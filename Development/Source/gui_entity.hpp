@@ -12,8 +12,8 @@ public:
 	void updateModelMatrix();
 
 	// Texture & color
-	void setTexture(GLuint texture);
-	void setColor(Vec3 color);
+	void setTexture(GLuint value);
+	void setColor(Vec3 value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setAlpha(float value);

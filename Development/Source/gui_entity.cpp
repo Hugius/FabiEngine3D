@@ -1,5 +1,7 @@
 #include "gui_entity.hpp"
 
+#include <algorithm>
+
 void GuiEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, 0.0f);
@@ -9,14 +11,14 @@ void GuiEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void GuiEntity::setTexture(GLuint texture)
+void GuiEntity::setTexture(GLuint value)
 {
-	_texture = texture;
+	_texture = value;
 }
 
-void GuiEntity::setColor(Vec3 color)
+void GuiEntity::setColor(Vec3 value)
 {
-	_color = color;
+	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void GuiEntity::setMirroredHorizontally(bool value)
@@ -31,7 +33,7 @@ void GuiEntity::setMirroredVertically(bool value)
 
 void GuiEntity::setAlpha(float value)
 {
-	_alpha = value;
+	_alpha = std::max(0.0f, value);
 }
 
 void GuiEntity::setCentered(bool value)
@@ -54,7 +56,7 @@ void GuiEntity::setRotation(float value)
 
 void GuiEntity::setScaling(Vec2 value)
 {
-	_scaling = value;
+	_scaling = Vec2(std::max(0.0f, value.x), std::max(0.0f, value.y));
 }
 
 void GuiEntity::translate(Vec2 value)
@@ -73,6 +75,7 @@ void GuiEntity::rotate(float value)
 void GuiEntity::scale(Vec2 value)
 {
 	_scaling += value;
+	_scaling = Vec2(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y));
 }
 
 void GuiEntity::setMinPosition(Vec2 value)
@@ -115,27 +118,27 @@ void GuiEntity::stopSpriteAnimationAnimation()
 
 void GuiEntity::setSpriteAnimationRowIndex(int value)
 {
-	_spriteAnimationRowIndex = value;
+	_spriteAnimationRowIndex = std::max(0, value);
 }
 
 void GuiEntity::setSpriteAnimationColumnIndex(int value)
 {
-	_spriteAnimationColumnIndex = value;
+	_spriteAnimationColumnIndex = std::max(0, value);
 }
 
 void GuiEntity::setTotalSpriteAnimationRows(int value)
 {
-	_totalSpriteAnimationRows = value;
+	_totalSpriteAnimationRows = std::max(0, value);
 }
 
 void GuiEntity::setTotalSpriteAnimationColumns(int value)
 {
-	_totalSpriteAnimationColumns = value;
+	_totalSpriteAnimationColumns = std::max(0, value);
 }
 
 void GuiEntity::setMaxSpriteAnimationFramestep(int value)
 {
-	_maxSpriteAnimationFramestep = value;
+	_maxSpriteAnimationFramestep = std::max(0, value);
 }
 
 void GuiEntity::increasePassedSpriteAnimationFrames()

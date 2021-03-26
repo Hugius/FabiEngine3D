@@ -102,32 +102,32 @@ void TerrainEntity::setNormalMapPathB(const string& filePath)
 
 void TerrainEntity::setUvRepeat(float value)
 {
-	_uvRepeat = value;
+	_uvRepeat = std::max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatR(float value)
 {
-	_blendRepeatR = value;
+	_blendRepeatR = std::max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatG(float value)
 {
-	_blendRepeatG = value;
+	_blendRepeatG = std::max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatB(float value)
 {
-	_blendRepeatB = value;
+	_blendRepeatB = std::max(0.0f, value);
 }
 
 void TerrainEntity::setSize(float value)
 {
-	_size = value;
+	_size = std::max(0.0f, value);
 }
 
 void TerrainEntity::setMaxHeight(float value)
 {
-	_maxHeight = value;
+	_maxHeight = std::max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLighted(bool value)
@@ -162,15 +162,15 @@ void TerrainEntity::setBlendMapped(bool value)
 
 void TerrainEntity::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = std::max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLightingFactor(float value)
 {
-	_specularLightingFactor = value;
+	_specularLightingFactor = std::max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLightingIntensity(float value)
 {
-	_specularLightingIntensity = value;
+	_specularLightingIntensity = std::max(0.0f, value);
 }

@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dGuiEntity(const string& ID)
 	// Cannot request/delete an engine entity
 	if (ID.front() == '@')
 	{
-		_throwScriptError("Requested image ID cannot start with '@'");
+		_throwScriptError("Requested image ID cannot start with '@'!");
 		return false;
 	}
 

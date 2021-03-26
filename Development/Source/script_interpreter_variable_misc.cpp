@@ -92,7 +92,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		// Check if string can be casted
 		if (_isIntegerValue(variable.getValue().getString()))
 		{
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(variable.getValue().getString())));
+			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(variable.getValue().getString()))));
 		}
 		else
 		{
@@ -105,7 +105,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		// Check if string can be casted
 		if (_isDecimalValue(variable.getValue().getString()))
 		{
-			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(variable.getValue().getString())));
+			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(variable.getValue().getString()))));
 		}
 		else
 		{

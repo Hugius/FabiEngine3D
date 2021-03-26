@@ -1,5 +1,7 @@
 #include "light_entity.hpp"
 
+#include <algorithm>
+
 void LightEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -12,17 +14,17 @@ void LightEntity::translate(Vec3 value)
 
 void LightEntity::setColor(Vec3 value)
 {
-	_color = value;
+	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void LightEntity::setIntensity(float value)
 {
-	_intensity = value;
+	_intensity = std::max(0.0f, value);
 }
 
 void LightEntity::setDistanceFactor(float value)
 {
-	_distanceFactor = value;
+	_distanceFactor = std::max(0.0f, value);
 }
 
 const Vec3 LightEntity::getPosition() const

@@ -176,12 +176,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				}
 				else if (typeString == DECIMAL_KEYWORD && _isDecimalValue(valueString)) // DECIMAL
 				{
-					auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString));
+					auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString)));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
 				else if (typeString == INTEGER_KEYWORD && _isIntegerValue(valueString)) // INTEGER
 				{
-					auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString));
+					auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString)));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
 				else if (typeString == BOOLEAN_KEYWORD && _isBooleanValue(valueString)) // BOOLEAN - normal

@@ -1,5 +1,7 @@
 #include "render_bus.hpp"
 
+#include <algorithm>
+
 void RenderBus::setMainSkyReflectionCubeMap(GLuint value)
 {
 	_mainSkyReflectionCubeMap = value;
@@ -97,7 +99,7 @@ void RenderBus::setCameraFront(Vec3 value)
 
 void RenderBus::setAmbientLightColor(Vec3 value)
 {
-	_ambientLightColor = value;
+	_ambientLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setDirectionalLightPosition(Vec3 value)
@@ -107,12 +109,12 @@ void RenderBus::setDirectionalLightPosition(Vec3 value)
 
 void RenderBus::setDirectionalLightColor(Vec3 value)
 {
-	_directionalLightColor = value;
+	_directionalLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setSpotLightColor(Vec3 value)
 {
-	_spotLightColor = value;
+	_spotLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setShadowEyePosition(Vec3 value)
@@ -127,7 +129,7 @@ void RenderBus::setShadowAreaCenter(Vec3 value)
 
 void RenderBus::setFogColor(Vec3 value)
 {
-	_fogColor = value;
+	_fogColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setFlareSourcePosition(Vec3 value)
@@ -137,12 +139,12 @@ void RenderBus::setFlareSourcePosition(Vec3 value)
 
 void RenderBus::setMainSkyColor(Vec3 value)
 {
-	_mainSkyColor = value;
+	_mainSkyColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setMixSkyColor(Vec3 value)
 {
-	_mixSkyColor = value;
+	_mixSkyColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setSceneReflectionHeight(float value)
@@ -155,109 +157,109 @@ void RenderBus::setSceneReflectionOffset(float value)
 	_sceneReflectionOffset = value;
 }
 
-void RenderBus::setSceneReflectionFactor(float value)
+void RenderBus::setSceneReflectionMixValue(float value)
 {
-	_sceneReflectionFactor = value;
+	_sceneReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setShadowAreaSize(float value)
 {
-	_shadowAreaSize = value;
+	_shadowAreaSize = std::max(0.0f, value);
 }
 
 void RenderBus::setShadowAreaReach(float value)
 {
-	_shadowAreaReach = value;
+	_shadowAreaReach = std::max(0.0f, value);
 }
 
 void RenderBus::setShadowLightness(float value)
 {
-	_shadowLightness = value;
+	_shadowLightness = std::max(0.0f, value);
 }
 
 void RenderBus::setLensFlareAlpha(float value)
 {
-	_lensFlareAlpha = value;
+	_lensFlareAlpha = std::max(0.0f, value);
 }
 
 void RenderBus::setLensFlareIntensity(float value)
 {
-	_lensFlareIntensity = value;
+	_lensFlareIntensity = std::max(0.0f, value);
 }
 
 void RenderBus::setLensFlareMultiplier(float value)
 {
-	_lensFlareMultiplier = value;
+	_lensFlareMultiplier = std::max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurStrength(float value)
 {
-	_motionBlurStrength = value;
+	_motionBlurStrength = std::max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurMixValue(float value)
 {
-	_motionBlurMixValue = value;
+	_motionBlurMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setMainSkyLightness(float value)
 {
-	_mainSkyLightness = value;
+	_mainSkyLightness = std::max(0.0f, value);
 }
 
 void RenderBus::setMixSkyLightness(float value)
 {
-	_mixSkyLightness = value;
+	_mixSkyLightness = std::max(0.0f, value);
 }
 
 void RenderBus::setSkyMixValue(float value)
 {
-	_skyMixValue = value;
+	_skyMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setMaxSpotLightAngle(float value)
 {
-	_maxSpotLightAngle = value;
+	_maxSpotLightAngle = std::fmodf(value, 360.0f);
 }
 
 void RenderBus::setMaxSpotLightDistance(float value)
 {
-	_maxSpotLightDistance = value;
+	_maxSpotLightDistance = std::max(0.0f, value);
 }
 
 void RenderBus::setAmbientLightIntensity(float value)
 {
-	_ambientLightIntensity = value;
+	_ambientLightIntensity = std::max(0.0f, value);
 }
 
 void RenderBus::setDirectionalLightIntensity(float value)
 {
-	_directionalLightIntensity = value;
+	_directionalLightIntensity = std::max(0.0f, value);
 }
 
 void RenderBus::setSpotLightIntensity(float value)
 {
-	_spotLightIntensity = value;
+	_spotLightIntensity = std::max(0.0f, value);
 }
 
 void RenderBus::setFogMinDistance(float value)
 {
-	_fogMinDistance = value;
+	_fogMinDistance = std::max(0.0f, value);
 }
 
 void RenderBus::setFogMaxDistance(float value)
 {
-	_fogMaxDistance = value;
+	_fogMaxDistance = std::max(0.0f, value);
 }
 
 void RenderBus::setFogThickness(float value)
 {
-	_fogThickness = value;
+	_fogThickness = std::clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setBloomIntensity(float value)
 {
-	_bloomIntensity = value;
+	_bloomIntensity = std::max(0.0f, value);
 }
 
 void RenderBus::setBloomBrightnessTreshold(float value)
@@ -277,7 +279,7 @@ void RenderBus::setCameraPitch(float value)
 
 void RenderBus::setNearZ(float value)
 {
-	_nearZ = value;
+	_nearZ = std::max(0.0f, value);
 }
 
 void RenderBus::setFarZ(float value)
@@ -287,30 +289,30 @@ void RenderBus::setFarZ(float value)
 
 void RenderBus::setDofMaxDistance(float value)
 {
-	_dofMaxDistance = value;
+	_dofMaxDistance = std::max(0.0f, value);
 }
 
 void RenderBus::setDofBlurDistance(float value)
 {
-	_dofBlurDistance = value;
+	_dofBlurDistance = std::max(0.0f, value);
 }
 
-void RenderBus::setSkyReflectionFactor(float value)
+void RenderBus::setSkyReflectionMixValue(float value)
 {
-	_skyReflectionFactor = value;
+	_skyReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setBloomBlurSize(int value)
 {
-	_bloomBlurSize = value;
+	_bloomBlurSize = std::max(0, value);
 }
-
+ 
 void RenderBus::resetTriangleCount()
 {
 	_triangleCount = 0;
 }
 
-void RenderBus::increaseTriangleCount(int value)
+void RenderBus::increaseTriangleCount(unsigned int value)
 {
 	if (_isTriangleCountingEnabled)
 	{
@@ -318,22 +320,22 @@ void RenderBus::increaseTriangleCount(int value)
 	}
 }
 
-void RenderBus::setMsaaSampleCount(int value)
+void RenderBus::setMsaaSampleCount(unsigned int value)
 {
 	_msaaSampleCount = value;
 }
 
-void RenderBus::setShadowMapSize(int value)
+void RenderBus::setShadowMapSize(unsigned int value)
 {
 	_shadowMapSize = value;
 }
 
-void RenderBus::setSceneReflectionMapSize(int value)
+void RenderBus::setSceneReflectionMapSize(unsigned int value)
 {
 	_sceneReflectionMapSize = value;
 }
 
-void RenderBus::setSceneRefractionMapSize(int value)
+void RenderBus::setSceneRefractionMapSize(unsigned int value)
 {
 	_sceneRefractionMapSize = value;
 }

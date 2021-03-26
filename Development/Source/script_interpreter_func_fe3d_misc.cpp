@@ -57,11 +57,12 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else if (arguments[0].getType() == ScriptValueType::DECIMAL)
 			{
-				_fe3d.logger_throwInfo(arguments[0].getDecimal());
+				string decimalString = to_string(arguments[0].getDecimal());
+				_fe3d.logger_throwInfo(decimalString.substr(0, decimalString.size() - 1));
 			}
 			else if (arguments[0].getType() == ScriptValueType::INTEGER)
 			{
-				_fe3d.logger_throwInfo(arguments[0].getInteger());
+				_fe3d.logger_throwInfo(to_string(arguments[0].getInteger()));
 			}
 			else if (arguments[0].getType() == ScriptValueType::BOOLEAN)
 			{

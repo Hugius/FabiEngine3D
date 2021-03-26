@@ -1,5 +1,7 @@
 #include "water_entity.hpp"
 
+#include <algorithm>
+
 void WaterEntity::setTranslation(Vec3 value)
 {
 	_translation = value;
@@ -7,7 +9,7 @@ void WaterEntity::setTranslation(Vec3 value)
 
 void WaterEntity::setColor(Vec3 value)
 {
-	_color = value;
+	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void WaterEntity::setDudvMap(GLuint value)
@@ -47,7 +49,7 @@ void WaterEntity::setRippleOffset(Vec2 value)
 
 void WaterEntity::setUvRepeat(float value)
 {
-	_uvRepeat = value;
+	_uvRepeat = std::max(0.0f, value);
 }
 
 void WaterEntity::setSpeed(Vec2 value)
@@ -62,17 +64,17 @@ void WaterEntity::setWaveOffset(Vec2 value)
 
 void WaterEntity::setWaveHeightFactor(float value)
 {
-	_waveHeightFactor = value;
+	_waveHeightFactor = std::max(0.0f, value);
 }
 
 void WaterEntity::setSpecularLightingFactor(float value)
 {
-	_specularLightingFactor = value;
+	_specularLightingFactor = std::max(0.0f, value);
 }
 
 void WaterEntity::setSpecularLightingIntensity(float value)
 {
-	_specularLightingIntensity = value;
+	_specularLightingIntensity = std::max(0.0f, value);
 }
 
 void WaterEntity::setWaving(bool value)
@@ -107,12 +109,12 @@ void WaterEntity::setSimplifiedOglBuffer(OpenGLBuffer* buffer)
 
 void WaterEntity::setSize(float value)
 {
-	_size = value;
+	_size = std::max(0.0f, value);
 }
 
 void WaterEntity::setTransparency(float value)
 {
-	_transparency = value;
+	_transparency = std::max(0.0f, value);
 }
 
 const Vec3 WaterEntity::getTranslation() const

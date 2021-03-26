@@ -151,7 +151,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingListOne) &&
 		variable.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL && _isDecimalValue(valueString)) // DECIMAL - normal
 	{
-		variable.getValue(valueIndexOne).setDecimal(stof(valueString));
+		variable.getValue(valueIndexOne).setDecimal(stof(_limitDecimalString(valueString)));
 	}
 	else if (variable.getType() == ScriptVariableType::SINGLE && vec3PartsOne != Ivec3(0) &&
 		variable.getValue(valueIndexOne).getType() == ScriptValueType::VEC3 && _isDecimalValue(valueString)) // DECIMAL - vec3 part
@@ -161,21 +161,21 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		// Determine which part of vec3 must change
 		if (vec3PartsOne.x)
 		{
-			variable.getValue(valueIndexOne).setVec3(Vec3(stof(valueString), oldValue.y, oldValue.z));
+			variable.getValue(valueIndexOne).setVec3(Vec3(stof(_limitDecimalString(valueString)), oldValue.y, oldValue.z));
 		}
 		else if (vec3PartsOne.y)
 		{
-			variable.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, stof(valueString), oldValue.z));
+			variable.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, stof(_limitDecimalString(valueString)), oldValue.z));
 		}
 		else if (vec3PartsOne.z)
 		{
-			variable.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y, stof(valueString)));
+			variable.getValue(valueIndexOne).setVec3(Vec3(oldValue.x, oldValue.y, stof(_limitDecimalString(valueString))));
 		}
 	}
 	else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingListOne) &&
 		variable.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER && _isIntegerValue(valueString)) // INTEGER
 	{
-		variable.getValue(valueIndexOne).setInteger(stoi(valueString));
+		variable.getValue(valueIndexOne).setInteger(stoi(_limitIntegerString(valueString)));
 	}
 	else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingListOne) &&
 		variable.getValue(valueIndexOne).getType() == ScriptValueType::BOOLEAN && _isBooleanValue(valueString)) // BOOLEAN - normal

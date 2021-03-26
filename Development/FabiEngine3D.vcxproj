@@ -415,6 +415,7 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_list_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
+    <ClCompile Include="Source\script_interpreter_string_operations.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_arithmetic.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_create.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_misc.cpp" />

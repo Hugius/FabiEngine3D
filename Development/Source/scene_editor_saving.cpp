@@ -134,11 +134,7 @@ void SceneEditor::saveEditorSceneToFile()
 			std::replace(animationID.begin(), animationID.end(), ' ', '?');
 
 			// Extract preview ID
-			string tempID = modelID;
-			std::reverse(tempID.begin(), tempID.end());
-			string previewID = tempID.substr(tempID.find('_') + 1);
-			std::reverse(previewID.begin(), previewID.end());
-			previewID = "@" + previewID;
+			string previewID = _loadedModelIDs.at(modelID);
 
 			// Write main data
 			file <<
@@ -200,11 +196,7 @@ void SceneEditor::saveEditorSceneToFile()
 			auto size = _fe3d.billboardEntity_getSize(billboardID);
 
 			// Extract preview ID
-			string tempID = billboardID;
-			std::reverse(tempID.begin(), tempID.end());
-			string previewID = tempID.substr(tempID.find('_') + 1);
-			std::reverse(previewID.begin(), previewID.end());
-			previewID = "@" + previewID;
+			string previewID = _loadedBillboardIDs.at(billboardID);
 
 			// Write data
 			file <<
@@ -234,11 +226,7 @@ void SceneEditor::saveEditorSceneToFile()
 			auto maxDistance = _fe3d.audioEntity_getMaxDistance(audioID);
 
 			// Extract preview ID
-			string tempID = audioID;
-			std::reverse(tempID.begin(), tempID.end());
-			string previewID = tempID.substr(tempID.find('_') + 1);
-			std::reverse(previewID.begin(), previewID.end());
-			previewID = "@" + previewID;
+			string previewID = _loadedAudioIDs.at(audioID);
 
 			// Write data
 			file <<

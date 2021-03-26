@@ -685,6 +685,9 @@
     <ClCompile Include="Source\scene_editor_loading_custom.cpp">
       <Filter>src\Editor System\Scene Editor\Persistence</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_string_operations.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\texture_loader.hpp">

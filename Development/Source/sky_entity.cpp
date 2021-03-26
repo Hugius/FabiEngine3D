@@ -1,5 +1,7 @@
 #include "sky_entity.hpp"
 
+#include <algorithm>
+
 void SkyEntity::updateRotationMatrix()
 {
 	if (_rotationSpeed != 0.0f)
@@ -16,7 +18,7 @@ void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
 
 void SkyEntity::setColor(Vec3 value)
 {
-	_color = value;
+	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void SkyEntity::setCubeMap(GLuint value)
@@ -26,12 +28,12 @@ void SkyEntity::setCubeMap(GLuint value)
 
 void SkyEntity::setOriginalLightness(float value)
 {
-	_originalLightness = value;
+	_originalLightness = std::max(0.0f, value);
 }
 
 void SkyEntity::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = std::max(0.0f, value);
 }
 
 void SkyEntity::setRotationSpeed(float value)

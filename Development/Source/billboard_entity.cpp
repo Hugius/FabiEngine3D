@@ -1,5 +1,7 @@
 #include "billboard_entity.hpp"
 
+#include <algorithm>
+
 void BillboardEntity::updateModelMatrix()
 {
 	// Identity matrix
@@ -52,6 +54,11 @@ void BillboardEntity::setTranslation(Vec3 value)
 void BillboardEntity::setInitialRotation(Vec3 value)
 {
 	_initialRotation = value;
+
+	// Limit rotation
+	_initialRotation.x = std::fmodf(_initialRotation.x, 360.0f);
+	_initialRotation.y = std::fmodf(_initialRotation.y, 360.0f);
+	_initialRotation.z = std::fmodf(_initialRotation.z, 360.0f);
 }
 
 void BillboardEntity::setRotation(Vec3 value)
@@ -66,12 +73,12 @@ void BillboardEntity::setRotation(Vec3 value)
 
 void BillboardEntity::setScaling(Vec3 value)
 {
-	_scaling = value;
+	_scaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
-void BillboardEntity::setColor(Vec3 color)
+void BillboardEntity::setColor(Vec3 value)
 {
-	_color = color;
+	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
 void BillboardEntity::translate(Vec3 value)
@@ -92,21 +99,22 @@ void BillboardEntity::rotate(Vec3 value)
 void BillboardEntity::scale(Vec3 value)
 {
 	_scaling += value;
+	_scaling = Vec3(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y), std::max(0.0f, _scaling.z));
 }
 
-void BillboardEntity::setTextContent(const string& text)
+void BillboardEntity::setTextContent(const string& value)
 {
-	_textContent = text;
+	_textContent = value;
 }
 
-void BillboardEntity::setFontPath(const string& fontPath)
+void BillboardEntity::setFontPath(const string& value)
 {
-	_fontPath = fontPath;
+	_fontPath = value;
 }
 
-void BillboardEntity::setDiffuseMapPath(const string& diffuseMapPath)
+void BillboardEntity::setDiffuseMapPath(const string& value)
 {
-	_diffuseMapPath = diffuseMapPath;
+	_diffuseMapPath = value;
 }
 
 void BillboardEntity::setTransparent(bool value)
@@ -144,27 +152,27 @@ void BillboardEntity::stopSpriteAnimation()
 
 void BillboardEntity::setSpriteAnimationRowIndex(int value)
 {
-	_spriteAnimationRowIndex = value;
+	_spriteAnimationRowIndex = std::max(0, value);
 }
 
 void BillboardEntity::setSpriteAnimationColumnIndex(int value)
 {
-	_spriteAnimationColumnIndex = value;
+	_spriteAnimationColumnIndex = std::max(0, value);
 }
 
 void BillboardEntity::setTotalSpriteAnimationRows(int value)
 {
-	_totalSpriteAnimationRows = value;
+	_totalSpriteAnimationRows = std::max(0, value);
 }
 
 void BillboardEntity::setTotalSpriteAnimationColumns(int value)
 {
-	_totalSpriteAnimationColumns = value;
+	_totalSpriteAnimationColumns = std::max(0, value);
 }
 
 void BillboardEntity::setMaxSpriteAnimationFramestep(int value)
 {
-	_maxSpriteAnimationFramestep = value;
+	_maxSpriteAnimationFramestep = std::max(0, value);
 }
 
 void BillboardEntity::increasePassedSpriteAnimationFrames()
@@ -184,7 +192,7 @@ void BillboardEntity::increaseSpriteAnimationRepeats()
 
 void BillboardEntity::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = std::max(0.0f, value);
 }
 
 void BillboardEntity::setMinHeight(float value)

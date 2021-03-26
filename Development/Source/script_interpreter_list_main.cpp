@@ -171,7 +171,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 						}
 						else
 						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(currentValueString)));
+							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(currentValueString))));
 							buildingNumber = false;
 							buildingDecimal = false;
 
@@ -184,7 +184,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 					}
 					else // Convert to integer
 					{
-						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(currentValueString)));
+						valueList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(currentValueString))));
 						buildingNumber = false;
 
 						// Check if next comma still needs to be found

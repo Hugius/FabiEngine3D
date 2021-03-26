@@ -238,8 +238,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			vec3PartsTwo != Ivec3(0) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableTwo->getValue().getVec3().f[vec3Index]) : // Vec3 part
 			_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndexTwo) : // Local variable
 			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndexTwo) : // Global variable
-			_isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) : // Integer
-			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : // Decimal
+			_isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))) : // Integer
+			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))) : // Decimal
 			_isVec3Value(valueString) ? ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)) : // Vec3
 			ScriptValue(_fe3d, ScriptValueType::EMPTY); // Empty
 

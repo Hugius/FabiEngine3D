@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dLightEntity(const string& ID)
 	// Just to be consistent with not starting entity ID's with '@'
 	if (ID.front() == '@')
 	{
-		_throwScriptError("Requested light ID cannot start with '@'");
+		_throwScriptError("Requested light ID cannot start with '@'!");
 		return false;
 	}
 

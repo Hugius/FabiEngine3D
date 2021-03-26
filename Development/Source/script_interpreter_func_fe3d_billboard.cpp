@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested billboard ID cannot start with '@'");
+		_throwScriptError("Requested billboard ID cannot start with '@'!");
 		return false;
 	}
 

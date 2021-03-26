@@ -133,11 +133,11 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 	else if (_isDecimalValue(valueString)) // DECIMAL
 	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(valueString))));
 	}
 	else if (_isIntegerValue(valueString)) // INTEGER
 	{
-		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(valueString))));
 	}
 	else if (_isBooleanValue(valueString)) // BOOLEAN
 	{
@@ -293,7 +293,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	unsigned int index = -1;
 	if (_isIntegerValue(indexString)) // Integer value
 	{
-		index = stoi(indexString);
+		index = stoi(_limitIntegerString(indexString));
 	}
 	else
 	{

@@ -95,11 +95,11 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 			}
 			else if (_isDecimalValue(elementString)) // DECIMAL
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(elementString)));
+				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(_limitDecimalString(elementString))));
 			}
 			else if (_isIntegerValue(elementString)) // INTEGER
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(elementString)));
+				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(_limitIntegerString(elementString))));
 			}
 			else if (_isBooleanValue(elementString)) // BOOLEAN
 			{

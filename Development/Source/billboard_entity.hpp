@@ -25,9 +25,9 @@ public:
 	void setRotation(Vec3 value);
 	void setScaling(Vec3 value);
 	void setColor(Vec3 color);
-	void setTextContent(const string& text);
-	void setFontPath(const string& fontPath);
-	void setDiffuseMapPath(const string& diffuseMapPath);
+	void setTextContent(const string& value);
+	void setFontPath(const string& value);
+	void setDiffuseMapPath(const string& value);
 	void playSpriteAnimation(int maxAnimationRepeats);
 	void pauseSpriteAnimation();
 	void resumeSpriteAnimation();

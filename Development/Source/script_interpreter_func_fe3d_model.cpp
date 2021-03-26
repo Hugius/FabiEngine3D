@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested model ID cannot start with '@'");
+		_throwScriptError("Requested model ID cannot start with '@'!");
 		return false;
 	}
 

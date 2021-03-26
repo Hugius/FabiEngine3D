@@ -47,13 +47,13 @@ void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float thi
 void FabiEngine3D::gfx_enableSkyReflections(float factor)
 {
 	_core->_renderBus.setSkyReflectionsEnabled(true);
-	_core->_renderBus.setSkyReflectionFactor(factor);
+	_core->_renderBus.setSkyReflectionMixValue(factor);
 }
 
 void FabiEngine3D::gfx_enableSceneReflections(float factor)
 {
 	_core->_renderBus.setSceneReflectionsEnabled(true);
-	_core->_renderBus.setSceneReflectionFactor(factor);
+	_core->_renderBus.setSceneReflectionMixValue(factor);
 }
 
 void FabiEngine3D::gfx_enableLightMapping()
@@ -189,7 +189,7 @@ void FabiEngine3D::gfx_disableSkyReflections(bool resetProperties)
 
 	if (resetProperties)
 	{
-		_core->_renderBus.setSkyReflectionFactor(0.0f);
+		_core->_renderBus.setSkyReflectionMixValue(0.0f);
 	}
 }
 
@@ -199,7 +199,7 @@ void FabiEngine3D::gfx_disableSceneReflections(bool resetProperties)
 
 	if (resetProperties)
 	{
-		_core->_renderBus.setSceneReflectionFactor(0.0f);
+		_core->_renderBus.setSceneReflectionMixValue(0.0f);
 	}
 }
 

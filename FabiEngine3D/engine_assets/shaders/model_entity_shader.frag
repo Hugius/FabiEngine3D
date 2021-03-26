@@ -48,8 +48,8 @@ uniform float u_directionalLightIntensity;
 uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
 uniform float u_customAlpha;
-uniform float u_skyReflectionFactor;
-uniform float u_sceneReflectionFactor;
+uniform float u_skyReflectionMixValue;
+uniform float u_sceneReflectionMixValue;
 uniform float u_lightness;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
@@ -425,8 +425,8 @@ vec3 applyFog(vec3 color)
 		float part = (distance - u_fogMinDistance) / difference;
 		part = clamp(part, 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float factor = part * thickness;
-		return mix(color, u_fogColor, factor);
+		float mixValue = part * thickness;
+		return mix(color, u_fogColor, mixValue);
 	}
 	else
 	{
@@ -451,7 +451,7 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 			vec3 mainSkyColor = texture(u_sampler_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mainSkyColor;
 			vec3 mixSkyColor  = texture(u_sampler_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mixSkyColor;
 			vec3 reflectColor = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
-			vec3 mixedColor   = mix(color, reflectColor, u_skyReflectionFactor);
+			vec3 mixedColor   = mix(color, reflectColor, u_skyReflectionMixValue);
 
 			return mixedColor.rgb;
 		}
@@ -477,7 +477,7 @@ vec3 applySceneReflections(vec3 color)
 			vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
 			vec2 texCoords       = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
-			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionFactor);
+			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionMixValue);
         
 			return mixedColor.rgb;
 		}

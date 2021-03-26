@@ -1,6 +1,8 @@
 #include "model_entity.hpp"
 #include "logger.hpp"
 
+#include <algorithm>
+
 void ModelEntity::addPart(const string& value)
 {
 	_partNames.push_back(value);
@@ -161,6 +163,11 @@ void ModelEntity::setTranslation(Vec3 value, const string& partName)
 void ModelEntity::setOriginalRotation(Vec3 value)
 {
 	_originalRotation = value;
+
+	// Limit rotation
+	_originalRotation.x = std::fmodf(_originalRotation.x, 360.0f);
+	_originalRotation.y = std::fmodf(_originalRotation.y, 360.0f);
+	_originalRotation.z = std::fmodf(_originalRotation.z, 360.0f);
 }
 
 void ModelEntity::setRotation(Vec3 value, const string& partName)
@@ -199,18 +206,18 @@ void ModelEntity::setRotationOrigin(Vec3 value, const string& partName)
 
 void ModelEntity::setOriginalScaling(Vec3 value)
 {
-	_originalScaling = value;
+	_originalScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
 void ModelEntity::setScaling(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseScaling = value;
+		_baseScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 	}
 	else
 	{
-		_scalings[_getPartIndex(partName)] = value;
+		_scalings[_getPartIndex(partName)] = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 	}
 }
 
@@ -253,10 +260,15 @@ void ModelEntity::scale(Vec3 value, const string& partName)
 	if (partName.empty() && _partNames.size() > 1)
 	{
 		_baseScaling += value;
+		_baseScaling = Vec3(std::max(0.0f, _baseScaling.x), std::max(0.0f, _baseScaling.y), std::max(0.0f, _baseScaling.z));
 	}
 	else
 	{
 		_scalings[_getPartIndex(partName)] += value;
+		_scalings[_getPartIndex(partName)] = Vec3(
+				std::max(0.0f, _scalings[_getPartIndex(partName)].x), 
+				std::max(0.0f, _scalings[_getPartIndex(partName)].y), 
+				std::max(0.0f, _scalings[_getPartIndex(partName)].z));
 	}
 }
 
@@ -266,12 +278,12 @@ void ModelEntity::setColor(Vec3 value, const string& partName)
 	{
 		for (auto& color : _colors)
 		{
-			color = value;
+			color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 		}
 	}
 	else
 	{
-		_colors[_getPartIndex(partName)] = value;
+		_colors[_getPartIndex(partName)] = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 	}
 }
 
@@ -411,17 +423,17 @@ void ModelEntity::clearNormalMaps()
 
 void ModelEntity::setLightness(float value)
 {
-	_lightness = value;
+	_lightness = std::max(0.0f, value);
 }
 
 void ModelEntity::setSpecularFactor(float value)
 {
-	_specularFactor = value;
+	_specularFactor = std::max(0.0f, value);
 }
 
 void ModelEntity::setSpecularIntensity(float value)
 {
-	_specularIntensity = value;
+	_specularIntensity = std::max(0.0f, value);
 }
 
 void ModelEntity::setMinHeight(float value)
@@ -434,12 +446,12 @@ void ModelEntity::setMaxHeight(float value)
 	_maxHeight = value;
 }
 
-void ModelEntity::setAlpha(float alpha)
+void ModelEntity::setAlpha(float value)
 {
-	_alpha = alpha;
+	_alpha = std::max(0.0f, value);
 }
 
 void ModelEntity::setUvRepeat(float value)
 {
-	_uvRepeat = value;
+	_uvRepeat = std::max(0.0f, value);
 }

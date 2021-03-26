@@ -1,5 +1,7 @@
 #include "aabb_entity.hpp"
 
+#include <algorithm>
+
 void AabbEntity::updateModelMatrix()
 {
 	// Temporary values
@@ -23,7 +25,7 @@ void AabbEntity::setTranslation(Vec3 value)
 
 void AabbEntity::setScaling(Vec3 value)
 {
-	_scaling = value;
+	_scaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
 void AabbEntity::setParent(const string& ID, AabbParentType type)
@@ -55,6 +57,7 @@ void AabbEntity::translate(Vec3 value)
 void AabbEntity::scale(Vec3 value)
 {
 	_scaling += value;
+	_scaling = Vec3(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y), std::max(0.0f, _scaling.z));
 }
 
 void AabbEntity::setLocalTranslation(Vec3 value)
@@ -65,6 +68,7 @@ void AabbEntity::setLocalTranslation(Vec3 value)
 void AabbEntity::setLocalScaling(Vec3 value)
 {
 	_localScaling = value;
+	_localScaling = Vec3(std::max(0.0f, _localScaling.x), std::max(0.0f, _localScaling.y), std::max(0.0f, _localScaling.z));
 }
 
 const Matrix44 & AabbEntity::getModelMatrix() const

@@ -101,6 +101,8 @@ private:
 
 	// Miscellaneous functions
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
+	string _limitIntegerString(const string& valueString);
+	string _limitDecimalString(const string& valueString);
 	unsigned int _countFrontSpaces(const string& scriptLineText);
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	bool _validateKeyInputString(const string& inputString);

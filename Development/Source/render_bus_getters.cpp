@@ -157,7 +157,7 @@ const float RenderBus::getSceneReflectionOffset() const
 
 const float RenderBus::getSceneReflectionFactor() const
 {
-	return _sceneReflectionFactor;
+	return _sceneReflectionMixValue;
 }
 
 const float RenderBus::getShadowAreaSize() const
@@ -297,7 +297,7 @@ const float RenderBus::getDofBlurDistance() const
 
 const float RenderBus::getSkyReflectionFactor() const
 {
-	return _skyReflectionFactor;
+	return _skyReflectionMixValue;
 }
 
 const int RenderBus::getBloomBlurSize() const

@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dAudioEntity(const string& ID, bool previewE
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested audio ID cannot start with '@'");
+		_throwScriptError("Requested audio ID cannot start with '@'!");
 		return false;
 	}
 

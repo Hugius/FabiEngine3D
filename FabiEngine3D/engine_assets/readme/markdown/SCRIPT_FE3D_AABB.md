@@ -10,7 +10,7 @@
 - `fe3d:aabb_delete`(`STR` ID) ---> `NONE`  
   Deletes non-bound AABB with **ID** if existing.
 - `fe3d:aabb_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
-  Sets the visibility of AABB with **ID** to **visible**.
+  Sets the visibility of non-bound AABB with **ID** to **visible**.
 - `fe3d:aabb_is_visible`(`STR` ID) ---> `BOOL`  
   Returns true if AABB with **ID** is visible.
 - `fe3d:aabb_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  

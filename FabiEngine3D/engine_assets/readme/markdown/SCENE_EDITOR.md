@@ -39,8 +39,8 @@
 - Every placed audio caster has a **maximum volume** (**Range**: 0 to 100) that can be **edited**.
 - Every placed audio caster has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
 ### Lighting
-- You can add **ambient lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf).
-- You can add **directional lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf) & **position** (**Range**: -inf to inf).
+- You can enable **ambient lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf).
+- You can enable **directional lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf) & **position** (**Range**: -inf to inf).
 - Directional lighting has the option to show a **light source billboard**, which has a **size** (**Range**: 0 to inf).
 - You can **place and delete** point lights in the scene.
 - If a terrain is selected, the point light will be placed **on top** of the terrain.

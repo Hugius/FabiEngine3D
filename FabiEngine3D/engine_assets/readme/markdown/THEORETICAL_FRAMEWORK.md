@@ -7,6 +7,7 @@
 - **Transformation**: the combination of translation, rotation, scaling.
 - **Collision**: intersection between 2 things (for example: between the camera and a model).
 - **Raycasting**: the process of "shooting" a ray from the camera position towards where the camera is looking.
+- **Wireframe**: the "skeleton" of a mesh; the drawing of only the lines between vertices.
 - **Mesh**: a collection of vertices that make a 3D shape together. Consists of triangles.
 - **Model**: a complex 3D object in 3D space, constisting of a mesh.  
 ![model](../images/model.png)

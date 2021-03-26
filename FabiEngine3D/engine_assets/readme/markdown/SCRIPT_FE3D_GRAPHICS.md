@@ -39,10 +39,6 @@
   Sets the shadow caster position as **xyz**.
 - `fe3d:graphics_get_shadow_position`() ---> `VEC3`  
   Returns the shadow caster position.
-- `fe3d:graphics_enable_light_mapping`() ---> `NONE`  
-  Enables the light mapping effect.
-- `fe3d:graphics_disable_light_mapping`() ---> `NONE`  
-  Disables the light mapping effect.
 - `fe3d:graphics_enable_sky_hdr`() ---> `NONE`  
   Enables the dynamic sky HDR effect.
 - `fe3d:graphics_disable_sky_hdr`() ---> `NONE`  

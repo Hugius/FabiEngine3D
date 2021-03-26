@@ -125,6 +125,7 @@ void ScriptInterpreter::_checkEngineWarnings()
 		// Retrieve all logged messages
 		auto messageStack = _fe3d.logger_getMessageStack();
 
+		std::cout << "hoi";
 		// Loop over all new messages
 		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageStack.size(); i++)
 		{

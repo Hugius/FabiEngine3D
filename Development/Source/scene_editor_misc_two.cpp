@@ -228,6 +228,16 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
+	// Delete AABB entities
+	for (auto& ID : _loadedAabbIDs)
+	{
+		// Delete AABB
+		if (_fe3d.aabbEntity_isExisting(ID))
+		{
+			_fe3d.aabbEntity_delete(ID);
+		}
+	}
+
 	// Delete AUDIO entities
 	for (auto& [ID, previewID] : _loadedAudioIDs)
 	{
@@ -288,8 +298,9 @@ void SceneEditor::createCustomScene(const string& sceneID)
 	_hasCustomSceneGraphics = false;
 	_customSceneModelIDs.clear();
 	_customSceneBillboardIDs.clear();
-	_customSceneLightIDs.clear();
+	_customSceneAabbIDs.clear();
 	_customSceneAudioIDs.clear();
+	_customSceneLightIDs.clear();
 }
 
 void SceneEditor::addLightingToCustomScene()
@@ -373,6 +384,18 @@ void SceneEditor::addBillboardToCustomScene(const string& billboardID)
 	else
 	{
 		_fe3d.logger_throwWarning("Cannot add billboard to custom scene!");
+	}
+}
+
+void SceneEditor::addAabbToCustomScene(const string& aabbID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneAabbIDs.push_back(aabbID);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add AABB to custom scene!");
 	}
 }
 

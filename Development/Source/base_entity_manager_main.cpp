@@ -21,94 +21,130 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getSkyEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create SKY entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create SKY entity: \"" + ID + "\" already exists!");
 			}
-			_skyEntities.insert(make_pair(ID, make_shared<SkyEntity>(ID)));
-			return;
+			else
+			{
+				_skyEntities.insert(make_pair(ID, make_shared<SkyEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::TERRAIN):
 		{
 			if (_getTerrainEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
 			}
-			_terrainEntities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
-			return;
+			else
+			{
+				_terrainEntities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::WATER):
 		{
 			if (_getWaterEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create WATER entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create WATER entity: \"" + ID + "\" already exists!");
 			}
-			_waterEntities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
-			return;
+			else
+			{
+				_waterEntities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::MODEL):
 		{
 			if (_getModelEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create MODEL entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create MODEL entity: \"" + ID + "\" already exists!");
 			}
-			_modelEntities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
-			return;
+			else
+			{
+				_modelEntities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::BILLBOARD):
 		{
 			if (_getBillboardEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
 			}
-			_billboardEntities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
-			return;
+			else
+			{
+				_billboardEntities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::AABB):
 		{
 			if (_getAabbEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create AABB entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create AABB entity: \"" + ID + "\" already exists!");
 			}
-			_aabbEntities.insert(make_pair(ID, make_shared<AabbEntity>(ID)));
-			return;
+			else
+			{
+				_aabbEntities.insert(make_pair(ID, make_shared<AabbEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::LIGHT):
 		{
 			if (_getLightEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create LIGHT entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create LIGHT entity: \"" + ID + "\" already exists!");
 			}
-			_lightEntities.insert(make_pair(ID, make_shared<LightEntity>(ID)));
-			return;
+			else
+			{
+				_lightEntities.insert(make_pair(ID, make_shared<LightEntity>(ID)));
+			}
+
+			break;
 		}
 
 		case(EntityType::GUI):
 		{
 			if (_getGuiEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create GUI entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create GUI entity: \"" + ID + "\" already exists!");
 			}
-			_guiEntities.insert(make_pair(ID, make_shared<GuiEntity>(ID)));
-			_getGuiEntity(ID)->setDepth(_guiDepth);
-			_guiDepth++;
-			return;
+			else
+			{
+				_guiEntities.insert(make_pair(ID, make_shared<GuiEntity>(ID)));
+				_getGuiEntity(ID)->setDepth(_guiDepth);
+				_guiDepth++;
+			}
+
+			break;
 		}
 
 		case(EntityType::TEXT):
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create TEXT entity: \"" + ID + "\" already exists!");
+				Logger::throwWarning("Could not create TEXT entity: \"" + ID + "\" already exists!");
 			}
-			_textEntities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
-			_getTextEntity(ID)->setDepth(_guiDepth);
-			_guiDepth++;
-			return;
+			else
+			{
+				_textEntities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
+				_getTextEntity(ID)->setDepth(_guiDepth);
+				_guiDepth++;
+			}
+
+			break;
 		}
 	}
 }

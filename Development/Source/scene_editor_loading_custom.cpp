@@ -263,6 +263,30 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
 				}
 			}
+			else if (entityType == "AABB")
+			{
+				// Data placeholders
+				string aabbID;
+				Vec3 position, size;
+				bool isVisible, isRaycastResponsive, isCollisionResponsive;
+
+				// Extract data
+				iss >>
+					aabbID >>
+					isVisible >>
+					isRaycastResponsive >>
+					isCollisionResponsive >>
+					position.x >>
+					position.y >>
+					position.z >>
+					size.x >>
+					size.y >>
+					size.z;
+
+				// Add AABB
+				_fe3d.aabbEntity_add(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
+				_loadedAabbIDs.push_back(aabbID);
+			}
 			else if (entityType == "AUDIO")
 			{
 				// Data placeholders

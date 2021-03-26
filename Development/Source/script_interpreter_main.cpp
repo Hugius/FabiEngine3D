@@ -323,6 +323,8 @@ void ScriptInterpreter::unload()
 	_animationEditor.stopAllAnimations();
 
 	// Miscellaneous
+	_fe3d.misc_disableAabbFrameRendering();
+	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableTerrainRaycasting();
 	_fe3d.misc_stopMillisecondTimer();
 	_fe3d.input_clearMouseToggles();

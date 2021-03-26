@@ -496,9 +496,6 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_camera.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_main.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_graphics.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -506,12 +503,6 @@
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_math.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_misc.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\sky_entity_manager.cpp">
@@ -687,6 +678,21 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_string_operations.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_filesystem.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_math.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_main.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_scene.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1414,6 +1420,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Persistence">
       <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Function\Core">
+      <UniqueIdentifier>{5c9ade0a-486a-43d4-b3db-caa1cccf8571}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

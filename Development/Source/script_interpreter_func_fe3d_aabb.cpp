@@ -137,6 +137,46 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
+	else if (functionName == "fe3d:aabb_set_visible")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				// Determine if AABB must be visible or not
+				if (arguments[1].getBoolean())
+				{
+					_fe3d.aabbEntity_show(arguments[0].getString());
+				}
+				else
+				{
+					_fe3d.aabbEntity_hide(arguments[0].getString());
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_is_visible")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.aabbEntity_isVisible(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:aabb_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

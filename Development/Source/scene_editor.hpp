@@ -37,6 +37,7 @@ public:
 	void addWaterToCustomScene();
 	void addModelToCustomScene(const string& modelID);
 	void addBillboardToCustomScene(const string& billboardID);
+	void addAabbToCustomScene(const string& aabbID);
 	void addLightToCustomScene(const string& lightID);
 	void addAudioToCustomScene(const string& audioID);
 	void loadCustomSceneFromFile(const string& fileName);
@@ -148,8 +149,9 @@ private:
 	bool _hasCustomSceneWater = false;
 	vector<string> _customSceneModelIDs;
 	vector<string> _customSceneBillboardIDs;
-	vector<string> _customSceneLightIDs;
+	vector<string> _customSceneAabbIDs;
 	vector<string> _customSceneAudioIDs;
+	vector<string> _customSceneLightIDs;
 
 	// Environment variables
 	string _loadedSkyID = "";
@@ -219,6 +221,7 @@ private:
 	string _activeLightBulbID = "";
 
 	// Miscellaneous
+	vector<string> _loadedAabbIDs;
 	string _loadedSceneID = "";
 	string _currentProjectID = "";
 	string _currentSceneID = "";

@@ -111,6 +111,7 @@ void SceneEditor::saveCustomSceneToFile()
 			transparency << std::endl;
 	}
 
+	// Models
 	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
@@ -200,7 +201,7 @@ void SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
-	// Write billboards
+	// Billboards
 	for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 	{
 		// Check if allowed to save
@@ -258,6 +259,37 @@ void SceneEditor::saveCustomSceneToFile()
 				lightness << "" <<
 				minHeight << " " <<
 				maxHeight << std::endl;
+		}
+	}
+
+	// AABBs
+	for (auto& aabbID : _fe3d.aabbEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		bool isCustomSceneAabb =
+			std::find(_customSceneAabbIDs.begin(), _customSceneAabbIDs.end(), aabbID) != _customSceneAabbIDs.end();
+		if ((aabbID[0] != '@') && isCustomSceneAabb && _fe3d.aabbEntity_getParentID(aabbID).empty())
+		{
+			// Data to save
+			bool isVisible = _fe3d.aabbEntity_isVisible(aabbID);
+			bool isRaycastResponsive = _fe3d.aabbEntity_isRaycastResponsive(aabbID);
+			bool isCollisionResponsive = _fe3d.aabbEntity_isCollisionResponsive(aabbID);
+			auto position = _fe3d.aabbEntity_getPosition(aabbID);
+			auto size = _fe3d.aabbEntity_getSize(aabbID);
+
+			// Write data
+			file <<
+				"AABB " <<
+				aabbID << " " <<
+				isVisible << " " <<
+				isRaycastResponsive << " " <<
+				isCollisionResponsive << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				size.x << " " <<
+				size.y << " " <<
+				size.z << std::endl;
 		}
 	}
 
@@ -472,6 +504,7 @@ void SceneEditor::saveCustomSceneToFile()
 	_hasCustomSceneWater = false;
 	_customSceneModelIDs.clear();
 	_customSceneBillboardIDs.clear();
+	_customSceneAabbIDs.clear();
 	_customSceneAudioIDs.clear();
 	_customSceneLightIDs.clear();
 }

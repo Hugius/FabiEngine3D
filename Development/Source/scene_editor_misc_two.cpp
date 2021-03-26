@@ -15,8 +15,8 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 	if (modelID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.modelEntity_getLightness(modelID) > _initialModelLightness[modelID] ||
-			_fe3d.modelEntity_getLightness(modelID) < 0.0f)
+		if ((_fe3d.modelEntity_getLightness(modelID) > _initialModelLightness[modelID]) ||
+			_fe3d.modelEntity_getLightness(modelID) <= 0.0f)
 		{
 			multiplier *= -1;
 		}
@@ -41,7 +41,7 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 	{
 		// Check if lightness reached bounds
 		if (_fe3d.billboardEntity_getLightness(billboardID) > _initialBillboardLightness[billboardID] ||
-			_fe3d.billboardEntity_getLightness(billboardID) < 0.0f)
+			_fe3d.billboardEntity_getLightness(billboardID) <= 0.0f)
 		{
 			multiplier *= -1;
 		}

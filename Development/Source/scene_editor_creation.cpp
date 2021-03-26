@@ -199,15 +199,6 @@ void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setUvRepeat(newEntityID, _fe3d.modelEntity_getUvRepeat(previewID));
 			_fe3d.modelEntity_setInstanced(newEntityID, true, { position });
 
-			// Save original lightness & transformation
-			if (_isEditorLoaded)
-			{
-				_initialModelLightness[newEntityID] = _fe3d.modelEntity_getLightness(previewID);
-				_initialModelPosition[newEntityID] = _fe3d.modelEntity_getPosition(previewID);
-				_initialModelRotation[newEntityID] = _fe3d.modelEntity_getRotation(previewID);
-				_initialModelSize[newEntityID] = _fe3d.modelEntity_getSize(previewID);
-			}
-
 			// Diffuse map
 			if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
 			{
@@ -263,15 +254,6 @@ void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setUvRepeat(newEntityID, _fe3d.modelEntity_getUvRepeat(previewID));
 		_fe3d.modelEntity_setLevelOfDetailEntity(newEntityID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
 
-		// Save original lightness & transformation
-		if (_isEditorLoaded)
-		{
-			_initialModelLightness[newEntityID] = _fe3d.modelEntity_getLightness(previewID);
-			_initialModelPosition[newEntityID] = _fe3d.modelEntity_getPosition(previewID);
-			_initialModelRotation[newEntityID] = _fe3d.modelEntity_getRotation(previewID);
-			_initialModelSize[newEntityID] = _fe3d.modelEntity_getSize(previewID);
-		}
-
 		// Diffuse map
 		if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
 		{
@@ -297,6 +279,15 @@ void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setNormalMap(newEntityID, _fe3d.modelEntity_getNormalMapPath(previewID));
 			_fe3d.modelEntity_setNormalMapped(newEntityID, true);
 		}
+	}
+
+	// Save original lightness & transformation
+	if (_isEditorLoaded)
+	{
+		_initialModelLightness[newEntityID] = _fe3d.modelEntity_getLightness(previewID);
+		_initialModelPosition[newEntityID] = _fe3d.modelEntity_getPosition(previewID);
+		_initialModelRotation[newEntityID] = _fe3d.modelEntity_getRotation(previewID);
+		_initialModelSize[newEntityID] = _fe3d.modelEntity_getSize(previewID);
 	}
 
 	// Save ID

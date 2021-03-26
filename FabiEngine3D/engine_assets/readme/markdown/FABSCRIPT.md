@@ -45,8 +45,8 @@
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
 - A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case **NOT** placeholders).
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`).
-- An integer is a whole number which can be negative (example: `42`).
-- A decimal is a floating point number which can be negative (example: `42.536`).
+- An integer is a whole number which can also be negative (example: `42`).
+- A decimal is a floating point number which can also be negative (example: `42.536`).
 #### VEC3
 - A vec3 is composed of 3 individual **decimal** values (example: `[1.0 2.0 3.0]`).
 - Usually a VEC3 is a position/direction or color.
@@ -197,3 +197,6 @@ fe3d:print(camPos.x)
 - You can set the value of a `BOOL` variable to the result of a condition using: `... <name> = (<condition>)`.
 - You can use the `PASS` statement as an empty placeholder for a logical statement or loop.
 - Be careful with loops as they can become indefinite. Luckily this will get detected eventually.
+- Integer values are clamped between -999999999 and 999999999 to prevent overflow.
+- Decimal values are clamped between -999999999.0 and 999999999.0 to prevent overflow.
+- Decimal values have a precision of 5 decimals after the dot.

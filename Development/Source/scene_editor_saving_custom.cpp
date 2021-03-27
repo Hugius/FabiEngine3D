@@ -218,6 +218,8 @@ void SceneEditor::saveCustomSceneToFile()
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
 			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 			auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
+			auto isAnimationPlaying = _fe3d.billboardEntity_isAnimationPlaying(billboardID);
+			auto isAnimationPaused = _fe3d.billboardEntity_isAnimationPaused(billboardID);
 			auto position = _fe3d.billboardEntity_getPosition(billboardID);
 			auto rotation = _fe3d.billboardEntity_getRotation(billboardID);
 			auto size = _fe3d.billboardEntity_getSize(billboardID);
@@ -226,7 +228,9 @@ void SceneEditor::saveCustomSceneToFile()
 			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 			auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
 			auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
-			//_fe3d.billboardEntity_get
+			auto remainingAnimationRepeats = _fe3d.billboardEntity_getRemainingAnimationRepeats(billboardID);
+			auto animationRowIndex = _fe3d.billboardEntity_getAnimationRowIndex(billboardID);
+			auto animationColumnIndex = _fe3d.billboardEntity_getAnimationColumnIndex(billboardID);
 
 			// Perform empty string & space conversions
 			textContent = (textContent == "") ? "?" : textContent;
@@ -245,6 +249,8 @@ void SceneEditor::saveCustomSceneToFile()
 				isAabbCollisionResponsive << " " <<
 				isFacingX << " " <<
 				isFacingY << " " <<
+				isAnimationPlaying << " " <<
+				isAnimationPaused << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -257,9 +263,12 @@ void SceneEditor::saveCustomSceneToFile()
 				color.g << " " <<
 				color.b << " " <<
 				textContent << " " <<
-				lightness << "" <<
+				lightness << " " <<
 				minHeight << " " <<
-				maxHeight << std::endl;
+				maxHeight << " " <<
+				remainingAnimationRepeats << " " <<
+				animationRowIndex << " " <<
+				animationColumnIndex << std::endl;
 		}
 	}
 

@@ -218,7 +218,9 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				Vec3 position, rotation, color;
 				Vec2 size;
 				float lightness, minHeight, maxHeight;
-				bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY;
+				int remainingAnimationRepeats;
+				unsigned int animationRowIndex, animationColumnIndex;
+				bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
 				// Extract data
 				iss >>
@@ -229,6 +231,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					isAabbCollisionResponsive >>
 					isFacingX >>
 					isFacingY >>
+					isAnimationPlaying >>
+					isAnimationPaused >>
 					position.x >>
 					position.y >>
 					position.z >>
@@ -243,10 +247,15 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					textContent >>
 					lightness >>
 					minHeight >>
-					maxHeight;
+					maxHeight >>
+					remainingAnimationRepeats >>
+					animationRowIndex >>
+					animationColumnIndex;
 
 				// Add billboard
 				_copyPreviewBillboard(billboardID, previewID, position);
+
+				// Set properties
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
 				_fe3d.billboardEntity_setSize(billboardID, size);
 				_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
@@ -261,6 +270,23 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
+				}
+
+				// Set animation progresss
+				if (isAnimationPlaying)
+				{
+					// Play
+					_fe3d.billboardEntity_playAnimation(billboardID, remainingAnimationRepeats);
+
+					// Pause
+					if (isAnimationPaused)
+					{
+						_fe3d.billboardEntity_pauseAnimation(billboardID);
+					}
+
+					// Progress
+					_fe3d.billboardEntity_setAnimationRowIndex(billboardID, animationRowIndex);
+					_fe3d.billboardEntity_setAnimationColumnIndex(billboardID, animationColumnIndex);
 				}
 			}
 			else if (entityType == "AABB")

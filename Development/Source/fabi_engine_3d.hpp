@@ -402,17 +402,22 @@ public:
 	void billboardEntity_pauseAnimation(const string& ID);
 	void billboardEntity_resumeAnimation(const string& ID);
 	void billboardEntity_stopAnimation(const string& ID);
-	void billboardEntity_setAnimationRows(const string& ID, int rows);
-	void billboardEntity_setAnimationColumns(const string& ID, int columns);
-	void billboardEntity_setAnimationFramestep(const string& ID, int framestep);
+	void billboardEntity_setAnimationRows(const string& ID, unsigned int rows);
+	void billboardEntity_setAnimationColumns(const string& ID, unsigned int columns);
+	void billboardEntity_setAnimationFramestep(const string& ID, unsigned int framestep);
+	void billboardEntity_setAnimationRowIndex(const string& ID, unsigned int index);
+	void billboardEntity_setAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Billboard entity interface (animation) - getters
 	bool billboardEntity_isAnimationFinished(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
 	bool billboardEntity_isAnimationPaused(const string& ID);
-	int billboardEntity_getAnimationRows(const string& ID);
-	int billboardEntity_getAnimationColumns(const string& ID);
-	int billboardEntity_getAnimationFramestep(const string& ID);
+	unsigned int billboardEntity_getAnimationRows(const string& ID);
+	unsigned int billboardEntity_getAnimationColumns(const string& ID);
+	unsigned int billboardEntity_getAnimationFramestep(const string& ID);
+	unsigned int billboardEntity_getAnimationRowIndex(const string& ID);
+	unsigned int billboardEntity_getAnimationColumnIndex(const string& ID);
+	int billboardEntity_getRemainingAnimationRepeats(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);

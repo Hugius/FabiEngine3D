@@ -148,31 +148,33 @@ void BillboardEntity::resumeSpriteAnimation()
 void BillboardEntity::stopSpriteAnimation()
 {
 	_isSpriteAnimationPlaying = false;
+	_spriteAnimationRowIndex = 0;
+	_spriteAnimationColumnIndex = 0;
 }
 
-void BillboardEntity::setSpriteAnimationRowIndex(int value)
+void BillboardEntity::setSpriteAnimationRowIndex(unsigned int value)
 {
-	_spriteAnimationRowIndex = std::max(0, value);
+	_spriteAnimationRowIndex = value;
 }
 
-void BillboardEntity::setSpriteAnimationColumnIndex(int value)
+void BillboardEntity::setSpriteAnimationColumnIndex(unsigned int value)
 {
-	_spriteAnimationColumnIndex = std::max(0, value);
+	_spriteAnimationColumnIndex = value;
 }
 
-void BillboardEntity::setTotalSpriteAnimationRows(int value)
+void BillboardEntity::setTotalSpriteAnimationRows(unsigned int value)
 {
-	_totalSpriteAnimationRows = std::max(0, value);
+	_totalSpriteAnimationRows = value;
 }
 
-void BillboardEntity::setTotalSpriteAnimationColumns(int value)
+void BillboardEntity::setTotalSpriteAnimationColumns(unsigned int value)
 {
-	_totalSpriteAnimationColumns = std::max(0, value);
+	_totalSpriteAnimationColumns = value;
 }
 
-void BillboardEntity::setMaxSpriteAnimationFramestep(int value)
+void BillboardEntity::setMaxSpriteAnimationFramestep(unsigned int value)
 {
-	_maxSpriteAnimationFramestep = std::max(0, value);
+	_maxSpriteAnimationFramestep = value;
 }
 
 void BillboardEntity::increasePassedSpriteAnimationFrames()

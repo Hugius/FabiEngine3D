@@ -315,19 +315,29 @@ void FabiEngine3D::billboardEntity_stopAnimation(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->stopSpriteAnimation();
 }
 
-void FabiEngine3D::billboardEntity_setAnimationRows(const string& ID, int rows)
+void FabiEngine3D::billboardEntity_setAnimationRows(const string& ID, unsigned int rows)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationRows(rows);
 }
 
-void FabiEngine3D::billboardEntity_setAnimationColumns(const string& ID, int columns)
+void FabiEngine3D::billboardEntity_setAnimationColumns(const string& ID, unsigned int columns)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setTotalSpriteAnimationColumns(columns);
 }
 
-void FabiEngine3D::billboardEntity_setAnimationFramestep(const string& ID, int framestep)
+void FabiEngine3D::billboardEntity_setAnimationFramestep(const string& ID, unsigned int framestep)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setMaxSpriteAnimationFramestep(framestep);
+}
+
+void FabiEngine3D::billboardEntity_setAnimationRowIndex(const string& ID, unsigned int index)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimationRowIndex(index);
+}
+
+void FabiEngine3D::billboardEntity_setAnimationColumnIndex(const string& ID, unsigned int index)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimationColumnIndex(index);
 }
 
 const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
@@ -357,17 +367,35 @@ bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->isTransparent();
 }
 
-int FabiEngine3D::billboardEntity_getAnimationRows(const string& ID)
+unsigned int FabiEngine3D::billboardEntity_getAnimationRows(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationRows();
 }
 
-int FabiEngine3D::billboardEntity_getAnimationColumns(const string& ID)
+unsigned int FabiEngine3D::billboardEntity_getAnimationColumns(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationColumns();
 }
 
-int FabiEngine3D::billboardEntity_getAnimationFramestep(const string& ID)
+unsigned int FabiEngine3D::billboardEntity_getAnimationFramestep(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationFramestep();
+}
+
+unsigned int FabiEngine3D::billboardEntity_getAnimationRowIndex(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRowIndex();
+}
+
+unsigned int FabiEngine3D::billboardEntity_getAnimationColumnIndex(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
+}
+
+int FabiEngine3D::billboardEntity_getRemainingAnimationRepeats(const string& ID)
+{
+	auto maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationRepeats();
+	auto currentRepeats = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRepeats();
+
+	return (maxRepeats - currentRepeats);
 }

@@ -32,7 +32,7 @@
 - **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
 - **Index** values cannot be lower than 0 (because a negative index does not exist).
 - **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees)
-- Furthermore there are some miscellaneous values that cannot be lower than 0.0 (**sprite row/column amount & framestep**, **lens flare multiplier**, **motion blur strength**).
+- Furthermore there are some miscellaneous values that cannot be lower than 0.0 (**sprite row/column amount & framestep**, **lens flare multiplier**, **motion blur strength**, **animation speed multiplier**).
 - Furthermore there are some miscellaneous values that are clamped between 0.0 and 1.0 (**fog thickness**).
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.

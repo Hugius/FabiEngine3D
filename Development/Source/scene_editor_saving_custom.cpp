@@ -226,6 +226,7 @@ void SceneEditor::saveCustomSceneToFile()
 			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 			auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
 			auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
+			//_fe3d.billboardEntity_get
 
 			// Perform empty string & space conversions
 			textContent = (textContent == "") ? "?" : textContent;

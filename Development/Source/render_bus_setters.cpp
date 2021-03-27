@@ -302,15 +302,11 @@ void RenderBus::setSkyReflectionMixValue(float value)
 	_skyReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
-void RenderBus::setBloomBlurSize(int value)
+void RenderBus::setBloomBlurSize(unsigned int value)
 {
-	_bloomBlurSize = std::max(0, value);
+	_bloomBlurSize = value;
 }
- 
-void RenderBus::resetTriangleCount()
-{
-	_triangleCount = 0;
-}
+
 
 void RenderBus::increaseTriangleCount(unsigned int value)
 {
@@ -338,6 +334,11 @@ void RenderBus::setSceneReflectionMapSize(unsigned int value)
 void RenderBus::setSceneRefractionMapSize(unsigned int value)
 {
 	_sceneRefractionMapSize = value;
+}
+
+void RenderBus::resetTriangleCount()
+{
+	_triangleCount = 0;
 }
 
 void RenderBus::setMsaaEnabled(bool value)

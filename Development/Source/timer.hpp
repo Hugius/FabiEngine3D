@@ -40,7 +40,7 @@ private:
 
 	string _currentID = "";
 
-	int _passedFrameCount = 0;
+	unsigned int _passedFrameCount = 0;
 
 	bool _isTiming = false;
 };

@@ -504,8 +504,8 @@ vec3 applyFog(vec3 color)
 		float part = (distance - u_fogMinDistance) / difference;
 		part = clamp(part, 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float factor = part * thickness;
-		return mix(color, u_fogColor, factor);
+		float mixValue = part * thickness;
+		return mix(color, u_fogColor, mixValue);
 	}
 	else
 	{

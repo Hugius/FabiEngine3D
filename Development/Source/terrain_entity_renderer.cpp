@@ -47,7 +47,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_isShadowsEnabled",			  _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_isSoftShadowingEnabled",	  _renderBus.isSoftShadowingEnabled());
-	_shader.uploadUniform("u_shadowMapSize",			  _renderBus.getShadowMapSize());
+	_shader.uploadUniform("u_shadowMapSize",			  static_cast<int>(_renderBus.getShadowMapSize()));
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap",  0);

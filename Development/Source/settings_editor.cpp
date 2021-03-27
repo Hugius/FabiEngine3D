@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
@@ -186,27 +187,27 @@ void SettingsEditor::update()
 			// Update forms
 			if (_gui.getGlobalScreen()->checkValueForm("msaaQuality", msaaQuality, {}))
 			{
-				_fe3d.gfx_setMsaaQuality(msaaQuality);
+				_fe3d.gfx_setMsaaQuality(std::clamp(msaaQuality, 1, 32));
 				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
-				_fe3d.gfx_setShadowQuality(shadowQuality);
+				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality, 512, 8192));
 				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
-				_fe3d.gfx_setReflectionQuality(reflectionQuality);
+				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality, 128, 2048));
 				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
-				_fe3d.gfx_setRefractionQuality(refractionQuality);
+				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality, 128, 2048));
 				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", audioChannels, {}))
 			{
-				_fe3d.sound_setMaxChannels(audioChannels);
+				_fe3d.sound_setMaxChannels(std::clamp(audioChannels, 32, 512));
 				save(false);
 			}
 		}

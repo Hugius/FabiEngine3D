@@ -229,7 +229,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 			// Check if animation is playing
 			if (isAnimationPlaying(animationID, modelID))
 			{
-				_playingAnimations.at(make_pair(animationID, modelID)).fadeFramestep = framestep;
+				_playingAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
 			}
 			else
 			{
@@ -247,7 +247,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	}
 }
 
-void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float speed)
+void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float multiplier)
 {
 	// Temporary values
 	string errorMessage = "Trying to set animation speed with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -258,7 +258,7 @@ void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, cons
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
 		{
-			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = speed;
+			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = std::max(0.0f, multiplier);
 		}
 		else
 		{

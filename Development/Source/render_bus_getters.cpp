@@ -155,7 +155,7 @@ const float RenderBus::getSceneReflectionOffset() const
 	return _sceneReflectionOffset;
 }
 
-const float RenderBus::getSceneReflectionFactor() const
+const float RenderBus::getSceneReflectionMixValue() const
 {
 	return _sceneReflectionMixValue;
 }
@@ -295,37 +295,37 @@ const float RenderBus::getDofBlurDistance() const
 	return _dofBlurDistance;
 }
 
-const float RenderBus::getSkyReflectionFactor() const
+const float RenderBus::getSkyReflectionMixValue() const
 {
 	return _skyReflectionMixValue;
 }
 
-const int RenderBus::getBloomBlurSize() const
+const unsigned int RenderBus::getBloomBlurSize() const
 {
 	return _bloomBlurSize;
 }
 
-const int RenderBus::getTriangleCount() const
+const unsigned int RenderBus::getTriangleCount() const
 {
 	return _triangleCount;
 }
 
-const int RenderBus::getMsaaSampleCount() const
+const unsigned int RenderBus::getMsaaSampleCount() const
 {
 	return _msaaSampleCount;
 }
 
-const int RenderBus::getShadowMapSize() const
+const unsigned int RenderBus::getShadowMapSize() const
 {
 	return _shadowMapSize;
 }
 
-const int RenderBus::getSceneReflectionMapSize() const
+const unsigned int RenderBus::getSceneReflectionMapSize() const
 {
 	return _sceneReflectionMapSize;
 }
 
-const int RenderBus::getSceneRefractionMapSize() const
+const unsigned int RenderBus::getSceneRefractionMapSize() const
 {
 	return _sceneRefractionMapSize;
 }

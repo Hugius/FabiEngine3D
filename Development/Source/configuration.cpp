@@ -30,6 +30,12 @@ Config::Config()
 	_processOption(file, _gameTitle, "game_title");
 	_processOption(file, _isGameExported, "game_exported");
 	
+	// Check if multiplier is between 0.0 and 1.0
+	if (windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
+	{
+		Logger::throwError("Option \"window_size_multiplier\" in configuration file must be between 0.0 and 1.0!");
+	}
+
 	// Save monitor dimensions
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);

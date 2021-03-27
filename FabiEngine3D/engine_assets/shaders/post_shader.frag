@@ -79,7 +79,7 @@ void main()
             blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 
             distanceMixValue = clamp(distanceMixValue, 0.0f, 1.0f);
 
-            // Apply camera distance factor
+            // Apply camera distance mix value
             blurMixValue = mix(0.0f, blurMixValue, u_isDofDynamic ? distanceMixValue : 1.0f);
 
             // Add bloom

@@ -474,7 +474,7 @@ Vec3 FabiEngine3D::gfx_getFogColor()
 
 float FabiEngine3D::gfx_getSkyReflectionFactor()
 {
-	return _core->_renderBus.getSkyReflectionFactor();
+	return _core->_renderBus.getSkyReflectionMixValue();
 }
 
 float FabiEngine3D::gfx_getSceneReflectionHeight()
@@ -484,7 +484,7 @@ float FabiEngine3D::gfx_getSceneReflectionHeight()
 
 float FabiEngine3D::gfx_getSceneReflectionFactor()
 {
-	return _core->_renderBus.getSceneReflectionFactor();
+	return _core->_renderBus.getSceneReflectionMixValue();
 }
 
 Vec3 FabiEngine3D::gfx_getShadowEyePosition()

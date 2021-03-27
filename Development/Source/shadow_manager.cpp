@@ -10,8 +10,8 @@ void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, 
 {
 	_eye    = eye;
 	_center = center;
-	_size   = size;
-	_reach  = reach;
+	_size   = std::max(0.0f, size);
+	_reach  = std::max(0.0f, reach);
 	_isFollowingCamera = isFollowingCamera;
 	_interval = interval;
 }

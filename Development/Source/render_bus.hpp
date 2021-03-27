@@ -83,13 +83,13 @@ public:
 	void setMixSkyLightness(float value);
 
 	// Integers
-	void setBloomBlurSize(int value);
-	void resetTriangleCount();
+	void setBloomBlurSize(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
 	void setMsaaSampleCount(unsigned int value);
 	void setShadowMapSize(unsigned int value);
 	void setSceneReflectionMapSize(unsigned int value);
 	void setSceneRefractionMapSize(unsigned int value);
+	void resetTriangleCount();
 
 	// Booleans
 	void setMsaaEnabled(bool value);
@@ -176,10 +176,10 @@ public:
 	const float getFarZ()					   const;
 	const float getDofMaxDistance()			   const;
 	const float getDofBlurDistance()		   const;
-	const float getSkyReflectionFactor()	   const;
+	const float getSkyReflectionMixValue()	   const;
 	const float getSceneReflectionHeight()	   const;
 	const float getSceneReflectionOffset()	   const;
-	const float getSceneReflectionFactor()	   const;
+	const float getSceneReflectionMixValue()	   const;
 	const float getShadowAreaSize()			   const;
 	const float getShadowAreaReach()		   const;
 	const float getShadowLightness()		   const;
@@ -193,12 +193,12 @@ public:
 	const float getMixSkyLightness()		   const;
 
 	// Integers
-	const int getBloomBlurSize()		  const;
-	const int getTriangleCount()		  const;
-	const int getMsaaSampleCount()		  const;
-	const int getShadowMapSize()		  const;
-	const int getSceneReflectionMapSize() const;
-	const int getSceneRefractionMapSize() const;
+	const unsigned int getBloomBlurSize()		   const;
+	const unsigned int getTriangleCount()		   const;
+	const unsigned int getMsaaSampleCount()		   const;
+	const unsigned int getShadowMapSize()		   const;
+	const unsigned int getSceneReflectionMapSize() const;
+	const unsigned int getSceneRefractionMapSize() const;
 
 	// Booleans
 	const bool isMsaaEnabled()                 const;
@@ -286,10 +286,10 @@ private:
 	float _farZ                      = 0.0f;
 	float _dofMaxDistance            = 0.0f;
 	float _dofBlurDistance			 = 0.0f;
-	float _skyReflectionMixValue       = 0.0f;
+	float _skyReflectionMixValue     = 0.0f;
 	float _sceneReflectionHeight     = 0.0f;
 	float _sceneReflectionOffset	 = 0.0f;
-	float _sceneReflectionMixValue     = 0.0f;
+	float _sceneReflectionMixValue   = 0.0f;
 	float _shadowAreaSize			 = 0.0f;
 	float _shadowAreaReach			 = 0.0f;
 	float _shadowLightness			 = 0.0f;
@@ -303,12 +303,12 @@ private:
 	float _mixSkyLightness			 = 0.0f;
 	
 	// Integers
-	int _bloomBlurSize			= 0;
-	int _triangleCount			= 0;
-	int _msaaSampleCount		= 0;
-	int _shadowMapSize			= 0;
-	int _sceneReflectionMapSize = 0;
-	int _sceneRefractionMapSize = 0;
+	unsigned int _bloomBlurSize			 = 0;
+	unsigned int _triangleCount			 = 0;
+	unsigned int _msaaSampleCount		 = 0;
+	unsigned int _shadowMapSize			 = 0;
+	unsigned int _sceneReflectionMapSize = 0;
+	unsigned int _sceneRefractionMapSize = 0;
 
 	// Booleans
 	bool _isMsaaEnabled                 = false;

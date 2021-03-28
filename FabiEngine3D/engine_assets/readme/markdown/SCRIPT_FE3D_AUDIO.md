@@ -31,12 +31,8 @@
   Returns a list of strings with the full IDs of all audios.
 - `fe3d:audio_delete`(`STR` ID) ---> `NONE`  
   Deletes audio with **ID** if existing.
-- `fe3d:audio_is_playing`(`STR` ID) ---> `BOOL`  
-  Returns true if audio with **ID** is playing.
 - `fe3d:audio_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  
-  Plays audio with **ID** and repeat it **loops** times at a maximum **volume**.
-- `fe3d:audio_is_paused`(`STR` ID) ---> `BOOL`  
-  Returns true if audio with **ID** is paused.
+  Plays audio with **ID** and repeats it **loops** times (-1 to play forever) at a maximum **volume**.
 - `fe3d:audio_pause`(`STR` ID) ---> `NONE`  
   Pauses playing audio with **ID**.
 - `fe3d:audio_pause_all`() ---> `NONE`  
@@ -49,6 +45,10 @@
   Stops playing audio with **ID**.
 - `fe3d:audio_stop_all`() ---> `NONE`  
   Stops all playing audio.
+- `fe3d:audio_is_playing`(`STR` ID) ---> `BOOL`  
+  Returns true if audio with **ID** is playing.
+- `fe3d:audio_is_paused`(`STR` ID) ---> `BOOL`  
+  Returns true if audio with **ID** is paused.
 - `fe3d:audio_is_3D`(`STR` ID) ---> `BOOL`  
   Returns true if audio with **ID** is 3D audio.
 - `fe3d:audio_get_volume`(`STR` ID) ---> `DEC`  

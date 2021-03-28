@@ -62,22 +62,22 @@
   
 # Animation
 - `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops) ---> `NONE`  
-  Starts the animation with **animationID** on model with **modelID** and repeat it **loops** times.
-- `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) ---> `BOOL`  
-  Returns true if animation with **animationID** was started (can be paused or playing) on model with **modelID**.
-- `fe3d:model_is_animation_playing`(`STR` modelID, `STR` animationID) ---> `BOOL`  
-  Returns true if animation with **animationID** is currently playing (not paused) on model with **modelID**.
-- `fe3d:model_is_animation_paused`(`STR` modelID, `STR` animationID) ---> `BOOL`  
-  Returns true if animation with **animationID** is currently paused (not playing) on model with **modelID**.
+  Starts the animation with **animationID** on model with **modelID** and repeats it **loops** times (-1 to play forever).
 - `fe3d:model_pause_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
-  Pauses the animation with **animationID** on model with **modelID**. Only possible when animation is currently playing.
+  Pauses the playing animation with **animationID** on model with **modelID**.
 - `fe3d:model_resume_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
-  Resumes the animation with **animationID** on model with **modelID**. Only possible when animation is currently paused.
+  Resumes the paused animation with **animationID** on model with **modelID**. Only possible when animation is currently paused.
 - `fe3d:model_fade_animation`(`STR` modelID, `STR` animationID, `INT` frameStep) ---> `NONE`  
-  Fades the animation with **animationID** on model with **modelID** to an end. Every **frameStep** amount of frames the animation will stop. Only possible when animation is currently playing.
+  Fades the playing animation with **animationID** on model with **modelID** to an end. Every **frameStep** amount of frames the animation will stop.
 - `fe3d:model_stop_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
-  Stops the animation with **animationID** on model with **modelID**.  Only possible when animation is currently playing.
+  Stops the playing animation with **animationID** on model with **modelID**.
+- `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** was started on model with **modelID**.
+- `fe3d:model_is_animation_playing`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** is currently playing on model with **modelID**.
+- `fe3d:model_is_animation_paused`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** is currently paused on model with **modelID**.
 - `fe3d:model_set_animation_speed`(`STR` modelID, `STR` animationID, `DEC` speed) ---> `NONE`  
   Sets the animation **speed** of animation with **animationID** on model with **modelID**.
 - `fe3d:model_get_animation_frame_index`(`STR` modelID, `STR` animationID) ---> `INT`  
-  Returns the current animation frame index of animation with **animationID** on model with **modelID**. An index starts at 0!
+  Returns the current animation frame index of animation with **animationID** on model with **modelID**. Remember: an index starts at 0!

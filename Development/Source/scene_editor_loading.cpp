@@ -182,7 +182,8 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						else // Add offset
 						{
 							Vec3 offset;
-							iss >> offset.x >> offset.y >> offset.z;
+							offset.x = stof(nextElement);
+							iss >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
 						}
 					}
@@ -248,7 +249,9 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				}
 
 				// Add audio
-				_fe3d.audioEntity_add3D(audioID, _fe3d.audioEntity_getFilePath(previewID), position, maxVolume, maxDistance);
+				_copyPreviewAudio(audioID, previewID, position);
+				_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
+				_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
 				_fe3d.audioEntity_play(audioID, -1, 0.0f);
 				_loadedAudioIDs.insert(make_pair(audioID, previewID));
 			}

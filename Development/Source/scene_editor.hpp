@@ -46,6 +46,7 @@ public:
 	// Miscellaneous
 	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
+	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
 	void setCurrentProjectID(const string& projectName);
 	bool isLoaded();
@@ -109,11 +110,12 @@ private:
 	void _updateMiscellaneous();
 
 	// Creation
-	void _copyPreviewSky(const string& newID, const string& previewID, bool addToScene = true);
-	void _copyPreviewTerrain(const string& newID, const string& previewID, bool addToScene = true);
-	void _copyPreviewWater(const string& newID, const string& previewID, bool addToScene = true);
-	void _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool addToScene = true);
-	void _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool addToScene = true);
+	void _copyPreviewSky(const string& newID, const string& previewID);
+	void _copyPreviewTerrain(const string& newID, const string& previewID);
+	void _copyPreviewWater(const string& newID, const string& previewID);
+	void _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	void _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	void _copyPreviewAudio(const string & newID, const string & previewID, Vec3 position, bool fromOutside = false);
 
 	// Miscellaneous
 	vector<string> _loadSceneNames();
@@ -163,6 +165,7 @@ private:
 
 	// Model variables
 	map<string, string> _loadedModelIDs;
+	map<string, string> _outsideLoadedModelIDs;
 	map<string, float> _initialModelLightness;
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
@@ -178,6 +181,7 @@ private:
 
 	// Billboard variables
 	map<string, string> _loadedBillboardIDs;
+	map<string, string> _outsideLoadedBillboardIDs;
 	map<string, float> _initialBillboardLightness;
 	string _currentPreviewBillboardName = "";
 	string _selectedBillboardID = "";
@@ -190,6 +194,7 @@ private:
 
 	// Audio variables
 	map<string, string> _loadedAudioIDs;
+	map<string, string> _outsideLoadedAudioIDs;
 	string _currentPreviewAudioName = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";

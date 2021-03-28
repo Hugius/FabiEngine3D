@@ -139,7 +139,15 @@ void SceneEditor::saveCustomSceneToFile()
 			auto lightness = _fe3d.modelEntity_getLightness(modelID);
 
 			// Extract preview ID
-			string previewID = _loadedModelIDs.at(modelID);
+			string previewID;
+			if (_loadedModelIDs.find(modelID) == _loadedModelIDs.end())
+			{
+				previewID = _outsideLoadedModelIDs.at(modelID);
+			}
+			else
+			{
+				previewID = _loadedModelIDs.at(modelID);
+			}
 
 			// Write data
 			file <<
@@ -201,40 +209,38 @@ void SceneEditor::saveCustomSceneToFile()
 			{
 				// Check if model has any parts
 				auto partNames = _fe3d.modelEntity_getPartNames(modelID);
-				if (partNames.size() > 1)
+				if (partNames.size() > 1 || !partNames.front().empty())
 				{
-					// Write space
-					file << " ";
-
 					// Write transformations
-					for (unsigned int i = 1; i < partNames.size(); i++)
+					for (unsigned int i = 0; i < partNames.size(); i++)
 					{
-						// Retrieve transformation
-						position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
-						rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
-						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
-						size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
-
-						// Write transformation
-						file <<
-							partNames[i] << " " <<
-							position.x << " " <<
-							position.y << " " <<
-							position.z << " " <<
-							rotation.x << " " <<
-							rotation.y << " " <<
-							rotation.z << " " <<
-							rotationOrigin.x << " " <<
-							rotationOrigin.y << " " <<
-							rotationOrigin.z << " " <<
-							size.x << " " <<
-							size.y << " " <<
-							size.z;
-
-						// Write space
-						if (i != (partNames.size() - 1))
+						// Part name cannot be empty
+						if (!partNames[i].empty())
 						{
+							// Write space
 							file << " ";
+
+							// Retrieve transformation
+							position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
+							rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
+							rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
+							size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
+
+							// Write transformation
+							file <<
+								partNames[i] << " " <<
+								position.x << " " <<
+								position.y << " " <<
+								position.z << " " <<
+								rotation.x << " " <<
+								rotation.y << " " <<
+								rotation.z << " " <<
+								rotationOrigin.x << " " <<
+								rotationOrigin.y << " " <<
+								rotationOrigin.z << " " <<
+								size.x << " " <<
+								size.y << " " <<
+								size.z;
 						}
 					}
 				}
@@ -303,7 +309,15 @@ void SceneEditor::saveCustomSceneToFile()
 			std::replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Extract preview ID
-			string previewID = _loadedBillboardIDs.at(billboardID);
+			string previewID;
+			if (_loadedBillboardIDs.find(billboardID) == _loadedBillboardIDs.end())
+			{
+				previewID = _outsideLoadedBillboardIDs.at(billboardID);
+			}
+			else
+			{
+				previewID = _loadedBillboardIDs.at(billboardID);
+			}
 
 			// Write data
 			file <<
@@ -383,7 +397,15 @@ void SceneEditor::saveCustomSceneToFile()
 			auto maxDistance = _fe3d.audioEntity_getMaxDistance(audioID);
 
 			// Extract preview ID
-			string previewID = _loadedAudioIDs.at(audioID);
+			string previewID;
+			if (_loadedAudioIDs.find(audioID) == _loadedAudioIDs.end())
+			{
+				previewID = _outsideLoadedAudioIDs.at(audioID);
+			}
+			else
+			{
+				previewID = _loadedAudioIDs.at(audioID);
+			}
 
 			// Write data
 			file <<

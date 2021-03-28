@@ -3,106 +3,6 @@
 #include <algorithm>
 #include <filesystem>
 
-void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
-{
-	// Reset multiplier if nothing active / selected
-	if (modelID == "")
-	{
-		multiplier = 1;
-	}
-
-	// Update model lightness
-	if (modelID != "")
-	{
-		// Check if lightness reached bounds
-		if ((_fe3d.modelEntity_getLightness(modelID) > _initialModelLightness[modelID]) ||
-			_fe3d.modelEntity_getLightness(modelID) <= 0.0f)
-		{
-			multiplier *= -1;
-		}
-
-		// Set model lightness
-		float range = _initialModelLightness[modelID];
-		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(multiplier) * range);
-		_fe3d.modelEntity_setLightness(modelID, _fe3d.modelEntity_getLightness(modelID) + speed);
-	}
-}
-
-void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multiplier)
-{
-	// Reset multiplier if nothing active / selected
-	if (billboardID == "")
-	{
-		multiplier = 1;
-	}
-
-	// Update billboard lightness
-	if (billboardID != "")
-	{
-		// Check if lightness reached bounds
-		if (_fe3d.billboardEntity_getLightness(billboardID) > _initialBillboardLightness[billboardID] ||
-			_fe3d.billboardEntity_getLightness(billboardID) <= 0.0f)
-		{
-			multiplier *= -1;
-		}
-
-		// Set billboard lightness
-		float range = _initialBillboardLightness[billboardID];
-		float speed = (BILLBOARD_BLINKING_SPEED * static_cast<float>(multiplier) * range);
-		_fe3d.billboardEntity_setLightness(billboardID, _fe3d.billboardEntity_getLightness(billboardID) + speed);
-	}
-}
-
-void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multiplier)
-{
-	// Reset multiplier if nothing active / selected
-	if (modelID == "")
-	{
-		multiplier = 1;
-	}
-	
-	// Update lightbulb animation
-	if (modelID != "")
-	{
-		// Check if model size reached bounds
-		if (_fe3d.modelEntity_getSize(modelID).x > DEFAULT_LIGHTBULB_SIZE.x * 1.5f || 
-			_fe3d.modelEntity_getSize(modelID).x < DEFAULT_LIGHTBULB_SIZE.x)
-		{
-			multiplier *= -1;
-		}
-
-		// Set model size
-		float speed = (LIGHTBULB_ANIMATION_SPEED * static_cast<float>(multiplier));
-		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
-	}
-}
-
-void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier)
-{
-	// Reset multiplier if nothing active / selected
-	if (modelID == "")
-	{
-		multiplier = 1;
-	}
-
-	// Update speaker animation
-	if (modelID != "")
-	{
-		// Check if model size reached bounds
-		if (_fe3d.modelEntity_getSize(modelID).x > DEFAULT_SPEAKER_SIZE.x * 1.5f ||
-			_fe3d.modelEntity_getSize(modelID).x < DEFAULT_SPEAKER_SIZE.x)
-		{
-			multiplier *= -1;
-		}
-
-		// Set model size
-		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(multiplier));
-		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
-	}
-}
-
 void SceneEditor::_updateMiscellaneous()
 {
 	if (_isEditorLoaded)
@@ -144,12 +44,17 @@ void SceneEditor::_updateMiscellaneous()
 
 void SceneEditor::copyPreviewModel(const string& newID, const string& previewID, Vec3 position)
 {
-	_copyPreviewModel(newID, previewID, position, false);
+	_copyPreviewModel(newID, previewID, position, true);
 }
 
 void SceneEditor::copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position)
 {
-	_copyPreviewBillboard(newID, previewID, position, false);
+	_copyPreviewBillboard(newID, previewID, position, true);
+}
+
+void SceneEditor::copyPreviewAudio(const string& newID, const string& previewID, Vec3 position)
+{
+	_copyPreviewAudio(newID, previewID, position, true);
 }
 
 void SceneEditor::clearCurrentScene()

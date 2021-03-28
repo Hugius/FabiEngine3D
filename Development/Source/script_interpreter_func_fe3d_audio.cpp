@@ -144,30 +144,38 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
+			string newID = arguments[0].getString();
+			string previewID = arguments[1].getString();
+
 			// New audio ID cannot start with '@'
-			if (arguments[0].getString().front() == '@')
+			if (newID.front() == '@')
 			{
 				_throwScriptError("New audio ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if audio entity already exists
-			if (_fe3d.audioEntity_isExisting(arguments[0].getString()))
+			if (_fe3d.audioEntity_isExisting(newID))
 			{
-				_throwScriptError("Audio with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("Audio with ID \"" + newID + "\" already exists!");
 				return true;
 			}
 
 			// Validate preview audio ID
-			if (_validateFe3dAudioEntity("@" + arguments[1].getString(), true))
+			if (_validateFe3dAudioEntity("@" + previewID, true))
 			{
-				auto filePath = _fe3d.audioEntity_getFilePath("@" + arguments[1].getString());
-				_fe3d.audioEntity_add3D(
-					arguments[0].getString(),
-					filePath,
-					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()),
-					arguments[5].getDecimal(),
-					arguments[6].getDecimal());
+				// Temporary values
+				auto position = Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
+				auto maxVolume = arguments[5].getDecimal();
+				auto maxDistance = arguments[6].getDecimal();
+
+				// Add audio
+				_sceneEditor.copyPreviewAudio(newID, "@" + previewID, position);
+				_fe3d.audioEntity_setMaxVolume(newID, maxVolume);
+				_fe3d.audioEntity_setMaxDistance(newID, maxDistance);
+
+				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

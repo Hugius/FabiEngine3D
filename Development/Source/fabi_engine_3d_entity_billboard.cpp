@@ -352,9 +352,14 @@ bool FabiEngine3D::billboardEntity_isAnimationFinished(const string& ID)
 	return (repeats == maxRepeats);
 }
 
-bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
+bool FabiEngine3D::billboardEntity_isAnimationStarted(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationPlaying();
+}
+
+bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
+{
+	return (billboardEntity_isAnimationStarted(ID) && !billboardEntity_isAnimationPaused(ID));
 }
 
 bool FabiEngine3D::billboardEntity_isAnimationPaused(const string& ID)

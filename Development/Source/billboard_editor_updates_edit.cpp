@@ -206,7 +206,7 @@ void BillboardEditor::_updateBillboardEditing()
 				}
 
 				// Update button hoverability
-				bool playing = _fe3d.billboardEntity_isAnimationPlaying(_currentBillboardID);
+				bool playing = _fe3d.billboardEntity_isAnimationStarted(_currentBillboardID);
 				screen->getButton("animate")->setHoverable(!playing && animationRowCount != 0 && animationColumnCount != 0);
 
 				// Update value filling

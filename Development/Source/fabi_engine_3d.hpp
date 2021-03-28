@@ -410,6 +410,7 @@ public:
 
 	// Billboard entity interface (animation) - getters
 	bool billboardEntity_isAnimationFinished(const string& ID);
+	bool billboardEntity_isAnimationStarted(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
 	bool billboardEntity_isAnimationPaused(const string& ID);
 	unsigned int billboardEntity_getAnimationRows(const string& ID);

@@ -39,13 +39,13 @@ void AnimationEditor::_updateManagementScreen()
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getLoadedAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 				}
 				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getLoadedAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 				}
 			}
 
@@ -80,7 +80,7 @@ void AnimationEditor::_updateAnimationCreation()
 				if (newAnimationName.find(' ') == string::npos)
 				{
 					// Check if name already exists
-					auto animationIDs = getLoadedAnimationIDs();
+					auto animationIDs = getAllAnimationIDs();
 					if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 					{
 						// Go to editor

@@ -201,6 +201,27 @@ void SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
+	// Animations
+	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isCustomSceneModel =
+			std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
+		{
+			// Every playing animation on every model
+			for (auto& animationID : _animationEditor.getPlayingAnimationIDs(modelID))
+			{
+				// Data to save
+				bool isAnimationStarted = _animationEditor.isAnimationStarted(animationID, modelID);
+				bool isAnimationPaused = _animationEditor.isAnimationPaused(animationID, modelID);
+				auto frameIndex = _animationEditor.getAnimationFrameIndex(animationID, modelID);
+				//auto animationSpeed = _animationEditor.getAnimationSpeedMultiplier(animationID, modelID);
+			}
+		}
+	}
+
 	// Billboards
 	for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 	{
@@ -218,7 +239,7 @@ void SceneEditor::saveCustomSceneToFile()
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
 			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 			auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
-			auto isAnimationPlaying = _fe3d.billboardEntity_isAnimationPlaying(billboardID);
+			auto isAnimationPlaying = _fe3d.billboardEntity_isAnimationStarted(billboardID);
 			auto isAnimationPaused = _fe3d.billboardEntity_isAnimationPaused(billboardID);
 			auto position = _fe3d.billboardEntity_getPosition(billboardID);
 			auto rotation = _fe3d.billboardEntity_getRotation(billboardID);

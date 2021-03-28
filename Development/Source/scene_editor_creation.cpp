@@ -320,7 +320,7 @@ void SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	}
 
 	// Animation
-	if (_fe3d.billboardEntity_isAnimationPlaying(previewID))
+	if (_fe3d.billboardEntity_isAnimationStarted(previewID))
 	{
 		_fe3d.billboardEntity_setAnimationRows(newID, _fe3d.billboardEntity_getAnimationRows(previewID));
 		_fe3d.billboardEntity_setAnimationColumns(newID, _fe3d.billboardEntity_getAnimationColumns(previewID));

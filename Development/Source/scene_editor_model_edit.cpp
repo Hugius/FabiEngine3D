@@ -133,12 +133,12 @@ void SceneEditor::_updateModelEditing()
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("animation")->isHovered()) // Animation button
 					{
 						_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f),
-							_animationEditor.getLoadedAnimationIDs());
+							_animationEditor.getAllAnimationIDs());
 					}
 				}
 
 				// Check if an animation name is clicked
-				auto lastAnimationID = _animationEditor.getPlayingAnimationNames(_activeModelID);
+				auto lastAnimationID = _animationEditor.getPlayingAnimationIDs(_activeModelID);
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animations");
 				if (selectedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
@@ -234,7 +234,7 @@ void SceneEditor::_updateModelEditing()
 				if (position != oldPosition || rotation != oldRotation || size != oldSize)
 				{
 					// Check if animation is playing
-					auto animationNames = _animationEditor.getPlayingAnimationNames(_activeModelID);
+					auto animationNames = _animationEditor.getPlayingAnimationIDs(_activeModelID);
 					if (!animationNames.empty())
 					{
 						// Stop animation

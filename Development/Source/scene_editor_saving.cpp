@@ -99,7 +99,7 @@ void SceneEditor::saveEditorSceneToFile()
 		if ((modelID[0] != '@') || isLodModel)
 		{
 			// Check if model has bound animation
-			if (!_animationEditor.getPlayingAnimationNames(modelID).empty())
+			if (!_animationEditor.getPlayingAnimationIDs(modelID).empty())
 			{
 				// Reset main transformation
 				_fe3d.modelEntity_setPosition(modelID, _initialModelPosition[modelID]);
@@ -126,8 +126,8 @@ void SceneEditor::saveEditorSceneToFile()
 			auto rotation = _fe3d.modelEntity_getRotation(modelID);
 			auto size = _fe3d.modelEntity_getSize(modelID);
 			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
-			auto animationID = (_animationEditor.getPlayingAnimationNames(modelID).empty()) ? "" :
-				_animationEditor.getPlayingAnimationNames(modelID).front();
+			auto animationID = (_animationEditor.getPlayingAnimationIDs(modelID).empty()) ? "" :
+				_animationEditor.getPlayingAnimationIDs(modelID).front();
 
 			// Perform empty string & space conversions
 			animationID = (animationID == "") ? "?" : animationID;

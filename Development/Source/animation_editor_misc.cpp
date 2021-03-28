@@ -197,7 +197,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 	_fe3d.logger_throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
 }
 
-const vector<string> AnimationEditor::getLoadedAnimationIDs()
+const vector<string> AnimationEditor::getAllAnimationIDs()
 {
 	vector<string> IDs;
 
@@ -213,7 +213,7 @@ const vector<string> AnimationEditor::getLoadedAnimationIDs()
 	return IDs;
 }
 
-const vector<string> AnimationEditor::getPlayingAnimationNames()
+const vector<string> AnimationEditor::getPlayingAnimationIDs()
 {
 	set<string> names;
 
@@ -225,7 +225,7 @@ const vector<string> AnimationEditor::getPlayingAnimationNames()
 	return vector<string>(names.begin(), names.end());
 }
 
-const vector<string> AnimationEditor::getPlayingAnimationNames(const string& modelID)
+const vector<string> AnimationEditor::getPlayingAnimationIDs(const string& modelID)
 {
 	set<string> names;
 

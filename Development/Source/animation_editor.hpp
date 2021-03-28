@@ -32,9 +32,9 @@ public:
 
 	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
 
-	const vector<string> getLoadedAnimationIDs();
-	const vector<string> getPlayingAnimationNames();
-	const vector<string> getPlayingAnimationNames(const string& modelID);
+	const vector<string> getAllAnimationIDs();
+	const vector<string> getPlayingAnimationIDs();
+	const vector<string> getPlayingAnimationIDs(const string& modelID);
 
 private:
 	void _loadGUI();
@@ -66,24 +66,24 @@ private:
 	map<pair<string, string>, Animation> _playingAnimations;
 
 	// Strings
-	string _currentProjectID = "";
+	string _currentProjectID   = "";
 	string _currentAnimationID = "";
 	string _currentPartName	   = "";
 
 	// Vectors
 	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
-	Vec3 _cameraLookatPosition = Vec3(0.0f);
+	Vec3 _cameraLookatPosition  = Vec3(0.0f);
 	Vec2 _totalCursorDifference = Vec2(0.0f, 0.5f);
-	Vec2 _cameraAcceleration = Vec2(0.0f);
-	Vec2 _lastCursorPos = Vec2(0.0f);
+	Vec2 _cameraAcceleration    = Vec2(0.0f);
+	Vec2 _lastCursorPos			= Vec2(0.0f);
 
 	// Floats
-	float _cameraDistance = 5.0f;
+	float _cameraDistance			   = 5.0f;
 	float _cameraScrollingAcceleration = 0.0f;
-	float _partColorStrength = 0.0f;
-	float _colorChangingSpeed = 0.05f;
-	float _cameraSpeed = 0.1f;
-	static inline const float MIN_CAMERA_HEIGHT = 1.0f;
+	float _partColorStrength		   = 0.0f;
+	float _colorChangingSpeed		   = 0.05f;
+	float _cameraSpeed				   = 0.1f;
+	static inline const float MIN_CAMERA_HEIGHT	   = 1.0f;
 	static inline const float SCROLL_WHEEL_DIVIDER = 5.0f;
 
 	// Integers
@@ -93,9 +93,9 @@ private:
 	// Booleans
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
-	bool _isEditingAnimation = false;
+	bool _isEditingAnimation  = false;
 	bool _isRemovingAnimation = false;
-	bool _isEditorLoaded = false;
-	bool _isEditorLoading = false;
+	bool _isEditorLoaded	  = false;
+	bool _isEditorLoading	  = false;
 	bool _partColorIncreasing = true;
 };

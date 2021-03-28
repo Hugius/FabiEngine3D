@@ -207,7 +207,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
 		auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
-		auto isAnimated = _fe3d.billboardEntity_isAnimationPlaying(billboardID);
+		auto isAnimated = _fe3d.billboardEntity_isAnimationStarted(billboardID);
 		auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
 		auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);

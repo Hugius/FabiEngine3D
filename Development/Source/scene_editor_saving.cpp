@@ -160,21 +160,23 @@ void SceneEditor::saveEditorSceneToFile()
 				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
 				if (!instancedOffsets.empty())
 				{
+					// Write space
 					file << " ";
-				}
 
-				// Write offsets
-				for (unsigned int i = 0; i < instancedOffsets.size(); i++)
-				{
-					file <<
-						instancedOffsets[i].x << " " <<
-						instancedOffsets[i].y << " " <<
-						instancedOffsets[i].z;
-
-					// Add space
-					if (i != (instancedOffsets.size() - 1))
+					// Write offsets
+					for (unsigned int i = 0; i < instancedOffsets.size(); i++)
 					{
-						file << " ";
+						// Write offset
+						file <<
+							instancedOffsets[i].x << " " <<
+							instancedOffsets[i].y << " " <<
+							instancedOffsets[i].z;
+
+						// Write space
+						if (i != (instancedOffsets.size() - 1))
+						{
+							file << " ";
+						}
 					}
 				}
 			}

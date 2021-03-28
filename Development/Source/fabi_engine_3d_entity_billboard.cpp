@@ -295,9 +295,9 @@ const string& FabiEngine3D::billboardEntity_getTextContent(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getTextContent();
 }
 
-void FabiEngine3D::billboardEntity_playAnimation(const string& ID, int maxAnimationRepeats)
+void FabiEngine3D::billboardEntity_playAnimation(const string& ID, int loops)
 {
-	_core->_billboardEntityManager.getEntity(ID)->playSpriteAnimation(maxAnimationRepeats);
+	_core->_billboardEntityManager.getEntity(ID)->startSpriteAnimation(loops);
 }
 
 void FabiEngine3D::billboardEntity_pauseAnimation(const string& ID)
@@ -347,14 +347,14 @@ const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 
 bool FabiEngine3D::billboardEntity_isAnimationFinished(const string& ID)
 {
-	int repeats = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRepeats();
-	int maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationRepeats();
-	return (repeats == maxRepeats);
+	int loops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
+	int maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
+	return (loops == maxLoops);
 }
 
 bool FabiEngine3D::billboardEntity_isAnimationStarted(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationPlaying();
+	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationStarted();
 }
 
 bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
@@ -397,10 +397,10 @@ unsigned int FabiEngine3D::billboardEntity_getAnimationColumnIndex(const string&
 	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
 }
 
-int FabiEngine3D::billboardEntity_getRemainingAnimationRepeats(const string& ID)
+int FabiEngine3D::billboardEntity_getRemainingAnimationLoops(const string& ID)
 {
-	auto maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationRepeats();
-	auto currentRepeats = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRepeats();
+	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
+	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
 
-	return (maxRepeats - currentRepeats);
+	return (maxLoops - currentLoops);
 }

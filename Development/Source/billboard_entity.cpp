@@ -1,4 +1,5 @@
 #include "billboard_entity.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -127,27 +128,51 @@ void BillboardEntity::setDepthMapIncluded(bool value)
 	_isDepthMapIncluded = value;
 }
 
-void BillboardEntity::playSpriteAnimation(int maxAnimationRepeats)
+void BillboardEntity::startSpriteAnimation(int loops)
 {
-	_isSpriteAnimationPlaying = true;
+	if (_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Sprite animation of billboard \"" + getID() + "\" already started while trying to start!");
+	}
+
+	_isSpriteAnimationStarted = true;
 	_passedSpriteAnimationFrames = 0;
-	_spriteAnimationRepeats = 0;
-	_maxSpriteAnimationRepeats = maxAnimationRepeats;
+	_spriteAnimationLoops = 0;
+	_maxSpriteAnimationLoops = loops;
 }
 
 void BillboardEntity::pauseSpriteAnimation()
 {
+	if (!_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Sprite animation of billboard \"" + getID() + "\" not started while trying to pause!");
+	}
+	else if (_isSpriteAnimationPaused)
+	{
+		Logger::throwWarning("Sprite animation of billboard \"" + getID() + "\" already paused while trying to pause!");
+	}
+
 	_isSpriteAnimationPaused = true;
 }
 
 void BillboardEntity::resumeSpriteAnimation()
 {
+	if (!_isSpriteAnimationPaused)
+	{
+		Logger::throwWarning("Sprite animation of billboard \"" + getID() + "\" not paused while trying to resume!");
+	}
+
 	_isSpriteAnimationPaused = false;
 }
 
 void BillboardEntity::stopSpriteAnimation()
 {
-	_isSpriteAnimationPlaying = false;
+	if (!_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Sprite animation of billboard \"" + getID() + "\" not started while trying to stop!");
+	}
+
+	_isSpriteAnimationStarted = false;
 	_spriteAnimationRowIndex = 0;
 	_spriteAnimationColumnIndex = 0;
 }
@@ -187,9 +212,9 @@ void BillboardEntity::resetPassedSpriteAnimationFrames()
 	_passedSpriteAnimationFrames = 0;
 }
 
-void BillboardEntity::increaseSpriteAnimationRepeats()
+void BillboardEntity::increaseSpriteAnimationLoops()
 {
-	_spriteAnimationRepeats++;
+	_spriteAnimationLoops++;
 }
 
 void BillboardEntity::setLightness(float value)
@@ -302,14 +327,14 @@ const int BillboardEntity::getSpriteAnimationColumnIndex() const
 	return _spriteAnimationColumnIndex;
 }
 
-const int BillboardEntity::getSpriteAnimationRepeats() const
+const int BillboardEntity::getSpriteAnimationLoops() const
 {
-	return _spriteAnimationRepeats;
+	return _spriteAnimationLoops;
 }
 
-const int BillboardEntity::getMaxSpriteAnimationRepeats() const
+const int BillboardEntity::getMaxSpriteAnimationLoops() const
 {
-	return _maxSpriteAnimationRepeats;
+	return _maxSpriteAnimationLoops;
 }
 
 const bool BillboardEntity::isTransparent() const
@@ -317,9 +342,9 @@ const bool BillboardEntity::isTransparent() const
 	return _isTransparent;
 }
 
-const bool BillboardEntity::isSpriteAnimationPlaying() const
+const bool BillboardEntity::isSpriteAnimationStarted() const
 {
-	return _isSpriteAnimationPlaying;
+	return _isSpriteAnimationStarted;
 }
 
 const bool BillboardEntity::isSpriteAnimationPaused() const

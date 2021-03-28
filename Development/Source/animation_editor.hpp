@@ -17,7 +17,7 @@ public:
 	void setCurrentProjectID(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
-	void startAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void startAnimation(const string& animationID, const string& modelID, int loops);
 	void setAnimationSpeedMultiplier(const string animationID, const string& modelID, float multiplier);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
@@ -30,6 +30,9 @@ public:
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
 
+	float getAnimationSpeedMultiplier(const string& animationID, const string& modelID);
+
+	int getAnimationRemainingLoops(const string& animationID, const string& modelID);
 	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
 
 	const vector<string> getAllAnimationIDs();

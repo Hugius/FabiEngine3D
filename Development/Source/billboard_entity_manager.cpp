@@ -121,8 +121,8 @@ void BillboardEntityManager::update()
 		}
 
 		// Update sprite animations
-		if (entity->isSpriteAnimationPlaying() && !entity->isSpriteAnimationPaused() && 
-			(entity->getSpriteAnimationRepeats() != entity->getMaxSpriteAnimationRepeats()))
+		if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() && 
+			(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
 		{
 			if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
 			{
@@ -134,7 +134,7 @@ void BillboardEntityManager::update()
 
 					if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
 					{
-						entity->increaseSpriteAnimationRepeats();
+						entity->increaseSpriteAnimationLoops();
 						entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
 					}
 					else // Next row

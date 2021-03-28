@@ -28,7 +28,7 @@ public:
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
-	void playSpriteAnimation(int maxAnimationRepeats);
+	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
 	void resumeSpriteAnimation();
 	void stopSpriteAnimation();
@@ -39,7 +39,7 @@ public:
 	void setMaxSpriteAnimationFramestep(unsigned int value);
 	void increasePassedSpriteAnimationFrames();
 	void resetPassedSpriteAnimationFrames();
-	void increaseSpriteAnimationRepeats();
+	void increaseSpriteAnimationLoops();
 	void setLightness(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
@@ -64,10 +64,10 @@ public:
 	const int getTotalSpriteAnimationColumns() const;
 	const int getSpriteAnimationRowIndex() const;
 	const int getSpriteAnimationColumnIndex() const;
-	const int getSpriteAnimationRepeats() const;
-	const int getMaxSpriteAnimationRepeats() const;
+	const int getSpriteAnimationLoops() const;
+	const int getMaxSpriteAnimationLoops() const;
 	const bool isTransparent() const;
-	const bool isSpriteAnimationPlaying() const;
+	const bool isSpriteAnimationStarted() const;
 	const bool isSpriteAnimationPaused() const;
 	const bool isCameraFacingX() const;
 	const bool isCameraFacingY() const;
@@ -93,8 +93,8 @@ private:
 	unsigned int _totalSpriteAnimationColumns = 0;
 	unsigned int _spriteAnimationRowIndex     = 0;
 	unsigned int _spriteAnimationColumnIndex  = 0;
-	int _spriteAnimationRepeats      = 0;
-	int _maxSpriteAnimationRepeats   = 0;
+	int _spriteAnimationLoops      = 0;
+	int _maxSpriteAnimationLoops   = 0;
 	
 	GLuint _diffuseMap = 0;
 
@@ -103,7 +103,7 @@ private:
 	string _fontPath	   = "";
 
 	bool _isTransparent			   = false;
-	bool _isSpriteAnimationPlaying = false;
+	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused  = false;
 	bool _isCameraFacingX	       = false;
 	bool _isCameraFacingY	       = false;

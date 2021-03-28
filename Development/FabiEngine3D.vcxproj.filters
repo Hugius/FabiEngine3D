@@ -490,9 +490,6 @@
     <ClCompile Include="Source\gui_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_animations.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_camera.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
@@ -693,6 +690,9 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_scene.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_animations.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

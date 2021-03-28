@@ -100,8 +100,8 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			Vec2 size;
 			Vec3 color;
 			float lightness;
-			bool facingX, facingY, transparent, playing;
-			int rows, columns, framestep;
+			bool facingX, facingY, transparent, isAnimationStarted;
+			int animationRows, animationColumns, animationFramestep;
 
 			// For file extraction
 			std::istringstream iss(line);
@@ -120,10 +120,10 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				transparent >>
 				fontPath >>
 				textContent >>
-				playing >>
-				rows >>
-				columns >>
-				framestep >>
+				isAnimationStarted >>
+				animationRows >>
+				animationColumns >>
+				animationFramestep >>
 				lightness;
 
 			// Perform empty string & space conversions
@@ -144,11 +144,11 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				_fe3d.billboardEntity_setColor(billboardID, color);
 
 				// Playing sprite animation
-				if (playing)
+				if (isAnimationStarted)
 				{
-					_fe3d.billboardEntity_setAnimationFramestep(billboardID, framestep);
-					_fe3d.billboardEntity_setAnimationRows(billboardID, rows);
-					_fe3d.billboardEntity_setAnimationColumns(billboardID, columns);
+					_fe3d.billboardEntity_setAnimationFramestep(billboardID, animationFramestep);
+					_fe3d.billboardEntity_setAnimationRows(billboardID, animationRows);
+					_fe3d.billboardEntity_setAnimationColumns(billboardID, animationColumns);
 					_fe3d.billboardEntity_playAnimation(billboardID, -1);
 				}
 			}
@@ -207,7 +207,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
 		auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
-		auto isAnimated = _fe3d.billboardEntity_isAnimationStarted(billboardID);
+		auto isAnimationStarted = _fe3d.billboardEntity_isAnimationStarted(billboardID);
 		auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
 		auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
@@ -235,7 +235,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			isTransparent << " " <<
 			fontPath << " " <<
 			textContent << " " <<
-			isAnimated << " " <<
+			isAnimationStarted << " " <<
 			animationRows << " " <<
 			animationColumns << " " <<
 			animationFramestep << " " <<

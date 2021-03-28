@@ -398,7 +398,7 @@ public:
 	const string& billboardEntity_getTextContent(const string& ID);
 	
 	// Billboard entity interface (animation) - setters
-	void billboardEntity_playAnimation(const string& ID, int maxAnimationRepeats);
+	void billboardEntity_playAnimation(const string& ID, int loops);
 	void billboardEntity_pauseAnimation(const string& ID);
 	void billboardEntity_resumeAnimation(const string& ID);
 	void billboardEntity_stopAnimation(const string& ID);
@@ -418,7 +418,7 @@ public:
 	unsigned int billboardEntity_getAnimationFramestep(const string& ID);
 	unsigned int billboardEntity_getAnimationRowIndex(const string& ID);
 	unsigned int billboardEntity_getAnimationColumnIndex(const string& ID);
-	int billboardEntity_getRemainingAnimationRepeats(const string& ID);
+	int billboardEntity_getRemainingAnimationLoops(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
@@ -508,7 +508,7 @@ public:
 	void guiEntity_setAlpha(const string& ID, float alpha);
 	void guiEntity_setMinPosition(const string& ID, Vec2 minPos);
 	void guiEntity_setMaxPosition(const string& ID, Vec2 maxPos);
-	void guiEntity_playAnimation(const string& ID, int maxAnimationRepeats);
+	void guiEntity_playAnimation(const string& ID, int loops);
 	void guiEntity_pauseAnimation(const string& ID);
 	void guiEntity_resumeAnimation(const string& ID);
 	void guiEntity_stopAnimation(const string& ID);

@@ -174,16 +174,15 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						string nextElement;
 						iss >> nextElement;
 
-						// Check if item is a number
-						if (nextElement == "") // End of line, because instanced model cannot have AABB
+						// Check for end of line
+						if (nextElement == "")
 						{
 							break;
 						}
 						else // Add offset
 						{
 							Vec3 offset;
-							offset.x = stof(nextElement);
-							iss >> offset.y >> offset.z;
+							iss >> offset.x >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
 						}
 					}

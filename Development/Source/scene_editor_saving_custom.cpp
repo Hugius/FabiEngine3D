@@ -170,28 +170,72 @@ void SceneEditor::saveCustomSceneToFile()
 				alpha << " " <<
 				lightness;
 
-			// Write instanced offset
+			// Write instanced offsets
 			if (_fe3d.modelEntity_isInstanced(modelID))
 			{
 				// Check if model has any offsets
 				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
 				if (!instancedOffsets.empty())
 				{
+					// Write space
 					file << " ";
-				}
 
-				// Write offsets
-				for (unsigned int i = 0; i < instancedOffsets.size(); i++)
-				{
-					file <<
-						instancedOffsets[i].x << " " <<
-						instancedOffsets[i].y << " " <<
-						instancedOffsets[i].z;
-
-					// Add space
-					if (i != (instancedOffsets.size() - 1))
+					// Write offsets
+					for (unsigned int i = 0; i < instancedOffsets.size(); i++)
 					{
-						file << " ";
+						// Write offset
+						file <<
+							instancedOffsets[i].x << " " <<
+							instancedOffsets[i].y << " " <<
+							instancedOffsets[i].z;
+
+						// Write space
+						if (i != (instancedOffsets.size() - 1))
+						{
+							file << " ";
+						}
+					}
+				}
+			}
+			else // Write part transformations
+			{
+				// Check if model has any parts
+				auto partNames = _fe3d.modelEntity_getPartNames(modelID);
+				if (partNames.size() > 1)
+				{
+					// Write space
+					file << " ";
+
+					// Write transformations
+					for (unsigned int i = 1; i < partNames.size(); i++)
+					{
+						// Retrieve transformation
+						position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
+						rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
+						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
+						size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
+
+						// Write transformation
+						file <<
+							partNames[i] << " " <<
+							position.x << " " <<
+							position.y << " " <<
+							position.z << " " <<
+							rotation.x << " " <<
+							rotation.y << " " <<
+							rotation.z << " " <<
+							rotationOrigin.x << " " <<
+							rotationOrigin.y << " " <<
+							rotationOrigin.z << " " <<
+							size.x << " " <<
+							size.y << " " <<
+							size.z;
+
+						// Write space
+						if (i != (partNames.size() - 1))
+						{
+							file << " ";
+						}
 					}
 				}
 			}
@@ -214,10 +258,11 @@ void SceneEditor::saveCustomSceneToFile()
 			for (auto& animationID : _animationEditor.getPlayingAnimationIDs(modelID))
 			{
 				// Data to save
-				bool isAnimationStarted = _animationEditor.isAnimationStarted(animationID, modelID);
-				bool isAnimationPaused = _animationEditor.isAnimationPaused(animationID, modelID);
+				bool isStarted = _animationEditor.isAnimationStarted(animationID, modelID);
+				bool isPaused = _animationEditor.isAnimationPaused(animationID, modelID);
 				auto frameIndex = _animationEditor.getAnimationFrameIndex(animationID, modelID);
-				//auto animationSpeed = _animationEditor.getAnimationSpeedMultiplier(animationID, modelID);
+				auto speedMultiplier = _animationEditor.getAnimationSpeedMultiplier(animationID, modelID);
+				auto remainingLoops = _animationEditor.getAnimationRemainingLoops(animationID, modelID);
 			}
 		}
 	}
@@ -249,7 +294,7 @@ void SceneEditor::saveCustomSceneToFile()
 			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 			auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
 			auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
-			auto remainingAnimationRepeats = _fe3d.billboardEntity_getRemainingAnimationRepeats(billboardID);
+			auto remainingAnimationRepeats = _fe3d.billboardEntity_getRemainingAnimationLoops(billboardID);
 			auto animationRowIndex = _fe3d.billboardEntity_getAnimationRowIndex(billboardID);
 			auto animationColumnIndex = _fe3d.billboardEntity_getAnimationColumnIndex(billboardID);
 

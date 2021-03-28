@@ -66,11 +66,14 @@ void ModelEditor::saveModelEntitiesToFile()
 			vector<string> aabbNames;
 			vector<Vec3> aabbPositions;
 			vector<Vec3> aabbSizes;
-			for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+			if (!isInstanced)
 			{
-				aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
-				aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
-				aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
+				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+				{
+					aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
+					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
+					aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
+				}
 			}
 
 			// Perform empty string & space conversions

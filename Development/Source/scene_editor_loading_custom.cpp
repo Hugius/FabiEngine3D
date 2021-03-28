@@ -49,8 +49,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 			// Extract type from file
 			string entityType;
-			iss >>
-				entityType;
+			iss >> entityType;
 
 			// Load entity according to type
 			if (entityType == "SKY")
@@ -82,9 +81,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				string terrainID, previewID;
 
 				// Extract data
-				iss >>
-					terrainID >>
-					previewID;
+				iss >> terrainID >> previewID;
 
 				// Add terrain
 				_copyPreviewTerrain(terrainID, previewID);
@@ -123,8 +120,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
 				// Extract ID
-				iss >>
-					modelID;
+				iss >> modelID;
 
 				// Check if LOD entitty
 				bool makeInvisible = (modelID[0] == '@');
@@ -182,27 +178,63 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						// Check if file has offset data left
 						string nextElement;
-						iss >>
-							nextElement;
+						iss >> nextElement;
 
-						// Check if item is a number
-						if (nextElement == "") // End of line, because instanced model cannot have AABB
+						// Check for end of line
+						if (nextElement == "")
 						{
 							break;
 						}
 						else // Add offset
 						{
 							Vec3 offset;
-							offset.x = stof(nextElement);
-							iss >>
-								offset.y >>
-								offset.z;
+							iss >> offset.x >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
 						}
 					}
 
 					// Add offsets
 					_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
+				}
+				else
+				{
+					while (true)
+					{
+						// Check if file has part data left
+						string nextElement;
+						iss >> nextElement;
+
+						// Check for end of line
+						if (nextElement == "")
+						{
+							break;
+						}
+						else
+						{
+							// Extract data
+							string partName;
+							iss >>
+								partName >>
+								position.x >>
+								position.y >>
+								position.z >>
+								rotation.x >>
+								rotation.y >>
+								rotation.z >>
+								rotationOrigin.x >>
+								rotationOrigin.y >>
+								rotationOrigin.z >>
+								size.x >>
+								size.y >>
+								size.z;
+
+							// Set part transformation
+							_fe3d.modelEntity_setPosition(modelID, position, partName);
+							_fe3d.modelEntity_setRotation(modelID, rotation, partName);
+							_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
+							_fe3d.modelEntity_setSize(modelID, size, partName);
+						}
+					}
 				}
 
 				// Hide model if LOD

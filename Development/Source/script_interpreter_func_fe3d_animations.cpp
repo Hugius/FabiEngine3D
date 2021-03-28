@@ -1,5 +1,24 @@
 #include "script_interpreter.hpp"
 
+bool ScriptInterpreter::_validateFe3dModelEntityAnimation(const string& ID)
+{
+	if (!_validateFe3dModelEntity(ID))
+	{
+		return false;
+	}
+	else
+	{
+		// Instanced model cannot have animation
+		if (_fe3d.modelEntity_isInstanced(ID))
+		{
+			_throwScriptError("Cannot start animation on instanced model with ID \"" + ID + "\"!");
+			return false;
+		}
+	}
+
+	return true;
+}
+
 bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	if (functionName == "fe3d:model_start_animation")
@@ -9,8 +28,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_is_animation_started")
@@ -20,8 +43,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			auto result = _animationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_is_animation_playing")
@@ -31,8 +58,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			auto result = _animationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_is_animation_paused")
@@ -42,8 +73,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			auto result = _animationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_pause_animation")
@@ -53,8 +88,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_resume_animation")
@@ -64,8 +103,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_fade_animation")
@@ -75,8 +118,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_stop_animation")
@@ -86,8 +133,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_animation_speed")
@@ -97,8 +148,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.setAnimationSpeedMultiplier(arguments[1].getString(), arguments[0].getString(), arguments[2].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				_animationEditor.setAnimationSpeedMultiplier(arguments[1].getString(), arguments[0].getString(), arguments[2].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
 		}
 	}
 	else if (functionName == "fe3d:model_get_animation_frame_index")
@@ -108,8 +163,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			auto result = _animationEditor.getAnimationFrameIndex(arguments[1].getString(), arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+			// Validate existing model ID
+			if (_validateFe3dModelEntityAnimation(arguments[0].getString()))
+			{
+				auto result = _animationEditor.getAnimationFrameIndex(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+			}
 		}
 	}
 	else

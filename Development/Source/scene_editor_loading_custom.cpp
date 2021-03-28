@@ -114,6 +114,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				string modelID, previewID;
 				Vec3 position, rotation, rotationOrigin, size, color;
 				float minHeight, maxHeight, alpha, lightness;
+				unsigned partCount;
 				bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
 
 				// Extract ID
@@ -147,16 +148,55 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					minHeight >>
 					maxHeight >>
 					alpha >>
-					lightness;
+					lightness >>
+					partCount;
+				
+				bool warningThrown = false;
 
-				// Check if preview model became instanced
+				// Perform part checks
+				if (partCount > 1)
+				{
+					// Read model part names
+					vector<string> partNames;
+					for (unsigned int i = 0; i < partCount; i++)
+					{
+						string partName;
+						iss >> partName;
+						partNames.push_back(partName);
+					}
+
+					// Check if preview model parts count
+					if (partNames.size() != _fe3d.modelEntity_getPartNames(previewID).size())
+					{
+						_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
+						warningThrown = true;
+					}
+
+					// Check if preview model parts changed
+					for (unsigned int i = 0; i < partNames.size(); i++)
+					{
+						if (partNames[i] != _fe3d.modelEntity_getPartNames(previewID)[i])
+						{
+							_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
+							warningThrown = true;
+						}
+					}
+				}
+
+				// Check if preview model instancing changed
 				if (_fe3d.modelEntity_isExisting(previewID))
 				{
 					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)))
 					{
-						_fe3d.logger_throwWarning("Scene model with ID \"" + modelID + "\" differs from base model!");
-						continue;
+						_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
+						warningThrown = true;
 					}
+				}
+
+				// Skip model placement if anything went wrong
+				if (warningThrown)
+				{
+					continue;
 				}
 
 				// Add model
@@ -177,6 +217,33 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 						_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
+					}
+
+					// Extract part transformations
+					for (unsigned int i = 0; i < partCount; i++)
+					{
+						// Extract data
+						string partName;
+						iss >>
+							partName >>
+							position.x >>
+							position.y >>
+							position.z >>
+							rotation.x >>
+							rotation.y >>
+							rotation.z >>
+							rotationOrigin.x >>
+							rotationOrigin.y >>
+							rotationOrigin.z >>
+							size.x >>
+							size.y >>
+							size.z;
+
+						// Set part transformation
+						_fe3d.modelEntity_setPosition(modelID, position, partName);
+						_fe3d.modelEntity_setRotation(modelID, rotation, partName);
+						_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
+						_fe3d.modelEntity_setSize(modelID, size, partName);
 					}
 
 					// Extract instanced offsets
@@ -205,45 +272,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 						// Add offsets
 						_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
-					}
-					else
-					{
-						while (true)
-						{
-							// Check if file has part data left
-							string nextElement;
-							iss >> nextElement;
-
-							// Check for end of line
-							if (nextElement == "")
-							{
-								break;
-							}
-							else
-							{
-								// Extract data
-								string partName = nextElement;
-								iss >>
-									position.x >>
-									position.y >>
-									position.z >>
-									rotation.x >>
-									rotation.y >>
-									rotation.z >>
-									rotationOrigin.x >>
-									rotationOrigin.y >>
-									rotationOrigin.z >>
-									size.x >>
-									size.y >>
-									size.z;
-
-								// Set part transformation
-								_fe3d.modelEntity_setPosition(modelID, position, partName);
-								_fe3d.modelEntity_setRotation(modelID, rotation, partName);
-								_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
-								_fe3d.modelEntity_setSize(modelID, size, partName);
-							}
-						}
 					}
 
 					// Hide model if LOD

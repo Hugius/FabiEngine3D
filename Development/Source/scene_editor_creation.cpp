@@ -332,11 +332,11 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Save ID
 	if (fromOutside)
 	{
-		_outsideLoadedModelIDs[newID] = previewID;
+		_outsideLoadedModelIDs[newEntityID] = previewID;
 	}
 	else
 	{
-		_loadedModelIDs[newID] = previewID;
+		_loadedModelIDs[newEntityID] = previewID;
 	}
 
 	return true;

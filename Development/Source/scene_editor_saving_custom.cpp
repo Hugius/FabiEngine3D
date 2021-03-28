@@ -176,7 +176,56 @@ void SceneEditor::saveCustomSceneToFile()
 				minHeight << " " <<
 				maxHeight << " " <<
 				alpha << " " <<
-				lightness;
+				lightness << " " <<
+				_fe3d.modelEntity_getPartNames(modelID).size();
+
+			// Check if model is multi-parted
+			auto partNames = _fe3d.modelEntity_getPartNames(modelID);
+			if (partNames.size() > 1)
+			{
+				// Write part names
+				for (auto& partName : partNames)
+				{
+					// Write space
+					file << " ";
+
+					// Write part name
+					file << partName;
+				}
+
+				// Write part transformations
+				for (unsigned int i = 0; i < partNames.size(); i++)
+				{
+					// Part name cannot be empty
+					if (!partNames[i].empty())
+					{
+						// Write space
+						file << " ";
+
+						// Retrieve transformation
+						position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
+						rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
+						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
+						size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
+
+						// Write transformation
+						file <<
+							partNames[i] << " " <<
+							position.x << " " <<
+							position.y << " " <<
+							position.z << " " <<
+							rotation.x << " " <<
+							rotation.y << " " <<
+							rotation.z << " " <<
+							rotationOrigin.x << " " <<
+							rotationOrigin.y << " " <<
+							rotationOrigin.z << " " <<
+							size.x << " " <<
+							size.y << " " <<
+							size.z;
+					}
+				}
+			}
 
 			// Write instanced offsets
 			if (_fe3d.modelEntity_isInstanced(modelID))
@@ -201,46 +250,6 @@ void SceneEditor::saveCustomSceneToFile()
 						if (i != (instancedOffsets.size() - 1))
 						{
 							file << " ";
-						}
-					}
-				}
-			}
-			else // Write part transformations
-			{
-				// Check if model has any parts
-				auto partNames = _fe3d.modelEntity_getPartNames(modelID);
-				if (partNames.size() > 1 || !partNames.front().empty())
-				{
-					// Write transformations
-					for (unsigned int i = 0; i < partNames.size(); i++)
-					{
-						// Part name cannot be empty
-						if (!partNames[i].empty())
-						{
-							// Write space
-							file << " ";
-
-							// Retrieve transformation
-							position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
-							rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
-							rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
-							size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
-
-							// Write transformation
-							file <<
-								partNames[i] << " " <<
-								position.x << " " <<
-								position.y << " " <<
-								position.z << " " <<
-								rotation.x << " " <<
-								rotation.y << " " <<
-								rotation.z << " " <<
-								rotationOrigin.x << " " <<
-								rotationOrigin.y << " " <<
-								rotationOrigin.z << " " <<
-								size.x << " " <<
-								size.y << " " <<
-								size.z;
 						}
 					}
 				}

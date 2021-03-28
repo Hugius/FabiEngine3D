@@ -186,7 +186,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Check if preview model instancing changed
 				if (_fe3d.modelEntity_isExisting(previewID))
 				{
-					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)))
+					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
+						!_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
 					{
 						_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 						warningThrown = true;

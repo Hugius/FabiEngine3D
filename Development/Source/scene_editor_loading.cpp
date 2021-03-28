@@ -137,10 +137,11 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				animationID = (animationID == "?") ? "" : animationID;
 				std::replace(animationID.begin(), animationID.end(), '?', ' ');
 
-				// Check if preview model became instanced
+				// Check if preview model instancing changed
 				if (_fe3d.modelEntity_isExisting(previewID))
 				{
-					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)))
+					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
+						!_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
 					{
 						_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 						continue;

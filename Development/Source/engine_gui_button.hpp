@@ -46,7 +46,7 @@ private:
 	const bool _sizeChangeEnabled;
 	const bool _colorChangeEnabled;
 
-	static inline const float TOTAL_SIZE_INCREASE = 1.1f;
+	static inline const float TOTAL_SIZE_INCREASE = 1.15f;
 	static inline const float INCREASE_FACTOR = 1.003f;
 	static inline const float DECREASE_FACTOR = 0.997f;
 };

@@ -48,5 +48,5 @@
 - **Lightness**: the brightness of the model fragments. **Range**: 0 to inf.
 - **Color**: the RGB color that will be mixed with the model rendering. **Range**: 0 to 255.
 - **UV repeat**: the amount of times the diffuse map texture is repeated. **Range**: 0 to inf.
-- **instanced**: enable or disable instanced rendering. This means that the model can be rendered VERY efficiently in large numbers. This option will also disable AABBs & animations for this model. **Range**: ON or OFF.
+- **instanced**: enable or disable instanced rendering. This means that the model can be rendered VERY efficiently in large numbers. This option will also disable/remove AABBs for this model. **Range**: ON or OFF.
 - **Level of detail**: the name of another created model representing a lower quality version of the current model. If the model is placed in a scene and is farther than the LOD distance, the mesh will be replaced with the specified level of detail mesh. If you want to remove the LOD, fill in "@" as LOD name.

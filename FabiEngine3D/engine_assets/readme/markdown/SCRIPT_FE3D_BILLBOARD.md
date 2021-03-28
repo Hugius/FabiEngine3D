@@ -63,10 +63,18 @@
   Returns true if billboard with **ID** is facing the camera in the Y direction.
 - `fe3d:billboard_start_animation`(`STR` ID, `INT` loops) ---> `NONE`  
   Starts the sprite animation of billboard with **ID** and repeat it **loops** times.
+- `fe3d:billboard_pause_animation`(`STR` ID) ---> `NONE`  
+  Pauses the playing sprite animation of billboard with **ID**.
+- `fe3d:billboard_resume_animation`(`STR` ID) ---> `NONE`  
+  Resumes the paused sprite animation of billboard with **ID**.
+- `fe3d:billboard_stop_animation`(`STR` ID) ---> `NONE`  
+  Stops the playing sprite animation of billboard with **ID**.
+- `fe3d:billboard_is_animation_started`(`STR` ID) ---> `BOOL`  
+  Returns true if animation of billboard with **ID** is started.
 - `fe3d:billboard_is_animation_playing`(`STR` ID) ---> `BOOL`  
   Returns true if animation of billboard with **ID** is playing.
-- `fe3d:billboard_stop_animation`(`STR` ID) ---> `NONE`  
-  Stops the sprite animation of billboard with **ID**.
+- `fe3d:billboard_is_animation_paused`(`STR` ID) ---> `BOOL`  
+  Returns true if animation of billboard with **ID** is paused.
 - `fe3d:billboard_is_animation_finished`(`STR` ID) ---> `BOOL`  
   Returns true if animation of billboard with **ID** is finished.
 - `fe3d:billboard_set_text`(`STR` ID, `STR` text) ---> `NONE`  

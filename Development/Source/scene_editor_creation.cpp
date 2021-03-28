@@ -1,14 +1,20 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
+bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 {
-	// Delete old
+	// Error checking
 	if (_fe3d.skyEntity_isExisting(newID))
 	{
-		_fe3d.skyEntity_delete(newID);
+		_fe3d.logger_throwWarning("Scene sky with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.skyEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base sky of scene sky with ID \"" + newID + "\" not existing anymore!");
+		return false;
 	}
 
-	// Create new
+	// Create new sky
 	_fe3d.skyEntity_add(newID);
 	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
@@ -18,10 +24,24 @@ void SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 
 	// Save ID
 	_loadedSkyID = newID;
+
+	return true;
 }
 
-void SceneEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
+bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& previewID)
 {
+	// Error checking
+	if (_fe3d.terrainEntity_isExisting(newID))
+	{
+		_fe3d.logger_throwWarning("Scene terrain with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.terrainEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base terrain of scene terrain with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
 	// Delete old
 	if (_fe3d.terrainEntity_isExisting(newID))
 	{
@@ -104,10 +124,24 @@ void SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 
 	// Save ID
 	_loadedTerrainID = newID;
+
+	return true;
 }
 
-void SceneEditor::_copyPreviewWater(const string& newID, const string& previewID)
+bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID)
 {
+	// Error checking
+	if (_fe3d.waterEntity_isExisting(newID))
+	{
+		_fe3d.logger_throwWarning("Scene water with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.waterEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base water of scene water with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
 	// Delete old
 	if (_fe3d.waterEntity_isExisting(newID))
 	{
@@ -154,10 +188,24 @@ void SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 
 	// Save ID
 	_loadedWaterID = newID;
+
+	return true;
 }
 
-void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
+	// Error checking
+	if (_fe3d.modelEntity_isExisting(newID) && !_fe3d.modelEntity_isInstanced(previewID))
+	{
+		_fe3d.logger_throwWarning("Model with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.modelEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base model of model with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
 	// Compose full entity ID
 	const string newEntityID = _fe3d.modelEntity_isInstanced(previewID) ? previewID.substr(1) : newID;
 
@@ -284,16 +332,30 @@ void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Save ID
 	if (fromOutside)
 	{
-		_outsideLoadedModelIDs.insert(make_pair(newEntityID, previewID));
+		_outsideLoadedModelIDs[newID] = previewID;
 	}
 	else
 	{
-		_loadedModelIDs.insert(make_pair(newEntityID, previewID));
+		_loadedModelIDs[newID] = previewID;
 	}
+
+	return true;
 }
 
-void SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
+	// Error checking
+	if (_fe3d.billboardEntity_isExisting(newID))
+	{
+		_fe3d.logger_throwWarning("Billboard with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.billboardEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base billboard of billboard with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
 	// Temporary values
 	auto color = _fe3d.billboardEntity_getColor(previewID);
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
@@ -339,16 +401,30 @@ void SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	// Save ID
 	if (fromOutside)
 	{
-		_outsideLoadedBillboardIDs.insert(make_pair(newID, previewID));
+		_outsideLoadedBillboardIDs[newID] = previewID;
 	}
 	else
 	{
-		_loadedBillboardIDs.insert(make_pair(newID, previewID));
+		_loadedBillboardIDs[newID] = previewID;
 	}
+
+	return true;
 }
 
-void SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
+	// Error checking
+	if (_fe3d.audioEntity_isExisting(newID))
+	{
+		_fe3d.logger_throwWarning("Audio with ID \"" + newID + "\" already exists!");
+		return false;
+	}
+	if (!_fe3d.audioEntity_isExisting(previewID))
+	{
+		_fe3d.logger_throwWarning("Base audio of audio with ID \"" + newID + "\" not existing anymore!");
+		return false;
+	}
+
 	// Add audio entity
 	_fe3d.audioEntity_add3D(
 		newID,
@@ -360,10 +436,12 @@ void SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID
 	// Save ID
 	if (fromOutside)
 	{
-		_outsideLoadedAudioIDs.insert(make_pair(newID, previewID));
+		_outsideLoadedAudioIDs[newID] = previewID;
 	}
 	else
 	{
-		_loadedAudioIDs.insert(make_pair(newID, previewID));
+		_loadedAudioIDs[newID] = previewID;
 	}
+
+	return true;
 }

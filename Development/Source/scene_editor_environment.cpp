@@ -77,6 +77,7 @@ void SceneEditor::_updateSkyMenu()
 				if (selectedButtonID != "")
 				{
 					_currentSkyID = selectedButtonID;
+					_fe3d.skyEntity_delete(_currentSkyID);
 					_copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("skyList");
 				}
@@ -140,6 +141,7 @@ void SceneEditor::_updateTerrainMenu()
 				if (selectedButtonID != "")
 				{
 					_currentTerrainID = selectedButtonID;
+					_fe3d.terrainEntity_delete(_currentTerrainID);
 					_copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 				}
@@ -213,6 +215,7 @@ void SceneEditor::_updateWaterMenu()
 				if (selectedButtonID != "")
 				{
 					_currentWaterID = selectedButtonID;
+					_fe3d.waterEntity_delete(_currentWaterID);
 					_copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
 				}

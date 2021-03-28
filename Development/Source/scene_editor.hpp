@@ -110,12 +110,12 @@ private:
 	void _updateMiscellaneous();
 
 	// Creation
-	void _copyPreviewSky(const string& newID, const string& previewID);
-	void _copyPreviewTerrain(const string& newID, const string& previewID);
-	void _copyPreviewWater(const string& newID, const string& previewID);
-	void _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	void _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	void _copyPreviewAudio(const string & newID, const string & previewID, Vec3 position, bool fromOutside = false);
+	bool _copyPreviewSky(const string& newID, const string& previewID);
+	bool _copyPreviewTerrain(const string& newID, const string& previewID);
+	bool _copyPreviewWater(const string& newID, const string& previewID);
+	bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	bool _copyPreviewAudio(const string & newID, const string & previewID, Vec3 position, bool fromOutside = false);
 
 	// Miscellaneous
 	vector<string> _loadSceneNames();

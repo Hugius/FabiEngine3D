@@ -24,15 +24,8 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	string fullFilePath = string(directoryPath + "editor\\" + fileName + ".fe3d");
 	if (_fe3d.misc_isFileExisting(fullFilePath))
 	{
-		// Clear last scene data
+		// Set new scene ID
 		_loadedSceneID = fileName;
-		_loadedSkyID = "";
-		_loadedTerrainID = "";
-		_loadedWaterID = "";
-		_loadedModelIDs.clear();
-		_loadedBillboardIDs.clear();
-		_loadedAudioIDs.clear();
-		_loadedLightIDs.clear();
 
 		// Load scene file
 		std::ifstream file(fullFilePath);
@@ -58,12 +51,12 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> skyID >> previewID;
 
 				// Add sky
-				_copyPreviewSky(skyID, previewID);
-
-				// Miscellaneous
-				if (_isEditorLoaded)
+				if (_copyPreviewSky(skyID, previewID))
 				{
-					_currentSkyID = skyID;
+					if (_isEditorLoaded)
+					{
+						_currentSkyID = skyID;
+					}
 				}
 			}
 			else if (entityType == "TERRAIN")
@@ -75,12 +68,12 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> terrainID >> previewID;
 
 				// Add terrain
-				_copyPreviewTerrain(terrainID, previewID);
-
-				// Miscellaneous
-				if (_isEditorLoaded)
+				if (_copyPreviewTerrain(terrainID, previewID))
 				{
-					_currentTerrainID = terrainID;
+					if (_isEditorLoaded)
+					{
+						_currentTerrainID = terrainID;
+					}
 				}
 			}
 			else if (entityType == "WATER")
@@ -92,12 +85,12 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> waterID >> previewID;
 
 				// Add water
-				_copyPreviewWater(waterID, previewID);
-
-				// Miscellaneous
-				if (_isEditorLoaded)
+				if (_copyPreviewWater(waterID, previewID))
 				{
-					_currentWaterID = waterID;
+					if (_isEditorLoaded)
+					{
+						_currentWaterID = waterID;
+					}
 				}
 			}
 			else if (entityType == "MODEL")
@@ -144,58 +137,71 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				animationID = (animationID == "?") ? "" : animationID;
 				std::replace(animationID.begin(), animationID.end(), '?', ' ');
 
-				// Add model
-				_copyPreviewModel(modelID, previewID, position);
-				_fe3d.modelEntity_setRotation(modelID, rotation);
-				_fe3d.modelEntity_setSize(modelID, size);
-				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
-				
-				// Save original transformation
-				if (_isEditorLoaded)
+				// Check if preview model became instanced
+				if (_fe3d.modelEntity_isExisting(previewID))
 				{
-					_initialModelPosition[modelID] = position;
-					_initialModelRotation[modelID] = rotation;
-					_initialModelSize[modelID]	   = size;
-				}
-
-				// Play animation
-				if (!animationID.empty())
-				{
-					_animationEditor.startAnimation(animationID, modelID, -1);
-				}
-
-				// Extract instanced offsets
-				if (_fe3d.modelEntity_isInstanced(modelID))
-				{
-					vector<Vec3> instancedOffsets;
-					while (true)
+					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)))
 					{
-						// Check if file has offset data left
-						string nextElement;
-						iss >> nextElement;
+						_fe3d.logger_throwWarning("Scene model with ID \"" + modelID + "\" differs from base model!");
+						continue;
+					}
+				}
 
-						// Check for end of line
-						if (nextElement == "")
-						{
-							break;
-						}
-						else // Add offset
-						{
-							Vec3 offset;
-							offset.x = stof(nextElement);
-							iss >> offset.y >> offset.z;
-							instancedOffsets.push_back(offset);
-						}
+				// Add model
+				if (_copyPreviewModel(modelID, previewID, position))
+				{
+					// Set properties
+					_fe3d.modelEntity_setRotation(modelID, rotation);
+					_fe3d.modelEntity_setSize(modelID, size);
+					_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
+
+					// Save original transformation
+					if (_isEditorLoaded)
+					{
+						_initialModelPosition[modelID] = position;
+						_initialModelRotation[modelID] = rotation;
+						_initialModelSize[modelID] = size;
 					}
 
-					// Add offsets
-					_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
-				}
+					// Play animation
+					if (!animationID.empty())
+					{
+						_animationEditor.startAnimation(animationID, modelID, -1);
+					}
 
-				// Hide model if LOD (and executing game)
-				if (makeInvisible)
-				{
-					_fe3d.modelEntity_hide(modelID);
+					// Extract instanced offsets
+					if (_fe3d.modelEntity_isInstanced(modelID))
+					{
+						vector<Vec3> instancedOffsets;
+						while (true)
+						{
+							// Check if file has offset data left
+							string nextElement;
+							iss >> nextElement;
+
+							// Check for end of line
+							if (nextElement == "")
+							{
+								break;
+							}
+							else // Add offset
+							{
+								Vec3 offset;
+								offset.x = stof(nextElement);
+								iss >> offset.y >> offset.z;
+								instancedOffsets.push_back(offset);
+							}
+						}
+
+						// Add offsets
+						_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
+					}
+
+					// Hide model if LOD (and executing game)
+					if (makeInvisible)
+					{
+						_fe3d.modelEntity_hide(modelID);
+					}
 				}
 			}
 			else if (entityType == "BILLBOARD")
@@ -219,9 +225,11 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					size.y;
 
 				// Add billboard
-				_copyPreviewBillboard(billboardID, previewID, position);
-				_fe3d.billboardEntity_setRotation(billboardID, rotation);
-				_fe3d.billboardEntity_setSize(billboardID, size);
+				if (_copyPreviewBillboard(billboardID, previewID, position))
+				{
+					_fe3d.billboardEntity_setRotation(billboardID, rotation);
+					_fe3d.billboardEntity_setSize(billboardID, size);
+				}
 			}
 			else if (entityType == "AUDIO")
 			{
@@ -249,11 +257,12 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				}
 
 				// Add audio
-				_copyPreviewAudio(audioID, previewID, position);
-				_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
-				_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
-				_fe3d.audioEntity_play(audioID, -1, 0.0f);
-				_loadedAudioIDs.insert(make_pair(audioID, previewID));
+				if (_copyPreviewAudio(audioID, previewID, position))
+				{
+					_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
+					_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
+					_fe3d.audioEntity_play(audioID, -1, 0.0f);
+				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{

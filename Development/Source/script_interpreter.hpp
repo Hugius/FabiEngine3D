@@ -93,7 +93,6 @@ private:
 	bool _validateFe3dSkyEntity();
 	bool _validateFe3dTerrainEntity();
 	bool _validateFe3dWaterEntity();
-	bool _validateFe3dModelEntityAnimation(const string& ID);
 	bool _validateFe3dModelEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dBillboardEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dAabbEntity(const string& ID);

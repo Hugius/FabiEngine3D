@@ -85,7 +85,7 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Start animation
-					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
+					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 0);
 				}
 				else if (screen->getButton("stop")->isHovered())
 				{

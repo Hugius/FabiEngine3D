@@ -27,15 +27,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	string fullFilePath = string(directoryPath + "custom\\" + fileName + ".fe3d");
 	if (_fe3d.misc_isFileExisting(fullFilePath))
 	{
-		// Clear last scene data
+		// Set new scene ID
 		_loadedSceneID = fileName;
-		_loadedSkyID = "";
-		_loadedTerrainID = "";
-		_loadedWaterID = "";
-		_loadedModelIDs.clear();
-		_loadedBillboardIDs.clear();
-		_loadedAudioIDs.clear();
-		_loadedLightIDs.clear();
 
 		// Load scene file
 		std::ifstream file(fullFilePath);
@@ -70,10 +63,12 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					color.b;
 
 				// Add sky
-				_copyPreviewSky(skyID, previewID);
-				_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
-				_fe3d.skyEntity_setLightness(skyID, lightness);
-				_fe3d.skyEntity_setColor(skyID, color);
+				if (_copyPreviewSky(skyID, previewID))
+				{
+					_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+					_fe3d.skyEntity_setLightness(skyID, lightness);
+					_fe3d.skyEntity_setColor(skyID, color);
+				}
 			}
 			else if (entityType == "TERRAIN")
 			{
@@ -106,10 +101,12 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					transparency;
 
 				// Add water
-				_copyPreviewWater(waterID, previewID);
-				_fe3d.waterEntity_setColor(waterID, color);
-				_fe3d.waterEntity_setSpeed(waterID, speed);
-				_fe3d.waterEntity_setTransparency(waterID, transparency);
+				if (_copyPreviewWater(waterID, previewID))
+				{
+					_fe3d.waterEntity_setColor(waterID, color);
+					_fe3d.waterEntity_setSpeed(waterID, speed);
+					_fe3d.waterEntity_setTransparency(waterID, transparency);
+				}
 			}
 			else if (entityType == "MODEL")
 			{
@@ -152,95 +149,108 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					alpha >>
 					lightness;
 
+				// Check if preview model became instanced
+				if (_fe3d.modelEntity_isExisting(previewID))
+				{
+					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)))
+					{
+						_fe3d.logger_throwWarning("Scene model with ID \"" + modelID + "\" differs from base model!");
+						continue;
+					}
+				}
+
 				// Add model
-				_copyPreviewModel(modelID, previewID, position);
-				_fe3d.modelEntity_setRotation(modelID, rotation);
-				_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin);
-				_fe3d.modelEntity_setSize(modelID, size);
-				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
-				_fe3d.modelEntity_setColor(modelID, color);
-				_fe3d.modelEntity_setMinHeight(modelID, minHeight);
-				_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
-				_fe3d.modelEntity_setAlpha(modelID, alpha);
-				_fe3d.modelEntity_setLightness(modelID, lightness);
-				!isVisible ? _fe3d.modelEntity_hide(modelID) : void(0);
-				for (auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+				if (_copyPreviewModel(modelID, previewID, position))
 				{
-					_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
-					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
-				}
-
-				// Extract instanced offsets
-				if (_fe3d.modelEntity_isInstanced(modelID))
-				{
-					vector<Vec3> instancedOffsets;
-					while (true)
+					// Set properties
+					_fe3d.modelEntity_setRotation(modelID, rotation);
+					_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin);
+					_fe3d.modelEntity_setSize(modelID, size);
+					_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
+					_fe3d.modelEntity_setColor(modelID, color);
+					_fe3d.modelEntity_setMinHeight(modelID, minHeight);
+					_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
+					_fe3d.modelEntity_setAlpha(modelID, alpha);
+					_fe3d.modelEntity_setLightness(modelID, lightness);
+					!isVisible ? _fe3d.modelEntity_hide(modelID) : void(0);
+					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 					{
-						// Check if file has offset data left
-						string nextElement;
-						iss >> nextElement;
+						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
+						_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
+					}
 
-						// Check for end of line
-						if (nextElement == "")
+					// Extract instanced offsets
+					if (_fe3d.modelEntity_isInstanced(modelID))
+					{
+						vector<Vec3> instancedOffsets;
+						while (true)
 						{
-							break;
+							// Check if file has offset data left
+							string nextElement;
+							iss >> nextElement;
+
+							// Check for end of line
+							if (nextElement == "")
+							{
+								break;
+							}
+							else // Add offset
+							{
+								Vec3 offset;
+								offset.x = stof(nextElement);
+								iss >> offset.y >> offset.z;
+								instancedOffsets.push_back(offset);
+							}
 						}
-						else // Add offset
+
+						// Add offsets
+						_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
+					}
+					else
+					{
+						while (true)
 						{
-							Vec3 offset;
-							offset.x = stof(nextElement);
-							iss >> offset.y >> offset.z;
-							instancedOffsets.push_back(offset);
+							// Check if file has part data left
+							string nextElement;
+							iss >> nextElement;
+
+							// Check for end of line
+							if (nextElement == "")
+							{
+								break;
+							}
+							else
+							{
+								// Extract data
+								string partName = nextElement;
+								iss >>
+									position.x >>
+									position.y >>
+									position.z >>
+									rotation.x >>
+									rotation.y >>
+									rotation.z >>
+									rotationOrigin.x >>
+									rotationOrigin.y >>
+									rotationOrigin.z >>
+									size.x >>
+									size.y >>
+									size.z;
+
+								// Set part transformation
+								_fe3d.modelEntity_setPosition(modelID, position, partName);
+								_fe3d.modelEntity_setRotation(modelID, rotation, partName);
+								_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
+								_fe3d.modelEntity_setSize(modelID, size, partName);
+							}
 						}
 					}
 
-					// Add offsets
-					_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
-				}
-				else
-				{
-					while (true)
+					// Hide model if LOD
+					if (makeInvisible)
 					{
-						// Check if file has part data left
-						string nextElement;
-						iss >> nextElement;
-
-						// Check for end of line
-						if (nextElement == "")
-						{
-							break;
-						}
-						else
-						{
-							// Extract data
-							string partName = nextElement;
-							iss >>
-								position.x >>
-								position.y >>
-								position.z >>
-								rotation.x >>
-								rotation.y >>
-								rotation.z >>
-								rotationOrigin.x >>
-								rotationOrigin.y >>
-								rotationOrigin.z >>
-								size.x >>
-								size.y >>
-								size.z;
-
-							// Set part transformation
-							_fe3d.modelEntity_setPosition(modelID, position, partName);
-							_fe3d.modelEntity_setRotation(modelID, rotation, partName);
-							_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
-							_fe3d.modelEntity_setSize(modelID, size, partName);
-						}
+						_fe3d.modelEntity_hide(modelID);
 					}
-				}
-
-				// Hide model if LOD
-				if (makeInvisible)
-				{
-					_fe3d.modelEntity_hide(modelID);
 				}
 			}
 			else if (entityType == "BILLBOARD")
@@ -285,40 +295,41 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					animationColumnIndex;
 
 				// Add billboard
-				_copyPreviewBillboard(billboardID, previewID, position);
-
-				// Set properties
-				_fe3d.billboardEntity_setRotation(billboardID, rotation);
-				_fe3d.billboardEntity_setSize(billboardID, size);
-				_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
-				_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
-				_fe3d.billboardEntity_setColor(billboardID, color);
-				_fe3d.billboardEntity_setTextContent(billboardID, textContent);
-				_fe3d.billboardEntity_setLightness(billboardID, lightness);
-				_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
-				_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
-				!isVisible ? _fe3d.modelEntity_hide(billboardID) : void(0);
-				for (auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
+				if (_copyPreviewBillboard(billboardID, previewID, position))
 				{
-					_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
-					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
-				}
-
-				// Set animation progresss
-				if (isAnimationPlaying)
-				{
-					// Play
-					_fe3d.billboardEntity_playAnimation(billboardID, remainingAnimationRepeats);
-
-					// Pause
-					if (isAnimationPaused)
+					// Set properties
+					_fe3d.billboardEntity_setRotation(billboardID, rotation);
+					_fe3d.billboardEntity_setSize(billboardID, size);
+					_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
+					_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
+					_fe3d.billboardEntity_setColor(billboardID, color);
+					_fe3d.billboardEntity_setTextContent(billboardID, textContent);
+					_fe3d.billboardEntity_setLightness(billboardID, lightness);
+					_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
+					_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
+					!isVisible ? _fe3d.modelEntity_hide(billboardID) : void(0);
+					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
 					{
-						_fe3d.billboardEntity_pauseAnimation(billboardID);
+						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
+						_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
 					}
 
-					// Progress
-					_fe3d.billboardEntity_setAnimationRowIndex(billboardID, animationRowIndex);
-					_fe3d.billboardEntity_setAnimationColumnIndex(billboardID, animationColumnIndex);
+					// Set animation progresss
+					if (isAnimationPlaying)
+					{
+						// Play
+						_fe3d.billboardEntity_playAnimation(billboardID, remainingAnimationRepeats);
+
+						// Pause
+						if (isAnimationPaused)
+						{
+							_fe3d.billboardEntity_pauseAnimation(billboardID);
+						}
+
+						// Progress
+						_fe3d.billboardEntity_setAnimationRowIndex(billboardID, animationRowIndex);
+						_fe3d.billboardEntity_setAnimationColumnIndex(billboardID, animationColumnIndex);
+					}
 				}
 			}
 			else if (entityType == "AABB")
@@ -363,10 +374,12 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					maxDistance;
 
 				// Add audio
-				_copyPreviewAudio(audioID, previewID, position);
-				_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
-				_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
-				_fe3d.audioEntity_play(audioID, -1, 0.0f);
+				if (_copyPreviewAudio(audioID, previewID, position))
+				{
+					_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
+					_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
+					_fe3d.audioEntity_play(audioID, -1, 0.0f);
+				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{

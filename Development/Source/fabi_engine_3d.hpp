@@ -321,7 +321,7 @@ public:
 	const vector<string>& modelEntity_getLightMapPaths(const string& ID);
 	const vector<string>& modelEntity_getReflectionMapPaths(const string& ID);
 	const vector<string>& modelEntity_getNormalMapPaths(const string& ID);
-	const vector<string>& modelEntity_getPartNames(const string& ID);
+	const vector<string>& modelEntity_getPartIDs(const string& ID);
 	vector<string> modelEntity_getAllIDs();
 	vector<string> modelEntity_getGroupIDs(const string& ID);
 

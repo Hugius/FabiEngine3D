@@ -53,7 +53,7 @@ void AnimationEditor::_updateMiscellaneous()
 			// Retrieve current animation
 			auto currentAnimation = _getAnimation(_currentAnimationID);
 
-			// Check if animation is not currently playing
+			// Check if animation is not started
 			if (!isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 			{
 				// Check if animation has a preview model
@@ -163,7 +163,7 @@ bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
 	return (first >= second - fabsf(speed)) && (first <= second + fabsf(speed));
 }
 
-bool AnimationEditor::_comparePartNames(vector<string> first, vector<string> second)
+bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> second)
 {
 	// Check size
 	if (first.size() != second.size())
@@ -213,11 +213,11 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	return IDs;
 }
 
-const vector<string> AnimationEditor::getPlayingAnimationIDs()
+const vector<string> AnimationEditor::getStartedAnimationIDs()
 {
 	set<string> names;
 
-	for (const auto& [idPair, animation] : _playingAnimations)
+	for (const auto& [idPair, animation] : _startedAnimations)
 	{
 		names.insert(idPair.first);
 	}
@@ -225,11 +225,11 @@ const vector<string> AnimationEditor::getPlayingAnimationIDs()
 	return vector<string>(names.begin(), names.end());
 }
 
-const vector<string> AnimationEditor::getPlayingAnimationIDs(const string& modelID)
+const vector<string> AnimationEditor::getStartedAnimationIDs(const string& modelID)
 {
 	set<string> names;
 
-	for (const auto& [idPair, animation] : _playingAnimations)
+	for (const auto& [idPair, animation] : _startedAnimations)
 	{
 		if (modelID == idPair.second)
 		{

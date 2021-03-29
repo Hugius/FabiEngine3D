@@ -166,7 +166,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 
 					// Check if preview model parts count
-					if (partNames.size() != _fe3d.modelEntity_getPartNames(previewID).size())
+					if (partNames.size() != _fe3d.modelEntity_getPartIDs(previewID).size())
 					{
 						_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 						warningThrown = true;
@@ -175,7 +175,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					// Check if preview model parts changed
 					for (unsigned int i = 0; i < partNames.size(); i++)
 					{
-						if (partNames[i] != _fe3d.modelEntity_getPartNames(previewID)[i])
+						if (partNames[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
 						{
 							_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 							warningThrown = true;
@@ -213,7 +213,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
 					_fe3d.modelEntity_setAlpha(modelID, alpha);
 					_fe3d.modelEntity_setLightness(modelID, lightness);
-					!isVisible ? _fe3d.modelEntity_hide(modelID) : void(0);
+					!isVisible ? _fe3d.modelEntity_hide(modelID) : void();
 					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
@@ -282,6 +282,71 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 				}
 			}
+			else if (entityType == "ANIMATION")
+			{
+				// Data placeholders
+				string animationID, modelID;
+				float speedMultiplier;
+				int remainingLoops;
+				unsigned int frameIndex;
+				bool isPaused;
+
+				// Extract main data
+				iss >>
+					animationID >>
+					modelID >>
+					isPaused >>
+					frameIndex >>
+					speedMultiplier >>
+					remainingLoops;
+
+				// Extract speeds
+				map<string, float> speeds;
+				while (true)
+				{
+					// Check if file has speed data left
+					string nextElement;
+					iss >> nextElement;
+
+					// Check for end of line
+					if (nextElement == "")
+					{
+						break;
+					}
+					else // Add offset
+					{
+						string partID = (nextElement == "?") ? "" : nextElement;
+						float speed;
+						iss >> speed;
+						speeds[partID] = speed;
+					}
+				}
+
+				// Start animation
+				_animationEditor.startAnimation(animationID, modelID, remainingLoops);
+				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
+
+				// Set properties
+				isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
+				animationData->speedMultiplier = speedMultiplier;
+				animationData->frameIndex = frameIndex;
+				animationData->frames[frameIndex].speeds = speeds;
+
+				// Retrieve parts
+				auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
+				for (auto& partID : partIDs)
+				{
+					// Retrieve part transformation
+					auto translation = _fe3d.modelEntity_getPosition(modelID, partID);
+					auto rotation = _fe3d.modelEntity_getRotation(modelID, partID);
+					auto scaling = _fe3d.modelEntity_getSize(modelID, partID);
+
+					// Set properties
+					animationData->totalTranslations[partID] = translation;
+					animationData->totalRotations[partID] = rotation;
+					animationData->totalScalings[partID] = scaling;
+				}
+			}
 			else if (entityType == "BILLBOARD")
 			{
 				// Data placeholders
@@ -336,7 +401,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.billboardEntity_setLightness(billboardID, lightness);
 					_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
 					_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
-					!isVisible ? _fe3d.modelEntity_hide(billboardID) : void(0);
+					!isVisible ? _fe3d.modelEntity_hide(billboardID) : void();
 					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);

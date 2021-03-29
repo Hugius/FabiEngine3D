@@ -244,7 +244,7 @@ void AnimationEditor::_updateEditingScreen()
 					if (currentAnimation->frames.size() == 1)
 					{
 						// Retrieve partnames from model
-						for (auto partName : _fe3d.modelEntity_getPartNames(currentAnimation->previewModelID))
+						for (auto partName : _fe3d.modelEntity_getPartIDs(currentAnimation->previewModelID))
 						{
 							// Cannot add whole-model partname again
 							if (!partName.empty())

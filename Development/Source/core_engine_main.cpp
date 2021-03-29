@@ -91,9 +91,9 @@ void CoreEngine::_setupApplication()
 
 	// Set window properties
 	_windowManager.setSize(Config::getInst().getWindowSize());
-	Config::getInst().isWindowFullscreen() ? _windowManager.enableFullscreen() : void(0);
-	!Config::getInst().isWindowBorderless() ? _windowManager.showBorder() : void(0);
-	Config::getInst().isGameExported() ? _windowManager.setTitle(Config::getInst().getWindowTitle()) : void(0);
+	Config::getInst().isWindowFullscreen() ? _windowManager.enableFullscreen() : void();
+	!Config::getInst().isWindowBorderless() ? _windowManager.showBorder() : void();
+	Config::getInst().isGameExported() ? _windowManager.setTitle(Config::getInst().getWindowTitle()) : void();
 	_windowManager.showWindow();
 
 	// Only if in engine preview

@@ -13,7 +13,7 @@ void AnimationEditor::_updateAnimationExecution()
 			if (isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Reset all rotation origins
-				auto animation = _playingAnimations.at(idPair);
+				auto animation = _startedAnimations.at(idPair);
 				for (auto partName : animation.partNames)
 				{
 					// Check if model still exists
@@ -45,7 +45,7 @@ void AnimationEditor::_updateAnimationExecution()
 		_animationsToStart.clear();
 
 		// Update all playing animations
-		for (auto& [idPair, animation] : _playingAnimations)
+		for (auto& [idPair, animation] : _startedAnimations)
 		{
 			// Skip paused animations
 			if (animation.isPaused)

@@ -268,7 +268,7 @@
     <ClCompile Include="Source\animation_editor_execution.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\animation_editor_lifecycle.cpp">
+    <ClCompile Include="Source\animation_editor_interface.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\texture_loader_interface.cpp">

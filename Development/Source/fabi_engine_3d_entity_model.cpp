@@ -228,7 +228,7 @@ bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
 
 bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& partName)
 {
-	for (auto& existingPartname : modelEntity_getPartNames(ID))
+	for (auto& existingPartname : modelEntity_getPartIDs(ID))
 	{
 		if (partName == existingPartname)
 		{
@@ -462,7 +462,7 @@ const vector<string>& FabiEngine3D::modelEntity_getNormalMapPaths(const string& 
 	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPaths();
 }
 
-const vector<string>& FabiEngine3D::modelEntity_getPartNames(const string& ID)
+const vector<string>& FabiEngine3D::modelEntity_getPartIDs(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartNames();
 }

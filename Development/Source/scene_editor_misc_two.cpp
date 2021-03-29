@@ -116,7 +116,7 @@ void SceneEditor::clearCurrentScene()
 		}
 
 		// Stop animation
-		auto animationID = _animationEditor.getPlayingAnimationIDs(ID);
+		auto animationID = _animationEditor.getStartedAnimationIDs(ID);
 		if (!animationID.empty())
 		{
 			_animationEditor.stopAnimation(animationID.back(), ID);

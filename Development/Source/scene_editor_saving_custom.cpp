@@ -177,10 +177,10 @@ void SceneEditor::saveCustomSceneToFile()
 				maxHeight << " " <<
 				alpha << " " <<
 				lightness << " " <<
-				_fe3d.modelEntity_getPartNames(modelID).size();
+				_fe3d.modelEntity_getPartIDs(modelID).size();
 
 			// Check if model is multi-parted
-			auto partNames = _fe3d.modelEntity_getPartNames(modelID);
+			auto partNames = _fe3d.modelEntity_getPartIDs(modelID);
 			if (partNames.size() > 1)
 			{
 				// Write part names
@@ -270,14 +270,42 @@ void SceneEditor::saveCustomSceneToFile()
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
 		{
 			// Every playing animation on every model
-			for (auto& animationID : _animationEditor.getPlayingAnimationIDs(modelID))
+			for (auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
 			{
 				// Data to save
-				bool isStarted = _animationEditor.isAnimationStarted(animationID, modelID);
-				bool isPaused = _animationEditor.isAnimationPaused(animationID, modelID);
-				auto frameIndex = _animationEditor.getAnimationFrameIndex(animationID, modelID);
-				auto speedMultiplier = _animationEditor.getAnimationSpeedMultiplier(animationID, modelID);
-				auto remainingLoops = _animationEditor.getAnimationRemainingLoops(animationID, modelID);
+				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
+				auto isPaused = animationData->isPaused;
+				auto frameIndex = animationData->frameIndex;
+				auto speedMultiplier = animationData->speedMultiplier;
+				auto remainingLoops = (animationData->timesToPlay == -1) ? -1 : (animationData->timesToPlay - 1);
+
+				// Write main data
+				file <<
+					"ANIMATION " <<
+					animationID << " " <<
+					modelID << " " <<
+					isPaused << " " <<
+					frameIndex << " " <<
+					speedMultiplier << " " <<
+					remainingLoops << " ";
+
+				// Write speeds
+				unsigned int index = 0;
+				auto speeds = animationData->frames[animationData->frameIndex].speeds;
+				for (auto& [partID, speed] : speeds)
+				{
+					// Write speed
+					file << (partID.empty() ? "?" : partID) << " " << speed;
+
+					// Write space
+					if (index != (speeds.size() - 1))
+					{
+						file << " ";
+					}
+					index++;
+				}
+
+				file << std::endl;
 			}
 		}
 	}

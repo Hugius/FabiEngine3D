@@ -1,6 +1,7 @@
 #include "audio_player.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -53,8 +54,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 				}
 				else
 				{
-					srand((unsigned int)time(NULL));
-					_musicIndex = rand() % music.size();
+					_musicIndex = Tools::getInst().getRandomInt(0, music.size() - 1);
 				}
 
 				// Play song

@@ -11,6 +11,7 @@ public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 	~AnimationEditor() = default;
 
+	// Interface
 	void load();
 	void unload();
 	void update();
@@ -18,26 +19,21 @@ public:
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
 	void startAnimation(const string& animationID, const string& modelID, int loops);
-	void setAnimationSpeedMultiplier(const string animationID, const string& modelID, float multiplier);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAllAnimations();
 
+	// Miscellaneous
 	bool isLoaded();
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
-
-	float getAnimationSpeedMultiplier(const string& animationID, const string& modelID);
-
-	int getAnimationRemainingLoops(const string& animationID, const string& modelID);
-	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
-
+	Animation* getAnimationData(const string& animationID, const string& modelID);
 	const vector<string> getAllAnimationIDs();
-	const vector<string> getPlayingAnimationIDs();
-	const vector<string> getPlayingAnimationIDs(const string& modelID);
+	const vector<string> getStartedAnimationIDs();
+	const vector<string> getStartedAnimationIDs(const string& modelID);
 
 private:
 	void _loadGUI();
@@ -54,7 +50,7 @@ private:
 	void _deleteAnimation(const string& ID);
 	bool _isAnimationExisting(const string& ID);
 	bool _hasReachedFloat(float first, float second, float speed);
-	bool _comparePartNames(vector<string> first, vector<string> second);
+	bool _comparePartIDs(vector<string> first, vector<string> second);
 	shared_ptr<Animation> _getAnimation(const string& ID);
 
 	// Core
@@ -66,12 +62,12 @@ private:
 	vector<shared_ptr<Animation>> _animations;
 	set<pair<string, string>> _animationsToStop;
 	set<pair<string, string>> _animationsToStart;
-	map<pair<string, string>, Animation> _playingAnimations;
+	map<pair<string, string>, Animation> _startedAnimations;
 
 	// Strings
 	string _currentProjectID   = "";
 	string _currentAnimationID = "";
-	string _currentPartName	   = "";
+	string _currentPartID	   = "";
 
 	// Vectors
 	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);

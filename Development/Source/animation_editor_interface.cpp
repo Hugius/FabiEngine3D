@@ -37,7 +37,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					// Play animation
 					if (hasAllParts)
 					{
-						_playingAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
+						_startedAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
 					}
 					else
 					{
@@ -77,7 +77,7 @@ bool AnimationEditor::isAnimationStarted(const string& animationID, const string
 	}
 	else
 	{
-		return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
+		return _startedAnimations.find(make_pair(animationID, modelID)) != _startedAnimations.end();
 	}
 
 	return false;
@@ -99,7 +99,7 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	}
 	else
 	{
-		return !_playingAnimations.at(make_pair(animationID, modelID)).isPaused;
+		return !_startedAnimations.at(make_pair(animationID, modelID)).isPaused;
 	}
 
 	return false;
@@ -121,7 +121,7 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	}
 	else
 	{
-		return _playingAnimations.at(make_pair(animationID, modelID)).isPaused;
+		return _startedAnimations.at(make_pair(animationID, modelID)).isPaused;
 	}
 
 	return false;
@@ -141,7 +141,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 			// Check if animation is playing
 			if (isAnimationPlaying(animationID, modelID))
 			{
-				_playingAnimations.at(make_pair(animationID, modelID)).isPaused = true;
+				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = true;
 			}
 			else
 			{
@@ -173,7 +173,7 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 			// Check if animation is paused
 			if (isAnimationPaused(animationID, modelID))
 			{
-				_playingAnimations.at(make_pair(animationID, modelID)).isPaused = false;
+				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = false;
 			}
 			else
 			{
@@ -202,7 +202,7 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
 		{
-			_playingAnimations.erase(make_pair(animationID, modelID));
+			_startedAnimations.erase(make_pair(animationID, modelID));
 		}
 		else
 		{
@@ -213,6 +213,11 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
+}
+
+void AnimationEditor::stopAllAnimations()
+{
+	_startedAnimations.clear();
 }
 
 void AnimationEditor::fadeAnimation(const string& animationID, const string& modelID, int framestep)
@@ -229,7 +234,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 			// Check if animation is playing
 			if (isAnimationPlaying(animationID, modelID))
 			{
-				_playingAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
+				_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
 			}
 			else
 			{
@@ -247,34 +252,10 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	}
 }
 
-void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float multiplier)
+Animation* AnimationEditor::getAnimationData(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to set animation speed with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
-	// Check if animation exists
-	if (_isAnimationExisting(animationID))
-	{
-		// Check if animation has already started
-		if (isAnimationStarted(animationID, modelID))
-		{
-			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = std::max(0.0f, multiplier);
-		}
-		else
-		{
-			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
-		}
-	}
-	else
-	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
-	}
-}
-
-float AnimationEditor::getAnimationSpeedMultiplier(const string& animationID, const string& modelID)
-{
-	// Temporary values
-	string errorMessage = "Trying to retrieve animation speed multiplier with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
 	if (!_isAnimationExisting(animationID))
@@ -287,57 +268,8 @@ float AnimationEditor::getAnimationSpeedMultiplier(const string& animationID, co
 	}
 	else
 	{
-		return (_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier);
+		return &_startedAnimations.at(make_pair(animationID, modelID));
 	}
 
-	return false;
-}
-
-int AnimationEditor::getAnimationRemainingLoops(const string& animationID, const string& modelID)
-{
-	// Temporary values
-	string errorMessage = "Trying to retrieve animation remaining loops with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
-	// Check if animation is able to be retrieved
-	if (!_isAnimationExisting(animationID))
-	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
-	}
-	else if (!isAnimationStarted(animationID, modelID))
-	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
-	}
-	else
-	{
-		return (_playingAnimations.at(make_pair(animationID, modelID)).timesToPlay - 1);
-	}
-
-	return false;
-}
-
-unsigned int AnimationEditor::getAnimationFrameIndex(const string& animationID, const string& modelID)
-{
-	// Temporary values
-	string errorMessage = "Trying to retrieve animation frame index with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
-	// Check if animation is able to be retrieved
-	if (!_isAnimationExisting(animationID))
-	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
-	}
-	else if (!isAnimationStarted(animationID, modelID))
-	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
-	}
-	else
-	{
-		return _playingAnimations.at(make_pair(animationID, modelID)).frameIndex;
-	}
-
-	return false;
-}
-
-void AnimationEditor::stopAllAnimations()
-{
-	_playingAnimations.clear();
+	return nullptr;
 }

@@ -132,8 +132,23 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_animationEditor.setAnimationSpeedMultiplier(arguments[1].getString(), arguments[0].getString(), arguments[2].getDecimal());
+				_animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->speedMultiplier = arguments[2].getDecimal();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_get_animation_speed")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->speedMultiplier;
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
 	}
@@ -147,7 +162,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _animationEditor.getAnimationFrameIndex(arguments[1].getString(), arguments[0].getString());
+				auto result = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->frameIndex;
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 			}
 		}

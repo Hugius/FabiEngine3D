@@ -11,11 +11,11 @@ void AnimationEditor::_updateFrameScreen()
 		{
 			// Temporary values
 			auto currentAnimation = _getAnimation(_currentAnimationID);
-			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformations[_currentPartName];
-			auto& rotationOrigin = currentAnimation->frames[_currentFrameIndex].rotationOrigins[_currentPartName];
-			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartName];
-			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName];
-			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartName];
+			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformations[_currentPartID];
+			auto& rotationOrigin = currentAnimation->frames[_currentFrameIndex].rotationOrigins[_currentPartID];
+			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartID];
+			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartID];
+			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartID];
 
 			// Translation in small units, scaling in %, rotation in whole degrees
 			float multiplier = (transType == TransformationType::TRANSLATION) ? 1000.0f :
@@ -25,7 +25,7 @@ void AnimationEditor::_updateFrameScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_currentPartName = "";
+					_currentPartID = "";
 					_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
@@ -83,10 +83,10 @@ void AnimationEditor::_updateFrameScreen()
 			}
 
 			// Emphasize selected model part
-			if (!_currentPartName.empty())
+			if (!_currentPartID.empty())
 			{
 				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
-				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
+				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartID);
 			}
 
 			// Update color strength
@@ -136,7 +136,7 @@ void AnimationEditor::_updateFrameScreen()
 			}
 
 			// Showing speed type
-			string newTextContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
+			string newTextContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartID] == AnimationSpeedType::LINEAR) ?
 				"Speed: linear" : "Speed: exponential";
 			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newTextContent);
 
@@ -155,7 +155,7 @@ void AnimationEditor::_updateFrameScreen()
 					// Check if selected part exists on preview model
 					if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 					{
-						_currentPartName = selectedButtonID;
+						_currentPartID = selectedButtonID;
 						_gui.getGlobalScreen()->removeChoiceForm("parts");
 					}
 					else

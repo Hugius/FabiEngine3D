@@ -113,9 +113,9 @@ void AnimationEditor::unload()
 
 	// Reset variables
 	_animations.clear();
-	_playingAnimations.clear();
+	_startedAnimations.clear();
 	_currentAnimationID = "";
-	_currentPartName = "";
+	_currentPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
 	_totalCursorDifference = Vec2(0.0f, 0.5f);
 	_cameraAcceleration = Vec2(0.0f);

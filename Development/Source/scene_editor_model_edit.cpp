@@ -138,7 +138,7 @@ void SceneEditor::_updateModelEditing()
 				}
 
 				// Check if an animation name is clicked
-				auto lastAnimationID = _animationEditor.getPlayingAnimationIDs(_activeModelID);
+				auto lastAnimationID = _animationEditor.getStartedAnimationIDs(_activeModelID);
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animations");
 				if (selectedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
@@ -155,7 +155,7 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.modelEntity_getPartNames(_activeModelID))
+						for (auto& partName : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
 							if (!partName.empty())
@@ -234,7 +234,7 @@ void SceneEditor::_updateModelEditing()
 				if (position != oldPosition || rotation != oldRotation || size != oldSize)
 				{
 					// Check if animation is playing
-					auto animationNames = _animationEditor.getPlayingAnimationIDs(_activeModelID);
+					auto animationNames = _animationEditor.getStartedAnimationIDs(_activeModelID);
 					if (!animationNames.empty())
 					{
 						// Stop animation
@@ -265,7 +265,7 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.modelEntity_getPartNames(_activeModelID))
+						for (auto& partName : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
 							if (!partName.empty())

@@ -22,7 +22,7 @@
 - `fe3d:scene_add_custom_water`() ---> `NONE`  
   Queues water environment to be saved in the custom scene (does not have to exist yet).
 - `fe3d:scene_add_custom_model`(`STR` modelID) ---> `NONE`  
-  Queues **modelID** to be saved in the custom scene (does not have to exist yet).
+  Queues **modelID** to be saved in the custom scene, including animation if started (does not have to exist yet).
 - `fe3d:scene_add_custom_billboard`(`STR` billboardID) ---> `NONE`  
   Queues **billboardID** to be saved in the custom scene (does not have to exist yet).
 - `fe3d:scene_add_custom_aabb`(`STR` aabbID) ---> `NONE`  

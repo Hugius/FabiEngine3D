@@ -156,30 +156,8 @@ string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questions/85
 	GetSystemInfo(&sysInfo);
 	string coreCount = to_string(sysInfo.dwNumberOfProcessors);
 
-	// Temporary values
-	string fullString = nameString;
-	string vendorName, cpuName, clockSpeed;
-
-	// Remove long copyrighted Intel name
-	if (fullString.substr(0, 5) == "Intel")
-	{
-		fullString = fullString.substr(18);
-		vendorName = "Intel";
-	}
-
-	// Extract name & clockspeed
-	for (unsigned int i = 0; i < fullString.size(); i++)
-	{
-		if (fullString[i] == '@')
-		{
-			cpuName = fullString.substr(0, i - 5);
-			clockSpeed = fullString.substr(i + 2);
-			break;
-		}
-	}
-
 	// Return
-	return vendorName + " " + cpuName + " " + coreCount + "x" + clockSpeed;
+	return nameString;
 }
 
 string FabiEngine3D::misc_getGpuName()

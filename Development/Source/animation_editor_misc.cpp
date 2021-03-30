@@ -145,19 +145,6 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 	_fe3d.logger_throwError("Cannot delete animation with ID \"" + ID + "\"");
 }
 
-bool AnimationEditor::_isAnimationExisting(const string& ID)
-{
-	for (auto& animation : _animations)
-	{
-		if (animation->ID == ID)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
 bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
 {
 	return (first >= second - fabsf(speed)) && (first <= second + fabsf(speed));

@@ -132,8 +132,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->speedMultiplier = arguments[2].getDecimal();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				if (animationData != nullptr)
+				{
+					animationData->speedMultiplier = arguments[2].getDecimal();
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				}
 			}
 		}
 	}
@@ -147,8 +151,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->speedMultiplier;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				if (animationData != nullptr)
+				{
+					auto result = animationData->speedMultiplier;
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				}
 			}
 		}
 	}
@@ -162,8 +170,12 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString())->frameIndex;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				if (animationData != nullptr)
+				{
+					auto result = animationData->frameIndex;
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+				}
 			}
 		}
 	}

@@ -272,8 +272,10 @@ void SceneEditor::saveCustomSceneToFile()
 			// Every playing animation on every model
 			for (auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
 			{
-				// Data to save
+				// Retrieve raw animation data for retrieving
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
+
+				// Data to save
 				auto isPaused = animationData->isPaused;
 				auto frameIndex = animationData->frameIndex;
 				auto speedMultiplier = animationData->speedMultiplier;

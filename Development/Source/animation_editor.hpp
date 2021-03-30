@@ -27,6 +27,7 @@ public:
 
 	// Miscellaneous
 	bool isLoaded();
+	bool isAnimationExisting(const string& ID);
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
@@ -48,7 +49,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
-	bool _isAnimationExisting(const string& ID);
 	bool _hasReachedFloat(float first, float second, float speed);
 	bool _comparePartIDs(vector<string> first, vector<string> second);
 	shared_ptr<Animation> _getAnimation(const string& ID);

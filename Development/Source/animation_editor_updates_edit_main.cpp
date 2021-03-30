@@ -177,7 +177,7 @@ void AnimationEditor::_updateEditingScreen()
 			}
 
 			// Button hoverabilities
-			bool isPlaying = (_isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID));
+			bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID));
 			bool hasPreviewModel = !currentAnimation->previewModelID.empty();
 			screen->getButton("preview")->setHoverable(!isPlaying);
 			screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->frames.size() > 1);

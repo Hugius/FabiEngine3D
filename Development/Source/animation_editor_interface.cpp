@@ -6,7 +6,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	string errorMessage = "Trying to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	if (isAnimationExisting(animationID))
 	{
 		// Check if model trying to animate exists
 		if (_fe3d.modelEntity_isExisting(modelID))
@@ -65,13 +65,26 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	}
 }
 
+bool AnimationEditor::isAnimationExisting(const string& ID)
+{
+	for (auto& animation : _animations)
+	{
+		if (animation->ID == ID)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID)
 {
 	// Temporary values
 	string errorMessage = "Trying to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation does not exist
-	if (!_isAnimationExisting(animationID))
+	if (!isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
@@ -89,7 +102,7 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	string errorMessage = "Trying to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
-	if (!_isAnimationExisting(animationID))
+	if (!isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
@@ -111,7 +124,7 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	string errorMessage = "Trying to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
-	if (!_isAnimationExisting(animationID))
+	if (!isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
@@ -133,7 +146,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 	string errorMessage = "Trying to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	if (isAnimationExisting(animationID))
 	{
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
@@ -165,7 +178,7 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 	string errorMessage = "Trying to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	if (isAnimationExisting(animationID))
 	{
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
@@ -197,7 +210,7 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 	string errorMessage = "Trying to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	if (isAnimationExisting(animationID))
 	{
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
@@ -226,7 +239,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	string errorMessage = "Trying to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	if (isAnimationExisting(animationID))
 	{
 		// Check if animation has already started
 		if (isAnimationStarted(animationID, modelID))
@@ -258,7 +271,7 @@ Animation* AnimationEditor::getAnimationData(const string& animationID, const st
 	string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
-	if (!_isAnimationExisting(animationID))
+	if (!isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}

@@ -18,6 +18,17 @@ public:
 		frames.push_back(AnimationFrame(""));
 	}
 
+	void updateValueLimits()
+	{
+		for (auto& [partID, totalScaling] : totalScalings)
+		{
+			totalScaling = Vec3(std::max(0.0f, totalScaling.x), std::max(0.0f, totalScaling.y), std::max(0.0f, totalScaling.z));
+		}
+		speedMultiplier = std::max(0.0f, speedMultiplier);
+		initialScaling = Vec3(std::max(0.0f, initialScaling.x), std::max(0.0f, initialScaling.y), std::max(0.0f, initialScaling.z));
+		initialColor = Vec3(std::max(0.0f, initialColor.r), std::max(0.0f, initialColor.g), std::max(0.0f, initialColor.b));
+	}
+
 	const string ID;
 
 	vector<AnimationFrame> frames;

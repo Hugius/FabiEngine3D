@@ -324,27 +324,32 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Start animation
 				_animationEditor.startAnimation(animationID, modelID, remainingLoops);
-				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
-
-				// Set properties
-				isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
-				animationData->speedMultiplier = speedMultiplier;
-				animationData->frameIndex = frameIndex;
-				animationData->frames[frameIndex].speeds = speeds;
-
-				// Retrieve parts
-				auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
-				for (auto& partID : partIDs)
+				// Check if animation exists
+				if (_animationEditor.isAnimationExisting(animationID))
 				{
-					// Retrieve part transformation
-					auto translation = _fe3d.modelEntity_getPosition(modelID, partID);
-					auto rotation = _fe3d.modelEntity_getRotation(modelID, partID);
-					auto scaling = _fe3d.modelEntity_getSize(modelID, partID);
+					// Retrieve raw animation data for editing
+					auto animationData = _animationEditor.getAnimationData(animationID, modelID);
 
 					// Set properties
-					animationData->totalTranslations[partID] = translation;
-					animationData->totalRotations[partID] = rotation;
-					animationData->totalScalings[partID] = scaling;
+					isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
+					animationData->speedMultiplier = speedMultiplier;
+					animationData->frameIndex = frameIndex;
+					animationData->frames[frameIndex].speeds = speeds;
+
+					// Retrieve parts
+					auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
+					for (auto& partID : partIDs)
+					{
+						// Retrieve part transformation
+						auto translation = _fe3d.modelEntity_getPosition(modelID, partID);
+						auto rotation = _fe3d.modelEntity_getRotation(modelID, partID);
+						auto scaling = _fe3d.modelEntity_getSize(modelID, partID);
+
+						// Set properties
+						animationData->totalTranslations[partID] = translation;
+						animationData->totalRotations[partID] = rotation;
+						animationData->totalScalings[partID] = scaling;
+					}
 				}
 			}
 			else if (entityType == "BILLBOARD")

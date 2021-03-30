@@ -4,13 +4,24 @@
 
 void AnimationEditor::update()
 {
+	// Prepare animation values
+	for (auto& animation : _animations)
+	{
+		animation->updateValueLimits();
+	}
+
+	// GUI
 	_updateAnimationExecution();
 	_updateManagementScreen();
-	_updateAnimationCreation();
-	_updateAnimationChoice();
 	_updateEditingScreen();
 	_updateFrameScreen();
+
+	// Animation lifecycle
+	_updateAnimationCreation();
+	_updateAnimationChoice();
 	_updateAnimationRemoval();
+
+	// Miscellaneous
 	_updateCamera();
 	_updateMiscellaneous();
 }

@@ -287,7 +287,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Data placeholders
 				string animationID, modelID;
 				float speedMultiplier;
-				int remainingLoops;
+				int remainingLoops, fadeFramestep;
 				unsigned int frameIndex;
 				bool isPaused;
 
@@ -298,7 +298,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					isPaused >>
 					frameIndex >>
 					speedMultiplier >>
-					remainingLoops;
+					remainingLoops >>
+					fadeFramestep;
 
 				// Extract speeds
 				map<string, float> speeds;
@@ -324,6 +325,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Start animation
 				_animationEditor.startAnimation(animationID, modelID, remainingLoops);
+
 				// Check if animation exists
 				if (_animationEditor.isAnimationExisting(animationID))
 				{
@@ -333,6 +335,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					// Set properties
 					isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
 					animationData->speedMultiplier = speedMultiplier;
+					animationData->fadeFramestep = fadeFramestep;
 					animationData->frameIndex = frameIndex;
 					animationData->frames[frameIndex].speeds = speeds;
 

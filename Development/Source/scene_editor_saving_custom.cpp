@@ -276,10 +276,11 @@ void SceneEditor::saveCustomSceneToFile()
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
 
 				// Data to save
-				auto isPaused = animationData->isPaused;
-				auto frameIndex = animationData->frameIndex;
+				auto isPaused		 = animationData->isPaused;
+				auto frameIndex		 = animationData->frameIndex;
 				auto speedMultiplier = animationData->speedMultiplier;
-				auto remainingLoops = (animationData->timesToPlay == -1) ? -1 : (animationData->timesToPlay - 1);
+				auto remainingLoops  = (animationData->timesToPlay == -1) ? -1 : (animationData->timesToPlay - 1);
+				auto fadeFramestep   = animationData->fadeFramestep;
 
 				// Write main data
 				file <<
@@ -289,7 +290,8 @@ void SceneEditor::saveCustomSceneToFile()
 					isPaused << " " <<
 					frameIndex << " " <<
 					speedMultiplier << " " <<
-					remainingLoops << " ";
+					remainingLoops << " " <<
+					fadeFramestep << " ";
 
 				// Write speeds
 				unsigned int index = 0;

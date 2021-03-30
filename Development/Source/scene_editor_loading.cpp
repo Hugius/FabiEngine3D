@@ -13,8 +13,8 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\";
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");

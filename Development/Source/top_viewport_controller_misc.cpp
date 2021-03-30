@@ -224,7 +224,7 @@ void TopViewportController::_updateProjectDeletion()
 			}
 
 			// Check if project folder is still existing
-			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID;
+			string directoryPath = (_fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID);
 			if (_fe3d.misc_isDirectoryExisting(directoryPath))
 			{
 				// Deleting project folder

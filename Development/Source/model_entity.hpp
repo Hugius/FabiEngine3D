@@ -22,14 +22,14 @@ public:
 	void setOriginalTranslation(Vec3 value);
 	void setOriginalRotation(Vec3 value);
 	void setOriginalScaling(Vec3 value);
-	void setTranslation(Vec3 value, const string& partName = "");
-	void setRotation(Vec3 value, const string& partName = "");
-	void setRotationOrigin(Vec3 value, const string& partName = "");
-	void setScaling(Vec3 value, const string& partName = "");
-	void translate(Vec3 value, const string& partName = "");
-	void rotate(Vec3 value, const string& partName = "");
-	void scale(Vec3 value, const string& partName = "");
-	void setColor(Vec3 value, const string& partName = "");
+	void setTranslation(Vec3 value, const string& partID = "");
+	void setRotation(Vec3 value, const string& partID = "");
+	void setRotationOrigin(Vec3 value, const string& partID = "");
+	void setScaling(Vec3 value, const string& partID = "");
+	void translate(Vec3 value, const string& partID = "");
+	void rotate(Vec3 value, const string& partID = "");
+	void scale(Vec3 value, const string& partID = "");
+	void setColor(Vec3 value, const string& partID = "");
 	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& value);
 	void setLightMapPath(const string& value);
@@ -74,11 +74,11 @@ public:
 	const Vec3 getOriginalTranslation() const;
 	const Vec3 getOriginalRotation() const;
 	const Vec3 getOriginalScaling() const;
-	const Vec3 getTranslation(const string& partName = "");
-	const Vec3 getRotation(const string& partName = "");
-	const Vec3 getRotationOrigin(const string& partName = "");
-	const Vec3 getScaling(const string& partName = "");
-	const Vec3 getColor(const string& partName = "");
+	const Vec3 getTranslation(const string& partID = "");
+	const Vec3 getRotation(const string& partID = "");
+	const Vec3 getRotationOrigin(const string& partID = "");
+	const Vec3 getScaling(const string& partID = "");
+	const Vec3 getColor(const string& partID = "");
 	const string& getMeshPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
@@ -89,7 +89,7 @@ public:
 	const vector<string>& getLightMapPaths() const;
 	const vector<string>& getReflectionMapPaths() const;
 	const vector<string>& getNormalMapPaths() const;
-	const vector<string>& getPartNames() const;
+	const vector<string>& getPartIDs() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
 	const float getSpecularIntensity() const;
@@ -115,10 +115,10 @@ public:
 	const bool hasNormalMap() const;
 
 private:
-	unsigned int _getPartIndex(string partName);
+	unsigned int _getPartIndex(string partID);
 	Vec3 _calculateAverageValue(vector<Vec3> elements);
 
-	vector<string> _partNames;
+	vector<string> _partIDs;
 	vector<Matrix44> _modelMatrices;
 	vector<string> _diffuseMapPaths;
 	vector<string> _lightMapPaths;

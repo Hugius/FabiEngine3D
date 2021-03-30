@@ -25,12 +25,12 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 
 					// Check if model has all the parts
 					bool hasAllParts = true;
-					for (auto& partName : animation->partNames)
+					for (auto& partID : animation->partIDs)
 					{
 						// Part cannot be empty
-						if (!partName.empty())
+						if (!partID.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(modelID, partName);
+							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(modelID, partID);
 						}
 					}
 

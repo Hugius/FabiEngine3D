@@ -5,7 +5,7 @@
 
 void ModelEntity::addPart(const string& value)
 {
-	_partNames.push_back(value);
+	_partIDs.push_back(value);
 	_modelMatrices.push_back(Matrix44(1.0f));
 	_translations.push_back(Vec3(0.0f));
 	_rotations.push_back(Vec3(0.0f));
@@ -148,15 +148,15 @@ void ModelEntity::setOriginalTranslation(Vec3 value)
 	_originalTranslation = value;
 }
 
-void ModelEntity::setTranslation(Vec3 value, const string& partName)
+void ModelEntity::setTranslation(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseTranslation = value;
 	}
 	else
 	{
-		_translations[_getPartIndex(partName)] = value;
+		_translations[_getPartIndex(partID)] = value;
 	}
 }
 
@@ -170,9 +170,9 @@ void ModelEntity::setOriginalRotation(Vec3 value)
 	_originalRotation.z = std::fmodf(_originalRotation.z, 360.0f);
 }
 
-void ModelEntity::setRotation(Vec3 value, const string& partName)
+void ModelEntity::setRotation(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseRotation = value;
 
@@ -183,24 +183,24 @@ void ModelEntity::setRotation(Vec3 value, const string& partName)
 	}
 	else
 	{
-		_rotations[_getPartIndex(partName)] = value;
+		_rotations[_getPartIndex(partID)] = value;
 
 		// Limit rotation
-		_rotations[_getPartIndex(partName)].x = std::fmodf(_rotations[_getPartIndex(partName)].x, 360.0f);
-		_rotations[_getPartIndex(partName)].y = std::fmodf(_rotations[_getPartIndex(partName)].y, 360.0f);
-		_rotations[_getPartIndex(partName)].z = std::fmodf(_rotations[_getPartIndex(partName)].z, 360.0f);
+		_rotations[_getPartIndex(partID)].x = std::fmodf(_rotations[_getPartIndex(partID)].x, 360.0f);
+		_rotations[_getPartIndex(partID)].y = std::fmodf(_rotations[_getPartIndex(partID)].y, 360.0f);
+		_rotations[_getPartIndex(partID)].z = std::fmodf(_rotations[_getPartIndex(partID)].z, 360.0f);
 	}
 }
 
-void ModelEntity::setRotationOrigin(Vec3 value, const string& partName)
+void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseRotationOrigin = value;
 	}
 	else
 	{
-		_rotationOrigins[_getPartIndex(partName)] = value;
+		_rotationOrigins[_getPartIndex(partID)] = value;
 	}
 }
 
@@ -209,33 +209,33 @@ void ModelEntity::setOriginalScaling(Vec3 value)
 	_originalScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
-void ModelEntity::setScaling(Vec3 value, const string& partName)
+void ModelEntity::setScaling(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 	}
 	else
 	{
-		_scalings[_getPartIndex(partName)] = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+		_scalings[_getPartIndex(partID)] = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 	}
 }
 
-void ModelEntity::translate(Vec3 value, const string& partName)
+void ModelEntity::translate(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseTranslation += value;
 	}
 	else
 	{
-		_translations[_getPartIndex(partName)] += value;
+		_translations[_getPartIndex(partID)] += value;
 	}
 }
 
-void ModelEntity::rotate(Vec3 value, const string& partName)
+void ModelEntity::rotate(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseRotation += value;
 
@@ -246,35 +246,35 @@ void ModelEntity::rotate(Vec3 value, const string& partName)
 	}
 	else
 	{
-		_rotations[_getPartIndex(partName)] += value;
+		_rotations[_getPartIndex(partID)] += value;
 
 		// Limit rotation
-		_rotations[_getPartIndex(partName)].x = std::fmodf(_rotations[_getPartIndex(partName)].x, 360.0f);
-		_rotations[_getPartIndex(partName)].y = std::fmodf(_rotations[_getPartIndex(partName)].y, 360.0f);
-		_rotations[_getPartIndex(partName)].z = std::fmodf(_rotations[_getPartIndex(partName)].z, 360.0f);
+		_rotations[_getPartIndex(partID)].x = std::fmodf(_rotations[_getPartIndex(partID)].x, 360.0f);
+		_rotations[_getPartIndex(partID)].y = std::fmodf(_rotations[_getPartIndex(partID)].y, 360.0f);
+		_rotations[_getPartIndex(partID)].z = std::fmodf(_rotations[_getPartIndex(partID)].z, 360.0f);
 	}
 }
 
-void ModelEntity::scale(Vec3 value, const string& partName)
+void ModelEntity::scale(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		_baseScaling += value;
 		_baseScaling = Vec3(std::max(0.0f, _baseScaling.x), std::max(0.0f, _baseScaling.y), std::max(0.0f, _baseScaling.z));
 	}
 	else
 	{
-		_scalings[_getPartIndex(partName)] += value;
-		_scalings[_getPartIndex(partName)] = Vec3(
-				std::max(0.0f, _scalings[_getPartIndex(partName)].x), 
-				std::max(0.0f, _scalings[_getPartIndex(partName)].y), 
-				std::max(0.0f, _scalings[_getPartIndex(partName)].z));
+		_scalings[_getPartIndex(partID)] += value;
+		_scalings[_getPartIndex(partID)] = Vec3(
+				std::max(0.0f, _scalings[_getPartIndex(partID)].x), 
+				std::max(0.0f, _scalings[_getPartIndex(partID)].y), 
+				std::max(0.0f, _scalings[_getPartIndex(partID)].z));
 	}
 }
 
-void ModelEntity::setColor(Vec3 value, const string& partName)
+void ModelEntity::setColor(Vec3 value, const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		for (auto& color : _colors)
 		{
@@ -283,7 +283,7 @@ void ModelEntity::setColor(Vec3 value, const string& partName)
 	}
 	else
 	{
-		_colors[_getPartIndex(partName)] = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+		_colors[_getPartIndex(partID)] = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 	}
 }
 

@@ -18,8 +18,8 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\";
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
@@ -108,15 +108,15 @@ void SceneEditor::saveEditorSceneToFile()
 				_fe3d.modelEntity_setSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
-				for (auto& partName : _fe3d.modelEntity_getPartIDs(modelID))
+				for (auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
 				{
 					// Only named parts
-					if (!partName.empty())
+					if (!partID.empty())
 					{
-						_fe3d.modelEntity_setPosition(modelID, Vec3(0.0f), partName);
-						_fe3d.modelEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
-						_fe3d.modelEntity_setRotation(modelID, Vec3(0.0f), partName);
-						_fe3d.modelEntity_setSize(modelID, Vec3(1.0f), partName);
+						_fe3d.modelEntity_setPosition(modelID, Vec3(0.0f), partID);
+						_fe3d.modelEntity_setRotationOrigin(modelID, Vec3(0.0f), partID);
+						_fe3d.modelEntity_setRotation(modelID, Vec3(0.0f), partID);
+						_fe3d.modelEntity_setSize(modelID, Vec3(1.0f), partID);
 					}
 				}
 			}

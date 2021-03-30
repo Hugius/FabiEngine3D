@@ -155,15 +155,15 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.modelEntity_getPartIDs(_activeModelID))
+						for (auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
-							if (!partName.empty())
+							if (!partID.empty())
 							{
-								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partName);
+								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partID);
 							}
 						}
 					}
@@ -265,15 +265,15 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.modelEntity_getPartIDs(_activeModelID))
+						for (auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
-							if (!partName.empty())
+							if (!partID.empty())
 							{
-								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partName);
+								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partID);
+								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partID);
 							}
 						}
 

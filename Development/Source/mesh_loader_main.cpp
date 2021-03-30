@@ -14,7 +14,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 	vector<Vec3> temp_positions;
 	vector<Vec2> temp_uvs;
 	vector<Vec3> temp_normals;
-	string selectedPartName = "";
+	string selectedPartID = "";
 	string tempDiffuseMapPath = "";
 	string tempLightMapPath = "";
 	string tempNormalMapPath = "";
@@ -72,12 +72,12 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		{
 			char name[128];
 			fscanf(file, "%s\n", name);
-			selectedPartName = name;
+			selectedPartID = name;
 
 			// Cannot be a questionmark
-			if (selectedPartName == "?")
+			if (selectedPartID == "?")
 			{
-				Logger::throwError("Model part name cannot be '?' of model with filepath \"" + filePath + "\"!");
+				Logger::throwError("Model part ID cannot be '?' of model with filepath \"" + filePath + "\"!");
 			}
 
 			// Reset material paths
@@ -90,7 +90,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		}
 		else if (strcmp(lineHeader, "FE3D_DIFFUSE_MAP") == 0) // Diffuse map material
 		{
-			if (selectedPartName != "")
+			if (selectedPartID != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
@@ -101,7 +101,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		}
 		else if (strcmp(lineHeader, "FE3D_LIGHT_MAP") == 0) // Light map material
 		{
-			if (selectedPartName != "")
+			if (selectedPartID != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
@@ -112,7 +112,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		}
 		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Reflection map material
 		{
-			if (selectedPartName != "")
+			if (selectedPartID != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
@@ -123,7 +123,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		}
 		else if (strcmp(lineHeader, "FE3D_NORMAL_MAP") == 0) // Normal map material
 		{
-			if (selectedPartName != "")
+			if (selectedPartID != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
@@ -159,7 +159,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			for (auto& meshPart : meshParts)
 			{
 				// Find mesh part
-				if (meshPart.name == selectedPartName)
+				if (meshPart.name == selectedPartID)
 				{
 					alreadyExisting = true;
 
@@ -189,8 +189,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 				}
 
-				// Set mesh part name
-				newPart.name = selectedPartName;
+				// Set mesh part ID
+				newPart.name = selectedPartID;
 
 				// Set texture map paths
 				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);

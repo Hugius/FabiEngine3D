@@ -47,8 +47,8 @@ void AnimationEditor::loadAnimationsFromFile()
 				iss = std::istringstream(line);
 				iss >> animationID >> previewModelID;
 
-				// Clear default empty partname
-				newAnimation->partNames.clear();
+				// Clear default empty partID
+				newAnimation->partIDs.clear();
 				newAnimation->totalTranslations.clear();
 				newAnimation->totalRotations.clear();
 				newAnimation->totalScalings.clear();
@@ -70,37 +70,37 @@ void AnimationEditor::loadAnimationsFromFile()
 						for (unsigned int i = 0; i < modelPartCount; i++)
 						{
 							// Temporary values
-							string partName;
+							string partID;
 							Vec3 targetTransformation, rotationOrigin;
 							float speed;
 							int speedType, transformationType;;
 
 							// Extract data
-							iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
+							iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
 								rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType >> transformationType;
 
-							// Questionmark means empty partname
-							if (partName == "?")
+							// Questionmark means empty partID
+							if (partID == "?")
 							{
-								partName = "";
+								partID = "";
 							}
 
 							// Add part to frame
-							frame.targetTransformations.insert(make_pair(partName, targetTransformation));
-							frame.rotationOrigins.insert(make_pair(partName, rotationOrigin));
-							frame.speeds.insert(make_pair(partName, speed));
-							frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
-							frame.transformationTypes.insert(make_pair(partName, TransformationType(transformationType)));
+							frame.targetTransformations.insert(make_pair(partID, targetTransformation));
+							frame.rotationOrigins.insert(make_pair(partID, rotationOrigin));
+							frame.speeds.insert(make_pair(partID, speed));
+							frame.speedTypes.insert(make_pair(partID, AnimationSpeedType(speedType)));
+							frame.transformationTypes.insert(make_pair(partID, TransformationType(transformationType)));
 
-							// Add all partnames 1 time only
+							// Add all partIDs 1 time only
 							if (frames.empty())
 							{
-								newAnimation->partNames.push_back(partName);
+								newAnimation->partIDs.push_back(partID);
 
-								// Also add total transformation for each partname
-								newAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
-								newAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
-								newAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
+								// Also add total transformation for each partID
+								newAnimation->totalTranslations.insert(make_pair(partID, Vec3(0.0f)));
+								newAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
+								newAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
 							}
 						}
 
@@ -125,12 +125,12 @@ void AnimationEditor::loadAnimationsFromFile()
 				{
 					// Check if parts are present
 					bool hasAllParts = true;
-					for (auto& partName : newAnimation->partNames)
+					for (auto& partID : newAnimation->partIDs)
 					{
 						// Part cannot be empty
-						if (!partName.empty())
+						if (!partID.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partName);
+							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partID);
 						}
 					}
 
@@ -217,28 +217,28 @@ void AnimationEditor::saveAnimationsToFile()
 				for (unsigned int i = 1; i < animation->frames.size(); i++)
 				{
 					// Write the amount of model parts
-					file << animation->partNames.size() << " ";
+					file << animation->partIDs.size() << " ";
 
 					// For every model part
 					unsigned int partIndex = 0;
-					for (auto partName : animation->partNames)
+					for (auto partID : animation->partIDs)
 					{
 						// Retrieve data
-						const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
-						const auto& rotationOrigin = animation->frames[i].rotationOrigins[partName];
-						const auto& speed = animation->frames[i].speeds[partName];
-						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
-						const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partName]);
+						const auto& targetTransformation = animation->frames[i].targetTransformations[partID];
+						const auto& rotationOrigin = animation->frames[i].rotationOrigins[partID];
+						const auto& speed = animation->frames[i].speeds[partID];
+						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partID]);
+						const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partID]);
 
-						// Questionmark means empty partname
-						if (partName.empty())
+						// Questionmark means empty partID
+						if (partID.empty())
 						{
-							partName = "?";
+							partID = "?";
 						}
 
 						// Write data
 						file <<
-							partName << " " <<
+							partID << " " <<
 							targetTransformation.x << " " <<
 							targetTransformation.y << " " <<
 							targetTransformation.z << " " <<
@@ -250,7 +250,7 @@ void AnimationEditor::saveAnimationsToFile()
 							transformationType;
 
 						// Add space
-						if (partIndex != (animation->partNames.size() - 1))
+						if (partIndex != (animation->partIDs.size() - 1))
 						{
 							file << " ";
 						}

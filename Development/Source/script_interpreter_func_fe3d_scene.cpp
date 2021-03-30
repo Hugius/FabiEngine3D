@@ -30,6 +30,22 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
+	else if (functionName == "fe3d:scene_is_custom_existing")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Compose file path
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
+			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
+
+			// Return
+			auto result = _fe3d.misc_isFileExisting(filePath);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
 	else if (functionName == "fe3d:scene_create_custom")
 	{
 		auto types = { ScriptValueType::STRING };
@@ -156,9 +172,9 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\";
-			string filePath = directoryPath + arguments[0].getString() + ".fe3d";
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
+			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))

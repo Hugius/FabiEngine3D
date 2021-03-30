@@ -20,8 +20,8 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\";
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
@@ -180,37 +180,37 @@ void SceneEditor::saveCustomSceneToFile()
 				_fe3d.modelEntity_getPartIDs(modelID).size();
 
 			// Check if model is multi-parted
-			auto partNames = _fe3d.modelEntity_getPartIDs(modelID);
-			if (partNames.size() > 1)
+			auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
+			if (partIDs.size() > 1)
 			{
-				// Write part names
-				for (auto& partName : partNames)
+				// Write part IDs
+				for (auto& partID : partIDs)
 				{
 					// Write space
 					file << " ";
 
-					// Write part name
-					file << partName;
+					// Write part ID
+					file << partID;
 				}
 
 				// Write part transformations
-				for (unsigned int i = 0; i < partNames.size(); i++)
+				for (unsigned int i = 0; i < partIDs.size(); i++)
 				{
-					// Part name cannot be empty
-					if (!partNames[i].empty())
+					// Part ID cannot be empty
+					if (!partIDs[i].empty())
 					{
 						// Write space
 						file << " ";
 
 						// Retrieve transformation
-						position = _fe3d.modelEntity_getPosition(modelID, partNames[i]);
-						rotation = _fe3d.modelEntity_getRotation(modelID, partNames[i]);
-						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partNames[i]);
-						size = _fe3d.modelEntity_getSize(modelID, partNames[i]);
+						position = _fe3d.modelEntity_getPosition(modelID, partIDs[i]);
+						rotation = _fe3d.modelEntity_getRotation(modelID, partIDs[i]);
+						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partIDs[i]);
+						size = _fe3d.modelEntity_getSize(modelID, partIDs[i]);
 
 						// Write transformation
 						file <<
-							partNames[i] << " " <<
+							partIDs[i] << " " <<
 							position.x << " " <<
 							position.y << " " <<
 							position.z << " " <<

@@ -8,8 +8,8 @@ class Animation final
 public:
 	Animation(const string& ID) : ID(ID)
 	{
-		// Empty partname = whole model
-		partNames.push_back("");
+		// Empty part = whole model
+		partIDs.push_back("");
 		totalTranslations.insert(make_pair("", Vec3(0.0f)));
 		totalRotations.insert(make_pair("", Vec3(0.0f)));
 		totalScalings.insert(make_pair("", Vec3(0.0f)));
@@ -32,7 +32,7 @@ public:
 	const string ID;
 
 	vector<AnimationFrame> frames;
-	vector<string> partNames;
+	vector<string> partIDs;
 
 	map<string, Vec3> totalTranslations;
 	map<string, Vec3> totalRotations;

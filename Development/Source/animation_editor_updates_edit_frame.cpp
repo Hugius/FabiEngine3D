@@ -76,7 +76,7 @@ void AnimationEditor::_updateFrameScreen()
 				else if (screen->getButton("part")->isHovered())
 				{
 					// Choosing part of preview model
-					auto modelParts = currentAnimation->partNames;
+					auto modelParts = currentAnimation->partIDs;
 					modelParts.erase(modelParts.begin());
 					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), modelParts);
 				}
@@ -145,7 +145,7 @@ void AnimationEditor::_updateFrameScreen()
 				transType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
 			_fe3d.textEntity_setTextContent(screen->getButton("transType")->getTextfield()->getEntityID(), newTextContent);
 
-			// Check if a animation partname is clicked
+			// Check if a animation partID is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
 			if (selectedButtonID != "")
 			{

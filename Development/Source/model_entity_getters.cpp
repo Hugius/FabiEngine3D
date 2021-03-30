@@ -36,15 +36,15 @@ const Vec3 ModelEntity::getOriginalTranslation() const
 	return _originalTranslation;
 }
 
-const Vec3 ModelEntity::getTranslation(const string& partName)
+const Vec3 ModelEntity::getTranslation(const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		return _baseTranslation;
 	}
 	else
 	{
-		return _translations[_getPartIndex(partName)];
+		return _translations[_getPartIndex(partID)];
 	}
 }
 
@@ -53,27 +53,27 @@ const Vec3 ModelEntity::getOriginalRotation() const
 	return _originalRotation;
 }
 
-const Vec3 ModelEntity::getRotation(const string& partName)
+const Vec3 ModelEntity::getRotation(const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		return _baseRotation;
 	}
 	else
 	{
-		return _rotations[_getPartIndex(partName)];
+		return _rotations[_getPartIndex(partID)];
 	}
 }
 
-const Vec3 ModelEntity::getRotationOrigin(const string& partName)
+const Vec3 ModelEntity::getRotationOrigin(const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		return _baseRotationOrigin;
 	}
 	else
 	{
-		return _rotationOrigins[_getPartIndex(partName)];
+		return _rotationOrigins[_getPartIndex(partID)];
 	}
 }
 
@@ -82,27 +82,27 @@ const Vec3 ModelEntity::getOriginalScaling() const
 	return _originalScaling;
 }
 
-const Vec3 ModelEntity::getScaling(const string& partName)
+const Vec3 ModelEntity::getScaling(const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		return _baseScaling;
 	}
 	else
 	{
-		return _scalings[_getPartIndex(partName)];
+		return _scalings[_getPartIndex(partID)];
 	}
 }
 
-const Vec3 ModelEntity::getColor(const string& partName)
+const Vec3 ModelEntity::getColor(const string& partID)
 {
-	if (partName.empty() && _partNames.size() > 1)
+	if (partID.empty() && _partIDs.size() > 1)
 	{
 		return _calculateAverageValue(_colors);
 	}
 	else
 	{
-		return _colors[_getPartIndex(partName)];
+		return _colors[_getPartIndex(partID)];
 	}
 }
 
@@ -156,9 +156,9 @@ const vector<string>& ModelEntity::getNormalMapPaths() const
 	return _normalMapPaths;
 }
 
-const vector<string>& ModelEntity::getPartNames() const
+const vector<string>& ModelEntity::getPartIDs() const
 {
-	return _partNames;
+	return _partIDs;
 }
 
 const bool ModelEntity::isTransparent() const
@@ -241,19 +241,19 @@ const bool ModelEntity::isWireframed() const
 	return _wireframed;
 }
 
-unsigned int ModelEntity::_getPartIndex(string partName)
+unsigned int ModelEntity::_getPartIndex(string partID)
 {
 	// Find index
-	for (unsigned int i = 0; i < _partNames.size(); i++)
+	for (unsigned int i = 0; i < _partIDs.size(); i++)
 	{
-		if (partName == _partNames[i])
+		if (partID == _partIDs[i])
 		{
 			return i;
 		}
 	}
 
 	// Error
-	Logger::throwError("MODEL entity with ID \"" + getID() + "\" has no part called \"" + partName + "\"");
+	Logger::throwError("MODEL entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"");
 }
 
 Vec3 ModelEntity::_calculateAverageValue(vector<Vec3> elements)

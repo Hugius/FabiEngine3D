@@ -9,14 +9,14 @@ class AnimationFrame
 public:
 	AnimationFrame() = default;
 
-	AnimationFrame(const string& partName)
+	AnimationFrame(const string& partID)
 	{
 		// Default data
-		targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
-		rotationOrigins.insert(make_pair(partName, Vec3(0.0f)));
-		speeds.insert(make_pair(partName, 0.0f));
-		speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
-		transformationTypes.insert(make_pair(partName, TransformationType::TRANSLATION));
+		targetTransformations.insert(make_pair(partID, Vec3(0.0f)));
+		rotationOrigins.insert(make_pair(partID, Vec3(0.0f)));
+		speeds.insert(make_pair(partID, 0.0f));
+		speedTypes.insert(make_pair(partID, AnimationSpeedType::LINEAR));
+		transformationTypes.insert(make_pair(partID, TransformationType::TRANSLATION));
 	}
 
 	map<string, Vec3> targetTransformations;

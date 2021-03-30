@@ -16,8 +16,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\";
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
@@ -156,26 +156,26 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Perform part checks
 				if (partCount > 1)
 				{
-					// Read model part names
-					vector<string> partNames;
+					// Read model part IDs
+					vector<string> partIDs;
 					for (unsigned int i = 0; i < partCount; i++)
 					{
-						string partName;
-						iss >> partName;
-						partNames.push_back(partName);
+						string partID;
+						iss >> partID;
+						partIDs.push_back(partID);
 					}
 
 					// Check if preview model parts count
-					if (partNames.size() != _fe3d.modelEntity_getPartIDs(previewID).size())
+					if (partIDs.size() != _fe3d.modelEntity_getPartIDs(previewID).size())
 					{
 						_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 						warningThrown = true;
 					}
 
 					// Check if preview model parts changed
-					for (unsigned int i = 0; i < partNames.size(); i++)
+					for (unsigned int i = 0; i < partIDs.size(); i++)
 					{
-						if (partNames[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
+						if (partIDs[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
 						{
 							_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 							warningThrown = true;
@@ -224,9 +224,9 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					for (unsigned int i = 0; i < partCount; i++)
 					{
 						// Extract data
-						string partName;
+						string partID;
 						iss >>
-							partName >>
+							partID >>
 							position.x >>
 							position.y >>
 							position.z >>
@@ -241,10 +241,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 							size.z;
 
 						// Set part transformation
-						_fe3d.modelEntity_setPosition(modelID, position, partName);
-						_fe3d.modelEntity_setRotation(modelID, rotation, partName);
-						_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partName);
-						_fe3d.modelEntity_setSize(modelID, size, partName);
+						_fe3d.modelEntity_setPosition(modelID, position, partID);
+						_fe3d.modelEntity_setRotation(modelID, rotation, partID);
+						_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partID);
+						_fe3d.modelEntity_setSize(modelID, size, partID);
 					}
 
 					// Extract instanced offsets

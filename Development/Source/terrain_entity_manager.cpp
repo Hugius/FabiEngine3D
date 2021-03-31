@@ -190,18 +190,18 @@ void TerrainEntityManager::generateMesh(const string& ID)
 		}
 	}
 
-	// Create OpenGL buffer
-	entity->clearOglBuffers();
-	entity->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
+	// Create render buffer
+	entity->clearRenderBuffers();
+	entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
 }
 
 void TerrainEntityManager::loadNormalMapping(const string& ID)
 {
 	// Check if entity has a buffer
-	if (!getEntity(ID)->getOglBuffers().empty())
+	if (!getEntity(ID)->getRenderBuffers().empty())
 	{
 		// Check if not already a tangent loaded model
-		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+		if (getEntity(ID)->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Data collections
 			auto vertices = getEntity(ID)->getVertices();
@@ -268,9 +268,9 @@ void TerrainEntityManager::loadNormalMapping(const string& ID)
 				finalDataCollection.push_back(tangents[i].z);
 			}
 
-			// Create OpenGL buffer
-			getEntity(ID)->clearOglBuffers();
-			getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], finalDataCollection.size()));
+			// Create render buffer
+			getEntity(ID)->clearRenderBuffers();
+			getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], finalDataCollection.size()));
 		}
 	}
 }

@@ -1,11 +1,11 @@
-#include "opengl_shader.hpp"
+#include "render_shader.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
 
-OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentFileName)
+RenderShader::RenderShader(const string& vertexFileName, const string& fragmentFileName)
 {
 	// Variables
 	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
@@ -45,7 +45,7 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	_createProgram(vShaderCode, fShaderCode);
 }
 
-void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)
+void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)
 {
 	// Compile the shaders
 	GLuint vertex, fragment;
@@ -101,12 +101,12 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFileName + "\"");
 }
 
-void OpenGLShader::bind()
+void RenderShader::bind()
 {
 	glUseProgram(_program);
 }
 
-void OpenGLShader::unbind()
+void RenderShader::unbind()
 {
 	glUseProgram(0);
 }

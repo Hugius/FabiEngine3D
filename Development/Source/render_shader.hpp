@@ -8,11 +8,11 @@
 
 using std::map;
 
-class OpenGLShader final
+class RenderShader final
 {
 public:
-	OpenGLShader(const string& vertexFileName, const string& fragmentFileName);
-	~OpenGLShader() = default;
+	RenderShader(const string& vertexFileName, const string& fragmentFileName);
+	~RenderShader() = default;
 
 	void bind();
 	void unbind();

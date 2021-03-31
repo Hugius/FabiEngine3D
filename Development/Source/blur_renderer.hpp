@@ -2,7 +2,7 @@
 
 #include "base_entity_renderer.hpp"
 #include "gui_entity.hpp"
-#include "opengl_framebuffer.hpp"
+#include "render_framebuffer.hpp"
 #include "blur_direction.hpp"
 
 class BlurRenderer final : public BaseEntityRenderer
@@ -20,7 +20,7 @@ public:
 private:
 	void _render(const shared_ptr<GuiEntity> entity, GLuint texture);
 
-	vector<OpenGLFramebuffer*> _horizontalFramebuffers;
-	vector<OpenGLFramebuffer*> _verticalFramebuffers;
+	vector<RenderFramebuffer*> _horizontalFramebuffers;
+	vector<RenderFramebuffer*> _verticalFramebuffers;
 };
 

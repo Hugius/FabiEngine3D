@@ -1,4 +1,4 @@
-#include "opengl_framebuffer.hpp"
+#include "render_framebuffer.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
@@ -9,7 +9,7 @@
 ////////////////
 // Destructor //
 ////////////////
-OpenGLFramebuffer::~OpenGLFramebuffer()
+RenderFramebuffer::~RenderFramebuffer()
 {
 	reset();
 }
@@ -17,7 +17,7 @@ OpenGLFramebuffer::~OpenGLFramebuffer()
 //////////////////////////////////
 // Create Anti Aliasing texture //
 //////////////////////////////////
-void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount, int aaSamples)
+void RenderFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount, int aaSamples)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -74,7 +74,7 @@ void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 //////////////////////////
 // Create color texture //
 //////////////////////////
-void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp)
+void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -151,7 +151,7 @@ void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amoun
 //////////////////////////
 // Create depth texture //
 //////////////////////////
-void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amount)
+void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amount)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -203,7 +203,7 @@ void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amoun
 	}
 }
 
-void OpenGLFramebuffer::reset()
+void RenderFramebuffer::reset()
 {
 	if (_isInitialized)
 	{

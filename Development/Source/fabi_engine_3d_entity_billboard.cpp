@@ -190,7 +190,7 @@ vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
 {
 	if (billboardEntity_isInstanced(ID))
 	{
-		return _core->_billboardEntityManager.getEntity(ID)->getOglBuffer(0)->getInstancedOffsets();
+		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer(0)->getInstancedOffsets();
 	}
 	else
 	{
@@ -245,9 +245,9 @@ bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
 
 bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
 {
-	if (!_core->_billboardEntityManager.getEntity(ID)->getOglBuffers().empty())
+	if (!_core->_billboardEntityManager.getEntity(ID)->getRenderBuffers().empty())
 	{
-		return _core->_billboardEntityManager.getEntity(ID)->getOglBuffer(0)->isInstanced();
+		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer(0)->isInstanced();
 	}
 	else
 	{

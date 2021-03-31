@@ -1,10 +1,10 @@
-#include "opengl_framebuffer.hpp"
+#include "render_framebuffer.hpp"
 #include "configuration.hpp"
 
 //////////////////////
 // Bind framebuffer //
 //////////////////////
-void OpenGLFramebuffer::bind()
+void RenderFramebuffer::bind()
 {
 	glViewport(_position.x, _position.y, _size.x, _size.y);
 	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
@@ -13,7 +13,7 @@ void OpenGLFramebuffer::bind()
 ///////////////////////
 // Unind framebuffer //
 ///////////////////////
-void OpenGLFramebuffer::unbind()
+void RenderFramebuffer::unbind()
 {
 	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -22,7 +22,7 @@ void OpenGLFramebuffer::unbind()
 /////////////////////////////////////////////////////////////////////////////////
 // Convert current framebuffer texture to AA texture and store in renderbuffer //
 /////////////////////////////////////////////////////////////////////////////////
-void OpenGLFramebuffer::processAAData(OpenGLFramebuffer* renderBuffer)
+void RenderFramebuffer::processAAData(RenderFramebuffer* renderBuffer)
 {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, renderBuffer->getFBO());
@@ -32,7 +32,7 @@ void OpenGLFramebuffer::processAAData(OpenGLFramebuffer* renderBuffer)
 ///////////////////////
 // Return AA samples //
 ///////////////////////
-int OpenGLFramebuffer::getAASamples()
+int RenderFramebuffer::getAASamples()
 {
 	return _aaSamples;
 }
@@ -40,7 +40,7 @@ int OpenGLFramebuffer::getAASamples()
 /////////////////
 // Return size //
 /////////////////
-Ivec2 OpenGLFramebuffer::getSize()
+Ivec2 RenderFramebuffer::getSize()
 {
 	return _size;
 }
@@ -48,7 +48,7 @@ Ivec2 OpenGLFramebuffer::getSize()
 //////////////////////////
 // Return actual buffer //
 //////////////////////////
-GLuint OpenGLFramebuffer::getFBO()
+GLuint RenderFramebuffer::getFBO()
 {
 	return _fbo;
 }
@@ -56,7 +56,7 @@ GLuint OpenGLFramebuffer::getFBO()
 ////////////////////
 // Return texture //
 ////////////////////
-GLuint OpenGLFramebuffer::getTexture(int ID)
+GLuint RenderFramebuffer::getTexture(int ID)
 {
 	return _textures[ID];
 }

@@ -102,9 +102,9 @@ void WaterEntity::setRefractive(bool value)
 	_isRefractive = value;
 }
 
-void WaterEntity::setSimplifiedOglBuffer(OpenGLBuffer* buffer)
+void WaterEntity::setSimplifiedRenderBuffer(RenderBuffer* buffer)
 {
-	_simplifiedOglBuffer = buffer;
+	_simplifiedRenderBuffer = buffer;
 }
 
 void WaterEntity::setSize(float value)
@@ -242,7 +242,7 @@ const bool WaterEntity::hasDisplacementMap() const
 	return (_displacementMap != 0);
 }
 
-const OpenGLBuffer* WaterEntity::getSimplifiedOglBuffer() const
+const RenderBuffer* WaterEntity::getSimplifiedRenderBuffer() const
 {
-	return _simplifiedOglBuffer;
+	return _simplifiedRenderBuffer;
 }

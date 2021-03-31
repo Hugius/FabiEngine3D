@@ -5,11 +5,11 @@
 #include <GLEW\\glew.h>
 #include <vector>
 
-class OpenGLFramebuffer final
+class RenderFramebuffer final
 {
 public:
-	OpenGLFramebuffer() = default;
-	~OpenGLFramebuffer();
+	RenderFramebuffer() = default;
+	~RenderFramebuffer();
 
 	void createMsaaTexture (Ivec2 position, Ivec2 size, int amount, int aaSamples);
 	void createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp);
@@ -18,7 +18,7 @@ public:
 
 	void bind();
 	void unbind();
-	void processAAData(OpenGLFramebuffer * renderBuffer);
+	void processAAData(RenderFramebuffer * renderBuffer);
 
 	int getAASamples();
 

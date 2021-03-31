@@ -53,14 +53,14 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", false);
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
 
 			// Unbind buffer
 			glBindVertexArray(0);
@@ -85,14 +85,14 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+			glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
 
 			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
+			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
 
 			// Unbind buffer
 			glBindVertexArray(0);
@@ -132,7 +132,7 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 
 		// Bind & render
 		unsigned int index = 0;
-		for (auto& buffer : entity->getOglBuffers())
+		for (auto& buffer : entity->getRenderBuffers())
 		{
 			// Model matrix
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
@@ -215,24 +215,24 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
-			if (entity->getOglBuffer()->isInstanced()) // Instanced
+			if (entity->getRenderBuffer()->isInstanced()) // Instanced
 			{
 				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount(), entity->getOglBuffer()->getInstancedOffsetCount());
-				_renderBus.increaseTriangleCount((entity->getOglBuffer()->getInstancedOffsetCount() * entity->getOglBuffer()->getVertexCount()) / 3);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
+				_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
 			}
 			else // Non-instanced
 			{
 				_shader.uploadUniform("u_isInstanced", false);
-				glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-				_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+				glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+				_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 			}
 
 			// Unbind buffer
@@ -263,14 +263,14 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
-			glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
+			glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
 
 			// Unbind buffer
 			glBindVertexArray(0);

@@ -8,13 +8,13 @@
 
 using std::vector;
 
-class OpenGLBuffer final
+class RenderBuffer final
 {
 public:
-	OpenGLBuffer() = delete;
-	OpenGLBuffer(BufferType type, float data[], int dataCount);   // 3D
-	OpenGLBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
-	~OpenGLBuffer();
+	RenderBuffer() = delete;
+	RenderBuffer(BufferType type, float data[], int dataCount);   // 3D
+	RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
+	~RenderBuffer();
 	
 	void addInstancing(const vector<Vec3>& offsets);
 	void removeInstancing();

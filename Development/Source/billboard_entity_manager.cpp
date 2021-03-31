@@ -17,7 +17,7 @@ BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLo
 		-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 	};
 
-	_openglBuffer = new OpenGLBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float));
+	_renderBuffer = new RenderBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float));
 }
 
 shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
@@ -42,7 +42,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 	// Create entity
 	_createEntity(ID);
 	auto entity = getEntity(ID);
-	entity->addOglBuffer(_openglBuffer, false);
+	entity->addRenderBuffer(_renderBuffer, false);
 
 	// Other
 	entity->setTranslation(T);

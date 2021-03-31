@@ -19,6 +19,7 @@ public:
 
 private:
 	vector<MeshPart> _loadMesh(const string& filePath, bool calculateTangents);
+
 	void _calculateTangents(vector<MeshPart>& meshParts);
 
 	std::map<string, vector<MeshPart>> _meshCache;

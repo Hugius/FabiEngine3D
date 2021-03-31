@@ -49,7 +49,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	auto parts = _meshLoader.loadMesh(meshPath, false);
 	auto entity = getEntity(ID);
 	entity->setMeshPath(meshPath);
-	entity->clearOglBuffers();
+	entity->clearRenderBuffers();
 	entity->clearDiffuseMaps();
 	entity->clearLightMaps();
 	entity->clearReflectionMaps();
@@ -72,7 +72,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
 	}
 
-	// Create OpenGL buffers
+	// Create render buffers
 	for (auto& part : parts)
 	{
 		// Temporary values
@@ -96,8 +96,8 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 			bufferData.push_back(part.normals[i].z);
 		}
 
-		// OpenGL buffer
-		entity->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
+		// Render buffer
+		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
 
 		// New transformation part
 		entity->addPart(part.name);
@@ -169,15 +169,15 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 void ModelEntityManager::loadNormalMapping(const string& ID)
 {
 	// Check if entity has a buffer
-	if (!getEntity(ID)->getOglBuffers().empty())
+	if (!getEntity(ID)->getRenderBuffers().empty())
 	{
 		// Check if not already a tangent loaded model
-		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+		if (getEntity(ID)->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Load mesh file
 			auto parts = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
 
-			// Create OpenGL buffers
+			// Create render buffers
 			for (auto& part : parts)
 			{
 				vector<float> data;
@@ -205,9 +205,9 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 					data.push_back(part.tangents[i].z);
 				}
 
-				// OpenGL buffer
-				getEntity(ID)->clearOglBuffers();
-				getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
+				// Render buffer
+				getEntity(ID)->clearRenderBuffers();
+				getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
 			}
 		}
 	}

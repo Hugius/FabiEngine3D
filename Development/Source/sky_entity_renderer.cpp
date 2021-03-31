@@ -56,17 +56,17 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
 		}
 
-		// Check if entity has an OpenGL buffer
-		if (!mainEntity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!mainEntity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(mainEntity->getOglBuffer()->getVAO());
+			glBindVertexArray(mainEntity->getRenderBuffer()->getVAO());
 
 			// Render
-			if (!mainEntity->getOglBuffers().empty())
+			if (!mainEntity->getRenderBuffers().empty())
 			{
-				glDrawArrays(GL_TRIANGLES, 0, mainEntity->getOglBuffer()->getVertexCount());
-				_renderBus.increaseTriangleCount(mainEntity->getOglBuffer()->getVertexCount() / 3);
+				glDrawArrays(GL_TRIANGLES, 0, mainEntity->getRenderBuffer()->getVertexCount());
+				_renderBus.increaseTriangleCount(mainEntity->getRenderBuffer()->getVertexCount() / 3);
 			}
 
 			// Unbind buffer

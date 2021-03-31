@@ -111,7 +111,7 @@ void SkyEntityManager::addSkyEntity(const string& ID)
 	_createEntity(ID);
 
 	// Fill entity
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
+	getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
 }
 
 void SkyEntityManager::update()

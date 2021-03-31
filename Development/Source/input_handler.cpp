@@ -1,11 +1,5 @@
 #include "input_handler.hpp"
 
-InputHandler::InputHandler(Timer& timer) :
-	_timer(timer)
-{
-
-}
-
 void InputHandler::f_checkInput()
 {
 	_keysPressed.clear();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opengl_framebuffer.hpp"
+#include "render_framebuffer.hpp"
 #include "camera_manager.hpp"
 #include "entity_bus.hpp"
 #include "sky_entity_renderer.hpp"
@@ -53,7 +53,7 @@ private:
 	SkyEntityRenderer        _skyEntityRenderer;
 	TerrainEntityRenderer    _terrainEntityRenderer;
 	WaterEntityRenderer      _waterEntityRenderer;
-	ModelEntityRenderer       _modelEntityRenderer;
+	ModelEntityRenderer      _modelEntityRenderer;
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
 	GuiEntityRenderer        _guiEntityRenderer;
@@ -65,15 +65,15 @@ private:
 	FinalRenderer            _finalRenderer;
 
 	// Framebuffers
-	OpenGLFramebuffer _screenFramebuffer;
-	OpenGLFramebuffer _msaaFramebuffer;
-	OpenGLFramebuffer _aaProcessorFramebuffer;
-	OpenGLFramebuffer _sceneReflectionFramebuffer;
-	OpenGLFramebuffer _sceneRefractionFramebuffer;
-	OpenGLFramebuffer _bloomHdrFramebuffer;
-	OpenGLFramebuffer _postProcessingFramebuffer;
-	OpenGLFramebuffer _shadowFramebuffer;
-	OpenGLFramebuffer _sceneDepthFramebuffer;
+	RenderFramebuffer _screenFramebuffer;
+	RenderFramebuffer _msaaFramebuffer;
+	RenderFramebuffer _aaProcessorFramebuffer;
+	RenderFramebuffer _sceneReflectionFramebuffer;
+	RenderFramebuffer _sceneRefractionFramebuffer;
+	RenderFramebuffer _bloomHdrFramebuffer;
+	RenderFramebuffer _postProcessingFramebuffer;
+	RenderFramebuffer _shadowFramebuffer;
+	RenderFramebuffer _sceneDepthFramebuffer;
 
 	// Capturing functions
 	void _captureSceneReflections(CameraManager& camera);

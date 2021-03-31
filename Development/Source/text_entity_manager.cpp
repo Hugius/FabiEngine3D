@@ -5,15 +5,15 @@ using std::make_shared;
 
 TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::TEXT, meshLoader, texLoader, renderBus),
-	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
-	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
+	_centeredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
+	_nonCenteredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
 {
 
 }
 
 TextEntityManager::~TextEntityManager()
 {
-	delete _nonCenteredOpenglBuffer;
+	delete _nonCenteredRenderBuffer;
 }
 
 shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
@@ -69,7 +69,7 @@ void TextEntityManager::addTextEntity
 	}
 	else // Load static text as a whole
 	{
-		entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+		entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
 		entity->setTexture(_textureLoader.getText(textContent, entity->getFontPath()));
 		entity->updateModelMatrix();
 	}
@@ -94,7 +94,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 			{
 				// Create new character entity
 				auto newCharacter = make_shared<GuiEntity>("uselessID");
-				newCharacter->addOglBuffer(_nonCenteredOpenglBuffer, false);
+				newCharacter->addRenderBuffer(_nonCenteredRenderBuffer, false);
 
 				// Load text map
 				string textContent = "";

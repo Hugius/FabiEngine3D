@@ -38,7 +38,7 @@ public:
 private:
 	CameraManager& _camera;
 
-	OpenGLBuffer* _openglBuffer = nullptr;
+	RenderBuffer* _renderBuffer = nullptr;
 
 	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 };

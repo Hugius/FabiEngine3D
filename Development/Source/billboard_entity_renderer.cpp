@@ -73,24 +73,24 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
-			if (entity->getOglBuffer()->isInstanced()) // Instanced
+			if (entity->getRenderBuffer()->isInstanced()) // Instanced
 			{
 				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount(), entity->getOglBuffer()->getInstancedOffsetCount());
-				_renderBus.increaseTriangleCount((entity->getOglBuffer()->getInstancedOffsetCount() * entity->getOglBuffer()->getVertexCount()) / 3);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
+				_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
 			}
 			else // Non-instanced
 			{
 				_shader.uploadUniform("u_isInstanced", false);
-				glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-				_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+				glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+				_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 			}
 
 			// Unbind buffer

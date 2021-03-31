@@ -156,9 +156,9 @@ bool FabiEngine3D::modelEntity_isVisible(const string& ID)
 
 bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 {
-	if (!_core->_modelEntityManager.getEntity(ID)->getOglBuffers().empty())
+	if (!_core->_modelEntityManager.getEntity(ID)->getRenderBuffers().empty())
 	{
-		return _core->_modelEntityManager.getEntity(ID)->getOglBuffer(0)->isInstanced();
+		return _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(0)->isInstanced();
 	}
 	else
 	{
@@ -328,7 +328,7 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, ve
 {
 	if (instanced) // Add instancing
 	{
-		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getOglBuffers())
+		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
 		{
 			if (buffer->isInstanced())
 			{
@@ -340,7 +340,7 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, ve
 	}
 	else // Remove instancing
 	{
-		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getOglBuffers())
+		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
 		{
 			if (buffer->isInstanced())
 			{
@@ -434,7 +434,7 @@ const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& I
 {
 	if (modelEntity_isInstanced(ID))
 	{
-		return _core->_modelEntityManager.getEntity(ID)->getOglBuffer(0)->getInstancedOffsets();
+		return _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(0)->getInstancedOffsets();
 	}
 	else
 	{

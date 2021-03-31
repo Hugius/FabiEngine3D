@@ -4,8 +4,8 @@
 
 void BlurRenderer::addFramebuffer(int index, bool textureClamp)
 {
-	_horizontalFramebuffers.push_back(new OpenGLFramebuffer());
-	_verticalFramebuffers.push_back(new OpenGLFramebuffer());
+	_horizontalFramebuffers.push_back(new RenderFramebuffer());
+	_verticalFramebuffers.push_back(new RenderFramebuffer());
 	_horizontalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
 	_verticalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
 }
@@ -78,11 +78,11 @@ void BlurRenderer::_render(const shared_ptr<GuiEntity> entity, GLuint texture)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
 			glDrawArrays(GL_TRIANGLES, 0, 6);

@@ -31,7 +31,7 @@ void ShadowRenderer::unbind()
 
 void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Face culling
 		if (entity->isFaceCulled())
@@ -48,7 +48,7 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 		// Bind & render
 		unsigned int index = 0;
-		for (auto& buffer : entity->getOglBuffers())
+		for (auto& buffer : entity->getRenderBuffers())
 		{
 			// Model matrix
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));

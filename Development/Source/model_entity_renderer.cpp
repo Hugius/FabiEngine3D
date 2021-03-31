@@ -188,7 +188,7 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 
 		// Bind & render
 		unsigned int index = 0;
-		for (auto& buffer : entity->getOglBuffers())
+		for (auto& buffer : entity->getRenderBuffers())
 		{
 			// Color
 			_shader.uploadUniform("u_color", entity->getColor(index));

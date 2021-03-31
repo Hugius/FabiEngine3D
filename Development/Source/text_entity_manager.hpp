@@ -25,8 +25,8 @@ public:
 	void update() override;
 
 private:
-	OpenGLBuffer* _centeredOpenglBuffer = nullptr;
-	OpenGLBuffer* _nonCenteredOpenglBuffer = nullptr;
+	RenderBuffer* _centeredRenderBuffer = nullptr;
+	RenderBuffer* _nonCenteredRenderBuffer = nullptr;
 
 	map<string, string> _textContentMap;
 };

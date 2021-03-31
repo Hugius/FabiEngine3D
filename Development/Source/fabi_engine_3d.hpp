@@ -1,6 +1,6 @@
 #pragma once
 
-#include "input_types.hpp"
+#include "input_type.hpp"
 #include "logger.hpp"
 #include "aabb_parent_type.hpp"
 #include "direction.hpp"

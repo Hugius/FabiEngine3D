@@ -18,6 +18,6 @@ public:
 	void updateSpriteAnimations();
 
 private:
-	OpenGLBuffer* _centeredOpenglBuffer = nullptr;
-	OpenGLBuffer* _nonCenteredOpenglBuffer = nullptr;
+	RenderBuffer* _centeredRenderBuffer = nullptr;
+	RenderBuffer* _nonCenteredRenderBuffer = nullptr;
 };

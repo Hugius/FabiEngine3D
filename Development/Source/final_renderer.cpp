@@ -37,11 +37,11 @@ void FinalRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap, 
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, motionblurMap);
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
 			glDrawArrays(GL_TRIANGLES, 0, 6);

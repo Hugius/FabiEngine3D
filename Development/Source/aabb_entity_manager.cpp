@@ -27,7 +27,7 @@ AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texL
 		-0.5f,  0.0f, -0.5f
 	};
 
-	_openglBuffer = new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float));
+	_renderBuffer = new RenderBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float));
 }
 
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
@@ -52,7 +52,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 	// Create entity
 	_createEntity(ID);
 	auto entity = getEntity(ID);
-	entity->addOglBuffer(_openglBuffer, false);
+	entity->addRenderBuffer(_renderBuffer, false);
 
 	// Other
 	entity->setLocalTranslation(position);

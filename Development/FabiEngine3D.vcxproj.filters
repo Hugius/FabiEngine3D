@@ -31,11 +31,11 @@
     <ClCompile Include="Source\window_manager.cpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\opengl_buffer.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClCompile Include="Source\render_buffer.cpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\opengl_shader.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClCompile Include="Source\render_shader.cpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="Source\bloom_hdr_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
@@ -70,8 +70,8 @@
     <ClCompile Include="Source\tools.cpp">
       <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\opengl_framebuffer_misc.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClCompile Include="Source\render_framebuffer_misc.cpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="Source\core_engine_misc.cpp">
       <Filter>src\Core System\Core</Filter>
@@ -406,8 +406,8 @@
     <ClCompile Include="Source\camera_manager_main.cpp">
       <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\opengl_framebuffer_main.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClCompile Include="Source\render_framebuffer_main.cpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClCompile>
     <ClCompile Include="Source\mesh_loader_main.cpp">
       <Filter>src\Asset Management System\Mesh</Filter>
@@ -729,14 +729,14 @@
     <ClInclude Include="Source\window_manager.hpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\opengl_buffer.hpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClInclude Include="Source\render_buffer.hpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\opengl_framebuffer.hpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClInclude Include="Source\render_framebuffer.hpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\opengl_shader.hpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
+    <ClInclude Include="Source\render_shader.hpp">
+      <Filter>src\Rendering System\Buffers</Filter>
     </ClInclude>
     <ClInclude Include="Source\bloom_hdr_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
@@ -831,7 +831,7 @@
     <ClInclude Include="Source\script_file.hpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\input_types.hpp">
+    <ClInclude Include="Source\input_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Source\transformation_type.hpp">
@@ -1069,9 +1069,6 @@
     </Filter>
     <Filter Include="src\Rendering System\Core">
       <UniqueIdentifier>{5b4059b8-26d7-4cdf-a4fe-6519113f74f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Rendering System\OpenGL">
-      <UniqueIdentifier>{30487a92-5701-4893-8750-39fbd5335d0c}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Rendering System\Miscellaneous">
       <UniqueIdentifier>{b72c0402-30db-4107-9507-7df679c190bb}</UniqueIdentifier>
@@ -1423,6 +1420,9 @@
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Function\Core">
       <UniqueIdentifier>{5c9ade0a-486a-43d4-b3db-caa1cccf8571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Buffers">
+      <UniqueIdentifier>{30487a92-5701-4893-8750-39fbd5335d0c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

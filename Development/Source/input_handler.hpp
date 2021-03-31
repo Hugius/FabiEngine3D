@@ -1,8 +1,7 @@
 #pragma once
 
-#include "input_types.hpp"
+#include "input_type.hpp"
 #include "logger.hpp"
-#include "Timer.hpp"
 
 #include <SDL\\SDL.h>
 #include <vector>
@@ -13,7 +12,7 @@ class InputHandler final
 {
 	friend class CoreEngine;
 public:
-	InputHandler(Timer& timer);
+	InputHandler() = default;
 	~InputHandler() = default;
 
 	void clearKeyToggles();
@@ -32,8 +31,6 @@ public:
 
 private:
 	void f_checkInput();
-
-	Timer& _timer;
 
 	// Keys
 	vector<InputType> _keysDown;

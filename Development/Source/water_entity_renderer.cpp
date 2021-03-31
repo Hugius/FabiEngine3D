@@ -143,31 +143,31 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		}
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
 			if (entity->isWaving())
 			{
-				glBindVertexArray(entity->getOglBuffer()->getVAO());
+				glBindVertexArray(entity->getRenderBuffer()->getVAO());
 			}
 			else
 			{
-				glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+				glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
 			}
 
 			// Render
-			if (!entity->getOglBuffers().empty())
+			if (!entity->getRenderBuffers().empty())
 			{
 				if (entity->isWaving())
 				{
-					glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-					_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+					glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+					_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 				}
 				else
 				{
-					glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
-					_renderBus.increaseTriangleCount(entity->getSimplifiedOglBuffer()->getVertexCount() / 3);
+					glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
+					_renderBus.increaseTriangleCount(entity->getSimplifiedRenderBuffer()->getVertexCount() / 3);
 				}
 			}
 

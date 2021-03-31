@@ -3,16 +3,16 @@
 
 GuiEntityManager::GuiEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::GUI, meshLoader, texLoader, renderBus),
-	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
-	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
+	_centeredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
+	_nonCenteredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
 	
 }
 
 GuiEntityManager::~GuiEntityManager()
 {
-	delete _centeredOpenglBuffer;
-	delete _nonCenteredOpenglBuffer;
+	delete _centeredRenderBuffer;
+	delete _nonCenteredRenderBuffer;
 }
 
 shared_ptr<GuiEntity> GuiEntityManager::getEntity(const string& ID)
@@ -37,7 +37,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 	// Create entity
 	_createEntity(ID);
 	auto entity = getEntity(ID);
-	entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
 
 	// Load transformation
 	entity->setTranslation(translation);
@@ -54,7 +54,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translati
 	// Create entity
 	_createEntity(ID);
 	auto entity = getEntity(ID);
-	entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
 
 	// Load transformation
 	entity->setTranslation(translation);

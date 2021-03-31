@@ -15,29 +15,29 @@ BaseEntity::BaseEntity(const string& ID)
 
 BaseEntity::~BaseEntity()
 {
-	clearOglBuffers();
+	clearRenderBuffers();
 }
 
-void BaseEntity::addOglBuffer(OpenGLBuffer * buffer, bool deleteOnDestroy)
+void BaseEntity::addRenderBuffer(RenderBuffer * buffer, bool deleteOnDestroy)
 {
-	_oglBuffers.push_back(buffer);
-	_oglBufferMemoryManagement.push_back(deleteOnDestroy);
+	_renderBuffers.push_back(buffer);
+	_renderBufferMemoryManagement.push_back(deleteOnDestroy);
 }
 
-void BaseEntity::clearOglBuffers()
+void BaseEntity::clearRenderBuffers()
 {
-	for (unsigned int i = 0; i < _oglBuffers.size(); i++)
+	for (unsigned int i = 0; i < _renderBuffers.size(); i++)
 	{
-		if (_oglBufferMemoryManagement[i])
+		if (_renderBufferMemoryManagement[i])
 		{
-			if (_oglBuffers[i] != nullptr)
+			if (_renderBuffers[i] != nullptr)
 			{
-				delete _oglBuffers[i];
+				delete _renderBuffers[i];
 			}
 		}
 	}
 
-	_oglBuffers.clear();
+	_renderBuffers.clear();
 }
 
 void BaseEntity::setVisible(bool value)
@@ -45,19 +45,19 @@ void BaseEntity::setVisible(bool value)
 	_visible = value;
 }
 
-const vector<OpenGLBuffer*>& BaseEntity::getOglBuffers() const
+const vector<RenderBuffer*>& BaseEntity::getRenderBuffers() const
 {
-	return _oglBuffers;
+	return _renderBuffers;
 }
 
-const OpenGLBuffer * BaseEntity::getOglBuffer(int index) const
+const RenderBuffer * BaseEntity::getRenderBuffer(int index) const
 {
-	return _oglBuffers[index];
+	return _renderBuffers[index];
 }
 
-const OpenGLBuffer * BaseEntity::getOglBuffer() const
+const RenderBuffer * BaseEntity::getRenderBuffer() const
 {
-	return _oglBuffers[0];
+	return _renderBuffers[0];
 }
 
 const string& BaseEntity::getID() const

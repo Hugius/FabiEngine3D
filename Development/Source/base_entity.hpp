@@ -1,6 +1,6 @@
 #pragma once
 
-#include "opengl_buffer.hpp"
+#include "render_buffer.hpp"
 
 #include <string>
 
@@ -12,20 +12,20 @@ public:
 	BaseEntity(const string& ID);
 	virtual ~BaseEntity();
 
-	void addOglBuffer(OpenGLBuffer* buffer, bool deleteOnDestroy = true);
-	void clearOglBuffers();
+	void addRenderBuffer(RenderBuffer* buffer, bool deleteOnDestroy = true);
+	void clearRenderBuffers();
 	void setVisible(bool value);
 
-	const vector<OpenGLBuffer*>& getOglBuffers() const;
-	const OpenGLBuffer* getOglBuffer(int index) const;
-	const OpenGLBuffer* getOglBuffer() const;
+	const vector<RenderBuffer*>& getRenderBuffers() const;
+	const RenderBuffer* getRenderBuffer(int index) const;
+	const RenderBuffer* getRenderBuffer() const;
 
 	const string& getID() const;
 	const bool isVisible() const;
 
 private:
-	vector<OpenGLBuffer*> _oglBuffers;
-	vector<bool> _oglBufferMemoryManagement;
+	vector<RenderBuffer*> _renderBuffers;
+	vector<bool> _renderBufferMemoryManagement;
 
 	string _ID = "ID_NULL";
 

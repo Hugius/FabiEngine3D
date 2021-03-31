@@ -10,7 +10,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_meshLoader(),
 	_textureLoader(),
 	_audioLoader(),
-	_inputHandler(_timer),
+	_inputHandler(),
 	_renderBus(),
 	_cameraManager(_renderBus, _windowManager),
 	_renderManager(_renderBus, _timer, _textureLoader),

@@ -31,7 +31,7 @@ public:
 	void setSpecularLighted(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
-	void setSimplifiedOglBuffer(OpenGLBuffer* buffer);
+	void setSimplifiedRenderBuffer(RenderBuffer* buffer);
 
 	// Getters
 	const Vec2    getSpeed()					 const;
@@ -59,7 +59,7 @@ public:
 	const bool	  hasDudvMap()					 const;
 	const bool	  hasNormalMap()				 const;
 	const bool	  hasDisplacementMap()			 const;
-	const OpenGLBuffer* getSimplifiedOglBuffer() const;
+	const RenderBuffer* getSimplifiedRenderBuffer() const;
 
 private:
 	Vec2 _speed		   = Vec2(0.0f);
@@ -90,5 +90,5 @@ private:
 	bool _isReflective		= false;
 	bool _isRefractive		= false;
 
-	OpenGLBuffer* _simplifiedOglBuffer = nullptr;
+	RenderBuffer* _simplifiedRenderBuffer = nullptr;
 };

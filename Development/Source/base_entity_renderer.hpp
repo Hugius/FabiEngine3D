@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
-#include "opengl_shader.hpp"
+#include "render_shader.hpp"
 #include "sky_entity.hpp"
 #include "terrain_entity.hpp"
 #include "water_entity.hpp"
@@ -26,7 +26,7 @@ public:
 	virtual void unbind() = 0;
 
 protected:
-	OpenGLShader _shader;
+	RenderShader _shader;
 
 	RenderBus& _renderBus;
 };

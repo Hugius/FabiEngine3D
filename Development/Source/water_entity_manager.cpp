@@ -134,8 +134,8 @@ void WaterEntityManager::generateMesh(const string& ID)
 	}
 	
 	// Fill entity
-	entity->clearOglBuffers();
-	entity->addOglBuffer(new OpenGLBuffer(BufferType::SURFACE, &waterVertices[0], waterVertices.size()));
+	entity->clearRenderBuffers();
+	entity->addRenderBuffer(new RenderBuffer(BufferType::SURFACE, &waterVertices[0], waterVertices.size()));
 
 	// Load mesh
 	float simplified_data[] =
@@ -149,7 +149,7 @@ void WaterEntityManager::generateMesh(const string& ID)
 	};
 
 	// Add simplified water plane
-	entity->setSimplifiedOglBuffer(new OpenGLBuffer(BufferType::SURFACE, simplified_data, sizeof(simplified_data) / sizeof(float)));
+	entity->setSimplifiedRenderBuffer(new RenderBuffer(BufferType::SURFACE, simplified_data, sizeof(simplified_data) / sizeof(float)));
 }
 
 void WaterEntityManager::update()

@@ -13,7 +13,7 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
 	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
 	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),
-	_modelEntityRenderer       ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
+	_modelEntityRenderer      ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
 	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       renderBus),
@@ -40,7 +40,7 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 
 	// Final screen texture
 	_finalSurface = make_shared<GuiEntity>("finalSurface");
-	_finalSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	_finalSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	_finalSurface->setMirroredVertically(true);
 }
 

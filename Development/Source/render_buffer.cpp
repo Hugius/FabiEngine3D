@@ -1,19 +1,19 @@
-#include "opengl_buffer.hpp"
+#include "render_buffer.hpp"
 
 // 3D
-OpenGLBuffer::OpenGLBuffer(BufferType type, float data[], int dataCount)
+RenderBuffer::RenderBuffer(BufferType type, float data[], int dataCount)
 {
 	_bufferType = type;
 	_create3D(type, data, dataCount);
 }
 
 // 2D
-OpenGLBuffer::OpenGLBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
+RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
 {
 	_create2D(x, y, w, h, isCentered, isText);
 }
 
-void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
+void RenderBuffer::_create3D(BufferType type, float data[], int dataCount)
 {
 	// Create buffers
 	glGenVertexArrays(1, &_vao);
@@ -83,7 +83,7 @@ void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
 	glBindVertexArray(0);
 }
 
-void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool isCentered, bool isText)
+void RenderBuffer::_create2D(float x, float y, float w, float h, bool isCentered, bool isText)
 {
 	// Generate vertices
 	float* data = nullptr;
@@ -140,14 +140,14 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool isCentered
 	_vertexCount = 6;
 }
 
-OpenGLBuffer::~OpenGLBuffer()
+RenderBuffer::~RenderBuffer()
 {
 	glDeleteVertexArrays(1, &_vao);
 	glDeleteBuffers(1, &_vbo);
 	glDeleteBuffers(1, &_vbo_instanced);
 }
 
-void OpenGLBuffer::addInstancing(const vector<Vec3>& offsets)
+void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 {
 	// Create instanced VBO
 	glGenBuffers(1, &_vbo_instanced);
@@ -174,7 +174,7 @@ void OpenGLBuffer::addInstancing(const vector<Vec3>& offsets)
 	_instancedOffsets = offsets;
 }
 
-void OpenGLBuffer::removeInstancing()
+void RenderBuffer::removeInstancing()
 {
 	glDeleteBuffers(1, &_vbo_instanced);
 	_isInstanced = false;
@@ -182,32 +182,32 @@ void OpenGLBuffer::removeInstancing()
 	_instancedOffsets.clear();
 }
 
-const GLuint OpenGLBuffer::getVAO() const
+const GLuint RenderBuffer::getVAO() const
 {
 	return _vao;
 }
 
-const unsigned int OpenGLBuffer::getVertexCount() const
+const unsigned int RenderBuffer::getVertexCount() const
 {
 	return _vertexCount;
 }
 
-const unsigned int OpenGLBuffer::getInstancedOffsetCount() const
+const unsigned int RenderBuffer::getInstancedOffsetCount() const
 {
 	return _offsetCount;
 }
 
-const bool OpenGLBuffer::isInstanced() const
+const bool RenderBuffer::isInstanced() const
 {
 	return _isInstanced;
 }
 
-const BufferType OpenGLBuffer::getBufferType() const
+const BufferType RenderBuffer::getBufferType() const
 {
 	return _bufferType;
 }
 
-const vector<Vec3>& OpenGLBuffer::getInstancedOffsets() const
+const vector<Vec3>& RenderBuffer::getInstancedOffsets() const
 {
 	return _instancedOffsets;
 }

@@ -54,7 +54,7 @@ void CoreEngine::_setupApplication()
 {
 	// Create engine logo
 	shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
-	logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	logo->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	logo->setTexture(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false, false));
 
 	// Calculate logo resolution

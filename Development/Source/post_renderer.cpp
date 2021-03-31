@@ -60,11 +60,11 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
 			glDrawArrays(GL_TRIANGLES, 0, 6);

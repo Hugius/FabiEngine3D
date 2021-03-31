@@ -26,11 +26,11 @@ void BloomHdrRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMa
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sceneMap);
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind buffer
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
 			glDrawArrays(GL_TRIANGLES, 0, 6);

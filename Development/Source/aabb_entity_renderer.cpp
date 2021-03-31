@@ -29,15 +29,15 @@ void AabbEntityRenderer::render(const shared_ptr<AabbEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
-		// Check if entity has an OpenGL buffer
-		if (!entity->getOglBuffers().empty())
+		// Check if entity has a render buffer
+		if (!entity->getRenderBuffers().empty())
 		{
 			// Bind
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 			// Render
-			glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+			glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
 			// Unbind
 			glBindVertexArray(0);

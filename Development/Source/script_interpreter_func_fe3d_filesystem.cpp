@@ -105,8 +105,9 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 				string line;
 
 				// Add lines to list
-				while (std::getline(file, line))
+				while (!file.eof())
 				{
+					std::getline(file, line);
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, line));
 				}
 

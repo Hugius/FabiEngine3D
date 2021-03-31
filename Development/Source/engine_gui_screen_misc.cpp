@@ -43,9 +43,9 @@ bool EngineGuiScreen::checkScrollingList(const string& ID)
 	return getScrollingList(ID) != nullptr;
 }
 
-bool EngineGuiScreen::checkWriteField(const string& ID)
+bool EngineGuiScreen::checkWritefield(const string& ID)
 {
-	return getWriteField(ID) != nullptr;
+	return getWritefield(ID) != nullptr;
 }
 
 bool EngineGuiScreen::checkButton(const string& ID)
@@ -76,9 +76,9 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 	return nullptr;
 }
 
-shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
+shared_ptr<EngineGuiWritefield> EngineGuiScreen::getWritefield(const string& ID)
 {
-	for (auto& writefield : _writeFields)
+	for (auto& writefield : _writefields)
 	{
 		if (ID == writefield->getID())
 		{
@@ -133,9 +133,9 @@ vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()
 	return _scrollingLists;
 }
 
-vector<shared_ptr<EngineGuiWriteField>>& EngineGuiScreen::getWriteFields()
+vector<shared_ptr<EngineGuiWritefield>>& EngineGuiScreen::getWritefields()
 {
-	return _writeFields;
+	return _writefields;
 }
 
 vector<shared_ptr<EngineGuiButton>>& EngineGuiScreen::getButtons()

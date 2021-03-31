@@ -239,9 +239,9 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addButton("xMinus", Vec2(-0.75f, -0.25f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yMinus", Vec2(-0.75f, -0.5f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zMinus", Vec2(-0.75f, -0.75f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, -0.25f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("x", Vec2(0.0f, -0.25f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("animation", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.08f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Right-viewport: mainWindow - billboardPropertiesMenu
@@ -261,9 +261,9 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addButton("xMinus", Vec2(-0.75f, -0.25f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yMinus", Vec2(-0.75f, -0.5f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zMinus", Vec2(-0.75f, -0.75f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, -0.25f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("x", Vec2(0.0f, -0.25f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 
 	// Right-viewport: mainWindow - pointlightPropertiesMenu
 	screenID = "pointlightPropertiesMenu";
@@ -271,35 +271,35 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addTextfield("intensity", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Intensity", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("intensityPlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("intensityMinus", Vec2(-0.75f, 0.85f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("intensity", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("intensity", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, 0.725f), Vec2(1.5f, 0.1f), "Distance", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, 0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, 0.5f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("xPlus", Vec2(0.75f, 0.4f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("xMinus", Vec2(-0.75f, 0.4f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, 0.4f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("x", Vec2(0.0f, 0.4f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("y", Vec2(0.0f, 0.275f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yPlus", Vec2(0.75f, 0.175f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yMinus", Vec2(-0.75f, 0.175f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, 0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, 0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("z", Vec2(0.0f, 0.05f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zPlus", Vec2(0.75f, -0.05f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zMinus", Vec2(-0.75f, -0.05f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("r", Vec2(0.0f, -0.175f), Vec2(0.25f, 0.1f), "R", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("rPlus", Vec2(0.75f, -0.275f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("rMinus", Vec2(-0.75f, -0.275f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("r", Vec2(0.0f, -0.275f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("r", Vec2(0.0f, -0.275f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("g", Vec2(0.0f, -0.4f), Vec2(0.25f, 0.1f), "G", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("gPlus", Vec2(0.75f, -0.5f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("gMinus", Vec2(-0.75f, -0.5f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("g", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("g", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("b", Vec2(0.0f, -0.625f), Vec2(0.25f, 0.1f), "B", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("bPlus", Vec2(0.75f, -0.725f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("bMinus", Vec2(-0.75f, -0.725f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("b", Vec2(0.0f, -0.725f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("b", Vec2(0.0f, -0.725f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Right-viewport: mainWindow - audiocasterPropertiesMenu
@@ -308,23 +308,23 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Max volume", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("volumeMinus", Vec2(-0.75f, 0.85f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("volume", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("volume", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, 0.725f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, 0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, 0.5f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("xPlus", Vec2(0.75f, 0.4f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("xMinus", Vec2(-0.75f, 0.4f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, 0.4f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("x", Vec2(0.0f, 0.4f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("y", Vec2(0.0f, 0.275f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yPlus", Vec2(0.75f, 0.175f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("yMinus", Vec2(-0.75f, 0.175f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, 0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, 0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addTextfield("z", Vec2(0.0f, 0.05f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zPlus", Vec2(0.75f, -0.05f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("zMinus", Vec2(-0.75f, -0.05f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.175f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 

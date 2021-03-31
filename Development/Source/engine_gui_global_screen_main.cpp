@@ -15,7 +15,7 @@ void EngineGuiGlobalScreen::update()
 	}
 
 	// Update writefields
-	for (auto& writefield : _writeFields)
+	for (auto& writefield : _writefields)
 	{
 		writefield->update(true);
 	}
@@ -36,10 +36,10 @@ void EngineGuiGlobalScreen::addScrollingList(const string& ID, Vec2 position, Ve
 	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalscreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
-void EngineGuiGlobalScreen::addWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
+void EngineGuiGlobalScreen::addWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
 	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 {
-	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
+	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
 }
 
 void EngineGuiGlobalScreen::addButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor)
@@ -72,9 +72,9 @@ bool EngineGuiGlobalScreen::checkScrollingList(const string& ID)
 	return getScrollingList(ID) != nullptr;
 }
 
-bool EngineGuiGlobalScreen::checkWriteField(const string& ID)
+bool EngineGuiGlobalScreen::checkWritefield(const string& ID)
 {
-	return getWriteField(ID) != nullptr;
+	return getWritefield(ID) != nullptr;
 }
 
 bool EngineGuiGlobalScreen::checkButton(const string& ID)
@@ -105,9 +105,9 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 	return nullptr;
 }
 
-shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const string& ID)
+shared_ptr<EngineGuiWritefield> EngineGuiGlobalScreen::getWritefield(const string& ID)
 {
-	for (auto& writefield : _writeFields)
+	for (auto& writefield : _writefields)
 	{
 		if (ID == writefield->getID())
 		{
@@ -162,9 +162,9 @@ vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingL
 	return _scrollingLists;
 }
 
-vector<shared_ptr<EngineGuiWriteField>>& EngineGuiGlobalScreen::getWriteFields()
+vector<shared_ptr<EngineGuiWritefield>>& EngineGuiGlobalScreen::getWritefields()
 {
-	return _writeFields;
+	return _writefields;
 }
 
 vector<shared_ptr<EngineGuiButton>>& EngineGuiGlobalScreen::getButtons()
@@ -198,20 +198,20 @@ void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)
 	_fe3d.logger_throwError("Could not delete scrollingList: \"" + ID + "\"");
 }
 
-void EngineGuiGlobalScreen::deleteWriteField(const string& ID)
+void EngineGuiGlobalScreen::deleteWritefield(const string& ID)
 {
 	// Delete writefield
-	for (size_t i = 0; i < _writeFields.size(); i++)
+	for (size_t i = 0; i < _writefields.size(); i++)
 	{
-		if (ID == _writeFields[i]->getID())
+		if (ID == _writefields[i]->getID())
 		{
-			_writeFields.erase(_writeFields.begin() + i);
+			_writefields.erase(_writefields.begin() + i);
 			return;
 		}
 	}
 
 	// Error
-	_fe3d.logger_throwError("Could not delete writeField: \"" + ID + "\"");
+	_fe3d.logger_throwError("Could not delete writefield: \"" + ID + "\"");
 }
 
 void EngineGuiGlobalScreen::deleteButton(const string& ID)

@@ -124,20 +124,20 @@ void SceneEditor::_updateBillboardEditing()
 				// Enabling all axes by default
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(true);
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(true);
-				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("x")->setHoverable(true);
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(true);
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(true);
-				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("y")->setHoverable(true);
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
-				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("z")->setHoverable(true);
 
 				// Disabling Z axis for scaling operations on a billboard
 				if (_transformation == TransformationType::SCALING)
 				{
 					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
 					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("z")->setHoverable(false);
 				}
 
 				// Apply new billboard position / rotation / size

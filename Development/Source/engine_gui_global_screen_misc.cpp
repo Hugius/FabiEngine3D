@@ -101,13 +101,13 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		_valueFormIDs.push_back(ID);
 		addRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
 		addTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
-		addWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
-		getWriteField(ID)->setTextContent(valueString);
+		addWritefield(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		getWritefield(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active
 		if (!_isFocused)
 		{
-			getWriteField(ID)->setActive(true);
+			getWritefield(ID)->setActive(true);
 			_isFocused = true;
 		}
 
@@ -128,14 +128,14 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	{
 		bool done = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
-		bool entered = getWriteField(ID)->confirmedInput();
+		bool entered = getWritefield(ID)->confirmedInput();
 
 		// Check if user confirmed or cancelled
 		if (done || entered || cancelled)
 		{
 			if (done || entered) // Pressed done or ENTER
 			{
-				string content = getWriteField(ID)->getTextContent();
+				string content = getWritefield(ID)->getTextContent();
 				
 				// Check if writefield is not empty
 				if (content == "")
@@ -154,7 +154,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 
 				// Apply to value
 				valueString = content;
-				changed = getWriteField(ID)->hasTextContentChanged();
+				changed = getWritefield(ID)->hasTextContentChanged();
 			}
 
 			// Remove valueform(s)
@@ -321,7 +321,7 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 		{
 			deleteRectangle(tempID);
 			deleteTextfield(tempID);
-			deleteWriteField(tempID);
+			deleteWritefield(tempID);
 		}
 		_valueFormIDs.clear();
 
@@ -337,7 +337,7 @@ void EngineGuiGlobalScreen::_removeValueForm(const string& ID)
 	{
 		deleteRectangle(ID);
 		deleteTextfield(ID);
-		deleteWriteField(ID);
+		deleteWritefield(ID);
 		_valueFormIDs.erase(std::remove(_valueFormIDs.begin(), _valueFormIDs.end(), ID), _valueFormIDs.end());
 	}
 }

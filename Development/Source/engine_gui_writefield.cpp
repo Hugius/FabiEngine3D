@@ -2,7 +2,7 @@
 
 #include <map>
 
-EngineGuiWriteField::EngineGuiWriteField(
+EngineGuiWritefield::EngineGuiWritefield(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
 	Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed) :
 	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true),
@@ -16,14 +16,14 @@ EngineGuiWriteField::EngineGuiWriteField(
 	_fe3d.textEntity_setTextContent(_textfield->getEntityID(), "|", CHAR_WIDTH);
 }
 
-void EngineGuiWriteField::update(bool hoverable)
+void EngineGuiWritefield::update(bool hoverable)
 {
 	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }
 
-void EngineGuiWriteField::_updateActivation()
+void EngineGuiWritefield::_updateActivation()
 {
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -41,7 +41,7 @@ void EngineGuiWriteField::_updateActivation()
 	}
 }
 
-void EngineGuiWriteField::_updateTyping()
+void EngineGuiWritefield::_updateTyping()
 {
 	if (_isActive)
 	{
@@ -237,35 +237,35 @@ void EngineGuiWriteField::_updateTyping()
 	}
 }
 
-void EngineGuiWriteField::setActive(bool active)
+void EngineGuiWritefield::setActive(bool active)
 {
 	_isActive = active;
 }
 
-void EngineGuiWriteField::setPermActive(bool active)
+void EngineGuiWritefield::setPermActive(bool active)
 {
 	_isActive = active;
 	_mustBeActive = active;
 }
 
-bool EngineGuiWriteField::confirmedInput()
+bool EngineGuiWritefield::confirmedInput()
 {
 	return _confirmedInput;
 }
 
-bool EngineGuiWriteField::isActive()
+bool EngineGuiWritefield::isActive()
 {
 	return _isActive;
 }
 
-bool EngineGuiWriteField::hasTextContentChanged()
+bool EngineGuiWritefield::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
 	_lastTextContent = _currentTextContent;
 	return result;
 }
 
-string EngineGuiWriteField::getTextContent()
+string EngineGuiWritefield::getTextContent()
 {
 	// Check if user filled in a minus without a number
 	if (_currentTextContent == "-" && _noSpecials && _minusAllowed)
@@ -278,7 +278,7 @@ string EngineGuiWriteField::getTextContent()
 	}
 }
 
-void EngineGuiWriteField::setTextContent(const string& content)
+void EngineGuiWritefield::setTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

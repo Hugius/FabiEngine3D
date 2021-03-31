@@ -67,9 +67,9 @@ void SceneEditor::_activateModel(const string& modelID)
 
 	// Filling writefields
 	Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string tempID = modelID;
@@ -114,9 +114,9 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 
 	// Filling writefields
 	Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the billboardID and updating the text content
 	string tempID = billboardID;
@@ -158,11 +158,11 @@ void SceneEditor::_activateAudio(const string& audioID)
 	Vec3 position = _fe3d.audioEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
 	float maxVolume = _fe3d.audioEntity_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
 	float maxDistance = _fe3d.audioEntity_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
 	// Removing the unique number from the audioID and updating the text content
 	string tempID = audioID;
@@ -228,7 +228,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	}
 
 	// Writefield handling
-	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID);
+	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID);
 	if (writefield->confirmedInput())
 	{
 		if (writefield->getTextContent() != "")
@@ -247,9 +247,9 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	value = std::clamp(value, minimum, maximum);
 
 	// Writefield filling
-	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID)->isActive())
+	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID)->isActive())
 	{
-		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID)->
+		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID)->
 			setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }

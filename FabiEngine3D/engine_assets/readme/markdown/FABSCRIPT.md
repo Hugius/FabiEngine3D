@@ -103,6 +103,7 @@ PULL temp1 6
 - Division syntax: `DIV <name> <value>`.
 - Negation syntax: `NEG <name>`.
 - The result of the arithmetic operation will be stored in the variable the operation was applied on.
+- Arithmetic can be applied on individual list elements, but not the list itself!
 #### Example code
 ```
 INT myInteger = 40

@@ -33,25 +33,17 @@
 - A variable name **must** be unique and not conflicting with FabScript keywords.
 - A variable name **must** start with an alpha value (abc...).
 - A global variable name **must** start with '_'
-#### Casting
-- You can **cast** a variable to a different type using: `CAST <name> <type>`.
-- You can cast from INT to DEC and vice versa.
-- You can cast from INT to BOOL and vice versa.
-- You can cast from BOOL to STR and vice versa (if possible).
-- You can cast from INT to STR and vice versa (if possible).
-- You can cast from DEC to STR and vice versa (if possible).
-- You can cast from VEC3 to STR and vice versa (if possible).
 #### Basic values
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
 - A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case **NOT** placeholders).
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`).
 - An integer is a whole number which can also be negative (example: `42`).
 - A decimal is a floating point number which can also be negative (example: `42.536`).
-#### VEC3
+#### Special values - VEC3
 - A vec3 is composed of 3 individual **decimal** values (example: `[1.0 2.0 3.0]`).
 - Usually a VEC3 is a position/direction or color.
 - To **access/change** the individual components, add .x/.y/.z or .r/.g/.b after the variable name (example: `<name>.x`).
-#### LIST
+#### Special values - LIST
 - A list is a special type of variable that holds 0 or more **individual values** (example: `{42, "test", <false>}`).
 - A list **cannot** hold another list value/variable.
 - You can **access** individual list components using: `<name>[<index>]`.
@@ -59,6 +51,15 @@
 - You can **delete** an existing value from the list using: `PULL <name> <index>`.
 - Remember: an index starts from **0**!
 - You **cannot** access a VEC3 decimal from a list directly.
+#### Type casting
+- You can **cast** a variable to a different **type** using: `CAST <name> <type>`.
+- You can cast from INT to DEC and vice versa.
+- You can cast from INT to BOOL and vice versa.
+- You can cast from BOOL to STR and vice versa (if possible).
+- You can cast from INT to STR and vice versa (if possible).
+- You can cast from DEC to STR and vice versa (if possible).
+- You can cast from VEC3 to STR and vice versa (if possible).
+- You **cannot** cast (an element of) a LIST variable.
 #### Example code
 ```
 /// Variable syntax for each type

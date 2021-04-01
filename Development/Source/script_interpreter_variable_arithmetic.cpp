@@ -64,7 +64,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Check if variable exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("variable \"" + nameString + "\" not found!");
+		_throwScriptError("variable not existing!");
 		return;
 	}
 
@@ -76,7 +76,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	{
 		if (variableOne.getType() == ScriptVariableType::MULTIPLE || variableOne.getValue().getType() != ScriptValueType::VEC3)
 		{
-			_throwScriptError("variable with ID \"" + variableOne.getID() + "\" is not a vec3!");
+			_throwScriptError("variable is not a vec3!");
 			return;
 		}
 	}
@@ -114,7 +114,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Check if variable can be changed
 	if (variableOne.isConstant())
 	{
-		_throwScriptError("variable \"" + nameString + "\" cannot be changed, it is constant!");
+		_throwScriptError("variable cannot be changed, it is constant!");
 		return;
 	}
 
@@ -192,7 +192,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			// Check if variable exists
 			if (!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
 			{
-				_throwScriptError("variable \"" + valueString + "\" not found!");
+				_throwScriptError("variable not existing!");
 				return;
 			}
 
@@ -205,7 +205,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		{
 			if (variableTwo->getType() == ScriptVariableType::MULTIPLE || variableTwo->getValue().getType() != ScriptValueType::VEC3)
 			{
-				_throwScriptError("variable with ID \"" + variableTwo->getID() + "\" is not a vec3!");
+				_throwScriptError("variable is not a vec3!");
 				return;
 			}
 		}

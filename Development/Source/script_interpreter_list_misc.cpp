@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 	// Check if variable is a list in the first place
 	if (list.getType() == ScriptVariableType::SINGLE)
 	{
-		_throwScriptError("variable with ID \"" + list.getID() + "\" is not a list!");
+		_throwScriptError("variable is not a list!");
 		return false;
 	}
 
@@ -99,7 +99,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// Check if list exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("list variable \"" + nameString + "\" not found!");
+		_throwScriptError("list not existing!");
 		return;
 	}
 
@@ -109,14 +109,14 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// A constant list should not be changed
 	if (listVariable.isConstant())
 	{
-		_throwScriptError("cannot push to list variable \"" + nameString + "\", it is constant!");
+		_throwScriptError("cannot push to list: it is constant!");
 		return;
 	}
 	
 	// Determine value type
 	if (_isListValue(valueString)) // LIST
 	{
-		_throwScriptError("cannot push list to a list variable!");
+		_throwScriptError("cannot push a list to another list!");
 		return;
 	}
 	else if (_isVec3Value(valueString)) // VEC3
@@ -188,7 +188,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			{
 				if (otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
 				{
-					_throwScriptError("variable with ID \"" + otherVariable.getID() + "\" is not a vec3!");
+					_throwScriptError("variable is not a vec3!");
 					return;
 				}
 			}
@@ -210,7 +210,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			
 			if (otherVariable.getType() == ScriptVariableType::MULTIPLE && !isAccessingList) // List value
 			{
-				_throwScriptError("cannot push list to a list variable!");
+				_throwScriptError("cannot push a list to another list!");
 				return;
 			}
 			else if (vec3Parts != Ivec3(0)) // Vec3 part value
@@ -275,7 +275,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	// Check if list exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("list variable \"" + nameString + "\" not found!");
+		_throwScriptError("list not existing!");
 		return;
 	}
 
@@ -285,7 +285,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	// A constant list should not be changed
 	if (listVariable.isConstant())
 	{
-		_throwScriptError("cannot push to list variable \"" + nameString + "\", it is constant!");
+		_throwScriptError("cannot push to list: it is constant!");
 		return;
 	}
 

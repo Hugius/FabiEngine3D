@@ -107,7 +107,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			{
 				if (_isLocalVariableExisting(nameString))
 				{
-					_throwScriptError("local variable \"" + nameString + "\" already defined!");
+					_throwScriptError("variable already defined!");
 					return;
 				}
 			}
@@ -115,7 +115,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			{
 				if (_isGlobalVariableExisting(nameString))
 				{
-					_throwScriptError("global variable \"" + nameString + "\" already defined!");
+					_throwScriptError("variable already defined!");
 					return;
 				}
 			}
@@ -285,7 +285,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 							if (otherVariable.getType() == ScriptVariableType::MULTIPLE || 
 								otherVariable.getValue().getType() != ScriptValueType::VEC3)
 							{
-								_throwScriptError("variable with ID \"" + otherVariable.getID() + "\" is not a vec3!");
+								_throwScriptError("variable is not a vec3!");
 								return;
 							}
 						}

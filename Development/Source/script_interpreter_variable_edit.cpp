@@ -87,7 +87,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	// Check if variable exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("variable \"" + nameString + "\" not found!");
+		_throwScriptError("variable not existing!");
 		return;
 	}
 
@@ -97,7 +97,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	// A constant variable should not be changed
 	if (variable.isConstant())
 	{
-		_throwScriptError("variable \"" + nameString + "\" cannot be changed, it is constant!");
+		_throwScriptError("variable cannot be changed: it is constant!");
 		return;
 	}
 
@@ -106,7 +106,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	{
 		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
 		{
-			_throwScriptError("variable with ID \"" + variable.getID() + "\" is not a vec3!");
+			_throwScriptError("variable is not a vec3!");
 			return;
 		}
 	}
@@ -207,7 +207,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an array
+		if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an list
 		{
 			variable.changeValues(values);
 		}
@@ -319,7 +319,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			{
 				if (otherVariable.getType() == ScriptVariableType::MULTIPLE || otherVariable.getValue().getType() != ScriptValueType::VEC3)
 				{
-					_throwScriptError("variable with ID \"" + otherVariable.getID() + "\" is not a vec3!");
+					_throwScriptError("variable is not a vec3!");
 					return;
 				}
 			}

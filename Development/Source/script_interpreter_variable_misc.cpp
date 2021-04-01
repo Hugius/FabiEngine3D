@@ -14,17 +14,24 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	// Check if variable exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
-		_throwScriptError("variable \"" + nameString + "\" not found!");
+		_throwScriptError("variable not existing!");
 		return;
 	}
 
 	// Retrieve variable
 	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
 
+	// Check if variable is not a list
+	if (variable.getType() == ScriptVariableType::MULTIPLE)
+	{
+		_throwScriptError("list variables cannot be typecasted!");
+		return;
+	}
+
 	// Check if variable can be changed
 	if (variable.isConstant())
 	{
-		_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, it is constant!");
+		_throwScriptError("constant variables cannot be typecasted!");
 		return;
 	}
 
@@ -83,7 +90,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to boolean, invalid string!");
+			_throwScriptError("variable cannot be typecasted to boolean: invalid string!");
 			return;
 		}
 	}
@@ -96,7 +103,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to integer, invalid string!");
+			_throwScriptError("variable cannot be typecasted to integer: invalid string!");
 			return;
 		}
 	}
@@ -109,7 +116,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to decimal, invalid string!");
+			_throwScriptError("variable cannot be typecasted to decimal: invalid string!");
 			return;
 		}
 	}
@@ -122,13 +129,13 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to vec3, invalid string!");
+			_throwScriptError("variable cannot be typecasted to vec3: invalid string!");
 			return;
 		}
 	}
 	else
 	{
-		_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, wrong type!");
+		_throwScriptError("variable cannot be typecasted: wrong type!");
 		return;
 	}
 
@@ -177,7 +184,7 @@ ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 		}
 	}
 
-	_fe3d.logger_throwError("Local script variable \"" + variableID + "\" not found!");
+	_fe3d.logger_throwError("Local script variable \"" + variableID + "\" not existing!");
 }
 
 ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
@@ -190,5 +197,5 @@ ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
 		}
 	}
 
-	_fe3d.logger_throwError("Global script variable \"" + variableID + "\" not found!");
+	_fe3d.logger_throwError("Global script variable \"" + variableID + "\" not existing!");
 }

@@ -278,7 +278,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 						{
 							if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
 							{
-								_throwScriptError("variable with ID \"" + variable.getID() + "\" is not a vec3!");
+								_throwScriptError("variable is not a vec3!");
 								return {};
 							}
 						}
@@ -313,7 +313,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 						}
 						else // Cannot be list variable
 						{
-							_throwScriptError("list variable cannot be used inside a list!");
+							_throwScriptError("list cannot be used inside another list!");
 							return {};
 						}
 
@@ -327,7 +327,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 					}
 					else
 					{
-						_throwScriptError("variable \"" + currentValueString + "\" does not exist!");
+						_throwScriptError("variable not existing!");
 						return {};
 					}
 				}

@@ -150,8 +150,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					alpha >>
 					lightness >>
 					partCount;
-				
-				bool warningThrown = false;
 
 				// Perform part checks
 				if (partCount > 1)
@@ -169,7 +167,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					if (partIDs.size() != _fe3d.modelEntity_getPartIDs(previewID).size())
 					{
 						_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
-						warningThrown = true;
+						continue;
 					}
 
 					// Check if preview model parts changed
@@ -178,31 +176,25 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 						if (partIDs[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
 						{
 							_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
-							warningThrown = true;
+							continue;
 						}
 					}
-				}
-
-				// Check if preview model instancing changed
-				if (_fe3d.modelEntity_isExisting(previewID))
-				{
-					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
-						!_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
-					{
-						_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
-						warningThrown = true;
-					}
-				}
-
-				// Skip model placement if anything went wrong
-				if (warningThrown)
-				{
-					continue;
 				}
 
 				// Add model
 				if (_copyPreviewModel(modelID, previewID, position))
 				{
+					// Check if preview model instancing changed
+					if (_fe3d.modelEntity_isExisting(previewID))
+					{
+						if (_fe3d.modelEntity_isInstanced(modelID) != _fe3d.modelEntity_isInstanced(previewID))
+						{
+							_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
+							_fe3d.modelEntity_delete(modelID);
+							continue;
+						}
+					}
+
 					// Set properties
 					_fe3d.modelEntity_setRotation(modelID, rotation);
 					_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin);

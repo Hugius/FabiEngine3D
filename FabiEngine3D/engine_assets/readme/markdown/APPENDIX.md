@@ -34,7 +34,8 @@
 - Furthermore there are some other values that cannot be lower than 0.0 (**sprite animaton repeat**, **lens flare multiplier**, **motion blur strength**, **model animation speed multiplier**).
 - Furthermore there are some other values that are clamped between 0.0 and 1.0 (**fog thickness**).
 ### Miscellaneous
-- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF & fog.
+- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
+- Text entities are rendered **on top of** image entities, because of the rendering order.
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

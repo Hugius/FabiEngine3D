@@ -401,7 +401,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.billboardEntity_setLightness(billboardID, lightness);
 					_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
 					_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
-					!isVisible ? _fe3d.modelEntity_hide(billboardID) : void();
+					!isVisible ? _fe3d.billboardEntity_hide(billboardID) : void();
 					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);

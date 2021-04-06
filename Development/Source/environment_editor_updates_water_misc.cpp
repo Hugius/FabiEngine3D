@@ -20,7 +20,7 @@ void EnvironmentEditor::_updateWaterCreation()
 {
 	if (_isEditorLoaded)
 	{
-		if (_waterCreationEnabled)
+		if (_isWaterCreationEnabled)
 		{
 			string newWaterName;
 
@@ -47,8 +47,8 @@ void EnvironmentEditor::_updateWaterCreation()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
 								"Water: " + _currentWaterID.substr(1), 0.025f);
 							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
-							_waterCreationEnabled = false;
-							_waterEditingEnabled = true;
+							_isWaterCreationEnabled = false;
+							_isWaterEditingEnabled = true;
 						}
 						else
 						{
@@ -73,7 +73,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 {
 	if (_isEditorLoaded)
 	{
-		if (_waterChoosingEnabled)
+		if (_isWaterChoosingEnabled)
 		{
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("waterList");
@@ -94,7 +94,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 					_hoveredWaterID = "";
 
 					// Only if going to editor
-					if (_waterEditingEnabled)
+					if (_isWaterEditingEnabled)
 					{
 						// Go to editor screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
@@ -110,7 +110,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
-					_waterChoosingEnabled = false;
+					_isWaterChoosingEnabled = false;
 				}
 				else
 				{
@@ -120,9 +120,9 @@ void EnvironmentEditor::_updateWaterChoosing()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList")) // Cancelled choosing
 			{
-				_waterChoosingEnabled = false;
-				_waterEditingEnabled = false;
-				_waterRemovalEnabled = false;
+				_isWaterChoosingEnabled = false;
+				_isWaterEditingEnabled = false;
+				_isWaterRemovalEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("waterList");
 			}
 			else // Nothing hovered
@@ -143,7 +143,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 {
 	if (_isEditorLoaded)
 	{
-		if (_waterRemovalEnabled && _currentWaterID != "")
+		if (_isWaterRemovalEnabled && _currentWaterID != "")
 		{
 			_gui.getGlobalScreen()->addAnswerForm("removeWater", "Are you sure?", Vec2(0.0f, 0.25f));
 
@@ -154,13 +154,13 @@ void EnvironmentEditor::_updateWaterRemoval()
 
 				// Delete from name record
 				_loadedWaterIDs.erase(std::remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
-				_waterRemovalEnabled = false;
+				_isWaterRemovalEnabled = false;
 				_currentWaterID = "";
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeWater"))
 			{
 				_fe3d.waterEntity_select("");
-				_waterRemovalEnabled = false;
+				_isWaterRemovalEnabled = false;
 				_currentWaterID = "";
 			}
 		}

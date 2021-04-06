@@ -84,7 +84,7 @@ void ModelEditor::_updateEditingScreen()
 						_fe3d.modelEntity_hide(_currentModelID);
 					}
 
-					// Reset variables and go back to main screen
+					// Go back to main screen
 					_isEditingModel = false;
 					_currentModelID = "";
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");

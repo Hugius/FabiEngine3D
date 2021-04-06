@@ -16,7 +16,7 @@ void ModelEditor::_updateModelEditingSize()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_resizingToggled = false;
+				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
 				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), "Mesh resize: OFF");
 				_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), "Direction: X");
@@ -30,10 +30,10 @@ void ModelEditor::_updateModelEditingSize()
 			}
 			else if (screen->getButton("toggleResize")->isHovered())
 			{
-				_resizingToggled = !_resizingToggled;
+				_isResizingToggled = !_isResizingToggled;
 
 				// Toggle resize
-				string newContent = _resizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF";
+				string newContent = _isResizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF";
 				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), newContent);
 			}
 			else if (screen->getButton("direction")->isHovered())
@@ -48,7 +48,7 @@ void ModelEditor::_updateModelEditingSize()
 		}
 
 		// Update resizing through cursor
-		if (_resizingToggled)
+		if (_isResizingToggled)
 		{
 			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
 			Vec3 newSize = _fe3d.modelEntity_getSize(_currentModelID);

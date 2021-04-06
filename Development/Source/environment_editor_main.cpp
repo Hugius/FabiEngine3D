@@ -217,7 +217,7 @@ void EnvironmentEditor::unload()
 	unloadTerrainEntities();
 	unloadWaterEntities();
 
-	// Reset variables
+	// Reset editor properties
 	_loadedSkyIDs.clear();
 	_loadedTerrainIDs.clear();
 	_loadedWaterIDs.clear();
@@ -230,18 +230,18 @@ void EnvironmentEditor::unload()
 	_hoveredTerrainID = "";
 	_currentWaterID = "";
 	_hoveredWaterID = "";
-	_skyCreationEnabled = false;
-	_skyChoosingEnabled = false;
-	_skyEditingEnabled = false;
-	_skyRemovalEnabled = false;
-	_terrainCreationEnabled = false;
-	_terrainChoosingEnabled = false;
-	_terrainEditingEnabled = false;
-	_terrainRemovalEnabled = false;
-	_waterCreationEnabled = false;
-	_waterChoosingEnabled = false;
-	_waterEditingEnabled = false;
-	_waterRemovalEnabled = false;
+	_isSkyCreationEnabled = false;
+	_isSkyChoosingEnabled = false;
+	_isSkyEditingEnabled = false;
+	_isSkyRemovalEnabled = false;
+	_isTerrainCreationEnabled = false;
+	_isTerrainChoosingEnabled = false;
+	_isTerrainEditingEnabled = false;
+	_isTerrainRemovalEnabled = false;
+	_isWaterCreationEnabled = false;
+	_isWaterChoosingEnabled = false;
+	_isWaterEditingEnabled = false;
+	_isWaterRemovalEnabled = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");

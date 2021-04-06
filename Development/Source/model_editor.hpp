@@ -81,10 +81,9 @@ private:
 	bool _isChoosingModel = false;
 	bool _isEditingModel = false;
 	bool _isDeletingModel = false;
-	bool _movingToggled = false;
-	bool _resizingToggled = false;
+	bool _isMovingToggled = false;
+	bool _isResizingToggled = false;
 	bool _isEditorLoaded = false;
-	bool _isPreLoaded = false;
 
 	// Miscellaneous
 	Direction _transformationDirection = Direction::X;

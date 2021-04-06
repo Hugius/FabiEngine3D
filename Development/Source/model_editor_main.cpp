@@ -165,15 +165,15 @@ void ModelEditor::unload()
 	_cameraAcceleration = Vec2(0.0f);
 	_lastCursorPos = Vec2(0.0f);
 	_cameraDistance = 5.0f;
-	_cameraSpeed = 0.1f;
 	_cameraScrollingAcceleration = 0.0f;
 	_aabbTransformationSpeed = 0.1f;
+	_cameraSpeed = 0.1f;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isEditingModel = false;
-	_movingToggled = false;
-	_resizingToggled = false;
 	_isDeletingModel = false;
+	_isMovingToggled = false;
+	_isResizingToggled = false;
 	_isEditorLoaded = false;
 	_transformationDirection = Direction::X;
 

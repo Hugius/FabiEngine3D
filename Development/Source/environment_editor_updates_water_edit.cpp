@@ -18,21 +18,21 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			}
 			else if (screen->getButton("create")->isHovered())
 			{
-				_waterCreationEnabled = true;
+				_isWaterCreationEnabled = true;
 				_gui.getGlobalScreen()->addValueForm("newWaterName", "New water name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
-				_waterChoosingEnabled = true;
-				_waterEditingEnabled = true;
+				_isWaterChoosingEnabled = true;
+				_isWaterEditingEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
-				_waterChoosingEnabled = true;
-				_waterRemovalEnabled = true;
+				_isWaterChoosingEnabled = true;
+				_isWaterRemovalEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), IDs);
@@ -59,11 +59,11 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 				_fe3d.waterEntity_select("");
 				_hoveredTerrainID = "";
 				_currentWaterID = "";
-				_waterEditingEnabled = false;
+				_isWaterEditingEnabled = false;
 			}
 			else if (screen->getButton("terrain")->isHovered())
 			{
-				_terrainChoosingEnabled = true;
+				_isTerrainChoosingEnabled = true;
 				for (auto& name : _loadedTerrainIDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _loadedTerrainIDs);
 				for (auto& name : _loadedTerrainIDs) { name = "@" + name; }
@@ -87,7 +87,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 
 		// Update preview terrain choosing
-		if (_terrainChoosingEnabled)
+		if (_isTerrainChoosingEnabled)
 		{
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
@@ -111,7 +111,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
-					_terrainChoosingEnabled = false;
+					_isTerrainChoosingEnabled = false;
 				}
 				else
 				{
@@ -121,7 +121,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 			{
-				_terrainChoosingEnabled = false;
+				_isTerrainChoosingEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 			}
 			else // Nothing hovered

@@ -14,8 +14,8 @@ void ModelEditor::_updateModelEditingAabb()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_movingToggled = false;
-				_resizingToggled = false;
+				_isMovingToggled = false;
+				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
 				_currentAabbID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -40,8 +40,8 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
-				_movingToggled = false;
-				_resizingToggled = false;
+				_isMovingToggled = false;
+				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
 				_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
 				_currentAabbID = "";
@@ -53,18 +53,18 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("toggleMove")->isHovered())
 			{
-				_movingToggled = !_movingToggled;
+				_isMovingToggled = !_isMovingToggled;
 
 				// Toggle box move
-				string newContent = _resizingToggled ? "Box move: ON" : "Box move: OFF";
+				string newContent = _isResizingToggled ? "Box move: ON" : "Box move: OFF";
 				_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), newContent);
 			}
 			else if (screen->getButton("toggleResize")->isHovered())
 			{
-				_resizingToggled = !_resizingToggled;
+				_isResizingToggled = !_isResizingToggled;
 
 				// Toggle box resize
-				string newContent = _resizingToggled ? "Box resize: ON" : "Box resize: OFF";
+				string newContent = _isResizingToggled ? "Box resize: ON" : "Box resize: OFF";
 				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), newContent);
 			}
 			else if (screen->getButton("direction")->isHovered())
@@ -100,8 +100,8 @@ void ModelEditor::_updateModelEditingAabb()
 	string directions[3] = { "X", "Y", "Z" };
 	string newContent = "Direction: " + directions[int(_transformationDirection)];
 	_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), newContent);
-	_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), _movingToggled ? "Box move: ON" : "Box move: OFF");
-	_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), _resizingToggled ? "Box resize: ON" : "Box resize: OFF");
+	_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), _isMovingToggled ? "Box move: ON" : "Box move: OFF");
+	_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), _isResizingToggled ? "Box resize: ON" : "Box resize: OFF");
 
 	// Filling transformation speed
 	if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
@@ -130,8 +130,8 @@ void ModelEditor::_updateModelEditingAabb()
 					_currentAabbID = newAabbName;
 
 					// Reset editing
-					_movingToggled = false;
-					_resizingToggled = false;
+					_isMovingToggled = false;
+					_isResizingToggled = false;
 					_transformationDirection = Direction::X;
 
 					// Show AABB title
@@ -172,8 +172,8 @@ void ModelEditor::_updateModelEditingAabb()
 				_currentAabbID = selectedButtonID;
 
 				// Reset editing
-				_movingToggled = false;
-				_resizingToggled = false;
+				_isMovingToggled = false;
+				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
 
 				// Show AABB title
@@ -203,7 +203,7 @@ void ModelEditor::_updateModelEditingAabb()
 	if (_currentAabbID != "" && !_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update moving through cursor
-		if (_movingToggled)
+		if (_isMovingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 			Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "@" + _currentAabbID);
@@ -229,7 +229,7 @@ void ModelEditor::_updateModelEditingAabb()
 		}
 
 		// Update resizing through cursor
-		if (_resizingToggled)
+		if (_isResizingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "@" + _currentAabbID);

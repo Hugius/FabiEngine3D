@@ -82,7 +82,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if waited long enough for continuous action
 			if (_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
 			{
-				_continuousActionAllowed = true;
+				_isContinuousActionAllowed = true;
 				_passedFrames = 0;
 			}
 			else // Keep waiting
@@ -96,8 +96,8 @@ void ScriptEditor::_updateTextWriter()
 		{
 			_activeActionKey = InputType::NONE;
 			_passedFrames = 0;
-			_singleActionAllowed = true;
-			_continuousActionAllowed = false;
+			_isSingleActionAllowed = true;
+			_isContinuousActionAllowed = false;
 		}
 
 		// Determine text functionality type
@@ -130,11 +130,11 @@ void ScriptEditor::_updateTextWriter()
 				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
 				{
 					// Check if single or fast new line action
-					if (_singleActionAllowed || _continuousActionAllowed)
+					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
-							_singleActionAllowed = false;
+							_isSingleActionAllowed = false;
 
 							// Extract remaining text in current line from cursor position
 							string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
@@ -159,11 +159,11 @@ void ScriptEditor::_updateTextWriter()
 		else if (_activeActionKey == InputType::KEY_LEFT) // Left arrow key
 		{
 			// Check if single or fast cursor move
-			if (_singleActionAllowed || _continuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
-					_singleActionAllowed = false;
+					_isSingleActionAllowed = false;
 
 					if (cursorCharIndex > 0) // If cursor somewhere on the line
 					{
@@ -183,11 +183,11 @@ void ScriptEditor::_updateTextWriter()
 		else if (_activeActionKey == InputType::KEY_RIGHT) // Right arrow key
 		{
 			// Check if single or fast cursor move
-			if (_singleActionAllowed || _continuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
-					_singleActionAllowed = false;
+					_isSingleActionAllowed = false;
 
 					// If cursor somewhere on the line
 					if (cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
@@ -209,11 +209,11 @@ void ScriptEditor::_updateTextWriter()
 		else if (_activeActionKey == InputType::KEY_UP) // Up arrow key
 		{
 			// Check if single or fast cursor move
-			if (_singleActionAllowed || _continuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
-					_singleActionAllowed = false;
+					_isSingleActionAllowed = false;
 
 					if (cursorLineIndex > 0) // Check if trying to move cursor out of screen
 					{
@@ -231,11 +231,11 @@ void ScriptEditor::_updateTextWriter()
 		else if (_activeActionKey == InputType::KEY_DOWN) // Down arrow key
 		{
 			// Check if single or fast cursor move
-			if (_singleActionAllowed || _continuousActionAllowed)
+			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
-					_singleActionAllowed = false;
+					_isSingleActionAllowed = false;
 
 					// Check if trying to move cursor out of screen
 					if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
@@ -339,11 +339,11 @@ void ScriptEditor::_updateTextWriter()
 				if (_firstSelectedLineIndex == -1)
 				{
 					// Check if single or fast remove
-					if (_singleActionAllowed || _continuousActionAllowed)
+					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
+						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
-							_singleActionAllowed = false;
+							_isSingleActionAllowed = false;
 
 							// Jump to line above if cursor at beginning of line
 							if (cursorCharIndex == 0 && _activeActionKey == InputType::KEY_BACKSPACE)

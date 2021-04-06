@@ -68,7 +68,7 @@ void AudioEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 
-	// Reset variables
+	// Reset editor properties
 	_loadedAudioIDs.clear();
 	_currentAudioID = "";
 	_hoveredAudioID = "";

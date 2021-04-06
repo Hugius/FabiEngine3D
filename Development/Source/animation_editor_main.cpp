@@ -111,7 +111,7 @@ void AnimationEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationFrame");
 
-	// Reset variables
+	// Reset editor properties
 	_animations.clear();
 	_startedAnimations.clear();
 	_currentAnimationID = "";

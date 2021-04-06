@@ -126,7 +126,7 @@ void BillboardEditor::unload()
 	// Delete billboard name textfield
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
-	// Reset variables
+	// Reset editor properties
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
 	_isEditingBillboard = false;

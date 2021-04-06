@@ -91,26 +91,26 @@ private:
 	vector <string> _loadedSkyIDs;
 	string _currentSkyID = "";
 	string _hoveredSkyID = "";
-	bool _skyCreationEnabled = false;
-	bool _skyChoosingEnabled = false;
-	bool _skyEditingEnabled = false;
-	bool _skyRemovalEnabled = false;
+	bool _isSkyCreationEnabled = false;
+	bool _isSkyChoosingEnabled = false;
+	bool _isSkyEditingEnabled = false;
+	bool _isSkyRemovalEnabled = false;
 
 	// Terrain variables
 	vector <string> _loadedTerrainIDs;
 	string _currentTerrainID = "";
 	string _hoveredTerrainID = "";
-	bool _terrainCreationEnabled = false;
-	bool _terrainChoosingEnabled = false;
-	bool _terrainEditingEnabled = false;
-	bool _terrainRemovalEnabled = false;
+	bool _isTerrainCreationEnabled = false;
+	bool _isTerrainChoosingEnabled = false;
+	bool _isTerrainEditingEnabled = false;
+	bool _isTerrainRemovalEnabled = false;
 
 	// Water variables
 	vector <string> _loadedWaterIDs;
 	string _currentWaterID = "";
 	string _hoveredWaterID = "";
-	bool _waterCreationEnabled = false;
-	bool _waterChoosingEnabled = false;
-	bool _waterEditingEnabled = false;
-	bool _waterRemovalEnabled = false;
+	bool _isWaterCreationEnabled = false;
+	bool _isWaterChoosingEnabled = false;
+	bool _isWaterEditingEnabled = false;
+	bool _isWaterRemovalEnabled = false;
 };

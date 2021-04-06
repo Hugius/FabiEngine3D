@@ -51,8 +51,8 @@ private:
 	bool _isEditorLoaded = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
-	bool _singleActionAllowed = true;
-	bool _continuousActionAllowed = false;
+	bool _isSingleActionAllowed = true;
+	bool _isContinuousActionAllowed = false;
 	bool _wasGuiFocused = false;
 	bool _hasClickedLMB = false;
 	int _firstSelectedLineIndex = -1;

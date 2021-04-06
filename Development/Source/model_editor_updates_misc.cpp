@@ -44,7 +44,7 @@ void ModelEditor::_updateCamera()
 		// Update scrolling
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			if (!_movingToggled && !_resizingToggled) // No active moving or resizing
+			if (!_isMovingToggled && !_isResizingToggled) // No active moving or resizing
 			{
 				// Add to acceleration
 				_cameraScrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / SCROLL_WHEEL_DIVIDER) * _cameraSpeed;

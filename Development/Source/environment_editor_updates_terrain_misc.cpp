@@ -20,7 +20,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 {
 	if (_isEditorLoaded)
 	{
-		if (_terrainCreationEnabled)
+		if (_isTerrainCreationEnabled)
 		{
 			string newTerrainName;
 
@@ -45,8 +45,8 @@ void EnvironmentEditor::_updateTerrainCreation()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
-							_terrainCreationEnabled = false;
-							_terrainEditingEnabled = true;
+							_isTerrainCreationEnabled = false;
+							_isTerrainEditingEnabled = true;
 						}
 						else
 						{
@@ -71,7 +71,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 {
 	if (_isEditorLoaded)
 	{
-		if (_terrainChoosingEnabled)
+		if (_isTerrainChoosingEnabled)
 		{
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
@@ -92,7 +92,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 					_hoveredTerrainID = "";
 
 					// Only if going to editor
-					if (_terrainEditingEnabled)
+					if (_isTerrainEditingEnabled)
 					{
 						// Go to editor screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
@@ -111,7 +111,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
-					_terrainChoosingEnabled = false;
+					_isTerrainChoosingEnabled = false;
 				}
 				else
 				{
@@ -121,9 +121,9 @@ void EnvironmentEditor::_updateTerrainChoosing()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 			{
-				_terrainChoosingEnabled = false;
-				_terrainEditingEnabled = false;
-				_terrainRemovalEnabled = false;
+				_isTerrainChoosingEnabled = false;
+				_isTerrainEditingEnabled = false;
+				_isTerrainRemovalEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 			}
 			else // Nothing hovered
@@ -148,7 +148,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 {
 	if (_isEditorLoaded)
 	{
-		if (_terrainRemovalEnabled && _currentTerrainID != "")
+		if (_isTerrainRemovalEnabled && _currentTerrainID != "")
 		{
 			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", Vec2(0.0f, 0.25f));
 
@@ -159,13 +159,13 @@ void EnvironmentEditor::_updateTerrainRemoval()
 
 				// Delete from name record
 				_loadedTerrainIDs.erase(std::remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
-				_terrainRemovalEnabled = false;
+				_isTerrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeTerrain"))
 			{
 				_fe3d.terrainEntity_select("");
-				_terrainRemovalEnabled = false;
+				_isTerrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}
 		}

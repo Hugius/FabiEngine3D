@@ -190,7 +190,6 @@ private:
 	bool _gameMustStop = false;
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
-	bool _startedInitialization = false;
 	bool _isDebugging = false;
 
 	// String to input type map

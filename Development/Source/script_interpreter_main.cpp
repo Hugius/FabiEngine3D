@@ -334,6 +334,9 @@ void ScriptInterpreter::unload()
 
 	// Reset all variables
 	_debuggingTimes.clear();
+	_localVariablesStack.clear();
+	_currentScriptIDsStack.clear();
+	_currentLineIndexStack.clear();
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
@@ -342,6 +345,7 @@ void ScriptInterpreter::unload()
 	_updateEntryID = "";
 	_destroyEntryID = "";
 	_lastLoggerMessageCount = 0;
+	_executionDepth = 0;
 	_hasThrownError = false;
 	_gameMustStop = false;
 	_scopeHasChanged = false;

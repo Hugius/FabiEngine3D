@@ -92,8 +92,8 @@ void ScriptEditor::unload()
 	_scrollingAcceleration = 0.0f;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
-	_singleActionAllowed = true;
-	_continuousActionAllowed = false;
+	_isSingleActionAllowed = true;
+	_isContinuousActionAllowed = false;
 	_wasGuiFocused = false;
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;

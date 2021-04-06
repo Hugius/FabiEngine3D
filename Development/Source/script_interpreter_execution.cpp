@@ -33,7 +33,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	// Detect infinite recursion
 	if (_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
-		_fe3d.logger_throwWarning("too many script execution layers, perhaps infinite recursion?");
+		_throwScriptError("too many script execution layers, perhaps infinite recursion?");
 	}
 
 	// Check if any engine warnings were thrown

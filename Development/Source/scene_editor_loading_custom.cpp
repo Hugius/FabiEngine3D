@@ -412,6 +412,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					if (isAnimationPlaying)
 					{
 						// Play
+						_fe3d.billboardEntity_stopAnimation(billboardID);
 						_fe3d.billboardEntity_playAnimation(billboardID, remainingAnimationRepeats);
 
 						// Pause

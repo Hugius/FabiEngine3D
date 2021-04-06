@@ -235,6 +235,13 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 		}
 	}
 
+	// Check if condition did not end with a logical operator
+	if (mustBeValue || mustBeComparisonOperator)
+	{
+		_throwScriptError("condition is incomplete!");
+		return false;
+	}
+
 	// Single condition
 	if (conditions.size() == 1)
 	{

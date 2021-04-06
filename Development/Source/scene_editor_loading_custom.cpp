@@ -388,6 +388,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					animationRowIndex >>
 					animationColumnIndex;
 
+				// Perform empty string & space conversions
+				textContent = (textContent == "?") ? "" : textContent;
+				std::replace(textContent.begin(), textContent.end(), '?', ' ');
+
 				// Add billboard
 				if (_copyPreviewBillboard(billboardID, previewID, position))
 				{

@@ -43,3 +43,25 @@
   Sets the **alpha** value for transparency of image with **ID**.
 - `fe3d:image_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of image with **ID**.
+- `fe3d:image_start_animation`(`STR` ID, `INT` rows, `INT` columns, `INT` framestep, `INT` loops) ---> `NONE`  
+  Starts a sprite animation on image with **ID** with a **rows** and **columns** amount of sprit at speed **framestep** and **loops** a certain amount of times.
+- `fe3d:image_pause_animation`(`STR` ID) ---> `NONE`  
+  Pauses the playing sprite animation on image with **ID**.
+- `fe3d:image_resume_animation`(`STR` ID) ---> `NONE`  
+  Resumes the paused sprite animation on image with **ID**.
+- `fe3d:image_stop_animation`(`STR` ID) ---> `NONE`  
+  Stops the playing sprite animation on image with **ID**.
+- `fe3d:image_is_animation_finished`(`STR` ID) ---> `BOOL`  
+  Returns true if animation on image with **ID** is finished.
+- `fe3d:image_is_animation_playing`(`STR` ID) ---> `BOOL`  
+  Returns true if animation on image with **ID** is playing.
+- `fe3d:image_is_animation_paused`(`STR` ID) ---> `BOOL`  
+  Returns true if animation on image with **ID** is paused.
+- `fe3d:image_set_mirrored_horizontally`(`STR` ID, `BOOL` enabled) ---> `NONE`  
+  Sets the horizontal mirroring of image with **ID** to **enabled**.
+- `fe3d:image_set_mirrored_vertically`(`STR` ID, `BOOL` enabled) ---> `NONE`  
+  Sets the vertical mirroring of image with **ID** to **enabled**.
+- `fe3d:image_is_mirrored_horizontally`(`STR` ID) ---> `BOOL`  
+  Returns true if image with **ID** is mirrored horizontally.
+- `fe3d:image_is_mirrored_vertically`(`STR` ID) ---> `BOOL`  
+  Returns true if image with **ID** is mirrored vertically.

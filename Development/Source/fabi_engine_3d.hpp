@@ -515,6 +515,8 @@ public:
 	void guiEntity_setAnimationRows(const string& ID, int rows);
 	void guiEntity_setAnimationColumns(const string& ID, int columns);
 	void guiEntity_setAnimationFramestep(const string& ID, int framestep);
+	void guiEntity_setMirroredHorizontally(const string& ID, bool mirrored);
+	void guiEntity_setMirroredVertically(const string& ID, bool mirrored);
 
 	// Gui entity interface - getters
 	bool guiEntity_isExisting(const string& ID);
@@ -523,6 +525,8 @@ public:
 	bool guiEntity_isAnimationFinished(const string& ID);
 	bool guiEntity_isAnimationPlaying(const string& ID);
 	bool guiEntity_isAnimationPaused(const string& ID);
+	bool guiEntity_isMirroredHorizontally(const string& ID);
+	bool guiEntity_isMirroredVertically(const string& ID);
 	Vec2 guiEntity_getPosition(const string& ID);
 	Vec2 guiEntity_getSize(const string& ID);
 	Vec2 guiEntity_getMinPosition(const string& ID);

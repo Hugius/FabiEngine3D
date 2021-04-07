@@ -201,6 +201,16 @@ void FabiEngine3D::guiEntity_setAnimationFramestep(const string& ID, int framest
 	_core->_guiEntityManager.getEntity(ID)->setMaxSpriteAnimationFramestep(framestep);
 }
 
+void FabiEngine3D::guiEntity_setMirroredHorizontally(const string& ID, bool mirrored)
+{
+	_core->_guiEntityManager.getEntity(ID)->setMirroredHorizontally(mirrored);
+}
+
+void FabiEngine3D::guiEntity_setMirroredVertically(const string& ID, bool mirrored)
+{
+	_core->_guiEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
+}
+
 bool FabiEngine3D::guiEntity_isAnimationFinished(const string& ID)
 {
 	int repeats = _core->_guiEntityManager.getEntity(ID)->getSpriteAnimationRepeats();
@@ -216,6 +226,16 @@ bool FabiEngine3D::guiEntity_isAnimationPlaying(const string& ID)
 bool FabiEngine3D::guiEntity_isAnimationPaused(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->isSpriteAnimationPaused();
+}
+
+bool FabiEngine3D::guiEntity_isMirroredHorizontally(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->isMirroredHorizonally();;
+}
+
+bool FabiEngine3D::guiEntity_isMirroredVertically(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->isMirroredVertically();;
 }
 
 int FabiEngine3D::guiEntity_getAnimationRows(const string& ID)

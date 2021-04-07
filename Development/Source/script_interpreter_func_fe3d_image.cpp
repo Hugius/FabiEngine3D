@@ -539,6 +539,66 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
+	else if (functionName == "fe3d:image_set_mirrored_horizontally")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				_fe3d.guiEntity_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_set_mirrored_vertically")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				_fe3d.guiEntity_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_is_mirrored_horizontally")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_isMirroredHorizontally(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_is_mirrored_vertically")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_isMirroredVertically(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

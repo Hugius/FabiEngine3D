@@ -61,7 +61,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		bool shadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
-		// Normalmapping are performance-heavy with little visual impact on reflections, so they should not appear
+		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
 		bool normalMappingEnabled = _renderBus.isNormalMappingEnabled();
 		_renderBus.setNormalMappingEnabled(false);
 

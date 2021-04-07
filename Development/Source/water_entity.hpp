@@ -79,7 +79,7 @@ private:
 
 	float _size						 = 1.0f;
 	float _uvRepeat					 = 1.0f;
-	float _waveHeightFactor			 = 1.0f;
+	float _waveHeightFactor			 = 0.0f;
 	float _specularLightingFactor    = 1.0f;
 	float _specularLightingIntensity = 1.0f;
 	float _transparency				 = 0.0f;

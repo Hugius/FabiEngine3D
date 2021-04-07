@@ -365,9 +365,9 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 	if (screen->getID() == "waterEditorMenuOptions")
 	{
 		// Temporary values
+		Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
 		Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
 		float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-		Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
 		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
 		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
 		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
@@ -470,5 +470,8 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			waveHeightFactor = std::max(0.0f, waveHeightFactor / 100.0f);
 			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);
 		}
+
+		// Buttons hoverability
+		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
 	}
 }

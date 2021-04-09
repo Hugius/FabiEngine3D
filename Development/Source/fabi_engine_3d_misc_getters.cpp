@@ -414,3 +414,23 @@ vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics()
 
 	return result;
 }
+
+void FabiEngine3D::misc_setAudioEnabled(bool enabled)
+{
+	_core->_audioPlayer.setChunksEnabled(enabled);
+}
+
+void FabiEngine3D::misc_setMusicEnabled(bool enabled)
+{
+	_core->_audioPlayer.setMusicEnabled(enabled);
+}
+
+void FabiEngine3D::misc_setMaxAudioChannels(int count)
+{
+	_core->_audioPlayer.allocateChannels(count);
+}
+
+int FabiEngine3D::misc_getMaxChannels()
+{
+	return _core->_audioPlayer.getAllocatedChannelCount();
+}

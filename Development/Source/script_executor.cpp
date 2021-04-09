@@ -81,7 +81,7 @@ void ScriptExecutor::pause()
 		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
 		_fe3d.misc_hideCursor();
 		_fe3d.misc_stopMillisecondTimer();
-		_fe3d.audioEntity_pauseAll();
+		_fe3d.soundEntity_pauseAll();
 		_fe3d.music_pause();
 		_fe3d.engine_pause();
 		_isRunning = false;
@@ -106,7 +106,7 @@ void ScriptExecutor::unpause()
 
 		// Resume game logic
 		_fe3d.camera_center();
-		_fe3d.audioEntity_resumeAll();
+		_fe3d.soundEntity_resumeAll();
 		_fe3d.music_resume();
 		_fe3d.engine_resume();
 		_isRunning = true;

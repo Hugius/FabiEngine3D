@@ -27,7 +27,7 @@ void SceneEditor::_updateMainAudioMenu()
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioChoice")->getScrollingList("audiocasters")->deleteButtons();
 
 					// Add every placed audiocaster name
-					for (auto& audioID : _fe3d.audioEntity_getAllIDs())
+					for (auto& audioID : _fe3d.soundEntity_getAllIDs())
 					{
 						// Check if audiocaster is not a preview
 						if (audioID[0] != '@')
@@ -102,7 +102,7 @@ void SceneEditor::_updateAudioChoosingMenu()
 			for (auto& button : screen->getScrollingList("audiocasters")->getButtons())
 			{
 				// Check if audiocaster is still existing
-				if (!_fe3d.audioEntity_isExisting(button->getID()))
+				if (!_fe3d.soundEntity_isExisting(button->getID()))
 				{
 					// Delete button
 					screen->getScrollingList("audiocasters")->deleteButton(button->getID());
@@ -111,7 +111,7 @@ void SceneEditor::_updateAudioChoosingMenu()
 			}
 
 			// Loop over every placed audiocaster
-			for (auto& audioName : _fe3d.audioEntity_getAllIDs())
+			for (auto& audioName : _fe3d.soundEntity_getAllIDs())
 			{
 				// Check if audiocaster is not a preview
 				if (audioName[0] != '@')

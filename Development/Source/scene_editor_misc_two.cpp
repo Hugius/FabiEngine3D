@@ -146,10 +146,10 @@ void SceneEditor::clearCurrentScene()
 	// Delete AUDIO entities
 	for (auto& [ID, previewID] : _loadedAudioIDs)
 	{
-		if (_fe3d.audioEntity_isExisting(ID))
+		if (_fe3d.soundEntity_isExisting(ID))
 		{
 			// Delete audio
-			_fe3d.audioEntity_delete(ID);
+			_fe3d.soundEntity_delete(ID);
 
 			// Remove corresponding speaker model
 			if (!_currentSceneID.empty())

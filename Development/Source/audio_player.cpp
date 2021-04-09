@@ -197,13 +197,13 @@ void AudioPlayer::setMusicEnabled(bool value)
 	_musicEnabled = value;
 }
 
-void AudioPlayer::playMusic(vector<AudioMusic>& musicList)
+void AudioPlayer::playMusic(vector<AudioMusic>& musicList, bool forcePlay)
 {
 	// Check if any music is existing
 	if (!musicList.empty())
 	{
-		// Check if music is not playing yet
-		if (!Mix_PlayingMusic())
+		// Check if music is allowed to play
+		if (!Mix_PlayingMusic() || forcePlay)
 		{
 			// Select next song
 			if (musicList.size() == 1)

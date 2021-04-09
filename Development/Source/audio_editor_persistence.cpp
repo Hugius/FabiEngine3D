@@ -93,7 +93,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 
 			// Add audio ID
 			_loadedAudioIDs.push_back(audioID);
-			_fe3d.audioEntity_add2D(audioID, audioPath);
+			_fe3d.soundEntity_add2D(audioID, audioPath);
 		}
 
 		// Close file
@@ -130,7 +130,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 	for (auto& audioID : _loadedAudioIDs)
 	{
 		// Retrieve all values
-		auto audioPath = _fe3d.audioEntity_getFilePath(audioID);
+		auto audioPath = _fe3d.soundEntity_getFilePath(audioID);
 
 		// Perform empty string & space conversions
 		audioPath = (audioPath == "") ? "?" : audioPath;

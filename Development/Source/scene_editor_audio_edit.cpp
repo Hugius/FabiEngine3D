@@ -99,7 +99,7 @@ void SceneEditor::_updateAudioEditing()
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.modelEntity_delete(_activeSpeakerID);
-						_fe3d.audioEntity_delete(ACTIVE_AUDIO_ID);
+						_fe3d.soundEntity_delete(ACTIVE_AUDIO_ID);
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						_activeSpeakerID = "";
 						return;
@@ -107,9 +107,9 @@ void SceneEditor::_updateAudioEditing()
 				}
 
 				// Get current values
-				Vec3 position = _fe3d.audioEntity_getPosition(ACTIVE_AUDIO_ID);
-				float maxVolume = _fe3d.audioEntity_getMaxVolume(ACTIVE_AUDIO_ID);
-				float maxDistance = _fe3d.audioEntity_getMaxDistance(ACTIVE_AUDIO_ID);
+				Vec3 position = _fe3d.soundEntity_getPosition(ACTIVE_AUDIO_ID);
+				float maxVolume = _fe3d.soundEntity_getMaxVolume(ACTIVE_AUDIO_ID);
+				float maxDistance = _fe3d.soundEntity_getMaxDistance(ACTIVE_AUDIO_ID);
 				
 				// Update value filling and changing
 				_handleValueChanging("audioPropertiesMenu", "distancePlus", "distance", maxDistance, AUDIO_DISTANCE_CHANGING_SPEED, 1.0f, 0.0f);
@@ -125,9 +125,9 @@ void SceneEditor::_updateAudioEditing()
 				
 				// Apply new values
 				_fe3d.modelEntity_setPosition(_activeSpeakerID, position);
-				_fe3d.audioEntity_setPosition(ACTIVE_AUDIO_ID, position);
-				_fe3d.audioEntity_setMaxVolume(ACTIVE_AUDIO_ID, maxVolume);
-				_fe3d.audioEntity_setMaxDistance(ACTIVE_AUDIO_ID, maxDistance);
+				_fe3d.soundEntity_setPosition(ACTIVE_AUDIO_ID, position);
+				_fe3d.soundEntity_setMaxVolume(ACTIVE_AUDIO_ID, maxVolume);
+				_fe3d.soundEntity_setMaxDistance(ACTIVE_AUDIO_ID, maxDistance);
 			}
 
 			// Check if audio is still selected or active

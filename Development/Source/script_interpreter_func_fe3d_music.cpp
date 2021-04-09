@@ -7,16 +7,16 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // Preview audioEntity ID
+			ScriptValueType::STRING, // Preview soundEntity ID
 		};
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate preview audio ID
-			if (_validateFe3dAudioEntity("@" + arguments[0].getString(), true))
+			if (_validateFe3dSoundEntity("@" + arguments[0].getString(), true))
 			{
-				auto filePath = _fe3d.audioEntity_getFilePath("@" + arguments[0].getString());
+				auto filePath = _fe3d.soundEntity_getFilePath("@" + arguments[0].getString());
 				_fe3d.music_addToPlaylist(filePath);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.sound_setMusicEnabled(arguments[0].getBoolean());
+			_fe3d.misc_setMusicEnabled(arguments[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

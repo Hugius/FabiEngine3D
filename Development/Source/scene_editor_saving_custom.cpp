@@ -425,17 +425,17 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Audio casters
-	for (auto& audioID : _fe3d.audioEntity_getAllIDs())
+	for (auto& audioID : _fe3d.soundEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneAudio =
 			std::find(_customSceneAudioIDs.begin(), _customSceneAudioIDs.end(), audioID) != _customSceneAudioIDs.end();
-		if ((audioID[0] != '@') && isCustomSceneAudio && _fe3d.audioEntity_is3D(audioID))
+		if ((audioID[0] != '@') && isCustomSceneAudio && _fe3d.soundEntity_is3D(audioID))
 		{
 			// Data to save
-			auto position = _fe3d.audioEntity_getPosition(audioID);
-			auto maxVolume = _fe3d.audioEntity_getMaxVolume(audioID);
-			auto maxDistance = _fe3d.audioEntity_getMaxDistance(audioID);
+			auto position = _fe3d.soundEntity_getPosition(audioID);
+			auto maxVolume = _fe3d.soundEntity_getMaxVolume(audioID);
+			auto maxDistance = _fe3d.soundEntity_getMaxDistance(audioID);
 
 			// Extract preview ID
 			string previewID;

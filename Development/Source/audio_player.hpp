@@ -31,7 +31,7 @@ public:
 	void stopChunk(AudioChunk& chunk, int fadeMillis);
 	void setChunkVolume(AudioChunk& chunk, int volume);
 	void setMusicEnabled(bool value);
-	void playMusic(vector<AudioMusic>& musicList);
+	void playMusic(vector<AudioMusic>& musicList, bool forcePlay = false);
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();

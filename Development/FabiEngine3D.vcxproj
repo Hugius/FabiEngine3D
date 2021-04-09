@@ -389,7 +389,7 @@
     <ClCompile Include="Source\script_file.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_animations.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_aabb.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_fe3d_audio.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_sound.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_filesystem.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_image.cpp" />

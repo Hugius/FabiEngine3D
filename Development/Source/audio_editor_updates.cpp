@@ -175,10 +175,10 @@ void AudioEditor::_updateAudioRemoval()
 				// Go to main screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 
-				// Delete audio entity
-				if (_fe3d.audioEntity_isExisting(_currentAudioID))
+				// Delete soundEntity
+				if (_fe3d.soundEntity_isExisting(_currentAudioID))
 				{
-					_fe3d.audioEntity_delete(_currentAudioID);
+					_fe3d.soundEntity_delete(_currentAudioID);
 				}
 
 				// Miscellaneous

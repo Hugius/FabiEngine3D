@@ -475,9 +475,9 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Add audio
 				if (_copyPreviewAudio(audioID, previewID, position))
 				{
-					_fe3d.audioEntity_setMaxVolume(audioID, maxVolume);
-					_fe3d.audioEntity_setMaxDistance(audioID, maxDistance);
-					_fe3d.audioEntity_play(audioID, -1, 0.0f);
+					_fe3d.soundEntity_setMaxVolume(audioID, maxVolume);
+					_fe3d.soundEntity_setMaxDistance(audioID, maxDistance);
+					_fe3d.soundEntity_play(audioID, -1, 0.0f);
 				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")

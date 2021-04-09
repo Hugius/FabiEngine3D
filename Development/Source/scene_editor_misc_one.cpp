@@ -155,9 +155,9 @@ void SceneEditor::_activateAudio(const string& audioID)
 	_transformation = TransformationType::TRANSLATION;
 
 	// Filling writefields
-	Vec3 position = _fe3d.audioEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
-	float maxVolume = _fe3d.audioEntity_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
-	float maxDistance = _fe3d.audioEntity_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
+	Vec3 position = _fe3d.soundEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
+	float maxVolume = _fe3d.soundEntity_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
+	float maxDistance = _fe3d.soundEntity_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
 	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));

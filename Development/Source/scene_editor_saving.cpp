@@ -217,15 +217,15 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Audio
-	for (auto& audioID : _fe3d.audioEntity_getAllIDs())
+	for (auto& audioID : _fe3d.soundEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		if (audioID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.audioEntity_getPosition(audioID);
-			auto maxVolume = _fe3d.audioEntity_getMaxVolume(audioID);
-			auto maxDistance = _fe3d.audioEntity_getMaxDistance(audioID);
+			auto position = _fe3d.soundEntity_getPosition(audioID);
+			auto maxVolume = _fe3d.soundEntity_getMaxVolume(audioID);
+			auto maxDistance = _fe3d.soundEntity_getMaxDistance(audioID);
 
 			// Extract preview ID
 			string previewID = _loadedAudioIDs.at(audioID);

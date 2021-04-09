@@ -640,7 +640,7 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_aabb.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_audio.cpp">
+    <ClCompile Include="Source\script_interpreter_func_fe3d_sound.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp">

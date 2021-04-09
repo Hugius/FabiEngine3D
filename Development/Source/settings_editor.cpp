@@ -66,7 +66,7 @@ void SettingsEditor::loadSettings()
 		_fe3d.gfx_setShadowQuality(shadowQuality);
 		_fe3d.gfx_setReflectionQuality(reflectionQuality);
 		_fe3d.gfx_setRefractionQuality(refractionQuality);
-		_fe3d.sound_setMaxChannels(audioChannels);
+		_fe3d.misc_setMaxAudioChannels(audioChannels);
 
 		// Close file
 		file.close();
@@ -115,7 +115,7 @@ void SettingsEditor::save(bool newFile)
 	int shadowQuality = _fe3d.gfx_getShadowQuality();
 	int reflectionQuality = _fe3d.gfx_getReflectionQuality();
 	int refractionQuality = _fe3d.gfx_getRefractionQuality();
-	int audioChannels = _fe3d.sound_getMaxChannels();
+	int audioChannels = _fe3d.misc_getMaxChannels();
 
 	// Default values for new file
 	if (newFile)
@@ -152,7 +152,7 @@ void SettingsEditor::update()
 			int shadowQuality = _fe3d.gfx_getShadowQuality();
 			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
 			int refractionQuality = _fe3d.gfx_getRefractionQuality();
-			int audioChannels = _fe3d.sound_getMaxChannels();
+			int audioChannels = _fe3d.misc_getMaxChannels();
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -207,7 +207,7 @@ void SettingsEditor::update()
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", audioChannels, {}))
 			{
-				_fe3d.sound_setMaxChannels(std::clamp(audioChannels, 32, 512));
+				_fe3d.misc_setMaxAudioChannels(std::clamp(audioChannels, 32, 512));
 				save(false);
 			}
 		}

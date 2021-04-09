@@ -23,9 +23,9 @@ void AudioEditor::_updateMiscellaneous()
 	if (_isEditorLoaded)
 	{
 		// Temporary values
-		bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
-		bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
-		bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
+		bool isExisting = _fe3d.soundEntity_isExisting(_currentAudioID);
+		bool isPlaying = isExisting && _fe3d.soundEntity_isPlaying(_currentAudioID);
+		bool isPaused = isExisting && _fe3d.soundEntity_isPaused(_currentAudioID);
 
 		// Update audio status symbol
 		if (isPlaying)

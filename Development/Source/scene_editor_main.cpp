@@ -124,7 +124,7 @@ void SceneEditor::unload()
 	_environmentEditor.unloadWaterEntities();
 
 	// Delete other preview entities
-	_fe3d.audioEntity_deleteAll();
+	_fe3d.soundEntity_deleteAll();
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();

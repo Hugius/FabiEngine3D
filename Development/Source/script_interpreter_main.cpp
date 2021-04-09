@@ -264,7 +264,7 @@ void ScriptInterpreter::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
-	_fe3d.audioEntity_deleteAll();
+	_fe3d.soundEntity_deleteAll();
 	_fe3d.music_clearPlaylist();
 
 	// Disable collision response

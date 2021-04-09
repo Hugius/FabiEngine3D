@@ -577,39 +577,39 @@ public:
 	const string& textEntity_getTextContent(const string& ID);
 	vector<string> textEntity_getAllIDs();
 
-	// Audio entity interface - setters
-	void audioEntity_add2D(const string& ID, const string& audioPath);
-	void audioEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxVolume, float maxDistance);
-	void audioEntity_delete(const string& ID);
-	void audioEntity_deleteAll();
-	void audioEntity_play(const string& ID, int loops, float initialVolume);
-	void audioEntity_pause(const string& ID);
-	void audioEntity_pauseAll();
-	void audioEntity_resume(const string& ID);
-	void audioEntity_resumeAll();
-	void audioEntity_stop(const string& ID, int fadeMillis = 0);
-	void audioEntity_stopAll();
-	void audioEntity_setPosition(const string& ID, Vec3 position);
-	void audioEntity_move(const string& ID, Vec3 factor);
-	void audioEntity_setVolume(const string& ID, float volume);
-	void audioEntity_setMaxVolume(const string& ID, float volume);
-	void audioEntity_setMaxDistance(const string& ID, float maxDistance);
+	// Sound entity interface - setters
+	void soundEntity_add2D(const string& ID, const string& audioPath);
+	void soundEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxVolume, float maxDistance);
+	void soundEntity_delete(const string& ID);
+	void soundEntity_deleteAll();
+	void soundEntity_play(const string& ID, int loops, float initialVolume);
+	void soundEntity_pause(const string& ID);
+	void soundEntity_pauseAll();
+	void soundEntity_resume(const string& ID);
+	void soundEntity_resumeAll();
+	void soundEntity_stop(const string& ID, int fadeMillis = 0);
+	void soundEntity_stopAll();
+	void soundEntity_setPosition(const string& ID, Vec3 position);
+	void soundEntity_move(const string& ID, Vec3 factor);
+	void soundEntity_setVolume(const string& ID, float volume);
+	void soundEntity_setMaxVolume(const string& ID, float volume);
+	void soundEntity_setMaxDistance(const string& ID, float maxDistance);
 
-	// Audio entity interface - getters
-	vector<string> audioEntity_getAllIDs();
-	string audioEntity_getFilePath(const string& ID);
-	Vec3 audioEntity_getPosition(const string& ID);
-	float audioEntity_getMaxDistance(const string& ID);
-	float audioEntity_getVolume(const string& ID);
-	float audioEntity_getMaxVolume(const string& ID);
-	bool audioEntity_isExisting(const string& ID);
-	bool audioEntity_isPlaying(const string& ID);
-	bool audioEntity_isPaused(const string& ID);
-	bool audioEntity_isLoaded(const string& ID);
-	bool audioEntity_is3D(const string& ID);
-	int audioEntity_getUsedChannelCount();
+	// Sound entity interface - getters
+	vector<string> soundEntity_getAllIDs();
+	string soundEntity_getFilePath(const string& ID);
+	Vec3 soundEntity_getPosition(const string& ID);
+	float soundEntity_getMaxDistance(const string& ID);
+	float soundEntity_getVolume(const string& ID);
+	float soundEntity_getMaxVolume(const string& ID);
+	bool soundEntity_isExisting(const string& ID);
+	bool soundEntity_isPlaying(const string& ID);
+	bool soundEntity_isPaused(const string& ID);
+	bool soundEntity_isLoaded(const string& ID);
+	bool soundEntity_is3D(const string& ID);
+	int soundEntity_getUsedChannelCount();
 
-	// Music entity interface - setters
+	// Music interface - setters
 	void music_addToPlaylist(const string& audioPath);
 	void music_clearPlaylist();
 	void music_setVolume(float volume);
@@ -620,14 +620,6 @@ public:
 	bool music_isPlaying();
 	bool music_isPaused();
 	float music_getVolume();
-
-	// Sound interface - setters
-	void sound_setAudioEnabled(bool enabled);
-	void sound_setMusicEnabled(bool enabled);
-	void sound_setMaxChannels(int count);
-
-	// Sound interface - getters
-	int sound_getMaxChannels();
 
 	// Graphics interface - setters
 	void gfx_setMsaaQuality(int quality);
@@ -811,12 +803,16 @@ public:
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
+	void misc_setAudioEnabled(bool enabled);
+	void misc_setMusicEnabled(bool enabled);
+	void misc_setMaxAudioChannels(int count);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);
 	int misc_getRandomInt(int min, int max);
 	int misc_getMsTimeSinceEpoch();
 	int misc_getTriangleCount();
+	int misc_getMaxChannels();
 	float misc_getRandomFloat(float min, float max);
 	float misc_getAspectRatio();
 	float misc_getFPS();

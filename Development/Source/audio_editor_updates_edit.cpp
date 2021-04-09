@@ -9,10 +9,10 @@ void AudioEditor::_updateAudioEditing()
 		if (screen->getID() == "audioEditorMenuChoice")
 		{
 			// Temporary values
-			bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
-			bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
-			bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
-			bool isLoaded = isExisting && _fe3d.audioEntity_isLoaded(_currentAudioID);
+			bool isExisting = _fe3d.soundEntity_isExisting(_currentAudioID);
+			bool isPlaying = isExisting && _fe3d.soundEntity_isPlaying(_currentAudioID);
+			bool isPaused = isExisting && _fe3d.soundEntity_isPaused(_currentAudioID);
+			bool isLoaded = isExisting && _fe3d.soundEntity_isLoaded(_currentAudioID);
 			
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -22,7 +22,7 @@ void AudioEditor::_updateAudioEditing()
 					// Stop sound preview
 					if (isPlaying)
 					{
-						_fe3d.audioEntity_stop(_currentAudioID);
+						_fe3d.soundEntity_stop(_currentAudioID);
 					}
 
 					// Miscellaneous
@@ -48,14 +48,14 @@ void AudioEditor::_updateAudioEditing()
 							const string newFilePath = filePath.substr(rootDirectory.size());
 
 							// Remove old audio
-							if (_fe3d.audioEntity_isExisting(_currentAudioID))
+							if (_fe3d.soundEntity_isExisting(_currentAudioID))
 							{
 								_fe3d.misc_clearAudioChunkCache(newFilePath);
-								_fe3d.audioEntity_delete(_currentAudioID);
+								_fe3d.soundEntity_delete(_currentAudioID);
 							}
 
 							// Create new audio
-							_fe3d.audioEntity_add2D(_currentAudioID, newFilePath);
+							_fe3d.soundEntity_add2D(_currentAudioID, newFilePath);
 						}
 						else
 						{
@@ -65,19 +65,19 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-					_fe3d.audioEntity_play(_currentAudioID, 0, 0.5f);
+					_fe3d.soundEntity_play(_currentAudioID, 0, 0.5f);
 				}
 				else if (screen->getButton("resume")->isHovered())
 				{
-					_fe3d.audioEntity_resume(_currentAudioID);
+					_fe3d.soundEntity_resume(_currentAudioID);
 				}
 				else if (screen->getButton("pause")->isHovered())
 				{
-					_fe3d.audioEntity_pause(_currentAudioID);
+					_fe3d.soundEntity_pause(_currentAudioID);
 				}
 				else if (screen->getButton("stop")->isHovered())
 				{
-					_fe3d.audioEntity_stop(_currentAudioID);
+					_fe3d.soundEntity_stop(_currentAudioID);
 				}
 			}
 			else
@@ -85,19 +85,19 @@ void AudioEditor::_updateAudioEditing()
 				// Controlling audio playback through keyboard
 				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 				{
-					_fe3d.audioEntity_play(_currentAudioID, 0, 0.5f);
+					_fe3d.soundEntity_play(_currentAudioID, 0, 0.5f);
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_R) && isPaused)
 				{
-					_fe3d.audioEntity_resume(_currentAudioID);
+					_fe3d.soundEntity_resume(_currentAudioID);
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_P) && isPlaying)
 				{
-					_fe3d.audioEntity_pause(_currentAudioID);
+					_fe3d.soundEntity_pause(_currentAudioID);
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
 				{
-					_fe3d.audioEntity_stop(_currentAudioID);
+					_fe3d.soundEntity_stop(_currentAudioID);
 				}
 			}
 

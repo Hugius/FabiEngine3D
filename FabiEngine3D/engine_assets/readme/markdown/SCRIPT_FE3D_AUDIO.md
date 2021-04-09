@@ -31,6 +31,8 @@
   Returns a list of strings with the full IDs of all audios.
 - `fe3d:audio_delete`(`STR` ID) ---> `NONE`  
   Deletes audio with **ID** if existing.
+- `fe3d:audio_set_enabled`(`BOOL` enabled) ---> `NONE`  
+  Set audio system to **enabled**.
 - `fe3d:audio_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  
   Plays audio with **ID** and repeats it **loops** times (-1 to play forever) at a maximum **volume**.
 - `fe3d:audio_pause`(`STR` ID) ---> `NONE`  
@@ -59,6 +61,8 @@
   Adds music to the playlist based on audio with **previewID**.
 - `fe3d:music_clear_playlist`() ---> `NONE`  
   Clears and stops all music from the playlist.
+- `fe3d:music_set_enabled`(`BOOL` enabled) ---> `NONE`  
+  Set music system to **enabled**.
 - `fe3d:music_set_volume`(`DEC` volume) ---> `NONE`  
   Sets music volume.
 - `fe3d:music_get_volume`(`STR` previewID) ---> `DEC`  

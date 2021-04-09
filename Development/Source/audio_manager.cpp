@@ -42,7 +42,7 @@ void AudioManager::deleteChunk(const std::string& ID)
 
 	if (index == -1) // Does not exist
 	{
-		Logger::throwError("Tried to remove nonexisting audio chunk with ID \'", ID, "\'!");
+		Logger::throwError("Tried to remove nonexisting audio chunk with ID \"", ID, "\"!");
 	}
 	else // Remove chunk
 	{
@@ -61,7 +61,7 @@ AudioChunk& AudioManager::getChunk(const std::string& ID)
 
 	if (index == -1)
 	{
-		Logger::throwError("Tried to get nonexisting audio chunk with ID \'", ID, "\'!");
+		Logger::throwError("Tried to get nonexisting audio chunk with ID \"", ID, "\"!");
 	}
 	else
 	{
@@ -83,7 +83,7 @@ void AudioManager::_checkValidAdd(const std::string& ID)
 {
 	if (_findIndex(ID) != -1) // Already exists
 	{
-		Logger::throwError("Audio chunk with ID \'", ID, "\' already exists!");
+		Logger::throwError("Audio chunk with ID \"", ID, "\" already exists!");
 	}
 	else if (ID == "") // Empty ID
 	{

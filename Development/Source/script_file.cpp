@@ -21,7 +21,7 @@ void ScriptFile::setLineText(unsigned int index, const string& textContent)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Could not set scriptline text content at file \'" + _ID + "\' with index: " + to_string(index));
+		_fe3d.logger_throwError("Could not set scriptline text content at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{
@@ -33,7 +33,7 @@ void ScriptFile::removeLine(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Could not delete scriptline at file \'" + _ID + "\' with index: " + to_string(index));
+		_fe3d.logger_throwError("Could not delete scriptline at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{
@@ -70,7 +70,7 @@ const string& ScriptFile::getLineText(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Could not retrieve scriptline at file \'" + _ID + "\' with index: " + to_string(index));
+		_fe3d.logger_throwError("Could not retrieve scriptline at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{

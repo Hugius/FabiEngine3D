@@ -83,7 +83,7 @@ void AudioEditor::_updateAudioEditing()
 			else
 			{
 				// Controlling audio playback through keyboard
-				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused)
+				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 				{
 					_fe3d.audioEntity_play(_currentAudioID, 0, 0.5f);
 				}

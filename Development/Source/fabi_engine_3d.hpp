@@ -582,7 +582,7 @@ public:
 	void audioEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxVolume, float maxDistance);
 	void audioEntity_delete(const string& ID);
 	void audioEntity_deleteAll();
-	void audioEntity_play(const string& ID, int loops, float initialVolume, bool noRestart = false, int fadeMillis = 0);
+	void audioEntity_play(const string& ID, int loops, float initialVolume);
 	void audioEntity_pause(const string& ID);
 	void audioEntity_pauseAll();
 	void audioEntity_resume(const string& ID);

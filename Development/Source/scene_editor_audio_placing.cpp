@@ -21,13 +21,13 @@ void SceneEditor::_updateAudioPlacing()
 					newPosition = _fe3d.misc_getRaycastPositionOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Play preview audiocaster
-					if (_fe3d.audioEntity_isPaused(_currentPreviewAudioName))
+					if (!_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
+					{
+						_fe3d.audioEntity_play(_currentPreviewAudioName, -1, 50);
+					}
+					else if (_fe3d.audioEntity_isPaused(_currentPreviewAudioName))
 					{
 						_fe3d.audioEntity_resume(_currentPreviewAudioName);
-					}
-					else
-					{
-						_fe3d.audioEntity_play(_currentPreviewAudioName, -1, 50, true);
 					}
 
 					// Show preview audiocaster

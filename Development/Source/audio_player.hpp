@@ -10,6 +10,7 @@
 #include <vector>
 
 using std::string;
+using std::vector;
 
 class AudioPlayer final
 {
@@ -19,21 +20,22 @@ public:
 
 	// Functions
 	void allocateChannels(int count);
-	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
+	void update(CameraManager& camera, vector<AudioChunk>& chunkList, vector<AudioMusic>& musicList);	
 	void setChunksEnabled(bool value);
 	void pauseAllChunks();
 	void resumeAllChunks();
 	void stopAllChunks();
-	void playChunk(AudioChunk& chunk, int loops, int initialVolume, bool noRestart, int fadeMillis);
+	void playChunk(AudioChunk& chunk, int loops);
 	void pauseChunk(AudioChunk& chunk);
 	void resumeChunk(AudioChunk& chunk);
 	void stopChunk(AudioChunk& chunk, int fadeMillis);
 	void setChunkVolume(AudioChunk& chunk, int volume);
 	void setMusicEnabled(bool value);
+	void playMusic(vector<AudioMusic>& musicList);
 	void pauseMusic();
 	void resumeMusic();
-	void setMusicVolume(int volume);
 	void stopMusic();
+	void setMusicVolume(int volume);
 
 	// Booleans
 	bool isChunkPlaying(AudioChunk& chunk);
@@ -56,8 +58,6 @@ private:
 	int _getFreeChannel();
 
 	std::map<int, string> _channelMap;
-
-	int _musicIndex = 0;
 
 	bool _chunksEnabled = true;
 	bool _musicEnabled = true;

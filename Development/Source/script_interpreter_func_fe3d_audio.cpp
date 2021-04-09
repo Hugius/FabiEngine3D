@@ -195,6 +195,17 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
+	else if (functionName == "fe3d:audio_set_enabled")
+	{
+		auto types = { ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.sound_setAudioEnabled(arguments[0].getBoolean());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:audio_play")
 	{
 		auto types =

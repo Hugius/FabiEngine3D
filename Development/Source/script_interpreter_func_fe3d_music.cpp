@@ -31,6 +31,17 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:music_set_enabled")
+	{
+		auto types = { ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.sound_setMusicEnabled(arguments[0].getBoolean());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:music_set_volume")
 	{
 		auto types = { ScriptValueType::DECIMAL };

@@ -18,6 +18,7 @@ void FabiEngine3D::audioEntity_stopAll()
 void FabiEngine3D::music_addToPlaylist(const std::string& fileName)
 {
 	_core->_audioManager.addMusic(fileName);
+	_core->_audioPlayer.playMusic(_core->_audioManager.getMusic());
 }
 
 void FabiEngine3D::music_pause()
@@ -47,6 +48,7 @@ float FabiEngine3D::music_getVolume()
 
 void FabiEngine3D::music_clearPlaylist()
 {
+	// Resume before stopping
 	if (music_isPaused())
 	{
 		music_resume();
@@ -95,10 +97,25 @@ void FabiEngine3D::audioEntity_delete(const std::string& ID)
 	_core->_audioManager.deleteChunk(ID);
 }
 
-void FabiEngine3D::audioEntity_play(const std::string& ID, int loops, float initialVolume, bool noRestart, int fadeMillis)
+void FabiEngine3D::audioEntity_play(const std::string& ID, int loops, float initialVolume)
 {
+	// Retrieve values
+	auto chunk = _core->_audioManager.getChunk(ID);
 	initialVolume = std::clamp(initialVolume, 0.0f, 1.0f);
-	_core->_audioPlayer.playChunk(_core->_audioManager.getChunk(ID), loops, static_cast<int>(initialVolume * 128.0f), noRestart, fadeMillis);
+	auto volume = static_cast<int>(initialVolume * 128.0f);
+
+	// Play chunk
+	_core->_audioPlayer.playChunk(chunk, loops);
+
+	// Set initial or maximum volume
+	if (chunk.is3D())
+	{
+		chunk.setMaxVolume(volume);
+	}
+	else
+	{
+		_core->_audioPlayer.setChunkVolume(chunk, volume);
+	}
 }
 
 void FabiEngine3D::audioEntity_pause(const std::string& ID)

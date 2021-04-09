@@ -34,7 +34,7 @@
 - `fe3d:audio_set_enabled`(`BOOL` enabled) ---> `NONE`  
   Set audio system to **enabled**.
 - `fe3d:audio_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  
-  Plays audio with **ID** and repeats it **loops** times (-1 to play forever) at a maximum **volume**.
+  Plays audio with **ID** and repeats it **loops** times (-1 to play forever) at an initial **volume** (sets the maximum volume if 3D audio).
 - `fe3d:audio_pause`(`STR` ID) ---> `NONE`  
   Pauses playing audio with **ID**.
 - `fe3d:audio_pause_all`() ---> `NONE`  
@@ -58,7 +58,7 @@
   
 # Music
 - `fe3d:music_add_to_playlist`(`STR` previewID) ---> `NONE`  
-  Adds music to the playlist based on audio with **previewID**.
+  Adds music to the playlist based on audio with **previewID** and plays random music from the playlist.
 - `fe3d:music_clear_playlist`() ---> `NONE`  
   Clears and stops all music from the playlist.
 - `fe3d:music_set_enabled`(`BOOL` enabled) ---> `NONE`  

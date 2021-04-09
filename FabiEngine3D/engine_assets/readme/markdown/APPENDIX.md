@@ -24,7 +24,8 @@
 - **Color** values (r,g,b) are clamped between 0.0 and 1.0 (0% and 100% respectively).
 - **Alpha/transparency** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
 - **Mix** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
-- **Size/width/height** values cannot be lower than 0.0 (a size 0.0 means nothing exists).
+- **Volume** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
+- **Size/width/height** values cannot be lower than 0.0 (a size of 0.0 means that nothing exists).
 - **Lightness/intensity/brightness** values cannot be lower than 0.0 (there cannot be less light than complete darkness).
 - **Distance** values are absolute (cannot be lower than 0.0).
 - **UV repeat** values cannot be lower than 0 (something cannot repeat negative).

@@ -185,7 +185,7 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 		}
 		_timer.stopDeltaPart();
 
-		// Render GUI entities
+		// Render gui entities
 		_timer.startDeltaPart("guiTextEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
 		_renderGuiEntities();

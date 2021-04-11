@@ -133,7 +133,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const st
 			collision_checkCursorInAny();
 		}
 
-		// Check if hovered AABB is empty or nonexisting
+		// Check if hovered AABB is empty or non-existing
 		if (_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
 		{
 			return make_pair("", -1.0f);

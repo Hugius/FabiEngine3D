@@ -55,7 +55,7 @@ void AudioEditor::_updateAudioEditing()
 							}
 
 							// Create new audio
-							_fe3d.soundEntity_add2D(_currentAudioID, newFilePath);
+							_fe3d.soundEntity_add(_currentAudioID, newFilePath);
 						}
 						else
 						{
@@ -65,7 +65,7 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-					_fe3d.soundEntity_play(_currentAudioID, 0, 0.5f);
+					_fe3d.soundEntity_play(_currentAudioID, 0);
 				}
 				else if (screen->getButton("resume")->isHovered())
 				{
@@ -85,7 +85,7 @@ void AudioEditor::_updateAudioEditing()
 				// Controlling audio playback through keyboard
 				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 				{
-					_fe3d.soundEntity_play(_currentAudioID, 0, 0.5f);
+					_fe3d.soundEntity_play(_currentAudioID, 0);
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_R) && isPaused)
 				{

@@ -39,7 +39,7 @@ public:
 	void addBillboardToCustomScene(const string& billboardID);
 	void addAabbToCustomScene(const string& aabbID);
 	void addLightToCustomScene(const string& lightID);
-	void addAudioToCustomScene(const string& audioID);
+	void addSoundToCustomScene(const string& soundID);
 	void loadCustomSceneFromFile(const string& fileName);
 	void saveCustomSceneToFile();
 
@@ -78,6 +78,13 @@ private:
 	void _updateBillboardPlacing();
 	void _updateBillboardEditing();
 
+	// Sound updates
+	void _updateMainSoundMenu();
+	void _updateSoundPlacingMenu();
+	void _updateSoundChoosingMenu();
+	void _updateSoundPlacing();
+	void _updateSoundEditing();
+
 	// Lighting updates
 	void _updateMainLightingMenu();
 	void _updateAmbientLightingMenu();
@@ -85,13 +92,6 @@ private:
 	void _updatePointLightingMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
-
-	// Audio updates
-	void _updateMainAudioMenu();
-	void _updateAudioPlacingMenu();
-	void _updateAudioChoosingMenu();
-	void _updateAudioPlacing();
-	void _updateAudioEditing();
 
 	// Settings updates
 	void _updateMainSettingsMenu();
@@ -115,11 +115,11 @@ private:
 	bool _copyPreviewWater(const string& newID, const string& previewID);
 	bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 	bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	bool _copyPreviewAudio(const string & newID, const string & previewID, Vec3 position, bool fromOutside = false);
+	bool _copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 
 	// Miscellaneous
-	vector<string> _loadSceneNames();
-	void _deleteSceneFile(const string& sceneName);
+	vector<string> _loadSceneIDs();
+	void _deleteSceneFile(const string& sceneID);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
@@ -128,8 +128,8 @@ private:
 	void _activateModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
 	void _activateBillboard(const string& billboardID);
-	void _selectAudio(const string & audioID);
-	void _activateAudio(const string & audioID);
+	void _selectSound(const string& soundID);
+	void _activateSound(const string& soundID);
 	void _handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 
@@ -152,7 +152,7 @@ private:
 	vector<string> _customSceneModelIDs;
 	vector<string> _customSceneBillboardIDs;
 	vector<string> _customSceneAabbIDs;
-	vector<string> _customSceneAudioIDs;
+	vector<string> _customSceneSoundIDs;
 	vector<string> _customSceneLightIDs;
 
 	// Environment variables
@@ -170,7 +170,7 @@ private:
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
 	map<string, Vec3> _initialModelSize;
-	string _currentPreviewModelName = "";
+	string _currentPreviewModelID = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
 	int _selectedModelLightnessMultiplier = 1;
@@ -183,7 +183,7 @@ private:
 	map<string, string> _loadedBillboardIDs;
 	map<string, string> _outsideLoadedBillboardIDs;
 	map<string, float> _initialBillboardLightness;
-	string _currentPreviewBillboardName = "";
+	string _currentPreviewBillboardID = "";
 	string _selectedBillboardID = "";
 	string _activeBillboardID = "";
 	int _selectedBillboardLightnessMultiplier = 1;
@@ -192,23 +192,24 @@ private:
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
 
-	// Audio variables
-	map<string, string> _loadedAudioIDs;
-	map<string, string> _outsideLoadedAudioIDs;
-	string _currentPreviewAudioName = "";
+	// Sound variables
+	map<string, string> _loadedSoundIDs;
+	map<string, string> _outsideLoadedSoundIDs;
+	string _currentPreviewSoundID = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
 	static inline const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
 	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
 	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
-	static inline const float DEFAULT_AUDIO_MAX_DISTANCE = 25.0f;
+	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
+	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 	static inline const float SPEAKER_ANIMATION_SPEED = 0.01f;
-	static inline const float AUDIO_VOLUME_CHANGING_SPEED = 0.01f;
-	static inline const float AUDIO_DISTANCE_CHANGING_SPEED = 0.05f;
-	int _selectedAudioSizeMultiplier = 1;
-	int _activeAudioSizeMultiplier = 1;
-	bool _dontResetSelectedAudio = false;
+	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
+	static inline const float SOUND_DISTANCE_CHANGING_SPEED = 0.05f;
+	int _selectedSoundSizeMultiplier = 1;
+	int _activeSoundSizeMultiplier = 1;
+	bool _dontResetSelectedSound = false;
 
 	// Lighting variables
 	vector<string> _loadedLightIDs;

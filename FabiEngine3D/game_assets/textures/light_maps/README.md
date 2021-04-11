@@ -1,0 +1,1 @@
+# This is where your light map files are stored

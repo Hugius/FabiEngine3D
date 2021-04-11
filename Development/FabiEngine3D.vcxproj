@@ -158,11 +158,11 @@
     <ClInclude Include="Source\animation_editor.hpp" />
     <ClInclude Include="Source\animation_frame.hpp" />
     <ClInclude Include="Source\animation_speed_type.hpp" />
-    <ClInclude Include="Source\audio_chunk.hpp" />
+    <ClInclude Include="Source\sound.hpp" />
     <ClInclude Include="Source\audio_editor.hpp" />
     <ClInclude Include="Source\audio_loader.hpp" />
     <ClInclude Include="Source\audio_manager.hpp" />
-    <ClInclude Include="Source\audio_music.hpp" />
+    <ClInclude Include="Source\music.hpp" />
     <ClInclude Include="Source\audio_player.hpp" />
     <ClInclude Include="Source\billboard_editor.hpp" />
     <ClInclude Include="Source\billboard_entity.hpp" />
@@ -279,7 +279,7 @@
     <ClCompile Include="Source\animation_editor_updates_edit_frame.cpp" />
     <ClCompile Include="Source\animation_editor_updates_edit_main.cpp" />
     <ClCompile Include="Source\animation_editor_execution.cpp" />
-    <ClCompile Include="Source\audio_chunk.cpp" />
+    <ClCompile Include="Source\sound.cpp" />
     <ClCompile Include="Source\audio_editor_main.cpp" />
     <ClCompile Include="Source\audio_editor_misc.cpp" />
     <ClCompile Include="Source\audio_editor_persistence.cpp" />
@@ -287,7 +287,7 @@
     <ClCompile Include="Source\audio_editor_updates_edit.cpp" />
     <ClCompile Include="Source\audio_loader.cpp" />
     <ClCompile Include="Source\audio_manager.cpp" />
-    <ClCompile Include="Source\audio_music.cpp" />
+    <ClCompile Include="Source\music.cpp" />
     <ClCompile Include="Source\audio_player.cpp" />
     <ClCompile Include="Source\base_entity_manager_misc.cpp" />
     <ClCompile Include="Source\billboard_editor_main.cpp" />

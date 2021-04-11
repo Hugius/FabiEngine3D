@@ -1,7 +1,7 @@
 #pragma once
 
-#include "audio_chunk.hpp"
-#include "audio_music.hpp"
+#include "sound.hpp"
+#include "music.hpp"
 #include "camera_manager.hpp"
 #include "mathematics.hpp"
 
@@ -18,47 +18,47 @@ public:
 	AudioPlayer();
 	~AudioPlayer() = default;
 
-	// Functions
 	void allocateChannels(int count);
-	void update(CameraManager& camera, vector<AudioChunk>& chunkList, vector<AudioMusic>& musicList);	
-	void setChunksEnabled(bool value);
-	void pauseAllChunks();
-	void resumeAllChunks();
-	void stopAllChunks();
-	void playChunk(AudioChunk& chunk, int loops);
-	void pauseChunk(AudioChunk& chunk);
-	void resumeChunk(AudioChunk& chunk);
-	void stopChunk(AudioChunk& chunk, int fadeMillis);
-	void setChunkVolume(AudioChunk& chunk, int volume);
+	void update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList);	
+	void setSoundsEnabled(bool value);
+	void pauseAllSounds();
+	void resumeAllSounds();
+	void stopAllSounds();
+	void playSound(Sound& sound, int loops);
+	void pauseSound(Sound& sound);
+	void resumeSound(Sound& sound);
+	void stopSound(Sound& sound, int fadeMillis);
 	void setMusicEnabled(bool value);
-	void playMusic(vector<AudioMusic>& musicList, bool forcePlay = false);
+	void playMusic(vector<Music>& musicList, bool forcePlay = false);
 	void pauseMusic();
 	void resumeMusic();
 	void stopMusic();
-	void setMusicVolume(int volume);
+	void setMusicVolume(float volume);
 
-	// Booleans
-	bool isChunkPlaying(AudioChunk& chunk);
-	bool isChunkPaused(AudioChunk& chunk);
-	bool isMusicPlaying();
-	bool isMusicPaused();
-	
-	// Integers
-	int getChunkVolume(AudioChunk& chunk);
-	int getMusicVolume();
+	float getMusicVolume();
 
-	// Unsigned integers
 	unsigned int getUsedChannelCount();
 	unsigned int getAllocatedChannelCount();
 
+	bool isSoundPlaying(Sound& sound);
+	bool isSoundPaused(Sound& sound);
+	bool isMusicPlaying();
+	bool isMusicPaused();
+
 private:
-	int _getChunkChannel(AudioChunk& chunk);
-	bool _isInMap(AudioChunk& chunk);
+	void _updateSoundVolume(Sound& sound);
+	void _updateMusicVolume();
+
+	int _getUsedChannel(Sound& sound);
 
 	int _getFreeChannel();
 
+	bool _isSoundInChannelMap(Sound& sound);
+
 	std::map<int, string> _channelMap;
 
-	bool _chunksEnabled = true;
-	bool _musicEnabled = true;
+	float _musicVolume = 1.0f;
+
+	bool _isSoundsEnabled = true;
+	bool _isMusicEnabled = true;
 };

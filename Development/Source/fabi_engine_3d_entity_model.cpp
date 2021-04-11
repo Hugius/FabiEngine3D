@@ -13,7 +13,7 @@ void FabiEngine3D::modelEntity_add
 
 void FabiEngine3D::modelEntity_deleteAll()
 {
-	// For every MODEL entity
+	// For every model entity
 	for (auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		modelEntity_delete(entity->getID());
@@ -28,7 +28,7 @@ void FabiEngine3D::modelEntity_delete(const string& ID)
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
-	// Delete MODEL entity
+	// Delete model entity
 	_core->_modelEntityManager.deleteEntity(ID);
 }
 

@@ -21,7 +21,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getSkyEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create SKY entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create sky entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -35,7 +35,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTerrainEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create terrain entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -49,7 +49,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getWaterEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create WATER entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create water entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -63,7 +63,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getModelEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create MODEL entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create model entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -77,7 +77,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getBillboardEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create billboard entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -105,7 +105,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getLightEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create LIGHT entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create light entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -119,7 +119,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getGuiEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create GUI entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create gui entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -135,7 +135,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create TEXT entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create text entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
@@ -251,7 +251,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
-	Logger::throwError("Nonexisting " + temp[_type] + " entity with ID \"" + ID + "\" requested for removal!");
+	Logger::throwError("Non-existing " + temp[_type] + " entity with ID \"" + ID + "\" requested for removal!");
 }
 
 void BaseEntityManager::deleteAllEntities()

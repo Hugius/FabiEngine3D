@@ -293,7 +293,7 @@ void ScriptInterpreter::unload()
 	// Delete game GUI
 	for (const auto& ID : _fe3d.guiEntity_getAllIDs())
 	{
-		// Cannot delete engine GUI entities
+		// Cannot delete engine gui entities
 		if (ID.front() != '@')
 		{
 			_fe3d.guiEntity_delete(ID);
@@ -303,7 +303,7 @@ void ScriptInterpreter::unload()
 	// Delete game text
 	for (const auto& ID : _fe3d.textEntity_getAllIDs())
 	{
-		// Cannot delete engine GUI entities
+		// Cannot delete engine gui entities
 		if (ID.front() != '@')
 		{
 			_fe3d.textEntity_delete(ID);

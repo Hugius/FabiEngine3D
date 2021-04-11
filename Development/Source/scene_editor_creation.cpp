@@ -48,11 +48,11 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 		_fe3d.terrainEntity_delete(newID);
 	}
 
-	// Create TERRAIN entity
+	// Create terrain entity
 	_fe3d.terrainEntity_add(newID, _fe3d.terrainEntity_getHeightMapPath(previewID));
 	_fe3d.terrainEntity_select(newID);
 
-	// Fill TERRAIN entity
+	// Fill terrain entity
 	_fe3d.terrainEntity_setMaxHeight(newID, _fe3d.terrainEntity_getMaxHeight(previewID));
 	_fe3d.terrainEntity_setUvRepeat(newID, _fe3d.terrainEntity_getUvRepeat(previewID));
 	_fe3d.terrainEntity_setBlendMapped(newID, _fe3d.terrainEntity_isBlendMapped(previewID));
@@ -148,11 +148,11 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 		_fe3d.waterEntity_delete(newID);
 	}
 
-	// Create WATER entity
+	// Create water entity
 	_fe3d.waterEntity_add(newID);
 	_fe3d.waterEntity_select(newID);
 
-	// Fill WATER entity
+	// Fill water entity
 	_fe3d.waterEntity_setPosition(newID, _fe3d.waterEntity_getPosition(previewID));
 	_fe3d.waterEntity_setSize(newID, _fe3d.waterEntity_getSize(previewID));
 	_fe3d.waterEntity_setWaving(newID, _fe3d.waterEntity_isWaving(previewID));
@@ -221,10 +221,10 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		}
 		else
 		{
-			// Create new MODEL entity
+			// Create new model entity
 			_fe3d.modelEntity_add(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
 
-			// Fill MODEL entity
+			// Fill model entity
 			_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
 			_fe3d.modelEntity_setShadowed(newEntityID, _fe3d.modelEntity_isShadowed(previewID));
 			_fe3d.modelEntity_setTransparent(newEntityID, _fe3d.modelEntity_isTransparent(previewID));
@@ -267,10 +267,10 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	}
 	else // Normal entity
 	{
-		// Add MODEL entity
+		// Add model entity
 		_fe3d.modelEntity_add(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
 
-		// Bind AABB entities to MODEL entity
+		// Bind AABB entities to model entity
 		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
 		{
 			string newAabbID = newEntityID + "@" + previewAabbID.substr(string(previewID + "_").size());
@@ -361,11 +361,11 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
 	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
 
-	// Add BILLBOARD entity
+	// Add billboard entity
 	Vec2 size = _fe3d.billboardEntity_getSize(previewID);
 	_fe3d.billboardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
-	// Determine BILLBOARD entity type
+	// Determine billboard entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
 	{
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
@@ -385,7 +385,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		_fe3d.billboardEntity_playAnimation(newID, -1);
 	}
 
-	// Bind AABB entity to BILLBOARD entity
+	// Bind AABB entity to billboard entity
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true);
 
 	// Miscellaneous
@@ -416,31 +416,27 @@ bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID
 	// Error checking
 	if (_fe3d.soundEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Audio with ID \"" + newID + "\" already exists!");
+		_fe3d.logger_throwWarning("Sound with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.soundEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base audio of audio with ID \"" + newID + "\" not existing anymore!");
+		_fe3d.logger_throwWarning("Base audio of sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
 	// Add soundEntity
-	_fe3d.soundEntity_add3D(
-		newID,
-		_fe3d.soundEntity_getFilePath(previewID),
-		position,
-		_fe3d.soundEntity_getMaxVolume(previewID),
-		_fe3d.soundEntity_getMaxDistance(previewID));
+	_fe3d.soundEntity_add(newID, _fe3d.soundEntity_getFilePath(previewID));
+	_fe3d.soundEntity_make3D(newID, position, 0.0f, 0.0f);
 
 	// Save ID
 	if (fromOutside)
 	{
-		_outsideLoadedAudioIDs[newID] = previewID;
+		_outsideLoadedSoundIDs[newID] = previewID;
 	}
 	else
 	{
-		_loadedAudioIDs[newID] = previewID;
+		_loadedSoundIDs[newID] = previewID;
 	}
 
 	return true;

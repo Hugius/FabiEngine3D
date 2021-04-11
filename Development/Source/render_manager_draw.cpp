@@ -12,7 +12,7 @@ void RenderManager::_renderSkyEntity()
 		// Bind
 		_skyEntityRenderer.bind();
 
-		// Render SKY entity
+		// Render sky entity
 		_skyEntityRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
 		// Unbind
@@ -30,7 +30,7 @@ void RenderManager::_renderTerrainEntity()
 		// Render lights
 		_terrainEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
-		// Render TERRAIN entity
+		// Render terrain entity
 		_terrainEntityRenderer.render(_entityBus->getTerrainEntity());
 
 		// Unbind
@@ -48,7 +48,7 @@ void RenderManager::_renderWaterEntity()
 		// Render lights
 		_waterEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
-		// Render WATER entity
+		// Render water entity
 		_waterEntityRenderer.render(_entityBus->getWaterEntity());
 
 		// Unbind
@@ -104,7 +104,7 @@ void RenderManager::_renderModelEntities()
 				}
 				else
 				{
-					Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
+					Logger::throwError("Model entity \"" + modelEntity->getID() + "\" has a non-existing LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity
@@ -125,7 +125,7 @@ void RenderManager::_renderBillboardEntities()
 		// Bind
 		_billboardEntityRenderer.bind();
 
-		// Render BILLBOARD entities
+		// Render billboard entities
 		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			_billboardEntityRenderer.render(entity);

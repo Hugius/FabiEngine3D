@@ -116,7 +116,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_sceneEditor.addAudioToCustomScene(arguments[0].getString());
+			_sceneEditor.addSoundToCustomScene(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

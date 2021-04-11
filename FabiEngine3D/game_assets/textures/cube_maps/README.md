@@ -1,0 +1,1 @@
+# This is where your cube map files are stored

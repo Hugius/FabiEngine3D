@@ -9,7 +9,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->isReflective();
 
-	// Search for a reflective MODEL entity
+	// Search for a reflective model entity
 	bool anyReflectiveEntityFound = false;
 	if (!waterReflectionsNeeded)
 	{
@@ -202,7 +202,7 @@ void RenderManager::_captureShadows()
 				}
 				else
 				{
-					Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
+					Logger::throwError("Model entity \"" + modelEntity->getID() + "\" has a non-existing LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity

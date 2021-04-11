@@ -578,11 +578,11 @@ public:
 	vector<string> textEntity_getAllIDs();
 
 	// Sound entity interface - setters
-	void soundEntity_add2D(const string& ID, const string& audioPath);
-	void soundEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxVolume, float maxDistance);
+	void soundEntity_add(const string& ID, const string& audioPath);
+	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
 	void soundEntity_delete(const string& ID);
 	void soundEntity_deleteAll();
-	void soundEntity_play(const string& ID, int loops, float initialVolume);
+	void soundEntity_play(const string& ID, int loops);
 	void soundEntity_pause(const string& ID);
 	void soundEntity_pauseAll();
 	void soundEntity_resume(const string& ID);
@@ -803,7 +803,7 @@ public:
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
-	void misc_setAudioEnabled(bool enabled);
+	void misc_setSoundsEnabled(bool enabled);
 	void misc_setMusicEnabled(bool enabled);
 	void misc_setMaxAudioChannels(int count);
 

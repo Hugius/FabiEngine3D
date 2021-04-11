@@ -14,88 +14,78 @@ void AudioManager::deleteMusic()
 	_musicList.clear();
 }
 
-void AudioManager::deleteAllChunks()
+void AudioManager::deleteAllSounds()
 {
-	_chunks.clear();
+	_sounds.clear();
 }
 
 void AudioManager::addMusic(const string& fileName)
 {
-	_musicList.push_back(AudioMusic(_audioLoader.getMusic(fileName)));
+	_musicList.push_back(Music(_audioLoader.getMusicDataPointer(fileName)));
 }
 
-void AudioManager::add2D(const std::string& ID, const std::string& fileName)
+void AudioManager::addSound(const string& ID, const string& fileName)
 {
-	_checkValidAdd(ID);
-	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName)));
-}
-
-void AudioManager::add3D(const std::string& ID, const std::string& fileName, Vec3 position, float maxVolume, float maxDistance)
-{
-	_checkValidAdd(ID);
-	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName), position, maxVolume, maxDistance));
-}
-
-void AudioManager::deleteChunk(const std::string& ID)
-{
-	auto index = _findIndex(ID);
-
-	if (index == -1) // Does not exist
+	if (_findIndex(ID) != -1)
 	{
-		Logger::throwError("Tried to remove nonexisting audio chunk with ID \"", ID, "\"!");
+		Logger::throwError("Sound with ID \"", ID, "\" already exists!");
 	}
-	else // Remove chunk
+	else if (ID == "")
 	{
-		_chunks.erase(_chunks.begin() + index);
+		Logger::throwError("Tried to create sound with empty ID!");
 	}
+
+	_sounds.push_back(Sound(ID, fileName, _audioLoader.getChunkDataPointer(fileName)));
 }
 
-bool AudioManager::isChunkExisting(const string& ID)
-{
-	return _findIndex(ID) != -1;
-}
-
-AudioChunk& AudioManager::getChunk(const std::string& ID)
+void AudioManager::deleteSound(const string& ID)
 {
 	auto index = _findIndex(ID);
 
 	if (index == -1)
 	{
-		Logger::throwError("Tried to get nonexisting audio chunk with ID \"", ID, "\"!");
+		Logger::throwError("Tried to remove non-existing sound with ID \"", ID, "\"!");
 	}
 	else
 	{
-		return _chunks[index];
+		_sounds.erase(_sounds.begin() + index);
 	}
 }
 
-std::vector<AudioChunk>& AudioManager::getChunks()
+bool AudioManager::isSoundExisting(const string& ID)
 {
-	return _chunks;
+	return _findIndex(ID) != -1;
 }
 
-std::vector<AudioMusic>& AudioManager::getMusic()
+Sound& AudioManager::getSound(const string& ID)
+{
+	auto index = _findIndex(ID);
+
+	if (index == -1)
+	{
+		Logger::throwError("Tried to get non-existing sound with ID \"", ID, "\"!");
+	}
+	else
+	{
+		return _sounds[index];
+	}
+}
+
+vector<Sound>& AudioManager::getSounds()
+{
+	return _sounds;
+}
+
+vector<Music>& AudioManager::getMusic()
 {
 	return _musicList;
 }
 
-void AudioManager::_checkValidAdd(const std::string& ID)
+int AudioManager::_findIndex(const string& ID)
 {
-	if (_findIndex(ID) != -1) // Already exists
+	for (size_t i = 0; i < _sounds.size(); i++)
 	{
-		Logger::throwError("Audio chunk with ID \"", ID, "\" already exists!");
-	}
-	else if (ID == "") // Empty ID
-	{
-		Logger::throwError("Tried to create audio chunk with empty ID!");
-	}
-}
-
-int AudioManager::_findIndex(const std::string& ID)
-{
-	for (size_t i = 0; i < _chunks.size(); i++)
-	{
-		if (_chunks[i].getID() == ID)
+		if (_sounds[i].getID() == ID)
 		{
 			return i;
 		}

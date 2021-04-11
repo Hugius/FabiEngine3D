@@ -93,7 +93,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 
 			// Add audio ID
 			_loadedAudioIDs.push_back(audioID);
-			_fe3d.soundEntity_add2D(audioID, audioPath);
+			_fe3d.soundEntity_add(audioID, audioPath);
 		}
 
 		// Close file

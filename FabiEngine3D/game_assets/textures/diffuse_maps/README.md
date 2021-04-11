@@ -1,0 +1,1 @@
+# This is where your diffuse map files are stored

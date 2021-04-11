@@ -80,7 +80,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	}
 }
 
-Mix_Chunk* AudioLoader::getChunk(const string& filePath)
+Mix_Chunk* AudioLoader::getChunkDataPointer(const string& filePath)
 {
 begin:
 	auto iterator = _chunkCache.find(filePath);
@@ -121,7 +121,7 @@ begin:
 	return iterator->second;
 }
 
-Mix_Music* AudioLoader::getMusic(const string& filePath)
+Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
 {
 begin:
 	auto iterator = _musicCache.find(filePath);

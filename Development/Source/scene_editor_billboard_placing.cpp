@@ -5,7 +5,7 @@ void SceneEditor::_updateBillboardPlacing()
 	if (_isEditorLoaded)
 	{
 		// Only if user is in placement mode
-		if (!_currentPreviewBillboardName.empty())
+		if (!_currentPreviewBillboardID.empty())
 		{
 			// Check if mouse behavior isn't being invalid
 			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
@@ -18,17 +18,17 @@ void SceneEditor::_updateBillboardPlacing()
 				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPositionOnTerrainValid())
 				{
 					// Show preview billboard
-					_fe3d.billboardEntity_show(_currentPreviewBillboardName);
+					_fe3d.billboardEntity_show(_currentPreviewBillboardID);
 
 					// Update preview billboard position
-					Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
+					Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardID);
 					newPosition = _fe3d.misc_getRaycastPositionOnTerrain();
-					_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
+					_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, newPosition);
 				}
 				else
 				{
 					// Hide preview billboard
-					_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
+					_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
 				}
 
 				// Placing billboard
@@ -37,7 +37,7 @@ void SceneEditor::_updateBillboardPlacing()
 				{
 					// Add new billboard
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = _currentPreviewBillboardName.substr(1); // Remove the '@'
+					string newID = _currentPreviewBillboardID.substr(1); // Remove the '@'
 					newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
 
 					// Check if ID not already exists
@@ -47,20 +47,20 @@ void SceneEditor::_updateBillboardPlacing()
 					}
 
 					// Add billboard
-					_copyPreviewBillboard(newID, _currentPreviewBillboardName, newPosition);
+					_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
-						_currentPreviewBillboardName = "";
+						_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+						_currentPreviewBillboardID = "";
 					}
 				}
 				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling billboard placement
 				{
 					// Hide preview billboard
-					_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
-					_currentPreviewBillboardName = "";
+					_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+					_currentPreviewBillboardID = "";
 					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
 				}
@@ -68,7 +68,7 @@ void SceneEditor::_updateBillboardPlacing()
 			else
 			{
 				// Hide preview billboard
-				_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
+				_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
 			}
 		}
 	}

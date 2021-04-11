@@ -161,7 +161,7 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update LIGHT entity count
+	// Update light entity count
 	if (_fe3d.misc_checkInterval("lightEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("lightEntityCount")->getEntityID();
@@ -177,11 +177,11 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update GUI entity count
+	// Update gui entity count
 	if (_fe3d.misc_checkInterval("guiEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("guiEntityCount")->getEntityID();
-		string text = "GUI entities: " + to_string(_fe3d.guiEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
+		string text = "Gui entities: " + to_string(_fe3d.guiEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

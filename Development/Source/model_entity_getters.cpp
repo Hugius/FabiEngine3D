@@ -253,7 +253,7 @@ unsigned int ModelEntity::_getPartIndex(string partID)
 	}
 
 	// Error
-	Logger::throwError("MODEL entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"");
+	Logger::throwError("Model entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"");
 }
 
 Vec3 ModelEntity::_calculateAverageValue(vector<Vec3> elements)

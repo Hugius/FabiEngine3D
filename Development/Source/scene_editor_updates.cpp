@@ -34,12 +34,12 @@ void SceneEditor::update()
 	_updateLightPlacing();
 	_updateLightEditing();
 
-	// Audio updates
-	_updateMainAudioMenu();
-	_updateAudioPlacingMenu();
-	_updateAudioChoosingMenu();
-	_updateAudioPlacing();
-	_updateAudioEditing();
+	// Sound updates
+	_updateMainSoundMenu();
+	_updateSoundPlacingMenu();
+	_updateSoundChoosingMenu();
+	_updateSoundPlacing();
+	_updateSoundEditing();
 
 	// Settings updates
 	_updateMainSettingsMenu();
@@ -79,12 +79,12 @@ void SceneEditor::_updateMainMenu()
 				else if (screen->getButton("edit")->isHovered())
 				{
 					_isChoosingScene = true;
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneIDs());
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
 					_isDeletingScene = true;
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneIDs());
 				}
 			}
 
@@ -92,7 +92,7 @@ void SceneEditor::_updateMainMenu()
 			string newSceneName;
 			if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
 			{
-				auto sceneNames = _loadSceneNames();
+				auto sceneNames = _loadSceneIDs();
 
 				// If scene name not existing yet
 				if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
@@ -189,9 +189,9 @@ void SceneEditor::_updateChoiceMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
-				else if (screen->getButton("audio")->isHovered()) // Audio button
+				else if (screen->getButton("sound")->isHovered()) // Sound button
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuAudio");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 				}
 				else if (screen->getButton("settings")->isHovered()) // Settings button
 				{

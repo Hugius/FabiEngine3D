@@ -1,7 +1,7 @@
 #pragma once
 
-#include "audio_chunk.hpp"
-#include "audio_music.hpp"
+#include "sound.hpp"
+#include "music.hpp"
 #include "audio_loader.hpp"
 
 #include <vector>
@@ -12,24 +12,21 @@ public:
 	AudioManager(AudioLoader& audioLoader);
 
 	void addMusic(const string& fileName);
+	void addSound(const string& ID, const string& fileName);
 	void deleteMusic();
-	void add2D(const string& ID, const string& fileName);
-	void add3D(const string& ID, const string& fileName, Vec3 position, float maxVolume, float maxDistance);
-	void deleteChunk(const string& ID);
-	void deleteAllChunks();
+	void deleteSound(const string& ID);
+	void deleteAllSounds();
 
-	bool isChunkExisting(const string& ID);
+	bool isSoundExisting(const string& ID);
 
-	AudioChunk& getChunk(const string& ID);
+	Sound& getSound(const string& ID);
 
-	std::vector<AudioChunk>& getChunks();
-	std::vector<AudioMusic>& getMusic();
+	vector<Sound>& getSounds();
+	vector<Music>& getMusic();
 
 private:
-	void _checkValidAdd(const string& ID);
-
-	std::vector<AudioChunk> _chunks;
-	std::vector<AudioMusic> _musicList;
+	vector<Sound> _sounds;
+	vector<Music> _musicList;
 
 	AudioLoader& _audioLoader;
 

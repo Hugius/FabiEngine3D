@@ -14,8 +14,8 @@ public:
 	AudioLoader() = default;
 	~AudioLoader();
 	
-	Mix_Chunk* getChunk(const string& filePath);
-	Mix_Music* getMusic(const string& filePath);
+	Mix_Chunk* getChunkDataPointer(const string& filePath);
+	Mix_Music* getMusicDataPointer(const string& filePath);
 
 	void cacheChunksMultiThreaded(const vector<string>& filePaths);
 	void clearChunkCache(const string& filePath);

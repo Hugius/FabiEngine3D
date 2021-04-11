@@ -424,34 +424,34 @@ void SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
-	// Audio casters
-	for (auto& audioID : _fe3d.soundEntity_getAllIDs())
+	// Sound casters
+	for (auto& soundID : _fe3d.soundEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isCustomSceneAudio =
-			std::find(_customSceneAudioIDs.begin(), _customSceneAudioIDs.end(), audioID) != _customSceneAudioIDs.end();
-		if ((audioID[0] != '@') && isCustomSceneAudio && _fe3d.soundEntity_is3D(audioID))
+		bool isCustomSceneSound =
+			std::find(_customSceneSoundIDs.begin(), _customSceneSoundIDs.end(), soundID) != _customSceneSoundIDs.end();
+		if ((soundID[0] != '@') && isCustomSceneSound && _fe3d.soundEntity_is3D(soundID))
 		{
 			// Data to save
-			auto position = _fe3d.soundEntity_getPosition(audioID);
-			auto maxVolume = _fe3d.soundEntity_getMaxVolume(audioID);
-			auto maxDistance = _fe3d.soundEntity_getMaxDistance(audioID);
+			auto position = _fe3d.soundEntity_getPosition(soundID);
+			auto maxVolume = _fe3d.soundEntity_getMaxVolume(soundID);
+			auto maxDistance = _fe3d.soundEntity_getMaxDistance(soundID);
 
 			// Extract preview ID
 			string previewID;
-			if (_loadedAudioIDs.find(audioID) == _loadedAudioIDs.end())
+			if (_loadedSoundIDs.find(soundID) == _loadedSoundIDs.end())
 			{
-				previewID = _outsideLoadedAudioIDs.at(audioID);
+				previewID = _outsideLoadedSoundIDs.at(soundID);
 			}
 			else
 			{
-				previewID = _loadedAudioIDs.at(audioID);
+				previewID = _loadedSoundIDs.at(soundID);
 			}
 
 			// Write data
 			file <<
-				"AUDIO " <<
-				audioID << " " <<
+				"SOUND " <<
+				soundID << " " <<
 				previewID << " " <<
 				position.x << " " <<
 				position.y << " " <<
@@ -644,6 +644,6 @@ void SceneEditor::saveCustomSceneToFile()
 	_customSceneModelIDs.clear();
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
-	_customSceneAudioIDs.clear();
+	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
 }

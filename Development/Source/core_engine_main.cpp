@@ -170,7 +170,7 @@ void CoreEngine::_updateApplication()
 
 		// Audio updates
 		_timer.startDeltaPart("audioUpdate");
-		_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
+		_audioPlayer.update(_cameraManager, _audioManager.getSounds(), _audioManager.getMusic());
 		_timer.stopDeltaPart();
 	}
 

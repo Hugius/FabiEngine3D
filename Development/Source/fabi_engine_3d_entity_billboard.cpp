@@ -21,7 +21,6 @@ void FabiEngine3D::billboardEntity_add(const string& ID, const string& text, con
 
 void FabiEngine3D::billboardEntity_deleteAll()
 {
-	// For every BILLBOARD entity
 	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_delete(entity->getID());
@@ -36,13 +35,13 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
-	// Delete BILLBOARD entity
+	// Delete billboard entity
 	_core->_billboardEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 {
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Loop over BILLBOARD entities
+	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Loop over billboard entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

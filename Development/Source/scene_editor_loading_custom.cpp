@@ -455,16 +455,16 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.aabbEntity_add(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
 				_loadedAabbIDs.push_back(aabbID);
 			}
-			else if (entityType == "AUDIO")
+			else if (entityType == "SOUND")
 			{
 				// Data placeholders
-				string audioID, previewID;
+				string soundID, previewID;
 				Vec3 position;
 				float maxVolume, maxDistance;
 
 				// Extract data
 				iss >>
-					audioID >>
+					soundID >>
 					previewID >>
 					position.x >>
 					position.y >>
@@ -472,12 +472,12 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					maxVolume >>
 					maxDistance;
 
-				// Add audio
-				if (_copyPreviewAudio(audioID, previewID, position))
+				// Add sound
+				if (_copyPreviewAudio(soundID, previewID, position))
 				{
-					_fe3d.soundEntity_setMaxVolume(audioID, maxVolume);
-					_fe3d.soundEntity_setMaxDistance(audioID, maxDistance);
-					_fe3d.soundEntity_play(audioID, -1, 0.0f);
+					_fe3d.soundEntity_setMaxVolume(soundID, maxVolume);
+					_fe3d.soundEntity_setMaxDistance(soundID, maxDistance);
+					_fe3d.soundEntity_play(soundID, -1);
 				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")

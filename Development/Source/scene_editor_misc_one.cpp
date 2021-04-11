@@ -128,9 +128,9 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }
 
-void SceneEditor::_selectAudio(const string& audioID)
+void SceneEditor::_selectSound(const string& soundID)
 {
-	_selectedSpeakerID = "@speaker_" + audioID;
+	_selectedSpeakerID = "@speaker_" + soundID;
 
 	// Change cursor
 	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -138,58 +138,58 @@ void SceneEditor::_selectAudio(const string& audioID)
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
-		// Removing the unique number from the audioID and updating the text content
-		string tempID = audioID;
+		// Removing the unique number from the soundID and updating the text content
+		string tempID = soundID;
 		std::reverse(tempID.begin(), tempID.end());
-		string audioName = tempID.substr(tempID.find('_') + 1);
-		std::reverse(audioName.begin(), audioName.end());
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
+		string soundName = tempID.substr(tempID.find('_') + 1);
+		std::reverse(soundName.begin(), soundName.end());
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
-		_fe3d.textEntity_setTextContent(textEntityID, "Selected audio: " + audioName, 0.025f);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected sound: " + soundName, 0.025f);
 	}
 }
 
-void SceneEditor::_activateAudio(const string& audioID)
+void SceneEditor::_activateSound(const string& soundID)
 {
-	_activeSpeakerID = "@speaker_" + audioID;
+	_activeSpeakerID = "@speaker_" + soundID;
 	_transformation = TransformationType::TRANSLATION;
 
 	// Filling writefields
 	Vec3 position = _fe3d.soundEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
 	float maxVolume = _fe3d.soundEntity_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
 	float maxDistance = _fe3d.soundEntity_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWritefield("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
-	// Removing the unique number from the audioID and updating the text content
-	string tempID = audioID;
+	// Removing the unique number from the soundID and updating the text content
+	string tempID = soundID;
 	std::reverse(tempID.begin(), tempID.end());
-	string audioName = tempID.substr(tempID.find('_') + 1);
-	std::reverse(audioName.begin(), audioName.end());
-	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
+	string soundName = tempID.substr(tempID.find('_') + 1);
+	std::reverse(soundName.begin(), soundName.end());
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
-	_fe3d.textEntity_setTextContent(textEntityID, "Active audio: " + audioName, 0.025f);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active sound: " + soundName, 0.025f);
 }
 
-vector<string> SceneEditor::_loadSceneNames()
+vector<string> SceneEditor::_loadSceneIDs()
 {
 	// Temporary values
-	vector<string> sceneNames;
+	vector<string> sceneIDs;
 	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
 		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
 
 	// Check if scenes directory exists
 	if (_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		// Get all project names
+		// Get all project IDs
 		for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 		{
-			string sceneName = string(entry.path().u8string());
-			sceneName.erase(0, directoryPath.size());
-			sceneNames.push_back(sceneName.substr(0, sceneName.size() - 5));
+			string sceneID = string(entry.path().u8string());
+			sceneID.erase(0, directoryPath.size());
+			sceneIDs.push_back(sceneID.substr(0, sceneID.size() - 5));
 		}
 	}
 	else
@@ -197,14 +197,14 @@ vector<string> SceneEditor::_loadSceneNames()
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
 	}
 
-	return sceneNames;
+	return sceneIDs;
 }
 
-void SceneEditor::_deleteSceneFile(const string& sceneName)
+void SceneEditor::_deleteSceneFile(const string& sceneID)
 {
 	// Check if scene file is still existing
 	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + sceneName + ".fe3d";
+		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + sceneID + ".fe3d";
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::filesystem::remove_all(filePath);

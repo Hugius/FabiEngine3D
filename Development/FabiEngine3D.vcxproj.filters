@@ -7,10 +7,10 @@
     <ClCompile Include="Source\audio_player.cpp">
       <Filter>src\Audio System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\audio_chunk.cpp">
+    <ClCompile Include="Source\sound.cpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="Source\audio_music.cpp">
+    <ClCompile Include="Source\music.cpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClCompile>
     <ClCompile Include="Source\entity_bus.cpp">
@@ -705,10 +705,10 @@
     <ClInclude Include="Source\audio_player.hpp">
       <Filter>src\Audio System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\audio_chunk.hpp">
+    <ClInclude Include="Source\sound.hpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Source\audio_music.hpp">
+    <ClInclude Include="Source\music.hpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="Source\entity_bus.hpp">

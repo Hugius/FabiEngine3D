@@ -1,0 +1,1 @@
+# This is where your image map files are stored

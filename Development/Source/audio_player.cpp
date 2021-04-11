@@ -23,7 +23,7 @@ void AudioPlayer::allocateChannels(int count)
 	}
 }
 
-void AudioPlayer::update(CameraManager& camera, vector<AudioChunk>& chunkList, vector<AudioMusic>& musicList)
+void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList)
 {
 	// Update channel management
 	for (auto& channelPair : _channelMap)
@@ -36,31 +36,33 @@ void AudioPlayer::update(CameraManager& camera, vector<AudioChunk>& chunkList, v
 		}
 	}
 
-	// Update chunks
-	if (_chunksEnabled)
+	// Update sound management
+	if (_isSoundsEnabled)
 	{
-		for (auto& chunk : chunkList)
+		// For every sound
+		for (auto& sound : soundList)
 		{
-			// Check if 3D chunk
-			if (chunk.is3D())
+			// Check if 3D sound
+			if (sound.is3D())
 			{
 				// Check if emitting sound
-				if (isChunkPlaying(chunk))
+				if (isSoundPlaying(sound))
 				{
 					// Distance
 					auto cameraPos = camera.getPosition(); // Camera position
-					float xDiff = fabsf(chunk.getPosition().x - cameraPos.x); // Difference between camera X & point X
-					float yDiff = fabsf(chunk.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
-					float zDiff = fabsf(chunk.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
+					float xDiff = fabsf(sound.getPosition().x - cameraPos.x); // Difference between camera X & point X
+					float yDiff = fabsf(sound.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
+					float zDiff = fabsf(sound.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
 					float maxDiff = std::max(xDiff, std::max(yDiff, zDiff)); // Maximum difference
-					float volume = chunk.getMaxVolume() - ((maxDiff / chunk.getMaxDistance()) * chunk.getMaxVolume()); // Calculate volume
-					volume = std::clamp(volume, 0.0f, chunk.getMaxVolume()); // Clamp to minimum and maximum
-					setChunkVolume(chunk, static_cast<int>(volume * 128.0f)); // Apply volume
+					float volume = sound.getMaxVolume() - ((maxDiff / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
+					volume = std::clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
+					sound.setVolume(volume); // Update sound volume
+					_updateSoundVolume(sound); // Update playing volume
 
 					// Panning
 					auto cameraFront = camera.getFront(); // From camera vector
 					Matrix44 rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(90.0f));
-					Vec3 pointVector = cameraPos - chunk.getPosition(); // To camera vector
+					Vec3 pointVector = cameraPos - sound.getPosition(); // To camera vector
 					Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);
 					pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
 					pointVector.normalize(); // Normalize
@@ -68,7 +70,7 @@ void AudioPlayer::update(CameraManager& camera, vector<AudioChunk>& chunkList, v
 					float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 					Uint8 leftStrength = Uint8(255.0f * range); // Left ear
 					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
-					Mix_SetPanning(_getChunkChannel(chunk), leftStrength, rightStrength); // Apply stereo panning
+					Mix_SetPanning(_getUsedChannel(sound), leftStrength, rightStrength); // Apply stereo panning
 				}
 			}
 		}
@@ -78,10 +80,11 @@ void AudioPlayer::update(CameraManager& camera, vector<AudioChunk>& chunkList, v
 		Mix_HaltChannel(-1);
 	}
 
-	// Update music playlist
-	if (_musicEnabled)
+	// Update music management
+	if (_isMusicEnabled)
 	{
 		playMusic(musicList);
+		_updateMusicVolume();
 	}
 	else
 	{
@@ -89,128 +92,134 @@ void AudioPlayer::update(CameraManager& camera, vector<AudioChunk>& chunkList, v
 	}
 }
 
-void AudioPlayer::setChunksEnabled(bool value)
+void AudioPlayer::setSoundsEnabled(bool value)
 {
-	_chunksEnabled = value;
+	_isSoundsEnabled = value;
 }
 
-void AudioPlayer::pauseAllChunks()
+void AudioPlayer::pauseAllSounds()
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
 		Mix_Pause(-1);
 	}
 }
 
-void AudioPlayer::resumeAllChunks()
+void AudioPlayer::resumeAllSounds()
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
 		Mix_Resume(-1);
 	}
 }
 
-void AudioPlayer::stopAllChunks()
+void AudioPlayer::stopAllSounds()
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
 		Mix_HaltChannel(-1);
 	}
 }
 
-void AudioPlayer::playChunk(AudioChunk& chunk, int loops)
+void AudioPlayer::playSound(Sound& sound, int loops)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			Mix_PlayChannel(_getChunkChannel(chunk), chunk.getMixChunk(), loops); // Play chunk again on same channel
+			Mix_PlayChannel(_getUsedChannel(sound), sound.getDataPointer(), loops); // Play sound again on same channel
 		}
 		else
 		{
 			int channel = _getFreeChannel();
-			Mix_PlayChannel(channel, chunk.getMixChunk(), loops); // Play chunk on new channel
-			_channelMap[channel] = chunk.getID();
+			Mix_PlayChannel(channel, sound.getDataPointer(), loops); // Play sound on new channel
+			_channelMap[channel] = sound.getID();
 		}
 	}
 }
 
-void AudioPlayer::pauseChunk(AudioChunk& chunk)
+void AudioPlayer::pauseSound(Sound& sound)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			Mix_Pause(_getChunkChannel(chunk));
+			Mix_Pause(_getUsedChannel(sound));
 		}
 		else
 		{
-			Logger::throwWarning("Trying to pause audio chunk with ID \"", chunk.getID(), " \", but was not playing!");
+			Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), " \", but was not playing!");
 		}
 	}
 }
 
-void AudioPlayer::resumeChunk(AudioChunk& chunk)
+void AudioPlayer::resumeSound(Sound& sound)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			Mix_Resume(_getChunkChannel(chunk));
+			Mix_Resume(_getUsedChannel(sound));
 		}
 		else
 		{
-			Logger::throwWarning("Trying to resume audio chunk with ID \"", chunk.getID(), "\", but was not paused!");
+			Logger::throwWarning("Trying to resume sound with ID \"", sound.getID(), "\", but was not paused!");
 		}
 	}
 }
 
-void AudioPlayer::stopChunk(AudioChunk& chunk, int fadeMillis)
+void AudioPlayer::stopSound(Sound& sound, int fadeMillis)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			if (isChunkPaused(chunk))
+			if (isSoundPaused(sound))
 			{
-				resumeChunk(chunk);
-				Mix_HaltChannel(_getChunkChannel(chunk));
+				resumeSound(sound);
+				Mix_HaltChannel(_getUsedChannel(sound));
 			}
 			else
 			{
-				Mix_FadeOutChannel(_getChunkChannel(chunk), fadeMillis);
+				Mix_FadeOutChannel(_getUsedChannel(sound), fadeMillis);
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Trying to stop audio chunk with ID \"", chunk.getID(), "\", but was not playing!");
+			Logger::throwWarning("Trying to stop sound with ID \"", sound.getID(), "\", but was not playing!");
 		}
 	}
 }
 
-void AudioPlayer::setChunkVolume(AudioChunk& chunk, int volume)
+void AudioPlayer::_updateSoundVolume(Sound& sound)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			Mix_Volume(_getChunkChannel(chunk), volume);
+			auto intVolume = static_cast<int>(sound.getVolume() * 128.0f);
+			Mix_Volume(_getUsedChannel(sound), intVolume);
 		}
-		else
-		{
-			Logger::throwWarning("Trying to set volume of audio chunk with ID \"", chunk.getID(), "\", but was not playing!");
-		}
+	}
+}
+
+void AudioPlayer::_updateMusicVolume()
+{
+	if (_isMusicEnabled)
+	{
+		auto intVolume = static_cast<int>(_musicVolume * 128.0f);
+		Mix_VolumeMusic(intVolume);
 	}
 }
 
 void AudioPlayer::setMusicEnabled(bool value)
 {
-	_musicEnabled = value;
+	_isMusicEnabled = value;
 }
 
-void AudioPlayer::playMusic(vector<AudioMusic>& musicList, bool forcePlay)
+void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		// Check if any music is existing
 		if (!musicList.empty())
@@ -221,12 +230,12 @@ void AudioPlayer::playMusic(vector<AudioMusic>& musicList, bool forcePlay)
 				// Select next song
 				if (musicList.size() == 1)
 				{
-					Mix_PlayMusic(musicList[0].getMixMusic(), 0);
+					Mix_PlayMusic(musicList[0].getDataPointer(), 0);
 				}
 				else
 				{
 					auto musicIndex = Tools::getInst().getRandomInt(0, musicList.size() - 1);
-					Mix_PlayMusic(musicList[musicIndex].getMixMusic(), 0);
+					Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
 				}
 			}
 		}
@@ -235,7 +244,7 @@ void AudioPlayer::playMusic(vector<AudioMusic>& musicList, bool forcePlay)
 
 void AudioPlayer::pauseMusic()
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		Mix_PauseMusic();
 	}
@@ -243,7 +252,7 @@ void AudioPlayer::pauseMusic()
 
 void AudioPlayer::resumeMusic()
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		Mix_ResumeMusic();
 	}
@@ -251,27 +260,27 @@ void AudioPlayer::resumeMusic()
 
 void AudioPlayer::stopMusic()
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		Mix_HaltMusic();
 	}
 }
 
-void AudioPlayer::setMusicVolume(int volume)
+void AudioPlayer::setMusicVolume(float volume)
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
-		Mix_VolumeMusic(volume);
+		_musicVolume = std::clamp(volume, 0.0f, 1.0f);
 	}
 }
 
-bool AudioPlayer::isChunkPlaying(AudioChunk& chunk)
+bool AudioPlayer::isSoundPlaying(Sound& sound)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			if (Mix_Playing(_getChunkChannel(chunk)))
+			if (Mix_Playing(_getUsedChannel(sound)))
 			{
 				return true;
 			}
@@ -285,13 +294,13 @@ bool AudioPlayer::isChunkPlaying(AudioChunk& chunk)
 	return false;
 }
 
-bool AudioPlayer::isChunkPaused(AudioChunk& chunk)
+bool AudioPlayer::isSoundPaused(Sound& sound)
 {
-	if (_chunksEnabled)
+	if (_isSoundsEnabled)
 	{
-		if (_isInMap(chunk))
+		if (_isSoundInChannelMap(sound))
 		{
-			if (Mix_Paused(_getChunkChannel(chunk)))
+			if (Mix_Paused(_getUsedChannel(sound)))
 			{
 				return true;
 			}
@@ -307,7 +316,7 @@ bool AudioPlayer::isChunkPaused(AudioChunk& chunk)
 
 bool AudioPlayer::isMusicPlaying()
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		return Mix_PlayingMusic();
 	}
@@ -317,7 +326,7 @@ bool AudioPlayer::isMusicPlaying()
 
 bool AudioPlayer::isMusicPaused()
 {
-	if (_musicEnabled)
+	if (_isMusicEnabled)
 	{
 		return Mix_PausedMusic();
 	}
@@ -325,31 +334,14 @@ bool AudioPlayer::isMusicPaused()
 	return false;
 }
 
-int AudioPlayer::getChunkVolume(AudioChunk& chunk)
+float AudioPlayer::getMusicVolume()
 {
-	if (_chunksEnabled)
+	if (_isMusicEnabled)
 	{
-		if (_isInMap(chunk))
-		{
-			return Mix_Volume(_getChunkChannel(chunk), -1);
-		}
-		else
-		{
-			Logger::throwWarning("Trying to get volume of audio chunk with ID \"", chunk.getID(), "\", but was not playing!");
-		}
+		return static_cast<float>(Mix_VolumeMusic(-1)) / 128.0f;
 	}
 
-	return -1;
-}
-
-int AudioPlayer::getMusicVolume()
-{
-	if (_musicEnabled)
-	{
-		return Mix_VolumeMusic(-1);
-	}
-
-	return -1;
+	return -1.0f;
 }
 
 unsigned int AudioPlayer::getUsedChannelCount()
@@ -372,24 +364,24 @@ unsigned int AudioPlayer::getAllocatedChannelCount()
 	return _channelMap.size();
 }
 
-int AudioPlayer::_getChunkChannel(AudioChunk& chunk)
+int AudioPlayer::_getUsedChannel(Sound& sound)
 {
 	for (auto& pair : _channelMap)
 	{
-		if (pair.second == chunk.getID())
+		if (pair.second == sound.getID())
 		{
 			return pair.first;
 		}
 	}
 
-	Logger::throwError("Trying to get audio chunk channel with ID \"", chunk.getID(), "\", but does not exist!");
+	Logger::throwError("Trying to get sound channel with ID \"", sound.getID(), "\", but does not exist!");
 }
 
-bool AudioPlayer::_isInMap(AudioChunk& chunk)
+bool AudioPlayer::_isSoundInChannelMap(Sound& sound)
 {
 	for (auto& pair : _channelMap)
 	{
-		if (pair.second == chunk.getID())
+		if (pair.second == sound.getID())
 		{
 			return true;
 		}

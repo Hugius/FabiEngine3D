@@ -26,7 +26,7 @@ void SceneEditor::_updateMainModelMenu()
 					// Clear all buttons from scrolling list
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 
-					// Add every placed model name
+					// Add the name of every placed model
 					for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 					{
 						// Check if model is not a preview model
@@ -66,26 +66,26 @@ void SceneEditor::_updateModelPlacingMenu()
 				else
 				{
 					// Loop over every created model
-					for (auto& modelName : _modelEditor.getLoadedModelIDs())
+					for (auto& modelID : _modelEditor.getLoadedModelIDs())
 					{
 						// Check if model has mesh
-						if (_fe3d.modelEntity_isExisting(modelName))
+						if (_fe3d.modelEntity_isExisting(modelID))
 						{
 							// Check if button is hovered
-							if (screen->getScrollingList("models")->getButton(modelName)->isHovered())
+							if (screen->getScrollingList("models")->getButton(modelID)->isHovered())
 							{
 								// Hide old preview model
-								if (_currentPreviewModelName != "")
+								if (_currentPreviewModelID != "")
 								{
-									_fe3d.modelEntity_hide(_currentPreviewModelName);
+									_fe3d.modelEntity_hide(_currentPreviewModelID);
 								}
 
 								// Set new preview model
-								_currentPreviewModelName = modelName;
-								_fe3d.modelEntity_show(_currentPreviewModelName);
+								_currentPreviewModelID = modelID;
+								_fe3d.modelEntity_show(_currentPreviewModelID);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1), 0.025f);
+								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 								_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
 								break;
 							}
@@ -119,23 +119,23 @@ void SceneEditor::_updateModelChoosingMenu()
 			}
 
 			// Loop over every placed model
-			for (auto& modelName : _fe3d.modelEntity_getAllIDs())
+			for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Check if model is not a preview model
-				if (modelName[0] != '@')
+				if (modelID[0] != '@')
 				{
 					// Check if button is hovered
-					if (screen->getScrollingList("models")->getButton(modelName)->isHovered())
+					if (screen->getScrollingList("models")->getButton(modelID)->isHovered())
 					{
 						// Check if LMB pressed (activation)
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
-							_activateModel(modelName);
+							_activateModel(modelID);
 						}
 						else // Hovering (selection)
 						{
 							_dontResetSelectedModel = true;
-							_selectModel(modelName);
+							_selectModel(modelID);
 						}
 
 						break;
@@ -149,7 +149,7 @@ void SceneEditor::_updateModelChoosingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
-					_currentPreviewModelName = "";
+					_currentPreviewModelID = "";
 				}
 			}
 		}

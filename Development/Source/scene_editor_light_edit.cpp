@@ -10,7 +10,7 @@ void SceneEditor::_updateLightEditing()
 		_selectedLightBulbID = "";
 
 		// User must not be in placement mode
-		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
+		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointlight && _currentPreviewSoundID == "")
 		{
 			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 

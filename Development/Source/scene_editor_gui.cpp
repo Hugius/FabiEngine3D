@@ -24,7 +24,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addButton("environment", Vec2(0.0f, 0.7875f), Vec2(GW("Environment"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Environment", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("model", Vec2(0.0f, 0.525f), Vec2(GW("Models"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Models", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("billboard", Vec2(0.0f, 0.2625f), Vec2(GW("Billboards"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboards", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("audio", Vec2(0.0f, 0.0f), Vec2(GW("Audio"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("sound", Vec2(0.0f, 0.0f), Vec2(GW("Sound"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("lighting", Vec2(0.0f, -0.2625f), Vec2(GW("Lighting"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lighting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("settings", Vec2(0.0f, -0.525f), Vec2(GW("Settings"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -96,23 +96,23 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addScrollingList("billboards", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: mainWindow - sceneEditorMenuAudio
-	screenID = "sceneEditorMenuAudio";
+	// Left-viewport: mainWindow - sceneEditorMenuSound
+	screenID = "sceneEditorMenuSound";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("place", Vec2(0.0f, 0.475f), Vec2(GW("Place audio"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("choice", Vec2(0.0f, 0.0f), Vec2(GW("Choose audio"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("place", Vec2(0.0f, 0.475f), Vec2(GW("Place sound"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("choice", Vec2(0.0f, 0.0f), Vec2(GW("Choose sound"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose sound", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.475f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: mainWindow - sceneEditorMenuAudioPlace
-	screenID = "sceneEditorMenuAudioPlace";
+	// Left-viewport: mainWindow - sceneEditorMenuSoundPlace
+	screenID = "sceneEditorMenuSoundPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("audiocasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: mainWindow - sceneEditorMenuAudioChoice
-	screenID = "sceneEditorMenuAudioChoice";
+	// Left-viewport: mainWindow - sceneEditorMenuSoundChoice
+	screenID = "sceneEditorMenuSoundChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("audiocasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuLighting
@@ -302,8 +302,8 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addWritefield("b", Vec2(0.0f, -0.725f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Right-viewport: mainWindow - audiocasterPropertiesMenu
-	screenID = "audioPropertiesMenu";
+	// Right-viewport: mainWindow - soundPropertiesMenu
+	screenID = "soundPropertiesMenu";
 	rightWindow->addScreen(screenID);
 	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Max volume", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -348,9 +348,9 @@ void SceneEditor::_unloadGUI()
 	leftWindow->deleteScreen("sceneEditorMenuLightingAmbient");
 	leftWindow->deleteScreen("sceneEditorMenuLightingDirectional");
 	leftWindow->deleteScreen("sceneEditorMenuLightingPoint");
-	leftWindow->deleteScreen("sceneEditorMenuAudio");
-	leftWindow->deleteScreen("sceneEditorMenuAudioPlace");
-	leftWindow->deleteScreen("sceneEditorMenuAudioChoice");
+	leftWindow->deleteScreen("sceneEditorMenuSound");
+	leftWindow->deleteScreen("sceneEditorMenuSoundPlace");
+	leftWindow->deleteScreen("sceneEditorMenuSoundChoice");
 	leftWindow->deleteScreen("sceneEditorMenuSettings");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphics");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsShadows");
@@ -362,5 +362,5 @@ void SceneEditor::_unloadGUI()
 	rightWindow->deleteScreen("modelPropertiesMenu");
 	rightWindow->deleteScreen("billboardPropertiesMenu");
 	rightWindow->deleteScreen("pointlightPropertiesMenu");
-	rightWindow->deleteScreen("audioPropertiesMenu");
+	rightWindow->deleteScreen("soundPropertiesMenu");
 }

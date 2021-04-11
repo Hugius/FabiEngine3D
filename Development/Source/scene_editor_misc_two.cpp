@@ -72,7 +72,7 @@ void SceneEditor::clearCurrentScene()
 		_fe3d.gfx_disableLensFlare(true);
 	}
 
-	// Delete SKY entity
+	// Delete sky entity
 	if (!_loadedSkyID.empty())
 	{
 		// Delete sky
@@ -86,7 +86,7 @@ void SceneEditor::clearCurrentScene()
 		_fe3d.skyEntity_setMixValue(0.0f);
 	}
 
-	// Delete TERRAIN entity
+	// Delete terrain entity
 	if (!_loadedTerrainID.empty())
 	{
 		// Delete terrain
@@ -96,7 +96,7 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete WATER entity
+	// Delete water entity
 	if (!_loadedWaterID.empty())
 	{
 		// Delete water
@@ -123,7 +123,7 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete BILLBOARD entities
+	// Delete billboard entities
 	for (auto& [ID, previewID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
@@ -143,15 +143,15 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete AUDIO entities
-	for (auto& [ID, previewID] : _loadedAudioIDs)
+	// Delete sounds
+	for (auto& [ID, previewID] : _loadedSoundIDs)
 	{
 		if (_fe3d.soundEntity_isExisting(ID))
 		{
-			// Delete audio
+			// Delete sound
 			_fe3d.soundEntity_delete(ID);
 
-			// Remove corresponding speaker model
+			// Delete corresponding speaker model
 			if (!_currentSceneID.empty())
 			{
 				_fe3d.modelEntity_delete("@speaker_" + ID);
@@ -165,7 +165,7 @@ void SceneEditor::clearCurrentScene()
 		_fe3d.billboardEntity_hide("@@lightSource");
 	}
 
-	// Delete LIGHT entities
+	// Delete light entities
 	for (auto& ID : _loadedLightIDs)
 	{
 		if (_fe3d.lightEntity_isExisting(ID))
@@ -173,7 +173,7 @@ void SceneEditor::clearCurrentScene()
 			// Delete light
 			_fe3d.lightEntity_delete(ID);
 
-			// Remove corresponding lightbulb model
+			// Delete corresponding lightbulb model
 			if (!_currentSceneID.empty())
 			{
 				_fe3d.modelEntity_delete("@" + ID);
@@ -188,7 +188,7 @@ void SceneEditor::clearCurrentScene()
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
-	_loadedAudioIDs.clear();
+	_loadedSoundIDs.clear();
 	_loadedLightIDs.clear();
 }
 
@@ -204,7 +204,7 @@ void SceneEditor::createCustomScene(const string& sceneID)
 	_customSceneModelIDs.clear();
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
-	_customSceneAudioIDs.clear();
+	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
 }
 
@@ -316,14 +316,14 @@ void SceneEditor::addLightToCustomScene(const string& lightID)
 	}
 }
 
-void SceneEditor::addAudioToCustomScene(const string& audioID)
+void SceneEditor::addSoundToCustomScene(const string& soundID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneAudioIDs.push_back(audioID);
+		_customSceneSoundIDs.push_back(soundID);
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add audio to custom scene!");
+		_fe3d.logger_throwWarning("Cannot add sound to custom scene!");
 	}
 }

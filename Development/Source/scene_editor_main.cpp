@@ -40,13 +40,13 @@ void SceneEditor::load()
 
 	// Preview models loading
 	_modelEditor.loadModelEntitiesFromFile();
-	for (auto& modelName : _modelEditor.getLoadedModelIDs())
+	for (auto& modelID : _modelEditor.getLoadedModelIDs())
 	{
-		// Check if there is a MODEL entity present
-		if (_fe3d.modelEntity_isExisting(modelName))
+		// Check if there is a model entity present
+		if (_fe3d.modelEntity_isExisting(modelID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->
-				addButton(modelName, modelName.substr(1));
+				addButton(modelID, modelID.substr(1));
 		}
 	}
 
@@ -55,42 +55,41 @@ void SceneEditor::load()
 
 	// Preview billboards loading
 	_billboardEditor.loadBillboardEntitiesFromFile();
-	for (auto& billboardName : _billboardEditor.getLoadedBillboardIDs())
+	for (auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 	{
-		// Check if there is a BILLBOARD entity present
-		if (_fe3d.billboardEntity_isExisting(billboardName))
+		// Check if there is a billboard entity present
+		if (_fe3d.billboardEntity_isExisting(billboardID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->
-				addButton(billboardName, billboardName.substr(1));
+				addButton(billboardID, billboardID.substr(1));
 		}
 	}
-
-	// Load lightsource billboard
-	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
-
-	// Preview pointlight loading
-	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
-	_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
-	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
-	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
 
 	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.modelEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
-	for (auto& audioName : _audioEditor.getLoadedAudioIDs())
+	for (auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
-		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->
-			addButton(audioName, audioName.substr(1));
+		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
+		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("soundcasters")->
+			addButton(audioID, audioID.substr(1));
 	}
+
+	// Preview pointlights loading
+	const string texturePath = "engine_assets\\textures\\light_source.png";
+	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
+	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
+	_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
+	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedSoundName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -138,7 +137,7 @@ void SceneEditor::unload()
 	_customSceneModelIDs.clear();
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
-	_customSceneAudioIDs.clear();
+	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
 	_currentSkyID = "";
 	_currentTerrainID = "";
@@ -149,21 +148,21 @@ void SceneEditor::unload()
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
-	_loadedAudioIDs.clear();
+	_loadedSoundIDs.clear();
 	_loadedLightIDs.clear();
 	_loadedAabbIDs.clear();
 	_outsideLoadedModelIDs.clear();
 	_outsideLoadedBillboardIDs.clear();
-	_outsideLoadedAudioIDs.clear();
+	_outsideLoadedSoundIDs.clear();
 	_initialModelLightness.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
 	_initialBillboardLightness.clear();
-	_currentPreviewModelName = "";
+	_currentPreviewModelID = "";
 	_selectedModelID = "";
 	_activeModelID = "";
-	_currentPreviewBillboardName = "";
+	_currentPreviewBillboardID = "";
 	_selectedBillboardID = "";
 	_activeBillboardID = "";
 	_selectedLightBulbID = "";
@@ -186,7 +185,7 @@ void SceneEditor::unload()
 	// Delete name textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
-	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedSoundName");
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();

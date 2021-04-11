@@ -1,0 +1,1 @@
+# This is where your normal map files are stored

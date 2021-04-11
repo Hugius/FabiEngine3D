@@ -1,0 +1,1 @@
+# This is where your flare map files are stored

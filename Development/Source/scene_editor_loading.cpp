@@ -232,16 +232,16 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					_fe3d.billboardEntity_setSize(billboardID, size);
 				}
 			}
-			else if (entityType == "AUDIO")
+			else if (entityType == "SOUND")
 			{
 				// Data placeholders
-				string audioID, previewID;
+				string soundID, previewID;
 				Vec3 position;
 				float maxVolume, maxDistance;
 
 				// Extract data
 				iss >>
-					audioID >>
+					soundID >>
 					previewID >>
 					position.x >>
 					position.y >>
@@ -252,17 +252,17 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Add speaker if in editor
 				if (_isEditorLoaded)
 				{
-					_fe3d.modelEntity_add("@speaker_" + audioID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-					_fe3d.modelEntity_setShadowed("@speaker_" + audioID, false);
-					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + audioID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+					_fe3d.modelEntity_add("@speaker_" + soundID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+					_fe3d.modelEntity_setShadowed("@speaker_" + soundID, false);
+					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + soundID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 				}
 
-				// Add audio
-				if (_copyPreviewAudio(audioID, previewID, position))
+				// Add sound
+				if (_copyPreviewAudio(soundID, previewID, position))
 				{
-					_fe3d.soundEntity_setMaxVolume(audioID, maxVolume);
-					_fe3d.soundEntity_setMaxDistance(audioID, maxDistance);
-					_fe3d.soundEntity_play(audioID, -1, 0.0f);
+					_fe3d.soundEntity_setMaxVolume(soundID, maxVolume);
+					_fe3d.soundEntity_setMaxDistance(soundID, maxDistance);
+					_fe3d.soundEntity_play(soundID, -1);
 				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")

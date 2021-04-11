@@ -15,7 +15,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string & projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadScriptsFromFile();
 	void saveScriptsToFile();
 

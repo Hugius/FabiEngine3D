@@ -13,7 +13,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting TERRAIN entity with ID \"" + ID + "\" requested");
+		Logger::throwError("Non-existing terrain entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

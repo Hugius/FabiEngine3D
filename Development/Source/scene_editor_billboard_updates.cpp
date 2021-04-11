@@ -26,7 +26,7 @@ void SceneEditor::_updateMainBillboardMenu()
 					// Clear all buttons from scrolling list
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 
-					// Add every placed billboard name
+					// Add the name of every placed billboard
 					for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 					{
 						// Check if billboard is not a preview
@@ -67,26 +67,26 @@ void SceneEditor::_updateBillboardPlacingMenu()
 				else
 				{
 					// Loop over every created billboard
-					for (auto& billboardName : _billboardEditor.getLoadedBillboardIDs())
+					for (auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 					{
 						// Check if billboard has a billboard entity
-						if (_fe3d.billboardEntity_isExisting(billboardName))
+						if (_fe3d.billboardEntity_isExisting(billboardID))
 						{
 							// Check if button is hovered
-							if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
+							if (screen->getScrollingList("billboards")->getButton(billboardID)->isHovered())
 							{
 								// Hide old preview billboard
-								if (_currentPreviewBillboardName != "")
+								if (_currentPreviewBillboardID != "")
 								{
-									_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
+									_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
 								}
 
 								// Set new preview billboard
-								_currentPreviewBillboardName = billboardName;
-								_fe3d.billboardEntity_show(_currentPreviewBillboardName);
+								_currentPreviewBillboardID = billboardID;
+								_fe3d.billboardEntity_show(_currentPreviewBillboardID);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardName.substr(1), 0.025f);
+								_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 								_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
 								break;
 							}
@@ -120,23 +120,23 @@ void SceneEditor::_updateBillboardChoosingMenu()
 			}
 
 			// Loop over every placed billboard
-			for (auto& billboardName : _fe3d.billboardEntity_getAllIDs())
+			for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// Check if billboard is not a preview billboard
-				if (billboardName[0] != '@')
+				if (billboardID[0] != '@')
 				{
 					// Check if button is hovered
-					if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
+					if (screen->getScrollingList("billboards")->getButton(billboardID)->isHovered())
 					{
 						// Check if LMB pressed (activation)
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
-							_activateBillboard(billboardName);
+							_activateBillboard(billboardID);
 						}
 						else // Hovering (selection)
 						{
 							_dontResetSelectedBillboard = true;
-							_selectBillboard(billboardName);
+							_selectBillboard(billboardID);
 						}
 
 						break;
@@ -150,7 +150,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
-					_currentPreviewBillboardName = "";
+					_currentPreviewBillboardID = "";
 				}
 			}
 		}

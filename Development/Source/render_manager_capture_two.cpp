@@ -44,7 +44,7 @@ void RenderManager::_captureSceneDepth()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_depthRenderer.bind();
 
-		// Render TERRAIN entity
+		// Render terrain entity
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
 			_depthRenderer.render(_entityBus->getTerrainEntity());
@@ -91,7 +91,7 @@ void RenderManager::_captureSceneDepth()
 					}
 					else
 					{
-						Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
+						Logger::throwError("Model entity \"" + modelEntity->getID() + "\" has a non-existing LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 					}
 				}
 				else // Render high-quality entity
@@ -101,7 +101,7 @@ void RenderManager::_captureSceneDepth()
 			}
 		}
 
-		// Render BILLBOARD entities
+		// Render billboard entities
 		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if entity must be included in depth map

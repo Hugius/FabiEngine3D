@@ -1,6 +1,6 @@
 # Sound (only 2D)
 - `fe3d:sound_place2D`(`STR` newID, `STR` previewID, `DEC` volume) ---> `NONE`  
-  Places a new 2D sound with **newID** (cannot start with @) based on audio with **previewID** and a **volume**.
+  Places a new 2D sound with **newID** (cannot start with @) based on audio with **previewID**. Has an initial **volume**.
 - `fe3d:sound_set_volume`(`STR` ID, `DEC` volume) ---> `NONE`  
   Sets the **volume** of sound with **ID**.
 
@@ -32,9 +32,9 @@
 - `fe3d:sound_delete`(`STR` ID) ---> `NONE`  
   Deletes sound with **ID** if existing.
 - `fe3d:sound_set_enabled`(`BOOL` enabled) ---> `NONE`  
-  Set sound system to **enabled**.
-- `fe3d:sound_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  
-  Plays sound with **ID** and repeats it **loops** times (-1 to play forever) with a **volume** (initial volume for 2D sound or maximum volume for 3D sound).
+  Sets sound system to **enabled**.
+- `fe3d:sound_play`(`STR` ID, `INT` loops) ---> `NONE`  
+  Plays sound with **ID** and repeats it **loops** times (-1 to play forever).
 - `fe3d:sound_pause`(`STR` ID) ---> `NONE`  
   Pauses playing sound with **ID**.
 - `fe3d:sound_pause_all`() ---> `NONE`  
@@ -62,7 +62,7 @@
 - `fe3d:music_clear_playlist`() ---> `NONE`  
   Clears and stops all music from the playlist.
 - `fe3d:music_set_enabled`(`BOOL` enabled) ---> `NONE`  
-  Set music system to **enabled**.
+  Sets music system to **enabled**.
 - `fe3d:music_set_volume`(`DEC` volume) ---> `NONE`  
   Sets music volume.
 - `fe3d:music_get_volume`(`STR` previewID) ---> `DEC`  

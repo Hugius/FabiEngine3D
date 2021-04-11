@@ -110,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_add_custom_audio")
+	else if (functionName == "fe3d:scene_add_custom_sound")
 	{
 		auto types = { ScriptValueType::STRING };
 

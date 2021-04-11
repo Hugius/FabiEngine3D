@@ -29,8 +29,8 @@
   Queues **billboardID** to be saved in the custom scene (does not have to exist yet).
 - `fe3d:scene_add_custom_aabb`(`STR` aabbID) ---> `NONE`  
   Queues non-bound **aabbID** to be saved in the custom scene (does not have to exist yet).
-- `fe3d:scene_add_custom_audio`(`STR` audioID) ---> `NONE`  
-  Queues 3D **audioID** to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_sound`(`STR` soundID) ---> `NONE`  
+  Queues 3D **soundID** to be saved in the custom scene (does not have to exist yet).
 - `fe3d:scene_add_custom_light`(`STR` lightID) ---> `NONE`  
   Queues **lightID** to be saved in the custom scene (does not have to exist yet).
 - `fe3d:scene_add_custom_lighting`() ---> `NONE`  

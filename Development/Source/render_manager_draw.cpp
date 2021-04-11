@@ -164,16 +164,16 @@ void RenderManager::_renderFinalSceneTexture()
 	_finalRenderer.unbind();
 }
 
-void RenderManager::_renderGuiEntities()
+void RenderManager::_renderImageEntities()
 {
-	if (!_entityBus->getGuiEntities().empty())
+	if (!_entityBus->getImageEntities().empty())
 	{
 		// Bind
-		_guiEntityRenderer.bind();
+		_imageEntityRenderer.bind();
 
 		// Sort render order
-		std::map<unsigned int, shared_ptr<GuiEntity>> orderedMap;
-		for (auto& [keyID, entity] : _entityBus->getGuiEntities())
+		std::map<unsigned int, shared_ptr<ImageEntity>> orderedMap;
+		for (auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
 			// Custom cursor entity must be rendered last
 			if (entity->getID() != _renderBus.getCursorEntityID())
@@ -185,11 +185,11 @@ void RenderManager::_renderGuiEntities()
 		// Render all entities
 		for (auto& [keyID, entity] : orderedMap)
 		{
-			_guiEntityRenderer.render(entity);
+			_imageEntityRenderer.render(entity);
 		}
 
 		// Unbind
-		_guiEntityRenderer.unbind();
+		_imageEntityRenderer.unbind();
 	}
 }
 
@@ -198,7 +198,7 @@ void RenderManager::_renderTextEntities()
 	if (!_entityBus->getTextEntities().empty())
 	{
 		// Bind
-		_guiEntityRenderer.bind();
+		_imageEntityRenderer.bind();
 
 		// Sort render order
 		std::map<unsigned int, shared_ptr<TextEntity>> orderedMap;
@@ -215,29 +215,29 @@ void RenderManager::_renderTextEntities()
 				// Render every character individually
 				for (auto& characterEntity : textEntity->getCharacterEntities())
 				{
-					_guiEntityRenderer.render(characterEntity);
+					_imageEntityRenderer.render(characterEntity);
 				}
 			}
 			else // Static text rendering
 			{
-				_guiEntityRenderer.render(textEntity);
+				_imageEntityRenderer.render(textEntity);
 			}
 		}
 
 		// Unbind
-		_guiEntityRenderer.unbind();
+		_imageEntityRenderer.unbind();
 	}
 }
 
 void RenderManager::_renderCustomCursor()
 {
-	for (auto& [keyID, entity] : _entityBus->getGuiEntities())
+	for (auto& [keyID, entity] : _entityBus->getImageEntities())
 	{
 		if (entity->getID() == _renderBus.getCursorEntityID())
 		{
-			_guiEntityRenderer.bind();
-			_guiEntityRenderer.render(entity);
-			_guiEntityRenderer.unbind();
+			_imageEntityRenderer.bind();
+			_imageEntityRenderer.render(entity);
+			_imageEntityRenderer.unbind();
 		}
 	}
 }
@@ -252,7 +252,7 @@ void RenderManager::_renderDebugScreens()
 	std::function<float(string)> calcTextWidth = [&](string text) {return static_cast<float>(text.size()) * charWidth; };
 
 	// Normal scene - surface
-	shared_ptr<GuiEntity> normalSurface = make_shared<GuiEntity>("normalSurface");
+	shared_ptr<ImageEntity> normalSurface = make_shared<ImageEntity>("normalSurface");
 	normalSurface->setTexture(_renderBus.getSceneMap());
 	normalSurface->addRenderBuffer(new RenderBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	normalSurface->setMirroredVertically(true);
@@ -264,7 +264,7 @@ void RenderManager::_renderDebugScreens()
 	normalText->setColor(color);
 
 	// Shadow scene - surface
-	shared_ptr<GuiEntity> shadowSurface = make_shared<GuiEntity>("shadowSurface");
+	shared_ptr<ImageEntity> shadowSurface = make_shared<ImageEntity>("shadowSurface");
 	shadowSurface->setTexture(_renderBus.getShadowMap());
 	shadowSurface->addRenderBuffer(new RenderBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	shadowSurface->setMirroredVertically(true);
@@ -276,7 +276,7 @@ void RenderManager::_renderDebugScreens()
 	shadowText->setColor(color);
 
 	// Reflection scene - surface
-	shared_ptr<GuiEntity> reflectionSurface = make_shared<GuiEntity>("reflectionSurface");
+	shared_ptr<ImageEntity> reflectionSurface = make_shared<ImageEntity>("reflectionSurface");
 	reflectionSurface->setTexture(_renderBus.getSceneReflectionMap());
 	reflectionSurface->addRenderBuffer(new RenderBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	reflectionSurface->setMirroredVertically(true);
@@ -288,7 +288,7 @@ void RenderManager::_renderDebugScreens()
 	reflectionText->setColor(color);
 
 	// Refraction scene - surface
-	shared_ptr<GuiEntity> refractionSurface = make_shared<GuiEntity>("refractionSurface");
+	shared_ptr<ImageEntity> refractionSurface = make_shared<ImageEntity>("refractionSurface");
 	refractionSurface->setTexture(_renderBus.getSceneRefractionMap());
 	refractionSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	refractionSurface->setMirroredVertically(true);
@@ -300,7 +300,7 @@ void RenderManager::_renderDebugScreens()
 	refractionText->setColor(color);
 
 	// Depth scene - surface
-	shared_ptr<GuiEntity> depthSurface = make_shared<GuiEntity>("depthSurface");
+	shared_ptr<ImageEntity> depthSurface = make_shared<ImageEntity>("depthSurface");
 	depthSurface->setDepthEntity(true);
 	depthSurface->setTexture(_renderBus.getSceneDepthMap());
 	depthSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 0.66666f, 0.66666f, true, false));
@@ -313,7 +313,7 @@ void RenderManager::_renderDebugScreens()
 	depthText->setColor(color);
 
 	// Bloom scene - surface
-	shared_ptr<GuiEntity> bloomSurface = make_shared<GuiEntity>("bloomSurface");
+	shared_ptr<ImageEntity> bloomSurface = make_shared<ImageEntity>("bloomSurface");
 	bloomSurface->setTexture(_renderBus.getBloomMap());
 	bloomSurface->addRenderBuffer(new RenderBuffer(0.0f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	bloomSurface->setMirroredVertically(true);
@@ -325,7 +325,7 @@ void RenderManager::_renderDebugScreens()
 	bloomText->setColor(color);
 	
 	// Blur scene - surface
-	shared_ptr<GuiEntity> blurSurface = make_shared<GuiEntity>("blurSurface");
+	shared_ptr<ImageEntity> blurSurface = make_shared<ImageEntity>("blurSurface");
 	blurSurface->setTexture(_renderBus.getBlurMap());
 	blurSurface->addRenderBuffer(new RenderBuffer(0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	blurSurface->setMirroredVertically(true);
@@ -337,7 +337,7 @@ void RenderManager::_renderDebugScreens()
 	blurText->setColor(color);
 
 	// Postprocessed scene - surface
-	shared_ptr<GuiEntity> postprocessedSurface = make_shared<GuiEntity>("postprocessedSurface");
+	shared_ptr<ImageEntity> postprocessedSurface = make_shared<ImageEntity>("postprocessedSurface");
 	postprocessedSurface->setTexture(_renderBus.getPostProcessedSceneMap());
 	postprocessedSurface->addRenderBuffer(new RenderBuffer(0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	postprocessedSurface->setMirroredVertically(true);
@@ -349,7 +349,7 @@ void RenderManager::_renderDebugScreens()
 	postprocessedText->setColor(color);
 
 	// Motion scene - surface
-	shared_ptr<GuiEntity> motionSurface = make_shared<GuiEntity>("motionSurface");
+	shared_ptr<ImageEntity> motionSurface = make_shared<ImageEntity>("motionSurface");
 	motionSurface->setTexture(_renderBus.getMotionBlurMap());
 	motionSurface->addRenderBuffer(new RenderBuffer(0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	motionSurface->setMirroredVertically(true);
@@ -361,24 +361,24 @@ void RenderManager::_renderDebugScreens()
 	motionText->setColor(color);
 	
 	// Render debug screens + text
-	_guiEntityRenderer.bind();
-	_guiEntityRenderer.render(normalSurface);
-	_guiEntityRenderer.render(normalText);
-	_guiEntityRenderer.render(shadowSurface);
-	_guiEntityRenderer.render(shadowText);
-	_guiEntityRenderer.render(reflectionSurface);
-	_guiEntityRenderer.render(reflectionText);
-	_guiEntityRenderer.render(refractionSurface);
-	_guiEntityRenderer.render(refractionText);
-	_guiEntityRenderer.render(depthSurface);
-	_guiEntityRenderer.render(depthText);
-	_guiEntityRenderer.render(bloomSurface);
-	_guiEntityRenderer.render(bloomText);
-	_guiEntityRenderer.render(blurSurface);
-	_guiEntityRenderer.render(blurText);
-	_guiEntityRenderer.render(postprocessedSurface);
-	_guiEntityRenderer.render(postprocessedText);
-	_guiEntityRenderer.render(motionSurface);
-	_guiEntityRenderer.render(motionText);
-	_guiEntityRenderer.unbind();
+	_imageEntityRenderer.bind();
+	_imageEntityRenderer.render(normalSurface);
+	_imageEntityRenderer.render(normalText);
+	_imageEntityRenderer.render(shadowSurface);
+	_imageEntityRenderer.render(shadowText);
+	_imageEntityRenderer.render(reflectionSurface);
+	_imageEntityRenderer.render(reflectionText);
+	_imageEntityRenderer.render(refractionSurface);
+	_imageEntityRenderer.render(refractionText);
+	_imageEntityRenderer.render(depthSurface);
+	_imageEntityRenderer.render(depthText);
+	_imageEntityRenderer.render(bloomSurface);
+	_imageEntityRenderer.render(bloomText);
+	_imageEntityRenderer.render(blurSurface);
+	_imageEntityRenderer.render(blurText);
+	_imageEntityRenderer.render(postprocessedSurface);
+	_imageEntityRenderer.render(postprocessedText);
+	_imageEntityRenderer.render(motionSurface);
+	_imageEntityRenderer.render(motionText);
+	_imageEntityRenderer.unbind();
 }

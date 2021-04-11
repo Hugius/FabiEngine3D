@@ -39,12 +39,12 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	_isHovered = false;
 
 	// Check if button is visible anyway
-	if (_fe3d.guiEntity_isVisible(_rectangle->getEntityID()))
+	if (_fe3d.imageEntity_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
 		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		Vec2 buttonPos = _fe3d.guiEntity_getPosition(_rectangle->getEntityID());
-		Vec2 buttonSize = _fe3d.guiEntity_getSize(_rectangle->getEntityID());
+		Vec2 buttonPos = _fe3d.imageEntity_getPosition(_rectangle->getEntityID());
+		Vec2 buttonSize = _fe3d.imageEntity_getSize(_rectangle->getEntityID());
 
 		// Check if cursor inside button
 		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis
@@ -63,11 +63,11 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 						string rectangleID = _rectangle->getEntityID();
 
 						// Slowly increase rectangle size
-						if (_fe3d.guiEntity_getSize(rectangleID).x < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).x &&
-							_fe3d.guiEntity_getSize(rectangleID).y < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
+						if (_fe3d.imageEntity_getSize(rectangleID).x < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).x &&
+							_fe3d.imageEntity_getSize(rectangleID).y < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
 						{
 							// Rectangle
-							_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * INCREASE_FACTOR);
+							_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * INCREASE_FACTOR);
 						}
 
 						// Slowly increase textfield size
@@ -87,7 +87,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 					if (_colorChangeEnabled)
 					{
 						// Rectangle
-						_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _hoverColor);
+						_fe3d.imageEntity_setColor(_rectangle->getEntityID(), _hoverColor);
 
 						// Textfield
 						if (_textfield != nullptr)
@@ -106,15 +106,15 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 			string rectangleID = _rectangle->getEntityID();
 
 			// Slowly decrease to default size
-			if (_fe3d.guiEntity_getSize(rectangleID).x > _rectangle->getOriginalSize().x &&
-				_fe3d.guiEntity_getSize(rectangleID).y > _rectangle->getOriginalSize().y)
+			if (_fe3d.imageEntity_getSize(rectangleID).x > _rectangle->getOriginalSize().x &&
+				_fe3d.imageEntity_getSize(rectangleID).y > _rectangle->getOriginalSize().y)
 			{
 				// Rectangle
-				_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * DECREASE_FACTOR);
+				_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * DECREASE_FACTOR);
 			}
 
 			// Set rectangle to default color
-			_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _rectangle->getOriginalColor());
+			_fe3d.imageEntity_setColor(_rectangle->getEntityID(), _rectangle->getOriginalColor());
 
 			// Textfield
 			if (_textfield != nullptr)
@@ -137,7 +137,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	// Set cursor texture to pointing
 	if(_isHovered)
 	{
-		_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+		_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 	}
 }
 
@@ -172,7 +172,7 @@ void EngineGuiButton::setHoverable(bool hoverable)
 	if (hoverable)
 	{
 		// Rectangle
-		_fe3d.guiEntity_setAlpha(_rectangle->getEntityID(), 1.0f);
+		_fe3d.imageEntity_setAlpha(_rectangle->getEntityID(), 1.0f);
 
 		// Text
 		if (_textfield != nullptr)
@@ -183,7 +183,7 @@ void EngineGuiButton::setHoverable(bool hoverable)
 	else
 	{
 		// Rectangle
-		_fe3d.guiEntity_setAlpha(_rectangle->getEntityID(), 0.25f);
+		_fe3d.imageEntity_setAlpha(_rectangle->getEntityID(), 0.25f);
 
 		// Text
 		if (_textfield != nullptr)

@@ -39,7 +39,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_selectedModelID = modelID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -86,7 +86,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_selectedBillboardID = billboardID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -133,7 +133,7 @@ void SceneEditor::_selectSound(const string& soundID)
 	_selectedSpeakerID = "@speaker_" + soundID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")

@@ -7,7 +7,7 @@
 #include "water_entity.hpp"
 #include "light_entity.hpp"
 #include "model_entity.hpp"
-#include "gui_entity.hpp"
+#include "image_entity.hpp"
 #include "render_bus.hpp"
 
 #include <memory>

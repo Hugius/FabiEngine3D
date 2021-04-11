@@ -226,10 +226,10 @@
     <ClCompile Include="Source\audio_editor_persistence.cpp">
       <Filter>src\Editor System\Audio Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_audio_updates.cpp">
+    <ClCompile Include="Source\scene_editor_sound_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_audio_placing.cpp">
+    <ClCompile Include="Source\scene_editor_sound_placing.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_execution.cpp">
@@ -364,7 +364,7 @@
     <ClCompile Include="Source\model_editor_updates_main.cpp">
       <Filter>src\Editor System\Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_audio_edit.cpp">
+    <ClCompile Include="Source\scene_editor_sound_edit.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_edit.cpp">
@@ -487,7 +487,7 @@
     <ClCompile Include="Source\model_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\gui_entity_renderer.cpp">
+    <ClCompile Include="Source\image_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_camera.cpp">
@@ -520,7 +520,7 @@
     <ClCompile Include="Source\model_entity_manager.cpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\gui_entity_manager.cpp">
+    <ClCompile Include="Source\image_entity_manager.cpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\light_entity_manager.cpp">
@@ -559,7 +559,7 @@
     <ClCompile Include="Source\model_entity_getters.cpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\gui_entity.cpp">
+    <ClCompile Include="Source\image_entity.cpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\light_entity.cpp">
@@ -610,7 +610,7 @@
     <ClCompile Include="Source\fabi_engine_3d_entity_model.cpp">
       <Filter>src\Core System\Interface\Entities\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_gui.cpp">
+    <ClCompile Include="Source\fabi_engine_3d_entity_image.cpp">
       <Filter>src\Core System\Interface\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_light.cpp">
@@ -969,7 +969,7 @@
     <ClInclude Include="Source\model_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\gui_entity_renderer.hpp">
+    <ClInclude Include="Source\image_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\sky_entity_manager.hpp">
@@ -990,7 +990,7 @@
     <ClInclude Include="Source\model_entity_manager.hpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\gui_entity_manager.hpp">
+    <ClInclude Include="Source\image_entity_manager.hpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\light_entity_manager.hpp">
@@ -1020,7 +1020,7 @@
     <ClInclude Include="Source\model_entity.hpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\gui_entity.hpp">
+    <ClInclude Include="Source\image_entity.hpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\light_entity.hpp">
@@ -1462,10 +1462,10 @@
     <None Include="..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\image_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
     <None Include="..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag">

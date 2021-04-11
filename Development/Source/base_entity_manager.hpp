@@ -11,7 +11,7 @@
 #include "billboard_entity.hpp"
 #include "aabb_entity.hpp"
 #include "light_entity.hpp"
-#include "gui_entity.hpp"
+#include "image_entity.hpp"
 #include "text_entity.hpp"
 #include "entity_type.hpp"
 
@@ -46,7 +46,7 @@ protected:
 	unordered_map<string, shared_ptr<AabbEntity>>&		_getAabbEntities();
 	unordered_map<string, shared_ptr<BillboardEntity>>& _getBillboardEntities();
 	unordered_map<string, shared_ptr<ModelEntity>>&		_getModelEntities();
-	unordered_map<string, shared_ptr<GuiEntity>>&		_getGuiEntities();
+	unordered_map<string, shared_ptr<ImageEntity>>&		_getImageEntities();
 	unordered_map<string, shared_ptr<LightEntity>>&		_getLightEntities();
 	unordered_map<string, shared_ptr<SkyEntity>>&		_getSkyEntities();
 	unordered_map<string, shared_ptr<TerrainEntity>>&	_getTerrainEntities();
@@ -56,7 +56,7 @@ protected:
 	shared_ptr<AabbEntity>		_getAabbEntity(const string& ID);
 	shared_ptr<BillboardEntity> _getBillboardEntity(const string& ID);
 	shared_ptr<ModelEntity>		_getModelEntity(const string& ID);
-	shared_ptr<GuiEntity>		_getGuiEntity(const string& ID);
+	shared_ptr<ImageEntity>		_getImageEntity(const string& ID);
 	shared_ptr<LightEntity>		_getLightEntity(const string& ID);
 	shared_ptr<SkyEntity>		_getSkyEntity(const string& ID);
 	shared_ptr<TerrainEntity>	_getTerrainEntity(const string& ID);
@@ -67,7 +67,7 @@ private:
 	unordered_map<string, shared_ptr<AabbEntity>>	   _aabbEntities;
 	unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 	unordered_map<string, shared_ptr<ModelEntity>>	   _modelEntities;
-	unordered_map<string, shared_ptr<GuiEntity>>	   _guiEntities;
+	unordered_map<string, shared_ptr<ImageEntity>>	   _imageEntities;
 	unordered_map<string, shared_ptr<LightEntity>>	   _lightEntities;
 	unordered_map<string, shared_ptr<SkyEntity>>	   _skyEntities;
 	unordered_map<string, shared_ptr<TerrainEntity>>   _terrainEntities;

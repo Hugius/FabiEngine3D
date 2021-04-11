@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dGuiEntity(const string& ID)
+bool ScriptInterpreter::_validateFe3dImageEntity(const string& ID)
 {
 	// Cannot request/delete an engine entity
 	if (ID.front() == '@')
@@ -10,7 +10,7 @@ bool ScriptInterpreter::_validateFe3dGuiEntity(const string& ID)
 	}
 
 	// Check if entity exists
-	if (!_fe3d.guiEntity_isExisting(ID))
+	if (!_fe3d.imageEntity_isExisting(ID))
 	{
 		_throwScriptError("Requested image with ID \"" + ID + "\" does not exist!");
 
@@ -20,7 +20,7 @@ bool ScriptInterpreter::_validateFe3dGuiEntity(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:image_is_existing")
@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 
 			// Check if existing
-			auto result = _fe3d.guiEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.imageEntity_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
@@ -56,8 +56,8 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 				return true;
 			}
 
-			// Find full guiEntity IDs based on part ID
-			for (auto& ID : _fe3d.guiEntity_getAllIDs())
+			// Find full imageEntity IDs based on part ID
+			for (auto& ID : _fe3d.imageEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -76,7 +76,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.guiEntity_getAllIDs();
+			auto result = _fe3d.imageEntity_getAllIDs();
 
 			// For every image
 			for (auto& ID : result)
@@ -110,15 +110,15 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 				return true;
 			}
 
-			// Check if guiEntity already exists
-			if (_fe3d.guiEntity_isExisting(arguments[0].getString()))
+			// Check if imageEntity already exists
+			if (_fe3d.imageEntity_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("image with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 			
 			// Add image
-			_fe3d.guiEntity_add(
+			_fe3d.imageEntity_add(
 				arguments[0].getString(),
 				string("game_assets\\textures\\image_maps\\") + arguments[1].getString(),
 				_convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())),
@@ -131,8 +131,8 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			{
 				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
 				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
-				_fe3d.guiEntity_setMinPosition(arguments[0].getString(), minPos);
-				_fe3d.guiEntity_setMaxPosition(arguments[0].getString(), maxPos);
+				_fe3d.imageEntity_setMinPosition(arguments[0].getString(), minPos);
+				_fe3d.imageEntity_setMaxPosition(arguments[0].getString(), maxPos);
 			}
 
 			// Return
@@ -147,9 +147,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_delete(arguments[0].getString());
+				_fe3d.imageEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -162,16 +162,16 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
 				// Determine if image must be visible or not
 				if (arguments[1].getBoolean())
 				{
-					_fe3d.guiEntity_show(arguments[0].getString());
+					_fe3d.imageEntity_show(arguments[0].getString());
 				}
 				else
 				{
-					_fe3d.guiEntity_hide(arguments[0].getString());
+					_fe3d.imageEntity_hide(arguments[0].getString());
 				}
 
 				// Return
@@ -187,9 +187,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -202,10 +202,10 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
 				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.guiEntity_setPosition(arguments[0].getString(), position);
+				_fe3d.imageEntity_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -218,10 +218,10 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
 				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.guiEntity_move(arguments[0].getString(), factor);
+				_fe3d.imageEntity_move(arguments[0].getString(), factor);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -234,9 +234,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).x));
 			}
 		}
@@ -249,9 +249,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).y));
 			}
 		}
@@ -264,9 +264,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.imageEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -279,9 +279,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.imageEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -294,9 +294,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getRotation(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
@@ -309,10 +309,10 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
 				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.guiEntity_setSize(arguments[0].getString(), size);
+				_fe3d.imageEntity_setSize(arguments[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -325,10 +325,10 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
 				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.guiEntity_scale(arguments[0].getString(), factor);
+				_fe3d.imageEntity_scale(arguments[0].getString(), factor);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -341,9 +341,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).x));
 			}
 		}
@@ -356,9 +356,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).y));
 			}
 		}
@@ -371,9 +371,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setColor(arguments[0].getString(),
+				_fe3d.imageEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -387,9 +387,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -402,9 +402,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.imageEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -417,9 +417,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_getAlpha(arguments[0].getString());
+				auto result = _fe3d.imageEntity_getAlpha(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
@@ -439,12 +439,12 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setAnimationRows(arguments[0].getString(), arguments[1].getInteger());
-				_fe3d.guiEntity_setAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
-				_fe3d.guiEntity_setAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
-				_fe3d.guiEntity_playAnimation(arguments[0].getString(), arguments[4].getInteger());
+				_fe3d.imageEntity_setAnimationRows(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.imageEntity_setAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
+				_fe3d.imageEntity_setAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
+				_fe3d.imageEntity_playAnimation(arguments[0].getString(), arguments[4].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -457,9 +457,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_pauseAnimation(arguments[0].getString());
+				_fe3d.imageEntity_pauseAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -472,9 +472,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_resumeAnimation(arguments[0].getString());
+				_fe3d.imageEntity_resumeAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -487,9 +487,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_stopAnimation(arguments[0].getString());
+				_fe3d.imageEntity_stopAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -502,9 +502,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isAnimationFinished(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isAnimationFinished(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -517,9 +517,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isAnimationPlaying(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isAnimationPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -532,9 +532,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isAnimationPaused(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -547,9 +547,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.imageEntity_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -562,9 +562,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.guiEntity_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.imageEntity_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -577,9 +577,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isMirroredHorizontally(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isMirroredHorizontally(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -592,9 +592,9 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.guiEntity_isMirroredVertically(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isMirroredVertically(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}

@@ -400,7 +400,7 @@ vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics()
 		pair<string, int>("modelEntityRender", 0),
 		pair<string, int>("billboardEntityRender", 0),
 		pair<string, int>("aabbEntityRender", 0),
-		pair<string, int>("guiTextEntityRender", 0),
+		pair<string, int>("guiEntityRender", 0),
 		pair<string, int>("postProcessing", 0),
 		pair<string, int>("bufferSwap", 0)
 	};

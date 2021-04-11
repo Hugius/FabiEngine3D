@@ -7,7 +7,7 @@
 #include "billboard_entity.hpp"
 #include "aabb_entity.hpp"
 #include "light_entity.hpp"
-#include "gui_entity.hpp"
+#include "image_entity.hpp"
 #include "text_entity.hpp"
 
 #include <unordered_map>
@@ -27,7 +27,7 @@ public:
 		const unordered_map<string, shared_ptr<BillboardEntity>> & billboardEntities,
 		const unordered_map<string, shared_ptr<AabbEntity>>      & aabbEntities,
 		const unordered_map<string, shared_ptr<LightEntity>>     & lightEntities,
-		const unordered_map<string, shared_ptr<GuiEntity>>       & guiEntities,
+		const unordered_map<string, shared_ptr<ImageEntity>>     & imageEntities,
 		const unordered_map<string, shared_ptr<TextEntity>>      & textEntities
 	);
 
@@ -40,7 +40,7 @@ public:
 	const unordered_map<string, shared_ptr<BillboardEntity>> & getBillboardEntities() const;
 	const unordered_map<string, shared_ptr<AabbEntity>>      & getAabbEntities()      const;
 	const unordered_map<string, shared_ptr<LightEntity>>     & getLightEntities()     const;
-	const unordered_map<string, shared_ptr<GuiEntity>>       & getGuiEntities()       const;
+	const unordered_map<string, shared_ptr<ImageEntity>>     & getImageEntities()     const;
 	const unordered_map<string, shared_ptr<TextEntity>>      & getTextEntities()      const;
 
 private:
@@ -53,6 +53,6 @@ private:
 	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 	const unordered_map<string, shared_ptr<AabbEntity>>      _aabbEntities;
 	const unordered_map<string, shared_ptr<LightEntity>>     _lightEntities;
-	const unordered_map<string, shared_ptr<GuiEntity>>       _guiEntities;
+	const unordered_map<string, shared_ptr<ImageEntity>>     _imageEntities;
 	const unordered_map<string, shared_ptr<TextEntity>>      _textEntities;
 };

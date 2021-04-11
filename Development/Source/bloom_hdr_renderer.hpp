@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity_renderer.hpp"
-#include "gui_entity.hpp"
+#include "image_entity.hpp"
 
 class BloomHdrRenderer final : public BaseEntityRenderer
 {
@@ -11,6 +11,6 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const shared_ptr<GuiEntity> entity, GLuint sceneMap);
+	void render(const shared_ptr<ImageEntity> entity, GLuint sceneMap);
 };
 

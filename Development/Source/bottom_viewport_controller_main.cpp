@@ -35,7 +35,7 @@ void BottomViewportController::initialize()
 	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("guiEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("imageEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
 	// Update profiling
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
@@ -177,11 +177,11 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update gui entity count
-	if (_fe3d.misc_checkInterval("guiEntityCount", 10))
+	// Update GUI entity count
+	if (_fe3d.misc_checkInterval("imageEntityCount", 10))
 	{
-		string textID = _statsScreen->getTextfield("guiEntityCount")->getEntityID();
-		string text = "Gui entities: " + to_string(_fe3d.guiEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
+		string textID = _statsScreen->getTextfield("imageEntityCount")->getEntityID();
+		string text = "GUI entities: " + to_string(_fe3d.imageEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

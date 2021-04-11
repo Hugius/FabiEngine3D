@@ -228,9 +228,9 @@
     <ClInclude Include="Source\model_entity_manager.hpp" />
     <ClInclude Include="Source\model_entity_renderer.hpp" />
     <ClInclude Include="Source\engine_gui_button.hpp" />
-    <ClInclude Include="Source\gui_entity.hpp" />
-    <ClInclude Include="Source\gui_entity_manager.hpp" />
-    <ClInclude Include="Source\gui_entity_renderer.hpp" />
+    <ClInclude Include="Source\image_entity.hpp" />
+    <ClInclude Include="Source\image_entity_manager.hpp" />
+    <ClInclude Include="Source\image_entity_renderer.hpp" />
     <ClInclude Include="Source\input_handler.hpp" />
     <ClInclude Include="Source\input_type.hpp" />
     <ClInclude Include="Source\light_entity.hpp" />
@@ -331,9 +331,9 @@
     <ClCompile Include="Source\model_editor_updates_misc.cpp" />
     <ClCompile Include="Source\render_bus_getters.cpp" />
     <ClCompile Include="Source\render_manager_capture_one.cpp" />
-    <ClCompile Include="Source\scene_editor_audio_edit.cpp" />
-    <ClCompile Include="Source\scene_editor_audio_placing.cpp" />
-    <ClCompile Include="Source\scene_editor_audio_updates.cpp" />
+    <ClCompile Include="Source\scene_editor_sound_edit.cpp" />
+    <ClCompile Include="Source\scene_editor_sound_placing.cpp" />
+    <ClCompile Include="Source\scene_editor_sound_updates.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_edit.cpp" />
     <ClCompile Include="Source\scene_editor_loading_custom.cpp" />
     <ClCompile Include="Source\scene_editor_main.cpp" />
@@ -361,7 +361,7 @@
     <ClCompile Include="Source\fabi_engine_3d_collision.cpp" />
     <ClCompile Include="Source\fabi_engine_3d_entity_model.cpp" />
     <ClCompile Include="Source\fabi_engine_3d_graphics.cpp" />
-    <ClCompile Include="Source\fabi_engine_3d_entity_gui.cpp" />
+    <ClCompile Include="Source\fabi_engine_3d_entity_image.cpp" />
     <ClCompile Include="Source\fabi_engine_3d_input.cpp" />
     <ClCompile Include="Source\fabi_engine_3d_entity_light.cpp" />
     <ClCompile Include="Source\fabi_engine_3d_misc_getters.cpp" />
@@ -437,7 +437,7 @@
     <ClCompile Include="Source\engine_gui_window.cpp" />
     <ClCompile Include="Source\engine_gui_writefield.cpp" />
     <ClCompile Include="Source\final_renderer.cpp" />
-    <ClCompile Include="Source\gui_entity_renderer.cpp" />
+    <ClCompile Include="Source\image_entity_renderer.cpp" />
     <ClCompile Include="Source\entity_bus.cpp" />
     <ClCompile Include="Source\model_entity_renderer.cpp" />
     <ClCompile Include="Source\base_entity.cpp" />
@@ -446,8 +446,8 @@
     <ClCompile Include="Source\camera_manager_main.cpp" />
     <ClCompile Include="Source\model_entity_setters.cpp" />
     <ClCompile Include="Source\model_entity_manager.cpp" />
-    <ClCompile Include="Source\gui_entity.cpp" />
-    <ClCompile Include="Source\gui_entity_manager.cpp" />
+    <ClCompile Include="Source\image_entity.cpp" />
+    <ClCompile Include="Source\image_entity_manager.cpp" />
     <ClCompile Include="Source\light_entity.cpp" />
     <ClCompile Include="Source\light_entity_manager.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -517,8 +517,8 @@
     <None Include="..\FabiEngine3D\engine_assets\shaders\final_shader.vert" />
     <None Include="..\FabiEngine3D\engine_assets\shaders\model_entity_shader.frag" />
     <None Include="..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\engine_assets\shaders\image_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert" />
     <None Include="..\FabiEngine3D\engine_assets\shaders\post_shader.frag" />
     <None Include="..\FabiEngine3D\engine_assets\shaders\post_shader.vert" />
     <None Include="..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag" />

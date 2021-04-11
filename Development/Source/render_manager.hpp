@@ -9,7 +9,7 @@
 #include "model_entity_renderer.hpp"
 #include "billboard_entity_renderer.hpp"
 #include "aabb_entity_renderer.hpp"
-#include "gui_entity_renderer.hpp"
+#include "image_entity_renderer.hpp"
 #include "post_renderer.hpp"
 #include "bloom_hdr_renderer.hpp"
 #include "blur_renderer.hpp"
@@ -26,7 +26,7 @@ public:
 	RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
 	~RenderManager() = default;
 
-	void renderEngineLogo(shared_ptr<GuiEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
+	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus, CameraManager& camera);
 	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);
@@ -47,7 +47,7 @@ private:
 	EntityBus* _entityBus = nullptr;
 
 	// Final screen texture
-	shared_ptr<GuiEntity> _finalSurface = nullptr;
+	shared_ptr<ImageEntity> _finalSurface = nullptr;
 
 	// Renderers
 	SkyEntityRenderer        _skyEntityRenderer;
@@ -56,7 +56,7 @@ private:
 	ModelEntityRenderer      _modelEntityRenderer;
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
-	GuiEntityRenderer        _guiEntityRenderer;
+	ImageEntityRenderer        _imageEntityRenderer;
 	BlurRenderer             _blurRenderer;
 	BloomHdrRenderer         _bloomHdrRenderer;
 	ShadowRenderer           _shadowRenderer;
@@ -94,7 +94,7 @@ private:
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneTexture();
-	void _renderGuiEntities();
+	void _renderImageEntities();
 	void _renderTextEntities();
 	void _renderCustomCursor();
 

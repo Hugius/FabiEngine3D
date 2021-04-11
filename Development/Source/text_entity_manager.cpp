@@ -93,7 +93,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 			if (!invalidFont)
 			{
 				// Create new character entity
-				auto newCharacter = make_shared<GuiEntity>("uselessID");
+				auto newCharacter = make_shared<ImageEntity>("uselessID");
 				newCharacter->addRenderBuffer(_nonCenteredRenderBuffer, false);
 
 				// Load text map

@@ -265,7 +265,7 @@ void SceneEditor::_updateCamera()
 				// Disable cursor while in FPS mode
 				if (_fe3d.camera_isFirstPersonViewEnabled())
 				{
-					_fe3d.guiEntity_hide("@@cursor");
+					_fe3d.imageEntity_hide("@@cursor");
 				}
 			}
 			else
@@ -275,7 +275,7 @@ void SceneEditor::_updateCamera()
 				// Cannot show cursor if outside of engine window
 				if (_fe3d.misc_isCursorInsideWindow())
 				{
-					_fe3d.guiEntity_show("@@cursor");
+					_fe3d.imageEntity_show("@@cursor");
 				}
 			}
 

@@ -51,7 +51,7 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-void TextEntity::addCharacterEntity(shared_ptr<GuiEntity> character)
+void TextEntity::addCharacterEntity(shared_ptr<ImageEntity> character)
 {
 	_characters.push_back(character);
 }
@@ -71,7 +71,7 @@ bool TextEntity::isDynamic()
 	return _isDynamic;
 }
 
-const vector<shared_ptr<GuiEntity>>& TextEntity::getCharacterEntities() const
+const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characters;
 }

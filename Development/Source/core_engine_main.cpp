@@ -53,7 +53,7 @@ void CoreEngine::_start()
 void CoreEngine::_setupApplication()
 {
 	// Create engine logo
-	shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
+	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	logo->setTexture(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false, false));
 
@@ -169,15 +169,15 @@ void CoreEngine::_updateApplication()
 		_timer.stopDeltaPart();
 
 		// Audio updates
-		_timer.startDeltaPart("audioUpdate");
+		_timer.startDeltaPart("guiEntityUpdate");
 		_audioPlayer.update(_cameraManager, _audioManager.getSounds(), _audioManager.getMusic());
 		_timer.stopDeltaPart();
 	}
 
 	// Always update 2D logic (except for sprite animations)
-	_timer.startDeltaPart("guiUpdate");
-	(!_isPaused) ? _guiEntityManager.updateSpriteAnimations() : (void)0;
-	_guiEntityManager.update();
+	_timer.startDeltaPart("imageTextUpdate");
+	(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : (void)0;
+	_imageEntityManager.update();
 	_textEntityManager.update();
 	_timer.stopDeltaPart();
 
@@ -200,7 +200,7 @@ void CoreEngine::_renderApplication()
 	(
 		_skyEntityManager.getSelectedMainSky(), _skyEntityManager.getSelectedMixSky(), _terrainEntityManager.getSelectedTerrain(),
 		_waterEntityManager.getSelectedWater(), _modelEntityManager.getEntities(), _billboardEntityManager.getEntities(), 
-		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
+		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _imageEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
 
 	// Render entities

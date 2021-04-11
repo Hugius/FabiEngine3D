@@ -115,16 +115,16 @@ void BaseEntityManager::_createEntity(const string& ID)
 			break;
 		}
 
-		case(EntityType::GUI):
+		case(EntityType::IMAGE):
 		{
-			if (_getGuiEntity(ID) != nullptr)
+			if (_getImageEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create gui entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create image entity: \"" + ID + "\" already exists!");
 			}
 			else
 			{
-				_guiEntities.insert(make_pair(ID, make_shared<GuiEntity>(ID)));
-				_getGuiEntity(ID)->setDepth(_guiDepth);
+				_imageEntities.insert(make_pair(ID, make_shared<ImageEntity>(ID)));
+				_getImageEntity(ID)->setDepth(_guiDepth);
 				_guiDepth++;
 			}
 
@@ -223,9 +223,9 @@ void BaseEntityManager::deleteEntity(const string& ID)
 			break;
 		}
 
-		case(EntityType::GUI):
+		case(EntityType::IMAGE):
 		{
-			if (_guiEntities.erase(ID))
+			if (_imageEntities.erase(ID))
 			{
 				return;
 			}
@@ -248,7 +248,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	std::map<EntityType, string> temp;
 	temp[EntityType::SKY] = "SKY"; temp[EntityType::TERRAIN] = "TERRAIN"; temp[EntityType::WATER] = "WATER";
 	temp[EntityType::MODEL] = "MODEL"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
-	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
+	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::IMAGE] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
 	Logger::throwError("Non-existing " + temp[_type] + " entity with ID \"" + ID + "\" requested for removal!");
@@ -259,7 +259,7 @@ void BaseEntityManager::deleteAllEntities()
 	_aabbEntities.clear();
 	_billboardEntities.clear();
 	_modelEntities.clear();
-	_guiEntities.clear();
+	_imageEntities.clear();
 	_lightEntities.clear();
 	_skyEntities.clear();
 	_terrainEntities.clear();

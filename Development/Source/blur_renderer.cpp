@@ -23,7 +23,7 @@ void BlurRenderer::unbind()
 	_shader.unbind();
 }
 
-GLuint BlurRenderer::blurTexture(const shared_ptr<GuiEntity> entity, GLuint texture, int index, int size, float intensity, BlurDirection direction)
+GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, int index, int size, float intensity, BlurDirection direction)
 {
 	// Variables
 	bool firstTime = true;
@@ -67,7 +67,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<GuiEntity> entity, GLuint text
 	return texture;
 }
 
-void BlurRenderer::_render(const shared_ptr<GuiEntity> entity, GLuint texture)
+void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 {
 	if (entity->isVisible())
 	{

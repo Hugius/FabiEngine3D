@@ -33,9 +33,9 @@ bool BaseEntityManager::isExisting(const string& ID)
 		{
 			return (_getLightEntity(ID) != nullptr);
 		}
-		case(EntityType::GUI):
+		case(EntityType::IMAGE):
 		{
-			return (_getGuiEntity(ID) != nullptr);
+			return (_getImageEntity(ID) != nullptr);
 		}
 		case(EntityType::TEXT):
 		{
@@ -61,9 +61,9 @@ unordered_map<string, shared_ptr<ModelEntity>>& BaseEntityManager::_getModelEnti
 	return _modelEntities;
 }
 
-unordered_map<string, shared_ptr<GuiEntity>>& BaseEntityManager::_getGuiEntities()
+unordered_map<string, shared_ptr<ImageEntity>>& BaseEntityManager::_getImageEntities()
 {
-	return _guiEntities;
+	return _imageEntities;
 }
 
 unordered_map<string, shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
@@ -133,11 +133,11 @@ shared_ptr<ModelEntity> BaseEntityManager::_getModelEntity(const string& ID)
 	}
 }
 
-shared_ptr<GuiEntity> BaseEntityManager::_getGuiEntity(const string& ID)
+shared_ptr<ImageEntity> BaseEntityManager::_getImageEntity(const string& ID)
 {
-	auto it = _guiEntities.find(ID);
+	auto it = _imageEntities.find(ID);
 
-	if (it == _guiEntities.end())
+	if (it == _imageEntities.end())
 	{
 		return nullptr;
 	}

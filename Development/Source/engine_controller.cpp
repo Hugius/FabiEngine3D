@@ -121,7 +121,7 @@ void EngineController::_initializeMiscellaneous()
 	skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 	// Custom cursor texture
-	guiEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+	imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
 	misc_hideCursor();
 }
@@ -143,9 +143,9 @@ void EngineController::_updateMiscellaneous()
 	lastScreen = activeScreen;
 
 	// Update custom cursor
-	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
-	guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
-	misc_isCursorInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
+	imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
+	imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
+	misc_isCursorInsideWindow() ? imageEntity_show("@@cursor") : imageEntity_hide("@@cursor");
 }
 
 bool EngineController::mustPromptOnExit()

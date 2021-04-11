@@ -291,19 +291,19 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_disableLensFlare(true);
 
 	// Delete game GUI
-	for (const auto& ID : _fe3d.guiEntity_getAllIDs())
+	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
 	{
-		// Cannot delete engine gui entities
+		// Cannot delete engine image entities
 		if (ID.front() != '@')
 		{
-			_fe3d.guiEntity_delete(ID);
+			_fe3d.imageEntity_delete(ID);
 		}
 	}
 
 	// Delete game text
 	for (const auto& ID : _fe3d.textEntity_getAllIDs())
 	{
-		// Cannot delete engine gui entities
+		// Cannot delete engine text entities
 		if (ID.front() != '@')
 		{
 			_fe3d.textEntity_delete(ID);

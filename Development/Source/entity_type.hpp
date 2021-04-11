@@ -9,6 +9,6 @@ enum class EntityType
 	BILLBOARD,
 	AABB,
 	LIGHT,
-	GUI,
+	IMAGE,
 	TEXT
 };

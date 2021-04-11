@@ -16,7 +16,7 @@
 #include "billboard_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "light_entity_manager.hpp"
-#include "gui_entity_manager.hpp"
+#include "image_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_manager.hpp"
 #include "ray_caster.hpp"
@@ -52,7 +52,7 @@ private:
 	BillboardEntityManager _billboardEntityManager;
 	AabbEntityManager      _aabbEntityManager;
 	LightEntityManager     _lightEntityManager;
-	GuiEntityManager       _guiEntityManager;
+	ImageEntityManager       _imageEntityManager;
 	TextEntityManager      _textEntityManager;
 	ShadowManager          _shadowManager;
 	RayCaster              _rayCaster;

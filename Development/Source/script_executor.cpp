@@ -41,7 +41,7 @@ void ScriptExecutor::update(bool debug)
 		// Custom cursor is only enabled in engine preview
 		if (!_fe3d.engine_isGameExported())
 		{
-			_fe3d.guiEntity_hide("@@cursor");
+			_fe3d.imageEntity_hide("@@cursor");
 		}
 
 		// Check for errors

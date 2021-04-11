@@ -16,7 +16,7 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 	_modelEntityRenderer      ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
-	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       renderBus),
+	_imageEntityRenderer        ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
 	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             renderBus),
 	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        renderBus),
 	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
@@ -39,31 +39,31 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
 
 	// Final screen texture
-	_finalSurface = make_shared<GuiEntity>("finalSurface");
+	_finalSurface = make_shared<ImageEntity>("finalSurface");
 	_finalSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderManager::renderEngineLogo(shared_ptr<GuiEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
+void RenderManager::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
 {
 	// Prepare
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Bind
-	_guiEntityRenderer.bind();
+	_imageEntityRenderer.bind();
 
 	// Render logo
-	_guiEntityRenderer.render(logo);
+	_imageEntityRenderer.render(logo);
 
 	// Render text
 	if (text != nullptr)
 	{
-		_guiEntityRenderer.render(text);
+		_imageEntityRenderer.render(text);
 	}
 
 	// Unbind
-	_guiEntityRenderer.unbind();
+	_imageEntityRenderer.unbind();
 }
 
 void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
@@ -84,7 +84,7 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderBillboardEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-		_renderGuiEntities();
+		_renderImageEntities();
 		_renderTextEntities();
 		_renderCustomCursor();
 	}
@@ -185,10 +185,10 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 		}
 		_timer.stopDeltaPart();
 
-		// Render gui entities
-		_timer.startDeltaPart("guiTextEntityRender");
+		// Render image entities
+		_timer.startDeltaPart("guiEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
-		_renderGuiEntities();
+		_renderImageEntities();
 
 		// Render text entities
 		_renderTextEntities();

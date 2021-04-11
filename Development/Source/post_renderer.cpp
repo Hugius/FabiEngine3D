@@ -39,7 +39,7 @@ void PostRenderer::unbind()
 	_shader.unbind();
 }
 
-void PostRenderer::render(const shared_ptr<GuiEntity> entity)
+void PostRenderer::render(const shared_ptr<ImageEntity> entity)
 {
 	if (entity->isVisible())
 	{

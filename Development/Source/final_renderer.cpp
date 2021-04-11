@@ -22,7 +22,7 @@ void FinalRenderer::unbind()
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap, GLuint motionblurMap)
+void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionblurMap)
 {
 	if (entity->isVisible())
 	{

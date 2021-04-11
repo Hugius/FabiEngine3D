@@ -28,7 +28,7 @@ void SceneEditor::_updateLightEditing()
 						_selectedLightBulbID = entityID;
 
 						// Change cursor
-						_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+						_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked lightbulb
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))

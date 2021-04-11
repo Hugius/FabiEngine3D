@@ -488,56 +488,56 @@ public:
 	float lightEntity_getDistanceFactor(const string& ID);
 	vector<string> lightEntity_getAllIDs();
 
-	// Gui entity interface - setters
-	void guiEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
-	void guiEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
-	void guiEntity_deleteAll();
-	void guiEntity_delete(const string& ID);
-	void guiEntity_hideAll();
-	void guiEntity_hide(const string& ID);
-	void guiEntity_showAll();
-	void guiEntity_show(const string& ID);
-	void guiEntity_changeTexture(const string& ID, const string& texturePath);
-	void guiEntity_setPosition(const string& ID, Vec2 position);
-	void guiEntity_setRotation(const string& ID, float rotation);
-	void guiEntity_setSize(const string& ID, Vec2 size);
-	void guiEntity_move(const string& ID, Vec2 position);
-	void guiEntity_rotate(const string& ID, float rotation);
-	void guiEntity_scale(const string& ID, Vec2 size);
-	void guiEntity_setColor(const string& ID, Vec3 color);
-	void guiEntity_setAlpha(const string& ID, float alpha);
-	void guiEntity_setMinPosition(const string& ID, Vec2 minPos);
-	void guiEntity_setMaxPosition(const string& ID, Vec2 maxPos);
-	void guiEntity_playAnimation(const string& ID, int loops);
-	void guiEntity_pauseAnimation(const string& ID);
-	void guiEntity_resumeAnimation(const string& ID);
-	void guiEntity_stopAnimation(const string& ID);
-	void guiEntity_setAnimationRows(const string& ID, int rows);
-	void guiEntity_setAnimationColumns(const string& ID, int columns);
-	void guiEntity_setAnimationFramestep(const string& ID, int framestep);
-	void guiEntity_setMirroredHorizontally(const string& ID, bool mirrored);
-	void guiEntity_setMirroredVertically(const string& ID, bool mirrored);
+	// Image entity interface - setters
+	void imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
+	void imageEntity_deleteAll();
+	void imageEntity_delete(const string& ID);
+	void imageEntity_hideAll();
+	void imageEntity_hide(const string& ID);
+	void imageEntity_showAll();
+	void imageEntity_show(const string& ID);
+	void imageEntity_changeTexture(const string& ID, const string& texturePath);
+	void imageEntity_setPosition(const string& ID, Vec2 position);
+	void imageEntity_setRotation(const string& ID, float rotation);
+	void imageEntity_setSize(const string& ID, Vec2 size);
+	void imageEntity_move(const string& ID, Vec2 position);
+	void imageEntity_rotate(const string& ID, float rotation);
+	void imageEntity_scale(const string& ID, Vec2 size);
+	void imageEntity_setColor(const string& ID, Vec3 color);
+	void imageEntity_setAlpha(const string& ID, float alpha);
+	void imageEntity_setMinPosition(const string& ID, Vec2 minPos);
+	void imageEntity_setMaxPosition(const string& ID, Vec2 maxPos);
+	void imageEntity_playAnimation(const string& ID, int loops);
+	void imageEntity_pauseAnimation(const string& ID);
+	void imageEntity_resumeAnimation(const string& ID);
+	void imageEntity_stopAnimation(const string& ID);
+	void imageEntity_setAnimationRows(const string& ID, int rows);
+	void imageEntity_setAnimationColumns(const string& ID, int columns);
+	void imageEntity_setAnimationFramestep(const string& ID, int framestep);
+	void imageEntity_setMirroredHorizontally(const string& ID, bool mirrored);
+	void imageEntity_setMirroredVertically(const string& ID, bool mirrored);
 
-	// Gui entity interface - getters
-	bool guiEntity_isExisting(const string& ID);
-	bool guiEntity_isVisible(const string& ID);
-	bool guiEntity_isCentered(const string& ID);
-	bool guiEntity_isAnimationFinished(const string& ID);
-	bool guiEntity_isAnimationPlaying(const string& ID);
-	bool guiEntity_isAnimationPaused(const string& ID);
-	bool guiEntity_isMirroredHorizontally(const string& ID);
-	bool guiEntity_isMirroredVertically(const string& ID);
-	Vec2 guiEntity_getPosition(const string& ID);
-	Vec2 guiEntity_getSize(const string& ID);
-	Vec2 guiEntity_getMinPosition(const string& ID);
-	Vec2 guiEntity_getMaxPosition(const string& ID);
-	Vec3 guiEntity_getColor(const string& ID);
-	float guiEntity_getRotation(const string& ID);
-	float guiEntity_getAlpha(const string& ID);
-	int guiEntity_getAnimationRows(const string& ID);
-	int guiEntity_getAnimationColumns(const string& ID);
-	int guiEntity_getAnimationFramestep(const string& ID);
-	vector<string> guiEntity_getAllIDs();
+	// Image entity interface - getters
+	bool imageEntity_isExisting(const string& ID);
+	bool imageEntity_isVisible(const string& ID);
+	bool imageEntity_isCentered(const string& ID);
+	bool imageEntity_isAnimationFinished(const string& ID);
+	bool imageEntity_isAnimationPlaying(const string& ID);
+	bool imageEntity_isAnimationPaused(const string& ID);
+	bool imageEntity_isMirroredHorizontally(const string& ID);
+	bool imageEntity_isMirroredVertically(const string& ID);
+	Vec2 imageEntity_getPosition(const string& ID);
+	Vec2 imageEntity_getSize(const string& ID);
+	Vec2 imageEntity_getMinPosition(const string& ID);
+	Vec2 imageEntity_getMaxPosition(const string& ID);
+	Vec3 imageEntity_getColor(const string& ID);
+	float imageEntity_getRotation(const string& ID);
+	float imageEntity_getAlpha(const string& ID);
+	int imageEntity_getAnimationRows(const string& ID);
+	int imageEntity_getAnimationColumns(const string& ID);
+	int imageEntity_getAnimationFramestep(const string& ID);
+	vector<string> imageEntity_getAllIDs();
 
 	// Text entity interface - setters
 	void textEntity_add
@@ -772,7 +772,7 @@ public:
 	}
 
 	// Miscellaneous interface - setters
-	void misc_setCustomCursor(const string& guiEntityID);
+	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_enableWireframeRendering();
 	void misc_disableWireframeRendering();
 	void misc_enableShadowFrameRendering();

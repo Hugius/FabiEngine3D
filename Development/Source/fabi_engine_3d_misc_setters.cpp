@@ -16,9 +16,9 @@ void FabiEngine3D::misc_hideCursor()
 	_core->_windowManager.hideCursor();
 }
 
-void FabiEngine3D::misc_setCustomCursor(const string& guiEntityID)
+void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)
 {
-	_core->_renderBus.setCursorEntityID(guiEntityID);
+	_core->_renderBus.setCursorEntityID(imageEntityID);
 }
 
 void FabiEngine3D::misc_enableWireframeRendering()

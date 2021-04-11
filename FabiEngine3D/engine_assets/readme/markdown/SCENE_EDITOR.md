@@ -2,7 +2,7 @@
 ![scene](../images/scene_editor.png)
 ### General
 - All scenes will be saved in `projects\<your_project>\scenes\editor\`.
-- **Everything** that you **place** in a scene (environment, model, billboard, audio, light) is **connected** to the **editors**. Only the things you change in the scene editor will be saved into the scene. For example: if you have a scene full of **green trees** and you change the color of that model to **red** in the **model editor**, those trees in the scene will become **red as well**.
+- **Everything** that you **place** in a scene (environment, model, billboard, sound, light) is **connected** to the **editors**. Only the things you change in the scene editor will be saved into the scene. For example: if you have a scene full of **green trees** and you change the color of that model to **red** in the **model editor**, those trees in the scene will become **red as well**.
 - Use the `WASD` keys to move around.
 - Use the `SPACE` key to move **up**.
 - Use the `LSHIFT` key to move **down**.
@@ -31,13 +31,13 @@
 - Every placed billboard has a **position** (**Range**: -inf to inf) that can be **edited**.
 - Every placed billboard has a **rotation** (**Range**: -360 to 360) that can be **edited**.
 - Every placed billboard has a **size** (**Range**: 0 to inf) that can be **edited**.
-### Audio
-- You can **place and delete** 3D audio casters in the scene.
-- If a terrain is selected, the audio caster will be placed **on top** of the terrain.
-- If no terrain is selected, the audio caster will be placed at **XYZ(0,0,0)**.
-- Every placed audio caster has a **position** (**Range**: -inf to inf) that can be **edited**.
-- Every placed audio caster has a **maximum volume** (**Range**: 0 to 100) that can be **edited**.
-- Every placed audio caster has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
+### Sound
+- You can **place and delete** 3D sound casters in the scene.
+- If a terrain is selected, the sound caster will be placed **on top** of the terrain.
+- If no terrain is selected, the sound caster will be placed at **XYZ(0,0,0)**.
+- Every placed sound caster has a **position** (**Range**: -inf to inf) that can be **edited**.
+- Every placed sound caster has a **maximum volume** (**Range**: 0 to 100) that can be **edited**.
+- Every placed sound caster has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
 ### Lighting
 - You can enable **ambient lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf).
 - You can enable **directional lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf) & **position** (**Range**: -inf to inf).

@@ -5,8 +5,8 @@
   Sets the **volume** of sound with **ID**.
 
 # Sound (only 3D)
-- `fe3d:sound_place3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` volume, `DEC` distance) ---> `NONE`  
-  Places a new 3D sound with **newID** (cannot start with @) based on audio with **previewID** at position as **xyz** at a maximum **volume** and **distance**.
+- `fe3d:sound_place3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` distance) ---> `NONE`  
+  Places a new 3D sound with **newID** (cannot start with @) based on audio with **previewID** at position as **xyz** with a maximum **distance**.
 - `fe3d:sound_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Sets the position as **xyz** of sound with **ID**.
 - `fe3d:sound_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
@@ -34,7 +34,7 @@
 - `fe3d:sound_set_enabled`(`BOOL` enabled) ---> `NONE`  
   Set sound system to **enabled**.
 - `fe3d:sound_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  
-  Plays sound with **ID** and repeats it **loops** times (-1 to play forever) at an initial **volume** (sets the maximum volume if 3D sound).
+  Plays sound with **ID** and repeats it **loops** times (-1 to play forever) with a **volume** (initial volume for 2D sound or maximum volume for 3D sound).
 - `fe3d:sound_pause`(`STR` ID) ---> `NONE`  
   Pauses playing sound with **ID**.
 - `fe3d:sound_pause_all`() ---> `NONE`  

@@ -78,6 +78,6 @@
 - `fe3d:model_is_animation_paused`(`STR` modelID, `STR` animationID) ---> `BOOL`  
   Returns true if animation with **animationID** is currently paused on model with **modelID**.
 - `fe3d:model_set_animation_speed`(`STR` modelID, `STR` animationID, `DEC` speed) ---> `NONE`  
-  Sets the animation **speed** of animation with **animationID** on model with **modelID**.
+  Sets the animation **speed** of animation with **animationID** on model with **modelID**. Cannot be lower than 0.
 - `fe3d:model_get_animation_frame_index`(`STR` modelID, `STR` animationID) ---> `INT`  
   Returns the current animation frame index of animation with **animationID** on model with **modelID**. Remember: an index starts at 0!

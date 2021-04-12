@@ -51,8 +51,6 @@
   Resumes the paused sprite animation on image with **ID**.
 - `fe3d:image_stop_animation`(`STR` ID) ---> `NONE`  
   Stops the playing sprite animation on image with **ID**.
-- `fe3d:image_is_animation_finished`(`STR` ID) ---> `BOOL`  
-  Returns true if animation on image with **ID** is finished.
 - `fe3d:image_is_animation_playing`(`STR` ID) ---> `BOOL`  
   Returns true if animation on image with **ID** is playing.
 - `fe3d:image_is_animation_paused`(`STR` ID) ---> `BOOL`  

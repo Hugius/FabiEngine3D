@@ -253,6 +253,12 @@ void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 	if (!_core->_terrainEntityManager.getEntity(ID)->getPixelValues().empty())
 	{
 		_core->_terrainEntityManager.generateMesh(ID);
+
+		// Load normal mapping again
+		if (_core->_terrainEntityManager.getEntity(ID)->isNormalMapped())
+		{
+			_core->_terrainEntityManager.loadNormalMapping(ID);
+		}
 	}
 }
 

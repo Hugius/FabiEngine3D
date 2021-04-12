@@ -44,7 +44,7 @@
 - `fe3d:image_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of image with **ID**.
 - `fe3d:image_start_animation`(`STR` ID, `INT` rows, `INT` columns, `INT` framestep, `INT` loops) ---> `NONE`  
-  Starts a sprite animation on image with **ID** with an amount **rows** and **columns** in the sprite at speed **framestep** and repeats it **loops** times (-1 to play forever, cannot be lower).
+  Starts a sprite animation on image with **ID** with an amount **rows** and **columns** in the sprite at speed **framestep** (cannot be lower than 0) and repeats it **loops** times (-1 to play forever, cannot be lower).
 - `fe3d:image_pause_animation`(`STR` ID) ---> `NONE`  
   Pauses the playing sprite animation on image with **ID**.
 - `fe3d:image_resume_animation`(`STR` ID) ---> `NONE`  

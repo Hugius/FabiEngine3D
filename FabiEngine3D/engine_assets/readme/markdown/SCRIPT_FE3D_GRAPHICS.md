@@ -12,9 +12,9 @@
 - `fe3d:graphics_get_max_fog_distance`() ---> `DEC`  
   Returns the maximum fog distance.
 - `fe3d:graphics_set_fog_thickness`(`DEC` thickness) ---> `NONE`  
-  Sets the fog **thickness** percentage (0.0 - 1.0).
+  Sets the fog **thickness** (clamped between 0.0 and 1.0; 0% and 100% respectively).
 - `fe3d:graphics_get_fog_thickness`() ---> `DEC`  
-  Returns the fog thickness percentage (0.0 - 1.0).
+  Returns the fog thickness.
 - `fe3d:graphics_set_fog_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
   Sets the fog color as **rgb**.
 - `fe3d:graphics_get_fog_color`() ---> `VEC3`  

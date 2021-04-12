@@ -62,7 +62,7 @@
 - `fe3d:billboard_is_facing_camera_y`(`STR` ID) ---> `BOOL`  
   Returns true if billboard with **ID** is facing the camera in the Y direction.
 - `fe3d:billboard_start_animation`(`STR` ID, `INT` loops) ---> `NONE`  
-  Starts the sprite animation of billboard with **ID** and repeats it **loops** times (-1 to play forever).
+  Starts the sprite animation of billboard with **ID** and repeats it **loops** times (-1 to play forever, cannot be lower).
 - `fe3d:billboard_pause_animation`(`STR` ID) ---> `NONE`  
   Pauses the playing sprite animation of billboard with **ID**.
 - `fe3d:billboard_resume_animation`(`STR` ID) ---> `NONE`  

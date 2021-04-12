@@ -75,8 +75,6 @@
   Returns true if animation of billboard with **ID** is playing.
 - `fe3d:billboard_is_animation_paused`(`STR` ID) ---> `BOOL`  
   Returns true if animation of billboard with **ID** is paused.
-- `fe3d:billboard_is_animation_finished`(`STR` ID) ---> `BOOL`  
-  Returns true if animation of billboard with **ID** is finished.
 - `fe3d:billboard_set_text`(`STR` ID, `STR` text) ---> `NONE`  
   Sets the text content of billboard with **ID**.
 - `fe3d:billboard_get_text`(`STR` ID) ---> `STR`  

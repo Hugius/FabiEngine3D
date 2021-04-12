@@ -1,7 +1,7 @@
 #include "scene_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.7f)
 
 void SceneEditor::_loadGUI()
 {

@@ -1,7 +1,7 @@
 #include "animation_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.7f)
 
 AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor) :
 	_fe3d(fe3d),

@@ -179,7 +179,7 @@ public:
 	const float getSkyReflectionMixValue()	   const;
 	const float getSceneReflectionHeight()	   const;
 	const float getSceneReflectionOffset()	   const;
-	const float getSceneReflectionMixValue()	   const;
+	const float getSceneReflectionMixValue()   const;
 	const float getShadowAreaSize()			   const;
 	const float getShadowAreaReach()		   const;
 	const float getShadowLightness()		   const;

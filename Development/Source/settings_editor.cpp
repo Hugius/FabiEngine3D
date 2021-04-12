@@ -5,7 +5,7 @@
 #include <sstream>
 #include <algorithm>
 
-#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.7f)
 
 SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	_fe3d(fe3d),

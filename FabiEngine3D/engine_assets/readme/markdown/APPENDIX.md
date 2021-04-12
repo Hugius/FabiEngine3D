@@ -20,7 +20,7 @@
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
-### Value limits
+### Value limits for frequently used values
 - **Color** values (r,g,b) are clamped between 0.0 and 1.0 (0% and 100% respectively).
 - **Alpha/transparency** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
 - **Mix** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
@@ -28,12 +28,10 @@
 - **Size/width/height** values cannot be lower than 0.0 (a size of 0.0 means that nothing exists).
 - **Lightness/intensity/brightness** values cannot be lower than 0.0 (there cannot be less light than complete darkness).
 - **Distance** values are absolute (cannot be lower than 0.0).
-- **UV repeat** values cannot be lower than 0 (something cannot repeat negative).
+- **UV repeat** values cannot be lower than 0 (something cannot repeat negatively).
 - **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
 - **Index** values cannot be lower than 0 (because a negative index does not exist).
-- **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees)
-- Furthermore there are some other values that cannot be lower than 0.0 (**sprite animaton repeat**, **lens flare multiplier**, **motion blur strength**, **model animation speed multiplier**).
-- Furthermore there are some other values that are clamped between 0.0 and 1.0 (**fog thickness**).
+- **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
 ### Miscellaneous
 - **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
 - Text entities are rendered **on top of** image entities, because of the rendering order.

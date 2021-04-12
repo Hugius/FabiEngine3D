@@ -70,9 +70,9 @@
 - `fe3d:billboard_stop_animation`(`STR` ID) ---> `NONE`  
   Stops the playing sprite animation of billboard with **ID**.
 - `fe3d:billboard_is_animation_started`(`STR` ID) ---> `BOOL`  
-  Returns true if animation of billboard with **ID** is started.
+  Returns true if animation of billboard with **ID** was started.
 - `fe3d:billboard_is_animation_playing`(`STR` ID) ---> `BOOL`  
-  Returns true if animation of billboard with **ID** is playing.
+  Returns true if animation of billboard with **ID** is currently playing.
 - `fe3d:billboard_is_animation_paused`(`STR` ID) ---> `BOOL`  
   Returns true if animation of billboard with **ID** is paused.
 - `fe3d:billboard_set_text`(`STR` ID, `STR` text) ---> `NONE`  

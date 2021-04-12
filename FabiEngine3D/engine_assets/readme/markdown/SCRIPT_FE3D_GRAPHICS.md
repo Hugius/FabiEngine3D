@@ -52,7 +52,7 @@
 - `fe3d:graphics_disable_motion_blur`() ---> `NONE`  
   Disables the motion blur effect.
 - `fe3d:graphics_set_motion_blur_strength`(`DEC` strength) ---> `NONE`  
-  Sets the **strength** of the motion blur effect.
+  Sets the **strength** of the motion blur effect. Cannot be lower than 0.
 - `fe3d:graphics_get_motion_blur_strength`() ---> `DEC`  
   Returns the strength of the motion blur effect.
 - `fe3d:graphics_enable_lens_flare`() ---> `NONE`  
@@ -68,6 +68,6 @@
 - `fe3d:graphics_get_lens_flare_intensity`() ---> `DEC`  
   Returns the lens flare intensity.
 - `fe3d:graphics_set_lens_flare_multiplier`(`DEC` multiplier) ---> `NONE`  
-  Sets the lens flare **multiplier**.
+  Sets the lens flare **multiplier**. Cannot be lower than 0.
 - `fe3d:graphics_get_lens_flare_multiplier`() ---> `DEC`  
   Returns the lens flare multiplier.

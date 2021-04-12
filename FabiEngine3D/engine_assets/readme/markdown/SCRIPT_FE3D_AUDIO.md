@@ -33,8 +33,8 @@
   Deletes sound with **ID** if existing.
 - `fe3d:sound_set_enabled`(`BOOL` enabled) ---> `NONE`  
   Sets sound system to **enabled**.
-- `fe3d:sound_play`(`STR` ID, `INT` loops) ---> `NONE`  
-  Plays sound with **ID** and repeats it **loops** times (-1 to play forever).
+- `fe3d:sound_play`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
+  Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds.
 - `fe3d:sound_pause`(`STR` ID) ---> `NONE`  
   Pauses playing sound with **ID**.
 - `fe3d:sound_pause_all`() ---> `NONE`  
@@ -43,12 +43,14 @@
   Resumes paused sound with **ID**.
 - `fe3d:sound_resume_all`() ---> `NONE`  
   Resumes all paused sound.
-- `fe3d:sound_stop`(`STR` ID) ---> `NONE`  
-  Stops playing sound with **ID**.
+- `fe3d:sound_stop`(`STR` ID, `INT` fadeMS) ---> `NONE`  
+  Stops playing sound with **ID**. Fades out with **fadeMS** milliseconds.
 - `fe3d:sound_stop_all`() ---> `NONE`  
   Stops all playing sound.
+- `fe3d:sound_is_started`(`STR` ID) ---> `BOOL`  
+  Returns true if sound with **ID** was started
 - `fe3d:sound_is_playing`(`STR` ID) ---> `BOOL`  
-  Returns true if sound with **ID** is playing.
+  Returns true if sound with **ID** is currently playing.
 - `fe3d:sound_is_paused`(`STR` ID) ---> `BOOL`  
   Returns true if sound with **ID** is paused.
 - `fe3d:sound_is_3D`(`STR` ID) ---> `BOOL`  
@@ -65,10 +67,12 @@
   Sets music system to **enabled**.
 - `fe3d:music_set_volume`(`DEC` volume) ---> `NONE`  
   Sets music volume.
-- `fe3d:music_get_volume`(`STR` previewID) ---> `DEC`  
+- `fe3d:music_get_volume`() ---> `DEC`  
   Returns music volume.
-- `fe3d:music_is_playing`(`STR` previewID) ---> `BOOL`  
-  Returns true if music is playing.
+- `fe3d:music_is_started`() ---> `BOOL`  
+  Returns true if music was started.
+- `fe3d:music_is_playing`() ---> `BOOL`  
+  Returns true if music is currently playing.
 - `fe3d:music_pause`() ---> `NONE`  
   Pauses playing music.
 - `fe3d:music_is_paused`() ---> `BOOL`  

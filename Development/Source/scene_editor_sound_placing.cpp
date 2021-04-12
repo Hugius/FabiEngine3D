@@ -23,7 +23,7 @@ void SceneEditor::_updateSoundPlacing()
 					// Play preview soundcaster
 					if (!_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
 					{
-						_fe3d.soundEntity_play(_currentPreviewSoundID, -1);
+						_fe3d.soundEntity_play(_currentPreviewSoundID, -1, 0);
 					}
 					else if (_fe3d.soundEntity_isPaused(_currentPreviewSoundID))
 					{
@@ -65,7 +65,7 @@ void SceneEditor::_updateSoundPlacing()
 					// Stop sound playback
 					if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
 					{
-						_fe3d.soundEntity_stop(_currentPreviewSoundID);
+						_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
 					}
 
 					// Add soundEntity
@@ -74,7 +74,7 @@ void SceneEditor::_updateSoundPlacing()
 					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + newID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 					_fe3d.soundEntity_add(newID, _fe3d.soundEntity_getFilePath(_currentPreviewSoundID));
 					_fe3d.soundEntity_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
-					_fe3d.soundEntity_play(newID, -1);
+					_fe3d.soundEntity_play(newID, -1, 0);
 					_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 
 					// Disable placement mode if no terrain availible to choose position from
@@ -86,7 +86,7 @@ void SceneEditor::_updateSoundPlacing()
 						// Stop sound playback
 						if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
 						{
-							_fe3d.soundEntity_stop(_currentPreviewSoundID);
+							_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
 						}
 
 						// Stop placing
@@ -101,7 +101,7 @@ void SceneEditor::_updateSoundPlacing()
 					// Stop sound playback
 					if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
 					{
-						_fe3d.soundEntity_stop(_currentPreviewSoundID);
+						_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
 					}
 
 					// Stop placing

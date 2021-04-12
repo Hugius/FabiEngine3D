@@ -344,13 +344,6 @@ const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-bool FabiEngine3D::billboardEntity_isAnimationFinished(const string& ID)
-{
-	int loops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
-	int maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
-	return (loops == maxLoops);
-}
-
 bool FabiEngine3D::billboardEntity_isAnimationStarted(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationStarted();

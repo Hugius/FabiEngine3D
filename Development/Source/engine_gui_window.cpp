@@ -79,7 +79,7 @@ void EngineGuiWindow::addScreen(const string& ID)
 	{
 		if (screen->getID() == ID)
 		{
-			_fe3d.logger_throwError("Screen creation: screen \"" + ID + "\" already exists!");
+			_fe3d.logger_throwError("Screen creation: screen with ID \"" + ID + "\" already exists!");
 		}
 	}
 

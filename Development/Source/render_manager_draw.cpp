@@ -104,7 +104,7 @@ void RenderManager::_renderModelEntities()
 				}
 				else
 				{
-					Logger::throwError("Model entity \"" + modelEntity->getID() + "\" has a non-existing LOD entity \"" + modelEntity->getLodEntityID() + "\"");
+					Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity

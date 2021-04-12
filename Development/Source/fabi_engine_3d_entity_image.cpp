@@ -211,13 +211,6 @@ void FabiEngine3D::imageEntity_setMirroredVertically(const string& ID, bool mirr
 	_core->_imageEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
 }
 
-bool FabiEngine3D::imageEntity_isAnimationFinished(const string& ID)
-{
-	int repeats = _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationRepeats();
-	int maxRepeats = _core->_imageEntityManager.getEntity(ID)->getMaxSpriteAnimationRepeats();
-	return (repeats == maxRepeats);
-}
-
 bool FabiEngine3D::imageEntity_isAnimationPlaying(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationPlaying();

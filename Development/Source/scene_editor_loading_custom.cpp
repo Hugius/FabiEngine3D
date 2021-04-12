@@ -477,7 +477,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				{
 					_fe3d.soundEntity_setMaxVolume(soundID, maxVolume);
 					_fe3d.soundEntity_setMaxDistance(soundID, maxDistance);
-					_fe3d.soundEntity_play(soundID, -1);
+					_fe3d.soundEntity_play(soundID, -1, 0);
 				}
 			}
 			else if (entityType == "AMBIENT_LIGHT")
@@ -658,6 +658,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Could not load scene \"" + fileName + "\"!");
+		_fe3d.logger_throwWarning("Could not load scene with ID\"" + fileName + "\"!");
 	}
 }

@@ -697,21 +697,6 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_animation_finished")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing billboard ID
-			if (_validateFe3dBillboardEntity(arguments[0].getString()))
-			{
-				auto result = _fe3d.billboardEntity_isAnimationFinished(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:billboard_set_text")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };

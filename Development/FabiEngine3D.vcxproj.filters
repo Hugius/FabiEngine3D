@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\audio_manager.cpp">
-      <Filter>src\Audio System\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\audio_player.cpp">
-      <Filter>src\Audio System\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\sound.cpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClCompile>
@@ -694,16 +688,19 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_animations.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\audio_manager.cpp">
+      <Filter>src\Audio System\Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_player_interface.cpp">
+      <Filter>src\Audio System\Core\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_player_misc.cpp">
+      <Filter>src\Audio System\Core\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\texture_loader.hpp">
       <Filter>src\Asset Management System\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\audio_manager.hpp">
-      <Filter>src\Audio System\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\audio_player.hpp">
-      <Filter>src\Audio System\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\sound.hpp">
       <Filter>src\Audio System\Data Structures</Filter>
@@ -1049,6 +1046,12 @@
     </ClInclude>
     <ClInclude Include="Source\base_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\audio_manager.hpp">
+      <Filter>src\Audio System\Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\audio_player.hpp">
+      <Filter>src\Audio System\Core\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1423,6 +1426,12 @@
     </Filter>
     <Filter Include="src\Rendering System\Buffers">
       <UniqueIdentifier>{30487a92-5701-4893-8750-39fbd5335d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Audio System\Core\Manager">
+      <UniqueIdentifier>{9f35bc80-df19-4430-b965-edffc1cf5b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Audio System\Core\Player">
+      <UniqueIdentifier>{7b01d90e-5121-491d-9eb0-874ab5cd8aa8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

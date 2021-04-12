@@ -212,8 +212,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // ID
+			ScriptValueType::STRING,  // ID
 			ScriptValueType::INTEGER, // Loops
+			ScriptValueType::INTEGER  // FadeMS
 		};
 
 		// Validate arguments
@@ -222,8 +223,23 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// Validate existing sound ID
 			if (_validateFe3dSoundEntity(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_play(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.soundEntity_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:sound_is_started")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing sound ID
+			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.soundEntity_isStarted(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}
@@ -315,7 +331,11 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:sound_stop")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types =
+		{
+			ScriptValueType::STRING,  // ID
+			ScriptValueType::INTEGER  // FadeMS
+		};
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -323,7 +343,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// Validate existing sound ID
 			if (_validateFe3dSoundEntity(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_stop(arguments[0].getString());
+				_fe3d.soundEntity_stop(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

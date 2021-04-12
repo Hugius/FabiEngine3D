@@ -77,7 +77,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			// Cannot be a questionmark
 			if (selectedPartID == "?")
 			{
-				Logger::throwError("Model part ID cannot be '?' of model with filepath \"" + filePath + "\"!");
+				Logger::throwError("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
 			}
 
 			// Reset material paths
@@ -149,7 +149,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			// Check if face amount is correct (3x3)
 			if (matches != 9)
 			{
-				Logger::throwWarning("Too many or not enough faces at mesh file: \"" + filePath + "\"");
+				Logger::throwWarning("Too many or not enough faces in mesh file: \"" + filePath + "\"");
 				return {};
 			}
 
@@ -213,7 +213,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 	// Error checking
 	if (meshParts.empty())
 	{
-		Logger::throwWarning("Incorrect or too little content at mesh file: \"" + filePath + "\"");
+		Logger::throwWarning("Incorrect or too little content in mesh file: \"" + filePath + "\"");
 		return {};
 	}
 

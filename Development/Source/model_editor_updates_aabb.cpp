@@ -115,7 +115,7 @@ void ModelEditor::_updateModelEditingAabb()
 	{
 		if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
 		{
-			_fe3d.logger_throwWarning("New AABB \"" + newAabbName + "\" of model \"" + _currentModelID.substr(1) + "\" already exists!");
+			_fe3d.logger_throwWarning("AABB name \"" + newAabbName + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
 		}
 		else
 		{

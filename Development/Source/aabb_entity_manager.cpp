@@ -187,7 +187,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to non-existing model entity \"" + entity->getParentID() + "\"");
+					Logger::throwError("AABB entity with ID \"" + entity->getID() + "\" bound to non-existing model entity with ID \"" + entity->getParentID() + "\"");
 				}
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
@@ -256,7 +256,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to non-existing billboard entity \"" + entity->getParentID() + "\"");
+					Logger::throwError("AABB entity with ID \"" + entity->getID() + "\" bound to non-existing billboard entity with ID \"" + entity->getParentID() + "\"");
 				}
 			}
 		}

@@ -22,7 +22,7 @@ void AudioEditor::_updateAudioEditing()
 					// Stop sound preview
 					if (isPlaying)
 					{
-						_fe3d.soundEntity_stop(_currentAudioID);
+						_fe3d.soundEntity_stop(_currentAudioID, 0);
 					}
 
 					// Miscellaneous
@@ -65,7 +65,7 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-					_fe3d.soundEntity_play(_currentAudioID, 0);
+					_fe3d.soundEntity_play(_currentAudioID, 0, 0);
 				}
 				else if (screen->getButton("resume")->isHovered())
 				{
@@ -77,7 +77,7 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (screen->getButton("stop")->isHovered())
 				{
-					_fe3d.soundEntity_stop(_currentAudioID);
+					_fe3d.soundEntity_stop(_currentAudioID, 0);
 				}
 			}
 			else
@@ -85,7 +85,7 @@ void AudioEditor::_updateAudioEditing()
 				// Controlling audio playback through keyboard
 				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused && isLoaded)
 				{
-					_fe3d.soundEntity_play(_currentAudioID, 0);
+					_fe3d.soundEntity_play(_currentAudioID, 0, 0);
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_R) && isPaused)
 				{
@@ -97,7 +97,7 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (_fe3d.input_getKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
 				{
-					_fe3d.soundEntity_stop(_currentAudioID);
+					_fe3d.soundEntity_stop(_currentAudioID, 0);
 				}
 			}
 

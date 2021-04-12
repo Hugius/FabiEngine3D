@@ -78,7 +78,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("Button \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Button with ID \"" + ID + "\" not deleted from scrollinglist with ID \"" + _ID + "\"!");
 }
 
 void EngineGuiScrollingList::deleteButtons()

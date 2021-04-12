@@ -409,7 +409,6 @@ public:
 	void billboardEntity_setAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Billboard entity interface (animation) - getters
-	bool billboardEntity_isAnimationFinished(const string& ID);
 	bool billboardEntity_isAnimationStarted(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
 	bool billboardEntity_isAnimationPaused(const string& ID);
@@ -522,7 +521,6 @@ public:
 	bool imageEntity_isExisting(const string& ID);
 	bool imageEntity_isVisible(const string& ID);
 	bool imageEntity_isCentered(const string& ID);
-	bool imageEntity_isAnimationFinished(const string& ID);
 	bool imageEntity_isAnimationPlaying(const string& ID);
 	bool imageEntity_isAnimationPaused(const string& ID);
 	bool imageEntity_isMirroredHorizontally(const string& ID);
@@ -582,12 +580,12 @@ public:
 	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
 	void soundEntity_delete(const string& ID);
 	void soundEntity_deleteAll();
-	void soundEntity_play(const string& ID, int loops);
+	void soundEntity_play(const string& ID, int loops, int fadeMS);
 	void soundEntity_pause(const string& ID);
 	void soundEntity_pauseAll();
 	void soundEntity_resume(const string& ID);
 	void soundEntity_resumeAll();
-	void soundEntity_stop(const string& ID, int fadeMillis = 0);
+	void soundEntity_stop(const string& ID, int fadeMS);
 	void soundEntity_stopAll();
 	void soundEntity_setPosition(const string& ID, Vec3 position);
 	void soundEntity_move(const string& ID, Vec3 factor);
@@ -603,6 +601,7 @@ public:
 	float soundEntity_getVolume(const string& ID);
 	float soundEntity_getMaxVolume(const string& ID);
 	bool soundEntity_isExisting(const string& ID);
+	bool soundEntity_isStarted(const string& ID);
 	bool soundEntity_isPlaying(const string& ID);
 	bool soundEntity_isPaused(const string& ID);
 	bool soundEntity_isLoaded(const string& ID);
@@ -617,6 +616,7 @@ public:
 	void music_resume();
 
 	// Music interface - getters
+	bool music_isStarted();
 	bool music_isPlaying();
 	bool music_isPaused();
 	float music_getVolume();

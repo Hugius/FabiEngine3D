@@ -494,21 +494,6 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_is_animation_finished")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
-			{
-				auto result = _fe3d.imageEntity_isAnimationFinished(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:image_is_animation_playing")
 	{
 		auto types = { ScriptValueType::STRING };

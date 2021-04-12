@@ -18,7 +18,7 @@ void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 pos
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity to non-existing model entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity to non-existing model entity with ID \"" + parentID + "\"");
 		}
 	}
 	else // Use custom ID
@@ -29,7 +29,7 @@ void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 pos
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing model entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity with ID \"" + customAabbID + "\" to non-existing model entity with ID \"" + parentID + "\"");
 		}
 	}
 }
@@ -44,7 +44,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity to non-existing billboard entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity to non-existing billboard entity with ID \"" + parentID + "\"");
 		}
 	}
 	else // Use custom ID
@@ -55,7 +55,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing billboard entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity with ID \"" + customAabbID + "\" to non-existing billboard entity with ID \"" + parentID + "\"");
 		}
 	}
 }

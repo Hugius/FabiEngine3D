@@ -62,6 +62,15 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
+	else if (functionName == "fe3d:music_is_started")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.music_isStarted();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
 	else if (functionName == "fe3d:music_is_playing")
 	{
 		// Validate arguments

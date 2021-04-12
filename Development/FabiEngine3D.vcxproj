@@ -279,6 +279,7 @@
     <ClCompile Include="Source\animation_editor_updates_edit_frame.cpp" />
     <ClCompile Include="Source\animation_editor_updates_edit_main.cpp" />
     <ClCompile Include="Source\animation_editor_execution.cpp" />
+    <ClCompile Include="Source\audio_player_misc.cpp" />
     <ClCompile Include="Source\sound.cpp" />
     <ClCompile Include="Source\audio_editor_main.cpp" />
     <ClCompile Include="Source\audio_editor_misc.cpp" />
@@ -288,7 +289,7 @@
     <ClCompile Include="Source\audio_loader.cpp" />
     <ClCompile Include="Source\audio_manager.cpp" />
     <ClCompile Include="Source\music.cpp" />
-    <ClCompile Include="Source\audio_player.cpp" />
+    <ClCompile Include="Source\audio_player_interface.cpp" />
     <ClCompile Include="Source\base_entity_manager_misc.cpp" />
     <ClCompile Include="Source\billboard_editor_main.cpp" />
     <ClCompile Include="Source\billboard_editor_misc.cpp" />

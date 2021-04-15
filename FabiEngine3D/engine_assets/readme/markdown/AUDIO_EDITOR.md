@@ -12,3 +12,4 @@
 - You can pause the selected audio with the `P` key.
 - You can resume the selected audio with the `R` key.
 - You can stop the selected audio with the `S` key.
+- All audio playback is at **50% volume** within this editor.

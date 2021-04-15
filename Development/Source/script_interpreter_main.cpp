@@ -313,11 +313,12 @@ void ScriptInterpreter::unload()
 	// Reset camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
+	// Reset audio
+	_fe3d.misc_setSoundsEnabled(true);
+	_fe3d.misc_setMusicEnabled(true);
+
 	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
-
-	// Delete music
-	_fe3d.music_clearPlaylist();
 
 	// Stop animations
 	_animationEditor.stopAllAnimations();

@@ -54,7 +54,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.lightEntity_add(newID, newPosition);
 					_loadedLightIDs.push_back(newID);
 
-					// Disable placement mode if no terrain availible to choose position from
+					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
 						_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);

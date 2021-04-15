@@ -54,7 +54,6 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 					float volume = sound.getMaxVolume() - ((maxDiff / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
 					volume = std::clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
 					sound.setVolume(volume); // Update sound volume
-					_updateSoundVolume(sound); // Update playing volume
 
 					// Panning
 					auto cameraFront = camera.getFront(); // From camera vector
@@ -70,6 +69,9 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 					Mix_SetPanning(_findSoundChannel(sound), leftStrength, rightStrength); // Apply stereo panning
 				}
 			}
+
+			// Update playing volume
+			_updateSoundVolume(sound);
 		}
 	}
 	else
@@ -150,7 +152,7 @@ int AudioPlayer::_findSoundChannel(Sound& sound)
 		}
 	}
 
-	Logger::throwError("Trying to get sound channel with ID \"", sound.getID(), "\", but does not exist!");
+	Logger::throwError("Trying to get corresponding channel of sound with ID \"", sound.getID(), "\"!");
 }
 
 bool AudioPlayer::_isSoundInChannelMap(Sound& sound)
@@ -176,5 +178,5 @@ int AudioPlayer::_getFreeChannel()
 		}
 	}
 
-	Logger::throwError("Not enough audio channels availible!");
+	Logger::throwError("Not enough audio channels available!");
 }

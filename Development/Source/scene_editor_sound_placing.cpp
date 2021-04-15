@@ -77,7 +77,7 @@ void SceneEditor::_updateSoundPlacing()
 					_fe3d.soundEntity_play(newID, -1, 0);
 					_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 
-					// Disable placement mode if no terrain availible to choose position from
+					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
 						// Hide preview speaker

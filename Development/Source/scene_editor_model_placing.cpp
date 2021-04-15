@@ -61,7 +61,7 @@ void SceneEditor::_updateModelPlacing()
 					// Add model
 					_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
 
-					// Disable placement mode if no terrain availible to choose position from
+					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
 						_fe3d.modelEntity_hide(_currentPreviewModelID);

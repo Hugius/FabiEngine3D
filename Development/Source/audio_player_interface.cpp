@@ -21,6 +21,9 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS)
 			{
 				Mix_FadeInChannel(channel, sound.getDataPointer(), loops, fadeMS);
 			}
+
+			// Set volume
+			_updateSoundVolume(sound);
 		}
 		else
 		{
@@ -52,6 +55,9 @@ void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 
 				// Play music
 				Mix_PlayMusic(musicList[musicIndex].getDataPointer(), 0);
+
+				// Set volume
+				_updateMusicVolume();
 			}
 		}
 	}

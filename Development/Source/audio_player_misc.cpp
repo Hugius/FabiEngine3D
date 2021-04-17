@@ -13,23 +13,23 @@ void AudioPlayer::allocateChannels(int count)
 	Mix_AllocateChannels(count);
 
 	// Initialize audio channels to none
-	_channelMap.clear();
+	_channels.clear();
 	for (unsigned int i = 0; i < count; i++)
 	{
-		_channelMap.insert(std::make_pair(i, ""));
+		_channels.push_back("");
 	}
 }
 
 void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList)
 {
 	// Update channel management
-	for (auto& channelPair : _channelMap)
+	for (unsigned int i = 0; i < _channels.size(); i++)
 	{
-		// Check if audio stopped playing, but is not paused
-		if (!Mix_Playing(channelPair.first) && !Mix_Paused(channelPair.first))
+		// Check if audio stopped playing
+		if (!Mix_Playing(i) && !Mix_Paused(i))
 		{
 			// De-allocate channel
-			channelPair.second = "";
+			_channels[i] = "";
 		}
 	}
 
@@ -105,9 +105,9 @@ unsigned int AudioPlayer::getUsedChannelCount()
 {
 	int count = 0;
 
-	for (auto& element : _channelMap)
+	for (auto& soundID : _channels)
 	{
-		if (element.second != "")
+		if (soundID.empty())
 		{
 			count++;
 		}
@@ -118,7 +118,7 @@ unsigned int AudioPlayer::getUsedChannelCount()
 
 unsigned int AudioPlayer::getAllocatedChannelCount()
 {
-	return _channelMap.size();
+	return _channels.size();
 }
 
 void AudioPlayer::_updateSoundVolume(Sound& sound)
@@ -144,22 +144,22 @@ void AudioPlayer::_updateMusicVolume()
 
 int AudioPlayer::_findSoundChannel(Sound& sound)
 {
-	for (auto& pair : _channelMap)
+	for (unsigned int i = 0; i < _channels.size(); i++)
 	{
-		if (pair.second == sound.getID())
+		if (_channels[i] == sound.getID())
 		{
-			return pair.first;
+			return i;
 		}
 	}
 
 	Logger::throwError("Trying to get corresponding channel of sound with ID \"", sound.getID(), "\"!");
 }
 
-bool AudioPlayer::_isSoundInChannelMap(Sound& sound)
+bool AudioPlayer::_isSoundStarted(Sound& sound)
 {
-	for (auto& pair : _channelMap)
+	for (auto& soundID : _channels)
 	{
-		if (pair.second == sound.getID())
+		if (soundID == sound.getID())
 		{
 			return true;
 		}
@@ -170,11 +170,11 @@ bool AudioPlayer::_isSoundInChannelMap(Sound& sound)
 
 int AudioPlayer::_getFreeChannel()
 {
-	for (auto& element : _channelMap)
+	for (unsigned int i = 0; i < _channels.size(); i++)
 	{
-		if (element.second == "")
+		if (_channels[i].empty())
 		{
-			return element.first;
+			return i;
 		}
 	}
 

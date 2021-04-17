@@ -55,9 +55,9 @@ private:
 
 	int _getFreeChannel();
 
-	bool _isSoundInChannelMap(Sound& sound);
+	bool _isSoundStarted(Sound& sound);
 
-	std::map<int, string> _channelMap;
+	vector<string> _channels;
 
 	float _musicVolume = 1.0f;
 

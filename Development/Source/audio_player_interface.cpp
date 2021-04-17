@@ -10,7 +10,7 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS)
 		{
 			// Find free channel
 			auto channel = _getFreeChannel();
-			_channelMap[channel] = sound.getID();
+			_channels[channel] = sound.getID();
 
 			// Play or fade
 			if (fadeMS == 0)
@@ -27,7 +27,7 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS)
 		}
 		else
 		{
-			Logger::throwWarning("Trying to play sound with ID \"", sound.getID(), " \": sound is already started!");
+			Logger::throwWarning("Trying to play sound with ID \"", sound.getID(), "\": sound is already started!");
 		}
 	}
 }
@@ -83,12 +83,12 @@ void AudioPlayer::pauseSound(Sound& sound)
 			}
 			else
 			{
-				Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), " \": sound is already paused!");
+				Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), "\": sound is already paused!");
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), " \": sound is not playing!");
+			Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), "\": sound is not playing!");
 		}
 	}
 }
@@ -186,6 +186,9 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 			{
 				Mix_FadeOutChannel(_findSoundChannel(sound), fadeMS);
 			}
+
+			// De-allocate channel
+			_channels[_findSoundChannel(sound)] = "";
 		}
 		else
 		{
@@ -238,7 +241,7 @@ bool AudioPlayer::isSoundStarted(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-		return _isSoundInChannelMap(sound);
+		return _isSoundStarted(sound);
 	}
 
 	return false;

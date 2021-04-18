@@ -2,11 +2,11 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS)
+void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 {
 	if (_isSoundsEnabled)
 	{
-		if (!isSoundStarted(sound))
+		if (!isSoundStarted(sound) || forcePlay)
 		{
 			// Find free channel
 			auto channel = _getFreeChannel();
@@ -79,7 +79,11 @@ void AudioPlayer::pauseSound(Sound& sound)
 		{
 			if (!isSoundPaused(sound))
 			{
-				Mix_Pause(_findSoundChannel(sound));
+				// For every sound playback
+				for (auto& channel : _findSoundChannels(sound))
+				{
+					Mix_Pause(channel);
+				}
 			}
 			else
 			{
@@ -129,7 +133,11 @@ void AudioPlayer::resumeSound(Sound& sound)
 	{
 		if (isSoundStarted(sound) && isSoundPaused(sound))
 		{
-			Mix_Resume(_findSoundChannel(sound));
+			// For every sound playback
+			for (auto& channel : _findSoundChannels(sound))
+			{
+				Mix_Resume(channel);
+			}
 		}
 		else
 		{
@@ -180,15 +188,26 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 			// Stop or fade
 			if (fadeMS == 0)
 			{
-				Mix_HaltChannel(_findSoundChannel(sound));
+				// For every sound playback
+				for (auto& channel : _findSoundChannels(sound))
+				{
+					Mix_HaltChannel(channel);
+				}
 			}
 			else
 			{
-				Mix_FadeOutChannel(_findSoundChannel(sound), fadeMS);
+				// For every sound playback
+				for (auto& channel : _findSoundChannels(sound))
+				{
+					Mix_FadeOutChannel(channel, fadeMS);
+				}
 			}
 
-			// De-allocate channel
-			_channels[_findSoundChannel(sound)] = "";
+			// De-allocate channels
+			for (auto& channel : _findSoundChannels(sound))
+			{
+				_channels[channel] = "";
+			}
 		}
 		else
 		{
@@ -241,7 +260,13 @@ bool AudioPlayer::isSoundStarted(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-		return _isSoundStarted(sound);
+		for (auto& soundID : _channels)
+		{
+			if (soundID == sound.getID())
+			{
+				return true;
+			}
+		}
 	}
 
 	return false;
@@ -261,7 +286,8 @@ bool AudioPlayer::isSoundPaused(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-		return (isSoundStarted(sound) && Mix_Paused(_findSoundChannel(sound)));
+
+		return (isSoundStarted(sound) && Mix_Paused(_findSoundChannels(sound).front()));
 	}
 
 	return false;

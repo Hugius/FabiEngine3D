@@ -580,7 +580,7 @@ public:
 	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
 	void soundEntity_delete(const string& ID);
 	void soundEntity_deleteAll();
-	void soundEntity_play(const string& ID, int loops, int fadeMS);
+	void soundEntity_play(const string& ID, int loops, int fadeMS, bool forcePlay = false);
 	void soundEntity_pause(const string& ID);
 	void soundEntity_pauseAll();
 	void soundEntity_resume(const string& ID);

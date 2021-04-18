@@ -22,7 +22,7 @@ public:
 	void update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList);	
 	void setSoundsEnabled(bool value);
 	void setMusicEnabled(bool value);
-	void playSound(Sound& sound, int loops, int fadeMS);
+	void playSound(Sound& sound, int loops, int fadeMS, bool forcePlay = false);
 	void playMusic(vector<Music>& musicList, bool forcePlay = false);
 	void pauseAllSounds();
 	void pauseSound(Sound& sound);
@@ -51,11 +51,9 @@ private:
 	void _updateSoundVolume(Sound& sound);
 	void _updateMusicVolume();
 
-	int _findSoundChannel(Sound& sound);
+	vector<int> _findSoundChannels(Sound& sound);
 
 	int _getFreeChannel();
-
-	bool _isSoundStarted(Sound& sound);
 
 	vector<string> _channels;
 

@@ -66,7 +66,12 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 					float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 					Uint8 leftStrength = Uint8(255.0f * range); // Left ear
 					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
-					Mix_SetPanning(_findSoundChannel(sound), leftStrength, rightStrength); // Apply stereo panning
+
+					// For every sound playback
+					for (auto& channel : _findSoundChannels(sound))
+					{
+						Mix_SetPanning(channel, leftStrength, rightStrength); // Apply stereo panning
+					}
 				}
 			}
 
@@ -128,7 +133,12 @@ void AudioPlayer::_updateSoundVolume(Sound& sound)
 		if (isSoundStarted(sound))
 		{
 			auto intVolume = static_cast<int>(sound.getVolume() * 128.0f);
-			Mix_Volume(_findSoundChannel(sound), intVolume);
+
+			// For every sound playback
+			for (auto& channel : _findSoundChannels(sound))
+			{
+				Mix_Volume(channel, intVolume);
+			}
 		}
 	}
 }
@@ -142,30 +152,25 @@ void AudioPlayer::_updateMusicVolume()
 	}
 }
 
-int AudioPlayer::_findSoundChannel(Sound& sound)
+vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 {
+	vector<int> channels;
+
 	for (unsigned int i = 0; i < _channels.size(); i++)
 	{
 		if (_channels[i] == sound.getID())
 		{
-			return i;
+			channels.push_back(i);
 		}
 	}
 
-	Logger::throwError("Trying to get corresponding channel of sound with ID \"", sound.getID(), "\"!");
-}
-
-bool AudioPlayer::_isSoundStarted(Sound& sound)
-{
-	for (auto& soundID : _channels)
+	// Find must never fail
+	if (channels.empty())
 	{
-		if (soundID == sound.getID())
-		{
-			return true;
-		}
+		Logger::throwError("Trying to get corresponding channels of sound with ID \"", sound.getID(), "\"!");
 	}
 
-	return false;
+	return channels;
 }
 
 int AudioPlayer::_getFreeChannel()

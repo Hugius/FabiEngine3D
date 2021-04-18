@@ -38,9 +38,9 @@ void FabiEngine3D::soundEntity_deleteAll()
 	_core->_audioManager.deleteAllSounds();
 }
 
-void FabiEngine3D::soundEntity_play(const string& ID, int loops, int fadeMS)
+void FabiEngine3D::soundEntity_play(const string& ID, int loops, int fadeMS, bool forcePlay)
 {
-	_core->_audioPlayer.playSound(_core->_audioManager.getSound(ID), loops, fadeMS);
+	_core->_audioPlayer.playSound(_core->_audioManager.getSound(ID), loops, fadeMS, forcePlay);
 }
 
 void FabiEngine3D::soundEntity_pause(const string& ID)

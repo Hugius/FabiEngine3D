@@ -228,6 +228,26 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 		}
 	}
+	else if (functionName == "fe3d:sound_play_forced")
+	{
+		auto types =
+		{
+			ScriptValueType::STRING,  // ID
+			ScriptValueType::INTEGER, // Loops
+			ScriptValueType::INTEGER  // FadeMS
+		};
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing sound ID
+			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			{
+				_fe3d.soundEntity_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
 	else if (functionName == "fe3d:sound_is_started")
 	{
 		auto types = { ScriptValueType::STRING };

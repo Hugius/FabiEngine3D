@@ -36,7 +36,7 @@
 - `fe3d:sound_play`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
   Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds.
 - `fe3d:sound_play_forced`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
-  Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds. The sound playback will be forced even if the sound is already playing (sound playbacks will be stacked and playing at the same time, up to the amount of allocated sound channels).
+  Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds. The sound playback will be forced even if the sound is already playing (sound playbacks will be stacked and playing at the same time).
 - `fe3d:sound_pause`(`STR` ID) ---> `NONE`  
   Pauses playing sound with **ID**.
 - `fe3d:sound_pause_all`() ---> `NONE`  

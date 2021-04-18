@@ -33,8 +33,8 @@
   Deletes sound with **ID** if existing.
 - `fe3d:sound_set_enabled`(`BOOL` enabled) ---> `NONE`  
   Sets sound system to **enabled**.
-- `fe3d:sound_play`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
-  Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds.
+- `fe3d:sound_play`(`STR` ID, `INT` loops, `INT` fadeMS, `BOOL` force) ---> `NONE`  
+  Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds. You can **force** the sound playback even if the sound is already playing (sound playbacks will be stacked).
 - `fe3d:sound_pause`(`STR` ID) ---> `NONE`  
   Pauses playing sound with **ID**.
 - `fe3d:sound_pause_all`() ---> `NONE`  

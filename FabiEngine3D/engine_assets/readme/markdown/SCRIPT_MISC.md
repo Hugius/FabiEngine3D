@@ -1,7 +1,7 @@
 ### Miscellaneous functions
 - `misc:concat_strings`(`STR` first, `STR` second) ---> `STR`  
   Returns **first** and **second** concatenated together.
-- `misc:concat_lists`(`STR` firstName, `STR` secondName) ---> `STR`  
+- `misc:concat_lists`(`STR` firstName, `STR` secondName) ---> `LIST`  
   Returns the lists with **firstName** and **secondName** concatenated together. **firstName** and **secondName** must be put in string values.
 - `misc:get_list_size`(`STR` name) ---> `INT`  
   Returns the counted total of list items and returns the amount. **name** must be put in a string value.

@@ -185,5 +185,5 @@ int AudioPlayer::_getFreeChannel()
 		}
 	}
 
-	Logger::throwError("Not enough audio channels available!");
+	return -1;
 }

@@ -257,6 +257,19 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_mixWithSelected("");
 	_fe3d.skyEntity_setMixValue(0.0f);
 
+	// Choose engine background again
+	_fe3d.skyEntity_select("@@engineBackground");
+
+	// Reset camera
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Reset audio
+	_fe3d.misc_setSoundsEnabled(true);
+	_fe3d.misc_setMusicEnabled(true);
+
+	// Stop animations
+	_animationEditor.stopAllAnimations();
+
 	// Delete all other entities
 	_fe3d.terrainEntity_deleteAll();
 	_fe3d.waterEntity_deleteAll();
@@ -309,19 +322,6 @@ void ScriptInterpreter::unload()
 			_fe3d.textEntity_delete(ID);
 		}
 	}
-
-	// Reset camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
-
-	// Reset audio
-	_fe3d.misc_setSoundsEnabled(true);
-	_fe3d.misc_setMusicEnabled(true);
-
-	// Choose engine background again
-	_fe3d.skyEntity_select("@@engineBackground");
-
-	// Stop animations
-	_animationEditor.stopAllAnimations();
 
 	// Miscellaneous
 	_fe3d.misc_disableAabbFrameRendering();

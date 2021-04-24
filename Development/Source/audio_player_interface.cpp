@@ -8,22 +8,29 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 	{
 		if (!isSoundStarted(sound) || forcePlay)
 		{
-			// Find free channel
+			// Try to find free channel
 			auto channel = _getFreeChannel();
-			_channels[channel] = sound.getID();
-
-			// Play or fade
-			if (fadeMS == 0)
+			if (channel != -1)
 			{
-				Mix_PlayChannel(channel, sound.getDataPointer(), loops);
+				_channels[channel] = sound.getID();
+
+				// Play or fade
+				if (fadeMS == 0)
+				{
+					Mix_PlayChannel(channel, sound.getDataPointer(), loops);
+				}
+				else
+				{
+					Mix_FadeInChannel(channel, sound.getDataPointer(), loops, fadeMS);
+				}
+
+				// Set volume
+				_updateSoundVolume(sound);
 			}
 			else
 			{
-				Mix_FadeInChannel(channel, sound.getDataPointer(), loops, fadeMS);
+				Logger::throwWarning("Trying to play sound with ID \"", sound.getID(), "\": no audio channels available!");
 			}
-
-			// Set volume
-			_updateSoundVolume(sound);
 		}
 		else
 		{

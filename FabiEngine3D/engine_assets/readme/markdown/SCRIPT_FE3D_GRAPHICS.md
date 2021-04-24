@@ -35,6 +35,10 @@
   Sets the minmum blurring DOF **distance** to objects.
 - `fe3d:graphics_get_dof_blur_distance`() ---> `DEC`  
   Returns the minmum blurring DOF distance to objects.
+- `fe3d:graphics_enable_shadows`() ---> `NONE`  
+  Enables shadow rendering.
+- `fe3d:graphics_disable_shadows`() ---> `NONE`  
+  Disables shadow rendering.
 - `fe3d:graphics_set_shadow_position`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Sets the shadow caster position as **xyz**.
 - `fe3d:graphics_get_shadow_position`() ---> `VEC3`  

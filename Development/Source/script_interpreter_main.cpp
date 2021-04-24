@@ -290,7 +290,7 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_disableMotionBlur(true);
 	_fe3d.gfx_disableLensFlare(true);
 
-	// Delete game GUI
+	// Delete game image entities
 	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
 	{
 		// Cannot delete engine image entities
@@ -300,7 +300,7 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Delete game text
+	// Delete game text entities
 	for (const auto& ID : _fe3d.textEntity_getAllIDs())
 	{
 		// Cannot delete engine text entities

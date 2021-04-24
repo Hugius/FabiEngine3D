@@ -179,7 +179,7 @@ void FabiEngine3D::music_addToPlaylist(const string& fileName)
 void FabiEngine3D::music_clearPlaylist()
 {
 	// Stop before deleting
-	_core->_audioPlayer.stopMusic();
+	_core->_audioPlayer.stopMusic(true);
 
 	// Delete music
 	_core->_audioManager.deleteMusic();

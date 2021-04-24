@@ -79,10 +79,6 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 			_updateSoundVolume(sound);
 		}
 	}
-	else
-	{
-		Mix_HaltChannel(-1);
-	}
 
 	// Update music management
 	if (_isMusicEnabled)
@@ -90,19 +86,25 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 		playMusic(musicList);
 		_updateMusicVolume();
 	}
-	else
-	{
-		Mix_HaltMusic();
-	}
 }
 
 void AudioPlayer::setSoundsEnabled(bool value)
 {
+	if (!value)
+	{
+		stopAllSounds();
+	}
+
 	_isSoundsEnabled = value;
 }
 
 void AudioPlayer::setMusicEnabled(bool value)
 {
+	if (!value)
+	{
+		stopMusic(true);
+	}
+
 	_isMusicEnabled = value;
 }
 

@@ -32,7 +32,7 @@ public:
 	void resumeMusic();
 	void stopAllSounds();
 	void stopSound(Sound& sound, int fadeMS);
-	void stopMusic();
+	void stopMusic(bool forceStop = false);
 	void setMusicVolume(float volume);
 
 	float getMusicVolume();

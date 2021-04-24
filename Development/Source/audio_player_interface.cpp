@@ -216,7 +216,7 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 	}
 }
 
-void AudioPlayer::stopMusic()
+void AudioPlayer::stopMusic(bool forceStop)
 {
 	if (_isMusicEnabled)
 	{
@@ -227,7 +227,7 @@ void AudioPlayer::stopMusic()
 		}
 
 		// Check if music is playing
-		if (isMusicPlaying())
+		if (isMusicPlaying() || forceStop)
 		{
 			Mix_HaltMusic();
 		}

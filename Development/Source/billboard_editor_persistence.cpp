@@ -149,7 +149,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 					_fe3d.billboardEntity_setAnimationFramestep(billboardID, animationFramestep);
 					_fe3d.billboardEntity_setAnimationRows(billboardID, animationRows);
 					_fe3d.billboardEntity_setAnimationColumns(billboardID, animationColumns);
-					_fe3d.billboardEntity_playAnimation(billboardID, -1);
+					_fe3d.billboardEntity_startAnimation(billboardID, -1);
 				}
 			}
 			else if (fontPath != "") // Text billboard

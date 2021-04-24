@@ -487,7 +487,7 @@ float FabiEngine3D::gfx_getSceneReflectionFactor()
 	return _core->_renderBus.getSceneReflectionMixValue();
 }
 
-Vec3 FabiEngine3D::gfx_getShadowEyePosition()
+Vec3 FabiEngine3D::gfx_getShadowEye()
 {
 	return _core->_shadowManager.getEye();
 }

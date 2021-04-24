@@ -1,4 +1,5 @@
 #include "image_entity.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -93,27 +94,56 @@ void ImageEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-void ImageEntity::playSpriteAnimation(int maxAnimationRepeats)
+void ImageEntity::startSpriteAnimation(int loops)
 {
-	_isSpriteAnimationPlaying = true;
+	if (_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Trying to start sprite animation on image with ID \"" + getID() + "\": animation already started!");
+		return;
+	}
+
+	_isSpriteAnimationStarted = true;
 	_passedSpriteAnimationFrames = 0;
-	_spriteAnimationRepeats = 0;
-	_maxSpriteAnimationRepeats = maxAnimationRepeats;
+	_spriteAnimationLoops = 0;
+	_maxSpriteAnimationLoops = loops;
 }
 
 void ImageEntity::pauseSpriteAnimation()
 {
+	if (!_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Trying to pause sprite animation on image with ID \"" + getID() + "\" animation not started!");
+		return;
+	}
+	else if (_isSpriteAnimationPaused)
+	{
+		Logger::throwWarning("Trying to pause sprite animation on image with ID \"" + getID() + "\" animation already paused!");
+		return;
+	}
+
 	_isSpriteAnimationPaused = true;
 }
 
 void ImageEntity::resumeSpriteAnimation()
 {
+	if (!_isSpriteAnimationPaused)
+	{
+		Logger::throwWarning("Trying to resume sprite animation on image with ID \"" + getID() + "\" animation not paused!");
+		return;
+	}
+
 	_isSpriteAnimationPaused = false;
 }
 
 void ImageEntity::stopSpriteAnimationAnimation()
 {
-	_isSpriteAnimationPlaying = false;
+	if (!_isSpriteAnimationStarted)
+	{
+		Logger::throwWarning("Trying to stop sprite animation on image with ID \"" + getID() + "\" animation not started!");
+		return;
+	}
+
+	_isSpriteAnimationStarted = false;
 }
 
 void ImageEntity::setSpriteAnimationRowIndex(int value)
@@ -151,14 +181,14 @@ void ImageEntity::resetPassedSpriteAnimationFrames()
 	_passedSpriteAnimationFrames = 0;
 }
 
-void ImageEntity::increaseSpriteAnimationRepeats()
+void ImageEntity::increaseSpriteAnimationLoops()
 {
-	_spriteAnimationRepeats++;
+	_spriteAnimationLoops++;
 }
 
-const bool ImageEntity::isSpriteAnimationPlaying() const
+const bool ImageEntity::isSpriteAnimationStarted() const
 {
-	return _isSpriteAnimationPlaying;
+	return _isSpriteAnimationStarted;
 }
 
 const bool ImageEntity::isSpriteAnimationPaused() const
@@ -196,14 +226,14 @@ const int ImageEntity::getSpriteAnimationColumnIndex() const
 	return _spriteAnimationColumnIndex;
 }
 
-const int ImageEntity::getSpriteAnimationRepeats() const
+const int ImageEntity::getSpriteAnimationLoops() const
 {
-	return _spriteAnimationRepeats;
+	return _spriteAnimationLoops;
 }
 
-const int ImageEntity::getMaxSpriteAnimationRepeats() const
+const int ImageEntity::getMaxSpriteAnimationLoops() const
 {
-	return _maxSpriteAnimationRepeats;
+	return _maxSpriteAnimationLoops;
 }
 
 const GLuint ImageEntity::getTexture() const

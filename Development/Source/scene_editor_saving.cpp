@@ -332,7 +332,7 @@ void SceneEditor::saveEditorSceneToFile()
 		// Data to save
 		float size = _fe3d.gfx_getShadowSize();
 		float lightness = _fe3d.gfx_getShadowLightness();
-		Vec3 position = _fe3d.gfx_getShadowEyePosition();
+		Vec3 position = _fe3d.gfx_getShadowEye();
 		Vec3 center = _fe3d.gfx_getShadowCenter();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 		bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();

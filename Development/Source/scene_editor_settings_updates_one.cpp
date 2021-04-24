@@ -102,7 +102,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
 		float size = _fe3d.gfx_getShadowSize();
 		float lightness = _fe3d.gfx_getShadowLightness();
-		Vec3 position = _fe3d.gfx_getShadowEyePosition();
+		Vec3 position = _fe3d.gfx_getShadowEye();
 		Vec3 center = _fe3d.gfx_getShadowCenter();
 		int interval = _fe3d.gfx_getShadowInterval();
 

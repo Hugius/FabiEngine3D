@@ -354,7 +354,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				Vec3 position, rotation, color;
 				Vec2 size;
 				float lightness, minHeight, maxHeight;
-				int remainingAnimationRepeats;
+				int remainingAnimationLoops;
 				unsigned int animationRowIndex, animationColumnIndex;
 				bool isVisible, isAabbRaycastResponsive, isAabbCollisionResponsive, isFacingX, isFacingY, isAnimationPlaying, isAnimationPaused;
 
@@ -384,7 +384,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					lightness >>
 					minHeight >>
 					maxHeight >>
-					remainingAnimationRepeats >>
+					remainingAnimationLoops >>
 					animationRowIndex >>
 					animationColumnIndex;
 
@@ -417,7 +417,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						// Play
 						_fe3d.billboardEntity_stopAnimation(billboardID);
-						_fe3d.billboardEntity_playAnimation(billboardID, remainingAnimationRepeats);
+						_fe3d.billboardEntity_startAnimation(billboardID, remainingAnimationLoops);
 
 						// Pause
 						if (isAnimationPaused)

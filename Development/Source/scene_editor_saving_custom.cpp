@@ -341,7 +341,7 @@ void SceneEditor::saveCustomSceneToFile()
 			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 			auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
 			auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
-			auto remainingAnimationRepeats = _fe3d.billboardEntity_getRemainingAnimationLoops(billboardID);
+			auto remainingAnimationLoops = _fe3d.billboardEntity_getRemainingAnimationLoops(billboardID);
 			auto animationRowIndex = _fe3d.billboardEntity_getAnimationRowIndex(billboardID);
 			auto animationColumnIndex = _fe3d.billboardEntity_getAnimationColumnIndex(billboardID);
 
@@ -387,7 +387,7 @@ void SceneEditor::saveCustomSceneToFile()
 				lightness << " " <<
 				minHeight << " " <<
 				maxHeight << " " <<
-				remainingAnimationRepeats << " " <<
+				remainingAnimationLoops << " " <<
 				animationRowIndex << " " <<
 				animationColumnIndex << std::endl;
 		}
@@ -546,7 +546,7 @@ void SceneEditor::saveCustomSceneToFile()
 			// Data to save
 			float size = _fe3d.gfx_getShadowSize();
 			float lightness = _fe3d.gfx_getShadowLightness();
-			Vec3 position = _fe3d.gfx_getShadowEyePosition();
+			Vec3 position = _fe3d.gfx_getShadowEye();
 			Vec3 center = _fe3d.gfx_getShadowCenter();
 			bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 			bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();

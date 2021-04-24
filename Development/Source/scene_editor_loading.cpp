@@ -164,7 +164,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						_initialModelSize[modelID] = size;
 					}
 
-					// Play animation
+					// Start animation
 					if (!animationID.empty())
 					{
 						_animationEditor.startAnimation(animationID, modelID, -1);

@@ -198,6 +198,24 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
+	else if (functionName == "fe3d:graphics_enable_shadows")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableShadows(_fe3d.gfx_getShadowEye(), _fe3d.gfx_getShadowCenter(), _fe3d.gfx_getShadowSize(),
+				_fe3d.gfx_getShadowReach(), _fe3d.gfx_getShadowLightness(), 
+				_fe3d.gfx_isShadowFollowingCamera(), _fe3d.gfx_isSoftShadowingEnabled());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:graphics_disable_shadows")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableShadows();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:graphics_set_shadow_position")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
@@ -214,7 +232,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getShadowEyePosition();
+			auto result = _fe3d.gfx_getShadowEye();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}

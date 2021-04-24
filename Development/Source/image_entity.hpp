@@ -31,7 +31,7 @@ public:
 	void setDepth(unsigned int value);
 
 	// Animation
-	void playSpriteAnimation(int maxAnimationRepeats);
+	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
 	void resumeSpriteAnimation();
 	void stopSpriteAnimationAnimation();
@@ -42,7 +42,7 @@ public:
 	void setMaxSpriteAnimationFramestep(int value);
 	void increasePassedSpriteAnimationFrames();
 	void resetPassedSpriteAnimationFrames();
-	void increaseSpriteAnimationRepeats();
+	void increaseSpriteAnimationLoops();
 
 	// Texture & color
 	const GLuint getTexture() const;
@@ -63,7 +63,7 @@ public:
 	const unsigned int getDepth() const;
 
 	// Animation
-	const bool isSpriteAnimationPlaying() const;
+	const bool isSpriteAnimationStarted() const;
 	const bool isSpriteAnimationPaused() const;
 	const int getPassedSpriteAnimationFrames() const;
 	const int getMaxSpriteAnimationFramestep() const;
@@ -71,8 +71,8 @@ public:
 	const int getTotalSpriteAnimationColumns() const;
 	const int getSpriteAnimationRowIndex() const;
 	const int getSpriteAnimationColumnIndex() const;
-	const int getSpriteAnimationRepeats() const;
-	const int getMaxSpriteAnimationRepeats() const;
+	const int getSpriteAnimationLoops() const;
+	const int getMaxSpriteAnimationLoops() const;
 
 	// Other
 	void setDepthEntity(bool value);
@@ -99,12 +99,12 @@ private:
 	int _totalSpriteAnimationColumns = 0;
 	int _spriteAnimationRowIndex	 = 0;
 	int _spriteAnimationColumnIndex  = 0;
-	int _spriteAnimationRepeats		 = 0;
-	int _maxSpriteAnimationRepeats   = 0;
+	int _spriteAnimationLoops		 = 0;
+	int _maxSpriteAnimationLoops     = 0;
 
 	unsigned int _depth = 0;
 
-	bool _isSpriteAnimationPlaying = false;
+	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused  = false;
 	bool _mirroredHorizontally	   = false;
 	bool _mirroredVertically	   = false;

@@ -382,7 +382,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		_fe3d.billboardEntity_setAnimationRows(newID, _fe3d.billboardEntity_getAnimationRows(previewID));
 		_fe3d.billboardEntity_setAnimationColumns(newID, _fe3d.billboardEntity_getAnimationColumns(previewID));
 		_fe3d.billboardEntity_setAnimationFramestep(newID, _fe3d.billboardEntity_getAnimationFramestep(previewID));
-		_fe3d.billboardEntity_playAnimation(newID, -1);
+		_fe3d.billboardEntity_startAnimation(newID, -1);
 	}
 
 	// Bind AABB entity to billboard entity

@@ -34,7 +34,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 						}
 					}
 
-					// Play animation
+					// Start animation
 					if (hasAllParts)
 					{
 						_startedAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));

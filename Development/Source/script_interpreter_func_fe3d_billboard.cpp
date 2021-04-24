@@ -602,7 +602,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				_fe3d.billboardEntity_playAnimation(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.billboardEntity_startAnimation(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

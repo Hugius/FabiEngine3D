@@ -42,7 +42,7 @@ void BottomViewportController::initialize()
 	int counter = 1;
 	for (auto& [key, value] : updateStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(-0.075f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		_statsScreen->addTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		counter++;
 	}
 

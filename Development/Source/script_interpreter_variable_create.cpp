@@ -268,7 +268,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					if (isAccessingList)
 					{
 						auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
-						unsigned int bracketIndex = std::distance(valueString.begin(), openingBracketFound);
+						auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
 						valueString = valueString.substr(0, bracketIndex);
 					}
 

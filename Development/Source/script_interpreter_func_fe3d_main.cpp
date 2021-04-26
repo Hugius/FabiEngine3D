@@ -18,7 +18,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 		else
 		{
 			// Extract arguments from argument string
-			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
+			auto parenthesisIndex = static_cast<unsigned int>(std::distance(scriptLine.begin(), openingParanthesisFound));
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
 			auto arguments = _extractValuesFromListString(argumentString);

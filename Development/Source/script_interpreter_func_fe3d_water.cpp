@@ -20,7 +20,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
 			if (_validateFe3dWaterEntity())
@@ -75,7 +75,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
 			if (_validateFe3dWaterEntity())
@@ -106,7 +106,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
 			if (_validateFe3dWaterEntity())

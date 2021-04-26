@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate preview audio ID
 			if (_validateFe3dSoundEntity("@" + arguments[0].getString(), true))
@@ -36,7 +36,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		auto types = { ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.misc_setMusicEnabled(arguments[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.music_setVolume(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

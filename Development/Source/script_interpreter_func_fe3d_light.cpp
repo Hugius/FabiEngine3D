@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Check if existing
 			auto result = _fe3d.lightEntity_isExisting(arguments[0].getString());
@@ -39,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// New light ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
@@ -123,7 +123,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -138,7 +138,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -162,7 +162,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -177,7 +177,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -209,7 +209,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -224,7 +224,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -240,7 +240,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -255,7 +255,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -270,7 +270,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -285,7 +285,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
@@ -300,7 +300,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))

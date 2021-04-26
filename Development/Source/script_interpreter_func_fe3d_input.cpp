@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
@@ -20,7 +20,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
@@ -33,7 +33,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{
@@ -72,7 +72,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{

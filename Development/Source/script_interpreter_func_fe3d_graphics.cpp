@@ -24,7 +24,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
 			_fe3d.gfx_enableFog(arguments[0].getDecimal(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogThickness(), _fe3d.gfx_getFogColor());
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
 			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), arguments[0].getDecimal(), _fe3d.gfx_getFogThickness(), _fe3d.gfx_getFogColor());
@@ -70,7 +70,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
 			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(), arguments[0].getDecimal(), _fe3d.gfx_getFogColor());
@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
 			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogThickness(),
@@ -133,7 +133,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::BOOLEAN };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
 			_fe3d.gfx_enableDOF(arguments[0].getBoolean(), _fe3d.gfx_getaMaxDofDistance(), _fe3d.gfx_getDofBlurDistance());
@@ -156,7 +156,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
 			_fe3d.gfx_enableDOF(_fe3d.gfx_isDofDynamic(), arguments[0].getDecimal(), _fe3d.gfx_getDofBlurDistance());
@@ -179,7 +179,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
 			_fe3d.gfx_enableDOF(_fe3d.gfx_isDofDynamic(), _fe3d.gfx_getaMaxDofDistance(), arguments[0].getDecimal());
@@ -220,7 +220,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableShadows(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
 				_fe3d.gfx_getShadowCenter(), _fe3d.gfx_getShadowSize(), _fe3d.gfx_getShadowReach(),
@@ -256,7 +256,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isSkyHdrEnabled();
 			_fe3d.gfx_enableSkyHDR(arguments[0].getDecimal());
@@ -295,7 +295,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isMotionBlurEnabled();
 			_fe3d.gfx_enableMotionBlur(arguments[0].getDecimal());
@@ -334,7 +334,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
 			const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
@@ -359,7 +359,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
 			_fe3d.gfx_enableLensFlare(_fe3d.gfx_getLensFlareMapPath(), arguments[0].getDecimal(), _fe3d.gfx_getLensFlareMultiplier());
@@ -382,7 +382,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
 			_fe3d.gfx_enableLensFlare(_fe3d.gfx_getLensFlareMapPath(), _fe3d.gfx_getLensFlareIntensity(), arguments[0].getDecimal());

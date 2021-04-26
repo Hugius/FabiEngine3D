@@ -98,7 +98,8 @@ bool ScriptInterpreter::_validateCurrentProject()
 
 ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth)
 {
-	unsigned int i = statements.size();
+	auto i = static_cast<unsigned int>(statements.size());
+
 	while (i--)
 	{
 		if (statements[i].scopeDepth == scopeDepth)

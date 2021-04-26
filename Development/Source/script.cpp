@@ -57,7 +57,7 @@ void Script::reset()
 
 unsigned int Script::getScriptFileCount()
 {
-	return _scriptFiles.size();
+	return static_cast<unsigned int>(_scriptFiles.size());
 }
 
 unsigned int Script::getTotalLineCount()

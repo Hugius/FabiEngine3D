@@ -80,7 +80,7 @@ const string& ScriptFile::getLineText(unsigned int index)
 
 unsigned int ScriptFile::getLineCount()
 {
-	return _lines.size();
+	return static_cast<unsigned int>(_lines.size());
 }
 
 unsigned int ScriptFile::getCursorLineIndex()

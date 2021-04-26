@@ -18,7 +18,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 		else
 		{
 			// Extract arguments from argument string
-			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
+			auto parenthesisIndex = static_cast<unsigned int>(std::distance(scriptLine.begin(), openingParanthesisFound));
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
 			auto arguments = _extractValuesFromListString(argumentString);
@@ -33,7 +33,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
@@ -42,7 +42,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto firstName = arguments[0].getString();
 						auto secondName = arguments[1].getString();
@@ -91,7 +91,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto nameString = arguments[0].getString();
 
@@ -119,7 +119,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Return string size
 						auto result = arguments[0].getString().size();
@@ -130,7 +130,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate index
 						if ((arguments[1].getInteger() < 0) ||
@@ -153,7 +153,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						ScriptValueType::INTEGER  // Max
 					};
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getUniqueInt(arguments[0].getInteger(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
@@ -167,7 +167,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						ScriptValueType::INTEGER  // Max
 					};
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getRandomInt(arguments[0].getInteger(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
@@ -181,7 +181,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						ScriptValueType::DECIMAL  // Max
 					};
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -191,7 +191,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_checkInterval(arguments[0].getString(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));

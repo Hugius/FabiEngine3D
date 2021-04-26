@@ -20,7 +20,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
@@ -91,7 +91,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
@@ -119,7 +119,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())

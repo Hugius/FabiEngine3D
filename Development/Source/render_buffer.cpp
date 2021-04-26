@@ -170,7 +170,7 @@ void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 
 	// Other
 	_isInstanced = true;
-	_offsetCount = offsets.size();
+	_offsetCount = static_cast<unsigned int>(offsets.size());
 	_instancedOffsets = offsets;
 }
 

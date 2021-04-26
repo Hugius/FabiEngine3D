@@ -28,7 +28,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableAmbientLighting(
 				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
@@ -50,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableAmbientLighting(_fe3d.gfx_getAmbientLightingColor(), arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -91,7 +91,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto position = Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 			_fe3d.gfx_enableDirectionalLighting(
@@ -116,7 +116,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableDirectionalLighting(
 				_fe3d.gfx_getDirectionalLightingPosition(),
@@ -139,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableDirectionalLighting(
 				_fe3d.gfx_getDirectionalLightingPosition(),
@@ -162,7 +162,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(arguments[0].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -204,7 +204,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
@@ -233,7 +233,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
@@ -262,7 +262,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
@@ -291,7 +291,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(

@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -74,7 +74,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -90,7 +90,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -170,7 +170,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -188,7 +188,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
@@ -212,7 +212,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 

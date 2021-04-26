@@ -57,7 +57,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	if (isAccessingListOne)
 	{
 		auto openingBracketFound = std::find(nameString.begin(), nameString.end(), '[');
-		unsigned int bracketIndex = std::distance(nameString.begin(), openingBracketFound);
+		auto bracketIndex = static_cast<unsigned int>(std::distance(nameString.begin(), openingBracketFound));
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
@@ -181,7 +181,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		if (isAccessingListTwo)
 		{
 			auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
-			unsigned int bracketIndex = std::distance(valueString.begin(), openingBracketFound);
+			auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 

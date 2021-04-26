@@ -172,7 +172,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	if (openingBracketFound != valueString.end() && closingBracketFound != valueString.end())
 	{
 		// Temporary values
-		unsigned int bracketIndex = std::distance(valueString.begin(), openingBracketFound);
+		auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
 		string indexString = valueString.substr(bracketIndex + 1);
 		indexString.pop_back();
 
@@ -255,7 +255,7 @@ string ScriptInterpreter::_limitIntegerString(const string& valueString)
 string ScriptInterpreter::_limitDecimalString(const string& valueString)
 {
 	// Cut everything after the dot
-	unsigned int dotIndex = valueString.find('.');
+	auto dotIndex = static_cast<unsigned int>(valueString.find('.'));
 	string intString = valueString.substr(0, dotIndex);
 
 	// Check if negative value

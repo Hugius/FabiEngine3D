@@ -86,5 +86,5 @@ vector<shared_ptr<ScriptValue>>& ScriptVariable::getValues()
 
 unsigned int ScriptVariable::getValueCount()
 {
-	return _values.size();
+	return static_cast<unsigned int>(_values.size());
 }

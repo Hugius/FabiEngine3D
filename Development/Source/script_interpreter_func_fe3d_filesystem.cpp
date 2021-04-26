@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			// Check for error
 			if (status == -1)
 			{
-				_throwScriptError("Cannot create directory \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot create directory \"" + arguments[0].getString() + "\"!");
 			}
 
 			// Return
@@ -66,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			}
 			else
 			{
-				_throwScriptError("Cannot delete directory \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot delete directory \"" + arguments[0].getString() + "\"!");
 			}
 		}
 	}
@@ -116,7 +116,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			}
 			else
 			{
-				_throwScriptError("Cannot read from file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot read from file \"" + arguments[0].getString() + "\"!");
 			}
 		}
 	}
@@ -204,7 +204,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			}
 			else
 			{
-				_throwScriptError("Cannot clear file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot clear file \"" + arguments[0].getString() + "\"!");
 			}
 		}
 	}
@@ -227,7 +227,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			}
 			else
 			{
-				_throwScriptError("Cannot delete file \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot delete file \"" + arguments[0].getString() + "\"!");
 			}
 		}
 	}

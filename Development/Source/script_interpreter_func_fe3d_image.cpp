@@ -5,14 +5,14 @@ bool ScriptInterpreter::_validateFe3dImageEntity(const string& ID)
 	// Cannot request/delete an engine entity
 	if (ID.front() == '@')
 	{
-		_throwScriptError("Requested image ID cannot start with '@'!");
+		_throwScriptError("requested image ID cannot start with '@'!");
 		return false;
 	}
 
 	// Check if entity exists
 	if (!_fe3d.imageEntity_isExisting(ID))
 	{
-		_throwScriptError("Requested image with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("requested image with ID \"" + ID + "\" does not exist!");
 
 		return false;
 	}
@@ -33,7 +33,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested image ID cannot start with '@'");
+				_throwScriptError("requested image ID cannot start with '@'");
 				return true;
 			}
 
@@ -52,7 +52,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested image ID cannot start with '@'");
+				_throwScriptError("requested image ID cannot start with '@'");
 				return true;
 			}
 
@@ -106,7 +106,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// New image ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("New image ID cannot start with '@'");
+				_throwScriptError("new image ID cannot start with '@'");
 				return true;
 			}
 

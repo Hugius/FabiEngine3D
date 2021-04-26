@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void CameraManager::translateFollowX(float speed) // Side movement
+void CameraManager::translateFollowX(float speed)
 { 
 	if (_isFreeMovementEnabled)
 	{
@@ -11,7 +11,7 @@ void CameraManager::translateFollowX(float speed) // Side movement
 	}
 }
 
-void CameraManager::translateFollowZ(float speed) // Forward movement
+void CameraManager::translateFollowZ(float speed)
 {
 	if (_isFreeMovementEnabled)
 	{
@@ -23,7 +23,7 @@ void CameraManager::translateFollowZ(float speed) // Forward movement
 	}
 }
 
-void CameraManager::translateFollowZY(float speed) // Forward movement
+void CameraManager::translateFollowZY(float speed)
 {
 	if (_isFreeMovementEnabled)
 	{
@@ -35,7 +35,10 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 
 void CameraManager::enableLookatView()
 {
-	_isLookatViewEabled = true;
+	if (!_isFirstPersonViewEnabled)
+	{
+		_isLookatViewEabled = true;
+	}
 }
 
 void CameraManager::disableLookatView()
@@ -45,13 +48,16 @@ void CameraManager::disableLookatView()
 
 void CameraManager::enableFirstPersonView()
 {
-	// Only center first time
-	if (!_isFirstPersonViewEnabled)
+	if (!_isLookatViewEabled)
 	{
-		_mustCenter = true;
-	}
+		// Only center first time
+		if (!_isFirstPersonViewEnabled)
+		{
+			_mustCenter = true;
+		}
 
-	_isFirstPersonViewEnabled = true;
+		_isFirstPersonViewEnabled = true;
+	}
 }
 
 void CameraManager::disableFirstPersonView()

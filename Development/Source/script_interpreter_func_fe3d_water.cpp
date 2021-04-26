@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dWaterEntity()
 	// Check if entity exists
 	if (_fe3d.waterEntity_getSelectedID().empty())
 	{
-		_throwScriptError("Current scene has no water entity!");
+		_throwScriptError("current scene has no water entity!");
 		return false;
 	}
 

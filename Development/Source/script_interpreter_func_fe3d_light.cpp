@@ -5,14 +5,14 @@ bool ScriptInterpreter::_validateFe3dLightEntity(const string& ID)
 	// Just to be consistent with not starting entity ID's with '@'
 	if (ID.front() == '@')
 	{
-		_throwScriptError("Requested light ID cannot start with '@'!");
+		_throwScriptError("requested light ID cannot start with '@'!");
 		return false;
 	}
 
 	// Check if entity exists
 	if (!_fe3d.lightEntity_isExisting(ID))
 	{
-		_throwScriptError("Requested light with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("requested light with ID \"" + ID + "\" does not exist!");
 		return false;
 	}
 
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested light ID cannot start with '@'");
+				_throwScriptError("requested light ID cannot start with '@'");
 				return true;
 			}
 
@@ -98,14 +98,14 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			// New light ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("New light ID cannot start with '@'");
+				_throwScriptError("new light ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if light entity already exists
 			if (_fe3d.lightEntity_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("Light with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("light with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 

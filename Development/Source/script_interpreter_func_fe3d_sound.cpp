@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool previewE
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested sound ID cannot start with '@'!");
+		_throwScriptError("requested sound ID cannot start with '@'!");
 		return false;
 	}
 
@@ -14,11 +14,11 @@ bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool previewE
 	{
 		if (previewEntity)
 		{
-			_throwScriptError("Requested sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested sound with ID \"" + ID.substr(1) + "\" does not exist!");
 		}
 		else
 		{
-			_throwScriptError("Requested sound with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("requested sound with ID \"" + ID + "\" does not exist!");
 		}
 
 		return false;
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested sound ID cannot start with '@'"); 
+				_throwScriptError("requested sound ID cannot start with '@'"); 
 				return true;
 			}
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested sound ID cannot start with '@'");
+				_throwScriptError("requested sound ID cannot start with '@'");
 				return true;
 			}
 
@@ -111,14 +111,14 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// New sound ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("New sound ID cannot start with '@'");
+				_throwScriptError("new sound ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if soundEntity already exists
 			if (_fe3d.soundEntity_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("Sound with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("sound with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
@@ -153,14 +153,14 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			// New sound ID cannot start with '@'
 			if (newID.front() == '@')
 			{
-				_throwScriptError("New sound ID cannot start with '@'");
+				_throwScriptError("new sound ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if soundEntity already exists
 			if (_fe3d.soundEntity_isExisting(newID))
 			{
-				_throwScriptError("Sound with ID \"" + newID + "\" already exists!");
+				_throwScriptError("sound with ID \"" + newID + "\" already exists!");
 				return true;
 			}
 
@@ -394,7 +394,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 2D sound
 				if (_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change volume of 3D sound!");
+					_throwScriptError("cannot change volume of 3D sound!");
 					return true;
 				}
 
@@ -432,7 +432,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change position of 2D sound!");
+					_throwScriptError("cannot change position of 2D sound!");
 					return true;
 				}
 
@@ -457,7 +457,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change position of 2D sound!");
+					_throwScriptError("cannot change position of 2D sound!");
 					return true;
 				}
 
@@ -479,7 +479,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change maximum volume of 2D sound!");
+					_throwScriptError("cannot change maximum volume of 2D sound!");
 					return true;
 				}
 
@@ -502,7 +502,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change maximum volume of 2D sound!");
+					_throwScriptError("cannot change maximum volume of 2D sound!");
 					return true;
 				}
 
@@ -525,7 +525,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change maximum distance of 2D sound!");
+					_throwScriptError("cannot change maximum distance of 2D sound!");
 					return true;
 				}
 
@@ -548,7 +548,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				// Only for 3D sound
 				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
 				{
-					_throwScriptError("Cannot change maximum distance of 2D sound!");
+					_throwScriptError("cannot change maximum distance of 2D sound!");
 					return true;
 				}
 

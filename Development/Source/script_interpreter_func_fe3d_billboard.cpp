@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested billboard ID cannot start with '@'!");
+		_throwScriptError("requested billboard ID cannot start with '@'!");
 		return false;
 	}
 
@@ -14,11 +14,11 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 	{
 		if (previewEntity)
 		{
-			_throwScriptError("Requested billboard with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested billboard with ID \"" + ID.substr(1) + "\" does not exist!");
 		}
 		else
 		{
-			_throwScriptError("Requested billboard with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("requested billboard with ID \"" + ID + "\" does not exist!");
 		}
 
 		return false;
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested billboard ID cannot start with '@'");
+				_throwScriptError("requested billboard ID cannot start with '@'");
 				return true;
 			}
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested billboard ID cannot start with '@'");
+				_throwScriptError("requested billboard ID cannot start with '@'");
 				return true;
 			}
 
@@ -111,14 +111,14 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// New billboard ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("New billboard ID cannot start with '@'");
+				_throwScriptError("new billboard ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if billboard entity already exists
 			if (_fe3d.billboardEntity_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("Billboard with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
@@ -486,7 +486,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("Billboard has no bound AABBs!");
+					_throwScriptError("billboard has no bound AABBs!");
 					return true;
 				}
 
@@ -517,7 +517,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("Billboard has no bound AABBs!");
+					_throwScriptError("billboard has no bound AABBs!");
 					return true;
 				}
 
@@ -710,7 +710,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboard is of type text
 				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
 				{
-					_throwScriptError("Billboard is not of type text!");
+					_throwScriptError("billboard is not of type text!");
 					return true;
 				}
 				else
@@ -734,7 +734,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboard is of type text
 				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
 				{
-					_throwScriptError("Billboard is not of type text!");
+					_throwScriptError("billboard is not of type text!");
 					return true;
 				}
 				else

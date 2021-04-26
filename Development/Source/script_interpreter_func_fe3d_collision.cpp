@@ -85,7 +85,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[2].getString() != "X" && arguments[2].getString() != "Y" && 
 				arguments[2].getString() != "Z" && arguments[2].getString() != "")
 			{
-				_throwScriptError("Invalid direction argument!");
+				_throwScriptError("invalid direction argument!");
 				return true;
 			}
 
@@ -141,7 +141,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
 				arguments[0].getString() != "Z" && arguments[0].getString() != "")
 			{
-				_throwScriptError("Invalid direction argument!");
+				_throwScriptError("invalid direction argument!");
 				return true;
 			}
 
@@ -180,7 +180,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[1].getString() != "X" && arguments[1].getString() != "Y" && 
 				arguments[1].getString() != "Z" && arguments[1].getString() != "")
 			{
-				_throwScriptError("Invalid direction argument!");
+				_throwScriptError("invalid direction argument!");
 				return true;
 			}
 
@@ -226,7 +226,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
 				arguments[0].getString() != "Z" && arguments[0].getString() != "")
 			{
-				_throwScriptError("Invalid direction argument!");
+				_throwScriptError("invalid direction argument!");
 				return true;
 			}
 
@@ -309,7 +309,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
 				if (!_fe3d.aabbEntity_isExisting(selfSearchID))
 				{
-					_throwScriptError("Requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 
@@ -382,7 +382,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
 				if (!_fe3d.aabbEntity_isExisting(selfSearchID))
 				{
-					_throwScriptError("Requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 
@@ -437,7 +437,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
 				if (!_fe3d.aabbEntity_isExisting(selfSearchID))
 				{
-					_throwScriptError("Requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
 					return true;
 				}
 

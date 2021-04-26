@@ -67,7 +67,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 
 	}
 
-	// Only if first person camera is enabled & not centering
+	// Update first person camera
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
 		// Offset between current mouse position & middle of the screen

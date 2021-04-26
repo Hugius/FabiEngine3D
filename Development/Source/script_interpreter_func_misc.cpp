@@ -199,7 +199,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else
 				{
-					_throwScriptError("MISC function not found!");
+					_throwScriptError("mISC function not found!");
 				}
 			}
 		}

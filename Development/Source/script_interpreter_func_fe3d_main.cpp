@@ -56,7 +56,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				// Check if function call exists
 				if(!executed)
 				{
-					_throwScriptError("FE3D function not found!");
+					_throwScriptError("fE3D function not found!");
 				}
 			}
 		}

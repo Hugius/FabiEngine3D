@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dSkyEntity()
 	// Check if entity exists
 	if (_fe3d.skyEntity_getSelectedID().empty())
 	{
-		_throwScriptError("Current scene has no sky entity!");
+		_throwScriptError("current scene has no sky entity!");
 		return false;
 	}
 

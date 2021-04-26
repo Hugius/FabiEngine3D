@@ -184,7 +184,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			}
 			else
 			{
-				_throwScriptError("Cannot delete custom scene \"" + arguments[0].getString() + "\"!");
+				_throwScriptError("cannot delete custom scene \"" + arguments[0].getString() + "\"!");
 			}
 		}
 	}

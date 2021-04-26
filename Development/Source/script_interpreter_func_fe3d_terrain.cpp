@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dTerrainEntity()
 	// Check if entity exists
 	if (_fe3d.terrainEntity_getSelectedID().empty())
 	{
-		_throwScriptError("Current scene has no terrain entity!");
+		_throwScriptError("current scene has no terrain entity!");
 		return false;
 	}
 

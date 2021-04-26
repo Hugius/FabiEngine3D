@@ -137,6 +137,12 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			if (_fe3d.camera_isFirstPersonViewEnabled())
+			{
+				_throwScriptError("first person view is currently enabled!");
+				return true;
+			}
+
 			_fe3d.camera_enableLookatView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -161,6 +167,12 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			if (_fe3d.camera_isLookatViewEnabled())
+			{
+				_throwScriptError("lookat view is currently enabled!");
+				return true;
+			}
+
 			_fe3d.camera_enableFirstPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}

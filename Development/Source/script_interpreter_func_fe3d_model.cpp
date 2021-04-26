@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Requested model ID cannot start with '@'!");
+		_throwScriptError("requested model ID cannot start with '@'!");
 		return false;
 	}
 
@@ -14,11 +14,11 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 	{
 		if (previewEntity)
 		{
-			_throwScriptError("Requested model with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested model with ID \"" + ID.substr(1) + "\" does not exist!");
 		}
 		else
 		{
-			_throwScriptError("Requested model with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("requested model with ID \"" + ID + "\" does not exist!");
 		}
 
 		return false;
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested model ID cannot start with '@'");
+				_throwScriptError("requested model ID cannot start with '@'");
 				return true;
 			}
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("Requested model ID cannot start with '@'");
+				_throwScriptError("requested model ID cannot start with '@'");
 				return true;
 			}
 
@@ -111,14 +111,14 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// New model ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("New model ID cannot start with '@'");
+				_throwScriptError("new model ID cannot start with '@'");
 				return true;
 			}
 
 			// Check if modelEntity already exists
 			if (_fe3d.modelEntity_isExisting(arguments[0].getString()))
 			{
-				_throwScriptError("Model with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("model with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
@@ -495,7 +495,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("Model has no bound AABBs!");
+					_throwScriptError("model has no bound AABBs!");
 					return true;
 				}
 
@@ -526,7 +526,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("Model has no bound AABBs!");
+					_throwScriptError("model has no bound AABBs!");
 					return true;
 				}
 

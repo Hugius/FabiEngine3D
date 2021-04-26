@@ -16,10 +16,11 @@ Tools::Tools() :
 const string Tools::getRootDirectory()
 {
 	// Temporary values
-	char buffer[256]; size_t len = sizeof(buffer);
+	char buffer[256];
+	size_t len = sizeof(buffer);
 
 	// Get executable path
-	GetModuleFileName(NULL, buffer, len);
+	GetModuleFileName(NULL, buffer, static_cast<DWORD>(len));
 
 	// Create final string
 	string rootDir = buffer;

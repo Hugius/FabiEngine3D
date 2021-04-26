@@ -179,10 +179,6 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 		{
 			// Load mesh file
 			auto partsPointer = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
-			if (partsPointer == nullptr)
-			{
-				return;
-			}
 			auto parts = *partsPointer;
 
 			// Create render buffers

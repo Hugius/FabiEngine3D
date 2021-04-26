@@ -8,8 +8,9 @@
 Config::Config()
 {
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
+	char buffer[256];
+	size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, static_cast<DWORD>(len));
 	string rootDir = buffer;
 	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
 

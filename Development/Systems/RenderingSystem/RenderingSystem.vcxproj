@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\aabb_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\base_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\billboard_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\bloom_hdr_renderer.cpp" />
+    <ClCompile Include="..\..\Source\blur_renderer.cpp" />
+    <ClCompile Include="..\..\Source\depth_renderer.cpp" />
+    <ClCompile Include="..\..\Source\final_renderer.cpp" />
+    <ClCompile Include="..\..\Source\image_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\model_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\post_renderer.cpp" />
+    <ClCompile Include="..\..\Source\render_buffer.cpp" />
+    <ClCompile Include="..\..\Source\render_bus_getters.cpp" />
+    <ClCompile Include="..\..\Source\render_bus_setters.cpp" />
+    <ClCompile Include="..\..\Source\render_framebuffer_main.cpp" />
+    <ClCompile Include="..\..\Source\render_framebuffer_misc.cpp" />
+    <ClCompile Include="..\..\Source\render_manager_capture_one.cpp" />
+    <ClCompile Include="..\..\Source\render_manager_capture_two.cpp" />
+    <ClCompile Include="..\..\Source\render_manager_draw.cpp" />
+    <ClCompile Include="..\..\Source\render_manager_main.cpp" />
+    <ClCompile Include="..\..\Source\render_shader.cpp" />
+    <ClCompile Include="..\..\Source\shadow_manager.cpp" />
+    <ClCompile Include="..\..\Source\shadow_renderer.cpp" />
+    <ClCompile Include="..\..\Source\sky_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\terrain_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\water_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\window_manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\aabb_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\base_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\billboard_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\bloom_hdr_renderer.hpp" />
+    <ClInclude Include="..\..\Source\blur_renderer.hpp" />
+    <ClInclude Include="..\..\Source\depth_renderer.hpp" />
+    <ClInclude Include="..\..\Source\final_renderer.hpp" />
+    <ClInclude Include="..\..\Source\image_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\model_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\post_renderer.hpp" />
+    <ClInclude Include="..\..\Source\render_buffer.hpp" />
+    <ClInclude Include="..\..\Source\render_bus.hpp" />
+    <ClInclude Include="..\..\Source\render_framebuffer.hpp" />
+    <ClInclude Include="..\..\Source\render_manager.hpp" />
+    <ClInclude Include="..\..\Source\render_shader.hpp" />
+    <ClInclude Include="..\..\Source\shadow_manager.hpp" />
+    <ClInclude Include="..\..\Source\shadow_renderer.hpp" />
+    <ClInclude Include="..\..\Source\sky_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\terrain_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\water_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\window_manager.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\water_entity_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\water_entity_shader.vert" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{1D4D6DA1-0A53-4DB4-93FF-F0755DFE1DBD}</ProjectGuid>
+    <RootNamespace>RenderingSystem</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Systems\</OutDir>
+    <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
+    <LibraryPath>
+    </LibraryPath>
+    <IntDir>$(ProjectDir)Temp\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level2</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

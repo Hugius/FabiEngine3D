@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Animation Editor">
+      <UniqueIdentifier>{ce127aed-4053-4bb3-af19-624153f70c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation Editor\Core">
+      <UniqueIdentifier>{e2011b46-5f88-42c0-9a59-40db66d04e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{c79d9fa8-72de-43b2-8c68-d93aaa991a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation Editor\Updates">
+      <UniqueIdentifier>{0b819a6c-bc62-490d-adc2-556478737fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation Editor\Data Structures">
+      <UniqueIdentifier>{baad863b-7fa3-4249-9d05-0954879e29ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Editor">
+      <UniqueIdentifier>{8011f7e8-c7ba-4295-b138-3e6e1eb14d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Editor\Core">
+      <UniqueIdentifier>{752ab018-d668-4268-a4d1-ffa2772f05b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Editor\Miscellaneous">
+      <UniqueIdentifier>{2877187a-dffb-491f-b745-08b7ab97e001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Editor\Updates">
+      <UniqueIdentifier>{e2ab1721-0c9c-494a-9bf7-5e9c85a34bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor">
+      <UniqueIdentifier>{063d7b87-4367-42d9-9cd8-ec43b6c6859d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor\Core">
+      <UniqueIdentifier>{def1ca50-9deb-4baf-be73-c5b864aeb462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor\Miscellaneous">
+      <UniqueIdentifier>{98e7159a-73c1-46c3-b837-f2fd96b8cf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor\Updates">
+      <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor">
+      <UniqueIdentifier>{bc63cee9-72b3-4934-a47f-6afda369118e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Miscellaneous">
+      <UniqueIdentifier>{5226b612-dfeb-4dcd-b9e9-5e1786c92dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Core">
+      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Updates">
+      <UniqueIdentifier>{05991820-f6e0-413c-926e-f2bfacffcf61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Updates\Sky">
+      <UniqueIdentifier>{4e4ede0a-f76d-44d4-ab4d-a4c8e1d282dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Updates\Terrain">
+      <UniqueIdentifier>{5435b852-146b-4f73-ab43-47bc9fa8b8d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Updates\Water">
+      <UniqueIdentifier>{c878400f-1b5e-48d9-b3fd-ac193a4fe98c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Updates\Core">
+      <UniqueIdentifier>{1fa2add1-d849-437c-b708-2cae9f45cdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment Editor\Persistence">
+      <UniqueIdentifier>{dac88059-b80d-417b-b3fd-c4c57efa3883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor">
+      <UniqueIdentifier>{d6928243-9010-4c7a-a3c8-82d952906238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Core">
+      <UniqueIdentifier>{c81a28c3-8641-4386-a44f-2e55a8e40ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Miscellaneous">
+      <UniqueIdentifier>{222fc625-b3fa-408e-b4c9-e127026eb7bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Updates">
+      <UniqueIdentifier>{8e81a6c6-f9b1-4f97-9869-cc4660b85b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model Editor\Persistence">
+      <UniqueIdentifier>{ccdde067-10ba-42a2-8bea-4d2c63cb049d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor">
+      <UniqueIdentifier>{e3af34ba-dd02-4a5a-b056-925d4e711595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Core">
+      <UniqueIdentifier>{d3d88ca1-85ef-42ec-895f-8e025772dd50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Lighting">
+      <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Settings">
+      <UniqueIdentifier>{27269715-c8cf-44f4-9496-444ba01514e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Miscellaneous">
+      <UniqueIdentifier>{5aa80d36-fbba-4b8a-8a17-87b4ad255715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Billboards">
+      <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Models">
+      <UniqueIdentifier>{0725081c-ce09-4ba4-aca4-247cf8a4eb32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Audio">
+      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Environment">
+      <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Persistence">
+      <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor">
+      <UniqueIdentifier>{d7b6a7a0-0d31-44c7-a5d5-605afe7eaad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor\Core">
+      <UniqueIdentifier>{aa76db5a-a605-480a-9ed6-d9ccb2be4d41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor\Updates">
+      <UniqueIdentifier>{8e8f8860-5987-44d5-8f36-1fd8125c78a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script Editor\Miscellaneous">
+      <UniqueIdentifier>{9c8d43b8-7054-467f-a457-a86edb05b425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Settings Editor">
+      <UniqueIdentifier>{126ada8c-b400-4922-ab90-b00ad353589a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\animation_editor_main.cpp">
+      <Filter>Animation Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_persistence.cpp">
+      <Filter>Animation Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_interface.cpp">
+      <Filter>Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_misc.cpp">
+      <Filter>Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_execution.cpp">
+      <Filter>Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_updates.cpp">
+      <Filter>Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_updates_edit_frame.cpp">
+      <Filter>Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_updates_edit_main.cpp">
+      <Filter>Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_main.cpp">
+      <Filter>Audio Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_persistence.cpp">
+      <Filter>Audio Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_misc.cpp">
+      <Filter>Audio Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_updates.cpp">
+      <Filter>Audio Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_updates_edit.cpp">
+      <Filter>Audio Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_main.cpp">
+      <Filter>Billboard Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp">
+      <Filter>Billboard Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_misc.cpp">
+      <Filter>Billboard Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates_edit.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_misc.cpp">
+      <Filter>Environment Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_main.cpp">
+      <Filter>Environment Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_sky_misc.cpp">
+      <Filter>Environment Editor\Updates\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit.cpp">
+      <Filter>Environment Editor\Updates\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_two.cpp">
+      <Filter>Environment Editor\Updates\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_one.cpp">
+      <Filter>Environment Editor\Updates\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_misc.cpp">
+      <Filter>Environment Editor\Updates\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_water_edit.cpp">
+      <Filter>Environment Editor\Updates\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_water_misc.cpp">
+      <Filter>Environment Editor\Updates\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates.cpp">
+      <Filter>Environment Editor\Updates\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_persistence_sky.cpp">
+      <Filter>Environment Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_persistence_terrain.cpp">
+      <Filter>Environment Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_persistence_water.cpp">
+      <Filter>Environment Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_main.cpp">
+      <Filter>Model Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_misc.cpp">
+      <Filter>Model Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_main.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp">
+      <Filter>Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_loading.cpp">
+      <Filter>Model Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_editor_saving.cpp">
+      <Filter>Model Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_main.cpp">
+      <Filter>Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_gui.cpp">
+      <Filter>Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_updates.cpp">
+      <Filter>Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_light_edit.cpp">
+      <Filter>Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_light_placing.cpp">
+      <Filter>Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_light_updates.cpp">
+      <Filter>Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_settings_updates_one.cpp">
+      <Filter>Scene Editor\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_settings_updates_two.cpp">
+      <Filter>Scene Editor\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_creation.cpp">
+      <Filter>Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_misc_one.cpp">
+      <Filter>Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_misc_two.cpp">
+      <Filter>Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_billboard_edit.cpp">
+      <Filter>Scene Editor\Billboards</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_billboard_updates.cpp">
+      <Filter>Scene Editor\Billboards</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_billboard_placing.cpp">
+      <Filter>Scene Editor\Billboards</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_model_edit.cpp">
+      <Filter>Scene Editor\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_model_placing.cpp">
+      <Filter>Scene Editor\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_model_updates.cpp">
+      <Filter>Scene Editor\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_sound_edit.cpp">
+      <Filter>Scene Editor\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_sound_placing.cpp">
+      <Filter>Scene Editor\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_sound_updates.cpp">
+      <Filter>Scene Editor\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_environment.cpp">
+      <Filter>Scene Editor\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp">
+      <Filter>Scene Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_loading.cpp">
+      <Filter>Scene Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_saving.cpp">
+      <Filter>Scene Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_saving_custom.cpp">
+      <Filter>Scene Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_main.cpp">
+      <Filter>Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_persistence.cpp">
+      <Filter>Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_writer.cpp">
+      <Filter>Script Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_updates.cpp">
+      <Filter>Script Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_selector.cpp">
+      <Filter>Script Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_misc.cpp">
+      <Filter>Script Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\settings_editor.cpp">
+      <Filter>Settings Editor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\animation_editor.hpp">
+      <Filter>Animation Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\animation.hpp">
+      <Filter>Animation Editor\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\animation_frame.hpp">
+      <Filter>Animation Editor\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\audio_editor.hpp">
+      <Filter>Audio Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\billboard_editor.hpp">
+      <Filter>Billboard Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\environment_editor.hpp">
+      <Filter>Environment Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\model_editor.hpp">
+      <Filter>Model Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\scene_editor.hpp">
+      <Filter>Scene Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_editor.hpp">
+      <Filter>Script Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\settings_editor.hpp">
+      <Filter>Settings Editor</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

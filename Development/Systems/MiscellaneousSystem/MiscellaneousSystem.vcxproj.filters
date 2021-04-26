@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Enums">
+      <UniqueIdentifier>{a7511681-4353-4e85-ba1a-e0b7d1d99d01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{cb9abead-d725-4fa1-af8f-f916f2d37d4c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\aabb_parent_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\animation_speed_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\blur_direction.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\blur_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\buffer_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\direction.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\entity_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\message_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_condition_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_value_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_variable_scope.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_variable_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\input_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\transformation_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\environment_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\camera_manager.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\configuration.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\input_handler.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\logger.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ray_caster.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\timer.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\tools.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\camera_manager_misc.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\configuration.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\camera_manager_main.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ray_caster.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\timer.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\input_handler.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\tools.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

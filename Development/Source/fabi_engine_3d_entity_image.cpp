@@ -254,7 +254,7 @@ bool FabiEngine3D::imageEntity_isMirroredVertically(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();;
 }
 
-unsigned unsigned int FabiEngine3D::imageEntity_getAnimationRows(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getAnimationRows(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationRows();
 }

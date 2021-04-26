@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{44bffe09-c571-460f-a483-bbd905dbf497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager">
+      <UniqueIdentifier>{d0c52f57-a55e-42b4-bad3-2f4d6f7e5a97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Player">
+      <UniqueIdentifier>{1bbcdce4-f0a7-40ad-bcdc-292ccd343cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data Structures">
+      <UniqueIdentifier>{cde7f474-004e-4d0a-8561-93f1d15f3abe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\audio_manager.cpp">
+      <Filter>Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_player_misc.cpp">
+      <Filter>Core\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_player_interface.cpp">
+      <Filter>Core\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sound.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\music.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\audio_manager.hpp">
+      <Filter>Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\audio_player.hpp">
+      <Filter>Core\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sound.hpp">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\music.hpp">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

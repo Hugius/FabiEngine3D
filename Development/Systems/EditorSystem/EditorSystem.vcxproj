@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\animation_editor_execution.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_interface.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_updates_edit_frame.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_updates_edit_main.cpp" />
+    <ClCompile Include="..\..\Source\audio_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\audio_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\audio_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\audio_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\audio_editor_updates_edit.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_edit.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_persistence_sky.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_persistence_terrain.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_persistence_water.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_sky_misc.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_one.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_two.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_misc.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_water_edit.cpp" />
+    <ClCompile Include="..\..\Source\environment_editor_updates_water_misc.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_loading.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_saving.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_options.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_billboard_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_billboard_placing.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_billboard_updates.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_creation.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_environment.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_gui.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_light_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_light_placing.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_light_updates.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_loading.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_one.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_misc_two.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_model_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_model_placing.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_model_updates.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_saving.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_saving_custom.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_settings_updates_one.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_settings_updates_two.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_sound_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_sound_placing.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_sound_updates.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_main.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_misc.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_selector.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_updates.cpp" />
+    <ClCompile Include="..\..\Source\script_editor_writer.cpp" />
+    <ClCompile Include="..\..\Source\settings_editor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\animation.hpp" />
+    <ClInclude Include="..\..\Source\animation_editor.hpp" />
+    <ClInclude Include="..\..\Source\animation_frame.hpp" />
+    <ClInclude Include="..\..\Source\audio_editor.hpp" />
+    <ClInclude Include="..\..\Source\billboard_editor.hpp" />
+    <ClInclude Include="..\..\Source\environment_editor.hpp" />
+    <ClInclude Include="..\..\Source\model_editor.hpp" />
+    <ClInclude Include="..\..\Source\scene_editor.hpp" />
+    <ClInclude Include="..\..\Source\script_editor.hpp" />
+    <ClInclude Include="..\..\Source\settings_editor.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{D4B85157-590E-4E08-A446-C81B4E632AC7}</ProjectGuid>
+    <RootNamespace>EditorSystem</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)Libraries\;$(IncludePath)</IncludePath>
+    <OutDir>$(SolutionDir)Systems\</OutDir>
+    <IntDir>$(ProjectDir)Temp\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level2</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

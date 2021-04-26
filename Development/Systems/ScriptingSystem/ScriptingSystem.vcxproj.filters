@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{9dfc9e9f-7ab2-4238-9f11-4e13e91cf600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data Structures">
+      <UniqueIdentifier>{8ac10d5b-3270-41f6-a619-5e1f0b27af76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution">
+      <UniqueIdentifier>{65b42125-b9a3-4e09-8f7c-779c9f646114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Executor">
+      <UniqueIdentifier>{7957d012-28d5-47d3-86fa-a36da89e5535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter">
+      <UniqueIdentifier>{992e8f17-069a-47a9-8d87-7d83424dc77f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Core">
+      <UniqueIdentifier>{541da134-77a6-4ba7-a9ea-e1c174278bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Miscellaneous">
+      <UniqueIdentifier>{a9fa97de-3c20-4d0b-86ee-83c7c11c0ede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function">
+      <UniqueIdentifier>{130479bd-0c79-48e0-898d-a5b9b5165bc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Entities">
+      <UniqueIdentifier>{8fb47fb8-c477-475e-9548-5caeef410d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Entities\Environment">
+      <UniqueIdentifier>{00066440-3137-469f-9343-1c400c578cbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Entities\Miscellaneous">
+      <UniqueIdentifier>{36988e15-96f9-4858-9f21-a2063da60e1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Miscellaneous">
+      <UniqueIdentifier>{c23fe641-24b8-4dea-9b85-cfffcb26d4e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Function\Core">
+      <UniqueIdentifier>{d76c7765-65c5-436a-a627-fdd98d31e78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Variable">
+      <UniqueIdentifier>{ec855f5f-cba3-46b4-aac3-ae2109f5bbc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\List">
+      <UniqueIdentifier>{bfddae24-cac4-4b45-bdce-240a9ee906cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Execution\Interpreter\Condition">
+      <UniqueIdentifier>{73e33946-97a8-40b0-9837-aceee869a5e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\script.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_file.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_value.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_variable.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_executor.cpp">
+      <Filter>Execution\Executor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_main.cpp">
+      <Filter>Execution\Interpreter\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_execution.cpp">
+      <Filter>Execution\Interpreter\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_misc.cpp">
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_string_operations.cpp">
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animations.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp">
+      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_graphics.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_math.cpp">
+      <Filter>Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_misc.cpp">
+      <Filter>Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_main.cpp">
+      <Filter>Execution\Interpreter\Function\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_variable_arithmetic.cpp">
+      <Filter>Execution\Interpreter\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_variable_create.cpp">
+      <Filter>Execution\Interpreter\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_variable_misc.cpp">
+      <Filter>Execution\Interpreter\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_variable_edit.cpp">
+      <Filter>Execution\Interpreter\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_list_main.cpp">
+      <Filter>Execution\Interpreter\List</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_list_misc.cpp">
+      <Filter>Execution\Interpreter\List</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_condition.cpp">
+      <Filter>Execution\Interpreter\Condition</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\script.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_file.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_variable.hpp">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_value.hpp">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_executor.hpp">
+      <Filter>Execution\Executor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_interpreter.hpp">
+      <Filter>Execution\Interpreter\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_condition_statement.hpp">
+      <Filter>Data Structures</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

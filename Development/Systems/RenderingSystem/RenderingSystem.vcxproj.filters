@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Buffers">
+      <UniqueIdentifier>{b34fa46f-cff4-4862-a24b-caed3757d4ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{7d8c27fd-0dde-4b64-a4e8-c60d3a9fb95f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Miscellaneous">
+      <UniqueIdentifier>{a7dae08a-f191-465d-9f2e-17f2f3d08e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers">
+      <UniqueIdentifier>{87058a7c-3a74-44c3-a64f-cf4399802d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Entity Renderers">
+      <UniqueIdentifier>{08f97625-e1f1-41db-8c32-2cdbbc1a8c33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Entity Renderers\Environment">
+      <UniqueIdentifier>{b515928b-a978-41f3-a32a-fdb1dae0e702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Entity Renderers\Miscellaneous">
+      <UniqueIdentifier>{42eec171-837d-411c-8bd9-7faf0bdd1b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Entity Renderers\Core">
+      <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Miscellaneous Renderers">
+      <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{ba14abd3-e04f-475b-bcea-96916736bc25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity Shaders">
+      <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity Shaders\Environment">
+      <UniqueIdentifier>{d9e50e48-c861-42fa-a8bd-faf0d0688849}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Entity Shaders\Miscellaneous">
+      <UniqueIdentifier>{ee6e0d91-4947-4616-9658-d20ae6c83dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Miscellaneous Shaders">
+      <UniqueIdentifier>{fd1c8bbb-eff4-4e91-8ff5-72fc31f68f12}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\render_framebuffer_main.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_framebuffer_misc.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_buffer.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_shader.cpp">
+      <Filter>Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_manager_capture_one.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_manager_capture_two.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_manager_draw.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_manager_main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_bus_getters.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\render_bus_setters.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\shadow_manager.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\window_manager.cpp">
+      <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\aabb_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\image_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\base_entity_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\bloom_hdr_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\depth_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\final_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\blur_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\post_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\shadow_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\render_framebuffer.hpp">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\render_buffer.hpp">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\render_shader.hpp">
+      <Filter>Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\render_manager.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\render_bus.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\shadow_manager.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\window_manager.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\sky_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\terrain_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\water_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\aabb_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\billboard_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\model_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\image_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\base_entity_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\bloom_hdr_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\blur_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\depth_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\final_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\post_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\shadow_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\water_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\water_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Environment</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.frag">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert">
+      <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert">
+      <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

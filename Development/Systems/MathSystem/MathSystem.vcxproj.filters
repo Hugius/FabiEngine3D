@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{c38cb861-2702-4948-b602-a7e9835def5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Matrix">
+      <UniqueIdentifier>{e5629230-2b10-47b9-9aea-0d0ac3fe6bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{d61bcf02-5acf-4c8d-baee-3d1610f9c6ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\mathematics.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\matrix33.hpp">
+      <Filter>Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\matrix44.hpp">
+      <Filter>Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ivector2.hpp">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ivector3.hpp">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\vector2.hpp">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\vector3.hpp">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\vector4.hpp">
+      <Filter>Vector</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\matrix33.cpp">
+      <Filter>Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\matrix44.cpp">
+      <Filter>Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\matrix44_functions.cpp">
+      <Filter>Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ivector2.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ivector3.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\vector2.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\vector3.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\vector4.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

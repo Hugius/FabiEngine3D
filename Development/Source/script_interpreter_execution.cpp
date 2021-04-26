@@ -273,7 +273,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
 					_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
 				{
-
 					// Extract condition string
 					string conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
 

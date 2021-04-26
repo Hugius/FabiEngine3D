@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\engine_controller.cpp">
+      <Filter>Core Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\left_viewport_controller.cpp">
+      <Filter>Viewport Controllers\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\right_viewport_controller.cpp">
+      <Filter>Viewport Controllers\Right</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\top_viewport_controller_main.cpp">
+      <Filter>Viewport Controllers\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\top_viewport_controller_misc.cpp">
+      <Filter>Viewport Controllers\Top</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\bottom_viewport_controller_main.cpp">
+      <Filter>Viewport Controllers\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\bottom_viewport_controller_console.cpp">
+      <Filter>Viewport Controllers\Bottom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\base_viewport_controller.cpp">
+      <Filter>Viewport Controllers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\engine_controller.hpp">
+      <Filter>Core Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\left_viewport_controller.hpp">
+      <Filter>Viewport Controllers\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\right_viewport_controller.hpp">
+      <Filter>Viewport Controllers\Right</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\top_viewport_controller.hpp">
+      <Filter>Viewport Controllers\Top</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\bottom_viewport_controller.hpp">
+      <Filter>Viewport Controllers\Bottom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\base_viewport_controller.hpp">
+      <Filter>Viewport Controllers\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\script_value.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Icon">
+      <UniqueIdentifier>{4c4ee138-6869-4b50-b826-de5daeeb4e80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Controller">
+      <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers">
+      <UniqueIdentifier>{e6006a3f-d7a8-4aac-96ff-43147e3b6520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers\Left">
+      <UniqueIdentifier>{e015ce04-192d-421b-bab5-4f26de7ccfdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers\Right">
+      <UniqueIdentifier>{806366d6-d72c-41d4-a43b-ed34ec72dcd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers\Top">
+      <UniqueIdentifier>{63bca393-cb2f-44ba-bba1-584e454128a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers\Bottom">
+      <UniqueIdentifier>{1e20aeb9-ae11-49ad-86f5-fd56358d2ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Viewport Controllers\Core">
+      <UniqueIdentifier>{1bae5270-bca5-41e5-80d2-e72a7743b26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{abd85b1f-6eba-43ca-8ab9-4770f0468c4f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Icon\AppIcon.rc">
+      <Filter>Icon</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Icon\logo.ico">
+      <Filter>Icon</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

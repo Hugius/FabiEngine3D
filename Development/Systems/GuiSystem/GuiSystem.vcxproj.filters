@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{049dc451-b853-4ded-b5e2-0197fb9509a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Elements">
+      <UniqueIdentifier>{e7fc78d7-01d3-4b6d-a332-2134aef4f325}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\engine_gui_global_screen_misc.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_global_screen_main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_manager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_screen_main.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_scrollinglist.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_button.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_rectangle.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_screen_misc.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_textfield.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_viewport.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_window.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\engine_gui_writefield.cpp">
+      <Filter>Elements</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\engine_gui_global_screen.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_manager.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_scrollinglist.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_rectangle.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_screen.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_textfield.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_viewport.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_window.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_writefield.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\engine_gui_button.hpp">
+      <Filter>Elements</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

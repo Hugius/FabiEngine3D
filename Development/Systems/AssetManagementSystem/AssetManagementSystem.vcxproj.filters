@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{81830e40-f9b0-4306-a6ad-29370178fc0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{f6342387-f9e9-47ed-8c29-abaa37f87394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{760944bd-52d8-46f2-aefc-76f4aec62d89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\audio_loader.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\mesh_loader_main.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\mesh_loader_interface.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\texture_loader_interface.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\texture_loader_main.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\audio_loader.hpp">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\mesh_part.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\mesh_loader.hpp">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\texture_loader.hpp">
+      <Filter>Texture</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{a75b543f-8ea1-44be-a91e-607cf3f19f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{15138853-8c37-4c22-a1b4-cc362a51184e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Entities">
+      <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Entities\Environment">
+      <UniqueIdentifier>{3c2c2d2e-2ae9-491e-b5d7-1b0bc3071cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Entities\Miscellaneous">
+      <UniqueIdentifier>{6d65cbfe-fd1d-464b-aff1-93fe20cbb707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Core">
+      <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Miscellaneous">
+      <UniqueIdentifier>{263730c8-b5dc-4e3f-ad8e-954f2a808a65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\core_engine_main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\core_engine_misc.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp">
+      <Filter>Interface\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp">
+      <Filter>Interface\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_water.cpp">
+      <Filter>Interface\Entities\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_aabb.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_billboard.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_model.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_image.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_light.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp">
+      <Filter>Interface\Entities\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d.cpp">
+      <Filter>Interface\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_audio.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_camera.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_collision.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\core_engine.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\fabi_engine_3d.hpp">
+      <Filter>Interface\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

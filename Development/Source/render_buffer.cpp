@@ -1,7 +1,7 @@
 #include "render_buffer.hpp"
 
 // 3D
-RenderBuffer::RenderBuffer(BufferType type, float data[], int dataCount)
+RenderBuffer::RenderBuffer(BufferType type, float data[], unsigned int dataCount)
 {
 	_bufferType = type;
 	_create3D(type, data, dataCount);
@@ -13,7 +13,7 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, 
 	_create2D(x, y, w, h, isCentered, isText);
 }
 
-void RenderBuffer::_create3D(BufferType type, float data[], int dataCount)
+void RenderBuffer::_create3D(BufferType type, float data[], unsigned int dataCount)
 {
 	// Create buffers
 	glGenVertexArrays(1, &_vao);

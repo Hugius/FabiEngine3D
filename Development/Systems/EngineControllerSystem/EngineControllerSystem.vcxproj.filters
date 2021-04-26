@@ -48,7 +48,6 @@
     <ClInclude Include="..\..\Source\base_viewport_controller.hpp">
       <Filter>Viewport Controllers\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\script_value.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Icon">

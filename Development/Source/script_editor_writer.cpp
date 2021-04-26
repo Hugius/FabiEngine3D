@@ -113,7 +113,7 @@ void ScriptEditor::_updateTextWriter()
 				if (hoveredCharacterIndex == -1)
 				{
 					// Place cursor at end of the line
-					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+					cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 				}
 				else
 				{
@@ -174,7 +174,7 @@ void ScriptEditor::_updateTextWriter()
 						if (cursorLineIndex > 0) // Check if trying to move cursor out of screen
 						{
 							cursorLineIndex--;
-							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 						}
 					}
 				}
@@ -222,7 +222,7 @@ void ScriptEditor::_updateTextWriter()
 						// Change character index accordingly
 						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
-							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 						}
 					}
 				}
@@ -245,7 +245,7 @@ void ScriptEditor::_updateTextWriter()
 						// Change character index accordingly
 						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
-							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+							cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 						}
 					}
 				}
@@ -357,7 +357,7 @@ void ScriptEditor::_updateTextWriter()
 									cursorLineIndex--;
 
 									// Set cursor to last character of line above & merge text from current line
-									cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+									cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 									_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex,
 										_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
 									textHasChanged = true;

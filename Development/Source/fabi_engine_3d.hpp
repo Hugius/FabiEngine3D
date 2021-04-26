@@ -671,33 +671,14 @@ public:
 	void gfx_disableLensFlare(bool resetProperties = false);
 	
 	// Graphics interface - getters
-	bool gfx_isMsaaEnabled();
-	bool gfx_isAmbientLightingEnabled();
-	bool gfx_isDirectionalLightingEnabled();
-	bool gfx_isSpecularLightingEnabled();
-	bool gfx_isPointLightingEnabled();
-	bool gfx_isSpotLightingEnabled();
-	bool gfx_isFogEnabled();
-	bool gfx_isLightMappingEnabled();
-	bool gfx_isNormalMappingEnabled();
-	bool gfx_isSkyReflectionsEnabled();
-	bool gfx_isSceneReflectionsEnabled();
-	bool gfx_isBloomEnabled();
-	bool gfx_isWaterEffectsEnabled();
-	bool gfx_isSkyHdrEnabled();
-	bool gfx_isShadowsEnabled();
-	bool gfx_isDofEnabled();
-	bool gfx_isDofDynamic();
-	bool gfx_isMotionBlurEnabled();
-	bool gfx_isLensFlareEnabled();
-	bool gfx_isShadowFollowingCamera();
-	bool gfx_isSoftShadowingEnabled();
-	int gfx_getMsaaQuality();
-	int gfx_getShadowQuality();
-	int gfx_getReflectionQuality();
-	int gfx_getRefractionQuality();
-	int gfx_getBloomBlurSize();
-	int gfx_getShadowInterval();
+	Vec3 gfx_getDirectionalLightingPosition();
+	Vec3 gfx_getAmbientLightingColor();
+	Vec3 gfx_getDirectionalLightingColor();
+	Vec3 gfx_getSpotLightingColor();
+	Vec3 gfx_getFogColor();
+	Vec3 gfx_getShadowEye();
+	Vec3 gfx_getShadowCenter();
+	string gfx_getLensFlareMapPath();
 	float gfx_getAmbientLightingIntensity();
 	float gfx_getDirectionalLightingIntensity();
 	float gfx_getSpotLightingIntensity();
@@ -720,14 +701,33 @@ public:
 	float gfx_getLensFlareIntensity();
 	float gfx_getLensFlareMultiplier();
 	float gfx_getMotionBlurStrength();
-	Vec3 gfx_getDirectionalLightingPosition();
-	Vec3 gfx_getAmbientLightingColor();
-	Vec3 gfx_getDirectionalLightingColor();
-	Vec3 gfx_getSpotLightingColor();
-	Vec3 gfx_getFogColor();
-	Vec3 gfx_getShadowEye();
-	Vec3 gfx_getShadowCenter();
-	string gfx_getLensFlareMapPath();
+	unsigned int gfx_getMsaaQuality();
+	unsigned int gfx_getShadowQuality();
+	unsigned int gfx_getReflectionQuality();
+	unsigned int gfx_getRefractionQuality();
+	unsigned int gfx_getBloomBlurSize();
+	unsigned int gfx_getShadowInterval();
+	bool gfx_isMsaaEnabled();
+	bool gfx_isAmbientLightingEnabled();
+	bool gfx_isDirectionalLightingEnabled();
+	bool gfx_isSpecularLightingEnabled();
+	bool gfx_isPointLightingEnabled();
+	bool gfx_isSpotLightingEnabled();
+	bool gfx_isFogEnabled();
+	bool gfx_isLightMappingEnabled();
+	bool gfx_isNormalMappingEnabled();
+	bool gfx_isSkyReflectionsEnabled();
+	bool gfx_isSceneReflectionsEnabled();
+	bool gfx_isBloomEnabled();
+	bool gfx_isWaterEffectsEnabled();
+	bool gfx_isSkyHdrEnabled();
+	bool gfx_isShadowsEnabled();
+	bool gfx_isDofEnabled();
+	bool gfx_isDofDynamic();
+	bool gfx_isMotionBlurEnabled();
+	bool gfx_isLensFlareEnabled();
+	bool gfx_isShadowFollowingCamera();
+	bool gfx_isSoftShadowingEnabled();
 
 	// Input interface
 	void input_setLocked(bool locked);
@@ -812,7 +812,7 @@ public:
 	void misc_setLevelOfDetailDistance(float distance);
 	void misc_setSoundsEnabled(bool enabled);
 	void misc_setMusicEnabled(bool enabled);
-	void misc_setMaxAudioChannels(int count);
+	void misc_setMaxAudioChannels(unsigned int count);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);

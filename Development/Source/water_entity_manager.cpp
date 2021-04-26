@@ -135,7 +135,7 @@ void WaterEntityManager::generateMesh(const string& ID)
 	
 	// Fill entity
 	entity->clearRenderBuffers();
-	entity->addRenderBuffer(new RenderBuffer(BufferType::SURFACE, &waterVertices[0], waterVertices.size()));
+	entity->addRenderBuffer(new RenderBuffer(BufferType::SURFACE, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
 
 	// Load mesh
 	float simplified_data[] =

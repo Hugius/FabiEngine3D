@@ -425,7 +425,7 @@ void FabiEngine3D::misc_setMusicEnabled(bool enabled)
 	_core->_audioPlayer.setMusicEnabled(enabled);
 }
 
-void FabiEngine3D::misc_setMaxAudioChannels(int count)
+void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)
 {
 	_core->_audioPlayer.allocateChannels(count);
 }

@@ -55,7 +55,7 @@ void ModelEditor::_loadMeshFileNames()
 
 	// Determine full mesh directory
 	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "game_assets\\meshes\\";
-	int endOfNameIndex = 0;
+	unsigned int endOfNameIndex = 0;
 
 	// Get all filenames
 	for (const auto& entry : std::filesystem::directory_iterator(meshDirectoryPath))
@@ -69,7 +69,7 @@ void ModelEditor::_loadMeshFileNames()
 			// End of file name
 			if (meshPath[i] == '.')
 			{
-				endOfNameIndex = i;
+				endOfNameIndex = static_cast<unsigned int>(i);
 			}
 		}
 

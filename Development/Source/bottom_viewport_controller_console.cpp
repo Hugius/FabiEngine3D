@@ -21,7 +21,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		float latestMessageY = _fe3d.textEntity_getPosition(entityID).y - CHAR_SIZE.y;
 
 		// Count all message text lines
-		unsigned int messageLineCount = _consoleMessageStack.size();
+		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageStack.size());
 		for (auto& [ID, message] : _consoleMessageStack)
 		{
 			// If a message is too long for 1 line, count all the text lines
@@ -32,7 +32,7 @@ void BottomViewportController::_updateConsoleScrolling()
 			}
 			if (count > 1)
 			{
-				messageLineCount += (count - 1);
+				messageLineCount += static_cast<unsigned int>(count - 1);
 			}
 		}
 
@@ -108,7 +108,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			// Check if type text ended
 			if (message[i] == ']')
 			{
-				typePartLength = i + 1;
+				typePartLength = static_cast<unsigned int>(i + 1);
 				break;
 			}
 		}

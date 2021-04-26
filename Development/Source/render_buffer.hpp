@@ -12,7 +12,7 @@ class RenderBuffer final
 {
 public:
 	RenderBuffer() = delete;
-	RenderBuffer(BufferType type, float data[], int dataCount);   // 3D
+	RenderBuffer(BufferType type, float data[], unsigned int dataCount);   // 3D
 	RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
 	~RenderBuffer();
 	
@@ -31,7 +31,7 @@ public:
 	const vector<Vec3>& getInstancedOffsets() const;
 
 private:
-	void _create3D(BufferType type, float data[], int dataCount);
+	void _create3D(BufferType type, float data[], unsigned int dataCount);
 	void _create2D(float x, float y, float w, float h, bool isCentered, bool isText);
 	
 	unsigned int _vertexCount;

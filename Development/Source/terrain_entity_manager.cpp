@@ -192,7 +192,7 @@ void TerrainEntityManager::generateMesh(const string& ID)
 
 	// Create render buffer
 	entity->clearRenderBuffers();
-	entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
+	entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 }
 
 void TerrainEntityManager::loadNormalMapping(const string& ID)
@@ -270,7 +270,7 @@ void TerrainEntityManager::loadNormalMapping(const string& ID)
 
 			// Create render buffer
 			getEntity(ID)->clearRenderBuffers();
-			getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], finalDataCollection.size()));
+			getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 		}
 	}
 }

@@ -387,22 +387,22 @@ bool FabiEngine3D::gfx_isLensFlareEnabled()
 	return _core->_renderBus.isLensFlareEnabled();
 }
 
-int FabiEngine3D::gfx_getMsaaQuality()
+unsigned int FabiEngine3D::gfx_getMsaaQuality()
 {
 	return _core->_renderBus.getMsaaSampleCount();
 }
 
-int FabiEngine3D::gfx_getShadowQuality()
+unsigned int FabiEngine3D::gfx_getShadowQuality()
 {
 	return _core->_renderBus.getShadowMapSize();
 }
 
-int FabiEngine3D::gfx_getReflectionQuality()
+unsigned int FabiEngine3D::gfx_getReflectionQuality()
 {
 	return _core->_renderBus.getSceneReflectionMapSize();
 }
 
-int FabiEngine3D::gfx_getRefractionQuality()
+unsigned int FabiEngine3D::gfx_getRefractionQuality()
 {
 	return _core->_renderBus.getSceneRefractionMapSize();
 }
@@ -537,12 +537,12 @@ float FabiEngine3D::gfx_getBloomBrightnessTreshold()
 	return _core->_renderBus.getBloomBrightnessTreshold();
 }
 
-int FabiEngine3D::gfx_getBloomBlurSize()
+unsigned int FabiEngine3D::gfx_getBloomBlurSize()
 {
 	return _core->_renderBus.getBloomBlurSize();
 }
 
-int FabiEngine3D::gfx_getShadowInterval()
+unsigned int FabiEngine3D::gfx_getShadowInterval()
 {
 	return _core->_shadowManager.getInterval();
 }

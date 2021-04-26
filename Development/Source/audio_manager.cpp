@@ -87,7 +87,7 @@ int AudioManager::_findIndex(const string& ID)
 	{
 		if (_sounds[i].getID() == ID)
 		{
-			return i;
+			return static_cast<int>(i);
 		}
 	}
 

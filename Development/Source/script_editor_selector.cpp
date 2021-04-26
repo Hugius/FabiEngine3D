@@ -53,9 +53,9 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 
 				// Correct hover position
-				if (hoveredLineIndex > _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+				if (hoveredLineIndex > static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount() - 1))
 				{
-					hoveredLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
+					hoveredLineIndex = static_cast<int>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 				}
 
 				// Correct cursor position
@@ -63,7 +63,9 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
 				}
-				cursorCharIndex = newCharacters.empty() ? 0 : newCharacters.size(); // Index based on amount of newly added characters
+
+				// Index based on amount of newly added characters
+				cursorCharIndex = newCharacters.empty() ? 0 : static_cast<unsigned int>(newCharacters.size());
 
 				// Add new line
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
@@ -159,7 +161,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 
 			// Place cursor at the end of current line
-			cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+			cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 		}
 
 		// Control button combinations
@@ -209,7 +211,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 						// Change cursor position
 						cursorLineIndex += (pastedAmount - static_cast<int>(firstLineEmpty));
 						cursorLineIndex = std::min(cursorLineIndex, (MAX_LINE_AMOUNT - 1));
-						cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+						cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 
 						// Make sure the script gets re-rendered
 						textHasChanged = true;

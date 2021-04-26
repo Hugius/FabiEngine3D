@@ -46,7 +46,7 @@ void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath
 void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 {
 	// Load mesh model
-	auto parts = _meshLoader.loadMesh(meshPath, false);
+	auto partsPointer = _meshLoader.loadMesh(meshPath, false);
 	auto entity = getEntity(ID);
 	entity->setMeshPath(meshPath);
 	entity->clearRenderBuffers();
@@ -56,12 +56,15 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	entity->clearNormalMaps();
 
 	// Check if model loading failed
-	if (parts.empty())
+	if (partsPointer == nullptr)
 	{
 		// Add empty part so the entity does not crash the engine
 		entity->addPart("");
+		return;
 	}
 	
+	auto parts = *partsPointer;
+
 	// Check if multiparted model actually has multiple parts
 	if (parts.size() == 1 && !parts.back().name.empty())
 	{
@@ -97,7 +100,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		}
 
 		// Render buffer
-		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
+		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
 		// New transformation part
 		entity->addPart(part.name);
@@ -175,7 +178,12 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 		if (getEntity(ID)->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Load mesh file
-			auto parts = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
+			auto partsPointer = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
+			if (partsPointer == nullptr)
+			{
+				return;
+			}
+			auto parts = *partsPointer;
 
 			// Create render buffers
 			for (auto& part : parts)
@@ -207,7 +215,7 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 
 				// Render buffer
 				getEntity(ID)->clearRenderBuffers();
-				getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
+				getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())));
 			}
 		}
 	}

@@ -7,7 +7,7 @@ AudioPlayer::AudioPlayer()
 	Mix_AllocateChannels(0);
 }
 
-void AudioPlayer::allocateChannels(int count)
+void AudioPlayer::allocateChannels(unsigned int count)
 {
 	// Allocate audio channels
 	Mix_AllocateChannels(count);
@@ -125,7 +125,7 @@ unsigned int AudioPlayer::getUsedChannelCount()
 
 unsigned int AudioPlayer::getAllocatedChannelCount()
 {
-	return _channels.size();
+	return static_cast<unsigned int>(_channels.size());
 }
 
 void AudioPlayer::_updateSoundVolume(Sound& sound)

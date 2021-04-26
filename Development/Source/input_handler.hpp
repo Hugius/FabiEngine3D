@@ -55,7 +55,7 @@ private:
 	int _mouseWheelY = 0;
 
 	// Extra functions
-	inline int _getVectorIndex(vector<InputType>& list, InputType element)
+	inline unsigned int _getVectorIndex(vector<InputType>& list, InputType element)
 	{
 		auto it = std::find(list.begin(), list.end(), element);
 
@@ -65,7 +65,7 @@ private:
 		}
 		else // Found
 		{
-			return std::distance(list.begin(), it);
+			return static_cast<unsigned int>(std::distance(list.begin(), it));
 		}
 	}
 

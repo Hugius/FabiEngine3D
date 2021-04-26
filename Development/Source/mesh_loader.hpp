@@ -11,7 +11,7 @@ public:
 	MeshLoader() = default;
 	~MeshLoader() = default;
 
-	const vector<MeshPart>& loadMesh(const string& filePath, bool calculateTangents);
+	const vector<MeshPart>* loadMesh(const string& filePath, bool calculateTangents);
 
 	void cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
 

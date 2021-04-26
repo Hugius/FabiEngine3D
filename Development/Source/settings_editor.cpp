@@ -58,7 +58,7 @@ void SettingsEditor::loadSettings()
 		std::istringstream iss(line);
 
 		// Extract values from file
-		int msaaQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+		unsigned int msaaQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
 		iss >> msaaQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
 
 		// Set values
@@ -111,11 +111,11 @@ void SettingsEditor::save(bool newFile)
 	file.open(filePath);
 
 	// Get values
-	int msaaQuality = _fe3d.gfx_getMsaaQuality();
-	int shadowQuality = _fe3d.gfx_getShadowQuality();
-	int reflectionQuality = _fe3d.gfx_getReflectionQuality();
-	int refractionQuality = _fe3d.gfx_getRefractionQuality();
-	int audioChannels = _fe3d.misc_getMaxChannels();
+	auto msaaQuality = _fe3d.gfx_getMsaaQuality();
+	auto shadowQuality = _fe3d.gfx_getShadowQuality();
+	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+	auto refractionQuality = _fe3d.gfx_getRefractionQuality();
+	auto audioChannels = _fe3d.misc_getMaxChannels();
 
 	// Default values for new file
 	if (newFile)

@@ -57,7 +57,7 @@ void AudioPlayer::playMusic(vector<Music>& musicList, bool forcePlay)
 				}
 				else
 				{
-					musicIndex = Tools::getInst().getRandomInt(0, musicList.size() - 1);
+					musicIndex = Tools::getInst().getRandomInt(0, static_cast<int>(musicList.size() - 1));
 				}
 
 				// Play music

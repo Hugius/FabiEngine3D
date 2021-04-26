@@ -27,12 +27,10 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		while (std::getline(file, line))
 		{
 			// Temporary values
-			string billboardID, diffuseMapPath, fontPath, textContent;
+			string billboardID, diffuseMapPath;
 			Vec2 size;
 			Vec3 color;
-			float lightness;
-			bool facingX, facingY, transparent, playing;
-			int rows, columns, framestep;
+			bool facingX, facingY;
 			std::istringstream iss(line);
 
 			// Extract data
@@ -101,7 +99,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			Vec3 color;
 			float lightness;
 			bool facingX, facingY, transparent, isAnimationStarted;
-			int animationRows, animationColumns, animationFramestep;
+			unsigned int animationRows, animationColumns, animationFramestep;
 
 			// For file extraction
 			std::istringstream iss(line);

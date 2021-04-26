@@ -18,7 +18,7 @@ public:
 	AudioPlayer();
 	~AudioPlayer() = default;
 
-	void allocateChannels(int count);
+	void allocateChannels(unsigned int count);
 	void update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList);	
 	void setSoundsEnabled(bool value);
 	void setMusicEnabled(bool value);

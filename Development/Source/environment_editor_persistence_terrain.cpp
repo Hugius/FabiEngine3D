@@ -32,7 +32,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 				blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
 			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB;
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Load base data
 			iss >>
@@ -131,7 +131,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 		// Read terrain data
 		while (std::getline(file, line))
 		{
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Values
 			string terrainID, heightMapPath, diffuseMapPath, normalMapPath, 

@@ -116,7 +116,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 						else if (arguments[0].getType() == ScriptValueType::DECIMAL && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
-							float result = std::pow(arguments[0].getDecimal(), arguments[1].getInteger());
+							float result = static_cast<float>(std::pow(arguments[0].getDecimal(), arguments[1].getInteger()));
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else

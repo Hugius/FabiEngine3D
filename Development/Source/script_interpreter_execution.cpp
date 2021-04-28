@@ -59,12 +59,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
-		stringstream scriptLineTextStream = stringstream(scriptLineText);
-		string noWhiteSpace;
-		scriptLineTextStream >> noWhiteSpace;
 
 		// Ignore comments
-		if (noWhiteSpace.substr(0, 3) == "///")
+		if (scriptLineText.substr(0, 3) == "///")
 		{
 			continue;
 		}

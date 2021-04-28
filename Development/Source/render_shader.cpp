@@ -26,7 +26,7 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	{
 		vShaderFile.open(rootDir + "engine_assets\\shaders\\" + _vertexFileName);
 		fShaderFile.open(rootDir + "engine_assets\\shaders\\" + _fragmentFileName);
-		std::stringstream vShaderStream, fShaderStream;
+		std::ostringstream vShaderStream, fShaderStream;
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
 		vShaderFile.close();

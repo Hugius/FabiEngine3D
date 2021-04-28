@@ -136,6 +136,7 @@ private:
 	vector<unsigned int> _currentLineIndexStack;
 
 	// Vectors
+	vector<string> _lineStringStreams;
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;

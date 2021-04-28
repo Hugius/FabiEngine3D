@@ -39,7 +39,7 @@ void ScriptEditor::loadScriptsFromFile()
 			// Extract cursor indices
 			unsigned int cursorLineIndex, cursorCharIndex;
 			std::getline(file, line);
-			stringstream iss(line);
+			std::istringstream iss(line);
 			iss >> cursorLineIndex >> cursorCharIndex;
 			_script.getScriptFile(scriptName)->setCursorLineIndex(cursorLineIndex);
 			_script.getScriptFile(scriptName)->setCursorCharIndex(cursorCharIndex);

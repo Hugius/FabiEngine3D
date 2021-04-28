@@ -28,7 +28,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 		{
 			// Temporary values
 			string waterID, dudvMapPath, normalMapPath, displacementMapPath;
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Load base data
 			iss >>
@@ -97,7 +97,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 		// Read water data
 		while (std::getline(file, line))
 		{
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Values
 			string waterID, dudvMapPath, normalMapPath, displacementMapPath;

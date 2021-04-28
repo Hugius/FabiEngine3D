@@ -28,7 +28,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 			// Temporary values
 			string skyID;
 			array<string, 6> diffuseMapPaths = {};
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Load base data
 			iss >>
@@ -88,7 +88,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 		// Read sky data
 		while (std::getline(file, line))
 		{
-			stringstream iss(line);
+			std::istringstream iss(line);
 
 			// Values
 			string skyID;

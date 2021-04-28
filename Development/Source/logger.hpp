@@ -16,7 +16,6 @@
 #include <type_traits>
 
 using std::vector;
-using std::stringstream;
 using std::string;
 
 class Logger final
@@ -82,7 +81,7 @@ private:
 	inline static void _printPrefix(MessageType type, T first, Rest&&...rest)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); //Console access
-		std::stringstream ss; // For message stack
+		std::ostringstream oss; // For message stack
 
 		//Current time
 		char timeBuffer[64];
@@ -92,10 +91,10 @@ private:
 
 		SetConsoleTextAttribute(console, 6); //White
 		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
-		ss << "[" + _level_string[static_cast<int>(type)] + "]";
+		oss << "[" + _level_string[static_cast<int>(type)] + "]";
 		SetConsoleTextAttribute(console, 12); //Red
 		std::cout << "[" << timeBuffer << "]";
-		ss << "[" << timeBuffer << "]";
+		oss << "[" << timeBuffer << "]";
 		SetConsoleTextAttribute(console, 7); //Yellow
 
 		//Proper indentation
@@ -109,8 +108,8 @@ private:
 		}
 
 		// Add to stack
-		ss << " > ";
-		_messageStack.push_back(ss.str());
+		oss << " > ";
+		_messageStack.push_back(oss.str());
 
 		// Print message body
 		_printMessage(first, rest...);
@@ -120,7 +119,7 @@ private:
 	inline static void _printMessage(T first, Rest&&...rest)
 	{
 		// For message stack
-		std::stringstream ss;
+		std::ostringstream oss;
 
 		// Write onto console output
 		std::cout << first;
@@ -128,11 +127,11 @@ private:
 		std::cout << std::endl;
 
 		// Write into stream
-		ss << first;
-		(ss << ... << rest);
+		oss << first;
+		(oss << ... << rest);
 		
 		// Add to stack
-		_messageStack.back() += ss.str();
+		_messageStack.back() += oss.str();
 		_messageCount++;
 	}
 };

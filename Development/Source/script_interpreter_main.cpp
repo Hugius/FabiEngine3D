@@ -126,6 +126,36 @@ void ScriptInterpreter::load()
 		}
 	}
 
+	// For every scriptfile
+	for (auto& scriptID : _script.getAllScriptFileIDs())
+	{
+		auto scriptFile = _script.getScriptFile(scriptID);
+
+		// Loop through every line
+		for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+		{
+			// Remove trailing whitespace of comments
+			auto scriptLineText = scriptFile->getLineText(lineIndex);
+			auto scriptLineTextStream = std::istringstream(scriptLineText);
+			string noWhiteSpace;
+			scriptLineTextStream >> noWhiteSpace;
+
+			// Update line text
+			if (noWhiteSpace.substr(0, 3) == "///")
+			{
+				unsigned int charIndex;
+				for (charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
+				{
+					if (scriptLineText[charIndex] != ' ')
+					{
+						break;
+					}
+				}
+				scriptFile->setLineText(lineIndex, scriptLineText.substr(charIndex));
+			}
+		}
+	}
+
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings();
 

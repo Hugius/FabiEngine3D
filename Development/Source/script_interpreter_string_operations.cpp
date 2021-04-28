@@ -143,19 +143,20 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 {
 	Ivec3 parts = Ivec3(0);
+	auto stringSize = valueString.size();
 
-	if (valueString.size() > 2 &&
-		(valueString.substr(valueString.size() - 2) == ".x" || valueString.substr(valueString.size() - 2) == ".r"))
+	if (stringSize > 2 &&
+		(valueString.substr(stringSize - 2) == ".x" || valueString.substr(stringSize - 2) == ".r"))
 	{
 		parts.x = 1;
 	}
-	else if (valueString.size() > 2 &&
-		(valueString.substr(valueString.size() - 2) == ".y" || valueString.substr(valueString.size() - 2) == ".g"))
+	else if (stringSize > 2 &&
+		(valueString.substr(stringSize - 2) == ".y" || valueString.substr(stringSize - 2) == ".g"))
 	{
 		parts.y = 1;
 	}
-	else if (valueString.size() > 2 &&
-		(valueString.substr(valueString.size() - 2) == ".z" || valueString.substr(valueString.size() - 2) == ".b"))
+	else if (stringSize > 2 &&
+		(valueString.substr(stringSize - 2) == ".z" || valueString.substr(stringSize - 2) == ".b"))
 	{
 		parts.z = 1;
 	}

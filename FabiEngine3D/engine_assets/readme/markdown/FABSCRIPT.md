@@ -3,11 +3,11 @@
 - Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
 - Scripts are run from the first line to the last line, from left to right.
 ### META
-- Line 1 of every script file should specify its type: initialization, update, destruction.
+- Line 1 of every script file **must** specify its type: initialization, update, destruction.
 - **Initialization** script: `META script_type_init`.
 - **Update** script: `META script_type_update`.
 - **Destruction** script: `META script_type_destroy`.
-- You also need to specify the first script to run for every type: `META execution_entry`.
+- You also need to specify which script to run first for **every type** on line 2: `META execution_entry`.
 #### Example code
 ```
 1. META script_type_init

@@ -150,51 +150,34 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 
 bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
 {
-	for (auto& variable : _localVariablesStack.back())
-	{
-		if (variableID == variable.getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return (_localVariables[_executionDepth].find(variableID) != _localVariables[_executionDepth].end());
 }
 
 bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID)
 {
-	for (auto& variable : _globalVariables)
-	{
-		if (variableID == variable.getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return (_globalVariables.find(variableID) != _globalVariables.end());
 }
 
 ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 {
-	for (auto& variable : _localVariablesStack.back())
+	auto it = _localVariables[_executionDepth].find(variableID);
+
+	if (it != _localVariables[_executionDepth].end())
 	{
-		if (variableID == variable.getID())
-		{
-			return variable;
-		}
+		return it->second;
 	}
+
 
 	_fe3d.logger_throwError("Local script variable \"" + variableID + "\" not existing!");
 }
 
 ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
 {
-	for (auto& variable : _globalVariables)
+	auto it = _globalVariables.find(variableID);
+	
+	if (it != _globalVariables.end())
 	{
-		if (variableID == variable.getID())
-		{
-			return variable;
-		}
+		return it->second;
 	}
 
 	_fe3d.logger_throwError("Global script variable \"" + variableID + "\" not existing!");

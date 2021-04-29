@@ -129,18 +129,16 @@ private:
 
 	// Dictionaries
 	map<string, float> _debuggingTimes;
-
-	// Stacks
-	vector<vector<ScriptVariable>> _localVariablesStack;
-	vector<string> _currentScriptIDsStack;
-	vector<unsigned int> _currentLineIndexStack;
+	unordered_map<string, ScriptVariable> _globalVariables;
+	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
 
 	// Vectors
+	vector<string> _currentScriptIDsStack;
+	vector<unsigned int> _currentLineIndexStack;
 	vector<string> _lineStringStreams;
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;
-	vector<ScriptVariable> _globalVariables;
 
 	// Strings
 	string _currentProjectID = "";

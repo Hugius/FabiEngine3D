@@ -50,6 +50,7 @@ void ScriptInterpreter::load()
 			return;
 		}
 
+		// Determine execution type
 		if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
 			// Set entry point
@@ -73,7 +74,7 @@ void ScriptInterpreter::load()
 		}
 		else if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
 		{
-			/// Purposely left blank
+			/// <--- Purposely left blank
 		}
 		else
 		{
@@ -99,7 +100,7 @@ void ScriptInterpreter::load()
 		return;
 	}
 
-	// For every scriptfile
+	// Comment optimization for runtime
 	for (auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
@@ -335,7 +336,7 @@ void ScriptInterpreter::unload()
 
 	// Reset all variables
 	_debuggingTimes.clear();
-	_localVariablesStack.clear();
+	_localVariables.clear();
 	_currentScriptIDsStack.clear();
 	_currentLineIndexStack.clear();
 	_initScriptIDs.clear();

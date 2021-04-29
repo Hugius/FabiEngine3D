@@ -19,12 +19,12 @@ public:
 	void setInteger(int value);
 	void setBoolean(bool value);
 
-	ScriptValueType getType();
-	Vec3 getVec3();
-	const string& getString();
-	float getDecimal();
-	int getInteger();
-	bool getBoolean();
+	const ScriptValueType& getType() const;
+	Vec3 getVec3() const;
+	const string& getString() const;
+	float getDecimal() const;
+	int getInteger() const;
+	bool getBoolean() const;
 
 private:
 	FabiEngine3D& _fe3d;

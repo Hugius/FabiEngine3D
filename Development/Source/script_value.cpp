@@ -82,17 +82,17 @@ void ScriptValue::setBoolean(bool value)
 	_boolean = value;
 }
 
-ScriptValueType ScriptValue::getType()
+const ScriptValueType& ScriptValue::getType() const
 {
 	return _type;
 }
 
-Vec3 ScriptValue::getVec3()
+Vec3 ScriptValue::getVec3() const
 {
 	return _vec3;
 }
 
-const string& ScriptValue::getString()
+const string& ScriptValue::getString() const
 {
 	if (_type != ScriptValueType::STRING)
 	{
@@ -102,7 +102,7 @@ const string& ScriptValue::getString()
 	return _string;
 }
 
-float ScriptValue::getDecimal()
+float ScriptValue::getDecimal() const
 {
 	if (_type != ScriptValueType::DECIMAL)
 	{
@@ -112,7 +112,7 @@ float ScriptValue::getDecimal()
 	return _decimal;
 }
 
-int ScriptValue::getInteger()
+int ScriptValue::getInteger() const
 {
 	if (_type != ScriptValueType::INTEGER)
 	{
@@ -122,7 +122,7 @@ int ScriptValue::getInteger()
 	return _integer;
 }
 
-bool ScriptValue::getBoolean()
+bool ScriptValue::getBoolean() const
 {
 	if (_type != ScriptValueType::BOOLEAN)
 	{

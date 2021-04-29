@@ -34,14 +34,34 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 	}
 
 	// Remove brackets
-	std::istringstream iss(valueString.substr(1, valueString.size() - 2));
+	auto withoutBrackets = valueString.substr(1, valueString.size() - 2);
 
 	// Extract XYZ
-	string x, y, z;
-	iss >> x >> y >> z;
+	string xyz[3] = { "", "","" };
+	bool isExtracting = false;
+	unsigned int index = 0;
+	for (auto& c : withoutBrackets)
+	{
+		if (c == ' ' && isExtracting)
+		{
+			isExtracting = false;
+			index++;
+		}
+
+		if (c != ' ')
+		{
+			xyz[index] += c;
+			isExtracting = true;
+		}
+
+		if (index == 3)
+		{
+			return false;
+		}
+	}
 
 	// Check if value is a valid vec3
-	return (_isDecimalValue(x) && _isDecimalValue(y) && _isDecimalValue(z));
+	return (_isDecimalValue(xyz[0]) && _isDecimalValue(xyz[1]) && _isDecimalValue(xyz[2]));
 }
 
 bool ScriptInterpreter::_isStringValue(const string& valueString)
@@ -131,13 +151,28 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	}
 
 	// Remove brackets
-	std::istringstream iss(valueString.substr(1, valueString.size() - 2));
+	auto withoutBrackets = valueString.substr(1, valueString.size() - 2);
 
 	// Extract XYZ
-	string x, y, z;
-	iss >> x >> y >> z;
+	string xyz[3] = { "", "","" };
+	bool isExtracting = false;
+	unsigned int index = 0;
+	for (auto& c : withoutBrackets)
+	{
+		if (c == ' ' && isExtracting)
+		{
+			isExtracting = false;
+			index++;
+		}
 
-	return Vec3(stof(_limitDecimalString(x)), stof(_limitDecimalString(y)), stof(_limitDecimalString(z)));
+		if (c != ' ')
+		{
+			xyz[index] += c;
+			isExtracting = true;
+		}
+	}
+
+	return Vec3(stof(_limitDecimalString(xyz[0])), stof(_limitDecimalString(xyz[1])), stof(_limitDecimalString(xyz[2])));
 }
 
 Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
@@ -166,43 +201,49 @@ Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 
 int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
+	// Check if brackets are in string
 	auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
 	auto closingBracketFound = std::find(valueString.begin(), valueString.end(), ']');
-
-	// Check if brackets are in string
-	if (openingBracketFound != valueString.end() && closingBracketFound != valueString.end())
+	if (openingBracketFound == valueString.end() || closingBracketFound == valueString.end())
 	{
-		// Temporary values
-		auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
-		string indexString = valueString.substr(bracketIndex + 1);
-		indexString.pop_back();
+		return -1;
+	}
 
-		// Check if index is a number
-		if (_isIntegerValue(indexString))
-		{
-			isAccessingList = true;
-			return stoi(_limitIntegerString(indexString));
-		}
-		else if (_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
-		{
-			// Retrieve variable
-			auto& variable = _isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString);
+	// Check if brackets are in the right place
+	auto openingBracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
+	auto closingBracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), closingBracketFound));
+	if (openingBracketIndex == 0 || closingBracketIndex != (valueString.size() - 1))
+	{
+		return -1;
+	}
 
-			// Check if variable is an integer
-			if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
-			{
-				_throwScriptError("list index must be an integer!");
-			}
-			else
-			{
-				isAccessingList = true;
-				return variable.getValue().getInteger();
-			}
+	// Check if index is a number
+	string indexString = valueString.substr(openingBracketIndex + 1);
+	indexString.pop_back();
+	if (_isIntegerValue(indexString))
+	{
+		isAccessingList = true;
+		return stoi(_limitIntegerString(indexString));
+	}
+	else if (_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
+	{
+		// Retrieve variable
+		auto& variable = _isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString);
+
+		// Check if variable is an integer
+		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
+		{
+			_throwScriptError("list index must be an integer!");
 		}
 		else
 		{
-			_throwScriptError("invalid list indexing syntax!");
+			isAccessingList = true;
+			return variable.getValue().getInteger();
 		}
+	}
+	else
+	{
+		_throwScriptError("invalid list indexing syntax!");
 	}
 
 	return -1;

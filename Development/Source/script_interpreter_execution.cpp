@@ -60,6 +60,12 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
 
+		// Ignore METAs
+		if (lineIndex == 0 || lineIndex == 1)
+		{
+			continue;
+		}
+
 		// Ignore comments
 		if (scriptLineText.substr(0, 3) == "///")
 		{
@@ -152,15 +158,19 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Determine keyword type
-		if (scriptLineText.substr(0, 5) == "fe3d:") // Engine function
+		if (scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
+		{
+			_throwScriptError("META keyword is only allowed on line 1 and 2!");
+		}
+		else if (scriptLineText.substr(0, 5) == "fe3d:")
 		{
 			_processEngineFunctionCall(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, 5) == "math:") // Mathematical function
+		else if (scriptLineText.substr(0, 5) == "math:")
 		{
 			_processMathematicalFunctionCall(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, 5) == "misc:") // Miscellaneous function
+		else if (scriptLineText.substr(0, 5) == "misc:")
 		{
 			_processMiscellaneousFunctionCall(scriptLineText);
 		}

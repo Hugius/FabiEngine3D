@@ -19,13 +19,13 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 	return true;
 }
 
-bool ScriptInterpreter::_validateListValueAmount(vector<ScriptValue> list, unsigned int amount)
+bool ScriptInterpreter::_validateListValueAmount(const vector<ScriptValue>& values, unsigned int amount)
 {
-	if (list.size() == amount) // Check if value amount is correct
+	if (values.size() == amount) // Check if value amount is correct
 	{
 		return true;
 	}
-	else if (list.size() < amount) // Not enough values
+	else if (values.size() < amount) // Not enough values
 	{
 		_throwScriptError("not enough values!");
 	}
@@ -37,11 +37,11 @@ bool ScriptInterpreter::_validateListValueAmount(vector<ScriptValue> list, unsig
 	return false;
 }
 
-bool ScriptInterpreter::_validateListValueTypes(vector<ScriptValue> list, vector<ScriptValueType> types)
+bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
 {
-	for (unsigned int i = 0; i < list.size(); i++)
+	for (unsigned int i = 0; i < values.size(); i++)
 	{
-		if (list[i].getType() != types[i])
+		if (values[i].getType() != types[i])
 		{
 			_throwScriptError("wrong value type(s)!");
 			return false;

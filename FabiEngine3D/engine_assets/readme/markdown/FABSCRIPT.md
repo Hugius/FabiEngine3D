@@ -4,10 +4,12 @@
 - Scripts are run from the first line to the last line, from left to right.
 ### META
 - Line 1 of every script file **must** specify its type: initialization, update, destruction.
+- Line 2 of every script file **must** specify its execution state: entry or sleep.
 - **Initialization** script: `META script_type_init`.
 - **Update** script: `META script_type_update`.
 - **Destruction** script: `META script_type_destroy`.
-- You also need to specify which script to run first for **every type** on line 2: `META execution_entry`.
+- **Entry** script: `META script_execution_entry`.
+- **Waiting** script: `META script_execution_waiting`.
 #### Example code
 ```
 1. META script_type_init

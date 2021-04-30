@@ -144,7 +144,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 				}
 
 				// Check if written content is not forbidden
-				for (auto& forbiddenValue : forbiddenValueStrings)
+				for (const auto& forbiddenValue : forbiddenValueStrings)
 				{
 					if (content == forbiddenValue)
 					{
@@ -189,7 +189,7 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 p
 		addButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
 		// Add buttons to scrolling list
-		for (auto& buttonTitle : buttonTitles)
+		for (const auto& buttonTitle : buttonTitles)
 		{
 			getScrollingList(ID)->addButton(buttonTitle, buttonTitle.empty() ? " " : buttonTitle);
 		}
@@ -204,7 +204,7 @@ string EngineGuiGlobalScreen::getSelectedChoiceFormButtonID(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
-		for (auto& button : getScrollingList(ID)->getButtons()) // For every button
+		for (const auto& button : getScrollingList(ID)->getButtons()) // For every button
 		{
 			if (button->isHovered()) // If button is hovered
 			{
@@ -317,7 +317,7 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 		_isFocused = false;
 
 		// Remove valueforms
-		for (auto& tempID : _valueFormIDs)
+		for (const auto& tempID : _valueFormIDs)
 		{
 			deleteRectangle(tempID);
 			deleteTextfield(tempID);

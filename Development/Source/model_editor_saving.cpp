@@ -23,7 +23,7 @@ void ModelEditor::saveModelEntitiesToFile()
 	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d");
 
 	// Write model data into file
-	for (auto& modelID : _loadedModelIDs)
+	for (const auto& modelID : _loadedModelIDs)
 	{
 		// Check if a 3D entity for this model is existing
 		if (_fe3d.modelEntity_isExisting(modelID))
@@ -68,7 +68,7 @@ void ModelEditor::saveModelEntitiesToFile()
 			vector<Vec3> aabbSizes;
 			if (!isInstanced)
 			{
-				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+				for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 				{
 					aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
 					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));

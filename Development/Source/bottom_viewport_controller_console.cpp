@@ -22,7 +22,7 @@ void BottomViewportController::_updateConsoleScrolling()
 
 		// Count all message text lines
 		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageStack.size());
-		for (auto& [ID, message] : _consoleMessageStack)
+		for (const auto& [ID, message] : _consoleMessageStack)
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
@@ -51,7 +51,7 @@ void BottomViewportController::_updateConsoleScrolling()
 			}
 
 			// Move all messages
-			for (auto& [ID, message] : _consoleMessageStack)
+			for (const auto& [ID, message] : _consoleMessageStack)
 			{
 				// Move time part
 				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
@@ -88,7 +88,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	// Reposition previous messages & add new message
 	reverse(_consoleMessageStack.begin(), _consoleMessageStack.end()); // Console prints reversed
 	unsigned int index = 0;
-	for (auto& [ID, message] : _consoleMessageStack)
+	for (const auto& [ID, message] : _consoleMessageStack)
 	{
 		// Temporary values
 		bool alreadyExisting = screen->checkTextfield(ID + "_time");

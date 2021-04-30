@@ -23,7 +23,7 @@ void SceneEditor::_updateSoundEditing()
 			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a speaker model
-			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
+			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be sound preview entity
 				if (entityID.substr(0, string("@speaker").size()) == "@speaker")

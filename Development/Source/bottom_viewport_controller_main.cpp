@@ -40,7 +40,7 @@ void BottomViewportController::initialize()
 	// Update profiling
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
 	int counter = 1;
-	for (auto& [key, value] : updateStatistics)
+	for (const auto& [key, value] : updateStatistics)
 	{
 		_statsScreen->addTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		counter++;
@@ -49,7 +49,7 @@ void BottomViewportController::initialize()
 	// Render profiling
 	auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
 	counter = 1;
-	for (auto& [key, value] : renderStatistics)
+	for (const auto& [key, value] : renderStatistics)
 	{
 		_statsScreen->addTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		counter++;
@@ -189,7 +189,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("updateProfiling", 50))
 	{
 		auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
-		for (auto& [key, value] : updateStatistics)
+		for (const auto& [key, value] : updateStatistics)
 		{
 			string textID = _statsScreen->getTextfield(key)->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);
@@ -200,7 +200,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("renderProfiling", 50))
 	{
 		auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
-		for (auto& [key, value] : renderStatistics)
+		for (const auto& [key, value] : renderStatistics)
 		{
 			string textID = _statsScreen->getTextfield(key)->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", CHAR_SIZE.x, CHAR_SIZE.y);

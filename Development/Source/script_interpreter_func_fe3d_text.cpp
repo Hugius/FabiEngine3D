@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 
 			// Find full textEntity IDs based on part ID
-			for (auto& ID : _fe3d.textEntity_getAllIDs())
+			for (const auto& ID : _fe3d.textEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -79,7 +79,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			auto result = _fe3d.textEntity_getAllIDs();
 
 			// For every text
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview texts
 				if (ID.front() != '@')

@@ -23,7 +23,7 @@ void SceneEditor::_updateModelEditing()
 			auto hoveredID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a model
-			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
+			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must not be preview entity
 				if (entityID[0] != '@')
@@ -117,7 +117,7 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 
 						// AABB
-						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
+						for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
 						{
 							_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 							_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
@@ -155,7 +155,7 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+						for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
 							if (!partID.empty())
@@ -265,7 +265,7 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
+						for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
 						{
 							// Only named parts
 							if (!partID.empty())
@@ -318,7 +318,7 @@ void SceneEditor::_updateModelEditing()
 			if (rightWindow->getActiveScreen()->getID() != "main")
 			{
 				// Reset when user wants to place models again
-				for (auto& entityID : _fe3d.modelEntity_getAllIDs())
+				for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 				{
 					// Check if not preview entity
 					if (entityID[0] != '@')

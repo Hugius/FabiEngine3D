@@ -143,7 +143,7 @@ void SkyEntityManager::update()
 
 void SkyEntityManager::_updateRotation()
 {
-	for (auto& [keyID, entity] : _getSkyEntities())
+	for (const auto& [keyID, entity] : _getSkyEntities())
 	{
 		if (entity->isVisible())
 		{

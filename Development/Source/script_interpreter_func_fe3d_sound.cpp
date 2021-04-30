@@ -64,7 +64,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 
 			// Find full soundEntity IDs based on part ID
-			for (auto& ID : _fe3d.soundEntity_getAllIDs())
+			for (const auto& ID : _fe3d.soundEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			auto result = _fe3d.soundEntity_getAllIDs();
 
 			// For every sound
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview sounds
 				if (ID.front() != '@')

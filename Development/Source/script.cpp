@@ -10,7 +10,7 @@ Script::Script(FabiEngine3D& fe3d) :
 void Script::addScriptFile(const string& ID)
 {
 	// Check if non-existent
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		if(file->getID() == ID)
 		{
@@ -24,7 +24,7 @@ void Script::addScriptFile(const string& ID)
 
 void Script::renameScriptFile(const string& ID, const string& newID)
 {
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		if (file->getID() == ID)
 		{
@@ -64,7 +64,7 @@ unsigned int Script::getTotalLineCount()
 {
 	unsigned int total = 0;
 
-	for (auto& scriptFile : _scriptFiles)
+	for (const auto& scriptFile : _scriptFiles)
 	{
 		total += scriptFile->getLineCount();
 	}
@@ -74,7 +74,7 @@ unsigned int Script::getTotalLineCount()
 
 bool Script::isScriptFileExisting(const string& ID)
 {
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		if (file->getID() == ID)
 		{
@@ -87,7 +87,7 @@ bool Script::isScriptFileExisting(const string& ID)
 
 shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 {
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		if (file->getID() == ID)
 		{
@@ -102,7 +102,7 @@ const vector<string> Script::getAllScriptFileIDs()
 {
 	vector<string> result;
 
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		result.push_back(file->getID());
 	}
@@ -116,7 +116,7 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 	vector<pair<string, unsigned int>> result;
 
 	// For every scriptfile
-	for (auto& file : _scriptFiles)
+	for (const auto& file : _scriptFiles)
 	{
 		// For every line
 		for (unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)

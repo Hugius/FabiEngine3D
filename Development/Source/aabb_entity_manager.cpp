@@ -74,7 +74,7 @@ void AabbEntityManager::update(
 	const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
-	for (auto& [keyID, entity] : _getAabbEntities())
+	for (const auto& [keyID, entity] : _getAabbEntities())
 	{
 		// Optional transformation updates
 		if (entity->getParentID() != "")

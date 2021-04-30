@@ -183,7 +183,7 @@ vec3 getPointLighting(vec3 normal)
 		vec3 result = vec3(0.0f);
 		
         // For every pointlight
-		for(int i = 0; i < u_pointLightCount; i++)
+		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting distance
 			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];

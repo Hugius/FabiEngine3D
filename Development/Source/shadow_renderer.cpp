@@ -48,7 +48,7 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 		// Bind & render
 		unsigned int index = 0;
-		for (auto& buffer : entity->getRenderBuffers())
+		for (const auto& buffer : entity->getRenderBuffers())
 		{
 			// Model matrix
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));

@@ -73,7 +73,7 @@ void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared
 	{
 		// Compose a map of all visible lights
 		unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
-		for (auto& [keyID, entity] : entities)
+		for (const auto& [keyID, entity] : entities)
 		{
 			if (entity->isVisible())
 			{
@@ -83,7 +83,7 @@ void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared
 
 		// Render all lights
 		unsigned int index = 0;
-		for (auto& [keyID, entity] : visibleEntities)
+		for (const auto& [keyID, entity] : visibleEntities)
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());

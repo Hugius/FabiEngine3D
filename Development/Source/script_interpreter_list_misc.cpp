@@ -72,7 +72,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 
 	// Extract remaining text (value)
-	for (auto& c : scriptLine)
+	for (const auto& c : scriptLine)
 	{
 		if (c == ' ' && elementBuild.empty() && valueString.empty()) // Useless whitespace
 		{

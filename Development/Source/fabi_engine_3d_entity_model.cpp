@@ -14,7 +14,7 @@ void FabiEngine3D::modelEntity_add
 void FabiEngine3D::modelEntity_deleteAll()
 {
 	// For every model entity
-	for (auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
 	{
 		modelEntity_delete(entity->getID());
 	}
@@ -23,7 +23,7 @@ void FabiEngine3D::modelEntity_deleteAll()
 void FabiEngine3D::modelEntity_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
+	for (const auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -34,7 +34,7 @@ void FabiEngine3D::modelEntity_delete(const string& ID)
 
 void FabiEngine3D::modelEntity_deleteGroup(const string& ID)
 {
-	for (auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over GAME entities
+	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over GAME entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -228,7 +228,7 @@ bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
 
 bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& partID)
 {
-	for (auto& existingPartID : modelEntity_getPartIDs(ID))
+	for (const auto& existingPartID : modelEntity_getPartIDs(ID))
 	{
 		if (partID == existingPartID)
 		{
@@ -328,7 +328,7 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, ve
 {
 	if (instanced) // Add instancing
 	{
-		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
+		for (const auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
 		{
 			if (buffer->isInstanced())
 			{
@@ -340,7 +340,7 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, ve
 	}
 	else // Remove instancing
 	{
-		for (auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
+		for (const auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
 		{
 			if (buffer->isInstanced())
 			{

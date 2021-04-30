@@ -97,7 +97,7 @@ void EngineGuiWritefield::_updateTyping()
 			// Letter characters
 			if (!_noLetters)
 			{
-				for (auto& c : letterCharacters)
+				for (const auto& c : letterCharacters)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(c)))
@@ -136,7 +136,7 @@ void EngineGuiWritefield::_updateTyping()
 			// Number characters
 			if (!_noNumbers)
 			{
-				for (auto& element : numberCharacterMap)
+				for (const auto& element : numberCharacterMap)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -157,7 +157,7 @@ void EngineGuiWritefield::_updateTyping()
 			// Special characters
 			if (!_noSpecials)
 			{
-				for (auto& element : specialCharacterMap)
+				for (const auto& element : specialCharacterMap)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))

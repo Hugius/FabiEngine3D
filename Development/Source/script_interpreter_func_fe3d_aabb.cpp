@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 
 			// Find full aabbEntity IDs based on part ID
-			for (auto& ID : _fe3d.aabbEntity_getAllIDs())
+			for (const auto& ID : _fe3d.aabbEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			auto result = _fe3d.aabbEntity_getAllIDs();
 
 			// For every AABB
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview AABBs
 				if (ID.front() != '@')

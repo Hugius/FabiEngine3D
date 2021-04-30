@@ -27,7 +27,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	unsigned int wordIndex = 0;
 	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
 	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
-	for (auto& c : scriptLine.substr(typeIndex))
+	for (const auto& c : scriptLine.substr(typeIndex))
 	{
 		if (c == ' ') // Current word ended
 		{
@@ -80,7 +80,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			(isalnum(nameString.front()) || nameString.front() == '_');
 
 		// Forbidden variable names
-		for (auto& word : { META_KEYWORD, EXECUTE_KEYWORD, LOOP_KEYWORD, BREAK_KEYWORD, IF_KEYWORD, ELIF_KEYWORD, ELSE_KEYWORD, GLOBAL_KEYWORD,
+		for (const auto& word : { META_KEYWORD, EXECUTE_KEYWORD, LOOP_KEYWORD, BREAK_KEYWORD, IF_KEYWORD, ELIF_KEYWORD, ELSE_KEYWORD, GLOBAL_KEYWORD,
 			CONST_KEYWORD, EDIT_KEYWORD, LIST_KEYWORD, VEC3_KEYWORD, STRING_KEYWORD, DECIMAL_KEYWORD, INTEGER_KEYWORD, BOOLEAN_KEYWORD, IS_KEYWORD,
 			NOT_KEYWORD, AND_KEYWORD, OR_KEYWORD, MORE_KEYWORD, LESS_KEYWORD, ADDITION_KEYWORD, SUBTRACTION_KEYWORD, MULTIPLICATION_KEYWORD, 
 			DIVISION_KEYWORD, NEGATION_KEYWORD, CASTING_KEYWORD, PUSHING_KEYWORD, PULLING_KEYWORD, PASS_KEYWORD })
@@ -89,7 +89,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		}
 
 		// Validate variable individual characters
-		for (auto& c : nameString)
+		for (const auto& c : nameString)
 		{
 			// Only non-alphanumeric character '_'
 			if (c != '_' && !isalnum(c))

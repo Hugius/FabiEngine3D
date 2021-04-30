@@ -88,7 +88,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 		entity->deleteCharacterEntities();
 
 		// For every character
-		for (auto& c : entity->getTextContent())
+		for (const auto& c : entity->getTextContent())
 		{
 			if (!invalidFont)
 			{
@@ -127,7 +127,7 @@ void TextEntityManager::deleteDynamicTextEntity(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (auto& [keyID, entity] : _getTextEntities())
+	for (const auto& [keyID, entity] : _getTextEntities())
 	{
 		// Update entity
 		if (entity->isDynamic())

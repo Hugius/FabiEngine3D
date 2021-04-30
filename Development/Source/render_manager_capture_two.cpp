@@ -52,7 +52,7 @@ void RenderManager::_captureSceneDepth()
 
 		// Render GAME entities
 		auto allModelEntities = _entityBus->getModelEntities();
-		for (auto& [keyID, modelEntity] : allModelEntities)
+		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if entity must be included in depth map
 			if (modelEntity->isDepthMapIncluded())
@@ -102,7 +102,7 @@ void RenderManager::_captureSceneDepth()
 		}
 
 		// Render billboard entities
-		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if entity must be included in depth map
 			if (entity->isDepthMapIncluded())
@@ -114,7 +114,7 @@ void RenderManager::_captureSceneDepth()
 		// Render AABB entities
 		if (_renderBus.isAabbFrameRenderingEnabled())
 		{
-			for (auto& [keyID, entity] : _entityBus->getAabbEntities())
+			for (const auto& [keyID, entity] : _entityBus->getAabbEntities())
 			{
 				_depthRenderer.render(entity, clippingY, isUnderWater);
 			}

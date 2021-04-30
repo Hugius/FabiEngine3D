@@ -84,7 +84,7 @@ void ModelEditor::_updateModelEditingAabb()
 	screen->getButton("direction")->setHoverable(isHoverable);
 
 	// Update AABB visibility
-	for (auto& entityID : _fe3d.aabbEntity_getAllIDs())
+	for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())
 	{
 		if (entityID == (_currentModelID + "@" + _currentAabbID))
 		{
@@ -158,7 +158,7 @@ void ModelEditor::_updateModelEditingAabb()
 		string hoveredAabbID = "";
 
 		// Hide every AABB
-		for (auto& entityID : _fe3d.aabbEntity_getAllIDs())
+		for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())
 		{
 			_fe3d.aabbEntity_hide(entityID);
 		}

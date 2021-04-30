@@ -64,7 +64,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 
 			// Find full modelEntity IDs based on part ID
-			for (auto& ID : _fe3d.modelEntity_getAllIDs())
+			for (const auto& ID : _fe3d.modelEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			auto result = _fe3d.modelEntity_getAllIDs();
 
 			// For every model
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview models
 				if (ID.front() != '@')
@@ -500,7 +500,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				}
 
 				// Set responsiveness
-				for (auto& ID : aabbIDs)
+				for (const auto& ID : aabbIDs)
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(ID, arguments[1].getBoolean());
 				}
@@ -531,7 +531,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				}
 
 				// Set responsiveness
-				for (auto& ID : aabbIDs)
+				for (const auto& ID : aabbIDs)
 				{
 					_fe3d.aabbEntity_setCollisionResponsive(ID, arguments[1].getBoolean());
 				}

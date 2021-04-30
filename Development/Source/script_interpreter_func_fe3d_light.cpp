@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 
 			// Find full lightEntity IDs based on part ID
-			for (auto& ID : _fe3d.lightEntity_getAllIDs())
+			for (const auto& ID : _fe3d.lightEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			auto result = _fe3d.lightEntity_getAllIDs();
 
 			// For every light
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview lights
 				if (ID.front() != '@')

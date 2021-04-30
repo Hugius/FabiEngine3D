@@ -37,7 +37,7 @@ void ScriptEditor::_updateTextWriter()
 			string charIndexString = "";
 
 			// Extract position indices
-			for (auto& c : hoveredBillboardID)
+			for (const auto& c : hoveredBillboardID)
 			{
 				// Add to string
 				if (extractingLineNumber)
@@ -260,7 +260,7 @@ void ScriptEditor::_updateTextWriter()
 			if (!_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
 			{
 				// Letter characters
-				for (auto& c : LETTER_CHARACTERS)
+				for (const auto& c : LETTER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(c)))
@@ -290,7 +290,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Number characters
-				for (auto& element : NUMBER_CHARACTERS)
+				for (const auto& element : NUMBER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -308,7 +308,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Special characters
-				for (auto& element : SPECIAL_CHARACTERS)
+				for (const auto& element : SPECIAL_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -413,7 +413,7 @@ void ScriptEditor::_updateTextWriter()
 					{
 						if (currentLineText.empty() || cursorCharIndex == currentLineText.size()) // First or last character in line
 						{
-							for (auto& character : newCharacters)
+							for (const auto& character : newCharacters)
 							{
 								currentLineText += character;
 								cursorCharIndex++;
@@ -421,7 +421,7 @@ void ScriptEditor::_updateTextWriter()
 						}
 						else // Inbetween character in line
 						{
-							for (auto& character : newCharacters)
+							for (const auto& character : newCharacters)
 							{
 								currentLineText.insert(currentLineText.begin() + cursorCharIndex, character);
 								cursorCharIndex++;

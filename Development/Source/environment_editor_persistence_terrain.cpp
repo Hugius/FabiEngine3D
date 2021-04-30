@@ -235,7 +235,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 
 void EnvironmentEditor::unloadTerrainEntities()
 {
-	for (auto& name : _loadedTerrainIDs)
+	for (const auto& name : _loadedTerrainIDs)
 	{
 		_fe3d.terrainEntity_delete(name);
 	}
@@ -262,7 +262,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 	std::ofstream file(filePath);
 
 	// Write every terrain to file
-	for (auto& terrainID : _loadedTerrainIDs)
+	for (const auto& terrainID : _loadedTerrainIDs)
 	{
 		// Values
 		string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);

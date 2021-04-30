@@ -12,7 +12,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	// Extract name & equal sign
 	string words[2] = { "", "" };
 	unsigned int wordIndex = 0;
-	for (auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
+	for (const auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
 	{
 		if (c == ' ') // Current word ended
 		{

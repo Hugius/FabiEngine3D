@@ -18,7 +18,7 @@ void SceneEditor::_updateBillboardEditing()
 		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointlight && _currentPreviewSoundID == "")
 		{
 			// Check if user selected a billboard
-			for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+			for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// Must not be preview entity
 				if (entityID[0] != '@')
@@ -193,7 +193,7 @@ void SceneEditor::_updateBillboardEditing()
 			if (_gui.getViewport("right")->getWindow("main")->getActiveScreen()->getID() != "main")
 			{
 				// Reset when user wants to place billboards again
-				for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+				for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
 				{
 					// Check if not preview entity
 					if (entityID[0] != '@')

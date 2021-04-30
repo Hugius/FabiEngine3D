@@ -125,7 +125,7 @@ void AnimationEditor::loadAnimationsFromFile()
 				{
 					// Check if parts are present
 					bool hasAllParts = true;
-					for (auto& partID : newAnimation->partIDs)
+					for (const auto& partID : newAnimation->partIDs)
 					{
 						// Part cannot be empty
 						if (!partID.empty())
@@ -193,7 +193,7 @@ void AnimationEditor::saveAnimationsToFile()
 	file.open(filePath);
 
 	// Write animation data into file
-	for (auto& animation : _animations)
+	for (const auto& animation : _animations)
 	{
 		// Only if animation has data
 		if (!animation->previewModelID.empty() || !animation->oldPreviewModelID.empty())

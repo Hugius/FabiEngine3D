@@ -16,31 +16,31 @@ void EngineGuiScreen::update(bool hoverable)
 	if (_isActive)
 	{
 		// Scrolling lists show
-		for (auto& scrollingList : _scrollingLists)
+		for (const auto& scrollingList : _scrollingLists)
 		{
 			scrollingList->show();
 		}
 
 		// Writefields show
-		for (auto& writefield : _writefields)
+		for (const auto& writefield : _writefields)
 		{
 			writefield->show();
 		}
 
 		// Buttons show
-		for (auto& button : _buttons)
+		for (const auto& button : _buttons)
 		{
 			button->show();
 		}
 
 		// Rectangles show
-		for (auto& rectangle : _rectangles)
+		for (const auto& rectangle : _rectangles)
 		{
 			rectangle->show();
 		}
 
 		// Textfields show
-		for (auto& textfield : _textfields)
+		for (const auto& textfield : _textfields)
 		{
 			textfield->show();
 		}
@@ -48,50 +48,50 @@ void EngineGuiScreen::update(bool hoverable)
 	else
 	{
 		// Scrolling lists hide
-		for (auto& scrollingList : _scrollingLists)
+		for (const auto& scrollingList : _scrollingLists)
 		{
 			scrollingList->hide();
 		}
 
 		// Writefields hide
-		for (auto& writefield : _writefields)
+		for (const auto& writefield : _writefields)
 		{
 			writefield->hide();
 		}
 
 		// Buttons hide
-		for (auto& button : _buttons)
+		for (const auto& button : _buttons)
 		{
 			button->hide();
 		}
 
 		// Rectangles hide
-		for (auto& rectangle : _rectangles)
+		for (const auto& rectangle : _rectangles)
 		{
 			rectangle->hide();
 		}
 
 		// Textfields hide
-		for (auto& textfield : _textfields)
+		for (const auto& textfield : _textfields)
 		{
 			textfield->hide();
 		}
 	}
 
 	// Update scrolling lists
-	for (auto& scrollingList : _scrollingLists)
+	for (const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(hoverable);
 	}
 
 	// Update writefields
-	for (auto& writefield : _writefields)
+	for (const auto& writefield : _writefields)
 	{
 		writefield->update(hoverable);
 	}
 
 	// Update buttons
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		button->update(hoverable);
 	}

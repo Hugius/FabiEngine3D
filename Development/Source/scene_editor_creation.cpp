@@ -271,7 +271,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_add(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
 
 		// Bind AABB entities to model entity
-		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
+		for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
 		{
 			string newAabbID = newEntityID + "@" + previewAabbID.substr(string(previewID + "_").size());
 			_fe3d.aabbEntity_bindToModelEntity(newEntityID, _fe3d.aabbEntity_getPosition(previewAabbID),

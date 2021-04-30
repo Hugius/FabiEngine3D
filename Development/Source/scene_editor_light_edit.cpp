@@ -15,7 +15,7 @@ void SceneEditor::_updateLightEditing()
 			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a lightbulb model
-			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
+			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be light preview entity
 				if (entityID.substr(0, 11) == "@pointlight")

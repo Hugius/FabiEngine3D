@@ -103,19 +103,19 @@ void ModelEditor::_loadMesh()
 				if (_fe3d.modelEntity_isMultiParted(_currentModelID))
 				{
 					// Clear texture cache
-					for (auto& path : _fe3d.modelEntity_getDiffuseMapPaths(_currentModelID))
+					for (const auto& path : _fe3d.modelEntity_getDiffuseMapPaths(_currentModelID))
 					{
 						_fe3d.misc_clearTextureCache2D(path);
 					}
-					for (auto& path : _fe3d.modelEntity_getLightMapPaths(_currentModelID))
+					for (const auto& path : _fe3d.modelEntity_getLightMapPaths(_currentModelID))
 					{
 						_fe3d.misc_clearTextureCache2D(path);
 					}
-					for (auto& path : _fe3d.modelEntity_getReflectionMapPaths(_currentModelID))
+					for (const auto& path : _fe3d.modelEntity_getReflectionMapPaths(_currentModelID))
 					{
 						_fe3d.misc_clearTextureCache2D(path);
 					}
-					for (auto& path : _fe3d.modelEntity_getNormalMapPaths(_currentModelID))
+					for (const auto& path : _fe3d.modelEntity_getNormalMapPaths(_currentModelID))
 					{
 						_fe3d.misc_clearTextureCache2D(path);
 					}

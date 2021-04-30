@@ -23,7 +23,7 @@ void ScriptInterpreter::load()
 	_lastLoggerMessageCount = _fe3d.logger_getMessageCount();
 
 	// For every scriptfile
-	for (auto& scriptID : _script.getAllScriptFileIDs())
+	for (const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
@@ -101,7 +101,7 @@ void ScriptInterpreter::load()
 	}
 
 	// Comment optimization for runtime
-	for (auto& scriptID : _script.getAllScriptFileIDs())
+	for (const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
 
@@ -220,14 +220,14 @@ void ScriptInterpreter::executeUpdate(bool debug)
 		{
 			// Calculate total debugging time
 			float totalTime = 0.0f;
-			for (auto& [scriptID, time] : _debuggingTimes)
+			for (const auto& [scriptID, time] : _debuggingTimes)
 			{
 				totalTime += time;
 			}
 
 			// Print times
 			_fe3d.logger_throwDebug("Debugging results:");
-			for (auto& [scriptID, time] : _debuggingTimes)
+			for (const auto& [scriptID, time] : _debuggingTimes)
 			{
 				float percentage = (time / totalTime) * 100.0f;
 				_fe3d.logger_throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
@@ -248,7 +248,7 @@ void ScriptInterpreter::executeDestruction()
 void ScriptInterpreter::unload()
 {
 	// Delete all sky entities except the engine background
-	for (auto& ID : _fe3d.skyEntity_getAllIDs())
+	for (const auto& ID : _fe3d.skyEntity_getAllIDs())
 	{
 		if (ID != "@@engineBackground")
 		{

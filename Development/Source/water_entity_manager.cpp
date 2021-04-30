@@ -163,7 +163,7 @@ void WaterEntityManager::update()
 	}
 
 	// Update all water entities
-	for (auto& [keyID, entity] : _getWaterEntities())
+	for (const auto& [keyID, entity] : _getWaterEntities())
 	{
 		// Update water animations (rippling & waving)
 		if (entity->isVisible() && _renderBus.isWaterEffectsEnabled())

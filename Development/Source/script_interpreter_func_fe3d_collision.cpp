@@ -271,7 +271,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[1].getString().empty()) // Check all AABB parts of self entity
 			{
 				// Get part IDs
-				for (auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false))
+				for (const auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false))
 				{
 					// Find aabbEntity ID
 					string otherSearchID = arguments[2].getString();
@@ -363,7 +363,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[1].getString().empty())
 			{
 				// Get part IDs
-				for (auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), false, true))
+				for (const auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), false, true))
 				{
 					// Find aabbEntity ID
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
@@ -418,7 +418,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			if (arguments[1].getString().empty())
 			{
 				// Get part IDs
-				for (auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false))
+				for (const auto& selfSearchID : _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false))
 				{
 					// Find aabbEntity ID
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());

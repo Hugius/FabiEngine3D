@@ -76,7 +76,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	}
 
 	// Create render buffers
-	for (auto& part : parts)
+	for (const auto& part : parts)
 	{
 		// Temporary values
 		vector<float> bufferData;
@@ -182,7 +182,7 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 			auto parts = *partsPointer;
 
 			// Create render buffers
-			for (auto& part : parts)
+			for (const auto& part : parts)
 			{
 				vector<float> data;
 
@@ -219,7 +219,7 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 
 void ModelEntityManager::update()
 {
-	for (auto& [keyID, entity] : _getModelEntities())
+	for (const auto& [keyID, entity] : _getModelEntities())
 	{
 		// Only update if visible
 		if (entity->isVisible())

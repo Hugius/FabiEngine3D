@@ -173,7 +173,7 @@ bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> secon
 
 shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 {
-	for (auto& animation : _animations)
+	for (const auto& animation : _animations)
 	{
 		if (animation->ID == ID)
 		{
@@ -189,7 +189,7 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	vector<string> IDs;
 
 	// Find all IDs
-	for (auto& animation : _animations)
+	for (const auto& animation : _animations)
 	{
 		IDs.push_back(animation->ID);
 	}

@@ -60,7 +60,7 @@ float Timer::getDeltaPartSum()
 {
 	float sum = 0.0f;
 
-	for (auto& part : _deltaParts)
+	for (const auto& part : _deltaParts)
 	{
 		sum += part.second;
 	}

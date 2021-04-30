@@ -207,7 +207,7 @@ void AnimationEditor::_updateEditingScreen()
 
 					// Check if parts are present
 					bool hasAllParts = true;
-					for (auto& partID : currentAnimation->partIDs)
+					for (const auto& partID : currentAnimation->partIDs)
 					{
 						// Part cannot be empty
 						if (!partID.empty())

@@ -81,7 +81,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						auto firstListValues = firstListVariable.getValues();
 						auto secondListValues = secondListVariable.getValues();
 						firstListValues.insert(firstListValues.end(), secondListValues.begin(), secondListValues.end());
-						for (auto& value : firstListValues)
+						for (const auto& value : firstListValues)
 						{
 							returnValues.push_back(*value);
 						}

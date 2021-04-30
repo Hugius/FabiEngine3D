@@ -28,7 +28,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 
 	// For every character in list string
 	unsigned int index = 0;
-	for (auto& c : listString)
+	for (const auto& c : listString)
 	{
 		if (finishedValue) // First character after a value has been extracted
 		{

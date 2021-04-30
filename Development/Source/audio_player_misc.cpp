@@ -68,7 +68,7 @@ void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector
 					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
 
 					// For every sound playback
-					for (auto& channel : _findSoundChannels(sound))
+					for (const auto& channel : _findSoundChannels(sound))
 					{
 						Mix_SetPanning(channel, leftStrength, rightStrength); // Apply stereo panning
 					}
@@ -112,7 +112,7 @@ unsigned int AudioPlayer::getUsedChannelCount()
 {
 	int count = 0;
 
-	for (auto& soundID : _channels)
+	for (const auto& soundID : _channels)
 	{
 		if (soundID.empty())
 		{
@@ -137,7 +137,7 @@ void AudioPlayer::_updateSoundVolume(Sound& sound)
 			auto intVolume = static_cast<int>(sound.getVolume() * 128.0f);
 
 			// For every sound playback
-			for (auto& channel : _findSoundChannels(sound))
+			for (const auto& channel : _findSoundChannels(sound))
 			{
 				Mix_Volume(channel, intVolume);
 			}

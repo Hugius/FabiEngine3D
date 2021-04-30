@@ -18,7 +18,7 @@ EngineGuiWindow::~EngineGuiWindow()
 
 void EngineGuiWindow::update(bool hoverable)
 {
-	for (auto& screen : _screens)
+	for (const auto& screen : _screens)
 	{
 		screen->update(hoverable);
 	}
@@ -75,7 +75,7 @@ const Vec2 EngineGuiWindow::getOriginalSize()
 void EngineGuiWindow::addScreen(const string& ID)
 {
 	// Check if already exists
-	for (auto& screen : _screens)
+	for (const auto& screen : _screens)
 	{
 		if (screen->getID() == ID)
 		{
@@ -134,7 +134,7 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen()
 
 shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 {
-	for (auto& screen : _screens)
+	for (const auto& screen : _screens)
 	{
 		if (ID == screen->getID())
 		{

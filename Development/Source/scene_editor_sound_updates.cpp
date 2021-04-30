@@ -68,7 +68,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 				else
 				{
 					// Loop over every created soundcaster
-					for (auto& audioName : _audioEditor.getLoadedAudioIDs())
+					for (const auto& audioName : _audioEditor.getLoadedAudioIDs())
 					{
 						// Check if button is hovered
 						if (screen->getScrollingList("soundcasters")->getButton(audioName)->isHovered())
@@ -99,7 +99,7 @@ void SceneEditor::_updateSoundChoosingMenu()
 		if (screen->getID() == "sceneEditorMenuSoundChoice")
 		{
 			// Remove deleted soundcasters from the scrollingList buttons
-			for (auto& button : screen->getScrollingList("soundcasters")->getButtons())
+			for (const auto& button : screen->getScrollingList("soundcasters")->getButtons())
 			{
 				// Check if soundcaster is still existing
 				if (!_fe3d.soundEntity_isExisting(button->getID()))
@@ -111,7 +111,7 @@ void SceneEditor::_updateSoundChoosingMenu()
 			}
 
 			// Loop over every placed soundcaster
-			for (auto& soundName : _fe3d.soundEntity_getAllIDs())
+			for (const auto& soundName : _fe3d.soundEntity_getAllIDs())
 			{
 				// Check if soundcaster is not a preview
 				if (soundName[0] != '@')

@@ -260,7 +260,7 @@ Vec3 ModelEntity::_calculateAverageValue(vector<Vec3> elements)
 {
 	Vec3 total = Vec3(0.0f);
 
-	for (auto& element : elements)
+	for (const auto& element : elements)
 	{
 		total += element;
 	}

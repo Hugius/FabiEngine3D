@@ -34,7 +34,7 @@ void main()
     vec3 result = texture(u_sampler_diffuse, f_uv).rgb * kernel[0] * u_intensity;
     if(u_horizontal)
     {
-        for(int i = 1; i < WEIGHT_AMOUNT; ++i)
+        for (int i = 1; i < WEIGHT_AMOUNT; ++i)
         {
             result += texture(u_sampler_diffuse, f_uv + vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
            	result += texture(u_sampler_diffuse, f_uv - vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
@@ -42,7 +42,7 @@ void main()
     }
     else
     {
-        for(int i = 1; i < WEIGHT_AMOUNT; ++i)
+        for (int i = 1; i < WEIGHT_AMOUNT; ++i)
         {
             result += texture(u_sampler_diffuse, f_uv + vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
            	result += texture(u_sampler_diffuse, f_uv - vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;

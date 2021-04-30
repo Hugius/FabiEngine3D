@@ -66,7 +66,7 @@ void SceneEditor::_updateModelPlacingMenu()
 				else
 				{
 					// Loop over every created model
-					for (auto& modelID : _modelEditor.getLoadedModelIDs())
+					for (const auto& modelID : _modelEditor.getLoadedModelIDs())
 					{
 						// Check if model has mesh
 						if (_fe3d.modelEntity_isExisting(modelID))
@@ -107,7 +107,7 @@ void SceneEditor::_updateModelChoosingMenu()
 		if (screen->getID() == "sceneEditorMenuModelChoice")
 		{
 			// Remove deleted models from the scrollingList buttons
-			for (auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
+			for (const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
 			{
 				// Check if model is still existing
 				if (!_fe3d.modelEntity_isExisting(button->getID()))
@@ -119,7 +119,7 @@ void SceneEditor::_updateModelChoosingMenu()
 			}
 
 			// Loop over every placed model
-			for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+			for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Check if model is not a preview model
 				if (modelID[0] != '@')

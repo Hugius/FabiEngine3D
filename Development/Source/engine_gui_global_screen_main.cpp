@@ -9,19 +9,19 @@ EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d) :
 void EngineGuiGlobalScreen::update()
 {
 	// Update scrolling lists
-	for (auto& scrollingList : _scrollingLists)
+	for (const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(true);
 	}
 
 	// Update writefields
-	for (auto& writefield : _writefields)
+	for (const auto& writefield : _writefields)
 	{
 		writefield->update(true);
 	}
 
 	// Update buttons
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		button->update(true);
 	}
@@ -94,7 +94,7 @@ bool EngineGuiGlobalScreen::checkTextfield(const string& ID)
 
 shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
 {
-	for (auto& scrollingList : _scrollingLists)
+	for (const auto& scrollingList : _scrollingLists)
 	{
 		if (ID == scrollingList->getID())
 		{
@@ -107,7 +107,7 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 
 shared_ptr<EngineGuiWritefield> EngineGuiGlobalScreen::getWritefield(const string& ID)
 {
-	for (auto& writefield : _writefields)
+	for (const auto& writefield : _writefields)
 	{
 		if (ID == writefield->getID())
 		{
@@ -120,7 +120,7 @@ shared_ptr<EngineGuiWritefield> EngineGuiGlobalScreen::getWritefield(const strin
 
 shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 {
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		if (ID == button->getID())
 		{
@@ -133,7 +133,7 @@ shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 
 shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string& ID)
 {
-	for (auto& rectangle : _rectangles)
+	for (const auto& rectangle : _rectangles)
 	{
 		if (ID == rectangle->getID())
 		{
@@ -146,7 +146,7 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 
 shared_ptr<EngineGuiTextfield> EngineGuiGlobalScreen::getTextfield(const string& ID)
 {
-	for (auto& textfield : _textfields)
+	for (const auto& textfield : _textfields)
 	{
 		if (ID == textfield->getID())
 		{

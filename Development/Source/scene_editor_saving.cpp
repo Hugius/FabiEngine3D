@@ -32,7 +32,7 @@ void SceneEditor::saveEditorSceneToFile()
 
 	// Save all LOD model IDs
 	vector<string> lodIDs;
-	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if not preview entity
 		if (modelID[0] != '@')
@@ -92,7 +92,7 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Models
-	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
@@ -108,7 +108,7 @@ void SceneEditor::saveEditorSceneToFile()
 				_fe3d.modelEntity_setSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
-				for (auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
+				for (const auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
 				{
 					// Only named parts
 					if (!partID.empty())
@@ -187,7 +187,7 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Billboards
-	for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+	for (const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		if (billboardID[0] != '@')
@@ -217,7 +217,7 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Sounds
-	for (auto& soundID : _fe3d.soundEntity_getAllIDs())
+	for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		if (soundID[0] != '@')
@@ -284,7 +284,7 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Point lights
-	for (auto& lightID : _fe3d.lightEntity_getAllIDs())
+	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		if (lightID[0] != '@')

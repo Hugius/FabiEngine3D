@@ -87,7 +87,7 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::update()
 {
-	for (auto& [keyID, entity] : _getBillboardEntities())
+	for (const auto& [keyID, entity] : _getBillboardEntities())
 	{
 		// 3D camera facing
 		auto facingX = entity->isCameraFacingX();

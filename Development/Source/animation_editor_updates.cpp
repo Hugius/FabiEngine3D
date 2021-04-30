@@ -5,7 +5,7 @@
 void AnimationEditor::update()
 {
 	// Prepare animation values
-	for (auto& animation : _animations)
+	for (const auto& animation : _animations)
 	{
 		animation->updateValueLimits();
 	}

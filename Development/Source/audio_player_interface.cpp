@@ -87,7 +87,7 @@ void AudioPlayer::pauseSound(Sound& sound)
 			if (!isSoundPaused(sound))
 			{
 				// For every sound playback
-				for (auto& channel : _findSoundChannels(sound))
+				for (const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_Pause(channel);
 				}
@@ -141,7 +141,7 @@ void AudioPlayer::resumeSound(Sound& sound)
 		if (isSoundStarted(sound) && isSoundPaused(sound))
 		{
 			// For every sound playback
-			for (auto& channel : _findSoundChannels(sound))
+			for (const auto& channel : _findSoundChannels(sound))
 			{
 				Mix_Resume(channel);
 			}
@@ -196,7 +196,7 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 			if (fadeMS == 0)
 			{
 				// For every sound playback
-				for (auto& channel : _findSoundChannels(sound))
+				for (const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_HaltChannel(channel);
 				}
@@ -204,14 +204,14 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 			else
 			{
 				// For every sound playback
-				for (auto& channel : _findSoundChannels(sound))
+				for (const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_FadeOutChannel(channel, fadeMS);
 				}
 			}
 
 			// De-allocate channels
-			for (auto& channel : _findSoundChannels(sound))
+			for (const auto& channel : _findSoundChannels(sound))
 			{
 				_channels[channel] = "";
 			}
@@ -267,7 +267,7 @@ bool AudioPlayer::isSoundStarted(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-		for (auto& soundID : _channels)
+		for (const auto& soundID : _channels)
 		{
 			if (soundID == sound.getID())
 			{

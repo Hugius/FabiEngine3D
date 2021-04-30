@@ -34,7 +34,7 @@ void SceneEditor::saveCustomSceneToFile()
 
 	// Save model LOD IDs
 	vector<string> lodIDs;
-	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
@@ -112,7 +112,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Models
-	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
@@ -184,7 +184,7 @@ void SceneEditor::saveCustomSceneToFile()
 			if (partIDs.size() > 1)
 			{
 				// Write part IDs
-				for (auto& partID : partIDs)
+				for (const auto& partID : partIDs)
 				{
 					// Write space
 					file << " ";
@@ -261,7 +261,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Animations
-	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
@@ -270,7 +270,7 @@ void SceneEditor::saveCustomSceneToFile()
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
 		{
 			// Every playing animation on every model
-			for (auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
+			for (const auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
 			{
 				// Retrieve raw animation data for retrieving
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
@@ -296,7 +296,7 @@ void SceneEditor::saveCustomSceneToFile()
 				// Write speeds
 				unsigned int index = 0;
 				auto speeds = animationData->frames[animationData->frameIndex].speeds;
-				for (auto& [partID, speed] : speeds)
+				for (const auto& [partID, speed] : speeds)
 				{
 					// Write speed
 					file << (partID.empty() ? "?" : partID) << " " << speed;
@@ -315,7 +315,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Billboards
-	for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+	for (const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneBillboard =
@@ -394,7 +394,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// AABBs
-	for (auto& aabbID : _fe3d.aabbEntity_getAllIDs())
+	for (const auto& aabbID : _fe3d.aabbEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneAabb =
@@ -425,7 +425,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Sound casters
-	for (auto& soundID : _fe3d.soundEntity_getAllIDs())
+	for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneSound =
@@ -506,7 +506,7 @@ void SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Write point lights
-	for (auto& lightID : _fe3d.lightEntity_getAllIDs())
+	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneLight =

@@ -17,7 +17,7 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 	bool buildingVec3 = false;
 
 	// Extract all invidual elements of the if statement
-	for(auto& c : conditionString)
+	for (const auto& c : conditionString)
 	{
 		if (c == ' ' && elementBuild.empty() && !buildingString && !buildingVec3) // Check for useless whitespace
 		{

@@ -96,7 +96,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 			// 6 threads for every 3D texture
 			cacheStatuses.push_back(false);
 			threads.push_back({});
-			for (auto& filePath : filePaths)
+			for (const auto& filePath : filePaths)
 			{
 				threads.back().push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePath));
 			}

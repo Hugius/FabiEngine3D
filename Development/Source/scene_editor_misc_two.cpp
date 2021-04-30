@@ -107,7 +107,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete GAME entities
-	for (auto& [ID, previewID] : _loadedModelIDs)
+	for (const auto& [ID, previewID] : _loadedModelIDs)
 	{
 		// Delete model
 		if (_fe3d.modelEntity_isExisting(ID))
@@ -124,7 +124,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete billboard entities
-	for (auto& [ID, previewID] : _loadedBillboardIDs)
+	for (const auto& [ID, previewID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
 		if (_fe3d.billboardEntity_isExisting(ID))
@@ -134,7 +134,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete AABB entities
-	for (auto& ID : _loadedAabbIDs)
+	for (const auto& ID : _loadedAabbIDs)
 	{
 		// Delete AABB
 		if (_fe3d.aabbEntity_isExisting(ID))
@@ -144,7 +144,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete sounds
-	for (auto& [ID, previewID] : _loadedSoundIDs)
+	for (const auto& [ID, previewID] : _loadedSoundIDs)
 	{
 		if (_fe3d.soundEntity_isExisting(ID))
 		{
@@ -166,7 +166,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete light entities
-	for (auto& ID : _loadedLightIDs)
+	for (const auto& ID : _loadedLightIDs)
 	{
 		if (_fe3d.lightEntity_isExisting(ID))
 		{

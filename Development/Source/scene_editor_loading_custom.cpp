@@ -206,7 +206,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_setAlpha(modelID, alpha);
 					_fe3d.modelEntity_setLightness(modelID, lightness);
 					!isVisible ? _fe3d.modelEntity_hide(modelID) : void();
-					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+					for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 						_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
@@ -333,7 +333,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 					// Retrieve parts
 					auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
-					for (auto& partID : partIDs)
+					for (const auto& partID : partIDs)
 					{
 						// Retrieve part transformation
 						auto translation = _fe3d.modelEntity_getPosition(modelID, partID);
@@ -406,7 +406,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
 					_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
 					!isVisible ? _fe3d.billboardEntity_hide(billboardID) : void();
-					for (auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
+					for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 						_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);

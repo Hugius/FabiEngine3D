@@ -67,7 +67,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 				else
 				{
 					// Loop over every created billboard
-					for (auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
+					for (const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 					{
 						// Check if billboard has a billboard entity
 						if (_fe3d.billboardEntity_isExisting(billboardID))
@@ -108,7 +108,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 		if (screen->getID() == "sceneEditorMenuBillboardChoice")
 		{
 			// Remove deleted billboards from the scrollingList buttons
-			for (auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->getButtons())
+			for (const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->getButtons())
 			{
 				// Check if billboard is still existing
 				if (!_fe3d.billboardEntity_isExisting(button->getID()))
@@ -120,7 +120,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 			}
 
 			// Loop over every placed billboard
-			for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
+			for (const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// Check if billboard is not a preview billboard
 				if (billboardID[0] != '@')

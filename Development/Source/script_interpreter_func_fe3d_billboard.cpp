@@ -64,7 +64,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 
 			// Find full billboardEntity IDs based on part ID
-			for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+			for (const auto& ID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			auto result = _fe3d.billboardEntity_getAllIDs();
 
 			// For every billboard
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview billboards
 				if (ID.front() != '@')
@@ -491,7 +491,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				}
 
 				// Set responsiveness
-				for (auto& ID : aabbIDs)
+				for (const auto& ID : aabbIDs)
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(ID, arguments[1].getBoolean());
 				}
@@ -522,7 +522,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				}
 
 				// Set responsiveness
-				for (auto& ID : aabbIDs)
+				for (const auto& ID : aabbIDs)
 				{
 					_fe3d.aabbEntity_setCollisionResponsive(ID, arguments[1].getBoolean());
 				}

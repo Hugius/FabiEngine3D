@@ -8,7 +8,7 @@ void FabiEngine3D::textEntity_deleteAll()
 
 void FabiEngine3D::textEntity_hideAll()
 {
-	for (auto& [keyID, entity] : _core->_textEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
 	{
 		entity->setVisible(false);
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::textEntity_hideAll()
 
 void FabiEngine3D::textEntity_showAll()
 {
-	for (auto& [keyID, entity] : _core->_textEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
 	{
 		entity->setVisible(true);
 	}

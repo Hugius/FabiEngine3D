@@ -20,7 +20,7 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 void EngineGuiManager::update()
 {
 	// Update viewports
-	for (auto& viewport : _viewports)
+	for (const auto& viewport : _viewports)
 	{
 		viewport->update(!_globalScreen->isFocused());
 	}
@@ -36,7 +36,7 @@ shared_ptr<EngineGuiGlobalScreen> EngineGuiManager::getGlobalScreen()
 
 shared_ptr<EngineGuiViewport> EngineGuiManager::getViewport(const string& ID)
 {
-	for (auto& viewport : _viewports)
+	for (const auto& viewport : _viewports)
 	{
 		if (ID == viewport->getID())
 		{

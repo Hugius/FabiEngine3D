@@ -9,7 +9,7 @@ ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, Sc
 	_ID(ID),
 	_isConstant(constant)
 {
-	for (auto& value : values)
+	for (const auto& value : values)
 	{
 		_values.push_back(make_shared<ScriptValue>(value));
 	}
@@ -39,7 +39,7 @@ void ScriptVariable::changeValues(vector<ScriptValue> values)
 {
 	_values.clear();
 
-	for (auto& value : values)
+	for (const auto& value : values)
 	{
 		_values.push_back(make_shared<ScriptValue>(value));
 	}

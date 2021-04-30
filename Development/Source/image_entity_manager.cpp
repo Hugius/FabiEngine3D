@@ -68,7 +68,7 @@ void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 trans
 
 void ImageEntityManager::updateSpriteAnimations()
 {
-	for (auto& [keyID, entity] : _getImageEntities())
+	for (const auto& [keyID, entity] : _getImageEntities())
 	{
 		if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
 			entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
@@ -106,7 +106,7 @@ void ImageEntityManager::updateSpriteAnimations()
 
 void ImageEntityManager::update()
 {
-	for (auto& [keyID, entity] : _getImageEntities())
+	for (const auto& [keyID, entity] : _getImageEntities())
 	{
 		// Calculate model matrix
 		if (entity->isVisible())

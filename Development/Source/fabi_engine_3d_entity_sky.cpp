@@ -9,7 +9,7 @@ void FabiEngine3D::skyEntity_add(const string& ID)
 void FabiEngine3D::skyEntity_deleteAll()
 {
 	// For every sky entity
-	for (auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
 		skyEntity_delete(entity->getID());
 	}

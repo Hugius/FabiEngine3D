@@ -15,7 +15,7 @@ EngineGuiViewport::~EngineGuiViewport()
 
 void EngineGuiViewport::update(bool hoverable)
 {
-	for (auto& window : _windows)
+	for (const auto& window : _windows)
 	{
 		window->update(hoverable);
 	}
@@ -82,7 +82,7 @@ vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
 
 shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 {
-	for (auto& window : _windows)
+	for (const auto& window : _windows)
 	{
 		if (ID == window->getID())
 		{

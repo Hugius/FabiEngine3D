@@ -141,7 +141,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 
 void EnvironmentEditor::unloadSkyEntities()
 {
-	for (auto& name : _loadedSkyIDs)
+	for (const auto& name : _loadedSkyIDs)
 	{
 		_fe3d.skyEntity_delete(name);
 	}
@@ -167,7 +167,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 	std::ofstream file(filePath);
 
 	// Write every sky to file
-	for (auto& skyID : _loadedSkyIDs)
+	for (const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
 		auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
@@ -186,7 +186,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		file << skyID << " ";
 
 		// Write paths to file
-		for (auto& diffuseMapPath : diffuseMapPaths)
+		for (const auto& diffuseMapPath : diffuseMapPaths)
 		{
 			file << diffuseMapPath << " ";
 		}

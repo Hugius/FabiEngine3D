@@ -176,7 +176,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 
 void EnvironmentEditor::unloadWaterEntities()
 {
-	for (auto& name : _loadedWaterIDs)
+	for (const auto& name : _loadedWaterIDs)
 	{
 		_fe3d.waterEntity_delete(name);
 	}
@@ -203,7 +203,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 	std::ofstream file(filePath);
 
 	// Write every water to file
-	for (auto& waterID : _loadedWaterIDs)
+	for (const auto& waterID : _loadedWaterIDs)
 	{
 		// Values
 		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);

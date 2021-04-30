@@ -51,7 +51,7 @@ void SceneEditor::_updateSkyMenu()
 				{
 					// Retrieve created skies
 					vector<string> skyNames;
-					for (auto& name : _environmentEditor.getLoadedSkyIDs())
+					for (const auto& name : _environmentEditor.getLoadedSkyIDs())
 					{ 
 						// Check if not engine sky & not scene editor sky
 						if (name[0] == '@' && name.substr(0, 2) != "@@")
@@ -115,7 +115,7 @@ void SceneEditor::_updateTerrainMenu()
 				{
 					// Retrieve created skies
 					vector<string> terrainNames;
-					for (auto& name : _environmentEditor.getLoadedTerrainIDs())
+					for (const auto& name : _environmentEditor.getLoadedTerrainIDs())
 					{
 						// Check if not engine terrain & not scene editor terrain
 						if (name[0] == '@' && name.substr(0, 2) != "@@")
@@ -189,7 +189,7 @@ void SceneEditor::_updateWaterMenu()
 				{
 					// Retrieve created skies
 					vector<string> waterNames;
-					for (auto& name : _environmentEditor.getLoadedWaterIDs())
+					for (const auto& name : _environmentEditor.getLoadedWaterIDs())
 					{
 						// Check if not engine water & not scene editor water
 						if (name[0] == '@' && name.substr(0, 2) != "@@")

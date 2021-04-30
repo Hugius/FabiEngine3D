@@ -161,7 +161,7 @@ void EngineGuiScrollingList::_updateScolling()
 		}
 
 		// Update
-		for (auto& button : _buttons)
+		for (const auto& button : _buttons)
 		{
 			string rectangleID = button->getRectangle()->getEntityID();
 			string textID = button->getTextfield()->getEntityID();
@@ -184,7 +184,7 @@ void EngineGuiScrollingList::_updateScolling()
 void EngineGuiScrollingList::_updateButtons(bool hoverable)
 {
 	// Update buttons
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		button->update(hoverable && _isHovered);
 	}
@@ -211,7 +211,7 @@ void EngineGuiScrollingList::show()
 	EngineGuiRectangle::show();
 
 	// Show all buttons
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		button->show();
 	}
@@ -222,7 +222,7 @@ void EngineGuiScrollingList::hide()
 	EngineGuiRectangle::hide();
 
 	// Hide all buttons
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		button->hide();
 	}
@@ -235,7 +235,7 @@ bool EngineGuiScrollingList::isHovered()
 
 shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID)
 {
-	for (auto& button : _buttons)
+	for (const auto& button : _buttons)
 	{
 		if (ID == button->getID())
 		{

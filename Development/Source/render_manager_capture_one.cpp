@@ -13,7 +13,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 	bool anyReflectiveEntityFound = false;
 	if (!waterReflectionsNeeded)
 	{
-		for (auto& [keyID, modelEntity]: _entityBus->getModelEntities())
+		for (const auto& [keyID, modelEntity]: _entityBus->getModelEntities())
 		{
 			if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 			{
@@ -40,7 +40,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		vector<string> reflectiveModelEntityIDs;
 		if (sceneReflectionsNeeded)
 		{
-			for (auto& [keyID, modelEntity]: _entityBus->getModelEntities())
+			for (const auto& [keyID, modelEntity]: _entityBus->getModelEntities())
 			{
 				if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 				{
@@ -107,9 +107,9 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		// Restore reflective GAME entities
 		if (sceneReflectionsNeeded)
 		{
-			for (auto& [keyID, modelEntity] : _entityBus->getModelEntities()) // Loop over all GAME entities
+			for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities()) // Loop over all GAME entities
 			{
-				for (auto& reflectiveID : reflectiveModelEntityIDs) // Loop over all reflective GAME entities
+				for (const auto& reflectiveID : reflectiveModelEntityIDs) // Loop over all reflective GAME entities
 				{
 					if (modelEntity->getID() == reflectiveID) // Check if IDs match
 					{
@@ -166,7 +166,7 @@ void RenderManager::_captureShadows()
 
 		// Render GAME entities
 		auto allModelEntities = _entityBus->getModelEntities();
-		for (auto& [keyID, modelEntity] : allModelEntities)
+		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if LOD entity needs to be rendered
 			if (modelEntity->isLevelOfDetailed())

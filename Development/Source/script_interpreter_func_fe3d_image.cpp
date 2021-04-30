@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			}
 
 			// Find full imageEntity IDs based on part ID
-			for (auto& ID : _fe3d.imageEntity_getAllIDs())
+			for (const auto& ID : _fe3d.imageEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -79,7 +79,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			auto result = _fe3d.imageEntity_getAllIDs();
 
 			// For every image
-			for (auto& ID : result)
+			for (const auto& ID : result)
 			{
 				// Only non-preview images
 				if (ID.front() != '@')

@@ -21,7 +21,7 @@ void FabiEngine3D::billboardEntity_add(const string& ID, const string& text, con
 
 void FabiEngine3D::billboardEntity_deleteAll()
 {
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_delete(entity->getID());
 	}
@@ -30,7 +30,7 @@ void FabiEngine3D::billboardEntity_deleteAll()
 void FabiEngine3D::billboardEntity_delete(const string& ID)
 {
 	// Delete all bound AABB entities if existing
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
+	for (const auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
 	{
 		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
@@ -41,7 +41,7 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 
 void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 {
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Loop over billboard entities
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Loop over billboard entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -58,7 +58,7 @@ void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 
 void FabiEngine3D::billboardEntity_hideAll()
 {
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_hide(entity->getID());
 	}
@@ -66,7 +66,7 @@ void FabiEngine3D::billboardEntity_hideAll()
 
 void FabiEngine3D::billboardEntity_showAll()
 {
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_show(entity->getID());
 	}
@@ -177,7 +177,7 @@ vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

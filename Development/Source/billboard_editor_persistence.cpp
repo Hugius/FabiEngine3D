@@ -194,7 +194,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
 	// Write billboard data into file
-	for (auto& billboardID : _loadedBillboardIDs)
+	for (const auto& billboardID : _loadedBillboardIDs)
 	{
 		// Retrieve all values
 		auto size = _fe3d.billboardEntity_getSize(billboardID);

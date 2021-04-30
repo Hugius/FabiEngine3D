@@ -68,7 +68,7 @@ void RenderManager::_renderModelEntities()
 
 		// Render GAME entities
 		auto allModelEntities = _entityBus->getModelEntities();
-		for (auto& [keyID, modelEntity] : allModelEntities)
+		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if LOD entity needs to be rendered
 			if (modelEntity->isLevelOfDetailed())
@@ -126,7 +126,7 @@ void RenderManager::_renderBillboardEntities()
 		_billboardEntityRenderer.bind();
 
 		// Render billboard entities
-		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			_billboardEntityRenderer.render(entity);
 		}
@@ -146,7 +146,7 @@ void RenderManager::_renderAabbEntities()
 			_aabbEntityRenderer.bind();
 
 			// Render AABB entities
-			for (auto& [keyID, entity] : _entityBus->getAabbEntities())
+			for (const auto& [keyID, entity] : _entityBus->getAabbEntities())
 			{
 				_aabbEntityRenderer.render(entity);
 			}
@@ -173,7 +173,7 @@ void RenderManager::_renderImageEntities()
 
 		// Sort render order
 		std::map<unsigned int, shared_ptr<ImageEntity>> orderedMap;
-		for (auto& [keyID, entity] : _entityBus->getImageEntities())
+		for (const auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
 			// Custom cursor entity must be rendered last
 			if (entity->getID() != _renderBus.getCursorEntityID())
@@ -183,7 +183,7 @@ void RenderManager::_renderImageEntities()
 		}
 
 		// Render all entities
-		for (auto& [keyID, entity] : orderedMap)
+		for (const auto& [keyID, entity] : orderedMap)
 		{
 			_imageEntityRenderer.render(entity);
 		}
@@ -202,18 +202,18 @@ void RenderManager::_renderTextEntities()
 
 		// Sort render order
 		std::map<unsigned int, shared_ptr<TextEntity>> orderedMap;
-		for (auto& [keyID, entity] : _entityBus->getTextEntities())
+		for (const auto& [keyID, entity] : _entityBus->getTextEntities())
 		{
 			orderedMap.insert(std::make_pair(entity->getDepth(), entity));
 		}
 
 		// Render all entities
-		for (auto& [keyID, textEntity] : orderedMap)
+		for (const auto& [keyID, textEntity] : orderedMap)
 		{
 			if (textEntity->isDynamic()) // Dynamic text rendering
 			{
 				// Render every character individually
-				for (auto& characterEntity : textEntity->getCharacterEntities())
+				for (const auto& characterEntity : textEntity->getCharacterEntities())
 				{
 					_imageEntityRenderer.render(characterEntity);
 				}
@@ -231,7 +231,7 @@ void RenderManager::_renderTextEntities()
 
 void RenderManager::_renderCustomCursor()
 {
-	for (auto& [keyID, entity] : _entityBus->getImageEntities())
+	for (const auto& [keyID, entity] : _entityBus->getImageEntities())
 	{
 		if (entity->getID() == _renderBus.getCursorEntityID())
 		{

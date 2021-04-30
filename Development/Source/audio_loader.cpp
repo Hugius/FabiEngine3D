@@ -10,13 +10,13 @@
 AudioLoader::~AudioLoader()
 {
 	// Delete chunks
-	for (auto& element : _chunkCache)
+	for (const auto& element : _chunkCache)
 	{
 		Mix_FreeChunk(element.second);
 	}
 
 	// Delete music
-	for (auto& element : _musicCache)
+	for (const auto& element : _musicCache)
 	{
 		Mix_FreeMusic(element.second);
 	}

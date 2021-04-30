@@ -304,7 +304,7 @@ vec3 getPointLighting(vec3 normal)
 		vec3 result = vec3(0.0f);
 		
         // For every pointlight
-		for(int i = 0; i < u_pointLightCount; i++)
+		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting strength
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
@@ -416,7 +416,7 @@ float getShadowValue()
 				);
 
 				// Calculate poisson sampled shadows
-				for(int i = 0; i < 4; i++)
+				for (int i = 0; i < 4; i++)
 				{
 					// Get random index
 					int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
@@ -437,9 +437,9 @@ float getShadowValue()
 			*/
 			
 			// Calculate PCF shadows
-			for(int x = -1; x <= 1; x++)
+			for (int x = -1; x <= 1; x++)
 			{
-				for(int y = -1; y <= 1; y++)
+				for (int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
 					shadow += (currentDepth - texelSize > pcfDepth) ? u_shadowLightness : 1.0f;        

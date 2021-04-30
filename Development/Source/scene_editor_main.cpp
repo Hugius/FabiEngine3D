@@ -40,7 +40,7 @@ void SceneEditor::load()
 
 	// Preview models loading
 	_modelEditor.loadModelEntitiesFromFile();
-	for (auto& modelID : _modelEditor.getLoadedModelIDs())
+	for (const auto& modelID : _modelEditor.getLoadedModelIDs())
 	{
 		// Check if there is a model entity present
 		if (_fe3d.modelEntity_isExisting(modelID))
@@ -55,7 +55,7 @@ void SceneEditor::load()
 
 	// Preview billboards loading
 	_billboardEditor.loadBillboardEntitiesFromFile();
-	for (auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
+	for (const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 	{
 		// Check if there is a billboard entity present
 		if (_fe3d.billboardEntity_isExisting(billboardID))
@@ -69,7 +69,7 @@ void SceneEditor::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.modelEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
-	for (auto& audioID : _audioEditor.getLoadedAudioIDs())
+	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("soundcasters")->

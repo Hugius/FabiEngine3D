@@ -79,7 +79,7 @@ void ScriptEditor::saveScriptsToFile()
 			("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 		// Delete all text files containing deleted scripts
-		for (auto& scriptName : _scriptFileNamesToDelete)
+		for (const auto& scriptName : _scriptFileNamesToDelete)
 		{
 			string finalPath = directoryPath + scriptName + ".fe3d";
 
@@ -92,7 +92,7 @@ void ScriptEditor::saveScriptsToFile()
 		_scriptFileNamesToDelete.clear();
 
 		// Write every script to a text file
-		for (auto& scriptName : _script.getAllScriptFileIDs())
+		for (const auto& scriptName : _script.getAllScriptFileIDs())
 		{
 			// Create or overwrite script file
 			std::ofstream file;

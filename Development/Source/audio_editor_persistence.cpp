@@ -127,7 +127,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Write audio data into file
-	for (auto& audioID : _loadedAudioIDs)
+	for (const auto& audioID : _loadedAudioIDs)
 	{
 		// Retrieve all values
 		auto audioPath = _fe3d.soundEntity_getFilePath(audioID);

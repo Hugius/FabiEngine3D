@@ -24,7 +24,7 @@ void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& he
 void FabiEngine3D::terrainEntity_deleteAll()
 {
 	// For every terrain entity
-	for (auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		terrainEntity_delete(entity->getID());
 	}

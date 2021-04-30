@@ -40,7 +40,7 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 	string xyz[3] = { "", "","" };
 	bool isExtracting = false;
 	unsigned int index = 0;
-	for (auto& c : withoutBrackets)
+	for (const auto& c : withoutBrackets)
 	{
 		if (c == ' ' && isExtracting)
 		{
@@ -157,7 +157,7 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	string xyz[3] = { "", "","" };
 	bool isExtracting = false;
 	unsigned int index = 0;
-	for (auto& c : withoutBrackets)
+	for (const auto& c : withoutBrackets)
 	{
 		if (c == ' ' && isExtracting)
 		{

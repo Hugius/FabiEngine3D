@@ -18,7 +18,7 @@ void TextEntity::updateCharacterEntities()
 	unsigned int index = 0;
 	
 	// Update every character
-	for (auto& character : _characters)
+	for (const auto& character : _characters)
 	{
 		// Temporary values
 		float xCharOffset = static_cast<float>(index) * xCharSize;

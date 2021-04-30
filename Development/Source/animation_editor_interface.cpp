@@ -25,7 +25,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 
 					// Check if model has all the parts
 					bool hasAllParts = true;
-					for (auto& partID : animation->partIDs)
+					for (const auto& partID : animation->partIDs)
 					{
 						// Part cannot be empty
 						if (!partID.empty())
@@ -67,7 +67,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 
 bool AnimationEditor::isAnimationExisting(const string& ID)
 {
-	for (auto& animation : _animations)
+	for (const auto& animation : _animations)
 	{
 		if (animation->ID == ID)
 		{

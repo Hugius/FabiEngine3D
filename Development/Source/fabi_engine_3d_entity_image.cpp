@@ -8,7 +8,7 @@ void FabiEngine3D::imageEntity_deleteAll()
 
 void FabiEngine3D::imageEntity_hideAll()
 {
-	for (auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
 	{
 		entity->setVisible(false);
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::imageEntity_hideAll()
 
 void FabiEngine3D::imageEntity_showAll()
 {
-	for (auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
 	{
 		entity->setVisible(true);
 	}

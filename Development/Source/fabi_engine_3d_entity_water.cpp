@@ -187,7 +187,7 @@ vector<string> FabiEngine3D::waterEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_waterEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_waterEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

@@ -136,7 +136,7 @@ vector<string> FabiEngine3D::imageEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_imageEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

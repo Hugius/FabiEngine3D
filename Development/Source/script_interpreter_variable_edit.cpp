@@ -3,17 +3,35 @@
 void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
-	string keyword;
-	string typeString = "";
 	string nameString = "";
 	string equalSignString = "";
 	string valueString = "";
 	bool isConstant = false;
 	unsigned int valueIndexOne = 0;
 
-	// Extract text parts
-	iss >> keyword >> nameString >> equalSignString;
+	// Extract name & equal sign
+	string words[2] = { "", "" };
+	unsigned int wordIndex = 0;
+	for (auto& c : scriptLine.substr(EDIT_KEYWORD.size() + 1))
+	{
+		if (c == ' ') // Current word ended
+		{
+			// Next word
+			wordIndex++;
+
+			// Check if words extracted
+			if (wordIndex == 2)
+			{
+				break;
+			}
+		}
+		else // Add to word
+		{
+			words[wordIndex] += c;
+		}
+	}
+	nameString = words[0];
+	equalSignString = words[1];
 
 	// Check if variable name is missing
 	if (nameString.empty())
@@ -30,19 +48,6 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		{
 			// Extract remaining text (value)
 			valueString = scriptLine.substr(scriptLine.find('=') + 2);
-			begin :
-			for (unsigned int i = 0; i < valueString.size(); i++)
-			{
-				if (valueString[i] == ' ')
-				{
-					valueString.erase(valueString.begin() + i);
-					goto begin;
-				}
-				else
-				{
-					break;
-				}
-			}
 		}
 		else
 		{

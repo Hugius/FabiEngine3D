@@ -145,7 +145,7 @@ vector<string> FabiEngine3D::terrainEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_terrainEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_terrainEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

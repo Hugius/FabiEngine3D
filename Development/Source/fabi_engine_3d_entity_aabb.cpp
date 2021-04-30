@@ -186,7 +186,7 @@ vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		if (parentID == entity->getParentID() &&
 			((entity->getParentType() == AabbParentType::MODEL_ENTITY && modelEntity) ||
@@ -203,7 +203,7 @@ vector<string> FabiEngine3D::aabbEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

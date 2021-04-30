@@ -137,7 +137,7 @@ vector<string> FabiEngine3D::skyEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [keyID, entity] : _core->_skyEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

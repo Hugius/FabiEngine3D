@@ -22,7 +22,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	}
 
 	// Extract type, name, equal sign
-	string words[5] = { "", "", "", "", "" };
+	string words[3] = { "", "", "" };
 	unsigned int typeIndex = 0;
 	unsigned int wordIndex = 0;
 	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
@@ -144,19 +144,6 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				{
 					// Extract remaining text (value)
 					valueString = scriptLine.substr(scriptLine.find('=') + 2);
-					begin:
-					for (unsigned int i = 0; i < valueString.size(); i++)
-					{
-						if (valueString[i] == ' ')
-						{
-							valueString.erase(valueString.begin() + i);
-							goto begin;
-						}
-						else
-						{
-							break;
-						}
-					}
 				}
 				else
 				{

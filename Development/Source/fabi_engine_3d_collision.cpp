@@ -32,7 +32,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 	float closestDistance = (std::numeric_limits<float>::max)();
 
 	// Loop over AABB entities
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if parent entity is not level of detailed
 		if (!(entity->getParentType() == AabbParentType::MODEL_ENTITY &&
@@ -101,6 +101,7 @@ pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, 
 	else
 	{
 		auto entity = _core->_aabbEntityManager.getEntity(ID);
+
 		if (entity->isRaycastResponsive() && entity->isVisible())
 		{
 			// Prepare intersection box
@@ -142,8 +143,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const st
 		// Check if ID matches (a part of) hovered AABB ID
 		if (_hoveredAabbID.size() >= ID.size())
 		{
-			auto subString = _hoveredAabbID.substr(0, ID.size());
-			if (subString == ID && _hoveredAabbID != exception)
+			if (_hoveredAabbID.substr(0, ID.size()) == ID && _hoveredAabbID != exception)
 			{
 				return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 			}
@@ -159,14 +159,13 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const st
 		string closestBoxID = "";
 
 		// Loop over AABB entities
-		for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
+		for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 		{
 			if (entity->isRaycastResponsive() && entity->isVisible())
 			{
 				if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 				{
-					auto subString = entity->getID().substr(0, ID.size());
-					if (subString == ID && entity->getID() != exception) // If entity matches ID
+					if (entity->getID().substr(0, ID.size()) == ID && entity->getID() != exception) // If entity matches ID
 					{
 						// Calculate box left bottom (LB) and right top (RT)
 						Vec3 lb, rt;
@@ -205,7 +204,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const st
 
 const string FabiEngine3D::collision_checkCameraWithAny()
 {
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getCollisionDirection() != Direction::NONE)
 		{
@@ -246,13 +245,12 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 	}
 
 	// Loop over AABB entities
-	for (auto [keyID, other] : _core->_aabbEntityManager.getEntities())
+	for (const auto& [keyID, other] : _core->_aabbEntityManager.getEntities())
 	{
 		if (other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
 		{
 			// Check if entity does not match ID
-			auto subString = other->getID().substr(0, otherID.size());
-			if (subString != otherID)
+			if (other->getID().substr(0, otherID.size()) != otherID)
 			{
 				continue;
 			}
@@ -317,17 +315,17 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 
 const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 {
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	// Loop over AABB entities
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		// Check if collided
+		if (entity->getCollisionDirection() != Direction::NONE)
 		{
-			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID) // If entity matches ID
+			// Check if entity ID is at least the size of group ID
+			if (entity->getID().size() >= ID.size())
 			{
-				auto direction = entity->getCollisionDirection(); // Calculate direction
-
-				// True if collides
-				if (direction != Direction::NONE)
+				// Check if entity matches ID
+				if (entity->getID().substr(0, ID.size()) == ID)
 				{
 					return entity->getID();
 				}
@@ -346,7 +344,8 @@ bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Di
 
 bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 {
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	// Loop over AABB entities
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		if (direction == entity->getCollisionDirection())
 		{
@@ -359,15 +358,17 @@ bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 
 bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
 {
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	// Loop over AABB entities
+	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		// Check if direction is the same
+		if (direction == entity->getCollisionDirection())
 		{
-			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID) // If entity matches ID
+			// Check if entity ID is at least the size of group ID
+			if (entity->getID().size() >= ID.size())
 			{
-				// Return direction if collides
-				if (direction == entity->getCollisionDirection())
+				// If entity matches ID
+				if (entity->getID().substr(0, ID.size()) == ID)
 				{
 					return true;
 				}

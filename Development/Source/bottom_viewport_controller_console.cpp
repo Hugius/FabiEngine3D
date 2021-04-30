@@ -73,7 +73,7 @@ void BottomViewportController::_updateConsoleScrolling()
 
 void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
-	//Temporary values
+	// Temporary values
 	auto window = _gui.getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 	const float timePartOffset = CHAR_SIZE.x * static_cast<float>(TIME_PART_LENGTH) * 2.0f; // Offset from time part

@@ -3,35 +3,51 @@
 void ScriptInterpreter::_processVariableCreation(const string& scriptLine, ScriptVariableScope scope)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
 	string typeString = "";
 	string nameString = "";
 	string equalSignString = "";
 	string valueString = "";
 	bool isConstant = false;
 
-	// Extract GLOB keyword
+	// Extract optional CONST keyword
 	if (scope == ScriptVariableScope::GLOBAL)
 	{
-		string keyword;
-		iss >> keyword;
-	}
-
-	// Extract CONST keyword
-	string possibleConstKeyword;
-	iss >> possibleConstKeyword;
-	isConstant = (possibleConstKeyword == "CONST");
-
-	// Extract other variable data
-	if (isConstant)
-	{
-		iss >> typeString >> nameString >> equalSignString;
+		string possibleConstKeyword = scriptLine.substr(GLOBAL_KEYWORD.size(), CONST_KEYWORD.size() + 2);
+		isConstant = (possibleConstKeyword == (" " + CONST_KEYWORD + " "));
 	}
 	else
 	{
-		typeString = possibleConstKeyword;
-		iss >> nameString >> equalSignString;
+		string possibleConstKeyword = scriptLine.substr(0, CONST_KEYWORD.size() + 1);
+		isConstant = (possibleConstKeyword == (CONST_KEYWORD + " "));
 	}
+
+	// Extract type, name, equal sign
+	string words[5] = { "", "", "", "", "" };
+	unsigned int typeIndex = 0;
+	unsigned int wordIndex = 0;
+	typeIndex += static_cast<unsigned int>((scope == ScriptVariableScope::GLOBAL) ? (GLOBAL_KEYWORD.size() + 1) : 0);
+	typeIndex += static_cast<unsigned int>(isConstant ? (CONST_KEYWORD.size() + 1) : 0);
+	for (auto& c : scriptLine.substr(typeIndex))
+	{
+		if (c == ' ') // Current word ended
+		{
+			// Next word
+			wordIndex++;
+
+			// Check if words extracted
+			if (wordIndex == 3)
+			{
+				break;
+			}
+		}
+		else // Add to word
+		{
+			words[wordIndex] += c;
+		}
+	}
+	typeString = words[0];
+	nameString = words[1];
+	equalSignString = words[2];
 
 	// Check if variable type is missing
 	if (typeString.empty())

@@ -174,10 +174,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ")
 		{
-			// Determine scriptname to execute and current script type
-			std::istringstream iss(scriptLineText);
-			string scriptToExecute;
-			iss >> scriptToExecute >> scriptToExecute;
+			// Determine scriptname to execute
+			string scriptToExecute = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
 
 			// Check if script is of the same type
 			if 

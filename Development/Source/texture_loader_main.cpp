@@ -157,7 +157,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 
 	// Load font
 	auto it = _fontCache.find(fontPath);
-	if (it == _fontCache.end()) //Not in map (yet)
+	if (it == _fontCache.end()) // Not in map (yet)
 	{
 		// Try to load font
 		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
@@ -177,7 +177,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 		}
 	}
 
-	return it->second; //Cache texture
+	return it->second; // Cache texture
 }
 
 GLuint TextureLoader::_loadText(const string& textContent, const string& fontPath)

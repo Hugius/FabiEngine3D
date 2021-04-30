@@ -80,24 +80,24 @@ private:
 	template<typename T, typename...Rest> 
 	inline static void _printPrefix(MessageType type, T first, Rest&&...rest)
 	{
-		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); //Console access
+		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
 		std::ostringstream oss; // For message stack
 
-		//Current time
+		// Current time
 		char timeBuffer[64];
 		auto t = std::time(nullptr);
 		auto foo = *std::localtime(&t);
 		std::strftime(timeBuffer, 64, "%H:%M:%S", &foo);
 
-		SetConsoleTextAttribute(console, 6); //White
+		SetConsoleTextAttribute(console, 6); // White
 		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
 		oss << "[" + _level_string[static_cast<int>(type)] + "]";
-		SetConsoleTextAttribute(console, 12); //Red
+		SetConsoleTextAttribute(console, 12); // Red
 		std::cout << "[" << timeBuffer << "]";
 		oss << "[" << timeBuffer << "]";
-		SetConsoleTextAttribute(console, 7); //Yellow
+		SetConsoleTextAttribute(console, 7); // Yellow
 
-		//Proper indentation
+		// Proper indentation
 		if (type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
 		{
 			std::cout << "> ";

@@ -3,18 +3,38 @@
 void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
-	string keyword = "";
 	string nameString = "";
 	string typeString = "";
 
-	// Extract data
-	iss >> keyword >> nameString >> typeString;
+	// Extract name
+	for (const auto& c : scriptLine.substr(CASTING_KEYWORD.size() + 1))
+	{
+		if (c == ' ')
+		{
+			break;
+		}
+		else
+		{
+			nameString += c;
+		}
+	}
 
 	// Check if variable exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("variable not existing!");
+		return;
+	}
+
+	// Check if type is present
+	if (scriptLine.size() >= (CASTING_KEYWORD.size() + nameString.size() + 3))
+	{
+		// Extract remaining text (type)
+		typeString = scriptLine.substr(CASTING_KEYWORD.size() + nameString.size() + 2);
+	}
+	else
+	{
+		_throwScriptError("type missing!");
 		return;
 	}
 
@@ -32,13 +52,6 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	if (variable.isConstant())
 	{
 		_throwScriptError("constant variables cannot be typecasted!");
-		return;
-	}
-
-	// Check if type is not empty
-	if (typeString.empty())
-	{
-		_throwScriptError("no new type found!");
 		return;
 	}
 
@@ -138,19 +151,12 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 		_throwScriptError("variable cannot be typecasted: wrong type!");
 		return;
 	}
-
-	// No characters allowed after variable arithmetic
-	string temp;
-	if ((iss >> temp) || scriptLine.back() == ' ')
-	{
-		_throwScriptError("invalid syntax!");
-		return;
-	}
 }
 
 bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
 {
-	return (_localVariables[_executionDepth].find(variableID) != _localVariables[_executionDepth].end());
+	auto& variables = _localVariables[_executionDepth];
+	return (variables.find(variableID) != variables.end());
 }
 
 bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID)
@@ -160,9 +166,10 @@ bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID)
 
 ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 {
-	auto it = _localVariables[_executionDepth].find(variableID);
+	auto& variables = _localVariables[_executionDepth];
+	auto it = variables.find(variableID);
 
-	if (it != _localVariables[_executionDepth].end())
+	if (it != variables.end())
 	{
 		return it->second;
 	}

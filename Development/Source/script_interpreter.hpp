@@ -53,15 +53,15 @@ private:
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 
 	// If statement functions
-	bool _checkConditionString(string conditionString);
-	bool _validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
-	bool _compareValues(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
+	bool _checkConditionString(const string& conditionString);
+	bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
+	bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 
 	// List functions
 	bool _validateListIndex(ScriptVariable& list, unsigned int index);
 	bool _validateListValueAmount(const vector<ScriptValue>& values, unsigned int amount);
 	bool _validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
-	vector<ScriptValue> _extractValuesFromListString(string listString);
+	vector<ScriptValue> _extractValuesFromListString(const string& listString);
 	void _processListPush(const string& scriptLine);
 	void _processListPull(const string& scriptLine);
 

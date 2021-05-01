@@ -3,13 +3,33 @@
 void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
 	string operatorString = "";
 	string nameString = "";
 	string valueString = "";
 
-	// Extract data
-	iss >> operatorString >> nameString;
+	// Extract operator & name
+	string words[2] = { "", "" };
+	unsigned int wordIndex = 0;
+	for (const auto& c : scriptLine)
+	{
+		if (c == ' ') // Current word ended
+		{
+			// Next word
+			wordIndex++;
+
+			// Check if words extracted
+			if (wordIndex == 2)
+			{
+				break;
+			}
+		}
+		else // Add to word
+		{
+			words[wordIndex] += c;
+		}
+	}
+	operatorString = words[0];
+	nameString = words[1];
 
 	// Check if variable name is missing
 	if (nameString.empty())
@@ -21,7 +41,17 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Only extract value if not negating
 	if (operatorString != NEGATION_KEYWORD)
 	{
-		iss >> valueString;
+		// Check if value is present
+		if (scriptLine.size() >= (operatorString.size() + nameString.size() + 3))
+		{
+			// Extract remaining text (value)
+			valueString = scriptLine.substr(operatorString.size() + nameString.size() + 2);
+		}
+		else
+		{
+			_throwScriptError("value missing!");
+			return;
+		}
 	}
 
 	// Check if valid arithmetic keyword
@@ -392,13 +422,5 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			_throwScriptError("arithmetic value not applicable to this variable!");
 			return;
 		}
-	}
-
-	// No characters allowed after variable arithmetic
-	string temp;
-	if (iss >> temp || scriptLine.back() == ' ')
-	{
-		_throwScriptError("invalid syntax!");
-		return;
 	}
 }

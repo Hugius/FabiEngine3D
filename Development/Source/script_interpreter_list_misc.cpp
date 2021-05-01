@@ -54,15 +54,21 @@ bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& value
 void ScriptInterpreter::_processListPush(const string& scriptLine)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
-	string keyword = "";
 	string nameString = "";
 	string valueString = "";
-	string elementBuild = "";
-	unsigned int elementsFound = 0;
 
-	// Extract text parts
-	iss >> keyword >> nameString;
+	// Extract name
+	for (const auto& c : scriptLine.substr(PUSHING_KEYWORD.size() + 1))
+	{
+		if (c == ' ')
+		{
+			break;
+		}
+		else
+		{
+			nameString += c;
+		}
+	}
 
 	// Check if list name is missing
 	if (nameString.empty())
@@ -71,29 +77,16 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		return;
 	}
 
-	// Extract remaining text (value)
-	for (const auto& c : scriptLine)
+	// Check if value is present
+	if (scriptLine.size() >= (PUSHING_KEYWORD.size() + nameString.size() + 3))
 	{
-		if (c == ' ' && elementBuild.empty() && valueString.empty()) // Useless whitespace
-		{
-			continue;
-		}
-		else if (elementsFound < 2) // Keyword & name
-		{
-			if (c == ' ') // Whitespace
-			{
-				elementsFound++;
-				elementBuild.clear();
-			}
-			else
-			{
-				elementBuild += c;
-			}
-		}
-		else // Value
-		{
-			valueString += c;
-		}
+		// Extract remaining text (value)
+		valueString = scriptLine.substr(PUSHING_KEYWORD.size() + nameString.size() + 2);
+	}
+	else
+	{
+		_throwScriptError("value missing!");
+		return;
 	}
 
 	// Check if list exists
@@ -243,13 +236,21 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 void ScriptInterpreter::_processListPull(const string& scriptLine)
 {
 	// Temporary values
-	std::istringstream iss(scriptLine);
-	string keyword = "";
 	string nameString = "";
 	string indexString = "";
 
-	// Extract text parts
-	iss >> keyword >> nameString >> indexString;
+	// Extract name
+	for (const auto& c : scriptLine.substr(PULLING_KEYWORD.size() + 1))
+	{
+		if (c == ' ')
+		{
+			break;
+		}
+		else
+		{
+			nameString += c;
+		}
+	}
 
 	// Check if variable name is missing
 	if (nameString.empty())
@@ -258,8 +259,13 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
-	// Check if list index is missing
-	if (indexString.empty())
+	// Check if list index is present
+	if (scriptLine.size() >= (PULLING_KEYWORD.size() + nameString.size() + 3))
+	{
+		// Extract remaining text (value)
+		indexString = scriptLine.substr(PULLING_KEYWORD.size() + nameString.size() + 2);
+	}
+	else
 	{
 		_throwScriptError("list index missing!");
 		return;
@@ -319,12 +325,4 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 
 	// Pull item from list by index
 	listVariable.removeValue(index);
-	
-	// No characters allowed after variable arithmetic
-	string temp;
-	if (iss >> temp || scriptLine.back() == ' ')
-	{
-		_throwScriptError("invalid syntax!");
-		return;
-	}
 }

@@ -147,7 +147,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				}
 				else
 				{
-					_throwScriptError("invalid value syntax!");
+					_throwScriptError("value missing!");
 					return;
 				}
 

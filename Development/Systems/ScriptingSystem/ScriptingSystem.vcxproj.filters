@@ -46,9 +46,6 @@
     <Filter Include="Execution\Interpreter\List">
       <UniqueIdentifier>{bfddae24-cac4-4b45-bdce-240a9ee906cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Execution\Interpreter\Condition">
-      <UniqueIdentifier>{73e33946-97a8-40b0-9837-aceee869a5e6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\script.cpp">
@@ -169,7 +166,7 @@
       <Filter>Execution\Interpreter\List</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_condition.cpp">
-      <Filter>Execution\Interpreter\Condition</Filter>
+      <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

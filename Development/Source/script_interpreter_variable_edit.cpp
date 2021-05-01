@@ -51,7 +51,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		}
 		else
 		{
-			_throwScriptError("invalid value syntax!");
+			_throwScriptError("value missing!");
 			return;
 		}
 	}

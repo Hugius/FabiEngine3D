@@ -5,12 +5,10 @@
 #include <sstream>
 #include <filesystem>
 
-using std::to_string;
-
 Tools::Tools() :
-	_generator(std::random_device{}())
+	_generator(static_cast<unsigned int>(time(nullptr)))
 {
-	srand((unsigned int)time(NULL));
+	
 }
 
 const string Tools::getRootDirectory()
@@ -37,19 +35,14 @@ const string Tools::getRootDirectory()
 
 int Tools::getRandomInt(int min, int max)
 {
-	std::uniform_int_distribution<> dist(min, max);
+	std::uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);
 }
 
 float Tools::getRandomFloat(float min, float max)
-{
-	std::uniform_real_distribution<> dist(static_cast<float>(min), static_cast<float>(max));
-	return static_cast<float>(dist(_generator));
-
-	// 2 different approaches, check which is the best <---
-	
-	//float randomNumber = min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
-	//return randomNumber;
+{	
+	std::uniform_real_distribution<float> dist(min, max);
+	return dist(_generator);
 }
 
 int Tools::DWORD_to_int(DWORD dword)

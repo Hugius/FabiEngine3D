@@ -76,8 +76,14 @@ void SceneEditor::_updateSkyMenu()
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
 				if (selectedButtonID != "")
 				{
+					// Delete old
+					if (_fe3d.skyEntity_isExisting(selectedButtonID))
+					{
+						_fe3d.skyEntity_delete(selectedButtonID);
+					}
+
+					// Create new
 					_currentSkyID = selectedButtonID;
-					_fe3d.skyEntity_delete(_currentSkyID);
 					_copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("skyList");
 				}
@@ -140,8 +146,14 @@ void SceneEditor::_updateTerrainMenu()
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
 				if (selectedButtonID != "")
 				{
+					// Delete old
+					if (_fe3d.terrainEntity_isExisting(selectedButtonID))
+					{
+						_fe3d.terrainEntity_delete(selectedButtonID);
+					}
+
+					// Create new
 					_currentTerrainID = selectedButtonID;
-					_fe3d.terrainEntity_delete(_currentTerrainID);
 					_copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 				}
@@ -214,8 +226,14 @@ void SceneEditor::_updateWaterMenu()
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("waterList");
 				if (selectedButtonID != "")
 				{
+					// Delete old
+					if (_fe3d.waterEntity_isExisting(selectedButtonID))
+					{
+						_fe3d.waterEntity_delete(selectedButtonID);
+					}
+
+					// Create new
 					_currentWaterID = selectedButtonID;
-					_fe3d.waterEntity_delete(_currentWaterID);
 					_copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
 				}

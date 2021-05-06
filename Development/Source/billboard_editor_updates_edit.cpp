@@ -216,6 +216,7 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (playing) // Only if animation is already playing
 					{
+						_fe3d.billboardEntity_stopAnimation(_currentBillboardID);
 						_fe3d.billboardEntity_startAnimation(_currentBillboardID, -1);
 					}
 				}

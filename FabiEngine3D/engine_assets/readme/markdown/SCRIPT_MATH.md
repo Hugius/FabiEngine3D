@@ -17,23 +17,15 @@
   Returns the result of **base** to the power of **exponent**.
 - `math:pow`(`DEC` base, `DEC` exponent) ---> `DEC`  
   Returns the result of **base** to the power of **exponent**.
-- `math:min`(`INT` first, `INT` second) ---> `INT`  
+- `math:min`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`  
   Returns the lower value of **first** and **second**.
-- `math:min`(`DEC` first, `DEC` second) ---> `DEC`  
-  Returns the lower value of **first** and **second**.
-- `math:max`(`INT` first, `INT` second) ---> `INT`  
+- `math:max`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`  
   Returns the higher value of **first** and **second**.
-- `math:max`(`DEC` first, `DEC` second) ---> `DEC`  
-  Returns the higher value of **first** and **second**.
-- `math:clamp`(`INT` value, `INT` min, `INT` max) ---> `INT`  
-  Returns the clamped **value** between **min** and **max**.
-- `math:clamp`(`DEC` value, `DEC` min, `DEC` max) ---> `DEC`  
+- `math:clamp`(`INT`/`DEC` value, `INT`/`DEC` min, `INT`/`DEC` max) ---> `INT`/`DEC`  
   Returns the clamped **value** between **min** and **max**.
 - `math:sqrt`(`DEC` value) ---> `DEC`  
   Returns the square root of **value**.
-- `math:abs`(`INT` value) ---> `INT`  
-  Returns the absolute value of **value**.
-- `math:abs`(`DEC` value) ---> `DEC`  
+- `math:abs`(`INT`/`DEC` value) ---> `INT`/`DEC`  
   Returns the absolute value of **value**.
 - `math:get_pi`() ---> `DEC`  
 - Returns a high-precision value of pi.

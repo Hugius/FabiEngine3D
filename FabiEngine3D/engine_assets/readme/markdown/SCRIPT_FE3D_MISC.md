@@ -43,6 +43,8 @@
   Loads a customly saved scene with **ID** into the game. Any previously loaded scene will be cleared.
 - `fe3d:scene_delete_custom`(`STR` ID) ---> `NONE`  
   Deletes customly saved scene with **ID**.
+- `fe3d:cursor_center`() ---> `NONE`  
+  Moves the cursor position to the middle of the screen.
 - `fe3d:cursor_show`() ---> `NONE`  
   Makes mouse cursor visible.
 - `fe3d:cursor_hide`() ---> `NONE`  

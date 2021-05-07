@@ -9,8 +9,6 @@
   Returns the counted total of **value** characters and returns the amount.
 - `misc:get_string_part`(`STR` value, `INT` index, `INT` count) ---> `STR`  
   Returns a part from **value**. Example: **value** = "test", **index** = 1, **count** = 2, returns: "est".
-- `misc:get_unique_integer`(`INT` min, `INT` max) ---> `INT`  
-  Returns a unique random integer between **min** and **max**.
 - `misc:get_random_integer`(`INT` min, `INT` max) ---> `INT`  
   Returns a random integer between **min** and **max**.
 - `misc:get_random_decimal`(`DEC` min, `DEC` max) ---> `DEC`  

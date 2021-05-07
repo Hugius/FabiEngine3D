@@ -41,7 +41,5 @@
   Returns true if first person camera view is enabled.
 - `fe3d:camera_set_cursor_speed`(`DEC` speed) ---> `NONE`  
   Sets the **speed** at which the cursor moves.
-- `fe3d:camera_center_cursor`() ---> `NONE`  
-  Moves the cursor position to the middle of the screen.
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.

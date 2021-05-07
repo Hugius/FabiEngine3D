@@ -34,8 +34,8 @@
 - **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
 ### Miscellaneous
 - **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
-- Text entities are rendered **on top of** image entities, because of the rendering order.
-- Centering the cursor might take **1 frame** (or more) in time, because it will **not** be centered instantly.
+- **Text** entities are rendered on top of **image** entities, because of the **rendering order**.
+- **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

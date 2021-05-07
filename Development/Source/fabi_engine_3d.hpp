@@ -54,8 +54,6 @@ public:
 	void camera_disableLookatView();
 	void camera_enableFirstPersonView();
 	void camera_disableFirstPersonView();
-	void camera_enableFreeMovement();
-	void camera_disableFreeMovement();
 	void camera_translateFollowX(float speed);
 	void camera_translateFollowZY(float speed);
 	void camera_translateFollowZ(float speed);
@@ -71,12 +69,10 @@ public:
 	void camera_setNearDistance(float nearZ);
 	void camera_setFarDistance(float farZ);
 	void camera_setMaxPitch(float pitch);
-	void camera_center();
 
 	// Camera interface - getters
 	bool camera_isLookatViewEnabled();
 	bool camera_isFirstPersonViewEnabled();
-	bool camera_isFreeMovementEnabled();
 	Vec3 camera_getPosition();
 	Vec3 camera_getLookatPosition();
 	float camera_getFOV();
@@ -790,6 +786,7 @@ public:
 	void misc_disableDebugRendering();
 	void misc_enableTerrainRaycasting(float distance, float precision);
 	void misc_disableTerrainRaycasting();
+	void misc_centerCursor();
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_setCursorPosition(Ivec2 pos);
@@ -815,8 +812,7 @@ public:
 	void misc_setMaxAudioChannels(unsigned int count);
 
 	// Miscellaneous interface - getters
-	int misc_getUniqueInt(int min, int max);
-	int misc_getRandomInt(int min, int max);
+	int misc_getRandomInteger(int min, int max);
 	int misc_getMsTimeSinceEpoch();
 	int misc_getTriangleCount();
 	int misc_getMaxChannels();

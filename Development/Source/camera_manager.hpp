@@ -31,15 +31,13 @@ public:
 	void disableLookatView();
 	void enableFirstPersonView();
 	void disableFirstPersonView();
-	void enableFreeMovement();
-	void disableFreeMovement();
 	void translateFollowX(float speed);
 	void translateFollowZY(float speed);
 	void translateFollowZ(float speed);
 	void translate(Vec3 translation);
 	void invertYaw();
 	void invertPitch();
-	void center();
+	void centerCursor();
 
 	// Getters
 	const Matrix44 & getViewMatrix()        const;
@@ -58,7 +56,6 @@ public:
 	const float  getMaxPitch()				const;
 	const bool   isLookatViewEnabled()		const;
 	const bool   isFirstPersonViewEnabled() const;
-	const bool   isFreeMovementEnabled()	const;
 
 private:
 	// Instances
@@ -94,6 +91,5 @@ private:
 	// Booleans
 	bool _isLookatViewEabled	   = false;
 	bool _isFirstPersonViewEnabled = false;
-	bool _isFreeMovementEnabled    = true;
-	bool _mustCenter               = false;
+	bool _mustCenterCursor         = false;
 };

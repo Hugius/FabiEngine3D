@@ -6,24 +6,7 @@
 #include <chrono>
 #include <filesystem>
 
-int FabiEngine3D::misc_getUniqueInt(int min, int max)
-{
-	static vector<int> uniqueInts;
-	int randomInt = misc_getRandomInt(min, max);
-
-	// Check if already existing
-	if (std::find(uniqueInts.begin(), uniqueInts.end(), randomInt) != uniqueInts.end())
-	{
-		return misc_getUniqueInt(min, max);
-	}
-	else
-	{
-		uniqueInts.push_back(randomInt);
-		return randomInt;
-	}
-}
-
-int FabiEngine3D::misc_getRandomInt(int min, int max)
+int FabiEngine3D::misc_getRandomInteger(int min, int max)
 {
 	return Tools::getInst().getRandomInt(min, max);
 }

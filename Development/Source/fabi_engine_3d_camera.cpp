@@ -32,16 +32,6 @@ void FabiEngine3D::camera_disableFirstPersonView()
 	_core->_cameraManager.disableFirstPersonView();
 }
 
-void FabiEngine3D::camera_enableFreeMovement()
-{
-	_core->_cameraManager.enableFreeMovement();
-}
-
-void FabiEngine3D::camera_disableFreeMovement()
-{
-	_core->_cameraManager.disableFreeMovement();
-}
-
 void FabiEngine3D::camera_translateFollowX(float speed)
 {
 	_core->_cameraManager.translateFollowX(speed);
@@ -117,11 +107,6 @@ void FabiEngine3D::camera_setMaxPitch(float pitch)
 	_core->_cameraManager.setMaxPitch(pitch);
 }
 
-void FabiEngine3D::camera_center()
-{
-	_core->_cameraManager.center();
-}
-
 float FabiEngine3D::camera_getYaw()
 {
 	return _core->_cameraManager.getYaw();
@@ -185,9 +170,4 @@ bool FabiEngine3D::camera_isLookatViewEnabled()
 bool FabiEngine3D::camera_isFirstPersonViewEnabled()
 {
 	return _core->_cameraManager.isFirstPersonViewEnabled();
-}
-
-bool FabiEngine3D::camera_isFreeMovementEnabled()
-{
-	return _core->_cameraManager.isFreeMovementEnabled();
 }

@@ -5,32 +5,23 @@
 
 void CameraManager::translateFollowX(float speed)
 { 
-	if (_isFreeMovementEnabled)
-	{
-		_position += (_right * speed);
-	}
+	_position += (_right * speed);
 }
 
 void CameraManager::translateFollowZ(float speed)
 {
-	if (_isFreeMovementEnabled)
-	{
-		Vec3 tempFront = _front;
-		tempFront.x = cos(Math::degreesToRadians(_yaw));
-		tempFront.z = sin(Math::degreesToRadians(_yaw));
-		_position.x += (tempFront.x * speed);
-		_position.z += (tempFront.z * speed);
-	}
+	Vec3 tempFront = _front;
+	tempFront.x = cos(Math::degreesToRadians(_yaw));
+	tempFront.z = sin(Math::degreesToRadians(_yaw));
+	_position.x += (tempFront.x * speed);
+	_position.z += (tempFront.z * speed);
 }
 
 void CameraManager::translateFollowZY(float speed)
 {
-	if (_isFreeMovementEnabled)
-	{
-		_position.x += (_front.x * speed);
-		_position.y += (_front.y * speed);
-		_position.z += (_front.z * speed);
-	}
+	_position.x += (_front.x * speed);
+	_position.y += (_front.y * speed);
+	_position.z += (_front.z * speed);
 }
 
 void CameraManager::enableLookatView()
@@ -53,7 +44,7 @@ void CameraManager::enableFirstPersonView()
 		// Only center first time
 		if (!_isFirstPersonViewEnabled)
 		{
-			_mustCenter = true;
+			_mustCenterCursor = true;
 		}
 
 		_isFirstPersonViewEnabled = true;
@@ -63,16 +54,6 @@ void CameraManager::enableFirstPersonView()
 void CameraManager::disableFirstPersonView()
 {
 	_isFirstPersonViewEnabled = false;
-}
-
-void CameraManager::enableFreeMovement()
-{
-	_isFreeMovementEnabled = true;
-}
-
-void CameraManager::disableFreeMovement()
-{
-	_isFreeMovementEnabled = false;
 }
 
 void CameraManager::setFOV(float value)
@@ -178,11 +159,6 @@ const bool CameraManager::isFirstPersonViewEnabled() const
 	return _isFirstPersonViewEnabled;
 }
 
-const bool CameraManager::isFreeMovementEnabled() const
-{
-	return _isFreeMovementEnabled;
-}
-
 const bool CameraManager::isLookatViewEnabled() const
 {
 	return _isLookatViewEabled;
@@ -190,18 +166,12 @@ const bool CameraManager::isLookatViewEnabled() const
 
 void CameraManager::translate(Vec3 translation)
 {
-	if (_isFreeMovementEnabled)
-	{
-		_position += translation;
-	}
+	_position += translation;
 }
 
 void CameraManager::setPosition(Vec3 value)
 {
-	if (_isFreeMovementEnabled)
-	{
-		_position = value;
-	}
+	_position = value;
 }
 
 void CameraManager::setLookatPosition(Vec3 value)
@@ -219,9 +189,9 @@ void CameraManager::invertPitch()
 	_pitch = -_pitch;
 }
 
-void CameraManager::center()
+void CameraManager::centerCursor()
 {
-	_mustCenter = true;
+	_mustCenterCursor = true;
 }
 
 const Matrix44 & CameraManager::getViewMatrix() const

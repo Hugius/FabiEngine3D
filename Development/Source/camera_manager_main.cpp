@@ -37,8 +37,7 @@ void CameraManager::reset()
 	// Booleans
 	_isLookatViewEabled = false;
 	_isFirstPersonViewEnabled = false;
-	_isFreeMovementEnabled = true;
-	_mustCenter = false;
+	_mustCenterCursor = false;
 }
 
 void CameraManager::update(Ivec2 lastCursorPosition)
@@ -46,29 +45,26 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	// Temporary values
 	Ivec2 currenCursorPosition = _windowManager.getCursorPos();
 	const int left = Config::getInst().getVpPos().x;
-	const int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
-	const int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
 
 	// Update cursor centering
-	if (_mustCenter)
+	if (_mustCenterCursor)
 	{
 		// Check if cursor reached center or cursor is moving
 		if (currenCursorPosition == Ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
 		{
-			_mustCenter = false;
+			_mustCenterCursor = false;
 		}
 		else // Spawn mouse in middle of screen
 		{
 			_windowManager.setCursorPos({ xMiddle, yMiddle });
 		}
-
 	}
 
 	// Update first person camera
-	if (_isFirstPersonViewEnabled && !_mustCenter)
+	if (_isFirstPersonViewEnabled && !_mustCenterCursor)
 	{
 		// Offset between current mouse position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);

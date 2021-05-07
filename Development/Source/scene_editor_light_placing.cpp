@@ -38,7 +38,7 @@ void SceneEditor::_updateLightPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight
-				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+				begin: int randomSerial = _fe3d.misc_getRandomInteger(0, INT_MAX);
 					string newID = "pointlight_" + to_string(randomSerial);
 
 					// Check if ID not already exists

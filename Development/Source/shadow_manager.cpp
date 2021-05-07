@@ -3,7 +3,7 @@
 
 ShadowManager::ShadowManager()
 {
-	_passedFrames = (std::numeric_limits<unsigned int>::max)();
+	_passedFrames = INT_MAX;
 }
 
 void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
@@ -18,7 +18,7 @@ void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, 
 
 void ShadowManager::unloadShadows()
 {
-	_passedFrames = (std::numeric_limits<unsigned int>::max)();
+	_passedFrames = INT_MAX;
 	_eye = Vec3(0.0f);
 	_center = Vec3(0.0f);
 	_size = 0.0f;

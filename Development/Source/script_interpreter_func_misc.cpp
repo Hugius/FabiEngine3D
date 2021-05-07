@@ -145,20 +145,6 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 					}
 				}
-				else if (functionName == "misc:get_unique_integer")
-				{
-					auto types =
-					{
-						ScriptValueType::INTEGER, // Min
-						ScriptValueType::INTEGER  // Max
-					};
-
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-					{
-						auto result = _fe3d.misc_getUniqueInt(arguments[0].getInteger(), arguments[1].getInteger());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
-					}
-				}
 				else if (functionName == "misc:get_random_integer")
 				{
 					auto types =
@@ -169,7 +155,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						auto result = _fe3d.misc_getRandomInt(arguments[0].getInteger(), arguments[1].getInteger());
+						auto result = _fe3d.misc_getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 					}
 				}

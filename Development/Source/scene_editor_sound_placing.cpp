@@ -53,7 +53,7 @@ void SceneEditor::_updateSoundPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new soundcaster
-				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+				begin: int randomSerial = _fe3d.misc_getRandomInteger(0, INT_MAX);
 					string newID = _currentPreviewSoundID.substr(1) + "_" + to_string(randomSerial);
 
 					// Check if ID not already exists

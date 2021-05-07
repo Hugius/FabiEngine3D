@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	else if (functionName == "fe3d:graphics_get_dof_blur_distance")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{`
+		{
 			auto result = _fe3d.gfx_getDofBlurDistance();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}

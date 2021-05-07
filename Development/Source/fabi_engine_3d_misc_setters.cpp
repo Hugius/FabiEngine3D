@@ -73,6 +73,11 @@ void FabiEngine3D::misc_disableTerrainRaycasting()
 	_core->_rayCaster.setTerrainPointingEnabled(false);
 }
 
+void FabiEngine3D::misc_centerCursor()
+{
+	_core->_cameraManager.centerCursor();
+}
+
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_rayCaster.update(pos);

@@ -105,7 +105,7 @@ void ScriptExecutor::unpause()
 		}
 
 		// Resume game logic
-		_fe3d.camera_center();
+		_fe3d.misc_centerCursor();
 		_fe3d.soundEntity_resumeAll();
 		_fe3d.music_resume();
 		_fe3d.engine_resume();

@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 	else if (functionName == "fe3d:graphics_get_dof_blur_distance")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
+		{`
 			auto result = _fe3d.gfx_getDofBlurDistance();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
@@ -203,8 +203,8 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableShadows(_fe3d.gfx_getShadowEye(), _fe3d.gfx_getShadowCenter(), _fe3d.gfx_getShadowSize(),
-				_fe3d.gfx_getShadowReach(), _fe3d.gfx_getShadowLightness(), 
-				_fe3d.gfx_isShadowFollowingCamera(), _fe3d.gfx_isSoftShadowingEnabled());
+				_fe3d.gfx_getShadowReach(), _fe3d.gfx_getShadowLightness(), _fe3d.gfx_isShadowFollowingCamera(),
+				_fe3d.gfx_isSoftShadowingEnabled(), _fe3d.gfx_getShadowInterval());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -223,8 +223,8 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableShadows(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
-				_fe3d.gfx_getShadowCenter(), _fe3d.gfx_getShadowSize(), _fe3d.gfx_getShadowReach(),
-				_fe3d.gfx_getShadowLightness(), _fe3d.gfx_isShadowFollowingCamera(), _fe3d.gfx_isSoftShadowingEnabled());
+				_fe3d.gfx_getShadowCenter(), _fe3d.gfx_getShadowSize(), _fe3d.gfx_getShadowReach(), _fe3d.gfx_getShadowLightness(),
+				_fe3d.gfx_isShadowFollowingCamera(), _fe3d.gfx_isSoftShadowingEnabled(), _fe3d.gfx_getShadowInterval());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -644,7 +644,7 @@ public:
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();
-	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool followingCamera, bool softShadowing, int interval = 0);
+	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool followingCamera, bool softShadowing, int interval);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);

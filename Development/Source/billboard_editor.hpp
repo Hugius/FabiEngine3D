@@ -45,7 +45,7 @@ private:
 
 	// Floats
 	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
-	float _cameraRotationSpeed = 0.0f;
+	float _cameraAcceleration = 0.0f;
 	float _totalCameraRotation = 0.0f;
 
 	// Core

@@ -235,10 +235,10 @@ void BillboardEditor::_updateBillboardCamera()
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
-				_cameraRotationSpeed += rotationAcceleration;
+				_cameraAcceleration += rotationAcceleration;
 			}
-			_cameraRotationSpeed *= 0.975f;
-			_totalCameraRotation += _cameraRotationSpeed;
+			_cameraAcceleration *= 0.975f;
+			_totalCameraRotation += _cameraAcceleration;
 
 			// Calculate new camera position
 			float x = cameraDistance * sin(_totalCameraRotation);
@@ -254,6 +254,8 @@ void BillboardEditor::_updateBillboardCamera()
 			// Set default camera
 			_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
 			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
+			_totalCameraRotation = 0.0f;
+			_cameraAcceleration = 0.0f;
 		}
 	}
 }

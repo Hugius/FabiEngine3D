@@ -34,7 +34,9 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (screen->getButton("editScript")->isHovered())
 				{
-					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), _script.getAllScriptFileIDs());
+					auto IDs = _script.getAllScriptFileIDs();
+					std::sort(IDs.begin(), IDs.end());
+					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), IDs);
 				}
 				else if (screen->getButton("renameScript")->isHovered())
 				{

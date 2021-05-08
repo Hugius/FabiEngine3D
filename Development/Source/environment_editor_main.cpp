@@ -222,7 +222,7 @@ void EnvironmentEditor::unload()
 	_loadedTerrainIDs.clear();
 	_loadedWaterIDs.clear();
 	_currentEnvironmentType = EnvironmentType::NONE;
-	_cameraRotationSpeed = 0.0f;
+	_cameraAcceleration = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_currentSkyID = "";
 	_hoveredSkyID = "";

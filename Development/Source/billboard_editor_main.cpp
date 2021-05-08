@@ -131,7 +131,7 @@ void BillboardEditor::unload()
 	_isChoosingBillboard = false;
 	_isEditingBillboard = false;
 	_isRemovingBillboard = false;
-	_cameraRotationSpeed = 0.0f;
+	_cameraAcceleration = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_hoveredBillboardID = "";
 	_currentBillboardID = "";

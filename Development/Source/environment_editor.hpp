@@ -81,7 +81,7 @@ private:
 	bool _isEditorLoaded = false;
 	EnvironmentType _currentEnvironmentType = EnvironmentType::NONE;
 	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
-	float _cameraRotationSpeed = 0.0f;
+	float _cameraAcceleration = 0.0f;
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectID = "";
 	FabiEngine3D& _fe3d;

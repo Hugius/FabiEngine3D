@@ -181,12 +181,12 @@ void EnvironmentEditor::_updateWaterCamera()
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
-				_cameraRotationSpeed += rotationAcceleration;
+				_cameraAcceleration += rotationAcceleration;
 			}
 
 			// Apply camera smoothing & rotation
-			_cameraRotationSpeed *= 0.975f;
-			_totalCameraRotation += _cameraRotationSpeed;
+			_cameraAcceleration *= 0.975f;
+			_totalCameraRotation += _cameraAcceleration;
 
 			// Calculate new camera position
 			Vec3 waterPosition = _fe3d.waterEntity_getPosition(waterID);
@@ -199,6 +199,11 @@ void EnvironmentEditor::_updateWaterCamera()
 			_fe3d.camera_setPosition(Vec3(x, y, z));
 			_fe3d.camera_enableLookatView();
 			_fe3d.camera_setLookatPosition(waterPosition);
+		}
+		else
+		{
+			_totalCameraRotation = 0.0f;
+			_cameraAcceleration = 0.0f;
 		}
 	}
 }

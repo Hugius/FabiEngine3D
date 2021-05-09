@@ -849,7 +849,7 @@ public:
 	bool misc_isCursorInsideWindow();
 	bool misc_isDirectoryExisting(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
-	bool misc_checkInterval(const string& key, int frameCount);
+	bool misc_checkInterval(unsigned int frames);
 	bool misc_isRaycastPositionOnTerrainValid();
 	bool misc_isMillisecondTimerStarted();
 	vector<pair<string, int>> misc_getUpdateProfilingStatistics();

@@ -132,7 +132,7 @@ void ScriptEditor::_updateTextWriter()
 					// Check if single or fast new line action
 					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 
@@ -161,7 +161,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -185,7 +185,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -211,7 +211,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -233,7 +233,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_isSingleActionAllowed || _isContinuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+				if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 				{
 					_isSingleActionAllowed = false;
 
@@ -341,7 +341,7 @@ void ScriptEditor::_updateTextWriter()
 					// Check if single or fast remove
 					if (_isSingleActionAllowed || _isContinuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
+						if (_fe3d.misc_checkInterval(CONTINUOUS_TEXT_ACTION_INTERVAL) || _isSingleActionAllowed)
 						{
 							_isSingleActionAllowed = false;
 

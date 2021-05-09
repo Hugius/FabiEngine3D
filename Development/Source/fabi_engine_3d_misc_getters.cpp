@@ -313,29 +313,9 @@ bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 	return (isExisting && !misc_isDirectoryExisting(filePath));
 }
 
-bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
+bool FabiEngine3D::misc_checkInterval(unsigned int frames)
 {
-	static map<string, int> intervalMap;
-
-	// Check if key exists
-	if (intervalMap.find(key) != intervalMap.end())
-	{
-		// Check if passed frames is more than interval minimum
-		if ((_core->_timer.getPassedFrameCount() % intervalMap[key]) == 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	else
-	{
-		// Create new interval
-		intervalMap.insert(std::make_pair(key, frameCount));
-		return true;
-	}
+	return ((_core->_timer.getPassedFrameCount() % frames) == 0);
 }
 
 vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()

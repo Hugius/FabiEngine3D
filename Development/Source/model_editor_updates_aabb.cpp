@@ -1,5 +1,7 @@
 #include "model_editor.hpp"
 
+#include <algorithm>
+
 void ModelEditor::_updateModelEditingAabb()
 {
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -34,6 +36,7 @@ void ModelEditor::_updateModelEditingAabb()
 				{
 					name = name.substr(string(_currentModelID + "@").size());
 				}
+				std::sort(aabbNames.begin(), aabbNames.end());
 
 				// Show choicelist
 				_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", Vec2(-0.4f, 0.1f), aabbNames);

@@ -24,7 +24,6 @@
 ### Miscellaneous
 - Keyboard input
 - Mouse input
-- Controller input
 - Custom "FabScript" functional interpreted gameplay programming language.
 
 # Engine Interface

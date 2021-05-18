@@ -17,7 +17,7 @@ WindowManager::WindowManager()
 	// Make sure scaled monitors still show the correct resolution
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
-	// SDL stuff
+	// SDL2
 	Logger::throwInfo("Initializing SDL...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
@@ -25,7 +25,7 @@ WindowManager::WindowManager()
 		Logger::throwError(error.c_str());
 	}
 	
-	// Window stuff
+	// SDL_Window
 	Logger::throwInfo("Initializing window...");
 	_window = SDL_CreateWindow(
 		"FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
@@ -42,25 +42,23 @@ WindowManager::WindowManager()
 		Logger::throwError(reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
 	}
 
-	// Image stuff
+	// SDL_image
 	Logger::throwInfo("Initializing SDL_Image...");
-	int imgFlags = IMG_INIT_PNG;
-	if (!(IMG_Init(imgFlags) & imgFlags))
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
 		string error = "SDL_IMG could not be initialized:: " + string(IMG_GetError());
 		Logger::throwError(error.c_str());
 	}
 
-	// Text stuff
+	// SDL_ttf
 	Logger::throwInfo("Initializing SDL_TTF...");
-	TTF_Init();
 	if (TTF_Init() == -1)
 	{
 		string error = "SDL_TTF could not be initialized: " + string(TTF_GetError());
 		Logger::throwError(error.c_str());
 	}
 
-	// Audio stuff
+	// SDL_mixer
 	Logger::throwInfo("Initializing SDL_Mixer...");
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{

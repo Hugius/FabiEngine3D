@@ -537,7 +537,6 @@ public:
 	unsigned int imageEntity_getAnimationFramestep(const string& ID);
 	unsigned int imageEntity_getAnimationRowIndex(const string& ID);
 	unsigned int imageEntity_getAnimationColumnIndex(const string& ID);
-
 	vector<string> imageEntity_getAllIDs();
 
 	// Text entity interface - setters

@@ -43,6 +43,7 @@
 - You can **clear** the console output by pressing **C** when hovering the **console window**.
 ### Known issues
 - There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
+- If FabiEngine3D crashes with the error `"WASAPI can't find requested audio endpoint: Element not found."`, then you do not have an active audio device enablde or you have sound driver problems.
 ### Performance
 ![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **game's performance**.

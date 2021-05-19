@@ -165,6 +165,33 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
+				else if (functionName == "math:round")
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, round(arguments[0].getDecimal())));
+					}
+				}
+				else if (functionName == "math:floor")
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, floor(arguments[0].getDecimal())));
+					}
+				}
+				else if (functionName == "math:ceil")
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, ceil(arguments[0].getDecimal())));
+					}
+				}
 				else if (functionName == "math:clamp")
 				{
 					if (_validateListValueAmount(arguments, 3))

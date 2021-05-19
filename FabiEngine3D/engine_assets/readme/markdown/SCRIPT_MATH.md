@@ -21,6 +21,12 @@
   Returns the lower value of **first** and **second**.
 - `math:max`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`  
   Returns the higher value of **first** and **second**.
+- `math:round`(`DEC` value) ---> `DEC`  
+  Returns the rounded **value**.
+- `math:floor`(`DEC` value) ---> `DEC`  
+  Returns the floored **value**.
+- `math:ceil`(`DEC` value) ---> `DEC`  
+  Returns the ceiled **value**.
 - `math:clamp`(`INT`/`DEC` value, `INT`/`DEC` min, `INT`/`DEC` max) ---> `INT`/`DEC`  
   Returns the clamped **value** between **min** and **max**.
 - `math:sqrt`(`DEC` value) ---> `DEC`  

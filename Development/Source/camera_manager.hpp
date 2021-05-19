@@ -37,7 +37,7 @@ public:
 	void translate(Vec3 translation);
 	void invertYaw();
 	void invertPitch();
-	void centerCursor();
+	void notifyCursorCenter();
 
 	// Getters
 	const Matrix44 & getViewMatrix()        const;
@@ -92,4 +92,5 @@ private:
 	bool _isLookatViewEabled	   = false;
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor         = false;
+	bool _cursorIsBeingCentered	   = false;
 };

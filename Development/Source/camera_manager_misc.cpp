@@ -189,9 +189,9 @@ void CameraManager::invertPitch()
 	_pitch = -_pitch;
 }
 
-void CameraManager::centerCursor()
+void CameraManager::notifyCursorCenter()
 {
-	_mustCenterCursor = true;
+	_cursorIsBeingCentered = true;
 }
 
 const Matrix44 & CameraManager::getViewMatrix() const

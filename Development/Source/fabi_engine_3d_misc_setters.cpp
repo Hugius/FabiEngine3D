@@ -82,6 +82,9 @@ void FabiEngine3D::misc_centerCursor()
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
 	_core->_windowManager.setCursorPos({ xMiddle, yMiddle });
+
+	// Notify camera of centering
+	_core->_cameraManager.notifyCursorCenter();
 }
 
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)

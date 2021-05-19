@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::_updateMainSoundMenu()
 {
 	if (_isEditorLoaded)
@@ -27,7 +29,9 @@ void SceneEditor::_updateMainSoundMenu()
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->getScrollingList("soundcasters")->deleteButtons();
 
 					// Add every placed soundcaster name
-					for (auto& soundID : _fe3d.soundEntity_getAllIDs())
+					auto IDs = _fe3d.soundEntity_getAllIDs();
+					std::sort(IDs.begin(), IDs.end());
+					for (auto& soundID : IDs)
 					{
 						// Check if soundcaster is not a preview
 						if (soundID[0] != '@')

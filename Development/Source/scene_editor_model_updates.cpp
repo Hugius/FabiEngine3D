@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::_updateMainModelMenu()
 {
 	if (_isEditorLoaded)
@@ -27,7 +29,9 @@ void SceneEditor::_updateMainModelMenu()
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 
 					// Add the name of every placed model
-					for (auto& modelID : _fe3d.modelEntity_getAllIDs())
+					auto IDs = _fe3d.modelEntity_getAllIDs();
+					std::sort(IDs.begin(), IDs.end());
+					for (auto& modelID : IDs)
 					{
 						// Check if model is not a preview model
 						if (modelID[0] != '@')

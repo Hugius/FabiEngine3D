@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::_updateMainBillboardMenu()
 {
 	if (_isEditorLoaded)
@@ -27,6 +29,8 @@ void SceneEditor::_updateMainBillboardMenu()
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 
 					// Add the name of every placed billboard
+					auto IDs = _fe3d.billboardEntity_getAllIDs();
+					std::sort(IDs.begin(), IDs.end());
 					for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 					{
 						// Check if billboard is not a preview

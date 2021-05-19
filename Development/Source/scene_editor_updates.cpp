@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::update()
 {
 	// Main updates
@@ -79,12 +81,16 @@ void SceneEditor::_updateMainMenu()
 				else if (screen->getButton("edit")->isHovered())
 				{
 					_isChoosingScene = true;
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneIDs());
+					auto IDs = _loadSceneIDs();
+					std::sort(IDs.begin(), IDs.end());
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
 					_isDeletingScene = true;
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneIDs());
+					auto IDs = _loadSceneIDs();
+					std::sort(IDs.begin(), IDs.end());
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), IDs);
 				}
 			}
 

@@ -298,12 +298,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
-			{
-				_fe3d.soundEntity_pauseAll();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
+			_fe3d.soundEntity_pauseAll();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:sound_is_paused")
@@ -341,12 +337,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
-			{
-				_fe3d.soundEntity_resumeAll();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
+			_fe3d.soundEntity_resumeAll();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:sound_stop")
@@ -373,12 +365,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
-			{
-				_fe3d.soundEntity_stopAll();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
+			_fe3d.soundEntity_stopAll();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:sound_set_volume")

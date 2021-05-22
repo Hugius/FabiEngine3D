@@ -64,16 +64,16 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 		}
 	}
 
+	// Update hovered AABB status
+	if (!_core->_aabbEntityManager.isExisting(_hoveredAabbID) || _hoveredAabbID.empty())
+	{
+		_hoveredAabbID = "";
+		_hoveredAabbDistance = -1.0f;
+	}
+
 	// Return
 	_isRaycastUpdated = true;
-	if (_hoveredAabbID.empty())
-	{
-		return make_pair("", -1.0f);
-	}
-	else
-	{
-		return make_pair(_hoveredAabbID, _hoveredAabbDistance);
-	}
+	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
 pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)

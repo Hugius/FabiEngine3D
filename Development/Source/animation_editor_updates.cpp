@@ -211,29 +211,33 @@ void AnimationEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Update camera speed alteration
-		if (_fe3d.input_getKeyPressed(InputType::KEY_UP))
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			_cameraSpeed *= 2.0f;
-		}
-		if (_fe3d.input_getKeyPressed(InputType::KEY_DOWN))
-		{
-			_cameraSpeed /= 2.0f;
-		}
-
-		// Update vertical lookat movement
-		if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
-		{
-			_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
-		}
-		if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
-		{
-			_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
-
-			// Cannot be negative
-			if (_cameraLookatPosition.y < 0.0f)
+			// Update camera speed alteration
+			if (_fe3d.input_getKeyPressed(InputType::KEY_UP))
 			{
-				_cameraLookatPosition = 0.0f;
+				_cameraSpeed *= 2.0f;
+			}
+			if (_fe3d.input_getKeyPressed(InputType::KEY_DOWN))
+			{
+				_cameraSpeed /= 2.0f;
+			}
+
+			// Update vertical lookat movement
+			if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+			{
+				_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
+			}
+			if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
+			{
+				_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
+
+				// Cannot be negative
+				if (_cameraLookatPosition.y < 0.0f)
+				{
+					_cameraLookatPosition = 0.0f;
+				}
 			}
 		}
 

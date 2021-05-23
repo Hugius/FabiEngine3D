@@ -1,7 +1,7 @@
 #include "script_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVPC::calcTextWidth(text, 0.2f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.7f)
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor,
 	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, 

@@ -13,10 +13,10 @@ bool startEngine()
 
 int main(int argc, char* argv[])
 {
-	// Initiate new scope so engine can endwd
+	// Initiate new scope so engine can end
 	if (startEngine())
 	{
-		std::cout << std::endl << "Type something to continue...";
+		std::cout << std::endl << "Press a key to continue...";
 		auto temp = _getch();
 	}
 

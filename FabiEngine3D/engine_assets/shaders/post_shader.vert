@@ -38,7 +38,7 @@ void main()
 {
 	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
 	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
-	f_uv.y = u_isMirroredVertically ?  v_uv.y : -v_uv.y; 
+	f_uv.y = u_isMirroredVertically ? v_uv.y : -v_uv.y; 
     f_flareOcclusion = calculateFlareOcclusion();
 }
 
@@ -48,7 +48,7 @@ float calculateFlareOcclusion()
     {
         // Convert to UV space
         vec2 lightSourceClipPos = u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w;
-        vec2 lightSourceUV = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
+        vec2 lightSourceUV      = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
 
         // Calculate scene depth
         float flareDepth         = texture(u_sampler_depth, lightSourceUV).r;

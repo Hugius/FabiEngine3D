@@ -45,7 +45,7 @@ void main()
 	vec3 sceneColor            = texture(u_sampler_scene, f_uv).rgb;
 	vec3 bloomColor            = texture(u_sampler_bloom, f_uv).rgb;
 	vec3 blurColor             = texture(u_sampler_blur, f_uv).rgb;
-    vec3 flareColor            = texture(u_sampler_flare, f_uv).rgb;
+    vec3 flareColor            = texture(u_sampler_flare, vec2(f_uv.x, -f_uv.y)).rgb;
 
     // Default scene
     o_finalColor.rgb = sceneColor;

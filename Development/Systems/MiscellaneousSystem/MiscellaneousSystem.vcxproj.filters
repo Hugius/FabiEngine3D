@@ -78,6 +78,9 @@
     <ClInclude Include="..\..\Source\tools.hpp">
       <Filter>Other</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\network_peer_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\camera_manager_misc.cpp">

@@ -2,8 +2,9 @@
 
 #include "input_type.hpp"
 #include "logger.hpp"
-#include "aabb_parent_type.hpp"
 #include "direction.hpp"
+#include "aabb_parent_type.hpp"
+#include "network_peer_type.hpp"
 #include "mathematics.hpp"
 
 #include <array>
@@ -772,6 +773,19 @@ public:
 	{
 		return Logger::clearMessageStack();
 	}
+
+	// Networking interface - setters
+	void network_enable(NetworkPeerType type);
+	void network_disable();
+	void network_startServer();
+	void network_connectToServer(const string& address, const string& port);
+
+	// Networking interface - getters
+	bool network_isRunningServer();
+	bool network_isConnectedToServer();
+	const string& network_getConnectedServerAddress();
+	const string& network_getConnectedServerPort();
+
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

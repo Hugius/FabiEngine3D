@@ -145,7 +145,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>AssetManagementSystem.lib;AudioSystem.lib;CoreSystem.lib;EditorSystem.lib;EntitySystem.lib;GuiSystem.lib;MathSystem.lib;MiscellaneousSystem.lib;PhysicsSystem.lib;RenderingSystem.lib;ScriptingSystem.lib;opengl32.lib;glew32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;shcore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AssetManagementSystem.lib;AudioSystem.lib;CoreSystem.lib;EditorSystem.lib;EntitySystem.lib;GuiSystem.lib;MathSystem.lib;MiscellaneousSystem.lib;PhysicsSystem.lib;RenderingSystem.lib;ScriptingSystem.lib;opengl32.lib;glew32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;shcore.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

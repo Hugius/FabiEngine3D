@@ -19,45 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\aabb_parent_type.hpp" />
-    <ClInclude Include="..\..\Source\animation_speed_type.hpp" />
-    <ClInclude Include="..\..\Source\blur_direction.hpp" />
-    <ClInclude Include="..\..\Source\blur_type.hpp" />
-    <ClInclude Include="..\..\Source\buffer_type.hpp" />
-    <ClInclude Include="..\..\Source\camera_manager.hpp" />
-    <ClInclude Include="..\..\Source\configuration.hpp" />
-    <ClInclude Include="..\..\Source\direction.hpp" />
-    <ClInclude Include="..\..\Source\entity_type.hpp" />
-    <ClInclude Include="..\..\Source\environment_type.hpp" />
-    <ClInclude Include="..\..\Source\input_handler.hpp" />
-    <ClInclude Include="..\..\Source\input_type.hpp" />
-    <ClInclude Include="..\..\Source\logger.hpp" />
-    <ClInclude Include="..\..\Source\message_type.hpp" />
-    <ClInclude Include="..\..\Source\network_peer_type.hpp" />
-    <ClInclude Include="..\..\Source\ray_caster.hpp" />
-    <ClInclude Include="..\..\Source\script_condition_type.hpp" />
-    <ClInclude Include="..\..\Source\script_type.hpp" />
-    <ClInclude Include="..\..\Source\script_value_type.hpp" />
-    <ClInclude Include="..\..\Source\script_variable_scope.hpp" />
-    <ClInclude Include="..\..\Source\script_variable_type.hpp" />
-    <ClInclude Include="..\..\Source\timer.hpp" />
-    <ClInclude Include="..\..\Source\tools.hpp" />
-    <ClInclude Include="..\..\Source\transformation_type.hpp" />
+    <ClInclude Include="..\..\Source\network_client.hpp" />
+    <ClInclude Include="..\..\Source\network_server.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\camera_manager_main.cpp" />
-    <ClCompile Include="..\..\Source\camera_manager_misc.cpp" />
-    <ClCompile Include="..\..\Source\configuration.cpp" />
-    <ClCompile Include="..\..\Source\input_handler.cpp" />
-    <ClCompile Include="..\..\Source\ray_caster.cpp" />
-    <ClCompile Include="..\..\Source\timer.cpp" />
-    <ClCompile Include="..\..\Source\tools.cpp" />
+    <ClCompile Include="..\..\Source\network_client.cpp" />
+    <ClCompile Include="..\..\Source\network_server.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{08C1E06F-7054-49F7-9206-F97C492919E1}</ProjectGuid>
-    <RootNamespace>MiscellaneousSystem</RootNamespace>
+    <ProjectGuid>{33206921-CE81-4709-A9FF-648BE4783B6A}</ProjectGuid>
+    <RootNamespace>NetworkingSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

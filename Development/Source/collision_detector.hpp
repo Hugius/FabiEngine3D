@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Collision.hpp"
+#include "collision.hpp"
 #include "aabb_entity.hpp"
 
 class CollisionDetector

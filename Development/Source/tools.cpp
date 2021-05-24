@@ -1,4 +1,4 @@
-#include "Tools.hpp"
+#include "tools.hpp"
 #include "logger.hpp"
 
 #include <ctime>
@@ -43,13 +43,4 @@ float Tools::getRandomFloat(float min, float max)
 {	
 	std::uniform_real_distribution<float> dist(min, max);
 	return dist(_generator);
-}
-
-int Tools::DWORD_to_int(DWORD dword)
-{
-	std::ostringstream stream;
-	stream << dword;
-	string convertedDWORD = stream.str();
-	int result = std::stoi(convertedDWORD);
-	return result;
 }

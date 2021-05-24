@@ -82,7 +82,7 @@ void ScriptExecutor::pause()
 		_fe3d.misc_hideCursor();
 		_fe3d.misc_stopMillisecondTimer();
 		_fe3d.soundEntity_pauseAll();
-		_fe3d.music_pause();
+		if (_fe3d.music_isPlaying()) { _fe3d.music_pause(); }
 		_fe3d.engine_pause();
 		_isRunning = false;
 	}

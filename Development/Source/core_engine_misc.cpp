@@ -30,7 +30,8 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_collisionResolver(_collisionDetector),
 	_timer(),
 	_audioManager(_audioLoader),
-	_audioPlayer()
+	_audioPlayer(),
+	_networkServer()
 {
 
 }

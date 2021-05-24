@@ -107,5 +107,8 @@
     <ClCompile Include="..\..\Source\tools.cpp">
       <Filter>Other</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\library_loader.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

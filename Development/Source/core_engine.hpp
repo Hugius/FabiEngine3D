@@ -27,6 +27,8 @@
 #include "audio_manager.hpp"
 #include "audio_player.hpp"
 #include "library_loader.hpp"
+#include "network_server.hpp"
+#include "network_client.hpp"
 
 class CoreEngine final
 {
@@ -63,6 +65,8 @@ private:
 	Timer                  _timer;
 	AudioManager		   _audioManager;
 	AudioPlayer			   _audioPlayer;
+	NetworkServer		   _networkServer;
+	//NetworkClient		   _networkClient;
 	
 	// Core functions
 	void _start();

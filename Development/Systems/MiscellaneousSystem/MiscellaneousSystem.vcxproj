@@ -50,6 +50,7 @@
     <ClCompile Include="..\..\Source\camera_manager_misc.cpp" />
     <ClCompile Include="..\..\Source\configuration.cpp" />
     <ClCompile Include="..\..\Source\input_handler.cpp" />
+    <ClCompile Include="..\..\Source\library_loader.cpp" />
     <ClCompile Include="..\..\Source\ray_caster.cpp" />
     <ClCompile Include="..\..\Source\timer.cpp" />
     <ClCompile Include="..\..\Source\tools.cpp" />

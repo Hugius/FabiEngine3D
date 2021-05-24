@@ -76,7 +76,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	// GUI management
 	if (screen->getID() == "main")
 	{
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("newProject")->isHovered())
 			{

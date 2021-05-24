@@ -16,7 +16,7 @@
 #include "shadow_renderer.hpp"
 #include "final_renderer.hpp"
 #include "depth_renderer.hpp"
-#include "Timer.hpp"
+#include "timer.hpp"
 #include "blur_type.hpp"
 #include "texture_loader.hpp"
 

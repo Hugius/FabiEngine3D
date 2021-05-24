@@ -4,7 +4,6 @@
 
 #include <string>
 #include <random>
-#include <windows.h>
 
 using std::string;
 
@@ -27,7 +26,6 @@ public:
 
 	// Integer functions
 	int getRandomInt(int min, int max);
-	int DWORD_to_int(DWORD dword);
 
 	// Float functions
 	float getRandomFloat(float min, float max);
@@ -40,11 +38,6 @@ public:
 	template<typename T> inline const T& getMax(const T& first, const T& second)
 	{
 		return (first > second ? first : second);
-	}
-	template<typename BufferType, typename ElementType>
-	void storeData(BufferType buffer, int count, FILE * fileStream)
-	{
-		fread((void*)(buffer), sizeof(ElementType), count, fileStream);
 	}
 
 private:

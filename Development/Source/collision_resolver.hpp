@@ -2,7 +2,7 @@
 
 #include "collision_detector.hpp"
 #include "aabb_entity.hpp"
-#include "camera_manager.hpp"
+#include "camera.hpp"
 #include "terrain_entity_manager.hpp"
 
 class CollisionResolver
@@ -11,7 +11,7 @@ public:
 	CollisionResolver(CollisionDetector& collisionDetector);
 	virtual ~CollisionResolver() = default;
 	
-	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, CameraManager & camera);
+	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera & camera);
 	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
 	void enableAabbResponse(bool x, bool y, bool z);
 	void disableAabbResponse();

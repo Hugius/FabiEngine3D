@@ -1,13 +1,13 @@
 #pragma once
 
 #include "render_bus.hpp"
-#include "window_manager.hpp"
+#include "window.hpp"
 
-class CameraManager final
+class Camera final
 {
 public:
-	CameraManager(RenderBus& renderBus, WindowManager& windowManager);
-	~CameraManager() = default;
+	Camera(RenderBus& renderBus, Window& window);
+	~Camera() = default;
 
 	void reset();
 
@@ -60,7 +60,7 @@ public:
 private:
 	// Instances
 	RenderBus& _renderBus;
-	WindowManager& _windowManager;
+	Window& _window;
 
 	// Matrices
 	Matrix44 _viewMatrix = Matrix44(1.0f);

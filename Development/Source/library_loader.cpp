@@ -26,9 +26,9 @@ LibraryLoader::LibraryLoader()
 
 	// SDL_Window
 	Logger::throwInfo("Initializing window...");
-	_window = SDL_CreateWindow("FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
+	_windowPointer = SDL_CreateWindow("FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
 		SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
-	SDL_GL_CreateContext(_window);
+	SDL_GL_CreateContext(_windowPointer);
 
 	// GLEW (OpenGL Extension Wrangler)
 	Logger::throwInfo("Initializing OpenGL...");
@@ -86,5 +86,5 @@ LibraryLoader::~LibraryLoader()
 
 SDL_Window* LibraryLoader::getWindowPointer() const
 {
-	return _window;
+	return _windowPointer;
 }

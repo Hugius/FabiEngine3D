@@ -6,9 +6,9 @@
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
 #include "render_bus.hpp"
-#include "window_manager.hpp"
-#include "camera_manager.hpp"
-#include "render_manager.hpp"
+#include "window.hpp"
+#include "camera.hpp"
+#include "master_renderer.hpp"
 #include "sky_entity_manager.hpp"
 #include "terrain_entity_manager.hpp"
 #include "water_entity_manager.hpp"
@@ -18,7 +18,7 @@
 #include "light_entity_manager.hpp"
 #include "image_entity_manager.hpp"
 #include "text_entity_manager.hpp"
-#include "shadow_manager.hpp"
+#include "shadow_generator.hpp"
 #include "ray_caster.hpp"
 #include "model_editor.hpp"
 #include "environment_editor.hpp"
@@ -35,30 +35,29 @@ class CoreEngine final
 	friend class FabiEngine3D;
 
 private:
-	// Core
 	CoreEngine(FabiEngine3D& fe3d);
 	virtual ~CoreEngine();
 
 	// Core instances
 	LibraryLoader		   _libraryLoader;
-	WindowManager          _windowManager;
+	Window				   _window;
 	MeshLoader             _meshLoader;
 	TextureLoader          _textureLoader;
 	AudioLoader			   _audioLoader;
 	InputHandler           _inputHandler;
 	RenderBus			   _renderBus;
-	CameraManager          _cameraManager;
-	RenderManager          _renderManager;
+	Camera				   _camera;
+	MasterRenderer         _masterRenderer;
 	SkyEntityManager       _skyEntityManager;
 	TerrainEntityManager   _terrainEntityManager;
 	WaterEntityManager     _waterEntityManager;
-	ModelEntityManager      _modelEntityManager;
+	ModelEntityManager     _modelEntityManager;
 	BillboardEntityManager _billboardEntityManager;
 	AabbEntityManager      _aabbEntityManager;
 	LightEntityManager     _lightEntityManager;
-	ImageEntityManager      _imageEntityManager;
+	ImageEntityManager     _imageEntityManager;
 	TextEntityManager      _textEntityManager;
-	ShadowManager          _shadowManager;
+	ShadowGenerator        _shadowGenerator;
 	RayCaster              _rayCaster;
 	CollisionDetector      _collisionDetector;
 	CollisionResolver      _collisionResolver;

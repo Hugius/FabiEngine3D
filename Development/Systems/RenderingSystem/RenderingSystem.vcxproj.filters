@@ -57,16 +57,16 @@
     <ClCompile Include="..\..\Source\render_shader.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_manager_capture_one.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_capture_one.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_manager_capture_two.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_capture_two.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_manager_draw.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_draw.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_manager_main.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\render_bus_getters.cpp">
@@ -75,10 +75,10 @@
     <ClCompile Include="..\..\Source\render_bus_setters.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\shadow_manager.cpp">
+    <ClCompile Include="..\..\Source\shadow_generator.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\window_manager.cpp">
+    <ClCompile Include="..\..\Source\window.cpp">
       <Filter>Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\terrain_entity_renderer.cpp">
@@ -134,16 +134,16 @@
     <ClInclude Include="..\..\Source\render_shader.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_manager.hpp">
+    <ClInclude Include="..\..\Source\master_renderer.hpp">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\render_bus.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\shadow_manager.hpp">
+    <ClInclude Include="..\..\Source\shadow_generator.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\window_manager.hpp">
+    <ClInclude Include="..\..\Source\window.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\sky_entity_renderer.hpp">

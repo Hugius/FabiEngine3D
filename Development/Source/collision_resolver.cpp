@@ -10,7 +10,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 void CollisionResolver::update(
 	const unordered_map<string, shared_ptr<AabbEntity>>& boxes, 
 	TerrainEntityManager& terrainManager, 
-	CameraManager& camera)
+	Camera& camera)
 {
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabledX || _aabbResponseEnabledY || _aabbResponseEnabledZ)

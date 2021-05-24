@@ -1,11 +1,11 @@
-#include "render_manager.hpp"
+#include "master_renderer.hpp"
 #include "render_bus.hpp"
 
 #include <functional>
 
 using std::make_shared;
 
-void RenderManager::_renderSkyEntity()
+void MasterRenderer::_renderSkyEntity()
 {
 	if (_entityBus->getMainSkyEntity() != nullptr)
 	{
@@ -20,7 +20,7 @@ void RenderManager::_renderSkyEntity()
 	}
 }
 
-void RenderManager::_renderTerrainEntity()
+void MasterRenderer::_renderTerrainEntity()
 {
 	if (_entityBus->getTerrainEntity() != nullptr)
 	{
@@ -38,7 +38,7 @@ void RenderManager::_renderTerrainEntity()
 	}
 }
 
-void RenderManager::_renderWaterEntity()
+void MasterRenderer::_renderWaterEntity()
 {
 	if (_entityBus->getWaterEntity() != nullptr)
 	{
@@ -56,7 +56,7 @@ void RenderManager::_renderWaterEntity()
 	}
 }
 
-void RenderManager::_renderModelEntities()
+void MasterRenderer::_renderModelEntities()
 {
 	if (!_entityBus->getModelEntities().empty())
 	{
@@ -118,7 +118,7 @@ void RenderManager::_renderModelEntities()
 	}
 }
 
-void RenderManager::_renderBillboardEntities()
+void MasterRenderer::_renderBillboardEntities()
 {
 	if (!_entityBus->getBillboardEntities().empty())
 	{
@@ -136,7 +136,7 @@ void RenderManager::_renderBillboardEntities()
 	}
 }
 
-void RenderManager::_renderAabbEntities()
+void MasterRenderer::_renderAabbEntities()
 {
 	if (_renderBus.isAabbFrameRenderingEnabled())
 	{
@@ -157,14 +157,14 @@ void RenderManager::_renderAabbEntities()
 	}
 }
 
-void RenderManager::_renderFinalSceneTexture()
+void MasterRenderer::_renderFinalSceneTexture()
 {
 	_finalRenderer.bind();
 	_finalRenderer.render(_finalSurface, _renderBus.getPostProcessedSceneMap(), _renderBus.getMotionBlurMap());
 	_finalRenderer.unbind();
 }
 
-void RenderManager::_renderImageEntities()
+void MasterRenderer::_renderImageEntities()
 {
 	if (!_entityBus->getImageEntities().empty())
 	{
@@ -193,7 +193,7 @@ void RenderManager::_renderImageEntities()
 	}
 }
 
-void RenderManager::_renderTextEntities()
+void MasterRenderer::_renderTextEntities()
 {
 	if (!_entityBus->getTextEntities().empty())
 	{
@@ -229,7 +229,7 @@ void RenderManager::_renderTextEntities()
 	}
 }
 
-void RenderManager::_renderCustomCursor()
+void MasterRenderer::_renderCustomCursor()
 {
 	for (const auto& [keyID, entity] : _entityBus->getImageEntities())
 	{
@@ -242,7 +242,7 @@ void RenderManager::_renderCustomCursor()
 	}
 }
 
-void RenderManager::_renderDebugScreens()
+void MasterRenderer::_renderDebugScreens()
 {
 	// Temporary values
 	const string fontPath = "engine_assets\\fonts\\font.ttf";

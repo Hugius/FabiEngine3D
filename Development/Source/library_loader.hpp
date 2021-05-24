@@ -11,5 +11,5 @@ public:
 	SDL_Window* getWindowPointer() const;
 
 private:
-	SDL_Window* _window = nullptr;
+	SDL_Window* _windowPointer = nullptr;
 };

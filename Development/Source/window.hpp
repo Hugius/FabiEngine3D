@@ -8,11 +8,11 @@
 
 using std::string;
 
-class WindowManager final
+class Window final
 {
 public:
-	WindowManager(LibraryLoader& libraryLoader);
-	~WindowManager();
+	Window(LibraryLoader& libraryLoader);
+	~Window();
 	
 	void setTitle(const string & title);
 	void setSize(Ivec2 size);
@@ -37,5 +37,5 @@ public:
 	bool isCursorVisible() const;
 
 private:
-	SDL_Window * _window = nullptr;
+	SDL_Window* _windowPointer = nullptr;
 };

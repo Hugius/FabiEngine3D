@@ -20,7 +20,7 @@ void AudioPlayer::allocateChannels(unsigned int count)
 	}
 }
 
-void AudioPlayer::update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList)
+void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList)
 {
 	// Update channel management
 	for (unsigned int i = 0; i < _channels.size(); i++)

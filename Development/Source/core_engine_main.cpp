@@ -73,11 +73,11 @@ void CoreEngine::_setupApplication()
 	else
 	{
 		glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
-		_windowManager.enableColorKeying(keyingColor);
-		_windowManager.setSize(logoResolution);
-		_windowManager.showWindow();
-		_renderManager.renderEngineLogo(logo, nullptr, logoResolution);
-		_windowManager.swapBackBuffer();
+		_window.enableColorKeying(keyingColor);
+		_window.setSize(logoResolution);
+		_window.showWindow();
+		_masterRenderer.renderEngineLogo(logo, nullptr, logoResolution);
+		_window.swapBackBuffer();
 	}
 
 	// Initialize engine controller
@@ -86,33 +86,33 @@ void CoreEngine::_setupApplication()
 	// Hide logo
 	if (!Config::getInst().isGameExported())
 	{
-		_windowManager.disableColorKeying(keyingColor);
+		_window.disableColorKeying(keyingColor);
 	}
 
 	// Set window properties
-	_windowManager.setSize(Config::getInst().getWindowSize());
-	Config::getInst().isWindowFullscreen() ? _windowManager.enableFullscreen() : void();
-	!Config::getInst().isWindowBorderless() ? _windowManager.showBorder() : void();
-	Config::getInst().isGameExported() ? _windowManager.setTitle(Config::getInst().getWindowTitle()) : void();
-	_windowManager.showWindow();
+	_window.setSize(Config::getInst().getWindowSize());
+	Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
+	!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
+	Config::getInst().isGameExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
+	_window.showWindow();
 
 	// Only if in engine preview
 	if (Config::getInst().isGameExported())
 	{
 		// No fade in
-		_windowManager.setOpacity(1.0f);
+		_window.setOpacity(1.0f);
 	}
 	else
 	{
 		// Start smooth window fade in
-		_windowManager.setOpacity(0.0f);
+		_window.setOpacity(0.0f);
 	}
 }
 
 void CoreEngine::_updateApplication()
 {
 	// Temporary values
-	static Ivec2 lastCursorPosition = _windowManager.getCursorPos();
+	static Ivec2 lastCursorPosition = _window.getCursorPos();
 
 	// Exit application
 	if (_inputHandler.getKeyDown(InputType::WINDOW_X_BUTTON))
@@ -132,7 +132,7 @@ void CoreEngine::_updateApplication()
 	{
 		// Camera updates
 		_timer.startDeltaPart("cameraUpdate");
-		_cameraManager.update(lastCursorPosition);
+		_camera.update(lastCursorPosition);
 		_timer.stopDeltaPart();
 
 		// Raycast updates
@@ -142,7 +142,7 @@ void CoreEngine::_updateApplication()
 
 		// Collision updates
 		_timer.startDeltaPart("collisionUpdate");
-		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
+		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera);
 		_timer.stopDeltaPart();
 
 		// 3D entity updates
@@ -164,13 +164,13 @@ void CoreEngine::_updateApplication()
 
 		// Shadow updates
 		_timer.startDeltaPart("shadowUpdate");
-		_shadowManager.update(_renderBus);
-		_cameraManager.updateMatrices();
+		_shadowGenerator.update(_renderBus);
+		_camera.updateMatrices();
 		_timer.stopDeltaPart();
 
 		// Audio updates
 		_timer.startDeltaPart("guiEntityUpdate");
-		_audioPlayer.update(_cameraManager, _audioManager.getSounds(), _audioManager.getMusic());
+		_audioPlayer.update(_camera, _audioManager.getSounds(), _audioManager.getMusic());
 		_timer.stopDeltaPart();
 	}
 
@@ -187,7 +187,7 @@ void CoreEngine::_updateApplication()
 	_timer.stopDeltaPart();
 
 	// Save last cursor position
-	lastCursorPosition = _windowManager.getCursorPos();
+	lastCursorPosition = _window.getCursorPos();
 }
 
 void CoreEngine::_renderApplication()
@@ -204,10 +204,10 @@ void CoreEngine::_renderApplication()
 	);
 
 	// Render entities
-	_renderManager.renderScene(&entityBus, _cameraManager);
+	_masterRenderer.renderScene(&entityBus, _camera);
 
 	// Swap GPU buffer
 	_timer.startDeltaPart("bufferSwap");
-	_windowManager.swapBackBuffer();
+	_window.swapBackBuffer();
 	_timer.stopDeltaPart();
 }

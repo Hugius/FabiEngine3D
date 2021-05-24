@@ -1,4 +1,4 @@
-#include "render_manager.hpp"
+#include "master_renderer.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
 
@@ -6,7 +6,7 @@
 
 using std::make_shared;
 
-RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader) :
+MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader) :
 	_renderBus(renderBus),
 	_timer(timer),
 	_textureLoader(textureLoader),
@@ -44,7 +44,7 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderManager::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
+void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
 {
 	// Prepare
 	glViewport(0, 0, viewport.x, viewport.y);
@@ -66,7 +66,7 @@ void RenderManager::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<Te
 	_imageEntityRenderer.unbind();
 }
 
-void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
+void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 {
 	// General stuff
 	_entityBus = entityBus;
@@ -203,28 +203,28 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 	}
 }
 
-void RenderManager::loadMsaaFramebuffer(int quality)
+void MasterRenderer::loadMsaaFramebuffer(int quality)
 {
 	_msaaFramebuffer.reset();
 	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 1, quality);
 	_renderBus.setMsaaSampleCount(quality);
 }
 
-void RenderManager::loadShadowFramebuffer(int quality)
+void MasterRenderer::loadShadowFramebuffer(int quality)
 {
 	_shadowFramebuffer.reset();
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality), 1);
 	_renderBus.setShadowMapSize(quality);
 }
 
-void RenderManager::loadReflectionFramebuffer(int quality)
+void MasterRenderer::loadReflectionFramebuffer(int quality)
 {
 	_sceneReflectionFramebuffer.reset();
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
 	_renderBus.setSceneReflectionMapSize(quality);
 }
 
-void RenderManager::loadRefractionFramebuffer(int quality)
+void MasterRenderer::loadRefractionFramebuffer(int quality)
 {
 	_sceneRefractionFramebuffer.reset();
 	_sceneRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);

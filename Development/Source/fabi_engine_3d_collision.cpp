@@ -51,7 +51,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 				rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
 				// Check intersection
-				float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+				float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
 
 				// Check if closest to camera
 				if (distance != -1.0f && distance < closestDistance)
@@ -114,7 +114,7 @@ pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, 
 			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
 			// Calculate intersection & distance
-			float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+			float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
 			bool result = (distance != -1.0f);
 
 			// Return
@@ -177,7 +177,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const st
 						rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
 						// Check intersection
-						float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+						float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
 
 						// Check if closest to camera
 						if (distance != -1.0f && distance < closestDistance)

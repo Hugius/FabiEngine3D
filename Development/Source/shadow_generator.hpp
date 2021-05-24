@@ -2,11 +2,11 @@
 
 #include "render_bus.hpp"
 
-class ShadowManager final
+class ShadowGenerator final
 {
 public:
-	ShadowManager();
-	~ShadowManager() = default;
+	ShadowGenerator();
+	~ShadowGenerator() = default;
 	
 	void loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, int interval);
 	void unloadShadows();

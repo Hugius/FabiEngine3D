@@ -57,7 +57,7 @@
     <ClInclude Include="..\..\Source\environment_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\camera_manager.hpp">
+    <ClInclude Include="..\..\Source\camera.hpp">
       <Filter>Other</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\configuration.hpp">
@@ -86,13 +86,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\camera_manager_misc.cpp">
+    <ClCompile Include="..\..\Source\camera_misc.cpp">
       <Filter>Other</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\configuration.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\camera_manager_main.cpp">
+    <ClCompile Include="..\..\Source\camera_main.cpp">
       <Filter>Other</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ray_caster.cpp">

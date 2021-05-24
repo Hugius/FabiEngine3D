@@ -1,11 +1,11 @@
-#include "render_manager.hpp"
+#include "master_renderer.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
 #include <chrono>
 #include <algorithm>
 
-void RenderManager::_captureSceneDepth()
+void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
 	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
@@ -127,7 +127,7 @@ void RenderManager::_captureSceneDepth()
 	}
 }
 
-void RenderManager::_captureDofBlur()
+void MasterRenderer::_captureDofBlur()
 {
 	if (_renderBus.isDofEnabled())
 	{
@@ -138,7 +138,7 @@ void RenderManager::_captureDofBlur()
 	}
 }
 
-void RenderManager::_capturePostProcessing()
+void MasterRenderer::_capturePostProcessing()
 {
 	// Apply bloom, DOF & lens-flare on scene texture
 	_postProcessingFramebuffer.bind();
@@ -149,7 +149,7 @@ void RenderManager::_capturePostProcessing()
 	_renderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
-void RenderManager::_captureMotionBlur(CameraManager& camera)
+void MasterRenderer::_captureMotionBlur(Camera& camera)
 {
 	// Temporary values
 	static bool firstTime = true;
@@ -226,7 +226,7 @@ void RenderManager::_captureMotionBlur(CameraManager& camera)
 	}
 }
 
-void RenderManager::_captureLensFlare()
+void MasterRenderer::_captureLensFlare()
 {
 	if (_renderBus.isLensFlareEnabled())
 	{

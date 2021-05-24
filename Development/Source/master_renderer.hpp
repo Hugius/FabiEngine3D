@@ -1,7 +1,7 @@
 #pragma once
 
 #include "render_framebuffer.hpp"
-#include "camera_manager.hpp"
+#include "camera.hpp"
 #include "entity_bus.hpp"
 #include "sky_entity_renderer.hpp"
 #include "terrain_entity_renderer.hpp"
@@ -20,14 +20,14 @@
 #include "blur_type.hpp"
 #include "texture_loader.hpp"
 
-class RenderManager final
+class MasterRenderer final
 {
 public:
-	RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
-	~RenderManager() = default;
+	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
+	~MasterRenderer() = default;
 
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
-	void renderScene(EntityBus* entityBus, CameraManager& camera);
+	void renderScene(EntityBus* entityBus, Camera& camera);
 	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);
 	void loadReflectionFramebuffer(int quality);
@@ -76,14 +76,14 @@ private:
 	RenderFramebuffer _sceneDepthFramebuffer;
 
 	// Capturing functions
-	void _captureSceneReflections(CameraManager& camera);
+	void _captureSceneReflections(Camera& camera);
 	void _captureSceneRefractions();
 	void _captureShadows();
 	void _captureBloom();
 	void _captureSceneDepth();
 	void _capturePostProcessing();
 	void _captureDofBlur();
-	void _captureMotionBlur(CameraManager& camera);
+	void _captureMotionBlur(Camera& camera);
 	void _captureLensFlare();
 
 	// Scene rendering functions

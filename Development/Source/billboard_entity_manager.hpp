@@ -1,12 +1,12 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
-#include "camera_manager.hpp"
+#include "camera.hpp"
 
 class BillboardEntityManager final : public BaseEntityManager
 {
 public:
-	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera);
+	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, Camera& camera);
 	~BillboardEntityManager() = default;
 
 	shared_ptr<BillboardEntity> getEntity(const string& ID);
@@ -36,7 +36,7 @@ public:
 	void update() override;
 
 private:
-	CameraManager& _camera;
+	Camera& _camera;
 
 	RenderBuffer* _renderBuffer = nullptr;
 

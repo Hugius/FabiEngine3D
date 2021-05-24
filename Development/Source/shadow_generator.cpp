@@ -1,12 +1,12 @@
-#include "shadow_manager.hpp"
+#include "shadow_generator.hpp"
 #include "render_bus.hpp"
 
-ShadowManager::ShadowManager()
+ShadowGenerator::ShadowGenerator()
 {
 	_passedFrames = INT_MAX;
 }
 
-void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
+void ShadowGenerator::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
 	_eye    = eye;
 	_center = center;
@@ -16,7 +16,7 @@ void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, 
 	_interval = interval;
 }
 
-void ShadowManager::unloadShadows()
+void ShadowGenerator::unloadShadows()
 {
 	_passedFrames = INT_MAX;
 	_eye = Vec3(0.0f);
@@ -27,7 +27,7 @@ void ShadowManager::unloadShadows()
 	_interval = 0;
 }
 
-void ShadowManager::update(RenderBus& renderBus)
+void ShadowGenerator::update(RenderBus& renderBus)
 {
 	if (_isFollowingCamera)
 	{
@@ -62,7 +62,7 @@ void ShadowManager::update(RenderBus& renderBus)
 	}
 }
 
-Matrix44 ShadowManager::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
+Matrix44 ShadowGenerator::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
 {
 	// Matrix generation
 	Matrix44 lightView = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
@@ -71,32 +71,32 @@ Matrix44 ShadowManager::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float siz
 	return lightProj * lightView;
 }
 
-Vec3 ShadowManager::getEye()
+Vec3 ShadowGenerator::getEye()
 {
 	return _eye;
 }
 
-Vec3 ShadowManager::getCenter()
+Vec3 ShadowGenerator::getCenter()
 {
 	return _center;
 }
 
-float ShadowManager::getSize()
+float ShadowGenerator::getSize()
 {
 	return _size;
 }
 
-float ShadowManager::getReach()
+float ShadowGenerator::getReach()
 {
 	return _reach;
 }
 
-bool ShadowManager::isFollowingCamera()
+bool ShadowGenerator::isFollowingCamera()
 {
 	return _isFollowingCamera;
 }
 
-int ShadowManager::getInterval()
+int ShadowGenerator::getInterval()
 {
 	return _interval;
 }

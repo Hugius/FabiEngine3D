@@ -3,7 +3,7 @@
 #include "logger.hpp"
 #include "mathematics.hpp"
 
-BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
+BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, Camera& camera) :
 	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
 	_camera(camera)
 {

@@ -24,7 +24,7 @@
     <ClInclude Include="..\..\Source\blur_direction.hpp" />
     <ClInclude Include="..\..\Source\blur_type.hpp" />
     <ClInclude Include="..\..\Source\buffer_type.hpp" />
-    <ClInclude Include="..\..\Source\camera_manager.hpp" />
+    <ClInclude Include="..\..\Source\camera.hpp" />
     <ClInclude Include="..\..\Source\configuration.hpp" />
     <ClInclude Include="..\..\Source\direction.hpp" />
     <ClInclude Include="..\..\Source\entity_type.hpp" />
@@ -46,8 +46,8 @@
     <ClInclude Include="..\..\Source\transformation_type.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\camera_manager_main.cpp" />
-    <ClCompile Include="..\..\Source\camera_manager_misc.cpp" />
+    <ClCompile Include="..\..\Source\camera_main.cpp" />
+    <ClCompile Include="..\..\Source\camera_misc.cpp" />
     <ClCompile Include="..\..\Source\configuration.cpp" />
     <ClCompile Include="..\..\Source\input_handler.cpp" />
     <ClCompile Include="..\..\Source\library_loader.cpp" />

@@ -1,16 +1,16 @@
-#include "camera_manager.hpp"
+#include "camera.hpp"
 #include "configuration.hpp"
 
 #include <algorithm>
 
-CameraManager::CameraManager(RenderBus& renderBus, WindowManager& windowManager) :
+Camera::Camera(RenderBus& renderBus, Window& window) :
 	_renderBus(renderBus),
-	_windowManager(windowManager)
+	_window(window)
 {
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 }
 
-void CameraManager::reset()
+void Camera::reset()
 {
 	// Matrices
 	_viewMatrix = Matrix44(1.0f);
@@ -41,10 +41,10 @@ void CameraManager::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void CameraManager::update(Ivec2 lastCursorPosition)
+void Camera::update(Ivec2 lastCursorPosition)
 {
 	// Temporary values
-	Ivec2 currenCursorPosition = _windowManager.getCursorPos();
+	Ivec2 currenCursorPosition = _window.getCursorPos();
 	const int left = Config::getInst().getVpPos().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
@@ -53,7 +53,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	// Update cursor centering
 	if (_mustCenterCursor)
 	{
-		_windowManager.setCursorPos({ xMiddle, yMiddle });
+		_window.setCursorPos({ xMiddle, yMiddle });
 		_mustCenterCursor = false;
 		_cursorIsBeingCentered = true;
 	}
@@ -86,7 +86,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 		_pitchAcceleration += yOffset;
 
 		// Spawn mouse in middle of screen
-		_windowManager.setCursorPos({ xMiddle, yMiddle });
+		_window.setCursorPos({ xMiddle, yMiddle });
 	}
 
 	// Update yaw & pitch movements
@@ -107,7 +107,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	updateMatrices();
 }
 
-void CameraManager::updateMatrices()
+void Camera::updateMatrices()
 {
 	// Clamp the camera position
 	_position.x = std::clamp(_position.x, -_farZ, _farZ);

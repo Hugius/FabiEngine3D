@@ -34,17 +34,17 @@
     <ClCompile Include="..\..\Source\render_bus_setters.cpp" />
     <ClCompile Include="..\..\Source\render_framebuffer_main.cpp" />
     <ClCompile Include="..\..\Source\render_framebuffer_misc.cpp" />
-    <ClCompile Include="..\..\Source\render_manager_capture_one.cpp" />
-    <ClCompile Include="..\..\Source\render_manager_capture_two.cpp" />
-    <ClCompile Include="..\..\Source\render_manager_draw.cpp" />
-    <ClCompile Include="..\..\Source\render_manager_main.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_capture_one.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_capture_two.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_draw.cpp" />
+    <ClCompile Include="..\..\Source\master_renderer_main.cpp" />
     <ClCompile Include="..\..\Source\render_shader.cpp" />
-    <ClCompile Include="..\..\Source\shadow_manager.cpp" />
+    <ClCompile Include="..\..\Source\shadow_generator.cpp" />
     <ClCompile Include="..\..\Source\shadow_renderer.cpp" />
     <ClCompile Include="..\..\Source\sky_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\water_entity_renderer.cpp" />
-    <ClCompile Include="..\..\Source\window_manager.cpp" />
+    <ClCompile Include="..\..\Source\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\aabb_entity_renderer.hpp" />
@@ -60,14 +60,14 @@
     <ClInclude Include="..\..\Source\render_buffer.hpp" />
     <ClInclude Include="..\..\Source\render_bus.hpp" />
     <ClInclude Include="..\..\Source\render_framebuffer.hpp" />
-    <ClInclude Include="..\..\Source\render_manager.hpp" />
+    <ClInclude Include="..\..\Source\master_renderer.hpp" />
     <ClInclude Include="..\..\Source\render_shader.hpp" />
-    <ClInclude Include="..\..\Source\shadow_manager.hpp" />
+    <ClInclude Include="..\..\Source\shadow_generator.hpp" />
     <ClInclude Include="..\..\Source\shadow_renderer.hpp" />
     <ClInclude Include="..\..\Source\sky_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\water_entity_renderer.hpp" />
-    <ClInclude Include="..\..\Source\window_manager.hpp" />
+    <ClInclude Include="..\..\Source\window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag" />

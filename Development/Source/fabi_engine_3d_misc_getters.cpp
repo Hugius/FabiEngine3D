@@ -181,7 +181,7 @@ Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
 
 Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
-	Ivec2 mousePos = _core->_windowManager.getCursorPos();
+	Ivec2 mousePos = _core->_window.getCursorPos();
 
 	return Ivec2(mousePos.x, misc_getWindowSize().y - mousePos.y);
 }
@@ -203,7 +203,7 @@ Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 		Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
 		// Apply Y offset to cursor position
-		Vec2 relativeCursorPosition = Vec2(_core->_windowManager.getCursorPos()) - Vec2(offset);
+		Vec2 relativeCursorPosition = Vec2(_core->_window.getCursorPos()) - Vec2(offset);
 
 		// Convert fullscreen coords to viewport coords
 		relativeCursorPosition = (relativeCursorPosition / Vec2(viewportSize)) * Vec2(windowSize);
@@ -259,7 +259,7 @@ Ivec2 FabiEngine3D::misc_getViewportSize()
 
 bool FabiEngine3D::misc_isCursorVisible()
 {
-	return _core->_windowManager.isCursorVisible();
+	return _core->_window.isCursorVisible();
 }
 
 bool FabiEngine3D::misc_isCursorInsideViewport()

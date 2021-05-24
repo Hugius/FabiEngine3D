@@ -7,24 +7,24 @@
 CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_fe3d(fe3d),
 	_libraryLoader(),
-	_windowManager(_libraryLoader),
+	_window(_libraryLoader),
 	_meshLoader(),
 	_textureLoader(),
 	_audioLoader(),
 	_inputHandler(),
 	_renderBus(),
-	_cameraManager(_renderBus, _windowManager),
-	_renderManager(_renderBus, _timer, _textureLoader),
+	_camera(_renderBus, _window),
+	_masterRenderer(_renderBus, _timer, _textureLoader),
 	_skyEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_terrainEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_waterEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_modelEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_billboardEntityManager(_meshLoader, _textureLoader, _renderBus, _cameraManager),
+	_billboardEntityManager(_meshLoader, _textureLoader, _renderBus, _camera),
 	_aabbEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_lightEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_shadowManager(),
+	_shadowGenerator(),
 	_rayCaster(_renderBus, _terrainEntityManager),
 	_collisionDetector(),
 	_collisionResolver(_collisionDetector),
@@ -51,12 +51,12 @@ void CoreEngine::_updateWindowFading()
 		// Stop if window is 100% visible
 		if (opacity < 1.0f)
 		{
-			_windowManager.setOpacity(opacity);
+			_window.setOpacity(opacity);
 			opacity += 0.01f;
 		}
 		else
 		{
-			_windowManager.setOpacity(1.0f);
+			_window.setOpacity(1.0f);
 		}
 	}
 }

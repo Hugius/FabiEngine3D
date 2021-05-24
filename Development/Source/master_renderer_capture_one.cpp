@@ -1,9 +1,9 @@
-#include "render_manager.hpp"
+#include "master_renderer.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
 // Capturing reflection texture
-void RenderManager::_captureSceneReflections(CameraManager& camera)
+void MasterRenderer::_captureSceneReflections(Camera& camera)
 {
 	// Check if water reflection needed
 	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
@@ -128,7 +128,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 }
 
 // Capturing water refraction texture
-void RenderManager::_captureSceneRefractions()
+void MasterRenderer::_captureSceneRefractions()
 {
 	// Temporary values
 	bool waterRefractionEnabled = (_renderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
@@ -155,7 +155,7 @@ void RenderManager::_captureSceneRefractions()
 }
 
 // Capturing shadows
-void RenderManager::_captureShadows()
+void MasterRenderer::_captureShadows()
 {
 	if (_renderBus.isShadowsEnabled())
 	{
@@ -219,7 +219,7 @@ void RenderManager::_captureShadows()
 }
 
 // Capturing bloom parts
-void RenderManager::_captureBloom()
+void MasterRenderer::_captureBloom()
 {
 	if (_renderBus.isBloomEnabled())
 	{

@@ -67,11 +67,10 @@ void NetworkServer::stop()
 
 void NetworkServer::update()
 {
-	// Error checking
+	// Must be running first
 	if (!_isRunning)
 	{
 		return;
-		//Logger::throwError("Trying to update network server: not running!");
 	}
 	
 	// Update client connection requests
@@ -107,11 +106,7 @@ void NetworkServer::update()
 		}
 	}
 
-	if (_listeningThread == nullptr)
-	{
-		std::cout << "HOIIII";
-	}
-
+	// Receive client
 	if (!_clientSocketIDs.empty())
 	{
 		char recvbuf[512];

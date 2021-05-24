@@ -9,12 +9,12 @@
 
 void FabiEngine3D::misc_showCursor()
 {
-	_core->_windowManager.showCursor();
+	_core->_window.showCursor();
 }
 
 void FabiEngine3D::misc_hideCursor()
 {
-	_core->_windowManager.hideCursor();
+	_core->_window.hideCursor();
 }
 
 void FabiEngine3D::network_enable(NetworkPeerType type)
@@ -95,32 +95,32 @@ void FabiEngine3D::misc_disableTerrainRaycasting()
 void FabiEngine3D::misc_centerCursor()
 {
 	// Center the cursor
-	Ivec2 currenCursorPosition = _core->_windowManager.getCursorPos();
+	Ivec2 currenCursorPosition = _core->_window.getCursorPos();
 	const int left = Config::getInst().getVpPos().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
-	_core->_windowManager.setCursorPos({ xMiddle, yMiddle });
+	_core->_window.setCursorPos({ xMiddle, yMiddle });
 
 	// Notify camera of centering
-	_core->_cameraManager.notifyCursorCenter();
+	_core->_camera.notifyCursorCenter();
 }
 
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_rayCaster.update(pos);
-	_core->_windowManager.setCursorPos(pos);
+	_core->_window.setCursorPos(pos);
 }
 
 void FabiEngine3D::misc_setVsync(bool enabled)
 {
 	if (enabled)
 	{
-		_core->_windowManager.enableVsync();
+		_core->_window.enableVsync();
 	}
 	else
 	{
-		_core->_windowManager.disableVsync();
+		_core->_window.disableVsync();
 	}
 }
 
@@ -131,7 +131,7 @@ void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
 
 void FabiEngine3D::misc_setWindowTitle(const string& title)
 {
-	_core->_windowManager.setTitle(title);
+	_core->_window.setTitle(title);
 }
 
 void FabiEngine3D::misc_clearMeshCache(const string& filePath)

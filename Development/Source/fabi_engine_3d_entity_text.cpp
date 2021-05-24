@@ -196,20 +196,20 @@ vector<string> FabiEngine3D::textEntity_getAllIDs()
 
 void FabiEngine3D::gfx_setMsaaQuality(int quality)
 {
-	_core->_renderManager.loadMsaaFramebuffer(quality);
+	_core->_masterRenderer.loadMsaaFramebuffer(quality);
 }
 
 void FabiEngine3D::gfx_setShadowQuality(int quality)
 {
-	_core->_renderManager.loadShadowFramebuffer(quality);
+	_core->_masterRenderer.loadShadowFramebuffer(quality);
 }
 
 void FabiEngine3D::gfx_setReflectionQuality(int quality)
 {
-	_core->_renderManager.loadReflectionFramebuffer(quality);
+	_core->_masterRenderer.loadReflectionFramebuffer(quality);
 }
 
 void FabiEngine3D::gfx_setRefractionQuality(int quality)
 {
-	_core->_renderManager.loadRefractionFramebuffer(quality);
+	_core->_masterRenderer.loadRefractionFramebuffer(quality);
 }

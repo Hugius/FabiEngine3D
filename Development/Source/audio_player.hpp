@@ -2,7 +2,7 @@
 
 #include "sound.hpp"
 #include "music.hpp"
-#include "camera_manager.hpp"
+#include "camera.hpp"
 #include "mathematics.hpp"
 
 #include <map>
@@ -19,7 +19,7 @@ public:
 	~AudioPlayer() = default;
 
 	void allocateChannels(unsigned int count);
-	void update(CameraManager& camera, vector<Sound>& soundList, vector<Music>& musicList);	
+	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);	
 	void setSoundsEnabled(bool value);
 	void setMusicEnabled(bool value);
 	void playSound(Sound& sound, int loops, int fadeMS, bool forcePlay = false);

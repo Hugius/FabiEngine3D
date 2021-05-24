@@ -9,6 +9,7 @@ Development/Systems/EntitySystem/Temp/
 Development/Systems/GuiSystem/Temp/
 Development/Systems/MathSystem/Temp/
 Development/Systems/MiscellaneousSystem/Temp/
+Development/Systems/NetworkingSystem/Temp/
 Development/Systems/PhysicsSystem/Temp/
 Development/Systems/RenderingSystem/Temp/
 Development/Systems/ScriptingSystem/Temp/
@@ -21,6 +22,7 @@ Development/Systems/EntitySystem.lib
 Development/Systems/GuiSystem.lib
 Development/Systems/MathSystem.lib
 Development/Systems/MiscellaneousSystem.lib
+Development/Systems/NetworkingSystem.lib
 Development/Systems/PhysicsSystem.lib
 Development/Systems/RenderingSystem.lib
 Development/Systems/ScriptingSystem.lib
@@ -33,9 +35,11 @@ Development/Systems/EntitySystem.pdb
 Development/Systems/GuiSystem.pdb
 Development/Systems/MathSystem.pdb
 Development/Systems/MiscellaneousSystem.pdb
+Development/Systems/NetworkingSystem.pdb
 Development/Systems/PhysicsSystem.pdb
 Development/Systems/RenderingSystem.pdb
 Development/Systems/ScriptingSystem.pdb
 FabiEngine3D/binaries/FabiEngine3D.pdb
 FabiEngine3D/binaries/FabiEngine3D.iobj
 FabiEngine3D/binaries/FabiEngine3D.ipdb
+FabiEngine3D/projects/*/

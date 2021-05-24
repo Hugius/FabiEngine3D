@@ -6,7 +6,8 @@
 
 CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_fe3d(fe3d),
-	_windowManager(),
+	_libraryLoader(),
+	_windowManager(_libraryLoader),
 	_meshLoader(),
 	_textureLoader(),
 	_audioLoader(),

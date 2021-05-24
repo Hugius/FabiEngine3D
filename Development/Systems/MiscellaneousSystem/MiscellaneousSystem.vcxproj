@@ -31,6 +31,7 @@
     <ClInclude Include="..\..\Source\environment_type.hpp" />
     <ClInclude Include="..\..\Source\input_handler.hpp" />
     <ClInclude Include="..\..\Source\input_type.hpp" />
+    <ClInclude Include="..\..\Source\library_loader.hpp" />
     <ClInclude Include="..\..\Source\logger.hpp" />
     <ClInclude Include="..\..\Source\message_type.hpp" />
     <ClInclude Include="..\..\Source\network_peer_type.hpp" />

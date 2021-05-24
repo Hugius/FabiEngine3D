@@ -1,7 +1,7 @@
 #pragma once
 
-#include "input_type.hpp"
 #include "logger.hpp"
+#include "input_type.hpp"
 #include "direction.hpp"
 #include "aabb_parent_type.hpp"
 #include "network_peer_type.hpp"
@@ -776,8 +776,6 @@ public:
 
 	// Networking interface - setters
 	void network_enable(NetworkPeerType type);
-	void network_disable();
-	void network_startServer();
 	void network_connectToServer(const string& address, const string& port);
 
 	// Networking interface - getters

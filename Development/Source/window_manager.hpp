@@ -1,17 +1,20 @@
 #pragma once
 
 #include "mathematics.hpp"
+#include "library_loader.hpp"
 
 #include <SDL\\SDL.h>
 #include <string>
 
+using std::string;
+
 class WindowManager final
 {
 public:
-	WindowManager();
+	WindowManager(LibraryLoader& libraryLoader);
 	~WindowManager();
 	
-	void setTitle(const std::string & title);
+	void setTitle(const string & title);
 	void setSize(Ivec2 size);
 	void center();
 	void setOpacity(float value);
@@ -35,6 +38,4 @@ public:
 
 private:
 	SDL_Window * _window = nullptr;
-
-	SDL_GLContext _context;
 };

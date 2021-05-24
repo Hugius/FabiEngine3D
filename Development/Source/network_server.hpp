@@ -1,14 +1,16 @@
 #pragma once
 
-#include <winsock2.h>
-#include <ws2tcpip.h>
+#include <Windows.h>
+#include <string>
+
+using std::string;
 
 class NetworkServer final
 {
 public:
-	NetworkServer();
-	~NetworkServer() = default;
+	void start();
+	void stop();
 
 private:
-	
+	static inline const string SERVER_PORT = "61205";
 };

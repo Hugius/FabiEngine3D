@@ -23,9 +23,10 @@
 #include "model_editor.hpp"
 #include "environment_editor.hpp"
 #include "collision_resolver.hpp"
-#include "Timer.hpp"
+#include "timer.hpp"
 #include "audio_manager.hpp"
 #include "audio_player.hpp"
+#include "library_loader.hpp"
 
 class CoreEngine final
 {
@@ -37,6 +38,7 @@ private:
 	virtual ~CoreEngine();
 
 	// Core instances
+	LibraryLoader		   _libraryLoader;
 	WindowManager          _windowManager;
 	MeshLoader             _meshLoader;
 	TextureLoader          _textureLoader;
@@ -52,7 +54,7 @@ private:
 	BillboardEntityManager _billboardEntityManager;
 	AabbEntityManager      _aabbEntityManager;
 	LightEntityManager     _lightEntityManager;
-	ImageEntityManager       _imageEntityManager;
+	ImageEntityManager      _imageEntityManager;
 	TextEntityManager      _textEntityManager;
 	ShadowManager          _shadowManager;
 	RayCaster              _rayCaster;

@@ -1,4 +1,5 @@
 #include "fabi_engine_3d.hpp"
+#include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 #include "tools.hpp"
 #include "configuration.hpp"
@@ -14,6 +15,24 @@ void FabiEngine3D::misc_showCursor()
 void FabiEngine3D::misc_hideCursor()
 {
 	_core->_windowManager.hideCursor();
+}
+
+void FabiEngine3D::network_enable(NetworkPeerType type)
+{
+	if (_core->_networkServer.isRunning())
+	{
+		logger_throwWarning("Trying to enable networking: already enabled!");
+		return;
+	}
+
+	if (type == NetworkPeerType::SERVER)
+	{
+		_core->_networkServer.start();
+	}
+	else
+	{
+		
+	}
 }
 
 void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)

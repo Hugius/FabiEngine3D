@@ -35,10 +35,11 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_main.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_network.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp" />

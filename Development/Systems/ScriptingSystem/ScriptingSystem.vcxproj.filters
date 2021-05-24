@@ -144,7 +144,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_misc.cpp">
       <Filter>Execution\Interpreter\Function\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_main.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d.cpp">
       <Filter>Execution\Interpreter\Function\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_variable_arithmetic.cpp">
@@ -167,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_condition.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_network.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

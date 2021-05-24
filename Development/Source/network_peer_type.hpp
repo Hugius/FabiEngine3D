@@ -3,6 +3,5 @@
 enum class NetworkPeerType
 {
 	SERVER,
-	CLIENT,
-	NONE
+	CLIENT
 };

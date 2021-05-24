@@ -784,7 +784,6 @@ public:
 	const string& network_getConnectedServerAddress();
 	const string& network_getConnectedServerPort();
 
-
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_enableWireframeRendering();

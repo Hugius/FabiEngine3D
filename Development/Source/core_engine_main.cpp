@@ -126,7 +126,7 @@ void CoreEngine::_updateApplication()
 	_fe3d._hoveredAabbID = "";
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 	_timer.stopDeltaPart();
-
+	_networkServer.update();
 	// Only update 3D if engine not paused
 	if (!_isPaused)
 	{

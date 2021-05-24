@@ -32,14 +32,14 @@ void NetworkServer::start()
 	}
 
 	// Create socket for listening
-	_listenSocket = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if (_listenSocket == INVALID_SOCKET)
+	_listenSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if (_listenSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Network server startup (socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Bind the listening socket
-	auto bindResult = bind(_listenSocket, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto bindResult = bind(_listenSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (bindResult == SOCKET_ERROR)
 	{
 		Logger::throwError("Network server startup (socket bind) failed with error code: ", WSAGetLastError());
@@ -59,8 +59,8 @@ void NetworkServer::stop()
 		Logger::throwError("Trying to stop network server: not running!");
 	}
 
-	closesocket(_clientSocket);
-	closesocket(_listenSocket);
+	//closesocket(_clientSocketID);
+	closesocket(_listenSocketID);
 	WSACleanup();
 	_isRunning = false;
 }
@@ -70,19 +70,80 @@ void NetworkServer::update()
 	// Error checking
 	if (!_isRunning)
 	{
-		Logger::throwError("Trying to update network server: not running!");
+		return;
+		//Logger::throwError("Trying to update network server: not running!");
+	}
+	
+	// Update client connection requests
+	if (_listeningThread == nullptr)
+	{
+		// Listen for any incoming client connection requests
+		auto listenResult = listen(_listenSocketID, SOMAXCONN);
+		if (listenResult == SOCKET_ERROR)
+		{
+			Logger::throwError("Network server listen failed with error code: ", WSAGetLastError());
+		}
+
+		// Wait for client request in different thread
+		_listeningThread = new std::future<SOCKET>(std::async(std::launch::async, &NetworkServer::_waitForClient, this, _listenSocketID));
+	}
+	else
+	{
+		// Check if client requested connection
+		if (_listeningThread->valid())
+		{
+			if (_listeningThread->wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+			{
+				auto clientSocketID = _listeningThread->get();
+				if (clientSocketID == INVALID_SOCKET)
+				{
+					Logger::throwError("Network server accept failed with error code: ", WSAGetLastError());
+				}
+				_clientSocketIDs.push_back(clientSocketID);
+				delete _listeningThread;
+				_listeningThread = nullptr;
+				std::cout << "Client connected!" << std::endl;
+			}
+		}
 	}
 
-	auto listenResult = listen(_listenSocket, SOMAXCONN);
-	if (listenResult == SOCKET_ERROR)
+	if (_listeningThread == nullptr)
 	{
-		Logger::throwError("Network server listen failed with error code: ", WSAGetLastError());
+		std::cout << "HOIIII";
 	}
 
-	// Accept a client socket
-	_clientSocket = accept(_listenSocket, NULL, NULL);
-	if (_clientSocket == INVALID_SOCKET)
+	if (!_clientSocketIDs.empty())
 	{
-		Logger::throwError("Network server client accept failed with error code: ", WSAGetLastError());
+		char recvbuf[512];
+		int iResult;
+		int recvbuflen = 512;
+		do {
+
+			iResult = recv(_clientSocketIDs[0], recvbuf, recvbuflen, 0);
+			// error 10054
+			if (iResult > 0)
+			{
+				std::cout << recvbuf[0] << std::endl;
+			}
+			else if (iResult == 0)
+			{
+				printf("Connection closing...\n");
+			}
+			else
+			{
+				Logger::throwError("Network server receive failed with error code: ", WSAGetLastError());
+			}
+
+		} while (iResult > 0);
 	}
+}
+
+bool NetworkServer::isRunning()
+{
+	return _isRunning;
+}
+
+SOCKET NetworkServer::_waitForClient(SOCKET listenSocketID)
+{
+	return accept(listenSocketID, NULL, NULL);
 }

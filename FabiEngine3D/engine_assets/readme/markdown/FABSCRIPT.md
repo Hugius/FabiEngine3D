@@ -3,17 +3,18 @@
 - Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
 - Scripts are run from the first line to the last line, from left to right.
 ### META
-- Line 1 of every script file **must** specify its type: initialization, update, destruction.
-- Line 2 of every script file **must** specify its execution state: entry or sleep.
+**Line 1** of every script file **must** specify its type: initialization, update, destruction.
 - **Initialization** script: `META script_type_init`.
 - **Update** script: `META script_type_update`.
 - **Destruction** script: `META script_type_destroy`.
+
+**Line 2** of every script file **must** specify its execution state: entry or waiting.
 - **Entry** script: `META script_execution_entry`.
 - **Waiting** script: `META script_execution_waiting`.
 #### Example code
 ```
 1. META script_type_init
-2. META execution_entry
+2. META script_execution_entry
 3. 
 4. /// Your code <--- This is a comment by the way
 ```

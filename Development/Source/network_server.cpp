@@ -24,10 +24,10 @@ void NetworkServer::start()
 
 	// Create address info
 	struct addrinfo* addressInfo = NULL;
-	auto infoResult = getaddrinfo(NULL, SERVER_PORT.c_str(), &hints, &addressInfo);
-	if (infoResult != 0)
+	auto infoStatusCode = getaddrinfo(NULL, SERVER_PORT.c_str(), &hints, &addressInfo);
+	if (infoStatusCode != 0)
 	{
-		Logger::throwError("Network server startup (address info) failed with error code: ", infoResult);
+		Logger::throwError("Network server startup (address info) failed with error code: ", infoStatusCode);
 		return;
 	}
 
@@ -39,14 +39,24 @@ void NetworkServer::start()
 	}
 
 	// Bind the listening socket
-	auto bindResult = bind(_listenSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
-	if (bindResult == SOCKET_ERROR)
+	auto bindStatusCode = bind(_listenSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	if (bindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("Network server startup (socket bind) failed with error code: ", WSAGetLastError());
 	}
 
 	// Address info not needed anymore
 	freeaddrinfo(addressInfo);
+
+	// Enable listening for any client connection requests
+	auto listenStatusCode = listen(_listenSocketID, SOMAXCONN);
+	if (listenStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("Network server startup (socket listen) failed with error code: ", WSAGetLastError());
+	}
+
+	// Spawn an initial thread for accepting incoming connection requests
+	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
 
 	_isRunning = true;
 }
@@ -59,8 +69,14 @@ void NetworkServer::stop()
 		Logger::throwError("Trying to stop network server: not running!");
 	}
 
-	//closesocket(_clientSocketID);
+	// Close all network sockets
 	closesocket(_listenSocketID);
+	for (auto& socketID : _clientSocketIDs)
+	{
+		closesocket(socketID);
+	}
+
+	// Miscellaneous
 	WSACleanup();
 	_isRunning = false;
 }
@@ -73,63 +89,66 @@ void NetworkServer::update()
 		return;
 	}
 	
-	// Update client connection requests
-	if (_listeningThread == nullptr)
+	// Update client connection requesting
+	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
-		// Listen for any incoming client connection requests
-		auto listenResult = listen(_listenSocketID, SOMAXCONN);
-		if (listenResult == SOCKET_ERROR)
+		// Retrieve new client socket ID
+		auto clientSocketID = _connectionThread.get();
+		if (clientSocketID == INVALID_SOCKET)
 		{
-			Logger::throwError("Network server listen failed with error code: ", WSAGetLastError());
+			Logger::throwError("Network server accept failed with error code: ", WSAGetLastError());
 		}
 
-		// Wait for client request in different thread
-		_listeningThread = new std::future<SOCKET>(std::async(std::launch::async, &NetworkServer::_waitForClient, this, _listenSocketID));
+		// Extract IP address
+		sockaddr_in socketAddress;
+		int socketAddressLength = sizeof(socketAddress);
+		auto peerResult = getpeername(clientSocketID, (struct sockaddr*) &socketAddress, &socketAddressLength);
+		auto ipAddress = string(inet_ntoa(socketAddress.sin_addr));
+
+		// Add client
+		_clientSocketIDs.push_back(clientSocketID);
+		_clientIPs.push_back(ipAddress);
+		_clientMessageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
+
+		// Spawn thread again
+		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
+
+		// Logging
+		Logger::throwInfo("A network client with IP \"" + ipAddress + "\" connected to the server!");
 	}
-	else
+
+	// Update client message receiving
+	for (unsigned int i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		// Check if client requested connection
-		if (_listeningThread->valid())
+		auto clientSocketID = _clientSocketIDs[i];
+		auto& messageThread = _clientMessageThreads[i];
+
+		// Check if the client sent any message
+		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
-			if (_listeningThread->wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
-			{
-				auto clientSocketID = _listeningThread->get();
-				if (clientSocketID == INVALID_SOCKET)
-				{
-					Logger::throwError("Network server accept failed with error code: ", WSAGetLastError());
-				}
-				_clientSocketIDs.push_back(clientSocketID);
-				delete _listeningThread;
-				_listeningThread = nullptr;
-				std::cout << "Client connected!" << std::endl;
-			}
-		}
-	}
+			auto messageResult = messageThread.get();
+			auto messageStatusCode = messageResult.first;
+			auto messageString = messageResult.second;
 
-	// Receive client
-	if (!_clientSocketIDs.empty())
-	{
-		char recvbuf[512];
-		int iResult;
-		int recvbuflen = 512;
-		do {
-
-			iResult = recv(_clientSocketIDs[0], recvbuf, recvbuflen, 0);
-			// error 10054
-			if (iResult > 0)
+			if (messageStatusCode > 0)
 			{
-				std::cout << recvbuf[0] << std::endl;
+				std::cout << messageString << " " << messageString.size() << std::endl;
 			}
-			else if (iResult == 0)
+			else if (messageStatusCode == 0)
 			{
-				printf("Connection closing...\n");
+				// closed
+			}
+			else if (messageStatusCode == 10054)
+			{
+				// forcibly closed
 			}
 			else
 			{
 				Logger::throwError("Network server receive failed with error code: ", WSAGetLastError());
 			}
 
-		} while (iResult > 0);
+			messageThread = std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID);
+		}
 	}
 }
 
@@ -138,7 +157,17 @@ bool NetworkServer::isRunning()
 	return _isRunning;
 }
 
-SOCKET NetworkServer::_waitForClient(SOCKET listenSocketID)
+SOCKET NetworkServer::_waitForClientConnection(SOCKET listenSocketID)
 {
 	return accept(listenSocketID, NULL, NULL);
+}
+
+pair<int, string> NetworkServer::_waitForClientMessage(SOCKET clientSocketID)
+{
+	char buffer[3];
+	int bufferLength = 3;
+
+	auto statusCode = recv(clientSocketID, buffer, bufferLength, 0);
+
+	return std::make_pair(statusCode, string(buffer));
 }

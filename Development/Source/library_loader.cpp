@@ -84,7 +84,10 @@ LibraryLoader::~LibraryLoader()
 	SDL_Quit();
 }
 
-SDL_Window* LibraryLoader::getWindowPointer() const
+SDL_Window* LibraryLoader::getWindowPointer()
 {
-	return _windowPointer;
+	// Can be retrieved only once
+	auto temp = _windowPointer;
+	_windowPointer = nullptr;
+	return temp;
 }

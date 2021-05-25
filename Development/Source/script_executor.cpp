@@ -93,7 +93,7 @@ void ScriptExecutor::pause()
 	}
 }
 
-void ScriptExecutor::unpause()
+void ScriptExecutor::resume()
 {
 	if (_isInitialized && !_isRunning)
 	{

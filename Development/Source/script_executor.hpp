@@ -11,7 +11,7 @@ public:
 	void load();
 	void update(bool debug);
 	void pause();
-	void unpause();
+	void resume();
 	void unload();
 	void setCurrentProjectID(const string& projectName);
 

@@ -93,7 +93,6 @@ void NetworkServer::stop()
 	}
 
 	// Miscellaneous
-	WSACleanup();
 	_clientSocketIDs.clear();
 	_clientIPs.clear();
 	_clientMessageThreads.clear();

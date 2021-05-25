@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("requested model ID cannot start with '@'!");
+		_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
 	}
 
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested model ID cannot start with '@'");
+				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested model ID cannot start with '@'");
+				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -111,7 +111,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// New model ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("new model ID cannot start with '@'");
+				_throwScriptError("new model ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
 			}
 
@@ -495,7 +495,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("model has no bound AABBs!");
+					_throwScriptError("model with ID \"" + arguments[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
@@ -526,7 +526,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("model has no bound AABBs!");
+					_throwScriptError("model with ID \"" + arguments[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 

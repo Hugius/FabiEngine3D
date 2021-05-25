@@ -78,6 +78,7 @@ LibraryLoader::LibraryLoader()
 
 LibraryLoader::~LibraryLoader()
 {
+	WSACleanup();
 	IMG_Quit();
 	TTF_Quit();
 	Mix_Quit();

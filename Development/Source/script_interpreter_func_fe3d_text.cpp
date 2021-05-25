@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dTextEntity(const string& ID)
 	// Cannot request/delete an engine entity
 	if (ID.front() == '@')
 	{
-		_throwScriptError("requested text ID cannot start with '@'!");
+		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
 	}
 
@@ -33,7 +33,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested text ID cannot start with '@'");
+				_throwScriptError("ID of requested text with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -52,7 +52,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested text ID cannot start with '@'");
+				_throwScriptError("ID of requested text with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -107,7 +107,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// New text ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("new text ID cannot start with '@'");
+				_throwScriptError("new text ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
 			}
 

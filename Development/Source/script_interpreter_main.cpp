@@ -324,6 +324,12 @@ void ScriptInterpreter::unload()
 		}
 	}
 
+	// Stop networking
+	if (_fe3d.network_isStarted())
+	{
+		_fe3d.network_stop();
+	}
+
 	// Miscellaneous
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();

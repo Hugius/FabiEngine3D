@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("requested billboard ID cannot start with '@'!");
+		_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
 	}
 
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested billboard ID cannot start with '@'");
+				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested billboard ID cannot start with '@'");
+				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -111,7 +111,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// New billboard ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("new billboard ID cannot start with '@'");
+				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
 			}
 

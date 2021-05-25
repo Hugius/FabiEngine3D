@@ -155,10 +155,10 @@ void TopViewportController::_updateGameScreenManagement()
 		{
 			if (gameScreen->getButton("play")->isHovered())
 			{
-				// Unpause game or load game
+				// Resume game or load game
 				if (SCRIPT_EXECUTOR.isInitialized())
 				{
-					SCRIPT_EXECUTOR.unpause();
+					SCRIPT_EXECUTOR.resume();
 				}
 				else
 				{
@@ -180,7 +180,7 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 			else if (gameScreen->getButton("debug")->isHovered())
 			{
-				SCRIPT_EXECUTOR.unpause();
+				SCRIPT_EXECUTOR.resume();
 				SCRIPT_EXECUTOR.update(true);
 				SCRIPT_EXECUTOR.pause();
 			}

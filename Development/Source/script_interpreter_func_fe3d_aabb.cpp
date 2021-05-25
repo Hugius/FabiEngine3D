@@ -5,7 +5,7 @@ bool ScriptInterpreter::_validateFe3dAabbEntity(const string& ID)
 	// Cannot request/delete a preview entity
 	if (ID.front() == '@')
 	{
-		_throwScriptError("requested AABB ID cannot start with '@'!");
+		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
 	}
 
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("requested AABB ID cannot start with '@'");
+				_throwScriptError("ID of requested AABB with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// New AABB ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("new AABB ID cannot start with '@'");
+				_throwScriptError("new AABB ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
 				return true;
 			}
 
@@ -127,7 +127,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot delete a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot delete an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot delete AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -150,7 +150,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -197,7 +197,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -221,7 +221,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -260,7 +260,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -284,7 +284,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -323,7 +323,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 
@@ -346,7 +346,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				// Cannot change a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
 				{
-					_throwScriptError("cannot change an AABB that is bound to a model or billboard!");
+					_throwScriptError("cannot change AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
 					return true;
 				}
 

@@ -9,14 +9,7 @@ bool ScriptInterpreter::_executeFe3dNetworkFunction(const string& functionName, 
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate networking status
-			if (_fe3d.network_isStarted())
-			{
-				_throwScriptError("networking is already started!");
-				return true;
-			}
-			
+		{			
 			// Determine peer type
 			if (arguments[0].getString() == "SERVER")
 			{
@@ -41,18 +34,26 @@ bool ScriptInterpreter::_executeFe3dNetworkFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Validate networking status
-			if (!_fe3d.network_isStarted())
-			{
-				_throwScriptError("networking is not started!");
-				return true;
-			}
-
-			// Stop networking
 			_fe3d.network_stop();
-
-			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:networking_is_request_pending")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.network_isServerRequestPending();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:networking_get_request_ip")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.network_isServerRequestPending();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else

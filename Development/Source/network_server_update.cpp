@@ -13,7 +13,7 @@ void NetworkServer::update()
 	{
 		return;
 	}
-	
+
 	// Update client connection requesting
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
@@ -24,55 +24,59 @@ void NetworkServer::update()
 			Logger::throwError("Network server accept failed with error code: ", WSAGetLastError());
 		}
 
-		// Extract IP address
-		sockaddr_in socketAddress = sockaddr_in();
-		int socketAddressLength = sizeof(socketAddress);
-		auto peerResult = getpeername(clientSocketID, (struct sockaddr*) &socketAddress, &socketAddressLength);
-		auto ipAddress = string(inet_ntoa(socketAddress.sin_addr));
+		// Save new client
+		_saveClient(clientSocketID);
 
-		// Add client
-		_clientSocketIDs.push_back(clientSocketID);
-		_clientIPs.push_back(ipAddress);
-		_clientMessageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
-
-		// Spawn thread again
+		// Spawn connection thread again
 		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
 
 		// Logging
-		Logger::throwInfo("A network client with IP \"" + ipAddress + "\" connected to the server!");
+		Logger::throwInfo("Network client with IP \"" + _clientIPs.back() + "\" connected to the server!");
 	}
 
-	// Update client message receiving
+	// Update client request receiving
+BEGIN:
 	for (unsigned int i = 0; i < _clientSocketIDs.size(); i++)
 	{
+		// Temporary values
 		auto clientSocketID = _clientSocketIDs[i];
-		auto& messageThread = _clientMessageThreads[i];
+		auto ipAddress = _clientIPs[i];
+		auto& requestThread = _clientRequestThreads[i];
 
-		// Check if the client sent any message
-		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+		// Check if the client sent any request
+		if (requestThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
-			auto messageResult = messageThread.get();
-			auto messageStatusCode = messageResult.first;
-			auto messageString = messageResult.second;
+			// Temporary values
+			auto requestResult = requestThread.get();
+			auto requestStatusCode = requestResult.first;
+			auto requestMessage = requestResult.second;
 
-			if (messageStatusCode > 0)
+			if (requestStatusCode > 0) // Request is received correctly
 			{
-				std::cout << messageString << " " << messageString.size() << std::endl;
+				_receivedRequestQueue.push_back(NetworkRequest(ipAddress, requestMessage));
 			}
-			else if (messageStatusCode == 0)
+			else if (requestStatusCode == 0) // Client closed socket connection
 			{
-				// closed
+				Logger::throwInfo("Network client with IP \"" + ipAddress + "\" disconnected from the server!");
+				_deleteClient(ipAddress);
+				goto BEGIN;
 			}
-			else if (messageStatusCode == 10054)
+			else // Receive failed
 			{
-				// forcibly closed
-			}
-			else
-			{
-				Logger::throwError("Network server receive failed with error code: ", WSAGetLastError());
+				if (WSAGetLastError() == 10054) // Client lost socket connection
+				{
+					Logger::throwInfo("Network client with IP \"" + ipAddress + "\" lost connection with the server!");
+					_deleteClient(ipAddress);
+					goto BEGIN;
+				}
+				else
+				{
+					Logger::throwError("Network server receive failed with error code: ", WSAGetLastError());
+				}
 			}
 
-			messageThread = std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID);
+			// Spawn new request thread
+			requestThread = std::async(std::launch::async, &NetworkServer::_waitForClientRequest, this, clientSocketID);
 		}
 	}
 }

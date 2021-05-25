@@ -72,13 +72,19 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_collision.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics.cpp">
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_getters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_network.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

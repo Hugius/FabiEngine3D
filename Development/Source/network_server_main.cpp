@@ -73,6 +73,7 @@ void NetworkServer::start()
 	// Spawn an initial thread for accepting incoming connection requests
 	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
 
+	// Server can now handle incoming requests
 	_isRunning = true;
 }
 
@@ -85,17 +86,16 @@ void NetworkServer::stop()
 		return;
 	}
 
-	// Close all network sockets
+	// Close listening sockets
 	closesocket(_listenSocketID);
-	for (auto& socketID : _clientSocketIDs)
+
+	// Delete all connected clients
+	for (auto& ip : _clientIPs)
 	{
-		closesocket(socketID);
+		_deleteClient(ip);
 	}
 
 	// Miscellaneous
-	_clientSocketIDs.clear();
-	_clientIPs.clear();
-	_clientMessageThreads.clear();
 	_listenSocketID = INVALID_SOCKET;
 	_isRunning = false;
 }

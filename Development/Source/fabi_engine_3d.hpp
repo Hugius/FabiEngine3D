@@ -5,6 +5,7 @@
 #include "direction.hpp"
 #include "aabb_parent_type.hpp"
 #include "network_peer_type.hpp"
+#include "network_request.hpp"
 #include "mathematics.hpp"
 
 #include <array>
@@ -778,13 +779,15 @@ public:
 	void network_start(NetworkPeerType type);
 	void network_stop();
 	void network_connectToServer(const string& address, const string& port);
+	void network_loadNextServerRequest();
 
 	// Networking interface - getters
 	bool network_isStarted();
-	bool network_isRunningServer();
 	bool network_isConnectedToServer();
+	bool network_isServerRequestPending();
 	const string& network_getConnectedServerAddress();
 	const string& network_getConnectedServerPort();
+	const NetworkRequest network_getLatestServerRequest();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

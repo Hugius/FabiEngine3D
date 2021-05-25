@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\network_client.hpp" />
+    <ClInclude Include="..\..\Source\network_request.hpp" />
     <ClInclude Include="..\..\Source\network_server.hpp" />
   </ItemGroup>
   <ItemGroup>

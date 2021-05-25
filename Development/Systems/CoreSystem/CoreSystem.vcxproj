@@ -161,10 +161,12 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_water.cpp" />
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_getters.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_network.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\core_engine.hpp" />

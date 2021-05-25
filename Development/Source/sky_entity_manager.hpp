@@ -6,7 +6,6 @@ class SkyEntityManager final : public BaseEntityManager
 {
 public:
 	SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~SkyEntityManager() = default;
 
 	shared_ptr<SkyEntity> getEntity(const string& ID);
 	shared_ptr<SkyEntity> getSelectedMainSky();

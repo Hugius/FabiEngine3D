@@ -6,7 +6,6 @@ class BillboardEntity final: public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~BillboardEntity() = default;
 
 	// Updates
 	void updateModelMatrix();

@@ -7,7 +7,6 @@ class SettingsEditor final
 {
 public:
 	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
-	~SettingsEditor() = default;
 
 	void loadSettings();
 	void load();

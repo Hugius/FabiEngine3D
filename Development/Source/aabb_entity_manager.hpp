@@ -6,7 +6,6 @@ class AabbEntityManager final :  public BaseEntityManager
 {
 public:
 	AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~AabbEntityManager() = default;
 
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 

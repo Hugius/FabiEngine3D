@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-struct Vec4
+struct Vec4 final
 {
 	// Data access
 	union

@@ -11,7 +11,6 @@ class DepthRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~DepthRenderer() = default;
 	
 	void bind()   override;
 	void unbind() override;

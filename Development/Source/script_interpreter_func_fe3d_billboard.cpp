@@ -130,9 +130,9 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
 				// Stop animation if started
-				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
+				if (_fe3d.billboardEntity_isSpriteAnimationStarted(arguments[0].getString()))
 				{
-					_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
+					_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
 				}
 
 				// Return
@@ -486,7 +486,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("billboard has no bound AABBs!");
+					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
@@ -517,7 +517,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())
 				{
-					_throwScriptError("billboard has no bound AABBs!");
+					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" has no bound AABBs!");
 					return true;
 				}
 
@@ -602,14 +602,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Validate animation status
-				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
-				{
-					_throwScriptError("animation already started!");
-				}
-
-				// Start animation
-				_fe3d.billboardEntity_startAnimation(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.billboardEntity_startSpriteAnimation(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -624,17 +617,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Validate animation status
-				if (!_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
-				{
-					_throwScriptError("animation not started!");
-				}
-				else if (!_fe3d.billboardEntity_isAnimationPaused(arguments[0].getString()))
-				{
-					_throwScriptError("animation already started!");
-				}
-
-				_fe3d.billboardEntity_pauseAnimation(arguments[0].getString());
+				_fe3d.billboardEntity_pauseSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -649,13 +632,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Validate animation status
-				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
-				{
-					_throwScriptError("animation already started!");
-				}
-
-				_fe3d.billboardEntity_resumeAnimation(arguments[0].getString());
+				_fe3d.billboardEntity_resumeSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -670,13 +647,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Validate animation status
-				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
-				{
-					_throwScriptError("animation already started!");
-				}
-
-				_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
+				_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -691,7 +662,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.billboardEntity_isAnimationStarted(arguments[0].getString());
+				auto result = _fe3d.billboardEntity_isSpriteAnimationStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -706,7 +677,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.billboardEntity_isAnimationPlaying(arguments[0].getString());
+				auto result = _fe3d.billboardEntity_isSpriteAnimationPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -721,7 +692,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.billboardEntity_isAnimationPaused(arguments[0].getString());
+				auto result = _fe3d.billboardEntity_isSpriteAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -739,7 +710,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboard is of type text
 				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
 				{
-					_throwScriptError("billboard is not of type text!");
+					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;
 				}
 				else
@@ -763,7 +734,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Check if billboard is of type text
 				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
 				{
-					_throwScriptError("billboard is not of type text!");
+					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;
 				}
 				else

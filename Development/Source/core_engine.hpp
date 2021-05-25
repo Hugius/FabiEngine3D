@@ -36,7 +36,6 @@ class CoreEngine final
 
 private:
 	CoreEngine(FabiEngine3D& fe3d);
-	virtual ~CoreEngine();
 
 	// Core instances
 	LibraryLoader		   _libraryLoader;

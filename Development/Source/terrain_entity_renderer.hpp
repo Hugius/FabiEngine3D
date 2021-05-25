@@ -7,7 +7,6 @@ class TerrainEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~TerrainEntityRenderer() = default;
 	
 	void bind()    override;
 	void unbind()  override;

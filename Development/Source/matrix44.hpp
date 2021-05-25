@@ -5,7 +5,7 @@
 
 struct Matrix33;
 
-struct Matrix44
+struct Matrix44 final
 {
 	// Data access
 	union

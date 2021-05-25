@@ -7,7 +7,6 @@ class SkyEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~SkyEntityRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

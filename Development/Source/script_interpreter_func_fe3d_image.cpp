@@ -441,10 +441,10 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_setAnimationRows(arguments[0].getString(), arguments[1].getInteger());
-				_fe3d.imageEntity_setAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
-				_fe3d.imageEntity_setAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
-				_fe3d.imageEntity_startAnimation(arguments[0].getString(), arguments[4].getInteger());
+				_fe3d.imageEntity_setSpriteAnimationRows(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.imageEntity_setSpriteAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
+				_fe3d.imageEntity_setSpriteAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
+				_fe3d.imageEntity_startSpriteAnimation(arguments[0].getString(), arguments[4].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -459,7 +459,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_pauseAnimation(arguments[0].getString());
+				_fe3d.imageEntity_pauseSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -474,7 +474,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_resumeAnimation(arguments[0].getString());
+				_fe3d.imageEntity_resumeSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -489,7 +489,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				_fe3d.imageEntity_stopAnimation(arguments[0].getString());
+				_fe3d.imageEntity_stopSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -504,7 +504,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.imageEntity_isAnimationStarted(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isSpriteAnimationStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -519,7 +519,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.imageEntity_isAnimationPlaying(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isSpriteAnimationPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -534,7 +534,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.imageEntity_isAnimationPaused(arguments[0].getString());
+				auto result = _fe3d.imageEntity_isSpriteAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}

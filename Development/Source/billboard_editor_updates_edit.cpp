@@ -177,9 +177,9 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuAnimation")
 			{
-				int animationRowCount = _fe3d.billboardEntity_getAnimationRows(_currentBillboardID);
-				int animationColumnCount = _fe3d.billboardEntity_getAnimationColumns(_currentBillboardID);
-				int animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(_currentBillboardID);
+				int animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
+				int animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
+				int animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 				{
@@ -189,7 +189,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("animate")->isHovered())
 					{
-						_fe3d.billboardEntity_startAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
 					}
 					else if (screen->getButton("rows")->isHovered())
 					{
@@ -206,7 +206,7 @@ void BillboardEditor::_updateBillboardEditing()
 				}
 
 				// Update button hoverability
-				bool playing = _fe3d.billboardEntity_isAnimationStarted(_currentBillboardID);
+				bool playing = _fe3d.billboardEntity_isSpriteAnimationStarted(_currentBillboardID);
 				screen->getButton("animate")->setHoverable(!playing && animationRowCount != 0 && animationColumnCount != 0);
 
 				// Update value filling
@@ -216,15 +216,15 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (playing) // Only if animation is already playing
 					{
-						_fe3d.billboardEntity_stopAnimation(_currentBillboardID);
-						_fe3d.billboardEntity_startAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_stopSpriteAnimation(_currentBillboardID);
+						_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
 					}
 				}
 
 				// Update animation values
-				_fe3d.billboardEntity_setAnimationRows(_currentBillboardID, std::max(0, animationRowCount));
-				_fe3d.billboardEntity_setAnimationColumns(_currentBillboardID, std::max(0, animationColumnCount));
-				_fe3d.billboardEntity_setAnimationFramestep(_currentBillboardID, std::max(0, animationFramestep));
+				_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, std::max(0, animationRowCount));
+				_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, std::max(0, animationColumnCount));
+				_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, std::max(0, animationFramestep));
 			}
 			else if (screen->getID() == "billboardEditorMenuText")
 			{

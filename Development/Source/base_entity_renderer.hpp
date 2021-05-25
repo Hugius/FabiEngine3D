@@ -20,7 +20,6 @@ class BaseEntityRenderer
 {
 public:
 	BaseEntityRenderer(const string& vertexFile, const string& fragmentFile, RenderBus& renderBus);
-	virtual ~BaseEntityRenderer() = default;
 
 	virtual void bind()   = 0;
 	virtual void unbind() = 0;

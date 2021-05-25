@@ -377,12 +377,12 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	}
 
 	// Animation
-	if (_fe3d.billboardEntity_isAnimationStarted(previewID))
+	if (_fe3d.billboardEntity_isSpriteAnimationStarted(previewID))
 	{
-		_fe3d.billboardEntity_setAnimationRows(newID, _fe3d.billboardEntity_getAnimationRows(previewID));
-		_fe3d.billboardEntity_setAnimationColumns(newID, _fe3d.billboardEntity_getAnimationColumns(previewID));
-		_fe3d.billboardEntity_setAnimationFramestep(newID, _fe3d.billboardEntity_getAnimationFramestep(previewID));
-		_fe3d.billboardEntity_startAnimation(newID, -1);
+		_fe3d.billboardEntity_setSpriteAnimationRows(newID, _fe3d.billboardEntity_getSpriteAnimationRows(previewID));
+		_fe3d.billboardEntity_setSpriteAnimationColumns(newID, _fe3d.billboardEntity_getSpriteAnimationColumns(previewID));
+		_fe3d.billboardEntity_setSpriteAnimationFramestep(newID, _fe3d.billboardEntity_getSpriteAnimationFramestep(previewID));
+		_fe3d.billboardEntity_startSpriteAnimation(newID, -1);
 	}
 
 	// Bind AABB entity to billboard entity

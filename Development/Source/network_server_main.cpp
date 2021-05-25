@@ -22,10 +22,11 @@ NetworkServer::~NetworkServer()
 
 void NetworkServer::start()
 {
-	// Error checking
+	// Validate runtime status
 	if (_isRunning)
 	{
-		Logger::throwError("Trying to start network server: already running!");
+		Logger::throwWarning("Trying to start networking server: already running!");
+		return;
 	}
 
 	// Compose address info hints
@@ -77,10 +78,11 @@ void NetworkServer::start()
 
 void NetworkServer::stop()
 {
-	// Error checking
+	// Validate runtime status
 	if (!_isRunning)
 	{
-		Logger::throwError("Trying to stop network server: not running!");
+		Logger::throwWarning("Trying to stop networking server: not running!");
+		return;
 	}
 
 	// Close all network sockets

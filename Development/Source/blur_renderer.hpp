@@ -9,7 +9,6 @@ class BlurRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~BlurRenderer() = default;
 
 	void addFramebuffer(int index, bool textureClamp);
 	void bind()   override;

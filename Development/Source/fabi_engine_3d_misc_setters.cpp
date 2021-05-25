@@ -19,13 +19,6 @@ void FabiEngine3D::misc_hideCursor()
 
 void FabiEngine3D::network_start(NetworkPeerType type)
 {
-	// Validate networking status
-	if (_core->_networkServer.isRunning() || false)
-	{
-		logger_throwError("Trying to enable networking: already enabled!");
-	}
-
-	// Start server or client
 	if (type == NetworkPeerType::SERVER)
 	{
 		_core->_networkServer.start();
@@ -48,7 +41,7 @@ void FabiEngine3D::network_stop()
 	}
 	else
 	{
-		logger_throwError("Trying to disable networking: not enabled!");
+		logger_throwWarning("Trying to stop networking: not started!");
 	}
 }
 

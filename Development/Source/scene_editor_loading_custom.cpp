@@ -416,18 +416,18 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					if (isAnimationPlaying)
 					{
 						// Play
-						_fe3d.billboardEntity_stopAnimation(billboardID);
-						_fe3d.billboardEntity_startAnimation(billboardID, remainingAnimationLoops);
+						_fe3d.billboardEntity_stopSpriteAnimation(billboardID);
+						_fe3d.billboardEntity_startSpriteAnimation(billboardID, remainingAnimationLoops);
 
 						// Pause
 						if (isAnimationPaused)
 						{
-							_fe3d.billboardEntity_pauseAnimation(billboardID);
+							_fe3d.billboardEntity_pauseSpriteAnimation(billboardID);
 						}
 
 						// Progress
-						_fe3d.billboardEntity_setAnimationRowIndex(billboardID, animationRowIndex);
-						_fe3d.billboardEntity_setAnimationColumnIndex(billboardID, animationColumnIndex);
+						_fe3d.billboardEntity_setSpriteAnimationRowIndex(billboardID, animationRowIndex);
+						_fe3d.billboardEntity_setSpriteAnimationColumnIndex(billboardID, animationColumnIndex);
 					}
 				}
 			}

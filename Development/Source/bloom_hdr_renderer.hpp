@@ -7,7 +7,6 @@ class BloomHdrRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~BloomHdrRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

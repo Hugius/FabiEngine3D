@@ -8,7 +8,6 @@ class ModelEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~ModelEntityRenderer() = default;
 	
 	void bind()   override;
 	void unbind() override;

@@ -7,7 +7,6 @@ class AudioEditor final
 {
 public:
 	AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
-	~AudioEditor() = default;
 
 	void load();
 	void unload();

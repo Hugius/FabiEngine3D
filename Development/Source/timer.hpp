@@ -11,9 +11,6 @@ using std::string;
 class Timer final
 {
 public:
-	Timer()  = default;
-	~Timer() = default;
-
 	void start();
 	void startDeltaPart(const string& ID);
 	void stopDeltaPart();

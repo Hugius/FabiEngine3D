@@ -8,7 +8,6 @@ class ShadowRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~ShadowRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

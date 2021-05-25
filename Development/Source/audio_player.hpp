@@ -16,7 +16,6 @@ class AudioPlayer final
 {
 public:
 	AudioPlayer();
-	~AudioPlayer() = default;
 
 	void allocateChannels(unsigned int count);
 	void update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList);	

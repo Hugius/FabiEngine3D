@@ -6,7 +6,6 @@ class TerrainEntity final: public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~TerrainEntity() = default;
 
 	// Setters
 	void setPixelValues(const vector<float>& value);

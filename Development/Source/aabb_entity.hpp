@@ -8,7 +8,6 @@ class AabbEntity final: public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~AabbEntity() = default;
 
 	// Updates
 	void updateModelMatrix();

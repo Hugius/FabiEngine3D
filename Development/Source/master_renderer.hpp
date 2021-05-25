@@ -24,7 +24,6 @@ class MasterRenderer final
 {
 public:
 	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
-	~MasterRenderer() = default;
 
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus, Camera& camera);

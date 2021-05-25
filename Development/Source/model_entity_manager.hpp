@@ -6,7 +6,6 @@ class ModelEntityManager final :  public BaseEntityManager
 {
 public:
 	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~ModelEntityManager() = default;
 
 	shared_ptr<ModelEntity> getEntity(const string& ID);
 

@@ -9,7 +9,6 @@ class AnimationEditor final
 {
 public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
-	~AnimationEditor() = default;
 
 	// Interface
 	void load();

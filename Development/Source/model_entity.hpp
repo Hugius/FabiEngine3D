@@ -6,7 +6,6 @@ class ModelEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~ModelEntity() = default;
 	
 	// Setters
 	void addPart(const string& value);

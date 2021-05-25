@@ -8,7 +8,6 @@ class EnvironmentEditor final
 {
 public:
 	EnvironmentEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
-	~EnvironmentEditor() = default;
 
 	void load();
 	void save();

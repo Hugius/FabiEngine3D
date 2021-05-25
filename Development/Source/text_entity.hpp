@@ -10,7 +10,6 @@ class TextEntity final : public ImageEntity
 {
 public:
 	using ImageEntity::ImageEntity;
-	~TextEntity() = default;
 	
 	void setDynamic(bool value);
 	void deleteCharacterEntities();

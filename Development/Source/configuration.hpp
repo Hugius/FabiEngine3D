@@ -9,7 +9,7 @@
 using std::string;
 using std::ifstream;
 
-class Config
+class Config final
 {
 public:
 	// Global instance
@@ -39,7 +39,6 @@ public:
 
 private:
 	Config();
-	~Config() = default;
 
 	void _processOption(ifstream& file, string& option, string criteria);
 	void _processOption(ifstream& file, float& option, string criteria);

@@ -12,9 +12,6 @@ class InputHandler final
 {
 	friend class CoreEngine;
 public:
-	InputHandler() = default;
-	~InputHandler() = default;
-
 	void clearKeyToggles();
 	void clearMouseToggles();
 	void setLocked(bool locked);

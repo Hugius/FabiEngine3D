@@ -18,7 +18,6 @@ public:
 		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, 
 		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
 		AudioEditor& audioEditor, SettingsEditor& settingsEditor);
-	~TopViewportController() = default;
 
 	void initialize() override;
 	void update() override;

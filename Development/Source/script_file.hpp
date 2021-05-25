@@ -2,7 +2,7 @@
 
 #include "fabi_engine_3d.hpp"
 
-class ScriptFile
+class ScriptFile final
 {
 public:
 	ScriptFile(FabiEngine3D& fe3d, const string& ID);

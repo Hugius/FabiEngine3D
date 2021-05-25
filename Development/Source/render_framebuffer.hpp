@@ -8,7 +8,6 @@
 class RenderFramebuffer final
 {
 public:
-	RenderFramebuffer() = default;
 	~RenderFramebuffer();
 
 	void createMsaaTexture (Ivec2 position, Ivec2 size, int amount, int aaSamples);

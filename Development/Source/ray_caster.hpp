@@ -6,7 +6,6 @@ class RayCaster final
 {
 public:
 	RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager);
-	~RayCaster() = default;
 
 	void update(Ivec2 cursorPosition);
 	void setTerrainPointingEnabled(bool enabled);

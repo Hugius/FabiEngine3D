@@ -7,7 +7,6 @@ class BillboardEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~BillboardEntityRenderer() = default;
 	
 	void bind()   override;
 	void unbind() override;

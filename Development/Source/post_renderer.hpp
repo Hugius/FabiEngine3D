@@ -7,7 +7,6 @@ class PostRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~PostRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

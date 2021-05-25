@@ -4,7 +4,7 @@
 #include "animation_speed_type.hpp"
 #include "transformation_type.hpp"
 
-class AnimationFrame
+class AnimationFrame final
 {
 public:
 	AnimationFrame() = default;

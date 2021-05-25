@@ -11,7 +11,7 @@
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
 
-class ScriptInterpreter
+class ScriptInterpreter final
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor,

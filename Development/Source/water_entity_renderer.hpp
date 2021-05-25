@@ -7,7 +7,6 @@ class WaterEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~WaterEntityRenderer() = default;
 
 	void bind() override;
 	void unbind() override;

@@ -7,7 +7,6 @@ class AabbEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~AabbEntityRenderer() = default;
 	
 	void bind()   override;
 	void unbind() override;

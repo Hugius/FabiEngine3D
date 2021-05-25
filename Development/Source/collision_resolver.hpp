@@ -5,11 +5,10 @@
 #include "camera.hpp"
 #include "terrain_entity_manager.hpp"
 
-class CollisionResolver
+class CollisionResolver final
 {
 public:
 	CollisionResolver(CollisionDetector& collisionDetector);
-	virtual ~CollisionResolver() = default;
 	
 	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera & camera);
 	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);

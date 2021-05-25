@@ -394,27 +394,27 @@ public:
 	const string& billboardEntity_getFontPath(const string& ID);
 	const string& billboardEntity_getTextContent(const string& ID);
 	
-	// Billboard entity interface (animation) - setters
-	void billboardEntity_startAnimation(const string& ID, int loops);
-	void billboardEntity_pauseAnimation(const string& ID);
-	void billboardEntity_resumeAnimation(const string& ID);
-	void billboardEntity_stopAnimation(const string& ID);
-	void billboardEntity_setAnimationRows(const string& ID, unsigned int rows);
-	void billboardEntity_setAnimationColumns(const string& ID, unsigned int columns);
-	void billboardEntity_setAnimationFramestep(const string& ID, unsigned int framestep);
-	void billboardEntity_setAnimationRowIndex(const string& ID, unsigned int index);
-	void billboardEntity_setAnimationColumnIndex(const string& ID, unsigned int index);
+	// Billboard entity interface (sprite animation) - setters
+	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
+	void billboardEntity_pauseSpriteAnimation(const string& ID);
+	void billboardEntity_resumeSpriteAnimation(const string& ID);
+	void billboardEntity_stopSpriteAnimation(const string& ID);
+	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
+	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
+	void billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep);
+	void billboardEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
+	void billboardEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Billboard entity interface (animation) - getters
-	bool billboardEntity_isAnimationStarted(const string& ID);
-	bool billboardEntity_isAnimationPlaying(const string& ID);
-	bool billboardEntity_isAnimationPaused(const string& ID);
-	unsigned int billboardEntity_getAnimationRows(const string& ID);
-	unsigned int billboardEntity_getAnimationColumns(const string& ID);
-	unsigned int billboardEntity_getAnimationFramestep(const string& ID);
-	unsigned int billboardEntity_getAnimationRowIndex(const string& ID);
-	unsigned int billboardEntity_getAnimationColumnIndex(const string& ID);
-	int billboardEntity_getRemainingAnimationLoops(const string& ID);
+	bool billboardEntity_isSpriteAnimationStarted(const string& ID);
+	bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
+	bool billboardEntity_isSpriteAnimationPaused(const string& ID);
+	unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
+	unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
+	unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID);
+	unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID);
+	unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID);
+	int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
@@ -506,15 +506,15 @@ public:
 	void imageEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 	void imageEntity_setMirroredHorizontally(const string& ID, bool mirrored);
 	void imageEntity_setMirroredVertically(const string& ID, bool mirrored);
-	void imageEntity_startAnimation(const string& ID, int loops);
-	void imageEntity_pauseAnimation(const string& ID);
-	void imageEntity_resumeAnimation(const string& ID);
-	void imageEntity_stopAnimation(const string& ID);
-	void imageEntity_setAnimationRows(const string& ID, int rows);
-	void imageEntity_setAnimationColumns(const string& ID, int columns);
-	void imageEntity_setAnimationFramestep(const string& ID, int framestep);
-	void imageEntity_setAnimationRowIndex(const string& ID, unsigned int index);
-	void imageEntity_setAnimationColumnIndex(const string& ID, unsigned int index);
+	void imageEntity_startSpriteAnimation(const string& ID, int loops);
+	void imageEntity_pauseSpriteAnimation(const string& ID);
+	void imageEntity_resumeSpriteAnimation(const string& ID);
+	void imageEntity_stopSpriteAnimation(const string& ID);
+	void imageEntity_setSpriteAnimationRows(const string& ID, int rows);
+	void imageEntity_setSpriteAnimationColumns(const string& ID, int columns);
+	void imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep);
+	void imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
+	void imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Image entity interface - getters
 	bool imageEntity_isExisting(const string& ID);
@@ -522,9 +522,9 @@ public:
 	bool imageEntity_isCentered(const string& ID);
 	bool imageEntity_isMirroredHorizontally(const string& ID);
 	bool imageEntity_isMirroredVertically(const string& ID);
-	bool imageEntity_isAnimationStarted(const string& ID);
-	bool imageEntity_isAnimationPlaying(const string& ID);
-	bool imageEntity_isAnimationPaused(const string& ID);
+	bool imageEntity_isSpriteAnimationStarted(const string& ID);
+	bool imageEntity_isSpriteAnimationPlaying(const string& ID);
+	bool imageEntity_isSpriteAnimationPaused(const string& ID);
 	Vec2 imageEntity_getPosition(const string& ID);
 	Vec2 imageEntity_getSize(const string& ID);
 	Vec2 imageEntity_getMinPosition(const string& ID);
@@ -532,12 +532,12 @@ public:
 	Vec3 imageEntity_getColor(const string& ID);
 	float imageEntity_getRotation(const string& ID);
 	float imageEntity_getAlpha(const string& ID);
-	int imageEntity_getRemainingAnimationLoops(const string& ID);
-	unsigned int imageEntity_getAnimationRows(const string& ID);
-	unsigned int imageEntity_getAnimationColumns(const string& ID);
-	unsigned int imageEntity_getAnimationFramestep(const string& ID);
-	unsigned int imageEntity_getAnimationRowIndex(const string& ID);
-	unsigned int imageEntity_getAnimationColumnIndex(const string& ID);
+	int imageEntity_getRemainingSpriteAnimationLoops(const string& ID);
+	unsigned int imageEntity_getSpriteAnimationRows(const string& ID);
+	unsigned int imageEntity_getSpriteAnimationColumns(const string& ID);
+	unsigned int imageEntity_getSpriteAnimationFramestep(const string& ID);
+	unsigned int imageEntity_getSpriteAnimationRowIndex(const string& ID);
+	unsigned int imageEntity_getSpriteAnimationColumnIndex(const string& ID);
 	vector<string> imageEntity_getAllIDs();
 
 	// Text entity interface - setters

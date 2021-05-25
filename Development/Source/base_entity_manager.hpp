@@ -26,7 +26,6 @@ class BaseEntityManager
 {
 public:
 	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~BaseEntityManager() = default;
 
 	void deleteEntity(const string& ID);
 	void deleteAllEntities();

@@ -1,6 +1,6 @@
 #pragma once
 
-class Collision
+class Collision final
 {
 public:
 	Collision(bool x, bool y, bool z);

@@ -8,7 +8,6 @@ class ModelEditor final
 {
 public:
 	ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
-	~ModelEditor() = default;
 
 	void load();
 	void unload();

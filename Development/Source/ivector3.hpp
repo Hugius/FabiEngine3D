@@ -4,7 +4,7 @@
 
 struct Vec3;
 
-struct Ivec3
+struct Ivec3 final
 {
 	// Data access
 	union

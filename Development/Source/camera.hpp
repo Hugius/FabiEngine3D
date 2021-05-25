@@ -7,7 +7,6 @@ class Camera final
 {
 public:
 	Camera(RenderBus& renderBus, Window& window);
-	~Camera() = default;
 
 	void reset();
 

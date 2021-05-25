@@ -7,7 +7,6 @@ class BillboardEditor final
 {
 public:
 	BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
-	~BillboardEditor() = default;
 
 	void load();
 	void unload();

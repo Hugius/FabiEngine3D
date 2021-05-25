@@ -11,7 +11,6 @@ using std::vector;
 class AudioLoader final
 {
 public:
-	AudioLoader() = default;
 	~AudioLoader();
 	
 	Mix_Chunk* getChunkDataPointer(const string& filePath);

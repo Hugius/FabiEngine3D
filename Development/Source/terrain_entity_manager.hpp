@@ -6,7 +6,6 @@ class TerrainEntityManager final : public BaseEntityManager
 {
 public:
 	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~TerrainEntityManager() = default;
 
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();

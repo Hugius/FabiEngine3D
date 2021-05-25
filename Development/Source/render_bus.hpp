@@ -9,9 +9,7 @@ using std::string;
 
 class RenderBus final
 {
-public:
-	RenderBus() = default;
-	
+public:	
 	// Textures
 	void setSceneMap(GLuint value);
 	void setMainSkyReflectionCubeMap(GLuint value);

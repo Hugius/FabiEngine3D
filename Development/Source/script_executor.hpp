@@ -2,7 +2,7 @@
 
 #include "script_interpreter.hpp"
 
-class ScriptExecutor
+class ScriptExecutor final
 {
 public:
 	ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 

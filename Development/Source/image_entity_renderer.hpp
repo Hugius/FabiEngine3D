@@ -7,7 +7,6 @@ class ImageEntityRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~ImageEntityRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

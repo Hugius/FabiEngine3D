@@ -11,7 +11,6 @@ class SkyEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~SkyEntity() = default;
 
 	void updateRotationMatrix();
 	void setDiffuseMapPaths(const array<string, 6>& value);

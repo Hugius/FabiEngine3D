@@ -6,7 +6,6 @@ class LightEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~LightEntity() = default;
 
 	void setPosition(Vec3 value);
 	void translate(Vec3 value);

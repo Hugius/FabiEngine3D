@@ -8,7 +8,7 @@
 using std::vector;
 using std::string;
 
-struct MeshPart
+struct MeshPart final
 {
 	string name;
 	string diffuseMapPath;

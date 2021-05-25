@@ -7,7 +7,6 @@ class FinalRenderer final : public BaseEntityRenderer
 {
 public:
 	using BaseEntityRenderer::BaseEntityRenderer;
-	~FinalRenderer() = default;
 
 	void bind()   override;
 	void unbind() override;

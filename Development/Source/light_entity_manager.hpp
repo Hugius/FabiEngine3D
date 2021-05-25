@@ -6,7 +6,6 @@ class LightEntityManager final : public BaseEntityManager
 {
 public:
 	LightEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~LightEntityManager() = default;
 
 	shared_ptr<LightEntity> getEntity(const string& ID);
 

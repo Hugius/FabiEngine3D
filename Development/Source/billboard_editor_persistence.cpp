@@ -144,10 +144,10 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				// Playing sprite animation
 				if (isAnimationStarted)
 				{
-					_fe3d.billboardEntity_setAnimationFramestep(billboardID, animationFramestep);
-					_fe3d.billboardEntity_setAnimationRows(billboardID, animationRows);
-					_fe3d.billboardEntity_setAnimationColumns(billboardID, animationColumns);
-					_fe3d.billboardEntity_startAnimation(billboardID, -1);
+					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
+					_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
+					_fe3d.billboardEntity_setSpriteAnimationColumns(billboardID, animationColumns);
+					_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
 				}
 			}
 			else if (fontPath != "") // Text billboard
@@ -205,10 +205,10 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
 		auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
-		auto isAnimationStarted = _fe3d.billboardEntity_isAnimationStarted(billboardID);
-		auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
-		auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
-		auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
+		auto isAnimationStarted = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
+		auto animationRows = _fe3d.billboardEntity_getSpriteAnimationRows(billboardID);
+		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
+		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 
 		// Perform empty string & space conversions

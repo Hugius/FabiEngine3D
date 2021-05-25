@@ -124,7 +124,7 @@ float FabiEngine3D::imageEntity_getAlpha(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->getAlpha();
 }
 
-int FabiEngine3D::imageEntity_getRemainingAnimationLoops(const string& ID)
+int FabiEngine3D::imageEntity_getRemainingSpriteAnimationLoops(const string& ID)
 {
 	auto maxLoops = _core->_imageEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
 	auto currentLoops = _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationLoops();
@@ -174,47 +174,47 @@ bool FabiEngine3D::imageEntity_isCentered(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->isCentered();
 }
 
-void FabiEngine3D::imageEntity_startAnimation(const string& ID, int loops)
+void FabiEngine3D::imageEntity_startSpriteAnimation(const string& ID, int loops)
 {
 	_core->_imageEntityManager.getEntity(ID)->startSpriteAnimation(loops);
 }
 
-void FabiEngine3D::imageEntity_pauseAnimation(const string& ID)
+void FabiEngine3D::imageEntity_pauseSpriteAnimation(const string& ID)
 {
 	_core->_imageEntityManager.getEntity(ID)->pauseSpriteAnimation();
 }
 
-void FabiEngine3D::imageEntity_resumeAnimation(const string& ID)
+void FabiEngine3D::imageEntity_resumeSpriteAnimation(const string& ID)
 {
 	_core->_imageEntityManager.getEntity(ID)->resumeSpriteAnimation();
 }
 
-void FabiEngine3D::imageEntity_stopAnimation(const string& ID)
+void FabiEngine3D::imageEntity_stopSpriteAnimation(const string& ID)
 {
 	_core->_imageEntityManager.getEntity(ID)->stopSpriteAnimationAnimation();
 }
 
-void FabiEngine3D::imageEntity_setAnimationRows(const string& ID, int rows)
+void FabiEngine3D::imageEntity_setSpriteAnimationRows(const string& ID, int rows)
 {
 	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationRows(rows);
 }
 
-void FabiEngine3D::imageEntity_setAnimationColumns(const string& ID, int columns)
+void FabiEngine3D::imageEntity_setSpriteAnimationColumns(const string& ID, int columns)
 {
 	_core->_imageEntityManager.getEntity(ID)->setTotalSpriteAnimationColumns(columns);
 }
 
-void FabiEngine3D::imageEntity_setAnimationFramestep(const string& ID, int framestep)
+void FabiEngine3D::imageEntity_setSpriteAnimationFramestep(const string& ID, int framestep)
 {
 	_core->_imageEntityManager.getEntity(ID)->setMaxSpriteAnimationFramestep(framestep);
 }
 
-void FabiEngine3D::imageEntity_setAnimationRowIndex(const string& ID, unsigned int index)
+void FabiEngine3D::imageEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationRowIndex(index);
 }
 
-void FabiEngine3D::imageEntity_setAnimationColumnIndex(const string& ID, unsigned int index)
+void FabiEngine3D::imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index)
 {
 	_core->_imageEntityManager.getEntity(ID)->setSpriteAnimationColumnIndex(index);
 }
@@ -229,17 +229,17 @@ void FabiEngine3D::imageEntity_setMirroredVertically(const string& ID, bool mirr
 	_core->_imageEntityManager.getEntity(ID)->setMirroredVertically(mirrored);
 }
 
-bool FabiEngine3D::imageEntity_isAnimationStarted(const string& ID)
+bool FabiEngine3D::imageEntity_isSpriteAnimationStarted(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationStarted();
 }
 
-bool FabiEngine3D::imageEntity_isAnimationPlaying(const string& ID)
+bool FabiEngine3D::imageEntity_isSpriteAnimationPlaying(const string& ID)
 {
-	return (imageEntity_isAnimationStarted(ID) && !imageEntity_isAnimationPaused(ID));
+	return (imageEntity_isSpriteAnimationStarted(ID) && !imageEntity_isSpriteAnimationPaused(ID));
 }
 
-bool FabiEngine3D::imageEntity_isAnimationPaused(const string& ID)
+bool FabiEngine3D::imageEntity_isSpriteAnimationPaused(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationPaused();
 }
@@ -254,27 +254,27 @@ bool FabiEngine3D::imageEntity_isMirroredVertically(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();;
 }
 
-unsigned int FabiEngine3D::imageEntity_getAnimationRows(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRows(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationRows();
 }
 
-unsigned int FabiEngine3D::imageEntity_getAnimationColumns(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getSpriteAnimationColumns(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getTotalSpriteAnimationColumns();
 }
 
-unsigned int FabiEngine3D::imageEntity_getAnimationFramestep(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getSpriteAnimationFramestep(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getMaxSpriteAnimationFramestep();
 }
 
-unsigned int FabiEngine3D::imageEntity_getAnimationRowIndex(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRowIndex(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationRowIndex();
 }
 
-unsigned int FabiEngine3D::imageEntity_getAnimationColumnIndex(const string& ID)
+unsigned int FabiEngine3D::imageEntity_getSpriteAnimationColumnIndex(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
 }

@@ -17,7 +17,6 @@ class SceneEditor final
 public:
 	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
-	~SceneEditor() = default;
 
 	// Core
 	void load();

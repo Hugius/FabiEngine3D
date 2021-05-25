@@ -6,7 +6,6 @@ class WaterEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~WaterEntity() = default;
 	
 	// Setters
 	void setSpeed(Vec2 value);

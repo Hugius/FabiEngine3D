@@ -6,7 +6,6 @@ class ImageEntity : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	~ImageEntity() = default;
 
 	// Model matrix
 	void updateModelMatrix();

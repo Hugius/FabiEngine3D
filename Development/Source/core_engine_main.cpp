@@ -37,58 +37,15 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 
 }
 
-CoreEngine::~CoreEngine()
-{
-
-}
-
-void CoreEngine::_updateWindowFading()
-{
-	// Only if in engine preview
-	if (!Config::getInst().isGameExported())
-	{
-		static float opacity = 0.0f;
-
-		// Stop if window is 100% visible
-		if (opacity < 1.0f)
-		{
-			_window.setOpacity(opacity);
-			opacity += 0.01f;
-		}
-		else
-		{
-			_window.setOpacity(1.0f);
-		}
-	}
-}
-
-void CoreEngine::_pause()
-{
-	if (_isPaused)
-	{
-		Logger::throwError("Trying to resume engine: already paused!");
-	}
-
-	_isPaused = true;
-}
-
-void CoreEngine::_resume()
-{
-	if (!_isPaused)
-	{
-		Logger::throwError("Trying to resume engine: not paused!");
-	}
-
-	_isPaused = false;
-}
-
-void CoreEngine::_stop()
-{
-	_isRunning = false;
-}
-
 void CoreEngine::_start()
 {
+	// Error
+	if (_isRunning)
+	{
+		Logger::throwWarning("Trying to start engine: already running!");
+		return;
+	}
+
 	// Setup
 	_setupApplication();
 	_isRunning = true;
@@ -130,6 +87,39 @@ void CoreEngine::_start()
 
 	// Finish engine controller
 	_fe3d.FE3D_CONTROLLER_DESTROY();
+}
+
+void CoreEngine::_pause()
+{
+	if (_isPaused)
+	{
+		Logger::throwWarning("Trying to resume engine: already paused!");
+		return;
+	}
+
+	_isPaused = true;
+}
+
+void CoreEngine::_resume()
+{
+	if (!_isPaused)
+	{
+		Logger::throwWarning("Trying to resume engine: not paused!");
+		return;
+	}
+
+	_isPaused = false;
+}
+
+void CoreEngine::_stop()
+{
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Trying to stop engine: not running!");
+		return;
+	}
+
+	_isRunning = false;
 }
 
 void CoreEngine::_setupApplication()
@@ -188,5 +178,25 @@ void CoreEngine::_setupApplication()
 	{
 		// Start smooth window fade in
 		_window.setOpacity(0.0f);
+	}
+}
+
+void CoreEngine::_updateWindowFading()
+{
+	// Only if in engine preview
+	if (!Config::getInst().isGameExported())
+	{
+		static float opacity = 0.0f;
+
+		// Stop if window is 100% visible
+		if (opacity < 1.0f)
+		{
+			_window.setOpacity(opacity);
+			opacity += 0.01f;
+		}
+		else
+		{
+			_window.setOpacity(1.0f);
+		}
 	}
 }

@@ -1,8 +1,8 @@
 # Miscellaneous
 - `fe3d:game_pause`() ---> `NONE`  
   Pauses all internal game/engine updates if playing (except for the scripting of course).
-- `fe3d:game_unpause`() ---> `NONE`  
-  Unpauses all internal game/engine updates if paused.
+- `fe3d:game_resume`() ---> `NONE`  
+  Resumes all internal game/engine updates if paused.
 - `fe3d:game_stop`() ---> `NONE`  
   Stops the game.
 - `fe3d:print`(`VEC3/STR/DEC/INT/BOOL` message) ---> `NONE`  

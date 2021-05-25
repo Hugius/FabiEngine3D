@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\core_engine_main.cpp" />
-    <ClCompile Include="..\..\Source\core_engine_misc.cpp" />
+    <ClCompile Include="..\..\Source\core_engine_update.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_audio.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_camera.cpp" />

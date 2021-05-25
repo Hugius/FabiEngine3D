@@ -132,8 +132,7 @@ void BillboardEntity::startSpriteAnimation(int loops)
 {
 	if (_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to start sprite animation on billboard with ID \"" + getID() + "\": animation already started!");
-		return;
+		Logger::throwError("Trying to start sprite animation on billboard with ID \"" + getID() + "\": animation already started!");
 	}
 
 	_isSpriteAnimationStarted = true;
@@ -146,13 +145,11 @@ void BillboardEntity::pauseSpriteAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
 	}
 	else if (_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation already paused!");
-		return;
+		Logger::throwError("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation already paused!");
 	}
 
 	_isSpriteAnimationPaused = true;
@@ -162,8 +159,7 @@ void BillboardEntity::resumeSpriteAnimation()
 {
 	if (!_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to resume sprite animation on billboard with ID \"" + getID() + "\" animation not paused!");
-		return;
+		Logger::throwError("Trying to resume sprite animation on billboard with ID \"" + getID() + "\" animation not paused!");
 	}
 
 	_isSpriteAnimationPaused = false;
@@ -173,8 +169,7 @@ void BillboardEntity::stopSpriteAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to stop sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("Trying to stop sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
 	}
 
 	_isSpriteAnimationStarted = false;

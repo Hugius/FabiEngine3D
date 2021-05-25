@@ -17,11 +17,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\network_server.cpp">
+    <ClCompile Include="..\..\Source\network_server_update.cpp">
       <Filter>Server</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\network_client.cpp">
       <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_server_main.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_server_misc.cpp">
+      <Filter>Server</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

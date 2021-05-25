@@ -775,10 +775,12 @@ public:
 	}
 
 	// Networking interface - setters
-	void network_enable(NetworkPeerType type);
+	void network_start(NetworkPeerType type);
+	void network_stop();
 	void network_connectToServer(const string& address, const string& port);
 
 	// Networking interface - getters
+	bool network_isStarted();
 	bool network_isRunningServer();
 	bool network_isConnectedToServer();
 	const string& network_getConnectedServerAddress();

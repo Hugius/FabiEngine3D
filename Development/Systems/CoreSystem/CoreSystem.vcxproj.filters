@@ -27,7 +27,7 @@
     <ClCompile Include="..\..\Source\core_engine_main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\core_engine_misc.cpp">
+    <ClCompile Include="..\..\Source\core_engine_update.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp">

@@ -5,6 +5,88 @@
 #include <ratio>
 #include <chrono>
 
+CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
+	_fe3d(fe3d),
+	_libraryLoader(),
+	_window(_libraryLoader),
+	_meshLoader(),
+	_textureLoader(),
+	_audioLoader(),
+	_inputHandler(),
+	_renderBus(),
+	_camera(_renderBus, _window),
+	_masterRenderer(_renderBus, _timer, _textureLoader),
+	_skyEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_terrainEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_waterEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_modelEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_billboardEntityManager(_meshLoader, _textureLoader, _renderBus, _camera),
+	_aabbEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_lightEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_shadowGenerator(),
+	_rayCaster(_renderBus, _terrainEntityManager),
+	_collisionDetector(),
+	_collisionResolver(_collisionDetector),
+	_timer(),
+	_audioManager(_audioLoader),
+	_audioPlayer(),
+	_networkServer()
+{
+
+}
+
+CoreEngine::~CoreEngine()
+{
+
+}
+
+void CoreEngine::_updateWindowFading()
+{
+	// Only if in engine preview
+	if (!Config::getInst().isGameExported())
+	{
+		static float opacity = 0.0f;
+
+		// Stop if window is 100% visible
+		if (opacity < 1.0f)
+		{
+			_window.setOpacity(opacity);
+			opacity += 0.01f;
+		}
+		else
+		{
+			_window.setOpacity(1.0f);
+		}
+	}
+}
+
+void CoreEngine::_pause()
+{
+	if (_isPaused)
+	{
+		Logger::throwError("Trying to resume engine: already paused!");
+	}
+
+	_isPaused = true;
+}
+
+void CoreEngine::_resume()
+{
+	if (!_isPaused)
+	{
+		Logger::throwError("Trying to resume engine: not paused!");
+	}
+
+	_isPaused = false;
+}
+
+void CoreEngine::_stop()
+{
+	_isRunning = false;
+}
+
 void CoreEngine::_start()
 {
 	// Setup
@@ -107,107 +189,4 @@ void CoreEngine::_setupApplication()
 		// Start smooth window fade in
 		_window.setOpacity(0.0f);
 	}
-}
-
-void CoreEngine::_updateApplication()
-{
-	// Temporary values
-	static Ivec2 lastCursorPosition = _window.getCursorPos();
-
-	// Exit application
-	if (_inputHandler.getKeyDown(InputType::WINDOW_X_BUTTON))
-	{
-		_stop();
-	}
-
-	// User updates
-	_timer.startDeltaPart("coreUpdate");
-	_fe3d._isRaycastUpdated = false;
-	_fe3d._hoveredAabbID = "";
-	_fe3d.FE3D_CONTROLLER_UPDATE();
-	_timer.stopDeltaPart();
-	_networkServer.update();
-	// Only update 3D if engine not paused
-	if (!_isPaused)
-	{
-		// Camera updates
-		_timer.startDeltaPart("cameraUpdate");
-		_camera.update(lastCursorPosition);
-		_timer.stopDeltaPart();
-
-		// Raycast updates
-		_timer.startDeltaPart("raycastUpdate");
-		_rayCaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
-		_timer.stopDeltaPart();
-
-		// Collision updates
-		_timer.startDeltaPart("collisionUpdate");
-		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera);
-		_timer.stopDeltaPart();
-
-		// 3D entity updates
-		_timer.startDeltaPart("skyEntityUpdate");
-		_skyEntityManager.update();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("waterEntityUpdate");
-		_waterEntityManager.update();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("modelEntityUpdate");
-		_modelEntityManager.update();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("billboardEntityUpdate");
-		_billboardEntityManager.update();
-		_timer.stopDeltaPart();
-		_timer.startDeltaPart("aabbEntityUpdate");
-		_aabbEntityManager.update(_modelEntityManager.getEntities(), _billboardEntityManager.getEntities());
-		_timer.stopDeltaPart();
-
-		// Shadow updates
-		_timer.startDeltaPart("shadowUpdate");
-		_shadowGenerator.update(_renderBus);
-		_camera.updateMatrices();
-		_timer.stopDeltaPart();
-
-		// Audio updates
-		_timer.startDeltaPart("guiEntityUpdate");
-		_audioPlayer.update(_camera, _audioManager.getSounds(), _audioManager.getMusic());
-		_timer.stopDeltaPart();
-	}
-
-	// Always update 2D logic (except for sprite animations)
-	_timer.startDeltaPart("imageTextUpdate");
-	(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : (void)0;
-	_imageEntityManager.update();
-	_textEntityManager.update();
-	_timer.stopDeltaPart();
-
-	// Updates miscellaneous
-	_timer.startDeltaPart("miscUpdate");
-	_updateWindowFading();
-	_timer.stopDeltaPart();
-
-	// Save last cursor position
-	lastCursorPosition = _window.getCursorPos();
-}
-
-void CoreEngine::_renderApplication()
-{
-	// Reset triangle count
-	_renderBus.resetTriangleCount();
-
-	// Create bus with all entities
-	EntityBus entityBus
-	(
-		_skyEntityManager.getSelectedMainSky(), _skyEntityManager.getSelectedMixSky(), _terrainEntityManager.getSelectedTerrain(),
-		_waterEntityManager.getSelectedWater(), _modelEntityManager.getEntities(), _billboardEntityManager.getEntities(), 
-		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _imageEntityManager.getEntities(), _textEntityManager.getEntities()
-	);
-
-	// Render entities
-	_masterRenderer.renderScene(&entityBus, _camera);
-
-	// Swap GPU buffer
-	_timer.startDeltaPart("bufferSwap");
-	_window.swapBackBuffer();
-	_timer.stopDeltaPart();
 }

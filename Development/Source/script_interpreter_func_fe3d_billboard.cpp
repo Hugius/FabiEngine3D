@@ -602,6 +602,13 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
+				// Validate animation status
+				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
+				{
+					_throwScriptError("animation already started!");
+				}
+
+				// Start animation
 				_fe3d.billboardEntity_startAnimation(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -617,6 +624,16 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
+				// Validate animation status
+				if (!_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
+				{
+					_throwScriptError("animation not started!");
+				}
+				else if (!_fe3d.billboardEntity_isAnimationPaused(arguments[0].getString()))
+				{
+					_throwScriptError("animation already started!");
+				}
+
 				_fe3d.billboardEntity_pauseAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -632,6 +649,12 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
+				// Validate animation status
+				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
+				{
+					_throwScriptError("animation already started!");
+				}
+
 				_fe3d.billboardEntity_resumeAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -647,6 +670,12 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
+				// Validate animation status
+				if (_fe3d.billboardEntity_isAnimationStarted(arguments[0].getString()))
+				{
+					_throwScriptError("animation already started!");
+				}
+
 				_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

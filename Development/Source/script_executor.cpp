@@ -59,9 +59,14 @@ void ScriptExecutor::unload()
 		// Unload script execution
 		_scriptInterpreter.unload();
 
+		// Resume engine updates
+		if (_fe3d.engine_isPaused())
+		{
+			_fe3d.engine_resume();
+		}
+
 		// Miscellaneous
 		_fe3d.misc_hideCursor();
-		_fe3d.engine_resume(); // Resume engine updates, just in case game was paused while stopping
 		_isInitialized = false;
 		_isRunning = false;
 	}

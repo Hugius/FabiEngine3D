@@ -14,6 +14,9 @@ typedef unsigned __int64 SOCKET;
 class NetworkServer final
 {
 public:
+	NetworkServer();
+	~NetworkServer();
+
 	void start();
 	void stop();
 	void update();

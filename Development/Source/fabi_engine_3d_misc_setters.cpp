@@ -17,14 +17,15 @@ void FabiEngine3D::misc_hideCursor()
 	_core->_window.hideCursor();
 }
 
-void FabiEngine3D::network_enable(NetworkPeerType type)
+void FabiEngine3D::network_start(NetworkPeerType type)
 {
-	if (_core->_networkServer.isRunning())
+	// Validate networking status
+	if (_core->_networkServer.isRunning() || false)
 	{
-		logger_throwWarning("Trying to enable networking: already enabled!");
-		return;
+		logger_throwError("Trying to enable networking: already enabled!");
 	}
 
+	// Start server or client
 	if (type == NetworkPeerType::SERVER)
 	{
 		_core->_networkServer.start();
@@ -33,6 +34,27 @@ void FabiEngine3D::network_enable(NetworkPeerType type)
 	{
 		
 	}
+}
+
+void FabiEngine3D::network_stop()
+{
+	if (_core->_networkServer.isRunning())
+	{
+		_core->_networkServer.stop();
+	}
+	else if (false)
+	{
+
+	}
+	else
+	{
+		logger_throwError("Trying to disable networking: not enabled!");
+	}
+}
+
+bool FabiEngine3D::network_isStarted()
+{
+	return (_core->_networkServer.isRunning() || false);
 }
 
 void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)

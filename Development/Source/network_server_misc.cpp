@@ -1,3 +1,4 @@
+#include "network_server.hpp"
 #define WIN32_LEAN_AND_MEAN
 
 #include "network_server.hpp"
@@ -16,7 +17,7 @@ bool NetworkServer::isMessagePending()
 	return !_receivedMessageQueue.empty();
 }
 
-void NetworkServer::loadNextMessage()
+void NetworkServer::loadNextPendingMessage()
 {
 	if (_receivedMessageQueue.empty())
 	{
@@ -39,6 +40,11 @@ const shared_ptr<NetworkMessage> NetworkServer::getPendingMessage()
 	{
 		return _receivedMessageQueue.front();
 	}
+}
+
+void NetworkServer::_spawnConnectionThread()
+{
+	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 }
 
 void NetworkServer::_sendMessageToClient(SOCKET clientSocketID, const string& content)

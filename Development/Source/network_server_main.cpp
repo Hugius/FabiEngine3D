@@ -71,7 +71,7 @@ void NetworkServer::start()
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
+	_spawnConnectionThread();
 
 	// Server is now operable
 	_isRunning = true;

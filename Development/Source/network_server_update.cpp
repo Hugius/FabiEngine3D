@@ -27,7 +27,7 @@ void NetworkServer::update()
 		// Check if client is allowed to connect
 		if (_clientIPs.size() == MAX_CLIENT_COUNT)
 		{
-			_sendMessageToClient(clientSocketID, "networkServer_FULL");
+			_sendMessageToClient(clientSocketID, "SERVER_FULL"); // <---
 			closesocket(clientSocketID);
 		}
 		else
@@ -40,7 +40,7 @@ void NetworkServer::update()
 		}
 
 		// Spawn connection thread again for next client
-		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
+		_spawnConnectionThread();
 	}
 
 	// Receive incoming client messages
@@ -59,7 +59,7 @@ void NetworkServer::update()
 			auto messageResult = messageThread.get();
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageContent = std::get<1>(messageResult);
-			auto messageError = std::get<2>(messageResult);
+			auto messageErrorCode = std::get<2>(messageResult);
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
@@ -73,7 +73,7 @@ void NetworkServer::update()
 			}
 			else // Receive failed
 			{
-				if (messageError == WSAECONNRESET) // Client lost socket connection
+				if (messageErrorCode == WSAECONNRESET) // Client lost socket connection
 				{
 					Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" lost connection with the server!");
 					_disconnectClient(ipAddress);
@@ -81,7 +81,7 @@ void NetworkServer::update()
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Networking server receive failed with error code: ", messageError);
+					Logger::throwError("Networking server receive failed with error code: ", messageErrorCode);
 				}
 			}
 

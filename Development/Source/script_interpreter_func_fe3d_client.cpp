@@ -83,6 +83,17 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:network_client_send_message")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.networkClient_sendMessage(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

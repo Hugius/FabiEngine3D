@@ -44,15 +44,8 @@ void NetworkClient::start(const string& serverIP, const string& serverPort)
 		return;
 	}
 
-	// Create socket for listening
-	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
-	if (_serverSocketID == INVALID_SOCKET)
-	{
-		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
-	}
-
-	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
+	// Start attempting to connect
+	_initiateConnection();
 
 	// Client is now operable
 	_isRunning = true;

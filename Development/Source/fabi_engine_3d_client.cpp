@@ -20,7 +20,12 @@ void FabiEngine3D::networkClient_stop()
 
 void FabiEngine3D::networkClient_loadNextPendingMessage()
 {
-	_core->_networkClient.loadNextMessage();
+	_core->_networkClient.loadNextPendingMessage();
+}
+
+void FabiEngine3D::networkClient_sendMessage(const string& content)
+{
+	_core->_networkClient.sendMessage(content);
 }
 
 bool FabiEngine3D::networkClient_isConnectedToServer()

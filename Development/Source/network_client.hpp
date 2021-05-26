@@ -27,7 +27,8 @@ public:
 	void start(const string& serverIP, const string& serverPort);
 	void stop();
 	void update();
-	void loadNextMessage();
+	void loadNextPendingMessage();
+	void sendMessage(const string& content);
 
 	bool isRunning();
 	bool isMessagePending();
@@ -36,7 +37,9 @@ public:
 	const shared_ptr<NetworkMessage> getPendingMessage();
 
 private:
-	void _sendMessageToServer(const string& content);
+	void _initiateConnection();
+	void _closeConnection();
+	void _spawnConnectionThread();
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET clientSocketID);
 

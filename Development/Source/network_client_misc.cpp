@@ -21,7 +21,7 @@ bool NetworkClient::isConnectedToServer()
 	return _isConnectedToServer;
 }
 
-void NetworkClient::loadNextMessage()
+void NetworkClient::loadNextPendingMessage()
 {
 	if (_receivedMessageQueue.empty())
 	{
@@ -45,6 +45,51 @@ const shared_ptr<NetworkMessage> NetworkClient::getPendingMessage()
 		return _receivedMessageQueue.front();
 	}
 }
+
+void NetworkClient::sendMessage(const string& content)
+{
+	auto sendStatusCode = send(_serverSocketID, content.c_str(), static_cast<int>(content.size()), 0);
+
+	if (sendStatusCode == SOCKET_ERROR)
+	{
+		auto errorCode = WSAGetLastError();
+
+		if (errorCode == WSAECONNRESET)
+		{
+			_closeConnection();
+			_initiateConnection();
+		}
+		else
+		{
+			Logger::throwError("Networking client send failed with error code: ", errorCode);
+		}
+	}
+}
+
+void NetworkClient::_initiateConnection()
+{
+	// Create socket for connecting to the server
+	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
+	if (_serverSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
+	}
+
+	// Spawn a thread for connecting to the server
+	_spawnConnectionThread();
+}
+
+void NetworkClient::_closeConnection()
+{
+	closesocket(_serverSocketID);
+	_isConnectedToServer = false;
+}
+
+void NetworkClient::_spawnConnectionThread()
+{
+	_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
+}
+
 int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)
 {
 	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));

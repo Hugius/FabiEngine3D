@@ -20,7 +20,7 @@ void FabiEngine3D::networkServer_stop()
 
 void FabiEngine3D::networkServer_loadNextPendingMessage()
 {
-	_core->_networkServer.loadNextMessage();
+	_core->_networkServer.loadNextPendingMessage();
 }
 
 bool FabiEngine3D::networkClient_isStarted()

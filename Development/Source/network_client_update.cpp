@@ -20,20 +20,20 @@ void NetworkClient::update()
 		if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
 			// Temporary values
-			auto connectionErrorCode = _connectionThread.get();
+			auto errorCode = _connectionThread.get();
 
-			if (connectionErrorCode == 0) // Successfully connected with server
+			if (errorCode == 0) // Successfully connected with server
 			{
 				_isConnectedToServer = true;
 			}
-			else if (connectionErrorCode == WSAECONNREFUSED) // Cannot connect with server
+			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
 				// Spawn thread again for another attempt
-				_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
+				_spawnConnectionThread();
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Networking client connect failed with error code: ", connectionErrorCode);
+				Logger::throwError("Networking client connect failed with error code: ", errorCode);
 			}
 		}
 	}

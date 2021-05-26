@@ -786,6 +786,7 @@ public:
 	void networkClient_start(const string& serverIP);
 	void networkClient_stop();
 	void networkClient_loadNextPendingMessage();
+	void networkClient_sendMessage(const string& content);
 
 	// Client interface - getters
 	bool networkClient_isStarted();

@@ -25,7 +25,7 @@ public:
 	void start();
 	void stop();
 	void update();
-	void loadNextMessage();
+	void loadNextPendingMessage();
 
 	bool isRunning();
 	bool isMessagePending();
@@ -35,6 +35,7 @@ public:
 	static inline const string networkServer_PORT = "61205";
 
 private:
+	void _spawnConnectionThread();
 	void _sendMessageToClient(SOCKET clientSocketID, const string& content);
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(const string& ipAddress);

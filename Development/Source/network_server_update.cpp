@@ -39,8 +39,8 @@ void NetworkServer::update()
 			Logger::throwInfo("Network client with IP \"" + _clientIPs.back() + "\" connected to the server!");
 		}
 
-		// Spawn connection thread again
-		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
+		// Spawn connection thread again for next client
+		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 	}
 
 	// Receive incoming client messages

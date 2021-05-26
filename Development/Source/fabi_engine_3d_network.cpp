@@ -1,7 +1,7 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::network_start(NetworkPeerType type)
+void FabiEngine3D::network_start(NetworkPeerType type, const string& serverIP)
 {
 	if (type == NetworkPeerType::SERVER)
 	{
@@ -9,7 +9,7 @@ void FabiEngine3D::network_start(NetworkPeerType type)
 	}
 	else
 	{
-
+		_core->_networkClient.start(serverIP, NetworkServer::SERVER_PORT);
 	}
 }
 
@@ -19,9 +19,9 @@ void FabiEngine3D::network_stop()
 	{
 		_core->_networkServer.stop();
 	}
-	else if (false)
+	else if (_core->_networkClient.isRunning())
 	{
-
+		_core->_networkClient.stop();
 	}
 	else
 	{

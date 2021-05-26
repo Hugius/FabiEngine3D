@@ -77,7 +77,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory
 	char titleBuffer[100];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = NULL;
+	ofn.hwndOwner = nullptr;
 	ofn.lpstrFile = pathBuffer;
 	ofn.lpstrFile[0] = '\0';
 	ofn.nMaxFile = sizeof(pathBuffer);

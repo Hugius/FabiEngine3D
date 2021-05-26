@@ -54,27 +54,27 @@ void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 
 	// Vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, NULL);
+	glShaderSource(vertex, 1, &vShaderCode, nullptr);
 	glCompileShader(vertex);
 
 	// Errors vertex shader
 	glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
 	if (!success) 
 	{
-		glGetShaderInfoLog(vertex, 512, NULL, infoLog);
+		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
 		Logger::throwError("Shader error at " + _vertexFileName + ": " + infoLog);
 	}
 
 	// Fragment shader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, NULL);
+	glShaderSource(fragment, 1, &fShaderCode, nullptr);
 	glCompileShader(fragment);
 
 	// Errors fragment shader
 	glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
 	if (!success) 
 	{
-		glGetShaderInfoLog(fragment, 512, NULL, infoLog);
+		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
 		Logger::throwError("Shader error at " + _fragmentFileName + ": " + infoLog);
 	}
 
@@ -88,7 +88,7 @@ void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	glGetProgramiv(_program, GL_LINK_STATUS, &success);
 	if (!success) 
 	{
-		glGetProgramInfoLog(_program, 512, NULL, infoLog);
+		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
 		Logger::throwError("Shader error at " + _fragmentFileName.substr(0, _fragmentFileName.size()-5) + ": " + infoLog);
 	}
 

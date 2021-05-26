@@ -18,7 +18,7 @@ const string Tools::getRootDirectory()
 	size_t len = sizeof(buffer);
 
 	// Get executable path
-	GetModuleFileName(NULL, buffer, static_cast<DWORD>(len));
+	GetModuleFileName(nullptr, buffer, static_cast<DWORD>(len));
 
 	// Create final string
 	string rootDir = buffer;

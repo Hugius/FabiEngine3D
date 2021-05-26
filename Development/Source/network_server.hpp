@@ -32,6 +32,8 @@ public:
 
 	const shared_ptr<NetworkMessage> getPendingMessage();
 
+	static inline const string SERVER_PORT = "61205";
+
 private:
 	void _sendMessageToClient(SOCKET clientSocketID, const string& content);
 	void _acceptClient(SOCKET clientSocketID);
@@ -39,11 +41,10 @@ private:
 	SOCKET _waitForClientConnection(SOCKET listenSocketID);
 	tuple<int, string, int> _waitForClientMessage(SOCKET clientSocketID);
 
-	static inline const string SERVER_PORT = "61205";
 	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
 	static inline const unsigned int MAX_CLIENT_COUNT = 1;
 
-	SOCKET _listenSocketID;
+	SOCKET _listeningSocketID;
 
 	future<SOCKET> _connectionThread;
 

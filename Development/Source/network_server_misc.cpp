@@ -81,7 +81,7 @@ void NetworkServer::_disconnectClient(const string& ipAddress)
 
 SOCKET NetworkServer::_waitForClientConnection(SOCKET listenSocketID)
 {
-	return accept(listenSocketID, NULL, NULL);
+	return accept(listenSocketID, nullptr, nullptr);
 }
 
 tuple<int, string, int> NetworkServer::_waitForClientMessage(SOCKET clientSocketID)

@@ -6,17 +6,11 @@
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT     0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
-////////////////
-// Destructor //
-////////////////
 RenderFramebuffer::~RenderFramebuffer()
 {
 	reset();
 }
 
-//////////////////////////////////
-// Create Anti Aliasing texture //
-//////////////////////////////////
 void RenderFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount, int aaSamples)
 {
 	// Check if already loaded
@@ -71,9 +65,6 @@ void RenderFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 	}
 }
 
-//////////////////////////
-// Create color texture //
-//////////////////////////
 void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp)
 {
 	// Check if already loaded
@@ -148,9 +139,6 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amoun
 	}
 }
 
-//////////////////////////
-// Create depth texture //
-//////////////////////////
 void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amount)
 {
 	// Check if already loaded
@@ -173,7 +161,7 @@ void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amoun
 			_textures.push_back(0);
 			glGenTextures(1, &_textures[i]);
 			glBindTexture(GL_TEXTURE_2D, _textures[i]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 			float aniso;
 			glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &aniso);
 			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, aniso);

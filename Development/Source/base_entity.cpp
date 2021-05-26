@@ -1,15 +1,12 @@
 #include "base_entity.hpp"
 #include "logger.hpp"
 
-BaseEntity::BaseEntity(const string& ID)
+BaseEntity::BaseEntity(const string& ID) :
+	_ID(ID)
 {
-	if (ID == "")
+	if (ID.empty())
 	{
-		Logger::throwError("Tried to create an Entity with empty ID!");
-	}
-	else
-	{
-		_ID = ID;
+		Logger::throwError("Tried to create a BaseEntity with an empty ID!");
 	}
 }
 

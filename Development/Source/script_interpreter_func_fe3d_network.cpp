@@ -3,29 +3,23 @@
 bool ScriptInterpreter::_executeFe3dNetworkFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:networking_start")
+	if (functionName == "fe3d:networking_start_server")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{			
+			_fe3d.network_start(NetworkPeerType::SERVER);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:networking_start_client")
 	{
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{			
-			// Determine peer type
-			if (arguments[0].getString() == "SERVER")
-			{
-				_fe3d.network_start(NetworkPeerType::SERVER);
-			}
-			else if (arguments[0].getString() == "CLIENT")
-			{
-				_fe3d.network_start(NetworkPeerType::CLIENT);
-			}
-			else
-			{
-				_throwScriptError("invalid peer type!");
-				return true;
-			}
-
-			// Return
+		{
+			_fe3d.network_start(NetworkPeerType::CLIENT, arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

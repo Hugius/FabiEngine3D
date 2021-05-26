@@ -774,9 +774,8 @@ public:
 	}
 
 	// Networking interface - setters
-	void network_start(NetworkPeerType type);
+	void network_start(NetworkPeerType type, const string& serverIP = "");
 	void network_stop();
-	void network_connectToServer(const string& address, const string& port);
 	void network_loadNextPendingMessage();
 
 	// Networking interface - getters

@@ -64,7 +64,7 @@ private:
 	AudioManager		   _audioManager;
 	AudioPlayer			   _audioPlayer;
 	NetworkServer		   _networkServer;
-	//NetworkClient		   _networkClient;
+	NetworkClient		   _networkClient;
 	
 	// Core functions
 	void _start();

@@ -26,7 +26,7 @@
     <ClCompile Include="..\..\Source\network_server_update.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client.cpp">
+    <ClCompile Include="..\..\Source\network_client_main.cpp">
       <Filter>Client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\network_server_main.cpp">
@@ -34,6 +34,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\network_server_misc.cpp">
       <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_client_update.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_client_misc.cpp">
+      <Filter>Client</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

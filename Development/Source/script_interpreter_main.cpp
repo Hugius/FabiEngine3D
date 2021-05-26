@@ -74,7 +74,7 @@ void ScriptInterpreter::load()
 		}
 		else if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_waiting"))
 		{
-			/// <--- Purposely left blank
+			// <--- Purposely left blank
 		}
 		else
 		{

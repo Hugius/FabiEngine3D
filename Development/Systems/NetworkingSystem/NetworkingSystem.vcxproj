@@ -24,7 +24,9 @@
     <ClInclude Include="..\..\Source\network_server.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\network_client.cpp" />
+    <ClCompile Include="..\..\Source\network_client_main.cpp" />
+    <ClCompile Include="..\..\Source\network_client_misc.cpp" />
+    <ClCompile Include="..\..\Source\network_client_update.cpp" />
     <ClCompile Include="..\..\Source\network_server_misc.cpp" />
     <ClCompile Include="..\..\Source\network_server_update.cpp" />
     <ClCompile Include="..\..\Source\network_server_main.cpp" />

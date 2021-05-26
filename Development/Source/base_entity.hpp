@@ -27,7 +27,7 @@ private:
 	vector<RenderBuffer*> _renderBuffers;
 	vector<bool> _renderBufferMemoryManagement;
 
-	string _ID = "ID_NULL";
+	const string _ID;
 
 	bool _visible = true;
 };

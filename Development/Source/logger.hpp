@@ -52,7 +52,7 @@ public:
 
 	inline static const vector<string>& getMessageStack()
 	{
-		return _receivedRequestQueue;
+		return _messageStack;
 	}
 
 	inline static unsigned int getMessageCount()
@@ -62,19 +62,19 @@ public:
 
 	inline static void setMessageStack(const vector<string>& customMessages)
 	{
-		_receivedRequestQueue = customMessages;
+		_messageStack = customMessages;
 	}
 
 	inline static void clearMessageStack()
 	{
 		_messageCount = 0;
-		_receivedRequestQueue.clear();
+		_messageStack.clear();
 	}
 
 private:
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
-	inline static std::vector<string> _receivedRequestQueue;
+	inline static std::vector<string> _messageStack;
 	inline static unsigned int _messageCount = 0;
 
 	template<typename T, typename...Rest> 
@@ -109,7 +109,7 @@ private:
 
 		// Add to stack
 		oss << " > ";
-		_receivedRequestQueue.push_back(oss.str());
+		_messageStack.push_back(oss.str());
 
 		// Print message body
 		_printMessage(first, rest...);
@@ -131,7 +131,7 @@ private:
 		(oss << ... << rest);
 		
 		// Add to stack
-		_receivedRequestQueue.back() += oss.str();
+		_messageStack.back() += oss.str();
 		_messageCount++;
 	}
 };

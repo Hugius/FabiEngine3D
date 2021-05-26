@@ -13,17 +13,17 @@ bool NetworkServer::isRunning()
 
 bool NetworkServer::isRequestPending()
 {
-	return !_receivedRequestQueue.empty();
+	return !_requestQueue.empty();
 }
 
 void NetworkServer::loadNextRequest()
 {
-	_receivedRequestQueue.erase(_receivedRequestQueue.begin());
+	_requestQueue.erase(_requestQueue.begin());
 }
 
-const NetworkRequest NetworkServer::getPendingRequest()
+const shared_ptr<NetworkRequest> NetworkServer::getPendingRequest()
 {
-	return _receivedRequestQueue.front();
+	return _requestQueue.front();
 }
 
 void NetworkServer::_saveClient(SOCKET clientSocketID)
@@ -60,19 +60,19 @@ SOCKET NetworkServer::_waitForClientConnection(SOCKET listenSocketID)
 	return accept(listenSocketID, NULL, NULL);
 }
 
-pair<int, string> NetworkServer::_waitForClientRequest(SOCKET clientSocketID)
+tuple<int, string, int> NetworkServer::_waitForClientRequest(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[MAX_REQUEST_BYTES];
 	int bufferLength = MAX_REQUEST_BYTES;
-	auto statusCode = recv(clientSocketID, buffer, bufferLength, 0);
+	auto receiveResult = recv(clientSocketID, buffer, bufferLength, 0);
 
-	if (statusCode > 0) // Request received correctly
+	if (receiveResult > 0) // Request received correctly
 	{
-		return std::make_pair(statusCode, string(buffer, statusCode));
+		return make_tuple(receiveResult, string(buffer, receiveResult), WSAGetLastError());
 	}
 	else // Something else happened
 	{
-		return std::make_pair(statusCode, "");
+		return make_tuple(receiveResult, "", WSAGetLastError());
 	}
 }

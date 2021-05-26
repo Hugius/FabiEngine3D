@@ -23,11 +23,9 @@ using std::map;
 using std::unordered_map;
 using std::pair;
 using std::string;
-using std::unique_ptr;
 using std::shared_ptr;
 using std::reverse;
 using std::to_string;
-using std::make_unique;
 using std::make_shared;
 using std::make_pair;
 
@@ -787,7 +785,7 @@ public:
 	bool network_isServerRequestPending();
 	const string& network_getConnectedServerAddress();
 	const string& network_getConnectedServerPort();
-	const NetworkRequest network_getLatestServerRequest();
+	const shared_ptr<NetworkRequest> network_getLatestServerRequest();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

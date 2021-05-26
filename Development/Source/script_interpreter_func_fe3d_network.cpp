@@ -52,8 +52,26 @@ bool ScriptInterpreter::_executeFe3dNetworkFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.network_isServerRequestPending();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			auto result = _fe3d.network_getLatestServerRequest()->ipAddress;
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:networking_get_request_message")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.network_getLatestServerRequest()->message;
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:networking_load_next_request")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.network_loadNextServerRequest();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else

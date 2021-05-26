@@ -44,7 +44,7 @@ bool FabiEngine3D::network_isServerRequestPending()
 	return _core->_networkServer.isRequestPending();
 }
 
-const NetworkRequest FabiEngine3D::network_getLatestServerRequest()
+const shared_ptr<NetworkRequest> FabiEngine3D::network_getLatestServerRequest()
 {
 	return _core->_networkServer.getPendingRequest();
 }

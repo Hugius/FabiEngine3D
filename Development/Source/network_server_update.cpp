@@ -35,7 +35,7 @@ void NetworkServer::update()
 	}
 
 	// Update client request receiving
-BEGIN:
+	BEGIN:
 	for (unsigned int i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		// Temporary values
@@ -48,12 +48,13 @@ BEGIN:
 		{
 			// Temporary values
 			auto requestResult = requestThread.get();
-			auto requestStatusCode = requestResult.first;
-			auto requestMessage = requestResult.second;
+			auto requestStatusCode = std::get<0>(requestResult);
+			auto requestMessage = std::get<1>(requestResult);
+			auto requestError = std::get<2>(requestResult);
 
 			if (requestStatusCode > 0) // Request is received correctly
 			{
-				_receivedRequestQueue.push_back(NetworkRequest(ipAddress, requestMessage));
+				_requestQueue.push_back(make_shared<NetworkRequest>(ipAddress, requestMessage));
 			}
 			else if (requestStatusCode == 0) // Client closed socket connection
 			{
@@ -63,15 +64,15 @@ BEGIN:
 			}
 			else // Receive failed
 			{
-				if (WSAGetLastError() == 10054) // Client lost socket connection
+				if (requestError == WSAECONNRESET) // Client lost socket connection
 				{
 					Logger::throwInfo("Network client with IP \"" + ipAddress + "\" lost connection with the server!");
 					_deleteClient(ipAddress);
 					goto BEGIN;
 				}
-				else
+				else // Something really bad happened
 				{
-					Logger::throwError("Network server receive failed with error code: ", WSAGetLastError());
+					Logger::throwError("Network server receive failed with error code: ", requestError);
 				}
 			}
 

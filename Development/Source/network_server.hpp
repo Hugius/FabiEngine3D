@@ -5,13 +5,16 @@
 #include <string>
 #include <future>
 #include <vector>
-#include <map>
+#include <memory>
+#include <tuple>
 
 using std::string;
 using std::vector;
-using std::pair;
 using std::future;
-using std::map;
+using std::shared_ptr;
+using std::tuple;
+using std::make_shared;
+using std::make_tuple;
 
 class NetworkServer final
 {
@@ -27,13 +30,13 @@ public:
 	bool isRunning();
 	bool isRequestPending();
 
-	const NetworkRequest getPendingRequest();
+	const shared_ptr<NetworkRequest> getPendingRequest();
 
 private:
 	void _saveClient(SOCKET clientSocketID);
 	void _deleteClient(const string& ipAddress);
 	SOCKET _waitForClientConnection(SOCKET listenSocketID);
-	pair<int, string> _waitForClientRequest(SOCKET clientSocketID);
+	tuple<int, string, int> _waitForClientRequest(SOCKET clientSocketID);
 
 	static inline const string SERVER_PORT = "61205";
 	static inline const unsigned int MAX_REQUEST_BYTES = 512;
@@ -44,8 +47,8 @@ private:
 
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
-	vector<future<pair<int, string>>> _clientRequestThreads;
-	vector<NetworkRequest> _receivedRequestQueue;
+	vector<future<tuple<int, string, int>>> _clientRequestThreads;
+	vector<shared_ptr<NetworkRequest>> _requestQueue;
 
 	bool _isRunning = false;
 };

@@ -125,13 +125,13 @@ void ScriptInterpreter::_checkEngineWarnings()
 	if (messageCount > _lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
-		auto messageStack = _fe3d.logger_getMessageStack();
+		auto messageQueue = _fe3d.logger_getMessageQueue();
 
 		// Loop over all new messages
 		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
 			// Check if logged message is a warning
-			if (messageStack[i].substr(0, string("[Warn]").size()) == "[Warn]")
+			if (messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")
 			{
 				_hasThrownError = true;
 			}

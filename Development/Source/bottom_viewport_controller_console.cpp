@@ -7,22 +7,22 @@ void BottomViewportController::_updateConsoleScrolling()
 	float scrollingSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;
 
 	// No scrolling for empty console
-	if (!_consoleMessageStack.empty() && scrollingSpeed != 0.0f)
+	if (!_consoleMessageQueue.empty() && scrollingSpeed != 0.0f)
 	{
 		// Temporary values
 		const auto screen = window->getScreen("main");
 		const float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
 		const float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
-		const float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageStack[0].first + "_time")->getEntityID()).y + CHAR_SIZE.y;
+		const float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageQueue[0].first + "_time")->getEntityID()).y + CHAR_SIZE.y;
 
 		// Calculate message part count for latest message Y
-		const string latestMessageID = _consoleMessageStack.back().first;
+		const string latestMessageID = _consoleMessageQueue.back().first;
 		const string entityID = screen->getTextfield(latestMessageID + "_msg_0")->getEntityID();
 		float latestMessageY = _fe3d.textEntity_getPosition(entityID).y - CHAR_SIZE.y;
 
 		// Count all message text lines
-		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageStack.size());
-		for (const auto& [ID, message] : _consoleMessageStack)
+		unsigned int messageLineCount = static_cast<unsigned int>(_consoleMessageQueue.size());
+		for (const auto& [ID, message] : _consoleMessageQueue)
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
@@ -51,7 +51,7 @@ void BottomViewportController::_updateConsoleScrolling()
 			}
 
 			// Move all messages
-			for (const auto& [ID, message] : _consoleMessageStack)
+			for (const auto& [ID, message] : _consoleMessageQueue)
 			{
 				// Move time part
 				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
@@ -82,13 +82,13 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	const Vec2 maxPosition = Vec2(0.995f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f));
 
 	// Add to stack for synchronization
-	string newID = to_string(_consoleMessageStack.size());
-	_consoleMessageStack.push_back(make_pair(newID, newMessage));
+	string newID = to_string(_consoleMessageQueue.size());
+	_consoleMessageQueue.push_back(make_pair(newID, newMessage));
 
 	// Reposition previous messages & add new message
-	reverse(_consoleMessageStack.begin(), _consoleMessageStack.end()); // Console prints reversed
+	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Console prints reversed
 	unsigned int index = 0;
-	for (const auto& [ID, message] : _consoleMessageStack)
+	for (const auto& [ID, message] : _consoleMessageQueue)
 	{
 		// Temporary values
 		bool alreadyExisting = screen->checkTextfield(ID + "_time");
@@ -235,7 +235,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			index++;
 		}
 	}
-	reverse(_consoleMessageStack.begin(), _consoleMessageStack.end()); // Set order back to normal
+	reverse(_consoleMessageQueue.begin(), _consoleMessageQueue.end()); // Set order back to normal
 }
 
 void BottomViewportController::_deleteConsoleMessage(const string& ID)

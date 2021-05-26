@@ -213,17 +213,17 @@ void BottomViewportController::update()
 		// Validate
 		if (!_topViewportController.isScriptRunning() && !_gui.getGlobalScreen()->isFocused() && !_scriptEditor.isWritingScript())
 		{
-			_fe3d.logger_clearMessageStack();
-			for (const auto& [ID, message] : _consoleMessageStack)
+			_fe3d.logger_clearMessageQueue();
+			for (const auto& [ID, message] : _consoleMessageQueue)
 			{
 				_deleteConsoleMessage(ID);
 			}
-			_consoleMessageStack.clear();
+			_consoleMessageQueue.clear();
 		}
 	}
 
 	// Clear console messages if it overflows
-	auto loggerMessages = _fe3d.logger_getMessageStack();
+	auto loggerMessages = _fe3d.logger_getMessageQueue();
 	if (loggerMessages.size() > MAX_CONSOLE_MESSAGES)
 	{
 		// Save most recent messages
@@ -235,22 +235,22 @@ void BottomViewportController::update()
 		}
 		
 		// Remove old messages
-		_fe3d.logger_clearMessageStack();
-		for (const auto& [ID, message] : _consoleMessageStack)
+		_fe3d.logger_clearMessageQueue();
+		for (const auto& [ID, message] : _consoleMessageQueue)
 		{
 			_deleteConsoleMessage(ID);
 		}
-		_consoleMessageStack.clear();
+		_consoleMessageQueue.clear();
 
 		// Set new messages
-		_fe3d.logger_setMessageStack(newMessages);
+		_fe3d.logger_setMessageQueue(newMessages);
 	}
 
 	// Synchronize console text with core logger
-	loggerMessages = _fe3d.logger_getMessageStack();
-	if (_consoleMessageStack.size() != loggerMessages.size())
+	loggerMessages = _fe3d.logger_getMessageQueue();
+	if (_consoleMessageQueue.size() != loggerMessages.size())
 	{
-		auto synchronizationCount = loggerMessages.size() - _consoleMessageStack.size();
+		auto synchronizationCount = loggerMessages.size() - _consoleMessageQueue.size();
 
 		// Synchronize messages
 		for (size_t i = loggerMessages.size() - synchronizationCount; i < loggerMessages.size(); i++)

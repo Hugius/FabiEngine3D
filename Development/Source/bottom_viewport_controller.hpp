@@ -26,7 +26,7 @@ private:
 
 	shared_ptr<EngineGuiScreen> _statsScreen;
 
-	vector<pair<string, string>> _consoleMessageStack;
+	vector<pair<string, string>> _consoleMessageQueue;
 
 	void _updateConsoleScrolling();
 	void _addConsoleMessage(const string& newMessage);

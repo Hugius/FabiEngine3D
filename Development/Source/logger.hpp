@@ -50,9 +50,9 @@ public:
 		_printPrefix(MessageType::WARNING, first, rest...);
 	}
 
-	inline static const vector<string>& getMessageStack()
+	inline static const vector<string>& getMessageQueue()
 	{
-		return _messageStack;
+		return _messageQueue;
 	}
 
 	inline static unsigned int getMessageCount()
@@ -60,28 +60,28 @@ public:
 		return _messageCount;
 	}
 
-	inline static void setMessageStack(const vector<string>& customMessages)
+	inline static void setCustomMessageQueue(const vector<string>& customMessages)
 	{
-		_messageStack = customMessages;
+		_messageQueue = customMessages;
 	}
 
-	inline static void clearMessageStack()
+	inline static void clearMessageQueue()
 	{
 		_messageCount = 0;
-		_messageStack.clear();
+		_messageQueue.clear();
 	}
 
 private:
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
-	inline static std::vector<string> _messageStack;
+	inline static std::vector<string> _messageQueue;
 	inline static unsigned int _messageCount = 0;
 
 	template<typename T, typename...Rest> 
 	inline static void _printPrefix(MessageType type, T first, Rest&&...rest)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
-		std::ostringstream oss; // For message stack
+		std::ostringstream oss; // For message queue
 
 		// Current time
 		char timeBuffer[64];
@@ -107,9 +107,9 @@ private:
 			std::cout << " > ";
 		}
 
-		// Add to stack
+		// Add to message queue
 		oss << " > ";
-		_messageStack.push_back(oss.str());
+		_messageQueue.push_back(oss.str());
 
 		// Print message body
 		_printMessage(first, rest...);
@@ -118,7 +118,7 @@ private:
 	template<typename T, typename...Rest>
 	inline static void _printMessage(T first, Rest&&...rest)
 	{
-		// For message stack
+		// For message queue
 		std::ostringstream oss;
 
 		// Write onto console output
@@ -130,8 +130,8 @@ private:
 		oss << first;
 		(oss << ... << rest);
 		
-		// Add to stack
-		_messageStack.back() += oss.str();
+		// Add to message queue
+		_messageQueue.back() += oss.str();
 		_messageCount++;
 	}
 };

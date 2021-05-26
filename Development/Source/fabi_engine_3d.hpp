@@ -756,21 +756,21 @@ public:
 	{
 		Logger::throwWarning(first, rest...);
 	}
-	inline const vector<string>& logger_getMessageStack()
+	inline const vector<string>& logger_getMessageQueue()
 	{
-		return Logger::getMessageStack();
+		return Logger::getMessageQueue();
 	}
 	inline unsigned int logger_getMessageCount()
 	{
 		return Logger::getMessageCount();
 	}
-	inline void logger_setMessageStack(const vector<string>& customMessages)
+	inline void logger_setMessageQueue(const vector<string>& customMessages)
 	{
-		return Logger::setMessageStack(customMessages);
+		return Logger::setCustomMessageQueue(customMessages);
 	}
-	inline void logger_clearMessageStack()
+	inline void logger_clearMessageQueue()
 	{
-		return Logger::clearMessageStack();
+		return Logger::clearMessageQueue();
 	}
 
 	// Networking interface - setters

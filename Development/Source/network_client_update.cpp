@@ -15,24 +15,27 @@ void NetworkClient::update()
 	}
 
 	// Handle server connection
-	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	if (!_isConnectedToServer)
 	{
-		// Temporary values
-		auto connectionErrorCode = _connectionThread.get();
+		if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+		{
+			// Temporary values
+			auto connectionErrorCode = _connectionThread.get();
 
-		if (connectionErrorCode == 0)
-		{
-			// Address info not needed anymore
-			freeaddrinfo(_addressInfo);
-			_addressInfo = nullptr;
-		}
-		else if(connectionErrorCode == 10061)
-		{
+			if (connectionErrorCode == 0) // Successfully connected with server
+			{
+				freeaddrinfo(_addressInfo);
+				_addressInfo = nullptr;
+				_isConnectedToServer = true;
+			}
+			else if (connectionErrorCode == 10061) // Cannot connect with server
+			{
 
-		}
-		else
-		{
-			Logger::throwError("Network client connect failed with error code: ", connectionErrorCode);
+			}
+			else // Something really bad happened
+			{
+				Logger::throwError("Network client connect failed with error code: ", connectionErrorCode);
+			}
 		}
 	}
 }

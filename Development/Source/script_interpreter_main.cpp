@@ -324,10 +324,16 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Stop networking
-	if (_fe3d.network_isStarted())
+	// Stop networking server
+	if (_fe3d.networkServer_isStarted())
 	{
-		_fe3d.network_stop();
+		_fe3d.networkServer_stop();
+	}
+
+	// Stop networking client
+	if (_fe3d.networkClient_isStarted())
+	{
+		_fe3d.networkClient_stop();
 	}
 
 	// Miscellaneous

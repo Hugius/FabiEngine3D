@@ -51,7 +51,8 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				executed = executed || _executeFe3dMusicFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dFilesystemFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dSceneFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dNetworkFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dServerFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dClientFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
 
 				// Check if function call exists

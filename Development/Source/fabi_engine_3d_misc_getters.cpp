@@ -335,7 +335,7 @@ vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()
 		pair<string, int>("guiEntityUpdate", 0),
 		pair<string, int>("shadowUpdate", 0),
 		pair<string, int>("audioUpdate", 0),
-		pair<string, int>("miscUpdate", 0)
+		pair<string, int>("networkUpdate", 0)
 	};
 
 	// Calculate percentages

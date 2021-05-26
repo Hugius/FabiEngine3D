@@ -22,6 +22,9 @@
     <Filter Include="Interface\Miscellaneous">
       <UniqueIdentifier>{263730c8-b5dc-4e3f-ad8e-954f2a808a65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Interface\Miscellaneous\Networking">
+      <UniqueIdentifier>{6e2e943e-b200-4fa6-8c8e-fe803fb5e0ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\core_engine_main.cpp">
@@ -81,11 +84,14 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_network.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp">
+      <Filter>Interface\Miscellaneous\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_server.cpp">
+      <Filter>Interface\Miscellaneous\Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

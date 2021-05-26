@@ -16,6 +16,11 @@ bool NetworkClient::isMessagePending()
 	return !_receivedMessageQueue.empty();
 }
 
+bool NetworkClient::isConnectedToServer()
+{
+	return _isConnectedToServer;
+}
+
 void NetworkClient::loadNextMessage()
 {
 	if (_receivedMessageQueue.empty())

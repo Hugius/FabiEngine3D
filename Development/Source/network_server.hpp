@@ -32,7 +32,7 @@ public:
 
 	const shared_ptr<NetworkMessage> getPendingMessage();
 
-	static inline const string SERVER_PORT = "61205";
+	static inline const string networkServer_PORT = "61205";
 
 private:
 	void _sendMessageToClient(SOCKET clientSocketID, const string& content);

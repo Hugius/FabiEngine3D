@@ -31,6 +31,7 @@ public:
 
 	bool isRunning();
 	bool isMessagePending();
+	bool isConnectedToServer();
 
 	const shared_ptr<NetworkMessage> getPendingMessage();
 
@@ -52,4 +53,5 @@ private:
 	addrinfo* _addressInfo = nullptr;
 
 	bool _isRunning = false;
+	bool _isConnectedToServer = false;
 };

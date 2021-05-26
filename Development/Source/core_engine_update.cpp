@@ -19,7 +19,7 @@ void CoreEngine::_updateApplication()
 	_fe3d._hoveredAabbID = "";
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 	_timer.stopDeltaPart();
-	_networkServer.update();
+
 	// Only update 3D if engine not paused
 	if (!_isPaused)
 	{
@@ -69,15 +69,19 @@ void CoreEngine::_updateApplication()
 
 	// Always update 2D logic (except for sprite animations)
 	_timer.startDeltaPart("imageTextUpdate");
-	(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : (void)0;
+	(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : void();
 	_imageEntityManager.update();
 	_textEntityManager.update();
 	_timer.stopDeltaPart();
 
-	// Updates miscellaneous
-	_timer.startDeltaPart("miscUpdate");
-	_updateWindowFading();
+	// Always update networking
+	_timer.startDeltaPart("networkUpdate");
+	_networkServer.update();
+	_networkClient.update();
 	_timer.stopDeltaPart();
+
+	// Miscellaneous
+	_updateWindowFading();
 
 	// Save last cursor position
 	lastCursorPosition = _window.getCursorPos();

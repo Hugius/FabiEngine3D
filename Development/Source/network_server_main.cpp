@@ -39,7 +39,7 @@ void NetworkServer::start()
 
 	// Create address info
 	struct addrinfo* addressInfo = nullptr;
-	auto infoStatusCode = getaddrinfo(nullptr, SERVER_PORT.c_str(), &hints, &addressInfo);
+	auto infoStatusCode = getaddrinfo(nullptr, networkServer_PORT.c_str(), &hints, &addressInfo);
 	if (infoStatusCode != 0)
 	{
 		Logger::throwError("Network server startup (address info) failed with error code: ", infoStatusCode);

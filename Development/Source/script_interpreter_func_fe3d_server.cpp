@@ -1,73 +1,74 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dNetworkFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:networking_start_server")
+	if (functionName == "fe3d:network_server_start")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{			
-			_fe3d.network_start(NetworkPeerType::SERVER);
+			_fe3d.networknetworkServer_start();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:networking_start_client")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.network_start(NetworkPeerType::CLIENT, arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:networking_stop")
+	else if (functionName == "fe3d:network_server_stop")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.network_stop();
+			_fe3d.networkServer_stop();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:networking_is_message_pending")
+	else if (functionName == "fe3d:network_server_is_started")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.network_isMessagePending();
+			auto result = _fe3d.networkServer_isStarted();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:networking_get_message_ip")
+	else if (functionName == "fe3d:network_server_is_message_pending")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.network_getPendingMessage()->ipAddress;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			auto result = _fe3d.networkServer_isMessagePending();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:networking_get_message_content")
+	else if (functionName == "fe3d:network_server_get_message_ip")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.network_getPendingMessage();
+			auto result = _fe3d.networkServer_getPendingMessage();
+			if (result != nullptr)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->ipAddress));
+			}
+		}
+	}
+	else if (functionName == "fe3d:network_server_get_message_content")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.networkServer_getPendingMessage();
 			if (result != nullptr)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->content));
 			}
 		}
 	}
-	else if (functionName == "fe3d:networking_load_next_message")
+	else if (functionName == "fe3d:network_server_load_next_message")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.network_loadNextPendingMessage();
+			_fe3d.networkServer_loadNextPendingMessage();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

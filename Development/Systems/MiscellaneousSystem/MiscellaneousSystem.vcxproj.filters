@@ -78,9 +78,6 @@
     <ClInclude Include="..\..\Source\tools.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_peer_type.hpp">
-      <Filter>Enums</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\library_loader.hpp">
       <Filter>Other</Filter>
     </ClInclude>

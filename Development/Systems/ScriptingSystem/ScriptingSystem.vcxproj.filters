@@ -168,7 +168,10 @@
     <ClCompile Include="..\..\Source\script_interpreter_condition.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_network.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_client.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

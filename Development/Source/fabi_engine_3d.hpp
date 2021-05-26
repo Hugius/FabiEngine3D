@@ -4,7 +4,6 @@
 #include "input_type.hpp"
 #include "direction.hpp"
 #include "aabb_parent_type.hpp"
-#include "network_peer_type.hpp"
 #include "network_message.hpp"
 #include "mathematics.hpp"
 
@@ -773,18 +772,26 @@ public:
 		return Logger::clearMessageQueue();
 	}
 
-	// Networking interface - setters
-	void network_start(NetworkPeerType type, const string& serverIP = "");
-	void network_stop();
-	void network_loadNextPendingMessage();
+	// Server interface - setters
+	void networknetworkServer_start();
+	void networkServer_stop();
+	void networkServer_loadNextPendingMessage();
 
-	// Networking interface - getters
-	bool network_isStarted();
-	bool network_isConnectedToServer();
-	bool network_isMessagePending();
-	const string& network_getConnectedServerAddress();
-	const string& network_getConnectedServerPort();
-	const shared_ptr<NetworkMessage> network_getPendingMessage();
+	// Server interface - getters
+	bool networkServer_isStarted();
+	bool networkServer_isMessagePending();
+	const shared_ptr<NetworkMessage> networkServer_getPendingMessage();
+
+	// Client interface - setters
+	void networkClient_start(const string& serverIP);
+	void networkClient_stop();
+	void networkClient_loadNextPendingMessage();
+
+	// Client interface - getters
+	bool networkClient_isStarted();
+	bool networkClient_isConnectedToServer();
+	bool networkClient_isMessagePending();
+	const shared_ptr<NetworkMessage> networkClient_getPendingMessage();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

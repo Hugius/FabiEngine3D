@@ -32,7 +32,8 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_timer(),
 	_audioManager(_audioLoader),
 	_audioPlayer(),
-	_networkServer()
+	_networkServer(),
+	_networkClient()
 {
 
 }
@@ -188,15 +189,15 @@ void CoreEngine::_updateWindowFading()
 	{
 		static float opacity = 0.0f;
 
-		// Stop if window is 100% visible
-		if (opacity < 1.0f)
+		if (opacity < 1.0f) // Stop if window is 100% visible
 		{
 			_window.setOpacity(opacity);
 			opacity += 0.01f;
 		}
-		else
+		if (opacity >= 1.0f) // Opacity must be exactly 100% after fading
 		{
-			_window.setOpacity(1.0f);
+			opacity = 1.0f;
+			_window.setOpacity(opacity);
 		}
 	}
 }

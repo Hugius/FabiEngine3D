@@ -27,7 +27,7 @@ void NetworkServer::update()
 		// Check if client is allowed to connect
 		if (_clientIPs.size() == MAX_CLIENT_COUNT)
 		{
-			_sendMessageToClient(clientSocketID, "SERVER_FULL");
+			_sendMessageToClient(clientSocketID, "networkServer_FULL");
 			closesocket(clientSocketID);
 		}
 		else

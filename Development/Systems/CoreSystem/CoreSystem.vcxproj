@@ -151,6 +151,7 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_audio.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_camera.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_collision.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_aabb.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_billboard.cpp" />
@@ -166,7 +167,7 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp" />
-    <ClCompile Include="..\..\Source\fabi_engine_3d_network.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\core_engine.hpp" />

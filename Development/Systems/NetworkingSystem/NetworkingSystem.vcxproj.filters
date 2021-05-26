@@ -18,7 +18,7 @@
     <ClInclude Include="..\..\Source\network_client.hpp">
       <Filter>Client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\network_request.hpp">
+    <ClInclude Include="..\..\Source\network_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>

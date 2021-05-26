@@ -63,17 +63,17 @@ void NetworkServer::start()
 	// Address info not needed anymore
 	freeaddrinfo(addressInfo);
 
-	// Enable listening for any client connection requests
+	// Enable listening for any incoming client connection message
 	auto listenStatusCode = listen(_listenSocketID, SOMAXCONN);
 	if (listenStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("Network server startup (socket listen) failed with error code: ", WSAGetLastError());
 	}
 
-	// Spawn an initial thread for accepting incoming connection requests
+	// Spawn an initial thread for accepting incoming connection messages
 	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listenSocketID);
 
-	// Server can now handle incoming requests
+	// Server is now operable
 	_isRunning = true;
 }
 
@@ -92,7 +92,7 @@ void NetworkServer::stop()
 	// Delete all connected clients
 	for (auto& ip : _clientIPs)
 	{
-		_deleteClient(ip);
+		_disconnectClient(ip);
 	}
 
 	// Miscellaneous

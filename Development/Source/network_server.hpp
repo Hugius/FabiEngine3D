@@ -1,6 +1,6 @@
 #pragma once
 
-#include "network_request.hpp"
+#include "network_message.hpp"
 
 #include <string>
 #include <future>
@@ -25,21 +25,23 @@ public:
 	void start();
 	void stop();
 	void update();
-	void loadNextRequest();
+	void loadNextMessage();
 
 	bool isRunning();
-	bool isRequestPending();
+	bool isMessagePending();
 
-	const shared_ptr<NetworkRequest> getPendingRequest();
+	const shared_ptr<NetworkMessage> getPendingMessage();
 
 private:
-	void _saveClient(SOCKET clientSocketID);
-	void _deleteClient(const string& ipAddress);
+	void _sendMessageToClient(SOCKET clientSocketID, const string& content);
+	void _acceptClient(SOCKET clientSocketID);
+	void _disconnectClient(const string& ipAddress);
 	SOCKET _waitForClientConnection(SOCKET listenSocketID);
-	tuple<int, string, int> _waitForClientRequest(SOCKET clientSocketID);
+	tuple<int, string, int> _waitForClientMessage(SOCKET clientSocketID);
 
 	static inline const string SERVER_PORT = "61205";
-	static inline const unsigned int MAX_REQUEST_BYTES = 512;
+	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
+	static inline const unsigned int MAX_CLIENT_COUNT = 1;
 
 	SOCKET _listenSocketID;
 
@@ -47,8 +49,8 @@ private:
 
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
-	vector<future<tuple<int, string, int>>> _clientRequestThreads;
-	vector<shared_ptr<NetworkRequest>> _requestQueue;
+	vector<future<tuple<int, string, int>>> _clientMessageThreads;
+	vector<shared_ptr<NetworkMessage>> _receivedMessageQueue;
 
 	bool _isRunning = false;
 };

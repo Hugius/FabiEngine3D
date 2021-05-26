@@ -7,15 +7,15 @@ using std::string;
 // Manually declare SOCKET, because winsock2.h cannot be included in this header
 typedef unsigned __int64 SOCKET;
 
-struct NetworkRequest final
+struct NetworkMessage final
 {
-	NetworkRequest(const string& ipAddress, const string& message) :
+	NetworkMessage(const string& ipAddress, const string& content) :
 		ipAddress(ipAddress),
-		message(message)
+		content(content)
 	{
 
 	}
 
 	const string ipAddress;
-	const string message;
+	const string content;
 };

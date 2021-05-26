@@ -11,22 +11,46 @@ bool NetworkServer::isRunning()
 	return _isRunning;
 }
 
-bool NetworkServer::isRequestPending()
+bool NetworkServer::isMessagePending()
 {
-	return !_requestQueue.empty();
+	return !_receivedMessageQueue.empty();
 }
 
-void NetworkServer::loadNextRequest()
+void NetworkServer::loadNextMessage()
 {
-	_requestQueue.erase(_requestQueue.begin());
+	if (_receivedMessageQueue.empty())
+	{
+		Logger::throwWarning("Cannot load next network message: no messages pending!");
+	}
+	else
+	{
+		_receivedMessageQueue.erase(_receivedMessageQueue.begin());
+	}
 }
 
-const shared_ptr<NetworkRequest> NetworkServer::getPendingRequest()
+const shared_ptr<NetworkMessage> NetworkServer::getPendingMessage()
 {
-	return _requestQueue.front();
+	if (_receivedMessageQueue.empty())
+	{
+		Logger::throwWarning("Cannot retrieve network message: no messages pending!");
+		return nullptr;
+	}
+	else
+	{
+		return _receivedMessageQueue.front();
+	}
 }
 
-void NetworkServer::_saveClient(SOCKET clientSocketID)
+void NetworkServer::_sendMessageToClient(SOCKET clientSocketID, const string& content)
+{
+	auto sendStatusCode = send(clientSocketID, content.c_str(), static_cast<int>(content.size()), 0);
+	if (sendStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("Network server send failed with error code: ", WSAGetLastError());
+	}
+}
+
+void NetworkServer::_acceptClient(SOCKET clientSocketID)
 {
 	// Extract IP address
 	sockaddr_in socketAddress = sockaddr_in();
@@ -37,10 +61,10 @@ void NetworkServer::_saveClient(SOCKET clientSocketID)
 	// Add client
 	_clientSocketIDs.push_back(clientSocketID);
 	_clientIPs.push_back(ipAddress);
-	_clientRequestThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientRequest, this, clientSocketID));
+	_clientMessageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
 }
 
-void NetworkServer::_deleteClient(const string& ipAddress)
+void NetworkServer::_disconnectClient(const string& ipAddress)
 {
 	for (unsigned int i = 0; i < _clientIPs.size(); i++)
 	{
@@ -49,7 +73,7 @@ void NetworkServer::_deleteClient(const string& ipAddress)
 			closesocket(_clientSocketIDs[i]);
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
-			_clientRequestThreads.erase(_clientRequestThreads.begin() + i);
+			_clientMessageThreads.erase(_clientMessageThreads.begin() + i);
 			break;
 		}
 	}
@@ -60,14 +84,14 @@ SOCKET NetworkServer::_waitForClientConnection(SOCKET listenSocketID)
 	return accept(listenSocketID, NULL, NULL);
 }
 
-tuple<int, string, int> NetworkServer::_waitForClientRequest(SOCKET clientSocketID)
+tuple<int, string, int> NetworkServer::_waitForClientMessage(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
-	char buffer[MAX_REQUEST_BYTES];
-	int bufferLength = MAX_REQUEST_BYTES;
+	char buffer[MAX_MESSAGE_BYTES];
+	int bufferLength = MAX_MESSAGE_BYTES;
 	auto receiveResult = recv(clientSocketID, buffer, bufferLength, 0);
 
-	if (receiveResult > 0) // Request received correctly
+	if (receiveResult > 0) // Message received correctly
 	{
 		return make_tuple(receiveResult, string(buffer, receiveResult), WSAGetLastError());
 	}

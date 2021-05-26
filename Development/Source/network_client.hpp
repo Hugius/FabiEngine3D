@@ -46,8 +46,8 @@ private:
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
-
 	future<tuple<int, string, int>> _serverMessageThread;
+
 	vector<shared_ptr<NetworkMessage>> _receivedMessageQueue;
 
 	addrinfo* _addressInfo = nullptr;

@@ -19,11 +19,14 @@
     <Filter Include="Interface\Core">
       <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Miscellaneous">
+    <Filter Include="Interface\Networking">
       <UniqueIdentifier>{263730c8-b5dc-4e3f-ad8e-954f2a808a65}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Miscellaneous\Networking">
-      <UniqueIdentifier>{6e2e943e-b200-4fa6-8c8e-fe803fb5e0ae}</UniqueIdentifier>
+    <Filter Include="Interface\Miscellaneous">
+      <UniqueIdentifier>{daa22d3a-cdd3-41a4-8242-102523a0cd54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\Graphics">
+      <UniqueIdentifier>{802e51d2-5836-4045-9b34-2426f305fae8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,8 +66,11 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d.cpp">
       <Filter>Interface\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp">
+      <Filter>Interface\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_getters.cpp">
+      <Filter>Interface\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_audio.cpp">
       <Filter>Interface\Miscellaneous</Filter>
@@ -75,23 +81,20 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_collision.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_getters.cpp">
-      <Filter>Interface\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp">
+    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp">
-      <Filter>Interface\Miscellaneous\Networking</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_server.cpp">
-      <Filter>Interface\Miscellaneous\Networking</Filter>
+      <Filter>Interface\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp">
+      <Filter>Interface\Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -41,38 +41,34 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 			// Check if texture is not processed yet
 			if (!cacheStatuses[i])
 			{
-				// Check if thread is valid
-				if (threads[i].valid())
+				// Check if thread is finished
+				if (threads[i].wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 				{
-					// Check if thread is finished
-					if (threads[i].wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+					// Retrieve the SDL image
+					auto loadedImage = threads[i].get();
+
+					// Update thread status
+					cacheStatuses[i] = true;
+					finishedThreadCount++;
+
+					// Check image status
+					if (loadedImage == nullptr)
 					{
-						// Retrieve the SDL image
-						auto loadedImage = threads[i].get();
+						Logger::throwWarning("Cannot open image file: \"" + uniqueFilePaths[i] + "\"");
+					}
+					else
+					{
+						// Load OpenGL texture
+						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, true, true, true);
 
-						// Update thread status
-						cacheStatuses[i] = true;
-						finishedThreadCount++;
+						// Free image memory
+						SDL_FreeSurface(loadedImage);
 
-						// Check image status
-						if (loadedImage == nullptr)
+						// Check texture status
+						if (loadedTexture != 0)
 						{
-							Logger::throwWarning("Cannot open image file: \"" + uniqueFilePaths[i] + "\"");
-						}
-						else
-						{
-							// Load OpenGL texture
-							auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, true, true, true);
-
-							// Free image memory
-							SDL_FreeSurface(loadedImage);
-
-							// Check texture status
-							if (loadedTexture != 0)
-							{
-								// Cache texture
-								_textureCache2D[uniqueFilePaths[i]] = loadedTexture;
-							}
+							// Cache texture
+							_textureCache2D[uniqueFilePaths[i]] = loadedTexture;
 						}
 					}
 				}

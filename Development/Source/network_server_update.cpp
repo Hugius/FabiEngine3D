@@ -21,7 +21,7 @@ void NetworkServer::update()
 		auto clientSocketID = _connectionThread.get();
 		if (clientSocketID == INVALID_SOCKET)
 		{
-			Logger::throwError("Network server accept failed with error code: ", WSAGetLastError());
+			Logger::throwError("Networking server accept failed with error code: ", WSAGetLastError());
 		}
 
 		// Check if client is allowed to connect
@@ -36,7 +36,7 @@ void NetworkServer::update()
 			_acceptClient(clientSocketID);
 
 			// Logging
-			Logger::throwInfo("Network client with IP \"" + _clientIPs.back() + "\" connected to the server!");
+			Logger::throwInfo("Networking client with IP \"" + _clientIPs.back() + "\" connected to the server!");
 		}
 
 		// Spawn connection thread again for next client
@@ -67,7 +67,7 @@ void NetworkServer::update()
 			}
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{
-				Logger::throwInfo("Network client with IP \"" + ipAddress + "\" disconnected from the server!");
+				Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" disconnected from the server!");
 				_disconnectClient(ipAddress);
 				goto BEGIN;
 			}
@@ -75,13 +75,13 @@ void NetworkServer::update()
 			{
 				if (messageError == WSAECONNRESET) // Client lost socket connection
 				{
-					Logger::throwInfo("Network client with IP \"" + ipAddress + "\" lost connection with the server!");
+					Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" lost connection with the server!");
 					_disconnectClient(ipAddress);
 					goto BEGIN;
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Network server receive failed with error code: ", messageError);
+					Logger::throwError("Networking server receive failed with error code: ", messageError);
 				}
 			}
 

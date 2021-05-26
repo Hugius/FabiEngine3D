@@ -24,17 +24,16 @@ void NetworkClient::update()
 
 			if (connectionErrorCode == 0) // Successfully connected with server
 			{
-				freeaddrinfo(_addressInfo);
-				_addressInfo = nullptr;
 				_isConnectedToServer = true;
 			}
-			else if (connectionErrorCode == 10061) // Cannot connect with server
+			else if (connectionErrorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
-
+				// Spawn thread again for another attempt
+				_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Network client connect failed with error code: ", connectionErrorCode);
+				Logger::throwError("Networking client connect failed with error code: ", connectionErrorCode);
 			}
 		}
 	}

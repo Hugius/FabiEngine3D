@@ -40,7 +40,7 @@ void NetworkClient::start(const string& serverIP, const string& serverPort)
 	auto infoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &hints, &_addressInfo);
 	if (infoStatusCode != 0)
 	{
-		Logger::throwError("Network client startup (address info) failed with error code: ", infoStatusCode);
+		Logger::throwError("Networking client startup (address info) failed with error code: ", infoStatusCode);
 		return;
 	}
 
@@ -48,7 +48,7 @@ void NetworkClient::start(const string& serverIP, const string& serverPort)
 	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
 	if (_serverSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("Network client startup (connection socket create) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
@@ -78,5 +78,8 @@ void NetworkClient::stop()
 
 	// Miscellaneous
 	_serverSocketID = INVALID_SOCKET;
+	_addressInfo = nullptr;
+	_receivedMessageQueue.clear();
 	_isRunning = false;
+	_isConnectedToServer = false;
 }

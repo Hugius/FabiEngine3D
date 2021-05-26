@@ -50,14 +50,14 @@ void NetworkServer::start()
 	_listeningSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if (_listeningSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("Network server startup (listening socket create) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server startup (socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Bind the listening socket
 	auto bindStatusCode = bind(_listeningSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (bindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Network server startup (listening socket bind) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server startup (socket bind) failed with error code: ", WSAGetLastError());
 	}
 
 	// Address info not needed anymore
@@ -67,7 +67,7 @@ void NetworkServer::start()
 	auto listenStatusCode = listen(_listeningSocketID, SOMAXCONN);
 	if (listenStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Network server startup (socket listen) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server startup (socket listen) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for accepting incoming connection requests
@@ -97,5 +97,6 @@ void NetworkServer::stop()
 
 	// Miscellaneous
 	_listeningSocketID = INVALID_SOCKET;
+	_receivedMessageQueue.clear();
 	_isRunning = false;
 }

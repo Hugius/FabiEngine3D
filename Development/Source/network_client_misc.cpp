@@ -48,10 +48,11 @@ const shared_ptr<NetworkMessage> NetworkClient::getPendingMessage()
 int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)
 {
 	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
-
+	
+	// Check if connection attempt went well
 	if (connectStatusCode == SOCKET_ERROR)
 	{
-		return WSAGetLastError();;
+		return WSAGetLastError();
 	}
 	else
 	{

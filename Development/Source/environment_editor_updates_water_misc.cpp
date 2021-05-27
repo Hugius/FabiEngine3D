@@ -180,7 +180,7 @@ void EnvironmentEditor::_updateWaterCamera()
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
+				float rotationAcceleration = static_cast<float>(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
 				_cameraAcceleration += rotationAcceleration;
 			}
 

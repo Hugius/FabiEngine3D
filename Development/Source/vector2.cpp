@@ -31,7 +31,7 @@ float Vec2::dot(const Vec2 & v)
 
 float Vec2::magnitude() const
 {
-	return float(sqrt(this->x*this->x + this->y*this->y));
+	return sqrt(this->x*this->x + this->y*this->y);
 }
 
 void Vec2::normalize()

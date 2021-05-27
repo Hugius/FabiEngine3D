@@ -306,7 +306,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 	}
 	
 	// Returning the corresponding height
-	int index = (int(x) * int(size)) + int(z);
+	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
 	return ((pixelColors[index]) / 255.0f) * maxHeight;
 }
 

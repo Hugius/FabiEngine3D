@@ -250,7 +250,7 @@ void AnimationEditor::_updateCamera()
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			// Add to acceleration
-			_cameraScrollingAcceleration += (float(-_fe3d.input_getMouseWheelY() / SCROLL_WHEEL_DIVIDER) * _cameraSpeed);
+			_cameraScrollingAcceleration += (static_cast<float>(-_fe3d.input_getMouseWheelY() / SCROLL_WHEEL_DIVIDER) * _cameraSpeed);
 		}
 		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
 

@@ -208,7 +208,7 @@ void ModelEditor::_updateModelEditingAabb()
 		// Update moving through cursor
 		if (_isMovingToggled)
 		{
-			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
+			float scrollingDirection = static_cast<float>(_fe3d.input_getMouseWheelY());
 			Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "@" + _currentAabbID);
 
 			// Determine direction
@@ -234,7 +234,7 @@ void ModelEditor::_updateModelEditingAabb()
 		// Update resizing through cursor
 		if (_isResizingToggled)
 		{
-			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
+			float scrollingDirection = static_cast<float>(_fe3d.input_getMouseWheelY());
 			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "@" + _currentAabbID);
 
 			// Check if able to scroll

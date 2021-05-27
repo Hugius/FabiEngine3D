@@ -17,7 +17,10 @@ void RenderFramebuffer::processAAData(RenderFramebuffer* renderBuffer)
 {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, renderBuffer->getFBO());
-	glBlitFramebuffer(0, 0, GLint(_size.x), GLint(_size.y), 0, 0, GLint(_size.x), GLint(_size.y), GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	glBlitFramebuffer(
+		0, 0, static_cast<GLint>(_size.x), static_cast<GLint>(_size.y), 
+		0, 0, static_cast<GLint>(_size.x), static_cast<GLint>(_size.y), 
+		GL_COLOR_BUFFER_BIT, GL_LINEAR);
 }
 
 int RenderFramebuffer::getAASamples()

@@ -36,8 +36,8 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->isSpriteAnimationStarted())
 		{
-			uvMultiplier = Vec2(1.0f / float(entity->getTotalSpriteAnimationColumns()), 1.0f / float(entity->getTotalSpriteAnimationRows()));
-			uvAdder = Vec2(float(entity->getSpriteAnimationColumnIndex()) * uvMultiplier.x, float(entity->getSpriteAnimationRowIndex()) * uvMultiplier.y);
+			uvMultiplier = Vec2(1.0f / static_cast<float>(entity->getTotalSpriteAnimationColumns()), 1.0f / static_cast<float>(entity->getTotalSpriteAnimationRows()));
+			uvAdder = Vec2(static_cast<float>(entity->getSpriteAnimationColumnIndex()) * uvMultiplier.x, static_cast<float>(entity->getSpriteAnimationRowIndex()) * uvMultiplier.y);
 		}
 
 		// Shader uniforms

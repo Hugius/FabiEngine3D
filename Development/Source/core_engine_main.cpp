@@ -133,8 +133,8 @@ void CoreEngine::_setupApplication()
 	// Calculate logo resolution
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	float width = float(DM.w);
-	float height = float(DM.h);
+	float width = static_cast<float>(DM.w);
+	float height = static_cast<float>(DM.h);
 	Ivec2 logoResolution = Ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
 	// Render logo

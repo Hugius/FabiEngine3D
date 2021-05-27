@@ -50,7 +50,7 @@ void ModelEditor::_updateModelEditingSize()
 		// Update resizing through cursor
 		if (_isResizingToggled)
 		{
-			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
+			float scrollSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * 0.05f;
 			Vec3 newSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 			// Check if able to scroll

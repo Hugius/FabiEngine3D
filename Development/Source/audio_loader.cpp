@@ -82,7 +82,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 
 Mix_Chunk* AudioLoader::getChunkDataPointer(const string& filePath)
 {
-begin:
+BEGIN:
 	auto iterator = _chunkCache.find(filePath);
 	if (iterator == _chunkCache.end()) // Not in map (yet)
 	{
@@ -113,7 +113,7 @@ begin:
 				_chunkCache.insert(std::make_pair(filePath, chunk));
 
 				// Return cached chunk
-				goto begin;
+				goto BEGIN;
 			}
 		}
 	}
@@ -123,7 +123,7 @@ begin:
 
 Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
 {
-begin:
+BEGIN:
 	auto iterator = _musicCache.find(filePath);
 	if (iterator == _musicCache.end()) // Not in map (yet)
 	{
@@ -148,7 +148,7 @@ begin:
 			_musicCache.insert(std::make_pair(filePath, music));
 
 			// Return cached music
-			goto begin;
+			goto BEGIN;
 		}
 	}
 	else

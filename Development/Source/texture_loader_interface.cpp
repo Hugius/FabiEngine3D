@@ -148,7 +148,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 
 GLuint TextureLoader::getTexture2D(const string& filePath, bool mipmap, bool aniso, bool repeat)
 {
-begin:
+BEGIN:
 	auto it = _textureCache2D.find(filePath);
 	if (it == _textureCache2D.end()) // Not in map (yet)
 	{
@@ -180,7 +180,7 @@ begin:
 				_textureCache2D.insert(std::make_pair(filePath, loadedTexture));
 
 				// Return cached texture
-				goto begin;
+				goto BEGIN;
 			}
 		}
 	}
@@ -190,7 +190,7 @@ begin:
 
 GLuint TextureLoader::getTexture3D(const array<string, 6>& filePaths)
 {
-begin:
+BEGIN:
 	auto it = _textureCache3D.find(filePaths);
 	if (it == _textureCache3D.end()) // Not in map (yet)
 	{
@@ -241,7 +241,7 @@ begin:
 			_textureCache3D.insert(std::make_pair(filePaths, loadedTexture));
 
 			// Return cached texture
-			goto begin;
+			goto BEGIN;
 		}
 	}
 
@@ -250,7 +250,7 @@ begin:
 
 GLuint TextureLoader::getText(const string& textContent, const string& fontPath)
 {
-begin:
+BEGIN:
 	auto it = _textCache.find(make_pair(textContent, fontPath));
 	if (it == _textCache.end()) // Not in map (yet)
 	{
@@ -264,7 +264,7 @@ begin:
 		else
 		{
 			_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
-			goto begin;
+			goto BEGIN;
 		}
 	}
 
@@ -273,7 +273,7 @@ begin:
 
 const vector<float>* TextureLoader::getBitmapPixels(const string& filePath)
 {
-begin:
+BEGIN:
 	auto it = _bitmapCache.find(filePath);
 	if (it == _bitmapCache.end()) // Not in map (yet)
 	{
@@ -290,7 +290,7 @@ begin:
 			_bitmapCache.insert(std::make_pair(filePath, loadedPixels));
 
 			// Return cached pixels
-			goto begin;
+			goto BEGIN;
 		}
 	}
 

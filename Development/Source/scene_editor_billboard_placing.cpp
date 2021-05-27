@@ -36,14 +36,14 @@ void SceneEditor::_updateBillboardPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new billboard
-				begin: int randomSerial = _fe3d.misc_getRandomInteger(0, INT_MAX);
+				BEGIN: int randomSerial = _fe3d.misc_getRandomInteger(0, INT_MAX);
 					string newID = _currentPreviewBillboardID.substr(1); // Remove the '@'
 					newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
 
 					// Check if ID not already exists
 					if (_fe3d.billboardEntity_isExisting(newID))
 					{
-						goto begin;
+						goto BEGIN;
 					}
 
 					// Add billboard

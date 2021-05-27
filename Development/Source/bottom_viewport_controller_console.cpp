@@ -126,7 +126,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		// Check if message part takes multiple lines
 		vector<string> messageParts;
-		begin:
+	BEGIN:
 		for (size_t i = 0; i < messagePartText.size(); i++)
 		{
 			// Check if message length is bigger than window size
@@ -138,7 +138,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 				// Set the remaining message
 				messagePartText = messagePartText.substr(i, messagePartText.size() - i);
-				goto begin;
+				goto BEGIN;
 			}
 		}
 

@@ -75,7 +75,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath, bool calculateTangents)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
-	begin : auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
+BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
 	if (iterator == _meshCache.end()) 
 	{
 		// Load mesh
@@ -95,7 +95,7 @@ const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath, bool calcul
 			_meshCache.insert(std::make_pair(filePath, loadedModel));
 
 			// Return new model
-			goto begin;
+			goto BEGIN;
 		}
 	}
 	else

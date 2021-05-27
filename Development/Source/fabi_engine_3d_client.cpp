@@ -28,12 +28,17 @@ void FabiEngine3D::networkClient_sendMessage(const string& content)
 	_core->_networkClient.sendMessage(content);
 }
 
-bool FabiEngine3D::networkClient_isConnectedToServer()
+const bool FabiEngine3D::networkClient_isStarted()
+{
+	return _core->_networkClient.isRunning();
+}
+
+const bool FabiEngine3D::networkClient_isConnectedToServer()
 {
 	return _core->_networkClient.isConnectedToServer();
 }
 
-bool FabiEngine3D::networkClient_isMessagePending()
+const bool FabiEngine3D::networkClient_isMessagePending()
 {
 	return _core->_networkClient.isMessagePending();
 }

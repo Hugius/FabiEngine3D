@@ -54,82 +54,82 @@ void FabiEngine3D::terrainEntity_show(const string& ID)
 	_core->_terrainEntityManager.getEntity(ID)->setVisible(true);
 }
 
-bool FabiEngine3D::terrainEntity_isExisting(const string& ID)
+const bool FabiEngine3D::terrainEntity_isExisting(const string& ID)
 {
 	return _core->_terrainEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::terrainEntity_isVisible(const string& ID)
+const bool FabiEngine3D::terrainEntity_isVisible(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isVisible();
 }
 
-bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
 }
 
-bool FabiEngine3D::terrainEntity_isNormalMapped(const string& ID)
+const bool FabiEngine3D::terrainEntity_isNormalMapped(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isNormalMapped();
 }
 
-bool FabiEngine3D::terrainEntity_isNormalMappedR(const string& ID)
+const bool FabiEngine3D::terrainEntity_isNormalMappedR(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedR();
 }
 
-bool FabiEngine3D::terrainEntity_isNormalMappedG(const string& ID)
+const bool FabiEngine3D::terrainEntity_isNormalMappedG(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedG();
 }
 
-bool FabiEngine3D::terrainEntity_isNormalMappedB(const string& ID)
+const bool FabiEngine3D::terrainEntity_isNormalMappedB(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedB();
 }
 
-bool FabiEngine3D::terrainEntity_isBlendMapped(const string& ID)
+const bool FabiEngine3D::terrainEntity_isBlendMapped(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isBlendMapped();
 }
 
-float FabiEngine3D::terrainEntity_getSize(const string& ID)
+const float FabiEngine3D::terrainEntity_getSize(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getSize();
 }
 
-float FabiEngine3D::terrainEntity_getMaxHeight(const string& ID)
+const float FabiEngine3D::terrainEntity_getMaxHeight(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-float FabiEngine3D::terrainEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::terrainEntity_getUvRepeat(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getUvRepeat();
 }
 
-bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float z)
+const bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float z)
 {
 	return _core->_terrainEntityManager.isInside(ID, x, z);
 }
 
-float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)
+const float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)
 {
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
 }
 
-float FabiEngine3D::terrainEntity_getSpecularLightingFactor(const string& ID)
+const float FabiEngine3D::terrainEntity_getSpecularLightingFactor(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingFactor();
 }
 
-float FabiEngine3D::terrainEntity_getSpecularLightingIntensity(const string& ID)
+const float FabiEngine3D::terrainEntity_getSpecularLightingIntensity(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingIntensity();
 }
 
-string FabiEngine3D::terrainEntity_getSelectedID()
+const string FabiEngine3D::terrainEntity_getSelectedID()
 {
 	if (_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{
@@ -141,7 +141,7 @@ string FabiEngine3D::terrainEntity_getSelectedID()
 	}
 }
 
-vector<string> FabiEngine3D::terrainEntity_getAllIDs()
+const vector<string> FabiEngine3D::terrainEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -198,22 +198,22 @@ const string& FabiEngine3D::terrainEntity_getNormalMapPathB(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathB();
 }
 
-float FabiEngine3D::terrainEntity_getBlendRepeatR(const string& ID)
+const float FabiEngine3D::terrainEntity_getBlendRepeatR(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatR();
 }
 
-float FabiEngine3D::terrainEntity_getBlendRepeatG(const string& ID)
+const float FabiEngine3D::terrainEntity_getBlendRepeatG(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatG();
 }
 
-float FabiEngine3D::terrainEntity_getBlendRepeatB(const string& ID)
+const float FabiEngine3D::terrainEntity_getBlendRepeatB(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatB();
 }
 
-float FabiEngine3D::terrainEntity_getLightness(const string& ID)
+const float FabiEngine3D::terrainEntity_getLightness(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getLightness();
 }

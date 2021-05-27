@@ -144,17 +144,17 @@ void FabiEngine3D::modelEntity_setSpecularLighted(const string& ID, bool enabled
 	_core->_modelEntityManager.getEntity(ID)->setSpecularLighted(enabled);
 }
 
-bool FabiEngine3D::modelEntity_isExisting(const string& ID)
+const bool FabiEngine3D::modelEntity_isExisting(const string& ID)
 {
 	return _core->_modelEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::modelEntity_isVisible(const string& ID)
+const bool FabiEngine3D::modelEntity_isVisible(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isVisible();
 }
 
-bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
+const bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 {
 	if (!_core->_modelEntityManager.getEntity(ID)->getRenderBuffers().empty())
 	{
@@ -166,67 +166,67 @@ bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 	}
 }
 
-bool FabiEngine3D::modelEntity_isMultiParted(const string& ID)
+const bool FabiEngine3D::modelEntity_isMultiParted(const string& ID)
 {
 	return (_core->_modelEntityManager.getEntity(ID)->getPartIDs().size() > 1);
 }
 
-bool FabiEngine3D::modelEntity_isTransparent(const string& ID)
+const bool FabiEngine3D::modelEntity_isTransparent(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isTransparent();
 }
 
-bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)
+const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isFaceCulled();
 }
 
-bool FabiEngine3D::modelEntity_isLightMapped(const string& ID)
+const bool FabiEngine3D::modelEntity_isLightMapped(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isLightMapped();
 }
 
-bool FabiEngine3D::modelEntity_isNormalMapped(const string& ID)
+const bool FabiEngine3D::modelEntity_isNormalMapped(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isNormalMapped();
 }
 
-bool FabiEngine3D::modelEntity_isSkyReflective(const string& ID)
+const bool FabiEngine3D::modelEntity_isSkyReflective(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isSkyReflective();
 }
 
-bool FabiEngine3D::modelEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::modelEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isSpecularLighted();
 }
 
-bool FabiEngine3D::modelEntity_isSceneReflective(const string& ID)
+const bool FabiEngine3D::modelEntity_isSceneReflective(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isSceneReflective();
 }
 
-bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
+const bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isShadowed();
 }
 
-bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID)
+const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
 }
 
-bool FabiEngine3D::modelEntity_isWireframed(const string& ID)
+const bool FabiEngine3D::modelEntity_isWireframed(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isWireframed();
 }
 
-bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
+const bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
-bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& partID)
+const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& partID)
 {
 	for (const auto& existingPartID : modelEntity_getPartIDs(ID))
 	{
@@ -274,22 +274,22 @@ void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string
 	_core->_modelEntityManager.getEntity(ID)->setScaling(size, partID);
 }
 
-Vec3 FabiEngine3D::modelEntity_getPosition(const string& ID, const string& partID)
+const Vec3 FabiEngine3D::modelEntity_getPosition(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getTranslation(partID);
 }
 
-Vec3 FabiEngine3D::modelEntity_getRotation(const string& ID, const string& partID)
+const Vec3 FabiEngine3D::modelEntity_getRotation(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getRotation(partID);
 }
 
-Vec3 FabiEngine3D::modelEntity_getRotationOrigin(const string& ID, const string& partID)
+const Vec3 FabiEngine3D::modelEntity_getRotationOrigin(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getRotationOrigin(partID);
 }
 
-Vec3 FabiEngine3D::modelEntity_getSize(const string& ID, const string& partID)
+const Vec3 FabiEngine3D::modelEntity_getSize(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getScaling(partID);
 }
@@ -360,72 +360,72 @@ void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
-float FabiEngine3D::modelEntity_getLightness(const string& ID)
+const float FabiEngine3D::modelEntity_getLightness(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLightness();
 }
 
-float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)
+const float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getSpecularFactor();
 }
 
-float FabiEngine3D::modelEntity_getSpecularIntensity(const string& ID)
+const float FabiEngine3D::modelEntity_getSpecularIntensity(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getSpecularIntensity();
 }
 
-float FabiEngine3D::modelEntity_getAlpha(const string& ID)
+const float FabiEngine3D::modelEntity_getAlpha(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getAlpha();
 }
 
-float FabiEngine3D::modelEntity_getMinHeight(const string& ID)
+const float FabiEngine3D::modelEntity_getMinHeight(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getMinHeight();
 }
 
-float FabiEngine3D::modelEntity_getMaxHeight(const string& ID)
+const float FabiEngine3D::modelEntity_getMaxHeight(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-float FabiEngine3D::modelEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::modelEntity_getUvRepeat(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getUvRepeat();
 }
 
-Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& partID)
+const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
 }
 
-string FabiEngine3D::modelEntity_getMeshPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getMeshPath(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getMeshPath();
 }
 
-string FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-string FabiEngine3D::modelEntity_getLightMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getLightMapPath(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLightMapPath();
 }
 
-string FabiEngine3D::modelEntity_getNormalMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getNormalMapPath(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath();
 }
 
-string FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPath();
 }
 
-string FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& ID)
+const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLodEntityID();
 }
@@ -492,7 +492,7 @@ void FabiEngine3D::modelEntity_setSceneReflective(const string& ID, bool enabled
 	_core->_modelEntityManager.getEntity(ID)->setSceneReflective(enabled);
 }
 
-vector<string> FabiEngine3D::modelEntity_getAllIDs()
+const vector<string> FabiEngine3D::modelEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -504,7 +504,7 @@ vector<string> FabiEngine3D::modelEntity_getAllIDs()
 	return IDs;
 }
 
-vector<string> FabiEngine3D::modelEntity_getGroupIDs(const string& ID)
+const vector<string> FabiEngine3D::modelEntity_getGroupIDs(const string& ID)
 {
 	vector<string> IDs;
 

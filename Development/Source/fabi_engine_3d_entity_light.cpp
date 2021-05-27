@@ -27,12 +27,12 @@ void FabiEngine3D::lightEntity_show(const string& ID)
 	_core->_lightEntityManager.getEntity(ID)->setVisible(true);
 }
 
-bool FabiEngine3D::lightEntity_isExisting(const string& ID)
+const bool FabiEngine3D::lightEntity_isExisting(const string& ID)
 {
 	return _core->_lightEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::lightEntity_isVisible(const string& ID)
+const  bool FabiEngine3D::lightEntity_isVisible(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->isVisible();
 }
@@ -62,27 +62,27 @@ void FabiEngine3D::lightEntity_setDistanceFactor(const string& ID, float factor)
 	_core->_lightEntityManager.getEntity(ID)->setDistanceFactor(factor);
 }
 
-Vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
+const Vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getPosition();
 }
 
-Vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
+const Vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getColor();
 }
 
-float FabiEngine3D::lightEntity_getIntensity(const string& ID)
+const float FabiEngine3D::lightEntity_getIntensity(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getIntensity();
 }
 
-float FabiEngine3D::lightEntity_getDistanceFactor(const string& ID)
+const float FabiEngine3D::lightEntity_getDistanceFactor(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getDistanceFactor();
 }
 
-vector<string> FabiEngine3D::lightEntity_getAllIDs()
+const vector<string> FabiEngine3D::lightEntity_getAllIDs()
 {
 	vector<string> IDs;
 

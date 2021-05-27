@@ -138,7 +138,7 @@ void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
 	}
 }
 
-Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
+const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
@@ -150,7 +150,7 @@ Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
 	}
 }
 
-Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
+const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
@@ -162,27 +162,27 @@ Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
 	}
 }
 
-bool FabiEngine3D::aabbEntity_isRaycastResponsive(const string& ID)
+const bool FabiEngine3D::aabbEntity_isRaycastResponsive(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isRaycastResponsive();
 }
 
-bool FabiEngine3D::aabbEntity_isCollisionResponsive(const string& ID)
+const bool FabiEngine3D::aabbEntity_isCollisionResponsive(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isCollisionResponsive();
 }
 
-bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
+const bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
 {
 	return _core->_aabbEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::aabbEntity_isVisible(const string& ID)
+const bool FabiEngine3D::aabbEntity_isVisible(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->isVisible();
 }
 
-vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity)
+const vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity)
 {
 	vector<string> IDs;
 
@@ -199,7 +199,7 @@ vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool
 	return IDs;
 }
 
-vector<string> FabiEngine3D::aabbEntity_getAllIDs()
+const vector<string> FabiEngine3D::aabbEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -211,12 +211,12 @@ vector<string> FabiEngine3D::aabbEntity_getAllIDs()
 	return IDs;
 }
 
-string FabiEngine3D::aabbEntity_getParentID(const string& ID)
+const string& FabiEngine3D::aabbEntity_getParentID(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentID();
 }
 
-AabbParentType FabiEngine3D::aabbEntity_getParentType(const string& ID)
+const AabbParentType FabiEngine3D::aabbEntity_getParentType(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getParentType();
 }

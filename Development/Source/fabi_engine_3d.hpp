@@ -45,7 +45,7 @@ public:
 	void   engine_stop();
 	bool   engine_isPaused();
 	bool   engine_isGameExported();
-	string engine_getGameTitle();
+	const string& engine_getGameTitle();
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
@@ -70,19 +70,19 @@ public:
 	void camera_setMaxPitch(float pitch);
 
 	// Camera interface - getters
-	bool camera_isLookatViewEnabled();
-	bool camera_isFirstPersonViewEnabled();
-	Vec3 camera_getPosition();
-	Vec3 camera_getLookatPosition();
-	float camera_getFOV();
-	float getAspectRatio();
-	float camera_getMouseSensitivity();
-	float camera_getYaw();
-	float camera_getPitch();
-	float camera_getNearDistance();
-	float camera_getFarDistance();
-	float camera_getMouseOffset();
-	float camera_getMaxPitch();
+	const bool camera_isLookatViewEnabled();
+	const bool camera_isFirstPersonViewEnabled();
+	const Vec3 camera_getPosition();
+	const Vec3 camera_getLookatPosition();
+	const float camera_getFOV();
+	const float getAspectRatio();
+	const float camera_getMouseSensitivity();
+	const float camera_getYaw();
+	const float camera_getPitch();
+	const float camera_getNearDistance();
+	const float camera_getFarDistance();
+	const float camera_getMouseOffset();
+	const float camera_getMaxPitch();
 
 	// Sky entity interface - setters
 	void skyEntity_add(const string& ID);
@@ -105,16 +105,16 @@ public:
 	void skyEntity_setMixValue(float mixValue);
 
 	// Sky entity interface - getters
-	bool skyEntity_isExisting(const string& ID);
-	bool skyEntity_isVisible(const string& ID);
-	string skyEntity_getSelectedID();
-	vector<string> skyEntity_getAllIDs();
+	const bool skyEntity_isExisting(const string& ID);
+	const bool skyEntity_isVisible(const string& ID);
+	const string skyEntity_getSelectedID();
+	const vector<string> skyEntity_getAllIDs();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
-	float skyEntity_getLightness(const string& ID);
-	float skyEntity_getOriginalLightness(const string& ID);
-	float skyEntity_getRotationSpeed(const string& ID);
-	float skyEntity_getMixValue();
-	Vec3 skyEntity_getColor(const string& ID);
+	const float skyEntity_getLightness(const string& ID);
+	const float skyEntity_getOriginalLightness(const string& ID);
+	const float skyEntity_getRotationSpeed(const string& ID);
+	const float skyEntity_getMixValue();
+	const Vec3 skyEntity_getColor(const string& ID);
 
 	// Terrain entity interface - setters
 	void terrainEntity_add(const string& ID, const string& heightMapPath);
@@ -149,17 +149,17 @@ public:
 	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 
 	// Terrain entity interface - getters
-	bool terrainEntity_isExisting(const string& ID);
-	bool terrainEntity_isVisible(const string& ID);
-	bool terrainEntity_isBlendMapped(const string& ID);
-	bool terrainEntity_isNormalMapped(const string& ID);
-	bool terrainEntity_isNormalMappedR(const string& ID);
-	bool terrainEntity_isNormalMappedG(const string& ID);
-	bool terrainEntity_isNormalMappedB(const string& ID);
-	bool terrainEntity_isSpecularLighted(const string& ID);
-	bool terrainEntity_isInside(const string& ID, float x, float z);
-	string terrainEntity_getSelectedID();
-	vector<string> terrainEntity_getAllIDs();
+	const bool terrainEntity_isExisting(const string& ID);
+	const bool terrainEntity_isVisible(const string& ID);
+	const bool terrainEntity_isBlendMapped(const string& ID);
+	const bool terrainEntity_isNormalMapped(const string& ID);
+	const bool terrainEntity_isNormalMappedR(const string& ID);
+	const bool terrainEntity_isNormalMappedG(const string& ID);
+	const bool terrainEntity_isNormalMappedB(const string& ID);
+	const bool terrainEntity_isSpecularLighted(const string& ID);
+	const bool terrainEntity_isInside(const string& ID, float x, float z);
+	const string terrainEntity_getSelectedID();
+	const vector<string> terrainEntity_getAllIDs();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
 	const string& terrainEntity_getNormalMapPath(const string& ID);
 	const string& terrainEntity_getHeightMapPath(const string& ID);
@@ -170,16 +170,16 @@ public:
 	const string& terrainEntity_getNormalMapPathR(const string& ID);
 	const string& terrainEntity_getNormalMapPathG(const string& ID);
 	const string& terrainEntity_getNormalMapPathB(const string& ID);
-	float terrainEntity_getMaxHeight(const string& ID);
-	float terrainEntity_getUvRepeat(const string& ID);
-	float terrainEntity_getLightness(const string& ID);
-	float terrainEntity_getBlendRepeatR(const string& ID);
-	float terrainEntity_getBlendRepeatG(const string& ID);
-	float terrainEntity_getBlendRepeatB(const string& ID);
-	float terrainEntity_getSize(const string& ID);
-	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
-	float terrainEntity_getSpecularLightingFactor(const string& ID);
-	float terrainEntity_getSpecularLightingIntensity(const string& ID);
+	const float terrainEntity_getMaxHeight(const string& ID);
+	const float terrainEntity_getUvRepeat(const string& ID);
+	const float terrainEntity_getLightness(const string& ID);
+	const float terrainEntity_getBlendRepeatR(const string& ID);
+	const float terrainEntity_getBlendRepeatG(const string& ID);
+	const float terrainEntity_getBlendRepeatB(const string& ID);
+	const float terrainEntity_getSize(const string& ID);
+	const float terrainEntity_getPixelHeight(const string& ID, float x, float z);
+	const float terrainEntity_getSpecularLightingFactor(const string& ID);
+	const float terrainEntity_getSpecularLightingIntensity(const string& ID);
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);
@@ -207,27 +207,27 @@ public:
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
 
 	// Water entity interface - getters
-	bool waterEntity_isExisting(const string& ID);
-	bool waterEntity_isVisible(const string& ID);
-	bool waterEntity_isWaving(const string& ID);
-	bool waterEntity_isRippling(const string& ID);
-	bool waterEntity_isSpecularLighted(const string& ID);
-	bool waterEntity_isReflective(const string& ID);
-	bool waterEntity_isRefractive(const string& ID);
-	Vec2 waterEntity_getSpeed(const string& ID);
-	Vec3 waterEntity_getPosition(const string& ID);
-	Vec3 waterEntity_getColor(const string& ID);
-	float waterEntity_getSize(const string& ID);
-	float waterEntity_getUvRepeat(const string& ID);
-	float waterEntity_getWaveHeightFactor(const string& ID);
-	float waterEntity_getSpecularLightingFactor(const string& ID);
-	float waterEntity_getSpecularLightingIntensity(const string& ID);
-	float waterEntity_getTransparency(const string& ID);
+	const bool waterEntity_isExisting(const string& ID);
+	const bool waterEntity_isVisible(const string& ID);
+	const bool waterEntity_isWaving(const string& ID);
+	const bool waterEntity_isRippling(const string& ID);
+	const bool waterEntity_isSpecularLighted(const string& ID);
+	const bool waterEntity_isReflective(const string& ID);
+	const bool waterEntity_isRefractive(const string& ID);
+	const Vec2 waterEntity_getSpeed(const string& ID);
+	const Vec3 waterEntity_getPosition(const string& ID);
+	const Vec3 waterEntity_getColor(const string& ID);
+	const float waterEntity_getSize(const string& ID);
+	const float waterEntity_getUvRepeat(const string& ID);
+	const float waterEntity_getWaveHeightFactor(const string& ID);
+	const float waterEntity_getSpecularLightingFactor(const string& ID);
+	const float waterEntity_getSpecularLightingIntensity(const string& ID);
+	const float waterEntity_getTransparency(const string& ID);
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
-	string waterEntity_getSelectedID();
-	vector<string> waterEntity_getAllIDs();
+	const string waterEntity_getSelectedID();
+	const vector<string> waterEntity_getAllIDs();
 
 	// Model entity interface - setters
 	void modelEntity_add
@@ -277,48 +277,48 @@ public:
 	void modelEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
 
 	// Model entity interface - getters
-	bool modelEntity_isExisting(const string& ID);
-	bool modelEntity_isVisible(const string& ID);
-	bool modelEntity_isInstanced(const string& ID);
-	bool modelEntity_isMultiParted(const string& ID);
-	bool modelEntity_isTransparent(const string& ID);
-	bool modelEntity_isFaceCulled(const string& ID);
-	bool modelEntity_isLightMapped(const string& ID);
-	bool modelEntity_isNormalMapped(const string& ID);
-	bool modelEntity_isSkyReflective(const string& ID);
-	bool modelEntity_isSpecularLighted(const string& ID);
-	bool modelEntity_isSceneReflective(const string& ID);
-	bool modelEntity_isShadowed(const string& ID);
-	bool modelEntity_isStaticToCamera(const string& ID);
-	bool modelEntity_isWireframed(const string& ID);
-	bool modelEntity_isDepthMapIncluded(const string& ID);
-	bool modelEntity_hasPart(const string& ID, const string& partID);
-	float modelEntity_getLightness(const string& ID);
-	float modelEntity_getSpecularFactor(const string& ID);
-	float modelEntity_getSpecularIntensity(const string& ID);
-	float modelEntity_getAlpha(const string& ID);
-	float modelEntity_getMinHeight(const string& ID);
-	float modelEntity_getMaxHeight(const string& ID);
-	float modelEntity_getUvRepeat(const string& ID);
-	Vec3 modelEntity_getPosition(const string& ID, const string& partID = "");
-	Vec3 modelEntity_getRotation(const string& ID, const string& partID = "");
-	Vec3 modelEntity_getRotationOrigin(const string& ID, const string& partID = "");
-	Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
-	Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
-	string modelEntity_getMeshPath(const string& ID);
-	string modelEntity_getDiffuseMapPath(const string& ID);
-	string modelEntity_getLightMapPath(const string& ID);
-	string modelEntity_getNormalMapPath(const string& ID);
-	string modelEntity_getReflectionMapPath(const string& ID);
-	string modelEntity_getLevelOfDetailEntityID(const string& ID);
+	const bool modelEntity_isExisting(const string& ID);
+	const bool modelEntity_isVisible(const string& ID);
+	const bool modelEntity_isInstanced(const string& ID);
+	const bool modelEntity_isMultiParted(const string& ID);
+	const bool modelEntity_isTransparent(const string& ID);
+	const bool modelEntity_isFaceCulled(const string& ID);
+	const bool modelEntity_isLightMapped(const string& ID);
+	const bool modelEntity_isNormalMapped(const string& ID);
+	const bool modelEntity_isSkyReflective(const string& ID);
+	const bool modelEntity_isSpecularLighted(const string& ID);
+	const bool modelEntity_isSceneReflective(const string& ID);
+	const bool modelEntity_isShadowed(const string& ID);
+	const bool modelEntity_isStaticToCamera(const string& ID);
+	const bool modelEntity_isWireframed(const string& ID);
+	const bool modelEntity_isDepthMapIncluded(const string& ID);
+	const bool modelEntity_hasPart(const string& ID, const string& partID);
+	const float modelEntity_getLightness(const string& ID);
+	const float modelEntity_getSpecularFactor(const string& ID);
+	const float modelEntity_getSpecularIntensity(const string& ID);
+	const float modelEntity_getAlpha(const string& ID);
+	const float modelEntity_getMinHeight(const string& ID);
+	const float modelEntity_getMaxHeight(const string& ID);
+	const float modelEntity_getUvRepeat(const string& ID);
+	const Vec3 modelEntity_getPosition(const string& ID, const string& partID = "");
+	const Vec3 modelEntity_getRotation(const string& ID, const string& partID = "");
+	const Vec3 modelEntity_getRotationOrigin(const string& ID, const string& partID = "");
+	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
+	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
+	const string& modelEntity_getMeshPath(const string& ID);
+	const string& modelEntity_getDiffuseMapPath(const string& ID);
+	const string& modelEntity_getLightMapPath(const string& ID);
+	const string& modelEntity_getNormalMapPath(const string& ID);
+	const string& modelEntity_getReflectionMapPath(const string& ID);
+	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
 	const vector<Vec3>    modelEntity_getInstancedOffsets(const string& ID);
 	const vector<string>& modelEntity_getDiffuseMapPaths(const string& ID);
 	const vector<string>& modelEntity_getLightMapPaths(const string& ID);
 	const vector<string>& modelEntity_getReflectionMapPaths(const string& ID);
 	const vector<string>& modelEntity_getNormalMapPaths(const string& ID);
 	const vector<string>& modelEntity_getPartIDs(const string& ID);
-	vector<string> modelEntity_getAllIDs();
-	vector<string> modelEntity_getGroupIDs(const string& ID);
+	const vector<string> modelEntity_getAllIDs();
+	const vector<string> modelEntity_getGroupIDs(const string& ID);
 
 	// Billboard entity interface (core) - setters
 	void billboardEntity_add
@@ -348,21 +348,21 @@ public:
 	void billboardEntity_setLightness(const string& ID, float lightness);
 
 	// Billboard entity interface (core) - getters
-	float billboardEntity_getLightness(const string& ID);
-	float billboardEntity_getMinHeight(const string& ID);
-	float billboardEntity_getMaxHeight(const string& ID);
-	bool billboardEntity_isExisting(const string& ID);
-	bool billboardEntity_isVisible(const string& ID);
-	bool billboardEntity_isFacingCameraX(const string& ID);
-	bool billboardEntity_isFacingCameraY(const string& ID);
-	bool billboardEntity_isDepthMapIncluded(const string& ID);
-	bool billboardEntity_isInstanced(const string& ID);
-	Vec3 billboardEntity_getPosition(const string& ID);
-	Vec3 billboardEntity_getRotation(const string& ID);
-	Vec2 billboardEntity_getSize(const string& ID);
-	Vec3 billboardEntity_getColor(const string& ID);
-	vector<string> billboardEntity_getAllIDs();
-	vector<Vec3>   billboardEntity_getInstancedOffsets(const string& ID);
+	const float billboardEntity_getLightness(const string& ID);
+	const float billboardEntity_getMinHeight(const string& ID);
+	const float billboardEntity_getMaxHeight(const string& ID);
+	const bool billboardEntity_isExisting(const string& ID);
+	const bool billboardEntity_isVisible(const string& ID);
+	const bool billboardEntity_isFacingCameraX(const string& ID);
+	const bool billboardEntity_isFacingCameraY(const string& ID);
+	const bool billboardEntity_isDepthMapIncluded(const string& ID);
+	const bool billboardEntity_isInstanced(const string& ID);
+	const Vec3 billboardEntity_getPosition(const string& ID);
+	const Vec3 billboardEntity_getRotation(const string& ID);
+	const Vec2 billboardEntity_getSize(const string& ID);
+	const Vec3 billboardEntity_getColor(const string& ID);
+	const vector<string> billboardEntity_getAllIDs();
+	const vector<Vec3> billboardEntity_getInstancedOffsets(const string& ID);
 
 	// Billboard entity interface (diffuseMap) - setters
 	void billboardEntity_add
@@ -376,7 +376,7 @@ public:
 
 	// Billboard entity interface (diffuseMap) - getters
 	const string& billboardEntity_getDiffuseMapPath(const string& ID);
-	bool billboardEntity_isTransparent(const string& ID);
+	const bool billboardEntity_isTransparent(const string& ID);
 
 	// Billboard entity interface (text) - setters
 	void billboardEntity_add
@@ -404,15 +404,15 @@ public:
 	void billboardEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Billboard entity interface (animation) - getters
-	bool billboardEntity_isSpriteAnimationStarted(const string& ID);
-	bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
-	bool billboardEntity_isSpriteAnimationPaused(const string& ID);
-	unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
-	unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
-	unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID);
-	unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID);
-	unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID);
-	int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
+	const bool billboardEntity_isSpriteAnimationStarted(const string& ID);
+	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
+	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID);
+	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
@@ -430,16 +430,16 @@ public:
 	void aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal = false);
 
 	// AABB entity interface - getters
-	Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
-	Vec3 aabbEntity_getSize(const string& ID, bool noLocal = false);
-	bool aabbEntity_isRaycastResponsive(const string& ID);
-	bool aabbEntity_isCollisionResponsive(const string& ID);
-	bool aabbEntity_isExisting(const string& ID);
-	bool aabbEntity_isVisible(const string& ID);
-	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
-	vector<string> aabbEntity_getAllIDs();
-	string aabbEntity_getParentID(const string& ID);
-	AabbParentType aabbEntity_getParentType(const string& ID);
+	const Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
+	const Vec3 aabbEntity_getSize(const string& ID, bool noLocal = false);
+	const bool aabbEntity_isRaycastResponsive(const string& ID);
+	const bool aabbEntity_isCollisionResponsive(const string& ID);
+	const bool aabbEntity_isExisting(const string& ID);
+	const bool aabbEntity_isVisible(const string& ID);
+	const vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
+	const vector<string> aabbEntity_getAllIDs();
+	const string& aabbEntity_getParentID(const string& ID);
+	const AabbParentType aabbEntity_getParentType(const string& ID);
 
 	// Global collision interface - setters
 	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
@@ -449,16 +449,16 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	pair<const string, float> collision_checkCursorInAny();
-	pair<bool, float>		  collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
-	pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
-	bool		 collision_checkCameraWithTerrain();
-	bool		 collision_checkCameraWithEntity(const string& ID);
+	const pair<const string, float> collision_checkCursorInAny();
+	const pair<bool, float>		  collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
+	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
+	const bool		 collision_checkCameraWithTerrain();
+	const bool		 collision_checkCameraWithEntity(const string& ID);
 	const string collision_checkCameraWithAny();
 	const string collision_checkCameraWithEntities(const string& ID);
-	bool		 collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
-	bool		 collision_checkCameraWithAnyDirection(Direction direction);
-	bool		 collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
+	const bool		 collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
+	const bool		 collision_checkCameraWithAnyDirection(Direction direction);
+	const bool		 collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
 	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
 
 	// Light entity interface - setters
@@ -474,13 +474,13 @@ public:
 	void lightEntity_setDistanceFactor(const string& ID, float factor);
 
 	// Light entity interface - getters
-	bool lightEntity_isExisting(const string& ID);
-	bool lightEntity_isVisible(const string& ID);
-	Vec3 lightEntity_getPosition(const string& ID);
-	Vec3 lightEntity_getColor(const string& ID);
-	float lightEntity_getIntensity(const string& ID);
-	float lightEntity_getDistanceFactor(const string& ID);
-	vector<string> lightEntity_getAllIDs();
+	const bool lightEntity_isExisting(const string& ID);
+	const bool lightEntity_isVisible(const string& ID);
+	const Vec3 lightEntity_getPosition(const string& ID);
+	const Vec3 lightEntity_getColor(const string& ID);
+	const float lightEntity_getIntensity(const string& ID);
+	const float lightEntity_getDistanceFactor(const string& ID);
+	const vector<string> lightEntity_getAllIDs();
 
 	// Image entity interface - setters
 	void imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
@@ -515,28 +515,28 @@ public:
 	void imageEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
 
 	// Image entity interface - getters
-	bool imageEntity_isExisting(const string& ID);
-	bool imageEntity_isVisible(const string& ID);
-	bool imageEntity_isCentered(const string& ID);
-	bool imageEntity_isMirroredHorizontally(const string& ID);
-	bool imageEntity_isMirroredVertically(const string& ID);
-	bool imageEntity_isSpriteAnimationStarted(const string& ID);
-	bool imageEntity_isSpriteAnimationPlaying(const string& ID);
-	bool imageEntity_isSpriteAnimationPaused(const string& ID);
-	Vec2 imageEntity_getPosition(const string& ID);
-	Vec2 imageEntity_getSize(const string& ID);
-	Vec2 imageEntity_getMinPosition(const string& ID);
-	Vec2 imageEntity_getMaxPosition(const string& ID);
-	Vec3 imageEntity_getColor(const string& ID);
-	float imageEntity_getRotation(const string& ID);
-	float imageEntity_getAlpha(const string& ID);
-	int imageEntity_getRemainingSpriteAnimationLoops(const string& ID);
-	unsigned int imageEntity_getSpriteAnimationRows(const string& ID);
-	unsigned int imageEntity_getSpriteAnimationColumns(const string& ID);
-	unsigned int imageEntity_getSpriteAnimationFramestep(const string& ID);
-	unsigned int imageEntity_getSpriteAnimationRowIndex(const string& ID);
-	unsigned int imageEntity_getSpriteAnimationColumnIndex(const string& ID);
-	vector<string> imageEntity_getAllIDs();
+	const bool imageEntity_isExisting(const string& ID);
+	const bool imageEntity_isVisible(const string& ID);
+	const bool imageEntity_isCentered(const string& ID);
+	const bool imageEntity_isMirroredHorizontally(const string& ID);
+	const bool imageEntity_isMirroredVertically(const string& ID);
+	const bool imageEntity_isSpriteAnimationStarted(const string& ID);
+	const bool imageEntity_isSpriteAnimationPlaying(const string& ID);
+	const bool imageEntity_isSpriteAnimationPaused(const string& ID);
+	const Vec2 imageEntity_getPosition(const string& ID);
+	const Vec2 imageEntity_getSize(const string& ID);
+	const Vec2 imageEntity_getMinPosition(const string& ID);
+	const Vec2 imageEntity_getMaxPosition(const string& ID);
+	const Vec3 imageEntity_getColor(const string& ID);
+	const float imageEntity_getRotation(const string& ID);
+	const float imageEntity_getAlpha(const string& ID);
+	const int imageEntity_getRemainingSpriteAnimationLoops(const string& ID);
+	const unsigned int imageEntity_getSpriteAnimationRows(const string& ID);
+	const unsigned int imageEntity_getSpriteAnimationColumns(const string& ID);
+	const unsigned int imageEntity_getSpriteAnimationFramestep(const string& ID);
+	const unsigned int imageEntity_getSpriteAnimationRowIndex(const string& ID);
+	const unsigned int imageEntity_getSpriteAnimationColumnIndex(const string& ID);
+	const vector<string> imageEntity_getAllIDs();
 
 	// Text entity interface - setters
 	void textEntity_add
@@ -564,17 +564,17 @@ public:
 	void textEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 
 	// Text interface - getters
-	bool textEntity_isExisting(const string& ID);
-	bool textEntity_isVisible(const string& ID);
-	Vec2 textEntity_getPosition(const string& ID);
-	Vec2 textEntity_getSize(const string& ID);
-	Vec2 textEntity_getMinPosition(const string& ID);
-	Vec2 textEntity_getMaxPosition(const string& ID);
-	Vec3 textEntity_getColor(const string& ID);
-	float textEntity_getRotation(const string& ID);
-	float textEntity_getAlpha(const string& ID);
+	const bool textEntity_isExisting(const string& ID);
+	const bool textEntity_isVisible(const string& ID);
+	const Vec2 textEntity_getPosition(const string& ID);
+	const Vec2 textEntity_getSize(const string& ID);
+	const Vec2 textEntity_getMinPosition(const string& ID);
+	const Vec2 textEntity_getMaxPosition(const string& ID);
+	const Vec3 textEntity_getColor(const string& ID);
+	const float textEntity_getRotation(const string& ID);
+	const float textEntity_getAlpha(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);
-	vector<string> textEntity_getAllIDs();
+	const vector<string> textEntity_getAllIDs();
 
 	// Sound entity interface - setters
 	void soundEntity_add(const string& ID, const string& audioPath);
@@ -595,19 +595,19 @@ public:
 	void soundEntity_setMaxDistance(const string& ID, float maxDistance);
 
 	// Sound entity interface - getters
-	vector<string> soundEntity_getAllIDs();
-	string soundEntity_getFilePath(const string& ID);
-	Vec3 soundEntity_getPosition(const string& ID);
-	float soundEntity_getMaxDistance(const string& ID);
-	float soundEntity_getVolume(const string& ID);
-	float soundEntity_getMaxVolume(const string& ID);
-	bool soundEntity_isExisting(const string& ID);
-	bool soundEntity_isStarted(const string& ID);
-	bool soundEntity_isPlaying(const string& ID);
-	bool soundEntity_isPaused(const string& ID);
-	bool soundEntity_isLoaded(const string& ID);
-	bool soundEntity_is3D(const string& ID);
-	int soundEntity_getUsedChannelCount();
+	const vector<string> soundEntity_getAllIDs();
+	const string& soundEntity_getFilePath(const string& ID);
+	const Vec3 soundEntity_getPosition(const string& ID);
+	const float soundEntity_getMaxDistance(const string& ID);
+	const float soundEntity_getVolume(const string& ID);
+	const float soundEntity_getMaxVolume(const string& ID);
+	const bool soundEntity_isExisting(const string& ID);
+	const bool soundEntity_isStarted(const string& ID);
+	const bool soundEntity_isPlaying(const string& ID);
+	const bool soundEntity_isPaused(const string& ID);
+	const bool soundEntity_isLoaded(const string& ID);
+	const bool soundEntity_is3D(const string& ID);
+	const int soundEntity_getUsedChannelCount();
 
 	// Music interface - setters
 	void music_addToPlaylist(const string& audioPath);
@@ -617,10 +617,10 @@ public:
 	void music_resume();
 
 	// Music interface - getters
-	bool music_isStarted();
-	bool music_isPlaying();
-	bool music_isPaused();
-	float music_getVolume();
+	const bool music_isStarted();
+	const bool music_isPlaying();
+	const bool music_isPaused();
+	const float music_getVolume();
 
 	// Graphics interface - setters
 	void gfx_setMsaaQuality(int quality);
@@ -665,78 +665,80 @@ public:
 	void gfx_disableLensFlare(bool resetProperties = false);
 	
 	// Graphics interface - getters
-	Vec3 gfx_getDirectionalLightingPosition();
-	Vec3 gfx_getAmbientLightingColor();
-	Vec3 gfx_getDirectionalLightingColor();
-	Vec3 gfx_getSpotLightingColor();
-	Vec3 gfx_getFogColor();
-	Vec3 gfx_getShadowEye();
-	Vec3 gfx_getShadowCenter();
-	string gfx_getLensFlareMapPath();
-	float gfx_getAmbientLightingIntensity();
-	float gfx_getDirectionalLightingIntensity();
-	float gfx_getSpotLightingIntensity();
-	float gfx_getSpotLightingAngle();
-	float gfx_getSpotLightingDistance();
-	float gfx_getFogMinDistance();
-	float gfx_getFogMaxDistance();
-	float gfx_getFogThickness();
-	float gfx_getSkyReflectionFactor();
-	float gfx_getSceneReflectionHeight();
-	float gfx_getSceneReflectionFactor();
-	float gfx_getShadowSize();
-	float gfx_getShadowReach();
-	float gfx_getShadowLightness();
-	float gfx_getBloomIntensity();
-	float gfx_getBloomBrightnessTreshold();
-	float gfx_getSkyHdrBrightnessFactor();
-	float gfx_getaMaxDofDistance();
-	float gfx_getDofBlurDistance();
-	float gfx_getLensFlareIntensity();
-	float gfx_getLensFlareMultiplier();
-	float gfx_getMotionBlurStrength();
-	unsigned int gfx_getMsaaQuality();
-	unsigned int gfx_getShadowQuality();
-	unsigned int gfx_getReflectionQuality();
-	unsigned int gfx_getRefractionQuality();
-	unsigned int gfx_getBloomBlurSize();
-	unsigned int gfx_getShadowInterval();
-	bool gfx_isMsaaEnabled();
-	bool gfx_isAmbientLightingEnabled();
-	bool gfx_isDirectionalLightingEnabled();
-	bool gfx_isSpecularLightingEnabled();
-	bool gfx_isPointLightingEnabled();
-	bool gfx_isSpotLightingEnabled();
-	bool gfx_isFogEnabled();
-	bool gfx_isLightMappingEnabled();
-	bool gfx_isNormalMappingEnabled();
-	bool gfx_isSkyReflectionsEnabled();
-	bool gfx_isSceneReflectionsEnabled();
-	bool gfx_isBloomEnabled();
-	bool gfx_isWaterEffectsEnabled();
-	bool gfx_isSkyHdrEnabled();
-	bool gfx_isShadowsEnabled();
-	bool gfx_isDofEnabled();
-	bool gfx_isDofDynamic();
-	bool gfx_isMotionBlurEnabled();
-	bool gfx_isLensFlareEnabled();
-	bool gfx_isShadowFollowingCamera();
-	bool gfx_isSoftShadowingEnabled();
+	const Vec3 gfx_getDirectionalLightingPosition();
+	const Vec3 gfx_getAmbientLightingColor();
+	const Vec3 gfx_getDirectionalLightingColor();
+	const Vec3 gfx_getSpotLightingColor();
+	const Vec3 gfx_getFogColor();
+	const Vec3 gfx_getShadowEye();
+	const Vec3 gfx_getShadowCenter();
+	const string& gfx_getLensFlareMapPath();
+	const float gfx_getAmbientLightingIntensity();
+	const float gfx_getDirectionalLightingIntensity();
+	const float gfx_getSpotLightingIntensity();
+	const float gfx_getSpotLightingAngle();
+	const float gfx_getSpotLightingDistance();
+	const float gfx_getFogMinDistance();
+	const float gfx_getFogMaxDistance();
+	const float gfx_getFogThickness();
+	const float gfx_getSkyReflectionFactor();
+	const float gfx_getSceneReflectionHeight();
+	const float gfx_getSceneReflectionFactor();
+	const float gfx_getShadowSize();
+	const float gfx_getShadowReach();
+	const float gfx_getShadowLightness();
+	const float gfx_getBloomIntensity();
+	const float gfx_getBloomBrightnessTreshold();
+	const float gfx_getSkyHdrBrightnessFactor();
+	const float gfx_getaMaxDofDistance();
+	const float gfx_getDofBlurDistance();
+	const float gfx_getLensFlareIntensity();
+	const float gfx_getLensFlareMultiplier();
+	const float gfx_getMotionBlurStrength();
+	const unsigned int gfx_getMsaaQuality();
+	const unsigned int gfx_getShadowQuality();
+	const unsigned int gfx_getReflectionQuality();
+	const unsigned int gfx_getRefractionQuality();
+	const unsigned int gfx_getBloomBlurSize();
+	const unsigned int gfx_getShadowInterval();
+	const bool gfx_isMsaaEnabled();
+	const bool gfx_isAmbientLightingEnabled();
+	const bool gfx_isDirectionalLightingEnabled();
+	const bool gfx_isSpecularLightingEnabled();
+	const bool gfx_isPointLightingEnabled();
+	const bool gfx_isSpotLightingEnabled();
+	const bool gfx_isFogEnabled();
+	const bool gfx_isLightMappingEnabled();
+	const bool gfx_isNormalMappingEnabled();
+	const bool gfx_isSkyReflectionsEnabled();
+	const bool gfx_isSceneReflectionsEnabled();
+	const bool gfx_isBloomEnabled();
+	const bool gfx_isWaterEffectsEnabled();
+	const bool gfx_isSkyHdrEnabled();
+	const bool gfx_isShadowsEnabled();
+	const bool gfx_isDofEnabled();
+	const bool gfx_isDofDynamic();
+	const bool gfx_isMotionBlurEnabled();
+	const bool gfx_isLensFlareEnabled();
+	const bool gfx_isShadowFollowingCamera();
+	const bool gfx_isSoftShadowingEnabled();
 
-	// Input interface
+	// Input interface - setters
 	void input_setLocked(bool locked);
 	void input_clearKeyToggles();
 	void input_clearMouseToggles();
 	void input_setKeyTogglingLocked(bool locked);
 	void input_setMouseTogglingLocked(bool locked);
-	bool input_getKeyDown(InputType keyName);
-	bool input_getKeyPressed(InputType keyName);
-	bool input_getKeyToggled(InputType keyName);
-	bool input_getMouseDown(InputType mouseButton);
-	bool input_getMousePressed(InputType mouseButton);
-	bool input_getMouseToggled(InputType mouseButton);
-	int input_getMouseWheelX();
-	int input_getMouseWheelY();
+
+	// Input interface - getters
+	const bool input_getKeyDown(InputType keyName);
+	const bool input_getKeyPressed(InputType keyName);
+	const bool input_getKeyToggled(InputType keyName);
+	const bool input_getMouseDown(InputType mouseButton);
+	const bool input_getMousePressed(InputType mouseButton);
+	const bool input_getMouseToggled(InputType mouseButton);
+	const int input_getMouseWheelX();
+	const int input_getMouseWheelY();
 
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)
@@ -778,8 +780,8 @@ public:
 	void networkServer_loadNextPendingMessage();
 
 	// Server interface - getters
-	bool networkServer_isStarted();
-	bool networkServer_isMessagePending();
+	const bool networkServer_isStarted();
+	const bool networkServer_isMessagePending();
 	const shared_ptr<NetworkMessage> networkServer_getPendingMessage();
 
 	// Client interface - setters
@@ -789,9 +791,9 @@ public:
 	void networkClient_sendMessage(const string& content);
 
 	// Client interface - getters
-	bool networkClient_isStarted();
-	bool networkClient_isConnectedToServer();
-	bool networkClient_isMessagePending();
+	const bool networkClient_isStarted();
+	const bool networkClient_isConnectedToServer();
+	const bool networkClient_isMessagePending();
 	const shared_ptr<NetworkMessage> networkClient_getPendingMessage();
 
 	// Miscellaneous interface - setters
@@ -832,48 +834,48 @@ public:
 	void misc_setMaxAudioChannels(unsigned int count);
 
 	// Miscellaneous interface - getters
-	int misc_getRandomInteger(int min, int max);
-	int misc_getMsTimeSinceEpoch();
-	int misc_getTriangleCount();
-	int misc_getMaxChannels();
-	float misc_getRandomFloat(float min, float max);
-	float misc_getAspectRatio();
-	float misc_getFPS();
-	float misc_getPI();
-	float misc_degreesToRadians(float angle);
-	float misc_radiansToDegrees(float angle);
-	float misc_stopMillisecondTimer();
-	float misc_getLevelOfDetailDistance();
-	string misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType);
-	string misc_vec2str(Ivec2 vec);
-	string misc_vec2str(Vec2 vec);
-	string misc_vec2str(Vec3 vec);
-	string misc_vec2str(Vec4 vec);
-	string misc_getRootDirectory();
-	string misc_getCpuName();
-	string misc_getGpuName();
-	string misc_getOpenglVersion();
-	Ivec2 misc_getCursorPosition();
-	Ivec2 misc_getCursorPositionRelativeToViewport();
-	Ivec2 misc_convertToScreenCoords(Vec2 pos);
-	Ivec2 misc_getViewportPosition();
-	Ivec2 misc_getViewportSize();
-	Ivec2 misc_getWindowSize();
-	Vec2 misc_convertToNDC(Vec2 pos);
-	Vec2 misc_convertFromNDC(Vec2 pos);
-	Vec2 misc_convertFromScreenCoords(Ivec2 pos);
-	Vec3 misc_getRaycastVector();
-	Vec3 misc_getRaycastPositionOnTerrain();
-	bool misc_isCursorVisible();
-	bool misc_isCursorInsideViewport();
-	bool misc_isCursorInsideWindow();
-	bool misc_isDirectoryExisting(const string& filePath);
-	bool misc_isFileExisting(const string& filePath);
-	bool misc_checkInterval(unsigned int frames);
-	bool misc_isRaycastPositionOnTerrainValid();
-	bool misc_isMillisecondTimerStarted();
-	vector<pair<string, int>> misc_getUpdateProfilingStatistics();
-	vector<pair<string, int>> misc_getRenderProfilingStatistics();
+	const int misc_getRandomInteger(int min, int max);
+	const int misc_getMsTimeSinceEpoch();
+	const int misc_getTriangleCount();
+	const int misc_getMaxChannels();
+	const float misc_getRandomFloat(float min, float max);
+	const float misc_getAspectRatio();
+	const float misc_getFPS();
+	const float misc_getPI();
+	const float misc_degreesToRadians(float angle);
+	const float misc_radiansToDegrees(float angle);
+	const float misc_stopMillisecondTimer();
+	const float misc_getLevelOfDetailDistance();
+	const string misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType);
+	const string misc_vec2str(Ivec2 vec);
+	const string misc_vec2str(Vec2 vec);
+	const string misc_vec2str(Vec3 vec);
+	const string misc_vec2str(Vec4 vec);
+	const string misc_getRootDirectory();
+	const string misc_getCpuName();
+	const string misc_getGpuName();
+	const string misc_getOpenglVersion();
+	const Ivec2 misc_getCursorPosition();
+	const Ivec2 misc_getCursorPositionRelativeToViewport();
+	const Ivec2 misc_convertToScreenCoords(Vec2 pos);
+	const Ivec2 misc_getViewportPosition();
+	const Ivec2 misc_getViewportSize();
+	const Ivec2 misc_getWindowSize();
+	const Vec2 misc_convertToNDC(Vec2 pos);
+	const Vec2 misc_convertFromNDC(Vec2 pos);
+	const Vec2 misc_convertFromScreenCoords(Ivec2 pos);
+	const Vec3 misc_getRaycastVector();
+	const Vec3 misc_getRaycastPositionOnTerrain();
+	const bool misc_isCursorVisible();
+	const bool misc_isCursorInsideViewport();
+	const bool misc_isCursorInsideWindow();
+	const bool misc_isDirectoryExisting(const string& filePath);
+	const bool misc_isFileExisting(const string& filePath);
+	const bool misc_checkInterval(unsigned int frames);
+	const bool misc_isRaycastPositionOnTerrainValid();
+	const bool misc_isMillisecondTimerStarted();
+	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
+	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
 
 protected:
 	// Virtual interface

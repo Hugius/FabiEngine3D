@@ -23,17 +23,12 @@ void FabiEngine3D::networkServer_loadNextPendingMessage()
 	_core->_networkServer.loadNextPendingMessage();
 }
 
-bool FabiEngine3D::networkClient_isStarted()
-{
-	return _core->_networkClient.isRunning();
-}
-
-bool FabiEngine3D::networkServer_isStarted()
+const bool FabiEngine3D::networkServer_isStarted()
 {
 	return _core->_networkServer.isRunning();
 }
 
-bool FabiEngine3D::networkServer_isMessagePending()
+const bool FabiEngine3D::networkServer_isMessagePending()
 {
 	return _core->_networkServer.isMessagePending();
 }

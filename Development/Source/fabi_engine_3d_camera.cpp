@@ -107,67 +107,67 @@ void FabiEngine3D::camera_setMaxPitch(float pitch)
 	_core->_camera.setMaxPitch(pitch);
 }
 
-float FabiEngine3D::camera_getYaw()
+const float FabiEngine3D::camera_getYaw()
 {
 	return _core->_camera.getYaw();
 }
 
-float FabiEngine3D::camera_getPitch()
+const float FabiEngine3D::camera_getPitch()
 {
 	return _core->_camera.getPitch();
 }
 
-float FabiEngine3D::camera_getNearDistance()
+const float FabiEngine3D::camera_getNearDistance()
 {
 	return _core->_camera.getNearZ();
 }
 
-float FabiEngine3D::camera_getFarDistance()
+const float FabiEngine3D::camera_getFarDistance()
 {
 	return _core->_camera.getFarZ();
 }
 
-float FabiEngine3D::camera_getMouseOffset()
+const float FabiEngine3D::camera_getMouseOffset()
 {
 	return _core->_camera.getMouseOffset();
 }
 
-float FabiEngine3D::camera_getMaxPitch()
+const float FabiEngine3D::camera_getMaxPitch()
 {
 	return _core->_camera.getMaxPitch();
 }
 
-float FabiEngine3D::camera_getFOV()
+const float FabiEngine3D::camera_getFOV()
 {
 	return _core->_camera.getFOV();
 }
 
-float FabiEngine3D::getAspectRatio()
+const float FabiEngine3D::getAspectRatio()
 {
 	return _core->_camera.getAspectRatio();
 }
 
-float FabiEngine3D::camera_getMouseSensitivity()
+const float FabiEngine3D::camera_getMouseSensitivity()
 {
 	return _core->_camera.getMouseSensitivity();
 }
 
-Vec3 FabiEngine3D::camera_getPosition()
+const Vec3 FabiEngine3D::camera_getPosition()
 {
 	return _core->_camera.getPosition();
 }
 
-Vec3 FabiEngine3D::camera_getLookatPosition()
+const Vec3 FabiEngine3D::camera_getLookatPosition()
 {
 	return _core->_camera.getLookatPosition();
 }
 
-bool FabiEngine3D::camera_isLookatViewEnabled()
+const bool FabiEngine3D::camera_isLookatViewEnabled()
 {
 	return _core->_camera.isLookatViewEnabled();
 }
 
-bool FabiEngine3D::camera_isFirstPersonViewEnabled()
+const bool FabiEngine3D::camera_isFirstPersonViewEnabled()
 {
 	return _core->_camera.isFirstPersonViewEnabled();
 }

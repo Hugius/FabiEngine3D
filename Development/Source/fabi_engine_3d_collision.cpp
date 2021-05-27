@@ -26,7 +26,7 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 	_core->_collisionResolver.disableTerrainResponse();
 }
 
-pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
+const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 {
 	// Temporary values
 	float closestDistance = (std::numeric_limits<float>::max)();
@@ -76,7 +76,7 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
-pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
+const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -123,7 +123,7 @@ pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, 
 	}
 }
 
-pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
+const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -215,12 +215,12 @@ const string FabiEngine3D::collision_checkCameraWithAny()
 	return "";
 }
 
-bool FabiEngine3D::collision_checkCameraWithTerrain()
+const bool FabiEngine3D::collision_checkCameraWithTerrain()
 {
 	return _core->_collisionResolver.isCameraUnderTerrain();
 }
 
-bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
+const bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != Direction::NONE;
 }
@@ -337,12 +337,12 @@ const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 	return "";
 }
 
-bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction)
 {
 	return (direction == _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection());
 }
 
-bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 {
 	// Loop over AABB entities
 	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -356,7 +356,7 @@ bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 	return false;
 }
 
-bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
+const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
 {
 	// Loop over AABB entities
 	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())

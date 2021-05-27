@@ -165,12 +165,12 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 	}
 }
 
-string Config::getGameTitle() const
+const string& Config::getGameTitle() const
 {
 	return _gameTitle;
 }
 
-string Config::getWindowTitle() const
+const string& Config::getWindowTitle() const
 {
 	return _windowTitle;
 }

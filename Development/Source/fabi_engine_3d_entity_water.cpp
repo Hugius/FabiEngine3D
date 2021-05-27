@@ -42,37 +42,37 @@ void FabiEngine3D::waterEntity_show(const string& ID)
 	_core->_waterEntityManager.getEntity(ID)->setVisible(true);
 }
 
-bool FabiEngine3D::waterEntity_isExisting(const string& ID)
+const bool FabiEngine3D::waterEntity_isExisting(const string& ID)
 {
 	return _core->_waterEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::waterEntity_isVisible(const string& ID)
+const bool FabiEngine3D::waterEntity_isVisible(const string& ID)
 {
 	_core->_waterEntityManager.getEntity(ID)->isVisible();
 }
 
-bool FabiEngine3D::waterEntity_isWaving(const string& ID)
+const bool FabiEngine3D::waterEntity_isWaving(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isWaving();
 }
 
-bool FabiEngine3D::waterEntity_isRippling(const string& ID)
+const bool FabiEngine3D::waterEntity_isRippling(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isRippling();
 }
 
-bool FabiEngine3D::waterEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::waterEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isSpecularLighted();
 }
 
-bool FabiEngine3D::waterEntity_isReflective(const string& ID)
+const bool FabiEngine3D::waterEntity_isReflective(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isReflective();
 }
 
-bool FabiEngine3D::waterEntity_isRefractive(const string& ID)
+const bool FabiEngine3D::waterEntity_isRefractive(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isRefractive();
 }
@@ -171,7 +171,7 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
-string FabiEngine3D::waterEntity_getSelectedID()
+const string FabiEngine3D::waterEntity_getSelectedID()
 {
 	if (_core->_waterEntityManager.getSelectedWater() != nullptr)
 	{
@@ -183,7 +183,7 @@ string FabiEngine3D::waterEntity_getSelectedID()
 	}
 }
 
-vector<string> FabiEngine3D::waterEntity_getAllIDs()
+const vector<string> FabiEngine3D::waterEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -195,37 +195,37 @@ vector<string> FabiEngine3D::waterEntity_getAllIDs()
 	return IDs;
 }
 
-float FabiEngine3D::waterEntity_getSize(const string& ID)
+const float FabiEngine3D::waterEntity_getSize(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSize();
 }
 
-float FabiEngine3D::waterEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::waterEntity_getUvRepeat(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getUvRepeat();
 }
 
-Vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
+const Vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpeed();
 }
 
-float FabiEngine3D::waterEntity_getWaveHeightFactor(const string& ID)
+const float FabiEngine3D::waterEntity_getWaveHeightFactor(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getWaveHeightFactor();
 }
 
-float FabiEngine3D::waterEntity_getSpecularLightingFactor(const string& ID)
+const float FabiEngine3D::waterEntity_getSpecularLightingFactor(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpecularLightingFactor();
 }
 
-float FabiEngine3D::waterEntity_getSpecularLightingIntensity(const string& ID)
+const float FabiEngine3D::waterEntity_getSpecularLightingIntensity(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpecularLightingIntensity();
 }
 
-float FabiEngine3D::waterEntity_getTransparency(const string& ID)
+const float FabiEngine3D::waterEntity_getTransparency(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getTransparency();
 }
@@ -245,12 +245,12 @@ const string& FabiEngine3D::waterEntity_getDisplacementMapPath(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getDisplacementMapPath();
 }
 
-Vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
+const Vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getTranslation();
 }
 
-Vec3 FabiEngine3D::waterEntity_getColor(const string& ID)
+const Vec3 FabiEngine3D::waterEntity_getColor(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getColor();
 }

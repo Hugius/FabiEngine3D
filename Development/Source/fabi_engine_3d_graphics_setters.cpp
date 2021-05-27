@@ -1,6 +1,26 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
+void FabiEngine3D::gfx_setMsaaQuality(int quality)
+{
+	_core->_masterRenderer.loadMsaaFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setShadowQuality(int quality)
+{
+	_core->_masterRenderer.loadShadowFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setReflectionQuality(int quality)
+{
+	_core->_masterRenderer.loadReflectionFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setRefractionQuality(int quality)
+{
+	_core->_masterRenderer.loadRefractionFramebuffer(quality);
+}
+
 void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)
 {
 	_core->_renderBus.setAmbientLightingEnabled(true);

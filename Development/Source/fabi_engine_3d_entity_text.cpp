@@ -41,12 +41,12 @@ void FabiEngine3D::textEntity_delete(const string& ID)
 	}
 }
 
-bool FabiEngine3D::textEntity_isExisting(const string& ID)
+const bool FabiEngine3D::textEntity_isExisting(const string& ID)
 {
 	return _core->_textEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::textEntity_isVisible(const string& ID)
+const bool FabiEngine3D::textEntity_isVisible(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->isVisible();
 }
@@ -142,37 +142,37 @@ void FabiEngine3D::textEntity_setMaxPosition(const string& ID, Vec2 maxPos)
 	_core->_textEntityManager.getEntity(ID)->setMaxPosition(maxPos);
 }
 
-Vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
+const Vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getTranslation();
 }
 
-float FabiEngine3D::textEntity_getRotation(const string& ID)
+const float FabiEngine3D::textEntity_getRotation(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getRotation();
 }
 
-float FabiEngine3D::textEntity_getAlpha(const string& ID)
+const float FabiEngine3D::textEntity_getAlpha(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getAlpha();
 }
 
-Vec2 FabiEngine3D::textEntity_getSize(const string& ID)
+const Vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getScaling();
 }
 
-Vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)
+const Vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMinPosition();
 }
 
-Vec2 FabiEngine3D::textEntity_getMaxPosition(const string& ID)
+const Vec2 FabiEngine3D::textEntity_getMaxPosition(const string& ID)
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMaxPosition();
 }
 
-Vec3 FabiEngine3D::textEntity_getColor(const string& ID)
+const Vec3 FabiEngine3D::textEntity_getColor(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getColor();
 }
@@ -182,7 +182,7 @@ const string& FabiEngine3D::textEntity_getTextContent(const string& ID)
 	return _core->_textEntityManager.getEntity(ID)->getTextContent();
 }
 
-vector<string> FabiEngine3D::textEntity_getAllIDs()
+const vector<string> FabiEngine3D::textEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -192,24 +192,4 @@ vector<string> FabiEngine3D::textEntity_getAllIDs()
 	}
 
 	return IDs;
-}
-
-void FabiEngine3D::gfx_setMsaaQuality(int quality)
-{
-	_core->_masterRenderer.loadMsaaFramebuffer(quality);
-}
-
-void FabiEngine3D::gfx_setShadowQuality(int quality)
-{
-	_core->_masterRenderer.loadShadowFramebuffer(quality);
-}
-
-void FabiEngine3D::gfx_setReflectionQuality(int quality)
-{
-	_core->_masterRenderer.loadReflectionFramebuffer(quality);
-}
-
-void FabiEngine3D::gfx_setRefractionQuality(int quality)
-{
-	_core->_masterRenderer.loadRefractionFramebuffer(quality);
 }

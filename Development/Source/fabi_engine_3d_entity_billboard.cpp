@@ -82,27 +82,27 @@ void FabiEngine3D::billboardEntity_show(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
 }
 
-float FabiEngine3D::billboardEntity_getLightness(const string& ID)
+const float FabiEngine3D::billboardEntity_getLightness(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getLightness();
 }
 
-float FabiEngine3D::billboardEntity_getMinHeight(const string& ID)
+const float FabiEngine3D::billboardEntity_getMinHeight(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getMinHeight();
 }
 
-float FabiEngine3D::billboardEntity_getMaxHeight(const string& ID)
+const float FabiEngine3D::billboardEntity_getMaxHeight(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
+const bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 {
 	return _core->_billboardEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
+const bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isVisible();
 }
@@ -153,27 +153,27 @@ void FabiEngine3D::billboardEntity_setTransparent(const string& ID, bool enabled
 	_core->_billboardEntityManager.getEntity(ID)->setTransparent(enabled);
 }
 
-Vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
+const Vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTranslation();
 }
 
-Vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
+const Vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getRotation();
 }
 
-Vec2 FabiEngine3D::billboardEntity_getSize(const string& ID)
+const Vec2 FabiEngine3D::billboardEntity_getSize(const string& ID)
 {
 	return Vec2(_core->_billboardEntityManager.getEntity(ID)->getScaling().x, _core->_billboardEntityManager.getEntity(ID)->getScaling().y);
 }
 
-Vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)
+const Vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getColor();
 }
 
-vector<string> FabiEngine3D::billboardEntity_getAllIDs()
+const vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -185,7 +185,7 @@ vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 	return IDs;
 }
 
-vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
+const vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
 {
 	if (billboardEntity_isInstanced(ID))
 	{
@@ -227,22 +227,22 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
+const bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isCameraFacingX();
 }
 
-bool FabiEngine3D::billboardEntity_isFacingCameraY(const string& ID)
+const bool FabiEngine3D::billboardEntity_isFacingCameraY(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isCameraFacingY();
 }
 
-bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
+const bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
-bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
+const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
 {
 	if (!_core->_billboardEntityManager.getEntity(ID)->getRenderBuffers().empty())
 	{
@@ -344,27 +344,27 @@ const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-bool FabiEngine3D::billboardEntity_isSpriteAnimationStarted(const string& ID)
+const bool FabiEngine3D::billboardEntity_isSpriteAnimationStarted(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationStarted();
 }
 
-bool FabiEngine3D::billboardEntity_isSpriteAnimationPlaying(const string& ID)
+const bool FabiEngine3D::billboardEntity_isSpriteAnimationPlaying(const string& ID)
 {
 	return (billboardEntity_isSpriteAnimationStarted(ID) && !billboardEntity_isSpriteAnimationPaused(ID));
 }
 
-bool FabiEngine3D::billboardEntity_isSpriteAnimationPaused(const string& ID)
+const bool FabiEngine3D::billboardEntity_isSpriteAnimationPaused(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationPaused();
 }
 
-bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
+const bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isTransparent();
 }
 
-int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const string& ID)
+const int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const string& ID)
 {
 	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
 	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
@@ -372,27 +372,27 @@ int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const string&
 	return (maxLoops - currentLoops);
 }
 
-unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationRows(const string& ID)
+const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationRows(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationRows();
 }
 
-unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationColumns(const string& ID)
+const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationColumns(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTotalSpriteAnimationColumns();
 }
 
-unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationFramestep(const string& ID)
+const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationFramestep(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationFramestep();
 }
 
-unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationRowIndex(const string& ID)
+const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationRowIndex(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationRowIndex();
 }
 
-unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationColumnIndex(const string& ID)
+const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationColumnIndex(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationColumnIndex();
 }

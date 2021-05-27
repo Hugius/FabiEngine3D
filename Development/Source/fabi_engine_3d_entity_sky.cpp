@@ -121,7 +121,7 @@ void FabiEngine3D::skyEntity_mixWithSelected(const string& ID)
 	_core->_skyEntityManager.selectMixSky(ID);
 }
 
-string FabiEngine3D::skyEntity_getSelectedID()
+const string FabiEngine3D::skyEntity_getSelectedID()
 {
 	if (_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
@@ -133,7 +133,7 @@ string FabiEngine3D::skyEntity_getSelectedID()
 	}
 }
 
-vector<string> FabiEngine3D::skyEntity_getAllIDs()
+const vector<string> FabiEngine3D::skyEntity_getAllIDs()
 {
 	vector<string> IDs;
 
@@ -150,37 +150,37 @@ const array<string, 6>& FabiEngine3D::skyEntity_getDiffuseMapPaths(const string&
 	return _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 }
 
-float FabiEngine3D::skyEntity_getLightness(const string& ID)
+const float FabiEngine3D::skyEntity_getLightness(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getLightness();
 }
 
-float FabiEngine3D::skyEntity_getOriginalLightness(const string& ID)
+const float FabiEngine3D::skyEntity_getOriginalLightness(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getOriginalLightness();
 }
 
-float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID)
+const float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getRotationSpeed();
 }
 
-float FabiEngine3D::skyEntity_getMixValue()
+const float FabiEngine3D::skyEntity_getMixValue()
 {
 	return _core->_renderBus.getSkyMixValue();
 }
 
-Vec3 FabiEngine3D::skyEntity_getColor(const string& ID)
+const Vec3 FabiEngine3D::skyEntity_getColor(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getColor();
 }
 
-bool FabiEngine3D::skyEntity_isExisting(const string& ID)
+const bool FabiEngine3D::skyEntity_isExisting(const string& ID)
 {
 	return _core->_skyEntityManager.isExisting(ID);
 }
 
-bool FabiEngine3D::skyEntity_isVisible(const string& ID)
+const bool FabiEngine3D::skyEntity_isVisible(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->isVisible();
 }

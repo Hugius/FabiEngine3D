@@ -277,7 +277,7 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			_fe3d.modelEntity_add(modelName, meshPath, Vec3(0.0f, 0.01f, 0.0f), Vec3(0.0f), size, false);
 
 			// Add AABBs
-			for (unsigned int i = 0; i < aabbNames.size(); i++)
+			for (size_t i = 0; i < aabbNames.size(); i++)
 			{
 				_fe3d.aabbEntity_bindToModelEntity(modelName, aabbPositions[i], aabbSizes[i], true, true, modelName + "@" + aabbNames[i]);
 			}

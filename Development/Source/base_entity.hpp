@@ -17,7 +17,7 @@ public:
 	void setVisible(bool value);
 
 	const vector<RenderBuffer*>& getRenderBuffers() const;
-	const RenderBuffer* getRenderBuffer(int index) const;
+	const RenderBuffer* getRenderBuffer(unsigned int index) const;
 	const RenderBuffer* getRenderBuffer() const;
 
 	const string& getID() const;

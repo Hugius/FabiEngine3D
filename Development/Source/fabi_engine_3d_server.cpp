@@ -23,6 +23,16 @@ void FabiEngine3D::networkServer_loadNextPendingMessage()
 	_core->_networkServer.loadNextPendingMessage();
 }
 
+void FabiEngine3D::networkClient_sendMessageToClient(const string& ipAddress, const string& content)
+{
+	_core->_networkServer.sendMessageToClient(ipAddress, content);
+}
+
+void FabiEngine3D::networkClient_broadcastMessage(const string& content)
+{
+	_core->_networkServer.broadcastMessage(content);
+}
+
 const bool FabiEngine3D::networkServer_isStarted()
 {
 	return _core->_networkServer.isRunning();

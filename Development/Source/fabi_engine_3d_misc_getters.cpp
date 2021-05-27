@@ -393,7 +393,7 @@ void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)
 	_core->_audioPlayer.allocateChannels(count);
 }
 
-const const int FabiEngine3D::misc_getMaxChannels()
+const int FabiEngine3D::misc_getMaxChannels()
 {
 	return _core->_audioPlayer.getAllocatedChannelCount();
 }

@@ -171,7 +171,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 
 					// Check if preview model parts changed
-					for (unsigned int i = 0; i < partIDs.size(); i++)
+					for (size_t i = 0; i < partIDs.size(); i++)
 					{
 						if (partIDs[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
 						{

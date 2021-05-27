@@ -36,7 +36,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	while (finishedThreadCount != cacheStatuses.size())
 	{
 		// For all threads
-		for (unsigned int i = 0; i < cacheStatuses.size(); i++)
+		for (size_t i = 0; i < cacheStatuses.size(); i++)
 		{
 			// Check if texture is not processed yet
 			if (!cacheStatuses[i])
@@ -104,14 +104,14 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	}
 
 	// Wait for all threads to finish
-	for (unsigned int i = 0; i < cacheStatuses.size(); i++)
+	for (size_t i = 0; i < cacheStatuses.size(); i++)
 	{
 		// Check if texture is not processed yet
 		if (!cacheStatuses[i])
 		{
 			// 6 images for every 3D texture
 			array<SDL_Surface*, 6> loadedImages;
-			for (unsigned int j = 0; j < threads[i].size(); j++)
+			for (size_t j = 0; j < threads[i].size(); j++)
 			{
 				// Save loaded image
 				loadedImages[j] = threads[i][j].get();
@@ -199,13 +199,13 @@ BEGIN:
 		array<SDL_Surface*, 6> loadedImages = { };
 
 		// Start all loading threads
-		for (unsigned int i = 0; i < filePaths.size(); i++)
+		for (size_t i = 0; i < filePaths.size(); i++)
 		{
 			threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
 		}
 
 		// Wait for all threads to finish
-		for (unsigned int i = 0; i < threads.size(); i++)
+		for (size_t i = 0; i < threads.size(); i++)
 		{
 			// Save loaded image
 			loadedImages[i] = threads[i].get();

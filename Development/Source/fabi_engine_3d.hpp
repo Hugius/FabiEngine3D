@@ -778,6 +778,8 @@ public:
 	void networknetworkServer_start();
 	void networkServer_stop();
 	void networkServer_loadNextPendingMessage();
+	void networkClient_sendMessageToClient(const string& ipAddress, const string& content);
+	void networkClient_broadcastMessage(const string& content);
 
 	// Server interface - getters
 	const bool networkServer_isStarted();

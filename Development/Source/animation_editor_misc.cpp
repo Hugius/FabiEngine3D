@@ -133,7 +133,7 @@ void AnimationEditor::_updateMiscellaneous()
 
 void AnimationEditor::_deleteAnimation(const string& ID)
 {
-	for (unsigned int i = 0; i < _animations.size(); i++)
+	for (size_t i = 0; i < _animations.size(); i++)
 	{
 		if (_animations[i]->ID == ID)
 		{
@@ -159,7 +159,7 @@ bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> secon
 	}
 
 	// Check content
-	for (unsigned int i = 0; i < first.size(); i++)
+	for (size_t i = 0; i < first.size(); i++)
 	{
 		if (first[i] != second[i])
 		{

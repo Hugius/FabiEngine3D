@@ -22,7 +22,7 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 	int countedSpaces = 0;
 
 	// For every character
-	for (unsigned int i = 0; i < scriptLineText.size(); i++)
+	for (size_t i = 0; i < scriptLineText.size(); i++)
 	{
 		// Check if current character is a space
 		if (scriptLineText[i] == ' ')

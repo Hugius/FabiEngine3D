@@ -179,15 +179,15 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					// Paste as much copied text as possible
 					unsigned int pastedAmount = 0;
 					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
-					for (unsigned int i = 0; i < _copyClipboard.size(); i++)
+					for (size_t i = 0; i < _copyClipboard.size(); i++)
 					{
 						// Check if next line exists
 						if ((cursorLineIndex + i) < _script.getScriptFile(_currentScriptFileID)->getLineCount())
 						{
 							// Check if text can be placed on current line
-							if (_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + i).empty())
+							if (_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
 							{
-								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + i, _copyClipboard[i]);
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 								pastedAmount++;
 								continue;
 							}
@@ -196,7 +196,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 						// Try to create new line
 						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
 						{
-							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + i, _copyClipboard[i]);
+							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
 							pastedAmount++;
 						}
 						else

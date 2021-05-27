@@ -23,7 +23,7 @@ void BaseEntity::addRenderBuffer(RenderBuffer * buffer, bool deleteOnDestroy)
 
 void BaseEntity::clearRenderBuffers()
 {
-	for (unsigned int i = 0; i < _renderBuffers.size(); i++)
+	for (size_t i = 0; i < _renderBuffers.size(); i++)
 	{
 		if (_renderBufferMemoryManagement[i])
 		{
@@ -47,7 +47,7 @@ const vector<RenderBuffer*>& BaseEntity::getRenderBuffers() const
 	return _renderBuffers;
 }
 
-const RenderBuffer * BaseEntity::getRenderBuffer(int index) const
+const RenderBuffer * BaseEntity::getRenderBuffer(unsigned int index) const
 {
 	return _renderBuffers[index];
 }

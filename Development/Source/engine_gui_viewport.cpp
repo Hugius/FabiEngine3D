@@ -65,7 +65,7 @@ void EngineGuiViewport::addWindow(const string& ID, Vec2 position, Vec2 size, Ve
 
 void EngineGuiViewport::deleteWindow(const string& ID)
 {
-	for (unsigned int i = 0; i < _windows.size(); i++)
+	for (size_t i = 0; i < _windows.size(); i++)
 	{
 		if (_windows[i]->getID() == ID)
 		{

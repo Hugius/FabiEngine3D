@@ -194,7 +194,7 @@ void SceneEditor::saveCustomSceneToFile()
 				}
 
 				// Write part transformations
-				for (unsigned int i = 0; i < partIDs.size(); i++)
+				for (size_t i = 0; i < partIDs.size(); i++)
 				{
 					// Part ID cannot be empty
 					if (!partIDs[i].empty())
@@ -238,7 +238,7 @@ void SceneEditor::saveCustomSceneToFile()
 					file << " ";
 
 					// Write offsets
-					for (unsigned int i = 0; i < instancedOffsets.size(); i++)
+					for (size_t i = 0; i < instancedOffsets.size(); i++)
 					{
 						// Write offset
 						file <<

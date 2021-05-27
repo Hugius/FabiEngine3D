@@ -91,7 +91,7 @@ GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, con
 
 	// Validate image sizes
 	int imageSize = -1;
-	for (unsigned int i = 0; i < images.size(); i++)
+	for (size_t i = 0; i < images.size(); i++)
 	{
 		// Check image status
 		if (images[i] != nullptr)
@@ -120,18 +120,18 @@ GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, con
 	}
 
 	// Add the face images to the texture buffer
-	for (unsigned int i = 0; i < images.size(); i++)
+	for (size_t i = 0; i < images.size(); i++)
 	{
 		// Check image status
 		if (images[i] == nullptr)
 		{
 			// Black image
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
 			// Loaded image
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->pixels);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->pixels);
 
 			// Logging
 			Logger::throwInfo("Loaded 3D texture part: \"" + filePaths[i] + "\"");

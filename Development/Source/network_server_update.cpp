@@ -27,7 +27,7 @@ void NetworkServer::update()
 		// Check if client is allowed to connect
 		if (_clientIPs.size() == MAX_CLIENT_COUNT)
 		{
-			_sendMessageToClient(clientSocketID, "SERVER_FULL"); // <---
+			_sendMessageToClient(clientSocketID, "SERVER_FULL");
 			closesocket(clientSocketID);
 		}
 		else
@@ -44,8 +44,8 @@ void NetworkServer::update()
 	}
 
 	// Receive incoming client messages
-	BEGIN:
-	for (unsigned int i = 0; i < _clientSocketIDs.size(); i++)
+BEGIN:
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		// Temporary values
 		auto clientSocketID = _clientSocketIDs[i];

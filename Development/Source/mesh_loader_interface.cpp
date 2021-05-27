@@ -30,7 +30,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 	}
 
 	// Wait for all threads to finish
-	for (unsigned int i = 0; i < meshStatuses.size(); i++)
+	for (size_t i = 0; i < meshStatuses.size(); i++)
 	{
 		// Check if mesh is not processed yet
 		if (!meshStatuses[i])

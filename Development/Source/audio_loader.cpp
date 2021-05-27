@@ -48,7 +48,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	for (unsigned int i = 0; i < threads.size(); i++)
+	for (size_t i = 0; i < threads.size(); i++)
 	{
 		// Check if chunk is not processed yet
 		if (!chunkStatuses[i])

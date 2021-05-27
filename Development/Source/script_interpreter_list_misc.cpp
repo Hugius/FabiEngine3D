@@ -39,7 +39,7 @@ bool ScriptInterpreter::_validateListValueAmount(const vector<ScriptValue>& valu
 
 bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
 {
-	for (unsigned int i = 0; i < values.size(); i++)
+	for (size_t i = 0; i < values.size(); i++)
 	{
 		if (values[i].getType() != types[i])
 		{

@@ -229,7 +229,7 @@ void BottomViewportController::update()
 		// Save most recent messages
 		std::reverse(loggerMessages.begin(), loggerMessages.end());
 		vector<string> newMessages;
-		for (unsigned int i = 0; i < (loggerMessages.size() - MAX_CONSOLE_MESSAGES); i++)
+		for (size_t i = 0; i < (loggerMessages.size() - static_cast<size_t>(MAX_CONSOLE_MESSAGES)); i++)
 		{
 			newMessages.push_back(loggerMessages[i]);
 		}

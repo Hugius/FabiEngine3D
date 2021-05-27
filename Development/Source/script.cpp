@@ -38,7 +38,7 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 
 void Script::removeScriptFile(const string& ID)
 {
-	for (unsigned int i = 0; i < _scriptFiles.size(); i++)
+	for (size_t i = 0; i < _scriptFiles.size(); i++)
 	{
 		if (_scriptFiles[i]->getID() == ID)
 		{
@@ -125,7 +125,7 @@ const vector<pair<string, unsigned int>> Script::findKeyword(const string& keywo
 			string line = file->getLines()[lineNumber];
 
 			// For every line
-			for (unsigned int i = 0; i < line.size(); i++)
+			for (size_t i = 0; i < line.size(); i++)
 			{
 				// Check if keyword occurs
 				if (line.substr(i, keyword.size()) == keyword)

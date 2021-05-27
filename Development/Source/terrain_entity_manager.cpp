@@ -246,7 +246,7 @@ void TerrainEntityManager::loadNormalMapping(const string& ID)
 
 			// Compose single data collection
 			vector<float> finalDataCollection;
-			for (unsigned int i = 0; i < vertices.size(); i++)
+			for (size_t i = 0; i < vertices.size(); i++)
 			{
 				// Vertex coordinate
 				finalDataCollection.push_back(vertices[i].x);

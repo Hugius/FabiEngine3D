@@ -14,6 +14,9 @@ void NetworkClient::update()
 		return;
 	}
 
+	// Clear all received messages from last frame
+	_receivedMessageQueue.clear();
+
 	// Handle server connection
 	if (!_isConnectedToServer)
 	{

@@ -47,6 +47,28 @@ void NetworkServer::_spawnConnectionThread()
 	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 }
 
+void NetworkServer::sendMessageToClient(const string& ipAddress, const string& content)
+{
+	for (size_t i = 0; i < _clientIPs.size(); i++)
+	{
+		if (ipAddress == _clientIPs[i])
+		{
+			_sendMessageToClient(_clientSocketIDs[i], content);
+			return;
+		}
+	}
+
+	// ip not found ERROR
+}
+
+void NetworkServer::broadcastMessage(const string& content)
+{
+	for (auto& socketID : _clientSocketIDs)
+	{
+		_sendMessageToClient(socketID, content);
+	}
+}
+
 void NetworkServer::_sendMessageToClient(SOCKET clientSocketID, const string& content)
 {
 	auto sendStatusCode = send(clientSocketID, content.c_str(), static_cast<int>(content.size()), 0);
@@ -72,7 +94,7 @@ void NetworkServer::_acceptClient(SOCKET clientSocketID)
 
 void NetworkServer::_disconnectClient(const string& ipAddress)
 {
-	for (unsigned int i = 0; i < _clientIPs.size(); i++)
+	for (size_t i = 0; i < _clientIPs.size(); i++)
 	{
 		if (_clientIPs[i] == ipAddress)
 		{

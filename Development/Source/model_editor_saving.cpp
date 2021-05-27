@@ -125,7 +125,7 @@ void ModelEditor::saveModelEntitiesToFile()
 			}
 
 			// Write AABB data
-			for (unsigned int i = 0; i < aabbNames.size(); i++)
+			for (size_t i = 0; i < aabbNames.size(); i++)
 			{
 				file <<
 					aabbNames[i] << " " <<

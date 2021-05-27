@@ -50,18 +50,17 @@ void NetworkClient::sendMessage(const string& content)
 {
 	auto sendStatusCode = send(_serverSocketID, content.c_str(), static_cast<int>(content.size()), 0);
 
+	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		auto errorCode = WSAGetLastError();
-
-		if (errorCode == WSAECONNRESET)
+		if (WSAGetLastError() == WSAECONNRESET) // Lost connection with host
 		{
 			_closeConnection();
 			_initiateConnection();
 		}
-		else
+		else // Something really bad happened
 		{
-			Logger::throwError("Networking client send failed with error code: ", errorCode);
+			Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
 		}
 	}
 }

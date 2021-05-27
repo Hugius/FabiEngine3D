@@ -23,10 +23,10 @@ void AudioPlayer::allocateChannels(unsigned int count)
 void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>& musicList)
 {
 	// Update channel management
-	for (unsigned int i = 0; i < _channels.size(); i++)
+	for (size_t i = 0; i < _channels.size(); i++)
 	{
 		// Check if audio stopped playing
-		if (!Mix_Playing(i) && !Mix_Paused(i))
+		if (!Mix_Playing(static_cast<int>(i)) && !Mix_Paused(static_cast<int>(i)))
 		{
 			// De-allocate channel
 			_channels[i] = "";
@@ -158,11 +158,11 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 {
 	vector<int> channels;
 
-	for (unsigned int i = 0; i < _channels.size(); i++)
+	for (size_t i = 0; i < _channels.size(); i++)
 	{
 		if (_channels[i] == sound.getID())
 		{
-			channels.push_back(i);
+			channels.push_back(static_cast<int>(i));
 		}
 	}
 
@@ -177,11 +177,11 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 
 int AudioPlayer::_getFreeChannel()
 {
-	for (unsigned int i = 0; i < _channels.size(); i++)
+	for (size_t i = 0; i < _channels.size(); i++)
 	{
 		if (_channels[i].empty())
 		{
-			return i;
+			return static_cast<int>(i);
 		}
 	}
 

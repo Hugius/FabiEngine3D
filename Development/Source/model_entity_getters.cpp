@@ -244,11 +244,11 @@ const bool ModelEntity::isWireframed() const
 unsigned int ModelEntity::_getPartIndex(string partID)
 {
 	// Find index
-	for (unsigned int i = 0; i < _partIDs.size(); i++)
+	for (size_t i = 0; i < _partIDs.size(); i++)
 	{
 		if (partID == _partIDs[i])
 		{
-			return i;
+			return static_cast<unsigned int>(i);
 		}
 	}
 

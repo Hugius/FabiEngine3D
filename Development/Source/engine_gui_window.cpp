@@ -93,7 +93,7 @@ void EngineGuiWindow::addScreen(const string& ID)
 void EngineGuiWindow::deleteScreen(const string& ID)
 {
 	// Find screen
-	for (unsigned int i = 0; i < _screens.size(); i++)
+	for (size_t i = 0; i < _screens.size(); i++)
 	{
 		if (_screens[i]->getID() == ID)
 		{

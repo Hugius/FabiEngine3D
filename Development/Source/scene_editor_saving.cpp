@@ -164,7 +164,7 @@ void SceneEditor::saveEditorSceneToFile()
 					file << " ";
 
 					// Write offsets
-					for (unsigned int i = 0; i < instancedOffsets.size(); i++)
+					for (size_t i = 0; i < instancedOffsets.size(); i++)
 					{
 						// Write offset
 						file <<

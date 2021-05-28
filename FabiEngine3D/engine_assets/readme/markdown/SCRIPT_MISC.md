@@ -13,5 +13,3 @@
   Returns a random integer between **min** and **max**.
 - `misc:get_random_decimal`(`DEC` min, `DEC` max) ---> `DEC`  
   Returns a random decimal between **min** and **max**.
-- `misc:time_interval`(`INT` frames) ---> `BOOL`  
-  Returns true every time **frames** has passed.

@@ -1,7 +1,7 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::networknetworkServer_start()
+void FabiEngine3D::networkServer_start()
 {
 	_core->_networkServer.start();
 }
@@ -23,12 +23,12 @@ void FabiEngine3D::networkServer_loadNextPendingMessage()
 	_core->_networkServer.loadNextPendingMessage();
 }
 
-void FabiEngine3D::networkClient_sendMessageToClient(const string& ipAddress, const string& content)
+void FabiEngine3D::networkServer_sendMessage(const string& ipAddress, const string& content)
 {
-	_core->_networkServer.sendMessageToClient(ipAddress, content);
+	_core->_networkServer.sendMessage(ipAddress, content);
 }
 
-void FabiEngine3D::networkClient_broadcastMessage(const string& content)
+void FabiEngine3D::networkServer_broadcastMessage(const string& content)
 {
 	_core->_networkServer.broadcastMessage(content);
 }

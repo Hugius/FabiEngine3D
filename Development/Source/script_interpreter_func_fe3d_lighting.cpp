@@ -23,7 +23,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	if (functionName == "fe3d:lighting_set_ambient_color")
+	else if (functionName == "fe3d:lighting_set_ambient_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 

@@ -27,7 +27,7 @@ void NetworkServer::update()
 		// Check if client is allowed to connect
 		if (_clientIPs.size() == MAX_CLIENT_COUNT)
 		{
-			_sendMessageToClient(clientSocketID, "SERVER_FULL");
+			_sendMessage(clientSocketID, "SERVER_FULL");
 			closesocket(clientSocketID);
 		}
 		else
@@ -50,7 +50,7 @@ BEGIN:
 		// Temporary values
 		auto clientSocketID = _clientSocketIDs[i];
 		auto ipAddress = _clientIPs[i];
-		auto& messageThread = _clientMessageThreads[i];
+		auto& messageThread = _messageThreads[i];
 
 		// Check if the client sent any message
 		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
@@ -86,7 +86,7 @@ BEGIN:
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID);
+			_spawnMessageThread(clientSocketID);
 		}
 	}
 }

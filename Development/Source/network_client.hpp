@@ -27,12 +27,11 @@ public:
 	void start(const string& serverIP, const string& serverPort);
 	void stop();
 	void update();
-	void loadNextPendingMessage();
 	void sendMessage(const string& content);
 
 	bool isRunning();
 	bool isMessagePending();
-	bool isConnectedToServer();
+	bool isConnected();
 
 	const shared_ptr<NetworkMessage> getPendingMessage();
 
@@ -41,17 +40,16 @@ private:
 	void _closeConnection();
 	void _spawnConnectionThread();
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
-	tuple<int, string, int> _waitForServerMessage(SOCKET clientSocketID);
+	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
 
 	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
-	static inline const unsigned int MAX_CLIENT_COUNT = 1;
 
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
 	future<tuple<int, string, int>> _serverMessageThread;
 
-	vector<shared_ptr<NetworkMessage>> _receivedMessageQueue;
+	shared_ptr<NetworkMessage> _receivedMessage = nullptr;
 
 	addrinfo* _addressInfo = nullptr;
 

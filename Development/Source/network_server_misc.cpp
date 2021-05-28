@@ -47,29 +47,34 @@ void NetworkServer::_spawnConnectionThread()
 	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 }
 
-void NetworkServer::sendMessageToClient(const string& ipAddress, const string& content)
+void NetworkServer::_spawnMessageThread(SOCKET clientSocketID)
+{
+	_messageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
+}
+
+void NetworkServer::sendMessage(const string& ipAddress, const string& content)
 {
 	for (size_t i = 0; i < _clientIPs.size(); i++)
 	{
 		if (ipAddress == _clientIPs[i])
 		{
-			_sendMessageToClient(_clientSocketIDs[i], content);
+			_sendMessage(_clientSocketIDs[i], content);
 			return;
 		}
 	}
 
-	// ip not found ERROR
+	Logger::throwWarning("Cannot send message to client: ip address not connected!");
 }
 
 void NetworkServer::broadcastMessage(const string& content)
 {
 	for (auto& socketID : _clientSocketIDs)
 	{
-		_sendMessageToClient(socketID, content);
+		_sendMessage(socketID, content);
 	}
 }
 
-void NetworkServer::_sendMessageToClient(SOCKET clientSocketID, const string& content)
+void NetworkServer::_sendMessage(SOCKET clientSocketID, const string& content)
 {
 	auto sendStatusCode = send(clientSocketID, content.c_str(), static_cast<int>(content.size()), 0);
 	if (sendStatusCode == SOCKET_ERROR)
@@ -89,7 +94,7 @@ void NetworkServer::_acceptClient(SOCKET clientSocketID)
 	// Add client
 	_clientSocketIDs.push_back(clientSocketID);
 	_clientIPs.push_back(ipAddress);
-	_clientMessageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
+	_spawnMessageThread(clientSocketID);
 }
 
 void NetworkServer::_disconnectClient(const string& ipAddress)
@@ -101,7 +106,7 @@ void NetworkServer::_disconnectClient(const string& ipAddress)
 			closesocket(_clientSocketIDs[i]);
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
-			_clientMessageThreads.erase(_clientMessageThreads.begin() + i);
+			_messageThreads.erase(_messageThreads.begin() + i);
 			break;
 		}
 	}

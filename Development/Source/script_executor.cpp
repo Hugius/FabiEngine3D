@@ -112,7 +112,7 @@ void ScriptExecutor::resume()
 		// Resume game logic
 		_fe3d.misc_centerCursor();
 		_fe3d.soundEntity_resumeAll();
-		_fe3d.music_resume();
+		if (_fe3d.music_isPaused()) { _fe3d.music_resume(); }
 		_fe3d.engine_resume();
 		_isRunning = true;
 		_skipUpdate = true;

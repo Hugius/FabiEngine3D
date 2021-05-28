@@ -173,16 +173,6 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "misc:time_interval")
-				{
-					auto types = { ScriptValueType::INTEGER };
-
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-					{
-						auto result = _fe3d.misc_checkInterval(arguments[0].getInteger());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-					}
-				}
 				else
 				{
 					_throwScriptError("misc function not found!");

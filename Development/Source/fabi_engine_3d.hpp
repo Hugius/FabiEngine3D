@@ -775,11 +775,11 @@ public:
 	}
 
 	// Server interface - setters
-	void networknetworkServer_start();
+	void networkServer_start();
 	void networkServer_stop();
 	void networkServer_loadNextPendingMessage();
-	void networkClient_sendMessageToClient(const string& ipAddress, const string& content);
-	void networkClient_broadcastMessage(const string& content);
+	void networkServer_sendMessage(const string& ipAddress, const string& content);
+	void networkServer_broadcastMessage(const string& content);
 
 	// Server interface - getters
 	const bool networkServer_isStarted();
@@ -789,12 +789,11 @@ public:
 	// Client interface - setters
 	void networkClient_start(const string& serverIP);
 	void networkClient_stop();
-	void networkClient_loadNextPendingMessage();
 	void networkClient_sendMessage(const string& content);
 
 	// Client interface - getters
 	const bool networkClient_isStarted();
-	const bool networkClient_isConnectedToServer();
+	const bool networkClient_isConnected();
 	const bool networkClient_isMessagePending();
 	const shared_ptr<NetworkMessage> networkClient_getPendingMessage();
 

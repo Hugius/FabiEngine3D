@@ -18,11 +18,6 @@ void FabiEngine3D::networkClient_stop()
 	}
 }
 
-void FabiEngine3D::networkClient_loadNextPendingMessage()
-{
-	_core->_networkClient.loadNextPendingMessage();
-}
-
 void FabiEngine3D::networkClient_sendMessage(const string& content)
 {
 	_core->_networkClient.sendMessage(content);
@@ -33,9 +28,9 @@ const bool FabiEngine3D::networkClient_isStarted()
 	return _core->_networkClient.isRunning();
 }
 
-const bool FabiEngine3D::networkClient_isConnectedToServer()
+const bool FabiEngine3D::networkClient_isConnected()
 {
-	return _core->_networkClient.isConnectedToServer();
+	return _core->_networkClient.isConnected();
 }
 
 const bool FabiEngine3D::networkClient_isMessagePending()

@@ -13,36 +13,24 @@ bool NetworkClient::isRunning()
 
 bool NetworkClient::isMessagePending()
 {
-	return !_receivedMessageQueue.empty();
+	return (_receivedMessage != nullptr);
 }
 
-bool NetworkClient::isConnectedToServer()
+bool NetworkClient::isConnected()
 {
 	return _isConnectedToServer;
 }
 
-void NetworkClient::loadNextPendingMessage()
-{
-	if (_receivedMessageQueue.empty())
-	{
-		Logger::throwWarning("Cannot load next network message: no messages pending!");
-	}
-	else
-	{
-		_receivedMessageQueue.erase(_receivedMessageQueue.begin());
-	}
-}
-
 const shared_ptr<NetworkMessage> NetworkClient::getPendingMessage()
 {
-	if (_receivedMessageQueue.empty())
+	if (_receivedMessage == nullptr)
 	{
-		Logger::throwWarning("Cannot retrieve network message: no messages pending!");
+		Logger::throwWarning("Cannot retrieve network message: no message pending!");
 		return nullptr;
 	}
 	else
 	{
-		return _receivedMessageQueue.front();
+		return _receivedMessage;
 	}
 }
 
@@ -101,5 +89,22 @@ int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressIn
 	else
 	{
 		return 0;
+	}
+}
+
+tuple<int, string, int> NetworkClient::_waitForServerMessage(SOCKET serverSocketID)
+{
+	// Retrieve bytes & size
+	char buffer[MAX_MESSAGE_BYTES];
+	int bufferLength = MAX_MESSAGE_BYTES;
+	auto receiveResult = recv(serverSocketID, buffer, bufferLength, 0);
+
+	if (receiveResult > 0) // Message received correctly
+	{
+		return make_tuple(receiveResult, string(buffer, receiveResult), WSAGetLastError());
+	}
+	else // Something else happened
+	{
+		return make_tuple(receiveResult, "", WSAGetLastError());
 	}
 }

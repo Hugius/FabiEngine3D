@@ -87,3 +87,5 @@
   Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
 - `fe3d:file_delete`(`STR` filePath) ---> `NONE`  
   Deletes an existing **filePath** in `projects\<your_project>\saves\`.
+- `fe3d:time_interval`(`INT` frames) ---> `BOOL`  
+  Returns true every time **frames** has passed.

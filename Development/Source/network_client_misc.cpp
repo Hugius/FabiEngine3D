@@ -63,18 +63,13 @@ void NetworkClient::_initiateConnection()
 	}
 
 	// Spawn a thread for connecting to the server
-	_spawnConnectionThread();
+	_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
 }
 
 void NetworkClient::_closeConnection()
 {
 	closesocket(_serverSocketID);
 	_isConnectedToServer = false;
-}
-
-void NetworkClient::_spawnConnectionThread()
-{
-	_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
 }
 
 int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)

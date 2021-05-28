@@ -14,6 +14,9 @@ void NetworkServer::update()
 		return;
 	}
 
+	// Clear all received messages from last frame
+	_receivedMessageQueue.clear();
+
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
@@ -40,7 +43,7 @@ void NetworkServer::update()
 		}
 
 		// Spawn connection thread again for next client
-		_spawnConnectionThread();
+		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 	}
 
 	// Receive incoming client messages
@@ -50,6 +53,7 @@ BEGIN:
 		// Temporary values
 		auto clientSocketID = _clientSocketIDs[i];
 		auto ipAddress = _clientIPs[i];
+		auto port = _clientPorts[i];
 		auto& messageThread = _messageThreads[i];
 
 		// Check if the client sent any message
@@ -60,23 +64,21 @@ BEGIN:
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageContent = std::get<1>(messageResult);
 			auto messageErrorCode = std::get<2>(messageResult);
-
+			messageContent = messageContent.substr(0, messageContent.find(']') + 1);
 			if (messageStatusCode > 0) // Message is received correctly
 			{
-				_receivedMessageQueue.push_back(make_shared<NetworkMessage>(ipAddress, messageContent));
+				_receivedMessageQueue.push_back(make_shared<NetworkMessage>(ipAddress, port, messageContent));
 			}
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{
-				Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" disconnected from the server!");
-				_disconnectClient(ipAddress);
+				_disconnectClient(clientSocketID);
 				goto BEGIN;
 			}
 			else // Receive failed
 			{
 				if (messageErrorCode == WSAECONNRESET) // Client lost socket connection
 				{
-					Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" lost connection with the server!");
-					_disconnectClient(ipAddress);
+					_disconnectClient(clientSocketID);
 					goto BEGIN;
 				}
 				else // Something really bad happened
@@ -86,7 +88,7 @@ BEGIN:
 			}
 
 			// Spawn new message thread
-			_spawnMessageThread(clientSocketID);
+			messageThread = std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID);
 		}
 	}
 }

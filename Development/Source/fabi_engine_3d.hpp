@@ -778,7 +778,7 @@ public:
 	void networkServer_start();
 	void networkServer_stop();
 	void networkServer_loadNextPendingMessage();
-	void networkServer_sendMessage(const string& ipAddress, const string& content);
+	void networkServer_sendMessage(const string& ipAddress, const string& port, const string& content);
 	void networkServer_broadcastMessage(const string& content);
 
 	// Server interface - getters

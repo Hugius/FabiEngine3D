@@ -23,9 +23,9 @@ void FabiEngine3D::networkServer_loadNextPendingMessage()
 	_core->_networkServer.loadNextPendingMessage();
 }
 
-void FabiEngine3D::networkServer_sendMessage(const string& ipAddress, const string& content)
+void FabiEngine3D::networkServer_sendMessage(const string& ipAddress, const string& port, const string& content)
 {
-	_core->_networkServer.sendMessage(ipAddress, content);
+	_core->_networkServer.sendMessage(ipAddress, port, content);
 }
 
 void FabiEngine3D::networkServer_broadcastMessage(const string& content)

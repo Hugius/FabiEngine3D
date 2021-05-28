@@ -53,6 +53,9 @@ void NetworkServer::start()
 		Logger::throwError("Networking server startup (socket create) failed with error code: ", WSAGetLastError());
 	}
 
+	//DWORD value = 1;
+	//std::cout << setsockopt(_listeningSocketID, IPPROTO_TCP, TCP_NODELAY, (char*)&value, sizeof(value)) << std::endl;
+
 	// Bind the listening socket
 	auto bindStatusCode = bind(_listeningSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (bindStatusCode == SOCKET_ERROR)
@@ -71,7 +74,7 @@ void NetworkServer::start()
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_spawnConnectionThread();
+	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
 
 	// Server is now operable
 	_isRunning = true;
@@ -90,9 +93,9 @@ void NetworkServer::stop()
 	closesocket(_listeningSocketID);
 
 	// Delete all connected clients
-	for (auto& ip : _clientIPs)
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		_disconnectClient(ip);
+		_disconnectClient(_clientSocketIDs[i]);
 	}
 
 	// Miscellaneous

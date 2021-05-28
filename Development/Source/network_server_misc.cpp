@@ -42,28 +42,18 @@ const shared_ptr<NetworkMessage> NetworkServer::getPendingMessage()
 	}
 }
 
-void NetworkServer::_spawnConnectionThread()
+void NetworkServer::sendMessage(const string& ipAddress, const string& port, const string& content)
 {
-	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
-}
-
-void NetworkServer::_spawnMessageThread(SOCKET clientSocketID)
-{
-	_messageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
-}
-
-void NetworkServer::sendMessage(const string& ipAddress, const string& content)
-{
-	for (size_t i = 0; i < _clientIPs.size(); i++)
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		if (ipAddress == _clientIPs[i])
+		if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
 		{
 			_sendMessage(_clientSocketIDs[i], content);
 			return;
 		}
 	}
 
-	Logger::throwWarning("Cannot send message to client: ip address not connected!");
+	Logger::throwWarning("Cannot send message to client: ip address not connected!"); // <-----
 }
 
 void NetworkServer::broadcastMessage(const string& content)
@@ -79,7 +69,14 @@ void NetworkServer::_sendMessage(SOCKET clientSocketID, const string& content)
 	auto sendStatusCode = send(clientSocketID, content.c_str(), static_cast<int>(content.size()), 0);
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Network server send failed with error code: ", WSAGetLastError());
+		if (WSAGetLastError() == WSAECONNRESET) // Client lost socket connection
+		{
+			_disconnectClient(clientSocketID);
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Network server send failed with error code: ", WSAGetLastError());
+		}
 	}
 }
 
@@ -90,23 +87,30 @@ void NetworkServer::_acceptClient(SOCKET clientSocketID)
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(clientSocketID, (struct sockaddr*)&socketAddress, &socketAddressLength);
 	auto ipAddress = string(inet_ntoa(socketAddress.sin_addr));
+	auto port = std::to_string(socketAddress.sin_port);
 
 	// Add client
 	_clientSocketIDs.push_back(clientSocketID);
 	_clientIPs.push_back(ipAddress);
-	_spawnMessageThread(clientSocketID);
+	_clientPorts.push_back(port);
+	_messageThreads.push_back(std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID));
 }
 
-void NetworkServer::_disconnectClient(const string& ipAddress)
+void NetworkServer::_disconnectClient(SOCKET clientSocketID)
 {
-	for (size_t i = 0; i < _clientIPs.size(); i++)
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		if (_clientIPs[i] == ipAddress)
+		if (clientSocketID == _clientSocketIDs[i])
 		{
+			auto ipAddress = _clientIPs[i];
+
 			closesocket(_clientSocketIDs[i]);
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
+			_clientPorts.erase(_clientPorts.begin() + i);
 			_messageThreads.erase(_messageThreads.begin() + i);
+
+			Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" lost connection with the server!");
 			break;
 		}
 	}

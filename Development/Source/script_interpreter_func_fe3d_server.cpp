@@ -39,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_message_ip")
+	else if (functionName == "fe3d:network_server_get_message_ip_address")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -48,6 +48,18 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			if (result != nullptr)
 			{
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->ipAddress));
+			}
+		}
+	}
+	else if (functionName == "fe3d:network_server_get_message_port")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.networkServer_getPendingMessage();
+			if (result != nullptr)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->port));
 			}
 		}
 	}
@@ -74,12 +86,12 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 	}
 	else if (functionName == "fe3d:network_server_send_message")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.networkServer_sendMessage(arguments[0].getString(), arguments[1].getString());
+			_fe3d.networkServer_sendMessage(arguments[0].getString(), arguments[1].getString(), arguments[2].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

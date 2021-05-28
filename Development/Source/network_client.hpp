@@ -38,7 +38,6 @@ public:
 private:
 	void _initiateConnection();
 	void _closeConnection();
-	void _spawnConnectionThread();
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
 

@@ -33,7 +33,7 @@ void NetworkClient::update()
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
 				// Spawn thread again for another attempt
-				_spawnConnectionThread();
+				_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
 			}
 			else // Something really bad happened
 			{
@@ -52,10 +52,10 @@ void NetworkClient::update()
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageContent = std::get<1>(messageResult);
 		auto messageErrorCode = std::get<2>(messageResult);
-
+		messageContent = messageContent.substr(0, messageContent.find(']') + 1);
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			_receivedMessage = make_shared<NetworkMessage>("192.168.1.134", messageContent);
+			_receivedMessage = make_shared<NetworkMessage>("192.168.1.134", "123", messageContent); // <---
 		}
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{

@@ -26,7 +26,7 @@ public:
 	void stop();
 	void update();
 	void loadNextPendingMessage();
-	void sendMessage(const string& ipAddress, const string& content);
+	void sendMessage(const string& ipAddress, const string& port, const string& content);
 	void broadcastMessage(const string& content);
 
 	bool isRunning();
@@ -38,15 +38,13 @@ public:
 
 private:
 	void _sendMessage(SOCKET clientSocketID, const string& content);
-	void _spawnConnectionThread();
-	void _spawnMessageThread(SOCKET clientSocketID);
 	void _acceptClient(SOCKET clientSocketID);
-	void _disconnectClient(const string& ipAddress);
+	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET listenSocketID);
 	tuple<int, string, int> _waitForClientMessage(SOCKET clientSocketID);
 
 	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
-	static inline const unsigned int MAX_CLIENT_COUNT = 1;
+	static inline const unsigned int MAX_CLIENT_COUNT = 2;
 
 	// Sockets
 	SOCKET _listeningSocketID;
@@ -57,6 +55,7 @@ private:
 	vector<future<tuple<int, string, int>>> _messageThreads;
 	
 	vector<string> _clientIPs;
+	vector<string> _clientPorts;
 	vector<shared_ptr<NetworkMessage>> _receivedMessageQueue;
 
 	bool _isRunning = false;

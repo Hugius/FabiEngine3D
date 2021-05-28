@@ -1,12 +1,12 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server.hpp"
+#include "network_server_tcp.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-void NetworkServer::update()
+void NetworkServerTCP::update()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -15,7 +15,7 @@ void NetworkServer::update()
 	}
 
 	// Clear all received messages from last frame
-	_receivedMessageQueue.clear();
+	_receivedMessages.clear();
 
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
@@ -39,11 +39,11 @@ void NetworkServer::update()
 			_acceptClient(clientSocketID);
 
 			// Logging
-			Logger::throwInfo("Networking client with IP \"" + _clientIPs.back() + "\" connected to the server!");
+			Logger::throwInfo("Networking client \"" + _clientIPs.back() + ":" + _clientPorts.back() + "\" connected to the server!");
 		}
 
-		// Spawn connection thread again for next client
-		_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
+		// Spawn connection thread again for next possible client
+		_connectionThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientConnection, this, _connectionSocketID);
 	}
 
 	// Receive incoming client messages
@@ -62,12 +62,14 @@ BEGIN:
 			// Temporary values
 			auto messageResult = messageThread.get();
 			auto messageStatusCode = std::get<0>(messageResult);
-			auto messageContent = std::get<1>(messageResult);
-			auto messageErrorCode = std::get<2>(messageResult);
-			messageContent = messageContent.substr(0, messageContent.find(']') + 1);
+			auto messageErrorCode = std::get<1>(messageResult);
+			auto messageContent = std::get<2>(messageResult);
+
+			//messageContent = messageContent.substr(0, messageContent.find(']') + 1); <---
+
 			if (messageStatusCode > 0) // Message is received correctly
 			{
-				_receivedMessageQueue.push_back(make_shared<NetworkMessage>(ipAddress, port, messageContent));
+				_receivedMessages.push_back(NetworkMessage(ipAddress, port, messageContent));
 			}
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{
@@ -88,7 +90,7 @@ BEGIN:
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServer::_waitForClientMessage, this, clientSocketID);
+			messageThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientMessage, this, clientSocketID);
 		}
 	}
 }

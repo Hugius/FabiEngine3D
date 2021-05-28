@@ -10,36 +10,48 @@
     <Filter Include="Miscellaneous">
       <UniqueIdentifier>{0558d553-6311-4587-87f1-c9ba59eb7fa3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Server\UDP">
+      <UniqueIdentifier>{b8731127-bd87-47af-b84b-e1314ed5e97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\TCP">
+      <UniqueIdentifier>{57fd101e-4518-4bc7-b4c8-6da0d0e797bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\UDP">
+      <UniqueIdentifier>{bebbfadf-59c0-4c1a-8ccf-6d534813f544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\TCP">
+      <UniqueIdentifier>{0adca4aa-cc4d-4dcc-ad77-bb7ad3f833d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\network_server.hpp">
-      <Filter>Server</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\network_client.hpp">
-      <Filter>Client</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\network_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\network_server_tcp.hpp">
+      <Filter>Server\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\network_client_tcp.hpp">
+      <Filter>Client\TCP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\network_server_update.cpp">
-      <Filter>Server</Filter>
+    <ClCompile Include="..\..\Source\network_server_tcp_main.cpp">
+      <Filter>Server\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_main.cpp">
-      <Filter>Client</Filter>
+    <ClCompile Include="..\..\Source\network_server_tcp_misc.cpp">
+      <Filter>Server\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_main.cpp">
-      <Filter>Server</Filter>
+    <ClCompile Include="..\..\Source\network_server_tcp_update.cpp">
+      <Filter>Server\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_server_misc.cpp">
-      <Filter>Server</Filter>
+    <ClCompile Include="..\..\Source\network_client_tcp_main.cpp">
+      <Filter>Client\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_update.cpp">
-      <Filter>Client</Filter>
+    <ClCompile Include="..\..\Source\network_client_tcp_misc.cpp">
+      <Filter>Client\TCP</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\network_client_misc.cpp">
-      <Filter>Client</Filter>
+    <ClCompile Include="..\..\Source\network_client_tcp_update.cpp">
+      <Filter>Client\TCP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

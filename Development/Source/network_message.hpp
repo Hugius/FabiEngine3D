@@ -9,7 +9,12 @@ typedef unsigned __int64 SOCKET;
 
 struct NetworkMessage final
 {
-	NetworkMessage(const string& ipAddress, const string& port, const string& content) :
+	NetworkMessage() = default;
+	NetworkMessage(
+		const string& ipAddress,
+		const string& port,
+		const string& content)
+		:
 		ipAddress(ipAddress),
 		port(port),
 		content(content)

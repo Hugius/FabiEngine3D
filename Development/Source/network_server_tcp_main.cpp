@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server.hpp"
+#include "network_server_tcp.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkServer::NetworkServer() :
-	_listeningSocketID(INVALID_SOCKET)
+NetworkServerTCP::NetworkServerTCP() :
+	_connectionSocketID(INVALID_SOCKET)
 {
 
 }
 
-NetworkServer::~NetworkServer()
+NetworkServerTCP::~NetworkServerTCP()
 {
 	if (_isRunning)
 	{
@@ -20,7 +20,7 @@ NetworkServer::~NetworkServer()
 	}
 }
 
-void NetworkServer::start()
+void NetworkServerTCP::start()
 {
 	// Validate runtime status
 	if (_isRunning)
@@ -39,25 +39,26 @@ void NetworkServer::start()
 
 	// Create address info
 	struct addrinfo* addressInfo = nullptr;
-	auto infoStatusCode = getaddrinfo(nullptr, networkServer_PORT.c_str(), &hints, &addressInfo);
+	auto infoStatusCode = getaddrinfo(nullptr, SERVER_PORT.c_str(), &hints, &addressInfo);
 	if (infoStatusCode != 0)
 	{
 		Logger::throwError("Network server startup (address info) failed with error code: ", infoStatusCode);
 		return;
 	}
 
-	// Create socket for listening
-	_listeningSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
-	if (_listeningSocketID == INVALID_SOCKET)
+	// Create socket for listening to client connection requests
+	_connectionSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if (_connectionSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking server startup (socket create) failed with error code: ", WSAGetLastError());
 	}
 
-	//DWORD value = 1;
-	//std::cout << setsockopt(_listeningSocketID, IPPROTO_TCP, TCP_NODELAY, (char*)&value, sizeof(value)) << std::endl;
+	// Add options to the connection socket
+	DWORD optionValue = 1;
+	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
 
 	// Bind the listening socket
-	auto bindStatusCode = bind(_listeningSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	auto bindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (bindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("Networking server startup (socket bind) failed with error code: ", WSAGetLastError());
@@ -66,21 +67,21 @@ void NetworkServer::start()
 	// Address info not needed anymore
 	freeaddrinfo(addressInfo);
 
-	// Enable listening for any incoming client connection message
-	auto listenStatusCode = listen(_listeningSocketID, SOMAXCONN);
+	// Enable listening for any incoming client connection request
+	auto listenStatusCode = listen(_connectionSocketID, SOMAXCONN);
 	if (listenStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("Networking server startup (socket listen) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_connectionThread = std::async(std::launch::async, &NetworkServer::_waitForClientConnection, this, _listeningSocketID);
+	_connectionThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientConnection, this, _connectionSocketID);
 
 	// Server is now operable
 	_isRunning = true;
 }
 
-void NetworkServer::stop()
+void NetworkServerTCP::stop()
 {
 	// Validate runtime status
 	if (!_isRunning)
@@ -90,7 +91,7 @@ void NetworkServer::stop()
 	}
 
 	// Close listening socket
-	closesocket(_listeningSocketID);
+	closesocket(_connectionSocketID);
 
 	// Delete all connected clients
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
@@ -99,7 +100,7 @@ void NetworkServer::stop()
 	}
 
 	// Miscellaneous
-	_listeningSocketID = INVALID_SOCKET;
-	_receivedMessageQueue.clear();
+	_connectionSocketID = INVALID_SOCKET;
+	_receivedMessages.clear();
 	_isRunning = false;
 }

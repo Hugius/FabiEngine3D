@@ -18,11 +18,11 @@ using std::make_tuple;
 
 struct addrinfo;
 
-class NetworkClient final
+class NetworkClientTCP final
 {
 public:
-	NetworkClient();
-	~NetworkClient();
+	NetworkClientTCP();
+	~NetworkClientTCP();
 
 	void start(const string& serverIP, const string& serverPort);
 	void stop();

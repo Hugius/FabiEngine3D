@@ -1,27 +1,27 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client.hpp"
+#include "network_client_tcp.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-bool NetworkClient::isRunning()
+bool NetworkClientTCP::isRunning()
 {
 	return _isRunning;
 }
 
-bool NetworkClient::isMessagePending()
+bool NetworkClientTCP::isMessagePending()
 {
 	return (_receivedMessage != nullptr);
 }
 
-bool NetworkClient::isConnected()
+bool NetworkClientTCP::isConnected()
 {
 	return _isConnectedToServer;
 }
 
-const shared_ptr<NetworkMessage> NetworkClient::getPendingMessage()
+const shared_ptr<NetworkMessage> NetworkClientTCP::getPendingMessage()
 {
 	if (_receivedMessage == nullptr)
 	{
@@ -34,7 +34,7 @@ const shared_ptr<NetworkMessage> NetworkClient::getPendingMessage()
 	}
 }
 
-void NetworkClient::sendMessage(const string& content)
+void NetworkClientTCP::sendMessage(const string& content)
 {
 	auto sendStatusCode = send(_serverSocketID, content.c_str(), static_cast<int>(content.size()), 0);
 
@@ -53,7 +53,7 @@ void NetworkClient::sendMessage(const string& content)
 	}
 }
 
-void NetworkClient::_initiateConnection()
+void NetworkClientTCP::_initiateConnection()
 {
 	// Create socket for connecting to the server
 	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
@@ -63,16 +63,16 @@ void NetworkClient::_initiateConnection()
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
+	_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_connectWithServer, this, _serverSocketID, _addressInfo);
 }
 
-void NetworkClient::_closeConnection()
+void NetworkClientTCP::_closeConnection()
 {
 	closesocket(_serverSocketID);
 	_isConnectedToServer = false;
 }
 
-int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)
+int NetworkClientTCP::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)
 {
 	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	
@@ -87,7 +87,7 @@ int NetworkClient::_connectWithServer(SOCKET serverSocketID, addrinfo* addressIn
 	}
 }
 
-tuple<int, string, int> NetworkClient::_waitForServerMessage(SOCKET serverSocketID)
+tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[MAX_MESSAGE_BYTES];

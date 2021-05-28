@@ -3,14 +3,14 @@
 
 void FabiEngine3D::networkServer_start()
 {
-	_core->_networkServer.start();
+	_core->_networkServerTCP.start();
 }
 
 void FabiEngine3D::networkServer_stop()
 {
 	if (networkServer_isStarted())
 	{
-		_core->_networkServer.stop();
+		_core->_networkServerTCP.stop();
 	}
 	else
 	{
@@ -20,30 +20,30 @@ void FabiEngine3D::networkServer_stop()
 
 void FabiEngine3D::networkServer_loadNextPendingMessage()
 {
-	_core->_networkServer.loadNextPendingMessage();
+	_core->_networkServerTCP.loadNextPendingMessage();
 }
 
 void FabiEngine3D::networkServer_sendMessage(const string& ipAddress, const string& port, const string& content)
 {
-	_core->_networkServer.sendMessage(ipAddress, port, content);
+	_core->_networkServerTCP.sendMessage(ipAddress, port, content);
 }
 
 void FabiEngine3D::networkServer_broadcastMessage(const string& content)
 {
-	_core->_networkServer.broadcastMessage(content);
+	_core->_networkServerTCP.broadcastMessage(content);
 }
 
 const bool FabiEngine3D::networkServer_isStarted()
 {
-	return _core->_networkServer.isRunning();
+	return _core->_networkServerTCP.isRunning();
 }
 
 const bool FabiEngine3D::networkServer_isMessagePending()
 {
-	return _core->_networkServer.isMessagePending();
+	return _core->_networkServerTCP.isMessagePending();
 }
 
 const shared_ptr<NetworkMessage> FabiEngine3D::networkServer_getPendingMessage()
 {
-	return _core->_networkServer.getPendingMessage();
+	return _core->_networkServerTCP.getPendingMessage();
 }

@@ -1,12 +1,12 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client.hpp"
+#include "network_client_tcp.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-void NetworkClient::update()
+void NetworkClientTCP::update()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -28,12 +28,12 @@ void NetworkClient::update()
 			if (errorCode == 0) // Successfully connected with server
 			{
 				_isConnectedToServer = true;
-				_serverMessageThread = std::async(std::launch::async, &NetworkClient::_waitForServerMessage, this, _serverSocketID);
+				_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
 				// Spawn thread again for another attempt
-				_connectionThread = std::async(std::launch::async, &NetworkClient::_connectWithServer, this, _serverSocketID, _addressInfo);
+				_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_connectWithServer, this, _serverSocketID, _addressInfo);
 			}
 			else // Something really bad happened
 			{
@@ -75,6 +75,6 @@ void NetworkClient::update()
 		}
 
 		// Spawn new message thread
-		_serverMessageThread = std::async(std::launch::async, &NetworkClient::_waitForServerMessage, this, _serverSocketID);
+		_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
 	}
 }

@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client.hpp"
+#include "network_client_tcp.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkClient::NetworkClient() :
+NetworkClientTCP::NetworkClientTCP() :
 	_serverSocketID(INVALID_SOCKET)
 {
 
 }
 
-NetworkClient::~NetworkClient()
+NetworkClientTCP::~NetworkClientTCP()
 {
 	if (_isRunning)
 	{
@@ -20,7 +20,7 @@ NetworkClient::~NetworkClient()
 	}
 }
 
-void NetworkClient::start(const string& serverIP, const string& serverPort)
+void NetworkClientTCP::start(const string& serverIP, const string& serverPort)
 {
 	// Validate runtime status
 	if (_isRunning)
@@ -51,7 +51,7 @@ void NetworkClient::start(const string& serverIP, const string& serverPort)
 	_isRunning = true;
 }
 
-void NetworkClient::stop()
+void NetworkClientTCP::stop()
 {
 	// Validate runtime status
 	if (!_isRunning)

@@ -32,8 +32,8 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_timer(),
 	_audioManager(_audioLoader),
 	_audioPlayer(),
-	_networkServer(),
-	_networkClient()
+	_networkServerTCP(),
+	_networkClientTCP()
 {
 
 }

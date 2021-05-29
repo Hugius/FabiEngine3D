@@ -223,18 +223,36 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						return;
 					}
 
-					if (typeString == LIST_KEYWORD) // Check if variable is an array
+					if (typeString == LIST_KEYWORD) // Check if variable isa list
 					{
+						// Check if function returned any empty values
+						for (const auto& value : values)
+						{
+							if (value.getType() == ScriptValueType::EMPTY)
+							{
+								_throwScriptError("function cannot return empty values!");
+								return;
+							}
+						}
+
+						// Add list values
 						variableList.insert(make_pair(nameString, 
 							ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values)));
 					}
-					else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned anything
+					else if (values.empty()) // Check if function returned 0 values
 					{
-						_throwScriptError("function must return a value!");
+						_throwScriptError("function did not return any values!");
+						return;
 					}
 					else if (values.size() > 1) // Check if function returned too many values
-					{					
+					{
 						_throwScriptError("function returned too many values!");
+						return;
+					}
+					else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned an empty value
+					{
+						_throwScriptError("function must return a value!");
+						return;
 					}
 					else if
 						(((typeString == VEC3_KEYWORD)	 && (values[0].getType() == ScriptValueType::VEC3))    || 
@@ -249,6 +267,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					else
 					{
 						_throwScriptError("function value type does not match the variable type!");
+						return;
 					}
 				}
 				else
@@ -354,26 +373,31 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						else
 						{
 							_throwScriptError("variable value types don't match!");
+							return;
 						}
 					}
 					else
 					{
 						_throwScriptError("invalid value!");
+						return;
 					}
 				}
 			}
 			else
 			{
 				_throwScriptError("equal sign missing!");
+				return;
 			}
 		}
 		else
 		{
 			_throwScriptError("forbidden variable name!");
+			return;
 		}
 	}
 	else
 	{
 		_throwScriptError("invalid variable type!");
+		return;
 	}
 }

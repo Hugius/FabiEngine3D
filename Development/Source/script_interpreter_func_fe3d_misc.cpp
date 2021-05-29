@@ -65,6 +65,10 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			{
 				_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
 			}
+			else
+			{
+				_fe3d.logger_throwError("Script interpreter print received empty value!");
+			}
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

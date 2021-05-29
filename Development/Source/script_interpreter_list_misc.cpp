@@ -28,13 +28,13 @@ bool ScriptInterpreter::_validateListValueAmount(const vector<ScriptValue>& valu
 	else if (values.size() < amount) // Not enough values
 	{
 		_throwScriptError("not enough values!");
+		return false;
 	}
 	else // Too many values
 	{
 		_throwScriptError("too many values!");
+		return false;
 	}
-
-	return false;
 }
 
 bool ScriptInterpreter::_validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types)
@@ -229,6 +229,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		else
 		{
 			_throwScriptError("invalid value!");
+			return;
 		}
 	}
 }

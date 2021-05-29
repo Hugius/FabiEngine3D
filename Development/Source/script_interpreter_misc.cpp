@@ -56,6 +56,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	if (_scopeHasChanged && ((currentLineScopeDepth != scopeDepth) || scriptLineText.substr(0, 3) == "///"))
 	{
 		_throwScriptError("no indented code after scope change!");
+		return false;
 	}
 	else if (currentLineScopeDepth < scopeDepth) // End of current scope
 	{
@@ -69,7 +70,8 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 		}
 		else // Useless indented statement
 		{
-			_throwScriptError("useless indentation before statement!");
+			_throwScriptError("useless indentation before statement!"); 
+			return false;
 		}
 	}
 

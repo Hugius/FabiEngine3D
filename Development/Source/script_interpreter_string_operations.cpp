@@ -233,6 +233,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)
 		{
 			_throwScriptError("list index must be an integer!");
+			return -1;
 		}
 		else
 		{
@@ -243,9 +244,8 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	else
 	{
 		_throwScriptError("invalid list indexing syntax!");
+		return -1;
 	}
-
-	return -1;
 }
 
 bool ScriptInterpreter::_validateKeyInputString(const string& inputString)

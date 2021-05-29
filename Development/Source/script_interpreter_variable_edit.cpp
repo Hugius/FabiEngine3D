@@ -214,15 +214,33 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 
 		if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an list
 		{
+			// Check if function returned any empty values
+			for (const auto& value : values)
+			{
+				if (value.getType() == ScriptValueType::EMPTY)
+				{
+					_throwScriptError("function cannot return empty values!");
+					return;
+				}
+			}
+
+			// Change list values
 			variable.changeValues(values);
 		}
-		else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned anything
+		else if (values.empty()) // Check if function returned 0 values
 		{
-			_throwScriptError("function must return a value!");
+			_throwScriptError("function did not return any values!");
+			return;
 		}
 		else if (values.size() > 1) // Check if function returned too many values
 		{
 			_throwScriptError("function returned too many values!");
+			return;
+		}
+		else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned an empty value
+		{
+			_throwScriptError("function must return a value!");
+			return;
 		}
 		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingListOne) && 
 			(variable.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) &&  // VEC3
@@ -277,6 +295,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		else
 		{
 			_throwScriptError("function type does not match the variable type!");
+			return;
 		}
 	}
 	else
@@ -413,11 +432,13 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			else
 			{
 				_throwScriptError("variable types do not match!");
+				return;
 			}
 		}
 		else
 		{
 			_throwScriptError("invalid value!");
+			return;
 		}
 	}
 }

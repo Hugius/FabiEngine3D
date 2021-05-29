@@ -1,6 +1,6 @@
 # Model
 - `fe3d:model_is_existing`(`STR` ID) ---> `BOOL`  
-  Returns true if model is existing.
+  Returns true if model with **ID** is existing.
 - `fe3d:model_find_ids`(`STR` subID) ---> `LIST`  
   Returns a list of strings with the IDs of all models which IDs start with **subID**.
 - `fe3d:model_get_all_ids`() ---> `LIST`  

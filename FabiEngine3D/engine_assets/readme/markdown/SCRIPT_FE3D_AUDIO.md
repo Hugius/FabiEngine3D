@@ -1,11 +1,11 @@
 # Sound (only 2D)
-- `fe3d:sound_place2D`(`STR` newID, `STR` previewID, `DEC` volume) ---> `NONE`  
+- `fe3d:sound_place_2D`(`STR` newID, `STR` previewID, `DEC` volume) ---> `NONE`  
   Places a new 2D sound with **newID** (cannot start with @) based on audio with **previewID**. Has an initial **volume**.
 - `fe3d:sound_set_volume`(`STR` ID, `DEC` volume) ---> `NONE`  
   Sets the **volume** of sound with **ID**.
 
 # Sound (only 3D)
-- `fe3d:sound_place3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` volume, `DEC` distance) ---> `NONE`  
+- `fe3d:sound_place_3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` volume, `DEC` distance) ---> `NONE`  
   Places a new 3D sound with **newID** (cannot start with @) based on audio with **previewID** at position as **xyz** with a maximum **volume** and a maximum **distance**.
 - `fe3d:sound_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Sets the position as **xyz** of sound with **ID**.

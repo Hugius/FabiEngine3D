@@ -1,6 +1,6 @@
 # AABB
-- `fe3d:aabb_is_existing`() ---> `BOOL`  
-  Returns true if AABB is existing.
+- `fe3d:aabb_is_existing`(`STR` ID) ---> `BOOL`  
+  Returns true if AABB with **ID** is existing.
 - `fe3d:aabb_find_ids`(`STR` subID) ---> `LIST`  
   Returns a list of strings with the IDs of all AABBs which IDs start with **subID**.
 - `fe3d:aabb_get_all_ids`() ---> `LIST`  

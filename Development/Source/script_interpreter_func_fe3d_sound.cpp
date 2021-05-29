@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:sound_place2D")
+	else if (functionName == "fe3d:sound_place_2D")
 	{
 		auto types =
 		{
@@ -132,7 +132,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:sound_place3D")
+	else if (functionName == "fe3d:sound_place_3D")
 	{
 		auto types =
 		{

@@ -18,7 +18,7 @@ void ScriptExecutor::load()
 	_scriptInterpreter.executeInitialization();
 	_isInitialized = true;
 	_isRunning = true;
-	_skipUpdate = true;
+	_mustSkipUpdate = true;
 
 	// Check for errors
 	_validateExecution();
@@ -29,13 +29,13 @@ void ScriptExecutor::update(bool debug)
 	if (_isInitialized && _isRunning)
 	{
 		// Skip first frame, then update fulltime
-		if (!_skipUpdate || debug)
+		if (!_mustSkipUpdate || debug)
 		{
 			_scriptInterpreter.executeUpdate(debug);
 		}
 		else
 		{
-			_skipUpdate = false;
+			_mustSkipUpdate = false;
 		}
 
 		// Custom cursor is only enabled in engine preview
@@ -46,6 +46,82 @@ void ScriptExecutor::update(bool debug)
 
 		// Check for errors
 		_validateExecution();
+	}
+}
+
+void ScriptExecutor::pause()
+{
+	if (_isInitialized && _isRunning)
+	{
+		// Save cursor state
+		_wasCursorVisible = _fe3d.misc_isCursorVisible();
+
+		// Save timer state
+		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
+		_fe3d.misc_hideCursor();
+		_fe3d.misc_stopMillisecondTimer();
+
+		// Save sound states
+		for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
+		{
+			if (_fe3d.soundEntity_isPaused(soundID))
+			{
+				_pausedSoundIDs.push_back(soundID);
+			}
+		}
+
+		// Pause sounds
+		_fe3d.soundEntity_pauseAll();
+
+		// Save music state
+		_wasMusicPaused = _fe3d.music_isPaused();
+
+		// Pause music
+		if (_fe3d.music_isPlaying())
+		{
+			_fe3d.music_pause();
+		}
+
+		// Pause engine updates & script execution
+		_fe3d.engine_pause();
+		_isRunning = false;
+	}
+}
+
+void ScriptExecutor::resume()
+{
+	if (_isInitialized && !_isRunning)
+	{
+		// Reset cursor
+		_fe3d.misc_centerCursor();
+		if (_wasCursorVisible)
+		{
+			_fe3d.misc_showCursor();
+		}
+
+		// Reset millisecond timer
+		if (_wasMillisecondTimerStarted)
+		{
+			_fe3d.misc_startMillisecondTimer();
+		}
+
+		// Reset sounds
+		_fe3d.soundEntity_resumeAll();
+		for (const auto& soundID : _pausedSoundIDs)
+		{
+			_fe3d.soundEntity_pause(soundID);
+		}
+
+		// Reset music
+		if (_fe3d.music_isPaused() && !_wasMusicPaused)
+		{
+			_fe3d.music_resume();
+		}
+
+		// Resume game logic
+		_fe3d.engine_resume();
+		_isRunning = true;
+		_mustSkipUpdate = true;
 	}
 }
 
@@ -69,54 +145,17 @@ void ScriptExecutor::unload()
 		_fe3d.misc_hideCursor();
 		_isInitialized = false;
 		_isRunning = false;
+		_wasCursorVisible = false;
+		_wasMillisecondTimerStarted = false;
+		_wasMusicPaused = false;
+		_mustSkipUpdate = false;
+		_pausedSoundIDs.clear();
 	}
 }
 
 void ScriptExecutor::setCurrentProjectID(const string& projectName)
 {
 	_scriptInterpreter.setCurrentProjectID(projectName);
-}
-
-void ScriptExecutor::pause()
-{
-	if (_isInitialized && _isRunning)
-	{
-		// Pause engine updates & script execution
-		_wasCursorVisible = _fe3d.misc_isCursorVisible();
-		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
-		_fe3d.misc_hideCursor();
-		_fe3d.misc_stopMillisecondTimer();
-		_fe3d.soundEntity_pauseAll();
-		if (_fe3d.music_isPlaying()) { _fe3d.music_pause(); }
-		_fe3d.engine_pause();
-		_isRunning = false;
-	}
-}
-
-void ScriptExecutor::resume()
-{
-	if (_isInitialized && !_isRunning)
-	{
-		// Reset cursor
-		if (_wasCursorVisible)
-		{
-			_fe3d.misc_showCursor();
-		}
-
-		// Reset millisecond timer
-		if (_wasMillisecondTimerStarted)
-		{
-			_fe3d.misc_startMillisecondTimer();
-		}
-
-		// Resume game logic
-		_fe3d.misc_centerCursor();
-		_fe3d.soundEntity_resumeAll();
-		if (_fe3d.music_isPaused()) { _fe3d.music_resume(); }
-		_fe3d.engine_resume();
-		_isRunning = true;
-		_skipUpdate = true;
-	}
 }
 
 bool ScriptExecutor::isScriptEmpty()

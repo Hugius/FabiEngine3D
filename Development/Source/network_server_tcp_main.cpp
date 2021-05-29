@@ -39,7 +39,7 @@ void NetworkServerTCP::start()
 
 	// Create address info
 	struct addrinfo* addressInfo = nullptr;
-	auto infoStatusCode = getaddrinfo(nullptr, SERVER_PORT.c_str(), &hints, &addressInfo);
+	auto infoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &hints, &addressInfo);
 	if (infoStatusCode != 0)
 	{
 		Logger::throwError("Network server startup (address info) failed with error code: ", infoStatusCode);
@@ -56,6 +56,8 @@ void NetworkServerTCP::start()
 	// Add options to the connection socket
 	DWORD optionValue = 1;
 	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
+	optionValue = 1;
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
 
 	// Bind the listening socket
 	auto bindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
@@ -101,6 +103,6 @@ void NetworkServerTCP::stop()
 
 	// Miscellaneous
 	_connectionSocketID = INVALID_SOCKET;
-	_receivedMessages.clear();
+	_pendingMessages.clear();
 	_isRunning = false;
 }

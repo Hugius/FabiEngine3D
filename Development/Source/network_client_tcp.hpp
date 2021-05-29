@@ -1,6 +1,7 @@
 #pragma once
 
 #include "network_message.hpp"
+#include "network_utils.hpp"
 
 #include <string>
 #include <future>
@@ -30,10 +31,9 @@ public:
 	void sendMessage(const string& content);
 
 	bool isRunning();
-	bool isMessagePending();
-	bool isConnected();
+	bool isConnectedToServer();
 
-	const shared_ptr<NetworkMessage> getPendingMessage();
+	const vector<NetworkMessage>& getPendingMessages();
 
 private:
 	void _initiateConnection();
@@ -41,14 +41,12 @@ private:
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
 
-	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
-
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
 	future<tuple<int, string, int>> _serverMessageThread;
 
-	shared_ptr<NetworkMessage> _receivedMessage = nullptr;
+	vector<NetworkMessage> _pendingMessages;
 
 	addrinfo* _addressInfo = nullptr;
 

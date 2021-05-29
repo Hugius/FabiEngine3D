@@ -11,27 +11,14 @@ bool NetworkClientTCP::isRunning()
 	return _isRunning;
 }
 
-bool NetworkClientTCP::isMessagePending()
-{
-	return (_receivedMessage != nullptr);
-}
-
-bool NetworkClientTCP::isConnected()
+bool NetworkClientTCP::isConnectedToServer()
 {
 	return _isConnectedToServer;
 }
 
-const shared_ptr<NetworkMessage> NetworkClientTCP::getPendingMessage()
+const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 {
-	if (_receivedMessage == nullptr)
-	{
-		Logger::throwWarning("Cannot retrieve network message: no message pending!");
-		return nullptr;
-	}
-	else
-	{
-		return _receivedMessage;
-	}
+	return _pendingMessages;
 }
 
 void NetworkClientTCP::sendMessage(const string& content)
@@ -90,8 +77,8 @@ int NetworkClientTCP::_connectWithServer(SOCKET serverSocketID, addrinfo* addres
 tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
 {
 	// Retrieve bytes & size
-	char buffer[MAX_MESSAGE_BYTES];
-	int bufferLength = MAX_MESSAGE_BYTES;
+	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
+	int bufferLength = NetworkUtils::MAX_MESSAGE_BYTES;
 	auto receiveResult = recv(serverSocketID, buffer, bufferLength, 0);
 
 	if (receiveResult > 0) // Message received correctly

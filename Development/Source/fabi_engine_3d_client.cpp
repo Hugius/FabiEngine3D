@@ -3,7 +3,7 @@
 
 void FabiEngine3D::networkClient_start(const string& serverIP)
 {
-	_core->_networkClientTCP.start(serverIP, NetworkServerTCP::SERVER_PORT);
+	_core->_networkClientTCP.start(serverIP, NetworkUtils::SERVER_PORT);
 }
 
 void FabiEngine3D::networkClient_stop()
@@ -28,17 +28,12 @@ const bool FabiEngine3D::networkClient_isStarted()
 	return _core->_networkClientTCP.isRunning();
 }
 
-const bool FabiEngine3D::networkClient_isConnected()
+const bool FabiEngine3D::networkClient_isConnectedToServer()
 {
-	return _core->_networkClientTCP.isConnected();
+	return _core->_networkClientTCP.isConnectedToServer();
 }
 
-const bool FabiEngine3D::networkClient_isMessagePending()
+const vector<NetworkMessage>& FabiEngine3D::networkClient_getPendingMessages()
 {
-	return _core->_networkClientTCP.isMessagePending();
-}
-
-const shared_ptr<NetworkMessage> FabiEngine3D::networkClient_getPendingMessage()
-{
-	return _core->_networkClientTCP.getPendingMessage();
+	return _core->_networkClientTCP.getPendingMessages();
 }

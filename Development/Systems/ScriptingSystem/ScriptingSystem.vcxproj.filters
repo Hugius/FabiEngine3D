@@ -46,6 +46,9 @@
     <Filter Include="Execution\Interpreter\List">
       <UniqueIdentifier>{bfddae24-cac4-4b45-bdce-240a9ee906cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Execution\Interpreter\Function\Networking">
+      <UniqueIdentifier>{847cc0de-5f17-483f-8f9d-0fee2643eea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\script.cpp">
@@ -168,11 +171,11 @@
     <ClCompile Include="..\..\Source\script_interpreter_condition.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_client.cpp">
-      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+      <Filter>Execution\Interpreter\Function\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp">
+      <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

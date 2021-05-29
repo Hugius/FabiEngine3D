@@ -37,40 +37,43 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkClient_isConnected();
+			auto result = _fe3d.networkClient_isConnectedToServer();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_client_is_message_pending")
+	else if (functionName == "fe3d:network_client_get_pending_ips")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkClient_isMessagePending();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
-	else if (functionName == "fe3d:network_client_get_message_ip")
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.networkClient_getPendingMessage();
-			if (result != nullptr)
+			auto messages = _fe3d.networkClient_getPendingMessages();
+			for (auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->ipAddress));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.ipAddress));
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_client_get_message_content")
+	else if (functionName == "fe3d:network_client_get_pending_ports")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkClient_getPendingMessage();
-			if (result != nullptr)
+			auto messages = _fe3d.networkClient_getPendingMessages();
+			for (auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result->content));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.port));
+			}
+		}
+	}
+	else if (functionName == "fe3d:network_client_get_pending_messages")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto messages = _fe3d.networkClient_getPendingMessages();
+			for (auto& message : messages)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.content));
 			}
 		}
 	}

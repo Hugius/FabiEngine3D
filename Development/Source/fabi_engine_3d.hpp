@@ -777,14 +777,12 @@ public:
 	// Server interface - setters
 	void networkServer_start();
 	void networkServer_stop();
-	void networkServer_loadNextPendingMessage();
-	void networkServer_sendMessage(const string& ipAddress, const string& port, const string& content);
+	void networkServer_sendMessage(const NetworkMessage& message);
 	void networkServer_broadcastMessage(const string& content);
 
 	// Server interface - getters
 	const bool networkServer_isStarted();
-	const bool networkServer_isMessagePending();
-	const shared_ptr<NetworkMessage> networkServer_getPendingMessage();
+	const vector<NetworkMessage>& networkServer_getPendingMessages();
 
 	// Client interface - setters
 	void networkClient_start(const string& serverIP);
@@ -793,9 +791,8 @@ public:
 
 	// Client interface - getters
 	const bool networkClient_isStarted();
-	const bool networkClient_isConnected();
-	const bool networkClient_isMessagePending();
-	const shared_ptr<NetworkMessage> networkClient_getPendingMessage();
+	const bool networkClient_isConnectedToServer();
+	const vector<NetworkMessage>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

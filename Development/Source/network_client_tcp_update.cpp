@@ -15,7 +15,7 @@ void NetworkClientTCP::update()
 	}
 
 	// Clear all received messages from last frame
-	_receivedMessage = nullptr;
+	_pendingMessages.clear();
 
 	// Handle server connection
 	if (!_isConnectedToServer)
@@ -52,21 +52,28 @@ void NetworkClientTCP::update()
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageContent = std::get<1>(messageResult);
 		auto messageErrorCode = std::get<2>(messageResult);
-		messageContent = messageContent.substr(0, messageContent.find(']') + 1);
+		//messageContent = messageContent.substr(0, messageContent.find(']') + 1); <---
+
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			_receivedMessage = make_shared<NetworkMessage>("192.168.1.134", "123", messageContent); // <---
+			// Extract IP address & port
+			auto serverIP = NetworkUtils::extractIP(_serverSocketID);
+			auto serverPort = NetworkUtils::extractPort(_serverSocketID);
+
+			// Add message
+			_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, messageContent));
 		}
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{
-			//Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" disconnected from the server!");
-			//_disconnectClient(ipAddress);
+			_closeConnection();
+			_initiateConnection();
 		}
 		else // Receive failed
 		{
 			if (messageErrorCode == WSAECONNRESET) // Server lost socket connection
 			{
-				//Logger::throwInfo("Networking client with IP \"" + ipAddress + "\" lost connection with the server!");
+				_closeConnection();
+				_initiateConnection();
 			}
 			else // Something really bad happened
 			{

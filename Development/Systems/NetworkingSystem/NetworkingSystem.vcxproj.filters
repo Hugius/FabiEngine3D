@@ -33,6 +33,9 @@
     <ClInclude Include="..\..\Source\network_client_tcp.hpp">
       <Filter>Client\TCP</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\network_utils.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\network_server_tcp_main.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\network_client_tcp_update.cpp">
       <Filter>Client\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\network_utils.cpp">
+      <Filter>Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

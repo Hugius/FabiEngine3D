@@ -11,9 +11,9 @@ bool NetworkServerTCP::isRunning()
 	return _isRunning;
 }
 
-const vector<NetworkMessage>& NetworkServerTCP::getReceivedMessages()
+const vector<NetworkMessage>& NetworkServerTCP::getPendingMessages()
 {
-	return _receivedMessages;
+	return _pendingMessages;
 }
 
 void NetworkServerTCP::sendMessage(const NetworkMessage& message)
@@ -58,16 +58,13 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 void NetworkServerTCP::_acceptClient(SOCKET clientSocketID)
 {
 	// Extract IP address & port
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(clientSocketID, (struct sockaddr*)&socketAddress, &socketAddressLength);
-	auto ipAddress = string(inet_ntoa(socketAddress.sin_addr));
-	auto port = std::to_string(socketAddress.sin_port);
+	auto clientIP = NetworkUtils::extractIP(clientSocketID);
+	auto clientPort = NetworkUtils::extractPort(clientSocketID);
 
 	// Save client data
 	_clientSocketIDs.push_back(clientSocketID);
-	_clientIPs.push_back(ipAddress);
-	_clientPorts.push_back(port);
+	_clientIPs.push_back(clientIP);
+	_clientPorts.push_back(clientPort);
 
 	// Spawn thread for receiving messages
 	_messageThreads.push_back(std::async(std::launch::async, &NetworkServerTCP::_waitForClientMessage, this, clientSocketID));
@@ -81,11 +78,11 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 		if (clientSocketID == _clientSocketIDs[i])
 		{
 			// Temporary values
-			auto ipAddress = _clientIPs[i];
-			auto port = _clientPorts[i];
+			auto clientIP = _clientIPs[i];
+			auto clientPort = _clientPorts[i];
 
 			// Close connection
-			closesocket(_clientSocketIDs[i]);
+			closesocket(clientSocketID);
 
 			// Remove client data
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
@@ -94,7 +91,7 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			_messageThreads.erase(_messageThreads.begin() + i);
 
 			// Notify logger
-			Logger::throwInfo("Networking client \"" + ipAddress + ":" + port + "\" lost connection with the server!");
+			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
 			break;
 		}
 	}
@@ -108,8 +105,8 @@ SOCKET NetworkServerTCP::_waitForClientConnection(SOCKET listenSocketID)
 tuple<int, int, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
-	char buffer[MAX_MESSAGE_BYTES];
-	int bufferLength = MAX_MESSAGE_BYTES;
+	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
+	int bufferLength = NetworkUtils::MAX_MESSAGE_BYTES;
 	auto receiveStatusCode = recv(clientSocketID, buffer, bufferLength, 0);
 
 	if (receiveStatusCode > 0) // Message received correctly

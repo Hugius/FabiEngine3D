@@ -22,6 +22,7 @@
     <ClInclude Include="..\..\Source\network_client_tcp.hpp" />
     <ClInclude Include="..\..\Source\network_message.hpp" />
     <ClInclude Include="..\..\Source\network_server_tcp.hpp" />
+    <ClInclude Include="..\..\Source\network_utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\network_client_tcp_main.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="..\..\Source\network_server_tcp_misc.cpp" />
     <ClCompile Include="..\..\Source\network_server_tcp_update.cpp" />
     <ClCompile Include="..\..\Source\network_server_tcp_main.cpp" />
+    <ClCompile Include="..\..\Source\network_utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -70,9 +70,9 @@ void NetworkClientTCP::stop()
 	}
 
 	// Miscellaneous
+	_pendingMessages.clear();
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
-	_receivedMessage = nullptr;
 	_isRunning = false;
 	_isConnectedToServer = false;
 }

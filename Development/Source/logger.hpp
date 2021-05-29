@@ -21,6 +21,8 @@ using std::string;
 class Logger final
 {
 public:
+	Logger() = delete;
+
 	template<typename T, typename...Rest> 
 	inline static void throwInfo(T first, Rest...rest)
 	{

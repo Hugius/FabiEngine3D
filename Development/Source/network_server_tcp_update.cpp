@@ -15,7 +15,7 @@ void NetworkServerTCP::update()
 	}
 
 	// Clear all received messages from last frame
-	_receivedMessages.clear();
+	_pendingMessages.clear();
 
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
@@ -28,7 +28,7 @@ void NetworkServerTCP::update()
 		}
 
 		// Check if client is allowed to connect
-		if (_clientIPs.size() == MAX_CLIENT_COUNT)
+		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT)
 		{
 			_sendMessage(clientSocketID, "SERVER_FULL");
 			closesocket(clientSocketID);
@@ -64,12 +64,12 @@ BEGIN:
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageErrorCode = std::get<1>(messageResult);
 			auto messageContent = std::get<2>(messageResult);
-
+			std::cout << messageContent << std::endl;
 			//messageContent = messageContent.substr(0, messageContent.find(']') + 1); <---
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
-				_receivedMessages.push_back(NetworkMessage(ipAddress, port, messageContent));
+				_pendingMessages.push_back(NetworkMessage(ipAddress, port, messageContent));
 			}
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{

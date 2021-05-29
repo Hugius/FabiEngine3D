@@ -23,7 +23,9 @@ const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 
 void NetworkClientTCP::sendMessage(const string& content)
 {
-	auto sendStatusCode = send(_serverSocketID, content.c_str(), static_cast<int>(content.size()), 0);
+	// Add a semicolon to indicate end of this message
+	string messageContent = content + ';';
+	auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)

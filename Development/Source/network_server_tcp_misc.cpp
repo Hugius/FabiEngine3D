@@ -40,8 +40,11 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 
 void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content)
 {
-	auto sendStatusCode = send(clientSocketID, content.c_str(), static_cast<int>(content.size()), 0);
+	// Add a semicolon to indicate end of this message
+	string messageContent = content + ';';
+	auto sendStatusCode = send(clientSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
 
+	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() == WSAECONNRESET) // Client lost socket connection

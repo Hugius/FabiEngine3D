@@ -56,8 +56,6 @@ void NetworkServerTCP::start()
 	// Add options to the connection socket
 	DWORD optionValue = 1;
 	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
-	optionValue = 1;
-	setsockopt(_connectionSocketID, SOL_SOCKET, SO_RCVBUF, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
 
 	// Bind the listening socket
 	auto bindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));

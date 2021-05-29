@@ -52,8 +52,8 @@ BEGIN:
 	{
 		// Temporary values
 		auto clientSocketID = _clientSocketIDs[i];
-		auto ipAddress = _clientIPs[i];
-		auto port = _clientPorts[i];
+		auto clientIP = _clientIPs[i];
+		auto clientPort = _clientPorts[i];
 		auto& messageThread = _messageThreads[i];
 
 		// Check if the client sent any message
@@ -64,12 +64,23 @@ BEGIN:
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageErrorCode = std::get<1>(messageResult);
 			auto messageContent = std::get<2>(messageResult);
-			std::cout << messageContent << std::endl;
-			//messageContent = messageContent.substr(0, messageContent.find(']') + 1); <---
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
-				_pendingMessages.push_back(NetworkMessage(ipAddress, port, messageContent));
+				// Loop through received message(s)
+				string content = "";
+				for (const auto& character : messageContent)
+				{
+					if (character == ';') // End of current message
+					{
+						_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, content));
+						content = "";
+					}
+					else // Add to current message
+					{
+						content += character;
+					}
+				}
 			}
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{

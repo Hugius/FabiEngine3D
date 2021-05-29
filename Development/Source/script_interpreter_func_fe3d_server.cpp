@@ -62,7 +62,6 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (auto& message : messages)
 			{
-				std::cout << "hoi";
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.content));
 			}
 		}

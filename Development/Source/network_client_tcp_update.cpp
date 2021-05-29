@@ -52,7 +52,6 @@ void NetworkClientTCP::update()
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageContent = std::get<1>(messageResult);
 		auto messageErrorCode = std::get<2>(messageResult);
-		//messageContent = messageContent.substr(0, messageContent.find(']') + 1); <---
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
@@ -60,8 +59,20 @@ void NetworkClientTCP::update()
 			auto serverIP = NetworkUtils::extractIP(_serverSocketID);
 			auto serverPort = NetworkUtils::extractPort(_serverSocketID);
 
-			// Add message
-			_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, messageContent));
+			// Loop through received message(s)
+			string content = "";
+			for (const auto& character : messageContent)
+			{
+				if (character == ';') // End of current message
+				{
+					_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, content));
+					content = "";
+				}
+				else // Add to current message
+				{
+					content += character;
+				}
+			}
 		}
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{

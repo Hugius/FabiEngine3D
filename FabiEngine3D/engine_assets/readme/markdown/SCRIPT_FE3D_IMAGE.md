@@ -1,6 +1,6 @@
 # Image
-- `fe3d:image_is_existing`() ---> `BOOL`  
-  Returns true if image is existing.
+- `fe3d:image_is_existing`(`STR` ID) ---> `BOOL`  
+  Returns true if image with **ID** is existing.
 - `fe3d:image_find_ids`(`STR` subID) ---> `LIST`  
   Returns a list of strings with the IDs of all images which IDs start with **subID**.
 - `fe3d:image_get_all_ids`() ---> `LIST`  

@@ -1,6 +1,6 @@
 # Billboard
-- `fe3d:billboard_is_existing`() ---> `BOOL`  
-  Returns true if billboard is existing.
+- `fe3d:billboard_is_existing`(`STR` ID) ---> `BOOL`  
+  Returns true if billboard with **ID** is existing.
 - `fe3d:billboard_find_ids`(`STR` subID) ---> `LIST`  
   Returns a list of strings with the IDs of all billboards which IDs start with **subID**.
 - `fe3d:billboard_get_all_ids`() ---> `LIST`  

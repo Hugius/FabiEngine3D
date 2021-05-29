@@ -28,10 +28,14 @@ void NetworkServerTCP::update()
 		}
 
 		// Check if client is allowed to connect
-		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT)
+		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT || _clientIPs.size() == _customMaxClientCount)
 		{
+			// Reject client
 			_sendMessage(clientSocketID, "SERVER_FULL");
 			closesocket(clientSocketID);
+
+			// Logging
+			Logger::throwInfo("Networking client \"" + _clientIPs.back() + ":" + _clientPorts.back() + "\" tried to connect to the server: SERVER_FULL!");
 		}
 		else
 		{

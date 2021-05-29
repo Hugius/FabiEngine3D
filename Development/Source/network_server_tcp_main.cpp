@@ -20,7 +20,7 @@ NetworkServerTCP::~NetworkServerTCP()
 	}
 }
 
-void NetworkServerTCP::start()
+void NetworkServerTCP::start(unsigned int customMaxClientCount)
 {
 	// Validate runtime status
 	if (_isRunning)
@@ -78,6 +78,7 @@ void NetworkServerTCP::start()
 	_connectionThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientConnection, this, _connectionSocketID);
 
 	// Server is now operable
+	_customMaxClientCount = customMaxClientCount;
 	_isRunning = true;
 }
 
@@ -100,7 +101,8 @@ void NetworkServerTCP::stop()
 	}
 
 	// Miscellaneous
-	_connectionSocketID = INVALID_SOCKET;
 	_pendingMessages.clear();
+	_connectionSocketID = INVALID_SOCKET;
+	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 	_isRunning = false;
 }

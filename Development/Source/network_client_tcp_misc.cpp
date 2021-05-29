@@ -23,22 +23,29 @@ const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 
 void NetworkClientTCP::sendMessage(const string& content)
 {
-	// Add a semicolon to indicate end of this message
-	string messageContent = content + ';';
-	auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
-
-	// Check if sending went well
-	if (sendStatusCode == SOCKET_ERROR)
+	if (_isConnectedToServer)
 	{
-		if (WSAGetLastError() == WSAECONNRESET) // Lost connection with host
+		// Add a semicolon to indicate end of this message
+		string messageContent = content + ';';
+		auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
+
+		// Check if sending went well
+		if (sendStatusCode == SOCKET_ERROR)
 		{
-			_closeConnection();
-			_initiateConnection();
+			if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
+			{
+				_closeConnection();
+				_initiateConnection();
+			}
+			else // Something really bad happened
+			{
+				Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
+			}
 		}
-		else // Something really bad happened
-		{
-			Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
-		}
+	}
+	else
+	{
+		Logger::throwWarning("Networking client cannot send message to server!");
 	}
 }
 

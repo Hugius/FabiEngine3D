@@ -11,9 +11,32 @@ bool NetworkServerTCP::isRunning()
 	return _isRunning;
 }
 
+bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& port)
+{
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+	{
+		if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 const vector<NetworkMessage>& NetworkServerTCP::getPendingMessages()
 {
 	return _pendingMessages;
+}
+
+const vector<string>& NetworkServerTCP::getClientIPs()
+{
+	return _clientIPs;
+}
+
+const vector<string>& NetworkServerTCP::getClientPorts()
+{
+	return _clientPorts;
 }
 
 void NetworkServerTCP::sendMessage(const NetworkMessage& message)
@@ -27,12 +50,12 @@ void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 		}
 	}
 
-	Logger::throwWarning("Cannot send message to client \"" + message.ipAddress + ":" + message.port + "\"!");
+	Logger::throwWarning("Networking server cannot send message to client \"" + message.ipAddress + ":" + message.port + "\"!");
 }
 
 void NetworkServerTCP::broadcastMessage(const string& content)
 {
-	for (auto& socketID : _clientSocketIDs)
+	for (const auto& socketID : _clientSocketIDs)
 	{
 		_sendMessage(socketID, content);
 	}
@@ -47,7 +70,7 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		if (WSAGetLastError() == WSAECONNRESET) // Client lost socket connection
+		if (WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
 		{
 			_disconnectClient(clientSocketID);
 		}
@@ -93,7 +116,7 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			_clientPorts.erase(_clientPorts.begin() + i);
 			_messageThreads.erase(_messageThreads.begin() + i);
 
-			// Notify logger
+			// Logging
 			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
 			break;
 		}

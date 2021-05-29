@@ -775,14 +775,17 @@ public:
 	}
 
 	// Server interface - setters
-	void networkServer_start();
+	void networkServer_start(unsigned int customMaxClientCount);
 	void networkServer_stop();
 	void networkServer_sendMessage(const NetworkMessage& message);
 	void networkServer_broadcastMessage(const string& content);
 
 	// Server interface - getters
 	const bool networkServer_isStarted();
+	const bool networkServer_isClientConnected(const string& ipAddress, const string& port);
 	const vector<NetworkMessage>& networkServer_getPendingMessages();
+	const vector<string>& networkServer_getClientIPs();
+	const vector<string>& networkServer_getClientPorts();
 
 	// Client interface - setters
 	void networkClient_start(const string& serverIP);

@@ -23,15 +23,19 @@ public:
 	NetworkServerTCP();
 	~NetworkServerTCP();
 
-	void start();
+	void start(unsigned int customMaxClientCount);
 	void stop();
 	void update();
 	void sendMessage(const NetworkMessage& message);
 	void broadcastMessage(const string& content);
 
 	bool isRunning();
+	bool isClientConnected(const string& ipAddress, const string& port);
 
 	const vector<NetworkMessage>& getPendingMessages();
+
+	const vector<string>& getClientIPs();
+	const vector<string>& getClientPorts();
 
 private:
 	void _sendMessage(SOCKET clientSocketID, const string& content);
@@ -49,6 +53,8 @@ private:
 
 	vector<NetworkMessage> _pendingMessages;
 	vector<future<tuple<int, int, string>>> _messageThreads;
+
+	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 
 	bool _isRunning = false;
 };

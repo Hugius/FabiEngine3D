@@ -60,17 +60,16 @@ void NetworkClientTCP::update()
 			auto serverPort = NetworkUtils::extractPort(_serverSocketID);
 
 			// Loop through received message(s)
-			string content = "";
 			for (const auto& character : messageContent)
 			{
 				if (character == ';') // End of current message
 				{
-					_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, content));
-					content = "";
+					_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, _currentMessageBuild));
+					_currentMessageBuild = "";
 				}
 				else // Add to current message
 				{
-					content += character;
+					_currentMessageBuild += character;
 				}
 			}
 		}

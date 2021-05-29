@@ -72,17 +72,16 @@ BEGIN:
 			if (messageStatusCode > 0) // Message is received correctly
 			{
 				// Loop through received message(s)
-				string content = "";
 				for (const auto& character : messageContent)
 				{
 					if (character == ';') // End of current message
 					{
-						_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, content));
-						content = "";
+						_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, _currentMessageBuild));
+						_currentMessageBuild = "";
 					}
 					else // Add to current message
 					{
-						content += character;
+						_currentMessageBuild += character;
 					}
 				}
 			}

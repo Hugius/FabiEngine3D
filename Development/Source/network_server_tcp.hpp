@@ -54,6 +54,8 @@ private:
 	vector<NetworkMessage> _pendingMessages;
 	vector<future<tuple<int, int, string>>> _messageThreads;
 
+	string _currentMessageBuild = "";
+
 	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 
 	bool _isRunning = false;

@@ -71,6 +71,7 @@ void NetworkClientTCP::stop()
 
 	// Miscellaneous
 	_pendingMessages.clear();
+	_currentMessageBuild = "";
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
 	_isRunning = false;

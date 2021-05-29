@@ -50,6 +50,8 @@ private:
 
 	addrinfo* _addressInfo = nullptr;
 
+	string _currentMessageBuild = "";
+
 	bool _isRunning = false;
 	bool _isConnectedToServer = false;
 };

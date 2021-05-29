@@ -102,6 +102,7 @@ void NetworkServerTCP::stop()
 
 	// Miscellaneous
 	_pendingMessages.clear();
+	_currentMessageBuild = "";
 	_connectionSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 	_isRunning = false;

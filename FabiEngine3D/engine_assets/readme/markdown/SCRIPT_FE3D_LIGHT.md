@@ -1,6 +1,6 @@
 # Light
-- `fe3d:light_is_existing`() ---> `BOOL`  
-  Returns true if light is existing.
+- `fe3d:light_is_existing`(`STR` ID) ---> `BOOL`  
+  Returns true if light with **ID** is existing.
 - `fe3d:light_find_ids`(`STR` subID) ---> `LIST`  
   Returns a list of strings with the IDs of all lights which IDs start with **subID**.
 - `fe3d:light_get_all_ids`() ---> `LIST`  

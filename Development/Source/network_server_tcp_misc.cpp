@@ -67,6 +67,7 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking message cannot contain semicolons!");
+		return;
 	}
 
 	// Add a semicolon to indicate end of this message

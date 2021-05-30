@@ -35,10 +35,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Try to create new directory
-			auto status = _mkdir(newDirectoryPath.c_str());
-
-			// Check for error
-			if (status == -1)
+			if (_fe3d.misc_createNewDirectory(newDirectoryPath))
 			{
 				_throwScriptError("cannot create directory \"" + arguments[0].getString() + "\"!");
 			}

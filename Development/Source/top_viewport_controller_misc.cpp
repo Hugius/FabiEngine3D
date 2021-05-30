@@ -1,8 +1,7 @@
 #include "top_viewport_controller.hpp"
 
 #include <filesystem>
-#include <direct.h>
-#include <fstream>  
+#include <fstream>
 
 #define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
 
@@ -67,15 +66,15 @@ void TopViewportController::_updateProjectCreation()
 			else // Project is non-existent
 			{
 				// Generate new project directory
-				auto temp = _mkdir(newProjectDirectoryPath.c_str());
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath);
 
 				// Generate project subfolders
-				temp = _mkdir((newProjectDirectoryPath + "\\data").c_str());
-				temp = _mkdir((newProjectDirectoryPath + "\\saves").c_str());
-				temp = _mkdir((newProjectDirectoryPath + "\\scenes").c_str());
-				temp = _mkdir((newProjectDirectoryPath + "\\scenes\\custom").c_str());
-				temp = _mkdir((newProjectDirectoryPath + "\\scenes\\editor").c_str());
-				temp = _mkdir((newProjectDirectoryPath + "\\scripts").c_str());
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\data");
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\saves");
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes");
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes\\custom");
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes\\editor");
+				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scripts");
 
 				// Create new empty project files
 				auto file = std::ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));

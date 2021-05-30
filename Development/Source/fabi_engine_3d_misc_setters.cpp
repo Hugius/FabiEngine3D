@@ -184,3 +184,18 @@ void FabiEngine3D::misc_setLevelOfDetailDistance(float distance)
 {
 	_core->_modelEntityManager.setLodDistance(distance);
 }
+
+void FabiEngine3D::misc_setSoundsEnabled(bool enabled)
+{
+	_core->_audioPlayer.setSoundsEnabled(enabled);
+}
+
+void FabiEngine3D::misc_setMusicEnabled(bool enabled)
+{
+	_core->_audioPlayer.setMusicEnabled(enabled);
+}
+
+void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)
+{
+	_core->_audioPlayer.allocateChannels(count);
+}

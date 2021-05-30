@@ -875,6 +875,7 @@ public:
 	const bool misc_checkInterval(unsigned int frames);
 	const bool misc_isRaycastPositionOnTerrainValid();
 	const bool misc_isMillisecondTimerStarted();
+	const bool misc_createNewDirectory(const string& directoryPath);
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

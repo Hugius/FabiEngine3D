@@ -4,7 +4,7 @@
 #include "configuration.hpp"
 
 #include <chrono>
-#include <filesystem>
+#include <direct.h>
 
 const int FabiEngine3D::misc_getRandomInteger(int min, int max)
 {
@@ -140,7 +140,7 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 	string coreCount = to_string(sysInfo.dwNumberOfProcessors);
 
 	// Return
-	return nameString;
+	return string(nameString);
 }
 
 const string FabiEngine3D::misc_getGpuName()
@@ -378,19 +378,9 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 	return result;
 }
 
-void FabiEngine3D::misc_setSoundsEnabled(bool enabled)
+const bool FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
 {
-	_core->_audioPlayer.setSoundsEnabled(enabled);
-}
-
-void FabiEngine3D::misc_setMusicEnabled(bool enabled)
-{
-	_core->_audioPlayer.setMusicEnabled(enabled);
-}
-
-void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)
-{
-	_core->_audioPlayer.allocateChannels(count);
+	return (_mkdir(directoryPath.c_str()) != -1);
 }
 
 const int FabiEngine3D::misc_getMaxChannels()

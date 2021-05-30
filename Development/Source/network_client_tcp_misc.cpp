@@ -23,35 +23,36 @@ const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 
 void NetworkClientTCP::sendMessage(const string& content)
 {
-	if (_isConnectedToServer)
-	{
-		// Validate message semantics
-		if (std::find(content.begin(), content.end(), ';') != content.end())
-		{
-			Logger::throwWarning("Networking message cannot contain semicolons!");
-		}
-
-		// Add a semicolon to indicate end of this message
-		string messageContent = content + ';';
-		auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
-
-		// Check if sending went well
-		if (sendStatusCode == SOCKET_ERROR)
-		{
-			if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
-			{
-				_closeConnection();
-				_initiateConnection();
-			}
-			else // Something really bad happened
-			{
-				Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
-			}
-		}
-	}
-	else
+	// Validate server connection
+	if (!_isConnectedToServer)
 	{
 		Logger::throwWarning("Networking client cannot send message to server: not connected!");
+		return;
+	}
+
+	// Validate message semantics
+	if (std::find(content.begin(), content.end(), ';') != content.end())
+	{
+		Logger::throwWarning("Networking message cannot contain semicolons!");
+		return;
+	}
+
+	// Add a semicolon to indicate end of this message
+	string messageContent = content + ';';
+	auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
+
+	// Check if sending went well
+	if (sendStatusCode == SOCKET_ERROR)
+	{
+		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
+		{
+			_closeConnection();
+			_initiateConnection();
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
+		}
 	}
 }
 

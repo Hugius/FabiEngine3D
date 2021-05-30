@@ -13,6 +13,14 @@ bool NetworkServerTCP::isRunning()
 
 bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& port)
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before retrieving client connection status!");
+		return false;
+	}
+
+	// Try to find client
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
@@ -26,21 +34,46 @@ bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& 
 
 const vector<NetworkMessage>& NetworkServerTCP::getPendingMessages()
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before retrieving pending messages!");
+	}
+
 	return _pendingMessages;
 }
 
 const vector<string>& NetworkServerTCP::getClientIPs()
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before retrieving client IPs!");
+	}
+
 	return _clientIPs;
 }
 
 const vector<string>& NetworkServerTCP::getClientPorts()
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before retrieving client ports!");
+	}
+
 	return _clientPorts;
 }
 
 void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before sending messages!");
+	}
+
+	// Try to find client and send message
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		if (message.ipAddress == _clientIPs[i] && message.port == _clientPorts[i])
@@ -50,11 +83,19 @@ void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 		}
 	}
 
+	// Client not connected
 	Logger::throwWarning("Networking server cannot send message to client \"" + message.ipAddress + ":" + message.port + "\": not connected!");
 }
 
 void NetworkServerTCP::broadcastMessage(const string& content)
 {
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before broadcasting messages!");
+	}
+
+	// Send message to all connected clients
 	for (const auto& socketID : _clientSocketIDs)
 	{
 		_sendMessage(socketID, content);

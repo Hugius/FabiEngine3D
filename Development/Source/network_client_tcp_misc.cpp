@@ -13,16 +13,34 @@ bool NetworkClientTCP::isRunning()
 
 bool NetworkClientTCP::isConnectedToServer()
 {
+	// Check if client is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client must be running before retrieving connection status!");
+	}
+
 	return _isConnectedToServer;
 }
 
 const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 {
+	// Check if client is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client must be running before retrieving pending messages!");
+	}
+
 	return _pendingMessages;
 }
 
 void NetworkClientTCP::sendMessage(const string& content)
 {
+	// Check if client is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client must be running before sending messages!");
+	}
+
 	// Validate server connection
 	if (!_isConnectedToServer)
 	{

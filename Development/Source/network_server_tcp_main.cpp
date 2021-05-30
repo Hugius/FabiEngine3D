@@ -22,10 +22,17 @@ NetworkServerTCP::~NetworkServerTCP()
 
 void NetworkServerTCP::start(unsigned int customMaxClientCount)
 {
-	// Validate runtime status
+	// Must not be running
 	if (_isRunning)
 	{
 		Logger::throwWarning("Trying to start networking server: already running!");
+		return;
+	}
+
+	// Check if custom client count is not too high
+	if (customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT)
+	{
+		Logger::throwWarning("Trying to start networking server: maximum client count is ", NetworkUtils::MAX_CLIENT_COUNT, "!");
 		return;
 	}
 
@@ -87,7 +94,7 @@ void NetworkServerTCP::start(unsigned int customMaxClientCount)
 
 void NetworkServerTCP::stop()
 {
-	// Validate runtime status
+	// Must be running first
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Trying to stop networking server: not running!");

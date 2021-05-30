@@ -22,7 +22,7 @@ NetworkClientTCP::~NetworkClientTCP()
 
 void NetworkClientTCP::start(const string& serverIP, const string& serverPort)
 {
-	// Validate runtime status
+	// Must not be running
 	if (_isRunning)
 	{
 		Logger::throwWarning("Trying to start networking client: already running!");
@@ -53,7 +53,7 @@ void NetworkClientTCP::start(const string& serverIP, const string& serverPort)
 
 void NetworkClientTCP::stop()
 {
-	// Validate runtime status
+	// Must be running first
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Trying to stop networking client: not running!");

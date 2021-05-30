@@ -192,6 +192,9 @@ private:
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
 	bool _isDebugging = false;
+	bool _isExecutingInitialization = false;
+	bool _isExecutingUpdate = false;
+	bool _isExecutingDestruction = false;
 
 	// String to input type map
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =

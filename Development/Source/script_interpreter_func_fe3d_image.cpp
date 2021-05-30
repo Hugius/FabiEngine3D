@@ -13,7 +13,6 @@ bool ScriptInterpreter::_validateFe3dImageEntity(const string& ID)
 	if (!_fe3d.imageEntity_isExisting(ID))
 	{
 		_throwScriptError("requested image with ID \"" + ID + "\" does not exist!");
-
 		return false;
 	}
 

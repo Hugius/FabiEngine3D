@@ -10,6 +10,14 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
+			// CoreEngine must know if application is a network server
+			if (!_isExecutingInitialization)
+			{
+				_throwScriptError("network server can only be started in initialization script!");
+				return true;
+			}
+
+			// Start server
 			_fe3d.networkServer_start(arguments[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}

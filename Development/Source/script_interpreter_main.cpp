@@ -200,7 +200,11 @@ void ScriptInterpreter::executeInitialization()
 {
 	if (_initEntryID != "")
 	{
+		_isExecutingInitialization = true;
+
 		_executeScript(_initEntryID, ScriptType::INIT);
+
+		_isExecutingInitialization = false;
 	}
 }
 
@@ -208,6 +212,8 @@ void ScriptInterpreter::executeUpdate(bool debug)
 {
 	if (_updateEntryID != "")
 	{
+		_isExecutingUpdate = true;
+
 		// Start debugging if specified
 		_isDebugging = debug;
 		_debuggingTimes.clear();
@@ -234,6 +240,8 @@ void ScriptInterpreter::executeUpdate(bool debug)
 			}
 			_fe3d.logger_throwDebug("");
 		}
+
+		_isExecutingUpdate = false;
 	}
 }
 
@@ -241,7 +249,11 @@ void ScriptInterpreter::executeDestruction()
 {
 	if (_destroyEntryID != "")
 	{
+		_isExecutingDestruction = true;
+
 		_executeScript(_destroyEntryID, ScriptType::DESTROY);
+
+		_isExecutingDestruction = false;
 	}
 }
 

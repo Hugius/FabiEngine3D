@@ -13,7 +13,6 @@ bool ScriptInterpreter::_validateFe3dTextEntity(const string& ID)
 	if (!_fe3d.textEntity_isExisting(ID))
 	{
 		_throwScriptError("requested text with ID \"" + ID + "\" does not exist!");
-
 		return false;
 	}
 

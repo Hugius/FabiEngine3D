@@ -15,13 +15,13 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 		if (previewEntity)
 		{
 			_throwScriptError("requested billboard with ID \"" + ID.substr(1) + "\" does not exist!");
+			return false;
 		}
 		else
 		{
 			_throwScriptError("requested billboard with ID \"" + ID + "\" does not exist!");
+			return false;
 		}
-
-		return false;
 	}
 
 	return true;

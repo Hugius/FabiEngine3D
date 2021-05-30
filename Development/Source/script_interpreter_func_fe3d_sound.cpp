@@ -15,13 +15,13 @@ bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool previewE
 		if (previewEntity)
 		{
 			_throwScriptError("requested sound with ID \"" + ID.substr(1) + "\" does not exist!");
+			return false;
 		}
 		else
 		{
 			_throwScriptError("requested sound with ID \"" + ID + "\" does not exist!");
+			return false;
 		}
-
-		return false;
 	}
 
 	return true;

@@ -162,42 +162,26 @@ void CoreEngine::_setupApplication()
 		_window.disableColorKeying(keyingColor);
 	}
 
-	// Set window properties
-	_window.setSize(Config::getInst().getWindowSize());
-	Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
-	!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
-	Config::getInst().isGameExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
-	_window.showWindow();
-
-	// Only if in engine preview
-	if (Config::getInst().isGameExported())
+	// If the application is a game server, no window is needed
+	if (!Config::getInst().isGameExported() || (Config::getInst().isGameExported() && !_fe3d.networkServer_isStarted()))
 	{
-		// No fade in
-		_window.setOpacity(1.0f);
-	}
-	else
-	{
-		// Start smooth window fade in
-		_window.setOpacity(0.0f);
-	}
-}
+		// Set window properties
+		_window.setSize(Config::getInst().getWindowSize());
+		Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
+		!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
+		Config::getInst().isGameExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
+		_window.showWindow();
 
-void CoreEngine::_updateWindowFading()
-{
-	// Only if in engine preview
-	if (!Config::getInst().isGameExported())
-	{
-		static float opacity = 0.0f;
-
-		if (opacity < 1.0f) // Stop if window is 100% visible
+		// Only if in engine preview
+		if (Config::getInst().isGameExported())
 		{
-			_window.setOpacity(opacity);
-			opacity += 0.01f;
+			// No fade in
+			_window.setOpacity(1.0f);
 		}
-		if (opacity >= 1.0f) // Opacity must be exactly 100% after fading
+		else
 		{
-			opacity = 1.0f;
-			_window.setOpacity(opacity);
+			// Start smooth window fade in
+			_window.setOpacity(0.0f);
 		}
 	}
 }

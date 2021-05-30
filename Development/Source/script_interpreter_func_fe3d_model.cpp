@@ -15,13 +15,13 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 		if (previewEntity)
 		{
 			_throwScriptError("requested model with ID \"" + ID.substr(1) + "\" does not exist!");
+			return false;
 		}
 		else
 		{
 			_throwScriptError("requested model with ID \"" + ID + "\" does not exist!");
+			return false;
 		}
-
-		return false;
 	}
 
 	return true;

@@ -49,10 +49,10 @@ void TopViewportController::_updateProjectCreation()
 		if (_gui.getGlobalScreen()->checkValueForm("newProjectName", newProjectName))
 		{
 			// Get directory path for the new project
-			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectName;
+			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectName;
 
 			// Check if project already exists
-			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
+			if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath))
 			{
 				_fe3d.logger_throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
 			}
@@ -67,30 +67,30 @@ void TopViewportController::_updateProjectCreation()
 			else // Project is non-existent
 			{
 				// Generate new project directory
-				auto temp = _mkdir(newDirectoryPath.c_str());
+				auto temp = _mkdir(newProjectDirectoryPath.c_str());
 
 				// Generate project subfolders
-				temp = _mkdir((newDirectoryPath + "\\data").c_str());
-				temp = _mkdir((newDirectoryPath + "\\saves").c_str());
-				temp = _mkdir((newDirectoryPath + "\\scenes").c_str());
-				temp = _mkdir((newDirectoryPath + "\\scenes\\custom").c_str());
-				temp = _mkdir((newDirectoryPath + "\\scenes\\editor").c_str());
-				temp = _mkdir((newDirectoryPath + "\\scripts").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\data").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\saves").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\scenes").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\scenes\\custom").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\scenes\\editor").c_str());
+				temp = _mkdir((newProjectDirectoryPath + "\\scripts").c_str());
 
 				// Create new empty project files
-				auto file = std::ofstream(string(newDirectoryPath + "\\data\\animation.fe3d"));
+				auto file = std::ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\audio.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\audio.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\billboard.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\billboard.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\model.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\model.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\sky.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\sky.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\terrain.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\terrain.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\water.fe3d"));
+				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
 				file.close();
 
 				// Create settings file
@@ -154,35 +154,42 @@ void TopViewportController::_updateProjectLoading()
 		// Check if user clicked a project name
 		if (clickedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			// Load current project
-			_currentProjectID = clickedButtonID;
-			_applyProjectChange();
+			if (_isProjectCorrupted(clickedButtonID))
+			{
+				_fe3d.logger_throwWarning("Cannot load project: corrupted files/folders!");
+			}
+			else
+			{
+				// Load current project
+				_currentProjectID = clickedButtonID;
+				_applyProjectChange();
 
-			// Load settings for this project
-			_settingsEditor.loadSettings();
+				// Load settings for this project
+				_settingsEditor.loadSettings();
 
-			// Preload all big assets of this project
-			vector<string> texturePaths;
-			auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
-			auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
-			auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
-			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
-			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
-			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
-			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
-			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
-			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
-			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
-			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
-			_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
-			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
+				// Preload all big assets of this project
+				vector<string> texturePaths;
+				auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
+				auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
+				auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
+				auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
+				auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+				auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
+				texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
+				texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
+				texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
+				texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+				_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
+				_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
+				_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
-			// Logging
-			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
+				// Logging
+				_fe3d.logger_throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
-			// Miscellaneous
-			_loadingProject = false;
-			_gui.getGlobalScreen()->removeChoiceForm("projectList");
+				// Miscellaneous
+				_loadingProject = false;
+				_gui.getGlobalScreen()->removeChoiceForm("projectList");
+			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
@@ -313,4 +320,37 @@ void TopViewportController::_applyProjectChange()
 	_sceneEditor.setCurrentProjectID(_currentProjectID);
 	_scriptEditor.setCurrentProjectID(_currentProjectID);
 	_settingsEditor.setCurrentProjectID(_currentProjectID);
+}
+
+bool TopViewportController::_isProjectCorrupted(const string& projectName)
+{
+	// Compose full directory path
+	string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + projectName;
+
+	// Check if all default directories are still existing
+	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath) ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\data") ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\saves") ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
+		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scripts"))
+	{
+		return true;
+	}
+
+	// Check if all default files are still existing
+	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\game_settings.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\water.fe3d"))
+	{
+		return true;
+	}
+
+	return false;
 }

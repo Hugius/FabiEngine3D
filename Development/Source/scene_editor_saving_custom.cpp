@@ -22,10 +22,13 @@ void SceneEditor::saveCustomSceneToFile()
 	// Check if scene directory still exists
 	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
+	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
-		return;
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+	}
+	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
+	{
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
 	}
 
 	// Create or overwrite file

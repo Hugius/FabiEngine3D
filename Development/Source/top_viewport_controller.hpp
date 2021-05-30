@@ -43,6 +43,7 @@ private:
 	void _prepareProjectLoading();
 	void _saveCurrentProject();
 	void _applyProjectChange();
+	bool _isProjectCorrupted(const string& projectName);
 
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;

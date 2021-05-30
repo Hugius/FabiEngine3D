@@ -15,52 +15,60 @@ void ScriptEditor::loadScriptsFromFile()
 	// Clear last script
 	_script.reset();
 
-	// Retrieve all filenames in the scripts folder
-	vector<string> scriptFilenames;
+	// Compose full directory path
 	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
 		("projects\\" + _currentProjectID)) + "\\scripts\\");
-	for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
+
+	// Check if directory exists
+	if (_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		// Extract filename
-		string fileName = string(entry.path().u8string());
-		fileName.erase(0, directoryPath.size());
-
-		// Check if script file exists & check if the file extension is correct
-		if (_fe3d.misc_isFileExisting(directoryPath + fileName) && (fileName.substr(fileName.size() - 5, 5) == ".fe3d"))
+		// Retrieve all filenames in the scripts folder
+		for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 		{
-			// Load script file
-			std::ifstream file(directoryPath + fileName);
-			string line;
+			// Extract filename
+			string fileName = string(entry.path().u8string());
+			fileName.erase(0, directoryPath.size());
 
-			// Add software script file to script
-			string scriptName = fileName.substr(0, fileName.size() - 5); // No file extension
-			_script.addScriptFile(scriptName);
-
-			// Extract cursor indices
-			unsigned int cursorLineIndex, cursorCharIndex;
-			std::getline(file, line);
-			std::istringstream iss(line);
-			iss >> cursorLineIndex >> cursorCharIndex;
-			_script.getScriptFile(scriptName)->setCursorLineIndex(cursorLineIndex);
-			_script.getScriptFile(scriptName)->setCursorCharIndex(cursorCharIndex);
-
-			// Extract script lines
-			unsigned int lineIndex = 0;
-			while (std::getline(file, line))
+			// Check if script file exists & check if the file extension is correct
+			if (_fe3d.misc_isFileExisting(directoryPath + fileName) && (fileName.substr(fileName.size() - 5, 5) == ".fe3d"))
 			{
-				// Add new scriptline
-				_script.getScriptFile(scriptName)->insertNewLine(lineIndex++, line);
+				// Load script file
+				std::ifstream file(directoryPath + fileName);
+				string line;
+
+				// Add software script file to script
+				string scriptName = fileName.substr(0, fileName.size() - 5); // No file extension
+				_script.addScriptFile(scriptName);
+
+				// Extract cursor indices
+				unsigned int cursorLineIndex, cursorCharIndex;
+				std::getline(file, line);
+				std::istringstream iss(line);
+				iss >> cursorLineIndex >> cursorCharIndex;
+				_script.getScriptFile(scriptName)->setCursorLineIndex(cursorLineIndex);
+				_script.getScriptFile(scriptName)->setCursorCharIndex(cursorCharIndex);
+
+				// Extract script lines
+				unsigned int lineIndex = 0;
+				while (std::getline(file, line))
+				{
+					// Add new scriptline
+					_script.getScriptFile(scriptName)->insertNewLine(lineIndex++, line);
+				}
+
+				// Close file
+				file.close();
 			}
-
-			// Close file
-			file.close();
 		}
+
+		// Logging
+		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
+		_isScriptLoadedFromFile = true;
 	}
-
-	// Logging
-	_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
-
-	_isScriptLoadedFromFile = true;
+	else
+	{
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
+	}
 }
 
 void ScriptEditor::saveScriptsToFile()

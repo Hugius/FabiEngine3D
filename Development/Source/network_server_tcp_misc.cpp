@@ -50,7 +50,7 @@ void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 		}
 	}
 
-	Logger::throwWarning("Networking server cannot send message to client \"" + message.ipAddress + ":" + message.port + "\"!");
+	Logger::throwWarning("Networking server cannot send message to client \"" + message.ipAddress + ":" + message.port + "\": not connected!");
 }
 
 void NetworkServerTCP::broadcastMessage(const string& content)
@@ -63,6 +63,12 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 
 void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content)
 {
+	// Validate message semantics
+	if (std::find(content.begin(), content.end(), ';') != content.end())
+	{
+		Logger::throwWarning("Networking message cannot contain semicolons!");
+	}
+
 	// Add a semicolon to indicate end of this message
 	string messageContent = content + ';';
 	auto sendStatusCode = send(clientSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);

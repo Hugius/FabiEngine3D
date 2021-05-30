@@ -167,7 +167,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: animation.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
 	}
 }
 

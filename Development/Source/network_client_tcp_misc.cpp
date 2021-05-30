@@ -25,6 +25,12 @@ void NetworkClientTCP::sendMessage(const string& content)
 {
 	if (_isConnectedToServer)
 	{
+		// Validate message semantics
+		if (std::find(content.begin(), content.end(), ';') != content.end())
+		{
+			Logger::throwWarning("Networking message cannot contain semicolons!");
+		}
+
 		// Add a semicolon to indicate end of this message
 		string messageContent = content + ';';
 		auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
@@ -45,7 +51,7 @@ void NetworkClientTCP::sendMessage(const string& content)
 	}
 	else
 	{
-		Logger::throwWarning("Networking client cannot send message to server!");
+		Logger::throwWarning("Networking client cannot send message to server: not connected!");
 	}
 }
 

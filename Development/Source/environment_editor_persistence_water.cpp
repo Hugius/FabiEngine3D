@@ -68,7 +68,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: water.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
 	}
 
 	return {};
@@ -170,7 +170,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: water.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
 	}
 }
 

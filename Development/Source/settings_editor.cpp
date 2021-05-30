@@ -73,7 +73,7 @@ void SettingsEditor::loadSettings()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: game_settings.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"game_settings.fe3d\" missing!");
 	}
 }
 

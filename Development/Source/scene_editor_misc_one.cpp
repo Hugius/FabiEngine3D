@@ -194,7 +194,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	return sceneIDs;
@@ -202,16 +202,18 @@ vector<string> SceneEditor::_loadSceneIDs()
 
 void SceneEditor::_deleteSceneFile(const string& sceneID)
 {
-	// Check if scene file is still existing
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
 		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + sceneID + ".fe3d";
+
+	// Check if scene file is still existing
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::filesystem::remove_all(filePath);
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectID + "\"!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
 	}
 }
 

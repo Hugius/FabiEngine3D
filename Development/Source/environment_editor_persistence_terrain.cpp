@@ -102,7 +102,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: terrain.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
 	}
 
 	return {};
@@ -229,7 +229,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: terrain.fe3d missing!");
+		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
 	}
 }
 

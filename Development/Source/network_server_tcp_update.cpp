@@ -44,9 +44,6 @@ void NetworkServerTCP::update()
 			// Extract IP address & port
 			auto clientIP = NetworkUtils::extractIP(clientSocketID);
 			auto clientPort = NetworkUtils::extractPort(clientSocketID);
-
-			// Logging
-			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" tried to connect to the server: SERVER_FULL!");
 		}
 		else
 		{

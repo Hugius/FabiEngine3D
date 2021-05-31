@@ -20,7 +20,8 @@ void CoreEngine::_updateApplication()
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 	_timer.stopDeltaPart();
 
-	if (!_fe3d.networkServer_isStarted())
+	// An exported server application does not have engine updates
+	if (!(_fe3d.engine_isGameExported() && _fe3d.networkServer_isStarted()))
 	{
 		// Only update 3D if engine not paused
 		if (!_isPaused)
@@ -69,7 +70,7 @@ void CoreEngine::_updateApplication()
 			_timer.stopDeltaPart();
 		}
 
-		// Always update 2D logic (except for sprite animations)
+		// Always update 2D logic (except for sprite animations), because of engine GUI interaction
 		_timer.startDeltaPart("imageTextUpdate");
 		(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : void();
 		_imageEntityManager.update();

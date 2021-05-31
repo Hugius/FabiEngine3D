@@ -35,7 +35,7 @@ const bool FabiEngine3D::networkServer_isStarted()
 
 const bool FabiEngine3D::networkServer_isClientConnected(const string& ipAddress, const string& port)
 {
-	return false;
+	return _core->_networkServerTCP.isClientConnected(ipAddress, port);
 }
 
 const vector<NetworkMessage>& FabiEngine3D::networkServer_getPendingMessages()

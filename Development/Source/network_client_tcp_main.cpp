@@ -74,6 +74,8 @@ void NetworkClientTCP::stop()
 	_currentMessageBuild = "";
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
+	_pingMS = 0;
+	_lastTimeMS = 0;
 	_isRunning = false;
 	_isConnectedToServer = false;
 }

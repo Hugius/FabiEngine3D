@@ -795,6 +795,7 @@ public:
 	// Client interface - getters
 	const bool networkClient_isStarted();
 	const bool networkClient_isConnectedToServer();
+	const unsigned int networkClient_getPingMS();
 	const vector<NetworkMessage>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters

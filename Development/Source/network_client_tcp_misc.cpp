@@ -6,12 +6,12 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-bool NetworkClientTCP::isRunning()
+const bool NetworkClientTCP::isRunning()
 {
 	return _isRunning;
 }
 
-bool NetworkClientTCP::isConnectedToServer()
+const bool NetworkClientTCP::isConnectedToServer()
 {
 	// Check if client is even running
 	if (!_isRunning)
@@ -20,6 +20,17 @@ bool NetworkClientTCP::isConnectedToServer()
 	}
 
 	return _isConnectedToServer;
+}
+
+const unsigned int NetworkClientTCP::getPingMS()
+{
+	// Check if client is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client must be running before retrieving server ping!");
+	}
+
+	return _pingMS;
 }
 
 const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
@@ -52,6 +63,13 @@ void NetworkClientTCP::sendMessage(const string& content)
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking message cannot contain semicolons!");
+		return;
+	}
+
+	// Check if message is not reserved
+	if (NetworkUtils::isMessageReserved(content))
+	{
+		Logger::throwWarning("Networking message is reserved!");
 		return;
 	}
 
@@ -123,4 +141,9 @@ tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSoc
 	{
 		return make_tuple(receiveResult, "", WSAGetLastError());
 	}
+}
+
+unsigned int NetworkClientTCP::_getCurrentTimeMS()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }

@@ -44,7 +44,15 @@ void NetworkClientTCP::update()
 		return;
 	}
 
-	// Check if the client sent any message
+	// Update server ping
+	if (!_isWaitingForPing)
+	{
+		sendMessage("PING");
+		_isWaitingForPing = true;
+		_lastTimeMS = _getCurrentTimeMS();
+	}
+
+	// Check if the server sent any message
 	if (_serverMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
@@ -64,8 +72,18 @@ void NetworkClientTCP::update()
 			{
 				if (character == ';') // End of current message
 				{
-					_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, _currentMessageBuild));
-					_currentMessageBuild = "";
+					if (_currentMessageBuild == "PING") // Handle ping response
+					{
+						auto currentTimeMS = _getCurrentTimeMS();
+						_pingMS = (currentTimeMS - _lastTimeMS);
+						_isWaitingForPing = false;
+						_currentMessageBuild = "";
+					}
+					else // Handle other messages
+					{
+						_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, _currentMessageBuild));
+						_currentMessageBuild = "";
+					}
 				}
 				else // Add to current message
 				{

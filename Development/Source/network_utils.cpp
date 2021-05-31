@@ -21,3 +21,8 @@ const string NetworkUtils::extractPort(SOCKET socket)
 	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
 	return std::to_string(socketAddress.sin_port);
 }
+
+const bool NetworkUtils::isMessageReserved(const string& message)
+{
+	return (message == "SERVER_FULL") and (message == "PING");
+}

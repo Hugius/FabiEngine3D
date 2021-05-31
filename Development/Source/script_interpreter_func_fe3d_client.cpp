@@ -32,7 +32,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_client_is_connected")
+	else if (functionName == "fe3d:network_client_is_connected_to_server")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -51,6 +51,15 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			{
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.content));
 			}
+		}
+	}
+	else if (functionName == "fe3d:network_client_get_ping")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.networkClient_getPingMS();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 		}
 	}
 	else if (functionName == "fe3d:network_client_send_message")

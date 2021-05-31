@@ -3,13 +3,11 @@
 #include "network_message.hpp"
 #include "network_utils.hpp"
 
-#include <string>
 #include <future>
 #include <vector>
 #include <memory>
 #include <tuple>
 
-using std::string;
 using std::vector;
 using std::future;
 using std::shared_ptr;

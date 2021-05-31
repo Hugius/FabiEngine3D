@@ -33,6 +33,11 @@ const bool FabiEngine3D::networkClient_isConnectedToServer()
 	return _core->_networkClientTCP.isConnectedToServer();
 }
 
+const unsigned int FabiEngine3D::networkClient_getPingMS()
+{
+	return _core->_networkClientTCP.getPingMS();
+}
+
 const vector<NetworkMessage>& FabiEngine3D::networkClient_getPendingMessages()
 {
 	return _core->_networkClientTCP.getPendingMessages();

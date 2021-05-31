@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_server_is_connected")
+	else if (functionName == "fe3d:network_server_is_client_connected")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 

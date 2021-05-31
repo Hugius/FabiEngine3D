@@ -76,8 +76,16 @@ BEGIN:
 				{
 					if (character == ';') // End of current message
 					{
-						_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, _currentMessageBuild));
-						_currentMessageBuild = "";
+						if (_currentMessageBuild == "PING") // Handle ping response
+						{
+							_sendMessage(clientSocketID, "PING");
+							_currentMessageBuild = "";
+						}
+						else // Handle other messages
+						{
+							_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, _currentMessageBuild));
+							_currentMessageBuild = "";
+						}
 					}
 					else // Add to current message
 					{

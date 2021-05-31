@@ -8,6 +8,7 @@
 #include <vector>
 #include <memory>
 #include <tuple>
+#include <chrono>
 
 using std::string;
 using std::vector;
@@ -30,8 +31,10 @@ public:
 	void update();
 	void sendMessage(const string& content);
 
-	bool isRunning();
-	bool isConnectedToServer();
+	const bool isRunning();
+	const bool isConnectedToServer();
+
+	const unsigned int getPingMS();
 
 	const vector<NetworkMessage>& getPendingMessages();
 
@@ -40,6 +43,7 @@ private:
 	void _closeConnection();
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
+	unsigned int _getCurrentTimeMS();
 
 	SOCKET _serverSocketID;
 
@@ -52,6 +56,10 @@ private:
 
 	string _currentMessageBuild = "";
 
+	unsigned int _pingMS = 0;
+	unsigned int _lastTimeMS = 0;
+
 	bool _isRunning = false;
 	bool _isConnectedToServer = false;
+	bool _isWaitingForPing = false;
 };

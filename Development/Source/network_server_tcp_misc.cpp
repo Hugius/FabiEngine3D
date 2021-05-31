@@ -111,6 +111,13 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 		return;
 	}
 
+	// Check if message is not reserved
+	if (NetworkUtils::isMessageReserved(content))
+	{
+		Logger::throwWarning("Networking message is reserved!");
+		return;
+	}
+
 	// Add a semicolon to indicate end of this message
 	string messageContent = content + ';';
 	auto sendStatusCode = send(clientSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);

@@ -46,6 +46,11 @@ const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
 
 void NetworkClientTCP::sendMessage(const string& content)
 {
+	_sendMessage(content, false);
+}
+
+void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
+{
 	// Check if client is even running
 	if (!_isRunning)
 	{
@@ -66,10 +71,10 @@ void NetworkClientTCP::sendMessage(const string& content)
 		return;
 	}
 
-	// Check if message is not reserved
-	if (NetworkUtils::isMessageReserved(content))
+	// Check if message is reserved
+	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking message is reserved!");
+		Logger::throwWarning("Networking message \"" + content + "\" is reserved!");
 		return;
 	}
 
@@ -145,5 +150,5 @@ tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSoc
 
 unsigned int NetworkClientTCP::_getCurrentTimeMS()
 {
-	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	return static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 }

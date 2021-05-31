@@ -28,6 +28,7 @@ void NetworkClientTCP::update()
 			if (errorCode == 0) // Successfully connected with server
 			{
 				_isConnectedToServer = true;
+				_sendMessage(_username, false);
 				_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
@@ -47,7 +48,7 @@ void NetworkClientTCP::update()
 	// Update server ping
 	if (!_isWaitingForPing)
 	{
-		sendMessage("PING");
+		_sendMessage("PING", true);
 		_isWaitingForPing = true;
 		_lastTimeMS = _getCurrentTimeMS();
 	}
@@ -98,7 +99,7 @@ void NetworkClientTCP::update()
 		}
 		else // Receive failed
 		{
-			if (messageErrorCode == WSAECONNRESET) // Server lost socket connection
+			if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Server lost socket connection
 			{
 				_closeConnection();
 				_initiateConnection();

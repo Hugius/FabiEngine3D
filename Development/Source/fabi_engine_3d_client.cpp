@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::networkClient_start(const string& serverIP)
+void FabiEngine3D::networkClient_start(const string& serverIP, const string& username)
 {
-	_core->_networkClientTCP.start(serverIP, NetworkUtils::SERVER_PORT);
+	_core->_networkClientTCP.start(serverIP, NetworkUtils::SERVER_PORT, username);
 }
 
 void FabiEngine3D::networkClient_stop()

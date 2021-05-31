@@ -20,13 +20,29 @@ NetworkClientTCP::~NetworkClientTCP()
 	}
 }
 
-void NetworkClientTCP::start(const string& serverIP, const string& serverPort)
+void NetworkClientTCP::start(const string& serverIP, const string& serverPort, const string& username)
 {
 	// Must not be running
 	if (_isRunning)
 	{
 		Logger::throwWarning("Trying to start networking client: already running!");
 		return;
+	}
+
+	// Validate username
+	if (username.empty())
+	{
+		Logger::throwWarning("Trying to start networking client: empty username!");
+		return;
+	}
+	else if (NetworkUtils::isMessageReserved(username))
+	{
+		Logger::throwWarning("Trying to start networking client: username is reserved!");
+		return;
+	}
+	else
+	{
+		_username = username;
 	}
 
 	// Compose address info hints
@@ -72,6 +88,7 @@ void NetworkClientTCP::stop()
 	// Miscellaneous
 	_pendingMessages.clear();
 	_currentMessageBuild = "";
+	_username = "";
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
 	_pingMS = 0;

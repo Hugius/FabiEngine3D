@@ -5,12 +5,12 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	// Determine type of function
 	if (functionName == "fe3d:network_client_start")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.networkClient_start(arguments[0].getString());
+			_fe3d.networkClient_start(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

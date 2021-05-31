@@ -76,10 +76,15 @@ void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 	// Try to find client and send message
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		if (message.ipAddress == _clientIPs[i] && message.port == _clientPorts[i])
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
 		{
-			_sendMessage(_clientSocketIDs[i], message.content);
-			return;
+			// Check if client is found
+			if (message.ipAddress == _clientIPs[i] && message.port == _clientPorts[i])
+			{
+				_sendMessage(_clientSocketIDs[i], message.content, false);
+				return;
+			}
 		}
 	}
 
@@ -96,13 +101,17 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 	}
 
 	// Send message to all connected clients
-	for (const auto& socketID : _clientSocketIDs)
+	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		_sendMessage(socketID, content);
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
+		{
+			_sendMessage(_clientSocketIDs[i], content, false);
+		}
 	}
 }
 
-void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content)
+void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
 {
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
@@ -112,9 +121,9 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 	}
 
 	// Check if message is not reserved
-	if (NetworkUtils::isMessageReserved(content))
+	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking message is reserved!");
+		Logger::throwWarning("Networking message \"" + content + "\" is reserved!");
 		return;
 	}
 
@@ -146,6 +155,7 @@ void NetworkServerTCP::_acceptClient(SOCKET clientSocketID)
 	_clientSocketIDs.push_back(clientSocketID);
 	_clientIPs.push_back(clientIP);
 	_clientPorts.push_back(clientPort);
+	_clientUsernames.push_back("");
 
 	// Spawn thread for receiving messages
 	_messageThreads.push_back(std::async(std::launch::async, &NetworkServerTCP::_waitForClientMessage, this, clientSocketID));
@@ -169,11 +179,14 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);
 			_clientPorts.erase(_clientPorts.begin() + i);
+			_clientUsernames.erase(_clientUsernames.begin() + i);
 			_messageThreads.erase(_messageThreads.begin() + i);
 
 			// Logging
 			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
-			break;
+
+
+			return;
 		}
 	}
 }

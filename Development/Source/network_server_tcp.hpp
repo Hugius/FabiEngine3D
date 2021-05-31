@@ -36,7 +36,7 @@ public:
 	const vector<string>& getClientPorts();
 
 private:
-	void _sendMessage(SOCKET clientSocketID, const string& content);
+	void _sendMessage(SOCKET clientSocketID, const string& content, bool isReserved);
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET connectionSocketID);
@@ -45,7 +45,7 @@ private:
 	SOCKET _connectionSocketID;
 	future<SOCKET> _connectionThread;
 
-	SOCKET _rejectedClientSocketID;
+	vector<SOCKET> _rejectedClientSocketIDs;
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;

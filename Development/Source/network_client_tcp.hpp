@@ -26,7 +26,7 @@ public:
 	NetworkClientTCP();
 	~NetworkClientTCP();
 
-	void start(const string& serverIP, const string& serverPort);
+	void start(const string& serverIP, const string& serverPort, const string& username);
 	void stop();
 	void update();
 	void sendMessage(const string& content);
@@ -41,6 +41,7 @@ public:
 private:
 	void _initiateConnection();
 	void _closeConnection();
+	void _sendMessage(const string& content, bool isReserved);
 	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
 	unsigned int _getCurrentTimeMS();
@@ -55,6 +56,7 @@ private:
 	addrinfo* _addressInfo = nullptr;
 
 	string _currentMessageBuild = "";
+	string _username = "";
 
 	unsigned int _pingMS = 0;
 	unsigned int _lastTimeMS = 0;

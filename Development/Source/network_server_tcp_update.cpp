@@ -18,11 +18,21 @@ void NetworkServerTCP::update()
 	_pendingMessages.clear();
 
 	// Close rejected client connections
-	if (_rejectedClientSocketID != INVALID_SOCKET)
+	for (auto& socketID : _rejectedClientSocketIDs)
 	{
-		closesocket(_rejectedClientSocketID);
-		_rejectedClientSocketID = INVALID_SOCKET;
+		if (socketID != INVALID_SOCKET)
+		{
+			if (std::find(_clientSocketIDs.begin(), _clientSocketIDs.end(), socketID) == _clientSocketIDs.end()) // Not connected yet
+			{
+				closesocket(socketID);
+			}
+			else // Was already a connected client
+			{
+				_disconnectClient(socketID);
+			};
+		}
 	}
+	_rejectedClientSocketIDs.clear();
 
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
@@ -38,12 +48,8 @@ void NetworkServerTCP::update()
 		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT || _clientIPs.size() == _customMaxClientCount)
 		{
 			// Reject client
-			_sendMessage(clientSocketID, "SERVER_FULL");
-			_rejectedClientSocketID = clientSocketID;
-
-			// Extract IP address & port
-			auto clientIP = NetworkUtils::extractIP(clientSocketID);
-			auto clientPort = NetworkUtils::extractPort(clientSocketID);
+			_sendMessage(clientSocketID, "SERVER_FULL", true);
+			_rejectedClientSocketIDs.push_back(clientSocketID);
 		}
 		else
 		{
@@ -66,6 +72,7 @@ BEGIN:
 		auto clientSocketID = _clientSocketIDs[i];
 		auto clientIP = _clientIPs[i];
 		auto clientPort = _clientPorts[i];
+		auto& clientUsername = _clientUsernames[i];
 		auto& messageThread = _messageThreads[i];
 
 		// Check if the client sent any message
@@ -84,17 +91,35 @@ BEGIN:
 				{
 					if (character == ';') // End of current message
 					{
-						if (_currentMessageBuild == "PING") // Handle ping response
+						if (clientUsername.empty()) // Handle username message
 						{
-							_sendMessage(clientSocketID, "PING");
+							// Check if username does not exist yet
+							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentMessageBuild) == _clientUsernames.end())
+							{
+								clientUsername = _currentMessageBuild;
+								_currentMessageBuild = "";
+							}
+							else
+							{
+								// Reject client
+								_sendMessage(clientSocketID, "USER_ALREADY_CONNECTED", true);
+								_rejectedClientSocketIDs.push_back(clientSocketID);
+								_currentMessageBuild = "";
+
+								// Prevent reading next messages
+								break;
+							}
+						}
+						else if (_currentMessageBuild == "PING") // Handle ping message
+						{
+							_sendMessage(clientSocketID, "PING", true);
 							_currentMessageBuild = "";
 						}
 						else // Handle other messages
 						{
 							_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, _currentMessageBuild));
 							_currentMessageBuild = "";
-						}
-					}
+						}					}
 					else // Add to current message
 					{
 						_currentMessageBuild += character;
@@ -108,7 +133,7 @@ BEGIN:
 			}
 			else // Receive failed
 			{
-				if (messageErrorCode == WSAECONNRESET) // Client lost socket connection
+				if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Client lost socket connection
 				{
 					_disconnectClient(clientSocketID);
 					goto BEGIN;

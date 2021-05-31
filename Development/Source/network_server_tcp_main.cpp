@@ -7,8 +7,7 @@
 #include <ws2tcpip.h>
 
 NetworkServerTCP::NetworkServerTCP() :
-	_connectionSocketID(INVALID_SOCKET),
-	_rejectedClientSocketID(INVALID_SOCKET)
+	_connectionSocketID(INVALID_SOCKET)
 {
 
 }
@@ -118,7 +117,6 @@ void NetworkServerTCP::stop()
 	_pendingMessages.clear();
 	_currentMessageBuild = "";
 	_connectionSocketID = INVALID_SOCKET;
-	_rejectedClientSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 	_isRunning = false;
 }

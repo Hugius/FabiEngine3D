@@ -784,8 +784,9 @@ public:
 	const bool networkServer_isStarted();
 	const bool networkServer_isClientConnected(const string& ipAddress, const string& port);
 	const vector<NetworkMessage>& networkServer_getPendingMessages();
-	const vector<string>& networkServer_getClientIPs();
-	const vector<string>& networkServer_getClientPorts();
+	const vector<string> networkServer_getClientIPs();
+	const vector<string> networkServer_getClientPorts();
+	const vector<string> networkServer_getClientUsernames();
 
 	// Client interface - setters
 	void networkClient_start(const string& serverIP, const string& username);

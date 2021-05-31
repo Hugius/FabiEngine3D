@@ -24,5 +24,5 @@ const string NetworkUtils::extractPort(SOCKET socket)
 
 const bool NetworkUtils::isMessageReserved(const string& message)
 {
-	return (message == "SERVER_FULL" || message == "USER_ALREADY_CONNECTED" || message == "PING");
+	return (message == "SERVER_FULL" || message == "USER_ALREADY_CONNECTED" || message == "PING" || message == "ACCEPTED");
 }

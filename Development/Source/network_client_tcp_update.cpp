@@ -73,7 +73,11 @@ void NetworkClientTCP::update()
 			{
 				if (character == ';') // End of current message
 				{
-					if (_currentMessageBuild == "PING") // Handle ping response
+					if (_currentMessageBuild == "ACCEPTED") // Handle accept message
+					{
+						_isAcceptedByServer = true;
+					}
+					else if (_currentMessageBuild == "PING") // Handle ping message
 					{
 						auto currentTimeMS = _getCurrentTimeMS();
 						_pingMS = (currentTimeMS - _lastTimeMS);

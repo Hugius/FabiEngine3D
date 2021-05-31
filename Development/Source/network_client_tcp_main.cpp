@@ -95,4 +95,5 @@ void NetworkClientTCP::stop()
 	_lastTimeMS = 0;
 	_isRunning = false;
 	_isConnectedToServer = false;
+	_isAcceptedByServer = false;
 }

@@ -23,9 +23,14 @@ bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& 
 	// Try to find client
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
 		{
-			return true;
+			// Check if client is found
+			if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
+			{
+				return true;
+			}
 		}
 	}
 
@@ -43,7 +48,7 @@ const vector<NetworkMessage>& NetworkServerTCP::getPendingMessages()
 	return _pendingMessages;
 }
 
-const vector<string>& NetworkServerTCP::getClientIPs()
+const vector<string> NetworkServerTCP::getClientIPs()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -51,10 +56,19 @@ const vector<string>& NetworkServerTCP::getClientIPs()
 		Logger::throwWarning("Networking server must be running before retrieving client IPs!");
 	}
 
-	return _clientIPs;
+	// Client must be fully accepted
+	vector<string> clientIPs;
+	for (size_t i = 0; i < _clientIPs.size(); i++)
+	{
+		if (!_clientUsernames[i].empty())
+		{
+			clientIPs.push_back(_clientIPs[i]);
+		}
+	}
+	return clientIPs;
 }
 
-const vector<string>& NetworkServerTCP::getClientPorts()
+const vector<string> NetworkServerTCP::getClientPorts()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -62,7 +76,36 @@ const vector<string>& NetworkServerTCP::getClientPorts()
 		Logger::throwWarning("Networking server must be running before retrieving client ports!");
 	}
 
-	return _clientPorts;
+	// Client must be fully accepted
+	vector<string> clientPorts;
+	for (size_t i = 0; i < _clientPorts.size(); i++)
+	{
+		if (!_clientUsernames[i].empty())
+		{
+			clientPorts.push_back(_clientPorts[i]);
+		}
+	}
+	return clientPorts;
+}
+
+const vector<string> NetworkServerTCP::getClientUsernames()
+{
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before retrieving client usernames!");
+	}
+
+	// Client must be fully accepted
+	vector<string> clientUsernames;
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
+	{
+		if (!_clientUsernames[i].empty())
+		{
+			clientUsernames.push_back(_clientUsernames[i]);
+		}
+	}
+	return clientUsernames;
 }
 
 void NetworkServerTCP::sendMessage(const NetworkMessage& message)
@@ -171,6 +214,7 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			// Temporary values
 			auto clientIP = _clientIPs[i];
 			auto clientPort = _clientPorts[i];
+			auto clientUsername = _clientUsernames[i];
 
 			// Close connection
 			closesocket(clientSocketID);
@@ -182,9 +226,11 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			_clientUsernames.erase(_clientUsernames.begin() + i);
 			_messageThreads.erase(_messageThreads.begin() + i);
 
-			// Logging
-			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
-
+			// Logging (if client was fully accepted)
+			if (!clientUsername.empty())
+			{
+				Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
+			}
 
 			return;
 		}

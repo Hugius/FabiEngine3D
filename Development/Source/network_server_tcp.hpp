@@ -32,8 +32,9 @@ public:
 
 	const vector<NetworkMessage>& getPendingMessages();
 
-	const vector<string>& getClientIPs();
-	const vector<string>& getClientPorts();
+	const vector<string> getClientIPs();
+	const vector<string> getClientPorts();
+	const vector<string> getClientUsernames();
 
 private:
 	void _sendMessage(SOCKET clientSocketID, const string& content, bool isReserved);

@@ -63,5 +63,6 @@ private:
 
 	bool _isRunning = false;
 	bool _isConnectedToServer = false;
+	bool _isAcceptedByServer = false;
 	bool _isWaitingForPing = false;
 };

@@ -22,9 +22,6 @@ NetworkServerTCP::~NetworkServerTCP()
 
 void NetworkServerTCP::start(unsigned int customMaxClientCount)
 {
-	// Logging
-	Logger::throwInfo("Starting network server...");
-
 	// Must not be running
 	if (_isRunning)
 	{
@@ -90,13 +87,13 @@ void NetworkServerTCP::start(unsigned int customMaxClientCount)
 	// Server is now operable
 	_customMaxClientCount = customMaxClientCount;
 	_isRunning = true;
+
+	// Logging
+	Logger::throwInfo("Started network server!");
 }
 
 void NetworkServerTCP::stop()
 {
-	// Logging
-	Logger::throwInfo("Stopping network server...");
-
 	// Must be running first
 	if (!_isRunning)
 	{
@@ -119,4 +116,7 @@ void NetworkServerTCP::stop()
 	_connectionSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 	_isRunning = false;
+
+	// Logging
+	Logger::throwInfo("Stopped network server!");
 }

@@ -19,7 +19,7 @@ const bool NetworkClientTCP::isConnectedToServer()
 		Logger::throwWarning("Networking client must be running before retrieving connection status!");
 	}
 
-	return _isConnectedToServer;
+	return (_isConnectedToServer && _isAcceptedByServer);
 }
 
 const unsigned int NetworkClientTCP::getPingMS()
@@ -57,8 +57,8 @@ void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 		Logger::throwWarning("Networking client must be running before sending messages!");
 	}
 
-	// Validate server connection
-	if (!_isConnectedToServer)
+	// Check if client is connected to the server & accepted by the server
+	if (!_isConnectedToServer && _isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client cannot send message to server: not connected!");
 		return;
@@ -114,6 +114,7 @@ void NetworkClientTCP::_closeConnection()
 {
 	closesocket(_serverSocketID);
 	_isConnectedToServer = false;
+	_isAcceptedByServer = false;
 }
 
 int NetworkClientTCP::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)

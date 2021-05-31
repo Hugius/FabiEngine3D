@@ -134,6 +134,18 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
+	else if (functionName == "fe3d:network_server_get_client_usernames")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto usernames = _fe3d.networkServer_getClientUsernames();
+			for (const auto& username : usernames)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, username));
+			}
+		}
+	}
 	else
 	{
 		return false;

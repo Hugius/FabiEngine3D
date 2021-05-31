@@ -55,9 +55,6 @@ void NetworkServerTCP::update()
 		{
 			// Save new client
 			_acceptClient(clientSocketID);
-
-			// Logging
-			Logger::throwInfo("Networking client \"" + _clientIPs.back() + ":" + _clientPorts.back() + "\" connected to the server!");
 		}
 
 		// Spawn connection thread again for next possible client
@@ -96,8 +93,13 @@ BEGIN:
 							// Check if username does not exist yet
 							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentMessageBuild) == _clientUsernames.end())
 							{
+								// Set new username
 								clientUsername = _currentMessageBuild;
+								_sendMessage(clientSocketID, "ACCEPTED", true);
 								_currentMessageBuild = "";
+
+								// Logging
+								Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" connected to the server!");
 							}
 							else
 							{

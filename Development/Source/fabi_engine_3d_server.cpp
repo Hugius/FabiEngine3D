@@ -43,12 +43,17 @@ const vector<NetworkMessage>& FabiEngine3D::networkServer_getPendingMessages()
 	return _core->_networkServerTCP.getPendingMessages();
 }
 
-const vector<string>& FabiEngine3D::networkServer_getClientIPs()
+const vector<string> FabiEngine3D::networkServer_getClientIPs()
 {
 	return _core->_networkServerTCP.getClientIPs();
 }
 
-const vector<string>& FabiEngine3D::networkServer_getClientPorts()
+const vector<string> FabiEngine3D::networkServer_getClientPorts()
 {
 	return _core->_networkServerTCP.getClientPorts();
+}
+
+const vector<string> FabiEngine3D::networkServer_getClientUsernames()
+{
+	return _core->_networkServerTCP.getClientUsernames();
 }

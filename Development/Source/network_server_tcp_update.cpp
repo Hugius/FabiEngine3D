@@ -17,6 +17,13 @@ void NetworkServerTCP::update()
 	// Clear all received messages from last frame
 	_pendingMessages.clear();
 
+	// Close rejected client connections
+	if (_rejectedClientSocketID != INVALID_SOCKET)
+	{
+		closesocket(_rejectedClientSocketID);
+		_rejectedClientSocketID = INVALID_SOCKET;
+	}
+
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
@@ -32,10 +39,14 @@ void NetworkServerTCP::update()
 		{
 			// Reject client
 			_sendMessage(clientSocketID, "SERVER_FULL");
-			closesocket(clientSocketID);
+			_rejectedClientSocketID = clientSocketID;
+
+			// Extract IP address & port
+			auto clientIP = NetworkUtils::extractIP(clientSocketID);
+			auto clientPort = NetworkUtils::extractPort(clientSocketID);
 
 			// Logging
-			Logger::throwInfo("Networking client \"" + _clientIPs.back() + ":" + _clientPorts.back() + "\" tried to connect to the server: SERVER_FULL!");
+			Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" tried to connect to the server: SERVER_FULL!");
 		}
 		else
 		{

@@ -7,7 +7,8 @@
 #include <ws2tcpip.h>
 
 NetworkServerTCP::NetworkServerTCP() :
-	_connectionSocketID(INVALID_SOCKET)
+	_connectionSocketID(INVALID_SOCKET),
+	_rejectedClientSocketID(INVALID_SOCKET)
 {
 
 }

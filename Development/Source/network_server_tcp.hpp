@@ -44,10 +44,12 @@ private:
 
 	SOCKET _connectionSocketID;
 	future<SOCKET> _connectionThread;
-	
+
+	SOCKET _rejectedClientSocketID;
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;
+	vector<string> _clientUsernames;
 
 	vector<NetworkMessage> _pendingMessages;
 	vector<future<tuple<int, int, string>>> _messageThreads;

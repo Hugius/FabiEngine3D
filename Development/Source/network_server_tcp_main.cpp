@@ -30,9 +30,9 @@ void NetworkServerTCP::start(unsigned int customMaxClientCount)
 	}
 
 	// Check if custom client count is not too high
-	if (customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT)
+	if ((customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT) || (customMaxClientCount <= 0))
 	{
-		Logger::throwWarning("Trying to start networking server: maximum client count is ", NetworkUtils::MAX_CLIENT_COUNT, "!");
+		Logger::throwWarning("Trying to start networking server: invalid maximum client count!");
 		return;
 	}
 

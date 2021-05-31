@@ -14,10 +14,12 @@ struct NetworkMessage final
 	NetworkMessage(
 		const string& ipAddress,
 		const string& port,
+		const string& username,
 		const string& content)
 		:
 		ipAddress(ipAddress),
 		port(port),
+		username(username),
 		content(content)
 	{
 
@@ -25,5 +27,6 @@ struct NetworkMessage final
 
 	const string ipAddress;
 	const string port;
+	const string username;
 	const string content;
 };

@@ -24,11 +24,12 @@ public:
 	void start(unsigned int customMaxClientCount);
 	void stop();
 	void update();
-	void sendMessage(const NetworkMessage& message);
+	void sendMessage(const string& username, const string& content);
 	void broadcastMessage(const string& content);
+	void disconnectClient(const string& username);
 
 	bool isRunning();
-	bool isClientConnected(const string& ipAddress, const string& port);
+	bool isClientConnected(const string& username);
 
 	const vector<NetworkMessage>& getPendingMessages();
 

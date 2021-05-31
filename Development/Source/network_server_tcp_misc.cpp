@@ -11,7 +11,7 @@ bool NetworkServerTCP::isRunning()
 	return _isRunning;
 }
 
-bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& port)
+bool NetworkServerTCP::isClientConnected(const string& username)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -21,13 +21,13 @@ bool NetworkServerTCP::isClientConnected(const string& ipAddress, const string& 
 	}
 
 	// Try to find client
-	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
 		if (!_clientUsernames[i].empty())
 		{
 			// Check if client is found
-			if (ipAddress == _clientIPs[i] && port == _clientPorts[i])
+			if (username == _clientUsernames[i])
 			{
 				return true;
 			}
@@ -108,7 +108,7 @@ const vector<string> NetworkServerTCP::getClientUsernames()
 	return clientUsernames;
 }
 
-void NetworkServerTCP::sendMessage(const NetworkMessage& message)
+void NetworkServerTCP::sendMessage(const string& username, const string& content)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -117,22 +117,22 @@ void NetworkServerTCP::sendMessage(const NetworkMessage& message)
 	}
 
 	// Try to find client and send message
-	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
 		// Client must be fully accepted
 		if (!_clientUsernames[i].empty())
 		{
 			// Check if client is found
-			if (message.ipAddress == _clientIPs[i] && message.port == _clientPorts[i])
+			if (username == _clientUsernames[i])
 			{
-				_sendMessage(_clientSocketIDs[i], message.content, false);
+				_sendMessage(_clientSocketIDs[i], content, false);
 				return;
 			}
 		}
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server cannot send message to client \"" + message.ipAddress + ":" + message.port + "\": not connected!");
+	Logger::throwWarning("Networking server cannot send message to client \"" + username + "\": not connected!");
 }
 
 void NetworkServerTCP::broadcastMessage(const string& content)
@@ -152,6 +152,33 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 			_sendMessage(_clientSocketIDs[i], content, false);
 		}
 	}
+}
+
+void NetworkServerTCP::disconnectClient(const string& username)
+{
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server must be running before disconnecting clients!");
+	}
+
+	// Try to find client and send message
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
+	{
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
+		{
+			// Check if client is found
+			if (username == _clientUsernames[i])
+			{
+				_disconnectClient(_clientSocketIDs[i]);
+				return;
+			}
+		}
+	}
+
+	// Client not connected
+	Logger::throwWarning("Networking server cannot disconnect client \"" + username + "\": not connected!");
 }
 
 void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
@@ -212,8 +239,6 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 		if (clientSocketID == _clientSocketIDs[i])
 		{
 			// Temporary values
-			auto clientIP = _clientIPs[i];
-			auto clientPort = _clientPorts[i];
 			auto clientUsername = _clientUsernames[i];
 
 			// Close connection
@@ -229,7 +254,7 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 			// Logging (if client was fully accepted)
 			if (!clientUsername.empty())
 			{
-				Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" lost connection with the server!");
+				Logger::throwInfo("Networking client \"" + clientUsername + "\" lost connection with the server!");
 			}
 
 			return;

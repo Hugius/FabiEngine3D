@@ -76,6 +76,7 @@ void NetworkClientTCP::update()
 					if (_currentMessageBuild == "ACCEPTED") // Handle accept message
 					{
 						_isAcceptedByServer = true;
+						_currentMessageBuild = "";
 					}
 					else if (_currentMessageBuild == "PING") // Handle ping message
 					{

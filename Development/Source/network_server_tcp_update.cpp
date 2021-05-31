@@ -20,17 +20,14 @@ void NetworkServerTCP::update()
 	// Close rejected client connections
 	for (auto& socketID : _rejectedClientSocketIDs)
 	{
-		if (socketID != INVALID_SOCKET)
+		if (std::find(_clientSocketIDs.begin(), _clientSocketIDs.end(), socketID) == _clientSocketIDs.end()) // Not connected yet
 		{
-			if (std::find(_clientSocketIDs.begin(), _clientSocketIDs.end(), socketID) == _clientSocketIDs.end()) // Not connected yet
-			{
-				closesocket(socketID);
-			}
-			else // Was already a connected client
-			{
-				_disconnectClient(socketID);
-			};
+			closesocket(socketID);
 		}
+		else // Was already a connected client
+		{
+			_disconnectClient(socketID);
+		};
 	}
 	_rejectedClientSocketIDs.clear();
 
@@ -99,7 +96,7 @@ BEGIN:
 								_currentMessageBuild = "";
 
 								// Logging
-								Logger::throwInfo("Networking client \"" + clientIP + ":" + clientPort + "\" connected to the server!");
+								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
 							}
 							else
 							{
@@ -119,7 +116,7 @@ BEGIN:
 						}
 						else // Handle other messages
 						{
-							_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, _currentMessageBuild));
+							_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, clientUsername, _currentMessageBuild));
 							_currentMessageBuild = "";
 						}					}
 					else // Add to current message

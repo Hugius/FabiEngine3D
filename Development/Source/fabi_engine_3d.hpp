@@ -777,12 +777,13 @@ public:
 	// Server interface - setters
 	void networkServer_start(unsigned int customMaxClientCount);
 	void networkServer_stop();
-	void networkServer_sendMessage(const NetworkMessage& message);
+	void networkServer_sendMessage(const string& username, const string& conten);
 	void networkServer_broadcastMessage(const string& content);
+	void networkServer_disconnectClient(const string& username);
 
 	// Server interface - getters
 	const bool networkServer_isStarted();
-	const bool networkServer_isClientConnected(const string& ipAddress, const string& port);
+	const bool networkServer_isClientConnected(const string& username);
 	const vector<NetworkMessage>& networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
 	const vector<string> networkServer_getClientPorts();

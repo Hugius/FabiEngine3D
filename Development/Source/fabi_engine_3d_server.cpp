@@ -18,9 +18,9 @@ void FabiEngine3D::networkServer_stop()
 	}
 }
 
-void FabiEngine3D::networkServer_sendMessage(const NetworkMessage& message)
+void FabiEngine3D::networkServer_sendMessage(const string& username, const string& content)
 {
-	_core->_networkServerTCP.sendMessage(message);
+	_core->_networkServerTCP.sendMessage(username, content);
 }
 
 void FabiEngine3D::networkServer_broadcastMessage(const string& content)
@@ -28,14 +28,19 @@ void FabiEngine3D::networkServer_broadcastMessage(const string& content)
 	_core->_networkServerTCP.broadcastMessage(content);
 }
 
+void FabiEngine3D::networkServer_disconnectClient(const string& username)
+{
+	_core->_networkServerTCP.disconnectClient(username);
+}
+
 const bool FabiEngine3D::networkServer_isStarted()
 {
 	return _core->_networkServerTCP.isRunning();
 }
 
-const bool FabiEngine3D::networkServer_isClientConnected(const string& ipAddress, const string& port)
+const bool FabiEngine3D::networkServer_isClientConnected(const string& username)
 {
-	return _core->_networkServerTCP.isClientConnected(ipAddress, port);
+	return _core->_networkServerTCP.isClientConnected(username);
 }
 
 const vector<NetworkMessage>& FabiEngine3D::networkServer_getPendingMessages()

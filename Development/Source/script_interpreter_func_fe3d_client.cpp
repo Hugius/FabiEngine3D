@@ -41,6 +41,17 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:network_client_send_message")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.networkClient_sendMessage(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:network_client_get_pending_messages")
 	{
 		// Validate arguments
@@ -60,17 +71,6 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		{
 			auto result = _fe3d.networkClient_getPingMS();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
-		}
-	}
-	else if (functionName == "fe3d:network_client_send_message")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.networkClient_sendMessage(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else

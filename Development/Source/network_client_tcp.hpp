@@ -44,7 +44,7 @@ public:
 	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
-	void _sendMessage(const string& content, bool isReserved);
+	bool _sendMessage(const string& content, bool isReserved);
 	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
 	unsigned int _getCurrentMilliseconds();

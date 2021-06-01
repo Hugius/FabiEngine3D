@@ -113,7 +113,7 @@ void NetworkClientTCP::disconnectFromServer()
 	// Must be connected first
 	if (!_isConnectedToServer)
 	{
-		Logger::throwWarning("Networking client tried to disconnect: not connected!");
+		Logger::throwError("Networking client tried to disconnect: not connected!");
 		return;
 	}
 
@@ -129,8 +129,13 @@ void NetworkClientTCP::disconnectFromServer()
 	// Reset variables
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
+	_pendingMessages.clear();
+	_serverPing = 0;
+	_lastMilliseconds = 0;
+	_currentMessageBuild = "";
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
+	_isWaitingForPing = false;
 }
 
 void NetworkClientTCP::stop()
@@ -148,11 +153,7 @@ void NetworkClientTCP::stop()
 		disconnectFromServer();
 	}
 
-	// Miscellaneous
-	_pendingMessages.clear();
-	_currentMessageBuild = "";
+	// Reset variables
 	_username = "";
-	_serverPing = 0;
-	_lastMilliseconds = 0;
 	_isRunning = false;
 }

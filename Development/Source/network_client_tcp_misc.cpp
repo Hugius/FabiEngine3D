@@ -42,10 +42,11 @@ const unsigned int NetworkClientTCP::getServerPing()
 	}
 
 	// Must be connected first
-	if (!_isConnectedToServer)
+	if ((!_isConnectedToServer && _isAcceptedByServer))
 	{
 		Logger::throwWarning("Networking client tried to retrieve server ping: not connected!");
 	}
+
 
 	return _serverPing;
 }
@@ -60,13 +61,7 @@ const vector<NetworkServerMessage>& NetworkClientTCP::getPendingMessages()
 	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve pending messages not running!");
-	}
-
-	// Must be connected first
-	if (!_isConnectedToServer)
-	{
-		Logger::throwWarning("Networking client tried to retrieve pending messages: not connected!");
+		Logger::throwWarning("Networking client tried to retrieve pending messages: not running!");
 	}
 
 	return _pendingMessages;
@@ -77,34 +72,34 @@ void NetworkClientTCP::sendMessage(const string& content)
 	_sendMessage(content, false);
 }
 
-void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
+bool NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 {
 	// Must be running first
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Networking client tried to send message: not running!");
-		return;
+		return false;
 	}
 
 	// Must be connected & accepted first
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	if ((!_isConnectedToServer && _isAcceptedByServer))
 	{
-		Logger::throwWarning("Networking client tried to send message: not running!");
-		return;
+		Logger::throwWarning("Networking client tried to send message: not connected!");
+		return false;
 	}
 
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking client tried to send message: cannot contain semicolons!");
-		return;
+		return false;
 	}
 
 	// Validate message availability
 	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwWarning("Networking client tried to send message: \"" + content + "\" is reserved!");
-		return;
+		return false;
 	}
 
 	// Add a semicolon to indicate end of this message
@@ -117,12 +112,15 @@ void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
 		{
 			disconnectFromServer();
+			return false;
 		}
 		else // Something really bad happened
 		{
 			Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
 		}
 	}
+
+	return true;
 }
 
 int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo)

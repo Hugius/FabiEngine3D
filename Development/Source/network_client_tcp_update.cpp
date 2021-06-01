@@ -33,7 +33,10 @@ void NetworkClientTCP::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				_sendMessage(_username, false);
+				if (!_sendMessage(_username, false))
+				{
+					return;
+				}
 
 				// Start a thread to listen for server messages
 				_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
@@ -62,7 +65,13 @@ void NetworkClientTCP::update()
 	// Update server ping
 	if (!_isWaitingForPing)
 	{
-		_sendMessage("PING", true);
+		// Send ping & validate
+		if (!_sendMessage("PING", true))
+		{
+			return;
+		}
+
+		// Start measuring time
 		_isWaitingForPing = true;
 		_lastMilliseconds = _getCurrentMilliseconds();
 	}
@@ -110,12 +119,14 @@ void NetworkClientTCP::update()
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{
 			disconnectFromServer();
+			return;
 		}
 		else // Receive failed
 		{
 			if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Server lost socket connection
 			{
 				disconnectFromServer();
+				return;
 			}
 			else // Something really bad happened
 			{

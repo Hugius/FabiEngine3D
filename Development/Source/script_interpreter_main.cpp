@@ -337,13 +337,13 @@ void ScriptInterpreter::unload()
 	}
 
 	// Stop networking server
-	if (_fe3d.networkServer_isStarted())
+	if (_fe3d.networkServer_isRunning())
 	{
 		_fe3d.networkServer_stop();
 	}
 
 	// Stop networking client
-	if (_fe3d.networkClient_isStarted())
+	if (_fe3d.networkClient_isRunning())
 	{
 		_fe3d.networkClient_stop();
 	}

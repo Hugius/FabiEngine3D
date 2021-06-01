@@ -776,13 +776,13 @@ public:
 
 	// Server interface - setters
 	void networkServer_start(unsigned int customMaxClientCount);
-	void networkServer_stop();
 	void networkServer_sendMessage(const string& username, const string& conten);
 	void networkServer_broadcastMessage(const string& content);
 	void networkServer_disconnectClient(const string& username);
+	void networkServer_stop();
 
 	// Server interface - getters
-	const bool networkServer_isStarted();
+	const bool networkServer_isRunning();
 	const bool networkServer_isClientConnected(const string& username);
 	const vector<NetworkMessage>& networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
@@ -790,15 +790,18 @@ public:
 	const vector<string> networkServer_getClientUsernames();
 
 	// Client interface - setters
-	void networkClient_start(const string& serverIP, const string& username);
-	void networkClient_stop();
+	void networkClient_start(const string& username);
+	void networkClient_connect(const string& serverIP);
 	void networkClient_sendMessage(const string& content);
+	void networkClient_disconnect();
+	void networkClient_stop();
 
 	// Client interface - getters
-	const bool networkClient_isStarted();
-	const bool networkClient_isConnectedToServer();
-	const unsigned int networkClient_getPingMS();
-	const vector<NetworkMessage>& networkClient_getPendingMessages();
+	const bool networkClient_isRunning();
+	const bool networkClient_isConnecting();
+	const bool networkClient_isConnected();
+	const unsigned int networkClient_getServerPing();
+	const vector<string>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

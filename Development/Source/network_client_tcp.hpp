@@ -1,6 +1,5 @@
 #pragma once
 
-#include "network_message.hpp"
 #include "network_utils.hpp"
 
 #include <string>
@@ -26,42 +25,44 @@ public:
 	NetworkClientTCP();
 	~NetworkClientTCP();
 
-	void start(const string& serverIP, const string& serverPort, const string& username);
-	void stop();
+	void start(const string& username);
 	void update();
+	void connectToServer(const string& serverIP, const string& serverPort);
+	void disconnectFromServer();
 	void sendMessage(const string& content);
+	void stop();
 
 	const bool isRunning();
+	const bool isConnectingToServer();
 	const bool isConnectedToServer();
 
-	const unsigned int getPingMS();
+	const unsigned int getServerPing();
 
-	const vector<NetworkMessage>& getPendingMessages();
+	const vector<string>& getPendingMessages();
 
 private:
-	void _initiateConnection();
-	void _closeConnection();
 	void _sendMessage(const string& content, bool isReserved);
-	int _connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo);
+	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
 	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
-	unsigned int _getCurrentTimeMS();
+	unsigned int _getCurrentMilliseconds();
+
+	addrinfo* _addressInfo = nullptr;
 
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
 	future<tuple<int, string, int>> _serverMessageThread;
 
-	vector<NetworkMessage> _pendingMessages;
-
-	addrinfo* _addressInfo = nullptr;
+	vector<string> _pendingMessages;
 
 	string _currentMessageBuild = "";
 	string _username = "";
 
-	unsigned int _pingMS = 0;
-	unsigned int _lastTimeMS = 0;
+	unsigned int _serverPing = 0;
+	unsigned int _lastMilliseconds = 0;
 
 	bool _isRunning = false;
+	bool _isConnectingToServer = false;
 	bool _isConnectedToServer = false;
 	bool _isAcceptedByServer = false;
 	bool _isWaitingForPing = false;

@@ -18,31 +18,39 @@ void NetworkClientTCP::update()
 	_pendingMessages.clear();
 
 	// Handle server connection
-	if (!_isConnectedToServer)
+	if (_isConnectingToServer)
 	{
+		// Check if connection thread is finished
 		if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
-			// Temporary values
+			// Retrieve error code
 			auto errorCode = _connectionThread.get();
 
 			if (errorCode == 0) // Successfully connected with server
 			{
+				// Not connecting anymore
+				_isConnectingToServer = false;
 				_isConnectedToServer = true;
+
+				// Send username to server
 				_sendMessage(_username, false);
+
+				// Start a thread to listen for server messages
 				_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
-				// Spawn thread again for another attempt
-				_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_connectWithServer, this, _serverSocketID, _addressInfo);
+				_isConnectingToServer = false;
 			}
 			else // Something really bad happened
 			{
 				Logger::throwError("Networking client connect failed with error code: ", errorCode);
 			}
 		}
-
-		return;
+		else
+		{
+			return; // Wait until client is connected to server
+		}
 	}
 
 	// Update server ping
@@ -50,10 +58,10 @@ void NetworkClientTCP::update()
 	{
 		_sendMessage("PING", true);
 		_isWaitingForPing = true;
-		_lastTimeMS = _getCurrentTimeMS();
+		_lastMilliseconds = _getCurrentMilliseconds();
 	}
 
-	// Check if the server sent any message
+	// Check if the server sent any messages
 	if (_serverMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
@@ -80,14 +88,14 @@ void NetworkClientTCP::update()
 					}
 					else if (_currentMessageBuild == "PING") // Handle ping message
 					{
-						auto currentTimeMS = _getCurrentTimeMS();
-						_pingMS = (currentTimeMS - _lastTimeMS);
+						auto currentTimeMS = _getCurrentMilliseconds();
+						_serverPing = (currentTimeMS - _lastMilliseconds);
 						_isWaitingForPing = false;
 						_currentMessageBuild = "";
 					}
 					else // Handle other messages
 					{
-						_pendingMessages.push_back(NetworkMessage(serverIP, serverPort, _currentMessageBuild));
+						_pendingMessages.push_back(_currentMessageBuild);
 						_currentMessageBuild = "";
 					}
 				}
@@ -99,15 +107,13 @@ void NetworkClientTCP::update()
 		}
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{
-			_closeConnection();
-			_initiateConnection();
+			disconnectFromServer();
 		}
 		else // Receive failed
 		{
 			if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Server lost socket connection
 			{
-				_closeConnection();
-				_initiateConnection();
+				disconnectFromServer();
 			}
 			else // Something really bad happened
 			{

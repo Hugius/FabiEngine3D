@@ -31,12 +31,12 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_is_started")
+	else if (functionName == "fe3d:network_server_is_running")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkServer_isStarted();
+			auto result = _fe3d.networkServer_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}

@@ -8,14 +8,7 @@ void FabiEngine3D::networkServer_start(unsigned int customMaxClientCount)
 
 void FabiEngine3D::networkServer_stop()
 {
-	if (networkServer_isStarted())
-	{
-		_core->_networkServerTCP.stop();
-	}
-	else
-	{
-		logger_throwWarning("Trying to stop networking server: not started!");
-	}
+	_core->_networkServerTCP.stop();
 }
 
 void FabiEngine3D::networkServer_sendMessage(const string& username, const string& content)
@@ -33,7 +26,7 @@ void FabiEngine3D::networkServer_disconnectClient(const string& username)
 	_core->_networkServerTCP.disconnectClient(username);
 }
 
-const bool FabiEngine3D::networkServer_isStarted()
+const bool FabiEngine3D::networkServer_isRunning()
 {
 	return _core->_networkServerTCP.isRunning();
 }

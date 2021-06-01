@@ -11,34 +11,57 @@ const bool NetworkClientTCP::isRunning()
 	return _isRunning;
 }
 
-const bool NetworkClientTCP::isConnectedToServer()
+const bool NetworkClientTCP::isConnectingToServer()
 {
-	// Check if client is even running
+	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client must be running before retrieving connection status!");
+		Logger::throwWarning("Networking client tried to retrieve connecting status: not running!");
+	}
+
+	return _isConnectingToServer;
+}
+
+const bool NetworkClientTCP::isConnectedToServer()
+{
+	// Must be running first
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client tried to retrieve connection status: not running!");
 	}
 
 	return (_isConnectedToServer && _isAcceptedByServer);
 }
 
-const unsigned int NetworkClientTCP::getPingMS()
+const unsigned int NetworkClientTCP::getServerPing()
 {
-	// Check if client is even running
+	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client must be running before retrieving server ping!");
+		Logger::throwWarning("Networking client tried to retrieve server ping: not running!");
 	}
 
-	return _pingMS;
+	// Must be connected first
+	if (!_isConnectedToServer)
+	{
+		Logger::throwWarning("Networking client tried to retrieve server ping: not connected!");
+	}
+
+	return _serverPing;
 }
 
-const vector<NetworkMessage>& NetworkClientTCP::getPendingMessages()
+const vector<string>& NetworkClientTCP::getPendingMessages()
 {
-	// Check if client is even running
+	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client must be running before retrieving pending messages!");
+		Logger::throwWarning("Networking client tried to retrieve pending messages not running!");
+	}
+
+	// Must be connected first
+	if (!_isConnectedToServer)
+	{
+		Logger::throwWarning("Networking client tried to retrieve pending messages: not connected!");
 	}
 
 	return _pendingMessages;
@@ -51,30 +74,31 @@ void NetworkClientTCP::sendMessage(const string& content)
 
 void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 {
-	// Check if client is even running
+	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client must be running before sending messages!");
+		Logger::throwWarning("Networking client tried to send message: not running!");
+		return;
 	}
 
-	// Check if client is connected to the server & accepted by the server
+	// Must be connected & accepted first
 	if (!_isConnectedToServer && _isAcceptedByServer)
 	{
-		Logger::throwWarning("Networking client cannot send message to server: not connected!");
+		Logger::throwWarning("Networking client tried to send message: not running!");
 		return;
 	}
 
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking message cannot contain semicolons!");
+		Logger::throwWarning("Networking client tried to send message: cannot contain semicolons!");
 		return;
 	}
 
-	// Check if message is reserved
+	// Validate message availability
 	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking message \"" + content + "\" is reserved!");
+		Logger::throwWarning("Networking client tried to send message: \"" + content + "\" is reserved!");
 		return;
 	}
 
@@ -87,8 +111,7 @@ void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 	{
 		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
 		{
-			_closeConnection();
-			_initiateConnection();
+			disconnectFromServer();
 		}
 		else // Something really bad happened
 		{
@@ -97,27 +120,7 @@ void NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 	}
 }
 
-void NetworkClientTCP::_initiateConnection()
-{
-	// Create socket for connecting to the server
-	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
-	if (_serverSocketID == INVALID_SOCKET)
-	{
-		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
-	}
-
-	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_connectWithServer, this, _serverSocketID, _addressInfo);
-}
-
-void NetworkClientTCP::_closeConnection()
-{
-	closesocket(_serverSocketID);
-	_isConnectedToServer = false;
-	_isAcceptedByServer = false;
-}
-
-int NetworkClientTCP::_connectWithServer(SOCKET serverSocketID, addrinfo* addressInfo)
+int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo)
 {
 	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	
@@ -149,7 +152,7 @@ tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSoc
 	}
 }
 
-unsigned int NetworkClientTCP::_getCurrentTimeMS()
+unsigned int NetworkClientTCP::_getCurrentMilliseconds()
 {
 	return static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 }

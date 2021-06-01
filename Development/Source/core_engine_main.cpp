@@ -163,7 +163,7 @@ void CoreEngine::_setupApplication()
 	}
 
 	// If the application is a game server, no window is needed
-	if (!Config::getInst().isGameExported() || (Config::getInst().isGameExported() && !_fe3d.networkServer_isStarted()))
+	if (!Config::getInst().isGameExported() || (Config::getInst().isGameExported() && !_fe3d.networkServer_isRunning()))
 	{
 		// Set window properties
 		_window.setSize(Config::getInst().getWindowSize());

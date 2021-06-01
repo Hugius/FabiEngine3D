@@ -20,29 +20,56 @@ NetworkClientTCP::~NetworkClientTCP()
 	}
 }
 
-void NetworkClientTCP::start(const string& serverIP, const string& serverPort, const string& username)
+void NetworkClientTCP::start(const string& username)
 {
 	// Must not be running
 	if (_isRunning)
 	{
-		Logger::throwWarning("Trying to start networking client: already running!");
+		Logger::throwWarning("Networking client tried to start: already running!");
 		return;
 	}
 
 	// Validate username
 	if (username.empty())
 	{
-		Logger::throwWarning("Trying to start networking client: empty username!");
+		Logger::throwWarning("Networking client tried to start: empty username!");
 		return;
 	}
 	else if (NetworkUtils::isMessageReserved(username))
 	{
-		Logger::throwWarning("Trying to start networking client: username is reserved!");
+		Logger::throwWarning("Networking client tried to start: username is reserved!");
 		return;
 	}
 	else
 	{
 		_username = username;
+	}
+
+	// Client is now operable
+	_isRunning = true;
+}
+
+void NetworkClientTCP::connectToServer(const string& serverIP, const string& serverPort)
+{
+	// Must be running first
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client tried to connect: not running!");
+		return;
+	}
+
+	// Must not already be connected
+	if (_isConnectedToServer)
+	{
+		Logger::throwWarning("Networking client tried to connect: already connected!");
+		return;
+	}
+
+	// Must not already be connecting
+	if (_isConnectingToServer)
+	{
+		Logger::throwWarning("Networking client tried to connect: already connecting!");
+		return;
 	}
 
 	// Compose address info hints
@@ -56,15 +83,54 @@ void NetworkClientTCP::start(const string& serverIP, const string& serverPort, c
 	auto infoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &hints, &_addressInfo);
 	if (infoStatusCode != 0)
 	{
-		Logger::throwError("Networking client startup (address info) failed with error code: ", infoStatusCode);
+		Logger::throwError("Networking client address info failed with error code: ", infoStatusCode);
 		return;
 	}
 
-	// Start attempting to connect
-	_initiateConnection();
+	// Create socket for connecting to the server
+	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
+	if (_serverSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
+	}
 
-	// Client is now operable
-	_isRunning = true;
+	// Spawn a thread for connecting to the server
+	_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerConnection, this, _serverSocketID, _addressInfo);
+
+	// Client is now connecting
+	_isConnectingToServer = true;
+}
+
+void NetworkClientTCP::disconnectFromServer()
+{
+	// Must be running first
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client tried to disconnect: not running!");
+		return;
+	}
+
+	// Must be connected first
+	if (!_isConnectedToServer)
+	{
+		Logger::throwWarning("Networking client tried to disconnect: not connected!");
+		return;
+	}
+
+	// Close server connection
+	closesocket(_serverSocketID);
+
+	// Delete address info
+	if (_addressInfo != nullptr)
+	{
+		freeaddrinfo(_addressInfo);
+	}
+
+	// Reset variables
+	_serverSocketID = INVALID_SOCKET;
+	_addressInfo = nullptr;
+	_isConnectedToServer = false;
+	_isAcceptedByServer = false;
 }
 
 void NetworkClientTCP::stop()
@@ -76,24 +142,17 @@ void NetworkClientTCP::stop()
 		return;
 	}
 
-	// Close connection socket
-	closesocket(_serverSocketID);
-
-	// Delete address info
-	if (_addressInfo != nullptr)
+	// Disconnect if connected
+	if (_isConnectedToServer)
 	{
-		freeaddrinfo(_addressInfo);
+		disconnectFromServer();
 	}
 
 	// Miscellaneous
 	_pendingMessages.clear();
 	_currentMessageBuild = "";
 	_username = "";
-	_serverSocketID = INVALID_SOCKET;
-	_addressInfo = nullptr;
-	_pingMS = 0;
-	_lastTimeMS = 0;
+	_serverPing = 0;
+	_lastMilliseconds = 0;
 	_isRunning = false;
-	_isConnectedToServer = false;
-	_isAcceptedByServer = false;
 }

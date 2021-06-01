@@ -53,6 +53,12 @@ void NetworkClientTCP::update()
 		}
 	}
 
+	// Must be connected first
+	if (!_isConnectedToServer)
+	{
+		return;
+	}
+
 	// Update server ping
 	if (!_isWaitingForPing)
 	{
@@ -72,10 +78,6 @@ void NetworkClientTCP::update()
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			// Extract IP address & port
-			auto serverIP = NetworkUtils::extractIP(_serverSocketID);
-			auto serverPort = NetworkUtils::extractPort(_serverSocketID);
-
 			// Loop through received message(s)
 			for (const auto& character : messageContent)
 			{
@@ -95,7 +97,7 @@ void NetworkClientTCP::update()
 					}
 					else // Handle other messages
 					{
-						_pendingMessages.push_back(_currentMessageBuild);
+						_pendingMessages.push_back(NetworkServerMessage(_currentMessageBuild));
 						_currentMessageBuild = "";
 					}
 				}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "network_message.hpp"
+#include "network_client_message.hpp"
 #include "network_utils.hpp"
 
 #include <future>
@@ -31,7 +31,7 @@ public:
 	bool isRunning();
 	bool isClientConnected(const string& username);
 
-	const vector<NetworkMessage>& getPendingMessages();
+	const vector<NetworkClientMessage>& getPendingMessages();
 
 	const vector<string> getClientIPs();
 	const vector<string> getClientPorts();
@@ -53,7 +53,7 @@ private:
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
 
-	vector<NetworkMessage> _pendingMessages;
+	vector<NetworkClientMessage> _pendingMessages;
 	vector<future<tuple<int, int, string>>> _messageThreads;
 
 	string _currentMessageBuild = "";

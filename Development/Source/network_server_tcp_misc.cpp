@@ -16,8 +16,7 @@ bool NetworkServerTCP::isClientConnected(const string& username)
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before retrieving client connection status!");
-		return false;
+		Logger::throwWarning("Networking server tried to retrieve client connection status: not running!");
 	}
 
 	// Try to find client
@@ -37,12 +36,12 @@ bool NetworkServerTCP::isClientConnected(const string& username)
 	return false;
 }
 
-const vector<NetworkMessage>& NetworkServerTCP::getPendingMessages()
+const vector<NetworkClientMessage>& NetworkServerTCP::getPendingMessages()
 {
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before retrieving pending messages!");
+		Logger::throwWarning("Networking server tried to retrieve pending messages: not running!");
 	}
 
 	return _pendingMessages;
@@ -53,7 +52,7 @@ const vector<string> NetworkServerTCP::getClientIPs()
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before retrieving client IPs!");
+		Logger::throwWarning("Networking server tried to retrieve client IPs: not running!");
 	}
 
 	// Client must be fully accepted

@@ -24,7 +24,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\network_message.hpp">
+    <ClInclude Include="..\..\Source\network_client_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\network_server_tcp.hpp">
@@ -34,6 +34,9 @@
       <Filter>Client\TCP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\network_utils.hpp">
+      <Filter>Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\network_server_message.hpp">
       <Filter>Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>

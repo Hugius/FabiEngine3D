@@ -50,7 +50,12 @@ const unsigned int NetworkClientTCP::getServerPing()
 	return _serverPing;
 }
 
-const vector<string>& NetworkClientTCP::getPendingMessages()
+const string NetworkClientTCP::getServerIP()
+{
+	return NetworkUtils::extractIP(_serverSocketID);
+}
+
+const vector<NetworkServerMessage>& NetworkClientTCP::getPendingMessages()
 {
 	// Must be running first
 	if (!_isRunning)

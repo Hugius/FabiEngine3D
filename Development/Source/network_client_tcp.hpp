@@ -1,6 +1,7 @@
 #pragma once
 
 #include "network_utils.hpp"
+#include "network_server_message.hpp"
 
 #include <string>
 #include <future>
@@ -38,7 +39,9 @@ public:
 
 	const unsigned int getServerPing();
 
-	const vector<string>& getPendingMessages();
+	const string getServerIP();
+
+	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
 	void _sendMessage(const string& content, bool isReserved);
@@ -53,7 +56,7 @@ private:
 	future<int> _connectionThread;
 	future<tuple<int, string, int>> _serverMessageThread;
 
-	vector<string> _pendingMessages;
+	vector<NetworkServerMessage> _pendingMessages;
 
 	string _currentMessageBuild = "";
 	string _username = "";

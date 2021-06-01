@@ -1,4 +1,5 @@
 #include "fabi_engine_3d.hpp"
+#include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
 void FabiEngine3D::networkClient_start(const string& username)
@@ -46,7 +47,12 @@ const unsigned int FabiEngine3D::networkClient_getServerPing()
 	return _core->_networkClientTCP.getServerPing();
 }
 
-const vector<string>& FabiEngine3D::networkClient_getPendingMessages()
+const string FabiEngine3D::networkClient_getServerIP()
+{
+	return _core->_networkClientTCP.getServerIP();
+}
+
+const vector<NetworkServerMessage>& FabiEngine3D::networkClient_getPendingMessages()
 {
 	return _core->_networkClientTCP.getPendingMessages();
 }

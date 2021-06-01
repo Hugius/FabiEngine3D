@@ -116,7 +116,7 @@ BEGIN:
 						}
 						else // Handle other messages
 						{
-							_pendingMessages.push_back(NetworkMessage(clientIP, clientPort, clientUsername, _currentMessageBuild));
+							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, _currentMessageBuild));
 							_currentMessageBuild = "";
 						}					}
 					else // Add to current message

@@ -4,7 +4,8 @@
 #include "input_type.hpp"
 #include "direction.hpp"
 #include "aabb_parent_type.hpp"
-#include "network_message.hpp"
+#include "network_client_message.hpp"
+#include "network_server_message.hpp"
 #include "mathematics.hpp"
 
 #include <array>
@@ -784,7 +785,7 @@ public:
 	// Server interface - getters
 	const bool networkServer_isRunning();
 	const bool networkServer_isClientConnected(const string& username);
-	const vector<NetworkMessage>& networkServer_getPendingMessages();
+	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
 	const vector<string> networkServer_getClientPorts();
 	const vector<string> networkServer_getClientUsernames();
@@ -801,7 +802,8 @@ public:
 	const bool networkClient_isConnecting();
 	const bool networkClient_isConnected();
 	const unsigned int networkClient_getServerPing();
-	const vector<string>& networkClient_getPendingMessages();
+	const string networkClient_getServerIP();
+	const vector<NetworkServerMessage>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& imageEntityID);

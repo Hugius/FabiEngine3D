@@ -36,7 +36,7 @@ const bool FabiEngine3D::networkServer_isClientConnected(const string& username)
 	return _core->_networkServerTCP.isClientConnected(username);
 }
 
-const vector<NetworkMessage>& FabiEngine3D::networkServer_getPendingMessages()
+const vector<NetworkClientMessage>& FabiEngine3D::networkServer_getPendingMessages()
 {
 	return _core->_networkServerTCP.getPendingMessages();
 }

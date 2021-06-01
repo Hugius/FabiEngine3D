@@ -113,7 +113,7 @@ void NetworkClientTCP::disconnectFromServer()
 	// Must be connected first
 	if (!_isConnectedToServer)
 	{
-		Logger::throwError("Networking client tried to disconnect: not connected!");
+		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
 	}
 

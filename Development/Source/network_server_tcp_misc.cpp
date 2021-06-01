@@ -72,7 +72,7 @@ const vector<string> NetworkServerTCP::getClientPorts()
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before retrieving client ports!");
+		Logger::throwWarning("Networking server tried to retrieve client ports: not running!");
 	}
 
 	// Client must be fully accepted
@@ -92,7 +92,7 @@ const vector<string> NetworkServerTCP::getClientUsernames()
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before retrieving client usernames!");
+		Logger::throwWarning("Networking server tried to retrieve client usernames: not running!");
 	}
 
 	// Client must be fully accepted
@@ -112,7 +112,7 @@ void NetworkServerTCP::sendMessage(const string& username, const string& content
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before sending messages!");
+		Logger::throwWarning("Networking server tried to send message: not running!");
 	}
 
 	// Try to find client and send message
@@ -131,7 +131,7 @@ void NetworkServerTCP::sendMessage(const string& username, const string& content
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server cannot send message to client \"" + username + "\": not connected!");
+	Logger::throwWarning("Networking server tried to send message to client \"" + username + "\": not connected!");
 }
 
 void NetworkServerTCP::broadcastMessage(const string& content)
@@ -139,7 +139,7 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before broadcasting messages!");
+		Logger::throwWarning("Networking server tried to broadcast message: not running!");
 	}
 
 	// Send message to all connected clients
@@ -158,7 +158,7 @@ void NetworkServerTCP::disconnectClient(const string& username)
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server must be running before disconnecting clients!");
+		Logger::throwWarning("Networking server tried to disconnect client: not running!");
 	}
 
 	// Try to find client and send message
@@ -170,14 +170,15 @@ void NetworkServerTCP::disconnectClient(const string& username)
 			// Check if client is found
 			if (username == _clientUsernames[i])
 			{
-				_disconnectClient(_clientSocketIDs[i]);
+				_sendMessage(_clientSocketIDs[i], "DISCONNECTED_BY_SERVER", true);
+				_disconnectingClientSocketIDs.push_back(_clientSocketIDs[i]);
 				return;
 			}
 		}
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server cannot disconnect client \"" + username + "\": not connected!");
+	Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not connected!");
 }
 
 void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
@@ -185,14 +186,14 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking message cannot contain semicolons!");
+		Logger::throwWarning("Networking message tried to send message: cannot contain semicolons!");
 		return;
 	}
 
 	// Check if message is not reserved
 	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking message \"" + content + "\" is reserved!");
+		Logger::throwWarning("Networking server tried to send message: \"" + content + "\" is reserved!");
 		return;
 	}
 

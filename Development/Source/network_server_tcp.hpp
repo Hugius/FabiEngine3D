@@ -22,11 +22,11 @@ public:
 	~NetworkServerTCP();
 
 	void start(unsigned int customMaxClientCount);
-	void stop();
 	void update();
 	void sendMessage(const string& username, const string& content);
 	void broadcastMessage(const string& content);
 	void disconnectClient(const string& username);
+	void stop();
 
 	bool isRunning();
 	bool isClientConnected(const string& username);
@@ -47,7 +47,7 @@ private:
 	SOCKET _connectionSocketID;
 	future<SOCKET> _connectionThread;
 
-	vector<SOCKET> _rejectedClientSocketIDs;
+	vector<SOCKET> _disconnectingClientSocketIDs;
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;

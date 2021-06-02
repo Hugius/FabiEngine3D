@@ -184,6 +184,7 @@ private:
 	static inline const unsigned int MAX_LOOPS_PER_FRAME = 1000;
 	static inline const unsigned int MAX_EXECUTION_DEPTH = 100;
 	unsigned int _lastLoggerMessageCount = 0;
+	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
 	// Booleans

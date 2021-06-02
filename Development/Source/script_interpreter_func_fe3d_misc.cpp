@@ -9,6 +9,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute pausing functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access pausing functionality as a networking server!");
+				return true;
+			}
+
+			// Pause engine
 			_fe3d.engine_pause();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -17,6 +25,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute pausing functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access pausing functionality as a networking server!");
+				return true;
+			}
+
+			// Resume engine
 			_fe3d.engine_resume();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -78,6 +94,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Center cursor
 			_fe3d.misc_centerCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -86,6 +110,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Show cursor
 			_fe3d.misc_showCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -94,6 +126,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Hide cursor
 			_fe3d.misc_hideCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -102,6 +142,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Get cursor position X
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
 		}
@@ -110,6 +158,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Get cursor position Y
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
 		}
@@ -118,6 +174,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute window functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access window functionality as a networking server!");
+				return true;
+			}
+
+			// Get window width
 			auto result = _fe3d.misc_getWindowSize().x;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
@@ -126,6 +190,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute window functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access window functionality as a networking server!");
+				return true;
+			}
+
+			// Get window height
 			auto result = _fe3d.misc_getWindowSize().y;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
@@ -150,6 +222,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute wireframe functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access wireframe functionality as a networking server!");
+				return true;
+			}
+
+			// Enable wireframe rendering
 			_fe3d.misc_enableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -158,6 +238,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute wireframe functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access wireframe functionality as a networking server!");
+				return true;
+			}
+
+			// Disable wireframe rendering
 			_fe3d.misc_disableWireframeRendering();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -166,6 +254,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute AABBs functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access AABBs functionality as a networking server!");
+				return true;
+			}
+
+			// Enable AABB rendering
 			_fe3d.misc_enableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -174,6 +270,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute AABBs functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access AABBs functionality as a networking server!");
+				return true;
+			}
+
+			// Disable AABB rendering
 			_fe3d.misc_disableAabbFrameRendering();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}

@@ -134,5 +134,11 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 		return false;
 	}
 
+	// Cannot execute water functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access water functionality as a networking server!");
+	}
+
 	return true;
 }

@@ -371,6 +371,7 @@ void ScriptInterpreter::unload()
 	_updateEntryID = "";
 	_destroyEntryID = "";
 	_lastLoggerMessageCount = 0;
+	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;
 	_gameMustStop = false;

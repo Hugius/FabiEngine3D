@@ -463,5 +463,11 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 		return false;
 	}
 
+	// Cannot execute text functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access text functionality as a networking server!");
+	}
+
 	return true;
 }

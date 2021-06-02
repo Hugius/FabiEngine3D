@@ -603,5 +603,11 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		return false;
 	}
 
+	// Cannot execute image functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access image functionality as a networking server!");
+	}
+
 	return true;
 }

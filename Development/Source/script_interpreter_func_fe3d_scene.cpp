@@ -193,5 +193,11 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 		return false;
 	}
 
+	// Cannot execute scene functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access scene functionality as a networking server!");
+	}
+
 	return true;
 }

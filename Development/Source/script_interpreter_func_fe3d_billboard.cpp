@@ -750,5 +750,11 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 		return false;
 	}
 
+	// Cannot execute billboard functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access billboard functionality as a networking server!");
+	}
+
 	return true;
 }

@@ -10,10 +10,17 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// CoreEngine must know if application is a network server
+			// CoreEngine must know if application is a networking server, so server can only be started in initialization phase
 			if (!_isExecutingInitialization)
 			{
-				_throwScriptError("network server can only be started in initialization script!");
+				_throwScriptError("networking server can only be started in initialization script!");
+				return true;
+			}
+
+			// Server startup must be the first function called
+			if (_engineFunctionCallCount > 0)
+			{
+				_throwScriptError("networking server can only be started before any other fe3d function call!");
 				return true;
 			}
 
@@ -171,6 +178,12 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 	else
 	{
 		return false;
+	}
+
+	// Cannot execute server functionality when client is running
+	if (_fe3d.networkClient_isRunning())
+	{
+		_throwScriptError("cannot access networking server functionality as a networking client!");
 	}
 
 	return true;

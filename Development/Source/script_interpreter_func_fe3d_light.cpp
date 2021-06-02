@@ -315,5 +315,11 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		return false;
 	}
 
+	// Cannot execute light functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access light functionality as a networking server!");
+	}
+
 	return true;
 }

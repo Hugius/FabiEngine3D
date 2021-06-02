@@ -218,5 +218,11 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 		return false;
 	}
 
+	// Cannot execute camera functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access camera functionality as a networking server!");
+	}
+
 	return true;
 }

@@ -361,5 +361,11 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		return false;
 	}
 
+	// Cannot execute AABB functionality when server is running
+	if (_fe3d.networkServer_isRunning())
+	{
+		_throwScriptError("cannot access AABB functionality as a networking server!");
+	}
+
 	return true;
 }

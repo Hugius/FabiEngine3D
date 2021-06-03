@@ -48,8 +48,13 @@ const unsigned int NetworkClientTCP::getServerPing()
 		Logger::throwWarning("Networking client tried to retrieve server ping: not connected!");
 	}
 
-
-	return _serverPing;
+	// Calculate average ping
+	unsigned int totalPing = 0;
+	for (const auto& ping : _serverPings)
+	{
+		totalPing += ping;
+	}
+	return (totalPing / _serverPings.size());
 }
 
 const string NetworkClientTCP::getServerIP()
@@ -139,20 +144,19 @@ int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* 
 	}
 }
 
-tuple<int, int, unsigned int, string> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
+tuple<int, int, long long, string> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
 	auto receiveResult = recv(serverSocketID, buffer, bufferLength, 0);
-	auto epoch = Tools::getTimeSinceEpochMS();
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), epoch, string(buffer, receiveResult));
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), epoch, "");
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
 }

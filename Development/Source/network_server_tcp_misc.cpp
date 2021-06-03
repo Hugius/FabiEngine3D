@@ -268,24 +268,23 @@ SOCKET NetworkServerTCP::_waitForClientConnection(SOCKET listenSocketID)
 	return accept(listenSocketID, nullptr, nullptr);
 }
 
-tuple<int, int, unsigned int, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
+tuple<int, int, long long, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
 	auto receiveStatusCode = recv(clientSocketID, buffer, bufferLength, 0);
-	auto epoch = Tools::getTimeSinceEpochMS();
 
 	if (receiveStatusCode > 0) // Message received correctly
 	{
-		return make_tuple(receiveStatusCode, 0, epoch, string(buffer, receiveStatusCode));
+		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), string(buffer, receiveStatusCode));
 	}
 	else if (receiveStatusCode == 0) // Client closed connection
 	{
-		return make_tuple(receiveStatusCode, 0, epoch, "");
+		return make_tuple(receiveStatusCode, 0, Tools::getTimeSinceEpochMS(), "");
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveStatusCode, WSAGetLastError(), epoch, "");
+		return make_tuple(receiveStatusCode, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
 }

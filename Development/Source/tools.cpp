@@ -38,7 +38,7 @@ const float Tools::getRandomFloat(float min, float max)
 	return dist(_generator);
 }
 
-const unsigned Tools::getTimeSinceEpochMS()
+const long long Tools::getTimeSinceEpochMS()
 {
-	return static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }

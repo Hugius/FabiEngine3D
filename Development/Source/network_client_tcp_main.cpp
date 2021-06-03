@@ -130,7 +130,7 @@ void NetworkClientTCP::disconnectFromServer()
 	_serverSocketID = INVALID_SOCKET;
 	_addressInfo = nullptr;
 	_pendingMessages.clear();
-	_serverPing = 0;
+	_serverPings.clear();
 	_lastMilliseconds = 0;
 	_currentMessageBuild = "";
 	_isConnectedToServer = false;

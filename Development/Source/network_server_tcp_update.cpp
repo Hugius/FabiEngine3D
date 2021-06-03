@@ -2,6 +2,7 @@
 
 #include "network_server_tcp.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -112,7 +113,8 @@ BEGIN:
 						}
 						else if (_currentMessageBuild == "PING") // Handle ping message
 						{
-							_sendMessage(clientSocketID, "PING" + std::to_string(messageTimestamp), true);
+							auto pingMessage = "PING" + std::to_string(messageTimestamp) + "_" + std::to_string(Tools::getTimeSinceEpochMS());
+							_sendMessage(clientSocketID, pingMessage, true);
 							_currentMessageBuild = "";
 						}
 						else // Handle other messages

@@ -82,8 +82,8 @@ void NetworkClientTCP::update()
 	{
 		// Temporary values
 		auto messageResult = _serverMessageThread.get();
-		auto messageErrorCode = std::get<0>(messageResult);
-		auto messageStatusCode = std::get<1>(messageResult);
+		auto messageStatusCode = std::get<0>(messageResult);
+		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
 		auto messageContent = std::get<3>(messageResult);
 
@@ -99,10 +99,21 @@ void NetworkClientTCP::update()
 						_isAcceptedByServer = true;
 						_currentMessageBuild = "";
 					}
-					else if (_currentMessageBuild == "PING") // Handle ping message
+					else if (_currentMessageBuild.substr(0, 4) == "PING") // Handle ping message
 					{
-						auto currentTimeMS = Tools::getTimeSinceEpochMS();
-						_serverPing = (currentTimeMS - _lastMilliseconds);
+						// Calculate server ping
+						auto pingData = _currentMessageBuild.substr(4);
+						auto serverReceiveEpoch = stoll(pingData.substr(0, pingData.find('_')));
+						auto serverSendEpoch = stoll(pingData.substr(pingData.find('_') + 1));
+						auto forthPing = (serverReceiveEpoch - _lastMilliseconds);
+						auto backPing = (Tools::getTimeSinceEpochMS() - serverSendEpoch);
+
+						// Register server ping
+						if (_serverPings.size() == 10)
+						{
+							_serverPings.clear();
+						}
+						_serverPings.push_back(static_cast<unsigned int>(forthPing + backPing));
 						_isWaitingForPing = false;
 						_currentMessageBuild = "";
 					}

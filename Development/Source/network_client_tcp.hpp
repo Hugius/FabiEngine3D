@@ -45,22 +45,23 @@ public:
 private:
 	bool _sendMessage(const string& content, bool isReserved);
 	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
-	tuple<int, int, unsigned int, string> _waitForServerMessage(SOCKET serverSocketID);
+	tuple<int, int, long long, string> _waitForServerMessage(SOCKET serverSocketID);
 
 	addrinfo* _addressInfo = nullptr;
 
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
-	future<tuple<int, int, unsigned int, string>> _serverMessageThread;
+	future<tuple<int, int, long long, string>> _serverMessageThread;
 
 	vector<NetworkServerMessage> _pendingMessages;
 
 	string _currentMessageBuild = "";
 	string _username = "";
 
-	unsigned int _serverPing = 0;
-	unsigned int _lastMilliseconds = 0;
+	vector<unsigned int> _serverPings;
+
+	long long _lastMilliseconds = 0;
 
 	bool _isRunning = false;
 	bool _isConnectingToServer = false;

@@ -2,6 +2,7 @@
 
 #include "network_client_tcp.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -73,7 +74,7 @@ void NetworkClientTCP::update()
 
 		// Start measuring time
 		_isWaitingForPing = true;
-		_lastMilliseconds = _getCurrentMilliseconds();
+		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
 	// Check if the server sent any messages
@@ -81,9 +82,10 @@ void NetworkClientTCP::update()
 	{
 		// Temporary values
 		auto messageResult = _serverMessageThread.get();
-		auto messageStatusCode = std::get<0>(messageResult);
-		auto messageContent = std::get<1>(messageResult);
-		auto messageErrorCode = std::get<2>(messageResult);
+		auto messageErrorCode = std::get<0>(messageResult);
+		auto messageStatusCode = std::get<1>(messageResult);
+		auto messageTimestamp = std::get<2>(messageResult);
+		auto messageContent = std::get<3>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
@@ -99,7 +101,7 @@ void NetworkClientTCP::update()
 					}
 					else if (_currentMessageBuild == "PING") // Handle ping message
 					{
-						auto currentTimeMS = _getCurrentMilliseconds();
+						auto currentTimeMS = Tools::getTimeSinceEpochMS();
 						_serverPing = (currentTimeMS - _lastMilliseconds);
 						_isWaitingForPing = false;
 						_currentMessageBuild = "";

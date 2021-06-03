@@ -76,7 +76,8 @@ BEGIN:
 			auto messageResult = messageThread.get();
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageErrorCode = std::get<1>(messageResult);
-			auto messageContent = std::get<2>(messageResult);
+			auto messageTimestamp = std::get<2>(messageResult);
+			auto messageContent = std::get<3>(messageResult);
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
@@ -111,7 +112,7 @@ BEGIN:
 						}
 						else if (_currentMessageBuild == "PING") // Handle ping message
 						{
-							_sendMessage(clientSocketID, "PING", true);
+							_sendMessage(clientSocketID, "PING" + std::to_string(messageTimestamp), true);
 							_currentMessageBuild = "";
 						}
 						else // Handle other messages

@@ -843,6 +843,7 @@ public:
 	void misc_setMaxAudioChannels(unsigned int count);
 
 	// Miscellaneous interface - getters
+	const unsigned misc_getTimeSinceEpochMS();
 	const int misc_getRandomInteger(int min, int max);
 	const int misc_getMsTimeSinceEpoch();
 	const int misc_getTriangleCount();

@@ -2,6 +2,7 @@
 
 #include "network_client_tcp.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -138,24 +139,20 @@ int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* 
 	}
 }
 
-tuple<int, string, int> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
+tuple<int, int, unsigned int, string> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
-	int bufferLength = NetworkUtils::MAX_MESSAGE_BYTES;
+	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
 	auto receiveResult = recv(serverSocketID, buffer, bufferLength, 0);
+	auto epoch = Tools::getTimeSinceEpochMS();
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, string(buffer, receiveResult), WSAGetLastError());
+		return make_tuple(receiveResult, WSAGetLastError(), epoch, string(buffer, receiveResult));
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, "", WSAGetLastError());
+		return make_tuple(receiveResult, WSAGetLastError(), epoch, "");
 	}
-}
-
-unsigned int NetworkClientTCP::_getCurrentMilliseconds()
-{
-	return static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 }

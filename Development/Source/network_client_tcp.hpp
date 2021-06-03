@@ -8,7 +8,6 @@
 #include <vector>
 #include <memory>
 #include <tuple>
-#include <chrono>
 
 using std::string;
 using std::vector;
@@ -46,15 +45,14 @@ public:
 private:
 	bool _sendMessage(const string& content, bool isReserved);
 	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
-	tuple<int, string, int> _waitForServerMessage(SOCKET serverSocketID);
-	unsigned int _getCurrentMilliseconds();
+	tuple<int, int, unsigned int, string> _waitForServerMessage(SOCKET serverSocketID);
 
 	addrinfo* _addressInfo = nullptr;
 
 	SOCKET _serverSocketID;
 
 	future<int> _connectionThread;
-	future<tuple<int, string, int>> _serverMessageThread;
+	future<tuple<int, int, unsigned int, string>> _serverMessageThread;
 
 	vector<NetworkServerMessage> _pendingMessages;
 

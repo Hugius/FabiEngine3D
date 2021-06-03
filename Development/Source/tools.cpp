@@ -1,15 +1,8 @@
 #include "tools.hpp"
 #include "logger.hpp"
 
-#include <ctime>
 #include <sstream>
 #include <filesystem>
-
-Tools::Tools() :
-	_generator(static_cast<unsigned int>(time(nullptr)))
-{
-	
-}
 
 const string Tools::getRootDirectory()
 {
@@ -33,14 +26,19 @@ const string Tools::getRootDirectory()
 	return rootDir;
 }
 
-int Tools::getRandomInt(int min, int max)
+const int Tools::getRandomInt(int min, int max)
 {
 	std::uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);
 }
 
-float Tools::getRandomFloat(float min, float max)
+const float Tools::getRandomFloat(float min, float max)
 {	
 	std::uniform_real_distribution<float> dist(min, max);
 	return dist(_generator);
+}
+
+const unsigned Tools::getTimeSinceEpochMS()
+{
+	return static_cast<unsigned int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 }

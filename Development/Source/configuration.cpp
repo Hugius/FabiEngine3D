@@ -175,37 +175,37 @@ const string& Config::getWindowTitle() const
 	return _windowTitle;
 }
 
-Ivec2 Config::getMonitorSize() const
+const Ivec2 Config::getMonitorSize() const
 {
 	return _monitorSize;
 }
 
-Ivec2 Config::getWindowSize() const
+const Ivec2 Config::getWindowSize() const
 { 
 	return _windowSize;
 }
 
-Ivec2 Config::getVpPos() const
+const Ivec2 Config::getVpPos() const
 {
 	return _viewportPosition;
 }
 
-Ivec2 Config::getVpSize() const
+const Ivec2 Config::getVpSize() const
 {
 	return _viewportSize;
 }
 
-bool Config::isWindowFullscreen() const
+const bool Config::isWindowFullscreen() const
 {
 	return _isWindowFullscreen;
 }
 
-bool Config::isWindowBorderless() const
+const bool Config::isWindowBorderless() const
 {
 	return _isWindowBorderless;
 }
 
-bool Config::isGameExported() const
+const bool Config::isGameExported() const
 {
 	return _isGameExported;
 }

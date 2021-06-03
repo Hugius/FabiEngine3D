@@ -8,7 +8,7 @@
 
 const int FabiEngine3D::misc_getRandomInteger(int min, int max)
 {
-	return Tools::getInst().getRandomInt(min, max);
+	return Tools::getRandomInt(min, max);
 }
 
 const int FabiEngine3D::misc_getMsTimeSinceEpoch()
@@ -24,7 +24,7 @@ const int FabiEngine3D::misc_getTriangleCount()
 
 const float FabiEngine3D::misc_getRandomFloat(float min, float max)
 {
-	return Tools::getInst().getRandomFloat(min, max);
+	return Tools::getRandomFloat(min, max);
 }
 
 const float FabiEngine3D::misc_getAspectRatio()
@@ -117,7 +117,7 @@ const string FabiEngine3D::misc_vec2str(Vec4 vec)
 
 const string FabiEngine3D::misc_getRootDirectory()
 {
-	return Tools::getInst().getRootDirectory();
+	return Tools::getRootDirectory();
 }
 
 const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine

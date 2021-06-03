@@ -2,6 +2,7 @@
 
 #include "network_server_tcp.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
@@ -267,23 +268,24 @@ SOCKET NetworkServerTCP::_waitForClientConnection(SOCKET listenSocketID)
 	return accept(listenSocketID, nullptr, nullptr);
 }
 
-tuple<int, int, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
+tuple<int, int, unsigned int, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
-	int bufferLength = NetworkUtils::MAX_MESSAGE_BYTES;
+	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
 	auto receiveStatusCode = recv(clientSocketID, buffer, bufferLength, 0);
+	auto epoch = Tools::getTimeSinceEpochMS();
 
 	if (receiveStatusCode > 0) // Message received correctly
 	{
-		return make_tuple(receiveStatusCode, 0, string(buffer, receiveStatusCode));
+		return make_tuple(receiveStatusCode, 0, epoch, string(buffer, receiveStatusCode));
 	}
 	else if (receiveStatusCode == 0) // Client closed connection
 	{
-		return make_tuple(receiveStatusCode, 0, "");
+		return make_tuple(receiveStatusCode, 0, epoch, "");
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveStatusCode, WSAGetLastError(), "");
+		return make_tuple(receiveStatusCode, WSAGetLastError(), epoch, "");
 	}
 }

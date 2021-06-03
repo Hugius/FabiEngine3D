@@ -19,7 +19,7 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	_fragmentFileName = fragmentFileName;
 
 	// Get application root directory
-	string rootDir = Tools::getInst().getRootDirectory();
+	string rootDir = Tools::getRootDirectory();
 
 	// Open the shader text files
 	try

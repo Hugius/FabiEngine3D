@@ -24,15 +24,15 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Interface functions
-	const string& getGameTitle()   const;
-	const string& getWindowTitle() const;
-	Ivec2  getMonitorSize()        const;
-	Ivec2  getWindowSize()         const;
-	Ivec2  getVpSize()			   const;
-	Ivec2  getVpPos()			   const;
-	bool   isWindowFullscreen()	   const;
-	bool   isWindowBorderless()	   const;
-	bool   isGameExported()		   const;
+	const string& getGameTitle()       const;
+	const string& getWindowTitle()     const;
+	const Ivec2   getMonitorSize()     const;
+	const Ivec2   getWindowSize()      const;
+	const Ivec2   getVpSize()		   const;
+	const Ivec2   getVpPos()		   const;
+	const bool    isWindowFullscreen() const;
+	const bool    isWindowBorderless() const;
+	const bool    isGameExported()	   const;
 
 	// Constants
 	static inline const float MS_PER_UPDATE = 6.94f; // 144 Hz

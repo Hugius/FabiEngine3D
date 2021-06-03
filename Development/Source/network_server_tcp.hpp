@@ -42,7 +42,7 @@ private:
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET connectionSocketID);
-	tuple<int, int, string> _waitForClientMessage(SOCKET clientSocketID);
+	tuple<int, int, unsigned int, string> _waitForClientMessage(SOCKET clientSocketID);
 
 	SOCKET _connectionSocketID;
 	future<SOCKET> _connectionThread;
@@ -54,7 +54,7 @@ private:
 	vector<string> _clientUsernames;
 
 	vector<NetworkClientMessage> _pendingMessages;
-	vector<future<tuple<int, int, string>>> _messageThreads;
+	vector<future<tuple<int, int, unsigned int, string>>> _messageThreads;
 
 	string _currentMessageBuild = "";
 

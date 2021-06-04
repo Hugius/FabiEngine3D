@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client_tcp.hpp"
+#include "network_client_api.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkClientTCP::NetworkClientTCP() :
+NetworkClientAPI::NetworkClientAPI() :
 	_serverSocketID(INVALID_SOCKET)
 {
 
 }
 
-NetworkClientTCP::~NetworkClientTCP()
+NetworkClientAPI::~NetworkClientAPI()
 {
 	if (_isRunning)
 	{
@@ -20,7 +20,7 @@ NetworkClientTCP::~NetworkClientTCP()
 	}
 }
 
-void NetworkClientTCP::start(const string& username)
+void NetworkClientAPI::start(const string& username)
 {
 	// Must not be running
 	if (_isRunning)
@@ -49,7 +49,7 @@ void NetworkClientTCP::start(const string& username)
 	_isRunning = true;
 }
 
-void NetworkClientTCP::connectToServer(const string& serverIP, const string& serverPort)
+void NetworkClientAPI::connectToServer(const string& serverIP, const string& serverPort)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -95,13 +95,13 @@ void NetworkClientTCP::connectToServer(const string& serverIP, const string& ser
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerConnection, this, _serverSocketID, _addressInfo);
+	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _serverSocketID, _addressInfo);
 
 	// Client is now connecting
 	_isConnectingToServer = true;
 }
 
-void NetworkClientTCP::disconnectFromServer()
+void NetworkClientAPI::disconnectFromServer()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -138,7 +138,7 @@ void NetworkClientTCP::disconnectFromServer()
 	_isWaitingForPing = false;
 }
 
-void NetworkClientTCP::stop()
+void NetworkClientAPI::stop()
 {
 	// Must be running first
 	if (!_isRunning)

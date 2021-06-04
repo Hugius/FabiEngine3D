@@ -1,13 +1,13 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server_tcp.hpp"
+#include "network_server_api.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-void NetworkServerTCP::update()
+void NetworkServerAPI::update()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -56,7 +56,7 @@ void NetworkServerTCP::update()
 		}
 
 		// Spawn connection thread again for next possible client
-		_connectionThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientConnection, this, _connectionSocketID);
+		_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 	}
 
 	// Receive incoming client messages
@@ -147,7 +147,7 @@ BEGIN:
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientMessage, this, clientSocketID);
+			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessage, this, clientSocketID);
 		}
 	}
 }

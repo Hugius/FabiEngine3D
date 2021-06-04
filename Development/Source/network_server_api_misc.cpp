@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server_tcp.hpp"
+#include "network_server_api.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-bool NetworkServerTCP::isRunning()
+bool NetworkServerAPI::isRunning()
 {
 	return _isRunning;
 }
 
-bool NetworkServerTCP::isClientConnected(const string& username)
+bool NetworkServerAPI::isClientConnected(const string& username)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -37,7 +37,7 @@ bool NetworkServerTCP::isClientConnected(const string& username)
 	return false;
 }
 
-const vector<NetworkClientMessage>& NetworkServerTCP::getPendingMessages()
+const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -48,7 +48,7 @@ const vector<NetworkClientMessage>& NetworkServerTCP::getPendingMessages()
 	return _pendingMessages;
 }
 
-const vector<string> NetworkServerTCP::getClientIPs()
+const vector<string> NetworkServerAPI::getClientIPs()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -68,7 +68,7 @@ const vector<string> NetworkServerTCP::getClientIPs()
 	return clientIPs;
 }
 
-const vector<string> NetworkServerTCP::getClientPorts()
+const vector<string> NetworkServerAPI::getClientPorts()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -88,7 +88,7 @@ const vector<string> NetworkServerTCP::getClientPorts()
 	return clientPorts;
 }
 
-const vector<string> NetworkServerTCP::getClientUsernames()
+const vector<string> NetworkServerAPI::getClientUsernames()
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -108,7 +108,7 @@ const vector<string> NetworkServerTCP::getClientUsernames()
 	return clientUsernames;
 }
 
-void NetworkServerTCP::sendMessage(const string& username, const string& content)
+void NetworkServerAPI::sendMessage(const string& username, const string& content)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -135,7 +135,7 @@ void NetworkServerTCP::sendMessage(const string& username, const string& content
 	Logger::throwWarning("Networking server tried to send message to client \"" + username + "\": not connected!");
 }
 
-void NetworkServerTCP::broadcastMessage(const string& content)
+void NetworkServerAPI::broadcastMessage(const string& content)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -154,7 +154,7 @@ void NetworkServerTCP::broadcastMessage(const string& content)
 	}
 }
 
-void NetworkServerTCP::disconnectClient(const string& username)
+void NetworkServerAPI::disconnectClient(const string& username)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -182,7 +182,7 @@ void NetworkServerTCP::disconnectClient(const string& username)
 	Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not connected!");
 }
 
-void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
+void NetworkServerAPI::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
 {
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
@@ -216,7 +216,7 @@ void NetworkServerTCP::_sendMessage(SOCKET clientSocketID, const string& content
 	}
 }
 
-void NetworkServerTCP::_acceptClient(SOCKET clientSocketID)
+void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 {
 	// Extract IP address & port
 	auto clientIP = NetworkUtils::extractIP(clientSocketID);
@@ -229,10 +229,10 @@ void NetworkServerTCP::_acceptClient(SOCKET clientSocketID)
 	_clientUsernames.push_back("");
 
 	// Spawn thread for receiving messages
-	_messageThreads.push_back(std::async(std::launch::async, &NetworkServerTCP::_waitForClientMessage, this, clientSocketID));
+	_messageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessage, this, clientSocketID));
 }
 
-void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
+void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 {
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
@@ -263,12 +263,12 @@ void NetworkServerTCP::_disconnectClient(SOCKET clientSocketID)
 	}
 }
 
-SOCKET NetworkServerTCP::_waitForClientConnection(SOCKET listenSocketID)
+SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET listenSocketID)
 {
 	return accept(listenSocketID, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkServerTCP::_waitForClientMessage(SOCKET clientSocketID)
+tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessage(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];

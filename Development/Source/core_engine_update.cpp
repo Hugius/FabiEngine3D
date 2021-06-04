@@ -80,8 +80,8 @@ void CoreEngine::_updateApplication()
 
 	// Always update networking
 	_timer.startDeltaPart("networkUpdate");
-	_networkServerTCP.update();
-	_networkClientTCP.update();
+	_networkServerAPI.update();
+	_networkClientAPI.update();
 	_timer.stopDeltaPart();
 
 	// Miscellaneous

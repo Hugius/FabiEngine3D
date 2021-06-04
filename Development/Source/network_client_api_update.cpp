@@ -1,13 +1,13 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client_tcp.hpp"
+#include "network_client_api.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-void NetworkClientTCP::update()
+void NetworkClientAPI::update()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -40,7 +40,7 @@ void NetworkClientTCP::update()
 				}
 
 				// Start a thread to listen for server messages
-				_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
+				_serverMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessage, this, _serverSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
@@ -148,6 +148,6 @@ void NetworkClientTCP::update()
 		}
 
 		// Spawn new message thread
-		_serverMessageThread = std::async(std::launch::async, &NetworkClientTCP::_waitForServerMessage, this, _serverSocketID);
+		_serverMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessage, this, _serverSocketID);
 	}
 }

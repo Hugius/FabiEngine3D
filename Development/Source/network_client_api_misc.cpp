@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_client_tcp.hpp"
+#include "network_client_api.hpp"
 #include "logger.hpp"
 #include "tools.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-const bool NetworkClientTCP::isRunning()
+const bool NetworkClientAPI::isRunning()
 {
 	return _isRunning;
 }
 
-const bool NetworkClientTCP::isConnectingToServer()
+const bool NetworkClientAPI::isConnectingToServer()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -23,7 +23,7 @@ const bool NetworkClientTCP::isConnectingToServer()
 	return _isConnectingToServer;
 }
 
-const bool NetworkClientTCP::isConnectedToServer()
+const bool NetworkClientAPI::isConnectedToServer()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -34,7 +34,7 @@ const bool NetworkClientTCP::isConnectedToServer()
 	return (_isConnectedToServer && _isAcceptedByServer);
 }
 
-const unsigned int NetworkClientTCP::getServerPing()
+const unsigned int NetworkClientAPI::getServerPing()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -54,15 +54,15 @@ const unsigned int NetworkClientTCP::getServerPing()
 	{
 		totalPing += ping;
 	}
-	return (totalPing / _serverPings.size());
+	return (totalPing / static_cast<int>(_serverPings.size()));
 }
 
-const string NetworkClientTCP::getServerIP()
+const string NetworkClientAPI::getServerIP()
 {
 	return NetworkUtils::extractIP(_serverSocketID);
 }
 
-const vector<NetworkServerMessage>& NetworkClientTCP::getPendingMessages()
+const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -73,12 +73,12 @@ const vector<NetworkServerMessage>& NetworkClientTCP::getPendingMessages()
 	return _pendingMessages;
 }
 
-void NetworkClientTCP::sendMessage(const string& content)
+void NetworkClientAPI::sendMessage(const string& content)
 {
 	_sendMessage(content, false);
 }
 
-bool NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
+bool NetworkClientAPI::_sendMessage(const string& content, bool isReserved)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -129,7 +129,7 @@ bool NetworkClientTCP::_sendMessage(const string& content, bool isReserved)
 	return true;
 }
 
-int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo)
+int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo)
 {
 	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	
@@ -144,7 +144,7 @@ int NetworkClientTCP::_waitForServerConnection(SOCKET serverSocketID, addrinfo* 
 	}
 }
 
-tuple<int, int, long long, string> NetworkClientTCP::_waitForServerMessage(SOCKET serverSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessage(SOCKET serverSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];

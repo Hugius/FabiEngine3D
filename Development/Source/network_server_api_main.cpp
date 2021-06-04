@@ -1,18 +1,18 @@
 #define WIN32_LEAN_AND_MEAN
 
-#include "network_server_tcp.hpp"
+#include "network_server_api.hpp"
 #include "logger.hpp"
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkServerTCP::NetworkServerTCP() :
+NetworkServerAPI::NetworkServerAPI() :
 	_connectionSocketID(INVALID_SOCKET)
 {
 
 }
 
-NetworkServerTCP::~NetworkServerTCP()
+NetworkServerAPI::~NetworkServerAPI()
 {
 	if (_isRunning)
 	{
@@ -20,7 +20,7 @@ NetworkServerTCP::~NetworkServerTCP()
 	}
 }
 
-void NetworkServerTCP::start(unsigned int customMaxClientCount)
+void NetworkServerAPI::start(unsigned int customMaxClientCount)
 {
 	// Must not be running
 	if (_isRunning)
@@ -82,7 +82,7 @@ void NetworkServerTCP::start(unsigned int customMaxClientCount)
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_connectionThread = std::async(std::launch::async, &NetworkServerTCP::_waitForClientConnection, this, _connectionSocketID);
+	_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 
 	// Server is now operable
 	_customMaxClientCount = customMaxClientCount;
@@ -92,7 +92,7 @@ void NetworkServerTCP::start(unsigned int customMaxClientCount)
 	Logger::throwInfo("Started network server!");
 }
 
-void NetworkServerTCP::stop()
+void NetworkServerAPI::stop()
 {
 	// Must be running first
 	if (!_isRunning)

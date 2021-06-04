@@ -4,55 +4,55 @@
 
 void FabiEngine3D::networkClient_start(const string& username)
 {
-	_core->_networkClientTCP.start(username);
+	_core->_networkClientAPI.start(username);
 }
 
 void FabiEngine3D::networkClient_connect(const string& serverIP)
 {
-	_core->_networkClientTCP.connectToServer(serverIP, NetworkUtils::SERVER_PORT);
+	_core->_networkClientAPI.connectToServer(serverIP, NetworkUtils::SERVER_PORT);
 }
 
 void FabiEngine3D::networkClient_sendMessage(const string& content)
 {
-	_core->_networkClientTCP.sendMessage(content);
+	_core->_networkClientAPI.sendMessage(content);
 }
 
 void FabiEngine3D::networkClient_disconnect()
 {
-	_core->_networkClientTCP.disconnectFromServer();
+	_core->_networkClientAPI.disconnectFromServer();
 }
 
 void FabiEngine3D::networkClient_stop()
 {
-	_core->_networkClientTCP.stop();
+	_core->_networkClientAPI.stop();
 }
 
 const bool FabiEngine3D::networkClient_isRunning()
 {
-	return _core->_networkClientTCP.isRunning();
+	return _core->_networkClientAPI.isRunning();
 }
 
 const bool FabiEngine3D::networkClient_isConnecting()
 {
-	return _core->_networkClientTCP.isConnectingToServer();
+	return _core->_networkClientAPI.isConnectingToServer();
 }
 
 const bool FabiEngine3D::networkClient_isConnected()
 {
-	return _core->_networkClientTCP.isConnectedToServer();
+	return _core->_networkClientAPI.isConnectedToServer();
 }
 
 const unsigned int FabiEngine3D::networkClient_getServerPing()
 {
-	return _core->_networkClientTCP.getServerPing();
+	return _core->_networkClientAPI.getServerPing();
 }
 
 const string FabiEngine3D::networkClient_getServerIP()
 {
-	return _core->_networkClientTCP.getServerIP();
+	return _core->_networkClientAPI.getServerIP();
 }
 
 const vector<NetworkServerMessage>& FabiEngine3D::networkClient_getPendingMessages()
 {
-	return _core->_networkClientTCP.getPendingMessages();
+	return _core->_networkClientAPI.getPendingMessages();
 }

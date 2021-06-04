@@ -15,11 +15,11 @@ using std::tuple;
 using std::make_shared;
 using std::make_tuple;
 
-class NetworkServerTCP final
+class NetworkServerAPI final
 {
 public:
-	NetworkServerTCP();
-	~NetworkServerTCP();
+	NetworkServerAPI();
+	~NetworkServerAPI();
 
 	void start(unsigned int customMaxClientCount);
 	void update();

@@ -59,7 +59,7 @@ const unsigned int NetworkClientAPI::getServerPing()
 
 const string NetworkClientAPI::getServerIP()
 {
-	return NetworkUtils::extractIP(_serverSocketID);
+	return NetworkUtils::extractIP(_tcpServerSocketID);
 }
 
 const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
@@ -73,44 +73,49 @@ const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 	return _pendingMessages;
 }
 
-void NetworkClientAPI::sendMessage(const string& content)
+void NetworkClientAPI::sendMessageTCP(const string& content)
 {
-	_sendMessage(content, false);
+	_sendMessageTCP(content, false);
 }
 
-bool NetworkClientAPI::_sendMessage(const string& content, bool isReserved)
+void NetworkClientAPI::sendMessageUDP(const string& content)
+{
+	_sendMessageUDP(content, false);
+}
+
+bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 {
 	// Must be running first
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to send message: not running!");
+		Logger::throwWarning("Networking client tried to send TCP message: not running!");
 		return false;
 	}
 
 	// Must be connected & accepted first
 	if ((!_isConnectedToServer && _isAcceptedByServer))
 	{
-		Logger::throwWarning("Networking client tried to send message: not connected!");
+		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
 		return false;
 	}
 
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking client tried to send message: cannot contain semicolons!");
+		Logger::throwWarning("Networking client tried to send TCP message: cannot contain semicolons!");
 		return false;
 	}
 
 	// Validate message availability
 	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking client tried to send message: \"" + content + "\" is reserved!");
+		Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
 		return false;
 	}
 
 	// Add a semicolon to indicate end of this message
 	string messageContent = content + ';';
-	auto sendStatusCode = send(_serverSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
+	auto sendStatusCode = send(_tcpServerSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -122,7 +127,65 @@ bool NetworkClientAPI::_sendMessage(const string& content, bool isReserved)
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
+			Logger::throwError("Networking client TCP send failed with error code: ", WSAGetLastError());
+		}
+	}
+
+	return true;
+}
+
+bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved)
+{
+	// Must be running first
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: not running!");
+		return false;
+	}
+
+	// Must be connected & accepted first
+	if ((!_isConnectedToServer && _isAcceptedByServer))
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
+		return false;
+	}
+
+	// Validate message semantics
+	if (std::find(content.begin(), content.end(), ';') != content.end())
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
+		return false;
+	}
+
+	// Validate message availability
+	if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
+		return false;
+	}
+
+	// Add a semicolon to indicate end of this message
+	string messageContent = content + ';';
+	auto sendStatusCode = sendto(
+		_udpServerSocketID, // UDP socket
+		messageContent.c_str(), // Message
+		static_cast<int>(messageContent.size()), // Message size
+		0, // Flags
+		_udpAddressInfo->ai_addr, // Server address
+		static_cast<int>(_udpAddressInfo->ai_addrlen)); // Server address length
+
+	// Check if sending went well
+	if (sendStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
+		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
+		{
+			disconnectFromServer();
+			return false;
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking client UDP send failed with error code: ", WSAGetLastError());
 		}
 	}
 
@@ -144,12 +207,12 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, addrinfo* 
 	}
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessage(SOCKET serverSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageTCP(SOCKET tcpServerSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	auto receiveResult = recv(serverSocketID, buffer, bufferLength, 0);
+	auto receiveResult = recv(tcpServerSocketID, buffer, bufferLength, 0);
 
 	if (receiveResult > 0) // Message received correctly
 	{
@@ -158,5 +221,26 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessage(SOCKE
 	else // Something else happened
 	{
 		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
+	}
+}
+
+tuple<int, int, long long, string, string, string> NetworkClientAPI::_waitForServerMessageUDP(SOCKET udpServerSocketID)
+{
+	// Retrieve bytes & size
+	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
+	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
+	sockaddr_in sourceAddress;
+	int sourceAddressLength;
+	auto receiveResult = recvfrom(udpServerSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto IP = NetworkUtils::extractIP(sourceAddress);
+	auto port = NetworkUtils::extractIP(sourceAddress);
+
+	if (receiveResult > 0) // Message received correctly
+	{
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+	}
+	else // Something else happened
+	{
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
 	}
 }

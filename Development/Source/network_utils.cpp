@@ -14,12 +14,24 @@ const string NetworkUtils::extractIP(SOCKET socket)
 	return string(ipAddress);
 }
 
+const string NetworkUtils::extractIP(sockaddr_in sourceAddress)
+{
+	char ipAddress[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &sourceAddress.sin_addr, ipAddress, sizeof(ipAddress));
+	return string(ipAddress);
+}
+
 const string NetworkUtils::extractPort(SOCKET socket)
 {
 	sockaddr_in socketAddress;
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
 	return std::to_string(socketAddress.sin_port);
+}
+
+const string NetworkUtils::extractPort(sockaddr_in sourceAddress)
+{
+	return std::to_string(sourceAddress.sin_port);
 }
 
 const bool NetworkUtils::isMessageReserved(const string& message)

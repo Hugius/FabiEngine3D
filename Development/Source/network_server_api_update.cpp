@@ -46,7 +46,7 @@ void NetworkServerAPI::update()
 		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT || _clientIPs.size() == _customMaxClientCount)
 		{
 			// Reject client
-			_sendMessage(clientSocketID, "SERVER_FULL", true);
+			_sendMessageTCP(clientSocketID, "SERVER_FULL", true);
 			_disconnectingClientSocketIDs.push_back(clientSocketID);
 		}
 		else
@@ -94,7 +94,7 @@ BEGIN:
 							{
 								// Set new username
 								clientUsername = _currentMessageBuild;
-								_sendMessage(clientSocketID, "ACCEPTED", true);
+								_sendMessageTCP(clientSocketID, "ACCEPTED", true);
 								_currentMessageBuild = "";
 
 								// Logging
@@ -103,7 +103,7 @@ BEGIN:
 							else
 							{
 								// Reject client
-								_sendMessage(clientSocketID, "USER_ALREADY_CONNECTED", true);
+								_sendMessageTCP(clientSocketID, "USER_ALREADY_CONNECTED", true);
 								_disconnectingClientSocketIDs.push_back(clientSocketID);
 								_currentMessageBuild = "";
 
@@ -114,7 +114,7 @@ BEGIN:
 						else if (_currentMessageBuild == "PING") // Handle ping message
 						{
 							auto pingMessage = "PING" + std::to_string(messageTimestamp) + "_" + std::to_string(Tools::getTimeSinceEpochMS());
-							_sendMessage(clientSocketID, pingMessage, true);
+							_sendMessageTCP(clientSocketID, pingMessage, true);
 							_currentMessageBuild = "";
 						}
 						else // Handle other messages

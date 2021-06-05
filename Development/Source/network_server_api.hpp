@@ -23,8 +23,8 @@ public:
 
 	void start(unsigned int customMaxClientCount);
 	void update();
-	void sendMessage(const string& username, const string& content);
-	void broadcastMessage(const string& content);
+	void sendMessageTCP(const string& username, const string& content);
+	void broadcastMessageTCP(const string& content);
 	void disconnectClient(const string& username);
 	void stop();
 
@@ -38,7 +38,7 @@ public:
 	const vector<string> getClientUsernames();
 
 private:
-	void _sendMessage(SOCKET clientSocketID, const string& content, bool isReserved);
+	void _sendMessageTCP(SOCKET clientSocketID, const string& content, bool isReserved);
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET connectionSocketID);

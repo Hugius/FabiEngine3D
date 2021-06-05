@@ -108,7 +108,7 @@ const vector<string> NetworkServerAPI::getClientUsernames()
 	return clientUsernames;
 }
 
-void NetworkServerAPI::sendMessage(const string& username, const string& content)
+void NetworkServerAPI::sendMessageTCP(const string& username, const string& content)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -125,7 +125,7 @@ void NetworkServerAPI::sendMessage(const string& username, const string& content
 			// Check if client is found
 			if (username == _clientUsernames[i])
 			{
-				_sendMessage(_clientSocketIDs[i], content, false);
+				_sendMessageTCP(_clientSocketIDs[i], content, false);
 				return;
 			}
 		}
@@ -135,7 +135,7 @@ void NetworkServerAPI::sendMessage(const string& username, const string& content
 	Logger::throwWarning("Networking server tried to send message to client \"" + username + "\": not connected!");
 }
 
-void NetworkServerAPI::broadcastMessage(const string& content)
+void NetworkServerAPI::broadcastMessageTCP(const string& content)
 {
 	// Check if server is even running
 	if (!_isRunning)
@@ -149,7 +149,7 @@ void NetworkServerAPI::broadcastMessage(const string& content)
 		// Client must be fully accepted
 		if (!_clientUsernames[i].empty())
 		{
-			_sendMessage(_clientSocketIDs[i], content, false);
+			_sendMessageTCP(_clientSocketIDs[i], content, false);
 		}
 	}
 }
@@ -171,7 +171,7 @@ void NetworkServerAPI::disconnectClient(const string& username)
 			// Check if client is found
 			if (username == _clientUsernames[i])
 			{
-				_sendMessage(_clientSocketIDs[i], "DISCONNECTED_BY_SERVER", true);
+				_sendMessageTCP(_clientSocketIDs[i], "DISCONNECTED_BY_SERVER", true);
 				_disconnectingClientSocketIDs.push_back(_clientSocketIDs[i]);
 				return;
 			}
@@ -182,7 +182,7 @@ void NetworkServerAPI::disconnectClient(const string& username)
 	Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not connected!");
 }
 
-void NetworkServerAPI::_sendMessage(SOCKET clientSocketID, const string& content, bool isReserved)
+void NetworkServerAPI::_sendMessageTCP(SOCKET clientSocketID, const string& content, bool isReserved)
 {
 	// Validate message semantics
 	if (std::find(content.begin(), content.end(), ';') != content.end())

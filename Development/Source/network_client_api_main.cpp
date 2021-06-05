@@ -7,7 +7,8 @@
 #include <ws2tcpip.h>
 
 NetworkClientAPI::NetworkClientAPI() :
-	_serverSocketID(INVALID_SOCKET)
+	_tcpServerSocketID(INVALID_SOCKET),
+	_udpServerSocketID(INVALID_SOCKET)
 {
 
 }
@@ -72,30 +73,52 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 		return;
 	}
 
-	// Compose address info hints
-	addrinfo hints;
-	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_INET; // Ipv4 address
-	hints.ai_socktype = SOCK_STREAM; // Streaming socket
-	hints.ai_protocol = IPPROTO_TCP; // TCP protocol
+	// Compose TCP address info hints
+	addrinfo tcpHints;
+	ZeroMemory(&tcpHints, sizeof(tcpHints));
+	tcpHints.ai_family = AF_INET; // Ipv4 address
+	tcpHints.ai_socktype = SOCK_STREAM; // Streaming socket
+	tcpHints.ai_protocol = IPPROTO_TCP; // TCP protocol
 
-	// Create address info
-	auto infoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &hints, &_addressInfo);
-	if (infoStatusCode != 0)
+	// Compose UDP address info hints
+	addrinfo udpHints;
+	ZeroMemory(&udpHints, sizeof(udpHints));
+	udpHints.ai_family = AF_INET; // Ipv4 address
+	udpHints.ai_socktype = SOCK_DGRAM; // Datagram socket
+	udpHints.ai_protocol = IPPROTO_UDP; // UDP protocol
+
+	// Create TCP address info
+	auto tcpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &tcpHints, &_tcpAddressInfo);
+	if (tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking client address info failed with error code: ", infoStatusCode);
+		Logger::throwError("Networking client TCP address info failed with error code: ", tcpInfoStatusCode);
 		return;
 	}
 
-	// Create socket for connecting to the server
-	_serverSocketID = socket(_addressInfo->ai_family, _addressInfo->ai_socktype, _addressInfo->ai_protocol);
-	if (_serverSocketID == INVALID_SOCKET)
+	// Create UDP address info
+	auto udpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &udpHints, &_udpAddressInfo);
+	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking client startup (socket create) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking client UDP address info failed with error code: ", udpInfoStatusCode);
+		return;
+	}
+
+	// Create TCP socket
+	_tcpServerSocketID = socket(_tcpAddressInfo->ai_family, _tcpAddressInfo->ai_socktype, _tcpAddressInfo->ai_protocol);
+	if (_tcpServerSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client startup (TCP socket create) failed with error code: ", WSAGetLastError());
+	}
+
+	// Create UDP socket
+	_udpServerSocketID = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+	if (_tcpServerSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client startup (UDP socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _serverSocketID, _addressInfo);
+	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpServerSocketID, _tcpAddressInfo);
 
 	// Client is now connecting
 	_isConnectingToServer = true;
@@ -118,17 +141,24 @@ void NetworkClientAPI::disconnectFromServer()
 	}
 
 	// Close server connection
-	closesocket(_serverSocketID);
+	closesocket(_tcpServerSocketID);
+	closesocket(_udpServerSocketID);
 
-	// Delete address info
-	if (_addressInfo != nullptr)
+	// Delete TCP address info
+	if (_tcpAddressInfo != nullptr)
 	{
-		freeaddrinfo(_addressInfo);
+		freeaddrinfo(_tcpAddressInfo);
+	}
+
+	// Delete UDP address info
+	if (_udpAddressInfo != nullptr)
+	{
+		freeaddrinfo(_udpAddressInfo);
 	}
 
 	// Reset variables
-	_serverSocketID = INVALID_SOCKET;
-	_addressInfo = nullptr;
+	_tcpServerSocketID = INVALID_SOCKET;
+	_tcpAddressInfo = nullptr;
 	_pendingMessages.clear();
 	_serverPings.clear();
 	_lastMilliseconds = 0;

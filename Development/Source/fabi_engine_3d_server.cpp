@@ -11,14 +11,24 @@ void FabiEngine3D::networkServer_stop()
 	_core->_networkServerAPI.stop();
 }
 
-void FabiEngine3D::networkServer_sendMessage(const string& username, const string& content)
+void FabiEngine3D::networkServer_sendMessageTCP(const string& username, const string& content)
 {
-	_core->_networkServerAPI.sendMessage(username, content);
+	_core->_networkServerAPI.sendMessageTCP(username, content);
 }
 
-void FabiEngine3D::networkServer_broadcastMessage(const string& content)
+void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const string& content)
 {
-	_core->_networkServerAPI.broadcastMessage(content);
+	//_core->_networkServerAPI.sendMessageUDP(username, content);
+}
+
+void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content)
+{
+	_core->_networkServerAPI.broadcastMessageTCP(content);
+}
+
+void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content)
+{
+	//_core->_networkServerAPI.broadcastMessageUDP(content);
 }
 
 void FabiEngine3D::networkServer_disconnectClient(const string& username)

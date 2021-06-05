@@ -29,7 +29,8 @@ public:
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
 	void disconnectFromServer();
-	void sendMessage(const string& content);
+	void sendMessageTCP(const string& content);
+	void sendMessageUDP(const string& content);
 	void stop();
 
 	const bool isRunning();
@@ -43,16 +44,21 @@ public:
 	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
-	bool _sendMessage(const string& content, bool isReserved);
 	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
-	tuple<int, int, long long, string> _waitForServerMessage(SOCKET serverSocketID);
+	bool _sendMessageTCP(const string& content, bool isReserved);
+	bool _sendMessageUDP(const string& content, bool isReserved);
+	tuple<int, int, long long, string> _waitForServerMessageTCP(SOCKET tcpServerSocketID);
+	tuple<int, int, long long, string, string, string> _waitForServerMessageUDP(SOCKET udpServerSocketID);
 
-	addrinfo* _addressInfo = nullptr;
+	addrinfo* _tcpAddressInfo = nullptr;
+	addrinfo* _udpAddressInfo = nullptr;
 
-	SOCKET _serverSocketID;
+	SOCKET _tcpServerSocketID;
+	SOCKET _udpServerSocketID;
 
 	future<int> _connectionThread;
-	future<tuple<int, int, long long, string>> _serverMessageThread;
+	future<tuple<int, int, long long, string>> _serverMessageThreadTCP;
+	future<tuple<int, int, long long, string, string, string>> _serverMessageThreadUDP;
 
 	vector<NetworkServerMessage> _pendingMessages;
 

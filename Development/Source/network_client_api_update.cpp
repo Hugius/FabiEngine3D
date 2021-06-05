@@ -34,13 +34,14 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendMessage(_username, false))
+				if (!_sendMessageTCP(_username, false))
 				{
 					return;
 				}
 
 				// Start a thread to listen for server messages
-				_serverMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessage, this, _serverSocketID);
+				_serverMessageThreadTCP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageTCP, this, _tcpServerSocketID);
+				_serverMessageThreadUDP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageUDP, this, _udpServerSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
@@ -67,7 +68,7 @@ void NetworkClientAPI::update()
 	if (!_isWaitingForPing)
 	{
 		// Send ping & validate
-		if (!_sendMessage("PING", true))
+		if (!_sendMessageTCP("PING", true))
 		{
 			return;
 		}
@@ -77,11 +78,11 @@ void NetworkClientAPI::update()
 		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
-	// Check if the server sent any messages
-	if (_serverMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	// Check if the server sent any TCP messages
+	if (_serverMessageThreadTCP.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
-		auto messageResult = _serverMessageThread.get();
+		auto messageResult = _serverMessageThreadTCP.get();
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
@@ -143,11 +144,36 @@ void NetworkClientAPI::update()
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Networking server receive failed with error code: ", messageErrorCode);
+				Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
 			}
 		}
 
 		// Spawn new message thread
-		_serverMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessage, this, _serverSocketID);
+		_serverMessageThreadTCP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageTCP, this, _tcpServerSocketID);
+	}
+
+	// Check if the server sent any UDP messages
+	while (_serverMessageThreadUDP.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	{
+		// Temporary values
+		auto messageResult = _serverMessageThreadUDP.get();
+		auto messageStatusCode = std::get<0>(messageResult);
+		auto messageErrorCode = std::get<1>(messageResult);
+		auto messageTimestamp = std::get<2>(messageResult);
+		auto messageContent = std::get<3>(messageResult);
+		auto messageIP = std::get<4>(messageResult);
+		auto messagePort = std::get<5>(messageResult);
+
+		if (messageStatusCode > 0) // Message is received correctly
+		{
+			_pendingMessages.push_back(NetworkServerMessage(_currentMessageBuild));
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
+		}
+
+		// Spawn new message thread
+		_serverMessageThreadUDP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageUDP, this, _udpServerSocketID);
 	}
 }

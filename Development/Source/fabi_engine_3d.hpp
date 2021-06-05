@@ -777,8 +777,10 @@ public:
 
 	// Server interface - setters
 	void networkServer_start(unsigned int customMaxClientCount);
-	void networkServer_sendMessage(const string& username, const string& conten);
-	void networkServer_broadcastMessage(const string& content);
+	void networkServer_sendMessageTCP(const string& username, const string& content);
+	void networkServer_sendMessageUDP(const string& username, const string& content);
+	void networkServer_broadcastMessageTCP(const string& content);
+	void networkServer_broadcastMessageUDP(const string& content);
 	void networkServer_disconnectClient(const string& username);
 	void networkServer_stop();
 
@@ -793,7 +795,8 @@ public:
 	// Client interface - setters
 	void networkClient_start(const string& username);
 	void networkClient_connect(const string& serverIP);
-	void networkClient_sendMessage(const string& content);
+	void networkClient_sendMessageTCP(const string& content);
+	void networkClient_sendMessageUDP(const string& content);
 	void networkClient_disconnect();
 	void networkClient_stop();
 

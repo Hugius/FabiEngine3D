@@ -12,9 +12,14 @@ void FabiEngine3D::networkClient_connect(const string& serverIP)
 	_core->_networkClientAPI.connectToServer(serverIP, NetworkUtils::SERVER_PORT);
 }
 
-void FabiEngine3D::networkClient_sendMessage(const string& content)
+void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
 {
-	_core->_networkClientAPI.sendMessage(content);
+	_core->_networkClientAPI.sendMessageTCP(content);
+}
+
+void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
+{
+	_core->_networkClientAPI.sendMessageUDP(content);
 }
 
 void FabiEngine3D::networkClient_disconnect()

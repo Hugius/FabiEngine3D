@@ -88,7 +88,8 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	udpHints.ai_protocol = IPPROTO_UDP; // UDP protocol
 
 	// Create TCP address info
-	auto tcpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &tcpHints, &_tcpAddressInfo);
+	addrinfo* tcpAddressInfo = nullptr;
+	auto tcpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("Networking client startup (TCP address info) failed with error code: ", tcpInfoStatusCode);
@@ -96,7 +97,8 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	}
 
 	// Create UDP address info
-	auto udpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &udpHints, &_udpAddressInfo);
+	addrinfo* udpAddressInfo = nullptr;
+	auto udpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
 		Logger::throwError("Networking client startup (UDP address info) failed with error code: ", udpInfoStatusCode);
@@ -104,21 +106,25 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	}
 
 	// Create TCP socket
-	_tcpServerSocketID = socket(_tcpAddressInfo->ai_family, _tcpAddressInfo->ai_socktype, _tcpAddressInfo->ai_protocol);
+	_tcpServerSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
 	if (_tcpServerSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking client startup (TCP socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Create UDP socket
-	_udpServerSocketID = socket(_udpAddressInfo->ai_family, _udpAddressInfo->ai_socktype, _udpAddressInfo->ai_protocol);
+	_udpServerSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
 	if (_udpServerSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking client startup (UDP socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpServerSocketID, _tcpAddressInfo);
+	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpServerSocketID, serverIP, serverPort);
+
+	// Address infos not needed anymore
+	freeaddrinfo(tcpAddressInfo);
+	freeaddrinfo(udpAddressInfo);
 
 	// Client is now connecting
 	_isConnectingToServer = true;
@@ -144,21 +150,8 @@ void NetworkClientAPI::disconnectFromServer()
 	closesocket(_tcpServerSocketID);
 	closesocket(_udpServerSocketID);
 
-	// Delete TCP address info
-	if (_tcpAddressInfo != nullptr)
-	{
-		freeaddrinfo(_tcpAddressInfo);
-	}
-
-	// Delete UDP address info
-	if (_udpAddressInfo != nullptr)
-	{
-		freeaddrinfo(_udpAddressInfo);
-	}
-
 	// Reset variables
 	_tcpServerSocketID = INVALID_SOCKET;
-	_tcpAddressInfo = nullptr;
 	_pendingMessages.clear();
 	_serverPings.clear();
 	_lastMilliseconds = 0;

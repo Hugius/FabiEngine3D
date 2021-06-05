@@ -8,7 +8,7 @@
 
 NetworkServerAPI::NetworkServerAPI() :
 	_connectionSocketID(INVALID_SOCKET),
-	_udpSocketID(INVALID_SOCKET)
+	_udpMessageSocketID(INVALID_SOCKET)
 {
 
 }
@@ -38,7 +38,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	}
 
 	// Compose TCP address info hints
-	addrinfo tcpHints;
+	addrinfo tcpHints = addrinfo();
 	ZeroMemory(&tcpHints, sizeof(tcpHints));
 	tcpHints.ai_family = AF_INET; // Ipv4 address
 	tcpHints.ai_socktype = SOCK_STREAM; // Streaming socket
@@ -46,7 +46,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	tcpHints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
 
 	// Compose UDP address info hints
-	addrinfo udpHints;
+	addrinfo udpHints = addrinfo();
 	ZeroMemory(&udpHints, sizeof(udpHints));
 	udpHints.ai_family = AF_INET; // Ipv4 address
 	udpHints.ai_socktype = SOCK_DGRAM; // Datagram socket
@@ -54,7 +54,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	udpHints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
 
 	// Create TCP address info
-	struct addrinfo* tcpAddressInfo = nullptr;
+	addrinfo* tcpAddressInfo = nullptr;
 	auto tcpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
@@ -63,7 +63,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	}
 
 	// Create UDP address info
-	struct addrinfo* udpAddressInfo = nullptr;
+	addrinfo* udpAddressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
@@ -79,8 +79,8 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	}
 
 	// Create socket for listening to client connection requests
-	_udpSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
-	if (_udpSocketID == INVALID_SOCKET)
+	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
+	if (_udpMessageSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking server startup (UDP socket create) failed with error code: ", WSAGetLastError());
 	}
@@ -97,15 +97,11 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	}
 
 	// Bind the UDP connection socket
-	auto udpBindStatusCode = bind(_udpSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
+	auto udpBindStatusCode = bind(_udpMessageSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
 		Logger::throwError("Networking server startup (TCP socket bind) failed with error code: ", WSAGetLastError());
 	}
-
-	// Address infos not needed anymore
-	freeaddrinfo(tcpAddressInfo);
-	freeaddrinfo(udpAddressInfo);
 
 	// Enable listening for any incoming connection requests
 	auto listenStatusCode = listen(_connectionSocketID, SOMAXCONN);
@@ -118,7 +114,11 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 
 	// Spawn a thread for any incoming UDP messages
-	_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpSocketID);
+	_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpMessageSocketID);
+
+	// Address infos not needed anymore
+	freeaddrinfo(tcpAddressInfo);
+	freeaddrinfo(udpAddressInfo);
 
 	// Server is now operable
 	_customMaxClientCount = customMaxClientCount;
@@ -141,7 +141,7 @@ void NetworkServerAPI::stop()
 	closesocket(_connectionSocketID);
 
 	// Close UDP message socket
-	closesocket(_udpSocketID);
+	closesocket(_udpMessageSocketID);
 
 	// Delete all connected clients
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
@@ -153,7 +153,7 @@ void NetworkServerAPI::stop()
 	_pendingMessages.clear();
 	_currentTcpMessageBuild = "";
 	_connectionSocketID = INVALID_SOCKET;
-	_udpSocketID = INVALID_SOCKET;
+	_udpMessageSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 	_isRunning = false;
 

@@ -9,12 +9,12 @@ struct NetworkClientMessage final
 	NetworkClientMessage() = default;
 
 	NetworkClientMessage(
-		const string& ipAddress,
+		const string& IP,
 		const string& port,
 		const string& username,
 		const string& content)
 		:
-		ipAddress(ipAddress),
+		IP(IP),
 		port(port),
 		username(username),
 		content(content)
@@ -22,7 +22,7 @@ struct NetworkClientMessage final
 
 	}
 
-	const string ipAddress;
+	const string IP;
 	const string port;
 	const string username;
 	const string content;

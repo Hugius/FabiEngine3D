@@ -80,7 +80,7 @@ void NetworkClientAPI::sendMessageTCP(const string& content)
 
 void NetworkClientAPI::sendMessageUDP(const string& content)
 {
-	_sendMessageUDP(content, false);
+	//_sendMessageUDP(content);
 }
 
 bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
@@ -134,7 +134,7 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 	return true;
 }
 
-bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved)
+bool NetworkClientAPI::_sendMessageUDP(const string& serverIP, const string& serverPort, const string& content)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -144,7 +144,7 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved)
 	}
 
 	// Must be connected & accepted first
-	if ((!_isConnectedToServer && _isAcceptedByServer))
+	if (!_isConnectedToServer && _isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
 		return false;
@@ -158,21 +158,26 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved)
 	}
 
 	// Validate message availability
-	if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	if (NetworkUtils::isMessageReserved(content))
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
 		return false;
 	}
 
+	// Compose socket address
+	sockaddr_in targetAddress;
+	targetAddress.sin_family = AF_INET;
+	targetAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
+	targetAddress.sin_port = htons(stoi(serverPort));
+
 	// Add a semicolon to indicate end of this message
-	string messageContent = content + ';';
 	auto sendStatusCode = sendto(
 		_udpServerSocketID, // UDP socket
-		messageContent.c_str(), // Message
-		static_cast<int>(messageContent.size()), // Message size
+		content.c_str(), // Message
+		static_cast<int>(content.size()), // Message size
 		0, // Flags
-		_udpAddressInfo->ai_addr, // Server address
-		static_cast<int>(_udpAddressInfo->ai_addrlen)); // Server address length
+		reinterpret_cast<sockaddr*>(&targetAddress), // Server address
+		sizeof(targetAddress)); // Server address length
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -192,9 +197,19 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content, bool isReserved)
 	return true;
 }
 
-int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo)
+int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
 {
-	auto connectStatusCode = connect(serverSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	// Compose socket address
+	sockaddr_in targetAddress;
+	targetAddress.sin_family = AF_INET;
+	targetAddress.sin_port = htons(stoi(serverPort));
+	targetAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
+
+	// Try to connect to server
+	auto connectStatusCode = connect(
+		serverSocketID,
+		reinterpret_cast<sockaddr*>(&targetAddress),
+		sizeof(targetAddress));
 	
 	// Check if connection attempt went well
 	if (connectStatusCode == SOCKET_ERROR)

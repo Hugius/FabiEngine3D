@@ -59,7 +59,7 @@ void NetworkServerAPI::update()
 		_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 	}
 
-	// Receive incoming client messages
+	// Receive incoming TCP messages
 BEGIN:
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
@@ -142,7 +142,7 @@ BEGIN:
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
+					Logger::throwError("Networking server TCP receive (message) failed with error code: ", messageErrorCode);
 				}
 			}
 
@@ -151,8 +151,8 @@ BEGIN:
 		}
 	}
 
-	// Check if the server sent any UDP messages
-	if (_udpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	// Receive incoming UDP messages
+	while (_udpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
 		auto messageResult = _udpMessageThread.get();
@@ -165,9 +165,10 @@ BEGIN:
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			for (unsigned int i = 0; i < _clientIPs.size(); i++) // Try to find username
+			// Try to find the corresponding username
+			for (unsigned int i = 0; i < _clientIPs.size(); i++)
 			{
-				if (messageIP == _clientIPs[i]) // Username found
+				if (messageIP == _clientIPs[i])
 				{
 					_pendingMessages.push_back(NetworkClientMessage(messageIP, messagePort, _clientUsernames[i], messageContent));
 				}
@@ -179,6 +180,6 @@ BEGIN:
 		}
 
 		// Spawn new message thread
-		_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpSocketID);
+		_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpMessageSocketID);
 	}
 }

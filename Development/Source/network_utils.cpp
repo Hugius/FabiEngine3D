@@ -9,16 +9,16 @@ const string NetworkUtils::extractIP(SOCKET socket)
 	sockaddr_in socketAddress;
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
-	char ipAddress[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &socketAddress.sin_addr, ipAddress, sizeof(ipAddress));
-	return string(ipAddress);
+	char IP[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &socketAddress.sin_addr, IP, sizeof(IP));
+	return string(IP);
 }
 
 const string NetworkUtils::extractIP(sockaddr_in sourceAddress)
 {
-	char ipAddress[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &sourceAddress.sin_addr, ipAddress, sizeof(ipAddress));
-	return string(ipAddress);
+	char IP[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &sourceAddress.sin_addr, IP, sizeof(IP));
+	return string(IP);
 }
 
 const string NetworkUtils::extractPort(SOCKET socket)

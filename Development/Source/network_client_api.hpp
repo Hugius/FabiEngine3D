@@ -17,8 +17,6 @@ using std::tuple;
 using std::make_shared;
 using std::make_tuple;
 
-struct addrinfo;
-
 class NetworkClientAPI final
 {
 public:
@@ -44,14 +42,11 @@ public:
 	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
-	int _waitForServerConnection(SOCKET serverSocketID, addrinfo* addressInfo);
+	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
 	bool _sendMessageTCP(const string& content, bool isReserved);
-	bool _sendMessageUDP(const string& content, bool isReserved);
+	bool _sendMessageUDP(const string& serverIP, const string& serverPort, const string& content);
 	tuple<int, int, long long, string> _waitForServerMessageTCP(SOCKET tcpServerSocketID);
 	tuple<int, int, long long, string, string, string> _waitForServerMessageUDP(SOCKET udpServerSocketID);
-
-	addrinfo* _tcpAddressInfo = nullptr;
-	addrinfo* _udpAddressInfo = nullptr;
 
 	SOCKET _tcpServerSocketID;
 	SOCKET _udpServerSocketID;

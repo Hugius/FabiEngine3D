@@ -132,7 +132,34 @@ void NetworkServerAPI::sendMessageTCP(const string& username, const string& cont
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server tried to send message to client \"" + username + "\": not connected!");
+	Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not connected!");
+}
+
+void NetworkServerAPI::sendMessageUDP(const string& username, const string& content)
+{
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to send TCP message: not running!");
+	}
+
+	// Try to find client and send message
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
+	{
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
+		{
+			// Check if client is found
+			if (username == _clientUsernames[i])
+			{
+				_sendMessageUDP(_clientIPs[i], _clientPorts[i], content);
+				return;
+			}
+		}
+	}
+
+	// Client not connected
+	Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not connected!");
 }
 
 void NetworkServerAPI::broadcastMessageTCP(const string& content)
@@ -140,7 +167,7 @@ void NetworkServerAPI::broadcastMessageTCP(const string& content)
 	// Check if server is even running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to broadcast message: not running!");
+		Logger::throwWarning("Networking server tried to broadcast TCP message: not running!");
 	}
 
 	// Send message to all connected clients
@@ -150,6 +177,25 @@ void NetworkServerAPI::broadcastMessageTCP(const string& content)
 		if (!_clientUsernames[i].empty())
 		{
 			_sendMessageTCP(_clientSocketIDs[i], content, false);
+		}
+	}
+}
+
+void NetworkServerAPI::broadcastMessageUDP(const string& content)
+{
+	// Check if server is even running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to broadcast UDP message: not running!");
+	}
+
+	// Try to find client and send message
+	for (size_t i = 0; i < _clientUsernames.size(); i++)
+	{
+		// Client must be fully accepted
+		if (!_clientUsernames[i].empty())
+		{
+			_sendMessageUDP(_clientIPs[i], _clientPorts[i], content);
 		}
 	}
 }
@@ -211,14 +257,52 @@ void NetworkServerAPI::_sendMessageTCP(SOCKET clientSocketID, const string& cont
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Network server send failed with error code: ", WSAGetLastError());
+			Logger::throwError("Network server TCP send failed with error code: ", WSAGetLastError());
 		}
+	}
+}
+
+void NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& clientPort, const string& content)
+{
+	// Validate message semantics
+	if (std::find(content.begin(), content.end(), ';') != content.end())
+	{
+		Logger::throwWarning("Networking message tried to send UDP message: cannot contain semicolons!");
+		return;
+	}
+
+	// Check if message is not reserved
+	if (NetworkUtils::isMessageReserved(content))
+	{
+		Logger::throwWarning("Networking server tried to send UDP message: \"" + content + "\" is reserved!");
+		return;
+	}
+
+	// Compose socket address
+	sockaddr_in targetAddress;
+	targetAddress.sin_family = AF_INET;
+	targetAddress.sin_addr.s_addr = inet_addr(clientIP.c_str());
+	targetAddress.sin_port = htons(stoi(clientPort));
+
+	// Add a semicolon to indicate end of this message
+	auto sendStatusCode = sendto(
+		_udpMessageSocketID, // UDP socket
+		content.c_str(), // Message
+		static_cast<int>(content.size()), // Message size
+		0, // Flags
+		reinterpret_cast<sockaddr*>(&targetAddress), // Server address
+		sizeof(targetAddress)); // Server address length
+
+	// Check if sending went well
+	if (sendStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("Network server UDP send failed with error code: ", WSAGetLastError());
 	}
 }
 
 void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 {
-	// Extract IP address & port
+	// Extract IP & port
 	auto clientIP = NetworkUtils::extractIP(clientSocketID);
 	auto clientPort = NetworkUtils::extractPort(clientSocketID);
 
@@ -294,7 +378,7 @@ tuple<int, int, long long, string, string, string> NetworkServerAPI::_waitForCli
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	sockaddr_in sourceAddress;
+	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
 	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 	auto IP = NetworkUtils::extractIP(sourceAddress);

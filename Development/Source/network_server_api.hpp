@@ -38,27 +38,35 @@ public:
 	const vector<string> getClientUsernames();
 
 private:
+	// Message functions
 	void _sendMessageTCP(SOCKET clientSocketID, const string& content, bool isReserved);
+	tuple<int, int, long long, string> _waitForClientMessageTCP(SOCKET clientSocketID);
+	tuple<int, int, long long, string, string, string> _waitForClientMessageUDP(SOCKET udpMessageSocketID);
+
+	// Client functions
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET connectionSocketID);
-	tuple<int, int, long long, string> _waitForClientMessage(SOCKET clientSocketID);
 
+	// Connection variables
 	SOCKET _connectionSocketID;
 	future<SOCKET> _connectionThread;
 
+	// Client variables
 	vector<SOCKET> _disconnectingClientSocketIDs;
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
-
-	vector<NetworkClientMessage> _pendingMessages;
-	vector<future<tuple<int, int, long long, string>>> _messageThreads;
-
-	string _currentMessageBuild = "";
-
 	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 
+	// Message variables
+	vector<NetworkClientMessage> _pendingMessages;
+	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
+	future<tuple<int, int, long long, string, string, string>> _udpMessageThread;
+	string _currentTcpMessageBuild = "";
+
+	// Miscellaneous variables
+	SOCKET _udpSocketID;
 	bool _isRunning = false;
 };

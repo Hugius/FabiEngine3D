@@ -62,7 +62,7 @@ private:
 
 	vector<NetworkServerMessage> _pendingMessages;
 
-	string _currentMessageBuild = "";
+	string _currentTcpMessageBuild = "";
 	string _username = "";
 
 	vector<unsigned int> _serverPings;

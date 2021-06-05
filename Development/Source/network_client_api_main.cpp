@@ -91,7 +91,7 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	auto tcpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &tcpHints, &_tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking client TCP address info failed with error code: ", tcpInfoStatusCode);
+		Logger::throwError("Networking client startup (TCP address info) failed with error code: ", tcpInfoStatusCode);
 		return;
 	}
 
@@ -99,7 +99,7 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	auto udpInfoStatusCode = getaddrinfo(serverIP.c_str(), serverPort.c_str(), &udpHints, &_udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking client UDP address info failed with error code: ", udpInfoStatusCode);
+		Logger::throwError("Networking client startup (UDP address info) failed with error code: ", udpInfoStatusCode);
 		return;
 	}
 
@@ -111,8 +111,8 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	}
 
 	// Create UDP socket
-	_udpServerSocketID = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (_tcpServerSocketID == INVALID_SOCKET)
+	_udpServerSocketID = socket(_udpAddressInfo->ai_family, _udpAddressInfo->ai_socktype, _udpAddressInfo->ai_protocol);
+	if (_udpServerSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking client startup (UDP socket create) failed with error code: ", WSAGetLastError());
 	}
@@ -162,7 +162,7 @@ void NetworkClientAPI::disconnectFromServer()
 	_pendingMessages.clear();
 	_serverPings.clear();
 	_lastMilliseconds = 0;
-	_currentMessageBuild = "";
+	_currentTcpMessageBuild = "";
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
 	_isWaitingForPing = false;

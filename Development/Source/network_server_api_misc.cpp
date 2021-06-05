@@ -228,8 +228,8 @@ void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 	_clientPorts.push_back(clientPort);
 	_clientUsernames.push_back("");
 
-	// Spawn thread for receiving messages
-	_messageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessage, this, clientSocketID));
+	// Spawn thread for receiving TCP messages
+	_tcpMessageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageTCP, this, clientSocketID));
 }
 
 void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
@@ -250,7 +250,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			_clientIPs.erase(_clientIPs.begin() + i);
 			_clientPorts.erase(_clientPorts.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_messageThreads.erase(_messageThreads.begin() + i);
+			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
 			// Logging (if client was fully accepted)
 			if (!clientUsername.empty())
@@ -268,7 +268,7 @@ SOCKET NetworkServerAPI::_waitForClientConnection(SOCKET listenSocketID)
 	return accept(listenSocketID, nullptr, nullptr);
 }
 
-tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessage(SOCKET clientSocketID)
+tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessageTCP(SOCKET clientSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
@@ -286,5 +286,26 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessage(SOCKE
 	else // Something else happened
 	{
 		return make_tuple(receiveStatusCode, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
+	}
+}
+
+tuple<int, int, long long, string, string, string> NetworkServerAPI::_waitForClientMessageUDP(SOCKET udpMessageSocketID)
+{
+	// Retrieve bytes & size
+	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
+	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
+	sockaddr_in sourceAddress;
+	int sourceAddressLength = sizeof(sourceAddress);
+	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto IP = NetworkUtils::extractIP(sourceAddress);
+	auto port = NetworkUtils::extractIP(sourceAddress);
+
+	if (receiveResult > 0) // Message received correctly
+	{
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+	}
+	else // Something else happened
+	{
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
 	}
 }

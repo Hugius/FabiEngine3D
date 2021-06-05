@@ -95,15 +95,15 @@ void NetworkClientAPI::update()
 			{
 				if (character == ';') // End of current message
 				{
-					if (_currentMessageBuild == "ACCEPTED") // Handle accept message
+					if (_currentTcpMessageBuild == "ACCEPTED") // Handle accept message
 					{
 						_isAcceptedByServer = true;
-						_currentMessageBuild = "";
+						_currentTcpMessageBuild = "";
 					}
-					else if (_currentMessageBuild.substr(0, 4) == "PING") // Handle ping message
+					else if (_currentTcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
 					{
 						// Calculate server ping
-						auto pingData = _currentMessageBuild.substr(4);
+						auto pingData = _currentTcpMessageBuild.substr(4);
 						auto serverReceiveEpoch = stoll(pingData.substr(0, pingData.find('_')));
 						auto serverSendEpoch = stoll(pingData.substr(pingData.find('_') + 1));
 						auto forthPing = (serverReceiveEpoch - _lastMilliseconds);
@@ -116,17 +116,17 @@ void NetworkClientAPI::update()
 						}
 						_serverPings.push_back(static_cast<unsigned int>(forthPing + backPing));
 						_isWaitingForPing = false;
-						_currentMessageBuild = "";
+						_currentTcpMessageBuild = "";
 					}
 					else // Handle other messages
 					{
-						_pendingMessages.push_back(NetworkServerMessage(_currentMessageBuild));
-						_currentMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_currentTcpMessageBuild));
+						_currentTcpMessageBuild = "";
 					}
 				}
 				else // Add to current message
 				{
-					_currentMessageBuild += character;
+					_currentTcpMessageBuild += character;
 				}
 			}
 		}
@@ -150,30 +150,5 @@ void NetworkClientAPI::update()
 
 		// Spawn new message thread
 		_serverMessageThreadTCP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageTCP, this, _tcpServerSocketID);
-	}
-
-	// Check if the server sent any UDP messages
-	while (_serverMessageThreadUDP.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
-	{
-		// Temporary values
-		auto messageResult = _serverMessageThreadUDP.get();
-		auto messageStatusCode = std::get<0>(messageResult);
-		auto messageErrorCode = std::get<1>(messageResult);
-		auto messageTimestamp = std::get<2>(messageResult);
-		auto messageContent = std::get<3>(messageResult);
-		auto messageIP = std::get<4>(messageResult);
-		auto messagePort = std::get<5>(messageResult);
-
-		if (messageStatusCode > 0) // Message is received correctly
-		{
-			_pendingMessages.push_back(NetworkServerMessage(_currentMessageBuild));
-		}
-		else // Something really bad happened
-		{
-			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
-		}
-
-		// Spawn new message thread
-		_serverMessageThreadUDP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageUDP, this, _udpServerSocketID);
 	}
 }

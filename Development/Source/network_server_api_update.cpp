@@ -68,7 +68,7 @@ BEGIN:
 		auto clientIP = _clientIPs[i];
 		auto clientPort = _clientPorts[i];
 		auto& clientUsername = _clientUsernames[i];
-		auto& messageThread = _messageThreads[i];
+		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
 		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
@@ -90,12 +90,12 @@ BEGIN:
 						if (clientUsername.empty()) // Handle username message
 						{
 							// Check if username does not exist yet
-							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentMessageBuild) == _clientUsernames.end())
+							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentTcpMessageBuild) == _clientUsernames.end())
 							{
 								// Set new username
-								clientUsername = _currentMessageBuild;
+								clientUsername = _currentTcpMessageBuild;
 								_sendMessageTCP(clientSocketID, "ACCEPTED", true);
-								_currentMessageBuild = "";
+								_currentTcpMessageBuild = "";
 
 								// Logging
 								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
@@ -105,26 +105,26 @@ BEGIN:
 								// Reject client
 								_sendMessageTCP(clientSocketID, "USER_ALREADY_CONNECTED", true);
 								_disconnectingClientSocketIDs.push_back(clientSocketID);
-								_currentMessageBuild = "";
+								_currentTcpMessageBuild = "";
 
 								// Prevent reading next messages
 								break;
 							}
 						}
-						else if (_currentMessageBuild == "PING") // Handle ping message
+						else if (_currentTcpMessageBuild == "PING") // Handle ping message
 						{
 							auto pingMessage = "PING" + std::to_string(messageTimestamp) + "_" + std::to_string(Tools::getTimeSinceEpochMS());
 							_sendMessageTCP(clientSocketID, pingMessage, true);
-							_currentMessageBuild = "";
+							_currentTcpMessageBuild = "";
 						}
 						else // Handle other messages
 						{
-							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, _currentMessageBuild));
-							_currentMessageBuild = "";
+							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, _currentTcpMessageBuild));
+							_currentTcpMessageBuild = "";
 						}					}
 					else // Add to current message
 					{
-						_currentMessageBuild += character;
+						_currentTcpMessageBuild += character;
 					}
 				}
 			}
@@ -142,12 +142,43 @@ BEGIN:
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Networking server receive failed with error code: ", messageErrorCode);
+					Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
 				}
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessage, this, clientSocketID);
+			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageTCP, this, clientSocketID);
 		}
+	}
+
+	// Check if the server sent any UDP messages
+	if (_udpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	{
+		// Temporary values
+		auto messageResult = _udpMessageThread.get();
+		auto messageStatusCode = std::get<0>(messageResult);
+		auto messageErrorCode = std::get<1>(messageResult);
+		auto messageTimestamp = std::get<2>(messageResult);
+		auto messageContent = std::get<3>(messageResult);
+		auto messageIP = std::get<4>(messageResult);
+		auto messagePort = std::get<5>(messageResult);
+
+		if (messageStatusCode > 0) // Message is received correctly
+		{
+			for (unsigned int i = 0; i < _clientIPs.size(); i++) // Try to find username
+			{
+				if (messageIP == _clientIPs[i]) // Username found
+				{
+					_pendingMessages.push_back(NetworkClientMessage(messageIP, messagePort, _clientUsernames[i], messageContent));
+				}
+			}
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
+		}
+
+		// Spawn new message thread
+		_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpSocketID);
 	}
 }

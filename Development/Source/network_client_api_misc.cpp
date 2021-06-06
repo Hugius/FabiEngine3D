@@ -126,10 +126,10 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 	}
 
 	// Add a semicolon to indicate end of this message
-	string messageContent = content + ';';
+	string message = content + ';';
 
 	// Send message to server
-	auto sendStatusCode = send(_tcpServerSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
+	auto sendStatusCode = send(_tcpServerSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -184,11 +184,14 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content)
 	targetAddress.sin_addr.s_addr = inet_addr(_serverIP.c_str());
 	targetAddress.sin_port = htons(stoi(_serverPort));
 
+	// Add a semicolon to separate username & content
+	string message = _username + ';' + content;
+
 	// Send message to server
 	auto sendStatusCode = sendto(
 		_udpServerSocketID, // UDP socket
-		content.c_str(), // Message
-		static_cast<int>(content.size()), // Message size
+		message.c_str(), // Message
+		static_cast<int>(message.size()), // Message size
 		0, // Flags
 		reinterpret_cast<sockaddr*>(&targetAddress), // Server address
 		sizeof(targetAddress)); // Server address length

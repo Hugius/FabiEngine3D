@@ -245,8 +245,10 @@ void NetworkServerAPI::_sendMessageTCP(SOCKET clientSocketID, const string& cont
 	}
 
 	// Add a semicolon to indicate end of this message
-	string messageContent = content + ';';
-	auto sendStatusCode = send(clientSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
+	string message = content + ';';
+
+	// Send message to client
+	auto sendStatusCode = send(clientSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -284,7 +286,7 @@ void NetworkServerAPI::_sendMessageUDP(const string& clientIP, const string& cli
 	targetAddress.sin_addr.s_addr = inet_addr(clientIP.c_str());
 	targetAddress.sin_port = htons(stoi(clientPort));
 
-	// Add a semicolon to indicate end of this message
+	// Send message to client
 	auto sendStatusCode = sendto(
 		_udpMessageSocketID, // UDP socket
 		content.c_str(), // Message

@@ -142,7 +142,7 @@ BEGIN:
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Networking server TCP receive (message) failed with error code: ", messageErrorCode);
+					Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
 				}
 			}
 
@@ -163,11 +163,20 @@ BEGIN:
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			//_pendingMessages.push_back(NetworkClientMessage(messageIP, messagePort, _clientUsernames[i], messageContent));
-		}
-		else if (messageStatusCode == 0) // Empty packet received
-		{
+			// Extract username & content
+			auto username = messageContent.substr(0, messageContent.find(';'));
+			auto content = messageContent.substr(messageContent.find(';') + 1);
 
+			// Try to find client
+			for (size_t i = 0; i < _clientUsernames.size(); i++)
+			{
+				// Check if username matches
+				if (username == _clientUsernames[i])
+				{
+					// Add new message
+					_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
+				}
+			}			
 		}
 		else // Something really bad happened
 		{

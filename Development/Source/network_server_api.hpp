@@ -44,7 +44,7 @@ private:
 	void _sendMessageTCP(SOCKET clientSocketID, const string& content, bool isReserved);
 	void _sendMessageUDP(const string& clientIP, const string& clientPort, const string& content);
 	tuple<int, int, long long, string> _waitForClientMessageTCP(SOCKET clientSocketID);
-	tuple<int, int, long long, string, string, string> _waitForClientMessageUDP(SOCKET udpMessageSocketID);
+	tuple<int, int, long long, string> _waitForClientMessageUDP(SOCKET udpMessageSocketID);
 
 	// Client functions
 	void _acceptClient(SOCKET clientSocketID);
@@ -66,7 +66,7 @@ private:
 	// Message variables
 	vector<NetworkClientMessage> _pendingMessages;
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
-	future<tuple<int, int, long long, string, string, string>> _udpMessageThread;
+	future<tuple<int, int, long long, string>> _udpMessageThread;
 	SOCKET _udpMessageSocketID;
 	string _currentTcpMessageBuild = "";
 

@@ -104,12 +104,12 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_client_get_server_ping")
+	else if (functionName == "fe3d:network_client_get_ping_latency")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.networkClient_getServerPing();
+			auto result = _fe3d.networkClient_getPingLatency();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 		}
 	}

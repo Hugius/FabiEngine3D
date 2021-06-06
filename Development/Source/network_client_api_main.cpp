@@ -128,6 +128,8 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 
 	// Client is now connecting
 	_isConnectingToServer = true;
+	_serverIP = serverIP;
+	_serverPort = serverPort;
 }
 
 void NetworkClientAPI::disconnectFromServer()
@@ -153,9 +155,11 @@ void NetworkClientAPI::disconnectFromServer()
 	// Reset variables
 	_tcpServerSocketID = INVALID_SOCKET;
 	_pendingMessages.clear();
-	_serverPings.clear();
+	_pingLatencies.clear();
 	_lastMilliseconds = 0;
 	_currentTcpMessageBuild = "";
+	_serverIP = "";
+	_serverPort = "";
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
 	_isWaitingForPing = false;

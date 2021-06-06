@@ -160,19 +160,14 @@ BEGIN:
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
 		auto messageContent = std::get<3>(messageResult);
-		auto messageIP = std::get<4>(messageResult);
-		auto messagePort = std::get<5>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			// Try to find the corresponding username
-			for (unsigned int i = 0; i < _clientIPs.size(); i++)
-			{
-				if (messageIP == _clientIPs[i])
-				{
-					_pendingMessages.push_back(NetworkClientMessage(messageIP, messagePort, _clientUsernames[i], messageContent));
-				}
-			}
+			//_pendingMessages.push_back(NetworkClientMessage(messageIP, messagePort, _clientUsernames[i], messageContent));
+		}
+		else if (messageStatusCode == 0) // Empty packet received
+		{
+
 		}
 		else // Something really bad happened
 		{

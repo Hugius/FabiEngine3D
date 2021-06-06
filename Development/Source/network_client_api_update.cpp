@@ -110,11 +110,11 @@ void NetworkClientAPI::update()
 						auto backPing = (Tools::getTimeSinceEpochMS() - serverSendEpoch);
 
 						// Register server ping
-						if (_serverPings.size() == 10)
+						if (_pingLatencies.size() == 10)
 						{
-							_serverPings.clear();
+							_pingLatencies.clear();
 						}
-						_serverPings.push_back(static_cast<unsigned int>(forthPing + backPing));
+						_pingLatencies.push_back(static_cast<unsigned int>(forthPing + backPing));
 						_isWaitingForPing = false;
 						_currentTcpMessageBuild = "";
 					}

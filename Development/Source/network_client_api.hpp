@@ -35,7 +35,7 @@ public:
 	const bool isConnectingToServer();
 	const bool isConnectedToServer();
 
-	const unsigned int getServerPing();
+	const unsigned int getPingLatency();
 
 	const string getServerIP();
 
@@ -44,23 +44,25 @@ public:
 private:
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
 	bool _sendMessageTCP(const string& content, bool isReserved);
-	bool _sendMessageUDP(const string& serverIP, const string& serverPort, const string& content);
+	bool _sendMessageUDP(const string& content);
 	tuple<int, int, long long, string> _waitForServerMessageTCP(SOCKET tcpServerSocketID);
-	tuple<int, int, long long, string, string, string> _waitForServerMessageUDP(SOCKET udpServerSocketID);
+	tuple<int, int, long long, string> _waitForServerMessageUDP(SOCKET udpServerSocketID);
 
 	SOCKET _tcpServerSocketID;
 	SOCKET _udpServerSocketID;
 
 	future<int> _connectionThread;
 	future<tuple<int, int, long long, string>> _serverMessageThreadTCP;
-	future<tuple<int, int, long long, string, string, string>> _serverMessageThreadUDP;
+	future<tuple<int, int, long long, string>> _serverMessageThreadUDP;
 
 	vector<NetworkServerMessage> _pendingMessages;
 
 	string _currentTcpMessageBuild = "";
 	string _username = "";
+	string _serverIP = "";
+	string _serverPort = "";
 
-	vector<unsigned int> _serverPings;
+	vector<unsigned int> _pingLatencies;
 
 	long long _lastMilliseconds = 0;
 

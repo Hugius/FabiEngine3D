@@ -34,7 +34,7 @@ const bool NetworkClientAPI::isConnectedToServer()
 	return (_isConnectedToServer && _isAcceptedByServer);
 }
 
-const unsigned int NetworkClientAPI::getServerPing()
+const unsigned int NetworkClientAPI::getPingLatency()
 {
 	// Must be running first
 	if (!_isRunning)
@@ -50,16 +50,28 @@ const unsigned int NetworkClientAPI::getServerPing()
 
 	// Calculate average ping
 	unsigned int totalPing = 0;
-	for (const auto& ping : _serverPings)
+	for (const auto& ping : _pingLatencies)
 	{
 		totalPing += ping;
 	}
-	return (totalPing / static_cast<int>(_serverPings.size()));
+	return (totalPing / static_cast<int>(_pingLatencies.size()));
 }
 
 const string NetworkClientAPI::getServerIP()
 {
-	return NetworkUtils::extractIP(_tcpServerSocketID);
+	// Must be running first
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
+	}
+
+	// Must be connected first
+	if ((!_isConnectedToServer && _isAcceptedByServer))
+	{
+		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
+	}
+
+	return _serverIP;
 }
 
 const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
@@ -80,7 +92,7 @@ void NetworkClientAPI::sendMessageTCP(const string& content)
 
 void NetworkClientAPI::sendMessageUDP(const string& content)
 {
-	//_sendMessageUDP(content);
+	_sendMessageUDP(content);
 }
 
 bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
@@ -115,6 +127,8 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 
 	// Add a semicolon to indicate end of this message
 	string messageContent = content + ';';
+
+	// Send message to server
 	auto sendStatusCode = send(_tcpServerSocketID, messageContent.c_str(), static_cast<int>(messageContent.size()), 0);
 
 	// Check if sending went well
@@ -134,7 +148,7 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 	return true;
 }
 
-bool NetworkClientAPI::_sendMessageUDP(const string& serverIP, const string& serverPort, const string& content)
+bool NetworkClientAPI::_sendMessageUDP(const string& content)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -165,12 +179,12 @@ bool NetworkClientAPI::_sendMessageUDP(const string& serverIP, const string& ser
 	}
 
 	// Compose socket address
-	sockaddr_in targetAddress;
+	sockaddr_in targetAddress = sockaddr_in();
 	targetAddress.sin_family = AF_INET;
-	targetAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
-	targetAddress.sin_port = htons(stoi(serverPort));
+	targetAddress.sin_addr.s_addr = inet_addr(_serverIP.c_str());
+	targetAddress.sin_port = htons(stoi(_serverPort));
 
-	// Add a semicolon to indicate end of this message
+	// Send message to server
 	auto sendStatusCode = sendto(
 		_udpServerSocketID, // UDP socket
 		content.c_str(), // Message
@@ -182,16 +196,7 @@ bool NetworkClientAPI::_sendMessageUDP(const string& serverIP, const string& ser
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking client send failed with error code: ", WSAGetLastError());
-		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
-		{
-			disconnectFromServer();
-			return false;
-		}
-		else // Something really bad happened
-		{
-			Logger::throwError("Networking client UDP send failed with error code: ", WSAGetLastError());
-		}
+		Logger::throwError("Networking client UDP send failed with error code: ", WSAGetLastError());
 	}
 
 	return true;
@@ -239,23 +244,21 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageTCP(SO
 	}
 }
 
-tuple<int, int, long long, string, string, string> NetworkClientAPI::_waitForServerMessageUDP(SOCKET udpServerSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageUDP(SOCKET udpServerSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	sockaddr_in sourceAddress;
-	int sourceAddressLength;
+	sockaddr_in sourceAddress = sockaddr_in();
+	int sourceAddressLength = sizeof(sourceAddress);
 	auto receiveResult = recvfrom(udpServerSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
-	auto IP = NetworkUtils::extractIP(sourceAddress);
-	auto port = NetworkUtils::extractIP(sourceAddress);
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
 }

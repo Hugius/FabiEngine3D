@@ -373,23 +373,19 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessageTCP(SO
 	}
 }
 
-tuple<int, int, long long, string, string, string> NetworkServerAPI::_waitForClientMessageUDP(SOCKET udpMessageSocketID)
+tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessageUDP(SOCKET udpMessageSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	sockaddr_in sourceAddress = sockaddr_in();
-	int sourceAddressLength = sizeof(sourceAddress);
-	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
-	auto IP = NetworkUtils::extractIP(sourceAddress);
-	auto port = NetworkUtils::extractIP(sourceAddress);
+	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, nullptr, nullptr);
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
 	}
 }

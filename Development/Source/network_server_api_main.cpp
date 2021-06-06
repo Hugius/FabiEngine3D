@@ -144,9 +144,11 @@ void NetworkServerAPI::stop()
 	closesocket(_udpMessageSocketID);
 
 	// Delete all connected clients
-	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
+BEGIN:
+	for (const auto& socketID : _clientSocketIDs)
 	{
-		_disconnectClient(_clientSocketIDs[i]);
+		_disconnectClient(socketID);
+		goto BEGIN;
 	}
 
 	// Miscellaneous

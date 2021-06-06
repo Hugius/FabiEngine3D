@@ -47,9 +47,9 @@ const bool FabiEngine3D::networkClient_isConnected()
 	return _core->_networkClientAPI.isConnectedToServer();
 }
 
-const unsigned int FabiEngine3D::networkClient_getServerPing()
+const unsigned int FabiEngine3D::networkClient_getPingLatency()
 {
-	return _core->_networkClientAPI.getServerPing();
+	return _core->_networkClientAPI.getPingLatency();
 }
 
 const string FabiEngine3D::networkClient_getServerIP()

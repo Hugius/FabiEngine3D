@@ -14,12 +14,12 @@ void FabiEngine3D::networkClient_connect(const string& serverIP)
 
 void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
 {
-	_core->_networkClientAPI.sendMessageTCP(content);
+	_core->_networkClientAPI.sendTcpMessage(content);
 }
 
 void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
 {
-	_core->_networkClientAPI.sendMessageUDP(content);
+	_core->_networkClientAPI.sendUdpMessage(content);
 }
 
 void FabiEngine3D::networkClient_disconnect()

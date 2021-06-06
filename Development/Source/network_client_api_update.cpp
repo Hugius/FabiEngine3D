@@ -34,14 +34,13 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendMessageTCP(_username, false))
+				if (!_sendTcpMessage(_username, false))
 				{
 					return;
 				}
 
-				// Start a thread to listen for server messages
-				_serverMessageThreadTCP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageTCP, this, _tcpServerSocketID);
-				_serverMessageThreadUDP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageUDP, this, _udpServerSocketID);
+				// Start a thread to wait for TCP messages
+				_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
@@ -58,31 +57,31 @@ void NetworkClientAPI::update()
 		}
 	}
 
-	// Must be connected first
+	// Must be connected
 	if (!_isConnectedToServer)
 	{
 		return;
 	}
 
-	// Update server ping
+	// Update server pinging
 	if (!_isWaitingForPing)
 	{
-		// Send ping & validate
-		if (!_sendMessageTCP("PING", true))
+		// Send ping
+		if (!_sendTcpMessage("PING", true))
 		{
 			return;
 		}
 
-		// Start measuring time
+		// Start measuring latency
 		_isWaitingForPing = true;
 		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
 	// Check if the server sent any TCP messages
-	if (_serverMessageThreadTCP.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	if (_tcpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
-		auto messageResult = _serverMessageThreadTCP.get();
+		auto messageResult = _tcpMessageThread.get();
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
@@ -102,14 +101,14 @@ void NetworkClientAPI::update()
 					}
 					else if (_currentTcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
 					{
-						// Calculate server ping
+						// Calculate server latency
 						auto pingData = _currentTcpMessageBuild.substr(4);
 						auto serverReceiveEpoch = stoll(pingData.substr(0, pingData.find('_')));
 						auto serverSendEpoch = stoll(pingData.substr(pingData.find('_') + 1));
 						auto forthPing = (serverReceiveEpoch - _lastMilliseconds);
 						auto backPing = (Tools::getTimeSinceEpochMS() - serverSendEpoch);
 
-						// Register server ping
+						// Register server latency
 						if (_pingLatencies.size() == 10)
 						{
 							_pingLatencies.clear();
@@ -124,7 +123,7 @@ void NetworkClientAPI::update()
 						_currentTcpMessageBuild = "";
 					}
 				}
-				else // Add to current message
+				else // Add to current message build
 				{
 					_currentTcpMessageBuild += character;
 				}
@@ -148,7 +147,7 @@ void NetworkClientAPI::update()
 			}
 		}
 
-		// Spawn new message thread
-		_serverMessageThreadTCP = std::async(std::launch::async, &NetworkClientAPI::_waitForServerMessageTCP, this, _tcpServerSocketID);
+		// Spawn new TCP message thread
+		_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
 	}
 }

@@ -46,7 +46,10 @@ void NetworkServerAPI::update()
 		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT || _clientIPs.size() == _customMaxClientCount)
 		{
 			// Reject client
-			_sendMessageTCP(clientSocketID, "SERVER_FULL", true);
+			if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
+			{
+				return;
+			}
 			_disconnectingClientSocketIDs.push_back(clientSocketID);
 		}
 		else
@@ -60,10 +63,10 @@ void NetworkServerAPI::update()
 	}
 
 	// Receive incoming TCP messages
-TCP_BEGIN:
+BEGIN:
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		// Read message data
+		// Client data
 		auto clientSocketID = _clientSocketIDs[i];
 		auto clientIP = _clientIPs[i];
 		auto clientPort = _clientPorts[i];
@@ -73,7 +76,7 @@ TCP_BEGIN:
 		// Check if the client sent any message
 		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
-			// Temporary values
+			// Message data
 			auto messageResult = messageThread.get();
 			auto messageStatusCode = std::get<0>(messageResult);
 			auto messageErrorCode = std::get<1>(messageResult);
@@ -82,8 +85,7 @@ TCP_BEGIN:
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
-				// Loop through received message(s)
-				for (const auto& character : messageContent)
+				for (const auto& character : messageContent) // Loop through received messages
 				{
 					if (character == ';') // End of current message
 					{
@@ -92,9 +94,12 @@ TCP_BEGIN:
 							// Check if username does not exist yet
 							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentTcpMessageBuild) == _clientUsernames.end())
 							{
-								// Set new username
+								// Save new username
 								clientUsername = _currentTcpMessageBuild;
-								_sendMessageTCP(clientSocketID, "ACCEPTED", true);
+								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								{
+									return;
+								}
 								_currentTcpMessageBuild = "";
 
 								// Logging
@@ -103,7 +108,10 @@ TCP_BEGIN:
 							else
 							{
 								// Reject client
-								_sendMessageTCP(clientSocketID, "USER_ALREADY_CONNECTED", true);
+								if (!_sendTcpMessage(clientSocketID, "USER_ALREADY_CONNECTED", true))
+								{
+									return;
+								}
 								_disconnectingClientSocketIDs.push_back(clientSocketID);
 								_currentTcpMessageBuild = "";
 
@@ -113,16 +121,26 @@ TCP_BEGIN:
 						}
 						else if (_currentTcpMessageBuild == "PING") // Handle ping message
 						{
-							auto pingMessage = "PING" + std::to_string(messageTimestamp) + "_" + std::to_string(Tools::getTimeSinceEpochMS());
-							_sendMessageTCP(clientSocketID, pingMessage, true);
+							// Compose ping message
+							auto pingMessage = 
+								"PING" + 
+								std::to_string(messageTimestamp) + "_" + 
+								std::to_string(Tools::getTimeSinceEpochMS());
+
+							// Send ping message
+							if (!_sendTcpMessage(clientSocketID, pingMessage, true))
+							{
+								return;
+							}
 							_currentTcpMessageBuild = "";
 						}
 						else // Handle other messages
 						{
 							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, _currentTcpMessageBuild));
 							_currentTcpMessageBuild = "";
-						}					}
-					else // Add to current message
+						}					
+					}
+					else // Add to current message build
 					{
 						_currentTcpMessageBuild += character;
 					}
@@ -131,14 +149,14 @@ TCP_BEGIN:
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{
 				_disconnectClient(clientSocketID);
-				goto TCP_BEGIN;
+				goto BEGIN;
 			}
 			else // Receive failed
 			{
 				if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Client lost socket connection
 				{
 					_disconnectClient(clientSocketID);
-					goto TCP_BEGIN;
+					goto BEGIN;
 				}
 				else // Something really bad happened
 				{
@@ -147,19 +165,19 @@ TCP_BEGIN:
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageTCP, this, clientSocketID);
+			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID);
 		}
 	}
 	
 	// Receive incoming UDP messages
 	fd_set socketSet;
-	timeval timeInterval = { 0, 1 };
+	timeval timeInterval = { 0 , 1 }; // 1 microsecond
 	FD_ZERO(&socketSet);
 	FD_SET(_udpMessageSocketID, &socketSet);
-	while (select(0, &socketSet, NULL, NULL, &timeInterval) > 0) // Check if a UDP message is ready
+	while (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0) // Check if a UDP message is ready to receive
 	{
-		// Read message data
-		auto messageResult = _receiveClientMessageUDP(_udpMessageSocketID);
+		// Message data
+		auto messageResult = _receiveUdpMessage(_udpMessageSocketID);
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);

@@ -30,7 +30,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 		return;
 	}
 
-	// Check if custom client count is not too high
+	// Validate custom client count
 	if ((customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT) || (customMaxClientCount <= 0))
 	{
 		Logger::throwWarning("Trying to start networking server: invalid maximum client count!");
@@ -58,7 +58,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto tcpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("Network server startup (address info) failed with error code: ", tcpInfoStatusCode);
+		Logger::throwError("Networking server startup (TCP address info) failed with error code: ", tcpInfoStatusCode);
 		return;
 	}
 
@@ -67,7 +67,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto udpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwError("Network server startup (address info) failed with error code: ", udpInfoStatusCode);
+		Logger::throwError("Networking server startup (UDP address info) failed with error code: ", udpInfoStatusCode);
 		return;
 	}
 
@@ -93,14 +93,21 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
 	if (tcpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking server startup (TCP socket bind) failed with error code: ", WSAGetLastError());
+		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		{
+
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking server startup (TCP socket bind) failed with error code: ", WSAGetLastError());
+		}
 	}
 
 	// Bind the UDP connection socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking server startup (TCP socket bind) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server startup (UDP socket bind) failed with error code: ", WSAGetLastError());
 	}
 
 	// Enable listening for any incoming connection requests
@@ -122,12 +129,12 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	_isRunning = true;
 
 	// Logging
-	Logger::throwInfo("Started network server!");
+	Logger::throwInfo("Started networking server!");
 }
 
 void NetworkServerAPI::stop()
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Trying to stop networking server: not running!");
@@ -150,6 +157,8 @@ BEGIN:
 
 	// Miscellaneous
 	_pendingMessages.clear();
+	_disconnectingClientSocketIDs.clear();
+	_tcpMessageThreads.clear();
 	_currentTcpMessageBuild = "";
 	_connectionSocketID = INVALID_SOCKET;
 	_udpMessageSocketID = INVALID_SOCKET;
@@ -157,5 +166,5 @@ BEGIN:
 	_isRunning = false;
 
 	// Logging
-	Logger::throwInfo("Stopped network server!");
+	Logger::throwInfo("Stopped networking server!");
 }

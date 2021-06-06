@@ -7,121 +7,29 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-const bool NetworkClientAPI::isRunning()
+bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved)
 {
-	return _isRunning;
-}
-
-const bool NetworkClientAPI::isConnectingToServer()
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to retrieve connecting status: not running!");
-	}
-
-	return _isConnectingToServer;
-}
-
-const bool NetworkClientAPI::isConnectedToServer()
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to retrieve connection status: not running!");
-	}
-
-	return (_isConnectedToServer && _isAcceptedByServer);
-}
-
-const unsigned int NetworkClientAPI::getPingLatency()
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to retrieve server ping: not running!");
-	}
-
-	// Must be connected first
-	if ((!_isConnectedToServer && _isAcceptedByServer))
-	{
-		Logger::throwWarning("Networking client tried to retrieve server ping: not connected!");
-	}
-
-	// Calculate average ping
-	unsigned int totalPing = 0;
-	for (const auto& ping : _pingLatencies)
-	{
-		totalPing += ping;
-	}
-	return (totalPing / static_cast<int>(_pingLatencies.size()));
-}
-
-const string NetworkClientAPI::getServerIP()
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
-	}
-
-	// Must be connected first
-	if ((!_isConnectedToServer && _isAcceptedByServer))
-	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
-	}
-
-	return _serverIP;
-}
-
-const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to retrieve pending messages: not running!");
-	}
-
-	return _pendingMessages;
-}
-
-void NetworkClientAPI::sendMessageTCP(const string& content)
-{
-	_sendMessageTCP(content, false);
-}
-
-void NetworkClientAPI::sendMessageUDP(const string& content)
-{
-	_sendMessageUDP(content);
-}
-
-bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
-{
-	// Must be running first
-	if (!_isRunning)
-	{
-		Logger::throwWarning("Networking client tried to send TCP message: not running!");
-		return false;
-	}
-
-	// Must be connected & accepted first
-	if ((!_isConnectedToServer && _isAcceptedByServer))
+	// Must be connected & accepted
+	if (!_isConnectedToServer && _isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
 		return false;
 	}
 
-	// Validate message semantics
+	// Validate message content
 	if (std::find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: cannot contain semicolons!");
 		return false;
 	}
-
-	// Validate message availability
-	if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
+		return false;
+	}
+	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	{
+		Logger::throwWarning("Networking client tried to send TCP message: maximum character amount exceeded!");
 		return false;
 	}
 
@@ -129,7 +37,7 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 	string message = content + ';';
 
 	// Send message to server
-	auto sendStatusCode = send(_tcpServerSocketID, message.c_str(), static_cast<int>(message.size()), 0);
+	auto sendStatusCode = send(_tcpSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -148,7 +56,7 @@ bool NetworkClientAPI::_sendMessageTCP(const string& content, bool isReserved)
 	return true;
 }
 
-bool NetworkClientAPI::_sendMessageUDP(const string& content)
+bool NetworkClientAPI::_sendUdpMessage(const string& content)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -170,11 +78,14 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content)
 		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
 		return false;
 	}
-
-	// Validate message availability
-	if (NetworkUtils::isMessageReserved(content))
+	else if (NetworkUtils::isMessageReserved(content))
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
+		return false;
+	}
+	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: maximum character amount exceeded!");
 		return false;
 	}
 
@@ -189,8 +100,8 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content)
 
 	// Send message to server
 	auto sendStatusCode = sendto(
-		_udpServerSocketID, // UDP socket
-		message.c_str(), // Message
+		_udpSocketID, // UDP socket
+		message.c_str(), // Message content
 		static_cast<int>(message.size()), // Message size
 		0, // Flags
 		reinterpret_cast<sockaddr*>(&targetAddress), // Server address
@@ -208,7 +119,7 @@ bool NetworkClientAPI::_sendMessageUDP(const string& content)
 int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
 {
 	// Compose socket address
-	sockaddr_in targetAddress;
+	sockaddr_in targetAddress = sockaddr_in();
 	targetAddress.sin_family = AF_INET;
 	targetAddress.sin_port = htons(stoi(serverPort));
 	targetAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
@@ -230,12 +141,12 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 	}
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageTCP(SOCKET tcpServerSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET tcpSocketID)
 {
 	// Retrieve bytes & size
-	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
-	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	auto receiveResult = recv(tcpServerSocketID, buffer, bufferLength, 0);
+	char buffer[NetworkUtils::TCP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(NetworkUtils::TCP_BUFFER_BYTES);
+	auto receiveResult = recv(tcpSocketID, buffer, bufferLength, 0);
 
 	if (receiveResult > 0) // Message received correctly
 	{
@@ -247,14 +158,12 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageTCP(SO
 	}
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_waitForServerMessageUDP(SOCKET udpServerSocketID)
+tuple<int, int, long long, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
 {
 	// Retrieve bytes & size
-	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];
-	int bufferLength = static_cast<int>(NetworkUtils::MAX_MESSAGE_BYTES);
-	sockaddr_in sourceAddress = sockaddr_in();
-	int sourceAddressLength = sizeof(sourceAddress);
-	auto receiveResult = recvfrom(udpServerSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
+	int bufferLength = static_cast<int>(NetworkUtils::UDP_BUFFER_BYTES);
+	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, nullptr, nullptr);
 
 	if (receiveResult > 0) // Message received correctly
 	{

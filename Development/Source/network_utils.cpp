@@ -6,7 +6,7 @@
 
 const string NetworkUtils::extractIP(SOCKET socket)
 {
-	sockaddr_in socketAddress;
+	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
 	char IP[IPV4_ADDRESS_LENGTH];
@@ -16,7 +16,7 @@ const string NetworkUtils::extractIP(SOCKET socket)
 
 const string NetworkUtils::extractPort(SOCKET socket)
 {
-	sockaddr_in socketAddress;
+	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
 	return std::to_string(socketAddress.sin_port);
@@ -25,9 +25,11 @@ const string NetworkUtils::extractPort(SOCKET socket)
 const bool NetworkUtils::isMessageReserved(const string& message)
 {
 	return
-		((message == "SERVER_FULL") ||
+	(
+		(message == "SERVER_FULL") ||
 		(message == "USER_ALREADY_CONNECTED") ||
 		(message == "ACCEPTED") ||
 		(message == "PING") ||
-		(message == "DISCONNECTED_BY_SERVER"));
+		(message == "DISCONNECTED_BY_SERVER")
+	);
 }

@@ -27,8 +27,8 @@ public:
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
 	void disconnectFromServer();
-	void sendMessageTCP(const string& content);
-	void sendMessageUDP(const string& content);
+	void sendTcpMessage(const string& content);
+	void sendUdpMessage(const string& content);
 	void stop();
 
 	const bool isRunning();
@@ -42,33 +42,38 @@ public:
 	const vector<NetworkServerMessage>& getPendingMessages();
 
 private:
+	// Message functions
+	bool _sendTcpMessage(const string& content, bool isReserved);
+	bool _sendUdpMessage(const string& content);
+	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
+	tuple<int, int, long long, string> _receiveUdpMessage(SOCKET udpSocketID);
+
+	// Server functions
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
-	bool _sendMessageTCP(const string& content, bool isReserved);
-	bool _sendMessageUDP(const string& content);
-	tuple<int, int, long long, string> _waitForServerMessageTCP(SOCKET tcpServerSocketID);
-	tuple<int, int, long long, string> _waitForServerMessageUDP(SOCKET udpServerSocketID);
 
-	SOCKET _tcpServerSocketID;
-	SOCKET _udpServerSocketID;
-
+	// Connection variables
+	SOCKET _tcpSocketID;
+	SOCKET _udpSocketID;
 	future<int> _connectionThread;
-	future<tuple<int, int, long long, string>> _serverMessageThreadTCP;
-	future<tuple<int, int, long long, string>> _serverMessageThreadUDP;
 
+	// Message variables
+	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	vector<NetworkServerMessage> _pendingMessages;
-
 	string _currentTcpMessageBuild = "";
-	string _username = "";
-	string _serverIP = "";
-	string _serverPort = "";
 
+	// Ping variables
 	vector<unsigned int> _pingLatencies;
-
 	long long _lastMilliseconds = 0;
 
+	// State variables
 	bool _isRunning = false;
 	bool _isConnectingToServer = false;
 	bool _isConnectedToServer = false;
 	bool _isAcceptedByServer = false;
 	bool _isWaitingForPing = false;
+
+	// Miscellaneous variables
+	string _username = "";
+	string _serverIP = "";
+	string _serverPort = "";
 };

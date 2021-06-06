@@ -7,8 +7,8 @@
 #include <ws2tcpip.h>
 
 NetworkClientAPI::NetworkClientAPI() :
-	_tcpServerSocketID(INVALID_SOCKET),
-	_udpServerSocketID(INVALID_SOCKET)
+	_tcpSocketID(INVALID_SOCKET),
+	_udpSocketID(INVALID_SOCKET)
 {
 
 }
@@ -33,12 +33,22 @@ void NetworkClientAPI::start(const string& username)
 	// Validate username
 	if (username.empty())
 	{
-		Logger::throwWarning("Networking client tried to start: empty username!");
+		Logger::throwWarning("Networking client tried to start: username is empty!");
+		return;
+	}
+	else if (username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
+	{
+		Logger::throwWarning("Networking client tried to start: username is too long!");
 		return;
 	}
 	else if (NetworkUtils::isMessageReserved(username))
 	{
 		Logger::throwWarning("Networking client tried to start: username is reserved!");
+		return;
+	}
+	else if (std::find(username.begin(), username.end(), ';') != username.end())
+	{
+		Logger::throwWarning("Networking client tried to start: username cannot contain semicolons!");
 		return;
 	}
 	else
@@ -52,7 +62,7 @@ void NetworkClientAPI::start(const string& username)
 
 void NetworkClientAPI::connectToServer(const string& serverIP, const string& serverPort)
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Networking client tried to connect: not running!");
@@ -106,54 +116,55 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	}
 
 	// Create TCP socket
-	_tcpServerSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
-	if (_tcpServerSocketID == INVALID_SOCKET)
+	_tcpSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
+	if (_tcpSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking client startup (TCP socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Create UDP socket
-	_udpServerSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
-	if (_udpServerSocketID == INVALID_SOCKET)
+	_udpSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
+	if (_udpSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("Networking client startup (UDP socket create) failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpServerSocketID, serverIP, serverPort);
+	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _tcpSocketID, serverIP, serverPort);
 
 	// Address infos not needed anymore
 	freeaddrinfo(tcpAddressInfo);
 	freeaddrinfo(udpAddressInfo);
 
 	// Client is now connecting
-	_isConnectingToServer = true;
 	_serverIP = serverIP;
 	_serverPort = serverPort;
+	_isConnectingToServer = true;
 }
 
 void NetworkClientAPI::disconnectFromServer()
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not running!");
 		return;
 	}
 
-	// Must be connected first
+	// Must be connected
 	if (!_isConnectedToServer)
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
 	}
 
-	// Close server connection
-	closesocket(_tcpServerSocketID);
-	closesocket(_udpServerSocketID);
+	// Close server connections
+	closesocket(_tcpSocketID);
+	closesocket(_udpSocketID);
 
 	// Reset variables
-	_tcpServerSocketID = INVALID_SOCKET;
+	_tcpSocketID = INVALID_SOCKET;
+	_udpSocketID = INVALID_SOCKET;
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
@@ -167,7 +178,7 @@ void NetworkClientAPI::disconnectFromServer()
 
 void NetworkClientAPI::stop()
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Trying to stop networking client: not running!");

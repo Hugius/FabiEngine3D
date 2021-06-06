@@ -18,7 +18,7 @@ public:
 	static const bool isMessageReserved(const string& message);
 
 	static inline const string SERVER_PORT = "61205";
-	static inline const unsigned int MAX_MESSAGE_BYTES = 512;
+	static inline const unsigned int MAX_MESSAGE_BYTES = 4096;
 	static inline const unsigned int MAX_CLIENT_COUNT = 100;
 	static inline const unsigned int IPV4_ADDRESS_LENGTH = 16;
 };

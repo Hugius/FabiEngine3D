@@ -375,7 +375,7 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessageTCP(SO
 	}
 }
 
-tuple<int, int, long long, string> NetworkServerAPI::_waitForClientMessageUDP(SOCKET udpMessageSocketID)
+tuple<int, int, long long, string> NetworkServerAPI::_receiveClientMessageUDP(SOCKET udpMessageSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::MAX_MESSAGE_BYTES];

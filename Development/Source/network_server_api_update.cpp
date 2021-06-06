@@ -60,10 +60,10 @@ void NetworkServerAPI::update()
 	}
 
 	// Receive incoming TCP messages
-BEGIN:
+TCP_BEGIN:
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		// Temporary values
+		// Read message data
 		auto clientSocketID = _clientSocketIDs[i];
 		auto clientIP = _clientIPs[i];
 		auto clientPort = _clientPorts[i];
@@ -131,14 +131,14 @@ BEGIN:
 			else if (messageStatusCode == 0) // Client closed socket connection
 			{
 				_disconnectClient(clientSocketID);
-				goto BEGIN;
+				goto TCP_BEGIN;
 			}
 			else // Receive failed
 			{
 				if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Client lost socket connection
 				{
 					_disconnectClient(clientSocketID);
-					goto BEGIN;
+					goto TCP_BEGIN;
 				}
 				else // Something really bad happened
 				{
@@ -150,12 +150,16 @@ BEGIN:
 			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageTCP, this, clientSocketID);
 		}
 	}
-
+	
 	// Receive incoming UDP messages
-	while (_udpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	fd_set socketSet;
+	timeval timeInterval = { 0, 1 };
+	FD_ZERO(&socketSet);
+	FD_SET(_udpMessageSocketID, &socketSet);
+	while (select(0, &socketSet, NULL, NULL, &timeInterval) > 0) // Check if a UDP message is ready
 	{
-		// Temporary values
-		auto messageResult = _udpMessageThread.get();
+		// Read message data
+		auto messageResult = _receiveClientMessageUDP(_udpMessageSocketID);
 		auto messageStatusCode = std::get<0>(messageResult);
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
@@ -175,15 +179,13 @@ BEGIN:
 				{
 					// Add new message
 					_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
+					break;
 				}
-			}			
+			}
 		}
 		else // Something really bad happened
 		{
 			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
 		}
-
-		// Spawn new message thread
-		_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpMessageSocketID);
 	}
 }

@@ -113,9 +113,6 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	// Spawn a thread for accepting incoming connection requests
 	_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 
-	// Spawn a thread for any incoming UDP messages
-	_udpMessageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientMessageUDP, this, _udpMessageSocketID);
-
 	// Address infos not needed anymore
 	freeaddrinfo(tcpAddressInfo);
 	freeaddrinfo(udpAddressInfo);

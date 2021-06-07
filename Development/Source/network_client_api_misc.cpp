@@ -90,10 +90,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 	}
 
 	// Compose socket address
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	socketAddress.sin_addr.s_addr = inet_addr(_serverIP.c_str());
-	socketAddress.sin_port = htons(static_cast<u_short>(stoi(_serverPort)));
+	auto socketAddress = NetworkUtils::composeSocketAddress(_serverIP, _serverPort);
 
 	// Add a semicolon to separate username & content
 	string message = _username + ';' + content;
@@ -119,10 +116,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
 {
 	// Compose socket address
-	sockaddr_in socketAddress = sockaddr_in();
-	socketAddress.sin_family = AF_INET;
-	socketAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
-	socketAddress.sin_port = htons(static_cast<u_short>(stoi(serverPort)));
+	auto socketAddress = NetworkUtils::composeSocketAddress(serverIP, serverPort);
 
 	// Try to connect to server
 	auto connectStatusCode = connect(
@@ -210,12 +204,16 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET t
 
 tuple<int, int, long long, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
 {
-	// Retrieve bytes & size
+	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::UDP_BUFFER_BYTES);
 	sockaddr_in sourceAddress = sockaddr_in();
 	int sourceAddressLength = sizeof(sourceAddress);
+
+	// Retrieve data
 	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	
+	// Extract address
 	auto IP = NetworkUtils::extractIP(&sourceAddress);
 	auto port = NetworkUtils::extractPort(&sourceAddress);
 

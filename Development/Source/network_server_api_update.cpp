@@ -171,34 +171,37 @@ BEGIN:
 	}
 	
 	// Receive incoming UDP messages
-	fd_set socketSet;
-	timeval timeInterval = { 0 , 1 }; // 1 microsecond
-	FD_ZERO(&socketSet);
-	FD_SET(_udpMessageSocketID, &socketSet);
-	while (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0) // Check if a UDP message is ready to receive
+	while (NetworkUtils::isMessageReady(_udpMessageSocketID))
 	{
 		// Message data
-		auto messageResult = _receiveUdpMessage(_udpMessageSocketID);
-		auto messageStatusCode = std::get<0>(messageResult);
-		auto messageErrorCode = std::get<1>(messageResult);
-		auto messageTimestamp = std::get<2>(messageResult);
-		auto messageContent = std::get<3>(messageResult);
+		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
+		const auto& messageStatusCode = std::get<0>(messageResult);
+		const auto& messageErrorCode = std::get<1>(messageResult);
+		const auto& messageTimestamp = std::get<2>(messageResult);
+		const auto& messageContent = std::get<3>(messageResult);
+		const auto& messageIP = std::get<4>(messageResult);
+		const auto& messagePort = std::get<5>(messageResult);
 
-		if (messageStatusCode > 0) // Message is received correctly
+		// Message is received correctly
+		if (messageStatusCode > 0)
 		{
-			// Extract username & content
-			auto username = messageContent.substr(0, messageContent.find(';'));
-			auto content = messageContent.substr(messageContent.find(';') + 1);
-
-			// Try to find client
-			for (size_t i = 0; i < _clientUsernames.size(); i++)
+			// Message must come from a client
+			if (_isClientConnected(messageIP, messagePort))
 			{
-				// Check if username matches
-				if (username == _clientUsernames[i])
+				// Extract username & content
+				auto username = messageContent.substr(0, messageContent.find(';'));
+				auto content = messageContent.substr(messageContent.find(';') + 1);
+
+				// Try to find client
+				for (size_t i = 0; i < _clientUsernames.size(); i++)
 				{
-					// Add new message
-					_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
-					break;
+					// Check if username matches
+					if (username == _clientUsernames[i])
+					{
+						// Add new message
+						_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
+						break;
+					}
 				}
 			}
 		}

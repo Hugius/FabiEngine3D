@@ -44,9 +44,10 @@ private:
 	bool _sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved);
 	bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content);
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET clientSocketID);
-	tuple<int, int, long long, string> _receiveUdpMessage(SOCKET udpMessageSocketID);
+	tuple<int, int, long long, string, string, string> _receiveUdpMessage(SOCKET udpMessageSocketID);
 
 	// Client functions
+	bool _isClientConnected(const string& IP, const string& port);
 	void _acceptClient(SOCKET clientSocketID);
 	void _disconnectClient(SOCKET clientSocketID);
 	SOCKET _waitForClientConnection(SOCKET connectionSocketID);

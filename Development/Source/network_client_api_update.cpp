@@ -81,11 +81,11 @@ void NetworkClientAPI::update()
 	if (_tcpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
-		auto messageResult = _tcpMessageThread.get();
-		auto messageStatusCode = std::get<0>(messageResult);
-		auto messageErrorCode = std::get<1>(messageResult);
-		auto messageTimestamp = std::get<2>(messageResult);
-		auto messageContent = std::get<3>(messageResult);
+		const auto& messageResult = _tcpMessageThread.get();
+		const auto& messageStatusCode = std::get<0>(messageResult);
+		const auto& messageErrorCode = std::get<1>(messageResult);
+		const auto& messageTimestamp = std::get<2>(messageResult);
+		const auto& messageContent = std::get<3>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
@@ -154,20 +154,16 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming UDP messages
-	fd_set socketSet;
-	timeval timeInterval = { 0 , 1 }; // 1 microsecond
-	FD_ZERO(&socketSet);
-	FD_SET(_udpMessageSocketID, &socketSet);
-	while (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0) // Check if a UDP message is ready to receive
+	while (NetworkUtils::isMessageReady(_udpMessageSocketID))
 	{
 		// Message data
-		auto messageResult = _receiveUdpMessage(_udpMessageSocketID);
-		auto messageStatusCode = std::get<0>(messageResult);
-		auto messageErrorCode = std::get<1>(messageResult);
-		auto messageTimestamp = std::get<2>(messageResult);
-		auto messageContent = std::get<3>(messageResult);
-		auto messageIP = std::get<4>(messageResult);
-		auto messagePort = std::get<5>(messageResult);
+		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
+		const auto& messageStatusCode = std::get<0>(messageResult);
+		const auto& messageErrorCode = std::get<1>(messageResult);
+		const auto& messageTimestamp = std::get<2>(messageResult);
+		const auto& messageContent = std::get<3>(messageResult);
+		const auto& messageIP = std::get<4>(messageResult);
+		const auto& messagePort = std::get<5>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
@@ -176,7 +172,7 @@ void NetworkClientAPI::update()
 				_pendingMessages.push_back(NetworkServerMessage(messageContent));
 			}
 		}
-		else if (messageStatusCode == 0 || messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED)
+		else if ((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED))
 		{
 			// Wrong packet, do nothing
 		}

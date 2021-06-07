@@ -4,6 +4,15 @@
 
 #include <ws2tcpip.h>
 
+const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const string& port)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	socketAddress.sin_port = htons(static_cast<u_short>(stoi(port)));
+	return socketAddress;
+}
+
 const string NetworkUtils::extractIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
@@ -32,6 +41,15 @@ const string NetworkUtils::extractPort(SOCKET socket)
 const string NetworkUtils::extractPort(sockaddr_in* address)
 {
 	return std::to_string(ntohs(address->sin_port));
+}
+
+const bool NetworkUtils::isMessageReady(SOCKET socket)
+{
+	fd_set socketSet = fd_set();
+	timeval timeInterval = { 0 , 1 }; // 1 microsecond
+	FD_ZERO(&socketSet);
+	FD_SET(socket, &socketSet);
+	return (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0);
 }
 
 const bool NetworkUtils::isMessageReserved(const string& message)

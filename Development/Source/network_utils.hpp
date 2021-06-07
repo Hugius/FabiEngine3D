@@ -14,11 +14,14 @@ class NetworkUtils final
 public:
 	NetworkUtils() = delete;
 
+	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
+
 	static const string extractIP(SOCKET socket);
 	static const string extractIP(sockaddr_in* address);
 	static const string extractPort(SOCKET socket);
 	static const string extractPort(sockaddr_in* address);
 
+	static const bool isMessageReady(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 
 	static inline const string SERVER_PORT = "61205";

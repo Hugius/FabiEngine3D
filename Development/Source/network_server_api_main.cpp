@@ -26,14 +26,14 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	// Must not be running
 	if (_isRunning)
 	{
-		Logger::throwWarning("Trying to start networking server: already running!");
+		Logger::throwWarning("Networking server tried to start: already running!");
 		return;
 	}
 
 	// Validate custom client count
 	if ((customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT) || (customMaxClientCount <= 0))
 	{
-		Logger::throwWarning("Trying to start networking server: invalid maximum client count!");
+		Logger::throwWarning("Networking server tried to start: invalid maximum client count!");
 		return;
 	}
 
@@ -59,7 +59,6 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	if (tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("Networking server startup (TCP address info) failed with error code: ", tcpInfoStatusCode);
-		return;
 	}
 
 	// Create UDP address info
@@ -95,7 +94,8 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	{
 		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
-
+			Logger::throwWarning("Networking server tried to start: IP address already in use!");
+			return;
 		}
 		else // Something really bad happened
 		{
@@ -107,7 +107,15 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto udpBindStatusCode = bind(_udpMessageSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking server startup (UDP socket bind) failed with error code: ", WSAGetLastError());
+		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
+		{
+			Logger::throwWarning("Networking server tried to start: IP address already in use!");
+			return;
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking server startup (UDP socket bind) failed with error code: ", WSAGetLastError());
+		}
 	}
 
 	// Enable listening for any incoming connection requests
@@ -137,7 +145,7 @@ void NetworkServerAPI::stop()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Trying to stop networking server: not running!");
+		Logger::throwWarning("Networking server tried to stop: not running!");
 		return;
 	}
 
@@ -159,7 +167,6 @@ BEGIN:
 	_pendingMessages.clear();
 	_disconnectingClientSocketIDs.clear();
 	_tcpMessageThreads.clear();
-	_currentTcpMessageBuild = "";
 	_connectionSocketID = INVALID_SOCKET;
 	_udpMessageSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;

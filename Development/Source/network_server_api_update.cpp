@@ -67,21 +67,23 @@ BEGIN:
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
 		// Client data
-		auto clientSocketID = _clientSocketIDs[i];
-		auto clientIP = _clientIPs[i];
-		auto clientPort = _clientPorts[i];
+		const auto& clientSocketID = _clientSocketIDs[i];
+		const auto& clientIP = _clientIPs[i];
+		const auto& clientPort = _clientPorts[i];
 		auto& clientUsername = _clientUsernames[i];
+		auto& clientMessageBuild = _clientMessageBuilds[i];
 		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
 		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
 			// Message data
-			auto messageResult = messageThread.get();
-			auto messageStatusCode = std::get<0>(messageResult);
-			auto messageErrorCode = std::get<1>(messageResult);
-			auto messageTimestamp = std::get<2>(messageResult);
-			auto messageContent = std::get<3>(messageResult);
+			const auto&
+ messageResult = messageThread.get();
+			const auto& messageStatusCode = std::get<0>(messageResult);
+			const auto& messageErrorCode = std::get<1>(messageResult);
+			const auto& messageTimestamp = std::get<2>(messageResult);
+			const auto& messageContent = std::get<3>(messageResult);
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
@@ -92,15 +94,15 @@ BEGIN:
 						if (clientUsername.empty()) // Handle username message
 						{
 							// Check if username does not exist yet
-							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), _currentTcpMessageBuild) == _clientUsernames.end())
+							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), clientMessageBuild) == _clientUsernames.end())
 							{
 								// Save new username
-								clientUsername = _currentTcpMessageBuild;
+								clientUsername = clientMessageBuild;
 								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
 								{
 									return;
 								}
-								_currentTcpMessageBuild = "";
+								clientMessageBuild = "";
 
 								// Logging
 								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
@@ -113,13 +115,13 @@ BEGIN:
 									return;
 								}
 								_disconnectingClientSocketIDs.push_back(clientSocketID);
-								_currentTcpMessageBuild = "";
+								clientMessageBuild = "";
 
 								// Prevent reading next messages
 								break;
 							}
 						}
-						else if (_currentTcpMessageBuild == "PING") // Handle ping message
+						else if (clientMessageBuild == "PING") // Handle ping message
 						{
 							// Compose ping message
 							auto pingMessage = 
@@ -132,17 +134,17 @@ BEGIN:
 							{
 								return;
 							}
-							_currentTcpMessageBuild = "";
+							clientMessageBuild = "";
 						}
 						else // Handle other messages
 						{
-							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, _currentTcpMessageBuild));
-							_currentTcpMessageBuild = "";
+							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, clientMessageBuild));
+							clientMessageBuild = "";
 						}					
 					}
 					else // Add to current message build
 					{
-						_currentTcpMessageBuild += character;
+						clientMessageBuild += character;
 					}
 				}
 			}

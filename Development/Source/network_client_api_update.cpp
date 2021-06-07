@@ -64,7 +64,7 @@ void NetworkClientAPI::update()
 	}
 
 	// Update server pinging
-	if (!_isWaitingForPing)
+	if (_isAcceptedByServer && !_isWaitingForPing)
 	{
 		// Send ping
 		if (!_sendTcpMessage("PING", true))

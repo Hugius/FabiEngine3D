@@ -61,12 +61,12 @@ private:
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
+	vector<string> _clientMessageBuilds;
 	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 
 	// Message variables
 	vector<NetworkClientMessage> _pendingMessages;
 	vector<future<tuple<int, int, long long, string>>> _tcpMessageThreads;
-	string _currentTcpMessageBuild = "";
 	SOCKET _udpMessageSocketID;
 
 	// Miscellaneous variables

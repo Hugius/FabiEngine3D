@@ -181,7 +181,7 @@ void NetworkClientAPI::stop()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Trying to stop networking client: not running!");
+		Logger::throwWarning("Networking client tried to stop: not running!");
 		return;
 	}
 

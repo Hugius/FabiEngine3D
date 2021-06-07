@@ -117,6 +117,7 @@ void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 	_clientIPs.push_back(clientIP);
 	_clientPorts.push_back(clientPort);
 	_clientUsernames.push_back("");
+	_clientMessageBuilds.push_back("");
 
 	// Spawn thread for receiving TCP messages
 	_tcpMessageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
@@ -140,6 +141,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			_clientIPs.erase(_clientIPs.begin() + i);
 			_clientPorts.erase(_clientPorts.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
+			_clientMessageBuilds.erase(_clientMessageBuilds.begin() + i);
 			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
 			// Logging (if client was fully accepted)

@@ -96,7 +96,8 @@ void NetworkClientAPI::update()
 				{
 					if (_currentTcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
 					{
-						_setupUDP(_currentTcpMessageBuild.substr(8)); // UDP uses the same port as TCP
+						auto tcpPort = _currentTcpMessageBuild.substr(8);
+						_setupUDP(tcpPort); // UDP uses the same port as TCP
 						_isAcceptedByServer = true;
 						_currentTcpMessageBuild = "";
 					}
@@ -165,10 +166,15 @@ void NetworkClientAPI::update()
 		auto messageErrorCode = std::get<1>(messageResult);
 		auto messageTimestamp = std::get<2>(messageResult);
 		auto messageContent = std::get<3>(messageResult);
+		auto messageIP = std::get<4>(messageResult);
+		auto messagePort = std::get<5>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
-			_pendingMessages.push_back(NetworkServerMessage(messageContent));
+			if ((messageIP == _serverIP) && (messagePort == _serverPort)) // Message must come from server
+			{
+				_pendingMessages.push_back(NetworkServerMessage(messageContent));
+			}
 		}
 		else if (messageStatusCode == 0 || messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED)
 		{

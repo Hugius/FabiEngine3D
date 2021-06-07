@@ -7,13 +7,17 @@ using std::string;
 // Manually declare SOCKET, because winsock2.h cannot be included in this header
 typedef unsigned __int64 SOCKET;
 
+struct sockaddr_in;
+
 class NetworkUtils final
 {
 public:
 	NetworkUtils() = delete;
 
 	static const string extractIP(SOCKET socket);
+	static const string extractIP(sockaddr_in* address);
 	static const string extractPort(SOCKET socket);
+	static const string extractPort(sockaddr_in* address);
 
 	static const bool isMessageReserved(const string& message);
 

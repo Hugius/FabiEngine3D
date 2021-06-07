@@ -46,12 +46,12 @@ private:
 	bool _sendTcpMessage(const string& content, bool isReserved);
 	bool _sendUdpMessage(const string& content);
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
-	tuple<int, int, long long, string> _receiveUdpMessage(SOCKET udpSocketID);
+	tuple<int, int, long long, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
 
 	// Miscellaneous functions
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
 	void _setupTCP();
-	void _setupUDP(const string& port);
+	void _setupUDP(const string& tcpPort);
 
 	// Connection variables
 	SOCKET _connectionSocketID;

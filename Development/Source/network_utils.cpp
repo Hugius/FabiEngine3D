@@ -8,9 +8,16 @@ const string NetworkUtils::extractIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
+	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &socketAddress.sin_addr, IP, sizeof(IP));
+	return string(IP);
+}
+
+const string NetworkUtils::extractIP(sockaddr_in* address)
+{
+	char IP[IPV4_ADDRESS_LENGTH];
+	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
 	return string(IP);
 }
 
@@ -18,8 +25,13 @@ const string NetworkUtils::extractPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (struct sockaddr*)&socketAddress, &socketAddressLength);
-	return std::to_string(socketAddress.sin_port);
+	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	return std::to_string(ntohs(socketAddress.sin_port));
+}
+
+const string NetworkUtils::extractPort(sockaddr_in* address)
+{
+	return std::to_string(ntohs(address->sin_port));
 }
 
 const bool NetworkUtils::isMessageReserved(const string& message)

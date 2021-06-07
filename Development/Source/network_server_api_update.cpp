@@ -78,8 +78,7 @@ BEGIN:
 		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 		{
 			// Message data
-			const auto&
- messageResult = messageThread.get();
+			const auto& messageResult = messageThread.get();
 			const auto& messageStatusCode = std::get<0>(messageResult);
 			const auto& messageErrorCode = std::get<1>(messageResult);
 			const auto& messageTimestamp = std::get<2>(messageResult);

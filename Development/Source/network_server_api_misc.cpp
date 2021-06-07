@@ -83,10 +83,10 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	}
 
 	// Compose socket address
-	sockaddr_in targetAddress = sockaddr_in();
-	targetAddress.sin_family = AF_INET;
-	targetAddress.sin_addr.s_addr = inet_addr(clientIP.c_str());
-	targetAddress.sin_port = htons(stoi(clientPort));
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	socketAddress.sin_addr.s_addr = inet_addr(clientIP.c_str());
+	socketAddress.sin_port = htons(static_cast<u_short>(stoi(clientPort)));
 
 	// Send message to client
 	auto sendStatusCode = sendto(
@@ -94,8 +94,8 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 		content.c_str(), // Message content
 		static_cast<int>(content.size()), // Message size
 		0, // Flags
-		reinterpret_cast<sockaddr*>(&targetAddress), // Client address
-		sizeof(targetAddress)); // Client address length
+		reinterpret_cast<sockaddr*>(&socketAddress), // Client address
+		sizeof(socketAddress)); // Client address length
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)

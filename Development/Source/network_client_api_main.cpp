@@ -83,9 +83,11 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 		return;
 	}
 
-	// Prepare for TCP connection
+	// Save server address
 	_serverIP = serverIP;
 	_serverPort = serverPort;
+
+	// Prepare for TCP connection
 	_setupTCP();
 
 	// Client is now connecting

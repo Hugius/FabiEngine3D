@@ -90,10 +90,10 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 	}
 
 	// Compose socket address
-	sockaddr_in targetAddress = sockaddr_in();
-	targetAddress.sin_family = AF_INET;
-	targetAddress.sin_addr.s_addr = inet_addr(_serverIP.c_str());
-	targetAddress.sin_port = htons(stoi(_serverPort));
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	socketAddress.sin_addr.s_addr = inet_addr(_serverIP.c_str());
+	socketAddress.sin_port = htons(static_cast<u_short>(stoi(_serverPort)));
 
 	// Add a semicolon to separate username & content
 	string message = _username + ';' + content;
@@ -104,8 +104,8 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 		message.c_str(), // Message content
 		static_cast<int>(message.size()), // Message size
 		0, // Flags
-		reinterpret_cast<sockaddr*>(&targetAddress), // Server address
-		sizeof(targetAddress)); // Server address length
+		reinterpret_cast<sockaddr*>(&socketAddress), // Server address
+		sizeof(socketAddress)); // Server address length
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -119,16 +119,16 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
 {
 	// Compose socket address
-	sockaddr_in serverAddress = sockaddr_in();
-	serverAddress.sin_family = AF_INET;
-	serverAddress.sin_port = htons(stoi(serverPort));
-	serverAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	socketAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
+	socketAddress.sin_port = htons(static_cast<u_short>(stoi(serverPort)));
 
 	// Try to connect to server
 	auto connectStatusCode = connect(
 		serverSocketID,
-		reinterpret_cast<sockaddr*>(&serverAddress),
-		sizeof(serverAddress));
+		reinterpret_cast<sockaddr*>(&socketAddress),
+		sizeof(socketAddress));
 	
 	// Check if connection attempt went well
 	if (connectStatusCode == SOCKET_ERROR)
@@ -154,7 +154,7 @@ void NetworkClientAPI::_setupTCP()
 	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
 }
 
-void NetworkClientAPI::_setupUDP(const string& port)
+void NetworkClientAPI::_setupUDP(const string& tcpPort)
 {
 	// Compose UDP address info hints
 	addrinfo hints;
@@ -163,10 +163,10 @@ void NetworkClientAPI::_setupUDP(const string& port)
 	hints.ai_socktype = SOCK_DGRAM; // Datagram socket
 	hints.ai_protocol = IPPROTO_UDP; // UDP protocol
 	hints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
-
+	
 	// Create UDP address info
 	addrinfo* addressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo(nullptr, port.c_str(), &hints, &addressInfo);
+	auto udpInfoStatusCode = getaddrinfo(nullptr, tcpPort.c_str(), &hints, &addressInfo);
 	if (udpInfoStatusCode != 0)
 	{
 		Logger::throwError("Networking client UDP address info failed with error code: ", udpInfoStatusCode);
@@ -208,19 +208,23 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET t
 	}
 }
 
-tuple<int, int, long long, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
+tuple<int, int, long long, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
 {
 	// Retrieve bytes & size
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
 	int bufferLength = static_cast<int>(NetworkUtils::UDP_BUFFER_BYTES);
-	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, nullptr, nullptr);
+	sockaddr_in sourceAddress = sockaddr_in();
+	int sourceAddressLength = sizeof(sourceAddress);
+	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
+	auto IP = NetworkUtils::extractIP(&sourceAddress);
+	auto port = NetworkUtils::extractPort(&sourceAddress);
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult));
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "");
+		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
 	}
 }

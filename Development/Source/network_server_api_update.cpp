@@ -98,7 +98,7 @@ BEGIN:
 							{
 								// Save new username
 								clientUsername = clientMessageBuild;
-								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								if (!_sendTcpMessage(clientSocketID, "ACCEPTED" + clientPort, true))
 								{
 									return;
 								}
@@ -126,8 +126,8 @@ BEGIN:
 							// Compose ping message
 							auto pingMessage = 
 								"PING" + 
-								std::to_string(messageTimestamp) + "_" + 
-								std::to_string(Tools::getTimeSinceEpochMS());
+								std::to_string(messageTimestamp) + "_" + // Timestamp of receive
+								std::to_string(Tools::getTimeSinceEpochMS()); // Timestamp of send
 
 							// Send ping message
 							if (!_sendTcpMessage(clientSocketID, pingMessage, true))
@@ -202,6 +202,10 @@ BEGIN:
 					break;
 				}
 			}
+		}
+		else if (messageStatusCode == 0 || messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED)
+		{
+			// Wrong packet, do nothing
 		}
 		else // Something really bad happened
 		{

@@ -37,7 +37,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved)
 	string message = content + ';';
 
 	// Send message to server
-	auto sendStatusCode = send(_tcpSocketID, message.c_str(), static_cast<int>(message.size()), 0);
+	auto sendStatusCode = send(_connectionSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
@@ -100,7 +100,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 
 	// Send message to server
 	auto sendStatusCode = sendto(
-		_udpSocketID, // UDP socket
+		_udpMessageSocketID, // UDP socket
 		message.c_str(), // Message content
 		static_cast<int>(message.size()), // Message size
 		0, // Flags
@@ -119,16 +119,16 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort)
 {
 	// Compose socket address
-	sockaddr_in targetAddress = sockaddr_in();
-	targetAddress.sin_family = AF_INET;
-	targetAddress.sin_port = htons(stoi(serverPort));
-	targetAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
+	sockaddr_in serverAddress = sockaddr_in();
+	serverAddress.sin_family = AF_INET;
+	serverAddress.sin_port = htons(stoi(serverPort));
+	serverAddress.sin_addr.s_addr = inet_addr(serverIP.c_str());
 
 	// Try to connect to server
 	auto connectStatusCode = connect(
 		serverSocketID,
-		reinterpret_cast<sockaddr*>(&targetAddress),
-		sizeof(targetAddress));
+		reinterpret_cast<sockaddr*>(&serverAddress),
+		sizeof(serverAddress));
 	
 	// Check if connection attempt went well
 	if (connectStatusCode == SOCKET_ERROR)
@@ -139,6 +139,56 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 	{
 		return 0;
 	}
+}
+
+void NetworkClientAPI::_setupTCP()
+{
+	// Create TCP socket
+	_connectionSocketID = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	if (_connectionSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client TCP socket create failed with error code: ", WSAGetLastError());
+	}
+
+	// Spawn a thread for connecting to the server
+	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
+}
+
+void NetworkClientAPI::_setupUDP(const string& port)
+{
+	// Compose UDP address info hints
+	addrinfo hints;
+	ZeroMemory(&hints, sizeof(hints));
+	hints.ai_family = AF_INET; // Ipv4 address
+	hints.ai_socktype = SOCK_DGRAM; // Datagram socket
+	hints.ai_protocol = IPPROTO_UDP; // UDP protocol
+	hints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
+
+	// Create UDP address info
+	addrinfo* addressInfo = nullptr;
+	auto udpInfoStatusCode = getaddrinfo(nullptr, port.c_str(), &hints, &addressInfo);
+	if (udpInfoStatusCode != 0)
+	{
+		Logger::throwError("Networking client UDP address info failed with error code: ", udpInfoStatusCode);
+		return;
+	}
+
+	// Create UDP socket
+	_udpMessageSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
+	if (_udpMessageSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking client UDP socket create failed with error code: ", WSAGetLastError());
+	}
+
+	// Bind UDP socket
+	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	if (udpBindStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("Networking server UDP socket bind failed with error code: ", WSAGetLastError());
+	}
+
+	// Address info not needed anymore
+	freeaddrinfo(addressInfo);
 }
 
 tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET tcpSocketID)

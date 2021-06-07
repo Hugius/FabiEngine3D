@@ -58,7 +58,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto tcpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking server startup (TCP address info) failed with error code: ", tcpInfoStatusCode);
+		Logger::throwError("Networking server TCP address info failed with error code: ", tcpInfoStatusCode);
 	}
 
 	// Create UDP address info
@@ -66,7 +66,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto udpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwError("Networking server startup (UDP address info) failed with error code: ", udpInfoStatusCode);
+		Logger::throwError("Networking server UDP address info failed with error code: ", udpInfoStatusCode);
 		return;
 	}
 
@@ -74,47 +74,47 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	_connectionSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
 	if (_connectionSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("Networking server startup (TCP socket create) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server TCP socket create failed with error code: ", WSAGetLastError());
 	}
 
-	// Create socket for listening to client connection requests
-	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
-	if (_udpMessageSocketID == INVALID_SOCKET)
-	{
-		Logger::throwError("Networking server startup (UDP socket create) failed with error code: ", WSAGetLastError());
-	}
-
-	// Add options to the connection socket
+	// Add options to connection socket
 	DWORD optionValue = 1;
 	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
 
-	// Bind the TCP connection socket
+	// Create socket for handling UDP messages
+	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
+	if (_udpMessageSocketID == INVALID_SOCKET)
+	{
+		Logger::throwError("Networking server UDP socket create failed with error code: ", WSAGetLastError());
+	}
+
+	// Bind connection socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));
 	if (tcpBindStatusCode == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
-			Logger::throwWarning("Networking server tried to start: IP address already in use!");
+			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			return;
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking server startup (TCP socket bind) failed with error code: ", WSAGetLastError());
+			Logger::throwError("Networking server TCP socket bind failed with error code: ", WSAGetLastError());
 		}
 	}
 
-	// Bind the UDP connection socket
+	// Bind UDP message socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, udpAddressInfo->ai_addr, static_cast<int>(udpAddressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
-			Logger::throwWarning("Networking server tried to start: IP address already in use!");
+			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
 			return;
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking server startup (UDP socket bind) failed with error code: ", WSAGetLastError());
+			Logger::throwError("Networking server UDP socket bind failed with error code: ", WSAGetLastError());
 		}
 	}
 
@@ -122,7 +122,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	auto listenStatusCode = listen(_connectionSocketID, SOMAXCONN);
 	if (listenStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking server startup (TCP socket listen) failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking server TCP socket listen failed with error code: ", WSAGetLastError());
 	}
 
 	// Spawn a thread for accepting incoming connection requests

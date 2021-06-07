@@ -48,18 +48,20 @@ private:
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
 	tuple<int, int, long long, string> _receiveUdpMessage(SOCKET udpSocketID);
 
-	// Server functions
+	// Miscellaneous functions
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
+	void _setupTCP();
+	void _setupUDP(const string& port);
 
 	// Connection variables
-	SOCKET _tcpSocketID;
-	SOCKET _udpSocketID;
+	SOCKET _connectionSocketID;
 	future<int> _connectionThread;
 
 	// Message variables
 	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	vector<NetworkServerMessage> _pendingMessages;
 	string _currentTcpMessageBuild = "";
+	SOCKET _udpMessageSocketID;
 
 	// Ping variables
 	vector<unsigned int> _pingLatencies;

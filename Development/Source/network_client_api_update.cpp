@@ -40,7 +40,7 @@ void NetworkClientAPI::update()
 				}
 
 				// Start a thread to wait for TCP messages
-				_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
+				_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 			}
 			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
 			{
@@ -77,7 +77,7 @@ void NetworkClientAPI::update()
 		_lastMilliseconds = Tools::getTimeSinceEpochMS();
 	}
 
-	// Check if the server sent any TCP messages
+	// Receive incoming TCP messages
 	if (_tcpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
 		// Temporary values
@@ -94,8 +94,9 @@ void NetworkClientAPI::update()
 			{
 				if (character == ';') // End of current message
 				{
-					if (_currentTcpMessageBuild == "ACCEPTED") // Handle accept message
+					if (_currentTcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
 					{
+						_setupUDP(_currentTcpMessageBuild.substr(8)); // UDP uses the same port as TCP
 						_isAcceptedByServer = true;
 						_currentTcpMessageBuild = "";
 					}
@@ -148,6 +149,34 @@ void NetworkClientAPI::update()
 		}
 
 		// Spawn new TCP message thread
-		_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _tcpSocketID);
+		_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
+	}
+
+	// Receive incoming UDP messages
+	fd_set socketSet;
+	timeval timeInterval = { 0 , 1 }; // 1 microsecond
+	FD_ZERO(&socketSet);
+	FD_SET(_udpMessageSocketID, &socketSet);
+	while (select(0, &socketSet, nullptr, nullptr, &timeInterval) > 0) // Check if a UDP message is ready to receive
+	{
+		// Message data
+		auto messageResult = _receiveUdpMessage(_udpMessageSocketID);
+		auto messageStatusCode = std::get<0>(messageResult);
+		auto messageErrorCode = std::get<1>(messageResult);
+		auto messageTimestamp = std::get<2>(messageResult);
+		auto messageContent = std::get<3>(messageResult);
+
+		if (messageStatusCode > 0) // Message is received correctly
+		{
+			_pendingMessages.push_back(NetworkServerMessage(messageContent));
+		}
+		else if (messageStatusCode == 0 || messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED)
+		{
+			// Wrong packet, do nothing
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
+		}
 	}
 }

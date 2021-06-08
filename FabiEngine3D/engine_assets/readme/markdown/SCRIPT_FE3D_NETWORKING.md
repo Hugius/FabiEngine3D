@@ -1,33 +1,59 @@
-# Networking
-- `fe3d:network_server_start`(`INT` clients) ---> `NONE`  
-  Starts networking server with a maximum amount of **clients**.
-- `fe3d:network_server_stop`() ---> `NONE`  
+# Server
+- `fe3d:server_start`(`INT` clients) ---> `NONE`  
+  Starts networking server with maximum amount of **clients**.
+- `fe3d:server_stop`() ---> `NONE`  
   Stops networking server.
-- `fe3d:network_server_is_running`() ---> `BOOL`  
+- `fe3d:server_is_running`() ---> `BOOL`  
   Returns true if networking server is running.
-- `fe3d:network_server_is_client_connected`(`STR` username) ---> `BOOL`  
-  Returns true if client with **username** is connected.
-- `fe3d:network_server_send_tcp_message`(`STR` username, `STR` message) ---> `NONE`  
-  Sends a TCP **message** to client with **username**.
-- `fe3d:network_server_send_udp_message`(`STR` username, `STR` message) ---> `NONE`  
-  Sends a UDP **message** to client with **username**.
-- `fe3d:network_server_broadcast_tcp_message`(`STR` message) ---> `NONE`  
-  Sends a TCP **message** to all connected clients.
-- `fe3d:network_server_broadcast_udp_message`(`STR` message) ---> `NONE`  
-  Sends a UDP **message** to all connected clients.
-- `fe3d:network_server_disconnect_client`(`STR` username) ---> `NONE`  
-  Disconnects a connected client with **username** from the server.
-- `fe3d:network_server_get_connected_ips`() ---> `LIST`  
-  Returns the IP addresses of all connected clients.
-- `fe3d:network_server_get_connected_ports`() ---> `LIST`  
-  Returns the ports of all connected clients.
-- `fe3d:network_server_get_connected_usernames`() ---> `LIST`  
-  Returns the usernames of all connected clients.
-- `fe3d:network_server_get_pending_ips`() ---> `LIST`  
-  Returns the corresponding IP addresses of the pending messages from clients.
-- `fe3d:network_server_get_pending_ports`() ---> `LIST`  
-  Returns the corresponding ports of the pending messages from clients.
-- `fe3d:network_server_get_pending_usernames`() ---> `LIST`  
-  Returns the corresponding usernames of the pending messages from clients.
-- `fe3d:network_server_get_pending_messages`() ---> `LIST`  
-  Returns the contents of the pending messages from clients.
+- `fe3d:server_is_client_connected`(`STR` username) ---> `BOOL`  
+  Returns true if networking client with **username** is connected.
+- `fe3d:server_send_tcp_message`(`STR` username, `STR` message) ---> `NONE`  
+  Sends TCP **message** to networking client with **username**.
+- `fe3d:server_send_udp_message`(`STR` username, `STR` message) ---> `NONE`  
+  Sends UDP **message** to networking client with **username**.
+- `fe3d:server_broadcast_tcp_message`(`STR` message) ---> `NONE`  
+  Sends TCP **message** to all connected networking clients.
+- `fe3d:server_broadcast_udp_message`(`STR` message) ---> `NONE`  
+  Sends UDP **message** to all connected networking clients.
+- `fe3d:server_disconnect_client`(`STR` username) ---> `NONE`  
+  Disconnects connected networking client with **username** from networking server.
+- `fe3d:server_get_connected_ips`() ---> `LIST`  
+  Returns IP addresses of all connected networking clients.
+- `fe3d:server_get_connected_ports`() ---> `LIST`  
+  Returns ports of all connected networking clients.
+- `fe3d:server_get_connected_usernames`() ---> `LIST`  
+  Returns usernames of all connected networking clients.
+- `fe3d:server_get_pending_ips`() ---> `LIST`  
+  Returns IP addresses of pending messages from networking clients.
+- `fe3d:server_get_pending_ports`() ---> `LIST`  
+  Returns ports of pending messages from networking clients.
+- `fe3d:server_get_pending_usernames`() ---> `LIST`  
+  Returns usernames of pending messages from networking clients.
+- `fe3d:server_get_pending_messages`() ---> `LIST`  
+  Returns contents of pending messages from networking clients.
+
+# Client
+- `fe3d:client_start`(`STR` username) ---> `NONE`  
+  Starts networking client with custom **username**.
+- `fe3d:client_stop`() ---> `NONE`  
+  Stops networking client.
+- `fe3d:client_connect`(`STR` IP) ---> `NONE`  
+  Connects to networking server with **IP** address.
+- `fe3d:client_disconnect`() ---> `NONE`  
+  Disconnects from networking server.
+- `fe3d:client_is_running`() ---> `BOOL`  
+  Returns true if networking client is running.
+- `fe3d:client_is_connecting`() ---> `BOOL`  
+  Returns true if networking client is connecting to networking server.
+- `fe3d:client_is_connected`() ---> `BOOL`  
+  Returns true if networking client is connected to networking server.
+- `fe3d:client_send_tcp_message`(`STR` message) ---> `NONE`  
+  Sends TCP **message** to networking server.
+- `fe3d:client_send_udp_message`(`STR` message) ---> `NONE`  
+  Sends UDP **message** to networking server.
+- `fe3d:client_get_pending_messages`() ---> `LIST`  
+  Returns contents of pending messages from networking server.
+- `fe3d:client_get_ping_latency`() ---> `INT`  
+  Returns round-trip ping latency from networking client to networking server.
+- `fe3d:client_get_server_ip`() ---> `STR`  
+  Returns IP address of networking server.

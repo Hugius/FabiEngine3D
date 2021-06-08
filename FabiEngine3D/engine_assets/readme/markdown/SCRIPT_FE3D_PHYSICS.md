@@ -1,5 +1,4 @@
-# Physics
-#### Raycasting
+# Raycasting
 - `fe3d:raycast_enable_terrain_positioning`(`DEC` distance, `DEC` precision) ---> `NONE`  
   Enables raycasting on terrain. Only works when a terrain is selected. **distance** is the maximum distance from the camera towards a point on the terrain. **precision** is how   precise the raycast should be. These values have impact on the performance!
 - `fe3d:raycast_disable_terrain_positioning`() ---> `NONE`  
@@ -27,7 +26,7 @@
 - `fe3d:raycast_into_billboards_distance`() ---> `DEC`  
   Returns the distance to any billboard that is selected. Returns -1.0 if the billboard is not selected.
 
-#### Collision
+# Collision
 - `fe3d:collision_enable_camera_terrain_response`(`DEC` height,  `DEC` speed) ---> `NONE`  
   Enables camera collision with the terrain surface (if existing). **height** is the minimum height the camera should be above the terrain. **speed** is the speed at which the camera corrects its height based on the terrain surface.
 - `fe3d:collision_disable_camera_terrain_response`() ---> `NONE`  

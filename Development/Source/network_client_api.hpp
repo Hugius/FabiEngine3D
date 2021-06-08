@@ -44,9 +44,9 @@ public:
 private:
 	// Message functions
 	bool _sendTcpMessage(const string& content, bool isReserved);
-	bool _sendUdpMessage(const string& content);
+	bool _sendUdpMessage(const string& content, bool isReserved);
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
-	tuple<int, int, long long, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
 
 	// Miscellaneous functions
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
@@ -60,7 +60,7 @@ private:
 	// Message variables
 	future<tuple<int, int, long long, string>> _tcpMessageThread;
 	vector<NetworkServerMessage> _pendingMessages;
-	string _currentTcpMessageBuild = "";
+	string _tcpMessageBuild = "";
 	SOCKET _udpMessageSocketID;
 
 	// Ping variables

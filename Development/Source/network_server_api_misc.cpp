@@ -56,7 +56,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	return true;
 }
 
-bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content)
+bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved)
 {
 	// Must be running
 	if (!_isRunning)
@@ -71,7 +71,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 		Logger::throwWarning("Networking message tried to send UDP message: cannot contain semicolons!");
 		return false;
 	}
-	else if (NetworkUtils::isMessageReserved(content))
+	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwWarning("Networking server tried to send UDP message: \"" + content + "\" is reserved!");
 		return false;
@@ -121,7 +121,7 @@ void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 	_clientIPs.push_back(clientIP);
 	_clientPorts.push_back(clientPort);
 	_clientUsernames.push_back("");
-	_clientMessageBuilds.push_back("");
+	_clientTcpMessageBuilds.push_back("");
 
 	// Spawn thread for receiving TCP messages
 	_tcpMessageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
@@ -145,7 +145,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			_clientIPs.erase(_clientIPs.begin() + i);
 			_clientPorts.erase(_clientPorts.begin() + i);
 			_clientUsernames.erase(_clientUsernames.begin() + i);
-			_clientMessageBuilds.erase(_clientMessageBuilds.begin() + i);
+			_clientTcpMessageBuilds.erase(_clientTcpMessageBuilds.begin() + i);
 			_tcpMessageThreads.erase(_tcpMessageThreads.begin() + i);
 
 			// Logging (if client was fully accepted)
@@ -185,7 +185,7 @@ tuple<int, int, long long, string> NetworkServerAPI::_waitForTcpMessage(SOCKET c
 	}
 }
 
-tuple<int, int, long long, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOCKET udpMessageSocketID)
+tuple<int, int, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOCKET udpMessageSocketID)
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
@@ -202,10 +202,10 @@ tuple<int, int, long long, string, string, string> NetworkServerAPI::_receiveUdp
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
 	}
 }

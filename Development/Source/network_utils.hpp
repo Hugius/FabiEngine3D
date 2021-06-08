@@ -25,6 +25,8 @@ public:
 	static const bool isMessageReserved(const string& message);
 
 	static inline const string SERVER_PORT = "61205";
+
+	static inline const unsigned int PING_DIVIDER = 10;
 	static inline const unsigned int MAX_CLIENT_COUNT = 100;
 	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 64;
 	static inline const unsigned int MAX_USERNAME_CHARACTERS = 16;

@@ -136,7 +136,7 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 			if (username == _clientUsernames[i])
 			{
 				// Send message
-				_sendUdpMessage(_clientIPs[i], _clientPorts[i], content);
+				_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
 				return;
 			}
 		}
@@ -169,7 +169,7 @@ void NetworkServerAPI::broadcastUdpMessage(const string& content)
 		if (!_clientUsernames[i].empty())
 		{
 			// Send message
-			_sendUdpMessage(_clientIPs[i], _clientPorts[i], content);
+			_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
 		}
 	}
 }

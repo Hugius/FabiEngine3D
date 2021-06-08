@@ -42,9 +42,9 @@ public:
 private:
 	// Message functions
 	bool _sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved);
-	bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content);
+	bool _sendUdpMessage(const string& clientIP, const string& clientPort, const string& content, bool isReserved);
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET clientSocketID);
-	tuple<int, int, long long, string, string, string> _receiveUdpMessage(SOCKET udpMessageSocketID);
+	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpMessageSocketID);
 
 	// Client functions
 	bool _isClientConnected(const string& IP, const string& port);
@@ -62,7 +62,7 @@ private:
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
-	vector<string> _clientMessageBuilds;
+	vector<string> _clientTcpMessageBuilds;
 	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
 
 	// Message variables

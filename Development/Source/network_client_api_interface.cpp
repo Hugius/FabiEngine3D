@@ -86,5 +86,5 @@ void NetworkClientAPI::sendTcpMessage(const string& content)
 
 void NetworkClientAPI::sendUdpMessage(const string& content)
 {
-	_sendUdpMessage(content);
+	_sendUdpMessage(content, false);
 }

@@ -67,7 +67,6 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	if (udpInfoStatusCode != 0)
 	{
 		Logger::throwError("Networking server UDP address info failed with error code: ", udpInfoStatusCode);
-		return;
 	}
 
 	// Create socket for listening to client connection requests
@@ -95,6 +94,8 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
+			freeaddrinfo(tcpAddressInfo);
+			freeaddrinfo(udpAddressInfo);
 			return;
 		}
 		else // Something really bad happened
@@ -110,6 +111,8 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 		if (WSAGetLastError() == WSAEADDRINUSE) // Server already running on current machine
 		{
 			Logger::throwWarning("Networking server tried to start: current machine already hosting a server!");
+			freeaddrinfo(tcpAddressInfo);
+			freeaddrinfo(udpAddressInfo);
 			return;
 		}
 		else // Something really bad happened

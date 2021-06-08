@@ -71,7 +71,7 @@ BEGIN:
 		const auto& clientIP = _clientIPs[i];
 		const auto& clientPort = _clientPorts[i];
 		auto& clientUsername = _clientUsernames[i];
-		auto& clientMessageBuild = _clientMessageBuilds[i];
+		auto& clientMessageBuild = _clientTcpMessageBuilds[i];
 		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
@@ -123,12 +123,12 @@ BEGIN:
 						else if (clientMessageBuild == "PING") // Handle ping message
 						{
 							// Compose ping message
-							auto pingMessage = 
-								"PING" + 
+							auto pingMessage =
+								"PING" +
 								std::to_string(messageTimestamp) + "_" + // Timestamp of receive
 								std::to_string(Tools::getTimeSinceEpochMS()); // Timestamp of send
 
-							// Send ping message
+							// Send ping message back to client
 							if (!_sendTcpMessage(clientSocketID, pingMessage, true))
 							{
 								return;
@@ -177,10 +177,9 @@ BEGIN:
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
 		const auto& messageStatusCode = std::get<0>(messageResult);
 		const auto& messageErrorCode = std::get<1>(messageResult);
-		const auto& messageTimestamp = std::get<2>(messageResult);
-		const auto& messageContent = std::get<3>(messageResult);
-		const auto& messageIP = std::get<4>(messageResult);
-		const auto& messagePort = std::get<5>(messageResult);
+		const auto& messageContent = std::get<2>(messageResult);
+		const auto& messageIP = std::get<3>(messageResult);
+		const auto& messagePort = std::get<4>(messageResult);
 
 		// Message is received correctly
 		if (messageStatusCode > 0)
@@ -198,7 +197,6 @@ BEGIN:
 					// Check if username matches
 					if (username == _clientUsernames[i])
 					{
-						// Add new message
 						_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
 						break;
 					}

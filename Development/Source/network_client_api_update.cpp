@@ -94,40 +94,40 @@ void NetworkClientAPI::update()
 			{
 				if (character == ';') // End of current message
 				{
-					if (_currentTcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
+					if (_tcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
 					{
-						auto tcpPort = _currentTcpMessageBuild.substr(8);
+						auto tcpPort = _tcpMessageBuild.substr(8);
 						_setupUDP(tcpPort); // UDP uses the same port as TCP
 						_isAcceptedByServer = true;
-						_currentTcpMessageBuild = "";
+						_tcpMessageBuild = "";
 					}
-					else if (_currentTcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
+					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
 					{
 						// Calculate server latency
-						auto pingData = _currentTcpMessageBuild.substr(4);
+						auto pingData = _tcpMessageBuild.substr(4);
 						auto serverReceiveEpoch = stoll(pingData.substr(0, pingData.find('_')));
 						auto serverSendEpoch = stoll(pingData.substr(pingData.find('_') + 1));
-						auto forthPing = (serverReceiveEpoch - _lastMilliseconds);
-						auto backPing = (Tools::getTimeSinceEpochMS() - serverSendEpoch);
+						auto forthPing = (serverReceiveEpoch - _lastMilliseconds); // Time from client to server
+						auto backPing = (messageTimestamp - serverSendEpoch); // Time from server back to client
 
-						// Register server latency
-						if (_pingLatencies.size() == 10)
+						// Register server latency`
+						if (_pingLatencies.size() == NetworkUtils::PING_DIVIDER)
 						{
-							_pingLatencies.clear();
+							_pingLatencies.erase(_pingLatencies.begin());
 						}
 						_pingLatencies.push_back(static_cast<unsigned int>(forthPing + backPing));
 						_isWaitingForPing = false;
-						_currentTcpMessageBuild = "";
+						_tcpMessageBuild = "";
 					}
 					else // Handle other messages
 					{
-						_pendingMessages.push_back(NetworkServerMessage(_currentTcpMessageBuild));
-						_currentTcpMessageBuild = "";
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_tcpMessageBuild = "";
 					}
 				}
 				else // Add to current message build
 				{
-					_currentTcpMessageBuild += character;
+					_tcpMessageBuild += character;
 				}
 			}
 		}
@@ -160,10 +160,9 @@ void NetworkClientAPI::update()
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
 		const auto& messageStatusCode = std::get<0>(messageResult);
 		const auto& messageErrorCode = std::get<1>(messageResult);
-		const auto& messageTimestamp = std::get<2>(messageResult);
-		const auto& messageContent = std::get<3>(messageResult);
-		const auto& messageIP = std::get<4>(messageResult);
-		const auto& messagePort = std::get<5>(messageResult);
+		const auto& messageContent = std::get<2>(messageResult);
+		const auto& messageIP = std::get<3>(messageResult);
+		const auto& messagePort = std::get<4>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{

@@ -56,7 +56,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved)
 	return true;
 }
 
-bool NetworkClientAPI::_sendUdpMessage(const string& content)
+bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved)
 {
 	// Must be running first
 	if (!_isRunning)
@@ -78,7 +78,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content)
 		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
 		return false;
 	}
-	else if (NetworkUtils::isMessageReserved(content))
+	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
 		return false;
@@ -202,7 +202,7 @@ tuple<int, int, long long, string> NetworkClientAPI::_waitForTcpMessage(SOCKET t
 	}
 }
 
-tuple<int, int, long long, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
+tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOCKET udpSocketID)
 {
 	// Data store
 	char buffer[NetworkUtils::UDP_BUFFER_BYTES];
@@ -219,10 +219,10 @@ tuple<int, int, long long, string, string, string> NetworkClientAPI::_receiveUdp
 
 	if (receiveResult > 0) // Message received correctly
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), string(buffer, receiveResult), IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), string(buffer, receiveResult), IP, port);
 	}
 	else // Something else happened
 	{
-		return make_tuple(receiveResult, WSAGetLastError(), Tools::getTimeSinceEpochMS(), "", IP, port);
+		return make_tuple(receiveResult, WSAGetLastError(), "", IP, port);
 	}
 }

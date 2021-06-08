@@ -104,7 +104,7 @@ void NetworkClientAPI::disconnectFromServer()
 	}
 
 	// Must be connected
-	if (!_isConnectedToServer)
+	if (!_isConnectedToServer && _isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
@@ -120,7 +120,7 @@ void NetworkClientAPI::disconnectFromServer()
 	_pendingMessages.clear();
 	_pingLatencies.clear();
 	_lastMilliseconds = 0;
-	_currentTcpMessageBuild = "";
+	_tcpMessageBuild = "";
 	_serverIP = "";
 	_serverPort = "";
 	_isConnectedToServer = false;
@@ -138,7 +138,7 @@ void NetworkClientAPI::stop()
 	}
 
 	// Disconnect if connected
-	if (_isConnectedToServer)
+	if (_isConnectedToServer && _isAcceptedByServer)
 	{
 		disconnectFromServer();
 	}

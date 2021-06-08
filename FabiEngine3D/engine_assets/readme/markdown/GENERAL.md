@@ -5,15 +5,15 @@
 - Multithreaded WAV audio file loading
 - Efficient (pre-)caching system  
 ### Rendering
-- **3D rendering**: sky, terrain, water, model, billboard
-- **2D rendering**: image, text
-- **Graphics**: ambient lighting, directional lighting, specular reflections, point lights, shadows, sky reflections, realtime scene reflections, fog
-- **Textures**: diffuse, cube, normal, reflection, light, height, gui, flare, dudv, displacement, blend, billboard
-- **Post processing**: bloom, DOF, motion blur, anti aliasing, sky HDR, lens flare
+- **3D rendering**: sky, terrain, water, model, billboard.
+- **2D rendering**: image, text.
+- **Graphics**: ambient lighting, directional lighting, specular reflections, point lights, shadows, sky reflections, realtime scene reflections, fog.
+- **Textures**: diffuse, cube, normal, reflection, light, height, image, flare, dudv, displacement, blend, billboard.
+- **Post processing**: bloom, DOF, motion blur, anti-aliasing, skyHDR, lens flare.
 ### Audio
 - Custom music playlist
 - 2D audio playback
-- 3D audio playback (volume distance, stereo panning)
+- 3D audio playback (distance volume, stereo panning)
 ### Physics
 - AABB system
 - Collision detection
@@ -21,10 +21,14 @@
 - Raycasting system
 - 3D camera system
 - Custom math library
+### Networking
+- Central networking server
+- Multiple networking clients
+- TCP & UDP messaging
 ### Miscellaneous
 - Keyboard input
 - Mouse input
-- Custom "FabScript" functional interpreted gameplay programming language.
+- Custom interpreted gameplay programming language ("FabScript")
 
 # Engine Interface
 ![interface](../images/interface.png)

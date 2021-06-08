@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:network_server_start")
+	if (functionName == "fe3d:server_start")
 	{
 		auto types = { ScriptValueType::INTEGER };
 
@@ -29,7 +29,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_stop")
+	else if (functionName == "fe3d:server_stop")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_is_running")
+	else if (functionName == "fe3d:server_is_running")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_server_is_client_connected")
+	else if (functionName == "fe3d:server_is_client_connected")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -58,7 +58,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:network_server_send_tcp_message")
+	else if (functionName == "fe3d:server_send_tcp_message")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -69,7 +69,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_send_udp_message")
+	else if (functionName == "fe3d:server_send_udp_message")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -80,7 +80,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_broadcast_tcp_message")
+	else if (functionName == "fe3d:server_broadcast_tcp_message")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -91,7 +91,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_broadcast_udp_message")
+	else if (functionName == "fe3d:server_broadcast_udp_message")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -102,7 +102,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_disconnect_client")
+	else if (functionName == "fe3d:server_disconnect_client")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -113,7 +113,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_connected_ips")
+	else if (functionName == "fe3d:server_get_connected_ips")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -125,7 +125,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_connected_ports")
+	else if (functionName == "fe3d:server_get_connected_ports")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -137,7 +137,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_connected_usernames")
+	else if (functionName == "fe3d:server_get_connected_usernames")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -149,7 +149,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_pending_ips")
+	else if (functionName == "fe3d:server_get_pending_ips")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -161,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_pending_ports")
+	else if (functionName == "fe3d:server_get_pending_ports")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -173,7 +173,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_pending_usernames")
+	else if (functionName == "fe3d:server_get_pending_usernames")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -185,7 +185,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:network_server_get_pending_messages")
+	else if (functionName == "fe3d:server_get_pending_messages")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

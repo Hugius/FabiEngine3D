@@ -110,7 +110,7 @@ void NetworkClientAPI::update()
 						auto forthPing = (serverReceiveEpoch - _lastMilliseconds); // Time from client to server
 						auto backPing = (messageTimestamp - serverSendEpoch); // Time from server back to client
 
-						// Register server latency`
+						// Register server latency
 						if (_pingLatencies.size() == NetworkUtils::PING_DIVIDER)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());

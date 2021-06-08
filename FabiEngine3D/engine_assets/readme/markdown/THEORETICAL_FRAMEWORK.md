@@ -1,7 +1,11 @@
 # Theoretical Framework
 - **C++**: a powerful and fast programming language used a lot in game development.
-- **OpenGL**: a 3D graphics library.
+- **OpenGL**: a library used for rendering 3D graphics.
 - **SDL2**: a multimedia library that supports things like rendering, asset loading, input, etc.
+- **Server**: a networking program that processes messages from networking clients.
+- **Client**: a networking program that sends messages to a networking server.
+- **TCP**: Transmission Control Protocol.
+- **UDP**: User Datagram Protocol.
 - **Translation**: this word is equal to "movement".
 - **Scaling**: this word is equal to "size".
 - **Transformation**: the combination of translation, rotation, scaling.

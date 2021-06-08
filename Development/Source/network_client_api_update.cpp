@@ -9,7 +9,7 @@
 
 void NetworkClientAPI::update()
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		return;
@@ -34,7 +34,7 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendTcpMessage(_username, false))
+				if (!_sendTcpMessage(_username, false, false))
 				{
 					return;
 				}
@@ -42,7 +42,7 @@ void NetworkClientAPI::update()
 				// Start a thread to wait for TCP messages
 				_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 			}
-			else if (errorCode == WSAECONNREFUSED) // Cannot connect with server
+			else if ((errorCode == WSAECONNREFUSED) || (errorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
 				_isConnectingToServer = false;
 			}
@@ -67,7 +67,7 @@ void NetworkClientAPI::update()
 	if (_isAcceptedByServer && !_isWaitingForPing)
 	{
 		// Send ping
-		if (!_sendTcpMessage("PING", true))
+		if (!_sendTcpMessage("PING", true, true))
 		{
 			return;
 		}
@@ -145,7 +145,7 @@ void NetworkClientAPI::update()
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
+				Logger::throwError("Networking client TCP receive failed with error code: ", messageErrorCode);
 			}
 		}
 
@@ -177,7 +177,7 @@ void NetworkClientAPI::update()
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
+			Logger::throwError("Networking client UDP receive failed with error code: ", messageErrorCode);
 		}
 	}
 }

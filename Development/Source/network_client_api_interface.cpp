@@ -36,8 +36,8 @@ const unsigned int NetworkClientAPI::getPingLatency()
 		Logger::throwWarning("Networking client tried to retrieve ping latency: not running!");
 	}
 
-	// Must be connected first
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	// Must be connected & accepted
+	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to retrieve ping latency: not connected!");
 	}
@@ -59,8 +59,8 @@ const string NetworkClientAPI::getServerIP()
 		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
 	}
 
-	// Must be connected
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	// Must be connected & accepted
+	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
 	}
@@ -81,10 +81,10 @@ const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 
 void NetworkClientAPI::sendTcpMessage(const string& content)
 {
-	_sendTcpMessage(content, false);
+	_sendTcpMessage(content, false, true);
 }
 
 void NetworkClientAPI::sendUdpMessage(const string& content)
 {
-	_sendUdpMessage(content, false);
+	_sendUdpMessage(content, false, true);
 }

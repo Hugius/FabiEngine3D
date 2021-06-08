@@ -19,6 +19,7 @@ NetworkClientAPI::~NetworkClientAPI()
 	{
 		stop();
 	}
+	std::cout << "hoi";
 }
 
 void NetworkClientAPI::start(const string& username)
@@ -103,8 +104,8 @@ void NetworkClientAPI::disconnectFromServer()
 		return;
 	}
 
-	// Must be connected
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	// Must be connected & accepted
+	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
@@ -137,13 +138,31 @@ void NetworkClientAPI::stop()
 		return;
 	}
 
-	// Disconnect if connected
-	if (_isConnectedToServer && _isAcceptedByServer)
+	// Close TCP socket
+	if (_connectionSocketID != INVALID_SOCKET)
 	{
-		disconnectFromServer();
+		closesocket(_connectionSocketID);
+	}
+
+	// Close UDP socket
+	if (_udpMessageSocketID != INVALID_SOCKET)
+	{
+		closesocket(_udpMessageSocketID);
 	}
 
 	// Reset variables
+	_connectionSocketID = INVALID_SOCKET;
+	_udpMessageSocketID = INVALID_SOCKET;
+	_pendingMessages.clear();
+	_pingLatencies.clear();
+	_lastMilliseconds = 0;
 	_username = "";
+	_tcpMessageBuild = "";
+	_serverIP = "";
+	_serverPort = "";
 	_isRunning = false;
+	_isConnectedToServer = false;
+	_isConnectingToServer = false;
+	_isAcceptedByServer = false;
+	_isWaitingForPing = false;	
 }

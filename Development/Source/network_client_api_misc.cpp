@@ -7,13 +7,22 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved)
+bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
-	// Must be connected & accepted
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	// Must be running
+	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
-		return false;
+		Logger::throwWarning("Networking client tried to send TCP message: not running!");
+	}
+
+	// Must be connected & optionally accepted
+	if (!_isConnectedToServer || !_isAcceptedByServer)
+	{
+		if (mustBeAccepted)
+		{
+			Logger::throwWarning("Networking client tried to send TCP message: not connected!");
+			return false;
+		}
 	}
 
 	// Validate message content
@@ -56,20 +65,23 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved)
 	return true;
 }
 
-bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved)
+bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not running!");
 		return false;
 	}
 
-	// Must be connected & accepted first
-	if (!_isConnectedToServer && _isAcceptedByServer)
+	// Must be connected & optionally accepted
+	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
-		return false;
+		if (mustBeAccepted)
+		{
+			Logger::throwWarning("Networking client tried to send UDP message: not connected!");
+			return false;
+		}
 	}
 
 	// Validate message semantics
@@ -178,7 +190,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("Networking server UDP socket bind failed with error code: ", WSAGetLastError());
+		Logger::throwError("Networking client UDP socket bind failed with error code: ", WSAGetLastError());
 	}
 
 	// Address info not needed anymore

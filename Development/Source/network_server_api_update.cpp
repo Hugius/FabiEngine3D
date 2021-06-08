@@ -9,7 +9,7 @@
 
 void NetworkServerAPI::update()
 {
-	// Must be running first
+	// Must be running
 	if (!_isRunning)
 	{
 		return;

@@ -43,8 +43,8 @@ public:
 
 private:
 	// Message functions
-	bool _sendTcpMessage(const string& content, bool isReserved);
-	bool _sendUdpMessage(const string& content, bool isReserved);
+	bool _sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted);
+	bool _sendUdpMessage(const string& content, bool isReserved, bool mustBeAccepted);
 	tuple<int, int, long long, string> _waitForTcpMessage(SOCKET tcpSocketID);
 	tuple<int, int, string, string, string> _receiveUdpMessage(SOCKET udpSocketID);
 

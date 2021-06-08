@@ -138,7 +138,8 @@ void NetworkClientAPI::update()
 		}
 		else // Receive failed
 		{
-			if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Server lost socket connection
+			auto code = messageErrorCode;
+			if ((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Server lost socket connection
 			{
 				disconnectFromServer();
 				return;

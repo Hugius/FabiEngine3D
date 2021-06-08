@@ -154,7 +154,8 @@ BEGIN:
 			}
 			else // Receive failed
 			{
-				if (messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED) // Client lost socket connection
+				auto code = messageErrorCode;
+				if ((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Client lost socket connection
 				{
 					_disconnectClient(clientSocketID);
 					goto BEGIN;
@@ -203,7 +204,7 @@ BEGIN:
 				}
 			}
 		}
-		else if (messageStatusCode == 0 || messageErrorCode == WSAECONNRESET || messageErrorCode == WSAECONNABORTED)
+		else if ((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED))
 		{
 			// Wrong packet, do nothing
 		}

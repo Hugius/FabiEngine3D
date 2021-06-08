@@ -122,11 +122,11 @@ BEGIN:
 						}
 						else if (clientMessageBuild == "PING") // Handle ping message
 						{
+							// Calculate delay between receiving the message and processing the receive
+							auto receiveDelay = Tools::getTimeSinceEpochMS() - messageTimestamp;
+
 							// Compose ping message
-							auto pingMessage =
-								"PING" +
-								std::to_string(messageTimestamp) + "_" + // Timestamp of receive
-								std::to_string(Tools::getTimeSinceEpochMS()); // Timestamp of send
+							auto pingMessage = "PING" + std::to_string(receiveDelay);
 
 							// Send ping message back to client
 							if (!_sendTcpMessage(clientSocketID, pingMessage, true))

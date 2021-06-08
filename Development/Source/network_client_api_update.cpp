@@ -103,19 +103,21 @@ void NetworkClientAPI::update()
 					}
 					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
 					{
-						// Calculate server latency
-						auto pingData = _tcpMessageBuild.substr(4);
-						auto serverReceiveEpoch = stoll(pingData.substr(0, pingData.find('_')));
-						auto serverSendEpoch = stoll(pingData.substr(pingData.find('_') + 1));
-						auto forthPing = (serverReceiveEpoch - _lastMilliseconds); // Time from client to server
-						auto backPing = (messageTimestamp - serverSendEpoch); // Time from server back to client
+						// Calculate ping latency
+						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);
+
+						// Subtract the server & client processing delays
+						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
+						auto clientReceiveDelay = Tools::getTimeSinceEpochMS() - messageTimestamp;
+						latency -= serverReceiveDelay;
+						latency -= clientReceiveDelay;
 
 						// Register server latency
 						if (_pingLatencies.size() == NetworkUtils::PING_DIVIDER)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}
-						_pingLatencies.push_back(static_cast<unsigned int>(forthPing + backPing));
+						_pingLatencies.push_back(static_cast<unsigned int>(latency));
 						_isWaitingForPing = false;
 						_tcpMessageBuild = "";
 					}

@@ -17,6 +17,7 @@
   Sets the color as **rgb** of the selected sky.
 - `fe3d:sky_get_color`() ---> `VEC3`  
   Returns the color of the selected sky.
+
 # Terrain
 - `fe3d:terrain_get_max_height`() ---> `DEC`  
   Returns the maximum height of the selected terrain (based on the heightmap pixels values).
@@ -24,6 +25,7 @@
   Returns size of the selected terrain.
 - `fe3d:terrain_get_pixel_height`(`DEC` x, `DEC` z) ---> `DEC`  
   Returns the height of the pixel in the selected terrain height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
+
 # Water
 - `fe3d:water_set_speed`(`DEC` x, `DEC` z) ---> `NONE`  
   Sets the rippling/waving speed of the selected water in the **x** direction and **z** direction.

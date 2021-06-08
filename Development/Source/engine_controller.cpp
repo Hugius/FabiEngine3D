@@ -1,5 +1,7 @@
 #include "engine_controller.hpp"
 
+#define SCRIPT_EXECUTOR _leftViewportController.getScriptEditor().getScriptExecutor()
+
 EngineController::EngineController() :
 	FabiEngine3D(),
 	_gui(*this),
@@ -39,7 +41,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_centerCursor();
 
 		// Initialize script execution
-		_leftViewportController.getScriptEditor().getScriptExecutor(false).load();
+		SCRIPT_EXECUTOR.load();
 	}
 	else // Engine preview
 	{
@@ -55,13 +57,13 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 {
 	if (engine_isGameExported()) // Game preview
 	{
-		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning()) // Still running
+		if (SCRIPT_EXECUTOR.isRunning()) // Still running
 		{
 			// Update animation system
 			_leftViewportController.getAnimationEditor().update();
 
 			// Update script execution
-			_leftViewportController.getScriptEditor().getScriptExecutor(false).update(false);
+			SCRIPT_EXECUTOR.update(false);
 		}
 		else // Error has been thrown
 		{
@@ -86,9 +88,9 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 	if (engine_isGameExported())
 	{
 		// Check if script was running
-		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning())
+		if (SCRIPT_EXECUTOR.isRunning())
 		{
-			_leftViewportController.getScriptEditor().getScriptExecutor(false).unload();
+			SCRIPT_EXECUTOR.unload();
 		}
 	}
 }

@@ -88,12 +88,12 @@ void ScriptEditor::_copySelectedText()
 	}
 }
 
-ScriptExecutor& ScriptEditor::getScriptExecutor(bool reloadScript)
+ScriptExecutor& ScriptEditor::getScriptExecutor()
 {
-	// Load the original script
-	if (reloadScript || !_isScriptLoadedFromFile)
+	// Optionally load script files
+	if (!_isScriptLoadedFromFile)
 	{
-		loadScriptsFromFile();
+		loadScriptFiles();
 	}
 	
 	return _scriptExecutor;

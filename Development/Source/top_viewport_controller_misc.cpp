@@ -3,7 +3,7 @@
 #include <filesystem>
 #include <fstream>
 
-#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
+#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
 
 bool TopViewportController::isScriptRunning()
 {

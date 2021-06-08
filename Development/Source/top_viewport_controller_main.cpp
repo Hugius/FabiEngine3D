@@ -1,9 +1,10 @@
 #include "top_viewport_controller.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
 
-#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
+#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
 	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
@@ -162,7 +163,8 @@ void TopViewportController::_updateGameScreenManagement()
 				}
 				else
 				{
-					_scriptEditor.getScriptExecutor(true).load();
+					_scriptEditor.loadScriptFiles();
+					SCRIPT_EXECUTOR.load();
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
@@ -172,7 +174,8 @@ void TopViewportController::_updateGameScreenManagement()
 			else if (gameScreen->getButton("restart")->isHovered())
 			{
 				SCRIPT_EXECUTOR.unload();
-				_scriptEditor.getScriptExecutor(true).load();
+				_scriptEditor.loadScriptFiles();
+				SCRIPT_EXECUTOR.load();
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
@@ -184,6 +187,12 @@ void TopViewportController::_updateGameScreenManagement()
 				SCRIPT_EXECUTOR.update(true);
 				SCRIPT_EXECUTOR.pause();
 			}
+		}
+		
+		// Reload script files every second
+		if (_fe3d.misc_checkInterval(Config::UPDATES_PER_SECOND))
+		{
+			_scriptEditor.loadScriptFiles();
 		}
 
 		// Update game buttons hoverability

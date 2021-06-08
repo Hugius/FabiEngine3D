@@ -4,7 +4,7 @@
 #include <sstream>
 #include <filesystem>
 
-void ScriptEditor::loadScriptsFromFile()
+void ScriptEditor::loadScriptFiles()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -53,7 +53,8 @@ void ScriptEditor::loadScriptsFromFile()
 				while (std::getline(file, line))
 				{
 					// Add new scriptline
-					_script.getScriptFile(scriptName)->insertNewLine(lineIndex++, line);
+					_script.getScriptFile(scriptName)->insertNewLine(lineIndex, line);
+					lineIndex++;
 				}
 
 				// Close file

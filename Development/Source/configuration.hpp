@@ -35,7 +35,8 @@ public:
 	const bool    isGameExported()	   const;
 
 	// Constants
-	static inline const float MS_PER_UPDATE = 6.94f; // 144 Hz
+	static inline const unsigned int UPDATES_PER_SECOND = 144;
+	static inline const float MS_PER_UPDATE = (1000.0f / static_cast<float>(UPDATES_PER_SECOND));
 
 private:
 	Config();

@@ -15,10 +15,10 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectID(const string& projectName);
-	void loadScriptsFromFile();
+	void loadScriptFiles();
 	void saveScriptsToFile();
 
-	ScriptExecutor& getScriptExecutor(bool reloadScript);
+	ScriptExecutor& getScriptExecutor();
 
 	bool isLoaded();
 	bool isWritingScript();

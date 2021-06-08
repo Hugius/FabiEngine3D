@@ -10,6 +10,7 @@
 - [Input](SCRIPT_FE3D_INPUT.md)
 - [Camera](SCRIPT_FE3D_CAMERA.md)
 - [Physics](SCRIPT_FE3D_PHYSICS.md)
+- [Networking](SCRIPT_FE3D_NETWORKING.md)
 - [Lighting](SCRIPT_FE3D_LIGHTING.md)
 - [Graphics](SCRIPT_FE3D_GRAPHICS.md)
 - [Miscellaneous](SCRIPT_FE3D_MISC.md)

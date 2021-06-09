@@ -188,16 +188,17 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		// Update game buttons hoverability
-		static bool wasInMainMenu;
+		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !_scriptEditor.getScriptExecutor().isRunning());
-		gameScreen->getButton("pause")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isRunning() && !_fe3d.networkServer_isRunning());
+		gameScreen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
+		gameScreen->getButton("pause")->setHoverable(isInMainMenu && isScriptRunning() && !_fe3d.networkServer_isRunning());
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
 		gameScreen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
 		gameScreen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
 
 		// Reload script files every second or if user came into menu
-		if ((!wasInMainMenu && isInMainMenu) || (isInMainMenu && _fe3d.misc_checkInterval(Config::UPDATES_PER_SECOND)))
+		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
+		if (cameIntoMenu || (isInMainMenu && !isScriptRunning() && _fe3d.misc_checkInterval(Config::UPDATES_PER_SECOND)))
 		{
 			_scriptEditor.loadScriptFiles(false);
 		}

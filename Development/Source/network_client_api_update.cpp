@@ -117,7 +117,7 @@ void NetworkClientAPI::update()
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}
-						_pingLatencies.push_back(static_cast<unsigned int>(latency));
+						_pingLatencies.push_back(static_cast<unsigned int>(llabs(latency)));
 						_isWaitingForPing = false;
 						_tcpMessageBuild = "";
 					}

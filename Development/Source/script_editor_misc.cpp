@@ -89,13 +89,7 @@ void ScriptEditor::_copySelectedText()
 }
 
 ScriptExecutor& ScriptEditor::getScriptExecutor()
-{
-	// Optionally load script files
-	if (!_isScriptLoadedFromFile)
-	{
-		loadScriptFiles();
-	}
-	
+{	
 	return _scriptExecutor;
 }
 

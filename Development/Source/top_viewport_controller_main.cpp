@@ -4,8 +4,6 @@
 #include <fstream>
 #include <sstream>
 
-#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
-
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
 	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
 	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
@@ -157,54 +155,54 @@ void TopViewportController::_updateGameScreenManagement()
 			if (gameScreen->getButton("play")->isHovered())
 			{
 				// Resume game or load game
-				if (SCRIPT_EXECUTOR.isInitialized())
+				if (_scriptEditor.getScriptExecutor().isInitialized())
 				{
-					SCRIPT_EXECUTOR.resume();
+					_scriptEditor.getScriptExecutor().resume();
 				}
 				else
 				{
-					_scriptEditor.loadScriptFiles();
-					SCRIPT_EXECUTOR.load();
+					_scriptEditor.loadScriptFiles(true);
+					_scriptEditor.getScriptExecutor().load();
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
 			{
-				SCRIPT_EXECUTOR.pause();
+				_scriptEditor.getScriptExecutor().pause();
 			}
 			else if (gameScreen->getButton("restart")->isHovered())
 			{
-				SCRIPT_EXECUTOR.unload();
-				_scriptEditor.loadScriptFiles();
-				SCRIPT_EXECUTOR.load();
+				_scriptEditor.getScriptExecutor().unload();
+				_scriptEditor.loadScriptFiles(true);
+				_scriptEditor.getScriptExecutor().load();
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
-				SCRIPT_EXECUTOR.unload();
+				_scriptEditor.getScriptExecutor().unload();
 			}
 			else if (gameScreen->getButton("debug")->isHovered())
 			{
-				SCRIPT_EXECUTOR.resume();
-				SCRIPT_EXECUTOR.update(true);
-				SCRIPT_EXECUTOR.pause();
+				_scriptEditor.getScriptExecutor().resume();
+				_scriptEditor.getScriptExecutor().update(true);
+				_scriptEditor.getScriptExecutor().pause();
 			}
 		}
 		
 		// Reload script files every second
 		if (_fe3d.misc_checkInterval(Config::UPDATES_PER_SECOND))
 		{
-			_scriptEditor.loadScriptFiles();
+			_scriptEditor.loadScriptFiles(false);
 		}
 
 		// Update game buttons hoverability
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR.isScriptEmpty() && !SCRIPT_EXECUTOR.isRunning());
-		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isRunning() && !_fe3d.networkServer_isRunning());
-		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
-		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
-		gameScreen->getButton("debug")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
+		gameScreen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !_scriptEditor.getScriptExecutor().isRunning());
+		gameScreen->getButton("pause")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isRunning() && !_fe3d.networkServer_isRunning());
+		gameScreen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
+		gameScreen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
+		gameScreen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isInitialized());
 
 		// Update other buttons hoverability
-		if (SCRIPT_EXECUTOR.isInitialized())
+		if (_scriptEditor.getScriptExecutor().isInitialized())
 		{
 			projectScreen->getButton("newProject")->setHoverable(false);
 			projectScreen->getButton("loadProject")->setHoverable(false);
@@ -222,24 +220,24 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		// Check if user wants to pause the running game
-		if (SCRIPT_EXECUTOR.isRunning())
+		if (_scriptEditor.getScriptExecutor().isRunning())
 		{
 			// Check if user pressed ESCAPE
 			if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (_fe3d.networkServer_isRunning()) // Server application cannot be paused, only on or off
 				{
-					SCRIPT_EXECUTOR.unload();
+					_scriptEditor.getScriptExecutor().unload();
 				}
 				else // Non-server application can be paused
 				{
-					SCRIPT_EXECUTOR.pause();
+					_scriptEditor.getScriptExecutor().pause();
 				}
 			}
 		}
 
 		// Executing game script (if possible)
-		SCRIPT_EXECUTOR.update(false);
+		_scriptEditor.getScriptExecutor().update(false);
 	}
 }
 

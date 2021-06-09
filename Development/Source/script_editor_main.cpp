@@ -57,7 +57,7 @@ void ScriptEditor::load()
 	_fe3d.lightEntity_add("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 
 	// Load script
-	loadScriptFiles();
+	loadScriptFiles(true);
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");

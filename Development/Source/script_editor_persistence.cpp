@@ -4,7 +4,7 @@
 #include <sstream>
 #include <filesystem>
 
-void ScriptEditor::loadScriptFiles()
+void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -63,7 +63,11 @@ void ScriptEditor::loadScriptFiles()
 		}
 
 		// Logging
-		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
+		if (isLoggingEnabled)
+		{
+			_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
+		}
+
 		_isScriptLoadedFromFile = true;
 	}
 	else

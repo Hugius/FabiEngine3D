@@ -359,8 +359,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_SPEED")
 			{
-				// Extract data
-				iss >> _editorSpeed;
+				if (_isEditorLoaded)
+				{
+					iss >> _editorSpeed;
+				}
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
@@ -371,7 +373,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> position.x >> position.y >> position.z;
 
 				// Set position
-				_fe3d.camera_setPosition(position);
+				if (_isEditorLoaded)
+				{
+					_fe3d.camera_setPosition(position);
+				}
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
@@ -382,7 +387,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> yaw;
 
 				// Set yaw
-				_fe3d.camera_setYaw(yaw);
+				if (_isEditorLoaded)
+				{
+					_fe3d.camera_setYaw(yaw);
+				}
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
@@ -393,7 +401,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				iss >> pitch;
 
 				// Set pitch
-				_fe3d.camera_setPitch(pitch);
+				if (_isEditorLoaded)
+				{
+					_fe3d.camera_setPitch(pitch);
+				}
 			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{

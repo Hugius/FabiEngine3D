@@ -145,12 +145,12 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 
 const string FabiEngine3D::misc_getGpuName()
 {
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
+	return _core->_libraryLoader.getGpuName();
 }
 
 const string FabiEngine3D::misc_getOpenglVersion()
 {
-	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
+	return _core->_libraryLoader.getOpenglVersion();
 }
 
 const Vec2 FabiEngine3D::misc_convertToNDC(Vec2 pos)

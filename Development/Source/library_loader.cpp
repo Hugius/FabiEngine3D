@@ -70,8 +70,9 @@ LibraryLoader::LibraryLoader()
 
 	// Miscellaneous stuff
 	Logger::throwInfo("Initializing SDL settings...");
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	const auto& versionString = getOpenglVersion();
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, stoi(string(1, versionString[0])));
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, stoi(string(1, versionString[2])));
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 }
@@ -91,4 +92,14 @@ SDL_Window* LibraryLoader::getWindowPointer()
 	auto temp = _windowPointer;
 	_windowPointer = nullptr;
 	return temp;
+}
+
+const string LibraryLoader::getGpuName()
+{
+	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
+}
+
+const string LibraryLoader::getOpenglVersion()
+{
+	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
 }

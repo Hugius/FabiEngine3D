@@ -54,6 +54,6 @@
 - `fe3d:client_get_pending_messages`() ---> `LIST`  
   Returns contents of pending messages from networking server.
 - `fe3d:client_get_ping_latency`() ---> `INT`  
-  Returns round-trip ping latency from networking client to networking server.
+  Returns average round-trip ping latency from networking client to networking server in milliseconds.
 - `fe3d:client_get_server_ip`() ---> `STR`  
   Returns IP address of networking server.

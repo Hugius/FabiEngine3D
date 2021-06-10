@@ -1,5 +1,5 @@
 # Networking
-![image](FabiEngine3D/engine_assets/readme/images/client_server.png)
+![image](../images/client_server.png)
 ### Server
 - A FabiEngine3D server is a **separate application** that runs on its own.
 - It is **NOT** a game and its only purpose is processing incoming/outgoing messages from/to clients.

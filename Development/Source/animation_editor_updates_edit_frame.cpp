@@ -21,6 +21,10 @@ void AnimationEditor::_updateFrameScreen()
 			float multiplier = (transType == TransformationType::TRANSLATION) ? 1000.0f :
 				(transType == TransformationType::SCALING) ? 100.0f : 1.0f;
 
+			// Rotation origin is only available if transformation type is rotation
+			screen->getButton("rotationOrigin")->setHoverable(transType == TransformationType::ROTATION);
+
+			// Update screen logic
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button

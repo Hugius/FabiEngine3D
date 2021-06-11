@@ -231,17 +231,16 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 
 	// Writefield handling
 	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID);
-	if (writefield->confirmedInput())
+	if (writefield->getTextContent().empty())
 	{
-		if (writefield->getTextContent() != "")
+		value = 0.0f; // Reset value to default
+	}
+	else
+	{
+		// Check if something is filled in
+		if (writefield->isActive())
 		{
-			// Cannot be empty
-			if (writefield->getTextContent() == "?")
-			{
-				writefield->setTextContent(to_string(value));
-			}
-
-			value = static_cast<float>(stoi(writefield->getTextContent())) / multiplier;
+			value = (static_cast<float>(stoi(writefield->getTextContent())) / multiplier); // Update value in realtime
 		}
 	}
 
@@ -249,10 +248,9 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	value = std::clamp(value, minimum, maximum);
 
 	// Writefield filling
-	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID)->isActive())
+	if (!writefield->isActive())
 	{
-		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID)->
-			setTextContent(to_string(static_cast<int>(value * multiplier)));
+		writefield->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

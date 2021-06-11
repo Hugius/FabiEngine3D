@@ -73,8 +73,8 @@ const string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir
 
 	// Open file explorer
 	OPENFILENAME ofn;
-	char pathBuffer[256];
-	char titleBuffer[100];
+	char pathBuffer[256] = {};
+	char titleBuffer[100] = {};
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = nullptr;

@@ -42,4 +42,12 @@
 - `fe3d:camera_set_cursor_speed`(`DEC` speed) ---> `NONE`  
   Sets the **speed** at which the cursor moves.
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
+  Sets the maximum camera pitch angle to **degrees**.
+- `fe3d:camera_lock_yaw`() ---> `NONE`  
+  Locks yaw rotations when first person camera is enabled.
+- `fe3d:camera_unlock_yaw`() ---> `NONE`  
+  Unlocks yaw rotations when first person camera is enabled.
+- `fe3d:camera_lock_pitch`() ---> `NONE`  
+  Locks pitch rotations when first person camera is enabled.
+- `fe3d:camera_unlock_pitch`() ---> `NONE`  
+  Unlocks pitch rotations when first person camera is enabled.

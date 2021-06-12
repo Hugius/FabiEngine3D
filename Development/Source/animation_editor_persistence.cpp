@@ -71,13 +71,14 @@ void AnimationEditor::loadAnimationsFromFile()
 						{
 							// Temporary values
 							string partID;
-							Vec3 targetTransformation, rotationOrigin;
-							float speed;
+							Vec3 targetTransformation, rotationOrigin, speed;
 							int speedType, transformationType;;
 
 							// Extract data
 							iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
-								rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType >> transformationType;
+								rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> 
+								speed.x >> speed.y >> speed.z >> 
+								speedType >> transformationType;
 
 							// Questionmark means empty partID
 							if (partID == "?")
@@ -245,7 +246,9 @@ void AnimationEditor::saveAnimationsToFile()
 							rotationOrigin.x << " " <<
 							rotationOrigin.y << " " <<
 							rotationOrigin.z << " " <<
-							speed << " " <<
+							speed.x << " " <<
+							speed.y << " " <<
+							speed.z << " " <<
 							speedType << " " <<
 							transformationType;
 

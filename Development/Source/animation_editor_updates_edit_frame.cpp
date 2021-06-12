@@ -47,7 +47,9 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xTransformationSpeed", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yTransformationSpeed", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformationSpeed", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("speedType")->isHovered())
 				{
@@ -97,46 +99,58 @@ void AnimationEditor::_updateFrameScreen()
 			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
 			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
 
-			// Update transformation X change
+			// Update X transformation change
 			if (_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { }))
 			{
 				transformation.x /= multiplier;
 			}
 
-			// Update transformation Y change
+			// Update Y transformation change
 			if (_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { }))
 			{
 				transformation.y /= multiplier;
 			}
 
-			// Update transformation Z change
+			// Update Z transformation change
 			if (_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { }))
 			{
 				transformation.z /= multiplier;
 			}
 
-			// Update rotation origin X change
+			// Update X rotation origin change
 			if (_gui.getGlobalScreen()->checkValueForm("xRotationOrigin", rotationOrigin.x, { }))
 			{
 				rotationOrigin.x /= 1000.0f;
 			}
 
-			// Update rotation origin Y change
+			// Update Y rotation origin change
 			if (_gui.getGlobalScreen()->checkValueForm("yRotationOrigin", rotationOrigin.y, { }))
 			{
 				rotationOrigin.y /= 1000.0f;
 			}
 
-			// Update rotation origin Z change
+			// Update Z rotation origin change
 			if (_gui.getGlobalScreen()->checkValueForm("zRotationOrigin", rotationOrigin.z, { }))
 			{
 				rotationOrigin.z /= 1000.0f;
 			}
 
-			// Update speed change
-			if (_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { }))
+			// Update X speed change
+			if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.x, { }))
 			{
-				speed /= 1000.0f;
+				speed.x /= 1000.0f;
+			}
+
+			// Update Y speed change
+			if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.y, { }))
+			{
+				speed.y /= 1000.0f;
+			}
+
+			// Update Z speed change
+			if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.z, { }))
+			{
+				speed.z /= 1000.0f;
 			}
 
 			// Showing speed type

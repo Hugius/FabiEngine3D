@@ -68,9 +68,9 @@ void AnimationEditor::_updateAnimationExecution()
 				const auto& speedType = frame.speedTypes[partID];
 				const auto& rotationOrigin = frame.rotationOrigins[partID];
 				const auto& speed = frame.speeds[partID] * animation.speedMultiplier;
-				const auto& xSpeed = !isRotation ? (speedMultiplier.x * speed) : speed;
-				const auto& ySpeed = !isRotation ? (speedMultiplier.y * speed) : speed;
-				const auto& zSpeed = !isRotation ? (speedMultiplier.z * speed) : speed;
+				const auto& xSpeed = !isRotation ? (speedMultiplier.x * speed.x) : speed.x;
+				const auto& ySpeed = !isRotation ? (speedMultiplier.y * speed.y) : speed.y;
+				const auto& zSpeed = !isRotation ? (speedMultiplier.z * speed.z) : speed.z;
 
 				// Translation is relative to initial size
 				// Rotation is always relative to real-time size

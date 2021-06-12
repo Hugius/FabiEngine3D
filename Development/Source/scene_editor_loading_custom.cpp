@@ -298,7 +298,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					fadeFramestep;
 
 				// Extract speeds
-				map<string, float> speeds;
+				map<string, Vec3> speeds;
 				while (true)
 				{
 					// Check if file has speed data left
@@ -310,11 +310,11 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						break;
 					}
-					else // Add offset
+					else // Add speed
 					{
 						string partID = (nextElement == "?") ? "" : nextElement;
-						float speed;
-						iss >> speed;
+						Vec3 speed;
+						iss >> speed.x >> speed.y >> speed.z;
 						speeds[partID] = speed;
 					}
 				}

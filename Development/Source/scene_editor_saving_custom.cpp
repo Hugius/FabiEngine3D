@@ -302,7 +302,7 @@ void SceneEditor::saveCustomSceneToFile()
 				for (const auto& [partID, speed] : speeds)
 				{
 					// Write speed
-					file << (partID.empty() ? "?" : partID) << " " << speed;
+					file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;
 
 					// Write space
 					if (index != (speeds.size() - 1))

@@ -14,7 +14,7 @@ public:
 		// Default data
 		targetTransformations.insert(make_pair(partID, Vec3(0.0f)));
 		rotationOrigins.insert(make_pair(partID, Vec3(0.0f)));
-		speeds.insert(make_pair(partID, 0.0f));
+		speeds.insert(make_pair(partID, Vec3(0.0f)));
 		speedTypes.insert(make_pair(partID, AnimationSpeedType::LINEAR));
 		transformationTypes.insert(make_pair(partID, TransformationType::TRANSLATION));
 	}
@@ -22,7 +22,7 @@ public:
 	map<string, Vec3> targetTransformations;
 	map<string, Vec3> rotationOrigins;
 
-	map<string, float> speeds;
+	map<string, Vec3> speeds;
 
 	map<string, AnimationSpeedType> speedTypes;
 

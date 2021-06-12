@@ -12,21 +12,6 @@ void AnimationEditor::_updateAnimationExecution()
 			// Check if animation is still playing
 			if (isAnimationStarted(idPair.first, idPair.second))
 			{
-				// Reset all rotation origins
-				auto animation = _startedAnimations.at(idPair);
-				for (auto partID : animation.partIDs)
-				{
-					// Check if model still exists
-					if (_fe3d.modelEntity_isExisting(animation.animatedModelID))
-					{
-						// Check if model has part
-						if (_fe3d.modelEntity_hasPart(animation.animatedModelID, partID) || partID.empty())
-						{
-							_fe3d.modelEntity_setRotationOrigin(animation.animatedModelID, Vec3(0.0f), partID);
-						}
-					}
-				}
-
 				// Stop animation
 				stopAnimation(idPair.first, idPair.second);
 			}

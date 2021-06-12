@@ -47,6 +47,7 @@ void ScriptInterpreter::load()
 		else
 		{
 			_fe3d.logger_throwWarning("No script_type META found on line 1 @ script \"" + scriptID + "\"");
+			_hasThrownError = true;
 			return;
 		}
 
@@ -69,6 +70,7 @@ void ScriptInterpreter::load()
 			else
 			{
 				_fe3d.logger_throwWarning("Entry point for " + scriptType + " defined multiple times!");
+				_hasThrownError = true;
 				return;
 			}
 		}
@@ -79,6 +81,7 @@ void ScriptInterpreter::load()
 		else
 		{
 			_fe3d.logger_throwWarning("No script_execution META found on line 2 @ script \"" + scriptID + "\"");
+			_hasThrownError = true;
 			return;
 		}
 	}
@@ -87,16 +90,19 @@ void ScriptInterpreter::load()
 	if (_initEntryID == "" && !_initScriptIDs.empty())
 	{
 		_fe3d.logger_throwWarning("No script_execution_entry META defined for INIT script(s)!");
+		_hasThrownError = true;
 		return;
 	}
 	if (_updateEntryID == "" && !_updateScriptIDs.empty())
 	{
 		_fe3d.logger_throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
+		_hasThrownError = true;
 		return;
 	}
 	if (_destroyEntryID == "" && !_destroyScriptIDs.empty())
 	{
 		_fe3d.logger_throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
+		_hasThrownError = true;
 		return;
 	}
 
@@ -194,6 +200,9 @@ void ScriptInterpreter::load()
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_setVsync(false);
+
+	// Check if any engine warnings were thrown
+	_checkEngineWarnings();
 }
 
 void ScriptInterpreter::executeInitialization()

@@ -37,6 +37,8 @@ void Camera::reset()
 	// Booleans
 	_isLookatViewEabled = false;
 	_isFirstPersonViewEnabled = false;
+	_isYawLocked = false;
+	_isPitchLocked = false;
 	_mustCenterCursor = false;
 	_cursorIsBeingCentered = false;
 }
@@ -81,9 +83,17 @@ void Camera::update(Ivec2 lastCursorPosition)
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
-		// Calculate yaw & pitch
-		_yawAcceleration += xOffset;
-		_pitchAcceleration += yOffset;
+		// Calculate yaw
+		if (!_isYawLocked)
+		{
+			_yawAcceleration += xOffset;
+		}
+
+		// Calculate pitch
+		if (!_isPitchLocked)
+		{
+			_pitchAcceleration += yOffset;
+		}
 
 		// Spawn mouse in middle of screen
 		_window.setCursorPos({ xMiddle, yMiddle });

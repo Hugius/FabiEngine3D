@@ -62,14 +62,24 @@ void FabiEngine3D::camera_setLookatPosition(Vec3 position)
 	_core->_camera.setLookatPosition(position);
 }
 
-void FabiEngine3D::camera_invertYaw()
+void FabiEngine3D::camera_lockYaw()
 {
-	_core->_camera.invertYaw();
+	_core->_camera.lockYaw();
 }
 
-void FabiEngine3D::camera_invertPitch()
+void FabiEngine3D::camera_unlockYaw()
 {
-	_core->_camera.invertPitch();
+	_core->_camera.unlockYaw();
+}
+
+void FabiEngine3D::camera_lockPitch()
+{
+	_core->_camera.lockPitch();
+}
+
+void FabiEngine3D::camera_unlockPitch()
+{
+	_core->_camera.unlockPitch();
 }
 
 void FabiEngine3D::camera_setFOV(float fov)

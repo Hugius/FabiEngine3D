@@ -179,14 +179,24 @@ void Camera::setLookatPosition(Vec3 value)
 	_lookatPosition = value;
 }
 
-void Camera::invertYaw()
+void Camera::lockYaw()
 {
-	_yaw = -_yaw;
+	_isYawLocked = true;
 }
 
-void Camera::invertPitch()
+void Camera::unlockYaw()
 {
-	_pitch = -_pitch;
+	_isYawLocked = false;
+}
+
+void Camera::lockPitch()
+{
+	_isPitchLocked = true;
+}
+
+void Camera::unlockPitch()
+{
+	_isPitchLocked = false;
 }
 
 void Camera::notifyCursorCenter()

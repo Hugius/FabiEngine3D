@@ -60,8 +60,10 @@ public:
 	void camera_translate(Vec3 translation);
 	void camera_setPosition(Vec3 position);
 	void camera_setLookatPosition(Vec3 position);
-	void camera_invertYaw();
-	void camera_invertPitch();
+	void camera_lockYaw();
+	void camera_unlockYaw();
+	void camera_lockPitch();
+	void camera_unlockPitch();
 	void camera_setFOV(float fov);
 	void camera_setMouseSensitivity(float speed);
 	void camera_setYaw(float yaw);

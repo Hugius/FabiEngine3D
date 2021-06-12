@@ -34,8 +34,10 @@ public:
 	void translateFollowZY(float speed);
 	void translateFollowZ(float speed);
 	void translate(Vec3 translation);
-	void invertYaw();
-	void invertPitch();
+	void lockYaw();
+	void unlockYaw();
+	void lockPitch();
+	void unlockPitch();
 	void notifyCursorCenter();
 
 	// Getters
@@ -90,6 +92,8 @@ private:
 	// Booleans
 	bool _isLookatViewEabled	   = false;
 	bool _isFirstPersonViewEnabled = false;
+	bool _isYawLocked			   = false;
+	bool _isPitchLocked			   = false;
 	bool _mustCenterCursor         = false;
 	bool _cursorIsBeingCentered	   = false;
 };

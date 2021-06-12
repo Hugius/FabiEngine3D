@@ -54,7 +54,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		Vec3 cameraPos = camera.getPosition();
 		Vec3 newCameraPos = Vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
 		camera.setPosition(newCameraPos);
-		camera.invertPitch();
+		camera.setPitch(-camera.getPitch());
 		camera.updateMatrices();
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
@@ -101,7 +101,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		cameraPos = camera.getPosition();
 		newCameraPos = Vec3(cameraPos.x, cameraPos.y + (cameraDistance * 2.0f), cameraPos.z);
 		camera.setPosition(newCameraPos);
-		camera.invertPitch();
+		camera.setPitch(-camera.getPitch());
 		camera.updateMatrices();
 
 		// Restore reflective GAME entities

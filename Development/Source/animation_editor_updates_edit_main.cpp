@@ -134,7 +134,7 @@ void AnimationEditor::_updateEditingScreen()
 							{
 								lastFrameCopy.targetTransformations.insert(make_pair(partID, Vec3(0.0f)));
 								lastFrameCopy.rotationOrigins.insert(make_pair(partID, Vec3(0.0f)));
-								lastFrameCopy.speeds.insert(make_pair(partID, 0.0f));
+								lastFrameCopy.speeds.insert(make_pair(partID, Vec3(0.0f)));
 								lastFrameCopy.speedTypes.insert(make_pair(partID, AnimationSpeedType::LINEAR));
 								lastFrameCopy.transformationTypes.insert(make_pair(partID, TransformationType::TRANSLATION));
 							}

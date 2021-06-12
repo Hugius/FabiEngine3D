@@ -142,13 +142,13 @@ void AnimationEditor::_updateFrameScreen()
 			}
 
 			// Update Y speed change
-			if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.y, { }))
+			if (_gui.getGlobalScreen()->checkValueForm("yTransformationSpeed", speed.y, { }))
 			{
 				speed.y /= 1000.0f;
 			}
 
 			// Update Z speed change
-			if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.z, { }))
+			if (_gui.getGlobalScreen()->checkValueForm("zTransformationSpeed", speed.z, { }))
 			{
 				speed.z /= 1000.0f;
 			}
@@ -159,8 +159,8 @@ void AnimationEditor::_updateFrameScreen()
 			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newTextContent);
 
 			// Showing transformation type
-			newTextContent = transType == TransformationType::TRANSLATION ? "Type: translation" :
-				transType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
+			newTextContent = transType == TransformationType::TRANSLATION ? "Type: translate" :
+				transType == TransformationType::ROTATION ? "Type: rotate" : "Type: scale";
 			_fe3d.textEntity_setTextContent(screen->getButton("transType")->getTextfield()->getEntityID(), newTextContent);
 
 			// Check if a animation partID is clicked

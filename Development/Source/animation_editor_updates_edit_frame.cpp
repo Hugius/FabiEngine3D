@@ -24,6 +24,9 @@ void AnimationEditor::_updateFrameScreen()
 			// Rotation origin is only available if transformation type is rotation
 			screen->getButton("rotationOrigin")->setHoverable(transType == TransformationType::ROTATION);
 
+			// Speed is only available if speed type is not instantly
+			screen->getButton("speed")->setHoverable(speedType != AnimationSpeedType::INSTANTLY);
+
 			// Update screen logic
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -60,7 +63,7 @@ void AnimationEditor::_updateFrameScreen()
 					}
 					else if (speedType == AnimationSpeedType::EXPONENTIAL)
 					{
-						speedType = AnimationSpeedType::INSTANT;
+						speedType = AnimationSpeedType::INSTANTLY;
 					}
 					else
 					{

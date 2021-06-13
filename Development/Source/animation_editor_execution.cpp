@@ -113,7 +113,7 @@ void AnimationEditor::_updateAnimationExecution()
 						if (transformationType == TransformationType::TRANSLATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalTranslation.x);
 							}
@@ -123,7 +123,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalRotation.x);
 							}
@@ -133,7 +133,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.x - totalScaling.x);
 							}
@@ -199,7 +199,7 @@ void AnimationEditor::_updateAnimationExecution()
 						if (transformationType == TransformationType::TRANSLATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalTranslation.y);
 							}
@@ -209,7 +209,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalRotation.y);
 							}
@@ -219,7 +219,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.y - totalScaling.y);
 							}
@@ -285,7 +285,7 @@ void AnimationEditor::_updateAnimationExecution()
 						if (transformationType == TransformationType::TRANSLATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalTranslation.z);
 							}
@@ -295,7 +295,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::ROTATION)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalRotation.z);
 							}
@@ -305,7 +305,7 @@ void AnimationEditor::_updateAnimationExecution()
 						else if (transformationType == TransformationType::SCALING)
 						{
 							// Instant speed means the whole transformation in one go
-							if (speedType == AnimationSpeedType::INSTANT)
+							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
 								finalSpeed = (targetTransformation.z - totalScaling.z);
 							}

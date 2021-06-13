@@ -4,5 +4,5 @@ enum class AnimationSpeedType
 {
 	LINEAR,
 	EXPONENTIAL,
-	INSTANT
+	INSTANTLY
 };

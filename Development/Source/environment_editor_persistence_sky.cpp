@@ -141,9 +141,12 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 
 void EnvironmentEditor::unloadSkyEntities()
 {
-	for (const auto& name : _loadedSkyIDs)
+	for (const auto& ID : _loadedSkyIDs)
 	{
-		_fe3d.skyEntity_delete(name);
+		if (_fe3d.skyEntity_isExisting(ID))
+		{
+			_fe3d.skyEntity_delete(ID);
+		}
 	}
 }
 

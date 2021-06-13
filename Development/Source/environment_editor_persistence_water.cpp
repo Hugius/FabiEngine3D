@@ -176,9 +176,12 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 
 void EnvironmentEditor::unloadWaterEntities()
 {
-	for (const auto& name : _loadedWaterIDs)
+	for (const auto& ID : _loadedWaterIDs)
 	{
-		_fe3d.waterEntity_delete(name);
+		if (_fe3d.waterEntity_isExisting(ID))
+		{
+			_fe3d.waterEntity_delete(ID);
+		}
 	}
 }
 

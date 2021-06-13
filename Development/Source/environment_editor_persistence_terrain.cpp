@@ -235,9 +235,12 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 
 void EnvironmentEditor::unloadTerrainEntities()
 {
-	for (const auto& name : _loadedTerrainIDs)
+	for (const auto& ID : _loadedTerrainIDs)
 	{
-		_fe3d.terrainEntity_delete(name);
+		if (_fe3d.terrainEntity_isExisting(ID))
+		{
+			_fe3d.terrainEntity_delete(ID);
+		}
 	}
 }
 

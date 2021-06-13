@@ -17,7 +17,7 @@
 ### Keyframes
 - The first keyframe is always the default model transformation.
 - Every keyframe has a different **target** transformation.
-- Every keyframe has a different animation **speed**, with 2 types to choose from: **linear & exponential**.
+- Every keyframe has a different animation **speed**, with 3 types to choose from: **linear, exponential, instantly**.
 - Rotational transformations can each have a different **rotation origin**.
 - If the model has **multiple parts**, each part has its own transformation every keyframe.
 - The **last** animation keyframe should be the same as the **initial** frame, for a full animation.

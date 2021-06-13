@@ -200,6 +200,9 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 	else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:") // FUNCTION
 	{
+		// Save current logger message count
+		auto loggerMessageCount = _fe3d.logger_getMessageCount();
+
 		// Call function
 		auto values =
 			(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
@@ -207,6 +210,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			_processMiscellaneousFunctionCall(valueString);
 
 		// Check if any error was thrown
+		_checkEngineWarnings(loggerMessageCount);
 		if (_hasThrownError)
 		{
 			return;

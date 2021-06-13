@@ -211,6 +211,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				}
 				else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 				{
+					// Save current logger message count
+					auto loggerMessageCount = _fe3d.logger_getMessageCount();
+
 					// Call function
 					auto values =
 						(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
@@ -218,12 +221,13 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						_processMiscellaneousFunctionCall(valueString);
 
 					// Check if any error was thrown
+					_checkEngineWarnings(loggerMessageCount);
 					if (_hasThrownError)
 					{
 						return;
 					}
 
-					if (typeString == LIST_KEYWORD) // Check if variable isa list
+					if (typeString == LIST_KEYWORD) // Check if variable is a list
 					{
 						// Check if function returned any empty values
 						for (const auto& value : values)

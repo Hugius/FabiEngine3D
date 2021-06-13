@@ -58,6 +58,10 @@ void AnimationEditor::_updateFrameScreen()
 					{
 						speedType = AnimationSpeedType::EXPONENTIAL;
 					}
+					else if (speedType == AnimationSpeedType::EXPONENTIAL)
+					{
+						speedType = AnimationSpeedType::INSTANT;
+					}
 					else
 					{
 						speedType = AnimationSpeedType::LINEAR;
@@ -154,8 +158,8 @@ void AnimationEditor::_updateFrameScreen()
 			}
 
 			// Showing speed type
-			string newTextContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartID] == AnimationSpeedType::LINEAR) ?
-				"Speed: linear" : "Speed: exponential";
+			string newTextContent = (speedType == AnimationSpeedType::LINEAR) ? "Speed: linear" :
+				(speedType == AnimationSpeedType::EXPONENTIAL) ? "Speed: exponent" : "Speed: instant";
 			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newTextContent);
 
 			// Showing transformation type

@@ -120,17 +120,17 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 	_hasThrownError = true;
 }
 
-void ScriptInterpreter::_checkEngineWarnings()
+void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount)
 {
 	// Check if any new messages were logged
 	auto messageCount = _fe3d.logger_getMessageCount();
-	if (messageCount > _lastLoggerMessageCount)
+	if (messageCount > lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
 		auto messageQueue = _fe3d.logger_getMessageQueue();
 
 		// Loop over all new messages
-		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageCount; i++)
+		for (unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
 			// Check if logged message is a warning
 			if (messageQueue[i].substr(0, string("[Warn]").size()) == "[Warn]")

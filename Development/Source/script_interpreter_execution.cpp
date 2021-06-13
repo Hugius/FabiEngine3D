@@ -34,9 +34,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_throwScriptError("too many script execution layers, perhaps infinite recursion?");
 	}
 
-	// Check if any engine warnings were thrown
-	_checkEngineWarnings();
-
 	// Skip the following lines of code if the last run caused an error
 	if (_hasThrownError)
 	{
@@ -50,7 +47,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		// Save current amount of logged messages
-		_lastLoggerMessageCount = _fe3d.logger_getMessageCount();
+		auto lastLoggerMessageCount = _fe3d.logger_getMessageCount();
 
 		// Save index of line of script currently being executed
 		_currentLineIndexStack.back() = lineIndex;
@@ -416,7 +413,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Check if any engine warnings were thrown
-		_checkEngineWarnings();
+		_checkEngineWarnings(lastLoggerMessageCount);
 
 		// Skip the following lines of code if the last run caused an error
 		if (_hasThrownError)

@@ -20,7 +20,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEd
 void ScriptInterpreter::load()
 {
 	// Save current amount of logged messages
-	_lastLoggerMessageCount = _fe3d.logger_getMessageCount();
+	auto lastLoggerMessageCount = _fe3d.logger_getMessageCount();
 
 	// For every scriptfile
 	for (const auto& scriptID : _script.getAllScriptFileIDs())
@@ -202,7 +202,7 @@ void ScriptInterpreter::load()
 	_fe3d.misc_setVsync(false);
 
 	// Check if any engine warnings were thrown
-	_checkEngineWarnings();
+	_checkEngineWarnings(lastLoggerMessageCount);
 }
 
 void ScriptInterpreter::executeInitialization()
@@ -379,7 +379,6 @@ void ScriptInterpreter::unload()
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
-	_lastLoggerMessageCount = 0;
 	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;

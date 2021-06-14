@@ -326,7 +326,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				if (_animationEditor.isAnimationExisting(animationID))
 				{
 					// Retrieve raw animation data for editing
-					auto animationData = _animationEditor.getAnimationData(animationID, modelID);
+					string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+					auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
 
 					// Set properties
 					isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();

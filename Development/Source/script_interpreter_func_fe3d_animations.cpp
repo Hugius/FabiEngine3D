@@ -132,7 +132,8 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				string errorMessage = "Trying to set speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 				if (animationData != nullptr)
 				{
 					animationData->speedMultiplier = arguments[2].getDecimal();
@@ -151,7 +152,8 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				string errorMessage = "Trying to get speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 				if (animationData != nullptr)
 				{
 					auto result = animationData->speedMultiplier;
@@ -170,7 +172,8 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString());
+				string errorMessage = "Trying to get frame index of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 				if (animationData != nullptr)
 				{
 					auto result = animationData->frameIndex;

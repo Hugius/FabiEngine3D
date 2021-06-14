@@ -276,7 +276,8 @@ void SceneEditor::saveCustomSceneToFile()
 			for (const auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
 			{
 				// Retrieve raw animation data for retrieving
-				auto animationData = _animationEditor.getAnimationData(animationID, modelID);
+				string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
 
 				// Data to save
 				auto isPaused		 = animationData->isPaused;

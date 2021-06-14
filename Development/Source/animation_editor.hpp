@@ -30,7 +30,7 @@ public:
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
-	Animation* getAnimationData(const string& animationID, const string& modelID);
+	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 	const vector<string> getAllAnimationIDs();
 	const vector<string> getStartedAnimationIDs();
 	const vector<string> getStartedAnimationIDs(const string& modelID);

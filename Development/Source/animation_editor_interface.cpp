@@ -265,19 +265,16 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	}
 }
 
-Animation* AnimationEditor::getAnimationData(const string& animationID, const string& modelID)
+Animation* AnimationEditor::getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage)
 {
-	// Temporary values
-	string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
-
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		_fe3d.logger_throwWarning(baseErrorMessage + "animation not existing!");
 	}
 	else if (!isAnimationStarted(animationID, modelID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+		_fe3d.logger_throwWarning(baseErrorMessage + "animation not started!");
 	}
 	else
 	{

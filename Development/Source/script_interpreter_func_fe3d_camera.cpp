@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:camera_set_cursor_speed")
+	else if (functionName == "fe3d:camera_set_mouse_sensitivity")
 	{
 		auto types = { ScriptValueType::DECIMAL };
 

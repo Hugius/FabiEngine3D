@@ -31,8 +31,10 @@
   Returns a list of strings with the full IDs of all sounds.
 - `fe3d:sound_delete`(`STR` ID) ---> `NONE`  
   Deletes sound with **ID** if existing.
-- `fe3d:sound_set_enabled`(`BOOL` enabled) ---> `NONE`  
-  Sets sound system to **enabled**.
+- `fe3d:sound_enable`() ---> `NONE`  
+  Enables the sound system.
+- `fe3d:sound_disable`() ---> `NONE`  
+  Disables the sound system.
 - `fe3d:sound_play`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
   Plays sound with **ID** and repeats it **loops** times (-1 to play forever). Fades in with **fadeMS** milliseconds.
 - `fe3d:sound_play_forced`(`STR` ID, `INT` loops, `INT` fadeMS) ---> `NONE`  
@@ -65,8 +67,10 @@
   Adds music to the playlist based on audio with **previewID** and plays random music from the playlist.
 - `fe3d:music_clear_playlist`() ---> `NONE`  
   Clears and stops all music from the playlist.
-- `fe3d:music_set_enabled`(`BOOL` enabled) ---> `NONE`  
-  Sets music system to **enabled**.
+- `fe3d:music_enable`() ---> `NONE`  
+  Enables the music system.
+- `fe3d:music_disable`() ---> `NONE`  
+  Disables the music system.
 - `fe3d:music_set_volume`(`DEC` volume) ---> `NONE`  
   Sets music volume.
 - `fe3d:music_get_volume`() ---> `DEC`  

@@ -29,16 +29,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function
-				if (functionName == "misc:concat_strings")
-				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
-					}
-				}
-				else if (functionName == "misc:concat_lists")
+				if (functionName == "misc:list_concat")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -87,7 +78,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 					}
 				}
-				else if (functionName == "misc:get_list_size")
+				else if (functionName == "misc:list_get_size")
 				{
 					auto types = { ScriptValueType::STRING };
 
@@ -115,18 +106,36 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:get_string_size")
+				else if (functionName == "misc:string_concat")
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
+					}
+				}
+				else if (functionName == "misc:string_get_size")
 				{
 					auto types = { ScriptValueType::STRING };
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						// Return string size
 						auto result = arguments[0].getString().size();
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:get_string_part")
+				else if (functionName == "misc:string_contains")
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (functionName == "misc:string_get_part")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 
@@ -143,6 +152,42 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+					}
+				}
+				else if (functionName == "misc:string_split")
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Validate splitter
+						if ((arguments[1].getString().size() > 1) ||
+							arguments[0].getString().find(arguments[1].getString()) == string::npos)
+						{
+							_throwScriptError("incorrect string splitter!");
+							return returnValues;
+						}
+
+						// Return all split string parts
+						string fullString = arguments[0].getString();
+						string stringPart = "";
+						for (size_t i = 0; i < fullString.size(); fullString)
+						{
+							if (fullString[i] == fullString.back()) // Found splitter
+							{
+								returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, stringPart));
+								stringPart = "";
+							}
+							else if (i == (fullString.size() - 1)) // End of string
+							{
+								stringPart += fullString[i];
+								returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, stringPart));
+							}
+							else // Add to string part
+							{
+								stringPart += fullString[i];
+							}
+						}						
 					}
 				}
 				else if (functionName == "misc:get_random_integer")

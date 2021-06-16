@@ -19,7 +19,6 @@ NetworkClientAPI::~NetworkClientAPI()
 	{
 		stop();
 	}
-	std::cout << "hoi";
 }
 
 void NetworkClientAPI::start(const string& username)

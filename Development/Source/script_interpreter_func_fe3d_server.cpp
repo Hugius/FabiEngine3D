@@ -26,6 +26,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 
 			// Start server
 			_fe3d.networkServer_start(arguments[0].getInteger());
+			_fe3d.misc_enableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -138,6 +138,22 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:cursor_is_visible")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access cursor functionality as a networking server!");
+				return true;
+			}
+
+			// Return cursor visbility
+			auto result = _fe3d.misc_isCursorVisible();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
 	else if (functionName == "fe3d:cursor_get_position_x")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -257,7 +273,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			// Cannot execute AABBs functionality when server is running
 			if (_fe3d.networkServer_isRunning())
 			{
-				_throwScriptError("cannot access AABBs functionality as a networking server!");
+				_throwScriptError("cannot access aabbs functionality as a networking server!");
 				return true;
 			}
 
@@ -273,7 +289,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			// Cannot execute AABBs functionality when server is running
 			if (_fe3d.networkServer_isRunning())
 			{
-				_throwScriptError("cannot access AABBs functionality as a networking server!");
+				_throwScriptError("cannot access aabbs functionality as a networking server!");
 				return true;
 			}
 
@@ -296,6 +312,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute Vsync functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access vsync functionality as a networking server!");
+				return true;
+			}
+
+			// Enable Vsync
 			_fe3d.misc_enableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -304,6 +328,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute Vsync functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access vsync functionality as a networking server!");
+				return true;
+			}
+
+			// Disable Vsync
 			_fe3d.misc_disableVsync();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -312,6 +344,14 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
+			// Cannot execute Vsync functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access vsync functionality as a networking server!");
+				return true;
+			}
+
+			// Return Vsync status
 			auto result = _fe3d.misc_isVsyncEnabled();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}

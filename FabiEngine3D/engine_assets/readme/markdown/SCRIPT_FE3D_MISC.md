@@ -50,7 +50,7 @@
 - `fe3d:cursor_hide`() ---> `NONE`  
   Makes mouse cursor invisible.
 - `fe3d:cursor_is_visible`() ---> `BOOL`  
-  Returns true if mouse cursor is invisible.
+  Returns true if mouse cursor is visible.
 - `fe3d:cursor_get_position_x`() ---> `DEC`  
   Returns the X position of the cursor (between -1.0 and 1.0).
 - `fe3d:cursor_get_position_y`() ---> `DEC`  

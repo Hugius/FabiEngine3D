@@ -807,7 +807,8 @@ public:
 	const bool networkClient_isConnecting();
 	const bool networkClient_isConnected();
 	const unsigned int networkClient_getPingLatency();
-	const string networkClient_getServerIP();
+	const string& networkClient_getUsername();
+	const string& networkClient_getServerIP();
 	const vector<NetworkServerMessage>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters

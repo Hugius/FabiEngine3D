@@ -52,7 +52,12 @@ const unsigned int FabiEngine3D::networkClient_getPingLatency()
 	return _core->_networkClientAPI.getPingLatency();
 }
 
-const string FabiEngine3D::networkClient_getServerIP()
+const string& FabiEngine3D::networkClient_getUsername()
+{
+	return _core->_networkClientAPI.getUsername();
+}
+
+const string& FabiEngine3D::networkClient_getServerIP()
 {
 	return _core->_networkClientAPI.getServerIP();
 }

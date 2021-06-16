@@ -51,7 +51,12 @@ const unsigned int NetworkClientAPI::getPingLatency()
 	return (totalPing / static_cast<int>(_pingLatencies.size()));
 }
 
-const string NetworkClientAPI::getServerIP()
+const string& NetworkClientAPI::getUsername()
+{
+	return _username;
+}
+
+const string& NetworkClientAPI::getServerIP()
 {
 	// Must be running
 	if (!_isRunning)

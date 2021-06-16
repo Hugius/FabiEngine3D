@@ -124,27 +124,38 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 {
 	// Temporary values
 	int CPUInfo[4];
-	char nameString[48];
+	char name[48];
 
 	// Retrieve full CPU name string
 	__cpuid(CPUInfo, 0x80000002);
-	memcpy(nameString, CPUInfo, sizeof(CPUInfo));
+	memcpy(name, CPUInfo, sizeof(CPUInfo));
 	__cpuid(CPUInfo, 0x80000003);
-	memcpy(nameString + 16, CPUInfo, sizeof(CPUInfo));
+	memcpy(name + 16, CPUInfo, sizeof(CPUInfo));
 	__cpuid(CPUInfo, 0x80000004);
-	memcpy(nameString + 32, CPUInfo, sizeof(CPUInfo));
-	
-	// Retrieve number of logical CPU cores
-	SYSTEM_INFO sysInfo;
-	GetSystemInfo(&sysInfo);
-	string coreCount = to_string(sysInfo.dwNumberOfProcessors);
+	memcpy(name + 32, CPUInfo, sizeof(CPUInfo));
 
-	// Return
-	string result;
+	// Convert to string
+	string nameString;
 	for (unsigned int i = 0; i < 48; i++)
 	{
-		result.push_back(nameString[i]);
+		nameString.push_back(name[i]);
 	}
+
+	// Remove trailing spaces
+	string result;
+	std::reverse(nameString.begin(), nameString.end());
+	for (unsigned int i = 0; i < nameString.size(); i++)
+	{
+		// Check if end of whitespace found
+		if (nameString[i] != 0)
+		{
+			result = nameString.substr(i);
+			break;
+		}
+	}
+
+	// Return
+	std::reverse(result.begin(), result.end());
 	return result;
 }
 

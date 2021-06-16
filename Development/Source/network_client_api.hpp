@@ -37,7 +37,8 @@ public:
 
 	const unsigned int getPingLatency();
 
-	const string getServerIP();
+	const string& getUsername();
+	const string& getServerIP();
 
 	const vector<NetworkServerMessage>& getPendingMessages();
 

@@ -122,6 +122,15 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
+	else if (functionName == "fe3d:client_get_username")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.networkClient_getUsername();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
 	else
 	{
 		return false;

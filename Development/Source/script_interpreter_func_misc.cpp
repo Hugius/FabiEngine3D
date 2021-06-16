@@ -170,10 +170,11 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return all split string parts
 						string fullString = arguments[0].getString();
+						string splitter = arguments[1].getString();
 						string stringPart = "";
 						for (size_t i = 0; i < fullString.size(); i++)
 						{
-							if (fullString[i] == fullString.back()) // Found splitter
+							if (fullString[i] == splitter.back()) // Found splitter
 							{
 								returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, stringPart));
 								stringPart = "";

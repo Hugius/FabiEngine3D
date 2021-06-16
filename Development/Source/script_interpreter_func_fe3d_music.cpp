@@ -31,14 +31,21 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:music_set_enabled")
+	else if (functionName == "fe3d:music_enable")
 	{
-		auto types = { ScriptValueType::BOOLEAN };
-
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.misc_setMusicEnabled(arguments[0].getBoolean());
+			_fe3d.misc_enableMusic();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:music_disable")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.misc_disableMusic();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

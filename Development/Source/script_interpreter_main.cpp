@@ -199,7 +199,7 @@ void ScriptInterpreter::load()
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
-	_fe3d.misc_setVsync(false);
+	_fe3d.misc_disableVsync();
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);
@@ -286,8 +286,8 @@ void ScriptInterpreter::unload()
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 	// Reset audio
-	_fe3d.misc_setSoundsEnabled(true);
-	_fe3d.misc_setMusicEnabled(true);
+	_fe3d.misc_enableSounds();
+	_fe3d.misc_enableMusic();
 
 	// Stop animations
 	_animationEditor.stopAllAnimations();
@@ -365,7 +365,7 @@ void ScriptInterpreter::unload()
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);
-	_fe3d.misc_setVsync(true);
+	_fe3d.misc_enableVsync();
 
 	// Reset all variables
 	_debuggingTimes.clear();

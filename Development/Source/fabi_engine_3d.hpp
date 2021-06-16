@@ -811,7 +811,6 @@ public:
 	const vector<NetworkServerMessage>& networkClient_getPendingMessages();
 
 	// Miscellaneous interface - setters
-	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_enableWireframeRendering();
 	void misc_disableWireframeRendering();
 	void misc_enableShadowFrameRendering();
@@ -822,11 +821,17 @@ public:
 	void misc_disableDebugRendering();
 	void misc_enableTerrainRaycasting(float distance, float precision);
 	void misc_disableTerrainRaycasting();
+	void misc_enableVsync();
+	void misc_disableVsync();
+	void misc_enableSounds();
+	void misc_disableSounds();
+	void misc_enableMusic();
+	void misc_disableMusic();
+	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_centerCursor();
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_setCursorPosition(Ivec2 pos);
-	void misc_setVsync(bool enabled);
 	void misc_setMainRenderingColor(Vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearMeshCache(const string& filePath);
@@ -843,8 +848,6 @@ public:
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
-	void misc_setSoundsEnabled(bool enabled);
-	void misc_setMusicEnabled(bool enabled);
 	void misc_setMaxAudioChannels(unsigned int count);
 
 	// Miscellaneous interface - getters
@@ -889,6 +892,7 @@ public:
 	const bool misc_isRaycastPositionOnTerrainValid();
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_createNewDirectory(const string& directoryPath);
+	const bool misc_isVsyncEnabled();
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

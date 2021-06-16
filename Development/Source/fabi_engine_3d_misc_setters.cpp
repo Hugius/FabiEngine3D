@@ -93,16 +93,34 @@ void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 	_core->_window.setCursorPos(pos);
 }
 
-void FabiEngine3D::misc_setVsync(bool enabled)
+void FabiEngine3D::misc_enableVsync()
 {
-	if (enabled)
-	{
-		_core->_window.enableVsync();
-	}
-	else
-	{
-		_core->_window.disableVsync();
-	}
+	_core->_window.enableVsync();
+}
+
+void FabiEngine3D::misc_disableVsync()
+{
+	_core->_window.disableVsync();
+}
+
+void FabiEngine3D::misc_enableSounds()
+{
+	_core->_audioPlayer.setSoundsEnabled(true);
+}
+
+void FabiEngine3D::misc_disableSounds()
+{
+	_core->_audioPlayer.setSoundsEnabled(false);
+}
+
+void FabiEngine3D::misc_enableMusic()
+{
+	_core->_audioPlayer.setMusicEnabled(true);
+}
+
+void FabiEngine3D::misc_disableMusic()
+{
+	_core->_audioPlayer.setMusicEnabled(false);
 }
 
 void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
@@ -183,16 +201,6 @@ void FabiEngine3D::misc_startMillisecondTimer()
 void FabiEngine3D::misc_setLevelOfDetailDistance(float distance)
 {
 	_core->_modelEntityManager.setLodDistance(distance);
-}
-
-void FabiEngine3D::misc_setSoundsEnabled(bool enabled)
-{
-	_core->_audioPlayer.setSoundsEnabled(enabled);
-}
-
-void FabiEngine3D::misc_setMusicEnabled(bool enabled)
-{
-	_core->_audioPlayer.setMusicEnabled(enabled);
 }
 
 void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)

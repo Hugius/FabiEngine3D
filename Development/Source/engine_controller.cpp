@@ -97,7 +97,7 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 void EngineController::_initializeMiscellaneous()
 {
 	// Enable vsync
-	misc_setVsync(true);
+	misc_enableVsync();
 
 	// Permanent graphical effects
 	misc_setMainRenderingColor(Vec3(0.0f));
@@ -139,7 +139,7 @@ void EngineController::_updateMiscellaneous()
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
 		skyEntity_select("@@engineBackground");
 		skyEntity_setLightness("@@engineBackground", 0.6f);
-		misc_setVsync(true);
+		misc_enableVsync();
 	}
 	lastScreen = activeScreen;
 

@@ -140,7 +140,12 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 	string coreCount = to_string(sysInfo.dwNumberOfProcessors);
 
 	// Return
-	return string(nameString);
+	string result;
+	for (unsigned int i = 0; i < 48; i++)
+	{
+		result.push_back(nameString[i]);
+	}
+	return result;
 }
 
 const string FabiEngine3D::misc_getGpuName()
@@ -381,6 +386,11 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 const bool FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
 {
 	return (_mkdir(directoryPath.c_str()) != -1);
+}
+
+const bool FabiEngine3D::misc_isVsyncEnabled()
+{
+	return _core->_window.isVsyncEnabled();
 }
 
 const int FabiEngine3D::misc_getMaxChannels()

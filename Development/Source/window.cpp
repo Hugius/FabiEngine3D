@@ -123,14 +123,19 @@ void Window::setCursorPos(Ivec2 pos)
 	SDL_WarpMouseInWindow(_windowPointer, pos.x, pos.y);
 }
 
-const Ivec2 Window::getCursorPos() const
+const Ivec2 Window::getCursorPos()
 {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	return Ivec2(x, y);
 }
 
-bool Window::isCursorVisible() const
+bool Window::isCursorVisible()
 {
 	return static_cast<bool>(SDL_ShowCursor(SDL_QUERY));
+}
+
+const bool Window::isVsyncEnabled()
+{
+	return SDL_GL_GetSwapInterval();
 }

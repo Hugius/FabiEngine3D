@@ -33,8 +33,9 @@ public:
 	void hideCursor();
 	void setCursorPos(Ivec2 pos);
 
-	const Ivec2 getCursorPos() const;
-	bool isCursorVisible() const;
+	const Ivec2 getCursorPos();
+	bool isCursorVisible();
+	const bool isVsyncEnabled();
 
 private:
 	SDL_Window* _windowPointer = nullptr;

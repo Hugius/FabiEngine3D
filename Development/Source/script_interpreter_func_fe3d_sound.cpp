@@ -197,14 +197,21 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:sound_set_enabled")
+	else if (functionName == "fe3d:sound_enable")
 	{
-		auto types = { ScriptValueType::BOOLEAN };
-
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.misc_setSoundsEnabled(arguments[0].getBoolean());
+			_fe3d.misc_enableSounds();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:sound_disable")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.misc_disableSounds();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

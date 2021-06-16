@@ -57,3 +57,5 @@
   Returns average round-trip ping latency from networking client to networking server in milliseconds.
 - `fe3d:client_get_server_ip`() ---> `STR`  
   Returns IP address of networking server.
+- `fe3d:client_get_username`() ---> `STR`  
+  Returns username of networking client.

@@ -171,7 +171,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						// Return all split string parts
 						string fullString = arguments[0].getString();
 						string stringPart = "";
-						for (size_t i = 0; i < fullString.size(); fullString)
+						for (size_t i = 0; i < fullString.size(); i++)
 						{
 							if (fullString[i] == fullString.back()) // Found splitter
 							{

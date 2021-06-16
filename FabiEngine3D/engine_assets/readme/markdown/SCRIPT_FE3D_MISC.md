@@ -89,3 +89,9 @@
   Deletes an existing **filePath** in `projects\<your_project>\saves\`.
 - `fe3d:time_interval`(`INT` frames) ---> `BOOL`  
   Returns true every time **frames** has passed.
+- `fe3d:vsync_enable`() ---> `NONE`  
+  Enables screen Vsync.
+- `fe3d:vsync_disable`() ---> `NONE`  
+  Disables screen Vsync.
+- `fe3d:vsync_is_enabled`() ---> `BOOL`  
+  Returns true if screen Vsync is enabled.

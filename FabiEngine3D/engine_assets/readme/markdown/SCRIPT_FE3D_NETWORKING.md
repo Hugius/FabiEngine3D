@@ -11,10 +11,10 @@
   Sends TCP **message** to networking client with **username**.
 - `fe3d:server_send_udp_message`(`STR` username, `STR` message) ---> `NONE`  
   Sends UDP **message** to networking client with **username**.
-- `fe3d:server_broadcast_tcp_message`(`STR` message) ---> `NONE`  
-  Sends TCP **message** to all connected networking clients.
-- `fe3d:server_broadcast_udp_message`(`STR` message) ---> `NONE`  
-  Sends UDP **message** to all connected networking clients.
+- `fe3d:server_broadcast_tcp_message`(`STR` message, `STR` exception) ---> `NONE`  
+  Sends TCP **message** to all connected networking clients, except for **exception** (username).
+- `fe3d:server_broadcast_udp_message`(`STR` message, `STR` exception) ---> `NONE`  
+  Sends UDP **message** to all connected networking clients, except for **exception** (username).
 - `fe3d:server_disconnect_client`(`STR` username) ---> `NONE`  
   Disconnects connected networking client with **username** from networking server.
 - `fe3d:server_get_connected_ips`() ---> `LIST`  

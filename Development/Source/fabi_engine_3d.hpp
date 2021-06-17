@@ -781,8 +781,8 @@ public:
 	void networkServer_start(unsigned int customMaxClientCount);
 	void networkServer_sendMessageTCP(const string& username, const string& content);
 	void networkServer_sendMessageUDP(const string& username, const string& content);
-	void networkServer_broadcastMessageTCP(const string& content);
-	void networkServer_broadcastMessageUDP(const string& content);
+	void networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername);
+	void networkServer_broadcastMessageUDP(const string& content, const string& exceptionUsername);
 	void networkServer_disconnectClient(const string& username);
 	void networkServer_stop();
 

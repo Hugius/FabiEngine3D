@@ -146,30 +146,38 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 	Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not connected!");
 }
 
-void NetworkServerAPI::broadcastTcpMessage(const string& content)
+void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
 	// Send message to all connected clients
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
-		// Client must be fully accepted
-		if (!_clientUsernames[i].empty())
+		// Check exception
+		if (_clientUsernames[i] != exceptionUsername)
 		{
-			// Send message
-			_sendTcpMessage(_clientSocketIDs[i], content, false);
+			// Client must be fully accepted
+			if (!_clientUsernames[i].empty())
+			{
+				// Send message
+				_sendTcpMessage(_clientSocketIDs[i], content, false);
+			}
 		}
 	}
 }
 
-void NetworkServerAPI::broadcastUdpMessage(const string& content)
+void NetworkServerAPI::broadcastUdpMessage(const string& content, const string& exceptionUsername)
 {
 	// Try to find client and send message
 	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
-		// Client must be fully accepted
-		if (!_clientUsernames[i].empty())
+		// Check exception
+		if (_clientUsernames[i] != exceptionUsername)
 		{
-			// Send message
-			_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
+			// Client must be fully accepted
+			if (!_clientUsernames[i].empty())
+			{
+				// Send message
+				_sendUdpMessage(_clientIPs[i], _clientPorts[i], content, false);
+			}
 		}
 	}
 }

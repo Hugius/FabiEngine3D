@@ -83,23 +83,23 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 	}
 	else if (functionName == "fe3d:server_broadcast_tcp_message")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.networkServer_broadcastMessageTCP(arguments[0].getString());
+			_fe3d.networkServer_broadcastMessageTCP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:server_broadcast_udp_message")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.networkServer_broadcastMessageUDP(arguments[0].getString());
+			_fe3d.networkServer_broadcastMessageUDP(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

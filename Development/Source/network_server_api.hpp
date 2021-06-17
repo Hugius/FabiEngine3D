@@ -25,8 +25,8 @@ public:
 	void update();
 	void sendTcpMessage(const string& username, const string& content);
 	void sendUdpMessage(const string& username, const string& content);
-	void broadcastTcpMessage(const string& content);
-	void broadcastUdpMessage(const string& content);
+	void broadcastTcpMessage(const string& content, const string& exceptionUsername);
+	void broadcastUdpMessage(const string& content, const string& exceptionUsername);
 	void disconnectClient(const string& username);
 	void stop();
 

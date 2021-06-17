@@ -21,14 +21,14 @@ void FabiEngine3D::networkServer_sendMessageUDP(const string& username, const st
 	_core->_networkServerAPI.sendUdpMessage(username, content);
 }
 
-void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content)
+void FabiEngine3D::networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername)
 {
-	_core->_networkServerAPI.broadcastTcpMessage(content);
+	_core->_networkServerAPI.broadcastTcpMessage(content, exceptionUsername);
 }
 
-void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content)
+void FabiEngine3D::networkServer_broadcastMessageUDP(const string& content, const string& exceptionUsername)
 {
-	_core->_networkServerAPI.broadcastUdpMessage(content);
+	_core->_networkServerAPI.broadcastUdpMessage(content, exceptionUsername);
 }
 
 void FabiEngine3D::networkServer_disconnectClient(const string& username)

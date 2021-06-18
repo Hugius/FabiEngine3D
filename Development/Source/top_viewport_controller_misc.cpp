@@ -3,6 +3,18 @@
 #include <filesystem>
 #include <fstream>
 
+bool TopViewportController::isScriptStarted()
+{
+	if (_currentProjectID == "")
+	{
+		return false;
+	}
+	else
+	{
+		return _scriptEditor.getScriptExecutor().isStarted();
+	}
+}
+
 bool TopViewportController::isScriptRunning()
 {
 	if (_currentProjectID == "")
@@ -17,7 +29,7 @@ bool TopViewportController::isScriptRunning()
 
 void TopViewportController::_updateMiscellaneous()
 {
-	bool hoverable = (_currentProjectID == "") ? false : !_scriptEditor.getScriptExecutor().isInitialized();
+	bool hoverable = (_currentProjectID == "") ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Project menus hoverability
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("environmentEditor")->setHoverable(hoverable);

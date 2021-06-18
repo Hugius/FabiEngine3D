@@ -22,6 +22,7 @@ public:
 	void initialize() override;
 	void update() override;
 
+	bool isScriptStarted();
 	bool isScriptRunning();
 
 	static inline const Vec3 FRAME_COLOR = Vec3(0.25f);

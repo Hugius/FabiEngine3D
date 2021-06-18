@@ -12,11 +12,11 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& 
 
 void ScriptExecutor::load()
 {
-	// Initialize script execution & run initialization scripts
+	// Start script execution & run initialization scripts
 	_fe3d.misc_showCursor();
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
-	_isInitialized = true;
+	_isStarted = true;
 	_isRunning = true;
 	_mustSkipUpdate = true;
 
@@ -26,7 +26,7 @@ void ScriptExecutor::load()
 
 void ScriptExecutor::update(bool debug)
 {
-	if (_isInitialized && _isRunning)
+	if (_isStarted && _isRunning)
 	{
 		// Skip first frame, then update fulltime
 		if (!_mustSkipUpdate || debug)
@@ -55,7 +55,7 @@ void ScriptExecutor::update(bool debug)
 
 void ScriptExecutor::pause()
 {
-	if (_isInitialized && _isRunning)
+	if (_isStarted && _isRunning)
 	{
 		// Save cursor state
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
@@ -94,7 +94,7 @@ void ScriptExecutor::pause()
 
 void ScriptExecutor::resume()
 {
-	if (_isInitialized && !_isRunning)
+	if (_isStarted && !_isRunning)
 	{
 		// Reset cursor
 		_fe3d.misc_centerCursor();
@@ -131,7 +131,7 @@ void ScriptExecutor::resume()
 
 void ScriptExecutor::unload()
 {
-	if (_isInitialized)
+	if (_isStarted)
 	{
 		// Execute destruction scripts
 		_scriptInterpreter.executeDestruction();
@@ -147,7 +147,7 @@ void ScriptExecutor::unload()
 
 		// Miscellaneous
 		_fe3d.misc_hideCursor();
-		_isInitialized = false;
+		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
 		_wasMillisecondTimerStarted = false;
@@ -167,9 +167,9 @@ bool ScriptExecutor::isScriptEmpty()
 	return (_script.getScriptFileCount() == 0);
 }
 
-bool ScriptExecutor::isInitialized()
+bool ScriptExecutor::isStarted()
 {
-	return _isInitialized;
+	return _isStarted;
 }
 
 bool ScriptExecutor::isRunning()
@@ -183,7 +183,7 @@ void ScriptExecutor::_validateExecution()
 	{
 		_scriptInterpreter.unload();
 		_fe3d.misc_hideCursor();
-		_isInitialized = false;
+		_isStarted = false;
 		_isRunning = false;
 	}
 	else if (_scriptInterpreter.gameMustStop()) // Script must stop

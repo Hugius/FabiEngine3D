@@ -106,7 +106,7 @@ void ScriptInterpreter::load()
 		return;
 	}
 
-	// Comment optimization for runtime
+	// Comment optimization for runtime execution
 	for (const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		auto scriptFile = _script.getScriptFile(scriptID);
@@ -120,17 +120,20 @@ void ScriptInterpreter::load()
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
 
-			// Update line text
+			// Check if line is comment
 			if (noWhiteSpace.substr(0, 3) == "///")
 			{
 				unsigned int charIndex;
 				for (charIndex = 0; charIndex < scriptLineText.size(); charIndex++)
 				{
+					// Check if character found
 					if (scriptLineText[charIndex] != ' ')
 					{
 						break;
 					}
 				}
+
+				// Update line text (any whitespace before indented comments is removed)
 				scriptFile->setLineText(lineIndex, scriptLineText.substr(charIndex));
 			}
 		}

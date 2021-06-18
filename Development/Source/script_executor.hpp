@@ -16,7 +16,7 @@ public:
 	void setCurrentProjectID(const string& projectID);
 
 	bool isScriptEmpty();
-	bool isInitialized();
+	bool isStarted();
 	bool isRunning();
 
 private:
@@ -28,7 +28,7 @@ private:
 
 	vector<string> _pausedSoundIDs;
 
-	bool _isInitialized = false;
+	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
 	bool _wasMillisecondTimerStarted = false;

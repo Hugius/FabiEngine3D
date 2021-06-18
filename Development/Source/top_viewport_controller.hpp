@@ -24,8 +24,6 @@ public:
 
 	bool isScriptRunning();
 
-	const string& getCurrentProjectName();
-
 	static inline const Vec3 FRAME_COLOR = Vec3(0.25f);
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.25f, 0.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 0.5f, 0.0f);
@@ -43,7 +41,7 @@ private:
 	void _prepareProjectLoading();
 	void _saveCurrentProject();
 	void _applyProjectChange();
-	bool _isProjectCorrupted(const string& projectName);
+	bool _isProjectCorrupted(const string& projectID);
 
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;

@@ -29,9 +29,9 @@ const string& SceneEditor::getLoadedSceneID()
 	return _loadedSceneID;
 }
 
-void SceneEditor::setCurrentProjectID(const string& projectName)
+void SceneEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }
 
 void SceneEditor::_selectModel(const string& modelID)

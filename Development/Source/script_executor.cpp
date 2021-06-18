@@ -157,9 +157,9 @@ void ScriptExecutor::unload()
 	}
 }
 
-void ScriptExecutor::setCurrentProjectID(const string& projectName)
+void ScriptExecutor::setCurrentProjectID(const string& projectID)
 {
-	_scriptInterpreter.setCurrentProjectID(projectName);
+	_scriptInterpreter.setCurrentProjectID(projectID);
 }
 
 bool ScriptExecutor::isScriptEmpty()

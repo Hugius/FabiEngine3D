@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void BillboardEditor::setCurrentProjectID(const string& projectName)
+void BillboardEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }
 
 bool BillboardEditor::isLoaded()

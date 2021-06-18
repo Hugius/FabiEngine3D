@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void AnimationEditor::setCurrentProjectID(const string& projectName)
+void AnimationEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }
 
 bool AnimationEditor::isLoaded()

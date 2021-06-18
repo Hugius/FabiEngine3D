@@ -33,7 +33,7 @@ void LeftViewportController::initialize()
 }
 
 void LeftViewportController::update()
-{	
+{
 	auto window = _gui.getViewport("left")->getWindow("main");
 	auto screen = window->getScreen("main");
 
@@ -101,12 +101,16 @@ void LeftViewportController::update()
 	_scriptEditor.update();
 	_settingsEditor.update();
 
-	// Check if user got out of script editor
-	if (_lastActiveEditorScreen == "scriptEditorMenuMain" && window->getActiveScreen()->getID() != "scriptEditorMenuMain")
+	// Check if project is loaded
+	if (!_settingsEditor.getCurrentProjectID().empty())
 	{
-		// Reload settings (MSAA in particular)
-		_settingsEditor.loadSettings();
-		_lastActiveEditorScreen = "";
+		// Check if user got out of script editor
+		if (_lastActiveEditorScreen == "scriptEditorMenuMain" && window->getActiveScreen()->getID() != "scriptEditorMenuMain")
+		{
+			// Reload settings (MSAA in particular)
+			_settingsEditor.loadSettings();
+			_lastActiveEditorScreen = "";
+		}
 	}
 }
 

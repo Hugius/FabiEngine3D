@@ -13,7 +13,7 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectName);
+	void setCurrentProjectID(const string& projectID);
 	void loadSkyEntitiesFromFile();
 	void loadTerrainEntitiesFromFile();
 	void loadWaterEntitiesFromFile();

@@ -15,11 +15,6 @@ bool TopViewportController::isScriptRunning()
 	}
 }
 
-const string& TopViewportController::getCurrentProjectName()
-{
-	return _currentProjectID;
-}
-
 void TopViewportController::_updateMiscellaneous()
 {
 	bool hoverable = (_currentProjectID == "") ? false : !_scriptEditor.getScriptExecutor().isInitialized();
@@ -40,24 +35,24 @@ void TopViewportController::_updateProjectCreation()
 	if (_creatingProject)
 	{
 		// Temporary values
-		string newProjectName;
+		string newProjectID;
 
 		// Check if value changed
-		if (_gui.getGlobalScreen()->checkValueForm("newProjectName", newProjectName))
+		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Get directory path for the new project
-			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectName;
+			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectID;
 
 			// Check if project already exists
 			if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath))
 			{
-				_fe3d.logger_throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
+				_fe3d.logger_throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 			}
-			else if (newProjectName.find_first_not_of(" ") == string::npos)
+			else if (newProjectID.find_first_not_of(" ") == string::npos)
 			{
 				_fe3d.logger_throwWarning("New project name cannot contain any spaces!");
 			}
-			else if (isupper(newProjectName.front()))
+			else if (isupper(newProjectID.front()))
 			{
 				_fe3d.logger_throwWarning("New project name cannot start with capital!");
 			}
@@ -91,11 +86,11 @@ void TopViewportController::_updateProjectCreation()
 				file.close();
 
 				// Create settings file
-				_settingsEditor.setCurrentProjectID(newProjectName);
+				_settingsEditor.setCurrentProjectID(newProjectID);
 				_settingsEditor.save(true);
 
 				// Load current project
-				_currentProjectID = newProjectName;
+				_currentProjectID = newProjectID;
 				_applyProjectChange();
 
 				// Load settings for this project
@@ -120,21 +115,21 @@ void TopViewportController::_prepareProjectLoading()
 	if (_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
 		// Get all project names
-		vector<string> projectNames;
+		vector<string> projectIDs;
 		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
 		{
 			// Extract project name
 			string projectPath = string(entry.path().u8string());
 			if (_fe3d.misc_isDirectoryExisting(projectPath))
 			{
-				string projectName = projectPath;
-				projectName.erase(0, userDirectoryPath.size());
-				projectNames.push_back(projectName);
+				string projectID = projectPath;
+				projectID.erase(0, userDirectoryPath.size());
+				projectIDs.push_back(projectID);
 			}
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectNames);
+		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectIDs);
 	}
 	else
 	{
@@ -319,10 +314,10 @@ void TopViewportController::_applyProjectChange()
 	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }
 
-bool TopViewportController::_isProjectCorrupted(const string& projectName)
+bool TopViewportController::_isProjectCorrupted(const string& projectID)
 {
 	// Compose full directory path
-	string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + projectName;
+	string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + projectID;
 
 	// Check if all default directories are still existing
 	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath) ||

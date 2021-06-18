@@ -22,7 +22,7 @@ public:
 	void executeUpdate(bool debug);
 	void executeDestruction();
 	void unload();
-	void setCurrentProjectID(const string& projectName);
+	void setCurrentProjectID(const string& projectID);
 
 	bool hasThrownError();
 	bool gameMustStop();

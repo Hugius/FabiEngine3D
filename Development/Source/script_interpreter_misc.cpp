@@ -2,9 +2,9 @@
 
 #include <sstream>
 
-void ScriptInterpreter::setCurrentProjectID(const string& projectName)
+void ScriptInterpreter::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }
 
 bool ScriptInterpreter::hasThrownError()

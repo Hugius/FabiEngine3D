@@ -139,6 +139,11 @@ void SettingsEditor::save(bool newFile)
 	file.close();
 }
 
+const string& SettingsEditor::getCurrentProjectID()
+{
+	return _currentProjectID;
+}
+
 void SettingsEditor::update()
 {
 	if (_isEditorLoaded)
@@ -214,7 +219,7 @@ void SettingsEditor::update()
 	}
 }
 
-void SettingsEditor::setCurrentProjectID(const string& projectName)
+void SettingsEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }

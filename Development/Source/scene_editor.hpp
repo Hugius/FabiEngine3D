@@ -47,7 +47,7 @@ public:
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
-	void setCurrentProjectID(const string& projectName);
+	void setCurrentProjectID(const string& projectID);
 	bool isLoaded();
 	bool isSceneExisting(const string& fileName);
 	const string& getLoadedSceneID();

@@ -177,8 +177,10 @@ void ScriptEditor::_updateMiscellaneous()
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
 			{
-				_isWritingScript = true;
 				_currentScriptFileID = newName;
+				_isWritingScript = true;
+				_firstSelectedLineIndex = -1;
+				_lastSelectedLineIndex = -1;
 				_script.addScriptFile(_currentScriptFileID);
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
 				_reloadScriptTextDisplay(true);

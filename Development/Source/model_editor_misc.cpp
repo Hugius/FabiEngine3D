@@ -239,9 +239,9 @@ void ModelEditor::_loadNormalMap()
 	}
 }
 
-void ModelEditor::setCurrentProjectID(const string& projectName)
+void ModelEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
+	_currentProjectID = projectID;
 }
 
 bool ModelEditor::isLoaded()

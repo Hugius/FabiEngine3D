@@ -93,10 +93,10 @@ ScriptExecutor& ScriptEditor::getScriptExecutor()
 	return _scriptExecutor;
 }
 
-void ScriptEditor::setCurrentProjectID(const string& projectName)
+void ScriptEditor::setCurrentProjectID(const string& projectID)
 {
-	_currentProjectID = projectName;
-	_scriptExecutor.setCurrentProjectID(projectName);
+	_currentProjectID = projectID;
+	_scriptExecutor.setCurrentProjectID(projectID);
 }
 
 bool ScriptEditor::isLoaded()

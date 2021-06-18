@@ -31,6 +31,21 @@ bool NetworkServerAPI::isClientConnected(const string& username)
 	return false;
 }
 
+const string& NetworkServerAPI::getNewClientIP()
+{
+	return _newClientIP;
+}
+
+const string& NetworkServerAPI::getNewClientPort()
+{
+	return _newClientPort;
+}
+
+const string& NetworkServerAPI::getNewClientUsername()
+{
+	return _newClientUsername;
+}
+
 const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 {
 	// Must be running

@@ -15,7 +15,12 @@ void NetworkServerAPI::update()
 		return;
 	}
 
-	// Clear all received messages from last frame
+	// Clear new client data from last tick
+	_newClientIP = "";
+	_newClientPort = "";
+	_newClientUsername = "";
+
+	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
 	// Close rejected client connections
@@ -95,13 +100,18 @@ BEGIN:
 							// Check if username does not exist yet
 							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), clientMessageBuild) == _clientUsernames.end())
 							{
-								// Save new username
-								clientUsername = clientMessageBuild;
+								// Acknowledge connection with client
 								if (!_sendTcpMessage(clientSocketID, "ACCEPTED" + clientPort, true))
 								{
 									return;
 								}
+
+								// Save new username
+								clientUsername = clientMessageBuild;
 								clientMessageBuild = "";
+								_newClientIP = clientIP;
+								_newClientPort = clientPort;
+								_newClientUsername = clientUsername;
 
 								// Logging
 								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");

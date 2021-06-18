@@ -114,6 +114,33 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:server_get_new_ip")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto IP = _fe3d.networkServer_getNewClientIP();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, IP));
+		}
+	}
+	else if (functionName == "fe3d:server_get_new_port")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto port = _fe3d.networkServer_getNewClientPort();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, port));
+		}
+	}
+	else if (functionName == "fe3d:server_get_new_username")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto username = _fe3d.networkServer_getNewClientUsername();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, username));
+		}
+	}
 	else if (functionName == "fe3d:server_get_connected_ips")
 	{
 		// Validate arguments

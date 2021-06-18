@@ -33,6 +33,10 @@ public:
 	bool isRunning();
 	bool isClientConnected(const string& username);
 
+	const string& getNewClientIP();
+	const string& getNewClientPort();
+	const string& getNewClientUsername();
+
 	const vector<NetworkClientMessage>& getPendingMessages();
 
 	const vector<string> getClientIPs();
@@ -63,7 +67,10 @@ private:
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
 	vector<string> _clientTcpMessageBuilds;
-	unsigned int _customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
+	unsigned int _customMaxClientCount;
+	string _newClientIP;
+	string _newClientPort;
+	string _newClientUsername;
 
 	// Message variables
 	vector<NetworkClientMessage> _pendingMessages;
@@ -71,5 +78,5 @@ private:
 	SOCKET _udpMessageSocketID;
 
 	// Miscellaneous variables
-	bool _isRunning = false;
+	bool _isRunning;
 };

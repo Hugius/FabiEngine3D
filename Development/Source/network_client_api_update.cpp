@@ -15,7 +15,7 @@ void NetworkClientAPI::update()
 		return;
 	}
 
-	// Clear all received messages from last frame
+	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
 	// Handle server connection

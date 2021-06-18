@@ -8,7 +8,12 @@
 
 NetworkServerAPI::NetworkServerAPI() :
 	_connectionSocketID(INVALID_SOCKET),
-	_udpMessageSocketID(INVALID_SOCKET)
+	_udpMessageSocketID(INVALID_SOCKET),
+	_customMaxClientCount(NetworkUtils::MAX_CLIENT_COUNT),
+	_newClientIP(""),
+	_newClientPort(""),
+	_newClientUsername(""),
+	_isRunning(false)
 {
 
 }
@@ -173,6 +178,7 @@ BEGIN:
 	_connectionSocketID = INVALID_SOCKET;
 	_udpMessageSocketID = INVALID_SOCKET;
 	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
+	_newClientUsername = "";
 	_isRunning = false;
 
 	// Logging

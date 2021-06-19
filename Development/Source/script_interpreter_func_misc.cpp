@@ -141,6 +141,12 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						{
 							if
 								(
+									(value->getType() == ScriptValueType::VEC3 &&
+									arguments[1].getType() == ScriptValueType::VEC3 &&
+									value->getVec3() == arguments[1].getVec3())
+
+									||
+
 									(value->getType() == ScriptValueType::STRING &&
 									arguments[1].getType() == ScriptValueType::STRING &&
 									value->getString() == arguments[1].getString())

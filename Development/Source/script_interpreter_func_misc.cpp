@@ -106,6 +106,73 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
+				else if (functionName == "misc:list_contains")
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, 2))
+					{
+						// List name must be string
+						if (arguments[0].getType() != ScriptValueType::STRING)
+						{
+							_throwScriptError("wrong value type(s)!");
+							return returnValues;
+						}
+
+						// Check if variable does not exist
+						auto nameString = arguments[0].getString();
+						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+						{
+							_throwScriptError("list variable \"" + nameString + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if variable is not a list
+						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + nameString + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Try to find value
+						bool foundValue = false;
+						for (const auto& value : listVariable.getValues())
+						{
+							if
+								(
+									(value->getType() == ScriptValueType::STRING &&
+									arguments[1].getType() == ScriptValueType::STRING &&
+									value->getString() == arguments[1].getString())
+
+									||
+
+									(value->getType() == ScriptValueType::DECIMAL &&
+									arguments[1].getType() == ScriptValueType::DECIMAL &&
+									value->getDecimal() == arguments[1].getDecimal())
+
+									||
+
+									(value->getType() == ScriptValueType::INTEGER &&
+									arguments[1].getType() == ScriptValueType::INTEGER &&
+									value->getInteger() == arguments[1].getInteger())
+
+									||
+
+									(value->getType() == ScriptValueType::BOOLEAN &&
+									arguments[1].getType() == ScriptValueType::BOOLEAN &&
+									value->getBoolean() == arguments[1].getBoolean())
+								)
+							{
+								foundValue = true;
+								break;
+							}
+						}
+
+						// Return find result
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, foundValue));
+					}
+				}
 				else if (functionName == "misc:string_concat")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };

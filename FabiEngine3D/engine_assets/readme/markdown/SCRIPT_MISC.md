@@ -2,7 +2,9 @@
 - `misc:list_concat`(`STR` firstName, `STR` secondName) ---> `LIST`  
   Returns the lists with **firstName** and **secondName** concatenated together. **firstName** and **secondName** must be put in string values.
 - `misc:list_size`(`STR` name) ---> `INT`  
-  Returns the counted total of list items and returns the amount. **name** must be put in a string value.
+  Returns the total count of items in list with **name** and returns the amount. **name** must be put in a string value.
+- `misc:list_contains`(`STR` name, `VEC3/STR/DEC/INT/BOOL` value) ---> `BOOL`  
+  Returns true if list with **name** contains **value**. **name** must be put in a string value.
 - `misc:string_concat`(`STR` first, `STR` second) ---> `STR`  
   Returns **first** and **second** concatenated together.
 - `misc:string_size`(`STR` string) ---> `INT`  

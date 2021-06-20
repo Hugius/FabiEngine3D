@@ -60,7 +60,7 @@ private:
 	
 	// Editor constants
 	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
-	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 0.0f, 10.0f);
+	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 0.0f, 10.0f);
 	static inline const Vec3 SCRIPT_TEXT_STARTING_POSITION = Vec3(-11.0f, 6.0f, 0.5f);
 	static inline const Vec3 LINE_NUMBER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
 	static inline const Vec3 CHARACTER_COLOR = Vec3(1.0f);
@@ -79,6 +79,7 @@ private:
 	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
 	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
 	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (MAX_VISIBLE_LINES / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
+	static inline const float CAMERA_FOV = 71.0f;
 	static inline const float AABB_DEPTH = 0.05f;
 	static inline const string LETTER_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =

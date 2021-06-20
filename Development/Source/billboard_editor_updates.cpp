@@ -252,7 +252,7 @@ void BillboardEditor::_updateBillboardCamera()
 		else
 		{
 			// Set default camera
-			_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
+			_fe3d.camera_setPosition(CAMERA_POSITION);
 			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
 			_totalCameraRotation = 0.0f;
 			_cameraAcceleration = 0.0f;

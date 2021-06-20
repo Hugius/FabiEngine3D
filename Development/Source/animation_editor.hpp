@@ -69,7 +69,7 @@ private:
 	string _currentPartID	   = "";
 
 	// Vectors
-	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
+	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
 	Vec3 _cameraLookatPosition  = Vec3(0.0f);
 	Vec2 _totalCursorDifference = Vec2(0.0f, 0.5f);
 	Vec2 _cameraAcceleration    = Vec2(0.0f);

@@ -39,7 +39,7 @@ private:
 	bool _isEditorLoaded = false;
 
 	// Vectors
-	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 2.5f, 5.0f);
+	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 2.5f, 5.0f);
 	static inline const Vec3 BILLBOARD_POSITION = Vec3(0.0f, 2.5f, 0.0f);
 
 	// Floats

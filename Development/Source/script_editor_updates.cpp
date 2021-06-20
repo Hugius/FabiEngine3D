@@ -102,12 +102,12 @@ void ScriptEditor::_updateMiscellaneous()
 			}
 
 			// Camera must not go out of screen (upwards)
-			if (_fe3d.camera_getPosition().y > DEFAULT_CAMERA_POSITION.y)
+			if (_fe3d.camera_getPosition().y > CAMERA_POSITION.y)
 			{
 				_scrollingAcceleration = 0.0f;
-				_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
+				_fe3d.camera_setPosition(CAMERA_POSITION);
 			}
-			else if (_fe3d.camera_getPosition().y == DEFAULT_CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
+			else if (_fe3d.camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
 			{
 				_scrollingAcceleration = 0.0f;
 			}
@@ -118,7 +118,7 @@ void ScriptEditor::_updateMiscellaneous()
 				if (_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET)) // Camera must not go out of screen
 				{
 					_scrollingAcceleration = 0.0f;
-					_fe3d.camera_setPosition(Vec3(DEFAULT_CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, DEFAULT_CAMERA_POSITION.z));
+					_fe3d.camera_setPosition(Vec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 				}
 				else if (_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Trying to scroll down
 				{
@@ -128,7 +128,7 @@ void ScriptEditor::_updateMiscellaneous()
 			else // Reset camera position if too little amount of lines
 			{
 				_scrollingAcceleration = 0.0f;
-				_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
+				_fe3d.camera_setPosition(CAMERA_POSITION);
 			}
 
 			// Synchronize camera position whenever writers adds or removes a line
@@ -137,7 +137,7 @@ void ScriptEditor::_updateMiscellaneous()
 			{
 				_scrollingAcceleration = 0.0f;
 				float currentLineHeight = _fe3d.billboardEntity_getPosition(to_string(currentLineIndex)).y;
-				_fe3d.camera_setPosition(Vec3(DEFAULT_CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, DEFAULT_CAMERA_POSITION.z));
+				_fe3d.camera_setPosition(Vec3(CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 			}
 			lastLineIndex = currentLineIndex;
 		}

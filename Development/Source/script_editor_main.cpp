@@ -43,7 +43,7 @@ void ScriptEditor::load()
 	_loadGUI();
 
 	// Camera
-	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, DEFAULT_CAMERA_POSITION, -90.0f);
+	_fe3d.camera_load(CAMERA_FOV, 0.1f, 10000.0f, CAMERA_POSITION, -90.0f);
 
 	// Background
 	_fe3d.skyEntity_setLightness("@@engineBackground", 0.3f);

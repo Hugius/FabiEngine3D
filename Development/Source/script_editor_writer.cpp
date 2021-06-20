@@ -298,11 +298,11 @@ void ScriptEditor::_updateTextWriter()
 						// Check if shift was pressed
 						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
 						{
-							newCharacters = element.second;
+							newCharacters += element.second;
 						}
 						else
 						{
-							newCharacters = element.first;
+							newCharacters += element.first;
 						}
 					}
 				}
@@ -403,7 +403,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 
 			// Check if not exceeding character limit of current line
-			if (currentLineText.size() < MAX_CHARACTERS_PER_LINE)
+			if (static_cast<unsigned int>(currentLineText.size() + newCharacters.size()) <= MAX_CHARACTERS_PER_LINE)
 			{
 				// Check if user is not selecting text
 				if (_firstSelectedLineIndex == -1)

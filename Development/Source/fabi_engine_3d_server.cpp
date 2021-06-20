@@ -61,6 +61,21 @@ const string& FabiEngine3D::networkServer_getNewClientUsername()
 	return _core->_networkServerAPI.getNewClientUsername();
 }
 
+const string FabiEngine3D::networkServer_getOldClientIP()
+{
+	return _core->_networkServerAPI.getOldClientIP();
+}
+
+const string FabiEngine3D::networkServer_getOldClientPort()
+{
+	return _core->_networkServerAPI.getOldClientPort();
+}
+
+const string FabiEngine3D::networkServer_getOldClientUsername()
+{
+	return _core->_networkServerAPI.getOldClientUsername();
+}
+
 const vector<NetworkClientMessage>& FabiEngine3D::networkServer_getPendingMessages()
 {
 	return _core->_networkServerAPI.getPendingMessages();

@@ -46,6 +46,42 @@ const string& NetworkServerAPI::getNewClientUsername()
 	return _newClientUsername;
 }
 
+const string NetworkServerAPI::getOldClientIP()
+{
+	if (_oldClientIPs.empty())
+	{
+		return "";
+	}
+	else
+	{
+		return _oldClientIPs.front();
+	}
+}
+
+const string NetworkServerAPI::getOldClientPort()
+{
+	if (_oldClientPorts.empty())
+	{
+		return "";
+	}
+	else
+	{
+		return _oldClientPorts.front();
+	}
+}
+
+const string NetworkServerAPI::getOldClientUsername()
+{
+	if (_oldClientUsernames.empty())
+	{
+		return "";
+	}
+	else
+	{
+		return _oldClientUsernames.front();
+	}
+}
+
 const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 {
 	// Must be running

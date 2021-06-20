@@ -36,6 +36,9 @@ public:
 	const string& getNewClientIP();
 	const string& getNewClientPort();
 	const string& getNewClientUsername();
+	const string getOldClientIP();
+	const string getOldClientPort();
+	const string getOldClientUsername();
 
 	const vector<NetworkClientMessage>& getPendingMessages();
 
@@ -67,6 +70,9 @@ private:
 	vector<string> _clientPorts;
 	vector<string> _clientUsernames;
 	vector<string> _clientTcpMessageBuilds;
+	vector<string> _oldClientIPs;
+	vector<string> _oldClientPorts;
+	vector<string> _oldClientUsernames;
 	unsigned int _customMaxClientCount;
 	string _newClientIP;
 	string _newClientPort;

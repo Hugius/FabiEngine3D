@@ -789,13 +789,16 @@ public:
 	// Server interface - getters
 	const bool networkServer_isRunning();
 	const bool networkServer_isClientConnected(const string& username);
-	const string& networkServer_getNewClientIP();
-	const string& networkServer_getNewClientPort();
-	const string& networkServer_getNewClientUsername();
 	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
 	const vector<string> networkServer_getClientPorts();
 	const vector<string> networkServer_getClientUsernames();
+	const string& networkServer_getNewClientIP();
+	const string& networkServer_getNewClientPort();
+	const string& networkServer_getNewClientUsername();
+	const string networkServer_getOldClientIP();
+	const string networkServer_getOldClientPort();
+	const string networkServer_getOldClientUsername();
 
 	// Client interface - setters
 	void networkClient_start(const string& username);

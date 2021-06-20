@@ -20,6 +20,20 @@ void NetworkServerAPI::update()
 	_newClientPort = "";
 	_newClientUsername = "";
 
+	// Clear old client data from last tick
+	if (!_oldClientIPs.empty())
+	{
+		_oldClientIPs.erase(_oldClientIPs.begin());
+	}
+	if (!_oldClientPorts.empty())
+	{
+		_oldClientPorts.erase(_oldClientPorts.begin());
+	}
+	if (!_oldClientUsernames.empty())
+	{
+		_oldClientUsernames.erase(_oldClientUsernames.begin());
+	}
+
 	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
@@ -48,7 +62,7 @@ void NetworkServerAPI::update()
 		}
 
 		// Check if client is allowed to connect
-		if (_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT || _clientIPs.size() == _customMaxClientCount)
+		if ((_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT )|| (_clientIPs.size() == _customMaxClientCount))
 		{
 			// Reject client
 			if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))

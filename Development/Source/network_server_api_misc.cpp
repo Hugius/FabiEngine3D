@@ -140,6 +140,11 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			// Close connection
 			closesocket(clientSocketID);
 
+			// Save disonnected client data
+			_oldClientIPs.push_back(_clientIPs[i]);
+			_oldClientPorts.push_back(_clientPorts[i]);
+			_oldClientUsernames.push_back(_clientUsernames[i]);
+
 			// Remove client data
 			_clientSocketIDs.erase(_clientSocketIDs.begin() + i);
 			_clientIPs.erase(_clientIPs.begin() + i);

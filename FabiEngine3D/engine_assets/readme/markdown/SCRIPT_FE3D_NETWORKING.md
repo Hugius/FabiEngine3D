@@ -23,6 +23,12 @@
   Returns port of client that just connected.
 - `fe3d:server_get_new_username`() ---> `STR`  
   Returns username of client that just connected.
+- `fe3d:server_get_old_ip`() ---> `STR`  
+  Returns IP address of client that just disconnected.
+- `fe3d:server_get_old_port`() ---> `STR`  
+  Returns port of client that just disconnected.
+- `fe3d:server_get_old_username`() ---> `STR`  
+  Returns username of client that just disconnected.
 - `fe3d:server_get_connected_ips`() ---> `LIST`  
   Returns IP addresses of all connected networking clients.
 - `fe3d:server_get_connected_ports`() ---> `LIST`  

@@ -20,7 +20,7 @@ void SceneEditor::load()
 	_loadGUI();
 
 	// Default camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Default graphics
 	_fe3d.gfx_enableSpecularLighting();

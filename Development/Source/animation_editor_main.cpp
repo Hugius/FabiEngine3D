@@ -62,7 +62,7 @@ void AnimationEditor::load()
 	_loadGUI();
 
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), -90.0f);
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), -90.0f, 0.0f);
 	_fe3d.camera_enableLookatView();
 
 	// Enable graphics

@@ -104,7 +104,7 @@ void ModelEditor::load()
 	_loadMeshFileNames();
 
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, CAMERA_POSITION);
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, CAMERA_POSITION, 0.0f, 0.0f);
 	_fe3d.camera_enableLookatView();
 
 	// Enable graphics

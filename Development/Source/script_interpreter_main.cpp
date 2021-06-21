@@ -182,7 +182,7 @@ void ScriptInterpreter::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 
 	// Default camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
@@ -286,7 +286,7 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_select("@@engineBackground");
 
 	// Reset camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Reset audio
 	_fe3d.misc_enableSounds();

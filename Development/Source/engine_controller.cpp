@@ -35,7 +35,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		gfx_enableBloom(1.0f, 0.0f, 10);
 
 		// Default camera
-		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0, 0);
+		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 		misc_centerCursor();
 
 		// Initialize script execution
@@ -106,7 +106,7 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default camera
-	camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+	camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Default engine background
 	string textureFolderPath = "engine_assets\\textures\\";

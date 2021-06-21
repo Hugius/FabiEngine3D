@@ -49,7 +49,7 @@ const bool FabiEngine3D::waterEntity_isExisting(const string& ID)
 
 const bool FabiEngine3D::waterEntity_isVisible(const string& ID)
 {
-	_core->_waterEntityManager.getEntity(ID)->isVisible();
+	return _core->_waterEntityManager.getEntity(ID)->isVisible();
 }
 
 const bool FabiEngine3D::waterEntity_isWaving(const string& ID)

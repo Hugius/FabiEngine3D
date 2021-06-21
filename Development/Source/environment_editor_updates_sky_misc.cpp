@@ -174,23 +174,38 @@ void EnvironmentEditor::_updateSkyRemoval()
 
 void EnvironmentEditor::_updateSkyCamera()
 {
-	if (_isEditorLoaded && _currentSkyID != "")
+	if (_isEditorLoaded)
 	{
-		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+		// Check if sky is active
+		if (_currentSkyID != "")
 		{
-			if (_fe3d.misc_isCursorInsideViewport())
+			// Check if first person view must be enabled
+			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
-				_fe3d.gfx_enableMotionBlur(0.2f);
-				_fe3d.camera_enableFirstPersonView();
-				_fe3d.camera_disableLookatView();
-				_fe3d.imageEntity_hide("@@cursor");
+				// Enable first person view
+				if (_fe3d.misc_isCursorInsideViewport())
+				{
+					_fe3d.gfx_enableMotionBlur(0.2f);
+					_fe3d.camera_enableFirstPersonView();
+					_fe3d.camera_disableLookatView();
+					_fe3d.imageEntity_hide("@@cursor");
+				}
+			}
+			else
+			{
+				// Disable first person view
+				_fe3d.gfx_disableMotionBlur();
+				_fe3d.camera_disableFirstPersonView();
+				_fe3d.imageEntity_show("@@cursor");
 			}
 		}
 		else
 		{
+			// Set default camera
 			_fe3d.gfx_disableMotionBlur();
 			_fe3d.camera_disableFirstPersonView();
-			_fe3d.imageEntity_show("@@cursor");
+			_fe3d.camera_setYaw(0.0f);
+			_fe3d.camera_setPitch(0.0f);
 		}
 	}
 }

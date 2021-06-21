@@ -171,11 +171,11 @@ void EnvironmentEditor::_updateWaterCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if a water is selected or hovered
+		// Check if water is selected or hovered
 		string waterID = (_currentWaterID != "") ? _currentWaterID : ((_hoveredWaterID != "") ? _hoveredWaterID : "");
 
-		// Check if water entity exists
-		if (_fe3d.waterEntity_isExisting(waterID))
+		// Check if water is active
+		if (_fe3d.waterEntity_isExisting(waterID) && _fe3d.waterEntity_isVisible(waterID))
 		{
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
@@ -195,13 +195,16 @@ void EnvironmentEditor::_updateWaterCamera()
 			float y = waterPosition.y + (waterSize / 8.0f);
 			float z = waterPosition.z + (waterSize / 2.0f) * cos(_totalCameraRotation);
 
-			// Update camera position
-			_fe3d.camera_setPosition(Vec3(x, y, z));
+			// Update camera
 			_fe3d.camera_enableLookatView();
+			_fe3d.camera_setPosition(Vec3(x, y, z));
 			_fe3d.camera_setLookatPosition(waterPosition);
 		}
 		else
 		{
+			_fe3d.camera_disableLookatView();
+			_fe3d.camera_setPosition(Vec3(0.0f));
+			_fe3d.camera_setLookatPosition(Vec3(0.0f));
 			_totalCameraRotation = 0.0f;
 			_cameraAcceleration = 0.0f;
 		}

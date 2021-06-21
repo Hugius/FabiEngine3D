@@ -225,6 +225,7 @@ void BillboardEditor::_updateBillboardCamera()
 {
 	if (_isEditorLoaded)
 	{
+		// Check if a billboard is being active
 		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{
 			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);

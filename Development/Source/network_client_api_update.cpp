@@ -113,7 +113,7 @@ void NetworkClientAPI::update()
 						latency -= clientReceiveDelay;
 
 						// Register server latency
-						if (_pingLatencies.size() == NetworkUtils::PING_DIVIDER)
+						if (_pingLatencies.size() == NetworkUtils::MAX_PING_COUNT)
 						{
 							_pingLatencies.erase(_pingLatencies.begin());
 						}

@@ -26,9 +26,9 @@ public:
 
 	static inline const string SERVER_PORT = "61205";
 
-	static inline const unsigned int PING_DIVIDER = 10;
+	static inline const unsigned int MAX_PING_COUNT = 10;
 	static inline const unsigned int MAX_CLIENT_COUNT = 100;
-	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 64;
+	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 128;
 	static inline const unsigned int MAX_USERNAME_CHARACTERS = 16;
 	static inline const unsigned int TCP_BUFFER_BYTES = 4096;
 	static inline const unsigned int UDP_BUFFER_BYTES = (MAX_USERNAME_CHARACTERS + 1 + MAX_MESSAGE_CHARACTERS);

@@ -1,4 +1,5 @@
 # Input
+### Getters
 - `fe3d:input_is_key_down`(`STR` key) ---> `BOOL`  
   Returns true is a keyboard **key** is being pushed down.
 - `fe3d:input_is_key_pressed`(`STR` key) ---> `BOOL`  

@@ -1,4 +1,5 @@
 # Miscellaneous
+### Setters
 - `fe3d:game_pause`() ---> `NONE`  
   Pauses all internal game/engine updates if playing (except for the scripting of course).
 - `fe3d:game_resume`() ---> `NONE`  
@@ -9,12 +10,8 @@
   Prints a value to the console (both internal & external). Accepts various message types.
 - `fe3d:scene_load`(`STR` ID) ---> `NONE`  
   Loads an editor scene with **ID** into the game. Any previously loaded scene will be cleared.
-- `fe3d:scene_get_current_id`() ---> `STR`  
-  Returns ID of currently loaded scene.
 - `fe3d:scene_clear`() ---> `NONE`  
   Deletes all sky, terrain, water, models, billboards, audio, lights from the currently loaded scene.
-- `fe3d:scene_is_custom_existing`(`STR` ID) ---> `BOOL`  
-  Returns true if custom scene with **ID** is existing.
 - `fe3d:scene_create_custom`(`STR` ID) ---> `NONE`  
   Creates a new custom scene as **ID**.
 - `fe3d:scene_add_custom_sky`() ---> `NONE`  
@@ -49,6 +46,37 @@
   Makes mouse cursor visible.
 - `fe3d:cursor_hide`() ---> `NONE`  
   Makes mouse cursor invisible.
+- `fe3d:timer_start`() ---> `NONE`  
+  Starts a timer to measure passing time. Works like a stopwatch.
+- `fe3d:wireframe_enable_rendering`() ---> `NONE`  
+  Enables wireframe rendering.
+- `fe3d:wireframe_disable_rendering`() ---> `NONE`  
+  Disables wireframe rendering.
+- `fe3d:aabbs_enable_rendering`() ---> `NONE`  
+  Enables frame rendering of AABBs.
+- `fe3d:aabbs_disable_rendering`() ---> `NONE`  
+  Disables frame rendering of AABBs.
+- `fe3d:directory_create`(`STR` directoryPath) ---> `NONE`  
+  Creates a new **directoryPath** in `projects\<your_project>\saves\`.
+- `fe3d:directory_delete`(`STR` directoryPath) ---> `NONE`  
+  Deletes an existing **directoryPath** in `projects\<your_project>\saves\`.
+- `fe3d:file_write`(`STR` filePath, `VEC3/STR/DEC/INT/BOOL` content) ---> `NONE`  
+  Opens/creates a **filePath** in `projects\<your_project>\saves\` and writes **content** to it.
+- `fe3d:file_add_new_line`(`STR` filePath) ---> `NONE`  
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and writes a new line to it.
+- `fe3d:file_clear`(`STR` filePath) ---> `NONE`  
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
+- `fe3d:file_delete`(`STR` filePath) ---> `NONE`  
+  Deletes an existing **filePath** in `projects\<your_project>\saves\`.
+- `fe3d:vsync_enable`() ---> `NONE`  
+  Enables screen Vsync.
+- `fe3d:vsync_disable`() ---> `NONE`  
+  Disables screen Vsync.
+### Getters
+- `fe3d:scene_get_current_id`() ---> `STR`  
+  Returns ID of currently loaded scene.
+- `fe3d:scene_is_custom_existing`(`STR` ID) ---> `BOOL`  
+  Returns true if custom scene with **ID** is existing.
 - `fe3d:cursor_is_visible`() ---> `BOOL`  
   Returns true if mouse cursor is visible.
 - `fe3d:cursor_get_position_x`() ---> `DEC`  
@@ -59,41 +87,15 @@
   Returns window width in pixels.
 - `fe3d:window_get_height`() ---> `INT`  
   Returns window height in pixels.
-- `fe3d:timer_start`() ---> `NONE`  
-  Starts a timer to measure passing time. Works like a stopwatch.
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
-- `fe3d:wireframe_enable_rendering`() ---> `NONE`  
-  Enable wireframe rendering.
-- `fe3d:wireframe_disable_rendering`() ---> `NONE`  
-  Disable wireframe rendering.
-- `fe3d:aabbs_enable_rendering`() ---> `NONE`  
-  Enable frame rendering of AABBs.
-- `fe3d:aabbs_disable_rendering`() ---> `NONE`  
-  Disable frame rendering of AABBs.
 - `fe3d:directory_is_existing`(`STR` directoryPath) ---> `BOOL`  
   Returns true if **directoryPath** in `projects\<your_project>\saves\` is existing.
-- `fe3d:directory_create`(`STR` directoryPath) ---> `NONE`  
-  Creates a new **directoryPath** in `projects\<your_project>\saves\`.
-- `fe3d:directory_delete`(`STR` directoryPath) ---> `NONE`  
-  Deletes an existing **directoryPath** in `projects\<your_project>\saves\`.
 - `fe3d:file_is_existing`(`STR` filePath) ---> `BOOL`  
   Returns true if **filePath** in `projects\<your_project>\saves\` is existing.
 - `fe3d:file_read`(`STR` filePath) ---> `LIST`  
   Opens an existing **filePath** in `projects\<your_project>\saves\` and returns all lines as a list of strings.
-- `fe3d:file_write`(`STR` filePath, `VEC3/STR/DEC/INT/BOOL` content) ---> `NONE`  
-  Opens/creates a **filePath** in `projects\<your_project>\saves\` and writes **content** to it.
-- `fe3d:file_add_new_line`(`STR` filePath) ---> `NONE`  
-  Opens an existing **filePath** in `projects\<your_project>\saves\` and writes a new line to it.
-- `fe3d:file_clear`(`STR` filePath) ---> `NONE`  
-  Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
-- `fe3d:file_delete`(`STR` filePath) ---> `NONE`  
-  Deletes an existing **filePath** in `projects\<your_project>\saves\`.
 - `fe3d:time_interval`(`INT` frames) ---> `BOOL`  
   Returns true every time **frames** has passed.
-- `fe3d:vsync_enable`() ---> `NONE`  
-  Enables screen Vsync.
-- `fe3d:vsync_disable`() ---> `NONE`  
-  Disables screen Vsync.
 - `fe3d:vsync_is_enabled`() ---> `BOOL`  
   Returns true if screen Vsync is enabled.

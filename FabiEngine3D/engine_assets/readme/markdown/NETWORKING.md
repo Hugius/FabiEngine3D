@@ -33,7 +33,7 @@
 - You can choose which protocol you want to use when sending a message. This gives you more control over **performance decisions**.
 
 ### Messaging
-- A network message cannot be longer than **64 characters** and cannot contain any **semicolons** (;).
+- A network message must **NOT** be longer than **128 characters** or contain any **semicolons (;)**.
 - There is **no guarantee** that if you send multiple messages right after each other, they will arrive at the same time.
 - Some messages are **reserved** for the engine: `SERVER_FULL`, `USER_ALREADY_CONNECTED`, `ACCEPTED`, `PING`, `DISCONNECTED_BY_SERVER`.
 - Every **update/tick** in either the server or the client, the **pending messages** will be cleared before receiving new messages.

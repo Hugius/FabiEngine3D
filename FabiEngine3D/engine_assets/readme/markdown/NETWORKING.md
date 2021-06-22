@@ -11,6 +11,7 @@
 - There can be **only 1** FabiEngine3D server running on the same machine.
 - A server can **only** access FE3D scripting functions: `server_*`, `directory_*`, `file_*`, `timer_*`, `game_stop`, `print`, `time_interval`.
 - The server can **send/receive** messages to/from clients.
+- Be careful with **performance heavy operations** in the server scripts, otherwise it might not be able to handle client messages in time.
 
 ### Client
 - A FabiEngine3D client system exists **within a FabiEngine3D game**.

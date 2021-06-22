@@ -32,6 +32,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	if (_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
 		_throwScriptError("too many script execution layers, perhaps infinite recursion?");
+		return;
 	}
 
 	// Skip the following lines of code if the last run caused an error
@@ -156,6 +157,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		if (scriptLineText.substr(0, META_KEYWORD.size()) == META_KEYWORD)
 		{
 			_throwScriptError("META keyword is only allowed on line 1 and 2!");
+			return;
 		}
 		else if (scriptLineText.substr(0, 5) == "fe3d:")
 		{

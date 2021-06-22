@@ -243,6 +243,7 @@ void BottomViewportController::update()
 		_consoleMessageQueue.clear();
 
 		// Set new messages
+		std::reverse(newMessages.begin(), newMessages.end());
 		_fe3d.logger_setMessageQueue(newMessages);
 	}
 

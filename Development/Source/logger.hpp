@@ -26,14 +26,16 @@ public:
 	template<typename T, typename...Rest> 
 	inline static void throwInfo(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::INFO, first, rest...);
+		_printPrefix(MessageType::INFO);
+		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> 
 	inline static void throwError(T first, Rest...rest)
 	{
 		std::cout << std::endl;
-		_printPrefix(MessageType::ERR, first, rest...);
+		_printPrefix(MessageType::ERR);
+		_printMessage(first, rest...);
 		std::cout << std::endl;
 		throwInfo("Type something to quit...");
 		auto temp = _getch();
@@ -43,13 +45,15 @@ public:
 	template<typename T, typename...Rest> 
 	inline static void throwDebug(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::DEBUG, first, rest...);
+		_printPrefix(MessageType::DEBUG);
+		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest> 
 	inline static void throwWarning(T first, Rest...rest)
 	{
-		_printPrefix(MessageType::WARNING, first, rest...);
+		_printPrefix(MessageType::WARNING);
+		_printMessage(first, rest...);
 	}
 
 	inline static const vector<string>& getMessageQueue()
@@ -79,8 +83,7 @@ private:
 	inline static std::vector<string> _messageQueue;
 	inline static unsigned int _messageCount = 0;
 
-	template<typename T, typename...Rest> 
-	inline static void _printPrefix(MessageType type, T first, Rest&&...rest)
+	inline static void _printPrefix(MessageType type)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
 		std::ostringstream oss; // For message queue
@@ -112,9 +115,6 @@ private:
 		// Add to message queue
 		oss << " > ";
 		_messageQueue.push_back(oss.str());
-
-		// Print message body
-		_printMessage(first, rest...);
 	}
 
 	template<typename T, typename...Rest>

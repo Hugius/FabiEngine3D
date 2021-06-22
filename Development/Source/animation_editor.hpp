@@ -20,8 +20,8 @@ public:
 	void startAnimation(const string& animationID, const string& modelID, int loops);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
-	void stopAnimation(const string& animationID, const string& modelID);
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
+	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
 
 	// Miscellaneous
@@ -30,6 +30,7 @@ public:
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
+	bool isAnimationFading(const string& animationID, const string& modelID);
 	Animation* getAnimationData(const string& animationID, const string& modelID, string baseErrorMessage);
 	const vector<string> getAllAnimationIDs();
 	const vector<string> getStartedAnimationIDs();

@@ -4,7 +4,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 {
 	if (functionName == "fe3d:model_start_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER }; // ModelEntityID + animationID + loops
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -19,7 +19,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_is_animation_started")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -34,7 +34,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_is_animation_playing")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_is_animation_paused")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -62,9 +62,24 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			}
 		}
 	}
+	else if (functionName == "fe3d:model_is_animation_fading")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:model_pause_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -79,7 +94,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_resume_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -94,7 +109,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_fade_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER }; // ModelEntityID + animationID + framestep
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -109,7 +124,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_stop_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -124,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_set_animation_speed")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL }; // ModelEntityID + animationID + speed
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -132,8 +147,11 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
+				// Retrieve animation data
 				string errorMessage = "Trying to set speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
 				if (animationData != nullptr)
 				{
 					animationData->speedMultiplier = arguments[2].getDecimal();
@@ -144,7 +162,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_get_animation_speed")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -152,8 +170,11 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
+				// Retrieve animation data
 				string errorMessage = "Trying to get speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
 				if (animationData != nullptr)
 				{
 					auto result = animationData->speedMultiplier;
@@ -164,7 +185,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_get_animation_frame_index")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntityID + animationID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -172,8 +193,11 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
+				// Retrieve animation data
 				string errorMessage = "Trying to get frame index of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+				
+				// Check if animation was found
 				if (animationData != nullptr)
 				{
 					auto result = animationData->frameIndex;

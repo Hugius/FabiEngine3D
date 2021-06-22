@@ -87,7 +87,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
       <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animations.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp">
       <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp">

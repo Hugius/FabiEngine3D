@@ -140,6 +140,28 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	return false;
 }
 
+bool AnimationEditor::isAnimationFading(const string& animationID, const string& modelID)
+{
+	// Temporary values
+	string errorMessage = "Trying to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation is able to be retrieved
+	if (!isAnimationExisting(animationID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+	}
+	else if (!isAnimationStarted(animationID, modelID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+	}
+	else
+	{
+		return (_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep != -1);
+	}
+
+	return false;
+}
+
 void AnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values

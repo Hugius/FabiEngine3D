@@ -25,7 +25,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_condition.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_execution.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animations.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_client.cpp" />

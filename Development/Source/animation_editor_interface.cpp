@@ -167,20 +167,20 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 	// Temporary values
 	string errorMessage = "Trying to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation exists
+	// Check if animation is existing
 	if (isAnimationExisting(animationID))
 	{
-		// Check if animation has already started
+		// Check if animation is started
 		if (isAnimationStarted(animationID, modelID))
 		{
-			// Check if animation is playing
-			if (isAnimationPlaying(animationID, modelID))
+			// Check if animation is paused
+			if (isAnimationPaused(animationID, modelID))
 			{
-				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = true;
+				_fe3d.logger_throwWarning(errorMessage + "animation already paused!");
 			}
 			else
 			{
-				_fe3d.logger_throwWarning(errorMessage + "animation not playing!");
+				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = true;
 			}
 		}
 		else
@@ -199,10 +199,10 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 	// Temporary values
 	string errorMessage = "Trying to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation exists
+	// Check if animation is existing
 	if (isAnimationExisting(animationID))
 	{
-		// Check if animation has already started
+		// Check if animation is started
 		if (isAnimationStarted(animationID, modelID))
 		{
 			// Check if animation is paused
@@ -231,10 +231,10 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 	// Temporary values
 	string errorMessage = "Trying to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation exists
+	// Check if animation is existing
 	if (isAnimationExisting(animationID))
 	{
-		// Check if animation has already started
+		// Check if animation is started
 		if (isAnimationStarted(animationID, modelID))
 		{
 			_startedAnimations.erase(make_pair(animationID, modelID));
@@ -260,16 +260,24 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	// Temporary values
 	string errorMessage = "Trying to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation exists
+	// Check if animation is existing
 	if (isAnimationExisting(animationID))
 	{
-		// Check if animation has already started
+		// Check if animation is started
 		if (isAnimationStarted(animationID, modelID))
 		{
 			// Check if animation is playing
 			if (isAnimationPlaying(animationID, modelID))
 			{
-				_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
+				// Check if animation is fading
+				if (isAnimationFading(animationID, modelID))
+				{
+					_fe3d.logger_throwWarning(errorMessage + "animation already fading!");
+				}
+				else
+				{
+					_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
+				}
 			}
 			else
 			{

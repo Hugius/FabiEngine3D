@@ -13,6 +13,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	if (!_isRunning)
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not running!");
+		return false;
 	}
 
 	// Must be connected & optionally accepted
@@ -226,8 +227,8 @@ tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOC
 	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 	
 	// Extract address
-	auto IP = NetworkUtils::extractIP(&sourceAddress);
-	auto port = NetworkUtils::extractPort(&sourceAddress);
+	auto IP = NetworkUtils::extractSocketAddressIP(&sourceAddress);
+	auto port = NetworkUtils::extractSocketAddressPort(&sourceAddress);
 
 	if (receiveResult > 0) // Message received correctly
 	{

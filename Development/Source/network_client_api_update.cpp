@@ -96,8 +96,9 @@ void NetworkClientAPI::update()
 				{
 					if (_tcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
 					{
-						auto tcpPort = _tcpMessageBuild.substr(8);
-						_setupUDP(tcpPort); // UDP uses the same port as TCP
+						// UDP uses the same port as TCP
+						auto tcpPort = NetworkUtils::extractSocketSourcePort(_connectionSocketID);
+						_setupUDP(tcpPort);
 						_isAcceptedByServer = true;
 						_tcpMessageBuild = "";
 					}
@@ -157,7 +158,7 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming UDP messages
-	while (NetworkUtils::isMessageReady(_udpMessageSocketID))
+	while (NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
@@ -174,7 +175,13 @@ void NetworkClientAPI::update()
 				_pendingMessages.push_back(NetworkServerMessage(messageContent));
 			}
 		}
-		else if ((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED))
+		else if
+			(
+				(messageStatusCode == 0)			  ||
+				(messageErrorCode == WSAECONNRESET)   ||
+				(messageErrorCode == WSAECONNABORTED) ||
+				(messageErrorCode == WSAEMSGSIZE)
+			)
 		{
 			// Wrong packet, do nothing
 		}

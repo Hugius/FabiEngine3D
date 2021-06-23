@@ -13,37 +13,51 @@ const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const str
 	return socketAddress;
 }
 
-const string NetworkUtils::extractIP(SOCKET socket)
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	char IP[IPV4_ADDRESS_LENGTH];
-	inet_ntop(AF_INET, &socketAddress.sin_addr, IP, sizeof(IP));
-	return string(IP);
-}
-
-const string NetworkUtils::extractIP(sockaddr_in* address)
+const string NetworkUtils::extractSocketAddressIP(sockaddr_in* address)
 {
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
 	return string(IP);
 }
 
-const string NetworkUtils::extractPort(SOCKET socket)
-{
-	sockaddr_in socketAddress = sockaddr_in();
-	int socketAddressLength = sizeof(socketAddress);
-	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	return std::to_string(ntohs(socketAddress.sin_port));
-}
-
-const string NetworkUtils::extractPort(sockaddr_in* address)
+const string NetworkUtils::extractSocketAddressPort(sockaddr_in* address)
 {
 	return std::to_string(ntohs(address->sin_port));
 }
 
-const bool NetworkUtils::isMessageReady(SOCKET socket)
+const string NetworkUtils::extractSocketSourceIP(SOCKET socket)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	return extractSocketAddressIP(&socketAddress);
+}
+
+const string NetworkUtils::extractSocketSourcePort(SOCKET socket)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	return extractSocketAddressPort(&socketAddress);
+}
+
+const string NetworkUtils::extractSocketDestinationIP(SOCKET socket)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	return extractSocketAddressIP(&socketAddress);
+}
+
+const string NetworkUtils::extractSocketDestinationPort(SOCKET socket)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	int socketAddressLength = sizeof(socketAddress);
+	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
+	return extractSocketAddressPort(&socketAddress);
+}
+
+const bool NetworkUtils::isUdpMessageReady(SOCKET socket)
 {
 	fd_set socketSet = fd_set();
 	timeval timeInterval = { 0 , 1 }; // 1 microsecond

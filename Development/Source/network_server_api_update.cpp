@@ -115,7 +115,7 @@ BEGIN:
 							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), clientMessageBuild) == _clientUsernames.end())
 							{
 								// Acknowledge connection with client
-								if (!_sendTcpMessage(clientSocketID, "ACCEPTED" + clientPort, true))
+								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
 								{
 									return;
 								}
@@ -196,7 +196,7 @@ BEGIN:
 	}
 	
 	// Receive incoming UDP messages
-	while (NetworkUtils::isMessageReady(_udpMessageSocketID))
+	while (NetworkUtils::isUdpMessageReady(_udpMessageSocketID))
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
@@ -228,7 +228,13 @@ BEGIN:
 				}
 			}
 		}
-		else if ((messageStatusCode == 0) || (messageErrorCode == WSAECONNRESET) || (messageErrorCode == WSAECONNABORTED))
+		else if
+			(
+				(messageStatusCode == 0)			  ||
+				(messageErrorCode == WSAECONNRESET)   ||
+				(messageErrorCode == WSAECONNABORTED) ||
+				(messageErrorCode == WSAEMSGSIZE)
+			)
 		{
 			// Wrong packet, do nothing
 		}

@@ -113,8 +113,8 @@ bool NetworkServerAPI::_isClientConnected(const string& IP, const string& port)
 void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 {
 	// Extract IP & port
-	auto clientIP = NetworkUtils::extractIP(clientSocketID);
-	auto clientPort = NetworkUtils::extractPort(clientSocketID);
+	auto clientIP = NetworkUtils::extractSocketDestinationIP(clientSocketID);
+	auto clientPort = NetworkUtils::extractSocketDestinationPort(clientSocketID);
 
 	// Save client data
 	_clientSocketIDs.push_back(clientSocketID);
@@ -202,8 +202,8 @@ tuple<int, int, string, string, string> NetworkServerAPI::_receiveUdpMessage(SOC
 	auto receiveResult = recvfrom(udpMessageSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 
 	// Extract address
-	auto IP = NetworkUtils::extractIP(&sourceAddress);
-	auto port = NetworkUtils::extractPort(&sourceAddress);
+	auto IP = NetworkUtils::extractSocketAddressIP(&sourceAddress);
+	auto port = NetworkUtils::extractSocketAddressPort(&sourceAddress);
 
 	if (receiveResult > 0) // Message received correctly
 	{

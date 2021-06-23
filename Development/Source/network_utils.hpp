@@ -16,12 +16,14 @@ public:
 
 	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
 
-	static const string extractIP(SOCKET socket);
-	static const string extractIP(sockaddr_in* address);
-	static const string extractPort(SOCKET socket);
-	static const string extractPort(sockaddr_in* address);
+	static const string extractSocketAddressIP(sockaddr_in* address);
+	static const string extractSocketAddressPort(sockaddr_in* address);
+	static const string extractSocketSourceIP(SOCKET socket);
+	static const string extractSocketSourcePort(SOCKET socket);
+	static const string extractSocketDestinationIP(SOCKET socket);
+	static const string extractSocketDestinationPort(SOCKET socket);
 
-	static const bool isMessageReady(SOCKET socket);
+	static const bool isUdpMessageReady(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 
 	static inline const string SERVER_PORT = "61205";

@@ -70,6 +70,7 @@ const bool NetworkUtils::isMessageReserved(const string& message)
 {
 	return
 	(
+		(message.substr(0, 8)  == "USERNAME")				||
 		(message.substr(0, 11) == "SERVER_FULL")			||
 		(message.substr(0, 22) == "USER_ALREADY_CONNECTED") ||
 		(message.substr(0, 8)  == "ACCEPTED")				||

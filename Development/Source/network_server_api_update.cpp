@@ -47,20 +47,8 @@ void NetworkServerAPI::update()
 			Logger::throwError("Networking server accept failed with error code: ", WSAGetLastError());
 		}
 
-		// Check if client is allowed to connect
-		if ((_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT) || (_clientIPs.size() == _customMaxClientCount))
-		{
-			// Reject client
-			if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
-			{
-				return;
-			}
-		}
-		else
-		{
-			// Save new client
-			_acceptClient(clientSocketID);
-		}
+		// Save new client
+		_acceptClient(clientSocketID);
 
 		// Spawn connection thread again for next possible client
 		_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
@@ -94,28 +82,25 @@ BEGIN:
 				{
 					if (character == ';') // End of current message
 					{
-						if (clientUsername.empty()) // Handle username message
+						if (clientMessageBuild.substr(0, 8) == "USERNAME") // Handle USERNAME message
 						{
-							// Check if username does not exist yet
-							if (std::find(_clientUsernames.begin(), _clientUsernames.end(), clientMessageBuild) == _clientUsernames.end())
+							// Extract username
+							auto username = clientMessageBuild.substr(8);
+
+							// Check if server is full or username is already connected
+							if ((_clientIPs.size() > NetworkUtils::MAX_CLIENT_COUNT) || (_clientIPs.size() > _customMaxClientCount))
 							{
-								// Acknowledge connection with client
-								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								// Reject client
+								if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
 								{
 									return;
 								}
-
-								// Save new username
-								clientUsername = clientMessageBuild;
 								clientMessageBuild = "";
-								_newClientIP = clientIP;
-								_newClientPort = clientPort;
-								_newClientUsername = clientUsername;
 
-								// Logging
-								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
+								// Prevent processing more messages
+								break;
 							}
-							else
+							else if (std::find(_clientUsernames.begin(), _clientUsernames.end(), username) != _clientUsernames.end())
 							{
 								// Reject client
 								if (!_sendTcpMessage(clientSocketID, "USER_ALREADY_CONNECTED", true))
@@ -124,11 +109,30 @@ BEGIN:
 								}
 								clientMessageBuild = "";
 
-								// Prevent reading more messages
+								// Prevent processing more messages
 								break;
 							}
+							else
+							{
+								// Accept client
+								if (!_sendTcpMessage(clientSocketID, "ACCEPTED", true))
+								{
+									return;
+								}
+
+								// Save new username
+								clientUsername = username;
+								clientMessageBuild = "";
+								_newClientIP = clientIP;
+								_newClientPort = clientPort;
+								_newClientUsername = clientUsername;
+
+								// Logging
+								Logger::throwInfo("Networking client \"" + clientUsername + "\" connected to the server!");
+							}
+	
 						}
-						else if (clientMessageBuild == "PING") // Handle ping message
+						else if (clientMessageBuild == "PING") // Handle PING message
 						{
 							// Calculate delay between receiving the message and processing the receive
 							auto receiveDelay = Tools::getTimeSinceEpochMS() - messageTimestamp;
@@ -143,7 +147,7 @@ BEGIN:
 							}
 							clientMessageBuild = "";
 						}
-						else // Handle other messages
+						else // Handle other message
 						{
 							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, clientMessageBuild));
 							clientMessageBuild = "";

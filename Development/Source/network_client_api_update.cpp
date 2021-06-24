@@ -41,7 +41,7 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendTcpMessage(_username, false, false))
+				if (!_sendTcpMessage("USERNAME" + _username, true, false))
 				{
 					return;
 				}
@@ -116,7 +116,7 @@ void NetworkClientAPI::update()
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
-						// Prevent reading more messages
+						// Prevent processing more messages
 						break;
 					}
 					else if (_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
@@ -126,7 +126,7 @@ void NetworkClientAPI::update()
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
-						// Prevent reading more messages
+						// Prevent processing more messages
 						break;
 					}
 					else if (_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
@@ -136,7 +136,7 @@ void NetworkClientAPI::update()
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
-						// Prevent reading more messages
+						// Prevent processing more messages
 						break;
 					}
 					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
@@ -159,7 +159,7 @@ void NetworkClientAPI::update()
 						_isWaitingForPing = false;
 						_tcpMessageBuild = "";
 					}
-					else // Handle other messages
+					else // Handle other message
 					{
 						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
 						_tcpMessageBuild = "";

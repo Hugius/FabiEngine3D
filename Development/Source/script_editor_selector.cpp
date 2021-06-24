@@ -5,15 +5,18 @@
 void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, 
 	unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
+	// Temporary values
+	bool isControlKeyDown = (_fe3d.input_isKeyDown(InputType::KEY_LCTRL) || _fe3d.input_isKeyDown(InputType::KEY_RCTRL));
+
 	// Check if any text selected
 	if (_firstSelectedLineIndex != -1)
 	{
 		// Check if user cancels or edits any selected text
-		if (_hasClickedLMB || _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) || // LMB or RMB
+		if (_hasClickedLMB || _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) || // LMB or RMB
 			_activeActionKey != InputType::NONE || // Action keys such as arrows, enter, etc.
 			!newCharacters.empty() || // Typed characters
-			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) || // CTRL + V
-			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X))) // CTRL + X
+			(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V)) || // CTRL + V
+			(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))) // CTRL + X
 		{
 			// Delete selection billboards
 			for (const auto& ID : _fe3d.billboardEntity_getAllIDs())
@@ -25,18 +28,18 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 
 			// Copy before removing text
-			if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X))
+			if (isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))
 			{
 				_copySelectedText();
 			}
 
 			// Check if text content has been changed
 			if (!newCharacters.empty() || 
-				_fe3d.input_getKeyPressed(InputType::KEY_BACKSPACE) ||
-				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) ||
-				_fe3d.input_getKeyPressed(InputType::KEY_ENTER) ||
-				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V) && !_copyClipboard.empty()) ||
-				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X)))
+				_fe3d.input_isKeyPressed(InputType::KEY_BACKSPACE) ||
+				_fe3d.input_isKeyPressed(InputType::KEY_DELETE) ||
+				_fe3d.input_isKeyPressed(InputType::KEY_ENTER) ||
+				(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V) && !_copyClipboard.empty()) ||
+				(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X)))
 			{
 				if (_lastSelectedLineIndex == -1) // Only 1 line is selected
 				{
@@ -71,7 +74,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
 
 				// Add extra line for entering
-				if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 				{
 					// Check if not exceeding the line limit
 					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
@@ -95,7 +98,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	}
 
 	// Update text selection
-	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
+	if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if a line is hovered
 		if (hoveredLineIndex != -1)
@@ -164,14 +167,14 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 		}
 
-		// Control button combinations
-		if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
+		// Control key combinations
+		if (isControlKeyDown)
 		{
-			if (_fe3d.input_getKeyPressed(InputType::KEY_C)) // Copy selected text to clipboard
+			if (_fe3d.input_isKeyPressed(InputType::KEY_C)) // Copy selected text to clipboard
 			{
 				_copySelectedText();
 			}
-			else if (_fe3d.input_getKeyPressed(InputType::KEY_V)) // Paste copied text
+			else if (_fe3d.input_isKeyPressed(InputType::KEY_V)) // Paste copied text
 			{
 				// Check if clipboard is not empty
 				if (!_copyClipboard.empty())

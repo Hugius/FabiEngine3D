@@ -12,7 +12,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Reload all AABB entities when LMB is pressed
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
 		{
 			_reloadScriptTextDisplay(true);
 			_hasClickedLMB = true;
@@ -69,7 +69,7 @@ void ScriptEditor::_updateTextWriter()
 		{
 			for (InputType actionKey : ACTION_KEYS) // Check all possible action keys
 			{
-				if (_fe3d.input_getKeyPressed(actionKey)) // Check if action key is pressed
+				if (_fe3d.input_isKeyPressed(actionKey)) // Check if action key is pressed
 				{
 					// Remember currently pressed action key
 					_activeActionKey = actionKey;
@@ -92,7 +92,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Reset timing state if action key released
-		if (!_fe3d.input_getKeyDown(_activeActionKey))
+		if (!_fe3d.input_isKeyDown(_activeActionKey))
 		{
 			_activeActionKey = InputType::NONE;
 			_passedFrames = 0;
@@ -257,13 +257,13 @@ void ScriptEditor::_updateTextWriter()
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 
 			// Control button is reserved for copy & paste
-			if (!_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
+			if (!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
 			{
 				// Letter characters
 				for (const auto& c : LETTER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(c)))
+					if (_fe3d.input_isKeyPressed(InputType(c)))
 					{
 						// Spacebar
 						if (c == ' ')
@@ -273,7 +273,7 @@ void ScriptEditor::_updateTextWriter()
 						else // Non-spacebar
 						{
 							// Uppercase or special character
-							if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+							if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 							{
 								newCharacters += (c - 32);
 							}
@@ -293,10 +293,10 @@ void ScriptEditor::_updateTextWriter()
 				for (const auto& element : NUMBER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -311,10 +311,10 @@ void ScriptEditor::_updateTextWriter()
 				for (const auto& element : SPECIAL_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += element.second;
 						}
@@ -326,7 +326,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Insert 4 spaces (TAB)
-				if (_fe3d.input_getKeyPressed(InputType::KEY_TAB))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_TAB))
 				{
 					newCharacters += "    ";
 				}
@@ -384,14 +384,14 @@ void ScriptEditor::_updateTextWriter()
 									}
 								}
 							}
-							else if (cursorCharIndex > 0 && _fe3d.input_getKeyDown(InputType::KEY_BACKSPACE)) // Remove previous character from current line
+							else if (cursorCharIndex > 0 && _fe3d.input_isKeyDown(InputType::KEY_BACKSPACE)) // Remove previous character from current line
 							{
 								cursorCharIndex--;
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
 							}
-							else if (_fe3d.input_getKeyDown(InputType::KEY_DELETE)) // Remove next character from current line
+							else if (_fe3d.input_isKeyDown(InputType::KEY_DELETE)) // Remove next character from current line
 							{
 								currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 								textHasChanged = true;

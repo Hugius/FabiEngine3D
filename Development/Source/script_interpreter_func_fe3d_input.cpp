@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getKeyDown(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isKeyDown(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -24,7 +24,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getKeyPressed(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isKeyPressed(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getKeyToggled(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isKeyToggled(KEY_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -50,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getMouseDown(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isMouseDown(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getMousePressed(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isMousePressed(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -76,7 +76,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
 			{
-				auto result = _fe3d.input_getMouseToggled(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
+				auto result = _fe3d.input_isMouseToggled(MOUSE_INPUT_STRING_MAP.at(arguments[0].getString()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}

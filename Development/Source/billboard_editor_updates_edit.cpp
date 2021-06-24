@@ -14,9 +14,9 @@ void BillboardEditor::_updateBillboardEditing()
 			// GUI management
 			if (screen->getID() == "billboardEditorMenuChoice")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
-					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
 						_fe3d.billboardEntity_hide(_currentBillboardID);
 						_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
@@ -50,9 +50,9 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuMesh")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
-					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					}
@@ -104,9 +104,9 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuAppearance")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
-					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					}
@@ -181,9 +181,9 @@ void BillboardEditor::_updateBillboardEditing()
 				int animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
 				int animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
-					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					}
@@ -228,9 +228,9 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuText")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
-					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					}

@@ -48,6 +48,23 @@ public:
 	bool engine_isGameExported();
 	const string& engine_getGameTitle();
 
+	// Input interface - setters
+	void input_setLocked(bool locked);
+	void input_clearKeyToggles();
+	void input_clearMouseToggles();
+	void input_setKeyTogglingLocked(bool locked);
+	void input_setMouseTogglingLocked(bool locked);
+
+	// Input interface - getters
+	const bool input_isKeyDown(InputType keyName);
+	const bool input_isKeyPressed(InputType keyName);
+	const bool input_isKeyToggled(InputType keyName);
+	const bool input_isMouseDown(InputType mouseButton);
+	const bool input_isMousePressed(InputType mouseButton);
+	const bool input_isMouseToggled(InputType mouseButton);
+	const int input_getMouseWheelX();
+	const int input_getMouseWheelY();
+
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw, float pitch);
 	void camera_enableLookatView();
@@ -725,23 +742,6 @@ public:
 	const bool gfx_isLensFlareEnabled();
 	const bool gfx_isShadowFollowingCamera();
 	const bool gfx_isSoftShadowingEnabled();
-
-	// Input interface - setters
-	void input_setLocked(bool locked);
-	void input_clearKeyToggles();
-	void input_clearMouseToggles();
-	void input_setKeyTogglingLocked(bool locked);
-	void input_setMouseTogglingLocked(bool locked);
-
-	// Input interface - getters
-	const bool input_getKeyDown(InputType keyName);
-	const bool input_getKeyPressed(InputType keyName);
-	const bool input_getKeyToggled(InputType keyName);
-	const bool input_getMouseDown(InputType mouseButton);
-	const bool input_getMousePressed(InputType mouseButton);
-	const bool input_getMouseToggled(InputType mouseButton);
-	const int input_getMouseWheelX();
-	const int input_getMouseWheelY();
 
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)

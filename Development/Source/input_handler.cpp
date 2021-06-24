@@ -45,7 +45,7 @@ void InputHandler::f_checkInput()
 						{
 							_mouseToggled_mayNotPress.push_back(button); // Mouse may not be pressed next frame
 
-							if (getMouseToggled(button)) // Make mouse toggle false
+							if (isMouseToggled(button)) // Make mouse toggle false
 							{
 								if (!_mouseToggled.empty())
 								{
@@ -118,7 +118,7 @@ void InputHandler::f_checkInput()
 						{
 							_keysToggled_mayNotPress.push_back(key); // Key may not be pressed next frame
 
-							if (getKeyToggled(key)) // Make key toggle false
+							if (isKeyToggled(key)) // Make key toggle false
 							{
 								if (!_keysToggled.empty())
 								{
@@ -204,32 +204,32 @@ void InputHandler::setMouseTogglingLocked(bool locked)
 	_mouseTogglingLocked = locked;
 }
 
-const bool InputHandler::getKeyDown(InputType keyName)
+const bool InputHandler::isKeyDown(InputType keyName)
 {
 	return _isInVector(_keysDown, keyName);
 }
 
-const bool InputHandler::getKeyToggled(InputType keyName)
+const bool InputHandler::isKeyToggled(InputType keyName)
 {
 	return _isInVector(_keysToggled, keyName);
 }
 
-const bool InputHandler::getKeyPressed(InputType keyName)
+const bool InputHandler::isKeyPressed(InputType keyName)
 {
 	return _isInVector(_keysPressed, keyName);
 }
 
-const bool InputHandler::getMouseDown(InputType mouseButton)
+const bool InputHandler::isMouseDown(InputType mouseButton)
 {
 	return _isInVector(_mouseDown, mouseButton);
 }
 
-const bool InputHandler::getMousePressed(InputType mouseButton)
+const bool InputHandler::isMousePressed(InputType mouseButton)
 {
 	return _isInVector(_mousePressed, mouseButton);
 }
 
-const bool InputHandler::getMouseToggled(InputType mouseButton)
+const bool InputHandler::isMouseToggled(InputType mouseButton)
 {
 	return _isInVector(_mouseToggled, mouseButton);
 }

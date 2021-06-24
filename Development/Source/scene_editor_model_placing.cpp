@@ -8,7 +8,7 @@ void SceneEditor::_updateModelPlacing()
 		if (!_currentPreviewModelID.empty())
 		{
 			// Check if mouse behavior isn't being invalid
-			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
+			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
 				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
 			{
 				// Default placement position
@@ -43,7 +43,7 @@ void SceneEditor::_updateModelPlacing()
 				}
 
 				// Placing model
-				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
+				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model
@@ -68,7 +68,7 @@ void SceneEditor::_updateModelPlacing()
 						_currentPreviewModelID = "";
 					}
 				}
-				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
 				{
 					// Hide preview model
 					_fe3d.modelEntity_hide(_currentPreviewModelID);

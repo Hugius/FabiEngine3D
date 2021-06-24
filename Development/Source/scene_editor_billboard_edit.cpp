@@ -28,13 +28,13 @@ void SceneEditor::_updateBillboardEditing()
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hovered && _fe3d.misc_isCursorInsideViewport() &&
-						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered billboard
 						_selectBillboard(entityID);
 
 						// Check if user clicked billboard
-						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same billboard is clicked again
 							if (_selectedBillboardID != _activeBillboardID)
@@ -58,7 +58,7 @@ void SceneEditor::_updateBillboardEditing()
 			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeBillboardID = "";
 					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
@@ -78,7 +78,7 @@ void SceneEditor::_updateBillboardEditing()
 				_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardPropertiesMenu");
 
 				// GUI management (pressed)
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{

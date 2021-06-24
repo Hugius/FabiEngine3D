@@ -9,9 +9,9 @@ void EnvironmentEditor::_updateWaterMenuMain()
 	// GUI management
 	if (screen->getID() == "waterEditorMenuMain")
 	{
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
 				_currentEnvironmentType = EnvironmentType::NONE;
@@ -48,9 +48,9 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 	// GUI management
 	if (screen->getID() == "waterEditorMenuChoice")
 	{
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
@@ -101,7 +101,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			// Check if a terrain name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Only select the terrain if it has a heightmap
 					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
@@ -153,9 +153,9 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}
@@ -172,7 +172,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		}
 
 		// Holding LMB
-		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("up")->isHovered())
 			{
@@ -223,9 +223,9 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}
@@ -373,9 +373,9 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}

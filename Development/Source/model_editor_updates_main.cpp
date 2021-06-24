@@ -20,9 +20,9 @@ void ModelEditor::_updateManagementScreen()
 		// GUI management
 		if (screen->getID() == "modelEditorMenuMain")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
@@ -74,9 +74,9 @@ void ModelEditor::_updateEditingScreen()
 		// GUI management
 		if (screen->getID() == "modelEditorMenuChoice")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					// Hide model entity
 					if (_fe3d.modelEntity_isExisting(_currentModelID))
@@ -229,7 +229,7 @@ void ModelEditor::_updateModelChoosing()
 			// Check if a model name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select model
 					_currentModelID = "@" + selectedButtonID;

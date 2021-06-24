@@ -221,7 +221,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	float multiplier, float minimum, float maximum)
 {
 	// Plus & minus button handling
-	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{

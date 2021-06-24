@@ -86,7 +86,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 			// Check if a sky name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select sky
 					_currentSkyID = "@" + selectedButtonID;
@@ -180,7 +180,7 @@ void EnvironmentEditor::_updateSkyCamera()
 		if (_currentSkyID != "")
 		{
 			// Check if first person view must be enabled
-			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Enable first person view
 				if (_fe3d.misc_isCursorInsideViewport())

@@ -26,34 +26,34 @@ void FabiEngine3D::input_setMouseTogglingLocked(bool locked)
 	return _core->_inputHandler.setMouseTogglingLocked(locked);
 }
 
-const bool FabiEngine3D::input_getKeyDown(InputType keyName)
+const bool FabiEngine3D::input_isKeyDown(InputType keyName)
 {
-	return _core->_inputHandler.getKeyDown(keyName);
+	return _core->_inputHandler.isKeyDown(keyName);
 }
 
-const bool FabiEngine3D::input_getKeyPressed(InputType keyName)
+const bool FabiEngine3D::input_isKeyPressed(InputType keyName)
 {
-	return _core->_inputHandler.getKeyPressed(keyName);
+	return _core->_inputHandler.isKeyPressed(keyName);
 }
 
-const bool FabiEngine3D::input_getKeyToggled(InputType keyName)
+const bool FabiEngine3D::input_isKeyToggled(InputType keyName)
 {
-	return _core->_inputHandler.getKeyToggled(keyName);
+	return _core->_inputHandler.isKeyToggled(keyName);
 }
 
-const bool FabiEngine3D::input_getMouseDown(InputType mouseButton)
+const bool FabiEngine3D::input_isMouseDown(InputType mouseButton)
 {
-	return _core->_inputHandler.getMouseDown(mouseButton);
+	return _core->_inputHandler.isMouseDown(mouseButton);
 }
 
-const bool FabiEngine3D::input_getMousePressed(InputType mouseButton)
+const bool FabiEngine3D::input_isMousePressed(InputType mouseButton)
 {
-	return _core->_inputHandler.getMousePressed(mouseButton);
+	return _core->_inputHandler.isMousePressed(mouseButton);
 }
 
-const bool FabiEngine3D::input_getMouseToggled(InputType mouseButton)
+const bool FabiEngine3D::input_isMouseToggled(InputType mouseButton)
 {
-	return _core->_inputHandler.getMouseToggled(mouseButton);
+	return _core->_inputHandler.isMouseToggled(mouseButton);
 }
 
 const int FabiEngine3D::input_getMouseWheelX()

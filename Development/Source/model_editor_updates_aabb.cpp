@@ -12,9 +12,9 @@ void ModelEditor::_updateModelEditingAabb()
 		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_isMovingToggled = false;
 				_isResizingToggled = false;
@@ -169,7 +169,7 @@ void ModelEditor::_updateModelEditingAabb()
 		// Check if a AABB name is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
 			{
 				// Set current AABB
 				_currentAabbID = selectedButtonID;

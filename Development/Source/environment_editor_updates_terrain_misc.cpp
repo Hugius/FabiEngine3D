@@ -85,7 +85,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 			// Check if a terrain name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select terrain
 					_currentTerrainID = "@" + selectedButtonID;

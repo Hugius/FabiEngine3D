@@ -25,7 +25,7 @@ void EngineGuiWritefield::update(bool hoverable)
 
 void EngineGuiWritefield::_updateActivation()
 {
-	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (_isHovered)
 		{
@@ -100,7 +100,7 @@ void EngineGuiWritefield::_updateTyping()
 				for (const auto& c : letterCharacters)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(c)))
+					if (_fe3d.input_isKeyPressed(InputType(c)))
 					{
 						// Spacebar
 						if (c == ' ')
@@ -109,7 +109,7 @@ void EngineGuiWritefield::_updateTyping()
 						}
 						else // Non-spacebar
 						{
-							if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
+							if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
 							{
 								// Convert to uppercase
 								{
@@ -139,10 +139,10 @@ void EngineGuiWritefield::_updateTyping()
 				for (const auto& element : numberCharacterMap)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -160,10 +160,10 @@ void EngineGuiWritefield::_updateTyping()
 				for (const auto& element : specialCharacterMap)
 				{
 					// Check if character is pressed on keyboard
-					if (_fe3d.input_getKeyPressed(InputType(element.first)))
+					if (_fe3d.input_isKeyPressed(InputType(element.first)))
 					{
 						// Check if shift was pressed
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 						{
 							_currentTextContent += element.second;
 						}
@@ -176,9 +176,9 @@ void EngineGuiWritefield::_updateTyping()
 			}
 			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
 			{
-				if (_fe3d.input_getKeyPressed(InputType('-')))
+				if (_fe3d.input_isKeyPressed(InputType('-')))
 				{
-					if (!_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+					if (!_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) && !_fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 					{
 						if (_currentTextContent.empty()) // Minus can only before any number
 						{
@@ -190,7 +190,7 @@ void EngineGuiWritefield::_updateTyping()
 		}
 
 		// Remove character
-		if (_fe3d.input_getKeyDown(InputType::KEY_BACKSPACE))
+		if (_fe3d.input_isKeyDown(InputType::KEY_BACKSPACE))
 		{
 			// Check if enough time passed
 			if (passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
@@ -220,7 +220,7 @@ void EngineGuiWritefield::_updateTyping()
 		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		// Input confirmation
-		if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
+		if (_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 		{
 			if (_currentTextContent != "")
 			{

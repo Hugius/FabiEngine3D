@@ -87,7 +87,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 			// Check if a water name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select water
 					_currentWaterID = "@" + selectedButtonID;

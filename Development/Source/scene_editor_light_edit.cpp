@@ -22,7 +22,7 @@ void SceneEditor::_updateLightEditing()
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
-						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
@@ -31,7 +31,7 @@ void SceneEditor::_updateLightEditing()
 						_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked lightbulb
-						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same lightbulb is clicked again
 							if (_selectedLightBulbID != ACTIVE_BULB_ID)
@@ -64,7 +64,7 @@ void SceneEditor::_updateLightEditing()
 			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_BULB_ID = "";
 					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
@@ -84,7 +84,7 @@ void SceneEditor::_updateLightEditing()
 				_gui.getViewport("right")->getWindow("main")->setActiveScreen("pointlightPropertiesMenu");
 
 				// GUI management (pressed)
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{

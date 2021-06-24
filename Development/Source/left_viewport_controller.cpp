@@ -38,7 +38,7 @@ void LeftViewportController::update()
 	auto screen = window->getScreen("main");
 
 	// Check if LMB is pressed
-	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
 		{

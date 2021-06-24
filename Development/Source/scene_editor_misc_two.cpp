@@ -11,7 +11,7 @@ void SceneEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
 		// Update bounding box visibility
-		if (_fe3d.input_getKeyToggled(InputType::KEY_B))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_B))
 		{
 			_fe3d.misc_enableAabbFrameRendering();
 		}
@@ -21,7 +21,7 @@ void SceneEditor::_updateMiscellaneous()
 		}
 
 		// Wireframe rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_F))
 		{
 			_fe3d.misc_enableWireframeRendering();
 		}
@@ -31,7 +31,7 @@ void SceneEditor::_updateMiscellaneous()
 		}
 
 		// Debug rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
 		{
 			_fe3d.misc_enableDebugRendering();
 		}

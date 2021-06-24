@@ -35,9 +35,9 @@ void AnimationEditor::_updateManagementScreen()
 		// GUI management
 		if (screen->getID() == "animationEditorMenuMain")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitAnimationEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
@@ -138,7 +138,7 @@ void AnimationEditor::_updateAnimationChoice()
 			// Check if a animation name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select animation
 					_currentAnimationID = selectedButtonID;
@@ -218,21 +218,21 @@ void AnimationEditor::_updateCamera()
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				// Update camera speed alteration
-				if (_fe3d.input_getKeyPressed(InputType::KEY_UP))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_UP))
 				{
 					_cameraSpeed *= 2.0f;
 				}
-				if (_fe3d.input_getKeyPressed(InputType::KEY_DOWN))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_DOWN))
 				{
 					_cameraSpeed /= 2.0f;
 				}
 
 				// Update vertical lookat movement
-				if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+				if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 				{
 					_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
 				}
-				if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
+				if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 				{
 					_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
 
@@ -269,7 +269,7 @@ void AnimationEditor::_updateCamera()
 			// Check if MMB down
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 				{
 					if (_fe3d.misc_isCursorInsideViewport()) // Only if cursor inside 3d screen
 					{

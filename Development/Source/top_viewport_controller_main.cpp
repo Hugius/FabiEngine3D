@@ -75,7 +75,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	// GUI management
 	if (screen->getID() == "main")
 	{
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("newProject")->isHovered())
 			{
@@ -150,7 +150,7 @@ void TopViewportController::_updateGameScreenManagement()
 	else
 	{
 		// Check if LMB pressed
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (gameScreen->getButton("play")->isHovered())
 			{
@@ -215,7 +215,7 @@ void TopViewportController::_updateGameScreenManagement()
 		if (_scriptEditor.getScriptExecutor().isRunning())
 		{
 			// Check if user pressed ESCAPE
-			if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (_fe3d.networkServer_isRunning()) // Server application cannot be paused, only on or off
 				{
@@ -239,7 +239,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	auto screen = _miscWindow->getScreen("main");
 
 	// Check if LMB pressed
-	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("uncache")->isHovered())
 		{

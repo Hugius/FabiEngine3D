@@ -18,9 +18,9 @@ void ScriptEditor::_updateGUI()
 		// GUI management
 		if (screen->getID() == "scriptEditorMenuMain")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
@@ -52,6 +52,16 @@ void ScriptEditor::_updateGUI()
 				}
 			}
 			
+			// Control key combinations
+			if (_fe3d.input_isKeyDown(InputType::KEY_LCTRL) || _fe3d.input_isKeyDown(InputType::KEY_RCTRL))
+			{
+				// Search hotkey
+				if (_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getGlobalScreen()->isFocused())
+				{
+					_gui.getGlobalScreen()->addValueForm("search", "Search keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				}
+			}
+
 			// Update total line count text
 			auto lineCountID = screen->getTextfield("lineCount")->getEntityID();
 			_fe3d.textEntity_setTextContent(lineCountID, "Line count: " + to_string(_script.getTotalLineCount()));
@@ -195,7 +205,7 @@ void ScriptEditor::_updateMiscellaneous()
 		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;

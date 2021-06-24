@@ -20,7 +20,7 @@ void EnvironmentEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
 		// Wireframe rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_F))
 		{
 			_fe3d.misc_enableWireframeRendering();
 		}
@@ -30,7 +30,7 @@ void EnvironmentEditor::_updateMiscellaneous()
 		}
 
 		// Debug rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
 		{
 			_fe3d.misc_enableDebugRendering();
 		}

@@ -32,13 +32,13 @@ void SceneEditor::_updateModelEditing()
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hovered && _fe3d.misc_isCursorInsideViewport() &&
-						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered model
 						_selectModel(entityID);
 
 						// Check if user clicked model
-						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same model is clicked again
 							if (_selectedModelID != _activeModelID)
@@ -62,7 +62,7 @@ void SceneEditor::_updateModelEditing()
 			if (_selectedModelID == "" && _activeModelID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeModelID = "";
 					rightWindow->setActiveScreen("sceneEditorControls");
@@ -82,7 +82,7 @@ void SceneEditor::_updateModelEditing()
 				rightWindow->setActiveScreen("modelPropertiesMenu");
 
 				// GUI management (pressed)
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{
@@ -140,7 +140,7 @@ void SceneEditor::_updateModelEditing()
 				// Check if an animation name is clicked
 				auto lastAnimationID = _animationEditor.getStartedAnimationIDs(_activeModelID);
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animations");
-				if (selectedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if (selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Stop last playing animation
 					if (!lastAnimationID.empty())
@@ -185,7 +185,7 @@ void SceneEditor::_updateModelEditing()
 				_fe3d.textEntity_setTextContent(freezeID, isFrozen ? "Unfreeze" : "Freeze");
 
 				// Alternative way of deleting
-				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))
+				if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 				{
 					_fe3d.modelEntity_delete(_activeModelID);
 					rightWindow->setActiveScreen("sceneEditorControls");

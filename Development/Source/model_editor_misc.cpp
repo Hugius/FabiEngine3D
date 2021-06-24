@@ -10,7 +10,7 @@ void ModelEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
 		// Update reference model visibility
-		if (_fe3d.input_getKeyToggled(InputType::KEY_R))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_R))
 		{
 			_fe3d.modelEntity_hide("@@cube");
 		}
@@ -20,7 +20,7 @@ void ModelEditor::_updateMiscellaneous()
 		}
 
 		// Debug rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
+		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
 		{
 			_fe3d.misc_enableDebugRendering();
 		}
@@ -33,7 +33,7 @@ void ModelEditor::_updateMiscellaneous()
 		string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
 		if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
 		{
-			if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+			if (_fe3d.input_isKeyToggled(InputType::KEY_F))
 			{
 				_fe3d.modelEntity_setWireframed(modelID, true);
 			}

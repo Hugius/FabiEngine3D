@@ -8,7 +8,7 @@ void SceneEditor::_updateLightPlacing()
 		if (_isPlacingPointlight)
 		{
 			// Check if mouse behavior isn't being invalid
-			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
+			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
 				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
 			{
 				// Default placement position
@@ -34,7 +34,7 @@ void SceneEditor::_updateLightPlacing()
 				}
 
 				// Placing pointlight
-				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
+				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight
@@ -62,7 +62,7 @@ void SceneEditor::_updateLightPlacing()
 						_isPlacingPointlight = false;
 					}
 				}
-				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
 					_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);

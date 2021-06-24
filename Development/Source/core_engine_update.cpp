@@ -8,7 +8,7 @@ void CoreEngine::_updateApplication()
 	static Ivec2 lastCursorPosition = _window.getCursorPos();
 
 	// Exit application
-	if (_inputHandler.getKeyDown(InputType::WINDOW_X_BUTTON))
+	if (_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		_stop();
 	}

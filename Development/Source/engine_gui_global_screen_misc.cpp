@@ -126,8 +126,8 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 
 	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{
-		bool done = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
-		bool cancelled = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
+		bool done = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
+		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWritefield(ID)->confirmedInput();
 
 		// Check if user confirmed or cancelled
@@ -220,7 +220,7 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
-		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT));
+		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT));
 	}
 	else
 	{
@@ -263,7 +263,7 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 {
 	if (ID == _answerFormID)
 	{
-		if (getButton("answer_form_yes")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (getButton("answer_form_yes")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			removeAnswerForm(ID);
 			return true;
@@ -279,7 +279,7 @@ bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 {
 	if (checkButton("answer_form_no") && (ID == _answerFormID))
 	{
-		if (getButton("answer_form_no")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			removeAnswerForm(ID);
 			return true;

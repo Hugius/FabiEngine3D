@@ -10,21 +10,21 @@ void ModelEditor::_updateCamera()
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			// Update camera speed alteration
-			if (_fe3d.input_getKeyPressed(InputType::KEY_UP))
+			if (_fe3d.input_isKeyPressed(InputType::KEY_UP))
 			{
 				_cameraSpeed *= 2.0f;
 			}
-			if (_fe3d.input_getKeyPressed(InputType::KEY_DOWN))
+			if (_fe3d.input_isKeyPressed(InputType::KEY_DOWN))
 			{
 				_cameraSpeed /= 2.0f;
 			}
 
 			// Update vertical lookat movement
-			if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+			if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 			{
 				_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
 			}
-			if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
+			if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 			{
 				_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
 
@@ -64,7 +64,7 @@ void ModelEditor::_updateCamera()
 		// Check if MMB pressed
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				if (_fe3d.misc_isCursorInsideViewport()) // Only if cursor inside 3d screen
 				{

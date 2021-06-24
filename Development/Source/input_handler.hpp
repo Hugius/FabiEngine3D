@@ -17,12 +17,12 @@ public:
 	void setLocked(bool locked);
 	void setKeyTogglingLocked(bool locked);
 	void setMouseTogglingLocked(bool locked);
-	const bool getKeyDown(InputType keyName);
-	const bool getKeyPressed(InputType keyName);
-	const bool getKeyToggled(InputType keyName);
-	const bool getMouseDown(InputType mouseButton);
-	const bool getMousePressed(InputType mouseButton);
-	const bool getMouseToggled(InputType mouseButton);
+	const bool isKeyDown(InputType keyName);
+	const bool isKeyPressed(InputType keyName);
+	const bool isKeyToggled(InputType keyName);
+	const bool isMouseDown(InputType mouseButton);
+	const bool isMousePressed(InputType mouseButton);
+	const bool isMouseToggled(InputType mouseButton);
 	const int  getMouseWheelX();
 	const int  getMouseWheelY();
 

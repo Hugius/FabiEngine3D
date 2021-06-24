@@ -12,9 +12,9 @@ void AnimationEditor::_updateEditingScreen()
 			// Temporary values
 			auto currentAnimation = _getAnimation(_currentAnimationID);
 
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					// Stop animation if playing
 					if (isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
@@ -200,7 +200,7 @@ void AnimationEditor::_updateEditingScreen()
 			if (selectedButtonID != "")
 			{
 				// Check if LMB is pressed
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Compose selected model ID
 					string selectedModelID = "@" + selectedButtonID;

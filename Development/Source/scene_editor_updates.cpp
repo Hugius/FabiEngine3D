@@ -67,9 +67,9 @@ void SceneEditor::_updateMainMenu()
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuMain")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -120,7 +120,7 @@ void SceneEditor::_updateMainMenu()
 			}
 
 			// Update scene choice
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
 				if (selectedButtonID != "")
@@ -183,9 +183,9 @@ void SceneEditor::_updateChoiceMenu()
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuChoice")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
@@ -270,7 +270,7 @@ void SceneEditor::_updateCamera()
 		if (_currentSceneID != "")
 		{
 			// Camera looking
-			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				if (_fe3d.misc_isCursorInsideViewport())
 				{
@@ -299,31 +299,31 @@ void SceneEditor::_updateCamera()
 			if (!_gui.getGlobalScreen()->isFocused())
 			{
 				// X movement
-				if (_fe3d.input_getKeyDown(InputType::KEY_A))
+				if (_fe3d.input_isKeyDown(InputType::KEY_A))
 				{
 					_fe3d.camera_translateFollowX(-_editorSpeed / 100.0f);
 				}
-				else if (_fe3d.input_getKeyDown(InputType::KEY_D))
+				else if (_fe3d.input_isKeyDown(InputType::KEY_D))
 				{
 					_fe3d.camera_translateFollowX(_editorSpeed / 100.0f);
 				}
 
 				// Y movement
-				if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+				if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 				{
 					_fe3d.camera_translate(Vec3(0.0f, _editorSpeed / 75.0f, 0.0f));
 				}
-				else if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
+				else if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 				{
 					_fe3d.camera_translate(Vec3(0.0f, -(_editorSpeed / 75.0f), 0.0f));
 				}
 
 				// Z movement
-				if (_fe3d.input_getKeyDown(InputType::KEY_W))
+				if (_fe3d.input_isKeyDown(InputType::KEY_W))
 				{
 					_fe3d.camera_translateFollowZ(_editorSpeed / 100.0f);
 				}
-				else if (_fe3d.input_getKeyDown(InputType::KEY_S))
+				else if (_fe3d.input_isKeyDown(InputType::KEY_S))
 				{
 					_fe3d.camera_translateFollowZ(-_editorSpeed / 100.0f);
 				}

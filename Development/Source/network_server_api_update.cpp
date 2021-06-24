@@ -37,20 +37,6 @@ void NetworkServerAPI::update()
 	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
-	// Close rejected client connections
-	for (auto& socketID : _disconnectingClientSocketIDs)
-	{
-		if (std::find(_clientSocketIDs.begin(), _clientSocketIDs.end(), socketID) == _clientSocketIDs.end()) // Not connected yet
-		{
-			closesocket(socketID);
-		}
-		else // Was already a connected client
-		{
-			_disconnectClient(socketID);
-		};
-	}
-	_disconnectingClientSocketIDs.clear();
-
 	// Handle new client connections
 	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
 	{
@@ -62,14 +48,13 @@ void NetworkServerAPI::update()
 		}
 
 		// Check if client is allowed to connect
-		if ((_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT )|| (_clientIPs.size() == _customMaxClientCount))
+		if ((_clientIPs.size() == NetworkUtils::MAX_CLIENT_COUNT) || (_clientIPs.size() == _customMaxClientCount))
 		{
 			// Reject client
 			if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))
 			{
 				return;
 			}
-			_disconnectingClientSocketIDs.push_back(clientSocketID);
 		}
 		else
 		{
@@ -137,10 +122,9 @@ BEGIN:
 								{
 									return;
 								}
-								_disconnectingClientSocketIDs.push_back(clientSocketID);
 								clientMessageBuild = "";
 
-								// Prevent reading next messages
+								// Prevent reading more messages
 								break;
 							}
 						}

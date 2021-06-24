@@ -134,6 +134,7 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 	_isConnectedToServer = false;
 	_isAcceptedByServer = false;
 	_isWaitingForPing = false;
+	_mustDisconnectFromServer = false;
 }
 
 void NetworkClientAPI::stop()
@@ -167,9 +168,10 @@ void NetworkClientAPI::stop()
 	_tcpMessageBuild = "";
 	_serverIP = "";
 	_serverPort = "";
-	_isRunning = false;
 	_isConnectedToServer = false;
 	_isConnectingToServer = false;
 	_isAcceptedByServer = false;
-	_isWaitingForPing = false;	
+	_isWaitingForPing = false;
+	_mustDisconnectFromServer = false;
+	_isRunning = false;
 }

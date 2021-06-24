@@ -15,6 +15,13 @@ void NetworkClientAPI::update()
 		return;
 	}
 
+	// Check if client must disconnect
+	if (_mustDisconnectFromServer)
+	{
+		disconnectFromServer(false);
+		return;
+	}
+
 	// Clear all received messages from last tick
 	_pendingMessages.clear();
 
@@ -94,7 +101,7 @@ void NetworkClientAPI::update()
 			{
 				if (character == ';') // End of current message
 				{
-					if (_tcpMessageBuild.substr(0, 8) == "ACCEPTED") // Handle accept message
+					if (_tcpMessageBuild == "ACCEPTED") // Handle ACCEPTED message
 					{
 						// UDP uses the same port as TCP
 						auto tcpPort = NetworkUtils::extractSocketSourcePort(_connectionSocketID);
@@ -102,7 +109,37 @@ void NetworkClientAPI::update()
 						_isAcceptedByServer = true;
 						_tcpMessageBuild = "";
 					}
-					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle ping message
+					else if (_tcpMessageBuild == "SERVER_FULL") // Handle SERVER_FULL message
+					{
+						// Disconnect next tick
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_tcpMessageBuild = "";
+						_mustDisconnectFromServer = true;
+
+						// Prevent reading more messages
+						break;
+					}
+					else if (_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
+					{
+						// Disconnect next tick
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_tcpMessageBuild = "";
+						_mustDisconnectFromServer = true;
+
+						// Prevent reading more messages
+						break;
+					}
+					else if (_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
+					{
+						// Disconnect next tick
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_tcpMessageBuild = "";
+						_mustDisconnectFromServer = true;
+
+						// Prevent reading more messages
+						break;
+					}
+					else if (_tcpMessageBuild.substr(0, 4) == "PING") // Handle PING message
 					{
 						// Calculate ping latency
 						auto latency = (Tools::getTimeSinceEpochMS() - _lastMilliseconds);

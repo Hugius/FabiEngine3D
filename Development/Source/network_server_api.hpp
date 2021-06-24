@@ -64,7 +64,6 @@ private:
 	future<SOCKET> _connectionThread;
 
 	// Client variables
-	vector<SOCKET> _disconnectingClientSocketIDs;
 	vector<SOCKET> _clientSocketIDs;
 	vector<string> _clientIPs;
 	vector<string> _clientPorts;

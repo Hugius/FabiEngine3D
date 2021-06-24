@@ -137,7 +137,7 @@ void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)
 			// Temporarily save username
 			auto clientUsername = _clientUsernames[i];
 
-			// Close connection
+			// Close socket
 			closesocket(clientSocketID);
 
 			// Save disonnected client data

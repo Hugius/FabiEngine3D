@@ -33,21 +33,45 @@ bool NetworkServerAPI::isClientConnected(const string& username)
 
 const string& NetworkServerAPI::getNewClientIP()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve new client IP: not running!");
+	}
+
 	return _newClientIP;
 }
 
 const string& NetworkServerAPI::getNewClientPort()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve new client port: not running!");
+	}
+
 	return _newClientPort;
 }
 
 const string& NetworkServerAPI::getNewClientUsername()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve new client username: not running!");
+	}
+
 	return _newClientUsername;
 }
 
 const string NetworkServerAPI::getOldClientIP()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve old client IP: not running!");
+	}
+
 	if (_oldClientIPs.empty())
 	{
 		return "";
@@ -60,6 +84,12 @@ const string NetworkServerAPI::getOldClientIP()
 
 const string NetworkServerAPI::getOldClientPort()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve old client port: not running!");
+	}
+
 	if (_oldClientPorts.empty())
 	{
 		return "";
@@ -72,6 +102,12 @@ const string NetworkServerAPI::getOldClientPort()
 
 const string NetworkServerAPI::getOldClientUsername()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to retrieve old client username: not running!");
+	}
+
 	if (_oldClientUsernames.empty())
 	{
 		return "";
@@ -155,6 +191,12 @@ const vector<string> NetworkServerAPI::getClientUsernames()
 
 void NetworkServerAPI::sendTcpMessage(const string& username, const string& content)
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not running!");
+	}
+
 	// Try to find client and send message
 	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
@@ -177,6 +219,12 @@ void NetworkServerAPI::sendTcpMessage(const string& username, const string& cont
 
 void NetworkServerAPI::sendUdpMessage(const string& username, const string& content)
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not running!");
+	}
+
 	// Try to find client and send message
 	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
@@ -199,6 +247,12 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 
 void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& exceptionUsername)
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to broadcast TCP message: not running!");
+	}
+
 	// Send message to all connected clients
 	for (size_t i = 0; i < _clientSocketIDs.size(); i++)
 	{
@@ -217,6 +271,12 @@ void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& 
 
 void NetworkServerAPI::broadcastUdpMessage(const string& content, const string& exceptionUsername)
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwWarning("Networking server tried to broadcast UDP message: not running!");
+	}
+
 	// Try to find client and send message
 	for (size_t i = 0; i < _clientUsernames.size(); i++)
 	{
@@ -250,9 +310,8 @@ void NetworkServerAPI::disconnectClient(const string& username)
 			// Check if client is found
 			if (username == _clientUsernames[i])
 			{
-				// Notify & disconnect client
+				// Notify client
 				_sendTcpMessage(_clientSocketIDs[i], "DISCONNECTED_BY_SERVER", true);
-				_disconnectingClientSocketIDs.push_back(_clientSocketIDs[i]);
 				return;
 			}
 		}

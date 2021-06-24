@@ -37,7 +37,7 @@ public:
 		_printPrefix(MessageType::ERR);
 		_printMessage(first, rest...);
 		std::cout << std::endl;
-		throwInfo("Type something to quit...");
+		throwInfo("Press a key to continue...");
 		auto temp = _getch();
 		exit(420);
 	}

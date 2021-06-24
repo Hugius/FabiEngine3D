@@ -74,6 +74,7 @@ private:
 	bool _isConnectedToServer = false;
 	bool _isAcceptedByServer = false;
 	bool _isWaitingForPing = false;
+	bool _mustDisconnectFromServer = false;
 
 	// Miscellaneous variables
 	string _username = "";

@@ -173,7 +173,6 @@ BEGIN:
 
 	// Miscellaneous
 	_pendingMessages.clear();
-	_disconnectingClientSocketIDs.clear();
 	_tcpMessageThreads.clear();
 	_connectionSocketID = INVALID_SOCKET;
 	_udpMessageSocketID = INVALID_SOCKET;

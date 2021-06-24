@@ -54,7 +54,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	{
 		if ((WSAGetLastError() == WSAECONNRESET) || (WSAGetLastError() == WSAECONNABORTED)) // Lost connection with host
 		{
-			disconnectFromServer();
+			disconnectFromServer(mustBeAccepted);
 			return false;
 		}
 		else // Something really bad happened

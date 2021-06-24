@@ -136,7 +136,7 @@ void NetworkClientAPI::update()
 		}
 		else if (messageStatusCode == 0) // Server closed socket connection
 		{
-			disconnectFromServer();
+			disconnectFromServer(false);
 			return;
 		}
 		else // Receive failed
@@ -144,7 +144,7 @@ void NetworkClientAPI::update()
 			auto code = messageErrorCode;
 			if ((code == WSAECONNRESET) || (code == WSAECONNABORTED) || (code == WSAETIMEDOUT)) // Server lost socket connection
 			{
-				disconnectFromServer();
+				disconnectFromServer(false);
 				return;
 			}
 			else // Something really bad happened

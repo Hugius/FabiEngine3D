@@ -26,7 +26,7 @@ public:
 	void start(const string& username);
 	void update();
 	void connectToServer(const string& serverIP, const string& serverPort);
-	void disconnectFromServer();
+	void disconnectFromServer(bool mustBeAccepted = true);
 	void sendTcpMessage(const string& content);
 	void sendUdpMessage(const string& content);
 	void stop();

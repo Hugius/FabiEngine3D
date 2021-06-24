@@ -94,7 +94,7 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	_isConnectingToServer = true;
 }
 
-void NetworkClientAPI::disconnectFromServer()
+void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 {
 	// Must be running
 	if (!_isRunning)
@@ -104,15 +104,23 @@ void NetworkClientAPI::disconnectFromServer()
 	}
 
 	// Must be connected & accepted
-	if (!_isConnectedToServer || !_isAcceptedByServer)
+	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
 		return;
 	}
 
-	// Close server connections
-	closesocket(_connectionSocketID);
-	closesocket(_udpMessageSocketID);
+	// Close connection socket
+	if (_connectionSocketID != INVALID_SOCKET)
+	{
+		closesocket(_connectionSocketID);
+	}
+
+	// Close UDP message socket
+	if (_udpMessageSocketID != INVALID_SOCKET)
+	{
+		closesocket(_udpMessageSocketID);
+	}
 
 	// Reset variables
 	_connectionSocketID = INVALID_SOCKET;

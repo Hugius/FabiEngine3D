@@ -64,8 +64,8 @@
   
 # Animation
 ### Setters
-- `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops) ---> `NONE`  
-  Starts the animation with **animationID** on model with **modelID** and repeats it **loops** times (-1 to play forever).
+- `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops, `BOOL` autoPause) ---> `NONE`  
+  Starts the animation with **animationID** on model with **modelID** and repeats the play **loops** times (0 = once, -1 = endless). If **autoPause** is enabled, the animation automatically pauses playback after every frame.
 - `fe3d:model_pause_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
   Pauses the playing animation with **animationID** on model with **modelID**.
 - `fe3d:model_resume_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  

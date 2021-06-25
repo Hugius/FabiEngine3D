@@ -13,6 +13,7 @@
 - The server can **send/receive** messages to/from clients.
 - You can set a **maximum** amount of **clients** that can connect to the server.
 - Be careful with **performance heavy operations** in the server scripts, otherwise it might not be able to handle client messages in time.
+- The server runs at the **maximum update speed** possible (it **overrides** the 144 ticks/second engine default).
 
 ### Client
 - A FabiEngine3D client system exists **within a FabiEngine3D game**.

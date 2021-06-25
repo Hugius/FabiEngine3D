@@ -87,6 +87,8 @@
   Returns window width in pixels.
 - `fe3d:window_get_height`() ---> `INT`  
   Returns window height in pixels.
+- `fe3d:timer_is_started`() ---> `BOOL`  
+  Returns true if the timer is running.
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
 - `fe3d:directory_is_existing`(`STR` directoryPath) ---> `BOOL`  

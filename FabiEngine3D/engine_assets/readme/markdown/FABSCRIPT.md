@@ -1,6 +1,6 @@
 # FabScript
 - FabScript is a custom **interpreted** scripting language created for FabiEngine3D.
-- Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
+- Experience with coding is a prerequisite (such as: Python, Java, C++, C#, Javascript, etc.).
 - Scripts are run from the first line to the last line, from left to right.
 ### META
 **Line 1** of every script file **must** specify its type: initialization, update, destruction.
@@ -126,11 +126,11 @@ NEG myInteger
 - To check if ***any** of the comparison statements are true: `<comparison> OR <comparison>`.
 - You **cannot** combine the `AND` and `OR` keywords in one logic statement.
 #### Logic statements
-- There are 3 types: if-statement, elif-statement, else-statement.
+- There are **3 types**: if-statement, elif-statement, else-statement.
 - Every logic statement **must** end with a `:`.
 - All code under a logic statement **must** must be indented with 4 spaces / 1 TAB.
 - The order is: if - elif - else.
-- These statements can be nested infinitely.
+- These statements can be **nested** infinitely.
 - Works the same as all other programming languages.
 #### Example code
 ```
@@ -147,7 +147,8 @@ ELSE:
 ### Loops
 - Use a `LOOP` statement if you want to run a block of code multiple times.
 - Once a loop is started, you can only get out using the `BREAK` statement.
-- You can use loops for iterating over a LIST for example.
+- You can use loops for iterating through a LIST for example.
+- There is a **maximum** of **1000** iterations per loop.
 #### Example code
 ```
 LIST myList = {"hello","beautiful", "world"}
@@ -169,6 +170,7 @@ LOOP:
 - After the script is executed, the program will continue running the script **where it left off**.
 - The script that is executed must have the **same type** as the caller script.
 - This works the same way as **functions** in other programming languages.
+- The maximum **execution depth** is 10.
 #### Example code
 ```
 /// Code in main_script.fe3d

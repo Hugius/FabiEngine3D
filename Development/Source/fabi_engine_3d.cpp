@@ -39,7 +39,7 @@ bool FabiEngine3D::engine_isPaused()
 
 bool FabiEngine3D::engine_isGameExported()
 {
-	return Config::getInst().isGameExported();
+	return Config::getInst().isApplicationExported();
 }
 
 const string& FabiEngine3D::engine_getGameTitle()

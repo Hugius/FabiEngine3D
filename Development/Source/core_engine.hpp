@@ -71,7 +71,7 @@ private:
 	void _pause();
 	void _resume();
 	void _stop();
-	void _setupApplication();
+	void _prepareApplication();
 	void _updateApplication();
 	void _renderApplication();
 

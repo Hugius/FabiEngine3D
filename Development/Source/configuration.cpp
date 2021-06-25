@@ -28,8 +28,8 @@ Config::Config()
 	_processOption(file, _isWindowFullscreen, "window_fullscreen");
 	_processOption(file, _isWindowBorderless, "window_borderless");
 	_processOption(file, _windowTitle, "window_title");
-	_processOption(file, _gameTitle, "game_title");
-	_processOption(file, _isGameExported, "game_exported");
+	_processOption(file, _gameTitle, "application_title");
+	_processOption(file, _isApplicationExported, "application_exported");
 	
 	// Check if multiplier is between 0.0 and 1.0
 	if (windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
@@ -44,7 +44,7 @@ Config::Config()
 	_monitorSize.y = DM.h;
 
 	// Set window & viewport dimensions
-	if (_isGameExported) // Game preview
+	if (_isApplicationExported) // Game preview
 	{
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
@@ -205,7 +205,7 @@ const bool Config::isWindowBorderless() const
 	return _isWindowBorderless;
 }
 
-const bool Config::isGameExported() const
+const bool Config::isApplicationExported() const
 {
-	return _isGameExported;
+	return _isApplicationExported;
 }

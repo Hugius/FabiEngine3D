@@ -48,7 +48,7 @@ void CoreEngine::_start()
 	}
 
 	// Setup
-	_setupApplication();
+	_prepareApplication();
 	_isRunning = true;
 
 	// Variables
@@ -58,32 +58,49 @@ void CoreEngine::_start()
 	// Main game-loop
 	while (_isRunning)
 	{
-		// Start measuring time
-		auto current = std::chrono::high_resolution_clock::now();
-
-		// Check if the delay is getting too much
-		if (lag > (Config::MS_PER_UPDATE * 10.0f))
+		if (_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
-			lag = Config::MS_PER_UPDATE;
-		}
+			// Retrieve user input
+			_inputHandler.update();
 
-		// Update 144 times per second
-		while (lag >= Config::MS_PER_UPDATE)
-		{
-			_inputHandler.f_checkInput();
+			// Update application
 			_updateApplication();
-			lag -= Config::MS_PER_UPDATE;
-			_timer.increasePassedFrameCount();
+
+			// Render application if not exported
+			if (!Config::getInst().isApplicationExported())
+			{
+				_renderApplication();
+			}
 		}
+		else // Process application at fixed speed
+		{
+			// Start measuring time
+			auto current = std::chrono::high_resolution_clock::now();
 
-		// Render at full speed
-		_renderApplication();
+			// Check if the delay is getting too much
+			if (lag > (Config::MS_PER_UPDATE * 10.0f))
+			{
+				lag = Config::MS_PER_UPDATE;
+			}
 
-		// Calculate timing values
-		auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
-		_deltaTimeMS = timeDifference.count() / 1000000.0f;
-		previous = current;
-		lag += _deltaTimeMS;
+			// Update (roughly) 144 times per second
+			while (lag >= Config::MS_PER_UPDATE)
+			{
+				_inputHandler.update();
+				_updateApplication();
+				lag -= Config::MS_PER_UPDATE;
+				_timer.increasePassedFrameCount();
+			}
+
+			// Render application at full speed
+			_renderApplication();
+
+			// Calculate timing values
+			auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
+			_deltaTimeMS = timeDifference.count() / 1000000.0f;
+			previous = current;
+			lag += _deltaTimeMS;
+		}
 	}
 
 	// Finish engine controller
@@ -123,7 +140,7 @@ void CoreEngine::_stop()
 	_isRunning = false;
 }
 
-void CoreEngine::_setupApplication()
+void CoreEngine::_prepareApplication()
 {
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
@@ -139,7 +156,7 @@ void CoreEngine::_setupApplication()
 
 	// Render logo
 	Vec3 keyingColor = Vec3(0.2f);
-	if (Config::getInst().isGameExported())
+	if (Config::getInst().isApplicationExported())
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
@@ -157,23 +174,23 @@ void CoreEngine::_setupApplication()
 	_fe3d.FE3D_CONTROLLER_INIT();
 
 	// Hide logo
-	if (!Config::getInst().isGameExported())
+	if (!Config::getInst().isApplicationExported())
 	{
 		_window.disableColorKeying(keyingColor);
 	}
 
-	// If the application is a game server, no window is needed
-	if (!Config::getInst().isGameExported() || (Config::getInst().isGameExported() && !_fe3d.networkServer_isRunning()))
+	// Create window if necessary
+	if (!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
 	{
 		// Set window properties
 		_window.setSize(Config::getInst().getWindowSize());
 		Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
 		!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
-		Config::getInst().isGameExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
+		Config::getInst().isApplicationExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
 		_window.showWindow();
 
 		// Only if in engine preview
-		if (Config::getInst().isGameExported())
+		if (Config::getInst().isApplicationExported())
 		{
 			// No fade in
 			_window.setOpacity(1.0f);

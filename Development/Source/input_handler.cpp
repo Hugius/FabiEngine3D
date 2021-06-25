@@ -1,6 +1,8 @@
 #include "input_handler.hpp"
 
-void InputHandler::f_checkInput()
+#include <SDL\\SDL.h>
+
+void InputHandler::update()
 {
 	_keysPressed.clear();
 	_mousePressed.clear();

@@ -24,15 +24,15 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Interface functions
-	const string& getGameTitle()       const;
-	const string& getWindowTitle()     const;
-	const Ivec2   getMonitorSize()     const;
-	const Ivec2   getWindowSize()      const;
-	const Ivec2   getVpSize()		   const;
-	const Ivec2   getVpPos()		   const;
-	const bool    isWindowFullscreen() const;
-	const bool    isWindowBorderless() const;
-	const bool    isGameExported()	   const;
+	const string& getGameTitle()		  const;
+	const string& getWindowTitle()		  const;
+	const Ivec2   getMonitorSize()		  const;
+	const Ivec2   getWindowSize()		  const;
+	const Ivec2   getVpSize()			  const;
+	const Ivec2   getVpPos()			  const;
+	const bool    isWindowFullscreen()	  const;
+	const bool    isWindowBorderless()	  const;
+	const bool    isApplicationExported() const;
 
 	// Constants
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
@@ -54,5 +54,5 @@ private:
 	Ivec2  _viewportPosition = Ivec2(0);
 	bool   _isWindowFullscreen = false;
 	bool   _isWindowBorderless = false;
-	bool   _isGameExported = false;
+	bool   _isApplicationExported = false;
 };

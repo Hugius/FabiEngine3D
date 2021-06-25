@@ -7,27 +7,28 @@ void AnimationEditor::_updateAnimationExecution()
 	if (!_fe3d.engine_isPaused())
 	{
 		// Remove all animations that ended
-		for (const auto& idPair : _animationsToStop)
+		for (const auto& tupleData : _animationsToStop)
 		{
 			// Check if animation is still playing
-			if (isAnimationStarted(idPair.first, idPair.second))
+			if (isAnimationStarted(std::get<0>(tupleData), std::get<1>(tupleData)))
 			{
 				// Stop animation
-				stopAnimation(idPair.first, idPair.second);
+				stopAnimation(std::get<0>(tupleData), std::get<1>(tupleData));
 			}
 		}
 		_animationsToStop.clear();
 
 		// Start all animations that play endlessly
-		for (const auto& idPair : _animationsToStart)
+		for (const auto& tupleData : _animationsToStartAgain)
 		{
 			// Check if animation is not already playing
-			if (!isAnimationStarted(idPair.first, idPair.second))
+			if (!isAnimationStarted(std::get<0>(tupleData), std::get<1>(tupleData)))
 			{
-				startAnimation(idPair.first, idPair.second, -1);
+				// Start animation
+				startAnimation(std::get<0>(tupleData), std::get<1>(tupleData), -1, std::get<2>(tupleData));
 			}
 		}
-		_animationsToStart.clear();
+		_animationsToStartAgain.clear();
 
 		// Update all playing animations
 		for (auto& [idPair, animation] : _startedAnimations)
@@ -394,36 +395,37 @@ void AnimationEditor::_updateAnimationExecution()
 				// Check if animation faded to its end
 				if (animation.frameIndex == animation.maxFrameIndex)
 				{
-					_animationsToStop.insert(idPair);
+					_animationsToStop.insert(make_tuple(idPair.first, idPair.second));
 				}
 				else
 				{
-					// Next frame or reset animation
+					// Check if animation is finished
 					if (animation.frameIndex >= animation.frames.size() - 1)
 					{
-						// Playing endlessly
+						// Check if animation is endless
 						if (animation.timesToPlay == -1)
-						{
-							_animationsToStop.insert(idPair);
-							_animationsToStart.insert(idPair);
-							continue;
-						}
-
-						// Played animation once
-						animation.timesToPlay--;
-
-						// Check if animation has ended
-						if (animation.timesToPlay == 0)
-						{
-							_animationsToStop.insert(idPair);
-						}
-						else
 						{
 							animation.frameIndex = 0;
 						}
+						else
+						{
+							// Animation finished current play
+							animation.timesToPlay--;
+
+							// Check if animation must stop
+							if (animation.timesToPlay == 0)
+							{
+								_animationsToStop.insert(make_tuple(idPair.first, idPair.second));
+							}
+							else
+							{
+								animation.frameIndex = 0;
+							}
+						}
 					}
-					else
+					else // Next frame
 					{
+						animation.isPaused = (animation.frameIndex == 0) ? false : animation.mustPauseEveryFrame;
 						animation.frameIndex++;
 					}
 				}

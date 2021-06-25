@@ -4,7 +4,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 {
 	if (functionName == "fe3d:model_start_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
+				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger(), arguments[3].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

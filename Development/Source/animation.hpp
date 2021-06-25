@@ -54,4 +54,5 @@ public:
 	unsigned int frameIndex = 0;
 
 	bool isPaused = false;
+	bool mustPauseEveryFrame = false;
 };

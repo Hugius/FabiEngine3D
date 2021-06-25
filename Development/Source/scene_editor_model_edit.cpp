@@ -169,7 +169,7 @@ void SceneEditor::_updateModelEditing()
 					}
 
 					// Start chosen animation
-					_animationEditor.startAnimation(selectedButtonID, _activeModelID, -1);
+					_animationEditor.startAnimation(selectedButtonID, _activeModelID, -1, false);
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("animations");
@@ -278,7 +278,7 @@ void SceneEditor::_updateModelEditing()
 						}
 
 						// Start animation again
-						_animationEditor.startAnimation(animationNames.front(), _activeModelID, -1);
+						_animationEditor.startAnimation(animationNames.front(), _activeModelID, -1, false);
 					}
 					else // No animation playing
 					{

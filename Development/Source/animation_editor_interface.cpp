@@ -1,6 +1,6 @@
 #include "animation_editor.hpp"
 
-void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
+void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops, bool mustPauseEveryFrame)
 {
 	// Temporary values
 	string errorMessage = "Trying to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -21,6 +21,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					auto animation = _getAnimation(animationID);
 					animation->animatedModelID = modelID;
 					animation->timesToPlay = (loops == -1) ? -1 : (loops + 1);
+					animation->mustPauseEveryFrame = mustPauseEveryFrame;
 					animation->initialScaling = _fe3d.modelEntity_getSize(modelID);
 
 					// Check if model has all the parts

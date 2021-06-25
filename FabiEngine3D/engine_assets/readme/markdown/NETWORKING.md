@@ -9,7 +9,7 @@
 - The server is hosted on the **IPV4 address** of your computer (write `ipconfig` in your Windows command prompt to look it up).
 - You can **portforward** the server in your router settings on **port 61205** for both **TCP & UDP** protocols.
 - There can be **only 1** FabiEngine3D server running on the same machine.
-- A server can **only** access FE3D scripting functions: `server_*`, `directory_*`, `file_*`, `timer_*`, `game_stop`, `print`, `time_interval`.
+- A server can **only** access: `server_*`, `directory_*`, `file_*`, `timer_*`, `application_stop`, `print`, `time_interval`.
 - The server can **send/receive** messages to/from clients.
 - You can set a **maximum** amount of **clients** that can connect to the server.
 - Be careful with **performance heavy operations** in the server scripts, otherwise it might not be able to handle client messages in time.

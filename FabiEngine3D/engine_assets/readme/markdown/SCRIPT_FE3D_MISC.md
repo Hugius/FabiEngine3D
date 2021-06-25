@@ -1,11 +1,11 @@
 # Miscellaneous
 ### Setters
-- `fe3d:game_pause`() ---> `NONE`  
-  Pauses all internal game/engine updates if playing (except for the scripting of course).
-- `fe3d:game_resume`() ---> `NONE`  
-  Resumes all internal game/engine updates if paused.
-- `fe3d:game_stop`() ---> `NONE`  
-  Stops the game.
+- `fe3d:application_pause`() ---> `NONE`  
+  Pauses all internal engine updates if playing (except for script execution of course).
+- `fe3d:application_resume`() ---> `NONE`  
+  Resumes all internal engine updates if paused.
+- `fe3d:application_stop`() ---> `NONE`  
+  Terminates the application.
 - `fe3d:print`(`VEC3/STR/DEC/INT/BOOL` message) ---> `NONE`  
   Prints a value to the console (both internal & external). Accepts various message types.
 - `fe3d:scene_load`(`STR` ID) ---> `NONE`  

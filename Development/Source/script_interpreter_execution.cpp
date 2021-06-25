@@ -16,11 +16,11 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	}
 
 	// Temporary local values for this script run
-	vector<unsigned int> loopLineIndices;
 	vector<unsigned int> loopScopeDepths;
+	vector<unsigned int> loopLineIndices;
+	vector<unsigned int> loopIterationCounts;
 	vector<ScriptConditionStatement> conditionStatements;
 	unsigned int scopeDepth = 0;
-	unsigned int totalLoops = 0;
 
 	// Prepare current script file's execution
 	_executionDepth++;
@@ -95,9 +95,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			if (currentLineScopeDepth <= loopScopeDepths.back()) // End of current loop scope
 			{
-				if (totalLoops >= MAX_LOOPS_PER_FRAME) // Infinite loop
+				if (loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
 				{
-					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
+					_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else // Normal loop
@@ -105,15 +105,15 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					// Go back to current loop's beginning
 					lineIndex = loopLineIndices.back();
 					scopeDepth = loopScopeDepths.back() + 1;
-					totalLoops++;
+					loopIterationCounts.back()++;
 					continue;
 				}
 			}
 			else if (lineIndex == scriptFile->getLineCount() - 1) // End of script
 			{
-				if (totalLoops >= MAX_LOOPS_PER_FRAME) // Infinite loop
+				if (loopIterationCounts.back() >= MAX_ITERATIONS_PER_LOOP) // Infinite loop
 				{
-					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
+					_throwScriptError("maximum amount of loop iterations reached, perhaps infinite looping?");
 					return;
 				}
 				else // Normal loop
@@ -229,6 +229,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
 				loopLineIndices.push_back(lineIndex); // Save loop's line index
+				loopIterationCounts.push_back(0); // Save loop's iteration count
 				scopeDepth++; // New depth layer
 				_scopeHasChanged = true;
 			}
@@ -400,8 +401,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else if (scriptLineText == BREAK_KEYWORD)
 		{
 			scopeDepth = loopScopeDepths.back();
-			loopLineIndices.pop_back();
 			loopScopeDepths.pop_back();
+			loopLineIndices.pop_back();
+			loopIterationCounts.pop_back();
 			_passedScopeChanger = true;
 		}
 		else if (scriptLineText == PASS_KEYWORD)
@@ -428,7 +430,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			lineIndex = loopLineIndices.back();
 			scopeDepth = loopScopeDepths.back() + 1;
-			totalLoops++;
+			loopIterationCounts.back()++;
 		}
 	}
 

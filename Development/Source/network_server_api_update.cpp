@@ -88,7 +88,7 @@ BEGIN:
 							auto username = clientMessageBuild.substr(8);
 
 							// Check if server is full or username is already connected
-							if ((_clientIPs.size() > NetworkUtils::MAX_CLIENT_COUNT) || (_clientIPs.size() > _customMaxClientCount))
+							if (_clientIPs.size() > _maxClientCount)
 							{
 								// Reject client
 								if (!_sendTcpMessage(clientSocketID, "SERVER_FULL", true))

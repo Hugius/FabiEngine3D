@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::networkServer_start(unsigned int customMaxClientCount)
+void FabiEngine3D::networkServer_start(unsigned int maxClientCount)
 {
-	_core->_networkServerAPI.start(customMaxClientCount);
+	_core->_networkServerAPI.start(maxClientCount);
 }
 
 void FabiEngine3D::networkServer_stop()

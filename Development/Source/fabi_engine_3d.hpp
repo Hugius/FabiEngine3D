@@ -778,7 +778,7 @@ public:
 	}
 
 	// Server interface - setters
-	void networkServer_start(unsigned int customMaxClientCount);
+	void networkServer_start(unsigned int maxClientCount);
 	void networkServer_sendMessageTCP(const string& username, const string& content);
 	void networkServer_sendMessageUDP(const string& username, const string& content);
 	void networkServer_broadcastMessageTCP(const string& content, const string& exceptionUsername);

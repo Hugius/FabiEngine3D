@@ -9,7 +9,7 @@
 NetworkServerAPI::NetworkServerAPI() :
 	_connectionSocketID(INVALID_SOCKET),
 	_udpMessageSocketID(INVALID_SOCKET),
-	_customMaxClientCount(NetworkUtils::MAX_CLIENT_COUNT),
+	_maxClientCount(0),
 	_newClientIP(""),
 	_newClientPort(""),
 	_newClientUsername(""),
@@ -26,7 +26,7 @@ NetworkServerAPI::~NetworkServerAPI()
 	}
 }
 
-void NetworkServerAPI::start(unsigned int customMaxClientCount)
+void NetworkServerAPI::start(unsigned int maxClientCount)
 {
 	// Must not be running
 	if (_isRunning)
@@ -36,7 +36,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	}
 
 	// Validate custom client count
-	if ((customMaxClientCount > NetworkUtils::MAX_CLIENT_COUNT) || (customMaxClientCount <= 0))
+	if (maxClientCount <= 0)
 	{
 		Logger::throwWarning("Networking server tried to start: invalid maximum client count!");
 		return;
@@ -141,7 +141,7 @@ void NetworkServerAPI::start(unsigned int customMaxClientCount)
 	freeaddrinfo(udpAddressInfo);
 
 	// Server is now operable
-	_customMaxClientCount = customMaxClientCount;
+	_maxClientCount = maxClientCount;
 	_isRunning = true;
 
 	// Logging
@@ -176,7 +176,7 @@ BEGIN:
 	_tcpMessageThreads.clear();
 	_connectionSocketID = INVALID_SOCKET;
 	_udpMessageSocketID = INVALID_SOCKET;
-	_customMaxClientCount = NetworkUtils::MAX_CLIENT_COUNT;
+	_maxClientCount = 0;
 	_newClientUsername = "";
 	_isRunning = false;
 

@@ -181,8 +181,8 @@ private:
 
 	// Integers
 	static inline const unsigned int SPACES_PER_INDENT = 4;
-	static inline const unsigned int MAX_LOOPS_PER_FRAME = 1000;
-	static inline const unsigned int MAX_EXECUTION_DEPTH = 100;
+	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
+	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 

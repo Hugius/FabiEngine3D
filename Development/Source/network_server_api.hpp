@@ -21,7 +21,7 @@ public:
 	NetworkServerAPI();
 	~NetworkServerAPI();
 
-	void start(unsigned int customMaxClientCount);
+	void start(unsigned int maxClientCount);
 	void update();
 	void sendTcpMessage(const string& username, const string& content);
 	void sendUdpMessage(const string& username, const string& content);
@@ -72,7 +72,7 @@ private:
 	vector<string> _oldClientIPs;
 	vector<string> _oldClientPorts;
 	vector<string> _oldClientUsernames;
-	unsigned int _customMaxClientCount;
+	unsigned int _maxClientCount;
 	string _newClientIP;
 	string _newClientPort;
 	string _newClientUsername;

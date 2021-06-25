@@ -2,8 +2,6 @@
 ### Setters
 - `fe3d:server_start`(`INT` clients) ---> `NONE`  
   Starts networking server with maximum amount of **clients**.
-- `fe3d:server_stop`() ---> `NONE`  
-  Stops networking server.
 - `fe3d:server_send_tcp_message`(`STR` username, `STR` message) ---> `NONE`  
   Sends TCP **message** to networking client with **username**.
 - `fe3d:server_send_udp_message`(`STR` username, `STR` message) ---> `NONE`  

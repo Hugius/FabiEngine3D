@@ -32,18 +32,6 @@
 - **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
 - **Index** values cannot be lower than 0 (because a negative index does not exist).
 - **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
-### Miscellaneous
-- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
-- **Text** entities are rendered on top of **image** entities, because of the **rendering order**.
-- **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
-### Tips & tricks
-- You can create your own custom **subfolders** within the main folder of `user\assets`.
-- Internal engine updates happen **after** the scripting updates.
-- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
-- You can **clear** the console output by pressing **C** when hovering the **console window**.
-### Known issues
-- There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
-- If FabiEngine3D crashes with the error `"WASAPI can't find requested audio endpoint: Element not found."`, then you do not have an active audio device enabled or you have sound driver problems.
 ### Performance metrics
 ![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **game's performance**.
@@ -55,3 +43,16 @@
 - **Lower the graphics quality** in the project settings to improve your **graphics performance**.
 - The water refraction effect has a **huge** impact on performance, because all models & billboards have to be rendered **twice**.
 - The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
+### Miscellaneous
+- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
+- **Text** entities are rendered on top of **image** entities, because of the **rendering order**.
+- **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
+- The engine **updates** its logic at a **fixed speed** (144 ticks/second) even if the rendering FPS is higher/lower.
+### Tips & tricks
+- You can create your own custom **subfolders** within the main folder of `user\assets`.
+- Internal engine updates happen **after** the scripting updates.
+- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
+- You can **clear** the console output by pressing **C** when hovering the **console window**.
+### Known issues
+- There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
+- If FabiEngine3D crashes with the error `"WASAPI can't find requested audio endpoint: Element not found."`, then you do not have an active audio device enabled or you have sound driver problems.

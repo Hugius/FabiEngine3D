@@ -203,6 +203,7 @@ void ScriptInterpreter::load()
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_disableVsync();
+	_fe3d.misc_showCursor();
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);
@@ -364,11 +365,17 @@ void ScriptInterpreter::unload()
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableTerrainRaycasting();
-	_fe3d.misc_stopMillisecondTimer();
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);
 	_fe3d.misc_enableVsync();
+	_fe3d.misc_hideCursor();
+
+	// Reset timer
+	if (_fe3d.misc_isMillisecondTimerStarted())
+	{
+		_fe3d.misc_stopMillisecondTimer();
+	}
 
 	// Reset all variables
 	_debuggingTimes.clear();

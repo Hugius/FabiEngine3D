@@ -13,7 +13,6 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& 
 void ScriptExecutor::load()
 {
 	// Start script execution & run initialization scripts
-	_fe3d.misc_showCursor();
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
 	_isStarted = true;
@@ -59,11 +58,14 @@ void ScriptExecutor::pause()
 	{
 		// Save cursor state
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
+		_fe3d.misc_hideCursor();
 
 		// Save timer state
 		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
-		_fe3d.misc_hideCursor();
-		_fe3d.misc_stopMillisecondTimer();
+		if (_wasMillisecondTimerStarted)
+		{
+			_fe3d.misc_stopMillisecondTimer();
+		}
 
 		// Save sound states
 		for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
@@ -146,7 +148,6 @@ void ScriptExecutor::unload()
 		}
 
 		// Miscellaneous
-		_fe3d.misc_hideCursor();
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;

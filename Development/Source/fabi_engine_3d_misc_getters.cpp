@@ -255,7 +255,7 @@ const bool FabiEngine3D::misc_isRaycastPositionOnTerrainValid()
 
 const bool FabiEngine3D::misc_isMillisecondTimerStarted()
 {
-	return _core->_timer.isTiming();
+	return _core->_timer.isStarted();
 }
 
 const Ivec2 FabiEngine3D::misc_getWindowSize()

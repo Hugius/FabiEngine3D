@@ -16,6 +16,7 @@ public:
 	void stopDeltaPart();
 	void sleep(int microseconds);
 	void increasePassedFrameCount();
+	void clearDeltaParts();
 
 	float stop();
 	float getDeltaPart(const string& ID);
@@ -23,7 +24,8 @@ public:
 
 	int getPassedFrameCount();
 
-	bool isTiming();
+	bool isStarted();
+	bool isDeltaPartStarted(const string& ID);
 
 private:
 	LARGE_INTEGER _frequency;
@@ -39,5 +41,5 @@ private:
 
 	unsigned int _passedFrameCount = 0;
 
-	bool _isTiming = false;
+	bool _isStarted = false;
 };

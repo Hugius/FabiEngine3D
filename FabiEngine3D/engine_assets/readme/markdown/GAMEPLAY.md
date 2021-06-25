@@ -1,9 +1,9 @@
-# Game Execution
+# Game execution
 ![execution](../images/execution.png)
 - You can **play/pause/resume/stop/debug** the game preview.
-- All **changes** made through scripting will be **reset** when the preview is stopped.
+- All **changes** made through scripting will be **reset** when the preview is stopped (unless persisted in a file).
 - You can pause the gameplay with **ESCAPE**.
-- If the game is paused you can start a **debugging** frame which prints a **performance** report about your **code**.
+- If the game is paused you can start a **debugging** frame which prints a **performance** report about your **script execution**.
 
 # Game exporting
 ### Steps
@@ -23,5 +23,5 @@
 - `window_fullscreen`: boolean value; toggle window fullscreen.
 - `window_borderless`: boolean value; toggle window border visibility.
 - `window_title`: string value; title of the game window.
-- `game_title`: string value; title of your game/project.
-- `game_exported`: boolean value; set to true if game is exported.
+- `application_title`: string value; title of your application.
+- `application_exported`: boolean value; set to true if you want to export your application.

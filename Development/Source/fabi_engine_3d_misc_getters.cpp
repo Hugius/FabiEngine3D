@@ -204,7 +204,7 @@ const Ivec2 FabiEngine3D::misc_getCursorPosition()
 
 const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 {
-	if (engine_isGameExported())
+	if (engine_isApplicationExported())
 	{
 		return misc_getCursorPosition();
 	}

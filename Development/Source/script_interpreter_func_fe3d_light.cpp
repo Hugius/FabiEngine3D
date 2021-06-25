@@ -318,7 +318,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 	// Cannot execute light functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access light functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:light` functionality as a networking server!");
 	}
 
 	return true;

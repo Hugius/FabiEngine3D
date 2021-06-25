@@ -45,8 +45,8 @@ public:
 	void engine_resume();
 	void engine_stop();
 	bool engine_isPaused();
-	bool engine_isGameExported();
-	const string& engine_getGameTitle();
+	bool engine_isApplicationExported();
+	const string& engine_getApplicationTitle();
 
 	// Input interface - setters
 	void input_setLocked(bool locked);

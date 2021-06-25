@@ -13,7 +13,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Check if sky file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -77,7 +77,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	_loadedSkyIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Check if sky file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -164,7 +164,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveSkyEntitiesToFile()");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Load file
 	std::ofstream file(filePath);

@@ -66,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 	// Cannot execute terrain functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access terrain functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:terrain` functionality as a networking server!");
 	}
 
 	return true;

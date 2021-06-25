@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
@@ -172,7 +172,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
@@ -196,7 +196,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 	// Cannot execute scene functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access scene functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:scene` functionality as a networking server!");
 	}
 
 	return true;

@@ -6,7 +6,7 @@ void Timer::start()
 	// Error checking
 	if (_isStarted)
 	{
-		Logger::throwWarning("Timer tried to start, but was already started!");
+		Logger::throwWarning("Trying to start timer, but was already started!");
 		return;
 	}
 
@@ -21,7 +21,7 @@ float Timer::stop()
 	// Error checking
 	if (!_isStarted)
 	{
-		Logger::throwWarning("Timer tried to stop, but was not started!");
+		Logger::throwWarning("Trying to stop timer, but was not started!");
 		return 0.0f;
 	}
 
@@ -36,7 +36,7 @@ void Timer::startDeltaPart(const string& ID)
 	// Error checking
 	if (!_currentID.empty())
 	{
-		Logger::throwError("Timer tried to start delta part, but was already started!");
+		Logger::throwError("Trying to start delta part timer, but was already started!");
 		return;
 	}
 
@@ -51,7 +51,7 @@ void Timer::stopDeltaPart()
 	// Error checking
 	if (_currentID.empty())
 	{
-		Logger::throwError("Timer tried to stop delta part, but was not started!");
+		Logger::throwError("Trying to stop delta part timer, but was not started!");
 		return;
 	}
 

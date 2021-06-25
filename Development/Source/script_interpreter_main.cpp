@@ -140,7 +140,7 @@ void ScriptInterpreter::load()
 	}
 
 	// Preload all big assets of this project, only in game preview
-	if (_fe3d.engine_isGameExported())
+	if (_fe3d.engine_isApplicationExported())
 	{
 		vector<string> texturePaths;
 
@@ -392,7 +392,7 @@ void ScriptInterpreter::unload()
 	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;
-	_gameMustStop = false;
+	_applicationMustStop = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
 	_isDebugging = false;

@@ -14,7 +14,7 @@ bool ScriptInterpreter::hasThrownError()
 
 bool ScriptInterpreter::gameMustStop()
 {
-	return _gameMustStop;
+	return _applicationMustStop;
 }
 
 unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
@@ -88,7 +88,7 @@ bool ScriptInterpreter::_validateCurrentProject()
 	}
 
 	// Check if saves folder still exists
-	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
 		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" folder missing!");
@@ -143,7 +143,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 
 Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 {
-	if (!_fe3d.engine_isGameExported())
+	if (!_fe3d.engine_isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
 			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
@@ -159,7 +159,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 {
-	if (!_fe3d.engine_isGameExported())
+	if (!_fe3d.engine_isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
 			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
@@ -179,7 +179,7 @@ Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 {
-	if (!_fe3d.engine_isGameExported())
+	if (!_fe3d.engine_isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
 			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
@@ -191,7 +191,7 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 
 Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
 {
-	if (!_fe3d.engine_isGameExported())
+	if (!_fe3d.engine_isApplicationExported())
 	{
 		auto sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
 			Vec2(_fe3d.misc_getViewportSize());

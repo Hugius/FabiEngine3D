@@ -97,7 +97,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	// Cannot execute input functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access input functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:input` functionality as a networking server!");
 	}
 
 	return true;

@@ -60,8 +60,11 @@ void CoreEngine::_start()
 	{
 		if (_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
-			// Retrieve user input
-			_inputHandler.update();
+			// Retrieve user input if not exported
+			if (!Config::getInst().isApplicationExported())
+			{
+				_inputHandler.update();
+			}
 
 			// Update application
 			_updateApplication();

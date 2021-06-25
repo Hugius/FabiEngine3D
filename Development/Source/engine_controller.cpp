@@ -15,17 +15,17 @@ EngineController::EngineController() :
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
-	if (engine_isGameExported()) // Game preview
+	if (engine_isApplicationExported()) // Game preview
 	{
 		// Set name of game (project) to run
-		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getModelEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getAnimationEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getBillboardEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getAudioEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getScriptEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getSceneEditor().setCurrentProjectID(engine_getGameTitle());
-		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getModelEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getAnimationEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getBillboardEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getAudioEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getScriptEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getSceneEditor().setCurrentProjectID(engine_getApplicationTitle());
+		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getApplicationTitle());
 
 		// Import settings
 		_leftViewportController.getSettingsEditor().loadSettings();
@@ -54,7 +54,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if (engine_isGameExported()) // Game preview
+	if (engine_isApplicationExported()) // Game preview
 	{
 		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning()) // Still running
 		{
@@ -84,7 +84,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
 	// Game preview
-	if (engine_isGameExported())
+	if (engine_isApplicationExported())
 	{
 		// Check if script was running
 		if (_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())

@@ -188,7 +188,7 @@ private:
 
 	// Booleans
 	bool _hasThrownError = false;
-	bool _gameMustStop = false;
+	bool _applicationMustStop = false;
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
 	bool _isDebugging = false;

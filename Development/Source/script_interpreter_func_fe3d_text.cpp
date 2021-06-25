@@ -134,7 +134,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 
 			// In-engine viewport boundaries
-			if (!_fe3d.engine_isGameExported())
+			if (!_fe3d.engine_isApplicationExported())
 			{
 				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
 				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
@@ -466,7 +466,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 	// Cannot execute text functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access text functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:text` functionality as a networking server!");
 	}
 
 	return true;

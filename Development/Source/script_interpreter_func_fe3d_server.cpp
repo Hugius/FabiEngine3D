@@ -26,16 +26,6 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 
 			// Start server
 			_fe3d.networkServer_start(arguments[0].getInteger());
-			_fe3d.misc_enableVsync();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:server_stop")
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.networkServer_stop();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -260,7 +250,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 	// Cannot execute server functionality when client is running
 	if (_fe3d.networkClient_isRunning())
 	{
-		_throwScriptError("cannot access networking server functionality as a networking client!");
+		_throwScriptError("cannot access `fe3d:server` functionality as a networking client!");
 	}
 
 	return true;

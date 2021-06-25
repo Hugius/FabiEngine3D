@@ -126,7 +126,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 				true);
 
 			// In-engine viewport boundaries
-			if (!_fe3d.engine_isGameExported())
+			if (!_fe3d.engine_isApplicationExported())
 			{
 				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
 				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
@@ -606,7 +606,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 	// Cannot execute image functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access image functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:image` functionality as a networking server!");
 	}
 
 	return true;

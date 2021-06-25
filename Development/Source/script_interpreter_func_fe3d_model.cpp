@@ -579,7 +579,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 	// Cannot execute model functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access model functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:model` functionality as a networking server!");
 	}
 
 	return true;

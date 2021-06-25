@@ -28,13 +28,13 @@ Config::Config()
 	_processOption(file, _isWindowFullscreen, "window_fullscreen");
 	_processOption(file, _isWindowBorderless, "window_borderless");
 	_processOption(file, _windowTitle, "window_title");
-	_processOption(file, _gameTitle, "application_title");
+	_processOption(file, _applicationTitle, "application_title");
 	_processOption(file, _isApplicationExported, "application_exported");
 	
 	// Check if multiplier is between 0.0 and 1.0
 	if (windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
 	{
-		Logger::throwError("Option \"window_size_multiplier\" in configuration file must be between 0.0 and 1.0!");
+		Logger::throwError("Option `window_size_multiplier` in configuration file must be between 0.0 and 1.0!");
 	}
 
 	// Save monitor dimensions
@@ -44,7 +44,7 @@ Config::Config()
 	_monitorSize.y = DM.h;
 
 	// Set window & viewport dimensions
-	if (_isApplicationExported) // Game preview
+	if (_isApplicationExported) // Application preview
 	{
 		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
 		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
@@ -83,7 +83,7 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
 	}
 }
 
@@ -104,7 +104,7 @@ void Config::_processOption(std::ifstream& file, float& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
 	}
 }
 
@@ -125,7 +125,7 @@ void Config::_processOption(std::ifstream& file, int& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
 	}
 }
 
@@ -156,18 +156,18 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 		}
 		else
 		{
-			Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid boolean value!");
+			Logger::throwError("Configuration file @ option `" + criteria + "`: invalid boolean value!");
 		}
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
 	}
 }
 
-const string& Config::getGameTitle() const
+const string& Config::getApplicationTitle() const
 {
-	return _gameTitle;
+	return _applicationTitle;
 }
 
 const string& Config::getWindowTitle() const

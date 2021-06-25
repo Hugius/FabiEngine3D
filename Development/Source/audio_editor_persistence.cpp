@@ -15,7 +15,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	_loadedAudioIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Check if audio file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -67,7 +67,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	_loadedAudioIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Check if audio file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -124,7 +124,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 
 	// Create or overwrite audio file
 	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
+	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Write audio data into file
 	for (const auto& audioID : _loadedAudioIDs)

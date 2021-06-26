@@ -7,25 +7,25 @@ void AnimationEditor::_updateAnimationExecution()
 	if (!_fe3d.engine_isPaused())
 	{
 		// Remove all animations that ended
-		for (const auto& tupleData : _animationsToStop)
+		for (const auto& idPair : _animationsToStop)
 		{
 			// Check if animation is still playing
-			if (isAnimationStarted(std::get<0>(tupleData), std::get<1>(tupleData)))
+			if (isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Stop animation
-				stopAnimation(std::get<0>(tupleData), std::get<1>(tupleData));
+				stopAnimation(idPair.first, idPair.second);
 			}
 		}
 		_animationsToStop.clear();
 
 		// Start all animations that play endlessly
-		for (const auto& tupleData : _animationsToStartAgain)
+		for (const auto& idPair : _animationsToStartAgain)
 		{
 			// Check if animation is not already playing
-			if (!isAnimationStarted(std::get<0>(tupleData), std::get<1>(tupleData)))
+			if (!isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Start animation
-				startAnimation(std::get<0>(tupleData), std::get<1>(tupleData), -1, std::get<2>(tupleData));
+				startAnimation(idPair.first, idPair.second, -1);
 			}
 		}
 		_animationsToStartAgain.clear();
@@ -363,28 +363,28 @@ void AnimationEditor::_updateAnimationExecution()
 			}
 
 			// Check if animation needs to be faded
-			if (animation.fadeFramestep != -1 && animation.maxFrameIndex == -1)
+			if (animation.fadeFramestep != -1 && animation.fadeFrameIndex == -1)
 			{
 				if (animation.fadeFramestep == 1)
 				{
 					if ((animation.frameIndex % 2) != 0)
 					{
-						animation.maxFrameIndex = animation.frameIndex + 1;
+						animation.fadeFrameIndex = animation.frameIndex + 1;
 					}
 					else
 					{
-						animation.maxFrameIndex = animation.frameIndex;
+						animation.fadeFrameIndex = animation.frameIndex;
 					}
 				}
 				else
 				{
 					if ((animation.frameIndex % animation.fadeFramestep) == 0)
 					{
-						animation.maxFrameIndex = animation.frameIndex + 1;
+						animation.fadeFrameIndex = animation.frameIndex + 1;
 					}
 					else
 					{
-						animation.maxFrameIndex = animation.frameIndex;
+						animation.fadeFrameIndex = animation.frameIndex;
 					}
 				}
 			}
@@ -392,15 +392,21 @@ void AnimationEditor::_updateAnimationExecution()
 			// Check if current frame is finished
 			if (finishedPartsAmount == animation.partIDs.size())
 			{
-				// Check if animation faded to its end
-				if (animation.frameIndex == animation.maxFrameIndex)
+				// Check if animation fading is enabled
+				if (animation.fadeFrameIndex != -1)
 				{
-					_animationsToStop.insert(make_tuple(idPair.first, idPair.second));
+					// Check if animation faded to its end
+					if (animation.frameIndex == animation.fadeFrameIndex)
+					{
+						_animationsToStop.insert(idPair);
+					}
 				}
 				else
 				{
-					// Check if animation is finished
-					if (animation.frameIndex >= animation.frames.size() - 1)
+					// Temporary values
+					unsigned int lastFrameIndex = (static_cast<unsigned int>(animation.frames.size()) - 1);
+
+					if (!animation.isDirectionReversed && (animation.frameIndex == lastFrameIndex)) // Normal animation finish
 					{
 						// Check if animation is endless
 						if (animation.timesToPlay == -1)
@@ -415,7 +421,7 @@ void AnimationEditor::_updateAnimationExecution()
 							// Check if animation must stop
 							if (animation.timesToPlay == 0)
 							{
-								_animationsToStop.insert(make_tuple(idPair.first, idPair.second));
+								_animationsToStop.insert(idPair);
 							}
 							else
 							{
@@ -423,10 +429,51 @@ void AnimationEditor::_updateAnimationExecution()
 							}
 						}
 					}
-					else // Next frame
+					else if (animation.isDirectionReversed && (animation.frameIndex == 0)) // Reverse animation finish
 					{
-						animation.isPaused = (animation.frameIndex == 0) ? false : animation.mustPauseEveryFrame;
-						animation.frameIndex++;
+						// Check if animation is endless
+						if (animation.timesToPlay == -1)
+						{
+							animation.frameIndex = lastFrameIndex;
+						}
+						else
+						{
+							// Animation finished current play
+							animation.timesToPlay--;
+
+							// Check if animation must stop
+							if (animation.timesToPlay == 0)
+							{
+								_animationsToStop.insert(idPair);
+							}
+							else
+							{
+								animation.frameIndex = lastFrameIndex;
+							}
+						}
+					}
+					else // Animation not finished yet
+					{
+						// Auto-pause if allowed
+						if (animation.isAutoPaused)
+						{
+							// Skip default frame
+							if ((!animation.isDirectionReversed && (animation.frameIndex != 0)) ||
+								(animation.isDirectionReversed && (animation.frameIndex != lastFrameIndex)))
+							{
+								animation.isPaused = true;
+							}
+						}
+
+						// Next frame
+						if (animation.isDirectionReversed)
+						{
+							animation.frameIndex--;
+						}
+						else
+						{
+							animation.frameIndex++;
+						}
 					}
 				}
 			}

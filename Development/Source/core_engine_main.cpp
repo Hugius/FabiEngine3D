@@ -58,6 +58,9 @@ void CoreEngine::_start()
 	// Main game-loop
 	while (_isRunning)
 	{
+		// Start measuring time
+		auto current = std::chrono::high_resolution_clock::now();
+
 		if (_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
 			// Retrieve user input if not exported
@@ -68,6 +71,7 @@ void CoreEngine::_start()
 
 			// Update application
 			_updateApplication();
+			_timer.increasePassedFrameCount();
 
 			// Render application if not exported
 			if (!Config::getInst().isApplicationExported())
@@ -77,10 +81,10 @@ void CoreEngine::_start()
 		}
 		else // Process application at fixed speed
 		{
-			// Start measuring time
-			auto current = std::chrono::high_resolution_clock::now();
+			// Calculate time delay
+			lag += _deltaTimeMS;
 
-			// Check if the delay is getting too much
+			// Check if time delay is getting too much
 			if (lag > (Config::MS_PER_UPDATE * 10.0f))
 			{
 				lag = Config::MS_PER_UPDATE;
@@ -97,13 +101,12 @@ void CoreEngine::_start()
 
 			// Render application at full speed
 			_renderApplication();
-
-			// Calculate timing values
-			auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
-			_deltaTimeMS = timeDifference.count() / 1000000.0f;
-			previous = current;
-			lag += _deltaTimeMS;
 		}
+
+		// Calculate delta time
+		auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
+		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
+		previous = current;
 	}
 
 	// Finish engine controller

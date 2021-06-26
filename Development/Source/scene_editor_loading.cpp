@@ -171,7 +171,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					// Start animation
 					if (!animationID.empty())
 					{
-						_animationEditor.startAnimation(animationID, modelID, -1, false);
+						_animationEditor.startAnimation(animationID, modelID, -1);
 					}
 
 					// Extract instanced offsets

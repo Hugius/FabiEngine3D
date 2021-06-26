@@ -49,10 +49,11 @@ public:
 
 	int timesToPlay = 0;
 	int fadeFramestep = -1;
-	int maxFrameIndex = -1;
+	int fadeFrameIndex = -1;
 
 	unsigned int frameIndex = 0;
 
 	bool isPaused = false;
-	bool mustPauseEveryFrame = false;
+	bool isAutoPaused = false;
+	bool isDirectionReversed = false;
 };

@@ -320,7 +320,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				}
 
 				// Start animation
-				_animationEditor.startAnimation(animationID, modelID, remainingLoops, false);
+				_animationEditor.startAnimation(animationID, modelID, remainingLoops);
 
 				// Check if animation exists
 				if (_animationEditor.isAnimationExisting(animationID))

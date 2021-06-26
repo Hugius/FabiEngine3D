@@ -5,30 +5,26 @@
 #include "animation.hpp"
 #include "model_editor.hpp"
 
-#include <tuple>
-
-using std::tuple;
-
 class AnimationEditor final
 {
 public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 
-	// Interface
+	// Setters
 	void load();
 	void unload();
 	void update();
 	void setCurrentProjectID(const string& projectID);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
-	void startAnimation(const string& animationID, const string& modelID, int loops, bool mustPauseEveryFrame);
+	void startAnimation(const string& animationID, const string& modelID, int loops);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
 
-	// Miscellaneous
+	// Getters
 	bool isLoaded();
 	bool isAnimationExisting(const string& ID);
 	bool isAnimationStarted(const string& animationID, const string& modelID);
@@ -64,8 +60,8 @@ private:
 
 	// Containers
 	vector<shared_ptr<Animation>> _animations;
-	set<tuple<string, string>> _animationsToStop;
-	set<tuple<string, string, bool>> _animationsToStartAgain;
+	set<pair<string, string>> _animationsToStop;
+	set<pair<string, string>> _animationsToStartAgain;
 	map<pair<string, string>, Animation> _startedAnimations;
 
 	// Strings

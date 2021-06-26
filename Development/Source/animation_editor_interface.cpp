@@ -1,6 +1,6 @@
 #include "animation_editor.hpp"
 
-void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops, bool mustPauseEveryFrame)
+void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
 {
 	// Temporary values
 	string errorMessage = "Trying to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
@@ -18,15 +18,14 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 				if (loops >= -1)
 				{
 					// Retrieve animation
-					auto animation = _getAnimation(animationID);
-					animation->animatedModelID = modelID;
-					animation->timesToPlay = (loops == -1) ? -1 : (loops + 1);
-					animation->mustPauseEveryFrame = mustPauseEveryFrame;
-					animation->initialScaling = _fe3d.modelEntity_getSize(modelID);
+					auto animation = *_getAnimation(animationID);
+					animation.animatedModelID = modelID;
+					animation.timesToPlay = (loops == -1) ? -1 : (loops + 1);
+					animation.initialScaling = _fe3d.modelEntity_getSize(modelID);
 
 					// Check if model has all the parts
 					bool hasAllParts = true;
-					for (const auto& partID : animation->partIDs)
+					for (const auto& partID : animation.partIDs)
 					{
 						// Part cannot be empty
 						if (!partID.empty())
@@ -38,7 +37,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					// Start animation
 					if (hasAllParts)
 					{
-						_startedAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
+						_startedAnimations.insert(make_pair(make_pair(animationID, modelID), animation));
 					}
 					else
 					{

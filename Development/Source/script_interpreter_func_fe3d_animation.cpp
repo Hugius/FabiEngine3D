@@ -4,7 +4,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 {
 	if (functionName == "fe3d:model_start_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::BOOLEAN };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger(), arguments[3].getBoolean());
+				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -148,13 +148,59 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to set speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Trying to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
 					animationData->speedMultiplier = arguments[2].getDecimal();
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_animation_autopaused")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				// Retrieve animation data
+				string errorMessage = "Trying to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
+				if (animationData != nullptr)
+				{
+					animationData->isAutoPaused = arguments[2].getBoolean();
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_animation_reverse_direction")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				// Retrieve animation data
+				string errorMessage = "Trying to set animation reversed option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
+				if (animationData != nullptr)
+				{
+					animationData->isDirectionReversed = arguments[2].getBoolean();
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 				}
 			}
@@ -171,7 +217,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to get speed of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Trying to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
@@ -179,6 +225,52 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				{
 					auto result = animationData->speedMultiplier;
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_is_animation_autopaused")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				// Retrieve animation data
+				string errorMessage = "Trying to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
+				if (animationData != nullptr)
+				{
+					auto result = animationData->isAutoPaused;
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_is_animation_reversed")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				// Retrieve animation data
+				string errorMessage = "Trying to get animation reversed option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
+
+				// Check if animation was found
+				if (animationData != nullptr)
+				{
+					auto result = animationData->isDirectionReversed;
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 				}
 			}
 		}
@@ -194,7 +286,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to get frame index of animation with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Trying to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 				
 				// Check if animation was found

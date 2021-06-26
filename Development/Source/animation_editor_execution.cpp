@@ -69,9 +69,9 @@ void AnimationEditor::_updateAnimationExecution()
 				const auto& speedType = frame.speedTypes[partID];
 				const auto& rotationOrigin = frame.rotationOrigins[partID];
 				const auto& speed = frame.speeds[partID] * animation.speedMultiplier;
-				const auto& xSpeed = !isRotation ? (speedMultiplier.x * speed.x) : speed.x;
-				const auto& ySpeed = !isRotation ? (speedMultiplier.y * speed.y) : speed.y;
-				const auto& zSpeed = !isRotation ? (speedMultiplier.z * speed.z) : speed.z;
+				const auto& xSpeed = (!isRotation ? (speedMultiplier.x * speed.x) : speed.x);
+				const auto& ySpeed = (!isRotation ? (speedMultiplier.y * speed.y) : speed.y);
+				const auto& zSpeed = (!isRotation ? (speedMultiplier.z * speed.z) : speed.z);
 
 				// Translation is relative to initial size
 				// Rotation is always relative to real-time size
@@ -92,11 +92,11 @@ void AnimationEditor::_updateAnimationExecution()
 					(isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, xSpeed)) &&
 					(isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, xSpeed))) ||
 					((isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, ySpeed)) &&
-					(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
-					(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed))) ||
+						(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
+						(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed))) ||
 					((isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, zSpeed)) &&
-					(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
-					(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
+						(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
+						(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
 				{
 					finishedPartsAmount++;
 				}
@@ -145,7 +145,7 @@ void AnimationEditor::_updateAnimationExecution()
 						// Increase speed if exponential
 						if (speedType == AnimationSpeedType::EXPONENTIAL)
 						{
-							baseSpeed += (baseSpeed / 100.0f);
+							baseSpeed.x += (baseSpeed.x / 100.0f);
 						}
 
 						// Check if animation reached transformation now
@@ -157,17 +157,17 @@ void AnimationEditor::_updateAnimationExecution()
 							// Determine transformation type
 							if (transformationType == TransformationType::TRANSLATION)
 							{
-								difference = totalTranslation.x - targetTransformation.x;
+								difference = (totalTranslation.x - targetTransformation.x);
 								totalTranslation.x += (-difference);
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
-								difference = totalRotation.x - targetTransformation.x;
+								difference = (totalRotation.x - targetTransformation.x);
 								totalRotation.x += (-difference);
 							}
 							else if (transformationType == TransformationType::SCALING)
 							{
-								difference = totalScaling.x - targetTransformation.x;
+								difference = (totalScaling.x - targetTransformation.x);
 								totalScaling.x += (-difference);
 							}
 						}
@@ -231,7 +231,7 @@ void AnimationEditor::_updateAnimationExecution()
 						// Increase speed if exponential
 						if (speedType == AnimationSpeedType::EXPONENTIAL)
 						{
-							baseSpeed += (baseSpeed / 100.0f);
+							baseSpeed.y += (baseSpeed.y / 100.0f);
 						}
 
 						// Check if animation reached transformation now
@@ -300,7 +300,7 @@ void AnimationEditor::_updateAnimationExecution()
 							{
 								finalSpeed = (targetTransformation.z - totalRotation.z);
 							}
-							
+
 							totalRotation.z += finalSpeed;
 						}
 						else if (transformationType == TransformationType::SCALING)
@@ -317,7 +317,7 @@ void AnimationEditor::_updateAnimationExecution()
 						// Increase speed if exponential
 						if (speedType == AnimationSpeedType::EXPONENTIAL)
 						{
-							baseSpeed += (baseSpeed / 100.0f);
+							baseSpeed.z += (baseSpeed.z / 100.0f);
 						}
 
 						// Check if animation reached transformation now
@@ -343,7 +343,7 @@ void AnimationEditor::_updateAnimationExecution()
 								totalScaling.z += (-difference);
 							}
 						}
-						
+
 						// Transform the model
 						if (transformationType == TransformationType::TRANSLATION)
 						{
@@ -392,89 +392,43 @@ void AnimationEditor::_updateAnimationExecution()
 			// Check if current frame is finished
 			if (finishedPartsAmount == animation.partIDs.size())
 			{
-				// Check if animation fading is enabled
-				if (animation.fadeFrameIndex != -1)
+				if (animation.frameIndex == animation.fadeFrameIndex) // Animation faded to its end
 				{
-					// Check if animation faded to its end
-					if (animation.frameIndex == animation.fadeFrameIndex)
-					{
-						_animationsToStop.insert(idPair);
-					}
+					_animationsToStop.insert(idPair);
 				}
-				else
+				else if (animation.frameIndex == (static_cast<unsigned int>(animation.frames.size()) - 1)) // Animation finished normally
 				{
-					// Temporary values
-					unsigned int lastFrameIndex = (static_cast<unsigned int>(animation.frames.size()) - 1);
-
-					if (!animation.isDirectionReversed && (animation.frameIndex == lastFrameIndex)) // Normal animation finish
+					// Check if animation is endless
+					if (animation.timesToPlay == -1)
 					{
-						// Check if animation is endless
-						if (animation.timesToPlay == -1)
+						animation.frameIndex = 0;
+					}
+					else
+					{
+						// Animation finished current play
+						animation.timesToPlay--;
+
+						// Check if animation must stop
+						if (animation.timesToPlay == 0)
+						{
+							_animationsToStop.insert(idPair);
+						}
+						else
 						{
 							animation.frameIndex = 0;
 						}
-						else
-						{
-							// Animation finished current play
-							animation.timesToPlay--;
-
-							// Check if animation must stop
-							if (animation.timesToPlay == 0)
-							{
-								_animationsToStop.insert(idPair);
-							}
-							else
-							{
-								animation.frameIndex = 0;
-							}
-						}
 					}
-					else if (animation.isDirectionReversed && (animation.frameIndex == 0)) // Reverse animation finish
+				}
+				else // Animation not finished yet
+				{
+					// Auto-pause if allowed (skip default frame)
+					if (animation.isAutoPaused && animation.frameIndex != 0)
 					{
-						// Check if animation is endless
-						if (animation.timesToPlay == -1)
-						{
-							animation.frameIndex = lastFrameIndex;
-						}
-						else
-						{
-							// Animation finished current play
-							animation.timesToPlay--;
-
-							// Check if animation must stop
-							if (animation.timesToPlay == 0)
-							{
-								_animationsToStop.insert(idPair);
-							}
-							else
-							{
-								animation.frameIndex = lastFrameIndex;
-							}
-						}
+						animation.isPaused = true;
 					}
-					else // Animation not finished yet
-					{
-						// Auto-pause if allowed
-						if (animation.isAutoPaused)
-						{
-							// Skip default frame
-							if ((!animation.isDirectionReversed && (animation.frameIndex != 0)) ||
-								(animation.isDirectionReversed && (animation.frameIndex != lastFrameIndex)))
-							{
-								animation.isPaused = true;
-							}
-						}
 
-						// Next frame
-						if (animation.isDirectionReversed)
-						{
-							animation.frameIndex--;
-						}
-						else
-						{
-							animation.frameIndex++;
-						}
-					}
+					// Next frame
+					animation.frameIndex++;
 				}
 			}
 		}

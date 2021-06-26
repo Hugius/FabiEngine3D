@@ -55,5 +55,4 @@ public:
 
 	bool isPaused = false;
 	bool isAutoPaused = false;
-	bool isDirectionReversed = false;
 };

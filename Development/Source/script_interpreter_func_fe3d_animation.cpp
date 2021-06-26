@@ -183,29 +183,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_animation_reverse_direction")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				// Retrieve animation data
-				string errorMessage = "Trying to set animation reversed option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if (animationData != nullptr)
-				{
-					animationData->isDirectionReversed = arguments[2].getBoolean();
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-				}
-			}
-		}
-	}
 	else if (functionName == "fe3d:model_get_animation_speed")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
@@ -247,29 +224,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				if (animationData != nullptr)
 				{
 					auto result = animationData->isAutoPaused;
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-				}
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_is_animation_reversed")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				// Retrieve animation data
-				string errorMessage = "Trying to get animation reversed option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
-				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-
-				// Check if animation was found
-				if (animationData != nullptr)
-				{
-					auto result = animationData->isDirectionReversed;
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 				}
 			}

@@ -113,8 +113,8 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
-					// Retrieve last (or default) frame
-					auto lastFrameCopy = currentAnimation->frames.back();
+					// Copy current frame
+					auto lastFrameCopy = currentAnimation->frames[_currentFrameIndex];
 
 					// Check if model has multiple parts
 					if (!currentAnimation->previewModelID.empty() && _fe3d.modelEntity_isMultiParted(currentAnimation->previewModelID))
@@ -142,7 +142,7 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Add copied frame
-					currentAnimation->frames.push_back(lastFrameCopy);
+					currentAnimation->frames.insert(currentAnimation->frames.begin() + _currentFrameIndex, lastFrameCopy);
 					_currentFrameIndex++;
 				}
 				else if (screen->getButton("editFrame")->isHovered())

@@ -119,7 +119,7 @@ void AnimationEditor::_updateAnimationCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New animation name cannot contain any spaces!");
+					_fe3d.logger_throwWarning("Animation name cannot contain any spaces!");
 				}
 			}
 		}

@@ -56,12 +56,12 @@ void EnvironmentEditor::_updateSkyCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New sky name cannot contain any spaces!");
+						_fe3d.logger_throwWarning("Sky name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New sky name cannot contain '@'!");
+					_fe3d.logger_throwWarning("Sky name cannot contain '@'!");
 				}
 			}
 		}

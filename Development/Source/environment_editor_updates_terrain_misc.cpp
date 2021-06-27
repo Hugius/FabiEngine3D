@@ -55,12 +55,12 @@ void EnvironmentEditor::_updateTerrainCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New terrain name cannot contain any spaces!");
+						_fe3d.logger_throwWarning("Terrain name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New terrain name cannot contain '@'!");
+					_fe3d.logger_throwWarning("Terrain name cannot contain '@'!");
 				}
 			}
 		}

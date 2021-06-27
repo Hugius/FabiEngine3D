@@ -108,7 +108,7 @@ void AudioEditor::_updateAudioCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New audio name cannot contain any spaces!");
+						_fe3d.logger_throwWarning("Audio name cannot contain any spaces!");
 					}
 				}
 				else

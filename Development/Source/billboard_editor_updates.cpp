@@ -112,12 +112,12 @@ void BillboardEditor::_updateBillboardCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New billboard name cannot contain any spaces!");
+						_fe3d.logger_throwWarning("Billboard name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New billboard name cannot contain '@'!");
+					_fe3d.logger_throwWarning("Billboard name cannot contain '@'!");
 				}
 			}
 		}

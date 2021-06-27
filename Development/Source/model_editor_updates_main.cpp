@@ -195,12 +195,12 @@ void ModelEditor::_updateModelCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New model name cannot contain any spaces!");
+						_fe3d.logger_throwWarning("Model name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New model name cannot contain '@'!");
+					_fe3d.logger_throwWarning("Model name cannot contain '@'!");
 				}
 			}
 		}

@@ -181,23 +181,32 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if user wants to create a new script
-		string newName;
-		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newName))
+		string newScriptName;
+		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptName))
 		{
-			auto existingNames = _script.getAllScriptFileIDs();
-			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
+			// Spaces not allowed
+			if (newScriptName.find(' ') == string::npos)
 			{
-				_currentScriptFileID = newName;
-				_isWritingScript = true;
-				_firstSelectedLineIndex = -1;
-				_lastSelectedLineIndex = -1;
-				_script.addScriptFile(_currentScriptFileID);
-				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
-				_reloadScriptTextDisplay(true);
+				// Check if name already exists
+				auto existingNames = _script.getAllScriptFileIDs();
+				if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())
+				{
+					_currentScriptFileID = newScriptName;
+					_isWritingScript = true;
+					_firstSelectedLineIndex = -1;
+					_lastSelectedLineIndex = -1;
+					_script.addScriptFile(_currentScriptFileID);
+					_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
+					_reloadScriptTextDisplay(true);
+				}
+				else
+				{
+					_fe3d.logger_throwWarning("Script name \"" + newScriptName + "\" already exists!");
+				}
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Script name already exists!");
+				_fe3d.logger_throwWarning("Script name cannot contain any spaces!");
 			}
 		}
 
@@ -221,14 +230,14 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if user wants to rename a script
-		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newName))
+		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();
-			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
+			if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())
 			{
 				_scriptFileNamesToDelete.push_back(_currentScriptFileID);
-				_script.renameScriptFile(_currentScriptFileID, newName);
-				_currentScriptFileID = newName;
+				_script.renameScriptFile(_currentScriptFileID, newScriptName);
+				_currentScriptFileID = newScriptName;
 			}
 			else
 			{

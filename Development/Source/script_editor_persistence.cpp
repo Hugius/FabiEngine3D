@@ -16,7 +16,7 @@ void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	_script.reset();
 
 	// Compose full directory path
-	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 		("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Check if directory exists
@@ -88,7 +88,7 @@ void ScriptEditor::saveScriptsToFile()
 		}
 
 		// Compose directory path
-		string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+		string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 			("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 		// Delete all text files containing deleted scripts

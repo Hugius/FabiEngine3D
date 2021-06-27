@@ -139,8 +139,8 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	// Preload all big assets of this project, only in game preview
-	if (_fe3d.engine_isApplicationExported())
+	// Preload all big assets of this project, only in application preview
+	if (_fe3d.application_isExported())
 	{
 		vector<string> texturePaths;
 

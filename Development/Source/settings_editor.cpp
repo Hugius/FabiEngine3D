@@ -46,7 +46,7 @@ void SettingsEditor::loadSettings()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
 
 	// Check if settings file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -104,7 +104,7 @@ void SettingsEditor::save(bool newFile)
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
 
 	// Overwrite (or create) settings file
 	std::ofstream file;

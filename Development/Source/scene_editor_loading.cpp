@@ -13,7 +13,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{

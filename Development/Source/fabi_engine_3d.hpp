@@ -40,13 +40,13 @@ public:
 	virtual ~FabiEngine3D();
 
 	// Engine interface
-	void engine_start();
-	void engine_pause();
-	void engine_resume();
-	void engine_stop();
-	bool engine_isPaused();
-	bool engine_isApplicationExported();
-	const string& engine_getApplicationTitle();
+	void application_start();
+	void application_pause();
+	void application_resume();
+	void application_stop();
+	bool application_isPaused();
+	bool application_isExported();
+	const string& application_getTitle();
 
 	// Input interface - setters
 	void input_setLocked(bool locked);

@@ -238,7 +238,7 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, (message.protocol == NetworkProtocol::TCP ? "TCP" : "UDP")));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, string((message.protocol == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
 		}
 	}

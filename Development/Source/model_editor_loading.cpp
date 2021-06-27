@@ -14,7 +14,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -100,7 +100,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 	_loadedModelIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))

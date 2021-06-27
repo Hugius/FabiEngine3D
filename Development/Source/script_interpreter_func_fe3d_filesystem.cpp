@@ -14,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
@@ -30,7 +30,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
@@ -74,7 +74,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 
@@ -90,7 +90,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 
@@ -124,7 +124,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, 2) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 
@@ -170,7 +170,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 
@@ -188,7 +188,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 
@@ -212,7 +212,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.engine_isApplicationExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = directoryPath + arguments[0].getString();
 

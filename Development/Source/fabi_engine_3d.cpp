@@ -12,37 +12,37 @@ FabiEngine3D::~FabiEngine3D()
 	delete _core;
 }
 
-void FabiEngine3D::engine_start()
+void FabiEngine3D::application_start()
 {
 	_core->_start();
 }
 
-void FabiEngine3D::engine_pause()
+void FabiEngine3D::application_pause()
 {
 	_core->_pause();
 }
 
-void FabiEngine3D::engine_resume()
+void FabiEngine3D::application_resume()
 {
 	_core->_resume();
 }
 
-void FabiEngine3D::engine_stop()
+void FabiEngine3D::application_stop()
 {
 	_core->_stop();
 }
 
-bool FabiEngine3D::engine_isPaused()
+bool FabiEngine3D::application_isPaused()
 {
 	return _core->_isPaused;
 }
 
-bool FabiEngine3D::engine_isApplicationExported()
+bool FabiEngine3D::application_isExported()
 {
 	return Config::getInst().isApplicationExported();
 }
 
-const string& FabiEngine3D::engine_getApplicationTitle()
+const string& FabiEngine3D::application_getTitle()
 {
 	return Config::getInst().getApplicationTitle();
 }

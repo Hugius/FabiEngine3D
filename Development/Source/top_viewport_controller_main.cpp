@@ -105,7 +105,7 @@ void TopViewportController::_updateProjectScreenManagement()
 				}
 				else // Otherwise, just exit the engine
 				{
-					_fe3d.engine_stop();
+					_fe3d.application_stop();
 				}
 			}
 		}
@@ -119,11 +119,11 @@ void TopViewportController::_updateProjectScreenManagement()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
 		{
 			_saveCurrentProject();
-			_fe3d.engine_stop();
+			_fe3d.application_stop();
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitEngine"))
 		{
-			_fe3d.engine_stop();
+			_fe3d.application_stop();
 		}
 
 		// Buttons hoverability

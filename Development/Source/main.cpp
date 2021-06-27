@@ -6,8 +6,9 @@ bool startEngine()
 	EngineController fe3dController;
 
 	// Start engine
-	fe3dController.engine_start();
+	fe3dController.application_start();
 
+	// Return
 	return fe3dController.mustPromptOnExit();
 }
 

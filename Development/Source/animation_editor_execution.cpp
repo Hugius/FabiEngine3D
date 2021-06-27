@@ -4,7 +4,7 @@
 
 void AnimationEditor::_updateAnimationExecution()
 {
-	if (!_fe3d.engine_isPaused())
+	if (!_fe3d.application_isPaused())
 	{
 		// Remove all animations that ended
 		for (const auto& idPair : _animationsToStop)

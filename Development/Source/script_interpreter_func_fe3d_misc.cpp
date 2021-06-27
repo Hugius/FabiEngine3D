@@ -41,7 +41,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			if (_fe3d.application_isExported()) // Export preview
+			if (_fe3d.application_isExported()) // Application preview
 			{
 				_fe3d.application_stop();
 			}

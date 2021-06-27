@@ -186,6 +186,11 @@ void ScriptExecutor::_validateExecution()
 		_fe3d.misc_hideCursor();
 		_isStarted = false;
 		_isRunning = false;
+		_wasCursorVisible = false;
+		_wasMillisecondTimerStarted = false;
+		_wasMusicPaused = false;
+		_mustSkipUpdate = false;
+		_pausedSoundIDs.clear();
 	}
 	else if (_scriptInterpreter.gameMustStop()) // Script must stop
 	{

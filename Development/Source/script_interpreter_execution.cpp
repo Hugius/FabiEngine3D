@@ -35,8 +35,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		return;
 	}
 
-	// Skip the following lines of code if the last run caused an error
-	if (_hasThrownError)
+	// Skip the following lines of code if necessary
+	if (_hasThrownError || _applicationMustStop)
 	{
 		return;
 	}
@@ -55,7 +55,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
-		
+
 		// Ignore METAs
 		if (lineIndex == 0 || lineIndex == 1)
 		{
@@ -67,14 +67,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			continue;
 		}
-		
-		// Count front spaces
+
+		// Count front spaces (and check if it went well)
 		unsigned int countedSpaces = _countFrontSpaces(scriptLineText);
-		if (_hasThrownError) // Check if an error was thrown
+		if (_hasThrownError)
 		{
 			return;
 		}
-		
+
 		// Check if indentation syntax is correct
 		if ((countedSpaces % SPACES_PER_INDENT) == 0)
 		{
@@ -88,7 +88,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		// Calculate current scope depth
 		unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
-		
+
 		// Detect end of loop
 		bool endOfLoop = false;
 		if (!loopLineIndices.empty())
@@ -147,7 +147,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Cannot start a new statement at the end of the script
 		if (lineIndex == scriptFile->getLineCount() - 1 &&
 			(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD || scriptLineText.substr(0, IF_KEYWORD.size()) == IF_KEYWORD ||
-			scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD || scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD))
+				scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD || scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD))
 		{
 			_throwScriptError("no statement allowed as the last line!");
 			return;
@@ -177,20 +177,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			string scriptToExecute = scriptLineText.substr(EXECUTE_KEYWORD.size() + 1);
 
 			// Check if script is of the same type
-			if 
+			if
 				(
 					(scriptType == ScriptType::INIT &&
-					(std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
-					std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+						(std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
+							std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
 					||
 					(scriptType == ScriptType::UPDATE &&
-					(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
-					std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+						(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+							std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
 					||
 					(scriptType == ScriptType::DESTROY &&
-					(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
-					std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
-				)
+						(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+							std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
+					)
 			{
 				_throwScriptError("script \"" + scriptToExecute + "\" is not of the same type!");
 				return;
@@ -274,7 +274,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				// Check if in sequence with if statement
 				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
 					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
-					_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
+						_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
 				{
 					// Extract condition string
 					string conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
@@ -356,14 +356,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Create local variable
 			(
-				scriptLineText.substr(0, CONST_KEYWORD.size()   + 1) == CONST_KEYWORD   + " " ||
-				scriptLineText.substr(0, LIST_KEYWORD.size()    + 1) == LIST_KEYWORD    + " " ||
-				scriptLineText.substr(0, VEC3_KEYWORD.size()    + 1) == VEC3_KEYWORD    + " " ||
-				scriptLineText.substr(0, STRING_KEYWORD.size()  + 1) == STRING_KEYWORD  + " " ||
+				scriptLineText.substr(0, CONST_KEYWORD.size() + 1) == CONST_KEYWORD + " " ||
+				scriptLineText.substr(0, LIST_KEYWORD.size() + 1) == LIST_KEYWORD + " " ||
+				scriptLineText.substr(0, VEC3_KEYWORD.size() + 1) == VEC3_KEYWORD + " " ||
+				scriptLineText.substr(0, STRING_KEYWORD.size() + 1) == STRING_KEYWORD + " " ||
 				scriptLineText.substr(0, DECIMAL_KEYWORD.size() + 1) == DECIMAL_KEYWORD + " " ||
 				scriptLineText.substr(0, INTEGER_KEYWORD.size() + 1) == INTEGER_KEYWORD + " " ||
 				scriptLineText.substr(0, BOOLEAN_KEYWORD.size() + 1) == BOOLEAN_KEYWORD + " "
-			)
+				)
 		{
 			_processVariableCreation(scriptLineText, ScriptVariableScope::LOCAL);
 		}
@@ -377,12 +377,12 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Variable arithmetic
 			(
-				scriptLineText.substr(0, ADDITION_KEYWORD.size() + 1) == ADDITION_KEYWORD + " "				||
-				scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " "		||
+				scriptLineText.substr(0, ADDITION_KEYWORD.size() + 1) == ADDITION_KEYWORD + " " ||
+				scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " " ||
 				scriptLineText.substr(0, MULTIPLICATION_KEYWORD.size() + 1) == MULTIPLICATION_KEYWORD + " " ||
-				scriptLineText.substr(0, DIVISION_KEYWORD.size() + 1) == DIVISION_KEYWORD + " "				||
+				scriptLineText.substr(0, DIVISION_KEYWORD.size() + 1) == DIVISION_KEYWORD + " " ||
 				scriptLineText.substr(0, NEGATION_KEYWORD.size() + 1) == NEGATION_KEYWORD + " "
-			)
+				)
 		{
 			_processVariableArithmetic(scriptLineText);
 		}
@@ -419,12 +419,12 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Check if any engine warnings were thrown
 		_checkEngineWarnings(lastLoggerMessageCount);
 
-		// Skip the following lines of code if the last run caused an error
-		if (_hasThrownError)
+		// Skip the following lines of code if necessary
+		if (_hasThrownError || _applicationMustStop)
 		{
 			return;
 		}
-		
+
 		// Go back to current loops beginning
 		if (endOfLoop)
 		{

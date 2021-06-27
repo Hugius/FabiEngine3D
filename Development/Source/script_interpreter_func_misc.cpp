@@ -206,9 +206,11 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Return list elements in reverse order
-						for (size_t i = listVariable.getValues().size(); i > 0; --i)
+						auto values = listVariable.getValues();
+						std::reverse(values.begin(), values.end());
+						for (const auto& value : values)
 						{
-							returnValues.push_back(*listVariable.getValues()[i]);
+							returnValues.push_back(*value);
 						}
 					}
 				}
@@ -303,10 +305,17 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						for (size_t i = arguments[0].getString().size(); i > 0; --i)
+						// Compose string in reverse
+						string result = "";
+						string content = arguments[0].getString();
+						std::reverse(content.begin(), content.end());
+						for (const auto& character : content)
 						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString()[i]));
+							result += character;
 						}
+
+						// Return
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 					}
 				}
 				else if (functionName == "misc:get_random_integer")

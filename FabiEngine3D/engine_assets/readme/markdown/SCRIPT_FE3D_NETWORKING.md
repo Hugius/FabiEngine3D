@@ -41,10 +41,10 @@
   Returns ports of pending messages from networking clients.
 - `fe3d:server_get_pending_usernames`() ---> `LIST`  
   Returns usernames of pending messages from networking clients.
-- `fe3d:server_get_pending_messages`() ---> `LIST`  
-  Returns contents of pending messages from networking clients.
 - `fe3d:server_get_pending_protocols`() ---> `LIST`  
   Returns protocols of pending messages from networking clients.
+- `fe3d:server_get_pending_contents`() ---> `LIST`  
+  Returns contents of pending messages from networking clients.
 
 # Client
 ### Setters
@@ -67,10 +67,10 @@
   Returns true if networking client is connecting to networking server.
 - `fe3d:client_is_connected`() ---> `BOOL`  
   Returns true if networking client is connected to networking server.
-- `fe3d:client_get_pending_messages`() ---> `LIST`  
-  Returns contents of pending messages from networking server.
 - `fe3d:client_get_pending_protocols`() ---> `LIST`  
   Returns protocols of pending messages from networking server.
+- `fe3d:client_get_pending_contents`() ---> `LIST`  
+  Returns contents of pending messages from networking server.
 - `fe3d:client_get_ping_latency`() ---> `INT`  
   Returns average round-trip ping latency from networking client to networking server in milliseconds.
 - `fe3d:client_get_server_ip`() ---> `STR`  

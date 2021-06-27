@@ -35,17 +35,18 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
+						// Temporary values
 						auto firstName = arguments[0].getString();
 						auto secondName = arguments[1].getString();
 
-						// Check if first list exists
+						// Check if first variable not existing
 						if (!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
 						{
 							_throwScriptError("list variable \"" + firstName + "\" not found!");
 							return returnValues;
 						}
 
-						// Check if second list exists
+						// Check if second variable not existing
 						if (!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
 						{
 							_throwScriptError("list variable \"" + secondName + "\" not found!");
@@ -84,20 +85,21 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						auto nameString = arguments[0].getString();
+						// Temporary values
+						auto listName = arguments[0].getString();
 
-						// Check if variable exists
-						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+						// Check if variable not existing
+						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 						{
-							_throwScriptError("list variable \"" + nameString + "\" not found!");
+							_throwScriptError("list variable \"" + listName + "\" not found!");
 							return returnValues;
 						}
 
 						// Check if variable is not a list
-						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
-							_throwScriptError("variable \"" + nameString + "\" is not a list!");
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
 							return returnValues;
 						}
 
@@ -120,18 +122,18 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if variable does not exist
-						auto nameString = arguments[0].getString();
-						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+						auto listName = arguments[0].getString();
+						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
 						{
-							_throwScriptError("list variable \"" + nameString + "\" not found!");
+							_throwScriptError("list variable \"" + listName + "\" not found!");
 							return returnValues;
 						}
 
 						// Check if variable is not a list
-						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
-							_throwScriptError("variable \"" + nameString + "\" is not a list!");
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
 							return returnValues;
 						}
 
@@ -177,6 +179,37 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return find result
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, foundValue));
+					}
+				}
+				else if (functionName == "misc:list_reverse")
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Temporary values
+						auto listName = arguments[0].getString();
+
+						// Check if variable not existing
+						if (!_isLocalVariableExisting(listName) && !_isGlobalVariableExisting(listName))
+						{
+							_throwScriptError("list variable \"" + listName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if variable is not a list
+						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
+						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + listName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Return list elements in reverse order
+						for (size_t i = listVariable.getValues().size(); i > 0; --i)
+						{
+							returnValues.push_back(*listVariable.getValues()[i]);
+						}
 					}
 				}
 				else if (functionName == "misc:string_concat")
@@ -262,6 +295,18 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 								stringPart += fullString[i];
 							}
 						}						
+					}
+				}
+				else if (functionName == "misc:string_reverse")
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						for (size_t i = arguments[0].getString().size(); i > 0; --i)
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString()[i]));
+						}
 					}
 				}
 				else if (functionName == "misc:get_random_integer")

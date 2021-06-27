@@ -241,6 +241,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	// Check if LMB pressed
 	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
+		// Check if button is hovered
 		if (screen->getButton("uncache")->isHovered())
 		{
 			// Get the chosen filename
@@ -251,16 +252,25 @@ void TopViewportController::_updateMiscScreenManagement()
 			// Check if user did not cancel
 			if (filePath != "")
 			{
-				// Make path relative
-				const string newFilePath = filePath.substr(rootDirectory.size());
+				// Check if user did not switch directory
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+				{
+					// Make path relative
+					const string newFilePath = filePath.substr(rootDirectory.size());
 
-				// Clear the cache of selected file
-				_fe3d.misc_clearMeshCache(newFilePath);
-				_fe3d.misc_clearFontCache(newFilePath);
-				_fe3d.misc_clearTextureCache2D(newFilePath);
-				_fe3d.misc_clearBitmapCache(newFilePath);
-				_fe3d.misc_clearAudioChunkCache(newFilePath);
-				_fe3d.misc_clearAudioMusicCache(newFilePath);
+					// Clear the cache of selected file
+					_fe3d.misc_clearMeshCache(newFilePath);
+					_fe3d.misc_clearFontCache(newFilePath);
+					_fe3d.misc_clearTextureCache2D(newFilePath);
+					_fe3d.misc_clearBitmapCache(newFilePath);
+					_fe3d.misc_clearAudioChunkCache(newFilePath);
+					_fe3d.misc_clearAudioMusicCache(newFilePath);
+				}
+				else
+				{
+					_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+				}
 			}
 		}
 		else if (screen->getButton("documentation")->isHovered())

@@ -10,8 +10,8 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	auto temp = freopen("NUL:", "w", stderr);
 
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
-	string fullFilePath = string(rootDir + filePath);
+	const string rootDir = Tools::getRootDirectory();
+	const string fullFilePath = string(rootDir + filePath);
 
 	// Load actual image data
 	SDL_Surface * image = IMG_Load(fullFilePath.c_str());
@@ -81,7 +81,7 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
 {
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	const string rootDir = Tools::getRootDirectory();
 
 	// Temporary values
 	GLuint texture;
@@ -153,7 +153,7 @@ GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, con
 TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 {
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	const string rootDir = Tools::getRootDirectory();
 
 	// Load font
 	auto it = _fontCache.find(fontPath);
@@ -165,7 +165,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 		// Check if font loading is successful
 		if (font == nullptr)
 		{
-			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"");
+			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"!");
 			return nullptr;
 		}
 		else
@@ -241,7 +241,7 @@ GLuint TextureLoader::_loadText(const string& textContent, const string& fontPat
 vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
 {
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	const string rootDir = Tools::getRootDirectory();
 
 	// Pixels
 	vector<float> pixelIntensities;
@@ -251,7 +251,7 @@ vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http:/
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::throwWarning("Cannot open bitmap image: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot load bitmap image: \"" + filePath + "\"!");
 		return {};
 	}
 

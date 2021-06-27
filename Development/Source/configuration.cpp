@@ -19,7 +19,7 @@ Config::Config()
 	std::ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{
-		Logger::throwError("Could not load engine configuration file!");
+		Logger::throwError("Cannot load `config.fe3d`!");
 	}
 
 	// Store config file content

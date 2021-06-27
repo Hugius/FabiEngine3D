@@ -504,6 +504,6 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Could not load scene with ID \"" + fileName + "\"!");
+		_fe3d.logger_throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
 	}
 }

@@ -54,7 +54,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					// Check image status
 					if (loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot open image file: \"" + uniqueFilePaths[i] + "\"");
+						Logger::throwWarning("Cannot load image file: \"" + uniqueFilePaths[i] + "\"!");
 					}
 					else
 					{
@@ -119,7 +119,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 				// Error logging
 				if (loadedImages[j] == nullptr && !filePathsList[i][j].empty())
 				{
-					Logger::throwWarning("Cannot open image file: \"" + filePathsList[i][j] + "\"");
+					Logger::throwWarning("Cannot load image file: \"" + filePathsList[i][j] + "\"!");
 				}
 			}
 
@@ -158,7 +158,7 @@ BEGIN:
 		// Check image status
 		if (loadedImage == nullptr)
 		{
-			Logger::throwWarning("Cannot open image file: \"" + filePath + "\"");
+			Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
 			return 0;
 		}
 		else
@@ -213,7 +213,7 @@ BEGIN:
 			// Error logging
 			if (loadedImages[i] == nullptr && !filePaths[i].empty())
 			{
-				Logger::throwWarning("Cannot open image file: \"" + filePaths[i] + "\"");
+				Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
 			}
 		}
 

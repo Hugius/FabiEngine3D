@@ -59,7 +59,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 			// Check data status
 			if (data == nullptr)
 			{
-				Logger::throwWarning("Could not load audio file \"", uniqueFilePaths[i], "\"");
+				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
 			}
 			else
 			{
@@ -92,7 +92,7 @@ BEGIN:
 		// Check data status
 		if (data == nullptr)
 		{
-			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+			Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 		}
 		else
 		{
@@ -128,7 +128,7 @@ BEGIN:
 	if (iterator == _musicCache.end()) // Not in map (yet)
 	{
 		// Get application root directory
-		string rootDir = Tools::getRootDirectory();
+		const string rootDir = Tools::getRootDirectory();
 
 		// Load audio file
 		Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
@@ -136,7 +136,7 @@ BEGIN:
 		// Check music status
 		if (music == nullptr)
 		{
-			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+			Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 			return nullptr;
 		}
 		else
@@ -179,7 +179,7 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
 	if (chunk == nullptr)
 	{
-		Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 	}
 
 	return chunk;
@@ -202,7 +202,7 @@ void AudioLoader::_throwLoadedMessage(const string& filePath)
 char* AudioLoader::_loadWaveFile(const std::string& filePath)
 {
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	const string rootDir = Tools::getRootDirectory();
 	auto fullFilePath = string(rootDir + filePath);
 
 	// Open WAV file

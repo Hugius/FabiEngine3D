@@ -4,44 +4,52 @@
 
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 RenderShader::RenderShader(const string& vertexFileName, const string& fragmentFileName)
 {
-	// Variables
+	// Temporary values
 	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
+	_vertexFileName = vertexFileName;
+	_fragmentFileName = fragmentFileName;
 	string vertexCode;
 	string fragmentCode;
-	std::ifstream vShaderFile;
-	std::ifstream fShaderFile;
-	vShaderFile.exceptions(std::ifstream::badbit);
-	fShaderFile.exceptions(std::ifstream::badbit);
-	_vertexFileName   = vertexFileName;
-	_fragmentFileName = fragmentFileName;
+	std::ifstream vertexFile;
+	std::ifstream fragmentFile;
 
-	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	// Compose file paths
+	const string rootDir = Tools::getRootDirectory();
+	const auto vertexPath = "engine_assets\\shaders\\" + _vertexFileName;
+	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFileName;
+
+	// Check if vertex shader file exists
+	if (!std::filesystem::exists(rootDir + vertexPath))
+	{
+		Logger::throwError("Cannot load shader file: \"" + vertexPath + "\"!");
+	}
+
+	// Check if fragment shader file exists
+	if (!std::filesystem::exists(rootDir + fragmentPath))
+	{
+		Logger::throwError("Cannot load shader file: \"" + fragmentPath + "\"!");
+	}
 
 	// Open the shader text files
-	try
-	{
-		vShaderFile.open(rootDir + "engine_assets\\shaders\\" + _vertexFileName);
-		fShaderFile.open(rootDir + "engine_assets\\shaders\\" + _fragmentFileName);
-		std::ostringstream vShaderStream, fShaderStream;
-		vShaderStream << vShaderFile.rdbuf();
-		fShaderStream << fShaderFile.rdbuf();
-		vShaderFile.close();
-		fShaderFile.close();
-		vertexCode = vShaderStream.str();
-		fragmentCode = fShaderStream.str();
-	}
-	catch (std::ifstream::failure e)
-	{
-		Logger::throwError("Shader text files could not be opened!");
-	}
+	vertexFile.open(rootDir + vertexPath);
+	fragmentFile.open(rootDir + fragmentPath);
 
+	// Extract shader code
+	std::ostringstream vShaderStream, fShaderStream;
+	vShaderStream << vertexFile.rdbuf();
+	fShaderStream << fragmentFile.rdbuf();
+	vertexFile.close();
+	fragmentFile.close();
+	vertexCode = vShaderStream.str();
+	fragmentCode = fShaderStream.str();
 	const GLchar* vShaderCode = vertexCode.c_str();
 	const GLchar* fShaderCode = fragmentCode.c_str();
 
+	// Create shader program
 	_createProgram(vShaderCode, fShaderCode);
 }
 

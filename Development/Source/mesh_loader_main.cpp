@@ -21,14 +21,14 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 	string tempReflectionMapPath = "";
 
 	// Get application root directory
-	string rootDir = Tools::getRootDirectory();
+	const string rootDir = Tools::getRootDirectory();
 
 	// Load .obj file
 	string path = rootDir + filePath;
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path) || filePath == "")
 	{
-		Logger::throwWarning("Cannot open mesh file: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot load mesh file: \"" + filePath + "\"!");
 		return {};
 	}
 

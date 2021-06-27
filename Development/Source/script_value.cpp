@@ -46,7 +46,7 @@ void ScriptValue::setString(const string& value)
 {
 	if (_type != ScriptValueType::STRING)
 	{
-		_fe3d.logger_throwError("Cannot set script value: wrong type!");
+		_fe3d.logger_throwError("Cannot set string script value: wrong type!");
 	}
 
 	_string = value;
@@ -56,7 +56,7 @@ void ScriptValue::setDecimal(float value)
 {
 	if (_type != ScriptValueType::DECIMAL)
 	{
-		_fe3d.logger_throwError("Cannot set script value: wrong type!");
+		_fe3d.logger_throwError("Cannot set decimal script value: wrong type!");
 	}
 
 	_decimal = value;
@@ -66,7 +66,7 @@ void ScriptValue::setInteger(int value)
 {
 	if (_type != ScriptValueType::INTEGER)
 	{
-		_fe3d.logger_throwError("Cannot set script value: wrong type!");
+		_fe3d.logger_throwError("Cannot set integer script value: wrong type!");
 	}
 
 	_integer = value;
@@ -76,7 +76,7 @@ void ScriptValue::setBoolean(bool value)
 {
 	if (_type != ScriptValueType::BOOLEAN)
 	{
-		_fe3d.logger_throwError("Cannot set script value: wrong type!");
+		_fe3d.logger_throwError("Cannot set boolean script value: wrong type!");
 	}
 
 	_boolean = value;

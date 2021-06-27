@@ -2,5 +2,5 @@ window_size_multiplier = 1.0
 window_fullscreen      = false
 window_borderless      = false
 window_title           = MyGame
-game_title             = mygame
-game_exported          = false
+application_title      = mygame
+application_exported   = false

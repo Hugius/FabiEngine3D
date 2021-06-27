@@ -112,7 +112,7 @@ void NetworkClientAPI::update()
 					else if (_tcpMessageBuild == "SERVER_FULL") // Handle SERVER_FULL message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -122,7 +122,7 @@ void NetworkClientAPI::update()
 					else if (_tcpMessageBuild == "USER_ALREADY_CONNECTED") // Handle USER_ALREADY_CONNECTED message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -132,7 +132,7 @@ void NetworkClientAPI::update()
 					else if (_tcpMessageBuild == "DISCONNECTED_BY_SERVER") // Handle DISCONNECTED_BY_SERVER message
 					{
 						// Disconnect next tick
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
 						_tcpMessageBuild = "";
 						_mustDisconnectFromServer = true;
 
@@ -161,7 +161,7 @@ void NetworkClientAPI::update()
 					}
 					else // Handle other message
 					{
-						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild));
+						_pendingMessages.push_back(NetworkServerMessage(_tcpMessageBuild, NetworkProtocol::TCP));
 						_tcpMessageBuild = "";
 					}
 				}
@@ -209,7 +209,7 @@ void NetworkClientAPI::update()
 		{
 			if ((messageIP == _serverIP) && (messagePort == _serverPort)) // Message must come from server
 			{
-				_pendingMessages.push_back(NetworkServerMessage(messageContent));
+				_pendingMessages.push_back(NetworkServerMessage(messageContent, NetworkProtocol::UDP));
 			}
 		}
 		else if

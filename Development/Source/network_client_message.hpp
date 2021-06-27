@@ -1,5 +1,7 @@
 #pragma once
 
+#include "network_protocol.hpp"
+
 #include <string>
 
 using std::string;
@@ -12,12 +14,14 @@ struct NetworkClientMessage final
 		const string& IP,
 		const string& port,
 		const string& username,
-		const string& content)
+		const string& content,
+		const NetworkProtocol protocol)
 		:
 		IP(IP),
 		port(port),
 		username(username),
-		content(content)
+		content(content),
+		protocol(protocol)
 	{
 
 	}
@@ -26,4 +30,5 @@ struct NetworkClientMessage final
 	const string port;
 	const string username;
 	const string content;
+	const NetworkProtocol protocol;
 };

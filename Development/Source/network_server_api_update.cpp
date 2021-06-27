@@ -149,7 +149,8 @@ BEGIN:
 						}
 						else // Handle other message
 						{
-							_pendingMessages.push_back(NetworkClientMessage(clientIP, clientPort, clientUsername, clientMessageBuild));
+							_pendingMessages.push_back(
+								NetworkClientMessage(clientIP, clientPort, clientUsername, clientMessageBuild, NetworkProtocol::TCP));
 							clientMessageBuild = "";
 						}					
 					}
@@ -210,7 +211,8 @@ BEGIN:
 					// Check if username matches
 					if (username == _clientUsernames[i])
 					{
-						_pendingMessages.push_back(NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content));
+						_pendingMessages.push_back(
+							NetworkClientMessage(_clientIPs[i], _clientPorts[i], username, content, NetworkProtocol::UDP));
 						break;
 					}
 				}

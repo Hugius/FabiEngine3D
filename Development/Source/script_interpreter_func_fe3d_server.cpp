@@ -230,7 +230,19 @@ bool ScriptInterpreter::_executeFe3dServerFunction(const string& functionName, v
 			}
 		}
 	}
-	else if (functionName == "fe3d:server_get_pending_messages")
+	else if (functionName == "fe3d:server_get_pending_protocols")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto messages = _fe3d.networkServer_getPendingMessages();
+			for (const auto& message : messages)
+			{
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, (message.protocol == NetworkProtocol::TCP ? "TCP" : "UDP")));
+			}
+		}
+	}
+	else if (functionName == "fe3d:server_get_pending_contents")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

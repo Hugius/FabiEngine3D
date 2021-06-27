@@ -41,6 +41,13 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
+
+		// Scripting error has been thrown
+		if (!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
+		{
+			application_stop();
+			_promptOnExit = true;
+		}
 	}
 	else // Engine preview
 	{

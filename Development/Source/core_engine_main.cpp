@@ -47,9 +47,11 @@ void CoreEngine::_start()
 		return;
 	}
 
-	// Setup
-	_prepareApplication();
+	// Start running
 	_isRunning = true;
+
+	// Prepare application
+	_prepareApplication();
 
 	// Variables
 	auto previous = std::chrono::high_resolution_clock::now();
@@ -179,32 +181,36 @@ void CoreEngine::_prepareApplication()
 	// Initialize engine controller
 	_fe3d.FE3D_CONTROLLER_INIT();
 
-	// Hide logo
-	if (!Config::getInst().isApplicationExported())
+	// Check if engine is still running
+	if (_isRunning)
 	{
-		_window.disableColorKeying(keyingColor);
-	}
-
-	// Create window if necessary
-	if (!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
-	{
-		// Set window properties
-		_window.setSize(Config::getInst().getWindowSize());
-		Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
-		!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
-		Config::getInst().isApplicationExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
-		_window.showWindow();
-
-		// Only if in engine preview
-		if (Config::getInst().isApplicationExported())
+		// Hide logo
+		if (!Config::getInst().isApplicationExported())
 		{
-			// No fade in
-			_window.setOpacity(1.0f);
+			_window.disableColorKeying(keyingColor);
 		}
-		else
+
+		// Create window if necessary
+		if (!Config::getInst().isApplicationExported() || (Config::getInst().isApplicationExported() && !_fe3d.networkServer_isRunning()))
 		{
-			// Start smooth window fade in
-			_window.setOpacity(0.0f);
+			// Set window properties
+			_window.setSize(Config::getInst().getWindowSize());
+			Config::getInst().isWindowFullscreen() ? _window.enableFullscreen() : void();
+			!Config::getInst().isWindowBorderless() ? _window.showBorder() : void();
+			Config::getInst().isApplicationExported() ? _window.setTitle(Config::getInst().getWindowTitle()) : void();
+			_window.showWindow();
+
+			// Only if in engine preview
+			if (Config::getInst().isApplicationExported())
+			{
+				// No fade in
+				_window.setOpacity(1.0f);
+			}
+			else
+			{
+				// Start smooth window fade in
+				_window.setOpacity(0.0f);
+			}
 		}
 	}
 }

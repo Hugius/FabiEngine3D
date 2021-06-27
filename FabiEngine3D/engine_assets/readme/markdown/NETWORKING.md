@@ -5,15 +5,16 @@
 - It is **NOT** a game and its only purpose is processing incoming/outgoing messages from/to clients.
 - Before you can call any server scripting functions, the client **must be started**.
 - You can **only** start a server in an **initialization script** before **any** other FE3D scripting functions are called.
-- If you **export** the server project there will be no window displaying, only the **logging console**.
-- The server is hosted on the **IPV4 address** of your computer (write `ipconfig` in your Windows command prompt to look it up).
+- If you **export** A server project there will be no window displaying, only the **logging console**.
+- A server is hosted on the **IPV4 address** of your computer (write `ipconfig` in your Windows command prompt to look it up).
 - You can **portforward** the server in your router settings on **port 61205** for both **TCP & UDP** protocols.
-- There can be **only 1** FabiEngine3D server running on the same machine.
 - A server can **only** access: `server_*`, `directory_*`, `file_*`, `timer_*`, `application_stop`, `print`, `time_interval`.
-- The server can **send/receive** messages to/from clients.
+- There can be **only 1** FabiEngine3D server running on the same machine.
+- A server can **send/receive** messages to/from clients.
 - You can set a **maximum** amount of **clients** that can connect to the server.
+- A server runs at the **maximum update speed** possible (it **overrides** the 144 ticks/second engine default).
 - Be careful with **performance heavy operations** in the server scripts, otherwise it might not be able to handle client messages in time.
-- The server runs at the **maximum update speed** possible (it **overrides** the 144 ticks/second engine default).
+- A server application does not need the `game_assets` folder to run.
 
 ### Client
 - A FabiEngine3D client system exists **within a FabiEngine3D game**.

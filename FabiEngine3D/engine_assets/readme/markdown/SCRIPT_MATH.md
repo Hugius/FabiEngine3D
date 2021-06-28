@@ -1,4 +1,5 @@
-### Math functions
+# Math functions
+### Getters
 - `math:tan`(`DEC` degrees) ---> `DEC`  
   Returns the tangent of **degrees**.
 - `math:sin`(`DEC` degrees) ---> `DEC`  

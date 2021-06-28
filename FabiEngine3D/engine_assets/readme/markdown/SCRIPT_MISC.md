@@ -1,7 +1,8 @@
-### Miscellaneous functions
+# Miscellaneous functions
+### Getters
 - `misc:list_concat`(`STR` firstName, `STR` secondName) ---> `LIST`  
   Returns the lists with **firstName** and **secondName** concatenated together. **firstName** and **secondName** must be put in string values.
-- `misc:list_size`(`STR` name) ---> `INT`  
+- `misc:list_get_size`(`STR` name) ---> `INT`  
   Returns the total amount of items in list with **name**. **name** must be put in a string value.
 - `misc:list_contains`(`STR` name, `VEC3/STR/DEC/INT/BOOL` value) ---> `BOOL`  
   Returns true if list with **name** contains **value**. **name** must be put in a string value.
@@ -9,9 +10,9 @@
   Returns the list with **name** in reverse. **name** must be put in a string value.
 - `misc:string_concat`(`STR` first, `STR` second) ---> `STR`  
   Returns **first** and **second** concatenated together.
-- `misc:string_size`(`STR` string) ---> `INT`  
+- `misc:string_get_size`(`STR` string) ---> `INT`  
   Returns the total amount of characters **string**.
-- `misc:string_part`(`STR` string, `INT` index, `INT` count) ---> `STR`  
+- `misc:string_get_part`(`STR` string, `INT` index, `INT` count) ---> `STR`  
   Returns a part from **string**. Example: **string** = "test", **index** = 1, **count** = 2, returns: "est".
 - `misc:string_contains`(`STR` string, `STR` subString) ---> `BOOL`  
   Returns true if **string** contains **subString**.

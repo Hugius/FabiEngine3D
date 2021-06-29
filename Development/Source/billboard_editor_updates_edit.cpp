@@ -248,11 +248,18 @@ void BillboardEditor::_updateBillboardEditing()
 							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
 								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 							{
+								// Set font
 								const string newFilePath = filePath.substr(rootDirectory.size());
 								_fe3d.misc_clearFontCache(newFilePath);
 								_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID), 
 									_fe3d.billboardEntity_getFontPath(_currentBillboardID));
 								_fe3d.billboardEntity_setFont(_currentBillboardID, newFilePath);
+
+								// Set default text
+								if (_fe3d.billboardEntity_getTextContent(_currentBillboardID).empty())
+								{
+									_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
+								}
 							}
 							else
 							{

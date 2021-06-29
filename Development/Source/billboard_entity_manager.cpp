@@ -95,8 +95,11 @@ void BillboardEntityManager::update()
 		Vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
+			// Calculate center of billboard
+			Vec3 position = (entity->getTranslation() + Vec3(0.0f, (entity->getScaling().y / 2.0f), 0.0f));
+
 			// Calculate direction
-			Vec3 direction = entity->getTranslation() - _renderBus.getCameraPosition();
+			Vec3 direction = (position - _renderBus.getCameraPosition());
 
 			// Calculate angles
 			float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));

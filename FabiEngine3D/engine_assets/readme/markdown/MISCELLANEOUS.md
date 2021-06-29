@@ -1,4 +1,4 @@
-# Appendix
+# Miscellaneous
 ### Coordinate systems
 - The **X axis** is horizontal (left & right).
 - The **Y axis** is vertical (down & up).
@@ -7,7 +7,7 @@
 - The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
 ### Rotations
 - Beware of the **[Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock)** when **rotating** objects in all 3 (XYZ) directions!
-- Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation, which is very useful in a lot of gameplay situations.
+- Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation.
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
 - X rotations go **towards** the direction of the X axis.
 - Z rotations go **towards** the direction of the Z axis.
@@ -44,10 +44,10 @@
 - The water refraction effect has a **huge** impact on performance, because all models & billboards have to be rendered **twice**.
 - The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
 ### Miscellaneous
-- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF, fog, motion blur, lens flare.
+- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by: DOF, fog, motion blur, lens flare.
 - **Text** entities are rendered on top of **image** entities, because of the **rendering order**.
 - **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
-- The engine **updates** its logic at a **fixed speed** (144 ticks/second) even if the rendering FPS is higher/lower.
+- The engine **updates** its logic at a **fixed speed** (144 ticks/second). Even if the rendering FPS is higher/lower.
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

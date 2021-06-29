@@ -18,7 +18,7 @@ FabiEngine3D is a game engine for simple 3D PC games. It contains various featur
 - [Scripting Functions](FabiEngine3D/engine_assets/readme/markdown/SCRIPT_FUNCTIONS.md)
 - [Networking](FabiEngine3D/engine_assets/readme/markdown/NETWORKING.md)
 - [Gameplay](FabiEngine3D/engine_assets/readme/markdown/GAMEPLAY.md)
-- [Appendix](FabiEngine3D/engine_assets/readme/markdown/APPENDIX.md)
+- [Miscellaneous](FabiEngine3D/engine_assets/readme/markdown/MISCELLANEOUS.md)
 
 # Games
 ### Starvation

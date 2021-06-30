@@ -84,17 +84,16 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_renderBillboardEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-		_renderImageEntities();
-		_renderTextEntities();
+		_renderGUI();
 		_renderCustomCursor();
 	}
 	else
 	{
-		// Update reflection priorities
+		// Temporarily disable scene reflections if water has reflections
 		bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 			_entityBus->getWaterEntity()->isReflective();
-		bool sceneReflectionsEnabled = _renderBus.isSceneReflectionsEnabled();
-		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled && !waterReflectionsNeeded);
+		bool wasSceneReflectionsEnabled = _renderBus.isSceneReflectionsEnabled();
+		_renderBus.setSceneReflectionsEnabled(wasSceneReflectionsEnabled && !waterReflectionsNeeded);
 
 		// Pre-rendering
 		_timer.startDeltaPart("reflectionPreRender");
@@ -185,21 +184,18 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		}
 		_timer.stopDeltaPart();
 
-		// Render image entities
+		// Render IMAGE entities & TEXT entities
 		_timer.startDeltaPart("guiEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
-		_renderImageEntities();
-
-		// Render text entities
-		_renderTextEntities();
+		_renderGUI();
 
 		// Render custom cursor entity
 		_renderCustomCursor();
 		_renderBus.setTriangleCountingEnabled(false);
 		_timer.stopDeltaPart();
 
-		// Update reflection priorities
-		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled);
+		// Enable scene reflections again if it was enabled
+		_renderBus.setSceneReflectionsEnabled(wasSceneReflectionsEnabled);
 	}
 }
 

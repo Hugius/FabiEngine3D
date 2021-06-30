@@ -25,13 +25,13 @@ void RightViewportController::initialize()
 
 	// Main menu
 	auto mainMenuScreen = rightWindow->getScreen("mainMenuControls");
+	mainMenuScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
+	mainMenuScreen->addRectangle("mouseLeft", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
+	mainMenuScreen->addRectangle("esc", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "esc.png", false);
 	mainMenuScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("General controls"), textHeight), "General controls", white);
 	mainMenuScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move cursor"), textHeight), "Move cursor", black, false);
 	mainMenuScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.475f), Vec2(CW("Confirm"), textHeight), "Confirm", black, false);
 	mainMenuScreen->addTextfield("esc", Vec2(-0.5f, 0.275f), Vec2(CW("Exit"), textHeight), "Exit", black, false);
-	mainMenuScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
-	mainMenuScreen->addRectangle("mouseLeft", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
-	mainMenuScreen->addRectangle("esc", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "esc.png", false);
 
 	// Environment editor
 	auto environmentditorScreen = rightWindow->getScreen("environmentEditorControls");

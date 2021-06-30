@@ -73,5 +73,5 @@ private:
 	unordered_map<string, shared_ptr<TextEntity>>	   _textEntities;
 	unordered_map<string, shared_ptr<WaterEntity>>	   _waterEntities;
 
-	unsigned int _guiDepth = 0;
+	static inline unsigned int _guiDepth = 0;
 };

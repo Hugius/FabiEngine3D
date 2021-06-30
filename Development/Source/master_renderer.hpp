@@ -93,8 +93,7 @@ private:
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneTexture();
-	void _renderImageEntities();
-	void _renderTextEntities();
+	void _renderGUI();
 	void _renderCustomCursor();
 
 	// Other

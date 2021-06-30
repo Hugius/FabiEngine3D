@@ -37,22 +37,22 @@ void BottomViewportController::initialize()
 	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("imageEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
-	// Update profiling
+	// Update-profiling statistics
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
-	int counter = 1;
+	int uCounter = 1;
 	for (const auto& [key, value] : updateStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
-		counter++;
+		_statsScreen->addTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		uCounter++;
 	}
 
-	// Render profiling
+	// Render-profiling statistics
 	auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
-	counter = 1;
+	int rCounter = 1;
 	for (const auto& [key, value] : renderStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
-		counter++;
+		_statsScreen->addTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		rCounter++;
 	}
 
 	// Console window

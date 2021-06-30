@@ -164,63 +164,52 @@ void MasterRenderer::_renderFinalSceneTexture()
 	_finalRenderer.unbind();
 }
 
-void MasterRenderer::_renderImageEntities()
+void MasterRenderer::_renderGUI()
 {
-	if (!_entityBus->getImageEntities().empty())
+	if (!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
 	{
 		// Bind
 		_imageEntityRenderer.bind();
 
-		// Sort render order
-		std::map<unsigned int, shared_ptr<ImageEntity>> orderedMap;
+		// Sort rendering order
+		std::map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
 		for (const auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
 			// Custom cursor entity must be rendered last
 			if (entity->getID() != _renderBus.getCursorEntityID())
 			{
-				orderedMap.insert(std::make_pair(entity->getDepth(), entity));
+				orderedEntityMap.insert(std::make_pair(entity->getDepth(), entity));
 			}
 		}
-
-		// Render IMAGE entities
-		for (const auto& [keyID, entity] : orderedMap)
-		{
-			_imageEntityRenderer.render(entity);
-		}
-
-		// Unbind
-		_imageEntityRenderer.unbind();
-	}
-}
-
-void MasterRenderer::_renderTextEntities()
-{
-	if (!_entityBus->getTextEntities().empty())
-	{
-		// Bind
-		_imageEntityRenderer.bind();
-
-		// Sort render order
-		std::map<unsigned int, shared_ptr<TextEntity>> orderedMap;
 		for (const auto& [keyID, entity] : _entityBus->getTextEntities())
 		{
-			orderedMap.insert(std::make_pair(entity->getDepth(), entity));
+			orderedEntityMap.insert(std::make_pair(entity->getDepth(), entity));
 		}
 
-		// Render TEXT entities
-		for (const auto& [keyID, textEntity] : orderedMap)
+		// Render entities
+		for (const auto& [keyID, entity] : orderedEntityMap)
 		{
-			if (textEntity->isDynamic()) // Dynamic text rendering
+			// Check if entity is a TEXT entity
+			auto castedTextEntity = std::dynamic_pointer_cast<TextEntity>(entity);
+
+			if (castedTextEntity == nullptr) // IMAGE entity
 			{
-				// Render every character individually
-				for (const auto& characterEntity : textEntity->getCharacterEntities())
-				{
-					_imageEntityRenderer.render(characterEntity);
-				}
+				_imageEntityRenderer.render(entity);
 			}
-			else // Static text rendering
+			else // TEXT entity
 			{
-				_imageEntityRenderer.render(textEntity);
+				if (castedTextEntity->isDynamic()) // Dynamic text rendering
+				{
+					// Render every character individually
+					for (const auto& characterEntity : castedTextEntity->getCharacterEntities())
+					{
+						_imageEntityRenderer.render(characterEntity);
+					}
+				}
+				else // Static text rendering
+				{
+					_imageEntityRenderer.render(castedTextEntity);
+				}
 			}
 		}
 

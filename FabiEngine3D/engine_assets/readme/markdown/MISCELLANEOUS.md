@@ -5,15 +5,15 @@
 - The **Z axis** is what makes a 3D world (back & front).
 - The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).
 - The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
-### Rotation system
+### Rotations
 - Beware of the **[Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock)** when **rotating** objects in all 3 (XYZ) directions!
 - Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation.
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
 - X rotations go **towards** the direction of the X axis.
 - Z rotations go **towards** the direction of the Z axis.
 - Y rotations go **around** the direction of the Y axis.
-- FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock.
-- FabiEngine3D **does** come with first person camera support, but **not** third person.
+- FabiEngine3D does **NOT** support a camera roll, because of the infamous Gimbal Lock.
+- FabiEngine3D **does** come with first person camera support, but **NOT** third person.
 ### AABB system
 - Bound **model AABBs** are adjusted to the transformation (position, rotation, size) of the model **automatically**. They will only rotate in **1 direction** (the direction with the greatest angle of rotation).
 - Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate only in **1 direction** (the direction with the greatest angle of rotation).
@@ -21,9 +21,20 @@
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
 ### Scene reflections
-- **Scene reflections** on **models* and **water** use the same reflection technique; **only 1** can be active at a time.
+- **Scene reflections** on **models** and **water** use the same reflection technique; **only 1** can be active at a time.
 - Reflective water has **priority** over reflective models (if your water is reflective, your models will **NOT** have scene reflections).
 - Make sure **all** of your reflective **models** are placed at the **same height/Y coordinate**!
+### Performance
+![performance](../images/performance.png)
+- You can use the performance statistics to analyze your **application's performance**.
+- The amounts of entities are the **total** amounts.
+- The amount of triangles is the **realtime** amount of triangles being rendered every frame.
+- `coreUpdate` includes all function calls and calculations in your **update scripts**.
+- `bufferSwap` means the actual buffering on the **output screen**.
+- Make use of **LOD models** to improve your performance on **high-poly models**.
+- **Lower the graphics quality** in the project settings to improve your **graphics performance**.
+- The water refraction effect has a **huge** impact on performance, because all **models** & **billboards** have to be rendered **twice**.
+- The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
 ### Value limits for frequently used values
 - **Color** values (r,g,b) are clamped between 0.0 and 1.0 (0% and 100% respectively).
 - **Alpha/transparency** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
@@ -36,17 +47,6 @@
 - **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
 - **Index** values cannot be lower than 0 (because a negative index does not exist).
 - **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
-### Performance
-![performance](../images/performance.png)
-- You can use the performance statistics to analyze your **application's performance**.
-- The amounts of entities are the **total** amounts.
-- The amount of triangles is the **realtime** amount of triangles being rendered every frame.
-- `coreUpdate` includes all function calls and calculations in your **update scripts**.
-- `bufferSwap` means the actual buffering on the **output screen**.
-- Make use of **LOD models** to improve your performance on **high-poly models**.
-- **Lower the graphics quality** in the project settings to improve your **graphics performance**.
-- The water refraction effect has a **huge** impact on performance, because all **models** & **billboards** have to be rendered **twice**.
-- The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
 ### Miscellaneous
 - **Billboards** are **NOT** affected by any **lighting**.
 - **Image** entities and **text** entities are rendered in the **order** you placed them (last placed entity on top).

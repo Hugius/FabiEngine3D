@@ -1,5 +1,5 @@
 # Miscellaneous
-### Coordinate system
+### Coordinates
 - The **X axis** is horizontal (left & right).
 - The **Y axis** is vertical (down & up).
 - The **Z axis** is what makes a 3D world (back & front).
@@ -20,7 +20,7 @@
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
-### Reflection system
+### Scene reflections
 - **Scene reflections** on **models* and **water** use the same reflection technique; **only 1** can be active at a time.
 - Reflective water has **priority** over reflective models (if your water is reflective, your models will **NOT** have scene reflections).
 - Make sure **all** of your reflective **models** are placed at the **same height/Y coordinate**!
@@ -36,7 +36,7 @@
 - **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
 - **Index** values cannot be lower than 0 (because a negative index does not exist).
 - **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
-### Performance metrics
+### Performance
 ![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **application's performance**.
 - The amounts of entities are the **total** amounts.
@@ -45,11 +45,11 @@
 - `bufferSwap` means the actual buffering on the **output screen**.
 - Make use of **LOD models** to improve your performance on **high-poly models**.
 - **Lower the graphics quality** in the project settings to improve your **graphics performance**.
-- The water refraction effect has a **huge** impact on performance, because all models & billboards have to be rendered **twice**.
+- The water refraction effect has a **huge** impact on performance, because all **models** & **billboards** have to be rendered **twice**.
 - The in-engine logging console **can** have impact on performance during in-engine gameplay runtime, because of scripting **error checks**. The higher the **amount** of console messages, the **bigger** the performance impact. To resolve this, simply **clear** the console messages.
 ### Miscellaneous
-- **Billboards** are **NOT** affected by any lighting or shadows.
-- **Text** entities are rendered **on top** of **image** entities, because of the **rendering order**.
+- **Billboards** are **NOT** affected by any **lighting**.
+- **Image** entities and **text** entities are rendered in the **order** you placed them (last placed entity on top).
 - **Centering** the **cursor** might take 1 frame (or more) in **time**, because it will **NOT** be centered instantly.
 - The engine **updates** its logic at a **fixed speed** (144 ticks/second). Even if the rendering FPS is higher/lower.
 ### Tips & tricks

@@ -36,7 +36,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Default camera
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
-		misc_centerCursor();
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);

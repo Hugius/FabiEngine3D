@@ -90,7 +90,7 @@ void SceneEditor::_updateModelPlacingMenu()
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
-								_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
+								_fe3d.misc_centerCursor();
 								break;
 							}
 						}

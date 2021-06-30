@@ -83,7 +83,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
-							_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
+							_fe3d.misc_centerCursor();
 							break;
 						}
 					}

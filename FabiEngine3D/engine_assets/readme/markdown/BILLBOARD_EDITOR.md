@@ -17,12 +17,14 @@
 - A textured billboard can have a **sprite animation**.
 ### Properties
 - **Size**: the size of the billboard. **Range**: 0 to inf.
+- **Facing X**: enable or disable billboard facing towards the camera around the X axis. **Range**: ON or OFF.
+- **Facing Y**: enable or disable billboard facing towards the camera around the Y axis. **Range**: ON or OFF.
+- **Reflective**: enable or disable billboard capturing in reflections. **Range**: ON or OFF.
+- **Shadowed**: enable or disable billboard capturing in shadows. **Range**: ON or OFF.
+- **Alpha**: enable or disable transparent pixels removal from the texture. **Range**: ON or OFF.
 - **Rows**: the amount of rows in the sprite animation texture. **Range**: 1 to inf.
 - **Columns**: the amount of columns in the sprite animation texture. **Range**: 1 to inf.
 - **Frame step**: the amount of engine frames between the sprite animation frame cycles. **Range**: 0 to inf.
-- **Alpha**: enable or disable transparent pixels removal from the texture. **Range**: ON or OFF.
-- **Facing X**: enable or disable billboard facing towards the camera around the X axis. **Range**: ON or OFF.
-- **Facing Y**: enable or disable billboard facing towards the camera around the Y axis. **Range**: ON or OFF.
 - **Lightness**: the brightness of the billboard fragments. **Range**: 0 to inf.
 - **Color**: the RGB color that will be mixed with the billboard fragments. **Range**: 0 to 255.
 - **Content**: the text content of the billboard.

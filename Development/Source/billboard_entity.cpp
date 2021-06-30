@@ -1,4 +1,6 @@
 #include "billboard_entity.hpp"
+#include "billboard_entity.hpp"
+#include "billboard_entity.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
@@ -34,12 +36,12 @@ void BillboardEntity::updateModelMatrix()
 
 void BillboardEntity::setCameraFacingX(bool value)
 {
-	_isCameraFacingX = value;
+	_isFacingCameraX = value;
 }
 
 void BillboardEntity::setCameraFacingY(bool value)
 {
-	_isCameraFacingY = value;
+	_isFacingCameraY = value;
 }
 
 void BillboardEntity::setDiffuseMap(GLuint value)
@@ -126,6 +128,16 @@ void BillboardEntity::setTransparent(bool value)
 void BillboardEntity::setDepthMapIncluded(bool value)
 {
 	_isDepthMapIncluded = value;
+}
+
+void BillboardEntity::setReflected(bool value)
+{
+	_isReflected = value;
+}
+
+void BillboardEntity::setShadowed(bool value)
+{
+	_isShadowed = value;
 }
 
 void BillboardEntity::startSpriteAnimation(int loops)
@@ -357,19 +369,29 @@ const bool BillboardEntity::isSpriteAnimationPaused() const
 	return _isSpriteAnimationPaused;
 }
 
-const bool BillboardEntity::isCameraFacingX() const
+const bool BillboardEntity::isFacingCameraX() const
 {
-	return _isCameraFacingX;
+	return _isFacingCameraX;
 }
 
-const bool BillboardEntity::isCameraFacingY() const
+const bool BillboardEntity::isFacingCameraY() const
 {
-	return _isCameraFacingY;
+	return _isFacingCameraY;
 }
 
 const bool BillboardEntity::isDepthMapIncluded() const
 {
 	return _isDepthMapIncluded;
+}
+
+const bool BillboardEntity::isReflected() const
+{
+	return _isReflected;
+}
+
+const bool BillboardEntity::isShadowed() const
+{
+	return _isShadowed;
 }
 
 const bool BillboardEntity::hasDiffuseMap() const

@@ -46,7 +46,7 @@ void Camera::reset()
 void Camera::update(Ivec2 lastCursorPosition)
 {
 	// Temporary values
-	Ivec2 currenCursorPosition = _window.getCursorPos();
+	Ivec2 currenCursorPosition = _window.getCursorPosition();
 	const int left = Config::getInst().getVpPos().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
@@ -55,7 +55,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 	// Update cursor centering
 	if (_mustCenterCursor)
 	{
-		_window.setCursorPos({ xMiddle, yMiddle });
+		_window.setCursorPosition({ xMiddle, yMiddle });
 		_mustCenterCursor = false;
 		_cursorIsBeingCentered = true;
 	}
@@ -96,7 +96,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		}
 
 		// Spawn mouse in middle of screen
-		_window.setCursorPos({ xMiddle, yMiddle });
+		_window.setCursorPosition({ xMiddle, yMiddle });
 	}
 
 	// Update yaw & pitch movements

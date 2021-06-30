@@ -76,12 +76,12 @@ void FabiEngine3D::misc_disableTerrainRaycasting()
 void FabiEngine3D::misc_centerCursor()
 {
 	// Center the cursor
-	Ivec2 currenCursorPosition = _core->_window.getCursorPos();
+	Ivec2 currenCursorPosition = _core->_window.getCursorPosition();
 	const int left = Config::getInst().getVpPos().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
 	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
-	_core->_window.setCursorPos({ xMiddle, yMiddle });
+	_core->_window.setCursorPosition({ xMiddle, yMiddle });
 
 	// Notify camera of centering
 	_core->_camera.notifyCursorCenter();
@@ -90,7 +90,7 @@ void FabiEngine3D::misc_centerCursor()
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_rayCaster.update(pos);
-	_core->_window.setCursorPos(pos);
+	_core->_window.setCursorPosition(pos);
 }
 
 void FabiEngine3D::misc_enableVsync()

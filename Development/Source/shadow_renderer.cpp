@@ -90,3 +90,38 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		}
 	}
 }
+
+void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
+{
+	if (entity->isVisible() && entity->isShadowed())
+	{
+		// Shader uniforms
+		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_sampler_diffuseMap", 0);
+
+		// Model matrix
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+
+		// Diffuse map transparency
+		if (entity->isTransparent() && entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
+
+		// Bind
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+
+		// Render
+		_shader.uploadUniform("u_isInstanced", false);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+	}
+}

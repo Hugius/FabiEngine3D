@@ -106,7 +106,7 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete GAME entities
+	// Delete MODEL entities
 	for (const auto& [ID, previewID] : _loadedModelIDs)
 	{
 		// Delete model

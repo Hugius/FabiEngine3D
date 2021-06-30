@@ -90,8 +90,8 @@ void BillboardEntityManager::update()
 	for (const auto& [keyID, entity] : _getBillboardEntities())
 	{
 		// 3D camera facing
-		auto facingX = entity->isCameraFacingX();
-		auto facingY = entity->isCameraFacingY();
+		auto facingX = entity->isFacingCameraX();
+		auto facingY = entity->isFacingCameraY();
 		Vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{

@@ -363,6 +363,8 @@ public:
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
 	void billboardEntity_setDepthMapIncluded(const string& ID, bool enabled);
+	void billboardEntity_setReflected(const string& ID, bool enabled);
+	void billboardEntity_setShadowed(const string& ID, bool enabled);
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
@@ -376,6 +378,8 @@ public:
 	const bool billboardEntity_isFacingCameraX(const string& ID);
 	const bool billboardEntity_isFacingCameraY(const string& ID);
 	const bool billboardEntity_isDepthMapIncluded(const string& ID);
+	const bool billboardEntity_isReflected(const string& ID);
+	const bool billboardEntity_isShadowed(const string& ID);
 	const bool billboardEntity_isInstanced(const string& ID);
 	const Vec3 billboardEntity_getPosition(const string& ID);
 	const Vec3 billboardEntity_getRotation(const string& ID);

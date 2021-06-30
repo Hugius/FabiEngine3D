@@ -98,7 +98,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			Vec2 size;
 			Vec3 color;
 			float lightness;
-			bool facingX, facingY, transparent, isAnimationStarted;
+			bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted;
 			unsigned int animationRows, animationColumns, animationFramestep;
 
 			// For file extraction
@@ -112,10 +112,12 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				color.r >>
 				color.g >>
 				color.b >>
-				facingX >>
-				facingY >>
+				isFacingX >>
+				isFacingY >>
 				diffuseMapPath >>
-				transparent >>
+				isTransparent >>
+				isReflected >>
+				isShadowed >>
 				fontPath >>
 				textContent >>
 				isAnimationStarted >>
@@ -136,12 +138,13 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			_loadedBillboardIDs.push_back(billboardID);
 
 			// Determine billboard type
-			if (diffuseMapPath != "") // Textured billboard
+			if (diffuseMapPath != "")
 			{
-				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, BILLBOARD_POSITION, Vec3(0.0f), size, transparent, facingX, facingY, false);
+				// Textured billboard
+				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, BILLBOARD_POSITION, Vec3(0.0f), size, isTransparent, isFacingX, isFacingY, false);
 				_fe3d.billboardEntity_setColor(billboardID, color);
 
-				// Playing sprite animation
+				// Play sprite animation
 				if (isAnimationStarted)
 				{
 					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
@@ -152,15 +155,17 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			}
 			else if (fontPath != "") // Text billboard
 			{
-				_fe3d.billboardEntity_add(billboardID, textContent, fontPath, color, BILLBOARD_POSITION, Vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billboardEntity_add(billboardID, textContent, fontPath, color, BILLBOARD_POSITION, Vec3(0.0f), size, isFacingX, isFacingY, false);
 			}
 			else // Colored billboard
 			{
-				_fe3d.billboardEntity_add(billboardID, color, BILLBOARD_POSITION, Vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billboardEntity_add(billboardID, color, BILLBOARD_POSITION, Vec3(0.0f), size, isFacingX, isFacingY, false);
 			}
 
 			// Miscellaneous
 			_fe3d.billboardEntity_setLightness(billboardID, lightness);
+			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
+			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 		}
 
 		// Close file
@@ -205,6 +210,8 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
 		auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
+		auto isReflected = _fe3d.billboardEntity_isReflected(billboardID);
+		auto isShadowed = _fe3d.billboardEntity_isShadowed(billboardID);
 		auto isAnimationStarted = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
 		auto animationRows = _fe3d.billboardEntity_getSpriteAnimationRows(billboardID);
 		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
@@ -231,6 +238,8 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			isFacingY << " " <<
 			diffuseMapPath << " " <<
 			isTransparent << " " <<
+			isReflected << " " <<
+			isShadowed << " " <<
 			fontPath << " " <<
 			textContent << " " <<
 			isAnimationStarted << " " <<

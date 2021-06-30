@@ -356,13 +356,11 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		return false;
 	}
 
-	// Temporary values
+	// Add billboard entity
 	auto color = _fe3d.billboardEntity_getColor(previewID);
+	auto size = _fe3d.billboardEntity_getSize(previewID);
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
 	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
-
-	// Add billboard entity
-	Vec2 size = _fe3d.billboardEntity_getSize(previewID);
 	_fe3d.billboardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine billboard entity type
@@ -376,7 +374,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));
 	}
 
-	// Animation
+	// Start sprite animation
 	if (_fe3d.billboardEntity_isSpriteAnimationStarted(previewID))
 	{
 		_fe3d.billboardEntity_setSpriteAnimationRows(newID, _fe3d.billboardEntity_getSpriteAnimationRows(previewID));
@@ -389,6 +387,8 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true);
 
 	// Miscellaneous
+	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
+	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
 

@@ -5,7 +5,7 @@
 void CoreEngine::_updateApplication()
 {
 	// Temporary values
-	static Ivec2 lastCursorPosition = _window.getCursorPos();
+	static Ivec2 lastCursorPosition = _window.getCursorPosition();
 
 	// Exit application
 	if (_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
@@ -88,7 +88,7 @@ void CoreEngine::_updateApplication()
 	_updateWindowFading();
 
 	// Save last cursor position
-	lastCursorPosition = _window.getCursorPos();
+	lastCursorPosition = _window.getCursorPosition();
 }
 
 void CoreEngine::_updateWindowFading()

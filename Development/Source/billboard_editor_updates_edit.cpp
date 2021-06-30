@@ -71,6 +71,16 @@ void BillboardEditor::_updateBillboardEditing()
 						bool isFacingY = !_fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
 						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
 					}
+					else if (screen->getButton("isReflected")->isHovered())
+					{
+						bool isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
+						_fe3d.billboardEntity_setReflected(_currentBillboardID, !isReflected);
+					}
+					else if (screen->getButton("isShadowed")->isHovered())
+					{
+						bool isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
+						_fe3d.billboardEntity_setShadowed(_currentBillboardID, !isShadowed);
+					}
 				}
 
 				// Setting billboard size
@@ -101,6 +111,18 @@ void BillboardEditor::_updateBillboardEditing()
 					rotation.y = 0.0f;
 				}
 				_fe3d.billboardEntity_setRotation(_currentBillboardID, rotation);
+
+				// Updating reflected status
+				string reflectedTextEntityID = screen->getButton("isReflected")->getTextfield()->getEntityID();
+				bool isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
+				_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
+				_fe3d.textEntity_setTextContent(reflectedTextEntityID, isReflected ? "Reflected: ON" : "Reflected: OFF");
+
+				// Updating shadowed status
+				string shadowedEntityID = screen->getButton("isShadowed")->getTextfield()->getEntityID();
+				bool isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
+				_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
+				_fe3d.textEntity_setTextContent(shadowedEntityID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 			}
 			else if (screen->getID() == "billboardEditorMenuAppearance")
 			{
@@ -169,11 +191,11 @@ void BillboardEditor::_updateBillboardEditing()
 				newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
 				_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
 
-				// Updating transparency
-				string textEntityID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
+				// Updating transparent status
+				string transparentTextEntityID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 				bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 				_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
-				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
+				_fe3d.textEntity_setTextContent(transparentTextEntityID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
 			}
 			else if (screen->getID() == "billboardEditorMenuAnimation")
 			{

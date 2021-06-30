@@ -2,14 +2,14 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-// Capturing reflection texture
 void MasterRenderer::_captureSceneReflections(Camera& camera)
 {
 	// Check if water reflection needed
-	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
-		_entityBus->getWaterEntity()->isReflective();
+	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && 
+		(_entityBus->getWaterEntity() != nullptr) &&
+		_entityBus->getWaterEntity()->isReflective());
 
-	// Search for a reflective model entity
+	// Search for any reflective model entity
 	bool anyReflectiveEntityFound = false;
 	if (!waterReflectionsNeeded)
 	{
@@ -24,7 +24,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 	}
 
 	// Check if scene reflection needed (and not occupied by water rendering)
-	bool sceneReflectionsNeeded = _renderBus.isSceneReflectionsEnabled() && anyReflectiveEntityFound && !waterReflectionsNeeded;
+	bool sceneReflectionsNeeded = (_renderBus.isSceneReflectionsEnabled() && anyReflectiveEntityFound && !waterReflectionsNeeded);
 	
 	// Check if needed to capture scene
 	if (waterReflectionsNeeded || sceneReflectionsNeeded)
@@ -36,17 +36,33 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Save and hide reflective GAME entities
-		vector<string> reflectiveModelEntityIDs;
+		// Only if scene reflections enabled
+		vector<string> savedModelEntityIDs;
 		if (sceneReflectionsNeeded)
 		{
+			// Iterate through all MODEL entities
 			for (const auto& [keyID, modelEntity]: _entityBus->getModelEntities())
 			{
+				// Check if necessary to hide
 				if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 				{
+					// Hide MODEL entity
 					modelEntity->setVisible(false);
-					reflectiveModelEntityIDs.push_back(modelEntity->getID());
+					savedModelEntityIDs.push_back(modelEntity->getID());
 				}
+			}
+		}
+
+		// Iterate through all BILLBOARD entities
+		vector<string> savedBillboardEntityIDs;
+		for (const auto& [keyID, billboardEntity] : _entityBus->getBillboardEntities())
+		{
+			// Check if necessary to hide
+			if (!billboardEntity->isReflected() && billboardEntity->isVisible())
+			{
+				// Hide BILLBOARD entity
+				billboardEntity->setVisible(false);
+				savedBillboardEntityIDs.push_back(billboardEntity->getID());
 			}
 		}
 
@@ -58,11 +74,11 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		camera.updateMatrices();
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
-		bool shadowsEnabled = _renderBus.isShadowsEnabled();
+		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
 		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
-		bool normalMappingEnabled = _renderBus.isNormalMappingEnabled();
+		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
 		_renderBus.setNormalMappingEnabled(false);
 
 		// Sky HDR must not appear in reflections
@@ -82,7 +98,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_renderTerrainEntity();
 		glDisable(GL_CLIP_DISTANCE0);
 
-		// Render game & billboard entities only for scene reflections
+		// Render model entities & billboard entities only for scene reflections
 		if (sceneReflectionsNeeded)
 		{
 			_renderModelEntities();
@@ -90,8 +106,8 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		}
 
 		// Revert reflection exceptions
-		_renderBus.setShadowsEnabled(shadowsEnabled);
-		_renderBus.setNormalMappingEnabled(normalMappingEnabled);
+		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
 		if (skyEntity != nullptr)
 		{ 
 			skyEntity->setLightness(oldLightness);
@@ -104,17 +120,36 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		camera.setPitch(-camera.getPitch());
 		camera.updateMatrices();
 
-		// Restore reflective GAME entities
+		// Only if scene reflections enabled
 		if (sceneReflectionsNeeded)
 		{
-			for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities()) // Loop over all GAME entities
+			// Iterate through all MODEL entities
+			for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities())
 			{
-				for (const auto& reflectiveID : reflectiveModelEntityIDs) // Loop over all reflective GAME entities
+				// Iterate through all saved MODEL entities
+				for (const auto& reflectiveID : savedModelEntityIDs)
 				{
-					if (modelEntity->getID() == reflectiveID) // Check if IDs match
+					// Check if IDs match
+					if (modelEntity->getID() == reflectiveID)
 					{
+						// Show MODEL entity again
 						modelEntity->setVisible(true);
 					}
+				}
+			}
+		}
+
+		// Iterate through all BILLBOARD entities
+		for (const auto& [keyID, billboardEntity] : _entityBus->getBillboardEntities())
+		{
+			// Iterate through all saved BILLBOARD entities
+			for (const auto& savedID : savedBillboardEntityIDs)
+			{
+				// Check if IDs match
+				if (billboardEntity->getID() == savedID)
+				{
+					// Show BILLBOARD entity again
+					billboardEntity->setVisible(true);
 				}
 			}
 		}
@@ -127,7 +162,6 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 	}
 }
 
-// Capturing water refraction texture
 void MasterRenderer::_captureSceneRefractions()
 {
 	// Temporary values
@@ -154,7 +188,6 @@ void MasterRenderer::_captureSceneRefractions()
 	}
 }
 
-// Capturing shadows
 void MasterRenderer::_captureShadows()
 {
 	if (_renderBus.isShadowsEnabled())
@@ -164,7 +197,7 @@ void MasterRenderer::_captureShadows()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_shadowRenderer.bind();
 
-		// Render GAME entities
+		// Render MODEL entities
 		auto allModelEntities = _entityBus->getModelEntities();
 		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{
@@ -211,6 +244,12 @@ void MasterRenderer::_captureShadows()
 			}
 		}
 
+		// Render BILLBOARD entities
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		{
+			_shadowRenderer.render(entity);
+		}
+
 		// Unbind
 		_shadowRenderer.unbind();
 		_shadowFramebuffer.unbind();
@@ -218,7 +257,6 @@ void MasterRenderer::_captureShadows()
 	}
 }
 
-// Capturing bloom parts
 void MasterRenderer::_captureBloom()
 {
 	if (_renderBus.isBloomEnabled())

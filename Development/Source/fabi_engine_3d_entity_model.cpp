@@ -34,7 +34,7 @@ void FabiEngine3D::modelEntity_delete(const string& ID)
 
 void FabiEngine3D::modelEntity_deleteGroup(const string& ID)
 {
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over GAME entities
+	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over MODEL entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -496,7 +496,7 @@ const vector<string> FabiEngine3D::modelEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over GAME entities
+	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over MODEL entities
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -508,7 +508,7 @@ const vector<string> FabiEngine3D::modelEntity_getGroupIDs(const string& ID)
 {
 	vector<string> IDs;
 
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over GAME entities
+	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities()) // Loop over MODEL entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

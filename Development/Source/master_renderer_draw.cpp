@@ -12,7 +12,7 @@ void MasterRenderer::_renderSkyEntity()
 		// Bind
 		_skyEntityRenderer.bind();
 
-		// Render sky entity
+		// Render SKY entity
 		_skyEntityRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
 		// Unbind
@@ -27,10 +27,10 @@ void MasterRenderer::_renderTerrainEntity()
 		// Bind
 		_terrainEntityRenderer.bind();
 
-		// Render lights
+		// Render LIGHT entities
 		_terrainEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
-		// Render terrain entity
+		// Render TERRAIN entity
 		_terrainEntityRenderer.render(_entityBus->getTerrainEntity());
 
 		// Unbind
@@ -45,10 +45,10 @@ void MasterRenderer::_renderWaterEntity()
 		// Bind
 		_waterEntityRenderer.bind();
 
-		// Render lights
+		// Render LIGHT entities
 		_waterEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
-		// Render water entity
+		// Render WATER entity
 		_waterEntityRenderer.render(_entityBus->getWaterEntity());
 
 		// Unbind
@@ -66,7 +66,7 @@ void MasterRenderer::_renderModelEntities()
 		// Render lights
 		_modelEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
-		// Render GAME entities
+		// Render MODEL entities
 		auto allModelEntities = _entityBus->getModelEntities();
 		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{
@@ -125,7 +125,7 @@ void MasterRenderer::_renderBillboardEntities()
 		// Bind
 		_billboardEntityRenderer.bind();
 
-		// Render billboard entities
+		// Render BILLBOARD entities
 		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			_billboardEntityRenderer.render(entity);
@@ -182,7 +182,7 @@ void MasterRenderer::_renderImageEntities()
 			}
 		}
 
-		// Render all entities
+		// Render IMAGE entities
 		for (const auto& [keyID, entity] : orderedMap)
 		{
 			_imageEntityRenderer.render(entity);
@@ -207,7 +207,7 @@ void MasterRenderer::_renderTextEntities()
 			orderedMap.insert(std::make_pair(entity->getDepth(), entity));
 		}
 
-		// Render all entities
+		// Render TEXT entities
 		for (const auto& [keyID, textEntity] : orderedMap)
 		{
 			if (textEntity->isDynamic()) // Dynamic text rendering

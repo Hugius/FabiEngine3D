@@ -18,6 +18,8 @@ public:
 	void setCameraFacingY(bool value);
 	void setTransparent(bool value);
 	void setDepthMapIncluded(bool value);
+	void setReflected(bool value);
+	void setShadowed(bool value);
 	void setDiffuseMap(GLuint value);
 	void setTranslation(Vec3 value);
 	void setInitialRotation(Vec3 value);
@@ -68,9 +70,11 @@ public:
 	const bool isTransparent() const;
 	const bool isSpriteAnimationStarted() const;
 	const bool isSpriteAnimationPaused() const;
-	const bool isCameraFacingX() const;
-	const bool isCameraFacingY() const;
+	const bool isFacingCameraX() const;
+	const bool isFacingCameraY() const;
 	const bool isDepthMapIncluded() const;
+	const bool isReflected() const;
+	const bool isShadowed() const;
 	const bool hasDiffuseMap() const;
 
 private:
@@ -104,7 +108,9 @@ private:
 	bool _isTransparent			   = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused  = false;
-	bool _isCameraFacingX	       = false;
-	bool _isCameraFacingY	       = false;
+	bool _isFacingCameraX	       = false;
+	bool _isFacingCameraY	       = false;
 	bool _isDepthMapIncluded       = true;
+	bool _isReflected			   = true;
+	bool _isShadowed			   = true;
 };

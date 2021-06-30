@@ -31,9 +31,9 @@ public:
 	void hideWindow();
 	void showCursor();
 	void hideCursor();
-	void setCursorPos(Ivec2 pos);
+	void setCursorPosition(Ivec2 pos);
 
-	const Ivec2 getCursorPos();
+	const Ivec2 getCursorPosition();
 	bool isCursorVisible();
 	const bool isVsyncEnabled();
 

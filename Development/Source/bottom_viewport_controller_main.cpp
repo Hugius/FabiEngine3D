@@ -149,7 +149,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("modelEntityCount")->getEntityID();
-		string text = "Game entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
+		string text = "Model entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

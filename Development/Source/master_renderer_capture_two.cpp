@@ -50,7 +50,7 @@ void MasterRenderer::_captureSceneDepth()
 			_depthRenderer.render(_entityBus->getTerrainEntity());
 		}
 
-		// Render GAME entities
+		// Render MODEL entities
 		auto allModelEntities = _entityBus->getModelEntities();
 		for (const auto& [keyID, modelEntity] : allModelEntities)
 		{

@@ -1,11 +1,11 @@
 # Miscellaneous
-### Coordinates
+### Coordinate system
 - The **X axis** is horizontal (left & right).
 - The **Y axis** is vertical (down & up).
 - The **Z axis** is what makes a 3D world (back & front).
 - The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).
 - The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
-### Rotations
+### Rotation system
 - Beware of the **[Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock)** when **rotating** objects in all 3 (XYZ) directions!
 - Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation.
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees).
@@ -20,10 +20,12 @@
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
-### Scene reflections
-- **Scene reflections** on **models** and **water** use the same reflection technique; **only 1** can be active at a time.
+### Reflection system
+- **Models** have 2 different** reflection types**: sky reflections & scene reflections.
+- **Sky reflections** are rendered at **all times**, but...
+- **Scene reflections** and **water reflections** use the same reflection technique; **only 1** can be active at a time.
 - Reflective water has **priority** over reflective models (if your water is reflective, your models will **NOT** have scene reflections).
-- Make sure **all** of your reflective **models** are placed at the **same height/Y coordinate**!
+- Make sure **all** of your reflective **models** are placed at the **same height/Y coordinate** for correct reflection rendering!
 ### Performance
 ![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **application's performance**.

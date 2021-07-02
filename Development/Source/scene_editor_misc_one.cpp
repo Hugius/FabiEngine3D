@@ -50,7 +50,7 @@ void SceneEditor::_selectModel(const string& modelID)
 		string modelName = tempID.substr(tempID.find('_') + 1);
 		std::reverse(modelName.begin(), modelName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
 	}
 }
@@ -77,7 +77,7 @@ void SceneEditor::_activateModel(const string& modelID)
 	string modelName = tempID.substr(tempID.find('_') + 1);
 	std::reverse(modelName.begin(), modelName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
 }
 
@@ -97,7 +97,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 		string billboardName = tempID.substr(tempID.find('_') + 1);
 		std::reverse(billboardName.begin(), billboardName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
-		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
 	}
 }
@@ -124,7 +124,7 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	string billboardName = tempID.substr(tempID.find('_') + 1);
 	std::reverse(billboardName.begin(), billboardName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
-	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }
 
@@ -144,7 +144,7 @@ void SceneEditor::_selectSound(const string& soundID)
 		string soundName = tempID.substr(tempID.find('_') + 1);
 		std::reverse(soundName.begin(), soundName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected sound: " + soundName, 0.025f);
 	}
 }
@@ -170,7 +170,7 @@ void SceneEditor::_activateSound(const string& soundID)
 	string soundName = tempID.substr(tempID.find('_') + 1);
 	std::reverse(soundName.begin(), soundName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active sound: " + soundName, 0.025f);
 }
 

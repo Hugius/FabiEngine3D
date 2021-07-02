@@ -101,7 +101,7 @@ void BillboardEditor::_updateBillboardCreation()
 							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f),	BILLBOARD_POSITION, Vec3(0.0f), Vec2(1.0f), false, false);
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 								_currentBillboardID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), true);
 							_isCreatingBillboard = false;
 							_isEditingBillboard = true;
 						}
@@ -136,7 +136,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			// Hide last billboard
 			if (_hoveredBillboardID != "")
 			{
-				_fe3d.billboardEntity_hide(_hoveredBillboardID);
+				_fe3d.billboardEntity_setVisible(_hoveredBillboardID, false);
 			}
 
 			// Check if a billboard name is hovered
@@ -154,11 +154,11 @@ void BillboardEditor::_updateBillboardChoosing()
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 							_currentBillboardID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), true);
 					}
 
 					// Miscellaneous
-					_fe3d.billboardEntity_show(_currentBillboardID);
+					_fe3d.billboardEntity_setVisible(_currentBillboardID, true);
 					_gui.getGlobalScreen()->removeChoiceForm("billboards");
 					_isChoosingBillboard = false;
 				}
@@ -183,7 +183,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			// Show hovered billboard
 			if (_hoveredBillboardID != "")
 			{
-				_fe3d.billboardEntity_show(_hoveredBillboardID);
+				_fe3d.billboardEntity_setVisible(_hoveredBillboardID, true);
 			}
 		}
 	}
@@ -213,7 +213,7 @@ void BillboardEditor::_updateBillboardRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeBillboard"))
 			{
-				_fe3d.billboardEntity_hide(_currentBillboardID);
+				_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
 				_isRemovingBillboard = false;
 				_currentBillboardID = "";
 			}

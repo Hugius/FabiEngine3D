@@ -10,12 +10,11 @@ public:
 	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, 
 		Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize);
 
-	void update(bool hoverable);
+	void update(bool isHoverable);
 	void addButton(const string& ID, string textContent);
 	void deleteButton(const string& ID);
 	void deleteButtons();
-	void show();
-	void hide();
+	void setVisible(bool isVisible);
 
 	bool isHovered();
 

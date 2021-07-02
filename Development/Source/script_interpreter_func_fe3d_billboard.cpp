@@ -165,17 +165,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Determine if billboard must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.billboardEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.billboardEntity_hide(arguments[0].getString());
-				}
-
-				// Return
+				_fe3d.billboardEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

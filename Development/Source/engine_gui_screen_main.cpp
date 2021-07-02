@@ -12,72 +12,6 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 
 void EngineGuiScreen::update(bool hoverable)
 {
-	// Check if screen is active
-	if (_isActive)
-	{
-		// Scrolling lists show
-		for (const auto& scrollingList : _scrollingLists)
-		{
-			scrollingList->show();
-		}
-
-		// Writefields show
-		for (const auto& writefield : _writefields)
-		{
-			writefield->show();
-		}
-
-		// Buttons show
-		for (const auto& button : _buttons)
-		{
-			button->show();
-		}
-
-		// Rectangles show
-		for (const auto& rectangle : _rectangles)
-		{
-			rectangle->show();
-		}
-
-		// Textfields show
-		for (const auto& textfield : _textfields)
-		{
-			textfield->show();
-		}
-	}
-	else
-	{
-		// Scrolling lists hide
-		for (const auto& scrollingList : _scrollingLists)
-		{
-			scrollingList->hide();
-		}
-
-		// Writefields hide
-		for (const auto& writefield : _writefields)
-		{
-			writefield->hide();
-		}
-
-		// Buttons hide
-		for (const auto& button : _buttons)
-		{
-			button->hide();
-		}
-
-		// Rectangles hide
-		for (const auto& rectangle : _rectangles)
-		{
-			rectangle->hide();
-		}
-
-		// Textfields hide
-		for (const auto& textfield : _textfields)
-		{
-			textfield->hide();
-		}
-	}
-
 	// Update scrolling lists
 	for (const auto& scrollingList : _scrollingLists)
 	{
@@ -94,6 +28,28 @@ void EngineGuiScreen::update(bool hoverable)
 	for (const auto& button : _buttons)
 	{
 		button->update(hoverable);
+	}
+
+	// Update visibilities
+	for (const auto& scrollingList : _scrollingLists)
+	{
+		scrollingList->setVisible(_isActive);
+	}
+	for (const auto& writefield : _writefields)
+	{
+		writefield->setVisible(_isActive);
+	}
+	for (const auto& button : _buttons)
+	{
+		button->setVisible(_isActive);
+	}
+	for (const auto& rectangle : _rectangles)
+	{
+		rectangle->setVisible(_isActive);
+	}
+	for (const auto& textfield : _textfields)
+	{
+		textfield->setVisible(_isActive);
 	}
 }
 

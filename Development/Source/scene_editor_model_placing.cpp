@@ -18,7 +18,7 @@ void SceneEditor::_updateModelPlacing()
 				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
 				{
 					// Show preview model
-					_fe3d.modelEntity_show(_currentPreviewModelID);
+					_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 
 					// Update preview model position
 					if (_fe3d.misc_isRaycastPointOnTerrainValid())
@@ -39,7 +39,7 @@ void SceneEditor::_updateModelPlacing()
 				else
 				{
 					// Hide preview model
-					_fe3d.modelEntity_hide(_currentPreviewModelID);
+					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 				}
 
 				// Placing model
@@ -64,23 +64,23 @@ void SceneEditor::_updateModelPlacing()
 					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.modelEntity_hide(_currentPreviewModelID);
+						_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 						_currentPreviewModelID = "";
 					}
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
 				{
 					// Hide preview model
-					_fe3d.modelEntity_hide(_currentPreviewModelID);
+					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 					_currentPreviewModelID = "";
 					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-					_fe3d.textEntity_hide(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, false);
 				}
 			}
 			else
 			{
 				// Hide preview model
-				_fe3d.modelEntity_hide(_currentPreviewModelID);
+				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 			}
 		}
 	}

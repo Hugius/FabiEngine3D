@@ -176,7 +176,7 @@ void SceneEditor::_updateBillboardEditing()
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 			if (_selectedBillboardID == "" && _activeBillboardID == "")
 			{
-				_fe3d.textEntity_hide(textEntityID);
+				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
@@ -184,7 +184,7 @@ void SceneEditor::_updateBillboardEditing()
 					_selectedLightBulbID == "" && _activeLightBulbID == "" &&
 					_selectedSpeakerID == "" && _activeSpeakerID == "")
 				{
-					_fe3d.textEntity_show(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 			}
 		}

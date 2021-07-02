@@ -143,16 +143,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			// Validate existing light ID
 			if (_validateFe3dLightEntity(arguments[0].getString()))
 			{
-				// Determine if light must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.lightEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.lightEntity_hide(arguments[0].getString());
-				}
-
+				_fe3d.lightEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

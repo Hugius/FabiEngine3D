@@ -209,7 +209,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
 					_fe3d.modelEntity_setAlpha(modelID, alpha);
 					_fe3d.modelEntity_setLightness(modelID, lightness);
-					!isVisible ? _fe3d.modelEntity_hide(modelID) : void();
+					_fe3d.modelEntity_setVisible(modelID, isVisible);
 					for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
@@ -274,7 +274,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					// Hide model if LOD
 					if (makeInvisible)
 					{
-						_fe3d.modelEntity_hide(modelID);
+						_fe3d.modelEntity_setVisible(modelID, false);
 					}
 				}
 			}
@@ -410,7 +410,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.billboardEntity_setLightness(billboardID, lightness);
 					_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
 					_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
-					!isVisible ? _fe3d.billboardEntity_hide(billboardID) : void();
+					_fe3d.billboardEntity_setVisible(billboardID, isVisible);
 					for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, false, true))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
@@ -528,7 +528,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-				_fe3d.billboardEntity_show("@@lightSource");
+				_fe3d.billboardEntity_setVisible("@@lightSource", true);
 			}
 			else if (entityType == "POINT_LIGHT")
 			{

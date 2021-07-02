@@ -29,12 +29,24 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiButton::update(bool hoverable)
+void EngineGuiButton::update(bool isHoverable)
 {
-	_updateHovering(hoverable);
+	_updateHovering(isHoverable);
 }
 
-void EngineGuiButton::_updateHovering(bool hoverable)
+void EngineGuiButton::setVisible(bool isVisible)
+{
+	// Rectangle
+	_rectangle->setVisible(isVisible);
+
+	// Text
+	if (_textfield != nullptr)
+	{
+		_textfield->setVisible(isVisible);
+	}
+}
+
+void EngineGuiButton::_updateHovering(bool isHoverable)
 {
 	_isHovered = false;
 
@@ -52,7 +64,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 			if (mousePos.y > buttonPos.y - (buttonSize.y / 2.0f) && mousePos.y < buttonPos.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				// Check if button is hoverable
-				if (hoverable && _isHoverable)
+				if (isHoverable && _isHoverable)
 				{
 					_isHovered = true;
 
@@ -141,35 +153,11 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	}
 }
 
-void EngineGuiButton::show()
+void EngineGuiButton::setHoverable(bool isHoverable)
 {
-	// Rectangle
-	_rectangle->show();
+	_isHoverable = isHoverable;
 
-	// Text
-	if (_textfield != nullptr)
-	{
-		_textfield->show();
-	}
-}
-
-void EngineGuiButton::hide()
-{
-	// Rectangle
-	_rectangle->hide();
-
-	// Text
-	if (_textfield != nullptr)
-	{
-		_textfield->hide();
-	}
-}
-
-void EngineGuiButton::setHoverable(bool hoverable)
-{
-	_isHoverable = hoverable;
-
-	if (hoverable)
+	if (isHoverable)
 	{
 		// Rectangle
 		_fe3d.imageEntity_setAlpha(_rectangle->getEntityID(), 1.0f);

@@ -17,14 +17,9 @@ void FabiEngine3D::lightEntity_delete(const string& ID)
 	_core->_lightEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::lightEntity_hide(const string& ID)
+void FabiEngine3D::lightEntity_setVisible(const string& ID, bool isVisible)
 {
-	_core->_lightEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::lightEntity_show(const string& ID)
-{
-	_core->_lightEntityManager.getEntity(ID)->setVisible(true);
+	_core->_lightEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 const bool FabiEngine3D::lightEntity_isExisting(const string& ID)

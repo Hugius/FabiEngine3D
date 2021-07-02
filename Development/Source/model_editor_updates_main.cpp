@@ -81,14 +81,14 @@ void ModelEditor::_updateEditingScreen()
 					// Hide model entity
 					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
-						_fe3d.modelEntity_hide(_currentModelID);
+						_fe3d.modelEntity_setVisible(_currentModelID, false);
 					}
 
 					// Go back to main screen
 					_isEditingModel = false;
 					_currentModelID = "";
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), false);
 				}
 				else if (screen->getButton("mesh")->isHovered())
 				{
@@ -127,7 +127,7 @@ void ModelEditor::_updateEditingScreen()
 				hoverable = true;
 
 				// Show mesh
-				_fe3d.modelEntity_show(_currentModelID);
+				_fe3d.modelEntity_setVisible(_currentModelID, true);
 			}
 
 			// Editing buttons hoverability
@@ -188,7 +188,7 @@ void ModelEditor::_updateModelCreation()
 							// Miscellaneous
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
 								"Model: " + _currentModelID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
 							_isCreatingModel = false;
 							_isEditingModel = true;
 						}
@@ -222,7 +222,7 @@ void ModelEditor::_updateModelChoosing()
 				// Check if model has mesh
 				if (_fe3d.modelEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.modelEntity_hide(_hoveredModelID);
+					_fe3d.modelEntity_setVisible(_hoveredModelID, false);
 				}
 			}
 
@@ -241,13 +241,13 @@ void ModelEditor::_updateModelChoosing()
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
 							"Model: " + _currentModelID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
 					}
 
 					// Check if model has mesh
 					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
-						_fe3d.modelEntity_show(_currentModelID);
+						_fe3d.modelEntity_setVisible(_currentModelID, true);
 					}
 
 					// Miscellaneous
@@ -278,7 +278,7 @@ void ModelEditor::_updateModelChoosing()
 				// Check if model has mesh
 				if (_fe3d.modelEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.modelEntity_show(_hoveredModelID);
+					_fe3d.modelEntity_setVisible(_hoveredModelID, true);
 				}
 			}
 		}
@@ -311,7 +311,7 @@ void ModelEditor::_updateModelRemoval()
 				// Check if model has mesh
 				if (_fe3d.modelEntity_isExisting(_currentModelID))
 				{
-					_fe3d.modelEntity_hide(_currentModelID);
+					_fe3d.modelEntity_setVisible(_currentModelID, false);
 				}
 
 				_isDeletingModel = false;

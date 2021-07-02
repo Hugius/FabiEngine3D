@@ -15,11 +15,11 @@ EngineGuiScrollingList::EngineGuiScrollingList(
 
 }
 
-void EngineGuiScrollingList::update(bool hoverable)
+void EngineGuiScrollingList::update(bool isHoverable)
 {
 	_updateHovering();
 	_updateScolling();
-	_updateButtons(hoverable);
+	_updateButtons(isHoverable);
 }
 
 void EngineGuiScrollingList::addButton(const string& ID, string textContent)
@@ -86,6 +86,17 @@ void EngineGuiScrollingList::deleteButtons()
 	_buttons.clear();
 	_scrollingOffset = 0.0f;
 	_scrollingSpeed = 0.0f;
+}
+
+void EngineGuiScrollingList::setVisible(bool isVisible)
+{
+	EngineGuiRectangle::setVisible(isVisible);
+
+	// Show all buttons
+	for (const auto& button : _buttons)
+	{
+		button->setVisible(isVisible);
+	}
 }
 
 void EngineGuiScrollingList::_updateHovering()
@@ -204,28 +215,6 @@ Vec2 EngineGuiScrollingList::_convertSize(Vec2 size)
 	Vec2 listSize = _fe3d.imageEntity_getSize(_entityID);
 	Vec2 buttonSize = (size / 2.0f) * listSize;
 	return buttonSize;
-}
-
-void EngineGuiScrollingList::show()
-{
-	EngineGuiRectangle::show();
-
-	// Show all buttons
-	for (const auto& button : _buttons)
-	{
-		button->show();
-	}
-}
-
-void EngineGuiScrollingList::hide()
-{
-	EngineGuiRectangle::hide();
-
-	// Hide all buttons
-	for (const auto& button : _buttons)
-	{
-		button->hide();
-	}
 }
 
 bool EngineGuiScrollingList::isHovered()

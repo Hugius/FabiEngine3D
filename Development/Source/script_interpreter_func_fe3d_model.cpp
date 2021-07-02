@@ -155,18 +155,8 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				// Determine if model must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.modelEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.modelEntity_hide(arguments[0].getString());
-				}
-
-				// Return
+			{		
+				_fe3d.modelEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

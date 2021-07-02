@@ -134,14 +134,14 @@ void SceneEditor::_updateSoundEditing()
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 			if (_selectedSpeakerID == "" && _activeSpeakerID == "")
 			{
-				_fe3d.textEntity_hide(textEntityID);
+				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
 				if (_selectedModelID == "" && _activeModelID == "" && _selectedBillboardID == "" && _activeBillboardID == ""
 					&& _selectedLightBulbID == "" && _activeLightBulbID == "")
 				{
-					_fe3d.textEntity_show(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 			}
 		}

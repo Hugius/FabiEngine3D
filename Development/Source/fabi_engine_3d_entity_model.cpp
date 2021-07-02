@@ -49,30 +49,9 @@ void FabiEngine3D::modelEntity_deleteGroup(const string& ID)
 	}
 }
 
-void FabiEngine3D::modelEntity_hideAll()
+void FabiEngine3D::modelEntity_setVisible(const string& ID, bool isVisible)
 {
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
-	{
-		modelEntity_hide(entity->getID());
-	}
-}
-
-void FabiEngine3D::modelEntity_showAll()
-{
-	for (const auto& [keyID, entity] : _core->_modelEntityManager.getEntities())
-	{
-		modelEntity_show(entity->getID());
-	}
-}
-
-void FabiEngine3D::modelEntity_hide(const string& ID)
-{
-	_core->_modelEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::modelEntity_show(const string& ID)
-{
-	_core->_modelEntityManager.getEntity(ID)->setVisible(true);
+	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::modelEntity_loadModel(const string& ID, const string& meshPath)

@@ -6,22 +6,6 @@ void FabiEngine3D::textEntity_deleteAll()
 	_core->_textEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::textEntity_hideAll()
-{
-	for (const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
-	{
-		entity->setVisible(false);
-	}
-}
-
-void FabiEngine3D::textEntity_showAll()
-{
-	for (const auto& [keyID, entity] : _core->_textEntityManager.getEntities())
-	{
-		entity->setVisible(true);
-	}
-}
-
 void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec2 position,
 	float rotation, Vec2 size, bool isCentered, bool isDynamic)
 {
@@ -39,6 +23,11 @@ void FabiEngine3D::textEntity_delete(const string& ID)
 	{
 		_core->_textEntityManager.deleteEntity(ID);
 	}
+}
+
+void FabiEngine3D::textEntity_setVisible(const string& ID, bool isVisible)
+{
+	_core->_textEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 const bool FabiEngine3D::textEntity_isExisting(const string& ID)
@@ -90,16 +79,6 @@ void FabiEngine3D::textEntity_setColor(const string& ID, Vec3 color)
 void FabiEngine3D::textEntity_setAlpha(const string& ID, float alpha)
 {
 	_core->_textEntityManager.getEntity(ID)->setAlpha(alpha);
-}
-
-void FabiEngine3D::textEntity_hide(const string& ID)
-{
-	_core->_textEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::textEntity_show(const string& ID)
-{
-	_core->_textEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::textEntity_setPosition(const string& ID, Vec2 position)

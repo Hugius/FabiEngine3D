@@ -18,8 +18,8 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
-						_fe3d.billboardEntity_hide(_currentBillboardID);
-						_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+						_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), false);
 						_currentBillboardID = "";
 						_isEditingBillboard = false;
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");

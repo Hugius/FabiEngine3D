@@ -82,14 +82,14 @@ void SceneEditor::_updateBillboardPlacingMenu()
 								// Hide old preview billboard
 								if (_currentPreviewBillboardID != "")
 								{
-									_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+									_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 								}
 
 								// Set new preview billboard
 								_currentPreviewBillboardID = billboardID;
-								_fe3d.billboardEntity_show(_currentPreviewBillboardID);
+								_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
-								_fe3d.textEntity_show(textEntityID);
+								_fe3d.textEntity_setVisible(textEntityID, true);
 								_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 								_fe3d.misc_centerCursor();
 								break;

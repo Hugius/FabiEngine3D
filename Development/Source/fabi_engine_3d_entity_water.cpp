@@ -32,14 +32,9 @@ void FabiEngine3D::waterEntity_delete(const string& ID)
 	_core->_waterEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::waterEntity_hide(const string& ID)
+void FabiEngine3D::waterEntity_setVisible(const string& ID, bool isVisible)
 {
-	_core->_waterEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::waterEntity_show(const string& ID)
-{
-	_core->_waterEntityManager.getEntity(ID)->setVisible(true);
+	_core->_waterEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 const bool FabiEngine3D::waterEntity_isExisting(const string& ID)

@@ -301,7 +301,7 @@ void SceneEditor::_updateModelEditing()
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 			if (_selectedModelID == "" && _activeModelID == "")
 			{
-				_fe3d.textEntity_hide(textEntityID);
+				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
@@ -309,7 +309,7 @@ void SceneEditor::_updateModelEditing()
 					_selectedLightBulbID == "" && _activeLightBulbID == "" &&
 					_selectedSpeakerID == "" && _activeSpeakerID == "")
 				{
-					_fe3d.textEntity_show(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 			}
 		}

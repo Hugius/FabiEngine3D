@@ -6,22 +6,6 @@ void FabiEngine3D::imageEntity_deleteAll()
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_hideAll()
-{
-	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
-	{
-		entity->setVisible(false);
-	}
-}
-
-void FabiEngine3D::imageEntity_showAll()
-{
-	for (const auto& [keyID, entity] : _core->_imageEntityManager.getEntities())
-	{
-		entity->setVisible(true);
-	}
-}
-
 void FabiEngine3D::imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible)
 {
 	_core->_imageEntityManager.addImageEntity(ID, texturePath, translation, rotation, scaling, false, isCentered);
@@ -34,19 +18,14 @@ void FabiEngine3D::imageEntity_add(const string& ID, Vec3 color, Vec2 translatio
 	_core->_imageEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::imageEntity_hide(const string& ID)
-{
-	_core->_imageEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::imageEntity_show(const string& ID)
-{
-	_core->_imageEntityManager.getEntity(ID)->setVisible(true);
-}
-
 void FabiEngine3D::imageEntity_delete(const string& ID)
 {
 	_core->_imageEntityManager.deleteEntity(ID);
+}
+
+void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
+{
+	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::imageEntity_changeTexture(const string& ID, const string& texturePath)

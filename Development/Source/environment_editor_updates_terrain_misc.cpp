@@ -44,7 +44,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
 							_isTerrainCreationEnabled = false;
 							_isTerrainEditingEnabled = true;
 						}
@@ -100,7 +100,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 						// Show terrain name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
 					}
 
 					// Only select the terrain if it has a heightmap

@@ -9,8 +9,7 @@ public:
 	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered = true);
 	~EngineGuiRectangle();
 
-	virtual void show();
-	virtual void hide();
+	virtual void setVisible(bool isVisible);
 
 	const Vec2 getOriginalPosition();
 	const Vec2 getOriginalSize();

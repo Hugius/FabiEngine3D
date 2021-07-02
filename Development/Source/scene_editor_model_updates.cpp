@@ -81,14 +81,14 @@ void SceneEditor::_updateModelPlacingMenu()
 								// Hide old preview model
 								if (_currentPreviewModelID != "")
 								{
-									_fe3d.modelEntity_hide(_currentPreviewModelID);
+									_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 								}
 
 								// Set new preview model
 								_currentPreviewModelID = modelID;
-								_fe3d.modelEntity_show(_currentPreviewModelID);
+								_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-								_fe3d.textEntity_show(textEntityID);
+								_fe3d.textEntity_setVisible(textEntityID, true);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 								_fe3d.misc_centerCursor();
 								break;

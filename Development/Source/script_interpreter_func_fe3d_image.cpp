@@ -163,17 +163,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				// Determine if image must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.imageEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.imageEntity_hide(arguments[0].getString());
-				}
-
-				// Return
+				_fe3d.imageEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

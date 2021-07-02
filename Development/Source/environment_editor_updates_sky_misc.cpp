@@ -45,7 +45,7 @@ void EnvironmentEditor::_updateSkyCreation()
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 								"Sky: " + _currentSkyID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
 							_isSkyCreationEnabled = false;
 							_isSkyEditingEnabled = true;
 						}
@@ -101,7 +101,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 						// Show sky name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
 					}
 
 					// Show entity
@@ -189,7 +189,7 @@ void EnvironmentEditor::_updateSkyCamera()
 					{
 						_fe3d.camera_enableFirstPersonView();
 						_fe3d.gfx_enableMotionBlur(0.2f);
-						_fe3d.imageEntity_hide("@@cursor");
+						_fe3d.imageEntity_setVisible("@@cursor", false);
 					}
 				}
 			}
@@ -200,7 +200,7 @@ void EnvironmentEditor::_updateSkyCamera()
 				{
 					_fe3d.camera_disableFirstPersonView();
 					_fe3d.gfx_disableMotionBlur();
-					_fe3d.imageEntity_show("@@cursor");
+					_fe3d.imageEntity_setVisible("@@cursor", true);
 				}
 			}
 		}

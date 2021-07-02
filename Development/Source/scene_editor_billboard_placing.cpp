@@ -18,7 +18,7 @@ void SceneEditor::_updateBillboardPlacing()
 				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
 				{
 					// Show preview billboard
-					_fe3d.billboardEntity_show(_currentPreviewBillboardID);
+					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
 
 					// Update preview billboard position
 					Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardID);
@@ -28,7 +28,7 @@ void SceneEditor::_updateBillboardPlacing()
 				else
 				{
 					// Hide preview billboard
-					_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 				}
 
 				// Placing billboard
@@ -52,23 +52,23 @@ void SceneEditor::_updateBillboardPlacing()
 					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 						_currentPreviewBillboardID = "";
 					}
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling billboard placement
 				{
 					// Hide preview billboard
-					_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 					_currentPreviewBillboardID = "";
 					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
-					_fe3d.textEntity_hide(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, false);
 				}
 			}
 			else
 			{
 				// Hide preview billboard
-				_fe3d.billboardEntity_hide(_currentPreviewBillboardID);
+				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 			}
 		}
 	}

@@ -33,13 +33,13 @@ void SceneEditor::_updateSoundPlacing()
 					// Show preview soundcaster
 					_fe3d.soundEntity_setPosition(_currentPreviewSoundID, newPosition);
 					_fe3d.soundEntity_setMaxDistance(_currentPreviewSoundID, DEFAULT_SOUND_MAX_DISTANCE);
-					_fe3d.modelEntity_show(PREVIEW_SPEAKER_ID);
+					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 					_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, newPosition);
 				}
 				else
 				{
 					// Hide preview speaker
-					_fe3d.modelEntity_hide(PREVIEW_SPEAKER_ID);
+					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 					// Pause sound playback
 					if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
@@ -81,7 +81,7 @@ void SceneEditor::_updateSoundPlacing()
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
 						// Hide preview speaker
-						_fe3d.modelEntity_hide(PREVIEW_SPEAKER_ID);
+						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 						// Stop placing
 						_currentPreviewSoundID = "";
@@ -90,7 +90,7 @@ void SceneEditor::_updateSoundPlacing()
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling soundcaster placement
 				{
 					// Hide preview speaker
-					_fe3d.modelEntity_hide(PREVIEW_SPEAKER_ID);
+					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 					// Stop sound playback
 					if (_fe3d.soundEntity_isStarted(_currentPreviewSoundID))
@@ -103,13 +103,13 @@ void SceneEditor::_updateSoundPlacing()
 
 					// Hide soundcaster name
 					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-					_fe3d.textEntity_hide(textEntityID);
+					_fe3d.textEntity_setVisible(textEntityID, false);
 				}
 			}
 			else
 			{
 				// Hide preview speaker
-				_fe3d.modelEntity_hide(PREVIEW_SPEAKER_ID);
+				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Pause sound playback
 				if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))

@@ -18,14 +18,9 @@ EngineGuiTextfield::~EngineGuiTextfield()
 	_fe3d.textEntity_delete(_entityID);
 }
 
-void EngineGuiTextfield::show()
+void EngineGuiTextfield::setVisible(bool isVisible)
 {
-	_fe3d.textEntity_show(_entityID);
-}
-
-void EngineGuiTextfield::hide()
-{
-	_fe3d.textEntity_hide(_entityID);
+	_fe3d.textEntity_setVisible(_entityID, isVisible);
 }
 
 const Vec2 EngineGuiTextfield::getOriginalPosition()

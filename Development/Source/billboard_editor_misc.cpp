@@ -26,14 +26,7 @@ void BillboardEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
 		// Update reference model visibility
-		if (_fe3d.input_isKeyToggled(InputType::KEY_R))
-		{
-			_fe3d.modelEntity_hide("@@cube");
-		}
-		else
-		{
-			_fe3d.modelEntity_show("@@cube");
-		}
+		_fe3d.modelEntity_setVisible("@@cube", !_fe3d.input_isKeyToggled(InputType::KEY_R));
 
 		// Update debug rendering
 		if (_fe3d.input_isKeyPressed(InputType::KEY_H))

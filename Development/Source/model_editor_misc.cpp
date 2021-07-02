@@ -12,11 +12,11 @@ void ModelEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if (_fe3d.input_isKeyToggled(InputType::KEY_R))
 		{
-			_fe3d.modelEntity_hide("@@cube");
+			_fe3d.modelEntity_setVisible("@@cube", false);
 		}
 		else
 		{
-			_fe3d.modelEntity_show("@@cube");
+			_fe3d.modelEntity_setVisible("@@cube", true);
 		}
 
 		// Update debug rendering

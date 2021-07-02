@@ -130,7 +130,7 @@ void EngineController::_initializeMiscellaneous()
 	// Custom cursor texture
 	imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
-	misc_hideCursor();
+	misc_setCursorVisible(false);
 }
 
 void EngineController::_updateMiscellaneous()
@@ -160,7 +160,7 @@ void EngineController::_updateMiscellaneous()
 	// Update custom cursor
 	imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
 	imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
-	misc_isCursorInsideWindow() ? imageEntity_show("@@cursor") : imageEntity_hide("@@cursor");
+	imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
 }
 
 bool EngineController::mustPromptOnExit()

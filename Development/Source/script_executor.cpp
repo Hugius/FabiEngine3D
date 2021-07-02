@@ -43,7 +43,7 @@ void ScriptExecutor::update(bool debug)
 			// Custom cursor must be inside of viewport or PC cursor must be visible
 			if (_fe3d.misc_isCursorInsideViewport() || _fe3d.misc_isCursorVisible())
 			{
-				_fe3d.imageEntity_hide("@@cursor");
+				_fe3d.imageEntity_setVisible("@@cursor", false);
 			}
 		}
 
@@ -58,7 +58,7 @@ void ScriptExecutor::pause()
 	{
 		// Save cursor state
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
-		_fe3d.misc_hideCursor();
+		_fe3d.misc_setCursorVisible(false);
 
 		// Save timer state
 		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
@@ -100,10 +100,7 @@ void ScriptExecutor::resume()
 	{
 		// Reset cursor
 		_fe3d.misc_centerCursor();
-		if (_wasCursorVisible)
-		{
-			_fe3d.misc_showCursor();
-		}
+		_fe3d.misc_setCursorVisible(_wasCursorVisible);
 
 		// Reset millisecond timer
 		if (_wasMillisecondTimerStarted)
@@ -183,7 +180,7 @@ void ScriptExecutor::_validateExecution()
 	if (_scriptInterpreter.hasThrownError()) // Script threw an error
 	{
 		_scriptInterpreter.unload();
-		_fe3d.misc_hideCursor();
+		_fe3d.misc_setCursorVisible(false);
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;

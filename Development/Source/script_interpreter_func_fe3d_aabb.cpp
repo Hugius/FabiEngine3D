@@ -154,15 +154,8 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 					return true;
 				}
 
-				// Determine if AABB must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.aabbEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.aabbEntity_hide(arguments[0].getString());
-				}
+				// Set visibility
+				_fe3d.aabbEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

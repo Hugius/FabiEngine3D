@@ -54,7 +54,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			{
 				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
-				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_fe3d.waterEntity_select("");
 				_hoveredTerrainID = "";

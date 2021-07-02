@@ -12,10 +12,9 @@ public:
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size,
 		const string& texturePath, Vec3 hoverColor, bool sizeChangeEnabled = true, bool colorChangeEnabled = true);
 
-	virtual void update(bool hoverable);
-	void show();
-	void hide();
-	void setHoverable(bool value);
+	virtual void update(bool isHoverable);
+	void setVisible(bool isVisible);
+	void setHoverable(bool isHoverable);
 
 	bool isHovered();
 

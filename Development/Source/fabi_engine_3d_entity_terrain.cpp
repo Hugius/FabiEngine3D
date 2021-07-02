@@ -44,14 +44,9 @@ void FabiEngine3D::terrainEntity_delete(const string& ID)
 	_core->_terrainEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::terrainEntity_hide(const string& ID)
+void FabiEngine3D::terrainEntity_setVisible(const string& ID, bool isVisible)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::terrainEntity_show(const string& ID)
-{
-	_core->_terrainEntityManager.getEntity(ID)->setVisible(true);
+	_core->_terrainEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 const bool FabiEngine3D::terrainEntity_isExisting(const string& ID)

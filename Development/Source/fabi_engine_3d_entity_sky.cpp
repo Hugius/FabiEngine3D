@@ -80,14 +80,9 @@ void FabiEngine3D::skyEntity_delete(const string& ID)
 	_core->_skyEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::skyEntity_hide(const string& ID)
+void FabiEngine3D::skyEntity_setVisible(const string& ID, bool isVisible)
 {
-	_core->_skyEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::skyEntity_show(const string& ID)
-{
-	_core->_skyEntityManager.getEntity(ID)->setVisible(true);
+	_core->_skyEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::skyEntity_select(const string& ID)

@@ -26,7 +26,7 @@ void AudioEditor::_updateAudioEditing()
 					}
 
 					// Miscellaneous
-					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), false);
 					_currentAudioID = "";
 					_isEditingAudio = false;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");

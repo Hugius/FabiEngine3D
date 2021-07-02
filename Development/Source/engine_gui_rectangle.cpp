@@ -29,14 +29,9 @@ EngineGuiRectangle::~EngineGuiRectangle()
 	_fe3d.imageEntity_delete(_entityID);
 }
 
-void EngineGuiRectangle::show()
+void EngineGuiRectangle::setVisible(bool isVisible)
 {
-	_fe3d.imageEntity_show(_entityID);
-}
-
-void EngineGuiRectangle::hide()
-{
-	_fe3d.imageEntity_hide(_entityID);
+	_fe3d.imageEntity_setVisible(_entityID, isVisible);
 }
 
 const Vec2 EngineGuiRectangle::getOriginalPosition()

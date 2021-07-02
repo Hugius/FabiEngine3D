@@ -21,16 +21,16 @@ void SceneEditor::_updateLightPlacing()
 					newPosition = _fe3d.misc_getRaycastPointOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
-					_fe3d.lightEntity_show(PREVIEW_POINTLIGHT_ID);
-					_fe3d.modelEntity_show(PREVIEW_POINTLIGHT_ID);
+					_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, true);
+					_fe3d.modelEntity_setVisible(PREVIEW_POINTLIGHT_ID, true);
 					_fe3d.lightEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
 					_fe3d.modelEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
 				}
 				else
 				{
 					// Hide preview pointlight
-					_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
-					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.modelEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
+					_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
 				}
 
 				// Placing pointlight
@@ -57,24 +57,24 @@ void SceneEditor::_updateLightPlacing()
 					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
-						_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+						_fe3d.modelEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
+						_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
 						_isPlacingPointlight = false;
 					}
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
-					_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
-					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.modelEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
+					_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
 					_isPlacingPointlight = false;
 				}
 			}
 			else
 			{
 				// Hide preview pointlight
-				_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
-				_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+				_fe3d.modelEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
+				_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
 			}
 		}
 	}

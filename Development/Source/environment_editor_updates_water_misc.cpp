@@ -46,7 +46,7 @@ void EnvironmentEditor::_updateWaterCreation()
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
 								"Water: " + _currentWaterID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), true);
 							_isWaterCreationEnabled = false;
 							_isWaterEditingEnabled = true;
 						}
@@ -102,7 +102,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 						// Show water name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
 							"Water: " + _currentWaterID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), true);
 					}
 
 					// Show entity

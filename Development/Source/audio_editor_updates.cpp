@@ -97,7 +97,7 @@ void AudioEditor::_updateAudioCreation()
 							// Miscellaneous
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
 								_currentAudioID.substr(1), 0.025f);
-							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), true);
 							_isCreatingAudio = false;
 							_isEditingAudio = true;
 						}
@@ -143,7 +143,7 @@ void AudioEditor::_updateAudioChoosing()
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
 							_currentAudioID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), true);
 					}
 
 					// Miscellaneous

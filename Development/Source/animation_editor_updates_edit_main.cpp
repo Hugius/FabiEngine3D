@@ -48,14 +48,14 @@ void AnimationEditor::_updateEditingScreen()
 					_isEditingAnimation = false;
 					_currentAnimationID = "";
 					_currentFrameIndex = 0;
-					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
-					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), false);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), false);
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 					
 					// Hide preview model
 					if (!currentAnimation->previewModelID.empty())
 					{
-						_fe3d.modelEntity_hide(currentAnimation->previewModelID);
+						_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
 					}
 				}
 				else if (screen->getButton("preview")->isHovered())
@@ -228,12 +228,12 @@ void AnimationEditor::_updateEditingScreen()
 					{
 						if (!currentAnimation->previewModelID.empty())
 						{
-							_fe3d.modelEntity_hide(currentAnimation->previewModelID);
+							_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
 						}
 					}
 
 					// Show new model
-					_fe3d.modelEntity_show(selectedModelID);
+					_fe3d.modelEntity_setVisible(selectedModelID, true);
 
 					// Change values
 					currentAnimation->previewModelID = selectedModelID;

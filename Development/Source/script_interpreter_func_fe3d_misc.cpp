@@ -90,9 +90,11 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:cursor_center")
+	else if (functionName == "fe3d:cursor_set_visible")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		auto types = { ScriptValueType::BOOLEAN };
+
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -101,40 +103,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 				return true;
 			}
 
-			// Center cursor
-			_fe3d.misc_centerCursor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:cursor_show")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// Cannot execute cursor functionality when server is running
-			if (_fe3d.networkServer_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
-				return true;
-			}
-
-			// Show cursor
-			_fe3d.misc_showCursor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:cursor_hide")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// Cannot execute cursor functionality when server is running
-			if (_fe3d.networkServer_isRunning())
-			{
-				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
-				return true;
-			}
-
-			// Hide cursor
-			_fe3d.misc_hideCursor();
+			// Set cursor visibility
+			_fe3d.misc_setCursorVisible(arguments[0].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -152,6 +122,22 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			// Return cursor visbility
 			auto result = _fe3d.misc_isCursorVisible();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:cursor_center")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Cannot execute cursor functionality when server is running
+			if (_fe3d.networkServer_isRunning())
+			{
+				_throwScriptError("cannot access `fe3d:cursor` functionality as a networking server!");
+				return true;
+			}
+
+			// Center cursor
+			_fe3d.misc_centerCursor();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:cursor_get_position_x")

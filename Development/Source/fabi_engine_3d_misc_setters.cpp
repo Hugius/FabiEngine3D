@@ -6,16 +6,6 @@
 #include <chrono>
 #include <filesystem>
 
-void FabiEngine3D::misc_showCursor()
-{
-	_core->_window.showCursor();
-}
-
-void FabiEngine3D::misc_hideCursor()
-{
-	_core->_window.hideCursor();
-}
-
 void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)
 {
 	_core->_renderBus.setCursorEntityID(imageEntityID);
@@ -212,6 +202,18 @@ void FabiEngine3D::misc_disableMusic()
 	else
 	{
 		Logger::throwWarning("Tried to disable music: not enabled!");
+	}
+}
+
+void FabiEngine3D::misc_setCursorVisible(bool isVisible)
+{
+	if (isVisible)
+	{
+		_core->_window.showCursor();
+	}
+	else
+	{
+		_core->_window.hideCursor();
 	}
 }
 

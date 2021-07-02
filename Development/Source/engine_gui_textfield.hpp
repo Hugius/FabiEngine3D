@@ -9,8 +9,7 @@ public:
 		string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
 	~EngineGuiTextfield();
 
-	void show();
-	void hide();
+	void setVisible(bool isVisible);
 
 	const Vec2 getOriginalPosition();
 	const Vec2 getOriginalSize();

@@ -79,9 +79,9 @@ void SceneEditor::_updateSoundPlacingMenu()
 						{
 							// Set new preview soundcaster
 							_currentPreviewSoundID = audioName;
-							_fe3d.modelEntity_show(PREVIEW_SPEAKER_ID);
+							_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-							_fe3d.textEntity_show(textEntityID);
+							_fe3d.textEntity_setVisible(textEntityID, false);
 							_fe3d.textEntity_setTextContent(textEntityID, "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 							_fe3d.misc_centerCursor();
 							break;

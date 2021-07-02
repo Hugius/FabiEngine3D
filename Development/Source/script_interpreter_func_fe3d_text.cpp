@@ -168,17 +168,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				// Determine if text must be visible or not
-				if (arguments[1].getBoolean())
-				{
-					_fe3d.textEntity_show(arguments[0].getString());
-				}
-				else
-				{
-					_fe3d.textEntity_hide(arguments[0].getString());
-				}
-
-				// Return
+				_fe3d.textEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

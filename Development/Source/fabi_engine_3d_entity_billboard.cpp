@@ -56,30 +56,9 @@ void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 	}
 }
 
-void FabiEngine3D::billboardEntity_hideAll()
+void FabiEngine3D::billboardEntity_setVisible(const string& ID, bool isVisible)
 {
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
-	{
-		billboardEntity_hide(entity->getID());
-	}
-}
-
-void FabiEngine3D::billboardEntity_showAll()
-{
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities())
-	{
-		billboardEntity_show(entity->getID());
-	}
-}
-
-void FabiEngine3D::billboardEntity_hide(const string& ID)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::billboardEntity_show(const string& ID)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
+	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 const float FabiEngine3D::billboardEntity_getLightness(const string& ID)

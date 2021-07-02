@@ -209,7 +209,7 @@ void SceneEditor::clearCurrentScene()
 	// Hide lightsource billboard
 	if (_fe3d.billboardEntity_isExisting("@@lightSource"))
 	{
-		_fe3d.billboardEntity_hide("@@lightSource");
+		_fe3d.billboardEntity_setVisible("@@lightSource", false);
 	}
 
 	// Delete light entities

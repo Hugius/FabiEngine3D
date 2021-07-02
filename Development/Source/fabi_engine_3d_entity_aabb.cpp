@@ -70,14 +70,9 @@ void FabiEngine3D::aabbEntity_delete(const string& ID)
 	_core->_aabbEntityManager.deleteEntity(ID);
 }
 
-void FabiEngine3D::aabbEntity_hide(const string& ID)
+void FabiEngine3D::aabbEntity_setVisible(const string& ID, bool isVisible)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setVisible(false);
-}
-
-void FabiEngine3D::aabbEntity_show(const string& ID)
-{
-	_core->_aabbEntityManager.getEntity(ID)->setVisible(true);
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::aabbEntity_setRaycastResponsive(const string& ID, bool responsive)

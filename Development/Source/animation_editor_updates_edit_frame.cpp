@@ -161,14 +161,32 @@ void AnimationEditor::_updateFrameScreen()
 			}
 
 			// Showing speed type
-			string newTextContent = (speedType == AnimationSpeedType::LINEAR) ? "Speed: linear" :
-				(speedType == AnimationSpeedType::EXPONENTIAL) ? "Speed: exponent" : "Speed: instant";
-			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newTextContent);
+			if (speedType == AnimationSpeedType::LINEAR)
+			{
+				screen->getButton("speedType")->changeTextContent("Speed: linear");
+			}
+			else if (speedType == AnimationSpeedType::EXPONENTIAL)
+			{
+				screen->getButton("speedType")->changeTextContent("Speed: exponent");
+			}
+			else
+			{
+				screen->getButton("speedType")->changeTextContent("Speed: instant");
+			}
 
 			// Showing transformation type
-			newTextContent = transType == TransformationType::TRANSLATION ? "Type: translate" :
-				transType == TransformationType::ROTATION ? "Type: rotate" : "Type: scale";
-			_fe3d.textEntity_setTextContent(screen->getButton("transType")->getTextfield()->getEntityID(), newTextContent);
+			if (transType == TransformationType::TRANSLATION)
+			{
+				screen->getButton("transType")->changeTextContent("Type: translate");
+			}
+			else if (transType == TransformationType::ROTATION)
+			{
+				screen->getButton("transType")->changeTextContent("Type: rotate");
+			}
+			else
+			{
+				screen->getButton("transType")->changeTextContent("Type: scale");
+			}
 
 			// Check if a animation partID is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");

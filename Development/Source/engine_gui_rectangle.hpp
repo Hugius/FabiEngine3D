@@ -10,6 +10,9 @@ public:
 	~EngineGuiRectangle();
 
 	virtual void setVisible(bool isVisible);
+	void updateOriginalPosition();
+	void updateOriginalSize();
+	void updateOriginalColor();
 
 	const Vec2 getOriginalPosition();
 	const Vec2 getOriginalSize();
@@ -22,9 +25,9 @@ public:
 protected:
 	FabiEngine3D& _fe3d;
 
-	const Vec2 _originalPosition;
-	const Vec2 _originalSize;
-	const Vec3 _originalColor;
+	Vec2 _originalPosition;
+	Vec2 _originalSize;
+	Vec3 _originalColor;
 
 	const string _ID;
 	const string _entityID;

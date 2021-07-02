@@ -52,7 +52,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	Vec2 newSize = entity->getScaling();
 	if (charWidth >= 0.0f)
 	{
-		newSize.x = charWidth * static_cast<float>(textContent.size());
+		newSize.x = (charWidth * static_cast<float>(textContent.size()));
 	}
 	if (charHeight >= 0.0f)
 	{

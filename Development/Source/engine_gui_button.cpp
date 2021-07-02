@@ -7,7 +7,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
 	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, 
-		Vec2(size.x * 0.9f, size.y * 0.75f), textContent, textColor)),
+		Vec2(size.x * TEXT_WIDTH_MULTIPLIER, size.y * TEXT_HEIGHT_MULTIPLIER), textContent, textColor)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
 	_sizeChangeEnabled(sizeChangeEnabled),
@@ -178,6 +178,26 @@ void EngineGuiButton::setHoverable(bool isHoverable)
 		{
 			_fe3d.textEntity_setAlpha(_textfield->getEntityID(), 0.25f);
 		}
+	}
+}
+
+void EngineGuiButton::changeTextContent(const string& content)
+{
+	auto textEntityID = getTextfield()->getEntityID();
+
+	// Check if text content changed
+	if (content != _fe3d.textEntity_getTextContent(textEntityID))
+	{
+		// Update textfield
+		auto charWidth = (getTextfield()->getOriginalSize().x / static_cast<float>(_fe3d.textEntity_getTextContent(textEntityID).size()));
+		auto charHeight = getTextfield()->getOriginalSize().y;
+		_fe3d.textEntity_setTextContent(textEntityID, content, charWidth, charHeight);
+		getTextfield()->updateOriginalSize();
+
+		// Update rectangle
+		auto newRectangleSize = Vec2(getTextfield()->getOriginalSize() / Vec2(TEXT_WIDTH_MULTIPLIER, TEXT_HEIGHT_MULTIPLIER));
+		_fe3d.imageEntity_setSize(getRectangle()->getEntityID(), newRectangleSize);
+		getRectangle()->updateOriginalSize();
 	}
 }
 

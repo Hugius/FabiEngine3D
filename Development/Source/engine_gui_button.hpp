@@ -15,6 +15,7 @@ public:
 	virtual void update(bool isHoverable);
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
+	void changeTextContent(const string& content);
 
 	bool isHovered();
 
@@ -46,6 +47,8 @@ private:
 	const bool _colorChangeEnabled;
 
 	static inline const float TOTAL_SIZE_INCREASE = 1.125f;
-	static inline const float INCREASE_FACTOR = 1.01f;
-	static inline const float DECREASE_FACTOR = 0.99f;
+	static inline const float INCREASE_FACTOR = 1.005f;
+	static inline const float DECREASE_FACTOR = 0.995f;
+	static inline const float TEXT_WIDTH_MULTIPLIER = 0.9f;
+	static inline const float TEXT_HEIGHT_MULTIPLIER = 0.75f;
 };

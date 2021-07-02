@@ -23,6 +23,21 @@ void EngineGuiTextfield::setVisible(bool isVisible)
 	_fe3d.textEntity_setVisible(_entityID, isVisible);
 }
 
+void EngineGuiTextfield::updateOriginalPosition()
+{
+	_originalPosition = _fe3d.textEntity_getPosition(_entityID);
+}
+
+void EngineGuiTextfield::updateOriginalSize()
+{
+	_originalSize = _fe3d.textEntity_getSize(_entityID);
+}
+
+void EngineGuiTextfield::updateOriginalColor()
+{
+	_originalColor = _fe3d.textEntity_getColor(_entityID);
+}
+
 const Vec2 EngineGuiTextfield::getOriginalPosition()
 {
 	return _originalPosition;

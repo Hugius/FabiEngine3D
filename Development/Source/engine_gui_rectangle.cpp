@@ -34,6 +34,21 @@ void EngineGuiRectangle::setVisible(bool isVisible)
 	_fe3d.imageEntity_setVisible(_entityID, isVisible);
 }
 
+void EngineGuiRectangle::updateOriginalPosition()
+{
+	_originalPosition = _fe3d.imageEntity_getPosition(_entityID);
+}
+
+void EngineGuiRectangle::updateOriginalSize()
+{
+	_originalSize = _fe3d.imageEntity_getSize(_entityID);
+}
+
+void EngineGuiRectangle::updateOriginalColor()
+{
+	_originalColor = _fe3d.imageEntity_getColor(_entityID);
+}
+
 const Vec2 EngineGuiRectangle::getOriginalPosition()
 {
 	return _originalPosition;

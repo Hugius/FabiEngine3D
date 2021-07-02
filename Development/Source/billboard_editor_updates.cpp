@@ -9,7 +9,7 @@ void BillboardEditor::update()
 	_updateBillboardChoosing();
 	_updateBillboardEditing();
 	_updateBillboardRemoval();
-	_updateBillboardCamera();
+	_updateCamera();
 	_updateMiscellaneous();
 }
 
@@ -221,13 +221,14 @@ void BillboardEditor::_updateBillboardRemoval()
 	}
 }
 
-void BillboardEditor::_updateBillboardCamera()
+void BillboardEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if a billboard is being active
-		if (_currentBillboardID != "" || _hoveredBillboardID != "")
+		// Check if a billboard is active
+		if ((_currentBillboardID != "") || (_hoveredBillboardID != ""))
 		{
+			// Temporary values
 			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
 			float cameraDistance = (std::max(billboardSize.x, billboardSize.y));
 			float cameraHeight = BILLBOARD_POSITION.y + (billboardSize.y / 2.0f);
@@ -248,11 +249,26 @@ void BillboardEditor::_updateBillboardCamera()
 
 			// Update camera position
 			_fe3d.camera_setPosition(Vec3(x, y, z));
-			_fe3d.camera_setLookatPosition(Vec3(0.0f, cameraHeight, 0.0f));
+
+			// Update camera lookat position
+			Vec3 cameraLookatPosition = Vec3(0.0f, cameraHeight, 0.0f);
+			_fe3d.camera_setLookatPosition(cameraLookatPosition);
+
+			// Update shadows
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows();
+			}
+			_fe3d.gfx_enableShadows(Vec3(cameraLookatPosition + Vec3(cameraDistance * 2.0f)),
+				cameraLookatPosition, cameraDistance * 4.0f, cameraDistance * 6.0f, 0.5f, false, true, 0);
 		}
 		else
 		{
-			// Set default camera
+			// Set default camera view
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows(true);
+			}
 			_fe3d.camera_setPosition(CAMERA_POSITION);
 			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
 			_totalCameraRotation = 0.0f;

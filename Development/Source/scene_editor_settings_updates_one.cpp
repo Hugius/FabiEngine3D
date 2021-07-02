@@ -188,11 +188,17 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Enable or disable shadows
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
+			if (!_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableShadows();
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows();
+			}
 		}
 
 		// Update buttons hoverability
@@ -243,11 +249,17 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 		// Enable or disable motionblur
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableMotionBlur(strength);
+			if (!_fe3d.gfx_isMotionBlurEnabled())
+			{
+				_fe3d.gfx_enableMotionBlur(strength);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableMotionBlur();
+			if (_fe3d.gfx_isMotionBlurEnabled())
+			{
+				_fe3d.gfx_disableMotionBlur();
+			}
 		}
 
 		// Update buttons hoverability

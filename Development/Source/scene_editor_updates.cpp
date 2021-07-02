@@ -247,7 +247,7 @@ void SceneEditor::_updateChoiceMenu()
 				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
 
-				// Exiting scene, so vsync needed
+				// Exiting scene, so enable Vsync again
 				_fe3d.misc_enableVsync();
 
 				// No selected scene
@@ -272,10 +272,10 @@ void SceneEditor::_updateCamera()
 			// Camera looking
 			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
-				if (_fe3d.misc_isCursorInsideViewport())
+				// Enable first person view
+				if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.camera_isFirstPersonViewEnabled())
 				{
 					_fe3d.camera_enableFirstPersonView();
-					_fe3d.camera_disableLookatView();
 				}
 
 				// Disable cursor while in FPS mode
@@ -286,7 +286,11 @@ void SceneEditor::_updateCamera()
 			}
 			else
 			{
-				_fe3d.camera_disableFirstPersonView();
+				// Disable first person view
+				if (_fe3d.camera_isFirstPersonViewEnabled())
+				{
+					_fe3d.camera_disableFirstPersonView();
+				}
 
 				// Cannot show cursor if outside of engine window
 				if (_fe3d.misc_isCursorInsideWindow())

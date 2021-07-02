@@ -54,11 +54,17 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		// Enable or disable DOF
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+			if (!_fe3d.gfx_isDofEnabled())
+			{
+				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableDOF();
+			if (_fe3d.gfx_isDofEnabled())
+			{
+				_fe3d.gfx_disableDOF();
+			}
 		}
 
 		// Update buttons hoverability
@@ -140,11 +146,17 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		// Enable or disable DOF
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
+			if (!_fe3d.gfx_isFogEnabled())
+			{
+				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableFog();
+			if (_fe3d.gfx_isFogEnabled())
+			{
+				_fe3d.gfx_disableFog();
+			}
 		}
 
 		// Update buttons hoverability
@@ -194,6 +206,12 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 					{
 						flareMapPath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(flareMapPath);
+
+						// Save lens flare path
+						if (_fe3d.gfx_isLensFlareEnabled())
+						{
+							_fe3d.gfx_disableLensFlare();
+						}
 						_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 						_fe3d.gfx_disableLensFlare();
 					}
@@ -231,11 +249,17 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		// Enable or disable lens flare
 		if (isEnabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
 		{
-			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+			if (!_fe3d.gfx_isLensFlareEnabled())
+			{
+				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableLensFlare();
+			if (_fe3d.gfx_isLensFlareEnabled())
+			{
+				_fe3d.gfx_disableLensFlare();
+			}
 		}
 
 		// Update buttons hoverability
@@ -284,11 +308,17 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		// Enable or disable skyHDR
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableSkyHDR(intensity);
+			if (!_fe3d.gfx_isSkyHdrEnabled())
+			{
+				_fe3d.gfx_enableSkyHDR(intensity);
+			}
 		}
 		else
 		{
-			_fe3d.gfx_disableSkyHDR();
+			if (_fe3d.gfx_isSkyHdrEnabled())
+			{
+				_fe3d.gfx_disableSkyHDR();
+			}
 		}
 
 		// Update buttons hoverability

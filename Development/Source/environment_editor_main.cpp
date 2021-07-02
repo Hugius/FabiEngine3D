@@ -172,7 +172,7 @@ void EnvironmentEditor::load()
 	// Default camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 	
-	// Enable graphics
+	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
@@ -206,7 +206,7 @@ void EnvironmentEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable graphics
+	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
@@ -248,7 +248,10 @@ void EnvironmentEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_fe3d.misc_disableDebugRendering();
+	if (_fe3d.misc_isDebugRenderingEnabled())
+	{
+		_fe3d.misc_disableDebugRendering();
+	}
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

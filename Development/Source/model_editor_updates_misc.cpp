@@ -86,9 +86,15 @@ void ModelEditor::_updateCamera()
 
 		// Update camera position
 		_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
+
+		// Update camera lookat position
 		_fe3d.camera_setLookatPosition(_cameraLookatPosition);
 
 		// Update shadows
+		if (_fe3d.gfx_isShadowsEnabled())
+		{
+			_fe3d.gfx_disableShadows();
+		}
 		_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(_cameraDistance * 2.0f)),
 			_cameraLookatPosition, _cameraDistance * 4.0f, _cameraDistance * 6.0f, 0.5f, false, true, 0);
 	}

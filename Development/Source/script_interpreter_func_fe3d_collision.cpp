@@ -10,7 +10,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.collision_enableCameraTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
+			_fe3d.collision_enableTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -19,7 +19,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.collision_disableCameraTerrainResponse();
+			_fe3d.collision_disableTerrainResponse();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

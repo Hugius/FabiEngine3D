@@ -190,7 +190,7 @@ void ScriptInterpreter::load()
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
 
-	// Default graphics
+	// Enable default graphics
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -290,8 +290,14 @@ void ScriptInterpreter::unload()
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Reset audio
-	_fe3d.misc_enableSounds();
-	_fe3d.misc_enableMusic();
+	if (!_fe3d.misc_isSoundsEnabled())
+	{
+		_fe3d.misc_enableSounds();
+	}
+	if (!_fe3d.misc_isMusicEnabled())
+	{
+		_fe3d.misc_enableMusic();
+	}
 
 	// Stop animations
 	_animationEditor.stopAllAnimations();
@@ -307,27 +313,58 @@ void ScriptInterpreter::unload()
 	_fe3d.music_clearPlaylist();
 
 	// Disable collision response
-	_fe3d.collision_disableCameraTerrainResponse();
-	_fe3d.collision_disableCameraResponse();
 	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	if (_fe3d.collision_isCameraResponseEnabled())
+	{
+		_fe3d.collision_disableCameraResponse();
+	}
+	if (_fe3d.collision_isTerrainResponseEnabled())
+	{
+		_fe3d.collision_disableTerrainResponse();
+	}
 
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting(true);
-	_fe3d.gfx_disableDirectionalLighting(true);
+	if (_fe3d.gfx_isAmbientLightingEnabled())
+	{
+		_fe3d.gfx_disableAmbientLighting(true);
+	}
+	if (_fe3d.gfx_isDirectionalLightingEnabled())
+	{
+		_fe3d.gfx_disableDirectionalLighting(true);
+	}
+	if (_fe3d.gfx_isFogEnabled())
+	{
+		_fe3d.gfx_disableFog(true);
+	}
+	if (_fe3d.gfx_isShadowsEnabled())
+	{
+		_fe3d.gfx_disableShadows(true);
+	}
+	if (_fe3d.gfx_isSkyHdrEnabled())
+	{
+		_fe3d.gfx_disableSkyHDR(true);
+	}
+	if (_fe3d.gfx_isDofEnabled())
+	{
+		_fe3d.gfx_disableDOF(true);
+	}
+	if (_fe3d.gfx_isMotionBlurEnabled())
+	{
+		_fe3d.gfx_disableMotionBlur(true);
+	}
+	if (_fe3d.gfx_isLensFlareEnabled())
+	{
+		_fe3d.gfx_disableLensFlare(true);
+	}
+
+	// Disable default graphics
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disablePointLighting(true);
-	_fe3d.gfx_disableSpotLighting(true);
-	_fe3d.gfx_disableFog(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
-	_fe3d.gfx_disableShadows(true);
 	_fe3d.gfx_disableWaterEffects(true);
-	_fe3d.gfx_disableSkyHDR(true);
-	_fe3d.gfx_disableDOF(true);
-	_fe3d.gfx_disableMotionBlur(true);
-	_fe3d.gfx_disableLensFlare(true);
 
 	// Delete game image entities
 	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
@@ -362,9 +399,18 @@ void ScriptInterpreter::unload()
 	}
 
 	// Miscellaneous
-	_fe3d.misc_disableAabbFrameRendering();
-	_fe3d.misc_disableWireframeRendering();
-	_fe3d.misc_disableTerrainRaycastPointing();
+	if (_fe3d.misc_isAabbFrameRenderingEnabled())
+	{
+		_fe3d.misc_disableAabbFrameRendering();
+	}
+	if (_fe3d.misc_isWireframeRenderingEnabled())
+	{
+		_fe3d.misc_disableWireframeRendering();
+	}
+	if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+	{
+		_fe3d.misc_disableTerrainRaycastPointing();
+	}
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

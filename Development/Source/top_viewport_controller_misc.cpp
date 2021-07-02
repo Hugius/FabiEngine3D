@@ -312,8 +312,11 @@ void TopViewportController::_applyProjectChange()
 		_sceneEditor.unload();
 	}
 
-	// Unload script editor (loaded by default)
-	_scriptEditor.unload();
+	// Unload script editor
+	if (_scriptEditor.isLoaded())
+	{
+		_scriptEditor.unload();
+	}
 
 	// Pass loaded project name
 	_environmentEditor.setCurrentProjectID(_currentProjectID);

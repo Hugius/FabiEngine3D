@@ -10,34 +10,57 @@ void SceneEditor::_updateMiscellaneous()
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
-		// Update bounding box visibility
-		if (_fe3d.input_isKeyToggled(InputType::KEY_B))
+		// Update AABB frame rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_B))
 		{
-			_fe3d.misc_enableAabbFrameRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableAabbFrameRendering();
-		}
-
-		// Wireframe rendering
-		if (_fe3d.input_isKeyToggled(InputType::KEY_F))
-		{
-			_fe3d.misc_enableWireframeRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableWireframeRendering();
+			if (_fe3d.misc_isAabbFrameRenderingEnabled())
+			{
+				_fe3d.misc_disableAabbFrameRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableAabbFrameRendering();
+			}
+			
 		}
 
-		// Debug rendering
-		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
+		// Update wireframe rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 		{
-			_fe3d.misc_enableDebugRendering();
+			if (_fe3d.misc_isWireframeRenderingEnabled())
+			{
+				_fe3d.misc_disableWireframeRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableWireframeRendering();
+			}
+		}
+
+		// Update debug rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+		{
+			if (_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
+			}
+		}
+
+		// Update terrain raycast pointing
+		if (_fe3d.terrainEntity_getSelectedID().empty())
+		{
+			if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+			{
+				_fe3d.misc_disableTerrainRaycastPointing();
+			}
 		}
 		else
 		{
-			_fe3d.misc_disableDebugRendering();
+			_fe3d.misc_enableTerrainRaycastPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
 		}
 	}
 }
@@ -62,14 +85,38 @@ void SceneEditor::clearCurrentScene()
 	// Disable scene graphics
 	if (_isEditorLoaded)
 	{
-		_fe3d.gfx_disableAmbientLighting(true);
-		_fe3d.gfx_disableDirectionalLighting(true);
-		_fe3d.gfx_disableFog(true);
-		_fe3d.gfx_disableShadows(true);
-		_fe3d.gfx_disableSkyHDR(true);
-		_fe3d.gfx_disableDOF(true);
-		_fe3d.gfx_disableMotionBlur(true);
-		_fe3d.gfx_disableLensFlare(true);
+		if (_fe3d.gfx_isAmbientLightingEnabled())
+		{
+			_fe3d.gfx_disableAmbientLighting(true);
+		}
+		if (_fe3d.gfx_isDirectionalLightingEnabled())
+		{
+			_fe3d.gfx_disableDirectionalLighting(true);
+		}
+		if (_fe3d.gfx_isFogEnabled())
+		{
+			_fe3d.gfx_disableFog(true);
+		}
+		if (_fe3d.gfx_isShadowsEnabled())
+		{
+			_fe3d.gfx_disableShadows(true);
+		}
+		if (_fe3d.gfx_isSkyHdrEnabled())
+		{
+			_fe3d.gfx_disableSkyHDR(true);
+		}
+		if (_fe3d.gfx_isDofEnabled())
+		{
+			_fe3d.gfx_disableDOF(true);
+		}
+		if (_fe3d.gfx_isMotionBlurEnabled())
+		{
+			_fe3d.gfx_disableMotionBlur(true);
+		}
+		if (_fe3d.gfx_isLensFlareEnabled())
+		{
+			_fe3d.gfx_disableLensFlare(true);
+		}
 	}
 
 	// Delete sky entity

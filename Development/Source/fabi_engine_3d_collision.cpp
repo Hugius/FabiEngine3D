@@ -16,12 +16,12 @@ void FabiEngine3D::collision_disableCameraResponse()
 	_core->_collisionResolver.disableAabbResponse();
 }
 
-void FabiEngine3D::collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed)
+void FabiEngine3D::collision_enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
 	_core->_collisionResolver.enableTerrainResponse(cameraHeight, cameraSpeed);
 }
 
-void FabiEngine3D::collision_disableCameraTerrainResponse()
+void FabiEngine3D::collision_disableTerrainResponse()
 {
 	_core->_collisionResolver.disableTerrainResponse();
 }
@@ -378,4 +378,14 @@ const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string
 
 	// No collision
 	return false;
+}
+
+const bool FabiEngine3D::collision_isCameraResponseEnabled()
+{
+	return _core->_collisionResolver.isCameraResponseEnabled();
+}
+
+const bool FabiEngine3D::collision_isTerrainResponseEnabled()
+{
+	return _core->_collisionResolver.isTerrainResponseEnabled();
 }

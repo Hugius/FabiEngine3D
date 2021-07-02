@@ -290,26 +290,40 @@ void AnimationEditor::_updateCamera()
 			float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 			// Update camera
-			_fe3d.camera_enableLookatView();
+			if (!_fe3d.camera_isLookatViewEnabled())
+			{
+				_fe3d.camera_enableLookatView();
+			}
 			_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
 			_fe3d.camera_setLookatPosition(_cameraLookatPosition);
 
 			// Update shadows
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows();
+			}
 			_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(_cameraDistance * 2.0f)),
 				_cameraLookatPosition, _cameraDistance * 4.0f, _cameraDistance * 6.0f, 0.5f, false, true, 0);
 		}
 		else
 		{
-			// Set default camera
-			_fe3d.camera_disableLookatView();
-			_fe3d.camera_setPosition(Vec3(0.0));
-			_fe3d.camera_setLookatPosition(Vec3(0.0));
-			_cameraLookatPosition = Vec3(0.0f);
-			_totalCursorDifference = Vec2(0.0f);
-			_cameraAcceleration = Vec2(0.0f);
-			_cameraScrollingAcceleration = 0.0f;
-			_cameraDistance = CAMERA_DISTANCE;
-			_cameraSpeed = CAMERA_SPEED;
+			// Set default camera view
+			if (_fe3d.camera_isLookatViewEnabled())
+			{
+				if (_fe3d.gfx_isShadowsEnabled())
+				{
+					_fe3d.gfx_disableShadows(true);
+				}
+				_fe3d.camera_disableLookatView();
+				_fe3d.camera_setPosition(Vec3(0.0));
+				_fe3d.camera_setLookatPosition(Vec3(0.0));
+				_cameraLookatPosition = Vec3(0.0f);
+				_totalCursorDifference = Vec2(0.0f);
+				_cameraAcceleration = Vec2(0.0f);
+				_cameraScrollingAcceleration = 0.0f;
+				_cameraDistance = CAMERA_DISTANCE;
+				_cameraSpeed = CAMERA_SPEED;
+			}
 		}
 	}
 }

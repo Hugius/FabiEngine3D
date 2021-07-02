@@ -90,8 +90,8 @@ void SceneEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedSoundName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
-	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_fe3d.collision_enableCameraResponse(true, true, true);
+	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
@@ -106,7 +106,7 @@ void SceneEditor::unload()
 	// Clear scene
 	clearCurrentScene();
 
-	// Disable graphics
+	// Disable default graphics
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disablePointLighting(true);
 	_fe3d.gfx_disableSkyReflections(true);
@@ -187,10 +187,22 @@ void SceneEditor::unload()
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();
-	_fe3d.misc_disableAabbFrameRendering();
-	_fe3d.misc_disableWireframeRendering();
-	_fe3d.misc_disableDebugRendering();
-	_fe3d.misc_disableTerrainRaycastPointing();
+	if (_fe3d.misc_isAabbFrameRenderingEnabled())
+	{
+		_fe3d.misc_disableAabbFrameRendering();
+	}
+	if (_fe3d.misc_isWireframeRenderingEnabled())
+	{
+		_fe3d.misc_disableWireframeRendering();
+	}
+	if (_fe3d.misc_isDebugRenderingEnabled())
+	{
+		_fe3d.misc_disableDebugRendering();
+	}
+	if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+	{
+		_fe3d.misc_disableTerrainRaycastPointing();
+	}
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

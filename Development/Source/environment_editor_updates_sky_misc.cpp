@@ -185,25 +185,33 @@ void EnvironmentEditor::_updateSkyCamera()
 				// Enable first person view
 				if (_fe3d.misc_isCursorInsideViewport())
 				{
-					_fe3d.gfx_enableMotionBlur(0.2f);
-					_fe3d.camera_enableFirstPersonView();
-					_fe3d.camera_disableLookatView();
-					_fe3d.imageEntity_hide("@@cursor");
+					if (!_fe3d.camera_isFirstPersonViewEnabled())
+					{
+						_fe3d.camera_enableFirstPersonView();
+						_fe3d.gfx_enableMotionBlur(0.2f);
+						_fe3d.imageEntity_hide("@@cursor");
+					}
 				}
 			}
 			else
 			{
 				// Disable first person view
-				_fe3d.gfx_disableMotionBlur();
-				_fe3d.camera_disableFirstPersonView();
-				_fe3d.imageEntity_show("@@cursor");
+				if (_fe3d.camera_isFirstPersonViewEnabled())
+				{
+					_fe3d.camera_disableFirstPersonView();
+					_fe3d.gfx_disableMotionBlur();
+					_fe3d.imageEntity_show("@@cursor");
+				}
 			}
 		}
 		else
 		{
-			// Set default camera
-			_fe3d.gfx_disableMotionBlur();
-			_fe3d.camera_disableFirstPersonView();
+			// Set default camera view
+			if (_fe3d.camera_isFirstPersonViewEnabled())
+			{
+				_fe3d.camera_disableFirstPersonView();
+				_fe3d.gfx_disableMotionBlur();
+			}
 			_fe3d.camera_setYaw(0.0f);
 			_fe3d.camera_setPitch(0.0f);
 		}

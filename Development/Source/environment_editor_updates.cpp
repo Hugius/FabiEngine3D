@@ -7,13 +7,8 @@ void EnvironmentEditor::update()
 		// Update main menu
 		if (_currentEnvironmentType == EnvironmentType::NONE)
 		{
+			// Temporary values
 			auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-
-			// Set default camera view
-			_fe3d.camera_setPosition(Vec3(0.0f));
-			_fe3d.camera_setYaw(0.0f);
-			_fe3d.camera_setPitch(0.0f);
-			_fe3d.camera_disableLookatView();
 
 			// Select the default sky
 			_fe3d.skyEntity_select("@@engineBackground");

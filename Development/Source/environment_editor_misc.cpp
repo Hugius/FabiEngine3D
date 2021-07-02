@@ -19,24 +19,30 @@ void EnvironmentEditor::_updateMiscellaneous()
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
-		// Wireframe rendering
-		if (_fe3d.input_isKeyToggled(InputType::KEY_F))
+		// Update wireframe rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 		{
-			_fe3d.misc_enableWireframeRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableWireframeRendering();
+			if (_fe3d.misc_isWireframeRenderingEnabled())
+			{
+				_fe3d.misc_disableWireframeRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableWireframeRendering();
+			}
 		}
 
-		// Debug rendering
-		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
+		// Update debug rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 		{
-			_fe3d.misc_enableDebugRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableDebugRendering();
+			if (_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
+			}
 		}
 	}
 }

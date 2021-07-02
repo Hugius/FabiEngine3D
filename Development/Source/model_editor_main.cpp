@@ -107,7 +107,7 @@ void ModelEditor::load()
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, CAMERA_POSITION, 0.0f, 0.0f);
 	_fe3d.camera_enableLookatView();
 
-	// Enable graphics
+	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f);
@@ -141,7 +141,7 @@ void ModelEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable graphics
+	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableShadows(true);
@@ -180,8 +180,14 @@ void ModelEditor::unload()
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAabbName");
-	_fe3d.misc_disableAabbFrameRendering();
-	_fe3d.misc_disableDebugRendering();
+	if (_fe3d.misc_isAabbFrameRenderingEnabled())
+	{
+		_fe3d.misc_disableAabbFrameRendering();
+	}
+	if (_fe3d.misc_isDebugRenderingEnabled())
+	{
+		_fe3d.misc_disableDebugRendering();
+	}
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

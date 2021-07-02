@@ -203,12 +203,15 @@ void EnvironmentEditor::_updateTerrainCamera()
 		}
 		else
 		{
-			// Set default camera
-			_fe3d.camera_disableLookatView();
-			_fe3d.camera_setPosition(Vec3(0.0f));
-			_fe3d.camera_setLookatPosition(Vec3(0.0f));
-			_totalCameraRotation = 0.0f;
-			_cameraAcceleration = 0.0f;
+			// Set default camera view
+			if (_fe3d.camera_isLookatViewEnabled())
+			{
+				_fe3d.camera_disableLookatView();
+				_fe3d.camera_setPosition(Vec3(0.0f));
+				_fe3d.camera_setLookatPosition(Vec3(0.0f));
+				_totalCameraRotation = 0.0f;
+				_cameraAcceleration = 0.0f;
+			}
 		}
 	}
 }

@@ -19,17 +19,20 @@ void ModelEditor::_updateMiscellaneous()
 			_fe3d.modelEntity_show("@@cube");
 		}
 
-		// Debug rendering
-		if (_fe3d.input_isKeyToggled(InputType::KEY_H))
+		// Update debug rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 		{
-			_fe3d.misc_enableDebugRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableDebugRendering();
+			if (_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
+			}
 		}
 
-		// Wireframed model rendering
+		// Update wireframed model rendering
 		string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
 		if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
 		{

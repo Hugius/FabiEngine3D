@@ -63,9 +63,8 @@ void AnimationEditor::load()
 
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), -90.0f, 0.0f);
-	_fe3d.camera_enableLookatView();
 
-	// Enable graphics
+	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -95,10 +94,9 @@ void AnimationEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable graphics
+	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
-	_fe3d.gfx_disableShadows(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
@@ -136,7 +134,10 @@ void AnimationEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_fe3d.misc_disableDebugRendering();
+	if (_fe3d.misc_isDebugRenderingEnabled())
+	{
+		_fe3d.misc_disableDebugRendering();
+	}
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

@@ -430,6 +430,16 @@ const bool FabiEngine3D::misc_isTerrainRaycastPointingEnabled()
 	return _core->_rayCaster.isTerrainPointingEnabled();
 }
 
+const bool FabiEngine3D::misc_isSoundsEnabled()
+{
+	return _core->_audioPlayer.isSoundsEnabled();
+}
+
+const bool FabiEngine3D::misc_isMusicEnabled()
+{
+	return _core->_audioPlayer.isMusicEnabled();
+}
+
 const int FabiEngine3D::misc_getMaxChannels()
 {
 	return _core->_audioPlayer.getAllocatedChannelCount();

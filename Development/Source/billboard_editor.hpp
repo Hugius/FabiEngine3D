@@ -28,7 +28,7 @@ private:
 	void _updateBillboardChoosing();
 	void _updateBillboardEditing();
 	void _updateBillboardRemoval();
-	void _updateBillboardCamera();
+	void _updateCamera();
 	void _updateMiscellaneous();
 
 	// Booleans

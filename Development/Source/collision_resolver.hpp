@@ -18,6 +18,8 @@ public:
 	void disableTerrainResponse();
 
 	bool isCameraUnderTerrain();
+	bool isCameraResponseEnabled();
+	bool isTerrainResponseEnabled();
 
 private:
 	CollisionDetector& _collisionDetector;
@@ -31,10 +33,10 @@ private:
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
-	bool _cameraResponseEnabled = false;
-	bool _cameraResponseEnabledX = false;
-	bool _cameraResponseEnabledY = false;
-	bool _cameraResponseEnabledZ = false;
-	bool _terrainResponseEnabled = false;
+	bool _isCameraResponseEnabled = false;
+	bool _isCameraResponseEnabledX = false;
+	bool _isCameraResponseEnabledY = false;
+	bool _isCameraResponseEnabledZ = false;
+	bool _isTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 };

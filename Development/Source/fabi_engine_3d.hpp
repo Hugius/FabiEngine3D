@@ -468,22 +468,24 @@ public:
 	// Global collision interface - setters
 	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
 	void collision_enableCameraResponse(bool x, bool y, bool z);
-	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
+	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraResponse();
-	void collision_disableCameraTerrainResponse();
+	void collision_disableTerrainResponse();
 
 	// Global collision interface - getters
 	const pair<const string, float> collision_checkCursorInAny();
-	const pair<bool, float>		  collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
+	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
 	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
-	const bool		 collision_checkCameraWithTerrain();
-	const bool		 collision_checkCameraWithEntity(const string& ID);
 	const string collision_checkCameraWithAny();
 	const string collision_checkCameraWithEntities(const string& ID);
-	const bool		 collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
-	const bool		 collision_checkCameraWithAnyDirection(Direction direction);
-	const bool		 collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
 	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
+	const bool collision_checkCameraWithTerrain();
+	const bool collision_checkCameraWithEntity(const string& ID);
+	const bool collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
+	const bool collision_checkCameraWithAnyDirection(Direction direction);
+	const bool collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
+	const bool collision_isCameraResponseEnabled();
+	const bool collision_isTerrainResponseEnabled();
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);
@@ -909,6 +911,8 @@ public:
 	const bool misc_isAabbFrameRenderingEnabled();
 	const bool misc_isDebugRenderingEnabled();
 	const bool misc_isTerrainRaycastPointingEnabled();
+	const bool misc_isSoundsEnabled();
+	const bool misc_isMusicEnabled();
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

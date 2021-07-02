@@ -100,11 +100,17 @@ void SceneEditor::_updateAmbientLightingMenu()
 			// Enable or disable ambient lighting
 			if (isEnabled)
 			{
-				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+				if (!_fe3d.gfx_isAmbientLightingEnabled())
+				{
+					_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+				}
 			}
 			else
 			{
-				_fe3d.gfx_disableAmbientLighting();
+				if (_fe3d.gfx_isAmbientLightingEnabled())
+				{
+					_fe3d.gfx_disableAmbientLighting();
+				}
 			}
 
 			// Update buttons hoverability
@@ -206,11 +212,17 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			// Enable or disable directional lighting
 			if (isEnabled)
 			{
-				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+				if (!_fe3d.gfx_isDirectionalLightingEnabled())
+				{
+					_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+				}
 			}
 			else
 			{
-				_fe3d.gfx_disableDirectionalLighting();
+				if (_fe3d.gfx_isDirectionalLightingEnabled())
+				{
+					_fe3d.gfx_disableDirectionalLighting();
+				}
 			}
 
 			// Update buttons hoverability

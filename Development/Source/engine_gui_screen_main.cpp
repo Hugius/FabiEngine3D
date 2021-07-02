@@ -16,37 +16,30 @@ void EngineGuiScreen::update(bool hoverable)
 	for (const auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(hoverable);
+		scrollingList->setVisible(_isActive);
 	}
 
 	// Update writefields
 	for (const auto& writefield : _writefields)
 	{
 		writefield->update(hoverable);
+		writefield->setVisible(_isActive);
 	}
 
 	// Update buttons
 	for (const auto& button : _buttons)
 	{
 		button->update(hoverable);
-	}
-
-	// Update visibilities
-	for (const auto& scrollingList : _scrollingLists)
-	{
-		scrollingList->setVisible(_isActive);
-	}
-	for (const auto& writefield : _writefields)
-	{
-		writefield->setVisible(_isActive);
-	}
-	for (const auto& button : _buttons)
-	{
 		button->setVisible(_isActive);
 	}
+
+	// Update rectangles
 	for (const auto& rectangle : _rectangles)
 	{
 		rectangle->setVisible(_isActive);
 	}
+
+	// Update textfields
 	for (const auto& textfield : _textfields)
 	{
 		textfield->setVisible(_isActive);

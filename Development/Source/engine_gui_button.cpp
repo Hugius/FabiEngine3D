@@ -7,7 +7,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
 	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, 
-		Vec2(size.x * 0.8f, size.y * 0.7f), textContent, textColor)),
+		Vec2(size.x * 0.9f, size.y * 0.75f), textContent, textColor)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
 	_sizeChangeEnabled(sizeChangeEnabled),

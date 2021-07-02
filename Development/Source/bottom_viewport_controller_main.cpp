@@ -3,8 +3,6 @@
 
 #include <algorithm>
 
-#define GW(text) LVPC::calcTextWidth(text, 0.04f, 2.0f)
-
 BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 	TopViewportController& topViewportController, ScriptEditor& scriptEditor) :
 	BaseViewportController(fe3d, gui),
@@ -17,13 +15,13 @@ BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGui
 void BottomViewportController::initialize()
 {
 	// Statistics window
-	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.875f), BottomViewportController::FRAME_COLOR);
+	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
 	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
 	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
 	// Console window
-	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.875f), BottomViewportController::FRAME_COLOR);
+	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
 	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 

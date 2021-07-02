@@ -24,7 +24,7 @@ private:
 
 	const Vec3 _originalColor;
 	const Vec2 _originalPosition;
-	const Vec2 _originalSize;
+	Vec2 _originalSize;
 
 	const string _ID;
 	const string _entityID;

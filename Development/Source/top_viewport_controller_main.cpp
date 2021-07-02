@@ -55,8 +55,8 @@ void TopViewportController::initialize()
 	_miscWindow->addScreen("main");
 	_miscWindow->setActiveScreen("main");
 	screen = _miscWindow->getScreen("main");
-	screen->addButton("uncache", Vec2(-0.55f, 0.0f), Vec2(0.5f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
-	screen->addButton("documentation", Vec2(0.35f, 0.0f), Vec2(0.9f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCUMENTATION", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("uncache", Vec2(-0.55f, 0.0f), Vec2(0.49f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("documentation", Vec2(0.35f, 0.0f), Vec2(0.91f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCUMENTATION", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
 }
 
 void TopViewportController::update()

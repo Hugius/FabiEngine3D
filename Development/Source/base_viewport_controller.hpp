@@ -3,6 +3,8 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
+#define VPC BaseViewportController
+
 class BaseViewportController
 {
 public:
@@ -11,10 +13,9 @@ public:
 	virtual void initialize() = 0;
 	virtual void update() = 0;
 
-	// Static stuff for easier GUI function calls
-	static inline const float calcTextWidth(const string& text, float charWidth, float maxWidth)
+	static inline const float calculateTextWidth(const string& text, float charWidth)
 	{
-		return std::min(static_cast<float>(text.size()) * charWidth, maxWidth);
+		return static_cast<float>(text.size()) * charWidth;
 	}
 
 protected:

@@ -6,6 +6,8 @@
 #include <chrono>
 #include <direct.h>
 
+using namespace std::chrono;
+
 const int FabiEngine3D::misc_getRandomInteger(int min, int max)
 {
 	return Tools::getRandomInt(min, max);
@@ -13,7 +15,6 @@ const int FabiEngine3D::misc_getRandomInteger(int min, int max)
 
 const int FabiEngine3D::misc_getMsTimeSinceEpoch()
 {
-	using namespace std::chrono;
 	return static_cast<int>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 }
 
@@ -169,37 +170,37 @@ const string FabiEngine3D::misc_getOpenglVersion()
 	return _core->_libraryLoader.getOpenglVersion();
 }
 
-const Vec2 FabiEngine3D::misc_convertToNDC(Vec2 pos)
+const Vec2 FabiEngine3D::misc_convertToNDC(Vec2 position)
 {
-	pos.x = (pos.x * 2.0f) - 1.0f;
-	pos.y = (pos.y * 2.0f) - 1.0f;
+	position.x = (position.x * 2.0f) - 1.0f;
+	position.y = (position.y * 2.0f) - 1.0f;
 
-	return Vec2(pos.x, pos.y);
+	return Vec2(position.x, position.y);
 }
 
-const Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 pos)
+const Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 position)
 {
-	pos.x += 1.0f;
-	pos.x /= 2.0f;
-	pos.y += 1.0f;
-	pos.y /= 2.0f;
+	position.x += 1.0f;
+	position.x /= 2.0f;
+	position.y += 1.0f;
+	position.y /= 2.0f;
 
-	return Vec2(pos.x, pos.y);
+	return Vec2(position.x, position.y);
 }
 
-const Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
+const Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 position)
 {
-	float x = static_cast<float>(pos.x) * static_cast<float>(misc_getWindowSize().x);
-	float y = static_cast<float>(pos.y) * static_cast<float>(misc_getWindowSize().y);
+	const float x = static_cast<float>(position.x) * static_cast<float>(misc_getWindowSize().x);
+	const float y = static_cast<float>(position.y) * static_cast<float>(misc_getWindowSize().y);
 
 	return Ivec2(static_cast<int>(x), static_cast<int>(y));
 }
 
 const Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
-	Ivec2 mousePos = _core->_window.getCursorPosition();
+	Ivec2 mousePosition = _core->_window.getCursorPosition();
 
-	return Ivec2(mousePos.x, misc_getWindowSize().y - mousePos.y);
+	return Ivec2(mousePosition.x, misc_getWindowSize().y - mousePosition.y);
 }
 
 const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
@@ -230,10 +231,10 @@ const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 	}
 }
 
-const Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)
+const Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 position)
 {
-	float x = static_cast<float>(pos.x) / static_cast<float>(misc_getWindowSize().x);
-	float y = static_cast<float>(pos.y) / static_cast<float>(misc_getWindowSize().y);
+	const float x = static_cast<float>(position.x) / static_cast<float>(misc_getWindowSize().x);
+	const float y = static_cast<float>(position.y) / static_cast<float>(misc_getWindowSize().y);
 
 	return Vec2(x, y);
 }
@@ -243,12 +244,12 @@ const Vec3 FabiEngine3D::misc_getRaycastVector()
 	return _core->_rayCaster.getRay();
 }
 
-const Vec3 FabiEngine3D::misc_getRaycastPositionOnTerrain()
+const Vec3 FabiEngine3D::misc_getRaycastPointOnTerrain()
 {
 	return _core->_rayCaster.getTerrainPoint();
 }
 
-const bool FabiEngine3D::misc_isRaycastPositionOnTerrainValid()
+const bool FabiEngine3D::misc_isRaycastPointOnTerrainValid()
 {
 	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
 }
@@ -280,15 +281,15 @@ const bool FabiEngine3D::misc_isCursorVisible()
 
 const bool FabiEngine3D::misc_isCursorInsideViewport()
 {
-	// Variables
-	Ivec2 mousePos = misc_getCursorPosition();
-	Ivec2 viewportPos = misc_getViewportPosition();
-	Ivec2 viewportSize = misc_getViewportSize();
+	// Temporary values
+	auto mousePosition = misc_getCursorPosition();
+	auto viewportPosition = misc_getViewportPosition();
+	auto viewportSize = misc_getViewportSize();
 
 	// Checking if cursor is inside viewport
-	if (mousePos.x > viewportPos.x && mousePos.x < viewportPos.x + viewportSize.x)
+	if (mousePosition.x > viewportPosition.x && mousePosition.x < viewportPosition.x + viewportSize.x)
 	{
-		if (mousePos.y > viewportPos.y && mousePos.y < viewportPos.y + viewportSize.y)
+		if (mousePosition.y > viewportPosition.y && mousePosition.y < viewportPosition.y + viewportSize.y)
 		{
 			return true;
 		}
@@ -299,14 +300,14 @@ const bool FabiEngine3D::misc_isCursorInsideViewport()
 
 const bool FabiEngine3D::misc_isCursorInsideWindow()
 {
-	// Variables
-	Ivec2 mousePos = misc_getCursorPosition();
-	Ivec2 windowSize = misc_getWindowSize();
+	// Temporary values
+	auto mousePosition = misc_getCursorPosition();
+	auto windowSize = misc_getWindowSize();
 	
 	// Checking if cursor is inside viewport
-	if (mousePos.x > 1 && mousePos.x < windowSize.x - 1)
+	if (mousePosition.x > 1 && mousePosition.x < windowSize.x - 1)
 	{
-		if (mousePos.y > 1 && mousePos.y < windowSize.y - 1)
+		if (mousePosition.y > 1 && mousePosition.y < windowSize.y - 1)
 		{
 			return true;
 		}
@@ -402,6 +403,31 @@ const bool FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
 const bool FabiEngine3D::misc_isVsyncEnabled()
 {
 	return _core->_window.isVsyncEnabled();
+}
+
+const bool FabiEngine3D::misc_isWireframeRenderingEnabled()
+{
+	return _core->_renderBus.isWireframeRenderingEnabled();
+}
+
+const bool FabiEngine3D::misc_isShadowFrameRenderingEnabled()
+{
+	return _core->_renderBus.isShadowFrameRenderingEnabled();
+}
+
+const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled()
+{
+	return _core->_renderBus.isAabbFrameRenderingEnabled();
+}
+
+const bool FabiEngine3D::misc_isDebugRenderingEnabled()
+{
+	return _core->_renderBus.isDebugRenderingEnabled();
+}
+
+const bool FabiEngine3D::misc_isTerrainRaycastPointingEnabled()
+{
+	return _core->_rayCaster.isTerrainPointingEnabled();
 }
 
 const int FabiEngine3D::misc_getMaxChannels()

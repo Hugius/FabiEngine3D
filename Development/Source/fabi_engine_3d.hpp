@@ -468,8 +468,8 @@ public:
 	// Global collision interface - setters
 	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
 	void collision_enableCameraResponse(bool x, bool y, bool z);
-	void collision_disableCameraResponse();
 	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
+	void collision_disableCameraResponse();
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
@@ -823,20 +823,20 @@ public:
 
 	// Miscellaneous interface - setters
 	void misc_enableWireframeRendering();
-	void misc_disableWireframeRendering();
 	void misc_enableShadowFrameRendering();
-	void misc_disableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
-	void misc_disableAabbFrameRendering();
 	void misc_enableDebugRendering();
-	void misc_disableDebugRendering();
-	void misc_enableTerrainRaycasting(float distance, float precision);
-	void misc_disableTerrainRaycasting();
+	void misc_enableTerrainRaycastPointing(float distance, float precision);
 	void misc_enableVsync();
-	void misc_disableVsync();
 	void misc_enableSounds();
-	void misc_disableSounds();
 	void misc_enableMusic();
+	void misc_disableWireframeRendering();
+	void misc_disableShadowFrameRendering();
+	void misc_disableAabbFrameRendering();
+	void misc_disableDebugRendering();
+	void misc_disableTerrainRaycastPointing();
+	void misc_disableVsync();
+	void misc_disableSounds();
 	void misc_disableMusic();
 	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_centerCursor();
@@ -885,25 +885,30 @@ public:
 	const string misc_getOpenglVersion();
 	const Ivec2 misc_getCursorPosition();
 	const Ivec2 misc_getCursorPositionRelativeToViewport();
-	const Ivec2 misc_convertToScreenCoords(Vec2 pos);
+	const Ivec2 misc_convertToScreenCoords(Vec2 position);
 	const Ivec2 misc_getViewportPosition();
 	const Ivec2 misc_getViewportSize();
 	const Ivec2 misc_getWindowSize();
-	const Vec2 misc_convertToNDC(Vec2 pos);
-	const Vec2 misc_convertFromNDC(Vec2 pos);
-	const Vec2 misc_convertFromScreenCoords(Ivec2 pos);
+	const Vec2 misc_convertToNDC(Vec2 position);
+	const Vec2 misc_convertFromNDC(Vec2 position);
+	const Vec2 misc_convertFromScreenCoords(Ivec2 position);
 	const Vec3 misc_getRaycastVector();
-	const Vec3 misc_getRaycastPositionOnTerrain();
+	const Vec3 misc_getRaycastPointOnTerrain();
 	const bool misc_isCursorVisible();
 	const bool misc_isCursorInsideViewport();
 	const bool misc_isCursorInsideWindow();
 	const bool misc_isDirectoryExisting(const string& filePath);
 	const bool misc_isFileExisting(const string& filePath);
 	const bool misc_checkInterval(unsigned int frames);
-	const bool misc_isRaycastPositionOnTerrainValid();
+	const bool misc_isRaycastPointOnTerrainValid();
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_createNewDirectory(const string& directoryPath);
 	const bool misc_isVsyncEnabled();
+	const bool misc_isWireframeRenderingEnabled();
+	const bool misc_isShadowFrameRenderingEnabled();
+	const bool misc_isAabbFrameRenderingEnabled();
+	const bool misc_isDebugRenderingEnabled();
+	const bool misc_isTerrainRaycastPointingEnabled();
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

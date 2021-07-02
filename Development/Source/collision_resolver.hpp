@@ -12,7 +12,7 @@ public:
 	
 	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera & camera);
 	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
-	void enableAabbResponse(bool x, bool y, bool z);
+	void enableCameraResponse(bool x, bool y, bool z);
 	void disableAabbResponse();
 	void enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void disableTerrainResponse();
@@ -31,9 +31,10 @@ private:
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
-	bool _aabbResponseEnabledX   = false;
-	bool _aabbResponseEnabledY   = false;
-	bool _aabbResponseEnabledZ   = false;
+	bool _cameraResponseEnabled = false;
+	bool _cameraResponseEnabledX = false;
+	bool _cameraResponseEnabledY = false;
+	bool _cameraResponseEnabledZ = false;
 	bool _terrainResponseEnabled = false;
-	bool _isCameraUnderTerrain	 = false;
+	bool _isCameraUnderTerrain = false;
 };

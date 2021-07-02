@@ -3,23 +3,23 @@
 bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_enable_terrain_positioning")
+	if (functionName == "fe3d:raycast_enable_terrain_pointing")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // Distance + precision
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.misc_enableTerrainRaycasting(arguments[0].getDecimal(), arguments[1].getDecimal());
+			_fe3d.misc_enableTerrainRaycastPointing(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:raycast_disable_terrain_positioning")
+	else if (functionName == "fe3d:raycast_disable_terrain_pointing")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.misc_disableTerrainRaycasting();
+			_fe3d.misc_disableTerrainRaycastPointing();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -36,7 +36,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_get_position_on_terrain")
+	else if (functionName == "fe3d:raycast_get_point_on_terrain")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -44,12 +44,12 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
 			{
-				auto result = _fe3d.misc_getRaycastPositionOnTerrain();
+				auto result = _fe3d.misc_getRaycastPointOnTerrain();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_is_position_on_terrain_valid")
+	else if (functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
 			{
-				auto result = _fe3d.misc_isRaycastPositionOnTerrainValid();
+				auto result = _fe3d.misc_isRaycastPointOnTerrainValid();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}

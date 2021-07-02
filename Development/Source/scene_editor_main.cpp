@@ -190,7 +190,7 @@ void SceneEditor::unload()
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableDebugRendering();
-	_fe3d.misc_disableTerrainRaycasting();
+	_fe3d.misc_disableTerrainRaycastPointing();
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

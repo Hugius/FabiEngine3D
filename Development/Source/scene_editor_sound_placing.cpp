@@ -15,10 +15,10 @@ void SceneEditor::_updateSoundPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPositionOnTerrainValid())
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
 				{
 					// Update preview soundcaster position
-					newPosition = _fe3d.misc_getRaycastPositionOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
+					newPosition = _fe3d.misc_getRaycastPointOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Play preview soundcaster
 					if (!_fe3d.soundEntity_isStarted(_currentPreviewSoundID))
@@ -49,7 +49,7 @@ void SceneEditor::_updateSoundPlacing()
 				}
 
 				// Placing soundcaster
-				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
+				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new soundcaster

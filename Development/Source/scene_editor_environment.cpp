@@ -173,11 +173,11 @@ void SceneEditor::_updateTerrainMenu()
 		// Terrain raycasting
 		if (_fe3d.terrainEntity_getSelectedID().empty())
 		{
-			_fe3d.misc_disableTerrainRaycasting();
+			_fe3d.misc_disableTerrainRaycastPointing();
 		}
 		else
 		{
-			_fe3d.misc_enableTerrainRaycasting(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
+			_fe3d.misc_enableTerrainRaycastPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
 		}
 	}
 }

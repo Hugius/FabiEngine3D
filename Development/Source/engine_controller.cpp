@@ -140,12 +140,20 @@ void EngineController::_updateMiscellaneous()
 	string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
+		// Restore camera
 		float lastYaw = camera_getYaw();
 		float lastPitch = camera_getPitch();
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
+
+		// Restore background
 		skyEntity_select("@@engineBackground");
 		skyEntity_setLightness("@@engineBackground", 0.6f);
-		misc_enableVsync();
+
+		// Restore Vsync
+		if (!misc_isVsyncEnabled())
+		{
+			misc_enableVsync();
+		}
 	}
 	lastScreen = activeScreen;
 

@@ -15,10 +15,9 @@ RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
 void RayCaster::update(Ivec2 cursorPosition)
 {
 	// Update raycasting
-	Vec3 mouseRay = _getMouseRay(cursorPosition);
-	_ray = mouseRay;
+	_ray = _getMouseRay(cursorPosition);
 
-	// Update cursor positioning on terrain
+	// Update cursor pointing on terrain
 	if (_isTerrainPointingEnabled)
 	{
 		if (_terrainManager.getSelectedTerrain() != nullptr)
@@ -49,6 +48,21 @@ void RayCaster::setTerrainPointingDistance(float distance)
 void RayCaster::setTerrainPointingPrecision(float precision)
 {
 	_terrainPointingPrecision = precision;
+}
+
+bool RayCaster::isTerrainPointingEnabled()
+{
+	return _isTerrainPointingEnabled;
+}
+
+float RayCaster::getTerrainPointingDistance()
+{
+	return _terrainPointingDistance;
+}
+
+float RayCaster::getTerrainPointingPrecision()
+{
+	return _terrainPointingPrecision;
 }
 
 float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot

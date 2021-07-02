@@ -1,5 +1,6 @@
 #include "camera.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -26,7 +27,15 @@ void Camera::translateFollowZY(float speed)
 
 void Camera::enableLookatView()
 {
-	if (!_isFirstPersonViewEnabled)
+	if (_isFirstPersonViewEnabled)
+	{
+		Logger::throwWarning("Tried to enable lookat view: first person view already enabled!");
+	}
+	else if (_isLookatViewEabled)
+	{
+		Logger::throwWarning("Tried to enable lookat view: already enabled!");
+	}
+	else
 	{
 		_isLookatViewEabled = true;
 	}
@@ -34,26 +43,43 @@ void Camera::enableLookatView()
 
 void Camera::disableLookatView()
 {
-	_isLookatViewEabled = false;
+	if (_isLookatViewEabled)
+	{
+		_isLookatViewEabled = false;
+	}
+	else
+	{
+		Logger::throwWarning("Tried to disable lookat view: not enabled!");
+	}
 }
 
 void Camera::enableFirstPersonView()
 {
-	if (!_isLookatViewEabled)
+	if (_isLookatViewEabled)
 	{
-		// Only center first time
-		if (!_isFirstPersonViewEnabled)
-		{
-			_mustCenterCursor = true;
-		}
-
+		Logger::throwWarning("Tried to enable first perso view: lookat view already enabled!");
+	}
+	else if (_isFirstPersonViewEnabled)
+	{
+		Logger::throwWarning("Tried to enable first person view: already enabled!");
+	}
+	else
+	{
+		_mustCenterCursor = true;
 		_isFirstPersonViewEnabled = true;
 	}
 }
 
 void Camera::disableFirstPersonView()
 {
-	_isFirstPersonViewEnabled = false;
+	if (_isFirstPersonViewEnabled)
+	{
+		_isFirstPersonViewEnabled = false;
+	}
+	else
+	{
+		Logger::throwWarning("Tried to disable first person view: not enabled!");
+	}
 }
 
 void Camera::setFOV(float value)

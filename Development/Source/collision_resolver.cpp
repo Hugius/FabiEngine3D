@@ -13,7 +13,7 @@ void CollisionResolver::update(
 	Camera& camera)
 {
 	// Check if AABB collision is needed in the first place
-	if (_aabbResponseEnabledX || _aabbResponseEnabledY || _aabbResponseEnabledZ)
+	if (_cameraResponseEnabled)
 	{
 		// Temporary values
 		static Vec3 oldCameraPos;
@@ -38,11 +38,11 @@ void CollisionResolver::update(
 
 		// Respond to collision
 		Vec3 newCameraPos = currentCameraPos;
-		if (collision.xCollided() && _aabbResponseEnabledX)
+		if (collision.xCollided() && _cameraResponseEnabledX)
 		{
 			newCameraPos.x = oldCameraPos.x;
 		}
-		if (collision.yCollided() && _aabbResponseEnabledY)
+		if (collision.yCollided() && _cameraResponseEnabledY)
 		{
 			// If camera is under terrain, response cannot be blocked
 			if (!_isCameraUnderTerrain)
@@ -50,7 +50,7 @@ void CollisionResolver::update(
 				newCameraPos.y = oldCameraPos.y;
 			}
 		}
-		if (collision.zCollided() && _aabbResponseEnabledZ)
+		if (collision.zCollided() && _cameraResponseEnabledZ)
 		{
 			newCameraPos.z = oldCameraPos.z;
 		}
@@ -104,30 +104,60 @@ void CollisionResolver::setCameraBoxSize(float bottom, float top, float left, fl
 	_cameraAabbBack = back * 0.99f;
 }
 
-void CollisionResolver::enableAabbResponse(bool x, bool y, bool z)
+void CollisionResolver::enableCameraResponse(bool x, bool y, bool z)
 {
-	_aabbResponseEnabledX = x;
-	_aabbResponseEnabledY = y;
-	_aabbResponseEnabledZ = z;
+	if (_cameraResponseEnabled)
+	{
+		Logger::throwWarning("Tried to enable camera response: already enabled!");
+	}
+	else
+	{
+		_cameraResponseEnabled = true;
+		_cameraResponseEnabledX = x;
+		_cameraResponseEnabledY = y;
+		_cameraResponseEnabledZ = z;
+	}
 }
 
 void CollisionResolver::disableAabbResponse()
 {
-	_aabbResponseEnabledX = false;
-	_aabbResponseEnabledY = false;
-	_aabbResponseEnabledZ = false;
+	if (_cameraResponseEnabled)
+	{
+		_cameraResponseEnabled = false;
+		_cameraResponseEnabledX = false;
+		_cameraResponseEnabledY = false;
+		_cameraResponseEnabledZ = false;
+	}
+	else
+	{
+		Logger::throwWarning("Tried to disable camera response: not enabled!");
+	}
 }
 
 void CollisionResolver::enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	_terrainResponseEnabled = true;
-	_cameraTerrainHeight = cameraHeight;
-	_cameraTerrainSpeed = cameraSpeed;
+	if (_terrainResponseEnabled)
+	{
+		Logger::throwWarning("Tried to enable terrain response: already enabled!");
+	}
+	else
+	{
+		_terrainResponseEnabled = true;
+		_cameraTerrainHeight = cameraHeight;
+		_cameraTerrainSpeed = cameraSpeed;
+	}
 }
 
 void CollisionResolver::disableTerrainResponse()
 {
-	_terrainResponseEnabled = false;
+	if (_terrainResponseEnabled)
+	{
+		_terrainResponseEnabled = false;
+	}
+	else
+	{
+		Logger::throwWarning("Tried to disable terrain response: not enabled!");
+	}
 }
 
 bool CollisionResolver::isCameraUnderTerrain()

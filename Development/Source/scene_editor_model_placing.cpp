@@ -15,15 +15,15 @@ void SceneEditor::_updateModelPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPositionOnTerrainValid())
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
 				{
 					// Show preview model
 					_fe3d.modelEntity_show(_currentPreviewModelID);
 
 					// Update preview model position
-					if (_fe3d.misc_isRaycastPositionOnTerrainValid())
+					if (_fe3d.misc_isRaycastPointOnTerrainValid())
 					{
-						newPosition = _fe3d.misc_getRaycastPositionOnTerrain();
+						newPosition = _fe3d.misc_getRaycastPointOnTerrain();
 
 						// Instanced entity has different positioning
 						if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
@@ -43,7 +43,7 @@ void SceneEditor::_updateModelPlacing()
 				}
 
 				// Placing model
-				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
+				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model

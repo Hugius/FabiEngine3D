@@ -16,11 +16,16 @@ BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGui
 
 void BottomViewportController::initialize()
 {
-	// Bottom-viewport: statistics
-	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::FRAME_COLOR);
+	// Statistics window
+	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.875f), BottomViewportController::FRAME_COLOR);
 	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
 	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
+
+	// Console window
+	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.875f), BottomViewportController::FRAME_COLOR);
+	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
+	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 
 	// General statistics
 	_statsScreen->addTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
@@ -54,11 +59,6 @@ void BottomViewportController::initialize()
 		_statsScreen->addTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		rCounter++;
 	}
-
-	// Console window
-	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::FRAME_COLOR);
-	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
-	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 }
 
 void BottomViewportController::update()
@@ -131,9 +131,9 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextfield("cursorPosition")->getEntityID();
 		string text = "Raycast position: " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPositionOnTerrain().x)) + " " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPositionOnTerrain().y)) + " " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPositionOnTerrain().z));
+			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().x)) + " " +
+			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().y)) + " " +
+			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().z));
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

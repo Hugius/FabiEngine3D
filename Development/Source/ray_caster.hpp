@@ -12,6 +12,10 @@ public:
 	void setTerrainPointingDistance(float distance);
 	void setTerrainPointingPrecision(float precision);
 
+	bool isTerrainPointingEnabled();
+	float getTerrainPointingDistance();
+	float getTerrainPointingPrecision();
+
 	float checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos);
 
 	Vec3 getRay();

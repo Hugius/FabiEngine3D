@@ -39,9 +39,11 @@ public:
 	unsigned int getUsedChannelCount();
 	unsigned int getAllocatedChannelCount();
 
+	bool isSoundsEnabled();
 	bool isSoundStarted(Sound& sound);
 	bool isSoundPlaying(Sound& sound);
 	bool isSoundPaused(Sound& sound);
+	bool isMusicEnabled();
 	bool isMusicStarted();
 	bool isMusicPlaying();
 	bool isMusicPaused();

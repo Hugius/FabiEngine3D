@@ -8,7 +8,7 @@ void FabiEngine3D::collision_setCameraBoxSize(float bottom, float top, float lef
 
 void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)
 {
-	_core->_collisionResolver.enableAabbResponse(x, y, z);
+	_core->_collisionResolver.enableCameraResponse(x, y, z);
 }
 
 void FabiEngine3D::collision_disableCameraResponse()

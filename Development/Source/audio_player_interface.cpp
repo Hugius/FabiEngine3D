@@ -263,6 +263,11 @@ float AudioPlayer::getMusicVolume()
 	return -1.0f;
 }
 
+bool AudioPlayer::isSoundsEnabled()
+{
+	return _isSoundsEnabled;
+}
+
 bool AudioPlayer::isSoundStarted(Sound& sound)
 {
 	if (_isSoundsEnabled)
@@ -298,6 +303,11 @@ bool AudioPlayer::isSoundPaused(Sound& sound)
 	}
 
 	return false;
+}
+
+bool AudioPlayer::isMusicEnabled()
+{
+	return _isMusicEnabled;
 }
 
 bool AudioPlayer::isMusicStarted()

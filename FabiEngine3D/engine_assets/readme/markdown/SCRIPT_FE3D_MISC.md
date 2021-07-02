@@ -40,12 +40,10 @@
   Loads a customly saved scene with **ID** into the game. Any previously loaded scene will be cleared.
 - `fe3d:scene_delete_custom`(`STR` ID) ---> `NONE`  
   Deletes customly saved scene with **ID**.
+- `fe3d:cursor_set_visible`(`BOOL` visible) ---> `NONE`  
+  Sets the cursor visibility to **visible**.
 - `fe3d:cursor_center`() ---> `NONE`  
   Moves the cursor position to the middle of the screen.
-- `fe3d:cursor_show`() ---> `NONE`  
-  Makes mouse cursor visible.
-- `fe3d:cursor_hide`() ---> `NONE`  
-  Makes mouse cursor invisible.
 - `fe3d:timer_start`() ---> `NONE`  
   Starts a timer to measure passing time. Works like a stopwatch.
 - `fe3d:wireframe_enable_rendering`() ---> `NONE`  

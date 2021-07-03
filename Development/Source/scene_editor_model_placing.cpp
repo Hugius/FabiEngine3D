@@ -44,7 +44,7 @@ void SceneEditor::_updateModelPlacing()
 
 				// Placing model
 				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
-					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
+					|| _fe3d.terrainEntity_getSelectedID() == "")  // Bypass placement if no terrain selected
 				{
 					// Add new model
 				BEGIN:

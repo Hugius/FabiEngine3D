@@ -114,8 +114,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		// Add done & cancel buttons
 		if (!checkButton("value_form_done"))
 		{
-			addButton("value_form_done", _valueFormButtonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.15f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
-			addButton("value_form_cancel", _valueFormButtonsPosition + Vec2(0.15f, -0.2f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_done", _valueFormButtonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_cancel", _valueFormButtonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 		}
 	}
 }

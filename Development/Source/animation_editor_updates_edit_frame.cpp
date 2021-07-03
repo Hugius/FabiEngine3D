@@ -160,7 +160,7 @@ void AnimationEditor::_updateFrameScreen()
 				speed.z /= 1000.0f;
 			}
 
-			// Showing speed type
+			// Button text contents
 			if (speedType == AnimationSpeedType::LINEAR)
 			{
 				screen->getButton("speedType")->changeTextContent("Speed: linear");
@@ -173,8 +173,6 @@ void AnimationEditor::_updateFrameScreen()
 			{
 				screen->getButton("speedType")->changeTextContent("Speed: instant");
 			}
-
-			// Showing transformation type
 			if (transType == TransformationType::TRANSLATION)
 			{
 				screen->getButton("transType")->changeTextContent("Type: translate");

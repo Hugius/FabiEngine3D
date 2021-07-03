@@ -8,12 +8,12 @@ void BillboardEditor::_updateBillboardEditing()
 	{
 		if (_isEditingBillboard && _currentBillboardID != "")
 		{
-			// Shortened screen instance
+			// Temporary values
 			auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-			// GUI management
 			if (screen->getID() == "billboardEditorMenuChoice")
 			{
+				// GUI management
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -50,6 +50,13 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuMesh")
 			{
+				// Temporary values
+				auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
+				auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
+				auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
+				auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
+
+				// GUI management
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -63,23 +70,23 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("facingX")->isHovered())
 					{
-						bool isFacingX = !_fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
+						isFacingX = !isFacingX;
 						_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
 					}
 					else if (screen->getButton("facingY")->isHovered())
 					{
-						bool isFacingY = !_fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
+						isFacingY = !isFacingY;
 						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
 					}
 					else if (screen->getButton("isReflected")->isHovered())
 					{
-						bool isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
-						_fe3d.billboardEntity_setReflected(_currentBillboardID, !isReflected);
+						isReflected = !isReflected;
+						_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
 					}
 					else if (screen->getButton("isShadowed")->isHovered())
 					{
-						bool isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-						_fe3d.billboardEntity_setShadowed(_currentBillboardID, !isShadowed);
+						isShadowed = !isShadowed;
+						_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
 					}
 				}
 
@@ -91,13 +98,9 @@ void BillboardEditor::_updateBillboardEditing()
 				newSize.y = std::max(0.0f, newSize.y / 100.0f);
 				_fe3d.billboardEntity_setSize(_currentBillboardID, newSize);
 
-				// Update facing buttons text
-				string textEntityIDx = screen->getButton("facingX")->getTextfield()->getEntityID();
-				string textEntityIDy = screen->getButton("facingY")->getTextfield()->getEntityID();
-				bool isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
-				bool isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
-				_fe3d.textEntity_setTextContent(textEntityIDx, isFacingX ? "Facing X: ON" : "Facing X: OFF");
-				_fe3d.textEntity_setTextContent(textEntityIDy, isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
+				// Button text contents
+				screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
+				screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
 
 				// Reset rotations if not facing camera
 				Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);
@@ -112,20 +115,16 @@ void BillboardEditor::_updateBillboardEditing()
 				}
 				_fe3d.billboardEntity_setRotation(_currentBillboardID, rotation);
 
-				// Updating reflected status
-				string reflectedTextEntityID = screen->getButton("isReflected")->getTextfield()->getEntityID();
-				bool isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
-				_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
-				_fe3d.textEntity_setTextContent(reflectedTextEntityID, isReflected ? "Reflected: ON" : "Reflected: OFF");
-
-				// Updating shadowed status
-				string shadowedEntityID = screen->getButton("isShadowed")->getTextfield()->getEntityID();
-				bool isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-				_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
-				_fe3d.textEntity_setTextContent(shadowedEntityID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+				// Button text contents
+				screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
+				screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 			}
 			else if (screen->getID() == "billboardEditorMenuAppearance")
 			{
+				// Temporary values
+				auto isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
+
+				// GUI management
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -168,8 +167,8 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("isTransparent")->isHovered())
 					{
-						bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
-						_fe3d.billboardEntity_setTransparent(_currentBillboardID, !isTransparent);
+						isTransparent = !isTransparent;
+						_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
 					}
 				}
 
@@ -191,18 +190,17 @@ void BillboardEditor::_updateBillboardEditing()
 				newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
 				_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
 
-				// Updating transparent status
-				string transparentTextEntityID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
-				bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
-				_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
-				_fe3d.textEntity_setTextContent(transparentTextEntityID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
+				// Button text contents
+				screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");
 			}
 			else if (screen->getID() == "billboardEditorMenuAnimation")
 			{
+				// Temporary values
 				int animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
 				int animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
 				int animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 
+				// GUI management
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -250,6 +248,7 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getID() == "billboardEditorMenuText")
 			{
+				// GUI management
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

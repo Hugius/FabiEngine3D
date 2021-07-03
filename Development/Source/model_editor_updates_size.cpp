@@ -9,6 +9,7 @@ void ModelEditor::_updateModelEditingSize()
 	if (screen->getID() == "modelEditorMenuSize")
 	{
 		// Temporary values
+		const string directions[3] = { "X", "Y", "Z" };
 		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 		// GUI management
@@ -18,8 +19,6 @@ void ModelEditor::_updateModelEditingSize()
 			{
 				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
-				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), "Mesh resize: OFF");
-				_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), "Direction: X");
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			}
 			else if (screen->getButton("size")->isHovered())
@@ -31,25 +30,28 @@ void ModelEditor::_updateModelEditingSize()
 			else if (screen->getButton("toggleResize")->isHovered())
 			{
 				_isResizingToggled = !_isResizingToggled;
-
-				// Toggle resize
-				string newContent = _isResizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF";
-				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), newContent);
 			}
 			else if (screen->getButton("direction")->isHovered())
 			{
-				// Change resize direction
-				string directions[3] = { "X", "Y", "Z" };
-				_transformationDirection = (_transformationDirection == Direction::X) ? Direction::Y :
-					(_transformationDirection == Direction::Y) ? Direction::Z : Direction::X;
-				string newContent = "Direction: " + directions[int(_transformationDirection)];
-				_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), newContent);
+				if (_transformationDirection == Direction::X)
+				{
+					_transformationDirection = Direction::Y;
+				}
+				else if (_transformationDirection == Direction::Y)
+				{
+					_transformationDirection = Direction::Z;
+				}
+				else
+				{
+					_transformationDirection = Direction::X;
+				}
 			}
 		}
 
 		// Update resizing through cursor
 		if (_isResizingToggled)
 		{
+			// Temporary values
 			float scrollSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * 0.05f;
 			Vec3 newSize = _fe3d.modelEntity_getSize(_currentModelID);
 
@@ -102,5 +104,9 @@ void ModelEditor::_updateModelEditingSize()
 			currentSize.z /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
+
+		// Button text contents
+		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF");
+		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
 	}
 }

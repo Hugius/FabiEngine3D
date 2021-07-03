@@ -6,9 +6,14 @@ void ModelEditor::_updateModelEditingOptions()
 {
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
 	if (screen->getID() == "modelEditorMenuOptions")
 	{
+		// Temporary values
+		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
+		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
+		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
+
+		// GUI management
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -17,15 +22,18 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else if (screen->getButton("isFaceculled")->isHovered())
 			{
-				_fe3d.modelEntity_setFaceCulled(_currentModelID, !_fe3d.modelEntity_isFaceCulled(_currentModelID));
+				isFaceculled = !isFaceculled;
+				_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceculled);
 			}
 			else if (screen->getButton("isTransparent")->isHovered())
 			{
-				_fe3d.modelEntity_setTransparent(_currentModelID, !_fe3d.modelEntity_isTransparent(_currentModelID));
+				isTransparent = !isTransparent;
+				_fe3d.modelEntity_setTransparent(_currentModelID, isTransparent);
 			}
 			else if (screen->getButton("isInstanced")->isHovered())
 			{
-				_fe3d.modelEntity_setInstanced(_currentModelID, !_fe3d.modelEntity_isInstanced(_currentModelID), { Vec3(0.0f) });
+				isInstanced = !isInstanced;
+				_fe3d.modelEntity_setInstanced(_currentModelID, isInstanced, { Vec3(0.0f) });
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -45,16 +53,10 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 		}
 
-		// Update GUI button contents
-		auto faceculledID = screen->getButton("isFaceculled")->getTextfield()->getEntityID();
-		auto isCulled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
-		auto transparentID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
-		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
-		auto instancedID = screen->getButton("isInstanced")->getTextfield()->getEntityID();
-		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
-		_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
-		_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
-		_fe3d.textEntity_setTextContent(instancedID, isInstanced ? "Instanced: ON" : "Instanced: OFF");
+		// Button text contents
+		screen->getButton("isFaceculled")->changeTextContent(isFaceculled ? "Culling: ON" : "Culling: OFF");
+		screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");
+		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");
 
 		// Setting model color
 		Vec3 newColor = _fe3d.modelEntity_getColor(_currentModelID) * 255.0f;

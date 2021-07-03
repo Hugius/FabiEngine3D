@@ -39,9 +39,9 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 		}
 
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
-		_fe3d.textEntity_setTextContent(screen->getButton("dynamic")->getTextfield()->getEntityID(), dynamic ? "Dynamic: YES" : "Dynamic: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
 
 		// Blur distance value
 		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
@@ -118,8 +118,8 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 		}
 
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Min distance value
 		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
@@ -231,8 +231,8 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 		}
 
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
@@ -296,8 +296,8 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			}
 		}
 
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Extra intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))

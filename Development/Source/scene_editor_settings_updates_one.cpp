@@ -152,8 +152,8 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 		}
 
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Size value
 		_gui.getGlobalScreen()->checkValueForm("size", size);
@@ -169,11 +169,9 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		_gui.getGlobalScreen()->checkValueForm("centerY", center.y);
 		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
 
-		// Following button content
-		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
-
-		// Following button content
-		_fe3d.textEntity_setTextContent(screen->getButton("soft")->getTextfield()->getEntityID(), isSoftShadowed ? "Soft: ON" : "Soft: OFF");
+		// Button text contents
+		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
+		screen->getButton("soft")->changeTextContent(isSoftShadowed ? "Soft: ON" : "Soft: OFF");
 
 		// Lightness value
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
@@ -237,8 +235,8 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			}
 		}
 		
-		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Strength value
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))

@@ -10,6 +10,7 @@ public:
 	~EngineGuiTextfield();
 
 	void setVisible(bool isVisible);
+	void changeTextContent(const string& content);
 	void updateOriginalPosition();
 	void updateOriginalSize();
 	void updateOriginalColor();

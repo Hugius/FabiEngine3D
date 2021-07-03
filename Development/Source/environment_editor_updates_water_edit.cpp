@@ -340,17 +340,12 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		screen->getButton("isRippling")->setHoverable(dudvMapPath != "");
 		screen->getButton("isSpecular")->setHoverable(normalMapPath != "");
 
-		// Update GUI button contents
-		auto reflectiveID = screen->getButton("isReflective")->getTextfield()->getEntityID();
-		auto refractiveID = screen->getButton("isRefractive")->getTextfield()->getEntityID();
-		auto wavingID = screen->getButton("isWaving")->getTextfield()->getEntityID();
-		auto ripplingID = screen->getButton("isRippling")->getTextfield()->getEntityID();
-		auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
-		_fe3d.textEntity_setTextContent(reflectiveID, isReflective ? "Reflective: ON" : "Reflective: OFF");
-		_fe3d.textEntity_setTextContent(refractiveID, isRefractive ? "Refractive: ON" : "Refractive: OFF");
-		_fe3d.textEntity_setTextContent(wavingID, isWaving ? "Waving: ON" : "Waving: OFF");
-		_fe3d.textEntity_setTextContent(ripplingID, isRippling ? "Rippling: ON" : "Rippling: OFF");
-		_fe3d.textEntity_setTextContent(specularID, isSpecularLighted ? "Specular: ON" : "Specular: OFF");
+		// Button text contents
+		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
+		screen->getButton("isWaving")->changeTextContent(isWaving ? "Waving: ON" : "Waving: OFF");
+		screen->getButton("isRippling")->changeTextContent(isRippling ? "Rippling: ON" : "Rippling: OFF");
+		screen->getButton("isSpecular")->changeTextContent(isSpecularLighted ? "Specular: ON" : "Specular: OFF");
 
 		// Update uvRepeat changes
 		_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);

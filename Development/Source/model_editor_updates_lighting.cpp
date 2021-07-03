@@ -9,6 +9,16 @@ void ModelEditor::_updateModelEditingLighting()
 	// GUI management
 	if (screen->getID() == "modelEditorMenuLighting")
 	{
+		// Temporary values
+		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
+		auto isShadowed = _fe3d.modelEntity_isShadowed(_currentModelID);
+		auto isSkyReflective = _fe3d.modelEntity_isSkyReflective(_currentModelID);
+		auto isSceneReflective = _fe3d.modelEntity_isSceneReflective(_currentModelID);
+		float specularFactor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
+		float specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
+		float lightness = _fe3d.modelEntity_getLightness(_currentModelID);
+
+		// GUI management
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -17,34 +27,33 @@ void ModelEditor::_updateModelEditingLighting()
 			}
 			else if (screen->getButton("isSpecular")->isHovered())
 			{
-				_fe3d.modelEntity_setSpecularLighted(_currentModelID, !_fe3d.modelEntity_isSpecularLighted(_currentModelID));
+				isSpecular = !isSpecular;
+				_fe3d.modelEntity_setSpecularLighted(_currentModelID, isSpecular);
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec factor",
-					_fe3d.modelEntity_getSpecularFactor(_currentModelID), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec intensity",
-					_fe3d.modelEntity_getSpecularIntensity(_currentModelID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness",
-					_fe3d.modelEntity_getLightness(_currentModelID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("isShadowed")->isHovered())
 			{
-				_fe3d.modelEntity_setShadowed(_currentModelID, !_fe3d.modelEntity_isShadowed(_currentModelID));
+				isShadowed = !isShadowed;
+				_fe3d.modelEntity_setShadowed(_currentModelID, isShadowed);
 			}
 			else if (screen->getButton("reflectionType")->isHovered())
 			{
-				if (_fe3d.modelEntity_isSceneReflective(_currentModelID))
+				if (isSceneReflective)
 				{
 					_fe3d.modelEntity_setSceneReflective(_currentModelID, false);
 				}
-				else if (_fe3d.modelEntity_isSkyReflective(_currentModelID))
+				else if (isSkyReflective)
 				{
 					_fe3d.modelEntity_setSkyReflective(_currentModelID, false);
 					_fe3d.modelEntity_setSceneReflective(_currentModelID, true);
@@ -56,36 +65,26 @@ void ModelEditor::_updateModelEditingLighting()
 			}
 		}
 
-		// Update GUI button contents
-		auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
-		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
-		auto shadowedID = screen->getButton("isShadowed")->getTextfield()->getEntityID();
-		auto isShadowed = _fe3d.modelEntity_isShadowed(_currentModelID);
-		auto reflectiveID = screen->getButton("reflectionType")->getTextfield()->getEntityID();
-		auto isSkyReflective = _fe3d.modelEntity_isSkyReflective(_currentModelID);
-		auto isSceneReflective = _fe3d.modelEntity_isSceneReflective(_currentModelID);
-		_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
-		_fe3d.textEntity_setTextContent(shadowedID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
-		_fe3d.textEntity_setTextContent(reflectiveID, isSkyReflective ? "Reflection: sky" : isSceneReflective ? "Reflection: scene" : "Reflective: OFF");
+		// Button text contents
+		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+		screen->getButton("reflectionType")->changeTextContent(isSkyReflective ? "Reflect: sky" : isSceneReflective ? "Reflect: scene" : "Reflect: OFF");
 
 		// Update specular factor
-		float factor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", factor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			factor = std::clamp(factor, 0.0f, 256.0f);
-			_fe3d.modelEntity_setSpecularFactor(_currentModelID, factor);
+			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
+			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
 
 		// Update specular intensity
-		float intensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
-		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", intensity))
+		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			intensity /= 100.0f;
-			_fe3d.modelEntity_setSpecularIntensity(_currentModelID, intensity);
+			specularIntensity /= 100.0f;
+			_fe3d.modelEntity_setSpecularIntensity(_currentModelID, specularIntensity);
 		}
 
 		// Update lightness
-		float lightness = _fe3d.modelEntity_getLightness(_currentModelID);
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;

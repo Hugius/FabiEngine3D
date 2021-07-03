@@ -70,8 +70,8 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 			}
 
-			// Enabled button content
-			_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+			// Button text contents
+			screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
@@ -168,8 +168,8 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 			}
 
-			// Enabled button content
-			_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+			// Button text contents
+			screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))

@@ -12,7 +12,6 @@ EngineGuiWritefield::EngineGuiWritefield(
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	// Initial text content
 	_fe3d.textEntity_setTextContent(_textfield->getEntityID(), "|", CHAR_WIDTH);
 }
 

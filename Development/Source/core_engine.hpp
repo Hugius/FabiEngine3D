@@ -85,5 +85,4 @@ private:
 	float _deltaTimeMS = 0.0f;
 	bool _isPaused = false;
 	bool _isRunning = false;
-	bool _showStats = false;
 };

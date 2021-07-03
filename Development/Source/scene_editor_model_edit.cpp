@@ -4,6 +4,7 @@ void SceneEditor::_updateModelEditing()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 		// Reset selected model from last frame
@@ -179,10 +180,9 @@ void SceneEditor::_updateModelEditing()
 					_gui.getGlobalScreen()->removeChoiceForm("animations");
 				}
 
-				// Update freeze button
-				auto freezeID = rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->getTextfield()->getEntityID();
+				// Button text contents
 				bool isFrozen = _fe3d.modelEntity_isStaticToCamera(_activeModelID);
-				_fe3d.textEntity_setTextContent(freezeID, isFrozen ? "Unfreeze" : "Freeze");
+				rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->changeTextContent(isFrozen ? "Unfreeze" : "Freeze");
 
 				// Alternative way of deleting
 				if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))

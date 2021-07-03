@@ -264,7 +264,7 @@ bool EngineGuiWritefield::hasTextContentChanged()
 	return result;
 }
 
-string EngineGuiWritefield::getTextContent()
+const string& EngineGuiWritefield::getTextContent()
 {
 	// Check if user filled in a minus without a number
 	if (_currentTextContent == "-" && _noSpecials && _minusAllowed)
@@ -277,7 +277,7 @@ string EngineGuiWritefield::getTextContent()
 	}
 }
 
-void EngineGuiWritefield::setTextContent(const string& content)
+void EngineGuiWritefield::changeTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

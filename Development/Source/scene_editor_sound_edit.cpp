@@ -52,9 +52,9 @@ void SceneEditor::_updateSoundEditing()
 
 								// Filling writefields
 								Vec3 position = _fe3d.modelEntity_getPosition(_activeSpeakerID);
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 							}
 						}
 					}

@@ -12,14 +12,13 @@ public:
 	void update(bool hoverable) override;
 	void setActive(bool active);
 	void setPermActive(bool active);
+	void changeTextContent(const string& content) override;
+
+	const string& getTextContent();
 
 	bool confirmedInput();
 	bool isActive();
 	bool hasTextContentChanged();
-
-	string getTextContent();
-
-	void setTextContent(const string& content);
 
 private:
 	void _updateActivation();

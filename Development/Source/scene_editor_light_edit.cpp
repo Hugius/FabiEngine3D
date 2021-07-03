@@ -42,13 +42,13 @@ void SceneEditor::_updateLightEditing()
 
 								// Filling writefields
 								Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_BULB_ID);
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("x")->setTextContent(to_string(static_cast<int>(position.x)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("y")->setTextContent(to_string(static_cast<int>(position.y)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("z")->setTextContent(to_string(static_cast<int>(position.z)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 							}
 						}
 					}
-					else
+					else 
 					{
 						// Don't reset if lightbulb is active
 						if (entityID != ACTIVE_BULB_ID)

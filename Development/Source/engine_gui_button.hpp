@@ -13,9 +13,9 @@ public:
 		const string& texturePath, Vec3 hoverColor, bool sizeChangeEnabled = true, bool colorChangeEnabled = true);
 
 	virtual void update(bool isHoverable);
+	virtual void changeTextContent(const string& content);
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
-	void changeTextContent(const string& content);
 
 	bool isHovered();
 

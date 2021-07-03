@@ -52,7 +52,6 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");

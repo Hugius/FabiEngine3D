@@ -212,6 +212,7 @@ void EnvironmentEditor::unload()
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableWaterEffects(true);
 
 	// Delete entities

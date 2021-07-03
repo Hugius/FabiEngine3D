@@ -99,11 +99,11 @@ void ModelEditor::_unloadGUI()
 
 void ModelEditor::load()
 {
-	// GUI
-	_loadGUI();
-
 	// Load all mesh filenames from assets folder
 	_loadMeshFileNames();
+
+	// GUI
+	_loadGUI();
 
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, CAMERA_POSITION, 0.0f, 0.0f);
@@ -142,6 +142,9 @@ void ModelEditor::unload()
 {
 	// GUI
 	_unloadGUI();
+
+	// Camera
+	_fe3d.camera_disableLookatView();
 
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);

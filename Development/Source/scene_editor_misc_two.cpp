@@ -7,46 +7,47 @@ void SceneEditor::_updateMiscellaneous()
 {
 	if (_isEditorLoaded)
 	{
-		// Lock toggling if GUI focused or cursor not in 3D viewport
-		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
-
-		// Update AABB frame rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_B))
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			if (_fe3d.misc_isAabbFrameRenderingEnabled())
+			// Update AABB frame rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_B))
 			{
-				_fe3d.misc_disableAabbFrameRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableAabbFrameRendering();
-			}
-			
-		}
+				if (_fe3d.misc_isAabbFrameRenderingEnabled())
+				{
+					_fe3d.misc_disableAabbFrameRendering();
+				}
+				else
+				{
+					_fe3d.misc_enableAabbFrameRendering();
+				}
 
-		// Update wireframe rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_F))
-		{
-			if (_fe3d.misc_isWireframeRenderingEnabled())
-			{
-				_fe3d.misc_disableWireframeRendering();
 			}
-			else
-			{
-				_fe3d.misc_enableWireframeRendering();
-			}
-		}
 
-		// Update debug rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
-		{
-			if (_fe3d.misc_isDebugRenderingEnabled())
+			// Update wireframe rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				_fe3d.misc_disableDebugRendering();
+				if (_fe3d.misc_isWireframeRenderingEnabled())
+				{
+					_fe3d.misc_disableWireframeRendering();
+				}
+				else
+				{
+					_fe3d.misc_enableWireframeRendering();
+				}
 			}
-			else
+
+			// Update debug rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 			{
-				_fe3d.misc_enableDebugRendering();
+				if (_fe3d.misc_isDebugRenderingEnabled())
+				{
+					_fe3d.misc_disableDebugRendering();
+				}
+				else
+				{
+					_fe3d.misc_enableDebugRendering();
+				}
 			}
 		}
 

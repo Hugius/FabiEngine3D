@@ -114,6 +114,9 @@ void BillboardEditor::unload()
 	// GUI
 	_unloadGUI();
 
+	// Camera
+	_fe3d.camera_disableLookatView();
+
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);

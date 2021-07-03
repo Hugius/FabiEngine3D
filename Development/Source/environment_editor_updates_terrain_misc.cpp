@@ -176,12 +176,13 @@ void EnvironmentEditor::_updateTerrainCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if terrain is selected or hovered
-		string terrainID = (_currentTerrainID != "") ? _currentTerrainID : ((_hoveredTerrainID != "") ? _hoveredTerrainID : "");
-
 		// Check if terrain is active
-		if (_fe3d.terrainEntity_isExisting(terrainID) && _fe3d.terrainEntity_isVisible(terrainID))
+		if ((_currentTerrainID != "" && _fe3d.terrainEntity_isExisting(_currentTerrainID)) ||
+			(_hoveredTerrainID != "" && _fe3d.terrainEntity_isExisting(_hoveredTerrainID)))
 		{
+			// Temporary values
+			auto terrainID = ((_currentTerrainID != "") ? _currentTerrainID : _hoveredTerrainID);
+
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
@@ -197,7 +198,10 @@ void EnvironmentEditor::_updateTerrainCamera()
 			float z = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * cos(_totalCameraRotation);
 
 			// Update camera
-			_fe3d.camera_enableLookatView();
+			if (!_fe3d.camera_isLookatViewEnabled())
+			{
+				_fe3d.camera_enableLookatView();
+			}
 			_fe3d.camera_setPosition(Vec3(x, y, z));
 			_fe3d.camera_setLookatPosition(Vec3(0.0f));
 		}

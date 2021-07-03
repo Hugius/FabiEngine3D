@@ -19,16 +19,20 @@ void AnimationEditor::_updateMiscellaneous()
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
 
-		// Update debug rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			if (_fe3d.misc_isDebugRenderingEnabled())
+			// Update debug rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
+				if (_fe3d.misc_isDebugRenderingEnabled())
+				{
+					_fe3d.misc_disableDebugRendering();
+				}
+				else
+				{
+					_fe3d.misc_enableDebugRendering();
+				}
 			}
 		}
 

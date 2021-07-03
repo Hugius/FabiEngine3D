@@ -265,14 +265,16 @@ void BillboardEditor::_updateCamera()
 		else
 		{
 			// Set default camera view
-			if (_fe3d.gfx_isShadowsEnabled())
-			{
-				_fe3d.gfx_disableShadows(true);
-			}
 			_fe3d.camera_setPosition(CAMERA_POSITION);
 			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
 			_totalCameraRotation = 0.0f;
 			_cameraAcceleration = 0.0f;
+
+			// Disable shadows
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows(true);
+			}
 		}
 	}
 }

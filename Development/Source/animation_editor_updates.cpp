@@ -310,10 +310,6 @@ void AnimationEditor::_updateCamera()
 			// Set default camera view
 			if (_fe3d.camera_isLookatViewEnabled())
 			{
-				if (_fe3d.gfx_isShadowsEnabled())
-				{
-					_fe3d.gfx_disableShadows(true);
-				}
 				_fe3d.camera_disableLookatView();
 				_fe3d.camera_setPosition(Vec3(0.0));
 				_fe3d.camera_setLookatPosition(Vec3(0.0));
@@ -323,6 +319,12 @@ void AnimationEditor::_updateCamera()
 				_cameraScrollingAcceleration = 0.0f;
 				_cameraDistance = CAMERA_DISTANCE;
 				_cameraSpeed = CAMERA_SPEED;
+			}
+
+			// Disable shadows
+			if (_fe3d.gfx_isShadowsEnabled())
+			{
+				_fe3d.gfx_disableShadows(true);
 			}
 		}
 	}

@@ -97,20 +97,16 @@ void SceneEditor::_updateAmbientLightingMenu()
 				ambientLightingIntensity = std::max(0.0f, ambientLightingIntensity / 100.0f);
 			}
 
-			// Enable or disable ambient lighting
-			if (isEnabled)
+			// Disable ambient lighting
+			if (_fe3d.gfx_isAmbientLightingEnabled())
 			{
-				if (!_fe3d.gfx_isAmbientLightingEnabled())
-				{
-					_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
-				}
+				_fe3d.gfx_disableAmbientLighting();
 			}
-			else
+
+			// Enable ambient lighting
+			if(isEnabled)
 			{
-				if (_fe3d.gfx_isAmbientLightingEnabled())
-				{
-					_fe3d.gfx_disableAmbientLighting();
-				}
+				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
 
 			// Update buttons hoverability
@@ -209,26 +205,23 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
 			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 
-			// Enable or disable directional lighting
-			if (isEnabled)
+			// Disable directional lighting
+			if (_fe3d.gfx_isDirectionalLightingEnabled())
 			{
-				if (!_fe3d.gfx_isDirectionalLightingEnabled())
-				{
-					_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				}
+				_fe3d.gfx_disableDirectionalLighting();
 			}
-			else
+
+			// Enable directional lighting
+			if(isEnabled)
 			{
-				if (_fe3d.gfx_isDirectionalLightingEnabled())
-				{
-					_fe3d.gfx_disableDirectionalLighting();
-				}
+				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 			}
 
 			// Update buttons hoverability
 			screen->getButton("color")->setHoverable(isEnabled);
 			screen->getButton("position")->setHoverable(isEnabled);
 			screen->getButton("intensity")->setHoverable(isEnabled);
+			screen->getButton("billboardSize")->setHoverable(isEnabled);
 		}
 	}
 }

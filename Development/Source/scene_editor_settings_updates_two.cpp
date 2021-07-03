@@ -51,20 +51,16 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
 		maxDistance = std::max(0.0f, maxDistance);
 
-		// Enable or disable DOF
+		// Disable DOF
+		if (_fe3d.gfx_isDofEnabled())
+		{
+			_fe3d.gfx_disableDOF();
+		}
+
+		// Enable DOF
 		if (isEnabled)
 		{
-			if (!_fe3d.gfx_isDofEnabled())
-			{
-				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isDofEnabled())
-			{
-				_fe3d.gfx_disableDOF();
-			}
+			_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
 		}
 
 		// Update buttons hoverability
@@ -143,20 +139,16 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
 		color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
 
-		// Enable or disable DOF
+		// Disable fog
+		if (_fe3d.gfx_isFogEnabled())
+		{
+			_fe3d.gfx_disableFog();
+		}
+
+		// Enable fog
 		if (isEnabled)
 		{
-			if (!_fe3d.gfx_isFogEnabled())
-			{
-				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isFogEnabled())
-			{
-				_fe3d.gfx_disableFog();
-			}
+			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 		}
 
 		// Update buttons hoverability
@@ -246,20 +238,16 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			multiplier = std::max(0.0f, multiplier / 100.0f);
 		}
 
-		// Enable or disable lens flare
+		// Disable lens flare
+		if (_fe3d.gfx_isLensFlareEnabled())
+		{
+			_fe3d.gfx_disableLensFlare();
+		}
+
+		// Enable lens flare
 		if (isEnabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
 		{
-			if (!_fe3d.gfx_isLensFlareEnabled())
-			{
-				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isLensFlareEnabled())
-			{
-				_fe3d.gfx_disableLensFlare();
-			}
+			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 		}
 
 		// Update buttons hoverability
@@ -305,20 +293,16 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			intensity = std::max(0.0f, intensity / 100.0f);
 		}
 
-		// Enable or disable skyHDR
+		// Disable skyHDR
+		if (_fe3d.gfx_isSkyHdrEnabled())
+		{
+			_fe3d.gfx_disableSkyHDR();
+		}
+
+		// Enable skyHDR
 		if (isEnabled)
 		{
-			if (!_fe3d.gfx_isSkyHdrEnabled())
-			{
-				_fe3d.gfx_enableSkyHDR(intensity);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isSkyHdrEnabled())
-			{
-				_fe3d.gfx_disableSkyHDR();
-			}
+			_fe3d.gfx_enableSkyHDR(intensity);
 		}
 
 		// Update buttons hoverability

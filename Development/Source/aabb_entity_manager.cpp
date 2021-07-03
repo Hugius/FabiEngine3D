@@ -198,13 +198,13 @@ void AabbEntityManager::update(
 				{
 					// Temporary values
 					auto parentEntity = foundPair->second;
-					Vec3 parentSize = parentEntity->getScaling();
-					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
+					const auto parentSize = parentEntity->getScaling();
+					auto newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 
 					// Retrieve absolute rotations
-					float rotationX = fabsf(parentEntity->getRotation().x);
-					float rotationY = fabsf(parentEntity->getRotation().y);
-					float rotationZ = fabsf(parentEntity->getRotation().z);
+					const float rotationX = fabsf(parentEntity->getRotation().x);
+					const float rotationY = fabsf(parentEntity->getRotation().y);
+					const float rotationZ = fabsf(parentEntity->getRotation().z);
 
 					// Calculate reference rotation & convert it to 0-45 range
 					float refRotationX = Math::calculateReferenceAngle(rotationX);
@@ -217,22 +217,22 @@ void AabbEntityManager::update(
 					// Determine direction to use
 					if (refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
-						float xSinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
-						float xCosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
+						const auto xSinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
+						const auto xCosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
 						newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
 						newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
 					}
 					else if (refRotationY > refRotationX && refRotationY > refRotationZ)
 					{
-						float ySinRotation = fabsf(sinf(Math::degreesToRadians(rotationY)));
-						float yCosRotation = fabsf(cosf(Math::degreesToRadians(rotationY)));
+						const auto ySinRotation = fabsf(sinf(Math::degreesToRadians(rotationY)));
+						const auto yCosRotation = fabsf(cosf(Math::degreesToRadians(rotationY)));
 						newAabbSize.x = (yCosRotation * parentSize.x);
 						newAabbSize.z = (ySinRotation * parentSize.x);
 					}
 					else if (refRotationZ > refRotationX && refRotationZ > refRotationY)
 					{
-						float zSinRotation = fabsf(sinf(Math::degreesToRadians(rotationZ)));
-						float zCosRotation = fabsf(cosf(Math::degreesToRadians(rotationZ)));
+						const auto zSinRotation = fabsf(sinf(Math::degreesToRadians(rotationZ)));
+						const auto zCosRotation = fabsf(cosf(Math::degreesToRadians(rotationZ)));
 						newAabbSize.y = (zCosRotation * parentSize.y);
 						newAabbSize.z = (zSinRotation * parentSize.y);
 					}

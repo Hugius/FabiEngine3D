@@ -183,20 +183,16 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		_gui.getGlobalScreen()->checkValueForm("interval", interval);
 		interval = std::max(0, interval);
 
-		// Enable or disable shadows
+		// Disable shadows
+		if (_fe3d.gfx_isShadowsEnabled())
+		{
+			_fe3d.gfx_disableShadows();
+		}
+
+		// Enable shadows
 		if (isEnabled)
 		{
-			if (!_fe3d.gfx_isShadowsEnabled())
-			{
-				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isShadowsEnabled())
-			{
-				_fe3d.gfx_disableShadows();
-			}
+			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
 		}
 
 		// Update buttons hoverability
@@ -204,6 +200,8 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("center")->setHoverable(isEnabled);
 		screen->getButton("follow")->setHoverable(isEnabled);
+		screen->getButton("soft")->setHoverable(isEnabled);
+		screen->getButton("lightness")->setHoverable(isEnabled);
 		screen->getButton("interval")->setHoverable(isEnabled && isFollowingCamera);
 	}
 }
@@ -244,20 +242,16 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			strength = std::max(0.0f, strength / 100.0f);
 		}
 
-		// Enable or disable motionblur
+		// Disable motion blur
+		if (_fe3d.gfx_isMotionBlurEnabled())
+		{
+			_fe3d.gfx_disableMotionBlur();
+		}
+
+		// Enable motion blur
 		if (isEnabled)
 		{
-			if (!_fe3d.gfx_isMotionBlurEnabled())
-			{
-				_fe3d.gfx_enableMotionBlur(strength);
-			}
-		}
-		else
-		{
-			if (_fe3d.gfx_isMotionBlurEnabled())
-			{
-				_fe3d.gfx_disableMotionBlur();
-			}
+			_fe3d.gfx_enableMotionBlur(strength);
 		}
 
 		// Update buttons hoverability

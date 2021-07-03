@@ -68,7 +68,7 @@ void ModelEditor::_updateModelEditingLighting()
 		// Button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
-		screen->getButton("reflectionType")->changeTextContent(isSkyReflective ? "Reflect: sky" : isSceneReflective ? "Reflect: scene" : "Reflect: OFF");
+		screen->getButton("reflectionType")->changeTextContent(isSkyReflective ? "Reflect: SKY" : isSceneReflective ? "Reflect: SCENE" : "Reflect: OFF");
 
 		// Update specular factor
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))

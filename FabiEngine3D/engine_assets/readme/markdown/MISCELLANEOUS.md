@@ -21,11 +21,13 @@
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
 ### Reflection system
-- **Models** have 2 different** reflection types**: sky reflections & scene reflections.
-- **Sky reflections** are rendered at **all times**, but...
+- **Models** have 2 different** reflection types**: full sky reflections & vertical scene reflections.
+- **Sky reflections** are rendered at **all times** when enabled, but...
 - **Scene reflections** and **water reflections** use the same reflection technique; **only 1** can be active at a time.
 - Reflective water has **priority** over reflective models (if your water is reflective, your models will **NOT** have scene reflections).
+- Scene reflections work best on **flat models** (such as the floor/ground).
 - Make sure **all** of your reflective **models** are placed at the **same height/Y coordinate** for correct reflection rendering!
+- Make sure the surface of your reflective **models** is positioned at the **local Y coordinate 0.0** for correct reflection rendering!
 ### Performance
 ![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **application's performance**.

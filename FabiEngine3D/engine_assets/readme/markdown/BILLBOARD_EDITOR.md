@@ -19,7 +19,7 @@
 - **Size**: the size of the billboard. **Range**: 0 to inf.
 - **Facing X**: enable or disable billboard facing towards the camera around the X axis. **Range**: ON or OFF.
 - **Facing Y**: enable or disable billboard facing towards the camera around the Y axis. **Range**: ON or OFF.
-- **Reflective**: enable or disable billboard capturing in reflections. **Range**: ON or OFF.
+- **Reflected**: enable or disable billboard capturing in reflections. **Range**: ON or OFF.
 - **Shadowed**: enable or disable billboard capturing in shadows. **Range**: ON or OFF.
 - **Alpha**: enable or disable transparent pixels removal from the texture. **Range**: ON or OFF.
 - **Rows**: the amount of rows in the sprite animation texture. **Range**: 1 to inf.

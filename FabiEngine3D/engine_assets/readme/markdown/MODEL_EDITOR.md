@@ -39,7 +39,6 @@
 ### Properties
 - **Mesh size**: size multiplier of the mesh. **Range**: 0 to inf.
 - **Reflect**: enable or disable full sky reflection or vertical scene reflection. **Range**: SKY or SCENE or OFF.
-- **Shadowed**: enable or disable shadow rendering on the model. **Range**: ON or OFF.
 - **Culling**: enable or disable the face culling optimization. **Range**: ON or OFF.
 - **Alpha**: enable or disable transparent pixels removal from diffuse map(s). **Range**: ON or OFF.
 - **Specular**: enable or disable specular lighting on the model. **Range**: ON or OFF.

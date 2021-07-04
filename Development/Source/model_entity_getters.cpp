@@ -196,11 +196,6 @@ const bool ModelEntity::isSpecularLighted() const
 	return _isSpecularLighted;
 }
 
-const bool ModelEntity::isShadowed() const
-{
-	return _isShadowed;
-}
-
 const bool ModelEntity::hasDiffuseMap() const
 {
 	return !_diffuseMaps.empty();

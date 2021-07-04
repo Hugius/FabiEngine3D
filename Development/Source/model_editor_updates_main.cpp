@@ -178,7 +178,7 @@ void ModelEditor::_updateModelCreation()
 					if (newModelName.find(' ') == string::npos)
 					{
 						// Add model and check if not already existing
-						if (_addModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", false, {}, {}, {}))
+						if (_addModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 0, 0, 0, 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", 0, {}, {}, {}))
 						{
 							// Go to editor screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");

@@ -227,7 +227,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 
 			// Fill model entity
 			_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
-			_fe3d.modelEntity_setShadowed(newEntityID, _fe3d.modelEntity_isShadowed(previewID));
 			_fe3d.modelEntity_setTransparent(newEntityID, _fe3d.modelEntity_isTransparent(previewID));
 			_fe3d.modelEntity_setSkyReflective(newEntityID, _fe3d.modelEntity_isSkyReflective(previewID));
 			_fe3d.modelEntity_setSceneReflective(newEntityID, _fe3d.modelEntity_isSceneReflective(previewID));
@@ -282,7 +281,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		// Model properties
 		_fe3d.modelEntity_setStaticToCamera(newEntityID, _fe3d.modelEntity_isStaticToCamera(previewID));
 		_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
-		_fe3d.modelEntity_setShadowed(newEntityID, _fe3d.modelEntity_isShadowed(previewID));
 		_fe3d.modelEntity_setTransparent(newEntityID, _fe3d.modelEntity_isTransparent(previewID));
 		_fe3d.modelEntity_setSkyReflective(newEntityID, _fe3d.modelEntity_isSkyReflective(previewID));
 		_fe3d.modelEntity_setSceneReflective(newEntityID, _fe3d.modelEntity_isSceneReflective(previewID));

@@ -37,7 +37,6 @@ void ModelEditor::saveModelEntitiesToFile()
 			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID);
 			auto modelSize = _fe3d.modelEntity_getSize(modelID);
 			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
-			auto isShadowed = _fe3d.modelEntity_isShadowed(modelID);
 			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
 			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
 			auto specularFactor = _fe3d.modelEntity_getSpecularFactor(modelID);
@@ -105,7 +104,6 @@ void ModelEditor::saveModelEntitiesToFile()
 				modelSize.y << " " <<
 				modelSize.z << " " <<
 				isFaceCulled << " " <<
-				isShadowed << " " <<
 				isTransparent << " " <<
 				reflectionType << " " <<
 				isSpecular << " " <<
@@ -149,7 +147,7 @@ void ModelEditor::saveModelEntitiesToFile()
 		}
 		else
 		{
-			file << modelID << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ? 0\n";
+			file << modelID << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ? 0\n";
 		}
 	}
 

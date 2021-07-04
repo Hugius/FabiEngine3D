@@ -268,7 +268,6 @@ public:
 	void modelEntity_setSkyReflective(const string& ID, bool enabled);
 	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setSceneReflective(const string& ID, bool enabled);
-	void modelEntity_setShadowed(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
 	void modelEntity_setWireframed(const string& ID, bool enabled);
@@ -298,10 +297,9 @@ public:
 	const bool modelEntity_isFaceCulled(const string& ID);
 	const bool modelEntity_isLightMapped(const string& ID);
 	const bool modelEntity_isNormalMapped(const string& ID);
-	const bool modelEntity_isSkyReflective(const string& ID);
 	const bool modelEntity_isSpecularLighted(const string& ID);
+	const bool modelEntity_isSkyReflective(const string& ID);
 	const bool modelEntity_isSceneReflective(const string& ID);
-	const bool modelEntity_isShadowed(const string& ID);
 	const bool modelEntity_isStaticToCamera(const string& ID);
 	const bool modelEntity_isWireframed(const string& ID);
 	const bool modelEntity_isDepthMapIncluded(const string& ID);

@@ -119,7 +119,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 			string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			int reflectionType;
-			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isInstanced;
+			bool isFaceCulled, isTransparent, isSpecular, isInstanced;
 			Vec3 modelSize, color;
 			vector<string> aabbNames;
 			vector<Vec3> aabbPositions;
@@ -140,7 +140,6 @@ void ModelEditor::loadModelEntitiesFromFile()
 				modelSize.y >>
 				modelSize.z >>
 				isFaceCulled >>
-				isShadowed >>
 				isTransparent >>
 				reflectionType >>
 				isSpecular >>
@@ -189,7 +188,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 			std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 			// Add new model
-			_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
+			_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
 				isTransparent, isSpecular, reflectionType, specularFactor, specularIntensity, lightness,
 				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}

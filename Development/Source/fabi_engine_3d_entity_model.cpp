@@ -185,11 +185,6 @@ const bool FabiEngine3D::modelEntity_isSceneReflective(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isSceneReflective();
 }
 
-const bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isShadowed();
-}
-
 const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
@@ -449,11 +444,6 @@ const vector<string>& FabiEngine3D::modelEntity_getPartIDs(const string& ID)
 void FabiEngine3D::modelEntity_setAlpha(const string& ID, float alpha)
 {
 	_core->_modelEntityManager.getEntity(ID)->setAlpha(alpha);
-}
-
-void FabiEngine3D::modelEntity_setShadowed(const string& ID, bool enabled)
-{
-	_core->_modelEntityManager.getEntity(ID)->setShadowed(enabled);
 }
 
 void FabiEngine3D::modelEntity_setDepthMapIncluded(const string& ID, bool enabled)

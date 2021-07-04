@@ -269,7 +269,7 @@ const vector<string>& ModelEditor::getLoadedModelIDs()
 }
 
 bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
-	Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
+	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType,
 	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
@@ -318,7 +318,6 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 
 			// Set boolean options
 			_fe3d.modelEntity_setFaceCulled(modelName, isFaceCulled);
-			_fe3d.modelEntity_setShadowed(modelName, isShadowed);
 			_fe3d.modelEntity_setTransparent(modelName, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelName, isSpecular);
 			_fe3d.modelEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });

@@ -27,7 +27,7 @@ void ImageEntityRenderer::unbind()
 
 void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	if (entity->isVisible() && 
+	if (entity->isVisible() && !entity->getRenderBuffers().empty() &&
 		((entity->getTranslation().y - entity->getScaling().y) < entity->getMaxPosition().y) &&
 		((entity->getTranslation().y + entity->getScaling().y) > entity->getMinPosition().y))
 	{
@@ -61,19 +61,15 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getTexture());
 		}
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
-		{
-			// Bind buffer
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		// Bind buffer
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, 6);
-			_renderBus.increaseTriangleCount(2);
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		_renderBus.increaseTriangleCount(2);
 
-			// Unbind buffer
-			glBindVertexArray(0);
-		}
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		// Unbind texture
 		if (entity->hasTexture())

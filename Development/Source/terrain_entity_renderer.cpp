@@ -111,7 +111,7 @@ void TerrainEntityRenderer::renderLightEntities(const unordered_map<string, shar
 
 void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Face culling
 		glEnable(GL_CULL_FACE);
@@ -187,19 +187,15 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapB());
 		}
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
-		{
-			// Bind buffer
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		// Bind buffer
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
-			// Unbind buffer
-			glBindVertexArray(0);
-		}
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		// Unbind textures
 		if (entity->hasDiffuseMap())

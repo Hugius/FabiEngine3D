@@ -372,11 +372,6 @@ void ModelEntity::setSpecularLighted(bool value)
 	_isSpecularLighted = value;
 }
 
-void ModelEntity::setShadowed(bool value)
-{
-	_isShadowed = value;
-}
-
 void ModelEntity::setCameraStatic(bool value)
 {
 	_isCameraStatic = value;

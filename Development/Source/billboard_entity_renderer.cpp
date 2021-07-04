@@ -40,7 +40,7 @@ void BillboardEntityRenderer::unbind()
 
 void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
@@ -71,29 +71,25 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
+		// Bind buffer
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+
+		// Render
+		if (entity->getRenderBuffer()->isInstanced()) // Instanced
 		{
-			// Bind buffer
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
-
-			// Render
-			if (entity->getRenderBuffer()->isInstanced()) // Instanced
-			{
-				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
-				_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
-			}
-			else // Non-instanced
-			{
-				_shader.uploadUniform("u_isInstanced", false);
-				glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-				_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
-			}
-
-			// Unbind buffer
-			glBindVertexArray(0);
+			_shader.uploadUniform("u_isInstanced", true);
+			glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
+			_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
 		}
+		else // Non-instanced
+		{
+			_shader.uploadUniform("u_isInstanced", false);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+		}
+
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		// Unbind texture
 		if (entity->hasDiffuseMap())

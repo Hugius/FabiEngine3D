@@ -22,23 +22,19 @@ void AabbEntityRenderer::unbind()
 
 void AabbEntityRenderer::render(const shared_ptr<AabbEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
-		{
-			// Bind
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		// Bind
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+		// Render
+		glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
-			// Unbind
-			glBindVertexArray(0);
-		}
+		// Unbind
+		glBindVertexArray(0);
 	}
 }

@@ -98,7 +98,7 @@ void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared
 
 void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
@@ -141,37 +141,30 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		}
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
+		// Bind buffer
+		if (entity->isWaving())
 		{
-			// Bind buffer
-			if (entity->isWaving())
-			{
-				glBindVertexArray(entity->getRenderBuffer()->getVAO());
-			}
-			else
-			{
-				glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
-			}
-
-			// Render
-			if (!entity->getRenderBuffers().empty())
-			{
-				if (entity->isWaving())
-				{
-					glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-					_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
-				}
-				else
-				{
-					glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
-					_renderBus.increaseTriangleCount(entity->getSimplifiedRenderBuffer()->getVertexCount() / 3);
-				}
-			}
-
-			// Unbind buffer
-			glBindVertexArray(0);
+			glBindVertexArray(entity->getRenderBuffer()->getVAO());
 		}
+		else
+		{
+			glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
+		}
+
+		// Render
+		if (entity->isWaving())
+		{
+			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+		}
+		else
+		{
+			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getSimplifiedRenderBuffer()->getVertexCount() / 3);
+		}
+
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		// Unbind textures
 		if (entity->hasDudvMap())

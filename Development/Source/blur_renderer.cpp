@@ -69,7 +69,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 
 void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_sampler_diffuse", 0);
@@ -78,18 +78,14 @@ void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// Check if entity has a render buffer
-		if (!entity->getRenderBuffers().empty())
-		{
-			// Bind buffer
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		// Bind buffer
+		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-			// Unbind buffer
-			glBindVertexArray(0);
-		}
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);

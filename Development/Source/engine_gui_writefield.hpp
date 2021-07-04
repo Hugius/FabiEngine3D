@@ -14,7 +14,7 @@ public:
 	void setPermActive(bool active);
 	void changeTextContent(const string& content) override;
 
-	const string& getTextContent();
+	const string getTextContent();
 
 	bool confirmedInput();
 	bool isActive();

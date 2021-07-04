@@ -222,7 +222,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("speed")->isHovered())
 					{
-						_gui.getGlobalScreen()->addValueForm("speed", "Frame steps", animationFramestep, Vec2(0.0f), Vec2(0.15f, 0.1f));
+						_gui.getGlobalScreen()->addValueForm("speed", "Framestep", animationFramestep, Vec2(0.0f), Vec2(0.15f, 0.1f));
 					}
 				}
 

@@ -26,7 +26,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
@@ -186,15 +186,15 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", specularFactor, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave Height Factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 

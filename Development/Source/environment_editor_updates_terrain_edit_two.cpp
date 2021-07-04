@@ -116,17 +116,17 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			else if (screen->getButton("redRepeat")->isHovered())
 			{
 				float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("redRepeat", "Red repeat", blendRepeatR, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("redRepeat", "Red Repeat", blendRepeatR, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("greenRepeat")->isHovered())
 			{
 				float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", blendRepeatG, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("greenRepeat", "Green Repeat", blendRepeatG, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("blueRepeat")->isHovered())
 			{
 				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("blueRepeat", "Blue Repeat", blendRepeatB, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -296,11 +296,11 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", specularFactor, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{

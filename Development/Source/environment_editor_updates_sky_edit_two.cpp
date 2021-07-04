@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 			}
 			else if (screen->getButton("rotationSpeed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 1000.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation Speed", skyRotationSpeed * 1000.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{

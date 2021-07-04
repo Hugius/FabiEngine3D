@@ -66,7 +66,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient Intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 			}
 
@@ -156,11 +156,11 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional Intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard Size", billboardSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 			}
 

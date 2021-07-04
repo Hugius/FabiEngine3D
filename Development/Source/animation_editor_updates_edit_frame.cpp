@@ -92,7 +92,7 @@ void AnimationEditor::_updateFrameScreen()
 					// Choosing part of preview model
 					auto modelParts = currentAnimation->partIDs;
 					modelParts.erase(modelParts.begin());
-					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), modelParts);
+					_gui.getGlobalScreen()->addChoiceForm("parts", "Select Part", Vec2(-0.4f, 0.1f), modelParts);
 				}
 			}
 
@@ -164,27 +164,27 @@ void AnimationEditor::_updateFrameScreen()
 			// Button text contents
 			if (speedType == AnimationSpeedType::LINEAR)
 			{
-				screen->getButton("speedType")->changeTextContent("Speed: linear");
+				screen->getButton("speedType")->changeTextContent("Speed: LINEAR");
 			}
 			else if (speedType == AnimationSpeedType::EXPONENTIAL)
 			{
-				screen->getButton("speedType")->changeTextContent("Speed: exponent");
+				screen->getButton("speedType")->changeTextContent("Speed: EXPONENT");
 			}
 			else
 			{
-				screen->getButton("speedType")->changeTextContent("Speed: instant");
+				screen->getButton("speedType")->changeTextContent("Speed: INSTANT");
 			}
 			if (transType == TransformationType::TRANSLATION)
 			{
-				screen->getButton("transType")->changeTextContent("Type: translate");
+				screen->getButton("transType")->changeTextContent("Type: TRANSLATE");
 			}
 			else if (transType == TransformationType::ROTATION)
 			{
-				screen->getButton("transType")->changeTextContent("Type: rotate");
+				screen->getButton("transType")->changeTextContent("Type: ROTATE");
 			}
 			else
 			{
-				screen->getButton("transType")->changeTextContent("Type: scale");
+				screen->getButton("transType")->changeTextContent("Type: SCALE");
 			}
 
 			// Check if a animation partID is clicked

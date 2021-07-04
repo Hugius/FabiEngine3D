@@ -32,11 +32,11 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("blurDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("blurDistance", "Blur distance", blurDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("blurDistance", "Blur Distance", blurDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF distance", maxDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF Distance", maxDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -97,11 +97,11 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("minDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("minDistance", "Min distance", minDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("minDistance", "Min Distance", minDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max distance", maxDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("thickness")->isHovered())
 			{
@@ -216,11 +216,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Flare intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Flare Intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("multiplier")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier", multiplier * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("multiplier", "Size Multiplier", multiplier * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -281,7 +281,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Extra Intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 

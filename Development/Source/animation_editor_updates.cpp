@@ -40,24 +40,24 @@ void AnimationEditor::_updateManagementScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitAnimationEditor", "Save changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitAnimationEditor", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addAnimation")->isHovered()) // Add animation button
 				{
-					_gui.getGlobalScreen()->addValueForm("newAnimationName", "New animation name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newAnimationName", "New Animation Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 					_isCreatingAnimation = true;
 				}
 				else if (screen->getButton("editAnimation")->isHovered()) // Edit animation button
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 				}
 				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 				}
 			}
 

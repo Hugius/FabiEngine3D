@@ -23,27 +23,27 @@ void ScriptEditor::_updateGUI()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("search")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
-				else if (screen->getButton("createScript")->isHovered())
+				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
-				else if (screen->getButton("editScript")->isHovered())
+				else if (screen->getButton("edit")->isHovered())
 				{
 					auto IDs = _script.getAllScriptFileIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f), IDs);
 				}
-				else if (screen->getButton("renameScript")->isHovered())
+				else if (screen->getButton("rename")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptRename", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
-				else if (screen->getButton("deleteScript")->isHovered())
+				else if (screen->getButton("delete")->isHovered())
 				{
 					_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 					_fe3d.billboardEntity_deleteAll();
@@ -59,7 +59,7 @@ void ScriptEditor::_updateGUI()
 				// Search hotkey
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getGlobalScreen()->isFocused())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
 			}
 
@@ -67,8 +67,8 @@ void ScriptEditor::_updateGUI()
 			screen->getTextfield("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
 
 			// Buttons hoverability
-			screen->getButton("renameScript")->setHoverable(_currentScriptFileID != "");
-			screen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
+			screen->getButton("rename")->setHoverable(_currentScriptFileID != "");
+			screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
 
 			// Check if user wants to save changes
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))

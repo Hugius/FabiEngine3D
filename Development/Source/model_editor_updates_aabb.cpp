@@ -28,7 +28,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -54,7 +54,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("toggleMove")->isHovered())
 			{
@@ -89,8 +89,8 @@ void ModelEditor::_updateModelEditingAabb()
 
 		// Button text contents
 		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
-		screen->getButton("toggleMove")->changeTextContent(_isMovingToggled ? "Box move: ON" : "Box move: OFF");
-		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Box resize: ON" : "Box resize: OFF");
+		screen->getButton("toggleMove")->changeTextContent(_isMovingToggled ? "Move: ON" : "Move: OFF");
+		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Resize: ON" : "Resize: OFF");
 
 		// Update AABB visibility
 		for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())

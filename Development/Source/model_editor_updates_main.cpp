@@ -25,7 +25,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addModel")->isHovered()) // Add model button
 				{
@@ -38,7 +38,7 @@ void ModelEditor::_updateManagementScreen()
 					_isEditingModel = true;
 					auto IDs = getLoadedModelIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 				{
@@ -46,7 +46,7 @@ void ModelEditor::_updateManagementScreen()
 					_isDeletingModel = true;
 					auto IDs = getLoadedModelIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), IDs);
 				}
 			}
 

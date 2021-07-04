@@ -17,10 +17,10 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
 				_currentEnvironmentType = EnvironmentType::NONE;
 			}
-			else if (screen->getButton("create")->isHovered())
+			else if (screen->getButton("add")->isHovered())
 			{
 				_isWaterCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newWaterName", "New water name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newWaterName", "New Water Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -28,7 +28,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_isWaterEditingEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(-0.4f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -36,7 +36,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_isWaterRemovalEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(-0.4f, 0.1f), IDs);
 			}
 		}
 	}
@@ -65,7 +65,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			{
 				_isTerrainChoosingEnabled = true;
 				for (auto& name : _loadedTerrainIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _loadedTerrainIDs);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(-0.4f, 0.1f), _loadedTerrainIDs);
 				for (auto& name : _loadedTerrainIDs) { name = "@" + name; }
 			}
 			else if (screen->getButton("mesh")->isHovered())

@@ -63,7 +63,7 @@ void AnimationEditor::_updateEditingScreen()
 				{
 					auto modelIDs = _modelEditor.getLoadedModelIDs();
 					for (auto& ID : modelIDs) { ID = ID.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), modelIDs);
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), modelIDs);
 				}
 				else if (screen->getButton("play")->isHovered())
 				{

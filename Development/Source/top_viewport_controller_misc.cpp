@@ -142,7 +142,7 @@ void TopViewportController::_prepareProjectLoading()
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectIDs);
+		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select Project", Vec2(0.0f), projectIDs);
 	}
 	else
 	{

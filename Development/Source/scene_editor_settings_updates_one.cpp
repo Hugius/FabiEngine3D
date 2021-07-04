@@ -26,7 +26,7 @@ void SceneEditor::_updateMainSettingsMenu()
 				}
 				else if (screen->getButton("setSpeed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _editorSpeed, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera Speed", _editorSpeed, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("lodDistance")->isHovered())
 				{
@@ -148,7 +148,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("interval")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", interval, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("interval", "Frame Interval", interval, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -170,7 +170,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
 
 		// Button text contents
-		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
+		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 		screen->getButton("lighted")->changeTextContent(isLighted ? "Lighted: ON" : "Lighted : OFF");
 
 		// Lightness value

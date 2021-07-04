@@ -75,23 +75,23 @@ void SceneEditor::_updateMainMenu()
 					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				}
-				else if (screen->getButton("create")->isHovered())
+				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{
 					_isChoosingScene = true;
 					auto IDs = _loadSceneIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
 					_isDeletingScene = true;
 					auto IDs = _loadSceneIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 			}
 
@@ -188,7 +188,7 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("environment")->isHovered()) // Environment button
 				{

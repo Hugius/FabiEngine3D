@@ -17,10 +17,10 @@ void EnvironmentEditor::_updateSkyMenuMain()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
 				_currentEnvironmentType = EnvironmentType::NONE;
 			}
-			else if (screen->getButton("create")->isHovered())
+			else if (screen->getButton("add")->isHovered())
 			{
 				_isSkyCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newSkyName", "New sky name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newSkyName", "New Sky Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -28,7 +28,7 @@ void EnvironmentEditor::_updateSkyMenuMain()
 				_isSkyEditingEnabled = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(-0.4f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -36,7 +36,7 @@ void EnvironmentEditor::_updateSkyMenuMain()
 				_isSkyRemovalEnabled = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(-0.4f, 0.1f), IDs);
 			}
 		}
 	}

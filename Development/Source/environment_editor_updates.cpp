@@ -26,7 +26,7 @@ void EnvironmentEditor::update()
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
-						_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", Vec2(0.0f, 0.25f));
+						_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save Changes?", Vec2(0.0f, 0.25f));
 					}
 					else if (screen->getButton("sky")->isHovered())
 					{

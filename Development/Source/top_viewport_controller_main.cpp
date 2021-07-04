@@ -80,7 +80,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			if (screen->getButton("newProject")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("newProjectID", "Enter project name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newProjectID", "Enter Project Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				_creatingProject = true;
 			}
 			else if (screen->getButton("loadProject")->isHovered())
@@ -102,7 +102,7 @@ void TopViewportController::_updateProjectScreenManagement()
 				// Check if currently in an editor
 				if (_currentProjectID != "" && _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "main")
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else // Otherwise, just exit the engine
 				{

@@ -31,7 +31,7 @@ void SettingsEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.15f), Vec2(CW("Reflections"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.15f), Vec2(CW("Refractions"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractions", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.45f), Vec2(CW("Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(CW("Go back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SettingsEditor::_unloadGUI()
@@ -172,23 +172,23 @@ void SettingsEditor::update()
 				}
 				else if (screen->getButton("msaaQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("msaaQuality", "MSAA quality", msaaQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("msaaQuality", "MSAA Quality", msaaQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("shadowQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("shadowQuality", "Shadow quality", shadowQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("reflectionQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("reflectionQuality", "Reflection quality", reflectionQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("refractionQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("refractionQuality", "Refraction quality", refractionQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("maxAudioChannels")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max audio channels", audioChannels, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max Audio Channels", audioChannels, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				}
 			}
 

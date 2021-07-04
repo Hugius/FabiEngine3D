@@ -38,7 +38,7 @@ public:
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 	static inline const float MS_PER_UPDATE = (1000.0f / static_cast<float>(UPDATES_PER_SECOND));
 	static inline const float DEFAULT_CAMERA_FOV = 90.0f;
-	static inline const float DEFAULT_CAMERA_NEAR = 0.1f;
+	static inline const float DEFAULT_CAMERA_NEAR = 0.01f;
 	static inline const float DEFAULT_CAMERA_FAR = 5000.0f;
 
 private:

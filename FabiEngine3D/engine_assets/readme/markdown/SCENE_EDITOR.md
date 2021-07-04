@@ -12,18 +12,18 @@
 - You can toggle **wireframe rendering** with the `F` key.
 - You can toggle **AABB rendering** with the `B` key.
 ### Environment
-- Sky: you can select **only 1** sky, created in the environment editor.
-- Terrain: you can select **only 1** terrain, created in the environment editor.
-- Water: you can select **only 1** water, created in the environment editor.
+- Sky: you can select **only 1** sky entity, created in the environment editor.
+- Terrain: you can select **only 1** terrain entity, created in the environment editor.
+- Water: you can select **only 1** water entity, created in the environment editor.
 ### Models
 - You can **place and delete** models in the scene.
 - If a terrain is selected, the model will be placed **on top** of the terrain.
 - If no terrain is selected, the model will be placed at **XYZ(0,0,0)**.
+- You can attach an (endless) **animation** to a placed model.
+- You can **"freeze"** into local space rendering, which means its position is not affected by camera movement.
 - Every placed model has a **position** (**Range**: -inf to inf) that can be **edited**.
 - Every placed model has a **rotation** (**Range**: -360 to 360) that can be **edited**.
 - Every placed model has a **size** (**Range**: 0 to inf) that can be **edited**.
-- You can attach an (endless) **animation** to a placed model.
-- You can **"freeze"** into local space rendering, which means its position is not affected by camera movement.
 ### Billboards
 - You can **place and delete** billboards in the scene.
 - If a terrain is selected, the billboard will be placed **on top** of the terrain.
@@ -31,7 +31,7 @@
 - Every placed billboard has a **position** (**Range**: -inf to inf) that can be **edited**.
 - Every placed billboard has a **rotation** (**Range**: -360 to 360) that can be **edited**.
 - Every placed billboard has a **size** (**Range**: 0 to inf) that can be **edited**.
-### Sound
+### Sounds
 - You can **place and delete** 3D sound casters in the scene.
 - If a terrain is selected, the sound caster will be placed **on top** of the terrain.
 - If no terrain is selected, the sound caster will be placed at **XYZ(0,0,0)**.
@@ -57,7 +57,8 @@
 - Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).
 - You can determine the direction of the shadows by setting the **center position** (**Range**: -inf to inf).
 - There is an option to make the shadow box **follow the camera** at a certain **interval** (**Range**: 0 to inf) measured in frames.
-- Additionally you can choose to enable **soft shadows** and andjust the **lightness** (**Range**: 0 to inf) of the shadows.
+- You can choose to enable **lighted shadowing**, which means that you can still see **directional lighting** effects in the casted shadows.
+- You can choose to adjust the **lightness** (**Range**: 0 to inf) of the casted shadows.
 ### Settings - Graphics - Motion blur
 - You can enable **motion blur** with a custom **strength** (**Range**: 0 to inf).
 ### Settings - Graphics - Depth Of Field

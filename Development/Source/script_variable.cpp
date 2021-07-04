@@ -1,4 +1,5 @@
 #include "script_variable.hpp"
+#include "logger.hpp"
 
 ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, 
 	const string& ID, bool constant, vector<ScriptValue> values)
@@ -50,7 +51,7 @@ void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
 	// Check if variable is immutable
 	if (_isConstant)
 	{
-		_fe3d.logger_throwError("Cannot change script value: variable is constant!");
+		Logger::throwError("Cannot change script value: variable is constant!");
 	}
 
 	// Delete old value
@@ -73,7 +74,7 @@ ScriptValue& ScriptVariable::getValue(unsigned int index)
 	// Validate index
 	if (index >= _values.size())
 	{
-		_fe3d.logger_throwError("Invalid index at script variable!");
+		Logger::throwError("Invalid index at script variable!");
 	}
 
 	return *_values[index];

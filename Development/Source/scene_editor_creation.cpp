@@ -1,16 +1,17 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 {
 	// Error checking
 	if (_fe3d.skyEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Scene sky with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Scene sky with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.skyEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base sky of scene sky with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base sky of scene sky with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -33,12 +34,12 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	// Error checking
 	if (_fe3d.terrainEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Scene terrain with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Scene terrain with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.terrainEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base terrain of scene terrain with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base terrain of scene terrain with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -133,12 +134,12 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	// Error checking
 	if (_fe3d.waterEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Scene water with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Scene water with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.waterEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base water of scene water with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base water of scene water with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -197,12 +198,12 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Error checking
 	if (_fe3d.modelEntity_isExisting(newID) && !_fe3d.modelEntity_isInstanced(previewID))
 	{
-		_fe3d.logger_throwWarning("Model with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Model with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.modelEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base model of model with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base model of model with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -347,12 +348,12 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	// Error checking
 	if (_fe3d.billboardEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Billboard with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Billboard with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.billboardEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base billboard of billboard with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base billboard of billboard with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -416,12 +417,12 @@ bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID
 	// Error checking
 	if (_fe3d.soundEntity_isExisting(newID))
 	{
-		_fe3d.logger_throwWarning("Sound with ID \"" + newID + "\" already exists!");
+		Logger::throwWarning("Sound with ID \"" + newID + "\" already exists!");
 		return false;
 	}
 	if (!_fe3d.soundEntity_isExisting(previewID))
 	{
-		_fe3d.logger_throwWarning("Base audio of sound with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Base audio of sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 

@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -149,7 +150,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	_fe3d.logger_throwError("Cannot delete animation with ID \"" + ID + "\"");
+	Logger::throwError("Cannot delete animation with ID \"" + ID + "\"");
 }
 
 bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
@@ -188,7 +189,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 		}
 	}
 
-	_fe3d.logger_throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
+	Logger::throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
 }
 
 const vector<string> AnimationEditor::getAllAnimationIDs()

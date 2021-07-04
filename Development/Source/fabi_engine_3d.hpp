@@ -1,6 +1,5 @@
 #pragma once
 
-#include "logger.hpp"
 #include "input_type.hpp"
 #include "direction.hpp"
 #include "aabb_parent_type.hpp"
@@ -731,40 +730,6 @@ public:
 	const bool gfx_isLensFlareEnabled();
 	const bool gfx_isShadowFollowingCamera();
 	const bool gfx_isSoftShadowingEnabled();
-
-	// Logger interface
-	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)
-	{
-		Logger::throwInfo(first, rest...);
-	}
-	template<typename T, typename...Rest> inline void logger_throwError(T first, Rest...rest)
-	{
-		Logger::throwError(first, rest...);
-	}
-	template<typename T, typename...Rest> inline void logger_throwDebug(T first, Rest...rest)
-	{
-		Logger::throwDebug(first, rest...);
-	}
-	template<typename T, typename...Rest> inline void logger_throwWarning(T first, Rest...rest)
-	{
-		Logger::throwWarning(first, rest...);
-	}
-	inline const vector<string>& logger_getMessageQueue()
-	{
-		return Logger::getMessageQueue();
-	}
-	inline unsigned int logger_getMessageCount()
-	{
-		return Logger::getMessageCount();
-	}
-	inline void logger_setMessageQueue(const vector<string>& customMessages)
-	{
-		return Logger::setCustomMessageQueue(customMessages);
-	}
-	inline void logger_clearMessageQueue()
-	{
-		return Logger::clearMessageQueue();
-	}
 
 	// Server interface - setters
 	void networkServer_start(unsigned int maxClientCount);

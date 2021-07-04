@@ -1,4 +1,5 @@
 #include "engine_gui_window.hpp"
+#include "logger.hpp"
 
 EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color) :
 	_fe3d(fe3d),
@@ -79,7 +80,7 @@ void EngineGuiWindow::addScreen(const string& ID)
 	{
 		if (screen->getID() == ID)
 		{
-			_fe3d.logger_throwError("Screen creation: screen with ID \"" + ID + "\" already exists!");
+			Logger::throwError("Screen creation: screen with ID \"" + ID + "\" already exists!");
 		}
 	}
 

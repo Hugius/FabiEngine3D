@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -14,7 +15,7 @@ void SceneEditor::saveEditorSceneToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SceneEditor::saveEditorSceneToFile()");
+		Logger::throwError("No current project loaded --> SceneEditor::saveEditorSceneToFile()");
 	}
 
 	// Check if scene directory still exists
@@ -22,11 +23,11 @@ void SceneEditor::saveEditorSceneToFile()
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
 	}
 	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	// Create or overwrite file
@@ -423,5 +424,5 @@ void SceneEditor::saveEditorSceneToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
 }

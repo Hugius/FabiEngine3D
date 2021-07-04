@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -62,28 +63,28 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			// Determine which type of value to print
 			if (arguments[0].getType() == ScriptValueType::VEC3)
 			{
-				_fe3d.logger_throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
+				Logger::throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
 			}
 			else if (arguments[0].getType() == ScriptValueType::STRING)
 			{
-				_fe3d.logger_throwInfo(arguments[0].getString());
+				Logger::throwInfo(arguments[0].getString());
 			}
 			else if (arguments[0].getType() == ScriptValueType::DECIMAL)
 			{
 				string decimalString = to_string(arguments[0].getDecimal());
-				_fe3d.logger_throwInfo(decimalString.substr(0, decimalString.size() - 1));
+				Logger::throwInfo(decimalString.substr(0, decimalString.size() - 1));
 			}
 			else if (arguments[0].getType() == ScriptValueType::INTEGER)
 			{
-				_fe3d.logger_throwInfo(to_string(arguments[0].getInteger()));
+				Logger::throwInfo(to_string(arguments[0].getInteger()));
 			}
 			else if (arguments[0].getType() == ScriptValueType::BOOLEAN)
 			{
-				_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
+				Logger::throwInfo(arguments[0].getBoolean() ? "true" : "false");
 			}
 			else
 			{
-				_fe3d.logger_throwError("Script interpreter print received empty value!");
+				Logger::throwError("Script interpreter print received empty value!");
 			}
 
 			// Return

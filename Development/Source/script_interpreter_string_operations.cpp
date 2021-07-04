@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 #include <sstream>
 
@@ -147,7 +148,7 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	// Check if vec3 value
 	if (!_isVec3Value(valueString))
 	{
-		_fe3d.logger_throwError("Tried to extract Vec3 value from non-vec3 valuestring!");
+		Logger::throwError("Tried to extract Vec3 value from non-vec3 valuestring!");
 	}
 
 	// Remove brackets

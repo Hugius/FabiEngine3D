@@ -1,4 +1,5 @@
 #include "top_viewport_controller.hpp"
+#include "logger.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -58,15 +59,15 @@ void TopViewportController::_updateProjectCreation()
 			// Check if project already exists
 			if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath))
 			{
-				_fe3d.logger_throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
+				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 			}
 			else if (newProjectID.find_first_not_of(" ") == string::npos)
 			{
-				_fe3d.logger_throwWarning("New project name cannot contain any spaces!");
+				Logger::throwWarning("New project name cannot contain any spaces!");
 			}
 			else if (isupper(newProjectID.front()))
 			{
-				_fe3d.logger_throwWarning("New project name cannot start with capital!");
+				Logger::throwWarning("New project name cannot start with capital!");
 			}
 			else // Project is non-existent
 			{
@@ -109,7 +110,7 @@ void TopViewportController::_updateProjectCreation()
 				_settingsEditor.loadSettings();
 
 				// Logging
-				_fe3d.logger_throwInfo("New project \"" + _currentProjectID + "\" created!");
+				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
 
 				// Miscellaneous
 				_creatingProject = false;
@@ -145,7 +146,7 @@ void TopViewportController::_prepareProjectLoading()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Projects folder is missing!");
+		Logger::throwError("Projects folder is missing!");
 	}
 }
 
@@ -160,7 +161,7 @@ void TopViewportController::_updateProjectLoading()
 		{
 			if (_isProjectCorrupted(clickedButtonID))
 			{
-				_fe3d.logger_throwWarning("Cannot load project: corrupted files/folders!");
+				Logger::throwWarning("Cannot load project: corrupted files/folders!");
 			}
 			else
 			{
@@ -188,7 +189,7 @@ void TopViewportController::_updateProjectLoading()
 				_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
 				// Logging
-				_fe3d.logger_throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
+				Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
 				// Miscellaneous
 				_loadingProject = false;
@@ -242,7 +243,7 @@ void TopViewportController::_updateProjectDeletion()
 				std::filesystem::remove_all(directoryPath);
 
 				// Logging
-				_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
+				Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
 
 				// Miscellaneous
 				_deletingProject = false;
@@ -250,7 +251,7 @@ void TopViewportController::_updateProjectDeletion()
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
+				Logger::throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
 			}
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteProject"))

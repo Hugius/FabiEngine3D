@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
@@ -48,7 +49,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		// Save current amount of logged messages
-		auto lastLoggerMessageCount = _fe3d.logger_getMessageCount();
+		auto lastLoggerMessageCount = Logger::getMessageCount();
 
 		// Save index of line of script currently being executed
 		_currentLineIndexStack.back() = lineIndex;

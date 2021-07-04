@@ -1,4 +1,5 @@
 #include "audio_editor.hpp"
+#include "logger.hpp"
 
 void AudioEditor::_updateAudioEditing()
 {
@@ -59,7 +60,7 @@ void AudioEditor::_updateAudioEditing()
 						}
 						else
 						{
-							_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+							Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 						}
 					}
 				}

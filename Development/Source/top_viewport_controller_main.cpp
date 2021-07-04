@@ -1,5 +1,6 @@
 #include "top_viewport_controller.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -269,7 +270,7 @@ void TopViewportController::_updateMiscScreenManagement()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 				}
 			}
 		}
@@ -285,7 +286,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> TopViewportController::_saveCurrentProject()");
+		Logger::throwError("No current project loaded --> TopViewportController::_saveCurrentProject()");
 	}
 
 	// Save everything
@@ -298,5 +299,5 @@ void TopViewportController::_saveCurrentProject()
 	_scriptEditor.saveScriptsToFile();
 
 	// Logging
-	_fe3d.logger_throwInfo("Project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");
 }

@@ -1,4 +1,5 @@
 #include "environment_editor.hpp"
+#include "logger.hpp"
 
 void EnvironmentEditor::_updateWaterEditor()
 {
@@ -52,17 +53,17 @@ void EnvironmentEditor::_updateWaterCreation()
 						}
 						else
 						{
-							_fe3d.logger_throwWarning("Water name \"" + newWaterName.substr(1) + "\" already exists!");
+							Logger::throwWarning("Water name \"" + newWaterName.substr(1) + "\" already exists!");
 						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Water name cannot contain any spaces!");
+						Logger::throwWarning("Water name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Water name cannot contain '@'!");
+					Logger::throwWarning("Water name cannot contain '@'!");
 				}
 			}
 		}

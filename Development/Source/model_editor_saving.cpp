@@ -1,5 +1,6 @@
 #include "model_editor.hpp"
 #include "left_viewport_controller.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -15,7 +16,7 @@ void ModelEditor::saveModelEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ModelEditor::saveModelEntitiesToFile()");
+		Logger::throwError("No current project loaded --> ModelEditor::saveModelEntitiesToFile()");
 	}
 
 	// Create or overwrite models file
@@ -156,5 +157,5 @@ void ModelEditor::saveModelEntitiesToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Model data from project \"" + _currentProjectID + "\" saved!");
 }

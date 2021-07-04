@@ -1,5 +1,6 @@
 #include "environment_editor.hpp"
 #include "left_viewport_controller.hpp"
+#include "configuration.hpp"
 
 #define CW(text) VPC::calculateTextWidth(text, 0.115f)
 
@@ -172,7 +173,7 @@ void EnvironmentEditor::load()
 	_loadGUI();
 
 	// Default camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 	
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);

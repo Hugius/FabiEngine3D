@@ -1,4 +1,5 @@
 #include "audio_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -8,7 +9,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> AudioEditor::getAllAudioPathsFromFile()");
+		Logger::throwError("No current project loaded --> AudioEditor::getAllAudioPathsFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -49,7 +50,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
 	}
 
 	return {};
@@ -60,7 +61,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> AudioEditor::loadAudioEntitiesFromFile()");
+		Logger::throwError("No current project loaded --> AudioEditor::loadAudioEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -100,11 +101,11 @@ void AudioEditor::loadAudioEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
 	}
 }
 
@@ -119,7 +120,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
+		Logger::throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
 	}
 
 	// Create or overwrite audio file
@@ -144,5 +145,5 @@ void AudioEditor::saveAudioEntitiesToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
 }

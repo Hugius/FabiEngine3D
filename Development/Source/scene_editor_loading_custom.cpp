@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -8,11 +9,11 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadCustomSceneFromFile()");
+		Logger::throwError("No current project loaded --> SceneEditor::loadCustomSceneFromFile()");
 	}
 	if (_isEditorLoaded)
 	{
-		_fe3d.logger_throwWarning("Tried to call saveCustomSceneToFile() from within scene editor!");
+		Logger::throwWarning("Tried to call saveCustomSceneToFile() from within scene editor!");
 	}
 
 	// Check if scene directory still exists
@@ -20,11 +21,11 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
 	}
 	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
 	}
 
 	// Check if scene file exists
@@ -170,7 +171,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					// Check if preview model parts count
 					if (partIDs.size() != _fe3d.modelEntity_getPartIDs(previewID).size())
 					{
-						_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
+						Logger::throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 						continue;
 					}
 
@@ -179,7 +180,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						if (partIDs[i] != _fe3d.modelEntity_getPartIDs(previewID)[i])
 						{
-							_fe3d.logger_throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
+							Logger::throwWarning("Scene model parts with ID \"" + modelID + "\" differ from base model!");
 							continue;
 						}
 					}
@@ -193,7 +194,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					{
 						if (_fe3d.modelEntity_isInstanced(modelID) != _fe3d.modelEntity_isInstanced(previewID))
 						{
-							_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
+							Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 							_fe3d.modelEntity_delete(modelID);
 							continue;
 						}
@@ -660,10 +661,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot load scene with ID\"" + fileName + "\"!");
+		Logger::throwWarning("Cannot load scene with ID\"" + fileName + "\"!");
 	}
 }

@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 {
@@ -175,7 +176,7 @@ ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 	}
 
 
-	_fe3d.logger_throwError("Local script variable \"" + variableID + "\" not existing!");
+	Logger::throwError("Local script variable \"" + variableID + "\" not existing!");
 }
 
 ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
@@ -187,5 +188,5 @@ ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
 		return it->second;
 	}
 
-	_fe3d.logger_throwError("Global script variable \"" + variableID + "\" not existing!");
+	Logger::throwError("Global script variable \"" + variableID + "\" not existing!");
 }

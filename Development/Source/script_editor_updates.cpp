@@ -1,4 +1,5 @@
 #include "script_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -165,17 +166,17 @@ void ScriptEditor::_updateMiscellaneous()
 			// Check if keyword found nowhere
 			if (result.empty())
 			{
-				_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
-				_fe3d.logger_throwInfo("");
+				Logger::throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
+				Logger::throwInfo("");
 			}
 			else
 			{
 				// Print all lines in which the keyword occurred 
 				for (const auto& [fileID, lineNumber] : result)
 				{
-					_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
+					Logger::throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
 				}
-				_fe3d.logger_throwInfo("");
+				Logger::throwInfo("");
 			}
 		}
 
@@ -200,12 +201,12 @@ void ScriptEditor::_updateMiscellaneous()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Script name \"" + newScriptName + "\" already exists!");
+					Logger::throwWarning("Script name \"" + newScriptName + "\" already exists!");
 				}
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Script name cannot contain any spaces!");
+				Logger::throwWarning("Script name cannot contain any spaces!");
 			}
 		}
 
@@ -240,7 +241,7 @@ void ScriptEditor::_updateMiscellaneous()
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Script name already exists!");
+				Logger::throwWarning("Script name already exists!");
 			}
 		}
 	}

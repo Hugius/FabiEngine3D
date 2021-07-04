@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 #include <sstream>
 
@@ -84,14 +85,14 @@ bool ScriptInterpreter::_validateCurrentProject()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ScriptInterpreter::_validateCurrentProject()");
+		Logger::throwError("No current project loaded --> ScriptInterpreter::_validateCurrentProject()");
 	}
 
 	// Check if saves folder still exists
 	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" folder missing!");
 		return false;
 	}
 
@@ -115,7 +116,7 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
+	Logger::throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
 		to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }
@@ -123,11 +124,11 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount)
 {
 	// Check if any new messages were logged
-	auto messageCount = _fe3d.logger_getMessageCount();
+	auto messageCount = Logger::getMessageCount();
 	if (messageCount > lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
-		auto messageQueue = _fe3d.logger_getMessageQueue();
+		auto messageQueue = Logger::getMessageQueue();
 
 		// Loop over all new messages
 		for (unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)

@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 #include <filesystem>
@@ -13,7 +14,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SceneEditor::isSceneExisting()");
+		Logger::throwError("No current project loaded --> SceneEditor::isSceneExisting()");
 	}
 
 	// Compose full file path
@@ -194,7 +195,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	return sceneIDs;
@@ -213,7 +214,7 @@ void SceneEditor::_deleteSceneFile(const string& sceneID)
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
 	}
 }
 

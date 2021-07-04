@@ -1,5 +1,6 @@
 #include "billboard_editor.hpp"
 #include "left_viewport_controller.hpp"
+#include "configuration.hpp"
 
 #define CW(text) VPC::calculateTextWidth(text, 0.115f)
 
@@ -82,7 +83,7 @@ void BillboardEditor::load()
 	_loadGUI();
 
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, CAMERA_POSITION, -90.0f, 0.0f);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, CAMERA_POSITION, -90.0f, 0.0f);
 	_fe3d.camera_enableLookatView();
 
 	// Enable default graphics

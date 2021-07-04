@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -83,7 +84,7 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
 			{
-				_fe3d.logger_throwWarning("Cannot find LOD entity name \"" + lodID + "\"");
+				Logger::throwWarning("Cannot find LOD entity name \"" + lodID + "\"");
 			}
 			else // Set LOD entity
 			{

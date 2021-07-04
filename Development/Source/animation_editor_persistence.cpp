@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -8,7 +9,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> AnimationEditor::loadAnimationsFromFile()");
+		Logger::throwError("No current project loaded --> AnimationEditor::loadAnimationsFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -145,14 +146,14 @@ void AnimationEditor::loadAnimationsFromFile()
 					{
 						newAnimation->oldPreviewModelID = newAnimation->previewModelID;
 						newAnimation->previewModelID = "";
-						_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" does not have required animation parts anymore!");
+						Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" does not have required animation parts anymore!");
 					}
 				}
 				else // Clear preview model
 				{
 					newAnimation->oldPreviewModelID = newAnimation->previewModelID;
 					newAnimation->previewModelID = "";
-					_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
 				}
 			}
 
@@ -164,11 +165,11 @@ void AnimationEditor::loadAnimationsFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
 	}
 }
 
@@ -183,7 +184,7 @@ void AnimationEditor::saveAnimationsToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
+		Logger::throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
 	}
 
 	// Compose full file path
@@ -277,5 +278,5 @@ void AnimationEditor::saveAnimationsToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
 }

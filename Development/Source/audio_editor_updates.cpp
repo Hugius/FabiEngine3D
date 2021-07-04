@@ -1,4 +1,5 @@
 #include "audio_editor.hpp"
+#include "logger.hpp"
 
 void AudioEditor::update()
 {
@@ -103,17 +104,17 @@ void AudioEditor::_updateAudioCreation()
 						}
 						else // Name already exists
 						{
-							_fe3d.logger_throwWarning("Audio name \"" + newAudioName.substr(1) + "\" already exists!");
+							Logger::throwWarning("Audio name \"" + newAudioName.substr(1) + "\" already exists!");
 						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Audio name cannot contain any spaces!");
+						Logger::throwWarning("Audio name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New audio name cannot begin with '@'!");
+					Logger::throwWarning("New audio name cannot begin with '@'!");
 				}
 			}
 		}

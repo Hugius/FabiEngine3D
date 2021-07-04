@@ -1,4 +1,5 @@
 #include "script_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,7 +10,7 @@ void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
+		Logger::throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
 	}
 
 	// Clear last script
@@ -65,14 +66,14 @@ void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		// Logging
 		if (isLoggingEnabled)
 		{
-			_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
+			Logger::throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
 		}
 
 		_isScriptLoadedFromFile = true;
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
 	}
 }
 
@@ -84,7 +85,7 @@ void ScriptEditor::saveScriptsToFile()
 		// Error checking
 		if (_currentProjectID == "")
 		{
-			_fe3d.logger_throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
+			Logger::throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
 		}
 
 		// Compose directory path
@@ -125,6 +126,6 @@ void ScriptEditor::saveScriptsToFile()
 		}
 
 		// Logging
-		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" saved!");
+		Logger::throwInfo("Script data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

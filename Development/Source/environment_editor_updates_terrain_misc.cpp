@@ -1,4 +1,5 @@
 #include "environment_editor.hpp"
+#include "logger.hpp"
 
 void EnvironmentEditor::_updateTerrainEditor()
 {
@@ -50,17 +51,17 @@ void EnvironmentEditor::_updateTerrainCreation()
 						}
 						else
 						{
-							_fe3d.logger_throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
+							Logger::throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
 						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Terrain name cannot contain any spaces!");
+						Logger::throwWarning("Terrain name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Terrain name cannot contain '@'!");
+					Logger::throwWarning("Terrain name cannot contain '@'!");
 				}
 			}
 		}

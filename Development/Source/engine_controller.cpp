@@ -1,4 +1,5 @@
 #include "engine_controller.hpp"
+#include "configuration.hpp"
 
 EngineController::EngineController() :
 	FabiEngine3D(),
@@ -35,7 +36,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		gfx_enableBloom(1.0f, 0.0f, 10);
 
 		// Default camera
-		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
+		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
@@ -50,7 +51,37 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	}
 	else // Engine preview
 	{
-		_initializeMiscellaneous();
+		// Enable vsync
+		misc_enableVsync();
+
+		// Permanent graphical effects
+		misc_setMainRenderingColor(Vec3(0.0f));
+		gfx_setMsaaQuality(16);
+		gfx_enableMSAA();
+		gfx_enableBloom(1.0f, 0.0f, 10);
+
+		// Default camera
+		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+
+		// Default engine background
+		string textureFolderPath = "engine_assets\\textures\\";
+		skyEntity_add("@@engineBackground");
+		skyEntity_setDiffuseMaps("@@engineBackground", {
+			textureFolderPath + "background_right.png",
+			textureFolderPath + "background_left.png",
+			textureFolderPath + "background_top.png",
+			textureFolderPath + "background_bottom.png",
+			textureFolderPath + "background_back.png",
+			textureFolderPath + "background_front.png" });
+		skyEntity_select("@@engineBackground");
+		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
+
+		// Custom cursor texture
+		imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+		misc_setCustomCursor("@@cursor");
+		misc_setCursorVisible(false);
+
+		// Initialize viewport controllers
 		_rightViewportController.initialize();
 		_bottomViewportController.initialize();
 		_topViewportController.initialize();
@@ -78,8 +109,37 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 	}
 	else // Engine preview
 	{
-		_updateMiscellaneous();
+		// Initialize main menu again if user came from another menu
+		static string lastScreen = "";
+		string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+		if (activeScreen == "main" && lastScreen != "main")
+		{
+			// Restore camera
+			float lastYaw = camera_getYaw();
+			float lastPitch = camera_getPitch();
+			camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), lastYaw, lastPitch);
+
+			// Restore background
+			skyEntity_select("@@engineBackground");
+			skyEntity_setLightness("@@engineBackground", 0.6f);
+
+			// Restore Vsync
+			if (!misc_isVsyncEnabled())
+			{
+				misc_enableVsync();
+			}
+		}
+		lastScreen = activeScreen;
+
+		// Update custom cursor
+		imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
+		imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
+		imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
+
+		// Update GUI manager
 		_gui.update();
+
+		// Update viewport controllers
 		_topViewportController.update();
 		_leftViewportController.update();
 		_rightViewportController.update();
@@ -98,69 +158,6 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 			_leftViewportController.getScriptEditor().getScriptExecutor().unload();
 		}
 	}
-}
-
-void EngineController::_initializeMiscellaneous()
-{
-	// Enable vsync
-	misc_enableVsync();
-
-	// Permanent graphical effects
-	misc_setMainRenderingColor(Vec3(0.0f));
-	gfx_setMsaaQuality(16);
-	gfx_enableMSAA();
-	gfx_enableBloom(1.0f, 0.0f, 10);
-
-	// Default camera
-	camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
-
-	// Default engine background
-	string textureFolderPath = "engine_assets\\textures\\";
-	skyEntity_add("@@engineBackground");
-	skyEntity_setDiffuseMaps("@@engineBackground", {
-		textureFolderPath + "background_right.png",
-		textureFolderPath + "background_left.png",
-		textureFolderPath + "background_top.png",
-		textureFolderPath + "background_bottom.png",
-		textureFolderPath + "background_back.png",
-		textureFolderPath + "background_front.png" });
-	skyEntity_select("@@engineBackground");
-	skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
-
-	// Custom cursor texture
-	imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
-	misc_setCustomCursor("@@cursor");
-	misc_setCursorVisible(false);
-}
-
-void EngineController::_updateMiscellaneous()
-{
-	// Initialize main menu again if user came from another menu
-	static string lastScreen = "";
-	string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
-	if (activeScreen == "main" && lastScreen != "main")
-	{
-		// Restore camera
-		float lastYaw = camera_getYaw();
-		float lastPitch = camera_getPitch();
-		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
-
-		// Restore background
-		skyEntity_select("@@engineBackground");
-		skyEntity_setLightness("@@engineBackground", 0.6f);
-
-		// Restore Vsync
-		if (!misc_isVsyncEnabled())
-		{
-			misc_enableVsync();
-		}
-	}
-	lastScreen = activeScreen;
-
-	// Update custom cursor
-	imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
-	imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
-	imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
 }
 
 bool EngineController::mustPromptOnExit()

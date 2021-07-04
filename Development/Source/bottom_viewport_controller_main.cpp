@@ -1,5 +1,6 @@
 #include "bottom_viewport_controller.hpp"
 #include "left_viewport_controller.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -211,7 +212,7 @@ void BottomViewportController::update()
 		// Validate
 		if (!_topViewportController.isScriptRunning() && !_gui.getGlobalScreen()->isFocused() && !_scriptEditor.isWritingScript())
 		{
-			_fe3d.logger_clearMessageQueue();
+			Logger::clearMessageQueue();
 			for (const auto& [ID, message] : _consoleMessageQueue)
 			{
 				_deleteConsoleMessage(ID);
@@ -221,7 +222,7 @@ void BottomViewportController::update()
 	}
 
 	// Clear console messages if it overflows
-	auto loggerMessages = _fe3d.logger_getMessageQueue();
+	auto loggerMessages = Logger::getMessageQueue();
 	if (loggerMessages.size() > MAX_CONSOLE_MESSAGES)
 	{
 		// Save most recent messages
@@ -233,7 +234,7 @@ void BottomViewportController::update()
 		}
 		
 		// Remove old messages
-		_fe3d.logger_clearMessageQueue();
+		Logger::clearMessageQueue();
 		for (const auto& [ID, message] : _consoleMessageQueue)
 		{
 			_deleteConsoleMessage(ID);
@@ -242,11 +243,11 @@ void BottomViewportController::update()
 
 		// Set new messages
 		std::reverse(newMessages.begin(), newMessages.end());
-		_fe3d.logger_setMessageQueue(newMessages);
+		Logger::setCustomMessageQueue(newMessages);
 	}
 
 	// Synchronize console text with core logger
-	loggerMessages = _fe3d.logger_getMessageQueue();
+	loggerMessages = Logger::getMessageQueue();
 	if (_consoleMessageQueue.size() != loggerMessages.size())
 	{
 		auto synchronizationCount = loggerMessages.size() - _consoleMessageQueue.size();

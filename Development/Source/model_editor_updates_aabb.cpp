@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -116,7 +117,7 @@ void ModelEditor::_updateModelEditingAabb()
 		{
 			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
 			{
-				_fe3d.logger_throwWarning("AABB name \"" + newAabbName + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
+				Logger::throwWarning("AABB name \"" + newAabbName + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
 			}
 			else
 			{
@@ -142,12 +143,12 @@ void ModelEditor::_updateModelEditingAabb()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("New AABB name cannot contain any spaces!");
+						Logger::throwWarning("New AABB name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New AABB name cannot contain '@'!");
+					Logger::throwWarning("New AABB name cannot contain '@'!");
 				}
 			}
 		}

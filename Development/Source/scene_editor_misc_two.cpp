@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 #include <filesystem>
@@ -264,7 +265,7 @@ void SceneEditor::addLightingToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add lighting to custom scene!");
+		Logger::throwWarning("Cannot add lighting to custom scene!");
 	}
 }
 
@@ -276,7 +277,7 @@ void SceneEditor::addGraphicsToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add graphics to custom scene!");
+		Logger::throwWarning("Cannot add graphics to custom scene!");
 	}
 }
 
@@ -288,7 +289,7 @@ void SceneEditor::addSkyToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add sky to custom scene!");
+		Logger::throwWarning("Cannot add sky to custom scene!");
 	}
 }
 
@@ -300,7 +301,7 @@ void SceneEditor::addTerrainToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add terrain to custom scene!");
+		Logger::throwWarning("Cannot add terrain to custom scene!");
 	}
 }
 
@@ -312,7 +313,7 @@ void SceneEditor::addWaterToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add water to custom scene!");
+		Logger::throwWarning("Cannot add water to custom scene!");
 	}
 }
 
@@ -324,7 +325,7 @@ void SceneEditor::addModelToCustomScene(const string& modelID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add model to custom scene!");
+		Logger::throwWarning("Cannot add model to custom scene!");
 	}
 }
 
@@ -336,7 +337,7 @@ void SceneEditor::addBillboardToCustomScene(const string& billboardID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add billboard to custom scene!");
+		Logger::throwWarning("Cannot add billboard to custom scene!");
 	}
 }
 
@@ -348,7 +349,7 @@ void SceneEditor::addAabbToCustomScene(const string& aabbID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add AABB to custom scene!");
+		Logger::throwWarning("Cannot add AABB to custom scene!");
 	}
 }
 
@@ -360,7 +361,7 @@ void SceneEditor::addLightToCustomScene(const string& lightID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add light to custom scene!");
+		Logger::throwWarning("Cannot add light to custom scene!");
 	}
 }
 
@@ -372,6 +373,6 @@ void SceneEditor::addSoundToCustomScene(const string& soundID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add sound to custom scene!");
+		Logger::throwWarning("Cannot add sound to custom scene!");
 	}
 }

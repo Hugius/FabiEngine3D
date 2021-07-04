@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 {
@@ -374,6 +375,6 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& co
 		}
 	}
 
-	_fe3d.logger_throwError("This error should not be thrown...");
+	Logger::throwError("This error should not be thrown...");
 	return false;
 }

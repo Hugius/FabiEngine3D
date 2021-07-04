@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -115,7 +116,7 @@ void SceneEditor::_updateMainMenu()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Scene name \"" + newSceneName + "\" already exists!");
+					Logger::throwWarning("Scene name \"" + newSceneName + "\" already exists!");
 				}
 			}
 

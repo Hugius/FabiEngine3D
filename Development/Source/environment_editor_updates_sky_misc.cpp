@@ -1,4 +1,5 @@
 #include "environment_editor.hpp"
+#include "logger.hpp"
 
 void EnvironmentEditor::_updateSkyEditor()
 {
@@ -51,17 +52,17 @@ void EnvironmentEditor::_updateSkyCreation()
 						}
 						else
 						{
-							_fe3d.logger_throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
+							Logger::throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
 						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Sky name cannot contain any spaces!");
+						Logger::throwWarning("Sky name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Sky name cannot contain '@'!");
+					Logger::throwWarning("Sky name cannot contain '@'!");
 				}
 			}
 		}

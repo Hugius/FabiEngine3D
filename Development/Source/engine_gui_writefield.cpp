@@ -1,6 +1,7 @@
 #include "engine_gui_writefield.hpp"
 
 #include <map>
+#include <windows.h>
 
 EngineGuiWritefield::EngineGuiWritefield(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,

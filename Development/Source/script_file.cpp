@@ -1,4 +1,5 @@
 #include "script_file.hpp"
+#include "logger.hpp"
 
 ScriptFile::ScriptFile(FabiEngine3D& fe3d, const string& ID) :
 	_fe3d(fe3d),
@@ -21,7 +22,7 @@ void ScriptFile::setLineText(unsigned int index, const string& textContent)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Cannot set scriptline text content at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwError("Cannot set scriptline text content at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{
@@ -33,7 +34,7 @@ void ScriptFile::removeLine(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Cannot delete scriptline at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwError("Cannot delete scriptline at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{
@@ -70,7 +71,7 @@ const string& ScriptFile::getLineText(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		_fe3d.logger_throwError("Cannot retrieve scriptline at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwError("Cannot retrieve scriptline at file \"" + _ID + "\" with index: " + to_string(index));
 	}
 	else
 	{

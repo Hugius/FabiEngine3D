@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 void ScriptInterpreter::_processVariableCreation(const string& scriptLine, ScriptVariableScope scope)
 {
@@ -212,7 +213,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 				{
 					// Save current logger message count
-					auto loggerMessageCount = _fe3d.logger_getMessageCount();
+					auto loggerMessageCount = Logger::getMessageCount();
 
 					// Call function
 					auto values =

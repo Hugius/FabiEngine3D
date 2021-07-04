@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "logger.hpp"
 
 #include <filesystem>
 
@@ -139,7 +140,7 @@ void ModelEditor::_loadMesh()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 		}
 	}
 }
@@ -164,7 +165,7 @@ void ModelEditor::_loadDiffuseMap()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 		}
 	}
 }
@@ -190,7 +191,7 @@ void ModelEditor::_loadLightMap()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 		}
 	}
 }
@@ -215,7 +216,7 @@ void ModelEditor::_loadReflectionMap()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 		}
 	}
 }
@@ -241,7 +242,7 @@ void ModelEditor::_loadNormalMap()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 		}
 	}
 }
@@ -345,7 +346,7 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Model name \"" + modelName.substr(1) + "\" already exists!");
+		Logger::throwWarning("Model name \"" + modelName.substr(1) + "\" already exists!");
 
 		return false;
 	}

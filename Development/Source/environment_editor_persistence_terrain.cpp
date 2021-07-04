@@ -1,4 +1,5 @@
 #include "environment_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,7 +10,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::getAllTerrainTexturePathsFromFile()");
+		Logger::throwError("No current project loaded --> EnvironmentEditor::getAllTerrainTexturePathsFromFile()");
 	}
 
 	// Compose full file path
@@ -102,7 +103,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
 	}
 
 	return {};
@@ -113,7 +114,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::loadTerrainEntitiesFromFile()");
+		Logger::throwError("No current project loaded --> EnvironmentEditor::loadTerrainEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -225,11 +226,11 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" missing!");
 	}
 }
 
@@ -255,7 +256,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveTerrainEntitiesToFile()");
+		Logger::throwError("No current project loaded --> EnvironmentEditor::saveTerrainEntitiesToFile()");
 	}
 
 	// Compose full terrain file path
@@ -348,7 +349,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
 }
 
 const vector<string>& EnvironmentEditor::getLoadedTerrainIDs()

@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 void AnimationEditor::_updateEditingScreen()
 {
@@ -219,7 +220,7 @@ void AnimationEditor::_updateEditingScreen()
 					// Throw warning
 					if (!hasAllParts)
 					{
-						_fe3d.logger_throwWarning("Preview model does not have required animation parts!");
+						Logger::throwWarning("Preview model does not have required animation parts!");
 						return;
 					}
 

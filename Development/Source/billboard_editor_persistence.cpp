@@ -1,4 +1,5 @@
 #include "billboard_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,7 +10,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::getAllTexturePathsFromFile()");
+		Logger::throwError("No current project loaded --> BillboardEditor::getAllTexturePathsFromFile()");
 	}
 
 	// Compose full file path
@@ -64,7 +65,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
 	}
 
 	return {};
@@ -75,7 +76,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::loadBillboardEntitiesFromFile()");
+		Logger::throwError("No current project loaded --> BillboardEditor::loadBillboardEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -172,11 +173,11 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
 	}
 }
 
@@ -191,7 +192,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::saveBillboardEntitiesToFile()");
+		Logger::throwError("No current project loaded --> BillboardEditor::saveBillboardEntitiesToFile()");
 	}
 
 	// Create or overwrite billboard file
@@ -253,5 +254,5 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectID + "\" saved!");
+	Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" saved!");
 }

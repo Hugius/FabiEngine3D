@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "logger.hpp"
 
 void ModelEditor::update()
 {
@@ -195,12 +196,12 @@ void ModelEditor::_updateModelCreation()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Model name cannot contain any spaces!");
+						Logger::throwWarning("Model name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Model name cannot contain '@'!");
+					Logger::throwWarning("Model name cannot contain '@'!");
 				}
 			}
 		}

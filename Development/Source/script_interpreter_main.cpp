@@ -1,4 +1,6 @@
 #include "script_interpreter.hpp"
+#include "configuration.hpp"
+#include "logger.hpp"
 
 #include <sstream>
 
@@ -20,7 +22,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEd
 void ScriptInterpreter::load()
 {
 	// Save current amount of logged messages
-	auto lastLoggerMessageCount = _fe3d.logger_getMessageCount();
+	auto lastLoggerMessageCount = Logger::getMessageCount();
 
 	// For every scriptfile
 	for (const auto& scriptID : _script.getAllScriptFileIDs())
@@ -46,7 +48,7 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("No script_type META found on line 1 @ script \"" + scriptID + "\"");
+			Logger::throwWarning("No script_type META found on line 1 @ script \"" + scriptID + "\"");
 			_hasThrownError = true;
 			return;
 		}
@@ -69,7 +71,7 @@ void ScriptInterpreter::load()
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Entry point for " + scriptType + " defined multiple times!");
+				Logger::throwWarning("Entry point for " + scriptType + " defined multiple times!");
 				_hasThrownError = true;
 				return;
 			}
@@ -80,7 +82,7 @@ void ScriptInterpreter::load()
 		}
 		else
 		{
-			_fe3d.logger_throwWarning("No script_execution META found on line 2 @ script \"" + scriptID + "\"");
+			Logger::throwWarning("No script_execution META found on line 2 @ script \"" + scriptID + "\"");
 			_hasThrownError = true;
 			return;
 		}
@@ -89,19 +91,19 @@ void ScriptInterpreter::load()
 	// No entry point errors
 	if (_initEntryID == "" && !_initScriptIDs.empty())
 	{
-		_fe3d.logger_throwWarning("No script_execution_entry META defined for INIT script(s)!");
+		Logger::throwWarning("No script_execution_entry META defined for INIT script(s)!");
 		_hasThrownError = true;
 		return;
 	}
 	if (_updateEntryID == "" && !_updateScriptIDs.empty())
 	{
-		_fe3d.logger_throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
+		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
 	if (_destroyEntryID == "" && !_destroyScriptIDs.empty())
 	{
-		_fe3d.logger_throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
+		Logger::throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
 		_hasThrownError = true;
 		return;
 	}
@@ -182,14 +184,14 @@ void ScriptInterpreter::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 
 	// Default camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
 	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
+	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Enable default graphics
 	_fe3d.gfx_enableSpecularLighting();
@@ -249,13 +251,13 @@ void ScriptInterpreter::executeUpdate(bool debug)
 			}
 
 			// Print times
-			_fe3d.logger_throwDebug("Debugging results:");
+			Logger::throwDebug("Debugging results:");
 			for (const auto& [scriptID, time] : _debuggingTimes)
 			{
 				float percentage = (time / totalTime) * 100.0f;
-				_fe3d.logger_throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
+				Logger::throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
 			}
-			_fe3d.logger_throwDebug("");
+			Logger::throwDebug("");
 		}
 
 		_isExecutingUpdate = false;
@@ -291,7 +293,7 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_select("@@engineBackground");
 
 	// Reset camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0.0f, 0.0f);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 
 	// Reset audio
 	if (!_fe3d.misc_isSoundsEnabled())

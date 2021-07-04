@@ -1,4 +1,5 @@
 #include "billboard_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -107,17 +108,17 @@ void BillboardEditor::_updateBillboardCreation()
 						}
 						else // Name already exists
 						{
-							_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+							Logger::throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
 						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Billboard name cannot contain any spaces!");
+						Logger::throwWarning("Billboard name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Billboard name cannot contain '@'!");
+					Logger::throwWarning("Billboard name cannot contain '@'!");
 				}
 			}
 		}

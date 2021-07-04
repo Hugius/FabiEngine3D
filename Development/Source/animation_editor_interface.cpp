@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
 {
@@ -41,27 +42,27 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					}
 					else
 					{
-						_fe3d.logger_throwWarning(errorMessage + "model does not have required animation parts!");
+						Logger::throwWarning(errorMessage + "model does not have required animation parts!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning(errorMessage + "loop count is invalid!");
+					Logger::throwWarning(errorMessage + "loop count is invalid!");
 				}
 			}
 			else
 			{
-				_fe3d.logger_throwWarning(errorMessage + "animation already playing!");
+				Logger::throwWarning(errorMessage + "animation already playing!");
 			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "model not existing!");
+			Logger::throwWarning(errorMessage + "model not existing!");
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 }
 
@@ -86,7 +87,7 @@ bool AnimationEditor::isAnimationStarted(const string& animationID, const string
 	// Check if animation does not exist
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 	else
 	{
@@ -104,11 +105,11 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 	else if (!isAnimationStarted(animationID, modelID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning(errorMessage + "animation not started!");
 	}
 	else
 	{
@@ -126,11 +127,11 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 	else if (!isAnimationStarted(animationID, modelID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning(errorMessage + "animation not started!");
 	}
 	else
 	{
@@ -148,11 +149,11 @@ bool AnimationEditor::isAnimationFading(const string& animationID, const string&
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 	else if (!isAnimationStarted(animationID, modelID))
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+		Logger::throwWarning(errorMessage + "animation not started!");
 	}
 	else
 	{
@@ -176,7 +177,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 			// Check if animation is paused
 			if (isAnimationPaused(animationID, modelID))
 			{
-				_fe3d.logger_throwWarning(errorMessage + "animation already paused!");
+				Logger::throwWarning(errorMessage + "animation already paused!");
 			}
 			else
 			{
@@ -185,12 +186,12 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+			Logger::throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 }
 
@@ -212,17 +213,17 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 			}
 			else
 			{
-				_fe3d.logger_throwWarning(errorMessage + "animation already playing!");
+				Logger::throwWarning(errorMessage + "animation already playing!");
 			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+			Logger::throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 }
 
@@ -241,12 +242,12 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+			Logger::throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 }
 
@@ -272,7 +273,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 				// Check if animation is fading
 				if (isAnimationFading(animationID, modelID))
 				{
-					_fe3d.logger_throwWarning(errorMessage + "animation already fading!");
+					Logger::throwWarning(errorMessage + "animation already fading!");
 				}
 				else
 				{
@@ -281,17 +282,17 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 			}
 			else
 			{
-				_fe3d.logger_throwWarning(errorMessage + "animation not playing!");
+				Logger::throwWarning(errorMessage + "animation not playing!");
 			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+			Logger::throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		Logger::throwWarning(errorMessage + "animation not existing!");
 	}
 }
 
@@ -300,11 +301,11 @@ Animation* AnimationEditor::getAnimationData(const string& animationID, const st
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
 	{
-		_fe3d.logger_throwWarning(baseErrorMessage + "animation not existing!");
+		Logger::throwWarning(baseErrorMessage + "animation not existing!");
 	}
 	else if (!isAnimationStarted(animationID, modelID))
 	{
-		_fe3d.logger_throwWarning(baseErrorMessage + "animation not started!");
+		Logger::throwWarning(baseErrorMessage + "animation not started!");
 	}
 	else
 	{

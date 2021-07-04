@@ -1,4 +1,5 @@
 #include "environment_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -36,7 +37,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -60,7 +61,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -84,7 +85,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -108,7 +109,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -209,7 +210,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -234,7 +235,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -259,7 +260,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}
@@ -284,7 +285,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 					}
 				}
 			}

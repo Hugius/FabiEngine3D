@@ -1,5 +1,6 @@
 #include "settings_editor.hpp"
 #include "left_viewport_controller.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -44,7 +45,7 @@ void SettingsEditor::loadSettings()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::loadSettings()");
+		Logger::throwError("No current project loaded --> SettingsEditor::loadSettings()");
 	}
 
 	// Compose full file path
@@ -75,7 +76,7 @@ void SettingsEditor::loadSettings()
 	}
 	else
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"game_settings.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"game_settings.fe3d\" missing!");
 	}
 }
 
@@ -102,7 +103,7 @@ void SettingsEditor::save(bool newFile)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::save()");
+		Logger::throwError("No current project loaded --> SettingsEditor::save()");
 	}
 
 	// Compose full file path

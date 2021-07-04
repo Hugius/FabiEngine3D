@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "logger.hpp"
 
 void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 {
@@ -201,7 +202,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:") // FUNCTION
 	{
 		// Save current logger message count
-		auto loggerMessageCount = _fe3d.logger_getMessageCount();
+		auto loggerMessageCount = Logger::getMessageCount();
 
 		// Call function
 		auto values =

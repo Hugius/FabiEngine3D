@@ -1,5 +1,7 @@
 #include "script_editor.hpp"
 
+#include <windows.h>
+
 void ScriptEditor::_updateTextWriter()
 {
 	// User must be editing script file & no active GUI overlays

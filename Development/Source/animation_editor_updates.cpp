@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -114,12 +115,12 @@ void AnimationEditor::_updateAnimationCreation()
 					}
 					else // Name already exists
 					{
-						_fe3d.logger_throwWarning("Animation name \"" + newAnimationName + "\" already exists!");
+						Logger::throwWarning("Animation name \"" + newAnimationName + "\" already exists!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("Animation name cannot contain any spaces!");
+					Logger::throwWarning("Animation name cannot contain any spaces!");
 				}
 			}
 		}

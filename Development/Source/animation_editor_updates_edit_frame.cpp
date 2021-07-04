@@ -1,4 +1,5 @@
 #include "animation_editor.hpp"
+#include "logger.hpp"
 
 void AnimationEditor::_updateFrameScreen()
 {
@@ -201,7 +202,7 @@ void AnimationEditor::_updateFrameScreen()
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Part does not exist on current preview model!");
+						Logger::throwWarning("Part does not exist on current preview model!");
 					}
 				}
 			}

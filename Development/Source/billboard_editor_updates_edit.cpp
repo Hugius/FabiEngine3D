@@ -1,4 +1,5 @@
 #include "billboard_editor.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
 
@@ -161,7 +162,7 @@ void BillboardEditor::_updateBillboardEditing()
 							}
 							else
 							{
-								_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 							}
 						}
 					}
@@ -284,7 +285,7 @@ void BillboardEditor::_updateBillboardEditing()
 							}
 							else
 							{
-								_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
 							}
 						}
 					}

@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,7 +10,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadEditorSceneFromFile()");
+		Logger::throwError("No current project loaded --> SceneEditor::loadEditorSceneFromFile()");
 	}
 
 	// Check if scene directory still exists
@@ -17,11 +18,11 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
 	}
 	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
 	{
-		_fe3d.logger_throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	// Check if scene file exists
@@ -147,7 +148,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					if (_fe3d.modelEntity_isInstanced(previewID) && (modelID != previewID.substr(1)) ||
 						!_fe3d.modelEntity_isInstanced(previewID) && (modelID == previewID.substr(1)))
 					{
-						_fe3d.logger_throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
+						Logger::throwWarning("Model instancing with ID \"" + modelID + "\" differs from base model!");
 						continue;
 					}
 				}
@@ -501,10 +502,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
+		Logger::throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
 	}
 }

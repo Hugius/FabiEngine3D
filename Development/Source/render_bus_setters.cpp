@@ -451,9 +451,9 @@ void RenderBus::setShadowFrameRenderingEnabled(bool value)
 	_isShadowFrameRenderingEnabled = value;
 }
 
-void RenderBus::setSoftShadowingEnabled(bool value)
+void RenderBus::setLightedShadowingEnabled(bool value)
 {
-	_isSoftShadowingEnabled = value;
+	_isLightedShadowingEnabled = value;
 }
 
 void RenderBus::setTriangleCountingEnabled(bool value)

@@ -231,9 +231,9 @@ const bool FabiEngine3D::gfx_isShadowFollowingCamera()
 	return _core->_shadowGenerator.isFollowingCamera();
 }
 
-const bool FabiEngine3D::gfx_isSoftShadowingEnabled()
+const bool FabiEngine3D::gfx_isLightedShadowingEnabled()
 {
-	return _core->_renderBus.isSoftShadowingEnabled();
+	return _core->_renderBus.isLightedShadowingEnabled();
 }
 
 const float FabiEngine3D::gfx_getBloomIntensity()

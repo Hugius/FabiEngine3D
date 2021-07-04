@@ -339,7 +339,7 @@ void SceneEditor::saveEditorSceneToFile()
 		Vec3 position = _fe3d.gfx_getShadowEye();
 		Vec3 center = _fe3d.gfx_getShadowCenter();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
+		bool isLighted = _fe3d.gfx_isLightedShadowingEnabled();
 		int interval = _fe3d.gfx_getShadowInterval();
 
 		// Write data
@@ -350,7 +350,7 @@ void SceneEditor::saveEditorSceneToFile()
 			_fe3d.misc_vec2str(position) << " " <<
 			_fe3d.misc_vec2str(center) << " " <<
 			isFollowingCamera << " " <<
-			isSoftShadowed << " " <<
+			isLighted << " " <<
 			interval << std::endl;
 	}
 

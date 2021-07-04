@@ -1,5 +1,6 @@
 #include "shadow_generator.hpp"
 #include "render_bus.hpp"
+#include "configuration.hpp"
 
 ShadowGenerator::ShadowGenerator()
 {
@@ -67,7 +68,7 @@ Matrix44 ShadowGenerator::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float s
 {
 	// Matrix generation
 	Matrix44 lightView = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
-	Matrix44 lightProj = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, 10.0f, reach);
+	Matrix44 lightProj = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, Config::DEFAULT_CAMERA_NEAR, reach);
 
 	return (lightProj * lightView);
 }

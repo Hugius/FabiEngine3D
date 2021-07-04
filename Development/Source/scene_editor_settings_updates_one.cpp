@@ -99,7 +99,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Temporary values
 		bool isEnabled = _fe3d.gfx_isShadowsEnabled();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
+		bool isLighted = _fe3d.gfx_isLightedShadowingEnabled();
 		float size = _fe3d.gfx_getShadowSize();
 		float lightness = _fe3d.gfx_getShadowLightness();
 		Vec3 position = _fe3d.gfx_getShadowEye();
@@ -138,9 +138,9 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			{
 				isFollowingCamera = !isFollowingCamera;
 			}
-			else if (screen->getButton("soft")->isHovered())
+			else if (screen->getButton("lighted")->isHovered())
 			{
-				isSoftShadowed = !isSoftShadowed;
+				isLighted = !isLighted;
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
@@ -171,7 +171,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 		// Button text contents
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
-		screen->getButton("soft")->changeTextContent(isSoftShadowed ? "Soft: ON" : "Soft: OFF");
+		screen->getButton("lighted")->changeTextContent(isLighted ? "Lighted: ON" : "Lighted : OFF");
 
 		// Lightness value
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
@@ -192,7 +192,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Enable shadows
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
+			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isLighted, interval);
 		}
 
 		// Update buttons hoverability
@@ -200,7 +200,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("center")->setHoverable(isEnabled);
 		screen->getButton("follow")->setHoverable(isEnabled);
-		screen->getButton("soft")->setHoverable(isEnabled);
+		screen->getButton("lighted")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);
 		screen->getButton("interval")->setHoverable(isEnabled && isFollowingCamera);
 	}

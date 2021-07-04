@@ -71,7 +71,7 @@ uniform bool u_isSpotLightEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_isShadowFrameRenderEnabled;
-uniform bool u_isSoftShadowingEnabled;
+uniform bool u_isLightedShadowingEnabled;
 uniform bool u_isSpecularLightEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
@@ -110,7 +110,7 @@ void main()
 	// Calculate lighting
     float shadow		   = getShadowValue();
 	vec3 ambient		   = getAmbientLighting();
-	vec3 directional	   = getDirectionalLighting(normal, u_isSoftShadowingEnabled ? true : (shadow == 1.0f));
+	vec3 directional	   = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
 	vec3 point			   = getPointLighting(normal);
 	vec3 spot			   = getSpotLighting(normal);
 
@@ -471,7 +471,7 @@ float getShadowValue()
 			}
 
 			// Return shadow value
-			if(u_isSoftShadowingEnabled)
+			if(u_isLightedShadowingEnabled)
 			{
 				return mix(shadow, 1.0f, alpha);
 			}

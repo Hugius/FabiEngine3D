@@ -112,7 +112,7 @@ public:
 	void setAabbFrameRenderingEnabled(bool value);
 	void setDebugRenderingEnabled(bool value);
 	void setShadowFrameRenderingEnabled(bool value);
-	void setSoftShadowingEnabled(bool value);
+	void setLightedShadowingEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 
@@ -220,7 +220,7 @@ public:
 	const bool isWireframeRenderingEnabled()   const;
 	const bool isAabbFrameRenderingEnabled()   const;
 	const bool isShadowFrameRenderingEnabled() const;
-	const bool isSoftShadowingEnabled()		   const;
+	const bool isLightedShadowingEnabled()	   const;
 	const bool isDebugRenderingEnabled()       const;
 	const bool isTriangleCountingEnabled()	   const;
 	const bool isDofDynamic()				   const;
@@ -330,7 +330,7 @@ private:
 	bool _isWireframeRenderingEnabled   = false;
 	bool _isAabbFrameRenderingEnabled   = false;
 	bool _isShadowFrameRenderingEnabled	= false;
-	bool _isSoftShadowingEnabled		= false;
+	bool _isLightedShadowingEnabled		= false;
 	bool _isDebugRenderingEnabled		= false;
 	bool _isTriangleCountingEnabled		= false;
 	bool _isDofDynamic					= false;

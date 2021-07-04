@@ -253,7 +253,7 @@ Matrix44 Matrix44::createOrtho(float left, float right, float bottom, float top,
 
 	newMatrix.m[0][0] = 2.0f / (right - left);
 	newMatrix.m[1][1] = 2.0f / (top - bottom);
-	newMatrix.m[2][2] = -(2.0f / (farZ - nearZ));
+	newMatrix.m[2][2] = -2.0f / (farZ - nearZ);
 	newMatrix.m[3][0] = -((right + left) / (right - left));
 	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
 	newMatrix.m[3][2] = -((farZ + nearZ) / (farZ - nearZ));

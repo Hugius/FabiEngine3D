@@ -528,6 +528,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+				_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 				_fe3d.billboardEntity_setVisible("@@lightSource", true);
 			}
 			else if (entityType == "POINT_LIGHT")

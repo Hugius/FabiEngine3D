@@ -67,14 +67,12 @@ void TerrainEntityRenderer::bind()
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_DEPTH_CLAMP_NV);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void TerrainEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_DEPTH_CLAMP_NV);
 	glActiveTexture(GL_TEXTURE9);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	_shader.unbind();

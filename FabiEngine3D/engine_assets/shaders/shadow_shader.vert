@@ -19,7 +19,6 @@ uniform float u_maxHeight;
 uniform bool u_isInstanced;
 
 // Out variables
-out vec3 f_pos;
 out vec2 f_uv;
 
 void main()
@@ -32,5 +31,4 @@ void main()
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
 	
 	f_uv = vec2(v_uv.x, -v_uv.y);
-	f_pos = v_pos;
 }

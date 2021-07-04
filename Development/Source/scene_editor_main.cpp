@@ -78,6 +78,7 @@ void SceneEditor::load()
 	const string texturePath = "engine_assets\\textures\\light_source.png";
 	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
 	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
 	_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);

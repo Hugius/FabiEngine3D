@@ -71,7 +71,6 @@ void ModelEntityRenderer::bind()
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_DEPTH_CLAMP_NV);
 	glDepthFunc(GL_LEQUAL);
 
 	// Alpha blending
@@ -106,7 +105,6 @@ void ModelEntityRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_DEPTH_CLAMP_NV);
 
 	// Unbind shader
 	_shader.unbind();

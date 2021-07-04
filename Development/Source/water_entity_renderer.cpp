@@ -45,7 +45,6 @@ void WaterEntityRenderer::bind()
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_DEPTH_CLAMP_NV);
 	glDepthFunc(GL_LEQUAL);
 
 	// Alpha blending
@@ -56,7 +55,6 @@ void WaterEntityRenderer::bind()
 void WaterEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_DEPTH_CLAMP_NV);
 	glDisable(GL_BLEND);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);

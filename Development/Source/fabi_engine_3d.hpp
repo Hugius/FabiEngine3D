@@ -268,6 +268,7 @@ public:
 	void modelEntity_setSkyReflective(const string& ID, bool enabled);
 	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setSceneReflective(const string& ID, bool enabled);
+	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setShadowed(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
@@ -302,6 +303,7 @@ public:
 	const bool modelEntity_isSpecularLighted(const string& ID);
 	const bool modelEntity_isSceneReflective(const string& ID);
 	const bool modelEntity_isShadowed(const string& ID);
+	const bool modelEntity_isReflected(const string& ID);
 	const bool modelEntity_isStaticToCamera(const string& ID);
 	const bool modelEntity_isWireframed(const string& ID);
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
@@ -353,8 +355,8 @@ public:
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
 	void billboardEntity_setDepthMapIncluded(const string& ID, bool enabled);
-	void billboardEntity_setReflected(const string& ID, bool enabled);
 	void billboardEntity_setShadowed(const string& ID, bool enabled);
+	void billboardEntity_setReflected(const string& ID, bool enabled);
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
@@ -368,8 +370,8 @@ public:
 	const bool billboardEntity_isFacingCameraX(const string& ID);
 	const bool billboardEntity_isFacingCameraY(const string& ID);
 	const bool billboardEntity_isDepthMapIncluded(const string& ID);
-	const bool billboardEntity_isReflected(const string& ID);
 	const bool billboardEntity_isShadowed(const string& ID);
+	const bool billboardEntity_isReflected(const string& ID);
 	const bool billboardEntity_isInstanced(const string& ID);
 	const Vec3 billboardEntity_getPosition(const string& ID);
 	const Vec3 billboardEntity_getRotation(const string& ID);

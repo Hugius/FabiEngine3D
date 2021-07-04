@@ -201,6 +201,11 @@ const bool ModelEntity::isShadowed() const
 	return _isShadowed;
 }
 
+const bool ModelEntity::isReflected() const
+{
+	return _isReflected;
+}
+
 const bool ModelEntity::hasDiffuseMap() const
 {
 	return !_diffuseMaps.empty();

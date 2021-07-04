@@ -384,14 +384,14 @@ const bool BillboardEntity::isDepthMapIncluded() const
 	return _isDepthMapIncluded;
 }
 
-const bool BillboardEntity::isReflected() const
-{
-	return _isReflected;
-}
-
 const bool BillboardEntity::isShadowed() const
 {
 	return _isShadowed;
+}
+
+const bool BillboardEntity::isReflected() const
+{
+	return _isReflected;
 }
 
 const bool BillboardEntity::hasDiffuseMap() const

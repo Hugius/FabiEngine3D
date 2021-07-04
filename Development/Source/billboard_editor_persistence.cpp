@@ -165,8 +165,8 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 
 			// Miscellaneous
 			_fe3d.billboardEntity_setLightness(billboardID, lightness);
-			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
+			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
 		}
 
 		// Close file

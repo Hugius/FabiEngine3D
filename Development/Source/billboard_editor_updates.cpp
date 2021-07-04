@@ -263,7 +263,7 @@ void BillboardEditor::_updateCamera()
 
 			// Enable shadows
 			_fe3d.gfx_enableShadows(Vec3(cameraLookatPosition + Vec3(cameraDistance * 2.0f)),
-				cameraLookatPosition, cameraDistance * 4.0f, cameraDistance * 8.0f, 0.5f, false, true, 0);
+				cameraLookatPosition, cameraDistance * 4.0f, cameraDistance * 8.0f, 0.5f, false, false, 0);
 		}
 		else
 		{

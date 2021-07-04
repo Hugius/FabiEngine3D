@@ -54,6 +54,7 @@ public:
 	void setSceneReflective(bool value);
 	void setSpecularLighted(bool value);
 	void setShadowed(bool value);
+	void setReflected(bool value);
 	void setCameraStatic(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
@@ -104,6 +105,7 @@ public:
 	const bool isSceneReflective() const;
 	const bool isSpecularLighted() const;
 	const bool isShadowed() const;
+	const bool isReflected() const;
 	const bool isCameraStatic() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
@@ -165,6 +167,7 @@ private:
 	bool _isSceneReflective  = false;
 	bool _isSpecularLighted  = false;
 	bool _isShadowed         = true;
+	bool _isReflected		 = false;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
 	bool _wireframed		 = false;

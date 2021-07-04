@@ -190,6 +190,11 @@ const bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isShadowed();
 }
 
+const bool FabiEngine3D::modelEntity_isReflected(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->isReflected();
+}
+
 const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
@@ -469,6 +474,11 @@ void FabiEngine3D::modelEntity_setColor(const string& ID, Vec3 color, const stri
 void FabiEngine3D::modelEntity_setSceneReflective(const string& ID, bool enabled)
 {
 	_core->_modelEntityManager.getEntity(ID)->setSceneReflective(enabled);
+}
+
+void FabiEngine3D::modelEntity_setReflected(const string& ID, bool enabled)
+{
+	_core->_modelEntityManager.getEntity(ID)->setReflected(enabled);
 }
 
 const vector<string> FabiEngine3D::modelEntity_getAllIDs()

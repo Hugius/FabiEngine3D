@@ -377,6 +377,11 @@ void ModelEntity::setShadowed(bool value)
 	_isShadowed = value;
 }
 
+void ModelEntity::setReflected(bool value)
+{
+	_isReflected = value;
+}
+
 void ModelEntity::setCameraStatic(bool value)
 {
 	_isCameraStatic = value;

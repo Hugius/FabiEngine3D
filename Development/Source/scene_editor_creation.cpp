@@ -386,8 +386,8 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true);
 
 	// Miscellaneous
-	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
 	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
+	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
 

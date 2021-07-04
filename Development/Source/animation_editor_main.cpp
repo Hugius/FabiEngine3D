@@ -70,6 +70,7 @@ void AnimationEditor::load()
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
@@ -100,6 +101,7 @@ void AnimationEditor::unload()
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);

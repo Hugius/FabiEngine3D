@@ -55,7 +55,7 @@ void RightViewportController::initialize()
 	modelEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
 	modelEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move Cam"), TH), "Move Cam", black, false);
 	modelEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
-	modelEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref Box"), TH), "Ref Box", black, false);
+	modelEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Reference Box"), TH), "Reference Box", black, false);
 	modelEditorScreen->addTextfield("f", Vec2(-0.5f, 0.075f), Vec2(CW("Wireframe"), TH), "Wireframe", black, false);
 	modelEditorScreen->addTextfield("space", Vec2(-0.5f, -0.125f), Vec2(CW("Move Up"), TH), "Move Up", black, false);
 	modelEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.325f), Vec2(CW("Move Down"), TH), "Move Down", black, false);

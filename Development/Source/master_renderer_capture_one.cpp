@@ -38,31 +38,31 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 
 		// Only if scene reflections enabled
 		vector<string> savedModelEntityIDs;
+		vector<string> savedBillboardEntityIDs;
 		if (sceneReflectionsNeeded)
 		{
 			// Iterate through all MODEL entities
-			for (const auto& [keyID, modelEntity]: _entityBus->getModelEntities())
+			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Check if necessary to hide
-				if (modelEntity->isSceneReflective() && modelEntity->isVisible())
+				if ((entity->isSceneReflective() || !entity->isReflected()) && entity->isVisible())
 				{
 					// Hide MODEL entity
-					modelEntity->setVisible(false);
-					savedModelEntityIDs.push_back(modelEntity->getID());
+					entity->setVisible(false);
+					savedModelEntityIDs.push_back(entity->getID());
 				}
 			}
-		}
 
-		// Iterate through all BILLBOARD entities
-		vector<string> savedBillboardEntityIDs;
-		for (const auto& [keyID, billboardEntity] : _entityBus->getBillboardEntities())
-		{
-			// Check if necessary to hide
-			if (!billboardEntity->isReflected() && billboardEntity->isVisible())
+			// Iterate through all BILLBOARD entities
+			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
-				// Hide BILLBOARD entity
-				billboardEntity->setVisible(false);
-				savedBillboardEntityIDs.push_back(billboardEntity->getID());
+				// Check if necessary to hide
+				if (!entity->isReflected() && entity->isVisible())
+				{
+					// Hide BILLBOARD entity
+					entity->setVisible(false);
+					savedBillboardEntityIDs.push_back(entity->getID());
+				}
 			}
 		}
 
@@ -124,32 +124,32 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		if (sceneReflectionsNeeded)
 		{
 			// Iterate through all MODEL entities
-			for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities())
+			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Iterate through all saved MODEL entities
-				for (const auto& reflectiveID : savedModelEntityIDs)
+				for (const auto& savedID : savedModelEntityIDs)
 				{
 					// Check if IDs match
-					if (modelEntity->getID() == reflectiveID)
+					if (entity->getID() == savedID)
 					{
 						// Show MODEL entity again
-						modelEntity->setVisible(true);
+						entity->setVisible(true);
 					}
 				}
 			}
-		}
 
-		// Iterate through all BILLBOARD entities
-		for (const auto& [keyID, billboardEntity] : _entityBus->getBillboardEntities())
-		{
-			// Iterate through all saved BILLBOARD entities
-			for (const auto& savedID : savedBillboardEntityIDs)
+			// Iterate through all BILLBOARD entities
+			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
-				// Check if IDs match
-				if (billboardEntity->getID() == savedID)
+				// Iterate through all saved BILLBOARD entities
+				for (const auto& savedID : savedBillboardEntityIDs)
 				{
-					// Show BILLBOARD entity again
-					billboardEntity->setVisible(true);
+					// Check if IDs match
+					if (entity->getID() == savedID)
+					{
+						// Show BILLBOARD entity again
+						entity->setVisible(true);
+					}
 				}
 			}
 		}

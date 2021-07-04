@@ -79,15 +79,15 @@ void BillboardEditor::_updateBillboardEditing()
 						isFacingY = !isFacingY;
 						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
 					}
-					else if (screen->getButton("isReflected")->isHovered())
-					{
-						isReflected = !isReflected;
-						_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
-					}
 					else if (screen->getButton("isShadowed")->isHovered())
 					{
 						isShadowed = !isShadowed;
 						_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
+					}
+					else if (screen->getButton("isReflected")->isHovered())
+					{
+						isReflected = !isReflected;
+						_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
 					}
 				}
 

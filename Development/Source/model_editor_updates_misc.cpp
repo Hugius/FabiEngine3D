@@ -98,6 +98,6 @@ void ModelEditor::_updateCamera()
 
 		// Enable shadows
 		_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(_cameraDistance * 2.0f)),
-			_cameraLookatPosition, _cameraDistance * 4.0f, _cameraDistance * 8.0f, 0.5f, false, true, 0);
+			_cameraLookatPosition, _cameraDistance * 4.0f, _cameraDistance * 8.0f, 0.5f, false, false, 0);
 	}
 }

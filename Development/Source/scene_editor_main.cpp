@@ -68,6 +68,7 @@ void SceneEditor::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.modelEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
 	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
@@ -80,11 +81,13 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
+	_fe3d.billboardEntity_setReflected("@@lightSource", false);
 	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
 	_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
 	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_POINTLIGHT_ID, false);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

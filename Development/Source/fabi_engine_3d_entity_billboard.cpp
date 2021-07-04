@@ -191,14 +191,14 @@ void FabiEngine3D::billboardEntity_setDepthMapIncluded(const string& ID, bool en
 	_core->_billboardEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
-void FabiEngine3D::billboardEntity_setReflected(const string& ID, bool enabled)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setReflected(enabled);
-}
-
 void FabiEngine3D::billboardEntity_setShadowed(const string& ID, bool enabled)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setShadowed(enabled);
+}
+
+void FabiEngine3D::billboardEntity_setReflected(const string& ID, bool enabled)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setReflected(enabled);
 }
 
 void FabiEngine3D::billboardEntity_setMinHeight(const string& ID, float height)
@@ -231,14 +231,14 @@ const bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
-const bool FabiEngine3D::billboardEntity_isReflected(const string& ID)
-{
-	return _core->_billboardEntityManager.getEntity(ID)->isReflected();
-}
-
 const bool FabiEngine3D::billboardEntity_isShadowed(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isShadowed();
+}
+
+const bool FabiEngine3D::billboardEntity_isReflected(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isReflected();
 }
 
 const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)

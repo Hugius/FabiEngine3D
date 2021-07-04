@@ -29,7 +29,7 @@ void ShadowRenderer::unbind()
 
 void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->isVisible() && !entity->getRenderBuffers().empty() && entity->isShadowed())
 	{
 		// Face culling
 		if (entity->isFaceCulled())

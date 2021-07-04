@@ -106,7 +106,7 @@ void ModelEditor::_updateModelEditingSize()
 		}
 
 		// Button text contents
-		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF");
+		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Resize: ON" : "Resize: OFF");
 		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
 	}
 }

@@ -70,6 +70,7 @@ void SceneEditor::_updateSoundPlacing()
 
 					// Add soundEntity
 					_fe3d.modelEntity_add("@speaker_" + newID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID), newPosition, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+					_fe3d.modelEntity_setShadowed("@speaker_" + newID, false);
 					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + newID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 					_fe3d.soundEntity_add(newID, _fe3d.soundEntity_getFilePath(_currentPreviewSoundID));
 					_fe3d.soundEntity_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);

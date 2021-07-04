@@ -70,6 +70,7 @@ uniform bool u_isNormalMapped;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
+uniform bool u_isShadowed;
 uniform bool u_isShadowFrameRenderEnabled;
 uniform bool u_isLightedShadowingEnabled;
 uniform bool u_isAmbientLightEnabled;
@@ -317,7 +318,7 @@ float getSpecularValue(vec3 position, vec3 normal)
 // Calculate shadow lighting
 float getShadowValue()
 {
-	if(u_isShadowsEnabled)
+	if(u_isShadowsEnabled && u_isShadowed)
 	{
         float halfSize = u_shadowAreaSize / 2.0f;
 
@@ -376,14 +377,7 @@ float getShadowValue()
 			}
 
 			// Return shadow value
-			if(u_isLightedShadowingEnabled)
-			{
-				return mix(shadow, 1.0f, alpha);
-			}
-			else
-			{
-				return shadow;
-			}
+			return mix(shadow, 1.0f, alpha);
 		}
 
 		// No shadow

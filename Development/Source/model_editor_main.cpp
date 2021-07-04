@@ -68,8 +68,8 @@ void ModelEditor::_loadGUI()
 
 	// Left-viewport: mainWindow - modelEditorMenuSize
 	leftWindow->addScreen("modelEditorMenuSize");
-	leftWindow->getScreen("modelEditorMenuSize")->addButton("size", Vec2(0.0f, 0.63f), Vec2(CW("Mesh size"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Mesh size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResize", Vec2(0.0f, 0.21f), Vec2(CW("Mesh resize: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Mesh resize: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuSize")->addButton("size", Vec2(0.0f, 0.63f), Vec2(CW("Size"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResize", Vec2(0.0f, 0.21f), Vec2(CW("Resize: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Resize: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuSize")->addButton("direction", Vec2(0.0f, -0.21f), Vec2(CW("Direction: X"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Direction: X", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuSize")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 

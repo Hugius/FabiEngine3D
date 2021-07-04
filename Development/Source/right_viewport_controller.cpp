@@ -29,8 +29,8 @@ void RightViewportController::initialize()
 	mainMenuScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	mainMenuScreen->addRectangle("mouseLeft", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
 	mainMenuScreen->addRectangle("esc", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "esc.png", false);
-	mainMenuScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("General controls"), TH), "General controls", white);
-	mainMenuScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move cursor"), TH), "Move cursor", black, false);
+	mainMenuScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("General Controls"), TH), "General Controls", white);
+	mainMenuScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move Cursor"), TH), "Move Cursor", black, false);
 	mainMenuScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.475f), Vec2(CW("Confirm"), TH), "Confirm", black, false);
 	mainMenuScreen->addTextfield("esc", Vec2(-0.5f, 0.275f), Vec2(CW("Exit"), TH), "Exit", black, false);
 
@@ -38,9 +38,9 @@ void RightViewportController::initialize()
 	auto environmentditorScreen = rightWindow->getScreen("environmentEditorControls");
 	environmentditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
 	environmentditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Look"), TH), "Look", black, false);
-	environmentditorScreen->addTextfield("mouseMiddle", Vec2(-0.5f, 0.475f), Vec2(CW("Rotate cam"), TH), "Rotate cam", black, false);
-	environmentditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.275f), Vec2(CW("Toggle cam"), TH), "Toggle cam", black, false);
-	environmentditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug render"), TH), "Debug render", black, false);
+	environmentditorScreen->addTextfield("mouseMiddle", Vec2(-0.5f, 0.475f), Vec2(CW("Rotate Cam"), TH), "Rotate Cam", black, false);
+	environmentditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.275f), Vec2(CW("Toggle Cam"), TH), "Toggle Cam", black, false);
+	environmentditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
 	environmentditorScreen->addTextfield("f", Vec2(-0.5f, -0.125f), Vec2(CW("Wireframe"), TH), "Wireframe", black, false);
 	environmentditorScreen->addTextfield("esc", Vec2(-0.5f, -0.325f), Vec2(CW("Back"), TH), "Back", black, false);
 	environmentditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
@@ -53,14 +53,14 @@ void RightViewportController::initialize()
 	// Model editor
 	auto modelEditorScreen = rightWindow->getScreen("modelEditorControls");
 	modelEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
-	modelEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move cam"), TH), "Move cam", black, false);
-	modelEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug render"), TH), "Debug render", black, false);
-	modelEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref box"), TH), "Ref box", black, false);
+	modelEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move Cam"), TH), "Move Cam", black, false);
+	modelEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
+	modelEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref Box"), TH), "Ref Box", black, false);
 	modelEditorScreen->addTextfield("f", Vec2(-0.5f, 0.075f), Vec2(CW("Wireframe"), TH), "Wireframe", black, false);
-	modelEditorScreen->addTextfield("space", Vec2(-0.5f, -0.125f), Vec2(CW("Move up"), TH), "Move up", black, false);
-	modelEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.325f), Vec2(CW("Move down"), TH), "Move down", black, false);
-	modelEditorScreen->addTextfield("up", Vec2(-0.5f, -0.525f), Vec2(CW("200% speed"), TH), "200% speed", black, false);
-	modelEditorScreen->addTextfield("down", Vec2(-0.5f, -0.725f), Vec2(CW("50% speed"), TH), "50% speed", black, false);
+	modelEditorScreen->addTextfield("space", Vec2(-0.5f, -0.125f), Vec2(CW("Move Up"), TH), "Move Up", black, false);
+	modelEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.325f), Vec2(CW("Move Down"), TH), "Move Down", black, false);
+	modelEditorScreen->addTextfield("up", Vec2(-0.5f, -0.525f), Vec2(CW("200% Speed"), TH), "200% Speed", black, false);
+	modelEditorScreen->addTextfield("down", Vec2(-0.5f, -0.725f), Vec2(CW("50% Speed"), TH), "50% Speed", black, false);
 	modelEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.925f), Vec2(CW("Back"), TH), "Back", black, false);
 	modelEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	modelEditorScreen->addRectangle("h", Vec2(-0.975f, 0.45f), Vec2(0.45f, 0.15f), "h.png", false);
@@ -75,9 +75,9 @@ void RightViewportController::initialize()
 	// Billboard editor
 	auto billboardEditorScreen = rightWindow->getScreen("billboardEditorControls");
 	billboardEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
-	billboardEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Rotate cam"), TH), "Rotate cam", black, false);
-	billboardEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug render"), TH), "Debug render", black, false);
-	billboardEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref box"), TH), "Ref box", black, false);
+	billboardEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Rotate Cam"), TH), "Rotate Cam", black, false);
+	billboardEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
+	billboardEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref Box"), TH), "Ref Box", black, false);
 	billboardEditorScreen->addTextfield("esc", Vec2(-0.5f, 0.075f), Vec2(CW("Back"), TH), "Back", black, false);
 	billboardEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	billboardEditorScreen->addRectangle("h", Vec2(-0.975f, 0.45f), Vec2(0.45f, 0.15f), "h.png", false);
@@ -89,13 +89,13 @@ void RightViewportController::initialize()
 	sceneEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
 	sceneEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Look/Move"), TH), "Look/Move", black, false);
 	sceneEditorScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.475f), Vec2(CW("Place"), TH), "Place", black, false);
-	sceneEditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.275f), Vec2(CW("Toggle cam"), TH), "Toggle cam", black, false);
-	sceneEditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug render"), TH), "Debug render", black, false);
+	sceneEditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.275f), Vec2(CW("Toggle Cam"), TH), "Toggle Cam", black, false);
+	sceneEditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
 	sceneEditorScreen->addTextfield("f", Vec2(-0.5f, -0.125f), Vec2(CW("Wireframe"), TH), "Wireframe", black, false);
 	sceneEditorScreen->addTextfield("b", Vec2(-0.5f, -0.325f), Vec2(CW("Toggle AABB"), TH), "Toggle AABB", black, false);
-	sceneEditorScreen->addTextfield("wasd", Vec2(-0.6f, -0.67f), Vec2(CW("XZ movement"), TH), "XZ movement", black, false);
-	sceneEditorScreen->addTextfield("space", Vec2(-0.5f, -0.8f), Vec2(CW("Move up"), TH), "Move up", black, false);
-	sceneEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.975f), Vec2(CW("Move down"), TH), "Move down", black, false);
+	sceneEditorScreen->addTextfield("wasd", Vec2(-0.6f, -0.67f), Vec2(CW("XZ Movement"), TH), "XZ Movement", black, false);
+	sceneEditorScreen->addTextfield("space", Vec2(-0.5f, -0.8f), Vec2(CW("Move Up"), TH), "Move Up", black, false);
+	sceneEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.975f), Vec2(CW("Move Down"), TH), "Move Down", black, false);
 	sceneEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	sceneEditorScreen->addRectangle("mouseLeft", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
 	sceneEditorScreen->addRectangle("mouseRight", Vec2(-1.1f, 0.25f), Vec2(0.6f, 0.15f), "mouse_right.png", false);
@@ -112,13 +112,13 @@ void RightViewportController::initialize()
 	// Animation editor
 	auto animationEditorScreen = rightWindow->getScreen("animationEditorControls");
 	animationEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
-	animationEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move cam"), TH), "Move cam", black, false);
-	animationEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug render"), TH), "Debug render", black, false);
+	animationEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move Cam"), TH), "Move Cam", black, false);
+	animationEditorScreen->addTextfield("h", Vec2(-0.5f, 0.475f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
 	animationEditorScreen->addTextfield("f", Vec2(-0.5f, 0.275f), Vec2(CW("Wireframe"), TH), "Wireframe", black, false);
-	animationEditorScreen->addTextfield("space", Vec2(-0.5f, 0.075f), Vec2(CW("Move up"), TH), "Move up", black, false);
-	animationEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.125f), Vec2(CW("Move down"), TH), "Move down", black, false);
-	animationEditorScreen->addTextfield("up", Vec2(-0.5f, -0.325f), Vec2(CW("200% speed"), TH), "200% speed", black, false);
-	animationEditorScreen->addTextfield("down", Vec2(-0.5f, -0.525f), Vec2(CW("50% speed"), TH), "50% speed", black, false);
+	animationEditorScreen->addTextfield("space", Vec2(-0.5f, 0.075f), Vec2(CW("Move Up"), TH), "Move Up", black, false);
+	animationEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.125f), Vec2(CW("Move Down"), TH), "Move Down", black, false);
+	animationEditorScreen->addTextfield("up", Vec2(-0.5f, -0.325f), Vec2(CW("200% Speed"), TH), "200% Speed", black, false);
+	animationEditorScreen->addTextfield("down", Vec2(-0.5f, -0.525f), Vec2(CW("50% Speed"), TH), "50% Speed", black, false);
 	animationEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.725f), Vec2(CW("Back"), TH), "Back", black, false);
 	animationEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	animationEditorScreen->addRectangle("h", Vec2(-0.975f, 0.45f), Vec2(0.45f, 0.15f), "h.png", false);
@@ -132,10 +132,10 @@ void RightViewportController::initialize()
 	// Script editor
 	auto scriptEditorScreen = rightWindow->getScreen("scriptEditorControls");
 	scriptEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
-	scriptEditorScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(CW("Place cursor"), TH), "Place cursor", black, false);
-	scriptEditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.475f), Vec2(CW("Select line"), TH), "Select line", black, false);
-	scriptEditorScreen->addTextfield("enter", Vec2(-0.5f, 0.275f), Vec2(CW("Next line"), TH), "Next line", black, false);
-	scriptEditorScreen->addTextfield("backspace", Vec2(-0.5f, 0.075f), Vec2(CW("Remove char"), TH), "Remove char", black, false);
+	scriptEditorScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(CW("Place Cursor"), TH), "Place Cursor", black, false);
+	scriptEditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.475f), Vec2(CW("Select Line"), TH), "Select Line", black, false);
+	scriptEditorScreen->addTextfield("enter", Vec2(-0.5f, 0.275f), Vec2(CW("Next Line"), TH), "Next Line", black, false);
+	scriptEditorScreen->addTextfield("backspace", Vec2(-0.5f, 0.075f), Vec2(CW("Remove Char"), TH), "Remove Char", black, false);
 	scriptEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.125f), Vec2(CW("Back"), TH), "Back", black, false);
 	scriptEditorScreen->addTextfield("arrows", Vec2(-0.525f, -0.47f), Vec2(CW("Navigation"), TH), "Navigation", black, false);
 	scriptEditorScreen->addTextfield("ctrlC", Vec2(0.0f, -0.625f), Vec2(CW("Copy"), TH), "Copy", black, false);

@@ -101,7 +101,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(100))
 	{
 		string textID = _statsScreen->getTextfield("openglVersion")->getEntityID();
-		string text = "OpenGL version: " + _fe3d.misc_getOpenglVersion();
+		string text = "OpenGL Version: " + _fe3d.misc_getOpenglVersion();
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -109,7 +109,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(1))
 	{
 		string textID = _statsScreen->getTextfield("cameraPosition")->getEntityID();
-		string text = "Camera position: " + 
+		string text = "Camera Position: " + 
 			to_string(static_cast<int>(_fe3d.camera_getPosition().x)) + " " +
 			to_string(static_cast<int>(_fe3d.camera_getPosition().y)) + " " +
 			to_string(static_cast<int>(_fe3d.camera_getPosition().z));
@@ -120,7 +120,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(1))
 	{
 		string textID = _statsScreen->getTextfield("cameraYawPitch")->getEntityID();
-		string text = "Camera yaw & pitch: " + 
+		string text = "Camera Yaw + Pitch: " + 
 			to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " + to_string(static_cast<int>(_fe3d.camera_getPitch()));
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
@@ -129,7 +129,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(1))
 	{
 		string textID = _statsScreen->getTextfield("cursorPosition")->getEntityID();
-		string text = "Raycast position: " +
+		string text = "Raycast Position: " +
 			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().x)) + " " +
 			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().y)) + " " +
 			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().z));
@@ -148,7 +148,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("modelEntityCount")->getEntityID();
-		string text = "Model entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
+		string text = "Model Entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -156,7 +156,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("billboardEntityCount")->getEntityID();
-		string text = "Billboard entities: " + to_string(_fe3d.billboardEntity_getAllIDs().size());
+		string text = "Billboard Entities: " + to_string(_fe3d.billboardEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -164,7 +164,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("lightEntityCount")->getEntityID();
-		string text = "Light entities: " + to_string(_fe3d.lightEntity_getAllIDs().size());
+		string text = "Light Entities: " + to_string(_fe3d.lightEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -172,7 +172,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("aabbEntityCount")->getEntityID();
-		string text = "AABB entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
+		string text = "AABB Entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -180,7 +180,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(10))
 	{
 		string textID = _statsScreen->getTextfield("imageEntityCount")->getEntityID();
-		string text = "GUI entities: " + to_string(_fe3d.imageEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
+		string text = "GUI Entities: " + to_string(_fe3d.imageEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

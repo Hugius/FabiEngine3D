@@ -9,7 +9,7 @@ layout(location = 4) in vec3 v_offset;
 // Matrix44 uniforms
 uniform mat4 u_modelMatrix;
 uniform mat4 u_viewMatrix;
-uniform mat4 u_projMatrix;
+uniform mat4 u_projectionMatrix;
 
 // Vec4 uniforms
 uniform vec4 u_clippingPlane;
@@ -35,12 +35,13 @@ void main()
 	// In variables
     vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + (u_isInstanced == true ? vec4(v_offset, 0.0f) : vec4(0.0f));
 	vec4 viewSpacePos  = u_viewMatrix * worldSpacePos;
-	vec4 clipSpacePos  = u_projMatrix * viewSpacePos;
+	vec4 clipSpacePos  = u_projectionMatrix * viewSpacePos;
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
 	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
+	gl_ClipDistance[2] = dot(worldSpacePos, u_clippingPlane);
 	
 	// Out variables
 	f_uv = vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y));

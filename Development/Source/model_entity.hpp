@@ -167,7 +167,7 @@ private:
 	bool _isSceneReflective  = false;
 	bool _isSpecularLighted  = false;
 	bool _isShadowed         = true;
-	bool _isReflected		 = false;
+	bool _isReflected		 = true;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
 	bool _wireframed		 = false;

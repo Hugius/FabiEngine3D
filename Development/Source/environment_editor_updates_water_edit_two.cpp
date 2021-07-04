@@ -262,6 +262,8 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		}
 
 		// Buttons hoverability
+		screen->getButton("specularFactor")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
+		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
 	}
 }

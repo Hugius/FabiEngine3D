@@ -66,7 +66,7 @@ private:
 	Vec2 _waveOffset   = Vec2(0.0f);
 
 	Vec3 _translation = Vec3(0.0f);
-	Vec3 _color = Vec3(0.0f);
+	Vec3 _color = Vec3(1.0f);
 
 	GLuint _dudvMap			= 0;
 	GLuint _normalMap		= 0;

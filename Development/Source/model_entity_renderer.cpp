@@ -6,13 +6,17 @@ using std::to_string;
 
 void ModelEntityRenderer::bind()
 {
+	// Define clipping plane for water/scene reflections
+	Vec4 clippingPlaneReflection = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
+
 	// Bind shader
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_projMatrix",        _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_projectionMatrix",	 _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
-	_shader.uploadUniform("u_shadowMatrix",      _renderBus.getShadowMatrix());
+	_shader.uploadUniform("u_shadowMatrix",		 _renderBus.getShadowMatrix());
+	_shader.uploadUniform("u_clippingPlane",	 clippingPlaneReflection);
 	
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",			  _renderBus.getCameraPosition());
@@ -101,10 +105,10 @@ void ModelEntityRenderer::unbind()
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 	// Disable OpenGL functionality
-	glDisable(GL_BLEND);
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
 	// Unbind shader
 	_shader.unbind();

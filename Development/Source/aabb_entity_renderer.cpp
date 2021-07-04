@@ -7,7 +7,7 @@ void AabbEntityRenderer::bind()
 
 	// Vertex shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);

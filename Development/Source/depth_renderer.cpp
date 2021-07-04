@@ -9,7 +9,7 @@ void DepthRenderer::bind()
 
 	// Vertex shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);

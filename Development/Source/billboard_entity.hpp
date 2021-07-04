@@ -80,10 +80,10 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	Vec3 _translation     = Vec3(0.0f, 0.0f, 0.0f);
-	Vec3 _rotation        = Vec3(0.0f, 0.0f, 0.0f);
-	Vec3 _initialRotation = Vec3(0.0f, 0.0f, 0.0f);
-	Vec3 _scaling         = Vec3(1.0f, 1.0f, 1.0f);
+	Vec3 _translation     = Vec3(0.0f);
+	Vec3 _rotation        = Vec3(0.0f);
+	Vec3 _initialRotation = Vec3(0.0f);
+	Vec3 _scaling         = Vec3(1.0f);
 	Vec3 _color           = Vec3(1.0f);
 
 	float _lightness = 1.0f;

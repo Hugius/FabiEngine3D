@@ -467,7 +467,7 @@ vec3 applySceneReflections(vec3 color)
 		// Check if current texel allows for reflection
 		if(reflectionMapColor.rgb != vec3(0.0f))
 		{
-			vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
+			vec2 ndc             = ((f_clip.xy / f_clip.w) / 2.0f) + 0.5f;
 			vec2 texCoords       = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
 			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionMixValue);

@@ -98,11 +98,13 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_renderTerrainEntity();
 		glDisable(GL_CLIP_DISTANCE0);
 
-		// Render model entities & billboard entities only for scene reflections
+		// Render model entities & billboard entities
 		if (sceneReflectionsNeeded)
 		{
+			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
 			_renderBillboardEntities();
+			glDisable(GL_CLIP_DISTANCE2);
 		}
 
 		// Revert reflection exceptions

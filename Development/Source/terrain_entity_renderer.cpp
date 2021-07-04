@@ -6,17 +6,17 @@ using std::to_string;
 
 void TerrainEntityRenderer::bind()
 {
-	// Define clipping plane for scene reflections
+	// Define clipping plane for water/scene reflections
 	Vec4 clippingPlaneReflection = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
 
 	// Bind shader
 	_shader.bind();
 	
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix",    _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix",    _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_shadowMatrix",  _renderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlaneReflection", clippingPlaneReflection);
+	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_shadowMatrix",		_renderBus.getShadowMatrix());
+	_shader.uploadUniform("u_clippingPlane",	clippingPlaneReflection);
 	
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",             _renderBus.getCameraPosition());
@@ -46,7 +46,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowLightness",			  _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled",			  _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_isLightedShadowingEnabled",	  _renderBus.isLightedShadowingEnabled());
+	_shader.uploadUniform("u_isLightedShadowingEnabled",  _renderBus.isLightedShadowingEnabled());
 	_shader.uploadUniform("u_shadowMapSize",			  static_cast<int>(_renderBus.getShadowMapSize()));
 
 	// Texture uniforms

@@ -9,11 +9,11 @@ layout(location = 3) in vec3 v_tangent;
 
 // Matrix44 uniforms
 uniform mat4 u_viewMatrix;
-uniform mat4 u_projMatrix;
+uniform mat4 u_projectionMatrix;
 uniform mat4 u_shadowMatrix;
 
 // Vec4 uniforms
-uniform vec4 u_clippingPlaneReflection;
+uniform vec4 u_clippingPlane;
 
 // Bool uniforms
 uniform bool u_isNormalMapped;
@@ -34,11 +34,11 @@ void main()
 	// In variables
 	vec4 worldSpacePos = vec4(v_pos, 1.0f);
 	vec4 viewSpacePos  = u_viewMatrix * worldSpacePos;
-	vec4 clipSpacePos  = u_projMatrix * viewSpacePos;
+	vec4 clipSpacePos  = u_projectionMatrix * viewSpacePos;
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlaneReflection);
+	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
 	
 	// Out variables
 	f_pos = worldSpacePos.xyz;

@@ -61,11 +61,6 @@ const bool FabiEngine3D::gfx_isBloomEnabled()
 	return _core->_renderBus.isBloomEnabled();
 }
 
-const bool FabiEngine3D::gfx_isWaterEffectsEnabled()
-{
-	return _core->_renderBus.isWaterEffectsEnabled();
-}
-
 const bool FabiEngine3D::gfx_isSkyHdrEnabled()
 {
 	return _core->_renderBus.isSkyHdrEnabled();
@@ -108,12 +103,12 @@ const unsigned int FabiEngine3D::gfx_getShadowQuality()
 
 const unsigned int FabiEngine3D::gfx_getReflectionQuality()
 {
-	return _core->_renderBus.getSceneReflectionMapSize();
+	return _core->_renderBus.getReflectionMapSize();
 }
 
 const unsigned int FabiEngine3D::gfx_getRefractionQuality()
 {
-	return _core->_renderBus.getSceneRefractionMapSize();
+	return _core->_renderBus.getRefractionMapSize();
 }
 
 const Vec3 FabiEngine3D::gfx_getAmbientLightingColor()

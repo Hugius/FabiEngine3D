@@ -30,7 +30,6 @@ void SceneEditor::load()
 	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enableWaterEffects();
 
 	// Preview environment loading
 	_environmentEditor.loadSkyEntitiesFromFile();
@@ -118,7 +117,6 @@ void SceneEditor::unload()
 	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
-	_fe3d.gfx_disableWaterEffects(true);
 
 	// Unload environment preview entities
 	_environmentEditor.unloadSkyEntities();

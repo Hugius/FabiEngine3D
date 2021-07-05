@@ -102,10 +102,11 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 
 			// Values
 			string waterID, dudvMapPath, normalMapPath, displacementMapPath;
-			bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
-			Vec2 speed;
 			Vec3 color, position;
+			Vec2 speed;
 			float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
+			unsigned int quality;
+			bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
 
 			// Load base data
 			iss >>
@@ -127,6 +128,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 				position.z >>
 				uvRepeat >>
 				waveHeightFactor >>
+				quality >>
 				speed.x >>
 				speed.y >>
 				transparency >>
@@ -152,6 +154,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 			_fe3d.waterEntity_setReflective(waterID, isReflective);
 			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
 			_fe3d.waterEntity_setWaveHeightFactor(waterID, waveHeightFactor);
+			_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
 			_fe3d.waterEntity_setSpecularLightingFactor(waterID, specularFactor);
 			_fe3d.waterEntity_setSpecularLightingIntensity(waterID, specularIntensity);
 			_fe3d.waterEntity_setTransparency(waterID, transparency);
@@ -210,23 +213,24 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 	for (const auto& waterID : _loadedWaterIDs)
 	{
 		// Values
-		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
-		string normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
-		string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
-		bool isWaving = _fe3d.waterEntity_isWaving(waterID);
-		bool isRippling = _fe3d.waterEntity_isRippling(waterID);
-		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
-		bool isReflective = _fe3d.waterEntity_isReflective(waterID);
-		bool isRefractive = _fe3d.waterEntity_isRefractive(waterID);
-		Vec3 color = _fe3d.waterEntity_getColor(waterID);
-		float size = _fe3d.waterEntity_getSize(waterID);
-		Vec3 position = _fe3d.waterEntity_getPosition(waterID);
-		float uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
-		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(waterID);
-		Vec2 speed = _fe3d.waterEntity_getSpeed(waterID);
-		float transparency = _fe3d.waterEntity_getTransparency(waterID);
-		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
-		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
+		auto dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
+		auto normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
+		auto displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
+		auto color = _fe3d.waterEntity_getColor(waterID);
+		auto position = _fe3d.waterEntity_getPosition(waterID);
+		auto speed = _fe3d.waterEntity_getSpeed(waterID);
+		auto size = _fe3d.waterEntity_getSize(waterID);
+		auto uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
+		auto waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(waterID);
+		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
+		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
+		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
+		auto quality = static_cast<unsigned int>(_fe3d.waterEntity_getQuality(waterID));
+		auto isWaving = _fe3d.waterEntity_isWaving(waterID);
+		auto isRippling = _fe3d.waterEntity_isRippling(waterID);
+		auto isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
+		auto isReflective = _fe3d.waterEntity_isReflective(waterID);
+		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
 
 		// Perform empty string & space conversions
 		dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
@@ -256,6 +260,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 			position.z << " " <<
 			uvRepeat << " " <<
 			waveHeightFactor << " " <<
+			quality << " " <<
 			speed.x << " " <<
 			speed.y << " " <<
 			transparency << " " <<

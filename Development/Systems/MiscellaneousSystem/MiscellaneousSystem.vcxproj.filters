@@ -84,6 +84,9 @@
     <ClInclude Include="..\..\Source\network_protocol.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\water_quality.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\camera_misc.cpp">

@@ -127,7 +127,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			_fe3d.application_stop();
 		}
 
-		// Buttons hoverability
+		// Button hoverabilities
 		screen->getButton("saveProject")->setHoverable(_currentProjectID != "");
 	}
 }

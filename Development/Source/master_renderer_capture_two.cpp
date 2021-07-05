@@ -8,8 +8,7 @@
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
-	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
-		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
+	bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->getTransparency() > 0.0f;
 	bool isUnderWater = false;
 	float clippingY = -(std::numeric_limits<float>::max)();
 

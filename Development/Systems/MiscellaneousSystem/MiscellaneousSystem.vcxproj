@@ -44,6 +44,7 @@
     <ClInclude Include="..\..\Source\timer.hpp" />
     <ClInclude Include="..\..\Source\tools.hpp" />
     <ClInclude Include="..\..\Source\transformation_type.hpp" />
+    <ClInclude Include="..\..\Source\water_quality.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\camera_main.cpp" />

@@ -66,7 +66,7 @@ void ScriptEditor::_updateGUI()
 			// Button text contents
 			screen->getTextfield("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
 
-			// Buttons hoverability
+			// Button hoverabilities
 			screen->getButton("rename")->setHoverable(_currentScriptFileID != "");
 			screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
 

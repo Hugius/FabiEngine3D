@@ -81,7 +81,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 		}
 
-		// Buttons hoverability
+		// Button hoverabilities
 		screen->getButton("delete")->setHoverable(_currentAabbID != "");
 		screen->getButton("toggleMove")->setHoverable(_currentAabbID != "");
 		screen->getButton("toggleResize")->setHoverable(_currentAabbID != "");

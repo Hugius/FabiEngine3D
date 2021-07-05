@@ -155,12 +155,13 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 	if (screen->getID() == "waterEditorMenuOptions")
 	{
 		// Temporary values
-		Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
-		Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
-		float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
-		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
-		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
+		auto color = _fe3d.waterEntity_getColor(_currentWaterID);
+		auto speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
+		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
+		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
+		auto waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
+		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
 
 		// GUI management
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -195,6 +196,25 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave Height Factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+			}
+			else if (screen->getButton("quality")->isHovered())
+			{
+				if (quality == WaterQuality::SKY)
+				{
+					quality = WaterQuality::SKY_TERRAIN;
+				}
+				else if (quality == WaterQuality::SKY_TERRAIN)
+				{
+					quality = WaterQuality::SKY_TERRAIN_MODELS;
+				}
+				else if (quality == WaterQuality::SKY_TERRAIN_MODELS)
+				{
+					quality = WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS;
+				}
+				else
+				{
+					quality = WaterQuality::SKY;
+				}
 			}
 		}
 
@@ -261,9 +281,15 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);
 		}
 
-		// Buttons hoverability
+		// Update water quality
+		_fe3d.waterEntity_setQuality(_currentWaterID, quality);
+
+		// Button hoverabilities
 		screen->getButton("specularFactor")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
+
+		// Button text contents
+		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

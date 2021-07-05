@@ -23,7 +23,6 @@ uniform float u_uvRepeat;
 uniform float u_waveHeightFactor;
 
 // Boolean uniforms
-uniform bool u_isEffectsEnabled;
 uniform bool u_isWaving;
 
 // Out variables
@@ -44,7 +43,7 @@ void main()
 	f_uv = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_uvRepeat;
 
 	// Vertex water waves
-	if(u_isEffectsEnabled && u_isWaving)
+	if(u_isWaving)
 	{
 		// Get size of 1 texel of this texture
 		float texelSize = 1.0f / textureSize(u_sampler_displacementMap, 0).x;

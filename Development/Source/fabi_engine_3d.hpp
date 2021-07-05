@@ -6,6 +6,7 @@
 #include "network_client_message.hpp"
 #include "network_server_message.hpp"
 #include "mathematics.hpp"
+#include "water_quality.hpp"
 
 #include <array>
 #include <vector>
@@ -221,6 +222,7 @@ public:
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, Vec3 color);
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
+	void waterEntity_setQuality(const string& ID, WaterQuality quality);
 
 	// Water entity interface - getters
 	const bool waterEntity_isExisting(const string& ID);
@@ -239,6 +241,7 @@ public:
 	const float waterEntity_getSpecularLightingFactor(const string& ID);
 	const float waterEntity_getSpecularLightingIntensity(const string& ID);
 	const float waterEntity_getTransparency(const string& ID);
+	const WaterQuality waterEntity_getQuality(const string& ID);
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
@@ -650,7 +653,6 @@ public:
 	void gfx_enableMSAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
-	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
@@ -668,7 +670,6 @@ public:
 	void gfx_disableMSAA(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
-	void gfx_disableWaterEffects(bool resetProperties = false);
 	void gfx_disableSkyHDR(bool resetProperties = false);
 	void gfx_disableDOF(bool resetProperties = false);
 	void gfx_disableMotionBlur(bool resetProperties = false);
@@ -723,7 +724,6 @@ public:
 	const bool gfx_isSkyReflectionsEnabled();
 	const bool gfx_isSceneReflectionsEnabled();
 	const bool gfx_isBloomEnabled();
-	const bool gfx_isWaterEffectsEnabled();
 	const bool gfx_isSkyHdrEnabled();
 	const bool gfx_isShadowsEnabled();
 	const bool gfx_isDofEnabled();

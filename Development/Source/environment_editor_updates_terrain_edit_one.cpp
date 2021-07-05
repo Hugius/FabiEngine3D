@@ -163,7 +163,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			}
 		}
 
-		// Buttons hoverability
+		// Button hoverabilities
 		bool existing = _fe3d.terrainEntity_isExisting(_currentTerrainID);
 		screen->getButton("diffuseMap")->setHoverable(existing);
 		screen->getButton("maxHeight")->setHoverable(existing);

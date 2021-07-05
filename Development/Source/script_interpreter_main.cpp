@@ -201,7 +201,6 @@ void ScriptInterpreter::load()
 	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enableWaterEffects();
 
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();
@@ -371,7 +370,6 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
-	_fe3d.gfx_disableWaterEffects(true);
 
 	// Delete game image entities
 	for (const auto& ID : _fe3d.imageEntity_getAllIDs())

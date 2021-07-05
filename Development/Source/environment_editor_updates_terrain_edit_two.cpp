@@ -308,7 +308,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			}
 		}
 
-		// Buttons hoverability
+		// Button hoverabilities
 		screen->getButton("specularFactor")->setHoverable(isSpecular);
 		screen->getButton("specularIntensity")->setHoverable(isSpecular);
 

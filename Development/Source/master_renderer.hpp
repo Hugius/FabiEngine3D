@@ -55,7 +55,7 @@ private:
 	ModelEntityRenderer      _modelEntityRenderer;
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
-	ImageEntityRenderer        _imageEntityRenderer;
+	ImageEntityRenderer      _imageEntityRenderer;
 	BlurRenderer             _blurRenderer;
 	BloomHdrRenderer         _bloomHdrRenderer;
 	ShadowRenderer           _shadowRenderer;
@@ -68,7 +68,8 @@ private:
 	RenderFramebuffer _msaaFramebuffer;
 	RenderFramebuffer _aaProcessorFramebuffer;
 	RenderFramebuffer _sceneReflectionFramebuffer;
-	RenderFramebuffer _sceneRefractionFramebuffer;
+	RenderFramebuffer _waterReflectionFramebuffer;
+	RenderFramebuffer _waterRefractionFramebuffer;
 	RenderFramebuffer _bloomHdrFramebuffer;
 	RenderFramebuffer _postProcessingFramebuffer;
 	RenderFramebuffer _shadowFramebuffer;
@@ -76,7 +77,8 @@ private:
 
 	// Capturing functions
 	void _captureSceneReflections(Camera& camera);
-	void _captureSceneRefractions();
+	void _captureWaterReflections(Camera& camera);
+	void _captureWaterRefractions();
 	void _captureShadows();
 	void _captureBloom();
 	void _captureSceneDepth();

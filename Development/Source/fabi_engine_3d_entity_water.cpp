@@ -108,6 +108,11 @@ void FabiEngine3D::waterEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_waterEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
+void FabiEngine3D::waterEntity_setQuality(const string& ID, WaterQuality quality)
+{
+	_core->_waterEntityManager.getEntity(ID)->setQuality(quality);
+}
+
 void FabiEngine3D::waterEntity_setReflective(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setReflective(enabled);
@@ -223,6 +228,11 @@ const float FabiEngine3D::waterEntity_getSpecularLightingIntensity(const string&
 const float FabiEngine3D::waterEntity_getTransparency(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getTransparency();
+}
+
+const WaterQuality FabiEngine3D::waterEntity_getQuality(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->getQuality();
 }
 
 const string& FabiEngine3D::waterEntity_getDudvMapPath(const string& ID)

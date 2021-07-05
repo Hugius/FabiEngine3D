@@ -154,19 +154,11 @@ void WaterEntityManager::generateMesh(const string& ID)
 
 void WaterEntityManager::update()
 {
-	// Update reflection height
-	if ((_renderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && 
-		(getSelectedWater()->isReflective() || getSelectedWater()->isRefractive()))
-	{
-		_renderBus.setSceneReflectionHeight(getSelectedWater()->getTranslation().y);
-		_renderBus.setSceneReflectionOffset(1.0f);
-	}
-
 	// Update all water entities
 	for (const auto& [keyID, entity] : _getWaterEntities())
 	{
 		// Update water animations (rippling & waving)
-		if (entity->isVisible() && _renderBus.isWaterEffectsEnabled())
+		if (entity->isVisible())
 		{
 			// Update ripple speed
 			Vec2 newOffset = entity->getRippleOffset() + entity->getSpeed();

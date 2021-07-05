@@ -19,7 +19,6 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_fogThickness",				 _renderBus.getFogThickness());
 	_shader.uploadUniform("u_fogColor",					 _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled",				 _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isEffectsEnabled",			 _renderBus.isWaterEffectsEnabled());
 	_shader.uploadUniform("u_nearZ",					 _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ",						 _renderBus.getFarZ());
 	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
@@ -37,9 +36,9 @@ void WaterEntityRenderer::bind()
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterReflectionMap());
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneRefractionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterRefractionMap());
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
 

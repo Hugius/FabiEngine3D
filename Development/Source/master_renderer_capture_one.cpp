@@ -4,30 +4,19 @@
 
 void MasterRenderer::_captureSceneReflections(Camera& camera)
 {
-	// Check if water reflection needed
-	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && 
-		(_entityBus->getWaterEntity() != nullptr) &&
-		_entityBus->getWaterEntity()->isReflective());
-
 	// Search for any reflective model entity
-	bool anyReflectiveEntityFound = false;
-	if (!waterReflectionsNeeded)
+	bool anyReflectiveModelFound = false;
+	for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities())
 	{
-		for (const auto& [keyID, modelEntity]: _entityBus->getModelEntities())
+		if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 		{
-			if (modelEntity->isSceneReflective() && modelEntity->isVisible())
-			{
-				anyReflectiveEntityFound = true;
-				break;
-			}
+			anyReflectiveModelFound = true;
+			break;
 		}
 	}
 
-	// Check if scene reflection needed (and not occupied by water rendering)
-	bool sceneReflectionsNeeded = (_renderBus.isSceneReflectionsEnabled() && anyReflectiveEntityFound && !waterReflectionsNeeded);
-	
 	// Check if needed to capture scene
-	if (waterReflectionsNeeded || sceneReflectionsNeeded)
+	if (_renderBus.isSceneReflectionsEnabled() && anyReflectiveModelFound)
 	{
 		// Calculate distance between camera and reflection surface
 		float cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
@@ -36,10 +25,139 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Only if scene reflections enabled
+		// Iterate through all MODEL entities
 		vector<string> savedModelEntityIDs;
+		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+		{
+			// Check if necessary to hide
+			if ((entity->isSceneReflective() || !entity->isReflected()) && entity->isVisible())
+			{
+				// Hide MODEL entity
+				entity->setVisible(false);
+				savedModelEntityIDs.push_back(entity->getID());
+			}
+		}
+
+		// Iterate through all BILLBOARD entities
 		vector<string> savedBillboardEntityIDs;
-		if (sceneReflectionsNeeded)
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		{
+			// Check if necessary to hide
+			if (!entity->isReflected() && entity->isVisible())
+			{
+				// Hide BILLBOARD entity
+				entity->setVisible(false);
+				savedBillboardEntityIDs.push_back(entity->getID());
+			}
+		}
+
+		// Change camera angle
+		Vec3 cameraPos = camera.getPosition();
+		Vec3 newCameraPos = Vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
+		camera.setPosition(newCameraPos);
+		camera.setPitch(-camera.getPitch());
+		camera.updateMatrices();
+
+		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
+		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
+		_renderBus.setShadowsEnabled(false);
+
+		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
+		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
+		_renderBus.setNormalMappingEnabled(false);
+
+		// Sky HDR must not appear in reflections
+		float oldLightness = 0.0f;
+		auto skyEntity = _entityBus->getMainSkyEntity();
+		if (skyEntity != nullptr)
+		{
+			oldLightness = skyEntity->getLightness();
+			skyEntity->setLightness(skyEntity->getOriginalLightness());
+		}
+
+		// Render SKY entity
+		_renderSkyEntity();
+
+		// Render TERRAIN entity
+		glEnable(GL_CLIP_DISTANCE0);
+		_renderTerrainEntity();
+		glDisable(GL_CLIP_DISTANCE0);
+
+		// Render MODEL entities & BILLBOARD entities
+		glEnable(GL_CLIP_DISTANCE2);
+		_renderModelEntities();
+		_renderBillboardEntities();
+		glDisable(GL_CLIP_DISTANCE2);
+
+		// Revert disabled graphics
+		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
+		if (skyEntity != nullptr)
+		{
+			skyEntity->setLightness(oldLightness);
+		}
+
+		// Revert camera angle
+		cameraPos = camera.getPosition();
+		newCameraPos = Vec3(cameraPos.x, cameraPos.y + (cameraDistance * 2.0f), cameraPos.z);
+		camera.setPosition(newCameraPos);
+		camera.setPitch(-camera.getPitch());
+		camera.updateMatrices();
+
+		// Iterate through all MODEL entities
+		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+		{
+			// Iterate through all saved MODEL entities
+			for (const auto& savedID : savedModelEntityIDs)
+			{
+				// Check if IDs match
+				if (entity->getID() == savedID)
+				{
+					// Show MODEL entity again
+					entity->setVisible(true);
+				}
+			}
+		}
+
+		// Iterate through all BILLBOARD entities
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		{
+			// Iterate through all saved BILLBOARD entities
+			for (const auto& savedID : savedBillboardEntityIDs)
+			{
+				// Check if IDs match
+				if (entity->getID() == savedID)
+				{
+					// Show BILLBOARD entity again
+					entity->setVisible(true);
+				}
+			}
+		}
+
+		// Stop capturing reflections
+		_sceneReflectionFramebuffer.unbind();
+
+		// Assign texture
+		_renderBus.setWaterReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+	}
+}
+
+void MasterRenderer::_captureWaterReflections(Camera& camera)
+{
+	// Check if water reflections needed
+	if ((_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->isReflective())
+	{
+		// Calculate distance between camera and reflection surface
+		float cameraDistance = (camera.getPosition().y - _entityBus->getWaterEntity()->getTranslation().y);
+
+		// Start capturing reflections
+		_waterReflectionFramebuffer.bind();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// Save MODEL entities that must not be captured
+		vector<string> savedModelEntityIDs;
+		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS || 
+			_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all MODEL entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
@@ -52,7 +170,12 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 					savedModelEntityIDs.push_back(entity->getID());
 				}
 			}
+		}
 
+		// Save BILLBOARD entities that must not be captured
+		vector<string> savedBillboardEntityIDs;
+		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		{
 			// Iterate through all BILLBOARD entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
@@ -90,24 +213,35 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 			skyEntity->setLightness(skyEntity->getOriginalLightness());
 		}
 
-		// Render sky
+		// Render SKY entity
 		_renderSkyEntity();
 
-		// Render terrain
-		glEnable(GL_CLIP_DISTANCE0);
-		_renderTerrainEntity();
-		glDisable(GL_CLIP_DISTANCE0);
+		// Render TERRAIN entity
+		if (_entityBus->getWaterEntity()->getQuality() != WaterQuality::SKY)
+		{
+			glEnable(GL_CLIP_DISTANCE0);
+			_renderTerrainEntity();
+			glDisable(GL_CLIP_DISTANCE0);
+		}
 
-		// Render model entities & billboard entities
-		if (sceneReflectionsNeeded)
+		// Render MODEL entities
+		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+			_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
+			glDisable(GL_CLIP_DISTANCE2);
+		}
+
+		// Render BILLBOARD entities
+		if(_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		{		
+			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		// Revert reflection exceptions
+		// Revert disabled graphics
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
 		if (skyEntity != nullptr)
@@ -122,58 +256,51 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		camera.setPitch(-camera.getPitch());
 		camera.updateMatrices();
 
-		// Only if scene reflections enabled
-		if (sceneReflectionsNeeded)
+		// Iterate through all saved MODEL entities
+		for (const auto& savedID : savedModelEntityIDs)
 		{
 			// Iterate through all MODEL entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
-				// Iterate through all saved MODEL entities
-				for (const auto& savedID : savedModelEntityIDs)
+				// Check if IDs match
+				if (entity->getID() == savedID)
 				{
-					// Check if IDs match
-					if (entity->getID() == savedID)
-					{
-						// Show MODEL entity again
-						entity->setVisible(true);
-					}
+					// Show MODEL entity again
+					entity->setVisible(true);
 				}
 			}
+		}
 
+		// Iterate through all saved BILLBOARD entities
+		for (const auto& savedID : savedBillboardEntityIDs)
+		{
 			// Iterate through all BILLBOARD entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
-				// Iterate through all saved BILLBOARD entities
-				for (const auto& savedID : savedBillboardEntityIDs)
+				// Check if IDs match
+				if (entity->getID() == savedID)
 				{
-					// Check if IDs match
-					if (entity->getID() == savedID)
-					{
-						// Show BILLBOARD entity again
-						entity->setVisible(true);
-					}
+					// Show BILLBOARD entity again
+					entity->setVisible(true);
 				}
 			}
 		}
 
 		// Stop capturing reflections
-		_sceneReflectionFramebuffer.unbind();
+		_waterReflectionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+		_renderBus.setWaterReflectionMap(_waterReflectionFramebuffer.getTexture(0));
 	}
 }
 
-void MasterRenderer::_captureSceneRefractions()
+void MasterRenderer::_captureWaterRefractions()
 {
-	// Temporary values
-	bool waterRefractionEnabled = (_renderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
-		_entityBus->getWaterEntity()->isRefractive();
-
-	if (waterRefractionEnabled)
+	// Check if water refractions needed
+	if (_entityBus->getWaterEntity() != nullptr && _entityBus->getWaterEntity()->isRefractive())
 	{
 		// Bind
-		_sceneRefractionFramebuffer.bind();
+		_waterRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Render whole scene
@@ -183,10 +310,10 @@ void MasterRenderer::_captureSceneRefractions()
 		_renderBillboardEntities();
 
 		// Unbind
-		_sceneRefractionFramebuffer.unbind();
+		_waterRefractionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
+		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
 	}
 }
 

@@ -198,18 +198,6 @@ void FabiEngine3D::gfx_enableBloom(float intensity, float brightnessTreshold, in
 	}
 }
 
-void FabiEngine3D::gfx_enableWaterEffects()
-{
-	if (_core->_renderBus.isWaterEffectsEnabled())
-	{
-		Logger::throwWarning("Tried to enable water effects: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setWaterEffectsEnabled(true);
-	}
-}
-
 void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
 {
 	if (_core->_renderBus.isBloomEnabled())
@@ -480,18 +468,6 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 	else
 	{
 		Logger::throwWarning("Tried to disable bloom: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableWaterEffects(bool resetProperties)
-{
-	if (_core->_renderBus.isWaterEffectsEnabled())
-	{
-		_core->_renderBus.setWaterEffectsEnabled(false);
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable water effects: not enabled");
 	}
 }
 

@@ -266,7 +266,7 @@ void MasterRenderer::_renderDebugScreens()
 
 	// Reflection scene - surface
 	shared_ptr<ImageEntity> reflectionSurface = make_shared<ImageEntity>("reflectionSurface");
-	reflectionSurface->setTexture(_renderBus.getSceneReflectionMap());
+	reflectionSurface->setTexture(_renderBus.getWaterReflectionMap());
 	reflectionSurface->addRenderBuffer(new RenderBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	reflectionSurface->setMirroredVertically(true);
 
@@ -278,7 +278,7 @@ void MasterRenderer::_renderDebugScreens()
 
 	// Refraction scene - surface
 	shared_ptr<ImageEntity> refractionSurface = make_shared<ImageEntity>("refractionSurface");
-	refractionSurface->setTexture(_renderBus.getSceneRefractionMap());
+	refractionSurface->setTexture(_renderBus.getWaterRefractionMap());
 	refractionSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	refractionSurface->setMirroredVertically(true);
 

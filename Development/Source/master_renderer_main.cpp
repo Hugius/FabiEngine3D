@@ -29,8 +29,8 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 0, 1);
 	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0), 1);
-	_sceneRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
-	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
+	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
+	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
 	_bloomHdrFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize(), 1);
@@ -90,17 +90,17 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 	else
 	{
 		// Temporarily disable scene reflections if water has reflections
-		bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
-			_entityBus->getWaterEntity()->isReflective();
+		bool waterReflectionsNeeded = (_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->isReflective();
 		bool wasSceneReflectionsEnabled = _renderBus.isSceneReflectionsEnabled();
 		_renderBus.setSceneReflectionsEnabled(wasSceneReflectionsEnabled && !waterReflectionsNeeded);
 
 		// Pre-rendering
 		_timer.startDeltaPart("reflectionPreRender");
 		_captureSceneReflections(camera);
+		_captureWaterReflections(camera);
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("refractionPreRender");
-		_captureSceneRefractions();
+		_captureWaterRefractions();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("shadowPreRender");
 		_captureShadows();
@@ -216,13 +216,15 @@ void MasterRenderer::loadShadowFramebuffer(int quality)
 void MasterRenderer::loadReflectionFramebuffer(int quality)
 {
 	_sceneReflectionFramebuffer.reset();
+	_waterReflectionFramebuffer.reset();
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setSceneReflectionMapSize(quality);
+	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
+	_renderBus.setReflectionMapSize(quality);
 }
 
 void MasterRenderer::loadRefractionFramebuffer(int quality)
 {
-	_sceneRefractionFramebuffer.reset();
-	_sceneRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setSceneRefractionMapSize(quality);
+	_waterRefractionFramebuffer.reset();
+	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
+	_renderBus.setRefractionMapSize(quality);
 }

@@ -52,6 +52,11 @@ void WaterEntity::setUvRepeat(float value)
 	_uvRepeat = std::max(0.0f, value);
 }
 
+void WaterEntity::setQuality(WaterQuality quality)
+{
+	_quality = quality;
+}
+
 void WaterEntity::setSpeed(Vec2 value)
 {
 	_speed = value;
@@ -165,6 +170,11 @@ const Vec2 WaterEntity::getRippleOffset() const
 const float WaterEntity::getUvRepeat() const
 {
 	return _uvRepeat;
+}
+
+const WaterQuality WaterEntity::getQuality() const
+{
+	return _quality;
 }
 
 const Vec2 WaterEntity::getSpeed() const

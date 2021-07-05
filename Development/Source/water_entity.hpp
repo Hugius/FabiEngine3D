@@ -1,6 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "water_quality.hpp"
 
 class WaterEntity final : public BaseEntity
 {
@@ -8,6 +9,7 @@ public:
 	using BaseEntity::BaseEntity;
 	
 	// Setters
+	void setQuality(WaterQuality quality);
 	void setSpeed(Vec2 value);
 	void setRippleOffset(Vec2 value);
 	void setWaveOffset(Vec2 value);
@@ -33,34 +35,37 @@ public:
 	void setSimplifiedRenderBuffer(RenderBuffer* buffer);
 
 	// Getters
-	const Vec2    getSpeed()					 const;
-	const Vec2    getRippleOffset()				 const;
-	const Vec2    getWaveOffset()				 const;
-	const Vec3	  getTranslation()				 const;
-	const Vec3    getColor()					 const;
-	const GLuint  getDudvMap()					 const;
-	const GLuint  getNormalMap()				 const;
-	const GLuint  getDisplacementMap()			 const;
-	const string& getDudvMapPath()				 const;
-	const string& getNormalMapPath()			 const;
-	const string& getDisplacementMapPath()		 const;
-	const float   getUvRepeat()					 const;
-	const float   getWaveHeightFactor()			 const;
-	const float   getSpecularLightingFactor()    const;
-	const float   getSpecularLightingIntensity() const;
-	const float   getSize()						 const;
-	const float   getTransparency()				 const;
-	const bool    isWaving()					 const;
-	const bool    isRippling()					 const;
-	const bool    isSpecularLighted()			 const;
-	const bool    isReflective()				 const;
-	const bool    isRefractive()				 const;
-	const bool	  hasDudvMap()					 const;
-	const bool	  hasNormalMap()				 const;
-	const bool	  hasDisplacementMap()			 const;
+	const WaterQuality getQuality()					const;
+	const Vec2    getSpeed()					    const;
+	const Vec2    getRippleOffset()				    const;
+	const Vec2    getWaveOffset()				    const;
+	const Vec3	  getTranslation()				    const;
+	const Vec3    getColor()					    const;
+	const GLuint  getDudvMap()					    const;
+	const GLuint  getNormalMap()				    const;
+	const GLuint  getDisplacementMap()			    const;
+	const string& getDudvMapPath()				    const;
+	const string& getNormalMapPath()			    const;
+	const string& getDisplacementMapPath()		    const;
+	const float   getUvRepeat()					    const;
+	const float   getWaveHeightFactor()			    const;
+	const float   getSpecularLightingFactor()       const;
+	const float   getSpecularLightingIntensity()    const;
+	const float   getSize()						    const;
+	const float   getTransparency()				    const;
+	const bool    isWaving()					    const;
+	const bool    isRippling()					    const;
+	const bool    isSpecularLighted()			    const;
+	const bool    isReflective()				    const;
+	const bool    isRefractive()				    const;
+	const bool	  hasDudvMap()					    const;
+	const bool	  hasNormalMap()				    const;
+	const bool	  hasDisplacementMap()			    const;
 	const RenderBuffer* getSimplifiedRenderBuffer() const;
 
 private:
+	WaterQuality _quality = WaterQuality::SKY;
+
 	Vec2 _speed		   = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);
 	Vec2 _waveOffset   = Vec2(0.0f);

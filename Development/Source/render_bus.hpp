@@ -15,7 +15,8 @@ public:
 	void setMainSkyReflectionCubeMap(GLuint value);
 	void setMixSkyReflectionCubeMap(GLuint value);
 	void setSceneReflectionMap(GLuint value);
-	void setSceneRefractionMap(GLuint value);
+	void setWaterReflectionMap(GLuint value);
+	void setWaterRefractionMap(GLuint value);
 	void setShadowMap(GLuint value);
 	void setBloomMap(GLuint value);
 	void setPostProcessedSceneMap(GLuint value);
@@ -82,11 +83,11 @@ public:
 
 	// Integers
 	void setBloomBlurSize(unsigned int value);
-	void increaseTriangleCount(unsigned int value);
 	void setMsaaSampleCount(unsigned int value);
 	void setShadowMapSize(unsigned int value);
-	void setSceneReflectionMapSize(unsigned int value);
-	void setSceneRefractionMapSize(unsigned int value);
+	void setReflectionMapSize(unsigned int value);
+	void setRefractionMapSize(unsigned int value);
+	void increaseTriangleCount(unsigned int value);
 	void resetTriangleCount();
 
 	// Booleans
@@ -102,7 +103,6 @@ public:
 	void setSkyReflectionsEnabled(bool value);
 	void setSceneReflectionsEnabled(bool value);
 	void setBloomEnabled(bool value);
-	void setWaterEffectsEnabled(bool value);
 	void setSkyHdrEnabled(bool value);
 	void setShadowsEnabled(bool value);
 	void setDofEnabled(bool value);
@@ -125,7 +125,8 @@ public:
 	const GLuint getMainSkyReflectionCubeMap() const;
 	const GLuint getMixSkyReflectionCubeMap()  const;
 	const GLuint getSceneReflectionMap()	   const;
-	const GLuint getSceneRefractionMap()	   const;
+	const GLuint getWaterReflectionMap()	   const;
+	const GLuint getWaterRefractionMap()	   const;
 	const GLuint getShadowMap()				   const;
 	const GLuint getBloomMap()				   const;
 	const GLuint getPostProcessedSceneMap()	   const;
@@ -191,12 +192,12 @@ public:
 	const float getMixSkyLightness()		   const;
 
 	// Integers
-	const unsigned int getBloomBlurSize()		   const;
-	const unsigned int getTriangleCount()		   const;
-	const unsigned int getMsaaSampleCount()		   const;
-	const unsigned int getShadowMapSize()		   const;
-	const unsigned int getSceneReflectionMapSize() const;
-	const unsigned int getSceneRefractionMapSize() const;
+	const unsigned int getBloomBlurSize()	  const;
+	const unsigned int getTriangleCount()	  const;
+	const unsigned int getMsaaSampleCount()	  const;
+	const unsigned int getShadowMapSize()	  const;
+	const unsigned int getReflectionMapSize() const;
+	const unsigned int getRefractionMapSize() const;
 
 	// Booleans
 	const bool isMsaaEnabled()                 const;
@@ -211,7 +212,6 @@ public:
 	const bool isSkyReflectionsEnabled()       const;
 	const bool isSceneReflectionsEnabled()     const;
 	const bool isBloomEnabled()                const;
-	const bool isWaterEffectsEnabled()         const;
 	const bool isSkyHdrEnabled()               const;
 	const bool isShadowsEnabled()              const;
 	const bool isDofEnabled()                  const;
@@ -234,8 +234,9 @@ private:
 	GLuint _sceneMap                 = 0;
 	GLuint _mainSkyReflectionCubeMap = 0;
 	GLuint _mixSkyReflectionCubeMap  = 0;
-	GLuint _sceneReflectionMap       = 0;
-	GLuint _sceneRefractionMap       = 0;
+	GLuint _sceneReflectionMap		 = 0;
+	GLuint _waterReflectionMap       = 0;
+	GLuint _waterRefractionMap       = 0;
 	GLuint _shadowMap                = 0;
 	GLuint _bloomMap                 = 0;
 	GLuint _postProcessedSceneMap    = 0;
@@ -301,12 +302,12 @@ private:
 	float _mixSkyLightness			 = 0.0f;
 	
 	// Integers
-	unsigned int _bloomBlurSize			 = 0;
-	unsigned int _triangleCount			 = 0;
-	unsigned int _msaaSampleCount		 = 0;
-	unsigned int _shadowMapSize			 = 0;
-	unsigned int _sceneReflectionMapSize = 0;
-	unsigned int _sceneRefractionMapSize = 0;
+	unsigned int _bloomBlurSize		= 0;
+	unsigned int _triangleCount		= 0;
+	unsigned int _msaaSampleCount	= 0;
+	unsigned int _shadowMapSize		= 0;
+	unsigned int _reflectionMapSize = 0;
+	unsigned int _refractionMapSize = 0;
 
 	// Booleans
 	bool _isMsaaEnabled                 = false;
@@ -321,7 +322,6 @@ private:
 	bool _isSkyReflectionsEnabled       = false;
 	bool _isSceneReflectionsEnabled     = false;
 	bool _isBloomEnabled                = false;
-	bool _isWaterEffectsEnabled         = false;
 	bool _isSkyHdrEnabled               = false;
 	bool _isShadowsEnabled              = false;
 	bool _isDofEnabled                  = false;

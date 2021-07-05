@@ -15,9 +15,14 @@ const GLuint RenderBus::getSceneReflectionMap() const
 	return _sceneReflectionMap;
 }
 
-const GLuint RenderBus::getSceneRefractionMap() const
+const GLuint RenderBus::getWaterReflectionMap() const
 {
-	return _sceneRefractionMap;
+	return _waterReflectionMap;
+}
+
+const GLuint RenderBus::getWaterRefractionMap() const
+{
+	return _waterRefractionMap;
 }
 
 const GLuint RenderBus::getBloomMap() const
@@ -320,14 +325,14 @@ const unsigned int RenderBus::getShadowMapSize() const
 	return _shadowMapSize;
 }
 
-const unsigned int RenderBus::getSceneReflectionMapSize() const
+const unsigned int RenderBus::getReflectionMapSize() const
 {
-	return _sceneReflectionMapSize;
+	return _reflectionMapSize;
 }
 
-const unsigned int RenderBus::getSceneRefractionMapSize() const
+const unsigned int RenderBus::getRefractionMapSize() const
 {
-	return _sceneRefractionMapSize;
+	return _refractionMapSize;
 }
 
 const bool RenderBus::isMsaaEnabled() const
@@ -388,11 +393,6 @@ const bool RenderBus::isSkyReflectionsEnabled() const
 const bool RenderBus::isBloomEnabled() const
 {
 	return _isBloomEnabled;
-}
-
-const bool RenderBus::isWaterEffectsEnabled() const
-{
-	return _isWaterEffectsEnabled;
 }
 
 const bool RenderBus::isSkyHdrEnabled() const

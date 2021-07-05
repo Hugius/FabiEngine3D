@@ -47,7 +47,6 @@ uniform int u_pointLightCount;
 // Boolean uniforms
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isFogEnabled;
-uniform bool u_isEffectsEnabled;
 uniform bool u_isRippling;
 uniform bool u_isSpecularLighted;
 uniform bool u_isReflective;
@@ -61,6 +60,7 @@ layout(location = 0) out vec4 o_finalColor;
 
 // Functions
 vec4 getMainColor();
+vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
 float getSpecularValue(vec3 position, vec3 normal);
 vec3 applyFog(vec3 color);
@@ -69,15 +69,8 @@ float convertDepthToLinear(float depth);
 // Calculate final fragment color
 void main()
 {    
-	if(u_isEffectsEnabled)
-	{
-		o_finalColor = getMainColor();
-		o_finalColor.rgb = applyFog(o_finalColor.rgb);
-	}
-	else
-	{
-		o_finalColor = vec4(u_color, 0.5f);
-	}
+	o_finalColor = getMainColor();
+	o_finalColor.rgb = applyFog(o_finalColor.rgb);
 }
 
 vec4 getMainColor()
@@ -117,19 +110,6 @@ vec4 getMainColor()
 		normal              = normalize(normal);
 	}
 
-	// Specular lighting
-	if(u_isDirectionalLightEnabled && u_isSpecularLightEnabled && u_isSpecularLighted)
-	{
-		vec3 lightDir     = normalize(u_directionalLightPosition - f_pos); // Light ray
-		vec3 viewDir      = normalize(f_pos - u_cameraPosition); // View ray
-		vec3 reflectDir   = reflect(normalize(lightDir), normal); // Reflect ray
-		float specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor); // Calculate if perpendicular
-		specular *= u_directionalLightIntensity; // Directional intensity
-		specular *= u_specularLightIntensity; // Specular intensity
-		directionalLighting = vec3(specular); // Add to lighting
-		directionalLighting *= u_directionalLightColor; // Directional color
-	}
-
 	// Fresnel effect
 	vec3 viewDir = normalize(u_cameraPosition - f_pos);
 	float mixFactor = dot(viewDir, normal);
@@ -140,8 +120,8 @@ vec4 getMainColor()
 	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
 
 	// Bloom correction
-	reflectionColor *= 1.5f;
-	refractionColor *= 1.5f;
+	reflectionColor *= 1.0f;
+	refractionColor *= 1.0f;
 
 	// Determine which textures to mix
 	if(u_isReflective && u_isRefractive && !u_isUnderWater) // Both
@@ -164,10 +144,10 @@ vec4 getMainColor()
 		finalColor = u_color;
 	}
 
-	// Specular highlights
+	// Specular lighting
 	if(u_isSpecularLightEnabled && u_isSpecularLighted)
 	{
-		finalColor += directionalLighting;
+		finalColor += getDirectionalLighting(normal);
 		finalColor += getPointLighting(normal);
 	}
 
@@ -209,18 +189,31 @@ vec3 getPointLighting(vec3 normal)
 	}
 }
 
+vec3 getDirectionalLighting(vec3 normal)
+{
+	if(u_isDirectionalLightEnabled)
+	{
+		vec3 lightDir = normalize(u_directionalLightPosition - f_pos); // Light ray
+		vec3 viewDir = normalize(f_pos - u_cameraPosition); // View ray
+		vec3 reflectDir = reflect(normalize(lightDir), normal); // Reflect ray
+		float specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor); // Calculate if perpendicular
+		specular *= u_directionalLightIntensity; // Directional intensity
+		specular *= u_specularLightIntensity; // Specular intensity
+		vec3 result = vec3(specular); // Add to lighting
+		result *= u_directionalLightColor; // Directional color
+		return result; // Return
+	}
+}
+
 // Calculate specular lighting
 float getSpecularValue(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
-        // Calculate
-        vec3 lightDirection   = normalize(f_pos - position);
-        vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
+        vec3 lightDirection = normalize(f_pos - position);
+        vec3 viewDirection = normalize(f_pos - u_cameraPosition);
         vec3 reflectDirection = reflect(-lightDirection, normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
-
-        // Return
+        float result = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
         return result * u_specularLightIntensity;
     }
     else

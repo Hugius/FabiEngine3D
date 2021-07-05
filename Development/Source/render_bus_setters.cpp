@@ -17,9 +17,14 @@ void RenderBus::setSceneReflectionMap(GLuint value)
 	_sceneReflectionMap = value;
 }
 
-void RenderBus::setSceneRefractionMap(GLuint value)
+void RenderBus::setWaterReflectionMap(GLuint value)
 {
-	_sceneRefractionMap = value;
+	_waterReflectionMap = value;
+}
+
+void RenderBus::setWaterRefractionMap(GLuint value)
+{
+	_waterRefractionMap = value;
 }
 
 void RenderBus::setBloomMap(GLuint value)
@@ -326,14 +331,14 @@ void RenderBus::setShadowMapSize(unsigned int value)
 	_shadowMapSize = value;
 }
 
-void RenderBus::setSceneReflectionMapSize(unsigned int value)
+void RenderBus::setReflectionMapSize(unsigned int value)
 {
-	_sceneReflectionMapSize = value;
+	_reflectionMapSize = value;
 }
 
-void RenderBus::setSceneRefractionMapSize(unsigned int value)
+void RenderBus::setRefractionMapSize(unsigned int value)
 {
-	_sceneRefractionMapSize = value;
+	_refractionMapSize = value;
 }
 
 void RenderBus::resetTriangleCount()
@@ -399,11 +404,6 @@ void RenderBus::setSkyReflectionsEnabled(bool value)
 void RenderBus::setBloomEnabled(bool value)
 {
 	_isBloomEnabled = value;
-}
-
-void RenderBus::setWaterEffectsEnabled(bool value)
-{
-	_isWaterEffectsEnabled = value;
 }
 
 void RenderBus::setSkyHdrEnabled(bool value)

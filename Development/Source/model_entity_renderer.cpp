@@ -6,9 +6,6 @@ using std::to_string;
 
 void ModelEntityRenderer::bind()
 {
-	// Define clipping plane for water/scene reflections
-	Vec4 clippingPlaneReflection = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
-
 	// Bind shader
 	_shader.bind();
 
@@ -16,7 +13,7 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix",	 _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix",		 _renderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlane",	 clippingPlaneReflection);
+	_shader.uploadUniform("u_clippingPlane",	 _renderBus.getClippingPlane());
 	
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",			  _renderBus.getCameraPosition());

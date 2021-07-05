@@ -92,6 +92,11 @@ void RenderBus::setFlareSourcePositionClipspace(Vec4 value)
 	_flareSourcePositionClipspace = value;
 }
 
+void RenderBus::setClippingPlane(Vec4 value)
+{
+	_clippingPlane = value;
+}
+
 void RenderBus::setCameraPosition(Vec3 value)
 {
 	_cameraPosition = value;
@@ -155,11 +160,6 @@ void RenderBus::setMixSkyColor(Vec3 value)
 void RenderBus::setSceneReflectionHeight(float value)
 {
 	_sceneReflectionHeight = value;
-}
-
-void RenderBus::setSceneReflectionOffset(float value)
-{
-	_sceneReflectionOffset = value;
 }
 
 void RenderBus::setSceneReflectionMixValue(float value)

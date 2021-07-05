@@ -16,7 +16,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_modelEntityRenderer      ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
-	_imageEntityRenderer        ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
+	_imageEntityRenderer      ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
 	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             renderBus),
 	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        renderBus),
 	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
@@ -89,11 +89,6 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 	}
 	else
 	{
-		// Temporarily disable scene reflections if water has reflections
-		bool waterReflectionsNeeded = (_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->isReflective();
-		bool wasSceneReflectionsEnabled = _renderBus.isSceneReflectionsEnabled();
-		_renderBus.setSceneReflectionsEnabled(wasSceneReflectionsEnabled && !waterReflectionsNeeded);
-
 		// Pre-rendering
 		_timer.startDeltaPart("reflectionPreRender");
 		_captureSceneReflections(camera);
@@ -193,9 +188,6 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_renderCustomCursor();
 		_renderBus.setTriangleCountingEnabled(false);
 		_timer.stopDeltaPart();
-
-		// Enable scene reflections again if it was enabled
-		_renderBus.setSceneReflectionsEnabled(wasSceneReflectionsEnabled);
 	}
 }
 

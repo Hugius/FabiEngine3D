@@ -216,7 +216,7 @@ public:
 	void waterEntity_setDudvMap(const string& ID, const string& texturePath);
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
-	void waterEntity_setWaveHeightFactor(const string& ID, float factor);
+	void waterEntity_setWaveHeight(const string& ID, float height);
 	void waterEntity_setSpecularLightingFactor(const string& ID, float factor);
 	void waterEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 	void waterEntity_setTransparency(const string& ID, float transparency);
@@ -237,7 +237,7 @@ public:
 	const Vec3 waterEntity_getColor(const string& ID);
 	const float waterEntity_getSize(const string& ID);
 	const float waterEntity_getUvRepeat(const string& ID);
-	const float waterEntity_getWaveHeightFactor(const string& ID);
+	const float waterEntity_getWaveHeight(const string& ID);
 	const float waterEntity_getSpecularLightingFactor(const string& ID);
 	const float waterEntity_getSpecularLightingIntensity(const string& ID);
 	const float waterEntity_getTransparency(const string& ID);

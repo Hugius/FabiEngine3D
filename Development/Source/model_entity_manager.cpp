@@ -231,7 +231,6 @@ void ModelEntityManager::update()
 			if (entity->isSceneReflective() && _renderBus.isSceneReflectionsEnabled())
 			{
 				_renderBus.setSceneReflectionHeight(entity->getTranslation().y);
-				_renderBus.setSceneReflectionOffset(0.0000001f);
 			}
 
 			// Check if entity has LOD

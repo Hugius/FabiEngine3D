@@ -20,7 +20,7 @@ uniform vec2 u_waveOffset;
 
 // Float uniforms
 uniform float u_uvRepeat;
-uniform float u_waveHeightFactor;
+uniform float u_waveHeight;
 
 // Boolean uniforms
 uniform bool u_isWaving;
@@ -60,7 +60,7 @@ void main()
 		float height = height1 + ((height2 - height1) / 2.0f);
 
 		// Add height to vertex Y
-		newPos.y += height * u_waveHeightFactor;
+		newPos.y += height * u_waveHeight;
 	}
 
 	// Camera spaces

@@ -67,13 +67,18 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_renderBus.setNormalMappingEnabled(false);
 
 		// Sky HDR must not appear in reflections
-		float oldLightness = 0.0f;
+		float oldSkyLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
 		if (skyEntity != nullptr)
 		{
-			oldLightness = skyEntity->getLightness();
+			oldSkyLightness = skyEntity->getLightness();
 			skyEntity->setLightness(skyEntity->getOriginalLightness());
 		}
+
+		// Calculate clipping plane
+		const float clippingHeight = -(_renderBus.getSceneReflectionHeight() + 0.0000001f);
+		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+		_renderBus.setClippingPlane(clippingPlane);
 
 		// Render SKY entity
 		_renderSkyEntity();
@@ -94,7 +99,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
 		if (skyEntity != nullptr)
 		{
-			skyEntity->setLightness(oldLightness);
+			skyEntity->setLightness(oldSkyLightness);
 		}
 
 		// Revert camera angle
@@ -144,11 +149,14 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 
 void MasterRenderer::_captureWaterReflections(Camera& camera)
 {
+	// Temporary values
+	const auto waterEntity = _entityBus->getWaterEntity();
+
 	// Check if water reflections needed
-	if ((_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->isReflective())
+	if ((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - _entityBus->getWaterEntity()->getTranslation().y);
+		float cameraDistance = (camera.getPosition().y - waterEntity->getTranslation().y);
 
 		// Start capturing reflections
 		_waterReflectionFramebuffer.bind();
@@ -156,8 +164,8 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 
 		// Save MODEL entities that must not be captured
 		vector<string> savedModelEntityIDs;
-		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS || 
-			_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS || 
+			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all MODEL entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
@@ -174,7 +182,7 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 
 		// Save BILLBOARD entities that must not be captured
 		vector<string> savedBillboardEntityIDs;
-		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all BILLBOARD entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
@@ -213,11 +221,16 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 			skyEntity->setLightness(skyEntity->getOriginalLightness());
 		}
 
+		// Calculate clipping plane
+		const float clippingHeight = -(waterEntity->getTranslation().y);
+		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+		_renderBus.setClippingPlane(clippingPlane);
+
 		// Render SKY entity
 		_renderSkyEntity();
 
 		// Render TERRAIN entity
-		if (_entityBus->getWaterEntity()->getQuality() != WaterQuality::SKY)
+		if (waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
 			_renderTerrainEntity();
@@ -225,8 +238,8 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		}
 
 		// Render MODEL entities
-		if (_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();
@@ -234,7 +247,7 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		}
 
 		// Render BILLBOARD entities
-		if(_entityBus->getWaterEntity()->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{		
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();
@@ -296,112 +309,98 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 
 void MasterRenderer::_captureWaterRefractions()
 {
+	// Temporary values
+	const auto waterEntity = _entityBus->getWaterEntity();
+
 	// Check if water refractions needed
-	if (_entityBus->getWaterEntity() != nullptr && _entityBus->getWaterEntity()->isRefractive())
+	if (waterEntity != nullptr && waterEntity->isRefractive())
 	{
-		// Bind
+		// Start capturing refractions
 		_waterRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Render whole scene
-		_renderSkyEntity();
-		_renderTerrainEntity();
-		_renderModelEntities();
-		_renderBillboardEntities();
+		// Shadows are not needed when no models are rendered, so they should not appear
+		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
+		if (waterEntity->getQuality() == WaterQuality::SKY || waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
+		{
+			_renderBus.setShadowsEnabled(false);
+		}
 
-		// Unbind
+		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
+		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
+		_renderBus.setNormalMappingEnabled(false);
+
+		// Sky HDR must not appear in reflections
+		float oldSkyLightness = 0.0f;
+		auto skyEntity = _entityBus->getMainSkyEntity();
+		if (skyEntity != nullptr)
+		{
+			oldSkyLightness = skyEntity->getLightness();
+			skyEntity->setLightness(skyEntity->getOriginalLightness());
+		}
+
+		// Check if camera underwater
+		const float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getTranslation().y + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f)));
+
+		// Calculate clipping plane
+		if (isUnderWater)
+		{
+			const float clippingHeight = -(waterEntity->getTranslation().y);
+			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+			_renderBus.setClippingPlane(clippingPlane);
+		}
+		else
+		{
+			const float clippingHeight = (waterEntity->getTranslation().y + waveHeight);
+			const Vec4 clippingPlane = Vec4(0.0f, -1.0f, 0.0f, clippingHeight);
+			_renderBus.setClippingPlane(clippingPlane);
+		}
+
+		// Render SKY entity
+		_renderSkyEntity();
+
+		// Render TERRAIN entity
+		if (waterEntity->getQuality() != WaterQuality::SKY)
+		{
+			glEnable(GL_CLIP_DISTANCE0);
+			_renderTerrainEntity();
+			glDisable(GL_CLIP_DISTANCE0);
+		}
+
+		// Render MODEL entities
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
+			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		{
+			glEnable(GL_CLIP_DISTANCE2);
+			_renderModelEntities();
+			glDisable(GL_CLIP_DISTANCE2);
+		}
+
+		// Render BILLBOARD entities
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		{
+			glEnable(GL_CLIP_DISTANCE2);
+			_renderBillboardEntities();
+			glDisable(GL_CLIP_DISTANCE2);
+		}
+
+		// Revert disabled graphics
+		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
+		if (skyEntity != nullptr)
+		{
+			skyEntity->setLightness(oldSkyLightness);
+		}
+
+		// Stop capturing refractions
 		_waterRefractionFramebuffer.unbind();
 
 		// Assign texture
 		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
-	}
-}
-
-void MasterRenderer::_captureShadows()
-{
-	if (_renderBus.isShadowsEnabled())
-	{
-		// Bind
-		_shadowFramebuffer.bind();
-		glClear(GL_DEPTH_BUFFER_BIT);
-		_shadowRenderer.bind();
-
-		// Render MODEL entities
-		auto allModelEntities = _entityBus->getModelEntities();
-		for (const auto& [keyID, modelEntity] : allModelEntities)
-		{
-			// Check if LOD entity needs to be rendered
-			if (modelEntity->isLevelOfDetailed())
-			{
-				// Try to find LOD entity
-				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
-				if (foundPair != allModelEntities.end())
-				{
-					auto lodEntity = foundPair->second;
-
-					// Save original transformation
-					Vec3 originalPosition = lodEntity->getTranslation();
-					Vec3 originalRotation = lodEntity->getRotation();
-					Vec3 originalSize = lodEntity->getScaling();
-					bool originalVisibility = lodEntity->isVisible();
-
-					// Change transformation
-					lodEntity->setTranslation(modelEntity->getTranslation());
-					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
-					lodEntity->setVisible(modelEntity->isVisible());
-					lodEntity->updateModelMatrix();
-
-					// Render LOD entity
-					_shadowRenderer.render(lodEntity);
-
-					// Revert to original transformation
-					lodEntity->setTranslation(originalPosition);
-					lodEntity->setRotation(originalRotation);
-					lodEntity->setScaling(originalSize);
-					lodEntity->setVisible(originalVisibility);
-					lodEntity->updateModelMatrix();
-				}
-				else
-				{
-					Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
-				}
-			}
-			else // Render high-quality entity
-			{
-				_shadowRenderer.render(modelEntity);
-			}
-		}
-
-		// Render BILLBOARD entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
-		{
-			_shadowRenderer.render(entity);
-		}
-
-		// Unbind
-		_shadowRenderer.unbind();
-		_shadowFramebuffer.unbind();
-		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
-	}
-}
-
-void MasterRenderer::_captureBloom()
-{
-	if (_renderBus.isBloomEnabled())
-	{
-		// Process scene texture
-		_bloomHdrFramebuffer.bind();
-		glClear(GL_COLOR_BUFFER_BIT);
-		_bloomHdrRenderer.bind();
-		_bloomHdrRenderer.render(_finalSurface, _renderBus.getSceneMap());
-		_bloomHdrRenderer.unbind();
-		_bloomHdrFramebuffer.unbind();
-
-		// Blur scene texture
-		_blurRenderer.bind();
-		_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0),
-			static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-		_blurRenderer.unbind();
 	}
 }

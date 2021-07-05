@@ -90,6 +90,11 @@ const Vec4 RenderBus::getFlareSourcePositionClipspace() const
 	return _flareSourcePositionClipspace;
 }
 
+const Vec4 RenderBus::getClippingPlane() const
+{
+	return _clippingPlane;
+}
+
 const Vec3 RenderBus::getCameraPosition() const
 {
 	return _cameraPosition;
@@ -153,11 +158,6 @@ const Vec3 RenderBus::getDirectionalLightColor() const
 const float RenderBus::getSceneReflectionHeight() const
 {
 	return _sceneReflectionHeight;
-}
-
-const float RenderBus::getSceneReflectionOffset() const
-{
-	return _sceneReflectionOffset;
 }
 
 const float RenderBus::getSceneReflectionMixValue() const

@@ -33,6 +33,7 @@ public:
 
 	// Vector4
 	void setFlareSourcePositionClipspace(Vec4 value);
+	void setClippingPlane(Vec4 value);
 
 	// Vector3
 	void setCameraPosition(Vec3 value);
@@ -67,7 +68,6 @@ public:
 	void setDofBlurDistance(float value);
 	void setSkyReflectionMixValue(float value);
 	void setSceneReflectionHeight(float value);
-	void setSceneReflectionOffset(float value);
 	void setSceneReflectionMixValue(float value);
 	void setShadowAreaSize(float value);
 	void setShadowAreaReach(float value);
@@ -143,6 +143,7 @@ public:
 
 	// Vector4
 	const Vec4 getFlareSourcePositionClipspace() const;
+	const Vec4 getClippingPlane() const;
 	
 	// Vector3
 	const Vec3 getCameraPosition()			 const;
@@ -177,7 +178,6 @@ public:
 	const float getDofBlurDistance()		   const;
 	const float getSkyReflectionMixValue()	   const;
 	const float getSceneReflectionHeight()	   const;
-	const float getSceneReflectionOffset()	   const;
 	const float getSceneReflectionMixValue()   const;
 	const float getShadowAreaSize()			   const;
 	const float getShadowAreaReach()		   const;
@@ -253,6 +253,7 @@ private:
 
 	// Vector4
 	Vec4 _flareSourcePositionClipspace = Vec4(0.0f);
+	Vec4 _clippingPlane = Vec4(0.0f);
 
 	// Vector3
 	Vec3 _cameraPosition		   = Vec3(0.0f);
@@ -287,7 +288,6 @@ private:
 	float _dofBlurDistance			 = 0.0f;
 	float _skyReflectionMixValue     = 0.0f;
 	float _sceneReflectionHeight     = 0.0f;
-	float _sceneReflectionOffset	 = 0.0f;
 	float _sceneReflectionMixValue   = 0.0f;
 	float _shadowAreaSize			 = 0.0f;
 	float _shadowAreaReach			 = 0.0f;

@@ -67,9 +67,9 @@ void WaterEntity::setWaveOffset(Vec2 value)
 	_waveOffset = value;
 }
 
-void WaterEntity::setWaveHeightFactor(float value)
+void WaterEntity::setWaveHeight(float value)
 {
-	_waveHeightFactor = std::max(0.0f, value);
+	_waveHeight = std::max(0.0f, value);
 }
 
 void WaterEntity::setSpecularLightingFactor(float value)
@@ -187,9 +187,9 @@ const Vec2 WaterEntity::getWaveOffset() const
 	return _waveOffset;
 }
 
-const float WaterEntity::getWaveHeightFactor() const
+const float WaterEntity::getWaveHeight() const
 {
-	return _waveHeightFactor;
+	return _waveHeight;
 }
 
 const float WaterEntity::getSpecularLightingFactor() const

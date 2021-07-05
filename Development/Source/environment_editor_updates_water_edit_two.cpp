@@ -160,7 +160,7 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
 		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
-		auto waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
+		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
 
 		// GUI management
@@ -195,7 +195,7 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave Height Factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave Height Factor", waveHeight * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("quality")->isHovered())
 			{
@@ -275,10 +275,10 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		}
 
 		// Check if wave height value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
-			waveHeightFactor = std::max(0.0f, waveHeightFactor / 100.0f);
-			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);
+			waveHeight = std::max(0.0f, waveHeight / 100.0f);
+			_fe3d.waterEntity_setWaveHeight(_currentWaterID, waveHeight);
 		}
 
 		// Update water quality

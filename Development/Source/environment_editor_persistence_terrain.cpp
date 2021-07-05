@@ -67,7 +67,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
 			normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
 			normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
-			blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
+			blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
 			blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
@@ -176,7 +176,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 			normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
 			normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
 			normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
-			blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
+			blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
 			blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;

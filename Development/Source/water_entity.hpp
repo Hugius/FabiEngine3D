@@ -22,7 +22,7 @@ public:
 	void setNormalMapPath(const string& value);
 	void setDisplacementMapPath(const string& value);
 	void setUvRepeat(float value);
-	void setWaveHeightFactor(float value);
+	void setWaveHeight(float value);
 	void setSpecularLightingFactor(float value);
 	void setSpecularLightingIntensity(float value);
 	void setSize(float value);
@@ -48,7 +48,7 @@ public:
 	const string& getNormalMapPath()			    const;
 	const string& getDisplacementMapPath()		    const;
 	const float   getUvRepeat()					    const;
-	const float   getWaveHeightFactor()			    const;
+	const float   getWaveHeight()					const;
 	const float   getSpecularLightingFactor()       const;
 	const float   getSpecularLightingIntensity()    const;
 	const float   getSize()						    const;
@@ -83,7 +83,7 @@ private:
 
 	float _size						 = 1.0f;
 	float _uvRepeat					 = 1.0f;
-	float _waveHeightFactor			 = 0.0f;
+	float _waveHeight				 = 0.0f;
 	float _specularLightingFactor    = 1.0f;
 	float _specularLightingIntensity = 1.0f;
 	float _transparency				 = 0.0f;

@@ -161,7 +161,8 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	_fe3d.waterEntity_setSpecularLighted(newID, _fe3d.waterEntity_isSpecularLighted(previewID));
 	_fe3d.waterEntity_setReflective(newID, _fe3d.waterEntity_isReflective(previewID));
 	_fe3d.waterEntity_setRefractive(newID, _fe3d.waterEntity_isRefractive(previewID));
-	_fe3d.waterEntity_setWaveHeightFactor(newID, _fe3d.waterEntity_getWaveHeightFactor(previewID));
+	_fe3d.waterEntity_setWaveHeight(newID, _fe3d.waterEntity_getWaveHeight(previewID));
+	_fe3d.waterEntity_setQuality(newID, _fe3d.waterEntity_getQuality(previewID));
 	_fe3d.waterEntity_setSpecularLightingFactor(newID, _fe3d.waterEntity_getSpecularLightingFactor(previewID));
 	_fe3d.waterEntity_setSpecularLightingIntensity(newID, _fe3d.waterEntity_getSpecularLightingIntensity(previewID));
 	_fe3d.waterEntity_setTransparency(newID, _fe3d.waterEntity_getTransparency(previewID));

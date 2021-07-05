@@ -104,7 +104,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 			string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 			Vec3 color, position;
 			Vec2 speed;
-			float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
+			float size, uvRepeat, waveHeight, transparency, specularFactor, specularIntensity;
 			unsigned int quality;
 			bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
 
@@ -127,7 +127,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 				position.y >>
 				position.z >>
 				uvRepeat >>
-				waveHeightFactor >>
+				waveHeight >>
 				quality >>
 				speed.x >>
 				speed.y >>
@@ -153,7 +153,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 			_fe3d.waterEntity_setSpecularLighted(waterID, isSpecularLighted);
 			_fe3d.waterEntity_setReflective(waterID, isReflective);
 			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
-			_fe3d.waterEntity_setWaveHeightFactor(waterID, waveHeightFactor);
+			_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
 			_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
 			_fe3d.waterEntity_setSpecularLightingFactor(waterID, specularFactor);
 			_fe3d.waterEntity_setSpecularLightingIntensity(waterID, specularIntensity);
@@ -221,7 +221,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 		auto speed = _fe3d.waterEntity_getSpeed(waterID);
 		auto size = _fe3d.waterEntity_getSize(waterID);
 		auto uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
-		auto waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(waterID);
+		auto waveHeight = _fe3d.waterEntity_getWaveHeight(waterID);
 		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
 		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
@@ -259,7 +259,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 			position.y << " " <<
 			position.z << " " <<
 			uvRepeat << " " <<
-			waveHeightFactor << " " <<
+			waveHeight << " " <<
 			quality << " " <<
 			speed.x << " " <<
 			speed.y << " " <<

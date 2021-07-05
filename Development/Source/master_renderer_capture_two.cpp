@@ -17,12 +17,12 @@ void MasterRenderer::_captureSceneDepth()
 	{
 		// Check if camera is underwater
 		auto waterEntity = _entityBus->getWaterEntity();
-		float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeightFactor() : 0.0f);
+		float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
 		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getTranslation().y + waveHeight));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f)));
 		
 		// Determine clipping Y based on being underwater or not
 		if (isUnderWater)
@@ -43,7 +43,7 @@ void MasterRenderer::_captureSceneDepth()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_depthRenderer.bind();
 
-		// Render terrain entity
+		// Render TERRAIN entity
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
 			_depthRenderer.render(_entityBus->getTerrainEntity());
@@ -100,7 +100,7 @@ void MasterRenderer::_captureSceneDepth()
 			}
 		}
 
-		// Render billboard entities
+		// Render BILLBOARD entities
 		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if entity must be included in depth map
@@ -253,5 +253,94 @@ void MasterRenderer::_captureLensFlare()
 		_renderBus.setLensFlareAlpha(alpha);
 		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
 		_renderBus.setFlareSourcePosition(lightingPosition);
+	}
+}
+
+void MasterRenderer::_captureShadows()
+{
+	if (_renderBus.isShadowsEnabled())
+	{
+		// Bind
+		_shadowFramebuffer.bind();
+		glClear(GL_DEPTH_BUFFER_BIT);
+		_shadowRenderer.bind();
+
+		// Render MODEL entities
+		auto allModelEntities = _entityBus->getModelEntities();
+		for (const auto& [keyID, modelEntity] : allModelEntities)
+		{
+			// Check if LOD entity needs to be rendered
+			if (modelEntity->isLevelOfDetailed())
+			{
+				// Try to find LOD entity
+				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
+				if (foundPair != allModelEntities.end())
+				{
+					auto lodEntity = foundPair->second;
+
+					// Save original transformation
+					Vec3 originalPosition = lodEntity->getTranslation();
+					Vec3 originalRotation = lodEntity->getRotation();
+					Vec3 originalSize = lodEntity->getScaling();
+					bool originalVisibility = lodEntity->isVisible();
+
+					// Change transformation
+					lodEntity->setTranslation(modelEntity->getTranslation());
+					lodEntity->setRotation(modelEntity->getRotation());
+					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+					lodEntity->setVisible(modelEntity->isVisible());
+					lodEntity->updateModelMatrix();
+
+					// Render LOD entity
+					_shadowRenderer.render(lodEntity);
+
+					// Revert to original transformation
+					lodEntity->setTranslation(originalPosition);
+					lodEntity->setRotation(originalRotation);
+					lodEntity->setScaling(originalSize);
+					lodEntity->setVisible(originalVisibility);
+					lodEntity->updateModelMatrix();
+				}
+				else
+				{
+					Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
+				}
+			}
+			else // Render high-quality entity
+			{
+				_shadowRenderer.render(modelEntity);
+			}
+		}
+
+		// Render BILLBOARD entities
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		{
+			_shadowRenderer.render(entity);
+		}
+
+		// Unbind
+		_shadowRenderer.unbind();
+		_shadowFramebuffer.unbind();
+		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
+	}
+}
+
+void MasterRenderer::_captureBloom()
+{
+	if (_renderBus.isBloomEnabled())
+	{
+		// Process scene texture
+		_bloomHdrFramebuffer.bind();
+		glClear(GL_COLOR_BUFFER_BIT);
+		_bloomHdrRenderer.bind();
+		_bloomHdrRenderer.render(_finalSurface, _renderBus.getSceneMap());
+		_bloomHdrRenderer.unbind();
+		_bloomHdrFramebuffer.unbind();
+
+		// Blur scene texture
+		_blurRenderer.bind();
+		_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0),
+			static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+		_blurRenderer.unbind();
 	}
 }

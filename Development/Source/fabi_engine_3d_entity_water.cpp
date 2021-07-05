@@ -141,9 +141,9 @@ void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string
 	_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(texturePath);
 }
 
-void FabiEngine3D::waterEntity_setWaveHeightFactor(const string& ID, float factor)
+void FabiEngine3D::waterEntity_setWaveHeight(const string& ID, float height)
 {
-	_core->_waterEntityManager.getEntity(ID)->setWaveHeightFactor(factor);
+	_core->_waterEntityManager.getEntity(ID)->setWaveHeight(height);
 }
 
 void FabiEngine3D::waterEntity_setSpecularLightingFactor(const string& ID, float factor)
@@ -210,9 +210,9 @@ const Vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getSpeed();
 }
 
-const float FabiEngine3D::waterEntity_getWaveHeightFactor(const string& ID)
+const float FabiEngine3D::waterEntity_getWaveHeight(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getWaveHeightFactor();
+	return _core->_waterEntityManager.getEntity(ID)->getWaveHeight();
 }
 
 const float FabiEngine3D::waterEntity_getSpecularLightingFactor(const string& ID)

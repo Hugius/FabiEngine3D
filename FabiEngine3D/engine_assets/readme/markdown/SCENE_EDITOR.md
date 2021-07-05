@@ -50,8 +50,9 @@
 - Every placed point light has an **intensity** (**Range**: 0 to inf) that can be **edited**.
 - Every placed point light has a **color** (**Range**: 0 to 255) that can be **edited**.
 ### Settings
-- You can change the editor **camera** movement speed (**Range**: 0 to inf).
-- You can set the **minimum distance** by which **level of detailed models** will change their rendering (**Range**: 0 to inf).
+- **Editor speed**: camera movement speed & value changing speed (**Range**: 0 to inf).
+- **LOD distance**: minimum distance by which level of detailed models will appear/disappear (**Range**: 0 to inf).
+- **Reflection height**: the Y coordinate from which scene reflections are captured (**Range**: -inf to inf).
 ### Settings - Graphics - Shadows
 - You can enable **directional shadows** casted from a certain **position** (**Range**: -inf to inf).
 - Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).

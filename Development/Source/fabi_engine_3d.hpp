@@ -647,7 +647,7 @@ public:
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
 	void gfx_enableSkyReflections(float factor);
-	void gfx_enableSceneReflections(float factor);
+	void gfx_enableSceneReflections(float factor, float height);
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();

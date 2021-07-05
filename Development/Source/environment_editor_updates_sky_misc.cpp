@@ -213,7 +213,7 @@ void EnvironmentEditor::_updateSkyCamera()
 				// Disable motion blur
 				if (_fe3d.gfx_isMotionBlurEnabled())
 				{
-					_fe3d.gfx_disableMotionBlur(false);
+					_fe3d.gfx_disableMotionBlur(true);
 				}
 
 				// Show cursor
@@ -226,7 +226,7 @@ void EnvironmentEditor::_updateSkyCamera()
 			if (_fe3d.camera_isFirstPersonViewEnabled())
 			{
 				_fe3d.camera_disableFirstPersonView();
-				_fe3d.gfx_disableMotionBlur();
+				_fe3d.gfx_disableMotionBlur(true);
 			}
 			_fe3d.camera_setYaw(0.0f);
 			_fe3d.camera_setPitch(0.0f);

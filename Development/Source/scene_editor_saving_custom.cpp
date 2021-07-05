@@ -542,6 +542,9 @@ void SceneEditor::saveCustomSceneToFile()
 	// LOD distance settings
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << std::endl;
 
+	// Reflection height
+	file << "REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << std::endl;
+
 	// Check if allowed to save
 	if (_hasCustomSceneGraphics)
 	{

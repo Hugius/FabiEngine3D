@@ -11,7 +11,8 @@ void SceneEditor::_updateMainSettingsMenu()
 		if (screen->getID() == "sceneEditorMenuSettings")
 		{
 			// Temporary values
-			float lodDistance = _fe3d.misc_getLevelOfDetailDistance();
+			auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
+			auto reflectionHeight = _fe3d.gfx_getSceneReflectionHeight();
 
 			// GUI management
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -32,6 +33,10 @@ void SceneEditor::_updateMainSettingsMenu()
 				{
 					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
+				else if (screen->getButton("reflectionHeight")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("reflectionHeight", "Scene reflection height", reflectionHeight, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				}
 			}
 
 			// Setting custom camera speed
@@ -43,6 +48,13 @@ void SceneEditor::_updateMainSettingsMenu()
 			{
 				lodDistance = std::max(0.0f, lodDistance);
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
+			}
+
+			// Setting reflection height
+			if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
+			{
+				_fe3d.gfx_disableSceneReflections();
+				_fe3d.gfx_enableSceneReflections(0.5f, reflectionHeight);
 			}
 		}
 	}

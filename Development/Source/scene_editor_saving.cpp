@@ -317,6 +317,9 @@ void SceneEditor::saveEditorSceneToFile()
 	// LOD distance
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << std::endl;
 
+	// Reflection height
+	file << "REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << std::endl;
+
 	// Editor camera speed
 	file << "EDITOR_SPEED " << _editorSpeed << std::endl;
 

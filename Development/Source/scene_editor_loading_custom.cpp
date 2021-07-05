@@ -568,6 +568,19 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
+			else if (entityType == "REFLECTION_HEIGHT")
+			{
+				// Data placeholders
+				float reflectionHeight;
+
+				// Extract data
+				iss >>
+					reflectionHeight;
+
+				// Set height
+				_fe3d.gfx_disableSceneReflections();
+				_fe3d.gfx_enableSceneReflections(0.5f, reflectionHeight);
+			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{
 				// Data placeholders

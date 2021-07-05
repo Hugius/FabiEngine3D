@@ -112,8 +112,8 @@ void ModelEditor::load()
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
-	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();

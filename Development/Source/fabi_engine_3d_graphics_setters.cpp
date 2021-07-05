@@ -119,7 +119,7 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 	}
 }
 
-void FabiEngine3D::gfx_enableSceneReflections(float factor)
+void FabiEngine3D::gfx_enableSceneReflections(float factor, float height)
 {
 	if (_core->_renderBus.isSceneReflectionsEnabled())
 	{
@@ -129,6 +129,7 @@ void FabiEngine3D::gfx_enableSceneReflections(float factor)
 	{
 		_core->_renderBus.setSceneReflectionsEnabled(true);
 		_core->_renderBus.setSceneReflectionMixValue(factor);
+		_core->_renderBus.setSceneReflectionHeight(height);
 	}
 }
 
@@ -389,6 +390,7 @@ void FabiEngine3D::gfx_disableSceneReflections(bool resetProperties)
 		if (resetProperties)
 		{
 			_core->_renderBus.setSceneReflectionMixValue(0.0f);
+			_core->_renderBus.setSceneReflectionHeight(0.0f);
 		}
 	}
 	else

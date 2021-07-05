@@ -251,6 +251,10 @@ void EnvironmentEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	if (_fe3d.camera_isLookatViewEnabled())
+	{
+		_fe3d.camera_disableLookatView();
+	}
 	if (_fe3d.misc_isDebugRenderingEnabled())
 	{
 		_fe3d.misc_disableDebugRendering();

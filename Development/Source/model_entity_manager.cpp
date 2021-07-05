@@ -227,12 +227,6 @@ void ModelEntityManager::update()
 			// Calculate model matrix
 			entity->updateModelMatrix();
 
-			// Update reflection height
-			if (entity->isSceneReflective() && _renderBus.isSceneReflectionsEnabled())
-			{
-				_renderBus.setSceneReflectionHeight(entity->getTranslation().y);
-			}
-
 			// Check if entity has LOD
 			if (!entity->getLodEntityID().empty())
 			{

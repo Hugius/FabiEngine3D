@@ -143,7 +143,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		_sceneReflectionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setWaterReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
 	}
 }
 

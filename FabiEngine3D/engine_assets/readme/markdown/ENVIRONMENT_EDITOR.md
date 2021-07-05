@@ -75,3 +75,5 @@
 - **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
 - **Spec intesity**: the intensity of the specular lighting. **Range**: 0 to inf.
 - **Wave height**: the height of the waves. **Range**: 0 to inf.
+- **Quality**: determines which entities are captured by reflections & refractions.  
+  **Range**: 1 (only sky) or 2 (sky + terrain) or 3 (sky + terrain + models) or 4 (sky + terrain + models + billboards).

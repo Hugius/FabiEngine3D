@@ -1,73 +1,77 @@
 #include "collision_detector.hpp"
+#include <iostream>
 
-Collision CollisionDetector::check(Vec3 aabbPosition, Vec3 aabbSize, Vec3 middle,
+Collision CollisionDetector::check(Vec3 boxPosition, Vec3 boxSize, Vec3 middlePosition,
 	float bottom, float top, float left, float right, float front, float back, 
-	Vec3 positionDifference)
+	Vec3 middleChange, bool hasCollided)
 {
 	// Temporary values
 	Collision collision(false, false, false);
-	const auto position = aabbPosition;
-	const auto size = aabbSize / 2.0f;
-	bool insideBox = false;
+	const auto position = boxPosition;
+	const auto size = boxSize / 2.0f;
+	bool isInsideBox = false;
 	bool xInsideBox = false;
 	bool yInsideBox = false;
 	bool zInsideBox = false;
 
 	// X collision detection
-	if (((middle.x + right) > (position.x - size.x) && (middle.x + right) < (position.x + size.x)) ||
-		((middle.x - left) < (position.x + size.x) && (middle.x - left) > (position.x - size.x)))
+	if (((middlePosition.x + right) > (position.x - size.x) && (middlePosition.x + right) < (position.x + size.x)) ||
+		((middlePosition.x - left) < (position.x + size.x) && (middlePosition.x - left) > (position.x - size.x)))
 	{
 		xInsideBox = true;
 	}
 
 	// Y collision detection
-	if (((middle.y + top) > (position.y) && (middle.y + top) < (position.y + (size.y * 2.0f))) ||
-		((middle.y - bottom) < (position.y + (size.y * 2.0f)) && (middle.y - bottom) > (position.y)))
+	if (((middlePosition.y + top) > (position.y) && (middlePosition.y + top) < (position.y + (size.y * 2.0f))) ||
+		((middlePosition.y - bottom) < (position.y + (size.y * 2.0f)) && (middlePosition.y - bottom) > (position.y)))
 	{
 		yInsideBox = true;
 
 	}
 
 	// Z collision detection
-	if (((middle.z + front) > (position.z - size.z) && (middle.z + front) < (position.z + size.z)) ||
-		((middle.z - back) < (position.z + size.z) && (middle.z - back) > (position.z - size.z)))
+	if (((middlePosition.z + front) > (position.z - size.z) && (middlePosition.z + front) < (position.z + size.z)) ||
+		((middlePosition.z - back) < (position.z + size.z) && (middlePosition.z - back) > (position.z - size.z)))
 	{
 		zInsideBox = true;
 	}
 
 	// Check if AABB is smaller than the camera box
-	bool xTooSmall = (middle.x + right) >= (position.x + size.x) && (middle.x - left) <= (position.x - size.x);
-	bool yTooSmall = (middle.y + top)   >= (position.y + (size.y * 2.0f)) && (middle.y - bottom) <= position.y;
-	bool zTooSmall = (middle.z + front) >= (position.z + size.z) && (middle.z - back) <= (position.z - size.z);
+	bool xTooSmall = (middlePosition.x + right) >= (position.x + size.x) && (middlePosition.x - left) <= (position.x - size.x);
+	bool yTooSmall = (middlePosition.y + top)   >= (position.y + (size.y * 2.0f)) && (middlePosition.y - bottom) <= position.y;
+	bool zTooSmall = (middlePosition.z + front) >= (position.z + size.z) && (middlePosition.z - back) <= (position.z - size.z);
 
 	// Check for any collision at all
 	if ((xInsideBox || xTooSmall) && (yInsideBox || yTooSmall) && (zInsideBox || zTooSmall))
 	{
-		insideBox = true;
+		isInsideBox = true;
 	}
 
-	// Check with which side the box collided
-	if (insideBox)
+	// Check which side collided
+	if (isInsideBox)
 	{
-		// Calculate differences
-		float xDiffFirst = fabsf((position.x - size.x) - (middle.x + right));
-		float xDiffSecnd = fabsf((position.x + size.x) - (middle.x - left));
-		float yDiffFirst = fabsf((position.y) - (middle.y + top));
-		float yDiffSecnd = fabsf((position.y + (size.y * 2.0f)) - (middle.y - bottom));
-		float zDiffFirst = fabsf((position.z - size.z) - (middle.z + front));
-		float zDiffSecnd = fabsf((position.z + size.z) - (middle.z - back));
+		// Calculate side differences
+		float leftDifference = fabsf((position.x - size.x) - (middlePosition.x + right));
+		float rightDifference = fabsf((position.x + size.x) - (middlePosition.x - left));
+		float bottomDifference = fabsf((position.y) - (middlePosition.y + top));
+		float topDifference = fabsf((position.y + (size.y * 2.0f)) - (middlePosition.y - bottom));
+		float backDifference = fabsf((position.z - size.z) - (middlePosition.z + back));
+		float frontDifference = fabsf((position.z + size.z) - (middlePosition.z - front));
 
-		// Check in which directions the box moved
-		bool xCollision = (xDiffFirst <= positionDifference.x || xDiffSecnd <= positionDifference.x);
-		bool yCollision = (yDiffFirst <= positionDifference.y || yDiffSecnd <= positionDifference.y);
-		bool zCollision = (zDiffFirst <= positionDifference.z || zDiffSecnd <= positionDifference.z);
+		// Check in which direction the box moved
+		bool leftCollision = (middleChange.x > 0.0f && leftDifference <= fabs(middleChange.x));
+		bool rightCollision = (middleChange.x < 0.0f && rightDifference <= fabs(middleChange.x));
+		bool bottomCollision = (middleChange.y > 0.0f && bottomDifference <= fabs(middleChange.y));
+		bool topCollision = (middleChange.y < 0.0f && topDifference <= fabs(middleChange.y));
+		bool backCollision = (middleChange.z > 0.0f && backDifference <= fabs(middleChange.z));
+		bool frontCollision = (middleChange.z < 0.0f && frontDifference <= fabs(middleChange.z));
 
 		// Compose collision direction
-		if (xCollision) { collision.setX(true); }
-		if (yCollision) { collision.setY(true); }
-		if (zCollision) { collision.setZ(true); }
+		if (leftCollision   || rightCollision) { collision.setX(true); }
+		if (bottomCollision || topCollision)   { collision.setY(true); }
+		if (backCollision   || frontCollision) { collision.setZ(true); }
 	}
-
+	
 	// Return total collision
 	return collision;
 }

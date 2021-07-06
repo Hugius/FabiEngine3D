@@ -17,9 +17,8 @@ void CollisionResolver::update(
 	{
 		// Temporary values
 		static Vec3 oldCameraPos;
-		Vec3 currentCameraPos = camera.getPosition();
-		Vec3 positionDifference = oldCameraPos - currentCameraPos;
-		positionDifference = Vec3(fabsf(positionDifference.x), fabsf(positionDifference.y), fabsf(positionDifference.z));
+		Vec3 middlePosition = camera.getPosition();
+		Vec3 middleChange = (middlePosition - oldCameraPos);
 		Collision collision(false, false, false);
 
 		// Detect collision
@@ -29,9 +28,9 @@ void CollisionResolver::update(
 			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
 				// Check collision with AABB
-				auto result = _collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), currentCameraPos,
+				auto result = _collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), middlePosition,
 					_cameraAabbBottom, _cameraAabbTop, _cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, 
-					positionDifference);
+					middleChange, aabb->hasCollided());
 
 				// Set direction
 				if (result.xCollided())
@@ -60,7 +59,7 @@ void CollisionResolver::update(
 		}
 
 		// Respond to collision
-		Vec3 newCameraPos = currentCameraPos;
+		Vec3 newCameraPos = middlePosition;
 		if (collision.xCollided() && _isCameraResponseEnabledX)
 		{
 			newCameraPos.x = oldCameraPos.x;

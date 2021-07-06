@@ -7,6 +7,7 @@
 #include "network_server_message.hpp"
 #include "mathematics.hpp"
 #include "water_quality.hpp"
+#include "bloom_type.hpp"
 
 #include <array>
 #include <vector>
@@ -454,6 +455,7 @@ public:
 	const bool aabbEntity_isCollisionResponsive(const string& ID);
 	const bool aabbEntity_isExisting(const string& ID);
 	const bool aabbEntity_isVisible(const string& ID);
+	const bool aabbEntity_hasParent(const string& ID);
 	const vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
 	const vector<string> aabbEntity_getAllIDs();
 	const string& aabbEntity_getParentID(const string& ID);
@@ -652,7 +654,7 @@ public:
 	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
-	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
+	void gfx_enableBloom(BloomType type, float intensity, int blurSize);
 	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
@@ -699,7 +701,6 @@ public:
 	const float gfx_getShadowReach();
 	const float gfx_getShadowLightness();
 	const float gfx_getBloomIntensity();
-	const float gfx_getBloomBrightnessTreshold();
 	const float gfx_getSkyHdrBrightnessFactor();
 	const float gfx_getaMaxDofDistance();
 	const float gfx_getDofBlurDistance();

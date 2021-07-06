@@ -71,7 +71,7 @@ void ModelEditor::_loadMeshFileNames()
 		string meshPath = string(entry.path().u8string());
 		meshPath.erase(0, meshDirectoryPath.size());
 
-		// Loop over file path
+		// Iterate through file path
 		for (size_t i = 0; i < meshPath.size(); i++)
 		{
 			// End of file name

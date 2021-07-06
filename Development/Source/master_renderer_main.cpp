@@ -18,20 +18,18 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
 	_imageEntityRenderer      ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
 	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             renderBus),
-	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        renderBus),
 	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
 	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   renderBus),
 	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
 	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
 	// Framebuffers
-	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
 	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 0, 1);
-	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0), 1);
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
 	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
-	_bloomHdrFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
@@ -143,14 +141,14 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
 			_msaaFramebuffer.unbind();
-			_finalSurface->setTexture(_aaProcessorFramebuffer.getTexture(0));
-			_renderBus.setSceneMap(_aaProcessorFramebuffer.getTexture(0));
+			_renderBus.setPrimarySceneMap(_aaProcessorFramebuffer.getTexture(0));
+			_renderBus.setSecondarySceneMap(_aaProcessorFramebuffer.getTexture(1));
 		}
 		else
 		{
 			_screenFramebuffer.unbind();
-			_finalSurface->setTexture(_screenFramebuffer.getTexture(0));
-			_renderBus.setSceneMap(_screenFramebuffer.getTexture(0));
+			_renderBus.setPrimarySceneMap(_screenFramebuffer.getTexture(0));
+			_renderBus.setSecondarySceneMap(_screenFramebuffer.getTexture(1));
 		}
 
 		// Postprocessing captures
@@ -194,7 +192,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 void MasterRenderer::loadMsaaFramebuffer(int quality)
 {
 	_msaaFramebuffer.reset();
-	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 1, quality);
+	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 2, quality);
 	_renderBus.setMsaaSampleCount(quality);
 }
 

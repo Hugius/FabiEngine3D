@@ -5,7 +5,7 @@ void EnvironmentEditor::update()
 	if (_isEditorLoaded)
 	{
 		// Update main menu
-		if (_currentEnvironmentType == EnvironmentType::NONE)
+		if (_isInMainMenu)
 		{
 			// Temporary values
 			auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -33,16 +33,19 @@ void EnvironmentEditor::update()
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 						_currentEnvironmentType = EnvironmentType::SKY;
+						_isInMainMenu = false;
 					}
 					else if (screen->getButton("terrain")->isHovered())
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
 						_currentEnvironmentType = EnvironmentType::TERRAIN;
+						_isInMainMenu = false;
 					}
 					else if (screen->getButton("water")->isHovered())
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 						_currentEnvironmentType = EnvironmentType::WATER;
+						_isInMainMenu = false;
 					}
 				}
 

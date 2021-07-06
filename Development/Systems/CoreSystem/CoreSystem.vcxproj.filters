@@ -96,6 +96,9 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_raycast.cpp">
+      <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\core_engine.hpp">

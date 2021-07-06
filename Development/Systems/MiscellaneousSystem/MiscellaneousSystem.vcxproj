@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\aabb_parent_type.hpp" />
     <ClInclude Include="..\..\Source\animation_speed_type.hpp" />
+    <ClInclude Include="..\..\Source\bloom_type.hpp" />
     <ClInclude Include="..\..\Source\blur_direction.hpp" />
     <ClInclude Include="..\..\Source\blur_type.hpp" />
     <ClInclude Include="..\..\Source\buffer_type.hpp" />

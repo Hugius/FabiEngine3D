@@ -50,7 +50,7 @@ void PostRenderer::render(const shared_ptr<ImageEntity> entity)
 		
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getPrimarySceneMap());
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
 		glActiveTexture(GL_TEXTURE2);

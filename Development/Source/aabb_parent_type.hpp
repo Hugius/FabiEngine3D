@@ -3,6 +3,5 @@
 enum class AabbParentType
 {
 	MODEL_ENTITY,
-	BILLBOARD_ENTITY,
-	NONE
+	BILLBOARD_ENTITY
 };

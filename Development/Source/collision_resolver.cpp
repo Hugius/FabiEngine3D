@@ -8,7 +8,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 }
 
 void CollisionResolver::update(
-	const unordered_map<string, shared_ptr<AabbEntity>>& boxes, 
+	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, 
 	TerrainEntityManager& terrainManager, 
 	Camera& camera)
 {
@@ -18,20 +18,43 @@ void CollisionResolver::update(
 		// Temporary values
 		static Vec3 oldCameraPos;
 		Vec3 currentCameraPos = camera.getPosition();
-		Vec3 posDifference = oldCameraPos - currentCameraPos;
-		posDifference = Vec3(fabsf(posDifference.x), fabsf(posDifference.y), fabsf(posDifference.z));
+		Vec3 positionDifference = oldCameraPos - currentCameraPos;
+		positionDifference = Vec3(fabsf(positionDifference.x), fabsf(positionDifference.y), fabsf(positionDifference.z));
 		Collision collision(false, false, false);
 
 		// Detect collision
-		for (const auto& [keyID, box] : boxes)
+		for (const auto& [keyID, aabb] : aabbs)
 		{
 			// If responsive to camera collision
-			if (box->isCollisionResponsive() && box->isVisible())
+			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
-				auto direction = box->getCollisionDirection();
-				auto result = _collisionDetector.check(*box, currentCameraPos, _cameraAabbBottom, _cameraAabbTop, 
-					_cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, posDifference, direction);
-				box->setCollisionDirection(direction);
+				// Check collision with AABB
+				auto result = _collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), currentCameraPos,
+					_cameraAabbBottom, _cameraAabbTop, _cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, 
+					positionDifference);
+
+				// Set direction
+				if (result.xCollided())
+				{
+					aabb->setCollisionDirection(Direction::X);
+					aabb->setCollided(true);
+				}
+				else if (result.yCollided())
+				{
+					aabb->setCollisionDirection(Direction::Y);
+					aabb->setCollided(true);
+				}
+				else if (result.zCollided())
+				{
+					aabb->setCollisionDirection(Direction::Z);
+					aabb->setCollided(true);
+				}
+				else
+				{
+					aabb->setCollided(false);
+				}
+
+				// Add to total collision
 				collision += result;
 			}
 		}

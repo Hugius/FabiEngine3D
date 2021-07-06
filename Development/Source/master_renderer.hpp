@@ -11,7 +11,6 @@
 #include "aabb_entity_renderer.hpp"
 #include "image_entity_renderer.hpp"
 #include "post_renderer.hpp"
-#include "bloom_hdr_renderer.hpp"
 #include "blur_renderer.hpp"
 #include "shadow_renderer.hpp"
 #include "final_renderer.hpp"
@@ -57,7 +56,6 @@ private:
 	AabbEntityRenderer       _aabbEntityRenderer;
 	ImageEntityRenderer      _imageEntityRenderer;
 	BlurRenderer             _blurRenderer;
-	BloomHdrRenderer         _bloomHdrRenderer;
 	ShadowRenderer           _shadowRenderer;
 	DepthRenderer            _depthRenderer;
 	PostRenderer             _postRenderer;
@@ -70,7 +68,6 @@ private:
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;
 	RenderFramebuffer _waterRefractionFramebuffer;
-	RenderFramebuffer _bloomHdrFramebuffer;
 	RenderFramebuffer _postProcessingFramebuffer;
 	RenderFramebuffer _shadowFramebuffer;
 	RenderFramebuffer _sceneDepthFramebuffer;

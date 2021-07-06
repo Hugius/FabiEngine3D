@@ -34,7 +34,7 @@ void AabbEntity::setParent(const string& ID, AabbParentType type)
 	_parentType = type;
 }
 
-void AabbEntity::setCollisionDirection(const Direction& value)
+void AabbEntity::setCollisionDirection(Direction value)
 {
 	_collisionDirection = value;
 }
@@ -47,6 +47,11 @@ void AabbEntity::setRaycastResponsive(bool value)
 void AabbEntity::setCollisionResponsive(bool value)
 {
 	_isCollisionResponsive = value;
+}
+
+void AabbEntity::setCollided(bool value)
+{
+	_hasCollided = value;
 }
 
 void AabbEntity::translate(Vec3 value)
@@ -101,12 +106,12 @@ const string& AabbEntity::getParentID() const
 	return _parentID;
 }
 
-const AabbParentType& AabbEntity::getParentType() const
+const AabbParentType AabbEntity::getParentType() const
 {
 	return _parentType;
 }
 
-const Direction& AabbEntity::getCollisionDirection() const
+const Direction AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
 }
@@ -119,4 +124,14 @@ const bool AabbEntity::isRaycastResponsive() const
 const bool AabbEntity::isCollisionResponsive() const
 {
 	return _isCollisionResponsive;
+}
+
+const bool AabbEntity::hasParent() const
+{
+	return !_parentID.empty();
+}
+
+const bool AabbEntity::hasCollided() const
+{
+	return _hasCollided;
 }

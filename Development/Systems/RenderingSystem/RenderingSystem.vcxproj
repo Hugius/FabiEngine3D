@@ -22,7 +22,6 @@
     <ClCompile Include="..\..\Source\aabb_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\base_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\billboard_entity_renderer.cpp" />
-    <ClCompile Include="..\..\Source\bloom_hdr_renderer.cpp" />
     <ClCompile Include="..\..\Source\blur_renderer.cpp" />
     <ClCompile Include="..\..\Source\depth_renderer.cpp" />
     <ClCompile Include="..\..\Source\final_renderer.cpp" />
@@ -50,7 +49,6 @@
     <ClInclude Include="..\..\Source\aabb_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\base_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\billboard_entity_renderer.hpp" />
-    <ClInclude Include="..\..\Source\bloom_hdr_renderer.hpp" />
     <ClInclude Include="..\..\Source\blur_renderer.hpp" />
     <ClInclude Include="..\..\Source\depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\final_renderer.hpp" />
@@ -74,8 +72,6 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.frag" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.frag" />

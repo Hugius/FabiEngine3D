@@ -73,7 +73,7 @@ void SceneEditor::_updateModelPlacingMenu()
 				}
 				else
 				{
-					// Loop over every created model
+					// Iterate through every created model
 					for (const auto& modelID : _modelEditor.getLoadedModelIDs())
 					{
 						// Check if model has mesh
@@ -127,7 +127,7 @@ void SceneEditor::_updateModelChoosingMenu()
 				}
 			}
 
-			// Loop over every placed model
+			// Iterate through every placed model
 			for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Check if model is not a preview model

@@ -74,7 +74,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 				}
 				else
 				{
-					// Loop over every created billboard
+					// Iterate through every created billboard
 					for (const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 					{
 						// Check if billboard has a billboard entity
@@ -128,7 +128,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 				}
 			}
 
-			// Loop over every placed billboard
+			// Iterate through every placed billboard
 			for (const auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// Check if billboard is not a preview billboard

@@ -105,9 +105,6 @@
     <ClCompile Include="..\..\Source\base_entity_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\bloom_hdr_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\depth_renderer.cpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
@@ -170,9 +167,6 @@
     <ClInclude Include="..\..\Source\base_entity_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\bloom_hdr_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\blur_renderer.hpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
@@ -231,12 +225,6 @@
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert">
       <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.frag">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.vert">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
       <Filter>Shaders\Miscellaneous Shaders</Filter>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mathematics.hpp"
+#include "bloom_type.hpp"
 
 #include <GLEW\\glew.h>
 #include <string>
@@ -11,7 +12,8 @@ class RenderBus final
 {
 public:	
 	// Textures
-	void setSceneMap(GLuint value);
+	void setPrimarySceneMap(GLuint value);
+	void setSecondarySceneMap(GLuint value);
 	void setMainSkyReflectionCubeMap(GLuint value);
 	void setMixSkyReflectionCubeMap(GLuint value);
 	void setSceneReflectionMap(GLuint value);
@@ -24,6 +26,10 @@ public:
 	void setBlurMap(GLuint value);
 	void setMotionBlurMap(GLuint value);
 	void setLensFlareMap(GLuint value);
+
+	// Strings
+	void setCursorEntityID(const string& value);
+	void setLensFlareMapPath(const string& value);
 
 	// Matrices
 	void setViewMatrix(const Matrix44 & value);
@@ -59,7 +65,6 @@ public:
 	void setFogMaxDistance(float value);
 	void setFogThickness(float value);
 	void setBloomIntensity(float value);
-	void setBloomBrightnessTreshold(float value);
 	void setCameraYaw(float value);
 	void setCameraPitch(float value);
 	void setNearZ(float value);
@@ -116,12 +121,12 @@ public:
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 
-	// Strings
-	void setCursorEntityID(const string& value);
-	void setLensFlareMapPath(const string& value);
+	// Miscellaneous
+	void setBloomType(BloomType value);
 
 	// Textures
-	const GLuint getSceneMap()                 const;
+	const GLuint getPrimarySceneMap()          const;
+	const GLuint getSecondarySceneMap()        const;
 	const GLuint getMainSkyReflectionCubeMap() const;
 	const GLuint getMixSkyReflectionCubeMap()  const;
 	const GLuint getSceneReflectionMap()	   const;
@@ -135,6 +140,10 @@ public:
 	const GLuint getMotionBlurMap()			   const;
 	const GLuint getLensFlareMap()			   const;
 	
+	// Strings
+	const string& getCursorEntityID() const;
+	const string& getLensFlareMapPath() const;
+
 	// Matrices
 	const Matrix44& getViewMatrix()        const;
 	const Matrix44& getProjectionMatrix()  const;
@@ -169,7 +178,6 @@ public:
 	const float getFogMaxDistance()			   const;
 	const float getFogThickness()			   const;
 	const float getBloomIntensity()			   const;
-	const float getBloomBrightnessTreshold()   const;
 	const float getCameraYaw()				   const;
 	const float getCameraPitch()			   const;
 	const float getNearZ()					   const;
@@ -225,13 +233,13 @@ public:
 	const bool isTriangleCountingEnabled()	   const;
 	const bool isDofDynamic()				   const;
 
-	// Strings
-	const string& getCursorEntityID() const;
-	const string& getLensFlareMapPath() const;
+	// Miscellaneous
+	const BloomType getBloomType() const;
 
 private:
 	// Textures
-	GLuint _sceneMap                 = 0;
+	GLuint _primarySceneMap          = 0;
+	GLuint _secondarySceneMap		 = 0;
 	GLuint _mainSkyReflectionCubeMap = 0;
 	GLuint _mixSkyReflectionCubeMap  = 0;
 	GLuint _sceneReflectionMap		 = 0;
@@ -245,6 +253,10 @@ private:
 	GLuint _motionBlurMap            = 0;
 	GLuint _lensFlareMap		     = 0;
 	
+	// Strings
+	string _cursorEntityID = "";
+	string _lensFlareMapPath = "";
+
 	// Matrices
 	Matrix44 _viewMatrix        = Matrix44(1.0f);
 	Matrix44 _projectionMatrix  = Matrix44(1.0f);
@@ -279,7 +291,6 @@ private:
 	float _fogMaxDistance			 = 0.0f;
 	float _fogThickness				 = 0.0f;
 	float _bloomIntensity            = 0.0f;
-	float _bloomBrightnessTreshold   = 0.0f;
 	float _cameraYaw                 = 0.0f;
 	float _cameraPitch               = 0.0f;
 	float _nearZ                     = 0.0f;
@@ -335,7 +346,6 @@ private:
 	bool _isTriangleCountingEnabled		= false;
 	bool _isDofDynamic					= false;
 
-	// Strings
-	string _cursorEntityID   = "";
-	string _lensFlareMapPath = "";
+	// Miscellaneous
+	BloomType _bloomType = BloomType();
 };

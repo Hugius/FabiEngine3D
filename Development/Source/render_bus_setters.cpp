@@ -32,9 +32,14 @@ void RenderBus::setBloomMap(GLuint value)
 	_bloomMap = value;
 }
 
-void RenderBus::setSceneMap(GLuint value)
+void RenderBus::setPrimarySceneMap(GLuint value)
 {
-	_sceneMap = value;
+	_primarySceneMap = value;
+}
+
+void RenderBus::setSecondarySceneMap(GLuint value)
+{
+	_secondarySceneMap = value;
 }
 
 void RenderBus::setShadowMap(GLuint value)
@@ -267,11 +272,6 @@ void RenderBus::setBloomIntensity(float value)
 	_bloomIntensity = std::max(0.0f, value);
 }
 
-void RenderBus::setBloomBrightnessTreshold(float value)
-{
-	_bloomBrightnessTreshold = value;
-}
-
 void RenderBus::setCameraYaw(float value)
 {
 	_cameraYaw = value;
@@ -464,6 +464,11 @@ void RenderBus::setTriangleCountingEnabled(bool value)
 void RenderBus::setDofDynamic(bool value)
 {
 	_isDofDynamic = value;
+}
+
+void RenderBus::setBloomType(BloomType value)
+{
+	_bloomType = value;
 }
 
 void RenderBus::setCursorEntityID(const string& value)

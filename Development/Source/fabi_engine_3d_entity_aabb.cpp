@@ -178,17 +178,28 @@ const bool FabiEngine3D::aabbEntity_isVisible(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->isVisible();
 }
 
+const bool FabiEngine3D::aabbEntity_hasParent(const string& ID)
+{
+	return _core->_aabbEntityManager.getEntity(ID)->hasParent();
+}
+
 const vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity)
 {
 	vector<string> IDs;
 
+	// Iterate through AABB entities
 	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		if (parentID == entity->getParentID() &&
-			((entity->getParentType() == AabbParentType::MODEL_ENTITY && modelEntity) ||
-				(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY && billboardEntity)))
+		// Check if AABB has parent
+		if (entity->hasParent())
 		{
-			IDs.push_back(entity->getID());
+			// Check if parent matches
+			if (parentID == entity->getParentID() && (
+				(entity->getParentType() == AabbParentType::MODEL_ENTITY && modelEntity) ||
+				(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY && billboardEntity)))
+			{
+				IDs.push_back(entity->getID());
+			}
 		}
 	}
 

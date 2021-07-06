@@ -242,7 +242,7 @@ void MasterRenderer::_renderDebugScreens()
 
 	// Normal scene - surface
 	shared_ptr<ImageEntity> normalSurface = make_shared<ImageEntity>("normalSurface");
-	normalSurface->setTexture(_renderBus.getSceneMap());
+	normalSurface->setTexture(_renderBus.getPrimarySceneMap());
 	normalSurface->addRenderBuffer(new RenderBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	normalSurface->setMirroredVertically(true);
 

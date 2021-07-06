@@ -75,7 +75,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 				}
 				else
 				{
-					// Loop over every created soundcaster
+					// Iterate through every created soundcaster
 					for (const auto& audioName : _audioEditor.getLoadedAudioIDs())
 					{
 						// Check if button is hovered
@@ -119,7 +119,7 @@ void SceneEditor::_updateSoundChoosingMenu()
 				}
 			}
 
-			// Loop over every placed soundcaster
+			// Iterate through every placed soundcaster
 			for (const auto& soundName : _fe3d.soundEntity_getAllIDs())
 			{
 				// Check if soundcaster is not a preview

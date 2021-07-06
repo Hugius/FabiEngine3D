@@ -30,9 +30,14 @@ const GLuint RenderBus::getBloomMap() const
 	return _bloomMap;
 }
 
-const GLuint RenderBus::getSceneMap() const
+const GLuint RenderBus::getPrimarySceneMap() const
 {
-	return _sceneMap;
+	return _primarySceneMap;
+}
+
+const GLuint RenderBus::getSecondarySceneMap() const
+{
+	return _secondarySceneMap;
 }
 
 const GLuint RenderBus::getShadowMap() const
@@ -265,11 +270,6 @@ const float RenderBus::getBloomIntensity() const
 	return _bloomIntensity;
 }
 
-const float RenderBus::getBloomBrightnessTreshold() const
-{
-	return _bloomBrightnessTreshold;
-}
-
 const float RenderBus::getCameraYaw() const
 {
 	return _cameraYaw;
@@ -453,6 +453,11 @@ const bool RenderBus::isTriangleCountingEnabled() const
 const bool RenderBus::isDofDynamic() const
 {
 	return _isDofDynamic;
+}
+
+const BloomType RenderBus::getBloomType() const
+{
+	return _bloomType;
 }
 
 const string& RenderBus::getCursorEntityID() const

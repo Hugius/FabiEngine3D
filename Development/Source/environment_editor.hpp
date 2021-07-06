@@ -77,14 +77,15 @@ private:
 	void _updateMiscellaneous();
 
 	// General variables
-	bool _isEditorLoaded = false;
-	EnvironmentType _currentEnvironmentType = EnvironmentType::NONE;
 	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
-	float _cameraAcceleration = 0.0f;
-	float _totalCameraRotation = 0.0f;
-	string _currentProjectID = "";
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
+	EnvironmentType _currentEnvironmentType = EnvironmentType();
+	string _currentProjectID = "";
+	float _cameraAcceleration = 0.0f;
+	float _totalCameraRotation = 0.0f;
+	bool _isEditorLoaded = false;
+	bool _isInMainMenu = false;
 
 	// Sky variables
 	vector <string> _loadedSkyIDs;

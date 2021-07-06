@@ -236,11 +236,6 @@ const float FabiEngine3D::gfx_getBloomIntensity()
 	return _core->_renderBus.getBloomIntensity();
 }
 
-const float FabiEngine3D::gfx_getBloomBrightnessTreshold()
-{
-	return _core->_renderBus.getBloomBrightnessTreshold();
-}
-
 const unsigned int FabiEngine3D::gfx_getBloomBlurSize()
 {
 	return _core->_renderBus.getBloomBlurSize();

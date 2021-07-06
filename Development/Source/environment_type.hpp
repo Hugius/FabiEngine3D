@@ -4,6 +4,5 @@ enum class EnvironmentType
 {
 	SKY,
 	TERRAIN,
-	WATER,
-	NONE
+	WATER
 };

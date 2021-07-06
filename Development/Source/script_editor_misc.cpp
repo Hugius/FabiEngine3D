@@ -44,7 +44,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, CHARACTER_COLOR, 
 				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
 
-			// Loop over every character
+			// Iterate through every character
 			for (unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
 			{
 				// Create new character BILLBOARD for logic

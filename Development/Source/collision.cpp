@@ -12,9 +12,9 @@ void Collision::operator+=(const Collision& c)
 	_y += c.yCollided();
 	_z += c.zCollided();
 
-	if (_x > 1) _x = 1;
-	if (_y > 1) _y = 1;
-	if (_z > 1) _z = 1;
+	if (_x > 1) { _x = 1; }
+	if (_y > 1) { _y = 1; }
+	if (_z > 1) { _z = 1; }
 }
 
 void Collision::setX(bool value)

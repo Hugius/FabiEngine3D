@@ -167,6 +167,7 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_raycast.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_server.cpp" />
   </ItemGroup>
   <ItemGroup>

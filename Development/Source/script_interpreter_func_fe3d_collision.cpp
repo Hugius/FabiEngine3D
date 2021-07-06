@@ -93,34 +93,39 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			string result = "";
 			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(arguments[0].getString());
 
-			// Retrieve bound modelEntity ID
-			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+			// Check if AABB found
+			if (!foundAabbID.empty())
 			{
-				// Check direction
-				auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
-				auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
-				auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
-				if ((directionX && arguments[2].getString() == "X") ||
-					(directionY && arguments[2].getString() == "Y") ||
-					(directionZ && arguments[2].getString() == "Z") ||
-					((directionX || directionY || directionZ) && arguments[2].getString().empty()))
+				// Check if AABB has modelEntity parent
+				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
+					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
-					if (arguments[1].getString().empty()) // No specific AABB part
+					// Check direction
+					auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
+					auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
+					auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
+					if ((directionX && arguments[2].getString() == "X") ||
+						(directionY && arguments[2].getString() == "Y") ||
+						(directionZ && arguments[2].getString() == "Z") ||
+						((directionX || directionY || directionZ) && arguments[2].getString().empty()))
 					{
-						result = _fe3d.aabbEntity_getParentID(foundAabbID);
-					}
-					else // Specific AABB part
-					{
-						// Extract AABB part ID
-						string partID = foundAabbID;
-						std::reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, partID.find('@'));
-						std::reverse(partID.begin(), partID.end());
-
-						// Check if AABB part ID's match
-						if (partID == arguments[1].getString())
+						if (arguments[1].getString().empty()) // No specific AABB part
 						{
 							result = _fe3d.aabbEntity_getParentID(foundAabbID);
+						}
+						else // Specific AABB part
+						{
+							// Extract AABB part ID
+							string partID = foundAabbID;
+							std::reverse(partID.begin(), partID.end());
+							partID = partID.substr(0, partID.find('@'));
+							std::reverse(partID.begin(), partID.end());
+
+							// Check if AABB part ID's match
+							if (partID == arguments[1].getString())
+							{
+								result = _fe3d.aabbEntity_getParentID(foundAabbID);
+							}
 						}
 					}
 				}
@@ -149,19 +154,24 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			string result = "";
 			auto foundAabbID = _fe3d.collision_checkCameraWithAny();
 
-			// Retrieve bound modelEntity ID
-			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+			// Check if AABB found
+			if (!foundAabbID.empty())
 			{
-				// Check direction
-				auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
-				auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
-				auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
-				if ((directionX && arguments[0].getString() == "X") ||
-					(directionY && arguments[0].getString() == "Y") ||
-					(directionZ && arguments[0].getString() == "Z") ||
-					((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+				// Check if AABB has modelEntity parent
+				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
+					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
-					result = _fe3d.aabbEntity_getParentID(foundAabbID);
+					// Check direction
+					auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
+					auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
+					auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
+					if ((directionX && arguments[0].getString() == "X") ||
+						(directionY && arguments[0].getString() == "Y") ||
+						(directionZ && arguments[0].getString() == "Z") ||
+						((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+					{
+						result = _fe3d.aabbEntity_getParentID(foundAabbID);
+					}
 				}
 			}
 
@@ -193,8 +203,8 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				// Check if requested aabbEntity is existing
 				if (_fe3d.aabbEntity_isExisting(arguments[0].getString()))
 				{
-					// Check if requested aabbEntity has no parent
-					if (_fe3d.aabbEntity_getParentType(arguments[0].getString()) == AabbParentType::NONE)
+					// Check if requested aabbEntity does not have a parent
+					if (!_fe3d.aabbEntity_hasParent(arguments[0].getString()))
 					{
 						// Check direction
 						auto directionX = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::X);
@@ -235,7 +245,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			auto foundAabbID = _fe3d.collision_checkCameraWithAny();
 
 			// Check if found and requested aabbEntity has no parent
-			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::NONE))
+			if (!foundAabbID.empty() && !_fe3d.aabbEntity_hasParent(foundAabbID))
 			{
 				// Check direction
 				auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
@@ -277,8 +287,57 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 					string otherSearchID = arguments[2].getString();
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, otherSearchID);
 
-					// Retrieve bound modelEntity ID
-					if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+					// Check if AABB found
+					if (!foundAabbID.empty())
+					{
+						// Check if AABB has modelEntity parent
+						if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
+							(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+						{
+							if (arguments[1].getString().empty()) // No specific AABB part
+							{
+								result = foundAabbID;
+							}
+							else // Specific AABB part
+							{
+								// Extract AABB part ID
+								string partID = foundAabbID;
+								std::reverse(partID.begin(), partID.end());
+								partID = partID.substr(0, partID.find('@'));
+								std::reverse(partID.begin(), partID.end());
+
+								// Check if AABB part ID's match
+								if (partID == arguments[1].getString())
+								{
+									result = foundAabbID;
+								}
+							}
+
+							break;
+						}
+					}
+				}
+			}
+			else // Check specific AABB part of self entity
+			{
+				// Check if self aabbEntity entity exists
+				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+				if (!_fe3d.aabbEntity_isExisting(selfSearchID))
+				{
+					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
+					return true;
+				}
+
+				// Find aabbEntity ID
+				string otherSearchID = arguments[2].getString();
+				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, otherSearchID);
+
+				// Check if AABB found
+				if (!foundAabbID.empty())
+				{
+					// Check if AABB has modelEntity parent
+					if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
+						(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 					{
 						if (arguments[1].getString().empty()) // No specific AABB part
 						{
@@ -298,45 +357,6 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 								result = foundAabbID;
 							}
 						}
-
-						break;
-					}
-				}
-			}
-			else // Check specific AABB part of self entity
-			{
-				// Check if self aabbEntity entity exists
-				string selfSearchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-				if (!_fe3d.aabbEntity_isExisting(selfSearchID))
-				{
-					_throwScriptError("requested model AABB with ID \"" + selfSearchID + "\" does not exist!");
-					return true;
-				}
-
-				// Find aabbEntity ID
-				string otherSearchID = arguments[2].getString();
-				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, otherSearchID);
-
-				// Retrieve bound modelEntity ID
-				if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
-				{
-					if (arguments[1].getString().empty()) // No specific AABB part
-					{
-						result = foundAabbID;
-					}
-					else // Specific AABB part
-					{
-						// Extract AABB part ID
-						string partID = foundAabbID;
-						std::reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, partID.find('@'));
-						std::reverse(partID.begin(), partID.end());
-
-						// Check if AABB part ID's match
-						if (partID == arguments[1].getString())
-						{
-							result = foundAabbID;
-						}
 					}
 				}
 			}
@@ -349,8 +369,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, ScriptValueType::STRING, // ModelEntity ID + aabbEntity part ID
-			ScriptValueType::STRING // BillboardEntity ID
+			ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING
 		};
 
 		// Validate arguments
@@ -368,11 +387,16 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 					// Find aabbEntity ID
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
 
-					// Retrieve bound modelEntity ID
-					if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+					// Check if AABB found
+					if (!foundAabbID.empty())
 					{
-						result = foundAabbID;
-						break;
+						// Check if AABB has billboardEntity parent
+						if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
+							(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+						{
+							result = foundAabbID;
+							break;
+						}
 					}
 				}
 			}
@@ -389,10 +413,15 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				// Find aabbEntity ID
 				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
 
-				// Retrieve bound modelEntity ID
-				if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+				// Check if AABB found
+				if (!foundAabbID.empty())
 				{
-					result = foundAabbID;
+					// Check if AABB has billboardEntity parent
+					if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
+						(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+					{
+						result = foundAabbID;
+					}
 				}
 			}
 
@@ -423,11 +452,15 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 					// Find aabbEntity ID
 					auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
 
-					// Check if found
-					if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::NONE))
+					// Check if AABB found
+					if (!foundAabbID.empty())
 					{
-						result = foundAabbID;
-						break;
+						// Check if AABB does not have a parent
+						if (!_fe3d.aabbEntity_hasParent(foundAabbID))
+						{
+							result = foundAabbID;
+							break;
+						}
 					}
 				}
 			}
@@ -444,10 +477,14 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 				// Find aabbEntity ID
 				auto foundAabbID = _fe3d.collision_checkEntityWithEntities(selfSearchID, arguments[2].getString());
 
-				// Check if found
-				if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::NONE))
+				// Check if AABB found
+				if (!foundAabbID.empty())
 				{
-					result = foundAabbID;
+					// Check if AABB does not have a parent
+					if (!_fe3d.aabbEntity_hasParent(foundAabbID))
+					{
+						result = foundAabbID;
+					}
 				}
 			}
 

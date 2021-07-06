@@ -76,8 +76,8 @@ void AabbEntityManager::update(
 {
 	for (const auto& [keyID, entity] : _getAabbEntities())
 	{
-		// Optional transformation updates
-		if (entity->getParentID() != "")
+		// Check if AABB has parent
+		if (entity->hasParent())
 		{
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::MODEL_ENTITY)
@@ -93,7 +93,7 @@ void AabbEntityManager::update(
 					if (!parentEntity->isLevelOfDetailed())
 					{
 						// Retrieve maximum rotation & direction (based on parent rotation)
-						Direction rotationDirection = Direction::NONE;
+						Direction rotationDirection = Direction();
 						Vec3 parentRotation = parentEntity->getRotation();
 						float rotation = 0.0f;
 						if (fabsf(parentRotation.x) > fabsf(parentRotation.y) && fabsf(parentRotation.x) > fabsf(parentRotation.z))
@@ -161,7 +161,7 @@ void AabbEntityManager::update(
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
-								rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(roundedRotation));					
+								rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(roundedRotation));
 							}
 							else if (rotationDirection == Direction::Y)
 							{
@@ -190,7 +190,7 @@ void AabbEntityManager::update(
 					Logger::throwError("AABB entity with ID \"" + entity->getID() + "\" bound to non-existing model entity with ID \"" + entity->getParentID() + "\"");
 				}
 			}
-			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
+			else
 			{
 				// Try to find the parent entity
 				auto foundPair = billboardEntities.find(entity->getParentID());
@@ -253,10 +253,6 @@ void AabbEntityManager::update(
 
 					// Update visibility
 					entity->setVisible(parentEntity->isVisible());
-				}
-				else
-				{
-					Logger::throwError("AABB entity with ID \"" + entity->getID() + "\" bound to non-existing billboard entity with ID \"" + entity->getParentID() + "\"");
 				}
 			}
 		}

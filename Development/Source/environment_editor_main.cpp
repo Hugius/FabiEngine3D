@@ -195,6 +195,7 @@ void EnvironmentEditor::load()
 	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
 	_isEditorLoaded = true;
+	_isInMainMenu = true;
 }
 
 void EnvironmentEditor::save()
@@ -224,7 +225,6 @@ void EnvironmentEditor::unload()
 	_loadedSkyIDs.clear();
 	_loadedTerrainIDs.clear();
 	_loadedWaterIDs.clear();
-	_currentEnvironmentType = EnvironmentType::NONE;
 	_cameraAcceleration = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_currentSkyID = "";
@@ -262,5 +262,6 @@ void EnvironmentEditor::unload()
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);
+	_isInMainMenu = false;
 	_isEditorLoaded = false;
 }

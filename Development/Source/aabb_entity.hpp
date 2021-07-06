@@ -20,21 +20,24 @@ public:
 	void translate(Vec3 value);
 	void scale(Vec3 value);
 	void setParent(const string& ID, AabbParentType type);
-	void setCollisionDirection(const Direction& value);
+	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
+	void setCollided(bool value);
 
 	// Getters
-	const Matrix44 & getModelMatrix() const;
+	const Matrix44& getModelMatrix() const;
 	const Vec3 getLocalTranslation() const;
 	const Vec3 getLocalScaling() const;
 	const Vec3 getTranslation() const;
 	const Vec3 getScaling() const;
 	const string& getParentID() const;
-	const AabbParentType& getParentType() const;
-	const Direction& getCollisionDirection() const;
+	const AabbParentType getParentType() const;
+	const Direction getCollisionDirection() const;
 	const bool isRaycastResponsive() const;
 	const bool isCollisionResponsive() const;
+	const bool hasParent() const;
+	const bool hasCollided() const;
 
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
@@ -42,13 +45,14 @@ private:
 	Vec3 _localTranslation = Vec3(0.0f);
 	Vec3 _localScaling = Vec3(1.0f);
 	Vec3 _translation = Vec3(0.0f);
-	Vec3 _scaling     = Vec3(1.0f);
+	Vec3 _scaling = Vec3(1.0f);
 	
 	string _parentID = "";
 
-	AabbParentType _parentType = AabbParentType::NONE;
-	Direction _collisionDirection = Direction::NONE;
+	AabbParentType _parentType = AabbParentType();
+	Direction _collisionDirection = Direction();
 
 	bool _isRaycastResponsive = false;
 	bool _isCollisionResponsive = false;
+	bool _hasCollided = false;
 };

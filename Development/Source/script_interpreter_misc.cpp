@@ -130,7 +130,7 @@ void ScriptInterpreter::_checkEngineWarnings(unsigned int lastLoggerMessageCount
 		// Retrieve all logged messages
 		auto messageQueue = Logger::getMessageQueue();
 
-		// Loop over all new messages
+		// Iterate through all new messages
 		for (unsigned int i = lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
 			// Check if logged message is a warning

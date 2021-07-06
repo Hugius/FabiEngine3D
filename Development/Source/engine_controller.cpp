@@ -33,7 +33,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Permanent graphical effects
 		gfx_enableMSAA();
-		gfx_enableBloom(1.0f, 0.0f, 10);
+		gfx_enableBloom(BloomType::EVERYTHING, 1.0f, 10);
 
 		// Default camera
 		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
@@ -58,7 +58,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_setMainRenderingColor(Vec3(0.0f));
 		gfx_setMsaaQuality(16);
 		gfx_enableMSAA();
-		gfx_enableBloom(1.0f, 0.0f, 10);
+		gfx_enableBloom(BloomType::EVERYTHING, 1.0f, 10);
 
 		// Default camera
 		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);

@@ -131,7 +131,7 @@ void MasterRenderer::_captureDofBlur()
 	if (_renderBus.isDofEnabled())
 	{
 		_blurRenderer.bind();
-		_renderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getSceneMap(), 
+		_renderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 
 			static_cast<int>(BlurType::DOF), 6, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
@@ -175,19 +175,21 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
 
 			// Temporary values
-			static BlurDirection lastDirection = BlurDirection::NONE;
-			BlurDirection direction = BlurDirection::NONE;
+			bool hasMoved = false;
+			BlurDirection direction = BlurDirection();
 
 			// Determine blur direction & mix value
 			if (xDifference != 0.0f || yDifference != 0.0f)
 			{
 				if (xDifference >= yDifference)
 				{
+					hasMoved = true;
 					direction = BlurDirection::HORIZONTAL;
 					_renderBus.setMotionBlurMixValue(xDifference);
 				}
 				else
 				{
+					hasMoved = true;
 					direction = BlurDirection::VERTICAL;
 					_renderBus.setMotionBlurMixValue(yDifference);
 				}
@@ -202,20 +204,19 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			lastPitch = camera.getPitch();
 
 			// Apply motion blur
-			if (direction == BlurDirection::NONE)
-			{
-				_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
-			}
-			else
+			if (hasMoved)
 			{
 				_blurRenderer.bind();
 				_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(),
 					static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
 				_blurRenderer.unbind();
 			}
+			else
+			{
+				_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
+			}
 
-			// Set last direction
-			lastDirection = direction;
+			// Miscellaneous
 			firstTime = false;
 		}
 		else // No motion blur
@@ -329,18 +330,22 @@ void MasterRenderer::_captureBloom()
 {
 	if (_renderBus.isBloomEnabled())
 	{
-		// Process scene texture
-		_bloomHdrFramebuffer.bind();
-		glClear(GL_COLOR_BUFFER_BIT);
-		_bloomHdrRenderer.bind();
-		_bloomHdrRenderer.render(_finalSurface, _renderBus.getSceneMap());
-		_bloomHdrRenderer.unbind();
-		_bloomHdrFramebuffer.unbind();
-
-		// Blur scene texture
+		// Bind
 		_blurRenderer.bind();
-		_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0),
-			static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+
+		// Blur texture
+		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
+		{
+			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
+				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+		}
+		else
+		{
+			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getSecondarySceneMap(),
+				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+		}
+
+		// Unbind
 		_blurRenderer.unbind();
 	}
 }

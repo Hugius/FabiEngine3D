@@ -6,11 +6,13 @@ void SceneEditor::_updateMainBillboardMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuBillboard")
 		{
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -56,11 +58,13 @@ void SceneEditor::_updateBillboardPlacingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuBillboardPlace")
 		{
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				// Back button
@@ -106,6 +110,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management

@@ -5,11 +5,13 @@
 
 void EnvironmentEditor::_updateSkyMenuMain()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "skyEditorMenuMain")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -44,11 +46,13 @@ void EnvironmentEditor::_updateSkyMenuMain()
 
 void EnvironmentEditor::_updateSkyMenuChoice()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "skyEditorMenuChoice")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -76,11 +80,13 @@ void EnvironmentEditor::_updateSkyMenuChoice()
 
 void EnvironmentEditor::_updateSkyMenuMesh()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "skyEditorMenuMesh")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

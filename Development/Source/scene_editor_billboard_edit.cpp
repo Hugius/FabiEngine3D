@@ -57,7 +57,6 @@ void SceneEditor::_updateBillboardEditing()
 			// Check if user made the active billboard inactive
 			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				// LMB pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeBillboardID = "";
@@ -77,7 +76,7 @@ void SceneEditor::_updateBillboardEditing()
 			{
 				_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardPropertiesMenu");
 
-				// GUI management (pressed)
+				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button

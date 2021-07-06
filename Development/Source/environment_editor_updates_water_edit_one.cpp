@@ -5,11 +5,13 @@
 
 void EnvironmentEditor::_updateWaterMenuMain()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "waterEditorMenuMain")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -44,11 +46,13 @@ void EnvironmentEditor::_updateWaterMenuMain()
 
 void EnvironmentEditor::_updateWaterMenuChoice()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "waterEditorMenuChoice")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -144,15 +148,17 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 
 void EnvironmentEditor::_updateWaterMenuMesh()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "waterEditorMenuMesh")
 	{
 		// Temporary values
 		Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
 		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

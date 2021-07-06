@@ -6,11 +6,13 @@ void SceneEditor::_updateMainLightingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuLighting")
 		{
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -38,8 +40,10 @@ void SceneEditor::_updateAmbientLightingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+		// GUI management
 		if (screen->getID() == "sceneEditorMenuLightingAmbient")
 		{
 			// Temporary values
@@ -47,7 +51,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
-			// GUI management
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -120,8 +124,10 @@ void SceneEditor::_updateDirectionalLightingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+		// GUI management
 		if (screen->getID() == "sceneEditorMenuLightingDirectional")
 		{
 			// Temporary values
@@ -131,7 +137,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
-			// GUI management
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -230,11 +236,13 @@ void SceneEditor::_updatePointLightingMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
 		if (screen->getID() == "sceneEditorMenuLightingPoint")
 		{
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

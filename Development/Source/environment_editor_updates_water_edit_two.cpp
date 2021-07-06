@@ -5,8 +5,10 @@
 
 void EnvironmentEditor::_updateWaterMenuEffects()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "waterEditorMenuEffects")
 	{
 		// Temporary values
@@ -17,7 +19,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
 		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -150,8 +152,10 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 
 void EnvironmentEditor::_updateWaterMenuOptions()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "waterEditorMenuOptions")
 	{
 		// Temporary values
@@ -163,7 +167,7 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

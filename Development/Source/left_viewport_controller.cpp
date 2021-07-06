@@ -1,4 +1,5 @@
 #include "left_viewport_controller.hpp"
+#include <iostream>
 
 #define CW(text) VPC::calculateTextWidth(text, 0.115f)
 
@@ -36,60 +37,64 @@ void LeftViewportController::initialize()
 
 void LeftViewportController::update()
 {
+	// Temporary values
 	auto window = _gui.getViewport("left")->getWindow("main");
-	auto screen = window->getScreen("main");
-
-	// Check if LMB is pressed
-	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	auto screen = window->getActiveScreen();
+	
+	// GUI management
+	if (screen->getID() == "main")
 	{
-		if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_environmentEditor.load();
-			window->setActiveScreen("environmentEditorMenu");
-			_lastActiveEditorScreen = "environmentEditorMenu";
-		}
-		else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
-		{
-			_modelEditor.load();
-			window->setActiveScreen("modelEditorMenuMain");
-			_lastActiveEditorScreen = "modelEditorMenuMain";
-		}
-		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
-		{
-			_animationEditor.load();
-			window->setActiveScreen("animationEditorMenuMain");
-			_lastActiveEditorScreen = "animationEditorMenuMain";
-		}
-		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
-		{
-			_billboardEditor.load();
-			window->setActiveScreen("billboardEditorMenuMain");
-			_lastActiveEditorScreen = "billboardEditorMenuMain";
-		}
-		else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
-		{
-			_audioEditor.load();
-			window->setActiveScreen("audioEditorMenuMain");
-			_lastActiveEditorScreen = "audioEditorMenuMain";
-		}
-		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
-		{
-			_sceneEditor.load();
-			window->setActiveScreen("sceneEditorMenuMain");
-			_lastActiveEditorScreen = "sceneEditorMenuMain";
-		}
-		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
-		{
-			_fe3d.gfx_setMsaaQuality(16); // Maximum MSAA for text quality
-			_scriptEditor.load();
-			window->setActiveScreen("scriptEditorMenuMain");
-			_lastActiveEditorScreen = "scriptEditorMenuMain";
-		}
-		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
-		{
-			_settingsEditor.load();
-			window->setActiveScreen("settingsEditorMenuMain");
-			_lastActiveEditorScreen = "settingsEditorMenuMain";
+			if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
+			{
+				_environmentEditor.load();
+				window->setActiveScreen("environmentEditorMenu");
+				_lastActiveEditorScreen = "environmentEditorMenu";
+			}
+			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
+			{
+				_modelEditor.load();
+				window->setActiveScreen("modelEditorMenuMain");
+				_lastActiveEditorScreen = "modelEditorMenuMain";
+			}
+			else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
+			{
+				_animationEditor.load();
+				window->setActiveScreen("animationEditorMenuMain");
+				_lastActiveEditorScreen = "animationEditorMenuMain";
+			}
+			else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
+			{
+				_billboardEditor.load();
+				window->setActiveScreen("billboardEditorMenuMain");
+				_lastActiveEditorScreen = "billboardEditorMenuMain";
+			}
+			else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
+			{
+				_audioEditor.load();
+				window->setActiveScreen("audioEditorMenuMain");
+				_lastActiveEditorScreen = "audioEditorMenuMain";
+			}
+			else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
+			{
+				_sceneEditor.load();
+				window->setActiveScreen("sceneEditorMenuMain");
+				_lastActiveEditorScreen = "sceneEditorMenuMain";
+			}
+			else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
+			{
+				_fe3d.gfx_setMsaaQuality(16); // Maximum MSAA for text quality
+				_scriptEditor.load();
+				window->setActiveScreen("scriptEditorMenuMain");
+				_lastActiveEditorScreen = "scriptEditorMenuMain";
+			}
+			else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
+			{
+				_settingsEditor.load();
+				window->setActiveScreen("settingsEditorMenuMain");
+				_lastActiveEditorScreen = "settingsEditorMenuMain";
+			}
 		}
 	}
 

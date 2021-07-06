@@ -4,6 +4,7 @@
 
 void ModelEditor::_updateModelEditingLighting()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
@@ -17,7 +18,7 @@ void ModelEditor::_updateModelEditingLighting()
 		float specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		float lightness = _fe3d.modelEntity_getLightness(_currentModelID);
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

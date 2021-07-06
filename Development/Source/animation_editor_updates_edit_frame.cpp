@@ -5,6 +5,7 @@ void AnimationEditor::_updateFrameScreen()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
@@ -28,7 +29,7 @@ void AnimationEditor::_updateFrameScreen()
 			// Speed is only available if speed type is not instantly
 			screen->getButton("speed")->setHoverable(speedType != AnimationSpeedType::INSTANTLY);
 
-			// Update screen logic
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button

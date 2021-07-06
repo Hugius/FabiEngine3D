@@ -5,8 +5,10 @@
 
 void ModelEditor::_updateModelEditingOptions()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "modelEditorMenuOptions")
 	{
 		// Temporary values
@@ -14,7 +16,7 @@ void ModelEditor::_updateModelEditingOptions()
 		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

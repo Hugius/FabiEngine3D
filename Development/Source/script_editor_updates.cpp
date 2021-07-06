@@ -14,11 +14,13 @@ void ScriptEditor::_updateGUI()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
 		if (screen->getID() == "scriptEditorMenuMain")
 		{
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

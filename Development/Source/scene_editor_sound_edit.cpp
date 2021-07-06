@@ -93,7 +93,7 @@ void SceneEditor::_updateSoundEditing()
 			{
 				_gui.getViewport("right")->getWindow("main")->setActiveScreen("soundPropertiesMenu");
 
-				// GUI management (pressed)
+				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getButton("delete")->isHovered()) // Delete button

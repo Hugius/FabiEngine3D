@@ -5,8 +5,10 @@ void AudioEditor::_updateAudioEditing()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+		// GUI management
 		if (screen->getID() == "audioEditorMenuChoice")
 		{
 			// Temporary values
@@ -15,7 +17,7 @@ void AudioEditor::_updateAudioEditing()
 			bool isPaused = isExisting && _fe3d.soundEntity_isPaused(_currentAudioID);
 			bool isLoaded = isExisting && _fe3d.soundEntity_isLoaded(_currentAudioID);
 			
-			// GUI management
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

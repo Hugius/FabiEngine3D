@@ -6,15 +6,17 @@ void SceneEditor::_updateMainSettingsMenu()
 {
 	if (_isEditorLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+		// GUI management
 		if (screen->getID() == "sceneEditorMenuSettings")
 		{
 			// Temporary values
 			auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
 			auto reflectionHeight = _fe3d.gfx_getSceneReflectionHeight();
 
-			// GUI management
+			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -62,11 +64,13 @@ void SceneEditor::_updateMainSettingsMenu()
 
 void SceneEditor::_updateGraphicsSettingsMenu()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
 	if (screen->getID() == "sceneEditorMenuSettingsGraphics")
 	{
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -104,8 +108,10 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 
 void SceneEditor::_updateShadowGraphicsSettingsMenu()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsShadows")
 	{
 		// Temporary values
@@ -118,7 +124,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		Vec3 center = _fe3d.gfx_getShadowCenter();
 		int interval = _fe3d.gfx_getShadowInterval();
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -220,15 +226,17 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 {
+	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+	// GUI management
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsMotionblur")
 	{
 		// Temporary values
 		bool isEnabled = _fe3d.gfx_isMotionBlurEnabled();
 		float strength = _fe3d.gfx_getMotionBlurStrength();
 
-		// GUI management
+		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

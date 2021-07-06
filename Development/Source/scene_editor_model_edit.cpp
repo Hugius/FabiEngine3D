@@ -82,7 +82,7 @@ void SceneEditor::_updateModelEditing()
 			{
 				rightWindow->setActiveScreen("modelPropertiesMenu");
 
-				// GUI management (pressed)
+				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button

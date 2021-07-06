@@ -88,13 +88,15 @@ uniform bool u_hasDiffuseMap;
 uniform bool u_hasLightMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasReflectionMap;
+uniform bool u_isBloomed;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
 uniform int u_pointLightCount;
 
 // Out variables
-layout (location = 0) out vec4 o_finalColor;
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
 vec3 getNormalMappedVector();
@@ -117,25 +119,29 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    float shadow		   = getShadowValue();
-	vec3 ambient		   = getAmbientLighting();
-	vec3 directional	   = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
-	vec3 point			   = getPointLighting(normal);
-    vec3 spot			   = getSpotLighting(normal);
+    float shadow	 = getShadowValue();
+	vec3 ambient	 = getAmbientLighting();
+	vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
+	vec3 point		 = getPointLighting(normal);
+    vec3 spot		 = getSpotLighting(normal);
 
-	// Apply lighting
-	vec3 color;
-	color  = getTextureColor(); // Diffuse map
-    color *= u_color;
-	color  = applySkyReflections(color, normal); // Sky reflection
-	color  = applySceneReflections(color); // Scene reflection
-	color *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
-	color  = applyLightMapping(color); // LightMapping
-	color *= u_lightness; // Lightness
-    color  = applyFog(color); // Fog
+	// Calculate primary color
+	vec3 primaryColor;
+	primaryColor  = getTextureColor(); // Diffuse map
+    primaryColor *= u_color;
+	primaryColor  = applySkyReflections(primaryColor, normal); // Sky reflection
+	primaryColor  = applySceneReflections(primaryColor); // Scene reflection
+	primaryColor *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
+	primaryColor  = applyLightMapping(primaryColor); // LightMapping
+	primaryColor *= u_lightness; // Lightness
+    primaryColor  = applyFog(primaryColor); // Fog
 
-	// Set final color
-	o_finalColor = vec4(color, u_customAlpha);
+	// Calculate secondary color
+	vec3 secondaryColor = (u_isBloomed ? primaryColor : vec3(0.0f));
+
+	// Set final colors
+	o_primaryColor = vec4(primaryColor, u_customAlpha);
+	o_secondaryColor = vec4(secondaryColor, 1.0f);
 }
 
 // Calculate new normal
@@ -166,7 +172,7 @@ vec3 getTextureColor()
 	}
 	else
 	{
-		// Calculating the texel color
+		// Calculate the texel color
 		vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
 
 		// Removing alpha background

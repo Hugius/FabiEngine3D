@@ -8,9 +8,6 @@ in vec3 f_pos;
 // Textures
 layout(location = 0) uniform sampler2D u_sampler;
 
-// Out variables
-layout (location = 0) out vec4 o_finalColor;
-
 // Vec3 uniforms
 uniform vec3 u_color;
 uniform vec3 u_cameraPosition;
@@ -27,15 +24,23 @@ uniform float u_minAlpha;
 uniform bool u_isFogEnabled;
 uniform bool u_isAlphaObject;
 uniform bool u_hasTexture;
+uniform bool u_isBloomed;
 
+// Out variables
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
+
+// Functions
 vec3 applyFog(vec3 color);
 
 // Calculate final fragment color
 void main()
 {
-	if(u_hasTexture) // Render texture
+	// Calculate primary color
+	vec3 primaryColor;
+	if(u_hasTexture)
 	{
-		// Calculating the texel color
+		// Calculate the texel color
 		vec4 texColor = texture(u_sampler, f_uv);
 
 		// Removing white alpha background
@@ -47,17 +52,23 @@ void main()
 			}
 		}
 
-		// Set texture color
-		o_finalColor = vec4(texColor.rgb * u_color, 1.0f);
+		// Set primary color
+		primaryColor = (texColor.rgb * u_color);
+		primaryColor = (applyFog(primaryColor) * u_lightness);
 	}
-	else // Render color only
+	else
 	{
-		o_finalColor = vec4(u_color, 1.0f);
+		// Set primary color
+		primaryColor = u_color;
+		primaryColor = (applyFog(primaryColor) * u_lightness);
 	}
+	
+	// Calculate secondary color
+	vec3 secondaryColor = (u_isBloomed ? primaryColor : vec3(0.0f));
 
-	// Finalize color
-	o_finalColor.rgb = applyFog(o_finalColor.rgb);
-    o_finalColor.rgb *= u_lightness;
+	// Set final colors
+	o_primaryColor = vec4(primaryColor, 1.0f);
+	o_secondaryColor = vec4(secondaryColor, 1.0f);
 }
 
 // Calculate fog color

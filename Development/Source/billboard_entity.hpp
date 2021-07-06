@@ -20,6 +20,7 @@ public:
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setReflected(bool value);
+	void setBloomed(bool value);
 	void setDiffuseMap(GLuint value);
 	void setTranslation(Vec3 value);
 	void setInitialRotation(Vec3 value);
@@ -75,6 +76,7 @@ public:
 	const bool isDepthMapIncluded() const;
 	const bool isShadowed() const;
 	const bool isReflected() const;
+	const bool isBloomed() const;
 	const bool hasDiffuseMap() const;
 
 private:
@@ -113,4 +115,5 @@ private:
 	bool _isDepthMapIncluded       = true;
 	bool _isShadowed			   = true;
 	bool _isReflected			   = true;
+	bool _isBloomed				   = false;
 };

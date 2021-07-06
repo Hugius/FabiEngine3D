@@ -402,6 +402,11 @@ void ModelEntity::setWireframed(bool value)
 	_wireframed = value;
 }
 
+void ModelEntity::setBloomed(bool value)
+{
+	_isBloomed = value;
+}
+
 void ModelEntity::clearDiffuseMaps()
 {
 	_diffuseMaps.clear();

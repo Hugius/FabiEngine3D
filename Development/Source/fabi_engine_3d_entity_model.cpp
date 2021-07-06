@@ -223,6 +223,11 @@ const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& par
 	return false;
 }
 
+const bool FabiEngine3D::modelEntity_isBloomed(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->isBloomed();
+}
+
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
 {
 	_core->_modelEntityManager.getEntity(ID)->translate(factor, partID);
@@ -308,9 +313,9 @@ void FabiEngine3D::modelEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_modelEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
-void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets)
+void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vector<Vec3> offsets)
 {
-	if (instanced) // Add instancing
+	if (enabled) // Add instancing
 	{
 		for (const auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
 		{
@@ -332,6 +337,11 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool instanced, ve
 			}
 		}
 	}
+}
+
+void FabiEngine3D::modelEntity_setBloomed(const string& ID, bool enabled)
+{
+	_core->_modelEntityManager.getEntity(ID)->setBloomed(enabled);
 }
 
 void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)

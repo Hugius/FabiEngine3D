@@ -201,6 +201,11 @@ void FabiEngine3D::billboardEntity_setReflected(const string& ID, bool enabled)
 	_core->_billboardEntityManager.getEntity(ID)->setReflected(enabled);
 }
 
+void FabiEngine3D::billboardEntity_setBloomed(const string& ID, bool enabled)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setBloomed(enabled);
+}
+
 void FabiEngine3D::billboardEntity_setMinHeight(const string& ID, float height)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setMinHeight(height);
@@ -253,9 +258,14 @@ const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
 	}
 }
 
+const bool FabiEngine3D::billboardEntity_isBloomed(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isBloomed();
+}
+
 void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontPath)
 {
-	string text = _core->_billboardEntityManager.getEntity(ID)->getTextContent();
+	auto text = _core->_billboardEntityManager.getEntity(ID)->getTextContent();
 	_core->_billboardEntityManager.getEntity(ID)->setFontPath(fontPath);
 
 	// Only update texture if text content is present

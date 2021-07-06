@@ -59,6 +59,7 @@ public:
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
 	void setWireframed(bool value);
+	void setBloomed(bool value);
 	void clearDiffuseMaps();
 	void clearLightMaps();
 	void clearReflectionMaps();
@@ -110,6 +111,7 @@ public:
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isWireframed() const;
+	const bool isBloomed() const;
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
@@ -171,4 +173,5 @@ private:
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
 	bool _wireframed		 = false;
+	bool _isBloomed			 = true;
 };

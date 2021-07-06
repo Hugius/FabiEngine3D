@@ -226,6 +226,11 @@ const bool ModelEntity::hasNormalMap() const
 	return !_normalMaps.empty();
 }
 
+const bool ModelEntity::isBloomed() const
+{
+	return _isBloomed;
+}
+
 const bool ModelEntity::isCameraStatic() const
 {
 	return _isCameraStatic;

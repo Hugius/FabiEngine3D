@@ -36,9 +36,9 @@ void RenderFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 			_textures.push_back(0);
 			glGenTextures(1, &_textures[i]);
 			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, _textures[i]);
-			glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, aaSamples, GL_RGBA16, _size.x, _size.y, GL_TRUE);
+			glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, aaSamples, GL_RGB, _size.x, _size.y, GL_TRUE);
 			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, _textures[i], 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D_MULTISAMPLE, _textures[i], 0);
 		}
 
 		// Renderbuffers
@@ -47,6 +47,14 @@ void RenderFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 		glRenderbufferStorageMultisample(GL_RENDERBUFFER, aaSamples, GL_DEPTH24_STENCIL8, _size.x, _size.y);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _rbo);
+
+		// Multiple textures
+		std::vector<GLuint> attachments;
+		for (int i = 0; i < amount; i++)
+		{
+			attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
+		}
+		glDrawBuffers(amount, &attachments[0]);
 
 		// Unbind
 		unbind();
@@ -84,12 +92,13 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amoun
 		// Texture generation
 		for (int i = 0; i < amount; i++)
 		{
+			// Add empty texture ID
 			_textures.push_back(0);
 
 			// Texture generation
 			glGenTextures(1, &_textures[i]);
 			glBindTexture(GL_TEXTURE_2D, _textures[i]);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
 			// Optional texture clamp
 			if (textureClamp)

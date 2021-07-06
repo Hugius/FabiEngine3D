@@ -25,7 +25,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 {
 	// Framebuffers
 	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 0, 1);
+	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 2, 1);
 	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0), 1);
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);

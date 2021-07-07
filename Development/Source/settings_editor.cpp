@@ -26,7 +26,7 @@ void SettingsEditor::_loadGUI()
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("msaaQuality", Vec2(0.0f, 0.75f), Vec2(CW("MSAA"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "MSAA", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("isFxaaEnabled", Vec2(0.0f, 0.75f), Vec2(CW("FXAA: ON"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.45f), Vec2(CW("Shadows"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.15f), Vec2(CW("Reflections"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.15f), Vec2(CW("Refractions"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractions", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -49,7 +49,7 @@ void SettingsEditor::loadSettings()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Check if settings file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -61,11 +61,18 @@ void SettingsEditor::loadSettings()
 		std::istringstream iss(line);
 
 		// Extract values from file
-		unsigned int msaaQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
-		iss >> msaaQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+		unsigned int shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+		bool isFxaaEnabled;
+		iss >> isFxaaEnabled >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+
+		// Disable FXAA
+		if (_fe3d.gfx_isFxaaEnabled())
+		{
+			_fe3d.gfx_disableFXAA(true);
+		}
 
 		// Set values
-		_fe3d.gfx_setMsaaQuality(msaaQuality);
+		isFxaaEnabled ? _fe3d.gfx_enableFXAA() : void();
 		_fe3d.gfx_setShadowQuality(shadowQuality);
 		_fe3d.gfx_setReflectionQuality(reflectionQuality);
 		_fe3d.gfx_setRefractionQuality(refractionQuality);
@@ -76,7 +83,7 @@ void SettingsEditor::loadSettings()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"game_settings.fe3d\" missing!");
+		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" missing!");
 	}
 }
 
@@ -107,14 +114,14 @@ void SettingsEditor::save(bool newFile)
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\game_settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Overwrite (or create) settings file
 	std::ofstream file;
 	file.open(filePath);
 
 	// Get values
-	auto msaaQuality = _fe3d.gfx_getMsaaQuality();
+	auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
 	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
 	auto refractionQuality = _fe3d.gfx_getRefractionQuality();
@@ -123,7 +130,7 @@ void SettingsEditor::save(bool newFile)
 	// Default values for new file
 	if (newFile)
 	{
-		msaaQuality = 4;
+		isFxaaEnabled = true;
 		shadowQuality = 2048;
 		reflectionQuality = 256;
 		refractionQuality = 256;
@@ -131,11 +138,11 @@ void SettingsEditor::save(bool newFile)
 	}
 
 	// Write to file
-	file << 
-		msaaQuality << " " << 
-		shadowQuality << " " << 
+	file <<
+		isFxaaEnabled << " " <<
+		shadowQuality << " " <<
 		reflectionQuality << " " <<
-		refractionQuality << " " << 
+		refractionQuality << " " <<
 		audioChannels;
 
 	// Close file
@@ -158,7 +165,7 @@ void SettingsEditor::update()
 		if (screen->getID() == "settingsEditorMenuMain")
 		{
 			// Temporary values
-			int msaaQuality = _fe3d.gfx_getMsaaQuality();
+			int isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
 			int shadowQuality = _fe3d.gfx_getShadowQuality();
 			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
 			int refractionQuality = _fe3d.gfx_getRefractionQuality();
@@ -172,9 +179,11 @@ void SettingsEditor::update()
 					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				}
-				else if (screen->getButton("msaaQuality")->isHovered())
+				else if (screen->getButton("isFxaaEnabled")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("msaaQuality", "MSAA Quality", msaaQuality, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+					isFxaaEnabled = !isFxaaEnabled;
+					isFxaaEnabled ? _fe3d.gfx_enableFXAA() : _fe3d.gfx_disableFXAA();
+					save(false);
 				}
 				else if (screen->getButton("shadowQuality")->isHovered())
 				{
@@ -195,12 +204,7 @@ void SettingsEditor::update()
 			}
 
 			// Update forms
-			if (_gui.getGlobalScreen()->checkValueForm("msaaQuality", msaaQuality, {}))
-			{
-				_fe3d.gfx_setMsaaQuality(std::clamp(msaaQuality, 1, 32));
-				save(false);
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
 				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality, 512, 8192));
 				save(false);
@@ -220,6 +224,9 @@ void SettingsEditor::update()
 				_fe3d.misc_setMaxAudioChannels(std::clamp(audioChannels, 32, 512));
 				save(false);
 			}
+
+			// Update button contents
+			screen->getButton("isFxaaEnabled")->changeTextContent(isFxaaEnabled ? "FXAA: ON" : "FXAA: OFF");
 		}
 	}
 }

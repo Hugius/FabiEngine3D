@@ -644,7 +644,6 @@ public:
 	const bool music_isPaused();
 
 	// Graphics interface - setters
-	void gfx_setMsaaQuality(int quality);
 	void gfx_setShadowQuality(int quality);
 	void gfx_setReflectionQuality(int quality);
 	void gfx_setRefractionQuality(int quality);
@@ -658,7 +657,7 @@ public:
 	void gfx_enableSceneReflections(float factor, float height);
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
-	void gfx_enableMSAA();
+	void gfx_enableFXAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
 	void gfx_enableBloom(BloomType type, float intensity, int blurSize);
 	void gfx_enableSkyHDR(float brightnessFactor);
@@ -675,7 +674,7 @@ public:
 	void gfx_disableSceneReflections(bool resetProperties = false);
 	void gfx_disableLightMapping(bool resetProperties = false);
 	void gfx_disableNormalMapping(bool resetProperties = false);
-	void gfx_disableMSAA(bool resetProperties = false);
+	void gfx_disableFXAA(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
 	void gfx_disableSkyHDR(bool resetProperties = false);
@@ -713,13 +712,12 @@ public:
 	const float gfx_getLensFlareIntensity();
 	const float gfx_getLensFlareMultiplier();
 	const float gfx_getMotionBlurStrength();
-	const unsigned int gfx_getMsaaQuality();
 	const unsigned int gfx_getShadowQuality();
 	const unsigned int gfx_getReflectionQuality();
 	const unsigned int gfx_getRefractionQuality();
 	const unsigned int gfx_getBloomBlurSize();
 	const unsigned int gfx_getShadowInterval();
-	const bool gfx_isMsaaEnabled();
+	const bool gfx_isFxaaEnabled();
 	const bool gfx_isAmbientLightingEnabled();
 	const bool gfx_isDirectionalLightingEnabled();
 	const bool gfx_isSpecularLightingEnabled();

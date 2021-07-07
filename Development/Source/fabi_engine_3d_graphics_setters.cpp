@@ -1,11 +1,6 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::gfx_setMsaaQuality(int quality)
-{
-	_core->_masterRenderer.loadMsaaFramebuffer(quality);
-}
-
 void FabiEngine3D::gfx_setShadowQuality(int quality)
 {
 	_core->_masterRenderer.loadShadowFramebuffer(quality);
@@ -157,15 +152,15 @@ void FabiEngine3D::gfx_enableNormalMapping()
 	}
 }
 
-void FabiEngine3D::gfx_enableMSAA()
+void FabiEngine3D::gfx_enableFXAA()
 {
-	if (_core->_renderBus.isMsaaEnabled())
+	if (_core->_renderBus.isFxaaEnabled())
 	{
-		Logger::throwWarning("Tried to enable MSAA: already enabled");
+		Logger::throwWarning("Tried to enable FXAA: already enabled");
 	}
 	else
 	{
-		_core->_renderBus.setMsaaEnabled(true);
+		_core->_renderBus.setFxaaEnabled(true);
 	}
 }
 
@@ -423,15 +418,15 @@ void FabiEngine3D::gfx_disableNormalMapping(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableMSAA(bool resetProperties)
+void FabiEngine3D::gfx_disableFXAA(bool resetProperties)
 {
-	if (_core->_renderBus.isMsaaEnabled())
+	if (_core->_renderBus.isFxaaEnabled())
 	{
-		_core->_renderBus.setMsaaEnabled(false);
+		_core->_renderBus.setFxaaEnabled(false);
 	}
 	else
 	{
-		Logger::throwWarning("Tried to disable MSAA: not enabled");
+		Logger::throwWarning("Tried to disable FXAA: not enabled");
 	}
 }
 

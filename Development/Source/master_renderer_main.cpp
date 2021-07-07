@@ -23,18 +23,16 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
 	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
-	// Framebuffers
+	// Create framebuffers
 	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 2, 1);
-	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0), 1);
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
 	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
 	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize(), 1);
-	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
-	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::DOF),    true);
-	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0));
+	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
+	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::BLOOM),  true);
+	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::DOF),    true);
+	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::MOTION), true);
 
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");
@@ -103,14 +101,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_timer.stopDeltaPart();
 
 		// Bind screen framebuffer
-		if (_renderBus.isMsaaEnabled())
-		{
-			_msaaFramebuffer.bind();
-		}
-		else
-		{
-			_screenFramebuffer.bind();
-		}
+		_screenFramebuffer.bind();
 
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -136,22 +127,12 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_renderBus.setTriangleCountingEnabled(false);
 
 		// Unbind screen framebuffer
-		_timer.startDeltaPart("postProcessing");
-		if (_renderBus.isMsaaEnabled())
-		{
-			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
-			_msaaFramebuffer.unbind();
-			_renderBus.setPrimarySceneMap(_aaProcessorFramebuffer.getTexture(0));
-			_renderBus.setSecondarySceneMap(_aaProcessorFramebuffer.getTexture(1));
-		}
-		else
-		{
-			_screenFramebuffer.unbind();
-			_renderBus.setPrimarySceneMap(_screenFramebuffer.getTexture(0));
-			_renderBus.setSecondarySceneMap(_screenFramebuffer.getTexture(1));
-		}
+		_screenFramebuffer.unbind();
+		_renderBus.setPrimarySceneMap(_screenFramebuffer.getTexture(0));
+		_renderBus.setSecondarySceneMap(_screenFramebuffer.getTexture(1));
 
 		// Postprocessing captures
+		_timer.startDeltaPart("postProcessing");
 		_captureBloom();
 		_captureDofBlur();
 		_captureLensFlare();
@@ -189,17 +170,10 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 	}
 }
 
-void MasterRenderer::loadMsaaFramebuffer(int quality)
-{
-	_msaaFramebuffer.reset();
-	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 2, quality);
-	_renderBus.setMsaaSampleCount(quality);
-}
-
 void MasterRenderer::loadShadowFramebuffer(int quality)
 {
 	_shadowFramebuffer.reset();
-	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality), 1);
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality));
 	_renderBus.setShadowMapSize(quality);
 }
 

@@ -348,7 +348,7 @@ bool TopViewportController::_isProjectCorrupted(const string& projectID)
 	}
 
 	// Check if all default files are still existing
-	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\game_settings.fe3d") ||
+	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\settings.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||

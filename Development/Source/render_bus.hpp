@@ -88,7 +88,6 @@ public:
 
 	// Integers
 	void setBloomBlurSize(unsigned int value);
-	void setMsaaSampleCount(unsigned int value);
 	void setShadowMapSize(unsigned int value);
 	void setReflectionMapSize(unsigned int value);
 	void setRefractionMapSize(unsigned int value);
@@ -96,7 +95,7 @@ public:
 	void resetTriangleCount();
 
 	// Booleans
-	void setMsaaEnabled(bool value);
+	void setFxaaEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
 	void setSpecularLightingEnabled(bool value);
@@ -202,13 +201,12 @@ public:
 	// Integers
 	const unsigned int getBloomBlurSize()	  const;
 	const unsigned int getTriangleCount()	  const;
-	const unsigned int getMsaaSampleCount()	  const;
 	const unsigned int getShadowMapSize()	  const;
 	const unsigned int getReflectionMapSize() const;
 	const unsigned int getRefractionMapSize() const;
 
 	// Booleans
-	const bool isMsaaEnabled()                 const;
+	const bool isFxaaEnabled()                 const;
 	const bool isAmbientLightingEnabled()      const;
 	const bool isDirectionalLightingEnabled()  const;
 	const bool isSpecularLightingEnabled()     const;
@@ -315,13 +313,12 @@ private:
 	// Integers
 	unsigned int _bloomBlurSize		= 0;
 	unsigned int _triangleCount		= 0;
-	unsigned int _msaaSampleCount	= 0;
 	unsigned int _shadowMapSize		= 0;
 	unsigned int _reflectionMapSize = 0;
 	unsigned int _refractionMapSize = 0;
 
 	// Booleans
-	bool _isMsaaEnabled                 = false;
+	bool _isFxaaEnabled                 = false;
 	bool _isAmbientLightingEnabled      = false;
 	bool _isDirectionalLightingEnabled  = false;
 	bool _isSpecularLightingEnabled     = false;

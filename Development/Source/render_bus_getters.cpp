@@ -315,11 +315,6 @@ const unsigned int RenderBus::getTriangleCount() const
 	return _triangleCount;
 }
 
-const unsigned int RenderBus::getMsaaSampleCount() const
-{
-	return _msaaSampleCount;
-}
-
 const unsigned int RenderBus::getShadowMapSize() const
 {
 	return _shadowMapSize;
@@ -335,9 +330,9 @@ const unsigned int RenderBus::getRefractionMapSize() const
 	return _refractionMapSize;
 }
 
-const bool RenderBus::isMsaaEnabled() const
+const bool RenderBus::isFxaaEnabled() const
 {
-	return _isMsaaEnabled;
+	return _isFxaaEnabled;
 }
 
 const bool RenderBus::isSceneReflectionsEnabled() const

@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-const bool FabiEngine3D::gfx_isMsaaEnabled()
+const bool FabiEngine3D::gfx_isFxaaEnabled()
 {
-	return _core->_renderBus.isMsaaEnabled();
+	return _core->_renderBus.isFxaaEnabled();
 }
 
 const bool FabiEngine3D::gfx_isAmbientLightingEnabled()
@@ -89,11 +89,6 @@ const bool FabiEngine3D::gfx_isMotionBlurEnabled()
 const bool FabiEngine3D::gfx_isLensFlareEnabled()
 {
 	return _core->_renderBus.isLensFlareEnabled();
-}
-
-const unsigned int FabiEngine3D::gfx_getMsaaQuality()
-{
-	return _core->_renderBus.getMsaaSampleCount();
 }
 
 const unsigned int FabiEngine3D::gfx_getShadowQuality()

@@ -2,7 +2,7 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void BlurRenderer::addFramebuffer(int index, bool textureClamp)
+void BlurRenderer::addFramebuffer(unsigned int index, bool textureClamp)
 {
 	_horizontalFramebuffers.push_back(new RenderFramebuffer());
 	_verticalFramebuffers.push_back(new RenderFramebuffer());
@@ -23,7 +23,7 @@ void BlurRenderer::unbind()
 	_shader.unbind();
 }
 
-GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, int index, int size, float intensity, BlurDirection direction)
+GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, unsigned int index, int size, float intensity, BlurDirection direction)
 {
 	// Variables
 	bool firstTime = true;

@@ -32,7 +32,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().loadSettings();
 
 		// Permanent graphical effects
-		gfx_enableMSAA();
+		gfx_enableFXAA();
 		gfx_enableBloom(BloomType::EVERYTHING, 1.0f, 10);
 
 		// Default camera
@@ -56,8 +56,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Permanent graphical effects
 		misc_setMainRenderingColor(Vec3(0.0f));
-		gfx_setMsaaQuality(16);
-		gfx_enableMSAA();
+		gfx_enableFXAA();
 		gfx_enableBloom(BloomType::PARTS, 1.0f, 10);
 
 		// Default camera

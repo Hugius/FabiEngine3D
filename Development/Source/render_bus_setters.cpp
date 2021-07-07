@@ -321,11 +321,6 @@ void RenderBus::increaseTriangleCount(unsigned int value)
 	}
 }
 
-void RenderBus::setMsaaSampleCount(unsigned int value)
-{
-	_msaaSampleCount = value;
-}
-
 void RenderBus::setShadowMapSize(unsigned int value)
 {
 	_shadowMapSize = value;
@@ -346,9 +341,9 @@ void RenderBus::resetTriangleCount()
 	_triangleCount = 0;
 }
 
-void RenderBus::setMsaaEnabled(bool value)
+void RenderBus::setFxaaEnabled(bool value)
 {
-	_isMsaaEnabled = value;
+	_isFxaaEnabled = value;
 }
 
 void RenderBus::setSceneReflectionsEnabled(bool value)

@@ -14,6 +14,10 @@
 
 LibraryLoader::LibraryLoader()
 {
+	// Attributes
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
 	// Make sure scaled monitors still show the correct resolution
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
@@ -67,14 +71,6 @@ LibraryLoader::LibraryLoader()
 	{
 		Logger::throwError("Windows Sockets API could not be initialized: ", winsockResult);
 	}
-
-	// Miscellaneous stuff
-	Logger::throwInfo("Initializing SDL settings...");
-	const auto& versionString = getOpenglVersion();
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, stoi(string(1, versionString[0])));
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, stoi(string(1, versionString[2])));
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 }
 
 LibraryLoader::~LibraryLoader()

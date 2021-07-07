@@ -26,7 +26,6 @@ public:
 
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus, Camera& camera);
-	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);
 	void loadReflectionFramebuffer(int quality);
 	void loadRefractionFramebuffer(int quality);
@@ -63,7 +62,7 @@ private:
 
 	// Framebuffers
 	RenderFramebuffer _screenFramebuffer;
-	RenderFramebuffer _msaaFramebuffer;
+	RenderFramebuffer _fxaaFramebuffer;
 	RenderFramebuffer _aaProcessorFramebuffer;
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;

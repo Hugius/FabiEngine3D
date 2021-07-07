@@ -14,7 +14,6 @@
 - You can set a **maximum** amount of **clients** that can connect to the server.
 - A server runs at the **maximum update speed** possible (it **overrides** the 144 ticks/second engine default).
 - Be careful with **performance heavy operations** in the server scripts, otherwise it might not be able to handle client messages in time.
-- A server application does not need the `game_assets` folder to run.
 
 ### Client
 - A FabiEngine3D client system exists **within a FabiEngine3D game**.

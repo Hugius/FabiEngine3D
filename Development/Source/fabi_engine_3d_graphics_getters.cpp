@@ -231,9 +231,9 @@ const float FabiEngine3D::gfx_getBloomIntensity()
 	return _core->_renderBus.getBloomIntensity();
 }
 
-const unsigned int FabiEngine3D::gfx_getBloomBlurSize()
+const unsigned int FabiEngine3D::gfx_getBloomBlurCount()
 {
-	return _core->_renderBus.getBloomBlurSize();
+	return _core->_renderBus.getBloomBlurCount();
 }
 
 const unsigned int FabiEngine3D::gfx_getShadowInterval()
@@ -269,4 +269,9 @@ const float FabiEngine3D::gfx_getLensFlareMultiplier()
 const float FabiEngine3D::gfx_getMotionBlurStrength()
 {
 	return _core->_renderBus.getMotionBlurStrength();
+}
+
+const BloomType FabiEngine3D::gfx_getBloomType()
+{
+	return _core->_renderBus.getBloomType();
 }

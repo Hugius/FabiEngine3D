@@ -75,6 +75,7 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 
 	// Load models
 	_modelEditor.loadModelEntitiesFromFile();
@@ -106,6 +107,7 @@ void AnimationEditor::unload()
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disableBloom(true);
 
 	// Delete models
 	_fe3d.modelEntity_deleteAll();

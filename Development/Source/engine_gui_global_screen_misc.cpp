@@ -15,6 +15,11 @@ void EngineGuiGlobalScreen::setValueFormButtonsPosition(Vec2 position)
 	_valueFormButtonsPosition = position;
 }
 
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size)
+{
+	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
+}
+
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, to_string(value), position, size, true);
@@ -33,6 +38,22 @@ void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, value, position, size, false);
+}
+
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
+{
+	// Convert from unsigned integer to string
+	vector<string> forbiddenValueStrings;
+	for (auto forbiddenValue : forbiddenValues)
+	{
+		forbiddenValueStrings.push_back(to_string(forbiddenValue));
+	}
+
+	int tempValue = static_cast<int>(value); // Dereference
+	string valueString = to_string(tempValue); // Convert to string
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
+	value = result ? static_cast<unsigned int>(std::stoi(valueString)) : value; // Apply to value
+	return result; // Return
 }
 
 bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)

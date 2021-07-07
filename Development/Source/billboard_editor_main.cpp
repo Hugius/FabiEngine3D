@@ -91,6 +91,7 @@ void BillboardEditor::load()
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	
 	// 3D Environment
 	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
@@ -123,6 +124,7 @@ void BillboardEditor::unload()
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableBloom(true);
 
 	// 3D environment
 	_fe3d.modelEntity_delete("@@cube");

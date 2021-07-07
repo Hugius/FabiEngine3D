@@ -118,6 +118,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	
 	// 3D Environment
 	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
@@ -156,6 +157,7 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disableBloom(true);
 
 	// Delete models
 	_fe3d.modelEntity_deleteAll();

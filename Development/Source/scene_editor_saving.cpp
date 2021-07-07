@@ -251,8 +251,8 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		// Data to save
-		Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
-		float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
+		auto ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+		auto ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
 		// Write data
 		file <<
@@ -267,11 +267,11 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isDirectionalLightingEnabled())
 	{
 		// Data to save
-		Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-		Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
-		float billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
+		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
+		auto billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+		auto billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
 
 		// Write data
 		file <<
@@ -324,7 +324,7 @@ void SceneEditor::saveEditorSceneToFile()
 	file << "EDITOR_SPEED " << _editorSpeed << std::endl;
 
 	// Editor camera position
-	Vec3 position = _fe3d.camera_getPosition();
+	auto position = _fe3d.camera_getPosition();
 	file << "EDITOR_POSITION " << position.x << " " << position.y << " " << position.z << std::endl;
 
 	// Editor camera yaw
@@ -337,13 +337,13 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isShadowsEnabled())
 	{
 		// Data to save
-		float size = _fe3d.gfx_getShadowSize();
-		float lightness = _fe3d.gfx_getShadowLightness();
-		Vec3 position = _fe3d.gfx_getShadowEye();
-		Vec3 center = _fe3d.gfx_getShadowCenter();
-		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		bool isLighted = _fe3d.gfx_isLightedShadowingEnabled();
-		int interval = _fe3d.gfx_getShadowInterval();
+		auto size = _fe3d.gfx_getShadowSize();
+		auto lightness = _fe3d.gfx_getShadowLightness();
+		auto position = _fe3d.gfx_getShadowEye();
+		auto center = _fe3d.gfx_getShadowCenter();
+		auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+		auto isLighted = _fe3d.gfx_isLightedShadowingEnabled();
+		auto interval = _fe3d.gfx_getShadowInterval();
 
 		// Write data
 		file << 
@@ -367,9 +367,9 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isDofEnabled())
 	{
 		// Data to save
-		bool dynamic = _fe3d.gfx_isDofDynamic();
-		float blurDistance = _fe3d.gfx_getDofBlurDistance();
-		float maxDistance = _fe3d.gfx_getaMaxDofDistance();
+		auto dynamic = _fe3d.gfx_isDofDynamic();
+		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
+		auto maxDistance = _fe3d.gfx_getaMaxDofDistance();
 
 		// Write data
 		file <<
@@ -383,10 +383,10 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isFogEnabled())
 	{
 		// Data to save
-		float minDistance = _fe3d.gfx_getFogMinDistance();
-		float maxDistance = _fe3d.gfx_getFogMaxDistance();
-		float thickness = _fe3d.gfx_getFogThickness();
-		Vec3 color = _fe3d.gfx_getFogColor();
+		auto minDistance = _fe3d.gfx_getFogMinDistance();
+		auto maxDistance = _fe3d.gfx_getFogMaxDistance();
+		auto thickness = _fe3d.gfx_getFogThickness();
+		auto color = _fe3d.gfx_getFogColor();
 
 		// Write data
 		file <<
@@ -401,9 +401,9 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isLensFlareEnabled())
 	{
 		// Data to save
-		string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
-		float intensity = _fe3d.gfx_getLensFlareIntensity();
-		float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
+		auto intensity = _fe3d.gfx_getLensFlareIntensity();
+		auto multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
 		// Perform empty string & space conversions
 		flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
@@ -421,6 +421,22 @@ void SceneEditor::saveEditorSceneToFile()
 	if (_fe3d.gfx_isSkyExposureEnabled())
 	{
 		file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureFactor() << std::endl;
+	}
+
+	// Bloom settings
+	if (_fe3d.gfx_isSkyExposureEnabled())
+	{
+		// Data to save
+		auto type = static_cast<unsigned int>(_fe3d.gfx_getBloomType());
+		auto intensity = _fe3d.gfx_getBloomIntensity();
+		auto blurCount = _fe3d.gfx_getBloomBlurCount();
+
+		// Write data
+		file <<
+			"GRAPHICS_BLOOM " <<
+			type << " " <<
+			intensity << " " <<
+			blurCount << std::endl;
 	}
 
 	// Close file

@@ -179,7 +179,7 @@ void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float re
 	}
 }
 
-void FabiEngine3D::gfx_enableBloom(BloomType type, float intensity, int blurSize)
+void FabiEngine3D::gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount)
 {
 	if (_core->_renderBus.isBloomEnabled())
 	{
@@ -190,7 +190,7 @@ void FabiEngine3D::gfx_enableBloom(BloomType type, float intensity, int blurSize
 		_core->_renderBus.setBloomEnabled(true);
 		_core->_renderBus.setBloomType(type);
 		_core->_renderBus.setBloomIntensity(intensity);
-		_core->_renderBus.setBloomBlurSize(blurSize);
+		_core->_renderBus.setBloomBlurCount(blurCount);
 	}
 }
 
@@ -451,7 +451,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 		if (resetProperties)
 		{
 			_core->_renderBus.setBloomIntensity(0.0f);
-			_core->_renderBus.setBloomBlurSize(0);
+			_core->_renderBus.setBloomBlurCount(0);
 		}
 	}
 	else

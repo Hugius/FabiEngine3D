@@ -305,9 +305,9 @@ const float RenderBus::getSkyReflectionMixValue() const
 	return _skyReflectionMixValue;
 }
 
-const unsigned int RenderBus::getBloomBlurSize() const
+const unsigned int RenderBus::getBloomBlurCount() const
 {
-	return _bloomBlurSize;
+	return _bloomBlurCount;
 }
 
 const unsigned int RenderBus::getTriangleCount() const

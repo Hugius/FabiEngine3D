@@ -87,7 +87,7 @@ public:
 	void setMixSkyLightness(float value);
 
 	// Integers
-	void setBloomBlurSize(unsigned int value);
+	void setBloomBlurCount(unsigned int value);
 	void setShadowMapSize(unsigned int value);
 	void setReflectionMapSize(unsigned int value);
 	void setRefractionMapSize(unsigned int value);
@@ -199,7 +199,7 @@ public:
 	const float getMixSkyLightness()		   const;
 
 	// Integers
-	const unsigned int getBloomBlurSize()	  const;
+	const unsigned int getBloomBlurCount()	  const;
 	const unsigned int getTriangleCount()	  const;
 	const unsigned int getShadowMapSize()	  const;
 	const unsigned int getReflectionMapSize() const;
@@ -311,7 +311,7 @@ private:
 	float _mixSkyLightness			 = 0.0f;
 	
 	// Integers
-	unsigned int _bloomBlurSize		= 0;
+	unsigned int _bloomBlurCount		= 0;
 	unsigned int _triangleCount		= 0;
 	unsigned int _shadowMapSize		= 0;
 	unsigned int _reflectionMapSize = 0;

@@ -512,6 +512,18 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Enable sky exposure
 				_fe3d.gfx_enableSkyExposure(intensity);
 			}
+			else if (entityType == "GRAPHICS_BLOOM")
+			{
+				// Data placeholders
+				unsigned int type, blurCount;
+				float intensity;
+
+				// Extract data
+				iss >> type >> blurCount >> intensity;
+
+				// Enable bloom
+				_fe3d.gfx_enableBloom(BloomType(type), intensity, blurCount);
+			}
 		}
 
 		// Close file

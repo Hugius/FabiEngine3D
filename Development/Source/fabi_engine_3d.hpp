@@ -659,7 +659,7 @@ public:
 	void gfx_enableNormalMapping();
 	void gfx_enableFXAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
-	void gfx_enableBloom(BloomType type, float intensity, int blurSize);
+	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
 	void gfx_enableSkyExposure(float factor);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
@@ -712,10 +712,11 @@ public:
 	const float gfx_getLensFlareIntensity();
 	const float gfx_getLensFlareMultiplier();
 	const float gfx_getMotionBlurStrength();
+	const BloomType gfx_getBloomType();
 	const unsigned int gfx_getShadowQuality();
 	const unsigned int gfx_getReflectionQuality();
 	const unsigned int gfx_getRefractionQuality();
-	const unsigned int gfx_getBloomBlurSize();
+	const unsigned int gfx_getBloomBlurCount();
 	const unsigned int gfx_getShadowInterval();
 	const bool gfx_isFxaaEnabled();
 	const bool gfx_isAmbientLightingEnabled();

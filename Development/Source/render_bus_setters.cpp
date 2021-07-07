@@ -307,9 +307,9 @@ void RenderBus::setSkyReflectionMixValue(float value)
 	_skyReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
 }
 
-void RenderBus::setBloomBlurSize(unsigned int value)
+void RenderBus::setBloomBlurCount(unsigned int value)
 {
-	_bloomBlurSize = value;
+	_bloomBlurCount = value;
 }
 
 

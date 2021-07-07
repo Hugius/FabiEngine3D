@@ -562,8 +562,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				float lodDistance;
 
 				// Extract data
-				iss >>
-					lodDistance;
+				iss >> lodDistance;
 
 				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
@@ -574,8 +573,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				float reflectionHeight;
 
 				// Extract data
-				iss >>
-					reflectionHeight;
+				iss >> reflectionHeight;
 
 				// Set height
 				_fe3d.gfx_disableSceneReflections();
@@ -668,6 +666,18 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Enable sky exposure
 				_fe3d.gfx_enableSkyExposure(intensity);
+			}
+			else if (entityType == "GRAPHICS_BLOOM")
+			{
+				// Data placeholders
+				unsigned int type, blurCount;
+				float intensity;
+
+				// Extract data
+				iss >> type >> blurCount >> intensity;
+
+				// Enable bloom
+				_fe3d.gfx_enableBloom(BloomType(type), intensity, blurCount);
 			}
 		}
 

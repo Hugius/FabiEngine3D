@@ -14,7 +14,7 @@ public:
 	void bind()   override;
 	void unbind() override;
 
-	GLuint blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, unsigned int index, int size, float intensity, BlurDirection direction);
+	GLuint blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, unsigned int index, unsigned int blurCount, float intensity, BlurDirection direction);
 
 private:
 	void _render(const shared_ptr<ImageEntity> entity, GLuint texture);

@@ -82,7 +82,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsShadows");
 				_fe3d.misc_enableShadowFrameRendering();
 			}
-			else if (screen->getButton("motionblur")->isHovered())
+			else if (screen->getButton("motionBlur")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsMotionblur");
 			}
@@ -94,13 +94,17 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsFog");
 			}
-			else if (screen->getButton("lensflare")->isHovered())
+			else if (screen->getButton("lensFlare")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsLensFlare");
 			}
 			else if (screen->getButton("skyExposure")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsSkyExposure");
+			}
+			else if (screen->getButton("bloom")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsBloom");
 			}
 		}
 	}
@@ -276,5 +280,75 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 
 		// Update buttons hoverability
 		screen->getButton("strength")->setHoverable(isEnabled);
+	}
+}
+
+void SceneEditor::_updateDofGraphicsSettingsMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsDof")
+	{
+		// Temporary values
+		bool isEnabled = _fe3d.gfx_isDofEnabled();
+		bool dynamic = _fe3d.gfx_isDofDynamic();
+		float blurDistance = _fe3d.gfx_getDofBlurDistance();
+		float maxDistance = _fe3d.gfx_getaMaxDofDistance();
+
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
+			{
+				isEnabled = !isEnabled;
+			}
+			else if (screen->getButton("dynamic")->isHovered())
+			{
+				dynamic = !dynamic;
+			}
+			else if (screen->getButton("blurDistance")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("blurDistance", "Blur Distance", blurDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+			}
+			else if (screen->getButton("maxDistance")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF Distance", maxDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
+			}
+		}
+
+		// Button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
+
+		// Blur distance value
+		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
+		blurDistance = std::max(0.0f, blurDistance);
+
+		// Max distance value
+		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+		maxDistance = std::max(0.0f, maxDistance);
+
+		// Disable DOF
+		if (_fe3d.gfx_isDofEnabled())
+		{
+			_fe3d.gfx_disableDOF();
+		}
+
+		// Enable DOF
+		if (isEnabled)
+		{
+			_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+		}
+
+		// Update buttons hoverability
+		screen->getButton("dynamic")->setHoverable(isEnabled);
+		screen->getButton("blurDistance")->setHoverable(isEnabled);
+		screen->getButton("maxDistance")->setHoverable(isEnabled && dynamic);
 	}
 }

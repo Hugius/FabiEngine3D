@@ -52,10 +52,12 @@ public:
 
 	// Value form
 	void setValueFormButtonsPosition(Vec2 position);
+	void addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size);
+	bool checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues = {});
 	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
 	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
 	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});

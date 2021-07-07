@@ -118,6 +118,10 @@ void SceneEditor::clearCurrentScene()
 		{
 			_fe3d.gfx_disableLensFlare(true);
 		}
+		if (_fe3d.gfx_isBloomEnabled())
+		{
+			_fe3d.gfx_disableBloom();
+		}
 	}
 
 	// Delete sky entity

@@ -55,7 +55,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		
 		// Default rendering color
 		misc_setMainRenderingColor(Vec3(0.0f));
-		gfx_enableBloom(BloomType::PARTS, 1.0f, 10);
 
 		// Default camera
 		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
@@ -70,7 +69,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			textureFolderPath + "background_bottom.png",
 			textureFolderPath + "background_back.png",
 			textureFolderPath + "background_front.png" });
-		skyEntity_select("@@engineBackground");
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture
@@ -118,8 +116,8 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 			// Restore background
 			skyEntity_select("@@engineBackground");
-			skyEntity_setLightness("@@engineBackground", 0.6f);
-
+			skyEntity_setLightness("@@engineBackground", 1.0f);
+			
 			// Restore Vsync
 			if (!misc_isVsyncEnabled())
 			{

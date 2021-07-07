@@ -16,11 +16,11 @@
 
 # Application exporting
 - Create a new **directory** for your application somewhere on your PC.
-- Copy `FabiEngine3D\binaries` to `<your_directory>`.
-- Copy `FabiEngine3D\shaders` to `<your_directory>`.
+- Copy `FabiEngine3D\binaries\` to `<your_directory>`.
+- Copy `FabiEngine3D\engine_assets\` to `<your_directory>`.
+- Unless your application is a **server**, copy `FabiEngine3D\game_assets\` to `<your_directory>` (only the assets you **need**).
 - Copy `FabiEngine3D\config.fe3d` to `<your_directory>`.
-- Copy `FabiEngine3D\game_assets` to `<your_directory>` (only the assets you need).
 - Copy **ALL** contents from `FabiEngine3D\projects\<your_project>` to `<your_directory>`.
-- In the config file, set the `application_exported` option to `true` and change the other options to your liking.
+- In the **config** file, set the `application_exported` option to `true` and change the other options to your liking.
 - Rename `<your_directory>\binaries\FabiEngine3D.exe` to your liking.
 - Open `<your_directory>\binaries\<your_application>.exe` to start your application!

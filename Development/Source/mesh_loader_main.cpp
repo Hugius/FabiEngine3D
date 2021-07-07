@@ -21,7 +21,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 	string tempReflectionMapPath = "";
 
 	// Get application root directory
-	const string rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectory();
 
 	// Load .obj file
 	string path = rootDir + filePath;

@@ -18,7 +18,7 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	std::ifstream fragmentFile;
 
 	// Compose file paths
-	const string rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectory();
 	const auto vertexPath = "engine_assets\\shaders\\" + _vertexFileName;
 	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFileName;
 

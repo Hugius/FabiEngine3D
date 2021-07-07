@@ -128,7 +128,7 @@ BEGIN:
 	if (iterator == _musicCache.end()) // Not in map (yet)
 	{
 		// Get application root directory
-		const string rootDir = Tools::getRootDirectory();
+		const auto rootDir = Tools::getRootDirectory();
 
 		// Load audio file
 		Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
@@ -202,7 +202,7 @@ void AudioLoader::_throwLoadedMessage(const string& filePath)
 char* AudioLoader::_loadWaveFile(const std::string& filePath)
 {
 	// Get application root directory
-	const string rootDir = Tools::getRootDirectory();
+	const auto rootDir = Tools::getRootDirectory();
 	auto fullFilePath = string(rootDir + filePath);
 
 	// Open WAV file

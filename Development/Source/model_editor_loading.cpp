@@ -119,7 +119,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 			string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			int reflectionType;
-			bool isFaceCulled, isTransparent, isSpecular, isInstanced;
+			bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBloomed;
 			Vec3 modelSize, color;
 			vector<string> aabbNames;
 			vector<Vec3> aabbPositions;
@@ -151,7 +151,8 @@ void ModelEditor::loadModelEntitiesFromFile()
 				color.b >>
 				uvRepeat >>
 				lodEntityID >>
-				isInstanced;
+				isInstanced >>
+				isBloomed;
 
 			// Extract AABB data from file
 			while (true)
@@ -190,7 +191,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 			// Add new model
 			_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
 				isTransparent, isSpecular, reflectionType, specularFactor, specularIntensity, lightness,
-				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
+				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, isBloomed, aabbNames, aabbPositions, aabbSizes);
 		}
 
 		// Close file

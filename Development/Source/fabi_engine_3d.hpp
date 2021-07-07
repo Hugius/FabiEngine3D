@@ -274,8 +274,8 @@ public:
 	void modelEntity_setSkyReflective(const string& ID, bool enabled);
 	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setSceneReflective(const string& ID, bool enabled);
-	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setShadowed(const string& ID, bool enabled);
+	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
 	void modelEntity_setWireframed(const string& ID, bool enabled);

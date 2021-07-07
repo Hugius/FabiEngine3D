@@ -173,5 +173,5 @@ private:
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
 	bool _wireframed		 = false;
-	bool _isBloomed			 = true;
+	bool _isBloomed			 = false;
 };

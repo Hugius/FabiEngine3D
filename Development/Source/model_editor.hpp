@@ -26,8 +26,8 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	bool _addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
-		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType,
-		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
+		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor, float specularIntensity,
+		float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBloomed,
 		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _loadMeshFileNames();
 	void _loadMesh();

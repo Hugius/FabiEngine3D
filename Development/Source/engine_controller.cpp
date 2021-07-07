@@ -28,12 +28,11 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSceneEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getSettingsEditor().setCurrentProjectID(application_getTitle());
 
+		// Default rendering color
+		misc_setMainRenderingColor(Vec3(0.0f));
+
 		// Import settings
 		_leftViewportController.getSettingsEditor().loadSettings();
-
-		// Permanent graphical effects
-		gfx_enableFXAA();
-		gfx_enableBloom(BloomType::EVERYTHING, 1.0f, 10);
 
 		// Default camera
 		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
@@ -53,10 +52,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	{
 		// Enable vsync
 		misc_enableVsync();
-
-		// Permanent graphical effects
+		
+		// Default rendering color
 		misc_setMainRenderingColor(Vec3(0.0f));
-		gfx_enableFXAA();
 		gfx_enableBloom(BloomType::PARTS, 1.0f, 10);
 
 		// Default camera

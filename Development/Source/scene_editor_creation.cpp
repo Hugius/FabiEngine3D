@@ -238,6 +238,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setColor(newEntityID, _fe3d.modelEntity_getColor(previewID));
 			_fe3d.modelEntity_setUvRepeat(newEntityID, _fe3d.modelEntity_getUvRepeat(previewID));
 			_fe3d.modelEntity_setInstanced(newEntityID, true, { position });
+			_fe3d.modelEntity_setBloomed(newEntityID, _fe3d.modelEntity_isBloomed(previewID));
 
 			// Diffuse map
 			if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
@@ -292,6 +293,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setColor(newEntityID, _fe3d.modelEntity_getColor(previewID));
 		_fe3d.modelEntity_setUvRepeat(newEntityID, _fe3d.modelEntity_getUvRepeat(previewID));
 		_fe3d.modelEntity_setLevelOfDetailEntity(newEntityID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
+		_fe3d.modelEntity_setBloomed(newEntityID, _fe3d.modelEntity_isBloomed(previewID));
 
 		// Diffuse map
 		if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
@@ -391,6 +393,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
+	_fe3d.billboardEntity_setBloomed(newID, _fe3d.billboardEntity_isBloomed(previewID));
 
 	// Save original lightness
 	if (_isEditorLoaded)

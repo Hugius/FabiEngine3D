@@ -74,5 +74,5 @@
 - The brightness of the flare can be adjusted with the **intensity** (**Range**: 0 to inf) property.
 - You can change how fast the flare fades with the **multiplier** (**Range**: 0 to inf) property).
 - **Flare map**: colored 24bit `PNG` format image file from `game_assets\textures\flare_maps`.
-### Settings - Graphics - Dynamic sky HDR
-- You can enable **dynamic sky HDR** based on extra **intensity** (**Range**: 0 to inf) that is added to the sky rendering.
+### Settings - Graphics - Dynamic sky exposure
+- You can enable **dynamic sky exposure** based on extra **intensity** (**Range**: 0 to inf) that is added to the sky lightness.

@@ -61,9 +61,9 @@ const bool FabiEngine3D::gfx_isBloomEnabled()
 	return _core->_renderBus.isBloomEnabled();
 }
 
-const bool FabiEngine3D::gfx_isSkyHdrEnabled()
+const bool FabiEngine3D::gfx_isSkyExposureEnabled()
 {
-	return _core->_renderBus.isSkyHdrEnabled();
+	return _core->_renderBus.isSkyExposureEnabled();
 }
 
 const bool FabiEngine3D::gfx_isShadowsEnabled()
@@ -241,9 +241,9 @@ const unsigned int FabiEngine3D::gfx_getShadowInterval()
 	return _core->_shadowGenerator.getInterval();
 }
 
-const float FabiEngine3D::gfx_getSkyHdrBrightnessFactor()
+const float FabiEngine3D::gfx_getSkyExposureFactor()
 {
-	return _core->_skyEntityManager.getBrightnessFactor();
+	return _core->_skyEntityManager.getSkyExposureFactor();
 }
 
 const float FabiEngine3D::gfx_getaMaxDofDistance()

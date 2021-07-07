@@ -660,7 +660,7 @@ public:
 	void gfx_enableFXAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
 	void gfx_enableBloom(BloomType type, float intensity, int blurSize);
-	void gfx_enableSkyHDR(float brightnessFactor);
+	void gfx_enableSkyExposure(float factor);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
 	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
@@ -677,7 +677,7 @@ public:
 	void gfx_disableFXAA(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
-	void gfx_disableSkyHDR(bool resetProperties = false);
+	void gfx_disableSkyExposure(bool resetProperties = false);
 	void gfx_disableDOF(bool resetProperties = false);
 	void gfx_disableMotionBlur(bool resetProperties = false);
 	void gfx_disableLensFlare(bool resetProperties = false);
@@ -706,7 +706,7 @@ public:
 	const float gfx_getShadowReach();
 	const float gfx_getShadowLightness();
 	const float gfx_getBloomIntensity();
-	const float gfx_getSkyHdrBrightnessFactor();
+	const float gfx_getSkyExposureFactor();
 	const float gfx_getaMaxDofDistance();
 	const float gfx_getDofBlurDistance();
 	const float gfx_getLensFlareIntensity();
@@ -729,7 +729,7 @@ public:
 	const bool gfx_isSkyReflectionsEnabled();
 	const bool gfx_isSceneReflectionsEnabled();
 	const bool gfx_isBloomEnabled();
-	const bool gfx_isSkyHdrEnabled();
+	const bool gfx_isSkyExposureEnabled();
 	const bool gfx_isShadowsEnabled();
 	const bool gfx_isDofEnabled();
 	const bool gfx_isDofDynamic();

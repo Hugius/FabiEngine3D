@@ -100,7 +100,7 @@ private:
 	void _updateDofGraphicsSettingsMenu();
 	void _updateFogGraphicsSettingsMenu();
 	void _updateLensFlareGraphicsSettingsMenu();
-	void _updateskyHdrGraphicsSettingsMenu();
+	void _updateskyExposureGraphicsSettingsMenu();
 
 	// Miscellaneous updates
 	void _updateMainMenu();

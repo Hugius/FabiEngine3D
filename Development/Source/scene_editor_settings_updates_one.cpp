@@ -98,9 +98,9 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsLensFlare");
 			}
-			else if (screen->getButton("skyHdr")->isHovered())
+			else if (screen->getButton("skyExposure")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsSkyHDR");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsSkyExposure");
 			}
 		}
 	}

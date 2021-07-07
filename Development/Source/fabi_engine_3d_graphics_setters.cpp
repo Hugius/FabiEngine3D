@@ -194,23 +194,16 @@ void FabiEngine3D::gfx_enableBloom(BloomType type, float intensity, int blurSize
 	}
 }
 
-void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
+void FabiEngine3D::gfx_enableSkyExposure(float factor)
 {
-	if (_core->_renderBus.isBloomEnabled())
+	if (_core->_renderBus.isSkyExposureEnabled())
 	{
-		if (_core->_renderBus.isSkyHdrEnabled())
-		{
-			Logger::throwWarning("Tried to enable sky HDR: already enabled");
-		}
-		else
-		{
-			_core->_renderBus.setSkyHdrEnabled(true);
-			_core->_skyEntityManager.setBrightnessFactor(brightnessFactor);
-		}
+		Logger::throwWarning("Tried to enable sky exposure: already enabled");
 	}
 	else
 	{
-		Logger::throwWarning("Tried to enable sky HDR: bloom not enabled");
+		_core->_renderBus.setSkyExposureEnabled(true);
+		_core->_skyEntityManager.setSkyExposureFactor(factor);
 	}
 }
 
@@ -467,20 +460,20 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableSkyHDR(bool resetProperties)
+void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 {
-	if (_core->_renderBus.isSkyHdrEnabled())
+	if (_core->_renderBus.isSkyExposureEnabled())
 	{
-		_core->_renderBus.setSkyHdrEnabled(false);
+		_core->_renderBus.setSkyExposureEnabled(false);
 
 		if (resetProperties)
 		{
-			_core->_skyEntityManager.setBrightnessFactor(0.0f);
+			_core->_skyEntityManager.setSkyExposureFactor(0.0f);
 		}
 	}
 	else
 	{
-		Logger::throwWarning("Tried to disable sky HDR: not enabled");
+		Logger::throwWarning("Tried to disable sky exposure: not enabled");
 	}
 }
 

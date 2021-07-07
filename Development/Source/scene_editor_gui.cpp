@@ -166,7 +166,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addButton("dof", Vec2(0.0f, 0.2625f), Vec2(CW("Depth Of Field"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Depth Of Field", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("fog", Vec2(0.0f, 0.0f), Vec2(CW("Fog"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Fog", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("lensflare", Vec2(0.0f, -0.2625f), Vec2(CW("Lens Flare"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lens Flare", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("skyHdr", Vec2(0.0f, -0.525f), Vec2(CW("Sky HDR"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky HDR", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("skyExposure", Vec2(0.0f, -0.525f), Vec2(CW("Sky Exposure"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Exposure", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7875f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsShadows
@@ -217,8 +217,8 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addButton("multiplier", Vec2(0.0f, -0.35f), Vec2(CW("Multiplier"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Multiplier", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsSkyHDR
-	screenID = "sceneEditorMenuSettingsGraphicsSkyHDR";
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsSkyExposure
+	screenID = "sceneEditorMenuSettingsGraphicsSkyExposure";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("enabled", Vec2(0.0f, 0.475f), Vec2(CW("Enabled: NO"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("intensity", Vec2(0.0f, 0.0f), Vec2(CW("Intensity"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -361,7 +361,7 @@ void SceneEditor::_unloadGUI()
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsDof");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsFog");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsLensFlare");
-	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsSkyHDR");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsSkyExposure");
 	rightWindow->deleteScreen("modelPropertiesMenu");
 	rightWindow->deleteScreen("billboardPropertiesMenu");
 	rightWindow->deleteScreen("pointlightPropertiesMenu");

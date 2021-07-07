@@ -264,17 +264,17 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	}
 }
 
-void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
+void SceneEditor::_updateskyExposureGraphicsSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsSkyHDR")
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsSkyExposure")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isSkyHdrEnabled();
-		float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
+		bool isEnabled = _fe3d.gfx_isSkyExposureEnabled();
+		float intensity = _fe3d.gfx_getSkyExposureFactor();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -302,16 +302,16 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			intensity = std::max(0.0f, intensity / 100.0f);
 		}
 
-		// Disable skyHDR
-		if (_fe3d.gfx_isSkyHdrEnabled())
+		// Disable sky exposure
+		if (_fe3d.gfx_isSkyExposureEnabled())
 		{
-			_fe3d.gfx_disableSkyHDR();
+			_fe3d.gfx_disableSkyExposure();
 		}
 
-		// Enable skyHDR
+		// Enable sky exposure
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableSkyHDR(intensity);
+			_fe3d.gfx_enableSkyExposure(intensity);
 		}
 
 		// Update buttons hoverability

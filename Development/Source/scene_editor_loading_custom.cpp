@@ -658,7 +658,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable lens flare
 				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 			}
-			else if (entityType == "GRAPHICS_SKYHDR")
+			else if (entityType == "GRAPHICS_SKY_EXPOSURE")
 			{
 				// Data placeholders
 				float intensity;
@@ -666,8 +666,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Extract data
 				iss >> intensity;
 
-				// Enable skyHDR
-				_fe3d.gfx_enableSkyHDR(intensity);
+				// Enable sky exposure
+				_fe3d.gfx_enableSkyExposure(intensity);
 			}
 		}
 

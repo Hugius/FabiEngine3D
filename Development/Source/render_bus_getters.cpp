@@ -390,9 +390,9 @@ const bool RenderBus::isBloomEnabled() const
 	return _isBloomEnabled;
 }
 
-const bool RenderBus::isSkyHdrEnabled() const
+const bool RenderBus::isSkyExposureEnabled() const
 {
-	return _isSkyHdrEnabled;
+	return _isSkyExposureEnabled;
 }
 
 const bool RenderBus::isShadowsEnabled() const

@@ -632,10 +632,10 @@ void SceneEditor::saveCustomSceneToFile()
 				multiplier << std::endl;
 		}
 
-		// Sky HDR settings
-		if (_fe3d.gfx_isSkyHdrEnabled())
+		// Sky exposure settings
+		if (_fe3d.gfx_isSkyExposureEnabled())
 		{
-			file << "GRAPHICS_SKYHDR " << _fe3d.gfx_getSkyHdrBrightnessFactor() << std::endl;
+			file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureFactor() << std::endl;
 		}
 	}
 

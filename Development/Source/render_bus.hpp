@@ -107,7 +107,7 @@ public:
 	void setSkyReflectionsEnabled(bool value);
 	void setSceneReflectionsEnabled(bool value);
 	void setBloomEnabled(bool value);
-	void setSkyHdrEnabled(bool value);
+	void setSkyExposureEnabled(bool value);
 	void setShadowsEnabled(bool value);
 	void setDofEnabled(bool value);
 	void setMotionBlurEnabled(bool value);
@@ -218,7 +218,7 @@ public:
 	const bool isSkyReflectionsEnabled()       const;
 	const bool isSceneReflectionsEnabled()     const;
 	const bool isBloomEnabled()                const;
-	const bool isSkyHdrEnabled()               const;
+	const bool isSkyExposureEnabled()               const;
 	const bool isShadowsEnabled()              const;
 	const bool isDofEnabled()                  const;
 	const bool isMotionBlurEnabled()           const;
@@ -330,7 +330,7 @@ private:
 	bool _isSkyReflectionsEnabled       = false;
 	bool _isSceneReflectionsEnabled     = false;
 	bool _isBloomEnabled                = false;
-	bool _isSkyHdrEnabled               = false;
+	bool _isSkyExposureEnabled               = false;
 	bool _isShadowsEnabled              = false;
 	bool _isDofEnabled                  = false;
 	bool _isMotionBlurEnabled           = false;

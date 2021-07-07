@@ -401,9 +401,9 @@ void RenderBus::setBloomEnabled(bool value)
 	_isBloomEnabled = value;
 }
 
-void RenderBus::setSkyHdrEnabled(bool value)
+void RenderBus::setSkyExposureEnabled(bool value)
 {
-	_isSkyHdrEnabled = value;
+	_isSkyExposureEnabled = value;
 }
 
 void RenderBus::setShadowsEnabled(bool value)

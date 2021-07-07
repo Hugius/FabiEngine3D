@@ -154,14 +154,14 @@ void SkyEntityManager::_updateRotation()
 
 void SkyEntityManager::_updateEyeAdaption()
 {
-	// Update sky HDR
-	if (_renderBus.isSkyHdrEnabled())
+	// Update sky exposure
+	if (_renderBus.isSkyExposureEnabled())
 	{
 		// Values
 		const float speed = 0.001f; // Lightness changing speed
 		float lightness = getSelectedMainSky()->getLightness(); // Current lightness
 		float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
-		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
+		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _skyExposureFactor);
 
 		// Based on verticle angle
 		if (lightness > targetLightness) // Decrease lightness
@@ -173,18 +173,18 @@ void SkyEntityManager::_updateEyeAdaption()
 			getSelectedMainSky()->setLightness(lightness + speed);
 		}
 	}
-	else // HDR not enabled
+	else // Sky exposure not enabled
 	{
 		getSelectedMainSky()->setLightness(getSelectedMainSky()->getOriginalLightness()); // Revert lightness
 	}
 }
 
-void SkyEntityManager::setBrightnessFactor(float brightnessFactor)
+void SkyEntityManager::setSkyExposureFactor(float skyExposureFactor)
 {
-	_hdrBrightnessFactor = brightnessFactor;
+	_skyExposureFactor = skyExposureFactor;
 }
 
-float SkyEntityManager::getBrightnessFactor()
+float SkyEntityManager::getSkyExposureFactor()
 {
-	return _hdrBrightnessFactor;
+	return _skyExposureFactor;
 }

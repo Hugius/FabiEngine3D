@@ -346,9 +346,9 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.gfx_disableShadows(true);
 	}
-	if (_fe3d.gfx_isSkyHdrEnabled())
+	if (_fe3d.gfx_isSkyExposureEnabled())
 	{
-		_fe3d.gfx_disableSkyHDR(true);
+		_fe3d.gfx_disableSkyExposure(true);
 	}
 	if (_fe3d.gfx_isDofEnabled())
 	{

@@ -66,7 +66,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
 		_renderBus.setNormalMappingEnabled(false);
 
-		// Sky HDR must not appear in reflections
+		// Sky exposure must not appear in reflections
 		float oldSkyLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
 		if (skyEntity != nullptr)
@@ -212,7 +212,7 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
 		_renderBus.setNormalMappingEnabled(false);
 
-		// Sky HDR must not appear in reflections
+		// Sky exposure must not appear in reflections
 		float oldLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
 		if (skyEntity != nullptr)
@@ -326,11 +326,11 @@ void MasterRenderer::_captureWaterRefractions()
 			_renderBus.setShadowsEnabled(false);
 		}
 
-		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
+		// Normal mapping is performance-heavy with little visual impact on refractions, so they should not appear
 		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
 		_renderBus.setNormalMappingEnabled(false);
 
-		// Sky HDR must not appear in reflections
+		// Sky exposure must not appear in refractions
 		float oldSkyLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
 		if (skyEntity != nullptr)

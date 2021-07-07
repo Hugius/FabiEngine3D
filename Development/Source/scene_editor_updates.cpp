@@ -52,7 +52,7 @@ void SceneEditor::update()
 	_updateDofGraphicsSettingsMenu();
 	_updateFogGraphicsSettingsMenu();
 	_updateLensFlareGraphicsSettingsMenu();
-	_updateskyHdrGraphicsSettingsMenu();
+	_updateskyExposureGraphicsSettingsMenu();
 
 	// Miscellaneous
 	_updateCamera();

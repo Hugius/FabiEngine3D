@@ -17,7 +17,7 @@ FabiEngine3D is a game engine for simple 3D PC games. It contains various featur
 - [FabScript](FabiEngine3D/engine_assets/readme/markdown/FABSCRIPT.md)
 - [Scripting Functions](FabiEngine3D/engine_assets/readme/markdown/SCRIPT_FUNCTIONS.md)
 - [Networking](FabiEngine3D/engine_assets/readme/markdown/NETWORKING.md)
-- [Gameplay](FabiEngine3D/engine_assets/readme/markdown/GAMEPLAY.md)
+- [Runtime](FabiEngine3D/engine_assets/readme/markdown/RUNTIME.md)
 - [Miscellaneous](FabiEngine3D/engine_assets/readme/markdown/MISCELLANEOUS.md)
 
 # Games

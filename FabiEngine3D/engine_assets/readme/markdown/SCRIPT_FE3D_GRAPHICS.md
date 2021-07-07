@@ -28,12 +28,12 @@
   Disables shadow rendering.
 - `fe3d:graphics_set_shadow_position`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Sets the shadow caster position as **xyz**.
-- `fe3d:graphics_enable_sky_hdr`() ---> `NONE`  
-  Enables the dynamic sky HDR effect.
-- `fe3d:graphics_disable_sky_hdr`() ---> `NONE`  
-  Disables the dynamic sky HDR effect.
-- `fe3d:graphics_set_sky_hdr_brightness`(`DEC` brightness) ---> `NONE`  
-  Sets the **brightness** of the sky HDR effect.
+- `fe3d:graphics_enable_sky_exposure`() ---> `NONE`  
+  Enables the dynamic sky exposure effect.
+- `fe3d:graphics_disable_sky_exposure`() ---> `NONE`  
+  Disables the dynamic sky exposure effect.
+- `fe3d:graphics_set_sky_exposure_factor`(`DEC` factor) ---> `NONE`  
+  Sets the exposure **factor** of the sky exposure effect.
 - `fe3d:graphics_enable_motion_blur`() ---> `NONE`  
   Enables the motion blur effect.
 - `fe3d:graphics_disable_motion_blur`() ---> `NONE`  
@@ -64,11 +64,11 @@
 - `fe3d:graphics_get_max_dof_distance`() ---> `DEC`  
   Returns the maximum DOF distance to objects.
 - `fe3d:graphics_get_dof_blur_distance`() ---> `DEC`  
-  Returns the minmum blurring DOF distance to objects.
+  Returns the minimum blurring DOF distance to objects.
 - `fe3d:graphics_get_shadow_position`() ---> `VEC3`  
   Returns the shadow caster position.
-- `fe3d:graphics_get_max_dof_distance`() ---> `DEC`  
-  Returns the brightness of the sky HDR effect.
+- `fe3d:graphics_get_sky_exposure_factor`() ---> `DEC`  
+  Returns the exposure factor of the sky exposure effect.
 - `fe3d:graphics_get_motion_blur_strength`() ---> `DEC`  
   Returns the strength of the motion blur effect.
 - `fe3d:graphics_get_lens_flare_map_path`() ---> `DEC`  

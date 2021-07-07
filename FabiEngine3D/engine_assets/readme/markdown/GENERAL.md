@@ -75,9 +75,9 @@ The engine root directory holds 6 folders and 1 file:
 - An important note is to **NOT** change anything in this directory!
 
 # Project Settings
-- Every project/game has its own settings.
-- All settings will be saved in `projects\<your_project>\game_settings.fe3d`.
-- MSAA quality (default: 4). **Range**: 1 to 32.
+- Every project/game has its own settings file.
+- All settings will be saved in `projects\<your_project>\settings.fe3d`.
+- FXAA (default: ON). **Range**: ON or OFF.
 - Shadow quality (default: 2048). **Range**: 512 to 8192.
 - Reflection quality (default: 256). **Range**: 128 to 2048.
 - Refraction quality (default: 256). **Range**: 128 to 2048.

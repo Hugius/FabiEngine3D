@@ -29,7 +29,7 @@ void BillboardEditor::_updateBillboardManagement()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitBillboardEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 				{
@@ -55,13 +55,13 @@ void BillboardEditor::_updateBillboardManagement()
 			}
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitBillboardEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				saveBillboardEntitiesToFile();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitBillboardEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();

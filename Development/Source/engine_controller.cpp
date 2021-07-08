@@ -31,8 +31,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Default rendering color
 		misc_setMainRenderingColor(Vec3(0.0f));
 
-		// Import settings
-		_leftViewportController.getSettingsEditor().loadSettings();
+		// Load application settings
+		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
 		// Default camera
 		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);

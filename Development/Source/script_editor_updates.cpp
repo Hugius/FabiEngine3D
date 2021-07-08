@@ -25,7 +25,7 @@ void ScriptEditor::_updateGUI()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("search")->isHovered())
 				{
@@ -73,13 +73,13 @@ void ScriptEditor::_updateGUI()
 			screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				saveScriptsToFile();
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitScriptEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");

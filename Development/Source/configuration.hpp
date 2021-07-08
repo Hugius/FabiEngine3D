@@ -35,11 +35,16 @@ public:
 	const bool    isApplicationExported() const;
 
 	// Constants
-	static inline const unsigned int UPDATES_PER_SECOND = 144;
-	static inline const float MS_PER_UPDATE = (1000.0f / static_cast<float>(UPDATES_PER_SECOND));
+	static inline const float MS_PER_UPDATE = (1000.0f / 144.0f);
 	static inline const float DEFAULT_CAMERA_FOV = 90.0f;
 	static inline const float DEFAULT_CAMERA_NEAR = 0.01f;
 	static inline const float DEFAULT_CAMERA_FAR = 5000.0f;
+	static inline const unsigned int UPDATES_PER_SECOND = 144;
+	static inline const unsigned int DEFAULT_SHADOW_QUALITY = 2048;
+	static inline const unsigned int DEFAULT_REFLECTION_QUALITY = 256;
+	static inline const unsigned int DEFAULT_REFRACTION_QUALITY = 256;
+	static inline const unsigned int DEFAULT_AUDIO_CHANNELS = 128;
+	static inline const bool DEFAULT_FXAA_ENABLED = true;
 
 private:
 	Config();

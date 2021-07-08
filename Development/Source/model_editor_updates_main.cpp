@@ -27,7 +27,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addModel")->isHovered()) // Add model button
 				{
@@ -53,13 +53,13 @@ void ModelEditor::_updateManagementScreen()
 			}
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				saveModelEntitiesToFile();
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitModelEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");

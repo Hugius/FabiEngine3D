@@ -13,6 +13,49 @@ AudioEditor::AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 }
 
+void AudioEditor::load()
+{
+	// GUI
+	_loadGUI();
+
+	// Load all audio entities
+	loadAudioEntitiesFromFile();
+
+	// Miscellaneous
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png", 
+		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
+	_fe3d.billboardEntity_setBloomed("@@icon", true);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
+	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
+	_isEditorLoaded = true;
+}
+
+void AudioEditor::unload()
+{
+	// GUI
+	_unloadGUI();
+
+	// Delete everything
+	_fe3d.billboardEntity_delete("@@icon");
+	_fe3d.soundEntity_deleteAll();
+	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+
+	// Reset editor properties
+	_loadedAudioIDs.clear();
+	_currentAudioID = "";
+	_hoveredAudioID = "";
+	_isCreatingAudio = false;
+	_isChoosingAudio = false;
+	_isEditingAudio = false;
+	_isRemovingAudio = false;
+
+	// Miscellaneous
+	_isEditorLoaded = false;
+}
+
 void AudioEditor::_loadGUI()
 {
 	// Private window instance of left viewport
@@ -40,51 +83,4 @@ void AudioEditor::_unloadGUI()
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 	leftWindow->deleteScreen("audioEditorMenuMain");
 	leftWindow->deleteScreen("audioEditorMenuChoice");
-}
-
-void AudioEditor::load()
-{
-	// GUI
-	_loadGUI();
-
-	// Load all audio entities
-	loadAudioEntitiesFromFile();
-
-	// Miscellaneous
-	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
-	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png", 
-		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
-	_fe3d.billboardEntity_setBloomed("@@icon", true);
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
-	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_isEditorLoaded = true;
-}
-
-void AudioEditor::unload()
-{
-	// GUI
-	_unloadGUI();
-
-	// Delete everything
-	_fe3d.billboardEntity_delete("@@icon");
-	_fe3d.soundEntity_deleteAll();
-	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-
-	// Reset editor properties
-	_loadedAudioIDs.clear();
-	_currentAudioID = "";
-	_hoveredAudioID = "";
-	_isCreatingAudio = false;
-	_isChoosingAudio = false;
-	_isEditingAudio = false;
-	_isRemovingAudio = false;
-
-	// Miscellaneous
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_isEditorLoaded = false;
 }

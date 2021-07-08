@@ -26,7 +26,7 @@ void AudioEditor::_updateMainMenu()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitAudioEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addAudio")->isHovered()) // Add audio button
 				{
@@ -52,13 +52,13 @@ void AudioEditor::_updateMainMenu()
 			}
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitAudioEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				saveAudioEntitiesToFile();
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitAudioEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");

@@ -42,7 +42,7 @@ void AnimationEditor::_updateManagementScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitAnimationEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("addAnimation")->isHovered()) // Add animation button
 				{
@@ -64,13 +64,13 @@ void AnimationEditor::_updateManagementScreen()
 			}
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitAnimationEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				saveAnimationsToFile();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitAnimationEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();

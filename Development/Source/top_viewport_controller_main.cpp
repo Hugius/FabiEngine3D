@@ -297,6 +297,7 @@ void TopViewportController::_saveCurrentProject()
 	_audioEditor.saveAudioEntitiesToFile();
 	_sceneEditor.saveEditorSceneToFile();
 	_scriptEditor.saveScriptsToFile();
+	_settingsEditor.saveSettingsToFile();
 
 	// Logging
 	Logger::throwInfo("Project \"" + _currentProjectID + "\" saved!");

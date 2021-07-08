@@ -97,17 +97,16 @@ void TopViewportController::_updateProjectCreation()
 				file.close();
 				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
 				file.close();
-
-				// Create settings file
-				_settingsEditor.setCurrentProjectID(newProjectID);
-				_settingsEditor.save(true);
+				file = std::ofstream(string(newProjectDirectoryPath + "\\settings.fe3d"));
+				file.close();
 
 				// Load current project
 				_currentProjectID = newProjectID;
 				_applyProjectChange();
 
-				// Load settings for this project
-				_settingsEditor.loadSettings();
+				// Create default settings
+				_settingsEditor.loadDefaultSettings();
+				_settingsEditor.saveSettingsToFile();
 
 				// Logging
 				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
@@ -170,7 +169,7 @@ void TopViewportController::_updateProjectLoading()
 				_applyProjectChange();
 
 				// Load settings for this project
-				_settingsEditor.loadSettings();
+				_settingsEditor.loadSettingsFromFile();
 
 				// Preload all big assets of this project
 				vector<string> texturePaths;
@@ -319,6 +318,12 @@ void TopViewportController::_applyProjectChange()
 		_scriptEditor.unload();
 	}
 
+	// Unload settings editor
+	if (_settingsEditor.isLoaded())
+	{
+		_settingsEditor.unload();
+	}
+
 	// Pass loaded project name
 	_environmentEditor.setCurrentProjectID(_currentProjectID);
 	_modelEditor.setCurrentProjectID(_currentProjectID);
@@ -348,14 +353,14 @@ bool TopViewportController::_isProjectCorrupted(const string& projectID)
 	}
 
 	// Check if all default files are still existing
-	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\settings.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
+	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
 		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\water.fe3d"))
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
+		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
 	{
 		return true;
 	}

@@ -193,7 +193,7 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("environment")->isHovered()) // Environment button
 				{
@@ -222,7 +222,7 @@ void SceneEditor::_updateChoiceMenu()
 			}
 
 			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 			{
 				// Save before closing
 				saveEditorSceneToFile();
@@ -245,7 +245,7 @@ void SceneEditor::_updateChoiceMenu()
 				// Go to main menu
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitSceneEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 			{
 				// Clear whole scene
 				clearCurrentScene();

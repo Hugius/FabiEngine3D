@@ -36,7 +36,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 	_shader.uploadUniform("u_intensity", intensity);
 
 	// Blur the texture
-	for (int i = 0; i < totalBlurCount; i++)
+	for (unsigned int i = 0; i < totalBlurCount; i++)
 	{
 		// Bind framebuffer
 		if (currentDirection) { _horizontalFramebuffers[index]->bind(); }

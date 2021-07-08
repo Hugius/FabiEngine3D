@@ -38,7 +38,6 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
 	_fe3d.billboardEntity_setBloomed("@@lightSource", true);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Preview environment loading
 	_environmentEditor.loadSkyEntitiesFromFile();
@@ -90,6 +89,7 @@ void SceneEditor::load()
 	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_POINTLIGHT_ID, false);
+	_fe3d.modelEntity_setBloomed(PREVIEW_POINTLIGHT_ID, true);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

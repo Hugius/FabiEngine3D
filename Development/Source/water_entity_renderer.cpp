@@ -27,12 +27,12 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_reflectionMap",   0);
-	_shader.uploadUniform("u_sampler_refractionMap",   1);
-	_shader.uploadUniform("u_sampler_depthMap",		   2);
-	_shader.uploadUniform("u_sampler_dudvMap",		   3);
-	_shader.uploadUniform("u_sampler_normalMap",	   4);
-	_shader.uploadUniform("u_sampler_displacementMap", 5);
+	_shader.uploadUniform("u_reflectionMap",   0);
+	_shader.uploadUniform("u_refractionMap",   1);
+	_shader.uploadUniform("u_depthMap",		   2);
+	_shader.uploadUniform("u_dudvMap",		   3);
+	_shader.uploadUniform("u_normalMap",	   4);
+	_shader.uploadUniform("u_displacementMap", 5);
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);

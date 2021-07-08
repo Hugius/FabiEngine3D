@@ -131,7 +131,7 @@ void MasterRenderer::_captureDofBlur()
 	if (_renderBus.isDofEnabled())
 	{
 		_blurRenderer.bind();
-		_renderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 
+		_renderBus.setDofMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 
 			static_cast<int>(BlurType::DOF), 3, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
@@ -145,7 +145,7 @@ void MasterRenderer::_capturePostProcessing()
 	_postRenderer.render(_finalSurface);
 	_postRenderer.unbind();
 	_postProcessingFramebuffer.unbind();
-	_renderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
+	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
 void MasterRenderer::_captureMotionBlur(Camera& camera)
@@ -207,13 +207,13 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			if (hasMoved)
 			{
 				_blurRenderer.bind();
-				_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(),
+				_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getFinalSceneMap(),
 					static_cast<int>(BlurType::MOTION), 5, 1.0f, direction));
 				_blurRenderer.unbind();
 			}
 			else
 			{
-				_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
+				_renderBus.setMotionBlurMap(_renderBus.getFinalSceneMap());
 			}
 
 			// Miscellaneous
@@ -221,7 +221,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 		}
 		else // No motion blur
 		{
-			_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
+			_renderBus.setMotionBlurMap(_renderBus.getFinalSceneMap());
 		}
 	}
 }

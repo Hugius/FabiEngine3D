@@ -6,7 +6,7 @@ in vec2 f_uv;
 in vec3 f_pos;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler;
+layout(location = 0) uniform sampler2D u_diffuseMap;
 
 // Vec3 uniforms
 uniform vec3 u_color;
@@ -41,7 +41,7 @@ void main()
 	if(u_hasTexture)
 	{
 		// Calculate the texel color
-		vec4 texColor = texture(u_sampler, f_uv);
+		vec4 texColor = texture(u_diffuseMap, f_uv);
 
 		// Removing white alpha background
 		if(u_isAlphaObject)

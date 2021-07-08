@@ -12,8 +12,8 @@ void FinalRenderer::bind()
 
 	// Shader uniforms
 	_shader.uploadUniform("u_mixValue", _renderBus.getMotionBlurMixValue());
-	_shader.uploadUniform("u_sampler_scene", 0);
-	_shader.uploadUniform("u_sampler_motionblur", 1);
+	_shader.uploadUniform("u_sceneMap", 0);
+	_shader.uploadUniform("u_motionBlurMap", 1);
 }
 
 void FinalRenderer::unbind()
@@ -22,7 +22,7 @@ void FinalRenderer::unbind()
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionblurMap)
+void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionBlurMap)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
@@ -35,7 +35,7 @@ void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sceneMap);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, motionblurMap);
+		glBindTexture(GL_TEXTURE_2D, motionBlurMap);
 
 		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());

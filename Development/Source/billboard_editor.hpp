@@ -11,9 +11,9 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadBillboardEntitiesFromFile();
 	void saveBillboardEntitiesToFile();
+	void setCurrentProjectID(const string& projectID);
 
 	bool isLoaded();
 

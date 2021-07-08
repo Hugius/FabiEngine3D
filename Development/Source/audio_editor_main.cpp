@@ -37,9 +37,12 @@ void AudioEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Delete everything
-	_fe3d.billboardEntity_delete("@@icon");
+	// Delete sounds
 	_fe3d.soundEntity_deleteAll();
+
+	// Miscellaneous
+	_fe3d.gfx_disableBloom(true);
+	_fe3d.billboardEntity_delete("@@icon");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 

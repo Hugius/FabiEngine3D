@@ -12,9 +12,9 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadModelEntitiesFromFile();
 	void saveModelEntitiesToFile();
+	void setCurrentProjectID(const string& projectID);
 
 	bool isLoaded();
 

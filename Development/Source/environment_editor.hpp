@@ -13,7 +13,6 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadSkyEntitiesFromFile();
 	void loadTerrainEntitiesFromFile();
 	void loadWaterEntitiesFromFile();
@@ -23,6 +22,7 @@ public:
 	void unloadSkyEntities();
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
+	void setCurrentProjectID(const string& projectID);
 
 	const vector<array<string, 6>> getAllSkyTexturePathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();

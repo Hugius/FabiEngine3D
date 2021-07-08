@@ -6,7 +6,7 @@ in vec2 f_pos;
 in vec2 f_uv;
 
 // Textures
-uniform sampler2D u_sampler_diffuse;
+uniform sampler2D u_diffuseMap;
 
 // Float uniforms
 uniform float u_radius;
@@ -30,22 +30,22 @@ void main()
 	kernel[3] = 0.054054f;
 	kernel[4] = 0.016216f;
 
-    vec2 tex_offset = (1.0 / textureSize(u_sampler_diffuse, 0)) * u_radius; 
-    vec3 result = texture(u_sampler_diffuse, f_uv).rgb * kernel[0] * u_intensity;
+    vec2 tex_offset = (1.0 / textureSize(u_diffuseMap, 0)) * u_radius; 
+    vec3 result = texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity;
     if(u_horizontal)
     {
         for (int i = 1; i < WEIGHT_AMOUNT; ++i)
         {
-            result += texture(u_sampler_diffuse, f_uv + vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
-           	result += texture(u_sampler_diffuse, f_uv - vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
+            result += texture(u_diffuseMap, f_uv + vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
+           	result += texture(u_diffuseMap, f_uv - vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
         }
     }
     else
     {
         for (int i = 1; i < WEIGHT_AMOUNT; ++i)
         {
-            result += texture(u_sampler_diffuse, f_uv + vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
-           	result += texture(u_sampler_diffuse, f_uv - vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
+            result += texture(u_diffuseMap, f_uv + vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
+           	result += texture(u_diffuseMap, f_uv - vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
         }
     }
 

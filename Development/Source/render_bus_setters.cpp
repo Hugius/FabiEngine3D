@@ -62,14 +62,14 @@ void RenderBus::setSceneDepthMap(GLuint value)
 	_sceneDepthMap = value;
 }
 
-void RenderBus::setBlurMap(GLuint value)
+void RenderBus::setDofMap(GLuint value)
 {
-	_blurMap = value;
+	_dofMap = value;
 }
 
-void RenderBus::setPostProcessedSceneMap(GLuint value)
+void RenderBus::setFinalSceneMap(GLuint value)
 {
-	_postProcessedSceneMap = value;
+	_finalSceneMap = value;
 }
 
 void RenderBus::setViewMatrix(const Matrix44& value)

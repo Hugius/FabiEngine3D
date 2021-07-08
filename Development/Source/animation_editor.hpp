@@ -14,7 +14,6 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
 	void startAnimation(const string& animationID, const string& modelID, int loops);
@@ -23,6 +22,7 @@ public:
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
+	void setCurrentProjectID(const string& projectID);
 
 	// Getters
 	bool isLoaded();

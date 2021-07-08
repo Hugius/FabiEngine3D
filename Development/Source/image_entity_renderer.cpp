@@ -12,7 +12,7 @@ void ImageEntityRenderer::bind()
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler", 0);
+	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Alpha blending
 	glEnable(GL_BLEND);

@@ -11,8 +11,8 @@ void SkyEntityRenderer::bind()
 	_shader.uploadUniform("u_rotationMatrix", _renderBus.getSkyRotationMatrix());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_mainCubeMap", 0);
-	_shader.uploadUniform("u_sampler_mixCubeMap", 1);
+	_shader.uploadUniform("u_mainCubeMap", 0);
+	_shader.uploadUniform("u_mixCubeMap", 1);
 	
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);

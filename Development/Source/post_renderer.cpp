@@ -22,11 +22,11 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_scene", 0);
-	_shader.uploadUniform("u_sampler_bloom", 1);
-	_shader.uploadUniform("u_sampler_depth", 2);
-	_shader.uploadUniform("u_sampler_blur",  3);
-	_shader.uploadUniform("u_sampler_flare", 4);
+	_shader.uploadUniform("u_sceneMap", 0);
+	_shader.uploadUniform("u_bloomMap", 1);
+	_shader.uploadUniform("u_depthMap", 2);
+	_shader.uploadUniform("u_blurMap",  3);
+	_shader.uploadUniform("u_flareMap", 4);
 
 	// Alpha blending
 	glEnable(GL_BLEND);
@@ -56,7 +56,7 @@ void PostRenderer::render(const shared_ptr<ImageEntity> entity)
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getBlurMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap());
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
 

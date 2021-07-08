@@ -543,7 +543,7 @@ void SceneEditor::saveCustomSceneToFile()
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << std::endl;
 
 	// Reflection height
-	file << "REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << std::endl;
+	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << std::endl;
 
 	// Check if allowed to save
 	if (_hasCustomSceneGraphics)
@@ -575,7 +575,7 @@ void SceneEditor::saveCustomSceneToFile()
 		// Motion blur settings
 		if (_fe3d.gfx_isMotionBlurEnabled())
 		{
-			file << "GRAPHICS_MOTIONBLUR " << _fe3d.gfx_getMotionBlurStrength() << std::endl;
+			file << "GRAPHICS_MOTION_BLUR " << _fe3d.gfx_getMotionBlurStrength() << std::endl;
 		}
 
 		// DOF settings
@@ -626,7 +626,7 @@ void SceneEditor::saveCustomSceneToFile()
 
 			// Write data
 			file <<
-				"GRAPHICS_LENSFLARE " <<
+				"GRAPHICS_LENS_FLARE " <<
 				flareMapPath << " " <<
 				intensity << " " <<
 				multiplier << std::endl;

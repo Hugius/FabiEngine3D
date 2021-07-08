@@ -62,8 +62,6 @@ private:
 
 	// Framebuffers
 	RenderFramebuffer _screenFramebuffer;
-	RenderFramebuffer _fxaaFramebuffer;
-	RenderFramebuffer _aaProcessorFramebuffer;
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;
 	RenderFramebuffer _waterRefractionFramebuffer;
@@ -83,7 +81,7 @@ private:
 	void _captureMotionBlur(Camera& camera);
 	void _captureLensFlare();
 
-	// Scene rendering functions
+	// Rendering functions
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
@@ -93,7 +91,5 @@ private:
 	void _renderFinalSceneTexture();
 	void _renderGUI();
 	void _renderCustomCursor();
-
-	// Other
 	void _renderDebugScreens();
 };

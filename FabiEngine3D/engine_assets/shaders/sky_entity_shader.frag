@@ -5,8 +5,8 @@
 in vec3 f_uv;
 
 // Textures
-layout(location = 0) uniform samplerCube u_sampler_mainCubeMap;
-layout(location = 1) uniform samplerCube u_sampler_mixCubeMap;
+layout(location = 0) uniform samplerCube u_mainCubeMap;
+layout(location = 1) uniform samplerCube u_mixCubeMap;
 
 // Float uniforms
 uniform float u_mainLightness;
@@ -24,8 +24,8 @@ layout (location = 1) out vec4 o_secondaryColor;
 void main()
 {
 	// Calculate colors
-	vec3 mainColor = texture(u_sampler_mainCubeMap, f_uv).rgb * u_mainColor;
-	vec3 mixColor = texture(u_sampler_mixCubeMap, f_uv).rgb * u_mixColor;
+	vec3 mainColor = texture(u_mainCubeMap, f_uv).rgb * u_mainColor;
+	vec3 mixColor = texture(u_mixCubeMap, f_uv).rgb * u_mixColor;
 
 	// Apply mixing & lightness
 	float mixValue = clamp(u_mixValue, 0.0, 1.0f);

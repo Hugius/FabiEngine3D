@@ -12,7 +12,7 @@ void DepthRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_diffuseMap", 0);
+	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Clipping (minY & maxY)
 	glEnable(GL_CLIP_DISTANCE0);

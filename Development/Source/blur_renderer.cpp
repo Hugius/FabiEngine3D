@@ -73,7 +73,7 @@ void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_sampler_diffuse", 0);
+		_shader.uploadUniform("u_diffuseMap", 0);
 
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);

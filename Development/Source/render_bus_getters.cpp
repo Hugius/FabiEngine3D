@@ -60,14 +60,14 @@ const GLuint RenderBus::getSceneDepthMap() const
 	return _sceneDepthMap;
 }
 
-const GLuint RenderBus::getBlurMap() const
+const GLuint RenderBus::getDofMap() const
 {
-	return _blurMap;
+	return _dofMap;
 }
 
-const GLuint RenderBus::getPostProcessedSceneMap() const
+const GLuint RenderBus::getFinalSceneMap() const
 {
-	return _postProcessedSceneMap;
+	return _finalSceneMap;
 }
 
 const Matrix44 & RenderBus::getViewMatrix() const

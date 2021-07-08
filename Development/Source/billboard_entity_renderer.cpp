@@ -20,7 +20,7 @@ void BillboardEntityRenderer::bind()
 	_shader.uploadUniform("u_isFogEnabled",	  _renderBus.isFogEnabled());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler", 0);
+	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Clipping (minY & maxY)
 	glEnable(GL_CLIP_DISTANCE0);

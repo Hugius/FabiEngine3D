@@ -47,16 +47,16 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowMapSize",			  static_cast<int>(_renderBus.getShadowMapSize()));
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_diffuseMap",  0);
-	_shader.uploadUniform("u_sampler_normalMap",   1);
-	_shader.uploadUniform("u_sampler_blendMap",    2);
-	_shader.uploadUniform("u_sampler_diffuseMapR", 3);
-	_shader.uploadUniform("u_sampler_diffuseMapG", 4);
-	_shader.uploadUniform("u_sampler_diffuseMapB", 5);
-	_shader.uploadUniform("u_sampler_normalMapR",  6);
-	_shader.uploadUniform("u_sampler_normalMapG",  7);
-	_shader.uploadUniform("u_sampler_normalMapB",  8);
-	_shader.uploadUniform("u_sampler_shadowMap",   9);
+	_shader.uploadUniform("u_diffuseMap",  0);
+	_shader.uploadUniform("u_normalMap",   1);
+	_shader.uploadUniform("u_blendMap",    2);
+	_shader.uploadUniform("u_diffuseMapR", 3);
+	_shader.uploadUniform("u_diffuseMapG", 4);
+	_shader.uploadUniform("u_diffuseMapB", 5);
+	_shader.uploadUniform("u_normalMapR",  6);
+	_shader.uploadUniform("u_normalMapG",  7);
+	_shader.uploadUniform("u_normalMapB",  8);
+	_shader.uploadUniform("u_shadowMap",   9);
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE9);

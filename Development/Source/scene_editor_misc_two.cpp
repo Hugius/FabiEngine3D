@@ -120,7 +120,7 @@ void SceneEditor::clearCurrentScene()
 		}
 		if (_fe3d.gfx_isBloomEnabled())
 		{
-			_fe3d.gfx_disableBloom();
+			_fe3d.gfx_disableBloom(true);
 		}
 	}
 

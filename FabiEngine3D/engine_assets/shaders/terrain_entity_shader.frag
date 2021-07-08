@@ -12,16 +12,16 @@ in vec4 f_shadowPos;
 in mat3 f_tbnMatrix;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
-layout(location = 1) uniform sampler2D u_sampler_normalMap;
-layout(location = 2) uniform sampler2D u_sampler_blendMap;
-layout(location = 3) uniform sampler2D u_sampler_diffuseMapR;
-layout(location = 4) uniform sampler2D u_sampler_diffuseMapG;
-layout(location = 5) uniform sampler2D u_sampler_diffuseMapB;
-layout(location = 6) uniform sampler2D u_sampler_normalMapR;
-layout(location = 7) uniform sampler2D u_sampler_normalMapG;
-layout(location = 8) uniform sampler2D u_sampler_normalMapB;
-layout(location = 9) uniform sampler2D u_sampler_shadowMap;
+layout(location = 0) uniform sampler2D u_diffuseMap;
+layout(location = 1) uniform sampler2D u_normalMap;
+layout(location = 2) uniform sampler2D u_blendMap;
+layout(location = 3) uniform sampler2D u_diffuseMapR;
+layout(location = 4) uniform sampler2D u_diffuseMapG;
+layout(location = 5) uniform sampler2D u_diffuseMapB;
+layout(location = 6) uniform sampler2D u_normalMapR;
+layout(location = 7) uniform sampler2D u_normalMapG;
+layout(location = 8) uniform sampler2D u_normalMapB;
+layout(location = 9) uniform sampler2D u_shadowMap;
 
 // Vec3 uniforms
 uniform vec3 u_cameraPosition;
@@ -139,7 +139,7 @@ vec3 getNormalMappedVector()
 		{
 			// Get color values of blendmap (R, G, B)
 			vec2 blendUV = f_uv / u_diffuseMapRepeat;
-			vec4 blendMapColor = texture(u_sampler_blendMap, blendUV);
+			vec4 blendMapColor = texture(u_blendMap, blendUV);
 			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 			float rStrength = blendMapColor.r;
 			float gStrength = blendMapColor.g;
@@ -151,7 +151,7 @@ vec3 getNormalMappedVector()
 			// Diffuse normal map
 			if(u_isNormalMapped && u_hasNormalMap)
 			{
-				vec3 normal = texture(u_sampler_normalMap, f_uv).rgb * 2.0f - 1.0f;
+				vec3 normal = texture(u_normalMap, f_uv).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * diffuseStrength;
 			}
 			else
@@ -162,7 +162,7 @@ vec3 getNormalMappedVector()
 			// BlendR normal map
 			if(u_isNormalMappedR && u_hasNormalMapR)
 			{
-				vec3 normal = texture(u_sampler_normalMapR, blendUV * u_diffuseMapRepeatR).rgb * 2.0f - 1.0f;
+				vec3 normal = texture(u_normalMapR, blendUV * u_diffuseMapRepeatR).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * rStrength;
 			}
 			else
@@ -173,7 +173,7 @@ vec3 getNormalMappedVector()
 			// BlendG normal map
 			if(u_isNormalMappedG && u_hasNormalMapG)
 			{
-				vec3 normal = texture(u_sampler_normalMapG, blendUV * u_diffuseMapRepeatG).rgb * 2.0f - 1.0f;
+				vec3 normal = texture(u_normalMapG, blendUV * u_diffuseMapRepeatG).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * gStrength;
 			}
 			else
@@ -184,7 +184,7 @@ vec3 getNormalMappedVector()
 			// BlendB normal map
 			if(u_isNormalMappedB && u_hasNormalMapB)
 			{
-				vec3 normal = texture(u_sampler_normalMapB, blendUV * u_diffuseMapRepeatB).rgb * 2.0f - 1.0f;
+				vec3 normal = texture(u_normalMapB, blendUV * u_diffuseMapRepeatB).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * bStrength;
 			}
 			else
@@ -200,7 +200,7 @@ vec3 getNormalMappedVector()
 			if(u_isNormalMapped && u_hasNormalMap)
 			{
 				// Calculate new normal vector
-				vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
+				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal = normal * 2.0f - 1.0f;
 				normal = normalize(f_tbnMatrix * normal);
 				return normal;
@@ -224,19 +224,19 @@ vec3 getTextureColor()
 	{
 		// Get color value of blendmap (R, G, B)
 		vec2 blendUV = f_uv / u_diffuseMapRepeat;
-		vec4 blendMapColor = texture(u_sampler_blendMap, blendUV);
+		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
 		// Calculate diffuse color
 		vec3 diffuseTextureColor = vec3(0.0f);
 		if(u_hasDiffuseMap)
 		{
-			diffuseTextureColor = texture(u_sampler_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			diffuseTextureColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 		}
 
 		// Calculate blending color for every channel
-		vec3 rTextureColor = u_hasDiffuseMapR ? (texture(u_sampler_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
-		vec3 gTextureColor = u_hasDiffuseMapG ? (texture(u_sampler_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
-		vec3 bTextureColor = u_hasDiffuseMapB ? (texture(u_sampler_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
+		vec3 rTextureColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
+		vec3 gTextureColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
+		vec3 bTextureColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
 
 		// Compose final color
 		vec3 newColor = diffuseTextureColor + rTextureColor + gTextureColor + bTextureColor;
@@ -247,7 +247,7 @@ vec3 getTextureColor()
 	else if(u_hasDiffuseMap) // Diffuse texture
 	{
 		// Calculate diffuse color
-		vec4 newColor = texture(u_sampler_diffuseMap, vec2(-f_uv.x, f_uv.y));
+		vec4 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y));
 
 		// Return
 		return newColor.rgb;
@@ -422,7 +422,7 @@ float getShadowValue()
 					int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
 
 					// Calculate depth from shadow map
-					float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
+					float shadowMapDepth = texture(u_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
 
 					// Apply result value
 					if((currentDepth - texelSize) > shadowMapDepth)
@@ -441,7 +441,7 @@ float getShadowValue()
 			{
 				for (int y = -1; y <= 1; y++)
 				{
-					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
+					float pcfDepth = texture(u_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
 					shadow += (currentDepth - texelSize > pcfDepth) ? u_shadowLightness : 1.0f;        
 				}    
 			}

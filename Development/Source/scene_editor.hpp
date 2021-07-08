@@ -96,7 +96,7 @@ private:
 	void _updateMainSettingsMenu();
 	void _updateGraphicsSettingsMenu();
 	void _updateShadowGraphicsSettingsMenu();
-	void _updateMotionblurGraphicsSettingsMenu();
+	void _updateMotionBlurGraphicsSettingsMenu();
 	void _updateDofGraphicsSettingsMenu();
 	void _updateFogGraphicsSettingsMenu();
 	void _updateLensFlareGraphicsSettingsMenu();

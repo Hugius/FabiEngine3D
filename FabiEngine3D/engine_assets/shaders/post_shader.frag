@@ -6,11 +6,11 @@ in vec2 f_uv;
 in float f_flareOcclusion;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler_scene;
-layout(location = 1) uniform sampler2D u_sampler_bloom;
-layout(location = 2) uniform sampler2D u_sampler_depth;
-layout(location = 3) uniform sampler2D u_sampler_blur;
-layout(location = 4) uniform sampler2D u_sampler_flare;
+layout(location = 0) uniform sampler2D u_sceneMap;
+layout(location = 1) uniform sampler2D u_bloomMap;
+layout(location = 2) uniform sampler2D u_depthMap;
+layout(location = 3) uniform sampler2D u_blurMap;
+layout(location = 4) uniform sampler2D u_flareMap;
 
 // Float uniforms
 uniform float u_nearZ;
@@ -38,14 +38,14 @@ float convertDepthToPerspective(float depth)
 void main()
 {
 	// Texture mapping
-	float currentDepth         = texture(u_sampler_depth, f_uv).r;
+	float currentDepth         = texture(u_depthMap, f_uv).r;
 	float currentFragmentDepth = convertDepthToPerspective(currentDepth) / u_farZ;
-    float middleDepth          = texture(u_sampler_depth, vec2(0.5f)).r;
+    float middleDepth          = texture(u_depthMap, vec2(0.5f)).r;
     float middleFragmentDepth  = convertDepthToPerspective(middleDepth) / u_farZ;
-	vec3 sceneColor            = texture(u_sampler_scene, f_uv).rgb;
-	vec3 bloomColor            = texture(u_sampler_bloom, f_uv).rgb;
-	vec3 blurColor             = texture(u_sampler_blur, f_uv).rgb;
-    vec3 flareColor            = texture(u_sampler_flare, vec2(f_uv.x, -f_uv.y)).rgb;
+	vec3 sceneColor            = texture(u_sceneMap, f_uv).rgb;
+	vec3 bloomColor            = texture(u_bloomMap, f_uv).rgb;
+	vec3 blurColor             = texture(u_blurMap, f_uv).rgb;
+    vec3 flareColor            = texture(u_flareMap, vec2(f_uv.x, -f_uv.y)).rgb;
 
     // Default scene
     o_finalColor.rgb = sceneColor;

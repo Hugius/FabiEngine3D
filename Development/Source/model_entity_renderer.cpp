@@ -57,14 +57,14 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_mixSkyColor",				  _renderBus.getMixSkyColor());
 	
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_diffuseMap", 0);
-	_shader.uploadUniform("u_sampler_lightMap", 1);
-	_shader.uploadUniform("u_sampler_normalMap", 2);
-	_shader.uploadUniform("u_sampler_reflectionMap", 3);
-	_shader.uploadUniform("u_sampler_sceneReflectionMap", 4);
-	_shader.uploadUniform("u_sampler_shadowMap", 5);
-	_shader.uploadUniform("u_sampler_mainSkyMap", 6);
-	_shader.uploadUniform("u_sampler_mixSkyMap", 7);
+	_shader.uploadUniform("u_diffuseMap", 0);
+	_shader.uploadUniform("u_lightMap", 1);
+	_shader.uploadUniform("u_normalMap", 2);
+	_shader.uploadUniform("u_reflectionMap", 3);
+	_shader.uploadUniform("u_sceneReflectionMap", 4);
+	_shader.uploadUniform("u_shadowMap", 5);
+	_shader.uploadUniform("u_mainSkyMap", 6);
+	_shader.uploadUniform("u_mixSkyMap", 7);
 
 	// Clipping (minY & maxY)
 	glEnable(GL_CLIP_DISTANCE0);

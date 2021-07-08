@@ -5,7 +5,7 @@
 in vec2 f_uv;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
+layout(location = 0) uniform sampler2D u_diffuseMap;
 
 // Float uniforms
 uniform float u_minAlpha;
@@ -16,7 +16,7 @@ uniform bool u_isAlphaObject;
 // Calculate final fragment color
 void main()
 {
-	vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
+	vec4 texColor = texture(u_diffuseMap, f_uv);
 
 	if(u_isAlphaObject)
 	{

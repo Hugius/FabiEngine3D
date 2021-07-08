@@ -6,7 +6,7 @@ layout(location = 0) in vec3 v_pos;
 layout(location = 1) in vec2 v_uv;
 
 // Textures
-layout(location = 5) uniform sampler2D u_sampler_displacementMap;
+layout(location = 5) uniform sampler2D u_displacementMap;
 
 // Matrix44 uniforms
 uniform mat4 u_viewMatrix;
@@ -46,15 +46,15 @@ void main()
 	if(u_isWaving)
 	{
 		// Get size of 1 texel of this texture
-		float texelSize = 1.0f / textureSize(u_sampler_displacementMap, 0).x;
+		float texelSize = 1.0f / textureSize(u_displacementMap, 0).x;
 
 		// Floor and ceil to nearest texels
 		float minX = u_waveOffset.x - mod(u_waveOffset.x, 1.0f);
 		float maxX = u_waveOffset.x + mod(u_waveOffset.x, 1.0f);
 		float minZ = u_waveOffset.y - mod(u_waveOffset.y, 1.0f);
 		float maxZ = u_waveOffset.y + mod(u_waveOffset.y, 1.0f);
-		float height1 = texture(u_sampler_displacementMap, f_uv + vec2(minX, minZ)).r;
-		float height2 = texture(u_sampler_displacementMap, f_uv + vec2(maxX, maxZ)).r;
+		float height1 = texture(u_displacementMap, f_uv + vec2(minX, minZ)).r;
+		float height2 = texture(u_displacementMap, f_uv + vec2(maxX, maxZ)).r;
 
 		// Calculate height in between texels
 		float height = height1 + ((height2 - height1) / 2.0f);

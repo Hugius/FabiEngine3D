@@ -5,7 +5,7 @@
 in vec2 f_uv;
 
 // Textures
-uniform sampler2D u_sampler_diffuseMap;
+uniform sampler2D u_diffuseMap;
 
 // Boolean uniforms
 uniform bool u_isAlphaObject;
@@ -13,7 +13,7 @@ uniform bool u_isAlphaObject;
 void main()
 {
 	// Texture sampling for possible alpha
-	vec4 texelColor = texture(u_sampler_diffuseMap, f_uv);
+	vec4 texelColor = texture(u_diffuseMap, f_uv);
 
 	if(u_isAlphaObject)
 	{

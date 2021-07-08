@@ -11,9 +11,9 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadAudioEntitiesFromFile();
 	void saveAudioEntitiesToFile();
+	void setCurrentProjectID(const string& projectID);
 
 	bool isLoaded();
 

@@ -84,7 +84,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("motionBlur")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsMotionblur");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsMotionBlur");
 			}
 			else if (screen->getButton("dof")->isHovered())
 			{
@@ -228,13 +228,13 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 	}
 }
 
-void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
+void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "sceneEditorMenuSettingsGraphicsMotionblur")
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsMotionBlur")
 	{
 		// Temporary values
 		bool isEnabled = _fe3d.gfx_isMotionBlurEnabled();

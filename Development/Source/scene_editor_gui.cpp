@@ -183,8 +183,8 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen(screenID)->addButton("interval", Vec2(0.0f, -0.6f), Vec2(CW("Interval"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Interval", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.8f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsMotionblur
-	screenID = "sceneEditorMenuSettingsGraphicsMotionblur";
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsMotionBlur
+	screenID = "sceneEditorMenuSettingsGraphicsMotionBlur";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("enabled", Vec2(0.0f, 0.475f), Vec2(CW("Enabled: NO"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("strength", Vec2(0.0f, 0.0f), Vec2(CW("Strength"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Strength", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -367,7 +367,7 @@ void SceneEditor::_unloadGUI()
 	leftWindow->deleteScreen("sceneEditorMenuSettings");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphics");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsShadows");
-	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsMotionblur");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsMotionBlur");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsDof");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsFog");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsLensFlare");

@@ -14,9 +14,9 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string& projectID);
 	void loadScriptFiles(bool isLoggingEnabled);
 	void saveScriptsToFile();
+	void setCurrentProjectID(const string& projectID);
 
 	ScriptExecutor& getScriptExecutor();
 

@@ -5,7 +5,7 @@
 layout(location = 0) in vec2 v_pos;
 layout(location = 1) in vec2 v_uv;
 
-layout(location = 2) uniform sampler2D u_sampler_depth;
+layout(location = 2) uniform sampler2D u_depthMap;
 
 // Matrix44 uniforms
 uniform mat4 u_modelMatrix;
@@ -51,7 +51,7 @@ float calculateFlareOcclusion()
         vec2 lightSourceUV      = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
 
         // Calculate scene depth
-        float flareDepth         = texture(u_sampler_depth, lightSourceUV).r;
+        float flareDepth         = texture(u_depthMap, lightSourceUV).r;
         float flareFragmentDepth = convertDepthToPerspective(flareDepth) / u_farZ;
 
         // Calculate distance to light source

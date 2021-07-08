@@ -450,6 +450,7 @@ void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 
 		if (resetProperties)
 		{
+			_core->_renderBus.setBloomType(BloomType());
 			_core->_renderBus.setBloomIntensity(0.0f);
 			_core->_renderBus.setBloomBlurCount(0);
 		}

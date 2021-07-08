@@ -10,11 +10,11 @@ in vec2 f_uv;
 in vec4 f_clip;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler_reflectionMap;
-layout(location = 1) uniform sampler2D u_sampler_refractionMap;
-layout(location = 2) uniform sampler2D u_sampler_depthMap;
-layout(location = 3) uniform sampler2D u_sampler_dudvMap;
-layout(location = 4) uniform sampler2D u_sampler_normalMap;
+layout(location = 0) uniform sampler2D u_reflectionMap;
+layout(location = 1) uniform sampler2D u_refractionMap;
+layout(location = 2) uniform sampler2D u_depthMap;
+layout(location = 3) uniform sampler2D u_dudvMap;
+layout(location = 4) uniform sampler2D u_normalMap;
 
 // Vector3 uniforms
 uniform vec3 u_directionalLightColor;
@@ -87,7 +87,7 @@ vec4 getMainColor()
 	float alpha = 1.0f;
 	if(u_transparency > 0.0f)
 	{
-		float depth = texture(u_sampler_depthMap, vec2(texCoords.x, -texCoords.y)).r;
+		float depth = texture(u_depthMap, vec2(texCoords.x, -texCoords.y)).r;
 		float floorDistance = convertDepthToLinear(depth);
 		float waterDistance = convertDepthToLinear(gl_FragCoord.z);
 		float waterDepth = floorDistance - waterDistance;
@@ -98,14 +98,14 @@ vec4 getMainColor()
 	if(u_isRippling)
 	{
 		// DUDV mapping
-		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
-		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0f) * 0.025f;
+		vec2 distortedTexCoords = f_uv + texture(u_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
+		vec2 totalDistortion = (texture(u_dudvMap, distortedTexCoords).rg * 2.0 - 1.0f) * 0.025f;
 		texCoords  += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
 		texCoords.y = clamp(texCoords.y, -0.999f, -0.001f);
 
 		// Normal mapping
-		vec3 normalMapColor = texture(u_sampler_normalMap, distortedTexCoords).rgb;
+		vec3 normalMapColor = texture(u_normalMap, distortedTexCoords).rgb;
 		normal              = vec3((normalMapColor.r * 2.0f) - 1.0f, normalMapColor.b, (normalMapColor.g * 2.0f) - 1.0f);
 		normal              = normalize(normal);
 	}
@@ -116,8 +116,8 @@ vec4 getMainColor()
 
 	// Finalizing fragment color
 	vec3 finalColor;
-	vec3 reflectionColor = texture(u_sampler_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
-	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
+	vec3 reflectionColor = texture(u_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
+	vec3 refractionColor = texture(u_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
 
 	// Bloom correction
 	reflectionColor *= 1.0f;

@@ -46,11 +46,11 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			std::istringstream iss(line);
 
 			// Extract type from file
-			string entityType;
-			iss >> entityType;
+			string lineType;
+			iss >> lineType;
 
 			// Load entity according to type
-			if (entityType == "SKY")
+			if (lineType == "SKY")
 			{
 				// Data placeholders
 				string skyID, previewID;
@@ -75,7 +75,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.skyEntity_setColor(skyID, color);
 				}
 			}
-			else if (entityType == "TERRAIN")
+			else if (lineType == "TERRAIN")
 			{
 				// Data placeholders
 				string terrainID, previewID;
@@ -86,7 +86,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Add terrain
 				_copyPreviewTerrain(terrainID, previewID);
 			}
-			else if (entityType == "WATER")
+			else if (lineType == "WATER")
 			{
 				// Data placeholders
 				string waterID, previewID;
@@ -113,7 +113,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.waterEntity_setTransparency(waterID, transparency);
 				}
 			}
-			else if (entityType == "MODEL")
+			else if (lineType == "MODEL")
 			{
 				// Data placeholders
 				string modelID, previewID;
@@ -279,7 +279,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 				}
 			}
-			else if (entityType == "ANIMATION")
+			else if (lineType == "ANIMATION")
 			{
 				// Data placeholders
 				string animationID, modelID;
@@ -353,7 +353,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 				}
 			}
-			else if (entityType == "BILLBOARD")
+			else if (lineType == "BILLBOARD")
 			{
 				// Data placeholders
 				string billboardID, previewID, textContent;
@@ -437,7 +437,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 				}
 			}
-			else if (entityType == "AABB")
+			else if (lineType == "AABB")
 			{
 				// Data placeholders
 				string aabbID;
@@ -461,7 +461,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.aabbEntity_add(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
 				_loadedAabbIDs.push_back(aabbID);
 			}
-			else if (entityType == "SOUND")
+			else if (lineType == "SOUND")
 			{
 				// Data placeholders
 				string soundID, previewID;
@@ -486,7 +486,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					_fe3d.soundEntity_play(soundID, -1, 0);
 				}
 			}
-			else if (entityType == "AMBIENT_LIGHT")
+			else if (lineType == "AMBIENT_LIGHT")
 			{
 				// Values
 				Vec3 ambientLightingColor;
@@ -502,7 +502,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Apply
 				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
-			else if (entityType == "DIRECTIONAL_LIGHT")
+			else if (lineType == "DIRECTIONAL_LIGHT")
 			{
 				// Data placeholders
 				Vec3 directionalLightingPosition, directionalLightingColor;
@@ -533,7 +533,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.billboardEntity_setReflected("@@lightSource", false);
 				_fe3d.billboardEntity_setVisible("@@lightSource", true);
 			}
-			else if (entityType == "POINT_LIGHT")
+			else if (lineType == "POINT_LIGHT")
 			{
 				// Data placeholders
 				string lightID;
@@ -556,7 +556,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.lightEntity_add(lightID, position, color, intensity, distance);
 				_loadedLightIDs.push_back(lightID);
 			}
-			else if (entityType == "LOD_DISTANCE")
+			else if (lineType == "LOD_DISTANCE")
 			{
 				// Data placeholders
 				float lodDistance;
@@ -567,7 +567,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
-			else if (entityType == "REFLECTION_HEIGHT")
+			else if (lineType == "SCENE_REFLECTION_HEIGHT")
 			{
 				// Data placeholders
 				float reflectionHeight;
@@ -579,7 +579,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.gfx_disableSceneReflections();
 				_fe3d.gfx_enableSceneReflections(0.5f, reflectionHeight);
 			}
-			else if (entityType == "GRAPHICS_SHADOWS")
+			else if (lineType == "GRAPHICS_SHADOWS")
 			{
 				// Data placeholders
 				float size, lightness;
@@ -605,7 +605,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable shadows
 				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isLighted, interval);
 			}
-			else if (entityType == "GRAPHICS_MOTIONBLUR")
+			else if (lineType == "GRAPHICS_MOTION_BLUR")
 			{
 				// Data placeholders
 				float strength;
@@ -616,7 +616,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable motion blur
 				_fe3d.gfx_enableMotionBlur(strength);
 			}
-			else if (entityType == "GRAPHICS_DOF")
+			else if (lineType == "GRAPHICS_DOF")
 			{
 				// Data placeholders
 				bool isDynamic;
@@ -628,7 +628,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable DOF
 				_fe3d.gfx_enableDOF(isDynamic, maxDistance, blurDistance);
 			}
-			else if (entityType == "GRAPHICS_FOG")
+			else if (lineType == "GRAPHICS_FOG")
 			{
 				// Data placeholders
 				float minDistance, maxDistance, thickness;
@@ -640,7 +640,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable fog
 				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 			}
-			else if (entityType == "GRAPHICS_LENSFLARE")
+			else if (lineType == "GRAPHICS_LENS_FLARE")
 			{
 				// Data placeholders
 				string flareMapPath;
@@ -656,7 +656,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable lens flare
 				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 			}
-			else if (entityType == "GRAPHICS_SKY_EXPOSURE")
+			else if (lineType == "GRAPHICS_SKY_EXPOSURE")
 			{
 				// Data placeholders
 				float intensity;
@@ -667,14 +667,14 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				// Enable sky exposure
 				_fe3d.gfx_enableSkyExposure(intensity);
 			}
-			else if (entityType == "GRAPHICS_BLOOM")
+			else if (lineType == "GRAPHICS_BLOOM")
 			{
 				// Data placeholders
 				unsigned int type, blurCount;
 				float intensity;
 
 				// Extract data
-				iss >> type >> blurCount >> intensity;
+				iss >> type >> intensity >> blurCount;
 
 				// Enable bloom
 				_fe3d.gfx_enableBloom(BloomType(type), intensity, blurCount);

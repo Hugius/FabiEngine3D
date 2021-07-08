@@ -41,7 +41,7 @@ void SettingsEditor::unload()
 	_unloadGUI();
 
 	// Miscellaneous
-	_fe3d.gfx_disableBloom();
+	_fe3d.gfx_disableBloom(true);
 	_fe3d.billboardEntity_delete("@@icon");
 	_isEditorLoaded = false;
 }

@@ -21,11 +21,11 @@ public:
 	void setWaterRefractionMap(GLuint value);
 	void setShadowMap(GLuint value);
 	void setBloomMap(GLuint value);
-	void setPostProcessedSceneMap(GLuint value);
 	void setSceneDepthMap(GLuint value);
-	void setBlurMap(GLuint value);
-	void setMotionBlurMap(GLuint value);
+	void setDofMap(GLuint value);
 	void setLensFlareMap(GLuint value);
+	void setMotionBlurMap(GLuint value);
+	void setFinalSceneMap(GLuint value);
 
 	// Strings
 	void setCursorEntityID(const string& value);
@@ -133,11 +133,11 @@ public:
 	const GLuint getWaterRefractionMap()	   const;
 	const GLuint getShadowMap()				   const;
 	const GLuint getBloomMap()				   const;
-	const GLuint getPostProcessedSceneMap()	   const;
 	const GLuint getSceneDepthMap()			   const;
-	const GLuint getBlurMap()				   const;
-	const GLuint getMotionBlurMap()			   const;
+	const GLuint getDofMap()				   const;
 	const GLuint getLensFlareMap()			   const;
+	const GLuint getFinalSceneMap()			   const;
+	const GLuint getMotionBlurMap()			   const;
 	
 	// Strings
 	const string& getCursorEntityID() const;
@@ -245,11 +245,11 @@ private:
 	GLuint _waterRefractionMap       = 0;
 	GLuint _shadowMap                = 0;
 	GLuint _bloomMap                 = 0;
-	GLuint _postProcessedSceneMap    = 0;
 	GLuint _sceneDepthMap            = 0;
-	GLuint _blurMap                  = 0;
+	GLuint _dofMap                   = 0;
+	GLuint _lensFlareMap			 = 0;
+	GLuint _finalSceneMap			 = 0;
 	GLuint _motionBlurMap            = 0;
-	GLuint _lensFlareMap		     = 0;
 	
 	// Strings
 	string _cursorEntityID = "";

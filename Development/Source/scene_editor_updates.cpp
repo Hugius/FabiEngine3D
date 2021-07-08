@@ -48,7 +48,7 @@ void SceneEditor::update()
 	_updateMainSettingsMenu();
 	_updateGraphicsSettingsMenu();
 	_updateShadowGraphicsSettingsMenu();
-	_updateMotionblurGraphicsSettingsMenu();
+	_updateMotionBlurGraphicsSettingsMenu();
 	_updateDofGraphicsSettingsMenu();
 	_updateFogGraphicsSettingsMenu();
 	_updateLensFlareGraphicsSettingsMenu();

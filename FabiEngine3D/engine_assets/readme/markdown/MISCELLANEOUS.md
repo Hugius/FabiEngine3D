@@ -5,7 +5,7 @@
 - The **Z axis** is what makes a 3D world (back & front).
 - The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).
 - The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
-- The **maximum render distance** is 5000.0 (the **reference box** in the **model editor** has a size of 1.0).
+- The **maximum render distance** is 3000.0 (the **reference box** in the **model editor** has a size of 1.0).
 ### Rotation system
 - Beware of the **[Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock)** when **rotating** objects in all 3 (XYZ) directions!
 - Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation.

@@ -204,7 +204,8 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isSkyExposureEnabled();
-		auto intensity = _fe3d.gfx_getSkyExposureFactor();
+		auto factor = _fe3d.gfx_getSkyExposureFactor();
+		auto speed = _fe3d.gfx_getSkyExposureSpeed();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -217,19 +218,29 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			{
 				isEnabled = !isEnabled;
 			}
-			else if (screen->getButton("intensity")->isHovered())
+			else if (screen->getButton("factor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Extra Intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("factor", "Exposure Factor", factor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+			}
+			else if (screen->getButton("speed")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("speed", "Exposure Speed", factor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
 		// Button text contents
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
-		// Extra intensity value
-		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
+		// Factor value
+		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
 		{
-			intensity = std::max(0.0f, intensity / 100.0f);
+			factor = std::max(0.0f, factor / 100.0f);
+		}
+
+		// Speed value
+		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
+		{
+			speed = std::max(0.0f, speed / 100000.0f);
 		}
 
 		// Disable sky exposure
@@ -241,11 +252,12 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		// Enable sky exposure
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableSkyExposure(intensity);
+			_fe3d.gfx_enableSkyExposure(factor, speed);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("intensity")->setHoverable(isEnabled);
+		screen->getButton("factor")->setHoverable(isEnabled);
+		screen->getButton("speed")->setHoverable(isEnabled);
 	}
 }
 

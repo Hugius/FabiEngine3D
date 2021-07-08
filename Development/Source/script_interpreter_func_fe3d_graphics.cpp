@@ -236,45 +236,6 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
-	else if (functionName == "fe3d:graphics_enable_sky_exposure")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_enableSkyExposure(_fe3d.gfx_getSkyExposureFactor());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:graphics_disable_sky_exposure")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_disableSkyExposure();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:graphics_set_sky_exposure_factor")
-	{
-		auto types = { ScriptValueType::DECIMAL };
-
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			bool wasEnabled = _fe3d.gfx_isSkyExposureEnabled();
-			_fe3d.gfx_enableSkyExposure(arguments[0].getDecimal());
-			if (!wasEnabled)
-			{
-				_fe3d.gfx_disableSkyExposure();
-			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:graphics_get_sky_exposure_factor")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getSkyExposureFactor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-		}
-	}
 	else if (functionName == "fe3d:graphics_enable_motion_blur")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

@@ -1,466 +1,466 @@
 #include "render_bus.hpp"
 
-const GLuint RenderBus::getMainSkyReflectionCubeMap() const
+const GLuint RenderBus::getMainSkyReflectionCubeMap()
 {
 	return _mainSkyReflectionCubeMap;
 }
 
-const GLuint RenderBus::getMixSkyReflectionCubeMap() const
+const GLuint RenderBus::getMixSkyReflectionCubeMap()
 {
 	return _mixSkyReflectionCubeMap;
 }
 
-const GLuint RenderBus::getSceneReflectionMap() const
+const GLuint RenderBus::getSceneReflectionMap()
 {
 	return _sceneReflectionMap;
 }
 
-const GLuint RenderBus::getWaterReflectionMap() const
+const GLuint RenderBus::getWaterReflectionMap()
 {
 	return _waterReflectionMap;
 }
 
-const GLuint RenderBus::getWaterRefractionMap() const
+const GLuint RenderBus::getWaterRefractionMap()
 {
 	return _waterRefractionMap;
 }
 
-const GLuint RenderBus::getBloomMap() const
+const GLuint RenderBus::getBloomMap()
 {
 	return _bloomMap;
 }
 
-const GLuint RenderBus::getPrimarySceneMap() const
+const GLuint RenderBus::getPrimarySceneMap()
 {
 	return _primarySceneMap;
 }
 
-const GLuint RenderBus::getSecondarySceneMap() const
+const GLuint RenderBus::getSecondarySceneMap()
 {
 	return _secondarySceneMap;
 }
 
-const GLuint RenderBus::getShadowMap() const
+const GLuint RenderBus::getShadowMap()
 {
 	return _shadowMap;
 }
 
-const GLuint RenderBus::getMotionBlurMap() const
+const GLuint RenderBus::getMotionBlurMap()
 {
 	return _motionBlurMap;
 }
 
-const GLuint RenderBus::getLensFlareMap() const
+const GLuint RenderBus::getLensFlareMap()
 {
 	return _lensFlareMap;
 }
 
-const GLuint RenderBus::getSceneDepthMap() const
+const GLuint RenderBus::getSceneDepthMap()
 {
 	return _sceneDepthMap;
 }
 
-const GLuint RenderBus::getDofMap() const
+const GLuint RenderBus::getDofMap()
 {
 	return _dofMap;
 }
 
-const GLuint RenderBus::getFinalSceneMap() const
+const GLuint RenderBus::getFinalSceneMap()
 {
 	return _finalSceneMap;
 }
 
-const Matrix44 & RenderBus::getViewMatrix() const
+const Matrix44 & RenderBus::getViewMatrix()
 {
 	return _viewMatrix;
 }
 
-const Matrix44 & RenderBus::getProjectionMatrix() const
+const Matrix44 & RenderBus::getProjectionMatrix()
 {
 	return _projectionMatrix;
 }
 
-const Matrix44 & RenderBus::getSkyRotationMatrix() const
+const Matrix44 & RenderBus::getSkyRotationMatrix()
 {
 	return _skyRotationMatrix;
 }
 
-const Matrix44 & RenderBus::getShadowMatrix() const
+const Matrix44 & RenderBus::getShadowMatrix()
 {
 	return _shadowMatrix;
 }
 
-const Vec4 RenderBus::getFlareSourcePositionClipspace() const
+const Vec4 RenderBus::getFlareSourcePositionClipspace()
 {
 	return _flareSourcePositionClipspace;
 }
 
-const Vec4 RenderBus::getClippingPlane() const
+const Vec4 RenderBus::getClippingPlane()
 {
 	return _clippingPlane;
 }
 
-const Vec3 RenderBus::getCameraPosition() const
+const Vec3 RenderBus::getCameraPosition()
 {
 	return _cameraPosition;
 }
 
-const Vec3 RenderBus::getCameraFront() const
+const Vec3 RenderBus::getCameraFront()
 {
 	return _cameraFront;
 }
 
-const Vec3 RenderBus::getAmbientLightColor() const
+const Vec3 RenderBus::getAmbientLightColor()
 {
 	return _ambientLightColor;
 }
 
-const Vec3 RenderBus::getDirectionalLightPosition() const
+const Vec3 RenderBus::getDirectionalLightPosition()
 {
 	return _directionalLightPosition;
 }
 
-const Vec3 RenderBus::getSpotLightColor() const
+const Vec3 RenderBus::getSpotLightColor()
 {
 	return _spotLightColor;
 }
 
-const Vec3 RenderBus::getShadowEyePosition() const
+const Vec3 RenderBus::getShadowEyePosition()
 {
 	return _shadowEyePosition;
 }
 
-const Vec3 RenderBus::getShadowAreaCenter() const
+const Vec3 RenderBus::getShadowAreaCenter()
 {
 	return _shadowAreaCenter;
 }
 
-const Vec3 RenderBus::getFogColor() const
+const Vec3 RenderBus::getFogColor()
 {
 	return _fogColor;
 }
 
-const Vec3 RenderBus::getFlareSourcePosition() const
+const Vec3 RenderBus::getFlareSourcePosition()
 {
 	return _flareSourcePosition;
 }
 
-const Vec3 RenderBus::getMainSkyColor() const
+const Vec3 RenderBus::getMainSkyColor()
 {
 	return _mainSkyColor;
 }
 
-const Vec3 RenderBus::getMixSkyColor() const
+const Vec3 RenderBus::getMixSkyColor()
 {
 	return _mixSkyColor;
 }
 
-const Vec3 RenderBus::getDirectionalLightColor() const
+const Vec3 RenderBus::getDirectionalLightColor()
 {
 	return _directionalLightColor;
 }
 
-const float RenderBus::getSceneReflectionHeight() const
+const float RenderBus::getSceneReflectionHeight()
 {
 	return _sceneReflectionHeight;
 }
 
-const float RenderBus::getSceneReflectionMixValue() const
+const float RenderBus::getSceneReflectionMixValue()
 {
 	return _sceneReflectionMixValue;
 }
 
-const float RenderBus::getShadowAreaSize() const
+const float RenderBus::getShadowAreaSize()
 {
 	return _shadowAreaSize;
 }
 
-const float RenderBus::getShadowAreaReach() const
+const float RenderBus::getShadowAreaReach()
 {
 	return _shadowAreaReach;
 }
 
-const float RenderBus::getShadowLightness() const
+const float RenderBus::getShadowLightness()
 {
 	return _shadowLightness;
 }
 
-const float RenderBus::getLensFlareAlpha() const
+const float RenderBus::getLensFlareAlpha()
 {
 	return _lensFlareAlpha;
 }
 
-const float RenderBus::getLensFlareIntensity() const
+const float RenderBus::getLensFlareIntensity()
 {
 	return _lensFlareIntensity;
 }
 
-const float RenderBus::getLensFlareMultiplier() const
+const float RenderBus::getLensFlareMultiplier()
 {
 	return _lensFlareMultiplier;
 }
 
-const float RenderBus::getMotionBlurStrength() const
+const float RenderBus::getMotionBlurStrength()
 {
 	return _motionBlurStrength;
 }
 
-const float RenderBus::getMotionBlurMixValue() const
+const float RenderBus::getMotionBlurMixValue()
 {
 	return _motionBlurMixValue;
 }
 
-const float RenderBus::getSkyMixValue() const
+const float RenderBus::getSkyMixValue()
 {
 	return _skyMixValue;
 }
 
-const float RenderBus::getMainSkyLightness() const
+const float RenderBus::getMainSkyLightness()
 {
 	return _mainSkyLightness;
 }
 
-const float RenderBus::getMixSkyLightness() const
+const float RenderBus::getMixSkyLightness()
 {
 	return _mixSkyLightness;
 }
 
-const float RenderBus::getAmbientLightIntensity() const
+const float RenderBus::getAmbientLightIntensity()
 {
 	return _ambientLightIntensity;
 }
 
-const float RenderBus::getDirectionalLightIntensity() const
+const float RenderBus::getDirectionalLightIntensity()
 {
 	return _directionalLightIntensity;
 }
 
-const float RenderBus::getSpotLightIntensity() const
+const float RenderBus::getSpotLightIntensity()
 {
 	return _spotLightIntensity;
 }
 
-const float RenderBus::getMaxSpotLightAngle() const
+const float RenderBus::getMaxSpotLightAngle()
 {
 	return _maxSpotLightAngle;
 }
 
-const float RenderBus::getMaxSpotLightDistance() const
+const float RenderBus::getMaxSpotLightDistance()
 {
 	return _maxSpotLightDistance;
 }
 
-const float RenderBus::getFogMinDistance() const
+const float RenderBus::getFogMinDistance()
 {
 	return _fogMinDistance;
 }
 
-const float RenderBus::getFogMaxDistance() const
+const float RenderBus::getFogMaxDistance()
 {
 	return _fogMaxDistance;
 }
 
-const float RenderBus::getFogThickness() const
+const float RenderBus::getFogThickness()
 {
 	return _fogThickness;
 }
 
-const float RenderBus::getBloomIntensity() const
+const float RenderBus::getBloomIntensity()
 {
 	return _bloomIntensity;
 }
 
-const float RenderBus::getCameraYaw() const
+const float RenderBus::getCameraYaw()
 {
 	return _cameraYaw;
 }
 
-const float RenderBus::getCameraPitch() const
+const float RenderBus::getCameraPitch()
 {
 	return _cameraPitch;
 }
 
-const float RenderBus::getNearZ() const
+const float RenderBus::getNearZ()
 {
 	return _nearZ;
 }
 
-const float RenderBus::getFarZ() const
+const float RenderBus::getFarZ()
 {
 	return _farZ;
 }
 
-const float RenderBus::getDofMaxDistance() const
+const float RenderBus::getDofMaxDistance()
 {
 	return _dofMaxDistance;
 }
 
-const float RenderBus::getDofBlurDistance() const
+const float RenderBus::getDofBlurDistance()
 {
 	return _dofBlurDistance;
 }
 
-const float RenderBus::getSkyReflectionMixValue() const
+const float RenderBus::getSkyReflectionMixValue()
 {
 	return _skyReflectionMixValue;
 }
 
-const unsigned int RenderBus::getBloomBlurCount() const
+const unsigned int RenderBus::getBloomBlurCount()
 {
 	return _bloomBlurCount;
 }
 
-const unsigned int RenderBus::getTriangleCount() const
+const unsigned int RenderBus::getTriangleCount()
 {
 	return _triangleCount;
 }
 
-const unsigned int RenderBus::getShadowMapSize() const
+const unsigned int RenderBus::getShadowMapSize()
 {
 	return _shadowMapSize;
 }
 
-const unsigned int RenderBus::getReflectionMapSize() const
+const unsigned int RenderBus::getReflectionMapSize()
 {
 	return _reflectionMapSize;
 }
 
-const unsigned int RenderBus::getRefractionMapSize() const
+const unsigned int RenderBus::getRefractionMapSize()
 {
 	return _refractionMapSize;
 }
 
-const bool RenderBus::isFxaaEnabled() const
+const bool RenderBus::isFxaaEnabled()
 {
 	return _isFxaaEnabled;
 }
 
-const bool RenderBus::isSceneReflectionsEnabled() const
+const bool RenderBus::isSceneReflectionsEnabled()
 {
 	return _isSceneReflectionsEnabled;
 }
 
-const bool RenderBus::isAmbientLightingEnabled() const
+const bool RenderBus::isAmbientLightingEnabled()
 {
 	return _isAmbientLightingEnabled;
 }
 
-const bool RenderBus::isDirectionalLightingEnabled() const
+const bool RenderBus::isDirectionalLightingEnabled()
 {
 	return _isDirectionalLightingEnabled;
 }
 
-const bool RenderBus::isSpecularLightingEnabled() const
+const bool RenderBus::isSpecularLightingEnabled()
 {
 	return _isSpecularLightingEnabled;
 }
 
-const bool RenderBus::isPointLightingEnabled() const
+const bool RenderBus::isPointLightingEnabled()
 {
 	return _isPointLightingEnabled;
 }
 
-const bool RenderBus::isSpotLightingEnabled() const
+const bool RenderBus::isSpotLightingEnabled()
 {
 	return _isSpotLightingEnabled;
 }
 
-const bool RenderBus::isFogEnabled() const
+const bool RenderBus::isFogEnabled()
 {
 	return _isFogEnabled;
 }
 
-const bool RenderBus::isLightMappingEnabled() const
+const bool RenderBus::isLightMappingEnabled()
 {
 	return _isLightMappingEnabled;
 }
 
-const bool RenderBus::isNormalMappingEnabled() const
+const bool RenderBus::isNormalMappingEnabled()
 {
 	return _isNormalMappingEnabled;
 }
 
-const bool RenderBus::isSkyReflectionsEnabled() const
+const bool RenderBus::isSkyReflectionsEnabled()
 {
 	return _isSkyReflectionsEnabled;
 }
 
-const bool RenderBus::isBloomEnabled() const
+const bool RenderBus::isBloomEnabled()
 {
 	return _isBloomEnabled;
 }
 
-const bool RenderBus::isSkyExposureEnabled() const
+const bool RenderBus::isSkyExposureEnabled()
 {
 	return _isSkyExposureEnabled;
 }
 
-const bool RenderBus::isShadowsEnabled() const
+const bool RenderBus::isShadowsEnabled()
 {
 	return _isShadowsEnabled;
 }
 
-const bool RenderBus::isDofEnabled() const
+const bool RenderBus::isDofEnabled()
 {
 	return _isDofEnabled;
 }
 
-const bool RenderBus::isMotionBlurEnabled() const
+const bool RenderBus::isMotionBlurEnabled()
 {
 	return _isMotionBlurEnabled;
 }
 
-const bool RenderBus::isLensFlareEnabled() const
+const bool RenderBus::isLensFlareEnabled()
 {
 	return _isLensFlareEnabled;
 }
 
-const bool RenderBus::isWireframeRenderingEnabled() const
+const bool RenderBus::isWireframeRenderingEnabled()
 {
 	return _isWireframeRenderingEnabled;
 }
 
-const bool RenderBus::isAabbFrameRenderingEnabled() const
+const bool RenderBus::isAabbFrameRenderingEnabled()
 {
 	return _isAabbFrameRenderingEnabled;
 }
 
-const bool RenderBus::isShadowFrameRenderingEnabled() const
+const bool RenderBus::isShadowFrameRenderingEnabled()
 {
 	return _isShadowFrameRenderingEnabled;
 }
 
-const bool RenderBus::isLightedShadowingEnabled() const
+const bool RenderBus::isLightedShadowingEnabled()
 {
 	return _isLightedShadowingEnabled;
 }
 
-const bool RenderBus::isDebugRenderingEnabled() const
+const bool RenderBus::isDebugRenderingEnabled()
 {
 	return _isDebugRenderingEnabled;
 }
 
-const bool RenderBus::isTriangleCountingEnabled() const
+const bool RenderBus::isTriangleCountingEnabled()
 {
 	return _isTriangleCountingEnabled;
 }
 
-const bool RenderBus::isDofDynamic() const
+const bool RenderBus::isDofDynamic()
 {
 	return _isDofDynamic;
 }
 
-const BloomType RenderBus::getBloomType() const
+const BloomType RenderBus::getBloomType()
 {
 	return _bloomType;
 }
 
-const string& RenderBus::getCursorEntityID() const
+const string& RenderBus::getCursorEntityID()
 {
 	return _cursorEntityID;
 }
 
-const string& RenderBus::getLensFlareMapPath() const
+const string& RenderBus::getLensFlareMapPath()
 {
 	return _lensFlareMapPath;
 }

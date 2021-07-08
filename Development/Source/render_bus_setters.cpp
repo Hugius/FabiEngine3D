@@ -312,7 +312,6 @@ void RenderBus::setBloomBlurCount(unsigned int value)
 	_bloomBlurCount = value;
 }
 
-
 void RenderBus::increaseTriangleCount(unsigned int value)
 {
 	if (_isTriangleCountingEnabled)

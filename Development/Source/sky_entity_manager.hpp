@@ -17,15 +17,18 @@ public:
 	void selectMixSky(const string& ID);
 	void addSkyEntity(const string& ID);
 	void update() override;
-	void setSkyExposureFactor(float skyExposureFactor);
+	void setExposureFactor(float skyExposureFactor);
+	void setExposureSpeed(float speed);
 
 	float getSkyExposureFactor();
+	float getSkyExposureSpeed();
 
 private:
 	void _updateRotation();
-	void _updateEyeAdaption();
+	void _updateExposureAdaption();
 
-	float _skyExposureFactor = 0.0f;
+	float _exposureFactor = 0.0f;
+	float _exposureSpeed = 0.0f;
 
 	string _selectedMainID = "";
 	string _selectedMixID = "";

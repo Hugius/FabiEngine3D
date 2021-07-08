@@ -654,13 +654,13 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (lineType == "GRAPHICS_SKY_EXPOSURE")
 			{
 				// Data placeholders
-				float intensity;
+				float factor, speed;
 
 				// Extract data
-				iss >> intensity;
+				iss >> factor >> speed;
 
 				// Enable sky exposure
-				_fe3d.gfx_enableSkyExposure(intensity);
+				_fe3d.gfx_enableSkyExposure(factor, speed);
 			}
 			else if (lineType == "GRAPHICS_BLOOM")
 			{

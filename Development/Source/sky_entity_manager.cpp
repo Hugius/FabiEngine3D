@@ -128,7 +128,7 @@ void SkyEntityManager::update()
 
 		// Core updates
 		_updateRotation();
-		_updateEyeAdaption();
+		_updateExposureAdaption();
 
 		// Check if mix sky exists
 		auto mixSky = getSelectedMixSky();
@@ -152,25 +152,24 @@ void SkyEntityManager::_updateRotation()
 	}
 }
 
-void SkyEntityManager::_updateEyeAdaption()
+void SkyEntityManager::_updateExposureAdaption()
 {
 	// Update sky exposure
 	if (_renderBus.isSkyExposureEnabled())
 	{
 		// Values
-		const float speed = 0.001f; // Lightness changing speed
 		float lightness = getSelectedMainSky()->getLightness(); // Current lightness
 		float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
-		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _skyExposureFactor);
+		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _exposureFactor);
 
 		// Based on verticle angle
 		if (lightness > targetLightness) // Decrease lightness
 		{
-			getSelectedMainSky()->setLightness(lightness - (speed * 3.5f));
+			getSelectedMainSky()->setLightness(lightness - (_exposureSpeed * 3.5f));
 		}
 		else if (getSelectedMainSky()->getLightness() < targetLightness) // Increase lightness
 		{
-			getSelectedMainSky()->setLightness(lightness + speed);
+			getSelectedMainSky()->setLightness(lightness + _exposureSpeed);
 		}
 	}
 	else // Sky exposure not enabled
@@ -179,12 +178,22 @@ void SkyEntityManager::_updateEyeAdaption()
 	}
 }
 
-void SkyEntityManager::setSkyExposureFactor(float skyExposureFactor)
+void SkyEntityManager::setExposureFactor(float skyExposureFactor)
 {
-	_skyExposureFactor = skyExposureFactor;
+	_exposureFactor = skyExposureFactor;
+}
+
+void SkyEntityManager::setExposureSpeed(float speed)
+{
+	_exposureSpeed = speed;
 }
 
 float SkyEntityManager::getSkyExposureFactor()
 {
-	return _skyExposureFactor;
+	return _exposureFactor;
+}
+
+float SkyEntityManager::getSkyExposureSpeed()
+{
+	return _exposureSpeed;
 }

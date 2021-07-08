@@ -8,7 +8,7 @@
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
-	bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && _entityBus->getWaterEntity()->getTransparency() > 0.0f;
+	bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
 	float clippingY = -(std::numeric_limits<float>::max)();
 
@@ -124,6 +124,10 @@ void MasterRenderer::_captureSceneDepth()
 		_sceneDepthFramebuffer.unbind();
 		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
 	}
+	else
+	{
+		_renderBus.setSceneDepthMap(0);
+	}
 }
 
 void MasterRenderer::_captureDofBlur()
@@ -134,6 +138,10 @@ void MasterRenderer::_captureDofBlur()
 		_renderBus.setDofMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 
 			static_cast<int>(BlurType::DOF), 3, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
+	}
+	else
+	{
+		_renderBus.setDofMap(0);
 	}
 }
 
@@ -152,8 +160,8 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 {
 	// Temporary values
 	static bool firstTime = true;
-	static float lastYaw;
-	static float lastPitch;
+	static float lastYaw = 0.0f;
+	static float lastPitch = 0.0f;
 
 	// Timing values
 	static std::chrono::high_resolution_clock::time_point previousMS = std::chrono::high_resolution_clock::now();
@@ -213,7 +221,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			}
 			else
 			{
-				_renderBus.setMotionBlurMap(_renderBus.getFinalSceneMap());
+				_renderBus.setMotionBlurMap(0);
 			}
 
 			// Miscellaneous
@@ -221,7 +229,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 		}
 		else // No motion blur
 		{
-			_renderBus.setMotionBlurMap(_renderBus.getFinalSceneMap());
+			_renderBus.setMotionBlurMap(0);
 		}
 	}
 }
@@ -324,6 +332,10 @@ void MasterRenderer::_captureShadows()
 		_shadowFramebuffer.unbind();
 		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
 	}
+	else
+	{
+		_renderBus.setShadowMap(0);
+	}
 }
 
 void MasterRenderer::_captureBloom()
@@ -347,5 +359,9 @@ void MasterRenderer::_captureBloom()
 
 		// Unbind
 		_blurRenderer.unbind();
+	}
+	else
+	{
+		_renderBus.setBloomMap(0);
 	}
 }

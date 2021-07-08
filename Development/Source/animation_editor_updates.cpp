@@ -316,8 +316,8 @@ void AnimationEditor::_updateCamera()
 			if (_fe3d.camera_isLookatViewEnabled())
 			{
 				_fe3d.camera_disableLookatView();
-				_fe3d.camera_setPosition(Vec3(0.0));
-				_fe3d.camera_setLookatPosition(Vec3(0.0));
+				_fe3d.camera_setPosition(Vec3(0.0f));
+				_fe3d.camera_setLookatPosition(Vec3(0.0f));
 				_cameraLookatPosition = Vec3(0.0f);
 				_totalCursorDifference = Vec2(0.0f);
 				_cameraAcceleration = Vec2(0.0f);

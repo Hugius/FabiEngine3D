@@ -145,6 +145,10 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		// Assign texture
 		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
 	}
+	else
+	{
+		_renderBus.setSceneReflectionMap(0);
+	}
 }
 
 void MasterRenderer::_captureWaterReflections(Camera& camera)
@@ -305,6 +309,10 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		// Assign texture
 		_renderBus.setWaterReflectionMap(_waterReflectionFramebuffer.getTexture(0));
 	}
+	else
+	{
+		_renderBus.setWaterReflectionMap(0);
+	}
 }
 
 void MasterRenderer::_captureWaterRefractions()
@@ -313,7 +321,7 @@ void MasterRenderer::_captureWaterRefractions()
 	const auto waterEntity = _entityBus->getWaterEntity();
 
 	// Check if water refractions needed
-	if (waterEntity != nullptr && waterEntity->isRefractive())
+	if ((waterEntity != nullptr) && waterEntity->isRefractive())
 	{
 		// Start capturing refractions
 		_waterRefractionFramebuffer.bind();
@@ -402,5 +410,9 @@ void MasterRenderer::_captureWaterRefractions()
 
 		// Assign texture
 		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
+	}
+	else
+	{
+		_renderBus.setWaterRefractionMap(0);
 	}
 }

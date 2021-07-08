@@ -49,7 +49,7 @@ void main()
 	if(u_isDepthEntity) // Visualizing depth map
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
-		o_finalColor = vec4(vec3((convertDepthToPerspective(depth, u_nearZ, u_farZ / 25.0f))), 1.0f);
+		o_finalColor = vec4(vec3((convertDepthToPerspective(depth, u_nearZ, u_farZ))), 1.0f);
 	}
 	else
 	{

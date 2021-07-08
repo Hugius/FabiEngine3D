@@ -168,7 +168,7 @@ void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 	// Unbind VAO
 	glBindVertexArray(0);
 
-	// Other
+	// Miscellaneous
 	_isInstanced = true;
 	_offsetCount = static_cast<unsigned int>(offsets.size());
 	_instancedOffsets = offsets;

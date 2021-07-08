@@ -54,7 +54,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(_renderBuffer, false);
 
-	// Other
+	// Miscellaneous
 	entity->setLocalTranslation(position);
 	entity->setLocalScaling(size);
 	entity->setTranslation(position);

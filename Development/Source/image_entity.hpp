@@ -73,9 +73,9 @@ public:
 	const int getSpriteAnimationLoops() const;
 	const int getMaxSpriteAnimationLoops() const;
 
-	// Other
-	void setDepthEntity(bool value);
-	const bool isDepthEntity() const;
+	// Miscellaneous
+	void setPerspectiveDepthEntity(bool value);
+	const bool isPerspectiveDepthEntity() const;
 
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
@@ -105,8 +105,8 @@ private:
 
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused  = false;
-	bool _mirroredHorizontally	   = false;
-	bool _mirroredVertically	   = false;
-	bool _isDepthEntity			   = false;
+	bool _isMirroredHorizontally   = false;
+	bool _isMirroredVertically	   = false;
+	bool _isPerspectiveDepthEntity = false;
 	bool _isCentered			   = false;
 };

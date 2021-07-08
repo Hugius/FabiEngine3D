@@ -44,7 +44,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(_renderBuffer, false);
 
-	// Other
+	// Miscellaneous
 	entity->setTranslation(T);
 	entity->setRotation(R);
 	entity->setInitialRotation(R);

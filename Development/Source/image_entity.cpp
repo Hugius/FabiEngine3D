@@ -24,12 +24,12 @@ void ImageEntity::setColor(Vec3 value)
 
 void ImageEntity::setMirroredHorizontally(bool value)
 {
-	_mirroredHorizontally = value;
+	_isMirroredHorizontally = value;
 }
 
 void ImageEntity::setMirroredVertically(bool value)
 {
-	_mirroredVertically = value;
+	_isMirroredVertically = value;
 }
 
 void ImageEntity::setAlpha(float value)
@@ -253,12 +253,12 @@ const float ImageEntity::getAlpha() const
 
 const bool ImageEntity::isMirroredHorizonally() const
 {
-	return _mirroredHorizontally;
+	return _isMirroredHorizontally;
 }
 
 const bool ImageEntity::isMirroredVertically() const
 {
-	return _mirroredVertically;
+	return _isMirroredVertically;
 }
 
 const bool ImageEntity::hasTexture() const
@@ -306,12 +306,12 @@ const unsigned int ImageEntity::getDepth() const
 	return _depth;
 }
 
-void ImageEntity::setDepthEntity(bool value)
+void ImageEntity::setPerspectiveDepthEntity(bool value)
 {
-	_isDepthEntity = value;
+	_isPerspectiveDepthEntity = value;
 }
 
-const bool ImageEntity::isDepthEntity() const
+const bool ImageEntity::isPerspectiveDepthEntity() const
 {
-	return _isDepthEntity;
+	return _isPerspectiveDepthEntity;
 }

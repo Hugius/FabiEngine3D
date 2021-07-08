@@ -25,7 +25,7 @@ public:
 	void setFarZ(float value);
 	void setMaxPitch(float value);
 
-	// Other
+	// Miscellaneous
 	void enableLookatView();
 	void disableLookatView();
 	void enableFirstPersonView();

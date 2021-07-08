@@ -100,7 +100,7 @@ public:
 	const bool hasNormalMapG()	   const;
 	const bool hasNormalMapB()	   const;
 
-	// Other
+	// Miscellaneous
 	const vector<float>& getPixelValues() const;
 
 private:

@@ -21,18 +21,14 @@ uniform float u_nearZ;
 uniform float u_farZ;
 
 // Boolean uniforms
-uniform bool u_isDepthEntity;
+uniform bool u_isPerspectiveDepthEntity;
 uniform bool u_hasTexture;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-float convertDepthToPerspective(float depth, float nearZ, float farZ)
-{
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    float result = (2.0 * nearZ * farZ) / (farZ + nearZ - z * (farZ - nearZ));
-	return result / farZ;
-}
+// Functions
+float convertDepthToPerspective(float depth, float nearZ, float farZ);
 
 void main()
 {
@@ -46,7 +42,7 @@ void main()
 		discard;
 	}
 
-	if(u_isDepthEntity) // Visualizing depth map
+	if(u_isPerspectiveDepthEntity) // Visualizing depth map
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
 		o_finalColor = vec4(vec3((convertDepthToPerspective(depth, u_nearZ, u_farZ))), 1.0f);
@@ -63,4 +59,11 @@ void main()
 			o_finalColor = vec4(u_color, u_alpha);
 		}
 	}
+}
+
+float convertDepthToPerspective(float depth, float nearZ, float farZ)
+{
+    float z = depth * 2.0 - 1.0; // Back to NDC 
+    float result = (2.0 * nearZ * farZ) / (farZ + nearZ - z * (farZ - nearZ));
+	return result / farZ;
 }

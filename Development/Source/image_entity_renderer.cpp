@@ -51,7 +51,7 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
-		_shader.uploadUniform("u_isDepthEntity", entity->isPerspectiveDepthEntity());
+		_shader.uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
 		_shader.uploadUniform("u_hasTexture", entity->getTexture() != 0);
 
 		// Bind texture

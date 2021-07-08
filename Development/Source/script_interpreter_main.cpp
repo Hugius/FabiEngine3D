@@ -186,14 +186,6 @@ void ScriptInterpreter::load()
 	// Default camera
 	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 
-	// Directional light source
-	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
-	_fe3d.billboardEntity_setReflected("@@lightSource", false);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
-
 	// Enable default graphics
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
@@ -201,6 +193,15 @@ void ScriptInterpreter::load()
 	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();
+
+	// Directional light source
+	const string texturePath = "engine_assets\\textures\\light_source.png";
+	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
+	_fe3d.billboardEntity_setReflected("@@lightSource", true);
+	_fe3d.billboardEntity_setBloomed("@@lightSource", true);
+	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();

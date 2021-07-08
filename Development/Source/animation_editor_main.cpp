@@ -68,8 +68,8 @@ void AnimationEditor::load()
 	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
 
 	// Enable default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
 	_fe3d.gfx_enableLightMapping();

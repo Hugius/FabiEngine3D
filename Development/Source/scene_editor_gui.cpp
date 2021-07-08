@@ -372,6 +372,7 @@ void SceneEditor::_unloadGUI()
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsFog");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsLensFlare");
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsSkyExposure");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsBloom");
 	rightWindow->deleteScreen("modelPropertiesMenu");
 	rightWindow->deleteScreen("billboardPropertiesMenu");
 	rightWindow->deleteScreen("pointlightPropertiesMenu");

@@ -89,8 +89,8 @@ void BillboardEditor::load()
 	_fe3d.camera_enableLookatView();
 
 	// Enable default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.5f);
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	
 	// 3D Environment

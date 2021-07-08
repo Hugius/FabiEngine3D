@@ -18,15 +18,22 @@ uniform vec3 u_mainColor;
 uniform vec3 u_mixColor;
 
 // Out variables
-layout (location = 0) out vec4 o_finalColor;
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
 
 void main()
 {
+	// Calculate colors
 	vec3 mainColor = texture(u_sampler_mainCubeMap, f_uv).rgb * u_mainColor;
 	vec3 mixColor = texture(u_sampler_mixCubeMap, f_uv).rgb * u_mixColor;
+
+	// Apply mixing & lightness
 	float mixValue = clamp(u_mixValue, 0.0, 1.0f);
 	float lightness = mix(u_mainLightness, u_mixLightness, mixValue);
-	o_finalColor.rgb = mix(mainColor, mixColor, mixValue);
-	o_finalColor.rgb *= lightness;
-	o_finalColor.a = 1.0f;
+
+	// Set final colors
+	o_primaryColor.rgb = mix(mainColor, mixColor, mixValue);
+	o_primaryColor.rgb *= lightness;
+	o_primaryColor.a = 1.0f;
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

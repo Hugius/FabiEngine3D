@@ -639,7 +639,7 @@ void SceneEditor::saveCustomSceneToFile()
 		}
 
 		// Bloom settings
-		if (_fe3d.gfx_isSkyExposureEnabled())
+		if (_fe3d.gfx_isBloomEnabled())
 		{
 			// Data to save
 			auto type = static_cast<unsigned int>(_fe3d.gfx_getBloomType());

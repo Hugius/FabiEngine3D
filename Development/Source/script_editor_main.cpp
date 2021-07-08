@@ -49,12 +49,13 @@ void ScriptEditor::load()
 	_fe3d.camera_load(CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, CAMERA_POSITION, -90.0f, 0.0f);
 
 	// Background
-	_fe3d.skyEntity_setLightness("@@engineBackground", 0.3f);
+	_fe3d.skyEntity_setLightness("@@engineBackground", 0.5f);
 
-	// Graphics
+	// Enable default graphics
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 
 	// Selection light
 	_fe3d.lightEntity_add("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
@@ -74,10 +75,11 @@ void ScriptEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Graphics
+	// Disable default graphics
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableBloom(true);
 
 	// Delete added entities
 	_fe3d.modelEntity_deleteAll();

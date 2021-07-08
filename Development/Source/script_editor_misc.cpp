@@ -14,6 +14,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		Vec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
 		_fe3d.billboardEntity_add("separator", SEPARATOR_COLOR, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
 			Vec3(0.0f), separatorSize, false, false);
+		_fe3d.billboardEntity_setBloomed("separator", true);
 
 		// Create visible billboards for display and invisible billboards for logic
 		for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
@@ -34,6 +35,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			// Create line number BILLBOARD
 			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, FONT_PATH, LINE_NUMBER_COLOR, 
 				lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f), Vec3(0.0f), lineNumberSize, 0, 0);
+			_fe3d.billboardEntity_setBloomed(lineNumberID, true);
 			
 			// Create line number AABB
 			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH);
@@ -43,6 +45,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			// Create line text display BILLBOARD
 			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, CHARACTER_COLOR, 
 				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
+			_fe3d.billboardEntity_setBloomed(lineTextID, true);
 
 			// Iterate through every character
 			for (unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)

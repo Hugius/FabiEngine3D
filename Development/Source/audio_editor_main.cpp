@@ -51,7 +51,10 @@ void AudioEditor::load()
 	loadAudioEntitiesFromFile();
 
 	// Miscellaneous
-	_fe3d.billboardEntity_add("@@audioStatus", "engine_assets\\textures\\stop.png", Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false, true);
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png", 
+		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
+	_fe3d.billboardEntity_setBloomed("@@icon", true);
 	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
@@ -66,7 +69,7 @@ void AudioEditor::unload()
 	_unloadGUI();
 
 	// Delete everything
-	_fe3d.billboardEntity_delete("@@audioStatus");
+	_fe3d.billboardEntity_delete("@@icon");
 	_fe3d.soundEntity_deleteAll();
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");

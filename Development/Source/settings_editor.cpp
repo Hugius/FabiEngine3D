@@ -1,6 +1,7 @@
 #include "settings_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -96,12 +97,22 @@ void SettingsEditor::load()
 	loadSettings();
 	
 	// Miscellaneous
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\settings.png", 
+		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
+	_fe3d.billboardEntity_setBloomed("@@icon", true);
+	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
 	_isEditorLoaded = true;
 }
 
 void SettingsEditor::unload()
 {
+	// GUI
 	_unloadGUI();
+
+	// Miscellaneous
+	_fe3d.gfx_disableBloom();
+	_fe3d.billboardEntity_delete("@@icon");
 	_isEditorLoaded = false;
 }
 
@@ -178,6 +189,7 @@ void SettingsEditor::update()
 				{
 					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+					return;
 				}
 				else if (screen->getButton("isFxaaEnabled")->isHovered())
 				{
@@ -227,6 +239,9 @@ void SettingsEditor::update()
 
 			// Update button contents
 			screen->getButton("isFxaaEnabled")->changeTextContent(isFxaaEnabled ? "FXAA: ON" : "FXAA: OFF");
+
+			// Miscellaneous
+			_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
 		}
 	}
 }

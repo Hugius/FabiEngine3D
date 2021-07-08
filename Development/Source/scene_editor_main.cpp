@@ -23,7 +23,7 @@ void SceneEditor::load()
 	// Default camera
 	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
 
-	// Default graphics
+	// Enable default graphics
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.5f);

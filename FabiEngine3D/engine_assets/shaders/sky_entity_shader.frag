@@ -23,17 +23,20 @@ layout (location = 1) out vec4 o_secondaryColor;
 
 void main()
 {
-	// Calculate colors
+	// Sky colors
 	vec3 mainColor = texture(u_mainCubeMap, f_uv).rgb * u_mainColor;
-	vec3 mixColor = texture(u_mixCubeMap, f_uv).rgb * u_mixColor;
+	vec3 mixColor  = texture(u_mixCubeMap, f_uv).rgb * u_mixColor;
 
 	// Apply mixing & lightness
-	float mixValue = clamp(u_mixValue, 0.0, 1.0f);
+	float mixValue  = clamp(u_mixValue, 0.0, 1.0f);
 	float lightness = mix(u_mainLightness, u_mixLightness, mixValue);
 
+	// Calculate primary color
+	vec3 primaryColor;
+	primaryColor  = mix(mainColor, mixColor, mixValue);
+	primaryColor *= lightness;
+
 	// Set final colors
-	o_primaryColor.rgb = mix(mainColor, mixColor, mixValue);
-	o_primaryColor.rgb *= lightness;
-	o_primaryColor.a = 1.0f;
+	o_primaryColor   = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

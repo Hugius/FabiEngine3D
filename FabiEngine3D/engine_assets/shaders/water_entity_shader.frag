@@ -56,24 +56,33 @@ uniform bool u_isPointLightEnabled;
 uniform bool u_isSpecularLightEnabled;
 
 // Out variables
-layout(location = 0) out vec4 o_finalColor;
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec4 getMainColor();
+vec4 calculateWaterColor();
 vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
-float getSpecularValue(vec3 position, vec3 normal);
 vec3 applyFog(vec3 color);
+float getSpecularValue(vec3 position, vec3 normal);
 float convertDepthToLinear(float depth);
 
 // Calculate final fragment color
 void main()
-{    
-	o_finalColor = getMainColor();
-	o_finalColor.rgb = applyFog(o_finalColor.rgb);
+{
+	// Main water color
+	vec4 waterColor = calculateWaterColor();
+
+	// Calculate primary color
+	vec3 primaryColor = waterColor.rgb;
+	primaryColor = applyFog(primaryColor);
+
+	// Set final colors
+	o_primaryColor   = vec4(primaryColor, waterColor.a);
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-vec4 getMainColor()
+vec4 calculateWaterColor()
 {
 	// Variables to be used
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);

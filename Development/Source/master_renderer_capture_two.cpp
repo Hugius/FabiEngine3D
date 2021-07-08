@@ -340,7 +340,7 @@ void MasterRenderer::_captureShadows()
 
 void MasterRenderer::_captureBloom()
 {
-	if (_renderBus.isBloomEnabled())
+	if (_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
 		// Bind
 		_blurRenderer.bind();

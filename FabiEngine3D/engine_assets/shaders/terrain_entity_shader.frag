@@ -88,7 +88,8 @@ uniform int u_shadowMapSize;
 uniform int u_pointLightCount;
 
 // Out variables
-layout (location = 0) out vec4 o_finalColor;
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
 vec3 getNormalMappedVector();
@@ -108,21 +109,22 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    float shadow		   = getShadowValue();
-	vec3 ambient		   = getAmbientLighting();
-	vec3 directional	   = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
-	vec3 point			   = getPointLighting(normal);
-	vec3 spot			   = getSpotLighting(normal);
+    float shadow	 = getShadowValue();
+	vec3 ambient	 = getAmbientLighting();
+	vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
+	vec3 point		 = getPointLighting(normal);
+	vec3 spot		 = getSpotLighting(normal);
 
-	// Apply lighting
-	vec3 color;
-	color = getTextureColor();
-	color *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
-	color *= u_lightness; // Lightness
-	color = applyFog(color);
+	// Calculate primary color
+	vec3 primaryColor;
+	primaryColor  = getTextureColor();
+	primaryColor *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
+	primaryColor *= u_lightness; // Lightness
+	primaryColor  = applyFog(primaryColor);
 
-	// Set final color
-	o_finalColor = vec4(color, 1.0f);
+	// Set final colors
+	o_primaryColor   = vec4(primaryColor, 1.0f);
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 // Calculate new normal vector

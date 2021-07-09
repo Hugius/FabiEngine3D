@@ -65,13 +65,13 @@ void CoreEngine::_updateApplication()
 			_timer.stopDeltaPart();
 
 			// Audio updates
-			_timer.startDeltaPart("guiEntityUpdate");
+			_timer.startDeltaPart("audioUpdate");
 			_audioPlayer.update(_camera, _audioManager.getSounds(), _audioManager.getMusic());
 			_timer.stopDeltaPart();
 		}
 
 		// Always update 2D logic (except for sprite animations), because of engine GUI interaction
-		_timer.startDeltaPart("imageTextUpdate");
+		_timer.startDeltaPart("guiEntityUpdate");
 		(!_isPaused) ? _imageEntityManager.updateSpriteAnimations() : void();
 		_imageEntityManager.update();
 		_textEntityManager.update();

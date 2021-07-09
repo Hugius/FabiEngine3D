@@ -2,6 +2,7 @@
 #include "configuration.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 Camera::Camera(RenderBus& renderBus, Window& window) :
 	_renderBus(renderBus),
@@ -35,7 +36,7 @@ void Camera::reset()
 	_maxPitch = 90.0f;
 
 	// Booleans
-	_isLookatViewEabled = false;
+	_isThirdPersonViewEnabled = false;
 	_isFirstPersonViewEnabled = false;
 	_isYawLocked = false;
 	_isPitchLocked = false;
@@ -83,29 +84,77 @@ void Camera::update(Ivec2 lastCursorPosition)
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
-		// Calculate yaw
+		// Update yaw
 		if (!_isYawLocked)
 		{
 			_yawAcceleration += xOffset;
+			_yawAcceleration = std::clamp(_yawAcceleration, -MAX_YAW_ACCELERATION, MAX_YAW_ACCELERATION);
+			_yaw += _yawAcceleration;
+			_yawAcceleration *= 0.75f;
 		}
 
-		// Calculate pitch
+		// Update pitch
 		if (!_isPitchLocked)
 		{
 			_pitchAcceleration += yOffset;
+			_pitchAcceleration = std::clamp(_pitchAcceleration, -MAX_PITCH_ACCELERATION, MAX_PITCH_ACCELERATION);
+			_pitch += _pitchAcceleration;
+			_pitchAcceleration *= 0.75f;
 		}
 
 		// Spawn mouse in middle of screen
 		_window.setCursorPosition({ xMiddle, yMiddle });
 	}
 
-	// Update yaw & pitch movements
-	_yawAcceleration = std::clamp(_yawAcceleration, -MAX_YAW_ACCELERATION, MAX_YAW_ACCELERATION);
-	_pitchAcceleration = std::clamp(_pitchAcceleration, -MAX_PITCH_ACCELERATION, MAX_PITCH_ACCELERATION);
-	_yaw += _yawAcceleration;
-	_pitch += _pitchAcceleration;
-	_yawAcceleration *= 0.75f;
-	_pitchAcceleration *= 0.75f;
+	// Update third person camera
+	if (_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
+	{
+		// Offset between current mouse position & middle of the screen
+		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
+		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
+
+		// Applying mouse sensitivity
+		xOffset *= _mouseSensitivity;
+		yOffset *= _mouseSensitivity;
+
+		// Calculate overall mouse offset
+		_mouseOffset = (xOffset + yOffset) / 2.0f;
+
+		// Update horizontal angle
+		if (!_isYawLocked)
+		{
+			_thirdPersonHorizontalAngle += xOffset;
+		}
+
+		// Update vertical angle
+		if (!_isPitchLocked)
+		{
+			_thirdPersonVerticalAngle -= yOffset;
+		}
+
+		// Limit angles
+		_thirdPersonHorizontalAngle = std::fmodf(_thirdPersonHorizontalAngle, 360.0f);
+		_thirdPersonVerticalAngle = std::clamp(_thirdPersonVerticalAngle, -90.0f, 90.0f);
+
+		// Calculate position multipliers
+		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonVerticalAngle) * sin(Math::degreesToRadians(_thirdPersonHorizontalAngle)));
+		float yMultiplier = sin(Math::degreesToRadians(_thirdPersonVerticalAngle));
+		float zMultiplier = cos(Math::degreesToRadians(_thirdPersonHorizontalAngle)) * cos(Math::degreesToRadians(_thirdPersonVerticalAngle));
+		
+		// Calculate camera position
+		_position.x = (_thirdPersonDistance * xMultiplier);
+		_position.y = (_thirdPersonDistance * yMultiplier);
+		_position.z = (_thirdPersonDistance * zMultiplier);
+
+		// Calculate yaw
+		_yaw = Math::radiansToDegrees(atan2f(_position.z, _position.x)) + 180.0f;
+
+		// Calculate pitch
+		_pitch = sin(Math::degreesToRadians(_thirdPersonVerticalAngle)) * -90.0f;
+
+		// Spawn mouse in middle of screen
+		_window.setCursorPosition({ xMiddle, yMiddle });
+	}
 
 	// Limit yaw
 	_yaw = std::fmodf(_yaw, 360.0f);
@@ -119,32 +168,18 @@ void Camera::update(Ivec2 lastCursorPosition)
 
 void Camera::updateMatrices()
 {
-	// Clamp the camera position
-	_position.x = std::clamp(_position.x, -_farZ, _farZ);
-	_position.y = std::clamp(_position.y, -_farZ, _farZ);
-	_position.z = std::clamp(_position.z, -_farZ, _farZ);
-
 	// Lookat front vector
-	if(_isLookatViewEabled)
-	{
-		Vec3 offset = Vec3(0.00001f); // Small offset, otherwise screen goes black in certain circumstances
-		_front = (_lookatPosition + offset) - _position;
-		_front.normalize();
-	}
-	else // First person front vector
-	{
-		_front.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
-		_front.y = sin(Math::degreesToRadians(_pitch));
-		_front.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
-		_front.normalize();
-	}
+	_front.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
+	_front.y = sin(Math::degreesToRadians(_pitch));
+	_front.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
+	_front.normalize();
 
 	// Calculate the view matrix input
-	_right = _front.cross(UP);
+	_right = _front.cross(UP_VECTOR);
 	_right.normalize();
 	
 	// View matrix
-	_viewMatrix = Matrix44::createView(_position, _position + _front, UP);
+	_viewMatrix = Matrix44::createView(_position, _position + _front, UP_VECTOR);
 
 	// Projection matrix
 	_projectionMatrix = Matrix44::createProjection(Math::degreesToRadians(_fov), _aspectRatio, _nearZ, _farZ);

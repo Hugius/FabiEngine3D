@@ -70,8 +70,8 @@ public:
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw, float pitch);
-	void camera_enableLookatView();
-	void camera_disableLookatView();
+	void camera_enableThirdPersonView();
+	void camera_disableThirdPersonView();
 	void camera_enableFirstPersonView();
 	void camera_disableFirstPersonView();
 	void camera_translateFollowX(float speed);
@@ -80,6 +80,7 @@ public:
 	void camera_translate(Vec3 translation);
 	void camera_setPosition(Vec3 position);
 	void camera_setLookatPosition(Vec3 position);
+	void camera_setThirdPersonDistance(float distance);
 	void camera_lockYaw();
 	void camera_unlockYaw();
 	void camera_lockPitch();
@@ -104,7 +105,7 @@ public:
 	const float camera_getFarDistance();
 	const float camera_getMouseOffset();
 	const float camera_getMaxPitch();
-	const bool camera_isLookatViewEnabled();
+	const bool camera_isThirdPersonViewEnabled();
 	const bool camera_isFirstPersonViewEnabled();
 
 	// Sky entity interface - setters

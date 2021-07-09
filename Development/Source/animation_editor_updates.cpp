@@ -293,9 +293,9 @@ void AnimationEditor::_updateCamera()
 			float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 			// Update camera
-			if (!_fe3d.camera_isLookatViewEnabled())
+			if (!_fe3d.camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_enableLookatView();
+				_fe3d.camera_enableThirdPersonView();
 			}
 			_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
 			_fe3d.camera_setLookatPosition(_cameraLookatPosition);
@@ -313,9 +313,9 @@ void AnimationEditor::_updateCamera()
 		else
 		{
 			// Set default camera view
-			if (_fe3d.camera_isLookatViewEnabled())
+			if (_fe3d.camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_disableLookatView();
+				_fe3d.camera_disableThirdPersonView();
 				_fe3d.camera_setPosition(Vec3(0.0f));
 				_fe3d.camera_setLookatPosition(Vec3(0.0f));
 				_cameraLookatPosition = Vec3(0.0f);

@@ -138,6 +138,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_captureLensFlare();
 		_capturePostProcessing();
 		_captureMotionBlur(camera);
+		_timer.stopDeltaPart();
 
 		// 2D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -156,7 +157,6 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 			
 		}
-		_timer.stopDeltaPart();
 
 		// Render IMAGE entities & TEXT entities
 		_timer.startDeltaPart("guiEntityRender");

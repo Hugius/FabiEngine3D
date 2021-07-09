@@ -12,14 +12,14 @@ void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, Vec3 startPos
 	_core->_camera.setFarZ(farZ);
 }
 
-void FabiEngine3D::camera_enableLookatView()
+void FabiEngine3D::camera_enableThirdPersonView()
 {
-	_core->_camera.enableLookatView();
+	_core->_camera.enableThirdPersonView();
 }
 
-void FabiEngine3D::camera_disableLookatView()
+void FabiEngine3D::camera_disableThirdPersonView()
 {
-	_core->_camera.disableLookatView();
+	_core->_camera.disableThirdPersonView();
 }
 
 void FabiEngine3D::camera_enableFirstPersonView()
@@ -60,6 +60,11 @@ void FabiEngine3D::camera_setPosition(Vec3 position)
 void FabiEngine3D::camera_setLookatPosition(Vec3 position)
 {
 	_core->_camera.setLookatPosition(position);
+}
+
+void FabiEngine3D::camera_setThirdPersonDistance(float distance)
+{
+	_core->_camera.setThirdPersonDistance(distance);
 }
 
 void FabiEngine3D::camera_lockYaw()
@@ -172,7 +177,7 @@ const Vec3 FabiEngine3D::camera_getLookatPosition()
 	return _core->_camera.getLookatPosition();
 }
 
-const bool FabiEngine3D::camera_isLookatViewEnabled()
+const bool FabiEngine3D::camera_isThirdPersonViewEnabled()
 {
 	return _core->_camera.isLookatViewEnabled();
 }

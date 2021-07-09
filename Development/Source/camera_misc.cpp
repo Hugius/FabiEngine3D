@@ -25,39 +25,11 @@ void Camera::translateFollowZY(float speed)
 	_position.z += (_front.z * speed);
 }
 
-void Camera::enableLookatView()
-{
-	if (_isFirstPersonViewEnabled)
-	{
-		Logger::throwWarning("Tried to enable lookat view: first person view already enabled!");
-	}
-	else if (_isLookatViewEabled)
-	{
-		Logger::throwWarning("Tried to enable lookat view: already enabled!");
-	}
-	else
-	{
-		_isLookatViewEabled = true;
-	}
-}
-
-void Camera::disableLookatView()
-{
-	if (_isLookatViewEabled)
-	{
-		_isLookatViewEabled = false;
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable lookat view: not enabled!");
-	}
-}
-
 void Camera::enableFirstPersonView()
 {
-	if (_isLookatViewEabled)
+	if (_isThirdPersonViewEnabled)
 	{
-		Logger::throwWarning("Tried to enable first perso view: lookat view already enabled!");
+		Logger::throwWarning("Tried to enable first person view: third person view already enabled!");
 	}
 	else if (_isFirstPersonViewEnabled)
 	{
@@ -79,6 +51,34 @@ void Camera::disableFirstPersonView()
 	else
 	{
 		Logger::throwWarning("Tried to disable first person view: not enabled!");
+	}
+}
+
+void Camera::enableThirdPersonView()
+{
+	if (_isFirstPersonViewEnabled)
+	{
+		Logger::throwWarning("Tried to enable third person view: first person view already enabled!");
+	}
+	else if (_isThirdPersonViewEnabled)
+	{
+		Logger::throwWarning("Tried to enable third person view: already enabled!");
+	}
+	else
+	{
+		_isThirdPersonViewEnabled = true;
+	}
+}
+
+void Camera::disableThirdPersonView()
+{
+	if (_isThirdPersonViewEnabled)
+	{
+		_isThirdPersonViewEnabled = false;
+	}
+	else
+	{
+		Logger::throwWarning("Tried to disable third person view: not enabled!");
 	}
 }
 
@@ -120,74 +120,84 @@ void Camera::setMaxPitch(float value)
 	_maxPitch = value;
 }
 
-const Vec3 Camera::getPosition() const
+void Camera::setThirdPersonDistance(float value)
+{
+	_thirdPersonDistance = value;
+}
+
+const Vec3 Camera::getPosition()
 {
 	return _position;
 }
 
-const Vec3 Camera::getFront() const
+const Vec3 Camera::getFront()
 {
 	return _front;
 }
 
-const Vec3 Camera::getLookatPosition() const
+const Vec3 Camera::getLookatPosition()
 {
 	return _lookatPosition;
 }
 
-const float Camera::getYaw() const
+const float Camera::getYaw()
 {
 	return _yaw;
 }
 
-const float Camera::getPitch() const
+const float Camera::getPitch()
 {
 	return _pitch;
 }
 
-const float Camera::getNearZ() const
+const float Camera::getNearZ()
 {
 	return _nearZ;
 }
 
-const float Camera::getFarZ() const
+const float Camera::getFarZ()
 {
 	return _farZ;
 }
 
-const float Camera::getMouseSensitivity() const
+const float Camera::getMouseSensitivity()
 {
 	return _mouseSensitivity;
 }
 
-const float Camera::getMouseOffset() const
+const float Camera::getMouseOffset()
 {
 	return _mouseOffset;
 }
 
-const float Camera::getMaxPitch() const
+const float Camera::getMaxPitch()
 {
 	return _maxPitch;
 }
 
-const float Camera::getFOV() const
+const float Camera::getThirdPersonDistance()
+{
+	return _thirdPersonDistance;
+}
+
+const float Camera::getFOV()
 {
 	return _fov;
 }
 
-const float Camera::getAspectRatio() const
+const float Camera::getAspectRatio()
 {
 	return _aspectRatio;
 }
 
-const bool Camera::isFirstPersonViewEnabled() const
+const bool Camera::isFirstPersonViewEnabled()
 {
 	return _isFirstPersonViewEnabled;
 }
 
-const bool Camera::isLookatViewEnabled() const
+const bool Camera::isLookatViewEnabled()
 {
-	return _isLookatViewEabled;
+	return _isThirdPersonViewEnabled;
 }
 
 void Camera::translate(Vec3 translation)
@@ -230,12 +240,12 @@ void Camera::notifyCursorCenter()
 	_cursorIsBeingCentered = true;
 }
 
-const Matrix44 & Camera::getViewMatrix() const
+const Matrix44& Camera::getViewMatrix()
 {
 	return _viewMatrix;
 }
 
-const Matrix44 & Camera::getProjectionMatrix() const
+const Matrix44& Camera::getProjectionMatrix()
 {
 	return _projectionMatrix;
 }

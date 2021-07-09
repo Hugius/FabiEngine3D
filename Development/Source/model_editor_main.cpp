@@ -27,7 +27,7 @@ void ModelEditor::load()
 
 	// Camera
 	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, CAMERA_POSITION, 0.0f, 0.0f);
-	_fe3d.camera_enableLookatView();
+	_fe3d.camera_enableThirdPersonView();
 
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -65,7 +65,7 @@ void ModelEditor::unload()
 	_unloadGUI();
 
 	// Camera
-	_fe3d.camera_disableLookatView();
+	_fe3d.camera_disableThirdPersonView();
 
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);

@@ -137,7 +137,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_enableLookatView();
+			_fe3d.camera_enableThirdPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -145,7 +145,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_disableLookatView();
+			_fe3d.camera_disableThirdPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -153,7 +153,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.camera_isLookatViewEnabled();
+			auto result = _fe3d.camera_isThirdPersonViewEnabled();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}

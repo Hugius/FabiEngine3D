@@ -26,8 +26,9 @@ void ModelEditor::load()
 	_loadGUI();
 
 	// Camera
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, CAMERA_POSITION, 0.0f, 0.0f);
+	_fe3d.camera_reset();
 	_fe3d.camera_enableThirdPersonView();
+	_fe3d.camera_setMouseSensitivity(0.05f);
 
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -52,7 +53,7 @@ void ModelEditor::load()
 	loadModelEntitiesFromFile();
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_fe3d.misc_setLevelOfDetailDistance(Config::DEFAULT_CAMERA_FAR);
+	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");

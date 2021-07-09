@@ -35,7 +35,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
 		// Default camera
-		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+		camera_reset();
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles(true);
@@ -57,7 +57,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_setMainRenderingColor(Vec3(0.0f));
 
 		// Default camera
-		camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+		camera_reset();
 
 		// Default engine background
 		string textureFolderPath = "engine_assets\\textures\\";
@@ -112,7 +112,9 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			// Restore camera
 			float lastYaw = camera_getYaw();
 			float lastPitch = camera_getPitch();
-			camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), lastYaw, lastPitch);
+			camera_reset();
+			camera_setYaw(lastYaw);
+			camera_setPitch(lastPitch);
 
 			// Restore background
 			skyEntity_select("@@engineBackground");

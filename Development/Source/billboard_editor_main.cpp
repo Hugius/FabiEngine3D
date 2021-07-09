@@ -19,7 +19,8 @@ void BillboardEditor::load()
 	_loadGUI();
 
 	// Camera
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, CAMERA_POSITION, -90.0f, 0.0f);
+	_fe3d.camera_reset();
+	_fe3d.camera_setYaw(-90.0f);
 	_fe3d.camera_enableThirdPersonView();
 
 	// Enable default graphics

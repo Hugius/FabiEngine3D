@@ -26,7 +26,8 @@ void AudioEditor::load()
 	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png", 
 		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
 	_fe3d.billboardEntity_setBloomed("@@icon", true);
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
+	_fe3d.camera_reset();
+	_fe3d.camera_setYaw(-90.0f);
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
 	_isEditorLoaded = true;

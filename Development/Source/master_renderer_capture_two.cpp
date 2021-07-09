@@ -159,18 +159,18 @@ void MasterRenderer::_capturePostProcessing()
 void MasterRenderer::_captureMotionBlur(Camera& camera)
 {
 	// Temporary values
-	static bool firstTime = true;
+	static bool isFirstTime = true;
 	static float lastYaw = 0.0f;
 	static float lastPitch = 0.0f;
 
 	// Timing values
 	static std::chrono::high_resolution_clock::time_point previousMS = std::chrono::high_resolution_clock::now();
-	std::chrono::high_resolution_clock::time_point currentMS = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(currentMS - previousMS);
-	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
+	const std::chrono::high_resolution_clock::time_point currentMS = std::chrono::high_resolution_clock::now();
+	const std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(currentMS - previousMS);
+	const float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 
 	// If 1 frame passed
-	if (elapsedMS >= Config::MS_PER_UPDATE || firstTime)
+	if (elapsedMS >= Config::MS_PER_UPDATE || isFirstTime)
 	{
 		// Set for next frame
 		previousMS = currentMS;
@@ -225,7 +225,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			}
 
 			// Miscellaneous
-			firstTime = false;
+			isFirstTime = false;
 		}
 		else // No motion blur
 		{

@@ -1,7 +1,6 @@
 #include "settings_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
-#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -31,7 +30,8 @@ void SettingsEditor::load()
 	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\settings.png", 
 		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
 	_fe3d.billboardEntity_setBloomed("@@icon", true);
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), -90.0f, 0.0f);
+	_fe3d.camera_reset();
+	_fe3d.camera_setYaw(-90.0f);
 	_isEditorLoaded = true;
 }
 
@@ -135,11 +135,11 @@ void SettingsEditor::update()
 
 void SettingsEditor::loadDefaultSettings()
 {
-	Config::DEFAULT_FXAA_ENABLED ? _fe3d.gfx_enableFXAA() : void();
-	_fe3d.gfx_setShadowQuality(Config::DEFAULT_SHADOW_QUALITY);
-	_fe3d.gfx_setReflectionQuality(Config::DEFAULT_REFLECTION_QUALITY);
-	_fe3d.gfx_setRefractionQuality(Config::DEFAULT_REFRACTION_QUALITY);
-	_fe3d.misc_setMaxAudioChannels(Config::DEFAULT_AUDIO_CHANNELS);
+	DEFAULT_FXAA_ENABLED ? _fe3d.gfx_enableFXAA() : void();
+	_fe3d.gfx_setShadowQuality(DEFAULT_SHADOW_QUALITY);
+	_fe3d.gfx_setReflectionQuality(DEFAULT_REFLECTION_QUALITY);
+	_fe3d.gfx_setRefractionQuality(DEFAULT_REFRACTION_QUALITY);
+	_fe3d.misc_setMaxAudioChannels(DEFAULT_AUDIO_CHANNELS);
 }
 
 void SettingsEditor::loadSettingsFromFile()

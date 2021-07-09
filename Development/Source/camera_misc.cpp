@@ -135,9 +135,9 @@ const Vec3 Camera::getFront()
 	return _front;
 }
 
-const Vec3 Camera::getLookatPosition()
+const Vec3 Camera::getThirdPersonPosition()
 {
-	return _lookatPosition;
+	return _thirdPersonPosition;
 }
 
 const float Camera::getYaw()
@@ -195,7 +195,7 @@ const bool Camera::isFirstPersonViewEnabled()
 	return _isFirstPersonViewEnabled;
 }
 
-const bool Camera::isLookatViewEnabled()
+const bool Camera::isThirdPersonViewEnabled()
 {
 	return _isThirdPersonViewEnabled;
 }
@@ -210,9 +210,9 @@ void Camera::setPosition(Vec3 value)
 	_position = value;
 }
 
-void Camera::setLookatPosition(Vec3 value)
+void Camera::setThirdPersonPosition(Vec3 value)
 {
-	_lookatPosition = value;
+	_thirdPersonPosition = value;
 }
 
 void Camera::lockYaw()

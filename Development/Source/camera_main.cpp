@@ -6,9 +6,10 @@
 
 Camera::Camera(RenderBus& renderBus, Window& window) :
 	_renderBus(renderBus),
-	_window(window)
+	_window(window),
+	_aspectRatio(static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y))
 {
-	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
+	reset();
 }
 
 void Camera::reset()
@@ -18,26 +19,27 @@ void Camera::reset()
 	_projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
+	_position = DEFAULT_POSITION;
+	_thirdPersonPosition = DEFAULT_POSITION;
 	_right = Vec3(0.0f);
 	_front = Vec3(0.0f);
-	_position = Vec3(0.0f);
-	_lookatPosition = Vec3(0.0f);
 
 	// Floats
-	_fov = 0.0f;
+	_fov = DEFAULT_FOV_ANGLE;
+	_nearZ = DEFAULT_NEAR_Z;
+	_farZ = DEFAULT_FAR_Z;
+	_yaw = DEFAULT_YAW_ANGLE;
+	_pitch = DEFAULT_PITCH_ANGLE;
+	_maxPitch = MAX_PITCH_ANGLE;
+	_mouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
 	_yawAcceleration = 0.0f;
 	_pitchAcceleration = 0.0f;
-	_yaw = 0.0f;
-	_pitch = 0.0f;
-	_nearZ = 0.0f;
-	_farZ = 0.0f;
-	_mouseSensitivity = 0.01f;
 	_mouseOffset = 0.0f;
-	_maxPitch = 90.0f;
+	_thirdPersonDistance = 0.0f;
 
 	// Booleans
-	_isThirdPersonViewEnabled = false;
 	_isFirstPersonViewEnabled = false;
+	_isThirdPersonViewEnabled = false;
 	_isYawLocked = false;
 	_isPitchLocked = false;
 	_mustCenterCursor = false;
@@ -134,17 +136,17 @@ void Camera::update(Ivec2 lastCursorPosition)
 
 		// Limit angles
 		_thirdPersonHorizontalAngle = std::fmodf(_thirdPersonHorizontalAngle, 360.0f);
-		_thirdPersonVerticalAngle = std::clamp(_thirdPersonVerticalAngle, -90.0f, 90.0f);
+		_thirdPersonVerticalAngle = std::clamp(_thirdPersonVerticalAngle, -89.0f, 89.0f);
 
 		// Calculate position multipliers
-		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonVerticalAngle) * sin(Math::degreesToRadians(_thirdPersonHorizontalAngle)));
+		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonVerticalAngle)) * sin(Math::degreesToRadians(_thirdPersonHorizontalAngle));
 		float yMultiplier = sin(Math::degreesToRadians(_thirdPersonVerticalAngle));
-		float zMultiplier = cos(Math::degreesToRadians(_thirdPersonHorizontalAngle)) * cos(Math::degreesToRadians(_thirdPersonVerticalAngle));
+		float zMultiplier = cos(Math::degreesToRadians(_thirdPersonVerticalAngle)) * cos(Math::degreesToRadians(_thirdPersonHorizontalAngle));
 		
 		// Calculate camera position
-		_position.x = (_thirdPersonDistance * xMultiplier);
-		_position.y = (_thirdPersonDistance * yMultiplier);
-		_position.z = (_thirdPersonDistance * zMultiplier);
+		_position.x = _thirdPersonPosition.x + (_thirdPersonDistance * xMultiplier);
+		_position.y = _thirdPersonPosition.y + (_thirdPersonDistance * yMultiplier);
+		_position.z = _thirdPersonPosition.z + (_thirdPersonDistance * zMultiplier);
 
 		// Calculate yaw
 		_yaw = Math::radiansToDegrees(atan2f(_position.z, _position.x)) + 180.0f;

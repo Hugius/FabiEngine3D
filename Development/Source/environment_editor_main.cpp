@@ -19,7 +19,7 @@ void EnvironmentEditor::load()
 	_loadGUI();
 
 	// Default camera
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+	_fe3d.camera_reset();
 	
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);

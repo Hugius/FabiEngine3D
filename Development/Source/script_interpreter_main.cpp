@@ -184,7 +184,7 @@ void ScriptInterpreter::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 
 	// Default camera
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+	_fe3d.camera_reset();
 
 	// Enable default graphics
 	_fe3d.gfx_enableSpecularLighting();
@@ -293,8 +293,8 @@ void ScriptInterpreter::unload()
 	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
 
-	// Reset camera
-	_fe3d.camera_load(Config::DEFAULT_CAMERA_FOV, Config::DEFAULT_CAMERA_NEAR, Config::DEFAULT_CAMERA_FAR, Vec3(0.0f), 0.0f, 0.0f);
+	// Default camera
+	_fe3d.camera_reset();
 
 	// Reset audio
 	if (!_fe3d.misc_isSoundsEnabled())

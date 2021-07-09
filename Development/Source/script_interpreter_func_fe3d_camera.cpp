@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_setLookatPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.camera_setThirdPersonPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -45,7 +45,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.camera_getLookatPosition();
+			auto result = _fe3d.camera_getThirdPersonPosition();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}

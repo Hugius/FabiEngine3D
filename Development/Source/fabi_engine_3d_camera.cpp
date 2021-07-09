@@ -1,15 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw, float pitch)
+void FabiEngine3D::camera_reset()
 {
 	_core->_camera.reset();
-	_core->_camera.setPosition(startPosition);
-	_core->_camera.setFOV(fov);
-	_core->_camera.setYaw(yaw);
-	_core->_camera.setPitch(pitch);
-	_core->_camera.setNearZ(nearZ);
-	_core->_camera.setFarZ(farZ);
 }
 
 void FabiEngine3D::camera_enableThirdPersonView()
@@ -57,9 +51,9 @@ void FabiEngine3D::camera_setPosition(Vec3 position)
 	_core->_camera.setPosition(position);
 }
 
-void FabiEngine3D::camera_setLookatPosition(Vec3 position)
+void FabiEngine3D::camera_setThirdPersonPosition(Vec3 position)
 {
-	_core->_camera.setLookatPosition(position);
+	_core->_camera.setThirdPersonPosition(position);
 }
 
 void FabiEngine3D::camera_setThirdPersonDistance(float distance)
@@ -87,9 +81,9 @@ void FabiEngine3D::camera_unlockPitch()
 	_core->_camera.unlockPitch();
 }
 
-void FabiEngine3D::camera_setFOV(float fov)
+void FabiEngine3D::camera_setFOV(float angle)
 {
-	_core->_camera.setFOV(fov);
+	_core->_camera.setFOV(angle);
 }
 
 void FabiEngine3D::camera_setMouseSensitivity(float speed)
@@ -97,29 +91,29 @@ void FabiEngine3D::camera_setMouseSensitivity(float speed)
 	_core->_camera.setMouseSensitivity(speed);
 }
 
-void FabiEngine3D::camera_setYaw(float yaw)
+void FabiEngine3D::camera_setYaw(float angle)
 {
-	_core->_camera.setYaw(yaw);
+	_core->_camera.setYaw(angle);
 }
 
-void FabiEngine3D::camera_setPitch(float pitch)
+void FabiEngine3D::camera_setPitch(float angle)
 {
-	_core->_camera.setPitch(pitch);
+	_core->_camera.setPitch(angle);
 }
 
-void FabiEngine3D::camera_setNearDistance(float nearZ)
+void FabiEngine3D::camera_setNearZ(float distance)
 {
-	_core->_camera.setNearZ(nearZ);
+	_core->_camera.setNearZ(distance);
 }
 
-void FabiEngine3D::camera_setFarDistance(float farZ)
+void FabiEngine3D::camera_setFarZ(float distance)
 {
-	_core->_camera.setFarZ(farZ);
+	_core->_camera.setFarZ(distance);
 }
 
-void FabiEngine3D::camera_setMaxPitch(float pitch)
+void FabiEngine3D::camera_setMaxPitch(float angle)
 {
-	_core->_camera.setMaxPitch(pitch);
+	_core->_camera.setMaxPitch(angle);
 }
 
 const float FabiEngine3D::camera_getYaw()
@@ -172,14 +166,14 @@ const Vec3 FabiEngine3D::camera_getPosition()
 	return _core->_camera.getPosition();
 }
 
-const Vec3 FabiEngine3D::camera_getLookatPosition()
+const Vec3 FabiEngine3D::camera_getThirdPersonPosition()
 {
-	return _core->_camera.getLookatPosition();
+	return _core->_camera.getThirdPersonPosition();
 }
 
 const bool FabiEngine3D::camera_isThirdPersonViewEnabled()
 {
-	return _core->_camera.isLookatViewEnabled();
+	return _core->_camera.isThirdPersonViewEnabled();
 }
 
 const bool FabiEngine3D::camera_isFirstPersonViewEnabled()

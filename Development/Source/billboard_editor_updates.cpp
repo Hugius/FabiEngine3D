@@ -255,7 +255,7 @@ void BillboardEditor::_updateCamera()
 
 			// Update camera lookat position
 			Vec3 cameraLookatPosition = Vec3(0.0f, cameraHeight, 0.0f);
-			_fe3d.camera_setLookatPosition(cameraLookatPosition);
+			_fe3d.camera_setThirdPersonPosition(cameraLookatPosition);
 
 			// Disable shadows
 			if (_fe3d.gfx_isShadowsEnabled())
@@ -271,7 +271,7 @@ void BillboardEditor::_updateCamera()
 		{
 			// Set default camera view
 			_fe3d.camera_setPosition(CAMERA_POSITION);
-			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
+			_fe3d.camera_setThirdPersonPosition(BILLBOARD_POSITION);
 			_totalCameraRotation = 0.0f;
 			_cameraAcceleration = 0.0f;
 

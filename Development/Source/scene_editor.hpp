@@ -131,7 +131,7 @@ private:
 	void _selectSound(const string& soundID);
 	void _activateSound(const string& soundID);
 	void _handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, float multiplier = 1.0f,
-		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
+		float minimum = std::numeric_limits<float>::lowest(), float maximum = std::numeric_limits<float>::max());
 
 	// Instances
 	FabiEngine3D& _fe3d;

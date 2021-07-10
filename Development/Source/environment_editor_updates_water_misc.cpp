@@ -200,10 +200,10 @@ void EnvironmentEditor::_updateWaterCamera()
 			// Update camera
 			if (!_fe3d.camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_enableThirdPersonView();
+				//_fe3d.camera_enableThirdPersonView();
 			}
 			_fe3d.camera_setPosition(Vec3(x, y, z));
-			_fe3d.camera_setThirdPersonPosition(waterPosition);
+			_fe3d.camera_setThirdPersonLookat(waterPosition);
 		}
 		else
 		{
@@ -212,7 +212,7 @@ void EnvironmentEditor::_updateWaterCamera()
 			{
 				_fe3d.camera_disableThirdPersonView();
 				_fe3d.camera_setPosition(Vec3(0.0f));
-				_fe3d.camera_setThirdPersonPosition(Vec3(0.0f));
+				_fe3d.camera_setThirdPersonLookat(Vec3(0.0f));
 				_totalCameraRotation = 0.0f;
 				_cameraAcceleration = 0.0f;
 			}

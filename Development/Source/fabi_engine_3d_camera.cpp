@@ -6,24 +6,24 @@ void FabiEngine3D::camera_reset()
 	_core->_camera.reset();
 }
 
-void FabiEngine3D::camera_enableThirdPersonView()
+void FabiEngine3D::camera_enableFirstPersonView(float initialYaw, float initialPitch)
 {
-	_core->_camera.enableThirdPersonView();
-}
-
-void FabiEngine3D::camera_disableThirdPersonView()
-{
-	_core->_camera.disableThirdPersonView();
-}
-
-void FabiEngine3D::camera_enableFirstPersonView()
-{
-	_core->_camera.enableFirstPersonView();
+	_core->_camera.enableFirstPersonView(initialYaw, initialPitch);
 }
 
 void FabiEngine3D::camera_disableFirstPersonView()
 {
 	_core->_camera.disableFirstPersonView();
+}
+
+void FabiEngine3D::camera_enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance)
+{
+	_core->_camera.enableThirdPersonView(initialYaw, initialPitch, initialDistance);
+}
+
+void FabiEngine3D::camera_disableThirdPersonView()
+{
+	_core->_camera.disableThirdPersonView();
 }
 
 void FabiEngine3D::camera_translateFollowX(float speed)
@@ -51,34 +51,9 @@ void FabiEngine3D::camera_setPosition(Vec3 position)
 	_core->_camera.setPosition(position);
 }
 
-void FabiEngine3D::camera_setThirdPersonPosition(Vec3 position)
+void FabiEngine3D::camera_setThirdPersonLookat(Vec3 position)
 {
-	_core->_camera.setThirdPersonPosition(position);
-}
-
-void FabiEngine3D::camera_setThirdPersonDistance(float distance)
-{
-	_core->_camera.setThirdPersonDistance(distance);
-}
-
-void FabiEngine3D::camera_lockYaw()
-{
-	_core->_camera.lockYaw();
-}
-
-void FabiEngine3D::camera_unlockYaw()
-{
-	_core->_camera.unlockYaw();
-}
-
-void FabiEngine3D::camera_lockPitch()
-{
-	_core->_camera.lockPitch();
-}
-
-void FabiEngine3D::camera_unlockPitch()
-{
-	_core->_camera.unlockPitch();
+	_core->_camera.setThirdPersonLookat(position);
 }
 
 void FabiEngine3D::camera_setFOV(float angle)
@@ -111,9 +86,34 @@ void FabiEngine3D::camera_setFarZ(float distance)
 	_core->_camera.setFarZ(distance);
 }
 
-void FabiEngine3D::camera_setMaxPitch(float angle)
+void FabiEngine3D::camera_setMinFirstPersonPitch(float angle)
 {
-	_core->_camera.setMaxPitch(angle);
+	_core->_camera.setMinFirstPersonPitch(angle);
+}
+
+void FabiEngine3D::camera_setMaxFirstPersonPitch(float angle)
+{
+	_core->_camera.setMaxFirstPersonPitch(angle);
+}
+
+void FabiEngine3D::camera_setMinThirdPersonPitch(float angle)
+{
+	_core->_camera.setMinThirdPersonPitch(angle);
+}
+
+void FabiEngine3D::camera_setMaxThirdPersonPitch(float angle)
+{
+	_core->_camera.setMaxThirdPersonPitch(angle);
+}
+
+void FabiEngine3D::camera_setMinThirdPersonDistance(float distance)
+{
+	_core->_camera.setMinThirdPersonDistance(distance);
+}
+
+void FabiEngine3D::camera_setMaxThirdPersonDistance(float distance)
+{
+	_core->_camera.setMaxThirdPersonDistance(distance);
 }
 
 const float FabiEngine3D::camera_getYaw()
@@ -124,6 +124,31 @@ const float FabiEngine3D::camera_getYaw()
 const float FabiEngine3D::camera_getPitch()
 {
 	return _core->_camera.getPitch();
+}
+
+const float FabiEngine3D::camera_getFirstPersonYaw()
+{
+	return _core->_camera.getFirstPersonYaw();
+}
+
+const float FabiEngine3D::camera_getFirstPersonPitch()
+{
+	return _core->_camera.getFirstPersonPitch();
+}
+
+const float FabiEngine3D::camera_getThirdPersonYaw()
+{
+	return _core->_camera.getThirdPersonYaw();
+}
+
+const float FabiEngine3D::camera_getThirdPersonPitch()
+{
+	return _core->_camera.getThirdPersonPitch();
+}
+
+const float FabiEngine3D::camera_getThirdPersonDistance()
+{
+	return _core->_camera.getThirdPersonDistance();
 }
 
 const float FabiEngine3D::camera_getNearDistance()
@@ -139,11 +164,6 @@ const float FabiEngine3D::camera_getFarDistance()
 const float FabiEngine3D::camera_getMouseOffset()
 {
 	return _core->_camera.getMouseOffset();
-}
-
-const float FabiEngine3D::camera_getMaxPitch()
-{
-	return _core->_camera.getMaxPitch();
 }
 
 const float FabiEngine3D::camera_getFOV()
@@ -164,11 +184,6 @@ const float FabiEngine3D::camera_getMouseSensitivity()
 const Vec3 FabiEngine3D::camera_getPosition()
 {
 	return _core->_camera.getPosition();
-}
-
-const Vec3 FabiEngine3D::camera_getThirdPersonPosition()
-{
-	return _core->_camera.getThirdPersonPosition();
 }
 
 const bool FabiEngine3D::camera_isThirdPersonViewEnabled()

@@ -21,7 +21,7 @@ void BillboardEditor::load()
 	// Camera
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(-90.0f);
-	_fe3d.camera_enableThirdPersonView();
+	///_fe3d.camera_enableThirdPersonView();
 
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);

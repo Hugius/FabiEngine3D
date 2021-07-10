@@ -27,8 +27,10 @@ void ModelEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
-	_fe3d.camera_enableThirdPersonView();
-	_fe3d.camera_setMouseSensitivity(0.05f);
+	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+	_fe3d.camera_setPosition(INITIAL_CAMERA_POSITION);
+	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -66,7 +68,10 @@ void ModelEditor::unload()
 	_unloadGUI();
 
 	// Camera
-	_fe3d.camera_disableThirdPersonView();
+	if (_fe3d.camera_isThirdPersonViewEnabled())
+	{
+		_fe3d.camera_disableThirdPersonView();
+	}
 
 	// Disable default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
@@ -89,13 +94,7 @@ void ModelEditor::unload()
 	_loadedModelIDs.clear();
 	_meshFileNames.clear();
 	_cameraLookatPosition = Vec3(0.0f);
-	_totalCursorDifference = Vec2(0.0f, 0.5f);
-	_cameraAcceleration = Vec2(0.0f);
-	_lastCursorPos = Vec2(0.0f);
-	_cameraDistance = 5.0f;
-	_cameraScrollingAcceleration = 0.0f;
 	_aabbTransformationSpeed = 0.1f;
-	_cameraSpeed = 0.1f;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isEditingModel = false;

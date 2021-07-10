@@ -136,7 +136,7 @@ void MasterRenderer::_captureDofBlur()
 	{
 		_blurRenderer.bind();
 		_renderBus.setDofMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 
-			static_cast<int>(BlurType::DOF), 3, 1.0f, BlurDirection::BOTH));
+			static_cast<int>(BlurType::DOF), 6, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
 	else
@@ -181,7 +181,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			// Camera speed and blur direction variables
 			float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
 			float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
-
+			
 			// Temporary values
 			bool hasMoved = false;
 			BlurDirection direction = BlurDirection();
@@ -216,7 +216,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			{
 				_blurRenderer.bind();
 				_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getFinalSceneMap(),
-					static_cast<int>(BlurType::MOTION), 5, 1.0f, direction));
+					static_cast<int>(BlurType::MOTION), 20, 1.0f, direction));
 				_blurRenderer.unbind();
 			}
 			else
@@ -349,12 +349,12 @@ void MasterRenderer::_captureBloom()
 		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
 			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
-				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurCount() * 2, _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		}
 		else
 		{
 			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getSecondarySceneMap(),
-				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+				static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurCount() * 2, _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		}
 
 		// Unbind

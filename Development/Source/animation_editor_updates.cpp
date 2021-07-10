@@ -295,10 +295,10 @@ void AnimationEditor::_updateCamera()
 			// Update camera
 			if (!_fe3d.camera_isThirdPersonViewEnabled())
 			{
-				_fe3d.camera_enableThirdPersonView();
+				//_fe3d.camera_enableThirdPersonView();
 			}
 			_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
-			_fe3d.camera_setThirdPersonPosition(_cameraLookatPosition);
+			_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
 
 			// Disable shadows
 			if (_fe3d.gfx_isShadowsEnabled())
@@ -317,13 +317,13 @@ void AnimationEditor::_updateCamera()
 			{
 				_fe3d.camera_disableThirdPersonView();
 				_fe3d.camera_setPosition(Vec3(0.0f));
-				_fe3d.camera_setThirdPersonPosition(Vec3(0.0f));
+				_fe3d.camera_setThirdPersonLookat(Vec3(0.0f));
 				_cameraLookatPosition = Vec3(0.0f);
 				_totalCursorDifference = Vec2(0.0f);
 				_cameraAcceleration = Vec2(0.0f);
 				_cameraScrollingAcceleration = 0.0f;
 				_cameraDistance = CAMERA_DISTANCE;
-				_cameraSpeed = CAMERA_SPEED;
+				_cameraSpeed = MOUSE_SENSITIVITY;
 			}
 
 			// Disable shadows

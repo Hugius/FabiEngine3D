@@ -189,7 +189,7 @@ void EnvironmentEditor::_updateSkyCamera()
 					// Enable first person view
 					if (!_fe3d.camera_isFirstPersonViewEnabled())
 					{
-						_fe3d.camera_enableFirstPersonView();
+						_fe3d.camera_enableFirstPersonView(0.0f, 0.0f);
 					}
 
 					// Enable motion blur

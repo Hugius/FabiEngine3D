@@ -207,11 +207,15 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 			}
 		}
 
-		// Change camera angle
-		Vec3 cameraPos = camera.getPosition();
-		Vec3 newCameraPos = Vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
-		camera.setPosition(newCameraPos);
-		camera.setPitch(-camera.getPitch());
+		// Move down
+		const Vec3 originalCameraPosition = camera.getPosition();
+		camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+
+		// Look up
+		const float originalCameraPitch = camera.getPitch();
+		camera.setPitch(-originalCameraPitch);
+
+		// Update camera
 		camera.updateMatrices();
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
@@ -272,11 +276,13 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 			skyEntity->setLightness(oldLightness);
 		}
 
-		// Revert camera angle
-		cameraPos = camera.getPosition();
-		newCameraPos = Vec3(cameraPos.x, cameraPos.y + (cameraDistance * 2.0f), cameraPos.z);
-		camera.setPosition(newCameraPos);
-		camera.setPitch(-camera.getPitch());
+		// Look down
+		camera.setPitch(originalCameraPitch);
+
+		// Move up
+		camera.setPosition(originalCameraPosition);
+
+		// Update camera
 		camera.updateMatrices();
 
 		// Iterate through all saved MODEL entities

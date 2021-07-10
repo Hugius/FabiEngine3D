@@ -281,7 +281,7 @@ void SceneEditor::_updateCamera()
 				// Enable first person view
 				if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.camera_isFirstPersonViewEnabled())
 				{
-					_fe3d.camera_enableFirstPersonView();
+					_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
 				}
 
 				// Disable cursor while in FPS mode

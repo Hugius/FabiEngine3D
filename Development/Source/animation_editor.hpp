@@ -79,12 +79,12 @@ private:
 	static inline const float MIN_CAMERA_HEIGHT = 1.0f;
 	static inline const float SCROLL_WHEEL_DIVIDER = 5.0f;
 	static inline const float CAMERA_DISTANCE = 5.0f;
-	static inline const float CAMERA_SPEED = 0.1f;
+	static inline const float MOUSE_SENSITIVITY = 0.1f;
 	float _cameraDistance			   = CAMERA_DISTANCE;
 	float _cameraScrollingAcceleration = 0.0f;
 	float _partColorStrength		   = 0.0f;
 	float _colorChangingSpeed		   = 0.05f;
-	float _cameraSpeed				   = CAMERA_SPEED;
+	float _cameraSpeed				   = MOUSE_SENSITIVITY;
 
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;

@@ -70,41 +70,44 @@ public:
 
 	// Camera interface - setters
 	void camera_reset();
-	void camera_enableFirstPersonView();
+	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
 	void camera_disableFirstPersonView();
-	void camera_enableThirdPersonView();
+	void camera_enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance);
 	void camera_disableThirdPersonView();
 	void camera_translateFollowX(float speed);
 	void camera_translateFollowZY(float speed);
 	void camera_translateFollowZ(float speed);
 	void camera_translate(Vec3 translation);
 	void camera_setPosition(Vec3 position);
-	void camera_setThirdPersonPosition(Vec3 position);
-	void camera_setThirdPersonDistance(float distance);
+	void camera_setThirdPersonLookat(Vec3 position);
 	void camera_setFOV(float angle);
 	void camera_setYaw(float angle);
 	void camera_setPitch(float angle);
-	void camera_setMaxPitch(float angle);
+	void camera_setMinFirstPersonPitch(float angle);
+	void camera_setMaxFirstPersonPitch(float angle);
+	void camera_setMinThirdPersonPitch(float angle);
+	void camera_setMaxThirdPersonPitch(float angle);
+	void camera_setMinThirdPersonDistance(float distance);
+	void camera_setMaxThirdPersonDistance(float distance);
 	void camera_setNearZ(float distance);
 	void camera_setFarZ(float farZ);
 	void camera_setMouseSensitivity(float speed);
-	void camera_lockYaw();
-	void camera_unlockYaw();
-	void camera_lockPitch();
-	void camera_unlockPitch();
 
 	// Camera interface - getters
 	const Vec3 camera_getPosition();
-	const Vec3 camera_getThirdPersonPosition();
 	const float camera_getFOV();
 	const float getAspectRatio();
 	const float camera_getMouseSensitivity();
 	const float camera_getYaw();
 	const float camera_getPitch();
+	const float camera_getFirstPersonYaw();
+	const float camera_getFirstPersonPitch();
+	const float camera_getThirdPersonYaw();
+	const float camera_getThirdPersonPitch();
+	const float camera_getThirdPersonDistance();
 	const float camera_getNearDistance();
 	const float camera_getFarDistance();
 	const float camera_getMouseOffset();
-	const float camera_getMaxPitch();
 	const bool camera_isThirdPersonViewEnabled();
 	const bool camera_isFirstPersonViewEnabled();
 

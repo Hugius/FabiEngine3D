@@ -6,8 +6,8 @@ void BlurRenderer::addFramebuffer(unsigned int index, bool textureClamp)
 {
 	_horizontalFramebuffers.push_back(new RenderFramebuffer());
 	_verticalFramebuffers.push_back(new RenderFramebuffer());
-	_horizontalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
-	_verticalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
+	_horizontalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 2, 1, textureClamp);
+	_verticalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 2, 1, textureClamp);
 }
 
 void BlurRenderer::bind()
@@ -30,13 +30,12 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 	bool currentDirection = true;
 	bool overrideHorizontal = (direction == BlurDirection::HORIZONTAL);
 	bool overrideVertical = (direction == BlurDirection::VERTICAL);
-	const unsigned int totalBlurCount = (blurCount * 2);
 
 	// Shader uniforms
 	_shader.uploadUniform("u_intensity", intensity);
 
 	// Blur the texture
-	for (unsigned int i = 0; i < totalBlurCount; i++)
+	for (unsigned int i = 0; i < blurCount; i++)
 	{
 		// Bind framebuffer
 		if (currentDirection) { _horizontalFramebuffers[index]->bind(); }
@@ -45,7 +44,6 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 		// Upload uniforms
 		bool isHorizontal = overrideHorizontal ? true : (overrideVertical ? false : currentDirection);
 		_shader.uploadUniform("u_horizontal", isHorizontal);
-		_shader.uploadUniform("u_radius", i * (i / 7.5f));
 
 		// First time use normal texture
 		if (firstTime)

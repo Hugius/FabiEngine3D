@@ -9,7 +9,6 @@ in vec2 f_uv;
 uniform sampler2D u_diffuseMap;
 
 // Float uniforms
-uniform float u_radius;
 uniform float u_intensity;
 
 // Boolean uniforms
@@ -30,7 +29,7 @@ void main()
 	kernel[3] = 0.054054f;
 	kernel[4] = 0.016216f;
 
-    vec2 tex_offset = (1.0 / textureSize(u_diffuseMap, 0)) * u_radius; 
+    vec2 tex_offset = (1.0 / textureSize(u_diffuseMap, 0)); 
     vec3 result = texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity;
     if(u_horizontal)
     {

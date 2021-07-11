@@ -30,9 +30,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0));
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
-	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::BLOOM),  true);
-	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::DOF),    true);
-	_blurRenderer.addFramebuffer(static_cast<unsigned int>(BlurType::MOTION), true);
+	_blurRenderer.loadFramebuffers(2, 2, 8);
 
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");

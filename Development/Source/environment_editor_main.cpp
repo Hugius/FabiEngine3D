@@ -26,7 +26,7 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enableMotionBlur(0.2f);
+	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Core
 	loadSkyEntitiesFromFile();

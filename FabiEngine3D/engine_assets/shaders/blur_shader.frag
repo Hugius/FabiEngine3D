@@ -17,36 +17,43 @@ uniform bool u_horizontal;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Blur kernel
-#define WEIGHT_AMOUNT 5
-float kernel[WEIGHT_AMOUNT];
+// Local variables
+#define KERNEL_SIZE 5
 
 void main()
 {
+    // Compose blur kernel
+    float kernel[KERNEL_SIZE];
 	kernel[0] = 0.227027f;
 	kernel[1] = 0.1945946f;
 	kernel[2] = 0.1216216f;
 	kernel[3] = 0.054054f;
 	kernel[4] = 0.016216f;
 
-    vec2 tex_offset = (1.0 / textureSize(u_diffuseMap, 0)); 
-    vec3 result = texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity;
+    // Calculate UV offset
+    vec2 uvOffset = (1.0f / textureSize(u_diffuseMap, 0));
+
+    // Calculate center pixel
+    vec3 result = (texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity);
+
+    // Determine blur direction
     if(u_horizontal)
     {
-        for (int i = 1; i < WEIGHT_AMOUNT; ++i)
+        for (int i = 1; i < KERNEL_SIZE; i++)
         {
-            result += texture(u_diffuseMap, f_uv + vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
-           	result += texture(u_diffuseMap, f_uv - vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
+            result += (texture(u_diffuseMap, f_uv + vec2(uvOffset.x * i, 0.0f)).rgb * kernel[i] * u_intensity);
+           	result += (texture(u_diffuseMap, f_uv - vec2(uvOffset.x * i, 0.0f)).rgb * kernel[i] * u_intensity);
         }
     }
     else
     {
-        for (int i = 1; i < WEIGHT_AMOUNT; ++i)
+        for (int i = 1; i < KERNEL_SIZE; i++)
         {
-            result += texture(u_diffuseMap, f_uv + vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
-           	result += texture(u_diffuseMap, f_uv - vec2(0.0f, tex_offset.y * i)).rgb * kernel[i] * u_intensity;
+            result += texture(u_diffuseMap, f_uv + vec2(0.0f, uvOffset.y * i)).rgb * kernel[i] * u_intensity;
+           	result += texture(u_diffuseMap, f_uv - vec2(0.0f, uvOffset.y * i)).rgb * kernel[i] * u_intensity;
         }
     }
 
+    // Set final color
     o_finalColor = vec4(result, 1.0f);
 }

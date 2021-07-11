@@ -3,6 +3,6 @@
 enum class BlurType
 {
 	DOF,
-	BLOOM,
-	MOTION
+	MOTION,
+	BLOOM
 };

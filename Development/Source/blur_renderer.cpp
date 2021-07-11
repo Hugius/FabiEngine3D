@@ -2,12 +2,20 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void BlurRenderer::addFramebuffer(unsigned int index, bool textureClamp)
+void BlurRenderer::loadFramebuffers(unsigned int dofDivider, unsigned int motionBlurDivider, unsigned int bloomDivider)
 {
-	_horizontalFramebuffers.push_back(new RenderFramebuffer());
-	_verticalFramebuffers.push_back(new RenderFramebuffer());
-	_horizontalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 2, 1, textureClamp);
-	_verticalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 2, 1, textureClamp);
+	_firstPassFramebuffers.push_back(new RenderFramebuffer());
+	_secondPassFramebuffers.push_back(new RenderFramebuffer());
+	_firstPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / dofDivider, 1, true);
+	_secondPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / dofDivider, 1, true);
+	_firstPassFramebuffers.push_back(new RenderFramebuffer());
+	_secondPassFramebuffers.push_back(new RenderFramebuffer());
+	_firstPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / motionBlurDivider, 1, true);
+	_secondPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / motionBlurDivider, 1, true);
+	_firstPassFramebuffers.push_back(new RenderFramebuffer());
+	_secondPassFramebuffers.push_back(new RenderFramebuffer());
+	_firstPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 4, 1, true);
+	_secondPassFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize() / 4, 1, true);
 }
 
 void BlurRenderer::bind()
@@ -23,13 +31,14 @@ void BlurRenderer::unbind()
 	_shader.unbind();
 }
 
-GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, unsigned int index, unsigned int blurCount, float intensity, BlurDirection direction)
+GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint texture, unsigned int blurCount, float intensity, BlurDirection direction, BlurType type)
 {
 	// Variables
-	bool firstTime = true;
-	bool currentDirection = true;
-	bool overrideHorizontal = (direction == BlurDirection::HORIZONTAL);
-	bool overrideVertical = (direction == BlurDirection::VERTICAL);
+	bool isFirstTime = true;
+	bool isFirstPass = true;
+	bool mustOverrideHorizontal = (direction == BlurDirection::HORIZONTAL);
+	bool mustOverrideVertical = (direction == BlurDirection::VERTICAL);
+	const unsigned int framebufferIndex = static_cast<unsigned int>(type);
 
 	// Shader uniforms
 	_shader.uploadUniform("u_intensity", intensity);
@@ -38,29 +47,30 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 	for (unsigned int i = 0; i < blurCount; i++)
 	{
 		// Bind framebuffer
-		if (currentDirection) { _horizontalFramebuffers[index]->bind(); }
-		else { _verticalFramebuffers[index]->bind(); }
+		if (isFirstPass) { _firstPassFramebuffers[framebufferIndex]->bind(); }
+		else { _secondPassFramebuffers[framebufferIndex]->bind(); }
 
 		// Upload uniforms
-		bool isHorizontal = overrideHorizontal ? true : (overrideVertical ? false : currentDirection);
-		_shader.uploadUniform("u_horizontal", isHorizontal);
+		_shader.uploadUniform("u_horizontal", (mustOverrideHorizontal ? true : (mustOverrideVertical ? false : isFirstPass)));
 
 		// First time use normal texture
-		if (firstTime)
+		if (isFirstTime)
 		{
 			_render(entity, texture);
-			firstTime = false;
+			isFirstTime = false;
 		}
 		else // Use blurred texture from last time
 		{
-			texture = currentDirection ? _verticalFramebuffers[index]->getTexture(0) : _horizontalFramebuffers[index]->getTexture(0);
+			texture = isFirstPass ? _secondPassFramebuffers[framebufferIndex]->getTexture(0) : _firstPassFramebuffers[framebufferIndex]->getTexture(0);
 			_render(entity, texture);
 		}
 
-		if (currentDirection) { _horizontalFramebuffers[index]->unbind(); }
-		else { _verticalFramebuffers[index]->unbind(); }
+		// Unbind framebuffer
+		if (isFirstPass) { _firstPassFramebuffers[framebufferIndex]->unbind(); }
+		else { _secondPassFramebuffers[framebufferIndex]->unbind(); }
 
-		currentDirection = !currentDirection;
+		// Swap direction
+		isFirstPass = !isFirstPass;
 	}
 
 	return texture;

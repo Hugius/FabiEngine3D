@@ -10,7 +10,7 @@ class RenderFramebuffer final
 public:
 	~RenderFramebuffer();
 
-	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool textureClamp);
+	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped);
 	void createDepthTexture(Ivec2 position, Ivec2 size);
 	void reset();
 

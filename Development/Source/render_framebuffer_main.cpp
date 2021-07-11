@@ -11,7 +11,7 @@ RenderFramebuffer::~RenderFramebuffer()
 	reset();
 }
 
-void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool textureClamp)
+void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -39,7 +39,7 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
 			// Optional texture clamp
-			if (textureClamp)
+			if (isTextureClamped)
 			{
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

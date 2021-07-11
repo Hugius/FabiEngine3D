@@ -80,7 +80,7 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
-	_fe3d.gfx_enableMotionBlur(0.2f);
+	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// 3D Environment
 	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));

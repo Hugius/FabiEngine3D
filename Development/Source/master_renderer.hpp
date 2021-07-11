@@ -54,7 +54,9 @@ private:
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
 	ImageEntityRenderer      _imageEntityRenderer;
-	BlurRenderer             _blurRenderer;
+	BlurRenderer             _dofRenderer;
+	BlurRenderer             _motionBlurRenderer;
+	BlurRenderer             _bloomRenderer;
 	ShadowRenderer           _shadowRenderer;
 	DepthRenderer            _depthRenderer;
 	PostRenderer             _postRenderer;

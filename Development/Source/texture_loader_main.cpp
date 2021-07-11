@@ -42,14 +42,13 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 		return 0;
 	}
 
-	// Mipmapping or not
-	if (mipmap)
+	if (mipmap) // Mipmapping
 	{
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	else
+	else // Normal filtering
 	{
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -58,9 +57,9 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 	// Anisotropic filtering
 	if (aniso)
 	{
-		float temp;
-		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &temp);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, temp);
+		float sampleCount;
+		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &sampleCount);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, sampleCount);
 	}
 
 	// Repeat dimensions

@@ -134,9 +134,9 @@ void MasterRenderer::_captureDofBlur()
 {
 	if (_renderBus.isDofEnabled())
 	{
-		_blurRenderer.bind();
-		_renderBus.setDofMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 4, 1.0f, BlurDirection::BOTH, BlurType::DOF));
-		_blurRenderer.unbind();
+		_dofRenderer.bind();
+		_renderBus.setDofMap(_dofRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_dofRenderer.unbind();
 	}
 	else
 	{
@@ -183,7 +183,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			
 			// Temporary values
 			bool hasMoved = false;
-			BlurDirection direction = BlurDirection();
+			BlurDirection direction;
 
 			// Determine blur direction & mix value
 			if (xDifference != 0.0f || yDifference != 0.0f)
@@ -209,9 +209,9 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			// Apply motion blur
 			if (hasMoved)
 			{
-				_blurRenderer.bind();
-				_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getFinalSceneMap(), 10, 1.0f, direction, BlurType::MOTION));
-				_blurRenderer.unbind();
+				_motionBlurRenderer.bind();
+				_renderBus.setMotionBlurMap(_motionBlurRenderer.blurTexture(_finalSurface, _renderBus.getFinalSceneMap(), 5, 1.0f, direction));
+				_motionBlurRenderer.unbind();
 			}
 			else
 			{
@@ -339,22 +339,22 @@ void MasterRenderer::_captureBloom()
 	if (_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
 		// Bind
-		_blurRenderer.bind();
+		_bloomRenderer.bind();
 
 		// Blur texture
 		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
-			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
-				_renderBus.getBloomBlurCount() * 2, _renderBus.getBloomIntensity(), BlurDirection::BOTH, BlurType::BLOOM));
+			_renderBus.setBloomMap(_bloomRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
+				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		}
 		else
 		{
-			_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getSecondarySceneMap(),
-				_renderBus.getBloomBlurCount() * 2, _renderBus.getBloomIntensity(), BlurDirection::BOTH, BlurType::BLOOM));
+			_renderBus.setBloomMap(_bloomRenderer.blurTexture(_finalSurface, _renderBus.getSecondarySceneMap(),
+				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		}
 
 		// Unbind
-		_blurRenderer.unbind();
+		_bloomRenderer.unbind();
 	}
 	else
 	{

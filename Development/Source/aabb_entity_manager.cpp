@@ -93,7 +93,7 @@ void AabbEntityManager::update(
 					if (!parentEntity->isLevelOfDetailed())
 					{
 						// Retrieve maximum rotation & direction (based on parent rotation)
-						Direction rotationDirection = Direction();
+						Direction rotationDirection;
 						Vec3 parentRotation = parentEntity->getRotation();
 						float rotation = 0.0f;
 						if (fabsf(parentRotation.x) > fabsf(parentRotation.y) && fabsf(parentRotation.x) > fabsf(parentRotation.z))

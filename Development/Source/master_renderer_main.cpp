@@ -17,7 +17,9 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
 	_imageEntityRenderer      ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
-	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             renderBus),
+	_dofRenderer			  ("blur_shader.vert",             "blur_shader.frag",             renderBus),
+	_motionBlurRenderer		  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
+	_bloomRenderer			  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
 	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
 	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   renderBus),
 	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
@@ -30,7 +32,9 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0));
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
-	_blurRenderer.loadFramebuffers(2, 2, 8);
+	_dofRenderer.loadFramebuffers(BlurType::DOF, 2);
+	_motionBlurRenderer.loadFramebuffers(BlurType::MOTION, 3);
+	_bloomRenderer.loadFramebuffers(BlurType::BLOOM, 4);
 
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");

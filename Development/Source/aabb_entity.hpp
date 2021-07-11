@@ -49,8 +49,8 @@ private:
 	
 	string _parentID = "";
 
-	AabbParentType _parentType = AabbParentType();
-	Direction _collisionDirection = Direction();
+	AabbParentType _parentType;
+	Direction _collisionDirection;
 
 	bool _isRaycastResponsive = false;
 	bool _isCollisionResponsive = false;

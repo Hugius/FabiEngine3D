@@ -9,8 +9,8 @@ void RenderFramebuffer::bind()
 
 void RenderFramebuffer::unbind()
 {
-	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 }
 
 Ivec2 RenderFramebuffer::getSize()

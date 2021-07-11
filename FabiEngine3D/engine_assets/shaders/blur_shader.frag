@@ -12,7 +12,7 @@ uniform sampler2D u_diffuseMap;
 uniform float u_intensity;
 
 // Boolean uniforms
-uniform bool u_horizontal;
+uniform bool u_isHorizontal;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -37,7 +37,7 @@ void main()
     vec3 result = (texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity);
 
     // Determine blur direction
-    if(u_horizontal)
+    if(u_isHorizontal)
     {
         for (int i = 1; i < KERNEL_SIZE; i++)
         {

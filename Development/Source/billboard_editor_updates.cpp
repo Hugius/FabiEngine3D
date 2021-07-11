@@ -255,10 +255,11 @@ void BillboardEditor::_updateCamera()
 			// Check if RMB pressed
 			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				// Set lookat & distance
+				// Update lookat & distance
 				if (_currentBillboardID.empty())
 				{
-					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, _fe3d.modelEntity_getSize("@@cube").y, 0.0f));
+					const auto size = _fe3d.modelEntity_getSize("@@cube");
+					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, size.y, 0.0f));
 					_fe3d.camera_setMinThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 					_fe3d.camera_setMaxThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
 				}

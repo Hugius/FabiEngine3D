@@ -21,10 +21,13 @@ void AnimationEditor::_updateCamera()
 			}
 		}
 
-		// Disable third person view
+		// Check if third person view is enabled
 		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
+			// Disable third person view
 			_fe3d.camera_disableThirdPersonView();
+
+			// Show cursor
 			_fe3d.imageEntity_setVisible("@@cursor", true);
 
 			// Disable shadows
@@ -45,11 +48,16 @@ void AnimationEditor::_updateCamera()
 			// Check if RMB pressed
 			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
+				// Update lookat
 				_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
+
+				// Enable third person view
 				_fe3d.camera_enableThirdPersonView(
 					_fe3d.camera_getThirdPersonYaw(),
 					_fe3d.camera_getThirdPersonPitch(),
 					_fe3d.camera_getThirdPersonDistance());
+
+				// Hide cursor
 				_fe3d.imageEntity_setVisible("@@cursor", false);
 			}
 		}

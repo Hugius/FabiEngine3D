@@ -189,7 +189,7 @@
     <ClCompile Include="..\..\Source\environment_editor_main.cpp">
       <Filter>Environment Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_sky_misc.cpp">
+    <ClCompile Include="..\..\Source\environment_editor_updates_sky_main.cpp">
       <Filter>Environment Editor\Updates\Sky</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit_one.cpp">
@@ -201,13 +201,13 @@
     <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_one.cpp">
       <Filter>Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_misc.cpp">
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_main.cpp">
       <Filter>Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\environment_editor_updates_water_edit_one.cpp">
       <Filter>Environment Editor\Updates\Water</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_water_misc.cpp">
+    <ClCompile Include="..\..\Source\environment_editor_updates_water_main.cpp">
       <Filter>Environment Editor\Updates\Water</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\environment_editor_updates.cpp">

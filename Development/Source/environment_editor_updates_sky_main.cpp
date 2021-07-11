@@ -177,59 +177,37 @@ void EnvironmentEditor::_updateSkyCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if sky is active
-		if (_currentSkyID != "")
+		// Disable first person view
+		if (_fe3d.camera_isFirstPersonViewEnabled())
 		{
-			// Check if first person view must be enabled
-			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+			_fe3d.camera_disableFirstPersonView();
+		}
+
+		// Check if sky is inactive
+		if (_currentSkyID.empty() || !_fe3d.skyEntity_isExisting(_currentSkyID))
+		{
+			// Reset camera
+			_fe3d.camera_reset();
+			_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+		}
+		else
+		{
+			// Show cursor
+			_fe3d.imageEntity_setVisible("@@cursor", true);
+
+			// Check if allowed by GUI
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				// Check if cursor in viewport
-				if (_fe3d.misc_isCursorInsideViewport())
+				// Check if RMB pressed
+				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Enable first person view
-					if (!_fe3d.camera_isFirstPersonViewEnabled())
-					{
-						_fe3d.camera_enableFirstPersonView(0.0f, 0.0f);
-					}
-
-					// Enable motion blur
-					if (!_fe3d.gfx_isMotionBlurEnabled())
-					{
-						_fe3d.gfx_enableMotionBlur(0.2f);
-					}
+					_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
 					
 					// Hide cursor
 					_fe3d.imageEntity_setVisible("@@cursor", false);
 				}
 			}
-			else
-			{
-				// Disable first person view
-				if (_fe3d.camera_isFirstPersonViewEnabled())
-				{
-					_fe3d.camera_disableFirstPersonView();
-				}
-
-				// Disable motion blur
-				if (_fe3d.gfx_isMotionBlurEnabled())
-				{
-					_fe3d.gfx_disableMotionBlur(true);
-				}
-
-				// Show cursor
-				_fe3d.imageEntity_setVisible("@@cursor", true);
-			}
-		}
-		else
-		{
-			// Set default camera view
-			if (_fe3d.camera_isFirstPersonViewEnabled())
-			{
-				_fe3d.camera_disableFirstPersonView();
-				_fe3d.gfx_disableMotionBlur(true);
-			}
-			_fe3d.camera_setYaw(0.0f);
-			_fe3d.camera_setPitch(0.0f);
 		}
 	}
 }

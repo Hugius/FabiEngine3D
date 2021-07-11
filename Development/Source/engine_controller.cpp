@@ -34,7 +34,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Load application settings
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
-		// Default camera
+		// Camera
 		camera_reset();
 
 		// Initialize script execution
@@ -56,7 +56,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Default rendering color
 		misc_setMainRenderingColor(Vec3(0.0f));
 
-		// Default camera
+		// Camera
 		camera_reset();
 
 		// Default engine background

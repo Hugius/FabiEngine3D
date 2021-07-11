@@ -20,7 +20,7 @@ void SceneEditor::load()
 	// GUI
 	_loadGUI();
 
-	// Default camera
+	// Camera
 	_fe3d.camera_reset();
 
 	// Default graphics

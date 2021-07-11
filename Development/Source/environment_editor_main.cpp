@@ -18,7 +18,7 @@ void EnvironmentEditor::load()
 	// GUI
 	_loadGUI();
 
-	// Default camera
+	// Camera
 	_fe3d.camera_reset();
 	
 	// Default graphics
@@ -26,6 +26,7 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableMotionBlur(0.2f);
 
 	// Core
 	loadSkyEntitiesFromFile();
@@ -60,6 +61,7 @@ void EnvironmentEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete entities
 	unloadSkyEntities();
@@ -70,8 +72,6 @@ void EnvironmentEditor::unload()
 	_loadedSkyIDs.clear();
 	_loadedTerrainIDs.clear();
 	_loadedWaterIDs.clear();
-	_cameraAcceleration = 0.0f;
-	_totalCameraRotation = 0.0f;
 	_currentSkyID = "";
 	_hoveredSkyID = "";
 	_currentTerrainID = "";

@@ -172,49 +172,46 @@ void EnvironmentEditor::_updateWaterCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if water is active
-		if ((_currentWaterID != "" && _fe3d.waterEntity_isExisting(_currentWaterID)) || 
-			(_hoveredWaterID != "" && _fe3d.waterEntity_isExisting(_hoveredWaterID)))
+		// Disable third person view
+		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
-			// Temporary values
-			auto waterID = ((_currentWaterID != "") ? _currentWaterID : _hoveredWaterID);
+			_fe3d.camera_disableThirdPersonView();
+		}
 
-			// Get scroll wheel input
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-			{
-				float rotationAcceleration = static_cast<float>(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
-				_cameraAcceleration += rotationAcceleration;
-			}
-
-			// Apply camera smoothing & rotation
-			_cameraAcceleration *= 0.975f;
-			_totalCameraRotation += _cameraAcceleration;
-
-			// Calculate new camera position
-			Vec3 waterPosition = _fe3d.waterEntity_getPosition(waterID);
-			float waterSize = _fe3d.waterEntity_getSize(waterID);
-			float x = waterPosition.x + (waterSize / 2.0f) * sin(_totalCameraRotation);
-			float y = waterPosition.y + (waterSize / 8.0f);
-			float z = waterPosition.z + (waterSize / 2.0f) * cos(_totalCameraRotation);
-
-			// Update camera
-			if (!_fe3d.camera_isThirdPersonViewEnabled())
-			{
-				//_fe3d.camera_enableThirdPersonView();
-			}
-			_fe3d.camera_setPosition(Vec3(x, y, z));
-			_fe3d.camera_setThirdPersonLookat(waterPosition);
+		// Check if water is inactive
+		if (_currentWaterID.empty() || !_fe3d.waterEntity_isExisting(_currentWaterID))
+		{
+			// Reset camera
+			_fe3d.camera_reset();
+			_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 		}
 		else
 		{
-			// Set default camera view
-			if (_fe3d.camera_isThirdPersonViewEnabled())
+			// Show cursor
+			_fe3d.imageEntity_setVisible("@@cursor", true);
+
+			// Check if allowed by GUI
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				_fe3d.camera_disableThirdPersonView();
-				_fe3d.camera_setPosition(Vec3(0.0f));
-				_fe3d.camera_setThirdPersonLookat(Vec3(0.0f));
-				_totalCameraRotation = 0.0f;
-				_cameraAcceleration = 0.0f;
+				// Check if RMB pressed
+				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				{
+					// Update lookat
+					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, _fe3d.waterEntity_getPosition(_currentWaterID).y, 0.0f));
+
+					// Update distance
+					_fe3d.camera_setMinThirdPersonDistance(_fe3d.waterEntity_getSize(_currentWaterID) * 0.75f);
+					_fe3d.camera_setMaxThirdPersonDistance(_fe3d.waterEntity_getSize(_currentWaterID) * 0.75f);
+	
+					// Enable third person view
+					_fe3d.camera_enableThirdPersonView(
+						_fe3d.camera_getThirdPersonYaw(),
+						_fe3d.camera_getThirdPersonPitch(),
+						_fe3d.camera_getThirdPersonDistance());
+
+					// Hide cursor
+					_fe3d.imageEntity_setVisible("@@cursor", false);
+				}
 			}
 		}
 	}

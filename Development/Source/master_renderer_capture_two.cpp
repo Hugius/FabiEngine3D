@@ -202,10 +202,6 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 					_renderBus.setMotionBlurMixValue(yDifference);
 				}
 			}
-			else
-			{
-				_renderBus.setMotionBlurMixValue(0.0f);
-			}
 
 			// Set for next iteration
 			lastYaw = camera.getYaw();
@@ -221,6 +217,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 			}
 			else
 			{
+				_renderBus.setMotionBlurMixValue(0.0f);
 				_renderBus.setMotionBlurMap(0);
 			}
 
@@ -229,6 +226,7 @@ void MasterRenderer::_captureMotionBlur(Camera& camera)
 		}
 		else // No motion blur
 		{
+			_renderBus.setMotionBlurMixValue(0.0f);
 			_renderBus.setMotionBlurMap(0);
 		}
 	}

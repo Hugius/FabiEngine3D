@@ -42,6 +42,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+	_fe3d.gfx_enableMotionBlur(0.2f);
 	
 	// 3D Environment
 	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
@@ -74,16 +75,22 @@ void ModelEditor::unload()
 		_fe3d.camera_disableThirdPersonView();
 	}
 
+	// Shadows
+	if (_fe3d.gfx_isShadowsEnabled())
+	{
+		_fe3d.gfx_disableShadows(true);
+	}
+
 	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
-	_fe3d.gfx_disableShadows(true);
-	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableSkyReflections(true);
+	_fe3d.gfx_disableSceneReflections(true);
 	_fe3d.gfx_disableLightMapping(true);
 	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableBloom(true);
+	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete models
 	_fe3d.modelEntity_deleteAll();

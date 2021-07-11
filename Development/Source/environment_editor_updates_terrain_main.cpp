@@ -177,45 +177,43 @@ void EnvironmentEditor::_updateTerrainCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if terrain is active
-		if ((_currentTerrainID != "" && _fe3d.terrainEntity_isExisting(_currentTerrainID)) ||
-			(_hoveredTerrainID != "" && _fe3d.terrainEntity_isExisting(_hoveredTerrainID)))
+		// Disable third person view
+		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
-			// Temporary values
-			auto terrainID = ((_currentTerrainID != "") ? _currentTerrainID : _hoveredTerrainID);
+			_fe3d.camera_disableThirdPersonView();
+		}
 
-			// Get scroll wheel input
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-			{
-				float rotationAcceleration = static_cast<float>(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
-				_cameraAcceleration += rotationAcceleration;
-			}
-			_cameraAcceleration *= 0.975f;
-			_totalCameraRotation += _cameraAcceleration;
-
-			// Calculate new camera position
-			float x = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * sin(_totalCameraRotation);
-			float y = (_fe3d.terrainEntity_getMaxHeight(terrainID) * 1.25f);
-			float z = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * cos(_totalCameraRotation);
-
-			// Update camera
-			if (!_fe3d.camera_isThirdPersonViewEnabled())
-			{
-				///_fe3d.camera_enableThirdPersonView();
-			}
-			_fe3d.camera_setPosition(Vec3(x, y, z));
-			_fe3d.camera_setThirdPersonLookat(Vec3(0.0f));
+		// Check if terrain is inactive
+		if (_currentTerrainID.empty() || !_fe3d.terrainEntity_isExisting(_currentTerrainID))
+		{
+			// Reset camera
+			_fe3d.camera_reset();
+			_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 		}
 		else
 		{
-			// Set default camera view
-			if (_fe3d.camera_isThirdPersonViewEnabled())
+			// Show cursor
+			_fe3d.imageEntity_setVisible("@@cursor", true);
+
+			// Check if allowed by GUI
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				_fe3d.camera_disableThirdPersonView();
-				_fe3d.camera_setPosition(Vec3(0.0f));
-				_fe3d.camera_setThirdPersonLookat(Vec3(0.0f));
-				_totalCameraRotation = 0.0f;
-				_cameraAcceleration = 0.0f;
+				// Check if RMB pressed
+				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				{
+					// Update distance
+					_fe3d.camera_setMinThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
+					_fe3d.camera_setMaxThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
+
+					// Enable third person view
+					_fe3d.camera_enableThirdPersonView(
+						_fe3d.camera_getThirdPersonYaw(),
+						_fe3d.camera_getThirdPersonPitch(),
+						_fe3d.camera_getThirdPersonDistance());
+
+					// Hide cursor
+					_fe3d.imageEntity_setVisible("@@cursor", false);
+				}
 			}
 		}
 	}

@@ -183,7 +183,7 @@ void ScriptInterpreter::load()
 	// Load preview audio
 	_audioEditor.loadAudioEntitiesFromFile();
 
-	// Default camera
+	// Camera
 	_fe3d.camera_reset();
 
 	// Default graphics
@@ -293,7 +293,7 @@ void ScriptInterpreter::unload()
 	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
 
-	// Default camera
+	// Camera
 	_fe3d.camera_reset();
 
 	// Reset audio

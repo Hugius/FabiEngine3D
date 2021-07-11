@@ -77,13 +77,11 @@ private:
 	void _updateMiscellaneous();
 
 	// General variables
-	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
+	static inline const float MOUSE_SENSITIVITY = 0.025f;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	EnvironmentType _currentEnvironmentType = EnvironmentType();
 	string _currentProjectID = "";
-	float _cameraAcceleration = 0.0f;
-	float _totalCameraRotation = 0.0f;
 	bool _isEditorLoaded = false;
 	bool _isInMainMenu = false;
 

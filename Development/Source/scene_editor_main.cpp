@@ -51,7 +51,7 @@ void SceneEditor::load()
 		// Check if there is a model entity present
 		if (_fe3d.modelEntity_isExisting(modelID))
 		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->
+			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->
 				addButton(modelID, modelID.substr(1));
 		}
 	}
@@ -66,7 +66,7 @@ void SceneEditor::load()
 		// Check if there is a billboard entity present
 		if (_fe3d.billboardEntity_isExisting(billboardID))
 		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->
+			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->
 				addButton(billboardID, billboardID.substr(1));
 		}
 	}

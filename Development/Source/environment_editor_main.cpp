@@ -73,11 +73,8 @@ void EnvironmentEditor::unload()
 	_loadedTerrainIDs.clear();
 	_loadedWaterIDs.clear();
 	_currentSkyID = "";
-	_hoveredSkyID = "";
 	_currentTerrainID = "";
-	_hoveredTerrainID = "";
 	_currentWaterID = "";
-	_hoveredWaterID = "";
 	_isSkyCreationEnabled = false;
 	_isSkyChoosingEnabled = false;
 	_isSkyEditingEnabled = false;

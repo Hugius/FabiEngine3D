@@ -46,20 +46,20 @@ void AnimationEditor::_updateManagementScreen()
 				}
 				else if (screen->getButton("addAnimation")->isHovered()) // Add animation button
 				{
-					_gui.getGlobalScreen()->addValueForm("newAnimationName", "New Animation Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 					_isCreatingAnimation = true;
 				}
 				else if (screen->getButton("editAnimation")->isHovered()) // Edit animation button
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 				}
 				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 				}
 			}
 
@@ -88,7 +88,7 @@ void AnimationEditor::_updateAnimationCreation()
 			string newAnimationName = "";
 
 			// Check if user filled in a new name
-			if (_gui.getGlobalScreen()->checkValueForm("newAnimationName", newAnimationName, { _currentAnimationID }))
+			if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationName, { _currentAnimationID }))
 			{
 				// Check if name contains spaces
 				if (newAnimationName.find(' ') == string::npos)
@@ -136,7 +136,7 @@ void AnimationEditor::_updateAnimationChoice()
 		if (_isChoosingAnimation)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animations");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animationList");
 
 			// Check if a animation name is hovered
 			if (selectedButtonID != "")
@@ -165,16 +165,16 @@ void AnimationEditor::_updateAnimationChoice()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("animations");
+					_gui.getGlobalScreen()->removeChoiceForm("animationList");
 					_isChoosingAnimation = false;
 				}
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animations")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 			{
 				_isChoosingAnimation = false;
 				_isEditingAnimation = false;
 				_isRemovingAnimation = false;
-				_gui.getGlobalScreen()->removeChoiceForm("animations");
+				_gui.getGlobalScreen()->removeChoiceForm("animationList");
 			}
 		}
 	}

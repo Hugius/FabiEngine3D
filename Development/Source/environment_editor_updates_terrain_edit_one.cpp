@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isTerrainCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newTerrainName", "New Terrain Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -30,7 +30,7 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 				_isTerrainEditingEnabled = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -38,7 +38,7 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 				_isTerrainRemovalEnabled = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 	}

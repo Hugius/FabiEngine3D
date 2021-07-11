@@ -70,13 +70,13 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
 	screenID = "sceneEditorMenuModelPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("models", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuModelChoice
 	screenID = "sceneEditorMenuModelChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("models", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboard
@@ -89,13 +89,13 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardPlace
 	screenID = "sceneEditorMenuBillboardPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("billboards", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardChoice
 	screenID = "sceneEditorMenuBillboardChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("billboards", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSound

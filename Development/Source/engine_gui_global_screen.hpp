@@ -51,7 +51,6 @@ public:
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
 	// Value form
-	void setValueFormButtonsPosition(Vec2 position);
 	void addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size);
 	void addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size);
@@ -97,12 +96,11 @@ private:
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 0.25f, 0.0f);
 	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
 	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
+	static inline const Vec2 VALUE_FORM_BUTTONS_POSITION = Vec2(0.0f, 0.1f);
 
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";
 	string _answerFormID = "";
-
-	Vec2 _valueFormButtonsPosition = Vec2(0.0f);
 
 	bool _isFocused = false;
 	bool _exitValueFilling = false;

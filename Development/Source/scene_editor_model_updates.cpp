@@ -28,7 +28,7 @@ void SceneEditor::_updateMainModelMenu()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModelChoice");
 
 					// Clear all buttons from scrolling list
-					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
+					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
 					// Add the name of every placed model
 					auto IDs = _fe3d.modelEntity_getAllIDs();
@@ -45,7 +45,7 @@ void SceneEditor::_updateMainModelMenu()
 							std::reverse(modelID.begin(), modelID.end());
 
 							// Add new button
-							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->addButton(modelID, modelName);
+							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->addButton(modelID, modelName);
 						}
 					}
 				}
@@ -80,7 +80,7 @@ void SceneEditor::_updateModelPlacingMenu()
 						if (_fe3d.modelEntity_isExisting(modelID))
 						{
 							// Check if button is hovered
-							if (screen->getScrollingList("models")->getButton(modelID)->isHovered())
+							if (screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 							{
 								// Hide old preview model
 								if (_currentPreviewModelID != "")
@@ -116,13 +116,13 @@ void SceneEditor::_updateModelChoosingMenu()
 		if (screen->getID() == "sceneEditorMenuModelChoice")
 		{
 			// Remove deleted models from the scrollingList buttons
-			for (const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
+			for (const auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 			{
 				// Check if model is still existing
 				if (!_fe3d.modelEntity_isExisting(button->getID()))
 				{
 					// Delete button
-					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButton(button->getID());
+					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
 					break;
 				}
 			}
@@ -134,7 +134,7 @@ void SceneEditor::_updateModelChoosingMenu()
 				if (modelID[0] != '@')
 				{
 					// Check if button is hovered
-					if (screen->getScrollingList("models")->getButton(modelID)->isHovered())
+					if (screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 					{
 						// Check if LMB pressed (activation)
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))

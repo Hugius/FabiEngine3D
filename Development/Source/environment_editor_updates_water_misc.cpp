@@ -26,7 +26,7 @@ void EnvironmentEditor::_updateWaterCreation()
 			string newWaterName;
 
 			// Create new water
-			if (_gui.getGlobalScreen()->checkValueForm("newWaterName", newWaterName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterName, {}))
 			{
 				// @ sign not allowed
 				if (newWaterName.find('@') == string::npos)
@@ -79,12 +79,6 @@ void EnvironmentEditor::_updateWaterChoosing()
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("waterList");
 
-			// Hide last water
-			if (_hoveredWaterID != "")
-			{
-				_fe3d.waterEntity_select("");
-			}
-
 			// Check if a water name is hovered
 			if (selectedButtonID != "")
 			{
@@ -92,7 +86,6 @@ void EnvironmentEditor::_updateWaterChoosing()
 				{
 					// Select water
 					_currentWaterID = "@" + selectedButtonID;
-					_hoveredWaterID = "";
 
 					// Only if going to editor
 					if (_isWaterEditingEnabled)
@@ -113,11 +106,6 @@ void EnvironmentEditor::_updateWaterChoosing()
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
 					_isWaterChoosingEnabled = false;
 				}
-				else
-				{
-					// Set new hovered water
-					_hoveredWaterID = "@" + selectedButtonID;
-				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList")) // Cancelled choosing
 			{
@@ -125,16 +113,6 @@ void EnvironmentEditor::_updateWaterChoosing()
 				_isWaterEditingEnabled = false;
 				_isWaterRemovalEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("waterList");
-			}
-			else // Nothing hovered
-			{
-				_hoveredWaterID = "";
-			}
-
-			// Show hovered water
-			if (_hoveredWaterID != "")
-			{
-				_fe3d.waterEntity_select(_hoveredWaterID);
 			}
 		}
 	}

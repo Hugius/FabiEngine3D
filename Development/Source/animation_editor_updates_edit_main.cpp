@@ -65,7 +65,7 @@ void AnimationEditor::_updateEditingScreen()
 				{
 					auto modelIDs = _modelEditor.getLoadedModelIDs();
 					for (auto& ID : modelIDs) { ID = ID.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), modelIDs);
+					_gui.getGlobalScreen()->addChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), modelIDs);
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
@@ -199,7 +199,7 @@ void AnimationEditor::_updateEditingScreen()
 			}
 
 			// Check if a animation name is clicked
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
 			if (selectedButtonID != "")
 			{
 				// Check if LMB is pressed
@@ -263,12 +263,12 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("models");
+					_gui.getGlobalScreen()->removeChoiceForm("modelList");
 				}
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("models")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("models");
+				_gui.getGlobalScreen()->removeChoiceForm("modelList");
 			}
 		}
 	}

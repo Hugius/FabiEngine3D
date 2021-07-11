@@ -133,14 +133,14 @@ void SceneEditor::_updateModelEditing()
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("animation")->isHovered()) // Animation button
 					{
-						_gui.getGlobalScreen()->addChoiceForm("animations", "Select Animation", Vec2(0.0f, 0.1f),
+						_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f),
 							_animationEditor.getAllAnimationIDs());
 					}
 				}
 
 				// Check if an animation name is clicked
 				auto lastAnimationID = _animationEditor.getStartedAnimationIDs(_activeModelID);
-				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animations");
+				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animationList");
 				if (selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Stop last playing animation
@@ -173,11 +173,11 @@ void SceneEditor::_updateModelEditing()
 					_animationEditor.startAnimation(selectedButtonID, _activeModelID, -1);
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("animations");
+					_gui.getGlobalScreen()->removeChoiceForm("animationList");
 				}
-				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animations")) // Cancelled choosing
+				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("animations");
+					_gui.getGlobalScreen()->removeChoiceForm("animationList");
 				}
 
 				// Button text contents

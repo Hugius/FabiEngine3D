@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isWaterCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newWaterName", "New Water Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -30,7 +30,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_isWaterEditingEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -38,7 +38,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_isWaterRemovalEnabled = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(-0.4f, 0.1f), IDs);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 	}
@@ -61,7 +61,6 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_fe3d.waterEntity_select("");
-				_hoveredTerrainID = "";
 				_currentWaterID = "";
 				_isWaterEditingEnabled = false;
 			}
@@ -69,7 +68,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			{
 				_isTerrainChoosingEnabled = true;
 				for (auto& name : _loadedTerrainIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(-0.4f, 0.1f), _loadedTerrainIDs);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), _loadedTerrainIDs);
 				for (auto& name : _loadedTerrainIDs) { name = "@" + name; }
 			}
 			else if (screen->getButton("mesh")->isHovered())
@@ -96,12 +95,6 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
 
-			// Hide last terrain
-			if (_hoveredTerrainID != "")
-			{
-				_fe3d.terrainEntity_select("");
-			}
-
 			// Check if a terrain name is hovered
 			if (selectedButtonID != "")
 			{
@@ -117,30 +110,11 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 					_isTerrainChoosingEnabled = false;
 				}
-				else
-				{
-					// Set new hovered terrain
-					_hoveredTerrainID = "@" + selectedButtonID;
-				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 			{
 				_isTerrainChoosingEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
-			}
-			else // Nothing hovered
-			{
-				_hoveredTerrainID = "";
-			}
-
-			// Show hovered terrain
-			if (_hoveredTerrainID != "")
-			{
-				// Only select the terrain if it has a heightmap
-				if (_fe3d.terrainEntity_isExisting(_hoveredTerrainID))
-				{
-					_fe3d.terrainEntity_select(_hoveredTerrainID);
-				}
 			}
 		}
 	}

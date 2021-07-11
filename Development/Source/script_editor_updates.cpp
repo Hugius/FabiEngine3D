@@ -29,21 +29,21 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (screen->getButton("search")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{
 					auto IDs = _script.getAllScriptFileIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("rename")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{

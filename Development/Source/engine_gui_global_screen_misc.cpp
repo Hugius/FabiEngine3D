@@ -10,11 +10,6 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
-void EngineGuiGlobalScreen::setValueFormButtonsPosition(Vec2 position)
-{
-	_valueFormButtonsPosition = position;
-}
-
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
@@ -135,8 +130,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		// Add done & cancel buttons
 		if (!checkButton("value_form_done"))
 		{
-			addButton("value_form_done", _valueFormButtonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
-			addButton("value_form_cancel", _valueFormButtonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_done", VALUE_FORM_BUTTONS_POSITION + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_cancel", VALUE_FORM_BUTTONS_POSITION + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 		}
 	}
 }

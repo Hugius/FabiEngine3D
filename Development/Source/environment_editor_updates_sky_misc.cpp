@@ -25,7 +25,7 @@ void EnvironmentEditor::_updateSkyCreation()
 			string newSkyName;
 
 			// Create new sky
-			if (_gui.getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyName, {}))
 			{
 				// @ sign not allowed
 				if (newSkyName.find('@') == string::npos)
@@ -78,12 +78,6 @@ void EnvironmentEditor::_updateSkyChoosing()
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
 
-			// Hide last sky
-			if (_hoveredSkyID != "")
-			{
-				_fe3d.skyEntity_select("@@engineBackground");
-			}
-
 			// Check if a sky name is hovered
 			if (selectedButtonID != "")
 			{
@@ -91,7 +85,6 @@ void EnvironmentEditor::_updateSkyChoosing()
 				{
 					// Select sky
 					_currentSkyID = "@" + selectedButtonID;
-					_hoveredSkyID = "";
 
 					// Only if going to editor
 					if (_isSkyEditingEnabled)
@@ -112,11 +105,6 @@ void EnvironmentEditor::_updateSkyChoosing()
 					_gui.getGlobalScreen()->removeChoiceForm("skyList");
 					_isSkyChoosingEnabled = false;
 				}
-				else
-				{
-					// Set new hovered sky
-					_hoveredSkyID = "@" + selectedButtonID;
-				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
 			{
@@ -124,16 +112,6 @@ void EnvironmentEditor::_updateSkyChoosing()
 				_isSkyEditingEnabled = false;
 				_isSkyRemovalEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("skyList");
-			}
-			else // Nothing hovered
-			{
-				_hoveredSkyID = "";
-			}
-
-			// Show hovered sky
-			if (_hoveredSkyID != "")
-			{
-				_fe3d.skyEntity_select(_hoveredSkyID);
 			}
 		}
 	}

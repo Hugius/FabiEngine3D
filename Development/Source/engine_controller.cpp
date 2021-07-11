@@ -110,11 +110,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		if (activeScreen == "main" && lastScreen != "main")
 		{
 			// Restore camera
-			float lastYaw = camera_getYaw();
-			float lastPitch = camera_getPitch();
 			camera_reset();
-			camera_setYaw(lastYaw);
-			camera_setPitch(lastPitch);
 
 			// Restore background
 			skyEntity_select("@@engineBackground");

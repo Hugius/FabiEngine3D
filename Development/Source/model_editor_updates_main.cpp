@@ -31,7 +31,7 @@ void ModelEditor::_updateManagementScreen()
 				}
 				else if (screen->getButton("addModel")->isHovered()) // Add model button
 				{
-					_gui.getGlobalScreen()->addValueForm("newModelName", "New model name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("modelCreate", "New model name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 					_isCreatingModel = true;
 				}
 				else if (screen->getButton("editModel")->isHovered()) // Edit model button
@@ -40,7 +40,7 @@ void ModelEditor::_updateManagementScreen()
 					_isEditingModel = true;
 					auto IDs = getLoadedModelIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 				{
@@ -48,7 +48,7 @@ void ModelEditor::_updateManagementScreen()
 					_isDeletingModel = true;
 					auto IDs = getLoadedModelIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select Model", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
 				}
 			}
 
@@ -173,7 +173,7 @@ void ModelEditor::_updateModelCreation()
 			string newModelName;
 
 			// Create new model
-			if (_gui.getGlobalScreen()->checkValueForm("newModelName", newModelName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelName, {}))
 			{
 				// @ sign not allowed
 				if (newModelName.find('@') == string::npos)
@@ -219,7 +219,7 @@ void ModelEditor::_updateModelChoosing()
 		if (_isChoosingModel)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
 
 			// Hide last model
 			if (_hoveredModelID != "")
@@ -256,7 +256,7 @@ void ModelEditor::_updateModelChoosing()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("models");
+					_gui.getGlobalScreen()->removeChoiceForm("modelList");
 					_isChoosingModel = false;
 				}
 				else
@@ -265,12 +265,12 @@ void ModelEditor::_updateModelChoosing()
 					_hoveredModelID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("models")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 			{
 				_isChoosingModel = false;
 				_isEditingModel = false;
 				_isDeletingModel = false;
-				_gui.getGlobalScreen()->removeChoiceForm("models");
+				_gui.getGlobalScreen()->removeChoiceForm("modelList");
 			}
 			else // Nothing hovered
 			{

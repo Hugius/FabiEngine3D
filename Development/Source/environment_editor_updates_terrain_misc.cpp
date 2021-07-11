@@ -26,7 +26,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 			string newTerrainName;
 
 			// Create new terrain
-			if (_gui.getGlobalScreen()->checkValueForm("newTerrainName", newTerrainName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
 			{
 				// @ sign not allowed
 				if (newTerrainName.find('@') == string::npos)
@@ -77,12 +77,6 @@ void EnvironmentEditor::_updateTerrainChoosing()
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
 
-			// Hide last terrain
-			if (_hoveredTerrainID != "")
-			{
-				_fe3d.terrainEntity_select("");
-			}
-
 			// Check if a terrain name is hovered
 			if (selectedButtonID != "")
 			{
@@ -90,7 +84,6 @@ void EnvironmentEditor::_updateTerrainChoosing()
 				{
 					// Select terrain
 					_currentTerrainID = "@" + selectedButtonID;
-					_hoveredTerrainID = "";
 
 					// Only if going to editor
 					if (_isTerrainEditingEnabled)
@@ -114,11 +107,6 @@ void EnvironmentEditor::_updateTerrainChoosing()
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 					_isTerrainChoosingEnabled = false;
 				}
-				else
-				{
-					// Set new hovered terrain
-					_hoveredTerrainID = "@" + selectedButtonID;
-				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 			{
@@ -126,20 +114,6 @@ void EnvironmentEditor::_updateTerrainChoosing()
 				_isTerrainEditingEnabled = false;
 				_isTerrainRemovalEnabled = false;
 				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
-			}
-			else // Nothing hovered
-			{
-				_hoveredTerrainID = "";
-			}
-
-			// Show hovered terrain
-			if (_hoveredTerrainID != "")
-			{
-				// Only select the terrain if it has a heightmap
-				if (_fe3d.terrainEntity_isExisting(_hoveredTerrainID))
-				{
-					_fe3d.terrainEntity_select(_hoveredTerrainID);
-				}
 			}
 		}
 	}

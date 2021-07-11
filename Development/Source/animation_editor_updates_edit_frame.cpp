@@ -93,7 +93,7 @@ void AnimationEditor::_updateFrameScreen()
 					// Choosing part of preview model
 					auto modelParts = currentAnimation->partIDs;
 					modelParts.erase(modelParts.begin());
-					_gui.getGlobalScreen()->addChoiceForm("parts", "Select Part", Vec2(-0.4f, 0.1f), modelParts);
+					_gui.getGlobalScreen()->addChoiceForm("parts", "Select Part", Vec2(-0.5f, 0.1f), modelParts);
 				}
 			}
 

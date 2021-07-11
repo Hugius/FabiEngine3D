@@ -33,7 +33,7 @@ void BillboardEditor::_updateBillboardManagement()
 				}
 				else if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 				{
-					_gui.getGlobalScreen()->addValueForm("newBillboardName", "New Billboard Name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
 					_isCreatingBillboard = true;
 				}
 				else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
@@ -42,7 +42,7 @@ void BillboardEditor::_updateBillboardManagement()
 					_isEditingBillboard = true;
 					auto IDs = getLoadedBillboardIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select Billboard", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 				{
@@ -50,7 +50,7 @@ void BillboardEditor::_updateBillboardManagement()
 					_isRemovingBillboard = true;
 					auto IDs = getLoadedBillboardIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select Billboard", Vec2(-0.4f, 0.1f), IDs);
+					_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 				}
 			}
 
@@ -79,7 +79,7 @@ void BillboardEditor::_updateBillboardCreation()
 			string newBillboardName = "";
 
 			// Check if user filled in a new name
-			if (_gui.getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardID }))
+			if (_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardName, { _currentBillboardID }))
 			{
 				// @ sign not allowed
 				if (newBillboardName.find('@') == string::npos)
@@ -134,7 +134,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		if (_isChoosingBillboard)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("billboards");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("billboardList");
 
 			// Hide last billboard
 			if (_hoveredBillboardID != "")
@@ -162,7 +162,7 @@ void BillboardEditor::_updateBillboardChoosing()
 
 					// Miscellaneous
 					_fe3d.billboardEntity_setVisible(_currentBillboardID, true);
-					_gui.getGlobalScreen()->removeChoiceForm("billboards");
+					_gui.getGlobalScreen()->removeChoiceForm("billboardList");
 					_isChoosingBillboard = false;
 				}
 				else
@@ -171,12 +171,12 @@ void BillboardEditor::_updateBillboardChoosing()
 					_hoveredBillboardID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("billboards")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("billboardList")) // Cancelled choosing
 			{
 				_isChoosingBillboard = false;
 				_isEditingBillboard = false;
 				_isRemovingBillboard = false;
-				_gui.getGlobalScreen()->removeChoiceForm("billboards");
+				_gui.getGlobalScreen()->removeChoiceForm("billboardList");
 			}
 			else // Nothing hovered
 			{

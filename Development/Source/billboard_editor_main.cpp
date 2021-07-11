@@ -23,7 +23,6 @@ void BillboardEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setPosition(INITIAL_CAMERA_POSITION);
 	_fe3d.camera_setMinThirdPersonPitch(0.0f);
-	_fe3d.camera_setMaxThirdPersonPitch(0.0f);
 	_fe3d.camera_setPitch(-90.0f);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 

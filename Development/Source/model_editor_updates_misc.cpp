@@ -57,3 +57,53 @@ void ModelEditor::_updateCamera()
 		}
 	}
 }
+
+void ModelEditor::_updateMiscellaneous()
+{
+	if (_isEditorLoaded)
+	{
+		// Lock toggling if GUI focused or cursor not in 3D viewport
+		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
+
+		// Update reference model visibility
+		if (_fe3d.input_isKeyToggled(InputType::KEY_R))
+		{
+			_fe3d.modelEntity_setVisible("@@cube", false);
+		}
+		else
+		{
+			_fe3d.modelEntity_setVisible("@@cube", true);
+		}
+
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		{
+			// Update debug rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+			{
+				if (_fe3d.misc_isDebugRenderingEnabled())
+				{
+					_fe3d.misc_disableDebugRendering();
+				}
+				else
+				{
+					_fe3d.misc_enableDebugRendering();
+				}
+			}
+		}
+
+		// Update wireframed model rendering
+		string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
+		if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
+		{
+			if (_fe3d.input_isKeyToggled(InputType::KEY_F))
+			{
+				_fe3d.modelEntity_setWireframed(modelID, true);
+			}
+			else
+			{
+				_fe3d.modelEntity_setWireframed(modelID, false);
+			}
+		}
+	}
+}

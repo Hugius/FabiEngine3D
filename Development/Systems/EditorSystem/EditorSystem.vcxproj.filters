@@ -144,7 +144,7 @@
     <ClCompile Include="..\..\Source\animation_editor_execution.cpp">
       <Filter>Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates.cpp">
+    <ClCompile Include="..\..\Source\animation_editor_updates_main.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_updates_edit_frame.cpp">
@@ -228,10 +228,10 @@
     <ClCompile Include="..\..\Source\model_editor_misc.cpp">
       <Filter>Model Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_edit_aabb.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_edit_lighting.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp">
@@ -240,13 +240,13 @@
     <ClCompile Include="..\..\Source\model_editor_updates_main.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_edit_mesh.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_edit_options.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_edit_size.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_loading.cpp">
@@ -356,6 +356,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit_two.cpp">
       <Filter>Environment Editor\Updates\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_updates_misc.cpp">
+      <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

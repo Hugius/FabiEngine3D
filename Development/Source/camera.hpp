@@ -83,17 +83,20 @@ private:
 	static inline const float MAX_ACCELERATION = 10.0f;
 	const float _aspectRatio;
 	float _fov = 0.0f;
-	float _yawAcceleration = 0.0f;
-	float _pitchAcceleration = 0.0f;
-	float _distanceAcceleration = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;
 	float _firstPersonYaw = 0.0f;
 	float _firstPersonPitch = 0.0f;
+	float _firstPersonYawAcceleration = 0.0f;
+	float _firstPersonPitchAcceleration = 0.0f;
 	float _minFirstPersonPitch = 0.0f;
 	float _maxFirstPersonPitch = 0.0f;
 	float _thirdPersonYaw = 0.0f;
 	float _thirdPersonPitch = 0.0f;
+	float _thirdPersonDistance = 0.0f;
+	float _thirdPersonYawAcceleration = 0.0f;
+	float _thirdPersonPitchAcceleration = 0.0f;
+	float _thirdPersonDistanceAcceleration = 0.0f;
 	float _minThirdPersonPitch = 0.0f;
 	float _maxThirdPersonPitch = 0.0f;
 	float _minThirdPersonDistance = 0.0f;
@@ -102,7 +105,6 @@ private:
 	float _farZ = 0.0f;
 	float _mouseSensitivity = 0.0f;
 	float _mouseOffset = 0.0f;
-	float _thirdPersonDistance = 0.0f;
 
 	// Booleans
 	bool _isThirdPersonViewEnabled = false;

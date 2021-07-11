@@ -21,7 +21,7 @@ void EnvironmentEditor::load()
 	// Default camera
 	_fe3d.camera_reset();
 	
-	// Enable default graphics
+	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
@@ -55,7 +55,7 @@ void EnvironmentEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable default graphics
+	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);

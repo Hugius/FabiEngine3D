@@ -101,7 +101,7 @@ void BillboardEditor::_updateBillboardCreation()
 							_loadedBillboardIDs.push_back(newBillboardName);
 
 							// Miscellaneous
-							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f),	BILLBOARD_POSITION, Vec3(0.0f), Vec2(1.0f), false, false);
+							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), Vec2(1.0f), false, false);
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 								_currentBillboardID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), true);
@@ -228,34 +228,14 @@ void BillboardEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
-		// Check if a billboard is active
-		if ((_currentBillboardID != "") || (_hoveredBillboardID != ""))
+		// Check if third person view is enabled
+		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
-			// Temporary values
-			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
-			float cameraDistance = (std::max(billboardSize.x, billboardSize.y));
-			float cameraHeight = BILLBOARD_POSITION.y + (billboardSize.y / 2.0f);
+			// Disable third person view
+			_fe3d.camera_disableThirdPersonView();
 
-			// Get scroll wheel input
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-			{
-				float rotationAcceleration = static_cast<float>(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
-				_cameraAcceleration += rotationAcceleration;
-			}
-			_cameraAcceleration *= 0.975f;
-			_totalCameraRotation += _cameraAcceleration;
-
-			// Calculate new camera position
-			float x = cameraDistance * sin(_totalCameraRotation);
-			float y = cameraHeight;
-			float z = cameraDistance * cos(_totalCameraRotation);
-
-			// Update camera position
-			_fe3d.camera_setPosition(Vec3(x, y, z));
-
-			// Update camera lookat position
-			Vec3 cameraLookatPosition = Vec3(0.0f, cameraHeight, 0.0f);
-			_fe3d.camera_setThirdPersonLookat(cameraLookatPosition);
+			// Show cursor
+			_fe3d.imageEntity_setVisible("@@cursor", true);
 
 			// Disable shadows
 			if (_fe3d.gfx_isShadowsEnabled())
@@ -264,21 +244,40 @@ void BillboardEditor::_updateCamera()
 			}
 
 			// Enable shadows
-			_fe3d.gfx_enableShadows(Vec3(cameraLookatPosition + Vec3(cameraDistance * 2.0f)),
-				cameraLookatPosition, cameraDistance * 4.0f, cameraDistance * 8.0f, 0.5f, false, false, 0);
+			const auto distance = _fe3d.camera_getThirdPersonDistance();
+			_fe3d.gfx_enableShadows(Vec3(distance * 2.0f),
+				Vec3(0.0f), distance * 4.0f, distance * 8.0f, 0.5f, false, false, 0);
 		}
-		else
-		{
-			// Set default camera view
-			_fe3d.camera_setPosition(CAMERA_POSITION);
-			_fe3d.camera_setThirdPersonLookat(BILLBOARD_POSITION);
-			_totalCameraRotation = 0.0f;
-			_cameraAcceleration = 0.0f;
 
-			// Disable shadows
-			if (_fe3d.gfx_isShadowsEnabled())
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		{
+			// Check if RMB pressed
+			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				_fe3d.gfx_disableShadows(true);
+				// Set lookat & distance
+				if (_currentBillboardID.empty())
+				{
+					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, _fe3d.modelEntity_getSize("@@cube").y, 0.0f));
+					_fe3d.camera_setMinThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
+					_fe3d.camera_setMaxThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
+				}
+				else
+				{
+					const auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
+					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, size.y / 2.0f, 0.0f));
+					_fe3d.camera_setMinThirdPersonDistance(std::max(size.x, size.y));
+					_fe3d.camera_setMaxThirdPersonDistance(std::max(size.x, size.y));
+				}
+
+				// Enable third person view
+				_fe3d.camera_enableThirdPersonView(
+					_fe3d.camera_getThirdPersonYaw(),
+					_fe3d.camera_getThirdPersonPitch(),
+					_fe3d.camera_getThirdPersonDistance());
+
+				// Hide cursor
+				_fe3d.imageEntity_setVisible("@@cursor", false);
 			}
 		}
 	}

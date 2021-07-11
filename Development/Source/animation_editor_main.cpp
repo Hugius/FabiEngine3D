@@ -66,9 +66,12 @@ void AnimationEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
-	_fe3d.camera_setYaw(-90.0f);
+	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+	_fe3d.camera_setPosition(INITIAL_CAMERA_POSITION);
+	_fe3d.camera_setPitch(-90.0f);
+	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 
-	// Enable default graphics
+	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -77,6 +80,15 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+
+	// 3D Environment
+	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
+	_fe3d.modelEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
+	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Load models
 	_modelEditor.loadModelEntitiesFromFile();
@@ -100,7 +112,7 @@ void AnimationEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable default graphics
+	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSceneReflections(true);
@@ -123,12 +135,6 @@ void AnimationEditor::unload()
 	_currentAnimationID = "";
 	_currentPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
-	_totalCursorDifference = Vec2(0.0f, 0.5f);
-	_cameraAcceleration = Vec2(0.0f);
-	_lastCursorPos = Vec2(0.0f);
-	_cameraDistance = 5.0f;
-	_cameraSpeed = 0.1f;
-	_cameraScrollingAcceleration = 0.0f;
 	_partColorStrength = 0.0f;
 	_colorChangingSpeed = 0.05f;
 	_currentFrameIndex = 0;

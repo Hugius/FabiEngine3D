@@ -31,29 +31,30 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
+	// Instances
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+
+	// Strings
+	vector<string> _loadedBillboardIDs;
+	string _hoveredBillboardID = "";
+	string _currentBillboardID = "";
+	string _currentProjectID = "";
+
+	// Vectors
+	static inline const Vec3 INITIAL_CAMERA_POSITION = Vec3(0.0f, 5.0f, 0.0f);
+
+	// Floats
+	static inline const float MOUSE_SENSITIVITY = 0.025f;
+	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
+	static inline const float INITIAL_CAMERA_YAW = 0.0f;
+	static inline const float INITIAL_CAMERA_PITCH = 0.0f;
+	static inline const float INITIAL_CAMERA_DISTANCE = 5.0f;
+
 	// Booleans
 	bool _isCreatingBillboard = false;
 	bool _isChoosingBillboard = false;
 	bool _isEditingBillboard = false;
 	bool _isRemovingBillboard = false;
 	bool _isEditorLoaded = false;
-
-	// Vectors
-	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 2.5f, 5.0f);
-	static inline const Vec3 BILLBOARD_POSITION = Vec3(0.0f, 2.5f, 0.0f);
-
-	// Floats
-	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
-	float _cameraAcceleration = 0.0f;
-	float _totalCameraRotation = 0.0f;
-
-	// Core
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-	
-	// Strings
-	string _hoveredBillboardID = "";
-	string _currentBillboardID = "";
-	string _currentProjectID = "";
-	vector<string> _loadedBillboardIDs;
 };

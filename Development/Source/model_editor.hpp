@@ -48,24 +48,23 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Core
+	// Instances
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 
 	// Strings
+	vector<string> _loadedModelIDs;
+	vector<string> _meshFileNames;
 	string _currentModelID = "";
 	string _currentAabbID = "";
 	string _currentProjectID = "";
 	string _hoveredModelID = "";
-	vector<string> _loadedModelIDs;
-	vector<string> _meshFileNames;
 
 	// Vectors
+	static inline const Vec3 INITIAL_CAMERA_POSITION = Vec3(0.0f, 5.0f, 0.0f);
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 
 	// Floats
-	static inline const Vec3 INITIAL_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
-	static inline const float SCROLL_WHEEL_DIVIDER = 40.0f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
 	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;

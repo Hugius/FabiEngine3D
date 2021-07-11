@@ -70,21 +70,17 @@ private:
 	string _currentPartID	   = "";
 
 	// Vectors
-	Vec3 _cameraLookatPosition  = Vec3(0.0f);
-	Vec2 _totalCursorDifference = Vec2(0.0f, 0.5f);
-	Vec2 _cameraAcceleration    = Vec2(0.0f);
-	Vec2 _lastCursorPos			= Vec2(0.0f);
+	static inline const Vec3 INITIAL_CAMERA_POSITION = Vec3(0.0f, 5.0f, 0.0f);
+	Vec3 _cameraLookatPosition = Vec3(0.0f);
 
 	// Floats
-	static inline const float MIN_CAMERA_HEIGHT = 1.0f;
-	static inline const float SCROLL_WHEEL_DIVIDER = 5.0f;
-	static inline const float CAMERA_DISTANCE = 5.0f;
-	static inline const float MOUSE_SENSITIVITY = 0.1f;
-	float _cameraDistance			   = CAMERA_DISTANCE;
-	float _cameraScrollingAcceleration = 0.0f;
-	float _partColorStrength		   = 0.0f;
-	float _colorChangingSpeed		   = 0.05f;
-	float _cameraSpeed				   = MOUSE_SENSITIVITY;
+	static inline const float MOUSE_SENSITIVITY = 0.025f;
+	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
+	static inline const float INITIAL_CAMERA_YAW = 0.0f;
+	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline const float INITIAL_CAMERA_DISTANCE = 5.0f;
+	float _partColorStrength = 0.0f;
+	float _colorChangingSpeed = 0.05f;
 
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;

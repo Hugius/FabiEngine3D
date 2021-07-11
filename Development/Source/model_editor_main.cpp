@@ -30,9 +30,10 @@ void ModelEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d.camera_setPosition(INITIAL_CAMERA_POSITION);
+	_fe3d.camera_setPitch(-90.0f);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 
-	// Enable default graphics
+	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -73,7 +74,7 @@ void ModelEditor::unload()
 		_fe3d.camera_disableThirdPersonView();
 	}
 
-	// Disable default graphics
+	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableShadows(true);

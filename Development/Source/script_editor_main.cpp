@@ -52,7 +52,7 @@ void ScriptEditor::load()
 	// Background
 	_fe3d.skyEntity_setLightness("@@engineBackground", 0.5f);
 
-	// Enable default graphics
+	// Default graphics
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
@@ -76,7 +76,7 @@ void ScriptEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Disable default graphics
+	// Default graphics
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableNormalMapping(true);

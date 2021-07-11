@@ -41,10 +41,13 @@ void Camera::reset()
 	_firstPersonPitch = 0.0f;
 	_thirdPersonYaw = 0.0f;
 	_thirdPersonPitch = 0.0f;
-	_yawAcceleration = 0.0f;
-	_pitchAcceleration = 0.0f;
-	_mouseOffset = 0.0f;
+	_firstPersonYawAcceleration = 0.0f;
+	_firstPersonPitchAcceleration = 0.0f;
+	_thirdPersonYawAcceleration = 0.0f;
+	_thirdPersonPitchAcceleration = 0.0f;
+	_thirdPersonDistanceAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
+	_mouseOffset = 0.0f;
 
 	// Booleans
 	_isFirstPersonViewEnabled = false;
@@ -94,17 +97,17 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
 		// Update yaw
-		_yawAcceleration += xOffset;
-		_yawAcceleration = std::clamp(_yawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_firstPersonYaw += _yawAcceleration;
-		_yawAcceleration *= 0.75f;
+		_firstPersonYawAcceleration += xOffset;
+		_firstPersonYawAcceleration = std::clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_firstPersonYaw += _firstPersonYawAcceleration;
+		_firstPersonYawAcceleration *= 0.75f;
 
 		// Update pitch
-		_pitchAcceleration += yOffset;
-		_pitchAcceleration = std::clamp(_pitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_firstPersonPitch += _pitchAcceleration;
+		_firstPersonPitchAcceleration += yOffset;
+		_firstPersonPitchAcceleration = std::clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_firstPersonPitch += _firstPersonPitchAcceleration;
 		_firstPersonPitch = std::clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch);
-		_pitchAcceleration *= 0.75f;
+		_firstPersonPitchAcceleration *= 0.75f;
 
 		// Limit view angles
 		_firstPersonYaw = std::fmodf(_firstPersonYaw, 360.0f);
@@ -116,6 +119,11 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 
 		// Spawn mouse in middle of screen
 		_window.setCursorPosition({ xMiddle, yMiddle });
+	}
+	else
+	{
+		_firstPersonYawAcceleration = 0.0f;
+		_firstPersonPitchAcceleration = 0.0f;
 	}
 
 	// Update third person camera
@@ -135,27 +143,27 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
 		// Update yaw
-		_yawAcceleration += xOffset;
-		_yawAcceleration = std::clamp(_yawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_thirdPersonYaw -= _yawAcceleration;
+		_thirdPersonYawAcceleration += xOffset;
+		_thirdPersonYawAcceleration = std::clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_thirdPersonYaw -= _thirdPersonYawAcceleration;
 		_thirdPersonYaw = std::fmodf(_thirdPersonYaw, 360.0f);
-		_yawAcceleration *= 0.75f;
+		_thirdPersonYawAcceleration *= 0.75f;
 		
 		// Update pitch
-		_pitchAcceleration += yOffset;
-		_pitchAcceleration = std::clamp(_pitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_thirdPersonPitch -= _pitchAcceleration;
+		_thirdPersonPitchAcceleration += yOffset;
+		_thirdPersonPitchAcceleration = std::clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
 		_thirdPersonPitch = std::clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch);
 		_thirdPersonPitch = std::clamp(_thirdPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
-		_pitchAcceleration *= 0.75f;
+		_thirdPersonPitchAcceleration *= 0.75f;
 
 		// Update distance
-		_distanceAcceleration += (scrollOffset * 5.0f);
-		_distanceAcceleration = std::clamp(_distanceAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_thirdPersonDistance -= _distanceAcceleration;
+		_thirdPersonDistanceAcceleration += (scrollOffset * 5.0f);
+		_thirdPersonDistanceAcceleration = std::clamp(_thirdPersonDistanceAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_thirdPersonDistance -= _thirdPersonDistanceAcceleration;
 		_thirdPersonDistance = std::clamp(_thirdPersonDistance, _minThirdPersonDistance, _maxThirdPersonDistance);
 		_thirdPersonDistance = std::clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
-		_distanceAcceleration *= 0.75f;
+		_thirdPersonDistanceAcceleration *= 0.75f;
 
 		// Calculate position multipliers
 		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * sin(Math::degreesToRadians(_thirdPersonYaw));
@@ -176,6 +184,12 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 
 		// Spawn mouse in middle of screen
 		_window.setCursorPosition({ xMiddle, yMiddle });
+	}
+	else
+	{
+		_thirdPersonYawAcceleration = 0.0f;
+		_thirdPersonPitchAcceleration = 0.0f;
+		_thirdPersonDistanceAcceleration = 0.0f;
 	}
 
 	// Limit view angles

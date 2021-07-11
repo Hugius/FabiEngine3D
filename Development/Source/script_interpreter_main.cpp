@@ -186,7 +186,7 @@ void ScriptInterpreter::load()
 	// Default camera
 	_fe3d.camera_reset();
 
-	// Enable default graphics
+	// Default graphics
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -368,7 +368,7 @@ void ScriptInterpreter::unload()
 		_fe3d.gfx_disableBloom(true);
 	}
 
-	// Disable default graphics
+	// Default graphics
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disablePointLighting(true);
 	_fe3d.gfx_disableSkyReflections(true);

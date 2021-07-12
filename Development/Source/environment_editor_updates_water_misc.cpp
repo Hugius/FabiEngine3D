@@ -173,10 +173,7 @@ void EnvironmentEditor::_updateWaterCamera()
 			{
 				// Check if RMB pressed
 				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
-				{
-					// Update lookat position
-					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, _fe3d.waterEntity_getPosition(_currentWaterID).y, 0.0f));
-	
+				{	
 					// Enable third person view
 					_fe3d.camera_enableThirdPersonView(
 						_fe3d.camera_getThirdPersonYaw(),

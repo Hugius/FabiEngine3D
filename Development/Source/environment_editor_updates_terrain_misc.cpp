@@ -101,6 +101,9 @@ void EnvironmentEditor::_updateTerrainChoosing()
 					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 					{
 						_fe3d.terrainEntity_select(_currentTerrainID);
+						_fe3d.camera_setPosition(Vec3(0.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f, 0.0f));
+						_fe3d.camera_setPitch(-90.0f);
+						_fe3d.camera_enableThirdPersonView(0.0f, 45.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f);
 					}
 
 					// Miscellaneous
@@ -175,6 +178,12 @@ void EnvironmentEditor::_updateTerrainCamera()
 				// Check if RMB pressed
 				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
+					// Set distance
+					_fe3d.camera_setMinThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
+					_fe3d.camera_setMaxThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
+					_fe3d.camera_setMinThirdPersonPitch(45.0f);
+					_fe3d.camera_setMaxThirdPersonPitch(45.0f);
+
 					// Enable third person view
 					_fe3d.camera_enableThirdPersonView(
 						_fe3d.camera_getThirdPersonYaw(),

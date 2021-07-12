@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isTerrainCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -160,12 +160,12 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			else if (screen->getButton("maxHeight")->isHovered())
 			{
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 

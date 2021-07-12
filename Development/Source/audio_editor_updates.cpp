@@ -30,7 +30,7 @@ void AudioEditor::_updateMainMenu()
 				}
 				else if (screen->getButton("addAudio")->isHovered()) // Add audio button
 				{
-					_gui.getGlobalScreen()->addValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingAudio = true;
 				}
 				else if (screen->getButton("editAudio")->isHovered()) // Edit audio button

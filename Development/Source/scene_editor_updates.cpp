@@ -80,7 +80,7 @@ void SceneEditor::_updateMainMenu()
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{

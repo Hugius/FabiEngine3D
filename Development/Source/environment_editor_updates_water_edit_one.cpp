@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isWaterCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -141,13 +141,13 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}			
 		}
 

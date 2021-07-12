@@ -51,11 +51,11 @@ public:
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
 	// Value form
-	void addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size);
-	void addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size);
-	void addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size);
-	void addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size);
-	void addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size);
+	void addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
+	void addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
+	void addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
+	void addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
+	void addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
 	bool checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues = {});
 	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
 	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
@@ -79,9 +79,9 @@ public:
 
 private:
 	void _updateValueFilling();
-	void _removeValueForm(const string& ID);
-	void _addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers);
+	void _addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition);
 	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
+	void _removeValueForm(const string& ID);
 
 	FabiEngine3D& _fe3d;
 
@@ -96,7 +96,6 @@ private:
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 0.25f, 0.0f);
 	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
 	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
-	static inline const Vec2 VALUE_FORM_BUTTONS_POSITION = Vec2(0.0f, 0.1f);
 
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";

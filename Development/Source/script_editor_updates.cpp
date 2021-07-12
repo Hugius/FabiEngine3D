@@ -29,11 +29,11 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (screen->getButton("search")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{
@@ -43,7 +43,7 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (screen->getButton("rename")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -61,7 +61,7 @@ void ScriptEditor::_updateGUI()
 				// Search hotkey
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getGlobalScreen()->isFocused())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 

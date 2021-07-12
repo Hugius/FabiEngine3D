@@ -64,13 +64,13 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B", ambientLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B", ambientLightingColor.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient Intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient Intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 
@@ -150,23 +150,23 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B", directionalLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B", directionalLightingColor.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("position")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional Intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional Intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard Size", billboardSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard Size", billboardSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 

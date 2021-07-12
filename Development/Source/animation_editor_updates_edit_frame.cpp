@@ -40,21 +40,21 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("transformation")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x * multiplier, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y * multiplier, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z * multiplier, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("rotationOrigin")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xTransformationSpeed", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("yTransformationSpeed", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("zTransformationSpeed", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xTransformationSpeed", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yTransformationSpeed", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformationSpeed", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("speedType")->isHovered())
 				{

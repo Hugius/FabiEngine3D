@@ -7,10 +7,9 @@
 
 class CollisionResolver final
 {
-public:
-	CollisionResolver(CollisionDetector& collisionDetector);
-	
-	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera & camera);
+public:	
+	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, 
+		Camera & camera, CollisionDetector& collisionDetector);
 	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
 	void enableCameraResponse(bool x, bool y, bool z);
 	void disableAabbResponse();
@@ -22,8 +21,6 @@ public:
 	bool isTerrainResponseEnabled();
 
 private:
-	CollisionDetector& _collisionDetector;
-
 	float _cameraAabbBottom = 0.0f;
 	float _cameraAabbTop = 0.0f;
 	float _cameraAabbLeft = 0.0f;

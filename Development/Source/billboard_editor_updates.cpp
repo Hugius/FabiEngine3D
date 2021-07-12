@@ -33,7 +33,7 @@ void BillboardEditor::_updateBillboardManagement()
 				}
 				else if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 				{
-					_gui.getGlobalScreen()->addValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingBillboard = true;
 				}
 				else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button

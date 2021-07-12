@@ -46,7 +46,7 @@ void AnimationEditor::_updateManagementScreen()
 				}
 				else if (screen->getButton("addAnimation")->isHovered()) // Add animation button
 				{
-					_gui.getGlobalScreen()->addValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingAnimation = true;
 				}
 				else if (screen->getButton("editAnimation")->isHovered()) // Edit animation button

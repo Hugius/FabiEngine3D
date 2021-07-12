@@ -22,25 +22,45 @@
 class MasterRenderer final
 {
 public:
-	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
+	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera);
 
+	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
-	void renderScene(EntityBus* entityBus, Camera& camera);
+	void renderScene(EntityBus* entityBus);
 	void loadShadowFramebuffer(int quality);
 	void loadReflectionFramebuffer(int quality);
 	void loadRefractionFramebuffer(int quality);
 
 private:
-	// Timer for performance profiling
+	// Capturing functions
+	void _captureSceneReflections();
+	void _captureWaterReflections();
+	void _captureWaterRefractions();
+	void _captureShadows();
+	void _captureBloom();
+	void _captureSceneDepth();
+	void _capturePostProcessing();
+	void _captureDofBlur();
+	void _captureMotionBlur();
+	void _captureLensFlare();
+
+	// Rendering functions
+	void _renderSkyEntity();
+	void _renderTerrainEntity();
+	void _renderWaterEntity();
+	void _renderModelEntities();
+	void _renderBillboardEntities();
+	void _renderAabbEntities();
+	void _renderFinalSceneTexture();
+	void _renderGUI();
+	void _renderCustomCursor();
+	void _renderDebugScreens();
+
+	// Instances
+	Camera& _camera;
 	Timer& _timer;
-
-	// Renderbus
 	RenderBus& _renderBus;
-
-	// Texture loader for debug rendering text
 	TextureLoader& _textureLoader;
-
-	// Temp entitybus
 	EntityBus* _entityBus = nullptr;
 
 	// Final screen texture
@@ -71,27 +91,7 @@ private:
 	RenderFramebuffer _shadowFramebuffer;
 	RenderFramebuffer _sceneDepthFramebuffer;
 
-	// Capturing functions
-	void _captureSceneReflections(Camera& camera);
-	void _captureWaterReflections(Camera& camera);
-	void _captureWaterRefractions();
-	void _captureShadows();
-	void _captureBloom();
-	void _captureSceneDepth();
-	void _capturePostProcessing();
-	void _captureDofBlur();
-	void _captureMotionBlur(Camera& camera);
-	void _captureLensFlare();
-
-	// Rendering functions
-	void _renderSkyEntity();
-	void _renderTerrainEntity();
-	void _renderWaterEntity();
-	void _renderModelEntities();
-	void _renderBillboardEntities();
-	void _renderAabbEntities();
-	void _renderFinalSceneTexture();
-	void _renderGUI();
-	void _renderCustomCursor();
-	void _renderDebugScreens();
+	// Miscellaneous
+	float _cameraYawDifference = 0.0f;
+	float _cameraPitchDifference = 0.0f;
 };

@@ -40,19 +40,19 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.modelEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.modelEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.modelEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.modelEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.modelEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.modelEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.modelEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.modelEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lodID")->isHovered())
 			{
 				string lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
 				lodID = (lodID == "") ? lodID : lodID.substr(1, lodID.size() - 1);
-				_gui.getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.0f), Vec2(0.4f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 

@@ -1,16 +1,10 @@
 #include "collision_resolver.hpp"
 #include "logger.hpp"
 
-CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
-	_collisionDetector(collisionDetector)
-{
-	
-}
-
 void CollisionResolver::update(
 	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, 
 	TerrainEntityManager& terrainManager, 
-	Camera& camera)
+	Camera& camera, CollisionDetector& collisionDetector)
 {
 	// Check if AABB collision is needed in the first place
 	if (_isCameraResponseEnabled)
@@ -28,7 +22,7 @@ void CollisionResolver::update(
 			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
 				// Check collision with AABB
-				auto result = _collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), middlePosition,
+				auto result = collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), middlePosition,
 					_cameraAabbBottom, _cameraAabbTop, _cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, 
 					middleChange, aabb->hasCollided());
 

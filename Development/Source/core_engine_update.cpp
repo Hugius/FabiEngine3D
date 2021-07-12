@@ -38,7 +38,7 @@ void CoreEngine::_updateApplication()
 
 			// Collision updates
 			_timer.startDeltaPart("collisionUpdate");
-			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera);
+			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera, _collisionDetector);
 			_timer.stopDeltaPart();
 
 			// 3D entity updates
@@ -84,6 +84,9 @@ void CoreEngine::_updateApplication()
 	_networkClientAPI.update();
 	_timer.stopDeltaPart();
 
+	// Always update master renderer
+	_masterRenderer.update();
+
 	// Miscellaneous
 	_updateWindowFading();
 
@@ -125,7 +128,7 @@ void CoreEngine::_renderApplication()
 	);
 
 	// Render entities
-	_masterRenderer.renderScene(&entityBus, _camera);
+	_masterRenderer.renderScene(&entityBus);
 
 	// Swap GPU buffer
 	_timer.startDeltaPart("bufferSwap");

@@ -2,7 +2,7 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void MasterRenderer::_captureSceneReflections(Camera& camera)
+void MasterRenderer::_captureSceneReflections()
 {
 	// Search for any reflective model entity
 	bool anyReflectiveModelFound = false;
@@ -19,7 +19,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 	if (_renderBus.isSceneReflectionsEnabled() && anyReflectiveModelFound)
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
+		float cameraDistance = (_camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 
 		// Start capturing reflections
 		_sceneReflectionFramebuffer.bind();
@@ -52,15 +52,15 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		}
 
 		// Move down
-		const Vec3 originalCameraPosition = camera.getPosition();
-		camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+		const Vec3 originalCameraPosition = _camera.getPosition();
+		_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
 
 		// Look up
-		const float originalCameraPitch = camera.getPitch();
-		camera.setPitch(-originalCameraPitch);
+		const float originalCameraPitch = _camera.getPitch();
+		_camera.setPitch(-originalCameraPitch);
 
 		// Update camera
-		camera.updateMatrices();
+		_camera.updateMatrices();
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
@@ -107,13 +107,13 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 		}
 
 		// Look down
-		camera.setPitch(originalCameraPitch);
+		_camera.setPitch(originalCameraPitch);
 
 		// Move up
-		camera.setPosition(originalCameraPosition);
+		_camera.setPosition(originalCameraPosition);
 
 		// Update camera
-		camera.updateMatrices();
+		_camera.updateMatrices();
 
 		// Iterate through all MODEL entities
 		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
@@ -157,7 +157,7 @@ void MasterRenderer::_captureSceneReflections(Camera& camera)
 	}
 }
 
-void MasterRenderer::_captureWaterReflections(Camera& camera)
+void MasterRenderer::_captureWaterReflections()
 {
 	// Temporary values
 	const auto waterEntity = _entityBus->getWaterEntity();
@@ -166,7 +166,7 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 	if ((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - waterEntity->getTranslation().y);
+		float cameraDistance = (_camera.getPosition().y - waterEntity->getTranslation().y);
 
 		// Start capturing reflections
 		_waterReflectionFramebuffer.bind();
@@ -208,15 +208,15 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		}
 
 		// Move down
-		const Vec3 originalCameraPosition = camera.getPosition();
-		camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+		const Vec3 originalCameraPosition = _camera.getPosition();
+		_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
 
 		// Look up
-		const float originalCameraPitch = camera.getPitch();
-		camera.setPitch(-originalCameraPitch);
+		const float originalCameraPitch = _camera.getPitch();
+		_camera.setPitch(-originalCameraPitch);
 
 		// Update camera
-		camera.updateMatrices();
+		_camera.updateMatrices();
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
@@ -277,13 +277,13 @@ void MasterRenderer::_captureWaterReflections(Camera& camera)
 		}
 
 		// Look down
-		camera.setPitch(originalCameraPitch);
+		_camera.setPitch(originalCameraPitch);
 
 		// Move up
-		camera.setPosition(originalCameraPosition);
+		_camera.setPosition(originalCameraPosition);
 
 		// Update camera
-		camera.updateMatrices();
+		_camera.updateMatrices();
 
 		// Iterate through all saved MODEL entities
 		for (const auto& savedID : savedModelEntityIDs)

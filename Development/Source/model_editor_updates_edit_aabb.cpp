@@ -30,7 +30,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -56,7 +56,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("toggleMove")->isHovered())
 			{

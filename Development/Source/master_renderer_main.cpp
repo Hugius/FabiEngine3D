@@ -6,10 +6,11 @@
 
 using std::make_shared;
 
-MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader) :
+MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera) :
 	_renderBus(renderBus),
 	_timer(timer),
 	_textureLoader(textureLoader),
+	_camera(camera),
 	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
 	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
 	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),
@@ -42,6 +43,16 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_finalSurface->setMirroredVertically(true);
 }
 
+void MasterRenderer::update()
+{
+	static float lastYaw = _camera.getYaw();
+	static float lastPitch = _camera.getPitch();
+	_cameraYawDifference = fabsf(_camera.getYaw() - lastYaw);
+	_cameraPitchDifference = fabsf(_camera.getPitch() - lastPitch);
+	lastYaw = _camera.getYaw();
+	lastPitch = _camera.getPitch();
+}
+
 void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
 {
 	// Prepare
@@ -64,7 +75,7 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 	_imageEntityRenderer.unbind();
 }
 
-void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
+void MasterRenderer::renderScene(EntityBus * entityBus)
 {
 	// General stuff
 	_entityBus = entityBus;
@@ -89,8 +100,8 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 	{
 		// Pre-rendering
 		_timer.startDeltaPart("reflectionPreRender");
-		_captureSceneReflections(camera);
-		_captureWaterReflections(camera);
+		_captureSceneReflections();
+		_captureWaterReflections();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("refractionPreRender");
 		_captureWaterRefractions();
@@ -139,7 +150,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus, Camera& camera)
 		_captureDofBlur();
 		_captureLensFlare();
 		_capturePostProcessing();
-		_captureMotionBlur(camera);
+		_captureMotionBlur();
 		_timer.stopDeltaPart();
 
 		// 2D rendering

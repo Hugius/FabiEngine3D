@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateSkyMenuMain()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isSkyCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{

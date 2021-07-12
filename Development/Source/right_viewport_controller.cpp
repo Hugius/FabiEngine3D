@@ -95,16 +95,22 @@ void RightViewportController::initialize()
 	// Billboard editor
 	auto billboardEditorScreen = rightWindow->getScreen("billboardEditorControls");
 	billboardEditorScreen->addRectangle("mouseRight", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse_right.png", false);
-	billboardEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse.png", false);
-	billboardEditorScreen->addRectangle("h", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "h.png", false);
-	billboardEditorScreen->addRectangle("r", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "r.png", false);
-	billboardEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "esc.png", false);
+	billboardEditorScreen->addRectangle("mouseMiddle", Vec2(-1.1f, 0.45f), Vec2(0.6f, 0.15f), "mouse_middle.png", false);
+	billboardEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.25f), Vec2(0.6f, 0.15f), "mouse.png", false);
+	billboardEditorScreen->addRectangle("h", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "h.png", false);
+	billboardEditorScreen->addRectangle("r", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "r.png", false);
+	billboardEditorScreen->addRectangle("space", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "space.png", false);
+	billboardEditorScreen->addRectangle("shift", Vec2(-0.975f, -0.55f), Vec2(0.45f, 0.15f), "shift.png", false);
+	billboardEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.75f), Vec2(0.45f, 0.15f), "esc.png", false);
 	billboardEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Editor Controls"), TH), "Editor Controls", white);
 	billboardEditorScreen->addTextfield("mouseRight", Vec2(-0.5f, 0.675f), Vec2(CW("Toggle Camera"), TH), "Toggle Camera", black, false);
-	billboardEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.475f), Vec2(CW("Move Camera"), TH), "Move Camera", black, false);
-	billboardEditorScreen->addTextfield("h", Vec2(-0.5f, 0.275f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
-	billboardEditorScreen->addTextfield("r", Vec2(-0.5f, 0.075f), Vec2(CW("Ref Box"), TH), "Ref Box", black, false);
-	billboardEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.125f), Vec2(CW("Back"), TH), "Back", black, false);
+	billboardEditorScreen->addTextfield("mouseMiddle", Vec2(-0.5f, 0.475f), Vec2(CW("Scroll Camera"), TH), "Scroll Camera", black, false);
+	billboardEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.275f), Vec2(CW("Move Camera"), TH), "Move Camera", black, false);
+	billboardEditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug Render"), TH), "Debug Render", black, false);
+	billboardEditorScreen->addTextfield("r", Vec2(-0.5f, -0.125f), Vec2(CW("Reference Box"), TH), "Reference Box", black, false);
+	billboardEditorScreen->addTextfield("space", Vec2(-0.5f, -0.325f), Vec2(CW("Move Up"), TH), "Move Up", black, false);
+	billboardEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.525f), Vec2(CW("Move Down"), TH), "Move Down", black, false);
+	billboardEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.725f), Vec2(CW("Back"), TH), "Back", black, false);
 
 	// Scene editor
 	auto sceneEditorScreen = rightWindow->getScreen("sceneEditorControls");

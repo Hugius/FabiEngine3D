@@ -175,10 +175,6 @@ void EnvironmentEditor::_updateTerrainCamera()
 				// Check if RMB pressed
 				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Update distance
-					_fe3d.camera_setMinThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
-					_fe3d.camera_setMaxThirdPersonDistance(_fe3d.terrainEntity_getSize(_currentTerrainID) * 0.75f);
-
 					// Enable third person view
 					_fe3d.camera_enableThirdPersonView(
 						_fe3d.camera_getThirdPersonYaw(),

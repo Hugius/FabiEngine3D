@@ -76,7 +76,8 @@ private:
 	ImageEntityRenderer      _imageEntityRenderer;
 	BlurRenderer             _dofRenderer;
 	BlurRenderer             _motionBlurRenderer;
-	BlurRenderer             _bloomRenderer;
+	BlurRenderer             _bloomRendererHighQuality;
+	BlurRenderer             _bloomRendererLowQuality;
 	ShadowRenderer           _shadowRenderer;
 	DepthRenderer            _depthRenderer;
 	PostRenderer             _postRenderer;

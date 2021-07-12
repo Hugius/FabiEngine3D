@@ -228,6 +228,23 @@ void BillboardEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
+		// Check if allowed by GUI
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		{
+			// Update moving up
+			if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
+			{
+				_cameraLookatPosition.y += LOOKAT_MOVEMENT_SPEED;
+			}
+
+			// Update moving down
+			if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
+			{
+				_cameraLookatPosition.y -= LOOKAT_MOVEMENT_SPEED;
+				_cameraLookatPosition.y = std::max(0.0f, _cameraLookatPosition.y);
+			}
+		}
+
 		// Check if third person view is enabled
 		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
@@ -245,8 +262,8 @@ void BillboardEditor::_updateCamera()
 
 			// Enable shadows
 			const auto distance = _fe3d.camera_getThirdPersonDistance();
-			_fe3d.gfx_enableShadows(Vec3(distance * 2.0f),
-				Vec3(0.0f), distance * 4.0f, distance * 8.0f, 0.5f, false, false, 0);
+			_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(distance * 2.0f)),
+				_cameraLookatPosition, distance * 4.0f, distance * 8.0f, 0.5f, false, false, 0);
 		}
 
 		// Check if allowed by GUI
@@ -255,21 +272,8 @@ void BillboardEditor::_updateCamera()
 			// Check if RMB pressed
 			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				// Update lookat & distance
-				if (_currentBillboardID.empty())
-				{
-					const auto size = _fe3d.modelEntity_getSize("@@cube");
-					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, size.y, 0.0f));
-					_fe3d.camera_setMinThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
-					_fe3d.camera_setMaxThirdPersonDistance(INITIAL_CAMERA_DISTANCE);
-				}
-				else
-				{
-					const auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
-					_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, size.y / 2.0f, 0.0f));
-					_fe3d.camera_setMinThirdPersonDistance(std::max(size.x, size.y));
-					_fe3d.camera_setMaxThirdPersonDistance(std::max(size.x, size.y));
-				}
+				// Update lookat position
+				_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
 
 				// Enable third person view
 				_fe3d.camera_enableThirdPersonView(

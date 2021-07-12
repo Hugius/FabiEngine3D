@@ -48,7 +48,7 @@ void AnimationEditor::_updateCamera()
 			// Check if RMB pressed
 			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				// Update lookat
+				// Update lookat position
 				_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
 
 				// Enable third person view

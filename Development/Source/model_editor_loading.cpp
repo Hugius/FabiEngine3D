@@ -11,7 +11,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> ModelEditor::preLoadModelEntitiesFromFile()");
+		Logger::throwError("ModelEditor::getAllTexturePathsFromFile() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -83,7 +83,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"model.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"model.fe3d\" missing!");
 	}
 
 	return {};
@@ -94,7 +94,7 @@ void ModelEditor::loadModelEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> ModelEditor::loadModelEntitiesFromFile()");
+		Logger::throwError("ModelEditor::loadModelEntitiesFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -202,6 +202,6 @@ void ModelEditor::loadModelEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"model.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"model.fe3d\" missing!");
 	}
 }

@@ -2,7 +2,6 @@
 #include "configuration.hpp"
 
 #include <algorithm>
-#include <iostream>
 
 Camera::Camera(RenderBus& renderBus, Window& window) :
 	_renderBus(renderBus),

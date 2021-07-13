@@ -2,7 +2,7 @@
 
 #include "base_entity.hpp"
 
-class BillboardEntity final: public BaseEntity
+class BillboardEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
@@ -60,13 +60,13 @@ public:
 	const float getLightness() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
-	const int getPassedSpriteAnimationFrames() const;
-	const int getMaxSpriteAnimationFramestep() const;
-	const int getTotalSpriteAnimationRows() const;
-	const int getTotalSpriteAnimationColumns() const;
-	const int getSpriteAnimationRowIndex() const;
-	const int getSpriteAnimationColumnIndex() const;
-	const int getSpriteAnimationLoops() const;
+	const unsigned int getPassedSpriteAnimationFrames() const;
+	const unsigned int getMaxSpriteAnimationFramestep() const;
+	const unsigned int getTotalSpriteAnimationRows() const;
+	const unsigned int getTotalSpriteAnimationColumns() const;
+	const unsigned int getSpriteAnimationRowIndex() const;
+	const unsigned int getSpriteAnimationColumnIndex() const;
+	const unsigned int getSpriteAnimationLoops() const;
 	const int getMaxSpriteAnimationLoops() const;
 	const bool isTransparent() const;
 	const bool isSpriteAnimationStarted() const;
@@ -82,38 +82,38 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	Vec3 _translation     = Vec3(0.0f);
-	Vec3 _rotation        = Vec3(0.0f);
+	Vec3 _translation = Vec3(0.0f);
+	Vec3 _rotation = Vec3(0.0f);
 	Vec3 _initialRotation = Vec3(0.0f);
-	Vec3 _scaling         = Vec3(1.0f);
-	Vec3 _color           = Vec3(1.0f);
+	Vec3 _scaling = Vec3(1.0f);
+	Vec3 _color = Vec3(1.0f);
 
 	float _lightness = 1.0f;
 	float _minHeight = -(std::numeric_limits<float>::max)();
 	float _maxHeight = (std::numeric_limits<float>::max)();
-	
+
 	unsigned int _maxSpriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;
-	unsigned int _totalSpriteAnimationRows    = 0;
+	unsigned int _totalSpriteAnimationRows = 0;
 	unsigned int _totalSpriteAnimationColumns = 0;
-	unsigned int _spriteAnimationRowIndex     = 0;
-	unsigned int _spriteAnimationColumnIndex  = 0;
-	int _spriteAnimationLoops      = 0;
-	int _maxSpriteAnimationLoops   = 0;
-	
+	unsigned int _spriteAnimationRowIndex = 0;
+	unsigned int _spriteAnimationColumnIndex = 0;
+	unsigned int _spriteAnimationLoops = 0;
+	int _maxSpriteAnimationLoops = 0;
+
 	GLuint _diffuseMap = 0;
 
-	string _textContent	   = "";
+	string _textContent = "";
 	string _diffuseMapPath = "";
-	string _fontPath	   = "";
+	string _fontPath = "";
 
-	bool _isTransparent			   = false;
+	bool _isTransparent = false;
 	bool _isSpriteAnimationStarted = false;
-	bool _isSpriteAnimationPaused  = false;
-	bool _isFacingCameraX	       = false;
-	bool _isFacingCameraY	       = false;
-	bool _isDepthMapIncluded       = true;
-	bool _isShadowed			   = true;
-	bool _isReflected			   = true;
-	bool _isBright				   = false;
+	bool _isSpriteAnimationPaused = false;
+	bool _isFacingCameraX = false;
+	bool _isFacingCameraY = false;
+	bool _isDepthMapIncluded = true;
+	bool _isShadowed = true;
+	bool _isReflected = true;
+	bool _isBright = false;
 };

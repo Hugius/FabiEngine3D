@@ -9,12 +9,15 @@ void SceneEditor::saveCustomSceneToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> SceneEditor::saveCustomSceneToFile()");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile() --> no current project loaded!");
+		
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwWarning("Tried to call saveCustomSceneToFile() from within scene editor!");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile() --> tried to call from within scene editor!");
 	}
+
+	// Warning checking
 	if (_customSceneID.empty())
 	{
 		Logger::throwWarning("Cannot save custom scene!");
@@ -25,11 +28,11 @@ void SceneEditor::saveCustomSceneToFile()
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
 	}
 	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
 	}
 
 	// Create or overwrite file

@@ -27,9 +27,10 @@ public:
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus);
-	void loadShadowFramebuffer(int quality);
-	void loadReflectionFramebuffer(int quality);
-	void loadRefractionFramebuffer(int quality);
+	void reloadShadowFramebuffer();
+	void reloadSceneReflectionFramebuffer();
+	void reloadWaterReflectionFramebuffer();
+	void reloadWaterRefractionFramebuffer();
 
 private:
 	// Capturing functions

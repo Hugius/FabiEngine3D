@@ -10,7 +10,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> BillboardEditor::getAllTexturePathsFromFile()");
+		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -65,7 +65,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
 	}
 
 	return {};
@@ -76,7 +76,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> BillboardEditor::loadBillboardEntitiesFromFile()");
+		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -179,7 +179,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" missing!");
 	}
 }
 
@@ -194,7 +194,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> BillboardEditor::saveBillboardEntitiesToFile()");
+		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile() --> no current project loaded!");
 	}
 
 	// Create or overwrite billboard file

@@ -10,7 +10,7 @@ void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
+		Logger::throwError("ScriptEditor::loadScriptsFromFile() --> no current project loaded!");
 	}
 
 	// Clear last script
@@ -73,7 +73,10 @@ void ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
+		if (isLoggingEnabled)
+		{
+			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
+		}
 	}
 }
 
@@ -85,7 +88,7 @@ void ScriptEditor::saveScriptsToFile()
 		// Error checking
 		if (_currentProjectID == "")
 		{
-			Logger::throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
+			Logger::throwError("ScriptEditor::saveScriptsToFile() --> no current project loaded!");
 		}
 
 		// Compose directory path

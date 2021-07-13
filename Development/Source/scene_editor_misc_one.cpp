@@ -14,7 +14,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> SceneEditor::isSceneExisting()");
+		Logger::throwError("SceneEditor::isSceneExisting() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -195,7 +195,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	return sceneIDs;
@@ -214,7 +214,7 @@ void SceneEditor::_deleteSceneFile(const string& sceneID)
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
 	}
 }
 

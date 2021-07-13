@@ -58,7 +58,4 @@ private:
 	map<string, TTF_Font*> _fontCache;
 	map<pair<string, string>, GLuint> _textCache;
 	map<string, vector<float>> _bitmapCache;
-
-	// Miscellaneous
-	static inline const unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
 };

@@ -42,7 +42,7 @@
     <ClCompile Include="..\..\Source\water_entity.cpp">
       <Filter>Data Structures\Environment</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_entity.cpp">
+    <ClCompile Include="..\..\Source\billboard_entity_getters.cpp">
       <Filter>Data Structures\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\aabb_entity.cpp">
@@ -101,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\entity_bus.cpp">
       <Filter>Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_entity_setters.cpp">
+      <Filter>Data Structures\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

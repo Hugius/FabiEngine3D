@@ -16,7 +16,7 @@ void ModelEditor::saveModelEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> ModelEditor::saveModelEntitiesToFile()");
+		Logger::throwError("ModelEditor::saveModelEntitiesToFile() --> no current project loaded!");
 	}
 
 	// Create or overwrite models file

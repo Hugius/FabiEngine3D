@@ -15,7 +15,7 @@ void SceneEditor::saveEditorSceneToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> SceneEditor::saveEditorSceneToFile()");
+		Logger::throwError("SceneEditor::saveEditorSceneToFile() --> no current project loaded!");
 	}
 
 	// Check if scene directory still exists
@@ -23,11 +23,11 @@ void SceneEditor::saveEditorSceneToFile()
 		("projects\\" + _currentProjectID)) + "\\scenes\\");
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
 	}
 	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
 	}
 
 	// Create or overwrite file

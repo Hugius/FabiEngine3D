@@ -3,22 +3,9 @@
 #include "tools.hpp"
 #include "configuration.hpp"
 
-#include <chrono>
 #include <direct.h>
 
-using namespace std::chrono;
-
-const int FabiEngine3D::misc_getRandomInteger(int min, int max)
-{
-	return Tools::getRandomInt(min, max);
-}
-
-const int FabiEngine3D::misc_getMsTimeSinceEpoch()
-{
-	return static_cast<int>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
-}
-
-const int FabiEngine3D::misc_getTriangleCount()
+const unsigned int FabiEngine3D::misc_getTriangleCount()
 {
 	return _core->_renderBus.getTriangleCount();
 }

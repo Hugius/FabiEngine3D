@@ -27,13 +27,14 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
 	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
-	// Create framebuffers
+	// Load framebuffers
 	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
-	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
-	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0));
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
+	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
+	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_dofRenderer.loadFramebuffers(BlurType::DOF, 2);
 	_motionBlurRenderer.loadFramebuffers(BlurType::MOTION, 4);
 	_bloomRendererHighQuality.loadFramebuffers(BlurType::BLOOM, 2);
@@ -185,24 +186,26 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	}
 }
 
-void MasterRenderer::loadShadowFramebuffer(int quality)
+void MasterRenderer::reloadShadowFramebuffer()
 {
 	_shadowFramebuffer.reset();
-	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality));
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(_renderBus.getShadowQuality()));
 }
 
-void MasterRenderer::loadReflectionFramebuffer(int quality)
+void MasterRenderer::reloadSceneReflectionFramebuffer()
 {
 	_sceneReflectionFramebuffer.reset();
-	_waterReflectionFramebuffer.reset();
-	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setReflectionQuality(quality);
+	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::loadRefractionFramebuffer(int quality)
+void MasterRenderer::reloadWaterReflectionFramebuffer()
+{
+	_waterReflectionFramebuffer.reset();
+	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+}
+
+void MasterRenderer::reloadWaterRefractionFramebuffer()
 {
 	_waterRefractionFramebuffer.reset();
-	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setRefractionQuality(quality);
+	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getRefractionQuality()), 1, false);
 }

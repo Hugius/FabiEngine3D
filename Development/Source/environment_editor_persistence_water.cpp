@@ -10,7 +10,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::getAllWaterTexturePathsFromFile()");
+		Logger::throwError("EnvironmentEditor::getAllWaterTexturePathsFromFile() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -69,7 +69,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
 	}
 
 	return {};
@@ -80,7 +80,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::loadWaterEntitiesFromFile()");
+		Logger::throwError("EnvironmentEditor::loadWaterEntitiesFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -174,7 +174,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" missing!");
 	}
 }
 
@@ -200,7 +200,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::saveWaterEntitiesToFile()");
+		Logger::throwError("EnvironmentEditor::saveWaterEntitiesToFile() --> no current project loaded!");
 	}
 
 	// Compose full file path

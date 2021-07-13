@@ -1,9 +1,7 @@
 #include "billboard_entity.hpp"
-#include "billboard_entity.hpp"
-#include "billboard_entity.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
+#include "logger.hpp"
 
 void BillboardEntity::updateModelMatrix()
 {
@@ -13,7 +11,7 @@ void BillboardEntity::updateModelMatrix()
 	// Translation matrix
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
 	_modelMatrix = _modelMatrix * translationMatrix;
-	
+
 	// Rotation origin matrix - translate
 	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_scaling.y / 2.0f), 0.0f);
 	_modelMatrix = _modelMatrix * rotationOriginMatrix;
@@ -147,12 +145,20 @@ void BillboardEntity::setShadowed(bool value)
 
 void BillboardEntity::startSpriteAnimation(int loops)
 {
+	// Warning checking
 	if (_isSpriteAnimationStarted)
 	{
 		Logger::throwWarning("Trying to start sprite animation on billboard with ID \"" + getID() + "\": animation already started!");
 		return;
 	}
 
+	// Error checking
+	if (loops < -1)
+	{
+		Logger::throwError("BillboardEntity::startSpriteAnimation() --> invalid loops argument!");
+	}
+
+	// Set values
 	_isSpriteAnimationStarted = true;
 	_passedSpriteAnimationFrames = 0;
 	_spriteAnimationLoops = 0;
@@ -252,159 +258,4 @@ void BillboardEntity::setMinHeight(float value)
 void BillboardEntity::setMaxHeight(float value)
 {
 	_maxHeight = value;
-}
-
-const Matrix44 & BillboardEntity::getModelMatrix() const
-{
-	return _modelMatrix;
-}
-
-const GLuint BillboardEntity::getDiffuseMap() const
-{
-	return _diffuseMap;
-}
-
-const Vec3 BillboardEntity::getTranslation() const
-{
-	return _translation;
-}
-
-const Vec3 BillboardEntity::getInitialRotation() const
-{
-	return _initialRotation;
-}
-
-const Vec3 BillboardEntity::getRotation() const
-{
-	return _rotation;
-}
-
-const Vec3 BillboardEntity::getScaling() const
-{
-	return _scaling;
-}
-
-const Vec3 BillboardEntity::getColor() const
-{
-	return _color;
-}
-
-const string& BillboardEntity::getTextContent() const
-{
-	return _textContent;
-}
-
-const string& BillboardEntity::getFontPath() const
-{
-	return _fontPath;
-}
-
-const string& BillboardEntity::getDiffuseMapPath() const
-{
-	return _diffuseMapPath;
-}
-
-const float BillboardEntity::getLightness() const
-{
-	return _lightness;
-}
-
-const float BillboardEntity::getMinHeight() const
-{
-	return _minHeight;
-}
-
-const float BillboardEntity::getMaxHeight() const
-{
-	return _maxHeight;
-}
-
-const int BillboardEntity::getPassedSpriteAnimationFrames() const
-{
-	return _passedSpriteAnimationFrames;
-}
-
-const int BillboardEntity::getMaxSpriteAnimationFramestep() const
-{
-	return _maxSpriteAnimationFramestep;
-}
-
-const int BillboardEntity::getTotalSpriteAnimationRows() const
-{
-	return _totalSpriteAnimationRows;
-}
-
-const int BillboardEntity::getTotalSpriteAnimationColumns() const
-{
-	return _totalSpriteAnimationColumns;
-}
-
-const int BillboardEntity::getSpriteAnimationRowIndex() const
-{
-	return _spriteAnimationRowIndex;
-}
-
-const int BillboardEntity::getSpriteAnimationColumnIndex() const
-{
-	return _spriteAnimationColumnIndex;
-}
-
-const int BillboardEntity::getSpriteAnimationLoops() const
-{
-	return _spriteAnimationLoops;
-}
-
-const int BillboardEntity::getMaxSpriteAnimationLoops() const
-{
-	return _maxSpriteAnimationLoops;
-}
-
-const bool BillboardEntity::isTransparent() const
-{
-	return _isTransparent;
-}
-
-const bool BillboardEntity::isSpriteAnimationStarted() const
-{
-	return _isSpriteAnimationStarted;
-}
-
-const bool BillboardEntity::isSpriteAnimationPaused() const
-{
-	return _isSpriteAnimationPaused;
-}
-
-const bool BillboardEntity::isFacingCameraX() const
-{
-	return _isFacingCameraX;
-}
-
-const bool BillboardEntity::isFacingCameraY() const
-{
-	return _isFacingCameraY;
-}
-
-const bool BillboardEntity::isDepthMapIncluded() const
-{
-	return _isDepthMapIncluded;
-}
-
-const bool BillboardEntity::isShadowed() const
-{
-	return _isShadowed;
-}
-
-const bool BillboardEntity::isReflected() const
-{
-	return _isReflected;
-}
-
-const bool BillboardEntity::isBright() const
-{
-	return _isBright;
-}
-
-const bool BillboardEntity::hasDiffuseMap() const
-{
-	return (_diffuseMap != 0);
 }

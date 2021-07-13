@@ -35,6 +35,16 @@ public:
 	const bool    isApplicationExported() const;
 
 	// Constants
+	static inline const unsigned int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
+	static inline const unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
+	static inline const unsigned int MIN_SHADOW_QUALITY = 2048;
+	static inline const unsigned int MAX_SHADOW_QUALITY = 8192;
+	static inline const unsigned int MIN_REFLECTION_QUALITY = 256;
+	static inline const unsigned int MAX_REFLECTION_QUALITY = 1024;
+	static inline const unsigned int MIN_REFRACTION_QUALITY = 256;
+	static inline const unsigned int MAX_REFRACTION_QUALITY = 1024;
+	static inline const unsigned int MIN_AUDIO_CHANNELS = 64;
+	static inline const unsigned int MAX_AUDIO_CHANNELS = 512;
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 	static inline const float MS_PER_UPDATE = (1000.0f / static_cast<float>(UPDATES_PER_SECOND));
 

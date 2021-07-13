@@ -10,7 +10,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::getAllSkyTexturePathsFromFile()");
+		Logger::throwError("EnvironmentEditor::getAllSkyTexturePathsFromFile() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -60,7 +60,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
 	}
 
 	return {};
@@ -71,7 +71,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::loadSkyEntitiesFromFile()");
+		Logger::throwError("EnvironmentEditor::loadSkyEntitiesFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -136,7 +136,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
 	}
 }
 
@@ -162,7 +162,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> EnvironmentEditor::saveSkyEntitiesToFile()");
+		Logger::throwError("EnvironmentEditor::saveSkyEntitiesToFile() --> no current project loaded!");
 	}
 
 	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";

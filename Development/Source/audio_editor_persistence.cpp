@@ -9,7 +9,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> AudioEditor::getAllAudioPathsFromFile()");
+		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -50,7 +50,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
 	}
 
 	return {};
@@ -61,7 +61,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> AudioEditor::loadAudioEntitiesFromFile()");
+		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -105,7 +105,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
 	}
 }
 
@@ -120,7 +120,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
+		Logger::throwError("AudioEditor::saveAudioEntitiesToFile() --> no current project loaded!");
 	}
 
 	// Create or overwrite audio file

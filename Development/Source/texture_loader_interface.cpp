@@ -1,9 +1,9 @@
 #include "texture_loader.hpp"
 #include "logger.hpp"
+#include "configuration.hpp"
 
 #include <future>
 #include <set>
-#include <iostream>
 
 TextureLoader::TextureLoader(RenderBus& renderBus) :
 	_renderBus(renderBus)
@@ -359,7 +359,7 @@ void TextureLoader::reloadAnisotropicFiltering()
 		glGetIntegerv(GL_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
 		// Set new quality
-		if (currentQuality >= 1 && currentQuality <= MAX_ANISOTROPIC_FILTERING_QUALITY)
+		if (currentQuality >= 1 && currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY)
 		{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
 		}

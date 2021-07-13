@@ -375,10 +375,18 @@ const bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
 
 const int FabiEngine3D::billboardEntity_getRemainingSpriteAnimationLoops(const string& ID)
 {
+	// Temporary values
 	auto maxLoops = _core->_billboardEntityManager.getEntity(ID)->getMaxSpriteAnimationLoops();
 	auto currentLoops = _core->_billboardEntityManager.getEntity(ID)->getSpriteAnimationLoops();
 
-	return (maxLoops - currentLoops);
+	if (maxLoops == -1) // Infinite
+	{
+		return -1;
+	}
+	else // Finite
+	{
+		return (maxLoops - currentLoops);
+	}
 }
 
 const unsigned int FabiEngine3D::billboardEntity_getSpriteAnimationRows(const string& ID)

@@ -1,5 +1,4 @@
 #include "collision_detector.hpp"
-#include <iostream>
 
 Collision CollisionDetector::check(Vec3 boxPosition, Vec3 boxSize, Vec3 middlePosition,
 	float bottom, float top, float left, float right, float front, float back, 

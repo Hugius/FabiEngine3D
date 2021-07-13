@@ -1,5 +1,4 @@
 #include "left_viewport_controller.hpp"
-#include <iostream>
 
 #define CW(text) VPC::calculateTextWidth(text, 0.115f)
 

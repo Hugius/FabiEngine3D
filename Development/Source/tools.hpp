@@ -12,7 +12,7 @@ public:
 	Tools() = delete;
 
 	static const string getRootDirectory();
-	static const int getRandomInt(int min, int max);
+	static const int getRandomInteger(int min, int max);
 	static const float getRandomFloat(float min, float max);
 	static const long long getTimeSinceEpochMS();
 

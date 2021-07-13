@@ -165,7 +165,7 @@ const float FabiEngine3D::soundEntity_getMaxVolume(const string& ID)
 	return _core->_audioManager.getSound(ID).getMaxVolume();
 }
 
-const int FabiEngine3D::soundEntity_getUsedChannelCount()
+const unsigned int FabiEngine3D::soundEntity_getUsedChannelCount()
 {
 	return _core->_audioPlayer.getUsedChannelCount();
 }

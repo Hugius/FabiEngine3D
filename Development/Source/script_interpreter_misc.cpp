@@ -80,19 +80,19 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	return true;
 }
 
-bool ScriptInterpreter::_validateCurrentProject()
+bool ScriptInterpreter::_validateSavesFolder()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> ScriptInterpreter::_validateCurrentProject()");
+		Logger::throwError("ScriptInterpreter::_validateSavesFolder() --> no current project loaded!");
 	}
 
 	// Check if saves folder still exists
 	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" folder missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" folder missing!");
 		return false;
 	}
 

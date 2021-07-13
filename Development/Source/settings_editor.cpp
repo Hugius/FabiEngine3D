@@ -1,6 +1,7 @@
 #include "settings_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
+#include "configuration.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -101,23 +102,33 @@ void SettingsEditor::update()
 			// Update forms
 			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
 			{
-				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp((int)anisotropicQuality, 1, 16));
+				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp(anisotropicQuality,
+					Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
+					Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
-				_fe3d.gfx_setShadowQuality(std::clamp((int)shadowQuality, 512, 8192));
+				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality,
+					Config::MIN_SHADOW_QUALITY,
+					Config::MAX_SHADOW_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
-				_fe3d.gfx_setReflectionQuality(std::clamp((int)reflectionQuality, 128, 2048));
+				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality,
+					Config::MIN_REFLECTION_QUALITY,
+					Config::MAX_REFLECTION_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
-				_fe3d.gfx_setRefractionQuality(std::clamp((int)refractionQuality, 128, 2048));
+				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality,
+					Config::MIN_REFRACTION_QUALITY,
+					Config::MAX_REFRACTION_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 			{
-				_fe3d.misc_setMaxAudioChannels(std::clamp((int)maxAudioChannels, 32, 512));
+				_fe3d.misc_setMaxAudioChannels(std::clamp(maxAudioChannels,
+					Config::MIN_AUDIO_CHANNELS,
+					Config::MAX_AUDIO_CHANNELS));
 			}
 
 			// Update button contents
@@ -144,12 +155,12 @@ void SettingsEditor::update()
 
 void SettingsEditor::loadDefaultSettings()
 {
-	DEFAULT_FXAA_ENABLED ? _fe3d.gfx_enableFXAA() : void();
-	_fe3d.gfx_setAnisotropicFilteringQuality(DEFAULT_ANISOTROPIC_FILTERING_QUALITY);
-	_fe3d.gfx_setShadowQuality(DEFAULT_SHADOW_QUALITY);
-	_fe3d.gfx_setReflectionQuality(DEFAULT_REFLECTION_QUALITY);
-	_fe3d.gfx_setRefractionQuality(DEFAULT_REFRACTION_QUALITY);
-	_fe3d.misc_setMaxAudioChannels(DEFAULT_AUDIO_CHANNELS);
+	_fe3d.gfx_isFxaaEnabled() ? _fe3d.gfx_disableFXAA() : void();
+	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
+	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
+	_fe3d.gfx_setReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setRefractionQuality(Config::MIN_REFRACTION_QUALITY);
+	_fe3d.misc_setMaxAudioChannels(Config::MIN_AUDIO_CHANNELS);
 }
 
 void SettingsEditor::loadSettingsFromFile()
@@ -157,7 +168,7 @@ void SettingsEditor::loadSettingsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> SettingsEditor::loadSettings()");
+		Logger::throwError("SettingsEditor::loadSettings() --> no current project loaded!");
 	}
 
 	// Compose full file path
@@ -196,7 +207,7 @@ void SettingsEditor::loadSettingsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" missing!");
 	}
 }
 
@@ -205,7 +216,7 @@ void SettingsEditor::saveSettingsToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> SettingsEditor::save()");
+		Logger::throwError("SettingsEditor::save() --> no current project loaded!");
 	}
 
 	// Compose full file path

@@ -286,7 +286,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> TopViewportController::_saveCurrentProject()");
+		Logger::throwError("TopViewportController::_saveCurrentProject() --> no current project loaded!");
 	}
 
 	// Save everything

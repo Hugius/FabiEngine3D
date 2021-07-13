@@ -24,8 +24,9 @@
     <ClCompile Include="..\..\Source\base_entity.cpp" />
     <ClCompile Include="..\..\Source\base_entity_manager_main.cpp" />
     <ClCompile Include="..\..\Source\base_entity_manager_misc.cpp" />
-    <ClCompile Include="..\..\Source\billboard_entity.cpp" />
+    <ClCompile Include="..\..\Source\billboard_entity_getters.cpp" />
     <ClCompile Include="..\..\Source\billboard_entity_manager.cpp" />
+    <ClCompile Include="..\..\Source\billboard_entity_setters.cpp" />
     <ClCompile Include="..\..\Source\entity_bus.cpp" />
     <ClCompile Include="..\..\Source\image_entity.cpp" />
     <ClCompile Include="..\..\Source\image_entity_manager.cpp" />

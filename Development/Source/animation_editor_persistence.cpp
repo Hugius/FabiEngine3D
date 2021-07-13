@@ -9,7 +9,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> AnimationEditor::loadAnimationsFromFile()");
+		Logger::throwError("AnimationEditor::loadAnimationsFromFile() --> no current project loaded!");
 	}
 
 	// Clear names list from previous loads
@@ -169,7 +169,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	}
 	else
 	{
-		Logger::throwError("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
 	}
 }
 
@@ -184,7 +184,7 @@ void AnimationEditor::saveAnimationsToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
+		Logger::throwError("AnimationEditor::saveAnimationsToFile() --> no current project loaded!");
 	}
 
 	// Compose full file path

@@ -626,7 +626,7 @@ public:
 	const float soundEntity_getMaxDistance(const string& ID);
 	const float soundEntity_getVolume(const string& ID);
 	const float soundEntity_getMaxVolume(const string& ID);
-	const int soundEntity_getUsedChannelCount();
+	const unsigned int soundEntity_getUsedChannelCount();
 	const bool soundEntity_isExisting(const string& ID);
 	const bool soundEntity_isStarted(const string& ID);
 	const bool soundEntity_isPlaying(const string& ID);
@@ -856,9 +856,7 @@ public:
 	const float misc_radiansToDegrees(float angle);
 	const float misc_stopMillisecondTimer();
 	const float misc_getLevelOfDetailDistance();
-	const int misc_getRandomInteger(int min, int max);
-	const int misc_getMsTimeSinceEpoch();
-	const int misc_getTriangleCount();
+	const unsigned int misc_getTriangleCount();
 	const unsigned int misc_getMaxAudioChannelCount();
 	const bool misc_isCursorVisible();
 	const bool misc_isCursorInsideViewport();

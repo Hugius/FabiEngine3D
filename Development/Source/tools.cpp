@@ -26,7 +26,7 @@ const string Tools::getRootDirectory()
 	return rootDir;
 }
 
-const int Tools::getRandomInt(int min, int max)
+const int Tools::getRandomInteger(int min, int max)
 {
 	std::uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);

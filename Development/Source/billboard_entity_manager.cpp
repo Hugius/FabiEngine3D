@@ -64,7 +64,7 @@ void BillboardEntityManager::addBillboardEntity
 	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
 
 	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, true, false));
+	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, true, true));
 	entity->setDiffuseMapPath(texturePath);
 	entity->setTransparent(transparent);
 }

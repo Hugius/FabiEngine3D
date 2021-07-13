@@ -27,6 +27,7 @@ private:
 
 	string _currentProjectID = "";
 
+	static inline const unsigned int DEFAULT_ANISOTROPIC_FILTERING_QUALITY = 1;
 	static inline const unsigned int DEFAULT_SHADOW_QUALITY = 2048;
 	static inline const unsigned int DEFAULT_REFLECTION_QUALITY = 256;
 	static inline const unsigned int DEFAULT_REFRACTION_QUALITY = 256;

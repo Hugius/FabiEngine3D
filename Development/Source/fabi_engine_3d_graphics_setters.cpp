@@ -1,19 +1,28 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
+void FabiEngine3D::gfx_setAnisotropicFilteringQuality(int quality)
+{
+	_core->_textureLoader.reloadAnisotropicFiltering();
+	_core->_renderBus.setAnisotropicFilteringQuality(quality);
+}
+
 void FabiEngine3D::gfx_setShadowQuality(int quality)
 {
 	_core->_masterRenderer.loadShadowFramebuffer(quality);
+	_core->_renderBus.setShadowQuality(quality);
 }
 
 void FabiEngine3D::gfx_setReflectionQuality(int quality)
 {
 	_core->_masterRenderer.loadReflectionFramebuffer(quality);
+	_core->_renderBus.setReflectionQuality(quality);
 }
 
 void FabiEngine3D::gfx_setRefractionQuality(int quality)
 {
 	_core->_masterRenderer.loadRefractionFramebuffer(quality);
+	_core->_renderBus.setRefractionQuality(quality);
 }
 
 void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)
@@ -245,7 +254,7 @@ void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensit
 	else
 	{
 		_core->_renderBus.setLensFlareEnabled(true);
-		_core->_renderBus.setLensFlareMap(_core->_textureLoader.getTexture2D(texturePath, false, false, false));
+		_core->_renderBus.setLensFlareMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
 		_core->_renderBus.setLensFlareMapPath(texturePath);
 		_core->_renderBus.setLensFlareIntensity(intensity);
 		_core->_renderBus.setLensFlareMultiplier(multiplier);

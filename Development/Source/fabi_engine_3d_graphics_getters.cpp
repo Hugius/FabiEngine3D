@@ -93,17 +93,17 @@ const bool FabiEngine3D::gfx_isLensFlareEnabled()
 
 const unsigned int FabiEngine3D::gfx_getShadowQuality()
 {
-	return _core->_renderBus.getShadowMapSize();
+	return _core->_renderBus.getShadowQuality();
 }
 
 const unsigned int FabiEngine3D::gfx_getReflectionQuality()
 {
-	return _core->_renderBus.getReflectionMapSize();
+	return _core->_renderBus.getReflectionQuality();
 }
 
 const unsigned int FabiEngine3D::gfx_getRefractionQuality()
 {
-	return _core->_renderBus.getRefractionMapSize();
+	return _core->_renderBus.getRefractionQuality();
 }
 
 const Vec3 FabiEngine3D::gfx_getAmbientLightingColor()
@@ -279,4 +279,9 @@ const float FabiEngine3D::gfx_getMotionBlurStrength()
 const BloomType FabiEngine3D::gfx_getBloomType()
 {
 	return _core->_renderBus.getBloomType();
+}
+
+const unsigned int FabiEngine3D::gfx_getAnisotropicFilteringQuality()
+{
+	return _core->_renderBus.getAnisotropicFilteringQuality();
 }

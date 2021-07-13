@@ -88,9 +88,10 @@ public:
 
 	// Integers
 	void setBloomBlurCount(unsigned int value);
-	void setShadowMapSize(unsigned int value);
-	void setReflectionMapSize(unsigned int value);
-	void setRefractionMapSize(unsigned int value);
+	void setAnisotropicFilteringQuality(unsigned int value);
+	void setShadowQuality(unsigned int value);
+	void setReflectionQuality(unsigned int value);
+	void setRefractionQuality(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
 	void resetTriangleCount();
 
@@ -201,9 +202,10 @@ public:
 	// Integers
 	const unsigned int getBloomBlurCount();
 	const unsigned int getTriangleCount();
-	const unsigned int getShadowMapSize();
-	const unsigned int getReflectionMapSize();
-	const unsigned int getRefractionMapSize();
+	const unsigned int getAnisotropicFilteringQuality();
+	const unsigned int getShadowQuality();
+	const unsigned int getReflectionQuality();
+	const unsigned int getRefractionQuality();
 
 	// Booleans
 	const bool isFxaaEnabled();
@@ -313,9 +315,10 @@ private:
 	// Integers
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
-	unsigned int _shadowMapSize = 0;
-	unsigned int _reflectionMapSize = 0;
-	unsigned int _refractionMapSize = 0;
+	unsigned int _anisotropicFilteringQuality = 0;
+	unsigned int _shadowQuality = 0;
+	unsigned int _reflectionQuality = 0;
+	unsigned int _refractionQuality = 0;
 
 	// Booleans
 	bool _isFxaaEnabled = false;

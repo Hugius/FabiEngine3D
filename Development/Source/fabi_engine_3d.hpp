@@ -648,6 +648,7 @@ public:
 	const bool music_isPaused();
 
 	// Graphics interface - setters
+	void gfx_setAnisotropicFilteringQuality(int quality);
 	void gfx_setShadowQuality(int quality);
 	void gfx_setReflectionQuality(int quality);
 	void gfx_setRefractionQuality(int quality);
@@ -718,6 +719,7 @@ public:
 	const float gfx_getLensFlareMultiplier();
 	const float gfx_getMotionBlurStrength();
 	const BloomType gfx_getBloomType();
+	const unsigned int gfx_getAnisotropicFilteringQuality();
 	const unsigned int gfx_getShadowQuality();
 	const unsigned int gfx_getReflectionQuality();
 	const unsigned int gfx_getRefractionQuality();
@@ -857,7 +859,7 @@ public:
 	const int misc_getRandomInteger(int min, int max);
 	const int misc_getMsTimeSinceEpoch();
 	const int misc_getTriangleCount();
-	const int misc_getMaxChannels();
+	const unsigned int misc_getMaxAudioChannelCount();
 	const bool misc_isCursorVisible();
 	const bool misc_isCursorInsideViewport();
 	const bool misc_isCursorInsideWindow();

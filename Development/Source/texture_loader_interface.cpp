@@ -5,7 +5,13 @@
 #include <set>
 #include <iostream>
 
-void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
+TextureLoader::TextureLoader(RenderBus& renderBus) :
+	_renderBus(renderBus)
+{
+
+}
+
+void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
 	// Temporary values
 	vector<std::future<SDL_Surface*>> threads;
@@ -59,7 +65,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					else
 					{
 						// Load OpenGL texture
-						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, true, true, true);
+						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, isMipmapped, isAnisotropic);
 
 						// Free image memory
 						SDL_FreeSurface(loadedImage);
@@ -146,7 +152,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	}
 }
 
-GLuint TextureLoader::getTexture2D(const string& filePath, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
 	auto it = _textureCache2D.find(filePath);
@@ -164,7 +170,7 @@ BEGIN:
 		else
 		{
 			// Load OpenGL texture
-			auto loadedTexture = _convertToTexture2D(filePath, loadedImage, mipmap, aniso, repeat);
+			auto loadedTexture = _convertToTexture2D(filePath, loadedImage, isMipmapped, isAnisotropic);
 
 			// Free image memory
 			SDL_FreeSurface(loadedImage);
@@ -338,5 +344,27 @@ void TextureLoader::clearBitmapCache(const string& filePath)
 	if (_bitmapCache.find(filePath) != _bitmapCache.end())
 	{
 		_bitmapCache.erase(filePath);
+	}
+}
+
+void TextureLoader::reloadAnisotropicFiltering()
+{
+	for (auto& [path, texture] : _textureCache2D)
+	{
+		// Bind
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		// Get current quality
+		int currentQuality;
+		glGetIntegerv(GL_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
+
+		// Set new quality
+		if (currentQuality >= 1 && currentQuality <= MAX_ANISOTROPIC_FILTERING_QUALITY)
+		{
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
+		}
+
+		// Unbind
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

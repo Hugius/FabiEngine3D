@@ -20,7 +20,7 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	return image;
 }
 
-GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic)
 {
 	// Generate OpenGL texture
 	GLuint texture;
@@ -42,7 +42,7 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 		return 0;
 	}
 
-	if (mipmap) // Mipmapping
+	if (isMipmapped) // Mipmapping
 	{
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -55,18 +55,9 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 	}
 
 	// Anisotropic filtering
-	if (aniso)
+	if (isAnisotropic)
 	{
-		float sampleCount;
-		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &sampleCount);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, sampleCount);
-	}
-
-	// Repeat dimensions
-	if (repeat)
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
 	}
 
 	// Logging

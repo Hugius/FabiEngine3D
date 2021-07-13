@@ -108,7 +108,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// Load an mesh part diffuse map
 		if (part.diffuseMapPath != "")
 		{
-			entity->addDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true, true));
+			entity->addDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true));
 			entity->addDiffuseMapPath(part.diffuseMapPath);
 		}
 		else
@@ -124,7 +124,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
-			entity->addLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true, true));
+			entity->addLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true));
 			entity->addLightMapPath(part.lightMapPath);
 		}
 		else
@@ -139,7 +139,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// Load an mesh part normal map
 		if (part.normalMapPath != "")
 		{
-			entity->addNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true, true));
+			entity->addNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true));
 			entity->addNormalMapPath(part.normalMapPath);
 		}
 		else
@@ -155,7 +155,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
-			entity->addReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true, true));
+			entity->addReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true));
 			entity->addReflectionMapPath(part.reflectionMapPath);
 		}
 		else

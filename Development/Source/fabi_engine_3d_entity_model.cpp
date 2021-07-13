@@ -61,25 +61,25 @@ void FabiEngine3D::modelEntity_loadModel(const string& ID, const string& meshPat
 
 void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 	_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
 void FabiEngine3D::modelEntity_setLightMap(const string& ID, const string& texturePath)
 {
-	_core->_modelEntityManager.getEntity(ID)->setLightMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_modelEntityManager.getEntity(ID)->setLightMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 	_core->_modelEntityManager.getEntity(ID)->setLightMapPath(texturePath);
 }
 
 void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_modelEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_modelEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 	_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
 void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& texturePath)
 {
-	_core->_modelEntityManager.getEntity(ID)->setReflectionMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_modelEntityManager.getEntity(ID)->setReflectionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 	_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(texturePath);
 }
 

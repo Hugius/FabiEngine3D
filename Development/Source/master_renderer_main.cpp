@@ -189,7 +189,6 @@ void MasterRenderer::loadShadowFramebuffer(int quality)
 {
 	_shadowFramebuffer.reset();
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality));
-	_renderBus.setShadowMapSize(quality);
 }
 
 void MasterRenderer::loadReflectionFramebuffer(int quality)
@@ -198,12 +197,12 @@ void MasterRenderer::loadReflectionFramebuffer(int quality)
 	_waterReflectionFramebuffer.reset();
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
 	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setReflectionMapSize(quality);
+	_renderBus.setReflectionQuality(quality);
 }
 
 void MasterRenderer::loadRefractionFramebuffer(int quality)
 {
 	_waterRefractionFramebuffer.reset();
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
-	_renderBus.setRefractionMapSize(quality);
+	_renderBus.setRefractionQuality(quality);
 }

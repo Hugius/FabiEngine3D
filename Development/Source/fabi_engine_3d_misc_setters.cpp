@@ -292,7 +292,7 @@ void FabiEngine3D::misc_cacheMeshesMultiThreaded(const vector<string>& meshPaths
 
 void FabiEngine3D::misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
 {
-	_core->_textureLoader.cacheTexturesMultiThreaded2D(filePaths);
+	_core->_textureLoader.cacheTexturesMultiThreaded2D(filePaths, true, true);
 }
 
 void FabiEngine3D::misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths)

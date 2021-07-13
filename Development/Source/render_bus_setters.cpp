@@ -312,6 +312,11 @@ void RenderBus::setBloomBlurCount(unsigned int value)
 	_bloomBlurCount = value;
 }
 
+void RenderBus::setAnisotropicFilteringQuality(unsigned int value)
+{
+	_anisotropicFilteringQuality = value;
+}
+
 void RenderBus::increaseTriangleCount(unsigned int value)
 {
 	if (_isTriangleCountingEnabled)
@@ -320,19 +325,19 @@ void RenderBus::increaseTriangleCount(unsigned int value)
 	}
 }
 
-void RenderBus::setShadowMapSize(unsigned int value)
+void RenderBus::setShadowQuality(unsigned int value)
 {
-	_shadowMapSize = value;
+	_shadowQuality = value;
 }
 
-void RenderBus::setReflectionMapSize(unsigned int value)
+void RenderBus::setReflectionQuality(unsigned int value)
 {
-	_reflectionMapSize = value;
+	_reflectionQuality = value;
 }
 
-void RenderBus::setRefractionMapSize(unsigned int value)
+void RenderBus::setRefractionQuality(unsigned int value)
 {
-	_refractionMapSize = value;
+	_refractionQuality = value;
 }
 
 void RenderBus::resetTriangleCount()

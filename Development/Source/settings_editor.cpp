@@ -57,11 +57,12 @@ void SettingsEditor::update()
 		if (screen->getID() == "settingsEditorMenuMain")
 		{
 			// Temporary values
-			int isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
-			int shadowQuality = _fe3d.gfx_getShadowQuality();
-			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
-			int refractionQuality = _fe3d.gfx_getRefractionQuality();
-			int audioChannels = _fe3d.misc_getMaxChannels();
+			auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
+			auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
+			auto shadowQuality = _fe3d.gfx_getShadowQuality();
+			auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+			auto refractionQuality = _fe3d.gfx_getRefractionQuality();
+			auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -74,6 +75,10 @@ void SettingsEditor::update()
 				{
 					isFxaaEnabled = !isFxaaEnabled;
 					isFxaaEnabled ? _fe3d.gfx_enableFXAA() : _fe3d.gfx_disableFXAA();
+				}
+				else if (screen->getButton("anisotropicQuality")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("shadowQuality")->isHovered())
 				{
@@ -89,26 +94,30 @@ void SettingsEditor::update()
 				}
 				else if (screen->getButton("maxAudioChannels")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max Audio Channels", audioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 
 			// Update forms
-			if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
 			{
-				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality, 512, 8192));
+				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp((int)anisotropicQuality, 1, 16));
+			}
+			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+			{
+				_fe3d.gfx_setShadowQuality(std::clamp((int)shadowQuality, 512, 8192));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
-				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality, 128, 2048));
+				_fe3d.gfx_setReflectionQuality(std::clamp((int)reflectionQuality, 128, 2048));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
-				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality, 128, 2048));
+				_fe3d.gfx_setRefractionQuality(std::clamp((int)refractionQuality, 128, 2048));
 			}
-			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", audioChannels, {}))
+			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 			{
-				_fe3d.misc_setMaxAudioChannels(std::clamp(audioChannels, 32, 512));
+				_fe3d.misc_setMaxAudioChannels(std::clamp((int)maxAudioChannels, 32, 512));
 			}
 
 			// Update button contents
@@ -136,6 +145,7 @@ void SettingsEditor::update()
 void SettingsEditor::loadDefaultSettings()
 {
 	DEFAULT_FXAA_ENABLED ? _fe3d.gfx_enableFXAA() : void();
+	_fe3d.gfx_setAnisotropicFilteringQuality(DEFAULT_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setShadowQuality(DEFAULT_SHADOW_QUALITY);
 	_fe3d.gfx_setReflectionQuality(DEFAULT_REFLECTION_QUALITY);
 	_fe3d.gfx_setRefractionQuality(DEFAULT_REFRACTION_QUALITY);
@@ -163,9 +173,9 @@ void SettingsEditor::loadSettingsFromFile()
 		std::istringstream iss(line);
 
 		// Extract values from file
-		unsigned int shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+		unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
 		bool isFxaaEnabled;
-		iss >> isFxaaEnabled >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+		iss >> isFxaaEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
 
 		// Disable FXAA
 		if (_fe3d.gfx_isFxaaEnabled())
@@ -175,6 +185,7 @@ void SettingsEditor::loadSettingsFromFile()
 
 		// Set values
 		isFxaaEnabled ? _fe3d.gfx_enableFXAA() : void();
+		_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicQuality);
 		_fe3d.gfx_setShadowQuality(shadowQuality);
 		_fe3d.gfx_setReflectionQuality(reflectionQuality);
 		_fe3d.gfx_setRefractionQuality(refractionQuality);
@@ -206,14 +217,16 @@ void SettingsEditor::saveSettingsToFile()
 
 	// Get values
 	auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
+	auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
 	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
 	auto refractionQuality = _fe3d.gfx_getRefractionQuality();
-	auto audioChannels = _fe3d.misc_getMaxChannels();
+	auto audioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
 	// Write to file
 	file <<
 		isFxaaEnabled << " " <<
+		anisotropicQuality << " " <<
 		shadowQuality << " " <<
 		reflectionQuality << " " <<
 		refractionQuality << " " <<
@@ -242,12 +255,13 @@ void SettingsEditor::_loadGUI()
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("isFxaaEnabled", Vec2(0.0f, 0.75f), Vec2(CW("FXAA: ON"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.45f), Vec2(CW("Shadows"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadows", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.15f), Vec2(CW("Reflections"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.15f), Vec2(CW("Refractions"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractions", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.45f), Vec2(CW("Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("isFxaaEnabled", Vec2(0.0f, 0.7875f), Vec2(CW("FXAA: ON"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("anisotropicQuality", Vec2(0.0f, 0.525f), Vec2(CW("Anisotropic"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.2625f), Vec2(CW("Shadow"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.0f), Vec2(CW("Reflection"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.2625f), Vec2(CW("Refraction"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.525f), Vec2(CW("Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7875f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SettingsEditor::_unloadGUI()

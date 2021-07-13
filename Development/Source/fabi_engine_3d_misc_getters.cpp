@@ -440,7 +440,7 @@ const bool FabiEngine3D::misc_isMusicEnabled()
 	return _core->_audioPlayer.isMusicEnabled();
 }
 
-const int FabiEngine3D::misc_getMaxChannels()
+const unsigned int FabiEngine3D::misc_getMaxAudioChannelCount()
 {
 	return _core->_audioPlayer.getAllocatedChannelCount();
 }

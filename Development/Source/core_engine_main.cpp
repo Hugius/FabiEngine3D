@@ -10,7 +10,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_libraryLoader(),
 	_window(_libraryLoader),
 	_meshLoader(),
-	_textureLoader(),
+	_textureLoader(_renderBus),
 	_audioLoader(),
 	_inputHandler(),
 	_renderBus(),
@@ -153,7 +153,7 @@ void CoreEngine::_prepareApplication()
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
 	logo->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-	logo->setTexture(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false, false));
+	logo->setTexture(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false));
 
 	// Calculate logo resolution
 	SDL_DisplayMode DM;

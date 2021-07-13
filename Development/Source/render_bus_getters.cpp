@@ -315,19 +315,24 @@ const unsigned int RenderBus::getTriangleCount()
 	return _triangleCount;
 }
 
-const unsigned int RenderBus::getShadowMapSize()
+const unsigned int RenderBus::getAnisotropicFilteringQuality()
 {
-	return _shadowMapSize;
+	return _anisotropicFilteringQuality;
 }
 
-const unsigned int RenderBus::getReflectionMapSize()
+const unsigned int RenderBus::getShadowQuality()
 {
-	return _reflectionMapSize;
+	return _shadowQuality;
 }
 
-const unsigned int RenderBus::getRefractionMapSize()
+const unsigned int RenderBus::getReflectionQuality()
 {
-	return _refractionMapSize;
+	return _reflectionQuality;
+}
+
+const unsigned int RenderBus::getRefractionQuality()
+{
+	return _refractionQuality;
 }
 
 const bool RenderBus::isFxaaEnabled()

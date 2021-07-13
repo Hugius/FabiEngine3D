@@ -4,13 +4,12 @@
 #include <fstream>
 #include <algorithm>
 
-void SceneEditor::saveCustomSceneToFile()
+bool SceneEditor::saveCustomSceneToFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
 		Logger::throwError("SceneEditor::saveCustomSceneToFile() --> no current project loaded!");
-		
 	}
 	if (_isEditorLoaded)
 	{
@@ -21,22 +20,15 @@ void SceneEditor::saveCustomSceneToFile()
 	if (_customSceneID.empty())
 	{
 		Logger::throwWarning("Cannot save custom scene!");
+		return false;
 	}
 
-	// Check if scene directory still exists
-	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\");
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
-	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
-	}
-	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
-	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\custom\\\" folder missing!");
-	}
+	// Compose file path
+	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
+	const string fullFilePath = (directoryPath + _customSceneID + ".fe3d");
 
 	// Create or overwrite file
-	string fullFilePath = (directoryPath + "custom\\" + _customSceneID + ".fe3d");
 	std::ofstream file(fullFilePath);
 
 	// Save model LOD IDs
@@ -673,4 +665,7 @@ void SceneEditor::saveCustomSceneToFile()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
+
+	// Return
+	return true;
 }

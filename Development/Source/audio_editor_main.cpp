@@ -18,12 +18,9 @@ void AudioEditor::load()
 	// GUI
 	_loadGUI();
 
-	// Load all audio entities
-	loadAudioEntitiesFromFile();
-
 	// Miscellaneous
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
-	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png", 
+	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\stop.png",
 		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
 	_fe3d.billboardEntity_setBright("@@icon", true);
 	_fe3d.camera_reset();
@@ -67,9 +64,9 @@ void AudioEditor::_loadGUI()
 
 	// Left-viewport: mainWindow - audioEditorMenuMain
 	leftWindow->addScreen("audioEditorMenuMain");
-	leftWindow->getScreen("audioEditorMenuMain")->addButton("addAudio", Vec2(0.0f, 0.63f), Vec2(CW("Add Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuMain")->addButton("editAudio", Vec2(0.0f, 0.21f), Vec2(CW("Edit Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuMain")->addButton("deleteAudio", Vec2(0.0f, -0.21f), Vec2(CW("Delete Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuMain")->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuMain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuMain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("audioEditorMenuMain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - audioEditorMenuChoice

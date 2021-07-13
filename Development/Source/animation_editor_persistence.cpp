@@ -12,7 +12,7 @@ void AnimationEditor::loadAnimationsFromFile()
 		Logger::throwError("AnimationEditor::loadAnimationsFromFile() --> no current project loaded!");
 	}
 
-	// Clear names list from previous loads
+	// Clear animations list from previous loads
 	_animations.clear();
 
 	// Compose full file path
@@ -169,7 +169,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" file missing!");
 	}
 }
 

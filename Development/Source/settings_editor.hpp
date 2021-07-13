@@ -8,13 +8,13 @@ class SettingsEditor final
 public:
 	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 	void loadDefaultSettings();
 	void loadSettingsFromFile();
 	void saveSettingsToFile();
-	void setCurrentProjectID(const string& projectID);
 
 	bool isLoaded();
 

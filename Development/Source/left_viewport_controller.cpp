@@ -67,8 +67,11 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
 			{
-				_audioEditor.load();
-				window->setActiveScreen("audioEditorMenuMain");
+				if (_audioEditor.loadAudioEntitiesFromFile())
+				{
+					_audioEditor.load();
+					window->setActiveScreen("audioEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 			{

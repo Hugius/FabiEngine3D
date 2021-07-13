@@ -17,12 +17,12 @@ public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor,
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void executeInitialization();
 	void executeUpdate(bool debug);
 	void executeDestruction();
 	void unload();
-	void setCurrentProjectID(const string& projectID);
 
 	bool hasThrownError();
 	bool gameMustStop();

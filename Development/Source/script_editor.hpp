@@ -11,12 +11,12 @@ public:
 	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 	void loadScriptFiles(bool isLoggingEnabled);
 	void saveScriptsToFile();
-	void setCurrentProjectID(const string& projectID);
 
 	ScriptExecutor& getScriptExecutor();
 

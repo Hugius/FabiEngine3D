@@ -8,12 +8,12 @@ class AudioEditor final
 public:
 	AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
-	void loadAudioEntitiesFromFile();
-	void saveAudioEntitiesToFile();
-	void setCurrentProjectID(const string& projectID);
+	bool loadAudioEntitiesFromFile();
+	bool saveAudioEntitiesToFile();
 
 	bool isLoaded();
 

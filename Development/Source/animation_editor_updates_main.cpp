@@ -44,18 +44,18 @@ void AnimationEditor::_updateManagementScreen()
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
-				else if (screen->getButton("addAnimation")->isHovered()) // Add animation button
+				else if (screen->getButton("add")->isHovered()) // Add animation button
 				{
 					_gui.getGlobalScreen()->addValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingAnimation = true;
 				}
-				else if (screen->getButton("editAnimation")->isHovered()) // Edit animation button
+				else if (screen->getButton("edit")->isHovered()) // Edit animation button
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
 					_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 				}
-				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
+				else if (screen->getButton("delete")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
@@ -186,9 +186,9 @@ void AnimationEditor::_updateAnimationRemoval()
 	{
 		if (_isRemovingAnimation && _currentAnimationID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeAnimation", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeAnimation"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
@@ -198,10 +198,9 @@ void AnimationEditor::_updateAnimationRemoval()
 				_currentAnimationID = "";
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->removeAnswerForm("removeAnimation");
 				_isRemovingAnimation = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeAnimation"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				_isRemovingAnimation = false;
 				_currentAnimationID = "";

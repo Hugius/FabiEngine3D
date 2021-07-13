@@ -28,12 +28,12 @@ void AudioEditor::_updateMainMenu()
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
-				else if (screen->getButton("addAudio")->isHovered()) // Add audio button
+				else if (screen->getButton("add")->isHovered()) // Add audio button
 				{
 					_gui.getGlobalScreen()->addValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingAudio = true;
 				}
-				else if (screen->getButton("editAudio")->isHovered()) // Edit audio button
+				else if (screen->getButton("edit")->isHovered()) // Edit audio button
 				{
 					_isChoosingAudio = true;
 					_isEditingAudio = true;
@@ -41,7 +41,7 @@ void AudioEditor::_updateMainMenu()
 					for (auto& name : IDs) { name = name.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
 				}
-				else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
+				else if (screen->getButton("delete")->isHovered()) // Delete audio button
 				{
 					_isChoosingAudio = true;
 					_isRemovingAudio = true;
@@ -171,9 +171,9 @@ void AudioEditor::_updateAudioRemoval()
 	{
 		if (_isRemovingAudio && _currentAudioID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeAudio", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeAudio"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
@@ -187,10 +187,9 @@ void AudioEditor::_updateAudioRemoval()
 				// Miscellaneous
 				_loadedAudioIDs.erase(std::remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
 				_currentAudioID = "";
-				_gui.getGlobalScreen()->removeAnswerForm("removeAudio");
 				_isRemovingAudio = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeAudio"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				_isChoosingAudio = true;
 				_currentAudioID = "";

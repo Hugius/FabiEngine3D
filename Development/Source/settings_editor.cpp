@@ -207,7 +207,7 @@ void SettingsEditor::loadSettingsFromFile()
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" file missing!");
 	}
 }
 

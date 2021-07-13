@@ -4,12 +4,12 @@
 #include <fstream>
 #include <algorithm>
 
-void SceneEditor::saveEditorSceneToFile()
+bool SceneEditor::saveEditorSceneToFile()
 {
 	// Must be editing a scene
 	if (_currentSceneID.empty())
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -18,20 +18,12 @@ void SceneEditor::saveEditorSceneToFile()
 		Logger::throwError("SceneEditor::saveEditorSceneToFile() --> no current project loaded!");
 	}
 
-	// Check if scene directory still exists
-	string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\");
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
-	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\\" folder missing!");
-	}
-	else if (!_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
-	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" folder missing!");
-	}
+	// Compose file path
+	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\");
+	const string fullFilePath = (directoryPath + _currentSceneID + ".fe3d");
 
-	// Create or overwrite file
-	string fullFilePath = (directoryPath + "editor\\" + _currentSceneID + ".fe3d");
+	// Create or overwrite scene file
 	std::ofstream file(fullFilePath);
 
 	// Save all LOD model IDs
@@ -444,4 +436,7 @@ void SceneEditor::saveEditorSceneToFile()
 
 	// Logging
 	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
+
+	// Return
+	return true;
 }

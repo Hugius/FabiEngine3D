@@ -12,7 +12,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() --> no current project loaded!");
 	}
 
-	// Clear names list from previous loads
+	// Clear IDs from previous loads
 	_loadedAudioIDs.clear();
 
 	// Compose full file path
@@ -50,13 +50,13 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
 	}
 
 	return {};
 }
 
-void AudioEditor::loadAudioEntitiesFromFile()
+bool AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -64,57 +64,60 @@ void AudioEditor::loadAudioEntitiesFromFile()
 		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile() --> no current project loaded!");
 	}
 
-	// Clear names list from previous loads
+	// Clear IDs from previous loads
 	_loadedAudioIDs.clear();
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+	// Compose file path
+	const string fullFilePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
-	// Check if audio file exists
-	if (_fe3d.misc_isFileExisting(filePath))
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(fullFilePath))
 	{
-		std::ifstream file(filePath);
-		string line;
-
-		// Read model data
-		while (std::getline(file, line))
-		{
-			// Placeholder variables
-			string audioID, audioPath;
-
-			// For file extraction
-			std::istringstream iss(line);
-
-			// Extract from file
-			iss >> audioID >> audioPath;
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "?") ? "" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
-
-			// Add audio ID
-			_loadedAudioIDs.push_back(audioID);
-			_fe3d.soundEntity_add(audioID, audioPath);
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
+		return false;
 	}
-	else
+
+	// Load audio file
+	std::ifstream file(fullFilePath);
+
+	// Read audio file
+	string line;
+	while (std::getline(file, line))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" missing!");
+		// Placeholder variables
+		string audioID, audioPath;
+
+		// For file extraction
+		std::istringstream iss(line);
+
+		// Extract from file
+		iss >> audioID >> audioPath;
+
+		// Perform empty string & space conversions
+		audioPath = (audioPath == "?") ? "" : audioPath;
+		std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+		// Add audio ID
+		_loadedAudioIDs.push_back(audioID);
+		_fe3d.soundEntity_add(audioID, audioPath);
 	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
+
+	// Return
+	return true;
 }
 
-void AudioEditor::saveAudioEntitiesToFile()
+bool AudioEditor::saveAudioEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -123,9 +126,13 @@ void AudioEditor::saveAudioEntitiesToFile()
 		Logger::throwError("AudioEditor::saveAudioEntitiesToFile() --> no current project loaded!");
 	}
 
+	// Compose file path
+	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\");
+	const string fullFilePath = (directoryPath + ".fe3d");
+
 	// Create or overwrite audio file
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
+	std::ofstream file(fullFilePath);
 
 	// Write audio data into file
 	for (const auto& audioID : _loadedAudioIDs)
@@ -146,4 +153,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 
 	// Logging
 	Logger::throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
+
+	// Return
+	return true;
 }

@@ -8,12 +8,12 @@ public:
 	ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void update(bool debug);
 	void pause();
 	void resume();
 	void unload();
-	void setCurrentProjectID(const string& projectID);
 
 	bool isScriptEmpty();
 	bool isStarted();

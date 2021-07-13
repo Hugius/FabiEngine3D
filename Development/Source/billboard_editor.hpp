@@ -8,12 +8,12 @@ class BillboardEditor final
 public:
 	BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 	void loadBillboardEntitiesFromFile();
 	void saveBillboardEntitiesToFile();
-	void setCurrentProjectID(const string& projectID);
 
 	bool isLoaded();
 

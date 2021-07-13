@@ -134,19 +134,21 @@ void SceneEditor::_updateMainMenu()
 					// Load selected scene for editing
 					if (_isChoosingScene)
 					{
-						// Disable engine background
-						_fe3d.skyEntity_select("");
+						if (loadEditorSceneFromFile(_currentSceneID))
+						{
+							// Disable engine background
+							_fe3d.skyEntity_select("");
 
-						// Disable vsync
-						_fe3d.misc_disableVsync();
+							// Disable vsync
+							_fe3d.misc_disableVsync();
 
-						// Load existing scene
-						loadEditorSceneFromFile(_currentSceneID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+							// Change GUI
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+						}
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
 					{
-						_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", Vec2(0.0f, 0.25f));
+						_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 					}
 
 					// Miscellaneous
@@ -162,13 +164,13 @@ void SceneEditor::_updateMainMenu()
 			// Update scene deletion if chosen
 			if (_isDeletingScene && _currentSceneID != "")
 			{
-				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
+				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete")) // Confirmed
 				{
 					_deleteSceneFile(_currentSceneID);
 					_isDeletingScene = false;
 					_currentSceneID = "";
 				}
-				else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteScene")) // Cancelled
+				else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete")) // Cancelled
 				{
 					_isDeletingScene = false;
 					_currentSceneID = "";

@@ -60,7 +60,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
 	}
 
 	return {};
@@ -74,7 +74,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 		Logger::throwError("EnvironmentEditor::loadSkyEntitiesFromFile() --> no current project loaded!");
 	}
 
-	// Clear names list from previous loads
+	// Clear IDs from previous loads
 	_loadedSkyIDs.clear();
 
 	// Compose full file path
@@ -136,7 +136,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
 	}
 }
 

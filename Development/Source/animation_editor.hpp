@@ -11,6 +11,7 @@ public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 
 	// Setters
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
@@ -22,7 +23,6 @@ public:
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
-	void setCurrentProjectID(const string& projectID);
 
 	// Getters
 	bool isLoaded();

@@ -113,9 +113,9 @@ void BillboardEditor::_loadGUI()
 
 	// Left-viewport: mainWindow - billboardEditorMenuMain
 	leftWindow->addScreen("billboardEditorMenuMain");
-	leftWindow->getScreen("billboardEditorMenuMain")->addButton("addBillboard", Vec2(0.0f, 0.63f), Vec2(CW("Add Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("billboardEditorMenuMain")->addButton("editBillboard", Vec2(0.0f, 0.21f), Vec2(CW("Edit Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("billboardEditorMenuMain")->addButton("deleteBillboard", Vec2(0.0f, -0.21f), Vec2(CW("Delete Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("billboardEditorMenuMain")->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("billboardEditorMenuMain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("billboardEditorMenuMain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Board"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Board", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuMain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - billboardEditorMenuChoice

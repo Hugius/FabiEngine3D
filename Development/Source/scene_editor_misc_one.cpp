@@ -214,7 +214,7 @@ void SceneEditor::_deleteSceneFile(const string& sceneID)
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\" + sceneID + ".fe3d\" missing!");
+		Logger::throwWarning("Cannot delete scene with ID \"" + sceneID + "\"!");
 	}
 }
 

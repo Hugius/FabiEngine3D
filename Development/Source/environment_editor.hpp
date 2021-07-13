@@ -9,6 +9,7 @@ class EnvironmentEditor final
 public:
 	EnvironmentEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void save();
 	void unload();
@@ -22,7 +23,6 @@ public:
 	void unloadSkyEntities();
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
-	void setCurrentProjectID(const string& projectID);
 
 	const vector<array<string, 6>> getAllSkyTexturePathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();

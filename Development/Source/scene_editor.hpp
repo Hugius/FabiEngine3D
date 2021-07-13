@@ -19,13 +19,14 @@ public:
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 
 	// Core
+	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
 
 	// Editor scene
-	void loadEditorSceneFromFile(const string& fileName);
-	void saveEditorSceneToFile();
+	bool loadEditorSceneFromFile(const string& fileName);
+	bool saveEditorSceneToFile();
 
 	// Custom scene
 	void createCustomScene(const string& sceneID);
@@ -39,15 +40,14 @@ public:
 	void addAabbToCustomScene(const string& aabbID);
 	void addLightToCustomScene(const string& lightID);
 	void addSoundToCustomScene(const string& soundID);
-	void loadCustomSceneFromFile(const string& fileName);
-	void saveCustomSceneToFile();
+	bool loadCustomSceneFromFile(const string& fileName);
+	bool saveCustomSceneToFile();
 
 	// Miscellaneous
 	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
-	void setCurrentProjectID(const string& projectID);
 	bool isLoaded();
 	bool isSceneExisting(const string& fileName);
 	const string& getLoadedSceneID();

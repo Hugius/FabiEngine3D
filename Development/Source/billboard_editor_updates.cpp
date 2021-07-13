@@ -31,12 +31,12 @@ void BillboardEditor::_updateBillboardManagement()
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
-				else if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
+				else if (screen->getButton("add")->isHovered()) // Add billboard button
 				{
 					_gui.getGlobalScreen()->addValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingBillboard = true;
 				}
-				else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
+				else if (screen->getButton("edit")->isHovered()) // Edit billboard button
 				{
 					_isChoosingBillboard = true;
 					_isEditingBillboard = true;
@@ -44,7 +44,7 @@ void BillboardEditor::_updateBillboardManagement()
 					for (auto& name : IDs) { name = name.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 				}
-				else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
+				else if (screen->getButton("delete")->isHovered()) // Delete billboard button
 				{
 					_isChoosingBillboard = true;
 					_isRemovingBillboard = true;
@@ -198,9 +198,9 @@ void BillboardEditor::_updateBillboardRemoval()
 	{
 		if (_isRemovingBillboard && _currentBillboardID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeBillboard"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
@@ -211,10 +211,9 @@ void BillboardEditor::_updateBillboardRemoval()
 				_currentBillboardID = "";
 
 				// Miscellaneous
-				_gui.getGlobalScreen()->removeAnswerForm("removeBillboard");
 				_isRemovingBillboard = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeBillboard"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
 				_isRemovingBillboard = false;

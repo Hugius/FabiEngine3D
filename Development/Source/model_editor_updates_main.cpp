@@ -29,12 +29,12 @@ void ModelEditor::_updateManagementScreen()
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
-				else if (screen->getButton("addModel")->isHovered()) // Add model button
+				else if (screen->getButton("add")->isHovered()) // Add model button
 				{
 					_gui.getGlobalScreen()->addValueForm("modelCreate", "New model name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 					_isCreatingModel = true;
 				}
-				else if (screen->getButton("editModel")->isHovered()) // Edit model button
+				else if (screen->getButton("edit")->isHovered()) // Edit model button
 				{
 					_isChoosingModel = true;
 					_isEditingModel = true;
@@ -42,7 +42,7 @@ void ModelEditor::_updateManagementScreen()
 					for (auto& name : IDs) { name = name.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
 				}
-				else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
+				else if (screen->getButton("delete")->isHovered()) // Delete model button
 				{
 					_isChoosingModel = true;
 					_isDeletingModel = true;
@@ -296,9 +296,9 @@ void ModelEditor::_updateModelRemoval()
 	{
 		if (_isDeletingModel && _currentModelID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteModel"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Delete entity
 				if (_fe3d.modelEntity_isExisting(_currentModelID))
@@ -311,7 +311,7 @@ void ModelEditor::_updateModelRemoval()
 				_isDeletingModel = false;
 				_currentModelID = "";
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteModel"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				// Check if model has mesh
 				if (_fe3d.modelEntity_isExisting(_currentModelID))

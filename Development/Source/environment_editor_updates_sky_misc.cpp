@@ -123,9 +123,9 @@ void EnvironmentEditor::_updateSkyRemoval()
 	{
 		if (_isSkyRemovalEnabled && _currentSkyID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
 
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeSky"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Delete entity
 				_fe3d.skyEntity_delete(_currentSkyID);
@@ -138,7 +138,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 				// Default sky
 				_fe3d.skyEntity_select("@@engineBackground");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeSky"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				// Default sky
 				_fe3d.skyEntity_select("@@engineBackground");

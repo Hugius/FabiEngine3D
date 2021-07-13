@@ -12,8 +12,8 @@ public:
 	void load();
 	void unload();
 	void update();
-	void loadBillboardEntitiesFromFile();
-	void saveBillboardEntitiesToFile();
+	bool loadBillboardEntitiesFromFile();
+	bool saveBillboardEntitiesToFile();
 
 	bool isLoaded();
 

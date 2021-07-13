@@ -13,8 +13,8 @@ public:
 	void unload();
 	void update();
 	void loadDefaultSettings();
-	void loadSettingsFromFile();
-	void saveSettingsToFile();
+	bool loadSettingsFromFile();
+	bool saveSettingsToFile();
 
 	bool isLoaded();
 

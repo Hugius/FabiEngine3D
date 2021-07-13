@@ -57,7 +57,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 			{
-				//if (_modelEditor.loadModelEntitiesFromFile())
+				if (_modelEditor.loadModelEntitiesFromFile())
 				{
 					_modelEditor.load();
 					window->setActiveScreen("modelEditorMenuMain");
@@ -65,7 +65,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 			{
-				//if (_animationEditor.loadAnimationsFromFile())
+				if (_animationEditor.loadAnimationsFromFile())
 				{
 					_animationEditor.load();
 					window->setActiveScreen("animationEditorMenuMain");
@@ -73,7 +73,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 			{
-				//if (_billboardEditor.loadBillboardEntitiesFromFile())
+				if (_billboardEditor.loadBillboardEntitiesFromFile())
 				{
 					_billboardEditor.load();
 					window->setActiveScreen("billboardEditorMenuMain");
@@ -94,7 +94,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 			{
-				//if (_scriptEditor.loadScriptFiles(true))
+				if (_scriptEditor.loadScriptFiles(true))
 				{
 					_scriptEditor.load();
 					window->setActiveScreen("scriptEditorMenuMain");
@@ -102,7 +102,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 			{
-				//if (_settingsEditor.loadSettingsFromFile())
+				if (_settingsEditor.loadSettingsFromFile())
 				{
 					_settingsEditor.load();
 					window->setActiveScreen("settingsEditorMenuMain");

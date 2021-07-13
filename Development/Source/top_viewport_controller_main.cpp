@@ -298,7 +298,7 @@ void TopViewportController::_saveCurrentProject()
 	_billboardEditor.saveBillboardEntitiesToFile();
 	_audioEditor.saveAudioEntitiesToFile();
 	_sceneEditor.saveEditorSceneToFile();
-	_scriptEditor.saveScriptsToFile();
+	_scriptEditor.saveScriptFiles();
 	_settingsEditor.saveSettingsToFile();
 
 	// Logging

@@ -13,8 +13,8 @@ public:
 	void load();
 	void unload();
 	void update();
-	void loadModelEntitiesFromFile();
-	void saveModelEntitiesToFile();
+	bool loadModelEntitiesFromFile();
+	bool saveModelEntitiesToFile();
 
 	bool isLoaded();
 

@@ -15,14 +15,14 @@ public:
 	void load();
 	void unload();
 	void update();
-	void loadAnimationsFromFile();
-	void saveAnimationsToFile();
 	void startAnimation(const string& animationID, const string& modelID, int loops);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
+	bool loadAnimationsFromFile();
+	bool saveAnimationsToFile();
 
 	// Getters
 	bool isLoaded();

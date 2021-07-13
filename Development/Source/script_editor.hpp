@@ -15,8 +15,8 @@ public:
 	void load();
 	void unload();
 	void update();
-	void loadScriptFiles(bool isLoggingEnabled);
-	void saveScriptsToFile();
+	bool loadScriptFiles(bool isLoggingEnabled);
+	bool saveScriptFiles();
 
 	ScriptExecutor& getScriptExecutor();
 

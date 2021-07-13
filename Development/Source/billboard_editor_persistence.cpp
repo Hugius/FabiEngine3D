@@ -13,65 +13,63 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile() --> no current project loaded!");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
-	// Check if billboard file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		// Temporary values
-		std::ifstream file(filePath);
-		string line;
-		vector<string> texturePaths;
-
-		// Read billboard data
-		while (std::getline(file, line))
-		{
-			// Temporary values
-			string billboardID, diffuseMapPath;
-			Vec2 size;
-			Vec3 color;
-			bool facingX, facingY;
-			std::istringstream iss(line);
-
-			// Extract data
-			iss >>
-				billboardID >>
-				size.x >>
-				size.y >>
-				color.r >>
-				color.g >>
-				color.b >>
-				facingX >>
-				facingY >>
-				diffuseMapPath;
-
-			// Perform empty string & space conversions
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-
-			// Save file paths
-			if (!diffuseMapPath.empty())
-			{
-				texturePaths.push_back(diffuseMapPath);
-			}
-		}
-
-		// Close file
-		file.close();
-
-		// Return
-		return texturePaths;
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" file missing!");
+		return {};
 	}
 
-	return {};
+	// Load billboard file
+	std::ifstream file(filePath);
+
+	// Read billboard data
+	vector<string> texturePaths;
+	string line;
+	while (std::getline(file, line))
+	{
+		// Temporary values
+		string billboardID, diffuseMapPath;
+		Vec2 size;
+		Vec3 color;
+		bool facingX, facingY;
+		std::istringstream iss(line);
+
+		// Extract data
+		iss >>
+			billboardID >>
+			size.x >>
+			size.y >>
+			color.r >>
+			color.g >>
+			color.b >>
+			facingX >>
+			facingY >>
+			diffuseMapPath;
+
+		// Perform empty string & space conversions
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+
+		// Save file paths
+		if (!diffuseMapPath.empty())
+		{
+			texturePaths.push_back(diffuseMapPath);
+		}
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return texturePaths;
 }
 
-void BillboardEditor::loadBillboardEntitiesFromFile()
+bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -82,113 +80,117 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	// Clear IDs from previous loads
 	_loadedBillboardIDs.clear();
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
-	// Check if billboard file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-
-		// Read billboard data
-		while (std::getline(file, line))
-		{
-			// Placeholder variables
-			string billboardID, diffuseMapPath, fontPath, textContent;
-			Vec2 size;
-			Vec3 color;
-			float lightness;
-			bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted, isBright;
-			unsigned int animationRows, animationColumns, animationFramestep;
-
-			// For file extraction
-			std::istringstream iss(line);
-
-			// Extract from file
-			iss >>
-				billboardID >>
-				size.x >>
-				size.y >>
-				color.r >>
-				color.g >>
-				color.b >>
-				isFacingX >>
-				isFacingY >>
-				diffuseMapPath >>
-				isTransparent >>
-				isReflected >>
-				isShadowed >>
-				fontPath >>
-				textContent >>
-				isAnimationStarted >>
-				animationRows >>
-				animationColumns >>
-				animationFramestep >>
-				lightness >>
-				isBright;
-
-			// Perform empty string & space conversions
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			fontPath = (fontPath == "?") ? "" : fontPath;
-			textContent = (textContent == "?") ? "" : textContent;
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
-			std::replace(textContent.begin(), textContent.end(), '?', ' ');
-
-			// Add billboard name
-			_loadedBillboardIDs.push_back(billboardID);
-
-			// Determine billboard type
-			if (diffuseMapPath != "")
-			{
-				// Textured billboard
-				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, Vec3(0.0f), Vec3(0.0f), size, isTransparent, isFacingX, isFacingY, false);
-				_fe3d.billboardEntity_setColor(billboardID, color);
-
-				// Play sprite animation
-				if (isAnimationStarted)
-				{
-					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
-					_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
-					_fe3d.billboardEntity_setSpriteAnimationColumns(billboardID, animationColumns);
-					_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
-				}
-			}
-			else if (fontPath != "") // Text billboard
-			{
-				_fe3d.billboardEntity_add(billboardID, textContent, fontPath, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
-			}
-			else // Colored billboard
-			{
-				_fe3d.billboardEntity_add(billboardID, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
-			}
-
-			// Miscellaneous
-			_fe3d.billboardEntity_setLightness(billboardID, lightness);
-			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
-			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-			_fe3d.billboardEntity_setBright(billboardID, isBright);
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" file missing!");
+		return false;
 	}
+
+	// Load billboard file
+	std::ifstream file(filePath);
+
+	// Read billboard data
+	string line;
+	while (std::getline(file, line))
+	{
+		// Placeholder variables
+		string billboardID, diffuseMapPath, fontPath, textContent;
+		Vec2 size;
+		Vec3 color;
+		float lightness;
+		bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted, isBright;
+		unsigned int animationRows, animationColumns, animationFramestep;
+
+		// For file extraction
+		std::istringstream iss(line);
+
+		// Extract from file
+		iss >>
+			billboardID >>
+			size.x >>
+			size.y >>
+			color.r >>
+			color.g >>
+			color.b >>
+			isFacingX >>
+			isFacingY >>
+			diffuseMapPath >>
+			isTransparent >>
+			isReflected >>
+			isShadowed >>
+			fontPath >>
+			textContent >>
+			isAnimationStarted >>
+			animationRows >>
+			animationColumns >>
+			animationFramestep >>
+			lightness >>
+			isBright;
+
+		// Perform empty string & space conversions
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		fontPath = (fontPath == "?") ? "" : fontPath;
+		textContent = (textContent == "?") ? "" : textContent;
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
+		std::replace(textContent.begin(), textContent.end(), '?', ' ');
+
+		// Add billboard name
+		_loadedBillboardIDs.push_back(billboardID);
+
+		// Determine billboard type
+		if (diffuseMapPath != "")
+		{
+			// Textured billboard
+			_fe3d.billboardEntity_add(billboardID, diffuseMapPath, Vec3(0.0f), Vec3(0.0f), size, isTransparent, isFacingX, isFacingY, false);
+			_fe3d.billboardEntity_setColor(billboardID, color);
+
+			// Play sprite animation
+			if (isAnimationStarted)
+			{
+				_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
+				_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
+				_fe3d.billboardEntity_setSpriteAnimationColumns(billboardID, animationColumns);
+				_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
+			}
+		}
+		else if (fontPath != "") // Text billboard
+		{
+			_fe3d.billboardEntity_add(billboardID, textContent, fontPath, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
+		}
+		else // Colored billboard
+		{
+			_fe3d.billboardEntity_add(billboardID, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
+		}
+
+		// Miscellaneous
+		_fe3d.billboardEntity_setLightness(billboardID, lightness);
+		_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
+		_fe3d.billboardEntity_setReflected(billboardID, isReflected);
+		_fe3d.billboardEntity_setBright(billboardID, isBright);
+	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
+
+	// Return
+	return true;
 }
 
-void BillboardEditor::saveBillboardEntitiesToFile()
+bool BillboardEditor::saveBillboardEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -197,11 +199,14 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile() --> no current project loaded!");
 	}
 
-	// Create or overwrite billboard file
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
+	// Compose file path
+	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
-	// Write billboard data into file
+	// Create or overwrite billboard file
+	std::ofstream file(filePath);
+
+	// Write billboard data
 	for (const auto& billboardID : _loadedBillboardIDs)
 	{
 		// Retrieve all values
@@ -259,4 +264,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 
 	// Logging
 	Logger::throwInfo("Billboard data from project \"" + _currentProjectID + "\" saved!");
+
+	// Return
+	return true;
 }

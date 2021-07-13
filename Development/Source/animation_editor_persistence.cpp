@@ -4,7 +4,7 @@
 #include <fstream>
 #include <algorithm>
 
-void AnimationEditor::loadAnimationsFromFile()
+bool AnimationEditor::loadAnimationsFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -15,170 +15,174 @@ void AnimationEditor::loadAnimationsFromFile()
 	// Clear animations list from previous loads
 	_animations.clear();
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
-	// Check if animation file exists
-	if (_fe3d.misc_isFileExisting(filePath))
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		std::ifstream file(filePath);
-		string line;
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" file missing!");
+		return false;
+	}
 
-		// Read model data
-		while (std::getline(file, line))
+	// Load animation file
+	std::ifstream file(filePath);
+
+	// Read animation data
+	string line;
+	while (std::getline(file, line))
+	{
+		// Placeholder variables
+		string animationID, previewModelID;
+
+		// For file extraction
+		std::istringstream iss(line);
+
+		// Extract general data from file
+		iss >> animationID >> previewModelID;
+
+		// Create new animation
+		auto newAnimation = make_shared<Animation>(animationID);
+		newAnimation->previewModelID = previewModelID;
+
+		// Check if there is any more content in line
+		string temp;
+		if (iss >> temp)
 		{
-			// Placeholder variables
-			string animationID, previewModelID;
-
-			// For file extraction
-			std::istringstream iss(line);
-
-			// Extract general data from file
+			// Start reading again
+			iss = std::istringstream(line);
 			iss >> animationID >> previewModelID;
 
-			// Create new animation
-			auto newAnimation = make_shared<Animation>(animationID);
-			newAnimation->previewModelID = previewModelID;
+			// Clear default empty partID
+			newAnimation->partIDs.clear();
+			newAnimation->totalTranslations.clear();
+			newAnimation->totalRotations.clear();
+			newAnimation->totalScalings.clear();
 
-			// Check if there is any more content in line
-			string temp;
-			if (iss >> temp)
+			// Extract frame data from file
+			vector<AnimationFrame> frames;
+			while (true)
 			{
-				// Start reading again
-				iss = std::istringstream(line);
-				iss >> animationID >> previewModelID;
+				// Read the amount of model parts
+				unsigned int modelPartCount;
 
-				// Clear default empty partID
-				newAnimation->partIDs.clear();
-				newAnimation->totalTranslations.clear();
-				newAnimation->totalRotations.clear();
-				newAnimation->totalScalings.clear();
-
-				// Extract frame data from file
-				vector<AnimationFrame> frames;
-				while (true)
+				// Check if file has frame data left
+				if (iss >> modelPartCount)
 				{
-					// Read the amount of model parts
-					unsigned int modelPartCount;
+					// Create frame
+					AnimationFrame frame;
 
-					// Check if file has frame data left
-					if (iss >> modelPartCount)
+					// For every model part
+					for (unsigned int i = 0; i < modelPartCount; i++)
 					{
-						// Create frame
-						AnimationFrame frame;
+						// Temporary values
+						string partID;
+						Vec3 targetTransformation, rotationOrigin, speed;
+						int speedType, transformationType;;
 
-						// For every model part
-						for (unsigned int i = 0; i < modelPartCount; i++)
+						// Extract data
+						iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
+							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >>
+							speed.x >> speed.y >> speed.z >>
+							speedType >> transformationType;
+
+						// Questionmark means empty partID
+						if (partID == "?")
 						{
-							// Temporary values
-							string partID;
-							Vec3 targetTransformation, rotationOrigin, speed;
-							int speedType, transformationType;;
-
-							// Extract data
-							iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
-								rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> 
-								speed.x >> speed.y >> speed.z >> 
-								speedType >> transformationType;
-
-							// Questionmark means empty partID
-							if (partID == "?")
-							{
-								partID = "";
-							}
-
-							// Add part to frame
-							frame.targetTransformations.insert(make_pair(partID, targetTransformation));
-							frame.rotationOrigins.insert(make_pair(partID, rotationOrigin));
-							frame.speeds.insert(make_pair(partID, speed));
-							frame.speedTypes.insert(make_pair(partID, AnimationSpeedType(speedType)));
-							frame.transformationTypes.insert(make_pair(partID, TransformationType(transformationType)));
-
-							// Add all partIDs 1 time only
-							if (frames.empty())
-							{
-								newAnimation->partIDs.push_back(partID);
-
-								// Also add total transformation for each partID
-								newAnimation->totalTranslations.insert(make_pair(partID, Vec3(0.0f)));
-								newAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
-								newAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
-							}
+							partID = "";
 						}
 
-						// Add frame
-						frames.push_back(frame);
+						// Add part to frame
+						frame.targetTransformations.insert(make_pair(partID, targetTransformation));
+						frame.rotationOrigins.insert(make_pair(partID, rotationOrigin));
+						frame.speeds.insert(make_pair(partID, speed));
+						frame.speedTypes.insert(make_pair(partID, AnimationSpeedType(speedType)));
+						frame.transformationTypes.insert(make_pair(partID, TransformationType(transformationType)));
+
+						// Add all partIDs 1 time only
+						if (frames.empty())
+						{
+							newAnimation->partIDs.push_back(partID);
+
+							// Also add total transformation for each partID
+							newAnimation->totalTranslations.insert(make_pair(partID, Vec3(0.0f)));
+							newAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
+							newAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
+						}
 					}
-					else
+
+					// Add frame
+					frames.push_back(frame);
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			// Add frames to animation
+			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
+		}
+
+		// Only if loading animations in editor
+		if (_isEditorLoading)
+		{
+			// Check if preview model is still existing
+			if (_fe3d.modelEntity_isExisting(newAnimation->previewModelID))
+			{
+				// Check if parts are present
+				bool hasAllParts = true;
+				for (const auto& partID : newAnimation->partIDs)
+				{
+					// Part cannot be empty
+					if (!partID.empty())
 					{
-						break;
+						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partID);
 					}
 				}
 
-				// Add frames to animation
-				newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
-			}
-
-			// Only if loading animations in editor
-			if (_isEditorLoading)
-			{
-				// Check if preview model is still existing
-				if (_fe3d.modelEntity_isExisting(newAnimation->previewModelID))
+				// Check if preview model still has all the parts
+				if (hasAllParts)
 				{
-					// Check if parts are present
-					bool hasAllParts = true;
-					for (const auto& partID : newAnimation->partIDs)
-					{
-						// Part cannot be empty
-						if (!partID.empty())
-						{
-							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partID);
-						}
-					}
-
-					// Check if preview model still has all the parts
-					if (hasAllParts)
-					{
-						newAnimation->initialScaling = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
-						newAnimation->initialColor = _fe3d.modelEntity_getColor(newAnimation->previewModelID);
-					}
-					else // Clear preview model
-					{
-						newAnimation->oldPreviewModelID = newAnimation->previewModelID;
-						newAnimation->previewModelID = "";
-						Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" does not have required animation parts anymore!");
-					}
+					newAnimation->initialScaling = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
+					newAnimation->initialColor = _fe3d.modelEntity_getColor(newAnimation->previewModelID);
 				}
 				else // Clear preview model
 				{
 					newAnimation->oldPreviewModelID = newAnimation->previewModelID;
 					newAnimation->previewModelID = "";
-					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" does not have required animation parts anymore!");
 				}
 			}
-
-			// Add new animation
-			_animations.push_back(newAnimation);
+			else // Clear preview model
+			{
+				newAnimation->oldPreviewModelID = newAnimation->previewModelID;
+				newAnimation->previewModelID = "";
+				Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+			}
 		}
 
-		// Close file
-		file.close();
+		// Add new animation
+		_animations.push_back(newAnimation);
+	}
 
-		// Logging
-		Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
-	}
-	else
-	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" file missing!");
-	}
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
+
+	// Return
+	return true;
 }
 
-void AnimationEditor::saveAnimationsToFile()
+bool AnimationEditor::saveAnimationsToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -188,13 +192,13 @@ void AnimationEditor::saveAnimationsToFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Create or overwrite animation file
-	std::ofstream file;
-	file.open(filePath);
+	std::ofstream file(filePath);
 
-	// Write animation data into file
+	// Write animation data
 	for (const auto& animation : _animations)
 	{
 		// Only if animation has data
@@ -279,4 +283,7 @@ void AnimationEditor::saveAnimationsToFile()
 
 	// Logging
 	Logger::throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
+
+	// Return
+	return true;
 }

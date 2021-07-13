@@ -5,12 +5,12 @@
 #include <fstream>
 #include <algorithm>
 
-void ModelEditor::saveModelEntitiesToFile()
+bool ModelEditor::saveModelEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -19,11 +19,14 @@ void ModelEditor::saveModelEntitiesToFile()
 		Logger::throwError("ModelEditor::saveModelEntitiesToFile() --> no current project loaded!");
 	}
 
-	// Create or overwrite models file
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d");
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
-	// Write model data into file
+	// Create or overwrite model file
+	std::ofstream file(filePath);
+
+	// Write model data
 	for (const auto& modelID : _loadedModelIDs)
 	{
 		// Check if a 3D entity for this model is existing
@@ -158,4 +161,7 @@ void ModelEditor::saveModelEntitiesToFile()
 
 	// Logging
 	Logger::throwInfo("Model data from project \"" + _currentProjectID + "\" saved!");
+
+	// Return
+	return true;
 }

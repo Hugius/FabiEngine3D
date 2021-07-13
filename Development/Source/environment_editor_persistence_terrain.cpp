@@ -122,7 +122,7 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
-	// Check if terrain file exists
+	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" file missing!");

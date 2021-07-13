@@ -163,7 +163,7 @@ void SettingsEditor::loadDefaultSettings()
 	_fe3d.misc_setMaxAudioChannels(Config::MIN_AUDIO_CHANNELS);
 }
 
-void SettingsEditor::loadSettingsFromFile()
+bool SettingsEditor::loadSettingsFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -171,47 +171,52 @@ void SettingsEditor::loadSettingsFromFile()
 		Logger::throwError("SettingsEditor::loadSettings() --> no current project loaded!");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
-	// Check if settings file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		// Open settings file
-		std::ifstream file(filePath);
-		string line;
-		std::getline(file, line);
-		std::istringstream iss(line);
-
-		// Extract values from file
-		unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
-		bool isFxaaEnabled;
-		iss >> isFxaaEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
-
-		// Disable FXAA
-		if (_fe3d.gfx_isFxaaEnabled())
-		{
-			_fe3d.gfx_disableFXAA(true);
-		}
-
-		// Set values
-		isFxaaEnabled ? _fe3d.gfx_enableFXAA() : void();
-		_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicQuality);
-		_fe3d.gfx_setShadowQuality(shadowQuality);
-		_fe3d.gfx_setReflectionQuality(reflectionQuality);
-		_fe3d.gfx_setRefractionQuality(refractionQuality);
-		_fe3d.misc_setMaxAudioChannels(audioChannels);
-
-		// Close file
-		file.close();
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" file missing!");
+		return false;
 	}
+
+	// Load settings file
+	std::ifstream file(filePath);
+
+	// Load settings data
+	string line;
+	std::getline(file, line);
+	std::istringstream iss(line);
+
+	// Extract values from file
+	unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+	bool isFxaaEnabled;
+	iss >> isFxaaEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+
+	// Disable FXAA
+	if (_fe3d.gfx_isFxaaEnabled())
+	{
+		_fe3d.gfx_disableFXAA(true);
+	}
+
+	// Set values
+	isFxaaEnabled ? _fe3d.gfx_enableFXAA() : void();
+	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicQuality);
+	_fe3d.gfx_setShadowQuality(shadowQuality);
+	_fe3d.gfx_setReflectionQuality(reflectionQuality);
+	_fe3d.gfx_setRefractionQuality(refractionQuality);
+	_fe3d.misc_setMaxAudioChannels(audioChannels);
+
+	// Close file
+	file.close();
+
+	// Return
+	return true;
 }
 
-void SettingsEditor::saveSettingsToFile()
+bool SettingsEditor::saveSettingsToFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -219,12 +224,12 @@ void SettingsEditor::saveSettingsToFile()
 		Logger::throwError("SettingsEditor::save() --> no current project loaded!");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\settings.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
-	// Overwrite (or create) settings file
-	std::ofstream file;
-	file.open(filePath);
+	// Create or overwrite settings file
+	std::ofstream file(filePath);
 
 	// Get values
 	auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
@@ -245,6 +250,9 @@ void SettingsEditor::saveSettingsToFile()
 
 	// Close file
 	file.close();
+
+	// Return
+	return true;
 }
 
 void SettingsEditor::setCurrentProjectID(const string& projectID)

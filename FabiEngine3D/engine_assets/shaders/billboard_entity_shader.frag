@@ -33,7 +33,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 // Functions
 vec3 applyFog(vec3 color);
 
-// Calculate final fragment color
+// Process fragment
 void main()
 {
 	// Calculate primary color

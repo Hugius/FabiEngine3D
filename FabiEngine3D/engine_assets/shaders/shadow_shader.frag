@@ -10,6 +10,7 @@ uniform sampler2D u_diffuseMap;
 // Boolean uniforms
 uniform bool u_isAlphaObject;
 
+// Process fragment
 void main()
 {
 	// Texture sampling for possible alpha

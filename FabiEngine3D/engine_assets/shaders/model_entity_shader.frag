@@ -112,7 +112,7 @@ vec3 applySceneReflections(vec3 color);
 float getShadowValue();
 float getSpecularValue(vec3 position, vec3 normal);
 
-// Calculate final fragment color
+// Process fragment
 void main()
 {
     // Calculate normal vector
@@ -127,14 +127,23 @@ void main()
 
 	// Calculate primary color
 	vec3 primaryColor;
-	primaryColor  = getTextureColor(); // Diffuse map
-    primaryColor *= u_color;
-	primaryColor  = applySkyReflections(primaryColor, normal); // Sky reflection
-	primaryColor  = applySceneReflections(primaryColor); // Scene reflection
-	primaryColor *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
-	primaryColor  = applyLightMapping(primaryColor); // LightMapping
-	primaryColor *= u_lightness; // Lightness
-    primaryColor  = applyFog(primaryColor); // Fog
+	primaryColor  = getTextureColor();
+	primaryColor *= u_color;
+	if(u_isBloomed)
+	{
+	    primaryColor  = applyLightMapping(primaryColor);
+		primaryColor *= u_lightness;
+	    primaryColor  = applyFog(primaryColor);
+	}
+	else
+	{
+		primaryColor  = applySkyReflections(primaryColor, normal);
+		primaryColor  = applySceneReflections(primaryColor);
+		primaryColor *= vec3(((ambient + directional) * shadow) + point + spot);
+		primaryColor  = applyLightMapping(primaryColor);
+		primaryColor *= u_lightness;
+	    primaryColor  = applyFog(primaryColor);
+	}
 
 	// Calculate secondary color
 	vec3 secondaryColor = (u_isBloomed ? primaryColor : vec3(0.0f));

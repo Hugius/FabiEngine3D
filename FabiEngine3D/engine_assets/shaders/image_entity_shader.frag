@@ -30,6 +30,7 @@ layout (location = 0) out vec4 o_finalColor;
 // Functions
 float convertDepthToPerspective(float depth, float nearZ, float farZ);
 
+// Process fragment
 void main()
 {
 	// Calculate fragment position and convert to NDC

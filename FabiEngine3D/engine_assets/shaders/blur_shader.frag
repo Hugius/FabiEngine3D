@@ -20,6 +20,7 @@ layout (location = 0) out vec4 o_finalColor;
 // Local variables
 #define KERNEL_SIZE 5
 
+// Process fragment
 void main()
 {
     // Compose blur kernel

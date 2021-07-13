@@ -29,12 +29,10 @@ uniform bool u_isLensFlareEnabled;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-float convertDepthToPerspective(float depth)
-{
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
-}
+// Functions
+float convertDepthToPerspective(float depth);
 
+// Process fragment
 void main()
 {
 	// Texture mapping
@@ -95,4 +93,10 @@ void main()
 
 	// Alpha value
 	o_finalColor.a = 1.0f;
+}
+
+float convertDepthToPerspective(float depth)
+{
+    float z = depth * 2.0 - 1.0; // Back to NDC 
+    return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
 }

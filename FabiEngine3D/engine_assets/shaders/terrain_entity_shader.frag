@@ -102,7 +102,7 @@ vec3 applyFog(vec3 color);
 float getShadowValue();
 float getSpecularValue(vec3 position, vec3 normal);
 
-// Calculate final fragment color
+// Process fragment
 void main()
 {
 	// Calculate new normal vector

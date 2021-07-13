@@ -50,8 +50,8 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 	}
 	else // Normal filtering
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
 	// Anisotropic filtering
@@ -208,14 +208,13 @@ GLuint TextureLoader::_loadText(const string& textContent, const string& fontPat
 	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
 
 	// OpenGL Texture
-	GLuint tex;
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 
 	// Determine pixel format
 	if (surface->format->BytesPerPixel == 4)
@@ -235,7 +234,7 @@ GLuint TextureLoader::_loadText(const string& textContent, const string& fontPat
 	// Memory management
 	SDL_FreeSurface(surface);
 
-	return tex;
+	return texture;
 }
 
 vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file

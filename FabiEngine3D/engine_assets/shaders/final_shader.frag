@@ -14,6 +14,7 @@ uniform float u_mixValue;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
+// Process fragment
 void main()
 {
 	vec4 scene = texture(u_sceneMap, f_uv);

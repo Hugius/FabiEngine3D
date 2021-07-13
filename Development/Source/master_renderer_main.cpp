@@ -37,7 +37,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofRenderer.loadFramebuffers(BlurType::DOF, 2);
 	_motionBlurRenderer.loadFramebuffers(BlurType::MOTION, 4);
 	_bloomRendererHighQuality.loadFramebuffers(BlurType::BLOOM, 2);
-	_bloomRendererLowQuality.loadFramebuffers(BlurType::BLOOM, 8);
+	_bloomRendererLowQuality.loadFramebuffers(BlurType::BLOOM, 6);
 
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");

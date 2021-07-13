@@ -13,7 +13,7 @@ uniform float u_minAlpha;
 // Boolean uniforms
 uniform bool u_isAlphaObject;
 
-// Calculate final fragment color
+// Process fragment
 void main()
 {
 	vec4 texColor = texture(u_diffuseMap, f_uv);

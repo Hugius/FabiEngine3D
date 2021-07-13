@@ -2,10 +2,12 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Out variables
-layout (location = 0) out vec4 o_finalColor;
+layout (location = 0) out vec4 o_primaryColor;
+layout (location = 1) out vec4 o_secondaryColor;
 
-// Calculate final fragment color
+// Process fragments
 void main()
 {
-	o_finalColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	o_primaryColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

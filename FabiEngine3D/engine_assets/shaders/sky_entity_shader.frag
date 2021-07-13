@@ -21,6 +21,7 @@ uniform vec3 u_mixColor;
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
+// Process fragment
 void main()
 {
 	// Sky colors

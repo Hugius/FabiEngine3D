@@ -67,7 +67,7 @@ vec3 applyFog(vec3 color);
 float getSpecularValue(vec3 position, vec3 normal);
 float convertDepthToLinear(float depth);
 
-// Calculate final fragment color
+// Process fragment
 void main()
 {
 	// Main water color

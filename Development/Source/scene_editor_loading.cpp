@@ -338,6 +338,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_add("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
 					_fe3d.modelEntity_setShadowed("@" + lightID, false);
 					_fe3d.modelEntity_setReflected("@" + lightID, false);
+					_fe3d.modelEntity_setBloomed("@" + lightID, true);
 					_fe3d.modelEntity_setColor("@" + lightID, color);
 					_fe3d.aabbEntity_bindToModelEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 				}

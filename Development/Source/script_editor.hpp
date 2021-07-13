@@ -34,32 +34,21 @@ private:
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
-	// Core variables
+	// Instances
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	Script _script;
 	ScriptExecutor _scriptExecutor;
 
-	// Editor variables
+	// Strings
+	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
+	static inline const string ALPHABET_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
-	InputType _activeActionKey = InputType::NONE;
 	string _currentProjectID = "";
 	string _currentScriptFileID = "";
-	float _scrollingAcceleration = 0.0f;
-	bool _isEditorLoaded = false;
-	bool _isScriptLoadedFromFile = false;
-	bool _isWritingScript = false;
-	bool _isSingleActionAllowed = true;
-	bool _isContinuousActionAllowed = false;
-	bool _wasGuiFocused = false;
-	bool _hasClickedLMB = false;
-	int _firstSelectedLineIndex = -1;
-	int _lastSelectedLineIndex = -1;
-	unsigned int _passedFrames = 0;
-	
-	// Editor constants
-	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
+
+	// Vectors
 	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 0.0f, 10.0f);
 	static inline const Vec3 SCRIPT_TEXT_STARTING_POSITION = Vec3(-11.0f, 6.0f, 0.5f);
 	static inline const Vec3 LINE_NUMBER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
@@ -67,21 +56,40 @@ private:
 	static inline const Vec3 SELECTION_COLOR = Vec3(0.25f);
 	static inline const Vec3 SEPARATOR_COLOR = Vec3(1.0f, 0.85f, 0.0f);
 	static inline const Vec2 TEXT_CHARACTER_SIZE = Vec2(0.25f, 0.75f);
+
+	// Integers
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
 	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
 	static inline const unsigned int MAX_CHARACTERS_PER_LINE = 88;
 	static inline const unsigned int MAX_LINE_AMOUNT = 100;
 	static inline const unsigned int MAX_VISIBLE_LINES = 13;
+	int _firstSelectedLineIndex = -1;
+	int _lastSelectedLineIndex = -1;
+	unsigned int _passedFrames = 0;
+
+	// Floats
 	static inline const float SCROLLING_SPEED = 0.1f;
 	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
 	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
 	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
 	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
-	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (MAX_VISIBLE_LINES / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
+	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(MAX_VISIBLE_LINES) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
 	static inline const float CAMERA_FOV = 71.0f;
 	static inline const float AABB_DEPTH = 0.05f;
-	static inline const string LETTER_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
+	float _scrollingAcceleration = 0.0f;
+
+	// Booleans
+	bool _isEditorLoaded = false;
+	bool _isScriptLoadedFromFile = false;
+	bool _isWritingScript = false;
+	bool _isSingleActionAllowed = true;
+	bool _isContinuousActionAllowed = false;
+	bool _wasGuiFocused = false;
+	bool _hasClickedLMB = false;
+
+	// Miscellaneous
+	InputType _activeActionKey = InputType::NONE;
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},

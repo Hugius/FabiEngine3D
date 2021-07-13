@@ -47,8 +47,10 @@ void ScriptEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
-	_fe3d.camera_setYaw(-90.0f);
+	_fe3d.camera_setPosition(CAMERA_POSITION);
 	_fe3d.camera_setFOV(CAMERA_FOV);
+	_fe3d.camera_setYaw(-90.0f);
+	_fe3d.camera_setPitch(0.0f);
 
 	// Background
 	_fe3d.skyEntity_setLightness("@@engineBackground", 0.5f);

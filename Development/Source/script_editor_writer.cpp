@@ -262,7 +262,7 @@ void ScriptEditor::_updateTextWriter()
 			if (!_fe3d.input_isKeyDown(InputType::KEY_LCTRL) && !_fe3d.input_isKeyDown(InputType::KEY_RCTRL))
 			{
 				// Letter characters
-				for (const auto& c : LETTER_CHARACTERS)
+				for (const auto& c : ALPHABET_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_isKeyPressed(InputType(c)))

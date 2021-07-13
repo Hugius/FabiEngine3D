@@ -19,7 +19,6 @@ public:
 	bool isLoaded();
 
 	const vector<string> getAllTexturePathsFromFile();
-	const vector<string>& getAllMeshFileNames();
 	const vector<string>& getLoadedModelIDs();
 
 private:
@@ -29,7 +28,6 @@ private:
 		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor, float specularIntensity,
 		float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBright,
 		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
-	void _loadMeshFileNames();
 	void _loadMesh();
 	void _loadDiffuseMap();
 	void _loadLightMap();
@@ -54,7 +52,6 @@ private:
 
 	// Strings
 	vector<string> _loadedModelIDs;
-	vector<string> _meshFileNames;
 	string _currentModelID = "";
 	string _currentAabbID = "";
 	string _currentProjectID = "";

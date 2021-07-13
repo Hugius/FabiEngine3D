@@ -134,16 +134,22 @@ void SceneEditor::_updateMainMenu()
 					// Load selected scene for editing
 					if (_isChoosingScene)
 					{
+						// Disable engine background
+						_fe3d.skyEntity_select("");
+
+						// Try to load scene
 						if (loadEditorSceneFromFile(_currentSceneID))
 						{
-							// Disable engine background
-							_fe3d.skyEntity_select("");
-
 							// Disable vsync
 							_fe3d.misc_disableVsync();
 
 							// Change GUI
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+						}
+						else
+						{
+							// Enable engine background
+							_fe3d.skyEntity_select("@@engineBackground");
 						}
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
@@ -232,7 +238,7 @@ void SceneEditor::_updateChoiceMenu()
 				// Clear whole scene
 				clearCurrentScene();
 
-				// Default skybox
+				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
 
 				// Exiting scene, so vsync needed
@@ -252,7 +258,7 @@ void SceneEditor::_updateChoiceMenu()
 				// Clear whole scene
 				clearCurrentScene();
 
-				// Default skybox
+				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
 
 				// Exiting scene, so enable Vsync again

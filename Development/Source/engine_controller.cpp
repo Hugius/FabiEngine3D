@@ -38,7 +38,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		camera_reset();
 
 		// Initialize script execution
-		_leftViewportController.getScriptEditor().loadScriptFiles(true);
+		_leftViewportController.getScriptEditor().loadScriptFiles();
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
 
 		// Scripting error has been thrown

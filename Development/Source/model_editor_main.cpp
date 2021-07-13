@@ -19,9 +19,6 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 void ModelEditor::load()
 {
-	// Load all mesh filenames from assets folder
-	_loadMeshFileNames();
-
 	// GUI
 	_loadGUI();
 
@@ -54,13 +51,12 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	loadModelEntitiesFromFile();
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_isEditorLoaded = true;
 }
 
@@ -100,7 +96,6 @@ void ModelEditor::unload()
 	_currentAabbID = "";
 	_hoveredModelID = "";
 	_loadedModelIDs.clear();
-	_meshFileNames.clear();
 	_cameraLookatPosition = Vec3(0.0f);
 	_aabbTransformationSpeed = 0.1f;
 	_isCreatingModel = false;

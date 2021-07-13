@@ -1,39 +1,7 @@
 #include "model_editor.hpp"
 #include "logger.hpp"
 
-#include <filesystem>
-
-void ModelEditor::_loadMeshFileNames()
-{
-	// Remove potential previous filenames
-	if (!_meshFileNames.empty())
-	{
-		_meshFileNames.clear();
-	}
-
-	// Determine full mesh directory
-	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "game_assets\\meshes\\";
-	unsigned int endOfNameIndex = 0;
-
-	// Get all filenames
-	for (const auto& entry : std::filesystem::directory_iterator(meshDirectoryPath))
-	{
-		string meshPath = string(entry.path().u8string());
-		meshPath.erase(0, meshDirectoryPath.size());
-
-		// Iterate through file path
-		for (size_t i = 0; i < meshPath.size(); i++)
-		{
-			// End of file name
-			if (meshPath[i] == '.')
-			{
-				endOfNameIndex = static_cast<unsigned int>(i);
-			}
-		}
-
-		_meshFileNames.push_back(meshPath.substr(0, endOfNameIndex));
-	}
-}
+#include <algorithm>
 
 void ModelEditor::_loadMesh()
 {
@@ -205,11 +173,6 @@ void ModelEditor::setCurrentProjectID(const string& projectID)
 bool ModelEditor::isLoaded()
 {
 	return _isEditorLoaded;
-}
-
-const vector<string>& ModelEditor::getAllMeshFileNames()
-{
-	return _meshFileNames;
 }
 
 const vector<string>& ModelEditor::getLoadedModelIDs()

@@ -41,9 +41,6 @@ void BillboardEditor::load()
 	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
-	// Load billboards from file
-	loadBillboardEntitiesFromFile();
-
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();

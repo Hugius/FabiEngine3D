@@ -22,9 +22,6 @@ void SettingsEditor::load()
 {
 	// GUI
 	_loadGUI();
-
-	// Settings
-	loadSettingsFromFile();
 	
 	// Miscellaneous
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);

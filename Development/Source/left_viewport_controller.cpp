@@ -65,7 +65,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 			{
-				if (_animationEditor.loadAnimationsFromFile())
+				if (_modelEditor.loadModelEntitiesFromFile() && _animationEditor.loadAnimationsFromFile())
 				{
 					_animationEditor.load();
 					window->setActiveScreen("animationEditorMenuMain");
@@ -94,7 +94,7 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 			{
-				if (_scriptEditor.loadScriptFiles(true))
+				if (_scriptEditor.loadScriptFiles())
 				{
 					_scriptEditor.load();
 					window->setActiveScreen("scriptEditorMenuMain");

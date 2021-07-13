@@ -135,12 +135,12 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_isSkyRemovalEnabled = false;
 				_currentSkyID = "";
 
-				// Default sky
+				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
-				// Default sky
+				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
 
 				// Miscellaneous

@@ -290,7 +290,9 @@ void TopViewportController::_saveCurrentProject()
 	}
 
 	// Save everything
-	_environmentEditor.save();
+	_environmentEditor.saveSkyEntitiesToFile();
+	_environmentEditor.saveTerrainEntitiesToFile();
+	_environmentEditor.saveWaterEntitiesToFile();
 	_modelEditor.saveModelEntitiesToFile();
 	_animationEditor.saveAnimationsToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();

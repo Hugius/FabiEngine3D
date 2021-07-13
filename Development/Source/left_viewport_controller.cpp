@@ -47,23 +47,37 @@ void LeftViewportController::update()
 		{
 			if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
 			{
-				_environmentEditor.load();
-				window->setActiveScreen("environmentEditorMenu");
+				if (_environmentEditor.loadSkyEntitiesFromFile() &&
+					_environmentEditor.loadTerrainEntitiesFromFile() &&
+					_environmentEditor.loadWaterEntitiesFromFile())
+				{
+					_environmentEditor.load();
+					window->setActiveScreen("environmentEditorMenu");
+				}
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 			{
-				_modelEditor.load();
-				window->setActiveScreen("modelEditorMenuMain");
+				//if (_modelEditor.loadModelEntitiesFromFile())
+				{
+					_modelEditor.load();
+					window->setActiveScreen("modelEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 			{
-				_animationEditor.load();
-				window->setActiveScreen("animationEditorMenuMain");
+				//if (_animationEditor.loadAnimationsFromFile())
+				{
+					_animationEditor.load();
+					window->setActiveScreen("animationEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 			{
-				_billboardEditor.load();
-				window->setActiveScreen("billboardEditorMenuMain");
+				//if (_billboardEditor.loadBillboardEntitiesFromFile())
+				{
+					_billboardEditor.load();
+					window->setActiveScreen("billboardEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
 			{
@@ -80,13 +94,19 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 			{
-				_scriptEditor.load();
-				window->setActiveScreen("scriptEditorMenuMain");
+				//if (_scriptEditor.loadScriptFiles(true))
+				{
+					_scriptEditor.load();
+					window->setActiveScreen("scriptEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 			{
-				_settingsEditor.load();
-				window->setActiveScreen("settingsEditorMenuMain");
+				//if (_settingsEditor.loadSettingsFromFile())
+				{
+					_settingsEditor.load();
+					window->setActiveScreen("settingsEditorMenuMain");
+				}
 			}
 		}
 	}

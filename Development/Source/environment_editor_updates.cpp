@@ -27,7 +27,7 @@ void EnvironmentEditor::update()
 				{
 					if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 					{
-						_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save Changes?", Vec2(0.0f, 0.25f));
+						_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 					}
 					else if (screen->getButton("sky")->isHovered())
 					{
@@ -50,13 +50,15 @@ void EnvironmentEditor::update()
 				}
 
 				// Check if user wants to save changes
-				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEnvironmentEditor"))
+				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 				{
-					save();
+					saveSkyEntitiesToFile();
+					saveTerrainEntitiesToFile();
+					saveWaterEntitiesToFile();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 					unload();
 				}
-				else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitEnvironmentEditor"))
+				else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 					unload();

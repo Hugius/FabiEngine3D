@@ -17,25 +17,21 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	}
 
 	// Compose file path
-	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
-	const string fullFilePath = string(directoryPath + fileName + ".fe3d");
+	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + fileName + ".fe3d");
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(fullFilePath))
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
 		return false;
 	}
 
-	// Set new scene ID
-	_loadedSceneID = fileName;
-
 	// Load scene file
-	std::ifstream file(fullFilePath);
-	string line;
+	std::ifstream file(filePath);
 
-	// Read model data
+	// Read scene data
+	string line;
 	while (std::getline(file, line))
 	{
 		// For file extraction
@@ -674,6 +670,9 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 	// Close file
 	file.close();
+
+	// Set new scene ID
+	_loadedSceneID = fileName;
 
 	// Logging
 	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");

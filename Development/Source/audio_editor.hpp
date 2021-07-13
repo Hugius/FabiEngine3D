@@ -10,8 +10,8 @@ public:
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
-	void unload();
 	void update();
+	void unload();
 	bool loadAudioEntitiesFromFile();
 	bool saveAudioEntitiesToFile();
 

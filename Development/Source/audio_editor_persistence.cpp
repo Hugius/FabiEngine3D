@@ -12,48 +12,44 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() --> no current project loaded!");
 	}
 
-	// Clear IDs from previous loads
-	_loadedAudioIDs.clear();
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
-
-	// Check if audio file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-		vector<string> audioPaths;
-
-		// Read model data
-		while (std::getline(file, line))
-		{
-			// Temporary values
-			string audioID, audioPath;
-			std::istringstream iss(line);
-
-			// Extract from file
-			iss >> audioID >> audioPath;
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "?") ? "" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
-
-			// Save file path
-			audioPaths.push_back(audioPath);
-		}
-
-		// Close file
-		file.close();
-
-		return audioPaths;
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
+		return {};
 	}
 
-	return {};
+	// Load audio file
+	std::ifstream file(filePath);
+
+	// Read model data
+	vector<string> audioPaths;
+	string line;
+	while (std::getline(file, line))
+	{
+		// Temporary values
+		string audioID, audioPath;
+		std::istringstream iss(line);
+
+		// Extract from file
+		iss >> audioID >> audioPath;
+
+		// Perform empty string & space conversions
+		audioPath = (audioPath == "?") ? "" : audioPath;
+		std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+		// Save file path
+		audioPaths.push_back(audioPath);
+	}
+
+	// Close file
+	file.close();
+
+	return audioPaths;
 }
 
 bool AudioEditor::loadAudioEntitiesFromFile()
@@ -68,17 +64,18 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	_loadedAudioIDs.clear();
 
 	// Compose file path
-	const string fullFilePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(fullFilePath))
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
 		return false;
 	}
 
 	// Load audio file
-	std::ifstream file(fullFilePath);
+	std::ifstream file(filePath);
 
 	// Read audio file
 	string line;
@@ -127,14 +124,13 @@ bool AudioEditor::saveAudioEntitiesToFile()
 	}
 
 	// Compose file path
-	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\data\\");
-	const string fullFilePath = (directoryPath + ".fe3d");
+	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Create or overwrite audio file
-	std::ofstream file(fullFilePath);
+	std::ofstream file(filePath);
 
-	// Write audio data into file
+	// Write audio data
 	for (const auto& audioID : _loadedAudioIDs)
 	{
 		// Retrieve all values

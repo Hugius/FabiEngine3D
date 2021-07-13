@@ -11,18 +11,17 @@ public:
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
-	void save();
-	void unload();
 	void update();
-	void loadSkyEntitiesFromFile();
-	void loadTerrainEntitiesFromFile();
-	void loadWaterEntitiesFromFile();
-	void saveSkyEntitiesToFile();
-	void saveTerrainEntitiesToFile();
-	void saveWaterEntitiesToFile();
+	void unload();
 	void unloadSkyEntities();
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
+	bool loadSkyEntitiesFromFile();
+	bool loadTerrainEntitiesFromFile();
+	bool loadWaterEntitiesFromFile();
+	bool saveSkyEntitiesToFile();
+	bool saveTerrainEntitiesToFile();
+	bool saveWaterEntitiesToFile();
 
 	const vector<array<string, 6>> getAllSkyTexturePathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();

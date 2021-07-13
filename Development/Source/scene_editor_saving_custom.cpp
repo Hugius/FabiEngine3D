@@ -24,12 +24,11 @@ bool SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Compose file path
-	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
-	const string fullFilePath = (directoryPath + _customSceneID + ".fe3d");
+	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + _customSceneID + ".fe3d");
 
 	// Create or overwrite file
-	std::ofstream file(fullFilePath);
+	std::ofstream file(filePath);
 
 	// Save model LOD IDs
 	vector<string> lodIDs;

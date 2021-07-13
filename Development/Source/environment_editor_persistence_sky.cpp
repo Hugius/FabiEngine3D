@@ -13,60 +13,59 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 		Logger::throwError("EnvironmentEditor::getAllSkyTexturePathsFromFile() --> no current project loaded!");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
-	// Check if sky file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-		vector<array<string, 6>> texturePaths;
-
-		// Read sky data
-		while (std::getline(file, line))
-		{
-			// Temporary values
-			string skyID;
-			array<string, 6> diffuseMapPaths = {};
-			std::istringstream iss(line);
-
-			// Load base data
-			iss >>
-				skyID >>
-				diffuseMapPaths[0] >>
-				diffuseMapPaths[1] >>
-				diffuseMapPaths[2] >>
-				diffuseMapPaths[3] >>
-				diffuseMapPaths[4] >>
-				diffuseMapPaths[5];
-
-			// Perform empty string & space conversions
-			for (auto& diffuseMapPath : diffuseMapPaths)
-			{
-				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			}
-
-			// Save file paths
-			texturePaths.push_back(diffuseMapPaths);
-		}
-
-		// Close file
-		file.close();
-
-		// Return
-		return texturePaths;
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
+		return {};
 	}
 
-	return {};
+	// Load sky file
+	std::ifstream file(filePath);
+
+	// Read sky data
+	vector<array<string, 6>> texturePaths;
+	string line;
+	while (std::getline(file, line))
+	{
+		// Temporary values
+		string skyID;
+		array<string, 6> diffuseMapPaths = {};
+		std::istringstream iss(line);
+
+		// Load base data
+		iss >>
+			skyID >>
+			diffuseMapPaths[0] >>
+			diffuseMapPaths[1] >>
+			diffuseMapPaths[2] >>
+			diffuseMapPaths[3] >>
+			diffuseMapPaths[4] >>
+			diffuseMapPaths[5];
+
+		// Perform empty string & space conversions
+		for (auto& diffuseMapPath : diffuseMapPaths)
+		{
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		}
+
+		// Save file paths
+		texturePaths.push_back(diffuseMapPaths);
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return texturePaths;
 }
 
-void EnvironmentEditor::loadSkyEntitiesFromFile()
+bool EnvironmentEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -77,86 +76,79 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	// Clear IDs from previous loads
 	_loadedSkyIDs.clear();
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
-	// Check if sky file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-		 
-		// Read sky data
-		while (std::getline(file, line))
-		{
-			std::istringstream iss(line);
-
-			// Values
-			string skyID;
-			std::array<string, 6> diffuseMapPaths{};
-			float rotationSpeed, lightness;
-			Vec3 color;
-
-			// Load base data
-			iss >>
-				skyID >>
-				diffuseMapPaths[0] >>
-				diffuseMapPaths[1] >>
-				diffuseMapPaths[2] >>
-				diffuseMapPaths[3] >>
-				diffuseMapPaths[4] >>
-				diffuseMapPaths[5] >>
-				rotationSpeed >>
-				lightness >>
-				color.r >>
-				color.g >>
-				color.b;
-
-			// Perform empty string & space conversions
-			for (auto& diffuseMapPath : diffuseMapPaths)
-			{
-				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			}
-
-			// Load entity
-			_loadedSkyIDs.push_back(skyID);
-			_fe3d.skyEntity_add(skyID);
-			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
-			_fe3d.skyEntity_setLightness(skyID, lightness);
-			_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
-			_fe3d.skyEntity_setColor(skyID, color);
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		Logger::throwInfo("Sky data from project \"" + _currentProjectID + "\" loaded!");
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
+		return false;
 	}
-}
 
-void EnvironmentEditor::unloadSkyEntities()
-{
-	for (const auto& ID : _loadedSkyIDs)
+	// Load sky file
+	std::ifstream file(filePath);
+
+	// Read sky data
+	string line;
+	while (std::getline(file, line))
 	{
-		if (_fe3d.skyEntity_isExisting(ID))
+		std::istringstream iss(line);
+
+		// Values
+		string skyID;
+		std::array<string, 6> diffuseMapPaths{};
+		float rotationSpeed, lightness;
+		Vec3 color;
+
+		// Load base data
+		iss >>
+			skyID >>
+			diffuseMapPaths[0] >>
+			diffuseMapPaths[1] >>
+			diffuseMapPaths[2] >>
+			diffuseMapPaths[3] >>
+			diffuseMapPaths[4] >>
+			diffuseMapPaths[5] >>
+			rotationSpeed >>
+			lightness >>
+			color.r >>
+			color.g >>
+			color.b;
+
+		// Perform empty string & space conversions
+		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
-			_fe3d.skyEntity_delete(ID);
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
+
+		// Load entity
+		_loadedSkyIDs.push_back(skyID);
+		_fe3d.skyEntity_add(skyID);
+		_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
+		_fe3d.skyEntity_setLightness(skyID, lightness);
+		_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+		_fe3d.skyEntity_setColor(skyID, color);
 	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Sky data from project \"" + _currentProjectID + "\" loaded!");
+
+	// Return
+	return true;
 }
 
-void EnvironmentEditor::saveSkyEntitiesToFile()
+bool EnvironmentEditor::saveSkyEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -165,12 +157,14 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		Logger::throwError("EnvironmentEditor::saveSkyEntitiesToFile() --> no current project loaded!");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
-	// Load file
+	// Load sky file
 	std::ofstream file(filePath);
 
-	// Write every sky to file
+	// Write sky data
 	for (const auto& skyID : _loadedSkyIDs)
 	{
 		// Values
@@ -209,10 +203,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 
 	// Logging
 	Logger::throwInfo("Sky data from project \"" + _currentProjectID + "\" saved!");
-}
 
-const vector<string>& EnvironmentEditor::getLoadedSkyIDs()
-{
-	std::sort(_loadedSkyIDs.begin(), _loadedSkyIDs.end());
-	return _loadedSkyIDs;
+	// Return
+	return true;
 }

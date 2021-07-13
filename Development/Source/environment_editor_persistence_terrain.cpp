@@ -13,103 +13,101 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 		Logger::throwError("EnvironmentEditor::getAllTerrainTexturePathsFromFile() --> no current project loaded!");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
-	// Load terrain file
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		// Temporary values
-		std::ifstream file(filePath);
-		string line;
-		vector<string> texturePaths;
-
-		// Read terrain data
-		while (std::getline(file, line))
-		{
-			// Temporary values
-			string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
-				normalMapPathR, normalMapPathG, normalMapPathB,
-				blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
-			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB;
-			std::istringstream iss(line);
-
-			// Load base data
-			iss >>
-				terrainID >>
-				heightMapPath >>
-				diffuseMapPath >>
-				maxHeight >>
-				uvRepeat >>
-				lightness >>
-				isBlendMapped >>
-				blendMapPath >>
-				blendMapPathR >>
-				blendMapPathG >>
-				blendMapPathB >>
-				blendRepeatR >>
-				blendRepeatG >>
-				blendRepeatB >>
-				isNormalMapped >>
-				isNormalMappedR >>
-				isNormalMappedG >>
-				isNormalMappedB >>
-				normalMapPath >>
-				normalMapPathR >>
-				normalMapPathG >>
-				normalMapPathB;
-
-			// Perform empty string & space conversions
-			heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-			normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
-			normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
-			normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
-			blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
-			blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
-			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
-			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
-			std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-			std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-			std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-			std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-			std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-			std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-			std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-			std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
-
-			// Save file paths
-			if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
-			if (!heightMapPath.empty())  texturePaths.push_back(heightMapPath);
-			if (!normalMapPath.empty())  texturePaths.push_back(normalMapPath);
-			if (!normalMapPathR.empty()) texturePaths.push_back(normalMapPathR);
-			if (!normalMapPathG.empty()) texturePaths.push_back(normalMapPathG);
-			if (!normalMapPathB.empty()) texturePaths.push_back(normalMapPathB);
-			if (!blendMapPath.empty())   texturePaths.push_back(blendMapPath);
-			if (!blendMapPathR.empty())  texturePaths.push_back(blendMapPathR);
-			if (!blendMapPathG.empty())  texturePaths.push_back(blendMapPathG);
-			if (!blendMapPathB.empty())  texturePaths.push_back(blendMapPathB);
-		}
-
-		// Close file
-		file.close();
-
-		// Return
-		return texturePaths;
-	}
-	else
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" file missing!");
+		return {};
 	}
 
-	return {};
+	// Load terrain file
+	std::ifstream file(filePath);
+
+	// Read terrain data
+	vector<string> texturePaths;
+	string line;
+	while (std::getline(file, line))
+	{
+		// Temporary values
+		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
+			normalMapPathR, normalMapPathG, normalMapPathB,
+			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
+		bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB;
+		std::istringstream iss(line);
+
+		// Load base data
+		iss >>
+			terrainID >>
+			heightMapPath >>
+			diffuseMapPath >>
+			maxHeight >>
+			uvRepeat >>
+			lightness >>
+			isBlendMapped >>
+			blendMapPath >>
+			blendMapPathR >>
+			blendMapPathG >>
+			blendMapPathB >>
+			blendRepeatR >>
+			blendRepeatG >>
+			blendRepeatB >>
+			isNormalMapped >>
+			isNormalMappedR >>
+			isNormalMappedG >>
+			isNormalMappedB >>
+			normalMapPath >>
+			normalMapPathR >>
+			normalMapPathG >>
+			normalMapPathB;
+
+		// Perform empty string & space conversions
+		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
+		normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
+		normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
+		blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
+		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
+		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
+		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+		std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+		std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+		std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+		std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+		std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+		std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+
+		// Save file paths
+		if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
+		if (!heightMapPath.empty())  texturePaths.push_back(heightMapPath);
+		if (!normalMapPath.empty())  texturePaths.push_back(normalMapPath);
+		if (!normalMapPathR.empty()) texturePaths.push_back(normalMapPathR);
+		if (!normalMapPathG.empty()) texturePaths.push_back(normalMapPathG);
+		if (!normalMapPathB.empty()) texturePaths.push_back(normalMapPathB);
+		if (!blendMapPath.empty())   texturePaths.push_back(blendMapPath);
+		if (!blendMapPathR.empty())  texturePaths.push_back(blendMapPathR);
+		if (!blendMapPathG.empty())  texturePaths.push_back(blendMapPathG);
+		if (!blendMapPathB.empty())  texturePaths.push_back(blendMapPathB);
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return texturePaths;
 }
 
-void EnvironmentEditor::loadTerrainEntitiesFromFile()
+bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -120,137 +118,130 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 	// Clear IDs from previous loads
 	_loadedTerrainIDs.clear();
 
-	// Compose full terrain file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Check if terrain file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-
-		// Read terrain data
-		while (std::getline(file, line))
-		{
-			std::istringstream iss(line);
-
-			// Values
-			string terrainID, heightMapPath, diffuseMapPath, normalMapPath, 
-				normalMapPathR, normalMapPathG, normalMapPathB,
-				blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
-			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
-
-			// Load base data
-			iss >>
-				terrainID >>
-				heightMapPath >>
-				diffuseMapPath >>
-				maxHeight >>
-				uvRepeat >>
-				lightness >>
-				isBlendMapped >>
-				blendMapPath >>
-				blendMapPathR >>
-				blendMapPathG >>
-				blendMapPathB >>
-				blendRepeatR >>
-				blendRepeatG >>
-				blendRepeatB >>
-				isNormalMapped >>
-				isNormalMappedR >>
-				isNormalMappedG >>
-				isNormalMappedB >>
-				normalMapPath >>
-				normalMapPathR >>
-				normalMapPathG >>
-				normalMapPathB >>
-				isSpecular >>
-				specularFactor >>
-				specularIntensity;
-
-			// Perform empty string & space conversions
-			heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-			normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
-			normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
-			normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
-			blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
-			blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
-			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
-			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
-			std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-			std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-			std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-			std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-			std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-			std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-			std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-			std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
-
-			// Add new terrain entity
-			_loadedTerrainIDs.push_back(terrainID);
-			if (heightMapPath != "")
-			{
-				_fe3d.terrainEntity_add(terrainID, heightMapPath);
-				_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
-				_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
-				_fe3d.terrainEntity_setBlendMapped(terrainID, isBlendMapped);
-				_fe3d.terrainEntity_setLightness(terrainID, lightness);
-				_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
-				_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
-				_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
-				_fe3d.terrainEntity_setNormalMapped(terrainID, isNormalMapped);
-				_fe3d.terrainEntity_setNormalMappedR(terrainID, isNormalMappedR);
-				_fe3d.terrainEntity_setNormalMappedG(terrainID, isNormalMappedG);
-				_fe3d.terrainEntity_setNormalMappedB(terrainID, isNormalMappedB);
-				_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
-				_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
-				_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
-				if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
-				if (normalMapPath != "")  _fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
-				if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
-				if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
-				if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
-				if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
-				if (blendMapPathR != "")  _fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
-				if (blendMapPathG != "")  _fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
-				if (blendMapPathB != "")  _fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
-			}
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" loaded!");
-	}
-	else
+	if (!_fe3d.misc_isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" file missing!");
+		return false;
 	}
-}
 
-void EnvironmentEditor::unloadTerrainEntities()
-{
-	for (const auto& ID : _loadedTerrainIDs)
+	// Load terrain file
+	std::ifstream file(filePath);
+
+	// Read terrain data
+	string line;
+	while (std::getline(file, line))
 	{
-		if (_fe3d.terrainEntity_isExisting(ID))
+		std::istringstream iss(line);
+
+		// Values
+		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
+			normalMapPathR, normalMapPathG, normalMapPathB,
+			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
+		bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
+
+		// Load base data
+		iss >>
+			terrainID >>
+			heightMapPath >>
+			diffuseMapPath >>
+			maxHeight >>
+			uvRepeat >>
+			lightness >>
+			isBlendMapped >>
+			blendMapPath >>
+			blendMapPathR >>
+			blendMapPathG >>
+			blendMapPathB >>
+			blendRepeatR >>
+			blendRepeatG >>
+			blendRepeatB >>
+			isNormalMapped >>
+			isNormalMappedR >>
+			isNormalMappedG >>
+			isNormalMappedB >>
+			normalMapPath >>
+			normalMapPathR >>
+			normalMapPathG >>
+			normalMapPathB >>
+			isSpecular >>
+			specularFactor >>
+			specularIntensity;
+
+		// Perform empty string & space conversions
+		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
+		normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
+		normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
+		blendMapPath = (blendMapPath == "?") ? "" : blendMapPath;
+		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
+		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
+		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+		std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+		std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+		std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+		std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+		std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+		std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+
+		// Add new terrain entity
+		_loadedTerrainIDs.push_back(terrainID);
+		if (heightMapPath != "")
 		{
-			_fe3d.terrainEntity_delete(ID);
+			_fe3d.terrainEntity_add(terrainID, heightMapPath);
+			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
+			_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
+			_fe3d.terrainEntity_setBlendMapped(terrainID, isBlendMapped);
+			_fe3d.terrainEntity_setLightness(terrainID, lightness);
+			_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
+			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
+			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
+			_fe3d.terrainEntity_setNormalMapped(terrainID, isNormalMapped);
+			_fe3d.terrainEntity_setNormalMappedR(terrainID, isNormalMappedR);
+			_fe3d.terrainEntity_setNormalMappedG(terrainID, isNormalMappedG);
+			_fe3d.terrainEntity_setNormalMappedB(terrainID, isNormalMappedB);
+			_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
+			_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
+			_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
+			if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
+			if (normalMapPath != "")  _fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
+			if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
+			if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
+			if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
+			if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
+			if (blendMapPathR != "")  _fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
+			if (blendMapPathG != "")  _fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
+			if (blendMapPathB != "")  _fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
 		}
 	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" loaded!");
+
+	// Return
+	return true;
 }
 
-void EnvironmentEditor::saveTerrainEntitiesToFile()
+bool EnvironmentEditor::saveTerrainEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
 	{
-		return;
+		return false;
 	}
 
 	// Error checking
@@ -259,13 +250,14 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 		Logger::throwError("EnvironmentEditor::saveTerrainEntitiesToFile() --> no current project loaded!");
 	}
 
-	// Compose full terrain file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
-	// Load file
+	// Load terrain file
 	std::ofstream file(filePath);
 
-	// Write every terrain to file
+	// Write terrain data
 	for (const auto& terrainID : _loadedTerrainIDs)
 	{
 		// Values
@@ -350,10 +342,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 
 	// Logging
 	Logger::throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
-}
 
-const vector<string>& EnvironmentEditor::getLoadedTerrainIDs()
-{
-	std::sort(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end());
-	return _loadedTerrainIDs;
+	// Return
+	return true;
 }

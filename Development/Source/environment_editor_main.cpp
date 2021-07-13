@@ -28,11 +28,6 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
-	// Core
-	loadSkyEntitiesFromFile();
-	loadTerrainEntitiesFromFile();
-	loadWaterEntitiesFromFile();
-
 	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedSkyName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedTerrainName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -42,13 +37,6 @@ void EnvironmentEditor::load()
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
 	_isEditorLoaded = true;
 	_isInMainMenu = true;
-}
-
-void EnvironmentEditor::save()
-{
-	saveSkyEntitiesToFile();
-	saveTerrainEntitiesToFile();
-	saveWaterEntitiesToFile();
 }
 
 void EnvironmentEditor::unload()

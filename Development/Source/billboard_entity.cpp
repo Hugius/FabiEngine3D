@@ -135,9 +135,9 @@ void BillboardEntity::setReflected(bool value)
 	_isReflected = value;
 }
 
-void BillboardEntity::setBloomed(bool value)
+void BillboardEntity::setBright(bool value)
 {
-	_isBloomed = value;
+	_isBright = value;
 }
 
 void BillboardEntity::setShadowed(bool value)
@@ -399,9 +399,9 @@ const bool BillboardEntity::isReflected() const
 	return _isReflected;
 }
 
-const bool BillboardEntity::isBloomed() const
+const bool BillboardEntity::isBright() const
 {
-	return _isBloomed;
+	return _isBright;
 }
 
 const bool BillboardEntity::hasDiffuseMap() const

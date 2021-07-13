@@ -57,7 +57,7 @@ void BillboardEditor::_updateBillboardEditing()
 				auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
 				auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
 				auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-				auto isBloomed = _fe3d.billboardEntity_isBloomed(_currentBillboardID);
+				auto isBright = _fe3d.billboardEntity_isBright(_currentBillboardID);
 
 				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -91,10 +91,10 @@ void BillboardEditor::_updateBillboardEditing()
 						isReflected = !isReflected;
 						_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
 					}
-					else if (screen->getButton("isBloomed")->isHovered())
+					else if (screen->getButton("isBright")->isHovered())
 					{
-						isBloomed = !isBloomed;
-						_fe3d.billboardEntity_setBloomed(_currentBillboardID, isBloomed);
+						isBright = !isBright;
+						_fe3d.billboardEntity_setBright(_currentBillboardID, isBright);
 					}
 				}
 
@@ -109,7 +109,7 @@ void BillboardEditor::_updateBillboardEditing()
 				// Button text contents
 				screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
 				screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
-				screen->getButton("isBloomed")->changeTextContent(isBloomed ? "Bloomed: ON" : "Bloomed : OFF");
+				screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright : OFF");
 
 				// Reset rotations if not facing camera
 				Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);

@@ -29,7 +29,7 @@ void SettingsEditor::load()
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.billboardEntity_add("@@icon", "engine_assets\\textures\\settings.png", 
 		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
-	_fe3d.billboardEntity_setBloomed("@@icon", true);
+	_fe3d.billboardEntity_setBright("@@icon", true);
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(-90.0f);
 	_isEditorLoaded = true;

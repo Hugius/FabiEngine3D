@@ -223,9 +223,9 @@ const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& par
 	return false;
 }
 
-const bool FabiEngine3D::modelEntity_isBloomed(const string& ID)
+const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->isBloomed();
+	return _core->_modelEntityManager.getEntity(ID)->isBright();
 }
 
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
@@ -339,9 +339,9 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vect
 	}
 }
 
-void FabiEngine3D::modelEntity_setBloomed(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setBright(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setBloomed(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setBright(enabled);
 }
 
 void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)

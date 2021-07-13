@@ -220,7 +220,7 @@ const vector<string>& ModelEditor::getLoadedModelIDs()
 
 bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
 	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType,
-	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBloomed,
+	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBright,
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// If model name not existing yet
@@ -271,7 +271,7 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			_fe3d.modelEntity_setTransparent(modelName, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelName, isSpecular);
 			_fe3d.modelEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
-			_fe3d.modelEntity_setBloomed(modelName, isBloomed);
+			_fe3d.modelEntity_setBright(modelName, isBright);
 			
 			// Set other options
 			_fe3d.modelEntity_setSpecularFactor(modelName, specularFactor);

@@ -24,7 +24,7 @@ uniform float u_minAlpha;
 uniform bool u_isFogEnabled;
 uniform bool u_isAlphaObject;
 uniform bool u_hasTexture;
-uniform bool u_isBloomed;
+uniform bool u_isBright;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
@@ -64,7 +64,7 @@ void main()
 	}
 	
 	// Calculate secondary color
-	vec3 secondaryColor = (u_isBloomed ? primaryColor : vec3(0.0f));
+	vec3 secondaryColor = (u_isBright ? primaryColor : vec3(0.0f));
 
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, 1.0f);

@@ -46,7 +46,7 @@ void ModelEditor::saveModelEntitiesToFile()
 			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
 			auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
-			auto isBloomed = _fe3d.modelEntity_isBloomed(modelID);
+			auto isBright = _fe3d.modelEntity_isBright(modelID);
 
 			// Reflection type
 			int reflectionType;
@@ -117,7 +117,7 @@ void ModelEditor::saveModelEntitiesToFile()
 				uvRepeat << " " <<
 				lodEntityID << " " <<
 				isInstanced << " " <<
-				isBloomed;
+				isBright;
 
 			// Add space
 			if (!aabbNames.empty())

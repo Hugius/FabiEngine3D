@@ -133,7 +133,7 @@ void BillboardEditor::_loadGUI()
 	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("facingY", Vec2(0.0f, 0.2625f), Vec2(CW("Facing Y: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Facing Y: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("isShadowed", Vec2(0.0f, 0.0f), Vec2(CW("Shadowed: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadowed: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("isReflected", Vec2(0.0f, -0.2625f), Vec2(CW("Reflected: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflected: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("isBloomed", Vec2(0.0f, -0.525f), Vec2(CW("Bloomed: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bloomed: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("isBright", Vec2(0.0f, -0.525f), Vec2(CW("Bright: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bright: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuMesh")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 

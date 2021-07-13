@@ -226,9 +226,9 @@ const bool ModelEntity::hasNormalMap() const
 	return !_normalMaps.empty();
 }
 
-const bool ModelEntity::isBloomed() const
+const bool ModelEntity::isBright() const
 {
-	return _isBloomed;
+	return _isBright;
 }
 
 const bool ModelEntity::isCameraStatic() const

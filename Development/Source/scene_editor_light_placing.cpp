@@ -52,7 +52,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.modelEntity_add("@" + newID, "engine_assets\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
 					_fe3d.modelEntity_setShadowed("@" + newID, false);
 					_fe3d.modelEntity_setReflected("@" + newID, false);
-					_fe3d.modelEntity_setBloomed("@" + newID, true);
+					_fe3d.modelEntity_setBright("@" + newID, true);
 					_fe3d.modelEntity_setColor("@" + newID, Vec3(1.0f));
 					_fe3d.aabbEntity_bindToModelEntity("@" + newID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 					_loadedLightIDs.push_back(newID);

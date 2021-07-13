@@ -201,9 +201,9 @@ void FabiEngine3D::billboardEntity_setReflected(const string& ID, bool enabled)
 	_core->_billboardEntityManager.getEntity(ID)->setReflected(enabled);
 }
 
-void FabiEngine3D::billboardEntity_setBloomed(const string& ID, bool enabled)
+void FabiEngine3D::billboardEntity_setBright(const string& ID, bool enabled)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setBloomed(enabled);
+	_core->_billboardEntityManager.getEntity(ID)->setBright(enabled);
 }
 
 void FabiEngine3D::billboardEntity_setMinHeight(const string& ID, float height)
@@ -258,9 +258,9 @@ const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
 	}
 }
 
-const bool FabiEngine3D::billboardEntity_isBloomed(const string& ID)
+const bool FabiEngine3D::billboardEntity_isBright(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->isBloomed();
+	return _core->_billboardEntityManager.getEntity(ID)->isBright();
 }
 
 void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontPath)

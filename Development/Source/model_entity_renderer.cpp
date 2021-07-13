@@ -173,7 +173,7 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
 		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
-		_shader.uploadUniform("u_isBloomed", entity->isBloomed());
+		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		
 		// Check if entity is static to the camera view

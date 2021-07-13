@@ -402,9 +402,9 @@ void ModelEntity::setWireframed(bool value)
 	_wireframed = value;
 }
 
-void ModelEntity::setBloomed(bool value)
+void ModelEntity::setBright(bool value)
 {
-	_isBloomed = value;
+	_isBright = value;
 }
 
 void ModelEntity::clearDiffuseMaps()

@@ -299,7 +299,7 @@ public:
 	void modelEntity_setMaxHeight(const string& ID, float height);
 	void modelEntity_setUvRepeat(const string& ID, float repeat);
 	void modelEntity_setInstanced(const string& ID, bool enabled, vector<Vec3> offsets);
-	void modelEntity_setBloomed(const string& ID, bool enabled);
+	void modelEntity_setBright(const string& ID, bool enabled);
 
 	// Model entity interface - getters
 	const vector<string>& modelEntity_getDiffuseMapPaths(const string& ID);
@@ -345,7 +345,7 @@ public:
 	const bool modelEntity_isWireframed(const string& ID);
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
-	const bool modelEntity_isBloomed(const string& ID);
+	const bool modelEntity_isBright(const string& ID);
 
 	// Billboard entity interface (core) - setters
 	void billboardEntity_add
@@ -369,7 +369,7 @@ public:
 	void billboardEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void billboardEntity_setShadowed(const string& ID, bool enabled);
 	void billboardEntity_setReflected(const string& ID, bool enabled);
-	void billboardEntity_setBloomed(const string& ID, bool enabled);
+	void billboardEntity_setBright(const string& ID, bool enabled);
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
@@ -392,7 +392,7 @@ public:
 	const bool billboardEntity_isShadowed(const string& ID);
 	const bool billboardEntity_isReflected(const string& ID);
 	const bool billboardEntity_isInstanced(const string& ID);
-	const bool billboardEntity_isBloomed(const string& ID);
+	const bool billboardEntity_isBright(const string& ID);
 
 	// Billboard entity interface (diffuseMap) - setters
 	void billboardEntity_add

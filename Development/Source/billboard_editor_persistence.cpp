@@ -99,7 +99,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			Vec2 size;
 			Vec3 color;
 			float lightness;
-			bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted, isBloomed;
+			bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted, isBright;
 			unsigned int animationRows, animationColumns, animationFramestep;
 
 			// For file extraction
@@ -126,7 +126,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				animationColumns >>
 				animationFramestep >>
 				lightness >>
-				isBloomed;
+				isBright;
 
 			// Perform empty string & space conversions
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -168,7 +168,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboardEntity_setLightness(billboardID, lightness);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-			_fe3d.billboardEntity_setBloomed(billboardID, isBloomed);
+			_fe3d.billboardEntity_setBright(billboardID, isBright);
 		}
 
 		// Close file
@@ -220,7 +220,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
-		auto isBloomed = _fe3d.billboardEntity_isBloomed(billboardID);
+		auto isBright = _fe3d.billboardEntity_isBright(billboardID);
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
@@ -251,7 +251,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			animationColumns << " " <<
 			animationFramestep << " " <<
 			lightness << " " <<
-			isBloomed << std::endl;
+			isBright << std::endl;
 	}
 
 	// Close file

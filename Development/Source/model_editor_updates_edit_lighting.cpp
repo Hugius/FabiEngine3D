@@ -17,7 +17,7 @@ void ModelEditor::_updateModelEditingLighting()
 		auto specularFactor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
-		auto isBloomed = _fe3d.modelEntity_isBloomed(_currentModelID);
+		auto isBright = _fe3d.modelEntity_isBright(_currentModelID);
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -59,17 +59,17 @@ void ModelEditor::_updateModelEditingLighting()
 					_fe3d.modelEntity_setSkyReflective(_currentModelID, true);
 				}
 			}
-			else if (screen->getButton("isBloomed")->isHovered())
+			else if (screen->getButton("isBright")->isHovered())
 			{
-				isBloomed = !isBloomed;
-				_fe3d.modelEntity_setBloomed(_currentModelID, isBloomed);
+				isBright = !isBright;
+				_fe3d.modelEntity_setBright(_currentModelID, isBright);
 			}
 		}
 
 		// Button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("reflectionType")->changeTextContent(isSkyReflective ? "Reflect: SKY" : isSceneReflective ? "Reflect: SCENE" : "Reflect: OFF");
-		screen->getButton("isBloomed")->changeTextContent(isBloomed ? "Bloomed: ON" : "Bloomed: OFF");
+		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 
 		// Update specular factor
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))

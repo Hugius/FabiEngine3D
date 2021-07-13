@@ -88,7 +88,7 @@ uniform bool u_hasDiffuseMap;
 uniform bool u_hasLightMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasReflectionMap;
-uniform bool u_isBloomed;
+uniform bool u_isBright;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -129,7 +129,7 @@ void main()
 	vec3 primaryColor;
 	primaryColor  = getTextureColor();
 	primaryColor *= u_color;
-	if(u_isBloomed)
+	if(u_isBright)
 	{
 	    primaryColor  = applyLightMapping(primaryColor);
 		primaryColor *= u_lightness;
@@ -146,7 +146,7 @@ void main()
 	}
 
 	// Calculate secondary color
-	vec3 secondaryColor = (u_isBloomed ? primaryColor : vec3(0.0f));
+	vec3 secondaryColor = (u_isBright ? primaryColor : vec3(0.0f));
 
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, u_customAlpha);

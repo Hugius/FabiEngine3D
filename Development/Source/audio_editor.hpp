@@ -24,10 +24,10 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
-	void _updateAudioCreation();
+	void _updateAudioCreating();
 	void _updateAudioChoosing();
 	void _updateAudioEditing();
-	void _updateAudioRemoval();
+	void _updateAudioDeleting();
 	void _updateMiscellaneous();
 
 	// Core
@@ -41,7 +41,7 @@ private:
 	bool _isCreatingAudio = false;
 	bool _isChoosingAudio = false;
 	bool _isEditingAudio = false;
-	bool _isRemovingAudio = false;
+	bool _isDeletingAudio = false;
 
 	// Miscellaneous
 	string _currentProjectID = "";

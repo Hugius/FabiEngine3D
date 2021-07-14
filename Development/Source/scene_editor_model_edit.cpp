@@ -173,11 +173,11 @@ void SceneEditor::_updateModelEditing()
 					_animationEditor.startAnimation(selectedButtonID, _activeModelID, -1);
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("animationList");
+					_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("animationList")) // Cancelled choosing
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("animationList");
+					_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				}
 
 				// Button text contents

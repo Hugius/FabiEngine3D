@@ -199,7 +199,7 @@ void AnimationEditor::_updateFrameScreen()
 					if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 					{
 						_currentPartID = selectedButtonID;
-						_gui.getGlobalScreen()->removeChoiceForm("parts");
+						_gui.getGlobalScreen()->deleteChoiceForm("parts");
 					}
 					else
 					{
@@ -209,7 +209,7 @@ void AnimationEditor::_updateFrameScreen()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("parts");
+				_gui.getGlobalScreen()->deleteChoiceForm("parts");
 			}
 		}
 	}

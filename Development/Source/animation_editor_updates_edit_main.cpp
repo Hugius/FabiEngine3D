@@ -263,12 +263,12 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("modelList");
+					_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("modelList");
+				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 			}
 		}
 	}

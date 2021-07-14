@@ -1,4 +1,5 @@
 #include "engine_gui_global_screen.hpp"
+#include "logger.hpp"
 
 void EngineGuiGlobalScreen::setFocus(bool focused)
 {
@@ -176,7 +177,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			// Remove valueform(s)
 			if (_valueFormIDs.size() == 1)
 			{
-				_removeValueForm(ID);
+				_deleteValueForm(ID);
 				deleteButton("value_form_done");
 				deleteButton("value_form_cancel");
 				_isFocused = false;
@@ -244,7 +245,7 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 	}
 }
 
-void EngineGuiGlobalScreen::removeChoiceForm(const string& ID)
+void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
@@ -273,6 +274,10 @@ void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, Vec2 p
 		_isFocused = true;
 		_answerFormID = ID;
 	}
+	else
+	{
+		Logger::throwError("EngineGuiGlobalScreen::addAnswerForm() ---> answer form with ID \"" + ID + "\" cannot be added!");
+	}
 }
 
 bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
@@ -281,7 +286,7 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 	{
 		if (getButton("answer_form_yes")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			removeAnswerForm(ID);
+			_deleteAnswerForm(ID);
 			return true;
 		}
 
@@ -297,7 +302,7 @@ bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 	{
 		if (getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			removeAnswerForm(ID);
+			_deleteAnswerForm(ID);
 			return true;
 		}
 
@@ -307,7 +312,7 @@ bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 	return false;
 }
 
-void EngineGuiGlobalScreen::removeAnswerForm(const string& ID)
+void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 {
 	if (ID == _answerFormID)
 	{
@@ -317,6 +322,10 @@ void EngineGuiGlobalScreen::removeAnswerForm(const string& ID)
 		deleteButton("answer_form_no");
 		_isFocused = false;
 		_answerFormID = "";
+	}
+	else
+	{
+		Logger::throwError("EngineGuiGlobalScreen::deleteAnswerForm() ---> answer form with ID \"" + ID + "\" cannot be deleted!");
 	}
 }
 
@@ -347,7 +356,7 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 	}
 }
 
-void EngineGuiGlobalScreen::_removeValueForm(const string& ID)
+void EngineGuiGlobalScreen::_deleteValueForm(const string& ID)
 {
 	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{

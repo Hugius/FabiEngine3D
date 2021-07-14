@@ -10,7 +10,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("ScriptEditor::loadScriptsFromFile() --> no current project loaded!");
+		Logger::throwError("ScriptEditor::loadScriptsFromFile() ---> no current project loaded!");
 	}
 
 	// Clear last script
@@ -94,7 +94,7 @@ bool ScriptEditor::saveScriptFiles()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("ScriptEditor::saveScriptsToFile() --> no current project loaded!");
+		Logger::throwError("ScriptEditor::saveScriptsToFile() ---> no current project loaded!");
 	}
 
 	// Compose directory path

@@ -43,9 +43,9 @@ private:
 	void _updateSkyMenuChoice();
 	void _updateSkyMenuMesh();
 	void _updateSkyMenuOptions();
-	void _updateSkyCreation();
+	void _updateSkyCreating();
 	void _updateSkyChoosing();
-	void _updateSkyRemoval();
+	void _updateSkyDeleting();
 	void _updateSkyCamera();
 
 	// Terrain function
@@ -55,9 +55,9 @@ private:
 	void _updateTerrainMenuMesh();
 	void _updateTerrainMenuBlendMap();
 	void _updateTerrainMenuLighting();
-	void _updateTerrainCreation();
+	void _updateTerrainCreating();
 	void _updateTerrainChoosing();
-	void _updateTerrainRemoval();
+	void _updateTerrainDeleting();
 	void _updateTerrainCamera();
 
 	// Water functions
@@ -67,9 +67,9 @@ private:
 	void _updateWaterMenuMesh();
 	void _updateWaterMenuEffects();
 	void _updateWaterMenuOptions();
-	void _updateWaterCreation();
+	void _updateWaterCreating();
 	void _updateWaterChoosing();
-	void _updateWaterRemoval();
+	void _updateWaterDeleting();
 	void _updateWaterCamera();
 
 	// Miscellaneous functions
@@ -87,24 +87,24 @@ private:
 	// Sky variables
 	vector <string> _loadedSkyIDs;
 	string _currentSkyID = "";
-	bool _isSkyCreationEnabled = false;
-	bool _isSkyChoosingEnabled = false;
-	bool _isSkyEditingEnabled = false;
-	bool _isSkyRemovalEnabled = false;
+	bool _isCreatingSky = false;
+	bool _isChoosingSky = false;
+	bool _isEditingSky = false;
+	bool _isDeletingSky = false;
 
 	// Terrain variables
 	vector <string> _loadedTerrainIDs;
 	string _currentTerrainID = "";
-	bool _isTerrainCreationEnabled = false;
-	bool _isTerrainChoosingEnabled = false;
-	bool _isTerrainEditingEnabled = false;
-	bool _isTerrainRemovalEnabled = false;
+	bool _isCreatingTerrain = false;
+	bool _isChoosingTerrain = false;
+	bool _isEditingTerrain = false;
+	bool _isDeletingTerrain = false;
 
 	// Water variables
 	vector <string> _loadedWaterIDs;
 	string _currentWaterID = "";
-	bool _isWaterCreationEnabled = false;
-	bool _isWaterChoosingEnabled = false;
-	bool _isWaterEditingEnabled = false;
-	bool _isWaterRemovalEnabled = false;
+	bool _isCreatingWater = false;
+	bool _isChoosingWater = false;
+	bool _isEditingWater = false;
+	bool _isDeletingWater = false;
 };

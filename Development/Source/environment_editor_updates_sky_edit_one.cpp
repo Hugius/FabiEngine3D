@@ -20,21 +20,21 @@ void EnvironmentEditor::_updateSkyMenuMain()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_isSkyCreationEnabled = true;
+				_isCreatingSky = true;
 				_gui.getGlobalScreen()->addValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
-				_isSkyChoosingEnabled = true;
-				_isSkyEditingEnabled = true;
+				_isChoosingSky = true;
+				_isEditingSky = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
-				_isSkyChoosingEnabled = true;
-				_isSkyRemovalEnabled = true;
+				_isChoosingSky = true;
+				_isDeletingSky = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
@@ -73,7 +73,7 @@ void EnvironmentEditor::_updateSkyMenuChoice()
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), false);
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSkyID = "";
-				_isSkyEditingEnabled = false;
+				_isEditingSky = false;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{

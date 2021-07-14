@@ -36,9 +36,9 @@ private:
 	void _updateGameScreenManagement();
 	void _updateMiscScreenManagement();
 	void _updateMiscellaneous();
-	void _updateProjectCreation();
+	void _updateProjectCreating();
 	void _updateProjectLoading();
-	void _updateProjectDeletion();
+	void _updateProjectDeleting();
 	void _prepareProjectLoading();
 	void _saveCurrentProject();
 	void _applyProjectChange();

@@ -4,10 +4,10 @@
 void ModelEditor::update()
 {
 	_updateManagementScreen();
-	_updateModelCreation();
+	_updateModelCreating();
 	_updateModelChoosing();
 	_updateEditingScreen();
-	_updateModelRemoval();
+	_updateModelDeleting();
 	_updateCamera();
 	_updateMiscellaneous();
 }
@@ -164,7 +164,7 @@ void ModelEditor::_updateEditingScreen()
 	}
 }
 
-void ModelEditor::_updateModelCreation()
+void ModelEditor::_updateModelCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -256,7 +256,7 @@ void ModelEditor::_updateModelChoosing()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("modelList");
+					_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 					_isChoosingModel = false;
 				}
 				else
@@ -270,7 +270,7 @@ void ModelEditor::_updateModelChoosing()
 				_isChoosingModel = false;
 				_isEditingModel = false;
 				_isDeletingModel = false;
-				_gui.getGlobalScreen()->removeChoiceForm("modelList");
+				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 			}
 			else // Nothing hovered
 			{
@@ -290,14 +290,19 @@ void ModelEditor::_updateModelChoosing()
 	}
 }
 
-void ModelEditor::_updateModelRemoval()
+void ModelEditor::_updateModelDeleting()
 {
 	if (_isEditorLoaded)
 	{
 		if (_isDeletingModel && _currentModelID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			// Add answer form
+			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			}
 
+			// Check is form is answered
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Delete entity

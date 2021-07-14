@@ -9,18 +9,18 @@ void EnvironmentEditor::_updateSkyEditor()
 		_updateSkyMenuChoice();
 		_updateSkyMenuMesh();
 		_updateSkyMenuOptions();
-		_updateSkyCreation();
+		_updateSkyCreating();
 		_updateSkyChoosing();
-		_updateSkyRemoval();
+		_updateSkyDeleting();
 		_updateSkyCamera();
 	}
 }
 
-void EnvironmentEditor::_updateSkyCreation()
+void EnvironmentEditor::_updateSkyCreating()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isSkyCreationEnabled)
+		if (_isCreatingSky)
 		{
 			string newSkyName;
 
@@ -47,8 +47,8 @@ void EnvironmentEditor::_updateSkyCreation()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 								"Sky: " + _currentSkyID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
-							_isSkyCreationEnabled = false;
-							_isSkyEditingEnabled = true;
+							_isCreatingSky = false;
+							_isEditingSky = true;
 						}
 						else
 						{
@@ -73,7 +73,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isSkyChoosingEnabled)
+		if (_isChoosingSky)
 		{
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
@@ -87,7 +87,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 					_currentSkyID = "@" + selectedButtonID;
 
 					// Only if going to editor
-					if (_isSkyEditingEnabled)
+					if (_isEditingSky)
 					{
 						// Go to editor screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
@@ -102,29 +102,34 @@ void EnvironmentEditor::_updateSkyChoosing()
 					_fe3d.skyEntity_select(_currentSkyID);
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("skyList");
-					_isSkyChoosingEnabled = false;
+					_gui.getGlobalScreen()->deleteChoiceForm("skyList");
+					_isChoosingSky = false;
 				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
 			{
-				_isSkyChoosingEnabled = false;
-				_isSkyEditingEnabled = false;
-				_isSkyRemovalEnabled = false;
-				_gui.getGlobalScreen()->removeChoiceForm("skyList");
+				_isChoosingSky = false;
+				_isEditingSky = false;
+				_isDeletingSky = false;
+				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 			}
 		}
 	}
 }
 
-void EnvironmentEditor::_updateSkyRemoval()
+void EnvironmentEditor::_updateSkyDeleting()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isSkyRemovalEnabled && _currentSkyID != "")
+		if (_isDeletingSky && _currentSkyID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			// Add answer form
+			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			}
 
+			// Check if form is answered
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Delete entity
@@ -132,7 +137,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 
 				// Delete from name record
 				_loadedSkyIDs.erase(std::remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
-				_isSkyRemovalEnabled = false;
+				_isDeletingSky = false;
 				_currentSkyID = "";
 
 				// Enable engine background
@@ -144,7 +149,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_fe3d.skyEntity_select("@@engineBackground");
 
 				// Miscellaneous
-				_isSkyRemovalEnabled = false;
+				_isDeletingSky = false;
 				_currentSkyID = "";
 			}
 		}

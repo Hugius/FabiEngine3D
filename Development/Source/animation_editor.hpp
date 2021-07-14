@@ -41,11 +41,11 @@ private:
 	void _unloadGUI();
 	void _updateAnimationExecution();
 	void _updateManagementScreen();
-	void _updateAnimationCreation();
+	void _updateAnimationCreating();
 	void _updateAnimationChoice();
 	void _updateEditingScreen();
 	void _updateFrameScreen();
-	void _updateAnimationRemoval();
+	void _updateAnimationDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
@@ -90,7 +90,7 @@ private:
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isEditingAnimation  = false;
-	bool _isRemovingAnimation = false;
+	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded	  = false;
 	bool _isEditorLoading	  = false;
 	bool _partColorIncreasing = true;

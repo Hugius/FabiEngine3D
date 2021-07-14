@@ -152,22 +152,22 @@ void SceneEditor::_updateMainMenu()
 							_fe3d.skyEntity_select("@@engineBackground");
 						}
 					}
-					else if (_isDeletingScene) // Prepare deletion confirmation
+					else if (_isDeletingScene) // Prepare deleting confirmation
 					{
 						_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("sceneList");
+					_gui.getGlobalScreen()->deleteChoiceForm("sceneList");
 					_isChoosingScene = false;
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("sceneList"))
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("sceneList");
+					_gui.getGlobalScreen()->deleteChoiceForm("sceneList");
 				}
 			}
 
-			// Update scene deletion if chosen
+			// Update scene deleting if chosen
 			if (_isDeletingScene && _currentSceneID != "")
 			{
 				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete")) // Confirmed

@@ -17,7 +17,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Scene"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Scene"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Remove Scene"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Scene"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuChoice
@@ -43,21 +43,21 @@ void SceneEditor::_loadGUI()
 	screenID = "sceneEditorMenuEnvironmentSky";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("choose", Vec2(0.0f, 0.475f), Vec2(CW("Choose Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Remove Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Delete Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.475f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentTerrain
 	screenID = "sceneEditorMenuEnvironmentTerrain";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("choose", Vec2(0.0f, 0.475f), Vec2(CW("Choose Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Remove Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Delete Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.475f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentWater
 	screenID = "sceneEditorMenuEnvironmentWater";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addButton("choose", Vec2(0.0f, 0.475f), Vec2(CW("Choose Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Remove Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.0f), Vec2(CW("Delete Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.475f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuModel

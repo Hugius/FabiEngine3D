@@ -184,7 +184,7 @@ void ModelEditor::_updateModelEditingAabb()
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
 						"AABB: " + _currentAabbID, 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), true);
-					_gui.getGlobalScreen()->removeChoiceForm("aabbList");
+					_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 				}
 				else
 				{
@@ -193,7 +193,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("aabbList");
+				_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 			}
 
 			// Show hovered AABB

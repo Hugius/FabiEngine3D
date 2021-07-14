@@ -67,21 +67,21 @@ public:
 	void addChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles);
 	string getSelectedChoiceFormButtonID(const string& ID);
 	bool isChoiceFormCancelled(const string& ID);
-	void removeChoiceForm(const string& ID);
+	void deleteChoiceForm(const string& ID);
 	bool isChoiceFormExisting(const string& ID);
 
 	// Answer form
 	void addAnswerForm(const string& ID, string title, Vec2 position);
 	bool isAnswerFormConfirmed(const string& ID);
 	bool isAnswerFormDenied(const string& ID);
-	void removeAnswerForm(const string& ID);
 	bool isAnswerFormExisting(const string& ID);
 
 private:
 	void _updateValueFilling();
 	void _addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition);
 	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
-	void _removeValueForm(const string& ID);
+	void _deleteValueForm(const string& ID);
+	void _deleteAnswerForm(const string& ID);
 
 	FabiEngine3D& _fe3d;
 

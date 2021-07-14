@@ -86,7 +86,7 @@ void BillboardEditor::unload()
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
 	_isEditingBillboard = false;
-	_isRemovingBillboard = false;
+	_isDeletingBillboard = false;
 	_hoveredBillboardID = "";
 	_currentBillboardID = "";
 	_loadedBillboardIDs.clear();

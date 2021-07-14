@@ -9,11 +9,11 @@ bool SceneEditor::saveCustomSceneToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("SceneEditor::saveCustomSceneToFile() --> no current project loaded!");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile() ---> no current project loaded!");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwError("SceneEditor::saveCustomSceneToFile() --> tried to call from within scene editor!");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile() ---> tried to call from within scene editor!");
 	}
 
 	// Warning checking

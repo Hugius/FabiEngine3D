@@ -10,7 +10,7 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::getAllSkyTexturePathsFromFile() --> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::getAllSkyTexturePathsFromFile() ---> no current project loaded!");
 	}
 
 	// Compose file path
@@ -70,7 +70,7 @@ bool EnvironmentEditor::loadSkyEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::loadSkyEntitiesFromFile() --> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::loadSkyEntitiesFromFile() ---> no current project loaded!");
 	}
 
 	// Clear IDs from previous loads
@@ -154,7 +154,7 @@ bool EnvironmentEditor::saveSkyEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::saveSkyEntitiesToFile() --> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::saveSkyEntitiesToFile() ---> no current project loaded!");
 	}
 
 	// Compose file path

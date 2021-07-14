@@ -20,21 +20,21 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_isTerrainCreationEnabled = true;
+				_isCreatingTerrain = true;
 				_gui.getGlobalScreen()->addValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
-				_isTerrainChoosingEnabled = true;
-				_isTerrainEditingEnabled = true;
+				_isChoosingTerrain = true;
+				_isEditingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
-				_isTerrainChoosingEnabled = true;
-				_isTerrainRemovalEnabled = true;
+				_isChoosingTerrain = true;
+				_isDeletingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
@@ -73,7 +73,7 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
-				_isTerrainEditingEnabled = false;
+				_isEditingTerrain = false;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{

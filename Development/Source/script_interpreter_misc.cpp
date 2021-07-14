@@ -85,7 +85,7 @@ bool ScriptInterpreter::_validateSavesFolder()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("ScriptInterpreter::_validateSavesFolder() --> no current project loaded!");
+		Logger::throwError("ScriptInterpreter::_validateSavesFolder() ---> no current project loaded!");
 	}
 
 	// Check if saves folder still exists

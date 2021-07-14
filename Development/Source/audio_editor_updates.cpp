@@ -4,10 +4,10 @@
 void AudioEditor::update()
 {
 	_updateMainMenu();
-	_updateAudioCreation();
+	_updateAudioCreating();
 	_updateAudioChoosing();
 	_updateAudioEditing();
-	_updateAudioRemoval();
+	_updateAudioDeleting();
 	_updateMiscellaneous();
 }
 
@@ -44,7 +44,7 @@ void AudioEditor::_updateMainMenu()
 				else if (screen->getButton("delete")->isHovered()) // Delete audio button
 				{
 					_isChoosingAudio = true;
-					_isRemovingAudio = true;
+					_isDeletingAudio = true;
 					auto IDs = getLoadedAudioIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
@@ -67,7 +67,7 @@ void AudioEditor::_updateMainMenu()
 	}
 }
 
-void AudioEditor::_updateAudioCreation()
+void AudioEditor::_updateAudioCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -150,7 +150,7 @@ void AudioEditor::_updateAudioChoosing()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("audioList");
+					_gui.getGlobalScreen()->deleteChoiceForm("audioList");
 					_isChoosingAudio = false;
 				}
 			}
@@ -158,21 +158,26 @@ void AudioEditor::_updateAudioChoosing()
 			{
 				_isChoosingAudio = false;
 				_isEditingAudio = false;
-				_isRemovingAudio = false;
-				_gui.getGlobalScreen()->removeChoiceForm("audioList");
+				_isDeletingAudio = false;
+				_gui.getGlobalScreen()->deleteChoiceForm("audioList");
 			}
 		}
 	}
 }
 
-void AudioEditor::_updateAudioRemoval()
+void AudioEditor::_updateAudioDeleting()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isRemovingAudio && _currentAudioID != "")
+		if (_isDeletingAudio && _currentAudioID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			// Add answer form
+			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			}
 
+			// Check if form is answered
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
@@ -187,7 +192,7 @@ void AudioEditor::_updateAudioRemoval()
 				// Miscellaneous
 				_loadedAudioIDs.erase(std::remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
 				_currentAudioID = "";
-				_isRemovingAudio = false;
+				_isDeletingAudio = false;
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{

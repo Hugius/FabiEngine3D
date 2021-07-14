@@ -14,7 +14,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("SceneEditor::isSceneExisting() --> no current project loaded!");
+		Logger::throwError("SceneEditor::isSceneExisting() ---> no current project loaded!");
 	}
 
 	// Compose full file path

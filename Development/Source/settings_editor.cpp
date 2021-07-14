@@ -165,7 +165,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("SettingsEditor::loadSettings() --> no current project loaded!");
+		Logger::throwError("SettingsEditor::loadSettings() ---> no current project loaded!");
 	}
 
 	// Compose file path
@@ -218,7 +218,7 @@ bool SettingsEditor::saveSettingsToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("SettingsEditor::save() --> no current project loaded!");
+		Logger::throwError("SettingsEditor::save() ---> no current project loaded!");
 	}
 
 	// Compose file path

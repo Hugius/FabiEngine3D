@@ -16,7 +16,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("ModelEditor::saveModelEntitiesToFile() --> no current project loaded!");
+		Logger::throwError("ModelEditor::saveModelEntitiesToFile() ---> no current project loaded!");
 	}
 
 	// Compose file path

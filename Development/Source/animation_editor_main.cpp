@@ -106,7 +106,7 @@ void AnimationEditor::unload()
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isEditingAnimation = false;
-	_isRemovingAnimation = false;
+	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
 	_isEditorLoading = false;
 	_partColorIncreasing = true;

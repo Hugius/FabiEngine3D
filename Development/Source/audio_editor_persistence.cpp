@@ -9,7 +9,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() --> no current project loaded!");
+		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() ---> no current project loaded!");
 	}
 
 	// Compose file path
@@ -57,7 +57,7 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile() --> no current project loaded!");
+		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile() ---> no current project loaded!");
 	}
 
 	// Clear IDs from previous loads
@@ -120,7 +120,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("AudioEditor::saveAudioEntitiesToFile() --> no current project loaded!");
+		Logger::throwError("AudioEditor::saveAudioEntitiesToFile() ---> no current project loaded!");
 	}
 
 	// Compose file path

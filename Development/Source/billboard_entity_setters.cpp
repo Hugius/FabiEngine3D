@@ -155,7 +155,7 @@ void BillboardEntity::startSpriteAnimation(int loops)
 	// Error checking
 	if (loops < -1)
 	{
-		Logger::throwError("BillboardEntity::startSpriteAnimation() --> invalid loops argument!");
+		Logger::throwError("BillboardEntity::startSpriteAnimation() ---> invalid loops argument!");
 	}
 
 	// Set values

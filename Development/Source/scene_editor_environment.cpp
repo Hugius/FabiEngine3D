@@ -89,11 +89,11 @@ void SceneEditor::_updateSkyMenu()
 					// Create new
 					_currentSkyID = selectedButtonID;
 					_copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
-					_gui.getGlobalScreen()->removeChoiceForm("skyList");
+					_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList"))
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("skyList");
+					_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 				}
 			}
 
@@ -161,11 +161,11 @@ void SceneEditor::_updateTerrainMenu()
 					// Create new
 					_currentTerrainID = selectedButtonID;
 					_copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
-					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
+					_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
+					_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 				}
 			}
 
@@ -233,11 +233,11 @@ void SceneEditor::_updateWaterMenu()
 					// Create new
 					_currentWaterID = selectedButtonID;
 					_copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
-					_gui.getGlobalScreen()->removeChoiceForm("waterList");
+					_gui.getGlobalScreen()->deleteChoiceForm("waterList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList"))
 				{
-					_gui.getGlobalScreen()->removeChoiceForm("waterList");
+					_gui.getGlobalScreen()->deleteChoiceForm("waterList");
 				}
 			}
 

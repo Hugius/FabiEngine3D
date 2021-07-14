@@ -218,7 +218,7 @@ void ScriptEditor::_updateMiscellaneous()
 		{
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
+				_gui.getGlobalScreen()->deleteChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
@@ -228,7 +228,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))
 		{
-			_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
+			_gui.getGlobalScreen()->deleteChoiceForm("scriptFileList");
 		}
 
 		// Check if user wants to rename a script

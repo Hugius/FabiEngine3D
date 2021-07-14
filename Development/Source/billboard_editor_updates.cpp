@@ -6,10 +6,10 @@
 void BillboardEditor::update()
 {
 	_updateBillboardManagement();
-	_updateBillboardCreation();
+	_updateBillboardCreating();
 	_updateBillboardChoosing();
 	_updateBillboardEditing();
-	_updateBillboardRemoval();
+	_updateBillboardDeleting();
 	_updateCamera();
 	_updateMiscellaneous();
 }
@@ -47,7 +47,7 @@ void BillboardEditor::_updateBillboardManagement()
 				else if (screen->getButton("delete")->isHovered()) // Delete billboard button
 				{
 					_isChoosingBillboard = true;
-					_isRemovingBillboard = true;
+					_isDeletingBillboard = true;
 					auto IDs = getLoadedBillboardIDs();
 					for (auto& name : IDs) { name = name.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
@@ -70,7 +70,7 @@ void BillboardEditor::_updateBillboardManagement()
 	}
 }
 
-void BillboardEditor::_updateBillboardCreation()
+void BillboardEditor::_updateBillboardCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -162,7 +162,7 @@ void BillboardEditor::_updateBillboardChoosing()
 
 					// Miscellaneous
 					_fe3d.billboardEntity_setVisible(_currentBillboardID, true);
-					_gui.getGlobalScreen()->removeChoiceForm("billboardList");
+					_gui.getGlobalScreen()->deleteChoiceForm("billboardList");
 					_isChoosingBillboard = false;
 				}
 				else
@@ -175,8 +175,8 @@ void BillboardEditor::_updateBillboardChoosing()
 			{
 				_isChoosingBillboard = false;
 				_isEditingBillboard = false;
-				_isRemovingBillboard = false;
-				_gui.getGlobalScreen()->removeChoiceForm("billboardList");
+				_isDeletingBillboard = false;
+				_gui.getGlobalScreen()->deleteChoiceForm("billboardList");
 			}
 			else // Nothing hovered
 			{
@@ -192,14 +192,19 @@ void BillboardEditor::_updateBillboardChoosing()
 	}
 }
 
-void BillboardEditor::_updateBillboardRemoval()
+void BillboardEditor::_updateBillboardDeleting()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isRemovingBillboard && _currentBillboardID != "")
+		if (_isDeletingBillboard && _currentBillboardID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			// Add answer form
+			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			}
 
+			// Check if form is answered
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
@@ -211,12 +216,12 @@ void BillboardEditor::_updateBillboardRemoval()
 				_currentBillboardID = "";
 
 				// Miscellaneous
-				_isRemovingBillboard = false;
+				_isDeletingBillboard = false;
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
 				_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
-				_isRemovingBillboard = false;
+				_isDeletingBillboard = false;
 				_currentBillboardID = "";
 			}
 		}

@@ -9,11 +9,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("SceneEditor::loadCustomSceneFromFile() --> no current project loaded!");
+		Logger::throwError("SceneEditor::loadCustomSceneFromFile() ---> no current project loaded!");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwError("SceneEditor::loadCustomSceneFromFile() --> tried to call from within scene editor!");
+		Logger::throwError("SceneEditor::loadCustomSceneFromFile() ---> tried to call from within scene editor!");
 	}
 
 	// Compose file path

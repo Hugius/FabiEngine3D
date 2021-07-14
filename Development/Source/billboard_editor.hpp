@@ -24,10 +24,10 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateBillboardManagement();
-	void _updateBillboardCreation();
+	void _updateBillboardCreating();
 	void _updateBillboardChoosing();
 	void _updateBillboardEditing();
-	void _updateBillboardRemoval();
+	void _updateBillboardDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -57,6 +57,6 @@ private:
 	bool _isCreatingBillboard = false;
 	bool _isChoosingBillboard = false;
 	bool _isEditingBillboard = false;
-	bool _isRemovingBillboard = false;
+	bool _isDeletingBillboard = false;
 	bool _isEditorLoaded = false;
 };

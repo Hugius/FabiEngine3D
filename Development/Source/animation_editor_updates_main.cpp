@@ -18,9 +18,9 @@ void AnimationEditor::update()
 	_updateFrameScreen();
 
 	// Animation lifecycle
-	_updateAnimationCreation();
+	_updateAnimationCreating();
 	_updateAnimationChoice();
-	_updateAnimationRemoval();
+	_updateAnimationDeleting();
 
 	// Miscellaneous
 	_updateCamera();
@@ -58,7 +58,7 @@ void AnimationEditor::_updateManagementScreen()
 				else if (screen->getButton("delete")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
-					_isRemovingAnimation = true;
+					_isDeletingAnimation = true;
 					_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 				}
 			}
@@ -79,7 +79,7 @@ void AnimationEditor::_updateManagementScreen()
 	}
 }
 
-void AnimationEditor::_updateAnimationCreation()
+void AnimationEditor::_updateAnimationCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -165,7 +165,7 @@ void AnimationEditor::_updateAnimationChoice()
 					}
 
 					// Miscellaneous
-					_gui.getGlobalScreen()->removeChoiceForm("animationList");
+					_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 					_isChoosingAnimation = false;
 				}
 			}
@@ -173,21 +173,26 @@ void AnimationEditor::_updateAnimationChoice()
 			{
 				_isChoosingAnimation = false;
 				_isEditingAnimation = false;
-				_isRemovingAnimation = false;
-				_gui.getGlobalScreen()->removeChoiceForm("animationList");
+				_isDeletingAnimation = false;
+				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 			}
 		}
 	}
 }
 
-void AnimationEditor::_updateAnimationRemoval()
+void AnimationEditor::_updateAnimationDeleting()
 {
 	if (_isEditorLoaded)
 	{
-		if (_isRemovingAnimation && _currentAnimationID != "")
+		if (_isDeletingAnimation && _currentAnimationID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			// Add answer form
+			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			}
 
+			// Check if form is answered
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{
 				// Go to main screen
@@ -198,11 +203,11 @@ void AnimationEditor::_updateAnimationRemoval()
 				_currentAnimationID = "";
 
 				// Miscellaneous
-				_isRemovingAnimation = false;
+				_isDeletingAnimation = false;
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 			{
-				_isRemovingAnimation = false;
+				_isDeletingAnimation = false;
 				_currentAnimationID = "";
 			}
 		}

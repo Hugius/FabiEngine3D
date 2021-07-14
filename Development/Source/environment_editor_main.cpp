@@ -63,18 +63,18 @@ void EnvironmentEditor::unload()
 	_currentSkyID = "";
 	_currentTerrainID = "";
 	_currentWaterID = "";
-	_isSkyCreationEnabled = false;
-	_isSkyChoosingEnabled = false;
-	_isSkyEditingEnabled = false;
-	_isSkyRemovalEnabled = false;
-	_isTerrainCreationEnabled = false;
-	_isTerrainChoosingEnabled = false;
-	_isTerrainEditingEnabled = false;
-	_isTerrainRemovalEnabled = false;
-	_isWaterCreationEnabled = false;
-	_isWaterChoosingEnabled = false;
-	_isWaterEditingEnabled = false;
-	_isWaterRemovalEnabled = false;
+	_isCreatingSky = false;
+	_isChoosingSky = false;
+	_isEditingSky = false;
+	_isDeletingSky = false;
+	_isCreatingTerrain = false;
+	_isChoosingTerrain = false;
+	_isEditingTerrain = false;
+	_isDeletingTerrain = false;
+	_isCreatingWater = false;
+	_isChoosingWater = false;
+	_isEditingWater = false;
+	_isDeletingWater = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");
@@ -112,7 +112,7 @@ void EnvironmentEditor::_loadGUI()
 	leftWindow->addScreen("environmentEditorMenuSky");
 	leftWindow->getScreen("environmentEditorMenuSky")->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuSky")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuSky")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Remove Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuSky")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Sky"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuSky")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - environmentEditorMenuSkyChoice
@@ -142,7 +142,7 @@ void EnvironmentEditor::_loadGUI()
 	leftWindow->addScreen("environmentEditorMenuTerrain");
 	leftWindow->getScreen("environmentEditorMenuTerrain")->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuTerrain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuTerrain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Remove Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuTerrain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Terrain"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuTerrain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - environmentEditorMenuTerrainChoice
@@ -187,7 +187,7 @@ void EnvironmentEditor::_loadGUI()
 	leftWindow->addScreen("environmentEditorMenuWater");
 	leftWindow->getScreen("environmentEditorMenuWater")->addButton("add", Vec2(0.0f, 0.63f), Vec2(CW("Add Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuWater")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(CW("Edit Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWater")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Remove Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Remove Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWater")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(CW("Delete Water"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuWater")->addButton("back", Vec2(0.0f, -0.63f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - environmentEditorMenuWaterChoice

@@ -43,7 +43,7 @@ void TopViewportController::_updateMiscellaneous()
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable);
 }
 
-void TopViewportController::_updateProjectCreation()
+void TopViewportController::_updateProjectCreating()
 {
 	if (_creatingProject)
 	{
@@ -192,18 +192,18 @@ void TopViewportController::_updateProjectLoading()
 
 				// Miscellaneous
 				_loadingProject = false;
-				_gui.getGlobalScreen()->removeChoiceForm("projectList");
+				_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
 			_loadingProject = false;
-			_gui.getGlobalScreen()->removeChoiceForm("projectList");
+			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 	}
 }
 
-void TopViewportController::_updateProjectDeletion()
+void TopViewportController::_updateProjectDeleting()
 {
 	if (_deletingProject)
 	{
@@ -213,18 +213,18 @@ void TopViewportController::_updateProjectDeletion()
 		// Check if user clicked a project name
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("deleteProject", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
-			_gui.getGlobalScreen()->removeChoiceForm("projectList");
+			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
 			_deletingProject = false;
-			_gui.getGlobalScreen()->removeChoiceForm("projectList");
+			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 
 		// Check if user is sure to delete
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteProject"))
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Check if deleting currently opened project
 			if (chosenButtonID == _currentProjectID)
@@ -253,7 +253,7 @@ void TopViewportController::_updateProjectDeletion()
 				Logger::throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
 			}
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteProject"))
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_deletingProject = false;
 			chosenButtonID = "";

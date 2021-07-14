@@ -34,7 +34,7 @@ private:
 	void _loadReflectionMap();
 	void _loadNormalMap();
 	void _updateManagementScreen();
-	void _updateModelCreation();
+	void _updateModelCreating();
 	void _updateModelChoosing();
 	void _updateEditingScreen();
 	void _updateModelEditingMesh();
@@ -42,7 +42,7 @@ private:
 	void _updateModelEditingLighting();
 	void _updateModelEditingSize();
 	void _updateModelEditingAabb();
-	void _updateModelRemoval();
+	void _updateModelDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 

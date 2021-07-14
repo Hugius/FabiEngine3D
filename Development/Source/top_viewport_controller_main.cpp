@@ -114,9 +114,9 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 
 		// Update specific processes
-		_updateProjectCreation();
+		_updateProjectCreating();
 		_updateProjectLoading();
-		_updateProjectDeletion();
+		_updateProjectDeleting();
 
 		// Quitting with ESCAPE
 		if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && leftScreen->getID() == "main")
@@ -294,7 +294,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("TopViewportController::_saveCurrentProject() --> no current project loaded!");
+		Logger::throwError("TopViewportController::_saveCurrentProject() ---> no current project loaded!");
 	}
 
 	// Save everything

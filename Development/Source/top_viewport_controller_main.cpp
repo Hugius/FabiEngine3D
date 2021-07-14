@@ -71,40 +71,42 @@ void TopViewportController::update()
 void TopViewportController::_updateProjectScreenManagement()
 {
 	// Temporary values
-	auto screen = _projectWindow->getActiveScreen();
+	auto topScreen = _projectWindow->getActiveScreen();
+	auto leftScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "main")
+	if (topScreen->getID() == "main")
 	{
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("newProject")->isHovered())
+			if (topScreen->getButton("newProject")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("newProjectID", "Enter Project Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_creatingProject = true;
 			}
-			else if (screen->getButton("loadProject")->isHovered())
+			else if (topScreen->getButton("loadProject")->isHovered())
 			{
 				_prepareProjectLoading();
 				_loadingProject = true;
 			}
-			else if (screen->getButton("saveProject")->isHovered())
+			else if (topScreen->getButton("saveProject")->isHovered())
 			{
 				_saveCurrentProject();
 			}
-			else if (screen->getButton("deleteProject")->isHovered())
+			else if (topScreen->getButton("deleteProject")->isHovered())
 			{
 				_prepareProjectLoading();
 				_deletingProject = true;
 			}
-			else if (screen->getButton("quitEngine")->isHovered())
+			else if (topScreen->getButton("quitEngine")->isHovered())
 			{
-				// Check if currently in an editor
-				if (_currentProjectID != "" && _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "main")
+				// Check if currently in an editor (except for: scene editor & environment editor)
+				if (_currentProjectID != "" && leftScreen->getID() != "main" && 
+					leftScreen->getID() != "sceneEditorMenuMain" && leftScreen->getID() != "environmentEditorMenuMain")
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
-				else // Otherwise, just exit the engine
+				else // Otherwise, just stop the engine
 				{
 					_fe3d.application_stop();
 				}
@@ -116,19 +118,25 @@ void TopViewportController::_updateProjectScreenManagement()
 		_updateProjectLoading();
 		_updateProjectDeletion();
 
+		// Quitting with ESCAPE
+		if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && leftScreen->getID() == "main")
+		{
+			_fe3d.application_stop();
+		}
+
 		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("quit"))
 		{
 			_saveCurrentProject();
 			_fe3d.application_stop();
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitEngine"))
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
 		{
 			_fe3d.application_stop();
 		}
 
 		// Button hoverabilities
-		screen->getButton("saveProject")->setHoverable(_currentProjectID != "");
+		topScreen->getButton("saveProject")->setHoverable(_currentProjectID != "");
 	}
 }
 

@@ -8,7 +8,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "skyEditorMenuOptions")
+	if (screen->getID() == "environmentEditorMenuSkyOptions")
 	{
 		// Temporary values
 		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
@@ -20,7 +20,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
 			}
 			else if (screen->getButton("rotationSpeed")->isHovered())
 			{

@@ -9,15 +9,14 @@ void EnvironmentEditor::_updateWaterMenuMain()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "waterEditorMenuMain")
+	if (screen->getID() == "environmentEditorMenuWater")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
-				_isInMainMenu = true;
+				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
@@ -41,6 +40,19 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
+
+		// Check if user wants to save changes
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		{
+			saveWaterEntitiesToFile();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			_isInMainMenu = true;
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			_isInMainMenu = true;
+		}
 	}
 }
 
@@ -50,14 +62,14 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "waterEditorMenuChoice")
+	if (screen->getID() == "environmentEditorMenuWaterChoice")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWater");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_fe3d.waterEntity_select("");
@@ -73,15 +85,15 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMesh");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterMesh");
 			}
 			else if (screen->getButton("effects")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuEffects");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterEffects");
 			}
 			else if (screen->getButton("options")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuOptions");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterOptions");
 			}
 		}
 
@@ -126,7 +138,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "waterEditorMenuMesh")
+	if (screen->getID() == "environmentEditorMenuWaterMesh")
 	{
 		// Temporary values
 		Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
@@ -137,7 +149,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
 			}
 			else if (screen->getButton("position")->isHovered())
 			{

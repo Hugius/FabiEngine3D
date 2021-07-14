@@ -47,13 +47,8 @@ void LeftViewportController::update()
 		{
 			if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
 			{
-				if (_environmentEditor.loadSkyEntitiesFromFile() &&
-					_environmentEditor.loadTerrainEntitiesFromFile() &&
-					_environmentEditor.loadWaterEntitiesFromFile())
-				{
-					_environmentEditor.load();
-					window->setActiveScreen("environmentEditorMenu");
-				}
+				_environmentEditor.load();
+				window->setActiveScreen("environmentEditorMenuMain");
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 			{

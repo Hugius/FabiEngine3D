@@ -42,7 +42,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 						{
 							_currentTerrainID = newTerrainName;
 							_loadedTerrainIDs.push_back(_currentTerrainID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
@@ -89,7 +89,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 					if (_isTerrainEditingEnabled)
 					{
 						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
 
 						// Show terrain name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
@@ -128,7 +128,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 	{
 		if (_isTerrainRemovalEnabled && _currentTerrainID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are You Sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeTerrain"))
 			{

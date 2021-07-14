@@ -43,7 +43,7 @@ void EnvironmentEditor::_updateSkyCreation()
 							_loadedSkyIDs.push_back(_currentSkyID);
 							_fe3d.skyEntity_add(_currentSkyID);
 							_fe3d.skyEntity_select(_currentSkyID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 								"Sky: " + _currentSkyID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
@@ -90,7 +90,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 					if (_isSkyEditingEnabled)
 					{
 						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
 
 						// Show sky name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
@@ -123,7 +123,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 	{
 		if (_isSkyRemovalEnabled && _currentSkyID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{

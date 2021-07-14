@@ -9,14 +9,14 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "terrainEditorMenuBlendMap")
+	if (screen->getID() == "environmentEditorMenuTerrainBlendMap")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
 			}
 			else if (screen->getButton("blendMap")->isHovered())
 			{
@@ -178,7 +178,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "terrainEditorMenuLighting")
+	if (screen->getID() == "environmentEditorMenuTerrainLighting")
 	{
 		// Temporary values
 		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
@@ -191,7 +191,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{

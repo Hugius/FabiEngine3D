@@ -186,7 +186,7 @@ void AnimationEditor::_updateAnimationRemoval()
 	{
 		if (_isRemovingAnimation && _currentAnimationID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are you sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 			{

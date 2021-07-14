@@ -9,15 +9,14 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "terrainEditorMenuMain")
+	if (screen->getID() == "environmentEditorMenuTerrain")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
-				_isInMainMenu = true;
+				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
@@ -41,6 +40,19 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
+
+		// Check if user wants to save changes
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		{
+			saveTerrainEntitiesToFile();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			_isInMainMenu = true;
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			_isInMainMenu = true;
+		}
 	}
 }
 
@@ -50,14 +62,14 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "terrainEditorMenuChoice")
+	if (screen->getID() == "environmentEditorMenuTerrainChoice")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrain");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
@@ -65,15 +77,15 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMesh");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainMesh");
 			}
 			else if (screen->getButton("blendMap")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainBlendMap");
 			}
 			else if (screen->getButton("lighting")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainLighting");
 			}
 		}
 
@@ -89,14 +101,14 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "terrainEditorMenuMesh")
+	if (screen->getID() == "environmentEditorMenuTerrainMesh")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
 			}
 			else if (screen->getButton("heightMap")->isHovered())
 			{

@@ -21,7 +21,7 @@ public:
 	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
-	bool loadAnimationsFromFile();
+	bool loadAnimationsFromFile(bool mustCheckPreviewModel = true);
 	bool saveAnimationsToFile();
 
 	// Getters
@@ -92,6 +92,5 @@ private:
 	bool _isEditingAnimation  = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded	  = false;
-	bool _isEditorLoading	  = false;
 	bool _partColorIncreasing = true;
 };

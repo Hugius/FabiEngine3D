@@ -57,7 +57,7 @@ void SceneEditor::load()
 	}
 
 	// Preview animations loading
-	_animationEditor.loadAnimationsFromFile();
+	_animationEditor.loadAnimationsFromFile(false);
 
 	// Preview billboards loading
 	_billboardEditor.loadBillboardEntitiesFromFile();

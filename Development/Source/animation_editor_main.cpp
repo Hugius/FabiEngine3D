@@ -16,8 +16,6 @@ AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, Mode
 
 void AnimationEditor::load()
 {
-	_isEditorLoading = true;
-
 	// GUI
 	_loadGUI();
 
@@ -55,7 +53,6 @@ void AnimationEditor::load()
 	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
-	_isEditorLoading = false;
 	_isEditorLoaded = true;
 }
 
@@ -108,7 +105,6 @@ void AnimationEditor::unload()
 	_isEditingAnimation = false;
 	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
-	_isEditorLoading = false;
 	_partColorIncreasing = true;
 
 	// Miscellaneous

@@ -4,7 +4,7 @@
 #include <fstream>
 #include <algorithm>
 
-bool AnimationEditor::loadAnimationsFromFile()
+bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -126,7 +126,7 @@ bool AnimationEditor::loadAnimationsFromFile()
 		}
 
 		// Only if loading animations in editor
-		if (_isEditorLoading)
+		if (mustCheckPreviewModel)
 		{
 			// Check if preview model is still existing
 			if (_fe3d.modelEntity_isExisting(newAnimation->previewModelID))

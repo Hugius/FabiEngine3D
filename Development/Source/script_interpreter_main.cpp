@@ -175,7 +175,7 @@ void ScriptInterpreter::load()
 	_modelEditor.loadModelEntitiesFromFile();
 
 	// Load preview animations
-	_animationEditor.loadAnimationsFromFile();
+	_animationEditor.loadAnimationsFromFile(false);
 
 	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();

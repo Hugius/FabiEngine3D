@@ -1,5 +1,7 @@
 #include "script_editor.hpp"
 
+#include <sstream>
+
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
 	if (_isEditorLoaded)
@@ -36,14 +38,18 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, FONT_PATH, LINE_NUMBER_COLOR, 
 				lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f), Vec3(0.0f), lineNumberSize, 0, 0);
 			_fe3d.billboardEntity_setBright(lineNumberID, true);
-			
+
 			// Create line number AABB
 			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH);
 			Vec3 aabbSize = Vec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true, true);
-			
+
 			// Create line text display BILLBOARD
-			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, CHARACTER_COLOR, 
+			std::istringstream iss(lineTextString);
+			string noWhiteSpace;
+			iss >> noWhiteSpace;
+			bool isComment = (noWhiteSpace.substr(0, 3) == "///");
+			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR,
 				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
 			_fe3d.billboardEntity_setBright(lineTextID, true);
 

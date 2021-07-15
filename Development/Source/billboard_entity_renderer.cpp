@@ -60,6 +60,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
+		_shader.uploadUniform("u_inversion", entity->getInversion());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());

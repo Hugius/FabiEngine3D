@@ -8,19 +8,20 @@ void SceneEditor::_updateSoundEditing()
 	if (_isEditorLoaded)
 	{
 		// Reset selected billboard from last frame
-		if (!_dontResetSelectedSound)
+		if (!_dontResetSelectedSpeaker)
 		{
 			_selectedSpeakerID = "";
 		}
 		else
 		{
-			_dontResetSelectedSound = false;
+			_dontResetSelectedSpeaker = false;
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointlight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
 		{
-			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
+			// Check which entity is selected
+			auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a speaker model
 			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
@@ -84,9 +85,9 @@ void SceneEditor::_updateSoundEditing()
 			// Update speaker animations
 			if (_selectedSpeakerID != _activeSpeakerID)
 			{
-				_updateSpeakerAnimation(_selectedSpeakerID, _selectedSoundSizeMultiplier);
+				_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeMultiplier);
 			}
-			_updateSpeakerAnimation(_activeSpeakerID, _activeSoundSizeMultiplier);
+			_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeMultiplier);
 
 			// Update properties screen
 			if (_activeSpeakerID != "")

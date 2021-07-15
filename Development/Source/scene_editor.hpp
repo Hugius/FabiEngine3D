@@ -122,8 +122,8 @@ private:
 	void _deleteSceneFile(const string& sceneID);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
-	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
 	void _updateSpeakerAnimation(const string& modelID, int& multiplier);
+	void _updateLightBulbAnimation(const string& modelID, int& multiplier);
 	void _selectModel(const string& modelID);
 	void _activateModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
@@ -166,15 +166,14 @@ private:
 	// Model variables
 	map<string, string> _loadedModelIDs;
 	map<string, string> _outsideLoadedModelIDs;
-	map<string, float> _initialModelLightness;
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
 	map<string, Vec3> _initialModelSize;
 	string _currentPreviewModelID = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
-	int _selectedModelLightnessMultiplier = 1;
-	int _activeModelLightnessMultiplier = 1;
+	int _selectedModelInversionMultiplier = 1;
+	int _activeModelInversionMultiplier = 1;
 	bool _dontResetSelectedModel = false;
 	static inline const float MODEL_BLINKING_SPEED = 0.025f;
 	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
@@ -182,12 +181,11 @@ private:
 	// Billboard variables
 	map<string, string> _loadedBillboardIDs;
 	map<string, string> _outsideLoadedBillboardIDs;
-	map<string, float> _initialBillboardLightness;
 	string _currentPreviewBillboardID = "";
 	string _selectedBillboardID = "";
 	string _activeBillboardID = "";
-	int _selectedBillboardLightnessMultiplier = 1;
-	int _activeBillboardLightnessMultiplier = 1;
+	int _selectedBillboardInversionMultiplier = 1;
+	int _activeBillboardInversionMultiplier = 1;
 	bool _dontResetSelectedBillboard = false;
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
@@ -198,31 +196,33 @@ private:
 	string _currentPreviewSoundID = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
-	static inline const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
+	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
 	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
 	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
+	static inline const float SPEAKER_SIZE_INCREASE = 1.25f;
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
-	static inline const float SPEAKER_ANIMATION_SPEED = 0.01f;
+	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
 	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
 	static inline const float SOUND_DISTANCE_CHANGING_SPEED = 0.05f;
-	int _selectedSoundSizeMultiplier = 1;
-	int _activeSoundSizeMultiplier = 1;
-	bool _dontResetSelectedSound = false;
+	int _selectedSpeakerSizeMultiplier = 1;
+	int _activeSpeakerSizeMultiplier = 1;
+	bool _dontResetSelectedSpeaker = false;
 
-	// Lighting variables
+	// Point light variables
 	vector<string> _loadedLightIDs;
-	bool _isPlacingPointlight = false;
-	static inline const string PREVIEW_POINTLIGHT_ID = "@@previewPointlight";
-	static inline const string LIGHTBULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
-	static inline const Vec3 DEFAULT_LIGHTBULB_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_LIGHTBULB_AABB_SIZE = Vec3(0.7f, 1.15f, 0.7f);
-	static inline const float LIGHTBULB_ANIMATION_SPEED = 0.01f;
+	bool _isPlacingPointLight = false;
+	static inline const string PREVIEW_LIGHT_BULB_ID = "@@previewLightBulb";
+	static inline const string LIGHT_BULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
+	static inline const Vec3 DEFAULT_LIGHT_BULB_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_LIGHT_BULB_AABB_SIZE = Vec3(0.7f, 1.15f, 0.7f);
+	static inline const float LIGHT_BULB_SIZE_INCREASE = 1.25f;
+	static inline const float LIGHT_BULB_ANIMATION_SPEED = 0.025f;
 	static inline const float LIGHTING_CHANGING_SPEED = 0.01f;
 	static inline const float LIGHTING_COLOR_CHANGING_SPEED = 0.005f;
-	int _selectedLightSizeMultiplier = 1;
-	int _activeLightSizeMultiplier = 1;
+	int _selectedLightBulbSizeMultiplier = 1;
+	int _activeLightBulbSizeMultiplier = 1;
 	string _selectedLightBulbID = "";
 	string _activeLightBulbID = "";
 

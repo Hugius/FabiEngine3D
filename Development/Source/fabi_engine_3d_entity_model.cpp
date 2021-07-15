@@ -298,6 +298,11 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, float lightness)
 	_core->_modelEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
+void FabiEngine3D::modelEntity_setInversion(const string& ID, float inversion)
+{
+	_core->_modelEntityManager.getEntity(ID)->setInversion(inversion);
+}
+
 void FabiEngine3D::modelEntity_setMinHeight(const string& ID, float height)
 {
 	_core->_modelEntityManager.getEntity(ID)->setMinHeight(height);
@@ -357,6 +362,11 @@ void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
 const float FabiEngine3D::modelEntity_getLightness(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getLightness();
+}
+
+const float FabiEngine3D::modelEntity_getInversion(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getInversion();
 }
 
 const float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)

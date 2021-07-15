@@ -293,6 +293,7 @@ public:
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
 	void modelEntity_setLightness(const string& ID, float lightness);
+	void modelEntity_setInversion(const string& ID, float inversion);
 	void modelEntity_setAlpha(const string& ID, float alpha);
 	void modelEntity_setColor(const string& ID, Vec3 color, const string& partID = "");
 	void modelEntity_setMinHeight(const string& ID, float height);
@@ -322,6 +323,7 @@ public:
 	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
 	const float modelEntity_getLightness(const string& ID);
+	const float modelEntity_getInversion(const string& ID);
 	const float modelEntity_getSpecularFactor(const string& ID);
 	const float modelEntity_getSpecularIntensity(const string& ID);
 	const float modelEntity_getAlpha(const string& ID);
@@ -373,6 +375,7 @@ public:
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
+	void billboardEntity_setInversion(const string& ID, float inversion);
 
 	// Billboard entity interface (core) - getters
 	const vector<string> billboardEntity_getAllIDs();
@@ -382,6 +385,7 @@ public:
 	const Vec2 billboardEntity_getSize(const string& ID);
 	const Vec3 billboardEntity_getColor(const string& ID);
 	const float billboardEntity_getLightness(const string& ID);
+	const float billboardEntity_getInversion(const string& ID);
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const bool billboardEntity_isExisting(const string& ID);

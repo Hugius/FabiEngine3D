@@ -15,7 +15,7 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointlight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
 		{
 			// Check if user selected a billboard
 			for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -23,6 +23,7 @@ void SceneEditor::_updateBillboardEditing()
 				// Must not be preview entity
 				if (entityID[0] != '@')
 				{
+					// Check which entity is selected
 					auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 					bool hovered = (hoveredAabbID.size() >= entityID.size()) && (hoveredAabbID.substr(0, entityID.size()) == entityID);
 
@@ -45,10 +46,10 @@ void SceneEditor::_updateBillboardEditing()
 					}
 					else
 					{
-						// Don't reset if billboard is active
-						if (entityID != _activeBillboardID && _selectedBillboardID == "")
+						// Don't reset inversion if billboard is active or selected
+						if (entityID != _activeBillboardID && entityID != _selectedBillboardID)
 						{
-							_fe3d.billboardEntity_setLightness(entityID, _initialBillboardLightness[entityID]);
+							_fe3d.billboardEntity_setInversion(entityID, 0.0f);
 						}
 					}
 				}
@@ -64,12 +65,12 @@ void SceneEditor::_updateBillboardEditing()
 				}
 			}
 
-			// Update billboard lightness blinking
+			// Update billboard blinking
 			if (_selectedBillboardID != _activeBillboardID)
 			{
-				_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardLightnessMultiplier);
+				_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardInversionMultiplier);
 			}
-			_updateBillboardBlinking(_activeBillboardID, _activeBillboardLightnessMultiplier);
+			_updateBillboardBlinking(_activeBillboardID, _activeBillboardInversionMultiplier);
 
 			// Update properties screen
 			if (_activeBillboardID != "")
@@ -198,8 +199,7 @@ void SceneEditor::_updateBillboardEditing()
 					if (entityID[0] != '@')
 					{
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
-						_fe3d.billboardEntity_setLightness(entityID, _initialBillboardLightness[entityID]);
-						_selectedBillboardLightnessMultiplier = 1;
+						_selectedBillboardInversionMultiplier = 1;
 						_activeBillboardID = "";
 						_selectedBillboardID = "";
 					}

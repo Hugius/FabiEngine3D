@@ -283,6 +283,11 @@ const float ModelEntity::getLightness() const
 	return _lightness;
 }
 
+const float ModelEntity::getInversion() const
+{
+	return _inversion;
+}
+
 const float ModelEntity::getSpecularFactor() const
 {
 	return _specularFactor;

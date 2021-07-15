@@ -36,6 +36,7 @@ void main()
 	vec3 primaryColor;
 	primaryColor  = mix(mainColor, mixColor, mixValue);
 	primaryColor *= lightness;
+	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
 	// Set final colors
 	o_primaryColor   = vec4(primaryColor, 1.0f);

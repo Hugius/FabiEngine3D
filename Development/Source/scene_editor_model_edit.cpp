@@ -18,7 +18,7 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointlight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
 		{
 			// Check which entity is selected
 			auto hoveredID = _fe3d.collision_checkCursorInAny().first;
@@ -50,10 +50,10 @@ void SceneEditor::_updateModelEditing()
 					}
 					else
 					{
-						// Don't reset if model is active or selected
+						// Don't reset inversion if model is active or selected
 						if (entityID != _activeModelID && entityID != _selectedModelID)
 						{
-							_fe3d.modelEntity_setLightness(entityID, _initialModelLightness[entityID]);
+							_fe3d.modelEntity_setInversion(entityID, 0.0f);
 						}
 					}
 				}
@@ -70,12 +70,12 @@ void SceneEditor::_updateModelEditing()
 				}
 			}
 
-			// Update model lightness blinking
+			// Update model blinking
 			if (_selectedModelID != _activeModelID)
 			{
-				_updateModelBlinking(_selectedModelID, _selectedModelLightnessMultiplier);
+				_updateModelBlinking(_selectedModelID, _selectedModelInversionMultiplier);
 			}
-			_updateModelBlinking(_activeModelID, _activeModelLightnessMultiplier);
+			_updateModelBlinking(_activeModelID, _activeModelInversionMultiplier);
 
 			// Update properties screen
 			if (_activeModelID != "")
@@ -324,8 +324,7 @@ void SceneEditor::_updateModelEditing()
 					if (entityID[0] != '@')
 					{
 						rightWindow->setActiveScreen("sceneEditorControls");
-						_fe3d.modelEntity_setLightness(entityID, _initialModelLightness[entityID]);
-						_selectedModelLightnessMultiplier = 1;
+						_selectedModelInversionMultiplier = 1;
 						_activeModelID = "";
 						_selectedModelID = "";
 					}

@@ -51,6 +51,7 @@ uniform float u_customAlpha;
 uniform float u_skyReflectionMixValue;
 uniform float u_sceneReflectionMixValue;
 uniform float u_lightness;
+uniform float u_inversion;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
@@ -70,7 +71,6 @@ uniform bool u_isNormalMapped;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
-uniform bool u_isShadowed;
 uniform bool u_isShadowFrameRenderEnabled;
 uniform bool u_isLightedShadowingEnabled;
 uniform bool u_isAmbientLightEnabled;
@@ -119,31 +119,29 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    float shadow	 = getShadowValue();
-	vec3 ambient	 = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
-	vec3 point		 = getPointLighting(normal);
-    vec3 spot		 = getSpotLighting(normal);
+	vec3 lighting = vec3(1.0f);
+	if(!u_isBright)
+	{
+		float shadow	 = getShadowValue();
+		vec3 ambient	 = getAmbientLighting();
+		vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
+		vec3 point		 = getPointLighting(normal);
+		vec3 spot		 = getSpotLighting(normal);
+		lighting		 = vec3(((ambient + directional) * shadow) + point + spot);
+	}
 
 	// Calculate primary color
 	vec3 primaryColor;
 	primaryColor  = getTextureColor();
+	primaryColor  = applySkyReflections(primaryColor, normal);
+	primaryColor  = applySceneReflections(primaryColor);
+	primaryColor *= u_lightness;
 	primaryColor *= u_color;
-	if(u_isBright)
-	{
-	    primaryColor  = applyLightMapping(primaryColor);
-		primaryColor *= u_lightness;
-	    primaryColor  = applyFog(primaryColor);
-	}
-	else
-	{
-		primaryColor  = applySkyReflections(primaryColor, normal);
-		primaryColor  = applySceneReflections(primaryColor);
-		primaryColor *= vec3(((ambient + directional) * shadow) + point + spot);
-		primaryColor  = applyLightMapping(primaryColor);
-		primaryColor *= u_lightness;
-	    primaryColor  = applyFog(primaryColor);
-	}
+	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
+	primaryColor *= lighting;
+	primaryColor  = applyLightMapping(primaryColor);
+	primaryColor  = applyFog(primaryColor);
 
 	// Calculate secondary color
 	vec3 secondaryColor = (u_isBright ? primaryColor : vec3(0.0f));
@@ -243,7 +241,7 @@ vec3 getPointLighting(vec3 normal)
 	{
 		vec3 result = vec3(0.0f);
 		
-        // For every pointlight
+        // For every pointLight
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting strength
@@ -333,7 +331,7 @@ float getSpecularValue(vec3 position, vec3 normal)
 // Calculate shadow lighting
 float getShadowValue()
 {
-	if(u_isShadowsEnabled && u_isShadowed)
+	if(u_isShadowsEnabled)
 	{
         float halfSize = u_shadowAreaSize / 2.0f;
 

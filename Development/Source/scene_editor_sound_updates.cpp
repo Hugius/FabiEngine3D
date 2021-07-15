@@ -135,7 +135,7 @@ void SceneEditor::_updateSoundChoosingMenu()
 						}
 						else // Hovering (selection)
 						{
-							_dontResetSelectedSound = true;
+							_dontResetSelectedSpeaker = true;
 							_selectSound(soundName);
 						}
 

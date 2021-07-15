@@ -56,6 +56,11 @@ const float BillboardEntity::getLightness() const
 	return _lightness;
 }
 
+const float BillboardEntity::getInversion() const
+{
+	return _inversion;
+}
+
 const float BillboardEntity::getMinHeight() const
 {
 	return _minHeight;

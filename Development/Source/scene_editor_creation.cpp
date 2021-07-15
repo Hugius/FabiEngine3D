@@ -322,10 +322,9 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		}
 	}
 
-	// Save original lightness & transformation
+	// Save original transformation
 	if (_isEditorLoaded)
 	{
-		_initialModelLightness[newEntityID] = _fe3d.modelEntity_getLightness(previewID);
 		_initialModelPosition[newEntityID] = _fe3d.modelEntity_getPosition(previewID);
 		_initialModelRotation[newEntityID] = _fe3d.modelEntity_getRotation(previewID);
 		_initialModelSize[newEntityID] = _fe3d.modelEntity_getSize(previewID);
@@ -394,12 +393,6 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
 	_fe3d.billboardEntity_setBright(newID, _fe3d.billboardEntity_isBright(previewID));
-
-	// Save original lightness
-	if (_isEditorLoaded)
-	{
-		_initialBillboardLightness[newID] = _fe3d.billboardEntity_getLightness(previewID);
-	}
 
 	// Save ID
 	if (fromOutside)

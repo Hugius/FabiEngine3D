@@ -84,13 +84,13 @@ void SceneEditor::load()
 			addButton(audioID, audioID.substr(1));
 	}
 
-	// Preview pointlight loading
-	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
-	_fe3d.lightEntity_setVisible(PREVIEW_POINTLIGHT_ID, false);
-	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
-	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_POINTLIGHT_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_POINTLIGHT_ID, true);
+	// Preview point light loading
+	_fe3d.lightEntity_add(PREVIEW_LIGHT_BULB_ID);
+	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+	_fe3d.modelEntity_add(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE, false);
+	_fe3d.modelEntity_setShadowed(PREVIEW_LIGHT_BULB_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_LIGHT_BULB_ID, false);
+	_fe3d.modelEntity_setBright(PREVIEW_LIGHT_BULB_ID, true);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -159,11 +159,9 @@ void SceneEditor::unload()
 	_outsideLoadedModelIDs.clear();
 	_outsideLoadedBillboardIDs.clear();
 	_outsideLoadedSoundIDs.clear();
-	_initialModelLightness.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
-	_initialBillboardLightness.clear();
 	_currentPreviewModelID = "";
 	_selectedModelID = "";
 	_activeModelID = "";
@@ -173,15 +171,15 @@ void SceneEditor::unload()
 	_selectedLightBulbID = "";
 	_activeLightBulbID = "";
 	_currentSceneID = "";
-	_selectedModelLightnessMultiplier = 1;
-	_activeModelLightnessMultiplier = 1;
-	_selectedBillboardLightnessMultiplier = 1;
-	_activeBillboardLightnessMultiplier = 1;
-	_selectedLightSizeMultiplier = 1;
-	_activeLightSizeMultiplier = 1;
+	_selectedModelInversionMultiplier = 1;
+	_activeModelInversionMultiplier = 1;
+	_selectedBillboardInversionMultiplier = 1;
+	_activeBillboardInversionMultiplier = 1;
+	_selectedLightBulbSizeMultiplier = 1;
+	_activeLightBulbSizeMultiplier = 1;
 	_dontResetSelectedModel = false;
 	_dontResetSelectedBillboard = false;
-	_isPlacingPointlight = false;
+	_isPlacingPointLight = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;
 	_transformation = TransformationType::TRANSLATION;

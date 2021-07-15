@@ -279,8 +279,8 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 
-	// Right-viewport: mainWindow - pointlightPropertiesMenu
-	screenID = "pointlightPropertiesMenu";
+	// Right-viewport: mainWindow - pointLightPropertiesMenu
+	screenID = "pointLightPropertiesMenu";
 	rightWindow->addScreen(screenID);
 	rightWindow->getScreen(screenID)->addTextfield("intensity", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Intensity", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("intensityPlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -376,6 +376,6 @@ void SceneEditor::_unloadGUI()
 	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsBloom");
 	rightWindow->deleteScreen("modelPropertiesMenu");
 	rightWindow->deleteScreen("billboardPropertiesMenu");
-	rightWindow->deleteScreen("pointlightPropertiesMenu");
+	rightWindow->deleteScreen("pointLightPropertiesMenu");
 	rightWindow->deleteScreen("soundPropertiesMenu");
 }

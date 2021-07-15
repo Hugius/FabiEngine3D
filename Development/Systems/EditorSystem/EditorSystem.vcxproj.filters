@@ -267,7 +267,7 @@
     <ClCompile Include="..\..\Source\scene_editor_light_edit.cpp">
       <Filter>Scene Editor\Lighting</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_placing.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_light_place.cpp">
       <Filter>Scene Editor\Lighting</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_light_updates.cpp">
@@ -294,13 +294,13 @@
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates.cpp">
       <Filter>Scene Editor\Billboards</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_placing.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_billboard_place.cpp">
       <Filter>Scene Editor\Billboards</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_model_edit.cpp">
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_placing.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_model_place.cpp">
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_model_updates.cpp">
@@ -309,7 +309,7 @@
     <ClCompile Include="..\..\Source\scene_editor_sound_edit.cpp">
       <Filter>Scene Editor\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_placing.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_sound_place.cpp">
       <Filter>Scene Editor\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_sound_updates.cpp">

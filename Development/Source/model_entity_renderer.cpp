@@ -168,11 +168,11 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
+		_shader.uploadUniform("u_inversion", entity->getInversion());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
-		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		

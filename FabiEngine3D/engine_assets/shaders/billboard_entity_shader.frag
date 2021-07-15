@@ -18,6 +18,7 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
+uniform float u_inversion;
 uniform float u_minAlpha;
 
 // Boolean uniforms
@@ -53,14 +54,19 @@ void main()
 		}
 
 		// Set primary color
-		primaryColor = (texColor.rgb * u_color);
-		primaryColor = (applyFog(primaryColor) * u_lightness);
+		primaryColor  = texColor.rgb;
+		primaryColor *= u_color;
+		primaryColor *= u_lightness;
+		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+		primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
+		primaryColor  = applyFog(primaryColor);
 	}
 	else
 	{
 		// Set primary color
-		primaryColor = u_color;
-		primaryColor = (applyFog(primaryColor) * u_lightness);
+		primaryColor  = u_color;
+		primaryColor *= u_lightness;
+		primaryColor  = applyFog(primaryColor);
 	}
 	
 	// Calculate secondary color

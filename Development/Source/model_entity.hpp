@@ -40,6 +40,7 @@ public:
 	void addReflectionMapPath(string value);
 	void addNormalMapPath(string value);
 	void setLightness(float value);
+	void setInversion(float value);
 	void setSpecularFactor(float value);
 	void setSpecularIntensity(float value);
 	void setMinHeight(float value);
@@ -92,6 +93,7 @@ public:
 	const vector<string>& getNormalMapPaths() const;
 	const vector<string>& getPartIDs() const;
 	const float getLightness() const;
+	const float getInversion() const;
 	const float getSpecularFactor() const;
 	const float getSpecularIntensity() const;
 	const float getAlpha() const;
@@ -153,6 +155,7 @@ private:
 	Vec3 _originalScaling = Vec3(1.0f);
 
 	float _lightness = 1.0f;
+	float _inversion = 0.0f;
 	float _specularFactor = 1.0f;
 	float _specularIntensity = 1.0f;
 	float _alpha = 1.0f;

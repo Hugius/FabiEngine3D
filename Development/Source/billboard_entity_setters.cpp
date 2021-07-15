@@ -250,6 +250,11 @@ void BillboardEntity::setLightness(float value)
 	_lightness = std::max(0.0f, value);
 }
 
+void BillboardEntity::setInversion(float value)
+{
+	_inversion = value;
+}
+
 void BillboardEntity::setMinHeight(float value)
 {
 	_minHeight = value;

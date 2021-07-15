@@ -75,6 +75,7 @@ void main()
 
 	// Calculate primary color
 	vec3 primaryColor = waterColor.rgb;
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = applyFog(primaryColor);
 
 	// Set final colors
@@ -171,7 +172,7 @@ vec3 getPointLighting(vec3 normal)
 	{
 		vec3 result = vec3(0.0f);
 		
-        // For every pointlight
+        // For every pointLight
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting distance

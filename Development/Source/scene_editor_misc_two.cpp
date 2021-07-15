@@ -225,7 +225,7 @@ void SceneEditor::clearCurrentScene()
 			// Delete light
 			_fe3d.lightEntity_delete(ID);
 
-			// Delete corresponding lightbulb model
+			// Delete corresponding light bulb model
 			if (!_currentSceneID.empty())
 			{
 				_fe3d.modelEntity_delete("@" + ID);

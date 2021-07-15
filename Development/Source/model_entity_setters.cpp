@@ -436,6 +436,11 @@ void ModelEntity::setLightness(float value)
 	_lightness = std::max(0.0f, value);
 }
 
+void ModelEntity::setInversion(float value)
+{
+	_inversion = value;
+}
+
 void ModelEntity::setSpecularFactor(float value)
 {
 	_specularFactor = std::max(0.0f, value);

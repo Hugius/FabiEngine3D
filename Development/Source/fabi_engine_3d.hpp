@@ -288,7 +288,7 @@ public:
 	void modelEntity_scale(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_setPosition(const string& ID, Vec3 position, const string& partID = "");
 	void modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partID = "");
-	void modelEntity_setRotationOrigin(const string& ID, Vec3 localRotationOrigin, const string& partID = "");
+	void modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID = "");
 	void modelEntity_setSize(const string& ID, Vec3 size, const string& partID = "");
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
@@ -514,12 +514,12 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
-	void imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 localScaling, bool isCentered, bool visible = true);
-	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 localScaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);
-	void imageEntity_changeTexture(const string& ID, const string& texturePath);
+	void imageEntity_changeDiffuseMap(const string& ID, const string& texturePath);
 	void imageEntity_setPosition(const string& ID, Vec2 position);
 	void imageEntity_setRotation(const string& ID, float rotation);
 	void imageEntity_setSize(const string& ID, Vec2 size);
@@ -668,7 +668,7 @@ public:
 	void gfx_enableSkyExposure(float factor, float speed);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
-	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
+	void gfx_enableLensFlare(const string& diffuseMapPath, float intensity, float multiplier);
 	void gfx_disableAmbientLighting(bool resetProperties = false);
 	void gfx_disableDirectionalLighting(bool resetProperties = false);
 	void gfx_disableSpecularLighting(bool resetProperties = false);

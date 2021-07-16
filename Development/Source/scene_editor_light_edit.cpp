@@ -30,7 +30,7 @@ void SceneEditor::_updateLightEditing()
 						_selectedLightBulbID = entityID;
 
 						// Change cursor
-						_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+						_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked light bulb
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -76,9 +76,9 @@ void SceneEditor::_updateLightEditing()
 			// Update light bulb animations
 			if (_selectedLightBulbID != ACTIVE_BULB_ID)
 			{
-				_updateLightBulbAnimation(_selectedLightBulbID, _selectedLightBulbSizeMultiplier);
+				_updateLightBulbAnimation(_selectedLightBulbID, _selectedLightBulbSizeDirection);
 			}
-			_updateLightBulbAnimation(ACTIVE_BULB_ID, _activeLightBulbSizeMultiplier);
+			_updateLightBulbAnimation(ACTIVE_BULB_ID, _activeLightBulbSizeDirection);
 
 			// Update properties screen
 			if (ACTIVE_BULB_ID != "")

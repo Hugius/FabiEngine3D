@@ -126,7 +126,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 		// Update custom cursor
 		imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
-		imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
+		imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_default.png");
 		imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
 
 		// Update GUI manager

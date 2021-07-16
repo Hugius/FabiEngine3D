@@ -5,18 +5,21 @@ void AabbEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void AabbEntityRenderer::unbind()
 {
+	// Disable depth testing
 	glDisable(GL_DEPTH_TEST);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -27,14 +30,14 @@ void AabbEntityRenderer::render(const shared_ptr<AabbEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
-		// Bind
+		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 		// Render
 		glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
 
-		// Unbind
+		// Unbind buffer
 		glBindVertexArray(0);
 	}
 }

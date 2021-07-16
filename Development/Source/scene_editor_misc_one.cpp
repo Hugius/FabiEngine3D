@@ -40,7 +40,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_selectedModelID = modelID;
 
 	// Change cursor
-	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -87,7 +87,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_selectedBillboardID = billboardID;
 
 	// Change cursor
-	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -134,7 +134,7 @@ void SceneEditor::_selectSound(const string& soundID)
 	_selectedSpeakerID = "@speaker_" + soundID;
 
 	// Change cursor
-	_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+	_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -263,12 +263,12 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	}
 }
 
-void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
+void SceneEditor::_updateModelBlinking(const string& modelID, int& direction)
 {
 	// Reset multiplier if nothing active/selected
 	if (modelID == "")
 	{
-		multiplier = 1;
+		direction = 1;
 	}
 
 	// Update model inversion
@@ -277,27 +277,27 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 		// Check if inversion reached minimum
 		if (_fe3d.modelEntity_getInversion(modelID) == 0.0f)
 		{
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
 		if (_fe3d.modelEntity_getInversion(modelID) == 1.0f)
 		{
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Set model inversion
-		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(multiplier));
+		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
 		_fe3d.modelEntity_setInversion(modelID, _fe3d.modelEntity_getInversion(modelID) + speed);
 	}
 }
 
-void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multiplier)
+void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& direction)
 {
-	// Reset multiplier if nothing active/selected
+	// Reset direction if nothing active/selected
 	if (billboardID == "")
 	{
-		multiplier = 1;
+		direction = 1;
 	}
 
 	// Update billboard inversion
@@ -306,27 +306,27 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 		// Check if inversion reached minimum
 		if (_fe3d.billboardEntity_getInversion(billboardID) == 0.0f)
 		{
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
 		if (_fe3d.billboardEntity_getInversion(billboardID) == 1.0f)
 		{
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Set billboard inversion
-		float speed = (BILLBOARD_BLINKING_SPEED * static_cast<float>(multiplier));
+		float speed = (BILLBOARD_BLINKING_SPEED * static_cast<float>(direction));
 		_fe3d.billboardEntity_setInversion(billboardID, _fe3d.billboardEntity_getInversion(billboardID) + speed);
 	}
 }
 
-void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier)
+void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 {
-	// Reset multiplier if nothing active/selected
+	// Reset direction if nothing active/selected
 	if (modelID == "")
 	{
-		multiplier = 1;
+		direction = 1;
 	}
 
 	// Update speaker animation
@@ -337,7 +337,7 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_SPEAKER_SIZE);
 			_fe3d.aabbEntity_setSize(modelID, DEFAULT_SPEAKER_AABB_SIZE);
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
@@ -345,22 +345,22 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier
 		{
 			_fe3d.modelEntity_setSize(modelID, (DEFAULT_SPEAKER_SIZE.x * SPEAKER_SIZE_INCREASE));
 			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_SPEAKER_AABB_SIZE.x * SPEAKER_SIZE_INCREASE));
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Set new sizes
-		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(multiplier) * (DEFAULT_SPEAKER_SIZE.x * 0.25f));
+		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(direction) * (DEFAULT_SPEAKER_SIZE.x * 0.25f));
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}
 }
 
-void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& multiplier)
+void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& direction)
 {
-	// Reset multiplier if nothing active/selected
+	// Reset direction if nothing active/selected
 	if (modelID == "")
 	{
-		multiplier = 1;
+		direction = 1;
 	}
 
 	// Update light bulb animation
@@ -371,7 +371,7 @@ void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& multipli
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_LIGHT_BULB_SIZE);
 			_fe3d.aabbEntity_setSize(modelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
@@ -379,11 +379,11 @@ void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& multipli
 		{
 			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_SIZE.x * LIGHT_BULB_SIZE_INCREASE));
 			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_AABB_SIZE.x * LIGHT_BULB_SIZE_INCREASE));
-			multiplier *= -1;
+			direction *= -1;
 		}
 
 		// Set new sizes
-		float speed = (LIGHT_BULB_ANIMATION_SPEED * static_cast<float>(multiplier) * (DEFAULT_LIGHT_BULB_SIZE.x * 0.25f));
+		float speed = (LIGHT_BULB_ANIMATION_SPEED * static_cast<float>(direction) * (DEFAULT_LIGHT_BULB_SIZE.x * 0.25f));
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}

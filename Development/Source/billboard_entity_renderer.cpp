@@ -6,36 +6,37 @@ void BillboardEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_clippingPlane",	_renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition",	_renderBus.getCameraPosition());
-
-	// Fragment shader uniforms
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogThickness",	  _renderBus.getFogThickness());
 	_shader.uploadUniform("u_fogColor",		  _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled",	  _renderBus.isFogEnabled());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Clipping (minY & maxY)
+	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void BillboardEntityRenderer::unbind()
 {
+	// Disable depth testing
+	glDisable(GL_DEPTH_TEST);
+
+	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
-	glDisable(GL_DEPTH_TEST);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -67,7 +68,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 		_shader.uploadUniform("u_isBright", entity->isBright());
 
-		// Bind texture
+		// Bind textures
 		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -94,7 +95,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind texture
+		// Unbind textures
 		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);

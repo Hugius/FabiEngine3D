@@ -56,7 +56,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 
 void BillboardEntityManager::addBillboardEntity
 (
-	const string& ID, const string& texturePath,
+	const string& ID, const string& diffuseMapPath,
 	Vec3 T, Vec3 R, Vec3 S,
 	bool transparent, bool facingCameraX, bool facingCameraY
 )
@@ -64,8 +64,8 @@ void BillboardEntityManager::addBillboardEntity
 	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
 
 	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, true, true));
-	entity->setDiffuseMapPath(texturePath);
+	entity->setDiffuseMap(_textureLoader.getTexture2D(diffuseMapPath, true, true));
+	entity->setDiffuseMapPath(diffuseMapPath);
 	entity->setTransparent(transparent);
 }
 

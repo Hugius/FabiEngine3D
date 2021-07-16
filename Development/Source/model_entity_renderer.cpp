@@ -9,13 +9,11 @@ void ModelEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_projectionMatrix",	 _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix",		 _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane",	 _renderBus.getClippingPlane());
-	
-	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",			  _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_cameraFront",				  _renderBus.getCameraFront());
 	_shader.uploadUniform("u_ambientLightColor",		  _renderBus.getAmbientLightColor());
@@ -55,8 +53,6 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_mixSkyLightness",			  _renderBus.getMixSkyLightness());
 	_shader.uploadUniform("u_mainSkyColor",				  _renderBus.getMainSkyColor());
 	_shader.uploadUniform("u_mixSkyColor",				  _renderBus.getMixSkyColor());
-	
-	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 	_shader.uploadUniform("u_lightMap", 1);
 	_shader.uploadUniform("u_reflectionMap", 2);
@@ -66,15 +62,15 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_mainSkyMap", 6);
 	_shader.uploadUniform("u_mixSkyMap", 7);
 
-	// Clipping (minY & maxY)
+	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Alpha blending
+	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -101,11 +97,15 @@ void ModelEntityRenderer::unbind()
 	glActiveTexture(GL_TEXTURE7);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-	// Disable OpenGL functionality
+	// Disable alpha blending
+	glDisable(GL_BLEND);
+
+	// Disable depth testing
+	glDisable(GL_DEPTH_TEST);
+
+	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
-	glDisable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
 
 	// Unbind shader
 	_shader.unbind();
@@ -146,13 +146,13 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 {
 	if (entity->isVisible())
 	{
-		// Wireframe
+		// Enable wireframe
 		if (entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Face culling
+		// Enable face culling
 		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
@@ -174,8 +174,6 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		
-		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
 			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
@@ -185,60 +183,52 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 		}
 
-		// Bind & render
+		// Iterate through parts
 		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
 		{
 			// Temporary values
 			auto partID = entity->getPartIDs()[i];
 			auto buffer = entity->getRenderBuffers()[i];
 
-			// Miscellaneous shader uniforms
-			_shader.uploadUniform("u_color", entity->getColor(partID));
-			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
-
 			// Model matrix
 			const auto& modelMatrix = entity->getModelMatrix(partID);
 			auto normalModelMatrix = modelMatrix;
 			normalModelMatrix.transpose();
 			normalModelMatrix.invert();
-			_shader.uploadUniform("u_modelMatrix", modelMatrix);
-			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 
-			// Check if entity has maps
+			// Shader uniforms
+			_shader.uploadUniform("u_color", entity->getColor(partID));
+			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
 			_shader.uploadUniform("u_hasLightMap", entity->hasLightMap(partID));
 			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
+			_shader.uploadUniform("u_modelMatrix", modelMatrix);
+			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 
-			// Diffuse map
+			// Bind textures
 			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
-
-			// Light map
 			if (entity->hasLightMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(partID));
 			}
-
-			// Reflection map
 			if (entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
-
-			// Normal map
 			if (entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
-			// Bind
+			// Bind buffer
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
@@ -255,48 +245,39 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 			}
 
-			// Diffuse map
+			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-
-			// Light map
 			if (entity->hasLightMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-
-			// Reflection map
 			if (entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-
-			// Normal map
 			if (entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Miscellaneous
-			glActiveTexture(GL_TEXTURE0);
+			// Unbind buffer
+			glBindVertexArray(0);
 		}
 
-		// Unbind buffer
-		glBindVertexArray(0);
-
-		// Face culling
+		// Disable face culling
 		if (entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
 		}
 
-		// Wireframe
+		// Disable wireframe
 		if (entity->isWireframed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

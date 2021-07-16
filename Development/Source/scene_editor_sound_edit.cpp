@@ -38,7 +38,7 @@ void SceneEditor::_updateSoundEditing()
 						_selectSound(SELECTED_SOUND_ID);
 
 						// Change cursor
-						_fe3d.imageEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+						_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked speaker
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -85,9 +85,9 @@ void SceneEditor::_updateSoundEditing()
 			// Update speaker animations
 			if (_selectedSpeakerID != _activeSpeakerID)
 			{
-				_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeMultiplier);
+				_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeDirection);
 			}
-			_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeMultiplier);
+			_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeDirection);
 
 			// Update properties screen
 			if (_activeSpeakerID != "")

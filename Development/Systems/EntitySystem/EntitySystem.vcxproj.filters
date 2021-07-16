@@ -105,7 +105,6 @@
     <ClCompile Include="..\..\Source\billboard_entity_setters.cpp">
       <Filter>Data Structures\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\sky_entity.hpp">

@@ -9,19 +9,20 @@ void SkyEntityRenderer::bind()
 	_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_rotationMatrix", _renderBus.getSkyRotationMatrix());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_mainCubeMap", 0);
 	_shader.uploadUniform("u_mixCubeMap", 1);
 	
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void SkyEntityRenderer::unbind()
 {
+	// Disable depth testing
 	glDisable(GL_DEPTH_TEST);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -82,6 +83,5 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		glActiveTexture(GL_TEXTURE0);
 	}
 }

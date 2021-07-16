@@ -200,24 +200,24 @@ void AnimationEditor::_updateMiscellaneous()
 			// Update model inversion
 			if (_currentPartID == "")
 			{
-				_selectedPartInversionMultiplier = 1;
+				_selectedPartInversionDirection = 1;
 			}
 			else
 			{
 				// Check if inversion reached minimum
 				if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) == 0.0f)
 				{
-					_selectedPartInversionMultiplier *= -1;
+					_selectedPartInversionDirection *= -1;
 				}
 
 				// Check if inversion reached maximum
 				if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) == 1.0f)
 				{
-					_selectedPartInversionMultiplier *= -1;
+					_selectedPartInversionDirection *= -1;
 				}
 
 				// Set model inversion
-				float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionMultiplier));
+				float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionDirection));
 				_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 
 					_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) + speed, _currentPartID);
 			}

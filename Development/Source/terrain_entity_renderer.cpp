@@ -9,13 +9,11 @@ void TerrainEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 	
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix",		_renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane",	_renderBus.getClippingPlane());
-	
-	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",             _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_cameraFront",				  _renderBus.getCameraFront());
 	_shader.uploadUniform("u_ambientLightColor",		  _renderBus.getAmbientLightColor());
@@ -45,8 +43,6 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_isLightedShadowingEnabled",  _renderBus.isLightedShadowingEnabled());
 	_shader.uploadUniform("u_shadowMapSize",			  static_cast<int>(_renderBus.getShadowQuality()));
-
-	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap",  0);
 	_shader.uploadUniform("u_normalMap",   1);
 	_shader.uploadUniform("u_blendMap",    2);
@@ -62,16 +58,21 @@ void TerrainEntityRenderer::bind()
 	glActiveTexture(GL_TEXTURE9);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void TerrainEntityRenderer::unbind()
 {
+	// Unbind textures
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Disable depth testing
 	glDisable(GL_DEPTH_TEST);
 	glActiveTexture(GL_TEXTURE9);
-	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -110,7 +111,7 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
-		// Face culling
+		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
@@ -240,9 +241,8 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 			glActiveTexture(GL_TEXTURE8);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		glActiveTexture(GL_TEXTURE0);
 
-		// Face culling
+		// Disable face culling
 		glDisable(GL_CULL_FACE);
 	}
 }

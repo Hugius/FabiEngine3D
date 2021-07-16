@@ -25,8 +25,6 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_isSpecularLightEnabled",	 _renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_isPointLightEnabled",		 _renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_reflectionMap",   0);
 	_shader.uploadUniform("u_refractionMap",   1);
 	_shader.uploadUniform("u_depthMap",		   2);
@@ -42,25 +40,32 @@ void WaterEntityRenderer::bind()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
-	// Alpha blending
+	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void WaterEntityRenderer::unbind()
 {
-	glDisable(GL_DEPTH_TEST);
+	// Disable alpha blending
 	glDisable(GL_BLEND);
+
+	// Disable depth testing
+	glDisable(GL_DEPTH_TEST);
+
+	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -99,6 +104,13 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
+		// Check if camera is underwater
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getTranslation().y + entity->getWaveHeight()));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getTranslation().x - (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < entity->getTranslation().x + (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > entity->getTranslation().z - (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getTranslation().z + (entity->getSize() / 2.0f));
+
 		// Shader uniforms
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
@@ -114,13 +126,6 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_isReflective", entity->isReflective());
 		_shader.uploadUniform("u_isRefractive", entity->isRefractive());
 		_shader.uploadUniform("u_color", entity->getColor());
-
-		// Check if camera is underwater
-		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getTranslation().y + entity->getWaveHeight()));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getTranslation().x - (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < entity->getTranslation().x + (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > entity->getTranslation().z - (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getTranslation().z + (entity->getSize() / 2.0f));
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		
 		// Bind textures
@@ -181,6 +186,5 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
-		glActiveTexture(GL_TEXTURE0);
 	}
 }

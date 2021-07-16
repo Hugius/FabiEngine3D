@@ -20,7 +20,7 @@ public:
 
 	void addBillboardEntity
 	(
-		const string& ID, const string& texturePath,
+		const string& ID, const string& diffuseMapPath,
 		Vec3 T, Vec3 R, Vec3 S,
 		bool transparent, bool facingCameraX, bool facingCameraY
 	);

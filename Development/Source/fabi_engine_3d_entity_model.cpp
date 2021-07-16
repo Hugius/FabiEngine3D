@@ -256,9 +256,9 @@ void FabiEngine3D::modelEntity_setRotation(const string& ID, Vec3 rotation, cons
 	_core->_modelEntityManager.getEntity(ID)->setRotation(rotation, partID);
 }
 
-void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 localRotationOrigin, const string& partID)
+void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(localRotationOrigin, partID);
+	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(rotationOrigin, partID);
 }
 
 void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string& partID)

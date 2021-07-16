@@ -7,29 +7,32 @@ void DepthRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Clipping (minY & maxY)
+	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
 	glEnable(GL_CLIP_DISTANCE1);
 	glEnable(GL_CLIP_DISTANCE2);
 
-	// Depth testing
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void DepthRenderer::unbind()
 {
+	// Disable depth testing
+	glDisable(GL_DEPTH_TEST);
+
+	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_CLIP_DISTANCE2);
-	glDisable(GL_DEPTH_TEST);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -37,7 +40,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
-		// Face culling
+		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
@@ -60,7 +63,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Face culling
+		// Disable face culling
 		glDisable(GL_CULL_FACE);
 	}
 }
@@ -69,8 +72,10 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
-		// Shader uniforms
+		// Model matrix
 		Matrix44 modelMatrix = Matrix44::createTranslation(entity->getTranslation().x, entity->getTranslation().y, entity->getTranslation().z);
+		
+		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", modelMatrix);
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
@@ -94,7 +99,7 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 {
 	if (entity->isVisible())
 	{
-		// Face culling
+		// Enable face culling
 		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
@@ -109,8 +114,6 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_minAlpha", 0.25f);
-
-		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
 			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
@@ -120,17 +123,17 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 		}
 
-		// Bind & render
+		// Iterate through parts
 		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
 		{
 			// Temporary values
 			auto partID = entity->getPartIDs()[i];
 			auto buffer = entity->getRenderBuffers()[i];
 
-			// Model matrix
+			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
 
-			// Diffuse map
+			// Bind textures
 			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
@@ -152,18 +155,18 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
-			// Diffuse map
+			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
+
+			// Unbind buffer
+			glBindVertexArray(0);
 		}
 
-		// Unbind buffer
-		glBindVertexArray(0);
-
-		// Face culling
+		// Disable face culling
 		if (entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);

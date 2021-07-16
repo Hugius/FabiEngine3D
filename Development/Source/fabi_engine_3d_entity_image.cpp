@@ -6,9 +6,9 @@ void FabiEngine3D::imageEntity_deleteAll()
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible)
+void FabiEngine3D::imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible)
 {
-	_core->_imageEntityManager.addImageEntity(ID, texturePath, translation, rotation, scaling, false, isCentered);
+	_core->_imageEntityManager.addImageEntity(ID, diffuseMapPath, translation, rotation, scaling, false, isCentered);
 	_core->_imageEntityManager.getEntity(ID)->setVisible(visible);
 }
 
@@ -28,7 +28,7 @@ void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::imageEntity_changeTexture(const string& ID, const string& texturePath)
+void FabiEngine3D::imageEntity_changeDiffuseMap(const string& ID, const string& texturePath)
 {
 	_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
 }

@@ -84,7 +84,7 @@ private:
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
-	int _selectedPartInversionMultiplier = 1;
+	int _selectedPartInversionDirection = 1;
 
 	// Booleans
 	bool _isCreatingAnimation = false;

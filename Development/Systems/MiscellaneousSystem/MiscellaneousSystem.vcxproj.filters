@@ -90,6 +90,9 @@
     <ClInclude Include="..\..\Source\bloom_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\reflection_type.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\camera_misc.cpp">

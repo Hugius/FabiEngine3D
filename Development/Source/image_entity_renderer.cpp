@@ -14,14 +14,17 @@ void ImageEntityRenderer::bind()
 	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 
-	// Alpha blending
+	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void ImageEntityRenderer::unbind()
 {
+	// Disable alpha blending
 	glDisable(GL_BLEND);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -54,7 +57,7 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 
-		// Bind texture
+		// Bind textures
 		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
@@ -71,7 +74,7 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		// Unbind buffer
 		glBindVertexArray(0);
 
-		// Unbind texture
+		// Unbind textures
 		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);

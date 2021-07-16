@@ -73,9 +73,9 @@ void SceneEditor::_updateModelEditing()
 			// Update model blinking
 			if (_selectedModelID != _activeModelID)
 			{
-				_updateModelBlinking(_selectedModelID, _selectedModelInversionMultiplier);
+				_updateModelBlinking(_selectedModelID, _selectedModelInversionDirection);
 			}
-			_updateModelBlinking(_activeModelID, _activeModelInversionMultiplier);
+			_updateModelBlinking(_activeModelID, _activeModelInversionDirection);
 
 			// Update properties screen
 			if (_activeModelID != "")
@@ -324,7 +324,7 @@ void SceneEditor::_updateModelEditing()
 					if (entityID[0] != '@')
 					{
 						rightWindow->setActiveScreen("sceneEditorControls");
-						_selectedModelInversionMultiplier = 1;
+						_selectedModelInversionDirection = 1;
 						_activeModelID = "";
 						_selectedModelID = "";
 					}

@@ -78,6 +78,7 @@ void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 		// Unbind buffer
 		glBindVertexArray(0);
 
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

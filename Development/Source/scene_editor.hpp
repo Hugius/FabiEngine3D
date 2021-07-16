@@ -120,10 +120,10 @@ private:
 	// Miscellaneous
 	vector<string> _loadSceneIDs();
 	void _deleteSceneFile(const string& sceneID);
-	void _updateModelBlinking(const string& modelID, int& multiplier);
-	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
-	void _updateSpeakerAnimation(const string& modelID, int& multiplier);
-	void _updateLightBulbAnimation(const string& modelID, int& multiplier);
+	void _updateModelBlinking(const string& modelID, int& direction);
+	void _updateBillboardBlinking(const string& billboardID, int& direction);
+	void _updateSpeakerAnimation(const string& modelID, int& direction);
+	void _updateLightBulbAnimation(const string& modelID, int& direction);
 	void _selectModel(const string& modelID);
 	void _activateModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
@@ -172,8 +172,8 @@ private:
 	string _currentPreviewModelID = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
-	int _selectedModelInversionMultiplier = 1;
-	int _activeModelInversionMultiplier = 1;
+	int _selectedModelInversionDirection = 1;
+	int _activeModelInversionDirection = 1;
 	bool _dontResetSelectedModel = false;
 	static inline const float MODEL_BLINKING_SPEED = 0.025f;
 	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
@@ -184,8 +184,8 @@ private:
 	string _currentPreviewBillboardID = "";
 	string _selectedBillboardID = "";
 	string _activeBillboardID = "";
-	int _selectedBillboardInversionMultiplier = 1;
-	int _activeBillboardInversionMultiplier = 1;
+	int _selectedBillboardInversionDirection = 1;
+	int _activeBillboardInversionDirection = 1;
 	bool _dontResetSelectedBillboard = false;
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
@@ -206,8 +206,8 @@ private:
 	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
 	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
 	static inline const float SOUND_DISTANCE_CHANGING_SPEED = 0.05f;
-	int _selectedSpeakerSizeMultiplier = 1;
-	int _activeSpeakerSizeMultiplier = 1;
+	int _selectedSpeakerSizeDirection = 1;
+	int _activeSpeakerSizeDirection = 1;
 	bool _dontResetSelectedSpeaker = false;
 
 	// Point light variables
@@ -221,8 +221,8 @@ private:
 	static inline const float LIGHT_BULB_ANIMATION_SPEED = 0.025f;
 	static inline const float LIGHTING_CHANGING_SPEED = 0.01f;
 	static inline const float LIGHTING_COLOR_CHANGING_SPEED = 0.005f;
-	int _selectedLightBulbSizeMultiplier = 1;
-	int _activeLightBulbSizeMultiplier = 1;
+	int _selectedLightBulbSizeDirection = 1;
+	int _activeLightBulbSizeDirection = 1;
 	string _selectedLightBulbID = "";
 	string _activeLightBulbID = "";
 

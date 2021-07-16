@@ -68,9 +68,9 @@ void SceneEditor::_updateBillboardEditing()
 			// Update billboard blinking
 			if (_selectedBillboardID != _activeBillboardID)
 			{
-				_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardInversionMultiplier);
+				_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardInversionDirection);
 			}
-			_updateBillboardBlinking(_activeBillboardID, _activeBillboardInversionMultiplier);
+			_updateBillboardBlinking(_activeBillboardID, _activeBillboardInversionDirection);
 
 			// Update properties screen
 			if (_activeBillboardID != "")
@@ -199,7 +199,7 @@ void SceneEditor::_updateBillboardEditing()
 					if (entityID[0] != '@')
 					{
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
-						_selectedBillboardInversionMultiplier = 1;
+						_selectedBillboardInversionDirection = 1;
 						_activeBillboardID = "";
 						_selectedBillboardID = "";
 					}

@@ -98,7 +98,7 @@ void AnimationEditor::unload()
 	_currentPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
 	_currentFrameIndex = 0;
-	_selectedPartInversionMultiplier = 1;
+	_selectedPartInversionDirection = 1;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isEditingAnimation = false;

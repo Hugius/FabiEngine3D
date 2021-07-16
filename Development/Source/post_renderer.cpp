@@ -28,14 +28,17 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_blurMap",  3);
 	_shader.uploadUniform("u_flareMap", 4);
 
-	// Alpha blending
+	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void PostRenderer::unbind()
 {
+	// Disable alpha blending
 	glDisable(GL_BLEND);
+
+	// Unbind shader
 	_shader.unbind();
 }
 

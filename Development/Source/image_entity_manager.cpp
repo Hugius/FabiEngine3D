@@ -46,7 +46,7 @@ void ImageEntityManager::addImageEntity(const string& ID, const string& textureP
 	entity->setCentered(isCentered);
 
 	// Load diffuse map
-	entity->setTexture(_textureLoader.getTexture2D(texturePath, false, false));
+	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
 }
 
 void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)

@@ -11,7 +11,7 @@ public:
 	void updateModelMatrix();
 
 	// Texture & color
-	void setTexture(GLuint value);
+	void setDiffuseMap(GLuint value);
 	void setColor(Vec3 value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
@@ -44,12 +44,12 @@ public:
 	void increaseSpriteAnimationLoops();
 
 	// Texture & color
-	const GLuint getTexture() const;
+	const GLuint getDiffuseMap() const;
 	const Vec3 getColor() const;
 	const float getAlpha() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
-	const bool hasTexture() const;
+	const bool hasDiffuseMap() const;
 
 	// Transformation
 	const bool isCentered() const;
@@ -80,7 +80,7 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	GLuint _texture = 0;
+	GLuint _diffuseMap = 0;
 
 	Vec3 _color = Vec3(1.0f);
 

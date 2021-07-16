@@ -29,21 +29,31 @@ void ModelEditor::_loadMesh()
 				if (_fe3d.modelEntity_isMultiParted(_currentModelID))
 				{
 					// Clear texture cache
-					for (const auto& path : _fe3d.modelEntity_getDiffuseMapPaths(_currentModelID))
+					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
 					{
-						_fe3d.misc_clearTextureCache2D(path);
-					}
-					for (const auto& path : _fe3d.modelEntity_getLightMapPaths(_currentModelID))
-					{
-						_fe3d.misc_clearTextureCache2D(path);
-					}
-					for (const auto& path : _fe3d.modelEntity_getReflectionMapPaths(_currentModelID))
-					{
-						_fe3d.misc_clearTextureCache2D(path);
-					}
-					for (const auto& path : _fe3d.modelEntity_getNormalMapPaths(_currentModelID))
-					{
-						_fe3d.misc_clearTextureCache2D(path);
+						// Diffuse maps
+						if (!_fe3d.modelEntity_getDiffuseMapPath(partID).empty())
+						{
+							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getDiffuseMapPath(partID));
+						}
+
+						// Light maps
+						if (!_fe3d.modelEntity_getLightMapPath(partID).empty())
+						{
+							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getLightMapPath(partID));
+						}
+
+						// Reflection maps
+						if (!_fe3d.modelEntity_getReflectionMapPath(partID).empty())
+						{
+							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getReflectionMapPath(partID));
+						}
+
+						// Normal maps
+						if (!_fe3d.modelEntity_getNormalMapPath(partID).empty())
+						{
+							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getNormalMapPath(partID));
+						}
 					}
 				}
 
@@ -220,6 +230,14 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			if (reflectionMapPath != "")
 			{
 				_fe3d.modelEntity_setReflectionMap(modelName, reflectionMapPath);
+				if (reflectionType == 1)
+				{
+					_fe3d.modelEntity_setSkyReflective(modelName, true);
+				}
+				else if (reflectionType == 2)
+				{
+					_fe3d.modelEntity_setSceneReflective(modelName, true);
+				}
 			}
 
 			// Normal map
@@ -243,16 +261,6 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			_fe3d.modelEntity_setColor(modelName, color); 
 			_fe3d.modelEntity_setUvRepeat(modelName, uvRepeat);
 			_fe3d.modelEntity_setLevelOfDetailEntity(modelName, lodEntityID);
-
-			// Reflection type
-			if (reflectionType == 1)
-			{
-				_fe3d.modelEntity_setSkyReflective(modelName, true);
-			}
-			else if (reflectionType == 2)
-			{
-				_fe3d.modelEntity_setSceneReflective(modelName, true);
-			}
 		}
 
 		return true;

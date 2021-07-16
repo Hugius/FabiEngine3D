@@ -3,287 +3,173 @@
 
 #include <algorithm>
 
-void ModelEntity::addPart(const string& value)
+void ModelEntity::addPart(const string& ID)
 {
-	_partIDs.push_back(value);
-	_modelMatrices.push_back(Matrix44(1.0f));
-	_translations.push_back(Vec3(0.0f));
-	_rotations.push_back(Vec3(0.0f));
-	_rotationOrigins.push_back(Vec3(0.0f));
-	_scalings.push_back(Vec3(1.0f));
-	_colors.push_back(Vec3(1.0f));
+	_parts.push_back(PartData(ID));
 }
 
 void ModelEntity::updateModelMatrix()
 {
-	for (size_t i = 0; i < _modelMatrices.size(); i++)
+	for (size_t i = 0; i < _parts.size(); i++)
 	{
 		// Instanced modelpart cannot have a modelmatrix position
 		if (!getRenderBuffers().empty() && getRenderBuffer(static_cast<unsigned int>(i))->isInstanced())
 		{
-			_translations[i] = Vec3(0.0f);
+			_parts[i].localTranslation = Vec3(0.0f);
 		}
 
 		// Identity matrix
-		_modelMatrices[i] = Matrix44(1.0f);
+		_parts[i].modelMatrix = Matrix44(1.0f);
 
 		// Base translation matrix
 		Matrix44 baseTranslationMatrix = Matrix44::createTranslation(_baseTranslation.x, _baseTranslation.y, _baseTranslation.z);
-		_modelMatrices[i] = _modelMatrices[i] * baseTranslationMatrix;
+		_parts[i].modelMatrix = _parts[i].modelMatrix * baseTranslationMatrix;
 
 		// Translation matrix
-		Matrix44 translationMatrix = Matrix44::createTranslation(_translations[i].x, _translations[i].y, _translations[i].z);
-		_modelMatrices[i] = _modelMatrices[i] * translationMatrix;
+		Matrix44 translationMatrix = Matrix44::createTranslation(_parts[i].localTranslation.x, _parts[i].localTranslation.y, _parts[i].localTranslation.z);
+		_parts[i].modelMatrix = _parts[i].modelMatrix * translationMatrix;
 
 		// Base rotation origin matrix - translate
 		Matrix44 baseRotationOriginMatrix = Matrix44::createTranslation(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
-		_modelMatrices[i] = _modelMatrices[i] * baseRotationOriginMatrix;
+		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationOriginMatrix;
 
 		// Base rotation matrix
 		Matrix44 baseRotationMatrix = Matrix44::createRotation(
 			Math::degreesToRadians(_baseRotation.x),
 			Math::degreesToRadians(_baseRotation.y),
 			Math::degreesToRadians(_baseRotation.z));
-		_modelMatrices[i] = _modelMatrices[i] * baseRotationMatrix;
+		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationMatrix;
 
 		// Base rotation origin matrix - translate back
 		baseRotationOriginMatrix = Matrix44::createTranslation(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
-		_modelMatrices[i] = _modelMatrices[i] * baseRotationOriginMatrix;
+		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationOriginMatrix;
 
 		// Rotation origin matrix - translate
-		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(_rotationOrigins[i].x, _rotationOrigins[i].y, _rotationOrigins[i].z);
-		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
+		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(_parts[i].localRotationOrigin.x, _parts[i].localRotationOrigin.y, _parts[i].localRotationOrigin.z);
+		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationOriginMatrix;
 
 		// Rotation matrix
 		Matrix44 rotationMatrix = Matrix44::createRotation(
-			Math::degreesToRadians(_rotations[i].x),
-			Math::degreesToRadians(_rotations[i].y),
-			Math::degreesToRadians(_rotations[i].z));
-		_modelMatrices[i] = _modelMatrices[i] * rotationMatrix;
+			Math::degreesToRadians(_parts[i].localRotation.x),
+			Math::degreesToRadians(_parts[i].localRotation.y),
+			Math::degreesToRadians(_parts[i].localRotation.z));
+		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationMatrix;
 
 		// Rotation origin matrix - translate back
-		rotationOriginMatrix = Matrix44::createTranslation(-_rotationOrigins[i].x, -_rotationOrigins[i].y, -_rotationOrigins[i].z);
-		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
+		rotationOriginMatrix = Matrix44::createTranslation(-_parts[i].localRotationOrigin.x, -_parts[i].localRotationOrigin.y, -_parts[i].localRotationOrigin.z);
+		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationOriginMatrix;
 
 		// Base scaling matrix
 		Matrix44 baseScalingMatrix = Matrix44::createScaling(_baseScaling.x, _baseScaling.y, _baseScaling.z);
-		_modelMatrices[i] = _modelMatrices[i] * baseScalingMatrix;
+		_parts[i].modelMatrix = _parts[i].modelMatrix * baseScalingMatrix;
 
 		// Scaling matrix
-		Matrix44 scalingMatrix = Matrix44::createScaling(_scalings[i].x, _scalings[i].y, _scalings[i].z);
-		_modelMatrices[i] = _modelMatrices[i] * scalingMatrix;
+		Matrix44 scalingMatrix = Matrix44::createScaling(_parts[i].localScaling.x, _parts[i].localScaling.y, _parts[i].localScaling.z);
+		_parts[i].modelMatrix = _parts[i].modelMatrix * scalingMatrix;
 	}
 }
 
-void ModelEntity::setDiffuseMap(GLuint value)
+void ModelEntity::setDiffuseMap(GLuint value, const string& partID)
 {
-	if (_diffuseMaps.empty())
-	{
-		_diffuseMaps.push_back(value);
-	}
-	else
-	{
-		_diffuseMaps[0] = value;
-	}
+	_parts[_getPartIndex(partID)].diffuseMap = value;
 }
 
-void ModelEntity::setLightMap(GLuint value)
+void ModelEntity::setLightMap(GLuint value, const string& partID)
 {
-	if (_lightMaps.empty())
-	{
-		_lightMaps.push_back(value);
-	}
-	else
-	{
-		_lightMaps[0] = value;
-	}
+	_parts[_getPartIndex(partID)].lightMap = value;
 }
 
-void ModelEntity::setReflectionMap(GLuint value)
+void ModelEntity::setReflectionMap(GLuint value, const string& partID)
 {
-	if (_reflectionMaps.empty())
-	{
-		_reflectionMaps.push_back(value);
-	}
-	else
-	{
-		_reflectionMaps[0] = value;
-	}
+	_parts[_getPartIndex(partID)].reflectionMap = value;
 }
 
-void ModelEntity::setNormalMap(GLuint value)
+void ModelEntity::setNormalMap(GLuint value, const string& partID)
 {
-	if (_normalMaps.empty())
-	{
-		_normalMaps.push_back(value);
-	}
-	else
-	{
-		_normalMaps[0] = value;
-	}
-}
-
-void ModelEntity::addDiffuseMap(GLuint value)
-{
-	_diffuseMaps.push_back(value);
-}
-
-void ModelEntity::addLightMap(GLuint value)
-{
-	_lightMaps.push_back(value);
-}
-
-void ModelEntity::addReflectionMap(GLuint value)
-{
-	_reflectionMaps.push_back(value);
-}
-
-void ModelEntity::addNormalMap(GLuint value)
-{
-	_normalMaps.push_back(value);
-}
-
-void ModelEntity::setOriginalTranslation(Vec3 value)
-{
-	_originalTranslation = value;
+	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
 void ModelEntity::setTranslation(Vec3 value, const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_baseTranslation = value;
 	}
 	else
 	{
-		_translations[_getPartIndex(partID)] = value;
+		_parts[_getPartIndex(partID)].localTranslation = value;
 	}
-}
-
-void ModelEntity::setOriginalRotation(Vec3 value)
-{
-	_originalRotation = value;
-
-	// Limit rotation
-	_originalRotation.x = std::fmodf(_originalRotation.x, 360.0f);
-	_originalRotation.y = std::fmodf(_originalRotation.y, 360.0f);
-	_originalRotation.z = std::fmodf(_originalRotation.z, 360.0f);
 }
 
 void ModelEntity::setRotation(Vec3 value, const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	value = Vec3(std::fmodf(value.x, 360.0f), std::fmodf(value.y, 360.0f), std::fmodf(value.z, 360.0f));
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_baseRotation = value;
-
-		// Limit rotation
-		_baseRotation.x = std::fmodf(_baseRotation.x, 360.0f);
-		_baseRotation.y = std::fmodf(_baseRotation.y, 360.0f);
-		_baseRotation.z = std::fmodf(_baseRotation.z, 360.0f);
 	}
 	else
 	{
-		_rotations[_getPartIndex(partID)] = value;
-
-		// Limit rotation
-		_rotations[_getPartIndex(partID)].x = std::fmodf(_rotations[_getPartIndex(partID)].x, 360.0f);
-		_rotations[_getPartIndex(partID)].y = std::fmodf(_rotations[_getPartIndex(partID)].y, 360.0f);
-		_rotations[_getPartIndex(partID)].z = std::fmodf(_rotations[_getPartIndex(partID)].z, 360.0f);
+		_parts[_getPartIndex(partID)].localRotation = value;
 	}
 }
 
 void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_baseRotationOrigin = value;
 	}
 	else
 	{
-		_rotationOrigins[_getPartIndex(partID)] = value;
+		_parts[_getPartIndex(partID)].localRotationOrigin = value;
 	}
-}
-
-void ModelEntity::setOriginalScaling(Vec3 value)
-{
-	_originalScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
 void ModelEntity::setScaling(Vec3 value, const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	value = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
-		_baseScaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+		_baseScaling = value;
 	}
 	else
 	{
-		_scalings[_getPartIndex(partID)] = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
-	}
-}
-
-void ModelEntity::translate(Vec3 value, const string& partID)
-{
-	if (partID.empty() && _partIDs.size() > 1)
-	{
-		_baseTranslation += value;
-	}
-	else
-	{
-		_translations[_getPartIndex(partID)] += value;
-	}
-}
-
-void ModelEntity::rotate(Vec3 value, const string& partID)
-{
-	if (partID.empty() && _partIDs.size() > 1)
-	{
-		_baseRotation += value;
-
-		// Limit rotation
-		_baseRotation.x = std::fmodf(_baseRotation.x, 360.0f);
-		_baseRotation.y = std::fmodf(_baseRotation.y, 360.0f);
-		_baseRotation.z = std::fmodf(_baseRotation.z, 360.0f);
-	}
-	else
-	{
-		_rotations[_getPartIndex(partID)] += value;
-
-		// Limit rotation
-		_rotations[_getPartIndex(partID)].x = std::fmodf(_rotations[_getPartIndex(partID)].x, 360.0f);
-		_rotations[_getPartIndex(partID)].y = std::fmodf(_rotations[_getPartIndex(partID)].y, 360.0f);
-		_rotations[_getPartIndex(partID)].z = std::fmodf(_rotations[_getPartIndex(partID)].z, 360.0f);
-	}
-}
-
-void ModelEntity::scale(Vec3 value, const string& partID)
-{
-	if (partID.empty() && _partIDs.size() > 1)
-	{
-		_baseScaling += value;
-		_baseScaling = Vec3(std::max(0.0f, _baseScaling.x), std::max(0.0f, _baseScaling.y), std::max(0.0f, _baseScaling.z));
-	}
-	else
-	{
-		_scalings[_getPartIndex(partID)] += value;
-		_scalings[_getPartIndex(partID)] = Vec3(
-				std::max(0.0f, _scalings[_getPartIndex(partID)].x), 
-				std::max(0.0f, _scalings[_getPartIndex(partID)].y), 
-				std::max(0.0f, _scalings[_getPartIndex(partID)].z));
+		_parts[_getPartIndex(partID)].localScaling = value;
 	}
 }
 
 void ModelEntity::setColor(Vec3 value, const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	value = Vec3(std::clamp(value.x, 0.0f, 1.0f), std::clamp(value.y, 0.0f, 1.0f), std::clamp(value.z, 0.0f, 1.0f));
+
+	if (partID.empty())
 	{
-		for (auto& color : _colors)
+		for (auto& part : _parts)
 		{
-			color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+			part.color = value;
 		}
 	}
 	else
 	{
-		_colors[_getPartIndex(partID)] = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+		_parts[_getPartIndex(partID)].color = value;
+	}
+}
+
+void ModelEntity::setInversion(float value, const string& partID)
+{
+	value = std::clamp(value, 0.0f, 1.0f);
+
+	if (partID.empty())
+	{
+		for (auto& part : _parts)
+		{
+			part.inversion = value;
+		}
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].inversion = value;
 	}
 }
 
@@ -292,49 +178,29 @@ void ModelEntity::setMeshPath(const string& value)
 	_meshPath = value;
 }
 
-void ModelEntity::setDiffuseMapPath(const string& value)
+void ModelEntity::setDiffuseMapPath(const string& value, const string& partID)
 {
-	_diffuseMapPath = value;
+	_parts[_getPartIndex(partID)].diffuseMapPath = value;
 }
 
-void ModelEntity::setLightMapPath(const string& value)
+void ModelEntity::setLightMapPath(const string& value, const string& partID)
 {
-	_lightMapPath = value;
+	_parts[_getPartIndex(partID)].lightMapPath = value;
 }
 
-void ModelEntity::setReflectionMapPath(const string& value)
+void ModelEntity::setReflectionMapPath(const string& value, const string& partID)
 {
-	_reflectionMapPath = value;
+	_parts[_getPartIndex(partID)].reflectionMapPath = value;
 }
 
-void ModelEntity::setNormalMapPath(const string& value)
+void ModelEntity::setNormalMapPath(const string& value, const string& partID)
 {
-	_normalMapPath = value;
+	_parts[_getPartIndex(partID)].normalMapPath = value;
 }
 
 void ModelEntity::setLodEntityID(const string& value)
 {
 	_lodEntityID = value;
-}
-
-void ModelEntity::addDiffuseMapPath(string value)
-{
-	_diffuseMapPaths.push_back(value);
-}
-
-void ModelEntity::addLightMapPath(string value)
-{
-	_lightMapPaths.push_back(value);
-}
-
-void ModelEntity::addReflectionMapPath(string value)
-{
-	_reflectionMapPaths.push_back(value);
-}
-
-void ModelEntity::addNormalMapPath(string value)
-{
-	_normalMapPaths.push_back(value);
 }
 
 void ModelEntity::setTransparent(bool value)
@@ -407,38 +273,14 @@ void ModelEntity::setBright(bool value)
 	_isBright = value;
 }
 
-void ModelEntity::clearDiffuseMaps()
+void ModelEntity::clearParts()
 {
-	_diffuseMaps.clear();
-	_diffuseMapPaths.clear();
-}
-
-void ModelEntity::clearLightMaps()
-{
-	_lightMaps.clear();
-	_lightMapPaths.clear();
-}
-
-void ModelEntity::clearReflectionMaps()
-{
-	_reflectionMaps.clear();
-	_reflectionMapPaths.clear();
-}
-
-void ModelEntity::clearNormalMaps()
-{
-	_normalMaps.clear();
-	_normalMapPaths.clear();
+	_parts.clear();
 }
 
 void ModelEntity::setLightness(float value)
 {
 	_lightness = std::max(0.0f, value);
-}
-
-void ModelEntity::setInversion(float value)
-{
-	_inversion = value;
 }
 
 void ModelEntity::setSpecularFactor(float value)

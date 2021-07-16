@@ -70,7 +70,7 @@ void TextEntityManager::addTextEntity
 	else // Load static text as a whole
 	{
 		entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
-		entity->setTexture(_textureLoader.getText(textContent, entity->getFontPath()));
+		entity->setDiffuseMap(_textureLoader.getText(textContent, entity->getFontPath()));
 		entity->updateModelMatrix();
 	}
 }
@@ -104,7 +104,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 				// Check if font loading went well
 				if (texture != 0)
 				{
-					newCharacter->setTexture(texture);
+					newCharacter->setDiffuseMap(texture);
 					entity->addCharacterEntity(newCharacter);
 				}
 				else

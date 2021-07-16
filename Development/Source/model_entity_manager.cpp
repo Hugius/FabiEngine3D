@@ -35,9 +35,6 @@ void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath
 	auto entity = getEntity(ID);
 
 	// Load transformation
-	entity->setOriginalTranslation(T);
-	entity->setOriginalRotation(R);
-	entity->setOriginalScaling(S);
 	entity->setTranslation(T);
 	entity->setRotation(R);
 	entity->setScaling(S);
@@ -50,10 +47,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	auto entity = getEntity(ID);
 	entity->setMeshPath(meshPath);
 	entity->clearRenderBuffers();
-	entity->clearDiffuseMaps();
-	entity->clearLightMaps();
-	entity->clearReflectionMaps();
-	entity->clearNormalMaps();
+	entity->clearParts();
 
 	// Check if model loading failed
 	if (partsPointer == nullptr)
@@ -66,16 +60,16 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	auto parts = *partsPointer;
 
 	// Check if multiparted model actually has multiple parts
-	if (parts.size() == 1 && !parts.back().name.empty())
+	if (parts.size() == 1 && !parts[0].ID.empty())
 	{
 		// Add empty part so the entity does not crash the engine
-		parts.back().name = "";
+		parts[0].ID = "";
 
 		// Warning
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
 	}
 
-	// Create render buffers
+	// Process parts
 	for (const auto& part : parts)
 	{
 		// Temporary values
@@ -102,69 +96,37 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// Render buffer
 		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
-		// New transformation part
-		entity->addPart(part.name);
+		// New model part
+		entity->addPart(part.ID);
 
-		// Load an mesh part diffuse map
+		// Load diffuse map
 		if (part.diffuseMapPath != "")
 		{
-			entity->addDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true));
-			entity->addDiffuseMapPath(part.diffuseMapPath);
-		}
-		else
-		{
-			// Only add empty diffuse maps if multiparted model
-			if (parts.size() > 1)
-			{
-				entity->addDiffuseMap(0);
-			}
+			entity->setDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true), part.ID);
+			entity->setDiffuseMapPath(part.diffuseMapPath, part.ID);
 		}
 
-		// Load an mesh part light map
+		// Load model part light map
 		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
-			entity->addLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true));
-			entity->addLightMapPath(part.lightMapPath);
-		}
-		else
-		{
-			// Only add empty light maps if multiparted model
-			if (parts.size() > 1)
-			{
-				entity->addLightMap(0);
-			}
+			entity->setLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true), part.ID);
+			entity->setLightMapPath(part.lightMapPath, part.ID);
 		}
 
-		// Load an mesh part normal map
-		if (part.normalMapPath != "")
-		{
-			entity->addNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true));
-			entity->addNormalMapPath(part.normalMapPath);
-		}
-		else
-		{
-			// Only add empty normal maps if multiparted model
-			if (parts.size() > 1)
-			{
-				entity->addNormalMap(0);
-			}
-		}
-
-		// Load an mesh part reflection map
+		// Load model part reflection map
 		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
-			entity->addReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true));
-			entity->addReflectionMapPath(part.reflectionMapPath);
+			entity->setReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true), part.ID);
+			entity->setReflectionMapPath(part.reflectionMapPath, part.ID);
 		}
-		else
+
+		// Load an model normal map
+		if (part.normalMapPath != "")
 		{
-			// Only add empty reflection maps if multiparted model
-			if (parts.size() > 1)
-			{
-				entity->addReflectionMap(0);
-			}
+			entity->setNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true), part.ID);
+			entity->setNormalMapPath(part.normalMapPath, part.ID);
 		}
 	}
 }

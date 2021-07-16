@@ -9,6 +9,7 @@ void ShadowRenderer::bind()
 
 	// Shader uniforms
 	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
+	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Clipping (minY & maxY)
 	glEnable(GL_CLIP_DISTANCE0);
@@ -42,20 +43,22 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_diffuseMap", 0);
 
 		// Bind & render
-		unsigned int index = 0;
-		for (const auto& buffer : entity->getRenderBuffers())
+		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
 		{
+			// Temporary values
+			auto partID = entity->getPartIDs()[i];
+			auto buffer = entity->getRenderBuffers()[i];
+
 			// Model matrix
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
 
 			// Diffuse map transparency
-			if (entity->isTransparent() && entity->hasDiffuseMap())
+			if (entity->isTransparent() && entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
 
 			// Bind
@@ -72,8 +75,6 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
-
-			index++;
 		}
 
 		// Unbind
@@ -98,7 +99,6 @@ void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_diffuseMap", 0);
 
 		// Model matrix
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

@@ -23,7 +23,7 @@ GLuint RenderFramebuffer::getFBO()
 	return _fbo;
 }
 
-GLuint RenderFramebuffer::getTexture(int ID)
+GLuint RenderFramebuffer::getDiffuseMap(int ID)
 {
 	return _textures[ID];
 }

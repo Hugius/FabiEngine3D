@@ -32,6 +32,7 @@
     <ClCompile Include="..\..\Source\image_entity_manager.cpp" />
     <ClCompile Include="..\..\Source\light_entity.cpp" />
     <ClCompile Include="..\..\Source\light_entity_manager.cpp" />
+    <ClCompile Include="..\..\Source\model_entity.cpp" />
     <ClCompile Include="..\..\Source\model_entity_getters.cpp" />
     <ClCompile Include="..\..\Source\model_entity_manager.cpp" />
     <ClCompile Include="..\..\Source\model_entity_setters.cpp" />

@@ -26,7 +26,6 @@ public:
 		}
 		speedMultiplier = std::max(0.0f, speedMultiplier);
 		initialScaling = Vec3(std::max(0.0f, initialScaling.x), std::max(0.0f, initialScaling.y), std::max(0.0f, initialScaling.z));
-		initialColor = Vec3(std::max(0.0f, initialColor.r), std::max(0.0f, initialColor.g), std::max(0.0f, initialColor.b));
 	}
 
 	const string ID;
@@ -39,7 +38,6 @@ public:
 	map<string, Vec3> totalScalings;
 
 	Vec3 initialScaling = Vec3(0.0f);
-	Vec3 initialColor = Vec3(0.0f);
 
 	string previewModelID = "";
 	string oldPreviewModelID = "";

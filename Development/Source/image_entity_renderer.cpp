@@ -52,13 +52,13 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isPerspectiveDepthEntity", entity->isPerspectiveDepthEntity());
-		_shader.uploadUniform("u_hasTexture", entity->getTexture() != 0);
+		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 
 		// Bind texture
-		if (entity->hasTexture())
+		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getTexture());
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		}
 
 		// Bind buffer
@@ -72,7 +72,7 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		glBindVertexArray(0);
 
 		// Unbind texture
-		if (entity->hasTexture())
+		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

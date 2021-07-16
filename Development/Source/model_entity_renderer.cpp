@@ -59,8 +59,8 @@ void ModelEntityRenderer::bind()
 	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 	_shader.uploadUniform("u_lightMap", 1);
-	_shader.uploadUniform("u_normalMap", 2);
-	_shader.uploadUniform("u_reflectionMap", 3);
+	_shader.uploadUniform("u_reflectionMap", 2);
+	_shader.uploadUniform("u_normalMap", 3);
 	_shader.uploadUniform("u_sceneReflectionMap", 4);
 	_shader.uploadUniform("u_shadowMap", 5);
 	_shader.uploadUniform("u_mainSkyMap", 6);
@@ -168,7 +168,6 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_inversion", entity->getInversion());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -187,55 +186,56 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		}
 
 		// Bind & render
-		unsigned int index = 0;
-		for (const auto& buffer : entity->getRenderBuffers())
+		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
 		{
-			// Color
-			_shader.uploadUniform("u_color", entity->getColor(index));
+			// Temporary values
+			auto partID = entity->getPartIDs()[i];
+			auto buffer = entity->getRenderBuffers()[i];
+
+			// Miscellaneous shader uniforms
+			_shader.uploadUniform("u_color", entity->getColor(partID));
+			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
 
 			// Model matrix
-			auto normalModelMatrix = entity->getModelMatrix(index);
+			const auto& modelMatrix = entity->getModelMatrix(partID);
+			auto normalModelMatrix = modelMatrix;
 			normalModelMatrix.transpose();
 			normalModelMatrix.invert();
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+			_shader.uploadUniform("u_modelMatrix", modelMatrix);
 			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 
 			// Check if entity has maps
-			bool hasDiffuseMap = (entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0);
-			bool hasLightMap = (entity->hasLightMap() && entity->getLightMap(index) != 0);
-			bool hasNormalMap = (entity->hasNormalMap() && entity->getNormalMap(index) != 0);
-			bool hasReflectionMap = (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0);
-			_shader.uploadUniform("u_hasDiffuseMap", hasDiffuseMap);
-			_shader.uploadUniform("u_hasLightMap", hasLightMap);
-			_shader.uploadUniform("u_hasNormalMap", hasNormalMap);
-			_shader.uploadUniform("u_hasReflectionMap", hasReflectionMap);
+			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
+			_shader.uploadUniform("u_hasLightMap", entity->hasLightMap(partID));
+			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
+			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
 
 			// Diffuse map
-			if (hasDiffuseMap)
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
 
 			// Light map
-			if (hasLightMap)
+			if (entity->hasLightMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
+				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(partID));
+			}
+
+			// Reflection map
+			if (entity->hasReflectionMap(partID))
+			{
+				glActiveTexture(GL_TEXTURE2);
+				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
 
 			// Normal map
-			if (hasNormalMap)
-			{
-				glActiveTexture(GL_TEXTURE2);
-				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(index));
-			}
-
-			// Reflection(part) map
-			if (hasReflectionMap)
+			if (entity->hasNormalMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE3);
-				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));
+				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
 			// Bind
@@ -256,36 +256,35 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			}
 
 			// Diffuse map
-			if (hasDiffuseMap)
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
 			// Light map
-			if (hasLightMap)
+			if (entity->hasLightMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Normal map
-			if (hasNormalMap)
+			// Reflection map
+			if (entity->hasReflectionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Reflection(part) map
-			if (hasReflectionMap)
+			// Normal map
+			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE3);
+				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
 			// Miscellaneous
 			glActiveTexture(GL_TEXTURE0);
-			index++;
 		}
 
 		// Unbind buffer

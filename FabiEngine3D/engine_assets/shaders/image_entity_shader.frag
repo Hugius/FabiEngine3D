@@ -22,7 +22,7 @@ uniform float u_farZ;
 
 // Boolean uniforms
 uniform bool u_isPerspectiveDepthEntity;
-uniform bool u_hasTexture;
+uniform bool u_hasDiffuseMap;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -50,7 +50,7 @@ void main()
 	}
 	else
 	{
-		if(u_hasTexture) // Render diffuse map
+		if(u_hasDiffuseMap) // Render diffuse map
 		{
 			vec4 texColor = texture(u_diffuseMap, f_uv);
 			o_finalColor = vec4(texColor.rgb * u_color, texColor.a * u_alpha);

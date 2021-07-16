@@ -30,7 +30,7 @@ void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
 
 void FabiEngine3D::imageEntity_changeTexture(const string& ID, const string& texturePath)
 {
-	_core->_imageEntityManager.getEntity(ID)->setTexture(_core->_textureLoader.getTexture2D(texturePath, false, false));
+	_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
 }
 
 const bool FabiEngine3D::imageEntity_isExisting(const string& ID)

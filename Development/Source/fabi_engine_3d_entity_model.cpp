@@ -230,17 +230,20 @@ const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->translate(factor, partID);
+	auto translation = _core->_modelEntityManager.getEntity(ID)->getTranslation(partID);
+	_core->_modelEntityManager.getEntity(ID)->setTranslation(translation + factor, partID);
 }
 
 void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->rotate(factor, partID);
+	auto rotation = _core->_modelEntityManager.getEntity(ID)->getRotation(partID);
+	_core->_modelEntityManager.getEntity(ID)->setRotation(rotation + factor, partID);
 }
 
 void FabiEngine3D::modelEntity_scale(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->scale(factor, partID);
+	auto scaling = _core->_modelEntityManager.getEntity(ID)->getScaling(partID);
+	_core->_modelEntityManager.getEntity(ID)->setScaling(scaling + factor, partID);
 }
 
 void FabiEngine3D::modelEntity_setPosition(const string& ID, Vec3 position, const string& partID)
@@ -253,9 +256,9 @@ void FabiEngine3D::modelEntity_setRotation(const string& ID, Vec3 rotation, cons
 	_core->_modelEntityManager.getEntity(ID)->setRotation(rotation, partID);
 }
 
-void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID)
+void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 localRotationOrigin, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(rotationOrigin, partID);
+	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(localRotationOrigin, partID);
 }
 
 void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string& partID)
@@ -283,6 +286,11 @@ const Vec3 FabiEngine3D::modelEntity_getSize(const string& ID, const string& par
 	return _core->_modelEntityManager.getEntity(ID)->getScaling(partID);
 }
 
+const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& partID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
+}
+
 void FabiEngine3D::modelEntity_setSpecularFactor(const string& ID, float intensity)
 {
 	_core->_modelEntityManager.getEntity(ID)->setSpecularFactor(intensity);
@@ -298,9 +306,9 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, float lightness)
 	_core->_modelEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::modelEntity_setInversion(const string& ID, float inversion)
+void FabiEngine3D::modelEntity_setInversion(const string& ID, float inversion, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setInversion(inversion);
+	_core->_modelEntityManager.getEntity(ID)->setInversion(inversion, partID);
 }
 
 void FabiEngine3D::modelEntity_setMinHeight(const string& ID, float height)
@@ -364,9 +372,9 @@ const float FabiEngine3D::modelEntity_getLightness(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->getLightness();
 }
 
-const float FabiEngine3D::modelEntity_getInversion(const string& ID)
+const float FabiEngine3D::modelEntity_getInversion(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getInversion();
+	return _core->_modelEntityManager.getEntity(ID)->getInversion(partID);
 }
 
 const float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)
@@ -397,11 +405,6 @@ const float FabiEngine3D::modelEntity_getMaxHeight(const string& ID)
 const float FabiEngine3D::modelEntity_getUvRepeat(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getUvRepeat();
-}
-
-const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& partID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
 }
 
 const string& FabiEngine3D::modelEntity_getMeshPath(const string& ID)
@@ -446,27 +449,7 @@ const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& I
 	}
 }
 
-const vector<string>& FabiEngine3D::modelEntity_getDiffuseMapPaths(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPaths();
-}
-
-const vector<string>& FabiEngine3D::modelEntity_getLightMapPaths(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->getLightMapPaths();
-}
-
-const vector<string>& FabiEngine3D::modelEntity_getReflectionMapPaths(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPaths();
-}
-
-const vector<string>& FabiEngine3D::modelEntity_getNormalMapPaths(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPaths();
-}
-
-const vector<string>& FabiEngine3D::modelEntity_getPartIDs(const string& ID)
+const vector<string> FabiEngine3D::modelEntity_getPartIDs(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getPartIDs();
 }

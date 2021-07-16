@@ -74,7 +74,7 @@ void MasterRenderer::_captureSceneDepth()
 						// Change transformation
 						lodEntity->setTranslation(modelEntity->getTranslation());
 						lodEntity->setRotation(modelEntity->getRotation());
-						lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+						//lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
 						lodEntity->setVisible(modelEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
@@ -122,7 +122,7 @@ void MasterRenderer::_captureSceneDepth()
 		// Unbind
 		_depthRenderer.unbind();
 		_sceneDepthFramebuffer.unbind();
-		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
+		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getDiffuseMap(0));
 	}
 	else
 	{
@@ -152,7 +152,7 @@ void MasterRenderer::_capturePostProcessing()
 	_postRenderer.render(_finalSurface);
 	_postRenderer.unbind();
 	_postProcessingFramebuffer.unbind();
-	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getTexture(0));
+	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getDiffuseMap(0));
 }
 
 void MasterRenderer::_captureMotionBlur()
@@ -267,7 +267,7 @@ void MasterRenderer::_captureShadows()
 					// Change transformation
 					lodEntity->setTranslation(modelEntity->getTranslation());
 					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+					//lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
 					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 
@@ -301,7 +301,7 @@ void MasterRenderer::_captureShadows()
 		// Unbind
 		_shadowRenderer.unbind();
 		_shadowFramebuffer.unbind();
-		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
+		_renderBus.setShadowMap(_shadowFramebuffer.getDiffuseMap(0));
 	}
 	else
 	{

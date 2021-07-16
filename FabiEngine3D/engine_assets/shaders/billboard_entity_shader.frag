@@ -24,7 +24,7 @@ uniform float u_minAlpha;
 // Boolean uniforms
 uniform bool u_isFogEnabled;
 uniform bool u_isAlphaObject;
-uniform bool u_hasTexture;
+uniform bool u_hasDiffuseMap;
 uniform bool u_isBright;
 
 // Out variables
@@ -39,7 +39,7 @@ void main()
 {
 	// Calculate primary color
 	vec3 primaryColor;
-	if(u_hasTexture)
+	if(u_hasDiffuseMap)
 	{
 		// Calculate the texel color
 		vec4 texColor = texture(u_diffuseMap, f_uv);

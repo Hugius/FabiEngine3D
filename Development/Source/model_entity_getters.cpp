@@ -1,319 +1,301 @@
 #include "model_entity.hpp"
 #include "logger.hpp"
 
-const Matrix44& ModelEntity::getModelMatrix(unsigned int index)
+const Matrix44& ModelEntity::getModelMatrix(const string& partID)
 {
-	return _modelMatrices[index];
+	return _parts[_getPartIndex(partID)].modelMatrix;
 }
 
-const GLuint ModelEntity::getDiffuseMap(unsigned int index) const
+const GLuint ModelEntity::getDiffuseMap(const string& partID)
 {
-	return _diffuseMaps[index];
+	return _parts[_getPartIndex(partID)].diffuseMap;
 }
 
-const GLuint ModelEntity::getLightMap(unsigned int index) const
+const GLuint ModelEntity::getLightMap(const string& partID)
 {
-	return _lightMaps[index];
+	return _parts[_getPartIndex(partID)].lightMap;
 }
 
-const GLuint ModelEntity::getReflectionMap(unsigned int index) const
+const GLuint ModelEntity::getReflectionMap(const string& partID)
 {
-	return _reflectionMaps[index];
+	return _parts[_getPartIndex(partID)].reflectionMap;
 }
 
-const GLuint ModelEntity::getNormalMap(unsigned int index) const
+const GLuint ModelEntity::getNormalMap(const string& partID)
 {
-	return _normalMaps[index];
+	return _parts[_getPartIndex(partID)].normalMap;
 }
 
-const Vec3 ModelEntity::getColor(unsigned int index)
+const Vec3 ModelEntity::getColor(const string& partID)
 {
-	return _colors[index];
-}
-
-const Vec3 ModelEntity::getOriginalTranslation() const
-{
-	return _originalTranslation;
+	if (partID.empty())
+	{
+		Vec3 total = Vec3(0.0f);
+		for (auto& part : _parts)
+		{
+			total += part.color;
+		}
+		return total / static_cast<float>(_parts.size());
+	}
+	else
+	{
+		return _parts[_getPartIndex(partID)].color;
+	}
 }
 
 const Vec3 ModelEntity::getTranslation(const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		return _baseTranslation;
 	}
 	else
 	{
-		return _translations[_getPartIndex(partID)];
+		return _parts[_getPartIndex(partID)].localTranslation;
 	}
-}
-
-const Vec3 ModelEntity::getOriginalRotation() const
-{
-	return _originalRotation;
 }
 
 const Vec3 ModelEntity::getRotation(const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		return _baseRotation;
 	}
 	else
 	{
-		return _rotations[_getPartIndex(partID)];
+		return _parts[_getPartIndex(partID)].localRotation;
 	}
 }
 
 const Vec3 ModelEntity::getRotationOrigin(const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		return _baseRotationOrigin;
 	}
 	else
 	{
-		return _rotationOrigins[_getPartIndex(partID)];
+		return _parts[_getPartIndex(partID)].localRotationOrigin;
 	}
-}
-
-const Vec3 ModelEntity::getOriginalScaling() const
-{
-	return _originalScaling;
 }
 
 const Vec3 ModelEntity::getScaling(const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		return _baseScaling;
 	}
 	else
 	{
-		return _scalings[_getPartIndex(partID)];
+		return _parts[_getPartIndex(partID)].localScaling;
 	}
 }
 
-const Vec3 ModelEntity::getColor(const string& partID)
+const float ModelEntity::getInversion(const string& partID)
 {
-	if (partID.empty() && _partIDs.size() > 1)
+	if (partID.empty())
 	{
-		return _calculateAverageValue(_colors);
+		float total = 0.0f;
+		for (auto& part : _parts)
+		{
+			total += part.inversion;
+		}
+		return total / static_cast<float>(_parts.size());
 	}
 	else
 	{
-		return _colors[_getPartIndex(partID)];
+		return _parts[_getPartIndex(partID)].inversion;
 	}
 }
 
-const string& ModelEntity::getMeshPath() const
+const string& ModelEntity::getMeshPath()
 {
 	return _meshPath;
 }
 
-const string& ModelEntity::getDiffuseMapPath() const
+const string& ModelEntity::getDiffuseMapPath(const string& partID)
 {
-	return _diffuseMapPath;
+	return _parts[_getPartIndex(partID)].diffuseMapPath;
 }
 
-const string& ModelEntity::getLightMapPath() const
+const string& ModelEntity::getLightMapPath(const string& partID)
 {
-	return _lightMapPath;
+	return _parts[_getPartIndex(partID)].lightMapPath;
 }
 
-const string& ModelEntity::getReflectionMapPath() const
+const string& ModelEntity::getReflectionMapPath(const string& partID)
 {
-	return _reflectionMapPath;
+	return _parts[_getPartIndex(partID)].reflectionMapPath;
 }
 
-const string& ModelEntity::getNormalMapPath() const
+const string& ModelEntity::getNormalMapPath(const string& partID)
 {
-	return _normalMapPath;
+	return _parts[_getPartIndex(partID)].normalMapPath;
 }
 
-const string& ModelEntity::getLodEntityID() const
+const string& ModelEntity::getLodEntityID()
 {
 	return _lodEntityID;
 }
 
-const vector<string>& ModelEntity::getDiffuseMapPaths() const
+const vector<string> ModelEntity::getPartIDs()
 {
-	return _diffuseMapPaths;
+	vector<string> result;
+
+	for (const auto& part : _parts)
+	{
+		result.push_back(part.ID);
+	}
+
+	return result;
 }
 
-const vector<string>& ModelEntity::getLightMapPaths() const
-{
-	return _lightMapPaths;
-}
-
-const vector<string>& ModelEntity::getReflectionMapPaths() const
-{
-	return _reflectionMapPaths;
-}
-
-const vector<string>& ModelEntity::getNormalMapPaths() const
-{
-	return _normalMapPaths;
-}
-
-const vector<string>& ModelEntity::getPartIDs() const
-{
-	return _partIDs;
-}
-
-const bool ModelEntity::isTransparent() const
+const bool ModelEntity::isTransparent()
 {
 	return _isTransparent;
 }
 
-const bool ModelEntity::isFaceCulled() const
+const bool ModelEntity::isFaceCulled()
 {
 	return _isFaceCulled;
 }
 
-const bool ModelEntity::isLightMapped() const
+const bool ModelEntity::isLightMapped()
 {
 	return _isLightMapped;
 }
 
-const bool ModelEntity::isNormalMapped() const
+const bool ModelEntity::isNormalMapped()
 {
 	return _isNormalMapped;
 }
 
-const bool ModelEntity::isSkyReflective() const
+const bool ModelEntity::isSkyReflective()
 {
 	return _isSkyReflective;
 }
 
-const bool ModelEntity::isSceneReflective() const
+const bool ModelEntity::isSceneReflective()
 {
 	return _isSceneReflective;
 }
 
-const bool ModelEntity::isSpecularLighted() const
+const bool ModelEntity::isSpecularLighted()
 {
 	return _isSpecularLighted;
 }
 
-const bool ModelEntity::isShadowed() const
+const bool ModelEntity::isShadowed()
 {
 	return _isShadowed;
 }
 
-const bool ModelEntity::isReflected() const
+const bool ModelEntity::isReflected()
 {
 	return _isReflected;
 }
 
-const bool ModelEntity::hasDiffuseMap() const
+const bool ModelEntity::hasDiffuseMap(const string& partID)
 {
-	return !_diffuseMaps.empty();
+	return (_parts[_getPartIndex(partID)].diffuseMap != 0);
 }
 
-const bool ModelEntity::hasLightMap() const
+const bool ModelEntity::hasLightMap(const string& partID)
 {
-	return !_lightMaps.empty();
+	return (_parts[_getPartIndex(partID)].lightMap != 0);
 }
 
-const bool ModelEntity::hasReflectionMap() const
+const bool ModelEntity::hasReflectionMap(const string& partID)
 {
-	return !_reflectionMaps.empty();
+	return (_parts[_getPartIndex(partID)].reflectionMap != 0);
 }
 
-const bool ModelEntity::hasNormalMap() const
+const bool ModelEntity::hasNormalMap(const string& partID)
 {
-	return !_normalMaps.empty();
+	return (_parts[_getPartIndex(partID)].normalMap != 0);
 }
 
-const bool ModelEntity::isBright() const
+const bool ModelEntity::isBright()
 {
 	return _isBright;
 }
 
-const bool ModelEntity::isCameraStatic() const
+const bool ModelEntity::isCameraStatic()
 {
 	return _isCameraStatic;
 }
 
-const bool ModelEntity::isDepthMapIncluded() const
+const bool ModelEntity::isDepthMapIncluded()
 {
 	return _isDepthMapIncluded;
 }
 
-const bool ModelEntity::isLevelOfDetailed() const
+const bool ModelEntity::isLevelOfDetailed()
 {
 	return _isLevelOfDetailed;
 }
 
-const bool ModelEntity::isWireframed() const
+const bool ModelEntity::isWireframed()
 {
 	return _wireframed;
 }
 
+const float ModelEntity::getLightness()
+{
+	return _lightness;
+}
+
+const float ModelEntity::getSpecularFactor()
+{
+	return _specularFactor;
+}
+
+const float ModelEntity::getSpecularIntensity()
+{
+	return _specularIntensity;
+}
+
+const float ModelEntity::getMinHeight()
+{
+	return _minHeight;
+}
+
+const float ModelEntity::getMaxHeight()
+{
+	return _maxHeight;
+}
+
+const float ModelEntity::getAlpha()
+{
+	return _alpha;
+}
+
+const float ModelEntity::getUvRepeat()
+{
+	return _uvRepeat;
+}
+
 unsigned int ModelEntity::_getPartIndex(string partID)
 {
-	// Find index
-	for (size_t i = 0; i < _partIDs.size(); i++)
+	if (partID.empty())
 	{
-		if (partID == _partIDs[i])
+		if (_parts.size() > 1)
+		{
+			Logger::throwError("Model entity with ID \"" + getID() + "\" has multiple parts!");
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	for (size_t i = 0; i < _parts.size(); i++)
+	{
+		if (partID == _parts[i].ID)
 		{
 			return static_cast<unsigned int>(i);
 		}
 	}
 
-	// Error
-	Logger::throwError("Model entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"");
-}
-
-Vec3 ModelEntity::_calculateAverageValue(vector<Vec3> elements)
-{
-	Vec3 total = Vec3(0.0f);
-
-	for (const auto& element : elements)
-	{
-		total += element;
-	}
-
-	return total / static_cast<float>(elements.size());
-}
-
-const float ModelEntity::getLightness() const
-{
-	return _lightness;
-}
-
-const float ModelEntity::getInversion() const
-{
-	return _inversion;
-}
-
-const float ModelEntity::getSpecularFactor() const
-{
-	return _specularFactor;
-}
-
-const float ModelEntity::getSpecularIntensity() const
-{
-	return _specularIntensity;
-}
-
-const float ModelEntity::getMinHeight() const
-{
-	return _minHeight;
-}
-
-const float ModelEntity::getMaxHeight() const
-{
-	return _maxHeight;
-}
-
-const float ModelEntity::getAlpha() const
-{
-	return _alpha;
-}
-
-const float ModelEntity::getUvRepeat() const
-{
-	return _uvRepeat;
+	Logger::throwError("Model entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"!");
 }

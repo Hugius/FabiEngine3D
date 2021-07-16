@@ -20,7 +20,7 @@ public:
 	Ivec2 getSize();
 
 	GLuint getFBO();
-	GLuint getTexture(int ID);
+	GLuint getDiffuseMap(int ID);
 
 private:
 	GLuint _fbo = 0;

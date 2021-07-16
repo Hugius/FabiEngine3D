@@ -241,7 +241,6 @@ void AnimationEditor::_updateEditingScreen()
 					// Change values
 					currentAnimation->previewModelID = selectedModelID;
 					currentAnimation->initialScaling = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
-					currentAnimation->initialColor = _fe3d.modelEntity_getColor(currentAnimation->previewModelID);
 
 					// First time choosing preview model, add all partIDs for this animation
 					if (currentAnimation->frames.size() == 1)

@@ -79,12 +79,12 @@ private:
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline const float INITIAL_CAMERA_DISTANCE = 5.0f;
-	float _partColorStrength = 0.0f;
-	float _colorChangingSpeed = 0.05f;
+	static inline const float PART_BLINKING_SPEED = 0.025f;
 
 	// Integers
 	static inline const unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
+	int _selectedPartInversionMultiplier = 1;
 
 	// Booleans
 	bool _isCreatingAnimation = false;
@@ -92,5 +92,4 @@ private:
 	bool _isEditingAnimation  = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded	  = false;
-	bool _partColorIncreasing = true;
 };

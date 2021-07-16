@@ -274,10 +274,10 @@ public:
 	void modelEntity_setTransparent(const string& ID, bool enabled);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setLightMapped(const string& ID, bool enabled);
-	void modelEntity_setNormalMapped(const string& ID, bool enabled);
 	void modelEntity_setSkyReflective(const string& ID, bool enabled);
-	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setSceneReflective(const string& ID, bool enabled);
+	void modelEntity_setNormalMapped(const string& ID, bool enabled);
+	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setShadowed(const string& ID, bool enabled);
 	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
@@ -288,12 +288,12 @@ public:
 	void modelEntity_scale(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_setPosition(const string& ID, Vec3 position, const string& partID = "");
 	void modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partID = "");
-	void modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID = "");
+	void modelEntity_setRotationOrigin(const string& ID, Vec3 localRotationOrigin, const string& partID = "");
 	void modelEntity_setSize(const string& ID, Vec3 size, const string& partID = "");
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
 	void modelEntity_setLightness(const string& ID, float lightness);
-	void modelEntity_setInversion(const string& ID, float inversion);
+	void modelEntity_setInversion(const string& ID, float inversion, const string& partID = "");
 	void modelEntity_setAlpha(const string& ID, float alpha);
 	void modelEntity_setColor(const string& ID, Vec3 color, const string& partID = "");
 	void modelEntity_setMinHeight(const string& ID, float height);
@@ -303,11 +303,7 @@ public:
 	void modelEntity_setBright(const string& ID, bool enabled);
 
 	// Model entity interface - getters
-	const vector<string>& modelEntity_getDiffuseMapPaths(const string& ID);
-	const vector<string>& modelEntity_getLightMapPaths(const string& ID);
-	const vector<string>& modelEntity_getReflectionMapPaths(const string& ID);
-	const vector<string>& modelEntity_getNormalMapPaths(const string& ID);
-	const vector<string>& modelEntity_getPartIDs(const string& ID);
+	const vector<string> modelEntity_getPartIDs(const string& ID);
 	const vector<string> modelEntity_getAllIDs();
 	const vector<string> modelEntity_getGroupIDs(const string& ID);
 	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
@@ -323,7 +319,7 @@ public:
 	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
 	const float modelEntity_getLightness(const string& ID);
-	const float modelEntity_getInversion(const string& ID);
+	const float modelEntity_getInversion(const string& ID, const string& partID = "");
 	const float modelEntity_getSpecularFactor(const string& ID);
 	const float modelEntity_getSpecularIntensity(const string& ID);
 	const float modelEntity_getAlpha(const string& ID);
@@ -518,8 +514,8 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
-	void imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
-	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 localScaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 localScaling, bool isCentered, bool visible = true);
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);

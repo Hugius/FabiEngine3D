@@ -109,7 +109,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string modelID, previewID;
-			Vec3 position, rotation, rotationOrigin, size, color;
+			Vec3 position, rotation, localRotationOrigin, size, color;
 			float minHeight, maxHeight, alpha, lightness;
 			unsigned partCount;
 			bool isVisible, isFrozen, isAabbRaycastResponsive, isAabbCollisionResponsive;
@@ -133,9 +133,9 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				rotation.x >>
 				rotation.y >>
 				rotation.z >>
-				rotationOrigin.x >>
-				rotationOrigin.y >>
-				rotationOrigin.z >>
+				localRotationOrigin.x >>
+				localRotationOrigin.y >>
+				localRotationOrigin.z >>
 				size.x >>
 				size.y >>
 				size.z >>
@@ -194,7 +194,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Set properties
 				_fe3d.modelEntity_setRotation(modelID, rotation);
-				_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin);
+				_fe3d.modelEntity_setRotationOrigin(modelID, localRotationOrigin);
 				_fe3d.modelEntity_setSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 				_fe3d.modelEntity_setColor(modelID, color);
@@ -222,9 +222,9 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 						rotation.x >>
 						rotation.y >>
 						rotation.z >>
-						rotationOrigin.x >>
-						rotationOrigin.y >>
-						rotationOrigin.z >>
+						localRotationOrigin.x >>
+						localRotationOrigin.y >>
+						localRotationOrigin.z >>
 						size.x >>
 						size.y >>
 						size.z;
@@ -232,7 +232,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					// Set part transformation
 					_fe3d.modelEntity_setPosition(modelID, position, partID);
 					_fe3d.modelEntity_setRotation(modelID, rotation, partID);
-					_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partID);
+					_fe3d.modelEntity_setRotationOrigin(modelID, localRotationOrigin, partID);
 					_fe3d.modelEntity_setSize(modelID, size, partID);
 				}
 
@@ -334,14 +334,14 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				for (const auto& partID : partIDs)
 				{
 					// Retrieve part transformation
-					auto translation = _fe3d.modelEntity_getPosition(modelID, partID);
+					auto localTranslation = _fe3d.modelEntity_getPosition(modelID, partID);
 					auto rotation = _fe3d.modelEntity_getRotation(modelID, partID);
-					auto scaling = _fe3d.modelEntity_getSize(modelID, partID);
+					auto localScaling = _fe3d.modelEntity_getSize(modelID, partID);
 
 					// Set properties
-					animationData->totalTranslations[partID] = translation;
+					animationData->totalTranslations[partID] = localTranslation;
 					animationData->totalRotations[partID] = rotation;
-					animationData->totalScalings[partID] = scaling;
+					animationData->totalScalings[partID] = localScaling;
 				}
 			}
 		}

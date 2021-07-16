@@ -97,15 +97,13 @@ void AnimationEditor::unload()
 	_currentAnimationID = "";
 	_currentPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
-	_partColorStrength = 0.0f;
-	_colorChangingSpeed = 0.05f;
 	_currentFrameIndex = 0;
+	_selectedPartInversionMultiplier = 1;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isEditingAnimation = false;
 	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
-	_partColorIncreasing = true;
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");

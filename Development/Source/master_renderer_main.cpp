@@ -144,8 +144,8 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 
 		// Unbind screen framebuffer
 		_screenFramebuffer.unbind();
-		_renderBus.setPrimarySceneMap(_screenFramebuffer.getTexture(0));
-		_renderBus.setSecondarySceneMap(_screenFramebuffer.getTexture(1));
+		_renderBus.setPrimarySceneMap(_screenFramebuffer.getDiffuseMap(0));
+		_renderBus.setSecondarySceneMap(_screenFramebuffer.getDiffuseMap(1));
 
 		// Postprocessing captures
 		_timer.startDeltaPart("postProcessing");

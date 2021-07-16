@@ -128,7 +128,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
 			auto position = _fe3d.modelEntity_getPosition(modelID);
 			auto rotation = _fe3d.modelEntity_getRotation(modelID);
-			auto rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID);
+			auto localRotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID);
 			auto size = _fe3d.modelEntity_getSize(modelID);
 			auto color = _fe3d.modelEntity_getColor(modelID);
 			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
@@ -162,9 +162,9 @@ bool SceneEditor::saveCustomSceneToFile()
 				rotation.x << " " <<
 				rotation.y << " " <<
 				rotation.z << " " <<
-				rotationOrigin.x << " " <<
-				rotationOrigin.y << " " <<
-				rotationOrigin.z << " " <<
+				localRotationOrigin.x << " " <<
+				localRotationOrigin.y << " " <<
+				localRotationOrigin.z << " " <<
 				size.x << " " <<
 				size.y << " " <<
 				size.z << " " <<
@@ -203,7 +203,7 @@ bool SceneEditor::saveCustomSceneToFile()
 						// Retrieve transformation
 						position = _fe3d.modelEntity_getPosition(modelID, partIDs[i]);
 						rotation = _fe3d.modelEntity_getRotation(modelID, partIDs[i]);
-						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partIDs[i]);
+						localRotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partIDs[i]);
 						size = _fe3d.modelEntity_getSize(modelID, partIDs[i]);
 
 						// Write transformation
@@ -215,9 +215,9 @@ bool SceneEditor::saveCustomSceneToFile()
 							rotation.x << " " <<
 							rotation.y << " " <<
 							rotation.z << " " <<
-							rotationOrigin.x << " " <<
-							rotationOrigin.y << " " <<
-							rotationOrigin.z << " " <<
+							localRotationOrigin.x << " " <<
+							localRotationOrigin.y << " " <<
+							localRotationOrigin.z << " " <<
 							size.x << " " <<
 							size.y << " " <<
 							size.z;

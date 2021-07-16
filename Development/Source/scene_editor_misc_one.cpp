@@ -275,16 +275,14 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 	if (modelID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getInversion(modelID) < 0.0f)
+		if (_fe3d.modelEntity_getInversion(modelID) == 0.0f)
 		{
-			_fe3d.modelEntity_setInversion(modelID, 0.0f);
 			multiplier *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getInversion(modelID) > 1.0f)
+		if (_fe3d.modelEntity_getInversion(modelID) == 1.0f)
 		{
-			_fe3d.modelEntity_setInversion(modelID, 1.0f);
 			multiplier *= -1;
 		}
 
@@ -306,16 +304,14 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 	if (billboardID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.billboardEntity_getInversion(billboardID) < 0.0f)
+		if (_fe3d.billboardEntity_getInversion(billboardID) == 0.0f)
 		{
-			_fe3d.billboardEntity_setInversion(billboardID, 0.0f);
 			multiplier *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.billboardEntity_getInversion(billboardID) > 1.0f)
+		if (_fe3d.billboardEntity_getInversion(billboardID) == 1.0f)
 		{
-			_fe3d.billboardEntity_setInversion(billboardID, 1.0f);
 			multiplier *= -1;
 		}
 

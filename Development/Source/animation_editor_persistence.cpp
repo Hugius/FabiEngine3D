@@ -146,7 +146,6 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 				if (hasAllParts)
 				{
 					newAnimation->initialScaling = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
-					newAnimation->initialColor = _fe3d.modelEntity_getColor(newAnimation->previewModelID);
 				}
 				else // Clear preview model
 				{

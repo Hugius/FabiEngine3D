@@ -10,7 +10,7 @@ using std::string;
 
 struct MeshPart final
 {
-	string name;
+	string ID;
 	string diffuseMapPath;
 	string lightMapPath;
 	string normalMapPath;

@@ -35,7 +35,7 @@ void AnimationEditor::_updateFrameScreen()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_currentPartID = "";
-					_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
+					_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
 				else if (screen->getButton("transformation")->isHovered())
@@ -96,17 +96,6 @@ void AnimationEditor::_updateFrameScreen()
 					_gui.getGlobalScreen()->addChoiceForm("parts", "Select Part", Vec2(-0.5f, 0.1f), modelParts);
 				}
 			}
-
-			// Emphasize selected model part
-			if (!_currentPartID.empty())
-			{
-				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
-				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartID);
-			}
-
-			// Update color strength
-			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
-			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
 
 			// Update X transformation change
 			if (_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { }))
@@ -198,6 +187,7 @@ void AnimationEditor::_updateFrameScreen()
 					// Check if selected part exists on preview model
 					if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 					{
+						_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
 						_currentPartID = selectedButtonID;
 						_gui.getGlobalScreen()->deleteChoiceForm("parts");
 					}

@@ -121,17 +121,20 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		}
 
 		// Bind & render
-		unsigned int index = 0;
-		for (const auto& buffer : entity->getRenderBuffers())
+		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
 		{
+			// Temporary values
+			auto partID = entity->getPartIDs()[i];
+			auto buffer = entity->getRenderBuffers()[i];
+
 			// Model matrix
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
 
 			// Diffuse map
-			if (entity->hasDiffuseMap())
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
 
 			// Bind buffer
@@ -150,14 +153,11 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 			}
 
 			// Diffuse map
-			if (entity->hasDiffuseMap())
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-
-			// Miscellaneous
-			index++;
 		}
 
 		// Unbind buffer

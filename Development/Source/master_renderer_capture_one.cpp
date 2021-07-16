@@ -149,7 +149,7 @@ void MasterRenderer::_captureSceneReflections()
 		_sceneReflectionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getDiffuseMap(0));
 	}
 	else
 	{
@@ -319,7 +319,7 @@ void MasterRenderer::_captureWaterReflections()
 		_waterReflectionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setWaterReflectionMap(_waterReflectionFramebuffer.getTexture(0));
+		_renderBus.setWaterReflectionMap(_waterReflectionFramebuffer.getDiffuseMap(0));
 	}
 	else
 	{
@@ -421,7 +421,7 @@ void MasterRenderer::_captureWaterRefractions()
 		_waterRefractionFramebuffer.unbind();
 
 		// Assign texture
-		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
+		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getDiffuseMap(0));
 	}
 	else
 	{

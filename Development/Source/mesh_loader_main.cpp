@@ -159,7 +159,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			for (auto& meshPart : meshParts)
 			{
 				// Find mesh part
-				if (meshPart.name == selectedPartID)
+				if (meshPart.ID == selectedPartID)
 				{
 					alreadyExisting = true;
 
@@ -190,7 +190,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 				}
 
 				// Set mesh part ID
-				newPart.name = selectedPartID;
+				newPart.ID = selectedPartID;
 
 				// Set texture map paths
 				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);

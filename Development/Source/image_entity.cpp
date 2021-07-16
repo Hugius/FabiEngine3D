@@ -12,9 +12,9 @@ void ImageEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void ImageEntity::setTexture(GLuint value)
+void ImageEntity::setDiffuseMap(GLuint value)
 {
-	_texture = value;
+	_diffuseMap = value;
 }
 
 void ImageEntity::setColor(Vec3 value)
@@ -236,9 +236,9 @@ const int ImageEntity::getMaxSpriteAnimationLoops() const
 	return _maxSpriteAnimationLoops;
 }
 
-const GLuint ImageEntity::getTexture() const
+const GLuint ImageEntity::getDiffuseMap() const
 {
-	return _texture;
+	return _diffuseMap;
 }
 
 const Vec3 ImageEntity::getColor() const
@@ -261,9 +261,9 @@ const bool ImageEntity::isMirroredVertically() const
 	return _isMirroredVertically;
 }
 
-const bool ImageEntity::hasTexture() const
+const bool ImageEntity::hasDiffuseMap() const
 {
-	return (_texture != 0);
+	return (_diffuseMap != 0);
 }
 
 const bool ImageEntity::isCentered() const

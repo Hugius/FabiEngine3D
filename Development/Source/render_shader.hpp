@@ -55,13 +55,13 @@ private:
 	}
 
 	// Overloading the upload functions
-	inline void _uploadUniform(const GLint & loc, const GLint & data)     { glUniform1i(loc, data); }
-	inline void _uploadUniform(const GLint & loc, const float & data)     { glUniform1f(loc, data); }
-	inline void _uploadUniform(const GLint & loc, const GLdouble & data)  { glUniform1d(loc, data); }
-	inline void _uploadUniform(const GLint & loc, const GLboolean & data) { glUniform1i(loc, data); }
-	inline void _uploadUniform(const GLint & loc, const Vec2 & data)      { glUniform2f(loc, data.x, data.y); }
-	inline void _uploadUniform(const GLint & loc, const Vec3 & data)      { glUniform3f(loc, data.x, data.y, data.z); }
-	inline void _uploadUniform(const GLint & loc, const Vec4 & data)      { glUniform4f(loc, data.x, data.y, data.z, data.w); }
-	inline void _uploadUniform(const GLint & loc, const Matrix33 & data)  { glUniformMatrix3fv(loc, 1, GL_FALSE, data.f); }
-	inline void _uploadUniform(const GLint & loc, const Matrix44 & data)  { glUniformMatrix4fv(loc, 1, GL_FALSE, data.f); }
+	inline void _uploadUniform(const GLint& location, const bool& data)		{ glUniform1i(location, data);							 }
+	inline void _uploadUniform(const GLint& location, const int& data)      { glUniform1i(location, data);							 }
+	inline void _uploadUniform(const GLint& location, const float& data)    { glUniform1f(location, data);							 }
+	inline void _uploadUniform(const GLint& location, const double& data)   { glUniform1d(location, data);							 }
+	inline void _uploadUniform(const GLint& location, const Vec2& data)     { glUniform2f(location, data.x, data.y);				 }
+	inline void _uploadUniform(const GLint& location, const Vec3& data)     { glUniform3f(location, data.x, data.y, data.z);		 }
+	inline void _uploadUniform(const GLint& location, const Vec4& data)     { glUniform4f(location, data.x, data.y, data.z, data.w); }
+	inline void _uploadUniform(const GLint& location, const Matrix33& data) { glUniformMatrix3fv(location, 1, GL_FALSE, data.f);	 }
+	inline void _uploadUniform(const GLint& location, const Matrix44& data) { glUniformMatrix4fv(location, 1, GL_FALSE, data.f);	 }
 };

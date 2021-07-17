@@ -1,6 +1,7 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "reflection_type.hpp"
 
 class ModelEntity final : public BaseEntity
 {
@@ -35,10 +36,6 @@ public:
 	void setUvRepeat(float value);
 	void setTransparent(bool value);
 	void setFaceCulled(bool value);
-	void setLightMapped(bool value);
-	void setNormalMapped(bool value);
-	void setSkyReflective(bool value);
-	void setSceneReflective(bool value);
 	void setSpecularLighted(bool value);
 	void setShadowed(bool value);
 	void setReflected(bool value);
@@ -47,6 +44,7 @@ public:
 	void setLevelOfDetailed(bool value);
 	void setWireframed(bool value);
 	void setBright(bool value);
+	void setReflectionType(ReflectionType value);
 	void clearParts();
 	
 	// Getters
@@ -77,10 +75,6 @@ public:
 	const float getMaxHeight();
 	const bool isTransparent();
 	const bool isFaceCulled();
-	const bool isLightMapped();
-	const bool isNormalMapped();
-	const bool isSkyReflective();
-	const bool isSceneReflective();
 	const bool isSpecularLighted();
 	const bool isShadowed();
 	const bool isReflected();
@@ -93,6 +87,7 @@ public:
 	const bool hasLightMap(const string& partID = "");
 	const bool hasReflectionMap(const string& partID = "");
 	const bool hasNormalMap(const string& partID = "");
+	const ReflectionType getReflectionType();
 
 private:
 	struct PartData final
@@ -132,7 +127,6 @@ private:
 	string _meshPath = "";
 	string _lodEntityID = "";
 
-	// Base transformation
 	Vec3 _baseTranslation = Vec3(0.0f);
 	Vec3 _baseRotation = Vec3(0.0f);
 	Vec3 _baseRotationOrigin = Vec3(0.0f);
@@ -149,10 +143,6 @@ private:
 	bool _isCameraStatic	 = false;
 	bool _isTransparent      = false;
 	bool _isFaceCulled       = false;
-	bool _isLightMapped      = false;
-	bool _isNormalMapped	 = false;
-	bool _isSkyReflective    = false;
-	bool _isSceneReflective  = false;
 	bool _isSpecularLighted  = false;
 	bool _isShadowed         = true;
 	bool _isReflected		 = true;
@@ -160,4 +150,6 @@ private:
 	bool _isLevelOfDetailed  = false;
 	bool _wireframed		 = false;
 	bool _isBright			 = false;
+
+	ReflectionType _reflectionType;
 };

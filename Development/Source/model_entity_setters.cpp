@@ -213,24 +213,9 @@ void ModelEntity::setFaceCulled(bool value)
 	_isFaceCulled = value;
 }
 
-void ModelEntity::setLightMapped(bool value)
+void ModelEntity::setReflectionType(ReflectionType value)
 {
-	_isLightMapped = value;
-}
-
-void ModelEntity::setNormalMapped(bool value)
-{
-	_isNormalMapped = value;
-}
-
-void ModelEntity::setSkyReflective(bool value)
-{
-	_isSkyReflective = value;
-}
-
-void ModelEntity::setSceneReflective(bool value)
-{
-	_isSceneReflective = value;
+	_reflectionType = value;
 }
 
 void ModelEntity::setSpecularLighted(bool value)

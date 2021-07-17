@@ -109,7 +109,6 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// Load model part light map
 		if (part.lightMapPath != "")
 		{
-			entity->setLightMapped(true);
 			entity->setLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true), part.ID);
 			entity->setLightMapPath(part.lightMapPath, part.ID);
 		}
@@ -117,7 +116,6 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// Load model part reflection map
 		if (part.reflectionMapPath != "")
 		{
-			entity->setSkyReflective(true);
 			entity->setReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true), part.ID);
 			entity->setReflectionMapPath(part.reflectionMapPath, part.ID);
 		}

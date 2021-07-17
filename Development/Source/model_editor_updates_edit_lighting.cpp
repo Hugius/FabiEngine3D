@@ -12,8 +12,7 @@ void ModelEditor::_updateModelEditingLighting()
 	{
 		// Temporary values
 		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
-		auto isSkyReflective = _fe3d.modelEntity_isSkyReflective(_currentModelID);
-		auto isSceneReflective = _fe3d.modelEntity_isSceneReflective(_currentModelID);
+		auto reflectionType = _fe3d.modelEntity_getReflectionType(_currentModelID);
 		auto specularFactor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
@@ -45,19 +44,15 @@ void ModelEditor::_updateModelEditingLighting()
 			}
 			else if (screen->getButton("reflectionType")->isHovered())
 			{
-				if (isSceneReflective)
+				if (reflectionType == ReflectionType::SKY)
 				{
-					_fe3d.modelEntity_setSceneReflective(_currentModelID, false);
-				}
-				else if (isSkyReflective)
-				{
-					_fe3d.modelEntity_setSkyReflective(_currentModelID, false);
-					_fe3d.modelEntity_setSceneReflective(_currentModelID, true);
+					reflectionType = ReflectionType::SCENE;
 				}
 				else
 				{
-					_fe3d.modelEntity_setSkyReflective(_currentModelID, true);
+					reflectionType = ReflectionType::SKY;
 				}
+				_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
 			}
 			else if (screen->getButton("isBright")->isHovered())
 			{
@@ -68,7 +63,7 @@ void ModelEditor::_updateModelEditingLighting()
 
 		// Button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("reflectionType")->changeTextContent(isSkyReflective ? "Reflect: SKY" : isSceneReflective ? "Reflect: SCENE" : "Reflect: OFF");
+		screen->getButton("reflectionType")->changeTextContent((reflectionType == ReflectionType::SKY) ? "Reflect: SKY" : "Reflect: SCENE");
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 
 		// Update specular factor
@@ -95,5 +90,6 @@ void ModelEditor::_updateModelEditingLighting()
 		// Update buttons hoverability
 		screen->getButton("specularFactor")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
+		screen->getButton("reflectionType")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
 	}
 }

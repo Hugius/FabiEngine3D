@@ -208,8 +208,9 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		return false;
 	}
 
-	// Compose full entity ID
-	const string newEntityID = _fe3d.modelEntity_isInstanced(previewID) ? previewID.substr(1) : newID;
+	// Temporary values
+	const string newEntityID = (_fe3d.modelEntity_isInstanced(previewID) ? previewID.substr(1) : newID);
+	const auto isMultiParted = _fe3d.modelEntity_isMultiParted(previewID);
 
 	// Check if instanced entity
 	if (_fe3d.modelEntity_isInstanced(previewID))
@@ -229,8 +230,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			// Fill model entity
 			_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
 			_fe3d.modelEntity_setTransparent(newEntityID, _fe3d.modelEntity_isTransparent(previewID));
-			_fe3d.modelEntity_setSkyReflective(newEntityID, _fe3d.modelEntity_isSkyReflective(previewID));
-			_fe3d.modelEntity_setSceneReflective(newEntityID, _fe3d.modelEntity_isSceneReflective(previewID));
+			_fe3d.modelEntity_setReflectionType(newEntityID, _fe3d.modelEntity_getReflectionType(previewID));
 			_fe3d.modelEntity_setSpecularLighted(newEntityID, _fe3d.modelEntity_isSpecularLighted(previewID));
 			_fe3d.modelEntity_setSpecularFactor(newEntityID, _fe3d.modelEntity_getSpecularFactor(previewID));
 			_fe3d.modelEntity_setSpecularIntensity(newEntityID, _fe3d.modelEntity_getSpecularIntensity(previewID));
@@ -241,29 +241,27 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setBright(newEntityID, _fe3d.modelEntity_isBright(previewID));
 
 			// Diffuse map
-			if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
+			if (_fe3d.modelEntity_hasDiffuseMap(previewID))
 			{
 				_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 			}
 
 			// Light map
-			if (_fe3d.modelEntity_getLightMapPath(previewID) != "")
+			if (_fe3d.modelEntity_hasLightMap(previewID))
 			{
 				_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
-				_fe3d.modelEntity_setLightMapped(newEntityID, true);
 			}
 
 			// Reflection map
-			if (_fe3d.modelEntity_getReflectionMapPath(previewID) != "")
+			if (_fe3d.modelEntity_hasReflectionMap(previewID))
 			{
 				_fe3d.modelEntity_setReflectionMap(newEntityID, _fe3d.modelEntity_getReflectionMapPath(previewID));
 			}
 
 			// Normal map
-			if (_fe3d.modelEntity_getNormalMapPath(previewID) != "")
+			if (_fe3d.modelEntity_hasNormalMap(previewID))
 			{
 				_fe3d.modelEntity_setNormalMap(newEntityID, _fe3d.modelEntity_getNormalMapPath(previewID));
-				_fe3d.modelEntity_setNormalMapped(newEntityID, true);
 			}
 		}
 	}
@@ -284,8 +282,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setStaticToCamera(newEntityID, _fe3d.modelEntity_isStaticToCamera(previewID));
 		_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
 		_fe3d.modelEntity_setTransparent(newEntityID, _fe3d.modelEntity_isTransparent(previewID));
-		_fe3d.modelEntity_setSkyReflective(newEntityID, _fe3d.modelEntity_isSkyReflective(previewID));
-		_fe3d.modelEntity_setSceneReflective(newEntityID, _fe3d.modelEntity_isSceneReflective(previewID));
+		_fe3d.modelEntity_setReflectionType(newEntityID, _fe3d.modelEntity_getReflectionType(previewID));
 		_fe3d.modelEntity_setSpecularLighted(newEntityID, _fe3d.modelEntity_isSpecularLighted(previewID));
 		_fe3d.modelEntity_setSpecularFactor(newEntityID, _fe3d.modelEntity_getSpecularFactor(previewID));
 		_fe3d.modelEntity_setSpecularIntensity(newEntityID, _fe3d.modelEntity_getSpecularIntensity(previewID));
@@ -296,29 +293,27 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setBright(newEntityID, _fe3d.modelEntity_isBright(previewID));
 
 		// Diffuse map
-		if (_fe3d.modelEntity_getDiffuseMapPath(previewID) != "")
+		if (_fe3d.modelEntity_hasDiffuseMap(previewID))
 		{
 			_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 		}
 
 		// Light map
-		if (_fe3d.modelEntity_getLightMapPath(previewID) != "")
+		if (_fe3d.modelEntity_hasLightMap(previewID))
 		{
 			_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
-			_fe3d.modelEntity_setLightMapped(newEntityID, true);
 		}
 
 		// Reflection map
-		if (_fe3d.modelEntity_getReflectionMapPath(previewID) != "")
+		if (_fe3d.modelEntity_hasReflectionMap(previewID))
 		{
 			_fe3d.modelEntity_setReflectionMap(newEntityID, _fe3d.modelEntity_getReflectionMapPath(previewID));
 		}
 
 		// Normal map
-		if (_fe3d.modelEntity_getNormalMapPath(previewID) != "")
+		if (_fe3d.modelEntity_hasNormalMap(previewID))
 		{
 			_fe3d.modelEntity_setNormalMap(newEntityID, _fe3d.modelEntity_getNormalMapPath(previewID));
-			_fe3d.modelEntity_setNormalMapped(newEntityID, true);
 		}
 	}
 

@@ -162,10 +162,8 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
-		_shader.uploadUniform("u_isLightMapped", entity->isLightMapped());
-		_shader.uploadUniform("u_isNormalMapped", entity->isNormalMapped());
-		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());
-		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
+		_shader.uploadUniform("u_isSkyReflective", (entity->getReflectionType() == ReflectionType::SKY));
+		_shader.uploadUniform("u_isSceneReflective", (entity->getReflectionType() == ReflectionType::SCENE));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);

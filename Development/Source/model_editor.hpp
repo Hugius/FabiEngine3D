@@ -3,6 +3,7 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 #include "direction.hpp"
+#include "reflection_type.hpp"
 
 class ModelEditor final
 {
@@ -25,9 +26,9 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	bool _addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
-		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor, float specularIntensity,
-		float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBright,
-		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
+		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
+		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
+		bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _loadMesh();
 	void _loadDiffuseMap();
 	void _loadLightMap();
@@ -68,6 +69,7 @@ private:
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline const float INITIAL_CAMERA_DISTANCE = 5.0f;
 	static inline const float MIN_CAMERA_PITCH = 1.0f;
+	static inline const float MODEL_Y_OFFSET = 0.001f;
 	float _aabbTransformationSpeed = 0.1f;
 
 	// Booleans

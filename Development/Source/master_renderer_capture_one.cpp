@@ -6,9 +6,9 @@ void MasterRenderer::_captureSceneReflections()
 {
 	// Search for any reflective model entity
 	bool anyReflectiveModelFound = false;
-	for (const auto& [keyID, modelEntity] : _entityBus->getModelEntities())
+	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		if (modelEntity->isSceneReflective() && modelEntity->isVisible())
+		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
 		{
 			anyReflectiveModelFound = true;
 			break;
@@ -29,10 +29,16 @@ void MasterRenderer::_captureSceneReflections()
 		vector<string> savedModelEntityIDs;
 		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 		{
-			// Check if necessary to hide
-			if ((entity->isSceneReflective() || !entity->isReflected()) && entity->isVisible())
+			// Hide reflective MODEL entity
+			if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
 			{
-				// Hide MODEL entity
+				entity->setVisible(false);
+				savedModelEntityIDs.push_back(entity->getID());
+			}
+
+			// Hide non-reflected MODEL entity
+			if (!entity->isReflected() && entity->isVisible())
+			{
 				entity->setVisible(false);
 				savedModelEntityIDs.push_back(entity->getID());
 			}
@@ -42,10 +48,9 @@ void MasterRenderer::_captureSceneReflections()
 		vector<string> savedBillboardEntityIDs;
 		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
-			// Check if necessary to hide
+			// Hide non-reflected BILLBOARD entity
 			if (!entity->isReflected() && entity->isVisible())
 			{
-				// Hide BILLBOARD entity
 				entity->setVisible(false);
 				savedBillboardEntityIDs.push_back(entity->getID());
 			}
@@ -180,10 +185,16 @@ void MasterRenderer::_captureWaterReflections()
 			// Iterate through all MODEL entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
-				// Check if necessary to hide
-				if ((entity->isSceneReflective() || !entity->isReflected()) && entity->isVisible())
+				// Hide reflective MODEL entity
+				if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
 				{
-					// Hide MODEL entity
+					entity->setVisible(false);
+					savedModelEntityIDs.push_back(entity->getID());
+				}
+
+				// Hide non-reflected MODEL entity
+				if (!entity->isReflected() && entity->isVisible())
+				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());
 				}
@@ -197,10 +208,9 @@ void MasterRenderer::_captureWaterReflections()
 			// Iterate through all BILLBOARD entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
-				// Check if necessary to hide
+				// Hide non-reflected BILLBOARD entity
 				if (!entity->isReflected() && entity->isVisible())
 				{
-					// Hide BILLBOARD entity
 					entity->setVisible(false);
 					savedBillboardEntityIDs.push_back(entity->getID());
 				}

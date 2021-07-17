@@ -31,26 +31,26 @@ void ModelEditor::_loadMesh()
 					// Clear texture cache
 					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
 					{
-						// Diffuse maps
-						if (!_fe3d.modelEntity_getDiffuseMapPath(partID).empty())
+						// Diffuse map
+						if (_fe3d.modelEntity_hasDiffuseMap(partID))
 						{
 							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getDiffuseMapPath(partID));
 						}
 
-						// Light maps
-						if (!_fe3d.modelEntity_getLightMapPath(partID).empty())
+						// Light map
+						if (_fe3d.modelEntity_hasLightMap(partID))
 						{
 							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getLightMapPath(partID));
 						}
 
-						// Reflection maps
-						if (!_fe3d.modelEntity_getReflectionMapPath(partID).empty())
+						// Reflection map
+						if (_fe3d.modelEntity_hasReflectionMap(partID))
 						{
 							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getReflectionMapPath(partID));
 						}
 
-						// Normal maps
-						if (!_fe3d.modelEntity_getNormalMapPath(partID).empty())
+						// Normal map
+						if (_fe3d.modelEntity_hasNormalMap(partID))
 						{
 							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getNormalMapPath(partID));
 						}
@@ -115,7 +115,6 @@ void ModelEditor::_loadLightMap()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.modelEntity_setLightMap(_currentModelID, newFilePath);
-			_fe3d.modelEntity_setLightMapped(_currentModelID, true);
 		}
 		else
 		{
@@ -166,7 +165,6 @@ void ModelEditor::_loadNormalMap()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.modelEntity_setNormalMap(_currentModelID, newFilePath);
-			_fe3d.modelEntity_setNormalMapped(_currentModelID, true);
 		}
 		else
 		{
@@ -192,9 +190,9 @@ const vector<string>& ModelEditor::getLoadedModelIDs()
 }
 
 bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
-	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, int reflectionType,
-	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced, bool isBright,
-	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
+	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
+	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
+	bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// If model name not existing yet
 	if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), modelName) == _loadedModelIDs.end())
@@ -202,10 +200,11 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 		// Add model name
 		_loadedModelIDs.push_back(modelName);
 
-		// Add 3D model
+		// Check if model has mesh
 		if (meshPath != "")
 		{
-			_fe3d.modelEntity_add(modelName, meshPath, Vec3(0.0f, 0.01f, 0.0f), Vec3(0.0f), size, false);
+			// Add model
+			_fe3d.modelEntity_add(modelName, meshPath, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f), Vec3(0.0f), size, false);
 
 			// Add AABBs
 			for (size_t i = 0; i < aabbNames.size(); i++)
@@ -223,44 +222,33 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			if (lightMapPath != "")
 			{
 				_fe3d.modelEntity_setLightMap(modelName, lightMapPath);
-				_fe3d.modelEntity_setLightMapped(modelName, true);
 			}
 
 			// Reflection map
 			if (reflectionMapPath != "")
 			{
 				_fe3d.modelEntity_setReflectionMap(modelName, reflectionMapPath);
-				if (reflectionType == 1)
-				{
-					_fe3d.modelEntity_setSkyReflective(modelName, true);
-				}
-				else if (reflectionType == 2)
-				{
-					_fe3d.modelEntity_setSceneReflective(modelName, true);
-				}
 			}
 
 			// Normal map
 			if (normalMapPath != "")
 			{
 				_fe3d.modelEntity_setNormalMap(modelName, normalMapPath);
-				_fe3d.modelEntity_setNormalMapped(modelName, true);
 			}
 
-			// Set boolean options
+			// Set properties
 			_fe3d.modelEntity_setFaceCulled(modelName, isFaceCulled);
 			_fe3d.modelEntity_setTransparent(modelName, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelName, isSpecular);
 			_fe3d.modelEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
 			_fe3d.modelEntity_setBright(modelName, isBright);
-			
-			// Set other options
 			_fe3d.modelEntity_setSpecularFactor(modelName, specularFactor);
 			_fe3d.modelEntity_setSpecularIntensity(modelName, specularIntensity);
 			_fe3d.modelEntity_setLightness(modelName, lightness);
 			_fe3d.modelEntity_setColor(modelName, color); 
 			_fe3d.modelEntity_setUvRepeat(modelName, uvRepeat);
 			_fe3d.modelEntity_setLevelOfDetailEntity(modelName, lodEntityID);
+			_fe3d.modelEntity_setReflectionType(modelName, reflectionType);
 		}
 
 		return true;

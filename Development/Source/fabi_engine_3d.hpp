@@ -8,6 +8,7 @@
 #include "mathematics.hpp"
 #include "water_quality.hpp"
 #include "bloom_type.hpp"
+#include "reflection_type.hpp"
 
 #include <array>
 #include <vector>
@@ -268,15 +269,12 @@ public:
 	void modelEntity_loadModel(const string& ID, const string& meshPath);
 	void modelEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void modelEntity_setLightMap(const string& ID, const string& texturePath);
-	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
 	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
+	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
 	void modelEntity_setTransparent(const string& ID, bool enabled);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
-	void modelEntity_setLightMapped(const string& ID, bool enabled);
-	void modelEntity_setSkyReflective(const string& ID, bool enabled);
-	void modelEntity_setSceneReflective(const string& ID, bool enabled);
-	void modelEntity_setNormalMapped(const string& ID, bool enabled);
+	void modelEntity_setReflectionType(const string& ID, ReflectionType type);
 	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
 	void modelEntity_setShadowed(const string& ID, bool enabled);
 	void modelEntity_setReflected(const string& ID, bool enabled);
@@ -332,11 +330,7 @@ public:
 	const bool modelEntity_isMultiParted(const string& ID);
 	const bool modelEntity_isTransparent(const string& ID);
 	const bool modelEntity_isFaceCulled(const string& ID);
-	const bool modelEntity_isLightMapped(const string& ID);
-	const bool modelEntity_isNormalMapped(const string& ID);
-	const bool modelEntity_isSkyReflective(const string& ID);
 	const bool modelEntity_isSpecularLighted(const string& ID);
-	const bool modelEntity_isSceneReflective(const string& ID);
 	const bool modelEntity_isShadowed(const string& ID);
 	const bool modelEntity_isReflected(const string& ID);
 	const bool modelEntity_isStaticToCamera(const string& ID);
@@ -344,6 +338,11 @@ public:
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
 	const bool modelEntity_isBright(const string& ID);
+	const bool modelEntity_hasDiffuseMap(const string& ID);
+	const bool modelEntity_hasLightMap(const string& ID);
+	const bool modelEntity_hasReflectionMap(const string& ID);
+	const bool modelEntity_hasNormalMap(const string& ID);
+	const ReflectionType modelEntity_getReflectionType(const string& ID);
 
 	// Billboard entity interface (core) - setters
 	void billboardEntity_add

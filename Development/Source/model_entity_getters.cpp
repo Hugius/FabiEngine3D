@@ -160,26 +160,6 @@ const bool ModelEntity::isFaceCulled()
 	return _isFaceCulled;
 }
 
-const bool ModelEntity::isLightMapped()
-{
-	return _isLightMapped;
-}
-
-const bool ModelEntity::isNormalMapped()
-{
-	return _isNormalMapped;
-}
-
-const bool ModelEntity::isSkyReflective()
-{
-	return _isSkyReflective;
-}
-
-const bool ModelEntity::isSceneReflective()
-{
-	return _isSceneReflective;
-}
-
 const bool ModelEntity::isSpecularLighted()
 {
 	return _isSpecularLighted;
@@ -197,22 +177,83 @@ const bool ModelEntity::isReflected()
 
 const bool ModelEntity::hasDiffuseMap(const string& partID)
 {
-	return (_parts[_getPartIndex(partID)].diffuseMap != 0);
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.diffuseMap != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].diffuseMap != 0);
+	}
 }
 
 const bool ModelEntity::hasLightMap(const string& partID)
 {
-	return (_parts[_getPartIndex(partID)].lightMap != 0);
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.lightMap != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].lightMap != 0);
+	}
 }
 
 const bool ModelEntity::hasReflectionMap(const string& partID)
 {
-	return (_parts[_getPartIndex(partID)].reflectionMap != 0);
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.reflectionMap != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].reflectionMap != 0);
+	}
 }
 
 const bool ModelEntity::hasNormalMap(const string& partID)
 {
-	return (_parts[_getPartIndex(partID)].normalMap != 0);
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.normalMap != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].normalMap != 0);
+	}
+}
+
+const ReflectionType ModelEntity::getReflectionType()
+{
+	return _reflectionType;
 }
 
 const bool ModelEntity::isBright()

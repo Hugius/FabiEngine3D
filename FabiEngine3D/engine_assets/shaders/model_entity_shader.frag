@@ -66,8 +66,6 @@ uniform float u_shadowLightness;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
-uniform bool u_isLightMapped;
-uniform bool u_isNormalMapped;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
@@ -154,7 +152,7 @@ void main()
 // Calculate new normal
 vec3 getNormalMappedVector()
 {
-    if(u_isNormalMappingEnabled && u_isNormalMapped && u_hasNormalMap)
+    if(u_isNormalMappingEnabled && u_hasNormalMap)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -406,7 +404,7 @@ float getShadowValue()
 // Calculate light mapping
 vec3 applyLightMapping(vec3 color)
 {
-	if(u_lightMappingEnabled && u_isLightMapped && u_hasLightMap)
+	if(u_lightMappingEnabled && u_hasLightMap)
 	{
 		vec3 lightMapColor = texture(u_lightMap, f_uv).rgb;
 		vec3 lightMappedColor = color + lightMapColor;
@@ -445,6 +443,7 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 {
 	if(u_skyReflectionsEnabled && u_isSkyReflective)
 	{
+		// Calculation reflection color
 		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv) : vec4(0.0f);
 		
 		// Check if current texel allows for reflection
@@ -475,6 +474,7 @@ vec3 applySceneReflections(vec3 color)
 {
 	if(u_sceneReflectionsEnabled && u_isSceneReflective)
 	{
+		// Calculation reflection color
 		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv) : vec4(0.0f);
 		
 		// Check if current texel allows for reflection

@@ -75,6 +75,7 @@ void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& text
 {
 	_core->_modelEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 	_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
+	_core->_modelEntityManager.loadNormalMapping(ID);
 }
 
 void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& texturePath)
@@ -98,24 +99,9 @@ void FabiEngine3D::modelEntity_setFaceCulled(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setFaceCulled(enabled);
 }
 
-void FabiEngine3D::modelEntity_setLightMapped(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setReflectionType(const string& ID, ReflectionType type)
 {
-	_core->_modelEntityManager.getEntity(ID)->setLightMapped(enabled);
-}
-
-void FabiEngine3D::modelEntity_setNormalMapped(const string& ID, bool enabled)
-{
-	_core->_modelEntityManager.getEntity(ID)->setNormalMapped(enabled);
-
-	if (enabled)
-	{
-		_core->_modelEntityManager.loadNormalMapping(ID);
-	}
-}
-
-void FabiEngine3D::modelEntity_setSkyReflective(const string& ID, bool enabled)
-{
-	_core->_modelEntityManager.getEntity(ID)->setSkyReflective(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setReflectionType(type);
 }
 
 void FabiEngine3D::modelEntity_setSpecularLighted(const string& ID, bool enabled)
@@ -160,29 +146,9 @@ const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isFaceCulled();
 }
 
-const bool FabiEngine3D::modelEntity_isLightMapped(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isLightMapped();
-}
-
-const bool FabiEngine3D::modelEntity_isNormalMapped(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isNormalMapped();
-}
-
-const bool FabiEngine3D::modelEntity_isSkyReflective(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isSkyReflective();
-}
-
 const bool FabiEngine3D::modelEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isSpecularLighted();
-}
-
-const bool FabiEngine3D::modelEntity_isSceneReflective(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isSceneReflective();
 }
 
 const bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
@@ -226,6 +192,31 @@ const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& par
 const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isBright();
+}
+
+const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+const bool FabiEngine3D::modelEntity_hasLightMap(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->hasLightMap();
+}
+
+const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->hasReflectionMap();
+}
+
+const bool FabiEngine3D::modelEntity_hasNormalMap(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->hasNormalMap();
+}
+
+const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getReflectionType();
 }
 
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
@@ -472,11 +463,6 @@ void FabiEngine3D::modelEntity_setDepthMapIncluded(const string& ID, bool enable
 void FabiEngine3D::modelEntity_setColor(const string& ID, Vec3 color, const string& partID)
 {
 	_core->_modelEntityManager.getEntity(ID)->setColor(color, partID);
-}
-
-void FabiEngine3D::modelEntity_setSceneReflective(const string& ID, bool enabled)
-{
-	_core->_modelEntityManager.getEntity(ID)->setSceneReflective(enabled);
 }
 
 void FabiEngine3D::modelEntity_setReflected(const string& ID, bool enabled)

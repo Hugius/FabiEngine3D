@@ -10,17 +10,10 @@ void FinalRenderer::bind()
 	_shader.uploadUniform("u_mixValue", _renderBus.getMotionBlurMixValue());
 	_shader.uploadUniform("u_sceneMap", 0);
 	_shader.uploadUniform("u_motionBlurMap", 1);
-
-	// Enable alpha blending
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void FinalRenderer::unbind()
 {
-	// Disable alpha blending
-	glDisable(GL_BLEND);
-
 	// Unbind shader
 	_shader.unbind();
 }

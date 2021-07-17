@@ -121,7 +121,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		// Placeholder variables
 		string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 		float uvRepeat, specularFactor, specularIntensity, lightness;
-		int reflectionType;
+		unsigned int reflectionType;
 		bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBright;
 		Vec3 modelSize, color;
 		vector<string> aabbNames;
@@ -193,7 +193,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 		// Add new model
 		_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
-			isTransparent, isSpecular, reflectionType, specularFactor, specularIntensity, lightness,
+			isTransparent, isSpecular, ReflectionType(reflectionType), specularFactor, specularIntensity, lightness,
 			Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, isBright, aabbNames, aabbPositions, aabbSizes);
 	}
 

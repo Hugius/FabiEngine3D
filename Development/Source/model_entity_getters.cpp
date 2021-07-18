@@ -91,6 +91,11 @@ const Vec3 ModelEntity::getScaling(const string& partID)
 	}
 }
 
+const Vec3 ModelEntity::getLevelOfDetailScaling()
+{
+	return _levelOfDetailScaling;
+}
+
 const float ModelEntity::getInversion(const string& partID)
 {
 	if (partID.empty())

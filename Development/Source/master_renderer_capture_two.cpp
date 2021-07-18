@@ -74,7 +74,7 @@ void MasterRenderer::_captureSceneDepth()
 						// Change transformation
 						lodEntity->setTranslation(modelEntity->getTranslation());
 						lodEntity->setRotation(modelEntity->getRotation());
-						//lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+						lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getLevelOfDetailScaling()) * originalSize);
 						lodEntity->setVisible(modelEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
@@ -267,7 +267,7 @@ void MasterRenderer::_captureShadows()
 					// Change transformation
 					lodEntity->setTranslation(modelEntity->getTranslation());
 					lodEntity->setRotation(modelEntity->getRotation());
-					//lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getLevelOfDetailScaling()) * originalSize);
 					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 

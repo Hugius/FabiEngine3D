@@ -32,12 +32,12 @@ void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath
 	// Load mesh
 	loadMesh(ID, meshPath);
 
+	// Set properties
 	auto entity = getEntity(ID);
-
-	// Load transformation
 	entity->setTranslation(T);
 	entity->setRotation(R);
 	entity->setScaling(S);
+	entity->setLevelOfDetailScaling(S);
 }
 
 void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)

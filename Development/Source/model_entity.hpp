@@ -20,6 +20,7 @@ public:
 	void setRotationOrigin(Vec3 value, const string& partID = "");
 	void setScaling(Vec3 value, const string& partID = "");
 	void setColor(Vec3 value, const string& partID = "");
+	void setLevelOfDetailScaling(Vec3 value);
 	void setInversion(float value, const string& partID = "");
 	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& value, const string& partID = "");
@@ -57,6 +58,7 @@ public:
 	const Vec3 getRotation(const string& partID = "");
 	const Vec3 getRotationOrigin(const string& partID = "");
 	const Vec3 getScaling(const string& partID = "");
+	const Vec3 getLevelOfDetailScaling();
 	const Vec3 getColor(const string& partID = "");
 	const float getInversion(const string& partID = "");
 	const vector<string> getPartIDs();
@@ -131,6 +133,7 @@ private:
 	Vec3 _baseRotation = Vec3(0.0f);
 	Vec3 _baseRotationOrigin = Vec3(0.0f);
 	Vec3 _baseScaling = Vec3(1.0f);
+	Vec3 _levelOfDetailScaling = Vec3(1.0f);
 
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;

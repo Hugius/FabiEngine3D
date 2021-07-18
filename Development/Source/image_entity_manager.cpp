@@ -36,33 +36,29 @@ void ImageEntityManager::addImageEntity(const string& ID, const string& textureP
 {
 	// Create entity
 	_createEntity(ID);
+
+	// Set properties
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
-
-	// Load transformation
+	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
 	entity->setTranslation(translation);
 	entity->setRotation(rotation);
 	entity->setScaling(scaling);
 	entity->setCentered(isCentered);
-
-	// Load diffuse map
-	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
 }
 
 void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);
+
+	// Set properties
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
-
-	// Load transformation
 	entity->setTranslation(translation);
 	entity->setRotation(rotation);
 	entity->setScaling(scaling);
 	entity->setCentered(isCentered);
-
-	// Set color
 	entity->setColor(color);
 }
 

@@ -156,6 +156,11 @@ void ModelEntity::setColor(Vec3 value, const string& partID)
 	}
 }
 
+void ModelEntity::setLevelOfDetailScaling(Vec3 value)
+{
+	_levelOfDetailScaling = value;
+}
+
 void ModelEntity::setInversion(float value, const string& partID)
 {
 	value = std::clamp(value, 0.0f, 1.0f);

@@ -46,15 +46,15 @@ void main()
 	if(u_isWaving)
 	{
 		// Get size of 1 texel of this texture
-		float texelSize = 1.0f / textureSize(u_displacementMap, 0).x;
+		vec2 texelSize = (vec2(1.0f) / textureSize(u_displacementMap, 0));
 
 		// Floor and ceil to nearest texels
 		float minX = u_waveOffset.x - mod(u_waveOffset.x, 1.0f);
 		float maxX = u_waveOffset.x + mod(u_waveOffset.x, 1.0f);
 		float minZ = u_waveOffset.y - mod(u_waveOffset.y, 1.0f);
 		float maxZ = u_waveOffset.y + mod(u_waveOffset.y, 1.0f);
-		float height1 = texture(u_displacementMap, f_uv + vec2(minX, minZ)).r;
-		float height2 = texture(u_displacementMap, f_uv + vec2(maxX, maxZ)).r;
+		float height1 = texture(u_displacementMap, f_uv + (vec2(minX, minZ) * texelSize)).r;
+		float height2 = texture(u_displacementMap, f_uv + (vec2(maxX, maxZ) * texelSize)).r;
 
 		// Calculate height in between texels
 		float height = height1 + ((height2 - height1) / 2.0f);

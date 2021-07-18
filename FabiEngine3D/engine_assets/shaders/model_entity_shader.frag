@@ -1,7 +1,7 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Const variables
+// Constant variables
 #define MAX_POINT_LIGHT_COUNT 128
 
 // In variables
@@ -89,7 +89,6 @@ uniform bool u_hasReflectionMap;
 uniform bool u_isBright;
 
 // Integer uniforms
-uniform int u_shadowMapSize;
 uniform int u_pointLightCount;
 
 // Out variables
@@ -341,11 +340,11 @@ float getShadowValue()
 		)
 		{
 			// Variables
-			float shadow        = 0.0f;
-			vec3 projCoords     = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
-			float currentDepth  = projCoords.z;
-			float texelSize     = 1.0f / float(u_shadowMapSize);
-			float bias			= 0.00075f;
+			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
+			float shadow = 0.0f;
+			vec3 projCoords = (((f_shadowPos.xyz / f_shadowPos.w) * 0.5f) + 0.5f);
+			float currentDepth = projCoords.z;
+			float bias = 0.00075f;
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
@@ -358,8 +357,8 @@ float getShadowValue()
 			{
 				for (int y = -1; y <= 1; y++)
 				{
-					float pcfDepth = texture(u_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - bias > pcfDepth) ? u_shadowLightness : 1.0f;        
+					float pcfDepth = texture(u_shadowMap, projCoords.xy + (vec2(x, y) * texelSize)).r; 
+					shadow += ((currentDepth - texelSize.x) > pcfDepth) ? u_shadowLightness : 1.0f;        
 				}    
 			}
             

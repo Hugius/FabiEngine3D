@@ -161,14 +161,13 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		// 2D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Render debug screens
-		if (_renderBus.isDebugRenderingEnabled())
+		if (_renderBus.isDebugRenderingEnabled()) // Render debug screens
 		{
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
 			_renderDebugScreens();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		}
-		else // Render final postprocessed texture
+		else // Render final scene texture
 		{
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
 			_renderFinalSceneTexture();

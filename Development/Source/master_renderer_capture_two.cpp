@@ -310,20 +310,22 @@ void MasterRenderer::_captureShadows()
 
 void MasterRenderer::_captureAntiAliasing()
 {
-	_antiAliasingFramebuffer.bind();
-	_antiAliasingRenderer.bind();
-	_antiAliasingRenderer.render(_finalSurface, _renderBus.getPrimarySceneMap());
-	_antiAliasingRenderer.unbind();
-	_antiAliasingFramebuffer.unbind();
-	_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getTexture(0));
+	if (_renderBus.isFxaaEnabled())
+	{
+		_antiAliasingFramebuffer.bind();
+		_antiAliasingRenderer.bind();
+		_antiAliasingRenderer.render(_finalSurface, _renderBus.getPrimarySceneMap());
+		_antiAliasingRenderer.unbind();
+		_antiAliasingFramebuffer.unbind();
+		_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getTexture(0));
+	}
 }
 
 void MasterRenderer::_captureBloom()
 {
 	if (_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
-		// Blur texture
-		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
+		if (_renderBus.getBloomType() == BloomType::EVERYTHING) // Blur primary scene map
 		{
 			_bloomRendererHighQuality.bind();
 			_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
@@ -336,7 +338,7 @@ void MasterRenderer::_captureBloom()
 				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 			_bloomRendererLowQuality.unbind();
 		}
-		else
+		else // Blur secondary scene map
 		{
 			// Blur the scene map high quality (small blur)
 			_bloomRendererHighQuality.bind();

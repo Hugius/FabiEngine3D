@@ -122,7 +122,7 @@ void MasterRenderer::_captureSceneDepth()
 		// Unbind
 		_depthRenderer.unbind();
 		_sceneDepthFramebuffer.unbind();
-		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getDiffuseMap(0));
+		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
 	}
 	else
 	{
@@ -151,7 +151,7 @@ void MasterRenderer::_capturePostProcessing()
 	_postProcessingRenderer.render(_finalSurface);
 	_postProcessingRenderer.unbind();
 	_postProcessingFramebuffer.unbind();
-	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getDiffuseMap(0));
+	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
 void MasterRenderer::_captureMotionBlur()
@@ -300,7 +300,7 @@ void MasterRenderer::_captureShadows()
 		// Unbind
 		_shadowRenderer.unbind();
 		_shadowFramebuffer.unbind();
-		_renderBus.setShadowMap(_shadowFramebuffer.getDiffuseMap(0));
+		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
 	}
 	else
 	{
@@ -315,7 +315,7 @@ void MasterRenderer::_captureAntiAliasing()
 	_antiAliasingRenderer.render(_finalSurface, _renderBus.getPrimarySceneMap());
 	_antiAliasingRenderer.unbind();
 	_antiAliasingFramebuffer.unbind();
-	_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getDiffuseMap(0));
+	_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getTexture(0));
 }
 
 void MasterRenderer::_captureBloom()

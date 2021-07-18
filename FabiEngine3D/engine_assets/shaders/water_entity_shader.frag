@@ -176,8 +176,8 @@ vec3 getPointLighting(vec3 normal)
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting distance
-			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
-			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
+			float distance = (length(u_pointLightPositions[i] - f_pos) / u_pointLightDistanceFactors[i]);
+			float attenuation = (1.0f / (1.0f + (distance * distance)));
 
             // Apply
             vec3 current = vec3(0.0f);

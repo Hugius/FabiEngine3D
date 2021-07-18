@@ -40,7 +40,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 			_blurFramebuffer.bind();
 			_render(entity, texture);
 			_blurFramebuffer.unbind();
-			texture = _blurFramebuffer.getDiffuseMap(0);
+			texture = _blurFramebuffer.getTexture(0);
 		}
 	}
 
@@ -56,7 +56,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, GLuint te
 			_blurFramebuffer.bind();
 			_render(entity, texture);
 			_blurFramebuffer.unbind();
-			texture = _blurFramebuffer.getDiffuseMap(0);
+			texture = _blurFramebuffer.getTexture(0);
 		}
 	}
 

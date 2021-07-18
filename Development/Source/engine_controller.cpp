@@ -73,6 +73,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Custom cursor texture
 		imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+		imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+		imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_text.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);
 

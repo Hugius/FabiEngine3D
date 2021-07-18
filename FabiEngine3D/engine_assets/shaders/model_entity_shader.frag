@@ -245,8 +245,8 @@ vec3 getPointLighting(vec3 normal)
             // Calculate lighting strength
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
 			float diffuse = max(dot(normal, lightDir), 0.0f);
-			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
-			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
+			float distance = (length(u_pointLightPositions[i] - f_pos) / u_pointLightDistanceFactors[i]);
+			float attenuation = (1.0f / (1.0f + (distance * distance)));
 			float specular = getSpecularValue(u_pointLightPositions[i], normal);
 
             // Apply

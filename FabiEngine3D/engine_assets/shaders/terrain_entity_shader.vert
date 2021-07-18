@@ -1,11 +1,11 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // In variables
-layout(location = 0) in vec3 v_pos;
-layout(location = 1) in vec2 v_uv;
-layout(location = 2) in vec3 v_normal;
-layout(location = 3) in vec3 v_tangent;
+layout (location = 0) in vec3 v_pos;
+layout (location = 1) in vec2 v_uv;
+layout (location = 2) in vec3 v_normal;
+layout (location = 3) in vec3 v_tangent;
 
 // Matrix44 uniforms
 uniform mat4 u_viewMatrix;

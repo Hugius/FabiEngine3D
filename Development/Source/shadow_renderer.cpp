@@ -22,9 +22,14 @@ void ShadowRenderer::bind()
 
 void ShadowRenderer::unbind()
 {
+	// Disable depth testing
+	glDisable(GL_DEPTH_TEST);
+
+	// Disable clipping
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
-	glDisable(GL_DEPTH_TEST);
+
+	// Unbind shader
 	_shader.unbind();
 }
 

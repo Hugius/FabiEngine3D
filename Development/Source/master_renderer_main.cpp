@@ -18,23 +18,25 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
 	_imageEntityRenderer      ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
+	_depthRenderer			  ("depth_shader.vert",			   "depth_shader.frag",			   renderBus),
+	_shadowRenderer			  ("shadow_shader.vert",		   "shadow_shader.frag",		   renderBus),
+	_antiAliasingRenderer	  ("anti_aliasing_shader.vert",	   "anti_aliasing_shader.frag",	   renderBus),
 	_dofRenderer			  ("blur_shader.vert",             "blur_shader.frag",             renderBus),
 	_motionBlurRenderer		  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
 	_bloomRendererHighQuality ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
 	_bloomRendererLowQuality  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
-	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
-	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   renderBus),
-	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
+	_postProcessingRenderer   ("post_processing_shader.vert",  "post_processing_shader.frag",  renderBus),
 	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
 	// Load framebuffers
-	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
-	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
+	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
+	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
+	_antiAliasingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_dofRenderer.loadFramebuffers(BlurType::DOF, 2);
 	_motionBlurRenderer.loadFramebuffers(BlurType::MOTION, 4);
 	_bloomRendererHighQuality.loadFramebuffers(BlurType::BLOOM, 2);
@@ -43,7 +45,6 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");
 	_finalSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-	_finalSurface->setMirroredVertically(true);
 }
 
 void MasterRenderer::update()
@@ -101,7 +102,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	}
 	else
 	{
-		// Pre-rendering
+		// Pre-captures
 		_timer.startDeltaPart("reflectionPreRender");
 		_captureSceneReflections();
 		_captureWaterReflections();
@@ -109,11 +110,11 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_timer.startDeltaPart("refractionPreRender");
 		_captureWaterRefractions();
 		_timer.stopDeltaPart();
-		_timer.startDeltaPart("shadowPreRender");
-		_captureShadows();
-		_timer.stopDeltaPart();
 		_timer.startDeltaPart("depthPreRender");
 		_captureSceneDepth();
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("shadowPreRender");
+		_captureShadows();
 		_timer.stopDeltaPart();
 
 		// Bind screen framebuffer
@@ -147,8 +148,9 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_renderBus.setPrimarySceneMap(_screenFramebuffer.getDiffuseMap(0));
 		_renderBus.setSecondarySceneMap(_screenFramebuffer.getDiffuseMap(1));
 
-		// Postprocessing captures
+		// Post-captures
 		_timer.startDeltaPart("postProcessing");
+		_captureAntiAliasing();
 		_captureBloom();
 		_captureDofBlur();
 		_captureLensFlare();

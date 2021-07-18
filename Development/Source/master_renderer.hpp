@@ -15,6 +15,7 @@
 #include "shadow_renderer.hpp"
 #include "final_renderer.hpp"
 #include "depth_renderer.hpp"
+#include "anti_aliasing_renderer.hpp"
 #include "timer.hpp"
 #include "blur_type.hpp"
 #include "texture_loader.hpp"
@@ -37,13 +38,14 @@ private:
 	void _captureSceneReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
-	void _captureShadows();
-	void _captureBloom();
 	void _captureSceneDepth();
-	void _capturePostProcessing();
+	void _captureShadows();
+	void _captureAntiAliasing();
+	void _captureBloom();
 	void _captureDofBlur();
-	void _captureMotionBlur();
 	void _captureLensFlare();
+	void _capturePostProcessing();
+	void _captureMotionBlur();
 
 	// Rendering functions
 	void _renderSkyEntity();
@@ -75,23 +77,25 @@ private:
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
 	ImageEntityRenderer      _imageEntityRenderer;
+	DepthRenderer            _depthRenderer;
+	ShadowRenderer           _shadowRenderer;
+	AntiAliasingRenderer	 _antiAliasingRenderer;
 	BlurRenderer             _dofRenderer;
 	BlurRenderer             _motionBlurRenderer;
 	BlurRenderer             _bloomRendererHighQuality;
 	BlurRenderer             _bloomRendererLowQuality;
-	ShadowRenderer           _shadowRenderer;
-	DepthRenderer            _depthRenderer;
-	PostRenderer             _postRenderer;
+	PostRenderer             _postProcessingRenderer;
 	FinalRenderer            _finalRenderer;
 
 	// Framebuffers
-	RenderFramebuffer _screenFramebuffer;
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;
 	RenderFramebuffer _waterRefractionFramebuffer;
-	RenderFramebuffer _postProcessingFramebuffer;
-	RenderFramebuffer _shadowFramebuffer;
 	RenderFramebuffer _sceneDepthFramebuffer;
+	RenderFramebuffer _shadowFramebuffer;
+	RenderFramebuffer _screenFramebuffer;
+	RenderFramebuffer _antiAliasingFramebuffer;
+	RenderFramebuffer _postProcessingFramebuffer;
 
 	// Miscellaneous
 	float _cameraYawDifference = 0.0f;

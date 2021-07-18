@@ -1,5 +1,5 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // Const variables
 #define MAX_POINT_LIGHT_COUNT 128
@@ -10,11 +10,11 @@ in vec2 f_uv;
 in vec4 f_clip;
 
 // Textures
-layout(location = 0) uniform sampler2D u_reflectionMap;
-layout(location = 1) uniform sampler2D u_refractionMap;
-layout(location = 2) uniform sampler2D u_depthMap;
-layout(location = 3) uniform sampler2D u_dudvMap;
-layout(location = 4) uniform sampler2D u_normalMap;
+layout (location = 0) uniform sampler2D u_reflectionMap;
+layout (location = 1) uniform sampler2D u_refractionMap;
+layout (location = 2) uniform sampler2D u_depthMap;
+layout (location = 3) uniform sampler2D u_dudvMap;
+layout (location = 4) uniform sampler2D u_normalMap;
 
 // Vector3 uniforms
 uniform vec3 u_directionalLightColor;

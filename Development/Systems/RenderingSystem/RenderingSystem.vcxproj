@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\aabb_entity_renderer.cpp" />
+    <ClCompile Include="..\..\Source\anti_aliasing_renderer.cpp" />
     <ClCompile Include="..\..\Source\base_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\billboard_entity_renderer.cpp" />
     <ClCompile Include="..\..\Source\blur_renderer.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\aabb_entity_renderer.hpp" />
+    <ClInclude Include="..\..\Source\anti_aliasing_renderer.hpp" />
     <ClInclude Include="..\..\Source\base_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\billboard_entity_renderer.hpp" />
     <ClInclude Include="..\..\Source\blur_renderer.hpp" />
@@ -70,6 +72,8 @@
   <ItemGroup>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag" />
@@ -82,8 +86,8 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.frag" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.frag" />

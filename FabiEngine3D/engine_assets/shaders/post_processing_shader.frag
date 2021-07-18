@@ -1,16 +1,16 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // In variables
 in vec2 f_uv;
 in float f_flareOcclusion;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sceneMap;
-layout(location = 1) uniform sampler2D u_bloomMap;
-layout(location = 2) uniform sampler2D u_depthMap;
-layout(location = 3) uniform sampler2D u_blurMap;
-layout(location = 4) uniform sampler2D u_flareMap;
+layout (location = 0) uniform sampler2D u_sceneMap;
+layout (location = 1) uniform sampler2D u_bloomMap;
+layout (location = 2) uniform sampler2D u_depthMap;
+layout (location = 3) uniform sampler2D u_blurMap;
+layout (location = 4) uniform sampler2D u_flareMap;
 
 // Float uniforms
 uniform float u_nearZ;

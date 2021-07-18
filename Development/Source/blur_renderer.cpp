@@ -10,11 +10,16 @@ void BlurRenderer::loadFramebuffers(BlurType type, unsigned int blurSize)
 
 void BlurRenderer::bind()
 {
+	// Bind shader
 	_shader.bind();
+
+	// Shader uniforms
+	_shader.uploadUniform("u_diffuseMap", 0);
 }
 
 void BlurRenderer::unbind()
 {
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -62,9 +67,6 @@ void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, GLuint texture)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
-		// Shader uniforms
-		_shader.uploadUniform("u_diffuseMap", 0);
-
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);

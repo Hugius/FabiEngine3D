@@ -10,8 +10,6 @@ void ImageEntityRenderer::bind()
 	// Shader uniforms
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Enable alpha blending

@@ -43,6 +43,9 @@
     <Filter Include="Shaders\Miscellaneous Shaders">
       <UniqueIdentifier>{fd1c8bbb-eff4-4e91-8ff5-72fc31f68f12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Post-processing Shaders">
+      <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\render_framebuffer_main.cpp">
@@ -120,6 +123,9 @@
     <ClCompile Include="..\..\Source\shadow_renderer.cpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\anti_aliasing_renderer.cpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\render_framebuffer.hpp">
@@ -182,6 +188,9 @@
     <ClInclude Include="..\..\Source\shadow_renderer.hpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\anti_aliasing_renderer.hpp">
+      <Filter>Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.frag">
@@ -226,28 +235,10 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_shader.vert">
       <Filter>Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.frag">
       <Filter>Shaders\Miscellaneous Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\depth_shader.vert">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.frag">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.vert">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.frag">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_shader.vert">
       <Filter>Shaders\Miscellaneous Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag">
@@ -255,6 +246,30 @@
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert">
       <Filter>Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.frag">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.vert">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.vert">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.frag">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.vert">
+      <Filter>Shaders\Post-processing Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.frag">
+      <Filter>Shaders\Post-processing Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -146,11 +146,10 @@ void MasterRenderer::_captureDofBlur()
 
 void MasterRenderer::_capturePostProcessing()
 {
-	// Apply bloom, DOF & lens-flare on scene texture
 	_postProcessingFramebuffer.bind();
-	_postRenderer.bind();
-	_postRenderer.render(_finalSurface);
-	_postRenderer.unbind();
+	_postProcessingRenderer.bind();
+	_postProcessingRenderer.render(_finalSurface);
+	_postProcessingRenderer.unbind();
 	_postProcessingFramebuffer.unbind();
 	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getDiffuseMap(0));
 }
@@ -229,7 +228,7 @@ void MasterRenderer::_captureLensFlare()
 			alpha = std::clamp(alpha, 0.0f, 1.0f);
 		}
 
-		// Update post-processing shader values
+		// Update shader properties
 		_renderBus.setLensFlareAlpha(alpha);
 		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
 		_renderBus.setFlareSourcePosition(lightingPosition);
@@ -307,6 +306,16 @@ void MasterRenderer::_captureShadows()
 	{
 		_renderBus.setShadowMap(0);
 	}
+}
+
+void MasterRenderer::_captureAntiAliasing()
+{
+	_antiAliasingFramebuffer.bind();
+	_antiAliasingRenderer.bind();
+	_antiAliasingRenderer.render(_finalSurface, _renderBus.getPrimarySceneMap());
+	_antiAliasingRenderer.unbind();
+	_antiAliasingFramebuffer.unbind();
+	_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getDiffuseMap(0));
 }
 
 void MasterRenderer::_captureBloom()

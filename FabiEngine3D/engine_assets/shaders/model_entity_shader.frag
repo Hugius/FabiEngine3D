@@ -1,5 +1,5 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // Const variables
 #define MAX_POINT_LIGHT_COUNT 128
@@ -13,14 +13,14 @@ in vec4 f_clip;
 in mat3 f_tbnMatrix;
 
 // Textures
-layout(location = 0) uniform sampler2D   u_diffuseMap;
-layout(location = 1) uniform sampler2D   u_lightMap;
-layout(location = 2) uniform sampler2D   u_reflectionMap;
-layout(location = 3) uniform sampler2D   u_normalMap;
-layout(location = 4) uniform sampler2D   u_sceneReflectionMap;
-layout(location = 5) uniform sampler2D   u_shadowMap;
-layout(location = 6) uniform samplerCube u_mainSkyMap;
-layout(location = 7) uniform samplerCube u_mixSkyMap;
+layout (location = 0) uniform sampler2D   u_diffuseMap;
+layout (location = 1) uniform sampler2D   u_lightMap;
+layout (location = 2) uniform sampler2D   u_reflectionMap;
+layout (location = 3) uniform sampler2D   u_normalMap;
+layout (location = 4) uniform sampler2D   u_sceneReflectionMap;
+layout (location = 5) uniform sampler2D   u_shadowMap;
+layout (location = 6) uniform samplerCube u_mainSkyMap;
+layout (location = 7) uniform samplerCube u_mixSkyMap;
 
 // Matrix44 uniforms
 uniform mat4 u_skyRotationMatrix;

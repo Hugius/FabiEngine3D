@@ -1,14 +1,12 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // In variables
-layout(location = 0) in vec2 v_pos;
-layout(location = 1) in vec2 v_uv;
+layout (location = 0) in vec2 v_pos;
+layout (location = 1) in vec2 v_uv;
 
-layout(location = 2) uniform sampler2D u_depthMap;
-
-// Matrix44 uniforms
-uniform mat4 u_modelMatrix;
+// Textures
+layout (location = 2) uniform sampler2D u_depthMap;
 
 // Vector4 uniforms
 uniform vec4 u_flareSourcePositionClipspace;
@@ -22,8 +20,6 @@ uniform float u_farZ;
 uniform float u_nearZ;
 
 // Boolean uniforms
-uniform bool u_isMirroredHorizontally;
-uniform bool u_isMirroredVertically;
 uniform bool u_isLensFlareEnabled;
 
 // Out variables
@@ -36,9 +32,8 @@ float calculateFlareOcclusion();
 
 void main()
 {
-	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
-	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
-	f_uv.y = u_isMirroredVertically ? v_uv.y : -v_uv.y; 
+	gl_Position = vec4(v_pos, 0.0f, 1.0f);
+	f_uv = v_uv; 
     f_flareOcclusion = calculateFlareOcclusion();
 }
 

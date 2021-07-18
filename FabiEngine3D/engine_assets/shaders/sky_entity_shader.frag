@@ -1,12 +1,12 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // In variables
 in vec3 f_uv;
 
 // Textures
-layout(location = 0) uniform samplerCube u_mainCubeMap;
-layout(location = 1) uniform samplerCube u_mixCubeMap;
+layout (location = 0) uniform samplerCube u_mainCubeMap;
+layout (location = 1) uniform samplerCube u_mixCubeMap;
 
 // Float uniforms
 uniform float u_mainLightness;

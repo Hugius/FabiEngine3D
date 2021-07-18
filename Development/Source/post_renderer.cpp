@@ -20,8 +20,6 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_flareSourcePositionClipspace", _renderBus.getFlareSourcePositionClipspace());
 	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
-
-	// Texture uniforms
 	_shader.uploadUniform("u_sceneMap", 0);
 	_shader.uploadUniform("u_bloomMap", 1);
 	_shader.uploadUniform("u_depthMap", 2);
@@ -38,12 +36,7 @@ void PostRenderer::unbind()
 void PostRenderer::render(const shared_ptr<ImageEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
-	{
-		// Shader uniforms
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
-		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
-		
+	{		
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getPrimarySceneMap());

@@ -1,32 +1,29 @@
-#include "final_renderer.hpp"
-#include "render_bus.hpp"
+#include "anti_aliasing_renderer.hpp"
+#include "configuration.hpp"
+#include "text_entity.hpp"
 
-void FinalRenderer::bind()
+void AntiAliasingRenderer::bind()
 {
 	// Bind shader
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_mixValue", _renderBus.getMotionBlurMixValue());
 	_shader.uploadUniform("u_sceneMap", 0);
-	_shader.uploadUniform("u_motionBlurMap", 1);
 }
 
-void FinalRenderer::unbind()
+void AntiAliasingRenderer::unbind()
 {
 	// Unbind shader
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionBlurMap)
+void AntiAliasingRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sceneMap);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, motionBlurMap);
 
 		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());
@@ -39,8 +36,6 @@ void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap
 
 		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

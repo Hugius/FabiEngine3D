@@ -1,12 +1,12 @@
 #version 330 core
-#extension GL_ARB_explicit_uniform_location : enable
+#extension GL_ARB_explicit_uniform_location : require
 
 // In variables
 in vec2 f_pos;
 in vec2 f_uv;
 
 // Textures
-uniform sampler2D u_diffuseMap;
+layout (location = 0) uniform sampler2D u_diffuseMap;
 
 // Float uniforms
 uniform float u_intensity;

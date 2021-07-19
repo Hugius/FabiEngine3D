@@ -86,7 +86,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 bool ScriptEditor::saveScriptFiles()
 {
 	// Editor must be loaded
-	if (_isEditorLoaded)
+	if (!_isEditorLoaded)
 	{
 		return false;
 	}

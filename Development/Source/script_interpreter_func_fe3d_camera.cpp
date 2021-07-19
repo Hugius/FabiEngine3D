@@ -233,7 +233,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_enableFirstPersonView(0.0f, 0.0f);
+			_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -121,7 +121,11 @@ void TopViewportController::_updateProjectScreenManagement()
 		// Quitting with ESCAPE
 		if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && leftScreen->getID() == "main")
 		{
-			_fe3d.application_stop();
+			// Check if script execution not started
+			if (!_scriptEditor.getScriptExecutor().isStarted())
+			{
+				_fe3d.application_stop();
+			}
 		}
 
 		// Check if user wants to save changes

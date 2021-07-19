@@ -241,25 +241,25 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setBright(newEntityID, _fe3d.modelEntity_isBright(previewID));
 
 			// Diffuse map
-			if (_fe3d.modelEntity_hasDiffuseMap(previewID))
+			if (!isMultiParted && _fe3d.modelEntity_hasDiffuseMap(previewID))
 			{
 				_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 			}
 
 			// Light map
-			if (_fe3d.modelEntity_hasLightMap(previewID))
+			if (!isMultiParted && _fe3d.modelEntity_hasLightMap(previewID))
 			{
 				_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
 			}
 
 			// Reflection map
-			if (_fe3d.modelEntity_hasReflectionMap(previewID))
+			if (!isMultiParted && _fe3d.modelEntity_hasReflectionMap(previewID))
 			{
 				_fe3d.modelEntity_setReflectionMap(newEntityID, _fe3d.modelEntity_getReflectionMapPath(previewID));
 			}
 
 			// Normal map
-			if (_fe3d.modelEntity_hasNormalMap(previewID))
+			if (!isMultiParted && _fe3d.modelEntity_hasNormalMap(previewID))
 			{
 				_fe3d.modelEntity_setNormalMap(newEntityID, _fe3d.modelEntity_getNormalMapPath(previewID));
 			}
@@ -293,25 +293,25 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setBright(newEntityID, _fe3d.modelEntity_isBright(previewID));
 
 		// Diffuse map
-		if (_fe3d.modelEntity_hasDiffuseMap(previewID))
+		if (!isMultiParted && _fe3d.modelEntity_hasDiffuseMap(previewID))
 		{
 			_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 		}
 
 		// Light map
-		if (_fe3d.modelEntity_hasLightMap(previewID))
+		if (!isMultiParted && _fe3d.modelEntity_hasLightMap(previewID))
 		{
 			_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
 		}
 
 		// Reflection map
-		if (_fe3d.modelEntity_hasReflectionMap(previewID))
+		if (!isMultiParted && _fe3d.modelEntity_hasReflectionMap(previewID))
 		{
 			_fe3d.modelEntity_setReflectionMap(newEntityID, _fe3d.modelEntity_getReflectionMapPath(previewID));
 		}
 
 		// Normal map
-		if (_fe3d.modelEntity_hasNormalMap(previewID))
+		if (!isMultiParted && _fe3d.modelEntity_hasNormalMap(previewID))
 		{
 			_fe3d.modelEntity_setNormalMap(newEntityID, _fe3d.modelEntity_getNormalMapPath(previewID));
 		}

@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -87,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -121,7 +121,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, 2) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -167,7 +167,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -185,7 +185,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
@@ -209,7 +209,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesFolder())
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 

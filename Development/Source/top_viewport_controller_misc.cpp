@@ -74,7 +74,7 @@ void TopViewportController::_updateProjectCreating()
 				// Generate new project directory
 				_fe3d.misc_createNewDirectory(newProjectDirectoryPath);
 
-				// Generate project subfolders
+				// Generate project subdirectories
 				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\data");
 				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\saves");
 				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes");
@@ -145,7 +145,7 @@ void TopViewportController::_prepareProjectLoading()
 	}
 	else
 	{
-		Logger::throwError("Projects folder is missing!");
+		Logger::throwError("Projects directory is missing!");
 	}
 }
 
@@ -153,14 +153,16 @@ void TopViewportController::_updateProjectLoading()
 {
 	if (_loadingProject)
 	{
-		string clickedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
+		// Temporary values
+		const string clickedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
+		const string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + clickedButtonID;
 
 		// Check if user clicked a project name
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if (_isProjectCorrupted(clickedButtonID))
+			if (isProjectCorrupted(projectDirectoryPath))
 			{
-				Logger::throwWarning("Cannot load project: corrupted files/folders!");
+				Logger::throwWarning("Cannot load project: corrupted files/directories!");
 			}
 			else
 			{
@@ -234,11 +236,11 @@ void TopViewportController::_updateProjectDeleting()
 				_applyProjectChange();
 			}
 
-			// Check if project folder is still existing
+			// Check if project directory is still existing
 			string directoryPath = (_fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID);
 			if (_fe3d.misc_isDirectoryExisting(directoryPath))
 			{
-				// Deleting project folder
+				// Deleting project directory
 				std::filesystem::remove_all(directoryPath);
 
 				// Logging
@@ -335,11 +337,8 @@ void TopViewportController::_applyProjectChange()
 	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }
 
-bool TopViewportController::_isProjectCorrupted(const string& projectID)
+bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath)
 {
-	// Compose full directory path
-	string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + projectID;
-
 	// Check if all default directories are still existing
 	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath) ||
 		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\data") ||

@@ -3,9 +3,9 @@
 
 // Constant variables
 #define LUMINOSITY_VECTOR vec3(0.299f, 0.587f, 0.114f)
-#define R_fxaaSpanMax 8.0f
-#define R_fxaaReduceMin 0.0078125
-#define R_fxaaReduceMul 0.03125f
+#define MAX_DIRECTION_TEXELS 8.0f
+#define MIN_DIRECTION_ADDER 0.0078125f
+#define LUMINOSITY_MULTIPLIER 0.03125f
 
 // In variables
 in vec2 f_uv;
@@ -34,21 +34,24 @@ void main()
 	direction.x = -((luminosityTL + luminosityTR) - (luminosityBL + luminosityBR));
 	direction.y =  ((luminosityTL + luminosityBL) - (luminosityTR + luminosityBR));
 	
-	//
-	float dirReduce = max((luminosityTL + luminosityTR + luminosityBL + luminosityBR) * R_fxaaReduceMul, R_fxaaReduceMin);
-	float inverseDirAdjustment = 1.0/(min(abs(direction.x), abs(direction.y)) + dirReduce);
+	// Calculate direction adder
+	float directionAdder = max((luminosityTL + luminosityTR + luminosityBL + luminosityBR) * LUMINOSITY_MULTIPLIER, MIN_DIRECTION_ADDER);
+
+	// Calculate direction adder multiplier
+	float directionMultiplier = (1.0f / (min(abs(direction.x), abs(direction.y)) + directionAdder));
 	
-	direction = clamp(direction * inverseDirAdjustment, -R_fxaaSpanMax, R_fxaaSpanMax) * texelSize;
+	// Clamp direction to maximum texel range
+	direction = (clamp((direction * directionMultiplier), -MAX_DIRECTION_TEXELS, MAX_DIRECTION_TEXELS) * texelSize);
 
 	// Calculate close range blur
 	vec3 closeBlur = vec3(0.0f);
-	closeBlur += texture(u_sceneMap, f_uv + (direction * vec2((1.0f / 3.0f) - 0.5f))).rgb * 0.5f;
-	closeBlur += texture(u_sceneMap, f_uv + (direction * vec2((2.0f / 3.0f) - 0.5f))).rgb * 0.5f;
+	closeBlur += (texture(u_sceneMap, f_uv + (direction * vec2((1.0f / 3.0f) - 0.5f))).rgb * 0.5f);
+	closeBlur += (texture(u_sceneMap, f_uv + (direction * vec2((2.0f / 3.0f) - 0.5f))).rgb * 0.5f);
 
 	// Calculate far range blur
 	vec3 farBlur = (closeBlur * 0.5f);
-	farBlur += texture(u_sceneMap, f_uv + (direction * vec2(-0.5f))).rgb * 0.25f;
-	farBlur += texture(u_sceneMap, f_uv + (direction * vec2(0.5f))).rgb * 0.25f;
+	farBlur += (texture(u_sceneMap, f_uv + (direction * vec2(-0.5f))).rgb * 0.25f);
+	farBlur += (texture(u_sceneMap, f_uv + (direction * vec2(0.5f))).rgb * 0.25f);
 
 	// Calculate minimum luminosity
 	float minLuminosity = min(luminosityMM, min(min(luminosityTL, luminosityTR), min(luminosityBL, luminosityBR)));

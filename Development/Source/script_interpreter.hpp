@@ -111,7 +111,7 @@ private:
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	bool _validateKeyInputString(const string& inputString);
 	bool _validateMouseInputString(const string& inputString);
-	bool _validateSavesFolder();
+	bool _validateSavesDirectory();
 	Vec2 _convertGuiPositionToViewport(Vec2 position);
 	Vec2 _convertGuiPositionFromViewport(Vec2 position);
 	Vec2 _convertGuiSizeToViewport(Vec2 size);

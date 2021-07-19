@@ -1,5 +1,6 @@
 #include "engine_controller.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 EngineController::EngineController() :
 	FabiEngine3D(),
@@ -18,6 +19,15 @@ void EngineController::FE3D_CONTROLLER_INIT()
 {
 	if (application_isExported()) // Application preview
 	{
+		// Validate project files & directories
+		if (_topViewportController.isProjectCorrupted(misc_getRootDirectory()))
+		{
+			Logger::throwWarning("Cannot load application: corrupted files/directories!");
+			application_stop();
+			_promptOnExit = true;
+			return;
+		}
+
 		// Set name of application to run
 		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getModelEditor().setCurrentProjectID(application_getTitle());
@@ -60,15 +70,15 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		camera_reset();
 
 		// Default engine background
-		string textureFolderPath = "engine_assets\\textures\\";
+		string textureDirectoryPath = "engine_assets\\textures\\";
 		skyEntity_add("@@engineBackground");
 		skyEntity_setDiffuseMaps("@@engineBackground", {
-			textureFolderPath + "background_right.png",
-			textureFolderPath + "background_left.png",
-			textureFolderPath + "background_top.png",
-			textureFolderPath + "background_bottom.png",
-			textureFolderPath + "background_back.png",
-			textureFolderPath + "background_front.png" });
+			textureDirectoryPath + "background_right.png",
+			textureDirectoryPath + "background_left.png",
+			textureDirectoryPath + "background_top.png",
+			textureDirectoryPath + "background_bottom.png",
+			textureDirectoryPath + "background_back.png",
+			textureDirectoryPath + "background_front.png" });
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture

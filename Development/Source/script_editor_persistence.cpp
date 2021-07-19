@@ -25,12 +25,12 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	{
 		if (isLoggingEnabled)
 		{
-			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" folder missing!");
+			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" directory missing!");
 		}
 		return false;
 	}
 
-	// Retrieve all filenames in the scripts folder
+	// Retrieve all filenames in the scripts directory
 	for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 	{
 		// Extract filename

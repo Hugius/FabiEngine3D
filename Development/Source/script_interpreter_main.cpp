@@ -201,7 +201,6 @@ void ScriptInterpreter::load()
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
 	_fe3d.billboardEntity_setBright("@@lightSource", true);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();

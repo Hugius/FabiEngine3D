@@ -2,10 +2,10 @@
 #include "core_engine.hpp"
 #include "logger.hpp"
 
-void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible)
+void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible)
 {
 	_core->_aabbEntityManager.addAabbEntity(ID, position, size, raycastResponsive, collisionResponsive);
-	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, 

@@ -4,11 +4,11 @@
 void FabiEngine3D::modelEntity_add
 (
 	const string& ID, const string& meshPath,
-	Vec3 position, Vec3 rotation, Vec3 size, bool visible
+	Vec3 position, Vec3 rotation, Vec3 size, bool isVisible
 )
 {
 	_core->_modelEntityManager.addModelEntity(ID, meshPath, position, rotation, size);
-	_core->_modelEntityManager.getEntity(ID)->setVisible(visible);
+	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::modelEntity_deleteAll()

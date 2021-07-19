@@ -23,5 +23,5 @@ private:
 	Vec3 _color = Vec3(1.0f);
 
 	float _intensity = 1.0f;
-	float _distanceFactor = 10.0f;
+	float _distanceFactor = 1.0f;
 };

@@ -7,9 +7,10 @@ void FabiEngine3D::textEntity_deleteAll()
 }
 
 void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec2 position,
-	float rotation, Vec2 size, bool isCentered, bool isDynamic)
+	float rotation, Vec2 size, bool isCentered, bool isDynamic, bool isVisible)
 {
 	_core->_textEntityManager.addTextEntity(ID, textContent, fontPath, color, position, rotation, size, false, isCentered, isDynamic);
+	_core->_textEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
 void FabiEngine3D::textEntity_delete(const string& ID)

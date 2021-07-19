@@ -260,7 +260,7 @@ public:
 	void modelEntity_add
 	(
 		const string& ID, const string& meshPath,
-		Vec3 position, Vec3 rotation, Vec3 size, bool visible = true
+		Vec3 position, Vec3 rotation, Vec3 size, bool isVisible = true
 	);
 	void modelEntity_deleteAll();
 	void modelEntity_delete(const string& ID);
@@ -348,7 +348,7 @@ public:
 	void billboardEntity_add
 	(
 		const string& ID, Vec3 color,
-		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
+		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_deleteAll();
 	void billboardEntity_delete(const string& ID);
@@ -398,7 +398,7 @@ public:
 	(
 		const string& ID, const string& diffuseMapPath,
 		Vec3 T, Vec3 R, Vec2 S,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool visible = true
+		bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void billboardEntity_setTransparent(const string& ID, bool enabled);
@@ -412,7 +412,7 @@ public:
 	(
 		const string& ID, const string& text,
 		const string& fontPath, Vec3 color,
-		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
+		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_setFont(const string& ID, const string& fontPath);
 	void billboardEntity_setTextContent(const string& ID, const string& textContent);
@@ -444,7 +444,7 @@ public:
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);
 
 	// AABB entity interface - setters
-	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
+	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible = true);
 	void aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_bindToBillboardEntity(const string& parentID, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
@@ -493,7 +493,7 @@ public:
 	const bool collision_isTerrainResponseEnabled();
 
 	// Light entity interface - setters
-	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);
+	void lightEntity_add(const string& ID, Vec3 position, Vec3 color, float intensity, float distanceFactor, bool isVisible = true);
 	void lightEntity_deleteAll();
 	void lightEntity_delete(const string& ID);
 	void lightEntity_setVisible(const string& ID, bool isVisible);
@@ -513,8 +513,8 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
-	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
-	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool visible = true);
+	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible = true);
+	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible = true);
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);
@@ -570,7 +570,7 @@ public:
 	(
 		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,
-		Vec2 position, float rotation, Vec2 size, bool isCentered, bool isDynamic
+		Vec2 position, float rotation, Vec2 size, bool isCentered, bool isDynamic, bool isVisible = true
 	);
 	void textEntity_deleteAll();
 	void textEntity_delete(const string& ID);

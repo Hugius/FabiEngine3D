@@ -85,7 +85,7 @@ void SceneEditor::load()
 	}
 
 	// Preview point light loading
-	_fe3d.lightEntity_add(PREVIEW_LIGHT_BULB_ID);
+	_fe3d.lightEntity_add(PREVIEW_LIGHT_BULB_ID, Vec3(0.0f), Vec3(1.0f), 1.0f, 10.0f);
 	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
 	_fe3d.modelEntity_add(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LIGHT_BULB_ID, false);

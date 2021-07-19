@@ -67,6 +67,10 @@ void MasterRenderer::_captureSceneReflections()
 		// Update camera
 		_camera.updateMatrices();
 
+		// Use original camera properties for correct specular lighting
+		_renderBus.setCameraPosition(originalCameraPosition);
+		_renderBus.setCameraPitch(originalCameraPitch);
+
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
@@ -227,6 +231,10 @@ void MasterRenderer::_captureWaterReflections()
 
 		// Update camera
 		_camera.updateMatrices();
+
+		// Use original camera properties for correct specular lighting
+		_renderBus.setCameraPosition(originalCameraPosition);
+		_renderBus.setCameraPitch(originalCameraPitch);
 
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();

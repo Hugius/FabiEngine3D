@@ -32,7 +32,7 @@ layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec3 applyFog(vec3 color);
+vec3 getFog(vec3 color);
 
 // Process fragment
 void main()
@@ -59,14 +59,14 @@ void main()
 		primaryColor *= u_lightness;
 		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 		primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
-		primaryColor  = applyFog(primaryColor);
+		primaryColor  = getFog(primaryColor);
 	}
 	else
 	{
 		// Set primary color
 		primaryColor  = u_color;
 		primaryColor *= u_lightness;
-		primaryColor  = applyFog(primaryColor);
+		primaryColor  = getFog(primaryColor);
 	}
 	
 	// Calculate secondary color
@@ -77,8 +77,7 @@ void main()
 	o_secondaryColor = vec4(secondaryColor, 1.0f);
 }
 
-// Calculate fog color
-vec3 applyFog(vec3 color)
+vec3 getFog(vec3 color)
 {
 	if(u_isFogEnabled)
 	{

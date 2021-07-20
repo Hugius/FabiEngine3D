@@ -327,6 +327,7 @@ void MasterRenderer::_captureBloom()
 	{
 		if (_renderBus.getBloomType() == BloomType::EVERYTHING) // Blur primary scene map
 		{
+			// Blur the scene map high quality (small blur)
 			_bloomRendererHighQuality.bind();
 			_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
 				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));

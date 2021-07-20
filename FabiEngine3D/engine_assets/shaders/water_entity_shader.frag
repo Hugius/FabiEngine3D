@@ -63,8 +63,8 @@ layout (location = 1) out vec4 o_secondaryColor;
 vec4 calculateWaterColor();
 vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
-vec3 applyFog(vec3 color);
-float getSpecularValue(vec3 position, vec3 normal);
+vec3 getFog(vec3 color);
+float getSpecularLighting(vec3 position, vec3 normal);
 float convertDepthToLinear(float depth);
 
 // Process fragment
@@ -76,7 +76,7 @@ void main()
 	// Calculate primary color
 	vec3 primaryColor = waterColor.rgb;
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor = applyFog(primaryColor);
+	primaryColor = getFog(primaryColor);
 
 	// Set final colors
 	o_primaryColor   = vec4(primaryColor, waterColor.a);
@@ -165,7 +165,6 @@ vec4 calculateWaterColor()
 	return vec4(finalColor, alpha);
 }
 
-// Calculate point lighting
 vec3 getPointLighting(vec3 normal)
 {
 	if(u_isPointLightEnabled)
@@ -181,7 +180,7 @@ vec3 getPointLighting(vec3 normal)
 
             // Apply
             vec3 current = vec3(0.0f);
-            current += vec3(getSpecularValue(u_pointLightPositions[i], normal)); // Specular
+            current += vec3(getSpecularLighting(u_pointLightPositions[i], normal)); // Specular
             current *= u_pointLightColors[i]; // Color
             current *= attenuation; // Distance
             current *= u_pointLightIntensities[i]; // Intensity
@@ -215,8 +214,7 @@ vec3 getDirectionalLighting(vec3 normal)
 	}
 }
 
-// Calculate specular lighting
-float getSpecularValue(vec3 position, vec3 normal)
+float getSpecularLighting(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
@@ -232,8 +230,7 @@ float getSpecularValue(vec3 position, vec3 normal)
     }
 }
 
-// Calculate fog color
-vec3 applyFog(vec3 color)
+vec3 getFog(vec3 color)
 {
 	if(u_isFogEnabled)
 	{

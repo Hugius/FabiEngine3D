@@ -42,9 +42,11 @@ void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath
 
 void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 {
-	// Load mesh model
-	auto partsPointer = _meshLoader.loadMesh(meshPath, false);
+	// Temporary values
 	auto entity = getEntity(ID);
+
+	// Load mesh file
+	auto partsPointer = _meshLoader.loadMesh(meshPath, false);
 	entity->setMeshPath(meshPath);
 	entity->clearRenderBuffers();
 	entity->clearParts();
@@ -93,7 +95,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 			bufferData.push_back(part.normals[i].z);
 		}
 
-		// Render buffer
+		// Load renderbuffer
 		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
 		// New model part
@@ -131,19 +133,23 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 
 void ModelEntityManager::loadNormalMapping(const string& ID)
 {
+	// Temporary values
+	auto entity = getEntity(ID);
+
 	// Check if entity has a buffer
-	if (!getEntity(ID)->getRenderBuffers().empty())
+	if (!entity->getRenderBuffers().empty())
 	{
-		// Check if not already a tangent loaded model
-		if (getEntity(ID)->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+		// Check if renderbuffer not already reloaded
+		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Load mesh file
-			auto partsPointer = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
+			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
 			auto parts = *partsPointer;
 
-			// Create render buffers
+			// Create renderbuffers
 			for (const auto& part : parts)
 			{
+				// Temporary values
 				vector<float> data;
 
 				// For every triangle vertex point
@@ -169,9 +175,56 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 					data.push_back(part.tangents[i].z);
 				}
 
-				// Render buffer
-				getEntity(ID)->clearRenderBuffers();
-				getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())));
+				// Reload renderbuffer
+				entity->clearRenderBuffers();
+				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())));
+			}
+		}
+	}
+}
+
+void ModelEntityManager::unloadNormalMapping(const string& ID)
+{
+	// Temporary values
+	auto entity = getEntity(ID);
+
+	// Check if entity has a buffer
+	if (!entity->getRenderBuffers().empty())
+	{
+		// Check if renderbuffer not already reloaded
+		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
+		{
+			// Load mesh file
+			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
+			auto parts = *partsPointer;
+
+			// Create renderbuffers
+			for (const auto& part : parts)
+			{
+				// Temporary values
+				vector<float> data;
+
+				// For every triangle vertex point
+				for (size_t i = 0; i < part.vertices.size(); i++)
+				{
+					// Vertex coordinate
+					data.push_back(part.vertices[i].x);
+					data.push_back(part.vertices[i].y);
+					data.push_back(part.vertices[i].z);
+
+					// UV coordinate
+					data.push_back(part.uvCoords[i].x);
+					data.push_back(part.uvCoords[i].y);
+
+					// Normal vector
+					data.push_back(part.normals[i].x);
+					data.push_back(part.normals[i].y);
+					data.push_back(part.normals[i].z);
+				}
+
+				// Reload renderbuffer
+				entity->clearRenderBuffers();
+				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &data[0], static_cast<unsigned int>(data.size())));
 			}
 		}
 	}

@@ -91,24 +91,24 @@ layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec3 getNormalMappedVector();
-vec3 getTextureColor();
+vec3 getNormalMapping();
+vec3 getDiffuseMapping();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
 vec3 getPointLighting(vec3 normal);
 vec3 getSpotLighting(vec3 normal);
-vec3 applyFog(vec3 color);
-float getShadowValue();
-float getSpecularValue(vec3 position, vec3 normal);
+vec3 getFog(vec3 color);
+float getShadows();
+float getSpecularLighting(vec3 position, vec3 normal);
 
 // Process fragment
 void main()
 {
 	// Calculate new normal vector
-    vec3 normal = getNormalMappedVector();
+    vec3 normal = getNormalMapping();
 
 	// Calculate lighting
-    float shadow	 = getShadowValue();
+    float shadow	 = getShadows();
 	vec3 ambient	 = getAmbientLighting();
 	vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
 	vec3 point		 = getPointLighting(normal);
@@ -116,19 +116,18 @@ void main()
 
 	// Calculate primary color
 	vec3 primaryColor;
-	primaryColor  = getTextureColor();
+	primaryColor  = getDiffuseMapping();
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor *= vec3(((ambient + directional) * shadow) + point + spot);
-	primaryColor  = applyFog(primaryColor);
+	primaryColor  = getFog(primaryColor);
 
 	// Set final colors
 	o_primaryColor   = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-// Calculate new normal vector
-vec3 getNormalMappedVector()
+vec3 getNormalMapping()
 {
     if(
 		u_isNormalMappingEnabled && 
@@ -219,8 +218,7 @@ vec3 getNormalMappedVector()
     }
 }
 
-// Calculate texture color
-vec3 getTextureColor()
+vec3 getDiffuseMapping()
 {
 	if(u_isBlendMapped && u_hasBlendMap) // Blendmapped mixed texture
 	{
@@ -260,7 +258,6 @@ vec3 getTextureColor()
 	}
 }
 
-// Calculate ambient lighting
 vec3 getAmbientLighting()
 {
 	if(u_isAmbientLightEnabled)
@@ -273,7 +270,6 @@ vec3 getAmbientLighting()
 	}
 }
 
-// Calculate directional lighting
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 {
 	if(u_isDirectionalLightEnabled)
@@ -285,7 +281,7 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 
         // Apply
         result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
-        result += vec3(getSpecularValue(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
+        result += vec3(getSpecularLighting(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 
@@ -298,7 +294,6 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 	}
 }
 
-// Calculate point lighting
 vec3 getPointLighting(vec3 normal)
 {
 	if(u_isPointLightEnabled)
@@ -317,7 +312,7 @@ vec3 getPointLighting(vec3 normal)
             // Apply
             vec3 current = vec3(0.0f);
 			current += vec3(diffuse); // Diffuse
-            current += vec3(getSpecularValue(u_pointLightPositions[i], normal)); // Specular
+            current += vec3(getSpecularLighting(u_pointLightPositions[i], normal)); // Specular
             current *= u_pointLightColors[i]; // Color
             current *= attenuation; // Distance
             current *= u_pointLightIntensities[i]; // Intensity
@@ -335,7 +330,6 @@ vec3 getPointLighting(vec3 normal)
 	}
 }
 
-// Calculate spot lighting
 vec3 getSpotLighting(vec3 normal)
 {
     if(u_isSpotLightEnabled)
@@ -356,7 +350,7 @@ vec3 getSpotLighting(vec3 normal)
 
         // Apply lighting calculations
         float diffuse = max(dot(normal, lightDirection), 0.0f);
-        float specular = getSpecularValue(u_cameraPosition, normal);
+        float specular = getSpecularLighting(u_cameraPosition, normal);
         result += vec3(diffuse * intensity); // Diffuse
         result += vec3(specular * intensity); // Specular
         result *= u_spotLightColor; // Color
@@ -371,8 +365,29 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
+vec3 getFog(vec3 color)
+{
+	if(u_isFogEnabled)
+	{
+		// Calculate distance in world space
+		float distance = length(f_pos.xyz - u_cameraPosition);
+
+        // Calculate fog intensity
+		float difference = u_fogMaxDistance - u_fogMinDistance;
+		float part = (distance - u_fogMinDistance) / difference;
+		part = clamp(part, 0.0f, 1.0f);
+		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
+		float mixValue = part * thickness;
+		return mix(color, u_fogColor, mixValue);
+	}
+	else
+	{
+		return color;
+	}
+}
+
 // Calculate shadow lighting
-float getShadowValue()
+float getShadows()
 {
 	if(u_isShadowsEnabled)
 	{
@@ -452,30 +467,7 @@ float getShadowValue()
 	}
 }
 
-// Calculate fog color
-vec3 applyFog(vec3 color)
-{
-	if(u_isFogEnabled)
-	{
-		// Calculate distance in world space
-		float distance = length(f_pos.xyz - u_cameraPosition);
-
-        // Calculate fog intensity
-		float difference = u_fogMaxDistance - u_fogMinDistance;
-		float part = (distance - u_fogMinDistance) / difference;
-		part = clamp(part, 0.0f, 1.0f);
-		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float mixValue = part * thickness;
-		return mix(color, u_fogColor, mixValue);
-	}
-	else
-	{
-		return color;
-	}
-}
-
-// Calculate specular lighting
-float getSpecularValue(vec3 position, vec3 normal)
+float getSpecularLighting(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {

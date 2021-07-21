@@ -333,7 +333,7 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 	if (modelID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(modelID).x < DEFAULT_SPEAKER_SIZE.x)
+		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_SPEAKER_SIZE.y)
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_SPEAKER_SIZE);
 			_fe3d.aabbEntity_setSize(modelID, DEFAULT_SPEAKER_AABB_SIZE);
@@ -341,17 +341,20 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(modelID).x > (DEFAULT_SPEAKER_SIZE.x * SPEAKER_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(modelID, (DEFAULT_SPEAKER_SIZE.x * SPEAKER_SIZE_INCREASE));
-			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_SPEAKER_AABB_SIZE.x * SPEAKER_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(modelID, (DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE));
+			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_SPEAKER_AABB_SIZE * SPEAKER_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
-		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(direction) * (DEFAULT_SPEAKER_SIZE.x * 0.25f));
-		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
+		Vec3 modelSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 aabbSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		modelSpeed *= ((DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
+		aabbSpeed *= ((DEFAULT_SPEAKER_AABB_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_AABB_SIZE);
+		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
+		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + aabbSpeed);
 	}
 }
 
@@ -367,7 +370,7 @@ void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& directio
 	if (modelID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(modelID).x < DEFAULT_LIGHT_BULB_SIZE.x)
+		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_LIGHT_BULB_SIZE.y)
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_LIGHT_BULB_SIZE);
 			_fe3d.aabbEntity_setSize(modelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
@@ -375,16 +378,19 @@ void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& directio
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(modelID).x > (DEFAULT_LIGHT_BULB_SIZE.x * LIGHT_BULB_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_LIGHT_BULB_SIZE.y * LIGHT_BULB_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_SIZE.x * LIGHT_BULB_SIZE_INCREASE));
-			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_AABB_SIZE.x * LIGHT_BULB_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_SIZE * LIGHT_BULB_SIZE_INCREASE));
+			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_AABB_SIZE * LIGHT_BULB_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
-		float speed = (LIGHT_BULB_ANIMATION_SPEED * static_cast<float>(direction) * (DEFAULT_LIGHT_BULB_SIZE.x * 0.25f));
-		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
+		Vec3 modelSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 aabbSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		modelSpeed *= ((DEFAULT_LIGHT_BULB_SIZE * LIGHT_BULB_SIZE_INCREASE) - DEFAULT_LIGHT_BULB_SIZE);
+		aabbSpeed *= ((DEFAULT_LIGHT_BULB_AABB_SIZE * LIGHT_BULB_SIZE_INCREASE) - DEFAULT_LIGHT_BULB_AABB_SIZE);
+		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
+		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + aabbSpeed);
 	}
 }

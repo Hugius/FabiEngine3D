@@ -199,7 +199,7 @@ private:
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
 	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
+	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.35f, 1.35f, 1.1f);
 	static inline const float SPEAKER_SIZE_INCREASE = 1.25f;
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
@@ -216,7 +216,7 @@ private:
 	static inline const string PREVIEW_LIGHT_BULB_ID = "@@previewLightBulb";
 	static inline const string LIGHT_BULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
 	static inline const Vec3 DEFAULT_LIGHT_BULB_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_LIGHT_BULB_AABB_SIZE = Vec3(0.7f, 1.15f, 0.7f);
+	static inline const Vec3 DEFAULT_LIGHT_BULB_AABB_SIZE = Vec3(0.7f, 1.2f, 0.7f);
 	static inline const float LIGHT_BULB_SIZE_INCREASE = 1.25f;
 	static inline const float LIGHT_BULB_ANIMATION_SPEED = 0.025f;
 	static inline const float LIGHTING_CHANGING_SPEED = 0.01f;

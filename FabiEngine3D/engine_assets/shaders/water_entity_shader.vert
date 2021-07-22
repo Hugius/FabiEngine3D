@@ -13,7 +13,7 @@ uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
 // Vec3 uniforms
-uniform vec3 u_customPositionOffset;
+uniform vec3 u_positionOffset;
 
 // Vec2 uniforms
 uniform vec2 u_waveOffset;
@@ -34,10 +34,10 @@ out vec3 f_pos;
 void main()
 {
 	// Variable for position altering
-	vec3 newPos = v_pos;
+	vec3 newPosition = v_pos;
 
 	// Add dynamic position offset
-	newPos += u_customPositionOffset;
+	newPosition += u_positionOffset;
 
 	// Pre-calculate UV out variable
 	f_uv = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_uvRepeat;
@@ -60,12 +60,12 @@ void main()
 		float height = height1 + ((height2 - height1) / 2.0f);
 
 		// Add height to vertex Y
-		newPos.y += height * u_waveHeight;
+		newPosition.y += height * u_waveHeight;
 	}
 
 	// Camera spaces
-	vec4 worldSpacePos = vec4(newPos, 1.0f);
-	vec4 clipSpacePos  = u_projectionMatrix * u_viewMatrix * vec4(newPos, 1.0f);
+	vec4 worldSpacePos = vec4(newPosition, 1.0f);
+	vec4 clipSpacePos  = u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f);
 
 	// GLSL variables
 	gl_Position = clipSpacePos;

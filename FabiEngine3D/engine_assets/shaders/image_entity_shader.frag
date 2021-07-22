@@ -43,7 +43,7 @@ void main()
 		discard;
 	}
 
-	if(u_isPerspectiveDepthEntity) // Visualizing depth map
+	if(u_isPerspectiveDepthEntity) // Visualize depth map
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
 		o_finalColor = vec4(vec3((convertDepthToPerspective(depth) / u_farZ)), 1.0f);
@@ -53,7 +53,9 @@ void main()
 		if(u_hasDiffuseMap) // Render diffuse map
 		{
 			vec4 texColor = texture(u_diffuseMap, f_uv);
-			o_finalColor = vec4(texColor.rgb * u_color, texColor.a * u_alpha);
+			texColor.rgb *= u_color;
+			texColor.a *= u_alpha;
+			o_finalColor = vec4(texColor.rgb, texColor.a);
 		}
 		else // Render color only
 		{

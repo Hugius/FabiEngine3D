@@ -77,6 +77,7 @@ void main()
 	vec3 primaryColor = waterColor.rgb;
 	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = getFog(primaryColor);
+	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors
 	o_primaryColor   = vec4(primaryColor, waterColor.a);

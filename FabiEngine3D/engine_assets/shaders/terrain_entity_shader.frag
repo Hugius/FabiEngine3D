@@ -110,7 +110,7 @@ void main()
 	// Calculate lighting
     float shadow	 = getShadows();
 	vec3 ambient	 = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
+	vec3 directional = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadow == 1.0f)));
 	vec3 point		 = getPointLighting(normal);
 	vec3 spot		 = getSpotLighting(normal);
 
@@ -121,6 +121,7 @@ void main()
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor *= vec3(((ambient + directional) * shadow) + point + spot);
 	primaryColor  = getFog(primaryColor);
+	primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors
 	o_primaryColor   = vec4(primaryColor, 1.0f);
@@ -241,6 +242,9 @@ vec3 getDiffuseMapping()
 		vec3 rTextureColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
 		vec3 gTextureColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
 		vec3 bTextureColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
+		rTextureColor = pow(rTextureColor, vec3(2.2f));
+		gTextureColor = pow(gTextureColor, vec3(2.2f));
+		bTextureColor = pow(bTextureColor, vec3(2.2f));
 
 		// Compose final color
 		vec3 newColor = diffuseTextureColor + rTextureColor + gTextureColor + bTextureColor;
@@ -251,10 +255,11 @@ vec3 getDiffuseMapping()
 	else if(u_hasDiffuseMap) // Diffuse texture
 	{
 		// Calculate
-		vec4 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y));
+		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
+		newColor = pow(newColor, vec3(2.2f));
 
 		// Return
-		return newColor.rgb;
+		return newColor;
 	}
 	else
 	{

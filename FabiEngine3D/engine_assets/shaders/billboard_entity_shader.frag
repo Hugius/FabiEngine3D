@@ -43,6 +43,7 @@ void main()
 	{
 		// Calculate the texel color
 		vec4 texColor = texture(u_diffuseMap, f_uv);
+		texColor.rgb = pow(texColor.rgb, vec3(2.2f));
 
 		// Removing white alpha background
 		if(u_isAlphaObject)
@@ -60,6 +61,7 @@ void main()
 		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 		primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
 		primaryColor  = getFog(primaryColor);
+		primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 	}
 	else
 	{
@@ -67,8 +69,9 @@ void main()
 		primaryColor  = u_color;
 		primaryColor *= u_lightness;
 		primaryColor  = getFog(primaryColor);
+		primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 	}
-	
+
 	// Calculate secondary color
 	vec3 secondaryColor = (u_isBright ? primaryColor : vec3(0.0f));
 

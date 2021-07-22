@@ -7,7 +7,7 @@ class ShadowGenerator final
 public:
 	ShadowGenerator();
 	
-	void loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, int interval);
+	void loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, unsigned int interval);
 	void unloadShadows();
 	void update(RenderBus& renderBus);
 

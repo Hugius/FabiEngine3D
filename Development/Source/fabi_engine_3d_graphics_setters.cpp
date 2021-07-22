@@ -174,7 +174,7 @@ void FabiEngine3D::gfx_enableFXAA()
 	}
 }
 
-void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval)
+void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval)
 {
 	if (_core->_renderBus.isShadowsEnabled())
 	{

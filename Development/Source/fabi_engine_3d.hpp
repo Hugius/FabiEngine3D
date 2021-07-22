@@ -662,7 +662,7 @@ public:
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
 	void gfx_enableFXAA();
-	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, int interval);
+	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
 	void gfx_enableSkyExposure(float factor, float speed);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);

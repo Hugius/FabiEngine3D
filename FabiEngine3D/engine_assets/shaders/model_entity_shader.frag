@@ -47,7 +47,7 @@ uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
 uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
-uniform float u_customAlpha;
+uniform float u_alpha;
 uniform float u_skyReflectionMixValue;
 uniform float u_sceneReflectionMixValue;
 uniform float u_lightness;
@@ -112,11 +112,14 @@ float getSpecularLighting(vec3 position, vec3 normal);
 // Process fragment
 void main()
 {
-    // Calculate normal vector
+    // Calculate normal mapping
     vec3 normal = getNormalMapping();
 
+    // Calculate light mapping
+    vec3 lightMapping = getLightMapping();
+
 	// Calculate lighting
-	bool isBright = ((getLightMapping() != vec3(0.0f)) || u_isBright);
+	bool isBright = ((lightMapping != vec3(0.0f)) || u_isBright);
 	vec3 lighting = vec3(1.0f);
 	if(!isBright)
 	{
@@ -135,16 +138,16 @@ void main()
 	primaryColor  = getSceneReflections(primaryColor);
 	primaryColor *= u_lightness;
 	primaryColor *= u_color;
-	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
+	primaryColor  = mix(primaryColor, (vec3(1.0f) - clamp(primaryColor, vec3(0.0f), vec3(1.0f))), clamp(u_inversion, 0.0f, 1.0f));
 	primaryColor *= lighting;
 	primaryColor  = getFog(primaryColor);
+    primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Calculate secondary color
 	vec3 secondaryColor = (isBright ? primaryColor : vec3(0.0f));
 
 	// Set final colors
-	o_primaryColor = vec4(primaryColor, u_customAlpha);
+	o_primaryColor = vec4(primaryColor, u_alpha);
 	o_secondaryColor = vec4(secondaryColor, 1.0f);
 }
 
@@ -154,7 +157,7 @@ vec3 getNormalMapping()
     {
         // Calculate new normal vector
         vec3 normal = texture(u_normalMap, f_uv).rgb;
-        normal = normal * 2.0f - 1.0f;
+        normal = ((normal * 2.0f) - 1.0f);
         normal = normalize(f_tbnMatrix * normal);
 
         // Return
@@ -176,6 +179,7 @@ vec3 getDiffuseMapping()
 	{
 		// Calculate the texel color
 		vec4 texColor = texture(u_diffuseMap, f_uv);
+		texColor.rgb = pow(texColor.rgb, vec3(2.2f));
 
 		// Removing alpha background
 		if(u_isTransparent)
@@ -338,18 +342,22 @@ vec3 getSkyReflections(vec3 color, vec3 normal)
 	if(u_skyReflectionsEnabled && u_isSkyReflective)
 	{
 		// Calculation reflection color
-		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv) : vec4(0.0f);
+		vec3 reflectionMapColor = (u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f));
 		
 		// Check if current texel allows for reflection
-		if(reflectionMapColor.rgb != vec3(0.0f))
+		if(reflectionMapColor != vec3(0.0f))
 		{
 			// Calculate
 			float mixValue        = clamp(u_skyMixValue, 0.0, 1.0f);
 			float lightness       = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
 			vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
 			vec3 reflectDirection = reflect(viewDirection, normal);
-			vec3 mainSkyColor     = texture(u_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb * u_mainSkyColor;
-			vec3 mixSkyColor      = texture(u_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb * u_mixSkyColor;
+			vec3 mainSkyColor     = texture(u_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb;
+			vec3 mixSkyColor      = texture(u_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb;
+			mainSkyColor 		  = pow(mainSkyColor, vec3(2.2f));
+			mixSkyColor 		  = pow(mixSkyColor, vec3(2.2f));
+			mainSkyColor 		 *= u_mainSkyColor;
+			mixSkyColor 		 *= u_mixSkyColor;
 			vec3 reflectColor     = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
 			vec3 mixedColor       = mix(color, reflectColor, u_skyReflectionMixValue);
 
@@ -371,16 +379,18 @@ vec3 getSceneReflections(vec3 color)
 	if(u_sceneReflectionsEnabled && u_isSceneReflective)
 	{
 		// Calculation reflection color
-		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv) : vec4(0.0f);
+		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);
 		
 		// Check if current texel allows for reflection
-		if(reflectionMapColor.rgb != vec3(0.0f))
+		if(reflectionMapColor != vec3(0.0f))
 		{
-			vec2 ndc             = ((f_clip.xy / f_clip.w) / 2.0f) + 0.5f;
+			// Calculate
+			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
 			vec2 texCoords       = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
 			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionMixValue);
         
+        	// Return
 			return mixedColor.rgb;
 		}
 

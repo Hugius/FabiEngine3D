@@ -267,7 +267,7 @@ void BillboardEditor::_updateCamera()
 			// Enable shadows
 			const auto distance = _fe3d.camera_getThirdPersonDistance();
 			_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(distance * 2.0f)),
-				_cameraLookatPosition, distance * 4.0f, distance * 8.0f, 0.5f, false, false, 0);
+				_cameraLookatPosition, distance * 4.0f, distance * 8.0f, 0.25f, false, false, 0);
 		}
 
 		// Check if allowed by GUI

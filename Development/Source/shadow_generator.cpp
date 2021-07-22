@@ -7,7 +7,7 @@ ShadowGenerator::ShadowGenerator()
 	_passedFrames = INT_MAX;
 }
 
-void ShadowGenerator::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
+void ShadowGenerator::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, unsigned int interval)
 {
 	_eye = eye;
 	_center = center;

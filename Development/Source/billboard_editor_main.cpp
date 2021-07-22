@@ -28,7 +28,7 @@ void BillboardEditor::load()
 
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.5f);
+	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 3.0f);
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.gfx_enableMotionBlur(0.1f);
 	

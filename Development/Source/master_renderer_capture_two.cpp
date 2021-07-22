@@ -18,20 +18,20 @@ void MasterRenderer::_captureSceneDepth()
 		// Check if camera is underwater
 		auto waterEntity = _entityBus->getWaterEntity();
 		float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
-		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getTranslation().y + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getPosition().y + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getPosition().x - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getPosition().x + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getPosition().z - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getPosition().z + (waterEntity->getSize() / 2.0f)));
 		
 		// Determine clipping Y based on being underwater or not
 		if (isUnderWater)
 		{
-			clippingY = waterEntity->getTranslation().y;
+			clippingY = waterEntity->getPosition().y;
 		}
 		else
 		{
-			clippingY = (waterEntity->getTranslation().y + waveHeight);
+			clippingY = (waterEntity->getPosition().y + waveHeight);
 		}
 	}
 	
@@ -66,15 +66,15 @@ void MasterRenderer::_captureSceneDepth()
 						auto lodEntity = foundPair->second;
 
 						// Save original transformation
-						Vec3 originalPosition = lodEntity->getTranslation();
+						Vec3 originalPosition = lodEntity->getPosition();
 						Vec3 originalRotation = lodEntity->getRotation();
-						Vec3 originalSize = lodEntity->getScaling();
+						Vec3 originalSize = lodEntity->getSize();
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation
-						lodEntity->setTranslation(modelEntity->getTranslation());
+						lodEntity->setPosition(modelEntity->getPosition());
 						lodEntity->setRotation(modelEntity->getRotation());
-						lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getLevelOfDetailScaling()) * originalSize);
+						lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 						lodEntity->setVisible(modelEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
@@ -82,9 +82,9 @@ void MasterRenderer::_captureSceneDepth()
 						_depthRenderer.render(lodEntity, clippingY, isUnderWater);
 
 						// Revert to original transformation
-						lodEntity->setTranslation(originalPosition);
+						lodEntity->setPosition(originalPosition);
 						lodEntity->setRotation(originalRotation);
-						lodEntity->setScaling(originalSize);
+						lodEntity->setSize(originalSize);
 						lodEntity->setVisible(originalVisibility);
 						lodEntity->updateModelMatrix();
 					}
@@ -258,15 +258,15 @@ void MasterRenderer::_captureShadows()
 					auto lodEntity = foundPair->second;
 
 					// Save original transformation
-					Vec3 originalPosition = lodEntity->getTranslation();
+					Vec3 originalPosition = lodEntity->getPosition();
 					Vec3 originalRotation = lodEntity->getRotation();
-					Vec3 originalSize = lodEntity->getScaling();
+					Vec3 originalSize = lodEntity->getSize();
 					bool originalVisibility = lodEntity->isVisible();
 
 					// Change transformation
-					lodEntity->setTranslation(modelEntity->getTranslation());
+					lodEntity->setPosition(modelEntity->getPosition());
 					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getLevelOfDetailScaling()) * originalSize);
+					lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 
@@ -274,9 +274,9 @@ void MasterRenderer::_captureShadows()
 					_shadowRenderer.render(lodEntity);
 
 					// Revert to original transformation
-					lodEntity->setTranslation(originalPosition);
+					lodEntity->setPosition(originalPosition);
 					lodEntity->setRotation(originalRotation);
-					lodEntity->setScaling(originalSize);
+					lodEntity->setSize(originalSize);
 					lodEntity->setVisible(originalVisibility);
 					lodEntity->updateModelMatrix();
 				}

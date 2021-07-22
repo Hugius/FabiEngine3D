@@ -55,10 +55,10 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 	entity->addRenderBuffer(_renderBuffer, false);
 
 	// Miscellaneous
-	entity->setLocalTranslation(position);
-	entity->setLocalScaling(size);
-	entity->setTranslation(position);
-	entity->setScaling(size);
+	entity->setLocalPosition(position);
+	entity->setLocalSize(size);
+	entity->setPosition(position);
+	entity->setSize(size);
 	entity->setRaycastResponsive(raycastResponsive);
 	entity->setCollisionResponsive(collisionResponsive);
 }
@@ -112,28 +112,28 @@ void AabbEntityManager::update(
 							rotation = parentRotation.z;
 						}
 
-						// Update scaling (based on parent scaling & AABB rotation)
-						Vec3 localScaling = (entity->getLocalScaling() * parentEntity->getScaling());
-						entity->setScaling(localScaling);
+						// Update size (based on parent size & AABB rotation)
+						Vec3 localSize = (entity->getLocalSize() * parentEntity->getSize());
+						entity->setSize(localSize);
 						if ((fabsf(rotation) > 45.0f && fabsf(rotation) < 135.0f) || (fabsf(rotation) > 225.0f && fabsf(rotation) < 315.0f))
 						{
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
-								entity->setScaling(Vec3(localScaling.y, localScaling.x, localScaling.z));
+								entity->setSize(Vec3(localSize.y, localSize.x, localSize.z));
 							}
 							else if (rotationDirection == Direction::Y)
 							{
-								entity->setScaling(Vec3(localScaling.z, localScaling.y, localScaling.x));
+								entity->setSize(Vec3(localSize.z, localSize.y, localSize.x));
 							}
 							else if (rotationDirection == Direction::Z)
 							{
-								entity->setScaling(Vec3(localScaling.x, localScaling.z, localScaling.y));
+								entity->setSize(Vec3(localSize.x, localSize.z, localSize.y));
 							}
 						}
 
-						// Update translation (based on parent translation + rotation + scaling)
-						Vec3 localTranslation = (entity->getLocalTranslation() * parentEntity->getScaling());
+						// Update position (based on parent position + rotation + size)
+						Vec3 localPosition = (entity->getLocalPosition() * parentEntity->getSize());
 						float roundedRotation = 
 							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
 							(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
@@ -151,12 +151,12 @@ void AabbEntityManager::update(
 
 							// Temporary values
 							Matrix44 rotationMatrix = Matrix44(1.0f);
-							Vec3 localOffset = Vec3(0.0f, (entity->getLocalScaling().y / 2.0f), 0.0f);
+							Vec3 localOffset = Vec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
 							bool isMirrored = (roundedRotation == -180.0f || roundedRotation == 180.0f);
-							localTranslation = (rotationDirection == Direction::Y) ? localTranslation : 
-								(entity->getLocalTranslation() + localOffset) * parentEntity->getScaling();
+							localPosition = (rotationDirection == Direction::Y) ? localPosition : 
+								(entity->getLocalPosition() + localOffset) * parentEntity->getSize();
 							float yOffset = (rotationDirection == Direction::Y) ? 0.0f : 
-								-((isMirrored ? localScaling.y : localScaling.x) / 2.0f);
+								-((isMirrored ? localSize.y : localSize.x) / 2.0f);
 
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
@@ -173,12 +173,12 @@ void AabbEntityManager::update(
 							}
 
 							// Apply rotation
-							Vec4 result = rotationMatrix * Vec4(localTranslation.x, localTranslation.y, localTranslation.z, 1.0f);
-							entity->setTranslation(parentEntity->getTranslation() + Vec3(result.x, result.y + yOffset, result.z));
+							Vec4 result = rotationMatrix * Vec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
+							entity->setPosition(parentEntity->getPosition() + Vec3(result.x, result.y + yOffset, result.z));
 						}
 						else // No rotation
 						{
-							entity->setTranslation(parentEntity->getTranslation() + localTranslation);
+							entity->setPosition(parentEntity->getPosition() + localPosition);
 						}
 
 						// Update visibility
@@ -198,7 +198,7 @@ void AabbEntityManager::update(
 				{
 					// Temporary values
 					auto parentEntity = foundPair->second;
-					const auto parentSize = parentEntity->getScaling();
+					const auto parentSize = parentEntity->getSize();
 					auto newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 
 					// Retrieve absolute rotations
@@ -245,11 +245,11 @@ void AabbEntityManager::update(
 					// Calculate Y offset, because rotation is around center while billboard is not centered
 					float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
 
-					// Update scaling (based on parent rotation)
-					entity->setScaling(newAabbSize);
+					// Update size (based on parent rotation)
+					entity->setSize(newAabbSize);
 
-					// Update translation (based on parent translation + scaling)
-					entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() + Vec3(0.0f, yOffset, 0.0f));
+					// Update position (based on parent position + size)
+					entity->setPosition(parentEntity->getPosition() + entity->getLocalPosition() + Vec3(0.0f, yOffset, 0.0f));
 
 					// Update visibility
 					entity->setVisible(parentEntity->isVisible());

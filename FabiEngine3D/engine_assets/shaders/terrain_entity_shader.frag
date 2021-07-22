@@ -232,22 +232,22 @@ vec3 getDiffuseMapping()
 		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
 		// Calculate diffuse color
-		vec3 diffuseTextureColor = vec3(0.0f);
+		vec3 diffuseMapColor = vec3(0.0f);
 		if(u_hasDiffuseMap)
 		{
-			diffuseTextureColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			diffuseMapColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 		}
 
 		// Calculate blending color for every channel
-		vec3 rTextureColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
-		vec3 gTextureColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
-		vec3 bTextureColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
-		rTextureColor = pow(rTextureColor, vec3(2.2f));
-		gTextureColor = pow(gTextureColor, vec3(2.2f));
-		bTextureColor = pow(bTextureColor, vec3(2.2f));
+		vec3 rColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
+		vec3 gColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
+		vec3 bColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
+		rColor = pow(rColor, vec3(2.2f));
+		gColor = pow(gColor, vec3(2.2f));
+		bColor = pow(bColor, vec3(2.2f));
 
 		// Compose final color
-		vec3 newColor = diffuseTextureColor + rTextureColor + gTextureColor + bTextureColor;
+		vec3 newColor = diffuseMapColor + rColor + gColor + bColor;
         
 		// Return
 		return newColor;

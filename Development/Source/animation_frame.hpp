@@ -16,7 +16,7 @@ public:
 		rotationOrigins.insert(make_pair(partID, Vec3(0.0f)));
 		speeds.insert(make_pair(partID, Vec3(0.0f)));
 		speedTypes.insert(make_pair(partID, AnimationSpeedType::LINEAR));
-		transformationTypes.insert(make_pair(partID, TransformationType::TRANSLATION));
+		transformationTypes.insert(make_pair(partID, TransformationType::MOVEMENT));
 	}
 
 	map<string, Vec3> targetTransformations;

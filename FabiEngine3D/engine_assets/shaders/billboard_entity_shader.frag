@@ -42,20 +42,20 @@ void main()
 	if(u_hasDiffuseMap)
 	{
 		// Calculate the texel color
-		vec4 texColor = texture(u_diffuseMap, f_uv);
-		texColor.rgb = pow(texColor.rgb, vec3(2.2f));
+		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Removing white alpha background
 		if(u_isAlphaObject)
 		{
-			if(texColor.a < u_minAlpha)
+			if(diffuseMapColor.a < u_minAlpha)
 			{
 				discard;
 			}
 		}
 
 		// Set primary color
-		primaryColor  = texColor.rgb;
+		primaryColor  = diffuseMapColor.rgb;
 		primaryColor *= u_color;
 		primaryColor *= u_lightness;
 		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));

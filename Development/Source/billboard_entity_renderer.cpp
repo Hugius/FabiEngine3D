@@ -11,11 +11,11 @@ void BillboardEntityRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_clippingPlane",	_renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition",	_renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogThickness",	  _renderBus.getFogThickness());
-	_shader.uploadUniform("u_fogColor",		  _renderBus.getFogColor());
-	_shader.uploadUniform("u_isFogEnabled",	  _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_fogMinDistance",   _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",   _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogThickness",	    _renderBus.getFogThickness());
+	_shader.uploadUniform("u_fogColor",		    _renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled",	    _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Enable clipping
@@ -62,7 +62,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_inversion", entity->getInversion());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);

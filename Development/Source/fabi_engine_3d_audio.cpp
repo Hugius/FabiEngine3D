@@ -85,7 +85,7 @@ void FabiEngine3D::soundEntity_setPosition(const string& ID, Vec3 position)
 
 void FabiEngine3D::soundEntity_move(const string& ID, Vec3 factor)
 {
-	_core->_audioManager.getSound(ID).translate(factor);
+	_core->_audioManager.getSound(ID).move(factor);
 }
 
 void FabiEngine3D::soundEntity_setMaxDistance(const string& ID, float maxDistance)

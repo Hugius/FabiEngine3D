@@ -9,11 +9,11 @@ void BillboardEntity::updateModelMatrix()
 	_modelMatrix = Matrix44(1.0f);
 
 	// Translation matrix
-	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
 	_modelMatrix = _modelMatrix * translationMatrix;
 
 	// Rotation origin matrix - translate
-	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_scaling.y / 2.0f), 0.0f);
+	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_size.y / 2.0f), 0.0f);
 	_modelMatrix = _modelMatrix * rotationOriginMatrix;
 
 	// Rotation matrix
@@ -24,11 +24,11 @@ void BillboardEntity::updateModelMatrix()
 	_modelMatrix = _modelMatrix * rotationMatrix;
 
 	// Rotation origin matrix - translate back
-	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_scaling.y / 2.0f), 0.0f);
+	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_size.y / 2.0f), 0.0f);
 	_modelMatrix = _modelMatrix * rotationOriginMatrix;
 
 	// Scaling matrix
-	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
 	_modelMatrix = _modelMatrix * scalingMatrix;
 }
 
@@ -47,9 +47,9 @@ void BillboardEntity::setDiffuseMap(GLuint value)
 	_diffuseMap = value;
 }
 
-void BillboardEntity::setTranslation(Vec3 value)
+void BillboardEntity::setPosition(Vec3 value)
 {
-	_translation = value;
+	_position = value;
 }
 
 void BillboardEntity::setInitialRotation(Vec3 value)
@@ -72,9 +72,9 @@ void BillboardEntity::setRotation(Vec3 value)
 	_rotation.z = std::fmodf(_rotation.z, 360.0f);
 }
 
-void BillboardEntity::setScaling(Vec3 value)
+void BillboardEntity::setSize(Vec3 value)
 {
-	_scaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	_size = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
 void BillboardEntity::setColor(Vec3 value)
@@ -82,9 +82,9 @@ void BillboardEntity::setColor(Vec3 value)
 	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
-void BillboardEntity::translate(Vec3 value)
+void BillboardEntity::move(Vec3 value)
 {
-	_translation += value;
+	_position += value;
 }
 
 void BillboardEntity::rotate(Vec3 value)
@@ -99,8 +99,8 @@ void BillboardEntity::rotate(Vec3 value)
 
 void BillboardEntity::scale(Vec3 value)
 {
-	_scaling += value;
-	_scaling = Vec3(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y), std::max(0.0f, _scaling.z));
+	_size += value;
+	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
 }
 
 void BillboardEntity::setTextContent(const string& value)

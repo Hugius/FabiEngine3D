@@ -16,11 +16,11 @@ uniform bool u_isAlphaObject;
 // Process fragment
 void main()
 {
-	vec4 texColor = texture(u_diffuseMap, f_uv);
+	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
 	if(u_isAlphaObject)
 	{
-		if(texColor.a < u_minAlpha)
+		if(diffuseMapColor.a < u_minAlpha)
 		{
 			discard;
 		}

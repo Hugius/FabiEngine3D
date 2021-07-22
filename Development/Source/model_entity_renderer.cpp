@@ -165,7 +165,7 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_isSceneReflective", (entity->getReflectionType() == ReflectionType::SCENE));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());

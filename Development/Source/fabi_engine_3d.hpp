@@ -75,10 +75,10 @@ public:
 	void camera_disableFirstPersonView();
 	void camera_enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance);
 	void camera_disableThirdPersonView();
-	void camera_translateFollowX(float speed);
-	void camera_translateFollowZY(float speed);
-	void camera_translateFollowZ(float speed);
-	void camera_translate(Vec3 translation);
+	void camera_moveFollowX(float speed);
+	void camera_moveFollowZY(float speed);
+	void camera_moveFollowZ(float speed);
+	void camera_move(Vec3 speed);
 	void camera_setPosition(Vec3 position);
 	void camera_setThirdPersonLookat(Vec3 position);
 	void camera_setFOV(float angle);
@@ -513,8 +513,8 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
-	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible = true);
-	void imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible = true);
+	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
+	void imageEntity_add(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);

@@ -50,7 +50,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	entity->setTextContent(textContent);
 
 	// Calculate new size
-	Vec2 newSize = entity->getScaling();
+	Vec2 newSize = entity->getSize();
 	if (charWidth >= 0.0f)
 	{
 		newSize.x = (charWidth * static_cast<float>(textContent.size()));
@@ -59,7 +59,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	{
 		newSize.y = charHeight;
 	}
-	entity->setScaling(newSize);
+	entity->setSize(newSize);
 
 	// Reload
 	if (entity->isDynamic())
@@ -84,7 +84,7 @@ void FabiEngine3D::textEntity_setAlpha(const string& ID, float alpha)
 
 void FabiEngine3D::textEntity_setPosition(const string& ID, Vec2 position)
 {
-	_core->_textEntityManager.getEntity(ID)->setTranslation(position);
+	_core->_textEntityManager.getEntity(ID)->setPosition(position);
 }
 
 void FabiEngine3D::textEntity_setRotation(const string& ID, float rotation)
@@ -94,12 +94,12 @@ void FabiEngine3D::textEntity_setRotation(const string& ID, float rotation)
 
 void FabiEngine3D::textEntity_setSize(const string& ID, Vec2 size)
 {
-	_core->_textEntityManager.getEntity(ID)->setScaling(size);
+	_core->_textEntityManager.getEntity(ID)->setSize(size);
 }
 
 void FabiEngine3D::textEntity_move(const string& ID, Vec2 position)
 {
-	_core->_textEntityManager.getEntity(ID)->translate(position);
+	_core->_textEntityManager.getEntity(ID)->move(position);
 }
 
 void FabiEngine3D::textEntity_rotate(const string& ID, float rotation)
@@ -124,7 +124,7 @@ void FabiEngine3D::textEntity_setMaxPosition(const string& ID, Vec2 maxPos)
 
 const Vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
 {
-	return _core->_textEntityManager.getEntity(ID)->getTranslation();
+	return _core->_textEntityManager.getEntity(ID)->getPosition();
 }
 
 const float FabiEngine3D::textEntity_getRotation(const string& ID)
@@ -139,7 +139,7 @@ const float FabiEngine3D::textEntity_getAlpha(const string& ID)
 
 const Vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 {
-	return _core->_textEntityManager.getEntity(ID)->getScaling();
+	return _core->_textEntityManager.getEntity(ID)->getSize();
 }
 
 const Vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)

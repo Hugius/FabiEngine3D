@@ -2,7 +2,7 @@
 
 enum class TransformationType
 {
-	TRANSLATION,
+	MOVEMENT,
 	ROTATION,
 	SCALING
 };

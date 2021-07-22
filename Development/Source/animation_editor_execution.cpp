@@ -62,10 +62,10 @@ void AnimationEditor::_updateAnimationExecution()
 				// Immutable values
 				const auto& currentModelSize = _fe3d.modelEntity_getSize(animation.animatedModelID);
 				const auto& transformationType = frame.transformationTypes[partID];
-				const auto& isTranslation = (transformationType == TransformationType::TRANSLATION);
+				const auto& isMovement = (transformationType == TransformationType::MOVEMENT);
 				const auto& isRotation = (transformationType == TransformationType::ROTATION);
 				const auto& isScaling = (transformationType == TransformationType::SCALING);
-				const auto& speedMultiplier = (partID.empty() || (isTranslation || isScaling)) ? animation.initialScaling : Vec3(1.0f);
+				const auto& speedMultiplier = (partID.empty() || (isMovement || isScaling)) ? animation.initialSize : Vec3(1.0f);
 				const auto& speedType = frame.speedTypes[partID];
 				const auto& rotationOrigin = frame.rotationOrigins[partID];
 				const auto& speed = frame.speeds[partID] * animation.speedMultiplier;
@@ -73,24 +73,24 @@ void AnimationEditor::_updateAnimationExecution()
 				const auto& ySpeed = (!isRotation ? (speedMultiplier.y * speed.y) : speed.y);
 				const auto& zSpeed = (!isRotation ? (speedMultiplier.z * speed.z) : speed.z);
 
-				// Translation is relative to initial size
+				// Movement is relative to initial size
 				// Rotation is always relative to real-time size
 				// Scaling is relative to initial size
 				const auto& targetTransformation =
-					isTranslation ? (animation.initialScaling * frame.targetTransformations[partID]) :
+					isMovement ? (animation.initialSize * frame.targetTransformations[partID]) :
 					isRotation ? frame.targetTransformations[partID] :
-					((partID.empty() ? animation.initialScaling : Vec3(1.0f)) * frame.targetTransformations[partID]);
+					((partID.empty() ? animation.initialSize : Vec3(1.0f)) * frame.targetTransformations[partID]);
 
 				// Mutable values
-				auto& totalTranslation = animation.totalTranslations[partID];
+				auto& totalMovement = animation.totalMovements[partID];
 				auto& totalRotation = animation.totalRotations[partID];
 				auto& totalScaling = animation.totalScalings[partID];
 				auto& baseSpeed = frame.speeds[partID];
 
 				// Check if reached transformation of current frame
-				if (((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) &&
-					(isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, xSpeed)) &&
-					(isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, xSpeed))) ||
+				if (((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) &&
+					(isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, xSpeed)) &&
+					(isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, xSpeed))) ||
 					((isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, ySpeed)) &&
 						(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
 						(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed))) ||
@@ -103,7 +103,7 @@ void AnimationEditor::_updateAnimationExecution()
 				else
 				{
 					// X transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) ||
+					if ((isMovement && !_hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) ||
 						(isRotation && !_hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
 						(isScaling && !_hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 					{
@@ -111,15 +111,15 @@ void AnimationEditor::_updateAnimationExecution()
 						float finalSpeed = xSpeed;
 
 						// Determine transformation type
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
 							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.x - totalTranslation.x);
+								finalSpeed = (targetTransformation.x - totalMovement.x);
 							}
 
-							totalTranslation.x += finalSpeed;
+							totalMovement.x += finalSpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
@@ -150,15 +150,15 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) ||
+						if ((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) ||
 							(isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
 							(isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 						{
 							// Determine transformation type
-							if (transformationType == TransformationType::TRANSLATION)
+							if (transformationType == TransformationType::MOVEMENT)
 							{
-								difference = (totalTranslation.x - targetTransformation.x);
-								totalTranslation.x += (-difference);
+								difference = (totalMovement.x - targetTransformation.x);
+								totalMovement.x += (-difference);
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
@@ -173,7 +173,7 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Transform the model
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
 						}
@@ -189,7 +189,7 @@ void AnimationEditor::_updateAnimationExecution()
 					}
 
 					// Y transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) ||
+					if ((isMovement && !_hasReachedFloat(totalMovement.y, targetTransformation.y, ySpeed)) ||
 						(isRotation && !_hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
 						(isScaling && !_hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 					{
@@ -197,15 +197,15 @@ void AnimationEditor::_updateAnimationExecution()
 						float finalSpeed = ySpeed;
 
 						// Determine transformation type
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
 							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.y - totalTranslation.y);
+								finalSpeed = (targetTransformation.y - totalMovement.y);
 							}
 
-							totalTranslation.y += finalSpeed;
+							totalMovement.y += finalSpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
@@ -236,15 +236,15 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) ||
+						if ((isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, ySpeed)) ||
 							(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
 							(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 						{
 							// Determine transformation type
-							if (transformationType == TransformationType::TRANSLATION)
+							if (transformationType == TransformationType::MOVEMENT)
 							{
-								difference = (totalTranslation.y - targetTransformation.y);
-								totalTranslation.y += (-difference);
+								difference = (totalMovement.y - targetTransformation.y);
+								totalMovement.y += (-difference);
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
@@ -259,7 +259,7 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Transform the model
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
 						}
@@ -275,7 +275,7 @@ void AnimationEditor::_updateAnimationExecution()
 					}
 
 					// Z transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.z, targetTransformation.z, zSpeed)) ||
+					if ((isMovement && !_hasReachedFloat(totalMovement.z, targetTransformation.z, zSpeed)) ||
 						(isRotation && !_hasReachedFloat(totalRotation.z, targetTransformation.z, zSpeed)) ||
 						(isScaling && !_hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed)))
 					{
@@ -283,15 +283,15 @@ void AnimationEditor::_updateAnimationExecution()
 						float finalSpeed = zSpeed;
 
 						// Determine transformation type
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							// Instant speed means the whole transformation in one go
 							if (speedType == AnimationSpeedType::INSTANTLY)
 							{
-								finalSpeed = (targetTransformation.z - totalTranslation.z);
+								finalSpeed = (targetTransformation.z - totalMovement.z);
 							}
 
-							totalTranslation.z += finalSpeed;
+							totalMovement.z += finalSpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
@@ -322,15 +322,15 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, finalSpeed)) ||
+						if ((isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, finalSpeed)) ||
 							(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, finalSpeed)) ||
 							(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, finalSpeed)))
 						{
 							// Determine transformation type
-							if (transformationType == TransformationType::TRANSLATION)
+							if (transformationType == TransformationType::MOVEMENT)
 							{
-								difference = (totalTranslation.z - targetTransformation.z);
-								totalTranslation.z += (-difference);
+								difference = (totalMovement.z - targetTransformation.z);
+								totalMovement.z += (-difference);
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
@@ -345,7 +345,7 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Transform the model
-						if (transformationType == TransformationType::TRANSLATION)
+						if (transformationType == TransformationType::MOVEMENT)
 						{
 							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
 						}

@@ -4,12 +4,12 @@
 
 #include <algorithm>
 
-void Camera::translateFollowX(float value)
+void Camera::moveFollowX(float value)
 { 
 	_position += (_right * value);
 }
 
-void Camera::translateFollowZ(float value)
+void Camera::moveFollowZ(float value)
 {
 	Vec3 tempFront = _front;
 	tempFront.x = cos(Math::degreesToRadians(_yaw));
@@ -18,7 +18,7 @@ void Camera::translateFollowZ(float value)
 	_position.z += (tempFront.z * value);
 }
 
-void Camera::translateFollowZY(float value)
+void Camera::moveFollowZY(float value)
 {
 	_position.x += (_front.x * value);
 	_position.y += (_front.y * value);
@@ -236,7 +236,7 @@ const bool Camera::isThirdPersonViewEnabled()
 	return _isThirdPersonViewEnabled;
 }
 
-void Camera::translate(Vec3 value)
+void Camera::move(Vec3 value)
 {
 	_position += value;
 }

@@ -254,8 +254,8 @@ const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& I
 
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
 {
-	auto translation = _core->_modelEntityManager.getEntity(ID)->getTranslation(partID);
-	_core->_modelEntityManager.getEntity(ID)->setTranslation(translation + factor, partID);
+	auto position = _core->_modelEntityManager.getEntity(ID)->getPosition(partID);
+	_core->_modelEntityManager.getEntity(ID)->setPosition(position + factor, partID);
 }
 
 void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const string& partID)
@@ -266,13 +266,13 @@ void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const strin
 
 void FabiEngine3D::modelEntity_scale(const string& ID, Vec3 factor, const string& partID)
 {
-	auto scaling = _core->_modelEntityManager.getEntity(ID)->getScaling(partID);
-	_core->_modelEntityManager.getEntity(ID)->setScaling(scaling + factor, partID);
+	auto size = _core->_modelEntityManager.getEntity(ID)->getSize(partID);
+	_core->_modelEntityManager.getEntity(ID)->setSize(size + factor, partID);
 }
 
 void FabiEngine3D::modelEntity_setPosition(const string& ID, Vec3 position, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setTranslation(position, partID);
+	_core->_modelEntityManager.getEntity(ID)->setPosition(position, partID);
 }
 
 void FabiEngine3D::modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partID)
@@ -287,12 +287,12 @@ void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 rotation
 
 void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setScaling(size, partID);
+	_core->_modelEntityManager.getEntity(ID)->setSize(size, partID);
 }
 
 const Vec3 FabiEngine3D::modelEntity_getPosition(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getTranslation(partID);
+	return _core->_modelEntityManager.getEntity(ID)->getPosition(partID);
 }
 
 const Vec3 FabiEngine3D::modelEntity_getRotation(const string& ID, const string& partID)
@@ -307,7 +307,7 @@ const Vec3 FabiEngine3D::modelEntity_getRotationOrigin(const string& ID, const s
 
 const Vec3 FabiEngine3D::modelEntity_getSize(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getScaling(partID);
+	return _core->_modelEntityManager.getEntity(ID)->getSize(partID);
 }
 
 const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& partID)

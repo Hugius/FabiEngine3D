@@ -9,23 +9,23 @@ void AabbEntity::updateModelMatrix()
 	Matrix44 scalingMatrix;
 
 	// Translation
-	translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
 
 	// Scaling
-	scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
 
 	// Final matrix
 	_modelMatrix = translationMatrix * scalingMatrix;
 }
 
-void AabbEntity::setTranslation(Vec3 value)
+void AabbEntity::setPosition(Vec3 value)
 {
-	_translation = value;
+	_position = value;
 }
 
-void AabbEntity::setScaling(Vec3 value)
+void AabbEntity::setSize(Vec3 value)
 {
-	_scaling = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	_size = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 }
 
 void AabbEntity::setParent(const string& ID, AabbParentType type)
@@ -54,26 +54,26 @@ void AabbEntity::setCollided(bool value)
 	_hasCollided = value;
 }
 
-void AabbEntity::translate(Vec3 value)
+void AabbEntity::move(Vec3 value)
 {
-	_translation += value;
+	_position += value;
 }
 
 void AabbEntity::scale(Vec3 value)
 {
-	_scaling += value;
-	_scaling = Vec3(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y), std::max(0.0f, _scaling.z));
+	_size += value;
+	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
 }
 
-void AabbEntity::setLocalTranslation(Vec3 value)
+void AabbEntity::setLocalPosition(Vec3 value)
 {
-	_localTranslation = value;
+	_localPosition = value;
 }
 
-void AabbEntity::setLocalScaling(Vec3 value)
+void AabbEntity::setLocalSize(Vec3 value)
 {
-	_localScaling = value;
-	_localScaling = Vec3(std::max(0.0f, _localScaling.x), std::max(0.0f, _localScaling.y), std::max(0.0f, _localScaling.z));
+	_localSize = value;
+	_localSize = Vec3(std::max(0.0f, _localSize.x), std::max(0.0f, _localSize.y), std::max(0.0f, _localSize.z));
 }
 
 const Matrix44 & AabbEntity::getModelMatrix() const
@@ -81,24 +81,24 @@ const Matrix44 & AabbEntity::getModelMatrix() const
 	return _modelMatrix;
 }
 
-const Vec3 AabbEntity::getLocalTranslation() const
+const Vec3 AabbEntity::getLocalPosition() const
 {
-	return _localTranslation;
+	return _localPosition;
 }
 
-const Vec3 AabbEntity::getLocalScaling() const
+const Vec3 AabbEntity::getLocalSize() const
 {
-	return _localScaling;
+	return _localSize;
 }
 
-const Vec3 AabbEntity::getTranslation() const
+const Vec3 AabbEntity::getPosition() const
 {
-	return _translation;
+	return _position;
 }
 
-const Vec3 AabbEntity::getScaling() const
+const Vec3 AabbEntity::getSize() const
 {
-	return _scaling;
+	return _size;
 }
 
 const string& AabbEntity::getParentID() const

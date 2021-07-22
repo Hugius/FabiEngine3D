@@ -39,7 +39,7 @@ void FabiEngine3D::lightEntity_setPosition(const string& ID, Vec3 position)
 
 void FabiEngine3D::lightEntity_move(const string& ID, Vec3 factor)
 {
-	_core->_lightEntityManager.getEntity(ID)->translate(factor);
+	_core->_lightEntityManager.getEntity(ID)->move(factor);
 }
 
 void FabiEngine3D::lightEntity_setColor(const string& ID, Vec3 color)

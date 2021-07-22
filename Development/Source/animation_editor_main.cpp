@@ -147,7 +147,7 @@ void AnimationEditor::_loadGUI()
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("rotationOrigin", Vec2(0.0f, 0.525f), Vec2(CW("Rotation Origin"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rotation Origin", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speed", Vec2(0.0f, 0.2625f), Vec2(CW("Speed"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Speed", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speedType", Vec2(0.0f, 0.0f), Vec2(CW("Speed: LINEAR"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Speed: LINEAR", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("transType", Vec2(0.0f, -0.2625f), Vec2(CW("Type: TRANSLATE"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Type: TRANSLATE", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("transType", Vec2(0.0f, -0.2625f), Vec2(CW("Type: MOVE"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Type: MOVE", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("part", Vec2(0.0f, -0.525f), Vec2(CW("Choose Part"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Part", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }

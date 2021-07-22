@@ -45,7 +45,7 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 
@@ -106,7 +106,7 @@ void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 

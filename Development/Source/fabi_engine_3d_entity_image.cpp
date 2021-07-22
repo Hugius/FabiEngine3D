@@ -6,15 +6,15 @@ void FabiEngine3D::imageEntity_deleteAll()
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible)
+void FabiEngine3D::imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
 {
-	_core->_imageEntityManager.addImageEntity(ID, diffuseMapPath, translation, rotation, scaling, false, isCentered);
+	_core->_imageEntityManager.addImageEntity(ID, diffuseMapPath, position, rotation, size, false, isCentered);
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::imageEntity_add(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered, bool isVisible)
+void FabiEngine3D::imageEntity_add(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
 {
-	_core->_imageEntityManager.addImageEntity(ID, color, translation, rotation, scaling, isCentered);
+	_core->_imageEntityManager.addImageEntity(ID, color, position, rotation, size, isCentered);
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
@@ -40,7 +40,7 @@ const bool FabiEngine3D::imageEntity_isExisting(const string& ID)
 
 void FabiEngine3D::imageEntity_setPosition(const string& ID, Vec2 position)
 {
-	_core->_imageEntityManager.getEntity(ID)->setTranslation(position);
+	_core->_imageEntityManager.getEntity(ID)->setPosition(position);
 }
 
 void FabiEngine3D::imageEntity_setRotation(const string& ID, float rotation)
@@ -50,12 +50,12 @@ void FabiEngine3D::imageEntity_setRotation(const string& ID, float rotation)
 
 void FabiEngine3D::imageEntity_setSize(const string& ID, Vec2 size)
 {
-	_core->_imageEntityManager.getEntity(ID)->setScaling(size);
+	_core->_imageEntityManager.getEntity(ID)->setSize(size);
 }
 
 void FabiEngine3D::imageEntity_move(const string& ID, Vec2 position)
 {
-	_core->_imageEntityManager.getEntity(ID)->translate(position);
+	_core->_imageEntityManager.getEntity(ID)->move(position);
 }
 
 void FabiEngine3D::imageEntity_rotate(const string& ID, float rotation)
@@ -90,7 +90,7 @@ void FabiEngine3D::imageEntity_setMaxPosition(const string& ID, Vec2 maxPos)
 
 const Vec2 FabiEngine3D::imageEntity_getPosition(const string& ID)
 {
-	return _core->_imageEntityManager.getEntity(ID)->getTranslation();
+	return _core->_imageEntityManager.getEntity(ID)->getPosition();
 }
 
 const float FabiEngine3D::imageEntity_getRotation(const string& ID)
@@ -125,7 +125,7 @@ const vector<string> FabiEngine3D::imageEntity_getAllIDs()
 
 const Vec2 FabiEngine3D::imageEntity_getSize(const string& ID)
 {
-	return _core->_imageEntityManager.getEntity(ID)->getScaling();
+	return _core->_imageEntityManager.getEntity(ID)->getSize();
 }
 
 const Vec2 FabiEngine3D::imageEntity_getMinPosition(const string& ID)

@@ -239,9 +239,9 @@ void SceneEditor::_loadGUI()
 	screenID = "modelPropertiesMenu";
 	rightWindow->addScreen(screenID);
 	rightWindow->getScreen(screenID)->addTextfield("transformation", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Transformation", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("translation", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "translation.png", Vec3(0.0f));
+	rightWindow->getScreen(screenID)->addButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("rotation", Vec2(0.0f, 0.55f), Vec2(0.75f, 0.2f), "rotation.png", Vec3(0.0f));
-	rightWindow->getScreen(screenID)->addButton("scaling", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "scaling.png", Vec3(0.0f));
+	rightWindow->getScreen(screenID)->addButton("size", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "size.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("freeze", Vec2(0.0f, 0.13f), Vec2(1.15f, 0.075f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.03f), Vec2(1.25f, 0.075f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, -0.15f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
@@ -262,9 +262,9 @@ void SceneEditor::_loadGUI()
 	screenID = "billboardPropertiesMenu";
 	rightWindow->addScreen(screenID);
 	rightWindow->getScreen(screenID)->addTextfield("transformation", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Transformation", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("translation", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "translation.png", Vec3(0.0f));
+	rightWindow->getScreen(screenID)->addButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("rotation", Vec2(0.0f, 0.55f), Vec2(0.75f, 0.2f), "rotation.png", Vec3(0.0f));
-	rightWindow->getScreen(screenID)->addButton("scaling", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "scaling.png", Vec3(0.0f));
+	rightWindow->getScreen(screenID)->addButton("size", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "size.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, 0.05f), Vec2(1.25f, 0.075f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, -0.15f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addTextfield("y", Vec2(0.0f, -0.4f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));

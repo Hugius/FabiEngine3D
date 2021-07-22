@@ -73,13 +73,13 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
 		// Model matrix
-		Matrix44 modelMatrix = Matrix44::createTranslation(entity->getTranslation().x, entity->getTranslation().y, entity->getTranslation().z);
+		Matrix44 modelMatrix = Matrix44::createTranslation(entity->getPosition().x, entity->getPosition().y, entity->getPosition().z);
 		
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", modelMatrix);
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
@@ -107,7 +107,7 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
@@ -190,7 +190,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
@@ -243,7 +243,7 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_clippingY", clippingY);

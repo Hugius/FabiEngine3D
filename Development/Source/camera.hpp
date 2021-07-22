@@ -11,7 +11,7 @@ public:
 	void reset();
 	void update(Ivec2 lastCursorPosition, int mouseWheelDirection);
 	void updateMatrices();
-	void translate(Vec3 value);
+	void move(Vec3 value);
 	void setPosition(Vec3 value);
 	void setThirdPersonLookat(Vec3 value);
 	void setFOV(float value);
@@ -26,9 +26,9 @@ public:
 	void setMaxThirdPersonDistance(float value);
 	void setNearZ(float value);
 	void setFarZ(float value);
-	void translateFollowX(float value);
-	void translateFollowZY(float value);
-	void translateFollowZ(float value);
+	void moveFollowX(float value);
+	void moveFollowZY(float value);
+	void moveFollowZ(float value);
 	void enableFirstPersonView(float initialYaw, float initialPitch);
 	void disableFirstPersonView();
 	void enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance);

@@ -56,7 +56,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 			// Clear default empty partID
 			newAnimation->partIDs.clear();
-			newAnimation->totalTranslations.clear();
+			newAnimation->totalMovements.clear();
 			newAnimation->totalRotations.clear();
 			newAnimation->totalScalings.clear();
 
@@ -106,7 +106,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 							newAnimation->partIDs.push_back(partID);
 
 							// Also add total transformation for each partID
-							newAnimation->totalTranslations.insert(make_pair(partID, Vec3(0.0f)));
+							newAnimation->totalMovements.insert(make_pair(partID, Vec3(0.0f)));
 							newAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
 							newAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
 						}
@@ -145,7 +145,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 				// Check if preview model still has all the parts
 				if (hasAllParts)
 				{
-					newAnimation->initialScaling = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
+					newAnimation->initialSize = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
 				}
 				else // Clear preview model
 				{

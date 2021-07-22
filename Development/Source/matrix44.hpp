@@ -12,17 +12,6 @@ struct Matrix44 final
 	{
 		float m[4][4];
 		float f[16];
-		struct
-		{
-			Vec3 xAxis;
-			float wx;
-			Vec3 yAxis;
-			float wy;
-			Vec3 zAxis;
-			float wz;
-			Vec3 translation;
-			float one;
-		};
 	};
 
 	// Creation
@@ -58,11 +47,11 @@ struct Matrix44 final
 
 	// Static creations
 	static Matrix44 createTranslation(float x, float y, float z);
-	static Matrix44 createScaling(float x, float y, float z);
 	static Matrix44 createRotation(float x, float y, float z);
 	static Matrix44 createRotationX(float angle);
 	static Matrix44 createRotationY(float angle);
 	static Matrix44 createRotationZ(float angle);
+	static Matrix44 createScaling(float x, float y, float z);
 	static Matrix44 createOrtho(float left, float right, float bottom, float top, float nearZ, float farZ);
 	static Matrix44 createProjection(float fovY, float aspect, float nearZ, float farZ);
 	static Matrix44 createView(const Vec3& eye, const Vec3& center, const Vec3& up);

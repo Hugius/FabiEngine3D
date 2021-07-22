@@ -9,7 +9,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_translate(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.camera_move(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_translateFollowX(arguments[0].getDecimal());
+			_fe3d.camera_moveFollowX(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_translateFollowZ(arguments[0].getDecimal());
+			_fe3d.camera_moveFollowZ(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -67,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_translateFollowZY(arguments[0].getDecimal());
+			_fe3d.camera_moveFollowZY(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

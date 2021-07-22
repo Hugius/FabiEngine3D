@@ -22,7 +22,7 @@ void CollisionResolver::update(
 			if (aabb->isCollisionResponsive() && aabb->isVisible())
 			{
 				// Check collision with AABB
-				auto result = collisionDetector.check(aabb->getTranslation(), aabb->getScaling(), middlePosition,
+				auto result = collisionDetector.check(aabb->getPosition(), aabb->getSize(), middlePosition,
 					_cameraAabbBottom, _cameraAabbTop, _cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, 
 					middleChange, aabb->hasCollided());
 
@@ -97,7 +97,7 @@ void CollisionResolver::update(
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
-				camera.translate(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraTerrainSpeed, 0.0f));
+				camera.move(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraTerrainSpeed, 0.0f));
 				camPos.y = camera.getPosition().y;
 
 				// Correct moved distance

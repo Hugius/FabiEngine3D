@@ -80,15 +80,15 @@ void MasterRenderer::_renderModelEntities()
 					auto lodEntity = foundPair->second;
 
 					// Save original transformation
-					Vec3 originalPosition = lodEntity->getTranslation();
+					Vec3 originalPosition = lodEntity->getPosition();
 					Vec3 originalRotation = lodEntity->getRotation();
-					Vec3 originalSize = lodEntity->getScaling();
+					Vec3 originalSize = lodEntity->getSize();
 					bool originalVisibility = lodEntity->isVisible();
 
 					// Change transformation
-					lodEntity->setTranslation(modelEntity->getTranslation());
+					lodEntity->setPosition(modelEntity->getPosition());
 					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getLevelOfDetailScaling()) * originalSize);
+					lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 
@@ -96,9 +96,9 @@ void MasterRenderer::_renderModelEntities()
 					_modelEntityRenderer.render(lodEntity);
 
 					// Revert to original transformation
-					lodEntity->setTranslation(originalPosition);
+					lodEntity->setPosition(originalPosition);
 					lodEntity->setRotation(originalRotation);
-					lodEntity->setScaling(originalSize);
+					lodEntity->setSize(originalSize);
 					lodEntity->setVisible(originalVisibility);
 					lodEntity->updateModelMatrix();
 				}

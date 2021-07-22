@@ -93,7 +93,7 @@ const bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
 
 void FabiEngine3D::billboardEntity_move(const string& ID, Vec3 factor)
 {
-	_core->_billboardEntityManager.getEntity(ID)->translate(factor);
+	_core->_billboardEntityManager.getEntity(ID)->move(factor);
 }
 
 void FabiEngine3D::billboardEntity_rotate(const string& ID, Vec3 factor)
@@ -108,7 +108,7 @@ void FabiEngine3D::billboardEntity_scale(const string& ID, Vec2 factor)
 
 void FabiEngine3D::billboardEntity_setPosition(const string& ID, Vec3 position)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setTranslation(position);
+	_core->_billboardEntityManager.getEntity(ID)->setPosition(position);
 }
 
 void FabiEngine3D::billboardEntity_setRotation(const string& ID, Vec3 rotation)
@@ -118,7 +118,7 @@ void FabiEngine3D::billboardEntity_setRotation(const string& ID, Vec3 rotation)
 
 void FabiEngine3D::billboardEntity_setSize(const string& ID, Vec2 size)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setScaling(Vec3(size.x, size.y, 1.0f));
+	_core->_billboardEntityManager.getEntity(ID)->setSize(Vec3(size.x, size.y, 1.0f));
 }
 
 void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
@@ -139,7 +139,7 @@ void FabiEngine3D::billboardEntity_setTransparent(const string& ID, bool enabled
 
 const Vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getTranslation();
+	return _core->_billboardEntityManager.getEntity(ID)->getPosition();
 }
 
 const Vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
@@ -149,7 +149,7 @@ const Vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
 
 const Vec2 FabiEngine3D::billboardEntity_getSize(const string& ID)
 {
-	return Vec2(_core->_billboardEntityManager.getEntity(ID)->getScaling().x, _core->_billboardEntityManager.getEntity(ID)->getScaling().y);
+	return Vec2(_core->_billboardEntityManager.getEntity(ID)->getSize().x, _core->_billboardEntityManager.getEntity(ID)->getSize().y);
 }
 
 const Vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)

@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void WaterEntity::setTranslation(Vec3 value)
+void WaterEntity::setPosition(Vec3 value)
 {
-	_translation = value;
+	_position = value;
 }
 
 void WaterEntity::setColor(Vec3 value)
@@ -122,9 +122,9 @@ void WaterEntity::setTransparency(float value)
 	_transparency = std::max(0.0f, value);
 }
 
-const Vec3 WaterEntity::getTranslation() const
+const Vec3 WaterEntity::getPosition() const
 {
-	return _translation;
+	return _position;
 }
 
 const Vec3 WaterEntity::getColor() const

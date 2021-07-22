@@ -60,8 +60,8 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 
 	// Temporary values
 	auto self = _core->_aabbEntityManager.getEntity(selfID);
-	Vec3 selfPos = self->getTranslation();
-	Vec3 selfSize = self->getScaling() / 2.0f;
+	Vec3 selfPos = self->getPosition();
+	Vec3 selfSize = self->getSize() / 2.0f;
 
 	// Check if self entity is responsive and visible
 	if (!self->isCollisionResponsive() || !self->isVisible())
@@ -93,8 +93,8 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 			}
 
 			// Temporary values
-			Vec3 otherPos = other->getTranslation();
-			Vec3 otherSize = other->getScaling() / 2.0f;
+			Vec3 otherPos = other->getPosition();
+			Vec3 otherSize = other->getSize() / 2.0f;
 			// Check XYZ collision between 2 entities
 			if
 			(

@@ -43,15 +43,15 @@ const Vec3 ModelEntity::getColor(const string& partID)
 	}
 }
 
-const Vec3 ModelEntity::getTranslation(const string& partID)
+const Vec3 ModelEntity::getPosition(const string& partID)
 {
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
-		return _baseTranslation;
+		return _basePosition;
 	}
 	else
 	{
-		return _parts[_getPartIndex(partID)].localTranslation;
+		return _parts[_getPartIndex(partID)].localPosition;
 	}
 }
 
@@ -79,21 +79,21 @@ const Vec3 ModelEntity::getRotationOrigin(const string& partID)
 	}
 }
 
-const Vec3 ModelEntity::getScaling(const string& partID)
+const Vec3 ModelEntity::getSize(const string& partID)
 {
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
-		return _baseScaling;
+		return _baseSize;
 	}
 	else
 	{
-		return _parts[_getPartIndex(partID)].localScaling;
+		return _parts[_getPartIndex(partID)].localSize;
 	}
 }
 
-const Vec3 ModelEntity::getLevelOfDetailScaling()
+const Vec3 ModelEntity::getLevelOfDetailSize()
 {
-	return _levelOfDetailScaling;
+	return _levelOfDetailSize;
 }
 
 const float ModelEntity::getInversion(const string& partID)

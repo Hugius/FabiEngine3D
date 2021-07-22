@@ -11,9 +11,9 @@ const GLuint BillboardEntity::getDiffuseMap() const
 	return _diffuseMap;
 }
 
-const Vec3 BillboardEntity::getTranslation() const
+const Vec3 BillboardEntity::getPosition() const
 {
-	return _translation;
+	return _position;
 }
 
 const Vec3 BillboardEntity::getInitialRotation() const
@@ -26,9 +26,9 @@ const Vec3 BillboardEntity::getRotation() const
 	return _rotation;
 }
 
-const Vec3 BillboardEntity::getScaling() const
+const Vec3 BillboardEntity::getSize() const
 {
-	return _scaling;
+	return _size;
 }
 
 const Vec3 BillboardEntity::getColor() const

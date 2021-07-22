@@ -16,7 +16,7 @@ public:
 	(
 		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,
-		Vec2 translation, float rotation, Vec2 scaling,
+		Vec2 position, float rotation, Vec2 size,
 		bool overwrite, bool isCentered, bool isDynamic
 	);
 

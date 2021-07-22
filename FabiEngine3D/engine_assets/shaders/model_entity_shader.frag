@@ -178,20 +178,20 @@ vec3 getDiffuseMapping()
 	else
 	{
 		// Calculate the texel color
-		vec4 texColor = texture(u_diffuseMap, f_uv);
-		texColor.rgb = pow(texColor.rgb, vec3(2.2f));
+		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Removing alpha background
 		if(u_isTransparent)
 		{
-			if(texColor.a < 0.25f)
+			if(diffuseMapColor.a < 0.25f)
 			{
 				discard;
 			}
 		}
 
 		// Return
-		return texColor.rgb;
+		return diffuseMapColor.rgb;
 	}
 }
 

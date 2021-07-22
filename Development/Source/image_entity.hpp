@@ -19,10 +19,10 @@ public:
 
 	// Transformation
 	void setCentered(bool value);
-	void setTranslation(Vec2 value);
+	void setPosition(Vec2 value);
 	void setRotation(float value);
-	void setScaling(Vec2 value);
-	void translate(Vec2 value);
+	void setSize(Vec2 value);
+	void move(Vec2 value);
 	void rotate(float value);
 	void scale(Vec2 value);
 	void setMinPosition(Vec2 value);
@@ -54,9 +54,9 @@ public:
 	// Transformation
 	const bool isCentered() const;
 	const Matrix44 getModelMatrix() const;
-	const Vec2 getTranslation() const;
+	const Vec2 getPosition() const;
 	const float getRotation() const;
-	const Vec2 getScaling() const;
+	const Vec2 getSize() const;
 	const Vec2 getMinPosition() const;
 	const Vec2 getMaxPosition() const;
 	const unsigned int getDepth() const;
@@ -84,10 +84,10 @@ private:
 
 	Vec3 _color = Vec3(1.0f);
 
-	Vec2 _translation = Vec2(0.0f);
-	Vec2 _scaling     = Vec2(1.0f);
+	Vec2 _position = Vec2(0.0f);
 	Vec2 _minPosition = Vec2(-1.0f);
 	Vec2 _maxPosition = Vec2(1.0f);
+	Vec2 _size = Vec2(1.0f);
 
 	float _rotation = 0.0f;
 	float _alpha    = 1.0f;

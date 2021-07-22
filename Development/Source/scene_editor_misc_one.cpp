@@ -59,12 +59,12 @@ void SceneEditor::_selectModel(const string& modelID)
 void SceneEditor::_activateModel(const string& modelID)
 {
 	_activeModelID = modelID;
-	_transformation = TransformationType::TRANSLATION;
+	_transformation = TransformationType::MOVEMENT;
 
 	// Activate properties screen
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
 
 	// Filling writefields
 	Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
@@ -106,12 +106,12 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 void SceneEditor::_activateBillboard(const string& billboardID)
 {
 	_activeBillboardID = billboardID;
-	_transformation = TransformationType::TRANSLATION;
+	_transformation = TransformationType::MOVEMENT;
 
 	// Activate properties screen
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 
 	// Filling writefields
 	Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
@@ -153,7 +153,7 @@ void SceneEditor::_selectSound(const string& soundID)
 void SceneEditor::_activateSound(const string& soundID)
 {
 	_activeSpeakerID = "@speaker_" + soundID;
-	_transformation = TransformationType::TRANSLATION;
+	_transformation = TransformationType::MOVEMENT;
 
 	// Filling writefields
 	Vec3 position = _fe3d.soundEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));

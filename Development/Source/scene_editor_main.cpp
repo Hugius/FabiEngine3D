@@ -182,7 +182,7 @@ void SceneEditor::unload()
 	_isPlacingPointLight = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;
-	_transformation = TransformationType::TRANSLATION;
+	_transformation = TransformationType::MOVEMENT;
 	_editorSpeed = 1.0f;
 
 	// Delete name textfields

@@ -18,12 +18,12 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 			{
 				// Calculate box left bottom (LB) and right top (RT)
 				Vec3 lb, rt;
-				lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-				lb.y = (entity->getTranslation().y);
-				lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-				rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-				rt.y = (entity->getTranslation().y + entity->getScaling().y);
-				rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+				lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
+				lb.y = (entity->getPosition().y);
+				lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
+				rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
+				rt.y = (entity->getPosition().y + entity->getSize().y);
+				rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
 
 				// Check intersection
 				float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
@@ -81,12 +81,12 @@ const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string
 		{
 			// Prepare intersection box
 			Vec3 lb, rt;
-			lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-			lb.y = (entity->getTranslation().y);
-			lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-			rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-			rt.y = (entity->getTranslation().y + entity->getScaling().y);
-			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+			lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
+			lb.y = (entity->getPosition().y);
+			lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
+			rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
+			rt.y = (entity->getPosition().y + entity->getSize().y);
+			rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
 
 			// Calculate intersection & distance
 			float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
@@ -144,12 +144,12 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 					{
 						// Calculate box left bottom (LB) and right top (RT)
 						Vec3 lb, rt;
-						lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-						lb.y = (entity->getTranslation().y);
-						lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-						rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-						rt.y = (entity->getTranslation().y + entity->getScaling().y);
-						rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+						lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
+						lb.y = (entity->getPosition().y);
+						lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
+						rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
+						rt.y = (entity->getPosition().y + entity->getSize().y);
+						rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
 
 						// Check intersection
 						float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());

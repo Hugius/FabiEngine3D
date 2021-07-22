@@ -34,10 +34,10 @@ void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath
 
 	// Set properties
 	auto entity = getEntity(ID);
-	entity->setTranslation(T);
+	entity->setPosition(T);
 	entity->setRotation(R);
-	entity->setScaling(S);
-	entity->setLevelOfDetailScaling(S);
+	entity->setSize(S);
+	entity->setLevelOfDetailSize(S);
 }
 
 void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
@@ -245,7 +245,7 @@ void ModelEntityManager::update()
 			{
 				// Calculate absolute distance between camera and entity
 				Vec3 camPos = _renderBus.getCameraPosition();
-				Vec3 entityPos = entity->getTranslation();
+				Vec3 entityPos = entity->getPosition();
 				float xDistance = fabsf(camPos.x - entityPos.x);
 				float yDistance = fabsf(camPos.y - entityPos.y);
 				float zDistance = fabsf(camPos.z - entityPos.z);

@@ -49,7 +49,7 @@ void SceneEditor::_updateSoundEditing()
 								// Set new active sound
 								_activeSpeakerID = _selectedSpeakerID;
 								_activateSound(ACTIVE_SOUND_ID);
-								_transformation = TransformationType::TRANSLATION;
+								_transformation = TransformationType::MOVEMENT;
 
 								// Filling writefields
 								Vec3 position = _fe3d.modelEntity_getPosition(_activeSpeakerID);

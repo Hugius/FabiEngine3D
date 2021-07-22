@@ -10,7 +10,7 @@ public:
 	{
 		// Empty part = whole model
 		partIDs.push_back("");
-		totalTranslations.insert(make_pair("", Vec3(0.0f)));
+		totalMovements.insert(make_pair("", Vec3(0.0f)));
 		totalRotations.insert(make_pair("", Vec3(0.0f)));
 		totalScalings.insert(make_pair("", Vec3(0.0f)));
 
@@ -25,7 +25,7 @@ public:
 			totalScaling = Vec3(std::max(0.0f, totalScaling.x), std::max(0.0f, totalScaling.y), std::max(0.0f, totalScaling.z));
 		}
 		speedMultiplier = std::max(0.0f, speedMultiplier);
-		initialScaling = Vec3(std::max(0.0f, initialScaling.x), std::max(0.0f, initialScaling.y), std::max(0.0f, initialScaling.z));
+		initialSize = Vec3(std::max(0.0f, initialSize.x), std::max(0.0f, initialSize.y), std::max(0.0f, initialSize.z));
 	}
 
 	const string ID;
@@ -33,11 +33,11 @@ public:
 	vector<AnimationFrame> frames;
 	vector<string> partIDs;
 
-	map<string, Vec3> totalTranslations;
+	map<string, Vec3> totalMovements;
 	map<string, Vec3> totalRotations;
 	map<string, Vec3> totalScalings;
 
-	Vec3 initialScaling = Vec3(0.0f);
+	Vec3 initialSize = Vec3(0.0f);
 
 	string previewModelID = "";
 	string oldPreviewModelID = "";

@@ -29,8 +29,8 @@ void ImageEntityRenderer::unbind()
 void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty() &&
-		((entity->getTranslation().y - entity->getScaling().y) < entity->getMaxPosition().y) &&
-		((entity->getTranslation().y + entity->getScaling().y) > entity->getMinPosition().y))
+		((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
+		((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);

@@ -138,7 +138,7 @@ void AnimationEditor::_updateMiscellaneous()
 						// Only whole model size must be original
 						if (partID.empty())
 						{
-							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partID);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
 						}
 						else
 						{
@@ -162,11 +162,11 @@ void AnimationEditor::_updateMiscellaneous()
 								if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, partID) || partID.empty())
 								{
 									// Determine type of transformation
-									if (frame.transformationTypes[partID] == TransformationType::TRANSLATION)
+									if (frame.transformationTypes[partID] == TransformationType::MOVEMENT)
 									{
-										// Translation
+										// Movement
 										_fe3d.modelEntity_setPosition(currentAnimation->previewModelID,
-											(currentAnimation->initialScaling * frame.targetTransformations[partID]), partID);
+											(currentAnimation->initialSize * frame.targetTransformations[partID]), partID);
 									}
 									else if (frame.transformationTypes[partID] == TransformationType::ROTATION)
 									{
@@ -184,7 +184,7 @@ void AnimationEditor::_updateMiscellaneous()
 									else if (frame.transformationTypes[partID] == TransformationType::SCALING)
 									{
 										// Retrieve model size (or part default size)
-										const auto& modelSize = partID.empty() ? currentAnimation->initialScaling : Vec3(1.0f);
+										const auto& modelSize = partID.empty() ? currentAnimation->initialSize : Vec3(1.0f);
 
 										// Scaling
 										_fe3d.modelEntity_setSize(currentAnimation->previewModelID,

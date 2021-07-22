@@ -14,7 +14,7 @@ public:
 
 	void make3D(Vec3 position, float maxVolume, float maxDistance);
 	void setPosition(Vec3 value);
-	void translate(Vec3 value);
+	void move(Vec3 value);
 	void setVolume(float value);
 	void setMaxVolume(float value);
 	void setMaxDistance(float value);

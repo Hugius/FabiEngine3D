@@ -15,18 +15,18 @@ void ModelEntity::updateModelMatrix()
 		// Instanced modelpart cannot have a modelmatrix position
 		if (!getRenderBuffers().empty() && getRenderBuffer(static_cast<unsigned int>(i))->isInstanced())
 		{
-			_parts[i].localTranslation = Vec3(0.0f);
+			_parts[i].localPosition = Vec3(0.0f);
 		}
 
 		// Identity matrix
 		_parts[i].modelMatrix = Matrix44(1.0f);
 
 		// Base translation matrix
-		Matrix44 baseTranslationMatrix = Matrix44::createTranslation(_baseTranslation.x, _baseTranslation.y, _baseTranslation.z);
+		Matrix44 baseTranslationMatrix = Matrix44::createTranslation(_basePosition.x, _basePosition.y, _basePosition.z);
 		_parts[i].modelMatrix = _parts[i].modelMatrix * baseTranslationMatrix;
 
 		// Translation matrix
-		Matrix44 translationMatrix = Matrix44::createTranslation(_parts[i].localTranslation.x, _parts[i].localTranslation.y, _parts[i].localTranslation.z);
+		Matrix44 translationMatrix = Matrix44::createTranslation(_parts[i].localPosition.x, _parts[i].localPosition.y, _parts[i].localPosition.z);
 		_parts[i].modelMatrix = _parts[i].modelMatrix * translationMatrix;
 
 		// Base rotation origin matrix - translate
@@ -60,11 +60,11 @@ void ModelEntity::updateModelMatrix()
 		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationOriginMatrix;
 
 		// Base scaling matrix
-		Matrix44 baseScalingMatrix = Matrix44::createScaling(_baseScaling.x, _baseScaling.y, _baseScaling.z);
+		Matrix44 baseScalingMatrix = Matrix44::createScaling(_baseSize.x, _baseSize.y, _baseSize.z);
 		_parts[i].modelMatrix = _parts[i].modelMatrix * baseScalingMatrix;
 
 		// Scaling matrix
-		Matrix44 scalingMatrix = Matrix44::createScaling(_parts[i].localScaling.x, _parts[i].localScaling.y, _parts[i].localScaling.z);
+		Matrix44 scalingMatrix = Matrix44::createScaling(_parts[i].localSize.x, _parts[i].localSize.y, _parts[i].localSize.z);
 		_parts[i].modelMatrix = _parts[i].modelMatrix * scalingMatrix;
 	}
 }
@@ -89,15 +89,15 @@ void ModelEntity::setNormalMap(GLuint value, const string& partID)
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
-void ModelEntity::setTranslation(Vec3 value, const string& partID)
+void ModelEntity::setPosition(Vec3 value, const string& partID)
 {
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
-		_baseTranslation = value;
+		_basePosition = value;
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localTranslation = value;
+		_parts[_getPartIndex(partID)].localPosition = value;
 	}
 }
 
@@ -126,16 +126,16 @@ void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::setScaling(Vec3 value, const string& partID)
+void ModelEntity::setSize(Vec3 value, const string& partID)
 {
 	value = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
-		_baseScaling = value;
+		_baseSize = value;
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localScaling = value;
+		_parts[_getPartIndex(partID)].localSize = value;
 	}
 }
 
@@ -156,9 +156,9 @@ void ModelEntity::setColor(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::setLevelOfDetailScaling(Vec3 value)
+void ModelEntity::setLevelOfDetailSize(Vec3 value)
 {
-	_levelOfDetailScaling = value;
+	_levelOfDetailSize = value;
 }
 
 void ModelEntity::setInversion(float value, const string& partID)

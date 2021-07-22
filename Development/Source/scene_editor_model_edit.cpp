@@ -85,32 +85,32 @@ void SceneEditor::_updateModelEditing()
 				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					if (rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->isHovered()) // Position button
 					{
-						_transformation = TransformationType::TRANSLATION;
+						_transformation = TransformationType::MOVEMENT;
 
 						// Update buttons hoverability
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
 						rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(true);
 						rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(false);
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
 					}
-					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->isHovered()) // Size button
 					{
 						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(true);
 						rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(false);
+						rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(false);
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
@@ -202,7 +202,7 @@ void SceneEditor::_updateModelEditing()
 				Vec3 oldSize = size;
 
 				// Apply new model position / rotation / size
-				if (_transformation == TransformationType::TRANSLATION)
+				if (_transformation == TransformationType::MOVEMENT)
 				{
 					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
 					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);

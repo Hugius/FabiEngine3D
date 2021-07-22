@@ -38,7 +38,7 @@ void AnimationEditor::_updateEditingScreen()
 							// Only whole model size must be original
 							if (partID.empty())
 							{
-								_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partID);
+								_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
 							}
 							else
 							{
@@ -79,7 +79,7 @@ void AnimationEditor::_updateEditingScreen()
 						// Only whole model size must be original
 						if (partID.empty())
 						{
-							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partID);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
 						}
 						else
 						{
@@ -96,7 +96,7 @@ void AnimationEditor::_updateEditingScreen()
 					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 
 					// Reset preview model transformation
-					_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, "");
 					for (const auto& partID : currentAnimation->partIDs)
 					{
 						_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partID);
@@ -106,7 +106,7 @@ void AnimationEditor::_updateEditingScreen()
 						// Only whole model size must be original
 						if (partID.empty())
 						{
-							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partID);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
 						}
 						else
 						{
@@ -139,7 +139,7 @@ void AnimationEditor::_updateEditingScreen()
 								lastFrameCopy.rotationOrigins.insert(make_pair(partID, Vec3(0.0f)));
 								lastFrameCopy.speeds.insert(make_pair(partID, Vec3(0.0f)));
 								lastFrameCopy.speedTypes.insert(make_pair(partID, AnimationSpeedType::LINEAR));
-								lastFrameCopy.transformationTypes.insert(make_pair(partID, TransformationType::TRANSLATION));
+								lastFrameCopy.transformationTypes.insert(make_pair(partID, TransformationType::MOVEMENT));
 							}
 						}
 					}
@@ -240,7 +240,7 @@ void AnimationEditor::_updateEditingScreen()
 
 					// Change values
 					currentAnimation->previewModelID = selectedModelID;
-					currentAnimation->initialScaling = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
+					currentAnimation->initialSize = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
 
 					// First time choosing preview model, add all partIDs for this animation
 					if (currentAnimation->frames.size() == 1)
@@ -254,7 +254,7 @@ void AnimationEditor::_updateEditingScreen()
 								currentAnimation->partIDs.push_back(partID);
 
 								// Also add total transformation for each partID
-								currentAnimation->totalTranslations.insert(make_pair(partID, Vec3(0.0f)));
+								currentAnimation->totalMovements.insert(make_pair(partID, Vec3(0.0f)));
 								currentAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
 								currentAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
 							}

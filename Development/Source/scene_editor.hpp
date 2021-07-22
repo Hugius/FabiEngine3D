@@ -234,6 +234,6 @@ private:
 	bool _isEditorLoaded = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
-	TransformationType _transformation = TransformationType::TRANSLATION;
+	TransformationType _transformation = TransformationType::MOVEMENT;
 	float _editorSpeed = 1.0f;
 };

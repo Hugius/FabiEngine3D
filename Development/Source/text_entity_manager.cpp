@@ -37,7 +37,7 @@ void TextEntityManager::addTextEntity
 (
 	const string& ID, const string& textContent,
 	const string& fontPath, Vec3 color,
-	Vec2 translation, float rotation, Vec2 scaling,
+	Vec2 position, float rotation, Vec2 size,
 	bool overwrite, bool isCentered, bool isDynamic
 )
 {
@@ -56,9 +56,9 @@ void TextEntityManager::addTextEntity
 	entity->setTextContent(textContent);
 	entity->setFontPath(fontPath);
 	entity->setColor(color);
-	entity->setTranslation(translation);
+	entity->setPosition(position);
 	entity->setRotation(rotation);
-	entity->setScaling(scaling);
+	entity->setSize(size);
 	entity->setCentered(isCentered);
 	entity->setDynamic(isDynamic);
 

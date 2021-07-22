@@ -22,7 +22,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					auto animation = *_getAnimation(animationID);
 					animation.animatedModelID = modelID;
 					animation.timesToPlay = (loops == -1) ? -1 : (loops + 1);
-					animation.initialScaling = _fe3d.modelEntity_getSize(modelID);
+					animation.initialSize = _fe3d.modelEntity_getSize(modelID);
 
 					// Check if model has all the parts
 					bool hasAllParts = true;

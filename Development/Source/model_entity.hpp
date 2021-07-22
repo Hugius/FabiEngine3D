@@ -15,12 +15,12 @@ public:
 	void setLightMap(GLuint value, const string& partID = "");
 	void setReflectionMap(GLuint value, const string& partID = "");
 	void setNormalMap(GLuint value, const string& partID = "");
-	void setTranslation(Vec3 value, const string& partID = "");
+	void setPosition(Vec3 value, const string& partID = "");
 	void setRotation(Vec3 value, const string& partID = "");
 	void setRotationOrigin(Vec3 value, const string& partID = "");
-	void setScaling(Vec3 value, const string& partID = "");
+	void setSize(Vec3 value, const string& partID = "");
 	void setColor(Vec3 value, const string& partID = "");
-	void setLevelOfDetailScaling(Vec3 value);
+	void setLevelOfDetailSize(Vec3 value);
 	void setInversion(float value, const string& partID = "");
 	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& value, const string& partID = "");
@@ -54,11 +54,11 @@ public:
 	const GLuint getLightMap(const string& partID = "");
 	const GLuint getReflectionMap(const string& partID = "");
 	const GLuint getNormalMap(const string& partID = "");
-	const Vec3 getTranslation(const string& partID = "");
+	const Vec3 getPosition(const string& partID = "");
 	const Vec3 getRotation(const string& partID = "");
 	const Vec3 getRotationOrigin(const string& partID = "");
-	const Vec3 getScaling(const string& partID = "");
-	const Vec3 getLevelOfDetailScaling();
+	const Vec3 getSize(const string& partID = "");
+	const Vec3 getLevelOfDetailSize();
 	const Vec3 getColor(const string& partID = "");
 	const float getInversion(const string& partID = "");
 	const vector<string> getPartIDs();
@@ -108,10 +108,10 @@ private:
 
 		Matrix44 modelMatrix = Matrix44(1.0f);
 
-		Vec3 localTranslation = Vec3(0.0f);
+		Vec3 localPosition = Vec3(0.0f);
 		Vec3 localRotation = Vec3(0.0f);
 		Vec3 localRotationOrigin = Vec3(0.0f);
-		Vec3 localScaling = Vec3(1.0f);
+		Vec3 localSize = Vec3(1.0f);
 		Vec3 color = Vec3(1.0f);
 
 		float inversion = 0.0f;
@@ -129,11 +129,11 @@ private:
 	string _meshPath = "";
 	string _lodEntityID = "";
 
-	Vec3 _baseTranslation = Vec3(0.0f);
+	Vec3 _basePosition = Vec3(0.0f);
 	Vec3 _baseRotation = Vec3(0.0f);
 	Vec3 _baseRotationOrigin = Vec3(0.0f);
-	Vec3 _baseScaling = Vec3(1.0f);
-	Vec3 _levelOfDetailScaling = Vec3(1.0f);
+	Vec3 _baseSize = Vec3(1.0f);
+	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;

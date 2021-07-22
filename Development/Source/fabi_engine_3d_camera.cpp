@@ -26,24 +26,24 @@ void FabiEngine3D::camera_disableThirdPersonView()
 	_core->_camera.disableThirdPersonView();
 }
 
-void FabiEngine3D::camera_translateFollowX(float speed)
+void FabiEngine3D::camera_moveFollowX(float speed)
 {
-	_core->_camera.translateFollowX(speed);
+	_core->_camera.moveFollowX(speed);
 }
 
-void FabiEngine3D::camera_translateFollowZY(float speed)
+void FabiEngine3D::camera_moveFollowZY(float speed)
 {
-	_core->_camera.translateFollowZY(speed);
+	_core->_camera.moveFollowZY(speed);
 }
 
-void FabiEngine3D::camera_translateFollowZ(float speed)
+void FabiEngine3D::camera_moveFollowZ(float speed)
 {
-	_core->_camera.translateFollowZ(speed);
+	_core->_camera.moveFollowZ(speed);
 }
 
-void FabiEngine3D::camera_translate(Vec3 translation)
+void FabiEngine3D::camera_move(Vec3 speed)
 {
-	_core->_camera.translate(translation);
+	_core->_camera.move(speed);
 }
 
 void FabiEngine3D::camera_setPosition(Vec3 position)

@@ -45,10 +45,10 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 	entity->addRenderBuffer(_renderBuffer, false);
 
 	// Miscellaneous
-	entity->setTranslation(T);
+	entity->setPosition(T);
 	entity->setRotation(R);
 	entity->setInitialRotation(R);
-	entity->setScaling(S);
+	entity->setSize(S);
 	entity->setCameraFacingX(facingCameraX);
 	entity->setCameraFacingY(facingCameraY);
 	entity->setColor(color);
@@ -96,7 +96,7 @@ void BillboardEntityManager::update()
 		if (facingX || facingY)
 		{
 			// Calculate center of billboard
-			Vec3 position = (entity->getTranslation() + Vec3(0.0f, (entity->getScaling().y / 2.0f), 0.0f));
+			Vec3 position = (entity->getPosition() + Vec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
 
 			// Calculate direction
 			Vec3 direction = (position - _renderBus.getCameraPosition());

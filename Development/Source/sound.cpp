@@ -42,7 +42,7 @@ void Sound::setPosition(Vec3 value)
 	}
 }
 
-void Sound::translate(Vec3 value)
+void Sound::move(Vec3 value)
 {
 	if (_is3D)
 	{

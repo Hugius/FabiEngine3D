@@ -7,7 +7,7 @@ void LightEntity::setPosition(Vec3 value)
 	_position = value;
 }
 
-void LightEntity::translate(Vec3 value)
+void LightEntity::move(Vec3 value)
 {
 	_position += value;
 }

@@ -5,9 +5,9 @@
 
 void ImageEntity::updateModelMatrix()
 {
-	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, 0.0f);
+	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, 0.0f);
 	Matrix44 rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(_rotation));
-	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, 1.0f);
+	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, 1.0f);
 
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
@@ -42,9 +42,9 @@ void ImageEntity::setCentered(bool value)
 	_isCentered = value;
 }
 
-void ImageEntity::setTranslation(Vec2 value)
+void ImageEntity::setPosition(Vec2 value)
 {
-	_translation = value;
+	_position = value;
 }
 
 void ImageEntity::setRotation(float value)
@@ -55,14 +55,14 @@ void ImageEntity::setRotation(float value)
 	_rotation = std::fmodf(_rotation, 360.0f);
 }
 
-void ImageEntity::setScaling(Vec2 value)
+void ImageEntity::setSize(Vec2 value)
 {
-	_scaling = Vec2(std::max(0.0f, value.x), std::max(0.0f, value.y));
+	_size = Vec2(std::max(0.0f, value.x), std::max(0.0f, value.y));
 }
 
-void ImageEntity::translate(Vec2 value)
+void ImageEntity::move(Vec2 value)
 {
-	_translation += value;
+	_position += value;
 }
 
 void ImageEntity::rotate(float value)
@@ -75,8 +75,8 @@ void ImageEntity::rotate(float value)
 
 void ImageEntity::scale(Vec2 value)
 {
-	_scaling += value;
-	_scaling = Vec2(std::max(0.0f, _scaling.x), std::max(0.0f, _scaling.y));
+	_size += value;
+	_size = Vec2(std::max(0.0f, _size.x), std::max(0.0f, _size.y));
 }
 
 void ImageEntity::setMinPosition(Vec2 value)
@@ -276,9 +276,9 @@ const Matrix44 ImageEntity::getModelMatrix() const
 	return _modelMatrix;
 }
 
-const Vec2 ImageEntity::getTranslation() const
+const Vec2 ImageEntity::getPosition() const
 {
-	return _translation;
+	return _position;
 }
 
 const float ImageEntity::getRotation() const
@@ -286,9 +286,9 @@ const float ImageEntity::getRotation() const
 	return _rotation;
 }
 
-const Vec2 ImageEntity::getScaling() const
+const Vec2 ImageEntity::getSize() const
 {
-	return _scaling;
+	return _size;
 }
 
 const Vec2 ImageEntity::getMinPosition() const

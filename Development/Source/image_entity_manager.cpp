@@ -32,7 +32,7 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 	return _getImageEntities();
 }
 
-void ImageEntityManager::addImageEntity(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool engine, bool isCentered)
+void ImageEntityManager::addImageEntity(const string& ID, const string& texturePath, Vec2 position, float rotation, Vec2 size, bool engine, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);
@@ -41,13 +41,13 @@ void ImageEntityManager::addImageEntity(const string& ID, const string& textureP
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
 	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
-	entity->setTranslation(translation);
+	entity->setPosition(position);
 	entity->setRotation(rotation);
-	entity->setScaling(scaling);
+	entity->setSize(size);
 	entity->setCentered(isCentered);
 }
 
-void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)
+void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);
@@ -55,9 +55,9 @@ void ImageEntityManager::addImageEntity(const string& ID, Vec3 color, Vec2 trans
 	// Set properties
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
-	entity->setTranslation(translation);
+	entity->setPosition(position);
 	entity->setRotation(rotation);
-	entity->setScaling(scaling);
+	entity->setSize(size);
 	entity->setCentered(isCentered);
 	entity->setColor(color);
 }

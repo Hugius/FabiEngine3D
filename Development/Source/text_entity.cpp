@@ -13,8 +13,8 @@ void TextEntity::deleteCharacterEntities()
 void TextEntity::updateCharacterEntities()
 {
 	// Temporary values
-	float xCharSize = this->getScaling().x / static_cast<float>(this->_textContent.size());
-	float yCharSize = this->getScaling().y;
+	float xCharSize = this->getSize().x / static_cast<float>(this->_textContent.size());
+	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
 	
 	// Update every character
@@ -27,14 +27,14 @@ void TextEntity::updateCharacterEntities()
 		// Check if text is isCentered
 		if (this->isCentered())
 		{
-			xCharOffset -= (this->getScaling().x / 2.0f);
+			xCharOffset -= (this->getSize().x / 2.0f);
 			yCharOffset -= (yCharSize / 2.0f);
 		}
 
 		// Set new transformation
-		character->setTranslation(this->getTranslation() + Vec2(xCharOffset, yCharOffset));
+		character->setPosition(this->getPosition() + Vec2(xCharOffset, yCharOffset));
 		character->setRotation(this->getRotation());
-		character->setScaling(Vec2(xCharSize, yCharSize));
+		character->setSize(Vec2(xCharSize, yCharSize));
 
 		// Copy all properties
 		character->setColor(this->getColor());

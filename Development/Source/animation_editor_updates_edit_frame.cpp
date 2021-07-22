@@ -19,8 +19,8 @@ void AnimationEditor::_updateFrameScreen()
 			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartID];
 			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartID];
 
-			// Translation in small units, scaling in %, rotation in whole degrees
-			float multiplier = (transType == TransformationType::TRANSLATION) ? 1000.0f :
+			// Movement in small units, rotation in whole degrees, scaling in %
+			float multiplier = (transType == TransformationType::MOVEMENT) ? 1000.0f :
 				(transType == TransformationType::SCALING) ? 100.0f : 1.0f;
 
 			// Rotation origin is only available if transformation type is rotation
@@ -75,7 +75,7 @@ void AnimationEditor::_updateFrameScreen()
 				else if (screen->getButton("transType")->isHovered())
 				{
 					// Change transformation type
-					if (transType == TransformationType::TRANSLATION)
+					if (transType == TransformationType::MOVEMENT)
 					{
 						transType = TransformationType::ROTATION;
 					}
@@ -85,7 +85,7 @@ void AnimationEditor::_updateFrameScreen()
 					}
 					else if (transType == TransformationType::SCALING)
 					{
-						transType = TransformationType::TRANSLATION;
+						transType = TransformationType::MOVEMENT;
 					}
 				}
 				else if (screen->getButton("part")->isHovered())
@@ -164,9 +164,9 @@ void AnimationEditor::_updateFrameScreen()
 			{
 				screen->getButton("speedType")->changeTextContent("Speed: INSTANT");
 			}
-			if (transType == TransformationType::TRANSLATION)
+			if (transType == TransformationType::MOVEMENT)
 			{
-				screen->getButton("transType")->changeTextContent("Type: TRANSLATE");
+				screen->getButton("transType")->changeTextContent("Type: MOVE");
 			}
 			else if (transType == TransformationType::ROTATION)
 			{

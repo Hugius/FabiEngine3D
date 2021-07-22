@@ -52,10 +52,10 @@ void main()
 	{
 		if(u_hasDiffuseMap) // Render diffuse map
 		{
-			vec4 texColor = texture(u_diffuseMap, f_uv);
-			texColor.rgb *= u_color;
-			texColor.a *= u_alpha;
-			o_finalColor = vec4(texColor.rgb, texColor.a);
+			vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
+			diffuseMapColor.rgb *= u_color;
+			diffuseMapColor.a *= u_alpha;
+			o_finalColor = diffuseMapColor;
 		}
 		else // Render color only
 		{

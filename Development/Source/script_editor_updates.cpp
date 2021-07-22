@@ -157,7 +157,7 @@ void ScriptEditor::_updateMiscellaneous()
 		// Smooth camera movement
 		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 		_scrollingAcceleration *= 0.95f;
-		_fe3d.camera_translate(Vec3(0.0f, _scrollingAcceleration, 0.0f));
+		_fe3d.camera_move(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 
 		// Check if user wants to search a keyword
 		string keyword;

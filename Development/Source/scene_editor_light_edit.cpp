@@ -40,7 +40,7 @@ void SceneEditor::_updateLightEditing()
 							{
 								// Set new active light
 								ACTIVE_BULB_ID = _selectedLightBulbID;
-								_transformation = TransformationType::TRANSLATION;
+								_transformation = TransformationType::MOVEMENT;
 
 								// Filling writefields
 								Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_BULB_ID);

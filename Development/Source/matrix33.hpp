@@ -11,15 +11,6 @@ struct Matrix33 final
 	{
 		float m[3][3];
 		float f[9];
-		struct
-		{
-			Vec2 xAxis;
-			float wx;
-			Vec2 yAxis;
-			float wy;
-			Vec2 translation;
-			float one;
-		};
 	};
 
 	// Creation

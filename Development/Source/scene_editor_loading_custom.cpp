@@ -339,7 +339,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					auto size = _fe3d.modelEntity_getSize(modelID, partID);
 
 					// Set properties
-					animationData->totalTranslations[partID] = position;
+					animationData->totalMovements[partID] = position;
 					animationData->totalRotations[partID] = rotation;
 					animationData->totalScalings[partID] = size;
 				}

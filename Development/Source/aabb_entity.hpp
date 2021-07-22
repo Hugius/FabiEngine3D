@@ -13,11 +13,11 @@ public:
 	void updateModelMatrix();
 
 	// Setters
-	void setLocalTranslation(Vec3 value);
-	void setLocalScaling(Vec3 value);
-	void setTranslation(Vec3 value);
-	void setScaling(Vec3 value);
-	void translate(Vec3 value);
+	void setLocalPosition(Vec3 value);
+	void setLocalSize(Vec3 value);
+	void setPosition(Vec3 value);
+	void setSize(Vec3 value);
+	void move(Vec3 value);
 	void scale(Vec3 value);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(Direction value);
@@ -27,10 +27,10 @@ public:
 
 	// Getters
 	const Matrix44& getModelMatrix() const;
-	const Vec3 getLocalTranslation() const;
-	const Vec3 getLocalScaling() const;
-	const Vec3 getTranslation() const;
-	const Vec3 getScaling() const;
+	const Vec3 getLocalPosition() const;
+	const Vec3 getLocalSize() const;
+	const Vec3 getPosition() const;
+	const Vec3 getSize() const;
 	const string& getParentID() const;
 	const AabbParentType getParentType() const;
 	const Direction getCollisionDirection() const;
@@ -42,10 +42,10 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	Vec3 _localTranslation = Vec3(0.0f);
-	Vec3 _localScaling = Vec3(1.0f);
-	Vec3 _translation = Vec3(0.0f);
-	Vec3 _scaling = Vec3(1.0f);
+	Vec3 _localPosition = Vec3(0.0f);
+	Vec3 _localSize = Vec3(1.0f);
+	Vec3 _position = Vec3(0.0f);
+	Vec3 _size = Vec3(1.0f);
 	
 	string _parentID = "";
 

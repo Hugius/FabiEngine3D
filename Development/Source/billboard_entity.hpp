@@ -9,7 +9,7 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(Vec3 value);
+	void move(Vec3 value);
 	void rotate(Vec3 value);
 	void scale(Vec3 value);
 
@@ -22,10 +22,10 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setDiffuseMap(GLuint value);
-	void setTranslation(Vec3 value);
+	void setPosition(Vec3 value);
 	void setInitialRotation(Vec3 value);
 	void setRotation(Vec3 value);
-	void setScaling(Vec3 value);
+	void setSize(Vec3 value);
 	void setColor(Vec3 color);
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
@@ -50,10 +50,10 @@ public:
 	// Getters
 	const Matrix44& getModelMatrix() const;
 	const GLuint getDiffuseMap() const;
-	const Vec3 getTranslation() const;
+	const Vec3 getPosition() const;
 	const Vec3 getInitialRotation() const;
 	const Vec3 getRotation() const;
-	const Vec3 getScaling() const;
+	const Vec3 getSize() const;
 	const Vec3 getColor() const;
 	const string& getTextContent() const;
 	const string& getFontPath() const;
@@ -84,10 +84,10 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	Vec3 _translation = Vec3(0.0f);
+	Vec3 _position = Vec3(0.0f);
 	Vec3 _rotation = Vec3(0.0f);
 	Vec3 _initialRotation = Vec3(0.0f);
-	Vec3 _scaling = Vec3(1.0f);
+	Vec3 _size = Vec3(1.0f);
 	Vec3 _color = Vec3(1.0f);
 
 	float _lightness = 1.0f;

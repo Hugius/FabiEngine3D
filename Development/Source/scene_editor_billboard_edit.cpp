@@ -80,32 +80,32 @@ void SceneEditor::_updateBillboardEditing()
 				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->isHovered()) // Position button
 					{
-						_transformation = TransformationType::TRANSLATION;
+						_transformation = TransformationType::MOVEMENT;
 
 						// Update buttons hoverability
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 					}
 					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(true);
 						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(false);
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 					}
-					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->isHovered()) // Size button
 					{
 						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(true);
 						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(false);
 					}
 					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
@@ -141,7 +141,7 @@ void SceneEditor::_updateBillboardEditing()
 				}
 
 				// Apply new billboard position / rotation / size
-				if (_transformation == TransformationType::TRANSLATION)
+				if (_transformation == TransformationType::MOVEMENT)
 				{
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
 					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);

@@ -175,7 +175,7 @@ void MasterRenderer::_captureWaterReflections()
 	if ((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (_camera.getPosition().y - waterEntity->getTranslation().y);
+		float cameraDistance = (_camera.getPosition().y - waterEntity->getPosition().y);
 
 		// Start capturing reflections
 		_waterReflectionFramebuffer.bind();
@@ -254,7 +254,7 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Calculate clipping plane
-		const float clippingHeight = -(waterEntity->getTranslation().y);
+		const float clippingHeight = -(waterEntity->getPosition().y);
 		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 		_renderBus.setClippingPlane(clippingPlane);
 
@@ -379,22 +379,22 @@ void MasterRenderer::_captureWaterRefractions()
 
 		// Check if camera underwater
 		const float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getTranslation().y + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f)));
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getPosition().y + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getPosition().x - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getPosition().x + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getPosition().z - (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getPosition().z + (waterEntity->getSize() / 2.0f)));
 
 		// Calculate clipping plane
 		if (isUnderWater)
 		{
-			const float clippingHeight = -(waterEntity->getTranslation().y);
+			const float clippingHeight = -(waterEntity->getPosition().y);
 			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}
 		else
 		{
-			const float clippingHeight = (waterEntity->getTranslation().y + waveHeight);
+			const float clippingHeight = (waterEntity->getPosition().y + waveHeight);
 			const Vec4 clippingPlane = Vec4(0.0f, -1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}

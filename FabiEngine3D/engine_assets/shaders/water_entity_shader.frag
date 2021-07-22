@@ -65,7 +65,7 @@ vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
 vec3 getFog(vec3 color);
 float getSpecularLighting(vec3 position, vec3 normal);
-float convertDepthToLinear(float depth);
+float convertDepthToPerspective(float depth);
 
 // Process fragment
 void main()
@@ -98,8 +98,8 @@ vec4 calculateWaterColor()
 	if(u_transparency > 0.0f)
 	{
 		float depth = texture(u_depthMap, vec2(texCoords.x, -texCoords.y)).r;
-		float floorDistance = convertDepthToLinear(depth);
-		float waterDistance = convertDepthToLinear(gl_FragCoord.z);
+		float floorDistance = convertDepthToPerspective(depth);
+		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 		float waterDepth = floorDistance - waterDistance;
 		alpha = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
 	}
@@ -212,17 +212,24 @@ vec3 getDirectionalLighting(vec3 normal)
 		result *= u_directionalLightColor; // Directional color
 		return result; // Return
 	}
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 float getSpecularLighting(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
-        vec3 lightDirection = normalize(f_pos - position);
-        vec3 viewDirection = normalize(f_pos - u_cameraPosition);
-        vec3 reflectDirection = reflect(-lightDirection, normal);
-        float result = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
-        return result * u_specularLightIntensity;
+    	// Calculate
+        vec3 lightDirection   = normalize(position - f_pos);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+        float result          = pow(max(dot(normal, halfWayDirection), 0.0f), u_specularLightFactor);
+
+        // Return
+        return (result * u_specularLightIntensity);
     }
     else
     {
@@ -243,15 +250,18 @@ vec3 getFog(vec3 color)
 		part = clamp(part, 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = part * thickness;
+
+		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
-	
-	return color;
+	else
+	{
+		return color;
+	}
 }
 
-// Convert the depth to a linear value
-float convertDepthToLinear(float depth)
+float convertDepthToPerspective(float depth)
 {
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
+    float z = ((depth * 2.0f) - 1.0f);
+    return (2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
 }

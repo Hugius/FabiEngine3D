@@ -28,7 +28,7 @@ uniform bool u_hasDiffuseMap;
 layout (location = 0) out vec4 o_finalColor;
 
 // Functions
-float convertDepthToPerspective(float depth, float nearZ, float farZ);
+float convertDepthToPerspective(float depth);
 
 // Process fragment
 void main()
@@ -46,7 +46,7 @@ void main()
 	if(u_isPerspectiveDepthEntity) // Visualizing depth map
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
-		o_finalColor = vec4(vec3((convertDepthToPerspective(depth, u_nearZ, u_farZ))), 1.0f);
+		o_finalColor = vec4(vec3((convertDepthToPerspective(depth) / u_farZ)), 1.0f);
 	}
 	else
 	{
@@ -62,9 +62,8 @@ void main()
 	}
 }
 
-float convertDepthToPerspective(float depth, float nearZ, float farZ)
+float convertDepthToPerspective(float depth)
 {
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    float result = (2.0 * nearZ * farZ) / (farZ + nearZ - z * (farZ - nearZ));
-	return result / farZ;
+    float z = ((depth * 2.0f) - 1.0f);
+    return ((2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ)));
 }

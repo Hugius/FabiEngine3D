@@ -122,7 +122,7 @@ void main()
 	{
 		float shadow	 = getShadows();
 		vec3 ambient	 = getAmbientLighting();
-		vec3 directional = getDirectionalLighting(normal, u_isLightedShadowingEnabled ? true : (shadow == 1.0f));
+		vec3 directional = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadow == 1.0f)));
 		vec3 point		 = getPointLighting(normal);
 		vec3 spot		 = getSpotLighting(normal);
 		lighting		 = vec3(((ambient + directional) * shadow) + point + spot);
@@ -157,7 +157,7 @@ vec3 getNormalMapping()
         normal = normal * 2.0f - 1.0f;
         normal = normalize(f_tbnMatrix * normal);
 
-        // Return result
+        // Return
         return normal;
     }
     else
@@ -186,7 +186,7 @@ vec3 getDiffuseMapping()
 			}
 		}
 
-		// Returning the texture color
+		// Return
 		return texColor.rgb;
 	}
 }
@@ -195,7 +195,7 @@ vec3 getAmbientLighting()
 {
 	if(u_isAmbientLightEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightIntensity;
+		return (u_ambientLightColor * u_ambientLightIntensity);
 	}
 	else
 	{
@@ -211,10 +211,11 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
         vec3 result = vec3(0.0f);
 		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
 		float diffuse = max(dot(normal, lightDirection), 0.0f);
+		float specular = getSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
         result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
-        result += vec3(getSpecularLighting(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
+        result += vec3(specular * float(noShadowOcclusion)); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 
@@ -237,8 +238,8 @@ vec3 getPointLighting(vec3 normal)
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting strength
-			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = max(dot(normal, lightDir), 0.0f);
+			vec3  lightDirection = normalize(u_pointLightPositions[i] - f_pos);
+			float diffuse = max(dot(normal, lightDirection), 0.0f);
 			float distance = (length(u_pointLightPositions[i] - f_pos) / u_pointLightDistanceFactors[i]);
 			float attenuation = (1.0f / (1.0f + (distance * distance)));
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
@@ -268,6 +269,7 @@ vec3 getSpotLighting(vec3 normal)
 {
     if(u_isSpotLightEnabled)
     {
+    	// Calculate distance
         float fragmentDistance = abs(length(u_cameraPosition - f_pos));
         float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
         distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
@@ -290,7 +292,7 @@ vec3 getSpotLighting(vec3 normal)
         result *= u_spotLightIntensity; // Intensity
 
         // Return
-        return result * distanceFactor;
+        return (result * distanceFactor);
     }
     else
     {
@@ -302,8 +304,7 @@ vec3 getLightMapping()
 {
 	if(u_lightMappingEnabled && u_hasLightMap)
 	{
-		vec3 lightMapColor = texture(u_lightMap, f_uv).rgb;
-		return lightMapColor;
+		return texture(u_lightMap, f_uv).rgb;
 	}
 	else
 	{
@@ -315,15 +316,15 @@ vec3 getFog(vec3 color)
 {
 	if(u_isFogEnabled)
 	{
-        // Calculate distance in world space
+		// Calculate
         float distance = length(f_pos.xyz - u_cameraPosition);
-
-        // Calculate fog intensity
 		float difference = u_fogMaxDistance - u_fogMinDistance;
 		float part = (distance - u_fogMinDistance) / difference;
 		part = clamp(part, 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = part * thickness;
+
+		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else
@@ -342,18 +343,21 @@ vec3 getSkyReflections(vec3 color, vec3 normal)
 		// Check if current texel allows for reflection
 		if(reflectionMapColor.rgb != vec3(0.0f))
 		{
-			float mixValue    = clamp(u_skyMixValue, 0.0, 1.0f);
-			float lightness   = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
-			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
-			vec3 reflectDir   = reflect(viewDir, normal);
-			vec3 mainSkyColor = texture(u_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mainSkyColor;
-			vec3 mixSkyColor  = texture(u_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mixSkyColor;
-			vec3 reflectColor = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
-			vec3 mixedColor   = mix(color, reflectColor, u_skyReflectionMixValue);
+			// Calculate
+			float mixValue        = clamp(u_skyMixValue, 0.0, 1.0f);
+			float lightness       = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
+			vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+			vec3 reflectDirection = reflect(viewDirection, normal);
+			vec3 mainSkyColor     = texture(u_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb * u_mainSkyColor;
+			vec3 mixSkyColor      = texture(u_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb * u_mixSkyColor;
+			vec3 reflectColor     = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
+			vec3 mixedColor       = mix(color, reflectColor, u_skyReflectionMixValue);
 
+			// Return
 			return mixedColor.rgb;
 		}
 
+		// Return
 		return color;
 	}
 	else
@@ -392,14 +396,14 @@ float getSpecularLighting(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
-        // Calculate
-        vec3 lightDirection   = normalize(f_pos - position);
-        vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
-        vec3 reflectDirection = reflect(-lightDirection, normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
+    	// Calculate
+        vec3 lightDirection   = normalize(position - f_pos);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+        float result          = pow(max(dot(normal, halfWayDirection), 0.0f), u_specularLightFactor);
 
         // Return
-        return result * u_specularLightIntensity;
+        return (result * u_specularLightIntensity);
     }
     else
     {
@@ -467,7 +471,7 @@ float getShadows()
 				}
 			}
 
-			// Return shadow value
+			// Return
 			return mix(shadow, 1.0f, alpha);
 		}
 

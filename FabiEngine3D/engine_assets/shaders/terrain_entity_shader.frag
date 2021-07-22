@@ -98,8 +98,8 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
 vec3 getPointLighting(vec3 normal);
 vec3 getSpotLighting(vec3 normal);
 vec3 getFog(vec3 color);
-float getShadows();
 float getSpecularLighting(vec3 position, vec3 normal);
+float getShadows();
 
 // Process fragment
 void main()
@@ -129,12 +129,14 @@ void main()
 
 vec3 getNormalMapping()
 {
-    if(
+    if
+    (
 		u_isNormalMappingEnabled && 
 		((u_isNormalMapped && u_hasNormalMap)  || 
 		(u_isNormalMappedR && u_hasNormalMapR) || 
 		(u_isNormalMappedG && u_hasNormalMapG) || 
-		(u_isNormalMappedB && u_hasNormalMapB)))
+		(u_isNormalMappedB && u_hasNormalMapB))
+	)
     {
 		if(u_isBlendMapped && u_hasBlendMap) // Blendmapped mixed normal
 		{
@@ -204,6 +206,8 @@ vec3 getNormalMapping()
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
 				normal = normal * 2.0f - 1.0f;
 				normal = normalize(f_tbnMatrix * normal);
+
+				// Return
 				return normal;
 			}
 			else
@@ -246,7 +250,7 @@ vec3 getDiffuseMapping()
 	}
 	else if(u_hasDiffuseMap) // Diffuse texture
 	{
-		// Calculate diffuse color
+		// Calculate
 		vec4 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y));
 
 		// Return
@@ -262,7 +266,7 @@ vec3 getAmbientLighting()
 {
 	if(u_isAmbientLightEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightIntensity;
+		return (u_ambientLightColor * u_ambientLightIntensity);
 	}
 	else
 	{
@@ -378,6 +382,8 @@ vec3 getFog(vec3 color)
 		part = clamp(part, 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
 		float mixValue = part * thickness;
+
+		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else
@@ -386,7 +392,25 @@ vec3 getFog(vec3 color)
 	}
 }
 
-// Calculate shadow lighting
+float getSpecularLighting(vec3 position, vec3 normal)
+{
+    if(u_isSpecularLightEnabled && u_isSpecularLighted)
+    {
+        // Calculate
+        vec3 lightDirection   = normalize(position - f_pos);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+        vec3 halfWayDirection = normalize(lightDirection + viewDirection);
+        float result          = pow(max(dot(normal, halfWayDirection), 0.0f), u_specularLightFactor);
+
+        // Return
+        return (result * u_specularLightIntensity);
+    }
+    else
+    {
+        return 0.0f;
+    }
+}
+
 float getShadows()
 {
 	if(u_isShadowsEnabled)
@@ -446,7 +470,7 @@ float getShadows()
 				}
 			}
 
-			// Return shadow value
+			// Return
 			if(u_isLightedShadowingEnabled)
 			{
 				return mix(shadow, 1.0f, alpha);
@@ -465,23 +489,4 @@ float getShadows()
 		// No shadow
 		return 1.0f;
 	}
-}
-
-float getSpecularLighting(vec3 position, vec3 normal)
-{
-    if(u_isSpecularLightEnabled && u_isSpecularLighted)
-    {
-        // Calculate
-        vec3 lightDirection   = normalize(f_pos - position);
-        vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
-        vec3 reflectDirection = reflect(-lightDirection, normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
-
-        // Return
-        return result * u_specularLightIntensity;
-    }
-    else
-    {
-        return 0.0f;
-    }
 }

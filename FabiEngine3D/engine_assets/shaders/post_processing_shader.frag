@@ -97,6 +97,6 @@ void main()
 
 float convertDepthToPerspective(float depth)
 {
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
+    float z = ((depth * 2.0f) - 1.0f);
+    return ((2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ)));
 }

@@ -516,7 +516,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto position = _fe3d.lightEntity_getPosition(lightID);
 			auto color = _fe3d.lightEntity_getColor(lightID);
 			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
-			auto distance = _fe3d.lightEntity_getDistanceFactor(lightID);
+			auto distance = _fe3d.lightEntity_getRadius(lightID);
 
 			// Write data
 			file <<
@@ -529,7 +529,9 @@ bool SceneEditor::saveCustomSceneToFile()
 				color.g << " " <<
 				color.b << " " <<
 				intensity << " " <<
-				distance << std::endl;
+				distance.x << " " <<
+				distance.y << " " <<
+				distance.z << std::endl;
 		}
 	}
 

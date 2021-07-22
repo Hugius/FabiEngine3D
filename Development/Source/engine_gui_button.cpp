@@ -201,6 +201,11 @@ void EngineGuiButton::changeTextContent(const string& content)
 	}
 }
 
+bool EngineGuiButton::isHoverable()
+{
+	return _isHoverable;
+}
+
 bool EngineGuiButton::isHovered()
 {
 	return _isHovered;

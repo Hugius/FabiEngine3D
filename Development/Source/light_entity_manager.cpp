@@ -35,7 +35,7 @@ void LightEntityManager::addLightEntity(const string& ID, Vec3 position, Vec3 co
 	entity->setPosition(position);
 	entity->setColor(color);
 	entity->setIntensity(intensity);
-	entity->setDistanceFactor(distanceFactor);
+	entity->setRadius(distanceFactor);
 }
 
 void LightEntityManager::update()

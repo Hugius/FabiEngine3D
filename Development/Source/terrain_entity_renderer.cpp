@@ -96,7 +96,7 @@ void TerrainEntityRenderer::renderLightEntities(const unordered_map<string, shar
 			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
 			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", entity->getDistanceFactor());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", entity->getRadius());
 
 			index++;
 		}

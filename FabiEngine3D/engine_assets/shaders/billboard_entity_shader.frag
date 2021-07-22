@@ -58,8 +58,7 @@ void main()
 		primaryColor  = diffuseMapColor.rgb;
 		primaryColor *= u_color;
 		primaryColor *= u_lightness;
-		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-		primaryColor  = mix(primaryColor, vec3(1.0f) - primaryColor, clamp(u_inversion, 0.0f, 1.0f));
+		primaryColor  = mix(primaryColor, vec3(1.0f) - clamp(primaryColor, vec3(0.0f), vec3(1.0f)), clamp(u_inversion, 0.0f, 1.0f));
 		primaryColor  = getFog(primaryColor);
 		primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
 	}

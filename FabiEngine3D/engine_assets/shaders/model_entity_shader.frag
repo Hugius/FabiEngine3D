@@ -242,10 +242,10 @@ vec3 getPointLighting(vec3 normal)
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
             // Calculate lighting strength
-			vec3  lightDirection = normalize(u_pointLightPositions[i] - f_pos);
+			vec3 lightDirection = normalize(u_pointLightPositions[i] - f_pos);
 			float diffuse = max(dot(normal, lightDirection), 0.0f);
-			float distance = (length(u_pointLightPositions[i] - f_pos) / u_pointLightDistanceFactors[i]);
-			float attenuation = (1.0f / (1.0f + (distance * distance)));
+			float distance = length(u_pointLightPositions[i] - f_pos);
+			float attenuation = max(0.0f, 1.0f - (distance / u_pointLightDistanceFactors[i]));
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
 
             // Apply
@@ -253,7 +253,7 @@ vec3 getPointLighting(vec3 normal)
 			current += vec3(diffuse); // Diffuse
 			current += vec3(specular); // Specular
             current *= u_pointLightColors[i]; // Color
-            current *= attenuation; // Distance
+            current *= (attenuation * attenuation); // Distance
             current *= u_pointLightIntensities[i]; // Intensity
 
             // Add to total lighting value

@@ -499,16 +499,16 @@ public:
 	void lightEntity_setVisible(const string& ID, bool isVisible);
 	void lightEntity_setPosition(const string& ID, Vec3 position);
 	void lightEntity_move(const string& ID, Vec3 factor);
+	void lightEntity_setRadius(const string& ID, Vec3 radius);
 	void lightEntity_setColor(const string& ID, Vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
-	void lightEntity_setDistanceFactor(const string& ID, float factor);
 
 	// Light entity interface - getters
 	const vector<string> lightEntity_getAllIDs();
 	const Vec3 lightEntity_getPosition(const string& ID);
+	const Vec3 lightEntity_getRadius(const string& ID);
 	const Vec3 lightEntity_getColor(const string& ID);
 	const float lightEntity_getIntensity(const string& ID);
-	const float lightEntity_getDistanceFactor(const string& ID);
 	const bool lightEntity_isExisting(const string& ID);
 	const bool lightEntity_isVisible(const string& ID);
 

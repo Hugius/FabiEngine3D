@@ -37,6 +37,7 @@ void SceneEditor::setCurrentProjectID(const string& projectID)
 
 void SceneEditor::_selectModel(const string& modelID)
 {
+	// Set ID
 	_selectedModelID = modelID;
 
 	// Change cursor
@@ -58,10 +59,10 @@ void SceneEditor::_selectModel(const string& modelID)
 
 void SceneEditor::_activateModel(const string& modelID)
 {
+	// Set ID
 	_activeModelID = modelID;
-	_transformation = TransformationType::MOVEMENT;
 
-	// Activate properties screen
+	// Update buttons hoverability
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
@@ -84,6 +85,7 @@ void SceneEditor::_activateModel(const string& modelID)
 
 void SceneEditor::_selectBillboard(const string& billboardID)
 {
+	// Set ID
 	_selectedBillboardID = billboardID;
 
 	// Change cursor
@@ -105,10 +107,10 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 
 void SceneEditor::_activateBillboard(const string& billboardID)
 {
+	// Set ID
 	_activeBillboardID = billboardID;
-	_transformation = TransformationType::MOVEMENT;
 
-	// Activate properties screen
+	// Update buttons hoverability
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
@@ -131,7 +133,8 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 
 void SceneEditor::_selectSound(const string& soundID)
 {
-	_selectedSpeakerID = "@speaker_" + soundID;
+	// Set ID
+	_selectedSpeakerID = ("@speaker_" + soundID);
 
 	// Change cursor
 	_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -152,8 +155,8 @@ void SceneEditor::_selectSound(const string& soundID)
 
 void SceneEditor::_activateSound(const string& soundID)
 {
-	_activeSpeakerID = "@speaker_" + soundID;
-	_transformation = TransformationType::MOVEMENT;
+	// Set ID
+	_activeSpeakerID = ("@speaker_" + soundID);
 
 	// Filling writefields
 	Vec3 position = _fe3d.soundEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));

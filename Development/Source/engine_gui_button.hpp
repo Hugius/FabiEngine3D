@@ -17,6 +17,7 @@ public:
 	void setVisible(bool isVisible);
 	void setHoverable(bool isHoverable);
 
+	bool isHoverable();
 	bool isHovered();
 
 	const string& getID();

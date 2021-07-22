@@ -42,6 +42,11 @@ void FabiEngine3D::lightEntity_move(const string& ID, Vec3 factor)
 	_core->_lightEntityManager.getEntity(ID)->move(factor);
 }
 
+void FabiEngine3D::lightEntity_setRadius(const string& ID, Vec3 radius)
+{
+	_core->_lightEntityManager.getEntity(ID)->setRadius(radius);
+}
+
 void FabiEngine3D::lightEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_lightEntityManager.getEntity(ID)->setColor(color);
@@ -52,14 +57,14 @@ void FabiEngine3D::lightEntity_setIntensity(const string& ID, float intensity)
 	_core->_lightEntityManager.getEntity(ID)->setIntensity(intensity);
 }
 
-void FabiEngine3D::lightEntity_setDistanceFactor(const string& ID, float factor)
-{
-	_core->_lightEntityManager.getEntity(ID)->setDistanceFactor(factor);
-}
-
 const Vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getPosition();
+}
+
+const Vec3 FabiEngine3D::lightEntity_getRadius(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->getRadius();
 }
 
 const Vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
@@ -70,11 +75,6 @@ const Vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
 const float FabiEngine3D::lightEntity_getIntensity(const string& ID)
 {
 	return _core->_lightEntityManager.getEntity(ID)->getIntensity();
-}
-
-const float FabiEngine3D::lightEntity_getDistanceFactor(const string& ID)
-{
-	return _core->_lightEntityManager.getEntity(ID)->getDistanceFactor();
 }
 
 const vector<string> FabiEngine3D::lightEntity_getAllIDs()

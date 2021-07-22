@@ -1,16 +1,21 @@
 #include "scene_editor.hpp"
 
+#define SELECTED_SPEAKER_ID _selectedSpeakerID
 #define SELECTED_SOUND_ID _selectedSpeakerID.substr(string("@speaker_").size())
+#define ACTIVE_SPEAKER_ID _activeSpeakerID
 #define ACTIVE_SOUND_ID _activeSpeakerID.substr(string("@speaker_").size())
 
 void SceneEditor::_updateSoundEditing()
 {
 	if (_isEditorLoaded)
 	{
-		// Reset selected billboard from last frame
+		// Temporary values
+		auto rightWindow = _gui.getViewport("right")->getWindow("main");
+
+		// Reset selected sound from last frame
 		if (!_dontResetSelectedSpeaker)
 		{
-			_selectedSpeakerID = "";
+			SELECTED_SPEAKER_ID = "";
 		}
 		else
 		{
@@ -34,7 +39,7 @@ void SceneEditor::_updateSoundEditing()
 						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected speaker
-						_selectedSpeakerID = entityID;
+						SELECTED_SPEAKER_ID = entityID;
 						_selectSound(SELECTED_SOUND_ID);
 
 						// Change cursor
@@ -44,25 +49,17 @@ void SceneEditor::_updateSoundEditing()
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same speaker is clicked again
-							if (_selectedSpeakerID != _activeSpeakerID)
+							if (SELECTED_SPEAKER_ID != ACTIVE_SPEAKER_ID)
 							{
-								// Set new active sound
-								_activeSpeakerID = _selectedSpeakerID;
+								ACTIVE_SPEAKER_ID = SELECTED_SPEAKER_ID;
 								_activateSound(ACTIVE_SOUND_ID);
-								_transformation = TransformationType::MOVEMENT;
-
-								// Filling writefields
-								Vec3 position = _fe3d.modelEntity_getPosition(_activeSpeakerID);
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 							}
 						}
 					}
 					else
 					{
 						// Don't reset if speaker is active
-						if (entityID != _activeSpeakerID && _selectedSpeakerID == "")
+						if (entityID != ACTIVE_SPEAKER_ID && SELECTED_SPEAKER_ID == "")
 						{
 							_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
 							_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
@@ -72,37 +69,41 @@ void SceneEditor::_updateSoundEditing()
 			}
 			
 			// Check if user made the active speaker inactive
-			if (_selectedSpeakerID == "" && _activeSpeakerID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if (SELECTED_SPEAKER_ID == "" && ACTIVE_SPEAKER_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					_activeSpeakerID = "";
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
+					ACTIVE_SPEAKER_ID = "";
+					rightWindow->setActiveScreen("sceneEditorControls");
 				}
 			}
 
 			// Update speaker animations
-			if (_selectedSpeakerID != _activeSpeakerID)
+			if (SELECTED_SPEAKER_ID != ACTIVE_SPEAKER_ID)
 			{
-				_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeDirection);
+				_updateSpeakerAnimation(SELECTED_SPEAKER_ID, _selectedSpeakerSizeDirection);
 			}
-			_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeDirection);
+			_updateSpeakerAnimation(ACTIVE_SPEAKER_ID, _activeSpeakerSizeDirection);
 
 			// Update properties screen
-			if (_activeSpeakerID != "")
+			if (ACTIVE_SPEAKER_ID != "")
 			{
-				_gui.getViewport("right")->getWindow("main")->setActiveScreen("soundPropertiesMenu");
+				// Temporary values
+				auto screen = rightWindow->getScreen("soundPropertiesMenu");
+
+				// Activate screen
+				rightWindow->setActiveScreen("soundPropertiesMenu");
 
 				// Check if input received
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					if (screen->getButton("delete")->isHovered()) // Delete button
 					{
-						_fe3d.modelEntity_delete(_activeSpeakerID);
+						_fe3d.modelEntity_delete(ACTIVE_SPEAKER_ID);
 						_fe3d.soundEntity_delete(ACTIVE_SOUND_ID);
-						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
-						_activeSpeakerID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+						ACTIVE_SPEAKER_ID = "";
 						return;
 					}
 				}
@@ -125,7 +126,7 @@ void SceneEditor::_updateSoundEditing()
 				_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
 				
 				// Apply new values
-				_fe3d.modelEntity_setPosition(_activeSpeakerID, position);
+				_fe3d.modelEntity_setPosition(ACTIVE_SPEAKER_ID, position);
 				_fe3d.soundEntity_setPosition(ACTIVE_SOUND_ID, position);
 				_fe3d.soundEntity_setMaxVolume(ACTIVE_SOUND_ID, maxVolume);
 				_fe3d.soundEntity_setMaxDistance(ACTIVE_SOUND_ID, maxDistance);
@@ -133,7 +134,7 @@ void SceneEditor::_updateSoundEditing()
 
 			// Check if sound is still selected or active
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-			if (_selectedSpeakerID == "" && _activeSpeakerID == "")
+			if (SELECTED_SPEAKER_ID == "" && ACTIVE_SPEAKER_ID == "")
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);
 			}

@@ -15,10 +15,6 @@ public:
 	void update() override;
 
 	static inline const Vec3 FRAME_COLOR = Vec3(0.0025f);
-	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
-	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 private:
 	TopViewportController& _topViewportController;

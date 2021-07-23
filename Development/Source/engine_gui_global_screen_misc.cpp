@@ -131,8 +131,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		// Add done & cancel buttons
 		if (!checkButton("value_form_done"))
 		{
-			addButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
-			addButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 		}
 	}
 }
@@ -202,8 +202,8 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 p
 		// Add GUI elements
 		addRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
 		addTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
-		addScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(SCROLL_LIST_COLOR), BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, Vec2(0.075f, 0.2f));
-		addButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
+		addScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(0.25f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), Vec3(1.0f), Vec3(0.0f), Vec2(0.075f, 0.2f));
+		addButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
 		// Add buttons to scrolling list
 		for (const auto& buttonTitle : buttonTitles)
@@ -269,8 +269,8 @@ void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, Vec2 p
 	{
 		addRectangle("question", position - Vec2(0.0f, 0.1f), Vec2(0.03f * title.size(), 0.5f), Vec3(0.25f));
 		addTextfield("question", position, Vec2(0.025f * title.size(), 0.1f), title, Vec3(1.0f));
-		addButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
-		addButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
+		addButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
+		addButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
 		_isFocused = true;
 		_answerFormID = ID;
 	}

@@ -31,7 +31,8 @@ private:
 	bool _isStarted = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
-	bool _wasMillisecondTimerStarted = false;
+	bool _wasVsyncEnabled = false;
+	bool _wasTimerStarted = false;
 	bool _wasMusicPaused = false;
 	bool _mustSkipUpdate = false;
 };

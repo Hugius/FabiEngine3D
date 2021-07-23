@@ -70,13 +70,13 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
 	screenID = "sceneEditorMenuModelPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuModelChoice
 	screenID = "sceneEditorMenuModelChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("modelList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboard
@@ -89,13 +89,13 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardPlace
 	screenID = "sceneEditorMenuBillboardPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardChoice
 	screenID = "sceneEditorMenuBillboardChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("billboardList", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSound
@@ -108,13 +108,13 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSoundPlace
 	screenID = "sceneEditorMenuSoundPlace";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSoundChoice
 	screenID = "sceneEditorMenuSoundChoice";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - sceneEditorMenuLighting
@@ -320,14 +320,14 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen(screenID)->addWritefield("x", Vec2(0.0f, 0.7f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWritefield("y", Vec2(0.0f, 0.45f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWritefield("z", Vec2(0.0f, 0.2f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.0f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, -0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("volumeMinus", Vec2(-0.75f, -0.85f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWritefield("volume", Vec2(0.0f, -0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, -0.725f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, -0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, -0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen(screenID)->addWritefield("distance", Vec2(0.0f, -0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, -0.325f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, -0.425f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, -0.425f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWritefield("distance", Vec2(0.0f, -0.425f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, -0.55f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, -0.65f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("volumeMinus", Vec2(-0.75f, -0.65f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWritefield("volume", Vec2(0.0f, -0.65f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 

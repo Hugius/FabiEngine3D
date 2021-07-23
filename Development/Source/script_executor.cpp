@@ -61,10 +61,17 @@ void ScriptExecutor::pause()
 		_fe3d.misc_setCursorVisible(false);
 
 		// Save timer state
-		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
-		if (_wasMillisecondTimerStarted)
+		_wasTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
+		if (_wasTimerStarted)
 		{
 			_fe3d.misc_stopMillisecondTimer();
+		}
+
+		// Save Vsync state
+		_wasVsyncEnabled = _fe3d.misc_isVsyncEnabled();
+		if (_wasVsyncEnabled)
+		{
+			_fe3d.misc_disableVsync();
 		}
 
 		// Save sound states
@@ -102,8 +109,14 @@ void ScriptExecutor::resume()
 		_fe3d.misc_centerCursor();
 		_fe3d.misc_setCursorVisible(_wasCursorVisible);
 
-		// Reset millisecond timer
-		if (_wasMillisecondTimerStarted)
+		// Reset Vsync
+		if (_wasVsyncEnabled)
+		{
+			_fe3d.misc_enableVsync();
+		}
+		
+		// Reset timer
+		if (_wasTimerStarted)
 		{
 			_fe3d.misc_startMillisecondTimer();
 		}
@@ -148,7 +161,8 @@ void ScriptExecutor::unload()
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
-		_wasMillisecondTimerStarted = false;
+		_wasVsyncEnabled = false;
+		_wasTimerStarted = false;
 		_wasMusicPaused = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();
@@ -180,11 +194,11 @@ void ScriptExecutor::_validateExecution()
 	if (_scriptInterpreter.hasThrownError()) // Script threw an error
 	{
 		_scriptInterpreter.unload();
-		_fe3d.misc_setCursorVisible(false);
 		_isStarted = false;
 		_isRunning = false;
 		_wasCursorVisible = false;
-		_wasMillisecondTimerStarted = false;
+		_wasVsyncEnabled = false;
+		_wasTimerStarted = false;
 		_wasMusicPaused = false;
 		_mustSkipUpdate = false;
 		_pausedSoundIDs.clear();

@@ -206,10 +206,6 @@ void ScriptInterpreter::load()
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_setCursorVisible(true);
-	if (_fe3d.misc_isVsyncEnabled())
-	{
-		_fe3d.misc_disableVsync();
-	}
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);
@@ -424,7 +420,12 @@ void ScriptInterpreter::unload()
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);
 	_fe3d.misc_setCursorVisible(false);
-	_fe3d.misc_enableVsync();
+
+	// Reset Vsync
+	if (_fe3d.misc_isVsyncEnabled())
+	{
+		_fe3d.misc_disableVsync();
+	}
 
 	// Reset timer
 	if (_fe3d.misc_isMillisecondTimerStarted())

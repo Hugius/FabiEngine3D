@@ -110,9 +110,6 @@ void SceneEditor::_updateMainMenu()
 					// Disable engine background
 					_fe3d.skyEntity_select("");
 
-					// Disable vsync
-					_fe3d.misc_disableVsync();
-
 					// Create new scene
 					_currentSceneID = newSceneName;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
@@ -140,9 +137,6 @@ void SceneEditor::_updateMainMenu()
 						// Try to load scene
 						if (loadEditorSceneFromFile(_currentSceneID))
 						{
-							// Disable vsync
-							_fe3d.misc_disableVsync();
-
 							// Change GUI
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 						}
@@ -241,9 +235,6 @@ void SceneEditor::_updateChoiceMenu()
 				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
 
-				// Exiting scene, so vsync needed
-				_fe3d.misc_enableVsync();
-
 				// No selected scene
 				_currentSceneID = "";
 				_currentSkyID = "";
@@ -260,9 +251,6 @@ void SceneEditor::_updateChoiceMenu()
 
 				// Enable engine background
 				_fe3d.skyEntity_select("@@engineBackground");
-
-				// Exiting scene, so enable Vsync again
-				_fe3d.misc_enableVsync();
 
 				// No selected scene
 				_currentSceneID = "";

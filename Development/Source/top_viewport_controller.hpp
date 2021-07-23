@@ -14,9 +14,9 @@
 class TopViewportController final : public BaseViewportController
 {
 public:
-	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, 
-		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
+	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
+		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
+		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor,
 		AudioEditor& audioEditor, SettingsEditor& settingsEditor);
 
 	void initialize() override;
@@ -26,7 +26,7 @@ public:
 	bool isScriptRunning();
 	bool isProjectCorrupted(const string& projectDirectoryPath);
 
-	static inline const Vec3 FRAME_COLOR = Vec3(0.1f);
+	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.1f, 0.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
 	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);

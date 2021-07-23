@@ -267,8 +267,8 @@ void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, Vec2 p
 {
 	if (_answerFormID == "")
 	{
-		addRectangle("question", position - Vec2(0.0f, 0.1f), Vec2(0.03f * title.size(), 0.5f), Vec3(0.25f));
-		addTextfield("question", position, Vec2(0.025f * title.size(), 0.1f), title, Vec3(1.0f));
+		addRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+		addTextfield("question", position, Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
 		addButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
 		addButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
 		_isFocused = true;

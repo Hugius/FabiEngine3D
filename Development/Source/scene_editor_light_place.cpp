@@ -49,7 +49,7 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.lightEntity_add(newID, newPosition, Vec3(1.0f), 1.0f, 10.0f);
+					_fe3d.lightEntity_add(newID, newPosition, Vec3(10.0f), Vec3(1.0f), 1.0f);
 					_fe3d.modelEntity_add("@" + newID, "engine_assets\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE);
 					_fe3d.modelEntity_setShadowed("@" + newID, false);
 					_fe3d.modelEntity_setReflected("@" + newID, false);

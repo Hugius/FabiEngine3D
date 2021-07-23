@@ -493,7 +493,7 @@ public:
 	const bool collision_isTerrainResponseEnabled();
 
 	// Light entity interface - setters
-	void lightEntity_add(const string& ID, Vec3 position, Vec3 color, float intensity, float distanceFactor, bool isVisible = true);
+	void lightEntity_add(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity, bool isVisible = true);
 	void lightEntity_deleteAll();
 	void lightEntity_delete(const string& ID);
 	void lightEntity_setVisible(const string& ID, bool isVisible);

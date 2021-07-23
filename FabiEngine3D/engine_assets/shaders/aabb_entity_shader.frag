@@ -1,6 +1,9 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
+// Constants
+vec3 FRAME_COLOR = vec3(1.0f, 0.0f, 0.0f);
+
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
@@ -8,6 +11,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 // Process fragments
 void main()
 {
-	o_primaryColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	vec3 primaryColor = pow(FRAME_COLOR, vec3(1.0f / 2.2f));
+	o_primaryColor = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }

@@ -9,27 +9,27 @@ void WaterEntityRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix",			     _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix",		     _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightColor",	 _renderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightPosition",  _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_cameraPosition",			 _renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogMinDistance",			 _renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance",			 _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogThickness",				 _renderBus.getFogThickness());
-	_shader.uploadUniform("u_fogColor",					 _renderBus.getFogColor());
-	_shader.uploadUniform("u_isFogEnabled",				 _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_nearZ",					 _renderBus.getNearZ());
-	_shader.uploadUniform("u_farZ",						 _renderBus.getFarZ());
+	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightColor());
+	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
+	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
+	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
+	_shader.uploadUniform("u_fogColor", _renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled", _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_isSpecularLightEnabled",	 _renderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_isPointLightEnabled",		 _renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_isPointLightEnabled", _renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
-	_shader.uploadUniform("u_reflectionMap",   0);
-	_shader.uploadUniform("u_refractionMap",   1);
-	_shader.uploadUniform("u_depthMap",		   2);
-	_shader.uploadUniform("u_dudvMap",		   3);
-	_shader.uploadUniform("u_normalMap",	   4);
+	_shader.uploadUniform("u_reflectionMap", 0);
+	_shader.uploadUniform("u_refractionMap", 1);
+	_shader.uploadUniform("u_depthMap", 2);
+	_shader.uploadUniform("u_dudvMap", 3);
+	_shader.uploadUniform("u_normalMap", 4);
 	_shader.uploadUniform("u_displacementMap", 5);
 
 	// Bind textures
@@ -90,7 +90,7 @@ void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared
 			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
 			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", entity->getRadius());
+			_shader.uploadUniform("u_pointLightRadiuses[" + to_string(index) + "]", entity->getRadius());
 
 			index++;
 		}

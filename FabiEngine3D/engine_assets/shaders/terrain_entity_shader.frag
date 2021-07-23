@@ -24,23 +24,23 @@ layout (location = 8) uniform sampler2D u_normalMapB;
 layout (location = 9) uniform sampler2D u_shadowMap;
 
 // Vec3 uniforms
+uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightRadiuses[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightColor;
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
-uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_spotLightColor;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
 
 // Float uniforms
+uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
 uniform float u_lightness;
 uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
-uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
-uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
 uniform float u_diffuseMapRepeat;
 uniform float u_diffuseMapRepeatR;
 uniform float u_diffuseMapRepeatG;
@@ -312,18 +312,23 @@ vec3 getPointLighting(vec3 normal)
         // For every pointLight
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
-            // Calculate lighting strength
-			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
+            // Calculate light strength
+			vec3 lightDir = normalize(u_pointLightPositions[i] - f_pos);
 			float diffuse = max(dot(normal, lightDir), 0.0f);
-			float distance = length(u_pointLightPositions[i] - f_pos) / u_pointLightDistanceFactors[i];
-			float attenuation = (1.0f / (1.0f + (distance * distance)));
+			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
+
+			// Calculate light attenuation
+			vec3 distance = abs(u_pointLightPositions[i] - f_pos);
+			float attenuation = max(0.0f, 1.0f - (distance.x / u_pointLightRadiuses[i].x));
+			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.y / u_pointLightRadiuses[i].y)));
+			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.z / u_pointLightRadiuses[i].z)));
 
             // Apply
             vec3 current = vec3(0.0f);
 			current += vec3(diffuse); // Diffuse
-            current += vec3(getSpecularLighting(u_pointLightPositions[i], normal)); // Specular
+            current += vec3(specular); // Specular
             current *= u_pointLightColors[i]; // Color
-            current *= attenuation; // Distance
+            current *= (attenuation * attenuation); // Distance
             current *= u_pointLightIntensities[i]; // Intensity
 
             // Add to total lighting value

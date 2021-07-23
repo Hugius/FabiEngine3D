@@ -26,8 +26,8 @@ void TopViewportController::initialize()
 {
 	// Top-viewport windows
 	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
-	_gui.getViewport("top")->addWindow("runWindow", Vec2(0.125f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
-	_gui.getViewport("top")->addWindow("miscWindow", Vec2(0.375f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
+	_gui.getViewport("top")->addWindow("runWindow", Vec2(0.125f, 0.0f), Vec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
+	_gui.getViewport("top")->addWindow("miscWindow", Vec2(0.375f, 0.0f), Vec2(0.4875f, 1.5f), TVPC::FRAME_COLOR);
 	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
 	_gameWindow = _gui.getViewport("top")->getWindow("runWindow");
 	_miscWindow = _gui.getViewport("top")->getWindow("miscWindow");

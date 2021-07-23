@@ -310,8 +310,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		{
 			// Data placeholders
 			string lightID;
-			Vec3 position, color;
-			float intensity, distance;
+			Vec3 position, radius, color;
+			float intensity;
 
 			// Extract data
 			iss >>
@@ -319,11 +319,13 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				position.x >>
 				position.y >>
 				position.z >>
+				radius.x >>
+				radius.y >>
+				radius.z >>
 				color.r >>
 				color.g >>
 				color.b >>
-				intensity >>
-				distance;
+				intensity;
 
 			// Add light bulb
 			if (_isEditorLoaded)
@@ -337,7 +339,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			}
 
 			// Add point light
-			_fe3d.lightEntity_add(lightID, position, color, intensity, distance);
+			_fe3d.lightEntity_add(lightID, position, radius, color, intensity);
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

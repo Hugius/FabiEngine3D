@@ -1,5 +1,4 @@
 #include "scene_editor.hpp"
-#include <iostream>
 
 #define SELECTED_BULB_ID _selectedLightBulbID
 #define ACTIVE_BULB_ID _activeLightBulbID

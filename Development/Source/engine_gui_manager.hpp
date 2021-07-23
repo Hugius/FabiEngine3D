@@ -14,6 +14,8 @@ public:
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 
+	static inline const Vec3 FRAME_COLOR = Vec3(0.025f);
+
 private:
 	FabiEngine3D& _fe3d;
 

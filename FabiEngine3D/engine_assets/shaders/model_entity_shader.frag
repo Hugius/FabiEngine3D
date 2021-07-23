@@ -26,13 +26,14 @@ layout (location = 7) uniform samplerCube u_mixSkyMap;
 uniform mat4 u_skyRotationMatrix;
 
 // Vector3 uniforms
+uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightRadiuses[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightColor;
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
-uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_spotLightColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
@@ -42,7 +43,6 @@ uniform vec3 u_mixSkyColor;
 
 // Float uniforms
 uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
-uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
 uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
 uniform float u_specularLightFactor;
@@ -241,12 +241,16 @@ vec3 getPointLighting(vec3 normal)
         // For every pointLight
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
-            // Calculate lighting strength
+            // Calculate light strength
 			vec3 lightDirection = normalize(u_pointLightPositions[i] - f_pos);
 			float diffuse = max(dot(normal, lightDirection), 0.0f);
-			float distance = length(u_pointLightPositions[i] - f_pos);
-			float attenuation = max(0.0f, 1.0f - (distance / u_pointLightDistanceFactors[i]));
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
+
+			// Calculate light attenuation
+			vec3 distance = abs(u_pointLightPositions[i] - f_pos);
+			float attenuation = max(0.0f, 1.0f - (distance.x / u_pointLightRadiuses[i].x));
+			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.y / u_pointLightRadiuses[i].y)));
+			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.z / u_pointLightRadiuses[i].z)));
 
             // Apply
             vec3 current = vec3(0.0f);

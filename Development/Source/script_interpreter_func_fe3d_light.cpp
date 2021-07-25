@@ -87,9 +87,9 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		{
 			ScriptValueType::STRING, // ID
 			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Position
+			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Radius
 			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Color
-			ScriptValueType::DECIMAL, // Intensity
-			ScriptValueType::DECIMAL // Distance
+			ScriptValueType::DECIMAL // Intensity
 		};
 
 		// Validate arguments
@@ -113,8 +113,8 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			_fe3d.lightEntity_add(arguments[0].getString(),
 				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
 				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()),
-				arguments[7].getDecimal(),
-				arguments[8].getDecimal());
+				Vec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()),
+				arguments[10].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

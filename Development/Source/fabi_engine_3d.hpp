@@ -781,6 +781,7 @@ public:
 	const string& networkClient_getUsername();
 	const string& networkClient_getServerIP();
 	const unsigned int networkClient_getPingLatency();
+	const bool networkClient_isValidServerIP(const string& serverIP);
 	const bool networkClient_isRunning();
 	const bool networkClient_isConnecting();
 	const bool networkClient_isConnected();

@@ -31,6 +31,7 @@ public:
 	void sendUdpMessage(const string& content);
 	void stop();
 
+	const bool isValidServerIP(const string& serverIP);
 	const bool isRunning();
 	const bool isConnectingToServer();
 	const bool isConnectedToServer();

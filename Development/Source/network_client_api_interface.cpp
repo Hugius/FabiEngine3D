@@ -1,6 +1,11 @@
 #include "network_client_api.hpp"
 #include "logger.hpp"
 
+const bool NetworkClientAPI::isValidServerIP(const string& serverIP)
+{
+	return (NetworkUtils::isValidIP(serverIP) && (serverIP != "0.0.0.0"));
+}
+
 const bool NetworkClientAPI::isRunning()
 {
 	return _isRunning;

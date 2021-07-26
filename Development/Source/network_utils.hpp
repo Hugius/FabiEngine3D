@@ -23,6 +23,7 @@ public:
 	static const string extractSocketDestinationIP(SOCKET socket);
 	static const string extractSocketDestinationPort(SOCKET socket);
 
+	static const bool isValidIP(const string& IP);
 	static const bool isUdpMessageReady(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 

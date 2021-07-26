@@ -43,6 +43,17 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:client_is_valid_server_ip")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			auto result = _fe3d.networkClient_isValidServerIP(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
 	else if (functionName == "fe3d:client_is_running")
 	{
 		// Validate arguments

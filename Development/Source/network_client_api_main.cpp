@@ -83,6 +83,13 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 		return;
 	}
 
+	// Must be a valid IP
+	if (!isValidServerIP(serverIP))
+	{
+		Logger::throwWarning("Networking client tried to connect: invalid server IP!");
+		return;
+	}
+
 	// Save server address
 	_serverIP = serverIP;
 	_serverPort = serverPort;

@@ -1,6 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include "network_utils.hpp"
+#include <iostream>
 
 #include <ws2tcpip.h>
 
@@ -55,6 +56,14 @@ const string NetworkUtils::extractSocketDestinationPort(SOCKET socket)
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
 	return extractSocketAddressPort(&socketAddress);
+}
+
+const bool NetworkUtils::isValidIP(const string& IP)
+{
+	sockaddr_in socketAddress = sockaddr_in();
+	socketAddress.sin_family = AF_INET;
+	auto result = InetPton(AF_INET, IP.c_str(), &socketAddress.sin_addr.s_addr);
+	return (result > 0);
 }
 
 const bool NetworkUtils::isUdpMessageReady(SOCKET socket)

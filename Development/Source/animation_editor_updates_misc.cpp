@@ -17,18 +17,17 @@ void AnimationEditor::_updateCamera()
 			if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 			{
 				_cameraLookatPosition.y -= LOOKAT_MOVEMENT_SPEED;
-				_cameraLookatPosition.y = std::max(0.0f, _cameraLookatPosition.y);
 			}
 		}
 
 		// Check if third person view is enabled
 		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
-			// Disable third person view
-			_fe3d.camera_disableThirdPersonView();
+			// Update lookat position
+			_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
 
-			// Show cursor
-			_fe3d.imageEntity_setVisible("@@cursor", true);
+			// Hide cursor
+			_fe3d.imageEntity_setVisible("@@cursor", false);
 
 			// Disable shadows
 			if (_fe3d.gfx_isShadowsEnabled())
@@ -46,19 +45,29 @@ void AnimationEditor::_updateCamera()
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			// Check if RMB pressed
-			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				// Update lookat position
-				_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
+				// Check third person view status
+				if (_fe3d.camera_isThirdPersonViewEnabled())
+				{
+					_fe3d.camera_disableThirdPersonView();
+				}
+				else
+				{
+					_fe3d.camera_enableThirdPersonView(
+						_fe3d.camera_getThirdPersonYaw(),
+						_fe3d.camera_getThirdPersonPitch(),
+						_fe3d.camera_getThirdPersonDistance());
+				}
+			}
+		}
 
-				// Enable third person view
-				_fe3d.camera_enableThirdPersonView(
-					_fe3d.camera_getThirdPersonYaw(),
-					_fe3d.camera_getThirdPersonPitch(),
-					_fe3d.camera_getThirdPersonDistance());
-
-				// Hide cursor
-				_fe3d.imageEntity_setVisible("@@cursor", false);
+		// Disable third person view if necessary
+		if (_fe3d.camera_isThirdPersonViewEnabled())
+		{
+			if (_gui.getGlobalScreen()->isFocused())
+			{
+				_fe3d.camera_disableThirdPersonView();
 			}
 		}
 	}
@@ -68,22 +77,22 @@ void AnimationEditor::_updateMiscellaneous()
 {
 	if (_isEditorLoaded)
 	{
-		// Lock toggling if GUI focused or cursor not in 3D viewport
-		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
-
-		// Update reference model visibility
-		if (_fe3d.input_isKeyToggled(InputType::KEY_R))
-		{
-			_fe3d.modelEntity_setVisible("@@cube", false);
-		}
-		else
-		{
-			_fe3d.modelEntity_setVisible("@@cube", true);
-		}
-
 		// Check if allowed by GUI
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
+			// Update reference model visibility
+			if (_fe3d.input_isKeyPressed(InputType::KEY_R))
+			{
+				if (_fe3d.modelEntity_isVisible("@@cube"))
+				{
+					_fe3d.modelEntity_setVisible("@@cube", false);
+				}
+				else
+				{
+					_fe3d.modelEntity_setVisible("@@cube", true);
+				}
+			}
+
 			// Update debug rendering
 			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 			{
@@ -96,22 +105,24 @@ void AnimationEditor::_updateMiscellaneous()
 					_fe3d.misc_enableDebugRendering();
 				}
 			}
-		}
 
-		// Wireframed model rendering
-		if (!_currentAnimationID.empty())
-		{
-			string modelID = _getAnimation(_currentAnimationID)->previewModelID;
-
-			if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
+			// Wireframed model rendering
+			if (!_currentAnimationID.empty())
 			{
-				if (_fe3d.input_isKeyToggled(InputType::KEY_F))
+				string modelID = _getAnimation(_currentAnimationID)->previewModelID;
+				if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
 				{
-					_fe3d.modelEntity_setWireframed(modelID, true);
-				}
-				else
-				{
-					_fe3d.modelEntity_setWireframed(modelID, false);
+					if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+					{
+						if (_fe3d.modelEntity_isWireframed(modelID))
+						{
+							_fe3d.modelEntity_setWireframed(modelID, false);
+						}
+						else
+						{
+							_fe3d.modelEntity_setWireframed(modelID, true);
+						}
+					}
 				}
 			}
 		}

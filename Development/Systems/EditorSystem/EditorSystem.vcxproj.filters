@@ -177,7 +177,7 @@
     <ClCompile Include="..\..\Source\billboard_editor_misc.cpp">
       <Filter>Billboard Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_edit.cpp">
@@ -359,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_updates_misc.cpp">
       <Filter>Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

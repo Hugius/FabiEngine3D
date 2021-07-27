@@ -11,45 +11,34 @@ class InputHandler final
 {
 public:
 	void update();
-	void clearKeyToggles();
-	void clearMouseToggles();
 	void setLocked(bool locked);
-	void setKeyTogglingLocked(bool locked);
-	void setMouseTogglingLocked(bool locked);
 
+	const bool isLocked();
 	const bool isKeyDown(InputType keyName);
 	const bool isKeyPressed(InputType keyName);
-	const bool isKeyToggled(InputType keyName);
 	const bool isMouseDown(InputType mouseButton);
 	const bool isMousePressed(InputType mouseButton);
-	const bool isMouseToggled(InputType mouseButton);
 
-	const int  getMouseWheelX();
-	const int  getMouseWheelY();
+	const int getMouseWheelX();
+	const int getMouseWheelY();
 
 private:
 	// Keys
 	vector<InputType> _keysDown;
 	vector<InputType> _keysPressed;
 	vector<InputType> _keysPressed_mayNotPress;
-	vector<InputType> _keysToggled;
-	vector<InputType> _keysToggled_mayNotPress;
 
 	// Mouse buttons
 	vector<InputType> _mouseDown;
 	vector<InputType> _mousePressed;
 	vector<InputType> _mousePressed_mayNotPress;
-	vector<InputType> _mouseToggled;
-	vector<InputType> _mouseToggled_mayNotPress;
 
 	// Mouse scrolling wheel
 	int _mouseWheelX = 0;
 	int _mouseWheelY = 0;
 
 	// Miscellaneous
-	bool _everythingLocked = false;
-	bool _keyTogglingLocked = false;
-	bool _mouseTogglingLocked = false;
+	bool _isLocked = false;
 
 	// Extra functions
 	inline unsigned int _getVectorIndex(vector<InputType>& list, InputType element)

@@ -59,7 +59,6 @@ private:
 	string _hoveredModelID = "";
 
 	// Vectors
-	static inline const Vec3 INITIAL_CAMERA_POSITION = Vec3(0.0f, 5.0f, 0.0f);
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 
 	// Floats
@@ -67,7 +66,7 @@ private:
 	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
-	static inline const float INITIAL_CAMERA_DISTANCE = 5.0f;
+	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline const float MIN_CAMERA_PITCH = 1.0f;
 	static inline const float MODEL_Y_OFFSET = 0.001f;
 	float _aabbTransformationSpeed = 0.1f;

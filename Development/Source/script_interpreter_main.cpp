@@ -203,8 +203,6 @@ void ScriptInterpreter::load()
 	_fe3d.billboardEntity_setBright("@@lightSource", true);
 
 	// Miscellaneous
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_setCursorVisible(true);
 
 	// Check if any engine warnings were thrown
@@ -416,9 +414,6 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.misc_disableTerrainRaycastPointing();
 	}
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_fe3d.input_setKeyTogglingLocked(false);
 	_fe3d.misc_setCursorVisible(false);
 
 	// Reset Vsync

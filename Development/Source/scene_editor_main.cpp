@@ -100,8 +100,6 @@ void SceneEditor::load()
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
 	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 	_isEditorLoaded = true;
 }
@@ -207,9 +205,6 @@ void SceneEditor::unload()
 	{
 		_fe3d.misc_disableTerrainRaycastPointing();
 	}
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_fe3d.input_setKeyTogglingLocked(false);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_isEditorLoaded = false;
 }

@@ -1,8 +1,6 @@
-#include "model_editor.hpp"
+#include "billboard_editor.hpp"
 
-#include <algorithm>
-
-void ModelEditor::_updateCamera()
+void BillboardEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
@@ -22,7 +20,7 @@ void ModelEditor::_updateCamera()
 				_cameraLookatPosition.y = std::max(0.0f, _cameraLookatPosition.y);
 			}
 		}
-		
+
 		// Check if third person view is enabled
 		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
@@ -47,24 +45,20 @@ void ModelEditor::_updateCamera()
 		// Check if allowed by GUI
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			// Check if allowed by editor
-			if (!_isMovingToggled && !_isResizingToggled)
+			// Check if RMB pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				// Check if RMB pressed
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+				// Check third person view status
+				if (_fe3d.camera_isThirdPersonViewEnabled())
 				{
-					// Check third person view status
-					if (_fe3d.camera_isThirdPersonViewEnabled())
-					{
-						_fe3d.camera_disableThirdPersonView();
-					}
-					else
-					{
-						_fe3d.camera_enableThirdPersonView(
-							_fe3d.camera_getThirdPersonYaw(),
-							_fe3d.camera_getThirdPersonPitch(),
-							_fe3d.camera_getThirdPersonDistance());
-					}
+					_fe3d.camera_disableThirdPersonView();
+				}
+				else
+				{
+					_fe3d.camera_enableThirdPersonView(
+						_fe3d.camera_getThirdPersonYaw(),
+						_fe3d.camera_getThirdPersonPitch(),
+						_fe3d.camera_getThirdPersonDistance());
 				}
 			}
 		}
@@ -72,7 +66,7 @@ void ModelEditor::_updateCamera()
 		// Disable third person view if necessary
 		if (_fe3d.camera_isThirdPersonViewEnabled())
 		{
-			if (_gui.getGlobalScreen()->isFocused() || _isMovingToggled || _isResizingToggled)
+			if (_gui.getGlobalScreen()->isFocused())
 			{
 				_fe3d.camera_disableThirdPersonView();
 			}
@@ -80,7 +74,7 @@ void ModelEditor::_updateCamera()
 	}
 }
 
-void ModelEditor::_updateMiscellaneous()
+void BillboardEditor::_updateMiscellaneous()
 {
 	if (_isEditorLoaded)
 	{
@@ -110,23 +104,6 @@ void ModelEditor::_updateMiscellaneous()
 				else
 				{
 					_fe3d.misc_enableDebugRendering();
-				}
-			}
-
-			// Update wireframed model rendering
-			string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
-			if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
-			{
-				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
-				{
-					if (_fe3d.modelEntity_isWireframed(modelID))
-					{
-						_fe3d.modelEntity_setWireframed(modelID, false);
-					}
-					else
-					{
-						_fe3d.modelEntity_setWireframed(modelID, true);
-					}
 				}
 			}
 		}

@@ -43,8 +43,6 @@ void ScriptEditor::load()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
 	_isEditorLoaded = true;
 }
 
@@ -84,9 +82,6 @@ void ScriptEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_fe3d.input_setKeyTogglingLocked(false);
 	_isEditorLoaded = false;
 }
 

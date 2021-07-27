@@ -54,20 +54,15 @@ public:
 
 	// Input interface - setters
 	void input_setLocked(bool locked);
-	void input_clearKeyToggles();
-	void input_clearMouseToggles();
-	void input_setKeyTogglingLocked(bool locked);
-	void input_setMouseTogglingLocked(bool locked);
 
 	// Input interface - getters
 	const int input_getMouseWheelX();
 	const int input_getMouseWheelY();
+	const bool input_isLocked();
 	const bool input_isKeyDown(InputType keyName);
 	const bool input_isKeyPressed(InputType keyName);
-	const bool input_isKeyToggled(InputType keyName);
 	const bool input_isMouseDown(InputType mouseButton);
 	const bool input_isMousePressed(InputType mouseButton);
-	const bool input_isMouseToggled(InputType mouseButton);
 
 	// Camera interface - setters
 	void camera_reset();

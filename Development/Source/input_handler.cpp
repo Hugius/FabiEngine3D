@@ -11,7 +11,7 @@ void InputHandler::update()
 	
 	SDL_Event event;
 
-	if (!_everythingLocked) 
+	if (!_isLocked) 
 	{
 		while (SDL_PollEvent(&event)) // Check for any input
 		{
@@ -40,31 +40,6 @@ void InputHandler::update()
 						_mouseDown.push_back(button);
 					}
 
-					// Toggled mouse press
-					if (!_mouseTogglingLocked)
-					{
-						if (!_isInVector(_mouseToggled_mayNotPress, button)) // Mouse may be pressed
-						{
-							_mouseToggled_mayNotPress.push_back(button); // Mouse may not be pressed next frame
-
-							if (isMouseToggled(button)) // Make mouse toggle false
-							{
-								if (!_mouseToggled.empty())
-								{
-									if (std::find(_mouseToggled.begin(), _mouseToggled.end(), button) != _mouseToggled.end())
-									{
-										_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
-									}
-								}
-
-							}
-							else
-							{
-								_mouseToggled.push_back(button); // Make mouse toggle true
-							}
-						}
-					}
-
 					// Single short mouse press
 					if (!_isInVector(_mousePressed_mayNotPress, button)) // Mouse may be pressed
 					{
@@ -85,18 +60,6 @@ void InputHandler::update()
 						_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
 					}
 
-					// Toggled mouse press
-					if (!_mouseTogglingLocked)
-					{
-						if (!_mouseToggled_mayNotPress.empty())
-						{
-							if (std::find(_mouseToggled_mayNotPress.begin(), _mouseToggled_mayNotPress.end(), button) != _mouseToggled_mayNotPress.end())
-							{
-								_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
-							}
-						}
-					}
-
 					// Single short mouse press
 					_mousePressed_mayNotPress.clear();
 
@@ -111,30 +74,6 @@ void InputHandler::update()
 					if (!_isInVector(_keysDown, key))
 					{
 						_keysDown.push_back(key);
-					}
-
-					// Toggled key press
-					if (!_keyTogglingLocked)
-					{
-						if (!_isInVector(_keysToggled_mayNotPress, key)) // Key may be pressed
-						{
-							_keysToggled_mayNotPress.push_back(key); // Key may not be pressed next frame
-
-							if (isKeyToggled(key)) // Make key toggle false
-							{
-								if (!_keysToggled.empty())
-								{
-									if (std::find(_keysToggled.begin(), _keysToggled.end(), key) != _keysToggled.end())
-									{
-										_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
-									}
-								}
-							}
-							else
-							{
-								_keysToggled.push_back(key); // Make key toggle true
-							}
-						}
 					}
 
 					// Single short key press
@@ -157,18 +96,6 @@ void InputHandler::update()
 						_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
 					}
 
-					// Toggled key press
-					if (!_keyTogglingLocked)
-					{
-						if (!_keysToggled_mayNotPress.empty())
-						{
-							if (std::find(_keysToggled_mayNotPress.begin(), _keysToggled_mayNotPress.end(), key) != _keysToggled_mayNotPress.end())
-							{
-								_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
-							}
-						}
-					}
-
 					// Single short key press
 					_keysPressed_mayNotPress.clear();
 
@@ -179,41 +106,19 @@ void InputHandler::update()
 	}
 }
 
-void InputHandler::clearKeyToggles()
-{
-	_keysToggled.clear();
-	_keysToggled_mayNotPress.clear();
-}
-
-void InputHandler::clearMouseToggles()
-{
-	_mouseToggled.clear();
-	_mouseToggled_mayNotPress.clear();
-}
-
 void InputHandler::setLocked(bool locked)
 {
-	_everythingLocked = locked;
+	_isLocked = locked;
 }
 
-void InputHandler::setKeyTogglingLocked(bool locked)
+const bool InputHandler::isLocked()
 {
-	_keyTogglingLocked = locked;
-}
-
-void InputHandler::setMouseTogglingLocked(bool locked)
-{
-	_mouseTogglingLocked = locked;
+	return _isLocked;
 }
 
 const bool InputHandler::isKeyDown(InputType keyName)
 {
 	return _isInVector(_keysDown, keyName);
-}
-
-const bool InputHandler::isKeyToggled(InputType keyName)
-{
-	return _isInVector(_keysToggled, keyName);
 }
 
 const bool InputHandler::isKeyPressed(InputType keyName)
@@ -229,11 +134,6 @@ const bool InputHandler::isMouseDown(InputType mouseButton)
 const bool InputHandler::isMousePressed(InputType mouseButton)
 {
 	return _isInVector(_mousePressed, mouseButton);
-}
-
-const bool InputHandler::isMouseToggled(InputType mouseButton)
-{
-	return _isInVector(_mouseToggled, mouseButton);
 }
 
 const int InputHandler::getMouseWheelX()

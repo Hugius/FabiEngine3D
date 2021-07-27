@@ -26,9 +26,7 @@ void ModelEditor::load()
 	_fe3d.camera_reset();
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
-	_fe3d.camera_setPosition(INITIAL_CAMERA_POSITION);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
-	_fe3d.camera_setPitch(-90.0f);
 
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -41,13 +39,13 @@ void ModelEditor::load()
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.gfx_enableMotionBlur(0.1f);
 	
-	// 3D Environment
+	// 3D environment
 	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
 	_fe3d.modelEntity_setFaceCulled("@@cube", true);
-	_fe3d.modelEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
+	_fe3d.modelEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(100.0f, 1.0f, 100.0f));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
+	_fe3d.modelEntity_setUvRepeat("@@grid", 10.0f);
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
@@ -55,8 +53,6 @@ void ModelEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
 	_isEditorLoaded = true;
 }
 
@@ -118,9 +114,6 @@ void ModelEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_fe3d.input_clearMouseToggles();
-	_fe3d.input_clearKeyToggles();
-	_fe3d.input_setKeyTogglingLocked(false);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }
 

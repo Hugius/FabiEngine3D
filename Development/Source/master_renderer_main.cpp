@@ -51,8 +51,10 @@ void MasterRenderer::update()
 {
 	static float lastYaw = _camera.getYaw();
 	static float lastPitch = _camera.getPitch();
-	_cameraYawDifference = fabsf(_camera.getYaw() - lastYaw);
-	_cameraPitchDifference = fabsf(_camera.getPitch() - lastPitch);
+	float currentYaw = _camera.getYaw();
+	float currentPitch = _camera.getPitch();
+	_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
+	_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
 	lastYaw = _camera.getYaw();
 	lastPitch = _camera.getPitch();
 }

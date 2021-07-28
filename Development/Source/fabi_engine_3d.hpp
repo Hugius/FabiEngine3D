@@ -366,6 +366,7 @@ public:
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
 	void billboardEntity_setInversion(const string& ID, float inversion);
+	void billboardEntity_setAlpha(const string& ID, float alpha);
 
 	// Billboard entity interface (core) - getters
 	const vector<string> billboardEntity_getAllIDs();
@@ -378,6 +379,7 @@ public:
 	const float billboardEntity_getInversion(const string& ID);
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
+	const float billboardEntity_getAlpha(const string& ID);
 	const bool billboardEntity_isExisting(const string& ID);
 	const bool billboardEntity_isVisible(const string& ID);
 	const bool billboardEntity_isFacingCameraX(const string& ID);

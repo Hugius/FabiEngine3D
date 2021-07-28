@@ -81,6 +81,11 @@ const float FabiEngine3D::billboardEntity_getMaxHeight(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getMaxHeight();
 }
 
+const float FabiEngine3D::billboardEntity_getAlpha(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getAlpha();
+}
+
 const bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 {
 	return _core->_billboardEntityManager.isExisting(ID);
@@ -229,6 +234,11 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 void FabiEngine3D::billboardEntity_setInversion(const string& ID, float inversion)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setInversion(inversion);
+}
+
+void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setAlpha(alpha);
 }
 
 const bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)

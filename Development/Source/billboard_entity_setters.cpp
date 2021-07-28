@@ -255,6 +255,11 @@ void BillboardEntity::setInversion(float value)
 	_inversion = std::clamp(value, 0.0f, 1.0f);
 }
 
+void BillboardEntity::setAlpha(float value)
+{
+	_alpha = value;
+}
+
 void BillboardEntity::setMinHeight(float value)
 {
 	_minHeight = value;

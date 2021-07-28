@@ -19,11 +19,12 @@ uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
 uniform float u_inversion;
-uniform float u_minAlpha;
+uniform float u_minDiffuseMapAlpha;
+uniform float u_alpha;
 
 // Boolean uniforms
 uniform bool u_isFogEnabled;
-uniform bool u_isAlphaObject;
+uniform bool u_isTransparent;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isBright;
 
@@ -46,9 +47,9 @@ void main()
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Removing white alpha background
-		if(u_isAlphaObject)
+		if(u_isTransparent)
 		{
-			if(diffuseMapColor.a < u_minAlpha)
+			if(diffuseMapColor.a < u_minDiffuseMapAlpha)
 			{
 				discard;
 			}
@@ -75,7 +76,7 @@ void main()
 	vec3 secondaryColor = (u_isBright ? primaryColor : vec3(0.0f));
 
 	// Set final colors
-	o_primaryColor = vec4(primaryColor, 1.0f);
+	o_primaryColor = vec4(primaryColor, u_alpha);
 	o_secondaryColor = vec4(secondaryColor, 1.0f);
 }
 

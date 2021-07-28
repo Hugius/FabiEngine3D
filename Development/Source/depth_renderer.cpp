@@ -49,7 +49,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
 		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_isAlphaObject", false);
+		_shader.uploadUniform("u_isTransparent", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", false);
@@ -77,7 +77,7 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 		
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", modelMatrix);
-		_shader.uploadUniform("u_isAlphaObject", false);
+		_shader.uploadUniform("u_isTransparent", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
@@ -106,14 +106,14 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_minAlpha", 0.25f);
+		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
 		if (entity->isCameraStatic())
 		{
 			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
@@ -189,7 +189,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -199,7 +199,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
+		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
 
 		// Bind textures
 		if (entity->hasDiffuseMap())
@@ -249,7 +249,7 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
-		_shader.uploadUniform("u_isAlphaObject", false);
+		_shader.uploadUniform("u_isTransparent", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 
 		// Bind buffer

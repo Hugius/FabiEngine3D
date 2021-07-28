@@ -44,6 +44,7 @@ public:
 	void increaseSpriteAnimationLoops();
 	void setLightness(float value);
 	void setInversion(float value);
+	void setAlpha(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 
@@ -60,6 +61,7 @@ public:
 	const string& getDiffuseMapPath() const;
 	const float getLightness() const;
 	const float getInversion() const;
+	const float getAlpha() const;
 	const float getMinHeight() const;
 	const float getMaxHeight() const;
 	const unsigned int getPassedSpriteAnimationFrames() const;
@@ -92,6 +94,7 @@ private:
 
 	float _lightness = 1.0f;
 	float _inversion = 0.0f;
+	float _alpha = 1.0f;
 	float _minHeight = -(std::numeric_limits<float>::max)();
 	float _maxHeight = (std::numeric_limits<float>::max)();
 

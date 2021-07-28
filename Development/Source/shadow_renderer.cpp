@@ -44,10 +44,11 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
 
 		// Iterate through parts
 		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
@@ -105,10 +106,11 @@ void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 	if (entity->isVisible() && entity->isShadowed())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
 
 		// Model matrix
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

@@ -48,6 +48,7 @@ uniform float u_directionalLightIntensity;
 uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
 uniform float u_alpha;
+uniform float u_minDiffuseMapAlpha;
 uniform float u_skyReflectionMixValue;
 uniform float u_sceneReflectionMixValue;
 uniform float u_lightness;
@@ -184,7 +185,7 @@ vec3 getDiffuseMapping()
 		// Removing alpha background
 		if(u_isTransparent)
 		{
-			if(diffuseMapColor.a < 0.25f)
+			if(diffuseMapColor.a < u_minDiffuseMapAlpha)
 			{
 				discard;
 			}

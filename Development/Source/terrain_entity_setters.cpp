@@ -135,31 +135,6 @@ void TerrainEntity::setSpecularLighted(bool value)
 	_isSpecularLighted = value;
 }
 
-void TerrainEntity::setNormalMapped(bool value)
-{
-	_isNormalMapped = value;
-}
-
-void TerrainEntity::setNormalMappedR(bool value)
-{
-	_isNormalMappedR = value;
-}
-
-void TerrainEntity::setNormalMappedG(bool value)
-{
-	_isNormalMappedG = value;
-}
-
-void TerrainEntity::setNormalMappedB(bool value)
-{
-	_isNormalMappedB = value;
-}
-
-void TerrainEntity::setBlendMapped(bool value)
-{
-	_isBlendMapped = value;
-}
-
 void TerrainEntity::setLightness(float value)
 {
 	_lightness = std::max(0.0f, value);

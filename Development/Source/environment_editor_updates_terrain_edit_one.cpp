@@ -130,7 +130,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 						// Check if terrain entity already exists
 						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 						{
-							_fe3d.terrainEntity_setHeightmap(_currentTerrainID, newFilePath);
+							_fe3d.terrainEntity_setHeightMap(_currentTerrainID, newFilePath);
 							_fe3d.terrainEntity_select(_currentTerrainID);
 						}
 						else

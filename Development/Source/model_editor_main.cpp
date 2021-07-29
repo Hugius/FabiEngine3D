@@ -33,8 +33,6 @@ void ModelEditor::load()
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 3.0f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.gfx_enableMotionBlur(0.1f);
@@ -78,8 +76,6 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableSceneReflections(true);
-	_fe3d.gfx_disableLightMapping(true);
-	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableMotionBlur(true);
@@ -142,7 +138,7 @@ void ModelEditor::_loadGUI()
 	leftWindow->addScreen("modelEditorMenuMesh");
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadMesh", Vec2(0.0f, 0.7875f), Vec2(CW("Load Mesh"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Load Mesh", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", Vec2(0.0f, 0.525f), Vec2(CW("Diffuse Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", Vec2(0.0f, 0.2625f), Vec2(CW("Light Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Light Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadEmissionMap", Vec2(0.0f, 0.2625f), Vec2(CW("Emission Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Emission Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", Vec2(0.0f, 0.0f), Vec2(CW("Reflect Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflect Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadNormalMap", Vec2(0.0f, -0.2625f), Vec2(CW("Normal Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("clearMaps", Vec2(0.0f, -0.525f), Vec2(CW("Clear Maps"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);

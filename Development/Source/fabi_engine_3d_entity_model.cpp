@@ -73,17 +73,17 @@ void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& tex
 	}
 }
 
-void FabiEngine3D::modelEntity_setLightMap(const string& ID, const string& texturePath)
+void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& texturePath)
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setLightMap(0);
-		_core->_modelEntityManager.getEntity(ID)->setLightMapPath("");
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(0);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setLightMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setLightMapPath(texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(texturePath);
 	}
 }
 
@@ -93,13 +93,11 @@ void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& text
 	{
 		_core->_modelEntityManager.getEntity(ID)->setNormalMap(0);
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("");
-		_core->_modelEntityManager.unloadNormalMapping(ID);
 	}
 	else
 	{
 		_core->_modelEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
 		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
-		_core->_modelEntityManager.loadNormalMapping(ID);
 	}
 }
 
@@ -232,9 +230,9 @@ const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap();
 }
 
-const bool FabiEngine3D::modelEntity_hasLightMap(const string& ID)
+const bool FabiEngine3D::modelEntity_hasEmissionMap(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasLightMap();
+	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap();
 }
 
 const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID)
@@ -441,9 +439,9 @@ const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-const string& FabiEngine3D::modelEntity_getLightMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getEmissionMapPath(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getLightMapPath();
+	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath();
 }
 
 const string& FabiEngine3D::modelEntity_getNormalMapPath(const string& ID)

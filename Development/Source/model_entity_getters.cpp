@@ -11,9 +11,9 @@ const GLuint ModelEntity::getDiffuseMap(const string& partID)
 	return _parts[_getPartIndex(partID)].diffuseMap;
 }
 
-const GLuint ModelEntity::getLightMap(const string& partID)
+const GLuint ModelEntity::getEmissionMap(const string& partID)
 {
-	return _parts[_getPartIndex(partID)].lightMap;
+	return _parts[_getPartIndex(partID)].emissionMap;
 }
 
 const GLuint ModelEntity::getReflectionMap(const string& partID)
@@ -123,9 +123,9 @@ const string& ModelEntity::getDiffuseMapPath(const string& partID)
 	return _parts[_getPartIndex(partID)].diffuseMapPath;
 }
 
-const string& ModelEntity::getLightMapPath(const string& partID)
+const string& ModelEntity::getEmissionMapPath(const string& partID)
 {
-	return _parts[_getPartIndex(partID)].lightMapPath;
+	return _parts[_getPartIndex(partID)].emissionMapPath;
 }
 
 const string& ModelEntity::getReflectionMapPath(const string& partID)
@@ -199,13 +199,13 @@ const bool ModelEntity::hasDiffuseMap(const string& partID)
 	}
 }
 
-const bool ModelEntity::hasLightMap(const string& partID)
+const bool ModelEntity::hasEmissionMap(const string& partID)
 {
 	if (partID.empty())
 	{
 		for (const auto& part : _parts)
 		{
-			if (part.lightMap != 0)
+			if (part.emissionMap != 0)
 			{
 				return true;
 			}
@@ -214,7 +214,7 @@ const bool ModelEntity::hasLightMap(const string& partID)
 	}
 	else
 	{
-		return (_parts[_getPartIndex(partID)].lightMap != 0);
+		return (_parts[_getPartIndex(partID)].emissionMap != 0);
 	}
 }
 

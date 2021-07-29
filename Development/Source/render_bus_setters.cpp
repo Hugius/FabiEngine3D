@@ -385,16 +385,6 @@ void RenderBus::setFogEnabled(bool value)
 	_isFogEnabled = value;
 }
 
-void RenderBus::setLightMappingEnabled(bool value)
-{
-	_isLightMappingEnabled = value;
-}
-
-void RenderBus::setNormalMappingEnabled(bool value)
-{
-	_isNormalMappingEnabled = value;
-}
-
 void RenderBus::setSkyReflectionsEnabled(bool value)
 {
 	_isSkyReflectionsEnabled = value;

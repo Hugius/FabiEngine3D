@@ -25,7 +25,6 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Miscellaneous
@@ -46,7 +45,6 @@ void EnvironmentEditor::unload()
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
-	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete entities

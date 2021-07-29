@@ -55,9 +55,9 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 				{
 					resultingTexturePaths.push_back(part.diffuseMapPath);
 				}
-				if (!part.lightMapPath.empty()) // Light map
+				if (!part.emissionMapPath.empty()) // Emission map
 				{
-					resultingTexturePaths.push_back(part.lightMapPath);
+					resultingTexturePaths.push_back(part.emissionMapPath);
 				}
 				if (!part.normalMapPath.empty()) // Normal map
 				{

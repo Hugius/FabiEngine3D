@@ -36,16 +36,6 @@ const bool FabiEngine3D::gfx_isFogEnabled()
 	return _core->_renderBus.isFogEnabled();
 }
 
-const bool FabiEngine3D::gfx_isLightMappingEnabled()
-{
-	return _core->_renderBus.isLightMappingEnabled();
-}
-
-const bool FabiEngine3D::gfx_isNormalMappingEnabled()
-{
-	return _core->_renderBus.isNormalMappingEnabled();
-}
-
 const bool FabiEngine3D::gfx_isSkyReflectionsEnabled()
 {
 	return _core->_renderBus.isSkyReflectionsEnabled();

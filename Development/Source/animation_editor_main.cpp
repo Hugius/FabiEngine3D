@@ -29,8 +29,6 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 3.0f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.gfx_enableMotionBlur(0.1f);
@@ -74,8 +72,6 @@ void AnimationEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableSceneReflections(true);
-	_fe3d.gfx_disableLightMapping(true);
-	_fe3d.gfx_disableNormalMapping(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableMotionBlur(true);

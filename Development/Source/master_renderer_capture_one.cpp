@@ -75,10 +75,6 @@ void MasterRenderer::_captureSceneReflections()
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
-		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
-		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
-		_renderBus.setNormalMappingEnabled(false);
-
 		// Sky exposure must not appear in reflections
 		float oldSkyLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
@@ -107,9 +103,10 @@ void MasterRenderer::_captureSceneReflections()
 		_renderBillboardEntities();
 		glDisable(GL_CLIP_DISTANCE2);
 
-		// Revert disabled graphics
+		// Revert shadows
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
-		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
+
+		// Revert sky lightness
 		if (skyEntity != nullptr)
 		{
 			skyEntity->setLightness(oldSkyLightness);
@@ -240,10 +237,6 @@ void MasterRenderer::_captureWaterReflections()
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
-		// Normal mapping is performance-heavy with little visual impact on reflections, so they should not appear
-		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
-		_renderBus.setNormalMappingEnabled(false);
-
 		// Sky exposure must not appear in reflections
 		float oldLightness = 0.0f;
 		auto skyEntity = _entityBus->getMainSkyEntity();
@@ -286,9 +279,10 @@ void MasterRenderer::_captureWaterReflections()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		// Revert disabled graphics
+		// Revert shadows
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
-		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
+
+		// Revert sky lightness
 		if (skyEntity != nullptr)
 		{ 
 			skyEntity->setLightness(oldLightness);
@@ -357,16 +351,12 @@ void MasterRenderer::_captureWaterRefractions()
 		_waterRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Shadows are not needed when no models are rendered, so they should not appear
+		// Shadows are not needed if no models are rendered, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		if (waterEntity->getQuality() == WaterQuality::SKY || waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
 		{
 			_renderBus.setShadowsEnabled(false);
 		}
-
-		// Normal mapping is performance-heavy with little visual impact on refractions, so they should not appear
-		bool wasNormalMappingEnabled = _renderBus.isNormalMappingEnabled();
-		_renderBus.setNormalMappingEnabled(false);
 
 		// Sky exposure must not appear in refractions
 		float oldSkyLightness = 0.0f;
@@ -427,9 +417,10 @@ void MasterRenderer::_captureWaterRefractions()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		// Revert disabled graphics
+		// Revert shadows
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
-		_renderBus.setNormalMappingEnabled(wasNormalMappingEnabled);
+
+		// Revert sky lightness
 		if (skyEntity != nullptr)
 		{
 			skyEntity->setLightness(oldSkyLightness);

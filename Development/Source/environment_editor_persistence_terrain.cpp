@@ -37,7 +37,6 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
-		bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB;
 		std::istringstream iss(line);
 
 		// Load base data
@@ -48,7 +47,6 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			maxHeight >>
 			uvRepeat >>
 			lightness >>
-			isBlendMapped >>
 			blendMapPath >>
 			blendMapPathR >>
 			blendMapPathG >>
@@ -56,10 +54,6 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			blendRepeatR >>
 			blendRepeatG >>
 			blendRepeatB >>
-			isNormalMapped >>
-			isNormalMappedR >>
-			isNormalMappedG >>
-			isNormalMappedB >>
 			normalMapPath >>
 			normalMapPathR >>
 			normalMapPathG >>
@@ -143,7 +137,7 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
-		bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
+		bool isSpecular;
 
 		// Load base data
 		iss >>
@@ -153,7 +147,6 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 			maxHeight >>
 			uvRepeat >>
 			lightness >>
-			isBlendMapped >>
 			blendMapPath >>
 			blendMapPathR >>
 			blendMapPathG >>
@@ -161,10 +154,6 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 			blendRepeatR >>
 			blendRepeatG >>
 			blendRepeatB >>
-			isNormalMapped >>
-			isNormalMappedR >>
-			isNormalMappedG >>
-			isNormalMappedB >>
 			normalMapPath >>
 			normalMapPathR >>
 			normalMapPathG >>
@@ -202,15 +191,10 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 			_fe3d.terrainEntity_add(terrainID, heightMapPath);
 			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
 			_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
-			_fe3d.terrainEntity_setBlendMapped(terrainID, isBlendMapped);
 			_fe3d.terrainEntity_setLightness(terrainID, lightness);
 			_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
-			_fe3d.terrainEntity_setNormalMapped(terrainID, isNormalMapped);
-			_fe3d.terrainEntity_setNormalMappedR(terrainID, isNormalMappedR);
-			_fe3d.terrainEntity_setNormalMappedG(terrainID, isNormalMappedG);
-			_fe3d.terrainEntity_setNormalMappedB(terrainID, isNormalMappedB);
 			_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
 			_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
 			_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
@@ -279,11 +263,6 @@ bool EnvironmentEditor::saveTerrainEntitiesToFile()
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
-		bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped(terrainID);
-		bool isNormalMapped = _fe3d.terrainEntity_isNormalMapped(terrainID);
-		bool isNormalMappedR = _fe3d.terrainEntity_isNormalMappedR(terrainID);
-		bool isNormalMappedG = _fe3d.terrainEntity_isNormalMappedG(terrainID);
-		bool isNormalMappedB = _fe3d.terrainEntity_isNormalMappedB(terrainID);
 		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(terrainID);
 
 		// Perform empty string & space conversions
@@ -316,7 +295,6 @@ bool EnvironmentEditor::saveTerrainEntitiesToFile()
 			maxHeight << " " <<
 			uvRepeat << " " <<
 			lightness << " " <<
-			isBlendMapped << " " <<
 			blendMapPath << " " <<
 			blendMapPathR << " " <<
 			blendMapPathG << " " <<
@@ -324,10 +302,6 @@ bool EnvironmentEditor::saveTerrainEntitiesToFile()
 			blendRepeatR << " " <<
 			blendRepeatG << " " <<
 			blendRepeatB << " " <<
-			isNormalMapped << " " <<
-			isNormalMappedR << " " <<
-			isNormalMappedG << " " <<
-			isNormalMappedB << " " <<
 			normalMapPath << " " <<
 			normalMapPathR << " " <<
 			normalMapPathG << " " <<

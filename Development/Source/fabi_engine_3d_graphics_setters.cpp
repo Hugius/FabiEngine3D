@@ -138,30 +138,6 @@ void FabiEngine3D::gfx_enableSceneReflections(float factor, float height)
 	}
 }
 
-void FabiEngine3D::gfx_enableLightMapping()
-{
-	if (_core->_renderBus.isLightMappingEnabled())
-	{
-		Logger::throwWarning("Tried to enable light mapping: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setLightMappingEnabled(true);
-	}
-}
-
-void FabiEngine3D::gfx_enableNormalMapping()
-{
-	if (_core->_renderBus.isNormalMappingEnabled())
-	{
-		Logger::throwWarning("Tried to enable normal mapping: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setNormalMappingEnabled(true);
-	}
-}
-
 void FabiEngine3D::gfx_enableFXAA()
 {
 	if (_core->_renderBus.isFxaaEnabled())
@@ -395,30 +371,6 @@ void FabiEngine3D::gfx_disableSceneReflections(bool resetProperties)
 	else
 	{
 		Logger::throwWarning("Tried to disable scene reflections: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableLightMapping(bool resetProperties)
-{
-	if (_core->_renderBus.isLightMappingEnabled())
-	{
-		_core->_renderBus.setLightMappingEnabled(false);
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable lightg mapping: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableNormalMapping(bool resetProperties)
-{
-	if (_core->_renderBus.isNormalMappingEnabled())
-	{
-		_core->_renderBus.setNormalMappingEnabled(false);
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable normal mapping: not enabled");
 	}
 }
 

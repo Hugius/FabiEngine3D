@@ -34,11 +34,6 @@ public:
 	void setUvRepeat(float value);
 	void setSize(float value);
 	void setMaxHeight(float value);
-	void setBlendMapped(bool value);
-	void setNormalMapped(bool value);
-	void setNormalMappedR(bool value);
-	void setNormalMappedG(bool value);
-	void setNormalMappedB(bool value);
 	void setSpecularLighted(bool value);
 	void setLightness(float value);
 	void setSpecularLightingFactor(float value);
@@ -84,11 +79,6 @@ public:
 	const float getSpecularLightingIntensity() const;
 
 	// Booleans
-	const bool isBlendMapped()	   const;
-	const bool isNormalMapped()	   const;
-	const bool isNormalMappedR()   const;
-	const bool isNormalMappedG()   const;
-	const bool isNormalMappedB()   const;
 	const bool isSpecularLighted() const;
 	const bool hasDiffuseMap()	   const;
 	const bool hasNormalMap()	   const;
@@ -140,10 +130,5 @@ private:
 	float _specularLightingFactor = 1.0f;
 	float _specularLightingIntensity = 0.0f;
 
-	bool _isBlendMapped     = false;
-	bool _isNormalMapped    = false;
-	bool _isNormalMappedR   = false;
-	bool _isNormalMappedG   = false;
-	bool _isNormalMappedB   = false;
 	bool _isSpecularLighted = false;
 };

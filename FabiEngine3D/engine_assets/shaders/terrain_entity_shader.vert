@@ -16,8 +16,7 @@ uniform mat4 u_shadowMatrix;
 uniform vec4 u_clippingPlane;
 
 // Bool uniforms
-uniform bool u_isNormalMapped;
-uniform bool u_isNormalMappingEnabled;
+uniform bool u_hasNormalMap;
 
 // Out variables
 out vec3 f_pos;
@@ -51,7 +50,7 @@ void main()
 mat3 calculateTbnMatrix()
 {
     // Normal mapping matrix
-    if(u_isNormalMappingEnabled && u_isNormalMapped)
+    if(u_hasNormalMap)
     {
 		vec3 tangent = normalize(v_tangent - dot(v_tangent, f_normal) * f_normal);
 		vec3 bitangent = cross(f_normal, tangent);

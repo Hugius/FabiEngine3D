@@ -25,9 +25,9 @@ void ModelEditor::_updateModelEditingMesh()
 			{
 				_loadDiffuseMap();
 			}
-			else if (screen->getButton("loadLightMap")->isHovered())
+			else if (screen->getButton("loadEmissionMap")->isHovered())
 			{
-				_loadLightMap();
+				_loadEmissionMap();
 			}
 			else if (screen->getButton("loadReflectionMap")->isHovered())
 			{
@@ -40,7 +40,7 @@ void ModelEditor::_updateModelEditingMesh()
 			else if (screen->getButton("clearMaps")->isHovered())
 			{
 				_fe3d.modelEntity_setDiffuseMap(_currentModelID, "");
-				_fe3d.modelEntity_setLightMap(_currentModelID, "");
+				_fe3d.modelEntity_setEmissionMap(_currentModelID, "");
 				_fe3d.modelEntity_setReflectionMap(_currentModelID, "");
 				_fe3d.modelEntity_setNormalMap(_currentModelID, "");
 			}
@@ -57,7 +57,7 @@ void ModelEditor::_updateModelEditingMesh()
 		// Editing buttons hoverability
 		screen->getButton("loadMesh")->setHoverable(!existing);
 		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
-		screen->getButton("loadLightMap")->setHoverable(hoverable);
+		screen->getButton("loadEmissionMap")->setHoverable(hoverable);
 		screen->getButton("loadReflectionMap")->setHoverable(hoverable);
 		screen->getButton("loadNormalMap")->setHoverable(hoverable);
 		screen->getButton("clearMaps")->setHoverable(hoverable);

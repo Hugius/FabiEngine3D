@@ -112,7 +112,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			{
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
-					// Only select the terrain if it has a heightmap
+					// Only select the terrain if it has a heightMap
 					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 					{
 						_fe3d.terrainEntity_select(_currentTerrainID);

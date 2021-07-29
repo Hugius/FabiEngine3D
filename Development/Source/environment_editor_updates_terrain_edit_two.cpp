@@ -35,7 +35,6 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_setBlendMapped(_currentTerrainID, true);
 					}
 					else
 					{
@@ -210,7 +209,6 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMap(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_setNormalMapped(_currentTerrainID, true);
 					}
 					else
 					{
@@ -235,7 +233,6 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_setNormalMappedR(_currentTerrainID, true);
 					}
 					else
 					{
@@ -260,7 +257,6 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_setNormalMappedG(_currentTerrainID, true);
 					}
 					else
 					{
@@ -285,7 +281,6 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapB(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_setNormalMappedB(_currentTerrainID, true);
 					}
 					else
 					{

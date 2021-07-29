@@ -101,28 +101,28 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		// New model part
 		entity->addPart(part.ID);
 
-		// Load diffuse map
+		// Diffuse map
 		if (part.diffuseMapPath != "")
 		{
 			entity->setDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true), part.ID);
 			entity->setDiffuseMapPath(part.diffuseMapPath, part.ID);
 		}
 
-		// Load model part light map
-		if (part.lightMapPath != "")
+		// Emission map
+		if (part.emissionMapPath != "")
 		{
-			entity->setLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true), part.ID);
-			entity->setLightMapPath(part.lightMapPath, part.ID);
+			entity->setEmissionMap(_textureLoader.getTexture2D(part.emissionMapPath, true, true), part.ID);
+			entity->setEmissionMapPath(part.emissionMapPath, part.ID);
 		}
 
-		// Load model part reflection map
+		// Reflection map
 		if (part.reflectionMapPath != "")
 		{
 			entity->setReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true), part.ID);
 			entity->setReflectionMapPath(part.reflectionMapPath, part.ID);
 		}
 
-		// Load an model normal map
+		// Normal map
 		if (part.normalMapPath != "")
 		{
 			entity->setNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true), part.ID);
@@ -131,7 +131,57 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	}
 }
 
-void ModelEntityManager::loadNormalMapping(const string& ID)
+void ModelEntityManager::update()
+{
+	for (const auto& [keyID, entity] : _getModelEntities())
+	{
+		if (entity->isVisible()) // Visible updates
+		{
+			// Calculate model matrix
+			entity->updateModelMatrix();
+
+			// Check if entity has LOD
+			if (!entity->getLodEntityID().empty())
+			{
+				// Calculate absolute distance between camera and entity
+				Vec3 camPos = _renderBus.getCameraPosition();
+				Vec3 entityPos = entity->getPosition();
+				float xDistance = fabsf(camPos.x - entityPos.x);
+				float yDistance = fabsf(camPos.y - entityPos.y);
+				float zDistance = fabsf(camPos.z - entityPos.z);
+				float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+
+				// Check if farther than LOD distance
+				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
+				entity->setLevelOfDetailed(isFarEnough);
+			}
+		}
+		else // Invisible updates
+		{
+			// Update normal mapping
+			if (entity->hasNormalMap())
+			{
+				_loadNormalMapping(entity->getID());
+			}
+			else
+			{
+				_unloadNormalMapping(entity->getID());
+			}
+		}
+	}
+}
+
+void ModelEntityManager::setLodDistance(float distance)
+{
+	_lodDistance = distance;
+}
+
+float ModelEntityManager::getLodDistance()
+{
+	return _lodDistance;
+}
+
+void ModelEntityManager::_loadNormalMapping(const string& ID)
 {
 	// Temporary values
 	auto entity = getEntity(ID);
@@ -145,6 +195,7 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 			// Load mesh file
 			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
 			auto parts = *partsPointer;
+			entity->clearRenderBuffers();
 
 			// Create renderbuffers
 			for (const auto& part : parts)
@@ -152,7 +203,7 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 				// Temporary values
 				vector<float> data;
 
-				// For every triangle vertex point
+				// For every triangle vertex
 				for (size_t i = 0; i < part.vertices.size(); i++)
 				{
 					// Vertex coordinate
@@ -175,15 +226,14 @@ void ModelEntityManager::loadNormalMapping(const string& ID)
 					data.push_back(part.tangents[i].z);
 				}
 
-				// Reload renderbuffer
-				entity->clearRenderBuffers();
+				// Load renderbuffer
 				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())));
 			}
 		}
 	}
 }
 
-void ModelEntityManager::unloadNormalMapping(const string& ID)
+void ModelEntityManager::_unloadNormalMapping(const string& ID)
 {
 	// Temporary values
 	auto entity = getEntity(ID);
@@ -197,6 +247,7 @@ void ModelEntityManager::unloadNormalMapping(const string& ID)
 			// Load mesh file
 			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
 			auto parts = *partsPointer;
+			entity->clearRenderBuffers();
 
 			// Create renderbuffers
 			for (const auto& part : parts)
@@ -204,7 +255,7 @@ void ModelEntityManager::unloadNormalMapping(const string& ID)
 				// Temporary values
 				vector<float> data;
 
-				// For every triangle vertex point
+				// For every triangle vertex
 				for (size_t i = 0; i < part.vertices.size(); i++)
 				{
 					// Vertex coordinate
@@ -222,49 +273,9 @@ void ModelEntityManager::unloadNormalMapping(const string& ID)
 					data.push_back(part.normals[i].z);
 				}
 
-				// Reload renderbuffer
-				entity->clearRenderBuffers();
+				// Load renderbuffer
 				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &data[0], static_cast<unsigned int>(data.size())));
 			}
 		}
 	}
-}
-
-void ModelEntityManager::update()
-{
-	for (const auto& [keyID, entity] : _getModelEntities())
-	{
-		// Only update if visible
-		if (entity->isVisible())
-		{
-			// Calculate model matrix
-			entity->updateModelMatrix();
-
-			// Check if entity has LOD
-			if (!entity->getLodEntityID().empty())
-			{
-				// Calculate absolute distance between camera and entity
-				Vec3 camPos = _renderBus.getCameraPosition();
-				Vec3 entityPos = entity->getPosition();
-				float xDistance = fabsf(camPos.x - entityPos.x);
-				float yDistance = fabsf(camPos.y - entityPos.y);
-				float zDistance = fabsf(camPos.z - entityPos.z);
-				float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
-
-				// Check if farther than LOD distance
-				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
-				entity->setLevelOfDetailed(isFarEnough);
-			}
-		}
-	}
-}
-
-void ModelEntityManager::setLodDistance(float distance)
-{
-	_lodDistance = distance;
-}
-
-float ModelEntityManager::getLodDistance()
-{
-	return _lodDistance;
 }

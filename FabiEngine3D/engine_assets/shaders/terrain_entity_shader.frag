@@ -57,13 +57,7 @@ uniform float u_maxSpotLightDistance;
 uniform float u_shadowLightness;
 
 // Boolean uniforms
-uniform bool u_isBlendMapped;
-uniform bool u_isNormalMapped;
-uniform bool u_isNormalMappedR;
-uniform bool u_isNormalMappedG;
-uniform bool u_isNormalMappedB;
 uniform bool u_isSpecularLighted;
-uniform bool u_isNormalMappingEnabled;
 uniform bool u_isAmbientLightEnabled;
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isPointLightEnabled;
@@ -142,16 +136,9 @@ void main()
 
 vec3 getNormalMapping()
 {
-    if
-    (
-		u_isNormalMappingEnabled && 
-		((u_isNormalMapped && u_hasNormalMap)  || 
-		(u_isNormalMappedR && u_hasNormalMapR) || 
-		(u_isNormalMappedG && u_hasNormalMapG) || 
-		(u_isNormalMappedB && u_hasNormalMapB))
-	)
+    if (u_hasNormalMap || u_hasNormalMapR || u_hasNormalMapG || u_hasNormalMapB)
     {
-		if(u_isBlendMapped && u_hasBlendMap) // Blendmapped mixed normal
+		if(u_hasBlendMap) // Blendmapped mixed normal
 		{
 			// Get color values of blendmap (R, G, B)
 			vec2 blendUV = f_uv / u_diffuseMapRepeat;
@@ -165,7 +152,7 @@ vec3 getNormalMapping()
 			vec3 totalNormal;
 
 			// Diffuse normal map
-			if(u_isNormalMapped && u_hasNormalMap)
+			if(u_hasNormalMap)
 			{
 				vec3 normal = texture(u_normalMap, f_uv).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * diffuseStrength;
@@ -176,7 +163,7 @@ vec3 getNormalMapping()
 			}
 			
 			// BlendR normal map
-			if(u_isNormalMappedR && u_hasNormalMapR)
+			if(u_hasNormalMapR)
 			{
 				vec3 normal = texture(u_normalMapR, blendUV * u_diffuseMapRepeatR).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * rStrength;
@@ -187,7 +174,7 @@ vec3 getNormalMapping()
 			}
 
 			// BlendG normal map
-			if(u_isNormalMappedG && u_hasNormalMapG)
+			if(u_hasNormalMapG)
 			{
 				vec3 normal = texture(u_normalMapG, blendUV * u_diffuseMapRepeatG).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * gStrength;
@@ -198,7 +185,7 @@ vec3 getNormalMapping()
 			}
 
 			// BlendB normal map
-			if(u_isNormalMappedB && u_hasNormalMapB)
+			if(u_hasNormalMapB)
 			{
 				vec3 normal = texture(u_normalMapB, blendUV * u_diffuseMapRepeatB).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * bStrength;
@@ -213,7 +200,7 @@ vec3 getNormalMapping()
 		}
 		else // Diffuse normal
 		{
-			if(u_isNormalMapped && u_hasNormalMap)
+			if(u_hasNormalMap)
 			{
 				// Calculate new normal vector
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -237,7 +224,7 @@ vec3 getNormalMapping()
 
 vec3 getDiffuseMapping()
 {
-	if(u_isBlendMapped && u_hasBlendMap) // Blendmapped mixed texture
+	if(u_hasBlendMap) // Blendmapped mixed texture
 	{
 		// Get color value of blendmap (R, G, B)
 		vec2 blendUV = f_uv / u_diffuseMapRepeat;

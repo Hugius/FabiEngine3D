@@ -14,7 +14,7 @@ in mat3 f_tbnMatrix;
 
 // Textures
 layout (location = 0) uniform sampler2D   u_diffuseMap;
-layout (location = 1) uniform sampler2D   u_lightMap;
+layout (location = 1) uniform sampler2D   u_emissionMap;
 layout (location = 2) uniform sampler2D   u_reflectionMap;
 layout (location = 3) uniform sampler2D   u_normalMap;
 layout (location = 4) uniform sampler2D   u_sceneReflectionMap;
@@ -76,15 +76,13 @@ uniform bool u_isAmbientLightEnabled;
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isSpecularLightEnabled;
 uniform bool u_isSpotLightEnabled;
-uniform bool u_lightMappingEnabled;
-uniform bool u_isNormalMappingEnabled;
 uniform bool u_isPointLightEnabled;
 uniform bool u_skyReflectionsEnabled;
 uniform bool u_sceneReflectionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
-uniform bool u_hasLightMap;
+uniform bool u_hasEmissionMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasReflectionMap;
 uniform bool u_isBright;
@@ -99,7 +97,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 // Functions
 vec3 getNormalMapping();
 vec3 getDiffuseMapping();
-vec3 getLightMapping();
+vec3 getEmissionMapping();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
 vec3 getPointLighting(vec3 normal);
@@ -113,14 +111,14 @@ float getSpecularLighting(vec3 position, vec3 normal);
 // Process fragment
 void main()
 {
-    // Calculate light mapping
-    vec3 lightMapColor = getLightMapping();
+    // Calculate emission mapping
+    vec3 emissionMapColor = getEmissionMapping();
 
     // Calculate normal mapping
     vec3 normal = getNormalMapping();
 
 	// Calculate lighting
-	bool isBright = ((lightMapColor != vec3(0.0f)) || u_isBright);
+	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);
 	float shadowLighting	 = getShadows();
 	vec3 ambientLighting	 = getAmbientLighting();
 	vec3 directionalLighting = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadowLighting == 1.0f)));
@@ -130,7 +128,7 @@ void main()
 	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += getDiffuseMapping();
-	primaryColor += lightMapColor;
+	primaryColor += emissionMapColor;
 	primaryColor  = getSkyReflections(primaryColor, normal);
 	primaryColor  = getSceneReflections(primaryColor);
 	primaryColor *= u_color;
@@ -163,7 +161,7 @@ void main()
 
 vec3 getNormalMapping()
 {
-    if(u_isNormalMappingEnabled && u_hasNormalMap)
+    if(u_hasNormalMap)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -318,11 +316,11 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
-vec3 getLightMapping()
+vec3 getEmissionMapping()
 {
-	if(u_lightMappingEnabled && u_hasLightMap)
+	if(u_hasEmissionMap)
 	{
-		return texture(u_lightMap, f_uv).rgb;
+		return texture(u_emissionMap, f_uv).rgb;
 	}
 	else
 	{

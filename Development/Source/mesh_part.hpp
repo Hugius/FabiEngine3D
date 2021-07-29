@@ -12,7 +12,7 @@ struct MeshPart final
 {
 	string ID;
 	string diffuseMapPath;
-	string lightMapPath;
+	string emissionMapPath;
 	string normalMapPath;
 	string reflectionMapPath;
 

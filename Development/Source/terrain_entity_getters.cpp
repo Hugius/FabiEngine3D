@@ -209,28 +209,3 @@ const bool TerrainEntity::hasNormalMapB() const
 {
 	return (_normalMapB != 0);
 }
-
-const bool TerrainEntity::isNormalMapped() const
-{
-	return _isNormalMapped;
-}
-
-const bool TerrainEntity::isNormalMappedR() const
-{
-	return _isNormalMappedR;
-}
-
-const bool TerrainEntity::isNormalMappedG() const
-{
-	return _isNormalMappedG;
-}
-
-const bool TerrainEntity::isNormalMappedB() const
-{
-	return _isNormalMappedB;
-}
-
-const bool TerrainEntity::isBlendMapped() const
-{
-	return _isBlendMapped;
-}

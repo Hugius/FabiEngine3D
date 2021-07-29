@@ -74,9 +74,9 @@ void ModelEntity::setDiffuseMap(GLuint value, const string& partID)
 	_parts[_getPartIndex(partID)].diffuseMap = value;
 }
 
-void ModelEntity::setLightMap(GLuint value, const string& partID)
+void ModelEntity::setEmissionMap(GLuint value, const string& partID)
 {
-	_parts[_getPartIndex(partID)].lightMap = value;
+	_parts[_getPartIndex(partID)].emissionMap = value;
 }
 
 void ModelEntity::setReflectionMap(GLuint value, const string& partID)
@@ -188,9 +188,9 @@ void ModelEntity::setDiffuseMapPath(const string& value, const string& partID)
 	_parts[_getPartIndex(partID)].diffuseMapPath = value;
 }
 
-void ModelEntity::setLightMapPath(const string& value, const string& partID)
+void ModelEntity::setEmissionMapPath(const string& value, const string& partID)
 {
-	_parts[_getPartIndex(partID)].lightMapPath = value;
+	_parts[_getPartIndex(partID)].emissionMapPath = value;
 }
 
 void ModelEntity::setReflectionMapPath(const string& value, const string& partID)

@@ -144,17 +144,12 @@ public:
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_setVisible(const string& ID, bool isVisible);
 	void terrainEntity_select(const string& ID);
-	void terrainEntity_setHeightmap(const string& ID, const string& heightMapPath);
+	void terrainEntity_setHeightMap(const string& ID, const string& texturePath);
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMap(const string& ID, const string& texturePath);
 	void terrainEntity_setLightness(const string& ID, float lightness);
-	void terrainEntity_setBlendMapped(const string& ID, bool enabled);
-	void terrainEntity_setNormalMapped(const string& ID, bool enabled);
-	void terrainEntity_setNormalMappedR(const string& ID, bool enabled);
-	void terrainEntity_setNormalMappedG(const string& ID, bool enabled);
-	void terrainEntity_setNormalMappedB(const string& ID, bool enabled);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
 	void terrainEntity_setDiffuseMapR(const string& ID, const string& texturePath);
@@ -194,11 +189,6 @@ public:
 	const float terrainEntity_getSpecularLightingIntensity(const string& ID);
 	const bool terrainEntity_isExisting(const string& ID);
 	const bool terrainEntity_isVisible(const string& ID);
-	const bool terrainEntity_isBlendMapped(const string& ID);
-	const bool terrainEntity_isNormalMapped(const string& ID);
-	const bool terrainEntity_isNormalMappedR(const string& ID);
-	const bool terrainEntity_isNormalMappedG(const string& ID);
-	const bool terrainEntity_isNormalMappedB(const string& ID);
 	const bool terrainEntity_isSpecularLighted(const string& ID);
 	const bool terrainEntity_isInside(const string& ID, float x, float z);
 
@@ -263,7 +253,7 @@ public:
 	void modelEntity_setVisible(const string& ID, bool isVisible);
 	void modelEntity_loadModel(const string& ID, const string& meshPath);
 	void modelEntity_setDiffuseMap(const string& ID, const string& texturePath);
-	void modelEntity_setLightMap(const string& ID, const string& texturePath);
+	void modelEntity_setEmissionMap(const string& ID, const string& texturePath);
 	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
 	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
@@ -302,7 +292,7 @@ public:
 	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
 	const string& modelEntity_getMeshPath(const string& ID);
 	const string& modelEntity_getDiffuseMapPath(const string& ID);
-	const string& modelEntity_getLightMapPath(const string& ID);
+	const string& modelEntity_getEmissionMapPath(const string& ID);
 	const string& modelEntity_getNormalMapPath(const string& ID);
 	const string& modelEntity_getReflectionMapPath(const string& ID);
 	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
@@ -334,7 +324,7 @@ public:
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
 	const bool modelEntity_isBright(const string& ID);
 	const bool modelEntity_hasDiffuseMap(const string& ID);
-	const bool modelEntity_hasLightMap(const string& ID);
+	const bool modelEntity_hasEmissionMap(const string& ID);
 	const bool modelEntity_hasReflectionMap(const string& ID);
 	const bool modelEntity_hasNormalMap(const string& ID);
 	const ReflectionType modelEntity_getReflectionType(const string& ID);
@@ -656,8 +646,6 @@ public:
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float factor, float height);
-	void gfx_enableLightMapping();
-	void gfx_enableNormalMapping();
 	void gfx_enableFXAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
@@ -673,8 +661,6 @@ public:
 	void gfx_disableFog(bool resetProperties = false);
 	void gfx_disableSkyReflections(bool resetProperties = false);
 	void gfx_disableSceneReflections(bool resetProperties = false);
-	void gfx_disableLightMapping(bool resetProperties = false);
-	void gfx_disableNormalMapping(bool resetProperties = false);
 	void gfx_disableFXAA(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
@@ -728,8 +714,6 @@ public:
 	const bool gfx_isPointLightingEnabled();
 	const bool gfx_isSpotLightingEnabled();
 	const bool gfx_isFogEnabled();
-	const bool gfx_isLightMappingEnabled();
-	const bool gfx_isNormalMappingEnabled();
 	const bool gfx_isSkyReflectionsEnabled();
 	const bool gfx_isSceneReflectionsEnabled();
 	const bool gfx_isBloomEnabled();

@@ -29,7 +29,6 @@ uniform float u_uvRepeat;
 // Boolean uniforms
 uniform bool u_isInstanced;
 uniform bool u_hasNormalMap;
-uniform bool u_isNormalMappingEnabled;
 
 // Out variables
 out vec3 f_pos;
@@ -67,7 +66,7 @@ void main()
 mat3 calculateTbnMatrix()
 {
     // Normal mapping matrix
-    if(u_isNormalMappingEnabled && u_hasNormalMap)
+    if(u_hasNormalMap)
     {
         vec3 tangent = normalize(mat3(u_normalModelMatrix) * v_tangent);
 			 tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);

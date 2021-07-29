@@ -97,7 +97,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
 					}
 
-					// Only select the terrain if it has a heightmap
+					// Only select the terrain if it has a heightMap
 					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 					{
 						_fe3d.terrainEntity_select(_currentTerrainID);

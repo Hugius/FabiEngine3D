@@ -36,7 +36,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
 			auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
 			auto diffuseMapPath = isMultiParted ? "" : _fe3d.modelEntity_getDiffuseMapPath(modelID);
-			auto lightMapPath = isMultiParted ? "" : _fe3d.modelEntity_getLightMapPath(modelID);
+			auto emissionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getEmissionMapPath(modelID);
 			auto normalMapPath = isMultiParted ? "" : _fe3d.modelEntity_getNormalMapPath(modelID);
 			auto reflectionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID);
 			auto modelSize = _fe3d.modelEntity_getSize(modelID);
@@ -70,13 +70,13 @@ bool ModelEditor::saveModelEntitiesToFile()
 			// Perform empty string & space conversions
 			meshPath = (meshPath == "") ? "?" : meshPath;
 			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-			lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
+			emissionMapPath = (emissionMapPath == "") ? "?" : emissionMapPath;
 			reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 			normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 			lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
 			std::replace(meshPath.begin(), meshPath.end(), ' ', '?');
 			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-			std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
+			std::replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 			std::replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
@@ -88,7 +88,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				modelID << " " <<
 				meshPath << " " <<
 				diffuseMapPath << " " <<
-				lightMapPath << " " <<
+				emissionMapPath << " " <<
 				reflectionMapPath << " " <<
 				normalMapPath << " " <<
 				modelSize.x << " " <<

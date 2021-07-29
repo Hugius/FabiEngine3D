@@ -37,10 +37,10 @@ void ModelEditor::_loadMesh()
 							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getDiffuseMapPath(partID));
 						}
 
-						// Light map
-						if (_fe3d.modelEntity_hasLightMap(partID))
+						// Emission map
+						if (_fe3d.modelEntity_hasEmissionMap(partID))
 						{
-							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getLightMapPath(partID));
+							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getEmissionMapPath(partID));
 						}
 
 						// Reflection map
@@ -98,11 +98,11 @@ void ModelEditor::_loadDiffuseMap()
 	}
 }
 
-void ModelEditor::_loadLightMap()
+void ModelEditor::_loadEmissionMap()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("game_assets\\textures\\light_maps\\");
+	const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
@@ -114,7 +114,7 @@ void ModelEditor::_loadLightMap()
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.modelEntity_setLightMap(_currentModelID, newFilePath);
+			_fe3d.modelEntity_setEmissionMap(_currentModelID, newFilePath);
 		}
 		else
 		{
@@ -189,7 +189,7 @@ const vector<string>& ModelEditor::getLoadedModelIDs()
 	return _loadedModelIDs;
 }
 
-bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
+bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string emissionMapPath, string reflectionMapPath, string normalMapPath,
 	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
 	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
 	bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
@@ -218,10 +218,10 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 				_fe3d.modelEntity_setDiffuseMap(modelName, diffuseMapPath);
 			}
 
-			// Light map
-			if (lightMapPath != "")
+			// Emission map
+			if (emissionMapPath != "")
 			{
-				_fe3d.modelEntity_setLightMap(modelName, lightMapPath);
+				_fe3d.modelEntity_setEmissionMap(modelName, emissionMapPath);
 			}
 
 			// Reflection map

@@ -16,7 +16,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 	vector<Vec3> temp_normals;
 	string selectedPartID = "";
 	string tempDiffuseMapPath = "";
-	string tempLightMapPath = "";
+	string tempEmissionMapPath = "";
 	string tempNormalMapPath = "";
 	string tempReflectionMapPath = "";
 
@@ -82,7 +82,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 
 			// Reset material paths
 			tempDiffuseMapPath = "";
-			tempLightMapPath = "";
+			tempEmissionMapPath = "";
 			tempReflectionMapPath = "";
 			tempNormalMapPath = "";
 
@@ -99,13 +99,13 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3D_LIGHT_MAP") == 0) // Light map material
+		else if (strcmp(lineHeader, "FE3D_EMISSION_MAP") == 0) // Emission map material
 		{
 			if (selectedPartID != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
-				tempLightMapPath = name;
+				tempEmissionMapPath = name;
 			}
 
 			continue;
@@ -194,7 +194,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 
 				// Set texture map paths
 				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);
-				newPart.lightMapPath = tempLightMapPath.empty() ? "" : string("game_assets\\textures\\light_maps\\" + tempLightMapPath);
+				newPart.emissionMapPath = tempEmissionMapPath.empty() ? "" : string("game_assets\\textures\\emission_maps\\" + tempEmissionMapPath);
 				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("game_assets\\textures\\normal_maps\\" + tempNormalMapPath);
 				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("game_assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
 

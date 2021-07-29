@@ -56,15 +56,10 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	// Fill terrain entity
 	_fe3d.terrainEntity_setMaxHeight(newID, _fe3d.terrainEntity_getMaxHeight(previewID));
 	_fe3d.terrainEntity_setUvRepeat(newID, _fe3d.terrainEntity_getUvRepeat(previewID));
-	_fe3d.terrainEntity_setBlendMapped(newID, _fe3d.terrainEntity_isBlendMapped(previewID));
 	_fe3d.terrainEntity_setLightness(newID, _fe3d.terrainEntity_getLightness(previewID));
 	_fe3d.terrainEntity_setBlendRepeatR(newID, _fe3d.terrainEntity_getBlendRepeatR(previewID));
 	_fe3d.terrainEntity_setBlendRepeatG(newID, _fe3d.terrainEntity_getBlendRepeatG(previewID));
 	_fe3d.terrainEntity_setBlendRepeatB(newID, _fe3d.terrainEntity_getBlendRepeatB(previewID));
-	_fe3d.terrainEntity_setNormalMapped(newID, _fe3d.terrainEntity_isNormalMapped(previewID));
-	_fe3d.terrainEntity_setNormalMappedR(newID, _fe3d.terrainEntity_isNormalMappedR(previewID));
-	_fe3d.terrainEntity_setNormalMappedG(newID, _fe3d.terrainEntity_isNormalMappedG(previewID));
-	_fe3d.terrainEntity_setNormalMappedB(newID, _fe3d.terrainEntity_isNormalMappedB(previewID));
 	_fe3d.terrainEntity_setSpecularLighted(newID, _fe3d.terrainEntity_isSpecularLighted(previewID));
 	_fe3d.terrainEntity_setSpecularLightingFactor(newID, _fe3d.terrainEntity_getSpecularLightingFactor(previewID));
 	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, _fe3d.terrainEntity_getSpecularLightingIntensity(previewID));
@@ -246,10 +241,10 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 				_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 			}
 
-			// Light map
-			if (!isMultiParted && _fe3d.modelEntity_hasLightMap(previewID))
+			// Emission map
+			if (!isMultiParted && _fe3d.modelEntity_hasEmissionMap(previewID))
 			{
-				_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
+				_fe3d.modelEntity_setEmissionMap(newEntityID, _fe3d.modelEntity_getEmissionMapPath(previewID));
 			}
 
 			// Reflection map
@@ -298,10 +293,10 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setDiffuseMap(newEntityID, _fe3d.modelEntity_getDiffuseMapPath(previewID));
 		}
 
-		// Light map
-		if (!isMultiParted && _fe3d.modelEntity_hasLightMap(previewID))
+		// Emission map
+		if (!isMultiParted && _fe3d.modelEntity_hasEmissionMap(previewID))
 		{
-			_fe3d.modelEntity_setLightMap(newEntityID, _fe3d.modelEntity_getLightMapPath(previewID));
+			_fe3d.modelEntity_setEmissionMap(newEntityID, _fe3d.modelEntity_getEmissionMapPath(previewID));
 		}
 
 		// Reflection map

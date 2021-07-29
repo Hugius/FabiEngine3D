@@ -195,23 +195,57 @@ void TerrainEntityManager::generateMesh(const string& ID)
 	entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 }
 
-void TerrainEntityManager::loadNormalMapping(const string& ID)
+float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
-	// Check if entity has a buffer
-	if (!getEntity(ID)->getRenderBuffers().empty())
+	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelValues());
+}
+
+bool TerrainEntityManager::isInside(const string& ID, float x, float z)
+{
+	// Return true if point is within terrain bounds
+	if (x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
 	{
-		// Check if not already a tangent loaded model
-		if (getEntity(ID)->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void TerrainEntityManager::update()
+{
+	for (const auto& [keyID, entity] : _getTerrainEntities())
+	{
+		// Update normal mapping
+		if (entity->hasNormalMap() || entity->hasNormalMapR() || entity->hasNormalMapG() || entity->hasNormalMapB())
+		{
+			_loadNormalMapping(entity->getID());
+		}
+		else
+		{
+			_unloadNormalMapping(entity->getID());
+		}
+	}
+}
+
+void TerrainEntityManager::_loadNormalMapping(const string& ID)
+{
+	// Temporary values
+	auto entity = getEntity(ID);
+	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
+
+	// Check if entity has a buffer
+	if (!entity->getRenderBuffers().empty())
+	{
+		// Check if renderbuffer not already reloaded
+		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Data collections
-			auto vertices = getEntity(ID)->getVertices();
-			auto uvCoords = getEntity(ID)->getUvCoords();
-			auto normals = getEntity(ID)->getNormals();
+			auto vertices = entity->getVertices();
+			auto uvCoords = entity->getUvCoords();
+			auto normals = entity->getNormals();
 			vector<Vec3> tangents;
-
-			// Handy values
-			const float size = getEntity(ID)->getSize();
-			const unsigned int uSize = static_cast<unsigned int>(size);
 
 			// Calculate tangents
 			for (size_t i = 0; i < vertices.size(); i += 3)
@@ -244,7 +278,7 @@ void TerrainEntityManager::loadNormalMapping(const string& ID)
 				tangents.push_back(tangent);
 			}
 
-			// Compose single data collection
+			// Compose final data collection
 			vector<float> finalDataCollection;
 			for (size_t i = 0; i < vertices.size(); i++)
 			{
@@ -269,20 +303,53 @@ void TerrainEntityManager::loadNormalMapping(const string& ID)
 			}
 
 			// Create render buffer
-			getEntity(ID)->clearRenderBuffers();
-			getEntity(ID)->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+			entity->clearRenderBuffers();
+			entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 		}
 	}
 }
 
-void TerrainEntityManager::update()
+void TerrainEntityManager::_unloadNormalMapping(const string& ID)
 {
+	// Temporary values
+	auto entity = getEntity(ID);
+	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
 
-}
+	// Check if entity has a buffer
+	if (!entity->getRenderBuffers().empty())
+	{
+		// Check if renderbuffer not already reloaded
+		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
+		{
+			// Data collections
+			auto vertices = entity->getVertices();
+			auto uvCoords = entity->getUvCoords();
+			auto normals = entity->getNormals();
 
-float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
-{
-	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelValues());
+			// Compose final data collection
+			vector<float> finalDataCollection;
+			for (size_t i = 0; i < vertices.size(); i++)
+			{
+				// Vertex coordinate
+				finalDataCollection.push_back(vertices[i].x);
+				finalDataCollection.push_back(vertices[i].y);
+				finalDataCollection.push_back(vertices[i].z);
+
+				// UV coordinate
+				finalDataCollection.push_back(uvCoords[i].x);
+				finalDataCollection.push_back(uvCoords[i].y);
+
+				// Normal vector
+				finalDataCollection.push_back(normals[i].x);
+				finalDataCollection.push_back(normals[i].y);
+				finalDataCollection.push_back(normals[i].z);
+			}
+
+			// Create render buffer
+			entity->clearRenderBuffers();
+			entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+		}
+	}
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)
@@ -308,17 +375,4 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 	// Returning the corresponding height
 	int index = (static_cast<int>(x) * static_cast<int>(size)) + static_cast<int>(z);
 	return ((pixelColors[index]) / 255.0f) * maxHeight;
-}
-
-bool TerrainEntityManager::isInside(const string& ID, float x, float z)
-{
-	// Return true if point is within terrain bounds
-	if (x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
 }

@@ -35,21 +35,21 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	while (std::getline(file, line))
 	{
 		// Temporary values
-		string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
+		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
 		std::istringstream iss(line);
 
 		// Extract data
-		iss >> modelID >> meshPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >> normalMapPath;
+		iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
 
 		// Perform empty string & space conversions
 		meshPath = (meshPath == "?") ? "" : meshPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-		lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
+		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
 		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
+		std::replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 		std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
@@ -59,9 +59,9 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		{
 			texturePaths.push_back(diffuseMapPath);
 		}
-		if (!lightMapPath.empty())
+		if (!emissionMapPath.empty())
 		{
-			texturePaths.push_back(lightMapPath);
+			texturePaths.push_back(emissionMapPath);
 		}
 		if (!reflectionMapPath.empty())
 		{
@@ -119,7 +119,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	while (std::getline(file, line))
 	{
 		// Placeholder variables
-		string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 		float uvRepeat, specularFactor, specularIntensity, lightness;
 		unsigned int reflectionType;
 		bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBright;
@@ -136,7 +136,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			modelID >>
 			meshPath >>
 			diffuseMapPath >>
-			lightMapPath >>
+			emissionMapPath >>
 			reflectionMapPath >>
 			normalMapPath >>
 			modelSize.x >>
@@ -180,19 +180,19 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		// Perform empty string & space conversions
 		meshPath = (meshPath == "?") ? "" : meshPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-		lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
+		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
 		std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
 		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
+		std::replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 		std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 		// Add new model
-		_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
+		_addModel(modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
 			isTransparent, isSpecular, ReflectionType(reflectionType), specularFactor, specularIntensity, lightness,
 			Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, isBright, aabbNames, aabbPositions, aabbSizes);
 	}

@@ -35,8 +35,6 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_isSpotLightEnabled", _renderBus.isSpotLightingEnabled());
 	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_isPointLightEnabled", _renderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_lightMappingEnabled", _renderBus.isLightMappingEnabled());
-	_shader.uploadUniform("u_isNormalMappingEnabled", _renderBus.isNormalMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled", _renderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled", _renderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize", _renderBus.getShadowAreaSize());
@@ -53,7 +51,7 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_mainSkyColor", _renderBus.getMainSkyColor());
 	_shader.uploadUniform("u_mixSkyColor", _renderBus.getMixSkyColor());
 	_shader.uploadUniform("u_diffuseMap", 0);
-	_shader.uploadUniform("u_lightMap", 1);
+	_shader.uploadUniform("u_emissionMap", 1);
 	_shader.uploadUniform("u_reflectionMap", 2);
 	_shader.uploadUniform("u_normalMap", 3);
 	_shader.uploadUniform("u_sceneReflectionMap", 4);
@@ -198,7 +196,7 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			_shader.uploadUniform("u_color", entity->getColor(partID));
 			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
-			_shader.uploadUniform("u_hasLightMap", entity->hasLightMap(partID));
+			_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
 			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
 			_shader.uploadUniform("u_modelMatrix", modelMatrix);
@@ -210,10 +208,10 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
-			if (entity->hasLightMap(partID))
+			if (entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(partID));
+				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
 			if (entity->hasReflectionMap(partID))
 			{
@@ -249,7 +247,7 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-			if (entity->hasLightMap(partID))
+			if (entity->hasEmissionMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, 0);

@@ -12,7 +12,7 @@ public:
 	void addPart(const string& ID);
 	void updateModelMatrix();
 	void setDiffuseMap(GLuint value, const string& partID = "");
-	void setLightMap(GLuint value, const string& partID = "");
+	void setEmissionMap(GLuint value, const string& partID = "");
 	void setReflectionMap(GLuint value, const string& partID = "");
 	void setNormalMap(GLuint value, const string& partID = "");
 	void setPosition(Vec3 value, const string& partID = "");
@@ -24,7 +24,7 @@ public:
 	void setInversion(float value, const string& partID = "");
 	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& value, const string& partID = "");
-	void setLightMapPath(const string& value, const string& partID = "");
+	void setEmissionMapPath(const string& value, const string& partID = "");
 	void setReflectionMapPath(const string& value, const string& partID = "");
 	void setNormalMapPath(const string& value, const string& partID = "");
 	void setLodEntityID(const string& value);
@@ -51,7 +51,7 @@ public:
 	// Getters
 	const Matrix44& getModelMatrix(const string& partID = "");
 	const GLuint getDiffuseMap(const string& partID = "");
-	const GLuint getLightMap(const string& partID = "");
+	const GLuint getEmissionMap(const string& partID = "");
 	const GLuint getReflectionMap(const string& partID = "");
 	const GLuint getNormalMap(const string& partID = "");
 	const Vec3 getPosition(const string& partID = "");
@@ -64,7 +64,7 @@ public:
 	const vector<string> getPartIDs();
 	const string& getMeshPath();
 	const string& getDiffuseMapPath(const string& partID = "");
-	const string& getLightMapPath(const string& partID = "");
+	const string& getEmissionMapPath(const string& partID = "");
 	const string& getReflectionMapPath(const string& partID = "");
 	const string& getNormalMapPath(const string& partID = "");
 	const string& getLodEntityID();
@@ -86,7 +86,7 @@ public:
 	const bool isWireframed();
 	const bool isBright();
 	const bool hasDiffuseMap(const string& partID = "");
-	const bool hasLightMap(const string& partID = "");
+	const bool hasEmissionMap(const string& partID = "");
 	const bool hasReflectionMap(const string& partID = "");
 	const bool hasNormalMap(const string& partID = "");
 	const ReflectionType getReflectionType();
@@ -102,7 +102,7 @@ private:
 
 		const string ID;
 		string diffuseMapPath = "";
-		string lightMapPath = "";
+		string emissionMapPath = "";
 		string reflectionMapPath = "";
 		string normalMapPath = "";
 
@@ -117,7 +117,7 @@ private:
 		float inversion = 0.0f;
 
 		GLuint diffuseMap = 0;
-		GLuint lightMap = 0;
+		GLuint emissionMap = 0;
 		GLuint reflectionMap = 0;
 		GLuint normalMap = 0;
 	};

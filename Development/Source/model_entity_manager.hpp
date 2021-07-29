@@ -13,13 +13,14 @@ public:
 
 	void addModelEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S);
 	void loadMesh(const string& ID, const string& meshPath);
-	void loadNormalMapping(const string& ID);
-	void unloadNormalMapping(const string& ID);
 	void setLodDistance(float distance);
 	void update() override;
 
 	float getLodDistance();
 
 private:
+	void _loadNormalMapping(const string& ID);
+	void _unloadNormalMapping(const string& ID);
+
 	float _lodDistance = 0.0f;
 };

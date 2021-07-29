@@ -375,16 +375,6 @@ const bool RenderBus::isFogEnabled()
 	return _isFogEnabled;
 }
 
-const bool RenderBus::isLightMappingEnabled()
-{
-	return _isLightMappingEnabled;
-}
-
-const bool RenderBus::isNormalMappingEnabled()
-{
-	return _isNormalMappingEnabled;
-}
-
 const bool RenderBus::isSkyReflectionsEnabled()
 {
 	return _isSkyReflectionsEnabled;

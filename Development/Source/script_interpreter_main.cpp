@@ -191,8 +191,6 @@ void ScriptInterpreter::load()
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableNormalMapping();
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
@@ -366,8 +364,6 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_disablePointLighting(true);
 	_fe3d.gfx_disableSkyReflections(true);
 	_fe3d.gfx_disableSceneReflections(true);
-	_fe3d.gfx_disableLightMapping(true);
-	_fe3d.gfx_disableNormalMapping(true);
 
 	// Delete game image entities
 	for (const auto& ID : _fe3d.imageEntity_getAllIDs())

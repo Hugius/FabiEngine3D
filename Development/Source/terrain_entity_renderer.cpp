@@ -30,7 +30,6 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
 	_shader.uploadUniform("u_fogColor", _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled", _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isNormalMappingEnabled", _renderBus.isNormalMappingEnabled());
 	_shader.uploadUniform("u_isAmbientLightEnabled", _renderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
 	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
@@ -114,11 +113,6 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isBlendMapped", entity->isBlendMapped());
-		_shader.uploadUniform("u_isNormalMapped", entity->isNormalMapped());
-		_shader.uploadUniform("u_isNormalMappedR", entity->isNormalMappedR());
-		_shader.uploadUniform("u_isNormalMappedG", entity->isNormalMappedG());
-		_shader.uploadUniform("u_isNormalMappedB", entity->isNormalMappedB());
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_diffuseMapRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_diffuseMapRepeatR", entity->getBlendRepeatR());

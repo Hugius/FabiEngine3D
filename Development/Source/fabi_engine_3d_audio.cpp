@@ -3,9 +3,9 @@
 
 #include <algorithm>
 
-void FabiEngine3D::soundEntity_add(const string& ID, const string& fileName)
+void FabiEngine3D::soundEntity_add(const string& ID, const string& filePath)
 {
-	_core->_audioManager.addSound(ID, fileName);
+	_core->_audioManager.addSound(ID, filePath);
 }
 
 void FabiEngine3D::soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance)
@@ -142,7 +142,7 @@ const bool FabiEngine3D::soundEntity_isPlaying(const string& ID)
 
 const bool FabiEngine3D::soundEntity_isPaused(const string& ID)
 {
-	return _core->_audioPlayer.isSoundPaused(_core->_audioManager.getSound(ID));;
+	return _core->_audioPlayer.isSoundPaused(_core->_audioManager.getSound(ID));
 }
 
 const bool FabiEngine3D::soundEntity_isLoaded(const string& ID)

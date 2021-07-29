@@ -37,18 +37,19 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 	return _getBillboardEntities();
 }
 
-void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY)
+void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Vec3 position, Vec3 rotation, Vec3 size,
+	bool facingCameraX, bool facingCameraY)
 {
 	// Create entity
 	_createEntity(ID);
 	auto entity = getEntity(ID);
 	entity->addRenderBuffer(_renderBuffer, false);
 
-	// Miscellaneous
-	entity->setPosition(T);
-	entity->setRotation(R);
-	entity->setInitialRotation(R);
-	entity->setSize(S);
+	// Set properties
+	entity->setPosition(position);
+	entity->setRotation(rotation);
+	entity->setInitialRotation(rotation);
+	entity->setSize(size);
 	entity->setCameraFacingX(facingCameraX);
 	entity->setCameraFacingY(facingCameraY);
 	entity->setColor(color);
@@ -57,12 +58,14 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 void BillboardEntityManager::addBillboardEntity
 (
 	const string& ID, const string& diffuseMapPath,
-	Vec3 T, Vec3 R, Vec3 S,
+	Vec3 position, Vec3 rotation, Vec3 size,
 	bool transparent, bool facingCameraX, bool facingCameraY
 )
 {
-	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
+	// Create entity
+	addBillboardEntity(ID, Vec3(1.0f), position, rotation, size, facingCameraX, facingCameraY);
 
+	// Set properties
 	auto entity = getEntity(ID);
 	entity->setDiffuseMap(_textureLoader.getTexture2D(diffuseMapPath, true, true));
 	entity->setDiffuseMapPath(diffuseMapPath);
@@ -71,18 +74,28 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::addBillboardEntity
 (
-	const string& ID, const string& text,
+	const string& ID, const string& textContent,
 	const string& fontPath, Vec3 color,
-	Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY
+	Vec3 position, Vec3 rotation, Vec3 size, bool facingCameraX, bool facingCameraY
 )
 {
-	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
+	// Check if text content is invalid
+	if (textContent.empty())
+	{
+		Logger::throwWarning("Tried to create billboard with ID \"" + ID + "\": text content cannot be empty!");
+	}
+	else
+	{
+		// Create entity
+		addBillboardEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
 
-	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_textureLoader.getText(text, fontPath));
-	entity->setTransparent(true);
-	entity->setTextContent(text);
-	entity->setFontPath(fontPath);
+		// Set properties
+		auto entity = getEntity(ID);
+		entity->setDiffuseMap(_textureLoader.getText(textContent, fontPath));
+		entity->setTransparent(true);
+		entity->setTextContent(textContent);
+		entity->setFontPath(fontPath);
+	}
 }
 
 void BillboardEntityManager::update()

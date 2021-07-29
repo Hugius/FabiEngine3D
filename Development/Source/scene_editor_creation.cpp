@@ -65,57 +65,57 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, _fe3d.terrainEntity_getSpecularLightingIntensity(previewID));
 
 	// Diffuse map
-	if (_fe3d.terrainEntity_getDiffuseMapPath(previewID) != "")
+	if (_fe3d.terrainEntity_hasDiffuseMap(previewID))
 	{
 		_fe3d.terrainEntity_setDiffuseMap(newID, _fe3d.terrainEntity_getDiffuseMapPath(previewID));
 	}
 
 	// Normal map
-	if (_fe3d.terrainEntity_getNormalMapPath(previewID) != "")
+	if (_fe3d.terrainEntity_hasNormalMap(previewID))
 	{
 		_fe3d.terrainEntity_setNormalMap(newID, _fe3d.terrainEntity_getNormalMapPath(previewID));
 	}
 
 	// Normal map R
-	if (_fe3d.terrainEntity_getNormalMapPathR(previewID) != "")
+	if (_fe3d.terrainEntity_hasNormalMapR(previewID))
 	{
 		_fe3d.terrainEntity_setNormalMapR(newID, _fe3d.terrainEntity_getNormalMapPathR(previewID));
 	}
 
 	// Normal map G
-	if (_fe3d.terrainEntity_getNormalMapPathG(previewID) != "")
+	if (_fe3d.terrainEntity_hasNormalMapG(previewID))
 	{
 		_fe3d.terrainEntity_setNormalMapG(newID, _fe3d.terrainEntity_getNormalMapPathG(previewID));
 	}
 
 	// Normal map B
-	if (_fe3d.terrainEntity_getNormalMapPathB(previewID) != "")
+	if (_fe3d.terrainEntity_hasNormalMapB(previewID))
 	{
 		_fe3d.terrainEntity_setNormalMapB(newID, _fe3d.terrainEntity_getNormalMapPathB(previewID));
 	}
 
 	// Blend map
-	if (_fe3d.terrainEntity_getBlendMapPath(previewID) != "")
+	if (_fe3d.terrainEntity_hasBlendMap(previewID))
 	{
 		_fe3d.terrainEntity_setBlendMap(newID, _fe3d.terrainEntity_getBlendMapPath(previewID));
 	}
 
 	// Blend map red
-	if (_fe3d.terrainEntity_getBlendMapPathR(previewID) != "")
+	if (_fe3d.terrainEntity_hasDiffuseMapR(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapR(newID, _fe3d.terrainEntity_getBlendMapPathR(previewID));
+		_fe3d.terrainEntity_setDiffuseMapR(newID, _fe3d.terrainEntity_getDiffuseMapPathR(previewID));
 	}
 
 	// Blend map green
-	if (_fe3d.terrainEntity_getBlendMapPathG(previewID) != "")
+	if (_fe3d.terrainEntity_hasDiffuseMapG(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapG(newID, _fe3d.terrainEntity_getBlendMapPathG(previewID));
+		_fe3d.terrainEntity_setDiffuseMapG(newID, _fe3d.terrainEntity_getDiffuseMapPathG(previewID));
 	}
 
 	// Blend map blue
-	if (_fe3d.terrainEntity_getBlendMapPathB(previewID) != "")
+	if (_fe3d.terrainEntity_hasDiffuseMapB(previewID))
 	{
-		_fe3d.terrainEntity_setDiffuseMapB(newID, _fe3d.terrainEntity_getBlendMapPathB(previewID));
+		_fe3d.terrainEntity_setDiffuseMapB(newID, _fe3d.terrainEntity_getDiffuseMapPathB(previewID));
 	}
 
 	// Save ID
@@ -166,19 +166,19 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	_fe3d.waterEntity_setSpeed(newID, _fe3d.waterEntity_getSpeed(previewID));
 
 	// DUDV map
-	if (_fe3d.waterEntity_getDudvMapPath(previewID) != "")
+	if (_fe3d.waterEntity_hasDudvMap(previewID))
 	{
 		_fe3d.waterEntity_setDudvMap(newID, _fe3d.waterEntity_getDudvMapPath(previewID));
 	}
 
 	// Normal map
-	if (_fe3d.waterEntity_getNormalMapPath(previewID) != "")
+	if (_fe3d.waterEntity_hasNormalMap(previewID))
 	{
 		_fe3d.waterEntity_setNormalMap(newID, _fe3d.waterEntity_getNormalMapPath(previewID));
 	}
 
 	// Displacement map
-	if (_fe3d.waterEntity_getDisplacementMapPath(previewID) != "")
+	if (_fe3d.waterEntity_hasDisplacementMap(previewID))
 	{
 		_fe3d.waterEntity_setDisplacementMap(newID, _fe3d.waterEntity_getDisplacementMapPath(previewID));
 	}
@@ -355,11 +355,11 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine billboard entity type
-	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
+	if (_fe3d.billboardEntity_hasDiffuseMap(previewID)) // Textured billboard
 	{
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}
-	else if (_fe3d.billboardEntity_getFontPath(previewID) != "") // Text billboard
+	else if (!_fe3d.billboardEntity_getTextContent(previewID).empty()) // Text billboard
 	{
 		_fe3d.billboardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
 		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));

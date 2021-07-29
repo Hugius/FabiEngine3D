@@ -17,6 +17,11 @@ void ImageEntity::setDiffuseMap(GLuint value)
 	_diffuseMap = value;
 }
 
+void ImageEntity::setDiffuseMapPath(const string& value)
+{
+	_diffuseMapPath = value;
+}
+
 void ImageEntity::setColor(Vec3 value)
 {
 	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
@@ -239,6 +244,11 @@ const int ImageEntity::getMaxSpriteAnimationLoops() const
 const GLuint ImageEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
+}
+
+const string& ImageEntity::getDiffuseMapPath() const
+{
+	return _diffuseMapPath;
 }
 
 const Vec3 ImageEntity::getColor() const

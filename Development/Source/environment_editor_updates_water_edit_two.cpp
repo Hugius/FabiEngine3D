@@ -130,12 +130,9 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		}
 
 		// Button hoverabilities
-		string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(_currentWaterID);
-		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(_currentWaterID);
-		string normalMapPath = _fe3d.waterEntity_getNormalMapPath(_currentWaterID);
-		screen->getButton("isWaving")->setHoverable(displacementMapPath != "");
-		screen->getButton("isRippling")->setHoverable(dudvMapPath != "");
-		screen->getButton("isSpecular")->setHoverable(normalMapPath != "");
+		screen->getButton("isRippling")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID));
+		screen->getButton("isSpecular")->setHoverable(_fe3d.waterEntity_hasNormalMap(_currentWaterID));
+		screen->getButton("isWaving")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 
 		// Button text contents
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");

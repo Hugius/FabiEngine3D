@@ -28,9 +28,18 @@ void FabiEngine3D::imageEntity_setVisible(const string& ID, bool isVisible)
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::imageEntity_changeDiffuseMap(const string& ID, const string& texturePath)
+void FabiEngine3D::imageEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
+	if (texturePath.empty())
+	{
+		_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(0);
+		_core->_imageEntityManager.getEntity(ID)->setDiffuseMapPath("");
+	}
+	else
+	{
+		_core->_imageEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
+		_core->_imageEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+	}
 }
 
 const bool FabiEngine3D::imageEntity_isExisting(const string& ID)
@@ -121,6 +130,11 @@ const vector<string> FabiEngine3D::imageEntity_getAllIDs()
 	}
 
 	return IDs;
+}
+
+const string& FabiEngine3D::imageEntity_getDiffuseMapPath(const string& ID)
+{
+	_core->_imageEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
 const Vec2 FabiEngine3D::imageEntity_getSize(const string& ID)
@@ -223,14 +237,19 @@ const bool FabiEngine3D::imageEntity_isSpriteAnimationPaused(const string& ID)
 	return _core->_imageEntityManager.getEntity(ID)->isSpriteAnimationPaused();
 }
 
+const bool FabiEngine3D::imageEntity_hasDiffuseMap(const string& ID)
+{
+	return _core->_imageEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
 const bool FabiEngine3D::imageEntity_isMirroredHorizontally(const string& ID)
 {
-	return _core->_imageEntityManager.getEntity(ID)->isMirroredHorizonally();;
+	return _core->_imageEntityManager.getEntity(ID)->isMirroredHorizonally();
 }
 
 const bool FabiEngine3D::imageEntity_isMirroredVertically(const string& ID)
 {
-	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();;
+	return _core->_imageEntityManager.getEntity(ID)->isMirroredVertically();
 }
 
 const unsigned int FabiEngine3D::imageEntity_getSpriteAnimationRows(const string& ID)

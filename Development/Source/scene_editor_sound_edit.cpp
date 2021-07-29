@@ -43,7 +43,7 @@ void SceneEditor::_updateSoundEditing()
 						_selectSound(SELECTED_SOUND_ID);
 
 						// Change cursor
-						_fe3d.imageEntity_changeDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+						_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked speaker
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))

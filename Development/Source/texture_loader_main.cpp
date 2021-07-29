@@ -14,7 +14,7 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	const string fullFilePath = string(rootDir + filePath);
 
 	// Load actual image data
-	SDL_Surface * image = IMG_Load(fullFilePath.c_str());
+	SDL_Surface* image = IMG_Load(fullFilePath.c_str());
 
 	// Return
 	return image;

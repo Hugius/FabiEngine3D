@@ -79,7 +79,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 						// Temporary values
 						string partID;
 						Vec3 targetTransformation, rotationOrigin, speed;
-						int speedType, transformationType;;
+						int speedType, transformationType;
 
 						// Extract data
 						iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>

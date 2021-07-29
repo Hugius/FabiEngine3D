@@ -13,9 +13,9 @@ void FabiEngine3D::billboardEntity_add(const string& ID, const string& diffuseMa
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::billboardEntity_add(const string& ID, const string& text, const string& fontPath, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible)
+void FabiEngine3D::billboardEntity_add(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.addBillboardEntity(ID, textContent, fontPath, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
@@ -298,15 +298,20 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 
 void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string& textContent)
 {
-	// Check if text content is not the same as the current one
+	// Check if new text content is not the same as the current one
 	if (_core->_billboardEntityManager.getEntity(ID)->getTextContent() != textContent)
 	{
-		string fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+		// Set text content
 		_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
 
-		// Only update texture if font is loaded
-		if (fontPath != "")
+		// Check if text content is invalid
+		if (textContent.empty())
 		{
+			Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": cannot be empty!");
+		}
+		else
+		{
+			auto fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
 			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
 			_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
 		}
@@ -386,6 +391,11 @@ const bool FabiEngine3D::billboardEntity_isSpriteAnimationPlaying(const string& 
 const bool FabiEngine3D::billboardEntity_isSpriteAnimationPaused(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationPaused();
+}
+
+const bool FabiEngine3D::billboardEntity_hasDiffuseMap(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->hasDiffuseMap();
 }
 
 const bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)

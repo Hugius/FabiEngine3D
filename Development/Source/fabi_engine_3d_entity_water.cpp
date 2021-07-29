@@ -72,6 +72,21 @@ const bool FabiEngine3D::waterEntity_isRefractive(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->isRefractive();
 }
 
+const bool FabiEngine3D::waterEntity_hasDudvMap(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->hasDudvMap();
+}
+
+const bool FabiEngine3D::waterEntity_hasNormalMap(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->hasNormalMap();
+}
+
+const bool FabiEngine3D::waterEntity_hasDisplacementMap(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->hasDisplacementMap();
+}
+
 void FabiEngine3D::waterEntity_select(const string& ID)
 {
 	_core->_waterEntityManager.selectWater(ID);
@@ -125,20 +140,44 @@ void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
 
 void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(texturePath);
+	if (texturePath.empty())
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(0);
+		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath("");
+	}
+	else
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(texturePath);
+	}
 }
 
 void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
+	if (texturePath.empty())
+	{
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(0);
+		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath("");
+	}
+	else
+	{
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
+	}
 }
 
 void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(texturePath);
+	if (texturePath.empty())
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(0);
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath("");
+	}
+	else
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(texturePath);
+	}
 }
 
 void FabiEngine3D::waterEntity_setWaveHeight(const string& ID, float height)

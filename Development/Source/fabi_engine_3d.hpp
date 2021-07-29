@@ -144,17 +144,17 @@ public:
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_setVisible(const string& ID, bool isVisible);
 	void terrainEntity_select(const string& ID);
-	void terrainEntity_setHeightMap(const string& ID, const string& texturePath);
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
-	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
-	void terrainEntity_setNormalMap(const string& ID, const string& texturePath);
 	void terrainEntity_setLightness(const string& ID, float lightness);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
+	void terrainEntity_setHeightMap(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
+	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void terrainEntity_setDiffuseMapR(const string& ID, const string& texturePath);
 	void terrainEntity_setDiffuseMapG(const string& ID, const string& texturePath);
 	void terrainEntity_setDiffuseMapB(const string& ID, const string& texturePath);
+	void terrainEntity_setNormalMap(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapR(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapG(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapB(const string& ID, const string& texturePath);
@@ -167,13 +167,13 @@ public:
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs();
 	const string terrainEntity_getSelectedID();
-	const string& terrainEntity_getDiffuseMapPath(const string& ID);
-	const string& terrainEntity_getNormalMapPath(const string& ID);
 	const string& terrainEntity_getHeightMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPath(const string& ID);
-	const string& terrainEntity_getBlendMapPathR(const string& ID);
-	const string& terrainEntity_getBlendMapPathG(const string& ID);
-	const string& terrainEntity_getBlendMapPathB(const string& ID);
+	const string& terrainEntity_getDiffuseMapPath(const string& ID);
+	const string& terrainEntity_getDiffuseMapPathR(const string& ID);
+	const string& terrainEntity_getDiffuseMapPathG(const string& ID);
+	const string& terrainEntity_getDiffuseMapPathB(const string& ID);
+	const string& terrainEntity_getNormalMapPath(const string& ID);
 	const string& terrainEntity_getNormalMapPathR(const string& ID);
 	const string& terrainEntity_getNormalMapPathG(const string& ID);
 	const string& terrainEntity_getNormalMapPathB(const string& ID);
@@ -191,6 +191,15 @@ public:
 	const bool terrainEntity_isVisible(const string& ID);
 	const bool terrainEntity_isSpecularLighted(const string& ID);
 	const bool terrainEntity_isInside(const string& ID, float x, float z);
+	const bool terrainEntity_hasBlendMap(const string& ID);
+	const bool terrainEntity_hasDiffuseMap(const string& ID);
+	const bool terrainEntity_hasDiffuseMapR(const string& ID);
+	const bool terrainEntity_hasDiffuseMapG(const string& ID);
+	const bool terrainEntity_hasDiffuseMapB(const string& ID);
+	const bool terrainEntity_hasNormalMap(const string& ID);
+	const bool terrainEntity_hasNormalMapR(const string& ID);
+	const bool terrainEntity_hasNormalMapG(const string& ID);
+	const bool terrainEntity_hasNormalMapB(const string& ID);
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);
@@ -240,6 +249,9 @@ public:
 	const bool waterEntity_isSpecularLighted(const string& ID);
 	const bool waterEntity_isReflective(const string& ID);
 	const bool waterEntity_isRefractive(const string& ID);
+	const bool waterEntity_hasDudvMap(const string& ID);
+	const bool waterEntity_hasNormalMap(const string& ID);
+	const bool waterEntity_hasDisplacementMap(const string& ID);
 
 	// Model entity interface - setters
 	void modelEntity_add
@@ -397,7 +409,7 @@ public:
 	// Billboard entity interface (text) - setters
 	void billboardEntity_add
 	(
-		const string& ID, const string& text,
+		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,
 		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
@@ -429,6 +441,7 @@ public:
 	const bool billboardEntity_isSpriteAnimationStarted(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);
+	const bool billboardEntity_hasDiffuseMap(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible = true);
@@ -505,7 +518,7 @@ public:
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);
-	void imageEntity_changeDiffuseMap(const string& ID, const string& texturePath);
+	void imageEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void imageEntity_setPosition(const string& ID, Vec2 position);
 	void imageEntity_setRotation(const string& ID, float rotation);
 	void imageEntity_setSize(const string& ID, Vec2 size);
@@ -530,6 +543,7 @@ public:
 
 	// Image entity interface - getters
 	const vector<string> imageEntity_getAllIDs();
+	const string& imageEntity_getDiffuseMapPath(const string& ID);
 	const Vec3 imageEntity_getColor(const string& ID);
 	const Vec2 imageEntity_getPosition(const string& ID);
 	const Vec2 imageEntity_getSize(const string& ID);
@@ -551,6 +565,7 @@ public:
 	const bool imageEntity_isSpriteAnimationStarted(const string& ID);
 	const bool imageEntity_isSpriteAnimationPlaying(const string& ID);
 	const bool imageEntity_isSpriteAnimationPaused(const string& ID);
+	const bool imageEntity_hasDiffuseMap(const string& ID);
 
 	// Text entity interface - setters
 	void textEntity_add
@@ -576,6 +591,7 @@ public:
 
 	// Text interface - getters
 	const vector<string> textEntity_getAllIDs();
+	const string& textEntity_getFontPath(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);
 	const Vec3 textEntity_getColor(const string& ID);
 	const Vec2 textEntity_getPosition(const string& ID);
@@ -588,7 +604,7 @@ public:
 	const bool textEntity_isVisible(const string& ID);
 
 	// Sound entity interface - setters
-	void soundEntity_add(const string& ID, const string& audioPath);
+	void soundEntity_add(const string& ID, const string& filePath);
 	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
 	void soundEntity_delete(const string& ID);
 	void soundEntity_deleteAll();
@@ -621,7 +637,7 @@ public:
 	const bool soundEntity_is3D(const string& ID);
 
 	// Music interface - setters
-	void music_addToPlaylist(const string& audioPath);
+	void music_addToPlaylist(const string& filePath);
 	void music_clearPlaylist();
 	void music_setVolume(float volume);
 	void music_pause();
@@ -652,7 +668,7 @@ public:
 	void gfx_enableSkyExposure(float factor, float speed);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
-	void gfx_enableLensFlare(const string& diffuseMapPath, float intensity, float multiplier);
+	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
 	void gfx_disableAmbientLighting(bool resetProperties = false);
 	void gfx_disableDirectionalLighting(bool resetProperties = false);
 	void gfx_disableSpecularLighting(bool resetProperties = false);

@@ -224,7 +224,7 @@ const bool WaterEntity::isRippling() const
 
 const bool WaterEntity::isSpecularLighted() const
 {
-	return _isSpecularLighted;;
+	return _isSpecularLighted;
 }
 
 const bool WaterEntity::isReflective() const

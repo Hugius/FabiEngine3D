@@ -84,6 +84,51 @@ const bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float
 	return _core->_terrainEntityManager.isInside(ID, x, z);
 }
 
+const bool FabiEngine3D::terrainEntity_hasBlendMap(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasBlendMap();
+}
+
+const bool FabiEngine3D::terrainEntity_hasDiffuseMap(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+const bool FabiEngine3D::terrainEntity_hasDiffuseMapR(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapR();
+}
+
+const bool FabiEngine3D::terrainEntity_hasDiffuseMapG(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapG();
+}
+
+const bool FabiEngine3D::terrainEntity_hasDiffuseMapB(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasDiffuseMapB();
+}
+
+const bool FabiEngine3D::terrainEntity_hasNormalMap(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMap();
+}
+
+const bool FabiEngine3D::terrainEntity_hasNormalMapR(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapR();
+}
+
+const bool FabiEngine3D::terrainEntity_hasNormalMapG(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapG();
+}
+
+const bool FabiEngine3D::terrainEntity_hasNormalMapB(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->hasNormalMapB();
+}
+
 const float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)
 {
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
@@ -138,17 +183,17 @@ const string& FabiEngine3D::terrainEntity_getBlendMapPath(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPath();
 }
 
-const string& FabiEngine3D::terrainEntity_getBlendMapPathR(const string& ID)
+const string& FabiEngine3D::terrainEntity_getDiffuseMapPathR(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathR();
 }
 
-const string& FabiEngine3D::terrainEntity_getBlendMapPathG(const string& ID)
+const string& FabiEngine3D::terrainEntity_getDiffuseMapPathG(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathG();
 }
 
-const string& FabiEngine3D::terrainEntity_getBlendMapPathB(const string& ID)
+const string& FabiEngine3D::terrainEntity_getDiffuseMapPathB(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathB();
 }

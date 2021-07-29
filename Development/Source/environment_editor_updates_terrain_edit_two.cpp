@@ -156,18 +156,18 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		}
 
 		// Filling statuses
-		bool loadedBlendMap = _fe3d.terrainEntity_getBlendMapPath(_currentTerrainID)  != "";
-		bool loadedRedTex   = _fe3d.terrainEntity_getBlendMapPathR(_currentTerrainID) != "";
-		bool loadedGreenTex = _fe3d.terrainEntity_getBlendMapPathG(_currentTerrainID) != "";
-		bool loadedBlueTex  = _fe3d.terrainEntity_getBlendMapPathB(_currentTerrainID) != "";
+		bool hasBlendMap = _fe3d.terrainEntity_hasBlendMap(_currentTerrainID);
+		bool hasDiffuseMapR = _fe3d.terrainEntity_hasDiffuseMapR(_currentTerrainID);
+		bool hasDiffuseMapG = _fe3d.terrainEntity_hasDiffuseMapG(_currentTerrainID);
+		bool hasDiffuseMapB = _fe3d.terrainEntity_hasDiffuseMapB(_currentTerrainID);
 
 		// Button hoverability
-		screen->getButton("red")->setHoverable(loadedBlendMap);
-		screen->getButton("green")->setHoverable(loadedBlendMap);
-		screen->getButton("blue")->setHoverable(loadedBlendMap);
-		screen->getButton("redRepeat")->setHoverable(loadedBlendMap && loadedRedTex);
-		screen->getButton("greenRepeat")->setHoverable(loadedBlendMap && loadedGreenTex);
-		screen->getButton("blueRepeat")->setHoverable(loadedBlendMap && loadedBlueTex);
+		screen->getButton("red")->setHoverable(hasBlendMap);
+		screen->getButton("green")->setHoverable(hasBlendMap);
+		screen->getButton("blue")->setHoverable(hasBlendMap);
+		screen->getButton("redRepeat")->setHoverable(hasBlendMap && hasDiffuseMapR);
+		screen->getButton("greenRepeat")->setHoverable(hasBlendMap && hasDiffuseMapG);
+		screen->getButton("blueRepeat")->setHoverable(hasBlendMap && hasDiffuseMapB);
 	}
 }
 

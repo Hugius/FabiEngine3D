@@ -249,9 +249,9 @@ bool EnvironmentEditor::saveTerrainEntitiesToFile()
 		string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath(terrainID);
 		string normalMapPath = _fe3d.terrainEntity_getNormalMapPath(terrainID);
 		string blendMapPath = _fe3d.terrainEntity_getBlendMapPath(terrainID);
-		string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR(terrainID);
-		string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG(terrainID);
-		string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB(terrainID);
+		string blendMapPathR = _fe3d.terrainEntity_getDiffuseMapPathR(terrainID);
+		string blendMapPathG = _fe3d.terrainEntity_getDiffuseMapPathG(terrainID);
+		string blendMapPathB = _fe3d.terrainEntity_getDiffuseMapPathB(terrainID);
 		string normalMapPathR = _fe3d.terrainEntity_getNormalMapPathR(terrainID);
 		string normalMapPathG = _fe3d.terrainEntity_getNormalMapPathG(terrainID);
 		string normalMapPathB = _fe3d.terrainEntity_getNormalMapPathB(terrainID);

@@ -12,6 +12,7 @@ public:
 
 	// Texture & color
 	void setDiffuseMap(GLuint value);
+	void setDiffuseMapPath(const string& value);
 	void setColor(Vec3 value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
@@ -45,6 +46,7 @@ public:
 
 	// Texture & color
 	const GLuint getDiffuseMap() const;
+	const string& getDiffuseMapPath() const;
 	const Vec3 getColor() const;
 	const float getAlpha() const;
 	const bool isMirroredHorizonally() const;
@@ -81,6 +83,8 @@ private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
 	GLuint _diffuseMap = 0;
+
+	string _diffuseMapPath = "";
 
 	Vec3 _color = Vec3(1.0f);
 

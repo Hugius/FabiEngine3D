@@ -12,5 +12,6 @@ public:
 	void initialize() override;
 	void update() override;
 
+private:
 	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
 };

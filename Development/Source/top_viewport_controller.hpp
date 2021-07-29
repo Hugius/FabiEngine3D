@@ -26,7 +26,6 @@ public:
 	bool isScriptRunning();
 	bool isProjectCorrupted(const string& projectDirectoryPath);
 
-	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.1f, 0.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
 	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
@@ -58,6 +57,8 @@ private:
 	shared_ptr<EngineGuiWindow> _miscWindow = nullptr;
 
 	string _currentProjectID = "";
+
+	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
 
 	bool _creatingProject = false;
 	bool _loadingProject = false;

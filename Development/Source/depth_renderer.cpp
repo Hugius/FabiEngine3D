@@ -113,7 +113,7 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 		if (entity->isCameraStatic())
 		{
 			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
@@ -199,7 +199,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_minDiffuseMapAlpha", Config::MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 
 		// Bind textures
 		if (entity->hasDiffuseMap())

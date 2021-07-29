@@ -47,7 +47,6 @@ public:
 	static inline const unsigned int MAX_AUDIO_CHANNELS = 512;
 	static inline const unsigned int UPDATES_PER_SECOND = 144;
 	static inline const float MS_PER_UPDATE = (1000.0f / static_cast<float>(UPDATES_PER_SECOND));
-	static inline const float MIN_DIFFUSE_MAP_ALPHA = 0.25f;
 
 private:
 	Config();

@@ -29,7 +29,6 @@ public:
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 
-	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
 	static inline const Vec3 SCROLLING_LIST_COLOR = Vec3(0.25f);
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.1f, 0.1f, 1.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.5f, 0.5f, 1.0f);
@@ -47,4 +46,6 @@ private:
 	SettingsEditor _settingsEditor;
 
 	string _lastActiveEditorScreen = "";
+
+	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
 };

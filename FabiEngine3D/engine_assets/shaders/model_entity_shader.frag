@@ -113,43 +113,52 @@ float getSpecularLighting(vec3 position, vec3 normal);
 // Process fragment
 void main()
 {
+    // Calculate light mapping
+    vec3 lightMapColor = getLightMapping();
+
     // Calculate normal mapping
     vec3 normal = getNormalMapping();
 
-    // Calculate light mapping
-    vec3 lightMapping = getLightMapping();
-
 	// Calculate lighting
-	bool isBright = ((lightMapping != vec3(0.0f)) || u_isBright);
-	vec3 lighting = vec3(1.0f);
-	if(!isBright)
-	{
-		float shadow	 = getShadows();
-		vec3 ambient	 = getAmbientLighting();
-		vec3 directional = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadow == 1.0f)));
-		vec3 point		 = getPointLighting(normal);
-		vec3 spot		 = getSpotLighting(normal);
-		lighting		 = vec3(((ambient + directional) * shadow) + point + spot);
-	}
+	bool isBright = ((lightMapColor != vec3(0.0f)) || u_isBright);
+	float shadowLighting	 = getShadows();
+	vec3 ambientLighting	 = getAmbientLighting();
+	vec3 directionalLighting = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadowLighting == 1.0f)));
+	vec3 pointLighting		 = getPointLighting(normal);
+	vec3 spotLighting		 = getSpotLighting(normal);
 
-	// Calculate primary color
-	vec3 primaryColor;
-	primaryColor  = getDiffuseMapping();
+	// Calculate base color
+	vec3 primaryColor = vec3(0.0f);
+	primaryColor += getDiffuseMapping();
+	primaryColor += lightMapColor;
 	primaryColor  = getSkyReflections(primaryColor, normal);
 	primaryColor  = getSceneReflections(primaryColor);
-	primaryColor *= u_lightness;
 	primaryColor *= u_color;
-	primaryColor  = mix(primaryColor, (vec3(1.0f) - clamp(primaryColor, vec3(0.0f), vec3(1.0f))), clamp(u_inversion, 0.0f, 1.0f));
-	primaryColor *= lighting;
-	primaryColor  = getFog(primaryColor);
-    primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
+	primaryColor *= u_lightness;
+	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
+	
+	// Apply lighting
+	if(!isBright)
+	{
+		vec3 lighting = vec3(0.0f);
+		lighting += ambientLighting;
+		lighting += directionalLighting;
+		lighting *= shadowLighting;
+		lighting += pointLighting;
+		lighting += spotLighting;
+		primaryColor *= lighting;
+	}
 
-	// Calculate secondary color
-	vec3 secondaryColor = (isBright ? primaryColor : vec3(0.0f));
+	// Apply fog
+	primaryColor = getFog(primaryColor);
+
+	// Apply gamma correction
+    primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, u_alpha);
-	o_secondaryColor = vec4(secondaryColor, 1.0f);
+	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
 }
 
 vec3 getNormalMapping()

@@ -28,4 +28,6 @@ protected:
 	RenderShader _shader;
 
 	RenderBus& _renderBus;
+
+	static inline const float MIN_DIFFUSE_MAP_ALPHA = 0.25f;
 };

@@ -36,16 +36,6 @@ const bool FabiEngine3D::gfx_isFogEnabled()
 	return _core->_renderBus.isFogEnabled();
 }
 
-const bool FabiEngine3D::gfx_isSkyReflectionsEnabled()
-{
-	return _core->_renderBus.isSkyReflectionsEnabled();
-}
-
-const bool FabiEngine3D::gfx_isSceneReflectionsEnabled()
-{
-	return _core->_renderBus.isSceneReflectionsEnabled();
-}
-
 const bool FabiEngine3D::gfx_isBloomEnabled()
 {
 	return _core->_renderBus.isBloomEnabled();
@@ -161,19 +151,9 @@ const Vec3 FabiEngine3D::gfx_getFogColor()
 	return _core->_renderBus.getFogColor();
 }
 
-const float FabiEngine3D::gfx_getSkyReflectionFactor()
-{
-	return _core->_renderBus.getSkyReflectionMixValue();
-}
-
 const float FabiEngine3D::gfx_getSceneReflectionHeight()
 {
 	return _core->_renderBus.getSceneReflectionHeight();
-}
-
-const float FabiEngine3D::gfx_getSceneReflectionFactor()
-{
-	return _core->_renderBus.getSceneReflectionMixValue();
 }
 
 const Vec3 FabiEngine3D::gfx_getShadowEye()

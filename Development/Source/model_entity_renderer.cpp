@@ -35,16 +35,12 @@ void ModelEntityRenderer::bind()
 	_shader.uploadUniform("u_isSpotLightEnabled", _renderBus.isSpotLightingEnabled());
 	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_isPointLightEnabled", _renderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_skyReflectionsEnabled", _renderBus.isSkyReflectionsEnabled());
-	_shader.uploadUniform("u_sceneReflectionsEnabled", _renderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize", _renderBus.getShadowAreaSize());
 	_shader.uploadUniform("u_shadowAreaCenter", _renderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_isLightedShadowingEnabled", _renderBus.isLightedShadowingEnabled());
-	_shader.uploadUniform("u_skyReflectionMixValue", _renderBus.getSkyReflectionMixValue());
-	_shader.uploadUniform("u_sceneReflectionMixValue", _renderBus.getSceneReflectionMixValue());
 	_shader.uploadUniform("u_skyMixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainSkyLightness", _renderBus.getMainSkyLightness());
 	_shader.uploadUniform("u_mixSkyLightness", _renderBus.getMixSkyLightness());

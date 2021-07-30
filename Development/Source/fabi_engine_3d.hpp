@@ -650,6 +650,7 @@ public:
 	const bool music_isPaused();
 
 	// Graphics interface - setters
+	void gfx_setSceneReflectionHeight(float height);
 	void gfx_setAnisotropicFilteringQuality(int quality);
 	void gfx_setShadowQuality(int quality);
 	void gfx_setReflectionQuality(int quality);
@@ -660,8 +661,6 @@ public:
 	void gfx_enablePointLighting();
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
-	void gfx_enableSkyReflections(float factor);
-	void gfx_enableSceneReflections(float factor, float height);
 	void gfx_enableFXAA();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
@@ -675,8 +674,6 @@ public:
 	void gfx_disablePointLighting(bool resetProperties = false);
 	void gfx_disableSpotLighting(bool resetProperties = false);
 	void gfx_disableFog(bool resetProperties = false);
-	void gfx_disableSkyReflections(bool resetProperties = false);
-	void gfx_disableSceneReflections(bool resetProperties = false);
 	void gfx_disableFXAA(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
@@ -702,9 +699,7 @@ public:
 	const float gfx_getFogMinDistance();
 	const float gfx_getFogMaxDistance();
 	const float gfx_getFogThickness();
-	const float gfx_getSkyReflectionFactor();
 	const float gfx_getSceneReflectionHeight();
-	const float gfx_getSceneReflectionFactor();
 	const float gfx_getShadowSize();
 	const float gfx_getShadowReach();
 	const float gfx_getShadowLightness();
@@ -730,8 +725,6 @@ public:
 	const bool gfx_isPointLightingEnabled();
 	const bool gfx_isSpotLightingEnabled();
 	const bool gfx_isFogEnabled();
-	const bool gfx_isSkyReflectionsEnabled();
-	const bool gfx_isSceneReflectionsEnabled();
 	const bool gfx_isBloomEnabled();
 	const bool gfx_isSkyExposureEnabled();
 	const bool gfx_isShadowsEnabled();

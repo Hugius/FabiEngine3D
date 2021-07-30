@@ -1,6 +1,11 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
+void FabiEngine3D::gfx_setSceneReflectionHeight(float height)
+{
+	_core->_renderBus.setSceneReflectionHeight(height);
+}
+
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(int quality)
 {
 	_core->_renderBus.setAnisotropicFilteringQuality(quality);
@@ -108,33 +113,6 @@ void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float thi
 		_core->_renderBus.setFogMaxDistance(maxDistance);
 		_core->_renderBus.setFogThickness(thickness);
 		_core->_renderBus.setFogColor(color);
-	}
-}
-
-void FabiEngine3D::gfx_enableSkyReflections(float factor)
-{
-	if (_core->_renderBus.isSkyReflectionsEnabled())
-	{
-		Logger::throwWarning("Tried to enable sky reflections: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setSkyReflectionsEnabled(true);
-		_core->_renderBus.setSkyReflectionMixValue(factor);
-	}
-}
-
-void FabiEngine3D::gfx_enableSceneReflections(float factor, float height)
-{
-	if (_core->_renderBus.isSceneReflectionsEnabled())
-	{
-		Logger::throwWarning("Tried to enable scene reflections: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setSceneReflectionsEnabled(true);
-		_core->_renderBus.setSceneReflectionMixValue(factor);
-		_core->_renderBus.setSceneReflectionHeight(height);
 	}
 }
 
@@ -336,41 +314,6 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 	else
 	{
 		Logger::throwWarning("Tried to disable fog: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableSkyReflections(bool resetProperties)
-{
-	if (_core->_renderBus.isSkyReflectionsEnabled())
-	{
-		_core->_renderBus.setSkyReflectionsEnabled(false);
-
-		if (resetProperties)
-		{
-			_core->_renderBus.setSkyReflectionMixValue(0.0f);
-		}
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable sky reflections: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableSceneReflections(bool resetProperties)
-{
-	if (_core->_renderBus.isSceneReflectionsEnabled())
-	{
-		_core->_renderBus.setSceneReflectionsEnabled(false);
-
-		if (resetProperties)
-		{
-			_core->_renderBus.setSceneReflectionMixValue(0.0f);
-			_core->_renderBus.setSceneReflectionHeight(0.0f);
-		}
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable scene reflections: not enabled");
 	}
 }
 

@@ -189,8 +189,7 @@ void ScriptInterpreter::load()
 	// Default graphics
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableSkyReflections(0.5f);
-	_fe3d.gfx_enableSceneReflections(0.5f, 0.0f);
+	_fe3d.gfx_setSceneReflectionHeight(0.0f);
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
@@ -365,14 +364,6 @@ void ScriptInterpreter::unload()
 	if (_fe3d.gfx_isPointLightingEnabled())
 	{
 		_fe3d.gfx_disablePointLighting(true);
-	}
-	if (_fe3d.gfx_isSkyReflectionsEnabled())
-	{
-		_fe3d.gfx_disableSkyReflections(true);
-	}
-	if (_fe3d.gfx_isSceneReflectionsEnabled())
-	{
-		_fe3d.gfx_disableSceneReflections(true);
 	}
 
 	// Delete game image entities

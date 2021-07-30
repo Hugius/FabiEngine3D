@@ -363,8 +363,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				reflectionHeight;
 
 			// Set height
-			_fe3d.gfx_disableSceneReflections();
-			_fe3d.gfx_enableSceneReflections(0.5f, reflectionHeight);
+			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
 		}
 		else if (lineType == "EDITOR_SPEED")
 		{

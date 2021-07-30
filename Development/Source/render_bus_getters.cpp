@@ -165,11 +165,6 @@ const float RenderBus::getSceneReflectionHeight()
 	return _sceneReflectionHeight;
 }
 
-const float RenderBus::getSceneReflectionMixValue()
-{
-	return _sceneReflectionMixValue;
-}
-
 const float RenderBus::getShadowAreaSize()
 {
 	return _shadowAreaSize;
@@ -300,11 +295,6 @@ const float RenderBus::getDofBlurDistance()
 	return _dofBlurDistance;
 }
 
-const float RenderBus::getSkyReflectionMixValue()
-{
-	return _skyReflectionMixValue;
-}
-
 const unsigned int RenderBus::getBloomBlurCount()
 {
 	return _bloomBlurCount;
@@ -340,11 +330,6 @@ const bool RenderBus::isFxaaEnabled()
 	return _isFxaaEnabled;
 }
 
-const bool RenderBus::isSceneReflectionsEnabled()
-{
-	return _isSceneReflectionsEnabled;
-}
-
 const bool RenderBus::isAmbientLightingEnabled()
 {
 	return _isAmbientLightingEnabled;
@@ -373,11 +358,6 @@ const bool RenderBus::isSpotLightingEnabled()
 const bool RenderBus::isFogEnabled()
 {
 	return _isFogEnabled;
-}
-
-const bool RenderBus::isSkyReflectionsEnabled()
-{
-	return _isSkyReflectionsEnabled;
 }
 
 const bool RenderBus::isBloomEnabled()

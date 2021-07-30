@@ -71,9 +71,7 @@ public:
 	void setFarZ(float value);
 	void setDofMaxDistance(float value);
 	void setDofBlurDistance(float value);
-	void setSkyReflectionMixValue(float value);
 	void setSceneReflectionHeight(float value);
-	void setSceneReflectionMixValue(float value);
 	void setShadowAreaSize(float value);
 	void setShadowAreaReach(float value);
 	void setShadowLightness(float value);
@@ -103,8 +101,6 @@ public:
 	void setPointLightingEnabled(bool value);
 	void setSpotLightingEnabled(bool value);
 	void setFogEnabled(bool value);
-	void setSkyReflectionsEnabled(bool value);
-	void setSceneReflectionsEnabled(bool value);
 	void setBloomEnabled(bool value);
 	void setSkyExposureEnabled(bool value);
 	void setShadowsEnabled(bool value);
@@ -182,9 +178,7 @@ public:
 	const float getFarZ();
 	const float getDofMaxDistance();
 	const float getDofBlurDistance();
-	const float getSkyReflectionMixValue();
 	const float getSceneReflectionHeight();
-	const float getSceneReflectionMixValue();
 	const float getShadowAreaSize();
 	const float getShadowAreaReach();
 	const float getShadowLightness();
@@ -213,8 +207,6 @@ public:
 	const bool isPointLightingEnabled();
 	const bool isSpotLightingEnabled();
 	const bool isFogEnabled();
-	const bool isSkyReflectionsEnabled();
-	const bool isSceneReflectionsEnabled();
 	const bool isBloomEnabled();
 	const bool isSkyExposureEnabled();
 	const bool isShadowsEnabled();
@@ -293,9 +285,7 @@ private:
 	float _farZ = 0.0f;
 	float _dofMaxDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
-	float _skyReflectionMixValue = 0.0f;
 	float _sceneReflectionHeight = 0.0f;
-	float _sceneReflectionMixValue = 0.0f;
 	float _shadowAreaSize = 0.0f;
 	float _shadowAreaReach = 0.0f;
 	float _shadowLightness = 0.0f;
@@ -324,8 +314,6 @@ private:
 	bool _isPointLightingEnabled = false;
 	bool _isSpotLightingEnabled = false;
 	bool _isFogEnabled = false;
-	bool _isSkyReflectionsEnabled = false;
-	bool _isSceneReflectionsEnabled = false;
 	bool _isBloomEnabled = false;
 	bool _isSkyExposureEnabled = false;
 	bool _isShadowsEnabled = false;

@@ -49,8 +49,6 @@ uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
 uniform float u_alpha;
 uniform float u_minDiffuseMapAlpha;
-uniform float u_skyReflectionMixValue;
-uniform float u_sceneReflectionMixValue;
 uniform float u_lightness;
 uniform float u_inversion;
 uniform float u_shadowAreaSize;
@@ -77,8 +75,6 @@ uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isSpecularLightEnabled;
 uniform bool u_isSpotLightEnabled;
 uniform bool u_isPointLightEnabled;
-uniform bool u_skyReflectionsEnabled;
-uniform bool u_sceneReflectionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
@@ -351,7 +347,7 @@ vec3 getFog(vec3 color)
 
 vec3 getSkyReflections(vec3 color, vec3 normal)
 {
-	if(u_skyReflectionsEnabled && u_isSkyReflective)
+	if(u_isSkyReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = (u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f));
@@ -371,7 +367,7 @@ vec3 getSkyReflections(vec3 color, vec3 normal)
 			mainSkyColor 		 *= u_mainSkyColor;
 			mixSkyColor 		 *= u_mixSkyColor;
 			vec3 reflectColor     = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
-			vec3 mixedColor       = mix(color, reflectColor, u_skyReflectionMixValue);
+			vec3 mixedColor       = mix(color, reflectColor, 0.5f);
 
 			// Return
 			return mixedColor.rgb;
@@ -388,7 +384,7 @@ vec3 getSkyReflections(vec3 color, vec3 normal)
 
 vec3 getSceneReflections(vec3 color)
 {
-	if(u_sceneReflectionsEnabled && u_isSceneReflective)
+	if(u_isSceneReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);
@@ -400,7 +396,7 @@ vec3 getSceneReflections(vec3 color)
 			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
 			vec2 texCoords       = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
-			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionMixValue);
+			vec3 mixedColor      = mix(color.rgb, reflectionColor, 0.5f);
         
         	// Return
 			return mixedColor.rgb;

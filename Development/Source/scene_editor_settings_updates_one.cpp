@@ -55,8 +55,7 @@ void SceneEditor::_updateMainSettingsMenu()
 			// Setting reflection height
 			if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
 			{
-				_fe3d.gfx_disableSceneReflections();
-				_fe3d.gfx_enableSceneReflections(0.5f, reflectionHeight);
+				_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
 			}
 		}
 	}

@@ -16,7 +16,7 @@ void MasterRenderer::_captureSceneReflections()
 	}
 
 	// Check if needed to capture scene
-	if (_renderBus.isSceneReflectionsEnabled() && anyReflectiveModelFound)
+	if (anyReflectiveModelFound)
 	{
 		// Calculate distance between camera and reflection surface
 		float cameraDistance = (_camera.getPosition().y - _renderBus.getSceneReflectionHeight());

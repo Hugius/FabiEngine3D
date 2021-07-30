@@ -167,11 +167,6 @@ void RenderBus::setSceneReflectionHeight(float value)
 	_sceneReflectionHeight = value;
 }
 
-void RenderBus::setSceneReflectionMixValue(float value)
-{
-	_sceneReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
-}
-
 void RenderBus::setShadowAreaSize(float value)
 {
 	_shadowAreaSize = std::max(0.0f, value);
@@ -302,11 +297,6 @@ void RenderBus::setDofBlurDistance(float value)
 	_dofBlurDistance = std::max(0.0f, value);
 }
 
-void RenderBus::setSkyReflectionMixValue(float value)
-{
-	_skyReflectionMixValue = std::clamp(value, 0.0f, 1.0f);
-}
-
 void RenderBus::setBloomBlurCount(unsigned int value)
 {
 	_bloomBlurCount = value;
@@ -350,11 +340,6 @@ void RenderBus::setFxaaEnabled(bool value)
 	_isFxaaEnabled = value;
 }
 
-void RenderBus::setSceneReflectionsEnabled(bool value)
-{
-	_isSceneReflectionsEnabled = value;
-}
-
 void RenderBus::setAmbientLightingEnabled(bool value)
 {
 	_isAmbientLightingEnabled = value;
@@ -383,11 +368,6 @@ void RenderBus::setSpotLightingEnabled(bool value)
 void RenderBus::setFogEnabled(bool value)
 {
 	_isFogEnabled = value;
-}
-
-void RenderBus::setSkyReflectionsEnabled(bool value)
-{
-	_isSkyReflectionsEnabled = value;
 }
 
 void RenderBus::setBloomEnabled(bool value)

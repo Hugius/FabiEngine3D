@@ -45,11 +45,13 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
 			saveTerrainEntitiesToFile();
+			unloadTerrainEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
+			unloadTerrainEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}

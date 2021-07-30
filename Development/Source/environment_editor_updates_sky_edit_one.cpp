@@ -45,11 +45,13 @@ void EnvironmentEditor::_updateSkyMenuMain()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
 			saveSkyEntitiesToFile();
+			unloadSkyEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
+			unloadSkyEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}

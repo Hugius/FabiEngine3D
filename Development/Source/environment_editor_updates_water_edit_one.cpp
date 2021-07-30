@@ -45,11 +45,13 @@ void EnvironmentEditor::_updateWaterMenuMain()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
 			saveWaterEntitiesToFile();
+			unloadWaterEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
+			unloadWaterEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
 			_isInMainMenu = true;
 		}

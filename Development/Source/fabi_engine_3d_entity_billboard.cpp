@@ -289,11 +289,12 @@ const bool FabiEngine3D::billboardEntity_isBright(const string& ID)
 
 void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontPath)
 {
-	auto text = _core->_billboardEntityManager.getEntity(ID)->getTextContent();
+	// Set font
 	_core->_billboardEntityManager.getEntity(ID)->setFontPath(fontPath);
 
-	// Only update texture if text content is present
-	if (text != "")
+	// Load diffuse map
+	auto text = _core->_billboardEntityManager.getEntity(ID)->getTextContent();
+	if (!text.empty())
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(text, fontPath));
 		_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
@@ -302,20 +303,21 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 
 void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string& textContent)
 {
-	// Check if new text content is not the same as the current one
-	if (_core->_billboardEntityManager.getEntity(ID)->getTextContent() != textContent)
+	// Font must be loaded
+	auto fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+	if (fontPath.empty())
 	{
-		// Set text content
-		_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
+		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
+	}
+	else
+	{
+		// Check if new text content is not the same as the current one
+		if (_core->_billboardEntityManager.getEntity(ID)->getTextContent() != textContent)
+		{
+			// Set text content
+			_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
 
-		// Check if text content is invalid
-		if (textContent.empty())
-		{
-			Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": cannot be empty!");
-		}
-		else
-		{
-			auto fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+			// Load diffuse map
 			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
 			_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
 		}

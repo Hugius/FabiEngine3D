@@ -205,30 +205,30 @@ void SceneEditor::_updateModelEditing()
 				// Handle position, rotation, size
 				if (!screen->getButton("position")->isHoverable())
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _editorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_editorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _editorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 				}
 				else if (!screen->getButton("rotation")->isHoverable())
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _editorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_editorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _editorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_editorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _editorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, (_editorSpeed / 50.0f));
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -(_editorSpeed / 50.0f));
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, (_editorSpeed / 50.0f));
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -(_editorSpeed / 50.0f));
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 50.0f));
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 50.0f));
 				}
 				else if (!screen->getButton("size")->isHoverable())
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, (_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -(_editorSpeed / 100.0f), MODEL_SIZE_MULTIPLIER, 0.0f);
 				}
 
 				// Update transformations if changed

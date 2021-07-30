@@ -79,23 +79,15 @@ void BillboardEntityManager::createEntity
 	Vec3 position, Vec3 rotation, Vec3 size, bool facingCameraX, bool facingCameraY
 )
 {
-	// Check if text content is invalid
-	if (textContent.empty())
-	{
-		Logger::throwWarning("Tried to create billboard with ID \"" + ID + "\": text content cannot be empty!");
-	}
-	else
-	{
-		// Create entity
-		createEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
+	// Create entity
+	createEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
 
-		// Set properties
-		auto entity = getEntity(ID);
-		entity->setDiffuseMap(_textureLoader.getText(textContent, fontPath));
-		entity->setTransparent(true);
-		entity->setTextContent(textContent);
-		entity->setFontPath(fontPath);
-	}
+	// Set properties
+	auto entity = getEntity(ID);
+	entity->setDiffuseMap(_textureLoader.getText(textContent, fontPath));
+	entity->setTransparent(true);
+	entity->setTextContent(textContent);
+	entity->setFontPath(fontPath);
 }
 
 void BillboardEntityManager::update()

@@ -205,7 +205,6 @@ private:
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
 	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
-	static inline const float SOUND_DISTANCE_CHANGING_SPEED = 0.05f;
 	int _selectedSpeakerSizeDirection = 1;
 	int _activeSpeakerSizeDirection = 1;
 	bool _dontResetSelectedSpeaker = false;
@@ -219,8 +218,8 @@ private:
 	static inline const Vec3 DEFAULT_LIGHT_BULB_AABB_SIZE = Vec3(0.7f, 1.2f, 0.7f);
 	static inline const float LIGHT_BULB_SIZE_INCREASE = 1.25f;
 	static inline const float LIGHT_BULB_ANIMATION_SPEED = 0.025f;
-	static inline const float LIGHTING_CHANGING_SPEED = 0.01f;
-	static inline const float LIGHTING_COLOR_CHANGING_SPEED = 0.005f;
+	static inline const float LIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
+	static inline const float LIGHT_COLOR_CHANGING_SPEED = 0.005f;
 	int _selectedLightBulbSizeDirection = 1;
 	int _activeLightBulbSizeDirection = 1;
 	string _selectedLightBulbID = "";

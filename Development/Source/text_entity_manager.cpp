@@ -33,7 +33,7 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 	return _getTextEntities();
 }
 
-void TextEntityManager::addTextEntity
+void TextEntityManager::createEntity
 (
 	const string& ID, const string& textContent,
 	const string& fontPath, Vec3 color,

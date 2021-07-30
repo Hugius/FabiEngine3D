@@ -13,8 +13,8 @@ public:
 	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 
 	void selectWater(const string& ID);
-	void addWaterEntity(const string& ID);
-	void generateMesh(const string& ID);
+	void createEntity(const string& ID);
+	void loadMesh(const string& ID);
 	void update() override;
 
 private:

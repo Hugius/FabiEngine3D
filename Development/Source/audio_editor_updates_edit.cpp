@@ -58,7 +58,7 @@ void AudioEditor::_updateAudioEditing()
 							}
 
 							// Create new audio
-							_fe3d.soundEntity_add(_currentAudioID, newFilePath);
+							_fe3d.soundEntity_create(_currentAudioID, newFilePath);
 						}
 						else
 						{

@@ -31,7 +31,7 @@ void SceneEditor::load()
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_create("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
@@ -71,7 +71,7 @@ void SceneEditor::load()
 
 	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.modelEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
+	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_SPEAKER_ID, true);
@@ -83,9 +83,9 @@ void SceneEditor::load()
 	}
 
 	// Preview point light loading
-	_fe3d.lightEntity_add(PREVIEW_LIGHT_BULB_ID, Vec3(0.0f), Vec3(1.0f), 1.0f, 10.0f);
+	_fe3d.lightEntity_create(PREVIEW_LIGHT_BULB_ID, Vec3(0.0f), Vec3(1.0f), 1.0f, 10.0f);
 	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-	_fe3d.modelEntity_add(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE, false);
+	_fe3d.modelEntity_create(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE, false);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LIGHT_BULB_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_LIGHT_BULB_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_LIGHT_BULB_ID, true);

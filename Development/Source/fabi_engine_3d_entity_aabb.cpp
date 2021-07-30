@@ -2,9 +2,9 @@
 #include "core_engine.hpp"
 #include "logger.hpp"
 
-void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible)
+void FabiEngine3D::aabbEntity_create(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible)
 {
-	_core->_aabbEntityManager.addAabbEntity(ID, position, size, raycastResponsive, collisionResponsive);
+	_core->_aabbEntityManager.createEntity(ID, position, size, raycastResponsive, collisionResponsive);
 	_core->_aabbEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
@@ -15,7 +15,7 @@ void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 pos
 	{
 		if (_core->_modelEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindEntity(parentID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
 		}
 		else
 		{
@@ -26,7 +26,7 @@ void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 pos
 	{
 		if (_core->_modelEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindEntity(customAabbID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
 		}
 		else
 		{
@@ -41,7 +41,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
 		}
 		else
 		{
@@ -52,7 +52,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
 		}
 		else
 		{

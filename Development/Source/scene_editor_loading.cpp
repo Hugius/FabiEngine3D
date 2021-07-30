@@ -249,7 +249,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Add speaker if in editor
 			if (_isEditorLoaded)
 			{
-				_fe3d.modelEntity_add("@speaker_" + soundID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+				_fe3d.modelEntity_create("@speaker_" + soundID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed("@speaker_" + soundID, false);
 				_fe3d.modelEntity_setReflected("@speaker_" + soundID, false);
 				_fe3d.modelEntity_setBright("@speaker_" + soundID, false);
@@ -330,7 +330,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Add light bulb
 			if (_isEditorLoaded)
 			{
-				_fe3d.modelEntity_add("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE);
+				_fe3d.modelEntity_create("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE);
 				_fe3d.modelEntity_setShadowed("@" + lightID, false);
 				_fe3d.modelEntity_setReflected("@" + lightID, false);
 				_fe3d.modelEntity_setBright("@" + lightID, true);
@@ -339,7 +339,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			}
 
 			// Add point light
-			_fe3d.lightEntity_add(lightID, position, radius, color, intensity);
+			_fe3d.lightEntity_create(lightID, position, radius, color, intensity);
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

@@ -126,7 +126,7 @@ bool EnvironmentEditor::loadSkyEntitiesFromFile()
 
 		// Load entity
 		_loadedSkyIDs.push_back(skyID);
-		_fe3d.skyEntity_add(skyID);
+		_fe3d.skyEntity_create(skyID);
 		_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
 		_fe3d.skyEntity_setLightness(skyID, lightness);
 		_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);

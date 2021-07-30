@@ -108,7 +108,7 @@ public:
 	const bool camera_isFirstPersonViewEnabled();
 
 	// Sky entity interface - setters
-	void skyEntity_add(const string& ID);
+	void skyEntity_create(const string& ID);
 	void skyEntity_deleteAll();
 	void skyEntity_delete(const string& ID);
 	void skyEntity_setVisible(const string& ID, bool isVisible);
@@ -139,7 +139,7 @@ public:
 	const bool skyEntity_isVisible(const string& ID);
 
 	// Terrain entity interface - setters
-	void terrainEntity_add(const string& ID, const string& heightMapPath);
+	void terrainEntity_create(const string& ID, const string& heightMapPath);
 	void terrainEntity_deleteAll();
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_setVisible(const string& ID, bool isVisible);
@@ -202,7 +202,7 @@ public:
 	const bool terrainEntity_hasNormalMapB(const string& ID);
 
 	// Water entity interface - setters
-	void waterEntity_add(const string& ID);
+	void waterEntity_create(const string& ID);
 	void waterEntity_deleteAll();
 	void waterEntity_delete(const string& ID);
 	void waterEntity_setVisible(const string& ID, bool isVisible);
@@ -254,7 +254,7 @@ public:
 	const bool waterEntity_hasDisplacementMap(const string& ID);
 
 	// Model entity interface - setters
-	void modelEntity_add
+	void modelEntity_create
 	(
 		const string& ID, const string& meshPath,
 		Vec3 position, Vec3 rotation, Vec3 size, bool isVisible = true
@@ -342,10 +342,10 @@ public:
 	const ReflectionType modelEntity_getReflectionType(const string& ID);
 
 	// Billboard entity interface (core) - setters
-	void billboardEntity_add
+	void billboardEntity_create
 	(
 		const string& ID, Vec3 color,
-		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible = true
+		Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_deleteAll();
 	void billboardEntity_delete(const string& ID);
@@ -393,10 +393,10 @@ public:
 	const bool billboardEntity_isBright(const string& ID);
 
 	// Billboard entity interface (diffuseMap) - setters
-	void billboardEntity_add
+	void billboardEntity_create
 	(
 		const string& ID, const string& diffuseMapPath,
-		Vec3 T, Vec3 R, Vec2 S,
+		Vec3 position, Vec3 rotation, Vec2 size,
 		bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
@@ -407,11 +407,11 @@ public:
 	const bool billboardEntity_isTransparent(const string& ID);
 
 	// Billboard entity interface (text) - setters
-	void billboardEntity_add
+	void billboardEntity_create
 	(
 		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,
-		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible = true
+		Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
 	void billboardEntity_setFont(const string& ID, const string& fontPath);
 	void billboardEntity_setTextContent(const string& ID, const string& textContent);
@@ -444,7 +444,7 @@ public:
 	const bool billboardEntity_hasDiffuseMap(const string& ID);
 
 	// AABB entity interface - setters
-	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible = true);
+	void aabbEntity_create(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible = true);
 	void aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_bindToBillboardEntity(const string& parentID, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
@@ -493,7 +493,7 @@ public:
 	const bool collision_isTerrainResponseEnabled();
 
 	// Light entity interface - setters
-	void lightEntity_add(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity, bool isVisible = true);
+	void lightEntity_create(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity, bool isVisible = true);
 	void lightEntity_deleteAll();
 	void lightEntity_delete(const string& ID);
 	void lightEntity_setVisible(const string& ID, bool isVisible);
@@ -513,8 +513,8 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
-	void imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
-	void imageEntity_add(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
+	void imageEntity_create(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
+	void imageEntity_create(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible = true);
 	void imageEntity_deleteAll();
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);
@@ -568,7 +568,7 @@ public:
 	const bool imageEntity_hasDiffuseMap(const string& ID);
 
 	// Text entity interface - setters
-	void textEntity_add
+	void textEntity_create
 	(
 		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,
@@ -604,7 +604,7 @@ public:
 	const bool textEntity_isVisible(const string& ID);
 
 	// Sound entity interface - setters
-	void soundEntity_add(const string& ID, const string& filePath);
+	void soundEntity_create(const string& ID, const string& filePath);
 	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
 	void soundEntity_delete(const string& ID);
 	void soundEntity_deleteAll();

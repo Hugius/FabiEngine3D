@@ -149,7 +149,7 @@ bool EnvironmentEditor::loadWaterEntitiesFromFile()
 
 		// Load entity
 		_loadedWaterIDs.push_back(waterID);
-		_fe3d.waterEntity_add(waterID);
+		_fe3d.waterEntity_create(waterID);
 		_fe3d.waterEntity_setPosition(waterID, position);
 		_fe3d.waterEntity_setSize(waterID, size);
 		_fe3d.waterEntity_setWaving(waterID, isWaving);

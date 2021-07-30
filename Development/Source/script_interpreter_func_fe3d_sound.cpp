@@ -126,7 +126,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			if (_validateFe3dSoundEntity("@" + arguments[1].getString(), true))
 			{
 				auto filePath = _fe3d.soundEntity_getFilePath("@" + arguments[1].getString());
-				_fe3d.soundEntity_add(arguments[0].getString(), filePath);
+				_fe3d.soundEntity_create(arguments[0].getString(), filePath);
 				_fe3d.soundEntity_setVolume(arguments[0].getString(), arguments[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

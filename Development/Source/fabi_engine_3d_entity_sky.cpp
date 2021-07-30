@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::skyEntity_add(const string& ID)
+void FabiEngine3D::skyEntity_create(const string& ID)
 {
-	_core->_skyEntityManager.addSkyEntity(ID);
+	_core->_skyEntityManager.createEntity(ID);
 }
 
 void FabiEngine3D::skyEntity_deleteAll()

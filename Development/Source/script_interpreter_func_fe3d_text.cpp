@@ -121,7 +121,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			auto fontPath = string("game_assets\\fonts\\") + arguments[1].getString();
 
 			// Add text
-			_fe3d.textEntity_add(
+			_fe3d.textEntity_create(
 				arguments[0].getString(),
 				arguments[2].getString(),
 				fontPath,

@@ -13,8 +13,8 @@ public:
 	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 
 	void selectTerrain(const string& ID);
-	void addTerrainEntity(const string& ID);
-	void generateMesh(const string& ID);
+	void createEntity(const string& ID);
+	void loadMesh(const string& ID);
 	void update() override;
 
 	float getPixelHeight(const string& ID, float x, float z);

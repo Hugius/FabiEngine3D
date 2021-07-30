@@ -114,13 +114,13 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
 					lineTextPosition.x = SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET;
-					_fe3d.billboardEntity_add(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false);
+					_fe3d.billboardEntity_create(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false);
 				}
 				else // Line is not empty
 				{
 					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
 					Vec2 lineTextSize = _fe3d.billboardEntity_getSize(textID);
-					_fe3d.billboardEntity_add(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
+					_fe3d.billboardEntity_create(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
 				}
 			}
 

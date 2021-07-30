@@ -71,7 +71,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Default engine background
 		string textureDirectoryPath = "engine_assets\\textures\\";
-		skyEntity_add("@@engineBackground");
+		skyEntity_create("@@engineBackground");
 		skyEntity_setDiffuseMaps("@@engineBackground", {
 			textureDirectoryPath + "background_right.png",
 			textureDirectoryPath + "background_left.png",
@@ -82,7 +82,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture
-		imageEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+		imageEntity_create("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_text.png");
 		misc_setCustomCursor("@@cursor");

@@ -47,7 +47,7 @@ const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntit
 	return _getAabbEntities();
 }
 
-void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive)
+void AabbEntityManager::createEntity(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive)
 {
 	// Create entity
 	_createEntity(ID);
@@ -63,10 +63,10 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 	entity->setCollisionResponsive(collisionResponsive);
 }
 
-void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, 
+void AabbEntityManager::bindEntity(const string& ID, const string& parentID, AabbParentType parentType, 
 	Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive)
 {
-	addAabbEntity(ID, position, size, raycastResponsive, collisionResponsive);
+	createEntity(ID, position, size, raycastResponsive, collisionResponsive);
 	getEntity(ID)->setParent(parentID, parentType);
 }
 

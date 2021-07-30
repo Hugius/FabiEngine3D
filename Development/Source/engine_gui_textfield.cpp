@@ -10,7 +10,7 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_originalSize(size),
 	_originalColor(textColor)
 {
-	_fe3d.textEntity_add(_entityID, textContent, "engine_assets\\fonts\\font.ttf", textColor, position, 0.0f, size, isCentered, isDynamic);
+	_fe3d.textEntity_create(_entityID, textContent, "engine_assets\\fonts\\font.ttf", textColor, position, 0.0f, size, isCentered, isDynamic);
 }
 
 EngineGuiTextfield::~EngineGuiTextfield()

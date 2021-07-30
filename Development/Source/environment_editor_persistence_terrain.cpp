@@ -188,7 +188,7 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 		_loadedTerrainIDs.push_back(terrainID);
 		if (heightMapPath != "")
 		{
-			_fe3d.terrainEntity_add(terrainID, heightMapPath);
+			_fe3d.terrainEntity_create(terrainID, heightMapPath);
 			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
 			_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
 			_fe3d.terrainEntity_setLightness(terrainID, lightness);

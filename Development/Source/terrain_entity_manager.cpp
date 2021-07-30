@@ -41,12 +41,12 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	_selectedID = ID;
 }
 
-void TerrainEntityManager::addTerrainEntity(const string& ID)
+void TerrainEntityManager::createEntity(const string& ID)
 {
 	_createEntity(ID);
 }
 
-void TerrainEntityManager::generateMesh(const string& ID)
+void TerrainEntityManager::loadMesh(const string& ID)
 {
 	auto entity = getEntity(ID);
 

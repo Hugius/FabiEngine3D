@@ -13,27 +13,27 @@ bool EngineGuiGlobalScreen::isFocused()
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_addValueForm(ID, title, to_string(value), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(value), position, size, true, buttonsPosition);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_addValueForm(ID, title, value, position, size, false, buttonsPosition);
+	_createValueForm(ID, title, value, position, size, false, buttonsPosition);
 }
 
 bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
@@ -110,7 +110,7 @@ bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 	return std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition)
 {
 	// Check if not already exists
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())

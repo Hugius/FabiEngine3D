@@ -63,7 +63,7 @@ void ModelEditor::_loadMesh()
 			else
 			{
 				// Create new entity
-				_fe3d.modelEntity_add(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
+				_fe3d.modelEntity_create(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
 			}
 		}
 		else
@@ -189,7 +189,7 @@ const vector<string>& ModelEditor::getLoadedModelIDs()
 	return _loadedModelIDs;
 }
 
-bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string emissionMapPath, string reflectionMapPath, string normalMapPath,
+bool ModelEditor::_createModel(const string& modelName, string meshPath, string diffuseMapPath, string emissionMapPath, string reflectionMapPath, string normalMapPath,
 	Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
 	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
 	bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
@@ -204,7 +204,7 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 		if (meshPath != "")
 		{
 			// Add model
-			_fe3d.modelEntity_add(modelName, meshPath, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f), Vec3(0.0f), size, false);
+			_fe3d.modelEntity_create(modelName, meshPath, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f), Vec3(0.0f), size, false);
 
 			// Add AABBs
 			for (size_t i = 0; i < aabbNames.size(); i++)

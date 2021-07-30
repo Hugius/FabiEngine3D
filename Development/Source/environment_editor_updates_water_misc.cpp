@@ -42,7 +42,7 @@ void EnvironmentEditor::_updateWaterCreating()
 						{
 							_currentWaterID = newWaterName;
 							_loadedWaterIDs.push_back(_currentWaterID);
-							_fe3d.waterEntity_add(_currentWaterID);
+							_fe3d.waterEntity_create(_currentWaterID);
 							_fe3d.waterEntity_select(_currentWaterID);
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),

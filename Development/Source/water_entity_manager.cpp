@@ -42,12 +42,12 @@ void WaterEntityManager::selectWater(const string& ID)
 	_selectedID = ID;
 }
 
-void WaterEntityManager::addWaterEntity(const string& ID)
+void WaterEntityManager::createEntity(const string& ID)
 {
 	_createEntity(ID);
 }
 
-void WaterEntityManager::generateMesh(const string& ID)
+void WaterEntityManager::loadMesh(const string& ID)
 {
 	// Variables
 	auto entity = getEntity(ID);

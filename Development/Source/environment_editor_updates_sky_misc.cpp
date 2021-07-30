@@ -41,7 +41,7 @@ void EnvironmentEditor::_updateSkyCreating()
 						{
 							_currentSkyID = newSkyName;
 							_loadedSkyIDs.push_back(_currentSkyID);
-							_fe3d.skyEntity_add(_currentSkyID);
+							_fe3d.skyEntity_create(_currentSkyID);
 							_fe3d.skyEntity_select(_currentSkyID);
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),

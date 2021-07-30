@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:scene_create_custom")
+	else if (functionName == "fe3d:scene_add_custom")
 	{
 		auto types = { ScriptValueType::STRING };
 

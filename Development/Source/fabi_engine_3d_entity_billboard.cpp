@@ -1,21 +1,25 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::billboardEntity_add(const string& ID, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible)
+void FabiEngine3D::billboardEntity_create(const string& ID, Vec3 color, 
+	Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.createEntity(ID, color, position, rotation, Vec3(size.x, size.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::billboardEntity_add(const string& ID, const string& diffuseMapPath, Vec3 T, Vec3 R, Vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible)
+void FabiEngine3D::billboardEntity_create(const string& ID, const string& diffuseMapPath, 
+	Vec3 position, Vec3 rotation, Vec2 size, bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, Vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.createEntity(ID, diffuseMapPath, position, rotation, Vec3(size.x, size.y, 1.0f), transparent, facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::billboardEntity_add(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool isVisible)
+void FabiEngine3D::billboardEntity_create(const string& ID, const string& textContent, const string& fontPath, Vec3 color, 
+	Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, textContent, fontPath, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.createEntity(ID, textContent, fontPath, color, 
+		position, rotation, Vec3(size.x, size.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 

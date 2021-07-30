@@ -108,7 +108,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 
 			// Add AABB
-			_fe3d.aabbEntity_add(arguments[0].getString(), 
+			_fe3d.aabbEntity_create(arguments[0].getString(), 
 				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
 				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()), true, true);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

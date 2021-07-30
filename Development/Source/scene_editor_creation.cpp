@@ -16,7 +16,7 @@ bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 	}
 
 	// Create new sky
-	_fe3d.skyEntity_add(newID);
+	_fe3d.skyEntity_create(newID);
 	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
 	_fe3d.skyEntity_setRotationSpeed(newID, _fe3d.skyEntity_getRotationSpeed(previewID));
@@ -50,7 +50,7 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	}
 
 	// Create terrain entity
-	_fe3d.terrainEntity_add(newID, _fe3d.terrainEntity_getHeightMapPath(previewID));
+	_fe3d.terrainEntity_create(newID, _fe3d.terrainEntity_getHeightMapPath(previewID));
 	_fe3d.terrainEntity_select(newID);
 
 	// Fill terrain entity
@@ -145,7 +145,7 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	}
 
 	// Create water entity
-	_fe3d.waterEntity_add(newID);
+	_fe3d.waterEntity_create(newID);
 	_fe3d.waterEntity_select(newID);
 
 	// Fill water entity
@@ -220,7 +220,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		else
 		{
 			// Create new model entity
-			_fe3d.modelEntity_add(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
+			_fe3d.modelEntity_create(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
 
 			// Fill model entity
 			_fe3d.modelEntity_setFaceCulled(newEntityID, _fe3d.modelEntity_isFaceCulled(previewID));
@@ -263,7 +263,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	else // Normal entity
 	{
 		// Add model entity
-		_fe3d.modelEntity_add(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
+		_fe3d.modelEntity_create(newEntityID, _fe3d.modelEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
 
 		// Bind AABB entities to model entity
 		for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
@@ -352,7 +352,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	auto size = _fe3d.billboardEntity_getSize(previewID);
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
 	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
-	_fe3d.billboardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
+	_fe3d.billboardEntity_create(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine billboard entity type
 	if (_fe3d.billboardEntity_hasDiffuseMap(previewID)) // Textured billboard
@@ -412,7 +412,7 @@ bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID
 	}
 
 	// Add soundEntity
-	_fe3d.soundEntity_add(newID, _fe3d.soundEntity_getFilePath(previewID));
+	_fe3d.soundEntity_create(newID, _fe3d.soundEntity_getFilePath(previewID));
 	_fe3d.soundEntity_make3D(newID, position, 0.0f, 0.0f);
 
 	// Save ID

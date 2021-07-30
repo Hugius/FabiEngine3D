@@ -1,13 +1,13 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::modelEntity_add
+void FabiEngine3D::modelEntity_create
 (
 	const string& ID, const string& meshPath,
 	Vec3 position, Vec3 rotation, Vec3 size, bool isVisible
 )
 {
-	_core->_modelEntityManager.addModelEntity(ID, meshPath, position, rotation, size);
+	_core->_modelEntityManager.createEntity(ID, meshPath, position, rotation, size);
 	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 

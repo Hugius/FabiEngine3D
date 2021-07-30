@@ -59,7 +59,7 @@ void SkyEntityManager::selectMixSky(const string& ID)
 	_selectedMixID = ID;
 }
 
-void SkyEntityManager::addSkyEntity(const string& ID)
+void SkyEntityManager::createEntity(const string& ID)
 {
 	// Skybox vertices
 	float skybox_data[] =

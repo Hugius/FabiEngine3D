@@ -24,7 +24,7 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 	return _getModelEntities();
 }
 
-void ModelEntityManager::addModelEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S)
+void ModelEntityManager::createEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S)
 {
 	// Create entity
 	_createEntity(ID);

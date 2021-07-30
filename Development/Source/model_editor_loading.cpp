@@ -192,7 +192,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 		// Add new model
-		_addModel(modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
+		_createModel(modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,
 			isTransparent, isSpecular, ReflectionType(reflectionType), specularFactor, specularIntensity, lightness,
 			Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, isBright, aabbNames, aabbPositions, aabbSizes);
 	}

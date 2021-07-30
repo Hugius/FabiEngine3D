@@ -9,7 +9,7 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	_originalPosition(position),
 	_originalSize(size)
 {
-	fe3d.imageEntity_add(_entityID, color, position, 0.0f, size, true);
+	fe3d.imageEntity_create(_entityID, color, position, 0.0f, size, true);
 }
 
 EngineGuiWindow::~EngineGuiWindow()

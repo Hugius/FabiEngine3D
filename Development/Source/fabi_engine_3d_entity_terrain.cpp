@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightMapPath)
+void FabiEngine3D::terrainEntity_create(const string& ID, const string& heightMapPath)
 {
-	_core->_terrainEntityManager.addTerrainEntity(ID);
+	_core->_terrainEntityManager.createEntity(ID);
 	terrainEntity_setHeightMap(ID, heightMapPath);
 }
 
@@ -17,7 +17,7 @@ void FabiEngine3D::terrainEntity_setHeightMap(const string& ID, const string& te
 		_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(texturePath);
 		_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
 		_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(sqrt(pixelValues->size())));
-		_core->_terrainEntityManager.generateMesh(ID);
+		_core->_terrainEntityManager.loadMesh(ID);
 	}
 }
 
@@ -251,7 +251,7 @@ void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 	if (!_core->_terrainEntityManager.getEntity(ID)->getHeightMapPath().empty())
 	{	
 		// Generate mesh again
-		_core->_terrainEntityManager.generateMesh(ID);
+		_core->_terrainEntityManager.loadMesh(ID);
 	}
 }
 
@@ -263,7 +263,7 @@ void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 	if (!_core->_terrainEntityManager.getEntity(ID)->getHeightMapPath().empty())
 	{
 		// Generate mesh again
-		_core->_terrainEntityManager.generateMesh(ID);
+		_core->_terrainEntityManager.loadMesh(ID);
 	}
 }
 

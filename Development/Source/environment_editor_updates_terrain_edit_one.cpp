@@ -135,7 +135,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 						}
 						else
 						{
-							_fe3d.terrainEntity_add(_currentTerrainID, newFilePath);
+							_fe3d.terrainEntity_create(_currentTerrainID, newFilePath);
 							_fe3d.terrainEntity_select(_currentTerrainID);
 						}
 					}

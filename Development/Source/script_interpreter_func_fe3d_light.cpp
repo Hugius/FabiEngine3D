@@ -110,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 
 			// Add light
-			_fe3d.lightEntity_add(arguments[0].getString(),
+			_fe3d.lightEntity_create(arguments[0].getString(),
 				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
 				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()),
 				Vec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()),

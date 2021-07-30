@@ -450,7 +450,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				size.z;
 
 			// Add AABB
-			_fe3d.aabbEntity_add(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
+			_fe3d.aabbEntity_create(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
 			_loadedAabbIDs.push_back(aabbID);
 		}
 		else if (lineType == "SOUND")
@@ -542,7 +542,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				intensity;
 
 			// Add point light
-			_fe3d.lightEntity_add(lightID, position, radius, color, intensity);
+			_fe3d.lightEntity_create(lightID, position, radius, color, intensity);
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

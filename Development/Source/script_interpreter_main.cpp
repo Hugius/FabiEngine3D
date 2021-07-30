@@ -194,7 +194,7 @@ void ScriptInterpreter::load()
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_create("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
@@ -358,12 +358,22 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.gfx_disableBloom(true);
 	}
-
-	// Default graphics
-	_fe3d.gfx_disableSpecularLighting(true);
-	_fe3d.gfx_disablePointLighting(true);
-	_fe3d.gfx_disableSkyReflections(true);
-	_fe3d.gfx_disableSceneReflections(true);
+	if (_fe3d.gfx_isSpecularLightingEnabled())
+	{
+		_fe3d.gfx_disableSpecularLighting(true);
+	}
+	if (_fe3d.gfx_isPointLightingEnabled())
+	{
+		_fe3d.gfx_disablePointLighting(true);
+	}
+	if (_fe3d.gfx_isSkyReflectionsEnabled())
+	{
+		_fe3d.gfx_disableSkyReflections(true);
+	}
+	if (_fe3d.gfx_isSceneReflectionsEnabled())
+	{
+		_fe3d.gfx_disableSceneReflections(true);
+	}
 
 	// Delete game image entities
 	for (const auto& ID : _fe3d.imageEntity_getAllIDs())

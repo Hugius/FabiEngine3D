@@ -12,7 +12,7 @@ public:
 
 	const unordered_map<string, shared_ptr<TextEntity>>& getEntities();
 
-	void addTextEntity
+	void createEntity
 	(
 		const string& ID, const string& textContent,
 		const string& fontPath, Vec3 color,

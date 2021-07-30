@@ -6,15 +6,15 @@ void FabiEngine3D::imageEntity_deleteAll()
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_add(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
+void FabiEngine3D::imageEntity_create(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
 {
-	_core->_imageEntityManager.addImageEntity(ID, diffuseMapPath, position, rotation, size, false, isCentered);
+	_core->_imageEntityManager.createEntity(ID, diffuseMapPath, position, rotation, size, false, isCentered);
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::imageEntity_add(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
+void FabiEngine3D::imageEntity_create(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
 {
-	_core->_imageEntityManager.addImageEntity(ID, color, position, rotation, size, isCentered);
+	_core->_imageEntityManager.createEntity(ID, color, position, rotation, size, isCentered);
 	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 

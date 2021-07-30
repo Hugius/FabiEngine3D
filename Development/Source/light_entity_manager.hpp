@@ -11,7 +11,7 @@ public:
 
 	const unordered_map<string, shared_ptr<LightEntity>>& getEntities();
 
-	void addLightEntity(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity);
+	void createEntity(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity);
 
 	void update() override;
 };

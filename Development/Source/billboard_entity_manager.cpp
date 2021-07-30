@@ -37,7 +37,7 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 	return _getBillboardEntities();
 }
 
-void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Vec3 position, Vec3 rotation, Vec3 size,
+void BillboardEntityManager::createEntity(const string& ID, Vec3 color, Vec3 position, Vec3 rotation, Vec3 size,
 	bool facingCameraX, bool facingCameraY)
 {
 	// Create entity
@@ -55,7 +55,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 	entity->setColor(color);
 }
 
-void BillboardEntityManager::addBillboardEntity
+void BillboardEntityManager::createEntity
 (
 	const string& ID, const string& diffuseMapPath,
 	Vec3 position, Vec3 rotation, Vec3 size,
@@ -63,7 +63,7 @@ void BillboardEntityManager::addBillboardEntity
 )
 {
 	// Create entity
-	addBillboardEntity(ID, Vec3(1.0f), position, rotation, size, facingCameraX, facingCameraY);
+	createEntity(ID, Vec3(1.0f), position, rotation, size, facingCameraX, facingCameraY);
 
 	// Set properties
 	auto entity = getEntity(ID);
@@ -72,7 +72,7 @@ void BillboardEntityManager::addBillboardEntity
 	entity->setTransparent(transparent);
 }
 
-void BillboardEntityManager::addBillboardEntity
+void BillboardEntityManager::createEntity
 (
 	const string& ID, const string& textContent,
 	const string& fontPath, Vec3 color,
@@ -87,7 +87,7 @@ void BillboardEntityManager::addBillboardEntity
 	else
 	{
 		// Create entity
-		addBillboardEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
+		createEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
 
 		// Set properties
 		auto entity = getEntity(ID);

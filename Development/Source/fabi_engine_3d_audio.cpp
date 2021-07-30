@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void FabiEngine3D::soundEntity_add(const string& ID, const string& filePath)
+void FabiEngine3D::soundEntity_create(const string& ID, const string& filePath)
 {
 	_core->_audioManager.addSound(ID, filePath);
 }

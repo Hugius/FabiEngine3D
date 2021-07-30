@@ -14,7 +14,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 		Vec2 separatorSize = Vec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
 		Vec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
-		_fe3d.billboardEntity_add("separator", SEPARATOR_COLOR, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
+		_fe3d.billboardEntity_create("separator", SEPARATOR_COLOR, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
 			Vec3(0.0f), separatorSize, false, false);
 		_fe3d.billboardEntity_setBright("separator", true);
 
@@ -35,21 +35,21 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				Vec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 			// Create line number BILLBOARD
-			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, FONT_PATH, LINE_NUMBER_COLOR, 
+			_fe3d.billboardEntity_create(lineNumberID, lineNumberString, FONT_PATH, LINE_NUMBER_COLOR, 
 				lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f), Vec3(0.0f), lineNumberSize, 0, 0);
 			_fe3d.billboardEntity_setBright(lineNumberID, true);
 
 			// Create line number AABB
 			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH);
 			Vec3 aabbSize = Vec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true, true);
+			_fe3d.aabbEntity_create(lineNumberID, aabbPosition, aabbSize, true, true);
 
 			// Create line text display BILLBOARD
 			std::istringstream iss(lineTextString);
 			string noWhiteSpace;
 			iss >> noWhiteSpace;
 			bool isComment = (noWhiteSpace.substr(0, 3) == "///");
-			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR,
+			_fe3d.billboardEntity_create(lineTextID, lineTextString, FONT_PATH, isComment ? COMMENT_TEXT_COLOR : DEFAULT_TEXT_COLOR,
 				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
 			_fe3d.billboardEntity_setBright(lineTextID, true);
 
@@ -60,7 +60,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				string characterID = lineNumberID + "_" + to_string(charIndex);
 				float characterX = HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex));
 				Vec3 characterPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
-				_fe3d.billboardEntity_add(characterID, Vec3(0.0f), characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f), 
+				_fe3d.billboardEntity_create(characterID, Vec3(0.0f), characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f), 
 					Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false, false);
 
 				// Create new character AABB for logic
@@ -68,7 +68,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				{
 					Vec3 aabbPosition = characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f);
 					Vec3 aabbSize = Vec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
-					_fe3d.aabbEntity_add(characterID, aabbPosition, aabbSize, true, true);
+					_fe3d.aabbEntity_create(characterID, aabbPosition, aabbSize, true, true);
 				}
 			}
 		}

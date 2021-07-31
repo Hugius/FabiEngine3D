@@ -262,7 +262,7 @@ vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http:/
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
 		auto b = getc(streamIn);
-		float value = static_cast<float>(r + g + b) / 3.0f;
+		float value = (static_cast<float>(r + g + b) / 3.0f);
 		pixelIntensities.push_back((value));
 	}
 

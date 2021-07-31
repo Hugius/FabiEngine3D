@@ -1,7 +1,5 @@
 #include "model_editor.hpp"
 
-#include <algorithm>
-
 void ModelEditor::_updateCamera()
 {
 	if (_isEditorLoaded)

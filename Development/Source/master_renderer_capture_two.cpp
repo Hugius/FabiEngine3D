@@ -325,34 +325,28 @@ void MasterRenderer::_captureBloom()
 {
 	if (_renderBus.isBloomEnabled() && _renderBus.getBloomBlurCount() > 0 && _renderBus.getBloomIntensity() > 0.0f)
 	{
-		if (_renderBus.getBloomType() == BloomType::EVERYTHING) // Blur primary scene map
+		// Determine texture to blur
+		GLuint textureToBlur;
+		if (_renderBus.getBloomType() == BloomType::EVERYTHING)
 		{
-			// Blur the scene map high quality (small blur)
-			_bloomRendererHighQuality.bind();
-			_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(),
-				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-			_bloomRendererHighQuality.unbind();
-
-			// Blur the scene map low quality (large blur)
-			_bloomRendererLowQuality.bind();
-			_renderBus.setBloomMap(_bloomRendererLowQuality.blurTexture(_finalSurface, _renderBus.getBloomMap(),
-				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-			_bloomRendererLowQuality.unbind();
+			textureToBlur = _renderBus.getPrimarySceneMap();
 		}
 		else // Blur secondary scene map
 		{
-			// Blur the scene map high quality (small blur)
-			_bloomRendererHighQuality.bind();
-			_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, _renderBus.getSecondarySceneMap(),
-				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-			_bloomRendererHighQuality.unbind();
+			textureToBlur = _renderBus.getSecondarySceneMap();
+		}
 
-			// Blur the scene map low quality (large blur)
-			_bloomRendererLowQuality.bind();
-			_renderBus.setBloomMap(_bloomRendererLowQuality.blurTexture(_finalSurface, _renderBus.getBloomMap(),
-				_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-			_bloomRendererLowQuality.unbind();
-		}		
+		// Blur the scene map (high quality, small blur)
+		_bloomRendererHighQuality.bind();
+		_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, textureToBlur,
+			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+		_bloomRendererHighQuality.unbind();
+
+		// Blur the blurred scene map (low quality, large blur)
+		_bloomRendererLowQuality.bind();
+		_renderBus.setBloomMap(_bloomRendererLowQuality.blurTexture(_finalSurface, _renderBus.getBloomMap(),
+			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
+		_bloomRendererLowQuality.unbind();
 	}
 	else
 	{

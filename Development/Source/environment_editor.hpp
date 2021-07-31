@@ -59,6 +59,7 @@ private:
 	void _updateTerrainChoosing();
 	void _updateTerrainDeleting();
 	void _updateTerrainCamera();
+	void _updateTerrainMiscellaneous();
 
 	// Water functions
 	void _updateWaterEditor();
@@ -77,10 +78,17 @@ private:
 
 	// General variables
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
+	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
+	static inline const float INITIAL_CAMERA_YAW = 0.0f;
+	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
+	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
+	static inline const float MIN_CAMERA_PITCH = 1.0f;
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	EnvironmentType _currentEnvironmentType = EnvironmentType();
 	string _currentProjectID = "";
+	Vec3 _cameraLookatPosition = Vec3(0.0f);
+	float _terrainCameraDistance = 0.0f;
 	bool _isEditorLoaded = false;
 	bool _isInMainMenu = false;
 
@@ -95,6 +103,8 @@ private:
 	// Terrain variables
 	vector <string> _loadedTerrainIDs;
 	string _currentTerrainID = "";
+	static inline const float TERRAIN_Y_OFFSET = 1.0f;
+	static inline const float TERRAIN_GRID_SIZE = 1024.0f;
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;
 	bool _isEditingTerrain = false;

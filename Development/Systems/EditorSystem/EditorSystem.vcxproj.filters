@@ -195,10 +195,10 @@
     <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit_one.cpp">
       <Filter>Environment Editor\Updates\Sky</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_two.cpp">
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_lighting.cpp">
       <Filter>Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_one.cpp">
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_mesh.cpp">
       <Filter>Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\environment_editor_updates_terrain_misc.cpp">
@@ -362,6 +362,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp">
       <Filter>Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_blendmap.cpp">
+      <Filter>Environment Editor\Updates\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_main.cpp">
+      <Filter>Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

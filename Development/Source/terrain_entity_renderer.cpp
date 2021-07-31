@@ -109,6 +109,12 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
+		// Enable wireframe
+		if (entity->isWireframed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+
 		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
@@ -237,5 +243,11 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		// Disable face culling
 		glDisable(GL_CULL_FACE);
+
+		// Disable wireframe
+		if (entity->isWireframed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
 	}
 }

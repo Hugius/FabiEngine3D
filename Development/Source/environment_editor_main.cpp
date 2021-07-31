@@ -22,8 +22,8 @@ void EnvironmentEditor::load()
 	_fe3d.camera_reset();
 	
 	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 3.0f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
@@ -201,15 +201,15 @@ void EnvironmentEditor::_loadGUI()
 
 	// Left-viewport: mainWindow - environmentEditorMenuWaterEffects
 	leftWindow->addScreen("environmentEditorMenuWaterEffects");
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("uvRepeat", Vec2(0.0f, 0.859f), Vec2(CW("UV Repeat"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("dudvMap", Vec2(0.0f, 0.668f), Vec2(CW("Dudv Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dudv Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("normalMap", Vec2(0.0f, 0.477f), Vec2(CW("Normal Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("displaceMap", Vec2(0.0f, 0.286f), Vec2(CW("Displace Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Displace Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isReflective", Vec2(0.0f, 0.095f), Vec2(CW("Reflective: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflective: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isRefractive", Vec2(0.0f, -0.096f), Vec2(CW("Refractive: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractive: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isWaving", Vec2(0.0f, -0.287f), Vec2(CW("Waving: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Waving: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isRippling", Vec2(0.0f, -0.478f), Vec2(CW("Rippling: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rippling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isSpecular", Vec2(0.0f, -0.669f), Vec2(CW("Specular: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("uvRepeat", Vec2(0.0f, 0.86f), Vec2(CW("UV Repeat"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("dudvMap", Vec2(0.0f, 0.67f), Vec2(CW("Dudv Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dudv Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("normalMap", Vec2(0.0f, 0.48f), Vec2(CW("Normal Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("displaceMap", Vec2(0.0f, 0.29f), Vec2(CW("Displace Map"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Displace Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isReflective", Vec2(0.0f, 0.01f), Vec2(CW("Reflective: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflective: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isRefractive", Vec2(0.0f, -0.01f), Vec2(CW("Refractive: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractive: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isWaving", Vec2(0.0f, -0.29f), Vec2(CW("Waving: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Waving: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isRippling", Vec2(0.0f, -0.48f), Vec2(CW("Rippling: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rippling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("isSpecular", Vec2(0.0f, -0.67f), Vec2(CW("Specular: OFF"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("environmentEditorMenuWaterEffects")->addButton("back", Vec2(0.0f, -0.86f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: mainWindow - environmentEditorMenuWaterOptions

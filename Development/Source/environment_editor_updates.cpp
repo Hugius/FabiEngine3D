@@ -34,6 +34,7 @@ void EnvironmentEditor::update()
 					{
 						if (loadSkyEntitiesFromFile())
 						{
+							// Go to sky menu
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSky");
 							_currentEnvironmentType = EnvironmentType::SKY;
 							_isInMainMenu = false;
@@ -43,6 +44,24 @@ void EnvironmentEditor::update()
 					{
 						if (loadTerrainEntitiesFromFile())
 						{
+							// Camera
+							_fe3d.camera_reset();
+							_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+							_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+							_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
+
+							// 3D environment
+							_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj", 
+								Vec3(0.0f, -TERRAIN_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(1.0f));
+							_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+							_fe3d.modelEntity_setFaceCulled("@@cube", true);
+							_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj", 
+								Vec3(0.0f, -TERRAIN_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(TERRAIN_GRID_SIZE, 1.0f, TERRAIN_GRID_SIZE));
+							_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+							_fe3d.modelEntity_setUvRepeat("@@grid", 10.0f);
+							_fe3d.modelEntity_setTransparent("@@grid", true);
+
+							// Go to terrain menu
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrain");
 							_currentEnvironmentType = EnvironmentType::TERRAIN;
 							_isInMainMenu = false;
@@ -52,6 +71,7 @@ void EnvironmentEditor::update()
 					{
 						if (loadWaterEntitiesFromFile())
 						{
+							// Go to water menu
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWater");
 							_currentEnvironmentType = EnvironmentType::WATER;
 							_isInMainMenu = false;

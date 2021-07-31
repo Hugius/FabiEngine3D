@@ -1,6 +1,6 @@
 #include "left_viewport_controller.hpp"
 
-#define CW(text) VPC::calculateTextWidth(text, 0.115f)
+#define CW(text) calculateTextWidth(text, 0.115f)
 
 constexpr auto TH = 0.0875f;
 
@@ -21,17 +21,20 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 void LeftViewportController::initialize()
 {
 	// Left-viewport: mainWindow - mainScreen
+	auto positions = calculateButtonPositions(10, TH);
 	_gui.getViewport("left")->addWindow("main", Vec2(0.0f), Vec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
 	_gui.getViewport("left")->getWindow("main")->addScreen("main");
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("environmentEditor", Vec2(0.0f, 0.83f), Vec2(CW("Environment"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Environment", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", Vec2(0.0f, 0.59f), Vec2(CW("Models"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Models", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", Vec2(0.0f, 0.36f), Vec2(CW("Animations"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animations", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", Vec2(0.0f, 0.13f), Vec2(CW("Billboards"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboards", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("audioEditor", Vec2(0.0f, -0.13f), Vec2(CW("Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, -0.36f), Vec2(CW("3D Scenes"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D Scenes", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, -0.59f), Vec2(CW("Scripting"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scripting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", Vec2(0.0f, -0.83f), Vec2(CW("Settings"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("skyEditor", Vec2(0.0f, positions[0]), Vec2(CW("Sky Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("terrainEditor", Vec2(0.0f, positions[1]), Vec2(CW("Terrain Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("waterEditor", Vec2(0.0f, positions[2]), Vec2(CW("Water Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", Vec2(0.0f, positions[3]), Vec2(CW("Model Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", Vec2(0.0f, positions[4]), Vec2(CW("Animation Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", Vec2(0.0f, positions[5]), Vec2(CW("Billboard Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("audioEditor", Vec2(0.0f, positions[6]), Vec2(CW("Audio Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, positions[7]), Vec2(CW("Scene Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scene Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, positions[8]), Vec2(CW("Script Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", Vec2(0.0f, positions[9]), Vec2(CW("Settings"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void LeftViewportController::update()
@@ -45,7 +48,17 @@ void LeftViewportController::update()
 	{
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
+			if (screen->getButton("skyEditor")->isHovered()) // Sky editor button
+			{
+				_environmentEditor.load();
+				window->setActiveScreen("environmentEditorMenuMain");
+			}
+			else if (screen->getButton("terrainEditor")->isHovered()) // Terrain editor button
+			{
+				_environmentEditor.load();
+				window->setActiveScreen("environmentEditorMenuMain");
+			}
+			else if (screen->getButton("waterEditor")->isHovered()) // Water editor button
 			{
 				_environmentEditor.load();
 				window->setActiveScreen("environmentEditorMenuMain");

@@ -28,7 +28,7 @@ void CoreEngine::_updateApplication()
 		{
 			// Camera updates
 			_timer.startDeltaPart("cameraUpdate");
-			_camera.update(lastCursorPosition, _inputHandler.getMouseWheelY());
+			_camera.update(lastCursorPosition);
 			_timer.stopDeltaPart();
 
 			// Raycast updates

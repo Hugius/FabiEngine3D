@@ -1,6 +1,6 @@
 #include "right_viewport_controller.hpp"
 
-#define CW(text) VPC::calculateTextWidth(text, 0.115f)
+#define CW(text) calculateTextWidth(text, 0.115f)
 
 constexpr auto TH = 0.0875f;
 

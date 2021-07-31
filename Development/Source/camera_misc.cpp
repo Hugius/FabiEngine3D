@@ -141,14 +141,9 @@ void Camera::setMaxThirdPersonPitch(float value)
 	_maxThirdPersonPitch = value;
 }
 
-void Camera::setMinThirdPersonDistance(float value)
+void Camera::setThirdPersonDistance(float value)
 {
-	_minThirdPersonDistance = value;
-}
-
-void Camera::setMaxThirdPersonDistance(float value)
-{
-	_maxThirdPersonDistance = value;
+	_thirdPersonDistance = value;
 }
 
 const Vec3 Camera::getPosition()

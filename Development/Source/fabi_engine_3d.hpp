@@ -76,6 +76,7 @@ public:
 	void camera_move(Vec3 speed);
 	void camera_setPosition(Vec3 position);
 	void camera_setThirdPersonLookat(Vec3 position);
+	void camera_setThirdPersonDistance(float distance);
 	void camera_setFOV(float angle);
 	void camera_setYaw(float angle);
 	void camera_setPitch(float angle);
@@ -83,8 +84,6 @@ public:
 	void camera_setMaxFirstPersonPitch(float angle);
 	void camera_setMinThirdPersonPitch(float angle);
 	void camera_setMaxThirdPersonPitch(float angle);
-	void camera_setMinThirdPersonDistance(float distance);
-	void camera_setMaxThirdPersonDistance(float distance);
 	void camera_setNearZ(float distance);
 	void camera_setFarZ(float farZ);
 	void camera_setMouseSensitivity(float speed);
@@ -144,10 +143,6 @@ public:
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_setVisible(const string& ID, bool isVisible);
 	void terrainEntity_select(const string& ID);
-	void terrainEntity_setMaxHeight(const string& ID, float height);
-	void terrainEntity_setUvRepeat(const string& ID, float repeat);
-	void terrainEntity_setLightness(const string& ID, float lightness);
-	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setHeightMap(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
 	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
@@ -161,8 +156,13 @@ public:
 	void terrainEntity_setBlendRepeatR(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatG(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatB(const string& ID, float repeat);
+	void terrainEntity_setMaxHeight(const string& ID, float height);
+	void terrainEntity_setUvRepeat(const string& ID, float repeat);
+	void terrainEntity_setLightness(const string& ID, float lightness);
 	void terrainEntity_setSpecularLightingFactor(const string& ID, float factor);
 	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
+	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
+	void terrainEntity_setWireframed(const string& ID, bool enabled);
 
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs();
@@ -190,6 +190,7 @@ public:
 	const bool terrainEntity_isExisting(const string& ID);
 	const bool terrainEntity_isVisible(const string& ID);
 	const bool terrainEntity_isSpecularLighted(const string& ID);
+	const bool terrainEntity_isWireframed(const string& ID);
 	const bool terrainEntity_isInside(const string& ID, float x, float z);
 	const bool terrainEntity_hasBlendMap(const string& ID);
 	const bool terrainEntity_hasDiffuseMap(const string& ID);

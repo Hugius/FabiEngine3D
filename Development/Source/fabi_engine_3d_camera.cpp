@@ -106,14 +106,9 @@ void FabiEngine3D::camera_setMaxThirdPersonPitch(float angle)
 	_core->_camera.setMaxThirdPersonPitch(angle);
 }
 
-void FabiEngine3D::camera_setMinThirdPersonDistance(float distance)
+void FabiEngine3D::camera_setThirdPersonDistance(float distance)
 {
-	_core->_camera.setMinThirdPersonDistance(distance);
-}
-
-void FabiEngine3D::camera_setMaxThirdPersonDistance(float distance)
-{
-	_core->_camera.setMaxThirdPersonDistance(distance);
+	_core->_camera.setThirdPersonDistance(distance);
 }
 
 const float FabiEngine3D::camera_getYaw()

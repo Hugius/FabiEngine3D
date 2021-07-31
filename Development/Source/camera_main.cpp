@@ -32,8 +32,6 @@ void Camera::reset()
 	_maxFirstPersonPitch = MAX_PITCH_ANGLE;
 	_minThirdPersonPitch = MIN_PITCH_ANGLE;
 	_maxThirdPersonPitch = MAX_PITCH_ANGLE;
-	_minThirdPersonDistance = MIN_THIRD_PERSON_DISTANCE;
-	_maxThirdPersonDistance = MAX_THIRD_PERSON_DISTANCE;
 	_yaw = 0.0f;
 	_pitch = 0.0f;
 	_firstPersonYaw = 0.0f;
@@ -44,7 +42,6 @@ void Camera::reset()
 	_firstPersonPitchAcceleration = 0.0f;
 	_thirdPersonYawAcceleration = 0.0f;
 	_thirdPersonPitchAcceleration = 0.0f;
-	_thirdPersonDistanceAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
 	_mouseOffset = 0.0f;
 
@@ -55,7 +52,7 @@ void Camera::reset()
 	_cursorIsBeingCentered = false;
 }
 
-void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
+void Camera::update(Ivec2 lastCursorPosition)
 {
 	// Temporary values
 	Ivec2 currenCursorPosition = _window.getCursorPosition();
@@ -131,12 +128,10 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 		// Offset between current mouse position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
-		float scrollOffset = static_cast<float>(mouseWheelDirection);
 
 		// Applying mouse sensitivity
 		xOffset *= _mouseSensitivity;
 		yOffset *= _mouseSensitivity;
-		scrollOffset *= _mouseSensitivity;
 
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
@@ -157,12 +152,7 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 		_thirdPersonPitchAcceleration *= 0.75f;
 
 		// Update distance
-		_thirdPersonDistanceAcceleration += (scrollOffset * 5.0f);
-		_thirdPersonDistanceAcceleration = std::clamp(_thirdPersonDistanceAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
-		_thirdPersonDistance -= _thirdPersonDistanceAcceleration;
-		_thirdPersonDistance = std::clamp(_thirdPersonDistance, _minThirdPersonDistance, _maxThirdPersonDistance);
 		_thirdPersonDistance = std::clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
-		_thirdPersonDistanceAcceleration *= 0.75f;
 
 		// Calculate position multipliers
 		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * sin(Math::degreesToRadians(_thirdPersonYaw));
@@ -188,7 +178,6 @@ void Camera::update(Ivec2 lastCursorPosition, int mouseWheelDirection)
 	{
 		_thirdPersonYawAcceleration = 0.0f;
 		_thirdPersonPitchAcceleration = 0.0f;
-		_thirdPersonDistanceAcceleration = 0.0f;
 	}
 
 	// Limit view angles

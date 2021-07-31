@@ -135,6 +135,11 @@ void TerrainEntity::setSpecularLighted(bool value)
 	_isSpecularLighted = value;
 }
 
+void TerrainEntity::setWireframed(bool value)
+{
+	_isWireframed = value;
+}
+
 void TerrainEntity::setLightness(float value)
 {
 	_lightness = std::max(0.0f, value);

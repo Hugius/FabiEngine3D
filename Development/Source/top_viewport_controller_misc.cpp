@@ -33,7 +33,9 @@ void TopViewportController::_updateMiscellaneous()
 	bool hoverable = (_currentProjectID == "") ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Project menus hoverability
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("environmentEditor")->setHoverable(hoverable);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("skyEditor")->setHoverable(hoverable);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("terrainEditor")->setHoverable(hoverable);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("waterEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(hoverable);

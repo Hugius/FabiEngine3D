@@ -9,11 +9,12 @@ public:
 	Camera(RenderBus& renderBus, Window& window);
 
 	void reset();
-	void update(Ivec2 lastCursorPosition, int mouseWheelDirection);
+	void update(Ivec2 lastCursorPosition);
 	void updateMatrices();
 	void move(Vec3 value);
 	void setPosition(Vec3 value);
 	void setThirdPersonLookat(Vec3 value);
+	void setThirdPersonDistance(float value);
 	void setFOV(float value);
 	void setMouseSensitivity(float value);
 	void setYaw(float value);
@@ -22,8 +23,6 @@ public:
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
 	void setMaxThirdPersonPitch(float value);
-	void setMinThirdPersonDistance(float value);
-	void setMaxThirdPersonDistance(float value);
 	void setNearZ(float value);
 	void setFarZ(float value);
 	void moveFollowX(float value);
@@ -96,11 +95,8 @@ private:
 	float _thirdPersonDistance = 0.0f;
 	float _thirdPersonYawAcceleration = 0.0f;
 	float _thirdPersonPitchAcceleration = 0.0f;
-	float _thirdPersonDistanceAcceleration = 0.0f;
 	float _minThirdPersonPitch = 0.0f;
 	float _maxThirdPersonPitch = 0.0f;
-	float _minThirdPersonDistance = 0.0f;
-	float _maxThirdPersonDistance = 0.0f;
 	float _nearZ = 0.0f;
 	float _farZ = 0.0f;
 	float _mouseSensitivity = 0.0f;

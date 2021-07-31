@@ -11,13 +11,22 @@ void FabiEngine3D::terrainEntity_setHeightMap(const string& ID, const string& te
 {
 	auto pixelValues = _core->_textureLoader.getBitmapPixels(texturePath);
 
-	// Check if heightMap loading went well
+	// Check if height map loading went well
 	if (pixelValues != nullptr)
 	{
-		_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(texturePath);
-		_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
-		_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(sqrt(pixelValues->size())));
-		_core->_terrainEntityManager.loadMesh(ID);
+		// Check if height map resolution too high
+		auto heightMapSize = sqrt(pixelValues->size());
+		if (heightMapSize > 1024)
+		{
+			Logger::throwWarning("Tried to set height map of terrain with ID \"" + ID + "\": resolution too high!");
+		}
+		else
+		{
+			_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(texturePath);
+			_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
+			_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(heightMapSize));
+			_core->_terrainEntityManager.loadMesh(ID);
+		}
 	}
 }
 
@@ -62,6 +71,11 @@ const bool FabiEngine3D::terrainEntity_isVisible(const string& ID)
 const bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
+}
+
+const bool FabiEngine3D::terrainEntity_isWireframed(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isWireframed();
 }
 
 const float FabiEngine3D::terrainEntity_getSize(const string& ID)
@@ -426,4 +440,9 @@ void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)
 void FabiEngine3D::terrainEntity_setSpecularLighted(const string& ID, bool enabled)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+}
+
+void FabiEngine3D::terrainEntity_setWireframed(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setWireframed(enabled);
 }

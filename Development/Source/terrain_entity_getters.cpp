@@ -165,6 +165,11 @@ const bool TerrainEntity::isSpecularLighted() const
 	return _isSpecularLighted;
 }
 
+const bool TerrainEntity::isWireframed() const
+{
+	return _isWireframed;
+}
+
 const bool TerrainEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != 0);

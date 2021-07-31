@@ -94,6 +94,19 @@ void BillboardEditor::_updateMiscellaneous()
 				}
 			}
 
+			// Update wire frame rendering
+			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+			{
+				if (_fe3d.billboardEntity_isWireFramed(_currentBillboardID))
+				{
+					_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
+				}
+				else
+				{
+					_fe3d.billboardEntity_setWireFramed(_currentBillboardID, true);
+				}
+			}
+
 			// Update debug rendering
 			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 			{

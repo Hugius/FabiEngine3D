@@ -109,8 +109,8 @@ void AnimationEditor::_updateMiscellaneous()
 			// Wire frame model rendering
 			if (!_currentAnimationID.empty())
 			{
-				string modelID = _getAnimation(_currentAnimationID)->previewModelID;
-				if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
+				auto modelID = _getAnimation(_currentAnimationID)->previewModelID;
+				if (_fe3d.modelEntity_isExisting(modelID))
 				{
 					if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 					{
@@ -137,7 +137,7 @@ void AnimationEditor::_updateMiscellaneous()
 			if (!isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 			{
 				// Check if animation has a preview model
-				if (!currentAnimation->previewModelID.empty())
+				if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
 				{
 					// Default transformation
 					for (auto partID : currentAnimation->partIDs)

@@ -86,6 +86,7 @@ void ModelEditor::_updateEditingScreen()
 					// Hide model entity
 					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
+						_fe3d.modelEntity_setWireFramed(_currentModelID, false);
 						_fe3d.modelEntity_setVisible(_currentModelID, false);
 					}
 

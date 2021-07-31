@@ -42,7 +42,7 @@ private:
 	void _updateAnimationExecution();
 	void _updateManagementScreen();
 	void _updateAnimationCreating();
-	void _updateAnimationChoice();
+	void _updateAnimationChoosing();
 	void _updateEditingScreen();
 	void _updateFrameScreen();
 	void _updateAnimationDeleting();

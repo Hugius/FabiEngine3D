@@ -345,16 +345,33 @@ public:
 	const bool modelEntity_hasNormalMap(const string& ID);
 	const ReflectionType modelEntity_getReflectionType(const string& ID);
 
-	// Billboard entity interface (core) - setters
+	// Billboard entity interface - setters
 	void billboardEntity_create
 	(
 		const string& ID, Vec3 color,
 		Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible = true
 	);
+	void billboardEntity_create
+	(
+		const string& ID, const string& diffuseMapPath,
+		Vec3 position, Vec3 rotation, Vec2 size,
+		bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible = true
+	);
+	void billboardEntity_create
+	(
+		const string& ID, const string& textContent,
+		const string& fontPath, Vec3 color,
+		Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible = true
+	);
 	void billboardEntity_deleteAll();
 	void billboardEntity_delete(const string& ID);
 	void billboardEntity_deleteGroup(const string& ID);
-	void billboardEntity_setVisible(const string& ID, bool isVisible);
+	void billboardEntity_pauseSpriteAnimation(const string& ID);
+	void billboardEntity_resumeSpriteAnimation(const string& ID);
+	void billboardEntity_stopSpriteAnimation(const string& ID);
+	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void billboardEntity_setFont(const string& ID, const string& fontPath);
+	void billboardEntity_setTextContent(const string& ID, const string& textContent);
 	void billboardEntity_move(const string& ID, Vec3 factor);
 	void billboardEntity_rotate(const string& ID, Vec3 factor);
 	void billboardEntity_scale(const string& ID, Vec2 factor);
@@ -362,20 +379,32 @@ public:
 	void billboardEntity_setRotation(const string& ID, Vec3 rotation);
 	void billboardEntity_setSize(const string& ID, Vec2 size);
 	void billboardEntity_setColor(const string& ID, Vec3 color);
+	void billboardEntity_setMinHeight(const string& ID, float height);
+	void billboardEntity_setMaxHeight(const string& ID, float height);
+	void billboardEntity_setLightness(const string& ID, float lightness);
+	void billboardEntity_setInversion(const string& ID, float inversion);
+	void billboardEntity_setAlpha(const string& ID, float alpha);
+	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
+	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
+	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
+	void billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep);
+	void billboardEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
+	void billboardEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
+	void billboardEntity_setVisible(const string& ID, bool isVisible);
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
 	void billboardEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void billboardEntity_setShadowed(const string& ID, bool enabled);
 	void billboardEntity_setReflected(const string& ID, bool enabled);
 	void billboardEntity_setBright(const string& ID, bool enabled);
-	void billboardEntity_setMinHeight(const string& ID, float height);
-	void billboardEntity_setMaxHeight(const string& ID, float height);
-	void billboardEntity_setLightness(const string& ID, float lightness);
-	void billboardEntity_setInversion(const string& ID, float inversion);
-	void billboardEntity_setAlpha(const string& ID, float alpha);
+	void billboardEntity_setTransparent(const string& ID, bool enabled);
+	void billboardEntity_setWireFramed(const string& ID, bool enabled);
 
-	// Billboard entity interface (core) - getters
+	// Billboard entity interface - getters
 	const vector<string> billboardEntity_getAllIDs();
+	const string& billboardEntity_getDiffuseMapPath(const string& ID);
+	const string& billboardEntity_getFontPath(const string& ID);
+	const string& billboardEntity_getTextContent(const string& ID);
 	const vector<Vec3> billboardEntity_getInstancedOffsets(const string& ID);
 	const Vec3 billboardEntity_getPosition(const string& ID);
 	const Vec3 billboardEntity_getRotation(const string& ID);
@@ -386,6 +415,12 @@ public:
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const float billboardEntity_getAlpha(const string& ID);
+	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID);
+	const unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID);
 	const bool billboardEntity_isExisting(const string& ID);
 	const bool billboardEntity_isVisible(const string& ID);
 	const bool billboardEntity_isFacingCameraX(const string& ID);
@@ -395,53 +430,8 @@ public:
 	const bool billboardEntity_isReflected(const string& ID);
 	const bool billboardEntity_isInstanced(const string& ID);
 	const bool billboardEntity_isBright(const string& ID);
-
-	// Billboard entity interface (diffuseMap) - setters
-	void billboardEntity_create
-	(
-		const string& ID, const string& diffuseMapPath,
-		Vec3 position, Vec3 rotation, Vec2 size,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible = true
-	);
-	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
-	void billboardEntity_setTransparent(const string& ID, bool enabled);
-
-	// Billboard entity interface (diffuseMap) - getters
-	const string& billboardEntity_getDiffuseMapPath(const string& ID);
 	const bool billboardEntity_isTransparent(const string& ID);
-
-	// Billboard entity interface (text) - setters
-	void billboardEntity_create
-	(
-		const string& ID, const string& textContent,
-		const string& fontPath, Vec3 color,
-		Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible = true
-	);
-	void billboardEntity_setFont(const string& ID, const string& fontPath);
-	void billboardEntity_setTextContent(const string& ID, const string& textContent);
-
-	// Billboard entity interface (text) - getters
-	const string& billboardEntity_getFontPath(const string& ID);
-	const string& billboardEntity_getTextContent(const string& ID);
-	
-	// Billboard entity interface (sprite animation) - setters
-	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
-	void billboardEntity_pauseSpriteAnimation(const string& ID);
-	void billboardEntity_resumeSpriteAnimation(const string& ID);
-	void billboardEntity_stopSpriteAnimation(const string& ID);
-	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
-	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
-	void billboardEntity_setSpriteAnimationFramestep(const string& ID, unsigned int framestep);
-	void billboardEntity_setSpriteAnimationRowIndex(const string& ID, unsigned int index);
-	void billboardEntity_setSpriteAnimationColumnIndex(const string& ID, unsigned int index);
-
-	// Billboard entity interface (animation) - getters
-	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
-	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
-	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
-	const unsigned int billboardEntity_getSpriteAnimationFramestep(const string& ID);
-	const unsigned int billboardEntity_getSpriteAnimationRowIndex(const string& ID);
-	const unsigned int billboardEntity_getSpriteAnimationColumnIndex(const string& ID);
+	const bool billboardEntity_isWireFramed(const string& ID);
 	const bool billboardEntity_isSpriteAnimationStarted(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);

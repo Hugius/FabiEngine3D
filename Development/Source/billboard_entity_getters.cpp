@@ -161,6 +161,11 @@ const bool BillboardEntity::isBright() const
 	return _isBright;
 }
 
+const bool BillboardEntity::isWireFramed() const
+{
+	return _isWireFramed;
+}
+
 const bool BillboardEntity::hasDiffuseMap() const
 {
 	return (_diffuseMap != 0);

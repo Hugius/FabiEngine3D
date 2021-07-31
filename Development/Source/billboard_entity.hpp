@@ -21,6 +21,7 @@ public:
 	void setShadowed(bool value);
 	void setReflected(bool value);
 	void setBright(bool value);
+	void setWireFramed(bool value);
 	void setDiffuseMap(GLuint value);
 	void setPosition(Vec3 value);
 	void setInitialRotation(Vec3 value);
@@ -81,6 +82,7 @@ public:
 	const bool isShadowed() const;
 	const bool isReflected() const;
 	const bool isBright() const;
+	const bool isWireFramed() const;
 	const bool hasDiffuseMap() const;
 
 private:
@@ -122,4 +124,5 @@ private:
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isBright = false;
+	bool _isWireFramed = false;
 };

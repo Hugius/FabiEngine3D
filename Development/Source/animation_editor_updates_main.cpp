@@ -19,7 +19,7 @@ void AnimationEditor::update()
 
 	// Animation lifecycle
 	_updateAnimationCreating();
-	_updateAnimationChoice();
+	_updateAnimationChoosing();
 	_updateAnimationDeleting();
 
 	// Miscellaneous
@@ -129,7 +129,7 @@ void AnimationEditor::_updateAnimationCreating()
 	}
 }
 
-void AnimationEditor::_updateAnimationChoice()
+void AnimationEditor::_updateAnimationChoosing()
 {
 	if (_isEditorLoaded)
 	{
@@ -158,7 +158,7 @@ void AnimationEditor::_updateAnimationChoice()
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), true);
 
 						// Show preview model
-						if (!_getAnimation(_currentAnimationID)->previewModelID.empty())
+						if (_fe3d.modelEntity_isExisting(_getAnimation(_currentAnimationID)->previewModelID))
 						{
 							_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->previewModelID, true);
 						}

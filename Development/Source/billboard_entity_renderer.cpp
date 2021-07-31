@@ -51,6 +51,12 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
+		// Enable wire frame
+		if (entity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
@@ -108,6 +114,12 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+
+		// Disable wire frame
+		if (entity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 }

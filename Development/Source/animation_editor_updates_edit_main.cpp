@@ -47,6 +47,13 @@ void AnimationEditor::_updateEditingScreen()
 						}
 					}
 
+					// Hide preview model
+					if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
+					{
+						_fe3d.modelEntity_setWireFramed(currentAnimation->previewModelID, false);
+						_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
+					}
+
 					// Reset some values
 					_isEditingAnimation = false;
 					_currentAnimationID = "";
@@ -54,12 +61,6 @@ void AnimationEditor::_updateEditingScreen()
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), false);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), false);
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
-					
-					// Hide preview model
-					if (!currentAnimation->previewModelID.empty())
-					{
-						_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
-					}
 				}
 				else if (screen->getButton("preview")->isHovered())
 				{
@@ -120,7 +121,7 @@ void AnimationEditor::_updateEditingScreen()
 					auto lastFrameCopy = currentAnimation->frames[_currentFrameIndex];
 
 					// Check if model has multiple parts
-					if (!currentAnimation->previewModelID.empty() && _fe3d.modelEntity_isMultiParted(currentAnimation->previewModelID))
+					if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID) && _fe3d.modelEntity_isMultiParted(currentAnimation->previewModelID))
 					{
 						// Check if last frame is the default frame
 						if (currentAnimation->frames.size() == 1)
@@ -181,7 +182,7 @@ void AnimationEditor::_updateEditingScreen()
 
 			// Button hoverabilities
 			bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID));
-			bool hasPreviewModel = !currentAnimation->previewModelID.empty();
+			bool hasPreviewModel = _fe3d.modelEntity_isExisting(currentAnimation->previewModelID);
 			screen->getButton("preview")->setHoverable(!isPlaying);
 			screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->frames.size() > 1);
 			screen->getButton("stop")->setHoverable(isPlaying&& hasPreviewModel);
@@ -219,7 +220,7 @@ void AnimationEditor::_updateEditingScreen()
 						}
 					}
 
-					// Throw warning
+					// Throw warning if necessary
 					if (!hasAllParts)
 					{
 						Logger::throwWarning("Preview model does not have required animation parts!");
@@ -229,10 +230,7 @@ void AnimationEditor::_updateEditingScreen()
 					// Hide old model
 					if (hasPreviewModel)
 					{
-						if (!currentAnimation->previewModelID.empty())
-						{
-							_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
-						}
+						_fe3d.modelEntity_setVisible(currentAnimation->previewModelID, false);
 					}
 
 					// Show new model

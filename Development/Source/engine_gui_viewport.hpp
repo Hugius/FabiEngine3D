@@ -16,7 +16,7 @@ public:
 	const string& getID();
 	const string& getEntityID();
 
-	void addWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color);
+	void createWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color);
 	void deleteWindow(const string& ID);
 	
 	vector<shared_ptr<EngineGuiWindow>>& getWindows();

@@ -46,7 +46,7 @@ void SceneEditor::_updateMainSoundMenu()
 
 							// Add new button
 							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->
-								getScrollingList("soundcasters")->addButton(soundID, soundName);
+								getScrollingList("soundcasters")->createButton(soundID, soundName);
 						}
 					}
 				}

@@ -47,45 +47,45 @@ void EngineGuiScreen::update(bool hoverable)
 	}
 }
 
-void EngineGuiScreen::addScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,
+void EngineGuiScreen::createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,
 	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
-void EngineGuiScreen::addWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
+void EngineGuiScreen::createWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
 	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
 }
 
-void EngineGuiScreen::addButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor)
+void EngineGuiScreen::createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor));
 }
 
-void EngineGuiScreen::addButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor)
+void EngineGuiScreen::createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), texturePath, hoverColor));
 }
 
-void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered)
+void EngineGuiScreen::createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, isCentered));
 }
 
-void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered)
+void EngineGuiScreen::createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
-void EngineGuiScreen::addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
+void EngineGuiScreen::createTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), textContent, textColor, isCentered, isDynamic));

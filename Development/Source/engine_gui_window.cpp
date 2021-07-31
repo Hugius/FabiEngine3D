@@ -73,7 +73,7 @@ const Vec2 EngineGuiWindow::getOriginalSize()
 	return _originalSize;
 }
 
-void EngineGuiWindow::addScreen(const string& ID)
+void EngineGuiWindow::createScreen(const string& ID)
 {
 	// Check if already exists
 	for (const auto& screen : _screens)

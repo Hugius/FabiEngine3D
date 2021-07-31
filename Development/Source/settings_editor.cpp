@@ -7,9 +7,7 @@
 #include <sstream>
 #include <algorithm>
 
-#define CW(text) VPC::calculateTextWidth(text, 0.115f)
-
-constexpr auto TH = 0.0875f;
+#define TW(text) VPC::calculateTextWidth(text, CW)
 
 SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	_fe3d(fe3d),
@@ -264,24 +262,22 @@ bool SettingsEditor::isLoaded()
 
 void SettingsEditor::_loadGUI()
 {
-	// Private window instance of left viewport
+	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
-	string screenID;
 
-	// Left-viewport: mainWindow - settingsEditorMenuMain
-	screenID = "settingsEditorMenuMain";
-	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("isFxaaEnabled", Vec2(0.0f, 0.7875f), Vec2(CW("FXAA: ON"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("anisotropicQuality", Vec2(0.0f, 0.525f), Vec2(CW("Anisotropic"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.2625f), Vec2(CW("Shadow"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.0f), Vec2(CW("Reflection"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.2625f), Vec2(CW("Refraction"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.525f), Vec2(CW("Audio"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7875f), Vec2(CW("Go Back"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	// Left-viewport: settingsEditorMenuMain
+	auto positions = VPC::calculateButtonPositions(7, CH);
+	leftWindow->createScreen("settingsEditorMenuMain");
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isFxaaEnabled", Vec2(0.0f, positions[0]), Vec2(TW("FXAA: ON"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicQuality", Vec2(0.0f, positions[1]), Vec2(TW("Anisotropic"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", Vec2(0.0f, positions[2]), Vec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("reflectionQuality", Vec2(0.0f, positions[3]), Vec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[4]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", Vec2(0.0f, positions[5]), Vec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SettingsEditor::_unloadGUI()
 {
-	auto leftWindow = _gui.getViewport("left")->getWindow("main");
-	leftWindow->deleteScreen("settingsEditorMenuMain");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("settingsEditorMenuMain");
 }

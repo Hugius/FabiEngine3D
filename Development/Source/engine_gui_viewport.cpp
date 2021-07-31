@@ -54,7 +54,7 @@ const string& EngineGuiViewport::getEntityID()
 	return _entityID;
 }
 
-void EngineGuiViewport::addWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color)
+void EngineGuiViewport::createWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color)
 {
 	Vec2 viewportPosition = _fe3d.imageEntity_getPosition(_entityID);
 	Vec2 viewportSize = _fe3d.imageEntity_getSize(_entityID);

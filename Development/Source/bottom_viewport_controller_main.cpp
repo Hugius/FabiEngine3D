@@ -16,37 +16,37 @@ BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGui
 void BottomViewportController::initialize()
 {
 	// Statistics window
-	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
-	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
+	_gui.getViewport("bottom")->createWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	_gui.getViewport("bottom")->getWindow("statistics")->createScreen("main");
 	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
 	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
 	// Console window
-	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
-	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
+	_gui.getViewport("bottom")->createWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.875f), BVPC::FRAME_COLOR);
+	_gui.getViewport("bottom")->getWindow("console")->createScreen("main");
 	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 
 	// General statistics
-	_statsScreen->addTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->addTextfield("gpuName", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->addTextfield("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->addTextfield("cameraPosition", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cursorPosition", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("triangleCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("modelEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("imageEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("cpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->createTextfield("gpuName", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->createTextfield("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->createTextfield("cameraPosition", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("cursorPosition", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("triangleCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("modelEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextfield("imageEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
 	// Update-profiling statistics
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
 	int uCounter = 1;
 	for (const auto& [key, value] : updateStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		_statsScreen->createTextfield(key, Vec2(-0.05f, 1.0f - (static_cast<float>(uCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		uCounter++;
 	}
 
@@ -55,7 +55,7 @@ void BottomViewportController::initialize()
 	int rCounter = 1;
 	for (const auto& [key, value] : renderStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		_statsScreen->createTextfield(key, Vec2(0.475f, 1.0f - (static_cast<float>(rCounter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		rCounter++;
 	}
 }

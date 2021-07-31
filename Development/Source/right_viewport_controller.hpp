@@ -14,4 +14,9 @@ public:
 
 private:
 	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
+	static inline const Vec3 BLACK = Vec3(0.0f);
+	static inline const Vec3 WHITE = Vec3(1.0f);
+
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
 };

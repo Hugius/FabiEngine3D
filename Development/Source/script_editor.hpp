@@ -70,6 +70,8 @@ private:
 	unsigned int _passedFrames = 0;
 
 	// Floats
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
 	static inline const float SCROLLING_SPEED = 0.1f;
 	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
 	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;

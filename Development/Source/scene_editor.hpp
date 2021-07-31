@@ -230,8 +230,10 @@ private:
 	string _loadedSceneID = "";
 	string _currentProjectID = "";
 	string _currentSceneID = "";
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
+	float _editorSpeed = 1.0f;
 	bool _isEditorLoaded = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
-	float _editorSpeed = 1.0f;
 };

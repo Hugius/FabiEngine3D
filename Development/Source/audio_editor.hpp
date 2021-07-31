@@ -44,6 +44,8 @@ private:
 	bool _isDeletingAudio = false;
 
 	// Miscellaneous
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
 	string _currentProjectID = "";
 	bool _isEditorLoaded = false;
 };

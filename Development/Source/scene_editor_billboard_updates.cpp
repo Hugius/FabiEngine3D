@@ -45,7 +45,7 @@ void SceneEditor::_updateMainBillboardMenu()
 							std::reverse(billboardID.begin(), billboardID.end());
 
 							// Add new button
-							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->addButton(billboardID, billboardName);
+							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, billboardName);
 						}
 					}
 				}

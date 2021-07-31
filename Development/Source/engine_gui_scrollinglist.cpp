@@ -23,7 +23,7 @@ void EngineGuiScrollingList::update(bool isHoverable)
 	_updateButtons(isHoverable);
 }
 
-void EngineGuiScrollingList::addButton(const string& ID, string textContent)
+void EngineGuiScrollingList::createButton(const string& ID, string textContent)
 {
 	// Calculate dimensions
 	float x = 0.0f;
@@ -70,7 +70,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 			// Create newly positioned buttons
 			for (size_t j = 0; j < buttonIDs.size(); j++)
 			{
-				addButton(buttonIDs[j], textContents[j]);
+				createButton(buttonIDs[j], textContents[j]);
 			}
 
 			// Return

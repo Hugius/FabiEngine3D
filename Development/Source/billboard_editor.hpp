@@ -45,6 +45,8 @@ private:
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 
 	// Floats
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
 	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;

@@ -1,8 +1,6 @@
 #include "left_viewport_controller.hpp"
 
-#define CW(text) calculateTextWidth(text, 0.115f)
-
-constexpr auto TH = 0.0875f;
+#define TW(text) calculateTextWidth(text, CW)
 
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	BaseViewportController(fe3d, gui),
@@ -20,21 +18,26 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 
 void LeftViewportController::initialize()
 {
-	// Left-viewport: mainWindow - mainScreen
-	auto positions = calculateButtonPositions(10, TH);
-	_gui.getViewport("left")->addWindow("main", Vec2(0.0f), Vec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
-	_gui.getViewport("left")->getWindow("main")->addScreen("main");
-	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("skyEditor", Vec2(0.0f, positions[0]), Vec2(CW("Sky Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("terrainEditor", Vec2(0.0f, positions[1]), Vec2(CW("Terrain Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("waterEditor", Vec2(0.0f, positions[2]), Vec2(CW("Water Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", Vec2(0.0f, positions[3]), Vec2(CW("Model Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", Vec2(0.0f, positions[4]), Vec2(CW("Animation Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", Vec2(0.0f, positions[5]), Vec2(CW("Billboard Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("audioEditor", Vec2(0.0f, positions[6]), Vec2(CW("Audio Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, positions[7]), Vec2(CW("Scene Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scene Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, positions[8]), Vec2(CW("Script Editor"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", Vec2(0.0f, positions[9]), Vec2(CW("Settings"), TH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	// Window
+	_gui.getViewport("left")->createWindow("main", Vec2(0.0f), Vec2(1.9f, 2.0f), LVPC::FRAME_COLOR);
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+
+	// Left-viewport: main
+	auto positions = calculateButtonPositions(10, CH);
+	leftWindow->createScreen("main");
+	leftWindow->getScreen("main")->createButton("skyEditor", Vec2(0.0f, positions[0]), Vec2(TW("Sky Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("terrainEditor", Vec2(0.0f, positions[1]), Vec2(TW("Terrain Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("waterEditor", Vec2(0.0f, positions[2]), Vec2(TW("Water Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("modelEditor", Vec2(0.0f, positions[3]), Vec2(TW("Model Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Model Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("animationEditor", Vec2(0.0f, positions[4]), Vec2(TW("Animation Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Animation Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("billboardEditor", Vec2(0.0f, positions[5]), Vec2(TW("Billboard Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboard Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("audioEditor", Vec2(0.0f, positions[6]), Vec2(TW("Audio Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("sceneEditor", Vec2(0.0f, positions[7]), Vec2(TW("Scene Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scene Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("scriptEditor", Vec2(0.0f, positions[8]), Vec2(TW("Script Editor"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Script Editor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("main")->createButton("settingsEditor", Vec2(0.0f, positions[9]), Vec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
+	// Default screen
+	leftWindow->setActiveScreen("main");
 }
 
 void LeftViewportController::update()
@@ -51,17 +54,17 @@ void LeftViewportController::update()
 			if (screen->getButton("skyEditor")->isHovered()) // Sky editor button
 			{
 				_environmentEditor.load();
-				window->setActiveScreen("environmentEditorMenuMain");
+				window->setActiveScreen("skyEditorMenuMain");
 			}
 			else if (screen->getButton("terrainEditor")->isHovered()) // Terrain editor button
 			{
 				_environmentEditor.load();
-				window->setActiveScreen("environmentEditorMenuMain");
+				window->setActiveScreen("terrainEditorMenuMain");
 			}
 			else if (screen->getButton("waterEditor")->isHovered()) // Water editor button
 			{
 				_environmentEditor.load();
-				window->setActiveScreen("environmentEditorMenuMain");
+				window->setActiveScreen("waterEditorMenuMain");
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 			{

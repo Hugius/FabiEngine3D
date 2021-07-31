@@ -27,5 +27,8 @@ private:
 
 	string _currentProjectID = "";
 
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
+
 	bool _isEditorLoaded = false;
 };

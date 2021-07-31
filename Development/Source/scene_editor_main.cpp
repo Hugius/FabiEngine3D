@@ -49,7 +49,7 @@ void SceneEditor::load()
 		if (_fe3d.modelEntity_isExisting(modelID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->
-				addButton(modelID, modelID.substr(1));
+				createButton(modelID, modelID.substr(1));
 		}
 	}
 
@@ -64,7 +64,7 @@ void SceneEditor::load()
 		if (_fe3d.billboardEntity_isExisting(billboardID))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->
-				addButton(billboardID, billboardID.substr(1));
+				createButton(billboardID, billboardID.substr(1));
 		}
 	}
 
@@ -78,7 +78,7 @@ void SceneEditor::load()
 	{
 		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("soundcasters")->
-			addButton(audioID, audioID.substr(1));
+			createButton(audioID, audioID.substr(1));
 	}
 
 	// Preview point light loading
@@ -90,9 +90,9 @@ void SceneEditor::load()
 	_fe3d.modelEntity_setBright(PREVIEW_LIGHT_BULB_ID, true);
 
 	// Create name textfields
-	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedSoundName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedSoundName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);

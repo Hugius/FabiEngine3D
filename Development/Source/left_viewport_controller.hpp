@@ -48,4 +48,7 @@ private:
 	string _lastActiveEditorScreen = "";
 
 	static inline const Vec3 FRAME_COLOR = Vec3(0.175f);
+
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
 };

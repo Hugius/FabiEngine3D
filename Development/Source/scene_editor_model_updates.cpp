@@ -45,7 +45,7 @@ void SceneEditor::_updateMainModelMenu()
 							std::reverse(modelID.begin(), modelID.end());
 
 							// Add new button
-							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->addButton(modelID, modelName);
+							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, modelName);
 						}
 					}
 				}

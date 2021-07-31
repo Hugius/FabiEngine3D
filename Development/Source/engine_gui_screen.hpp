@@ -17,16 +17,16 @@ public:
 	void show();
 	void hide();
 
-	// Add
-	void addScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, 
+	// Create
+	void createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, 
 		Vec3 textHoverColor, Vec2 charSize);
-	void addWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
+	void createWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
 		bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
-	void addButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor);
-	void addButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor);
-	void addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered = true);
-	void addRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered = true);
-	void addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
+	void createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor);
+	void createButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor);
+	void createRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered = true);
+	void createRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered = true);
+	void createTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
 
 	// Delete
 	void deleteScrollingList(const string& ID);

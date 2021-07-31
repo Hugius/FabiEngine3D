@@ -11,7 +11,7 @@ public:
 		Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize);
 
 	void update(bool isHoverable);
-	void addButton(const string& ID, string textContent);
+	void createButton(const string& ID, string textContent);
 	void deleteButton(const string& ID);
 	void deleteButtons();
 	void setVisible(bool isVisible);

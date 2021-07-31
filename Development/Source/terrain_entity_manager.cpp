@@ -14,7 +14,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing terrain entity with ID \"" + ID + "\" requested");
+		Logger::throwError("Non-existing terrain entity with ID \"" + ID + "\" requested!");
 	}
 
 	return result;
@@ -39,7 +39,14 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
-	_selectedID = ID;
+	if (isExisting(ID) || ID.empty())
+	{
+		_selectedID = ID;
+	}
+	else
+	{
+		Logger::throwError("Tried to select terrain entity with ID \"" + ID + "\": not existing!");
+	}
 }
 
 void TerrainEntityManager::createEntity(const string& ID)

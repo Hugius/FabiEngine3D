@@ -134,7 +134,7 @@ void SceneEditor::clearCurrentScene()
 		}
 
 		// Miscellaneous
-		_fe3d.skyEntity_mixWithSelected("");
+		_fe3d.skyEntity_selectMixSky("");
 		_fe3d.skyEntity_setMixValue(0.0f);
 	}
 

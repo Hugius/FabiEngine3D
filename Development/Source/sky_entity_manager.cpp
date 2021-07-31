@@ -15,7 +15,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing sky entity with ID \"" + ID + "\" requested");
+		Logger::throwError("Non-existing sky entity with ID \"" + ID + "\" requested!");
 	}
 
 	return result;
@@ -52,12 +52,26 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 
 void SkyEntityManager::selectMainSky(const string& ID)
 {
-	_selectedMainID = ID;
+	if (isExisting(ID) || ID.empty())
+	{
+		_selectedMainID = ID;
+	}
+	else
+	{
+		Logger::throwError("Tried to select main sky entity with ID \"" + ID + "\": not existing!");
+	}
 }
 
 void SkyEntityManager::selectMixSky(const string& ID)
 {
-	_selectedMixID = ID;
+	if (isExisting(ID) || ID.empty())
+	{
+		_selectedMixID = ID;
+	}
+	else
+	{
+		Logger::throwError("Tried to select mix sky entity with ID \"" + ID + "\": not existing!");
+	}
 }
 
 void SkyEntityManager::createEntity(const string& ID)

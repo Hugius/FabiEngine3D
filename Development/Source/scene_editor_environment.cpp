@@ -101,7 +101,7 @@ void SceneEditor::_updateSkyMenu()
 			screen->getButton("delete")->setHoverable(_currentSkyID != "");
 
 			// Update sky selection
-			_fe3d.skyEntity_select(_currentSkyID);
+			_fe3d.skyEntity_selectMainSky(_currentSkyID);
 		}
 	}
 }

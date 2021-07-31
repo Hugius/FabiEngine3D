@@ -85,7 +85,7 @@ void SkyEditor::_updateChoiceMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), false);
-				_fe3d.skyEntity_select("@@engineBackground");
+				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 				_currentSkyID = "";
 				_isEditingSky = false;
 			}
@@ -128,7 +128,7 @@ void SkyEditor::_updateSkyCreating()
 						_currentSkyID = newSkyName;
 						_loadedSkyIDs.push_back(_currentSkyID);
 						_fe3d.skyEntity_create(_currentSkyID);
-						_fe3d.skyEntity_select(_currentSkyID);
+						_fe3d.skyEntity_selectMainSky(_currentSkyID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
@@ -182,7 +182,7 @@ void SkyEditor::_updateSkyChoosing()
 				}
 
 				// Show entity
-				_fe3d.skyEntity_select(_currentSkyID);
+				_fe3d.skyEntity_selectMainSky(_currentSkyID);
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
@@ -221,12 +221,12 @@ void SkyEditor::_updateSkyDeleting()
 			_currentSkyID = "";
 
 			// Enable engine background
-			_fe3d.skyEntity_select("@@engineBackground");
+			_fe3d.skyEntity_selectMainSky("@@engineBackground");
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			// Enable engine background
-			_fe3d.skyEntity_select("@@engineBackground");
+			_fe3d.skyEntity_selectMainSky("@@engineBackground");
 
 			// Miscellaneous
 			_isDeletingSky = false;

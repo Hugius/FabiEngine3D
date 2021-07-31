@@ -165,7 +165,7 @@ void ScriptInterpreter::load()
 	}
 
 	// No sky at default
-	_fe3d.skyEntity_select("");
+	_fe3d.skyEntity_selectMainSky("");
 
 	// Load preview environments
 	_skyEditor.loadSkyEntitiesFromFile();
@@ -278,11 +278,11 @@ void ScriptInterpreter::unload()
 			_fe3d.skyEntity_delete(ID);
 		}
 	}
-	_fe3d.skyEntity_mixWithSelected("");
+	_fe3d.skyEntity_selectMixSky("");
 	_fe3d.skyEntity_setMixValue(0.0f);
 
 	// Choose engine background again
-	_fe3d.skyEntity_select("@@engineBackground");
+	_fe3d.skyEntity_selectMainSky("@@engineBackground");
 
 	// Camera
 	_fe3d.camera_reset();

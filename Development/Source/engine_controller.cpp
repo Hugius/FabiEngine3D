@@ -126,7 +126,8 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			camera_reset();
 
 			// Restore background
-			skyEntity_select("@@engineBackground");
+			skyEntity_selectMainSky("@@engineBackground");
+			skyEntity_setMixValue(0.0f);
 			skyEntity_setLightness("@@engineBackground", 1.0f);
 			
 			// Restore Vsync

@@ -21,7 +21,7 @@ bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
 	_fe3d.skyEntity_setRotationSpeed(newID, _fe3d.skyEntity_getRotationSpeed(previewID));
 	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));
-	_fe3d.skyEntity_select(newID);
+	_fe3d.skyEntity_selectMainSky(newID);
 
 	// Save ID
 	_loadedSkyID = newID;

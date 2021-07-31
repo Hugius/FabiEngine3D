@@ -85,7 +85,7 @@ void FabiEngine3D::skyEntity_setVisible(const string& ID, bool isVisible)
 	_core->_skyEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::skyEntity_select(const string& ID)
+void FabiEngine3D::skyEntity_selectMainSky(const string& ID)
 {
 	_core->_skyEntityManager.selectMainSky(ID);
 }
@@ -94,6 +94,11 @@ void FabiEngine3D::skyEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_skyEntityManager.getEntity(ID)->setLightness(lightness);
 	_core->_skyEntityManager.getEntity(ID)->setOriginalLightness(lightness);
+}
+
+void FabiEngine3D::skyEntity_setMixValue(float mixValue)
+{
+	_core->_renderBus.setSkyMixValue(mixValue);
 }
 
 void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
@@ -106,17 +111,12 @@ void FabiEngine3D::skyEntity_setColor(const string& ID, Vec3 color)
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::skyEntity_setMixValue(float mixValue)
-{
-	_core->_renderBus.setSkyMixValue(mixValue);
-}
-
 void FabiEngine3D::skyEntity_setWireFramed(const string& ID, bool enabled)
 {
 	_core->_skyEntityManager.getEntity(ID)->setWireFramed(enabled);
 }
 
-void FabiEngine3D::skyEntity_mixWithSelected(const string& ID)
+void FabiEngine3D::skyEntity_selectMixSky(const string& ID)
 {
 	_core->_skyEntityManager.selectMixSky(ID);
 }
@@ -126,6 +126,18 @@ const string FabiEngine3D::skyEntity_getSelectedID()
 	if (_core->_skyEntityManager.getSelectedMainSky() != nullptr)
 	{
 		return _core->_skyEntityManager.getSelectedMainSky()->getID();
+	}
+	else
+	{
+		return "";
+	}
+}
+
+const string FabiEngine3D::skyEntity_getMixID()
+{
+	if (_core->_skyEntityManager.getSelectedMixSky() != nullptr)
+	{
+		return _core->_skyEntityManager.getSelectedMixSky()->getID();
 	}
 	else
 	{

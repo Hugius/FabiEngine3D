@@ -15,7 +15,7 @@ bool ScriptInterpreter::_validateFe3dSkyEntity()
 bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:sky_mix_with_current")
+	if (functionName == "fe3d:sky_mix")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -25,8 +25,21 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
 			{
-				_fe3d.skyEntity_mixWithSelected("@" + arguments[0].getString());
+				_fe3d.skyEntity_selectMixSky("@" + arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:sky_get_mix_id")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate sky existence
+			if (_validateFe3dSkyEntity())
+			{
+				auto result = _fe3d.skyEntity_getMixID();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 			}
 		}
 	}

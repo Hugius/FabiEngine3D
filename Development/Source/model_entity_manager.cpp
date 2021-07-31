@@ -14,7 +14,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing model entity with ID \"" + ID + "\" requested");
+		Logger::throwError("Non-existing model entity with ID \"" + ID + "\" requested!");
 	}
 
 	return result;

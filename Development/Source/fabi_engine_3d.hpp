@@ -111,8 +111,9 @@ public:
 	void skyEntity_deleteAll();
 	void skyEntity_delete(const string& ID);
 	void skyEntity_setVisible(const string& ID, bool isVisible);
-	void skyEntity_select(const string& ID);
-	void skyEntity_mixWithSelected(const string& ID);
+	void skyEntity_selectMainSky(const string& ID);
+	void skyEntity_selectMixSky(const string& ID);
+	void skyEntity_setMixValue(float mixValue);
 	void skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths);
 	void skyEntity_setDiffuseMapRight(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapLeft(const string& ID, const string& texturePath);
@@ -124,12 +125,12 @@ public:
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, Vec3 color);
 	void skyEntity_setWireFramed(const string& ID, bool enabled);
-	void skyEntity_setMixValue(float mixValue);
 
 	// Sky entity interface - getters
 	const vector<string> skyEntity_getAllIDs();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
 	const string skyEntity_getSelectedID();
+	const string skyEntity_getMixID();
 	const Vec3 skyEntity_getColor(const string& ID);
 	const float skyEntity_getLightness(const string& ID);
 	const float skyEntity_getOriginalLightness(const string& ID);

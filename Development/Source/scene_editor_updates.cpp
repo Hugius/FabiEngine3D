@@ -108,7 +108,7 @@ void SceneEditor::_updateMainMenu()
 				if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
 				{
 					// Disable engine background
-					_fe3d.skyEntity_select("");
+					_fe3d.skyEntity_selectMainSky("");
 
 					// Create new scene
 					_currentSceneID = newSceneName;
@@ -132,7 +132,7 @@ void SceneEditor::_updateMainMenu()
 					if (_isChoosingScene)
 					{
 						// Disable engine background
-						_fe3d.skyEntity_select("");
+						_fe3d.skyEntity_selectMainSky("");
 
 						// Try to load scene
 						if (loadEditorSceneFromFile(_currentSceneID))
@@ -143,7 +143,7 @@ void SceneEditor::_updateMainMenu()
 						else
 						{
 							// Enable engine background
-							_fe3d.skyEntity_select("@@engineBackground");
+							_fe3d.skyEntity_selectMainSky("@@engineBackground");
 						}
 					}
 					else if (_isDeletingScene) // Prepare deleting confirmation
@@ -233,7 +233,7 @@ void SceneEditor::_updateChoiceMenu()
 				clearCurrentScene();
 
 				// Enable engine background
-				_fe3d.skyEntity_select("@@engineBackground");
+				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 
 				// No selected scene
 				_currentSceneID = "";
@@ -250,7 +250,7 @@ void SceneEditor::_updateChoiceMenu()
 				clearCurrentScene();
 
 				// Enable engine background
-				_fe3d.skyEntity_select("@@engineBackground");
+				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 
 				// No selected scene
 				_currentSceneID = "";

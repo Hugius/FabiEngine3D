@@ -15,7 +15,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing water entity with ID \"" + ID + "\" requested");
+		Logger::throwError("Non-existing water entity with ID \"" + ID + "\" requested!");
 	}
 
 	return result;
@@ -40,7 +40,14 @@ const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEnt
 
 void WaterEntityManager::selectWater(const string& ID)
 {
-	_selectedID = ID;
+	if (isExisting(ID) || ID.empty())
+	{
+		_selectedID = ID;
+	}
+	else
+	{
+		Logger::throwError("Tried to select main sky entity with ID \"" + ID + "\": not existing!");
+	}
 }
 
 void WaterEntityManager::createEntity(const string& ID)

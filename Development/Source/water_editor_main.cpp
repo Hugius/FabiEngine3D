@@ -42,7 +42,7 @@ void WaterEditor::load()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextfield("selectedWaterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("waterEditorControls");
 	_isEditorLoaded = true;
 }
 

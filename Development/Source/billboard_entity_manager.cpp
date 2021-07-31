@@ -123,7 +123,7 @@ void BillboardEntityManager::update()
 		// Update rotation
 		entity->setRotation(rotation);
 
-		// Calculate model matrix
+		// Update model matrix
 		if (entity->isVisible())
 		{
 			entity->updateModelMatrix();

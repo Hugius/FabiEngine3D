@@ -24,12 +24,9 @@ public:
 	float getSkyExposureSpeed();
 
 private:
-	void _updateRotation();
-	void _updateExposureAdaption();
+	string _selectedMainID = "";
+	string _selectedMixID = "";
 
 	float _exposureFactor = 0.0f;
 	float _exposureSpeed = 0.0f;
-
-	string _selectedMainID = "";
-	string _selectedMixID = "";
 };

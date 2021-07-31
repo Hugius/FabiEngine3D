@@ -131,65 +131,55 @@ void SkyEntityManager::createEntity(const string& ID)
 
 void SkyEntityManager::update()
 {
-	// Check if main sky exists
+	// Temporary values
 	auto mainSky = getSelectedMainSky();
+	auto mixSky = getSelectedMixSky();
+
+	// Check if main sky exists
 	if (mainSky != nullptr)
 	{
-		// Renderbus updates
+		// Update rotation
+		if (mainSky->isVisible())
+		{
+			mainSky->updateRotation();
+		}
+
+		// Update sky exposure
+		if (_renderBus.isSkyExposureEnabled())
+		{
+			// Values
+			float lightness = mainSky->getLightness(); // Current lightness
+			float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
+			float targetLightness = mainSky->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _exposureFactor);
+
+			// Based on verticle angle
+			if (lightness > targetLightness) // Decrease lightness
+			{
+				mainSky->setLightness(lightness - (_exposureSpeed * 3.5f));
+			}
+			else if (mainSky->getLightness() < targetLightness) // Increase lightness
+			{
+				mainSky->setLightness(lightness + _exposureSpeed);
+			}
+		}
+		else
+		{
+			mainSky->setLightness(mainSky->getOriginalLightness()); // Revert lightness
+		}
+
+		// Update main sky renderbus values
 		_renderBus.setSkyRotationMatrix(mainSky->getRotationMatrix());
 		_renderBus.setMainSkyReflectionCubeMap(mainSky->getCubeMap());
 		_renderBus.setMainSkyColor(mainSky->getColor());
 		_renderBus.setMainSkyLightness(mainSky->getLightness());
 
-		// Core updates
-		_updateRotation();
-		_updateExposureAdaption();
-
-		// Check if mix sky exists
-		auto mixSky = getSelectedMixSky();
-		if (getSelectedMixSky() != nullptr)
+		// Update mix sky renderbus values
+		if (mixSky != nullptr)
 		{
-			_renderBus.setMixSkyReflectionCubeMap(getSelectedMixSky()->getCubeMap());
+			_renderBus.setMixSkyReflectionCubeMap(mixSky->getCubeMap());
 			_renderBus.setMixSkyColor(mixSky->getColor());
 			_renderBus.setMixSkyLightness(mixSky->getLightness());
 		}
-	}
-}
-
-void SkyEntityManager::_updateRotation()
-{
-	for (const auto& [keyID, entity] : _getSkyEntities())
-	{
-		if (entity->isVisible())
-		{
-			entity->updateRotationMatrix();
-		}
-	}
-}
-
-void SkyEntityManager::_updateExposureAdaption()
-{
-	// Update sky exposure
-	if (_renderBus.isSkyExposureEnabled())
-	{
-		// Values
-		float lightness = getSelectedMainSky()->getLightness(); // Current lightness
-		float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
-		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _exposureFactor);
-
-		// Based on verticle angle
-		if (lightness > targetLightness) // Decrease lightness
-		{
-			getSelectedMainSky()->setLightness(lightness - (_exposureSpeed * 3.5f));
-		}
-		else if (getSelectedMainSky()->getLightness() < targetLightness) // Increase lightness
-		{
-			getSelectedMainSky()->setLightness(lightness + _exposureSpeed);
-		}
-	}
-	else // Sky exposure not enabled
-	{
-		getSelectedMainSky()->setLightness(getSelectedMainSky()->getOriginalLightness()); // Revert lightness
 	}
 }
 

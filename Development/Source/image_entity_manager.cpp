@@ -105,7 +105,7 @@ void ImageEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getImageEntities())
 	{
-		// Calculate model matrix
+		// Update model matrix
 		if (entity->isVisible())
 		{
 			entity->updateModelMatrix();

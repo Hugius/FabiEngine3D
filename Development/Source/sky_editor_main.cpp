@@ -18,13 +18,14 @@ void SkyEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
+	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	
 	// Default graphics
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextfield("selectedSkyName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("skyEditorControls");
 	_isEditorLoaded = true;
 }
 

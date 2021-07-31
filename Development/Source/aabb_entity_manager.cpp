@@ -258,7 +258,7 @@ void AabbEntityManager::update(
 			}
 		}
 
-		// Calculate model matrix
+		// Update model matrix
 		if (entity->isVisible())
 		{
 			entity->updateModelMatrix();

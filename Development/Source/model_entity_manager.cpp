@@ -138,7 +138,7 @@ void ModelEntityManager::update()
 	{
 		if (entity->isVisible()) // Visible updates
 		{
-			// Calculate model matrix
+			// Update model matrix
 			entity->updateModelMatrix();
 
 			// Check if entity has LOD

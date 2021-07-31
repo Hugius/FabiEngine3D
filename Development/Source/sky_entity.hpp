@@ -12,7 +12,7 @@ class SkyEntity final : public BaseEntity
 public:
 	using BaseEntity::BaseEntity;
 
-	void updateRotationMatrix();
+	void updateRotation();
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);
 	void setCubeMap(GLuint value);
@@ -29,7 +29,7 @@ public:
 	const float getLightness()					 const;
 	const float getRotationSpeed()				 const;
 	const bool hasCubeMap()						 const;
-	const bool isWireFramed() const;
+	const bool isWireFramed()					 const;
 
 private:
 	array<string, 6> _diffuseMapPaths = { "", "", "", "", "", "" };

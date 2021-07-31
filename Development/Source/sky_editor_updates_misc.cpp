@@ -2,36 +2,37 @@
 
 void SkyEditor::_updateCamera()
 {
-	// Disable first person view
+	// Check if first person view is enabled
 	if (_fe3d.camera_isFirstPersonViewEnabled())
 	{
-		_fe3d.camera_disableFirstPersonView();
+		// Hide cursor
+		_fe3d.imageEntity_setVisible("@@cursor", false);
 	}
 
-	// Check if sky is inactive
-	if (_currentSkyID.empty() || !_fe3d.skyEntity_isExisting(_currentSkyID))
+	// Check if allowed by GUI
+	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Reset camera
-		_fe3d.camera_reset();
-		_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
-	}
-	else
-	{
-		// Show cursor
-		_fe3d.imageEntity_setVisible("@@cursor", true);
-
-		// Check if allowed by GUI
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		// Check if RMB pressed
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if RMB pressed
-			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check first person view status
+			if (_fe3d.camera_isFirstPersonViewEnabled())
 			{
-				// Enable first person view
-				_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
-
-				// Hide cursor
-				_fe3d.imageEntity_setVisible("@@cursor", false);
+				_fe3d.camera_disableFirstPersonView();
 			}
+			else
+			{
+				_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
+			}
+		}
+	}
+
+	// Disable first person view if necessary
+	if (_fe3d.camera_isFirstPersonViewEnabled())
+	{
+		if (_gui.getGlobalScreen()->isFocused())
+		{
+			_fe3d.camera_disableFirstPersonView();
 		}
 	}
 }

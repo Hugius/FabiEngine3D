@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void SkyEntity::updateRotationMatrix()
+void SkyEntity::updateRotation()
 {
 	if (_rotationSpeed != 0.0f)
 	{

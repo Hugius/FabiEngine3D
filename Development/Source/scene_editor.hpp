@@ -60,34 +60,34 @@ private:
 	void _unloadGUI();
 
 	// Environment updates
-	void _updateMainEnvironmentMenu();
+	void _updateEnvironmentMenu();
 	void _updateSkyMenu();
 	void _updateTerrainMenu();
 	void _updateWaterMenu();
 
 	// Model updates
-	void _updateMainModelMenu();
+	void _updateModelMenu();
 	void _updateModelPlacingMenu();
 	void _updateModelChoosingMenu();
 	void _updateModelPlacing();
 	void _updateModelEditing();
 
 	// Billboard updates
-	void _updateMainBillboardMenu();
+	void _updateBillboardMenu();
 	void _updateBillboardPlacingMenu();
 	void _updateBillboardChoosingMenu();
 	void _updateBillboardPlacing();
 	void _updateBillboardEditing();
 
 	// Sound updates
-	void _updateMainSoundMenu();
+	void _updateSoundMenu();
 	void _updateSoundPlacingMenu();
 	void _updateSoundChoosingMenu();
 	void _updateSoundPlacing();
 	void _updateSoundEditing();
 
 	// Lighting updates
-	void _updateMainLightingMenu();
+	void _updateLightingMenu();
 	void _updateAmbientLightingMenu();
 	void _updateDirectionalLightingMenu();
 	void _updatePointLightingMenu();
@@ -95,7 +95,7 @@ private:
 	void _updateLightEditing();
 
 	// Settings updates
-	void _updateMainSettingsMenu();
+	void _updateSettingsMenu();
 	void _updateGraphicsSettingsMenu();
 	void _updateShadowGraphicsSettingsMenu();
 	void _updateMotionBlurGraphicsSettingsMenu();

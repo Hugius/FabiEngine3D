@@ -40,11 +40,11 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateAnimationExecution();
-	void _updateManagementScreen();
+	void _updateMainMenu();
+	void _updateChoiceMenu();
+	void _updateFrameMenu();
 	void _updateAnimationCreating();
 	void _updateAnimationChoosing();
-	void _updateEditingScreen();
-	void _updateFrameScreen();
 	void _updateAnimationDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();

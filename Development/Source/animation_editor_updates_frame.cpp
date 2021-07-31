@@ -1,7 +1,7 @@
 #include "animation_editor.hpp"
 #include "logger.hpp"
 
-void AnimationEditor::_updateFrameScreen()
+void AnimationEditor::_updateFrameMenu()
 {
 	if (_isEditorLoaded)
 	{

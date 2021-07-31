@@ -3,16 +3,16 @@
 
 void ModelEditor::update()
 {
-	_updateManagementScreen();
+	_updateMainMenu();
+	_updateChoiceMenu();
 	_updateModelCreating();
 	_updateModelChoosing();
-	_updateEditingScreen();
 	_updateModelDeleting();
 	_updateCamera();
 	_updateMiscellaneous();
 }
 
-void ModelEditor::_updateManagementScreen()
+void ModelEditor::_updateMainMenu()
 {
 	if (_isEditorLoaded)
 	{
@@ -68,7 +68,7 @@ void ModelEditor::_updateManagementScreen()
 	}
 }
 
-void ModelEditor::_updateEditingScreen()
+void ModelEditor::_updateChoiceMenu()
 {
 	if (_isEditingModel && _currentModelID != "")
 	{
@@ -144,23 +144,23 @@ void ModelEditor::_updateEditingScreen()
 		}
 		else if (screen->getID() == "modelEditorMenuMesh")
 		{
-			_updateModelEditingMesh();
+			_updateMeshMenu();
 		}
 		else if (screen->getID() == "modelEditorMenuOptions")
 		{
-			_updateModelEditingOptions();
+			_updateOptionsMenu();
 		}
 		else if (screen->getID() == "modelEditorMenuLighting")
 		{
-			_updateModelEditingLighting();
+			_updateLightingMenu();
 		}
 		else if (screen->getID() == "modelEditorMenuSize")
 		{
-			_updateModelEditingSize();
+			_updateSizeMenu();
 		}
 		else if (screen->getID() == "modelEditorMenuAabb")
 		{
-			_updateModelEditingAabb();
+			_updateAabbMenu();
 		}
 	}
 }

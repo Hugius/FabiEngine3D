@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void SceneEditor::_updateMainModelMenu()
+void SceneEditor::_updateModelMenu()
 {
 	if (_isEditorLoaded)
 	{

@@ -4,9 +4,9 @@
 void AudioEditor::update()
 {
 	_updateMainMenu();
+	_updateChoiceMenu();
 	_updateAudioCreating();
 	_updateAudioChoosing();
-	_updateAudioEditing();
 	_updateAudioDeleting();
 	_updateMiscellaneous();
 }

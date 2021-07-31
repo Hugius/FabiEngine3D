@@ -1,7 +1,7 @@
 #include "audio_editor.hpp"
 #include "logger.hpp"
 
-void AudioEditor::_updateAudioEditing()
+void AudioEditor::_updateChoiceMenu()
 {
 	if (_isEditorLoaded)
 	{

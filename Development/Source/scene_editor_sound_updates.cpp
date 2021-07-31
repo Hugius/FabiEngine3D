@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void SceneEditor::_updateMainSoundMenu()
+void SceneEditor::_updateSoundMenu()
 {
 	if (_isEditorLoaded)
 	{

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void SceneEditor::_updateMainBillboardMenu()
+void SceneEditor::_updateBillboardMenu()
 {
 	if (_isEditorLoaded)
 	{

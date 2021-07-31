@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void BillboardEditor::_updateBillboardEditing()
+void BillboardEditor::_updateChoiceMenu()
 {
 	if (_isEditorLoaded)
 	{

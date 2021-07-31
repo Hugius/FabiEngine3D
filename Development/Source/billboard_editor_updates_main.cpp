@@ -5,16 +5,16 @@
 
 void BillboardEditor::update()
 {
-	_updateBillboardManagement();
+	_updateMainMenu();
+	_updateChoiceMenu();
 	_updateBillboardCreating();
 	_updateBillboardChoosing();
-	_updateBillboardEditing();
 	_updateBillboardDeleting();
 	_updateCamera();
 	_updateMiscellaneous();
 }
 
-void BillboardEditor::_updateBillboardManagement()
+void BillboardEditor::_updateMainMenu()
 {
 	if (_isEditorLoaded)
 	{

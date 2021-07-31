@@ -24,9 +24,9 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();
+	void _updateChoiceMenu();
 	void _updateAudioCreating();
 	void _updateAudioChoosing();
-	void _updateAudioEditing();
 	void _updateAudioDeleting();
 	void _updateMiscellaneous();
 

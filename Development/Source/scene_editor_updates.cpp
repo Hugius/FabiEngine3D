@@ -10,27 +10,27 @@ void SceneEditor::update()
 	_updateChoiceMenu();
 
 	// Environment updates
-	_updateMainEnvironmentMenu();
+	_updateEnvironmentMenu();
 	_updateSkyMenu();
 	_updateTerrainMenu();
 	_updateWaterMenu();
 
 	// Model updates
-	_updateMainModelMenu();
+	_updateModelMenu();
 	_updateModelPlacingMenu();
 	_updateModelChoosingMenu();
 	_updateModelPlacing();
 	_updateModelEditing();
 
 	// Billboard updates
-	_updateMainBillboardMenu();
+	_updateBillboardMenu();
 	_updateBillboardPlacingMenu();
 	_updateBillboardChoosingMenu();
 	_updateBillboardPlacing();
 	_updateBillboardEditing();
 
 	// Lighting updates
-	_updateMainLightingMenu();
+	_updateLightingMenu();
 	_updateAmbientLightingMenu();
 	_updateDirectionalLightingMenu();
 	_updatePointLightingMenu();
@@ -38,14 +38,14 @@ void SceneEditor::update()
 	_updateLightEditing();
 
 	// Sound updates
-	_updateMainSoundMenu();
+	_updateSoundMenu();
 	_updateSoundPlacingMenu();
 	_updateSoundChoosingMenu();
 	_updateSoundPlacing();
 	_updateSoundEditing();
 
 	// Settings updates
-	_updateMainSettingsMenu();
+	_updateSettingsMenu();
 	_updateGraphicsSettingsMenu();
 	_updateShadowGraphicsSettingsMenu();
 	_updateMotionBlurGraphicsSettingsMenu();

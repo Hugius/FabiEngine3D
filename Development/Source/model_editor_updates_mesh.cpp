@@ -2,7 +2,7 @@
 
 #include "model_editor.hpp"
 
-void ModelEditor::_updateModelEditingMesh()
+void ModelEditor::_updateMeshMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

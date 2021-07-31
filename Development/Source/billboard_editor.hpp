@@ -23,10 +23,10 @@ public:
 private:
 	void _loadGUI();
 	void _unloadGUI();
-	void _updateBillboardManagement();
+	void _updateMainMenu();
+	void _updateChoiceMenu();
 	void _updateBillboardCreating();
 	void _updateBillboardChoosing();
-	void _updateBillboardEditing();
 	void _updateBillboardDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();

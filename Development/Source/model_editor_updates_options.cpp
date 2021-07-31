@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void ModelEditor::_updateModelEditingOptions()
+void ModelEditor::_updateOptionsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

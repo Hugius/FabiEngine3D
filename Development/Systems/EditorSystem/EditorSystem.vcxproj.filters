@@ -156,10 +156,10 @@
     <ClCompile Include="..\..\Source\animation_editor_updates_main.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_edit_frame.cpp">
+    <ClCompile Include="..\..\Source\animation_editor_updates_frame.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_updates_edit_main.cpp">
+    <ClCompile Include="..\..\Source\animation_editor_updates_choice.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\audio_editor_main.cpp">
@@ -171,10 +171,10 @@
     <ClCompile Include="..\..\Source\audio_editor_misc.cpp">
       <Filter>Audio Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_updates.cpp">
+    <ClCompile Include="..\..\Source\audio_editor_updates_main.cpp">
       <Filter>Audio Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_updates_edit.cpp">
+    <ClCompile Include="..\..\Source\audio_editor_updates_choice.cpp">
       <Filter>Audio Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_main.cpp">
@@ -189,7 +189,7 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_edit.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_choice.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\sky_editor_misc.cpp">
@@ -204,10 +204,10 @@
     <ClCompile Include="..\..\Source\model_editor_misc.cpp">
       <Filter>Model Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_edit_aabb.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_edit_lighting.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp">
@@ -216,13 +216,13 @@
     <ClCompile Include="..\..\Source\model_editor_updates_main.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_edit_mesh.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_edit_options.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_edit_size.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_loading.cpp">

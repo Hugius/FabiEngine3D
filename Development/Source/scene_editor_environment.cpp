@@ -1,6 +1,6 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::_updateMainEnvironmentMenu()
+void SceneEditor::_updateEnvironmentMenu()
 {
 	if (_isEditorLoaded)
 	{

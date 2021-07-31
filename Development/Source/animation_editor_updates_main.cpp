@@ -13,9 +13,9 @@ void AnimationEditor::update()
 
 	// GUI
 	_updateAnimationExecution();
-	_updateManagementScreen();
-	_updateEditingScreen();
-	_updateFrameScreen();
+	_updateMainMenu();
+	_updateChoiceMenu();
+	_updateFrameMenu();
 
 	// Animation lifecycle
 	_updateAnimationCreating();
@@ -27,7 +27,7 @@ void AnimationEditor::update()
 	_updateMiscellaneous();
 }
 
-void AnimationEditor::_updateManagementScreen()
+void AnimationEditor::_updateMainMenu()
 {
 	if (_isEditorLoaded)
 	{

@@ -2,11 +2,13 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
-SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
-	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
+SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor)
+	:
 	_fe3d(fe3d),
 	_gui(gui),
-	_environmentEditor(environmentEditor),
+	_skyEditor(skyEditor),
+	_terrainEditor(terrainEditor),
+	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
@@ -37,9 +39,9 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_setBright("@@lightSource", true);
 
 	// Preview environment loading
-	_environmentEditor.loadSkyEntitiesFromFile();
-	_environmentEditor.loadTerrainEntitiesFromFile();
-	_environmentEditor.loadWaterEntitiesFromFile();
+	_skyEditor.loadSkyEntitiesFromFile();
+	_terrainEditor.loadTerrainEntitiesFromFile();
+	_waterEditor.loadWaterEntitiesFromFile();
 
 	// Preview models loading
 	_modelEditor.loadModelEntitiesFromFile();
@@ -114,9 +116,9 @@ void SceneEditor::unload()
 	_fe3d.gfx_disablePointLighting(true);
 
 	// Unload environment preview entities
-	_environmentEditor.unloadSkyEntities();
-	_environmentEditor.unloadTerrainEntities();
-	_environmentEditor.unloadWaterEntities();
+	_skyEditor.unloadSkyEntities();
+	_terrainEditor.unloadTerrainEntities();
+	_waterEditor.unloadWaterEntities();
 
 	// Delete other preview entities
 	_fe3d.soundEntity_deleteAll();

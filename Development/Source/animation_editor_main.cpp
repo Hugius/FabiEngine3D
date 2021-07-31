@@ -4,7 +4,8 @@
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor) :
+AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor)
+	:
 	_fe3d(fe3d),
 	_gui(gui),
 	_modelEditor(modelEditor)

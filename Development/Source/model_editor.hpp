@@ -25,8 +25,8 @@ public:
 private:
 	void _loadGUI();
 	void _unloadGUI();
-	bool _createModel(const string& modelName, string meshPath, string diffuseMapPath, string emissionMapPath, string reflectionMapPath, string normalMapPath,
-		Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
+	bool _createModel(const string& modelName, string meshPath, string diffuseMapPath, string emissionMapPath, string reflectionMapPath, 
+		string normalMapPath, Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
 		bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _loadMesh();

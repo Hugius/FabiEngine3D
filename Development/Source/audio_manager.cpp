@@ -3,7 +3,8 @@
 
 #include <algorithm>
 
-AudioManager::AudioManager(AudioLoader& audioLoader) :
+AudioManager::AudioManager(AudioLoader& audioLoader)
+	:
 	_audioLoader(audioLoader)
 {
 

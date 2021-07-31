@@ -1,15 +1,15 @@
-#include "environment_editor.hpp"
+#include "water_editor.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-void EnvironmentEditor::_updateWaterMenuEffects()
+void WaterEditor::_updateWaterMenuEffects()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuWaterEffects")
+	if (screen->getID() == "waterEditorMenuEffects")
 	{
 		// Temporary values
 		float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
@@ -24,7 +24,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
@@ -147,13 +147,13 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 	}
 }
 
-void EnvironmentEditor::_updateWaterMenuOptions()
+void WaterEditor::_updateWaterMenuOptions()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuWaterOptions")
+	if (screen->getID() == "waterEditorMenuOptions")
 	{
 		// Temporary values
 		auto color = _fe3d.waterEntity_getColor(_currentWaterID);
@@ -169,7 +169,7 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{

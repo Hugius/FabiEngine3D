@@ -2,14 +2,13 @@
 #include "configuration.hpp"
 #include "logger.hpp"
 
-EngineController::EngineController() :
+EngineController::EngineController()
+	:
 	FabiEngine3D(),
 	_gui(*this),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
-	_topViewportController(*this, _gui, _leftViewportController.getEnvironmentEditor(), _leftViewportController.getModelEditor(),
-		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), _leftViewportController.getAnimationEditor(),
-		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getSettingsEditor()),
+	_topViewportController(*this, _gui, _leftViewportController.getSkyEditor(), _leftViewportController.getTerrainEditor(), _leftViewportController.getWaterEditor(), _leftViewportController.getModelEditor(), _leftViewportController.getAnimationEditor(), _leftViewportController.getBillboardEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getSceneEditor(), _leftViewportController.getScriptEditor(), _leftViewportController.getSettingsEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
 
@@ -29,7 +28,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		}
 
 		// Set name of application to run
-		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(application_getTitle());
+		_leftViewportController.getSkyEditor().setCurrentProjectID(application_getTitle());
+		_leftViewportController.getTerrainEditor().setCurrentProjectID(application_getTitle());
+		_leftViewportController.getWaterEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getModelEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getAnimationEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getBillboardEditor().setCurrentProjectID(application_getTitle());

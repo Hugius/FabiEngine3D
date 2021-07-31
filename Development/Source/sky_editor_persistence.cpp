@@ -1,16 +1,16 @@
-#include "environment_editor.hpp"
+#include "sky_editor.hpp"
 #include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
 #include <algorithm>
 
-const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile()
+const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::getAllSkyTexturePathsFromFile() ---> no current project loaded!");
+		Logger::throwError("SkyEditor::getAllTexturePathsFromFile() ---> no current project loaded!");
 	}
 
 	// Compose file path
@@ -65,12 +65,12 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 	return texturePaths;
 }
 
-bool EnvironmentEditor::loadSkyEntitiesFromFile()
+bool SkyEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::loadSkyEntitiesFromFile() ---> no current project loaded!");
+		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile() ---> no current project loaded!");
 	}
 
 	// Clear IDs from previous loads
@@ -143,7 +143,7 @@ bool EnvironmentEditor::loadSkyEntitiesFromFile()
 	return true;
 }
 
-bool EnvironmentEditor::saveSkyEntitiesToFile()
+bool SkyEditor::saveSkyEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
@@ -154,7 +154,7 @@ bool EnvironmentEditor::saveSkyEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		Logger::throwError("EnvironmentEditor::saveSkyEntitiesToFile() ---> no current project loaded!");
+		Logger::throwError("SkyEditor::saveSkyEntitiesToFile() ---> no current project loaded!");
 	}
 
 	// Compose file path

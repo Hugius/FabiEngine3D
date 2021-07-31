@@ -6,7 +6,9 @@
 class Animation final
 {
 public:
-	Animation(const string& ID) : ID(ID)
+	Animation(const string& ID)
+		:
+		ID(ID)
 	{
 		// Empty part = whole model
 		partIDs.push_back("");

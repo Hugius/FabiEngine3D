@@ -4,7 +4,8 @@
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
-BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
+BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)
+	:
 	_fe3d(fe3d),
 	_gui(gui)
 {

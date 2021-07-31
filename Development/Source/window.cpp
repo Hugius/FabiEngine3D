@@ -4,7 +4,8 @@
 
 #include <SDL\\SDL_syswm.h>
 
-Window::Window(LibraryLoader& libraryLoader) :
+Window::Window(LibraryLoader& libraryLoader)
+	:
 	_windowPointer(libraryLoader.getWindowPointer())
 {
 	hideBorder();

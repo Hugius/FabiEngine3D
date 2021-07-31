@@ -312,8 +312,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 					{
 						// Retrieve other variable
-						auto otherVariable = _isLocalVariableExisting(valueString) ?
-							_getLocalVariable(valueString) : _getGlobalVariable(valueString);
+						auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 						// Validate vec3 access
 						if (vec3Parts != Ivec3(0))

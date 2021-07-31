@@ -3,9 +3,8 @@
 
 #include <algorithm>
 
-EngineGuiScrollingList::EngineGuiScrollingList(
-	FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color,
-	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize) :
+EngineGuiScrollingList::EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
+	:
 	EngineGuiRectangle(fe3d, parentID + "_scrollinglist", ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),

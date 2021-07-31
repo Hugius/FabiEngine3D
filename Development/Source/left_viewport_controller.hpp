@@ -1,7 +1,9 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
-#include "environment_editor.hpp"
+#include "sky_editor.hpp"
+#include "terrain_editor.hpp"
+#include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
@@ -20,7 +22,9 @@ public:
 	void initialize() override;
 	void update() override;
 
-	EnvironmentEditor& getEnvironmentEditor();
+	SkyEditor& getSkyEditor();
+	TerrainEditor& getTerrainEditor();
+	WaterEditor& getWaterEditor();
 	ModelEditor& getModelEditor();
 	AnimationEditor& getAnimationEditor();
 	BillboardEditor& getBillboardEditor();
@@ -36,7 +40,9 @@ public:
 	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 private:
-	EnvironmentEditor _environmentEditor;
+	SkyEditor _skyEditor;
+	TerrainEditor _terrainEditor;
+	WaterEditor _waterEditor;
 	ModelEditor _modelEditor;
 	AnimationEditor _animationEditor;
 	BillboardEditor _billboardEditor;

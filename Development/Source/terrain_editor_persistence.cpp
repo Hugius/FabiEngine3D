@@ -1,11 +1,11 @@
-#include "environment_editor.hpp"
+#include "terrain_editor.hpp"
 #include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
 #include <algorithm>
 
-const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
+const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -101,7 +101,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 	return texturePaths;
 }
 
-bool EnvironmentEditor::loadTerrainEntitiesFromFile()
+bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -220,7 +220,7 @@ bool EnvironmentEditor::loadTerrainEntitiesFromFile()
 	return true;
 }
 
-bool EnvironmentEditor::saveTerrainEntitiesToFile()
+bool TerrainEditor::saveTerrainEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)

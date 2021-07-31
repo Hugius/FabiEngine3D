@@ -2,7 +2,8 @@
 
 #include <algorithm>
 
-Sound::Sound(const string& ID, const string& filePath, Mix_Chunk* dataPointer) :
+Sound::Sound(const string& ID, const string& filePath, Mix_Chunk* dataPointer)
+	:
 	_ID(ID),
 	_filePath(filePath),
 	_dataPointer(dataPointer)

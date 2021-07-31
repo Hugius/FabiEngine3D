@@ -3,9 +3,8 @@
 #include <map>
 #include <windows.h>
 
-EngineGuiWritefield::EngineGuiWritefield(
-	FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
-	Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed) :
+EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
+	:
 	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),

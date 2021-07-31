@@ -3,7 +3,8 @@
 
 using std::make_shared;
 
-BaseEntityManager::BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+BaseEntityManager::BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+	:
 	_type(type),
 	_meshLoader(meshLoader),
 	_textureLoader(texLoader),

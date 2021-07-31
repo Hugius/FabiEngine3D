@@ -228,7 +228,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	else if (_isLocalVariableExisting(indexString) || _isGlobalVariableExisting(indexString))
 	{
 		// Retrieve variable
-		auto& variable = _isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString);
+		auto& variable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
 		// Check if variable is an integer
 		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::INTEGER)

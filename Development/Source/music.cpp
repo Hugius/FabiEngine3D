@@ -1,6 +1,7 @@
 #include "music.hpp"
 
-Music::Music(Mix_Music* dataPointer) :
+Music::Music(Mix_Music* dataPointer)
+	:
 	_dataPointer(dataPointer)
 {
 	

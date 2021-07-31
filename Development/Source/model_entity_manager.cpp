@@ -1,7 +1,8 @@
 #include "model_entity_manager.hpp"
 #include "logger.hpp"
 
-ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+	:
 	BaseEntityManager(EntityType::MODEL, meshLoader, texLoader, renderBus)
 {
 

@@ -3,7 +3,8 @@
 
 #include <algorithm>
 
-Camera::Camera(RenderBus& renderBus, Window& window) :
+Camera::Camera(RenderBus& renderBus, Window& window)
+	:
 	_renderBus(renderBus),
 	_window(window),
 	_aspectRatio(static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y))

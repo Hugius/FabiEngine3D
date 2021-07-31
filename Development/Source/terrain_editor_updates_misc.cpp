@@ -1,6 +1,6 @@
-#include "environment_editor.hpp"
+#include "terrain_editor.hpp"
 
-void EnvironmentEditor::_updateTerrainCamera()
+void TerrainEditor::_updateTerrainCamera()
 {
 	if (_isEditorLoaded)
 	{
@@ -79,7 +79,7 @@ void EnvironmentEditor::_updateTerrainCamera()
 	}
 }
 
-void EnvironmentEditor::_updateTerrainMiscellaneous()
+void TerrainEditor::_updateTerrainMiscellaneous()
 {
 	if (_isEditorLoaded)
 	{

@@ -1,11 +1,11 @@
-#include "environment_editor.hpp"
+#include "water_editor.hpp"
 #include "logger.hpp"
 
 #include <fstream>
 #include <sstream>
 #include <algorithm>
 
-const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
+const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -73,7 +73,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 	return texturePaths;
 }
 
-bool EnvironmentEditor::loadWaterEntitiesFromFile()
+bool WaterEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
@@ -180,7 +180,7 @@ bool EnvironmentEditor::loadWaterEntitiesFromFile()
 	return true;
 }
 
-bool EnvironmentEditor::saveWaterEntitiesToFile()
+bool WaterEditor::saveWaterEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)

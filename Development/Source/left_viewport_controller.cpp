@@ -2,15 +2,18 @@
 
 #define TW(text) calculateTextWidth(text, CW)
 
-LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui) :
+LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui)
+	:
 	BaseViewportController(fe3d, gui),
-	_environmentEditor(fe3d, gui),
+	_skyEditor(fe3d, gui),
+	_terrainEditor(fe3d, gui),
+	_waterEditor(fe3d, gui),
 	_modelEditor(fe3d, gui),
 	_animationEditor(fe3d, gui, _modelEditor),
 	_billboardEditor(fe3d, gui),
 	_audioEditor(fe3d, gui),
-	_sceneEditor(fe3d, gui, _environmentEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor),
-	_scriptEditor(fe3d, gui, _sceneEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor, _environmentEditor),
+	_sceneEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor),
+	_scriptEditor(fe3d, gui, _skyEditor, _terrainEditor, _waterEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor, _sceneEditor),
 	_settingsEditor(fe3d, gui)
 {
 
@@ -53,17 +56,20 @@ void LeftViewportController::update()
 		{
 			if (screen->getButton("skyEditor")->isHovered()) // Sky editor button
 			{
-				_environmentEditor.load();
-				window->setActiveScreen("skyEditorMenuMain");
+				if (_skyEditor.loadSkyEntitiesFromFile())
+				{
+					_skyEditor.load();
+					window->setActiveScreen("skyEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("terrainEditor")->isHovered()) // Terrain editor button
 			{
-				_environmentEditor.load();
+				_terrainEditor.load();
 				window->setActiveScreen("terrainEditorMenuMain");
 			}
 			else if (screen->getButton("waterEditor")->isHovered()) // Water editor button
 			{
-				_environmentEditor.load();
+				_waterEditor.load();
 				window->setActiveScreen("waterEditorMenuMain");
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
@@ -123,7 +129,9 @@ void LeftViewportController::update()
 	}
 
 	// Update all editors
-	_environmentEditor.update();
+	_skyEditor.update();
+	_terrainEditor.update();
+	_waterEditor.update();
 	_modelEditor.update();
 	_animationEditor.update();
 	_billboardEditor.update();
@@ -133,9 +141,19 @@ void LeftViewportController::update()
 	_settingsEditor.update();
 }
 
-EnvironmentEditor& LeftViewportController::getEnvironmentEditor()
+SkyEditor& LeftViewportController::getSkyEditor()
 {
-	return _environmentEditor;
+	return _skyEditor;
+}
+
+TerrainEditor& LeftViewportController::getTerrainEditor()
+{
+	return _terrainEditor;
+}
+
+WaterEditor& LeftViewportController::getWaterEditor()
+{
+	return _waterEditor;
 }
 
 ModelEditor& LeftViewportController::getModelEditor()

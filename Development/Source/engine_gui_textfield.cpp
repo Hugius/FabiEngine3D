@@ -1,7 +1,7 @@
 #include "engine_gui_textfield.hpp"
 
-EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
-	string textContent, Vec3 textColor, bool isCentered, bool isDynamic) :
+EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),

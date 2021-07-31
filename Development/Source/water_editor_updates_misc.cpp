@@ -1,9 +1,9 @@
-#include "environment_editor.hpp"
+#include "water_editor.hpp"
 #include "logger.hpp"
 
-void EnvironmentEditor::_updateWaterEditor()
+void WaterEditor::_updateWaterEditor()
 {
-	if (_currentEnvironmentType == EnvironmentType::WATER)
+	if (_isEditorLoaded)
 	{
 		_updateWaterMenuMain();
 		_updateWaterMenuChoice();
@@ -17,7 +17,7 @@ void EnvironmentEditor::_updateWaterEditor()
 	}
 }
 
-void EnvironmentEditor::_updateWaterCreating()
+void WaterEditor::_updateWaterCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -44,7 +44,7 @@ void EnvironmentEditor::_updateWaterCreating()
 							_loadedWaterIDs.push_back(_currentWaterID);
 							_fe3d.waterEntity_create(_currentWaterID);
 							_fe3d.waterEntity_select(_currentWaterID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
 								"Water: " + _currentWaterID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), true);
@@ -70,7 +70,7 @@ void EnvironmentEditor::_updateWaterCreating()
 	}
 }
 
-void EnvironmentEditor::_updateWaterChoosing()
+void WaterEditor::_updateWaterChoosing()
 {
 	if (_isEditorLoaded)
 	{
@@ -91,7 +91,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 					if (_isEditingWater)
 					{
 						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
 						// Show water name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
@@ -118,7 +118,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 	}
 }
 
-void EnvironmentEditor::_updateWaterDeleting()
+void WaterEditor::_updateWaterDeleting()
 {
 	if (_isEditorLoaded)
 	{
@@ -151,7 +151,7 @@ void EnvironmentEditor::_updateWaterDeleting()
 	}
 }
 
-void EnvironmentEditor::_updateWaterCamera()
+void WaterEditor::_updateWaterCamera()
 {
 	if (_isEditorLoaded)
 	{
@@ -191,4 +191,9 @@ void EnvironmentEditor::_updateWaterCamera()
 			}
 		}
 	}
+}
+
+void WaterEditor::_updateMiscellaneous()
+{
+
 }

@@ -1,7 +1,8 @@
 #include "base_entity.hpp"
 #include "logger.hpp"
 
-BaseEntity::BaseEntity(const string& ID) :
+BaseEntity::BaseEntity(const string& ID)
+	:
 	_ID(ID)
 {
 	if (ID.empty())

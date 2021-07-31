@@ -31,6 +31,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\ivector2.cpp" />
     <ClCompile Include="..\..\Source\ivector3.cpp" />
+    <ClCompile Include="..\..\Source\mathematics.cpp" />
     <ClCompile Include="..\..\Source\matrix33.cpp" />
     <ClCompile Include="..\..\Source\matrix44.cpp" />
     <ClCompile Include="..\..\Source\matrix44_functions.cpp" />

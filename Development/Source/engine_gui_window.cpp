@@ -1,7 +1,8 @@
 #include "engine_gui_window.hpp"
 #include "logger.hpp"
 
-EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color) :
+EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),

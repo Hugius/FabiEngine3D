@@ -1,6 +1,7 @@
 #include "engine_gui_viewport.hpp"
 
-EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 position, Vec2 size, Vec3 color) :
+EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 position, Vec2 size, Vec3 color)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + ID)

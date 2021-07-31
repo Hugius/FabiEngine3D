@@ -97,7 +97,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 
 	// Retrieve list variable
-	auto& listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// A constant list should not be changed
 	if (listVariable.isConstant())
@@ -173,8 +173,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 		{
 			// Retrieve other value
-			auto otherVariable = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) :
-				_getGlobalVariable(valueString);
+			auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 			// Validate vec3 access
 			if (vec3Parts != Ivec3(0))
@@ -287,7 +286,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	// Retrieve list variable
-	auto& listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+	auto& listVariable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// A constant list should not be changed
 	if (listVariable.isConstant())
@@ -305,7 +304,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	else
 	{
 		// Retrieve index variable
-		auto indexVariable = _isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString);
+		auto indexVariable = (_isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString));
 
 		// Check if integer
 		if (indexVariable.getValue().getType() != ScriptValueType::INTEGER)

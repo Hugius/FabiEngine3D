@@ -5,12 +5,12 @@
 #include <fstream>
 #include <sstream>
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
-	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
-	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
-	AudioEditor& audioEditor, SettingsEditor& settingsEditor) :
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
+	:
 	BaseViewportController(fe3d, gui),
-	_environmentEditor(environmentEditor),
+	_skyEditor(skyEditor),
+	_terrainEditor(terrainEditor),
+	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
@@ -302,9 +302,9 @@ void TopViewportController::_saveCurrentProject()
 	}
 
 	// Save everything
-	_environmentEditor.saveSkyEntitiesToFile();
-	_environmentEditor.saveTerrainEntitiesToFile();
-	_environmentEditor.saveWaterEntitiesToFile();
+	_skyEditor.saveSkyEntitiesToFile();
+	_terrainEditor.saveTerrainEntitiesToFile();
+	_waterEditor.saveWaterEntitiesToFile();
 	_modelEditor.saveModelEntitiesToFile();
 	_animationEditor.saveAnimationsToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();

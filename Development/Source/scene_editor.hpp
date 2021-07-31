@@ -2,11 +2,13 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "environment_editor.hpp"
+#include "sky_editor.hpp"
+#include "terrain_editor.hpp"
+#include "water_editor.hpp"
 #include "model_editor.hpp"
+#include "animation_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
-#include "animation_editor.hpp"
 #include "transformation_type.hpp"
 
 #include <map>
@@ -15,7 +17,7 @@
 class SceneEditor final
 {
 public:
-	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
+	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor,
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 
 	// Core
@@ -136,7 +138,9 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
-	EnvironmentEditor& _environmentEditor;
+	SkyEditor& _skyEditor;
+	TerrainEditor& _terrainEditor;
+	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;

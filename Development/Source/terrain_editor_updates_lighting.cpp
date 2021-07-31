@@ -1,15 +1,15 @@
-#include "environment_editor.hpp"
+#include "terrain_editor.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-void EnvironmentEditor::_updateTerrainMenuLighting()
+void TerrainEditor::_updateTerrainMenuLighting()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuTerrainLighting")
+	if (screen->getID() == "terrainEditorMenuLighting")
 	{
 		// Temporary values
 		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
@@ -22,7 +22,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{

@@ -1,6 +1,7 @@
 #include "engine_gui_manager.hpp"
 
-EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) : 
+EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d)
+	: 
 	_fe3d(fe3d)
 {
 	// Check if loading engine preview

@@ -6,7 +6,8 @@
 
 using std::make_shared;
 
-MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera) :
+MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera)
+	:
 	_renderBus(renderBus),
 	_timer(timer),
 	_textureLoader(textureLoader),

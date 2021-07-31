@@ -11,40 +11,10 @@
 class Math final
 {
 public:
-	static inline float degreesToRadians(float angle)
-	{
-		return (angle * DEG2RAD);
-	}
-
-	static inline float radiansToDegrees(float angle)
-	{
-		return (angle * RAD2DEG);
-	}
-	
-	static inline float getPI()
-	{
-		return PI;
-	}
-
-	static inline float calculateReferenceAngle(float initialAngle)
-	{
-		if (initialAngle >= 0.0f && initialAngle <= 90.0f)
-		{
-			return initialAngle;
-		}
-		else if (initialAngle > 90.0f && initialAngle <= 180.0f)
-		{
-			return 180.0f - initialAngle;
-		}
-		else if (initialAngle > 180.0f && initialAngle <= 270.0f)
-		{
-			return initialAngle - 180.0f;
-		}
-		else
-		{
-			return 360.0f - initialAngle;
-		}
-	}
+	static float degreesToRadians(float angle);
+	static float radiansToDegrees(float angle);
+	static float getPI();
+	static float calculateReferenceAngle(float initialAngle);
 
 private:
 	static inline const float PI = 3.14159265358979323846264338327f;

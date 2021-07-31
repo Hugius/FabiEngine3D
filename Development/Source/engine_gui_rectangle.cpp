@@ -1,6 +1,7 @@
 #include "engine_gui_rectangle.hpp"
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered) :
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
@@ -12,7 +13,8 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.imageEntity_create(_entityID, color, position, 0.0f, size, isCentered);
 }
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered) :
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),

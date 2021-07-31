@@ -140,8 +140,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 				if (_isLocalVariableExisting(elementString) || _isGlobalVariableExisting(elementString))
 				{
 					// Retrieve variable value
-					auto variable = _isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) :
-						_getGlobalVariable(elementString);
+					auto variable = (_isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) : _getGlobalVariable(elementString));
 
 					if (vec3Parts.x) // Vec3.x
 					{

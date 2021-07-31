@@ -5,7 +5,8 @@
 #include <algorithm>
 
 BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-	TopViewportController& topViewportController, ScriptEditor& scriptEditor) :
+	TopViewportController& topViewportController, ScriptEditor& scriptEditor)
+	:
 	BaseViewportController(fe3d, gui),
 	_topViewportController(topViewportController),
 	_scriptEditor(scriptEditor)

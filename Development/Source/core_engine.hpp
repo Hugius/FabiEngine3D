@@ -20,8 +20,6 @@
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
 #include "ray_caster.hpp"
-#include "model_editor.hpp"
-#include "environment_editor.hpp"
 #include "collision_resolver.hpp"
 #include "timer.hpp"
 #include "audio_manager.hpp"

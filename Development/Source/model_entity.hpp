@@ -94,7 +94,8 @@ public:
 private:
 	struct PartData final
 	{
-		PartData(const string& ID) :
+		PartData(const string& ID)
+			:
 			ID(ID)
 		{
 

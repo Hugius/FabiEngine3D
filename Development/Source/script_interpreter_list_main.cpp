@@ -270,8 +270,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					if (_isLocalVariableExisting(currentValueString) || _isGlobalVariableExisting(currentValueString))
 					{
 						// Retrieve value
-						auto variable = _isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) :
-							_getGlobalVariable(currentValueString);
+						auto variable = (_isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) : _getGlobalVariable(currentValueString));
 
 						// Validate vec3 access
 						if (vec3Parts != Ivec3(0))

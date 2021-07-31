@@ -40,33 +40,6 @@
     <Filter Include="Billboard Editor\Updates">
       <UniqueIdentifier>{4ff3dc37-6430-4a6e-b964-a56600422763}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Environment Editor">
-      <UniqueIdentifier>{bc63cee9-72b3-4934-a47f-6afda369118e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Miscellaneous">
-      <UniqueIdentifier>{5226b612-dfeb-4dcd-b9e9-5e1786c92dfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Core">
-      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Updates">
-      <UniqueIdentifier>{05991820-f6e0-413c-926e-f2bfacffcf61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Updates\Sky">
-      <UniqueIdentifier>{4e4ede0a-f76d-44d4-ab4d-a4c8e1d282dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Updates\Terrain">
-      <UniqueIdentifier>{5435b852-146b-4f73-ab43-47bc9fa8b8d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Updates\Water">
-      <UniqueIdentifier>{c878400f-1b5e-48d9-b3fd-ac193a4fe98c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Updates\Core">
-      <UniqueIdentifier>{1fa2add1-d849-437c-b708-2cae9f45cdcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Environment Editor\Persistence">
-      <UniqueIdentifier>{dac88059-b80d-417b-b3fd-c4c57efa3883}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model Editor">
       <UniqueIdentifier>{d6928243-9010-4c7a-a3c8-82d952906238}</UniqueIdentifier>
     </Filter>
@@ -127,6 +100,42 @@
     <Filter Include="Settings Editor">
       <UniqueIdentifier>{126ada8c-b400-4922-ab90-b00ad353589a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sky Editor">
+      <UniqueIdentifier>{bc63cee9-72b3-4934-a47f-6afda369118e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Miscellaneous">
+      <UniqueIdentifier>{5226b612-dfeb-4dcd-b9e9-5e1786c92dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Core">
+      <UniqueIdentifier>{5700e399-7ef0-4d3f-825d-dac2901b30ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Updates">
+      <UniqueIdentifier>{05991820-f6e0-413c-926e-f2bfacffcf61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor">
+      <UniqueIdentifier>{96286cc9-e02d-4c97-822a-87999a4b9f57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor">
+      <UniqueIdentifier>{2a4f9bf0-5aef-4673-b3a5-ecdc7e7a93d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Core">
+      <UniqueIdentifier>{f926a8c2-362b-4a43-adc8-b51275acb1ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Core">
+      <UniqueIdentifier>{62fb57fb-a4c7-4cef-8f1d-e57904b9070d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Updates">
+      <UniqueIdentifier>{bec038ca-373e-40af-b3f5-e8314584e5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Updates">
+      <UniqueIdentifier>{4d7ecea9-2aaa-4d23-9154-ebfa014c039f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Miscellaneous">
+      <UniqueIdentifier>{982dba41-f0d1-44ba-a3b1-a71a884e88f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Miscellaneous">
+      <UniqueIdentifier>{874f3f11-4af9-4678-b56b-09709d9252bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation_editor_main.cpp">
@@ -183,44 +192,11 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_edit.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_misc.cpp">
-      <Filter>Environment Editor\Miscellaneous</Filter>
+    <ClCompile Include="..\..\Source\sky_editor_misc.cpp">
+      <Filter>Sky Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_main.cpp">
-      <Filter>Environment Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_sky_misc.cpp">
-      <Filter>Environment Editor\Updates\Sky</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit_one.cpp">
-      <Filter>Environment Editor\Updates\Sky</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_lighting.cpp">
-      <Filter>Environment Editor\Updates\Terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_mesh.cpp">
-      <Filter>Environment Editor\Updates\Terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_misc.cpp">
-      <Filter>Environment Editor\Updates\Terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_water_edit_one.cpp">
-      <Filter>Environment Editor\Updates\Water</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_water_misc.cpp">
-      <Filter>Environment Editor\Updates\Water</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates.cpp">
-      <Filter>Environment Editor\Updates\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_persistence_sky.cpp">
-      <Filter>Environment Editor\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_persistence_terrain.cpp">
-      <Filter>Environment Editor\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_persistence_water.cpp">
-      <Filter>Environment Editor\Persistence</Filter>
+    <ClCompile Include="..\..\Source\sky_editor_main.cpp">
+      <Filter>Sky Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_main.cpp">
       <Filter>Model Editor\Core</Filter>
@@ -351,23 +327,68 @@
     <ClCompile Include="..\..\Source\settings_editor.cpp">
       <Filter>Settings Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_water_edit_two.cpp">
-      <Filter>Environment Editor\Updates\Water</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_sky_edit_two.cpp">
-      <Filter>Environment Editor\Updates\Sky</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_updates_misc.cpp">
       <Filter>Animation Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_edit_blendmap.cpp">
-      <Filter>Environment Editor\Updates\Terrain</Filter>
+    <ClCompile Include="..\..\Source\sky_editor_persistence.cpp">
+      <Filter>Sky Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\environment_editor_updates_terrain_main.cpp">
-      <Filter>Environment Editor\Updates\Terrain</Filter>
+    <ClCompile Include="..\..\Source\terrain_editor_persistence.cpp">
+      <Filter>Terrain Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_persistence.cpp">
+      <Filter>Water Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_main.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_misc.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_mesh.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_blendmap.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_editor_updates_main.cpp">
+      <Filter>Sky Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_editor_updates_mesh.cpp">
+      <Filter>Sky Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_editor_updates_options.cpp">
+      <Filter>Sky Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_editor_updates_misc.cpp">
+      <Filter>Sky Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_updates_one.cpp">
+      <Filter>Water Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_updates_two.cpp">
+      <Filter>Water Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp">
+      <Filter>Water Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_misc.cpp">
+      <Filter>Terrain Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_misc.cpp">
+      <Filter>Water Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_main.cpp">
+      <Filter>Terrain Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_main.cpp">
+      <Filter>Water Editor\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -386,8 +407,8 @@
     <ClInclude Include="..\..\Source\billboard_editor.hpp">
       <Filter>Billboard Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\environment_editor.hpp">
-      <Filter>Environment Editor\Core</Filter>
+    <ClInclude Include="..\..\Source\sky_editor.hpp">
+      <Filter>Sky Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\model_editor.hpp">
       <Filter>Model Editor\Core</Filter>
@@ -400,6 +421,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\settings_editor.hpp">
       <Filter>Settings Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\water_editor.hpp">
+      <Filter>Water Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\terrain_editor.hpp">
+      <Filter>Terrain Editor\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

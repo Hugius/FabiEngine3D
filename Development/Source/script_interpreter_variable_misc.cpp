@@ -40,7 +40,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 
 	// Retrieve variable
-	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+	auto& variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// Check if variable is not a list
 	if (variable.getType() == ScriptVariableType::MULTIPLE)

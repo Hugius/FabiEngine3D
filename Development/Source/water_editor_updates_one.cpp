@@ -1,15 +1,15 @@
-#include "environment_editor.hpp"
+#include "water_editor.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-void EnvironmentEditor::_updateWaterMenuMain()
+void WaterEditor::_updateWaterMenuMain()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuWater")
+	if (screen->getID() == "waterEditorMenuMain")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -47,100 +47,98 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			saveWaterEntitiesToFile();
 			unloadWaterEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
-			_isInMainMenu = true;
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
 			unloadWaterEntities();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
-			_isInMainMenu = true;
 		}
 	}
 }
 
-void EnvironmentEditor::_updateWaterMenuChoice()
+void WaterEditor::_updateWaterMenuChoice()
+{
+	//// Temporary values
+	//auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	//// GUI management
+	//if (screen->getID() == "waterEditorMenuChoice")
+	//{
+	//	// Check if input received
+	//	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+	//	{
+	//		if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+	//		{
+	//			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+	//			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
+	//			_fe3d.terrainEntity_select("");
+	//			_fe3d.waterEntity_select("");
+	//			_currentWaterID = "";
+	//			_isEditingWater = false;
+	//		}
+	//		else if (screen->getButton("terrain")->isHovered())
+	//		{
+	//			_isChoosingTerrain = true;
+	//			for (auto& name : _loadedTerrainIDs) { name = name.substr(1); }
+	//			_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), _loadedTerrainIDs);
+	//			for (auto& name : _loadedTerrainIDs) { name = "@" + name; }
+	//		}
+	//		else if (screen->getButton("mesh")->isHovered())
+	//		{
+	//			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMesh");
+	//		}
+	//		else if (screen->getButton("effects")->isHovered())
+	//		{
+	//			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuEffects");
+	//		}
+	//		else if (screen->getButton("options")->isHovered())
+	//		{
+	//			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuOptions");
+	//		}
+	//	}
+
+	//	// Screen hoverabilities
+	//	screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+	//	screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+
+	//	// Update preview terrain choosing
+	//	if (_isChoosingTerrain)
+	//	{
+	//		// Get selected button ID
+	//		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+
+	//		// Check if a terrain name is hovered
+	//		if (selectedButtonID != "")
+	//		{
+	//			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+	//			{
+	//				// Only select the terrain if it has a heightMap
+	//				if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+	//				{
+	//					_fe3d.terrainEntity_select(_currentTerrainID);
+	//				}
+
+	//				// Miscellaneous
+	//				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
+	//				_isChoosingTerrain = false;
+	//			}
+	//		}
+	//		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+	//		{
+	//			_isChoosingTerrain = false;
+	//			_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
+	//		}
+	//	}
+	//}
+}
+
+void WaterEditor::_updateWaterMenuMesh()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuWaterChoice")
-	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
-		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWater");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(), false);
-				_fe3d.terrainEntity_select("");
-				_fe3d.waterEntity_select("");
-				_currentWaterID = "";
-				_isEditingWater = false;
-			}
-			else if (screen->getButton("terrain")->isHovered())
-			{
-				_isChoosingTerrain = true;
-				for (auto& name : _loadedTerrainIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), _loadedTerrainIDs);
-				for (auto& name : _loadedTerrainIDs) { name = "@" + name; }
-			}
-			else if (screen->getButton("mesh")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterMesh");
-			}
-			else if (screen->getButton("effects")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterEffects");
-			}
-			else if (screen->getButton("options")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterOptions");
-			}
-		}
-
-		// Screen hoverabilities
-		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-
-		// Update preview terrain choosing
-		if (_isChoosingTerrain)
-		{
-			// Get selected button ID
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
-
-			// Check if a terrain name is hovered
-			if (selectedButtonID != "")
-			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
-				{
-					// Only select the terrain if it has a heightMap
-					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-					{
-						_fe3d.terrainEntity_select(_currentTerrainID);
-					}
-
-					// Miscellaneous
-					_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
-					_isChoosingTerrain = false;
-				}
-			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
-			{
-				_isChoosingTerrain = false;
-				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
-			}
-		}
-	}
-}
-
-void EnvironmentEditor::_updateWaterMenuMesh()
-{
-	// Temporary values
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-
-	// GUI management
-	if (screen->getID() == "environmentEditorMenuWaterMesh")
+	if (screen->getID() == "waterEditorMenuMesh")
 	{
 		// Temporary values
 		Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
@@ -151,7 +149,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuWaterChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			}
 			else if (screen->getButton("position")->isHovered())
 			{

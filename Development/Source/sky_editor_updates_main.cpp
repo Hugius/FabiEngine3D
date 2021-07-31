@@ -1,22 +1,110 @@
-#include "environment_editor.hpp"
+#include "sky_editor.hpp"
 #include "logger.hpp"
 
-void EnvironmentEditor::_updateSkyEditor()
+void SkyEditor::update()
 {
-	if (_currentEnvironmentType == EnvironmentType::SKY)
+	if (_isEditorLoaded)
 	{
-		_updateSkyMenuMain();
-		_updateSkyMenuChoice();
-		_updateSkyMenuMesh();
-		_updateSkyMenuOptions();
+		_updateMainMenu();
+		_updateChoiceMenu();
+		_updateMeshMenu();
+		_updateOptionsMenu();
 		_updateSkyCreating();
 		_updateSkyChoosing();
 		_updateSkyDeleting();
-		_updateSkyCamera();
+		_updateCamera();
+		_updateMiscellaneous();
 	}
 }
 
-void EnvironmentEditor::_updateSkyCreating()
+void SkyEditor::_updateMainMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "skyEditorMenuMain")
+	{
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+			}
+			else if (screen->getButton("add")->isHovered())
+			{
+				_isCreatingSky = true;
+				_gui.getGlobalScreen()->addValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("edit")->isHovered())
+			{
+				_isChoosingSky = true;
+				_isEditingSky = true;
+				auto IDs = getLoadedSkyIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+			}
+			else if (screen->getButton("delete")->isHovered())
+			{
+				_isChoosingSky = true;
+				_isDeletingSky = true;
+				auto IDs = getLoadedSkyIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+			}
+		}
+
+		// Check if user wants to save changes
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		{
+			saveSkyEntitiesToFile();
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		{
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+		}
+	}
+}
+
+void SkyEditor::_updateChoiceMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "skyEditorMenuChoice")
+	{
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), false);
+				_fe3d.skyEntity_select("@@engineBackground");
+				_currentSkyID = "";
+				_isEditingSky = false;
+			}
+			else if (screen->getButton("mesh")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMesh");
+			}
+			else if (screen->getButton("options")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuOptions");
+			}
+		}
+
+		// Options screen hoverability
+		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
+	}
+}
+
+void SkyEditor::_updateSkyCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -43,7 +131,7 @@ void EnvironmentEditor::_updateSkyCreating()
 							_loadedSkyIDs.push_back(_currentSkyID);
 							_fe3d.skyEntity_create(_currentSkyID);
 							_fe3d.skyEntity_select(_currentSkyID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 								"Sky: " + _currentSkyID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
@@ -69,7 +157,7 @@ void EnvironmentEditor::_updateSkyCreating()
 	}
 }
 
-void EnvironmentEditor::_updateSkyChoosing()
+void SkyEditor::_updateSkyChoosing()
 {
 	if (_isEditorLoaded)
 	{
@@ -90,7 +178,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 					if (_isEditingSky)
 					{
 						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuSkyChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
 						// Show sky name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
@@ -117,7 +205,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 	}
 }
 
-void EnvironmentEditor::_updateSkyDeleting()
+void SkyEditor::_updateSkyDeleting()
 {
 	if (_isEditorLoaded)
 	{
@@ -151,45 +239,6 @@ void EnvironmentEditor::_updateSkyDeleting()
 				// Miscellaneous
 				_isDeletingSky = false;
 				_currentSkyID = "";
-			}
-		}
-	}
-}
-
-void EnvironmentEditor::_updateSkyCamera()
-{
-	if (_isEditorLoaded)
-	{
-		// Disable first person view
-		if (_fe3d.camera_isFirstPersonViewEnabled())
-		{
-			_fe3d.camera_disableFirstPersonView();
-		}
-
-		// Check if sky is inactive
-		if (_currentSkyID.empty() || !_fe3d.skyEntity_isExisting(_currentSkyID))
-		{
-			// Reset camera
-			_fe3d.camera_reset();
-			_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
-		}
-		else
-		{
-			// Show cursor
-			_fe3d.imageEntity_setVisible("@@cursor", true);
-
-			// Check if allowed by GUI
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-			{
-				// Check if RMB pressed
-				if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
-				{
-					// Enable first person view
-					_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
-					
-					// Hide cursor
-					_fe3d.imageEntity_setVisible("@@cursor", false);
-				}
 			}
 		}
 	}

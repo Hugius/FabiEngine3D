@@ -4,7 +4,8 @@
 
 struct ScriptConditionStatement final
 {
-	ScriptConditionStatement(unsigned int scopeDepth, bool conditionResult) :
+	ScriptConditionStatement(unsigned int scopeDepth, bool conditionResult)
+		:
 		scopeDepth(scopeDepth),
 		conditionResult(conditionResult),
 		type(ScriptConditionType::IF)

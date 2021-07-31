@@ -8,8 +8,9 @@
 class ScriptEditor final
 {
 public:
-	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
-		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
+	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, 
+		WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, 
+		BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();

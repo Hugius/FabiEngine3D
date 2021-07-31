@@ -5,7 +5,8 @@
 #include <future>
 #include <set>
 
-TextureLoader::TextureLoader(RenderBus& renderBus) :
+TextureLoader::TextureLoader(RenderBus& renderBus)
+	:
 	_renderBus(renderBus)
 {
 

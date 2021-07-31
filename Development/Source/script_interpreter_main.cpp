@@ -4,17 +4,18 @@
 
 #include <sstream>
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor,
-	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, 
-	AudioEditor& audioEditor, EnvironmentEditor& environmentEditor) :
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)
+	:
 	_fe3d(fe3d),
 	_script(script),
-	_sceneEditor(sceneEditor),
+	_skyEditor(skyEditor),
+	_terrainEditor(terrainEditor),
+	_waterEditor(waterEditor),
 	_modelEditor(modelEditor),
 	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor),
-	_environmentEditor(environmentEditor)
+	_sceneEditor(sceneEditor)
 {
 	
 }
@@ -141,14 +142,14 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	// Preload all big assets of this project, only in application preview
+	// Preload all editor assets of this project, only in application preview
 	if (_fe3d.application_isExported())
 	{
 		vector<string> texturePaths;
 
-		auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
-		auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
-		auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
+		auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
+		auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
+		auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
 		auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
 		auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
@@ -167,9 +168,9 @@ void ScriptInterpreter::load()
 	_fe3d.skyEntity_select("");
 
 	// Load preview environments
-	_environmentEditor.loadSkyEntitiesFromFile();
-	_environmentEditor.loadTerrainEntitiesFromFile();
-	_environmentEditor.loadWaterEntitiesFromFile();
+	_skyEditor.loadSkyEntitiesFromFile();
+	_terrainEditor.loadTerrainEntitiesFromFile();
+	_waterEditor.loadWaterEntitiesFromFile();
 
 	// Load preview models
 	_modelEditor.loadModelEntitiesFromFile();

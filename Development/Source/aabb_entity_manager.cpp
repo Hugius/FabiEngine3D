@@ -4,7 +4,8 @@
 #include "tools.hpp"
 
 
-AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+	:
 	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus)
 {
 	float box_data[] =

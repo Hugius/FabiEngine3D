@@ -1,7 +1,8 @@
 #include "engine_gui_global_screen.hpp"
 #include "logger.hpp"
 
-EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d) :
+EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d)
+	:
 	_fe3d(fe3d)
 {
 

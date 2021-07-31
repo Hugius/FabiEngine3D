@@ -1,38 +1,44 @@
 #include "script_value.hpp"
 #include "logger.hpp"
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type)
+	:
 	_fe3d(fe3d),
 	_type(type)
 {
 
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, Vec3 value) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, Vec3 value)
+	:
 	ScriptValue(fe3d, type)
 {
 	setVec3(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value)
+	:
 	ScriptValue(fe3d, type)
 {
 	setString(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value)
+	:
 	ScriptValue(fe3d, type)
 {
 	setDecimal(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value)
+	:
 	ScriptValue(fe3d, type)
 {
 	setInteger(value);
 }
 
-ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value) :
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value)
+	:
 	ScriptValue(fe3d, type)
 {
 	setBoolean(value);

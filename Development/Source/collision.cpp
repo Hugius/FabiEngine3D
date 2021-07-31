@@ -1,7 +1,10 @@
 #include "collision.hpp"
 
-Collision::Collision(bool x, bool y, bool z) :
-	_x(x), _y(y), _z(z)
+Collision::Collision(bool x, bool y, bool z)
+	:
+	_x(x),
+	_y(y),
+	_z(z)
 {
 
 }

@@ -29,7 +29,6 @@
     <ClInclude Include="..\..\Source\configuration.hpp" />
     <ClInclude Include="..\..\Source\direction.hpp" />
     <ClInclude Include="..\..\Source\entity_type.hpp" />
-    <ClInclude Include="..\..\Source\environment_type.hpp" />
     <ClInclude Include="..\..\Source\input_handler.hpp" />
     <ClInclude Include="..\..\Source\input_type.hpp" />
     <ClInclude Include="..\..\Source\library_loader.hpp" />

@@ -1,9 +1,9 @@
-#include "environment_editor.hpp"
+#include "terrain_editor.hpp"
 #include "logger.hpp"
 
-void EnvironmentEditor::_updateTerrainEditor()
+void TerrainEditor::_updateTerrainEditor()
 {
-	if (_currentEnvironmentType == EnvironmentType::TERRAIN)
+	if (_isEditorLoaded)
 	{
 		_updateTerrainMenuMain();
 		_updateTerrainMenuChoice();
@@ -18,13 +18,13 @@ void EnvironmentEditor::_updateTerrainEditor()
 	}
 }
 
-void EnvironmentEditor::_updateTerrainMenuMain()
+void TerrainEditor::_updateTerrainMenuMain()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuTerrain")
+	if (screen->getID() == "terrainEditorMenuMain")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -64,7 +64,6 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			_fe3d.modelEntity_delete("@@cube");
 			_fe3d.modelEntity_delete("@@grid");
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
-			_isInMainMenu = true;
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
@@ -72,25 +71,24 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			_fe3d.modelEntity_delete("@@cube");
 			_fe3d.modelEntity_delete("@@grid");
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
-			_isInMainMenu = true;
 		}
 	}
 }
 
-void EnvironmentEditor::_updateTerrainMenuChoice()
+void TerrainEditor::_updateTerrainMenuChoice()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuTerrainChoice")
+	if (screen->getID() == "terrainEditorMenuChoice")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrain");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
@@ -98,15 +96,15 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainMesh");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMesh");
 			}
 			else if (screen->getButton("blendMap")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainBlendMap");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
 			}
 			else if (screen->getButton("lighting")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainLighting");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
 			}
 		}
 
@@ -116,7 +114,7 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 	}
 }
 
-void EnvironmentEditor::_updateTerrainCreating()
+void TerrainEditor::_updateTerrainCreating()
 {
 	if (_isEditorLoaded)
 	{
@@ -141,7 +139,7 @@ void EnvironmentEditor::_updateTerrainCreating()
 						{
 							_currentTerrainID = newTerrainName;
 							_loadedTerrainIDs.push_back(_currentTerrainID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
@@ -167,7 +165,7 @@ void EnvironmentEditor::_updateTerrainCreating()
 	}
 }
 
-void EnvironmentEditor::_updateTerrainChoosing()
+void TerrainEditor::_updateTerrainChoosing()
 {
 	if (_isEditorLoaded)
 	{
@@ -188,7 +186,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 					if (_isEditingTerrain)
 					{
 						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
 						// Show terrain name
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
@@ -221,7 +219,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 	}
 }
 
-void EnvironmentEditor::_updateTerrainDeleting()
+void TerrainEditor::_updateTerrainDeleting()
 {
 	if (_isEditorLoaded)
 	{

@@ -5,7 +5,8 @@
 #include <ratio>
 #include <chrono>
 
-CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
+CoreEngine::CoreEngine(FabiEngine3D& fe3d)
+	:
 	_fe3d(fe3d),
 	_libraryLoader(),
 	_window(_libraryLoader),

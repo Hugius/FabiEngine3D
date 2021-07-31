@@ -6,7 +6,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-NetworkClientAPI::NetworkClientAPI() :
+NetworkClientAPI::NetworkClientAPI()
+	:
 	_connectionSocketID(INVALID_SOCKET),
 	_udpMessageSocketID(INVALID_SOCKET)
 {

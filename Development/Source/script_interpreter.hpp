@@ -5,17 +5,21 @@
 #include "script_value.hpp"
 #include "script_variable.hpp"
 #include "script_condition_statement.hpp"
+#include "sky_editor.hpp"
+#include "terrain_editor.hpp"
+#include "water_editor.hpp"
 #include "model_editor.hpp"
-#include "scene_editor.hpp"
 #include "animation_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
+#include "scene_editor.hpp"
 
 class ScriptInterpreter final
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor,
-		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor,
+		WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, 
+		BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
 	void setCurrentProjectID(const string& projectID);
 	void load();
@@ -122,12 +126,14 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	Script& _script;
-	SceneEditor& _sceneEditor;
+	SkyEditor& _skyEditor;
+	TerrainEditor& _terrainEditor;
+	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
 	AudioEditor& _audioEditor;
-	EnvironmentEditor& _environmentEditor;
+	SceneEditor& _sceneEditor;
 
 	// Dictionaries
 	map<string, float> _debuggingTimes;

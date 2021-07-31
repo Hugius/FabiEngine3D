@@ -55,7 +55,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if first variable is a list
-						auto firstListVariable = _isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName);
+						auto firstListVariable = (_isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName));
 						if (firstListVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + firstName + "\" is not a list!");
@@ -63,7 +63,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if second variable is a list
-						auto secondListVariable = _isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName);
+						auto secondListVariable = (_isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName));
 						if (secondListVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + secondName + "\" is not a list!");
@@ -97,7 +97,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if variable is not a list
-						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");
@@ -131,7 +131,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if variable is not a list
-						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");
@@ -199,7 +199,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Check if variable is not a list
-						auto listVariable = _isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName);
+						auto listVariable = (_isLocalVariableExisting(listName) ? _getLocalVariable(listName) : _getGlobalVariable(listName));
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + listName + "\" is not a list!");

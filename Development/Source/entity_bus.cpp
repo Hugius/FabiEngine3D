@@ -12,7 +12,8 @@ EntityBus::EntityBus
 	const unordered_map<string, shared_ptr<LightEntity>>     & lightEntities,
 	const unordered_map<string, shared_ptr<ImageEntity>>     & imageEntities,
 	const unordered_map<string, shared_ptr<TextEntity>>      & textEntities
-) :
+)
+	:
 	_mainSkyEntity(mainSkyEntity),
 	_mixSkyEntity(mixSkyEntity),
 	_terrainEntity(terrainEntity),

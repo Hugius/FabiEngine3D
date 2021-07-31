@@ -1,7 +1,8 @@
 #include "engine_gui_screen.hpp"
 #include "logger.hpp"
 
-EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size) :
+EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size)
+	:
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),

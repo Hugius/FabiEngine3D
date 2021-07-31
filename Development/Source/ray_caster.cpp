@@ -5,7 +5,8 @@
 
 #include <algorithm>
 
-RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager) :
+RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
+	:
 	_renderBus(renderBus),
 	_terrainManager(terrainManager)
 {

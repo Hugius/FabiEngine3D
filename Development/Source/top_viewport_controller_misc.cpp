@@ -177,9 +177,9 @@ void TopViewportController::_updateProjectLoading()
 
 				// Preload all big assets of this project
 				vector<string> texturePaths;
-				auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
-				auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
-				auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
+				auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
+				auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
+				auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
 				auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
 				auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 				auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
@@ -280,10 +280,22 @@ void TopViewportController::_applyProjectChange()
 	// Go back to main menu
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
-	// Unload environment editor
-	if (_environmentEditor.isLoaded())
+	// Unload sky editor
+	if (_skyEditor.isLoaded())
 	{
-		_environmentEditor.unload();
+		_skyEditor.unload();
+	}
+
+	// Unload terrain editor
+	if (_terrainEditor.isLoaded())
+	{
+		_terrainEditor.unload();
+	}
+
+	// Unload water editor
+	if (_waterEditor.isLoaded())
+	{
+		_waterEditor.unload();
 	}
 
 	// Unload model editor
@@ -329,7 +341,9 @@ void TopViewportController::_applyProjectChange()
 	}
 
 	// Pass loaded project name
-	_environmentEditor.setCurrentProjectID(_currentProjectID);
+	_skyEditor.setCurrentProjectID(_currentProjectID);
+	_terrainEditor.setCurrentProjectID(_currentProjectID);
+	_waterEditor.setCurrentProjectID(_currentProjectID);
 	_modelEditor.setCurrentProjectID(_currentProjectID);
 	_animationEditor.setCurrentProjectID(_currentProjectID);
 	_billboardEditor.setCurrentProjectID(_currentProjectID);

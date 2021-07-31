@@ -1,12 +1,14 @@
 #pragma once
 
 #include "base_viewport_controller.hpp"
-#include "environment_editor.hpp"
+#include "sky_editor.hpp"
+#include "terrain_editor.hpp"
+#include "water_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+#include "audio_editor.hpp"
 #include "scene_editor.hpp"
 #include "script_editor.hpp"
-#include "audio_editor.hpp"
 #include "settings_editor.hpp"
 
 #define TVPC TopViewportController
@@ -15,9 +17,9 @@ class TopViewportController final : public BaseViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
-		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
-		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor,
-		AudioEditor& audioEditor, SettingsEditor& settingsEditor);
+		SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor,
+		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
+		SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
 
 	void initialize() override;
 	void update() override;
@@ -43,7 +45,9 @@ private:
 	void _saveCurrentProject();
 	void _applyProjectChange();
 
-	EnvironmentEditor& _environmentEditor;
+	SkyEditor& _skyEditor;
+	TerrainEditor& _terrainEditor;
+	WaterEditor& _waterEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	AnimationEditor& _animationEditor;

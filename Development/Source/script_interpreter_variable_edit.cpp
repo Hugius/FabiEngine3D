@@ -98,7 +98,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	}
 
 	// Retrieve variable
-	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+	auto& variable = (_isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString));
 
 	// A constant variable should not be changed
 	if (variable.isConstant())
@@ -340,8 +340,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 		{
 			// Retrieve other value
-			auto otherVariable = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) :
-				_getGlobalVariable(valueString);
+			auto otherVariable = (_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 
 			// Validate vec3 access
 			if (vec3PartsTwo != Ivec3(0))

@@ -1,20 +1,20 @@
-#include "environment_editor.hpp"
+#include "terrain_editor.hpp"
 #include "logger.hpp"
 
-void EnvironmentEditor::_updateTerrainMenuBlendMap()
+void TerrainEditor::_updateTerrainMenuBlendMap()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// GUI management
-	if (screen->getID() == "environmentEditorMenuTerrainBlendMap")
+	if (screen->getID() == "terrainEditorMenuBlendMap")
 	{
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuTerrainChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			}
 			else if (screen->getButton("blendMap")->isHovered())
 			{

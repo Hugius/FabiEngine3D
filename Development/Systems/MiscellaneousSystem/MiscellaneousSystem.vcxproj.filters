@@ -54,9 +54,6 @@
     <ClInclude Include="..\..\Source\transformation_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\environment_type.hpp">
-      <Filter>Enums</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\camera.hpp">
       <Filter>Other</Filter>
     </ClInclude>

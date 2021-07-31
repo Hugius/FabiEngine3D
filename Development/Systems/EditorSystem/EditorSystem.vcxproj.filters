@@ -369,10 +369,10 @@
     <ClCompile Include="..\..\Source\sky_editor_updates_misc.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_one.cpp">
+    <ClCompile Include="..\..\Source\water_editor_updates_main.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_two.cpp">
+    <ClCompile Include="..\..\Source\water_editor_updates_effects.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp">
@@ -389,6 +389,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\water_editor_main.cpp">
       <Filter>Water Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_updates_mesh.cpp">
+      <Filter>Water Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_updates_options.cpp">
+      <Filter>Water Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

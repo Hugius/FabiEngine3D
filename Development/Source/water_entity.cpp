@@ -107,6 +107,11 @@ void WaterEntity::setRefractive(bool value)
 	_isRefractive = value;
 }
 
+void WaterEntity::setWireFramed(bool value)
+{
+	_isWireFramed = value;
+}
+
 void WaterEntity::setSimplifiedRenderBuffer(RenderBuffer* buffer)
 {
 	_simplifiedRenderBuffer = buffer;
@@ -235,6 +240,11 @@ const bool WaterEntity::isReflective() const
 const bool WaterEntity::isRefractive() const
 {
 	return _isRefractive;
+}
+
+const bool WaterEntity::isWireFramed() const
+{
+	return _isWireFramed;
 }
 
 const bool WaterEntity::hasDudvMap() const

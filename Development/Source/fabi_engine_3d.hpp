@@ -219,6 +219,7 @@ public:
 	void waterEntity_setSpecularLighted(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
+	void waterEntity_setWireFramed(const string& ID, bool enabled);
 	void waterEntity_setDudvMap(const string& ID, const string& texturePath);
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
@@ -253,6 +254,7 @@ public:
 	const bool waterEntity_isSpecularLighted(const string& ID);
 	const bool waterEntity_isReflective(const string& ID);
 	const bool waterEntity_isRefractive(const string& ID);
+	const bool waterEntity_isWireFramed(const string& ID);
 	const bool waterEntity_hasDudvMap(const string& ID);
 	const bool waterEntity_hasNormalMap(const string& ID);
 	const bool waterEntity_hasDisplacementMap(const string& ID);

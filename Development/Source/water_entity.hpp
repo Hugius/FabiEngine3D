@@ -7,7 +7,7 @@ class WaterEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	
+
 	// Setters
 	void setQuality(WaterQuality quality);
 	void setSpeed(Vec2 value);
@@ -32,6 +32,7 @@ public:
 	void setSpecularLighted(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
+	void setWireFramed(bool value);
 	void setSimplifiedRenderBuffer(RenderBuffer* buffer);
 
 	// Getters
@@ -39,7 +40,7 @@ public:
 	const Vec2    getSpeed()					    const;
 	const Vec2    getRippleOffset()				    const;
 	const Vec2    getWaveOffset()				    const;
-	const Vec3	  getPosition()				    const;
+	const Vec3	  getPosition()						const;
 	const Vec3    getColor()					    const;
 	const GLuint  getDudvMap()					    const;
 	const GLuint  getNormalMap()				    const;
@@ -58,41 +59,43 @@ public:
 	const bool    isSpecularLighted()			    const;
 	const bool    isReflective()				    const;
 	const bool    isRefractive()				    const;
+	const bool	  isWireFramed()					const;
 	const bool	  hasDudvMap()					    const;
 	const bool	  hasNormalMap()				    const;
 	const bool	  hasDisplacementMap()			    const;
 	const RenderBuffer* getSimplifiedRenderBuffer() const;
 
 private:
+	RenderBuffer* _simplifiedRenderBuffer = nullptr;
+
 	WaterQuality _quality = WaterQuality::SKY;
 
-	Vec2 _speed		   = Vec2(0.0f);
+	Vec2 _speed = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);
-	Vec2 _waveOffset   = Vec2(0.0f);
+	Vec2 _waveOffset = Vec2(0.0f);
 
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 
-	GLuint _dudvMap			= 0;
-	GLuint _normalMap		= 0;
+	GLuint _dudvMap = 0;
+	GLuint _normalMap = 0;
 	GLuint _displacementMap = 0;
 
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
 	string _displacementMapPath = "";
 
-	float _size						 = 1.0f;
-	float _uvRepeat					 = 1.0f;
-	float _waveHeight				 = 0.0f;
-	float _specularLightingFactor    = 1.0f;
+	float _size = 1.0f;
+	float _uvRepeat = 1.0f;
+	float _waveHeight = 0.0f;
+	float _specularLightingFactor = 1.0f;
 	float _specularLightingIntensity = 1.0f;
-	float _transparency				 = 0.0f;
-	
-	bool _isRippling		= false;
-	bool _isWaving			= false;
-	bool _isSpecularLighted	= false;
-	bool _isReflective		= false;
-	bool _isRefractive		= false;
+	float _transparency = 0.0f;
 
-	RenderBuffer* _simplifiedRenderBuffer = nullptr;
+	bool _isRippling = false;
+	bool _isWaving = false;
+	bool _isSpecularLighted = false;
+	bool _isReflective = false;
+	bool _isRefractive = false;
+	bool _isWireFramed = false;
 };

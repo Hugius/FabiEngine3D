@@ -72,6 +72,11 @@ const bool FabiEngine3D::waterEntity_isRefractive(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->isRefractive();
 }
 
+const bool FabiEngine3D::waterEntity_isWireFramed(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->isWireFramed();
+}
+
 const bool FabiEngine3D::waterEntity_hasDudvMap(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->hasDudvMap();
@@ -136,6 +141,11 @@ void FabiEngine3D::waterEntity_setReflective(const string& ID, bool enabled)
 void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
 {
 	_core->_waterEntityManager.getEntity(ID)->setRefractive(enabled);
+}
+
+void FabiEngine3D::waterEntity_setWireFramed(const string& ID, bool enabled)
+{
+	_core->_waterEntityManager.getEntity(ID)->setWireFramed(enabled);
 }
 
 void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)

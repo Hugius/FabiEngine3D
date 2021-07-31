@@ -104,6 +104,12 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{
+		// Enable wire frame
+		if (entity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+
 		// Check if camera is underwater
 		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getPosition().y + entity->getWaveHeight()));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getPosition().x - (entity->getSize() / 2.0f));
@@ -185,6 +191,12 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		{
 			glActiveTexture(GL_TEXTURE5);
 			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+
+		// Disable wire frame
+		if (entity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 }

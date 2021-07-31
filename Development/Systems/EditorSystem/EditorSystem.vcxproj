@@ -57,8 +57,9 @@
     <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_main.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_misc.cpp" />
-    <ClCompile Include="..\..\Source\water_editor_updates_one.cpp" />
-    <ClCompile Include="..\..\Source\water_editor_updates_two.cpp" />
+    <ClCompile Include="..\..\Source\water_editor_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\water_editor_updates_mesh.cpp" />
+    <ClCompile Include="..\..\Source\water_editor_updates_effects.cpp" />
     <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\model_editor_loading.cpp" />
     <ClCompile Include="..\..\Source\model_editor_main.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="..\..\Source\script_editor_updates.cpp" />
     <ClCompile Include="..\..\Source\script_editor_writer.cpp" />
     <ClCompile Include="..\..\Source\settings_editor.cpp" />
+    <ClCompile Include="..\..\Source\water_editor_updates_options.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\animation.hpp" />

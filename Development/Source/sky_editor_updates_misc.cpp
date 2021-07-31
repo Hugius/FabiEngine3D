@@ -42,15 +42,18 @@ void SkyEditor::_updateMiscellaneous()
 	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update wire frame rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+		if (_fe3d.skyEntity_isExisting(_currentSkyID))
 		{
-			if (_fe3d.skyEntity_isWireFramed(_currentSkyID))
+			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				_fe3d.skyEntity_setWireFramed(_currentSkyID, false);
-			}
-			else
-			{
-				_fe3d.skyEntity_setWireFramed(_currentSkyID, true);
+				if (_fe3d.skyEntity_isWireFramed(_currentSkyID))
+				{
+					_fe3d.skyEntity_setWireFramed(_currentSkyID, false);
+				}
+				else
+				{
+					_fe3d.skyEntity_setWireFramed(_currentSkyID, true);
+				}
 			}
 		}
 

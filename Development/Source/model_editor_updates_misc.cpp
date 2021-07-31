@@ -98,6 +98,22 @@ void ModelEditor::_updateMiscellaneous()
 				}
 			}
 
+			// Update wire frame model rendering
+			if (_fe3d.modelEntity_isExisting(_currentModelID))
+			{
+				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+				{
+					if (_fe3d.modelEntity_isWireFramed(_currentModelID))
+					{
+						_fe3d.modelEntity_setWireFramed(_currentModelID, false);
+					}
+					else
+					{
+						_fe3d.modelEntity_setWireFramed(_currentModelID, true);
+					}
+				}
+			}
+
 			// Update debug rendering
 			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 			{
@@ -108,23 +124,6 @@ void ModelEditor::_updateMiscellaneous()
 				else
 				{
 					_fe3d.misc_enableDebugRendering();
-				}
-			}
-
-			// Update wire frame model rendering
-			string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
-			if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
-			{
-				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
-				{
-					if (_fe3d.modelEntity_isWireFramed(modelID))
-					{
-						_fe3d.modelEntity_setWireFramed(modelID, false);
-					}
-					else
-					{
-						_fe3d.modelEntity_setWireFramed(modelID, true);
-					}
 				}
 			}
 		}

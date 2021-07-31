@@ -75,21 +75,8 @@ void TerrainEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update debug rendering
-		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
-		{
-			if (_fe3d.misc_isDebugRenderingEnabled())
-			{
-				_fe3d.misc_disableDebugRendering();
-			}
-			else
-			{
-				_fe3d.misc_enableDebugRendering();
-			}
-		}
-
 		// Update wire frame rendering
-		if (!_currentTerrainID.empty() && _fe3d.terrainEntity_isExisting(_currentTerrainID))
+		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 		{
 			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
@@ -101,6 +88,19 @@ void TerrainEditor::_updateMiscellaneous()
 				{
 					_fe3d.terrainEntity_setWireFramed(_currentTerrainID, true);
 				}
+			}
+		}
+
+		// Update debug rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+		{
+			if (_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
 			}
 		}
 	}

@@ -19,6 +19,9 @@ void WaterEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
+	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 	
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -26,14 +29,21 @@ void WaterEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
+	// 3D environment
+	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj",
+		Vec3(0.0f, -GRID_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
+	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj",
+		Vec3(0.0f, -GRID_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
+	_fe3d.modelEntity_setTransparent("@@grid", true);
+
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextfield("selectedWaterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
 	_isEditorLoaded = true;
-}
-
-void WaterEditor::update()
-{
 }
 
 void WaterEditor::unload()
@@ -47,6 +57,10 @@ void WaterEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
+	// 3D environment
+	_fe3d.modelEntity_delete("@@cube");
+	_fe3d.modelEntity_delete("@@grid");
+
 	// Delete entities
 	unloadWaterEntities();
 
@@ -57,6 +71,7 @@ void WaterEditor::unload()
 	_isChoosingWater = false;
 	_isEditingWater = false;
 	_isDeletingWater = false;
+	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
@@ -69,7 +84,6 @@ void WaterEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_isEditorLoaded = false;
 }
 
 void WaterEditor::_loadGUI()
@@ -86,36 +100,32 @@ void WaterEditor::_loadGUI()
 	leftWindow->getScreen("waterEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: waterEditorMenuChoice
-	positions = VPC::calculateButtonPositions(5, CH);
+	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("waterEditorMenuChoice");
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("terrain", Vec2(0.0f, positions[0]), Vec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("mesh", Vec2(0.0f, positions[1]), Vec2(TW("3D mesh"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D mesh", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("effects", Vec2(0.0f, positions[2]), Vec2(TW("Effects"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Effects", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("options", Vec2(0.0f, positions[3]), Vec2(TW("Options"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Options", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuChoice")->createButton("mesh", Vec2(0.0f, positions[0]), Vec2(TW("3D mesh"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D mesh", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuChoice")->createButton("effects", Vec2(0.0f, positions[1]), Vec2(TW("Effects"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Effects", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuChoice")->createButton("options", Vec2(0.0f, positions[2]), Vec2(TW("Options"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Options", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: waterEditorMenuMesh
-	positions = VPC::calculateButtonPositions(5, CH);
+	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("waterEditorMenuMesh");
-	leftWindow->getScreen("waterEditorMenuMesh")->createButton("position", Vec2(0.0f, positions[0]), Vec2(TW("Position"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Position", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuMesh")->createButton("size", Vec2(0.0f, positions[1]), Vec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuMesh")->createButton("up", Vec2(0.0f, positions[2]), Vec2(TW("Move Up"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Move Up", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuMesh")->createButton("down", Vec2(0.0f, positions[3]), Vec2(TW("Move Down"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Move Down", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuMesh")->createButton("size", Vec2(0.0f, positions[0]), Vec2(TW("Size"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Size", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuMesh")->createButton("uvRepeat", Vec2(0.0f, positions[1]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: waterEditorMenuEffects
-	positions = VPC::calculateButtonPositions(10, CH);
+	positions = VPC::calculateButtonPositions(9, CH);
 	leftWindow->createScreen("waterEditorMenuEffects");
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("uvRepeat", Vec2(0.0f, positions[0]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("dudvMap", Vec2(0.0f, positions[1]), Vec2(TW("Dudv Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dudv Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("normalMap", Vec2(0.0f, positions[2]), Vec2(TW("Normal Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("displaceMap", Vec2(0.0f, positions[3]), Vec2(TW("Displace Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Displace Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isReflective", Vec2(0.0f, positions[4]), Vec2(TW("Reflective: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflective: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isRefractive", Vec2(0.0f, positions[5]), Vec2(TW("Refractive: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractive: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isWaving", Vec2(0.0f, positions[6]), Vec2(TW("Waving: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Waving: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isRippling", Vec2(0.0f, positions[7]), Vec2(TW("Rippling: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rippling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isSpecular", Vec2(0.0f, positions[8]), Vec2(TW("Specular: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuEffects")->createButton("back", Vec2(0.0f, positions[9]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("dudvMap", Vec2(0.0f, positions[0]), Vec2(TW("Dudv Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Dudv Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("normalMap", Vec2(0.0f, positions[1]), Vec2(TW("Normal Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("displaceMap", Vec2(0.0f, positions[2]), Vec2(TW("Displace Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Displace Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isReflective", Vec2(0.0f, positions[3]), Vec2(TW("Reflective: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflective: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isRefractive", Vec2(0.0f, positions[4]), Vec2(TW("Refractive: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refractive: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isWaving", Vec2(0.0f, positions[5]), Vec2(TW("Waving: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Waving: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isRippling", Vec2(0.0f, positions[6]), Vec2(TW("Rippling: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rippling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("isSpecular", Vec2(0.0f, positions[7]), Vec2(TW("Specular: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuEffects")->createButton("back", Vec2(0.0f, positions[8]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: waterEditorMenuOptions
 	positions = VPC::calculateButtonPositions(8, CH);

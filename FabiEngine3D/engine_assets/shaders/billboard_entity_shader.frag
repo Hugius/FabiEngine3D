@@ -42,7 +42,7 @@ void main()
 	vec3 primaryColor;
 	if(u_hasDiffuseMap)
 	{
-		// Calculate the texel color
+		// Calculate diffuse map color
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
@@ -55,21 +55,30 @@ void main()
 			}
 		}
 
-		// Set primary color
+		// Calculate base color
 		primaryColor  = diffuseMapColor.rgb;
 		primaryColor *= u_color;
 		primaryColor *= u_lightness;
-		primaryColor  = mix(primaryColor, vec3(1.0f) - clamp(primaryColor, vec3(0.0f), vec3(1.0f)), clamp(u_inversion, 0.0f, 1.0f));
-		primaryColor  = getFog(primaryColor);
-		primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
+		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+		primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
+
+		// Apply fog
+		primaryColor = getFog(primaryColor);
+
+		// Apply gamma correction
+		primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 	}
 	else
 	{
-		// Set primary color
+		// Calculate base color
 		primaryColor  = u_color;
 		primaryColor *= u_lightness;
-		primaryColor  = getFog(primaryColor);
-		primaryColor  = pow(primaryColor, vec3(1.0f / 2.2f));
+
+		// Apply fog
+		primaryColor = getFog(primaryColor);
+
+		// Apply gamma correction
+		primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 	}
 
 	// Calculate secondary color

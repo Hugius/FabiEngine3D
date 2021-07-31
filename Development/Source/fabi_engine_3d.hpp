@@ -112,6 +112,7 @@ public:
 	void skyEntity_delete(const string& ID);
 	void skyEntity_setVisible(const string& ID, bool isVisible);
 	void skyEntity_select(const string& ID);
+	void skyEntity_mixWithSelected(const string& ID);
 	void skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths);
 	void skyEntity_setDiffuseMapRight(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapLeft(const string& ID, const string& texturePath);
@@ -122,7 +123,7 @@ public:
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, Vec3 color);
-	void skyEntity_mixWithSelected(const string& ID);
+	void skyEntity_setWireFramed(const string& ID, bool enabled);
 	void skyEntity_setMixValue(float mixValue);
 
 	// Sky entity interface - getters
@@ -136,6 +137,7 @@ public:
 	const float skyEntity_getMixValue();
 	const bool skyEntity_isExisting(const string& ID);
 	const bool skyEntity_isVisible(const string& ID);
+	const bool skyEntity_isWireFramed(const string& ID);
 
 	// Terrain entity interface - setters
 	void terrainEntity_create(const string& ID, const string& heightMapPath);
@@ -162,7 +164,7 @@ public:
 	void terrainEntity_setSpecularLightingFactor(const string& ID, float factor);
 	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
-	void terrainEntity_setWireframed(const string& ID, bool enabled);
+	void terrainEntity_setWireFramed(const string& ID, bool enabled);
 
 	// Terrain entity interface - getters
 	const vector<string> terrainEntity_getAllIDs();
@@ -190,7 +192,7 @@ public:
 	const bool terrainEntity_isExisting(const string& ID);
 	const bool terrainEntity_isVisible(const string& ID);
 	const bool terrainEntity_isSpecularLighted(const string& ID);
-	const bool terrainEntity_isWireframed(const string& ID);
+	const bool terrainEntity_isWireFramed(const string& ID);
 	const bool terrainEntity_isInside(const string& ID, float x, float z);
 	const bool terrainEntity_hasBlendMap(const string& ID);
 	const bool terrainEntity_hasDiffuseMap(const string& ID);
@@ -278,7 +280,7 @@ public:
 	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
-	void modelEntity_setWireframed(const string& ID, bool enabled);
+	void modelEntity_setWireFramed(const string& ID, bool enabled);
 	void modelEntity_move(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_rotate(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_scale(const string& ID, Vec3 factor, const string& partID = "");
@@ -332,7 +334,7 @@ public:
 	const bool modelEntity_isShadowed(const string& ID);
 	const bool modelEntity_isReflected(const string& ID);
 	const bool modelEntity_isStaticToCamera(const string& ID);
-	const bool modelEntity_isWireframed(const string& ID);
+	const bool modelEntity_isWireFramed(const string& ID);
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
 	const bool modelEntity_isBright(const string& ID);
@@ -778,7 +780,7 @@ public:
 	const bool networkClient_isConnected();
 
 	// Miscellaneous interface - setters
-	void misc_enableWireframeRendering();
+	void misc_enableWireFrameRendering();
 	void misc_enableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
 	void misc_enableDebugRendering();
@@ -786,7 +788,7 @@ public:
 	void misc_enableVsync();
 	void misc_enableSounds();
 	void misc_enableMusic();
-	void misc_disableWireframeRendering();
+	void misc_disableWireFrameRendering();
 	void misc_disableShadowFrameRendering();
 	void misc_disableAabbFrameRendering();
 	void misc_disableDebugRendering();
@@ -859,7 +861,7 @@ public:
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_createNewDirectory(const string& directoryPath);
 	const bool misc_isVsyncEnabled();
-	const bool misc_isWireframeRenderingEnabled();
+	const bool misc_isWireFrameRenderingEnabled();
 	const bool misc_isShadowFrameRenderingEnabled();
 	const bool misc_isAabbFrameRenderingEnabled();
 	const bool misc_isDebugRenderingEnabled();

@@ -197,9 +197,9 @@ const bool FabiEngine3D::modelEntity_isStaticToCamera(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isCameraStatic();
 }
 
-const bool FabiEngine3D::modelEntity_isWireframed(const string& ID)
+const bool FabiEngine3D::modelEntity_isWireFramed(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->isWireframed();
+	return _core->_modelEntityManager.getEntity(ID)->isWireFramed();
 }
 
 const bool FabiEngine3D::modelEntity_isDepthMapIncluded(const string& ID)
@@ -384,9 +384,9 @@ void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)
 	_core->_modelEntityManager.getEntity(ID)->setCameraStatic(enabled);
 }
 
-void FabiEngine3D::modelEntity_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setWireFramed(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setWireframed(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setWireFramed(enabled);
 }
 
 const float FabiEngine3D::modelEntity_getLightness(const string& ID)

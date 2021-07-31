@@ -41,6 +41,11 @@ void SkyEntity::setRotationSpeed(float value)
 	_rotationSpeed = value;
 }
 
+void SkyEntity::setWireFramed(bool value)
+{
+	_isWireFramed = value;
+}
+
 const array<string, 6>& SkyEntity::getDiffuseMapPaths() const
 {
 	return _diffuseMapPaths;
@@ -79,4 +84,9 @@ const float SkyEntity::getRotationSpeed() const
 const bool SkyEntity::hasCubeMap() const
 {
 	return (_cubeMap != 0);
+}
+
+const bool SkyEntity::isWireFramed() const
+{
+	return _isWireFramed;
 }

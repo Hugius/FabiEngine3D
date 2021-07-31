@@ -111,6 +111,11 @@ void FabiEngine3D::skyEntity_setMixValue(float mixValue)
 	_core->_renderBus.setSkyMixValue(mixValue);
 }
 
+void FabiEngine3D::skyEntity_setWireFramed(const string& ID, bool enabled)
+{
+	_core->_skyEntityManager.getEntity(ID)->setWireFramed(enabled);
+}
+
 void FabiEngine3D::skyEntity_mixWithSelected(const string& ID)
 {
 	_core->_skyEntityManager.selectMixSky(ID);
@@ -178,4 +183,9 @@ const bool FabiEngine3D::skyEntity_isExisting(const string& ID)
 const bool FabiEngine3D::skyEntity_isVisible(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->isVisible();
+}
+
+const bool FabiEngine3D::skyEntity_isWireFramed(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->isWireFramed();
 }

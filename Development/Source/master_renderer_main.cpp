@@ -87,8 +87,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	// General stuff
 	_entityBus = entityBus;
 
-	// Wireframe or non-wireframe rendering
-	if (_renderBus.isWireframeRenderingEnabled())
+	if (_renderBus.isWireFrameRenderingEnabled()) // Wire frame rendering
 	{
 		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -103,7 +102,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_renderGUI();
 		_renderCustomCursor();
 	}
-	else
+	else // Normal rendering
 	{
 		// Pre-captures
 		_timer.startDeltaPart("reflectionPreRender");

@@ -111,19 +111,19 @@ void ModelEditor::_updateMiscellaneous()
 				}
 			}
 
-			// Update wireframed model rendering
+			// Update wire frame model rendering
 			string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
 			if (!modelID.empty() && _fe3d.modelEntity_isExisting(modelID))
 			{
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
-					if (_fe3d.modelEntity_isWireframed(modelID))
+					if (_fe3d.modelEntity_isWireFramed(modelID))
 					{
-						_fe3d.modelEntity_setWireframed(modelID, false);
+						_fe3d.modelEntity_setWireFramed(modelID, false);
 					}
 					else
 					{
-						_fe3d.modelEntity_setWireframed(modelID, true);
+						_fe3d.modelEntity_setWireFramed(modelID, true);
 					}
 				}
 			}

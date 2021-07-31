@@ -43,7 +43,7 @@ public:
 	void setCameraStatic(bool value);
 	void setDepthMapIncluded(bool value);
 	void setLevelOfDetailed(bool value);
-	void setWireframed(bool value);
+	void setWireFramed(bool value);
 	void setBright(bool value);
 	void setReflectionType(ReflectionType value);
 	void clearParts();
@@ -83,7 +83,7 @@ public:
 	const bool isCameraStatic();
 	const bool isDepthMapIncluded();
 	const bool isLevelOfDetailed();
-	const bool isWireframed();
+	const bool isWireFramed();
 	const bool isBright();
 	const bool hasDiffuseMap(const string& partID = "");
 	const bool hasEmissionMap(const string& partID = "");
@@ -152,7 +152,7 @@ private:
 	bool _isReflected		 = true;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
-	bool _wireframed		 = false;
+	bool _wireFramed		 = false;
 	bool _isBright			 = false;
 
 	ReflectionType _reflectionType;

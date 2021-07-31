@@ -30,14 +30,17 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 {
 	if (mainEntity->isVisible())
 	{
-		// Check if a second skybox should be mixed with the main skybox
-		bool secondEnabled = ((mixEntity != nullptr) && mixEntity->isVisible());
+		// Enable wire frame
+		if (mainEntity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
 
 		// Shader uniforms
 		_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());		
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
-		if (secondEnabled)
+		if (mixEntity != nullptr)
 		{
 			_shader.uploadUniform("u_mixLightness", mixEntity->getLightness());
 			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
@@ -49,7 +52,7 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
 		}
-		if (secondEnabled && mixEntity->hasCubeMap())
+		if ((mixEntity != nullptr) && mixEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
@@ -78,10 +81,16 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
-		if (secondEnabled && mixEntity->hasCubeMap())
+		if ((mixEntity != nullptr) && mixEntity->hasCubeMap())
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
+
+		// Disable wire frame
+		if (mainEntity->isWireFramed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 }

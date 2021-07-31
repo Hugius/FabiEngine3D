@@ -139,8 +139,8 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 {
 	if (entity->isVisible())
 	{
-		// Enable wireframe
-		if (entity->isWireframed())
+		// Enable wire frame
+		if (entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
@@ -269,8 +269,8 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			glDisable(GL_CULL_FACE);
 		}
 
-		// Disable wireframe
-		if (entity->isWireframed())
+		// Disable wire frame
+		if (entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}

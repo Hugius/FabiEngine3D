@@ -11,15 +11,15 @@ void FabiEngine3D::misc_setCustomCursor(const string& imageEntityID)
 	_core->_renderBus.setCursorEntityID(imageEntityID);
 }
 
-void FabiEngine3D::misc_enableWireframeRendering()
+void FabiEngine3D::misc_enableWireFrameRendering()
 {
-	if (_core->_renderBus.isWireframeRenderingEnabled())
+	if (_core->_renderBus.isWireFrameRenderingEnabled())
 	{
-		Logger::throwWarning("Tried to enable wireframe rendering: already enabled!");
+		Logger::throwWarning("Tried to enable wire frame rendering: already enabled!");
 	}
 	else
 	{
-		_core->_renderBus.setWireframeRenderingEnabled(true);
+		_core->_renderBus.setWireFrameRenderingEnabled(true);
 	}
 }
 
@@ -109,15 +109,15 @@ void FabiEngine3D::misc_enableMusic()
 	}
 }
 
-void FabiEngine3D::misc_disableWireframeRendering()
+void FabiEngine3D::misc_disableWireFrameRendering()
 {
-	if (_core->_renderBus.isWireframeRenderingEnabled())
+	if (_core->_renderBus.isWireFrameRenderingEnabled())
 	{
-		_core->_renderBus.setWireframeRenderingEnabled(false);
+		_core->_renderBus.setWireFrameRenderingEnabled(false);
 	}
 	else
 	{
-		Logger::throwWarning("Tried to disable wireframe rendering: not enabled!");
+		Logger::throwWarning("Tried to disable wire frame rendering: not enabled!");
 	}
 }
 

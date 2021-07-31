@@ -20,9 +20,6 @@ void SkyEditor::load()
 	_fe3d.camera_reset();
 	
 	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 3.0f);
-	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Miscellaneous
@@ -37,9 +34,6 @@ void SkyEditor::unload()
 	_unloadGUI();
 
 	// Default graphics
-	_fe3d.gfx_disableAmbientLighting(true);
-	_fe3d.gfx_disableDirectionalLighting(true);
-	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete entities
@@ -52,6 +46,7 @@ void SkyEditor::unload()
 	_isChoosingSky = false;
 	_isEditingSky = false;
 	_isDeletingSky = false;
+	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");
@@ -64,7 +59,6 @@ void SkyEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_isEditorLoaded = false;
 }
 
 void SkyEditor::_loadGUI()

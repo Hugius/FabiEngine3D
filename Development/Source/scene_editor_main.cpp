@@ -188,9 +188,9 @@ void SceneEditor::unload()
 	{
 		_fe3d.misc_disableAabbFrameRendering();
 	}
-	if (_fe3d.misc_isWireframeRenderingEnabled())
+	if (_fe3d.misc_isWireFrameRenderingEnabled())
 	{
-		_fe3d.misc_disableWireframeRendering();
+		_fe3d.misc_disableWireFrameRendering();
 	}
 	if (_fe3d.misc_isDebugRenderingEnabled())
 	{

@@ -25,16 +25,16 @@ void SceneEditor::_updateMiscellaneous()
 
 			}
 
-			// Update wireframe rendering
+			// Update wire frame rendering
 			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 			{
-				if (_fe3d.misc_isWireframeRenderingEnabled())
+				if (_fe3d.misc_isWireFrameRenderingEnabled())
 				{
-					_fe3d.misc_disableWireframeRendering();
+					_fe3d.misc_disableWireFrameRendering();
 				}
 				else
 				{
-					_fe3d.misc_enableWireframeRendering();
+					_fe3d.misc_enableWireFrameRendering();
 				}
 			}
 

@@ -392,9 +392,9 @@ const bool FabiEngine3D::misc_isVsyncEnabled()
 	return _core->_window.isVsyncEnabled();
 }
 
-const bool FabiEngine3D::misc_isWireframeRenderingEnabled()
+const bool FabiEngine3D::misc_isWireFrameRenderingEnabled()
 {
-	return _core->_renderBus.isWireframeRenderingEnabled();
+	return _core->_renderBus.isWireFrameRenderingEnabled();
 }
 
 const bool FabiEngine3D::misc_isShadowFrameRenderingEnabled()

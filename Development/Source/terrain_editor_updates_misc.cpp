@@ -112,18 +112,18 @@ void TerrainEditor::_updateTerrainMiscellaneous()
 				}
 			}
 
-			// Update wireframed rendering
+			// Update wire frame rendering
 			if (!_currentTerrainID.empty() && _fe3d.terrainEntity_isExisting(_currentTerrainID))
 			{
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
 				{
-					if (_fe3d.terrainEntity_isWireframed(_currentTerrainID))
+					if (_fe3d.terrainEntity_isWireFramed(_currentTerrainID))
 					{
-						_fe3d.terrainEntity_setWireframed(_currentTerrainID, false);
+						_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
 					}
 					else
 					{
-						_fe3d.terrainEntity_setWireframed(_currentTerrainID, true);
+						_fe3d.terrainEntity_setWireFramed(_currentTerrainID, true);
 					}
 				}
 			}

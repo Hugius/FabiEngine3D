@@ -19,6 +19,7 @@ public:
 	void setOriginalLightness(float value);
 	void setLightness(float value);
 	void setRotationSpeed(float value);
+	void setWireFramed(bool value);
 
 	const array<string, 6>& getDiffuseMapPaths() const;
 	const Matrix44& getRotationMatrix()			 const;
@@ -28,9 +29,10 @@ public:
 	const float getLightness()					 const;
 	const float getRotationSpeed()				 const;
 	const bool hasCubeMap()						 const;
+	const bool isWireFramed() const;
 
 private:
-	array<string, 6> _diffuseMapPaths = {"", "", "", "", "", ""};
+	array<string, 6> _diffuseMapPaths = { "", "", "", "", "", "" };
 
 	Matrix44 _rotationMatrix = Matrix44(1.0f);
 
@@ -39,7 +41,9 @@ private:
 	GLuint _cubeMap = 0;
 
 	float _originalLightness = 1.0f;
-	float _lightness		 = 1.0f;
-	float _rotationSpeed     = 0.0f;
-	float _rotation			 = 0.0f;
+	float _lightness = 1.0f;
+	float _rotationSpeed = 0.0f;
+	float _rotation = 0.0f;
+
+	bool _isWireFramed = false;
 };

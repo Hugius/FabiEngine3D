@@ -38,7 +38,7 @@ public:
 	void setSpecularLightingFactor(float value);
 	void setSpecularLightingIntensity(float value);
 	void setSpecularLighted(bool value);
-	void setWireframed(bool value);
+	void setWireFramed(bool value);
 
 	// Textures
 	const GLuint getDiffuseMap()  const;
@@ -81,7 +81,7 @@ public:
 
 	// Booleans
 	const bool isSpecularLighted() const;
-	const bool isWireframed()	   const;
+	const bool isWireFramed()	   const;
 	const bool hasDiffuseMap()	   const;
 	const bool hasNormalMap()	   const;
 	const bool hasBlendMap()	   const;
@@ -133,5 +133,5 @@ private:
 	float _specularLightingIntensity = 0.0f;
 
 	bool _isSpecularLighted = false;
-	bool _isWireframed = false;
+	bool _isWireFramed = false;
 };

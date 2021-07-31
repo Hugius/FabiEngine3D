@@ -107,7 +107,7 @@ public:
 	void setDofEnabled(bool value);
 	void setMotionBlurEnabled(bool value);
 	void setLensFlareEnabled(bool value);
-	void setWireframeRenderingEnabled(bool value);
+	void setWireFrameRenderingEnabled(bool value);
 	void setAabbFrameRenderingEnabled(bool value);
 	void setDebugRenderingEnabled(bool value);
 	void setShadowFrameRenderingEnabled(bool value);
@@ -213,7 +213,7 @@ public:
 	const bool isDofEnabled();
 	const bool isMotionBlurEnabled();
 	const bool isLensFlareEnabled();
-	const bool isWireframeRenderingEnabled();
+	const bool isWireFrameRenderingEnabled();
 	const bool isAabbFrameRenderingEnabled();
 	const bool isShadowFrameRenderingEnabled();
 	const bool isLightedShadowingEnabled();
@@ -320,7 +320,7 @@ private:
 	bool _isDofEnabled = false;
 	bool _isMotionBlurEnabled = false;
 	bool _isLensFlareEnabled = false;
-	bool _isWireframeRenderingEnabled = false;
+	bool _isWireFrameRenderingEnabled = false;
 	bool _isAabbFrameRenderingEnabled = false;
 	bool _isShadowFrameRenderingEnabled = false;
 	bool _isLightedShadowingEnabled = false;

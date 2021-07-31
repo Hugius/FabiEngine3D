@@ -36,11 +36,13 @@ void main()
 	float mixValue  = clamp(u_mixValue, 0.0, 1.0f);
 	float lightness = mix(u_mainLightness, u_mixLightness, mixValue);
 
-	// Calculate primary color
+	// Calculate base color
 	vec3 primaryColor;
 	primaryColor  = mix(mainColor, mixColor, mixValue);
 	primaryColor *= lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+
+	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors

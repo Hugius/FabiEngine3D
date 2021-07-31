@@ -73,9 +73,9 @@ const bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
 }
 
-const bool FabiEngine3D::terrainEntity_isWireframed(const string& ID)
+const bool FabiEngine3D::terrainEntity_isWireFramed(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->isWireframed();
+	return _core->_terrainEntityManager.getEntity(ID)->isWireFramed();
 }
 
 const float FabiEngine3D::terrainEntity_getSize(const string& ID)
@@ -442,7 +442,7 @@ void FabiEngine3D::terrainEntity_setSpecularLighted(const string& ID, bool enabl
 	_core->_terrainEntityManager.getEntity(ID)->setSpecularLighted(enabled);
 }
 
-void FabiEngine3D::terrainEntity_setWireframed(const string& ID, bool enabled)
+void FabiEngine3D::terrainEntity_setWireFramed(const string& ID, bool enabled)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setWireframed(enabled);
+	_core->_terrainEntityManager.getEntity(ID)->setWireFramed(enabled);
 }

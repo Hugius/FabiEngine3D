@@ -73,10 +73,12 @@ void main()
 	// Main water color
 	vec4 waterColor = calculateWaterColor();
 
-	// Calculate primary color
+	// Calculate base color
 	vec3 primaryColor = waterColor.rgb;
-	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 	primaryColor = getFog(primaryColor);
+	primaryColor = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+
+	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
 
 	// Set final colors

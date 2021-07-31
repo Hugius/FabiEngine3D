@@ -1,24 +1,24 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
-void TerrainEditor::_updateTerrainEditor()
+void TerrainEditor::update()
 {
 	if (_isEditorLoaded)
 	{
-		_updateTerrainMenuMain();
-		_updateTerrainMenuChoice();
-		_updateTerrainMenuMesh();
-		_updateTerrainMenuBlendMap();
-		_updateTerrainMenuLighting();
+		_updateMainMenu();
+		_updateChoiceMenu();
+		_updateMeshMenu();
+		_updateBlendMapMenu();
+		_updateLightingMenu();
 		_updateTerrainCreating();
 		_updateTerrainChoosing();
 		_updateTerrainDeleting();
-		_updateTerrainCamera();
-		_updateTerrainMiscellaneous();
+		_updateCamera();
+		_updateMiscellaneous();
 	}
 }
 
-void TerrainEditor::_updateTerrainMenuMain()
+void TerrainEditor::_updateMainMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -60,22 +60,18 @@ void TerrainEditor::_updateTerrainMenuMain()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
 			saveTerrainEntitiesToFile();
-			unloadTerrainEntities();
-			_fe3d.modelEntity_delete("@@cube");
-			_fe3d.modelEntity_delete("@@grid");
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
-			unloadTerrainEntities();
-			_fe3d.modelEntity_delete("@@cube");
-			_fe3d.modelEntity_delete("@@grid");
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenuMain");
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
 	}
 }
 
-void TerrainEditor::_updateTerrainMenuChoice()
+void TerrainEditor::_updateChoiceMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -116,50 +112,47 @@ void TerrainEditor::_updateTerrainMenuChoice()
 
 void TerrainEditor::_updateTerrainCreating()
 {
-	if (_isEditorLoaded)
+	if (_isCreatingTerrain)
 	{
-		if (_isCreatingTerrain)
+		string newTerrainName;
+
+		// Create new terrain
+		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
 		{
-			string newTerrainName;
-
-			// Create new terrain
-			if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
+			// @ sign not allowed
+			if (newTerrainName.find('@') == string::npos)
 			{
-				// @ sign not allowed
-				if (newTerrainName.find('@') == string::npos)
+				// Spaces not allowed
+				if (newTerrainName.find(' ') == string::npos)
 				{
-					// Spaces not allowed
-					if (newTerrainName.find(' ') == string::npos)
-					{
-						// Add @ sign to new name
-						newTerrainName = "@" + newTerrainName;
+					// Add @ sign to new name
+					newTerrainName = "@" + newTerrainName;
 
-						// If terrain name not existing yet
-						if (std::find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
-						{
-							_currentTerrainID = newTerrainName;
-							_loadedTerrainIDs.push_back(_currentTerrainID);
-							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
-								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
-							_isCreatingTerrain = false;
-							_isEditingTerrain = true;
-						}
-						else
-						{
-							Logger::throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
-						}
+					// If terrain name not existing yet
+					if (std::find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
+					{
+						_currentTerrainID = newTerrainName;
+						_loadedTerrainIDs.push_back(_currentTerrainID);
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
+						_isCreatingTerrain = false;
+						_isEditingTerrain = true;
 					}
 					else
 					{
-						Logger::throwWarning("Terrain name cannot contain any spaces!");
+						Logger::throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Terrain name cannot contain '@'!");
+					Logger::throwWarning("Terrain name cannot contain any spaces!");
 				}
+			}
+			else
+			{
+				Logger::throwWarning("Terrain name cannot contain '@'!");
 			}
 		}
 	}
@@ -167,87 +160,81 @@ void TerrainEditor::_updateTerrainCreating()
 
 void TerrainEditor::_updateTerrainChoosing()
 {
-	if (_isEditorLoaded)
+	if (_isChoosingTerrain)
 	{
-		if (_isChoosingTerrain)
+		// Get selected button ID
+		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+
+		// Check if a terrain name is hovered
+		if (selectedButtonID != "")
 		{
-			// Get selected button ID
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
-
-			// Check if a terrain name is hovered
-			if (selectedButtonID != "")
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				// Select terrain
+				_currentTerrainID = "@" + selectedButtonID;
+
+				// Only if going to editor
+				if (_isEditingTerrain)
 				{
-					// Select terrain
-					_currentTerrainID = "@" + selectedButtonID;
+					// Go to editor screen
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
-					// Only if going to editor
-					if (_isEditingTerrain)
-					{
-						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-
-						// Show terrain name
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
-							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
-					}
-
-					// Only select the terrain if it has a heightMap
-					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-					{
-						_fe3d.terrainEntity_select(_currentTerrainID);
-						_fe3d.camera_setPosition(Vec3(0.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f, 0.0f));
-						_fe3d.camera_setPitch(-90.0f);
-						_fe3d.camera_enableThirdPersonView(0.0f, 45.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f);
-					}
-
-					// Miscellaneous
-					_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
-					_isChoosingTerrain = false;
+					// Show terrain name
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+						"Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
 				}
-			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
-			{
-				_isChoosingTerrain = false;
-				_isEditingTerrain = false;
-				_isDeletingTerrain = false;
+
+				// Only select the terrain if it has a heightMap
+				if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+				{
+					_fe3d.terrainEntity_select(_currentTerrainID);
+					_fe3d.camera_setPosition(Vec3(0.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f, 0.0f));
+					_fe3d.camera_setPitch(-90.0f);
+					_fe3d.camera_enableThirdPersonView(0.0f, 45.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f);
+				}
+
+				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
+				_isChoosingTerrain = false;
 			}
+		}
+		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+		{
+			_isChoosingTerrain = false;
+			_isEditingTerrain = false;
+			_isDeletingTerrain = false;
+			_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 		}
 	}
 }
 
 void TerrainEditor::_updateTerrainDeleting()
 {
-	if (_isEditorLoaded)
+	if (_isDeletingTerrain && _currentTerrainID != "")
 	{
-		if (_isDeletingTerrain && _currentTerrainID != "")
+		// Add answer form
+		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			// Add answer form
-			if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
-			{
-				_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
-			}
+			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+		}
 
-			// Check if form is answered
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
-			{
-				// Delete entity
-				_fe3d.terrainEntity_delete(_currentTerrainID);
+		// Check if form is answered
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		{
+			// Delete entity
+			_fe3d.terrainEntity_delete(_currentTerrainID);
 
-				// Delete from name record
-				_loadedTerrainIDs.erase(std::remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
-				_isDeletingTerrain = false;
-				_currentTerrainID = "";
-			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
-			{
-				_fe3d.terrainEntity_select("");
-				_isDeletingTerrain = false;
-				_currentTerrainID = "";
-			}
+			// Delete from name record
+			_loadedTerrainIDs.erase(std::remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
+			_isDeletingTerrain = false;
+			_currentTerrainID = "";
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		{
+			_fe3d.terrainEntity_select("");
+			_isDeletingTerrain = false;
+			_currentTerrainID = "";
 		}
 	}
 }

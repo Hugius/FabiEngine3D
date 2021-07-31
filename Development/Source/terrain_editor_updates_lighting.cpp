@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-void TerrainEditor::_updateTerrainMenuLighting()
+void TerrainEditor::_updateLightingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

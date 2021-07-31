@@ -18,6 +18,9 @@ void TerrainEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
+	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
+	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
 	
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -25,15 +28,21 @@ void TerrainEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
+	// 3D environment
+	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj",
+		Vec3(0.0f, -GRID_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
+	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj",
+		Vec3(0.0f, -GRID_Y_OFFSET, 0.0f), Vec3(0.0f), Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
+	_fe3d.modelEntity_setTransparent("@@grid", true);
+
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextfield("selectedTerrainName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
 	_isEditorLoaded = true;
-}
-
-void TerrainEditor::update()
-{
-
 }
 
 void TerrainEditor::unload()
@@ -47,16 +56,22 @@ void TerrainEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
+	// 3D environment
+	_fe3d.modelEntity_delete("@@cube");
+	_fe3d.modelEntity_delete("@@grid");
+
 	// Delete entities
 	unloadTerrainEntities();
 
 	// Reset editor properties
 	_loadedTerrainIDs.clear();
 	_currentTerrainID = "";
+	_cameraDistance = INITIAL_CAMERA_DISTANCE;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
 	_isEditingTerrain = false;
 	_isDeletingTerrain = false;
+	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
@@ -69,7 +84,6 @@ void TerrainEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_isEditorLoaded = false;
 }
 
 void TerrainEditor::_loadGUI()

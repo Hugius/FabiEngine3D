@@ -70,7 +70,6 @@ void Camera::enableThirdPersonView(float initialYaw, float initialPitch, float i
 	{
 		_thirdPersonYaw = initialYaw;
 		_thirdPersonPitch = initialPitch;
-		_thirdPersonDistance = initialDistance;
 		_mustCenterCursor = true;
 		_isThirdPersonViewEnabled = true;
 	}

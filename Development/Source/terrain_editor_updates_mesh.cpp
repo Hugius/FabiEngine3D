@@ -1,7 +1,7 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
-void TerrainEditor::_updateTerrainMenuMesh()
+void TerrainEditor::_updateMeshMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

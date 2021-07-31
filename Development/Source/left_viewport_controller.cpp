@@ -64,13 +64,19 @@ void LeftViewportController::update()
 			}
 			else if (screen->getButton("terrainEditor")->isHovered()) // Terrain editor button
 			{
-				_terrainEditor.load();
-				window->setActiveScreen("terrainEditorMenuMain");
+				if (_terrainEditor.loadTerrainEntitiesFromFile())
+				{
+					_terrainEditor.load();
+					window->setActiveScreen("terrainEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("waterEditor")->isHovered()) // Water editor button
 			{
-				_waterEditor.load();
-				window->setActiveScreen("waterEditorMenuMain");
+				if (_waterEditor.loadWaterEntitiesFromFile())
+				{
+					_waterEditor.load();
+					window->setActiveScreen("waterEditorMenuMain");
+				}
 			}
 			else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 			{

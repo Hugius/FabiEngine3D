@@ -8,19 +8,23 @@ class BillboardEditor final
 public:
 	BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
-	bool loadBillboardEntitiesFromFile();
-	bool saveBillboardEntitiesToFile();
 
-	bool isLoaded();
-
+	// Strings
 	const vector<string> getAllTexturePathsFromFile();
 	const vector<string>& getLoadedBillboardIDs();
 
+	// Booleans
+	bool loadBillboardEntitiesFromFile();
+	bool saveBillboardEntitiesToFile();
+	bool isLoaded();
+
 private:
+	// Voids
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateMainMenu();

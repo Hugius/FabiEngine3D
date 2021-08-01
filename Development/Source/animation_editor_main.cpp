@@ -2,6 +2,8 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
+using std::numeric_limits;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor)
@@ -44,7 +46,7 @@ void AnimationEditor::load()
 	_gui.getGlobalScreen()->createTextfield("selectedAnimationName", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedAnimationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
-	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
+	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
 	_isEditorLoaded = true;
 }
 

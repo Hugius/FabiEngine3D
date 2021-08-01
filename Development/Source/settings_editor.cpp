@@ -7,6 +7,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)
@@ -179,12 +183,12 @@ bool SettingsEditor::loadSettingsFromFile()
 	}
 
 	// Load settings file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Load settings data
 	string line;
-	std::getline(file, line);
-	std::istringstream iss(line);
+	getline(file, line);
+	istringstream iss(line);
 
 	// Extract values from file
 	unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
@@ -225,7 +229,7 @@ bool SettingsEditor::saveSettingsToFile()
 		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Create or overwrite settings file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Get values
 	auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();

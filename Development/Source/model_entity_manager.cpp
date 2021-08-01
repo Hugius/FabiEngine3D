@@ -1,6 +1,8 @@
 #include "model_entity_manager.hpp"
 #include "logger.hpp"
 
+using std::make_shared;
+
 ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::MODEL, meshLoader, texLoader, renderBus)
@@ -105,7 +107,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		entity->addPart(part.ID);
 
 		// Render buffer
-		entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
+		entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
 
 		// Diffuse map
 		if (part.diffuseMapPath != "")

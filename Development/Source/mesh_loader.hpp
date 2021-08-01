@@ -5,6 +5,8 @@
 
 #include <map>
 
+using std::map;
+
 class MeshLoader final
 {
 public:
@@ -17,5 +19,5 @@ public:
 private:
 	vector<MeshPart> _loadMesh(const string& filePath);
 
-	std::map<string, vector<MeshPart>> _meshCache;
+	map<string, vector<MeshPart>> _meshCache;
 };

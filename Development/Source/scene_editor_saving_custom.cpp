@@ -4,6 +4,9 @@
 #include <fstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+
 bool SceneEditor::saveCustomSceneToFile()
 {
 	// Error checking
@@ -28,7 +31,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + _customSceneID + ".fe3d");
 
 	// Create or overwrite file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Save model LOD IDs
 	vector<string> lodIDs;
@@ -69,7 +72,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			lightness << " " <<
 			color.r << " " <<
 			color.g << " " <<
-			color.b << std::endl;
+			color.b << endl;
 	}
 
 	// Terrain
@@ -83,7 +86,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		file <<
 			"TERRAIN " <<
 			terrainID << " " <<
-			previewID << std::endl;
+			previewID << endl;
 	}
 
 	// Water
@@ -106,7 +109,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			color.b << " " <<
 			speed.x << " " <<
 			speed.y << " " <<
-			transparency << std::endl;
+			transparency << endl;
 	}
 
 	// Models
@@ -254,7 +257,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			}
 
 			// New line
-			file << std::endl;
+			file << endl;
 		}
 	}
 
@@ -308,7 +311,7 @@ bool SceneEditor::saveCustomSceneToFile()
 					index++;
 				}
 
-				file << std::endl;
+				file << endl;
 			}
 		}
 	}
@@ -346,7 +349,7 @@ bool SceneEditor::saveCustomSceneToFile()
 
 			// Perform empty string & space conversions
 			textContent = (textContent == "") ? "?" : textContent;
-			std::replace(textContent.begin(), textContent.end(), ' ', '?');
+			replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Extract preview ID
 			string previewID;
@@ -388,7 +391,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				maxHeight << " " <<
 				remainingAnimationLoops << " " <<
 				animationRowIndex << " " <<
-				animationColumnIndex << std::endl;
+				animationColumnIndex << endl;
 		}
 	}
 
@@ -419,7 +422,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				position.z << " " <<
 				size.x << " " <<
 				size.y << " " <<
-				size.z << std::endl;
+				size.z << endl;
 		}
 	}
 
@@ -456,7 +459,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				position.y << " " <<
 				position.z << " " <<
 				maxVolume << " " <<
-				maxDistance << std::endl;
+				maxDistance << endl;
 		}
 	}
 
@@ -476,7 +479,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				ambientLightingColor.r << " " <<
 				ambientLightingColor.g << " " <<
 				ambientLightingColor.b << " " <<
-				ambientLightingIntensity << std::endl;
+				ambientLightingIntensity << endl;
 		}
 
 		// Directional lighting
@@ -500,7 +503,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				directionalLightingColor.b << " " <<
 				directionalLightingIntensity << " " <<
 				billboardSize << " " <<
-				billboardLightness << std::endl;
+				billboardLightness << endl;
 		}
 	}
 
@@ -531,15 +534,15 @@ bool SceneEditor::saveCustomSceneToFile()
 				color.r << " " <<
 				color.g << " " <<
 				color.b << " " <<
-				intensity << std::endl;
+				intensity << endl;
 		}
 	}
 
 	// LOD distance settings
-	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << std::endl;
+	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Reflection height
-	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << std::endl;
+	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << endl;
 
 	// Check if allowed to save
 	if (_hasCustomSceneGraphics)
@@ -565,13 +568,13 @@ bool SceneEditor::saveCustomSceneToFile()
 				_fe3d.misc_vec2str(center) << " " <<
 				isFollowingCamera << " " <<
 				isLighted << " " <<
-				interval << std::endl;
+				interval << endl;
 		}
 
 		// Motion blur settings
 		if (_fe3d.gfx_isMotionBlurEnabled())
 		{
-			file << "GRAPHICS_MOTION_BLUR " << _fe3d.gfx_getMotionBlurStrength() << std::endl;
+			file << "GRAPHICS_MOTION_BLUR " << _fe3d.gfx_getMotionBlurStrength() << endl;
 		}
 
 		// DOF settings
@@ -587,7 +590,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				"GRAPHICS_DOF " <<
 				dynamic << " " <<
 				blurDistance << " " <<
-				maxDistance << std::endl;
+				maxDistance << endl;
 		}
 
 		// Fog settings
@@ -605,7 +608,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				minDistance << " " <<
 				maxDistance << " " <<
 				thickness << " " <<
-				_fe3d.misc_vec2str(color) << std::endl;
+				_fe3d.misc_vec2str(color) << endl;
 		}
 
 		// Lens flare settings
@@ -618,20 +621,20 @@ bool SceneEditor::saveCustomSceneToFile()
 
 			// Perform empty string & space conversions
 			flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
-			std::replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
+			replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
 			// Write data
 			file <<
 				"GRAPHICS_LENS_FLARE " <<
 				flareMapPath << " " <<
 				intensity << " " <<
-				multiplier << std::endl;
+				multiplier << endl;
 		}
 
 		// Sky exposure settings
 		if (_fe3d.gfx_isSkyExposureEnabled())
 		{
-			file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureFactor() << " " << _fe3d.gfx_getSkyExposureSpeed() << std::endl;
+			file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureFactor() << " " << _fe3d.gfx_getSkyExposureSpeed() << endl;
 		}
 
 		// Bloom settings
@@ -647,7 +650,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				"GRAPHICS_BLOOM " <<
 				type << " " <<
 				intensity << " " <<
-				blurCount << std::endl;
+				blurCount << endl;
 		}
 	}
 

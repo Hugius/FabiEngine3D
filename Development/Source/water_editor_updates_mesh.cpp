@@ -1,5 +1,7 @@
 #include "water_editor.hpp"
 
+using std::max;
+
 void WaterEditor::_updateMeshMenu()
 {
 	// Temporary values
@@ -32,7 +34,7 @@ void WaterEditor::_updateMeshMenu()
 		// Update size changes
 		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
-			waterSize = std::max(0.0f, waterSize);
+			waterSize = max(0.0f, waterSize);
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
 

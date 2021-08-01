@@ -2,6 +2,8 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+using std::max;
+
 AudioPlayer::AudioPlayer()
 {
 	Mix_AllocateChannels(0);
@@ -50,7 +52,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					float xDiff = fabsf(sound.getPosition().x - cameraPos.x); // Difference between camera X & point X
 					float yDiff = fabsf(sound.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
 					float zDiff = fabsf(sound.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
-					float maxDiff = std::max(xDiff, std::max(yDiff, zDiff)); // Maximum difference
+					float maxDiff = max(xDiff, max(yDiff, zDiff)); // Maximum difference
 					float volume = sound.getMaxVolume() - ((maxDiff / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
 					volume = std::clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
 					sound.setVolume(volume); // Update sound volume

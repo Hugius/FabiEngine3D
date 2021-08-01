@@ -1,6 +1,8 @@
 #include "animation_editor.hpp"
 #include "logger.hpp"
 
+using std::max;
+
 void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
 {
 	// Temporary values
@@ -277,7 +279,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 				}
 				else
 				{
-					_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = std::max(0, framestep);
+					_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = max(0, framestep);
 				}
 			}
 			else

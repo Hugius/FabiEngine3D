@@ -5,6 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
@@ -25,17 +29,17 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	}
 
 	// Load sky file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read sky data
 	vector<array<string, 6>> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string skyID;
 		array<string, 6> diffuseMapPaths = {};
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Load base data
 		iss >>
@@ -51,7 +55,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
 
 		// Save file paths
@@ -88,17 +92,17 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 	}
 
 	// Load sky file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read sky data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Values
 		string skyID;
-		std::array<string, 6> diffuseMapPaths{};
+		array<string, 6> diffuseMapPaths{};
 		float rotationSpeed, lightness;
 		Vec3 color;
 
@@ -121,7 +125,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
 
 		// Load entity
@@ -162,7 +166,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\sky.fe3d";
 
 	// Load sky file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write sky data
 	for (const auto& skyID : _loadedSkyIDs)
@@ -177,7 +181,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
 			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		}
 
 		// Write name to file
@@ -195,7 +199,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 			lightness << " " <<
 			color.r << " " <<
 			color.g << " " <<
-			color.b << std::endl;
+			color.b << endl;
 	}
 
 	// Close file

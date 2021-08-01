@@ -3,6 +3,9 @@
 #include "logger.hpp" 
 #include "tools.hpp"
 
+using std::make_shared;
+using std::max;
+
 const float vertex_data[] =
 {
 	-0.5f,  1.0f, -0.5f,
@@ -26,7 +29,7 @@ const float vertex_data[] =
 AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus),
-	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
 
 }
@@ -239,9 +242,9 @@ void AabbEntityManager::update(
 					}
 
 					// AABB must still be a box (cannot be flat)
-					newAabbSize.x = std::max(newAabbSize.x, 0.1f);
-					newAabbSize.y = std::max(newAabbSize.y, 0.1f);
-					newAabbSize.z = std::max(newAabbSize.z, 0.1f);
+					newAabbSize.x = max(newAabbSize.x, 0.1f);
+					newAabbSize.y = max(newAabbSize.y, 0.1f);
+					newAabbSize.z = max(newAabbSize.z, 0.1f);
 
 					// Calculate Y offset, because rotation is around center while billboard is not centered
 					float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);

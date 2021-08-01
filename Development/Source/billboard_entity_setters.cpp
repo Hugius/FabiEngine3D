@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "logger.hpp"
 
+using std::max;
+
 void BillboardEntity::updateModelMatrix()
 {
 	// Identity matrix
@@ -79,7 +81,7 @@ void BillboardEntity::setRotation(Vec3 value)
 
 void BillboardEntity::setSize(Vec3 value)
 {
-	_size = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	_size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void BillboardEntity::setColor(Vec3 value)
@@ -105,7 +107,7 @@ void BillboardEntity::rotate(Vec3 value)
 void BillboardEntity::scale(Vec3 value)
 {
 	_size += value;
-	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
+	_size = Vec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
 }
 
 void BillboardEntity::setTextContent(const string& value)
@@ -257,7 +259,7 @@ void BillboardEntity::increaseSpriteAnimationLoops()
 
 void BillboardEntity::setLightness(float value)
 {
-	_lightness = std::max(0.0f, value);
+	_lightness = max(0.0f, value);
 }
 
 void BillboardEntity::setInversion(float value)

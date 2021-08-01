@@ -227,7 +227,7 @@ void BottomViewportController::update()
 	if (loggerMessages.size() > MAX_CONSOLE_MESSAGES)
 	{
 		// Save most recent messages
-		std::reverse(loggerMessages.begin(), loggerMessages.end());
+		reverse(loggerMessages.begin(), loggerMessages.end());
 		vector<string> newMessages;
 		for (size_t i = 0; i < (loggerMessages.size() - static_cast<size_t>(MAX_CONSOLE_MESSAGES)); i++)
 		{
@@ -243,7 +243,7 @@ void BottomViewportController::update()
 		_consoleMessageQueue.clear();
 
 		// Set new messages
-		std::reverse(newMessages.begin(), newMessages.end());
+		reverse(newMessages.begin(), newMessages.end());
 		Logger::setCustomMessageQueue(newMessages);
 	}
 

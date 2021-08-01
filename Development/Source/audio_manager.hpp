@@ -4,8 +4,6 @@
 #include "music.hpp"
 #include "audio_loader.hpp"
 
-#include <vector>
-
 class AudioManager final
 {
 public:
@@ -25,7 +23,7 @@ public:
 	vector<Music>& getMusic();
 
 private:
-	vector<Sound> _sounds;
+	vector<Sound> _soundList;
 	vector<Music> _musicList;
 
 	AudioLoader& _audioLoader;

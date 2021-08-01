@@ -5,6 +5,8 @@
 
 #include <ws2tcpip.h>
 
+using std::to_string;
+
 const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const string& port)
 {
 	sockaddr_in socketAddress = sockaddr_in();
@@ -23,7 +25,7 @@ const string NetworkUtils::extractSocketAddressIP(sockaddr_in* address)
 
 const string NetworkUtils::extractSocketAddressPort(sockaddr_in* address)
 {
-	return std::to_string(ntohs(address->sin_port));
+	return to_string(ntohs(address->sin_port));
 }
 
 const string NetworkUtils::extractSocketSourceIP(SOCKET socket)

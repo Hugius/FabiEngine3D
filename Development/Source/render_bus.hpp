@@ -329,5 +329,5 @@ private:
 	bool _isDofDynamic = false;
 
 	// Miscellaneous
-	BloomType _bloomType = BloomType();
+	BloomType _bloomType;
 };

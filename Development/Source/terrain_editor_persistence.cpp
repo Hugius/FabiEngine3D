@@ -5,6 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 {
 	// Error checking
@@ -25,19 +29,19 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	}
 
 	// Load terrain file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read terrain data
 	vector<string> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Load base data
 		iss >>
@@ -70,16 +74,16 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
-		std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-		std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-		std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-		std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-		std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-		std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-		std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+		replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+		replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 		// Save file paths
 		if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
@@ -124,13 +128,13 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 	}
 
 	// Load terrain file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read terrain data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
@@ -173,16 +177,16 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
-		std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
-		std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
-		std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-		std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
-		std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
-		std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
-		std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+		replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+		replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+		replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 		// Add new terrain entity
 		_loadedTerrainIDs.push_back(terrainID);
@@ -236,7 +240,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Load terrain file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write terrain data
 	for (const auto& terrainID : _loadedTerrainIDs)
@@ -273,16 +277,16 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		normalMapPathR = (normalMapPathR == "") ? "?" : normalMapPathR;
 		normalMapPathG = (normalMapPathG == "") ? "?" : normalMapPathG;
 		normalMapPathB = (normalMapPathB == "") ? "?" : normalMapPathB;
-		std::replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-		std::replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
-		std::replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
-		std::replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
-		std::replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
-		std::replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
-		std::replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
-		std::replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
+		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+		replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
+		replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
+		replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
+		replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
+		replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
+		replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
+		replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
 
 		// Write terrain data to file
 		file <<
@@ -305,7 +309,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 			normalMapPathB << " " <<
 			isSpecular << " " <<
 			specularFactor << " " <<
-			specularIntensity << std::endl;
+			specularIntensity << endl;
 	}
 
 	// Close file

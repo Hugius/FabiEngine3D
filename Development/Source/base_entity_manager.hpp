@@ -18,9 +18,9 @@
 #include <memory>
 #include <unordered_map>
 
+using std::make_pair;
 using std::shared_ptr;
 using std::unordered_map;
-using std::make_pair;
 
 class BaseEntityManager
 {

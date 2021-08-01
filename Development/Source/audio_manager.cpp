@@ -17,7 +17,7 @@ void AudioManager::deleteMusic()
 
 void AudioManager::deleteAllSounds()
 {
-	_sounds.clear();
+	_soundList.clear();
 }
 
 void AudioManager::addMusic(const string& fileName)
@@ -36,7 +36,7 @@ void AudioManager::addSound(const string& ID, const string& fileName)
 		Logger::throwError("Tried to create sound with empty ID!");
 	}
 
-	_sounds.push_back(Sound(ID, fileName, _audioLoader.getChunkDataPointer(fileName)));
+	_soundList.push_back(Sound(ID, fileName, _audioLoader.getChunkDataPointer(fileName)));
 }
 
 void AudioManager::deleteSound(const string& ID)
@@ -49,7 +49,7 @@ void AudioManager::deleteSound(const string& ID)
 	}
 	else
 	{
-		_sounds.erase(_sounds.begin() + index);
+		_soundList.erase(_soundList.begin() + index);
 	}
 }
 
@@ -68,13 +68,13 @@ Sound& AudioManager::getSound(const string& ID)
 	}
 	else
 	{
-		return _sounds[index];
+		return _soundList[index];
 	}
 }
 
 vector<Sound>& AudioManager::getSounds()
 {
-	return _sounds;
+	return _soundList;
 }
 
 vector<Music>& AudioManager::getMusic()
@@ -84,9 +84,9 @@ vector<Music>& AudioManager::getMusic()
 
 int AudioManager::_findIndex(const string& ID)
 {
-	for (size_t i = 0; i < _sounds.size(); i++)
+	for (size_t i = 0; i < _soundList.size(); i++)
 	{
-		if (_sounds[i].getID() == ID)
+		if (_soundList[i].getID() == ID)
 		{
 			return static_cast<int>(i);
 		}

@@ -5,6 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
@@ -25,19 +29,19 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 
 	// Load billboard file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read billboard data
 	vector<string> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string billboardID, diffuseMapPath;
 		Vec2 size;
 		Vec3 color;
 		bool facingX, facingY;
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract data
 		iss >>
@@ -53,7 +57,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
 		// Save file paths
 		if (!diffuseMapPath.empty())
@@ -92,11 +96,11 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	}
 
 	// Load billboard file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read billboard data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Placeholder variables
 		string billboardID, diffuseMapPath, fontPath, textContent;
@@ -107,7 +111,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		unsigned int animationRows, animationColumns, animationFramestep;
 
 		// For file extraction
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract from file
 		iss >>
@@ -136,9 +140,9 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		fontPath = (fontPath == "?") ? "" : fontPath;
 		textContent = (textContent == "?") ? "" : textContent;
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
-		std::replace(textContent.begin(), textContent.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(fontPath.begin(), fontPath.end(), '?', ' ');
+		replace(textContent.begin(), textContent.end(), '?', ' ');
 
 		// Add billboard name
 		_loadedBillboardIDs.push_back(billboardID);
@@ -204,7 +208,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
 	// Create or overwrite billboard file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write billboard data
 	for (const auto& billboardID : _loadedBillboardIDs)
@@ -231,9 +235,9 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 		fontPath = (fontPath == "") ? "?" : fontPath;
 		textContent = (textContent == "") ? "?" : textContent;
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-		std::replace(fontPath.begin(), fontPath.end(), ' ', '?');
-		std::replace(textContent.begin(), textContent.end(), ' ', '?');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+		replace(fontPath.begin(), fontPath.end(), ' ', '?');
+		replace(textContent.begin(), textContent.end(), ' ', '?');
 
 		// Export data
 		file <<
@@ -256,7 +260,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 			animationColumns << " " <<
 			animationFramestep << " " <<
 			lightness << " " <<
-			isBright << std::endl;
+			isBright << endl;
 	}
 
 	// Close file

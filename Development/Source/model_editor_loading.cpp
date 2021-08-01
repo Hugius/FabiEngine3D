@@ -6,6 +6,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<string> ModelEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
@@ -26,17 +30,17 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 
 	// Load model file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read model data
 	vector<string> meshPaths;
 	vector<string> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract data
 		iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
@@ -47,11 +51,11 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(meshPath.begin(), meshPath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 		// Save file paths
 		meshPaths.push_back(meshPath);
@@ -110,13 +114,13 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	}
 
 	// Load model file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read model data
 	vector<string> meshPaths;
 	vector<string> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Placeholder variables
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
@@ -129,7 +133,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		vector<Vec3> aabbSizes;
 
 		// For file extraction
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract general data from file
 		iss >>
@@ -184,12 +188,12 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
-		std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
-		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		std::replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
+		replace(meshPath.begin(), meshPath.end(), '?', ' ');
+		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 		// Add new model
 		_createModel(modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled,

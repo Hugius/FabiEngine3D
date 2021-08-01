@@ -2,6 +2,8 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
+using std::numeric_limits;
+
 void DepthRenderer::bind()
 {
 	// Bind shader
@@ -49,9 +51,9 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", Matrix44(1.0f));
 		_shader.uploadUniform("u_currentY", 0.0f);
-		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_minHeight", -(numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (numeric_limits<float>::max)());
+		_shader.uploadUniform("u_clippingY", -(numeric_limits<float>::max)());
 		_shader.uploadUniform("u_isTransparent", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isBillboard", false);
@@ -83,9 +85,9 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_isTransparent", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
-		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_minHeight", -(numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (numeric_limits<float>::max)());
+		_shader.uploadUniform("u_clippingY", -(numeric_limits<float>::max)());
 
 		// Bind buffer
 		glBindVertexArray(entity->getLowQualityRenderBuffer()->getVAO());
@@ -245,8 +247,8 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
-		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
-		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_minHeight", -(numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (numeric_limits<float>::max)());
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);

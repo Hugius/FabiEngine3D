@@ -1,5 +1,7 @@
 #include "billboard_editor.hpp"
 
+using std::max;
+
 void BillboardEditor::_updateCamera()
 {
 	// Check if allowed by GUI
@@ -15,7 +17,7 @@ void BillboardEditor::_updateCamera()
 		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 		{
 			_cameraLookatPosition.y -= LOOKAT_MOVEMENT_SPEED;
-			_cameraLookatPosition.y = std::max(0.0f, _cameraLookatPosition.y);
+			_cameraLookatPosition.y = max(0.0f, _cameraLookatPosition.y);
 		}
 	}
 

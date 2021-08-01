@@ -1,6 +1,8 @@
 #include "terrain_entity_manager.hpp"
 #include "logger.hpp"
 
+using std::make_shared;
+
 TerrainEntityManager::TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::TERRAIN, meshLoader, texLoader, renderBus)
@@ -232,7 +234,7 @@ void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPat
 	entity->setVertices(vertices);
 	entity->setUvCoords(uvCoords);
 	entity->setNormals(normals);
-	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+	entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

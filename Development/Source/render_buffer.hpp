@@ -30,18 +30,20 @@ public:
 	const vector<Vec3>& getInstancedOffsets();
 
 private:
-	unsigned int _vertexCount = 0;
+	// Vectors
+	vector<Vec3> _instancedOffsets;
 
+	// Integers
+	unsigned int _vertexCount = 0;
 	unsigned int _offsetCount = 0;
 
+	// Booleans
 	bool _isInstanced = false;
 
+	// Miscellaneosu
+	BufferType _bufferType;
 	BufferID _vao = 0;
 	BufferID _vbo = 0;
 	BufferID _vbo_instanced = 0;
-
-	BufferType _bufferType = BufferType();
-
-	vector<Vec3> _instancedOffsets;
 };
 

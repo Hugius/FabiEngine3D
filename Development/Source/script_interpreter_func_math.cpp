@@ -131,12 +131,12 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
-							int result = std::min(arguments[0].getInteger(), arguments[1].getInteger());
+							int result = min(arguments[0].getInteger(), arguments[1].getInteger());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 						}
 						else if (arguments[0].getType() == ScriptValueType::DECIMAL && arguments[1].getType() == ScriptValueType::DECIMAL)
 						{
-							float result = std::min(arguments[0].getDecimal(), arguments[1].getDecimal());
+							float result = min(arguments[0].getDecimal(), arguments[1].getDecimal());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else
@@ -151,12 +151,12 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
-							int result = std::max(arguments[0].getInteger(), arguments[1].getInteger());
+							int result = max(arguments[0].getInteger(), arguments[1].getInteger());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 						}
 						else if (arguments[0].getType() == ScriptValueType::DECIMAL && arguments[1].getType() == ScriptValueType::DECIMAL)
 						{
-							float result = std::max(arguments[0].getDecimal(), arguments[1].getDecimal());
+							float result = max(arguments[0].getDecimal(), arguments[1].getDecimal());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else

@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void BillboardEditor::_updateChoiceMenu()
 {
 	if (_isEditingBillboard && _currentBillboardID != "")
@@ -101,8 +103,8 @@ void BillboardEditor::_updateChoiceMenu()
 			Vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardID) * 100.0f;
 			_gui.getGlobalScreen()->checkValueForm("sizeX", newSize.x, { 0.0f });
 			_gui.getGlobalScreen()->checkValueForm("sizeY", newSize.y, { 0.0f });
-			newSize.x = std::max(0.0f, newSize.x / 100.0f);
-			newSize.y = std::max(0.0f, newSize.y / 100.0f);
+			newSize.x = max(0.0f, newSize.x / 100.0f);
+			newSize.y = max(0.0f, newSize.y / 100.0f);
 			_fe3d.billboardEntity_setSize(_currentBillboardID, newSize);
 
 			// Button text contents
@@ -184,7 +186,7 @@ void BillboardEditor::_updateChoiceMenu()
 			float newLightness;
 			if (_gui.getGlobalScreen()->checkValueForm("lightness", newLightness, { }))
 			{
-				newLightness = std::max(0.0f, newLightness / 100.0f);
+				newLightness = max(0.0f, newLightness / 100.0f);
 				_fe3d.billboardEntity_setLightness(_currentBillboardID, newLightness);
 			}
 
@@ -250,9 +252,9 @@ void BillboardEditor::_updateChoiceMenu()
 			}
 
 			// Update animation values
-			_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, std::max(0, animationRowCount));
-			_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, std::max(0, animationColumnCount));
-			_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, std::max(0, animationFramestep));
+			_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, max(0, animationRowCount));
+			_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, max(0, animationColumnCount));
+			_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, max(0, animationFramestep));
 		}
 		else if (screen->getID() == "billboardEditorMenuText")
 		{

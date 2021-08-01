@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void LightEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -14,7 +16,7 @@ void LightEntity::move(Vec3 value)
 
 void LightEntity::setRadius(Vec3 value)
 {
-	_radius = Vec3(std::max(0.0f, value.r), std::max(0.0f, value.g), std::max(0.0f, value.b));
+	_radius = Vec3(max(0.0f, value.r), max(0.0f, value.g), max(0.0f, value.b));
 }
 
 void LightEntity::setColor(Vec3 value)
@@ -24,7 +26,7 @@ void LightEntity::setColor(Vec3 value)
 
 void LightEntity::setIntensity(float value)
 {
-	_intensity = std::max(0.0f, value);
+	_intensity = max(0.0f, value);
 }
 
 const Vec3 LightEntity::getPosition()

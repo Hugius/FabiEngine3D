@@ -68,7 +68,7 @@ void EngineGuiWritefield::_updateTyping()
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 
 			// Number characters
-			std::map<char, char> numberCharacterMap;
+			map<char, char> numberCharacterMap;
 			numberCharacterMap['0'] = ')';
 			numberCharacterMap['1'] = '!';
 			numberCharacterMap['2'] = '@';
@@ -81,7 +81,7 @@ void EngineGuiWritefield::_updateTyping()
 			numberCharacterMap['9'] = '(';
 
 			// Special characters
-			std::map<char, char> specialCharacterMap;
+			map<char, char> specialCharacterMap;
 			specialCharacterMap['.'] = '>';
 			specialCharacterMap[','] = '<';
 			specialCharacterMap['/'] = '?';

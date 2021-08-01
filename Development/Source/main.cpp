@@ -3,6 +3,9 @@
 #include <iostream>
 #include <conio.h>
 
+using std::endl;
+using std::cout;
+
 bool startEngine()
 {
 	// Create engine
@@ -20,7 +23,7 @@ int main(int argc, char* argv[])
 	// Initiate new scope so engine can end
 	if (startEngine())
 	{
-		std::cout << std::endl << "Press a key to continue...";
+		cout << endl << "Press a key to continue...";
 		auto temp = _getch();
 	}
 

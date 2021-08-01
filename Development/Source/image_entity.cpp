@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void ImageEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, 0.0f);
@@ -44,7 +46,7 @@ void ImageEntity::setMirroredVertically(bool value)
 
 void ImageEntity::setAlpha(float value)
 {
-	_alpha = std::max(0.0f, value);
+	_alpha = max(0.0f, value);
 }
 
 void ImageEntity::setCentered(bool value)
@@ -67,7 +69,7 @@ void ImageEntity::setRotation(float value)
 
 void ImageEntity::setSize(Vec2 value)
 {
-	_size = Vec2(std::max(0.0f, value.x), std::max(0.0f, value.y));
+	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 void ImageEntity::move(Vec2 value)
@@ -86,7 +88,7 @@ void ImageEntity::rotate(float value)
 void ImageEntity::scale(Vec2 value)
 {
 	_size += value;
-	_size = Vec2(std::max(0.0f, _size.x), std::max(0.0f, _size.y));
+	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
 }
 
 void ImageEntity::setMinPosition(Vec2 value)
@@ -158,27 +160,27 @@ void ImageEntity::stopSpriteAnimationAnimation()
 
 void ImageEntity::setSpriteAnimationRowIndex(int value)
 {
-	_spriteAnimationRowIndex = std::max(0, value);
+	_spriteAnimationRowIndex = max(0, value);
 }
 
 void ImageEntity::setSpriteAnimationColumnIndex(int value)
 {
-	_spriteAnimationColumnIndex = std::max(0, value);
+	_spriteAnimationColumnIndex = max(0, value);
 }
 
 void ImageEntity::setTotalSpriteAnimationRows(int value)
 {
-	_totalSpriteAnimationRows = std::max(0, value);
+	_totalSpriteAnimationRows = max(0, value);
 }
 
 void ImageEntity::setTotalSpriteAnimationColumns(int value)
 {
-	_totalSpriteAnimationColumns = std::max(0, value);
+	_totalSpriteAnimationColumns = max(0, value);
 }
 
 void ImageEntity::setMaxSpriteAnimationFramestep(int value)
 {
-	_maxSpriteAnimationFramestep = std::max(0, value);
+	_maxSpriteAnimationFramestep = max(0, value);
 }
 
 void ImageEntity::increasePassedSpriteAnimationFrames()

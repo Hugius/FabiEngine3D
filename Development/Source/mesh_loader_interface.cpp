@@ -4,6 +4,8 @@
 #include <future>
 #include <set>
 
+using std::set;
+
 void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths)
 {
 	// Temporary values
@@ -11,7 +13,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 	vector<bool> meshStatuses;
 
 	// Remove duplicates
-	auto tempFilePaths = std::set<string>(meshPaths.begin(), meshPaths.end());
+	auto tempFilePaths = set<string>(meshPaths.begin(), meshPaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
@@ -92,7 +94,7 @@ BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh pa
 			Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 
 			// Cache model
-			_meshCache.insert(std::make_pair(filePath, loadedModel));
+			_meshCache.insert(make_pair(filePath, loadedModel));
 
 			// Return new model
 			goto BEGIN;

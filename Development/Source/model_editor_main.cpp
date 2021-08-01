@@ -6,6 +6,8 @@
 #include <sstream>
 #include <algorithm>
 
+using std::numeric_limits;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 ModelEditor::ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)
@@ -48,7 +50,7 @@ void ModelEditor::load()
 	_gui.getGlobalScreen()->createTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
-	_fe3d.misc_setLevelOfDetailDistance(std::numeric_limits<float>::max());
+	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
 	_isEditorLoaded = true;
 }
 

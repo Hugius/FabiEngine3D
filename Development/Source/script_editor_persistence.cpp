@@ -5,6 +5,10 @@
 #include <sstream>
 #include <filesystem>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
@@ -41,7 +45,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		if (_fe3d.misc_isFileExisting(directoryPath + fileName) && (fileName.substr(fileName.size() - 5, 5) == ".fe3d"))
 		{
 			// Load script file
-			std::ifstream file(directoryPath + fileName);
+			ifstream file(directoryPath + fileName);
 			string line;
 
 			// Add software script file to script
@@ -50,15 +54,15 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 
 			// Extract cursor indices
 			unsigned int cursorLineIndex, cursorCharIndex;
-			std::getline(file, line);
-			std::istringstream iss(line);
+			getline(file, line);
+			istringstream iss(line);
 			iss >> cursorLineIndex >> cursorCharIndex;
 			_script.getScriptFile(scriptName)->setCursorLineIndex(cursorLineIndex);
 			_script.getScriptFile(scriptName)->setCursorCharIndex(cursorCharIndex);
 
 			// Extract script lines
 			unsigned int lineIndex = 0;
-			while (std::getline(file, line))
+			while (getline(file, line))
 			{
 				// Add new scriptline
 				_script.getScriptFile(scriptName)->insertNewLine(lineIndex, line);
@@ -118,16 +122,16 @@ bool ScriptEditor::saveScriptFiles()
 	for (const auto& scriptName : _script.getAllScriptFileIDs())
 	{
 		// Create or overwrite script file
-		std::ofstream file;
+		ofstream file;
 		file.open(directoryPath + scriptName + ".fe3d");
 
 		// Write cursor indices to file
-		file << _script.getScriptFile(scriptName)->getCursorLineIndex() << " " << _script.getScriptFile(scriptName)->getCursorCharIndex() << std::endl;
+		file << _script.getScriptFile(scriptName)->getCursorLineIndex() << " " << _script.getScriptFile(scriptName)->getCursorCharIndex() << endl;
 
 		// Write every scriptline to file
 		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptName)->getLineCount(); lineIndex++)
 		{
-			file << _script.getScriptFile(scriptName)->getLineText(lineIndex) << std::endl;
+			file << _script.getScriptFile(scriptName)->getLineText(lineIndex) << endl;
 		}
 
 		// Close file

@@ -7,6 +7,7 @@
 #include <memory>
 
 using std::shared_ptr;
+using std::numeric_limits;
 
 class ModelEntity final : public BaseEntity
 {
@@ -161,8 +162,8 @@ private:
 	float _specularIntensity = 1.0f;
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;
-	float _minHeight = -(std::numeric_limits<float>::max)();
-	float _maxHeight = (std::numeric_limits<float>::max)();
+	float _minHeight = -(numeric_limits<float>::max)();
+	float _maxHeight = (numeric_limits<float>::max)();
 
 	bool _isCameraStatic	 = false;
 	bool _isTransparent      = false;

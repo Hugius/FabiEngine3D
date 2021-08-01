@@ -5,6 +5,9 @@
 
 #include <algorithm>
 
+using std::min;
+using std::max;
+
 RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
 	:
 	_renderBus(renderBus),
@@ -82,8 +85,8 @@ float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some
 	float t5 = (lb.z - cameraPos.z) * dirfrac.z;
 	float t6 = (rt.z - cameraPos.z) * dirfrac.z;
 
-	float tmin = std::max(std::max(std::min(t1, t2), std::min(t3, t4)), std::min(t5, t6));
-	float tmax = std::min(std::min(std::max(t1, t2), std::max(t3, t4)), std::max(t5, t6));
+	float tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6));
+	float tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));
 
 	// AABB is behind
 	if (tmax < 0)

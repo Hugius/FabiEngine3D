@@ -6,6 +6,7 @@
 #include <memory>
 
 using std::shared_ptr;
+using std::numeric_limits;
 
 class BillboardEntity final : public BaseEntity
 {
@@ -117,8 +118,8 @@ private:
 	float _lightness = 1.0f;
 	float _inversion = 0.0f;
 	float _alpha = 1.0f;
-	float _minHeight = -(std::numeric_limits<float>::max)();
-	float _maxHeight = (std::numeric_limits<float>::max)();
+	float _minHeight = -(numeric_limits<float>::max)();
+	float _maxHeight = (numeric_limits<float>::max)();
 
 	unsigned int _maxSpriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;

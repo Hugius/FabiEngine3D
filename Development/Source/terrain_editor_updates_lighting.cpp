@@ -156,14 +156,14 @@ void TerrainEditor::_updateLightingMenu()
 		// Check if specular intensity confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			specularIntensity = std::max(0.0f, specularIntensity / 100.0f);
+			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
 		}
 
 		// Check if lightness confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness = std::max(0.0f, lightness / 100.0f);
+			lightness = max(0.0f, lightness / 100.0f);
 			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
 		}
 	}

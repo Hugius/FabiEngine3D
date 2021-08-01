@@ -65,7 +65,7 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
 		// Multiple textures
-		std::vector<TextureID> attachments;
+		vector<TextureID> attachments;
 		for (unsigned int i = 0; i < amount; i++)
 		{
 			attachments.push_back(GL_COLOR_ATTACHMENT0 + i);

@@ -5,6 +5,8 @@
 #include <SDL\\SDL.h>
 #include <filesystem>
 
+using std::istringstream;
+
 Config::Config()
 {
 	// Get application root directory
@@ -16,7 +18,7 @@ Config::Config()
 
 	// Open config file
 	auto path = string(rootDir + "config.fe3d");
-	std::ifstream file(path);
+	ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{
 		Logger::throwError("Cannot load `config.fe3d`!");
@@ -72,8 +74,8 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	string line;
 	string name;
 	string equals;
-	std::getline(file, line);
-	std::istringstream iss(line);
+	getline(file, line);
+	istringstream iss(line);
 	iss >> name >> equals;
 
 	// Check criteria
@@ -93,8 +95,8 @@ void Config::_processOption(std::ifstream& file, float& option, string criteria)
 	string line;
 	string name;
 	string equals;
-	std::getline(file, line);
-	std::istringstream iss(line);
+	getline(file, line);
+	istringstream iss(line);
 	iss >> name >> equals;
 
 	// Check criteria
@@ -114,8 +116,8 @@ void Config::_processOption(std::ifstream& file, int& option, string criteria)
 	string line;
 	string name;
 	string equals;
-	std::getline(file, line);
-	std::istringstream iss(line);
+	getline(file, line);
+	istringstream iss(line);
 	iss >> name >> equals;
 
 	// Check criteria
@@ -138,8 +140,8 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 	string value;
 
 	// Read line
-	std::getline(file, line);
-	std::istringstream iss(line);
+	getline(file, line);
+	istringstream iss(line);
 	iss >> name >> equals >> value;
 
 	// Check criteria

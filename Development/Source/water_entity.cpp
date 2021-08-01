@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void WaterEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -49,7 +51,7 @@ void WaterEntity::setRippleOffset(Vec2 value)
 
 void WaterEntity::setUvRepeat(float value)
 {
-	_uvRepeat = std::max(0.0f, value);
+	_uvRepeat = max(0.0f, value);
 }
 
 void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value)
@@ -79,17 +81,17 @@ void WaterEntity::setWaveOffset(Vec2 value)
 
 void WaterEntity::setWaveHeight(float value)
 {
-	_waveHeight = std::max(0.0f, value);
+	_waveHeight = max(0.0f, value);
 }
 
 void WaterEntity::setSpecularLightingFactor(float value)
 {
-	_specularLightingFactor = std::max(0.0f, value);
+	_specularLightingFactor = max(0.0f, value);
 }
 
 void WaterEntity::setSpecularLightingIntensity(float value)
 {
-	_specularLightingIntensity = std::max(0.0f, value);
+	_specularLightingIntensity = max(0.0f, value);
 }
 
 void WaterEntity::setWaving(bool value)
@@ -124,12 +126,12 @@ void WaterEntity::setWireFramed(bool value)
 
 void WaterEntity::setSize(float value)
 {
-	_size = std::max(0.0f, value);
+	_size = max(0.0f, value);
 }
 
 void WaterEntity::setTransparency(float value)
 {
-	_transparency = std::max(0.0f, value);
+	_transparency = max(0.0f, value);
 }
 
 const Vec3 WaterEntity::getPosition()

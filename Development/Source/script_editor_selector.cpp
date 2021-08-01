@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::min;
+
 void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, 
 	unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
@@ -160,7 +162,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			else // Multiple lines selected
 			{
 				// Most upper selected line must be the cursor position
-				cursorLineIndex = std::min(_firstSelectedLineIndex, _lastSelectedLineIndex);
+				cursorLineIndex = min(_firstSelectedLineIndex, _lastSelectedLineIndex);
 			}
 
 			// Place cursor at the end of current line
@@ -213,7 +215,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					{
 						// Change cursor position
 						cursorLineIndex += (pastedAmount - static_cast<int>(firstLineEmpty));
-						cursorLineIndex = std::min(cursorLineIndex, (MAX_LINE_AMOUNT - 1));
+						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_AMOUNT - 1));
 						cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 
 						// Make sure the script gets re-rendered

@@ -1,6 +1,8 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
+using std::max;
+
 void TerrainEditor::_updateBlendMapMenu()
 {
 	// Temporary values
@@ -133,7 +135,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
 		{
-			blendRepeatR = std::max(0.0f, blendRepeatR);
+			blendRepeatR = max(0.0f, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
 		}
 
@@ -141,7 +143,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
 		{
-			blendRepeatG = std::max(0.0f, blendRepeatG);
+			blendRepeatG = max(0.0f, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
 		}
 
@@ -149,7 +151,7 @@ void TerrainEditor::_updateBlendMapMenu()
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
 		{
-			blendRepeatB = std::max(0.0f, blendRepeatB);
+			blendRepeatB = max(0.0f, blendRepeatB);
 			_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);
 		}
 

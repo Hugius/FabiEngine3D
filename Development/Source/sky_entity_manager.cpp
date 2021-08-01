@@ -2,6 +2,9 @@
 #include "render_bus.hpp"
 #include "logger.hpp"
 
+using std::make_shared;
+using std::min;
+
 const float vertex_data[] =
 {
 	-1.0f,  1.0f, -1.0f,
@@ -50,7 +53,7 @@ const float vertex_data[] =
 SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::SKY, meshLoader, texLoader, renderBus),
-	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
 
 }
@@ -146,7 +149,7 @@ void SkyEntityManager::update()
 		{
 			// Values
 			float lightness = mainSky->getLightness(); // Current lightness
-			float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
+			float pitch = min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
 			float targetLightness = mainSky->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _exposureFactor);
 
 			// Based on verticle angle

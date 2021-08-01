@@ -1,6 +1,8 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
+using std::max;
+
 void TerrainEditor::_updateMeshMenu()
 {
 	// Temporary values
@@ -100,7 +102,7 @@ void TerrainEditor::_updateMeshMenu()
 			float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
 			if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 			{
-				maxHeight = std::max(0.0f, maxHeight);
+				maxHeight = max(0.0f, maxHeight);
 				_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 			}
 
@@ -108,7 +110,7 @@ void TerrainEditor::_updateMeshMenu()
 			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
 			if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
 			{
-				uvRepeat = std::max(0.0f, uvRepeat);
+				uvRepeat = max(0.0f, uvRepeat);
 				_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
 			}
 		}

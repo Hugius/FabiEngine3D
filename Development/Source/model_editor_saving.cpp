@@ -5,6 +5,9 @@
 #include <fstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+
 bool ModelEditor::saveModelEntitiesToFile()
 {
 	// Editor must be loaded
@@ -24,7 +27,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Create or overwrite model file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write model data
 	for (const auto& modelID : _loadedModelIDs)
@@ -74,12 +77,12 @@ bool ModelEditor::saveModelEntitiesToFile()
 			reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 			normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 			lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
-			std::replace(meshPath.begin(), meshPath.end(), ' ', '?');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-			std::replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
-			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
-			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-			std::replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
+			replace(meshPath.begin(), meshPath.end(), ' ', '?');
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
+			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+			replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
 			// NOTE: 1 model -> 1 line in file
 
@@ -135,7 +138,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			}
 
 			// Add newline
-			file << std::endl;
+			file << endl;
 		}
 		else
 		{

@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void WaterEditor::_updateOptionsMenu()
 {
 	// Temporary values
@@ -126,14 +128,14 @@ void WaterEditor::_updateOptionsMenu()
 		// Check if specular intensity value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			specularIntensity = std::max(0.0f, specularIntensity / 100.0f);
+			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 
 		// Check if wave height value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
-			waveHeight = std::max(0.0f, waveHeight / 100.0f);
+			waveHeight = max(0.0f, waveHeight / 100.0f);
 			_fe3d.waterEntity_setWaveHeight(_currentWaterID, waveHeight);
 		}
 

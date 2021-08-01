@@ -39,10 +39,10 @@ void SceneEditor::_updateModelMenu()
 						if (modelID[0] != '@')
 						{
 							// Removing the unique number from the modelID
-							std::reverse(modelID.begin(), modelID.end());
+							reverse(modelID.begin(), modelID.end());
 							string modelName = modelID.substr(modelID.find('_') + 1);
-							std::reverse(modelName.begin(), modelName.end());
-							std::reverse(modelID.begin(), modelID.end());
+							reverse(modelName.begin(), modelName.end());
+							reverse(modelID.begin(), modelID.end());
 
 							// Add new button
 							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, modelName);

@@ -3,6 +3,8 @@
 #include "render_bus.hpp"
 #include "window.hpp"
 
+using std::numeric_limits;
+
 class Camera final
 {
 public:
@@ -78,7 +80,7 @@ private:
 	static inline const float MIN_PITCH_ANGLE = -89.0f;
 	static inline const float MAX_PITCH_ANGLE = 89.0f;
 	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
-	static inline const float MAX_THIRD_PERSON_DISTANCE = std::numeric_limits<float>::max();
+	static inline const float MAX_THIRD_PERSON_DISTANCE = numeric_limits<float>::max();
 	static inline const float MAX_ACCELERATION = 10.0f;
 	const float _aspectRatio;
 	float _fov = 0.0f;

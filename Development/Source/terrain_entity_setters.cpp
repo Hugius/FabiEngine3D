@@ -1,5 +1,7 @@
 #include "terrain_entity.hpp"
 
+using std::max;
+
 void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;
@@ -122,32 +124,32 @@ void TerrainEntity::setNormalMapPathB(const string& filePath)
 
 void TerrainEntity::setUvRepeat(float value)
 {
-	_uvRepeat = std::max(0.0f, value);
+	_uvRepeat = max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatR(float value)
 {
-	_blendRepeatR = std::max(0.0f, value);
+	_blendRepeatR = max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatG(float value)
 {
-	_blendRepeatG = std::max(0.0f, value);
+	_blendRepeatG = max(0.0f, value);
 }
 
 void TerrainEntity::setBlendRepeatB(float value)
 {
-	_blendRepeatB = std::max(0.0f, value);
+	_blendRepeatB = max(0.0f, value);
 }
 
 void TerrainEntity::setSize(float value)
 {
-	_size = std::max(0.0f, value);
+	_size = max(0.0f, value);
 }
 
 void TerrainEntity::setMaxHeight(float value)
 {
-	_maxHeight = std::max(0.0f, value);
+	_maxHeight = max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLighted(bool value)
@@ -162,15 +164,15 @@ void TerrainEntity::setWireFramed(bool value)
 
 void TerrainEntity::setLightness(float value)
 {
-	_lightness = std::max(0.0f, value);
+	_lightness = max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLightingFactor(float value)
 {
-	_specularLightingFactor = std::max(0.0f, value);
+	_specularLightingFactor = max(0.0f, value);
 }
 
 void TerrainEntity::setSpecularLightingIntensity(float value)
 {
-	_specularLightingIntensity = std::max(0.0f, value);
+	_specularLightingIntensity = max(0.0f, value);
 }

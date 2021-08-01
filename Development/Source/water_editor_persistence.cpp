@@ -5,6 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 {
 	// Error checking
@@ -25,16 +29,16 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	}
 
 	// Load water file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read water data
 	vector<string> texturePaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Load base data
 		iss >>
@@ -47,9 +51,9 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
-		std::replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 		// Save file paths
 		if (!dudvMapPath.empty())
@@ -96,13 +100,13 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	}
 
 	// Load water file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read water data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
@@ -143,9 +147,9 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
 		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
-		std::replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+		replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
+		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 		// Load entity
 		_loadedWaterIDs.push_back(waterID);
@@ -199,7 +203,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write water data
 	for (const auto& waterID : _loadedWaterIDs)
@@ -228,9 +232,9 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
 		normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
 		displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
-		std::replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
-		std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-		std::replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
+		replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
+		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
 		// Write data to file
 		file <<
@@ -257,7 +261,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 			speed.y << " " <<
 			transparency << " " <<
 			specularFactor << " " <<
-			specularIntensity << std::endl;
+			specularIntensity << endl;
 	}
 
 	// Close file

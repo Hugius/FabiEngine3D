@@ -7,6 +7,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+using std::to_string;
+
 void NetworkServerAPI::update()
 {
 	// Must be running
@@ -138,7 +140,7 @@ BEGIN:
 							auto receiveDelay = Tools::getTimeSinceEpochMS() - messageTimestamp;
 
 							// Compose ping message
-							auto pingMessage = "PING" + std::to_string(receiveDelay);
+							auto pingMessage = "PING" + to_string(receiveDelay);
 
 							// Send ping message back to client
 							if (!_sendTcpMessage(clientSocketID, pingMessage, true))

@@ -29,10 +29,10 @@ struct Animation final
 	{
 		for (auto& [partID, totalScaling] : totalScalings)
 		{
-			totalScaling = Vec3(std::max(0.0f, totalScaling.x), std::max(0.0f, totalScaling.y), std::max(0.0f, totalScaling.z));
+			totalScaling = Vec3(max(0.0f, totalScaling.x), max(0.0f, totalScaling.y), max(0.0f, totalScaling.z));
 		}
-		speedMultiplier = std::max(0.0f, speedMultiplier);
-		initialSize = Vec3(std::max(0.0f, initialSize.x), std::max(0.0f, initialSize.y), std::max(0.0f, initialSize.z));
+		speedMultiplier = max(0.0f, speedMultiplier);
+		initialSize = Vec3(max(0.0f, initialSize.x), max(0.0f, initialSize.y), max(0.0f, initialSize.z));
 	}
 
 	const string ID;

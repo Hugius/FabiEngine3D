@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void ModelEntity::addPart(const string& ID)
 {
 	_parts.push_back(PartData(ID));
@@ -133,7 +135,7 @@ void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 
 void ModelEntity::setSize(Vec3 value, const string& partID)
 {
-	value = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	value = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_baseSize = value;
@@ -275,17 +277,17 @@ void ModelEntity::clearParts()
 
 void ModelEntity::setLightness(float value)
 {
-	_lightness = std::max(0.0f, value);
+	_lightness = max(0.0f, value);
 }
 
 void ModelEntity::setSpecularFactor(float value)
 {
-	_specularFactor = std::max(0.0f, value);
+	_specularFactor = max(0.0f, value);
 }
 
 void ModelEntity::setSpecularIntensity(float value)
 {
-	_specularIntensity = std::max(0.0f, value);
+	_specularIntensity = max(0.0f, value);
 }
 
 void ModelEntity::setMinHeight(float value)
@@ -300,10 +302,10 @@ void ModelEntity::setMaxHeight(float value)
 
 void ModelEntity::setAlpha(float value)
 {
-	_alpha = std::max(0.0f, value);
+	_alpha = max(0.0f, value);
 }
 
 void ModelEntity::setUvRepeat(float value)
 {
-	_uvRepeat = std::max(0.0f, value);
+	_uvRepeat = max(0.0f, value);
 }

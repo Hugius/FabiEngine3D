@@ -6,6 +6,9 @@
 #include <sstream>
 #include <filesystem>
 
+using std::ifstream;
+using std::ofstream;
+
 RenderShader::RenderShader(const string& vertexFileName, const string& fragmentFileName)
 {
 	// Temporary values
@@ -14,8 +17,8 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	_fragmentFileName = fragmentFileName;
 	string vertexCode;
 	string fragmentCode;
-	std::ifstream vertexFile;
-	std::ifstream fragmentFile;
+	ifstream vertexFile;
+	ifstream fragmentFile;
 
 	// Compose file paths
 	const auto rootDir = Tools::getRootDirectory();
@@ -122,7 +125,7 @@ UniformID RenderShader::_getUniformID(const string& uniformName)
 		}
 
 		// Cache uniform
-		_uniformCache.insert(std::make_pair(uniformName, uniform));
+		_uniformCache.insert(make_pair(uniformName, uniform));
 
 		// Return new uniform
 		return uniform;

@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void AabbEntity::updateModelMatrix()
 {
 	// Temporary values
@@ -25,7 +27,7 @@ void AabbEntity::setPosition(Vec3 value)
 
 void AabbEntity::setSize(Vec3 value)
 {
-	_size = Vec3(std::max(0.0f, value.x), std::max(0.0f, value.y), std::max(0.0f, value.z));
+	_size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void AabbEntity::setParent(const string& ID, AabbParentType type)
@@ -62,7 +64,7 @@ void AabbEntity::move(Vec3 value)
 void AabbEntity::scale(Vec3 value)
 {
 	_size += value;
-	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
+	_size = Vec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
 }
 
 void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
@@ -78,7 +80,7 @@ void AabbEntity::setLocalPosition(Vec3 value)
 void AabbEntity::setLocalSize(Vec3 value)
 {
 	_localSize = value;
-	_localSize = Vec3(std::max(0.0f, _localSize.x), std::max(0.0f, _localSize.y), std::max(0.0f, _localSize.z));
+	_localSize = Vec3(max(0.0f, _localSize.x), max(0.0f, _localSize.y), max(0.0f, _localSize.z));
 }
 
 const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()

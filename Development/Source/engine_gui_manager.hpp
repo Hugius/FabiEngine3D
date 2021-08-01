@@ -21,5 +21,5 @@ private:
 
 	shared_ptr<EngineGuiGlobalScreen> _globalScreen;
 
-	std::vector<shared_ptr<EngineGuiViewport>> _viewports;
+	vector<shared_ptr<EngineGuiViewport>> _viewports;
 };

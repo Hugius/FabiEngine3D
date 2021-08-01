@@ -5,12 +5,15 @@
 #include <chrono>
 #include <algorithm>
 
+using std::max;
+using std::numeric_limits;
+
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
 	bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
-	float clippingY = -(std::numeric_limits<float>::max)();
+	float clippingY = -(numeric_limits<float>::max)();
 
 	// Prepare water depth
 	if (waterDepthNeeded)
@@ -224,7 +227,7 @@ void MasterRenderer::_captureLensFlare()
 		{
 			float x = clipSpacePosition.x / clipSpacePosition.w;
 			float y = clipSpacePosition.y / clipSpacePosition.w;
-			alpha = 1.0f - (std::max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
+			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
 			alpha = std::clamp(alpha, 0.0f, 1.0f);
 		}
 

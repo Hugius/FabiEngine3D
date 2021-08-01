@@ -18,6 +18,12 @@
 #include <string>
 #include <memory>
 
+using std::min;
+using std::max;
+using std::reverse;
+using std::to_string;
+using std::make_shared;
+using std::make_pair;
 using std::array;
 using std::vector;
 using std::set;
@@ -26,10 +32,6 @@ using std::unordered_map;
 using std::pair;
 using std::string;
 using std::shared_ptr;
-using std::reverse;
-using std::to_string;
-using std::make_shared;
-using std::make_pair;
 
 class CoreEngine;
 

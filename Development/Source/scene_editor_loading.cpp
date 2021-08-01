@@ -5,6 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 {
 	// Error checking
@@ -25,14 +29,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	}
 
 	// Load scene file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read scene data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// For file extraction
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract type from file
 		string lineType;
@@ -132,7 +136,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 
 			// Perform empty string & space conversions
 			animationID = (animationID == "?") ? "" : animationID;
-			std::replace(animationID.begin(), animationID.end(), '?', ' ');
+			replace(animationID.begin(), animationID.end(), '?', ' ');
 
 			// Check if preview model instancing changed
 			if (_fe3d.modelEntity_isExisting(previewID))
@@ -486,7 +490,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 
 			// Perform empty string & space conversions
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
-			std::replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
+			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
 			// Enable lens flare
 			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);

@@ -131,7 +131,7 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 
 	// Remove trailing spaces
 	string result;
-	std::reverse(nameString.begin(), nameString.end());
+	reverse(nameString.begin(), nameString.end());
 	for (unsigned int i = 0; i < nameString.size(); i++)
 	{
 		// Check if end of whitespace found
@@ -143,7 +143,7 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 	}
 
 	// Return
-	std::reverse(result.begin(), result.end());
+	reverse(result.begin(), result.end());
 	return result;
 }
 

@@ -1,10 +1,12 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
+using std::numeric_limits;
+
 const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 {
 	// Temporary values
-	float closestDistance = (std::numeric_limits<float>::max)();
+	float closestDistance = (numeric_limits<float>::max)();
 
 	// Iterate through AABB entities
 	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
@@ -130,7 +132,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 	else
 	{
 		// Temporary values
-		float closestDistance = (std::numeric_limits<float>::max)();
+		float closestDistance = (numeric_limits<float>::max)();
 		string closestBoxID = "";
 
 		// Iterate through AABB entities

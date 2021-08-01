@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 Camera::Camera(RenderBus& renderBus, Window& window)
 	:
 	_renderBus(renderBus),
@@ -161,7 +163,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		float zMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * cos(Math::degreesToRadians(_thirdPersonYaw));
 
 		// Limit view distance
-		_thirdPersonDistance = std::max(0.0f, _thirdPersonDistance);
+		_thirdPersonDistance = max(0.0f, _thirdPersonDistance);
 		
 		// Calculate camera position
 		_position.x = _thirdPersonLookat.x + (_thirdPersonDistance * xMultiplier);

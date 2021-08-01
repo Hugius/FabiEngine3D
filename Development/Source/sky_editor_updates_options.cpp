@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void SkyEditor::_updateOptionsMenu()
 {
 	// Temporary values
@@ -47,7 +49,7 @@ void SkyEditor::_updateOptionsMenu()
 		// Lightness value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
-			skyLightness = std::max(0.0f, skyLightness / 100.0f);
+			skyLightness = max(0.0f, skyLightness / 100.0f);
 		}
 
 		// Color R values conversion

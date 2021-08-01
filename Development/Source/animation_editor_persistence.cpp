@@ -4,6 +4,10 @@
 #include <fstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
@@ -27,17 +31,17 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	}
 
 	// Load animation file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read animation data
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Placeholder variables
 		string animationID, previewModelID;
 
 		// For file extraction
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract general data from file
 		iss >> animationID >> previewModelID;
@@ -51,7 +55,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 		if (iss >> temp)
 		{
 			// Start reading again
-			iss = std::istringstream(line);
+			iss = istringstream(line);
 			iss >> animationID >> previewModelID;
 
 			// Clear default empty partID
@@ -195,7 +199,7 @@ bool AnimationEditor::saveAnimationsToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Create or overwrite animation file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write animation data
 	for (const auto& animation : _animations)
@@ -273,7 +277,7 @@ bool AnimationEditor::saveAnimationsToFile()
 			}
 
 			// Add newline
-			file << std::endl;
+			file << endl;
 		}
 	}
 

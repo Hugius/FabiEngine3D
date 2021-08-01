@@ -48,9 +48,9 @@ void SceneEditor::_selectModel(const string& modelID)
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = modelID;
-		std::reverse(tempID.begin(), tempID.end());
+		reverse(tempID.begin(), tempID.end());
 		string modelName = tempID.substr(tempID.find('_') + 1);
-		std::reverse(modelName.begin(), modelName.end());
+		reverse(modelName.begin(), modelName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
@@ -75,9 +75,9 @@ void SceneEditor::_activateModel(const string& modelID)
 
 	// Removing the unique number from the modelID and updating the text content
 	string tempID = modelID;
-	std::reverse(tempID.begin(), tempID.end());
+	reverse(tempID.begin(), tempID.end());
 	string modelName = tempID.substr(tempID.find('_') + 1);
-	std::reverse(modelName.begin(), modelName.end());
+	reverse(modelName.begin(), modelName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
@@ -96,9 +96,9 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = billboardID;
-		std::reverse(tempID.begin(), tempID.end());
+		reverse(tempID.begin(), tempID.end());
 		string billboardName = tempID.substr(tempID.find('_') + 1);
-		std::reverse(billboardName.begin(), billboardName.end());
+		reverse(billboardName.begin(), billboardName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
@@ -123,9 +123,9 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 
 	// Removing the unique number from the billboardID and updating the text content
 	string tempID = billboardID;
-	std::reverse(tempID.begin(), tempID.end());
+	reverse(tempID.begin(), tempID.end());
 	string billboardName = tempID.substr(tempID.find('_') + 1);
-	std::reverse(billboardName.begin(), billboardName.end());
+	reverse(billboardName.begin(), billboardName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
@@ -144,9 +144,9 @@ void SceneEditor::_selectSound(const string& soundID)
 	{
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = soundID;
-		std::reverse(tempID.begin(), tempID.end());
+		reverse(tempID.begin(), tempID.end());
 		string soundName = tempID.substr(tempID.find('_') + 1);
-		std::reverse(soundName.begin(), soundName.end());
+		reverse(soundName.begin(), soundName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected sound: " + soundName, 0.025f);
@@ -170,9 +170,9 @@ void SceneEditor::_activateSound(const string& soundID)
 
 	// Removing the unique number from the soundID and updating the text content
 	string tempID = soundID;
-	std::reverse(tempID.begin(), tempID.end());
+	reverse(tempID.begin(), tempID.end());
 	string soundName = tempID.substr(tempID.find('_') + 1);
-	std::reverse(soundName.begin(), soundName.end());
+	reverse(soundName.begin(), soundName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active sound: " + soundName, 0.025f);

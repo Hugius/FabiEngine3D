@@ -4,6 +4,11 @@
 #include <direct.h>
 #include <filesystem>
 
+using std::endl;
+using std::ios;
+using std::ifstream;
+using std::ofstream;
+
 bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -98,13 +103,13 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			if (_fe3d.misc_isFileExisting(filePath))
 			{
 				// Open file
-				std::ifstream file(filePath);
+				ifstream file(filePath);
 				string line;
 
 				// Add lines to list
 				while (!file.eof())
 				{
-					std::getline(file, line);
+					getline(file, line);
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, line));
 				}
 
@@ -129,7 +134,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Open file
-			std::ofstream file(filePath, std::ios::app);
+			ofstream file(filePath, ios::app);
 
 			// Determine which type of value to print
 			if (arguments[1].getType() == ScriptValueType::VEC3)
@@ -175,8 +180,8 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Write line to file
-			std::ofstream file(filePath, std::ios::app);
-			file << std::endl;
+			ofstream file(filePath, ios::app);
+			file << endl;
 			file.close();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
@@ -195,7 +200,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				std::ofstream file(filePath, std::ios::trunc);
+				ofstream file(filePath, ios::trunc);
 				file.close();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

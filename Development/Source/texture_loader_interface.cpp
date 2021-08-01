@@ -5,6 +5,8 @@
 #include <future>
 #include <set>
 
+using std::set;
+
 TextureLoader::TextureLoader(RenderBus& renderBus)
 	:
 	_renderBus(renderBus)
@@ -20,7 +22,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	unsigned int finishedThreadCount = 0;
 
 	// Remove duplicates
-	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
@@ -184,7 +186,7 @@ BEGIN:
 			else
 			{
 				// Cache texture
-				_textureCache2D.insert(std::make_pair(filePath, loadedTexture));
+				_textureCache2D.insert(make_pair(filePath, loadedTexture));
 
 				// Return cached texture
 				goto BEGIN;
@@ -245,7 +247,7 @@ BEGIN:
 		else
 		{
 			// Cache texture
-			_textureCache3D.insert(std::make_pair(filePaths, loadedTexture));
+			_textureCache3D.insert(make_pair(filePaths, loadedTexture));
 
 			// Return cached texture
 			goto BEGIN;
@@ -294,7 +296,7 @@ BEGIN:
 		else
 		{
 			// Cache pixels
-			_bitmapCache.insert(std::make_pair(filePath, loadedPixels));
+			_bitmapCache.insert(make_pair(filePath, loadedPixels));
 
 			// Return cached pixels
 			goto BEGIN;

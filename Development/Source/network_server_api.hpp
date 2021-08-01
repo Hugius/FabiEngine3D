@@ -8,12 +8,12 @@
 #include <memory>
 #include <tuple>
 
+using std::make_shared;
+using std::make_tuple;
 using std::vector;
 using std::future;
 using std::shared_ptr;
 using std::tuple;
-using std::make_shared;
-using std::make_tuple;
 
 class NetworkServerAPI final
 {

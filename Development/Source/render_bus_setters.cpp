@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void RenderBus::setMainSkyReflectionCubeMap(TextureID value)
 {
 	_mainSkyReflectionCubeMap = value;
@@ -169,37 +171,37 @@ void RenderBus::setSceneReflectionHeight(float value)
 
 void RenderBus::setShadowAreaSize(float value)
 {
-	_shadowAreaSize = std::max(0.0f, value);
+	_shadowAreaSize = max(0.0f, value);
 }
 
 void RenderBus::setShadowAreaReach(float value)
 {
-	_shadowAreaReach = std::max(0.0f, value);
+	_shadowAreaReach = max(0.0f, value);
 }
 
 void RenderBus::setShadowLightness(float value)
 {
-	_shadowLightness = std::max(0.0f, value);
+	_shadowLightness = max(0.0f, value);
 }
 
 void RenderBus::setLensFlareAlpha(float value)
 {
-	_lensFlareAlpha = std::max(0.0f, value);
+	_lensFlareAlpha = max(0.0f, value);
 }
 
 void RenderBus::setLensFlareIntensity(float value)
 {
-	_lensFlareIntensity = std::max(0.0f, value);
+	_lensFlareIntensity = max(0.0f, value);
 }
 
 void RenderBus::setLensFlareMultiplier(float value)
 {
-	_lensFlareMultiplier = std::max(0.0f, value);
+	_lensFlareMultiplier = max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurStrength(float value)
 {
-	_motionBlurStrength = std::max(0.0f, value);
+	_motionBlurStrength = max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurMixValue(float value)
@@ -209,12 +211,12 @@ void RenderBus::setMotionBlurMixValue(float value)
 
 void RenderBus::setMainSkyLightness(float value)
 {
-	_mainSkyLightness = std::max(0.0f, value);
+	_mainSkyLightness = max(0.0f, value);
 }
 
 void RenderBus::setMixSkyLightness(float value)
 {
-	_mixSkyLightness = std::max(0.0f, value);
+	_mixSkyLightness = max(0.0f, value);
 }
 
 void RenderBus::setSkyMixValue(float value)
@@ -229,32 +231,32 @@ void RenderBus::setMaxSpotLightAngle(float value)
 
 void RenderBus::setMaxSpotLightDistance(float value)
 {
-	_maxSpotLightDistance = std::max(0.0f, value);
+	_maxSpotLightDistance = max(0.0f, value);
 }
 
 void RenderBus::setAmbientLightIntensity(float value)
 {
-	_ambientLightIntensity = std::max(0.0f, value);
+	_ambientLightIntensity = max(0.0f, value);
 }
 
 void RenderBus::setDirectionalLightIntensity(float value)
 {
-	_directionalLightIntensity = std::max(0.0f, value);
+	_directionalLightIntensity = max(0.0f, value);
 }
 
 void RenderBus::setSpotLightIntensity(float value)
 {
-	_spotLightIntensity = std::max(0.0f, value);
+	_spotLightIntensity = max(0.0f, value);
 }
 
 void RenderBus::setFogMinDistance(float value)
 {
-	_fogMinDistance = std::max(0.0f, value);
+	_fogMinDistance = max(0.0f, value);
 }
 
 void RenderBus::setFogMaxDistance(float value)
 {
-	_fogMaxDistance = std::max(0.0f, value);
+	_fogMaxDistance = max(0.0f, value);
 }
 
 void RenderBus::setFogThickness(float value)
@@ -264,7 +266,7 @@ void RenderBus::setFogThickness(float value)
 
 void RenderBus::setBloomIntensity(float value)
 {
-	_bloomIntensity = std::max(0.0f, value);
+	_bloomIntensity = max(0.0f, value);
 }
 
 void RenderBus::setCameraYaw(float value)
@@ -279,7 +281,7 @@ void RenderBus::setCameraPitch(float value)
 
 void RenderBus::setNearZ(float value)
 {
-	_nearZ = std::max(0.0f, value);
+	_nearZ = max(0.0f, value);
 }
 
 void RenderBus::setFarZ(float value)
@@ -289,12 +291,12 @@ void RenderBus::setFarZ(float value)
 
 void RenderBus::setDofMaxDistance(float value)
 {
-	_dofMaxDistance = std::max(0.0f, value);
+	_dofMaxDistance = max(0.0f, value);
 }
 
 void RenderBus::setDofBlurDistance(float value)
 {
-	_dofBlurDistance = std::max(0.0f, value);
+	_dofBlurDistance = max(0.0f, value);
 }
 
 void RenderBus::setBloomBlurCount(unsigned int value)

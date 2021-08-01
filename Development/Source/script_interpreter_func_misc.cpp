@@ -208,7 +208,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return list elements in reverse order
 						auto values = listVariable.getValues();
-						std::reverse(values.begin(), values.end());
+						reverse(values.begin(), values.end());
 						for (const auto& value : values)
 						{
 							returnValues.push_back(*value);
@@ -309,7 +309,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						// Compose string in reverse
 						string result = "";
 						string content = arguments[0].getString();
-						std::reverse(content.begin(), content.end());
+						reverse(content.begin(), content.end());
 						for (const auto& character : content)
 						{
 							result += character;

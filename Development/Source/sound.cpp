@@ -11,7 +11,7 @@ Sound::Sound(const string& ID, const string& filePath, Mix_Chunk* dataPointer)
 
 }
 
-const std::string& Sound::getID() const
+const string& Sound::getID() const
 {
 	return _ID;
 }

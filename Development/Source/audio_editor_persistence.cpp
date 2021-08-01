@@ -4,6 +4,10 @@
 #include <fstream>
 #include <algorithm>
 
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+
 const vector<string> AudioEditor::getAllAudioPathsFromFile()
 {
 	// Error checking
@@ -24,23 +28,23 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 
 	// Load audio file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read model data
 	vector<string> audioPaths;
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Temporary values
 		string audioID, audioPath;
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract from file
 		iss >> audioID >> audioPath;
 
 		// Perform empty string & space conversions
 		audioPath = (audioPath == "?") ? "" : audioPath;
-		std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 		// Save file path
 		audioPaths.push_back(audioPath);
@@ -75,24 +79,24 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	}
 
 	// Load audio file
-	std::ifstream file(filePath);
+	ifstream file(filePath);
 
 	// Read audio file
 	string line;
-	while (std::getline(file, line))
+	while (getline(file, line))
 	{
 		// Placeholder variables
 		string audioID, audioPath;
 
 		// For file extraction
-		std::istringstream iss(line);
+		istringstream iss(line);
 
 		// Extract from file
 		iss >> audioID >> audioPath;
 
 		// Perform empty string & space conversions
 		audioPath = (audioPath == "?") ? "" : audioPath;
-		std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 		// Add audio ID
 		_loadedAudioIDs.push_back(audioID);
@@ -128,7 +132,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 		("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
 
 	// Create or overwrite audio file
-	std::ofstream file(filePath);
+	ofstream file(filePath);
 
 	// Write audio data
 	for (const auto& audioID : _loadedAudioIDs)
@@ -138,10 +142,10 @@ bool AudioEditor::saveAudioEntitiesToFile()
 
 		// Perform empty string & space conversions
 		audioPath = (audioPath == "") ? "?" : audioPath;
-		std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
+		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		// Export data
-		file << audioID << " " << audioPath << std::endl;
+		file << audioID << " " << audioPath << endl;
 	}
 
 	// Close file

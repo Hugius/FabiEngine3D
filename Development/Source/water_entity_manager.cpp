@@ -2,6 +2,8 @@
 #include "render_bus.hpp"
 #include "logger.hpp"
 
+using std::make_shared;
+
 WaterEntityManager::WaterEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::WATER, meshLoader, texLoader, renderBus)
@@ -138,11 +140,11 @@ void WaterEntityManager::loadMesh(const string& ID)
 	}
 	catch (std::bad_alloc& ba)
 	{
-		std::cerr << "Bad allocation: " << ba.what();
+		Logger::throwError("Bad water memory allocation: " + string(ba.what()));
 	}
 	
 	// Fill entity
-	entity->setHighQualityRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
+	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
 
 	// Load mesh
 	float simplified_data[] =
@@ -156,7 +158,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	};
 
 	// Add simplified water plane
-	entity->setLowQualityRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV, simplified_data, static_cast<unsigned int>(sizeof(simplified_data) / sizeof(float))));
+	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, simplified_data, static_cast<unsigned int>(sizeof(simplified_data) / sizeof(float))));
 }
 
 void WaterEntityManager::update()

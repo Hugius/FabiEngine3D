@@ -172,18 +172,18 @@ void MasterRenderer::_renderGUI()
 		_imageEntityRenderer.bind();
 
 		// Sort rendering order
-		std::map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
+		map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
 		for (const auto& [keyID, entity] : _entityBus->getImageEntities())
 		{
 			// Custom cursor entity must be rendered last
 			if (entity->getID() != _renderBus.getCursorEntityID())
 			{
-				orderedEntityMap.insert(std::make_pair(entity->getDepth(), entity));
+				orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 			}
 		}
 		for (const auto& [keyID, entity] : _entityBus->getTextEntities())
 		{
-			orderedEntityMap.insert(std::make_pair(entity->getDepth(), entity));
+			orderedEntityMap.insert(make_pair(entity->getDepth(), entity));
 		}
 
 		// Render entities

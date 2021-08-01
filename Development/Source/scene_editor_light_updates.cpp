@@ -98,7 +98,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 			// Ambient intensity value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
 			{
-				ambientLightingIntensity = std::max(0.0f, ambientLightingIntensity / 100.0f);
+				ambientLightingIntensity = max(0.0f, ambientLightingIntensity / 100.0f);
 			}
 
 			// Disable ambient lighting
@@ -199,12 +199,12 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			// Directional intensity value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
 			{
-				directionalLightingIntensity = std::max(0.0f, directionalLightingIntensity / 100.0f);
+				directionalLightingIntensity = max(0.0f, directionalLightingIntensity / 100.0f);
 			}
 
 			// Update billboard size value
 			_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
-			billboardSize = std::max(0.0f, billboardSize);
+			billboardSize = max(0.0f, billboardSize);
 
 			// Update lightsource billboard
 			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);

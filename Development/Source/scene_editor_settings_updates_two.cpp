@@ -54,11 +54,11 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 
 		// Min distance value
 		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
-		minDistance = std::max(0.0f, minDistance);
+		minDistance = max(0.0f, minDistance);
 
 		// Max distance value
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-		maxDistance = std::max(0.0f, maxDistance);
+		maxDistance = max(0.0f, maxDistance);
 
 		// Thickness value
 		thickness *= 100.0f;
@@ -166,13 +166,13 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		// Intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity = std::max(0.0f, intensity / 100.0f);
+			intensity = max(0.0f, intensity / 100.0f);
 		}
 
 		// Multiplier value
 		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
 		{
-			multiplier = std::max(0.0f, multiplier / 100.0f);
+			multiplier = max(0.0f, multiplier / 100.0f);
 		}
 
 		// Disable lens flare
@@ -234,13 +234,13 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		// Factor value
 		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
 		{
-			factor = std::max(0.0f, factor / 100.0f);
+			factor = max(0.0f, factor / 100.0f);
 		}
 
 		// Speed value
 		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
-			speed = std::max(0.0f, speed / 100000.0f);
+			speed = max(0.0f, speed / 100000.0f);
 		}
 
 		// Disable sky exposure
@@ -307,13 +307,13 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		// Extra intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity = std::max(0.0f, intensity / 100.0f);
+			intensity = max(0.0f, intensity / 100.0f);
 		}
 
 		// Blur count value
 		if (_gui.getGlobalScreen()->checkValueForm("blurs", blurCount))
 		{
-			blurCount = std::max(0, blurCount);
+			blurCount = max(0, blurCount);
 		}
 
 		// Disable bloom

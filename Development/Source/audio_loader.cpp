@@ -7,6 +7,13 @@
 #include <set>
 #include <fstream>
 
+using std::reverse;
+using std::transform;
+using std::set;
+using std::ios;
+using std::ifstream;
+using std::ofstream;
+
 AudioLoader::~AudioLoader()
 {
 	// Delete chunks
@@ -29,7 +36,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	vector<bool> chunkStatuses;
 
 	// Remove duplicates
-	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
@@ -110,7 +117,7 @@ BEGIN:
 				_throwLoadedMessage(filePath);
 
 				// Cache chunk
-				_chunkCache.insert(std::make_pair(filePath, chunk));
+				_chunkCache.insert(make_pair(filePath, chunk));
 
 				// Return cached chunk
 				goto BEGIN;
@@ -145,7 +152,7 @@ BEGIN:
 			_throwLoadedMessage(filePath);
 
 			// Cache music
-			_musicCache.insert(std::make_pair(filePath, music));
+			_musicCache.insert(make_pair(filePath, music));
 
 			// Return cached music
 			goto BEGIN;
@@ -193,27 +200,27 @@ Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 void AudioLoader::_throwLoadedMessage(const string& filePath)
 {
 	auto reversed(filePath); // Copy
-	std::reverse(reversed.begin(), reversed.end()); // Reverse, because . must be last in path
+	reverse(reversed.begin(), reversed.end()); // Reverse, because . must be last in path
 	auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
-	std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
+	transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
 	Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log message
 }
 
-char* AudioLoader::_loadWaveFile(const std::string& filePath)
+char* AudioLoader::_loadWaveFile(const string& filePath)
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
 	auto fullFilePath = string(rootDir + filePath);
 
 	// Open WAV file
-	std::ifstream file(fullFilePath.c_str(), std::ios::binary);
+	ifstream file(fullFilePath.c_str(), ios::binary);
 	if (!file)
 	{
 		return nullptr;
 	}
 
 	// Go the end of file position
-	file.seekg(0, std::ios::end);
+	file.seekg(0, ios::end);
 
 	// Store the size of the whole file in bytes
 	auto dataSize = (DWORD)file.tellg();
@@ -222,7 +229,7 @@ char* AudioLoader::_loadWaveFile(const std::string& filePath)
 	auto data = new char[dataSize];       
 
 	// Reset file position
-	file.seekg(0, std::ios::beg);
+	file.seekg(0, ios::beg);
 
 	// Store the whole WAVE file data in the data array
 	file.read(data, dataSize);

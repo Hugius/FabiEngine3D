@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+using std::istringstream;
+
 void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 {
 	if (_isEditorLoaded)
@@ -45,7 +47,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.aabbEntity_create(lineNumberID, aabbPosition, aabbSize, true, true);
 
 			// Create line text display BILLBOARD
-			std::istringstream iss(lineTextString);
+			istringstream iss(lineTextString);
 			string noWhiteSpace;
 			iss >> noWhiteSpace;
 			bool isComment = (noWhiteSpace.substr(0, 3) == "///");

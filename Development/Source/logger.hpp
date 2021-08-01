@@ -15,8 +15,14 @@
 #include <sstream>
 #include <type_traits>
 
+using std::endl;
+using std::strftime;
+using std::time;
+using std::localtime;
 using std::vector;
 using std::string;
+using std::cout;
+using std::ostringstream;
 
 class Logger final
 {
@@ -33,10 +39,10 @@ public:
 	template<typename T, typename...Rest> 
 	inline static void throwError(T first, Rest...rest)
 	{
-		std::cout << std::endl;
+		cout << endl;
 		_printPrefix(MessageType::ERR);
 		_printMessage(first, rest...);
-		std::cout << std::endl;
+		cout << endl;
 		throwInfo("Press a key to continue...");
 		auto temp = _getch();
 		exit(420);
@@ -80,36 +86,36 @@ public:
 private:
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
-	inline static std::vector<string> _messageQueue;
+	inline static vector<string> _messageQueue;
 	inline static unsigned int _messageCount = 0;
 
 	inline static void _printPrefix(MessageType type)
 	{
 		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE); // Console access
-		std::ostringstream oss; // For message queue
+		ostringstream oss; // For message queue
 
 		// Current time
 		char timeBuffer[64];
-		auto t = std::time(nullptr);
-		auto foo = *std::localtime(&t);
-		std::strftime(timeBuffer, 64, "%H:%M:%S", &foo);
+		auto t = time(nullptr);
+		auto foo = *localtime(&t);
+		strftime(timeBuffer, 64, "%H:%M:%S", &foo);
 
 		SetConsoleTextAttribute(console, 6); // White
-		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
+		cout << "[" + _level_string[static_cast<int>(type)] + "]";
 		oss << "[" + _level_string[static_cast<int>(type)] + "]";
 		SetConsoleTextAttribute(console, 12); // Red
-		std::cout << "[" << timeBuffer << "]";
+		cout << "[" << timeBuffer << "]";
 		oss << "[" << timeBuffer << "]";
 		SetConsoleTextAttribute(console, 7); // Yellow
 
 		// Proper indentation
 		if (type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
 		{
-			std::cout << "> ";
+			cout << "> ";
 		}
 		else // 4 chars
 		{
-			std::cout << " > ";
+			cout << " > ";
 		}
 
 		// Add to message queue
@@ -121,12 +127,12 @@ private:
 	inline static void _printMessage(T first, Rest&&...rest)
 	{
 		// For message queue
-		std::ostringstream oss;
+		ostringstream oss;
 
 		// Write onto console output
-		std::cout << first;
-		(std::cout << ... << rest);
-		std::cout << std::endl;
+		cout << first;
+		(cout << ... << rest);
+		cout << endl;
 
 		// Write into stream
 		oss << first;

@@ -2,6 +2,8 @@
 #include "render_bus.hpp"
 #include "logger.hpp"
 
+using std::make_shared;
+
 const float vertex_data[] =
 {
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -16,7 +18,7 @@ BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLo
 	:
 	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
 	_camera(camera),
-	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
 
 }

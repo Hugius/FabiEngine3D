@@ -7,6 +7,7 @@
 #include <string>
 
 using std::string;
+using std::map;
 
 class Timer final
 {
@@ -35,7 +36,7 @@ private:
 	LARGE_INTEGER _specificTime1;
 	LARGE_INTEGER _specificTime2;
 
-	std::map<string, float> _deltaParts;
+	map<string, float> _deltaParts;
 
 	string _currentID = "";
 

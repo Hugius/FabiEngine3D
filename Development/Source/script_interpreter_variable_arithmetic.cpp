@@ -305,7 +305,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			}
 
 			// Limit integer
-			result = ((result < 0) ? std::max(result, -1000000000) : std::min(result, 1000000000));
+			result = ((result < 0) ? max(result, -1000000000) : min(result, 1000000000));
 
 			// Set resulting value
 			variableOne.getValue(valueIndexOne).setInteger(result);
@@ -334,7 +334,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			}
 
 			// Limit decimal
-			result = ((result < 0) ? std::max(result, -1000000000.0f) : std::min(result, 1000000000.0f));
+			result = ((result < 0) ? max(result, -1000000000.0f) : min(result, 1000000000.0f));
 
 			// Set resulting value
 			variableOne.getValue(valueIndexOne).setDecimal(result);

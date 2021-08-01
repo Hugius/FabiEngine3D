@@ -5,6 +5,7 @@
 
 #include <vector>
 
+using std::to_string;
 using std::vector;
 
 class InputHandler final
@@ -47,7 +48,7 @@ private:
 
 		if (it == list.end()) // Not found
 		{
-			Logger::throwError("Failed to get input " + std::to_string(static_cast<int>(element)) + " index from vector!");
+			Logger::throwError("Failed to get input " + to_string(static_cast<int>(element)) + " index from vector!");
 		}
 		else // Found
 		{

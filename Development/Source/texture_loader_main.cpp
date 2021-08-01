@@ -160,7 +160,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 		else
 		{
 			// Save font to cache
-			_fontCache.insert(std::make_pair(fontPath, font));
+			_fontCache.insert(make_pair(fontPath, font));
 			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
 			return font;
 		}
@@ -171,9 +171,8 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 
 TextureID TextureLoader::_loadText(const string& textContent, const string& fontPath)
 {
-	std::string newText;
-
 	// No empty text
+	string newText;
 	if (textContent == "")
 	{
 		newText = " ";

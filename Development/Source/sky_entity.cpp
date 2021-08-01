@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::max;
+
 void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;
@@ -33,12 +35,12 @@ void SkyEntity::setCubeMap(TextureID value)
 
 void SkyEntity::setOriginalLightness(float value)
 {
-	_originalLightness = std::max(0.0f, value);
+	_originalLightness = max(0.0f, value);
 }
 
 void SkyEntity::setLightness(float value)
 {
-	_lightness = std::max(0.0f, value);
+	_lightness = max(0.0f, value);
 }
 
 void SkyEntity::setRotationSpeed(float value)

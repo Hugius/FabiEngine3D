@@ -2,6 +2,8 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
+using std::max;
+
 ShadowGenerator::ShadowGenerator()
 {
 	_passedFrames = INT_MAX;
@@ -11,8 +13,8 @@ void ShadowGenerator::loadShadows(Vec3 eye, Vec3 center, float size, float reach
 {
 	_eye = eye;
 	_center = center;
-	_size = std::max(0.0f, size);
-	_reach = std::max(0.0f, reach);
+	_size = max(0.0f, size);
+	_reach = max(0.0f, reach);
 	_isFollowingCamera = isFollowingCamera;
 	_interval = interval;
 	_passedFrames = 0;

@@ -88,9 +88,9 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 					{
 						// Extract AABB part ID
 						string partID = foundAabbID;
-						std::reverse(partID.begin(), partID.end());
+						reverse(partID.begin(), partID.end());
 						partID = partID.substr(0, partID.find('@'));
-						std::reverse(partID.begin(), partID.end());
+						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match
 						if (partID == arguments[1].getString())
@@ -133,9 +133,9 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 					{
 						// Extract AABB part ID
 						string partID = foundAabbID;
-						std::reverse(partID.begin(), partID.end());
+						reverse(partID.begin(), partID.end());
 						partID = partID.substr(0, partID.find('@'));
-						std::reverse(partID.begin(), partID.end());
+						reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match
 						if (partID == arguments[1].getString())

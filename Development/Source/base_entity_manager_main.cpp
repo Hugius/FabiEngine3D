@@ -246,7 +246,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	}
 
 	// Temporary type2string map
-	std::map<EntityType, string> temp;
+	map<EntityType, string> temp;
 	temp[EntityType::SKY] = "SKY"; temp[EntityType::TERRAIN] = "TERRAIN"; temp[EntityType::WATER] = "WATER";
 	temp[EntityType::MODEL] = "MODEL"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::IMAGE] = "GUI"; temp[EntityType::TEXT] = "TEXT";

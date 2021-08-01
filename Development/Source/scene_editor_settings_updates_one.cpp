@@ -43,12 +43,12 @@ void SceneEditor::_updateSettingsMenu()
 
 			// Setting custom camera speed
 			_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
-			_editorSpeed = std::max(0.0f, _editorSpeed);
+			_editorSpeed = max(0.0f, _editorSpeed);
 
 			// Setting LOD distance
 			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
 			{
-				lodDistance = std::max(0.0f, lodDistance);
+				lodDistance = max(0.0f, lodDistance);
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
 
@@ -178,7 +178,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 		// Size value
 		_gui.getGlobalScreen()->checkValueForm("size", size);
-		size = std::max(0.0f, size);
+		size = max(0.0f, size);
 
 		// Position values
 		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
@@ -197,12 +197,12 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Lightness value
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness = std::max(0.0f, lightness / 100.0f);
+			lightness = max(0.0f, lightness / 100.0f);
 		}
 
 		// Interval value
 		_gui.getGlobalScreen()->checkValueForm("interval", interval);
-		interval = std::max(0, interval);
+		interval = max(0, interval);
 
 		// Disable shadows
 		if (_fe3d.gfx_isShadowsEnabled())
@@ -262,7 +262,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		// Strength value
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
-			strength = std::max(0.0f, strength / 100.0f);
+			strength = max(0.0f, strength / 100.0f);
 		}
 
 		// Disable motion blur
@@ -327,11 +327,11 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 
 		// Blur distance value
 		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
-		blurDistance = std::max(0.0f, blurDistance);
+		blurDistance = max(0.0f, blurDistance);
 
 		// Max distance value
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-		maxDistance = std::max(0.0f, maxDistance);
+		maxDistance = max(0.0f, maxDistance);
 
 		// Disable DOF
 		if (_fe3d.gfx_isDofEnabled())

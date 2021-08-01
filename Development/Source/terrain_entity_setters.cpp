@@ -10,6 +10,21 @@ void TerrainEntity::setPixelValues(const vector<float>& value)
 	_pixelValues = value;
 }
 
+void TerrainEntity::setVertices(const vector<Vec3> value)
+{
+	_vertices = value;
+}
+
+void TerrainEntity::setUvCoords(const vector<Vec2> value)
+{
+	_uvCoords = value;
+}
+
+void TerrainEntity::setNormals(const vector<Vec3> value)
+{
+	_normals = value;
+}
+
 void TerrainEntity::setHeightMapPath(const string& value)
 {
 	_heightMapPath = value;

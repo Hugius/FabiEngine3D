@@ -47,7 +47,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	auto entity = getEntity(ID);
 
 	// Load mesh file
-	auto partsPointer = _meshLoader.loadMesh(meshPath, false);
+	auto partsPointer = _meshLoader.loadMesh(meshPath);
 	entity->setMeshPath(meshPath);
 	entity->clearParts();
 
@@ -94,13 +94,18 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 			bufferData.push_back(part.normals[i].x);
 			bufferData.push_back(part.normals[i].y);
 			bufferData.push_back(part.normals[i].z);
+
+			// Tangent vector
+			bufferData.push_back(part.tangents[i].x);
+			bufferData.push_back(part.tangents[i].y);
+			bufferData.push_back(part.tangents[i].z);
 		}
 
 		// New model part
 		entity->addPart(part.ID);
 
 		// Render buffer
-		entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
+		entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
 
 		// Diffuse map
 		if (part.diffuseMapPath != "")
@@ -136,7 +141,7 @@ void ModelEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getModelEntities())
 	{
-		if (entity->isVisible()) // Visible updates
+		if (entity->isVisible())
 		{
 			// Update model matrix
 			entity->updateModelMatrix();
@@ -157,18 +162,6 @@ void ModelEntityManager::update()
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 		}
-		else // Invisible updates
-		{
-			// Update normal mapping
-			if (entity->hasNormalMap())
-			{
-				_loadNormalMapping(entity->getID());
-			}
-			else
-			{
-				_unloadNormalMapping(entity->getID());
-			}
-		}
 	}
 }
 
@@ -180,101 +173,4 @@ void ModelEntityManager::setLodDistance(float distance)
 float ModelEntityManager::getLodDistance()
 {
 	return _lodDistance;
-}
-
-void ModelEntityManager::_loadNormalMapping(const string& ID)
-{
-	// Temporary values
-	auto entity = getEntity(ID);
-
-	// Check if entity has a buffer
-	if (entity->hasRenderBuffer())
-	{
-		// Check if render buffer not already reloaded
-		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
-		{
-			// Load mesh file
-			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
-			auto parts = *partsPointer;
-
-			// Create renderbuffers
-			for (const auto& part : parts)
-			{
-				// Temporary values
-				vector<float> data;
-
-				// For every triangle vertex
-				for (size_t i = 0; i < part.vertices.size(); i++)
-				{
-					// Vertex coordinate
-					data.push_back(part.vertices[i].x);
-					data.push_back(part.vertices[i].y);
-					data.push_back(part.vertices[i].z);
-
-					// UV coordinate
-					data.push_back(part.uvCoords[i].x);
-					data.push_back(part.uvCoords[i].y);
-
-					// Normal vector
-					data.push_back(part.normals[i].x);
-					data.push_back(part.normals[i].y);
-					data.push_back(part.normals[i].z);
-
-					// Tangent vector
-					data.push_back(part.tangents[i].x);
-					data.push_back(part.tangents[i].y);
-					data.push_back(part.tangents[i].z);
-				}
-
-				// Load render buffer
-				entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())), part.ID);
-			}
-		}
-	}
-}
-
-void ModelEntityManager::_unloadNormalMapping(const string& ID)
-{
-	// Temporary values
-	auto entity = getEntity(ID);
-
-	// Check if entity has a buffer
-	if (entity->hasRenderBuffer())
-	{
-		// Check if render buffer not already reloaded
-		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
-		{
-			// Load mesh file
-			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
-			auto parts = *partsPointer;
-
-			// Create renderbuffers
-			for (const auto& part : parts)
-			{
-				// Temporary values
-				vector<float> data;
-
-				// For every triangle vertex
-				for (size_t i = 0; i < part.vertices.size(); i++)
-				{
-					// Vertex coordinate
-					data.push_back(part.vertices[i].x);
-					data.push_back(part.vertices[i].y);
-					data.push_back(part.vertices[i].z);
-
-					// UV coordinate
-					data.push_back(part.uvCoords[i].x);
-					data.push_back(part.uvCoords[i].y);
-
-					// Normal vector
-					data.push_back(part.normals[i].x);
-					data.push_back(part.normals[i].y);
-					data.push_back(part.normals[i].z);
-				}
-
-				// Load render buffer
-				entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &data[0], static_cast<unsigned int>(data.size())), part.ID);
-			}
-		}
-	}
 }

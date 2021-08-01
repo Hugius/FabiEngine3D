@@ -20,7 +20,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 		// Check if mesh is not already cached
 		if (_meshCache.find(filePath) == _meshCache.end())
 		{
-			threads.push_back(std::async(std::launch::async, &MeshLoader::_loadMesh, this, filePath, false));
+			threads.push_back(std::async(std::launch::async, &MeshLoader::_loadMesh, this, filePath));
 			meshStatuses.push_back(false);
 		}
 		else
@@ -72,14 +72,14 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 	}
 }
 
-const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath, bool calculateTangents)
+const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
 BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
 	if (iterator == _meshCache.end()) 
 	{
 		// Load mesh
-		auto loadedModel = _loadMesh(filePath, calculateTangents);
+		auto loadedModel = _loadMesh(filePath);
 
 		// Check model status
 		if (loadedModel.empty())
@@ -100,12 +100,6 @@ BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh pa
 	}
 	else
 	{
-		// Calculate tangents once for this model
-		if (calculateTangents)
-		{
-			_calculateTangents(iterator->second);
-		}
-
 		return &iterator->second; // Return the corresponding mesh parts
 	}
 }

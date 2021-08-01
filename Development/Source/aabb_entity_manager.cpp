@@ -26,7 +26,7 @@ const float vertex_data[] =
 AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus),
-	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::AABB, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
 
 }

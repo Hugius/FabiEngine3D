@@ -50,7 +50,7 @@ const float vertex_data[] =
 SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::SKY, meshLoader, texLoader, renderBus),
-	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::CUBEMAP, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
 
 }

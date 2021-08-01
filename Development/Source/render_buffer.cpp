@@ -19,7 +19,23 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 	// Store buffer data
 	switch (type)
 	{
-	case BufferType::MODEL:
+	case BufferType::VERTEX:
+	{
+		_vertexCount = dataCount / 3;
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glEnableVertexAttribArray(0);
+		break;
+	}
+	case BufferType::VERTEX_UV:
+	{
+		_vertexCount = dataCount / 5;
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		break;
+	}
+	case BufferType::VERTEX_UV_NORMAL:
 	{
 		_vertexCount = dataCount / 8;
 		glEnableVertexAttribArray(0);
@@ -30,7 +46,7 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		break;
 	}
-	case BufferType::MODEL_TANGENT:
+	case BufferType::VERTEX_UV_NORMAL_TANGENT:
 	{
 		_vertexCount = dataCount / 11;
 		glEnableVertexAttribArray(0);
@@ -41,29 +57,6 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
-		break;
-	}
-	case BufferType::SURFACE:
-	{
-		_vertexCount = dataCount / 5;
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-		break;
-	}
-	case BufferType::AABB:
-	{
-		_vertexCount = dataCount / 3;
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glEnableVertexAttribArray(0);
-		break;
-	}
-	case BufferType::CUBEMAP:
-	{
-		_vertexCount = dataCount / 3;
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-		glEnableVertexAttribArray(0);
 		break;
 	}
 	}
@@ -118,10 +111,10 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, 
 	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &data[0], GL_STATIC_DRAW);
 
 	// Store buffer data
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(2 * sizeof(float)));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (GLvoid*)(2 * sizeof(float)));
 
 	// Unbind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -95,17 +95,17 @@ const string& TerrainEntity::getNormalMapPathB()
 	return _normalMapPathB;
 }
 
-vector<Vec3>& TerrainEntity::getVertices()
+const vector<Vec3>& TerrainEntity::getVertices()
 {
 	return _vertices;
 }
 
-vector<Vec2>& TerrainEntity::getUvCoords()
+const vector<Vec2>& TerrainEntity::getUvCoords()
 {
 	return _uvCoords;
 }
 
-vector<Vec3>& TerrainEntity::getNormals()
+const vector<Vec3>& TerrainEntity::getNormals()
 {
 	return _normals;
 }

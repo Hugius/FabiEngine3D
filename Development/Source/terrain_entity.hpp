@@ -13,8 +13,11 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixelValues(const vector<float>& value);
+	void setVertices(const vector<Vec3> value);
+	void setUvCoords(const vector<Vec2> value);
+	void setNormals(const vector<Vec3> value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
@@ -59,9 +62,9 @@ public:
 	const string& getNormalMapPathB();
 
 	// Vectors
-	vector<Vec3>& getVertices();
-	vector<Vec2>& getUvCoords();
-	vector<Vec3>& getNormals();
+	const vector<Vec3>& getVertices();
+	const vector<Vec2>& getUvCoords();
+	const vector<Vec3>& getNormals();
 
 	// Floats
 	const vector<float>& getPixelValues();

@@ -22,10 +22,6 @@ public:
 	bool isInside(const string& ID, float x, float z);
 
 private:
-	// Voids
-	void _loadNormalMapping(const string& ID);
-	void _unloadNormalMapping(const string& ID);
-
 	// Strings
 	string _selectedID = "";
 

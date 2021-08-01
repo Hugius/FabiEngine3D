@@ -8,16 +8,14 @@
 class MeshLoader final
 {
 public:
-	const vector<MeshPart>* loadMesh(const string& filePath, bool calculateTangents);
+	const vector<MeshPart>* loadMesh(const string& filePath);
 
 	void cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
 
 	void clearMeshCache(const string& filePath);
 
 private:
-	vector<MeshPart> _loadMesh(const string& filePath, bool calculateTangents);
-
-	void _calculateTangents(vector<MeshPart>& meshParts);
+	vector<MeshPart> _loadMesh(const string& filePath);
 
 	std::map<string, vector<MeshPart>> _meshCache;
 };

@@ -6,7 +6,7 @@
 
 #include <filesystem>
 
-vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTangents)
+vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 {
 	// Declare variables
 	vector<MeshPart> meshParts;
@@ -203,25 +203,6 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		}
 	}
 
-	// Calculate tangents for all mesh parts
-	if (calculateTangents)
-	{
-		_calculateTangents(meshParts);
-	}
-
-	// Error checking
-	if (meshParts.empty())
-	{
-		Logger::throwWarning("Incorrect or too little content in mesh file: \"" + filePath + "\"");
-		return {};
-	}
-
-	// Return new mesh parts
-	return meshParts;
-}
-
-void MeshLoader::_calculateTangents(vector<MeshPart>& meshParts)
-{
 	// Calculate tangents for normal mapping
 	for (auto& meshPart : meshParts)
 	{
@@ -255,4 +236,14 @@ void MeshLoader::_calculateTangents(vector<MeshPart>& meshParts)
 			meshPart.tangents.push_back(tangent);
 		}
 	}
+
+	// Error checking
+	if (meshParts.empty())
+	{
+		Logger::throwWarning("Incorrect or too little content in mesh file: \"" + filePath + "\"");
+		return {};
+	}
+
+	// Return new mesh parts
+	return meshParts;
 }

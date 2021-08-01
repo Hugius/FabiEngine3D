@@ -361,30 +361,36 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vect
 	{
 		for (const auto& partID : entity->getPartIDs())
 		{
-			// Temporary values
-			auto buffer = entity->getRenderBuffer(partID);
-
-			// Remove instancing
-			if (buffer->isInstanced())
+			if (entity->hasRenderBuffer(partID))
 			{
-				buffer->removeInstancing();
-			}
+				// Temporary values
+				auto buffer = entity->getRenderBuffer(partID);
 
-			// Add instancing
-			buffer->addInstancing(offsets);
+				// Remove instancing
+				if (buffer->isInstanced())
+				{
+					buffer->removeInstancing();
+				}
+
+				// Add instancing
+				buffer->addInstancing(offsets);
+			}
 		}
 	}
 	else
 	{
 		for (const auto& partID : _core->_modelEntityManager.getEntity(ID)->getPartIDs())
 		{
-			// Temporary values
-			auto buffer = _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(partID);
-
-			// Remove instancing
-			if (buffer->isInstanced())
+			if (entity->hasRenderBuffer(partID))
 			{
-				buffer->removeInstancing();
+				// Temporary values
+				auto buffer = _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(partID);
+
+				// Remove instancing
+				if (buffer->isInstanced())
+				{
+					buffer->removeInstancing();
+				}
 			}
 		}
 	}

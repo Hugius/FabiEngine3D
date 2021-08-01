@@ -98,10 +98,9 @@ void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPat
 	const float maxHeight = entity->getMaxHeight();
 	const float uvRepeat = entity->getUvRepeat();
 
-	// Generate terrain vertices
-	for (float x = -halfSize; x < halfSize; x++)
+	for (float x = -halfSize; x < halfSize; x++) // X direction
 	{
-		for (float z = -halfSize; z < halfSize; z++)
+		for (float z = -halfSize; z < halfSize; z++) // Z direction
 		{
 			// Calculate vertex
 			float vertexX = x;
@@ -120,113 +119,120 @@ void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPat
 			Vec3 normal = Vec3(LH - RH, 3.0f, DH - UH);
 			normal.normalize();
 
-			// Single vertex
+			// Add data
 			tempVertices.push_back(Vec3(vertexX, vertexY, vertexZ));
 			tempUvCoords.push_back(Vec2(uvX, uvY));
 			tempNormals.push_back(normal);
 		}
 	}
-
-	// Compose single data collection
-	vector<float> finalDataCollection;
-	auto& vertices = getEntity(ID)->getVertices();
-	auto& uvCoords = getEntity(ID)->getUvCoords();
-	auto& normals = getEntity(ID)->getNormals();
-	vertices.clear();
-	uvCoords.clear();
-	normals.clear();
+	
+	// Compose vertices, UV coordinates, normals
+	vector<Vec3> vertices;
+	vector<Vec2> uvCoords;
+	vector<Vec3> normals;
 	for (unsigned int x = 0; x < uSize - 1; x++)
 	{
 		for (unsigned int z = 0; z < uSize - 1; z++)
 		{
-			// Indices for vertices collection
+			// Indices
 			unsigned int topLeftIndex = (z * uSize) + x;
 			unsigned int topRightIndex = topLeftIndex + 1;
 			unsigned int bottomLeftIndex = ((z + 1) * uSize) + x;
 			unsigned int bottomRightIndex = bottomLeftIndex + 1;
 
 			// Top-left
-			finalDataCollection.push_back(tempVertices[topLeftIndex].x);
-			finalDataCollection.push_back(tempVertices[topLeftIndex].y);
-			finalDataCollection.push_back(tempVertices[topLeftIndex].z);
-			finalDataCollection.push_back(tempUvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(tempUvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].x);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].z);
 			vertices.push_back(tempVertices[topLeftIndex]);
 			uvCoords.push_back(tempUvCoords[topLeftIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 
 			// Top-right
-			finalDataCollection.push_back(tempVertices[topRightIndex].x);
-			finalDataCollection.push_back(tempVertices[topRightIndex].y);
-			finalDataCollection.push_back(tempVertices[topRightIndex].z);
-			finalDataCollection.push_back(tempUvCoords[topRightIndex].x);
-			finalDataCollection.push_back(tempUvCoords[topRightIndex].y);
-			finalDataCollection.push_back(tempNormals[topRightIndex].x);
-			finalDataCollection.push_back(tempNormals[topRightIndex].y);
-			finalDataCollection.push_back(tempNormals[topRightIndex].z);
 			vertices.push_back(tempVertices[topRightIndex]);
 			uvCoords.push_back(tempUvCoords[topRightIndex]);
 			normals.push_back(tempNormals[topRightIndex]);
 
 			// Bottom-right
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].x);
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].y);
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].z);
-			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].x);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].z);
 			vertices.push_back(tempVertices[bottomRightIndex]);
 			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
 			normals.push_back(tempNormals[bottomRightIndex]);
 
 			// Bottom-right
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].x);
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].y);
-			finalDataCollection.push_back(tempVertices[bottomRightIndex].z);
-			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].x);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomRightIndex].z);
 			vertices.push_back(tempVertices[bottomRightIndex]);
 			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
 			normals.push_back(tempNormals[bottomRightIndex]);
 
 			// Bottom-left
-			finalDataCollection.push_back(tempVertices[bottomLeftIndex].x);
-			finalDataCollection.push_back(tempVertices[bottomLeftIndex].y);
-			finalDataCollection.push_back(tempVertices[bottomLeftIndex].z);
-			finalDataCollection.push_back(tempUvCoords[bottomLeftIndex].x);
-			finalDataCollection.push_back(tempUvCoords[bottomLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomLeftIndex].x);
-			finalDataCollection.push_back(tempNormals[bottomLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[bottomLeftIndex].z);
 			vertices.push_back(tempVertices[bottomLeftIndex]);
 			uvCoords.push_back(tempUvCoords[bottomLeftIndex]);
 			normals.push_back(tempNormals[bottomLeftIndex]);
 
 			// Top-left
-			finalDataCollection.push_back(tempVertices[topLeftIndex].x);
-			finalDataCollection.push_back(tempVertices[topLeftIndex].y);
-			finalDataCollection.push_back(tempVertices[topLeftIndex].z);
-			finalDataCollection.push_back(tempUvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(tempUvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].x);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].y);
-			finalDataCollection.push_back(tempNormals[topLeftIndex].z);
 			vertices.push_back(tempVertices[topLeftIndex]);
 			uvCoords.push_back(tempUvCoords[topLeftIndex]);
 			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
+	
+	// Calculate tangents
+	vector<Vec3> tangents;
+	for (size_t i = 0; i < vertices.size(); i += 3)
+	{
+		// Vertices of 1 triangle
+		Vec3 v0 = vertices[i + 0];
+		Vec3 v1 = vertices[i + 1];
+		Vec3 v2 = vertices[i + 2];
+
+		// Shortcuts for UVs
+		Vec2 uv0 = uvCoords[i + 0];
+		Vec2 uv1 = uvCoords[i + 1];
+		Vec2 uv2 = uvCoords[i + 2];
+
+		// Vertex delta
+		Vec3 deltaPos1 = v1 - v0;
+		Vec3 deltaPos2 = v2 - v0;
+
+		// UV delta
+		Vec2 deltaUV1 = uv1 - uv0;
+		Vec2 deltaUV2 = uv2 - uv0;
+
+		// Calculate tangent vector
+		float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+		Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+		// Add to list
+		tangents.push_back(tangent);
+		tangents.push_back(tangent);
+		tangents.push_back(tangent);
+	}
+
+	// Compose final data collection
+	vector<float> finalDataCollection;
+	for (size_t i = 0; i < vertices.size(); i++)
+	{
+		// Vertex coordinate
+		finalDataCollection.push_back(vertices[i].x);
+		finalDataCollection.push_back(vertices[i].y);
+		finalDataCollection.push_back(vertices[i].z);
+
+		// UV coordinate
+		finalDataCollection.push_back(uvCoords[i].x);
+		finalDataCollection.push_back(uvCoords[i].y);
+
+		// Normal vector
+		finalDataCollection.push_back(normals[i].x);
+		finalDataCollection.push_back(normals[i].y);
+		finalDataCollection.push_back(normals[i].z);
+
+		// Tangent vector
+		finalDataCollection.push_back(tangents[i].x);
+		finalDataCollection.push_back(tangents[i].y);
+		finalDataCollection.push_back(tangents[i].z);
+	}
 
 	// Create render buffer
-	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+	entity->setVertices(vertices);
+	entity->setUvCoords(uvCoords);
+	entity->setNormals(normals);
+	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
@@ -249,139 +255,7 @@ bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 
 void TerrainEntityManager::update()
 {
-	for (const auto& [keyID, entity] : _getTerrainEntities())
-	{
-		// Update normal mapping
-		if (entity->hasNormalMap() || entity->hasNormalMapR() || entity->hasNormalMapG() || entity->hasNormalMapB())
-		{
-			_loadNormalMapping(entity->getID());
-		}
-		else
-		{
-			_unloadNormalMapping(entity->getID());
-		}
-	}
-}
 
-void TerrainEntityManager::_loadNormalMapping(const string& ID)
-{
-	// Temporary values
-	auto entity = getEntity(ID);
-	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
-
-	// Check if entity has a buffer
-	if (entity->hasRenderBuffer())
-	{
-		// Check if render buffer not already reloaded
-		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
-		{
-			// Data collections
-			auto vertices = entity->getVertices();
-			auto uvCoords = entity->getUvCoords();
-			auto normals = entity->getNormals();
-			vector<Vec3> tangents;
-
-			// Calculate tangents
-			for (size_t i = 0; i < vertices.size(); i += 3)
-			{
-				// Vertices of 1 triangle
-				Vec3 v0 = vertices[i + 0];
-				Vec3 v1 = vertices[i + 1];
-				Vec3 v2 = vertices[i + 2];
-
-				// Shortcuts for UVs
-				Vec2 uv0 = uvCoords[i + 0];
-				Vec2 uv1 = uvCoords[i + 1];
-				Vec2 uv2 = uvCoords[i + 2];
-
-				// Vertex delta
-				Vec3 deltaPos1 = v1 - v0;
-				Vec3 deltaPos2 = v2 - v0;
-
-				// UV delta
-				Vec2 deltaUV1 = uv1 - uv0;
-				Vec2 deltaUV2 = uv2 - uv0;
-
-				// Calculate tangent vector
-				float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-				Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
-
-				// Add to list
-				tangents.push_back(tangent);
-				tangents.push_back(tangent);
-				tangents.push_back(tangent);
-			}
-
-			// Compose final data collection
-			vector<float> finalDataCollection;
-			for (size_t i = 0; i < vertices.size(); i++)
-			{
-				// Vertex coordinate
-				finalDataCollection.push_back(vertices[i].x);
-				finalDataCollection.push_back(vertices[i].y);
-				finalDataCollection.push_back(vertices[i].z);
-
-				// UV coordinate
-				finalDataCollection.push_back(uvCoords[i].x);
-				finalDataCollection.push_back(uvCoords[i].y);
-
-				// Normal vector
-				finalDataCollection.push_back(normals[i].x);
-				finalDataCollection.push_back(normals[i].y);
-				finalDataCollection.push_back(normals[i].z);
-
-				// Tangent vector
-				finalDataCollection.push_back(tangents[i].x);
-				finalDataCollection.push_back(tangents[i].y);
-				finalDataCollection.push_back(tangents[i].z);
-			}
-
-			// Create render buffer
-			entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
-		}
-	}
-}
-
-void TerrainEntityManager::_unloadNormalMapping(const string& ID)
-{
-	// Temporary values
-	auto entity = getEntity(ID);
-	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
-
-	// Check if entity has a buffer
-	if (entity->hasRenderBuffer())
-	{
-		// Check if render buffer not already reloaded
-		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
-		{
-			// Data collections
-			auto vertices = entity->getVertices();
-			auto uvCoords = entity->getUvCoords();
-			auto normals = entity->getNormals();
-
-			// Compose final data collection
-			vector<float> finalDataCollection;
-			for (size_t i = 0; i < vertices.size(); i++)
-			{
-				// Vertex coordinate
-				finalDataCollection.push_back(vertices[i].x);
-				finalDataCollection.push_back(vertices[i].y);
-				finalDataCollection.push_back(vertices[i].z);
-
-				// UV coordinate
-				finalDataCollection.push_back(uvCoords[i].x);
-				finalDataCollection.push_back(uvCoords[i].y);
-
-				// Normal vector
-				finalDataCollection.push_back(normals[i].x);
-				finalDataCollection.push_back(normals[i].y);
-				finalDataCollection.push_back(normals[i].z);
-			}
-
-			// Create render buffer
-			entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
-		}
-	}
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)

@@ -2,7 +2,7 @@
 
 #include "base_entity_manager.hpp"
 
-class ModelEntityManager final :  public BaseEntityManager
+class ModelEntityManager final : public BaseEntityManager
 {
 public:
 	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
@@ -19,8 +19,5 @@ public:
 	float getLodDistance();
 
 private:
-	void _loadNormalMapping(const string& ID);
-	void _unloadNormalMapping(const string& ID);
-
 	float _lodDistance = 0.0f;
 };

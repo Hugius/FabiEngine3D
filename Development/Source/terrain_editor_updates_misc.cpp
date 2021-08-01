@@ -13,17 +13,6 @@ void TerrainEditor::_updateCamera()
 
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);
-
-		// Disable shadows
-		if (_fe3d.gfx_isShadowsEnabled())
-		{
-			_fe3d.gfx_disableShadows();
-		}
-
-		// Enable shadows
-		const auto distance = _fe3d.camera_getThirdPersonDistance();
-		_fe3d.gfx_enableShadows(Vec3(Vec3(distance * 2.0f)),
-			Vec3(0.0f), distance * 4.0f, distance * 8.0f, 0.25f, false, false, 0);
 	}
 
 	// Check if allowed by GUI

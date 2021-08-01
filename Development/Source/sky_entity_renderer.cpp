@@ -28,7 +28,7 @@ void SkyEntityRenderer::unbind()
 
 void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const shared_ptr<SkyEntity> mixEntity)
 {
-	if (mainEntity->isVisible())
+	if (mainEntity->hasRenderBuffer() && mainEntity->isVisible())
 	{
 		// Enable wire frame
 		if (mainEntity->isWireFramed())
@@ -58,22 +58,15 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
 		}
 
-		// Check if entity has a render buffer
-		if (!mainEntity->getRenderBuffers().empty())
-		{
-			// Bind buffer
-			glBindVertexArray(mainEntity->getRenderBuffer()->getVAO());
+		// Bind buffer
+		glBindVertexArray(mainEntity->getRenderBuffer()->getVAO());
 
-			// Render
-			if (!mainEntity->getRenderBuffers().empty())
-			{
-				glDrawArrays(GL_TRIANGLES, 0, mainEntity->getRenderBuffer()->getVertexCount());
-				_renderBus.increaseTriangleCount(mainEntity->getRenderBuffer()->getVertexCount() / 3);
-			}
+		// Render buffer
+		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getRenderBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(mainEntity->getRenderBuffer()->getVertexCount() / 3);
 
-			// Unbind buffer
-			glBindVertexArray(0);
-		}
+		// Unbind buffer
+		glBindVertexArray(0);
 
 		// Unbind textures
 		if (mainEntity->hasCubeMap())

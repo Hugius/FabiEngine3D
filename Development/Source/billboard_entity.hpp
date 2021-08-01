@@ -1,19 +1,20 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "render_buffer.hpp"
+
+#include <memory>
+
+using std::shared_ptr;
 
 class BillboardEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
 
-	// Updates
+	// Voids
 	void updateModelMatrix();
-	void move(Vec3 value);
-	void rotate(Vec3 value);
-	void scale(Vec3 value);
-
-	// Setters
+	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
 	void setCameraFacingX(bool value);
 	void setCameraFacingY(bool value);
 	void setTransparent(bool value);
@@ -23,6 +24,9 @@ public:
 	void setBright(bool value);
 	void setWireFramed(bool value);
 	void setDiffuseMap(TextureID value);
+	void move(Vec3 value);
+	void rotate(Vec3 value);
+	void scale(Vec3 value);
 	void setPosition(Vec3 value);
 	void setInitialRotation(Vec3 value);
 	void setRotation(Vec3 value);
@@ -49,43 +53,59 @@ public:
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 
-	// Getters
-	const Matrix44& getModelMatrix() const;
-	const TextureID getDiffuseMap() const;
-	const Vec3 getPosition() const;
-	const Vec3 getInitialRotation() const;
-	const Vec3 getRotation() const;
-	const Vec3 getSize() const;
-	const Vec3 getColor() const;
-	const string& getTextContent() const;
-	const string& getFontPath() const;
-	const string& getDiffuseMapPath() const;
-	const float getLightness() const;
-	const float getInversion() const;
-	const float getAlpha() const;
-	const float getMinHeight() const;
-	const float getMaxHeight() const;
-	const unsigned int getPassedSpriteAnimationFrames() const;
-	const unsigned int getMaxSpriteAnimationFramestep() const;
-	const unsigned int getTotalSpriteAnimationRows() const;
-	const unsigned int getTotalSpriteAnimationColumns() const;
-	const unsigned int getSpriteAnimationRowIndex() const;
-	const unsigned int getSpriteAnimationColumnIndex() const;
-	const unsigned int getSpriteAnimationLoops() const;
-	const int getMaxSpriteAnimationLoops() const;
-	const bool isTransparent() const;
-	const bool isSpriteAnimationStarted() const;
-	const bool isSpriteAnimationPaused() const;
-	const bool isFacingCameraX() const;
-	const bool isFacingCameraY() const;
-	const bool isDepthMapIncluded() const;
-	const bool isShadowed() const;
-	const bool isReflected() const;
-	const bool isBright() const;
-	const bool isWireFramed() const;
-	const bool hasDiffuseMap() const;
+	// Strings
+	const string& getTextContent();
+	const string& getFontPath();
+	const string& getDiffuseMapPath();
+
+	// Matrices
+	const Matrix44& getModelMatrix();
+
+	// Vectors
+	const Vec3 getPosition();
+	const Vec3 getInitialRotation();
+	const Vec3 getRotation();
+	const Vec3 getSize();
+	const Vec3 getColor();
+
+	// Floats
+	const float getLightness();
+	const float getInversion();
+	const float getAlpha();
+	const float getMinHeight();
+	const float getMaxHeight();
+
+	// Integers
+	const int getMaxSpriteAnimationLoops();
+	const unsigned int getPassedSpriteAnimationFrames();
+	const unsigned int getMaxSpriteAnimationFramestep();
+	const unsigned int getTotalSpriteAnimationRows();
+	const unsigned int getTotalSpriteAnimationColumns();
+	const unsigned int getSpriteAnimationRowIndex();
+	const unsigned int getSpriteAnimationColumnIndex();
+	const unsigned int getSpriteAnimationLoops();
+
+	// Booleans
+	const bool isTransparent();
+	const bool isSpriteAnimationStarted();
+	const bool isSpriteAnimationPaused();
+	const bool isFacingCameraX();
+	const bool isFacingCameraY();
+	const bool isDepthMapIncluded();
+	const bool isShadowed();
+	const bool isReflected();
+	const bool isBright();
+	const bool isWireFramed();
+	const bool hasRenderBuffer();
+	const bool hasDiffuseMap();
+
+	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer();
+	const TextureID getDiffuseMap();
 
 private:
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
 	Vec3 _position = Vec3(0.0f);

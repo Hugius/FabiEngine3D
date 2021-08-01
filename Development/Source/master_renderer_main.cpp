@@ -45,7 +45,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 
 	// Final screen texture
 	_finalSurface = make_shared<ImageEntity>("finalSurface");
-	_finalSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	_finalSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 }
 
 void MasterRenderer::update()

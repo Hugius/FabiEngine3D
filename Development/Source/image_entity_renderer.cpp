@@ -28,7 +28,7 @@ void ImageEntityRenderer::unbind()
 
 void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty() &&
+	if (entity->hasRenderBuffer() && entity->isVisible() &&
 		((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 		((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
@@ -37,8 +37,15 @@ void ImageEntityRenderer::render(const shared_ptr<ImageEntity> entity)
 		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->isSpriteAnimationStarted())
 		{
-			uvMultiplier = Vec2(1.0f / static_cast<float>(entity->getTotalSpriteAnimationColumns()), 1.0f / static_cast<float>(entity->getTotalSpriteAnimationRows()));
-			uvAdder = Vec2(static_cast<float>(entity->getSpriteAnimationColumnIndex()) * uvMultiplier.x, static_cast<float>(entity->getSpriteAnimationRowIndex()) * uvMultiplier.y);
+			// Retrieve values
+			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
+			const auto totalRows = entity->getTotalSpriteAnimationRows();
+			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
+			const auto rowIndex = entity->getSpriteAnimationRowIndex();
+
+			// Apply values
+			uvMultiplier = Vec2(1.0f / static_cast<float>(totalColumns), 1.0f / static_cast<float>(totalRows));
+			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 
 		// Shader uniforms

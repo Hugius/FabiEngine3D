@@ -49,26 +49,33 @@ void BillboardEntityRenderer::unbind()
 
 void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
+		// Temporary values
+		auto buffer = entity->getRenderBuffer();
+
 		// Enable wire frame
 		if (entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
-
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->isSpriteAnimationStarted())
 		{
-			uvMultiplier = Vec2(1.0f / static_cast<float>(entity->getTotalSpriteAnimationColumns()), 1.0f / static_cast<float>(entity->getTotalSpriteAnimationRows()));
-			uvAdder = Vec2(static_cast<float>(entity->getSpriteAnimationColumnIndex()) * uvMultiplier.x, static_cast<float>(entity->getSpriteAnimationRowIndex()) * uvMultiplier.y);
+			// Retrieve values
+			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
+			const auto totalRows = entity->getTotalSpriteAnimationRows();
+			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
+			const auto rowIndex = entity->getSpriteAnimationRowIndex();
+
+			// Apply values
+			uvMultiplier = Vec2(1.0f / static_cast<float>(totalColumns), 1.0f / static_cast<float>(totalRows));
+			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_uvAdder", uvAdder);
-		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
@@ -81,6 +88,8 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 		_shader.uploadUniform("u_isBright", entity->isBright());
+		_shader.uploadUniform("u_uvAdder", uvAdder);
+		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 
 		// Bind textures
 		if (entity->hasDiffuseMap())
@@ -90,21 +99,11 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		}
 
 		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(buffer->getVAO());
 
 		// Render
-		if (entity->getRenderBuffer()->isInstanced()) // Instanced
-		{
-			_shader.uploadUniform("u_isInstanced", true);
-			glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
-			_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
-		}
-		else // Non-instanced
-		{
-			_shader.uploadUniform("u_isInstanced", false);
-			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
-		}
+		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		// Unbind buffer
 		glBindVertexArray(0);

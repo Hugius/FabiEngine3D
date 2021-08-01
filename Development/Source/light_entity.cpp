@@ -27,22 +27,22 @@ void LightEntity::setIntensity(float value)
 	_intensity = std::max(0.0f, value);
 }
 
-const Vec3 LightEntity::getPosition() const
+const Vec3 LightEntity::getPosition()
 {
 	return _position;
 }
 
-const Vec3 LightEntity::getRadius() const
+const Vec3 LightEntity::getRadius()
 {
 	return _radius;
 }
 
-const Vec3 LightEntity::getColor() const
+const Vec3 LightEntity::getColor()
 {
 	return _color;
 }
 
-const float LightEntity::getIntensity() const
+const float LightEntity::getIntensity()
 {
 	return _intensity;
 }

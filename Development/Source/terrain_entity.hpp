@@ -1,13 +1,19 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "render_buffer.hpp"
 
-class TerrainEntity final: public BaseEntity
+#include <memory>
+
+using std::shared_ptr;
+
+class TerrainEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
 
-	// Setters
+	// Voids
+	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
 	void setPixelValues(const vector<float>& value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
@@ -40,28 +46,17 @@ public:
 	void setSpecularLighted(bool value);
 	void setWireFramed(bool value);
 
-	// Textures
-	const TextureID getDiffuseMap()  const;
-	const TextureID getNormalMap()   const;
-	const TextureID getBlendMap()    const;
-	const TextureID getDiffuseMapR() const;
-	const TextureID getDiffuseMapG() const;
-	const TextureID getDiffuseMapB() const;
-	const TextureID getNormalMapR()  const;
-	const TextureID getNormalMapG()  const;
-	const TextureID getNormalMapB()  const;
-
-	// Texture paths
-	const string& getHeightMapPath()   const;
-	const string& getDiffuseMapPath()  const;
-	const string& getNormalMapPath()   const;
-	const string& getBlendMapPath()    const;
-	const string& getDiffuseMapPathR() const;
-	const string& getDiffuseMapPathG() const;
-	const string& getDiffuseMapPathB() const;
-	const string& getNormalMapPathR()  const;
-	const string& getNormalMapPathG()  const;
-	const string& getNormalMapPathB()  const;
+	// Strings
+	const string& getHeightMapPath();
+	const string& getDiffuseMapPath();
+	const string& getNormalMapPath();
+	const string& getBlendMapPath();
+	const string& getDiffuseMapPathR();
+	const string& getDiffuseMapPathG();
+	const string& getDiffuseMapPathB();
+	const string& getNormalMapPathR();
+	const string& getNormalMapPathG();
+	const string& getNormalMapPathB();
 
 	// Vectors
 	vector<Vec3>& getVertices();
@@ -69,69 +64,86 @@ public:
 	vector<Vec3>& getNormals();
 
 	// Floats
-	const float getBlendRepeatR() const;
-	const float getBlendRepeatG() const;
-	const float getBlendRepeatB() const;
-	const float getUvRepeat()     const;
-	const float getSize()         const;
-	const float getMaxHeight()    const;
-	const float getLightness()    const;
-	const float getSpecularLightingFactor() const;
-	const float getSpecularLightingIntensity() const;
+	const vector<float>& getPixelValues();
+	const float getBlendRepeatR();
+	const float getBlendRepeatG();
+	const float getBlendRepeatB();
+	const float getUvRepeat();
+	const float getSize();
+	const float getMaxHeight();
+	const float getLightness();
+	const float getSpecularLightingFactor();
+	const float getSpecularLightingIntensity();
 
 	// Booleans
-	const bool isSpecularLighted() const;
-	const bool isWireFramed()	   const;
-	const bool hasDiffuseMap()	   const;
-	const bool hasNormalMap()	   const;
-	const bool hasBlendMap()	   const;
-	const bool hasDiffuseMapR()	   const;
-	const bool hasDiffuseMapG()	   const;
-	const bool hasDiffuseMapB()	   const;
-	const bool hasNormalMapR()	   const;
-	const bool hasNormalMapG()	   const;
-	const bool hasNormalMapB()	   const;
+	const bool isSpecularLighted();
+	const bool isWireFramed();
+	const bool hasRenderBuffer();
+	const bool hasDiffuseMap();
+	const bool hasNormalMap();
+	const bool hasBlendMap();
+	const bool hasDiffuseMapR();
+	const bool hasDiffuseMapG();
+	const bool hasDiffuseMapB();
+	const bool hasNormalMapR();
+	const bool hasNormalMapG();
+	const bool hasNormalMapB();
 
 	// Miscellaneous
-	const vector<float>& getPixelValues() const;
+	const shared_ptr<RenderBuffer> getRenderBuffer();
+	const TextureID getDiffuseMap();
+	const TextureID getNormalMap();
+	const TextureID getBlendMap();
+	const TextureID getDiffuseMapR();
+	const TextureID getDiffuseMapG();
+	const TextureID getDiffuseMapB();
+	const TextureID getNormalMapR();
+	const TextureID getNormalMapG();
+	const TextureID getNormalMapB();
 
 private:
-	vector<float> _pixelValues;
+	// Vectors
 	vector<Vec3> _vertices;
-	vector<Vec2> _uvCoords;
 	vector<Vec3> _normals;
+	vector<Vec2> _uvCoords;
 
-	TextureID _diffuseMap = 0;
-	TextureID _normalMap  = 0;
-	TextureID _blendMap   = 0;
-	TextureID _diffuseMapR  = 0;
-	TextureID _diffuseMapG  = 0;
-	TextureID _diffuseMapB  = 0;
-	TextureID _normalMapR = 0;
-	TextureID _normalMapG = 0;
-	TextureID _normalMapB = 0;
-
-	string _heightMapPath  = "";
+	// Strings
+	string _heightMapPath = "";
 	string _diffuseMapPath = "";
-	string _normalMapPath  = "";
-	string _blendMapPath   = "";
-	string _diffuseMapPathR  = "";
-	string _diffuseMapPathG  = "";
-	string _diffuseMapPathB  = "";
+	string _normalMapPath = "";
+	string _blendMapPath = "";
+	string _diffuseMapPathR = "";
+	string _diffuseMapPathG = "";
+	string _diffuseMapPathB = "";
 	string _normalMapPathR = "";
 	string _normalMapPathG = "";
 	string _normalMapPathB = "";
 
+	// Floats
+	vector<float> _pixelValues;
 	float _blendRepeatR = 1.0f;
 	float _blendRepeatG = 1.0f;
 	float _blendRepeatB = 1.0f;
-	float _uvRepeat		= 1.0f;
-	float _maxHeight    = 1.0f;
-	float _size         = 0.0f;
-	float _lightness    = 1.0f;
+	float _uvRepeat = 1.0f;
+	float _maxHeight = 1.0f;
+	float _size = 0.0f;
+	float _lightness = 1.0f;
 	float _specularLightingFactor = 1.0f;
 	float _specularLightingIntensity = 0.0f;
 
+	// Booleans
 	bool _isSpecularLighted = false;
 	bool _isWireFramed = false;
+
+	// Miscellaneous
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+	TextureID _diffuseMap = 0;
+	TextureID _normalMap = 0;
+	TextureID _blendMap = 0;
+	TextureID _diffuseMapR = 0;
+	TextureID _diffuseMapG = 0;
+	TextureID _diffuseMapB = 0;
+	TextureID _normalMapR = 0;
+	TextureID _normalMapG = 0;
+	TextureID _normalMapB = 0;
 };

@@ -7,7 +7,7 @@ void TextEntity::setDynamic(bool value)
 
 void TextEntity::deleteCharacterEntities()
 {
-	_characters.clear();
+	_characterEntities.clear();
 }
 
 void TextEntity::updateCharacterEntities()
@@ -18,7 +18,7 @@ void TextEntity::updateCharacterEntities()
 	unsigned int index = 0;
 	
 	// Update every character
-	for (const auto& character : _characters)
+	for (const auto& character : _characterEntities)
 	{
 		// Temporary values
 		float xCharOffset = static_cast<float>(index) * xCharSize;
@@ -53,7 +53,7 @@ void TextEntity::updateCharacterEntities()
 
 void TextEntity::addCharacterEntity(shared_ptr<ImageEntity> character)
 {
-	_characters.push_back(character);
+	_characterEntities.push_back(character);
 }
 
 void TextEntity::setTextContent(const string& text)
@@ -71,17 +71,17 @@ bool TextEntity::isDynamic()
 	return _isDynamic;
 }
 
-const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities() const
+const vector<shared_ptr<ImageEntity>>& TextEntity::getCharacterEntities()
 {
-	return _characters;
+	return _characterEntities;
 }
 
-const string& TextEntity::getTextContent() const
+const string& TextEntity::getTextContent()
 {
 	return _textContent;
 }
 
-const string& TextEntity::getFontPath() const
+const string& TextEntity::getFontPath()
 {
 	return _fontPath;
 }

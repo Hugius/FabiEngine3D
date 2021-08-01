@@ -1,16 +1,22 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "render_buffer.hpp"
 #include "reflection_type.hpp"
+
+#include <memory>
+
+using std::shared_ptr;
 
 class ModelEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
 	
-	// Setters
+	// Voids
 	void addPart(const string& ID);
 	void updateModelMatrix();
+	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer, const string& partID = "");
 	void setDiffuseMap(TextureID value, const string& partID = "");
 	void setEmissionMap(TextureID value, const string& partID = "");
 	void setReflectionMap(TextureID value, const string& partID = "");
@@ -47,20 +53,8 @@ public:
 	void setBright(bool value);
 	void setReflectionType(ReflectionType value);
 	void clearParts();
-	
-	// Getters
-	const Matrix44& getModelMatrix(const string& partID = "");
-	const TextureID getDiffuseMap(const string& partID = "");
-	const TextureID getEmissionMap(const string& partID = "");
-	const TextureID getReflectionMap(const string& partID = "");
-	const TextureID getNormalMap(const string& partID = "");
-	const Vec3 getPosition(const string& partID = "");
-	const Vec3 getRotation(const string& partID = "");
-	const Vec3 getRotationOrigin(const string& partID = "");
-	const Vec3 getSize(const string& partID = "");
-	const Vec3 getLevelOfDetailSize();
-	const Vec3 getColor(const string& partID = "");
-	const float getInversion(const string& partID = "");
+
+	// Strings
 	const vector<string> getPartIDs();
 	const string& getMeshPath();
 	const string& getDiffuseMapPath(const string& partID = "");
@@ -68,6 +62,20 @@ public:
 	const string& getReflectionMapPath(const string& partID = "");
 	const string& getNormalMapPath(const string& partID = "");
 	const string& getLodEntityID();
+
+	// Matrices
+	const Matrix44& getModelMatrix(const string& partID = "");
+
+	// Vectors
+	const Vec3 getPosition(const string& partID = "");
+	const Vec3 getRotation(const string& partID = "");
+	const Vec3 getRotationOrigin(const string& partID = "");
+	const Vec3 getSize(const string& partID = "");
+	const Vec3 getLevelOfDetailSize();
+	const Vec3 getColor(const string& partID = "");
+
+	// Floats
+	const float getInversion(const string& partID = "");
 	const float getLightness();
 	const float getSpecularFactor();
 	const float getSpecularIntensity();
@@ -75,6 +83,8 @@ public:
 	const float getUvRepeat();
 	const float getMinHeight();
 	const float getMaxHeight();
+
+	// Booleans
 	const bool isTransparent();
 	const bool isFaceCulled();
 	const bool isSpecularLighted();
@@ -85,10 +95,18 @@ public:
 	const bool isLevelOfDetailed();
 	const bool isWireFramed();
 	const bool isBright();
+	const bool hasRenderBuffer(const string& partID = "");
 	const bool hasDiffuseMap(const string& partID = "");
 	const bool hasEmissionMap(const string& partID = "");
 	const bool hasReflectionMap(const string& partID = "");
 	const bool hasNormalMap(const string& partID = "");
+
+	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID = "");
+	const TextureID getDiffuseMap(const string& partID = "");
+	const TextureID getEmissionMap(const string& partID = "");
+	const TextureID getReflectionMap(const string& partID = "");
+	const TextureID getNormalMap(const string& partID = "");
 	const ReflectionType getReflectionType();
 
 private:
@@ -106,6 +124,8 @@ private:
 		string emissionMapPath = "";
 		string reflectionMapPath = "";
 		string normalMapPath = "";
+
+		shared_ptr<RenderBuffer> renderBuffer = nullptr;
 
 		Matrix44 modelMatrix = Matrix44(1.0f);
 

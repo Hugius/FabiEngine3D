@@ -57,7 +57,7 @@ void main()
 	// Out variables
 	f_pos       = worldSpacePos.xyz;
 	f_uv        = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
-	f_normal    = normalize(mat3(u_normalModelMatrix) * v_normal);
+	f_normal    = normalize(u_normalModelMatrix * v_normal);
 	f_shadowPos = u_shadowMatrix * worldSpacePos;
 	f_clip      = clipSpacePos;
     f_tbnMatrix = calculateTbnMatrix();

@@ -1,96 +1,96 @@
 #include "terrain_entity.hpp"
 
-const TextureID TerrainEntity::getDiffuseMap() const
+const TextureID TerrainEntity::getDiffuseMap()
 {
 	return _diffuseMap;
 }
 
-const TextureID TerrainEntity::getNormalMap() const
+const TextureID TerrainEntity::getNormalMap()
 {
 	return _normalMap;
 }
 
-const TextureID TerrainEntity::getBlendMap() const
+const TextureID TerrainEntity::getBlendMap()
 {
 	return _blendMap;
 }
 
-const TextureID TerrainEntity::getDiffuseMapR() const
+const TextureID TerrainEntity::getDiffuseMapR()
 {
 	return _diffuseMapR;
 }
 
-const TextureID TerrainEntity::getDiffuseMapG() const
+const TextureID TerrainEntity::getDiffuseMapG()
 {
 	return _diffuseMapG;
 }
 
-const TextureID TerrainEntity::getDiffuseMapB() const
+const TextureID TerrainEntity::getDiffuseMapB()
 {
 	return _diffuseMapB;
 }
 
-const TextureID TerrainEntity::getNormalMapR() const
+const TextureID TerrainEntity::getNormalMapR()
 {
 	return _normalMapR;
 }
 
-const TextureID TerrainEntity::getNormalMapG() const
+const TextureID TerrainEntity::getNormalMapG()
 {
 	return _normalMapG;
 }
 
-const TextureID TerrainEntity::getNormalMapB() const
+const TextureID TerrainEntity::getNormalMapB()
 {
 	return _normalMapB;
 }
 
-const string& TerrainEntity::getHeightMapPath() const
+const string& TerrainEntity::getHeightMapPath()
 {
 	return _heightMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPath() const
+const string& TerrainEntity::getDiffuseMapPath()
 {
 	return _diffuseMapPath;
 }
 
-const string& TerrainEntity::getNormalMapPath() const
+const string& TerrainEntity::getNormalMapPath()
 {
 	return _normalMapPath;
 }
 
-const string& TerrainEntity::getBlendMapPath() const
+const string& TerrainEntity::getBlendMapPath()
 {
 	return _blendMapPath;
 }
 
-const string& TerrainEntity::getDiffuseMapPathR() const
+const string& TerrainEntity::getDiffuseMapPathR()
 {
 	return _diffuseMapPathR;
 }
 
-const string& TerrainEntity::getDiffuseMapPathG() const
+const string& TerrainEntity::getDiffuseMapPathG()
 {
 	return _diffuseMapPathG;
 }
 
-const string& TerrainEntity::getDiffuseMapPathB() const
+const string& TerrainEntity::getDiffuseMapPathB()
 {
 	return _diffuseMapPathB;
 }
 
-const string& TerrainEntity::getNormalMapPathR() const
+const string& TerrainEntity::getNormalMapPathR()
 {
 	return _normalMapPathR;
 }
 
-const string& TerrainEntity::getNormalMapPathG() const
+const string& TerrainEntity::getNormalMapPathG()
 {
 	return _normalMapPathG;
 }
 
-const string& TerrainEntity::getNormalMapPathB() const
+const string& TerrainEntity::getNormalMapPathB()
 {
 	return _normalMapPathB;
 }
@@ -110,107 +110,117 @@ vector<Vec3>& TerrainEntity::getNormals()
 	return _normals;
 }
 
-const float TerrainEntity::getUvRepeat() const
+const float TerrainEntity::getUvRepeat()
 {
 	return _uvRepeat;
 }
 
-const float TerrainEntity::getBlendRepeatR() const
+const float TerrainEntity::getBlendRepeatR()
 {
 	return _blendRepeatR;
 }
 
-const float TerrainEntity::getBlendRepeatG() const
+const float TerrainEntity::getBlendRepeatG()
 {
 	return _blendRepeatG;
 }
 
-const float TerrainEntity::getBlendRepeatB() const
+const float TerrainEntity::getBlendRepeatB()
 {
 	return _blendRepeatB;
 }
 
-const float TerrainEntity::getSize() const
+const float TerrainEntity::getSize()
 {
 	return _size;
 }
 
-const float TerrainEntity::getMaxHeight() const
+const float TerrainEntity::getMaxHeight()
 {
 	return _maxHeight;
 }
 
-const float TerrainEntity::getLightness() const
+const float TerrainEntity::getLightness()
 {
 	return _lightness;
 }
 
-const float TerrainEntity::getSpecularLightingFactor() const
+const float TerrainEntity::getSpecularLightingFactor()
 {
 	return _specularLightingFactor;
 }
 
-const float TerrainEntity::getSpecularLightingIntensity() const
+const float TerrainEntity::getSpecularLightingIntensity()
 {
 	return _specularLightingIntensity;
 }
 
-const vector<float>& TerrainEntity::getPixelValues() const
+const shared_ptr<RenderBuffer> TerrainEntity::getRenderBuffer()
+{
+	return _renderBuffer;
+}
+
+const vector<float>& TerrainEntity::getPixelValues()
 {
 	return _pixelValues;
 }
 
-const bool TerrainEntity::isSpecularLighted() const
+const bool TerrainEntity::isSpecularLighted()
 {
 	return _isSpecularLighted;
 }
 
-const bool TerrainEntity::isWireFramed() const
+const bool TerrainEntity::isWireFramed()
 {
 	return _isWireFramed;
 }
 
-const bool TerrainEntity::hasDiffuseMap() const
+const bool TerrainEntity::hasRenderBuffer()
+{
+	return (_renderBuffer != nullptr);
+}
+
+const bool TerrainEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
 }
 
-const bool TerrainEntity::hasNormalMap() const
+const bool TerrainEntity::hasNormalMap()
 {
 	return (_normalMap != 0);
 }
 
-const bool TerrainEntity::hasBlendMap() const
+const bool TerrainEntity::hasBlendMap()
 {
 	return (_blendMap != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapR() const
+const bool TerrainEntity::hasDiffuseMapR()
 {
 	return (_diffuseMapR != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapG() const
+const bool TerrainEntity::hasDiffuseMapG()
 {
 	return (_diffuseMapG != 0);
 }
 
-const bool TerrainEntity::hasDiffuseMapB() const
+const bool TerrainEntity::hasDiffuseMapB()
 {
 	return (_diffuseMapB != 0);
 }
 
-const bool TerrainEntity::hasNormalMapR() const
+const bool TerrainEntity::hasNormalMapR()
 {
 	return (_normalMapR != 0);
 }
 
-const bool TerrainEntity::hasNormalMapG() const
+const bool TerrainEntity::hasNormalMapG()
 {
 	return (_normalMapG != 0);
 }
 
-const bool TerrainEntity::hasNormalMapB() const
+const bool TerrainEntity::hasNormalMapB()
 {
 	return (_normalMapB != 0);
 }

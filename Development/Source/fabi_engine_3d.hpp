@@ -269,7 +269,7 @@ public:
 	void modelEntity_delete(const string& ID);
 	void modelEntity_deleteGroup(const string& ID);
 	void modelEntity_setVisible(const string& ID, bool isVisible);
-	void modelEntity_loadModel(const string& ID, const string& meshPath);
+	void modelEntity_loadMesh(const string& ID, const string& meshPath);
 	void modelEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void modelEntity_setEmissionMap(const string& ID, const string& texturePath);
 	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);

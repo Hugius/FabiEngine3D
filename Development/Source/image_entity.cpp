@@ -12,6 +12,11 @@ void ImageEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
+void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+{
+	_renderBuffer = renderBuffer;
+}
+
 void ImageEntity::setDiffuseMap(TextureID value)
 {
 	_diffuseMap = value;
@@ -191,127 +196,137 @@ void ImageEntity::increaseSpriteAnimationLoops()
 	_spriteAnimationLoops++;
 }
 
-const bool ImageEntity::isSpriteAnimationStarted() const
+const bool ImageEntity::isSpriteAnimationStarted()
 {
 	return _isSpriteAnimationStarted;
 }
 
-const bool ImageEntity::isSpriteAnimationPaused() const
+const bool ImageEntity::isSpriteAnimationPaused()
 {
 	return _isSpriteAnimationPaused;
 }
 
-const int ImageEntity::getPassedSpriteAnimationFrames() const
+const int ImageEntity::getPassedSpriteAnimationFrames()
 {
 	return _passedSpriteAnimationFrames;
 }
 
-const int ImageEntity::getMaxSpriteAnimationFramestep() const
+const int ImageEntity::getMaxSpriteAnimationFramestep()
 {
 	return _maxSpriteAnimationFramestep;
 }
 
-const int ImageEntity::getTotalSpriteAnimationRows() const
+const int ImageEntity::getTotalSpriteAnimationRows()
 {
 	return _totalSpriteAnimationRows;
 }
 
-const int ImageEntity::getTotalSpriteAnimationColumns() const
+const int ImageEntity::getTotalSpriteAnimationColumns()
 {
 	return _totalSpriteAnimationColumns;
 }
 
-const int ImageEntity::getSpriteAnimationRowIndex() const
+const int ImageEntity::getSpriteAnimationRowIndex()
 {
 	return _spriteAnimationRowIndex;
 }
 
-const int ImageEntity::getSpriteAnimationColumnIndex() const
+const int ImageEntity::getSpriteAnimationColumnIndex()
 {
 	return _spriteAnimationColumnIndex;
 }
 
-const int ImageEntity::getSpriteAnimationLoops() const
+const int ImageEntity::getSpriteAnimationLoops()
 {
 	return _spriteAnimationLoops;
 }
 
-const int ImageEntity::getMaxSpriteAnimationLoops() const
+const int ImageEntity::getMaxSpriteAnimationLoops()
 {
 	return _maxSpriteAnimationLoops;
 }
 
-const TextureID ImageEntity::getDiffuseMap() const
+const bool ImageEntity::hasRenderBuffer()
+{
+	return (_renderBuffer != nullptr);
+}
+
+const shared_ptr<RenderBuffer> ImageEntity::getRenderBuffer()
+{
+	return _renderBuffer;
+}
+
+const TextureID ImageEntity::getDiffuseMap()
 {
 	return _diffuseMap;
 }
 
-const string& ImageEntity::getDiffuseMapPath() const
+const string& ImageEntity::getDiffuseMapPath()
 {
 	return _diffuseMapPath;
 }
 
-const Vec3 ImageEntity::getColor() const
+const Vec3 ImageEntity::getColor()
 {
 	return _color;
 }
 
-const float ImageEntity::getAlpha() const
+const float ImageEntity::getAlpha()
 {
 	return _alpha;
 }
 
-const bool ImageEntity::isMirroredHorizonally() const
+const bool ImageEntity::isMirroredHorizonally()
 {
 	return _isMirroredHorizontally;
 }
 
-const bool ImageEntity::isMirroredVertically() const
+const bool ImageEntity::isMirroredVertically()
 {
 	return _isMirroredVertically;
 }
 
-const bool ImageEntity::hasDiffuseMap() const
+const bool ImageEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
 }
 
-const bool ImageEntity::isCentered() const
+const bool ImageEntity::isCentered()
 {
 	return _isCentered;
 }
 
-const Matrix44 ImageEntity::getModelMatrix() const
+const Matrix44 ImageEntity::getModelMatrix()
 {
 	return _modelMatrix;
 }
 
-const Vec2 ImageEntity::getPosition() const
+const Vec2 ImageEntity::getPosition()
 {
 	return _position;
 }
 
-const float ImageEntity::getRotation() const
+const float ImageEntity::getRotation()
 {
 	return _rotation;
 }
 
-const Vec2 ImageEntity::getSize() const
+const Vec2 ImageEntity::getSize()
 {
 	return _size;
 }
 
-const Vec2 ImageEntity::getMinPosition() const
+const Vec2 ImageEntity::getMinPosition()
 {
 	return _minPosition;
 }
 
-const Vec2 ImageEntity::getMaxPosition() const
+const Vec2 ImageEntity::getMaxPosition()
 {
 	return _maxPosition;
 }
 
-const unsigned int ImageEntity::getDepth() const
+const unsigned int ImageEntity::getDepth()
 {
 	return _depth;
 }
@@ -321,7 +336,7 @@ void ImageEntity::setPerspectiveDepthEntity(bool value)
 	_isPerspectiveDepthEntity = value;
 }
 
-const bool ImageEntity::isPerspectiveDepthEntity() const
+const bool ImageEntity::isPerspectiveDepthEntity()
 {
 	return _isPerspectiveDepthEntity;
 }

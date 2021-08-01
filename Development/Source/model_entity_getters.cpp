@@ -1,6 +1,11 @@
 #include "model_entity.hpp"
 #include "logger.hpp"
 
+const shared_ptr<RenderBuffer> ModelEntity::getRenderBuffer(const string& partID)
+{
+	return _parts[_getPartIndex(partID)].renderBuffer;
+}
+
 const Matrix44& ModelEntity::getModelMatrix(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].modelMatrix;
@@ -264,6 +269,25 @@ const ReflectionType ModelEntity::getReflectionType()
 const bool ModelEntity::isBright()
 {
 	return _isBright;
+}
+
+const bool ModelEntity::hasRenderBuffer(const string& partID)
+{
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.renderBuffer != nullptr)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].renderBuffer != nullptr);
+	}
 }
 
 const bool ModelEntity::isCameraStatic()

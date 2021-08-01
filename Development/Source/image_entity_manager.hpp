@@ -6,7 +6,6 @@ class ImageEntityManager final : public BaseEntityManager
 {
 public:
 	ImageEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~ImageEntityManager();
 
 	shared_ptr<ImageEntity> getEntity(const string& ID);
 
@@ -18,6 +17,6 @@ public:
 	void updateSpriteAnimations();
 
 private:
-	RenderBuffer* _centeredRenderBuffer = nullptr;
-	RenderBuffer* _nonCenteredRenderBuffer = nullptr;
+	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
+	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 };

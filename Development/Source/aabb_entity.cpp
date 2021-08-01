@@ -65,6 +65,11 @@ void AabbEntity::scale(Vec3 value)
 	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
 }
 
+void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+{
+	_renderBuffer = renderBuffer;
+}
+
 void AabbEntity::setLocalPosition(Vec3 value)
 {
 	_localPosition = value;
@@ -76,62 +81,72 @@ void AabbEntity::setLocalSize(Vec3 value)
 	_localSize = Vec3(std::max(0.0f, _localSize.x), std::max(0.0f, _localSize.y), std::max(0.0f, _localSize.z));
 }
 
-const Matrix44 & AabbEntity::getModelMatrix() const
+const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()
+{
+	return _renderBuffer;
+}
+
+const Matrix44 & AabbEntity::getModelMatrix()
 {
 	return _modelMatrix;
 }
 
-const Vec3 AabbEntity::getLocalPosition() const
+const Vec3 AabbEntity::getLocalPosition()
 {
 	return _localPosition;
 }
 
-const Vec3 AabbEntity::getLocalSize() const
+const Vec3 AabbEntity::getLocalSize()
 {
 	return _localSize;
 }
 
-const Vec3 AabbEntity::getPosition() const
+const Vec3 AabbEntity::getPosition()
 {
 	return _position;
 }
 
-const Vec3 AabbEntity::getSize() const
+const Vec3 AabbEntity::getSize()
 {
 	return _size;
 }
 
-const string& AabbEntity::getParentID() const
+const string& AabbEntity::getParentID()
 {
 	return _parentID;
 }
 
-const AabbParentType AabbEntity::getParentType() const
+const AabbParentType AabbEntity::getParentType()
 {
 	return _parentType;
 }
 
-const Direction AabbEntity::getCollisionDirection() const
+const Direction AabbEntity::getCollisionDirection()
 {
 	return _collisionDirection;
 }
 
-const bool AabbEntity::isRaycastResponsive() const
+const bool AabbEntity::isRaycastResponsive()
 {
 	return _isRaycastResponsive;
 }
 
-const bool AabbEntity::isCollisionResponsive() const
+const bool AabbEntity::isCollisionResponsive()
 {
 	return _isCollisionResponsive;
 }
 
-const bool AabbEntity::hasParent() const
+const bool AabbEntity::hasParent()
 {
 	return !_parentID.empty();
 }
 
-const bool AabbEntity::hasCollided() const
+const bool AabbEntity::hasCollided()
 {
 	return _hasCollided;
+}
+
+const bool AabbEntity::hasRenderBuffer()
+{
+	return (_renderBuffer != nullptr);
 }

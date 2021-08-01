@@ -65,23 +65,20 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 
 void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, TextureID texture)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
-	{
-		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
+	// Bind textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
-		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+	// Bind buffer
+	glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+	// Render
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
-		// Unbind buffer
-		glBindVertexArray(0);
+	// Unbind buffer
+	glBindVertexArray(0);
 
-		// Unbind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+	// Unbind textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

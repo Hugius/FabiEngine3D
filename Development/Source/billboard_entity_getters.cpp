@@ -1,172 +1,181 @@
 #include "billboard_entity.hpp"
-#include "logger.hpp"
 
-const Matrix44 & BillboardEntity::getModelMatrix() const
+const shared_ptr<RenderBuffer> BillboardEntity::getRenderBuffer()
+{
+	return _renderBuffer;
+}
+
+const Matrix44 & BillboardEntity::getModelMatrix()
 {
 	return _modelMatrix;
 }
 
-const TextureID BillboardEntity::getDiffuseMap() const
+const TextureID BillboardEntity::getDiffuseMap()
 {
 	return _diffuseMap;
 }
 
-const Vec3 BillboardEntity::getPosition() const
+const Vec3 BillboardEntity::getPosition()
 {
 	return _position;
 }
 
-const Vec3 BillboardEntity::getInitialRotation() const
+const Vec3 BillboardEntity::getInitialRotation()
 {
 	return _initialRotation;
 }
 
-const Vec3 BillboardEntity::getRotation() const
+const Vec3 BillboardEntity::getRotation()
 {
 	return _rotation;
 }
 
-const Vec3 BillboardEntity::getSize() const
+const Vec3 BillboardEntity::getSize()
 {
 	return _size;
 }
 
-const Vec3 BillboardEntity::getColor() const
+const Vec3 BillboardEntity::getColor()
 {
 	return _color;
 }
 
-const string& BillboardEntity::getTextContent() const
+const string& BillboardEntity::getTextContent()
 {
 	return _textContent;
 }
 
-const string& BillboardEntity::getFontPath() const
+const string& BillboardEntity::getFontPath()
 {
 	return _fontPath;
 }
 
-const string& BillboardEntity::getDiffuseMapPath() const
+const string& BillboardEntity::getDiffuseMapPath()
 {
 	return _diffuseMapPath;
 }
 
-const float BillboardEntity::getLightness() const
+const float BillboardEntity::getLightness()
 {
 	return _lightness;
 }
 
-const float BillboardEntity::getInversion() const
+const float BillboardEntity::getInversion()
 {
 	return _inversion;
 }
 
-const float BillboardEntity::getAlpha() const
+const float BillboardEntity::getAlpha()
 {
 	return _alpha;
 }
 
-const float BillboardEntity::getMinHeight() const
+const float BillboardEntity::getMinHeight()
 {
 	return _minHeight;
 }
 
-const float BillboardEntity::getMaxHeight() const
+const float BillboardEntity::getMaxHeight()
 {
 	return _maxHeight;
 }
 
-const unsigned int BillboardEntity::getPassedSpriteAnimationFrames() const
+const unsigned int BillboardEntity::getPassedSpriteAnimationFrames()
 {
 	return _passedSpriteAnimationFrames;
 }
 
-const unsigned int BillboardEntity::getMaxSpriteAnimationFramestep() const
+const unsigned int BillboardEntity::getMaxSpriteAnimationFramestep()
 {
 	return _maxSpriteAnimationFramestep;
 }
 
-const unsigned int BillboardEntity::getTotalSpriteAnimationRows() const
+const unsigned int BillboardEntity::getTotalSpriteAnimationRows()
 {
 	return _totalSpriteAnimationRows;
 }
 
-const unsigned int BillboardEntity::getTotalSpriteAnimationColumns() const
+const unsigned int BillboardEntity::getTotalSpriteAnimationColumns()
 {
 	return _totalSpriteAnimationColumns;
 }
 
-const unsigned int BillboardEntity::getSpriteAnimationRowIndex() const
+const unsigned int BillboardEntity::getSpriteAnimationRowIndex()
 {
 	return _spriteAnimationRowIndex;
 }
 
-const unsigned int BillboardEntity::getSpriteAnimationColumnIndex() const
+const unsigned int BillboardEntity::getSpriteAnimationColumnIndex()
 {
 	return _spriteAnimationColumnIndex;
 }
 
-const unsigned int BillboardEntity::getSpriteAnimationLoops() const
+const unsigned int BillboardEntity::getSpriteAnimationLoops()
 {
 	return _spriteAnimationLoops;
 }
 
-const int BillboardEntity::getMaxSpriteAnimationLoops() const
+const int BillboardEntity::getMaxSpriteAnimationLoops()
 {
 	return _maxSpriteAnimationLoops;
 }
 
-const bool BillboardEntity::isTransparent() const
+const bool BillboardEntity::isTransparent()
 {
 	return _isTransparent;
 }
 
-const bool BillboardEntity::isSpriteAnimationStarted() const
+const bool BillboardEntity::isSpriteAnimationStarted()
 {
 	return _isSpriteAnimationStarted;
 }
 
-const bool BillboardEntity::isSpriteAnimationPaused() const
+const bool BillboardEntity::isSpriteAnimationPaused()
 {
 	return _isSpriteAnimationPaused;
 }
 
-const bool BillboardEntity::isFacingCameraX() const
+const bool BillboardEntity::isFacingCameraX()
 {
 	return _isFacingCameraX;
 }
 
-const bool BillboardEntity::isFacingCameraY() const
+const bool BillboardEntity::isFacingCameraY()
 {
 	return _isFacingCameraY;
 }
 
-const bool BillboardEntity::isDepthMapIncluded() const
+const bool BillboardEntity::isDepthMapIncluded()
 {
 	return _isDepthMapIncluded;
 }
 
-const bool BillboardEntity::isShadowed() const
+const bool BillboardEntity::isShadowed()
 {
 	return _isShadowed;
 }
 
-const bool BillboardEntity::isReflected() const
+const bool BillboardEntity::isReflected()
 {
 	return _isReflected;
 }
 
-const bool BillboardEntity::isBright() const
+const bool BillboardEntity::isBright()
 {
 	return _isBright;
 }
 
-const bool BillboardEntity::isWireFramed() const
+const bool BillboardEntity::isWireFramed()
 {
 	return _isWireFramed;
 }
 
-const bool BillboardEntity::hasDiffuseMap() const
+const bool BillboardEntity::hasRenderBuffer()
+{
+	return (_renderBuffer != nullptr);
+}
+
+const bool BillboardEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
 }

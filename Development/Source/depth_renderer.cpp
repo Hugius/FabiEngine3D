@@ -38,8 +38,11 @@ void DepthRenderer::unbind()
 
 void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
+		// Temporary values
+		auto buffer = entity->getRenderBuffer();
+
 		// Enable face culling
 		glEnable(GL_CULL_FACE);
 
@@ -55,10 +58,10 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_isUnderWater", false);
 
 		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(buffer->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
 		// Unbind buffer
 		glBindVertexArray(0);
@@ -70,7 +73,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasLowQualityRenderBuffer() && entity->isVisible())
 	{
 		// Model matrix
 		Matrix44 modelMatrix = Matrix44::createTranslation(entity->getPosition().x, entity->getPosition().y, entity->getPosition().z);
@@ -85,10 +88,10 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
 
 		// Bind buffer
-		glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
+		glBindVertexArray(entity->getLowQualityRenderBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityRenderBuffer()->getVertexCount());
 
 		// Unbind buffer
 		glBindVertexArray(0);
@@ -97,13 +100,16 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 
 void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Enable face culling
 		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);
 		}
+
+		// View matrix
+		auto viewMatrix = (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix());
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
@@ -114,24 +120,17 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
-		if (entity->isCameraStatic())
-		{
-			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
-		}
-		else
-		{
-			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-		}
+		_shader.uploadUniform("u_viewMatrix", viewMatrix);
 
 		// Iterate through parts
-		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
+		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto partID = entity->getPartIDs()[i];
-			auto buffer = entity->getRenderBuffers()[i];
+			auto buffer = entity->getRenderBuffer(partID);
 
 			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
+			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -146,12 +145,11 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 			// Render
 			if (buffer->isInstanced())
 			{
-				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getInstancedOffsetCount());
+				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
 			}
 			else
 			{
-				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
@@ -176,15 +174,25 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 
 void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
+		// Temporary values
+		auto buffer = entity->getRenderBuffer();
+
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->isSpriteAnimationStarted())
 		{
-			uvMultiplier = Vec2(1.0f / static_cast<float>(entity->getTotalSpriteAnimationColumns()), 1.0f / static_cast<float>(entity->getTotalSpriteAnimationRows()));
-			uvAdder = Vec2(static_cast<float>(entity->getSpriteAnimationColumnIndex()) * uvMultiplier.x, static_cast<float>(entity->getSpriteAnimationRowIndex()) * uvMultiplier.y);
+			// Retrieve values
+			const auto totalColumns = entity->getTotalSpriteAnimationColumns();
+			const auto totalRows = entity->getTotalSpriteAnimationRows();
+			const auto columnIndex = entity->getSpriteAnimationColumnIndex();
+			const auto rowIndex = entity->getSpriteAnimationRowIndex();
+
+			// Apply values
+			uvMultiplier = Vec2(1.0f / static_cast<float>(totalColumns), 1.0f / static_cast<float>(totalRows));
+			uvAdder = Vec2(static_cast<float>(columnIndex) * uvMultiplier.x, static_cast<float>(rowIndex) * uvMultiplier.y);
 		}
 
 		// Shader uniforms
@@ -194,12 +202,12 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
+		_shader.uploadUniform("u_isUnderWater", isUnderWater);
+		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
-		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 
 		// Bind textures
 		if (entity->hasDiffuseMap())
@@ -209,21 +217,11 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		}
 
 		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(buffer->getVAO());
 
 		// Render
-		if (entity->getRenderBuffer()->isInstanced()) // Instanced
-		{
-			_shader.uploadUniform("u_isInstanced", true);
-			glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount(), entity->getRenderBuffer()->getInstancedOffsetCount());
-			_renderBus.increaseTriangleCount((entity->getRenderBuffer()->getInstancedOffsetCount() * entity->getRenderBuffer()->getVertexCount()) / 3);
-		}
-		else // Non-instanced
-		{
-			_shader.uploadUniform("u_isInstanced", false);
-			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
-		}
+		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		// Unbind buffer
 		glBindVertexArray(0);
@@ -239,8 +237,11 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 
 void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
+		// Temporary values
+		auto buffer = entity->getRenderBuffer();
+
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_currentY", entity->getPosition().y);
@@ -253,10 +254,10 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 
 		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(buffer->getVAO());
 
 		// Render
-		glDrawArrays(GL_LINE_STRIP, 0, entity->getRenderBuffer()->getVertexCount());
+		glDrawArrays(GL_LINE_STRIP, 0, buffer->getVertexCount());
 
 		// Unbind buffer
 		glBindVertexArray(0);

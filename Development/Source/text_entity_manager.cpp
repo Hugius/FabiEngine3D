@@ -1,20 +1,13 @@
 #include "text_entity_manager.hpp"
 #include "logger.hpp"
 
-using std::make_shared;
-
 TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::TEXT, meshLoader, texLoader, renderBus),
-	_centeredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
-	_nonCenteredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
+	_centeredRenderBuffer(std::make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
+	_nonCenteredRenderBuffer(std::make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
 
-}
-
-TextEntityManager::~TextEntityManager()
-{
-	delete _nonCenteredRenderBuffer;
 }
 
 shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
@@ -70,7 +63,7 @@ void TextEntityManager::createEntity
 	}
 	else // Load static text as a whole
 	{
-		entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
+		entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 		entity->setDiffuseMap(_textureLoader.getText(textContent, entity->getFontPath()));
 		entity->updateModelMatrix();
 	}
@@ -94,8 +87,8 @@ void TextEntityManager::reloadCharacters(const string& ID)
 			if (!invalidFont)
 			{
 				// Create new character entity
-				auto newCharacter = make_shared<ImageEntity>("uselessID");
-				newCharacter->addRenderBuffer(_nonCenteredRenderBuffer, false);
+				auto newCharacter = std::make_shared<ImageEntity>("uselessID");
+				newCharacter->setRenderBuffer(_nonCenteredRenderBuffer);
 
 				// Load text map
 				string textContent = "";

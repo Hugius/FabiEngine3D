@@ -1,14 +1,21 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "render_buffer.hpp"
 #include "water_quality.hpp"
+
+#include <memory>
+
+using std::shared_ptr;
 
 class WaterEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
 
-	// Setters
+	// Voids
+	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
 	void setQuality(WaterQuality quality);
 	void setSpeed(Vec2 value);
 	void setRippleOffset(Vec2 value);
@@ -33,58 +40,62 @@ public:
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireFramed(bool value);
-	void setSimplifiedRenderBuffer(RenderBuffer* buffer);
 
-	// Getters
-	const WaterQuality getQuality()					const;
-	const Vec2    getSpeed()					    const;
-	const Vec2    getRippleOffset()				    const;
-	const Vec2    getWaveOffset()				    const;
-	const Vec3	  getPosition()						const;
-	const Vec3    getColor()					    const;
-	const TextureID  getDudvMap()					    const;
-	const TextureID  getNormalMap()				    const;
-	const TextureID  getDisplacementMap()			    const;
-	const string& getDudvMapPath()				    const;
-	const string& getNormalMapPath()			    const;
-	const string& getDisplacementMapPath()		    const;
-	const float   getUvRepeat()					    const;
-	const float   getWaveHeight()					const;
-	const float   getSpecularLightingFactor()       const;
-	const float   getSpecularLightingIntensity()    const;
-	const float   getSize()						    const;
-	const float   getTransparency()				    const;
-	const bool    isWaving()					    const;
-	const bool    isRippling()					    const;
-	const bool    isSpecularLighted()			    const;
-	const bool    isReflective()				    const;
-	const bool    isRefractive()				    const;
-	const bool	  isWireFramed()					const;
-	const bool	  hasDudvMap()					    const;
-	const bool	  hasNormalMap()				    const;
-	const bool	  hasDisplacementMap()			    const;
-	const RenderBuffer* getSimplifiedRenderBuffer() const;
+	// Vectors
+	const Vec2 getSpeed();
+	const Vec2 getRippleOffset();
+	const Vec2 getWaveOffset();
+	const Vec3 getPosition();
+	const Vec3 getColor();
+
+	// Strings
+	const string& getDudvMapPath();
+	const string& getNormalMapPath();
+	const string& getDisplacementMapPath();
+
+	// Floats
+	const float getUvRepeat();
+	const float getWaveHeight();
+	const float getSpecularLightingFactor();
+	const float getSpecularLightingIntensity();
+	const float getSize();
+	const float getTransparency();
+
+	// Booleans
+	const bool isWaving();
+	const bool isRippling();
+	const bool isSpecularLighted();
+	const bool isReflective();
+	const bool isRefractive();
+	const bool isWireFramed();
+	const bool hasLowQualityRenderBuffer();
+	const bool hasHighQualityRenderBuffer();
+	const bool hasDudvMap();
+	const bool hasNormalMap();
+	const bool hasDisplacementMap();
+
+	// Miscellaneous
+	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
+	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
+	const WaterQuality getQuality();
+	const TextureID getDudvMap();
+	const TextureID getNormalMap();
+	const TextureID getDisplacementMap();
 
 private:
-	RenderBuffer* _simplifiedRenderBuffer = nullptr;
-
-	WaterQuality _quality = WaterQuality::SKY;
-
+	// Vectors
+	Vec3 _position = Vec3(0.0f);
+	Vec3 _color = Vec3(1.0f);
 	Vec2 _speed = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);
 	Vec2 _waveOffset = Vec2(0.0f);
 
-	Vec3 _position = Vec3(0.0f);
-	Vec3 _color = Vec3(1.0f);
-
-	TextureID _dudvMap = 0;
-	TextureID _normalMap = 0;
-	TextureID _displacementMap = 0;
-
+	// Strings
 	string _dudvMapPath = "";
 	string _normalMapPath = "";
 	string _displacementMapPath = "";
 
+	// Floats
 	float _size = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _waveHeight = 0.0f;
@@ -92,10 +103,19 @@ private:
 	float _specularLightingIntensity = 1.0f;
 	float _transparency = 0.0f;
 
+	// Booleans
 	bool _isRippling = false;
 	bool _isWaving = false;
 	bool _isSpecularLighted = false;
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireFramed = false;
+
+	// Miscellaneous
+	shared_ptr<RenderBuffer> _lowQualityRenderBuffer = nullptr;
+	shared_ptr<RenderBuffer> _highQualityRenderBuffer = nullptr;
+	WaterQuality _quality = WaterQuality::SKY;
+	TextureID _dudvMap = 0;
+	TextureID _normalMap = 0;
+	TextureID _displacementMap = 0;
 };

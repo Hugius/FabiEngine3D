@@ -187,7 +187,7 @@ const vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const strin
 {
 	if (billboardEntity_isInstanced(ID))
 	{
-		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer(0)->getInstancedOffsets();
+		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer()->getInstancedOffsets();
 	}
 	else
 	{
@@ -277,9 +277,9 @@ const bool FabiEngine3D::billboardEntity_isReflected(const string& ID)
 
 const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
 {
-	if (!_core->_billboardEntityManager.getEntity(ID)->getRenderBuffers().empty())
+	if (_core->_billboardEntityManager.getEntity(ID)->hasRenderBuffer())
 	{
-		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer(0)->isInstanced();
+		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer()->isInstanced();
 	}
 	else
 	{

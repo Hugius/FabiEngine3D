@@ -49,7 +49,6 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 	// Load mesh file
 	auto partsPointer = _meshLoader.loadMesh(meshPath, false);
 	entity->setMeshPath(meshPath);
-	entity->clearRenderBuffers();
 	entity->clearParts();
 
 	// Check if model loading failed
@@ -60,6 +59,7 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 		return;
 	}
 	
+	// Dereference parts pointer
 	auto parts = *partsPointer;
 
 	// Check if multiparted model actually has multiple parts
@@ -96,11 +96,11 @@ void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
 			bufferData.push_back(part.normals[i].z);
 		}
 
-		// Load renderbuffer
-		entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
-
 		// New model part
 		entity->addPart(part.ID);
+
+		// Render buffer
+		entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
 
 		// Diffuse map
 		if (part.diffuseMapPath != "")
@@ -188,15 +188,14 @@ void ModelEntityManager::_loadNormalMapping(const string& ID)
 	auto entity = getEntity(ID);
 
 	// Check if entity has a buffer
-	if (!entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer())
 	{
-		// Check if renderbuffer not already reloaded
+		// Check if render buffer not already reloaded
 		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Load mesh file
 			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
 			auto parts = *partsPointer;
-			entity->clearRenderBuffers();
 
 			// Create renderbuffers
 			for (const auto& part : parts)
@@ -227,8 +226,8 @@ void ModelEntityManager::_loadNormalMapping(const string& ID)
 					data.push_back(part.tangents[i].z);
 				}
 
-				// Load renderbuffer
-				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())));
+				// Load render buffer
+				entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL_TANGENT, &data[0], static_cast<unsigned int>(data.size())), part.ID);
 			}
 		}
 	}
@@ -240,15 +239,14 @@ void ModelEntityManager::_unloadNormalMapping(const string& ID)
 	auto entity = getEntity(ID);
 
 	// Check if entity has a buffer
-	if (!entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer())
 	{
-		// Check if renderbuffer not already reloaded
+		// Check if render buffer not already reloaded
 		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
 		{
 			// Load mesh file
 			auto partsPointer = _meshLoader.loadMesh(entity->getMeshPath(), true);
 			auto parts = *partsPointer;
-			entity->clearRenderBuffers();
 
 			// Create renderbuffers
 			for (const auto& part : parts)
@@ -274,8 +272,8 @@ void ModelEntityManager::_unloadNormalMapping(const string& ID)
 					data.push_back(part.normals[i].z);
 				}
 
-				// Load renderbuffer
-				entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &data[0], static_cast<unsigned int>(data.size())));
+				// Load render buffer
+				entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &data[0], static_cast<unsigned int>(data.size())), part.ID);
 			}
 		}
 	}

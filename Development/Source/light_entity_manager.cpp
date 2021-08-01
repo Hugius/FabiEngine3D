@@ -30,9 +30,9 @@ void LightEntityManager::createEntity(const string& ID, Vec3 position, Vec3 radi
 {
 	// Create entity
 	_createEntity(ID);
-	auto entity = getEntity(ID);
 
-	// Fill entity
+	// Set properties
+	auto entity = getEntity(ID);
 	entity->setPosition(position);
 	entity->setRadius(radius);
 	entity->setColor(color);

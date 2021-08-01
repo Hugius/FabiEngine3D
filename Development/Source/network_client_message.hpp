@@ -8,8 +8,6 @@ using std::string;
 
 struct NetworkClientMessage final
 {
-	NetworkClientMessage() = default;
-
 	NetworkClientMessage(
 		const string& IP,
 		const string& port,

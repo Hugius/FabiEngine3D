@@ -49,14 +49,41 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	}
 }
 
-void TerrainEntityManager::createEntity(const string& ID)
+void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
 {
 	_createEntity(ID);
+	loadMesh(ID, heightMapPath);
 }
 
-void TerrainEntityManager::loadMesh(const string& ID)
+void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPath)
 {
+	// Temporary values
 	auto entity = getEntity(ID);
+
+	// Load height map
+	auto pixelValues = _textureLoader.getBitmapPixels(heightMapPath);
+	entity->setHeightMapPath(heightMapPath);
+	entity->setPixelValues({});
+	entity->setSize(0.0f);
+	entity->setRenderBuffer(nullptr);
+
+	// Check if height map loading failed
+	if (pixelValues == nullptr)
+	{
+		return;
+	}
+
+	// Check if height map resolution too high
+	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
+	if (heightMapSize > MAX_HEIGHT_MAP_RESOLUTION)
+	{
+		Logger::throwWarning("Tried to load mesh of terrain with ID \"" + ID + "\": height map resolution too high!");
+		return;
+	}
+
+	// Set properties
+	entity->setPixelValues(*pixelValues);
+	entity->setSize(static_cast<float>(heightMapSize));
 
 	// Data collections
 	vector<Vec3> tempVertices;
@@ -199,8 +226,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	}
 
 	// Create render buffer
-	entity->clearRenderBuffers();
-	entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
@@ -244,9 +270,9 @@ void TerrainEntityManager::_loadNormalMapping(const string& ID)
 	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
 
 	// Check if entity has a buffer
-	if (!entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer())
 	{
-		// Check if renderbuffer not already reloaded
+		// Check if render buffer not already reloaded
 		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Data collections
@@ -311,8 +337,7 @@ void TerrainEntityManager::_loadNormalMapping(const string& ID)
 			}
 
 			// Create render buffer
-			entity->clearRenderBuffers();
-			entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+			entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 		}
 	}
 }
@@ -324,9 +349,9 @@ void TerrainEntityManager::_unloadNormalMapping(const string& ID)
 	const unsigned int uSize = static_cast<unsigned int>(entity->getSize());
 
 	// Check if entity has a buffer
-	if (!entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer())
 	{
-		// Check if renderbuffer not already reloaded
+		// Check if render buffer not already reloaded
 		if (entity->getRenderBuffer()->getBufferType() != BufferType::MODEL)
 		{
 			// Data collections
@@ -354,8 +379,7 @@ void TerrainEntityManager::_unloadNormalMapping(const string& ID)
 			}
 
 			// Create render buffer
-			entity->clearRenderBuffers();
-			entity->addRenderBuffer(new RenderBuffer(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+			entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::MODEL, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
 		}
 	}
 }

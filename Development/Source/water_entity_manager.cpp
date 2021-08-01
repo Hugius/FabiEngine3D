@@ -142,8 +142,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	}
 	
 	// Fill entity
-	entity->clearRenderBuffers();
-	entity->addRenderBuffer(new RenderBuffer(BufferType::SURFACE, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
+	entity->setHighQualityRenderBuffer(std::make_shared<RenderBuffer>(BufferType::SURFACE, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
 
 	// Load mesh
 	float simplified_data[] =
@@ -157,7 +156,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	};
 
 	// Add simplified water plane
-	entity->setSimplifiedRenderBuffer(new RenderBuffer(BufferType::SURFACE, simplified_data, sizeof(simplified_data) / sizeof(float)));
+	entity->setLowQualityRenderBuffer(std::make_shared<RenderBuffer>(BufferType::SURFACE, simplified_data, static_cast<unsigned int>(sizeof(simplified_data) / sizeof(float))));
 }
 
 void WaterEntityManager::update()

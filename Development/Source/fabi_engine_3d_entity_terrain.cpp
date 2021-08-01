@@ -3,31 +3,12 @@
 
 void FabiEngine3D::terrainEntity_create(const string& ID, const string& heightMapPath)
 {
-	_core->_terrainEntityManager.createEntity(ID);
-	terrainEntity_setHeightMap(ID, heightMapPath);
+	_core->_terrainEntityManager.createEntity(ID, heightMapPath);
 }
 
 void FabiEngine3D::terrainEntity_setHeightMap(const string& ID, const string& texturePath)
 {
-	auto pixelValues = _core->_textureLoader.getBitmapPixels(texturePath);
-
-	// Check if height map loading went well
-	if (pixelValues != nullptr)
-	{
-		// Check if height map resolution too high
-		auto heightMapSize = sqrt(pixelValues->size());
-		if (heightMapSize > 1024)
-		{
-			Logger::throwWarning("Tried to set height map of terrain with ID \"" + ID + "\": resolution too high!");
-		}
-		else
-		{
-			_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(texturePath);
-			_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
-			_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(heightMapSize));
-			_core->_terrainEntityManager.loadMesh(ID);
-		}
-	}
+	_core->_terrainEntityManager.loadMesh(ID, texturePath);
 }
 
 void FabiEngine3D::terrainEntity_deleteAll()
@@ -262,10 +243,11 @@ void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 	_core->_terrainEntityManager.getEntity(ID)->setMaxHeight(height);
 
 	// Check if height map is loaded
-	if (!_core->_terrainEntityManager.getEntity(ID)->getHeightMapPath().empty())
+	auto heightMapPath = _core->_terrainEntityManager.getEntity(ID)->getHeightMapPath();
+	if (!heightMapPath.empty())
 	{	
 		// Generate mesh again
-		_core->_terrainEntityManager.loadMesh(ID);
+		_core->_terrainEntityManager.loadMesh(ID, heightMapPath);
 	}
 }
 
@@ -274,10 +256,11 @@ void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_terrainEntityManager.getEntity(ID)->setUvRepeat(repeat);
 
 	// Check if height map is loaded
-	if (!_core->_terrainEntityManager.getEntity(ID)->getHeightMapPath().empty())
+	auto heightMapPath = _core->_terrainEntityManager.getEntity(ID)->getHeightMapPath();
+	if (!heightMapPath.empty())
 	{
 		// Generate mesh again
-		_core->_terrainEntityManager.loadMesh(ID);
+		_core->_terrainEntityManager.loadMesh(ID, heightMapPath);
 	}
 }
 

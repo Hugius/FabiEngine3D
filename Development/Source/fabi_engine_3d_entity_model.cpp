@@ -54,7 +54,7 @@ void FabiEngine3D::modelEntity_setVisible(const string& ID, bool isVisible)
 	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::modelEntity_loadModel(const string& ID, const string& meshPath)
+void FabiEngine3D::modelEntity_loadMesh(const string& ID, const string& meshPath)
 {
 	_core->_modelEntityManager.loadMesh(ID, meshPath);
 }
@@ -152,9 +152,13 @@ const bool FabiEngine3D::modelEntity_isVisible(const string& ID)
 
 const bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 {
-	if (!_core->_modelEntityManager.getEntity(ID)->getRenderBuffers().empty())
+	// Temporary values
+	auto entity = _core->_modelEntityManager.getEntity(ID);
+
+	// Check if entity has render buffer
+	if (entity->hasRenderBuffer())
 	{
-		return _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(0)->isInstanced();
+		return entity->getRenderBuffer(entity->getPartIDs()[0])->isInstanced();
 	}
 	else
 	{
@@ -350,22 +354,34 @@ void FabiEngine3D::modelEntity_setUvRepeat(const string& ID, float repeat)
 
 void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vector<Vec3> offsets)
 {
-	if (enabled) // Add instancing
+	// Temporary values
+	auto entity = _core->_modelEntityManager.getEntity(ID);
+
+	if (enabled)
 	{
-		for (const auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
+		for (const auto& partID : entity->getPartIDs())
 		{
+			// Temporary values
+			auto buffer = entity->getRenderBuffer(partID);
+
+			// Remove instancing
 			if (buffer->isInstanced())
 			{
 				buffer->removeInstancing();
 			}
 
+			// Add instancing
 			buffer->addInstancing(offsets);
 		}
 	}
-	else // Remove instancing
+	else
 	{
-		for (const auto& buffer : _core->_modelEntityManager.getEntity(ID)->getRenderBuffers())
+		for (const auto& partID : _core->_modelEntityManager.getEntity(ID)->getPartIDs())
 		{
+			// Temporary values
+			auto buffer = _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(partID);
+
+			// Remove instancing
 			if (buffer->isInstanced())
 			{
 				buffer->removeInstancing();
@@ -461,9 +477,13 @@ const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& I
 
 const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID)
 {
+	// Temporary values
+	auto entity = _core->_modelEntityManager.getEntity(ID);
+
+	// Check if model is instanced
 	if (modelEntity_isInstanced(ID))
 	{
-		return _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(0)->getInstancedOffsets();
+		return entity->getRenderBuffer(entity->getPartIDs()[0])->getInstancedOffsets();
 	}
 	else
 	{

@@ -58,7 +58,7 @@ void ModelEditor::_loadMesh()
 				}
 
 				// Reload model
-				_fe3d.modelEntity_loadModel(_currentModelID, newFilePath);
+				_fe3d.modelEntity_loadMesh(_currentModelID, newFilePath);
 			}
 			else
 			{

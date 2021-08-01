@@ -1,24 +1,24 @@
 #include "billboard_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "logger.hpp"
-#include "mathematics.hpp"
+
+const float vertex_data[] =
+{
+	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+	-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
+	 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+	 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+	 0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
+	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
+};
 
 BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, Camera& camera)
 	:
 	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
-	_camera(camera)
+	_camera(camera),
+	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::SURFACE, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
-	float plane_data[] =
-	{
-		-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
-		-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
-		 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-		 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-		 0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
-		-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
-	};
 
-	_renderBuffer = new RenderBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float));
 }
 
 shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
@@ -42,11 +42,11 @@ void BillboardEntityManager::createEntity(const string& ID, Vec3 color, Vec3 pos
 	bool facingCameraX, bool facingCameraY)
 {
 	// Create entity
-	_createEntity(ID);
-	auto entity = getEntity(ID);
-	entity->addRenderBuffer(_renderBuffer, false);
+	_createEntity(ID);	
 
 	// Set properties
+	auto entity = getEntity(ID);
+	entity->setRenderBuffer(_renderBuffer);
 	entity->setPosition(position);
 	entity->setRotation(rotation);
 	entity->setInitialRotation(rotation);

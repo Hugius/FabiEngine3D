@@ -6,7 +6,6 @@ class TextEntityManager final : public BaseEntityManager
 {
 public:
 	TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~TextEntityManager();
 
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
@@ -25,8 +24,8 @@ public:
 	void update() override;
 
 private:
-	RenderBuffer* _centeredRenderBuffer = nullptr;
-	RenderBuffer* _nonCenteredRenderBuffer = nullptr;
+	const shared_ptr<RenderBuffer> _centeredRenderBuffer;
+	const shared_ptr<RenderBuffer> _nonCenteredRenderBuffer;
 
 	map<string, string> _textContentMap;
 };

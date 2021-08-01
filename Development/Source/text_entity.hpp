@@ -1,6 +1,7 @@
 #pragma once
 
 #include "image_entity.hpp"
+#include "render_buffer.hpp"
 
 #include <memory>
 
@@ -11,6 +12,7 @@ class TextEntity final : public ImageEntity
 public:
 	using ImageEntity::ImageEntity;
 	
+	// Voids
 	void setDynamic(bool value);
 	void deleteCharacterEntities();
 	void updateCharacterEntities();
@@ -18,17 +20,24 @@ public:
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 
+	// Strings
+	const string& getTextContent();
+	const string& getFontPath();
+
+	// Booleans
 	bool isDynamic();
-	const vector<shared_ptr<ImageEntity>>& getCharacterEntities() const;
-	const string& getTextContent() const;
-	const string& getFontPath() const;
+
+	// Miscellaneous
+	const vector<shared_ptr<ImageEntity>>& getCharacterEntities();
 
 private:
-	vector<shared_ptr<ImageEntity>> _characters;
-
+	// Strings
 	string _textContent = "";
-
 	string _fontPath = "";
 
+	// Booleans
 	bool _isDynamic = false;
+
+	// Miscellaneous
+	vector<shared_ptr<ImageEntity>> _characterEntities;
 };

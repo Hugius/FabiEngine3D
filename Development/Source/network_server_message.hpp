@@ -8,8 +8,6 @@ using std::string;
 
 struct NetworkServerMessage final
 {
-	NetworkServerMessage() = default;
-
 	NetworkServerMessage(
 		const string& content,
 		const NetworkProtocol protocol)

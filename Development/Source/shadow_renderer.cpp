@@ -35,7 +35,7 @@ void ShadowRenderer::unbind()
 
 void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty() && entity->isShadowed())
+	if (entity->hasRenderBuffer() && entity->isVisible() && entity->isShadowed())
 	{
 		// Enable face culling
 		if (entity->isFaceCulled())
@@ -51,14 +51,14 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 
 		// Iterate through parts
-		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
+		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto partID = entity->getPartIDs()[i];
-			auto buffer = entity->getRenderBuffers()[i];
+			auto buffer = entity->getRenderBuffer(partID);
 
 			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
+			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
 			if (entity->isTransparent() && entity->hasDiffuseMap(partID))
@@ -73,12 +73,11 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Render
 			if (buffer->isInstanced())
 			{
-				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getInstancedOffsetCount());
+				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
 			}
 			else
 			{
-				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
@@ -103,7 +102,7 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 
 void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible() && entity->isShadowed())
+	if (entity->hasRenderBuffer() && entity->isVisible() && entity->isShadowed())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
@@ -111,6 +110,7 @@ void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_isInstanced", false);
 
 		// Model matrix
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
@@ -126,7 +126,6 @@ void ShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
 		// Render
-		_shader.uploadUniform("u_isInstanced", false);
 		glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
 
 		// Unbind buffer

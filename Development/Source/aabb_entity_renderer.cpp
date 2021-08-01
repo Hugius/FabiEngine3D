@@ -25,7 +25,7 @@ void AabbEntityRenderer::unbind()
 
 void AabbEntityRenderer::render(const shared_ptr<AabbEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

@@ -102,7 +102,7 @@ void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared
 
 void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
+	if (entity->hasLowQualityRenderBuffer() && entity->hasHighQualityRenderBuffer() && entity->isVisible())
 	{
 		// Enable wire frame
 		if (entity->isWireFramed())
@@ -154,23 +154,23 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		// Bind buffer
 		if (entity->isWaving())
 		{
-			glBindVertexArray(entity->getRenderBuffer()->getVAO());
+			glBindVertexArray(entity->getHighQualityRenderBuffer()->getVAO());
 		}
 		else
 		{
-			glBindVertexArray(entity->getSimplifiedRenderBuffer()->getVAO());
+			glBindVertexArray(entity->getLowQualityRenderBuffer()->getVAO());
 		}
 
 		// Render
 		if (entity->isWaving())
 		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getRenderBuffer()->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getHighQualityRenderBuffer()->getVertexCount() / 3);
 		}
 		else
 		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedRenderBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getSimplifiedRenderBuffer()->getVertexCount() / 3);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getLowQualityRenderBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getLowQualityRenderBuffer()->getVertexCount() / 3);
 		}
 
 		// Unbind buffer

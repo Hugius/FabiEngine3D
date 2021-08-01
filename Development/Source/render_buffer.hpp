@@ -12,29 +12,26 @@ class RenderBuffer final
 {
 public:
 	RenderBuffer() = delete;
-	RenderBuffer(BufferType type, float data[], unsigned int dataCount);   // 3D
+	RenderBuffer(BufferType type, const float data[], unsigned int dataCount);   // 3D
 	RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
 	~RenderBuffer();
 	
 	void addInstancing(const vector<Vec3>& offsets);
 	void removeInstancing();
 
-	const BufferID getVAO() const;
+	const BufferID getVAO();
 
-	const unsigned int getVertexCount() const;
-	const unsigned int getInstancedOffsetCount() const;
+	const unsigned int getVertexCount();
 	
-	const bool isInstanced() const;
+	const bool isInstanced();
 
-	const BufferType getBufferType() const;
+	const BufferType getBufferType();
 
-	const vector<Vec3>& getInstancedOffsets() const;
+	const vector<Vec3>& getInstancedOffsets();
 
 private:
-	void _create3D(BufferType type, float data[], unsigned int dataCount);
-	void _create2D(float x, float y, float w, float h, bool isCentered, bool isText);
-	
 	unsigned int _vertexCount = 0;
+
 	unsigned int _offsetCount = 0;
 
 	bool _isInstanced = false;

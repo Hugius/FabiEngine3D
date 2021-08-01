@@ -3,9 +3,8 @@
 #include "fabi_engine_3d.hpp"
 #include "animation_frame.hpp"
 
-class Animation final
+struct Animation final
 {
-public:
 	Animation(const string& ID)
 		:
 		ID(ID)
@@ -17,7 +16,13 @@ public:
 		totalScalings.insert(make_pair("", Vec3(0.0f)));
 
 		// Add default frame
-		frames.push_back(AnimationFrame(""));
+		AnimationFrame defaultFrame;
+		defaultFrame.targetTransformations.insert(make_pair("", Vec3(0.0f)));
+		defaultFrame.rotationOrigins.insert(make_pair("", Vec3(0.0f)));
+		defaultFrame.speeds.insert(make_pair("", Vec3(0.0f)));
+		defaultFrame.speedTypes.insert(make_pair("", AnimationSpeedType::LINEAR));
+		defaultFrame.transformationTypes.insert(make_pair("", TransformationType::MOVEMENT));
+		frames.push_back(defaultFrame);
 	}
 
 	void updateValueLimits()

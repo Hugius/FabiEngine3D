@@ -137,7 +137,7 @@ void ModelEntityRenderer::renderLightEntities(const unordered_map<string, shared
 
 void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Enable wire frame
 		if (entity->isWireFramed())
@@ -150,6 +150,9 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		{
 			glEnable(GL_CULL_FACE);
 		}
+
+		// View matrix
+		auto viewMatrix = (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix());
 
 		// Shader uniforms
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
@@ -166,27 +169,20 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		if (entity->isCameraStatic())
-		{
-			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
-		}
-		else
-		{
-			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-		}
+		_shader.uploadUniform("u_viewMatrix", viewMatrix);
 
 		// Iterate through parts
-		for (size_t i = 0; i < entity->getRenderBuffers().size(); i++)
+		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto partID = entity->getPartIDs()[i];
-			auto buffer = entity->getRenderBuffers()[i];
+			auto buffer = entity->getRenderBuffer(partID);
 
-			// Model matrix
+			// Model matrices
 			const auto& modelMatrix = entity->getModelMatrix(partID);
 			auto normalModelMatrix = modelMatrix;
 			normalModelMatrix.transpose();
 			normalModelMatrix.invert();
+			normalModelMatrix = Matrix33(normalModelMatrix);
 
 			// Shader uniforms
 			_shader.uploadUniform("u_color", entity->getColor(partID));
@@ -196,7 +192,8 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
 			_shader.uploadUniform("u_modelMatrix", modelMatrix);
-			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
+			_shader.uploadUniform("u_normalModelMatrix", normalModelMatrix);
+			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -226,13 +223,12 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Render
 			if (buffer->isInstanced())
 			{
-				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getInstancedOffsetCount());
-				_renderBus.increaseTriangleCount((buffer->getInstancedOffsetCount() * buffer->getVertexCount()) / 3);
+				const auto offsetCount = static_cast<unsigned int>(buffer->getInstancedOffsets().size());
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), offsetCount);
+				_renderBus.increaseTriangleCount((offsetCount * buffer->getVertexCount()) / 3);
 			}
 			else
 			{
-				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 			}

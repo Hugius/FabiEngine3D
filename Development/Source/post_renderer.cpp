@@ -35,39 +35,36 @@ void PostRenderer::unbind()
 
 void PostRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	if (entity->isVisible() && !entity->getRenderBuffers().empty())
-	{		
-		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getPrimarySceneMap());
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap());
-		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
+	// Bind textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getPrimarySceneMap());
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDofMap());
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
 
-		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+	// Bind buffer
+	glBindVertexArray(entity->getRenderBuffer()->getVAO());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+	// Render
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 
-		// Unbind buffer
-		glBindVertexArray(0);
+	// Unbind buffer
+	glBindVertexArray(0);
 
-		// Unbind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, 0);
-	}
+	// Unbind textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE3);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

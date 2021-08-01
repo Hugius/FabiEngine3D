@@ -21,5 +21,5 @@ public:
 		const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
 
 private:
-	RenderBuffer* _renderBuffer = nullptr;
+	const shared_ptr<RenderBuffer> _renderBuffer;
 };

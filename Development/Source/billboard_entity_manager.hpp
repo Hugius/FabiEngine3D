@@ -37,7 +37,5 @@ public:
 private:
 	Camera& _camera;
 
-	RenderBuffer* _renderBuffer = nullptr;
-
-	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
+	const shared_ptr<RenderBuffer> _renderBuffer;
 };

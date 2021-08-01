@@ -243,118 +243,118 @@ void MasterRenderer::_renderDebugScreens()
 	// Scene - surface
 	shared_ptr<ImageEntity> sceneSurface = make_shared<ImageEntity>("sceneSurface");
 	sceneSurface->setDiffuseMap(_renderBus.getPrimarySceneMap());
+	sceneSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.666f, 0.666f, 0.666f, true, false));
 	sceneSurface->setMirroredVertically(true);
-	sceneSurface->addRenderBuffer(new RenderBuffer(-0.666f, 0.666f, 0.666f, 0.666f, true, false));
 
 	// Shadow - surface
 	shared_ptr<ImageEntity> shadowSurface = make_shared<ImageEntity>("shadowSurface");
 	shadowSurface->setDiffuseMap(_renderBus.getShadowMap());
 	shadowSurface->setColor(Vec3(static_cast<float>(_renderBus.getShadowMap() != 0)));
+	shadowSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.666f, 0.666f, 0.666f, true, false));
 	shadowSurface->setMirroredVertically(true);
-	shadowSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.666f, 0.666f, 0.666f, true, false));
 
 	// Bloom - surface
 	shared_ptr<ImageEntity> bloomSurface = make_shared<ImageEntity>("bloomSurface");
 	bloomSurface->setDiffuseMap(_renderBus.getBloomMap());
 	bloomSurface->setColor(Vec3(static_cast<float>(_renderBus.getBloomMap() != 0)));
-	bloomSurface->setMirroredVertically(true);
-	bloomSurface->addRenderBuffer(new RenderBuffer(0.666f, 0.666f, 0.666f, 0.666f, true, false));
+	bloomSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.666f, 0.666f, 0.666f, true, false));
+	shadowSurface->setMirroredVertically(true);
 
 	// Scene reflection - surface
 	shared_ptr<ImageEntity> sceneReflectionSurface = make_shared<ImageEntity>("sceneReflectionSurface");
 	sceneReflectionSurface->setDiffuseMap(_renderBus.getSceneReflectionMap());
 	sceneReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getSceneReflectionMap() != 0)));
-	sceneReflectionSurface->setMirroredVertically(true);
-	sceneReflectionSurface->addRenderBuffer(new RenderBuffer(-0.666f, 0.0f, 0.666f, 0.666f, true, false));
+	sceneReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.0f, 0.666f, 0.666f, true, false));
+	shadowSurface->setMirroredVertically(true);
 
 	// Water reflection - surface
 	shared_ptr<ImageEntity> waterReflectionSurface = make_shared<ImageEntity>("waterReflectionSurface");
 	waterReflectionSurface->setDiffuseMap(_renderBus.getWaterReflectionMap());
 	waterReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getWaterReflectionMap() != 0)));
-	waterReflectionSurface->setMirroredVertically(true);
-	waterReflectionSurface->addRenderBuffer(new RenderBuffer(0.0f, 0.0f, 0.666f, 0.666f, true, false));
+	waterReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 0.666f, 0.666f, true, false));
+	shadowSurface->setMirroredVertically(true);
 
 	// Water refraction - surface
 	shared_ptr<ImageEntity> waterRefractionSurface = make_shared<ImageEntity>("waterRefractionSurface");
 	waterRefractionSurface->setDiffuseMap(_renderBus.getWaterRefractionMap());
 	waterRefractionSurface->setColor(Vec3(static_cast<float>(_renderBus.getWaterRefractionMap() != 0)));
-	waterRefractionSurface->setMirroredVertically(true);
-	waterRefractionSurface->addRenderBuffer(new RenderBuffer(0.666f, 0.0f, 0.666f, 0.666f, true, false));
+	waterRefractionSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.0f, 0.666f, 0.666f, true, false));
+	shadowSurface->setMirroredVertically(true);
 
 	// Depth - surface
 	shared_ptr<ImageEntity> depthSurface = make_shared<ImageEntity>("depthSurface");
 	depthSurface->setDiffuseMap(_renderBus.getSceneDepthMap());
 	depthSurface->setColor(Vec3(static_cast<float>(_renderBus.getSceneDepthMap() != 0)));
+	depthSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.666f, 0.666f, 0.666f, true, false));
 	depthSurface->setMirroredVertically(true);
 	depthSurface->setPerspectiveDepthEntity(true);
-	depthSurface->addRenderBuffer(new RenderBuffer(-0.666f, -0.666f, 0.666f, 0.666f, true, false));
 
 	// DOF - surface
 	shared_ptr<ImageEntity> dofSurface = make_shared<ImageEntity>("dofSurface");
 	dofSurface->setDiffuseMap(_renderBus.getDofMap());
 	dofSurface->setColor(Vec3(static_cast<float>(_renderBus.getDofMap() != 0)));
+	dofSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.666f, 0.666f, 0.666f, true, false));
 	dofSurface->setMirroredVertically(true);
-	dofSurface->addRenderBuffer(new RenderBuffer(0.0f, -0.666f, 0.666f, 0.666f, true, false));
 
 	// Motion blur - surface
 	shared_ptr<ImageEntity> motionBlurSurface = make_shared<ImageEntity>("motionBlurSurface");
 	motionBlurSurface->setDiffuseMap(_renderBus.getMotionBlurMap());
 	motionBlurSurface->setColor(Vec3(static_cast<float>(_renderBus.getMotionBlurMap() != 0)));
-	motionBlurSurface->setMirroredVertically(true);
-	motionBlurSurface->addRenderBuffer(new RenderBuffer(0.666f, -0.666f, 0.666f, 0.666f, true, false));
+	motionBlurSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.666f, 0.666f, 0.666f, true, false));
+	dofSurface->setMirroredVertically(true);
 
 	// Scene - text
 	shared_ptr<TextEntity> sceneText = make_shared<TextEntity>("sceneText");
 	sceneText->setDiffuseMap(_textureLoader.getText("Scene Render", fontPath));
-	sceneText->addRenderBuffer(new RenderBuffer(-0.666f, 0.4f, calcTextWidth("Scene Render"), charHeight, true, false));
+	sceneText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.4f, calcTextWidth("Scene Render"), charHeight, true, false));
 	sceneText->setColor(textColor);
 
 	// Shadow - text
 	shared_ptr<TextEntity> shadowText = make_shared<TextEntity>("shadowText");
 	shadowText->setDiffuseMap(_textureLoader.getText("Shadow Render", fontPath));
-	shadowText->addRenderBuffer(new RenderBuffer(0.0f, 0.4f, calcTextWidth("Shadow Render"), charHeight, true, false));
+	shadowText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.4f, calcTextWidth("Shadow Render"), charHeight, true, false));
 	shadowText->setColor(textColor);
 
 	// Bloom - text
 	shared_ptr<TextEntity> bloomText = make_shared<TextEntity>("bloomText");
 	bloomText->setDiffuseMap(_textureLoader.getText("Bloom Render", fontPath));
-	bloomText->addRenderBuffer(new RenderBuffer(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true, false));
+	bloomText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true, false));
 	bloomText->setColor(textColor);
 	
 	// Scene reflection - text
 	shared_ptr<TextEntity> sceneReflectionText = make_shared<TextEntity>("sceneReflectionText");
 	sceneReflectionText->setDiffuseMap(_textureLoader.getText("Scene Reflection Render", fontPath));
-	sceneReflectionText->addRenderBuffer(new RenderBuffer(-0.666f, -0.26f, calcTextWidth("Scene Reflection Render"), charHeight, true, false));
+	sceneReflectionText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.26f, calcTextWidth("Scene Reflection Render"), charHeight, true, false));
 	sceneReflectionText->setColor(textColor);
 
 	// Water reflection - text
 	shared_ptr<TextEntity> waterReflectionText = make_shared<TextEntity>("waterReflectionText");
 	waterReflectionText->setDiffuseMap(_textureLoader.getText("Water Reflection Render", fontPath));
-	waterReflectionText->addRenderBuffer(new RenderBuffer(0.0f, -0.26f, calcTextWidth("Water Reflection Render"), charHeight, true, false));
+	waterReflectionText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.26f, calcTextWidth("Water Reflection Render"), charHeight, true, false));
 	waterReflectionText->setColor(textColor);
 
 	// Water refraction - text
 	shared_ptr<TextEntity> waterRefractionText = make_shared<TextEntity>("waterRefractionText");
 	waterRefractionText->setDiffuseMap(_textureLoader.getText("Water Refraction Render", fontPath));
-	waterRefractionText->addRenderBuffer(new RenderBuffer(0.666f, -0.26f, calcTextWidth("Water Refraction Render"), charHeight, true, false));
+	waterRefractionText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.26f, calcTextWidth("Water Refraction Render"), charHeight, true, false));
 	waterRefractionText->setColor(textColor);
 
 	// Depth - text
 	shared_ptr<TextEntity> depthText = make_shared<TextEntity>("depthText");
 	depthText->setDiffuseMap(_textureLoader.getText("Depth Render", fontPath));
-	depthText->addRenderBuffer(new RenderBuffer(-0.666f, -0.92f, calcTextWidth("Depth Render"), charHeight, true, false));
+	depthText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.92f, calcTextWidth("Depth Render"), charHeight, true, false));
 	depthText->setColor(textColor);
 
 	// DOF - text
 	shared_ptr<TextEntity> dofText = make_shared<TextEntity>("dofText");
 	dofText->setDiffuseMap(_textureLoader.getText("DOF Render", fontPath));
-	dofText->addRenderBuffer(new RenderBuffer(0.0f, -0.92f, calcTextWidth("DOF Render"), charHeight, true, false));
+	dofText->setRenderBuffer(make_shared<RenderBuffer>(0.0f, -0.92f, calcTextWidth("DOF Render"), charHeight, true, false));
 	dofText->setColor(textColor);
 
 	// Motion blur - text
 	shared_ptr<TextEntity> motionText = make_shared<TextEntity>("motionBlurText");
 	motionText->setDiffuseMap(_textureLoader.getText("Motion Blur Render", fontPath));
-	motionText->addRenderBuffer(new RenderBuffer(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true, false));
+	motionText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, -0.92f, calcTextWidth("Motion Blur Render"), charHeight, true, false));
 	motionText->setColor(textColor);
 	
 	// Bind

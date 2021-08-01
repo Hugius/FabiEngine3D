@@ -24,6 +24,8 @@ public:
 	float getSkyExposureSpeed();
 
 private:
+	const shared_ptr<RenderBuffer> _renderBuffer;
+
 	string _selectedMainID = "";
 	string _selectedMixID = "";
 

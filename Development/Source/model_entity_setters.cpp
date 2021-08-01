@@ -13,7 +13,7 @@ void ModelEntity::updateModelMatrix()
 	for (size_t i = 0; i < _parts.size(); i++)
 	{
 		// Instanced modelpart cannot have a modelmatrix position
-		if (!getRenderBuffers().empty() && getRenderBuffer(static_cast<unsigned int>(i))->isInstanced())
+		if ((_parts[i].renderBuffer != nullptr) && _parts[i].renderBuffer->isInstanced())
 		{
 			_parts[i].localPosition = Vec3(0.0f);
 		}
@@ -67,6 +67,11 @@ void ModelEntity::updateModelMatrix()
 		Matrix44 scalingMatrix = Matrix44::createScaling(_parts[i].localSize.x, _parts[i].localSize.y, _parts[i].localSize.z);
 		_parts[i].modelMatrix = _parts[i].modelMatrix * scalingMatrix;
 	}
+}
+
+void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer, const string& partID)
+{
+	_parts[_getPartIndex(partID)].renderBuffer = renderBuffer;
 }
 
 void ModelEntity::setDiffuseMap(TextureID value, const string& partID)

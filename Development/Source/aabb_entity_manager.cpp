@@ -3,32 +3,32 @@
 #include "logger.hpp" 
 #include "tools.hpp"
 
+const float vertex_data[] =
+{
+	-0.5f,  1.0f, -0.5f,
+	 0.5f,  1.0f, -0.5f,
+	 0.5f,  0.0f, -0.5f,
+	-0.5f,  0.0f, -0.5f,
+	-0.5f,  1.0f, -0.5f,
+	-0.5f,  1.0f,  0.5f,
+	 0.5f,  1.0f,  0.5f,
+	 0.5f,  0.0f,  0.5f,
+	-0.5f,  0.0f,  0.5f,
+	-0.5f,  1.0f,  0.5f,
+	 0.5f,  1.0f,  0.5f,
+	 0.5f,  1.0f, -0.5f,
+	 0.5f,  0.0f, -0.5f,
+	 0.5f,  0.0f,  0.5f,
+	-0.5f,  0.0f,  0.5f,
+	-0.5f,  0.0f, -0.5f
+};
 
 AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus),
+	_renderBuffer(std::make_shared<RenderBuffer>(BufferType::AABB, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
 {
-	float box_data[] =
-	{
-		-0.5f,  1.0f, -0.5f,
-		 0.5f,  1.0f, -0.5f,
-		 0.5f,  0.0f, -0.5f,
-		-0.5f,  0.0f, -0.5f,
-		-0.5f,  1.0f, -0.5f,
-		-0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f,  0.5f,
-		 0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f,  0.5f,
-		-0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f, -0.5f,
-		 0.5f,  0.0f, -0.5f,
-		 0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f, -0.5f
-	};
 
-	_renderBuffer = new RenderBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float));
 }
 
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
@@ -52,10 +52,10 @@ void AabbEntityManager::createEntity(const string& ID, Vec3 position, Vec3 size,
 {
 	// Create entity
 	_createEntity(ID);
-	auto entity = getEntity(ID);
-	entity->addRenderBuffer(_renderBuffer, false);
 
-	// Miscellaneous
+	// Set properties
+	auto entity = getEntity(ID);
+	entity->setRenderBuffer(_renderBuffer);
 	entity->setLocalPosition(position);
 	entity->setLocalSize(size);
 	entity->setPosition(position);

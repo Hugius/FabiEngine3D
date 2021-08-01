@@ -4,16 +4,10 @@
 ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::IMAGE, meshLoader, texLoader, renderBus),
-	_centeredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
-	_nonCenteredRenderBuffer(new RenderBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
+	_centeredRenderBuffer(std::make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
+	_nonCenteredRenderBuffer(std::make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
 	
-}
-
-ImageEntityManager::~ImageEntityManager()
-{
-	delete _centeredRenderBuffer;
-	delete _nonCenteredRenderBuffer;
 }
 
 shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
@@ -40,7 +34,7 @@ void ImageEntityManager::createEntity(const string& ID, const string& texturePat
 
 	// Set properties
 	auto entity = getEntity(ID);
-	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
+	entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
 	entity->setPosition(position);
 	entity->setRotation(rotation);
@@ -55,7 +49,7 @@ void ImageEntityManager::createEntity(const string& ID, Vec3 color, Vec2 positio
 
 	// Set properties
 	auto entity = getEntity(ID);
-	entity->addRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer, false);
+	entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 	entity->setPosition(position);
 	entity->setRotation(rotation);
 	entity->setSize(size);

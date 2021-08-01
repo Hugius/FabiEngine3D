@@ -1,5 +1,10 @@
 #include "terrain_entity.hpp"
 
+void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+{
+	_renderBuffer = renderBuffer;
+}
+
 void TerrainEntity::setPixelValues(const vector<float>& value)
 {
 	_pixelValues = value;

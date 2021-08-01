@@ -1,20 +1,10 @@
 #include "render_buffer.hpp"
 
-// 3D
-RenderBuffer::RenderBuffer(BufferType type, float data[], unsigned int dataCount)
+RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dataCount)
 {
+	// Set buffer type
 	_bufferType = type;
-	_create3D(type, data, dataCount);
-}
-
-// 2D
-RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
-{
-	_create2D(x, y, w, h, isCentered, isText);
-}
-
-void RenderBuffer::_create3D(BufferType type, float data[], unsigned int dataCount)
-{
+	
 	// Create buffers
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
@@ -23,59 +13,59 @@ void RenderBuffer::_create3D(BufferType type, float data[], unsigned int dataCou
 	glBindVertexArray(_vao);
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-	// Allocate buffer dataCount
-	glBufferData(GL_ARRAY_BUFFER, dataCount * sizeof(float), &data[0], GL_STATIC_DRAW);
+	// Allocate buffer data
+	glBufferData(GL_ARRAY_BUFFER, (dataCount * sizeof(float)), &data[0], GL_STATIC_DRAW);
 
 	// Store buffer data
 	switch (type)
 	{
-		case BufferType::MODEL:
-		{
-			_vertexCount = dataCount / 8;
-			glEnableVertexAttribArray(0);
-			glEnableVertexAttribArray(1);
-			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
-			break;
-		}
-		case BufferType::MODEL_TANGENT:
-		{
-			_vertexCount = dataCount / 11;
-			glEnableVertexAttribArray(0);
-			glEnableVertexAttribArray(1);
-			glEnableVertexAttribArray(2);
-			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-			glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
-			glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
-			break;
-		}
-		case BufferType::SURFACE:
-		{
-			_vertexCount = dataCount / 5;
-			glEnableVertexAttribArray(0);
-			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
-			break;
-		}
-		case BufferType::AABB:
-		{
-			_vertexCount = dataCount / 3;
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glEnableVertexAttribArray(0);
-			break;
-		}
-		case BufferType::CUBEMAP:
-		{
-			_vertexCount = dataCount / 3;
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
-			glEnableVertexAttribArray(0);
-			break;
-		}
+	case BufferType::MODEL:
+	{
+		_vertexCount = dataCount / 8;
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+		break;
+	}
+	case BufferType::MODEL_TANGENT:
+	{
+		_vertexCount = dataCount / 11;
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
+		break;
+	}
+	case BufferType::SURFACE:
+	{
+		_vertexCount = dataCount / 5;
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		break;
+	}
+	case BufferType::AABB:
+	{
+		_vertexCount = dataCount / 3;
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glEnableVertexAttribArray(0);
+		break;
+	}
+	case BufferType::CUBEMAP:
+	{
+		_vertexCount = dataCount / 3;
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glEnableVertexAttribArray(0);
+		break;
+	}
 	}
 
 	// Unbind buffers
@@ -83,9 +73,9 @@ void RenderBuffer::_create3D(BufferType type, float data[], unsigned int dataCou
 	glBindVertexArray(0);
 }
 
-void RenderBuffer::_create2D(float x, float y, float w, float h, bool isCentered, bool isText)
+RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
 {
-	// Generate vertices
+	// Temporary values
 	float* data = nullptr;
 
 	// Determine center point of the quad
@@ -157,7 +147,7 @@ void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 
 	// Bind instanced VBO
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
-	glBufferData(GL_ARRAY_BUFFER, offsets.size() * sizeof(Vec3), &offsets[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(Vec3)), &offsets[0], GL_STATIC_DRAW);
 
 	// Fill instanced VBO
 	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
@@ -170,7 +160,6 @@ void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 
 	// Miscellaneous
 	_isInstanced = true;
-	_offsetCount = static_cast<unsigned int>(offsets.size());
 	_instancedOffsets = offsets;
 }
 
@@ -178,36 +167,30 @@ void RenderBuffer::removeInstancing()
 {
 	glDeleteBuffers(1, &_vbo_instanced);
 	_isInstanced = false;
-	_offsetCount = 0;
 	_instancedOffsets.clear();
 }
 
-const BufferID RenderBuffer::getVAO() const
+const BufferID RenderBuffer::getVAO()
 {
 	return _vao;
 }
 
-const unsigned int RenderBuffer::getVertexCount() const
+const unsigned int RenderBuffer::getVertexCount()
 {
 	return _vertexCount;
 }
 
-const unsigned int RenderBuffer::getInstancedOffsetCount() const
-{
-	return _offsetCount;
-}
-
-const bool RenderBuffer::isInstanced() const
+const bool RenderBuffer::isInstanced()
 {
 	return _isInstanced;
 }
 
-const BufferType RenderBuffer::getBufferType() const
+const BufferType RenderBuffer::getBufferType()
 {
 	return _bufferType;
 }
 
-const vector<Vec3>& RenderBuffer::getInstancedOffsets() const
+const vector<Vec3>& RenderBuffer::getInstancedOffsets()
 {
 	return _instancedOffsets;
 }

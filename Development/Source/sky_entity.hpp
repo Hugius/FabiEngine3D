@@ -16,7 +16,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void updateRotation();
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);

@@ -31,33 +31,33 @@ struct Vec4 final
 	Vec4(float xyzw);
 	Vec4(float x, float y, float z, float w);
 
-	// Applications
+	// Voids
 	void normalize();
-	float getMagnitude() const;
-
-	// Operators
-	Vec4 operator-();
-
-	Vec4 operator+(const Vec4& v) const;
-	Vec4 operator-(const Vec4& v) const;
-	Vec4 operator*(const Vec4& v) const;
-	Vec4 operator/(const Vec4& v) const;
-
-	Vec4 operator+(const float& value) const;
-	Vec4 operator-(const float& value) const;
-	Vec4 operator/(const float& value) const;
-	Vec4 operator*(const float& value) const;
-
+	void clear();
 	void operator+=(const Vec4& v);
 	void operator-=(const Vec4& v);
 	void operator*=(const Vec4& v);
 	void operator/=(const Vec4& v);
-
 	void operator+=(const float& value);
 	void operator-=(const float& value);
 	void operator/=(const float& value);
 	void operator*=(const float& value);
 
-	bool operator==(const Vec4& other) const;
-	bool operator!=(const Vec4& other) const;
+	// Vectors
+	const Vec4 operator-() const;
+	const Vec4 operator+(const Vec4& v) const;
+	const Vec4 operator-(const Vec4& v) const;
+	const Vec4 operator*(const Vec4& v) const;
+	const Vec4 operator/(const Vec4& v) const;
+	const Vec4 operator+(const float& value) const;
+	const Vec4 operator-(const float& value) const;
+	const Vec4 operator/(const float& value) const;
+	const Vec4 operator*(const float& value) const;
+
+	// Floats	
+	const float getMagnitude() const;
+
+	// Booleans
+	const bool operator==(const Vec4& other) const;
+	const bool operator!=(const Vec4& other) const;
 };

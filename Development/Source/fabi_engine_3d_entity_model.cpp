@@ -364,7 +364,7 @@ void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vect
 			if (entity->hasRenderBuffer(partID))
 			{
 				// Temporary values
-				auto buffer = entity->getRenderBuffer(partID);
+				const auto buffer = entity->getRenderBuffer(partID);
 
 				// Remove instancing
 				if (buffer->isInstanced())

@@ -14,53 +14,54 @@ Vec3::Vec3(float xyz)
 	this->z = xyz;
 }
 
-Vec3::Vec3(float x, float y, float z) {
+Vec3::Vec3(float x, float y, float z)
+{
 	this->x = x;
 	this->y = y;
 	this->z = z;
 }
 
-Vec3 Vec3::operator+(const Vec3 & other) const
+const Vec3 Vec3::operator+(const Vec3& other) const
 {
 	return Vec3(this->x + other.x, this->y + other.y, this->z + other.z);
 }
 
-Vec3 Vec3::operator-(const Vec3 & other) const
+const Vec3 Vec3::operator-(const Vec3& other) const
 {
 	return Vec3(this->x - other.x, this->y - other.y, this->z - other.z);
 }
 
-Vec3 Vec3::operator*(const Vec3& other) const
+const Vec3 Vec3::operator*(const Vec3& other) const
 {
 	return Vec3(this->x * other.x, this->y * other.y, this->z * other.z);
 }
 
-Vec3 Vec3::operator/(const Vec3& other) const
+const Vec3 Vec3::operator/(const Vec3& other) const
 {
 	return Vec3(this->x / other.x, this->y / other.y, this->z / other.z);
 }
 
-Vec3 Vec3::operator+(const float& other) const
+const Vec3 Vec3::operator+(const float& other) const
 {
 	return Vec3(this->x + other, this->y + other, this->z + other);
 }
 
-Vec3 Vec3::operator-(const float& other) const
+const Vec3 Vec3::operator-(const float& other) const
 {
 	return Vec3(this->x - other, this->y - other, this->z - other);
 }
 
-Vec3 Vec3::operator*(const float& other) const
+const Vec3 Vec3::operator*(const float& other) const
 {
 	return Vec3(this->x * other, this->y * other, this->z * other);
 }
 
-Vec3 Vec3::operator/(const float& other) const
+const Vec3 Vec3::operator/(const float& other) const
 {
 	return Vec3(this->x / other, this->y / other, this->z / other);
 }
 
-Vec3 Vec3::operator-() const
+const Vec3 Vec3::operator-() const
 {
 	return Vec3(-this->x, -this->y, -this->z);
 }
@@ -79,14 +80,14 @@ void Vec3::operator-=(const float& other)
 	this->z -= other;
 }
 
-void Vec3::operator+=(const Vec3 & other)
+void Vec3::operator+=(const Vec3& other)
 {
 	this->x += other.x;
 	this->y += other.y;
 	this->z += other.z;
 }
 
-void Vec3::operator-=(const Vec3 & other)
+void Vec3::operator-=(const Vec3& other)
 {
 	this->x -= other.x;
 	this->y -= other.y;
@@ -121,7 +122,7 @@ void Vec3::operator/=(const float& other)
 	this->z /= other;
 }
 
-Vec3 Vec3::cross(const Vec3 & vector) const
+const Vec3 Vec3::cross(const Vec3& vector) const
 {
 	Vec3 crossVector;
 	crossVector.x = this->y * vector.z - this->z * vector.y;
@@ -130,31 +131,31 @@ Vec3 Vec3::cross(const Vec3 & vector) const
 	return crossVector;
 }
 
-float Vec3::dot(const Vec3 & vector) const
+const float Vec3::dot(const Vec3& vector)
 {
-	return (this->x * vector.x + this->y * vector.y + this->z * vector.z); // Fastest dot product calculation
+	return (this->x * vector.x + this->y * vector.y + this->z * vector.z);
 }
 
-float Vec3::getMagnitude() const
+const float Vec3::getMagnitude()
 {
 	return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
 }
 
 void Vec3::normalize()
 {
-	float inverseSqrt = 1.0f / this->getMagnitude();
+	float inverseSqrt = (1.0f / this->getMagnitude());
 
 	this->x *= inverseSqrt;
 	this->y *= inverseSqrt;
 	this->z *= inverseSqrt;
 }
 
-bool Vec3::operator==(const Vec3 & other) const
+const bool Vec3::operator==(const Vec3& other) const
 {
 	return (this->x == other.x && this->y == other.y && this->z == other.z);
 }
 
-bool Vec3::operator!=(const Vec3 & other) const
+const bool Vec3::operator!=(const Vec3& other) const
 {
 	return (this->x != other.x || this->y != other.y || this->z != other.z);
 }

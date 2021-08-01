@@ -16,7 +16,7 @@ public:
 	// Voids
 	void addPart(const string& ID);
 	void updateModelMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer, const string& partID = "");
+	void setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID = "");
 	void setDiffuseMap(TextureID value, const string& partID = "");
 	void setEmissionMap(TextureID value, const string& partID = "");
 	void setReflectionMap(TextureID value, const string& partID = "");

@@ -54,7 +54,7 @@ void ShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto buffer = entity->getRenderBuffer(partID);
+			const auto buffer = entity->getRenderBuffer(partID);
 
 			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));

@@ -16,14 +16,14 @@ public:
 
 	// Voids
 	void updateModelMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setLocalPosition(Vec3 value);
 	void setLocalSize(Vec3 value);
 	void setPosition(Vec3 value);
 	void setSize(Vec3 value);
 	void move(Vec3 value);
 	void scale(Vec3 value);
-	void setParent(const string& ID, AabbParentType type);
+	void setParent(const string& ID, AabbParentType value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);

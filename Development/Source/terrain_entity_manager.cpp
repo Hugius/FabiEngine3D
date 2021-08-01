@@ -204,35 +204,35 @@ void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPat
 		tangents.push_back(tangent);
 	}
 
-	// Compose final data collection
-	vector<float> finalDataCollection;
+	// Compose buffer data
+	vector<float> bufferData;
 	for (size_t i = 0; i < vertices.size(); i++)
 	{
 		// Vertex coordinate
-		finalDataCollection.push_back(vertices[i].x);
-		finalDataCollection.push_back(vertices[i].y);
-		finalDataCollection.push_back(vertices[i].z);
+		bufferData.push_back(vertices[i].x);
+		bufferData.push_back(vertices[i].y);
+		bufferData.push_back(vertices[i].z);
 
 		// UV coordinate
-		finalDataCollection.push_back(uvCoords[i].x);
-		finalDataCollection.push_back(uvCoords[i].y);
+		bufferData.push_back(uvCoords[i].x);
+		bufferData.push_back(uvCoords[i].y);
 
 		// Normal vector
-		finalDataCollection.push_back(normals[i].x);
-		finalDataCollection.push_back(normals[i].y);
-		finalDataCollection.push_back(normals[i].z);
+		bufferData.push_back(normals[i].x);
+		bufferData.push_back(normals[i].y);
+		bufferData.push_back(normals[i].z);
 
 		// Tangent vector
-		finalDataCollection.push_back(tangents[i].x);
-		finalDataCollection.push_back(tangents[i].y);
-		finalDataCollection.push_back(tangents[i].z);
+		bufferData.push_back(tangents[i].x);
+		bufferData.push_back(tangents[i].y);
+		bufferData.push_back(tangents[i].z);
 	}
 
 	// Create render buffer
 	entity->setVertices(vertices);
 	entity->setUvCoords(uvCoords);
 	entity->setNormals(normals);
-	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &finalDataCollection[0], static_cast<unsigned int>(finalDataCollection.size())));
+	entity->setRenderBuffer(std::make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

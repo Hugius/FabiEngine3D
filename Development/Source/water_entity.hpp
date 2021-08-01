@@ -14,9 +14,9 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
-	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
-	void setQuality(WaterQuality quality);
+	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);
+	void setQuality(WaterQuality value);
 	void setSpeed(Vec2 value);
 	void setRippleOffset(Vec2 value);
 	void setWaveOffset(Vec2 value);

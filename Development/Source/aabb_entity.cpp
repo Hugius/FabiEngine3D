@@ -65,9 +65,9 @@ void AabbEntity::scale(Vec3 value)
 	_size = Vec3(std::max(0.0f, _size.x), std::max(0.0f, _size.y), std::max(0.0f, _size.z));
 }
 
-void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void AabbEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_renderBuffer = renderBuffer;
+	_renderBuffer = value;
 }
 
 void AabbEntity::setLocalPosition(Vec3 value)

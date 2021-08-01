@@ -14,7 +14,7 @@ public:
 
 	// Voids
 	void updateModelMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCameraFacingX(bool value);
 	void setCameraFacingY(bool value);
 	void setTransparent(bool value);

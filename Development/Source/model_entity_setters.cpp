@@ -69,9 +69,9 @@ void ModelEntity::updateModelMatrix()
 	}
 }
 
-void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer, const string& partID)
+void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID)
 {
-	_parts[_getPartIndex(partID)].renderBuffer = renderBuffer;
+	_parts[_getPartIndex(partID)].renderBuffer = value;
 }
 
 void ModelEntity::setDiffuseMap(TextureID value, const string& partID)

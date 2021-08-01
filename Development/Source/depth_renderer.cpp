@@ -41,7 +41,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Temporary values
-		auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getRenderBuffer();
 
 		// Enable face culling
 		glEnable(GL_CULL_FACE);
@@ -126,7 +126,7 @@ void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY
 		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto buffer = entity->getRenderBuffer(partID);
+			const auto buffer = entity->getRenderBuffer(partID);
 
 			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
@@ -177,7 +177,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Temporary values
-		auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getRenderBuffer();
 
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
@@ -240,7 +240,7 @@ void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY,
 	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Temporary values
-		auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getRenderBuffer();
 
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

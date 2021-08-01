@@ -32,9 +32,9 @@ void BillboardEntity::updateModelMatrix()
 	_modelMatrix = _modelMatrix * scalingMatrix;
 }
 
-void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_renderBuffer = renderBuffer;
+	_renderBuffer = value;
 }
 
 void BillboardEntity::setCameraFacingX(bool value)

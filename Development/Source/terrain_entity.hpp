@@ -16,8 +16,8 @@ public:
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixelValues(const vector<float>& value);
 	void setVertices(const vector<Vec3> value);
-	void setUvCoords(const vector<Vec2> value);
 	void setNormals(const vector<Vec3> value);
+	void setUvCoords(const vector<Vec2> value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
@@ -63,8 +63,8 @@ public:
 
 	// Vectors
 	const vector<Vec3>& getVertices();
-	const vector<Vec2>& getUvCoords();
 	const vector<Vec3>& getNormals();
+	const vector<Vec2>& getUvCoords();
 
 	// Floats
 	const vector<float>& getPixelValues();

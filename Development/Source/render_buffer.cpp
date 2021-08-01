@@ -132,23 +132,23 @@ RenderBuffer::~RenderBuffer()
 
 void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
 {
-	// Create instanced VBO
+	// Create buffers
 	glGenBuffers(1, &_vbo_instanced);
 
-	// Bind VAO
+	// Bind buffers
 	glBindVertexArray(_vao);
-
-	// Bind instanced VBO
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
+
+	// Allocate buffer data
 	glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(Vec3)), &offsets[0], GL_STATIC_DRAW);
 
-	// Fill instanced VBO
-	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+	// Store buffer data
 	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 	glVertexAttribDivisor(4, 1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// Unbind VAO
+	// Unbind buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
 	// Miscellaneous

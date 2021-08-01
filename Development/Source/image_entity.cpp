@@ -12,9 +12,9 @@ void ImageEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_renderBuffer = renderBuffer;
+	_renderBuffer = value;
 }
 
 void ImageEntity::setDiffuseMap(TextureID value)

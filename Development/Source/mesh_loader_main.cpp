@@ -24,8 +24,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 
 	// Load .obj file
 	string path = rootDir + filePath;
-	FILE * file = fopen(path.c_str(), "r");
-	if (!std::filesystem::exists(path) || filePath == "")
+	FILE* file = fopen(path.c_str(), "r");
+	if (!std::filesystem::exists(path) || filePath.empty())
 	{
 		Logger::throwWarning("Cannot load mesh file: \"" + filePath + "\"!");
 		return {};
@@ -219,16 +219,16 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 			Vec2 uv2 = meshPart.uvCoords[i + 2];
 
 			// Vertex delta
-			Vec3 deltaPos1 = v1 - v0;
-			Vec3 deltaPos2 = v2 - v0;
+			Vec3 deltaPos1 = (v1 - v0);
+			Vec3 deltaPos2 = (v2 - v0);
 
 			// UV delta
-			Vec2 deltaUV1 = uv1 - uv0;
-			Vec2 deltaUV2 = uv2 - uv0;
+			Vec2 deltaUV1 = (uv1 - uv0);
+			Vec2 deltaUV2 = (uv2 - uv0);
 
 			// Calculate tangent vector
-			float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-			Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+			float r = (1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x));
+			Vec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
 
 			// Add to current mesh part
 			meshPart.tangents.push_back(tangent);

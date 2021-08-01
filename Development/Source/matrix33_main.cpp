@@ -1,7 +1,6 @@
 #include "matrix33.hpp"
 #include "matrix44.hpp"
 
-// Create the matrix with specified values
 Matrix33::Matrix33(
 	float m00, float m01, float m02, 
 	float m10, float m11, float m12, 
@@ -12,7 +11,6 @@ Matrix33::Matrix33(
 	this->m[0][2] = m02; this->m[1][2] = m12; this->m[2][2] = m22;
 }
 
-// Create the identity matrix
 Matrix33::Matrix33()
 {
 	for (int i = 0; i < 9; i++) {
@@ -24,7 +22,6 @@ Matrix33::Matrix33()
 	this->m[2][2] = 1.0f;
 }
 
-// Create a matrix from another bigger matrix
 Matrix33::Matrix33(const Matrix44& other)
 {
 	this->m[0][0] = other.m[0][0]; this->m[1][0] = other.m[1][0]; this->m[2][0] = other.m[2][0];
@@ -32,7 +29,6 @@ Matrix33::Matrix33(const Matrix44& other)
 	this->m[0][2] = other.m[0][2]; this->m[1][2] = other.m[1][2]; this->m[2][2] = other.m[2][2];
 }
 
-// Create a custom identity matrix
 Matrix33::Matrix33(float value)
 {
 	for (int i = 0; i < 9; i++) {
@@ -44,8 +40,7 @@ Matrix33::Matrix33(float value)
 	this->m[2][2] = value;
 }
 
-// Matrix-matrix addition
-Matrix33 Matrix33::operator+(const Matrix33& other) const
+const Matrix33 Matrix33::operator+(const Matrix33& other) const
 {
 	Matrix33 newMatrix;
 
@@ -56,8 +51,7 @@ Matrix33 Matrix33::operator+(const Matrix33& other) const
 	return newMatrix;
 }
 
-// Matrix-matrix subtraction
-Matrix33 Matrix33::operator-(const Matrix33& other) const
+const Matrix33 Matrix33::operator-(const Matrix33& other) const
 {
 	Matrix33 newMatrix;
 
@@ -68,8 +62,7 @@ Matrix33 Matrix33::operator-(const Matrix33& other) const
 	return newMatrix;
 }
 
-// Matrix-matrix multiplication
-Matrix33 Matrix33::operator*(const Matrix33& other) const
+const Matrix33 Matrix33::operator*(const Matrix33& other) const
 {
 	Matrix33 newMatrix(0.0f);
 

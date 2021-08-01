@@ -52,14 +52,14 @@ void WaterEntity::setUvRepeat(float value)
 	_uvRepeat = std::max(0.0f, value);
 }
 
-void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_lowQualityRenderBuffer = renderBuffer;
+	_lowQualityRenderBuffer = value;
 }
 
-void WaterEntity::setHighQualityRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void WaterEntity::setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_highQualityRenderBuffer = renderBuffer;
+	_highQualityRenderBuffer = value;
 }
 
 void WaterEntity::setQuality(WaterQuality quality)

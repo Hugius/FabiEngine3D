@@ -26,33 +26,35 @@ struct Matrix44 final
 		float m30, float m31, float m32, float m33
 	);
 
-	// Operators
-	float operator[](unsigned int index) const;
-	Vec4 operator*(const Vec4& other) const;
-	Vec3 operator*(const Vec3& other) const;
-	Matrix44 operator+(const Matrix44& other) const;
-	Matrix44 operator-(const Matrix44& other) const;
-	Matrix44 operator*(const Matrix44& other) const;
-
-	// Axes
-	Vec3 GetXAxis() const;
-	Vec3 GetYAxis() const;
-	Vec3 GetZAxis() const;
-
-	// Application
-	float getDeterminant() const;
-	bool invert();
+	// Voids
 	void transpose();
-	void SetEulerAxis(float yaw, float pitch, float roll);
+	void setEulerAxis(float yaw, float pitch, float roll);
+	
+	// Matrices
+	static const Matrix44 createTranslation(float x, float y, float z);
+	static const Matrix44 createRotation(float x, float y, float z);
+	static const Matrix44 createRotationX(float angle);
+	static const Matrix44 createRotationY(float angle);
+	static const Matrix44 createRotationZ(float angle);
+	static const Matrix44 createScaling(float x, float y, float z);
+	static const Matrix44 createOrtho(float left, float right, float bottom, float top, float nearZ, float farZ);
+	static const Matrix44 createProjection(float fovY, float aspect, float nearZ, float farZ);
+	static const Matrix44 createView(const Vec3& eye, const Vec3& center, const Vec3& up);
+	const Matrix44 operator+(const Matrix44& other) const;
+	const Matrix44 operator-(const Matrix44& other) const;
+	const Matrix44 operator*(const Matrix44& other) const;
 
-	// Static creations
-	static Matrix44 createTranslation(float x, float y, float z);
-	static Matrix44 createRotation(float x, float y, float z);
-	static Matrix44 createRotationX(float angle);
-	static Matrix44 createRotationY(float angle);
-	static Matrix44 createRotationZ(float angle);
-	static Matrix44 createScaling(float x, float y, float z);
-	static Matrix44 createOrtho(float left, float right, float bottom, float top, float nearZ, float farZ);
-	static Matrix44 createProjection(float fovY, float aspect, float nearZ, float farZ);
-	static Matrix44 createView(const Vec3& eye, const Vec3& center, const Vec3& up);
+	// Vectors
+	const Vec4 operator*(const Vec4& other) const;
+	const Vec3 operator*(const Vec3& other) const;
+	const Vec3 getXAxis();
+	const Vec3 getYAxis();
+	const Vec3 getZAxis();
+
+	// Floats
+	const float operator[](unsigned int index) const;
+	const float getDeterminant();
+	
+	// Booleans
+	const bool invert();
 };

@@ -24,29 +24,28 @@ struct Ivec2 final
 	Ivec2(int xy);
 	Ivec2(int x, int y);
 
-	// Operators
-	Ivec2 operator-() const;
-
-	Ivec2 operator+(const Ivec2& other) const;
-	Ivec2 operator-(const Ivec2& other) const;
-	Ivec2 operator*(const Ivec2& other) const;
-	Ivec2 operator/(const Ivec2& other) const;
-
-	Ivec2 operator+(const int& other) const;
-	Ivec2 operator-(const int& other) const;
-	Ivec2 operator*(const int& other) const;
-	Ivec2 operator/(const int& other) const;
-
+	// Voids
 	void operator+=(const Ivec2& other);
 	void operator-=(const Ivec2& other);
 	void operator*=(const Ivec2& other);
 	void operator/=(const Ivec2& other);
-
 	void operator+=(const int& other);
 	void operator-=(const int& other);
 	void operator/=(const int& other);
 	void operator*=(const int& other);
 
-	bool operator==(const Ivec2& other) const;
-	bool operator!=(const Ivec2& other) const;
+	// Vectors
+	const Ivec2 operator-() const;
+	const Ivec2 operator+(const Ivec2& other) const;
+	const Ivec2 operator-(const Ivec2& other) const;
+	const Ivec2 operator*(const Ivec2& other) const;
+	const Ivec2 operator/(const Ivec2& other) const;
+	const Ivec2 operator+(const int& other) const;
+	const Ivec2 operator-(const int& other) const;
+	const Ivec2 operator*(const int& other) const;
+	const Ivec2 operator/(const int& other) const;
+	
+	// Booleans
+	const bool operator==(const Ivec2& other) const;
+	const bool operator!=(const Ivec2& other) const;
 };

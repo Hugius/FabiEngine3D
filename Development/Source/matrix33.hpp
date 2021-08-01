@@ -24,8 +24,17 @@ struct Matrix33 final
 		float m20, float m21, float m22
 	);
 
-	// Operators
-	Matrix33 operator+(const Matrix33& other) const;
-	Matrix33 operator-(const Matrix33& other) const;
-	Matrix33 operator*(const Matrix33& other) const;
+	// Voids
+	void transpose();
+
+	// Matrices
+	const Matrix33 operator+(const Matrix33& other) const;
+	const Matrix33 operator-(const Matrix33& other) const;
+	const Matrix33 operator*(const Matrix33& other) const;
+
+	// Floats
+	const float getDeterminant();
+
+	// Booleans
+	const bool invert();
 };

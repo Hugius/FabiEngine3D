@@ -14,7 +14,7 @@ public:
 
 	// Voids
 	void updateModelMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer);
+	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
 	void setColor(Vec3 value);

@@ -1,8 +1,8 @@
 #include "terrain_entity.hpp"
 
-void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> renderBuffer)
+void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
-	_renderBuffer = renderBuffer;
+	_renderBuffer = value;
 }
 
 void TerrainEntity::setPixelValues(const vector<float>& value)

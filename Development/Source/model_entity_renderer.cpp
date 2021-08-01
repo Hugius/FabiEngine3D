@@ -175,14 +175,13 @@ void ModelEntityRenderer::render(const shared_ptr<ModelEntity> entity)
 		for (const auto& partID : entity->getPartIDs())
 		{
 			// Temporary values
-			auto buffer = entity->getRenderBuffer(partID);
+			const auto buffer = entity->getRenderBuffer(partID);
 
 			// Model matrices
 			const auto& modelMatrix = entity->getModelMatrix(partID);
-			auto normalModelMatrix = modelMatrix;
-			normalModelMatrix.transpose();
+			Matrix33 normalModelMatrix = Matrix33(modelMatrix);
 			normalModelMatrix.invert();
-			normalModelMatrix = Matrix33(normalModelMatrix);
+			normalModelMatrix.transpose();
 
 			// Shader uniforms
 			_shader.uploadUniform("u_color", entity->getColor(partID));

@@ -52,7 +52,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 	if (entity->hasRenderBuffer() && entity->isVisible())
 	{
 		// Temporary values
-		auto buffer = entity->getRenderBuffer();
+		const auto buffer = entity->getRenderBuffer();
 
 		// Enable wire frame
 		if (entity->isWireFramed())

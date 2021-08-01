@@ -22,7 +22,7 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireFramed(bool value);
-	void setDiffuseMap(GLuint value);
+	void setDiffuseMap(TextureID value);
 	void setPosition(Vec3 value);
 	void setInitialRotation(Vec3 value);
 	void setRotation(Vec3 value);
@@ -51,7 +51,7 @@ public:
 
 	// Getters
 	const Matrix44& getModelMatrix() const;
-	const GLuint getDiffuseMap() const;
+	const TextureID getDiffuseMap() const;
 	const Vec3 getPosition() const;
 	const Vec3 getInitialRotation() const;
 	const Vec3 getRotation() const;
@@ -109,7 +109,7 @@ private:
 	unsigned int _spriteAnimationLoops = 0;
 	int _maxSpriteAnimationLoops = 0;
 
-	GLuint _diffuseMap = 0;
+	TextureID _diffuseMap = 0;
 
 	string _textContent = "";
 	string _diffuseMapPath = "";

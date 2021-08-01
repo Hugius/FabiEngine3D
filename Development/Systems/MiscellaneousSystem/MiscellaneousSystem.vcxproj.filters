@@ -7,6 +7,9 @@
     <Filter Include="Other">
       <UniqueIdentifier>{cb9abead-d725-4fa1-af8f-f916f2d37d4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{9074a0b9-27be-4ac8-853e-3d01ee7a4fb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\aabb_parent_type.hpp">
@@ -54,9 +57,6 @@
     <ClInclude Include="..\..\Source\transformation_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\camera.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\configuration.hpp">
       <Filter>Other</Filter>
     </ClInclude>
@@ -90,15 +90,15 @@
     <ClInclude Include="..\..\Source\reflection_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\render_utils.hpp">
+      <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\camera.hpp">
+      <Filter>Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\camera_misc.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\configuration.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\camera_main.cpp">
       <Filter>Other</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ray_caster.cpp">
@@ -115,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\library_loader.cpp">
       <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\camera_main.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\camera_misc.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

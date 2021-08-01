@@ -10,7 +10,7 @@ void TerrainEntity::setHeightMapPath(const string& value)
 	_heightMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMap(GLuint value)
+void TerrainEntity::setDiffuseMap(TextureID value)
 {
 	_diffuseMap = value;
 }
@@ -20,7 +20,7 @@ void TerrainEntity::setDiffuseMapPath(const string& value)
 	_diffuseMapPath = value;
 }
 
-void TerrainEntity::setNormalMap(GLuint value)
+void TerrainEntity::setNormalMap(TextureID value)
 {
 	_normalMap = value;
 }
@@ -30,7 +30,7 @@ void TerrainEntity::setNormalMapPath(const string& value)
 	_normalMapPath = value;
 }
 
-void TerrainEntity::setBlendMap(GLuint value)
+void TerrainEntity::setBlendMap(TextureID value)
 {
 	_blendMap = value;
 }
@@ -40,7 +40,7 @@ void TerrainEntity::setBlendMapPath(const string& value)
 	_blendMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMapR(GLuint value)
+void TerrainEntity::setDiffuseMapR(TextureID value)
 {
 	_diffuseMapR = value;
 }
@@ -50,7 +50,7 @@ void TerrainEntity::setDiffuseMapPathR(const string& value)
 	_diffuseMapPathR = value;
 }
 
-void TerrainEntity::setDiffuseMapG(GLuint value)
+void TerrainEntity::setDiffuseMapG(TextureID value)
 {
 	_diffuseMapG = value;
 }
@@ -60,7 +60,7 @@ void TerrainEntity::setDiffuseMapPathG(const string& value)
 	_diffuseMapPathG = value;
 }
 
-void TerrainEntity::setDiffuseMapB(GLuint value)
+void TerrainEntity::setDiffuseMapB(TextureID value)
 {
 	_diffuseMapB = value;
 }
@@ -70,7 +70,7 @@ void TerrainEntity::setDiffuseMapPathB(const string& value)
 	_diffuseMapPathB = value;
 }
 
-void TerrainEntity::setNormalMapR(GLuint value)
+void TerrainEntity::setNormalMapR(TextureID value)
 {
 	_normalMapR = value;
 }
@@ -80,7 +80,7 @@ void TerrainEntity::setNormalMapPathR(const string& value)
 	_normalMapPathR = value;
 }
 
-void TerrainEntity::setNormalMapG(GLuint value)
+void TerrainEntity::setNormalMapG(TextureID value)
 {
 	_normalMapG = value;
 }
@@ -90,7 +90,7 @@ void TerrainEntity::setNormalMapPathG(const string& value)
 	_normalMapPathG = value;
 }
 
-void TerrainEntity::setNormalMapB(GLuint value)
+void TerrainEntity::setNormalMapB(TextureID value)
 {
 	_normalMapB = value;
 }

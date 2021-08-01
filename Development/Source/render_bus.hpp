@@ -2,8 +2,8 @@
 
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
+#include "render_utils.hpp"
 
-#include <GLEW\\glew.h>
 #include <string>
 
 using std::string;
@@ -12,20 +12,20 @@ class RenderBus final
 {
 public:
 	// Textures
-	void setPrimarySceneMap(GLuint value);
-	void setSecondarySceneMap(GLuint value);
-	void setMainSkyReflectionCubeMap(GLuint value);
-	void setMixSkyReflectionCubeMap(GLuint value);
-	void setSceneReflectionMap(GLuint value);
-	void setWaterReflectionMap(GLuint value);
-	void setWaterRefractionMap(GLuint value);
-	void setShadowMap(GLuint value);
-	void setBloomMap(GLuint value);
-	void setSceneDepthMap(GLuint value);
-	void setDofMap(GLuint value);
-	void setLensFlareMap(GLuint value);
-	void setMotionBlurMap(GLuint value);
-	void setFinalSceneMap(GLuint value);
+	void setPrimarySceneMap(TextureID value);
+	void setSecondarySceneMap(TextureID value);
+	void setMainSkyReflectionCubeMap(TextureID value);
+	void setMixSkyReflectionCubeMap(TextureID value);
+	void setSceneReflectionMap(TextureID value);
+	void setWaterReflectionMap(TextureID value);
+	void setWaterRefractionMap(TextureID value);
+	void setShadowMap(TextureID value);
+	void setBloomMap(TextureID value);
+	void setSceneDepthMap(TextureID value);
+	void setDofMap(TextureID value);
+	void setLensFlareMap(TextureID value);
+	void setMotionBlurMap(TextureID value);
+	void setFinalSceneMap(TextureID value);
 
 	// Strings
 	void setCursorEntityID(const string& value);
@@ -119,20 +119,20 @@ public:
 	void setBloomType(BloomType value);
 
 	// Textures
-	const GLuint getPrimarySceneMap();
-	const GLuint getSecondarySceneMap();
-	const GLuint getMainSkyReflectionCubeMap();
-	const GLuint getMixSkyReflectionCubeMap();
-	const GLuint getSceneReflectionMap();
-	const GLuint getWaterReflectionMap();
-	const GLuint getWaterRefractionMap();
-	const GLuint getShadowMap();
-	const GLuint getBloomMap();
-	const GLuint getSceneDepthMap();
-	const GLuint getDofMap();
-	const GLuint getLensFlareMap();
-	const GLuint getFinalSceneMap();
-	const GLuint getMotionBlurMap();
+	const TextureID getPrimarySceneMap();
+	const TextureID getSecondarySceneMap();
+	const TextureID getMainSkyReflectionCubeMap();
+	const TextureID getMixSkyReflectionCubeMap();
+	const TextureID getSceneReflectionMap();
+	const TextureID getWaterReflectionMap();
+	const TextureID getWaterRefractionMap();
+	const TextureID getShadowMap();
+	const TextureID getBloomMap();
+	const TextureID getSceneDepthMap();
+	const TextureID getDofMap();
+	const TextureID getLensFlareMap();
+	const TextureID getFinalSceneMap();
+	const TextureID getMotionBlurMap();
 
 	// Strings
 	const string& getCursorEntityID();
@@ -226,20 +226,20 @@ public:
 
 private:
 	// Textures
-	GLuint _primarySceneMap = 0;
-	GLuint _secondarySceneMap = 0;
-	GLuint _mainSkyReflectionCubeMap = 0;
-	GLuint _mixSkyReflectionCubeMap = 0;
-	GLuint _sceneReflectionMap = 0;
-	GLuint _waterReflectionMap = 0;
-	GLuint _waterRefractionMap = 0;
-	GLuint _shadowMap = 0;
-	GLuint _bloomMap = 0;
-	GLuint _sceneDepthMap = 0;
-	GLuint _dofMap = 0;
-	GLuint _lensFlareMap = 0;
-	GLuint _finalSceneMap = 0;
-	GLuint _motionBlurMap = 0;
+	TextureID _primarySceneMap = 0;
+	TextureID _secondarySceneMap = 0;
+	TextureID _mainSkyReflectionCubeMap = 0;
+	TextureID _mixSkyReflectionCubeMap = 0;
+	TextureID _sceneReflectionMap = 0;
+	TextureID _waterReflectionMap = 0;
+	TextureID _waterRefractionMap = 0;
+	TextureID _shadowMap = 0;
+	TextureID _bloomMap = 0;
+	TextureID _sceneDepthMap = 0;
+	TextureID _dofMap = 0;
+	TextureID _lensFlareMap = 0;
+	TextureID _finalSceneMap = 0;
+	TextureID _motionBlurMap = 0;
 
 	// Strings
 	string _cursorEntityID = "";

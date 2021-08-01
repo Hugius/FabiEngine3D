@@ -131,7 +131,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 			}
 
 			// Load OpenGL texture
-			GLuint loadedTexture = _convertToTexture3D(filePathsList[i], loadedImages);
+			TextureID loadedTexture = _convertToTexture3D(filePathsList[i], loadedImages);
 
 			// Free images memory
 			for (const auto& image : loadedImages)
@@ -153,7 +153,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	}
 }
 
-GLuint TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
 	auto it = _textureCache2D.find(filePath);
@@ -195,7 +195,7 @@ BEGIN:
 	return it->second;
 }
 
-GLuint TextureLoader::getTexture3D(const array<string, 6>& filePaths)
+TextureID TextureLoader::getTexture3D(const array<string, 6>& filePaths)
 {
 BEGIN:
 	auto it = _textureCache3D.find(filePaths);
@@ -225,7 +225,7 @@ BEGIN:
 		}
 
 		// Load OpenGL texture
-		GLuint loadedTexture = _convertToTexture3D(filePaths, loadedImages);
+		TextureID loadedTexture = _convertToTexture3D(filePaths, loadedImages);
 
 		// Free images memory
 		for (const auto& image : loadedImages)
@@ -255,13 +255,13 @@ BEGIN:
 	return it->second;
 }
 
-GLuint TextureLoader::getText(const string& textContent, const string& fontPath)
+TextureID TextureLoader::getText(const string& textContent, const string& fontPath)
 {
 BEGIN:
 	auto it = _textCache.find(make_pair(textContent, fontPath));
 	if (it == _textCache.end()) // Not in map (yet)
 	{
-		GLuint loadedTexture = _loadText(textContent, fontPath);
+		TextureID loadedTexture = _loadText(textContent, fontPath);
 
 		// Determine if needs to be cached
 		if (loadedTexture == 0)

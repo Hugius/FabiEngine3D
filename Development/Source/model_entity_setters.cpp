@@ -69,22 +69,22 @@ void ModelEntity::updateModelMatrix()
 	}
 }
 
-void ModelEntity::setDiffuseMap(GLuint value, const string& partID)
+void ModelEntity::setDiffuseMap(TextureID value, const string& partID)
 {
 	_parts[_getPartIndex(partID)].diffuseMap = value;
 }
 
-void ModelEntity::setEmissionMap(GLuint value, const string& partID)
+void ModelEntity::setEmissionMap(TextureID value, const string& partID)
 {
 	_parts[_getPartIndex(partID)].emissionMap = value;
 }
 
-void ModelEntity::setReflectionMap(GLuint value, const string& partID)
+void ModelEntity::setReflectionMap(TextureID value, const string& partID)
 {
 	_parts[_getPartIndex(partID)].reflectionMap = value;
 }
 
-void ModelEntity::setNormalMap(GLuint value, const string& partID)
+void ModelEntity::setNormalMap(TextureID value, const string& partID)
 {
 	_parts[_getPartIndex(partID)].normalMap = value;
 }

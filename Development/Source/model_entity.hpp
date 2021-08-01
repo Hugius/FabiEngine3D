@@ -11,10 +11,10 @@ public:
 	// Setters
 	void addPart(const string& ID);
 	void updateModelMatrix();
-	void setDiffuseMap(GLuint value, const string& partID = "");
-	void setEmissionMap(GLuint value, const string& partID = "");
-	void setReflectionMap(GLuint value, const string& partID = "");
-	void setNormalMap(GLuint value, const string& partID = "");
+	void setDiffuseMap(TextureID value, const string& partID = "");
+	void setEmissionMap(TextureID value, const string& partID = "");
+	void setReflectionMap(TextureID value, const string& partID = "");
+	void setNormalMap(TextureID value, const string& partID = "");
 	void setPosition(Vec3 value, const string& partID = "");
 	void setRotation(Vec3 value, const string& partID = "");
 	void setRotationOrigin(Vec3 value, const string& partID = "");
@@ -50,10 +50,10 @@ public:
 	
 	// Getters
 	const Matrix44& getModelMatrix(const string& partID = "");
-	const GLuint getDiffuseMap(const string& partID = "");
-	const GLuint getEmissionMap(const string& partID = "");
-	const GLuint getReflectionMap(const string& partID = "");
-	const GLuint getNormalMap(const string& partID = "");
+	const TextureID getDiffuseMap(const string& partID = "");
+	const TextureID getEmissionMap(const string& partID = "");
+	const TextureID getReflectionMap(const string& partID = "");
+	const TextureID getNormalMap(const string& partID = "");
 	const Vec3 getPosition(const string& partID = "");
 	const Vec3 getRotation(const string& partID = "");
 	const Vec3 getRotationOrigin(const string& partID = "");
@@ -117,10 +117,10 @@ private:
 
 		float inversion = 0.0f;
 
-		GLuint diffuseMap = 0;
-		GLuint emissionMap = 0;
-		GLuint reflectionMap = 0;
-		GLuint normalMap = 0;
+		TextureID diffuseMap = 0;
+		TextureID emissionMap = 0;
+		TextureID reflectionMap = 0;
+		TextureID normalMap = 0;
 	};
 
 	unsigned int _getPartIndex(string partID);

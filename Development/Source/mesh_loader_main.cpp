@@ -4,7 +4,6 @@
 
 #pragma warning(disable:4996) // Disabling annoying warning
 
-#include <GLEW\\glew.h>
 #include <filesystem>
 
 vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTangents)
@@ -47,7 +46,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		if (strcmp(lineHeader, "v") == 0) // Vertices
 		{
 			Vec3 vertex;
-			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
+			auto temp = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			temp_positions.push_back(vertex);
 
 			continue;
@@ -55,7 +54,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		else if (strcmp(lineHeader, "vt") == 0) // Uv coords
 		{
 			Vec2 uv;
-			fscanf(file, "%f %f\n", &uv.x, &uv.y);
+			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
 			temp_uvs.push_back(uv);
 
 			continue;
@@ -63,7 +62,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		else if (strcmp(lineHeader, "vn") == 0) // Normals
 		{
 			Vec3 normal;
-			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
+			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
 
 			continue;
@@ -71,7 +70,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		else if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
 		{
 			char name[128];
-			fscanf(file, "%s\n", name);
+			auto temp = fscanf(file, "%s\n", name);
 			selectedPartID = name;
 
 			// Cannot be a questionmark
@@ -93,7 +92,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			if (selectedPartID != "")
 			{
 				char name[128];
-				fscanf(file, "%s\n", name);
+				auto temp = fscanf(file, "%s\n", name);
 				tempDiffuseMapPath = name;
 			}
 
@@ -104,7 +103,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			if (selectedPartID != "")
 			{
 				char name[128];
-				fscanf(file, "%s\n", name);
+				auto temp = fscanf(file, "%s\n", name);
 				tempEmissionMapPath = name;
 			}
 
@@ -115,7 +114,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			if (selectedPartID != "")
 			{
 				char name[128];
-				fscanf(file, "%s\n", name);
+				auto temp = fscanf(file, "%s\n", name);
 				tempReflectionMapPath = name;
 			}
 
@@ -126,7 +125,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 			if (selectedPartID != "")
 			{
 				char name[128];
-				fscanf(file, "%s\n", name);
+				auto temp = fscanf(file, "%s\n", name);
 				tempNormalMapPath = name;
 			}
 
@@ -135,9 +134,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 		else if (strcmp(lineHeader, "f") == 0) // Faces (triangle data)
 		{
 			// Declare variables
-			GLuint posIndex[3];
-			GLuint uvIndex[3];
-			GLuint normalIndex[3];
+			unsigned int posIndex[3];
+			unsigned int uvIndex[3];
+			unsigned int normalIndex[3];
 			int matches;
 
 			// Read face indices

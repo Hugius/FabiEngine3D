@@ -1,71 +1,71 @@
 #include "render_bus.hpp"
 
-const GLuint RenderBus::getMainSkyReflectionCubeMap()
+const TextureID RenderBus::getMainSkyReflectionCubeMap()
 {
 	return _mainSkyReflectionCubeMap;
 }
 
-const GLuint RenderBus::getMixSkyReflectionCubeMap()
+const TextureID RenderBus::getMixSkyReflectionCubeMap()
 {
 	return _mixSkyReflectionCubeMap;
 }
 
-const GLuint RenderBus::getSceneReflectionMap()
+const TextureID RenderBus::getSceneReflectionMap()
 {
 	return _sceneReflectionMap;
 }
 
-const GLuint RenderBus::getWaterReflectionMap()
+const TextureID RenderBus::getWaterReflectionMap()
 {
 	return _waterReflectionMap;
 }
 
-const GLuint RenderBus::getWaterRefractionMap()
+const TextureID RenderBus::getWaterRefractionMap()
 {
 	return _waterRefractionMap;
 }
 
-const GLuint RenderBus::getBloomMap()
+const TextureID RenderBus::getBloomMap()
 {
 	return _bloomMap;
 }
 
-const GLuint RenderBus::getPrimarySceneMap()
+const TextureID RenderBus::getPrimarySceneMap()
 {
 	return _primarySceneMap;
 }
 
-const GLuint RenderBus::getSecondarySceneMap()
+const TextureID RenderBus::getSecondarySceneMap()
 {
 	return _secondarySceneMap;
 }
 
-const GLuint RenderBus::getShadowMap()
+const TextureID RenderBus::getShadowMap()
 {
 	return _shadowMap;
 }
 
-const GLuint RenderBus::getMotionBlurMap()
+const TextureID RenderBus::getMotionBlurMap()
 {
 	return _motionBlurMap;
 }
 
-const GLuint RenderBus::getLensFlareMap()
+const TextureID RenderBus::getLensFlareMap()
 {
 	return _lensFlareMap;
 }
 
-const GLuint RenderBus::getSceneDepthMap()
+const TextureID RenderBus::getSceneDepthMap()
 {
 	return _sceneDepthMap;
 }
 
-const GLuint RenderBus::getDofMap()
+const TextureID RenderBus::getDofMap()
 {
 	return _dofMap;
 }
 
-const GLuint RenderBus::getFinalSceneMap()
+const TextureID RenderBus::getFinalSceneMap()
 {
 	return _finalSceneMap;
 }

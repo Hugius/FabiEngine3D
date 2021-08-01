@@ -2,9 +2,9 @@
 
 #include "buffer_type.hpp"
 #include "mathematics.hpp"
+#include "render_utils.hpp"
 
 #include <vector>
-#include <GLEW\\glew.h>
 
 using std::vector;
 
@@ -19,7 +19,7 @@ public:
 	void addInstancing(const vector<Vec3>& offsets);
 	void removeInstancing();
 
-	const GLuint getVAO() const;
+	const BufferID getVAO() const;
 
 	const unsigned int getVertexCount() const;
 	const unsigned int getInstancedOffsetCount() const;
@@ -34,16 +34,16 @@ private:
 	void _create3D(BufferType type, float data[], unsigned int dataCount);
 	void _create2D(float x, float y, float w, float h, bool isCentered, bool isText);
 	
-	unsigned int _vertexCount;
-	unsigned int _offsetCount;
+	unsigned int _vertexCount = 0;
+	unsigned int _offsetCount = 0;
 
 	bool _isInstanced = false;
 
-	GLuint _vao;
-	GLuint _vbo;
-	GLuint _vbo_instanced;
+	BufferID _vao = 0;
+	BufferID _vbo = 0;
+	BufferID _vbo_instanced = 0;
 
-	BufferType _bufferType;
+	BufferType _bufferType = BufferType();
 
 	vector<Vec3> _instancedOffsets;
 };

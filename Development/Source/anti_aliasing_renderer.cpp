@@ -17,7 +17,7 @@ void AntiAliasingRenderer::unbind()
 	_shader.unbind();
 }
 
-void AntiAliasingRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap)
+void AntiAliasingRenderer::render(const shared_ptr<ImageEntity> entity, TextureID sceneMap)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{

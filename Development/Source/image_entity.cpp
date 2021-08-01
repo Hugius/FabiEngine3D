@@ -12,7 +12,7 @@ void ImageEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void ImageEntity::setDiffuseMap(GLuint value)
+void ImageEntity::setDiffuseMap(TextureID value)
 {
 	_diffuseMap = value;
 }
@@ -241,7 +241,7 @@ const int ImageEntity::getMaxSpriteAnimationLoops() const
 	return _maxSpriteAnimationLoops;
 }
 
-const GLuint ImageEntity::getDiffuseMap() const
+const TextureID ImageEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }

@@ -10,23 +10,23 @@ public:
 	// Setters
 	void setPixelValues(const vector<float>& value);
 	void setHeightMapPath(const string& value);
-	void setDiffuseMap(GLuint value);
+	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
-	void setNormalMap(GLuint value);
+	void setNormalMap(TextureID value);
 	void setNormalMapPath(const string& value);
-	void setBlendMap(GLuint value);
+	void setBlendMap(TextureID value);
 	void setBlendMapPath(const string& value);
-	void setDiffuseMapR(GLuint value);
+	void setDiffuseMapR(TextureID value);
 	void setDiffuseMapPathR(const string& value);
-	void setDiffuseMapG(GLuint value);
+	void setDiffuseMapG(TextureID value);
 	void setDiffuseMapPathG(const string& value);
-	void setDiffuseMapB(GLuint value);
+	void setDiffuseMapB(TextureID value);
 	void setDiffuseMapPathB(const string& value);
-	void setNormalMapR(GLuint value);
+	void setNormalMapR(TextureID value);
 	void setNormalMapPathR(const string& value);
-	void setNormalMapG(GLuint value);
+	void setNormalMapG(TextureID value);
 	void setNormalMapPathG(const string& value);
-	void setNormalMapB(GLuint value);
+	void setNormalMapB(TextureID value);
 	void setNormalMapPathB(const string& value);
 	void setBlendRepeatR(float value);
 	void setBlendRepeatG(float value);
@@ -41,15 +41,15 @@ public:
 	void setWireFramed(bool value);
 
 	// Textures
-	const GLuint getDiffuseMap()  const;
-	const GLuint getNormalMap()   const;
-	const GLuint getBlendMap()    const;
-	const GLuint getDiffuseMapR() const;
-	const GLuint getDiffuseMapG() const;
-	const GLuint getDiffuseMapB() const;
-	const GLuint getNormalMapR()  const;
-	const GLuint getNormalMapG()  const;
-	const GLuint getNormalMapB()  const;
+	const TextureID getDiffuseMap()  const;
+	const TextureID getNormalMap()   const;
+	const TextureID getBlendMap()    const;
+	const TextureID getDiffuseMapR() const;
+	const TextureID getDiffuseMapG() const;
+	const TextureID getDiffuseMapB() const;
+	const TextureID getNormalMapR()  const;
+	const TextureID getNormalMapG()  const;
+	const TextureID getNormalMapB()  const;
 
 	// Texture paths
 	const string& getHeightMapPath()   const;
@@ -101,15 +101,15 @@ private:
 	vector<Vec2> _uvCoords;
 	vector<Vec3> _normals;
 
-	GLuint _diffuseMap = 0;
-	GLuint _normalMap  = 0;
-	GLuint _blendMap   = 0;
-	GLuint _diffuseMapR  = 0;
-	GLuint _diffuseMapG  = 0;
-	GLuint _diffuseMapB  = 0;
-	GLuint _normalMapR = 0;
-	GLuint _normalMapG = 0;
-	GLuint _normalMapB = 0;
+	TextureID _diffuseMap = 0;
+	TextureID _normalMap  = 0;
+	TextureID _blendMap   = 0;
+	TextureID _diffuseMapR  = 0;
+	TextureID _diffuseMapG  = 0;
+	TextureID _diffuseMapB  = 0;
+	TextureID _normalMapR = 0;
+	TextureID _normalMapG = 0;
+	TextureID _normalMapB = 0;
 
 	string _heightMapPath  = "";
 	string _diffuseMapPath = "";

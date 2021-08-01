@@ -10,5 +10,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const shared_ptr<ImageEntity> entity, GLuint sceneMap);
+	void render(const shared_ptr<ImageEntity> entity, TextureID sceneMap);
 };

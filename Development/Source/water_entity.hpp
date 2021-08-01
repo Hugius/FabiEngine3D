@@ -15,9 +15,9 @@ public:
 	void setWaveOffset(Vec2 value);
 	void setPosition(Vec3 value);
 	void setColor(Vec3 value);
-	void setDudvMap(GLuint value);
-	void setNormalMap(GLuint value);
-	void setDisplacementMap(GLuint value);
+	void setDudvMap(TextureID value);
+	void setNormalMap(TextureID value);
+	void setDisplacementMap(TextureID value);
 	void setDudvMapPath(const string& value);
 	void setNormalMapPath(const string& value);
 	void setDisplacementMapPath(const string& value);
@@ -42,9 +42,9 @@ public:
 	const Vec2    getWaveOffset()				    const;
 	const Vec3	  getPosition()						const;
 	const Vec3    getColor()					    const;
-	const GLuint  getDudvMap()					    const;
-	const GLuint  getNormalMap()				    const;
-	const GLuint  getDisplacementMap()			    const;
+	const TextureID  getDudvMap()					    const;
+	const TextureID  getNormalMap()				    const;
+	const TextureID  getDisplacementMap()			    const;
 	const string& getDudvMapPath()				    const;
 	const string& getNormalMapPath()			    const;
 	const string& getDisplacementMapPath()		    const;
@@ -77,9 +77,9 @@ private:
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 
-	GLuint _dudvMap = 0;
-	GLuint _normalMap = 0;
-	GLuint _displacementMap = 0;
+	TextureID _dudvMap = 0;
+	TextureID _normalMap = 0;
+	TextureID _displacementMap = 0;
 
 	string _dudvMapPath = "";
 	string _normalMapPath = "";

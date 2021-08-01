@@ -6,7 +6,7 @@ const Matrix44 & BillboardEntity::getModelMatrix() const
 	return _modelMatrix;
 }
 
-const GLuint BillboardEntity::getDiffuseMap() const
+const TextureID BillboardEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }

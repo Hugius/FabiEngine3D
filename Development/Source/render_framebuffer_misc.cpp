@@ -18,12 +18,12 @@ Ivec2 RenderFramebuffer::getSize()
 	return _size;
 }
 
-GLuint RenderFramebuffer::getFBO()
+BufferID RenderFramebuffer::getFBO()
 {
 	return _fbo;
 }
 
-GLuint RenderFramebuffer::getTexture(int ID)
+BufferID RenderFramebuffer::getTexture(int ID)
 {
 	return _textures[ID];
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "render_bus.hpp"
+#include "render_utils.hpp"
 
-#include <GLEW\\glew.h>
 #include <SDL\\SDL_ttf.h>
 #include <array>
 #include <vector>
@@ -21,9 +21,9 @@ public:
 	TextureLoader(RenderBus& renderBus);
 
 	// Instant asset loading or caching
-	GLuint getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
-	GLuint getTexture3D(const array<string, 6>& filePaths);
-	GLuint getText(const string& textContent, const string& fontPath);
+	TextureID getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
+	TextureID getTexture3D(const array<string, 6>& filePaths);
+	TextureID getText(const string& textContent, const string& fontPath);
 	const vector<float>* getBitmapPixels(const string& filePath);
 
 	// Multithreaded caching
@@ -43,19 +43,19 @@ public:
 private:
 	// Functions
 	SDL_Surface* _loadImage(const string& filePath);
-	GLuint _convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic);
-	GLuint _convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images);
+	TextureID _convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic);
+	TextureID _convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images);
 	TTF_Font* _loadFont(const string& filePath);
-	GLuint _loadText(const string& textContent, const string& filePath);
+	TextureID _loadText(const string& textContent, const string& filePath);
 	vector<float> _loadBitmapPixels(const string& filePath);
 
 	// Instances
 	RenderBus& _renderBus;
 
 	// Caches
-	map<string, GLuint>	_textureCache2D;
-	map<array<string, 6>, GLuint> _textureCache3D;
+	map<string, TextureID>	_textureCache2D;
+	map<array<string, 6>, TextureID> _textureCache3D;
 	map<string, TTF_Font*> _fontCache;
-	map<pair<string, string>, GLuint> _textCache;
+	map<pair<string, string>, TextureID> _textCache;
 	map<string, vector<float>> _bitmapCache;
 };

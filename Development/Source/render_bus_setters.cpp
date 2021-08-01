@@ -2,72 +2,72 @@
 
 #include <algorithm>
 
-void RenderBus::setMainSkyReflectionCubeMap(GLuint value)
+void RenderBus::setMainSkyReflectionCubeMap(TextureID value)
 {
 	_mainSkyReflectionCubeMap = value;
 }
 
-void RenderBus::setMixSkyReflectionCubeMap(GLuint value)
+void RenderBus::setMixSkyReflectionCubeMap(TextureID value)
 {
 	_mixSkyReflectionCubeMap = value;
 }
 
-void RenderBus::setSceneReflectionMap(GLuint value)
+void RenderBus::setSceneReflectionMap(TextureID value)
 {
 	_sceneReflectionMap = value;
 }
 
-void RenderBus::setWaterReflectionMap(GLuint value)
+void RenderBus::setWaterReflectionMap(TextureID value)
 {
 	_waterReflectionMap = value;
 }
 
-void RenderBus::setWaterRefractionMap(GLuint value)
+void RenderBus::setWaterRefractionMap(TextureID value)
 {
 	_waterRefractionMap = value;
 }
 
-void RenderBus::setBloomMap(GLuint value)
+void RenderBus::setBloomMap(TextureID value)
 {
 	_bloomMap = value;
 }
 
-void RenderBus::setPrimarySceneMap(GLuint value)
+void RenderBus::setPrimarySceneMap(TextureID value)
 {
 	_primarySceneMap = value;
 }
 
-void RenderBus::setSecondarySceneMap(GLuint value)
+void RenderBus::setSecondarySceneMap(TextureID value)
 {
 	_secondarySceneMap = value;
 }
 
-void RenderBus::setShadowMap(GLuint value)
+void RenderBus::setShadowMap(TextureID value)
 {
 	_shadowMap = value;
 }
 
-void RenderBus::setMotionBlurMap(GLuint value)
+void RenderBus::setMotionBlurMap(TextureID value)
 {
 	_motionBlurMap = value;
 }
 
-void RenderBus::setLensFlareMap(GLuint value)
+void RenderBus::setLensFlareMap(TextureID value)
 {
 	_lensFlareMap = value;
 }
 
-void RenderBus::setSceneDepthMap(GLuint value)
+void RenderBus::setSceneDepthMap(TextureID value)
 {
 	_sceneDepthMap = value;
 }
 
-void RenderBus::setDofMap(GLuint value)
+void RenderBus::setDofMap(TextureID value)
 {
 	_dofMap = value;
 }
 
-void RenderBus::setFinalSceneMap(GLuint value)
+void RenderBus::setFinalSceneMap(TextureID value)
 {
 	_finalSceneMap = value;
 }

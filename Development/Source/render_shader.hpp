@@ -1,9 +1,9 @@
 #pragma once
 
 #include "logger.hpp"
-#include "mathematics.hpp"
+#include "mathematics.hpp" 
+#include "render_utils.hpp"
 
-#include <GLEW\\glew.h>
 #include <map>
 
 using std::map;
@@ -16,52 +16,32 @@ public:
 	void bind();
 	void unbind();
 	
-	template<class T> void uploadUniform(const string& name, const T & data) 
+	template<typename T>
+	void uploadUniform(const string& name, const T & data) 
 	{
-		GLint loc = _getUniLoc(name);
-		_uploadUniform(loc, data);
+		auto uniform = _getUniformID(name);
+		_uploadUniform(uniform, data);
 	}
 
 private:
-	void _createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode);
+	void _createProgram(const char* vShaderCode, const char* fShaderCode);
+	void _uploadUniform(const UniformID& uniformID, const bool& data);
+	void _uploadUniform(const UniformID& uniformID, const int& data);
+	void _uploadUniform(const UniformID& uniformID, const float& data);
+	void _uploadUniform(const UniformID& uniformID, const double& data);
+	void _uploadUniform(const UniformID& uniformID, const Vec2& data);
+	void _uploadUniform(const UniformID& uniformID, const Vec3& data);
+	void _uploadUniform(const UniformID& uniformID, const Vec4& data);
+	void _uploadUniform(const UniformID& uniformID, const Matrix33& data);
+	void _uploadUniform(const UniformID& uniformID, const Matrix44& data);
 
-	GLuint _program;
+	UniformID _getUniformID(const string& uniformName);
 
-	map<string, GLint> _uniformMap;
+	ShaderID _program = 0;
 
-	string _vertexFileName;
-	string _fragmentFileName;
-	string _name;
+	map<string, UniformID> _uniformCache;
 
-	// Get uniform location
-	GLint _getUniLoc(const string& uniformName) 
-	{
-		auto it = _uniformMap.find(uniformName);
-		if (it == _uniformMap.end()) // Add location to the map
-		{
-			GLint loc = glGetUniformLocation(_program, uniformName.c_str());
-			if (loc == -1) 
-			{
-				Logger::throwError("Uniform " + uniformName + " not found in shader " + _name);
-			}
-
-			_uniformMap.insert(std::make_pair(uniformName, loc));
-
-			return loc;
-		}
-		else {
-			return it->second; // Return existing location
-		}
-	}
-
-	// Overloading the upload functions
-	inline void _uploadUniform(const GLint& location, const bool& data)		{ glUniform1i(location, data);							 }
-	inline void _uploadUniform(const GLint& location, const int& data)      { glUniform1i(location, data);							 }
-	inline void _uploadUniform(const GLint& location, const float& data)    { glUniform1f(location, data);							 }
-	inline void _uploadUniform(const GLint& location, const double& data)   { glUniform1d(location, data);							 }
-	inline void _uploadUniform(const GLint& location, const Vec2& data)     { glUniform2f(location, data.x, data.y);				 }
-	inline void _uploadUniform(const GLint& location, const Vec3& data)     { glUniform3f(location, data.x, data.y, data.z);		 }
-	inline void _uploadUniform(const GLint& location, const Vec4& data)     { glUniform4f(location, data.x, data.y, data.z, data.w); }
-	inline void _uploadUniform(const GLint& location, const Matrix33& data) { glUniformMatrix3fv(location, 1, GL_FALSE, data.f);	 }
-	inline void _uploadUniform(const GLint& location, const Matrix44& data) { glUniformMatrix4fv(location, 1, GL_FALSE, data.f);	 }
+	string _vertexFileName = "";
+	string _fragmentFileName = "";
+	string _name = "";
 };

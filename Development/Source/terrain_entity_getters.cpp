@@ -1,46 +1,46 @@
 #include "terrain_entity.hpp"
 
-const GLuint TerrainEntity::getDiffuseMap() const
+const TextureID TerrainEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
 }
 
-const GLuint TerrainEntity::getNormalMap() const
+const TextureID TerrainEntity::getNormalMap() const
 {
 	return _normalMap;
 }
 
-const GLuint TerrainEntity::getBlendMap() const
+const TextureID TerrainEntity::getBlendMap() const
 {
 	return _blendMap;
 }
 
-const GLuint TerrainEntity::getDiffuseMapR() const
+const TextureID TerrainEntity::getDiffuseMapR() const
 {
 	return _diffuseMapR;
 }
 
-const GLuint TerrainEntity::getDiffuseMapG() const
+const TextureID TerrainEntity::getDiffuseMapG() const
 {
 	return _diffuseMapG;
 }
 
-const GLuint TerrainEntity::getDiffuseMapB() const
+const TextureID TerrainEntity::getDiffuseMapB() const
 {
 	return _diffuseMapB;
 }
 
-const GLuint TerrainEntity::getNormalMapR() const
+const TextureID TerrainEntity::getNormalMapR() const
 {
 	return _normalMapR;
 }
 
-const GLuint TerrainEntity::getNormalMapG() const
+const TextureID TerrainEntity::getNormalMapG() const
 {
 	return _normalMapG;
 }
 
-const GLuint TerrainEntity::getNormalMapB() const
+const TextureID TerrainEntity::getNormalMapB() const
 {
 	return _normalMapB;
 }

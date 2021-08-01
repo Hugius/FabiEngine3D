@@ -42,7 +42,7 @@ void BillboardEntity::setCameraFacingY(bool value)
 	_isFacingCameraY = value;
 }
 
-void BillboardEntity::setDiffuseMap(GLuint value)
+void BillboardEntity::setDiffuseMap(TextureID value)
 {
 	_diffuseMap = value;
 }

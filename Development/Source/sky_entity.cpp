@@ -21,7 +21,7 @@ void SkyEntity::setColor(Vec3 value)
 	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
-void SkyEntity::setCubeMap(GLuint value)
+void SkyEntity::setCubeMap(TextureID value)
 {
 	_cubeMap = value;
 }
@@ -61,7 +61,7 @@ const Vec3 SkyEntity::getColor() const
 	return _color;
 }
 
-const GLuint SkyEntity::getCubeMap() const
+const TextureID SkyEntity::getCubeMap() const
 {
 	return _cubeMap;
 }

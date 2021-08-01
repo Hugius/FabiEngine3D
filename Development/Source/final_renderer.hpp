@@ -10,6 +10,6 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionBlurMap);
+	void render(const shared_ptr<ImageEntity> entity, TextureID sceneMap, TextureID motionBlurMap);
 };
 

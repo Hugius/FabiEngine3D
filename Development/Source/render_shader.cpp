@@ -46,19 +46,19 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	fragmentFile.close();
 	vertexCode = vShaderStream.str();
 	fragmentCode = fShaderStream.str();
-	const GLchar* vShaderCode = vertexCode.c_str();
-	const GLchar* fShaderCode = fragmentCode.c_str();
+	const char* vShaderCode = vertexCode.c_str();
+	const char* fShaderCode = fragmentCode.c_str();
 
 	// Create shader program
 	_createProgram(vShaderCode, fShaderCode);
 }
 
-void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)
+void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCode)
 {
 	// Compile the shaders
-	GLuint vertex, fragment;
-	GLint success;
-	GLchar infoLog[512]; // For errors
+	unsigned int vertex, fragment;
+	int success;
+	char infoLog[512]; // For errors
 
 	// Vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
@@ -94,10 +94,10 @@ void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 
 	// Linking errors 
 	glGetProgramiv(_program, GL_LINK_STATUS, &success);
-	if (!success) 
+	if (!success)
 	{
 		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _fragmentFileName.substr(0, _fragmentFileName.size()-5) + ": " + infoLog);
+		Logger::throwError("Shader error at " + _name + ": " + infoLog);
 	}
 
 	// Delete the no longer needed shaders
@@ -109,6 +109,29 @@ void RenderShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFileName + "\"");
 }
 
+UniformID RenderShader::_getUniformID(const string& uniformName)
+{
+	auto it = _uniformCache.find(uniformName);
+	if (it == _uniformCache.end())
+	{
+		// Retrieve uniform location
+		auto uniform = glGetUniformLocation(_program, uniformName.c_str());
+		if (uniform == -1)
+		{
+			Logger::throwError("Uniform " + uniformName + " not found in shader " + _name);
+		}
+
+		// Cache uniform
+		_uniformCache.insert(std::make_pair(uniformName, uniform));
+
+		// Return new uniform
+		return uniform;
+	}
+	else {
+		return it->second; // Return existing uniform
+	}
+}
+
 void RenderShader::bind()
 {
 	glUseProgram(_program);
@@ -117,4 +140,49 @@ void RenderShader::bind()
 void RenderShader::unbind()
 {
 	glUseProgram(0);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const bool& data)
+{
+	glUniform1i(uniformID, data);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const int& data)
+{
+	glUniform1i(uniformID, data);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const float& data)
+{
+	glUniform1f(uniformID, data);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const double& data)
+{
+	glUniform1d(uniformID, data);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const Vec2& data)
+{
+	glUniform2f(uniformID, data.x, data.y);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const Vec3& data)
+{
+	glUniform3f(uniformID, data.x, data.y, data.z);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const Vec4& data)
+{
+	glUniform4f(uniformID, data.x, data.y, data.z, data.w);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const Matrix33& data)
+{
+	glUniformMatrix3fv(uniformID, 1, GL_FALSE, data.f);
+}
+
+void RenderShader::_uploadUniform(const UniformID& uniformID, const Matrix44& data)
+{
+	glUniformMatrix4fv(uniformID, 1, GL_FALSE, data.f);
 }

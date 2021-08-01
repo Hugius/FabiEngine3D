@@ -20,10 +20,10 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	return image;
 }
 
-GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic)
+TextureID TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic)
 {
 	// Generate OpenGL texture
-	GLuint texture;
+	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -67,13 +67,13 @@ GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* i
 	return texture;
 }
 
-GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
+TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
 
 	// Temporary values
-	GLuint texture;
+	TextureID texture;
 	glGenTextures(1, &texture);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
@@ -169,7 +169,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	return it->second; // Cache texture
 }
 
-GLuint TextureLoader::_loadText(const string& textContent, const string& fontPath)
+TextureID TextureLoader::_loadText(const string& textContent, const string& fontPath)
 {
 	std::string newText;
 
@@ -199,7 +199,7 @@ GLuint TextureLoader::_loadText(const string& textContent, const string& fontPat
 	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
 
 	// OpenGL Texture
-	GLuint texture;
+	TextureID texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

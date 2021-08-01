@@ -1,9 +1,11 @@
 #pragma once
 
 #include "mathematics.hpp"
+#include "render_utils.hpp"
 
-#include <GLEW\\glew.h>
 #include <vector>
+
+using std::vector;
 
 class RenderFramebuffer final
 {
@@ -19,14 +21,14 @@ public:
 
 	Ivec2 getSize();
 
-	GLuint getFBO();
-	GLuint getTexture(int ID);
+	BufferID getFBO();
+	TextureID getTexture(int ID);
 
 private:
-	GLuint _fbo = 0;
-	GLuint _rbo = 0;
+	BufferID _fbo = 0;
+	BufferID _rbo = 0;
 
-	std::vector<GLuint> _textures;
+	vector<TextureID> _textures;
 
 	Ivec2 _position = Ivec2(0);
 	Ivec2 _size = Ivec2(0);

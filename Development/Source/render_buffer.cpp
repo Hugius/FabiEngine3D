@@ -182,7 +182,7 @@ void RenderBuffer::removeInstancing()
 	_instancedOffsets.clear();
 }
 
-const GLuint RenderBuffer::getVAO() const
+const BufferID RenderBuffer::getVAO() const
 {
 	return _vao;
 }

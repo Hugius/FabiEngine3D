@@ -18,7 +18,7 @@ void FinalRenderer::unbind()
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const shared_ptr<ImageEntity> entity, GLuint sceneMap, GLuint motionBlurMap)
+void FinalRenderer::render(const shared_ptr<ImageEntity> entity, TextureID sceneMap, TextureID motionBlurMap)
 {
 	if (entity->isVisible() && !entity->getRenderBuffers().empty())
 	{

@@ -11,7 +11,7 @@ public:
 	void updateModelMatrix();
 
 	// Texture & color
-	void setDiffuseMap(GLuint value);
+	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
 	void setColor(Vec3 value);
 	void setMirroredHorizontally(bool value);
@@ -45,7 +45,7 @@ public:
 	void increaseSpriteAnimationLoops();
 
 	// Texture & color
-	const GLuint getDiffuseMap() const;
+	const TextureID getDiffuseMap() const;
 	const string& getDiffuseMapPath() const;
 	const Vec3 getColor() const;
 	const float getAlpha() const;
@@ -82,7 +82,7 @@ public:
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	GLuint _diffuseMap = 0;
+	TextureID _diffuseMap = 0;
 
 	string _diffuseMapPath = "";
 

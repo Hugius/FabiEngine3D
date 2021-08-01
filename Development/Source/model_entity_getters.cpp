@@ -6,22 +6,22 @@ const Matrix44& ModelEntity::getModelMatrix(const string& partID)
 	return _parts[_getPartIndex(partID)].modelMatrix;
 }
 
-const GLuint ModelEntity::getDiffuseMap(const string& partID)
+const TextureID ModelEntity::getDiffuseMap(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].diffuseMap;
 }
 
-const GLuint ModelEntity::getEmissionMap(const string& partID)
+const TextureID ModelEntity::getEmissionMap(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].emissionMap;
 }
 
-const GLuint ModelEntity::getReflectionMap(const string& partID)
+const TextureID ModelEntity::getReflectionMap(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].reflectionMap;
 }
 
-const GLuint ModelEntity::getNormalMap(const string& partID)
+const TextureID ModelEntity::getNormalMap(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].normalMap;
 }

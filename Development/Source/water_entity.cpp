@@ -12,17 +12,17 @@ void WaterEntity::setColor(Vec3 value)
 	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
 }
 
-void WaterEntity::setDudvMap(GLuint value)
+void WaterEntity::setDudvMap(TextureID value)
 {
 	_dudvMap = value;
 }
 
-void WaterEntity::setNormalMap(GLuint value)
+void WaterEntity::setNormalMap(TextureID value)
 {
 	_normalMap = value;
 }
 
-void WaterEntity::setDisplacementMap(GLuint value)
+void WaterEntity::setDisplacementMap(TextureID value)
 {
 	_displacementMap = value;
 }
@@ -137,17 +137,17 @@ const Vec3 WaterEntity::getColor() const
 	return _color;
 }
 
-const GLuint WaterEntity::getDudvMap() const
+const TextureID WaterEntity::getDudvMap() const
 {
 	return _dudvMap;
 }
 
-const GLuint WaterEntity::getNormalMap() const
+const TextureID WaterEntity::getNormalMap() const
 {
 	return _normalMap;
 }
 
-const GLuint WaterEntity::getDisplacementMap() const
+const TextureID WaterEntity::getDisplacementMap() const
 {
 	return _displacementMap;
 }

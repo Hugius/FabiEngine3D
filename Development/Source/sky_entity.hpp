@@ -15,7 +15,7 @@ public:
 	void updateRotation();
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);
-	void setCubeMap(GLuint value);
+	void setCubeMap(TextureID value);
 	void setOriginalLightness(float value);
 	void setLightness(float value);
 	void setRotationSpeed(float value);
@@ -24,7 +24,7 @@ public:
 	const array<string, 6>& getDiffuseMapPaths() const;
 	const Matrix44& getRotationMatrix()			 const;
 	const Vec3 getColor()						 const;
-	const GLuint getCubeMap()					 const;
+	const TextureID getCubeMap()					 const;
 	const float getOriginalLightness()			 const;
 	const float getLightness()					 const;
 	const float getRotationSpeed()				 const;
@@ -38,7 +38,7 @@ private:
 
 	Vec3 _color = Vec3(1.0f);
 
-	GLuint _cubeMap = 0;
+	TextureID _cubeMap = 0;
 
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;

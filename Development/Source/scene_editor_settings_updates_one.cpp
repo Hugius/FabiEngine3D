@@ -42,18 +42,18 @@ void SceneEditor::_updateSettingsMenu()
 			}
 
 			// Setting custom camera speed
-			_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
+			_gui.getGlobalScreen()->hasValueFormChanged("setSpeed", _editorSpeed, {});
 			_editorSpeed = max(0.0f, _editorSpeed);
 
 			// Setting LOD distance
-			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
+			if (_gui.getGlobalScreen()->hasValueFormChanged("lodDistance", lodDistance, {}))
 			{
 				lodDistance = max(0.0f, lodDistance);
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
 
 			// Setting reflection height
-			if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
+			if (_gui.getGlobalScreen()->hasValueFormChanged("reflectionHeight", reflectionHeight, {}))
 			{
 				_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
 			}
@@ -177,31 +177,31 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Size value
-		_gui.getGlobalScreen()->checkValueForm("size", size);
+		_gui.getGlobalScreen()->hasValueFormChanged("size", size);
 		size = max(0.0f, size);
 
 		// Position values
-		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
-		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);
-		_gui.getGlobalScreen()->checkValueForm("positionZ", position.z);
+		_gui.getGlobalScreen()->hasValueFormChanged("positionX", position.x);
+		_gui.getGlobalScreen()->hasValueFormChanged("positionY", position.y);
+		_gui.getGlobalScreen()->hasValueFormChanged("positionZ", position.z);
 
 		// Center values
-		_gui.getGlobalScreen()->checkValueForm("centerX", center.x);
-		_gui.getGlobalScreen()->checkValueForm("centerY", center.y);
-		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
+		_gui.getGlobalScreen()->hasValueFormChanged("centerX", center.x);
+		_gui.getGlobalScreen()->hasValueFormChanged("centerY", center.y);
+		_gui.getGlobalScreen()->hasValueFormChanged("centerZ", center.z);
 
 		// Button text contents
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 		screen->getButton("lighted")->changeTextContent(isLighted ? "Lighted: ON" : "Lighted : OFF");
 
 		// Lightness value
-		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("lightness", lightness))
 		{
 			lightness = max(0.0f, lightness / 100.0f);
 		}
 
 		// Interval value
-		_gui.getGlobalScreen()->checkValueForm("interval", interval);
+		_gui.getGlobalScreen()->hasValueFormChanged("interval", interval);
 		interval = max(0, interval);
 
 		// Disable shadows
@@ -260,7 +260,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Strength value
-		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("strength", strength))
 		{
 			strength = max(0.0f, strength / 100.0f);
 		}
@@ -326,11 +326,11 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
 
 		// Blur distance value
-		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
+		_gui.getGlobalScreen()->hasValueFormChanged("blurDistance", blurDistance);
 		blurDistance = max(0.0f, blurDistance);
 
 		// Max distance value
-		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+		_gui.getGlobalScreen()->hasValueFormChanged("maxDistance", maxDistance);
 		maxDistance = max(0.0f, maxDistance);
 
 		// Disable DOF

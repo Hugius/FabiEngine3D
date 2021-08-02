@@ -36,7 +36,7 @@ void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string 
 	_createValueForm(ID, title, value, position, size, false, buttonsPosition);
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
+bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
@@ -52,7 +52,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)
+bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, int& value, vector<int> forbiddenValues)
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
@@ -68,7 +68,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vector<float> forbiddenValues)
+bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, float& value, vector<float> forbiddenValues)
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
@@ -84,7 +84,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vecto
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vector<double> forbiddenValues)
+bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, double& value, vector<double> forbiddenValues)
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
@@ -100,9 +100,19 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vect
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vector<string> forbiddenValues)
+bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, string& value, vector<string> forbiddenValues)
 {
 	return _checkValueForm(ID, value, forbiddenValues);
+}
+
+bool EngineGuiGlobalScreen::isValueFormConfirmed()
+{
+	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered());
+}
+
+bool EngineGuiGlobalScreen::isValueFormCancelled()
+{
+	return (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered());
 }
 
 bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
@@ -338,9 +348,6 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 {
 	if (_exitValueFilling)
 	{
-		_exitValueFilling = false;
-		_isFocused = false;
-
 		// Remove valueforms
 		for (const auto& tempID : _valueFormIDs)
 		{
@@ -353,6 +360,10 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 		// Remove confirmation and cancellation buttons
 		deleteButton("value_form_done");
 		deleteButton("value_form_cancel");
+
+		// Miscellaneous
+		_exitValueFilling = false;
+		_isFocused = false;
 	}
 }
 

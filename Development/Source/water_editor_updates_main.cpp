@@ -120,7 +120,7 @@ void WaterEditor::_updateWaterCreating()
 		string newWaterName;
 
 		// Create new water
-		if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterName, {}))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("waterCreate", newWaterName, {}))
 		{
 			// @ sign not allowed
 			if (newWaterName.find('@') == string::npos)

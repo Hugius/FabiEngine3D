@@ -108,14 +108,14 @@ void ModelEditor::_updateAabbMenu()
 		}
 
 		// Filling transformation speed
-		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("speed", _aabbTransformationSpeed, { }))
 		{
 			_aabbTransformationSpeed /= 100.0f;
 		}
 
 		// Create AABB
 		string newAabbName;
-		if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newAabbName, {}))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("newAabbName", newAabbName, {}))
 		{
 			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
 			{

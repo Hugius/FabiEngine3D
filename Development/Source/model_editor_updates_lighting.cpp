@@ -67,21 +67,21 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 
 		// Update specular factor
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
 
 		// Update specular intensity
-		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d.modelEntity_setSpecularIntensity(_currentModelID, specularIntensity);
 		}
 
 		// Update lightness
-		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("lightness", lightness))
 		{
 			lightness /= 100.0f;
 			_fe3d.modelEntity_setLightness(_currentModelID, lightness);

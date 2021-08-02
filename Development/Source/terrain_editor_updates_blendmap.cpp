@@ -133,7 +133,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 		// Check if redRepeat confirmed
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
-		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("redRepeat", blendRepeatR))
 		{
 			blendRepeatR = max(0.0f, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
@@ -141,7 +141,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 		// Check if greenRepeat confirmed
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
-		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("greenRepeat", blendRepeatG))
 		{
 			blendRepeatG = max(0.0f, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
@@ -149,7 +149,7 @@ void TerrainEditor::_updateBlendMapMenu()
 
 		// Check if blueRepeat confirmed
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
-		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("blueRepeat", blendRepeatB))
 		{
 			blendRepeatB = max(0.0f, blendRepeatB);
 			_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);

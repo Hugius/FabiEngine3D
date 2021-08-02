@@ -100,31 +100,31 @@ void SettingsEditor::update()
 			}
 
 			// Update forms
-			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
+			if (_gui.getGlobalScreen()->hasValueFormChanged("anisotropicQuality", anisotropicQuality, {}))
 			{
 				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp(anisotropicQuality,
 					Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
 					Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+			else if (_gui.getGlobalScreen()->hasValueFormChanged("shadowQuality", shadowQuality, {}))
 			{
 				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality,
 					Config::MIN_SHADOW_QUALITY,
 					Config::MAX_SHADOW_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
+			else if (_gui.getGlobalScreen()->hasValueFormChanged("reflectionQuality", reflectionQuality, {}))
 			{
 				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality,
 					Config::MIN_REFLECTION_QUALITY,
 					Config::MAX_REFLECTION_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
+			else if (_gui.getGlobalScreen()->hasValueFormChanged("refractionQuality", refractionQuality, {}))
 			{
 				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality,
 					Config::MIN_REFRACTION_QUALITY,
 					Config::MAX_REFRACTION_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
+			else if (_gui.getGlobalScreen()->hasValueFormChanged("maxAudioChannels", maxAudioChannels, {}))
 			{
 				_fe3d.misc_setMaxAudioChannels(std::clamp(maxAudioChannels,
 					Config::MIN_AUDIO_CHANNELS,

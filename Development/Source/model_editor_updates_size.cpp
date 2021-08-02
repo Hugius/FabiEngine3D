@@ -87,21 +87,21 @@ void ModelEditor::_updateSizeMenu()
 		}
 
 		// Update size X
-		if (_gui.getGlobalScreen()->checkValueForm("sizeX", currentSize.x))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeX", currentSize.x))
 		{
 			currentSize.x /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Y
-		if (_gui.getGlobalScreen()->checkValueForm("sizeY", currentSize.y))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeY", currentSize.y))
 		{
 			currentSize.y /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Z
-		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", currentSize.z))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeZ", currentSize.z))
 		{
 			currentSize.z /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);

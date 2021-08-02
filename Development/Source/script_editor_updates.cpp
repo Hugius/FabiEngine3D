@@ -161,7 +161,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Check if user wants to search a keyword
 		string keyword;
-		if (_gui.getGlobalScreen()->checkValueForm("search", keyword))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("search", keyword))
 		{
 			auto result = _script.findKeyword(keyword);
 
@@ -184,7 +184,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Check if user wants to create a new script
 		string newScriptName;
-		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptName))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("scriptCreate", newScriptName))
 		{
 			// Spaces not allowed
 			if (newScriptName.find(' ') == string::npos)
@@ -232,7 +232,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if user wants to rename a script
-		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptName))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("scriptRename", newScriptName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())

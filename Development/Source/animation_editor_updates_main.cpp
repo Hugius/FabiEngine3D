@@ -84,7 +84,7 @@ void AnimationEditor::_updateAnimationCreating()
 		string newAnimationName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationName, { _currentAnimationID }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("animationCreate", newAnimationName, { _currentAnimationID }))
 		{
 			// Check if name contains spaces
 			if (newAnimationName.find(' ') == string::npos)

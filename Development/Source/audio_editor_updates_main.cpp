@@ -75,7 +75,7 @@ void AudioEditor::_updateAudioCreating()
 		string newAudioName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioName, { _currentAudioID }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("newAudioName", newAudioName, { _currentAudioID }))
 		{
 			// Check if name starts with @ sign
 			if (newAudioName[0] != '@')

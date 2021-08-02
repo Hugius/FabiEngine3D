@@ -100,7 +100,7 @@ void SceneEditor::_updateMainMenu()
 
 			// Update scene creation
 			string newSceneName;
-			if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
+			if (_gui.getGlobalScreen()->hasValueFormChanged("newSceneName", newSceneName, {}))
 			{
 				auto sceneNames = _loadSceneIDs();
 

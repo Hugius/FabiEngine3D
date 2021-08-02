@@ -169,7 +169,7 @@ void ModelEditor::_updateModelCreating()
 		string newModelName;
 
 		// Create new model
-		if (_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelName, {}))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("modelCreate", newModelName, {}))
 		{
 			// @ sign not allowed
 			if (newModelName.find('@') == string::npos)

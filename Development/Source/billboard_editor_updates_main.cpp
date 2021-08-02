@@ -78,7 +78,7 @@ void BillboardEditor::_updateBillboardCreating()
 		string newBillboardName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardName, { _currentBillboardID }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("billboardCreate", newBillboardName, { _currentBillboardID }))
 		{
 			// @ sign not allowed
 			if (newBillboardName.find('@') == string::npos)

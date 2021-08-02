@@ -41,31 +41,31 @@ void SkyEditor::_updateOptionsMenu()
 		}
 
 		// Speed value conversion
-		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationSpeed", skyRotationSpeed))
 		{
 			skyRotationSpeed /= 1000.0f;
 		}
 
 		// Lightness value conversion
-		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("lightness", skyLightness))
 		{
 			skyLightness = max(0.0f, skyLightness / 100.0f);
 		}
 
 		// Color R values conversion
-		if (_gui.getGlobalScreen()->checkValueForm("colorR", skyColor.r))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorR", skyColor.r))
 		{
 			skyColor.r = std::clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color G values conversion
-		if (_gui.getGlobalScreen()->checkValueForm("colorG", skyColor.g))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorG", skyColor.g))
 		{
 			skyColor.g = std::clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color B values conversion
-		if (_gui.getGlobalScreen()->checkValueForm("colorB", skyColor.b))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorB", skyColor.b))
 		{
 			skyColor.b = std::clamp(skyColor.b / 255.0f, 0.0f, 1.0f);
 		}

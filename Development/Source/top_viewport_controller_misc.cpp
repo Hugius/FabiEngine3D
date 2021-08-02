@@ -53,7 +53,7 @@ void TopViewportController::_updateProjectCreating()
 		string newProjectID;
 
 		// Check if value changed
-		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("newProjectID", newProjectID))
 		{
 			// Get directory path for the new project
 			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectID;

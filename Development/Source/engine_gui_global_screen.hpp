@@ -56,18 +56,20 @@ public:
 	void addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
 	void addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
 	void addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	bool checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues = {});
-	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
-	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
-	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});
-	bool checkValueForm(const string& ID, string& value, vector<string> forbiddenValues = {});
+	bool hasValueFormChanged(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues = {});
+	bool hasValueFormChanged(const string& ID, int& value, vector<int> forbiddenValues = {});
+	bool hasValueFormChanged(const string& ID, float& value, vector<float> forbiddenValues = {});
+	bool hasValueFormChanged(const string& ID, double& value, vector<double> forbiddenValues = {});
+	bool hasValueFormChanged(const string& ID, string& value, vector<string> forbiddenValues = {});
+	bool isValueFormConfirmed();
+	bool isValueFormCancelled();
 	bool isValueFormExisting(const string& ID);
 
 	// Choice form
 	void addChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles);
+	void deleteChoiceForm(const string& ID);
 	string getSelectedChoiceFormButtonID(const string& ID);
 	bool isChoiceFormCancelled(const string& ID);
-	void deleteChoiceForm(const string& ID);
 	bool isChoiceFormExisting(const string& ID);
 
 	// Answer form

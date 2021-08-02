@@ -77,63 +77,63 @@ void WaterEditor::_updateOptionsMenu()
 		}
 
 		// Check if speed X value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("speedX", speed.x))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 
 		// Check if speed Z value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("speedZ", speed.y))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 
 		// Check if transparency value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transparency", transparency))
 		{
 			transparency = std::clamp(transparency / 100.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
 
 		// Check if color R value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorR", color.r))
 		{
 			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color G value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorG", color.g))
 		{
 			color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color B value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("colorB", color.b))
 		{
 			color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if specular factor value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
 
 		// Check if specular intensity value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("specularIntensity", specularIntensity))
 		{
 			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 
 		// Check if wave height value confirmed
-		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("waveHeight", waveHeight))
 		{
 			waveHeight = max(0.0f, waveHeight / 100.0f);
 			_fe3d.waterEntity_setWaveHeight(_currentWaterID, waveHeight);

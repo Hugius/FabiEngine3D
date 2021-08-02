@@ -118,7 +118,7 @@ void TerrainEditor::_updateTerrainCreating()
 		string newTerrainName;
 
 		// Create new terrain
-		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("terrainCreate", newTerrainName, {}))
 		{
 			// @ sign not allowed
 			if (newTerrainName.find('@') == string::npos)

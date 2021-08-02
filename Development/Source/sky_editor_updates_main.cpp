@@ -112,7 +112,7 @@ void SkyEditor::_updateSkyCreating()
 		string newSkyName;
 
 		// Create new sky
-		if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyName, {}))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("skyCreate", newSkyName, {}))
 		{
 			// @ sign not allowed
 			if (newSkyName.find('@') == string::npos)

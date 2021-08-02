@@ -95,6 +95,26 @@ void SceneEditor::_updateModelPlacingMenu()
 								_fe3d.textEntity_setVisible(textEntityID, true);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 								_fe3d.misc_centerCursor();
+
+								// Set default position
+								if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
+								{
+									_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { Vec3(0.0f) });
+								}
+								else
+								{
+									_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));
+								}
+
+								// Add position value forms for placing without terrain
+								if (_fe3d.terrainEntity_getSelectedID() == "")
+								{
+									_gui.getGlobalScreen()->addValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+									_gui.getGlobalScreen()->addValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+									_gui.getGlobalScreen()->addValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+								}
+
+								// Disable model choosing
 								break;
 							}
 						}

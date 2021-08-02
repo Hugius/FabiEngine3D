@@ -38,21 +38,21 @@ void AnimationEditor::_updateFrameMenu()
 			}
 			else if (screen->getButton("transformation")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationX", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationY", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationZ", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("rotationOrigin")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("xTransformationSpeed", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("yTransformationSpeed", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("zTransformationSpeed", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationSpeedX", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speedType")->isHovered())
 			{
@@ -96,55 +96,55 @@ void AnimationEditor::_updateFrameMenu()
 		}
 
 		// Update X transformation change
-		if (_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationX", transformation.x, { }))
 		{
 			transformation.x /= multiplier;
 		}
 
 		// Update Y transformation change
-		if (_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationY", transformation.y, { }))
 		{
 			transformation.y /= multiplier;
 		}
 
 		// Update Z transformation change
-		if (_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationZ", transformation.z, { }))
 		{
 			transformation.z /= multiplier;
 		}
 
 		// Update X rotation origin change
-		if (_gui.getGlobalScreen()->checkValueForm("xRotationOrigin", rotationOrigin.x, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginX", rotationOrigin.x, { }))
 		{
 			rotationOrigin.x /= 1000.0f;
 		}
 
 		// Update Y rotation origin change
-		if (_gui.getGlobalScreen()->checkValueForm("yRotationOrigin", rotationOrigin.y, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginY", rotationOrigin.y, { }))
 		{
 			rotationOrigin.y /= 1000.0f;
 		}
 
 		// Update Z rotation origin change
-		if (_gui.getGlobalScreen()->checkValueForm("zRotationOrigin", rotationOrigin.z, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginZ", rotationOrigin.z, { }))
 		{
 			rotationOrigin.z /= 1000.0f;
 		}
 
 		// Update X speed change
-		if (_gui.getGlobalScreen()->checkValueForm("xTransformationSpeed", speed.x, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedX", speed.x, { }))
 		{
 			speed.x /= 1000.0f;
 		}
 
 		// Update Y speed change
-		if (_gui.getGlobalScreen()->checkValueForm("yTransformationSpeed", speed.y, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedY", speed.y, { }))
 		{
 			speed.y /= 1000.0f;
 		}
 
 		// Update Z speed change
-		if (_gui.getGlobalScreen()->checkValueForm("zTransformationSpeed", speed.z, { }))
+		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedZ", speed.z, { }))
 		{
 			speed.z /= 1000.0f;
 		}

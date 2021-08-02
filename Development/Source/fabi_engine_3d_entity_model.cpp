@@ -352,46 +352,38 @@ void FabiEngine3D::modelEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_modelEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
-void FabiEngine3D::modelEntity_setInstanced(const string& ID, bool enabled, vector<Vec3> offsets)
+void FabiEngine3D::modelEntity_enableInstancing(const string& ID, vector<Vec3> offsets)
 {
 	// Temporary values
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
-	if (enabled)
+	// Validate offsets
+	if (offsets.empty())
 	{
-		for (const auto& partID : entity->getPartIDs())
+		Logger::throwError("FabiEngine3D::modelEntity_enableInstancing");
+	}
+
+	for (const auto& partID : entity->getPartIDs())
+	{
+		// Check if entity has render buffer
+		if (entity->hasRenderBuffer(partID))
 		{
-			if (entity->hasRenderBuffer(partID))
-			{
-				// Temporary values
-				const auto buffer = entity->getRenderBuffer(partID);
-
-				// Remove instancing
-				if (buffer->isInstanced())
-				{
-					buffer->removeInstancing();
-				}
-
-				// Add instancing
-				buffer->addInstancing(offsets);
-			}
+			entity->getRenderBuffer(partID)->enableInstancing(offsets);
 		}
 	}
-	else
-	{
-		for (const auto& partID : _core->_modelEntityManager.getEntity(ID)->getPartIDs())
-		{
-			if (entity->hasRenderBuffer(partID))
-			{
-				// Temporary values
-				auto buffer = _core->_modelEntityManager.getEntity(ID)->getRenderBuffer(partID);
+}
 
-				// Remove instancing
-				if (buffer->isInstanced())
-				{
-					buffer->removeInstancing();
-				}
-			}
+void FabiEngine3D::modelEntity_disableInstancing(const string& ID)
+{
+	// Temporary values
+	auto entity = _core->_modelEntityManager.getEntity(ID);
+
+	for (const auto& partID : entity->getPartIDs())
+	{
+		// Check if entity has render buffer
+		if (entity->hasRenderBuffer(partID))
+		{
+			entity->getRenderBuffer(partID)->disableInstancing();
 		}
 	}
 }

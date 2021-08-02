@@ -16,8 +16,8 @@ public:
 	RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
 	~RenderBuffer();
 	
-	void addInstancing(const vector<Vec3>& offsets);
-	void removeInstancing();
+	void enableInstancing(const vector<Vec3>& offsets);
+	void disableInstancing();
 
 	const BufferID getVAO();
 

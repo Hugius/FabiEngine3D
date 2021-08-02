@@ -14,12 +14,6 @@ void ModelEntity::updateModelMatrix()
 {
 	for (size_t i = 0; i < _parts.size(); i++)
 	{
-		// Instanced modelpart cannot have a modelmatrix position
-		if ((_parts[i].renderBuffer != nullptr) && _parts[i].renderBuffer->isInstanced())
-		{
-			_parts[i].localPosition = Vec3(0.0f);
-		}
-
 		// Identity matrix
 		_parts[i].modelMatrix = Matrix44(1.0f);
 

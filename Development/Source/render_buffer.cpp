@@ -1,5 +1,6 @@
 #include "render_buffer.hpp"
-#include <iostream>
+#include "logger.hpp"
+
 RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dataCount)
 {
 	// Set buffer type
@@ -133,37 +134,51 @@ RenderBuffer::~RenderBuffer()
 	glDeleteBuffers(1, &_vbo_instanced);
 }
 
-void RenderBuffer::addInstancing(const vector<Vec3>& offsets)
+void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
 {
-	// Create buffers
-	glGenBuffers(1, &_vbo_instanced);
+	if (_isInstanced)
+	{
+		Logger::throwError("RenderBuffer::enableInstancing");
+	}
+	else
+	{
+		// Create buffers
+		glGenBuffers(1, &_vbo_instanced);
 
-	// Bind buffers
-	glBindVertexArray(_vao);
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
+		// Bind buffers
+		glBindVertexArray(_vao);
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
 
-	// Allocate buffer data
-	glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(Vec3)), &offsets[0], GL_STATIC_DRAW);
+		// Allocate buffer data
+		glBufferData(GL_ARRAY_BUFFER, (offsets.size() * sizeof(Vec3)), &offsets[0], GL_STATIC_DRAW);
 
-	// Store buffer data
-	glEnableVertexAttribArray(4);
-	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-	glVertexAttribDivisor(4, 1);
+		// Store buffer data
+		glEnableVertexAttribArray(4);
+		glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+		glVertexAttribDivisor(4, 1);
 
-	// Unbind buffers
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+		// Unbind buffers
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
 
-	// Miscellaneous
-	_isInstanced = true;
-	_instancedOffsets = offsets;
+		// Miscellaneous
+		_isInstanced = true;
+		_instancedOffsets = offsets;
+	}
 }
 
-void RenderBuffer::removeInstancing()
+void RenderBuffer::disableInstancing()
 {
-	glDeleteBuffers(1, &_vbo_instanced);
-	_isInstanced = false;
-	_instancedOffsets.clear();
+	if (_isInstanced)
+	{
+		glDeleteBuffers(1, &_vbo_instanced);
+		_isInstanced = false;
+		_instancedOffsets.clear();
+	}
+	else
+	{
+		Logger::throwError("RenderBuffer::disableInstancing");
+	}
 }
 
 const BufferID RenderBuffer::getVAO()

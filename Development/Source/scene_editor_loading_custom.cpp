@@ -265,7 +265,8 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					}
 
 					// Add offsets
-					_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
+					_fe3d.modelEntity_disableInstancing(modelID);
+					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
 				}
 
 				// Hide model if LOD

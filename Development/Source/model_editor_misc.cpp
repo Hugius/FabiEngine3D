@@ -233,11 +233,16 @@ bool ModelEditor::_createModel(const string& modelName, string meshPath, string 
 				_fe3d.modelEntity_setNormalMap(modelName, normalMapPath);
 			}
 
+			// Instancing
+			if (isInstanced)
+			{
+				_fe3d.modelEntity_enableInstancing(modelName, { Vec3(0.0f) });
+			}
+
 			// Set properties
 			_fe3d.modelEntity_setFaceCulled(modelName, isFaceCulled);
 			_fe3d.modelEntity_setTransparent(modelName, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelName, isSpecular);
-			_fe3d.modelEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
 			_fe3d.modelEntity_setBright(modelName, isBright);
 			_fe3d.modelEntity_setSpecularFactor(modelName, specularFactor);
 			_fe3d.modelEntity_setSpecularIntensity(modelName, specularIntensity);

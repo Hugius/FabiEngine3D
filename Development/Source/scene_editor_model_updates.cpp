@@ -90,21 +90,12 @@ void SceneEditor::_updateModelPlacingMenu()
 
 								// Set new preview model
 								_currentPreviewModelID = modelID;
+								_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));
 								_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 								_fe3d.textEntity_setVisible(textEntityID, true);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 								_fe3d.misc_centerCursor();
-
-								// Set default position
-								if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
-								{
-									_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { Vec3(0.0f) });
-								}
-								else
-								{
-									_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));
-								}
 
 								// Add position value forms for placing without terrain
 								if (_fe3d.terrainEntity_getSelectedID() == "")

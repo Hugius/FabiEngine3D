@@ -12,15 +12,7 @@ void SceneEditor::_updateModelPlacing()
 			if (_fe3d.terrainEntity_getSelectedID() == "") // Placing without terrain
 			{
 				// Retrieve current position
-				Vec3 newPosition;
-				if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
-				{
-					newPosition = _fe3d.modelEntity_getInstancedOffsets(_currentPreviewModelID)[0];
-				}
-				else
-				{
-					newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
-				}
+				auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 
 				// Update position change
 				bool filledX = _gui.getGlobalScreen()->hasValueFormChanged("positionX", newPosition.x, { });
@@ -28,14 +20,7 @@ void SceneEditor::_updateModelPlacing()
 				bool filledZ = _gui.getGlobalScreen()->hasValueFormChanged("positionZ", newPosition.z, { });
 
 				// Update position
-				if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
-				{
-					_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { newPosition });
-				}
-				else
-				{
-					_fe3d.modelEntity_setPosition(_currentPreviewModelID, newPosition);
-				}
+				_fe3d.modelEntity_setPosition(_currentPreviewModelID, newPosition);
 				
 				// Check if model must be placed
 				if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -43,12 +28,23 @@ void SceneEditor::_updateModelPlacing()
 					// Remove the '@'
 					const string rawID = _currentPreviewModelID.substr(1);
 
-					// Instanced model has different ID composition
-					if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
+					if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
 					{
-						_copyPreviewModel(rawID, _currentPreviewModelID, newPosition);
+						if (_fe3d.modelEntity_isExisting(rawID)) // Add to existing offsets
+						{
+							auto offsets = _fe3d.modelEntity_getInstancedOffsets(rawID);
+							offsets.push_back(newPosition);
+							_fe3d.modelEntity_disableInstancing(rawID);
+							_fe3d.modelEntity_enableInstancing(rawID, offsets);
+						}
+						else // Create new model
+						{
+							_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f));
+							_fe3d.modelEntity_disableInstancing(rawID);
+							_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
+						}
 					}
-					else
+					else // Non-instanced model
 					{
 						// Adding a number to make it unique
 					BEGIN1:
@@ -89,18 +85,8 @@ void SceneEditor::_updateModelPlacing()
 							// Show preview model
 							_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 
-							// Retrieve new position
-							auto newPosition = _fe3d.misc_getRaycastPointOnTerrain();
-
 							// Update position
-							if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
-							{
-								_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { newPosition });
-							}
-							else
-							{
-								_fe3d.modelEntity_setPosition(_currentPreviewModelID, newPosition);
-							}
+							_fe3d.modelEntity_setPosition(_currentPreviewModelID, _fe3d.misc_getRaycastPointOnTerrain());
 						}
 						else
 						{
@@ -113,14 +99,25 @@ void SceneEditor::_updateModelPlacing()
 						{
 							// Remove the '@'
 							const string rawID = _currentPreviewModelID.substr(1);
+							auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 
-							// Instanced model has different ID composition
-							if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
+							if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
 							{
-								auto newPosition = _fe3d.modelEntity_getInstancedOffsets(_currentPreviewModelID)[0];
-								_copyPreviewModel(rawID, _currentPreviewModelID, newPosition);
+								if (_fe3d.modelEntity_isExisting(rawID)) // Add to existing offsets
+								{
+									auto offsets = _fe3d.modelEntity_getInstancedOffsets(rawID);
+									offsets.push_back(newPosition);
+									_fe3d.modelEntity_disableInstancing(rawID);
+									_fe3d.modelEntity_enableInstancing(rawID, offsets);
+								}
+								else // Create new model
+								{
+									_copyPreviewModel(rawID, _currentPreviewModelID, Vec3(0.0f));
+									_fe3d.modelEntity_disableInstancing(rawID);
+									_fe3d.modelEntity_enableInstancing(rawID, { newPosition });
+								}
 							}
-							else
+							else // Non-instanced model
 							{	
 							BEGIN2:
 								// Adding a number to make it unique
@@ -134,7 +131,6 @@ void SceneEditor::_updateModelPlacing()
 								}
 
 								// Add model
-								auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 								_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
 							}
 						}

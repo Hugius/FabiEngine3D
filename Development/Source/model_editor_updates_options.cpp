@@ -36,7 +36,16 @@ void ModelEditor::_updateOptionsMenu()
 			else if (screen->getButton("isInstanced")->isHovered())
 			{
 				isInstanced = !isInstanced;
-				_fe3d.modelEntity_setInstanced(_currentModelID, isInstanced, { Vec3(0.0f) });
+
+				if (isInstanced)
+				{
+					_fe3d.modelEntity_enableInstancing(_currentModelID, { Vec3(0.0f) });
+				}
+				else
+				{
+					_fe3d.modelEntity_disableInstancing(_currentModelID);
+				}
+				
 			}
 			else if (screen->getButton("color")->isHovered())
 			{

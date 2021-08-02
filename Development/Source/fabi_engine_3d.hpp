@@ -302,7 +302,8 @@ public:
 	void modelEntity_setMinHeight(const string& ID, float height);
 	void modelEntity_setMaxHeight(const string& ID, float height);
 	void modelEntity_setUvRepeat(const string& ID, float repeat);
-	void modelEntity_setInstanced(const string& ID, bool enabled, vector<Vec3> offsets);
+	void modelEntity_enableInstancing(const string& ID, vector<Vec3> offsets);
+	void modelEntity_disableInstancing(const string& ID);
 	void modelEntity_setBright(const string& ID, bool enabled);
 
 	// Model entity interface - getters

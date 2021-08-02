@@ -409,7 +409,6 @@ public:
 	const string& billboardEntity_getDiffuseMapPath(const string& ID);
 	const string& billboardEntity_getFontPath(const string& ID);
 	const string& billboardEntity_getTextContent(const string& ID);
-	const vector<Vec3> billboardEntity_getInstancedOffsets(const string& ID);
 	const Vec3 billboardEntity_getPosition(const string& ID);
 	const Vec3 billboardEntity_getRotation(const string& ID);
 	const Vec2 billboardEntity_getSize(const string& ID);
@@ -432,7 +431,6 @@ public:
 	const bool billboardEntity_isDepthMapIncluded(const string& ID);
 	const bool billboardEntity_isShadowed(const string& ID);
 	const bool billboardEntity_isReflected(const string& ID);
-	const bool billboardEntity_isInstanced(const string& ID);
 	const bool billboardEntity_isBright(const string& ID);
 	const bool billboardEntity_isTransparent(const string& ID);
 	const bool billboardEntity_isWireFramed(const string& ID);

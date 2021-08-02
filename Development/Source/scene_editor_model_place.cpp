@@ -8,80 +8,95 @@ void SceneEditor::_updateModelPlacing()
 		// Only if user is in placement mode
 		if (!_currentPreviewModelID.empty())
 		{
-			// Check if mouse behavior isn't being invalid
-			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
-				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
+			if (_fe3d.terrainEntity_getSelectedID() == "") // Placing without terrain
 			{
-				// Default placement position
-				Vec3 newPosition = Vec3(0.0f);
+				// Add new model
+			BEGIN1:
+				int randomSerial = Tools::getRandomInteger(0, INT_MAX);
+				string newID = _currentPreviewModelID.substr(1); // Remove the '@'
+				newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
 
-				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
+				// Check if ID not already exists
+				if (_fe3d.modelEntity_isExisting(newID))
 				{
-					// Show preview model
-					_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
+					goto BEGIN1;
+				}
 
-					// Update preview model position
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+				// Add model
+				_copyPreviewModel(newID, _currentPreviewModelID, Vec3(0.0f));
+
+				// Disable placement mode
+				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+				_currentPreviewModelID = "";
+			}
+			else // Placing on terrain
+			{
+				// Check if allowed by GUI
+				if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+				{
+					// Check if allowed by mouse
+					if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
-						newPosition = _fe3d.misc_getRaycastPointOnTerrain();
+						// Default placement position
+						Vec3 newPosition = Vec3(0.0f);
 
-						// Instanced entity has different positioning
-						if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
+						// Check if a terrain is loaded
+						if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
 						{
-							_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { newPosition });
+							// Show preview model
+							_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
+
+							// Retrieve currrent position
+							newPosition = _fe3d.misc_getRaycastPointOnTerrain();
+
+							// Instanced entity has different positioning
+							if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID))
+							{
+								_fe3d.modelEntity_setInstanced(_currentPreviewModelID, true, { newPosition });
+							}
+							else
+							{
+								_fe3d.modelEntity_setPosition(_currentPreviewModelID, newPosition);
+							}
 						}
 						else
 						{
-							_fe3d.modelEntity_setPosition(_currentPreviewModelID, newPosition);
+							// Hide preview model
+							_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+						}
+
+						// Placing model on terrain
+						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+						{
+							// Add new model
+						BEGIN2:
+							int randomSerial = Tools::getRandomInteger(0, INT_MAX);
+							string newID = _currentPreviewModelID.substr(1); // Remove the '@'
+							newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
+
+							// Check if ID not already exists
+							if (_fe3d.modelEntity_isExisting(newID))
+							{
+								goto BEGIN2;
+							}
+
+							// Add model
+							_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
+						}
+						else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+						{
+							_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+							_currentPreviewModelID = "";
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+							_fe3d.textEntity_setVisible(textEntityID, false);
 						}
 					}
-				}
-				else
-				{
-					// Hide preview model
-					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-				}
-
-				// Placing model
-				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
-					|| _fe3d.terrainEntity_getSelectedID() == "")  // Bypass placement if no terrain selected
-				{
-					// Add new model
-				BEGIN:
-					int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-					string newID = _currentPreviewModelID.substr(1); // Remove the '@'
-					newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
-
-					// Check if ID not already exists
-					if (_fe3d.modelEntity_isExisting(newID))
+					else
 					{
-						goto BEGIN;
-					}
-
-					// Add model
-					_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
-
-					// Disable placement mode if no terrain available to choose position from
-					if (_fe3d.terrainEntity_getSelectedID() == "")
-					{
+						// Hide preview model
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-						_currentPreviewModelID = "";
 					}
 				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
-				{
-					// Hide preview model
-					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-					_currentPreviewModelID = "";
-					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-					_fe3d.textEntity_setVisible(textEntityID, false);
-				}
-			}
-			else
-			{
-				// Hide preview model
-				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
 			}
 		}
 	}

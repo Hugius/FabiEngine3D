@@ -1,5 +1,5 @@
 #include "render_buffer.hpp"
-
+#include <iostream>
 RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dataCount)
 {
 	// Set buffer type
@@ -70,6 +70,9 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, 
 {
 	// Temporary values
 	float* data = nullptr;
+
+	// Set buffer type
+	_bufferType = BufferType::VERTEX_UV;
 
 	// Determine center point of the quad
 	if (isCentered)

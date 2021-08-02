@@ -183,18 +183,6 @@ const vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 	return IDs;
 }
 
-const vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
-{
-	if (billboardEntity_isInstanced(ID))
-	{
-		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer()->getInstancedOffsets();
-	}
-	else
-	{
-		return {};
-	}
-}
-
 void FabiEngine3D::billboardEntity_setCameraFacingX(const string& ID, bool enabled)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingX(enabled);
@@ -273,18 +261,6 @@ const bool FabiEngine3D::billboardEntity_isShadowed(const string& ID)
 const bool FabiEngine3D::billboardEntity_isReflected(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isReflected();
-}
-
-const bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
-{
-	if (_core->_billboardEntityManager.getEntity(ID)->hasRenderBuffer())
-	{
-		return _core->_billboardEntityManager.getEntity(ID)->getRenderBuffer()->isInstanced();
-	}
-	else
-	{
-		return false;
-	}
 }
 
 const bool FabiEngine3D::billboardEntity_isBright(const string& ID)

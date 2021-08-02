@@ -13,7 +13,7 @@ void TextEntity::deleteCharacterEntities()
 void TextEntity::updateCharacterEntities()
 {
 	// Temporary values
-	float xCharSize = this->getSize().x / static_cast<float>(this->_textContent.size());
+	float xCharSize = (this->getSize().x / static_cast<float>(this->_textContent.size()));
 	float yCharSize = this->getSize().y;
 	unsigned int index = 0;
 	
@@ -47,6 +47,7 @@ void TextEntity::updateCharacterEntities()
 		character->setVisible(this->isVisible());
 		character->updateModelMatrix();
 
+		// Miscellaneous
 		index++;
 	}
 }

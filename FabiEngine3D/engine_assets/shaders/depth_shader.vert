@@ -34,8 +34,8 @@ void main()
 {
 	// In variables
 	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + (u_isInstanced == true ? vec4(v_offset, 0.0f) : vec4(0.0f));
-	vec4 viewSpacePos  = u_viewMatrix * worldSpacePos;
-	vec4 clipSpacePos  = u_projectionMatrix * viewSpacePos;
+	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
+	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
 
 	// GLSL variables
 	gl_Position = clipSpacePos;

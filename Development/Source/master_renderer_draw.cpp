@@ -4,6 +4,7 @@
 #include <functional>
 
 using std::make_shared;
+using std::dynamic_pointer_cast;
 
 void MasterRenderer::_renderSkyEntity()
 {
@@ -190,7 +191,7 @@ void MasterRenderer::_renderGUI()
 		for (const auto& [keyID, entity] : orderedEntityMap)
 		{
 			// Check if entity is a TEXT entity
-			auto castedTextEntity = std::dynamic_pointer_cast<TextEntity>(entity);
+			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
 			if (castedTextEntity == nullptr) // IMAGE entity
 			{

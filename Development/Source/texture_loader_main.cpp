@@ -149,7 +149,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	if (it == _fontCache.end()) // Not in map (yet)
 	{
 		// Try to load font
-		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
+		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 32);
 
 		// Check if font loading is successful
 		if (font == nullptr)

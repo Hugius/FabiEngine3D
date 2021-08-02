@@ -1,35 +1,9 @@
 #include "animation_editor.hpp"
 
-#include <set>
-
 void AnimationEditor::_updateAnimationExecution()
 {
 	if (!_fe3d.application_isPaused())
 	{
-		// Remove all animations that ended
-		for (const auto& idPair : _animationsToStop)
-		{
-			// Check if animation is still playing
-			if (isAnimationStarted(idPair.first, idPair.second))
-			{
-				// Stop animation
-				stopAnimation(idPair.first, idPair.second);
-			}
-		}
-		_animationsToStop.clear();
-
-		// Start all animations that play endlessly
-		for (const auto& idPair : _animationsToStartAgain)
-		{
-			// Check if animation is not already playing
-			if (!isAnimationStarted(idPair.first, idPair.second))
-			{
-				// Start animation
-				startAnimation(idPair.first, idPair.second, -1);
-			}
-		}
-		_animationsToStartAgain.clear();
-
 		// Update all playing animations
 		for (auto& [idPair, animation] : _startedAnimations)
 		{
@@ -86,7 +60,7 @@ void AnimationEditor::_updateAnimationExecution()
 				auto& totalRotation = animation.totalRotations[partID];
 				auto& totalScaling = animation.totalScalings[partID];
 				auto& baseSpeed = frame.speeds[partID];
-
+				
 				// Check if reached transformation of current frame
 				if (((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) &&
 					(isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, xSpeed)) &&
@@ -401,7 +375,8 @@ void AnimationEditor::_updateAnimationExecution()
 					// Check if animation is endless
 					if (animation.timesToPlay == -1)
 					{
-						animation.frameIndex = 0;
+						_animationsToStop.insert(idPair);
+						_animationsToStartAgain.insert(idPair);
 					}
 					else
 					{
@@ -432,5 +407,29 @@ void AnimationEditor::_updateAnimationExecution()
 				}
 			}
 		}
+
+		// Remove all animations that ended
+		for (const auto& idPair : _animationsToStop)
+		{
+			// Check if animation is still playing
+			if (isAnimationStarted(idPair.first, idPair.second))
+			{
+				// Stop animation
+				stopAnimation(idPair.first, idPair.second);
+			}
+		}
+		_animationsToStop.clear();
+
+		// Start all endless animations again
+		for (const auto& idPair : _animationsToStartAgain)
+		{
+			// Check if animation is not already playing
+			if (!isAnimationStarted(idPair.first, idPair.second))
+			{
+				// Start animation
+				startAnimation(idPair.first, idPair.second, -1);
+			}
+		}
+		_animationsToStartAgain.clear();
 	}
 }

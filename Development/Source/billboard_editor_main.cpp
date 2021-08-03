@@ -78,6 +78,7 @@ void BillboardEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
 	// Reset editor properties
+	_isEditorLoaded = false;
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
 	_isEditingBillboard = false;
@@ -92,7 +93,6 @@ void BillboardEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_isEditorLoaded = false;
 }
 
 void BillboardEditor::_loadGUI()

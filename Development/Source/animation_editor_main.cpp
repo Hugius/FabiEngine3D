@@ -101,7 +101,6 @@ void AnimationEditor::unload()
 	{
 		_fe3d.misc_disableDebugRendering();
 	}
-	_isEditorLoaded = false;
 }
 
 void AnimationEditor::_loadGUI()

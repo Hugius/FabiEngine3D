@@ -47,13 +47,11 @@ void AudioEditor::unload()
 	_loadedAudioIDs.clear();
 	_currentAudioID = "";
 	_hoveredAudioID = "";
+	_isEditorLoaded = false;
 	_isCreatingAudio = false;
 	_isChoosingAudio = false;
 	_isEditingAudio = false;
 	_isDeletingAudio = false;
-
-	// Miscellaneous
-	_isEditorLoaded = false;
 }
 
 void AudioEditor::_loadGUI()

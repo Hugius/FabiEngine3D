@@ -43,11 +43,11 @@ void SkyEditor::unload()
 	// Reset editor properties
 	_loadedSkyIDs.clear();
 	_currentSkyID = "";
+	_isEditorLoaded = false;
 	_isCreatingSky = false;
 	_isChoosingSky = false;
 	_isEditingSky = false;
 	_isDeletingSky = false;
-	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");

@@ -67,11 +67,11 @@ void TerrainEditor::unload()
 	_loadedTerrainIDs.clear();
 	_currentTerrainID = "";
 	_cameraDistance = INITIAL_CAMERA_DISTANCE;
+	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
 	_isEditingTerrain = false;
 	_isDeletingTerrain = false;
-	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");

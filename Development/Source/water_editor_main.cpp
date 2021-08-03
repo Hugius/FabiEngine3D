@@ -67,11 +67,11 @@ void WaterEditor::unload()
 	// Reset editor properties
 	_loadedWaterIDs.clear();
 	_currentWaterID = "";
+	_isEditorLoaded = false;
 	_isCreatingWater = false;
 	_isChoosingWater = false;
 	_isEditingWater = false;
 	_isDeletingWater = false;
-	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");

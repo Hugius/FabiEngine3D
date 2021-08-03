@@ -27,12 +27,20 @@ void ScriptEditor::load()
 	_fe3d.camera_setPitch(0.0f);
 
 	// Background
-	_fe3d.skyEntity_setLightness("@@engineBackground", 0.5f);
+	_fe3d.skyEntity_selectMainSky("");
+	_fe3d.misc_setMainRenderingColor(BACKGROUND_COLOR);
 
 	// Default graphics
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 3);
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 2);
+
+	// Save FXAA state
+	_wasFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
+	if (_wasFxaaEnabled)
+	{
+		_fe3d.gfx_disableFXAA(true);
+	}
 
 	// Selection light
 	_fe3d.lightEntity_create("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
@@ -47,10 +55,20 @@ void ScriptEditor::unload()
 	// GUI
 	_unloadGUI();
 
+	// Background
+	_fe3d.skyEntity_selectMainSky("@@engineBackground");
+	_fe3d.misc_setMainRenderingColor(Vec3(0.0f));
+
 	// Default graphics
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableBloom(true);
+
+	// Reset FXAA
+	if (_wasFxaaEnabled)
+	{
+		_fe3d.gfx_enableFXAA();
+	}
 
 	// Delete added entities
 	_fe3d.modelEntity_deleteAll();
@@ -66,6 +84,8 @@ void ScriptEditor::unload()
 	_activeActionKey = InputType::NONE;
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;
+	_isEditorLoaded = false;
+	_wasFxaaEnabled = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isSingleActionAllowed = true;
@@ -77,7 +97,6 @@ void ScriptEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_isEditorLoaded = false;
 }
 
 void ScriptEditor::_loadGUI()

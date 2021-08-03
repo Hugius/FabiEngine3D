@@ -88,13 +88,13 @@ void ModelEditor::unload()
 	_loadedModelIDs.clear();
 	_cameraLookatPosition = Vec3(0.0f);
 	_aabbTransformationSpeed = 0.1f;
+	_isEditorLoaded = false;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isEditingModel = false;
 	_isDeletingModel = false;
 	_isMovingToggled = false;
 	_isResizingToggled = false;
-	_isEditorLoaded = false;
 	_transformationDirection = Direction::X;
 
 	// Miscellaneous

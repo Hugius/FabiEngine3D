@@ -1,23 +1,27 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool previewEntity)
+bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool isPreviewEntity)
 {
-	// Cannot request/delete a preview entity
-	if (!previewEntity && ID.front() == '@')
+	if (isPreviewEntity)
 	{
-		_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
-		return false;
-	}
-
-	// Check if entity exists
-	if (!_fe3d.billboardEntity_isExisting(ID))
-	{
-		if (previewEntity)
+		// Validate existence
+		if (!_fe3d.billboardEntity_isExisting(ID))
 		{
-			_throwScriptError("requested billboard with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested preview billboard with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
-		else
+	}
+	else
+	{
+		// Cannot access a preview billboard
+		if (!isPreviewEntity && ID.front() == '@')
+		{
+			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
+			return false;
+		}
+
+		// Validate existence
+		if (!_fe3d.billboardEntity_isExisting(ID))
 		{
 			_throwScriptError("requested billboard with ID \"" + ID + "\" does not exist!");
 			return false;
@@ -37,7 +41,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// Cannot request a preview billboard
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -56,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// Cannot request a preview billboard
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");

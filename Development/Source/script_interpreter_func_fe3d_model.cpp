@@ -1,27 +1,39 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewEntity)
+bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool isPreviewEntity)
 {
-	// Cannot request/delete a preview entity
-	if (!previewEntity && ID.front() == '@')
+	if (isPreviewEntity)
 	{
-		_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
-		return false;
-	}
-
-	// Check if entity exists
-	if (!_fe3d.modelEntity_isExisting(ID))
-	{
-		if (previewEntity)
+		// Validate existence
+		if (!_fe3d.modelEntity_isExisting(ID))
 		{
-			_throwScriptError("requested model with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
 		}
-		else
+
+		// Cannot access an instanced model
+		if (_fe3d.modelEntity_isInstanced(ID))
+		{
+			_throwScriptError("requested preview model with ID \"" + ID.substr(1) + "\" cannot be instanced!");
+			return false;
+		}
+	}
+	else
+	{
+		// Cannot access a preview model
+		if (ID.front() == '@')
+		{
+			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
+			return false;
+		}
+
+		// Validate existence
+		if (!_fe3d.modelEntity_isExisting(ID))
 		{
 			_throwScriptError("requested model with ID \"" + ID + "\" does not exist!");
 			return false;
 		}
+
 	}
 
 	return true;
@@ -37,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// Cannot request a preview model
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -56,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// Cannot request a preview model
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");

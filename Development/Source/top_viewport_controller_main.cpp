@@ -81,7 +81,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			if (topScreen->getButton("newProject")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("newProjectID", "Enter Project Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("newProjectID", "Enter Project Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_creatingProject = true;
 			}
 			else if (topScreen->getButton("loadProject")->isHovered())
@@ -104,7 +104,7 @@ void TopViewportController::_updateProjectScreenManagement()
 				if (_currentProjectID != "" && leftScreen->getID() != "main" && 
 					leftScreen->getID() != "sceneEditorMenuMain" && leftScreen->getID() != "environmentEditorMenuMain")
 				{
-					_gui.getGlobalScreen()->addAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else // Otherwise, just stop the engine
 				{

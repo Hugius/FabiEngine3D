@@ -80,27 +80,27 @@ void SceneEditor::_updateMainMenu()
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{
 					_isChoosingScene = true;
 					auto IDs = _loadSceneIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
+					_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
 					_isDeletingScene = true;
 					auto IDs = _loadSceneIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
+					_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 			}
 
 			// Update scene creation
 			string newSceneName;
-			if (_gui.getGlobalScreen()->hasValueFormChanged("newSceneName", newSceneName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
 			{
 				auto sceneNames = _loadSceneIDs();
 
@@ -123,7 +123,7 @@ void SceneEditor::_updateMainMenu()
 			// Update scene choice
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
+				string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("sceneList");
 				if (selectedButtonID != "")
 				{
 					_currentSceneID = selectedButtonID;
@@ -148,7 +148,7 @@ void SceneEditor::_updateMainMenu()
 					}
 					else if (_isDeletingScene) // Prepare deleting confirmation
 					{
-						_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+						_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 					}
 
 					// Miscellaneous
@@ -195,7 +195,7 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("environment")->isHovered()) // Environment button
 				{

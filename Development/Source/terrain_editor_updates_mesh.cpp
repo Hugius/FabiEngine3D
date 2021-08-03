@@ -80,12 +80,12 @@ void TerrainEditor::_updateMeshMenu()
 			else if (screen->getButton("maxHeight")->isHovered())
 			{
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -100,7 +100,7 @@ void TerrainEditor::_updateMeshMenu()
 		{
 			// Check if maxHeight confirmed
 			float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-			if (_gui.getGlobalScreen()->hasValueFormChanged("maxHeight", maxHeight))
+			if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 			{
 				maxHeight = max(0.0f, maxHeight);
 				_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
@@ -108,7 +108,7 @@ void TerrainEditor::_updateMeshMenu()
 
 			// Check if uvRepeat confirmed
 			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-			if (_gui.getGlobalScreen()->hasValueFormChanged("uvRepeat", uvRepeat))
+			if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
 			{
 				uvRepeat = max(0.0f, uvRepeat);
 				_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);

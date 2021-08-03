@@ -31,21 +31,21 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("minDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("minDistance", "Min Distance", minDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("minDistance", "Min Distance", minDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("thickness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("thickness", "Thickness", thickness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("thickness", "Thickness", thickness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -53,23 +53,23 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Min distance value
-		_gui.getGlobalScreen()->hasValueFormChanged("minDistance", minDistance);
+		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
 		minDistance = max(0.0f, minDistance);
 
 		// Max distance value
-		_gui.getGlobalScreen()->hasValueFormChanged("maxDistance", maxDistance);
+		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
 		maxDistance = max(0.0f, maxDistance);
 
 		// Thickness value
 		thickness *= 100.0f;
-		_gui.getGlobalScreen()->hasValueFormChanged("thickness", thickness);
+		_gui.getGlobalScreen()->checkValueForm("thickness", thickness);
 		thickness = std::clamp(thickness / 100.0f, 0.0f, 1.0f);
 
 		// Color values
 		color *= 255.0f;
-		_gui.getGlobalScreen()->hasValueFormChanged("colorR", color.r, { });
-		_gui.getGlobalScreen()->hasValueFormChanged("colorG", color.g, { });
-		_gui.getGlobalScreen()->hasValueFormChanged("colorB", color.b, { });
+		_gui.getGlobalScreen()->checkValueForm("colorR", color.r, { });
+		_gui.getGlobalScreen()->checkValueForm("colorG", color.g, { });
+		_gui.getGlobalScreen()->checkValueForm("colorB", color.b, { });
 		color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
 		color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
 		color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
@@ -152,11 +152,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Flare Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("multiplier")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("multiplier", "Size Multiplier", multiplier * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("multiplier", "Size Multiplier", multiplier * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -164,13 +164,13 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Intensity value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("intensity", intensity))
+		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity = max(0.0f, intensity / 100.0f);
 		}
 
 		// Multiplier value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("multiplier", multiplier))
+		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
 		{
 			multiplier = max(0.0f, multiplier / 100.0f);
 		}
@@ -220,11 +220,11 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("factor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("factor", "Exposure Factor", factor * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("factor", "Exposure Factor", factor * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speed", "Exposure Speed", speed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", speed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -232,13 +232,13 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Factor value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("factor", factor))
+		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
 		{
 			factor = max(0.0f, factor / 100.0f);
 		}
 
 		// Speed value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("speed", speed))
+		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
 			speed = max(0.0f, speed / 100000.0f);
 		}
@@ -292,11 +292,11 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Bloom Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("intensity", "Bloom Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("blurs")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("blurs", "Amount Of Blurs", blurCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("blurs", "Amount Of Blurs", blurCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -305,13 +305,13 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
 
 		// Extra intensity value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("intensity", intensity))
+		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity = max(0.0f, intensity / 100.0f);
 		}
 
 		// Blur count value
-		if (_gui.getGlobalScreen()->hasValueFormChanged("blurs", blurCount))
+		if (_gui.getGlobalScreen()->checkValueForm("blurs", blurCount))
 		{
 			blurCount = max(0, blurCount);
 		}

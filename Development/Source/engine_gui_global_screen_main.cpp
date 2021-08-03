@@ -29,7 +29,7 @@ void EngineGuiGlobalScreen::update()
 	}
 
 	// Miscellaneous
-	_updateValueFilling();
+	_updateValueFormDeleting();
 }
 
 void EngineGuiGlobalScreen::createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,

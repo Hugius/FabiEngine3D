@@ -30,12 +30,12 @@ void SkyEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingSky = true;
-				_gui.getGlobalScreen()->addValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -43,7 +43,7 @@ void SkyEditor::_updateMainMenu()
 				_isEditingSky = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -51,7 +51,7 @@ void SkyEditor::_updateMainMenu()
 				_isDeletingSky = true;
 				auto IDs = getLoadedSkyIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -112,7 +112,7 @@ void SkyEditor::_updateSkyCreating()
 		string newSkyName;
 
 		// Create new sky
-		if (_gui.getGlobalScreen()->hasValueFormChanged("skyCreate", newSkyName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyName, {}))
 		{
 			// @ sign not allowed
 			if (newSkyName.find('@') == string::npos)
@@ -160,7 +160,7 @@ void SkyEditor::_updateSkyChoosing()
 	if (_isChoosingSky)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 
 		// Check if a sky name is hovered
 		if (selectedButtonID != "")
@@ -207,7 +207,7 @@ void SkyEditor::_updateSkyDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

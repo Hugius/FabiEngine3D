@@ -23,23 +23,23 @@ void WaterEditor::_updateMeshMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("size", "Size", waterSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
 		// Update size changes
-		if (_gui.getGlobalScreen()->hasValueFormChanged("size", waterSize, { 0.0f }))
+		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
 			waterSize = max(0.0f, waterSize);
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
 
 		// Update uvRepeat changes
-		_gui.getGlobalScreen()->hasValueFormChanged("uvRepeat", uvRepeat);
+		_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
 		_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
 	}
 }

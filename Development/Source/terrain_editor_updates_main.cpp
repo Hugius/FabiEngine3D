@@ -31,12 +31,12 @@ void TerrainEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingTerrain = true;
-				_gui.getGlobalScreen()->addValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -44,7 +44,7 @@ void TerrainEditor::_updateMainMenu()
 				_isEditingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -52,7 +52,7 @@ void TerrainEditor::_updateMainMenu()
 				_isDeletingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -118,7 +118,7 @@ void TerrainEditor::_updateTerrainCreating()
 		string newTerrainName;
 
 		// Create new terrain
-		if (_gui.getGlobalScreen()->hasValueFormChanged("terrainCreate", newTerrainName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
 		{
 			// @ sign not allowed
 			if (newTerrainName.find('@') == string::npos)
@@ -164,7 +164,7 @@ void TerrainEditor::_updateTerrainChoosing()
 	if (_isChoosingTerrain)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
 
 		// Check if a terrain name is hovered
 		if (selectedButtonID != "")
@@ -217,7 +217,7 @@ void TerrainEditor::_updateTerrainDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

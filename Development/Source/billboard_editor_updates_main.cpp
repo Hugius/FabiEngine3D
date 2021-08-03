@@ -31,11 +31,11 @@ void BillboardEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered()) // Add billboard button
 			{
-				_gui.getGlobalScreen()->addValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingBillboard = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit billboard button
@@ -44,7 +44,7 @@ void BillboardEditor::_updateMainMenu()
 				_isEditingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete billboard button
 			{
@@ -52,7 +52,7 @@ void BillboardEditor::_updateMainMenu()
 				_isDeletingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 		}
 
@@ -78,7 +78,7 @@ void BillboardEditor::_updateBillboardCreating()
 		string newBillboardName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->hasValueFormChanged("billboardCreate", newBillboardName, { _currentBillboardID }))
+		if (_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardName, { _currentBillboardID }))
 		{
 			// @ sign not allowed
 			if (newBillboardName.find('@') == string::npos)
@@ -130,7 +130,7 @@ void BillboardEditor::_updateBillboardChoosing()
 	if (_isChoosingBillboard)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("billboardList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("billboardList");
 
 		// Hide last billboard
 		if (_hoveredBillboardID != "")
@@ -194,7 +194,7 @@ void BillboardEditor::_updateBillboardDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

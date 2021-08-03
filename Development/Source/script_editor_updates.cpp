@@ -25,25 +25,25 @@ void ScriptEditor::_updateGUI()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("search")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("edit")->isHovered())
 				{
 					auto IDs = _script.getAllScriptFileIDs();
 					std::sort(IDs.begin(), IDs.end());
-					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f, 0.1f), IDs);
+					_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("rename")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -61,7 +61,7 @@ void ScriptEditor::_updateGUI()
 				// Search hotkey
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F) && !_gui.getGlobalScreen()->isFocused())
 				{
-					_gui.getGlobalScreen()->addValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 
@@ -161,7 +161,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Check if user wants to search a keyword
 		string keyword;
-		if (_gui.getGlobalScreen()->hasValueFormChanged("search", keyword))
+		if (_gui.getGlobalScreen()->checkValueForm("search", keyword))
 		{
 			auto result = _script.findKeyword(keyword);
 
@@ -184,7 +184,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Check if user wants to create a new script
 		string newScriptName;
-		if (_gui.getGlobalScreen()->hasValueFormChanged("scriptCreate", newScriptName))
+		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptName))
 		{
 			// Spaces not allowed
 			if (newScriptName.find(' ') == string::npos)
@@ -213,7 +213,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if existing script file chosen for viewing
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("scriptFileList");
 		if (selectedButtonID != "")
 		{
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -232,7 +232,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if user wants to rename a script
-		if (_gui.getGlobalScreen()->hasValueFormChanged("scriptRename", newScriptName))
+		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())

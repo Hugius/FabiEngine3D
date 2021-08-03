@@ -64,7 +64,7 @@ void AnimationEditor::_updateChoiceMenu()
 			{
 				auto modelIDs = _modelEditor.getLoadedModelIDs();
 				for (auto& ID : modelIDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), modelIDs);
+				_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), modelIDs);
 			}
 			else if (screen->getButton("play")->isHovered())
 			{
@@ -198,7 +198,7 @@ void AnimationEditor::_updateChoiceMenu()
 		}
 
 		// Check if a animation name is clicked
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
 		if (selectedButtonID != "")
 		{
 			// Check if LMB is pressed

@@ -53,7 +53,7 @@ void TopViewportController::_updateProjectCreating()
 		string newProjectID;
 
 		// Check if value changed
-		if (_gui.getGlobalScreen()->hasValueFormChanged("newProjectID", newProjectID))
+		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Get directory path for the new project
 			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectID;
@@ -143,7 +143,7 @@ void TopViewportController::_prepareProjectLoading()
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select Project", Vec2(0.0f, 0.1f), projectIDs);
+		_gui.getGlobalScreen()->createChoiceForm("projectList", "Select Project", Vec2(0.0f, 0.1f), projectIDs);
 	}
 	else
 	{
@@ -156,7 +156,7 @@ void TopViewportController::_updateProjectLoading()
 	if (_loadingProject)
 	{
 		// Temporary values
-		const string clickedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
+		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + clickedButtonID;
 
 		// Check if user clicked a project name
@@ -212,12 +212,12 @@ void TopViewportController::_updateProjectDeleting()
 	if (_deletingProject)
 	{
 		static string chosenButtonID = "";
-		string clickedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
+		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 
 		// Check if user clicked a project name
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}

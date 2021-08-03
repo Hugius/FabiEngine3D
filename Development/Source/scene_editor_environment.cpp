@@ -65,7 +65,7 @@ void SceneEditor::_updateSkyMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("skyList", "Select Sky", Vec2(-0.5f, 0.1f), skyNames);
+					_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(-0.5f, 0.1f), skyNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -77,7 +77,7 @@ void SceneEditor::_updateSkyMenu()
 			// Update sky choosing
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
+				string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 				if (selectedButtonID != "")
 				{
 					// Delete old
@@ -137,7 +137,7 @@ void SceneEditor::_updateTerrainMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select Terrain", Vec2(-0.5f, 0.1f), terrainNames);
+					_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(-0.5f, 0.1f), terrainNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -149,7 +149,7 @@ void SceneEditor::_updateTerrainMenu()
 			// Update terrain choosing
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+				string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
 				if (selectedButtonID != "")
 				{
 					// Delete old
@@ -209,7 +209,7 @@ void SceneEditor::_updateWaterMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(-0.5f, 0.1f), waterNames);
+					_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(-0.5f, 0.1f), waterNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -221,7 +221,7 @@ void SceneEditor::_updateWaterMenu()
 			// Update water choosing
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("waterList");
+				string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
 				if (selectedButtonID != "")
 				{
 					// Delete old

@@ -49,19 +49,19 @@ void ModelEditor::_updateOptionsMenu()
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.modelEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.modelEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.modelEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorR", "R", _fe3d.modelEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorG", "G", _fe3d.modelEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("colorB", "B", _fe3d.modelEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.modelEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", _fe3d.modelEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lodID")->isHovered())
 			{
 				string lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
 				lodID = (lodID == "") ? lodID : lodID.substr(1, lodID.size() - 1);
-				_gui.getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -72,9 +72,9 @@ void ModelEditor::_updateOptionsMenu()
 
 		// Setting model color
 		Vec3 newColor = _fe3d.modelEntity_getColor(_currentModelID) * 255.0f;
-		_gui.getGlobalScreen()->hasValueFormChanged("colorR", newColor.r, { });
-		_gui.getGlobalScreen()->hasValueFormChanged("colorG", newColor.g, { });
-		_gui.getGlobalScreen()->hasValueFormChanged("colorB", newColor.b, { });
+		_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
+		_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
+		_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
 		newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
 		newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
 		newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
@@ -82,12 +82,12 @@ void ModelEditor::_updateOptionsMenu()
 
 		// Setting model UV repeat
 		float newUvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
-		_gui.getGlobalScreen()->hasValueFormChanged("uvRepeat", newUvRepeat, { });
+		_gui.getGlobalScreen()->checkValueForm("uvRepeat", newUvRepeat, { });
 		_fe3d.modelEntity_setUvRepeat(_currentModelID, newUvRepeat);
 
 		// Setting LOD entityID
 		string lodID = "";
-		if (_gui.getGlobalScreen()->hasValueFormChanged("lodID", lodID, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("lodID", lodID, { }))
 		{
 			if (lodID == "@") // No LOD entity
 			{

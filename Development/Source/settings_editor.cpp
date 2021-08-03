@@ -70,7 +70,7 @@ void SettingsEditor::update()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}
 				else if (screen->getButton("isFxaaEnabled")->isHovered())
 				{
@@ -79,52 +79,52 @@ void SettingsEditor::update()
 				}
 				else if (screen->getButton("anisotropicQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("shadowQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("reflectionQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("refractionQuality")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("maxAudioChannels")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 
 			// Update forms
-			if (_gui.getGlobalScreen()->hasValueFormChanged("anisotropicQuality", anisotropicQuality, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
 			{
 				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp(anisotropicQuality,
 					Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
 					Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->hasValueFormChanged("shadowQuality", shadowQuality, {}))
+			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
 				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality,
 					Config::MIN_SHADOW_QUALITY,
 					Config::MAX_SHADOW_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->hasValueFormChanged("reflectionQuality", reflectionQuality, {}))
+			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
 				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality,
 					Config::MIN_REFLECTION_QUALITY,
 					Config::MAX_REFLECTION_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->hasValueFormChanged("refractionQuality", refractionQuality, {}))
+			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
 				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality,
 					Config::MIN_REFRACTION_QUALITY,
 					Config::MAX_REFRACTION_QUALITY));
 			}
-			else if (_gui.getGlobalScreen()->hasValueFormChanged("maxAudioChannels", maxAudioChannels, {}))
+			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 			{
 				_fe3d.misc_setMaxAudioChannels(std::clamp(maxAudioChannels,
 					Config::MIN_AUDIO_CHANNELS,

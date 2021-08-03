@@ -1,42 +1,32 @@
 #include "engine_gui_global_screen.hpp"
 #include "logger.hpp"
 
-void EngineGuiGlobalScreen::setFocus(bool focused)
-{
-	_isFocused = focused;
-}
-
-bool EngineGuiGlobalScreen::isFocused()
-{
-	return _isFocused;
-}
-
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(value), position, size, true, buttonsPosition);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
 	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
 	_createValueForm(ID, title, value, position, size, false, buttonsPosition);
 }
 
-bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
@@ -52,7 +42,7 @@ bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, unsigned int& 
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, int& value, vector<int> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
@@ -68,7 +58,7 @@ bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, int& value, ve
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, float& value, vector<float> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vector<float> forbiddenValues)
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
@@ -84,7 +74,7 @@ bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, float& value, 
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, double& value, vector<double> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vector<double> forbiddenValues)
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
@@ -100,7 +90,7 @@ bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, double& value,
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::hasValueFormChanged(const string& ID, string& value, vector<string> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vector<string> forbiddenValues)
 {
 	return _checkValueForm(ID, value, forbiddenValues);
 }
@@ -117,33 +107,36 @@ bool EngineGuiGlobalScreen::isValueFormCancelled()
 
 bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 {
-	return std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
+	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
 void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition)
 {
-	// Check if not already exists
-	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
+	// Validate existence
+	if (isValueFormExisting(ID))
 	{
-		_valueFormIDs.push_back(ID);
-		createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-		createTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
-		createWritefield(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
-		getWritefield(ID)->changeTextContent(valueString);
+		Logger::throwError("EngineGuiGlobalScreen::_createValueForm");
+	}
 
-		// GUI focus & set first writefield active
-		if (!_isFocused)
-		{
-			getWritefield(ID)->setActive(true);
-			_isFocused = true;
-		}
+	// Create value form
+	_valueFormIDs.push_back(ID);
+	createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+	createTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
+	createWritefield(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+	getWritefield(ID)->changeTextContent(valueString);
 
-		// Add done & cancel buttons
-		if (!checkButton("value_form_done"))
-		{
-			createButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
-			createButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
-		}
+	// GUI focus & set first writefield active
+	if (!_isFocused)
+	{
+		getWritefield(ID)->setActive(true);
+		_isFocused = true;
+	}
+
+	// Add done & cancel buttons
+	if (!checkButton("value_form_done"))
+	{
+		createButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
+		createButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 	}
 }
 
@@ -162,7 +155,8 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 		{
 			if (done || entered) // Pressed done or ENTER
 			{
-				string content = getWritefield(ID)->getTextContent();
+				// Retrieve content
+				auto content = getWritefield(ID)->getTextContent();
 				
 				// Check if writefield is not empty
 				if (content == "")
@@ -187,16 +181,13 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			// Remove valueform(s)
 			if (_valueFormIDs.size() == 1)
 			{
-				_deleteValueForm(ID);
-				deleteButton("value_form_done");
-				deleteButton("value_form_cancel");
-				_isFocused = false;
+				_mustDeleteValueForms = true;
 			}
 			else
 			{
 				if (done || cancelled)
 				{
-					_exitValueFilling = true;
+					_mustDeleteValueForms = true;
 				}
 			}
 		}
@@ -205,29 +196,32 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	return changed;
 }
 
-void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles)
+void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles)
 {
-	if (_choiceFormID == "")
+	// Validate existence
+	if (!_choiceFormID.empty())
 	{
-		// Add GUI elements
-		createRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-		createTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
-		createScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(0.25f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), Vec3(1.0f), Vec3(0.0f), Vec2(0.075f, 0.2f));
-		createButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
-
-		// Add buttons to scrolling list
-		for (const auto& buttonTitle : buttonTitles)
-		{
-			getScrollingList(ID)->createButton(buttonTitle, buttonTitle.empty() ? " " : buttonTitle);
-		}
-		
-		// Miscellaneous
-		_isFocused = true;
-		_choiceFormID = ID;
+		Logger::throwError("EngineGuiGlobalScreen::createChoiceForm");
 	}
+
+	// Create choice form
+	createRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+	createTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+	createScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(0.25f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), Vec3(1.0f), Vec3(0.0f), Vec2(0.075f, 0.2f));
+	createButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
+
+	// Add buttons to scrolling list
+	for (const auto& buttonTitle : buttonTitles)
+	{
+		getScrollingList(ID)->createButton(buttonTitle, buttonTitle.empty() ? " " : buttonTitle);
+	}
+
+	// Miscellaneous
+	_isFocused = true;
+	_choiceFormID = ID;
 }
 
-string EngineGuiGlobalScreen::getSelectedChoiceFormButtonID(const string& ID)
+const string EngineGuiGlobalScreen::checkChoiceForm(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
@@ -257,15 +251,21 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 
 void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 {
-	if (ID == _choiceFormID)
+	// Validate existence
+	if (ID != _choiceFormID)
 	{
-		deleteRectangle(_choiceFormID);
-		deleteTextfield(_choiceFormID);
-		deleteScrollingList(_choiceFormID);
-		deleteButton("choice_form_cancel");
-		_isFocused = false;
-		_choiceFormID = "";
+		Logger::throwError("EngineGuiGlobalScreen::deleteChoiceForm");
 	}
+
+	// Delete choice form
+	deleteRectangle(_choiceFormID);
+	deleteTextfield(_choiceFormID);
+	deleteScrollingList(_choiceFormID);
+	deleteButton("choice_form_cancel");
+
+	// Miscellaneous
+	_isFocused = false;
+	_choiceFormID = "";
 }
 
 bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
@@ -273,21 +273,23 @@ bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
 	return (ID == _choiceFormID);
 }
 
-void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, Vec2 position)
+void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec2 position)
 {
-	if (_answerFormID == "")
+	// Validate existence
+	if (!_answerFormID.empty())
 	{
-		createRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-		createTextfield("question", position, Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
-		createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
-		createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
-		_isFocused = true;
-		_answerFormID = ID;
+		Logger::throwError("EngineGuiGlobalScreen::createAnswerForm()");
 	}
-	else
-	{
-		Logger::throwError("EngineGuiGlobalScreen::addAnswerForm() ---> answer form with ID \"" + ID + "\" cannot be added!");
-	}
+
+	// Create answer form
+	createRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+	createTextfield("question", position, Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
+	createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
+	createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
+	
+	// Miscellaneous
+	_isFocused = true;
+	_answerFormID = ID;
 }
 
 bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
@@ -324,19 +326,21 @@ bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 
 void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 {
-	if (ID == _answerFormID)
+	// Validate existence
+	if (ID != _answerFormID)
 	{
-		deleteRectangle("question");
-		deleteTextfield("question");
-		deleteButton("answer_form_yes");
-		deleteButton("answer_form_no");
-		_isFocused = false;
-		_answerFormID = "";
+		Logger::throwError("EngineGuiGlobalScreen::_deleteAnswerForm");
 	}
-	else
-	{
-		Logger::throwError("EngineGuiGlobalScreen::deleteAnswerForm() ---> answer form with ID \"" + ID + "\" cannot be deleted!");
-	}
+
+	// Delete answer form
+	deleteRectangle("question");
+	deleteTextfield("question");
+	deleteButton("answer_form_yes");
+	deleteButton("answer_form_no");
+
+	// Miscellaneous
+	_isFocused = false;
+	_answerFormID = "";
 }
 
 bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID)
@@ -344,9 +348,9 @@ bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID)
 	return (ID == _answerFormID);
 }
 
-void EngineGuiGlobalScreen::_updateValueFilling()
+void EngineGuiGlobalScreen::_updateValueFormDeleting()
 {
-	if (_exitValueFilling)
+	if (_mustDeleteValueForms)
 	{
 		// Remove valueforms
 		for (const auto& tempID : _valueFormIDs)
@@ -362,18 +366,17 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 		deleteButton("value_form_cancel");
 
 		// Miscellaneous
-		_exitValueFilling = false;
+		_mustDeleteValueForms = false;
 		_isFocused = false;
 	}
 }
 
-void EngineGuiGlobalScreen::_deleteValueForm(const string& ID)
+void EngineGuiGlobalScreen::setFocus(bool focused)
 {
-	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
-	{
-		deleteRectangle(ID);
-		deleteTextfield(ID);
-		deleteWritefield(ID);
-		_valueFormIDs.erase(std::remove(_valueFormIDs.begin(), _valueFormIDs.end(), ID), _valueFormIDs.end());
-	}
+	_isFocused = focused;
+}
+
+bool EngineGuiGlobalScreen::isFocused()
+{
+	return _isFocused;
 }

@@ -32,15 +32,15 @@ void ModelEditor::_updateLightingMenu()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularFactor", "Spec Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Spec Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("reflectionType")->isHovered())
 			{
@@ -67,21 +67,21 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 
 		// Update specular factor
-		if (_gui.getGlobalScreen()->hasValueFormChanged("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
 
 		// Update specular intensity
-		if (_gui.getGlobalScreen()->hasValueFormChanged("specularIntensity", specularIntensity))
+		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d.modelEntity_setSpecularIntensity(_currentModelID, specularIntensity);
 		}
 
 		// Update lightness
-		if (_gui.getGlobalScreen()->hasValueFormChanged("lightness", lightness))
+		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
 			_fe3d.modelEntity_setLightness(_currentModelID, lightness);

@@ -33,12 +33,12 @@ void WaterEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingWater = true;
-				_gui.getGlobalScreen()->addValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -46,7 +46,7 @@ void WaterEditor::_updateMainMenu()
 				_isEditingWater = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -54,7 +54,7 @@ void WaterEditor::_updateMainMenu()
 				_isDeletingWater = true;
 				auto IDs = getLoadedWaterIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -120,7 +120,7 @@ void WaterEditor::_updateWaterCreating()
 		string newWaterName;
 
 		// Create new water
-		if (_gui.getGlobalScreen()->hasValueFormChanged("waterCreate", newWaterName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterName, {}))
 		{
 			// @ sign not allowed
 			if (newWaterName.find('@') == string::npos)
@@ -168,7 +168,7 @@ void WaterEditor::_updateWaterChoosing()
 	if (_isChoosingWater)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("waterList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
 
 		// Check if a water name is hovered
 		if (selectedButtonID != "")
@@ -215,7 +215,7 @@ void WaterEditor::_updateWaterDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

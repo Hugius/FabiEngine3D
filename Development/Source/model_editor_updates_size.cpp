@@ -25,9 +25,9 @@ void ModelEditor::_updateSizeMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("toggleResize")->isHovered())
 			{
@@ -87,21 +87,21 @@ void ModelEditor::_updateSizeMenu()
 		}
 
 		// Update size X
-		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeX", currentSize.x))
+		if (_gui.getGlobalScreen()->checkValueForm("sizeX", currentSize.x))
 		{
 			currentSize.x /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Y
-		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeY", currentSize.y))
+		if (_gui.getGlobalScreen()->checkValueForm("sizeY", currentSize.y))
 		{
 			currentSize.y /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Z
-		if (_gui.getGlobalScreen()->hasValueFormChanged("sizeZ", currentSize.z))
+		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", currentSize.z))
 		{
 			currentSize.z /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, currentSize);

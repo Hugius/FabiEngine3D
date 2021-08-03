@@ -41,24 +41,24 @@ void AnimationEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered()) // Add animation button
 			{
-				_gui.getGlobalScreen()->addValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAnimation = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit animation button
 			{
 				_isChoosingAnimation = true;
 				_isEditingAnimation = true;
-				_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+				_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete animation button
 			{
 				_isChoosingAnimation = true;
 				_isDeletingAnimation = true;
-				_gui.getGlobalScreen()->addChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+				_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 			}
 		}
 
@@ -84,7 +84,7 @@ void AnimationEditor::_updateAnimationCreating()
 		string newAnimationName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->hasValueFormChanged("animationCreate", newAnimationName, { _currentAnimationID }))
+		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationName, { _currentAnimationID }))
 		{
 			// Check if name contains spaces
 			if (newAnimationName.find(' ') == string::npos)
@@ -129,7 +129,7 @@ void AnimationEditor::_updateAnimationChoosing()
 	if (_isChoosingAnimation)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("animationList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 
 		// Check if a animation name is hovered
 		if (selectedButtonID != "")
@@ -179,7 +179,7 @@ void AnimationEditor::_updateAnimationDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

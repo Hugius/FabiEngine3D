@@ -127,15 +127,15 @@ void TerrainEditor::_updateLightingMenu()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -147,21 +147,21 @@ void TerrainEditor::_updateLightingMenu()
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 
 		// Check if specular factor confirmed
-		if (_gui.getGlobalScreen()->hasValueFormChanged("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, specularFactor);
 		}
 
 		// Check if specular intensity confirmed
-		if (_gui.getGlobalScreen()->hasValueFormChanged("specularIntensity", specularIntensity))
+		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
 		}
 
 		// Check if lightness confirmed
-		if (_gui.getGlobalScreen()->hasValueFormChanged("lightness", lightness))
+		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness = max(0.0f, lightness / 100.0f);
 			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);

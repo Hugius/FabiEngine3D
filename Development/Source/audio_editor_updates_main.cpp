@@ -28,11 +28,11 @@ void AudioEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("add")->isHovered()) // Add audio button
 			{
-				_gui.getGlobalScreen()->addValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAudio = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit audio button
@@ -41,7 +41,7 @@ void AudioEditor::_updateMainMenu()
 				_isEditingAudio = true;
 				auto IDs = getLoadedAudioIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete audio button
 			{
@@ -49,7 +49,7 @@ void AudioEditor::_updateMainMenu()
 				_isDeletingAudio = true;
 				auto IDs = getLoadedAudioIDs();
 				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -75,7 +75,7 @@ void AudioEditor::_updateAudioCreating()
 		string newAudioName = "";
 
 		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->hasValueFormChanged("newAudioName", newAudioName, { _currentAudioID }))
+		if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioName, { _currentAudioID }))
 		{
 			// Check if name starts with @ sign
 			if (newAudioName[0] != '@')
@@ -126,7 +126,7 @@ void AudioEditor::_updateAudioChoosing()
 	if (_isChoosingAudio)
 	{
 		// Get selected button ID
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("audioList");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("audioList");
 
 		// Check if a audio name is hovered
 		if (selectedButtonID != "")
@@ -168,7 +168,7 @@ void AudioEditor::_updateAudioDeleting()
 		// Add answer form
 		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
 		// Check if form is answered

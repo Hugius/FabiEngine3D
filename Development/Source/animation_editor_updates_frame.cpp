@@ -38,21 +38,21 @@ void AnimationEditor::_updateFrameMenu()
 			}
 			else if (screen->getButton("transformation")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("transformationX", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("transformationY", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("transformationZ", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationX", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationY", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationZ", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("rotationOrigin")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("transformationSpeedX", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speedType")->isHovered())
 			{
@@ -91,60 +91,60 @@ void AnimationEditor::_updateFrameMenu()
 				// Choosing part of preview model
 				auto modelParts = currentAnimation->partIDs;
 				modelParts.erase(modelParts.begin());
-				_gui.getGlobalScreen()->addChoiceForm("parts", "Select Part", Vec2(-0.5f, 0.1f), modelParts);
+				_gui.getGlobalScreen()->createChoiceForm("parts", "Select Part", Vec2(-0.5f, 0.1f), modelParts);
 			}
 		}
 
 		// Update X transformation change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationX", transformation.x, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationX", transformation.x, { }))
 		{
 			transformation.x /= multiplier;
 		}
 
 		// Update Y transformation change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationY", transformation.y, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationY", transformation.y, { }))
 		{
 			transformation.y /= multiplier;
 		}
 
 		// Update Z transformation change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationZ", transformation.z, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationZ", transformation.z, { }))
 		{
 			transformation.z /= multiplier;
 		}
 
 		// Update X rotation origin change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginX", rotationOrigin.x, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginX", rotationOrigin.x, { }))
 		{
 			rotationOrigin.x /= 1000.0f;
 		}
 
 		// Update Y rotation origin change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginY", rotationOrigin.y, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginY", rotationOrigin.y, { }))
 		{
 			rotationOrigin.y /= 1000.0f;
 		}
 
 		// Update Z rotation origin change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("rotationOriginZ", rotationOrigin.z, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginZ", rotationOrigin.z, { }))
 		{
 			rotationOrigin.z /= 1000.0f;
 		}
 
 		// Update X speed change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedX", speed.x, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedX", speed.x, { }))
 		{
 			speed.x /= 1000.0f;
 		}
 
 		// Update Y speed change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedY", speed.y, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedY", speed.y, { }))
 		{
 			speed.y /= 1000.0f;
 		}
 
 		// Update Z speed change
-		if (_gui.getGlobalScreen()->hasValueFormChanged("transformationSpeedZ", speed.z, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedZ", speed.z, { }))
 		{
 			speed.z /= 1000.0f;
 		}
@@ -176,7 +176,7 @@ void AnimationEditor::_updateFrameMenu()
 		}
 
 		// Check if a animation partID is clicked
-		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("parts");
 		if (selectedButtonID != "")
 		{
 			// Check if LMB pressed

@@ -30,7 +30,7 @@ void ModelEditor::_updateAabbMenu()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -43,7 +43,7 @@ void ModelEditor::_updateAabbMenu()
 				std::sort(aabbNames.begin(), aabbNames.end());
 
 				// Show choicelist
-				_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", Vec2(-0.5f, 0.1f), aabbNames);
+				_gui.getGlobalScreen()->createChoiceForm("aabbList", "Select AABB", Vec2(-0.5f, 0.1f), aabbNames);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -56,7 +56,7 @@ void ModelEditor::_updateAabbMenu()
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("toggleMove")->isHovered())
 			{
@@ -108,14 +108,14 @@ void ModelEditor::_updateAabbMenu()
 		}
 
 		// Filling transformation speed
-		if (_gui.getGlobalScreen()->hasValueFormChanged("speed", _aabbTransformationSpeed, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
 		{
 			_aabbTransformationSpeed /= 100.0f;
 		}
 
 		// Create AABB
 		string newAabbName;
-		if (_gui.getGlobalScreen()->hasValueFormChanged("newAabbName", newAabbName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newAabbName, {}))
 		{
 			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
 			{
@@ -158,7 +158,7 @@ void ModelEditor::_updateAabbMenu()
 		// Choose AABB
 		if (_gui.getGlobalScreen()->isChoiceFormExisting("aabbList"))
 		{
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("aabbList");
+			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("aabbList");
 			string hoveredAabbID = "";
 
 			// Hide every AABB

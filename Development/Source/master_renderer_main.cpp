@@ -12,22 +12,24 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_timer(timer),
 	_textureLoader(textureLoader),
 	_camera(camera),
-	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
-	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
-	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),
-	_modelEntityRenderer      ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
-	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
-	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
-	_imageEntityRenderer      ("image_entity_shader.vert",     "image_entity_shader.frag",     renderBus),
-	_depthRenderer			  ("depth_shader.vert",			   "depth_shader.frag",			   renderBus),
-	_shadowRenderer			  ("shadow_shader.vert",		   "shadow_shader.frag",		   renderBus),
-	_antiAliasingRenderer	  ("anti_aliasing_shader.vert",	   "anti_aliasing_shader.frag",	   renderBus),
-	_dofRenderer			  ("blur_shader.vert",             "blur_shader.frag",             renderBus),
-	_motionBlurRenderer		  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
-	_bloomRendererHighQuality ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
-	_bloomRendererLowQuality  ("blur_shader.vert",			   "blur_shader.frag",			   renderBus),
-	_postProcessingRenderer   ("post_processing_shader.vert",  "post_processing_shader.frag",  renderBus),
-	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
+	_skyEntityColorRenderer("sky_entity_color_shader.vert", "sky_entity_color_shader.frag", renderBus),
+	_terrainEntityColorRenderer("terrain_entity_color_shader.vert", "terrain_entity_color_shader.frag", renderBus),
+	_terrainEntityDepthRenderer("terrain_entity_depth_shader.vert", "terrain_entity_depth_shader.frag", renderBus),
+	_waterEntityColorRenderer("water_entity_color_shader.vert", "water_entity_color_shader.frag", renderBus),
+	_modelEntityColorRenderer("model_entity_color_shader.vert", "model_entity_color_shader.frag", renderBus),
+	_modelEntityDepthRenderer("model_entity_depth_shader.vert", "model_entity_depth_shader.frag", renderBus),
+	_billboardEntityColorRenderer("billboard_entity_color_shader.vert", "billboard_entity_color_shader.frag", renderBus),
+	_billboardEntityDepthRenderer("billboard_entity_depth_shader.vert", "billboard_entity_depth_shader.frag", renderBus),
+	_aabbEntityColorRenderer("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag", renderBus),
+	_imageEntityColorRenderer("image_entity_color_shader.vert", "image_entity_color_shader.frag", renderBus),
+	_shadowRenderer("shadow_shader.vert", "shadow_shader.frag", renderBus),
+	_antiAliasingRenderer("anti_aliasing_shader.vert", "anti_aliasing_shader.frag", renderBus),
+	_dofRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
+	_motionBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
+	_bloomRendererHighQuality("blur_shader.vert", "blur_shader.frag", renderBus),
+	_bloomRendererLowQuality("blur_shader.vert", "blur_shader.frag", renderBus),
+	_postProcessingRenderer("post_processing_shader.vert", "post_processing_shader.frag", renderBus),
+	_finalRenderer("final_shader.vert", "final_shader.frag", renderBus)
 {
 	// Load framebuffers
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
@@ -67,19 +69,19 @@ void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<T
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Bind
-	_imageEntityRenderer.bind();
+	_imageEntityColorRenderer.bind();
 
 	// Render logo
-	_imageEntityRenderer.render(logo);
+	_imageEntityColorRenderer.render(logo);
 
 	// Render text
 	if (text != nullptr)
 	{
-		_imageEntityRenderer.render(text);
+		_imageEntityColorRenderer.render(text);
 	}
 
 	// Unbind
-	_imageEntityRenderer.unbind();
+	_imageEntityColorRenderer.unbind();
 }
 
 void MasterRenderer::renderScene(EntityBus * entityBus)

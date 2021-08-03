@@ -28,12 +28,6 @@
     <Filter Include="Execution\Interpreter\Function\Entities">
       <UniqueIdentifier>{8fb47fb8-c477-475e-9548-5caeef410d6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Execution\Interpreter\Function\Entities\Environment">
-      <UniqueIdentifier>{00066440-3137-469f-9343-1c400c578cbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Execution\Interpreter\Function\Entities\Miscellaneous">
-      <UniqueIdentifier>{36988e15-96f9-4858-9f21-a2063da60e1f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Execution\Interpreter\Function\Miscellaneous">
       <UniqueIdentifier>{c23fe641-24b8-4dea-9b85-cfffcb26d4e4}</UniqueIdentifier>
     </Filter>
@@ -77,42 +71,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_string_operations.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp">
-      <Filter>Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
@@ -176,6 +134,42 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "base_entity_renderer.hpp"
+#include "base_renderer.hpp"
 #include "image_entity.hpp"
 
-class AntiAliasingRenderer final : public BaseEntityRenderer
+class AntiAliasingRenderer final : public BaseRenderer
 {
 public:
-	using BaseEntityRenderer::BaseEntityRenderer;
+	using BaseRenderer::BaseRenderer;
 
 	void bind()   override;
 	void unbind() override;

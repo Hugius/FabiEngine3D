@@ -11,9 +11,11 @@ using std::numeric_limits;
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
-	bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
-	bool isUnderWater = false;
+	auto allModelEntities = _entityBus->getModelEntities();
+	auto allBillboardEntities = _entityBus->getBillboardEntities();
 	float clippingY = -(numeric_limits<float>::max)();
+	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
+	bool isUnderWater = false;
 
 	// Prepare water depth
 	if (waterDepthNeeded)
@@ -44,86 +46,101 @@ void MasterRenderer::_captureSceneDepth()
 		// Bind
 		_sceneDepthFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
-		_depthRenderer.bind();
 
-		// Render TERRAIN entity
+		// Validate existence
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
-			_depthRenderer.render(_entityBus->getTerrainEntity());
+			// Bind
+			_terrainEntityDepthRenderer.bind();
+
+			// Render TERRAIN entity
+			_terrainEntityDepthRenderer.render(_entityBus->getTerrainEntity());
+
+			// Unbind
+			_terrainEntityDepthRenderer.unbind();
 		}
-
-		// Render MODEL entities
-		auto allModelEntities = _entityBus->getModelEntities();
-		for (const auto& [keyID, modelEntity] : allModelEntities)
+		
+		// Validate existence
+		if (!allModelEntities.empty())
 		{
-			// Check if entity must be included in depth map
-			if (modelEntity->isDepthMapIncluded())
+			// Bind
+			_modelEntityDepthRenderer.bind();
+
+			// Render MODEL entities
+			for (const auto& [keyID, modelEntity] : allModelEntities)
 			{
-				// Check if LOD entity needs to be rendered
-				if (modelEntity->isLevelOfDetailed())
+				// Check if entity must be included in depth map
+				if (modelEntity->isDepthMapIncluded())
 				{
-					// Try to find LOD entity
-					auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
-					if (foundPair != allModelEntities.end())
+					// Check if LOD entity needs to be rendered
+					if (modelEntity->isLevelOfDetailed())
 					{
-						auto lodEntity = foundPair->second;
+						// Try to find LOD entity
+						auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
+						if (foundPair != allModelEntities.end())
+						{
+							auto lodEntity = foundPair->second;
 
-						// Save original transformation
-						Vec3 originalPosition = lodEntity->getPosition();
-						Vec3 originalRotation = lodEntity->getRotation();
-						Vec3 originalSize = lodEntity->getSize();
-						bool originalVisibility = lodEntity->isVisible();
+							// Save original transformation
+							Vec3 originalPosition = lodEntity->getPosition();
+							Vec3 originalRotation = lodEntity->getRotation();
+							Vec3 originalSize = lodEntity->getSize();
+							bool originalVisibility = lodEntity->isVisible();
 
-						// Change transformation
-						lodEntity->setPosition(modelEntity->getPosition());
-						lodEntity->setRotation(modelEntity->getRotation());
-						lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
-						lodEntity->setVisible(modelEntity->isVisible());
-						lodEntity->updateModelMatrix();
+							// Change transformation
+							lodEntity->setPosition(modelEntity->getPosition());
+							lodEntity->setRotation(modelEntity->getRotation());
+							lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+							lodEntity->setVisible(modelEntity->isVisible());
+							lodEntity->updateModelMatrix();
 
-						// Render LOD entity
-						_depthRenderer.render(lodEntity, clippingY, isUnderWater);
+							// Render LOD entity
+							_modelEntityDepthRenderer.render(lodEntity, clippingY, isUnderWater);
 
-						// Revert to original transformation
-						lodEntity->setPosition(originalPosition);
-						lodEntity->setRotation(originalRotation);
-						lodEntity->setSize(originalSize);
-						lodEntity->setVisible(originalVisibility);
-						lodEntity->updateModelMatrix();
+							// Revert to original transformation
+							lodEntity->setPosition(originalPosition);
+							lodEntity->setRotation(originalRotation);
+							lodEntity->setSize(originalSize);
+							lodEntity->setVisible(originalVisibility);
+							lodEntity->updateModelMatrix();
+						}
+						else
+						{
+							Logger::throwError("MasterRenderer::_captureSceneDepth");
+						}
 					}
-					else
+					else // Render high-quality entity
 					{
-						Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
+						_modelEntityDepthRenderer.render(modelEntity, clippingY, isUnderWater);
 					}
 				}
-				else // Render high-quality entity
+			}
+
+			// Unbind
+			_modelEntityDepthRenderer.unbind();
+		}
+
+		// Validate existence
+		if (!allBillboardEntities.empty())
+		{
+			// Bind
+			_billboardEntityDepthRenderer.bind();
+
+			// Render BILLBOARD entities
+			for (const auto& [keyID, entity] : allBillboardEntities)
+			{
+				// Check if entity must be included in depth map
+				if (entity->isDepthMapIncluded())
 				{
-					_depthRenderer.render(modelEntity, clippingY, isUnderWater);
+					_billboardEntityDepthRenderer.render(entity, clippingY, isUnderWater);
 				}
 			}
-		}
 
-		// Render BILLBOARD entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
-		{
-			// Check if entity must be included in depth map
-			if (entity->isDepthMapIncluded())
-			{
-				_depthRenderer.render(entity, clippingY, isUnderWater);
-			}
-		}
-
-		// Render AABB entities
-		if (_renderBus.isAabbFrameRenderingEnabled())
-		{
-			for (const auto& [keyID, entity] : _entityBus->getAabbEntities())
-			{
-				_depthRenderer.render(entity, clippingY, isUnderWater);
-			}
+			// Unbind
+			_billboardEntityDepthRenderer.unbind();
 		}
 
 		// Unbind
-		_depthRenderer.unbind();
 		_sceneDepthFramebuffer.unbind();
 		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
 	}
@@ -285,7 +302,7 @@ void MasterRenderer::_captureShadows()
 				}
 				else
 				{
-					Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
+					Logger::throwError("MasterRenderer::_captureShadows");
 				}
 			}
 			else // Render high-quality entity

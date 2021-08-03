@@ -8,75 +8,81 @@ using std::dynamic_pointer_cast;
 
 void MasterRenderer::_renderSkyEntity()
 {
+	// Validate existence
 	if (_entityBus->getMainSkyEntity() != nullptr)
 	{
 		// Bind
-		_skyEntityRenderer.bind();
+		_skyEntityColorRenderer.bind();
 
 		// Render SKY entity
-		_skyEntityRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
+		_skyEntityColorRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
 		// Unbind
-		_skyEntityRenderer.unbind();
+		_skyEntityColorRenderer.unbind();
 	}
 }
 
 void MasterRenderer::_renderTerrainEntity()
 {
+	// Validate existence
 	if (_entityBus->getTerrainEntity() != nullptr)
 	{
 		// Bind
-		_terrainEntityRenderer.bind();
+		_terrainEntityColorRenderer.bind();
 
 		// Render LIGHT entities
-		_terrainEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+		_terrainEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render TERRAIN entity
-		_terrainEntityRenderer.render(_entityBus->getTerrainEntity());
+		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
 
 		// Unbind
-		_terrainEntityRenderer.unbind();
+		_terrainEntityColorRenderer.unbind();
 	}
 }
 
 void MasterRenderer::_renderWaterEntity()
 {
+	// Validate existence
 	if (_entityBus->getWaterEntity() != nullptr)
 	{
 		// Bind
-		_waterEntityRenderer.bind();
+		_waterEntityColorRenderer.bind();
 
 		// Render LIGHT entities
-		_waterEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+		_waterEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render WATER entity
-		_waterEntityRenderer.render(_entityBus->getWaterEntity());
+		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
 
 		// Unbind
-		_waterEntityRenderer.unbind();
+		_waterEntityColorRenderer.unbind();
 	}
 }
 
 void MasterRenderer::_renderModelEntities()
 {
-	if (!_entityBus->getModelEntities().empty())
+	// Temporary values
+	auto modelEntities = _entityBus->getModelEntities();
+
+	// Validate existence
+	if (!modelEntities.empty())
 	{
 		// Bind
-		_modelEntityRenderer.bind();
+		_modelEntityColorRenderer.bind();
 
 		// Render lights
-		_modelEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+		_modelEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render MODEL entities
-		auto allModelEntities = _entityBus->getModelEntities();
-		for (const auto& [keyID, modelEntity] : allModelEntities)
+		for (const auto& [keyID, modelEntity] : modelEntities)
 		{
 			// Check if LOD entity needs to be rendered
 			if (modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
-				if (foundPair != allModelEntities.end())
+				auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
+				if (foundPair != modelEntities.end())
 				{
 					auto lodEntity = foundPair->second;
 
@@ -94,7 +100,7 @@ void MasterRenderer::_renderModelEntities()
 					lodEntity->updateModelMatrix();
 
 					// Render LOD entity
-					_modelEntityRenderer.render(lodEntity);
+					_modelEntityColorRenderer.render(lodEntity);
 
 					// Revert to original transformation
 					lodEntity->setPosition(originalPosition);
@@ -110,30 +116,34 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else // Render high-quality entity
 			{
-				_modelEntityRenderer.render(modelEntity);
+				_modelEntityColorRenderer.render(modelEntity);
 			}
 		}
 
 		// Unbind
-		_modelEntityRenderer.unbind();
+		_modelEntityColorRenderer.unbind();
 	}
 }
 
 void MasterRenderer::_renderBillboardEntities()
 {
-	if (!_entityBus->getBillboardEntities().empty())
+	// Temporary values
+	auto billboardEntities = _entityBus->getBillboardEntities();
+
+	// Validate existence
+	if (!billboardEntities.empty())
 	{
 		// Bind
-		_billboardEntityRenderer.bind();
+		_billboardEntityColorRenderer.bind();
 
 		// Render BILLBOARD entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		for (const auto& [keyID, entity] : billboardEntities)
 		{
-			_billboardEntityRenderer.render(entity);
+			_billboardEntityColorRenderer.render(entity);
 		}
 
 		// Unbind
-		_billboardEntityRenderer.unbind();
+		_billboardEntityColorRenderer.unbind();
 	}
 }
 
@@ -141,19 +151,23 @@ void MasterRenderer::_renderAabbEntities()
 {
 	if (_renderBus.isAabbFrameRenderingEnabled())
 	{
-		if (!_entityBus->getAabbEntities().empty())
+		// Temporary values
+		auto aabbEntities = _entityBus->getAabbEntities();
+
+		// Validate existence
+		if (!aabbEntities.empty())
 		{
 			// Bind
-			_aabbEntityRenderer.bind();
+			_aabbEntityColorRenderer.bind();
 
 			// Render AABB entities
-			for (const auto& [keyID, entity] : _entityBus->getAabbEntities())
+			for (const auto& [keyID, entity] : aabbEntities)
 			{
-				_aabbEntityRenderer.render(entity);
+				_aabbEntityColorRenderer.render(entity);
 			}
 
 			// Unbind
-			_aabbEntityRenderer.unbind();
+			_aabbEntityColorRenderer.unbind();
 		}
 	}
 }
@@ -170,7 +184,7 @@ void MasterRenderer::_renderGUI()
 	if (!_entityBus->getImageEntities().empty() || !_entityBus->getTextEntities().empty())
 	{
 		// Bind
-		_imageEntityRenderer.bind();
+		_imageEntityColorRenderer.bind();
 
 		// Sort rendering order
 		map<unsigned int, shared_ptr<ImageEntity>> orderedEntityMap;
@@ -195,7 +209,7 @@ void MasterRenderer::_renderGUI()
 
 			if (castedTextEntity == nullptr) // IMAGE entity
 			{
-				_imageEntityRenderer.render(entity);
+				_imageEntityColorRenderer.render(entity);
 			}
 			else // TEXT entity
 			{
@@ -204,18 +218,18 @@ void MasterRenderer::_renderGUI()
 					// Render every character individually
 					for (const auto& characterEntity : castedTextEntity->getCharacterEntities())
 					{
-						_imageEntityRenderer.render(characterEntity);
+						_imageEntityColorRenderer.render(characterEntity);
 					}
 				}
 				else // Static text rendering
 				{
-					_imageEntityRenderer.render(castedTextEntity);
+					_imageEntityColorRenderer.render(castedTextEntity);
 				}
 			}
 		}
 
 		// Unbind
-		_imageEntityRenderer.unbind();
+		_imageEntityColorRenderer.unbind();
 	}
 }
 
@@ -225,9 +239,9 @@ void MasterRenderer::_renderCustomCursor()
 	{
 		if (entity->getID() == _renderBus.getCursorEntityID())
 		{
-			_imageEntityRenderer.bind();
-			_imageEntityRenderer.render(entity);
-			_imageEntityRenderer.unbind();
+			_imageEntityColorRenderer.bind();
+			_imageEntityColorRenderer.render(entity);
+			_imageEntityColorRenderer.unbind();
 		}
 	}
 }
@@ -359,30 +373,30 @@ void MasterRenderer::_renderDebugScreens()
 	motionText->setColor(textColor);
 	
 	// Bind
-	_imageEntityRenderer.bind();
+	_imageEntityColorRenderer.bind();
 
 	// Render debug surfaces
-	_imageEntityRenderer.render(sceneSurface);
-	_imageEntityRenderer.render(shadowSurface);
-	_imageEntityRenderer.render(bloomSurface);
-	_imageEntityRenderer.render(sceneReflectionSurface);
-	_imageEntityRenderer.render(waterReflectionSurface);
-	_imageEntityRenderer.render(waterRefractionSurface);
-	_imageEntityRenderer.render(depthSurface);
-	_imageEntityRenderer.render(dofSurface);
-	_imageEntityRenderer.render(motionBlurSurface);
+	_imageEntityColorRenderer.render(sceneSurface);
+	_imageEntityColorRenderer.render(shadowSurface);
+	_imageEntityColorRenderer.render(bloomSurface);
+	_imageEntityColorRenderer.render(sceneReflectionSurface);
+	_imageEntityColorRenderer.render(waterReflectionSurface);
+	_imageEntityColorRenderer.render(waterRefractionSurface);
+	_imageEntityColorRenderer.render(depthSurface);
+	_imageEntityColorRenderer.render(dofSurface);
+	_imageEntityColorRenderer.render(motionBlurSurface);
 
 	// Render debug text
-	_imageEntityRenderer.render(sceneText);
-	_imageEntityRenderer.render(shadowText);
-	_imageEntityRenderer.render(bloomText);
-	_imageEntityRenderer.render(sceneReflectionText);
-	_imageEntityRenderer.render(waterReflectionText);
-	_imageEntityRenderer.render(waterRefractionText);
-	_imageEntityRenderer.render(depthText);
-	_imageEntityRenderer.render(dofText);
-	_imageEntityRenderer.render(motionText);
+	_imageEntityColorRenderer.render(sceneText);
+	_imageEntityColorRenderer.render(shadowText);
+	_imageEntityColorRenderer.render(bloomText);
+	_imageEntityColorRenderer.render(sceneReflectionText);
+	_imageEntityColorRenderer.render(waterReflectionText);
+	_imageEntityColorRenderer.render(waterRefractionText);
+	_imageEntityColorRenderer.render(depthText);
+	_imageEntityColorRenderer.render(dofText);
+	_imageEntityColorRenderer.render(motionText);
 
 	// Unbind
-	_imageEntityRenderer.unbind();
+	_imageEntityColorRenderer.unbind();
 }

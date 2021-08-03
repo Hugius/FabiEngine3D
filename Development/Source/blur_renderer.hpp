@@ -1,15 +1,15 @@
 #pragma once
 
-#include "base_entity_renderer.hpp"
+#include "base_renderer.hpp"
 #include "image_entity.hpp"
 #include "render_framebuffer.hpp"
 #include "blur_direction.hpp"
 #include "blur_type.hpp"
 
-class BlurRenderer final : public BaseEntityRenderer
+class BlurRenderer final : public BaseRenderer
 {
 public:
-	using BaseEntityRenderer::BaseEntityRenderer;
+	using BaseRenderer::BaseRenderer;
 
 	void loadFramebuffers(BlurType type, unsigned int blurSize);
 	void bind() override;

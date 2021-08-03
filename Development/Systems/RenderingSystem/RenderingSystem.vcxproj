@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\Source\base_renderer.cpp" />
     <ClCompile Include="..\..\Source\billboard_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\Source\billboard_entity_color_renderer.cpp" />
+    <ClCompile Include="..\..\Source\billboard_entity_shadow_renderer.cpp" />
     <ClCompile Include="..\..\Source\blur_renderer.cpp" />
     <ClCompile Include="..\..\Source\model_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_depth_renderer.cpp" />
@@ -42,7 +43,7 @@
     <ClCompile Include="..\..\Source\master_renderer_main.cpp" />
     <ClCompile Include="..\..\Source\render_shader.cpp" />
     <ClCompile Include="..\..\Source\shadow_generator.cpp" />
-    <ClCompile Include="..\..\Source\shadow_renderer.cpp" />
+    <ClCompile Include="..\..\Source\model_entity_shadow_renderer.cpp" />
     <ClCompile Include="..\..\Source\sky_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_color_renderer.cpp" />
     <ClCompile Include="..\..\Source\water_entity_color_renderer.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="..\..\Source\base_renderer.hpp" />
     <ClInclude Include="..\..\Source\billboard_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\billboard_entity_color_renderer.hpp" />
+    <ClInclude Include="..\..\Source\billboard_entity_shadow_renderer.hpp" />
     <ClInclude Include="..\..\Source\blur_renderer.hpp" />
     <ClInclude Include="..\..\Source\model_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity_depth_renderer.hpp" />
@@ -67,7 +69,7 @@
     <ClInclude Include="..\..\Source\master_renderer.hpp" />
     <ClInclude Include="..\..\Source\render_shader.hpp" />
     <ClInclude Include="..\..\Source\shadow_generator.hpp" />
-    <ClInclude Include="..\..\Source\shadow_renderer.hpp" />
+    <ClInclude Include="..\..\Source\model_entity_shadow_renderer.hpp" />
     <ClInclude Include="..\..\Source\sky_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity_color_renderer.hpp" />
     <ClInclude Include="..\..\Source\water_entity_color_renderer.hpp" />
@@ -82,6 +84,8 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_color_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_depth_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_depth_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_depth_shader.frag" />
@@ -94,8 +98,8 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_color_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.vert" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shadow_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shadow_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_color_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\sky_entity_color_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\terrain_entity_color_shader.frag" />

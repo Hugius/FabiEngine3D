@@ -16,8 +16,10 @@ uniform bool u_isTransparent;
 // Process fragment
 void main()
 {
+	// Calculate diffuse map color
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
+	// Check if transparent
 	if(u_isTransparent)
 	{
 		if(diffuseMapColor.a < u_minDiffuseMapAlpha)

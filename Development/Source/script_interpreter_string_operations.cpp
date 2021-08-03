@@ -203,8 +203,8 @@ Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
 {
 	// Check if brackets are in string
-	auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
-	auto closingBracketFound = std::find(valueString.begin(), valueString.end(), ']');
+	auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
+	auto closingBracketFound = find(valueString.begin(), valueString.end(), ']');
 	if (openingBracketFound == valueString.end() || closingBracketFound == valueString.end())
 	{
 		return -1;

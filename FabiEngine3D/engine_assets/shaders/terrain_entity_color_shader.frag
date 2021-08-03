@@ -230,7 +230,7 @@ vec3 getDiffuseMapping()
 		vec2 blendUV = f_uv / u_diffuseMapRepeat;
 		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
-		// Calculate diffuse color
+		// Calculate diffuse map color
 		vec3 diffuseMapColor = vec3(0.0f);
 		if(u_hasDiffuseMap)
 		{
@@ -246,7 +246,7 @@ vec3 getDiffuseMapping()
 		bColor = pow(bColor, vec3(2.2f));
 
 		// Compose final color
-		vec3 newColor = diffuseMapColor + rColor + gColor + bColor;
+		vec3 newColor = (diffuseMapColor + rColor + gColor + bColor);
         
 		// Return
 		return newColor;

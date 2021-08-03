@@ -32,10 +32,10 @@ public:
 	void setLensFlareMapPath(const string& value);
 
 	// Matrices
-	void setViewMatrix(const Matrix44& value);
-	void setProjectionMatrix(const Matrix44& value);
-	void setSkyRotationMatrix(const Matrix44& value);
-	void setShadowMatrix(const Matrix44& value);
+	void setViewMatrix(const Matrix44 value);
+	void setProjectionMatrix(const Matrix44 value);
+	void setSkyRotationMatrix(const Matrix44 value);
+	void setShadowMatrix(const Matrix44 value);
 
 	// Vector4
 	void setFlareSourcePositionClipspace(Vec4 value);
@@ -139,10 +139,10 @@ public:
 	const string& getLensFlareMapPath();
 
 	// Matrices
-	const Matrix44& getViewMatrix();
-	const Matrix44& getProjectionMatrix();
-	const Matrix44& getSkyRotationMatrix();
-	const Matrix44& getShadowMatrix();
+	const Matrix44 getViewMatrix();
+	const Matrix44 getProjectionMatrix();
+	const Matrix44 getSkyRotationMatrix();
+	const Matrix44 getShadowMatrix();
 
 	// Vector4
 	const Vec4 getFlareSourcePositionClipspace();

@@ -27,7 +27,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	}
 
 	// Validate message content
-	if (std::find(content.begin(), content.end(), ';') != content.end())
+	if (find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: cannot contain semicolons!");
 		return false;
@@ -86,7 +86,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	}
 
 	// Validate message semantics
-	if (std::find(content.begin(), content.end(), ';') != content.end())
+	if (find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
 		return false;

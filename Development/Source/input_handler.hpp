@@ -44,7 +44,7 @@ private:
 	// Extra functions
 	inline unsigned int _getVectorIndex(vector<InputType>& list, InputType element)
 	{
-		auto it = std::find(list.begin(), list.end(), element);
+		auto it = find(list.begin(), list.end(), element);
 
 		if (it == list.end()) // Not found
 		{
@@ -57,6 +57,6 @@ private:
 	}
 	inline bool _isInVector(vector<InputType>& list, InputType element)
 	{
-		return std::find(list.begin(), list.end(), element) != list.end();
+		return find(list.begin(), list.end(), element) != list.end();
 	}
 };

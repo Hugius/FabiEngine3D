@@ -10,12 +10,6 @@
     <Filter Include="Interface\Entities">
       <UniqueIdentifier>{58eff109-7a52-4f2b-b047-1ed6d6a63f68}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Interface\Entities\Environment">
-      <UniqueIdentifier>{3c2c2d2e-2ae9-491e-b5d7-1b0bc3071cde}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Interface\Entities\Miscellaneous">
-      <UniqueIdentifier>{6d65cbfe-fd1d-464b-aff1-93fe20cbb707}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Interface\Core">
       <UniqueIdentifier>{ec2d2619-8458-42b3-b623-d20f669e26ae}</UniqueIdentifier>
     </Filter>
@@ -35,33 +29,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\core_engine_update.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp">
-      <Filter>Interface\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp">
-      <Filter>Interface\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_water.cpp">
-      <Filter>Interface\Entities\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_aabb.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_billboard.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_model.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_image.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_light.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp">
-      <Filter>Interface\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d.cpp">
       <Filter>Interface\Core</Filter>
@@ -98,6 +65,33 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\fabi_engine_3d_raycast.cpp">
       <Filter>Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_water.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_aabb.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_billboard.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_image.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_light.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_model.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp">
+      <Filter>Interface\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

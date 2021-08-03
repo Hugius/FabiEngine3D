@@ -181,16 +181,16 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			if
 				(
 					(scriptType == ScriptType::INIT &&
-						(std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
-							std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+						(find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
+							find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
 					||
 					(scriptType == ScriptType::UPDATE &&
-						(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
-							std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+						(find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+							find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
 					||
 					(scriptType == ScriptType::DESTROY &&
-						(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
-							std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
+						(find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+							find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
 					)
 			{
 				_throwScriptError("script \"" + scriptToExecute + "\" is not of the same type!");
@@ -200,7 +200,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			// Check if script exists
 			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs :
 				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
-			if (std::find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
+			if (find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
 				// Pause timer
 				if (_isDebugging)

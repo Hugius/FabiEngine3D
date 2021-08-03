@@ -18,10 +18,6 @@ uniform vec2 u_uvMultiplier;
 uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
-uniform float u_clippingY;
-
-// Boolean uniforms
-uniform bool u_isUnderWater;
 
 // Out variables
 out vec2 f_uv;
@@ -37,7 +33,6 @@ void main()
 	gl_Position = clipSpacePos;
 	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
-	gl_ClipDistance[2] = dot(worldSpacePos, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
 	// Out variables
     f_uv = vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y));

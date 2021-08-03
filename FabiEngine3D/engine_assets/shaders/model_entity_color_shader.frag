@@ -181,7 +181,7 @@ vec3 getDiffuseMapping()
 	}
 	else
 	{
-		// Calculate the texel color
+		// Calculate diffuse map color
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 

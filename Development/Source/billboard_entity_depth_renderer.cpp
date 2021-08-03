@@ -60,7 +60,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
-		_shader.uploadUniform("u_currentY", entity->getPosition().y);
+		_shader.uploadUniform("u_positionY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
@@ -81,7 +81,6 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 
 		// Render
 		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		// Unbind buffer
 		glBindVertexArray(0);

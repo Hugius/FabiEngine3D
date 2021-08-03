@@ -131,7 +131,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 				// Remove list accessing characters
 				if (isAccessingList)
 				{
-					auto openingBracketFound = std::find(elementString.begin(), elementString.end(), '[');
+					auto openingBracketFound = find(elementString.begin(), elementString.end(), '[');
 					auto bracketIndex = static_cast<unsigned int>(std::distance(elementString.begin(), openingBracketFound));
 					elementString = elementString.substr(0, bracketIndex);
 				}

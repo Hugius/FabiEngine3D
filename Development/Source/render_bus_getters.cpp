@@ -70,22 +70,22 @@ const TextureID RenderBus::getFinalSceneMap()
 	return _finalSceneMap;
 }
 
-const Matrix44 & RenderBus::getViewMatrix()
+const Matrix44 RenderBus::getViewMatrix()
 {
 	return _viewMatrix;
 }
 
-const Matrix44 & RenderBus::getProjectionMatrix()
+const Matrix44 RenderBus::getProjectionMatrix()
 {
 	return _projectionMatrix;
 }
 
-const Matrix44 & RenderBus::getSkyRotationMatrix()
+const Matrix44 RenderBus::getSkyRotationMatrix()
 {
 	return _skyRotationMatrix;
 }
 
-const Matrix44 & RenderBus::getShadowMatrix()
+const Matrix44 RenderBus::getShadowMatrix()
 {
 	return _shadowMatrix;
 }

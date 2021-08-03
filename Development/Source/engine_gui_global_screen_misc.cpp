@@ -144,7 +144,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 {
 	bool changed = false;
 
-	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
+	if (find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{
 		bool done = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();

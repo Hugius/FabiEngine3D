@@ -16,9 +16,10 @@ uniform bool u_isTransparent;
 // Process fragment
 void main()
 {
-	// Texture sampling for possible alpha
+	// Calculate diffuse map color
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
+	// Check if transparent
 	if(u_isTransparent)
 	{
 		if(diffuseMapColor.a < u_minDiffuseMapAlpha) 
@@ -26,4 +27,7 @@ void main()
 			discard;
 		}
 	}
-}  
+
+	// Set final depth
+	gl_FragDepth = gl_FragCoord.z;
+} 

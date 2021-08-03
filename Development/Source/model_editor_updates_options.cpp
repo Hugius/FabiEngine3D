@@ -93,7 +93,7 @@ void ModelEditor::_updateOptionsMenu()
 			{
 				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "");
 			}
-			else if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
+			else if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
 			{
 				Logger::throwWarning("Cannot find LOD entity name \"" + lodID + "\"");
 			}

@@ -6,8 +6,8 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 {
 	// Temporary values
 	vector<ScriptValue> returnValues;
-	auto openingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), '(');
-	auto closingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), ')');
+	auto openingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), '(');
+	auto closingParanthesisFound = find(scriptLine.begin(), scriptLine.end(), ')');
 
 	// Check if function call has opening & closing parentheses
 	if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())

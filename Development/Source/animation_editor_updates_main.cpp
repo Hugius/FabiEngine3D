@@ -91,7 +91,7 @@ void AnimationEditor::_updateAnimationCreating()
 			{
 				// Check if name already exists
 				auto animationIDs = getAllAnimationIDs();
-				if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
+				if (find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 				{
 					// Go to editor
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");

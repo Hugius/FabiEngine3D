@@ -17,7 +17,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	}
 
 	// Validate message content
-	if (std::find(content.begin(), content.end(), ';') != content.end())
+	if (find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking message tried to send TCP message: cannot contain semicolons!");
 		return false;
@@ -66,7 +66,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	}
 
 	// Validate message content
-	if (std::find(content.begin(), content.end(), ';') != content.end())
+	if (find(content.begin(), content.end(), ';') != content.end())
 	{
 		Logger::throwWarning("Networking message tried to send UDP message: cannot contain semicolons!");
 		return false;
@@ -105,8 +105,8 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 
 bool NetworkServerAPI::_isClientConnected(const string& IP, const string& port)
 {
-	bool foundIP   = (std::find(_clientIPs.begin(), _clientIPs.end(), IP) != _clientIPs.end());
-	bool foundPort = (std::find(_clientPorts.begin(), _clientPorts.end(), port) != _clientPorts.end());
+	bool foundIP   = (find(_clientIPs.begin(), _clientIPs.end(), IP) != _clientIPs.end());
+	bool foundPort = (find(_clientPorts.begin(), _clientPorts.end(), port) != _clientPorts.end());
 	return (foundIP && foundPort);
 }
 

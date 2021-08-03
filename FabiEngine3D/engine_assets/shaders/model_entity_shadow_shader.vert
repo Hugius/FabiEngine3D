@@ -11,7 +11,7 @@ uniform mat4 u_lightSpaceMatrix;
 uniform mat4 u_modelMatrix;
 
 // Float uniforms
-uniform float u_currentY;
+uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 
@@ -23,12 +23,15 @@ out vec2 f_uv;
 
 void main()
 {
-	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + (u_isInstanced == true ? vec4(v_offset, 0.0f) : vec4(0.0f));
-	vec4 lightSpacePos = u_lightSpaceMatrix * worldSpacePos;
+	// In variables
+	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
+	vec4 lightSpacePos = (u_lightSpaceMatrix * worldSpacePos);
 
+	// GLSL variables
 	gl_Position = lightSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
 	
+	// Out variables
 	f_uv = vec2(v_uv.x, -v_uv.y);
 }

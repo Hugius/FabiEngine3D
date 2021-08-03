@@ -19,9 +19,6 @@
     <Filter Include="Shaders\Entity Shaders">
       <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Miscellaneous Shaders">
-      <UniqueIdentifier>{fd1c8bbb-eff4-4e91-8ff5-72fc31f68f12}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Post-processing Shaders">
       <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
     </Filter>
@@ -96,9 +93,6 @@
     <ClCompile Include="..\..\Source\post_renderer.cpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\shadow_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\anti_aliasing_renderer.cpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
@@ -130,6 +124,12 @@
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_entity_depth_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Depth</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\model_entity_shadow_renderer.cpp">
+      <Filter>Renderers\Entity Renderers\Depth</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_entity_shadow_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
   </ItemGroup>
@@ -167,9 +167,6 @@
     <ClInclude Include="..\..\Source\post_renderer.hpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\shadow_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\anti_aliasing_renderer.hpp">
       <Filter>Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
@@ -203,14 +200,14 @@
     <ClInclude Include="..\..\Source\billboard_entity_depth_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\model_entity_shadow_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Depth</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\billboard_entity_shadow_renderer.hpp">
+      <Filter>Renderers\Entity Renderers\Depth</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert">
-      <Filter>Shaders\Miscellaneous Shaders</Filter>
-    </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.frag">
       <Filter>Shaders\Post-processing Shaders</Filter>
     </None>
@@ -293,6 +290,18 @@
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_depth_shader.vert">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shadow_shader.frag">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_shadow_shader.vert">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.frag">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
   </ItemGroup>

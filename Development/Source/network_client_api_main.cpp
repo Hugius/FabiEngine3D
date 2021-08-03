@@ -47,7 +47,7 @@ void NetworkClientAPI::start(const string& username)
 		Logger::throwWarning("Networking client tried to start: username is reserved!");
 		return;
 	}
-	else if (std::find(username.begin(), username.end(), ';') != username.end())
+	else if (find(username.begin(), username.end(), ';') != username.end())
 	{
 		Logger::throwWarning("Networking client tried to start: username cannot contain semicolons!");
 		return;

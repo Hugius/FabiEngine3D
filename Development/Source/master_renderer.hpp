@@ -9,13 +9,14 @@
 #include "water_entity_color_renderer.hpp"
 #include "model_entity_color_renderer.hpp"
 #include "model_entity_depth_renderer.hpp"
+#include "model_entity_shadow_renderer.hpp"
 #include "billboard_entity_color_renderer.hpp"
 #include "billboard_entity_depth_renderer.hpp"
+#include "billboard_entity_shadow_renderer.hpp"
 #include "aabb_entity_color_renderer.hpp"
 #include "image_entity_color_renderer.hpp"
 #include "post_renderer.hpp"
 #include "blur_renderer.hpp"
-#include "shadow_renderer.hpp"
 #include "final_renderer.hpp"
 #include "anti_aliasing_renderer.hpp"
 #include "timer.hpp"
@@ -74,23 +75,24 @@ private:
 	// Renderers
 	SkyEntityColorRenderer _skyEntityColorRenderer;
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;
-	TerrainEntityDepthRenderer    _terrainEntityDepthRenderer;
-	WaterEntityColorRenderer      _waterEntityColorRenderer;
-	ModelEntityColorRenderer      _modelEntityColorRenderer;
-	ModelEntityDepthRenderer      _modelEntityDepthRenderer;
-	BillboardEntityColorRenderer  _billboardEntityColorRenderer;
-	BillboardEntityDepthRenderer  _billboardEntityDepthRenderer;
-	AabbEntityColorRenderer       _aabbEntityColorRenderer;
-	ImageEntityColorRenderer      _imageEntityColorRenderer;
-	ShadowRenderer           _shadowRenderer;
-	AntiAliasingRenderer	 _antiAliasingRenderer;
-	BlurRenderer             _dofRenderer;
-	BlurRenderer             _motionBlurRenderer;
-	BlurRenderer             _bloomRendererHighQuality;
-	BlurRenderer             _bloomRendererLowQuality;
-	PostRenderer             _postProcessingRenderer;
-	FinalRenderer            _finalRenderer;
-
+	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;
+	WaterEntityColorRenderer _waterEntityColorRenderer;
+	ModelEntityColorRenderer _modelEntityColorRenderer;
+	ModelEntityDepthRenderer _modelEntityDepthRenderer;
+	ModelEntityShadowRenderer _modelEntityShadowRenderer;
+	BillboardEntityColorRenderer _billboardEntityColorRenderer;
+	BillboardEntityDepthRenderer _billboardEntityDepthRenderer;
+	BillboardEntityShadowRenderer _billboardEntityShadowRenderer;
+	AabbEntityColorRenderer _aabbEntityColorRenderer;
+	ImageEntityColorRenderer _imageEntityColorRenderer;
+	AntiAliasingRenderer _antiAliasingRenderer;
+	BlurRenderer _dofRenderer;
+	BlurRenderer _motionBlurRenderer;
+	BlurRenderer _bloomRendererHighQuality;
+	BlurRenderer _bloomRendererLowQuality;
+	PostRenderer _postProcessingRenderer;
+	FinalRenderer _finalRenderer;
+	
 	// Framebuffers
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;

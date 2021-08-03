@@ -105,7 +105,7 @@ void SceneEditor::_updateMainMenu()
 				auto sceneNames = _loadSceneIDs();
 
 				// If scene name not existing yet
-				if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
+				if (find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
 				{
 					// Disable engine background
 					_fe3d.skyEntity_selectMainSky("");

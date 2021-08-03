@@ -130,7 +130,7 @@ void TerrainEditor::_updateTerrainCreating()
 					newTerrainName = "@" + newTerrainName;
 
 					// If terrain name not existing yet
-					if (std::find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
+					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
 					{
 						_currentTerrainID = newTerrainName;
 						_loadedTerrainIDs.push_back(_currentTerrainID);

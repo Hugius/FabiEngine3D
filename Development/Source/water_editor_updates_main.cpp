@@ -132,7 +132,7 @@ void WaterEditor::_updateWaterCreating()
 					newWaterName = "@" + newWaterName;
 
 					// If water name not existing yet
-					if (std::find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterName) == _loadedWaterIDs.end())
+					if (find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterName) == _loadedWaterIDs.end())
 					{
 						_currentWaterID = newWaterName;
 						_loadedWaterIDs.push_back(_currentWaterID);

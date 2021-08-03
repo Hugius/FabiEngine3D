@@ -90,7 +90,7 @@ void BillboardEditor::_updateBillboardCreating()
 					newBillboardName = "@" + newBillboardName;
 
 					// Check if name already exists
-					if (std::find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardName) == _loadedBillboardIDs.end()) // If name not existing yet
+					if (find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardName) == _loadedBillboardIDs.end()) // If name not existing yet
 					{
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");

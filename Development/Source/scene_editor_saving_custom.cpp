@@ -38,14 +38,14 @@ bool SceneEditor::saveCustomSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+		bool isCustomSceneModel = find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
 		if ((modelID[0] != '@') && isCustomSceneModel)
 		{
 			// Check if entity has LOD ID
 			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if (std::find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
+				if (find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
 				{
 					lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
@@ -116,9 +116,9 @@ bool SceneEditor::saveCustomSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
 		bool isCustomSceneModel =
-			std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+			find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
 		{
 			// Retrieve all bound AABB IDs
@@ -265,9 +265,9 @@ bool SceneEditor::saveCustomSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
 		bool isCustomSceneModel =
-			std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+			find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
 		{
 			// Every playing animation on every model
@@ -321,7 +321,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	{
 		// Check if allowed to save
 		bool isCustomSceneBillboard =
-			std::find(_customSceneBillboardIDs.begin(), _customSceneBillboardIDs.end(), billboardID) != _customSceneBillboardIDs.end();
+			find(_customSceneBillboardIDs.begin(), _customSceneBillboardIDs.end(), billboardID) != _customSceneBillboardIDs.end();
 		if ((billboardID[0] != '@') && isCustomSceneBillboard)
 		{
 			// Retrieve all bound AABB IDs
@@ -400,7 +400,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	{
 		// Check if allowed to save
 		bool isCustomSceneAabb =
-			std::find(_customSceneAabbIDs.begin(), _customSceneAabbIDs.end(), aabbID) != _customSceneAabbIDs.end();
+			find(_customSceneAabbIDs.begin(), _customSceneAabbIDs.end(), aabbID) != _customSceneAabbIDs.end();
 		if ((aabbID[0] != '@') && isCustomSceneAabb && _fe3d.aabbEntity_getParentID(aabbID).empty())
 		{
 			// Data to save
@@ -431,7 +431,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	{
 		// Check if allowed to save
 		bool isCustomSceneSound =
-			std::find(_customSceneSoundIDs.begin(), _customSceneSoundIDs.end(), soundID) != _customSceneSoundIDs.end();
+			find(_customSceneSoundIDs.begin(), _customSceneSoundIDs.end(), soundID) != _customSceneSoundIDs.end();
 		if ((soundID[0] != '@') && isCustomSceneSound && _fe3d.soundEntity_is3D(soundID))
 		{
 			// Data to save
@@ -512,7 +512,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	{
 		// Check if allowed to save
 		bool isCustomSceneLight =
-			std::find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
+			find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
 		if ((lightID[0] != '@') && isCustomSceneLight)
 		{
 			// Data to save

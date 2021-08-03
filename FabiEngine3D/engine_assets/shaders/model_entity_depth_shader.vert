@@ -3,7 +3,7 @@
 
 // In variables
 layout (location = 0) in vec3 v_pos;
-layout (location = 1) in vec3 v_uv;
+layout (location = 1) in vec2 v_uv;
 layout (location = 4) in vec3 v_offset;
 
 // Matrix uniforms
@@ -12,7 +12,7 @@ uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
 // Float uniforms
-uniform float u_currentY;
+uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 uniform float u_clippingY;
@@ -27,14 +27,14 @@ out vec2 f_uv;
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + (u_isInstanced == true ? vec4(v_offset, 0.0f) : vec4(0.0f));
+	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
 	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
 	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
 	gl_ClipDistance[2] = dot(worldSpacePos, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
 	// Out variables

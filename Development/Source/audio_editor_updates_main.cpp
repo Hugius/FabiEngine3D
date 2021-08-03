@@ -87,7 +87,7 @@ void AudioEditor::_updateAudioCreating()
 					newAudioName = "@" + newAudioName;
 
 					// Check if name already exists
-					if (std::find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioName) == _loadedAudioIDs.end()) // If name not existing yet
+					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioName) == _loadedAudioIDs.end()) // If name not existing yet
 					{
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");

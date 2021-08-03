@@ -102,7 +102,7 @@ BEGIN:
 								// Prevent processing more messages
 								break;
 							}
-							else if (std::find(_clientUsernames.begin(), _clientUsernames.end(), username) != _clientUsernames.end())
+							else if (find(_clientUsernames.begin(), _clientUsernames.end(), username) != _clientUsernames.end())
 							{
 								// Reject client
 								if (!_sendTcpMessage(clientSocketID, "USER_ALREADY_CONNECTED", true))

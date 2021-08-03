@@ -74,22 +74,22 @@ void RenderBus::setFinalSceneMap(TextureID value)
 	_finalSceneMap = value;
 }
 
-void RenderBus::setViewMatrix(const Matrix44& value)
+void RenderBus::setViewMatrix(const Matrix44 value)
 {
 	_viewMatrix = value;
 }
 
-void RenderBus::setProjectionMatrix(const Matrix44& value)
+void RenderBus::setProjectionMatrix(const Matrix44 value)
 {
 	_projectionMatrix = value;
 }
 
-void RenderBus::setSkyRotationMatrix(const Matrix44& value)
+void RenderBus::setSkyRotationMatrix(const Matrix44 value)
 {
 	_skyRotationMatrix = value;
 }
 
-void RenderBus::setShadowMatrix(const Matrix44& value)
+void RenderBus::setShadowMatrix(const Matrix44 value)
 {
 	_shadowMatrix = value;
 }

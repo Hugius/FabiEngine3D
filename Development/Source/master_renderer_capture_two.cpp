@@ -11,8 +11,8 @@ using std::numeric_limits;
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
-	auto allModelEntities = _entityBus->getModelEntities();
-	auto allBillboardEntities = _entityBus->getBillboardEntities();
+	auto modelEntities = _entityBus->getModelEntities();
+	auto billboardEntities = _entityBus->getBillboardEntities();
 	float clippingY = -(numeric_limits<float>::max)();
 	const bool waterDepthNeeded = (_entityBus->getWaterEntity() != nullptr) && (_entityBus->getWaterEntity()->getTransparency() > 0.0f);
 	bool isUnderWater = false;
@@ -61,13 +61,13 @@ void MasterRenderer::_captureSceneDepth()
 		}
 		
 		// Validate existence
-		if (!allModelEntities.empty())
+		if (!modelEntities.empty())
 		{
 			// Bind
 			_modelEntityDepthRenderer.bind();
 
 			// Render MODEL entities
-			for (const auto& [keyID, modelEntity] : allModelEntities)
+			for (const auto& [keyID, modelEntity] : modelEntities)
 			{
 				// Check if entity must be included in depth map
 				if (modelEntity->isDepthMapIncluded())
@@ -76,8 +76,8 @@ void MasterRenderer::_captureSceneDepth()
 					if (modelEntity->isLevelOfDetailed())
 					{
 						// Try to find LOD entity
-						auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
-						if (foundPair != allModelEntities.end())
+						auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
+						if (foundPair != modelEntities.end())
 						{
 							auto lodEntity = foundPair->second;
 
@@ -121,13 +121,13 @@ void MasterRenderer::_captureSceneDepth()
 		}
 
 		// Validate existence
-		if (!allBillboardEntities.empty())
+		if (!billboardEntities.empty())
 		{
 			// Bind
 			_billboardEntityDepthRenderer.bind();
 
 			// Render BILLBOARD entities
-			for (const auto& [keyID, entity] : allBillboardEntities)
+			for (const auto& [keyID, entity] : billboardEntities)
 			{
 				// Check if entity must be included in depth map
 				if (entity->isDepthMapIncluded())
@@ -229,10 +229,10 @@ void MasterRenderer::_captureLensFlare()
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Calculate screen position
-		Vec3 lightingPosition = _renderBus.getDirectionalLightPosition();
-		Matrix44 viewMatrix = _renderBus.getViewMatrix();
-		Matrix44 projectionMatrix = _renderBus.getProjectionMatrix();
-		Vec4 clipSpacePosition = projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f);
+		auto lightingPosition = _renderBus.getDirectionalLightPosition();
+		auto viewMatrix = _renderBus.getViewMatrix();
+		auto projectionMatrix = _renderBus.getProjectionMatrix();
+		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f));
 		float alpha = 0.0f;
 
 		// Calculate transparency value
@@ -259,66 +259,87 @@ void MasterRenderer::_captureShadows()
 {
 	if (_renderBus.isShadowsEnabled())
 	{
+		// Temporary values
+		auto modelEntities = _entityBus->getModelEntities();
+		auto billboardEntities = _entityBus->getBillboardEntities();
+
 		// Bind
 		_shadowFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
-		_shadowRenderer.bind();
 
-		// Render MODEL entities
-		auto allModelEntities = _entityBus->getModelEntities();
-		for (const auto& [keyID, modelEntity] : allModelEntities)
+		// Validate existence
+		if (!modelEntities.empty())
 		{
-			// Check if LOD entity needs to be rendered
-			if (modelEntity->isLevelOfDetailed())
+			// Bind
+			_modelEntityShadowRenderer.bind();
+
+			// Render MODEL entities
+			for (const auto& [keyID, modelEntity] : modelEntities)
 			{
-				// Try to find LOD entity
-				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
-				if (foundPair != allModelEntities.end())
+				// Check if LOD entity needs to be rendered
+				if (modelEntity->isLevelOfDetailed())
 				{
-					auto lodEntity = foundPair->second;
+					// Try to find LOD entity
+					auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
+					if (foundPair != modelEntities.end())
+					{
+						auto lodEntity = foundPair->second;
 
-					// Save original transformation
-					Vec3 originalPosition = lodEntity->getPosition();
-					Vec3 originalRotation = lodEntity->getRotation();
-					Vec3 originalSize = lodEntity->getSize();
-					bool originalVisibility = lodEntity->isVisible();
+						// Save original transformation
+						Vec3 originalPosition = lodEntity->getPosition();
+						Vec3 originalRotation = lodEntity->getRotation();
+						Vec3 originalSize = lodEntity->getSize();
+						bool originalVisibility = lodEntity->isVisible();
 
-					// Change transformation
-					lodEntity->setPosition(modelEntity->getPosition());
-					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
-					lodEntity->setVisible(modelEntity->isVisible());
-					lodEntity->updateModelMatrix();
+						// Change transformation
+						lodEntity->setPosition(modelEntity->getPosition());
+						lodEntity->setRotation(modelEntity->getRotation());
+						lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+						lodEntity->setVisible(modelEntity->isVisible());
+						lodEntity->updateModelMatrix();
 
-					// Render LOD entity
-					_shadowRenderer.render(lodEntity);
+						// Render LOD entity
+						_modelEntityShadowRenderer.render(lodEntity);
 
-					// Revert to original transformation
-					lodEntity->setPosition(originalPosition);
-					lodEntity->setRotation(originalRotation);
-					lodEntity->setSize(originalSize);
-					lodEntity->setVisible(originalVisibility);
-					lodEntity->updateModelMatrix();
+						// Revert to original transformation
+						lodEntity->setPosition(originalPosition);
+						lodEntity->setRotation(originalRotation);
+						lodEntity->setSize(originalSize);
+						lodEntity->setVisible(originalVisibility);
+						lodEntity->updateModelMatrix();
+					}
+					else
+					{
+						Logger::throwError("MasterRenderer::_captureShadows");
+					}
 				}
-				else
+				else // Render high-quality entity
 				{
-					Logger::throwError("MasterRenderer::_captureShadows");
+					_modelEntityShadowRenderer.render(modelEntity);
 				}
 			}
-			else // Render high-quality entity
-			{
-				_shadowRenderer.render(modelEntity);
-			}
+
+			// Unbind
+			_modelEntityShadowRenderer.unbind();
 		}
-
-		// Render BILLBOARD entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		
+		// Validate existence
+		if (!billboardEntities.empty())
 		{
-			_shadowRenderer.render(entity);
+			// Bind
+			_billboardEntityShadowRenderer.bind();
+
+			// Render BILLBOARD entities
+			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+			{
+				_billboardEntityShadowRenderer.render(entity);
+			}
+
+			// Unbind
+			_billboardEntityShadowRenderer.unbind();
 		}
 
 		// Unbind
-		_shadowRenderer.unbind();
 		_shadowFramebuffer.unbind();
 		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
 	}

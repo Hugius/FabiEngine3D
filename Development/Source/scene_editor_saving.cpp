@@ -39,7 +39,7 @@ bool SceneEditor::saveEditorSceneToFile()
 			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if (std::find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
+				if (find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
 				{
 					lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
@@ -93,7 +93,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
 		if ((modelID[0] != '@') || isLodModel)
 		{
 			// Check if model has bound animation

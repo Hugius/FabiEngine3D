@@ -19,7 +19,7 @@ uniform mat3 u_normalModelMatrix;
 uniform vec4 u_clippingPlane;
 
 // Float uniforms
-uniform float u_currentY;
+uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
 uniform float u_uvRepeat;
@@ -42,14 +42,14 @@ mat3 calculateTbnMatrix();
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + (u_isInstanced == true ? vec4(v_offset, 0.0f) : vec4(0.0f));
+	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
 	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
 	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
 	gl_ClipDistance[2] = dot(worldSpacePos, u_clippingPlane);
 	
 	// Out variables

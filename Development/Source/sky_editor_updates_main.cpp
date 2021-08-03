@@ -124,7 +124,7 @@ void SkyEditor::_updateSkyCreating()
 					newSkyName = "@" + newSkyName;
 
 					// If sky name not existing yet
-					if (std::find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyName) == _loadedSkyIDs.end())
+					if (find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyName) == _loadedSkyIDs.end())
 					{
 						_currentSkyID = newSkyName;
 						_loadedSkyIDs.push_back(_currentSkyID);

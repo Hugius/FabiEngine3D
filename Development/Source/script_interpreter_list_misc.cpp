@@ -164,7 +164,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		// Remove list accessing characters
 		if (isAccessingList)
 		{
-			auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
+			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
 			auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}

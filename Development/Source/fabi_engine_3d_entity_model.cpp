@@ -307,6 +307,11 @@ const Vec3 FabiEngine3D::modelEntity_getColor(const string& ID, const string& pa
 	return _core->_modelEntityManager.getEntity(ID)->getColor(partID);
 }
 
+const Vec3 FabiEngine3D::modelEntity_getLevelOfDetailSize(const string& ID)
+{
+	_core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
+}
+
 void FabiEngine3D::modelEntity_setSpecularFactor(const string& ID, float intensity)
 {
 	_core->_modelEntityManager.getEntity(ID)->setSpecularFactor(intensity);
@@ -335,6 +340,11 @@ void FabiEngine3D::modelEntity_setMinHeight(const string& ID, float height)
 void FabiEngine3D::modelEntity_setMaxHeight(const string& ID, float height)
 {
 	_core->_modelEntityManager.getEntity(ID)->setMaxHeight(height);
+}
+
+void FabiEngine3D::modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size)
+{
+	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailSize(size);
 }
 
 void FabiEngine3D::modelEntity_setUvRepeat(const string& ID, float repeat)

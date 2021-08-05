@@ -56,75 +56,75 @@ void FabiEngine3D::aabbEntity_setCollisionResponsive(const string& ID, bool resp
 	_core->_aabbEntityManager.getEntity(ID)->setCollisionResponsive(responsive);
 }
 
-void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal)
+void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
-	}
-	else // Bound entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setLocalPosition(position);
 	}
+	else
+	{
+		_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
+	}
 }
 
-void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor, bool noLocal)
+void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
+	{
+		_core->_aabbEntityManager.getEntity(ID)->moveLocal(factor);
+	}
+	else
 	{
 		_core->_aabbEntityManager.getEntity(ID)->move(factor);
 	}
-	else // Bound entity
-	{
-		_core->_aabbEntityManager.getEntity(ID)->move(factor);
-	}
 }
 
-void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal)
+void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
-		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
+		_core->_aabbEntityManager.getEntity(ID)->scaleLocal(factor);
 	}
-	else // Bound entity
+	else
 	{
 		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
 	}
 }
 
-void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
+void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setSize(size);
-	}
-	else // Bound entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setLocalSize(size);
 	}
+	else
+	{
+		_core->_aabbEntityManager.getEntity(ID)->setSize(size);
+	}
 }
 
-const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
+const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
-	{
-		return _core->_aabbEntityManager.getEntity(ID)->getPosition();
-	}
-	else // Bound entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getLocalPosition();
 	}
+	else
+	{
+		return _core->_aabbEntityManager.getEntity(ID)->getPosition();
+	}
 }
 
-const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
+const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)
 {
-	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
-	{
-		return _core->_aabbEntityManager.getEntity(ID)->getSize();
-	}
-	else // Bound entity
+	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getLocalSize();
+	}
+	else
+	{
+		return _core->_aabbEntityManager.getEntity(ID)->getSize();
 	}
 }
 

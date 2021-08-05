@@ -287,6 +287,7 @@ public:
 	void modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partID = "");
 	void modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID = "");
 	void modelEntity_setSize(const string& ID, Vec3 size, const string& partID = "");
+	void modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size);
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
 	void modelEntity_setLightness(const string& ID, float lightness);
@@ -316,6 +317,7 @@ public:
 	const Vec3 modelEntity_getRotationOrigin(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
+	const Vec3 modelEntity_getLevelOfDetailSize(const string& ID);
 	const float modelEntity_getLightness(const string& ID);
 	const float modelEntity_getInversion(const string& ID, const string& partID = "");
 	const float modelEntity_getSpecularFactor(const string& ID);
@@ -427,17 +429,17 @@ public:
 	void aabbEntity_setVisible(const string& ID, bool isVisible);
 	void aabbEntity_setRaycastResponsive(const string& ID, bool responsive);
 	void aabbEntity_setCollisionResponsive(const string& ID, bool responsive);
-	void aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal = false);
-	void aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal = false);
-	void aabbEntity_move(const string& ID, Vec3 factor, bool noLocal = false);
-	void aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal = false);
+	void aabbEntity_setPosition(const string& ID, Vec3 position);
+	void aabbEntity_setSize(const string& ID, Vec3 size);
+	void aabbEntity_move(const string& ID, Vec3 factor);
+	void aabbEntity_scale(const string& ID, Vec3 factor);
 
 	// AABB entity interface - getters
 	const vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
 	const vector<string> aabbEntity_getAllIDs();
 	const string& aabbEntity_getParentID(const string& ID);
-	const Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
-	const Vec3 aabbEntity_getSize(const string& ID, bool noLocal = false);
+	const Vec3 aabbEntity_getPosition(const string& ID);
+	const Vec3 aabbEntity_getSize(const string& ID);
 	const AabbParentType aabbEntity_getParentType(const string& ID);
 	const bool aabbEntity_isRaycastResponsive(const string& ID);
 	const bool aabbEntity_isCollisionResponsive(const string& ID);

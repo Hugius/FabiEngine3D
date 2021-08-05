@@ -29,49 +29,15 @@ const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntit
 	return _getTextEntities();
 }
 
-void TextEntityManager::createEntity
-(
-	const string& ID, const string& textContent,
-	const string& fontPath, Vec3 color,
-	Vec2 position, float rotation, Vec2 size,
-	bool overwrite, bool isCentered, bool isDynamic
-)
+void TextEntityManager::createEntity(const string& ID, bool isCentered, bool isDynamic)
 {
-	// Optional overwrite
-	if (overwrite)
-	{
-		if (isExisting(ID))
-		{
-			deleteEntity(ID);
-		}
-	}
-
-	// Create entity
 	_createEntity(ID);
-	auto entity = getEntity(ID);
-	entity->setTextContent(textContent);
-	entity->setFontPath(fontPath);
-	entity->setColor(color);
-	entity->setPosition(position);
-	entity->setRotation(rotation);
-	entity->setSize(size);
-	entity->setCentered(isCentered);
-	entity->setDynamic(isDynamic);
-
-	// Create separate character entities
-	if (isDynamic)
-	{
-		reloadCharacters(ID);
-	}
-	else // Load static text as a whole
-	{
-		entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
-		entity->setDiffuseMap(_textureLoader.getText(textContent, entity->getFontPath()));
-		entity->updateModelMatrix();
-	}
+	getEntity(ID)->setCentered(isCentered);
+	getEntity(ID)->setDynamic(isDynamic);
+	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 }
 
-void TextEntityManager::reloadCharacters(const string& ID)
+void TextEntityManager::loadCharacters(const string& ID)
 {
 	auto entity = getEntity(ID);
 

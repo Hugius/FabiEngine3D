@@ -83,9 +83,11 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture
-		imageEntity_create("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
-		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+		imageEntity_create("@@cursor", true);
+		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * misc_getAspectRatio()));
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_text.png");
+		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_default.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);
 

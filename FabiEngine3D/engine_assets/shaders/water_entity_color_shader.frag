@@ -179,7 +179,7 @@ vec3 getPointLighting(vec3 normal)
 		{
 		    // Calculate light strength
 			vec3 lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = max(dot(normal, lightDir), 0.0f);
+			float diffuse = clamp(dot(normal, lightDir), 0.0f, 1.0f);
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
 
 			// Calculate light attenuation
@@ -216,7 +216,7 @@ vec3 getDirectionalLighting(vec3 normal)
 		vec3 lightDir = normalize(u_directionalLightPosition - f_pos); // Light ray
 		vec3 viewDir = normalize(f_pos - u_cameraPosition); // View ray
 		vec3 reflectDir = reflect(normalize(lightDir), normal); // Reflect ray
-		float specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor); // Calculate if perpendicular
+		float specular = pow(clamp(dot(reflectDir, viewDir), 0.0f, 1.0f), u_specularLightFactor); // Calculate if perpendicular
 		specular *= u_directionalLightIntensity; // Directional intensity
 		specular *= u_specularLightIntensity; // Specular intensity
 		vec3 result = vec3(specular); // Add to lighting
@@ -237,7 +237,7 @@ float getSpecularLighting(vec3 position, vec3 normal)
         vec3 lightDirection   = normalize(position - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(max(dot(normal, halfWayDirection), 0.0f), u_specularLightFactor);
+        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightFactor);
 
         // Return
         return (result * u_specularLightIntensity);

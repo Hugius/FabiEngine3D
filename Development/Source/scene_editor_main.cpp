@@ -32,11 +32,16 @@ void SceneEditor::load()
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_create("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_create("@@lightSource");
+	_fe3d.billboardEntity_setSize("@@lightSource", Vec2(0.0f));
+	_fe3d.billboardEntity_setDiffuseMap("@@lightSource", texturePath);
+	_fe3d.billboardEntity_setTransparent("@@lightSource", true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
 	_fe3d.billboardEntity_setBright("@@lightSource", true);
+	_fe3d.billboardEntity_setCameraFacingX("@@lightSource", true);
+	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
 
 	// Preview environment loading
 	_skyEditor.loadSkyEntitiesFromFile();
@@ -72,10 +77,12 @@ void SceneEditor::load()
 
 	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
+	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
+	_fe3d.modelEntity_setSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_SPEAKER_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
@@ -84,12 +91,16 @@ void SceneEditor::load()
 	}
 
 	// Preview point light loading
-	_fe3d.lightEntity_create(PREVIEW_LIGHT_BULB_ID, Vec3(0.0f), Vec3(1.0f), 1.0f, 10.0f);
-	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-	_fe3d.modelEntity_create(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE, false);
+	_fe3d.modelEntity_create(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH);
+	_fe3d.modelEntity_setSize(PREVIEW_LIGHT_BULB_ID, DEFAULT_LIGHT_BULB_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LIGHT_BULB_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_LIGHT_BULB_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_LIGHT_BULB_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+	_fe3d.lightEntity_create(PREVIEW_LIGHT_BULB_ID);
+	_fe3d.lightEntity_setRadius(PREVIEW_LIGHT_BULB_ID, Vec3(DEFAULT_LIGHT_RADIUS));
+	_fe3d.lightEntity_setIntensity(PREVIEW_LIGHT_BULB_ID, DEFAULT_LIGHT_INTENSITY);
+	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->createTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

@@ -13,9 +13,9 @@ public:
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 
+	void createEntity(const string& ID);
 	void selectMainSky(const string& ID);
 	void selectMixSky(const string& ID);
-	void createEntity(const string& ID);
 	void update() override;
 	void setExposureFactor(float skyExposureFactor);
 	void setExposureSpeed(float speed);

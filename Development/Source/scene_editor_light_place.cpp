@@ -48,14 +48,24 @@ void SceneEditor::_updateLightPlacing()
 						goto BEGIN;
 					}
 
-					// Add light entity
-					_fe3d.lightEntity_create(newID, newPosition, Vec3(10.0f), Vec3(1.0f), 1.0f);
-					_fe3d.modelEntity_create("@" + newID, "engine_assets\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE);
-					_fe3d.modelEntity_setShadowed("@" + newID, false);
-					_fe3d.modelEntity_setReflected("@" + newID, false);
-					_fe3d.modelEntity_setBright("@" + newID, true);
-					_fe3d.modelEntity_setColor("@" + newID, Vec3(1.0f));
-					_fe3d.aabbEntity_bindToModelEntity("@" + newID, Vec3(0.0f), DEFAULT_LIGHT_BULB_AABB_SIZE, true, true);
+					// Create model
+					const string newModelID = ("@" + newID);
+					_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
+					_fe3d.modelEntity_setPosition(newModelID, newPosition);
+					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_SIZE);
+					_fe3d.modelEntity_setShadowed(newModelID, false);
+					_fe3d.modelEntity_setReflected(newModelID, false);
+					_fe3d.modelEntity_setBright(newModelID, true);
+					_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
+
+					// Bind AABB
+					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
+
+					// Create light
+					_fe3d.lightEntity_setPosition(newID, newPosition);
+					_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
+					_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
 					_loadedLightIDs.push_back(newID);
 
 					// Disable placement mode if no terrain available to choose position from

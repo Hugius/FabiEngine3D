@@ -66,10 +66,9 @@ private:
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _size = Vec3(1.0f);
 
-
 	// Booleans
-	bool _isRaycastResponsive = false;
-	bool _isCollisionResponsive = false;
+	bool _isRaycastResponsive = true;
+	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;
 
 	// Miscellaneous

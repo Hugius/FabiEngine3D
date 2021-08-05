@@ -26,20 +26,7 @@ const unordered_map<string, shared_ptr<LightEntity>>& LightEntityManager::getEnt
 	return _getLightEntities();
 }
 
-void LightEntityManager::createEntity(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity)
+void LightEntityManager::createEntity(const string& ID)
 {
-	// Create entity
 	_createEntity(ID);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setPosition(position);
-	entity->setRadius(radius);
-	entity->setColor(color);
-	entity->setIntensity(intensity);
-}
-
-void LightEntityManager::update()
-{
-
 }

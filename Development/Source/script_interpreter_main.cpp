@@ -194,11 +194,16 @@ void ScriptInterpreter::load()
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
-	_fe3d.billboardEntity_create("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_create("@@lightSource");
+	_fe3d.billboardEntity_setSize("@@lightSource", Vec2(0.0f));
+	_fe3d.billboardEntity_setDiffuseMap("@@lightSource", texturePath);
+	_fe3d.billboardEntity_setTransparent("@@lightSource", true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);
 	_fe3d.billboardEntity_setBright("@@lightSource", true);
+	_fe3d.billboardEntity_setCameraFacingX("@@lightSource", true);
+	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
 
 	// Miscellaneous
 	_fe3d.misc_setCursorVisible(true);

@@ -28,7 +28,7 @@ void ImageEntityColorRenderer::unbind()
 
 void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible() &&
+	if (entity->isVisible() &&
 		((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 		((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{

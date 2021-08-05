@@ -11,8 +11,7 @@ public:
 
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
 
-	void createEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S);
-	void loadMesh(const string& ID, const string& meshPath);
+	void createEntity(const string& ID, const string& meshPath);
 	void setLodDistance(float distance);
 	void update() override;
 

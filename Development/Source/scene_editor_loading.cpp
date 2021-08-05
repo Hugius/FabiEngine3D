@@ -51,7 +51,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Extract data
 			iss >> skyID >> previewID;
 
-			// Add sky
+			// Create sky
 			if (_copyPreviewSky(skyID, previewID))
 			{
 				if (_isEditorLoaded)
@@ -68,7 +68,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Extract data
 			iss >> terrainID >> previewID;
 
-			// Add terrain
+			// Create terrain
 			if (_copyPreviewTerrain(terrainID, previewID))
 			{
 				if (_isEditorLoaded)
@@ -85,7 +85,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			// Extract data
 			iss >> waterID >> previewID;
 
-			// Add water
+			// Create water
 			if (_copyPreviewWater(waterID, previewID))
 			{
 				if (_isEditorLoaded)
@@ -149,7 +149,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				}
 			}
 
-			// Add model
+			// Create model
 			if (_copyPreviewModel(modelID, previewID, position))
 			{
 				// Set properties
@@ -195,7 +195,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						}
 					}
 
-					// Add instancing
+					// Enable instancing
 					_fe3d.modelEntity_disableInstancing(modelID);
 					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
 				}
@@ -227,7 +227,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				size.x >>
 				size.y;
 
-			// Add billboard
+			// Create billboard
 			if (_copyPreviewBillboard(billboardID, previewID, position))
 			{
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
@@ -251,17 +251,24 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				maxVolume >>
 				maxDistance;
 
-			// Add speaker if in editor
+			// Create speaker if in editor
 			if (_isEditorLoaded)
 			{
-				_fe3d.modelEntity_create("@speaker_" + soundID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-				_fe3d.modelEntity_setShadowed("@speaker_" + soundID, false);
-				_fe3d.modelEntity_setReflected("@speaker_" + soundID, false);
-				_fe3d.modelEntity_setBright("@speaker_" + soundID, false);
-				_fe3d.aabbEntity_bindToModelEntity("@speaker_" + soundID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+				// Create model
+				const string newModelID = ("@speaker_" + soundID);
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\speaker.obj");
+				_fe3d.modelEntity_setPosition(newModelID, position);
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
+				_fe3d.modelEntity_setShadowed(newModelID, false);
+				_fe3d.modelEntity_setReflected(newModelID, false);
+				_fe3d.modelEntity_setBright(newModelID, false);
+
+				// Bind AABB
+				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 			}
 
-			// Add sound
+			// Create sound
 			if (_copyPreviewAudio(soundID, previewID, position))
 			{
 				_fe3d.soundEntity_setMaxVolume(soundID, maxVolume);
@@ -282,7 +289,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				ambientLightingColor.b >>
 				ambientLightingIntensity;
 
-			// Add ambient lighting
+			// Enable ambient lighting
 			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 		}
 		else if (lineType == "DIRECTIONAL_LIGHT")
@@ -302,7 +309,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				directionalLightingIntensity >>
 				billboardSize;
 
-			// Add directional lighting
+			// Enable directional lighting
 			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 
 			// Set lightsource billboard
@@ -332,19 +339,31 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			// Add light bulb
+			// Create light bulb
 			if (_isEditorLoaded)
 			{
-				_fe3d.modelEntity_create("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHT_BULB_SIZE);
-				_fe3d.modelEntity_setShadowed("@" + lightID, false);
-				_fe3d.modelEntity_setReflected("@" + lightID, false);
-				_fe3d.modelEntity_setBright("@" + lightID, true);
-				_fe3d.modelEntity_setColor("@" + lightID, color);
-				_fe3d.aabbEntity_bindToModelEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHT_BULB_AABB_SIZE, true, true);
+				// Create model
+				const string newModelID = "@" + lightID;
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
+				_fe3d.modelEntity_setPosition(newModelID, position);
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_SIZE);
+				_fe3d.modelEntity_setShadowed(newModelID, false);
+				_fe3d.modelEntity_setReflected(newModelID, false);
+				_fe3d.modelEntity_setBright(newModelID, true);
+				_fe3d.modelEntity_setColor(newModelID, color);
+
+				// Bind AABB
+				_fe3d.aabbEntity_create(newModelID);
+				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
 			}
 
-			// Add point light
-			_fe3d.lightEntity_create(lightID, position, radius, color, intensity);
+			// Create point light
+			_fe3d.lightEntity_create(lightID);
+			_fe3d.lightEntity_setPosition(lightID, position);
+			_fe3d.lightEntity_setRadius(lightID, radius);
+			_fe3d.lightEntity_setColor(lightID, color);
+			_fe3d.lightEntity_setIntensity(lightID, intensity);
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

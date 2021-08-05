@@ -222,6 +222,8 @@ private:
 	static inline const string LIGHT_BULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
 	static inline const Vec3 DEFAULT_LIGHT_BULB_SIZE = Vec3(1.0f);
 	static inline const Vec3 DEFAULT_LIGHT_BULB_AABB_SIZE = Vec3(0.7f, 1.2f, 0.7f);
+	static inline const float DEFAULT_LIGHT_RADIUS = 5.0f;
+	static inline const float DEFAULT_LIGHT_INTENSITY = 10.0f;
 	static inline const float LIGHT_BULB_SIZE_INCREASE = 1.25f;
 	static inline const float LIGHT_BULB_ANIMATION_SPEED = 0.025f;
 	static inline const float LIGHT_INTENSITY_CHANGING_SPEED = 0.01f;

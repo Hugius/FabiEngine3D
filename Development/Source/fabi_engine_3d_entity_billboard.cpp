@@ -1,26 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::billboardEntity_create(const string& ID, Vec3 color, 
-	Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible)
+void FabiEngine3D::billboardEntity_create(const string& ID)
 {
-	_core->_billboardEntityManager.createEntity(ID, color, position, rotation, Vec3(size.x, size.y, 1.0f), facingCameraX, facingCameraY);
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
-}
-
-void FabiEngine3D::billboardEntity_create(const string& ID, const string& diffuseMapPath, 
-	Vec3 position, Vec3 rotation, Vec2 size, bool transparent, bool facingCameraX, bool facingCameraY, bool isVisible)
-{
-	_core->_billboardEntityManager.createEntity(ID, diffuseMapPath, position, rotation, Vec3(size.x, size.y, 1.0f), transparent, facingCameraX, facingCameraY);
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
-}
-
-void FabiEngine3D::billboardEntity_create(const string& ID, const string& textContent, const string& fontPath, Vec3 color, 
-	Vec3 position, Vec3 rotation, Vec2 size, bool facingCameraX, bool facingCameraY, bool isVisible)
-{
-	_core->_billboardEntityManager.createEntity(ID, textContent, fontPath, color, 
-		position, rotation, Vec3(size.x, size.y, 1.0f), facingCameraX, facingCameraY);
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_billboardEntityManager.createEntity(ID);
 }
 
 void FabiEngine3D::billboardEntity_deleteAll()
@@ -270,22 +253,28 @@ const bool FabiEngine3D::billboardEntity_isBright(const string& ID)
 
 void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontPath)
 {
-	// Set font
-	_core->_billboardEntityManager.getEntity(ID)->setFontPath(fontPath);
+	// Temporary values
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
 
-	// Load diffuse map
-	auto text = _core->_billboardEntityManager.getEntity(ID)->getTextContent();
-	if (!text.empty())
+	// Set font path
+	entity->setFontPath(fontPath);
+
+	// Load text
+	auto textContent = entity->getTextContent();
+	if (!textContent.empty())
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(text, fontPath));
-		_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+		entity->setTransparent(true);
 	}
 }
 
 void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string& textContent)
 {
+	// Temporary values
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
+
 	// Font must be loaded
-	auto fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+	auto fontPath = entity->getFontPath();
 	if (fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
@@ -293,14 +282,14 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 	else
 	{
 		// Check if new text content is not the same as the current one
-		if (_core->_billboardEntityManager.getEntity(ID)->getTextContent() != textContent)
+		if (entity->getTextContent() != textContent)
 		{
 			// Set text content
-			_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
+			entity->setTextContent(textContent);
 
 			// Load diffuse map
-			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
-			_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
+			entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+			entity->setTransparent(true);
 		}
 	}
 }

@@ -6,11 +6,6 @@ void FabiEngine3D::terrainEntity_create(const string& ID, const string& heightMa
 	_core->_terrainEntityManager.createEntity(ID, heightMapPath);
 }
 
-void FabiEngine3D::terrainEntity_setHeightMap(const string& ID, const string& texturePath)
-{
-	_core->_terrainEntityManager.loadMesh(ID, texturePath);
-}
-
 void FabiEngine3D::terrainEntity_deleteAll()
 {
 	// For every terrain entity
@@ -241,27 +236,13 @@ void FabiEngine3D::terrainEntity_select(const string& ID)
 void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setMaxHeight(height);
-
-	// Check if height map is loaded
-	auto heightMapPath = _core->_terrainEntityManager.getEntity(ID)->getHeightMapPath();
-	if (!heightMapPath.empty())
-	{	
-		// Generate mesh again
-		_core->_terrainEntityManager.loadMesh(ID, heightMapPath);
-	}
+	_core->_terrainEntityManager.loadMesh(ID);
 }
 
 void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setUvRepeat(repeat);
-
-	// Check if height map is loaded
-	auto heightMapPath = _core->_terrainEntityManager.getEntity(ID)->getHeightMapPath();
-	if (!heightMapPath.empty())
-	{
-		// Generate mesh again
-		_core->_terrainEntityManager.loadMesh(ID, heightMapPath);
-	}
+	_core->_terrainEntityManager.loadMesh(ID);
 }
 
 void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& texturePath)

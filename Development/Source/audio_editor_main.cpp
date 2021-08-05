@@ -19,8 +19,10 @@ void AudioEditor::load()
 
 	// Miscellaneous
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
-	_fe3d.billboardEntity_create("@@icon", "engine_assets\\textures\\stop.png",
-		Vec3(0.0f, -0.5f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false);
+	_fe3d.billboardEntity_create("@@icon");
+	_fe3d.billboardEntity_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
+	_fe3d.billboardEntity_setDiffuseMap("@@icon", "engine_assets\\textures\\stop.png");
+	_fe3d.billboardEntity_setTransparent("@@icon", true);
 	_fe3d.billboardEntity_setBright("@@icon", true);
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(-90.0f);

@@ -182,7 +182,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				}
 			}
 
-			// Add model
+			// Create model
 			if (_copyPreviewModel(modelID, previewID, position))
 			{
 				// Check if preview model instancing changed
@@ -395,7 +395,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			textContent = (textContent == "?") ? "" : textContent;
 			replace(textContent.begin(), textContent.end(), '?', ' ');
 
-			// Add billboard
+			// Create billboard
 			if (_copyPreviewBillboard(billboardID, previewID, position))
 			{
 				// Set properties
@@ -455,7 +455,12 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				size.z;
 
 			// Add AABB
-			_fe3d.aabbEntity_create(aabbID, position, size, isRaycastResponsive, isCollisionResponsive, isVisible);
+			_fe3d.aabbEntity_create(aabbID);
+			_fe3d.aabbEntity_setPosition(aabbID, position);
+			_fe3d.aabbEntity_setSize(aabbID, size);
+			_fe3d.aabbEntity_setRaycastResponsive(aabbID, isRaycastResponsive);
+			_fe3d.aabbEntity_setCollisionResponsive(aabbID, isCollisionResponsive);
+			_fe3d.aabbEntity_setVisible(aabbID, isVisible);
 			_loadedAabbIDs.push_back(aabbID);
 		}
 		else if (lineType == "SOUND")
@@ -547,7 +552,10 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				intensity;
 
 			// Add point light
-			_fe3d.lightEntity_create(lightID, position, radius, color, intensity);
+			_fe3d.lightEntity_setPosition(lightID, position);
+			_fe3d.lightEntity_setRadius(lightID, radius);
+			_fe3d.lightEntity_setColor(lightID, color);
+			_fe3d.lightEntity_setIntensity(lightID, intensity);
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

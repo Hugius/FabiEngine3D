@@ -103,35 +103,30 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values 
+			const auto ID = arguments[0].getString();
+
 			// New text ID cannot start with '@'
-			if (arguments[0].getString().front() == '@')
+			if (ID.front() == '@')
 			{
-				_throwScriptError("new text ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
+				_throwScriptError("new text ID \"" + ID + "\" cannot start with '@'");
 				return true;
 			}
 
 			// Check if text entity already exists
-			if (_fe3d.textEntity_isExisting(arguments[0].getString()))
+			if (_fe3d.textEntity_isExisting(ID))
 			{
-				_throwScriptError("text with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("text with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 
-			// Compose full texture path
-			auto fontPath = string("game_assets\\fonts\\") + arguments[1].getString();
-
-			// Add text
-			_fe3d.textEntity_create(
-				arguments[0].getString(),
-				arguments[2].getString(),
-				fontPath,
-				Vec3(1.0f),
-				_convertGuiPositionToViewport(Vec2(arguments[3].getDecimal(), arguments[4].getDecimal())),
-				arguments[5].getDecimal(),
-				_convertGuiSizeToViewport(Vec2(arguments[6].getDecimal(), arguments[7].getDecimal())),
-				true,
-				true);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			// Create text
+			_fe3d.textEntity_create(ID, true, true);
+			_fe3d.textEntity_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[3].getDecimal(), arguments[4].getDecimal())));
+			_fe3d.textEntity_setRotation(ID, arguments[5].getDecimal());
+			_fe3d.textEntity_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[6].getDecimal(), arguments[7].getDecimal())));
+			_fe3d.textEntity_setFont(ID, string("game_assets\\fonts\\") + arguments[1].getString());
+			_fe3d.textEntity_setTextContent(ID, arguments[2].getString());
 
 			// In-engine viewport boundaries
 			if (!_fe3d.application_isExported())
@@ -141,6 +136,9 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 				_fe3d.textEntity_setMinPosition(arguments[0].getString(), minPos);
 				_fe3d.textEntity_setMaxPosition(arguments[0].getString(), maxPos);
 			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:text_delete")

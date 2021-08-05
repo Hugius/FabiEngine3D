@@ -36,7 +36,7 @@ void BillboardEntityDepthRenderer::unbind()
 
 void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();

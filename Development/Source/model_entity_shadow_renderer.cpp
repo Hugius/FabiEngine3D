@@ -34,7 +34,7 @@ void ModelEntityShadowRenderer::unbind()
 
 void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible() && entity->isShadowed())
+	if (entity->isVisible() && entity->isShadowed())
 	{
 		// Enable face culling
 		if (entity->isFaceCulled())

@@ -177,7 +177,7 @@ void ModelEditor::_updateModelCreating()
 				// Spaces not allowed
 				if (newModelName.find(' ') == string::npos)
 				{
-					// Add model and check if not already existing
+					// Create model and check if not already existing
 					if (_createModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 0, 0, ReflectionType(), 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", 0, 0, {}, {}, {}))
 					{
 						// Go to editor screen

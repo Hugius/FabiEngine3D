@@ -49,7 +49,7 @@ void BillboardEntityColorRenderer::unbind()
 
 void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();

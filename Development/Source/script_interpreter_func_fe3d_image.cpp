@@ -102,36 +102,37 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
+			auto ID = arguments[0].getString();
+
 			// New image ID cannot start with '@'
-			if (arguments[0].getString().front() == '@')
+			if (ID.front() == '@')
 			{
-				_throwScriptError("new image ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
+				_throwScriptError("new image ID (\"" + ID + "\") cannot start with '@'");
 				return true;
 			}
 
 			// Check if imageEntity already exists
-			if (_fe3d.imageEntity_isExisting(arguments[0].getString()))
+			if (_fe3d.imageEntity_isExisting(ID))
 			{
-				_throwScriptError("image with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("image with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 			
-			// Add image
-			_fe3d.imageEntity_create(
-				arguments[0].getString(),
-				string("game_assets\\textures\\image_maps\\") + arguments[1].getString(),
-				_convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())),
-				arguments[4].getDecimal(),
-				_convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())),
-				true);
+			// Create image
+			_fe3d.imageEntity_create(ID, true);
+			_fe3d.imageEntity_setPosition(ID, _convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())));
+			_fe3d.imageEntity_setRotation(ID, arguments[4].getDecimal());
+			_fe3d.imageEntity_setSize(ID, _convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())));
+			_fe3d.imageEntity_setDiffuseMap(ID, string(("game_assets\\textures\\image_maps\\") + arguments[1].getString()));
 
 			// In-engine viewport boundaries
 			if (!_fe3d.application_isExported())
 			{
 				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
 				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
-				_fe3d.imageEntity_setMinPosition(arguments[0].getString(), minPos);
-				_fe3d.imageEntity_setMaxPosition(arguments[0].getString(), maxPos);
+				_fe3d.imageEntity_setMinPosition(ID, minPos);
+				_fe3d.imageEntity_setMaxPosition(ID, maxPos);
 			}
 
 			// Return

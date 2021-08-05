@@ -55,21 +55,22 @@ void WaterEntityManager::selectWater(const string& ID)
 void WaterEntityManager::createEntity(const string& ID)
 {
 	_createEntity(ID);
+	loadMesh(ID);
 }
 
 void WaterEntityManager::loadMesh(const string& ID)
 {
-	// Variables
+	// Temporary values
 	auto entity = getEntity(ID);
 	float size = entity->getSize();
-	float halfSize = size / 2.0f;
-	vector<float> waterVertices;
+	float halfSize = (size / 2.0f);
+	vector<float> highQualityBufferData;
 
-	// Try to fill the vector
+	// Compose high quality buffer data
 	try
 	{
 		// Reserving memory for the vertices
-		waterVertices.reserve(size_t(size) * size_t(size) * 30);
+		highQualityBufferData.reserve(size_t(size) * size_t(size) * 30);
 
 		// Creating flat tiled water surface
 		for (float x = -halfSize; x < halfSize; x++)
@@ -100,41 +101,41 @@ void WaterEntityManager::loadMesh(const string& ID)
 				float fourthUvX = ((x + halfSize) / size);
 				float fourthUvY = ((z + halfSize) / size);
 
-				waterVertices.push_back(firstVertexX);
-				waterVertices.push_back(firstVertexY);
-				waterVertices.push_back(firstVertexZ);
-				waterVertices.push_back(firstUvX);
-				waterVertices.push_back(firstUvY);
+				highQualityBufferData.push_back(firstVertexX);
+				highQualityBufferData.push_back(firstVertexY);
+				highQualityBufferData.push_back(firstVertexZ);
+				highQualityBufferData.push_back(firstUvX);
+				highQualityBufferData.push_back(firstUvY);
 
-				waterVertices.push_back(secondVertexX);
-				waterVertices.push_back(secondVertexY);
-				waterVertices.push_back(secondVertexZ);
-				waterVertices.push_back(secondUvX);
-				waterVertices.push_back(secondUvY);
+				highQualityBufferData.push_back(secondVertexX);
+				highQualityBufferData.push_back(secondVertexY);
+				highQualityBufferData.push_back(secondVertexZ);
+				highQualityBufferData.push_back(secondUvX);
+				highQualityBufferData.push_back(secondUvY);
 				
-				waterVertices.push_back(thirdVertexX);
-				waterVertices.push_back(thirdVertexY);
-				waterVertices.push_back(thirdVertexZ);
-				waterVertices.push_back(thirdUvX);
-				waterVertices.push_back(thirdUvY);
+				highQualityBufferData.push_back(thirdVertexX);
+				highQualityBufferData.push_back(thirdVertexY);
+				highQualityBufferData.push_back(thirdVertexZ);
+				highQualityBufferData.push_back(thirdUvX);
+				highQualityBufferData.push_back(thirdUvY);
 				
-				waterVertices.push_back(thirdVertexX);
-				waterVertices.push_back(thirdVertexY);
-				waterVertices.push_back(thirdVertexZ);
-				waterVertices.push_back(thirdUvX);
-				waterVertices.push_back(thirdUvY);
+				highQualityBufferData.push_back(thirdVertexX);
+				highQualityBufferData.push_back(thirdVertexY);
+				highQualityBufferData.push_back(thirdVertexZ);
+				highQualityBufferData.push_back(thirdUvX);
+				highQualityBufferData.push_back(thirdUvY);
 				
-				waterVertices.push_back(fourthVertexX);
-				waterVertices.push_back(fourthVertexY);
-				waterVertices.push_back(fourthVertexZ);
-				waterVertices.push_back(fourthUvX);
-				waterVertices.push_back(fourthUvY);
+				highQualityBufferData.push_back(fourthVertexX);
+				highQualityBufferData.push_back(fourthVertexY);
+				highQualityBufferData.push_back(fourthVertexZ);
+				highQualityBufferData.push_back(fourthUvX);
+				highQualityBufferData.push_back(fourthUvY);
 				
-				waterVertices.push_back(firstVertexX);
-				waterVertices.push_back(firstVertexY);
-				waterVertices.push_back(firstVertexZ);
-				waterVertices.push_back(firstUvX);
-				waterVertices.push_back(firstUvY);
+				highQualityBufferData.push_back(firstVertexX);
+				highQualityBufferData.push_back(firstVertexY);
+				highQualityBufferData.push_back(firstVertexZ);
+				highQualityBufferData.push_back(firstUvX);
+				highQualityBufferData.push_back(firstUvY);
 			}
 		}
 	}
@@ -143,11 +144,11 @@ void WaterEntityManager::loadMesh(const string& ID)
 		Logger::throwError("Bad water memory allocation: " + string(ba.what()));
 	}
 	
-	// Fill entity
-	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, &waterVertices[0], static_cast<unsigned int>(waterVertices.size())));
+	// Create high quality render buffer
+	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
 
-	// Load mesh
-	float simplified_data[] =
+	// Compose low quality buffer data
+	float lowQualityBufferData[] =
 	{
 		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f,
 		-halfSize,  0.0f, -halfSize, 0.0f, 0.0f,
@@ -157,8 +158,8 @@ void WaterEntityManager::loadMesh(const string& ID)
 		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f
 	};
 
-	// Add simplified water plane
-	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, simplified_data, static_cast<unsigned int>(sizeof(simplified_data) / sizeof(float))));
+	// Create low quality render buffer
+	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, lowQualityBufferData, static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float))));
 }
 
 void WaterEntityManager::update()

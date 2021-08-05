@@ -107,7 +107,7 @@ void TerrainEntityColorRenderer::renderLightEntities(const unordered_map<string,
 
 void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Enable wire frame
 		if (entity->isWireFramed())

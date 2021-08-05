@@ -27,19 +27,13 @@ class BaseEntityManager
 public:
 	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 
+	virtual void update() = 0;
 	void deleteEntity(const string& ID);
 	void deleteAllEntities();
 
 	bool isExisting(const string& ID);
 
-	virtual void update() = 0;
-
 protected:
-	EntityType	   _type;
-	MeshLoader&    _meshLoader;
-	TextureLoader& _textureLoader;
-	RenderBus&     _renderBus;
-
 	void _createEntity(const string& ID);
 
 	unordered_map<string, shared_ptr<AabbEntity>>&		_getAabbEntities();
@@ -61,6 +55,11 @@ protected:
 	shared_ptr<TerrainEntity>	_getTerrainEntity(const string& ID);
 	shared_ptr<TextEntity>		_getTextEntity(const string& ID);
 	shared_ptr<WaterEntity>		_getWaterEntity(const string& ID);
+
+	EntityType	   _type;
+	MeshLoader& _meshLoader;
+	TextureLoader& _textureLoader;
+	RenderBus& _renderBus;
 
 private:
 	unordered_map<string, shared_ptr<AabbEntity>>	   _aabbEntities;

@@ -42,9 +42,6 @@ void ScriptEditor::load()
 		_fe3d.gfx_disableFXAA(true);
 	}
 
-	// Selection light
-	_fe3d.lightEntity_create("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
-
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");
 	_isEditorLoaded = true;

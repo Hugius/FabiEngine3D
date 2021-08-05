@@ -27,52 +27,35 @@ const unordered_map<string, shared_ptr<ModelEntity>>& ModelEntityManager::getEnt
 	return _getModelEntities();
 }
 
-void ModelEntityManager::createEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S)
+void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 {
 	// Create entity
 	_createEntity(ID);
-	
-	// Load mesh
-	loadMesh(ID, meshPath);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setPosition(T);
-	entity->setRotation(R);
-	entity->setSize(S);
-	entity->setLevelOfDetailSize(S);
-}
-
-void ModelEntityManager::loadMesh(const string& ID, const string& meshPath)
-{
-	// Temporary values
-	auto entity = getEntity(ID);
 
 	// Load mesh file
 	auto partsPointer = _meshLoader.loadMesh(meshPath);
-	entity->setMeshPath(meshPath);
-	entity->clearParts();
 
 	// Check if model loading failed
 	if (partsPointer == nullptr)
 	{
-		// Add empty part so the entity does not crash the engine
-		entity->addPart("");
+		deleteEntity(ID);
 		return;
 	}
-	
-	// Dereference parts pointer
+
+	// Check if multiparted model only has 1 part
 	auto parts = *partsPointer;
-
-	// Check if multiparted model actually has multiple parts
-	if (parts.size() == 1 && !parts[0].ID.empty())
+	if ((parts.size() == 1) && !parts[0].ID.empty())
 	{
-		// Add empty part so the entity does not crash the engine
-		parts[0].ID = "";
-
-		// Warning
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
+		deleteEntity(ID);
+		return;
 	}
+
+	// Temporary values
+	auto entity = getEntity(ID);
+
+	// Set mesh path
+	entity->setMeshPath(meshPath);
 
 	// Process parts
 	for (const auto& part : parts)

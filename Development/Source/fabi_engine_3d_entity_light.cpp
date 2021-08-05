@@ -6,10 +6,9 @@ void FabiEngine3D::lightEntity_deleteAll()
 	_core->_lightEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::lightEntity_create(const string& ID, Vec3 position, Vec3 radius, Vec3 color, float intensity, bool isVisible)
+void FabiEngine3D::lightEntity_create(const string& ID)
 {
-	_core->_lightEntityManager.createEntity(ID, position, radius, color, intensity);
-	_core->_lightEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_lightEntityManager.createEntity(ID);
 }
 
 void FabiEngine3D::lightEntity_delete(const string& ID)

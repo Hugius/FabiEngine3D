@@ -12,25 +12,7 @@ public:
 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
 
-	void createEntity
-	(
-		const string& ID, Vec3 color,
-		Vec3 position, Vec3 rotation, Vec3 size, bool facingCameraX, bool facingCameraY
-	);
-
-	void createEntity
-	(
-		const string& ID, const string& diffuseMapPath,
-		Vec3 position, Vec3 rotation, Vec3 size,
-		bool transparent, bool facingCameraX, bool facingCameraY
-	);
-
-	void createEntity
-	(
-		const string& ID, const string& textContent,
-		const string& fontPath, Vec3 color,
-		Vec3 position, Vec3 rotation, Vec3 size, bool facingCameraX, bool facingCameraY
-	);
+	void createEntity(const string& ID);
 
 	void update() override;
 

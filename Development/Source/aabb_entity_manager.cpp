@@ -6,7 +6,7 @@
 using std::make_shared;
 using std::max;
 
-const float vertex_data[] =
+const float bufferData[] =
 {
 	-0.5f,  1.0f, -0.5f,
 	 0.5f,  1.0f, -0.5f,
@@ -29,7 +29,7 @@ const float vertex_data[] =
 AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus),
-	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
 }
@@ -51,27 +51,10 @@ const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntit
 	return _getAabbEntities();
 }
 
-void AabbEntityManager::createEntity(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive)
+void AabbEntityManager::createEntity(const string& ID)
 {
-	// Create entity
 	_createEntity(ID);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setRenderBuffer(_renderBuffer);
-	entity->setLocalPosition(position);
-	entity->setLocalSize(size);
-	entity->setPosition(position);
-	entity->setSize(size);
-	entity->setRaycastResponsive(raycastResponsive);
-	entity->setCollisionResponsive(collisionResponsive);
-}
-
-void AabbEntityManager::bindEntity(const string& ID, const string& parentID, AabbParentType parentType, 
-	Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive)
-{
-	createEntity(ID, position, size, raycastResponsive, collisionResponsive);
-	getEntity(ID)->setParent(parentID, parentType);
+	getEntity(ID)->setRenderBuffer(_renderBuffer);
 }
 
 void AabbEntityManager::update(

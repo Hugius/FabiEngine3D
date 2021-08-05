@@ -1,6 +1,6 @@
 #include "engine_gui_textfield.hpp"
 
-EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
+EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 color, bool isCentered, bool isDynamic)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -8,9 +8,14 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_parentID(parentID),
 	_originalPosition(position),
 	_originalSize(size),
-	_originalColor(textColor)
+	_originalColor(color)
 {
-	_fe3d.textEntity_create(_entityID, textContent, "engine_assets\\fonts\\font.ttf", textColor, position, 0.0f, size, isCentered, isDynamic);
+	_fe3d.textEntity_create(_entityID, isCentered, isDynamic);
+	_fe3d.textEntity_setPosition(_entityID, position);
+	_fe3d.textEntity_setSize(_entityID, size);
+	_fe3d.textEntity_setColor(_entityID, color);
+	_fe3d.textEntity_setFont(_entityID, "engine_assets\\fonts\\font.ttf");
+	_fe3d.textEntity_setTextContent(_entityID, textContent);
 }
 
 EngineGuiTextfield::~EngineGuiTextfield()

@@ -6,16 +6,9 @@ void FabiEngine3D::imageEntity_deleteAll()
 	_core->_imageEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::imageEntity_create(const string& ID, const string& diffuseMapPath, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
+void FabiEngine3D::imageEntity_create(const string& ID, bool isCentered)
 {
-	_core->_imageEntityManager.createEntity(ID, diffuseMapPath, position, rotation, size, false, isCentered);
-	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
-}
-
-void FabiEngine3D::imageEntity_create(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered, bool isVisible)
-{
-	_core->_imageEntityManager.createEntity(ID, color, position, rotation, size, isCentered);
-	_core->_imageEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_imageEntityManager.createEntity(ID, isCentered);
 }
 
 void FabiEngine3D::imageEntity_delete(const string& ID)
@@ -160,11 +153,6 @@ const Vec3 FabiEngine3D::imageEntity_getColor(const string& ID)
 const bool FabiEngine3D::imageEntity_isVisible(const string& ID)
 {
 	return _core->_imageEntityManager.getEntity(ID)->isVisible();
-}
-
-const bool FabiEngine3D::imageEntity_isCentered(const string& ID)
-{
-	return _core->_imageEntityManager.getEntity(ID)->isCentered();
 }
 
 void FabiEngine3D::imageEntity_startSpriteAnimation(const string& ID, int loops)

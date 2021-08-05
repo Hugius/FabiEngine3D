@@ -29,34 +29,10 @@ const unordered_map<string, shared_ptr<ImageEntity>>& ImageEntityManager::getEnt
 	return _getImageEntities();
 }
 
-void ImageEntityManager::createEntity(const string& ID, const string& texturePath, Vec2 position, float rotation, Vec2 size, bool engine, bool isCentered)
+void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 {
-	// Create entity
 	_createEntity(ID);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
-	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, false, false));
-	entity->setPosition(position);
-	entity->setRotation(rotation);
-	entity->setSize(size);
-	entity->setCentered(isCentered);
-}
-
-void ImageEntityManager::createEntity(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered)
-{
-	// Create entity
-	_createEntity(ID);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
-	entity->setPosition(position);
-	entity->setRotation(rotation);
-	entity->setSize(size);
-	entity->setCentered(isCentered);
-	entity->setColor(color);
+	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 }
 
 void ImageEntityManager::updateSpriteAnimations()

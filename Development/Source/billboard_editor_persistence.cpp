@@ -144,15 +144,17 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-		// Add billboard name
+		// Add billboard ID
 		_loadedBillboardIDs.push_back(billboardID);
 
-		// Determine billboard type
-		if (diffuseMapPath != "")
+		// Create billboard
+		_fe3d.billboardEntity_create(billboardID);
+
+		// Diffuse map
+		if (!diffuseMapPath.empty())
 		{
-			// Textured billboard
-			_fe3d.billboardEntity_create(billboardID, diffuseMapPath, Vec3(0.0f), Vec3(0.0f), size, isTransparent, isFacingX, isFacingY, false);
-			_fe3d.billboardEntity_setColor(billboardID, color);
+			// Set diffuse map
+			_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
 
 			// Play sprite animation
 			if (isAnimationStarted)
@@ -163,16 +165,20 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 				_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
 			}
 		}
-		else if (fontPath != "") // Text billboard
+
+		// Text
+		if (!fontPath.empty())
 		{
-			_fe3d.billboardEntity_create(billboardID, textContent, fontPath, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
-		}
-		else // Colored billboard
-		{
-			_fe3d.billboardEntity_create(billboardID, color, Vec3(0.0f), Vec3(0.0f), size, isFacingX, isFacingY, false);
+			_fe3d.billboardEntity_setFont(billboardID, fontPath);
+			_fe3d.billboardEntity_setTextContent(billboardID, textContent);
 		}
 
-		// Miscellaneous
+		// Set properties
+		_fe3d.billboardEntity_setVisible(billboardID, false);
+		_fe3d.billboardEntity_setSize(billboardID, size);
+		_fe3d.billboardEntity_setColor(billboardID, color);
+		_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
+		_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
 		_fe3d.billboardEntity_setLightness(billboardID, lightness);
 		_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 		_fe3d.billboardEntity_setReflected(billboardID, isReflected);

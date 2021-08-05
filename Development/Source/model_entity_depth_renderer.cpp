@@ -36,7 +36,7 @@ void ModelEntityDepthRenderer::unbind()
 
 void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Enable face culling
 		if (entity->isFaceCulled())

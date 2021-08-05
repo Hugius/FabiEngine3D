@@ -58,12 +58,12 @@ void ModelEditor::_loadMesh()
 				}
 
 				// Reload model
-				_fe3d.modelEntity_loadMesh(_currentModelID, newFilePath);
+				//_fe3d.modelEntity_loadMesh(_currentModelID, newFilePath);
 			}
 			else
 			{
 				// Create new entity
-				_fe3d.modelEntity_create(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
+				//_fe3d.modelEntity_create(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
 			}
 		}
 		else
@@ -194,19 +194,26 @@ bool ModelEditor::_createModel(const string& modelName, string meshPath, string 
 	// If model name not existing yet
 	if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), modelName) == _loadedModelIDs.end())
 	{
-		// Add model name
+		// Add model ID
 		_loadedModelIDs.push_back(modelName);
 
 		// Check if model has mesh
 		if (meshPath != "")
 		{
-			// Add model
-			_fe3d.modelEntity_create(modelName, meshPath, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f), Vec3(0.0f), size, false);
+			// Create model
+			_fe3d.modelEntity_create(modelName, meshPath);
+			_fe3d.modelEntity_setPosition(modelName, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f));
+			_fe3d.modelEntity_setSize(modelName, size);
+			_fe3d.modelEntity_setVisible(modelName, false);
 
-			// Add AABBs
+			// Bind AABBs
 			for (size_t i = 0; i < aabbNames.size(); i++)
 			{
-				_fe3d.aabbEntity_bindToModelEntity(modelName, aabbPositions[i], aabbSizes[i], true, true, modelName + "@" + aabbNames[i]);
+				const string newAabbID = modelName + "@" + aabbNames[i];
+				_fe3d.aabbEntity_create(newAabbID);
+				_fe3d.aabbEntity_bindToModelEntity(newAabbID, modelName);
+				_fe3d.aabbEntity_setPosition(newAabbID, aabbPositions[i]);
+				_fe3d.aabbEntity_setSize(newAabbID, aabbSizes[i]);
 			}
 
 			// Diffuse map

@@ -26,7 +26,7 @@ void TerrainEntityDepthRenderer::unbind()
 
 void TerrainEntityDepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();

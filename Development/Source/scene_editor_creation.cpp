@@ -203,15 +203,19 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		return false;
 	}
 
-	// Add model entity
-	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.modelEntity_getSize(previewID));
+	// Create model entity
+	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID));
+	_fe3d.modelEntity_setPosition(newID, position);
+	_fe3d.modelEntity_setSize(newID, _fe3d.modelEntity_getSize(previewID));
 
 	// Bind AABB entities to model entity
 	for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
 	{
-		string newAabbID = newID + "@" + previewAabbID.substr(string(previewID + "_").size());
-		_fe3d.aabbEntity_bindToModelEntity(newID, _fe3d.aabbEntity_getPosition(previewAabbID),
-			_fe3d.aabbEntity_getSize(previewAabbID), true, true, newAabbID);
+		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
+		_fe3d.aabbEntity_create(newAabbID);
+		_fe3d.aabbEntity_bindToModelEntity(newAabbID, newID);
+		_fe3d.aabbEntity_setPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
+		_fe3d.aabbEntity_setSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
 
 	// Diffuse map
@@ -293,19 +297,20 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		return false;
 	}
 
-	// Add billboard entity
-	auto color = _fe3d.billboardEntity_getColor(previewID);
-	auto size = _fe3d.billboardEntity_getSize(previewID);
-	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
-	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
-	_fe3d.billboardEntity_create(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
+	// Create billboard entity
+	_fe3d.billboardEntity_create(newID);
 
-	// Determine billboard entity type
-	if (_fe3d.billboardEntity_hasDiffuseMap(previewID)) // Textured billboard
+	// Bind AABB entity
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, newID);
+
+	// Diffuse map
+	if (_fe3d.billboardEntity_hasDiffuseMap(previewID))
 	{
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}
-	else if (!_fe3d.billboardEntity_getFontPath(previewID).empty()) // Text billboard
+
+	// Text
+	if (!_fe3d.billboardEntity_getFontPath(previewID).empty())
 	{
 		_fe3d.billboardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
 		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));
@@ -320,10 +325,12 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		_fe3d.billboardEntity_startSpriteAnimation(newID, -1);
 	}
 
-	// Bind AABB entity to billboard entity
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true);
-
-	// Miscellaneous
+	// Set properties
+	_fe3d.billboardEntity_setPosition(newID, position);
+	_fe3d.billboardEntity_setSize(newID, _fe3d.billboardEntity_getSize(previewID));
+	_fe3d.billboardEntity_setCameraFacingX(newID, _fe3d.billboardEntity_isFacingCameraX(previewID));
+	_fe3d.billboardEntity_setCameraFacingY(newID, _fe3d.billboardEntity_isFacingCameraY(previewID));
+	_fe3d.billboardEntity_setColor(newID, _fe3d.billboardEntity_getColor(previewID));
 	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
 	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));

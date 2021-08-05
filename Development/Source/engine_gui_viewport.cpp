@@ -6,7 +6,10 @@ EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 
 	_ID(ID),
 	_entityID("@" + ID)
 {
-	fe3d.imageEntity_create(_entityID, color, position, 0.0f, size, true);
+	_fe3d.imageEntity_create(_entityID, true);
+	_fe3d.imageEntity_setPosition(_entityID, position);
+	_fe3d.imageEntity_setSize(_entityID, size);
+	_fe3d.imageEntity_setColor(_entityID, color);
 }
 
 EngineGuiViewport::~EngineGuiViewport()

@@ -114,15 +114,21 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				// Check if line text is empty
 				if (_fe3d.billboardEntity_getTextContent(textID).empty())
 				{
-					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
-					lineTextPosition.x = SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET;
-					_fe3d.billboardEntity_create(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false);
+					Vec3 lineTextPosition = (_fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f));
+					lineTextPosition.x = (SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET);
+					_fe3d.billboardEntity_create(selectionID);
+					_fe3d.billboardEntity_setColor(selectionID, SELECTION_COLOR);
+					_fe3d.billboardEntity_setPosition(selectionID, lineTextPosition);
+					_fe3d.billboardEntity_setSize(selectionID, TEXT_CHARACTER_SIZE);
 				}
 				else // Line is not empty
 				{
-					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
-					Vec2 lineTextSize = _fe3d.billboardEntity_getSize(textID);
-					_fe3d.billboardEntity_create(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
+					const Vec3 lineTextPosition = (_fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f));
+					const auto lineTextSize = _fe3d.billboardEntity_getSize(textID);
+					_fe3d.billboardEntity_create(selectionID);
+					_fe3d.billboardEntity_setColor(selectionID, SELECTION_COLOR);
+					_fe3d.billboardEntity_setPosition(selectionID, lineTextPosition);
+					_fe3d.billboardEntity_setSize(selectionID, lineTextSize);
 				}
 			}
 

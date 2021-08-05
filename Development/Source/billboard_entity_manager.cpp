@@ -4,7 +4,7 @@
 
 using std::make_shared;
 
-const float vertex_data[] =
+const float bufferData[] =
 {
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
 	-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -18,7 +18,7 @@ BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLo
 	:
 	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
 	_camera(camera),
-	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
 }
@@ -40,57 +40,10 @@ const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager
 	return _getBillboardEntities();
 }
 
-void BillboardEntityManager::createEntity(const string& ID, Vec3 color, Vec3 position, Vec3 rotation, Vec3 size,
-	bool facingCameraX, bool facingCameraY)
+void BillboardEntityManager::createEntity(const string& ID)
 {
-	// Create entity
-	_createEntity(ID);	
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setRenderBuffer(_renderBuffer);
-	entity->setPosition(position);
-	entity->setRotation(rotation);
-	entity->setInitialRotation(rotation);
-	entity->setSize(size);
-	entity->setCameraFacingX(facingCameraX);
-	entity->setCameraFacingY(facingCameraY);
-	entity->setColor(color);
-}
-
-void BillboardEntityManager::createEntity
-(
-	const string& ID, const string& diffuseMapPath,
-	Vec3 position, Vec3 rotation, Vec3 size,
-	bool transparent, bool facingCameraX, bool facingCameraY
-)
-{
-	// Create entity
-	createEntity(ID, Vec3(1.0f), position, rotation, size, facingCameraX, facingCameraY);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_textureLoader.getTexture2D(diffuseMapPath, true, true));
-	entity->setDiffuseMapPath(diffuseMapPath);
-	entity->setTransparent(transparent);
-}
-
-void BillboardEntityManager::createEntity
-(
-	const string& ID, const string& textContent,
-	const string& fontPath, Vec3 color,
-	Vec3 position, Vec3 rotation, Vec3 size, bool facingCameraX, bool facingCameraY
-)
-{
-	// Create entity
-	createEntity(ID, color, position, rotation, size, facingCameraX, facingCameraY);
-
-	// Set properties
-	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_textureLoader.getText(textContent, fontPath));
-	entity->setTransparent(true);
-	entity->setTextContent(textContent);
-	entity->setFontPath(fontPath);
+	_createEntity(ID);
+	getEntity(ID)->setRenderBuffer(_renderBuffer);
 }
 
 void BillboardEntityManager::update()

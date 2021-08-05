@@ -28,7 +28,7 @@ void SkyEntityColorRenderer::unbind()
 
 void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, const shared_ptr<SkyEntity> mixEntity)
 {
-	if (mainEntity->hasRenderBuffer() && mainEntity->isVisible())
+	if (mainEntity->isVisible())
 	{
 		// Enable wire frame
 		if (mainEntity->isWireFramed())

@@ -54,7 +54,8 @@ void SceneEditor::_updateSoundPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new soundcaster
-				BEGIN: int randomSerial = Tools::getRandomInteger(0, INT_MAX);
+				BEGIN:
+					int randomSerial = Tools::getRandomInteger(0, INT_MAX);
 					string newID = _currentPreviewSoundID.substr(1) + "_" + to_string(randomSerial);
 
 					// Check if ID not already exists
@@ -69,12 +70,21 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
 					}
 
-					// Add soundEntity
-					_fe3d.modelEntity_create("@speaker_" + newID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID), newPosition, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-					_fe3d.modelEntity_setShadowed("@speaker_" + newID, false);
-					_fe3d.modelEntity_setReflected("@speaker_" + newID, false);
-					_fe3d.modelEntity_setBright("@speaker_" + newID, true);
-					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + newID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+					// Create model
+					const string newModelID = ("@speaker_" + newID);
+					_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
+					_fe3d.modelEntity_setPosition(newModelID, newPosition);
+					_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
+					_fe3d.modelEntity_setShadowed(newModelID, false);
+					_fe3d.modelEntity_setReflected(newModelID, false);
+					_fe3d.modelEntity_setBright(newModelID, true);
+
+					// Create AABB
+					_fe3d.aabbEntity_create(newModelID);
+					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
+
+					// Create sound
 					_fe3d.soundEntity_create(newID, _fe3d.soundEntity_getFilePath(_currentPreviewSoundID));
 					_fe3d.soundEntity_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 					_fe3d.soundEntity_play(newID, -1, 0);

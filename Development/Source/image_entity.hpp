@@ -21,7 +21,6 @@ public:
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setAlpha(float value);
-	void setCentered(bool value);
 	void setPosition(Vec2 value);
 	void setRotation(float value);
 	void setSize(Vec2 value);
@@ -79,7 +78,6 @@ public:
 	const bool isSpriteAnimationStarted();
 	const bool isSpriteAnimationPaused();
 	const bool isPerspectiveDepthEntity();
-	const bool isCentered();
 	const bool hasRenderBuffer();
 	const bool hasDiffuseMap();
 
@@ -123,7 +121,6 @@ private:
 	bool _isMirroredHorizontally = false;
 	bool _isMirroredVertically = false;
 	bool _isPerspectiveDepthEntity = false;
-	bool _isCentered = false;
 
 	// Miscellaneous
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;

@@ -11,15 +11,9 @@ public:
 
 	const unordered_map<string, shared_ptr<TextEntity>>& getEntities();
 
-	void createEntity
-	(
-		const string& ID, const string& textContent,
-		const string& fontPath, Vec3 color,
-		Vec2 position, float rotation, Vec2 size,
-		bool overwrite, bool isCentered, bool isDynamic
-	);
+	void createEntity(const string& ID, bool isCentered, bool isDynamic);
 
-	void reloadCharacters(const string& ID);
+	void loadCharacters(const string& ID);
 	void deleteDynamicTextEntity(const string& ID);
 	void update() override;
 

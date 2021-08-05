@@ -137,7 +137,7 @@ void ModelEntityColorRenderer::renderLightEntities(const unordered_map<string, s
 
 void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 {
-	if (entity->hasRenderBuffer() && entity->isVisible())
+	if (entity->isVisible())
 	{
 		// Enable wire frame
 		if (entity->isWireFramed())

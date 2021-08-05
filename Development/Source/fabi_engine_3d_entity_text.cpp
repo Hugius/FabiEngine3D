@@ -6,11 +6,9 @@ void FabiEngine3D::textEntity_deleteAll()
 	_core->_textEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::textEntity_create(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec2 position,
-	float rotation, Vec2 size, bool isCentered, bool isDynamic, bool isVisible)
+void FabiEngine3D::textEntity_create(const string& ID, bool isCentered, bool isDynamic)
 {
-	_core->_textEntityManager.createEntity(ID, textContent, fontPath, color, position, rotation, size, false, isCentered, isDynamic);
-	_core->_textEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_textEntityManager.createEntity(ID, isCentered, isDynamic);
 }
 
 void FabiEngine3D::textEntity_delete(const string& ID)
@@ -41,34 +39,67 @@ const bool FabiEngine3D::textEntity_isVisible(const string& ID)
 	return _core->_textEntityManager.getEntity(ID)->isVisible();
 }
 
-void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
+void FabiEngine3D::textEntity_setFont(const string& ID, const string& fontPath)
 {
-	// Retrieve entity
+	// Temporary values
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	// Set new text
-	entity->setTextContent(textContent);
+	// Set font
+	entity->setFontPath(fontPath);
 
-	// Calculate new size
-	Vec2 newSize = entity->getSize();
-	if (charWidth >= 0.0f)
+	// Load text
+	auto textContent = entity->getTextContent();
+	if (!textContent.empty())
 	{
-		newSize.x = (charWidth * static_cast<float>(textContent.size()));
+		if (entity->isDynamic())
+		{
+			_core->_textEntityManager.loadCharacters(ID);
+		}
+		else
+		{
+			entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+		}
 	}
-	if (charHeight >= 0.0f)
-	{
-		newSize.y = charHeight;
-	}
-	entity->setSize(newSize);
+}
 
-	// Reload
-	if (entity->isDynamic())
+void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
+{
+	// Temporary values
+	auto entity = _core->_textEntityManager.getEntity(ID);
+
+	// Font must be loaded
+	auto fontPath = entity->getFontPath();
+	if (fontPath.empty())
 	{
-		_core->_textEntityManager.reloadCharacters(ID);
+		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
 	}
 	else
 	{
-		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, entity->getFontPath()));
+
+		// Set new text
+		entity->setTextContent(textContent);
+
+		// Calculate new size
+		Vec2 newSize = entity->getSize();
+		if (charWidth >= 0.0f)
+		{
+			newSize.x = (charWidth * static_cast<float>(textContent.size()));
+		}
+		if (charHeight >= 0.0f)
+		{
+			newSize.y = charHeight;
+		}
+		entity->setSize(newSize);
+
+		// Reload text
+		if (entity->isDynamic())
+		{
+			_core->_textEntityManager.loadCharacters(ID);
+		}
+		else
+		{
+			entity->setDiffuseMap(_core->_textureLoader.getText(textContent, entity->getFontPath()));
+		}
 	}
 }
 

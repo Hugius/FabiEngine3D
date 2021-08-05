@@ -6,7 +6,6 @@
 void FabiEngine3D::waterEntity_create(const string& ID)
 {
 	_core->_waterEntityManager.createEntity(ID);
-	_core->_waterEntityManager.loadMesh(ID);
 }
 
 void FabiEngine3D::waterEntity_deleteAll()

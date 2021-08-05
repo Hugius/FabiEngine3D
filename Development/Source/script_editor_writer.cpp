@@ -466,7 +466,9 @@ void ScriptEditor::_updateTextWriter()
 		// If cursor billboard not existing, create new one
 		if (!_fe3d.billboardEntity_isExisting("cursor"))
 		{
-			_fe3d.billboardEntity_create("cursor", "", FONT_PATH, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), TEXT_CHARACTER_SIZE, 0, 0);
+			_fe3d.billboardEntity_create("cursor");
+			_fe3d.billboardEntity_setFont("cursor", FONT_PATH);
+			_fe3d.billboardEntity_setSize("cursor", TEXT_CHARACTER_SIZE);
 		}
 
 		// Update cursor billboard text & position

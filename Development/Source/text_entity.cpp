@@ -1,5 +1,10 @@
 #include "text_entity.hpp"
 
+void TextEntity::setCentered(bool value)
+{
+	_isCentered = value;
+}
+
 void TextEntity::setDynamic(bool value)
 {
 	_isDynamic = value;
@@ -25,7 +30,7 @@ void TextEntity::updateCharacterEntities()
 		float yCharOffset = 0.0f;
 
 		// Check if text is isCentered
-		if (this->isCentered())
+		if (_isCentered)
 		{
 			xCharOffset -= (this->getSize().x / 2.0f);
 			yCharOffset -= (yCharSize / 2.0f);
@@ -41,7 +46,6 @@ void TextEntity::updateCharacterEntities()
 		character->setMirroredHorizontally(this->isMirroredHorizonally());
 		character->setMirroredVertically(this->isMirroredVertically());
 		character->setAlpha(this->getAlpha());
-		character->setCentered(this->isCentered());
 		character->setMinPosition(this->getMinPosition());
 		character->setMaxPosition(this->getMaxPosition());
 		character->setVisible(this->isVisible());
@@ -67,7 +71,12 @@ void TextEntity::setFontPath(const string& fontPath)
 	_fontPath = fontPath;
 }
 
-bool TextEntity::isDynamic()
+const bool TextEntity::isCentered()
+{
+	return _isCentered;
+}
+
+const bool TextEntity::isDynamic()
 {
 	return _isDynamic;
 }

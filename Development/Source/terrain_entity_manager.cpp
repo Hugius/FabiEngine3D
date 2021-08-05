@@ -39,6 +39,41 @@ const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::ge
 	return _getTerrainEntities();
 }
 
+void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
+{
+	// Create entity
+	_createEntity(ID);
+
+	// Load height map
+	auto pixelValues = _textureLoader.getBitmapPixels(heightMapPath);
+
+	// Check if height map loading failed
+	if (pixelValues == nullptr)
+	{
+		deleteEntity(ID);
+		return;
+	}
+
+	// Check if height map resolution is too high
+	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
+	if (heightMapSize > MAX_HEIGHT_MAP_RESOLUTION)
+	{
+		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
+		deleteEntity(ID);
+		return;
+	}
+
+	// Temporary values
+	auto entity = getEntity(ID);
+
+	// Set properties
+	entity->setPixelValues(*pixelValues);
+	entity->setSize(static_cast<float>(heightMapSize));
+
+	// Load mesh
+	loadMesh(ID);
+}
+
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
 	if (isExisting(ID) || ID.empty())
@@ -51,41 +86,10 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	}
 }
 
-void TerrainEntityManager::createEntity(const string& ID, const string& heightMapPath)
-{
-	_createEntity(ID);
-	loadMesh(ID, heightMapPath);
-}
-
-void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPath)
+void TerrainEntityManager::loadMesh(const string& ID)
 {
 	// Temporary values
 	auto entity = getEntity(ID);
-
-	// Load height map
-	auto pixelValues = _textureLoader.getBitmapPixels(heightMapPath);
-	entity->setHeightMapPath(heightMapPath);
-	entity->setPixelValues({});
-	entity->setSize(0.0f);
-	entity->setRenderBuffer(nullptr);
-
-	// Check if height map loading failed
-	if (pixelValues == nullptr)
-	{
-		return;
-	}
-
-	// Check if height map resolution too high
-	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
-	if (heightMapSize > MAX_HEIGHT_MAP_RESOLUTION)
-	{
-		Logger::throwWarning("Tried to load mesh of terrain with ID \"" + ID + "\": height map resolution too high!");
-		return;
-	}
-
-	// Set properties
-	entity->setPixelValues(*pixelValues);
-	entity->setSize(static_cast<float>(heightMapSize));
 
 	// Data collections
 	vector<Vec3> tempVertices;
@@ -231,10 +235,12 @@ void TerrainEntityManager::loadMesh(const string& ID, const string& heightMapPat
 	}
 
 	// Create render buffer
+	entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+
+	// Set properties
 	entity->setVertices(vertices);
 	entity->setUvCoords(uvCoords);
 	entity->setNormals(normals);
-	entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
@@ -253,11 +259,6 @@ bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 	{
 		return false;
 	}
-}
-
-void TerrainEntityManager::update()
-{
-
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)

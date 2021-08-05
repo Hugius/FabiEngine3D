@@ -57,7 +57,7 @@ void SceneEditor::_updateModelPlacing()
 							goto BEGIN1;
 						}
 
-						// Add model
+						// Create model
 						_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
 					}
 				}
@@ -130,7 +130,7 @@ void SceneEditor::_updateModelPlacing()
 									goto BEGIN2;
 								}
 
-								// Add model
+								// Create model
 								_copyPreviewModel(newID, _currentPreviewModelID, newPosition);
 							}
 						}

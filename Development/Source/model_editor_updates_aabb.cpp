@@ -129,8 +129,9 @@ void ModelEditor::_updateAabbMenu()
 					// Spaces not allowed
 					if (newAabbName.find(' ') == string::npos)
 					{
-						// Add new AABB
-						_fe3d.aabbEntity_bindToModelEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "@" + newAabbName);
+						// Bind AABB
+						_fe3d.aabbEntity_create(_currentModelID + "@" + newAabbName);
+						_fe3d.aabbEntity_bindToModelEntity((_currentModelID + "@" + newAabbName), _currentModelID);
 						_currentAabbID = newAabbName;
 
 						// Reset editing

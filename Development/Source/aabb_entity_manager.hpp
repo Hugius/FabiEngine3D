@@ -10,11 +10,8 @@ public:
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
-	
-	void createEntity(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive);
-	void bindEntity(const string& ID, const string& parentID, AabbParentType parentType, 
-		Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive);
 
+	void createEntity(const string& ID);
 	void update() override {}
 	void update(
 		const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, 

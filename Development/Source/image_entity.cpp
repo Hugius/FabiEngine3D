@@ -49,11 +49,6 @@ void ImageEntity::setAlpha(float value)
 	_alpha = max(0.0f, value);
 }
 
-void ImageEntity::setCentered(bool value)
-{
-	_isCentered = value;
-}
-
 void ImageEntity::setPosition(Vec2 value)
 {
 	_position = value;
@@ -291,11 +286,6 @@ const bool ImageEntity::isMirroredVertically()
 const bool ImageEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
-}
-
-const bool ImageEntity::isCentered()
-{
-	return _isCentered;
 }
 
 const Matrix44 ImageEntity::getModelMatrix()

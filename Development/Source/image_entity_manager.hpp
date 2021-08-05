@@ -11,8 +11,7 @@ public:
 
 	const unordered_map<string, shared_ptr<ImageEntity>>& getEntities();
 
-	void createEntity(const string& ID, const string& texturePath, Vec2 position, float rotation, Vec2 size, bool engine, bool isCentered);
-	void createEntity(const string& ID, Vec3 color, Vec2 position, float rotation, Vec2 size, bool isCentered);
+	void createEntity(const string& ID, bool isCentered);
 	void update() override;
 	void updateSpriteAnimations();
 

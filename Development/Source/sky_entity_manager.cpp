@@ -5,7 +5,7 @@
 using std::make_shared;
 using std::min;
 
-const float vertex_data[] =
+const float bufferData[] =
 {
 	-1.0f,  1.0f, -1.0f,
 	-1.0f, -1.0f, -1.0f,
@@ -53,7 +53,7 @@ const float vertex_data[] =
 SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
 	BaseEntityManager(EntityType::SKY, meshLoader, texLoader, renderBus),
-	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, vertex_data, static_cast<unsigned int>(sizeof(vertex_data) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
 }

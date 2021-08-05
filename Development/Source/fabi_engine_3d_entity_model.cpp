@@ -1,14 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::modelEntity_create
-(
-	const string& ID, const string& meshPath,
-	Vec3 position, Vec3 rotation, Vec3 size, bool isVisible
-)
+void FabiEngine3D::modelEntity_create(const string& ID, const string& meshPath)
 {
-	_core->_modelEntityManager.createEntity(ID, meshPath, position, rotation, size);
-	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_modelEntityManager.createEntity(ID, meshPath);
 }
 
 void FabiEngine3D::modelEntity_deleteAll()
@@ -52,11 +47,6 @@ void FabiEngine3D::modelEntity_deleteGroup(const string& ID)
 void FabiEngine3D::modelEntity_setVisible(const string& ID, bool isVisible)
 {
 	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
-}
-
-void FabiEngine3D::modelEntity_loadMesh(const string& ID, const string& meshPath)
-{
-	_core->_modelEntityManager.loadMesh(ID, meshPath);
 }
 
 void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& texturePath)

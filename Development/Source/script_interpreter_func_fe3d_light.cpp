@@ -95,26 +95,31 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
+			const auto ID = arguments[0].getString();
+
 			// New light ID cannot start with '@'
-			if (arguments[0].getString().front() == '@')
+			if (ID.front() == '@')
 			{
-				_throwScriptError("new light ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
+				_throwScriptError("new light ID (\"" + ID + "\") cannot start with '@'");
 				return true;
 			}
 
 			// Check if light entity already exists
-			if (_fe3d.lightEntity_isExisting(arguments[0].getString()))
+			if (_fe3d.lightEntity_isExisting(ID))
 			{
-				_throwScriptError("light with ID \"" + arguments[0].getString() + "\" already exists!");
+				_throwScriptError("light with ID \"" + ID + "\" already exists!");
 				return true;
 			}
 
-			// Add light
-			_fe3d.lightEntity_create(arguments[0].getString(),
-				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()),
-				Vec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()),
-				arguments[10].getDecimal());
+			// Create light
+			_fe3d.lightEntity_create(ID);
+			_fe3d.lightEntity_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.lightEntity_setRadius(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.lightEntity_setColor(ID, Vec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()));
+			_fe3d.lightEntity_setIntensity(ID, arguments[10].getDecimal());
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

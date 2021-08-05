@@ -2,62 +2,32 @@
 #include "core_engine.hpp"
 #include "logger.hpp"
 
-void FabiEngine3D::aabbEntity_create(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool isVisible)
+void FabiEngine3D::aabbEntity_create(const string& ID)
 {
-	_core->_aabbEntityManager.createEntity(ID, position, size, raycastResponsive, collisionResponsive);
-	_core->_aabbEntityManager.getEntity(ID)->setVisible(isVisible);
+	_core->_aabbEntityManager.createEntity(ID);
 }
 
-void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, 
-	bool raycastResponsive, bool collisionResponsive, const string& customAabbID)
+void FabiEngine3D::aabbEntity_bindToModelEntity(const string& ID, const string& parentID)
 {
-	if (customAabbID.empty()) // Use parent ID
+	if (_core->_modelEntityManager.isExisting(parentID))
 	{
-		if (_core->_modelEntityManager.isExisting(parentID))
-		{
-			_core->_aabbEntityManager.bindEntity(parentID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
-		}
-		else
-		{
-			Logger::throwError("Tried to bind AABB entity to non-existing model entity with ID \"" + parentID + "\"");
-		}
+		_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::MODEL_ENTITY);
 	}
-	else // Use custom ID
+	else
 	{
-		if (_core->_modelEntityManager.isExisting(parentID))
-		{
-			_core->_aabbEntityManager.bindEntity(customAabbID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
-		}
-		else
-		{
-			Logger::throwError("Tried to bind AABB entity with ID \"" + customAabbID + "\" to non-existing model entity with ID \"" + parentID + "\"");
-		}
+		Logger::throwError("Tried to bind AABB entity with ID \"" + ID + "\" to non-existing model entity with ID \"" + parentID + "\"");
 	}
 }
 
-void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool raycastResponsive, bool collisionResponsive, const string& customAabbID)
+void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& ID, const string& parentID)
 {
-	if (customAabbID.empty()) // Use parent ID
+	if (_core->_billboardEntityManager.isExisting(parentID))
 	{
-		if (_core->_billboardEntityManager.isExisting(parentID))
-		{
-			_core->_aabbEntityManager.bindEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
-		}
-		else
-		{
-			Logger::throwError("Tried to bind AABB entity to non-existing billboard entity with ID \"" + parentID + "\"");
-		}
+		_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::BILLBOARD_ENTITY);
 	}
-	else // Use custom ID
+	else
 	{
-		if (_core->_billboardEntityManager.isExisting(parentID))
-		{
-			_core->_aabbEntityManager.bindEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), raycastResponsive, collisionResponsive);
-		}
-		else
-		{
-			Logger::throwError("Tried to bind AABB entity with ID \"" + customAabbID + "\" to non-existing billboard entity with ID \"" + parentID + "\"");
-		}
+		Logger::throwError("Tried to bind AABB entity with ID \"" + ID + "\" to non-existing billboard entity with ID \"" + parentID + "\"");
 	}
 }
 
@@ -88,7 +58,7 @@ void FabiEngine3D::aabbEntity_setCollisionResponsive(const string& ID, bool resp
 
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
 	}
@@ -100,7 +70,7 @@ void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool 
 
 void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->move(factor);
 	}
@@ -112,7 +82,7 @@ void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor, bool noLocal)
 
 void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
 	}
@@ -124,7 +94,7 @@ void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal)
 
 void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setSize(size);
 	}
@@ -136,7 +106,7 @@ void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
 
 const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getPosition();
 	}
@@ -148,7 +118,7 @@ const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
 
 const Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	if (!_core->_aabbEntityManager.getEntity(ID)->hasParent() || noLocal) // Standalone entity
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getSize();
 	}

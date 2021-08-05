@@ -339,14 +339,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				color.b >>
 				intensity;
 
-			// Create light bulb
+			// Create lamp
 			if (_isEditorLoaded)
 			{
 				// Create model
 				const string newModelID = "@" + lightID;
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
 				_fe3d.modelEntity_setPosition(newModelID, position);
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_SIZE);
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -355,7 +355,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 			}
 
 			// Create point light

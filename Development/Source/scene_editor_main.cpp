@@ -91,16 +91,16 @@ void SceneEditor::load()
 	}
 
 	// Preview point light loading
-	_fe3d.modelEntity_create(PREVIEW_LIGHT_BULB_ID, LIGHT_BULB_MODEL_PATH);
-	_fe3d.modelEntity_setSize(PREVIEW_LIGHT_BULB_ID, DEFAULT_LIGHT_BULB_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_LIGHT_BULB_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_LIGHT_BULB_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_LIGHT_BULB_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-	_fe3d.lightEntity_create(PREVIEW_LIGHT_BULB_ID);
-	_fe3d.lightEntity_setRadius(PREVIEW_LIGHT_BULB_ID, Vec3(DEFAULT_LIGHT_RADIUS));
-	_fe3d.lightEntity_setIntensity(PREVIEW_LIGHT_BULB_ID, DEFAULT_LIGHT_INTENSITY);
-	_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+	_fe3d.modelEntity_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
+	_fe3d.modelEntity_setSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
+	_fe3d.modelEntity_setShadowed(PREVIEW_LAMP_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_LAMP_ID, false);
+	_fe3d.modelEntity_setBright(PREVIEW_LAMP_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+	_fe3d.lightEntity_create(PREVIEW_LAMP_ID);
+	_fe3d.lightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_LIGHT_RADIUS));
+	_fe3d.lightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
+	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Create name textfields
 	_gui.getGlobalScreen()->createTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -172,15 +172,15 @@ void SceneEditor::unload()
 	_currentPreviewBillboardID = "";
 	_selectedBillboardID = "";
 	_activeBillboardID = "";
-	_selectedLightBulbID = "";
-	_activeLightBulbID = "";
+	_selectedLampID = "";
+	_activeLampID = "";
 	_currentSceneID = "";
 	_selectedModelInversionDirection = 1;
 	_activeModelInversionDirection = 1;
 	_selectedBillboardInversionDirection = 1;
 	_activeBillboardInversionDirection = 1;
-	_selectedLightBulbSizeDirection = 1;
-	_activeLightBulbSizeDirection = 1;
+	_selectedLampSizeDirection = 1;
+	_activeLampSizeDirection = 1;
 	_dontResetSelectedModel = false;
 	_dontResetSelectedBillboard = false;
 	_isPlacingPointLight = false;

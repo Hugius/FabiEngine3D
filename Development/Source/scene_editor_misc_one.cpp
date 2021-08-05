@@ -44,7 +44,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
+	if (_activeModelID == "" && _activeBillboardID == "" && _activeLampID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = modelID;
@@ -92,7 +92,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
+	if (_activeBillboardID == "" && _activeModelID == "" && _activeLampID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = billboardID;
@@ -140,7 +140,7 @@ void SceneEditor::_selectSound(const string& soundID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
+	if (_activeBillboardID == "" && _activeModelID == "" && _activeLampID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = soundID;
@@ -352,8 +352,8 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 		}
 
 		// Set new sizes
-		Vec3 modelSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
-		Vec3 aabbSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 modelSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 aabbSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
 		aabbSpeed *= ((DEFAULT_SPEAKER_AABB_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_AABB_SIZE);
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
@@ -361,7 +361,7 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 	}
 }
 
-void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& direction)
+void SceneEditor::_updateLampAnimation(const string& modelID, int& direction)
 {
 	// Reset direction if nothing active/selected
 	if (modelID == "")
@@ -369,30 +369,30 @@ void SceneEditor::_updateLightBulbAnimation(const string& modelID, int& directio
 		direction = 1;
 	}
 
-	// Update light bulb animation
+	// Update lamp animation
 	if (modelID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_LIGHT_BULB_SIZE.y)
+		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_LAMP_SIZE.y)
 		{
-			_fe3d.modelEntity_setSize(modelID, DEFAULT_LIGHT_BULB_SIZE);
-			_fe3d.aabbEntity_setSize(modelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
+			_fe3d.modelEntity_setSize(modelID, DEFAULT_LAMP_SIZE);
+			_fe3d.aabbEntity_setSize(modelID, DEFAULT_LAMP_AABB_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_LIGHT_BULB_SIZE.y * LIGHT_BULB_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_SIZE * LIGHT_BULB_SIZE_INCREASE));
-			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LIGHT_BULB_AABB_SIZE * LIGHT_BULB_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
+			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LAMP_AABB_SIZE * LAMP_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
-		Vec3 modelSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
-		Vec3 aabbSpeed = (Vec3(LIGHT_BULB_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
-		modelSpeed *= ((DEFAULT_LIGHT_BULB_SIZE * LIGHT_BULB_SIZE_INCREASE) - DEFAULT_LIGHT_BULB_SIZE);
-		aabbSpeed *= ((DEFAULT_LIGHT_BULB_AABB_SIZE * LIGHT_BULB_SIZE_INCREASE) - DEFAULT_LIGHT_BULB_AABB_SIZE);
+		Vec3 modelSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 aabbSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		modelSpeed *= ((DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_SIZE);
+		aabbSpeed *= ((DEFAULT_LAMP_AABB_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_AABB_SIZE);
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + aabbSpeed);
 	}

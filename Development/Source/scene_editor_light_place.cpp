@@ -22,16 +22,16 @@ void SceneEditor::_updateLightPlacing()
 					newPosition = _fe3d.misc_getRaycastPointOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview point light
-					_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, true);
-					_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, true);
-					_fe3d.lightEntity_setPosition(PREVIEW_LIGHT_BULB_ID, newPosition);
-					_fe3d.modelEntity_setPosition(PREVIEW_LIGHT_BULB_ID, newPosition);
+					_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, true);
+					_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
+					_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
+					_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
 				}
 				else
 				{
 					// Hide preview point light
-					_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-					_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+					_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+					_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 				}
 
 				// Placing point light
@@ -49,10 +49,10 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Create model
-					const string newModelID = ("@" + newID);
+					const string newModelID = ("@lamp_" + newID);
 					_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
 					_fe3d.modelEntity_setPosition(newModelID, newPosition);
-					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_SIZE);
+					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
 					_fe3d.modelEntity_setShadowed(newModelID, false);
 					_fe3d.modelEntity_setReflected(newModelID, false);
 					_fe3d.modelEntity_setBright(newModelID, true);
@@ -60,7 +60,7 @@ void SceneEditor::_updateLightPlacing()
 
 					// Bind AABB
 					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LIGHT_BULB_AABB_SIZE);
+					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 
 					// Create light
 					_fe3d.lightEntity_setPosition(newID, newPosition);
@@ -71,24 +71,24 @@ void SceneEditor::_updateLightPlacing()
 					// Disable placement mode if no terrain available to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-						_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 						_isPlacingPointLight = false;
 					}
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling point light placement
 				{
 					// Hide preview point light
-					_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-					_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+					_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+					_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 					_isPlacingPointLight = false;
 				}
 			}
 			else
 			{
 				// Hide preview point light
-				_fe3d.modelEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
-				_fe3d.lightEntity_setVisible(PREVIEW_LIGHT_BULB_ID, false);
+				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 			}
 		}
 	}

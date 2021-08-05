@@ -307,7 +307,7 @@ void SceneEditor::_updateModelEditing()
 			else
 			{
 				if (_selectedBillboardID == "" && _activeBillboardID == "" &&
-					_selectedLightBulbID == "" && _activeLightBulbID == "" &&
+					_selectedLampID == "" && _activeLampID == "" &&
 					_selectedSpeakerID == "" && _activeSpeakerID == "")
 				{
 					_fe3d.textEntity_setVisible(textEntityID, true);

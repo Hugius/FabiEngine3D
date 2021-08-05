@@ -1,8 +1,8 @@
 #include "scene_editor.hpp"
 
-#define SELECTED_BULB_ID _selectedLightBulbID
-#define ACTIVE_BULB_ID _activeLightBulbID
-#define ACTIVE_LIGHT_ID _activeLightBulbID.substr(1)
+#define SELECTED_LAMP_ID _selectedLampID
+#define ACTIVE_LAMP_ID _activeLampID
+#define ACTIVE_LIGHT_ID _activeLampID.substr(1)
 
 void SceneEditor::_updateLightEditing()
 {
@@ -12,7 +12,7 @@ void SceneEditor::_updateLightEditing()
 		auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 		// Reset selected light from last frame
-		SELECTED_BULB_ID = "";
+		SELECTED_LAMP_ID = "";
 
 		// User must not be in placement mode
 		if ((_currentPreviewModelID == "") && (_currentPreviewBillboardID == "") && !_isPlacingPointLight && (_currentPreviewSoundID == ""))
@@ -20,30 +20,30 @@ void SceneEditor::_updateLightEditing()
 			// Check which entity is selected
 			auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
-			// Check if user selected a light bulb model
+			// Check if user selected a lamp model
 			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be light preview entity
-				if (entityID.substr(0, 6) == "@light")
+				if (entityID.substr(0, 5) == "@lamp")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
-						// Set new selected light bulb
-						SELECTED_BULB_ID = entityID;
+						// Set new selected lamp
+						SELECTED_LAMP_ID = entityID;
 
 						// Change cursor
 						_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
-						// Check if user clicked light bulb
+						// Check if user clicked lamp
 						if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
-							// Check if same light bulb is not clicked again
-							if (SELECTED_BULB_ID != ACTIVE_BULB_ID)
+							// Check if same lamp is not clicked again
+							if (SELECTED_LAMP_ID != ACTIVE_LAMP_ID)
 							{
 								// Set new active light
-								ACTIVE_BULB_ID = SELECTED_BULB_ID;
+								ACTIVE_LAMP_ID = SELECTED_LAMP_ID;
 								
 								// Update buttons hoverability
 								rightWindow->getScreen("pointLightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -51,7 +51,7 @@ void SceneEditor::_updateLightEditing()
 								rightWindow->getScreen("pointLightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 								// Filling writefields
-								Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_BULB_ID);
+								Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_LAMP_ID);
 								rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 								rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 								rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
@@ -60,36 +60,36 @@ void SceneEditor::_updateLightEditing()
 					}
 					else 
 					{
-						// Don't reset if light bulb is active
-						if (entityID != ACTIVE_BULB_ID)
+						// Don't reset if lamp is active
+						if (entityID != ACTIVE_LAMP_ID)
 						{
-							_fe3d.modelEntity_setSize(entityID, DEFAULT_LIGHT_BULB_SIZE);
-							_fe3d.aabbEntity_setSize(entityID, DEFAULT_LIGHT_BULB_AABB_SIZE);
+							_fe3d.modelEntity_setSize(entityID, DEFAULT_LAMP_SIZE);
+							_fe3d.aabbEntity_setSize(entityID, DEFAULT_LAMP_AABB_SIZE);
 						}
 					}
 				}
 			}
 			
-			// Check if user made the active light bulb inactive
-			if ((SELECTED_BULB_ID == "") && (ACTIVE_BULB_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			// Check if user made the active lamp inactive
+			if ((SELECTED_LAMP_ID == "") && (ACTIVE_LAMP_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					ACTIVE_BULB_ID = "";
+					ACTIVE_LAMP_ID = "";
 					rightWindow->setActiveScreen("sceneEditorControls");
 				}
 			}
 
-			// Update light bulb animations
-			if (SELECTED_BULB_ID != ACTIVE_BULB_ID)
+			// Update lamp animations
+			if (SELECTED_LAMP_ID != ACTIVE_LAMP_ID)
 			{
-				_updateLightBulbAnimation(SELECTED_BULB_ID, _selectedLightBulbSizeDirection);
+				_updateLampAnimation(SELECTED_LAMP_ID, _selectedLampSizeDirection);
 			}
-			_updateLightBulbAnimation(ACTIVE_BULB_ID, _activeLightBulbSizeDirection);
+			_updateLampAnimation(ACTIVE_LAMP_ID, _activeLampSizeDirection);
 
 			// Update properties screen
-			if (ACTIVE_BULB_ID != "")
+			if (ACTIVE_LAMP_ID != "")
 			{
 				// Temporary values
 				auto screen = rightWindow->getScreen("pointLightPropertiesMenu");
@@ -123,10 +123,10 @@ void SceneEditor::_updateLightEditing()
 					}
 					else if (screen->getButton("delete")->isHovered()) // Delete button
 					{
-						_fe3d.modelEntity_delete(ACTIVE_BULB_ID);
+						_fe3d.modelEntity_delete(ACTIVE_LAMP_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
 						rightWindow->setActiveScreen("sceneEditorControls");
-						ACTIVE_BULB_ID = "";
+						ACTIVE_LAMP_ID = "";
 						return;
 					}
 				}
@@ -146,7 +146,7 @@ void SceneEditor::_updateLightEditing()
 					_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 					_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 					_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
-					_fe3d.modelEntity_setPosition(ACTIVE_BULB_ID, position);
+					_fe3d.modelEntity_setPosition(ACTIVE_LAMP_ID, position);
 					_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
 				}
 				else if (!screen->getButton("radius")->isHoverable())
@@ -167,7 +167,7 @@ void SceneEditor::_updateLightEditing()
 					_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", color.g, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 					_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", color.b, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 					_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-					_fe3d.modelEntity_setColor(ACTIVE_BULB_ID, color);
+					_fe3d.modelEntity_setColor(ACTIVE_LAMP_ID, color);
 					_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
 				}
 				

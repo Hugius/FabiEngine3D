@@ -12,6 +12,7 @@ uniform mat4 u_projectionMatrix;
 // Out variables
 out vec3 f_uv;
 
+// Process vertex
 void main()
 {
 	vec4 pos = u_projectionMatrix * u_viewMatrix * u_rotationMatrix * vec4(v_pos, 1.0f);

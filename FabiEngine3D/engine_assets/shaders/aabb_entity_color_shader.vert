@@ -12,6 +12,7 @@ uniform mat4 u_projectionMatrix;
 // Out variables
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	// In variables

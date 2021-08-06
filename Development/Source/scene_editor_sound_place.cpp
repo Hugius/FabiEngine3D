@@ -56,7 +56,7 @@ void SceneEditor::_updateSoundPlacing()
 					// Add new soundcaster
 				BEGIN:
 					int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-					string newID = _currentPreviewSoundID.substr(1) + "_" + to_string(randomSerial);
+					string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(randomSerial));
 
 					// Check if ID not already exists
 					if (_fe3d.soundEntity_isExisting(newID))
@@ -71,7 +71,7 @@ void SceneEditor::_updateSoundPlacing()
 					}
 
 					// Create model
-					const string newModelID = ("@speaker_" + newID);
+					const string newModelID = ("@@speaker_" + newID);
 					_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
 					_fe3d.modelEntity_setPosition(newModelID, newPosition);
 					_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);

@@ -24,6 +24,7 @@ uniform float u_maxHeight;
 out vec3 f_pos;
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	// In variables

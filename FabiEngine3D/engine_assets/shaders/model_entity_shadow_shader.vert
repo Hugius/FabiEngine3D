@@ -21,6 +21,7 @@ uniform bool u_isInstanced;
 // Out variables
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	// In variables

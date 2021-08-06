@@ -32,7 +32,7 @@ void SceneEditor::_updateSoundEditing()
 			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be sound preview entity
-				if (entityID.substr(0, string("@speaker").size()) == "@speaker")
+				if (entityID.substr(0, string("@@speaker").size()) == "@@speaker")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&

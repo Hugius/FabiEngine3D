@@ -28,7 +28,7 @@ out vec4 f_clip;
 out vec2 f_uv;
 out vec3 f_pos;
 
-// Main function
+// Process vertex
 void main()
 {
 	// Variable for position altering

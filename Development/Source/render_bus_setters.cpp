@@ -59,9 +59,9 @@ void RenderBus::setLensFlareMap(TextureID value)
 	_lensFlareMap = value;
 }
 
-void RenderBus::setSceneDepthMap(TextureID value)
+void RenderBus::setDepthMap(TextureID value)
 {
-	_sceneDepthMap = value;
+	_depthMap = value;
 }
 
 void RenderBus::setDofMap(TextureID value)

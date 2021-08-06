@@ -11,7 +11,7 @@ class BlurRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::BaseRenderer;
 
-	void loadFramebuffers(BlurType type, unsigned int blurSize);
+	void loadFramebuffer(BlurType type, unsigned int blurSize);
 	void bind() override;
 	void unbind() override;
 

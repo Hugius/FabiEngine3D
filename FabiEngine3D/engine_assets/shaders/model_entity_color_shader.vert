@@ -39,6 +39,7 @@ out mat3 f_tbnMatrix;
 // Declarations
 mat3 calculateTbnMatrix();
 
+// Process vertex
 void main()
 {
 	// In variables

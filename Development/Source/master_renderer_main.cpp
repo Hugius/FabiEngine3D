@@ -5,6 +5,8 @@
 #include <algorithm>
 
 using std::make_shared;
+using std::max;
+using std::clamp;
 
 MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera)
 	:
@@ -25,12 +27,14 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_aabbEntityColorRenderer("aabb_entity_color_shader.vert", "aabb_entity_color_shader.frag", renderBus),
 	_imageEntityColorRenderer("image_entity_color_shader.vert", "image_entity_color_shader.frag", renderBus),
 	_antiAliasingRenderer("anti_aliasing_shader.vert", "anti_aliasing_shader.frag", renderBus),
-	_dofRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
-	_motionBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
-	_bloomRendererHighQuality("blur_shader.vert", "blur_shader.frag", renderBus),
-	_bloomRendererLowQuality("blur_shader.vert", "blur_shader.frag", renderBus),
-	_postProcessingRenderer("post_processing_shader.vert", "post_processing_shader.frag", renderBus),
-	_finalRenderer("final_shader.vert", "final_shader.frag", renderBus)
+	_bloomRenderer("bloom_shader.vert", "bloom_shader.frag", renderBus),
+	_dofRenderer("dof_shader.vert", "dof_shader.frag", renderBus),
+	_lensRenderer("lens_shader.vert", "lens_shader.frag", renderBus),
+	_motionBlurRenderer("motion_blur_shader.vert", "motion_blur_shader.frag", renderBus),
+	_bloomBlurRendererHighQuality("blur_shader.vert", "blur_shader.frag", renderBus),
+	_bloomBlurRendererLowQuality("blur_shader.vert", "blur_shader.frag", renderBus),
+	_dofBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
+	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
 	// Load framebuffers
 	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
@@ -38,29 +42,26 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
 	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
-	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
+	_sceneColorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
 	_antiAliasingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_dofRenderer.loadFramebuffers(BlurType::DOF, 2);
-	_motionBlurRenderer.loadFramebuffers(BlurType::MOTION, 4);
-	_bloomRendererHighQuality.loadFramebuffers(BlurType::BLOOM, 2);
-	_bloomRendererLowQuality.loadFramebuffers(BlurType::BLOOM, 6);
+	_bloomFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_dofFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_lensFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_motionBlurFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_bloomBlurRendererHighQuality.loadFramebuffer(BlurType::BLOOM, 2);
+	_bloomBlurRendererLowQuality.loadFramebuffer(BlurType::BLOOM, 8);
+	_dofBlurRenderer.loadFramebuffer(BlurType::DOF, 2);
+	_motionBlurBlurRenderer.loadFramebuffer(BlurType::MOTION, 4);
 
-	// Final screen texture
-	_finalSurface = make_shared<ImageEntity>("finalSurface");
-	_finalSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	// Render surface
+	_renderSurface = make_shared<ImageEntity>("renderSurface");
+	_renderSurface->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 }
 
 void MasterRenderer::update()
 {
-	static float lastYaw = _camera.getYaw();
-	static float lastPitch = _camera.getPitch();
-	float currentYaw = _camera.getYaw();
-	float currentPitch = _camera.getPitch();
-	_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
-	_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
-	lastYaw = _camera.getYaw();
-	lastPitch = _camera.getPitch();
+	_updateMotionBlur();
+	_updateLensEffects();
 }
 
 void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
@@ -122,8 +123,8 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_captureShadows();
 		_timer.stopDeltaPart();
 
-		// Bind screen framebuffer
-		_screenFramebuffer.bind();
+		// Bind scene framebuffer
+		_sceneColorFramebuffer.bind();
 
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -148,18 +149,17 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
-		// Unbind screen framebuffer
-		_screenFramebuffer.unbind();
-		_renderBus.setPrimarySceneMap(_screenFramebuffer.getTexture(0));
-		_renderBus.setSecondarySceneMap(_screenFramebuffer.getTexture(1));
+		// Unbind scene framebuffer
+		_sceneColorFramebuffer.unbind();
+		_renderBus.setFinalSceneMap(_sceneColorFramebuffer.getTexture(0));
+		_renderBus.setPrimarySceneMap(_sceneColorFramebuffer.getTexture(0));
+		_renderBus.setSecondarySceneMap(_sceneColorFramebuffer.getTexture(1));
 
 		// Post-captures
 		_timer.startDeltaPart("postProcessing");
 		_captureAntiAliasing();
 		_captureBloom();
-		_captureDofBlur();
-		_captureLensFlare();
-		_capturePostProcessing();
+		_captureDOF();
 		_captureMotionBlur();
 		_timer.stopDeltaPart();
 
@@ -175,7 +175,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		else // Render final scene texture
 		{
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
-			_renderFinalSceneTexture();
+			_renderFinalSceneImage();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 			
 		}
@@ -214,4 +214,50 @@ void MasterRenderer::reloadWaterRefractionFramebuffer()
 {
 	_waterRefractionFramebuffer.reset();
 	_waterRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getRefractionQuality()), 1, false);
+}
+
+void MasterRenderer::_updateMotionBlur()
+{
+	if (_renderBus.isMotionBlurEnabled())
+	{
+		static float lastYaw = _camera.getYaw();
+		static float lastPitch = _camera.getPitch();
+		float currentYaw = _camera.getYaw();
+		float currentPitch = _camera.getPitch();
+		_cameraYawDifference = fabsf(Math::calculateReferenceAngle(currentYaw) - Math::calculateReferenceAngle(lastYaw));
+		_cameraPitchDifference = fabsf(Math::calculateReferenceAngle(currentPitch) - Math::calculateReferenceAngle(lastPitch));
+		lastYaw = _camera.getYaw();
+		lastPitch = _camera.getPitch();
+	}
+}
+
+void MasterRenderer::_updateLensEffects()
+{
+	if (_renderBus.isLensFlareEnabled())
+	{
+		// Calculate screen position
+		auto lightingPosition = _renderBus.getDirectionalLightPosition();
+		auto viewMatrix = _renderBus.getViewMatrix();
+		auto projectionMatrix = _renderBus.getProjectionMatrix();
+		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f));
+		float alpha = 0.0f;
+
+		// Calculate transparency value
+		if (clipSpacePosition.w <= 0.0f)
+		{
+			alpha = 0.0f;
+		}
+		else
+		{
+			float x = clipSpacePosition.x / clipSpacePosition.w;
+			float y = clipSpacePosition.y / clipSpacePosition.w;
+			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
+			alpha = clamp(alpha, 0.0f, 1.0f);
+		}
+
+		// Update shader properties
+		_renderBus.setLensFlareAlpha(alpha);
+		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
+		_renderBus.setFlareSourcePosition(lightingPosition);
+	}
 }

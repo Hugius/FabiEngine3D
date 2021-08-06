@@ -38,7 +38,7 @@ void WaterEntityColorRenderer::bind()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterRefractionMap());
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getDepthMap());
 
 	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);

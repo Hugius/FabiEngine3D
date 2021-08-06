@@ -10,17 +10,11 @@
     <Filter Include="Renderers">
       <UniqueIdentifier>{87058a7c-3a74-44c3-a64f-cf4399802d7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderers\Miscellaneous Renderers">
-      <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{ba14abd3-e04f-475b-bcea-96916736bc25}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders\Entity Shaders">
       <UniqueIdentifier>{6c8e990a-18ba-41ce-bc62-1af0d6f53558}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders\Post-processing Shaders">
-      <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
     </Filter>
     <Filter Include="Master Renderer">
       <UniqueIdentifier>{7d8c27fd-0dde-4b64-a4e8-c60d3a9fb95f}</UniqueIdentifier>
@@ -42,6 +36,12 @@
     </Filter>
     <Filter Include="Renderers\Core">
       <UniqueIdentifier>{db74bef5-67e7-47ba-9bf8-024bd20dc2dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers\Post Renderers">
+      <UniqueIdentifier>{7fb7ca30-ed1c-4742-80f3-75199997d0c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Post Shaders">
+      <UniqueIdentifier>{16f78e2a-5f05-4057-a0e0-4b959ade0823}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -84,17 +84,11 @@
     <ClCompile Include="..\..\Source\base_renderer.cpp">
       <Filter>Renderers\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\final_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\blur_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\post_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
+      <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\anti_aliasing_renderer.cpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
+      <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\aabb_entity_color_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
@@ -132,6 +126,18 @@
     <ClCompile Include="..\..\Source\billboard_entity_shadow_renderer.cpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\bloom_renderer.cpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\dof_renderer.cpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\lens_renderer.cpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\motion_blur_renderer.cpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\render_framebuffer.hpp">
@@ -159,16 +165,10 @@
       <Filter>Renderers\Core</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\blur_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\final_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\post_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
+      <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\anti_aliasing_renderer.hpp">
-      <Filter>Renderers\Miscellaneous Renderers</Filter>
+      <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\aabb_entity_color_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Color</Filter>
@@ -206,31 +206,31 @@
     <ClInclude Include="..\..\Source\billboard_entity_shadow_renderer.hpp">
       <Filter>Renderers\Entity Renderers\Depth</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\bloom_renderer.hpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\dof_renderer.hpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\lens_renderer.hpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\motion_blur_renderer.hpp">
+      <Filter>Renderers\Post Renderers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.frag">
-      <Filter>Shaders\Post-processing Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\post_processing_shader.vert">
-      <Filter>Shaders\Post-processing Shaders</Filter>
-    </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert">
-      <Filter>Shaders\Post-processing Shaders</Filter>
+      <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
-      <Filter>Shaders\Post-processing Shaders</Filter>
+      <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.vert">
-      <Filter>Shaders\Post-processing Shaders</Filter>
+      <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\anti_aliasing_shader.frag">
-      <Filter>Shaders\Post-processing Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.vert">
-      <Filter>Shaders\Post-processing Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\final_shader.frag">
-      <Filter>Shaders\Post-processing Shaders</Filter>
+      <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\aabb_entity_color_shader.frag">
       <Filter>Shaders\Entity Shaders\Color</Filter>
@@ -303,6 +303,30 @@
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\motion_blur_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\motion_blur_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\bloom_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\dof_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\dof_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

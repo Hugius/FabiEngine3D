@@ -8,6 +8,7 @@ layout (location = 0) in vec3 v_pos;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
+// Process vertex
 void main()
 {
 	// In variables

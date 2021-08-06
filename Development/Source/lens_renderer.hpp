@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "image_entity.hpp"
 
-class AntiAliasingRenderer final : public BaseRenderer
+class LensRenderer final : public BaseRenderer
 {
 public:
 	using BaseRenderer::BaseRenderer;

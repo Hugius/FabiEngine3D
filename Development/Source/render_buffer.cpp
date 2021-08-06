@@ -67,7 +67,7 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 	glBindVertexArray(0);
 }
 
-RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
+RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 {
 	// Temporary values
 	float* data = nullptr;

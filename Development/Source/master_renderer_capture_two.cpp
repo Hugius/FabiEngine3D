@@ -2,12 +2,6 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-#include <chrono>
-#include <algorithm>
-
-using std::max;
-using std::numeric_limits;
-
 void MasterRenderer::_captureSceneDepth()
 {
 	// Temporary values
@@ -142,36 +136,37 @@ void MasterRenderer::_captureSceneDepth()
 
 		// Unbind
 		_sceneDepthFramebuffer.unbind();
-		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
+
+		// Update depth map
+		_renderBus.setDepthMap(_sceneDepthFramebuffer.getTexture(0));
 	}
 	else
 	{
-		_renderBus.setSceneDepthMap(0);
+		_renderBus.setDepthMap(0);
 	}
 }
 
-void MasterRenderer::_captureDofBlur()
+void MasterRenderer::_captureDOF()
 {
 	if (_renderBus.isDofEnabled())
 	{
+		// Blur final scene map
+		_dofBlurRenderer.bind();
+		_renderBus.setDofMap(_dofBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalSceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_dofBlurRenderer.unbind();
+
+		// Apply DOF & update final scene map
+		_dofFramebuffer.bind();
 		_dofRenderer.bind();
-		_renderBus.setDofMap(_dofRenderer.blurTexture(_finalSurface, _renderBus.getPrimarySceneMap(), 2, 1.0f, BlurDirection::BOTH));
+		_dofRenderer.render(_renderSurface);
 		_dofRenderer.unbind();
+		_dofFramebuffer.unbind();
+		_renderBus.setFinalSceneMap(_dofFramebuffer.getTexture(0));
 	}
 	else
 	{
 		_renderBus.setDofMap(0);
 	}
-}
-
-void MasterRenderer::_capturePostProcessing()
-{
-	_postProcessingFramebuffer.bind();
-	_postProcessingRenderer.bind();
-	_postProcessingRenderer.render(_finalSurface);
-	_postProcessingRenderer.unbind();
-	_postProcessingFramebuffer.unbind();
-	_renderBus.setFinalSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
 void MasterRenderer::_captureMotionBlur()
@@ -207,51 +202,27 @@ void MasterRenderer::_captureMotionBlur()
 		// Apply motion blur
 		if (hasMoved)
 		{
-			_motionBlurRenderer.bind();
-			_renderBus.setMotionBlurMap(_motionBlurRenderer.blurTexture(_finalSurface, _renderBus.getFinalSceneMap(), 5, 1.0f, direction));
-			_motionBlurRenderer.unbind();
+			_motionBlurBlurRenderer.bind();
+			_renderBus.setMotionBlurMap(_motionBlurBlurRenderer.blurTexture(_renderSurface, _renderBus.getFinalSceneMap(), 5, 1.0f, direction));
+			_motionBlurBlurRenderer.unbind();
 		}
 		else
 		{
 			_renderBus.setMotionBlurMixValue(0.0f);
 			_renderBus.setMotionBlurMap(0);
 		}
+
+		// Apply motion blur & update final scene map
+		_motionBlurFramebuffer.bind();
+		_motionBlurRenderer.bind();
+		_motionBlurRenderer.render(_renderSurface);
+		_motionBlurRenderer.unbind();
+		_motionBlurFramebuffer.unbind();
+		_renderBus.setFinalSceneMap(_motionBlurFramebuffer.getTexture(0));
 	}
 	else // No motion blur
 	{
-		_renderBus.setMotionBlurMixValue(0.0f);
 		_renderBus.setMotionBlurMap(0);
-	}
-}
-
-void MasterRenderer::_captureLensFlare()
-{
-	if (_renderBus.isLensFlareEnabled())
-	{
-		// Calculate screen position
-		auto lightingPosition = _renderBus.getDirectionalLightPosition();
-		auto viewMatrix = _renderBus.getViewMatrix();
-		auto projectionMatrix = _renderBus.getProjectionMatrix();
-		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f));
-		float alpha = 0.0f;
-
-		// Calculate transparency value
-		if (clipSpacePosition.w <= 0.0f)
-		{
-			alpha = 0.0f;
-		}
-		else
-		{
-			float x = clipSpacePosition.x / clipSpacePosition.w;
-			float y = clipSpacePosition.y / clipSpacePosition.w;
-			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
-			alpha = std::clamp(alpha, 0.0f, 1.0f);
-		}
-
-		// Update shader properties
-		_renderBus.setLensFlareAlpha(alpha);
-		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
-		_renderBus.setFlareSourcePosition(lightingPosition);
 	}
 }
 
@@ -353,12 +324,13 @@ void MasterRenderer::_captureAntiAliasing()
 {
 	if (_renderBus.isFxaaEnabled())
 	{
+		// Apply anti-aliasing & update final scene map
 		_antiAliasingFramebuffer.bind();
 		_antiAliasingRenderer.bind();
-		_antiAliasingRenderer.render(_finalSurface, _renderBus.getPrimarySceneMap());
+		_antiAliasingRenderer.render(_renderSurface);
 		_antiAliasingRenderer.unbind();
 		_antiAliasingFramebuffer.unbind();
-		_renderBus.setPrimarySceneMap(_antiAliasingFramebuffer.getTexture(0));
+		_renderBus.setFinalSceneMap(_antiAliasingFramebuffer.getTexture(0));
 	}
 }
 
@@ -378,16 +350,24 @@ void MasterRenderer::_captureBloom()
 		}
 
 		// Blur the scene map (high quality, small blur)
-		_bloomRendererHighQuality.bind();
-		_renderBus.setBloomMap(_bloomRendererHighQuality.blurTexture(_finalSurface, textureToBlur,
+		_bloomBlurRendererHighQuality.bind();
+		_renderBus.setBloomMap(_bloomBlurRendererHighQuality.blurTexture(_renderSurface, textureToBlur,
 			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-		_bloomRendererHighQuality.unbind();
+		_bloomBlurRendererHighQuality.unbind();
 
 		// Blur the blurred scene map (low quality, large blur)
-		_bloomRendererLowQuality.bind();
-		_renderBus.setBloomMap(_bloomRendererLowQuality.blurTexture(_finalSurface, _renderBus.getBloomMap(),
+		_bloomBlurRendererLowQuality.bind();
+		_renderBus.setBloomMap(_bloomBlurRendererLowQuality.blurTexture(_renderSurface, _renderBus.getBloomMap(),
 			_renderBus.getBloomBlurCount(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
-		_bloomRendererLowQuality.unbind();
+		_bloomBlurRendererLowQuality.unbind();
+
+		// Apply bloom & update final scene map
+		_bloomFramebuffer.bind();
+		_bloomRenderer.bind();
+		_bloomRenderer.render(_renderSurface);
+		_bloomRenderer.unbind();
+		_bloomFramebuffer.unbind();
+		_renderBus.setFinalSceneMap(_bloomFramebuffer.getTexture(0));
 	}
 	else
 	{

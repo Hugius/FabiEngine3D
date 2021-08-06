@@ -9,6 +9,7 @@ layout (location = 1) in vec2 v_uv;
 out vec2 f_pos;
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	gl_Position = vec4(v_pos, 0.0f, 1.0f);

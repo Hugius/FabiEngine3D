@@ -15,10 +15,12 @@
 #include "billboard_entity_shadow_renderer.hpp"
 #include "aabb_entity_color_renderer.hpp"
 #include "image_entity_color_renderer.hpp"
-#include "post_renderer.hpp"
-#include "blur_renderer.hpp"
-#include "final_renderer.hpp"
 #include "anti_aliasing_renderer.hpp"
+#include "bloom_renderer.hpp"
+#include "dof_renderer.hpp"
+#include "lens_renderer.hpp"
+#include "motion_blur_renderer.hpp"
+#include "blur_renderer.hpp"
 #include "timer.hpp"
 #include "blur_type.hpp"
 #include "texture_loader.hpp"
@@ -37,17 +39,21 @@ public:
 	void reloadWaterRefractionFramebuffer();
 
 private:
-	// Capturing functions
+	// Update functions
+	void _updateMotionBlur();
+	void _updateLensEffects();
+
+	// Pre-capturing functions
 	void _captureSceneReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
 	void _captureSceneDepth();
 	void _captureShadows();
+
+	// Post-capturing functions
 	void _captureAntiAliasing();
 	void _captureBloom();
-	void _captureDofBlur();
-	void _captureLensFlare();
-	void _capturePostProcessing();
+	void _captureDOF();
 	void _captureMotionBlur();
 
 	// Rendering functions
@@ -57,7 +63,7 @@ private:
 	void _renderModelEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
-	void _renderFinalSceneTexture();
+	void _renderFinalSceneImage();
 	void _renderGUI();
 	void _renderCustomCursor();
 	void _renderDebugScreens();
@@ -68,9 +74,6 @@ private:
 	RenderBus& _renderBus;
 	TextureLoader& _textureLoader;
 	EntityBus* _entityBus = nullptr;
-
-	// Final screen texture
-	shared_ptr<ImageEntity> _finalSurface = nullptr;
 
 	// Renderers
 	SkyEntityColorRenderer _skyEntityColorRenderer;
@@ -86,22 +89,30 @@ private:
 	AabbEntityColorRenderer _aabbEntityColorRenderer;
 	ImageEntityColorRenderer _imageEntityColorRenderer;
 	AntiAliasingRenderer _antiAliasingRenderer;
-	BlurRenderer _dofRenderer;
-	BlurRenderer _motionBlurRenderer;
-	BlurRenderer _bloomRendererHighQuality;
-	BlurRenderer _bloomRendererLowQuality;
-	PostRenderer _postProcessingRenderer;
-	FinalRenderer _finalRenderer;
+	BloomRenderer _bloomRenderer;
+	DofRenderer _dofRenderer;
+	LensRenderer _lensRenderer;
+	MotionBlurRenderer _motionBlurRenderer;
+	BlurRenderer _dofBlurRenderer;
+	BlurRenderer _motionBlurBlurRenderer;
+	BlurRenderer _bloomBlurRendererHighQuality;
+	BlurRenderer _bloomBlurRendererLowQuality;
 	
 	// Framebuffers
 	RenderFramebuffer _sceneReflectionFramebuffer;
 	RenderFramebuffer _waterReflectionFramebuffer;
 	RenderFramebuffer _waterRefractionFramebuffer;
-	RenderFramebuffer _sceneDepthFramebuffer;
 	RenderFramebuffer _shadowFramebuffer;
-	RenderFramebuffer _screenFramebuffer;
+	RenderFramebuffer _sceneDepthFramebuffer;
+	RenderFramebuffer _sceneColorFramebuffer;
 	RenderFramebuffer _antiAliasingFramebuffer;
-	RenderFramebuffer _postProcessingFramebuffer;
+	RenderFramebuffer _bloomFramebuffer;
+	RenderFramebuffer _dofFramebuffer;
+	RenderFramebuffer _lensFramebuffer;
+	RenderFramebuffer _motionBlurFramebuffer;
+
+	// Surfaces
+	shared_ptr<ImageEntity> _renderSurface = nullptr;
 
 	// Miscellaneous
 	float _cameraYawDifference = 0.0f;

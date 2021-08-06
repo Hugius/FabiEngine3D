@@ -13,7 +13,7 @@ class RenderBuffer final
 public:
 	RenderBuffer() = delete;
 	RenderBuffer(BufferType type, const float data[], unsigned int dataCount);   // 3D
-	RenderBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
+	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 	
 	void enableInstancing(const vector<Vec3>& offsets);

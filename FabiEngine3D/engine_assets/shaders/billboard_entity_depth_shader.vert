@@ -26,6 +26,7 @@ uniform bool u_isUnderWater;
 // Out variables
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	// In variables

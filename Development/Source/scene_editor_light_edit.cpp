@@ -24,7 +24,7 @@ void SceneEditor::_updateLightEditing()
 			for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be light preview entity
-				if (entityID.substr(0, 5) == "@lamp")
+				if (entityID.substr(0, string("@@lamp").size()) == "@@lamp")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&

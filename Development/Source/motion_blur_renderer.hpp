@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "image_entity.hpp"
 
-class PostRenderer final : public BaseRenderer
+class MotionBlurRenderer final : public BaseRenderer
 {
 public:
 	using BaseRenderer::BaseRenderer;

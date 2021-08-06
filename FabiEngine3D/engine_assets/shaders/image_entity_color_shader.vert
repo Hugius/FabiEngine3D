@@ -19,6 +19,7 @@ uniform bool u_isMirroredVertically;
 // Out variables
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);

@@ -21,7 +21,7 @@ public:
 	void setWaterRefractionMap(TextureID value);
 	void setShadowMap(TextureID value);
 	void setBloomMap(TextureID value);
-	void setSceneDepthMap(TextureID value);
+	void setDepthMap(TextureID value);
 	void setDofMap(TextureID value);
 	void setLensFlareMap(TextureID value);
 	void setMotionBlurMap(TextureID value);
@@ -128,7 +128,7 @@ public:
 	const TextureID getWaterRefractionMap();
 	const TextureID getShadowMap();
 	const TextureID getBloomMap();
-	const TextureID getSceneDepthMap();
+	const TextureID getDepthMap();
 	const TextureID getDofMap();
 	const TextureID getLensFlareMap();
 	const TextureID getFinalSceneMap();
@@ -235,7 +235,7 @@ private:
 	TextureID _waterRefractionMap = 0;
 	TextureID _shadowMap = 0;
 	TextureID _bloomMap = 0;
-	TextureID _sceneDepthMap = 0;
+	TextureID _depthMap = 0;
 	TextureID _dofMap = 0;
 	TextureID _lensFlareMap = 0;
 	TextureID _finalSceneMap = 0;

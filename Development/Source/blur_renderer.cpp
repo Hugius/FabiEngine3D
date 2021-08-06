@@ -2,7 +2,7 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void BlurRenderer::loadFramebuffers(BlurType type, unsigned int blurSize)
+void BlurRenderer::loadFramebuffer(BlurType type, unsigned int blurSize)
 {
 	_type = type;
 	_blurFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize() / blurSize, 1, true);

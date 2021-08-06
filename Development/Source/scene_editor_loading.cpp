@@ -264,6 +264,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				_fe3d.modelEntity_setBright(newModelID, false);
 
 				// Bind AABB
+				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 			}

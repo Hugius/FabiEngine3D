@@ -40,7 +40,7 @@ void SceneEditor::_updateLightPlacing()
 				{
 					// Add new point light
 				BEGIN: int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-					string newID = "light_" + to_string(randomSerial);
+					string newID = ("light_" + to_string(randomSerial));
 
 					// Check if ID not already exists
 					if (_fe3d.lightEntity_isExisting(newID))
@@ -49,7 +49,7 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Create model
-					const string newModelID = ("@lamp_" + newID);
+					const string newModelID = ("@@lamp_" + newID);
 					_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
 					_fe3d.modelEntity_setPosition(newModelID, newPosition);
 					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
@@ -59,6 +59,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
 
 					// Bind AABB
+					_fe3d.aabbEntity_create(newModelID);
 					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 

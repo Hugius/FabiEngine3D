@@ -1,31 +1,36 @@
-#include "anti_aliasing_renderer.hpp"
-#include "configuration.hpp"
-#include "text_entity.hpp"
+#include "bloom_renderer.hpp"
+#include "render_bus.hpp"
 
-void AntiAliasingRenderer::bind()
+void BloomRenderer::bind()
 {
 	// Bind shader
 	_shader.bind();
 
 	// Shader uniforms
 	_shader.uploadUniform("u_sceneMap", 0);
+	_shader.uploadUniform("u_bloomMap", 1);
+	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
 
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getFinalSceneMap());
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
 }
 
-void AntiAliasingRenderer::unbind()
+void BloomRenderer::unbind()
 {
 	// Unbind textures
 	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Unbind shader
 	_shader.unbind();
 }
 
-void AntiAliasingRenderer::render(const shared_ptr<ImageEntity> entity)
+void BloomRenderer::render(const shared_ptr<ImageEntity> entity)
 {
 	// Bind buffer
 	glBindVertexArray(entity->getRenderBuffer()->getVAO());

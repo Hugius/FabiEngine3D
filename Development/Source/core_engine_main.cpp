@@ -153,7 +153,7 @@ void CoreEngine::_prepareApplication()
 {
 	// Create engine logo
 	shared_ptr<ImageEntity> logo = make_shared<ImageEntity>("logo");
-	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	logo->setRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo->setDiffuseMap(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false));
 
 	// Calculate logo resolution

@@ -6,7 +6,7 @@ layout (location = 0) in vec2 v_pos;
 layout (location = 1) in vec2 v_uv;
 
 // Textures
-layout (location = 2) uniform sampler2D u_depthMap;
+layout (location = 0) uniform sampler2D u_depthMap;
 
 // Vector4 uniforms
 uniform vec4 u_flareSourcePositionClipspace;
@@ -30,6 +30,7 @@ out float f_flareOcclusion;
 float convertDepthToPerspective(float depth);
 float calculateFlareOcclusion();
 
+// Process vertex
 void main()
 {
 	gl_Position = vec4(v_pos, 0.0f, 1.0f);
@@ -47,7 +48,7 @@ float calculateFlareOcclusion()
 
         // Calculate scene depth
         float flareDepth         = texture(u_depthMap, lightSourceUV).r;
-        float flareFragmentDepth = convertDepthToPerspective(flareDepth) / u_farZ;
+        float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farZ);
 
         // Calculate distance to light source
         vec3 viewDirection       = (u_cameraPosition - u_flareSourcePosition);

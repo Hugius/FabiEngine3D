@@ -55,9 +55,9 @@ const TextureID RenderBus::getLensFlareMap()
 	return _lensFlareMap;
 }
 
-const TextureID RenderBus::getSceneDepthMap()
+const TextureID RenderBus::getDepthMap()
 {
-	return _sceneDepthMap;
+	return _depthMap;
 }
 
 const TextureID RenderBus::getDofMap()

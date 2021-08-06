@@ -22,6 +22,7 @@ uniform float u_maxHeight;
 // Out variables
 out vec2 f_uv;
 
+// Process vertex
 void main()
 {
 	// In variables

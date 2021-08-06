@@ -29,7 +29,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_antiAliasingRenderer("anti_aliasing_shader.vert", "anti_aliasing_shader.frag", renderBus),
 	_bloomRenderer("bloom_shader.vert", "bloom_shader.frag", renderBus),
 	_dofRenderer("dof_shader.vert", "dof_shader.frag", renderBus),
-	_lensRenderer("lens_shader.vert", "lens_shader.frag", renderBus),
+	_lensFlareRenderer("lens_flare_shader.vert", "lens_flare_shader.frag", renderBus),
 	_motionBlurRenderer("motion_blur_shader.vert", "motion_blur_shader.frag", renderBus),
 	_bloomBlurRendererHighQuality("blur_shader.vert", "blur_shader.frag", renderBus),
 	_bloomBlurRendererLowQuality("blur_shader.vert", "blur_shader.frag", renderBus),
@@ -46,10 +46,10 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_antiAliasingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_bloomFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_dofFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_lensFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_lensFlareFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_motionBlurFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_bloomBlurRendererHighQuality.loadFramebuffer(BlurType::BLOOM, 2);
-	_bloomBlurRendererLowQuality.loadFramebuffer(BlurType::BLOOM, 8);
+	_bloomBlurRendererLowQuality.loadFramebuffer(BlurType::BLOOM, 4);
 	_dofBlurRenderer.loadFramebuffer(BlurType::DOF, 2);
 	_motionBlurBlurRenderer.loadFramebuffer(BlurType::MOTION, 4);
 
@@ -61,7 +61,7 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 void MasterRenderer::update()
 {
 	_updateMotionBlur();
-	_updateLensEffects();
+	_updateLensFlare();
 }
 
 void MasterRenderer::renderEngineLogo(shared_ptr<ImageEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
@@ -160,6 +160,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_captureAntiAliasing();
 		_captureBloom();
 		_captureDOF();
+		_captureLensFlare();
 		_captureMotionBlur();
 		_timer.stopDeltaPart();
 
@@ -231,33 +232,29 @@ void MasterRenderer::_updateMotionBlur()
 	}
 }
 
-void MasterRenderer::_updateLensEffects()
+void MasterRenderer::_updateLensFlare()
 {
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Calculate screen position
-		auto lightingPosition = _renderBus.getDirectionalLightPosition();
+		auto lightPosition = _renderBus.getDirectionalLightPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
 		auto projectionMatrix = _renderBus.getProjectionMatrix();
-		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f));
+		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightPosition.x, lightPosition.y, lightPosition.z, 1.0f));
 		float alpha = 0.0f;
 
 		// Calculate transparency value
-		if (clipSpacePosition.w <= 0.0f)
+		if (clipSpacePosition.w > 0.0f)
 		{
-			alpha = 0.0f;
-		}
-		else
-		{
-			float x = clipSpacePosition.x / clipSpacePosition.w;
-			float y = clipSpacePosition.y / clipSpacePosition.w;
-			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
+			const float x = (clipSpacePosition.x / clipSpacePosition.w);
+			const float y = (clipSpacePosition.y / clipSpacePosition.w);
+			alpha = (1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier()));
 			alpha = clamp(alpha, 0.0f, 1.0f);
 		}
 
 		// Update shader properties
 		_renderBus.setLensFlareAlpha(alpha);
 		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
-		_renderBus.setFlareSourcePosition(lightingPosition);
+		_renderBus.setFlareSourcePosition(lightPosition);
 	}
 }

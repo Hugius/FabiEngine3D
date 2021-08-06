@@ -18,7 +18,7 @@
 #include "anti_aliasing_renderer.hpp"
 #include "bloom_renderer.hpp"
 #include "dof_renderer.hpp"
-#include "lens_renderer.hpp"
+#include "lens_flare_renderer.hpp"
 #include "motion_blur_renderer.hpp"
 #include "blur_renderer.hpp"
 #include "timer.hpp"
@@ -41,7 +41,7 @@ public:
 private:
 	// Update functions
 	void _updateMotionBlur();
-	void _updateLensEffects();
+	void _updateLensFlare();
 
 	// Pre-capturing functions
 	void _captureSceneReflections();
@@ -54,6 +54,7 @@ private:
 	void _captureAntiAliasing();
 	void _captureBloom();
 	void _captureDOF();
+	void _captureLensFlare();
 	void _captureMotionBlur();
 
 	// Rendering functions
@@ -91,7 +92,7 @@ private:
 	AntiAliasingRenderer _antiAliasingRenderer;
 	BloomRenderer _bloomRenderer;
 	DofRenderer _dofRenderer;
-	LensRenderer _lensRenderer;
+	LensFlareRenderer _lensFlareRenderer;
 	MotionBlurRenderer _motionBlurRenderer;
 	BlurRenderer _dofBlurRenderer;
 	BlurRenderer _motionBlurBlurRenderer;
@@ -108,7 +109,7 @@ private:
 	RenderFramebuffer _antiAliasingFramebuffer;
 	RenderFramebuffer _bloomFramebuffer;
 	RenderFramebuffer _dofFramebuffer;
-	RenderFramebuffer _lensFramebuffer;
+	RenderFramebuffer _lensFlareFramebuffer;
 	RenderFramebuffer _motionBlurFramebuffer;
 
 	// Surfaces

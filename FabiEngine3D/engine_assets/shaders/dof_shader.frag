@@ -72,7 +72,8 @@ void main()
         blurMixValue = mix(0.0f, blurMixValue, u_isDofDynamic ? distanceMixValue : 1.0f);
 
         // Mix with blur color accordingly
-        o_finalColor.rgb = mix(o_finalColor.rgb, blurColor, blurMixValue);
+        vec3 sceneColor = texture(u_sceneMap, f_uv).rgb;
+        o_finalColor.rgb = mix(sceneColor, blurColor, blurMixValue);
         o_finalColor.a = 1.0f;
     }
     else

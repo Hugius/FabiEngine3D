@@ -42,11 +42,14 @@ void DofRenderer::unbind()
 
 void DofRenderer::render(const shared_ptr<ImageEntity> entity)
 {
+	// Temporary values
+	const auto buffer = entity->getRenderBuffer();
+
 	// Bind buffer
-	glBindVertexArray(entity->getRenderBuffer()->getVAO());
+	glBindVertexArray(buffer->getVAO());
 
 	// Render
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
 	// Unbind buffer
 	glBindVertexArray(0);

@@ -8,10 +8,10 @@ layout (location = 1) in vec2 v_uv;
 // Textures
 layout (location = 0) uniform sampler2D u_depthMap;
 
-// Vector4 uniforms
+// Vector uniforms
 uniform vec4 u_flareSourcePositionClipspace;
 
-// Vector3 uniforms
+// Vector uniforms
 uniform vec3 u_flareSourcePosition;
 uniform vec3 u_cameraPosition;
 
@@ -24,38 +24,38 @@ uniform bool u_isLensFlareEnabled;
 
 // Out variables
 out vec2 f_uv;
-out float f_flareOcclusion;
+out float f_flareVisibility;
 
 // Functions
 float convertDepthToPerspective(float depth);
-float calculateFlareOcclusion();
+float calculateFlareVisibility();
 
 // Process vertex
 void main()
 {
 	gl_Position = vec4(v_pos, 0.0f, 1.0f);
 	f_uv = v_uv; 
-    f_flareOcclusion = calculateFlareOcclusion();
+    f_flareVisibility = calculateFlareVisibility();
 }
 
-float calculateFlareOcclusion()
+float calculateFlareVisibility()
 {
-    if(u_isLensFlareEnabled && u_flareSourcePositionClipspace.w > 0.0f)
+    if(u_isLensFlareEnabled && (u_flareSourcePositionClipspace.w > 0.0f))
     {
         // Convert to UV space
-        vec2 lightSourceClipPos = u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w;
-        vec2 lightSourceUV      = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
+        vec2 lightSourceClipPosition = (u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w);
+        vec2 lightSourceUV = vec2((lightSourceClipPosition.x + 1.0f) / 2.0f, (lightSourceClipPosition.y + 1.0f) / 2.0f);
 
         // Calculate scene depth
-        float flareDepth         = texture(u_depthMap, lightSourceUV).r;
+        float flareDepth = texture(u_depthMap, lightSourceUV).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farZ);
 
         // Calculate distance to light source
-        vec3 viewDirection       = (u_cameraPosition - u_flareSourcePosition);
-        float flareDistance      = length(viewDirection);
+        vec3 viewDirection = (u_cameraPosition - u_flareSourcePosition);
+        float flareDistance = length(viewDirection);
         
         // Check if lightsource is not occluded by an object
-        if(flareFragmentDepth * u_farZ >= abs(flareDistance))
+        if((flareFragmentDepth * u_farZ) >= abs(flareDistance))
         {
             return 1.0f;
         }

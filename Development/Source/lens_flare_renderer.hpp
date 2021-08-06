@@ -3,7 +3,7 @@
 #include "base_renderer.hpp"
 #include "image_entity.hpp"
 
-class LensRenderer final : public BaseRenderer
+class LensFlareRenderer final : public BaseRenderer
 {
 public:
 	using BaseRenderer::BaseRenderer;

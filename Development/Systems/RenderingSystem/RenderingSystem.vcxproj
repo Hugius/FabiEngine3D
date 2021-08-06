@@ -28,7 +28,7 @@
     <ClCompile Include="..\..\Source\bloom_renderer.cpp" />
     <ClCompile Include="..\..\Source\blur_renderer.cpp" />
     <ClCompile Include="..\..\Source\dof_renderer.cpp" />
-    <ClCompile Include="..\..\Source\lens_renderer.cpp" />
+    <ClCompile Include="..\..\Source\lens_flare_renderer.cpp" />
     <ClCompile Include="..\..\Source\model_entity_depth_renderer.cpp" />
     <ClCompile Include="..\..\Source\motion_blur_renderer.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_depth_renderer.cpp" />
@@ -61,7 +61,7 @@
     <ClInclude Include="..\..\Source\bloom_renderer.hpp" />
     <ClInclude Include="..\..\Source\blur_renderer.hpp" />
     <ClInclude Include="..\..\Source\dof_renderer.hpp" />
-    <ClInclude Include="..\..\Source\lens_renderer.hpp" />
+    <ClInclude Include="..\..\Source\lens_flare_renderer.hpp" />
     <ClInclude Include="..\..\Source\model_entity_depth_renderer.hpp" />
     <ClInclude Include="..\..\Source\motion_blur_renderer.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity_depth_renderer.hpp" />
@@ -96,8 +96,8 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\blur_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\dof_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\dof_shader.vert" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.frag" />
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.vert" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_flare_shader.frag" />
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_flare_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_depth_shader.frag" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\model_entity_depth_shader.vert" />
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\image_entity_color_shader.frag" />

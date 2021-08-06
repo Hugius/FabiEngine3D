@@ -132,7 +132,7 @@
     <ClCompile Include="..\..\Source\dof_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\lens_renderer.cpp">
+    <ClCompile Include="..\..\Source\lens_flare_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\motion_blur_renderer.cpp">
@@ -212,7 +212,7 @@
     <ClInclude Include="..\..\Source\dof_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\lens_renderer.hpp">
+    <ClInclude Include="..\..\Source\lens_flare_renderer.hpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\motion_blur_renderer.hpp">
@@ -304,7 +304,7 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\billboard_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.vert">
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_flare_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\motion_blur_shader.frag">
@@ -325,7 +325,7 @@
     <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\dof_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_shader.frag">
+    <None Include="..\..\..\FabiEngine3D\engine_assets\shaders\lens_flare_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
   </ItemGroup>

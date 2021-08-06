@@ -32,6 +32,9 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		((entity->getPosition().y - entity->getSize().y) < entity->getMaxPosition().y) &&
 		((entity->getPosition().y + entity->getSize().y) > entity->getMinPosition().y))
 	{
+		// Temporary values
+		const auto buffer = entity->getRenderBuffer();
+
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
@@ -70,11 +73,11 @@ void ImageEntityColorRenderer::render(const shared_ptr<ImageEntity> entity)
 		}
 
 		// Bind buffer
-		glBindVertexArray(entity->getRenderBuffer()->getVAO());
+		glBindVertexArray(buffer->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		_renderBus.increaseTriangleCount(2);
+		glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+		_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 
 		// Unbind buffer
 		glBindVertexArray(0);

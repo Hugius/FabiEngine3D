@@ -65,15 +65,18 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 
 void BlurRenderer::_render(const shared_ptr<ImageEntity> entity, TextureID texture)
 {
+	// Temporary values
+	const auto buffer = entity->getRenderBuffer();
+
 	// Bind textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// Bind buffer
-	glBindVertexArray(entity->getRenderBuffer()->getVAO());
+	glBindVertexArray(buffer->getVAO());
 
 	// Render
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 
 	// Unbind buffer
 	glBindVertexArray(0);

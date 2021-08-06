@@ -25,7 +25,7 @@ layout (location = 7) uniform samplerCube u_mixSkyMap;
 // Matrix uniforms
 uniform mat4 u_skyRotationMatrix;
 
-// Vector3 uniforms
+// Vector uniforms
 uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_pointLightRadiuses[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];

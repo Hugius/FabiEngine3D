@@ -169,6 +169,20 @@ void MasterRenderer::_captureDOF()
 	}
 }
 
+void MasterRenderer::_captureLensFlare()
+{
+	if (_renderBus.isLensFlareEnabled())
+	{
+		// Apply lens flare & update final scene map
+		_lensFlareFramebuffer.bind();
+		_lensFlareRenderer.bind();
+		_lensFlareRenderer.render(_renderSurface);
+		_lensFlareRenderer.unbind();
+		_lensFlareFramebuffer.unbind();
+		_renderBus.setFinalSceneMap(_lensFlareFramebuffer.getTexture(0));
+	}
+}
+
 void MasterRenderer::_captureMotionBlur()
 {
 	// Check if motion blur is enabled

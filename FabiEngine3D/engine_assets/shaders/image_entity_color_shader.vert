@@ -22,7 +22,7 @@ out vec2 f_uv;
 // Process vertex
 void main()
 {
-	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
+	gl_Position = (u_modelMatrix * vec4(v_pos, 0.0f, 1.0f));
 	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
 	f_uv.y = u_isMirroredVertically ? v_uv.y : -v_uv.y; 
 	f_uv = vec2(u_uvAdder.x + (f_uv.x * u_uvMultiplier.x), u_uvAdder.y + (f_uv.y * u_uvMultiplier.y));

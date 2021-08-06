@@ -16,7 +16,7 @@ layout (location = 2) uniform sampler2D u_depthMap;
 layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
-// Vector3 uniforms
+// Vector uniforms
 uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_pointLightRadiuses[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];

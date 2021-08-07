@@ -21,6 +21,7 @@ void TerrainEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
+	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -67,7 +68,6 @@ void TerrainEditor::unload()
 	// Reset editor properties
 	_loadedTerrainIDs.clear();
 	_currentTerrainID = "";
-	_cameraDistance = INITIAL_CAMERA_DISTANCE;
 	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
@@ -104,18 +104,17 @@ void TerrainEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("terrainEditorMenuChoice");
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("mesh", Vec2(0.0f, positions[0]), Vec2(TW("3D Mesh"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D Mesh", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("blendMap", Vec2(0.0f, positions[1]), Vec2(TW("BlendMap"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "BlendMap", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("blendMap", Vec2(0.0f, positions[1]), Vec2(TW("Blend Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blend Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("lighting", Vec2(0.0f, positions[2]), Vec2(TW("Lighting"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lighting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: terrainEditorMenuMesh
-	positions = VPC::calculateButtonPositions(5, CH);
+	positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("terrainEditorMenuMesh");
-	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("heightMap", Vec2(0.0f, positions[0]), Vec2(TW("Height Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Height Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("maxHeight", Vec2(0.0f, positions[0]), Vec2(TW("Max Height"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Max Height", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("diffuseMap", Vec2(0.0f, positions[1]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("maxHeight", Vec2(0.0f, positions[2]), Vec2(TW("Max Height"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Max Height", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("uvRepeat", Vec2(0.0f, positions[3]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("uvRepeat", Vec2(0.0f, positions[2]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: terrainEditorMenuBlendMap
 	positions = VPC::calculateButtonPositions(8, CH);

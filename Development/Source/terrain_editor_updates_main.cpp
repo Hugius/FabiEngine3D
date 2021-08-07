@@ -104,10 +104,6 @@ void TerrainEditor::_updateChoiceMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
 			}
 		}
-
-		// Screens hoverability
-		screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
-		screen->getButton("lighting")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
 	}
 }
 
@@ -132,6 +128,37 @@ void TerrainEditor::_updateTerrainCreating()
 					// If terrain name not existing yet
 					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
 					{
+						// Get the chosen filename
+						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const string targetDirectory = string("game_assets\\textures\\height_maps\\");
+						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "BMP");
+
+						// Check if user chose a filename
+						if (filePath.empty())
+						{
+							_isCreatingTerrain = false;
+							return;
+						}
+						else
+						{
+							// Check if user did not switch directory
+							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+							{
+								const string newFilePath = filePath.substr(rootDirectory.size());
+								_fe3d.misc_clearBitmapCache(newFilePath);
+								_fe3d.terrainEntity_create(newTerrainName, newFilePath);
+								_fe3d.terrainEntity_select(newTerrainName);
+							}
+							else
+							{
+								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								_isCreatingTerrain = false;
+								return;
+							}
+						}
+
+						// Set new terrain
 						_currentTerrainID = newTerrainName;
 						_loadedTerrainIDs.push_back(_currentTerrainID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
@@ -166,15 +193,22 @@ void TerrainEditor::_updateTerrainChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
 
+		// Hide terrain
+		_fe3d.terrainEntity_select("");
+
 		// Check if a terrain name is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Show terrain
+			_fe3d.terrainEntity_select("@" + selectedButtonID);
+
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select terrain
 				_currentTerrainID = "@" + selectedButtonID;
 
-				// Only if going to editor
+				// Check if going to editor
 				if (_isEditingTerrain)
 				{
 					// Go to editor screen
@@ -184,15 +218,6 @@ void TerrainEditor::_updateTerrainChoosing()
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 						"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
-				}
-
-				// Only select the terrain if it has a heightMap
-				if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-				{
-					_fe3d.terrainEntity_select(_currentTerrainID);
-					_fe3d.camera_setPosition(Vec3(0.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f, 0.0f));
-					_fe3d.camera_setPitch(-90.0f);
-					_fe3d.camera_enableThirdPersonView(0.0f, 45.0f, _fe3d.terrainEntity_getSize(_currentTerrainID) * 0.5f);
 				}
 
 				// Miscellaneous

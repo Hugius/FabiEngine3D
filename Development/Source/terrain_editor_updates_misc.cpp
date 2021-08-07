@@ -1,15 +1,17 @@
 #include "terrain_editor.hpp"
 
+using std::max;
+
 void TerrainEditor::_updateCamera()
 {
-	float scrollOffset = static_cast<float>(_fe3d.input_getMouseWheelY());
-	_cameraDistance -= scrollOffset;
-
 	// Check if third person view is enabled
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		// Update distance
-		_fe3d.camera_setThirdPersonDistance(_cameraDistance);
+		// Update distance scrolling
+		auto scrollOffset = _fe3d.input_getMouseWheelY();
+		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
+		cameraDistance = std::max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * SCROLL_MULTIPLIER));
+		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);

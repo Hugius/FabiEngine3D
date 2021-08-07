@@ -6,6 +6,8 @@
 
 #include <filesystem>
 
+using std::filesystem::exists;
+
 vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 {
 	// Declare variables
@@ -25,7 +27,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 	// Load .obj file
 	string path = rootDir + filePath;
 	FILE* file = fopen(path.c_str(), "r");
-	if (!std::filesystem::exists(path) || filePath.empty())
+	if (!exists(path) || filePath.empty())
 	{
 		Logger::throwWarning("Cannot load mesh file: \"" + filePath + "\"!");
 		return {};

@@ -5,6 +5,10 @@
 #include <ratio>
 #include <chrono>
 
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::nanoseconds;
+
 CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
@@ -55,14 +59,14 @@ void CoreEngine::_start()
 	_prepareApplication();
 
 	// Variables
-	auto previous = std::chrono::high_resolution_clock::now();
+	auto previous = high_resolution_clock::now();
 	float lag = 0.0f;
 
 	// Main game-loop
 	while (_isRunning)
 	{
 		// Start measuring time
-		auto current = std::chrono::high_resolution_clock::now();
+		auto current = high_resolution_clock::now();
 
 		if (_fe3d.networkServer_isRunning()) // Process application at full speed
 		{
@@ -107,7 +111,7 @@ void CoreEngine::_start()
 		}
 
 		// Calculate delta time
-		auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
+		auto timeDifference = duration_cast<nanoseconds>(current - previous);
 		_deltaTimeMS = static_cast<float>(timeDifference.count()) / 1000000.0f;
 		previous = current;
 	}

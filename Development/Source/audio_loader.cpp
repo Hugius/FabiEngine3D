@@ -13,6 +13,8 @@ using std::set;
 using std::ios;
 using std::ifstream;
 using std::ofstream;
+using std::future;
+using std::launch;
 
 AudioLoader::~AudioLoader()
 {
@@ -32,7 +34,7 @@ AudioLoader::~AudioLoader()
 void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 {
 	// Temporary values
-	vector<std::future<char*>> threads;
+	vector<future<char*>> threads;
 	vector<bool> chunkStatuses;
 
 	// Remove duplicates
@@ -45,7 +47,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 		// Check if chunk is not already cached
 		if (_chunkCache.find(filePath) == _chunkCache.end())
 		{
-			threads.push_back(std::async(std::launch::async, &AudioLoader::_loadWaveFile, this, filePath));
+			threads.push_back(async(launch::async, &AudioLoader::_loadWaveFile, this, filePath));
 			chunkStatuses.push_back(false);
 		}
 		else

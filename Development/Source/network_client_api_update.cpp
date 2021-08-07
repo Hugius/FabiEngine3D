@@ -7,6 +7,11 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+using std::future_status;
+using std::launch;
+using std::chrono::system_clock;
+using std::get;
+
 void NetworkClientAPI::update()
 {
 	// Must be running
@@ -29,7 +34,7 @@ void NetworkClientAPI::update()
 	if (_isConnectingToServer)
 	{
 		// Check if connection thread is finished
-		if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+		if (_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
 			// Retrieve error code
 			auto errorCode = _connectionThread.get();
@@ -47,7 +52,7 @@ void NetworkClientAPI::update()
 				}
 
 				// Start a thread to wait for TCP messages
-				_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
+				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 			}
 			else if ((errorCode == WSAECONNREFUSED) || (errorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
@@ -85,14 +90,14 @@ void NetworkClientAPI::update()
 	}
 
 	// Receive incoming TCP messages
-	if (_tcpMessageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	if (_tcpMessageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Temporary values
 		const auto& messageResult = _tcpMessageThread.get();
-		const auto& messageStatusCode = std::get<0>(messageResult);
-		const auto& messageErrorCode = std::get<1>(messageResult);
-		const auto& messageTimestamp = std::get<2>(messageResult);
-		const auto& messageContent = std::get<3>(messageResult);
+		const auto& messageStatusCode = get<0>(messageResult);
+		const auto& messageErrorCode = get<1>(messageResult);
+		const auto& messageTimestamp = get<2>(messageResult);
+		const auto& messageContent = get<3>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{
@@ -191,7 +196,7 @@ void NetworkClientAPI::update()
 		}
 
 		// Spawn new TCP message thread
-		_tcpMessageThread = std::async(std::launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
+		_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 	}
 
 	// Receive incoming UDP messages
@@ -199,11 +204,11 @@ void NetworkClientAPI::update()
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
-		const auto& messageStatusCode = std::get<0>(messageResult);
-		const auto& messageErrorCode = std::get<1>(messageResult);
-		const auto& messageContent = std::get<2>(messageResult);
-		const auto& messageIP = std::get<3>(messageResult);
-		const auto& messagePort = std::get<4>(messageResult);
+		const auto& messageStatusCode = get<0>(messageResult);
+		const auto& messageErrorCode = get<1>(messageResult);
+		const auto& messageContent = get<2>(messageResult);
+		const auto& messageIP = get<3>(messageResult);
+		const auto& messagePort = get<4>(messageResult);
 
 		if (messageStatusCode > 0) // Message is received correctly
 		{

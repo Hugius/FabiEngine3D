@@ -25,6 +25,6 @@ void TerrainEditor::unloadTerrainEntities()
 
 const vector<string>& TerrainEditor::getLoadedTerrainIDs()
 {
-	std::sort(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end());
+	sort(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end());
 	return _loadedTerrainIDs;
 }

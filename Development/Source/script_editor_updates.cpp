@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void ScriptEditor::update()
 {
 	_updateGUI();
@@ -38,7 +40,7 @@ void ScriptEditor::_updateGUI()
 				else if (screen->getButton("edit")->isHovered())
 				{
 					auto IDs = _script.getAllScriptFileIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("rename")->isHovered())
@@ -155,7 +157,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Smooth camera movement
-		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
+		_scrollingAcceleration = clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_move(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 

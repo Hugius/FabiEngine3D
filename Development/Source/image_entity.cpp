@@ -4,6 +4,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void ImageEntity::updateModelMatrix()
 {
@@ -31,7 +32,7 @@ void ImageEntity::setDiffuseMapPath(const string& value)
 
 void ImageEntity::setColor(Vec3 value)
 {
-	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void ImageEntity::setMirroredHorizontally(bool value)
@@ -59,7 +60,7 @@ void ImageEntity::setRotation(float value)
 	_rotation = value;
 
 	// Limit rotation
-	_rotation = std::fmodf(_rotation, 360.0f);
+	_rotation = fmodf(_rotation, 360.0f);
 }
 
 void ImageEntity::setSize(Vec2 value)
@@ -77,7 +78,7 @@ void ImageEntity::rotate(float value)
 	_rotation += value;
 
 	// Limit rotation
-	_rotation = std::fmodf(_rotation, 360.0f);
+	_rotation = fmodf(_rotation, 360.0f);
 }
 
 void ImageEntity::scale(Vec2 value)

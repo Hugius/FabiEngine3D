@@ -179,7 +179,7 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				auto status = std::remove(filePath.c_str());
+				auto status = remove(filePath.c_str());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 			else

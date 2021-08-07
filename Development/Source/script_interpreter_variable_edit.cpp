@@ -86,7 +86,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	if (isAccessingListOne)
 	{
 		auto openingBracketFound = find(nameString.begin(), nameString.end(), '[');
-		auto bracketIndex = static_cast<unsigned int>(std::distance(nameString.begin(), openingBracketFound));
+		auto bracketIndex = static_cast<unsigned int>(distance(nameString.begin(), openingBracketFound));
 		nameString = nameString.substr(0, bracketIndex);
 	}
 
@@ -332,7 +332,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		if (isAccessingListTwo)
 		{
 			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
+			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 

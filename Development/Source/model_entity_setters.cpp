@@ -4,6 +4,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void ModelEntity::addPart(const string& ID)
 {
@@ -104,7 +105,7 @@ void ModelEntity::setPosition(Vec3 value, const string& partID)
 
 void ModelEntity::setRotation(Vec3 value, const string& partID)
 {
-	value = Vec3(std::fmodf(value.x, 360.0f), std::fmodf(value.y, 360.0f), std::fmodf(value.z, 360.0f));
+	value = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_baseRotation = value;
@@ -142,7 +143,7 @@ void ModelEntity::setSize(Vec3 value, const string& partID)
 
 void ModelEntity::setColor(Vec3 value, const string& partID)
 {
-	value = Vec3(std::clamp(value.x, 0.0f, 1.0f), std::clamp(value.y, 0.0f, 1.0f), std::clamp(value.z, 0.0f, 1.0f));
+	value = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 
 	if (partID.empty())
 	{
@@ -164,7 +165,7 @@ void ModelEntity::setLevelOfDetailSize(Vec3 value)
 
 void ModelEntity::setInversion(float value, const string& partID)
 {
-	value = std::clamp(value, 0.0f, 1.0f);
+	value = clamp(value, 0.0f, 1.0f);
 
 	if (partID.empty())
 	{

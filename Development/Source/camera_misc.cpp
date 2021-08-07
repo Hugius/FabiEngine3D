@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void Camera::moveFollowX(float value)
 { 
 	_position += (_right * value);
@@ -101,13 +103,13 @@ void Camera::setMouseSensitivity(float speed)
 void Camera::setYaw(float value)
 {
 	_yaw = value;
-	_yaw = std::fmodf(_yaw, 360.0f);
+	_yaw = fmodf(_yaw, 360.0f);
 }
 
 void Camera::setPitch(float value)
 {
 	_pitch = value;
-	_pitch = std::clamp(_pitch, -89.0f, 89.0f);
+	_pitch = clamp(_pitch, -89.0f, 89.0f);
 }
 
 void Camera::setNearZ(float value)

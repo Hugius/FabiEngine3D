@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void RenderBus::setMainSkyReflectionCubeMap(TextureID value)
 {
@@ -116,7 +117,7 @@ void RenderBus::setCameraFront(Vec3 value)
 
 void RenderBus::setAmbientLightColor(Vec3 value)
 {
-	_ambientLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_ambientLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setDirectionalLightPosition(Vec3 value)
@@ -126,12 +127,12 @@ void RenderBus::setDirectionalLightPosition(Vec3 value)
 
 void RenderBus::setDirectionalLightColor(Vec3 value)
 {
-	_directionalLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_directionalLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setSpotLightColor(Vec3 value)
 {
-	_spotLightColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_spotLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setShadowEyePosition(Vec3 value)
@@ -146,7 +147,7 @@ void RenderBus::setShadowAreaCenter(Vec3 value)
 
 void RenderBus::setFogColor(Vec3 value)
 {
-	_fogColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_fogColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setFlareSourcePosition(Vec3 value)
@@ -156,12 +157,12 @@ void RenderBus::setFlareSourcePosition(Vec3 value)
 
 void RenderBus::setMainSkyColor(Vec3 value)
 {
-	_mainSkyColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_mainSkyColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setMixSkyColor(Vec3 value)
 {
-	_mixSkyColor = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_mixSkyColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void RenderBus::setSceneReflectionHeight(float value)
@@ -206,7 +207,7 @@ void RenderBus::setMotionBlurStrength(float value)
 
 void RenderBus::setMotionBlurMixValue(float value)
 {
-	_motionBlurMixValue = std::clamp(value, 0.0f, 1.0f);
+	_motionBlurMixValue = clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setMainSkyLightness(float value)
@@ -221,12 +222,12 @@ void RenderBus::setMixSkyLightness(float value)
 
 void RenderBus::setSkyMixValue(float value)
 {
-	_skyMixValue = std::clamp(value, 0.0f, 1.0f);
+	_skyMixValue = clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setMaxSpotLightAngle(float value)
 {
-	_maxSpotLightAngle = std::fmodf(value, 360.0f);
+	_maxSpotLightAngle = fmodf(value, 360.0f);
 }
 
 void RenderBus::setMaxSpotLightDistance(float value)
@@ -261,7 +262,7 @@ void RenderBus::setFogMaxDistance(float value)
 
 void RenderBus::setFogThickness(float value)
 {
-	_fogThickness = std::clamp(value, 0.0f, 1.0f);
+	_fogThickness = clamp(value, 0.0f, 1.0f);
 }
 
 void RenderBus::setBloomIntensity(float value)

@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -154,7 +156,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 			// Get cursor position X
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:cursor_get_position_y")
@@ -170,7 +172,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 			// Get cursor position Y
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:window_get_width")

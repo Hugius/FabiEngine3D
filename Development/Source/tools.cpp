@@ -4,6 +4,13 @@
 #include <sstream>
 #include <filesystem>
 
+using std::uniform_int_distribution;
+using std::uniform_real_distribution;
+using std::filesystem::absolute;
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
+using std::chrono::system_clock;
+
 const string Tools::getRootDirectory()
 {
 	// Temporary values
@@ -17,7 +24,7 @@ const string Tools::getRootDirectory()
 	string rootDir = buffer;
 
 	// Convert to absolute path if it's relative
-	rootDir = std::filesystem::absolute(rootDir).string();
+	rootDir = absolute(rootDir).string();
 
 	// Cut to engine root directory
 	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
@@ -28,17 +35,17 @@ const string Tools::getRootDirectory()
 
 const int Tools::getRandomInteger(int min, int max)
 {
-	std::uniform_int_distribution<int> dist(min, max);
+	uniform_int_distribution<int> dist(min, max);
 	return dist(_generator);
 }
 
 const float Tools::getRandomFloat(float min, float max)
 {	
-	std::uniform_real_distribution<float> dist(min, max);
+	uniform_real_distribution<float> dist(min, max);
 	return dist(_generator);
 }
 
 const long long Tools::getTimeSinceEpochMS()
 {
-	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
 }

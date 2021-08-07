@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void SceneEditor::_updateLightingMenu()
 {
 	if (_isEditorLoaded)
@@ -80,19 +82,19 @@ void SceneEditor::_updateAmbientLightingMenu()
 			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
 			{
-				ambientLightingColor.r = std::clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
+				ambientLightingColor.r = clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color G value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
 			{
-				ambientLightingColor.g = std::clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
+				ambientLightingColor.g = clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color B value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
 			{
-				ambientLightingColor.b = std::clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
+				ambientLightingColor.b = clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Ambient intensity value conversion
@@ -176,19 +178,19 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
 			{
-				directionalLightingColor.r = std::clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
+				directionalLightingColor.r = clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color G value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
 			{
-				directionalLightingColor.g = std::clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
+				directionalLightingColor.g = clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color B value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
 			{
-				directionalLightingColor.b = std::clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
+				directionalLightingColor.b = clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Update position values

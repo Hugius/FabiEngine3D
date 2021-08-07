@@ -4,6 +4,10 @@
 #include <algorithm>
 #include <filesystem>
 
+using std::clamp;
+using std::filesystem::directory_iterator;
+using std::filesystem::remove_all;
+
 bool SceneEditor::isLoaded()
 {
 	return _isEditorLoaded;
@@ -189,7 +193,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 	if (_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
 		// Get all project IDs
-		for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
+		for (const auto& entry : directory_iterator(directoryPath))
 		{
 			string sceneID = string(entry.path().u8string());
 			sceneID.erase(0, directoryPath.size());
@@ -213,7 +217,7 @@ void SceneEditor::_deleteSceneFile(const string& sceneID)
 	// Check if scene file is still existing
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
-		std::filesystem::remove_all(filePath);
+		remove_all(filePath);
 	}
 	else
 	{
@@ -257,7 +261,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	}
 
 	// Clamp value range
-	value = std::clamp(value, minimum, maximum);
+	value = clamp(value, minimum, maximum);
 
 	// Writefield post-update
 	if (!writefield->isActive())

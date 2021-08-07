@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void SkyEditor::_updateOptionsMenu()
 {
@@ -55,19 +56,19 @@ void SkyEditor::_updateOptionsMenu()
 		// Color R values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", skyColor.r))
 		{
-			skyColor.r = std::clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
+			skyColor.r = clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color G values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", skyColor.g))
 		{
-			skyColor.g = std::clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
+			skyColor.g = clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color B values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", skyColor.b))
 		{
-			skyColor.b = std::clamp(skyColor.b / 255.0f, 0.0f, 1.0f);
+			skyColor.b = clamp(skyColor.b / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Dynamically update sky options

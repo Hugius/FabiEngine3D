@@ -8,6 +8,7 @@
 using std::ifstream;
 using std::ofstream;
 using std::istringstream;
+using std::filesystem::directory_iterator;
 
 bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
@@ -35,7 +36,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	}
 
 	// Retrieve all filenames in the scripts directory
-	for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
+	for (const auto& entry : directory_iterator(directoryPath))
 	{
 		// Extract filename
 		string fileName = string(entry.path().u8string());

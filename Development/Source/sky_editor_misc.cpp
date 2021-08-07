@@ -25,6 +25,6 @@ void SkyEditor::unloadSkyEntities()
 
 const vector<string>& SkyEditor::getLoadedSkyIDs()
 {
-	std::sort(_loadedSkyIDs.begin(), _loadedSkyIDs.end());
+	sort(_loadedSkyIDs.begin(), _loadedSkyIDs.end());
 	return _loadedSkyIDs;
 }

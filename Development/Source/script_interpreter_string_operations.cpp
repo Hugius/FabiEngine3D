@@ -211,7 +211,7 @@ int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bo
 	}
 
 	// Check if brackets are in the right place
-	auto openingBracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
+	auto openingBracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
 	if (openingBracketIndex == 0)
 	{
 		return -1;

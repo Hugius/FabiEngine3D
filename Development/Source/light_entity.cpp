@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void LightEntity::setPosition(Vec3 value)
 {
@@ -21,7 +22,7 @@ void LightEntity::setRadius(Vec3 value)
 
 void LightEntity::setColor(Vec3 value)
 {
-	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void LightEntity::setIntensity(float value)

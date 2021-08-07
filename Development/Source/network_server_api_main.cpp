@@ -6,6 +6,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+using std::launch;
+
 NetworkServerAPI::NetworkServerAPI()
 	:
 	_connectionSocketID(INVALID_SOCKET),
@@ -135,7 +137,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	}
 
 	// Spawn a thread for accepting incoming connection requests
-	_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
+	_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 
 	// Address infos not needed anymore
 	freeaddrinfo(tcpAddressInfo);

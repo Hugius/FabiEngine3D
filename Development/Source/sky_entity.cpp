@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
@@ -25,7 +26,7 @@ void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
 
 void SkyEntity::setColor(Vec3 value)
 {
-	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void SkyEntity::setCubeMap(TextureID value)

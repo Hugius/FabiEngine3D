@@ -4,6 +4,8 @@
 
 #include <sstream>
 
+using std::istringstream;
+
 ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)
 	:
 	_fe3d(fe3d),
@@ -119,7 +121,7 @@ void ScriptInterpreter::load()
 		{
 			// Remove trailing whitespace of comments
 			auto scriptLineText = scriptFile->getLineText(lineIndex);
-			auto scriptLineTextStream = std::istringstream(scriptLineText);
+			auto scriptLineTextStream = istringstream(scriptLineText);
 			string noWhiteSpace;
 			scriptLineTextStream >> noWhiteSpace;
 

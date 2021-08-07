@@ -32,7 +32,7 @@ void SceneEditor::_updateBillboardMenu()
 
 					// Add the name of every placed billboard
 					auto IDs = _fe3d.billboardEntity_getAllIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					for (auto& billboardID : IDs)
 					{
 						// Check if billboard is not a preview

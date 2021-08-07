@@ -225,7 +225,7 @@ void WaterEditor::_updateWaterDeleting()
 			_fe3d.waterEntity_delete(_currentWaterID);
 
 			// Delete from name record
-			_loadedWaterIDs.erase(std::remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
+			_loadedWaterIDs.erase(remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
 			_isDeletingWater = false;
 			_currentWaterID = "";
 		}

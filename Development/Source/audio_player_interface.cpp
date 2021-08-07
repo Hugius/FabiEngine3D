@@ -2,6 +2,8 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
+using std::clamp;
+
 void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 {
 	if (_isSoundsEnabled)
@@ -249,7 +251,7 @@ void AudioPlayer::setMusicVolume(float volume)
 {
 	if (_isMusicEnabled)
 	{
-		_musicVolume = std::clamp(volume, 0.0f, 1.0f);
+		_musicVolume = clamp(volume, 0.0f, 1.0f);
 	}
 }
 

@@ -14,7 +14,7 @@ bool AudioEditor::isLoaded()
 
 const vector<string>& AudioEditor::getLoadedAudioIDs()
 {
-	std::sort(_loadedAudioIDs.begin(), _loadedAudioIDs.end());
+	sort(_loadedAudioIDs.begin(), _loadedAudioIDs.end());
 	return _loadedAudioIDs;
 }
 

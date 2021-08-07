@@ -4,6 +4,10 @@
 #include <filesystem>
 #include <fstream>
 
+using std::ofstream;
+using std::filesystem::directory_iterator;
+using std::filesystem::remove_all;
+
 bool TopViewportController::isScriptStarted()
 {
 	if (_currentProjectID == "")
@@ -85,21 +89,21 @@ void TopViewportController::_updateProjectCreating()
 				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scripts");
 
 				// Create new empty project files
-				auto file = std::ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
+				auto file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\audio.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\audio.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\billboard.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\billboard.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\model.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\model.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\sky.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\sky.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\terrain.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\terrain.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\data\\water.fe3d"));
 				file.close();
-				file = std::ofstream(string(newProjectDirectoryPath + "\\settings.fe3d"));
+				file = ofstream(string(newProjectDirectoryPath + "\\settings.fe3d"));
 				file.close();
 
 				// Load current project
@@ -130,7 +134,7 @@ void TopViewportController::_prepareProjectLoading()
 	{
 		// Get all project names
 		vector<string> projectIDs;
-		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		for (const auto& entry : directory_iterator(userDirectoryPath))
 		{
 			// Extract project name
 			string projectPath = string(entry.path().u8string());
@@ -243,7 +247,7 @@ void TopViewportController::_updateProjectDeleting()
 			if (_fe3d.misc_isDirectoryExisting(directoryPath))
 			{
 				// Deleting project directory
-				std::filesystem::remove_all(directoryPath);
+				remove_all(directoryPath);
 
 				// Logging
 				Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");

@@ -8,6 +8,10 @@
 #include <ws2tcpip.h>
 
 using std::to_string;
+using std::get;
+using std::future_status;
+using std::launch;
+using std::chrono::system_clock;
 
 void NetworkServerAPI::update()
 {
@@ -40,7 +44,7 @@ void NetworkServerAPI::update()
 	_pendingMessages.clear();
 
 	// Handle new client connections
-	if (_connectionThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+	if (_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 	{
 		// Retrieve new client socket ID
 		auto clientSocketID = _connectionThread.get();
@@ -53,7 +57,7 @@ void NetworkServerAPI::update()
 		_acceptClient(clientSocketID);
 
 		// Spawn connection thread again for next possible client
-		_connectionThread = std::async(std::launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
+		_connectionThread = async(launch::async, &NetworkServerAPI::_waitForClientConnection, this, _connectionSocketID);
 	}
 
 	// Receive incoming TCP messages
@@ -69,14 +73,14 @@ BEGIN:
 		auto& messageThread = _tcpMessageThreads[i];
 
 		// Check if the client sent any message
-		if (messageThread.wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+		if (messageThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
 			// Message data
 			const auto& messageResult = messageThread.get();
-			const auto& messageStatusCode = std::get<0>(messageResult);
-			const auto& messageErrorCode = std::get<1>(messageResult);
-			const auto& messageTimestamp = std::get<2>(messageResult);
-			const auto& messageContent = std::get<3>(messageResult);
+			const auto& messageStatusCode = get<0>(messageResult);
+			const auto& messageErrorCode = get<1>(messageResult);
+			const auto& messageTimestamp = get<2>(messageResult);
+			const auto& messageContent = get<3>(messageResult);
 
 			if (messageStatusCode > 0) // Message is received correctly
 			{
@@ -182,7 +186,7 @@ BEGIN:
 			}
 
 			// Spawn new message thread
-			messageThread = std::async(std::launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID);
+			messageThread = async(launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID);
 		}
 	}
 	
@@ -191,11 +195,11 @@ BEGIN:
 	{
 		// Message data
 		const auto& messageResult = _receiveUdpMessage(_udpMessageSocketID);
-		const auto& messageStatusCode = std::get<0>(messageResult);
-		const auto& messageErrorCode = std::get<1>(messageResult);
-		const auto& messageContent = std::get<2>(messageResult);
-		const auto& messageIP = std::get<3>(messageResult);
-		const auto& messagePort = std::get<4>(messageResult);
+		const auto& messageStatusCode = get<0>(messageResult);
+		const auto& messageErrorCode = get<1>(messageResult);
+		const auto& messageContent = get<2>(messageResult);
+		const auto& messageIP = get<3>(messageResult);
+		const auto& messagePort = get<4>(messageResult);
 
 		// Message is received correctly
 		if (messageStatusCode > 0)

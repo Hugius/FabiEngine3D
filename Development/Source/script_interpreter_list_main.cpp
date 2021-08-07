@@ -262,7 +262,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					if (isAccessingList)
 					{
 						auto openingBracketFound = find(currentValueString.begin(), currentValueString.end(), '[');
-						auto bracketIndex = static_cast<unsigned int>(std::distance(currentValueString.begin(), openingBracketFound));
+						auto bracketIndex = static_cast<unsigned int>(distance(currentValueString.begin(), openingBracketFound));
 						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 

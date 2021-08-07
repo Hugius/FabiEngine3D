@@ -10,7 +10,7 @@ void TerrainEditor::_updateCamera()
 		// Update distance scrolling
 		auto scrollOffset = _fe3d.input_getMouseWheelY();
 		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
-		cameraDistance = std::max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * SCROLL_MULTIPLIER));
+		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * SCROLL_MULTIPLIER));
 		_fe3d.camera_setThirdPersonDistance(cameraDistance);
 
 		// Hide cursor

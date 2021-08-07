@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 Sound::Sound(const string& ID, const string& filePath, Mix_Chunk* dataPointer)
 	:
 	_ID(ID),
@@ -53,14 +55,14 @@ void Sound::move(Vec3 value)
 
 void Sound::setVolume(float value)
 {
-	_volume = std::clamp(value, 0.0f, 1.0f);
+	_volume = clamp(value, 0.0f, 1.0f);
 }
 
 void Sound::setMaxVolume(float value)
 {
 	if (_is3D)
 	{
-		_maxVolume = std::clamp(value, 0.0f, 1.0f);
+		_maxVolume = clamp(value, 0.0f, 1.0f);
 	}
 }
 

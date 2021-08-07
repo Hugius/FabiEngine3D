@@ -7,6 +7,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+using std::launch;
+
 bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& content, bool isReserved)
 {
 	// Must be running
@@ -124,7 +126,7 @@ void NetworkServerAPI::_acceptClient(SOCKET clientSocketID)
 	_clientTcpMessageBuilds.push_back("");
 
 	// Spawn thread for receiving TCP messages
-	_tcpMessageThreads.push_back(std::async(std::launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
+	_tcpMessageThreads.push_back(async(launch::async, &NetworkServerAPI::_waitForTcpMessage, this, clientSocketID));
 }
 
 void NetworkServerAPI::_disconnectClient(SOCKET clientSocketID)

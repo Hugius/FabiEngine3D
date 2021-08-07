@@ -40,7 +40,7 @@ void ModelEditor::_updateAabbMenu()
 				{
 					name = name.substr(string(_currentModelID + "@").size());
 				}
-				std::sort(aabbNames.begin(), aabbNames.end());
+				sort(aabbNames.begin(), aabbNames.end());
 
 				// Show choicelist
 				_gui.getGlobalScreen()->createChoiceForm("aabbList", "Select AABB", Vec2(-0.5f, 0.1f), aabbNames);

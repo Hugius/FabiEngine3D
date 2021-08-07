@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void WaterEntity::setPosition(Vec3 value)
 {
@@ -11,7 +12,7 @@ void WaterEntity::setPosition(Vec3 value)
 
 void WaterEntity::setColor(Vec3 value)
 {
-	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void WaterEntity::setDudvMap(TextureID value)

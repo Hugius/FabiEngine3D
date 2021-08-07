@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void TerrainEditor::_updateLightingMenu()
 {
 	// Temporary values
@@ -149,7 +151,7 @@ void TerrainEditor::_updateLightingMenu()
 		// Check if specular factor confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, specularFactor);
 		}
 

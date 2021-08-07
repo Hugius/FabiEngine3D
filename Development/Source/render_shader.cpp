@@ -8,6 +8,7 @@
 
 using std::ifstream;
 using std::ofstream;
+using std::filesystem::exists;
 
 RenderShader::RenderShader(const string& vertexFileName, const string& fragmentFileName)
 {
@@ -26,13 +27,13 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFileName;
 
 	// Check if vertex shader file exists
-	if (!std::filesystem::exists(rootDir + vertexPath))
+	if (!exists(rootDir + vertexPath))
 	{
 		Logger::throwError("Cannot load shader file: \"" + vertexPath + "\"!");
 	}
 
 	// Check if fragment shader file exists
-	if (!std::filesystem::exists(rootDir + fragmentPath))
+	if (!exists(rootDir + fragmentPath))
 	{
 		Logger::throwError("Cannot load shader file: \"" + fragmentPath + "\"!");
 	}
@@ -42,7 +43,7 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 	fragmentFile.open(rootDir + fragmentPath);
 
 	// Extract shader code
-	std::ostringstream vShaderStream, fShaderStream;
+	ostringstream vShaderStream, fShaderStream;
 	vShaderStream << vertexFile.rdbuf();
 	fShaderStream << fragmentFile.rdbuf();
 	vertexFile.close();

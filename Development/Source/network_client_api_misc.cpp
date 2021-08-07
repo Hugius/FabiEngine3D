@@ -7,6 +7,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+using std::launch;
+
 bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, bool mustBeAccepted)
 {
 	// Must be running
@@ -158,7 +160,7 @@ void NetworkClientAPI::_setupTCP()
 	}
 
 	// Spawn a thread for connecting to the server
-	_connectionThread = std::async(std::launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
+	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
 }
 
 void NetworkClientAPI::_setupUDP(const string& tcpPort)

@@ -185,7 +185,7 @@ bool ModelEditor::isLoaded()
 
 const vector<string>& ModelEditor::getLoadedModelIDs()
 {
-	std::sort(_loadedModelIDs.begin(), _loadedModelIDs.end());
+	sort(_loadedModelIDs.begin(), _loadedModelIDs.end());
 	return _loadedModelIDs;
 }
 

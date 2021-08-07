@@ -4,6 +4,7 @@
 #include "logger.hpp"
 
 using std::max;
+using std::clamp;
 
 void BillboardEntity::updateModelMatrix()
 {
@@ -64,9 +65,9 @@ void BillboardEntity::setInitialRotation(Vec3 value)
 	_initialRotation = value;
 
 	// Limit rotation
-	_initialRotation.x = std::fmodf(_initialRotation.x, 360.0f);
-	_initialRotation.y = std::fmodf(_initialRotation.y, 360.0f);
-	_initialRotation.z = std::fmodf(_initialRotation.z, 360.0f);
+	_initialRotation.x = fmodf(_initialRotation.x, 360.0f);
+	_initialRotation.y = fmodf(_initialRotation.y, 360.0f);
+	_initialRotation.z = fmodf(_initialRotation.z, 360.0f);
 }
 
 void BillboardEntity::setRotation(Vec3 value)
@@ -74,9 +75,9 @@ void BillboardEntity::setRotation(Vec3 value)
 	_rotation = value;
 
 	// Limit rotation
-	_rotation.x = std::fmodf(_rotation.x, 360.0f);
-	_rotation.y = std::fmodf(_rotation.y, 360.0f);
-	_rotation.z = std::fmodf(_rotation.z, 360.0f);
+	_rotation.x = fmodf(_rotation.x, 360.0f);
+	_rotation.y = fmodf(_rotation.y, 360.0f);
+	_rotation.z = fmodf(_rotation.z, 360.0f);
 }
 
 void BillboardEntity::setSize(Vec3 value)
@@ -86,7 +87,7 @@ void BillboardEntity::setSize(Vec3 value)
 
 void BillboardEntity::setColor(Vec3 value)
 {
-	_color = Vec3(std::clamp(value.r, 0.0f, 1.0f), std::clamp(value.g, 0.0f, 1.0f), std::clamp(value.b, 0.0f, 1.0f));
+	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
 void BillboardEntity::move(Vec3 value)
@@ -99,9 +100,9 @@ void BillboardEntity::rotate(Vec3 value)
 	_rotation += value;
 
 	// Limit rotation
-	_rotation.x = std::fmodf(_rotation.x, 360.0f);
-	_rotation.y = std::fmodf(_rotation.y, 360.0f);
-	_rotation.z = std::fmodf(_rotation.z, 360.0f);
+	_rotation.x = fmodf(_rotation.x, 360.0f);
+	_rotation.y = fmodf(_rotation.y, 360.0f);
+	_rotation.z = fmodf(_rotation.z, 360.0f);
 }
 
 void BillboardEntity::scale(Vec3 value)
@@ -264,7 +265,7 @@ void BillboardEntity::setLightness(float value)
 
 void BillboardEntity::setInversion(float value)
 {
-	_inversion = std::clamp(value, 0.0f, 1.0f);
+	_inversion = clamp(value, 0.0f, 1.0f);
 }
 
 void BillboardEntity::setAlpha(float value)

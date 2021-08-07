@@ -165,7 +165,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		if (isAccessingList)
 		{
 			auto openingBracketFound = find(valueString.begin(), valueString.end(), '[');
-			auto bracketIndex = static_cast<unsigned int>(std::distance(valueString.begin(), openingBracketFound));
+			auto bracketIndex = static_cast<unsigned int>(distance(valueString.begin(), openingBracketFound));
 			valueString = valueString.substr(0, bracketIndex);
 		}
 

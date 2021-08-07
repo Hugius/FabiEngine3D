@@ -252,7 +252,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			_fe3d.terrainEntity_delete(_currentTerrainID);
 
 			// Delete from name record
-			_loadedTerrainIDs.erase(std::remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
+			_loadedTerrainIDs.erase(remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
 			_isDeletingTerrain = false;
 			_currentTerrainID = "";
 		}

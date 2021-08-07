@@ -8,6 +8,7 @@ using std::endl;
 using std::ios;
 using std::ifstream;
 using std::ofstream;
+using std::filesystem::remove_all;
 
 bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
@@ -63,7 +64,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			// Check if directory exists
 			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
 			{
-				std::filesystem::remove_all(newDirectoryPath);
+				remove_all(newDirectoryPath);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 			else
@@ -224,7 +225,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemFunction(const string& functionNam
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				auto status = std::remove(filePath.c_str());
+				auto status = remove(filePath.c_str());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 			else

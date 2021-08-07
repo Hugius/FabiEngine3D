@@ -132,7 +132,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 				if (isAccessingList)
 				{
 					auto openingBracketFound = find(elementString.begin(), elementString.end(), '[');
-					auto bracketIndex = static_cast<unsigned int>(std::distance(elementString.begin(), openingBracketFound));
+					auto bracketIndex = static_cast<unsigned int>(distance(elementString.begin(), openingBracketFound));
 					elementString = elementString.substr(0, bracketIndex);
 				}
 

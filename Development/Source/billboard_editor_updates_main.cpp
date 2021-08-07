@@ -205,7 +205,7 @@ void BillboardEditor::_updateBillboardDeleting()
 
 			// Delete billboard
 			_fe3d.billboardEntity_delete(_currentBillboardID);
-			_loadedBillboardIDs.erase(std::remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
+			_loadedBillboardIDs.erase(remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
 			_currentBillboardID = "";
 
 			// Miscellaneous

@@ -184,7 +184,7 @@ void AudioEditor::_updateAudioDeleting()
 			}
 
 			// Miscellaneous
-			_loadedAudioIDs.erase(std::remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
+			_loadedAudioIDs.erase(remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
 			_currentAudioID = "";
 			_isDeletingAudio = false;
 		}

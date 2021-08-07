@@ -14,6 +14,6 @@ bool BillboardEditor::isLoaded()
 
 const vector<string>& BillboardEditor::getLoadedBillboardIDs()
 {
-	std::sort(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end());
+	sort(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end());
 	return _loadedBillboardIDs;
 }

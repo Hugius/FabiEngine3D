@@ -25,6 +25,6 @@ void WaterEditor::unloadWaterEntities()
 
 const vector<string>& WaterEditor::getLoadedWaterIDs()
 {
-	std::sort(_loadedWaterIDs.begin(), _loadedWaterIDs.end());
+	sort(_loadedWaterIDs.begin(), _loadedWaterIDs.end());
 	return _loadedWaterIDs;
 }

@@ -38,7 +38,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 	int tempValue = static_cast<int>(value); // Dereference
 	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<unsigned int>(std::stoi(valueString)) : value; // Apply to value
+	value = result ? static_cast<unsigned int>(stoi(valueString)) : value; // Apply to value
 	return result; // Return
 }
 
@@ -54,7 +54,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<
 	int tempValue = value; // Dereference
 	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? std::stoi(valueString) : value; // Apply to value
+	value = result ? stoi(valueString) : value; // Apply to value
 	return result; // Return
 }
 
@@ -70,7 +70,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vecto
 	int tempValue = static_cast<int>(value); // Dereference
 	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<float>(std::stoi(valueString)) : value; // Apply to value
+	value = result ? static_cast<float>(stoi(valueString)) : value; // Apply to value
 	return result; // Return
 }
 
@@ -86,7 +86,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vect
 	int tempValue = static_cast<int>(value); // Dereference
 	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
-	value = result ? static_cast<double>(std::stoi(valueString)) : value; // Apply to value
+	value = result ? static_cast<double>(stoi(valueString)) : value; // Apply to value
 	return result; // Return
 }
 

@@ -86,14 +86,14 @@ void SceneEditor::_updateMainMenu()
 				{
 					_isChoosingScene = true;
 					auto IDs = _loadSceneIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
 					_isDeletingScene = true;
 					auto IDs = _loadSceneIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
 				}
 			}

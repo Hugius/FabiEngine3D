@@ -10,6 +10,7 @@
 using std::ifstream;
 using std::ofstream;
 using std::istringstream;
+using std::clamp;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
@@ -104,31 +105,31 @@ void SettingsEditor::update()
 			// Update forms
 			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
 			{
-				_fe3d.gfx_setAnisotropicFilteringQuality(std::clamp(anisotropicQuality,
+				_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicQuality,
 					Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
 					Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
-				_fe3d.gfx_setShadowQuality(std::clamp(shadowQuality,
+				_fe3d.gfx_setShadowQuality(clamp(shadowQuality,
 					Config::MIN_SHADOW_QUALITY,
 					Config::MAX_SHADOW_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
-				_fe3d.gfx_setReflectionQuality(std::clamp(reflectionQuality,
+				_fe3d.gfx_setReflectionQuality(clamp(reflectionQuality,
 					Config::MIN_REFLECTION_QUALITY,
 					Config::MAX_REFLECTION_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
-				_fe3d.gfx_setRefractionQuality(std::clamp(refractionQuality,
+				_fe3d.gfx_setRefractionQuality(clamp(refractionQuality,
 					Config::MIN_REFRACTION_QUALITY,
 					Config::MAX_REFRACTION_QUALITY));
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 			{
-				_fe3d.misc_setMaxAudioChannels(std::clamp(maxAudioChannels,
+				_fe3d.misc_setMaxAudioChannels(clamp(maxAudioChannels,
 					Config::MIN_AUDIO_CHANNELS,
 					Config::MAX_AUDIO_CHANNELS));
 			}

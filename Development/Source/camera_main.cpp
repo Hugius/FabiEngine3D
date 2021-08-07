@@ -4,6 +4,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 Camera::Camera(RenderBus& renderBus, Window& window)
 	:
@@ -97,20 +98,20 @@ void Camera::update(Ivec2 lastCursorPosition)
 
 		// Update yaw
 		_firstPersonYawAcceleration += xOffset;
-		_firstPersonYawAcceleration = std::clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_firstPersonYawAcceleration = clamp(_firstPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonYaw += _firstPersonYawAcceleration;
 		_firstPersonYawAcceleration *= 0.75f;
 
 		// Update pitch
 		_firstPersonPitchAcceleration += yOffset;
-		_firstPersonPitchAcceleration = std::clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_firstPersonPitchAcceleration = clamp(_firstPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_firstPersonPitch += _firstPersonPitchAcceleration;
-		_firstPersonPitch = std::clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch);
+		_firstPersonPitch = clamp(_firstPersonPitch, _minFirstPersonPitch, _maxFirstPersonPitch);
 		_firstPersonPitchAcceleration *= 0.75f;
 
 		// Limit view angles
-		_firstPersonYaw = std::fmodf(_firstPersonYaw, 360.0f);
-		_firstPersonPitch = std::clamp(_firstPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+		_firstPersonYaw = fmodf(_firstPersonYaw, 360.0f);
+		_firstPersonPitch = clamp(_firstPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
 		// Set view angles
 		_yaw = _firstPersonYaw;
@@ -141,21 +142,21 @@ void Camera::update(Ivec2 lastCursorPosition)
 
 		// Update yaw
 		_thirdPersonYawAcceleration += xOffset;
-		_thirdPersonYawAcceleration = std::clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_thirdPersonYawAcceleration = clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
-		_thirdPersonYaw = std::fmodf(_thirdPersonYaw, 360.0f);
+		_thirdPersonYaw = fmodf(_thirdPersonYaw, 360.0f);
 		_thirdPersonYawAcceleration *= 0.75f;
 		
 		// Update pitch
 		_thirdPersonPitchAcceleration += yOffset;
-		_thirdPersonPitchAcceleration = std::clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
+		_thirdPersonPitchAcceleration = clamp(_thirdPersonPitchAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonPitch -= _thirdPersonPitchAcceleration;
-		_thirdPersonPitch = std::clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch);
-		_thirdPersonPitch = std::clamp(_thirdPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+		_thirdPersonPitch = clamp(_thirdPersonPitch, _minThirdPersonPitch, _maxThirdPersonPitch);
+		_thirdPersonPitch = clamp(_thirdPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 		_thirdPersonPitchAcceleration *= 0.75f;
 
 		// Update distance
-		_thirdPersonDistance = std::clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
+		_thirdPersonDistance = clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
 
 		// Calculate position multipliers
 		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * sin(Math::degreesToRadians(_thirdPersonYaw));
@@ -184,8 +185,8 @@ void Camera::update(Ivec2 lastCursorPosition)
 	}
 
 	// Limit view angles
-	_yaw = std::fmodf(_yaw, 360.0f);
-	_pitch = std::clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
+	_yaw = fmodf(_yaw, 360.0f);
+	_pitch = clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
 	// Update matrices
 	updateMatrices();

@@ -5,6 +5,7 @@
 #include <ctime>
 
 using std::string;
+using std::mt19937;
 
 class Tools final
 {
@@ -17,5 +18,5 @@ public:
 	static const long long getTimeSinceEpochMS();
 
 private:
-	static inline std::mt19937 _generator = std::mt19937(static_cast<unsigned int>(time(nullptr)));
+	static inline mt19937 _generator = mt19937(static_cast<unsigned int>(time(nullptr)));
 };

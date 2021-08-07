@@ -302,7 +302,7 @@ void ModelEditor::_updateModelDeleting()
 			}
 
 			// Delete from name record
-			_loadedModelIDs.erase(std::remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
+			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}

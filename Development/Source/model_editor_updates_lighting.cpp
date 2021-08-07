@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void ModelEditor::_updateLightingMenu()
 {
 	// Temporary values
@@ -69,7 +71,7 @@ void ModelEditor::_updateLightingMenu()
 		// Update specular factor
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
 

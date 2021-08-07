@@ -52,7 +52,7 @@ private:
 		}
 		else // Found
 		{
-			return static_cast<unsigned int>(std::distance(list.begin(), it));
+			return static_cast<unsigned int>(distance(list.begin(), it));
 		}
 	}
 	inline bool _isInVector(vector<InputType>& list, InputType element)

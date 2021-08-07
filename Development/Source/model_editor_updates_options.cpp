@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 void ModelEditor::_updateOptionsMenu()
 {
 	// Temporary values
@@ -75,9 +77,9 @@ void ModelEditor::_updateOptionsMenu()
 		_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
 		_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
 		_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
-		newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-		newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-		newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
+		newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
+		newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
+		newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
 		_fe3d.modelEntity_setColor(_currentModelID, newColor);
 
 		// Setting model UV repeat

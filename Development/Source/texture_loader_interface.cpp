@@ -6,6 +6,10 @@
 #include <set>
 
 using std::set;
+using std::future;
+using std::launch;
+using std::future_status;
+using std::chrono::system_clock;
 
 TextureLoader::TextureLoader(RenderBus& renderBus)
 	:
@@ -17,7 +21,7 @@ TextureLoader::TextureLoader(RenderBus& renderBus)
 void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic)
 {
 	// Temporary values
-	vector<std::future<SDL_Surface*>> threads;
+	vector<future<SDL_Surface*>> threads;
 	vector<bool> cacheStatuses;
 	unsigned int finishedThreadCount = 0;
 
@@ -31,7 +35,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 		// Check if texture is not already cached
 		if (_textureCache2D.find(filePath) == _textureCache2D.end())
 		{
-			threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePath));
+			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
 			cacheStatuses.push_back(false);
 		}
 		else
@@ -51,7 +55,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 			if (!cacheStatuses[i])
 			{
 				// Check if thread is finished
-				if (threads[i].wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
+				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
 					// Retrieve the SDL image
 					auto loadedImage = threads[i].get();
@@ -89,7 +93,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList)
 {
 	// Temporary values
-	vector<vector<std::future<SDL_Surface*>>> threads;
+	vector<vector<future<SDL_Surface*>>> threads;
 	vector<bool> cacheStatuses;
 
 	// Start all loading threads
@@ -103,7 +107,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 			threads.push_back({});
 			for (const auto& filePath : filePaths)
 			{
-				threads.back().push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePath));
+				threads.back().push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
 			}
 		}
 		else
@@ -204,13 +208,13 @@ BEGIN:
 	if (it == _textureCache3D.end()) // Not in map (yet)
 	{
 		// Temporary values
-		vector<std::future<SDL_Surface*>> threads;
+		vector<future<SDL_Surface*>> threads;
 		array<SDL_Surface*, 6> loadedImages = { };
 
 		// Start all loading threads
 		for (size_t i = 0; i < filePaths.size(); i++)
 		{
-			threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
+			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
 		}
 
 		// Wait for all threads to finish

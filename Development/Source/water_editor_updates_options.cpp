@@ -3,6 +3,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void WaterEditor::_updateOptionsMenu()
 {
@@ -93,35 +94,35 @@ void WaterEditor::_updateOptionsMenu()
 		// Check if transparency value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
-			transparency = std::clamp(transparency / 100.0f, 0.0f, 1.0f);
+			transparency = clamp(transparency / 100.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
 
 		// Check if color R value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
-			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
+			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color G value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
-			color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
+			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color B value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
-			color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
+			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if specular factor value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
 

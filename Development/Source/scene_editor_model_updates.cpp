@@ -32,7 +32,7 @@ void SceneEditor::_updateModelMenu()
 
 					// Add the name of every placed model
 					auto IDs = _fe3d.modelEntity_getAllIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					for (auto& modelID : IDs)
 					{
 						// Check if model is not a preview model

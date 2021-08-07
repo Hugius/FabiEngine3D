@@ -6,6 +6,7 @@
 #include <filesystem>
 
 using std::istringstream;
+using std::filesystem::exists;
 
 Config::Config()
 {
@@ -19,7 +20,7 @@ Config::Config()
 	// Open config file
 	auto path = string(rootDir + "config.fe3d");
 	ifstream file(path);
-	if (!std::filesystem::exists(path))
+	if (!exists(path))
 	{
 		Logger::throwError("Cannot load `config.fe3d`!");
 	}
@@ -89,7 +90,7 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	}
 }
 
-void Config::_processOption(std::ifstream& file, float& option, string criteria)
+void Config::_processOption(ifstream& file, float& option, string criteria)
 {
 	// Temporary values
 	string line;
@@ -110,7 +111,7 @@ void Config::_processOption(std::ifstream& file, float& option, string criteria)
 	}
 }
 
-void Config::_processOption(std::ifstream& file, int& option, string criteria)
+void Config::_processOption(ifstream& file, int& option, string criteria)
 {
 	// Temporary values
 	string line;
@@ -131,7 +132,7 @@ void Config::_processOption(std::ifstream& file, int& option, string criteria)
 	}
 }
 
-void Config::_processOption(std::ifstream& file, bool& option, string criteria)
+void Config::_processOption(ifstream& file, bool& option, string criteria)
 {
 	// Temporary values
 	string line;

@@ -5,6 +5,7 @@
 
 using std::make_shared;
 using std::dynamic_pointer_cast;
+using std::function;
 
 void MasterRenderer::_renderSkyEntity()
 {
@@ -263,7 +264,7 @@ void MasterRenderer::_renderDebugScreens()
 	const Vec3 textColor = Vec3(0.75f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;
-	std::function<float(string)> calcTextWidth = [&](string text) { return (static_cast<float>(text.size()) * charWidth); };
+	function<float(string)> calcTextWidth = [&](string text) { return (static_cast<float>(text.size()) * charWidth); };
 
 	// Scene - surface
 	shared_ptr<ImageEntity> sceneSurface = make_shared<ImageEntity>("sceneSurface");

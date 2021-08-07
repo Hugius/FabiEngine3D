@@ -4,6 +4,7 @@
 #include <algorithm>
 
 using std::max;
+using std::clamp;
 
 void BillboardEditor::_updateChoiceMenu()
 {
@@ -195,9 +196,9 @@ void BillboardEditor::_updateChoiceMenu()
 			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
 			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
 			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
-			newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-			newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-			newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
+			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
+			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
+			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
 
 			// Button text contents
@@ -319,9 +320,9 @@ void BillboardEditor::_updateChoiceMenu()
 			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
 			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
 			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
-			newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-			newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-			newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
+			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
+			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
+			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
 
 			// Updating text content

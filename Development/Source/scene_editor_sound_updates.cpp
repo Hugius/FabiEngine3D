@@ -32,7 +32,7 @@ void SceneEditor::_updateSoundMenu()
 
 					// Add every placed soundcaster name
 					auto IDs = _fe3d.soundEntity_getAllIDs();
-					std::sort(IDs.begin(), IDs.end());
+					sort(IDs.begin(), IDs.end());
 					for (auto& soundID : IDs)
 					{
 						// Check if soundcaster is not a preview

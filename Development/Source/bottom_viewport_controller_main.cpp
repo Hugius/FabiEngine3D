@@ -68,7 +68,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(100))
 	{
 		// Calculate median
-		std::sort(fpsList.begin(), fpsList.end());
+		sort(fpsList.begin(), fpsList.end());
 		float fps = fpsList.empty() ? -1.0f : fpsList[49];
 
 		// Display FPS

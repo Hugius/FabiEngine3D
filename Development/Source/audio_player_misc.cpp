@@ -3,6 +3,7 @@
 #include "tools.hpp"
 
 using std::max;
+using std::clamp;
 
 AudioPlayer::AudioPlayer()
 {
@@ -54,7 +55,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					float zDiff = fabsf(sound.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
 					float maxDiff = max(xDiff, max(yDiff, zDiff)); // Maximum difference
 					float volume = sound.getMaxVolume() - ((maxDiff / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
-					volume = std::clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
+					volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
 					sound.setVolume(volume); // Update sound volume
 
 					// Panning

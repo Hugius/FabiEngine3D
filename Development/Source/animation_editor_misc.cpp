@@ -77,7 +77,7 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	}
 
 	// Sort alphabetically
-	std::sort(IDs.begin(), IDs.end());
+	sort(IDs.begin(), IDs.end());
 
 	return IDs;
 }

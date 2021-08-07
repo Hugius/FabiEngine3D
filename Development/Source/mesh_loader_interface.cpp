@@ -5,11 +5,13 @@
 #include <set>
 
 using std::set;
+using std::future;
+using std::launch;
 
 void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths)
 {
 	// Temporary values
-	vector<std::future<vector<MeshPart>>> threads;
+	vector<future<vector<MeshPart>>> threads;
 	vector<bool> meshStatuses;
 
 	// Remove duplicates
@@ -22,7 +24,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 		// Check if mesh is not already cached
 		if (_meshCache.find(filePath) == _meshCache.end())
 		{
-			threads.push_back(std::async(std::launch::async, &MeshLoader::_loadMesh, this, filePath));
+			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
 			meshStatuses.push_back(false);
 		}
 		else
@@ -76,7 +78,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 
 const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath)
 {
-	// Check if mesh data was loaded already, if not, load data and store in std::map
+	// Check if mesh data was loaded already, if not, load data and store in map
 BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
 	if (iterator == _meshCache.end()) 
 	{

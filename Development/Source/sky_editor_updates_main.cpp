@@ -217,7 +217,7 @@ void SkyEditor::_updateSkyDeleting()
 			_fe3d.skyEntity_delete(_currentSkyID);
 
 			// Delete from name record
-			_loadedSkyIDs.erase(std::remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
+			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
 			_isDeletingSky = false;
 			_currentSkyID = "";
 

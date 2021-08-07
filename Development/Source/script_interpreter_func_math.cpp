@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+using std::clamp;
+
 vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const string& scriptLine)
 {
 	// Temporary values
@@ -20,7 +22,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 		else
 		{
 			// Extract arguments from argument string
-			auto parenthesisIndex = static_cast<unsigned int>(std::distance(scriptLine.begin(), openingParanthesisFound));
+			auto parenthesisIndex = static_cast<unsigned int>(distance(scriptLine.begin(), openingParanthesisFound));
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
 			auto arguments = _extractValuesFromListString(argumentString);
@@ -38,7 +40,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::tan(angle)));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, tan(angle)));
 					}
 				}
 				else if (functionName == "math:sin")
@@ -48,7 +50,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sin(angle)));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, sin(angle)));
 					}
 				}
 				else if (functionName == "math:cos")
@@ -58,7 +60,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, cos(angle)));
 					}
 				}
 				else if (functionName == "math:atan")
@@ -67,7 +69,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = std::atan(arguments[0].getDecimal());
+						float angle = atan(arguments[0].getDecimal());
 						float result = _fe3d.misc_radiansToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
@@ -78,7 +80,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = std::asin(arguments[0].getDecimal());
+						float angle = asin(arguments[0].getDecimal());
 						float result = _fe3d.misc_radiansToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
@@ -89,7 +91,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = std::acos(arguments[0].getDecimal());
+						float angle = acos(arguments[0].getDecimal());
 						float result = _fe3d.misc_radiansToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
@@ -100,7 +102,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = std::atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
+						float angle = atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
 						float result = _fe3d.misc_radiansToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
@@ -111,12 +113,12 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
-							int result = static_cast<int>(std::pow(arguments[0].getInteger(), arguments[1].getInteger()));
+							int result = static_cast<int>(pow(arguments[0].getInteger(), arguments[1].getInteger()));
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 						}
 						else if (arguments[0].getType() == ScriptValueType::DECIMAL && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
-							float result = static_cast<float>(std::pow(arguments[0].getDecimal(), arguments[1].getInteger()));
+							float result = static_cast<float>(pow(arguments[0].getDecimal(), arguments[1].getInteger()));
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else
@@ -200,7 +202,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 							arguments[2].getType() == ScriptValueType::INTEGER &&
 							arguments[3].getType() == ScriptValueType::INTEGER)
 						{
-							int result = std::clamp(arguments[0].getInteger(), arguments[1].getInteger(), arguments[2].getInteger());
+							int result = clamp(arguments[0].getInteger(), arguments[1].getInteger(), arguments[2].getInteger());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 						}
 						else if (
@@ -208,7 +210,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 							arguments[1].getType() == ScriptValueType::DECIMAL &&
 							arguments[2].getType() == ScriptValueType::DECIMAL)
 						{
-							float result = std::clamp(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
+							float result = clamp(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else
@@ -223,7 +225,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sqrtf(arguments[0].getDecimal())));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, sqrtf(arguments[0].getDecimal())));
 					}
 				}
 				else if (functionName == "math:abs")

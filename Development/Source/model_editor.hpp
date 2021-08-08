@@ -29,7 +29,6 @@ private:
 		string normalMapPath, Vec3 size, bool isFaceCulled, bool isTransparent, bool isSpecular, ReflectionType reflectionType,
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID,
 		bool isInstanced, bool isBright, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
-	void _loadMesh();
 	void _loadDiffuseMap();
 	void _loadEmissionMap();
 	void _loadReflectionMap();
@@ -58,19 +57,20 @@ private:
 	string _currentProjectID = "";
 	string _hoveredModelID = "";
 
-	// Vectors
-	Vec3 _cameraLookatPosition = Vec3(0.0f);
-
 	// Floats
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
-	static inline const float LOOKAT_MOVEMENT_SPEED = 0.05f;
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline const float MIN_CAMERA_PITCH = 1.0f;
-	static inline const float MODEL_Y_OFFSET = 0.001f;
+	static inline const float GRID_Y_OFFSET = 0.001f;
+	static inline const float GRID_SIZE = 50.0f;
+	static inline const float GRID_UV = 5.0f;
+	static inline const float MIN_CAMERA_DISTANCE = 1.5f;
+	static inline const float CAMERA_DISTANCE_SPEED = 0.25f;
+	static inline const float CAMERA_LOOKAT_SPEED = 0.05f;
 	float _aabbTransformationSpeed = 0.1f;
 
 	// Booleans

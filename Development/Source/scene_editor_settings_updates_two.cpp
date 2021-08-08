@@ -26,6 +26,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
@@ -118,6 +119,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
@@ -215,6 +217,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
@@ -283,6 +286,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{

@@ -22,6 +22,7 @@ void ModelEditor::_updateSizeMenu()
 				_isResizingToggled = false;
 				_transformationDirection = Direction::X;
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+				return;
 			}
 			else if (screen->getButton("size")->isHovered())
 			{

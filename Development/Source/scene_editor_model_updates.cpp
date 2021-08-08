@@ -18,6 +18,7 @@ void SceneEditor::_updateModelMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("place")->isHovered()) // Place model button
 				{
@@ -70,6 +71,7 @@ void SceneEditor::_updateModelPlacingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
+					return;
 				}
 				else
 				{
@@ -170,6 +172,7 @@ void SceneEditor::_updateModelChoosingMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 					_currentPreviewModelID = "";
+					return;
 				}
 			}
 		}

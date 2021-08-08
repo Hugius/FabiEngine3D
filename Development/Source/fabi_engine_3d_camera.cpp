@@ -181,6 +181,11 @@ const Vec3 FabiEngine3D::camera_getPosition()
 	return _core->_camera.getPosition();
 }
 
+const Vec3 FabiEngine3D::camera_getThirdPersonLookat()
+{
+	return _core->_camera.getThirdPersonLookat();
+}
+
 const bool FabiEngine3D::camera_isThirdPersonViewEnabled()
 {
 	return _core->_camera.isThirdPersonViewEnabled();

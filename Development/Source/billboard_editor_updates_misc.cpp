@@ -10,13 +10,13 @@ void BillboardEditor::_updateCamera()
 		// Update moving up
 		if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
 		{
-			_cameraLookatPosition.y += LOOKAT_MOVEMENT_SPEED;
+			_cameraLookatPosition.y += CAMERA_LOOKAT_SPEED;
 		}
 
 		// Update moving down
 		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 		{
-			_cameraLookatPosition.y -= LOOKAT_MOVEMENT_SPEED;
+			_cameraLookatPosition.y -= CAMERA_LOOKAT_SPEED;
 			_cameraLookatPosition.y = max(0.0f, _cameraLookatPosition.y);
 		}
 	}

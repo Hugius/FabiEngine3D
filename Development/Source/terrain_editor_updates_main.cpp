@@ -90,6 +90,7 @@ void TerrainEditor::_updateChoiceMenu()
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
 				_isEditingTerrain = false;
+				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
@@ -111,22 +112,22 @@ void TerrainEditor::_updateTerrainCreating()
 {
 	if (_isCreatingTerrain)
 	{
-		string newTerrainName;
+		string newTerrainID;
 
 		// Create new terrain
-		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
 			// @ sign not allowed
-			if (newTerrainName.find('@') == string::npos)
+			if (newTerrainID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newTerrainName.find(' ') == string::npos)
+				if (newTerrainID.find(' ') == string::npos)
 				{
-					// Add @ sign to new name
-					newTerrainName = "@" + newTerrainName;
+					// Add @ sign to new ID
+					newTerrainID = "@" + newTerrainID;
 
-					// If terrain name not existing yet
-					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
+					// If terrain ID not existing yet
+					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
 						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
@@ -147,8 +148,8 @@ void TerrainEditor::_updateTerrainCreating()
 							{
 								const string newFilePath = filePath.substr(rootDirectory.size());
 								_fe3d.misc_clearBitmapCache(newFilePath);
-								_fe3d.terrainEntity_create(newTerrainName, newFilePath);
-								_fe3d.terrainEntity_select(newTerrainName);
+								_fe3d.terrainEntity_create(newTerrainID, newFilePath);
+								_fe3d.terrainEntity_select(newTerrainID);
 							}
 							else
 							{
@@ -158,8 +159,8 @@ void TerrainEditor::_updateTerrainCreating()
 							}
 						}
 
-						// Set new terrain
-						_currentTerrainID = newTerrainName;
+						// Miscellaneous
+						_currentTerrainID = newTerrainID;
 						_loadedTerrainIDs.push_back(_currentTerrainID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
@@ -170,7 +171,7 @@ void TerrainEditor::_updateTerrainCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
+						Logger::throwWarning("Terrain name \"" + newTerrainID.substr(1) + "\" already exists!");
 					}
 				}
 				else
@@ -193,7 +194,7 @@ void TerrainEditor::_updateTerrainChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
 
-		// Hide terrain
+		// Hide last terrain
 		_fe3d.terrainEntity_select("");
 
 		// Check if a terrain name is hovered

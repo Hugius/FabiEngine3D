@@ -82,17 +82,15 @@ void ModelEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				// Hide model entity
-				if (_fe3d.modelEntity_isExisting(_currentModelID))
-				{
-					_fe3d.modelEntity_setWireFramed(_currentModelID, false);
-					_fe3d.modelEntity_setVisible(_currentModelID, false);
-				}
+				_fe3d.modelEntity_setWireFramed(_currentModelID, false);
+				_fe3d.modelEntity_setVisible(_currentModelID, false);
 
 				// Go back to main screen
 				_isEditingModel = false;
 				_currentModelID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), false);
+				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
@@ -108,37 +106,17 @@ void ModelEditor::_updateChoiceMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				if (_fe3d.modelEntity_isExisting(_currentModelID))
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
-				}
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
 			}
 			else if (screen->getButton("aabb")->isHovered())
 			{
-				if (_fe3d.modelEntity_isExisting(_currentModelID))
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
-					_fe3d.misc_enableAabbFrameRendering();
-				}
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
+				_fe3d.misc_enableAabbFrameRendering();
 			}
 		}
 
-		// Check if mesh exists
-		bool isExisting = _fe3d.modelEntity_isExisting(_currentModelID);
-		bool isHoverable = false;
-		if (isExisting)
-		{
-			isHoverable = true;
-
-			// Show mesh
-			_fe3d.modelEntity_setVisible(_currentModelID, true);
-		}
-
-		// Editing buttons hoverability
-		screen->getButton("options")->setHoverable(isHoverable);
-		screen->getButton("lighting")->setHoverable(isHoverable);
-		screen->getButton("size")->setHoverable(isHoverable);
-		screen->getButton("aabb")->setHoverable(isHoverable && !_fe3d.modelEntity_isInstanced(_currentModelID));
+		// Buttons hoverability
+		screen->getButton("aabb")->setHoverable(!_fe3d.modelEntity_isInstanced(_currentModelID));
 	}
 	else if (screen->getID() == "modelEditorMenuMesh")
 	{
@@ -166,32 +144,65 @@ void ModelEditor::_updateModelCreating()
 {
 	if (_isCreatingModel)
 	{
-		string newModelName;
+		string newModelID;
 
 		// Create new model
-		if (_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelID, {}))
 		{
 			// @ sign not allowed
-			if (newModelName.find('@') == string::npos)
+			if (newModelID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newModelName.find(' ') == string::npos)
+				if (newModelID.find(' ') == string::npos)
 				{
-					// Create model and check if not already existing
-					if (_createModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 0, 0, ReflectionType(), 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", 0, 0, {}, {}, {}))
+					// Add @ sign to new ID
+					newModelID = ("@" + newModelID);
+
+					// If model ID not existing yet
+					if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
-						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+						// Get the chosen filename
+						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const string targetDirectory = string("game_assets\\meshes\\");
+						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
 
-						// Select model
-						_currentModelID = "@" + newModelName;
-
+						// Check if not cancelled
+						if (filePath == "")
+						{
+							_isCreatingModel = false;
+							return;
+						}
+						else
+						{
+							// Check if user did not switch directory
+							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+							{
+								const string newFilePath = filePath.substr(rootDirectory.size());
+								_fe3d.misc_clearMeshCache(newFilePath);
+								_fe3d.modelEntity_create(newModelID, newFilePath);
+							}
+							else
+							{
+								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								_isCreatingModel = false;
+								return;
+							}
+						}
+	
 						// Miscellaneous
+						_currentModelID = newModelID;
+						_loadedModelIDs.push_back(newModelID);
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
 							"Model: " + _currentModelID.substr(1), 0.025f);
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
 						_isCreatingModel = false;
 						_isEditingModel = true;
+					}
+					else
+					{
+						Logger::throwWarning("Model name \"" + newModelID.substr(1) + "\" already exists!");
 					}
 				}
 				else
@@ -217,17 +228,17 @@ void ModelEditor::_updateModelChoosing()
 		// Hide last model
 		if (_hoveredModelID != "")
 		{
-			// Check if model has mesh
-			if (_fe3d.modelEntity_isExisting(_hoveredModelID))
-			{
-				_fe3d.modelEntity_setVisible(_hoveredModelID, false);
-			}
+			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
 		}
 
 		// Check if a model name is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Set new hovered model
+			_hoveredModelID = "@" + selectedButtonID;
+
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select model
 				_currentModelID = "@" + selectedButtonID;
@@ -242,20 +253,11 @@ void ModelEditor::_updateModelChoosing()
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
 				}
 
-				// Check if model has mesh
-				if (_fe3d.modelEntity_isExisting(_currentModelID))
-				{
-					_fe3d.modelEntity_setVisible(_currentModelID, true);
-				}
+				_fe3d.modelEntity_setVisible(_currentModelID, true);
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
-			}
-			else
-			{
-				// Set new hovered model
-				_hoveredModelID = "@" + selectedButtonID;
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
@@ -273,11 +275,7 @@ void ModelEditor::_updateModelChoosing()
 		// Show hovered model
 		if (_hoveredModelID != "")
 		{
-			// Check if model has mesh
-			if (_fe3d.modelEntity_isExisting(_hoveredModelID))
-			{
-				_fe3d.modelEntity_setVisible(_hoveredModelID, true);
-			}
+			_fe3d.modelEntity_setVisible(_hoveredModelID, true);
 		}
 	}
 }
@@ -295,25 +293,14 @@ void ModelEditor::_updateModelDeleting()
 		// Check is form is answered
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
-			// Delete entity
-			if (_fe3d.modelEntity_isExisting(_currentModelID))
-			{
-				_fe3d.modelEntity_delete(_currentModelID);
-			}
-
-			// Delete from name record
+			_fe3d.modelEntity_delete(_currentModelID);
 			_loadedModelIDs.erase(remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			// Check if model has mesh
-			if (_fe3d.modelEntity_isExisting(_currentModelID))
-			{
-				_fe3d.modelEntity_setVisible(_currentModelID, false);
-			}
-
+			_fe3d.modelEntity_setVisible(_currentModelID, false);
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}

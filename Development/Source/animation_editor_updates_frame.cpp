@@ -35,6 +35,7 @@ void AnimationEditor::_updateFrameMenu()
 				_currentPartID = "";
 				_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+				return;
 			}
 			else if (screen->getButton("transformation")->isHovered())
 			{

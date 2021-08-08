@@ -157,6 +157,11 @@ const Vec3 Camera::getFront()
 	return _front;
 }
 
+const Vec3 Camera::getThirdPersonLookat()
+{
+	return _thirdPersonLookat;
+}
+
 const float Camera::getFirstPersonYaw()
 {
 	return _yaw;

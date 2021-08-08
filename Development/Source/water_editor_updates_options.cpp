@@ -28,6 +28,7 @@ void WaterEditor::_updateOptionsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+				return;
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{

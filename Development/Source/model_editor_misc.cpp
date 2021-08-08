@@ -3,76 +3,6 @@
 
 #include <algorithm>
 
-void ModelEditor::_loadMesh()
-{
-	// Get the chosen filename
-	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("game_assets\\meshes\\");
-	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
-
-	// Check if not cancelled
-	if (filePath != "")
-	{
-		// Check if user did not switch directory
-		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-		{
-			const string newFilePath = filePath.substr(rootDirectory.size());
-
-			// Delete existing entity
-			if (_fe3d.modelEntity_isExisting(_currentModelID))
-			{
-				// Clear mesh cache
-				_fe3d.misc_clearMeshCache(newFilePath);
-
-				// Check if multiparted entity
-				if (_fe3d.modelEntity_isMultiParted(_currentModelID))
-				{
-					// Clear texture cache
-					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_currentModelID))
-					{
-						// Diffuse map
-						if (_fe3d.modelEntity_hasDiffuseMap(partID))
-						{
-							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getDiffuseMapPath(partID));
-						}
-
-						// Emission map
-						if (_fe3d.modelEntity_hasEmissionMap(partID))
-						{
-							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getEmissionMapPath(partID));
-						}
-
-						// Reflection map
-						if (_fe3d.modelEntity_hasReflectionMap(partID))
-						{
-							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getReflectionMapPath(partID));
-						}
-
-						// Normal map
-						if (_fe3d.modelEntity_hasNormalMap(partID))
-						{
-							_fe3d.misc_clearTextureCache2D(_fe3d.modelEntity_getNormalMapPath(partID));
-						}
-					}
-				}
-
-				// Reload model
-				//_fe3d.modelEntity_loadMesh(_currentModelID, newFilePath);
-			}
-			else
-			{
-				// Create new entity
-				//_fe3d.modelEntity_create(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
-			}
-		}
-		else
-		{
-			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
-		}
-	}
-}
-
 void ModelEditor::_loadDiffuseMap()
 {
 	// Get the chosen filename
@@ -202,7 +132,6 @@ bool ModelEditor::_createModel(const string& modelName, string meshPath, string 
 		{
 			// Create model
 			_fe3d.modelEntity_create(modelName, meshPath);
-			_fe3d.modelEntity_setPosition(modelName, Vec3(0.0f, MODEL_Y_OFFSET, 0.0f));
 			_fe3d.modelEntity_setSize(modelName, size);
 			_fe3d.modelEntity_setVisible(modelName, false);
 

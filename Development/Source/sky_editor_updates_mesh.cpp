@@ -15,6 +15,7 @@ void SkyEditor::_updateMeshMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+				return;
 			}
 			else if (screen->getButton("rightTexture")->isHovered())
 			{

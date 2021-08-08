@@ -16,6 +16,7 @@ void SceneEditor::_updateEnvironmentMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("sky")->isHovered())
 				{
@@ -50,6 +51,7 @@ void SceneEditor::_updateSkyMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+					return;
 				}
 				else if (screen->getButton("choose")->isHovered())
 				{
@@ -122,6 +124,7 @@ void SceneEditor::_updateTerrainMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+					return;
 				}
 				else if (screen->getButton("choose")->isHovered())
 				{
@@ -194,6 +197,7 @@ void SceneEditor::_updateWaterMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+					return;
 				}
 				else if (screen->getButton("choose")->isHovered())
 				{

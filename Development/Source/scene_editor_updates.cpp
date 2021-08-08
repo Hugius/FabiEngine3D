@@ -77,6 +77,7 @@ void SceneEditor::_updateMainMenu()
 				{
 					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+					return;
 				}
 				else if (screen->getButton("add")->isHovered())
 				{
@@ -193,31 +194,32 @@ void SceneEditor::_updateChoiceMenu()
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+					return;
 				}
-				else if (screen->getButton("environment")->isHovered()) // Environment button
+				else if (screen->getButton("environment")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
-				else if (screen->getButton("model")->isHovered()) // Model button
+				else if (screen->getButton("model")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 				}
-				else if (screen->getButton("billboard")->isHovered()) // Billboard button
+				else if (screen->getButton("billboard")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 				}
-				else if (screen->getButton("lighting")->isHovered()) // Lighting button
+				else if (screen->getButton("lighting")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
-				else if (screen->getButton("sound")->isHovered()) // Sound button
+				else if (screen->getButton("sound")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 				}
-				else if (screen->getButton("settings")->isHovered()) // Settings button
+				else if (screen->getButton("settings")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
 				}

@@ -22,6 +22,7 @@ void SceneEditor::_updateSettingsMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("graphics")->isHovered())
 				{
@@ -75,6 +76,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
+				return;
 			}
 			else if (screen->getButton("shadows")->isHovered())
 			{
@@ -134,6 +136,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 				_fe3d.misc_disableShadowFrameRendering();
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
@@ -245,6 +248,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
@@ -302,6 +306,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				return;
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{

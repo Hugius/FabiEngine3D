@@ -27,6 +27,7 @@ void ModelEditor::_updateAabbMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 				_fe3d.misc_disableAabbFrameRendering();
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), false);
+				return;
 			}
 			else if (screen->getButton("add")->isHovered())
 			{

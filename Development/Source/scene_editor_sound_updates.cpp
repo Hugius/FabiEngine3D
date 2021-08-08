@@ -18,6 +18,7 @@ void SceneEditor::_updateSoundMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("place")->isHovered())
 				{
@@ -72,6 +73,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
+					return;
 				}
 				else
 				{
@@ -151,6 +153,7 @@ void SceneEditor::_updateSoundChoosingMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 					_currentPreviewSoundID = "";
+					return;
 				}
 			}
 		}

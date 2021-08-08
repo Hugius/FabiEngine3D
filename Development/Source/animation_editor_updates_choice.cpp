@@ -59,6 +59,7 @@ void AnimationEditor::_updateChoiceMenu()
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), false);
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), false);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
+				return;
 			}
 			else if (screen->getButton("preview")->isHovered())
 			{

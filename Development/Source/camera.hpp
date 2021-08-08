@@ -40,6 +40,7 @@ public:
 	const Matrix44& getProjectionMatrix();
 	const Vec3 getPosition();
 	const Vec3 getFront();
+	const Vec3 getThirdPersonLookat();
 	const float getFOV();
 	const float getAspectRatio();
 	const float getYaw();

@@ -67,6 +67,7 @@ void BillboardEditor::_updateChoiceMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("size")->isHovered())
 				{
@@ -141,6 +142,7 @@ void BillboardEditor::_updateChoiceMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("lightness")->isHovered())
 				{
@@ -217,6 +219,7 @@ void BillboardEditor::_updateChoiceMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("animate")->isHovered())
 				{
@@ -265,6 +268,7 @@ void BillboardEditor::_updateChoiceMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("font")->isHovered())
 				{

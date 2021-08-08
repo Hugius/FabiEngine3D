@@ -31,6 +31,7 @@ void AudioEditor::_updateChoiceMenu()
 				_currentAudioID = "";
 				_isEditingAudio = false;
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
+				return;
 			}
 			else if (screen->getButton("load")->isHovered())
 			{

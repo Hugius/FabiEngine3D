@@ -59,8 +59,8 @@ private:
 	static inline const float GRID_Y_OFFSET = 1.0f;
 	static inline const float GRID_SIZE = 1024.0f;
 	static inline const float GRID_UV = 10.0f;
-	static inline const float SCROLL_MULTIPLIER = 5.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 2.5f;
+	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
+	static inline const float MIN_CAMERA_DISTANCE = 1.5f;
 
 	// Booleans
 	bool _isEditorLoaded = false;

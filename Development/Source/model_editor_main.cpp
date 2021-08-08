@@ -28,6 +28,7 @@ void ModelEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
+	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -42,9 +43,9 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
 	_fe3d.modelEntity_setFaceCulled("@@cube", true);
 	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj");
-	_fe3d.modelEntity_setSize("@@grid", Vec3(50.0f, 1.0f, 50.0f));
+	_fe3d.modelEntity_setSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
+	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
@@ -87,7 +88,6 @@ void ModelEditor::unload()
 	_currentAabbID = "";
 	_hoveredModelID = "";
 	_loadedModelIDs.clear();
-	_cameraLookatPosition = Vec3(0.0f);
 	_aabbTransformationSpeed = 0.1f;
 	_isEditorLoaded = false;
 	_isCreatingModel = false;
@@ -138,13 +138,12 @@ void ModelEditor::_loadGUI()
 	// Left-viewport: modelEditorMenuMesh
 	positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("modelEditorMenuMesh");
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadMesh", Vec2(0.0f, positions[0]), Vec2(TW("Load Mesh"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Load Mesh", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadDiffuseMap", Vec2(0.0f, positions[1]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadEmissionMap", Vec2(0.0f, positions[2]), Vec2(TW("Emission Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Emission Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadReflectionMap", Vec2(0.0f, positions[3]), Vec2(TW("Reflect Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflect Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadNormalMap", Vec2(0.0f, positions[4]), Vec2(TW("Normal Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("clearMaps", Vec2(0.0f, positions[5]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadDiffuseMap", Vec2(0.0f, positions[0]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadEmissionMap", Vec2(0.0f, positions[1]), Vec2(TW("Emission Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Emission Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadReflectionMap", Vec2(0.0f, positions[2]), Vec2(TW("Reflect Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflect Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("loadNormalMap", Vec2(0.0f, positions[3]), Vec2(TW("Normal Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("clearMaps", Vec2(0.0f, positions[4]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: modelEditorMenuOptions
 	positions = VPC::calculateButtonPositions(7, CH);

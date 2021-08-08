@@ -92,6 +92,7 @@ public:
 
 	// Camera interface - getters
 	const Vec3 camera_getPosition();
+	const Vec3 camera_getThirdPersonLookat();
 	const float camera_getFOV();
 	const float getAspectRatio();
 	const float camera_getMouseSensitivity();

@@ -20,6 +20,7 @@ void SceneEditor::_updateLightingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("ambient")->isHovered()) // Ambient light button
 				{
@@ -59,6 +60,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+					return;
 				}
 				else if (screen->getButton("enabled")->isHovered())
 				{
@@ -145,6 +147,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+					return;
 				}
 				else if (screen->getButton("enabled")->isHovered())
 				{
@@ -251,6 +254,7 @@ void SceneEditor::_updatePointLightingMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 					_isPlacingPointLight = false;
+					return;
 				}
 				else if (screen->getButton("add")->isHovered())
 				{

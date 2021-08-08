@@ -18,6 +18,7 @@ void SceneEditor::_updateBillboardMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					return;
 				}
 				else if (screen->getButton("place")->isHovered()) // Place billboard button
 				{
@@ -71,6 +72,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
+					return;
 				}
 				else
 				{
@@ -160,6 +162,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 					_currentPreviewBillboardID = "";
+					return;
 				}
 			}
 		}

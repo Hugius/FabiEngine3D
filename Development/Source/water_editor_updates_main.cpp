@@ -92,6 +92,7 @@ void WaterEditor::_updateChoiceMenu()
 				_fe3d.waterEntity_select("");
 				_currentWaterID = "";
 				_isEditingWater = false;
+				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{

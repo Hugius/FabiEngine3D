@@ -89,6 +89,7 @@ void SkyEditor::_updateChoiceMenu()
 				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 				_currentSkyID = "";
 				_isEditingSky = false;
+				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{

@@ -25,6 +25,7 @@ void TerrainEditor::_updateLightingMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+				return;
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{

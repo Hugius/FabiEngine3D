@@ -134,7 +134,8 @@ void AnimationEditor::_updateAnimationChoosing()
 		// Check if a animation ID is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select animation
 				_currentAnimationID = selectedButtonID;

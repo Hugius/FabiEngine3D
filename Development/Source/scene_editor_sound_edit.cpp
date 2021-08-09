@@ -23,7 +23,7 @@ void SceneEditor::_updateSoundEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
 		{
 			// Check which entity is selected
 			auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
@@ -59,7 +59,7 @@ void SceneEditor::_updateSoundEditing()
 					else
 					{
 						// Don't reset if speaker is active
-						if (entityID != ACTIVE_SPEAKER_ID && SELECTED_SPEAKER_ID == "")
+						if (entityID != ACTIVE_SPEAKER_ID && SELECTED_SPEAKER_ID.empty())
 						{
 							_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
 							_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
@@ -69,9 +69,9 @@ void SceneEditor::_updateSoundEditing()
 			}
 			
 			// Check if user made the active speaker inactive
-			if (SELECTED_SPEAKER_ID == "" && ACTIVE_SPEAKER_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				// LMB pressed
+				// Check if LMB is pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_SPEAKER_ID = "";
@@ -134,14 +134,14 @@ void SceneEditor::_updateSoundEditing()
 
 			// Check if sound is still selected or active
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
-			if (SELECTED_SPEAKER_ID == "" && ACTIVE_SPEAKER_ID == "")
+			if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID.empty())
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
-				if (_selectedModelID == "" && _activeModelID == "" && _selectedBillboardID == "" && _activeBillboardID == ""
-					&& _selectedLampID == "" && _activeLampID == "")
+				if (_selectedModelID.empty() && _activeModelID.empty() && _selectedBillboardID.empty() && _activeBillboardID.empty()
+					&& _selectedLampID.empty() && _activeLampID.empty())
 				{
 					_fe3d.textEntity_setVisible(textEntityID, true);
 				}

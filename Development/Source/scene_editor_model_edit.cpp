@@ -21,7 +21,7 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
 		{
 			// Check which entity is selected
 			auto hoveredID = _fe3d.collision_checkCursorInAny().first;
@@ -63,9 +63,9 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Check if user made the active model inactive
-			if ((SELECTED_MODEL_ID == "") && (ACTIVE_MODEL_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if ((SELECTED_MODEL_ID.empty()) && (ACTIVE_MODEL_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				// LMB pressed
+				// Check if LMB is pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_MODEL_ID = "";
@@ -300,15 +300,15 @@ void SceneEditor::_updateModelEditing()
 
 			// Check if model is still selected or active
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
-			if (SELECTED_MODEL_ID == "" && ACTIVE_MODEL_ID == "")
+			if (SELECTED_MODEL_ID.empty() && ACTIVE_MODEL_ID.empty())
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
-				if (_selectedBillboardID == "" && _activeBillboardID == "" &&
-					_selectedLampID == "" && _activeLampID == "" &&
-					_selectedSpeakerID == "" && _activeSpeakerID == "")
+				if (_selectedBillboardID.empty() && _activeBillboardID.empty() &&
+					_selectedLampID.empty() && _activeLampID.empty() &&
+					_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 				{
 					_fe3d.textEntity_setVisible(textEntityID, true);
 				}

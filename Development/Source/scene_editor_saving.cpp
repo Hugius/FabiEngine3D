@@ -16,7 +16,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::saveEditorSceneToFile() ---> no current project loaded!");
 	}
@@ -128,7 +128,7 @@ bool SceneEditor::saveEditorSceneToFile()
 				_animationEditor.getStartedAnimationIDs(modelID).front();
 
 			// Perform empty string & space conversions
-			animationID = (animationID == "") ? "?" : animationID;
+			animationID = (animationID.empty()) ? "?" : animationID;
 			replace(animationID.begin(), animationID.end(), ' ', '?');
 
 			// Extract preview ID
@@ -402,7 +402,7 @@ bool SceneEditor::saveEditorSceneToFile()
 		auto multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
 		// Perform empty string & space conversions
-		flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
+		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 		replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
 		// Write data

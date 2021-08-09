@@ -152,7 +152,7 @@ void TopViewportController::_updateGameScreenManagement()
 	auto miscScreen = _miscWindow->getScreen("main");
 
 	// Check if currently a project is loaded
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		gameScreen->getButton("play")->setHoverable(false);
 		gameScreen->getButton("pause")->setHoverable(false);
@@ -296,7 +296,7 @@ void TopViewportController::_updateMiscScreenManagement()
 void TopViewportController::_saveCurrentProject()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("TopViewportController::_saveCurrentProject() ---> no current project loaded!");
 	}

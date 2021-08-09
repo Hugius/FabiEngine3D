@@ -9,7 +9,7 @@ void SceneEditor::_updateModelPlacing()
 		// Only if user is in placement mode
 		if (!_currentPreviewModelID.empty())
 		{
-			if (_fe3d.terrainEntity_getSelectedID() == "") // Placing without terrain
+			if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 			{
 				// Retrieve current position
 				auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);

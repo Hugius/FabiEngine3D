@@ -169,7 +169,7 @@ void SettingsEditor::loadDefaultSettings()
 bool SettingsEditor::loadSettingsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::loadSettings() ---> no current project loaded!");
 	}
@@ -222,7 +222,7 @@ bool SettingsEditor::loadSettingsFromFile()
 bool SettingsEditor::saveSettingsToFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SettingsEditor::save() ---> no current project loaded!");
 	}

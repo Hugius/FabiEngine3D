@@ -63,7 +63,7 @@ void ModelEditor::_updateOptionsMenu()
 			else if (screen->getButton("lodID")->isHovered())
 			{
 				string lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
-				lodID = (lodID == "") ? lodID : lodID.substr(1, lodID.size() - 1);
+				lodID = (lodID.empty()) ? lodID : lodID.substr(1, lodID.size() - 1);
 				_gui.getGlobalScreen()->createValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}

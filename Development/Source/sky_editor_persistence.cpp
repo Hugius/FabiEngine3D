@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::getAllTexturePathsFromFile() ---> no current project loaded!");
 	}
@@ -72,7 +72,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 bool SkyEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile() ---> no current project loaded!");
 	}
@@ -156,7 +156,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SkyEditor::saveSkyEntitiesToFile() ---> no current project loaded!");
 	}
@@ -180,7 +180,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 		// Perform empty string & space conversions
 		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
-			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		}
 

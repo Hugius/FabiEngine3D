@@ -60,15 +60,15 @@ void ScriptInterpreter::load()
 		if (scriptFile->getLineText(1) == (META_KEYWORD + " script_execution_entry"))
 		{
 			// Set entry point
-			if (scriptType == "script_type_init" && _initEntryID == "")
+			if (scriptType == "script_type_init" && _initEntryID.empty())
 			{
 				_initEntryID = _initScriptIDs.back();
 			}
-			else if (scriptType == "script_type_update" && _updateEntryID == "")
+			else if (scriptType == "script_type_update" && _updateEntryID.empty())
 			{
 				_updateEntryID = _updateScriptIDs.back();
 			}
-			else if (scriptType == "script_type_destroy" && _destroyEntryID == "")
+			else if (scriptType == "script_type_destroy" && _destroyEntryID.empty())
 			{
 				_destroyEntryID = _destroyScriptIDs.back();
 			}
@@ -92,19 +92,19 @@ void ScriptInterpreter::load()
 	}
 
 	// No entry point errors
-	if (_initEntryID == "" && !_initScriptIDs.empty())
+	if (_initEntryID.empty() && !_initScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for INIT script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if (_updateEntryID == "" && !_updateScriptIDs.empty())
+	if (_updateEntryID.empty() && !_updateScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for UPDATE script(s)!");
 		_hasThrownError = true;
 		return;
 	}
-	if (_destroyEntryID == "" && !_destroyScriptIDs.empty())
+	if (_destroyEntryID.empty() && !_destroyScriptIDs.empty())
 	{
 		Logger::throwWarning("No script_execution_entry META defined for DESTROY script(s)!");
 		_hasThrownError = true;

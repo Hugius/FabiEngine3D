@@ -3,39 +3,46 @@
 
 void WaterEditor::_updateCamera()
 {
-	// Disable third person view
+	// Check if third person view is enabled
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
-		_fe3d.camera_disableThirdPersonView();
+		// Update distance scrolling
+		auto scrollOffset = _fe3d.input_getMouseWheelY();
+		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
+		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
+		_fe3d.camera_setThirdPersonDistance(cameraDistance);
+
+		// Hide cursor
+		_fe3d.imageEntity_setVisible("@@cursor", false);
 	}
 
-	// Check if water is inactive
-	if (_currentWaterID.empty() || !_fe3d.waterEntity_isExisting(_currentWaterID))
+	// Check if allowed by GUI
+	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Reset camera
-		_fe3d.camera_reset();
-		_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
-	}
-	else
-	{
-		// Show cursor
-		_fe3d.imageEntity_setVisible("@@cursor", true);
-
-		// Check if allowed by GUI
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		// Check if RMB pressed
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if RMB pressed
-			if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check third person view status
+			if (_fe3d.camera_isThirdPersonViewEnabled())
 			{
-				// Enable third person view
+				_fe3d.camera_disableThirdPersonView();
+			}
+			else
+			{
 				_fe3d.camera_enableThirdPersonView(
 					_fe3d.camera_getThirdPersonYaw(),
 					_fe3d.camera_getThirdPersonPitch(),
 					_fe3d.camera_getThirdPersonDistance());
-
-				// Hide cursor
-				_fe3d.imageEntity_setVisible("@@cursor", false);
 			}
+		}
+	}
+
+	// Disable third person view if necessary
+	if (_fe3d.camera_isThirdPersonViewEnabled())
+	{
+		if (_gui.getGlobalScreen()->isFocused())
+		{
+			_fe3d.camera_disableThirdPersonView();
 		}
 	}
 }

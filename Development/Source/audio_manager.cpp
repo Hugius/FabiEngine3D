@@ -31,7 +31,7 @@ void AudioManager::addSound(const string& ID, const string& fileName)
 	{
 		Logger::throwError("Sound with ID \"", ID, "\" already exists!");
 	}
-	else if (ID == "")
+	else if (ID.empty())
 	{
 		Logger::throwError("Tried to create sound with empty ID!");
 	}

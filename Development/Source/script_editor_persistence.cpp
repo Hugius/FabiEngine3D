@@ -13,7 +13,7 @@ using std::filesystem::directory_iterator;
 bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::loadScriptsFromFile() ---> no current project loaded!");
 	}
@@ -97,7 +97,7 @@ bool ScriptEditor::saveScriptFiles()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptEditor::saveScriptsToFile() ---> no current project loaded!");
 	}

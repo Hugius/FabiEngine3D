@@ -10,7 +10,7 @@ void SceneEditor::_updateBillboardPlacing()
 		{
 			// Check if mouse behavior isn't being invalid
 			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
-				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
+				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID().empty())
 			{
 				// Default placement position
 				Vec3 newPosition = Vec3(0.0f);
@@ -34,7 +34,7 @@ void SceneEditor::_updateBillboardPlacing()
 
 				// Placing billboard
 				if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
-					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
+					|| _fe3d.terrainEntity_getSelectedID().empty())  // Can be bypassed if terrain does not exist
 				{
 					// Add new billboard
 				BEGIN: int randomSerial = Tools::getRandomInteger(0, INT_MAX);
@@ -51,7 +51,7 @@ void SceneEditor::_updateBillboardPlacing()
 					_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
 
 					// Disable placement mode if no terrain available to choose position from
-					if (_fe3d.terrainEntity_getSelectedID() == "")
+					if (_fe3d.terrainEntity_getSelectedID().empty())
 					{
 						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 						_currentPreviewBillboardID = "";

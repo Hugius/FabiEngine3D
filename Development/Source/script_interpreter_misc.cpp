@@ -83,7 +83,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 bool ScriptInterpreter::_validateSavesDirectory()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("ScriptInterpreter::_validateSavesDirectory() ---> no current project loaded!");
 	}

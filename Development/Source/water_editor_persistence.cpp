@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::getAllWaterTexturePathsFromFile() ---> no current project loaded!");
 	}
@@ -80,7 +80,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 bool WaterEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::loadWaterEntitiesFromFile() ---> no current project loaded!");
 	}
@@ -193,7 +193,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::saveWaterEntitiesToFile() ---> no current project loaded!");
 	}
@@ -229,9 +229,9 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
 
 		// Perform empty string & space conversions
-		dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
-		normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
-		displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
+		dudvMapPath = (dudvMapPath.empty() ? "?" : dudvMapPath);
+		normalMapPath = (normalMapPath.empty() ? "?" : normalMapPath);
+		displacementMapPath = (displacementMapPath.empty() ? "?" : displacementMapPath);
 		replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');

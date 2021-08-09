@@ -166,7 +166,8 @@ void SkyEditor::_updateSkyChoosing()
 		// Check if a sky name is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select sky
 				_currentSkyID = "@" + selectedButtonID;

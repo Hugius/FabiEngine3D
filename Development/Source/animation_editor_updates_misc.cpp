@@ -204,7 +204,7 @@ void AnimationEditor::_updateMiscellaneous()
 		}
 
 		// Update model inversion
-		if (_currentPartID == "")
+		if (_currentPartID.empty())
 		{
 			_selectedPartInversionDirection = 1;
 		}

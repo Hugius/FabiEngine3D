@@ -12,7 +12,7 @@ using std::istringstream;
 bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::loadEditorSceneFromFile() ---> no current project loaded!");
 	}
@@ -182,7 +182,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						iss >> nextElement;
 
 						// Check for end of line
-						if (nextElement == "")
+						if (nextElement.empty())
 						{
 							break;
 						}

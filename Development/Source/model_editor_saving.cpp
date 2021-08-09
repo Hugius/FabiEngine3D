@@ -17,7 +17,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("ModelEditor::saveModelEntitiesToFile() ---> no current project loaded!");
 	}
@@ -71,12 +71,12 @@ bool ModelEditor::saveModelEntitiesToFile()
 			}
 
 			// Perform empty string & space conversions
-			meshPath = (meshPath == "") ? "?" : meshPath;
-			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-			emissionMapPath = (emissionMapPath == "") ? "?" : emissionMapPath;
-			reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
-			normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
-			lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
+			meshPath = (meshPath.empty()) ? "?" : meshPath;
+			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
+			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
+			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
+			lodEntityID = (lodEntityID.empty()) ? "?" : lodEntityID;
 			replace(meshPath.begin(), meshPath.end(), ' ', '?');
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');

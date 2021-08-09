@@ -24,7 +24,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 {
-	if (_getTerrainEntities().empty() || _selectedID == "")
+	if (_getTerrainEntities().empty() || _selectedID.empty())
 	{
 		return nullptr;
 	}
@@ -56,7 +56,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 
 	// Check if height map resolution is too high
 	auto heightMapSize = static_cast<unsigned int>(sqrt(static_cast<double>(pixelValues->size())));
-	if (heightMapSize > MAX_HEIGHT_MAP_RESOLUTION)
+	if (heightMapSize > MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to create terrain with ID \"" + ID + "\": height map resolution too high!");
 		deleteEntity(ID);
@@ -90,19 +90,15 @@ void TerrainEntityManager::loadMesh(const string& ID)
 {
 	// Temporary values
 	auto entity = getEntity(ID);
-
-	// Data collections
-	vector<Vec3> tempVertices;
-	vector<Vec2> tempUvCoords;
-	vector<Vec3> tempNormals;
-
-	// Handy values
 	const auto& pixelColors = entity->getPixelValues();
 	const float size = entity->getSize();
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
 	const float maxHeight = entity->getMaxHeight();
 	const float uvRepeat = entity->getUvRepeat();
+	vector<Vec3> tempVertices;
+	vector<Vec2> tempUvCoords;
+	vector<Vec3> tempNormals;
 
 	for (float x = -halfSize; x < halfSize; x++) // X direction
 	{

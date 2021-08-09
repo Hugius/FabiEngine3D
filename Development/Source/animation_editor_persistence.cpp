@@ -11,7 +11,7 @@ using std::istringstream;
 bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("AnimationEditor::loadAnimationsFromFile() ---> no current project loaded!");
 	}
@@ -189,7 +189,7 @@ bool AnimationEditor::saveAnimationsToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("AnimationEditor::saveAnimationsToFile() ---> no current project loaded!");
 	}

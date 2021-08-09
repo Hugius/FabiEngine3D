@@ -23,7 +23,7 @@ void BillboardEditor::_updateCamera()
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}
-		_fe3d.camera_setThirdPersonLookat(Vec3(cameraLookat.x, max(GRID_Y_OFFSET, cameraLookat.y), cameraLookat.z));
+		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);

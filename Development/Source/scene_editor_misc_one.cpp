@@ -16,7 +16,7 @@ bool SceneEditor::isLoaded()
 bool SceneEditor::isSceneExisting(const string& fileName)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::isSceneExisting() ---> no current project loaded!");
 	}
@@ -48,7 +48,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID == "" && _activeBillboardID == "" && _activeLampID == "" && _activeSpeakerID == "")
+	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = modelID;
@@ -96,7 +96,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID == "" && _activeModelID == "" && _activeLampID == "" && _activeSpeakerID == "")
+	if (_activeBillboardID.empty() && _activeModelID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = billboardID;
@@ -144,7 +144,7 @@ void SceneEditor::_selectSound(const string& soundID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID == "" && _activeModelID == "" && _activeLampID == "" && _activeSpeakerID == "")
+	if (_activeBillboardID.empty() && _activeModelID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
 	{
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = soundID;
@@ -273,7 +273,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 void SceneEditor::_updateModelBlinking(const string& modelID, int& direction)
 {
 	// Reset multiplier if nothing active/selected
-	if (modelID == "")
+	if (modelID.empty())
 	{
 		direction = 1;
 	}
@@ -302,7 +302,7 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& direction)
 void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (billboardID == "")
+	if (billboardID.empty())
 	{
 		direction = 1;
 	}
@@ -331,7 +331,7 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& direc
 void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (modelID == "")
+	if (modelID.empty())
 	{
 		direction = 1;
 	}
@@ -368,7 +368,7 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 void SceneEditor::_updateLampAnimation(const string& modelID, int& direction)
 {
 	// Reset direction if nothing active/selected
-	if (modelID == "")
+	if (modelID.empty())
 	{
 		direction = 1;
 	}

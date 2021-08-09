@@ -26,7 +26,7 @@ void AudioEditor::load()
 	_fe3d.billboardEntity_setBright("@@icon", true);
 	_fe3d.camera_reset();
 	_fe3d.camera_setYaw(-90.0f);
-	_gui.getGlobalScreen()->createTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedAudioID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
 	_isEditorLoaded = true;
 }
@@ -42,7 +42,7 @@ void AudioEditor::unload()
 	// Miscellaneous
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.billboardEntity_delete("@@icon");
-	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAudioID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 
 	// Reset editor properties

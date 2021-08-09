@@ -72,7 +72,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 {
-	if (_getSkyEntities().empty() || _selectedMainID == "")
+	if (_getSkyEntities().empty() || _selectedMainID.empty())
 	{
 		return nullptr;
 	}
@@ -84,7 +84,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
 {
-	if (_getSkyEntities().empty() || _selectedMixID == "")
+	if (_getSkyEntities().empty() || _selectedMixID.empty())
 	{
 		return nullptr;
 	}

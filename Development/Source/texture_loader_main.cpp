@@ -173,7 +173,7 @@ TextureID TextureLoader::_loadText(const string& textContent, const string& font
 {
 	// No empty text
 	string newText;
-	if (textContent == "")
+	if (textContent.empty())
 	{
 		newText = " ";
 	}

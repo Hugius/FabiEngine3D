@@ -159,7 +159,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 				auto content = getWritefield(ID)->getTextContent();
 				
 				// Check if writefield is not empty
-				if (content == "")
+				if (content.empty())
 				{
 					return false;
 				}

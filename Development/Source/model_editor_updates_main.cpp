@@ -167,7 +167,7 @@ void ModelEditor::_updateModelCreating()
 						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
 
 						// Check if not cancelled
-						if (filePath == "")
+						if (filePath.empty())
 						{
 							_isCreatingModel = false;
 							return;

@@ -103,8 +103,15 @@ void FabiEngine3D::waterEntity_setPosition(const string& ID, Vec3 position)
 
 void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 {
-	_core->_waterEntityManager.getEntity(ID)->setSize(size);
-	_core->_waterEntityManager.loadMesh(ID);
+	if (size > WaterEntityManager::MAX_SIZE)
+	{
+		Logger::throwWarning("Tried to set size of water with ID \"" + ID + "\": too high!");
+	}
+	else
+	{
+		_core->_waterEntityManager.getEntity(ID)->setSize(size);
+		_core->_waterEntityManager.loadMesh(ID);
+	}
 }
 
 void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)

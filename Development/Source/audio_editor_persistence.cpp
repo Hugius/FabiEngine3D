@@ -11,7 +11,7 @@ using std::istringstream;
 const vector<string> AudioEditor::getAllAudioPathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::getAllAudioPathsFromFile() ---> no current project loaded!");
 	}
@@ -59,7 +59,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 bool AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile() ---> no current project loaded!");
 	}
@@ -122,7 +122,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("AudioEditor::saveAudioEntitiesToFile() ---> no current project loaded!");
 	}
@@ -141,7 +141,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 		auto audioPath = _fe3d.soundEntity_getFilePath(audioID);
 
 		// Perform empty string & space conversions
-		audioPath = (audioPath == "") ? "?" : audioPath;
+		audioPath = (audioPath.empty()) ? "?" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 		// Export data

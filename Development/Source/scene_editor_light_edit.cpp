@@ -15,7 +15,7 @@ void SceneEditor::_updateLightEditing()
 		SELECTED_LAMP_ID = "";
 
 		// User must not be in placement mode
-		if ((_currentPreviewModelID == "") && (_currentPreviewBillboardID == "") && !_isPlacingPointLight && (_currentPreviewSoundID == ""))
+		if ((_currentPreviewModelID.empty()) && (_currentPreviewBillboardID.empty()) && !_isPlacingPointLight && (_currentPreviewSoundID.empty()))
 		{
 			// Check which entity is selected
 			auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
@@ -71,9 +71,9 @@ void SceneEditor::_updateLightEditing()
 			}
 			
 			// Check if user made the active lamp inactive
-			if ((SELECTED_LAMP_ID == "") && (ACTIVE_LAMP_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if ((SELECTED_LAMP_ID.empty()) && (ACTIVE_LAMP_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				// LMB pressed
+				// Check if LMB is pressed
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_LAMP_ID = "";

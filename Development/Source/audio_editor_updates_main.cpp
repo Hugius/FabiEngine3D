@@ -97,9 +97,9 @@ void AudioEditor::_updateAudioCreating()
 						_loadedAudioIDs.push_back(newAudioID);
 
 						// Miscellaneous
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), "Audio: " +
 							_currentAudioID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), true);
 						_isCreatingAudio = false;
 						_isEditingAudio = true;
 					}
@@ -131,7 +131,8 @@ void AudioEditor::_updateAudioChoosing()
 		// Check if a audio ID is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select audio
 				_currentAudioID = "@" + selectedButtonID;
@@ -140,9 +141,9 @@ void AudioEditor::_updateAudioChoosing()
 				if (_isEditingAudio)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), "Audio: " +
 						_currentAudioID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

@@ -17,6 +17,8 @@ public:
 	void selectWater(const string& ID);
 	void update() override;
 
+	static inline const unsigned int MAX_SIZE = 1024;
+
 private:
 	string _selectedID = "";
 };

@@ -10,7 +10,7 @@ using std::filesystem::remove_all;
 
 bool TopViewportController::isScriptStarted()
 {
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		return false;
 	}
@@ -22,7 +22,7 @@ bool TopViewportController::isScriptStarted()
 
 bool TopViewportController::isScriptRunning()
 {
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		return false;
 	}
@@ -34,7 +34,7 @@ bool TopViewportController::isScriptRunning()
 
 void TopViewportController::_updateMiscellaneous()
 {
-	bool hoverable = (_currentProjectID == "") ? false : !_scriptEditor.getScriptExecutor().isStarted();
+	bool hoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
 	// Project menus hoverability
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("skyEditor")->setHoverable(hoverable);
@@ -272,7 +272,7 @@ void TopViewportController::_updateProjectDeleting()
 void TopViewportController::_applyProjectChange()
 {
 	// Change window title
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		_fe3d.misc_setWindowTitle("FabiEngine3D");
 	}

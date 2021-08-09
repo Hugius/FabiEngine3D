@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile() ---> no current project loaded!");
 	}
@@ -76,7 +76,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 bool BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile() ---> no current project loaded!");
 	}
@@ -204,7 +204,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile() ---> no current project loaded!");
 	}
@@ -238,9 +238,9 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		auto isBright = _fe3d.billboardEntity_isBright(billboardID);
 
 		// Perform empty string & space conversions
-		diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-		fontPath = (fontPath == "") ? "?" : fontPath;
-		textContent = (textContent == "") ? "?" : textContent;
+		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+		fontPath = (fontPath.empty()) ? "?" : fontPath;
+		textContent = (textContent.empty()) ? "?" : textContent;
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');

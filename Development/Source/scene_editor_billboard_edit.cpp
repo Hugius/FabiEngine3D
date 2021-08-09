@@ -21,7 +21,7 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelID == "" && _currentPreviewBillboardID == "" && !_isPlacingPointLight && _currentPreviewSoundID == "")
+		if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
 		{
 			// Check if user selected a billboard
 			for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -62,7 +62,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 
 			// Check if user made the active billboard inactive
-			if (SELECTED_BILLBOARD_ID == "" && ACTIVE_BILLBOARD_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
@@ -178,15 +178,15 @@ void SceneEditor::_updateBillboardEditing()
 
 			// Check if billboard is still selected or active
 			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
-			if (SELECTED_BILLBOARD_ID == "" && ACTIVE_BILLBOARD_ID == "")
+			if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID.empty())
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 			else
 			{
-				if (_selectedModelID == "" && _activeModelID == "" && 
-					_selectedLampID == "" && _activeLampID == "" &&
-					_selectedSpeakerID == "" && _activeSpeakerID == "")
+				if (_selectedModelID.empty() && _activeModelID.empty() && 
+					_selectedLampID.empty() && _activeLampID.empty() &&
+					_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 				{
 					_fe3d.textEntity_setVisible(textEntityID, true);
 				}

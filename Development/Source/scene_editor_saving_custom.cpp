@@ -10,7 +10,7 @@ using std::ofstream;
 bool SceneEditor::saveCustomSceneToFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::saveCustomSceneToFile() ---> no current project loaded!");
 	}
@@ -348,7 +348,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto animationColumnIndex = _fe3d.billboardEntity_getSpriteAnimationColumnIndex(billboardID);
 
 			// Perform empty string & space conversions
-			textContent = (textContent == "") ? "?" : textContent;
+			textContent = (textContent.empty()) ? "?" : textContent;
 			replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Extract preview ID
@@ -620,7 +620,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
 			// Perform empty string & space conversions
-			flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
+			flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
 			replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 
 			// Write data

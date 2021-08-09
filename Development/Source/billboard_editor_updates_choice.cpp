@@ -48,9 +48,9 @@ void BillboardEditor::_updateChoiceMenu()
 			}
 
 			// Update buttons hoverability
-			screen->getButton("appearance")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID) == "");
+			screen->getButton("appearance")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID).empty());
 			screen->getButton("animation")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID) != "");
-			screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID) == "");
+			screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID).empty());
 		}
 		else if (screen->getID() == "billboardEditorMenuMesh")
 		{

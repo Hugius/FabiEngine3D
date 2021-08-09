@@ -11,7 +11,7 @@ using std::istringstream;
 bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("SceneEditor::loadCustomSceneFromFile() ---> no current project loaded!");
 	}
@@ -251,7 +251,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 						iss >> nextElement;
 
 						// Check for end of line
-						if (nextElement == "")
+						if (nextElement.empty())
 						{
 							break;
 						}
@@ -304,7 +304,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				iss >> nextElement;
 
 				// Check for end of line
-				if (nextElement == "")
+				if (nextElement.empty())
 				{
 					break;
 				}

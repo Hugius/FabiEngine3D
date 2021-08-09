@@ -12,7 +12,7 @@ using std::istringstream;
 const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::getAllTerrainTexturePathsFromFile() ---> no current project loaded!");
 	}
@@ -108,7 +108,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::loadTerrainEntitiesFromFile() ---> no current project loaded!");
 	}
@@ -188,9 +188,67 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
-		// Add new terrain entity
+		// Add terrain ID
 		_loadedTerrainIDs.push_back(terrainID);
+		
+		// Create terrain
 		_fe3d.terrainEntity_create(terrainID, heightMapPath);
+
+		// Diffuse map
+		if (!diffuseMapPath.empty())
+		{
+			_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
+		}
+
+		// Normal map
+		if (!normalMapPath.empty())
+		{
+			_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
+		}
+
+		// Normal map R
+		if (!normalMapPathR.empty())
+		{
+			_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
+		}
+
+		// Normal map G
+		if (!normalMapPathG.empty())
+		{
+			_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
+		}
+
+		// Normal map B
+		if (!normalMapPathB.empty())
+		{
+			_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
+		}
+
+		// Blend map
+		if (!blendMapPath.empty())
+		{
+			_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
+		}
+
+		// Blend map R
+		if (!blendMapPathR.empty())
+		{
+			_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
+		}
+
+		// Blend map G
+		if (!blendMapPathG.empty())
+		{
+			_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
+		}
+
+		// Blend map B
+		if (!blendMapPathB.empty())
+		{
+			_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
+		}
+
+		// Set properties
 		_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
 		_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
 		_fe3d.terrainEntity_setLightness(terrainID, lightness);
@@ -200,15 +258,6 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
 		_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
 		_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
-		if (!diffuseMapPath.empty()) _fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
-		if (!normalMapPath.empty())  _fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
-		if (!normalMapPathR.empty()) _fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
-		if (!normalMapPathG.empty()) _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
-		if (!normalMapPathB.empty()) _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
-		if (!blendMapPath.empty())   _fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
-		if (!blendMapPathR.empty())  _fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
-		if (!blendMapPathG.empty())  _fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
-		if (!blendMapPathB.empty())  _fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
 	}
 
 	// Close file
@@ -230,7 +279,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 	}
 
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID.empty())
 	{
 		Logger::throwError("EnvironmentEditor::saveTerrainEntitiesToFile() ---> no current project loaded!");
 	}
@@ -267,16 +316,16 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(terrainID);
 
 		// Perform empty string & space conversions
-		heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
-		diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-		normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
-		blendMapPath = (blendMapPath == "") ? "?" : blendMapPath;
-		blendMapPathR = (blendMapPathR == "") ? "?" : blendMapPathR;
-		blendMapPathG = (blendMapPathG == "") ? "?" : blendMapPathG;
-		blendMapPathB = (blendMapPathB == "") ? "?" : blendMapPathB;
-		normalMapPathR = (normalMapPathR == "") ? "?" : normalMapPathR;
-		normalMapPathG = (normalMapPathG == "") ? "?" : normalMapPathG;
-		normalMapPathB = (normalMapPathB == "") ? "?" : normalMapPathB;
+		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
+		blendMapPath = (blendMapPath.empty()) ? "?" : blendMapPath;
+		blendMapPathR = (blendMapPathR.empty()) ? "?" : blendMapPathR;
+		blendMapPathG = (blendMapPathG.empty()) ? "?" : blendMapPathG;
+		blendMapPathB = (blendMapPathB.empty()) ? "?" : blendMapPathB;
+		normalMapPathR = (normalMapPathR.empty()) ? "?" : normalMapPathR;
+		normalMapPathG = (normalMapPathG.empty()) ? "?" : normalMapPathG;
+		normalMapPathB = (normalMapPathB.empty()) ? "?" : normalMapPathB;
 		replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');

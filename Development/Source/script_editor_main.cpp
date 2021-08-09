@@ -77,7 +77,7 @@ void ScriptEditor::unload()
 	_script.reset();
 
 	// Reset editor properties
-	_scriptFileNamesToDelete.clear();
+	_scriptFilenamesToDelete.clear();
 	_activeActionKey = InputType::NONE;
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;

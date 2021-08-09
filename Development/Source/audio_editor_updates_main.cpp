@@ -32,7 +32,7 @@ void AudioEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add audio button
 			{
-				_gui.getGlobalScreen()->createValueForm("newAudioName", "New Audio Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("audioCreate", "Create Audio", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAudio = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit audio button
@@ -40,16 +40,22 @@ void AudioEditor::_updateMainMenu()
 				_isChoosingAudio = true;
 				_isEditingAudio = true;
 				auto IDs = getLoadedAudioIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("audioList", "Edit Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete audio button
 			{
 				_isChoosingAudio = true;
 				_isDeletingAudio = true;
 				auto IDs = getLoadedAudioIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -75,7 +81,7 @@ void AudioEditor::_updateAudioCreating()
 		string newAudioID = "";
 
 		// Check if user filled in a new ID
-		if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioID, { _currentAudioID }))
+		if (_gui.getGlobalScreen()->checkValueForm("audioCreate", newAudioID, { _currentAudioID }))
 		{
 			// Check if ID starts with @ sign
 			if (newAudioID[0] != '@')
@@ -103,7 +109,7 @@ void AudioEditor::_updateAudioCreating()
 						_isCreatingAudio = false;
 						_isEditingAudio = true;
 					}
-					else // Name already exists
+					else // ID already exists
 					{
 						Logger::throwWarning("Audio ID \"" + newAudioID.substr(1) + "\" already exists!");
 					}

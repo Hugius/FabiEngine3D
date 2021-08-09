@@ -9,8 +9,8 @@ class AudioManager final
 public:
 	AudioManager(AudioLoader& audioLoader);
 
-	void addMusic(const string& fileName);
-	void addSound(const string& ID, const string& fileName);
+	void createMusic(const string& filename);
+	void createSound(const string& ID, const string& filename);
 	void deleteMusic();
 	void deleteSound(const string& ID);
 	void deleteAllSounds();

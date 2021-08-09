@@ -26,25 +26,25 @@ void ModelEditor::_updateAabbMenu()
 				_currentAabbID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 				_fe3d.misc_disableAabbFrameRendering();
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), false);
 				return;
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("newAabbName", "New AABB Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("aabbCreate", "Create AABB", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				// Retrieve all AABB names of this model
-				vector<string> aabbNames = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
-				for (auto& name : aabbNames)
+				vector<string> IDs = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
+				for (auto& ID : IDs)
 				{
-					name = name.substr(string(_currentModelID + "@").size());
+					ID = ID.substr(string(_currentModelID + "@").size());
 				}
-				sort(aabbNames.begin(), aabbNames.end());
+				sort(IDs.begin(), IDs.end());
 
 				// Show choicelist
-				_gui.getGlobalScreen()->createChoiceForm("aabbList", "Select AABB", Vec2(-0.5f, 0.1f), aabbNames);
+				_gui.getGlobalScreen()->createChoiceForm("aabbList", "Edit AABB", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
@@ -53,7 +53,7 @@ void ModelEditor::_updateAabbMenu()
 				_transformationDirection = Direction::X;
 				_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
 				_currentAabbID = "";
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), false);
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
@@ -115,25 +115,25 @@ void ModelEditor::_updateAabbMenu()
 		}
 
 		// Create AABB
-		string newAabbName;
-		if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newAabbName, {}))
+		string newAabbID;
+		if (_gui.getGlobalScreen()->checkValueForm("aabbCreate", newAabbID, {}))
 		{
-			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
+			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbID)) // Check if already exists
 			{
-				Logger::throwWarning("AABB name \"" + newAabbName + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
+				Logger::throwWarning("AABB ID \"" + newAabbID + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
 			}
 			else
 			{
 				// @ sign not allowed
-				if (newAabbName.find('@') == string::npos)
+				if (newAabbID.find('@') == string::npos)
 				{
 					// Spaces not allowed
-					if (newAabbName.find(' ') == string::npos)
+					if (newAabbID.find(' ') == string::npos)
 					{
 						// Bind AABB
-						_fe3d.aabbEntity_create(_currentModelID + "@" + newAabbName);
-						_fe3d.aabbEntity_bindToModelEntity((_currentModelID + "@" + newAabbName), _currentModelID);
-						_currentAabbID = newAabbName;
+						_fe3d.aabbEntity_create(_currentModelID + "@" + newAabbID);
+						_fe3d.aabbEntity_bindToModelEntity((_currentModelID + "@" + newAabbID), _currentModelID);
+						_currentAabbID = newAabbID;
 
 						// Reset editing
 						_isMovingToggled = false;
@@ -141,18 +141,18 @@ void ModelEditor::_updateAabbMenu()
 						_transformationDirection = Direction::X;
 
 						// Show AABB title
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(),
 							"AABB: " + _currentAabbID, 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), true);
 					}
 					else
 					{
-						Logger::throwWarning("New AABB name cannot contain any spaces!");
+						Logger::throwWarning("AABB ID cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("New AABB name cannot contain '@'!");
+					Logger::throwWarning("AABB ID cannot contain '@'!");
 				}
 			}
 		}
@@ -169,7 +169,7 @@ void ModelEditor::_updateAabbMenu()
 				_fe3d.aabbEntity_setVisible(entityID, false);
 			}
 
-			// Check if a AABB name is hovered
+			// Check if a AABB ID is hovered
 			if (selectedButtonID != "")
 			{
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
@@ -183,9 +183,9 @@ void ModelEditor::_updateAabbMenu()
 					_transformationDirection = Direction::X;
 
 					// Show AABB title
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(),
 						"AABB: " + _currentAabbID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), true);
 					_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 				}
 				else

@@ -35,23 +35,29 @@ void SkyEditor::_updateMainMenu()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingSky = true;
-				_gui.getGlobalScreen()->createValueForm("skyCreate", "New Sky Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("skyCreate", "Create Sky", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_isChoosingSky = true;
 				_isEditingSky = true;
 				auto IDs = getLoadedSkyIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("skyList", "Edit Sky", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_isChoosingSky = true;
 				_isDeletingSky = true;
 				auto IDs = getLoadedSkyIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("skyList", "Select Sky", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("skyList", "Delete Sky", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -110,24 +116,24 @@ void SkyEditor::_updateSkyCreating()
 {
 	if (_isCreatingSky)
 	{
-		string newSkyName;
+		string newSkyID;
 
 		// Create new sky
-		if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyID, {}))
 		{
 			// @ sign not allowed
-			if (newSkyName.find('@') == string::npos)
+			if (newSkyID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newSkyName.find(' ') == string::npos)
+				if (newSkyID.find(' ') == string::npos)
 				{
 					// Add @ sign to new name
-					newSkyName = "@" + newSkyName;
+					newSkyID = "@" + newSkyID;
 
 					// If sky name not existing yet
-					if (find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyName) == _loadedSkyIDs.end())
+					if (find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) == _loadedSkyIDs.end())
 					{
-						_currentSkyID = newSkyName;
+						_currentSkyID = newSkyID;
 						_loadedSkyIDs.push_back(_currentSkyID);
 						_fe3d.skyEntity_create(_currentSkyID);
 						_fe3d.skyEntity_selectMainSky(_currentSkyID);
@@ -140,7 +146,7 @@ void SkyEditor::_updateSkyCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
+						Logger::throwWarning("Sky name \"" + newSkyID.substr(1) + "\" already exists!");
 					}
 				}
 				else

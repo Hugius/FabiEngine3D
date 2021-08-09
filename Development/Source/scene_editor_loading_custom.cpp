@@ -8,7 +8,7 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
-bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
+bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 {
 	// Error checking
 	if (_currentProjectID.empty())
@@ -22,12 +22,12 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 	// Compose file path
 	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + fileName + ".fe3d");
+		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + filename + ".fe3d");
 
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Cannot load scene with ID \"" + fileName + "\"!");
+		Logger::throwWarning("Cannot load scene with ID \"" + filename + "\"!");
 		return false;
 	}
 
@@ -686,7 +686,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	file.close();
 
 	// Set new scene ID
-	_loadedSceneID = fileName;
+	_loadedSceneID = filename;
 
 	// Logging
 	Logger::throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");

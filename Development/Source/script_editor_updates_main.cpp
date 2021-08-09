@@ -32,25 +32,25 @@ void ScriptEditor::_updateGUI()
 			}
 			else if (screen->getButton("search")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("search", "Search Keyword", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("scriptCreate", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				auto IDs = _script.getAllScriptFileIDs();
 				sort(IDs.begin(), IDs.end());
-				_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Choose Script", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("rename")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("scriptRename", "New Script Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("scriptRename", "Rename Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
-				_scriptFileNamesToDelete.push_back(_currentScriptFileID);
+				_scriptFilenamesToDelete.push_back(_currentScriptFileID);
 				_fe3d.billboardEntity_deleteAll();
 				_script.removeScriptFile(_currentScriptFileID);
 				_isWritingScript = false;
@@ -182,18 +182,18 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if user wants to create a new script
-	string newScriptName;
-	if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptName))
+	// Check if user wants to create a new script file
+	string newScriptFileID;
+	if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptFileID))
 	{
 		// Spaces not allowed
-		if (newScriptName.find(' ') == string::npos)
+		if (newScriptFileID.find(' ') == string::npos)
 		{
 			// Check if name already exists
-			auto existingNames = _script.getAllScriptFileIDs();
-			if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())
+			auto existingScriptFileIDs = _script.getAllScriptFileIDs();
+			if (find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{
-				_currentScriptFileID = newScriptName;
+				_currentScriptFileID = newScriptFileID;
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
@@ -203,7 +203,7 @@ void ScriptEditor::_updateMiscellaneous()
 			}
 			else
 			{
-				Logger::throwWarning("Script name \"" + newScriptName + "\" already exists!");
+				Logger::throwWarning("Script name \"" + newScriptFileID + "\" already exists!");
 			}
 		}
 		else
@@ -232,14 +232,14 @@ void ScriptEditor::_updateMiscellaneous()
 	}
 
 	// Check if user wants to rename a script
-	if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptName))
+	if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptFileID))
 	{
-		auto existingNames = _script.getAllScriptFileIDs();
-		if (find(existingNames.begin(), existingNames.end(), newScriptName) == existingNames.end())
+		auto existingScriptFileIDs = _script.getAllScriptFileIDs();
+		if (find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 		{
-			_scriptFileNamesToDelete.push_back(_currentScriptFileID);
-			_script.renameScriptFile(_currentScriptFileID, newScriptName);
-			_currentScriptFileID = newScriptName;
+			_scriptFilenamesToDelete.push_back(_currentScriptFileID);
+			_script.renameScriptFile(_currentScriptFileID, newScriptFileID);
+			_currentScriptFileID = newScriptFileID;
 		}
 		else
 		{

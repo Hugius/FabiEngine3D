@@ -34,7 +34,7 @@ void BillboardEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add billboard button
 			{
-				_gui.getGlobalScreen()->createValueForm("billboardCreate", "New Billboard Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("billboardCreate", "Create Billboard", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingBillboard = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit billboard button
@@ -42,16 +42,22 @@ void BillboardEditor::_updateMainMenu()
 				_isChoosingBillboard = true;
 				_isEditingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Edit Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete billboard button
 			{
 				_isChoosingBillboard = true;
 				_isDeletingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Delete Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 		}
 

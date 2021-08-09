@@ -29,7 +29,7 @@ public:
 	void update();
 
 	// Editor scene
-	bool loadEditorSceneFromFile(const string& fileName);
+	bool loadEditorSceneFromFile(const string& filename);
 	bool saveEditorSceneToFile();
 
 	// Custom scene
@@ -44,7 +44,7 @@ public:
 	void addAabbToCustomScene(const string& aabbID);
 	void addLightToCustomScene(const string& lightID);
 	void addSoundToCustomScene(const string& soundID);
-	bool loadCustomSceneFromFile(const string& fileName);
+	bool loadCustomSceneFromFile(const string& filename);
 	bool saveCustomSceneToFile();
 
 	// Miscellaneous
@@ -53,7 +53,7 @@ public:
 	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
 	bool isLoaded();
-	bool isSceneExisting(const string& fileName);
+	bool isSceneExisting(const string& filename);
 	const string& getLoadedSceneID();
 
 private:

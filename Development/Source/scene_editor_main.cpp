@@ -105,7 +105,7 @@ void SceneEditor::load()
 	// Create name textfields
 	_gui.getGlobalScreen()->createTextfield("selectedModelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedBillboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("selectedSoundName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedSoundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
@@ -191,7 +191,7 @@ void SceneEditor::unload()
 	// Delete name textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelID");
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardID");
-	_gui.getGlobalScreen()->deleteTextfield("selectedSoundName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedSoundID");
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();

@@ -13,7 +13,7 @@ bool SceneEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-bool SceneEditor::isSceneExisting(const string& fileName)
+bool SceneEditor::isSceneExisting(const string& filename)
 {
 	// Error checking
 	if (_currentProjectID.empty())
@@ -23,7 +23,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
-		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + fileName + ".fe3d";
+		("projects\\" + _currentProjectID)) + "\\scenes\\editor\\" + filename + ".fe3d";
 
 	// Check if scene file exists
 	return (_fe3d.misc_isFileExisting(filePath));
@@ -53,11 +53,11 @@ void SceneEditor::_selectModel(const string& modelID)
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = modelID;
 		reverse(tempID.begin(), tempID.end());
-		string modelName = tempID.substr(tempID.find('_') + 1);
-		reverse(modelName.begin(), modelName.end());
+		string rawID = tempID.substr(tempID.find('_') + 1);
+		reverse(rawID.begin(), rawID.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
-		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + rawID, 0.025f);
 	}
 }
 
@@ -80,11 +80,11 @@ void SceneEditor::_activateModel(const string& modelID)
 	// Removing the unique number from the modelID and updating the text content
 	string tempID = modelID;
 	reverse(tempID.begin(), tempID.end());
-	string modelName = tempID.substr(tempID.find('_') + 1);
-	reverse(modelName.begin(), modelName.end());
+	string rawID = tempID.substr(tempID.find('_') + 1);
+	reverse(rawID.begin(), rawID.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
-	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + rawID, 0.025f);
 }
 
 void SceneEditor::_selectBillboard(const string& billboardID)
@@ -101,11 +101,11 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = billboardID;
 		reverse(tempID.begin(), tempID.end());
-		string billboardName = tempID.substr(tempID.find('_') + 1);
-		reverse(billboardName.begin(), billboardName.end());
+		string rawID = tempID.substr(tempID.find('_') + 1);
+		reverse(rawID.begin(), rawID.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
-		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + rawID, 0.025f);
 	}
 }
 
@@ -128,11 +128,11 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	// Removing the unique number from the billboardID and updating the text content
 	string tempID = billboardID;
 	reverse(tempID.begin(), tempID.end());
-	string billboardName = tempID.substr(tempID.find('_') + 1);
-	reverse(billboardName.begin(), billboardName.end());
+	string rawID = tempID.substr(tempID.find('_') + 1);
+	reverse(rawID.begin(), rawID.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
-	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + rawID, 0.025f);
 }
 
 void SceneEditor::_selectSound(const string& soundID)
@@ -149,11 +149,11 @@ void SceneEditor::_selectSound(const string& soundID)
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = soundID;
 		reverse(tempID.begin(), tempID.end());
-		string soundName = tempID.substr(tempID.find('_') + 1);
-		reverse(soundName.begin(), soundName.end());
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
+		string rawID = tempID.substr(tempID.find('_') + 1);
+		reverse(rawID.begin(), rawID.end());
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
-		_fe3d.textEntity_setTextContent(textEntityID, "Selected sound: " + soundName, 0.025f);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected sound: " + rawID, 0.025f);
 	}
 }
 
@@ -175,11 +175,11 @@ void SceneEditor::_activateSound(const string& soundID)
 	// Removing the unique number from the soundID and updating the text content
 	string tempID = soundID;
 	reverse(tempID.begin(), tempID.end());
-	string soundName = tempID.substr(tempID.find('_') + 1);
-	reverse(soundName.begin(), soundName.end());
-	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
+	string rawID = tempID.substr(tempID.find('_') + 1);
+	reverse(rawID.begin(), rawID.end());
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
-	_fe3d.textEntity_setTextContent(textEntityID, "Active sound: " + soundName, 0.025f);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active sound: " + rawID, 0.025f);
 }
 
 vector<string> SceneEditor::_loadSceneIDs()

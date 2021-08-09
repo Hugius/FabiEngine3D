@@ -194,7 +194,7 @@ void RightViewportController::initialize()
 	rightWindow->getScreen("scriptEditorControls")->createRectangle("v", Vec2(-0.475f, -0.825f), Vec2(0.45f, 0.15f), "v.png", false);
 	rightWindow->getScreen("scriptEditorControls")->createTextfield("title", Vec2(0.0f, 0.9f), Vec2(TW("Editor Controls"), CH), "Editor Controls", WHITE);
 	rightWindow->getScreen("scriptEditorControls")->createTextfield("mouseLeft", Vec2(-0.5f, 0.675f), Vec2(TW("Place Cursor"), CH), "Place Cursor", BLACK, false);
-	rightWindow->getScreen("scriptEditorControls")->createTextfield("mouseRight", Vec2(-0.5f, 0.475f), Vec2(TW("Select Line"), CH), "Select Line", BLACK, false);
+	rightWindow->getScreen("scriptEditorControls")->createTextfield("mouseRight", Vec2(-0.5f, 0.475f), Vec2(TW("Choose Line"), CH), "Choose Line", BLACK, false);
 	rightWindow->getScreen("scriptEditorControls")->createTextfield("enter", Vec2(-0.5f, 0.275f), Vec2(TW("Next Line"), CH), "Next Line", BLACK, false);
 	rightWindow->getScreen("scriptEditorControls")->createTextfield("backspace", Vec2(-0.5f, 0.075f), Vec2(TW("Remove Char"), CH), "Remove Char", BLACK, false);
 	rightWindow->getScreen("scriptEditorControls")->createTextfield("esc", Vec2(-0.5f, -0.125f), Vec2(TW("Back"), CH), "Back", BLACK, false);

@@ -6,24 +6,24 @@ void FabiEngine3D::input_setLocked(bool locked)
 	return _core->_inputHandler.setLocked(locked);
 }
 
-const bool FabiEngine3D::input_isKeyDown(InputType keyName)
+const bool FabiEngine3D::input_isKeyDown(InputType key)
 {
-	return _core->_inputHandler.isKeyDown(keyName);
+	return _core->_inputHandler.isKeyDown(key);
 }
 
-const bool FabiEngine3D::input_isKeyPressed(InputType keyName)
+const bool FabiEngine3D::input_isKeyPressed(InputType key)
 {
-	return _core->_inputHandler.isKeyPressed(keyName);
+	return _core->_inputHandler.isKeyPressed(key);
 }
 
-const bool FabiEngine3D::input_isMouseDown(InputType mouseButton)
+const bool FabiEngine3D::input_isMouseDown(InputType button)
 {
-	return _core->_inputHandler.isMouseDown(mouseButton);
+	return _core->_inputHandler.isMouseDown(button);
 }
 
-const bool FabiEngine3D::input_isMousePressed(InputType mouseButton)
+const bool FabiEngine3D::input_isMousePressed(InputType button)
 {
-	return _core->_inputHandler.isMousePressed(mouseButton);
+	return _core->_inputHandler.isMousePressed(button);
 }
 
 const int FabiEngine3D::input_getMouseWheelX()

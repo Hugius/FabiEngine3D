@@ -61,10 +61,10 @@ public:
 	const int input_getMouseWheelX();
 	const int input_getMouseWheelY();
 	const bool input_isLocked();
-	const bool input_isKeyDown(InputType keyName);
-	const bool input_isKeyPressed(InputType keyName);
-	const bool input_isMouseDown(InputType mouseButton);
-	const bool input_isMousePressed(InputType mouseButton);
+	const bool input_isKeyDown(InputType key);
+	const bool input_isKeyPressed(InputType key);
+	const bool input_isMouseDown(InputType button);
+	const bool input_isMousePressed(InputType button);
 
 	// Camera interface - setters
 	void camera_reset();

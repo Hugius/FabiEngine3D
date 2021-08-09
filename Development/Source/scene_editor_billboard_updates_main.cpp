@@ -39,12 +39,13 @@ void SceneEditor::_updateBillboardMenu()
 					{
 						// Removing the unique number from the billboardID
 						reverse(billboardID.begin(), billboardID.end());
-						string billboardName = billboardID.substr(billboardID.find('_') + 1);
-						reverse(billboardName.begin(), billboardName.end());
+						string rawID = billboardID.substr(billboardID.find('_') + 1);
+						reverse(rawID.begin(), rawID.end());
 						reverse(billboardID.begin(), billboardID.end());
 
 						// Add new button
-						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, billboardName);
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->
+							getScrollingList("billboardList")->createButton(billboardID, rawID);
 					}
 				}
 			}

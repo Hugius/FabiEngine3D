@@ -38,23 +38,29 @@ void WaterEditor::_updateMainMenu()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingWater = true;
-				_gui.getGlobalScreen()->createValueForm("waterCreate", "New Water Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("waterCreate", "Create Water", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_isChoosingWater = true;
 				_isEditingWater = true;
 				auto IDs = getLoadedWaterIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("waterList", "Edit Water", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_isChoosingWater = true;
 				_isDeletingWater = true;
 				auto IDs = getLoadedWaterIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("waterList", "Select Water", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("waterList", "Delete Water", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 
@@ -118,24 +124,24 @@ void WaterEditor::_updateWaterCreating()
 {
 	if (_isCreatingWater)
 	{
-		string newWaterName;
+		string newWaterID;
 
 		// Create new water
-		if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterID, {}))
 		{
 			// @ sign not allowed
-			if (newWaterName.find('@') == string::npos)
+			if (newWaterID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newWaterName.find(' ') == string::npos)
+				if (newWaterID.find(' ') == string::npos)
 				{
 					// Add @ sign to new name
-					newWaterName = "@" + newWaterName;
+					newWaterID = "@" + newWaterID;
 
 					// If water name not existing yet
-					if (find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterName) == _loadedWaterIDs.end())
+					if (find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) == _loadedWaterIDs.end())
 					{
-						_currentWaterID = newWaterName;
+						_currentWaterID = newWaterID;
 						_loadedWaterIDs.push_back(_currentWaterID);
 						_fe3d.waterEntity_create(_currentWaterID);
 						_fe3d.waterEntity_select(_currentWaterID);
@@ -148,7 +154,7 @@ void WaterEditor::_updateWaterCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Water name \"" + newWaterName.substr(1) + "\" already exists!");
+						Logger::throwWarning("Water name \"" + newWaterID.substr(1) + "\" already exists!");
 					}
 				}
 				else

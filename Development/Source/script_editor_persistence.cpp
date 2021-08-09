@@ -39,34 +39,34 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	for (const auto& entry : directory_iterator(directoryPath))
 	{
 		// Extract filename
-		string fileName = string(entry.path().u8string());
-		fileName.erase(0, directoryPath.size());
+		string filename = string(entry.path().u8string());
+		filename.erase(0, directoryPath.size());
 
 		// Check if script file exists & check if the file extension is correct
-		if (_fe3d.misc_isFileExisting(directoryPath + fileName) && (fileName.substr(fileName.size() - 5, 5) == ".fe3d"))
+		if (_fe3d.misc_isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
 		{
 			// Load script file
-			ifstream file(directoryPath + fileName);
+			ifstream file(directoryPath + filename);
 			string line;
 
 			// Add software script file to script
-			string scriptName = fileName.substr(0, fileName.size() - 5); // No file extension
-			_script.addScriptFile(scriptName);
+			string scriptFileID = filename.substr(0, filename.size() - 5); // No file extension
+			_script.addScriptFile(scriptFileID);
 
 			// Extract cursor indices
 			unsigned int cursorLineIndex, cursorCharIndex;
 			getline(file, line);
 			istringstream iss(line);
 			iss >> cursorLineIndex >> cursorCharIndex;
-			_script.getScriptFile(scriptName)->setCursorLineIndex(cursorLineIndex);
-			_script.getScriptFile(scriptName)->setCursorCharIndex(cursorCharIndex);
+			_script.getScriptFile(scriptFileID)->setCursorLineIndex(cursorLineIndex);
+			_script.getScriptFile(scriptFileID)->setCursorCharIndex(cursorCharIndex);
 
 			// Extract script lines
 			unsigned int lineIndex = 0;
 			while (getline(file, line))
 			{
 				// Add new scriptline
-				_script.getScriptFile(scriptName)->insertNewLine(lineIndex, line);
+				_script.getScriptFile(scriptFileID)->insertNewLine(lineIndex, line);
 				lineIndex++;
 			}
 
@@ -107,9 +107,9 @@ bool ScriptEditor::saveScriptFiles()
 		("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts
-	for (const auto& scriptName : _scriptFileNamesToDelete)
+	for (const auto& filename : _scriptFilenamesToDelete)
 	{
-		const string finalPath = directoryPath + scriptName + ".fe3d";
+		const string finalPath = directoryPath + filename + ".fe3d";
 
 		// Check if file exists
 		if (_fe3d.misc_isFileExisting(finalPath))
@@ -117,22 +117,22 @@ bool ScriptEditor::saveScriptFiles()
 			DeleteFile(LPCSTR(finalPath.c_str()));
 		}
 	}
-	_scriptFileNamesToDelete.clear();
+	_scriptFilenamesToDelete.clear();
 
 	// Write every script to a text file
-	for (const auto& scriptName : _script.getAllScriptFileIDs())
+	for (const auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		// Create or overwrite script file
 		ofstream file;
-		file.open(directoryPath + scriptName + ".fe3d");
+		file.open(directoryPath + scriptID + ".fe3d");
 
 		// Write cursor indices to file
-		file << _script.getScriptFile(scriptName)->getCursorLineIndex() << " " << _script.getScriptFile(scriptName)->getCursorCharIndex() << endl;
+		file << _script.getScriptFile(scriptID)->getCursorLineIndex() << " " << _script.getScriptFile(scriptID)->getCursorCharIndex() << endl;
 
 		// Write every scriptline to file
-		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptName)->getLineCount(); lineIndex++)
+		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(scriptID)->getLineCount(); lineIndex++)
 		{
-			file << _script.getScriptFile(scriptName)->getLineText(lineIndex) << endl;
+			file << _script.getScriptFile(scriptID)->getLineText(lineIndex) << endl;
 		}
 
 		// Close file

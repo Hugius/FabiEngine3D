@@ -128,7 +128,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		unsigned int reflectionType;
 		bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBright;
 		Vec3 size, color;
-		vector<string> aabbNames;
+		vector<string> aabbIDs;
 		vector<Vec3> aabbPositions;
 		vector<Vec3> aabbSizes;
 
@@ -165,17 +165,17 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		while (true)
 		{
 			// Check if file has AABB data left
-			string name;
+			string aabbID;
 			Vec3 position, size;
-			iss >> name;
-			if (name.empty())
+			iss >> aabbID;
+			if (aabbID.empty())
 			{
 				break;
 			}
 			else
 			{
 				iss >> position.x >> position.y >> position.z >> size.x >> size.y >> size.z;
-				aabbNames.push_back(name);
+				aabbIDs.push_back(aabbID);
 				aabbPositions.push_back(position);
 				aabbSizes.push_back(size);
 			}
@@ -205,9 +205,9 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_loadedModelIDs.push_back(modelID);
 
 			// Bind AABBs
-			for (size_t i = 0; i < aabbNames.size(); i++)
+			for (size_t i = 0; i < aabbIDs.size(); i++)
 			{
-				const string newAabbID = (modelID + "@" + aabbNames[i]);
+				const string newAabbID = (modelID + "@" + aabbIDs[i]);
 				_fe3d.aabbEntity_create(newAabbID);
 				_fe3d.aabbEntity_bindToModelEntity(newAabbID, modelID);
 				_fe3d.aabbEntity_setPosition(newAabbID, aabbPositions[i]);

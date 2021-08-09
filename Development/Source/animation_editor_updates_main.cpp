@@ -45,20 +45,20 @@ void AnimationEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add animation button
 			{
-				_gui.getGlobalScreen()->createValueForm("animationCreate", "New Animation Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("animationCreate", "Create Animation", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAnimation = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit animation button
 			{
 				_isChoosingAnimation = true;
 				_isEditingAnimation = true;
-				_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+				_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete animation button
 			{
 				_isChoosingAnimation = true;
 				_isDeletingAnimation = true;
-				_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+				_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 			}
 		}
 
@@ -81,23 +81,23 @@ void AnimationEditor::_updateAnimationCreating()
 {
 	if (_isCreatingAnimation)
 	{
-		string newAnimationName = "";
+		string newAnimationID = "";
 
 		// Check if user filled in a new ID
-		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationName, { _currentAnimationID }))
+		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, { _currentAnimationID }))
 		{
 			// Check if ID contains spaces
-			if (newAnimationName.find(' ') == string::npos)
+			if (newAnimationID.find(' ') == string::npos)
 			{
 				// Check if ID already exists
 				auto animationIDs = getAllAnimationIDs();
-				if (find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
+				if (find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 				{
 					// Go to editor
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 					// Select animation
-					_currentAnimationID = newAnimationName;
+					_currentAnimationID = newAnimationID;
 
 					// Create animation
 					_animations.push_back(make_shared<Animation>(_currentAnimationID));
@@ -111,9 +111,9 @@ void AnimationEditor::_updateAnimationCreating()
 					_isEditingAnimation = true;
 
 				}
-				else // Name already exists
+				else // ID already exists
 				{
-					Logger::throwWarning("Animation ID \"" + newAnimationName + "\" already exists!");
+					Logger::throwWarning("Animation ID \"" + newAnimationID + "\" already exists!");
 				}
 			}
 			else

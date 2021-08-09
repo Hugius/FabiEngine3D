@@ -10,12 +10,12 @@ using std::ifstream;
 using std::ofstream;
 using std::filesystem::exists;
 
-RenderShader::RenderShader(const string& vertexFileName, const string& fragmentFileName)
+RenderShader::RenderShader(const string& vertexFilename, const string& fragmentFilename)
 {
 	// Temporary values
-	_name = vertexFileName.substr(0, vertexFileName.size() - 5);
-	_vertexFileName = vertexFileName;
-	_fragmentFileName = fragmentFileName;
+	_name = vertexFilename.substr(0, vertexFilename.size() - 5);
+	_vertexFilename = vertexFilename;
+	_fragmentFilename = fragmentFilename;
 	string vertexCode;
 	string fragmentCode;
 	ifstream vertexFile;
@@ -23,8 +23,8 @@ RenderShader::RenderShader(const string& vertexFileName, const string& fragmentF
 
 	// Compose file paths
 	const auto rootDir = Tools::getRootDirectory();
-	const auto vertexPath = "engine_assets\\shaders\\" + _vertexFileName;
-	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFileName;
+	const auto vertexPath = "engine_assets\\shaders\\" + _vertexFilename;
+	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFilename;
 
 	// Check if vertex shader file exists
 	if (!exists(rootDir + vertexPath))
@@ -74,7 +74,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _vertexFileName + ": " + infoLog);
+		Logger::throwError("Shader error at " + _vertexFilename + ": " + infoLog);
 	}
 
 	// Fragment shader
@@ -87,7 +87,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _fragmentFileName + ": " + infoLog);
+		Logger::throwError("Shader error at " + _fragmentFilename + ": " + infoLog);
 	}
 
 	// Shader program
@@ -109,24 +109,24 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::throwInfo("Loaded vertex shader: \"shaders\\" + _vertexFileName + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFileName + "\"");
+	Logger::throwInfo("Loaded vertex shader: \"shaders\\" + _vertexFilename + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFilename + "\"");
 }
 
-UniformID RenderShader::_getUniformID(const string& uniformName)
+UniformID RenderShader::_getUniformID(const string& uniformID)
 {
-	auto it = _uniformCache.find(uniformName);
+	auto it = _uniformCache.find(uniformID);
 	if (it == _uniformCache.end())
 	{
 		// Retrieve uniform location
-		auto uniform = glGetUniformLocation(_program, uniformName.c_str());
+		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
 		if (uniform == -1)
 		{
-			Logger::throwError("Uniform " + uniformName + " not found in shader " + _name);
+			Logger::throwError("Uniform " + uniformID + " not found in shader " + _name);
 		}
 
 		// Cache uniform
-		_uniformCache.insert(make_pair(uniformName, uniform));
+		_uniformCache.insert(make_pair(uniformID, uniform));
 
 		// Return new uniform
 		return uniform;

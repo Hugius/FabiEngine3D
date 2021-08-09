@@ -81,7 +81,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			if (topScreen->getButton("newProject")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("newProjectID", "Enter Project Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_creatingProject = true;
 			}
 			else if (topScreen->getButton("loadProject")->isHovered())

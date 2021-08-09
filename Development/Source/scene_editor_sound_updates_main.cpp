@@ -37,15 +37,15 @@ void SceneEditor::_updateSoundMenu()
 					// Check if soundcaster is not a preview
 					if (soundID[0] != '@')
 					{
-						// Removing the unique number from the soundID
+						// Removing the unique number from the ID
 						reverse(soundID.begin(), soundID.end());
-						string soundName = soundID.substr(soundID.find('_') + 1);
-						reverse(soundName.begin(), soundName.end());
+						string rawID = soundID.substr(soundID.find('_') + 1);
+						reverse(rawID.begin(), rawID.end());
 						reverse(soundID.begin(), soundID.end());
 
 						// Add new button
 						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->
-							getScrollingList("soundcasters")->createButton(soundID, soundName);
+							getScrollingList("soundcasters")->createButton(soundID, rawID);
 					}
 				}
 			}
@@ -73,15 +73,15 @@ void SceneEditor::_updateSoundPlacingMenu()
 			else
 			{
 				// Iterate through every created soundcaster
-				for (const auto& audioName : _audioEditor.getLoadedAudioIDs())
+				for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 				{
 					// Check if button is hovered
-					if (screen->getScrollingList("soundcasters")->getButton(audioName)->isHovered())
+					if (screen->getScrollingList("soundcasters")->getButton(audioID)->isHovered())
 					{
 						// Set new preview soundcaster
-						_currentPreviewSoundID = audioName;
+						_currentPreviewSoundID = audioID;
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
-						string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundName")->getEntityID();
+						string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 						_fe3d.textEntity_setVisible(textEntityID, false);
 						_fe3d.textEntity_setTextContent(textEntityID, "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
@@ -114,23 +114,23 @@ void SceneEditor::_updateSoundChoosingMenu()
 		}
 
 		// Iterate through every placed soundcaster
-		for (const auto& soundName : _fe3d.soundEntity_getAllIDs())
+		for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
 		{
 			// Check if soundcaster is not a preview
-			if (soundName[0] != '@')
+			if (soundID[0] != '@')
 			{
 				// Check if button is hovered
-				if (screen->getScrollingList("soundcasters")->getButton(soundName)->isHovered())
+				if (screen->getScrollingList("soundcasters")->getButton(soundID)->isHovered())
 				{
 					// Check if LMB pressed (activation)
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activateSound(soundName);
+						_activateSound(soundID);
 					}
 					else // Hovering (selection)
 					{
 						_dontResetSelectedSpeaker = true;
-						_selectSound(soundName);
+						_selectSound(soundID);
 					}
 
 					break;

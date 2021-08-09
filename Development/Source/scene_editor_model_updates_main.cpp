@@ -39,12 +39,13 @@ void SceneEditor::_updateModelMenu()
 					{
 						// Removing the unique number from the modelID
 						reverse(modelID.begin(), modelID.end());
-						string modelName = modelID.substr(modelID.find('_') + 1);
-						reverse(modelName.begin(), modelName.end());
+						string rawID = modelID.substr(modelID.find('_') + 1);
+						reverse(rawID.begin(), rawID.end());
 						reverse(modelID.begin(), modelID.end());
 
 						// Add new button
-						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, modelName);
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->
+							getScrollingList("modelList")->createButton(modelID, rawID);
 					}
 				}
 			}

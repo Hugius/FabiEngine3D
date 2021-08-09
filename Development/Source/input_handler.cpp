@@ -116,24 +116,24 @@ const bool InputHandler::isLocked()
 	return _isLocked;
 }
 
-const bool InputHandler::isKeyDown(InputType keyName)
+const bool InputHandler::isKeyDown(InputType key)
 {
-	return _isInVector(_keysDown, keyName);
+	return _isInVector(_keysDown, key);
 }
 
-const bool InputHandler::isKeyPressed(InputType keyName)
+const bool InputHandler::isKeyPressed(InputType key)
 {
-	return _isInVector(_keysPressed, keyName);
+	return _isInVector(_keysPressed, key);
 }
 
-const bool InputHandler::isMouseDown(InputType mouseButton)
+const bool InputHandler::isMouseDown(InputType button)
 {
-	return _isInVector(_mouseDown, mouseButton);
+	return _isInVector(_mouseDown, button);
 }
 
-const bool InputHandler::isMousePressed(InputType mouseButton)
+const bool InputHandler::isMousePressed(InputType button)
 {
-	return _isInVector(_mousePressed, mouseButton);
+	return _isInVector(_mousePressed, button);
 }
 
 const int InputHandler::getMouseWheelX()

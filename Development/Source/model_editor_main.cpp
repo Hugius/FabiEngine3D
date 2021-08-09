@@ -53,7 +53,7 @@ void ModelEditor::load()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextfield("selectedModelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedAabbID", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
 	_isEditorLoaded = true;
@@ -103,7 +103,7 @@ void ModelEditor::unload()
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelID");
-	_gui.getGlobalScreen()->deleteTextfield("selectedAabbName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAabbID");
 	if (_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();

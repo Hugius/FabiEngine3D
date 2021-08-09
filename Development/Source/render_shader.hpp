@@ -11,7 +11,7 @@ using std::map;
 class RenderShader final
 {
 public:
-	RenderShader(const string& vertexFileName, const string& fragmentFileName);
+	RenderShader(const string& vertexFilename, const string& fragmentFilename);
 
 	void bind();
 	void unbind();
@@ -35,13 +35,13 @@ private:
 	void _uploadUniform(const UniformID& uniformID, const Matrix33& data);
 	void _uploadUniform(const UniformID& uniformID, const Matrix44& data);
 
-	UniformID _getUniformID(const string& uniformName);
+	UniformID _getUniformID(const string& uniformID);
 
 	ShaderID _program = 0;
 
 	map<string, UniformID> _uniformCache;
 
-	string _vertexFileName = "";
-	string _fragmentFileName = "";
+	string _vertexFilename = "";
+	string _fragmentFilename = "";
 	string _name = "";
 };

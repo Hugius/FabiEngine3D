@@ -36,23 +36,29 @@ void TerrainEditor::_updateMainMenu()
 			else if (screen->getButton("add")->isHovered())
 			{
 				_isCreatingTerrain = true;
-				_gui.getGlobalScreen()->createValueForm("terrainCreate", "New Terrain Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("terrainCreate", "Create Terrain", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_isChoosingTerrain = true;
 				_isEditingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Edit Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_isChoosingTerrain = true;
 				_isDeletingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Delete Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 

@@ -32,7 +32,7 @@ void ModelEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add model button
 			{
-				_gui.getGlobalScreen()->createValueForm("modelCreate", "New Model Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Mode", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingModel = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit model button
@@ -40,16 +40,22 @@ void ModelEditor::_updateMainMenu()
 				_isChoosingModel = true;
 				_isEditingModel = true;
 				auto IDs = getLoadedModelIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("modelList", "Edit Model", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete model button
 			{
 				_isChoosingModel = true;
 				_isDeletingModel = true;
 				auto IDs = getLoadedModelIDs();
-				for (auto& ID : IDs) { ID = ID.substr(1); }
-				_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
+				for (auto& ID : IDs)
+				{
+					ID = ID.substr(1);
+				}
+				_gui.getGlobalScreen()->createChoiceForm("modelList", "Delete Model", Vec2(-0.5f, 0.1f), IDs);
 			}
 		}
 

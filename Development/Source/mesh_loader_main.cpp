@@ -71,9 +71,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		}
 		else if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
 		{
-			char name[128];
-			auto temp = fscanf(file, "%s\n", name);
-			selectedPartID = name;
+			char ID[128];
+			auto temp = fscanf(file, "%s\n", ID);
+			selectedPartID = ID;
 
 			// Cannot be a questionmark
 			if (selectedPartID == "?")
@@ -93,9 +93,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		{
 			if (selectedPartID != "")
 			{
-				char name[128];
-				auto temp = fscanf(file, "%s\n", name);
-				tempDiffuseMapPath = name;
+				char path[128];
+				auto temp = fscanf(file, "%s\n", path);
+				tempDiffuseMapPath = path;
 			}
 
 			continue;
@@ -104,9 +104,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		{
 			if (selectedPartID != "")
 			{
-				char name[128];
-				auto temp = fscanf(file, "%s\n", name);
-				tempEmissionMapPath = name;
+				char path[128];
+				auto temp = fscanf(file, "%s\n", path);
+				tempEmissionMapPath = path;
 			}
 
 			continue;
@@ -115,9 +115,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		{
 			if (selectedPartID != "")
 			{
-				char name[128];
-				auto temp = fscanf(file, "%s\n", name);
-				tempReflectionMapPath = name;
+				char path[128];
+				auto temp = fscanf(file, "%s\n", path);
+				tempReflectionMapPath = path;
 			}
 
 			continue;
@@ -126,9 +126,9 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		{
 			if (selectedPartID != "")
 			{
-				char name[128];
-				auto temp = fscanf(file, "%s\n", name);
-				tempNormalMapPath = name;
+				char path[128];
+				auto temp = fscanf(file, "%s\n", path);
+				tempNormalMapPath = path;
 			}
 
 			continue;

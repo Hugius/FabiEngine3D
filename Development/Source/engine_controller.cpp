@@ -27,7 +27,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			return;
 		}
 
-		// Set name of application to run
+		// Set title of application to run
 		_leftViewportController.getSkyEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getTerrainEditor().setCurrentProjectID(application_getTitle());
 		_leftViewportController.getWaterEditor().setCurrentProjectID(application_getTitle());

@@ -82,21 +82,21 @@ void SceneEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("newSceneName", "New Scene Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("newSceneName", "Create Scene", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_isChoosingScene = true;
 				auto IDs = _loadSceneIDs();
 				sort(IDs.begin(), IDs.end());
-				_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("sceneList", "Edit Scene", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_isDeletingScene = true;
 				auto IDs = _loadSceneIDs();
 				sort(IDs.begin(), IDs.end());
-				_gui.getGlobalScreen()->createChoiceForm("sceneList", "Select Scene", Vec2(0.0f, 0.1f), IDs);
+				_gui.getGlobalScreen()->createChoiceForm("sceneList", "Delete Scene", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
 

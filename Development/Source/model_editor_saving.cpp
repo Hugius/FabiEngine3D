@@ -57,14 +57,14 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID));
 
 			// AABB data
-			vector<string> aabbNames;
+			vector<string> aabbIDs;
 			vector<Vec3> aabbPositions;
 			vector<Vec3> aabbSizes;
 			if (!isInstanced)
 			{
 				for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 				{
-					aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
+					aabbIDs.push_back(aabbID.substr(string(modelID + "_").size()));
 					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
 					aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
 				}
@@ -113,16 +113,16 @@ bool ModelEditor::saveModelEntitiesToFile()
 				isBright;
 
 			// Add space
-			if (!aabbNames.empty())
+			if (!aabbIDs.empty())
 			{
 				file << " ";
 			}
 
 			// Write AABB data
-			for (size_t i = 0; i < aabbNames.size(); i++)
+			for (size_t i = 0; i < aabbIDs.size(); i++)
 			{
 				file <<
-					aabbNames[i] << " " <<
+					aabbIDs[i] << " " <<
 					aabbPositions[i].x << " " <<
 					aabbPositions[i].y << " " <<
 					aabbPositions[i].z << " " <<
@@ -131,7 +131,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 					aabbSizes[i].z;
 
 				// Add space
-				if (i != (aabbNames.size() - 1))
+				if (i != (aabbIDs.size() - 1))
 				{
 					file << " ";
 				}

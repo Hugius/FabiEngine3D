@@ -5,7 +5,7 @@
 
 void FabiEngine3D::soundEntity_create(const string& ID, const string& filePath)
 {
-	_core->_audioManager.addSound(ID, filePath);
+	_core->_audioManager.createSound(ID, filePath);
 }
 
 void FabiEngine3D::soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance)
@@ -170,9 +170,9 @@ const unsigned int FabiEngine3D::soundEntity_getUsedChannelCount()
 	return _core->_audioPlayer.getUsedChannelCount();
 }
 
-void FabiEngine3D::music_addToPlaylist(const string& fileName)
+void FabiEngine3D::music_addToPlaylist(const string& filename)
 {
-	_core->_audioManager.addMusic(fileName);
+	_core->_audioManager.createMusic(filename);
 	_core->_audioPlayer.playMusic(_core->_audioManager.getMusic(), true);
 }
 

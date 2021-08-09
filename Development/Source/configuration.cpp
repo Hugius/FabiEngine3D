@@ -73,20 +73,20 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 {
 	// Temporary values
 	string line;
-	string name;
+	string field;
 	string equals;
 	getline(file, line);
 	istringstream iss(line);
-	iss >> name >> equals;
+	iss >> field >> equals;
 
 	// Check criteria
-	if (name == criteria)
+	if (field == criteria)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -94,20 +94,20 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 {
 	// Temporary values
 	string line;
-	string name;
+	string field;
 	string equals;
 	getline(file, line);
 	istringstream iss(line);
-	iss >> name >> equals;
+	iss >> field >> equals;
 
 	// Check criteria
-	if (name == criteria)
+	if (field == criteria)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -115,20 +115,20 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 {
 	// Temporary values
 	string line;
-	string name;
+	string field;
 	string equals;
 	getline(file, line);
 	istringstream iss(line);
-	iss >> name >> equals;
+	iss >> field >> equals;
 
 	// Check criteria
-	if (name == criteria)
+	if (field == criteria)
 	{
 		iss >> option;
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -136,17 +136,17 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 {
 	// Temporary values
 	string line;
-	string name;
+	string field;
 	string equals;
 	string value;
 
 	// Read line
 	getline(file, line);
 	istringstream iss(line);
-	iss >> name >> equals >> value;
+	iss >> field >> equals >> value;
 
 	// Check criteria
-	if (name == criteria)
+	if (field == criteria)
 	{
 		// Parsing to boolean value
 		if (value == "true")
@@ -164,7 +164,7 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option name!");
+		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 

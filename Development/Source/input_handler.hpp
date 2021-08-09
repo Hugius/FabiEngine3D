@@ -15,10 +15,10 @@ public:
 	void setLocked(bool locked);
 
 	const bool isLocked();
-	const bool isKeyDown(InputType keyName);
-	const bool isKeyPressed(InputType keyName);
-	const bool isMouseDown(InputType mouseButton);
-	const bool isMousePressed(InputType mouseButton);
+	const bool isKeyDown(InputType key);
+	const bool isKeyPressed(InputType key);
+	const bool isMouseDown(InputType button);
+	const bool isMousePressed(InputType button);
 
 	const int getMouseWheelX();
 	const int getMouseWheelY();

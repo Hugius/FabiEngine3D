@@ -125,7 +125,7 @@ void SceneEditor::_updateModelEditing()
 				}
 				else if (screen->getButton("animation")->isHovered()) // Animation button
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f),
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Choose Animation", Vec2(0.0f, 0.1f),
 						_animationEditor.getAllAnimationIDs());
 				}
 				else if (screen->getButton("delete")->isHovered()) // Delete button

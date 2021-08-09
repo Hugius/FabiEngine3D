@@ -86,7 +86,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(100))
 	{
 		string textID = _statsScreen->getTextfield("cpuName")->getEntityID();
-		string text = "CPU: " + _fe3d.misc_getCpuName();
+		string text = ("CPU: " + _fe3d.misc_getCpuName());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
@@ -94,7 +94,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(100))
 	{
 		string textID = _statsScreen->getTextfield("gpuName")->getEntityID();
-		string text = "GPU: " + _fe3d.misc_getGpuName();
+		string text = ("GPU: " + _fe3d.misc_getGpuName());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

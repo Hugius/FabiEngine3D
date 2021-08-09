@@ -4,60 +4,57 @@
 
 void SceneEditor::_updateSettingsMenu()
 {
-	if (_isEditorLoaded)
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettings")
 	{
 		// Temporary values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
+		auto reflectionHeight = _fe3d.gfx_getSceneReflectionHeight();
 
-		// GUI management
-		if (screen->getID() == "sceneEditorMenuSettings")
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			// Temporary values
-			auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
-			auto reflectionHeight = _fe3d.gfx_getSceneReflectionHeight();
-
-			// Check if input received
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-					return;
-				}
-				else if (screen->getButton("graphics")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
-				}
-				else if (screen->getButton("setSpeed")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("setSpeed", "Camera Speed", _editorSpeed, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("lodDistance")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("reflectionHeight")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("reflectionHeight", "Scene reflection height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+				return;
 			}
-
-			// Setting custom camera speed
-			_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
-			_editorSpeed = max(0.0f, _editorSpeed);
-
-			// Setting LOD distance
-			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
+			else if (screen->getButton("graphics")->isHovered())
 			{
-				lodDistance = max(0.0f, lodDistance);
-				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
-
-			// Setting reflection height
-			if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
+			else if (screen->getButton("setSpeed")->isHovered())
 			{
-				_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
+				_gui.getGlobalScreen()->createValueForm("setSpeed", "Camera Speed", _editorSpeed, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
+			else if (screen->getButton("lodDistance")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("reflectionHeight")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("reflectionHeight", "Scene reflection height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+		}
+
+		// Setting custom camera speed
+		_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
+		_editorSpeed = max(0.0f, _editorSpeed);
+
+		// Setting LOD distance
+		if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
+		{
+			lodDistance = max(0.0f, lodDistance);
+			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
+		}
+
+		// Setting reflection height
+		if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
+		{
+			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
 		}
 	}
 }

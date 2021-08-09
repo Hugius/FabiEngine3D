@@ -32,7 +32,7 @@ public:
 	void moveFollowZ(float value);
 	void enableFirstPersonView(float initialYaw, float initialPitch);
 	void disableFirstPersonView();
-	void enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance);
+	void enableThirdPersonView(float initialYaw, float initialPitch);
 	void disableThirdPersonView();
 	void notifyCursorCenter();
 

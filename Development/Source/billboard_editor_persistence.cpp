@@ -144,45 +144,49 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
-		// Add billboard ID
-		_loadedBillboardIDs.push_back(billboardID);
-
 		// Create billboard
 		_fe3d.billboardEntity_create(billboardID);
 
-		// Diffuse map
-		if (!diffuseMapPath.empty())
+		// Check if billboard creation went well
+		if (_fe3d.billboardEntity_isExisting(billboardID))
 		{
-			// Set diffuse map
-			_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
+			// Add billboard ID
+			_loadedBillboardIDs.push_back(billboardID);
 
-			// Play sprite animation
-			if (isAnimationStarted)
+			// Diffuse map
+			if (!diffuseMapPath.empty())
 			{
-				_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
-				_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
-				_fe3d.billboardEntity_setSpriteAnimationColumns(billboardID, animationColumns);
-				_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
+				// Set diffuse map
+				_fe3d.billboardEntity_setDiffuseMap(billboardID, diffuseMapPath);
+
+				// Play sprite animation
+				if (isAnimationStarted)
+				{
+					_fe3d.billboardEntity_setSpriteAnimationFramestep(billboardID, animationFramestep);
+					_fe3d.billboardEntity_setSpriteAnimationRows(billboardID, animationRows);
+					_fe3d.billboardEntity_setSpriteAnimationColumns(billboardID, animationColumns);
+					_fe3d.billboardEntity_startSpriteAnimation(billboardID, -1);
+				}
 			}
-		}
 
-		// Text
-		if (!fontPath.empty())
-		{
-			_fe3d.billboardEntity_setFont(billboardID, fontPath);
-			_fe3d.billboardEntity_setTextContent(billboardID, textContent);
-		}
+			// Text
+			if (!fontPath.empty())
+			{
+				_fe3d.billboardEntity_setFont(billboardID, fontPath);
+				_fe3d.billboardEntity_setTextContent(billboardID, textContent);
+			}
 
-		// Set properties
-		_fe3d.billboardEntity_setVisible(billboardID, false);
-		_fe3d.billboardEntity_setSize(billboardID, size);
-		_fe3d.billboardEntity_setColor(billboardID, color);
-		_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
-		_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
-		_fe3d.billboardEntity_setLightness(billboardID, lightness);
-		_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
-		_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-		_fe3d.billboardEntity_setBright(billboardID, isBright);
+			// Set properties
+			_fe3d.billboardEntity_setVisible(billboardID, false);
+			_fe3d.billboardEntity_setSize(billboardID, size);
+			_fe3d.billboardEntity_setColor(billboardID, color);
+			_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
+			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
+			_fe3d.billboardEntity_setLightness(billboardID, lightness);
+			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
+			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
+			_fe3d.billboardEntity_setBright(billboardID, isBright);
+		}
 	}
 
 	// Close file

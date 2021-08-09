@@ -2,27 +2,27 @@
 
 void AnimationEditor::_updateCamera()
 {
-	// Check if allowed by GUI
-	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-	{
-		// Update moving up
-		if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
-		{
-			_cameraLookatPosition.y += CAMERA_LOOKAT_SPEED;
-		}
-
-		// Update moving down
-		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
-		{
-			_cameraLookatPosition.y -= CAMERA_LOOKAT_SPEED;
-		}
-	}
-
 	// Check if third person view is enabled
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{
+		// Update distance scrolling
+		auto scrollOffset = _fe3d.input_getMouseWheelY();
+		auto cameraDistance = _fe3d.camera_getThirdPersonDistance();
+		cameraDistance = max(MIN_CAMERA_DISTANCE, cameraDistance - (static_cast<float>(scrollOffset) * CAMERA_DISTANCE_SPEED));
+		_fe3d.camera_setThirdPersonDistance(cameraDistance);
+
 		// Update lookat position
-		_fe3d.camera_setThirdPersonLookat(_cameraLookatPosition);
+		auto cameraLookat = _fe3d.camera_getThirdPersonLookat();
+		if (_fe3d.input_isKeyDown(InputType::KEY_SPACE))
+		{
+			cameraLookat.y += CAMERA_LOOKAT_SPEED;
+		}
+		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
+		{
+			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
+		}
+		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
+		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);
@@ -35,8 +35,8 @@ void AnimationEditor::_updateCamera()
 
 		// Enable shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
-		_fe3d.gfx_enableShadows(Vec3(_cameraLookatPosition + Vec3(distance * 2.0f)),
-			_cameraLookatPosition, distance * 4.0f, distance * 8.0f, 0.25f, false, false, 0);
+		_fe3d.gfx_enableShadows(Vec3(cameraLookat + Vec3(distance * 2.0f)),
+			cameraLookat, distance * 4.0f, distance * 8.0f, 0.25f, false, false, 0);
 	}
 
 	// Check if allowed by GUI
@@ -52,10 +52,7 @@ void AnimationEditor::_updateCamera()
 			}
 			else
 			{
-				_fe3d.camera_enableThirdPersonView(
-					_fe3d.camera_getThirdPersonYaw(),
-					_fe3d.camera_getThirdPersonPitch(),
-					_fe3d.camera_getThirdPersonDistance());
+				_fe3d.camera_enableThirdPersonView(_fe3d.camera_getThirdPersonYaw(), _fe3d.camera_getThirdPersonPitch());
 			}
 		}
 	}

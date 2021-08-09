@@ -53,10 +53,7 @@ void BillboardEditor::_updateCamera()
 			}
 			else
 			{
-				_fe3d.camera_enableThirdPersonView(
-					_fe3d.camera_getThirdPersonYaw(),
-					_fe3d.camera_getThirdPersonPitch(),
-					_fe3d.camera_getThirdPersonDistance());
+				_fe3d.camera_enableThirdPersonView(_fe3d.camera_getThirdPersonYaw(), _fe3d.camera_getThirdPersonPitch());
 			}
 		}
 	}

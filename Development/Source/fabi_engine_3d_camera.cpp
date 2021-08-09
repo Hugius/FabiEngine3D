@@ -16,9 +16,9 @@ void FabiEngine3D::camera_disableFirstPersonView()
 	_core->_camera.disableFirstPersonView();
 }
 
-void FabiEngine3D::camera_enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance)
+void FabiEngine3D::camera_enableThirdPersonView(float initialYaw, float initialPitch)
 {
-	_core->_camera.enableThirdPersonView(initialYaw, initialPitch, initialDistance);
+	_core->_camera.enableThirdPersonView(initialYaw, initialPitch);
 }
 
 void FabiEngine3D::camera_disableThirdPersonView()

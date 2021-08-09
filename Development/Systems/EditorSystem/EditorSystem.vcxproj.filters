@@ -136,6 +136,12 @@
     <Filter Include="Terrain Editor\Miscellaneous">
       <UniqueIdentifier>{874f3f11-4af9-4678-b56b-09709d9252bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene Editor\Persistence\Editor">
+      <UniqueIdentifier>{d501544b-39db-41f9-9471-343b717f5762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Persistence\Custom">
+      <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation_editor_main.cpp">
@@ -237,16 +243,16 @@
     <ClCompile Include="..\..\Source\scene_editor_gui.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_updates.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_updates_main.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_edit.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_light_updates_edit.cpp">
       <Filter>Scene Editor\Lighting</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_place.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_light_updates_place.cpp">
       <Filter>Scene Editor\Lighting</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_updates.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_light_updates_main.cpp">
       <Filter>Scene Editor\Lighting</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_settings_updates_one.cpp">
@@ -264,47 +270,35 @@
     <ClCompile Include="..\..\Source\scene_editor_misc_two.cpp">
       <Filter>Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_edit.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_edit.cpp">
       <Filter>Scene Editor\Billboards</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_updates.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_main.cpp">
       <Filter>Scene Editor\Billboards</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_billboard_place.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_billboard_updates_place.cpp">
       <Filter>Scene Editor\Billboards</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_edit.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_model_updates_edit.cpp">
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_place.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_model_updates_place.cpp">
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_model_updates.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_model_updates_main.cpp">
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_edit.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_sound_updates_edit.cpp">
       <Filter>Scene Editor\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_place.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_sound_updates_place.cpp">
       <Filter>Scene Editor\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_sound_updates.cpp">
+    <ClCompile Include="..\..\Source\scene_editor_sound_updates_main.cpp">
       <Filter>Scene Editor\Audio</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_environment.cpp">
       <Filter>Scene Editor\Environment</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp">
-      <Filter>Scene Editor\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_loading.cpp">
-      <Filter>Scene Editor\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_saving.cpp">
-      <Filter>Scene Editor\Persistence</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_saving_custom.cpp">
-      <Filter>Scene Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_editor_main.cpp">
       <Filter>Script Editor\Core</Filter>
@@ -312,13 +306,13 @@
     <ClCompile Include="..\..\Source\script_editor_persistence.cpp">
       <Filter>Script Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_writer.cpp">
+    <ClCompile Include="..\..\Source\script_editor_updates_writer.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_updates.cpp">
+    <ClCompile Include="..\..\Source\script_editor_updates_main.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_selector.cpp">
+    <ClCompile Include="..\..\Source\script_editor_updates_selector.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_editor_misc.cpp">
@@ -395,6 +389,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\water_editor_updates_options.cpp">
       <Filter>Water Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp">
+      <Filter>Scene Editor\Persistence\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_saving_custom.cpp">
+      <Filter>Scene Editor\Persistence\Custom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_loading.cpp">
+      <Filter>Scene Editor\Persistence\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_saving.cpp">
+      <Filter>Scene Editor\Persistence\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

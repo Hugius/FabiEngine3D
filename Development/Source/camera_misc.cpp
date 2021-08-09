@@ -58,7 +58,7 @@ void Camera::disableFirstPersonView()
 	}
 }
 
-void Camera::enableThirdPersonView(float initialYaw, float initialPitch, float initialDistance)
+void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 {
 	if (_isFirstPersonViewEnabled)
 	{

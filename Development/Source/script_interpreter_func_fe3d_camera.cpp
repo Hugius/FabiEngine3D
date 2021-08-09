@@ -205,35 +205,11 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:camera_enable_third_person_view")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.camera_enableThirdPersonView(0.0f, 0.0f, 0.0f);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:camera_disable_third_person_view")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.camera_disableThirdPersonView();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:camera_is_lookat_view_enabled")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.camera_isThirdPersonViewEnabled();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
 	else if (functionName == "fe3d:camera_enable_first_person_view")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_enableFirstPersonView(_fe3d.camera_getFirstPersonYaw(), _fe3d.camera_getFirstPersonPitch());
+			_fe3d.camera_enableFirstPersonView(0.0f, 0.0f);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -250,6 +226,30 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_isFirstPersonViewEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_enable_third_person_view")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.camera_enableThirdPersonView(0.0f, 0.0f);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:camera_disable_third_person_view")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.camera_disableThirdPersonView();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:camera_is_third_person_view_enabled")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_isThirdPersonViewEnabled();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}

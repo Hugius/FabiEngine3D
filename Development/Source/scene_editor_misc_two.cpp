@@ -6,63 +6,60 @@
 
 void SceneEditor::_updateMiscellaneous()
 {
-	if (_isEditorLoaded)
+	// Check if allowed by GUI
+	if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
-		// Check if allowed by GUI
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		// Update AABB frame rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_B))
 		{
-			// Update AABB frame rendering
-			if (_fe3d.input_isKeyPressed(InputType::KEY_B))
+			if (_fe3d.misc_isAabbFrameRenderingEnabled())
 			{
-				if (_fe3d.misc_isAabbFrameRenderingEnabled())
-				{
-					_fe3d.misc_disableAabbFrameRendering();
-				}
-				else
-				{
-					_fe3d.misc_enableAabbFrameRendering();
-				}
-
+				_fe3d.misc_disableAabbFrameRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableAabbFrameRendering();
 			}
 
-			// Update wire frame rendering
-			if (_fe3d.input_isKeyPressed(InputType::KEY_F))
-			{
-				if (_fe3d.misc_isWireFrameRenderingEnabled())
-				{
-					_fe3d.misc_disableWireFrameRendering();
-				}
-				else
-				{
-					_fe3d.misc_enableWireFrameRendering();
-				}
-			}
+		}
 
-			// Update debug rendering
-			if (_fe3d.input_isKeyPressed(InputType::KEY_H))
+		// Update wire frame rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_F))
+		{
+			if (_fe3d.misc_isWireFrameRenderingEnabled())
 			{
-				if (_fe3d.misc_isDebugRenderingEnabled())
-				{
-					_fe3d.misc_disableDebugRendering();
-				}
-				else
-				{
-					_fe3d.misc_enableDebugRendering();
-				}
+				_fe3d.misc_disableWireFrameRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableWireFrameRendering();
 			}
 		}
 
-		// Disable terrain raycast pointing
-		if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+		// Update debug rendering
+		if (_fe3d.input_isKeyPressed(InputType::KEY_H))
 		{
-			_fe3d.misc_disableTerrainRaycastPointing();
+			if (_fe3d.misc_isDebugRenderingEnabled())
+			{
+				_fe3d.misc_disableDebugRendering();
+			}
+			else
+			{
+				_fe3d.misc_enableDebugRendering();
+			}
 		}
+	}
 
-		// Enable terrain raycast pointing
-		if (!_fe3d.terrainEntity_getSelectedID().empty())
-		{
-			_fe3d.misc_enableTerrainRaycastPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
-		}
+	// Disable terrain raycast pointing
+	if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+	{
+		_fe3d.misc_disableTerrainRaycastPointing();
+	}
+
+	// Enable terrain raycast pointing
+	if (!_fe3d.terrainEntity_getSelectedID().empty())
+	{
+		_fe3d.misc_enableTerrainRaycastPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
 	}
 }
 

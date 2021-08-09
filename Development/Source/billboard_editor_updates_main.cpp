@@ -19,7 +19,6 @@ void BillboardEditor::update()
 
 void BillboardEditor::_updateMainMenu()
 {
-
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

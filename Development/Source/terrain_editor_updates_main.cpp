@@ -43,7 +43,7 @@ void TerrainEditor::_updateMainMenu()
 				_isChoosingTerrain = true;
 				_isEditingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
@@ -51,7 +51,7 @@ void TerrainEditor::_updateMainMenu()
 				_isChoosingTerrain = true;
 				_isDeletingTerrain = true;
 				auto IDs = getLoadedTerrainIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
@@ -85,7 +85,7 @@ void TerrainEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), false);
 				_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
@@ -114,7 +114,7 @@ void TerrainEditor::_updateTerrainCreating()
 	{
 		string newTerrainID;
 
-		// Create new terrain
+		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("terrainCreate", newTerrainID, {}))
 		{
 			// @ sign not allowed
@@ -163,25 +163,25 @@ void TerrainEditor::_updateTerrainCreating()
 						_currentTerrainID = newTerrainID;
 						_loadedTerrainIDs.push_back(_currentTerrainID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), true);
 						_isCreatingTerrain = false;
 						_isEditingTerrain = true;
 					}
 					else
 					{
-						Logger::throwWarning("Terrain name \"" + newTerrainID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Terrain ID \"" + newTerrainID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Terrain name cannot contain any spaces!");
+					Logger::throwWarning("Terrain ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Terrain name cannot contain '@'!");
+				Logger::throwWarning("Terrain ID cannot contain '@'!");
 			}
 		}
 	}
@@ -197,7 +197,7 @@ void TerrainEditor::_updateTerrainChoosing()
 		// Hide last terrain
 		_fe3d.terrainEntity_select("");
 
-		// Check if a terrain name is hovered
+		// Check if a terrain ID is hovered
 		if (selectedButtonID != "")
 		{
 			// Show terrain
@@ -209,16 +209,13 @@ void TerrainEditor::_updateTerrainChoosing()
 				// Select terrain
 				_currentTerrainID = "@" + selectedButtonID;
 
-				// Check if going to editor
+				// Go to editor
 				if (_isEditingTerrain)
 				{
-					// Go to editor screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-
-					// Show terrain name
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(),
 						"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), true);
 				}
 
 				// Miscellaneous
@@ -252,7 +249,7 @@ void TerrainEditor::_updateTerrainDeleting()
 			// Delete entity
 			_fe3d.terrainEntity_delete(_currentTerrainID);
 
-			// Delete from name record
+			// Delete from ID record
 			_loadedTerrainIDs.erase(remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
 			_isDeletingTerrain = false;
 			_currentTerrainID = "";

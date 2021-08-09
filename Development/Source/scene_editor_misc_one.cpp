@@ -55,7 +55,7 @@ void SceneEditor::_selectModel(const string& modelID)
 		reverse(tempID.begin(), tempID.end());
 		string modelName = tempID.substr(tempID.find('_') + 1);
 		reverse(modelName.begin(), modelName.end());
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
 	}
@@ -82,7 +82,7 @@ void SceneEditor::_activateModel(const string& modelID)
 	reverse(tempID.begin(), tempID.end());
 	string modelName = tempID.substr(tempID.find('_') + 1);
 	reverse(modelName.begin(), modelName.end());
-	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
 }
@@ -103,7 +103,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 		reverse(tempID.begin(), tempID.end());
 		string billboardName = tempID.substr(tempID.find('_') + 1);
 		reverse(billboardName.begin(), billboardName.end());
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 		_fe3d.textEntity_setVisible(textEntityID, true);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
 	}
@@ -130,7 +130,7 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	reverse(tempID.begin(), tempID.end());
 	string billboardName = tempID.substr(tempID.find('_') + 1);
 	reverse(billboardName.begin(), billboardName.end());
-	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 	_fe3d.textEntity_setVisible(textEntityID, true);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }

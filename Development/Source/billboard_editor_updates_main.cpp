@@ -43,7 +43,7 @@ void BillboardEditor::_updateMainMenu()
 				_isChoosingBillboard = true;
 				_isEditingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete billboard button
@@ -51,7 +51,7 @@ void BillboardEditor::_updateMainMenu()
 				_isChoosingBillboard = true;
 				_isDeletingBillboard = true;
 				auto IDs = getLoadedBillboardIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Select Billboard", Vec2(-0.5f, 0.1f), IDs);
 			}
 		}
@@ -75,51 +75,51 @@ void BillboardEditor::_updateBillboardCreating()
 {
 	if (_isCreatingBillboard)
 	{
-		string newBillboardName = "";
+		string newBillboardID = "";
 
-		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardName, { _currentBillboardID }))
+		// Check if user filled in a new ID
+		if (_gui.getGlobalScreen()->checkValueForm("billboardCreate", newBillboardID, { _currentBillboardID }))
 		{
 			// @ sign not allowed
-			if (newBillboardName.find('@') == string::npos)
+			if (newBillboardID.find('@') == string::npos)
 			{
 				// Spaces not allowed
-				if (newBillboardName.find(' ') == string::npos)
+				if (newBillboardID.find(' ') == string::npos)
 				{
-					// Add @ sign to new name
-					newBillboardName = "@" + newBillboardName;
+					// Add @ sign to new ID
+					newBillboardID = "@" + newBillboardID;
 
-					// Check if name already exists
-					if (find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardName) == _loadedBillboardIDs.end()) // If name not existing yet
+					// If billboard ID not existing yet
+					if (find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) == _loadedBillboardIDs.end())
 					{
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 
 						// Select billboard
-						_currentBillboardID = newBillboardName;
-						_loadedBillboardIDs.push_back(newBillboardName);
+						_currentBillboardID = newBillboardID;
+						_loadedBillboardIDs.push_back(newBillboardID);
 
 						// Miscellaneous
-						_fe3d.billboardEntity_create(newBillboardName);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
+						_fe3d.billboardEntity_create(newBillboardID);
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), "Billboard: " +
 							_currentBillboardID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), true);
 						_isCreatingBillboard = false;
 						_isEditingBillboard = true;
 					}
-					else // Name already exists
+					else
 					{
-						Logger::throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+						Logger::throwWarning("Billboard ID \"" + newBillboardID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Billboard name cannot contain any spaces!");
+					Logger::throwWarning("Billboard ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Billboard name cannot contain '@'!");
+				Logger::throwWarning("Billboard ID cannot contain '@'!");
 			}
 		}
 	}
@@ -138,10 +138,14 @@ void BillboardEditor::_updateBillboardChoosing()
 			_fe3d.billboardEntity_setVisible(_hoveredBillboardID, false);
 		}
 
-		// Check if a billboard name is hovered
+		// Check if a billboard ID is hovered
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+			// Set new hovered model
+			_hoveredBillboardID = ("@" + selectedButtonID);
+
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select billboard
 				_currentBillboardID = "@" + selectedButtonID;
@@ -151,9 +155,9 @@ void BillboardEditor::_updateBillboardChoosing()
 				if (_isEditingBillboard)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), "Billboard: " +
 						_currentBillboardID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

@@ -177,7 +177,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 
 			// Check if billboard is still selected or active
-			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 			if (SELECTED_BILLBOARD_ID == "" && ACTIVE_BILLBOARD_ID == "")
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);

@@ -23,7 +23,7 @@ void BillboardEditor::_updateChoiceMenu()
 				{
 					_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
 					_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), false);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), false);
 					_currentBillboardID = "";
 					_isEditingBillboard = false;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");

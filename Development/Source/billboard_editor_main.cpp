@@ -22,6 +22,7 @@ void BillboardEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	_fe3d.camera_setMinThirdPersonPitch(MIN_CAMERA_PITCH);
 	_fe3d.camera_enableThirdPersonView(INITIAL_CAMERA_YAW, INITIAL_CAMERA_PITCH, INITIAL_CAMERA_DISTANCE);
+	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
@@ -34,13 +35,13 @@ void BillboardEditor::load()
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
 	_fe3d.modelEntity_setFaceCulled("@@cube", true);
 	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj");
-	_fe3d.modelEntity_setSize("@@grid", Vec3(30.0f, 1.0f, 30.0f));
+	_fe3d.modelEntity_setSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", 3.0f);
+	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedBillboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardEditorControls");
 	_isEditorLoaded = true;
 }
@@ -75,8 +76,8 @@ void BillboardEditor::unload()
 	// Delete billboards
 	_fe3d.billboardEntity_deleteAll();
 
-	// Delete billboard name textfield
-	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
+	// Delete billboard ID textfield
+	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardID");
 
 	// Reset editor properties
 	_isEditorLoaded = false;

@@ -299,7 +299,7 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Check if model is still selected or active
-			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 			if (SELECTED_MODEL_ID == "" && ACTIVE_MODEL_ID == "")
 			{
 				_fe3d.textEntity_setVisible(textEntityID, false);

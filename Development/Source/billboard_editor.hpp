@@ -45,18 +45,20 @@ private:
 	string _currentBillboardID = "";
 	string _currentProjectID = "";
 
-	// Vectors
-	Vec3 _cameraLookatPosition = Vec3(0.0f);
-
 	// Floats
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
-	static inline const float CAMERA_LOOKAT_SPEED = 0.05f;
 	static inline const float INITIAL_CAMERA_YAW = 0.0f;
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;
 	static inline const float MIN_CAMERA_PITCH = 1.0f;
+	static inline const float GRID_Y_OFFSET = 0.001f;
+	static inline const float GRID_SIZE = 30.0f;
+	static inline const float GRID_UV = 3.0f;
+	static inline const float MIN_CAMERA_DISTANCE = 1.5f;
+	static inline const float CAMERA_DISTANCE_SPEED = 0.125f;
+	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 
 	// Booleans
 	bool _isCreatingBillboard = false;

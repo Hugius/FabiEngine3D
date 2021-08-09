@@ -44,7 +44,7 @@ void AnimationEditor::load()
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("selectedAnimationName", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("selectedAnimationID", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedAnimationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
 	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
@@ -79,7 +79,7 @@ void AnimationEditor::unload()
 	_fe3d.modelEntity_deleteAll();
 
 	// Delete animation extfields
-	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationID");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationFrame");
 
 	// Reset editor properties

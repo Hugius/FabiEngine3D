@@ -32,7 +32,7 @@ void ModelEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add model button
 			{
-				_gui.getGlobalScreen()->createValueForm("modelCreate", "New model name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("modelCreate", "New Model Name", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingModel = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit model button
@@ -40,7 +40,7 @@ void ModelEditor::_updateMainMenu()
 				_isChoosingModel = true;
 				_isEditingModel = true;
 				auto IDs = getLoadedModelIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete model button
@@ -48,7 +48,7 @@ void ModelEditor::_updateMainMenu()
 				_isChoosingModel = true;
 				_isDeletingModel = true;
 				auto IDs = getLoadedModelIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), IDs);
 			}
 		}
@@ -89,7 +89,7 @@ void ModelEditor::_updateChoiceMenu()
 				_isEditingModel = false;
 				_currentModelID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(), false);
 				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
@@ -194,25 +194,25 @@ void ModelEditor::_updateModelCreating()
 						_currentModelID = newModelID;
 						_loadedModelIDs.push_back(newModelID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(),
 							"Model: " + _currentModelID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(), true);
 						_isCreatingModel = false;
 						_isEditingModel = true;
 					}
 					else
 					{
-						Logger::throwWarning("Model name \"" + newModelID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Model ID \"" + newModelID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Model name cannot contain any spaces!");
+					Logger::throwWarning("Model ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Model name cannot contain '@'!");
+				Logger::throwWarning("Model ID cannot contain '@'!");
 			}
 		}
 	}
@@ -231,11 +231,11 @@ void ModelEditor::_updateModelChoosing()
 			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
 		}
 
-		// Check if a model name is hovered
+		// Check if a model ID is hovered
 		if (selectedButtonID != "")
 		{
 			// Set new hovered model
-			_hoveredModelID = "@" + selectedButtonID;
+			_hoveredModelID = ("@" + selectedButtonID);
 
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -244,18 +244,17 @@ void ModelEditor::_updateModelChoosing()
 				_currentModelID = "@" + selectedButtonID;
 				_hoveredModelID = "";
 
-				// Go to editor screen & show model name
+				// Go to editor
 				if (_isEditingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(),
 						"Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(), true);
 				}
 
-				_fe3d.modelEntity_setVisible(_currentModelID, true);
-
 				// Miscellaneous
+				_fe3d.modelEntity_setVisible(_currentModelID, true);
 				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 				_isChoosingModel = false;
 			}

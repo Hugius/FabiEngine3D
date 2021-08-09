@@ -40,7 +40,7 @@ void AudioEditor::_updateMainMenu()
 				_isChoosingAudio = true;
 				_isEditingAudio = true;
 				auto IDs = getLoadedAudioIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered()) // Delete audio button
@@ -48,7 +48,7 @@ void AudioEditor::_updateMainMenu()
 				_isChoosingAudio = true;
 				_isDeletingAudio = true;
 				auto IDs = getLoadedAudioIDs();
-				for (auto& name : IDs) { name = name.substr(1); }
+				for (auto& ID : IDs) { ID = ID.substr(1); }
 				_gui.getGlobalScreen()->createChoiceForm("audioList", "Select Audio", Vec2(0.0f, 0.1f), IDs);
 			}
 		}
@@ -72,29 +72,29 @@ void AudioEditor::_updateAudioCreating()
 {
 	if (_isCreatingAudio)
 	{
-		string newAudioName = "";
+		string newAudioID = "";
 
-		// Check if user filled in a new name
-		if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioName, { _currentAudioID }))
+		// Check if user filled in a new ID
+		if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioID, { _currentAudioID }))
 		{
-			// Check if name starts with @ sign
-			if (newAudioName[0] != '@')
+			// Check if ID starts with @ sign
+			if (newAudioID[0] != '@')
 			{
-				// Check if name contains spaces
-				if (newAudioName.find(' ') == string::npos)
+				// Check if ID contains spaces
+				if (newAudioID.find(' ') == string::npos)
 				{
-					// Add @ sign to new name
-					newAudioName = "@" + newAudioName;
+					// Add @ sign to new ID
+					newAudioID = "@" + newAudioID;
 
-					// Check if name already exists
-					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioName) == _loadedAudioIDs.end()) // If name not existing yet
+					// Check if ID already exists
+					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 
 						// Select audio
-						_currentAudioID = newAudioName;
-						_loadedAudioIDs.push_back(newAudioName);
+						_currentAudioID = newAudioID;
+						_loadedAudioIDs.push_back(newAudioID);
 
 						// Miscellaneous
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
@@ -105,17 +105,17 @@ void AudioEditor::_updateAudioCreating()
 					}
 					else // Name already exists
 					{
-						Logger::throwWarning("Audio name \"" + newAudioName.substr(1) + "\" already exists!");
+						Logger::throwWarning("Audio ID \"" + newAudioID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Audio name cannot contain any spaces!");
+					Logger::throwWarning("Audio ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("New audio name cannot begin with '@'!");
+				Logger::throwWarning("Audio ID cannot begin with '@'!");
 			}
 		}
 	}
@@ -128,7 +128,7 @@ void AudioEditor::_updateAudioChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("audioList");
 
-		// Check if a audio name is hovered
+		// Check if a audio ID is hovered
 		if (selectedButtonID != "")
 		{
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed

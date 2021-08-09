@@ -94,7 +94,7 @@ void SceneEditor::_updateModelPlacingMenu()
 								_currentPreviewModelID = modelID;
 								_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));
 								_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
-								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 								_fe3d.textEntity_setVisible(textEntityID, true);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 								_fe3d.misc_centerCursor();

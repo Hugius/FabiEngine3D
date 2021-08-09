@@ -22,9 +22,8 @@ void ModelEditor::_updateCamera()
 			if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
 			{
 				cameraLookat.y -= CAMERA_LOOKAT_SPEED;
-				cameraLookat.y = max(GRID_Y_OFFSET, cameraLookat.y);
 			}
-			_fe3d.camera_setThirdPersonLookat(cameraLookat);
+			_fe3d.camera_setThirdPersonLookat(Vec3(cameraLookat.x, max(GRID_Y_OFFSET, cameraLookat.y), cameraLookat.z));
 
 			// Hide cursor
 			_fe3d.imageEntity_setVisible("@@cursor", false);

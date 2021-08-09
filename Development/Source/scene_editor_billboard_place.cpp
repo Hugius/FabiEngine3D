@@ -62,7 +62,7 @@ void SceneEditor::_updateBillboardPlacing()
 					// Hide preview billboard
 					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 					_currentPreviewBillboardID = "";
-					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 					_fe3d.textEntity_setVisible(textEntityID, false);
 				}
 			}

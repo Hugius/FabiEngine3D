@@ -83,13 +83,13 @@ void AnimationEditor::_updateAnimationCreating()
 	{
 		string newAnimationName = "";
 
-		// Check if user filled in a new name
+		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationName, { _currentAnimationID }))
 		{
-			// Check if name contains spaces
+			// Check if ID contains spaces
 			if (newAnimationName.find(' ') == string::npos)
 			{
-				// Check if name already exists
+				// Check if ID already exists
 				auto animationIDs = getAllAnimationIDs();
 				if (find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 				{
@@ -103,9 +103,9 @@ void AnimationEditor::_updateAnimationCreating()
 					_animations.push_back(make_shared<Animation>(_currentAnimationID));
 
 					// Miscellaneous
-					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationID")->getEntityID();
 					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationID")->getEntityID(), true);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), true);
 					_isCreatingAnimation = false;
 					_isEditingAnimation = true;
@@ -113,12 +113,12 @@ void AnimationEditor::_updateAnimationCreating()
 				}
 				else // Name already exists
 				{
-					Logger::throwWarning("Animation name \"" + newAnimationName + "\" already exists!");
+					Logger::throwWarning("Animation ID \"" + newAnimationName + "\" already exists!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Animation name cannot contain any spaces!");
+				Logger::throwWarning("Animation ID cannot contain any spaces!");
 			}
 		}
 	}
@@ -131,7 +131,7 @@ void AnimationEditor::_updateAnimationChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 
-		// Check if a animation name is hovered
+		// Check if a animation ID is hovered
 		if (selectedButtonID != "")
 		{
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
@@ -145,9 +145,9 @@ void AnimationEditor::_updateAnimationChoosing()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 					// Show text
-					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationID")->getEntityID();
 					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationID")->getEntityID(), true);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), true);
 
 					// Show preview model

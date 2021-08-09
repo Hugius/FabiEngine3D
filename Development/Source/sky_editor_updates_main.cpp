@@ -84,7 +84,7 @@ void SkyEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(), false);
 				_fe3d.skyEntity_setWireFramed(_currentSkyID, false);
 				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 				_currentSkyID = "";
@@ -132,9 +132,9 @@ void SkyEditor::_updateSkyCreating()
 						_fe3d.skyEntity_create(_currentSkyID);
 						_fe3d.skyEntity_selectMainSky(_currentSkyID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(), true);
 						_isCreatingSky = false;
 						_isEditingSky = true;
 					}
@@ -178,9 +178,9 @@ void SkyEditor::_updateSkyChoosing()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
 					// Show sky name
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(),
 						"Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(), true);
 				}
 
 				// Show entity

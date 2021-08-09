@@ -66,7 +66,7 @@ void SceneEditor::_updateModelPlacing()
 				if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 				{
 					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 					_fe3d.textEntity_setVisible(textEntityID, false);
 					_currentPreviewModelID = "";
 				}
@@ -137,7 +137,7 @@ void SceneEditor::_updateModelPlacing()
 						else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 						{
 							_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 							_fe3d.textEntity_setVisible(textEntityID, false);
 							_currentPreviewModelID = "";
 						}

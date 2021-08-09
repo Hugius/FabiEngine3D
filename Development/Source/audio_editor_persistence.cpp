@@ -98,9 +98,15 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		// Add audio ID
-		_loadedAudioIDs.push_back(audioID);
+		// Create sound
 		_fe3d.soundEntity_create(audioID, audioPath);
+
+		// Check if sound creation went well
+		if (_fe3d.soundEntity_isExisting(audioID))
+		{
+			// Add audio ID
+			_loadedAudioIDs.push_back(audioID);
+		}
 	}
 
 	// Close file

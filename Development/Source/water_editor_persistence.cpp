@@ -151,27 +151,50 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		// Load entity
-		_loadedWaterIDs.push_back(waterID);
+		// Create water
 		_fe3d.waterEntity_create(waterID);
-		_fe3d.waterEntity_setPosition(waterID, position);
-		_fe3d.waterEntity_setSize(waterID, size);
-		_fe3d.waterEntity_setWaving(waterID, isWaving);
-		_fe3d.waterEntity_setRippling(waterID, isRippling);
-		_fe3d.waterEntity_setSpecularLighted(waterID, isSpecularLighted);
-		_fe3d.waterEntity_setReflective(waterID, isReflective);
-		_fe3d.waterEntity_setRefractive(waterID, isRefractive);
-		_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
-		_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
-		_fe3d.waterEntity_setSpecularLightingFactor(waterID, specularFactor);
-		_fe3d.waterEntity_setSpecularLightingIntensity(waterID, specularIntensity);
-		_fe3d.waterEntity_setTransparency(waterID, transparency);
-		_fe3d.waterEntity_setColor(waterID, color);
-		_fe3d.waterEntity_setUvRepeat(waterID, uvRepeat);
-		_fe3d.waterEntity_setSpeed(waterID, speed);
-		if (dudvMapPath != "") _fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
-		if (normalMapPath != "") _fe3d.waterEntity_setNormalMap(waterID, normalMapPath);
-		if (displacementMapPath != "") _fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
+
+		// Check if water creation went well
+		if (_fe3d.waterEntity_isExisting(waterID))
+		{
+			// Add water ID
+			_loadedWaterIDs.push_back(waterID);
+
+			// DUDV map
+			if (dudvMapPath != "")
+			{
+				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
+			}
+
+			// Normal map
+			if (normalMapPath != "")
+			{
+				_fe3d.waterEntity_setNormalMap(waterID, normalMapPath);
+			}
+
+			// Displacement map
+			if (displacementMapPath != "")
+			{
+				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
+			}
+
+			// Set properties
+			_fe3d.waterEntity_setPosition(waterID, position);
+			_fe3d.waterEntity_setSize(waterID, size);
+			_fe3d.waterEntity_setWaving(waterID, isWaving);
+			_fe3d.waterEntity_setRippling(waterID, isRippling);
+			_fe3d.waterEntity_setSpecularLighted(waterID, isSpecularLighted);
+			_fe3d.waterEntity_setReflective(waterID, isReflective);
+			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
+			_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
+			_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
+			_fe3d.waterEntity_setSpecularLightingFactor(waterID, specularFactor);
+			_fe3d.waterEntity_setSpecularLightingIntensity(waterID, specularIntensity);
+			_fe3d.waterEntity_setTransparency(waterID, transparency);
+			_fe3d.waterEntity_setColor(waterID, color);
+			_fe3d.waterEntity_setUvRepeat(waterID, uvRepeat);
+			_fe3d.waterEntity_setSpeed(waterID, speed);
+		}
 	}
 
 	// Close file

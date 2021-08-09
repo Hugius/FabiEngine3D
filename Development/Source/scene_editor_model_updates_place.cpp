@@ -4,6 +4,7 @@
 
 void SceneEditor::_updateModelPlacing()
 {
+	// Only if user is in placement mode
 	if (!_currentPreviewModelID.empty())
 	{
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain

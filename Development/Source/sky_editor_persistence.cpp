@@ -128,13 +128,21 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
 
-		// Load entity
-		_loadedSkyIDs.push_back(skyID);
+		// Create sky
 		_fe3d.skyEntity_create(skyID);
-		_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
-		_fe3d.skyEntity_setLightness(skyID, lightness);
-		_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
-		_fe3d.skyEntity_setColor(skyID, color);
+
+		// Check if sky creation went well
+		if (_fe3d.skyEntity_isExisting(skyID))
+		{
+			// Add sky ID
+			_loadedSkyIDs.push_back(skyID);
+
+			// Set properties
+			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
+			_fe3d.skyEntity_setLightness(skyID, lightness);
+			_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+			_fe3d.skyEntity_setColor(skyID, color);
+		}
 	}
 
 	// Close file

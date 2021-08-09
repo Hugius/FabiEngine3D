@@ -85,17 +85,65 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
-		// Save file paths
-		if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
-		if (!heightMapPath.empty())  texturePaths.push_back(heightMapPath);
-		if (!normalMapPath.empty())  texturePaths.push_back(normalMapPath);
-		if (!normalMapPathR.empty()) texturePaths.push_back(normalMapPathR);
-		if (!normalMapPathG.empty()) texturePaths.push_back(normalMapPathG);
-		if (!normalMapPathB.empty()) texturePaths.push_back(normalMapPathB);
-		if (!blendMapPath.empty())   texturePaths.push_back(blendMapPath);
-		if (!blendMapPathR.empty())  texturePaths.push_back(blendMapPathR);
-		if (!blendMapPathG.empty())  texturePaths.push_back(blendMapPathG);
-		if (!blendMapPathB.empty())  texturePaths.push_back(blendMapPathB);
+		// Save diffuse map path
+		if (!diffuseMapPath.empty())
+		{
+			texturePaths.push_back(diffuseMapPath);
+		}
+
+		// Save height map path
+		if (!heightMapPath.empty())
+		{
+			texturePaths.push_back(heightMapPath);
+		}
+
+		// Save normal map path
+		if (!normalMapPath.empty())
+		{
+			texturePaths.push_back(normalMapPath);
+		}
+
+		// Save normal map R path
+		if (!normalMapPathR.empty())
+		{
+			texturePaths.push_back(normalMapPathR);
+		}
+
+		// Save normal map G path
+		if (!normalMapPathG.empty())
+		{
+			texturePaths.push_back(normalMapPathG);
+		}
+
+		// Save normal map B path
+		if (!normalMapPathB.empty())
+		{
+			texturePaths.push_back(normalMapPathB);
+		}
+
+		// Save blend map path
+		if (!blendMapPath.empty())
+		{
+			texturePaths.push_back(blendMapPath);
+		}
+
+		// Save blend map R path
+		if (!blendMapPathR.empty())
+		{
+			texturePaths.push_back(blendMapPathR);
+		}
+
+		// Save blend map G path
+		if (!blendMapPathG.empty())
+		{
+			texturePaths.push_back(blendMapPathG);
+		}
+
+		// Save blend map B path
+		if (!blendMapPathB.empty())
+		{
+			texturePaths.push_back(blendMapPathB);
+		}
 	}
 
 	// Close file
@@ -187,77 +235,81 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
 		replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 		replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
-
-		// Add terrain ID
-		_loadedTerrainIDs.push_back(terrainID);
 		
 		// Create terrain
 		_fe3d.terrainEntity_create(terrainID, heightMapPath);
 
-		// Diffuse map
-		if (!diffuseMapPath.empty())
+		// Check if terrain creation went well
+		if (_fe3d.terrainEntity_isExisting(terrainID))
 		{
-			_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
-		}
+			// Add terrain ID
+			_loadedTerrainIDs.push_back(terrainID);
 
-		// Normal map
-		if (!normalMapPath.empty())
-		{
-			_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
-		}
+			// Diffuse map
+			if (!diffuseMapPath.empty())
+			{
+				_fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
+			}
 
-		// Normal map R
-		if (!normalMapPathR.empty())
-		{
-			_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
-		}
+			// Normal map
+			if (!normalMapPath.empty())
+			{
+				_fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
+			}
 
-		// Normal map G
-		if (!normalMapPathG.empty())
-		{
-			_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
-		}
+			// Normal map R
+			if (!normalMapPathR.empty())
+			{
+				_fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
+			}
 
-		// Normal map B
-		if (!normalMapPathB.empty())
-		{
-			_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
-		}
+			// Normal map G
+			if (!normalMapPathG.empty())
+			{
+				_fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
+			}
 
-		// Blend map
-		if (!blendMapPath.empty())
-		{
-			_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
-		}
+			// Normal map B
+			if (!normalMapPathB.empty())
+			{
+				_fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
+			}
 
-		// Blend map R
-		if (!blendMapPathR.empty())
-		{
-			_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
-		}
+			// Blend map
+			if (!blendMapPath.empty())
+			{
+				_fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
+			}
 
-		// Blend map G
-		if (!blendMapPathG.empty())
-		{
-			_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
-		}
+			// Blend map R
+			if (!blendMapPathR.empty())
+			{
+				_fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
+			}
 
-		// Blend map B
-		if (!blendMapPathB.empty())
-		{
-			_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
-		}
+			// Blend map G
+			if (!blendMapPathG.empty())
+			{
+				_fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
+			}
 
-		// Set properties
-		_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
-		_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
-		_fe3d.terrainEntity_setLightness(terrainID, lightness);
-		_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
-		_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
-		_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
-		_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
-		_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
-		_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
+			// Blend map B
+			if (!blendMapPathB.empty())
+			{
+				_fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
+			}
+
+			// Set properties
+			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
+			_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
+			_fe3d.terrainEntity_setLightness(terrainID, lightness);
+			_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
+			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
+			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
+			_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
+			_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
+			_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
+		}
 	}
 
 	// Close file

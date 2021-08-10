@@ -206,7 +206,7 @@ void AnimationEditor::_updateChoiceMenu()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Compose selected model ID
-				string selectedModelID = "@" + selectedButtonID;
+				string selectedModelID = ("@" + selectedButtonID);
 
 				// Check if parts are present
 				bool hasAllParts = true;

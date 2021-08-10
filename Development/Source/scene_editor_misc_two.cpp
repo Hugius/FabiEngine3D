@@ -155,7 +155,7 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete MODEL entities
+	// Delete model entities
 	for (const auto& [ID, previewID] : _loadedModelIDs)
 	{
 		// Delete model
@@ -203,7 +203,7 @@ void SceneEditor::clearCurrentScene()
 			// Delete corresponding speaker model
 			if (!_currentSceneID.empty())
 			{
-				_fe3d.modelEntity_delete("@speaker_" + ID);
+				_fe3d.modelEntity_delete("@@speaker_" + ID);
 			}
 		}
 	}
@@ -225,7 +225,7 @@ void SceneEditor::clearCurrentScene()
 			// Delete corresponding lamp model
 			if (!_currentSceneID.empty())
 			{
-				_fe3d.modelEntity_delete("@" + ID);
+				_fe3d.modelEntity_delete("@@lamp_" + ID);
 			}
 		}
 	}

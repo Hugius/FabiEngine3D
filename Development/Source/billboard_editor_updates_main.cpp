@@ -171,7 +171,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select billboard
-				_currentBillboardID = "@" + selectedButtonID;
+				_currentBillboardID = ("@" + selectedButtonID);
 				_hoveredBillboardID = "";
 
 				// Go to editor
@@ -191,7 +191,7 @@ void BillboardEditor::_updateBillboardChoosing()
 			else
 			{
 				// Set new hovered billboard
-				_hoveredBillboardID = "@" + selectedButtonID;
+				_hoveredBillboardID = ("@" + selectedButtonID);
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("billboardList")) // Cancelled choosing

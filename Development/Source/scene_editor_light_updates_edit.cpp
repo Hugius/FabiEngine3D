@@ -2,7 +2,7 @@
 
 #define SELECTED_LAMP_ID _selectedLampID
 #define ACTIVE_LAMP_ID _activeLampID
-#define ACTIVE_LIGHT_ID _activeLampID.substr(1)
+#define ACTIVE_LIGHT_ID _activeLampID.substr(string("@@lamp_").size())
 
 void SceneEditor::_updateLightEditing()
 {

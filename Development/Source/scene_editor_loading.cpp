@@ -255,13 +255,13 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			if (_isEditorLoaded)
 			{
 				// Create model
-				const string newModelID = ("@speaker_" + soundID);
+				const string newModelID = ("@@speaker_" + soundID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\speaker.obj");
 				_fe3d.modelEntity_setPosition(newModelID, position);
 				_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, false);
+				_fe3d.modelEntity_setBright(newModelID, true);
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
@@ -344,14 +344,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			if (_isEditorLoaded)
 			{
 				// Create model
-				const string newModelID = "@" + lightID;
+				const string newModelID = ("@@lamp_" + lightID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
 				_fe3d.modelEntity_setPosition(newModelID, position);
 				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
+				_fe3d.modelEntity_setColor(newModelID, color);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
-				_fe3d.modelEntity_setColor(newModelID, color);
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
@@ -359,7 +359,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 			}
 
-			// Create point light
+			// Create light
 			_fe3d.lightEntity_create(lightID);
 			_fe3d.lightEntity_setPosition(lightID, position);
 			_fe3d.lightEntity_setRadius(lightID, radius);

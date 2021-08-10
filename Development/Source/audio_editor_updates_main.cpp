@@ -155,7 +155,7 @@ void AudioEditor::_updateAudioChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select audio
-				_currentAudioID = "@" + selectedButtonID;
+				_currentAudioID = ("@" + selectedButtonID);
 
 				// Go to editor
 				if (_isEditingAudio)

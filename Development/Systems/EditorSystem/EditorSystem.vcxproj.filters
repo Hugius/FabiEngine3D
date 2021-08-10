@@ -76,9 +76,6 @@
     <Filter Include="Scene Editor\Models">
       <UniqueIdentifier>{0725081c-ce09-4ba4-aca4-247cf8a4eb32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Audio">
-      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene Editor\Environment">
       <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="Scene Editor\Persistence\Custom">
       <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Sounds">
+      <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -289,13 +289,13 @@
       <Filter>Scene Editor\Models</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_sound_updates_edit.cpp">
-      <Filter>Scene Editor\Audio</Filter>
+      <Filter>Scene Editor\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_sound_updates_place.cpp">
-      <Filter>Scene Editor\Audio</Filter>
+      <Filter>Scene Editor\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_sound_updates_main.cpp">
-      <Filter>Scene Editor\Audio</Filter>
+      <Filter>Scene Editor\Sounds</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_environment.cpp">
       <Filter>Scene Editor\Environment</Filter>

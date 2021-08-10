@@ -1,9 +1,9 @@
 #include "scene_editor.hpp"
 
 #define SELECTED_SPEAKER_ID _selectedSpeakerID
-#define SELECTED_SOUND_ID _selectedSpeakerID.substr(string("@speaker_").size())
+#define SELECTED_SOUND_ID _selectedSpeakerID.substr(string("@@speaker_").size())
 #define ACTIVE_SPEAKER_ID _activeSpeakerID
-#define ACTIVE_SOUND_ID _activeSpeakerID.substr(string("@speaker_").size())
+#define ACTIVE_SOUND_ID _activeSpeakerID.substr(string("@@speaker_").size())
 
 void SceneEditor::_updateSoundEditing()
 {

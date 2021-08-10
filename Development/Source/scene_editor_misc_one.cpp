@@ -138,7 +138,7 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 void SceneEditor::_selectSound(const string& soundID)
 {
 	// Set ID
-	_selectedSpeakerID = ("@speaker_" + soundID);
+	_selectedSpeakerID = ("@@speaker_" + soundID);
 
 	// Change cursor
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -160,12 +160,12 @@ void SceneEditor::_selectSound(const string& soundID)
 void SceneEditor::_activateSound(const string& soundID)
 {
 	// Set ID
-	_activeSpeakerID = ("@speaker_" + soundID);
+	_activeSpeakerID = ("@@speaker_" + soundID);
 
 	// Filling writefields
-	Vec3 position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
-	float maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
-	float maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
+	Vec3 position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
+	float maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
+	float maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));

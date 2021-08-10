@@ -17,9 +17,9 @@ public:
 	void unbind();
 	
 	template<typename T>
-	void uploadUniform(const string& name, const T & data) 
+	void uploadUniform(const string& ID, const T & data) 
 	{
-		auto uniform = _getUniformID(name);
+		auto uniform = _getUniformID(ID);
 		_uploadUniform(uniform, data);
 	}
 

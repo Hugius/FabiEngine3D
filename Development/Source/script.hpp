@@ -7,7 +7,7 @@ class Script final
 public:
 	Script(FabiEngine3D& fe3d);
 
-	void addScriptFile(const string& ID);
+	void createScriptFile(const string& ID);
 	void renameScriptFile(const string& ID, const string& newID);
 	void removeScriptFile(const string& ID);
 	void reset();

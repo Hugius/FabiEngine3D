@@ -137,7 +137,7 @@ void SceneEditor::_updateModelEditing()
 				}
 			}
 
-			// Check if an animation name is clicked
+			// Check if an animation ID is clicked
 			auto lastAnimationID = _animationEditor.getStartedAnimationIDs(ACTIVE_MODEL_ID);
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 			if (selectedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))

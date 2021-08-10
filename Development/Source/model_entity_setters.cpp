@@ -6,7 +6,7 @@
 using std::max;
 using std::clamp;
 
-void ModelEntity::addPart(const string& ID)
+void ModelEntity::createPart(const string& ID)
 {
 	_parts.push_back(PartData(ID));
 }

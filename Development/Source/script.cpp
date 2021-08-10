@@ -8,7 +8,7 @@ Script::Script(FabiEngine3D& fe3d)
 
 }
 
-void Script::addScriptFile(const string& ID)
+void Script::createScriptFile(const string& ID)
 {
 	// Check if non-existent
 	for (const auto& file : _scriptFiles)

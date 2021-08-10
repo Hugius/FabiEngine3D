@@ -52,12 +52,12 @@ void SceneEditor::_updateSkyMenu()
 			{
 				// Retrieve created skies
 				vector<string> skyNames;
-				for (const auto& name : _skyEditor.getLoadedSkyIDs())
+				for (const auto& ID : _skyEditor.getLoadedSkyIDs())
 				{
 					// Check if not engine sky & not scene editor sky
-					if (name[0] == '@' && name.substr(0, 2) != "@@")
+					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
 					{
-						skyNames.push_back(name.substr(1));
+						skyNames.push_back(ID.substr(1));
 					}
 				}
 
@@ -122,12 +122,12 @@ void SceneEditor::_updateTerrainMenu()
 			{
 				// Retrieve created skies
 				vector<string> terrainNames;
-				for (const auto& name : _terrainEditor.getLoadedTerrainIDs())
+				for (const auto& ID : _terrainEditor.getLoadedTerrainIDs())
 				{
 					// Check if not engine terrain & not scene editor terrain
-					if (name[0] == '@' && name.substr(0, 2) != "@@")
+					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
 					{
-						terrainNames.push_back(name.substr(1));
+						terrainNames.push_back(ID.substr(1));
 					}
 				}
 
@@ -192,12 +192,12 @@ void SceneEditor::_updateWaterMenu()
 			{
 				// Retrieve created skies
 				vector<string> waterNames;
-				for (const auto& name : _waterEditor.getLoadedWaterIDs())
+				for (const auto& ID : _waterEditor.getLoadedWaterIDs())
 				{
 					// Check if not engine water & not scene editor water
-					if (name[0] == '@' && name.substr(0, 2) != "@@")
+					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
 					{
-						waterNames.push_back(name.substr(1));
+						waterNames.push_back(ID.substr(1));
 					}
 				}
 

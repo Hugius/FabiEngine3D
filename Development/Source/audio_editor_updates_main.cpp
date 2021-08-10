@@ -90,9 +90,9 @@ void AudioEditor::_updateAudioCreating()
 				if (newAudioID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
-					newAudioID = "@" + newAudioID;
+					newAudioID = ("@" + newAudioID);
 
-					// Check if ID already exists
+					// Check if audio already exists
 					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
 						// Go to editor
@@ -111,7 +111,7 @@ void AudioEditor::_updateAudioCreating()
 					}
 					else // ID already exists
 					{
-						Logger::throwWarning("Audio ID \"" + newAudioID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Audio with ID \"" + newAudioID.substr(1) + "\" already exists!");
 					}
 				}
 				else

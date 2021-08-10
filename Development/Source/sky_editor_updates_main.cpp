@@ -127,10 +127,10 @@ void SkyEditor::_updateSkyCreating()
 				// Spaces not allowed
 				if (newSkyID.find(' ') == string::npos)
 				{
-					// Add @ sign to new name
-					newSkyID = "@" + newSkyID;
+					// Add @ sign to new ID
+					newSkyID = ("@" + newSkyID);
 
-					// If sky name not existing yet
+					// If sky not existing yet
 					if (find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyID) == _loadedSkyIDs.end())
 					{
 						_currentSkyID = newSkyID;
@@ -146,17 +146,17 @@ void SkyEditor::_updateSkyCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Sky name \"" + newSkyID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Sky with ID \"" + newSkyID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Sky name cannot contain any spaces!");
+					Logger::throwWarning("Sky ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Sky name cannot contain '@'!");
+				Logger::throwWarning("Sky ID cannot contain '@'!");
 			}
 		}
 	}
@@ -169,7 +169,7 @@ void SkyEditor::_updateSkyChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 
-		// Check if a sky name is hovered
+		// Check if a sky ID is hovered
 		if (selectedButtonID != "")
 		{
 			// Check if LMB is pressed
@@ -178,13 +178,10 @@ void SkyEditor::_updateSkyChoosing()
 				// Select sky
 				_currentSkyID = "@" + selectedButtonID;
 
-				// Only if going to editor
+				// Go to editor
 				if (_isEditingSky)
 				{
-					// Go to editor screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-
-					// Show sky name
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(),
 						"Sky: " + _currentSkyID.substr(1), 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedSkyID")->getEntityID(), true);
@@ -224,7 +221,7 @@ void SkyEditor::_updateSkyDeleting()
 			// Delete entity
 			_fe3d.skyEntity_delete(_currentSkyID);
 
-			// Delete from name record
+			// Delete from ID record
 			_loadedSkyIDs.erase(remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
 			_isDeletingSky = false;
 			_currentSkyID = "";

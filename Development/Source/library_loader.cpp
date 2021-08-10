@@ -90,7 +90,7 @@ SDL_Window* LibraryLoader::getWindowPointer()
 	return temp;
 }
 
-const string LibraryLoader::getGpuName()
+const string LibraryLoader::getGpuModel()
 {
 	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
 }

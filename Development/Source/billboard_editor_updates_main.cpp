@@ -92,9 +92,9 @@ void BillboardEditor::_updateBillboardCreating()
 				if (newBillboardID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
-					newBillboardID = "@" + newBillboardID;
+					newBillboardID = ("@" + newBillboardID);
 
-					// If billboard ID not existing yet
+					// If billboard not existing yet
 					if (find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) == _loadedBillboardIDs.end())
 					{
 						// Go to editor
@@ -114,7 +114,7 @@ void BillboardEditor::_updateBillboardCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Billboard ID \"" + newBillboardID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Billboard with ID \"" + newBillboardID.substr(1) + "\" already exists!");
 					}
 				}
 				else

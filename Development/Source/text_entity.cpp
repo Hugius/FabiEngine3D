@@ -56,7 +56,7 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-void TextEntity::addCharacterEntity(shared_ptr<ImageEntity> character)
+void TextEntity::createCharacterEntity(shared_ptr<ImageEntity> character)
 {
 	_characterEntities.push_back(character);
 }

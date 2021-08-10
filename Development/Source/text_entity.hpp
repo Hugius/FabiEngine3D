@@ -15,7 +15,7 @@ public:
 	// Voids
 	void setCentered(bool value);
 	void setDynamic(bool value);
-	void addCharacterEntity(shared_ptr<ImageEntity> character);
+	void createCharacterEntity(shared_ptr<ImageEntity> character);
 	void updateCharacterEntities();
 	void deleteCharacterEntities();
 	void setTextContent(const string& text);

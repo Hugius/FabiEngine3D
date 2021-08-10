@@ -29,8 +29,8 @@ void BottomViewportController::initialize()
 
 	// General statistics
 	_statsScreen->createTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextfield("cpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->createTextfield("gpuName", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->createTextfield("cpuModel", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->createTextfield("gpuModel", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextfield("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextfield("cameraPosition", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextfield("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
@@ -85,16 +85,16 @@ void BottomViewportController::update()
 	// Update CPU stats
 	if (_fe3d.misc_checkInterval(100))
 	{
-		string textID = _statsScreen->getTextfield("cpuName")->getEntityID();
-		string text = ("CPU: " + _fe3d.misc_getCpuName());
+		string textID = _statsScreen->getTextfield("cpuModel")->getEntityID();
+		string text = ("CPU: " + _fe3d.misc_getCpuModel());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update GPU stats
 	if (_fe3d.misc_checkInterval(100))
 	{
-		string textID = _statsScreen->getTextfield("gpuName")->getEntityID();
-		string text = ("GPU: " + _fe3d.misc_getGpuName());
+		string textID = _statsScreen->getTextfield("gpuModel")->getEntityID();
+		string text = ("GPU: " + _fe3d.misc_getGpuModel());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

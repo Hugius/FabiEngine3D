@@ -189,7 +189,7 @@ void ScriptEditor::_updateMiscellaneous()
 		// Spaces not allowed
 		if (newScriptFileID.find(' ') == string::npos)
 		{
-			// Check if name already exists
+			// Check if ID already exists
 			auto existingScriptFileIDs = _script.getAllScriptFileIDs();
 			if (find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{
@@ -197,18 +197,18 @@ void ScriptEditor::_updateMiscellaneous()
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
-				_script.addScriptFile(_currentScriptFileID);
+				_script.createScriptFile(_currentScriptFileID);
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
 				_reloadScriptTextDisplay(true);
 			}
 			else
 			{
-				Logger::throwWarning("Script name \"" + newScriptFileID + "\" already exists!");
+				Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Script name cannot contain any spaces!");
+			Logger::throwWarning("Script ID cannot contain any spaces!");
 		}
 	}
 
@@ -243,7 +243,7 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 		else
 		{
-			Logger::throwWarning("Script name already exists!");
+			Logger::throwWarning("Script with ID \"" + newScriptFileID + "\" already exists!");
 		}
 	}
 }

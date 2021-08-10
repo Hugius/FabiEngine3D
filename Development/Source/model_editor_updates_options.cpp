@@ -98,7 +98,7 @@ void ModelEditor::_updateOptionsMenu()
 			}
 			else if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
 			{
-				Logger::throwWarning("Cannot find LOD entity name \"" + lodID + "\"");
+				Logger::throwWarning("Cannot find LOD entity with ID \"" + lodID + "\"");
 			}
 			else // Set LOD entity
 			{

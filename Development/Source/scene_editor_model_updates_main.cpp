@@ -29,7 +29,7 @@ void SceneEditor::_updateModelMenu()
 				// Clear all buttons from scrolling list
 				_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
-				// Add the name of every placed model
+				// Add the ID of every placed model
 				auto IDs = _fe3d.modelEntity_getAllIDs();
 				sort(IDs.begin(), IDs.end());
 				for (auto& modelID : IDs)

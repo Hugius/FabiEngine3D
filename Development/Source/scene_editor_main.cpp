@@ -102,7 +102,7 @@ void SceneEditor::load()
 	_fe3d.lightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
 	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
-	// Create name textfields
+	// Create ID textfields
 	_gui.getGlobalScreen()->createTextfield("selectedModelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedBillboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextfield("selectedSoundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -188,7 +188,7 @@ void SceneEditor::unload()
 	_isDeletingScene = false;
 	_editorSpeed = 1.0f;
 
-	// Delete name textfields
+	// Delete ID textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelID");
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardID");
 	_gui.getGlobalScreen()->deleteTextfield("selectedSoundID");

@@ -164,7 +164,7 @@ void ModelEditor::_updateModelCreating()
 					// Add @ sign to new ID
 					newModelID = ("@" + newModelID);
 
-					// If model ID not existing yet
+					// If model not existing yet
 					if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
 						// Get the chosen filename
@@ -208,7 +208,7 @@ void ModelEditor::_updateModelCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Model ID \"" + newModelID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Model with ID \"" + newModelID.substr(1) + "\" already exists!");
 					}
 				}
 				else

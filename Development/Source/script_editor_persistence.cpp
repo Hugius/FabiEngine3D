@@ -49,9 +49,9 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 			ifstream file(directoryPath + filename);
 			string line;
 
-			// Add software script file to script
+			// Add script file to script
 			string scriptFileID = filename.substr(0, filename.size() - 5); // No file extension
-			_script.addScriptFile(scriptFileID);
+			_script.createScriptFile(scriptFileID);
 
 			// Extract cursor indices
 			unsigned int cursorLineIndex, cursorCharIndex;

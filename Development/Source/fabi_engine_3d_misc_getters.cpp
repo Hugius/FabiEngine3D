@@ -108,25 +108,25 @@ const string FabiEngine3D::misc_getRootDirectory()
 	return Tools::getRootDirectory();
 }
 
-const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
+const string FabiEngine3D::misc_getCpuModel() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
 {
 	// Temporary values
 	int CPUInfo[4];
-	char name[48];
+	char model[48];
 
-	// Retrieve full CPU name string
+	// Retrieve full CPU model string
 	__cpuid(CPUInfo, 0x80000002);
-	memcpy(name, CPUInfo, sizeof(CPUInfo));
+	memcpy(model, CPUInfo, sizeof(CPUInfo));
 	__cpuid(CPUInfo, 0x80000003);
-	memcpy(name + 16, CPUInfo, sizeof(CPUInfo));
+	memcpy(model + 16, CPUInfo, sizeof(CPUInfo));
 	__cpuid(CPUInfo, 0x80000004);
-	memcpy(name + 32, CPUInfo, sizeof(CPUInfo));
+	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
 
 	// Convert to string
 	string nameString;
 	for (unsigned int i = 0; i < 48; i++)
 	{
-		nameString.push_back(name[i]);
+		nameString.push_back(model[i]);
 	}
 
 	// Remove trailing spaces
@@ -147,9 +147,9 @@ const string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questi
 	return result;
 }
 
-const string FabiEngine3D::misc_getGpuName()
+const string FabiEngine3D::misc_getGpuModel()
 {
-	return _core->_libraryLoader.getGpuName();
+	return _core->_libraryLoader.getGpuModel();
 }
 
 const string FabiEngine3D::misc_getOpenglVersion()

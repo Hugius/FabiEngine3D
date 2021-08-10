@@ -192,7 +192,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 		}
 
-		// Write name to file
+		// Write ID to file
 		file << skyID << " ";
 
 		// Write paths to file

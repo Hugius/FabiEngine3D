@@ -67,7 +67,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 				if (texture != 0)
 				{
 					newCharacter->setDiffuseMap(texture);
-					entity->addCharacterEntity(newCharacter);
+					entity->createCharacterEntity(newCharacter);
 				}
 				else
 				{

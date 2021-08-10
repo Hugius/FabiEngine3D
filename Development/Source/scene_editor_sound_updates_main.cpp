@@ -29,7 +29,7 @@ void SceneEditor::_updateSoundMenu()
 				// Clear all buttons from scrolling list
 				_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->getScrollingList("soundcasters")->deleteButtons();
 
-				// Add every placed soundcaster name
+				// Add the ID of every placed sound
 				auto IDs = _fe3d.soundEntity_getAllIDs();
 				sort(IDs.begin(), IDs.end());
 				for (auto& soundID : IDs)

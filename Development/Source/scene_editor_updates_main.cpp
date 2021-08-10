@@ -106,7 +106,7 @@ void SceneEditor::_updateMainMenu()
 		{
 			auto sceneNames = _loadSceneIDs();
 
-			// If scene name not existing yet
+			// If scene ID not existing yet
 			if (find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
 			{
 				// Disable engine background
@@ -118,7 +118,7 @@ void SceneEditor::_updateMainMenu()
 			}
 			else
 			{
-				Logger::throwWarning("Scene name \"" + newSceneName + "\" already exists!");
+				Logger::throwWarning("Scene with ID \"" + newSceneName + "\" already exists!");
 			}
 		}
 

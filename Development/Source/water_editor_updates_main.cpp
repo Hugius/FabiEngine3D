@@ -135,10 +135,10 @@ void WaterEditor::_updateWaterCreating()
 				// Spaces not allowed
 				if (newWaterID.find(' ') == string::npos)
 				{
-					// Add @ sign to new name
-					newWaterID = "@" + newWaterID;
+					// Add @ sign to new ID
+					newWaterID = ("@" + newWaterID);
 
-					// If water name not existing yet
+					// If water not existing yet
 					if (find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) == _loadedWaterIDs.end())
 					{
 						_currentWaterID = newWaterID;
@@ -154,17 +154,17 @@ void WaterEditor::_updateWaterCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Water name \"" + newWaterID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Water with ID \"" + newWaterID.substr(1) + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("Water name cannot contain any spaces!");
+					Logger::throwWarning("Water ID cannot contain any spaces!");
 				}
 			}
 			else
 			{
-				Logger::throwWarning("Water name cannot contain '@'!");
+				Logger::throwWarning("Water ID cannot contain '@'!");
 			}
 		}
 	}
@@ -177,7 +177,7 @@ void WaterEditor::_updateWaterChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
 
-		// Check if a water name is hovered
+		// Check if a water ID is hovered
 		if (selectedButtonID != "")
 		{
 			// Check if LMB is pressed
@@ -186,13 +186,10 @@ void WaterEditor::_updateWaterChoosing()
 				// Select water
 				_currentWaterID = "@" + selectedButtonID;
 
-				// Only if going to editor
+				// Go to editor
 				if (_isEditingWater)
 				{
-					// Go to editor screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-
-					// Show water name
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(),
 						"Water: " + _currentWaterID.substr(1), 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(), true);
@@ -232,7 +229,7 @@ void WaterEditor::_updateWaterDeleting()
 			// Delete entity
 			_fe3d.waterEntity_delete(_currentWaterID);
 
-			// Delete from name record
+			// Delete from ID record
 			_loadedWaterIDs.erase(remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
 			_isDeletingWater = false;
 			_currentWaterID = "";

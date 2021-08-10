@@ -29,7 +29,7 @@ void SceneEditor::_updateBillboardMenu()
 				// Clear all buttons from scrolling list
 				_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 
-				// Add the name of every placed billboard
+				// Add the ID of every placed billboard
 				auto IDs = _fe3d.billboardEntity_getAllIDs();
 				sort(IDs.begin(), IDs.end());
 				for (auto& billboardID : IDs)

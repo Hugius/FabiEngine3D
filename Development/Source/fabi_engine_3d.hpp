@@ -796,8 +796,8 @@ public:
 	const string misc_vec2str(Vec3 vec);
 	const string misc_vec2str(Vec4 vec);
 	const string misc_getRootDirectory();
-	const string misc_getCpuName();
-	const string misc_getGpuName();
+	const string misc_getCpuModel();
+	const string misc_getGpuModel();
 	const string misc_getOpenglVersion();
 	const Vec3 misc_getRaycastVector();
 	const Vec3 misc_getRaycastPointOnTerrain();

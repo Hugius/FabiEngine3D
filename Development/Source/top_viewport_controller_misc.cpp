@@ -136,7 +136,7 @@ void TopViewportController::_prepareProjectLoading()
 		vector<string> projectIDs;
 		for (const auto& entry : directory_iterator(userDirectoryPath))
 		{
-			// Extract project name
+			// Extract project ID
 			string projectPath = string(entry.path().u8string());
 			if (_fe3d.misc_isDirectoryExisting(projectPath))
 			{
@@ -147,7 +147,7 @@ void TopViewportController::_prepareProjectLoading()
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->createChoiceForm("projectList", "Choose Project", Vec2(0.0f, 0.1f), projectIDs);
+		_gui.getGlobalScreen()->createChoiceForm("projectList", "Load Project", Vec2(0.0f, 0.1f), projectIDs);
 	}
 	else
 	{
@@ -163,7 +163,7 @@ void TopViewportController::_updateProjectLoading()
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 		const string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + clickedButtonID;
 
-		// Check if user clicked a project name
+		// Check if user clicked a project ID
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (isProjectCorrupted(projectDirectoryPath))
@@ -218,7 +218,7 @@ void TopViewportController::_updateProjectDeleting()
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 
-		// Check if user clicked a project name
+		// Check if user clicked a project ID
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
@@ -344,7 +344,7 @@ void TopViewportController::_applyProjectChange()
 		_settingsEditor.unload();
 	}
 
-	// Pass loaded project name
+	// Pass loaded project ID
 	_skyEditor.setCurrentProjectID(_currentProjectID);
 	_terrainEditor.setCurrentProjectID(_currentProjectID);
 	_waterEditor.setCurrentProjectID(_currentProjectID);

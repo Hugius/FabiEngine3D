@@ -130,9 +130,9 @@ void TerrainEditor::_updateTerrainCreating()
 				if (newTerrainID.find(' ') == string::npos)
 				{
 					// Add @ sign to new ID
-					newTerrainID = "@" + newTerrainID;
+					newTerrainID = ("@" + newTerrainID);
 
-					// If terrain ID not existing yet
+					// If terrain not existing yet
 					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
 						// Get the chosen filename
@@ -177,7 +177,7 @@ void TerrainEditor::_updateTerrainCreating()
 					}
 					else
 					{
-						Logger::throwWarning("Terrain ID \"" + newTerrainID.substr(1) + "\" already exists!");
+						Logger::throwWarning("Terrain with ID \"" + newTerrainID.substr(1) + "\" already exists!");
 					}
 				}
 				else

@@ -427,17 +427,17 @@ bool SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Sound casters
-	for (const auto& soundID : _fe3d.soundEntity_getAllIDs())
+	for (const auto& soundID : _fe3d.sound_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneSound =
 			find(_customSceneSoundIDs.begin(), _customSceneSoundIDs.end(), soundID) != _customSceneSoundIDs.end();
-		if ((soundID[0] != '@') && isCustomSceneSound && _fe3d.soundEntity_is3D(soundID))
+		if ((soundID[0] != '@') && isCustomSceneSound && _fe3d.sound_is3D(soundID))
 		{
 			// Data to save
-			auto position = _fe3d.soundEntity_getPosition(soundID);
-			auto maxVolume = _fe3d.soundEntity_getMaxVolume(soundID);
-			auto maxDistance = _fe3d.soundEntity_getMaxDistance(soundID);
+			auto position = _fe3d.sound_getPosition(soundID);
+			auto maxVolume = _fe3d.sound_getMaxVolume(soundID);
+			auto maxDistance = _fe3d.sound_getMaxDistance(soundID);
 
 			// Extract preview ID
 			string previewID;

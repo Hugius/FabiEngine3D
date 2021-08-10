@@ -354,20 +354,20 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
 	// Error checking
-	if (_fe3d.soundEntity_isExisting(newID))
+	if (_fe3d.sound_isExisting(newID))
 	{
 		Logger::throwWarning("Sound with ID \"" + newID + "\" already exists!");
 		return false;
 	}
-	if (!_fe3d.soundEntity_isExisting(previewID))
+	if (!_fe3d.sound_isExisting(previewID))
 	{
 		Logger::throwWarning("Base audio of sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
-	// Add soundEntity
-	_fe3d.soundEntity_create(newID, _fe3d.soundEntity_getFilePath(previewID));
-	_fe3d.soundEntity_make3D(newID, position, 0.0f, 0.0f);
+	// Create sound
+	_fe3d.sound_create(newID, _fe3d.sound_getFilePath(previewID));
+	_fe3d.sound_make3D(newID, position, 0.0f, 0.0f);
 
 	// Save ID
 	if (fromOutside)

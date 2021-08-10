@@ -10,7 +10,13 @@ void ScriptEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateGUI();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTextWriter();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

@@ -52,106 +52,109 @@ void SettingsEditor::unload()
 
 void SettingsEditor::update()
 {
-	if (_isEditorLoaded)
+	// Only if editor is loaded
+	if (!_isEditorLoaded)
+	{
+		return;
+	}
+
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "settingsEditorMenuMain")
 	{
 		// Temporary values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
+		auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
+		auto shadowQuality = _fe3d.gfx_getShadowQuality();
+		auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
+		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
-		// GUI management
-		if (screen->getID() == "settingsEditorMenuMain")
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
-			// Temporary values
-			auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
-			auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
-			auto shadowQuality = _fe3d.gfx_getShadowQuality();
-			auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
-			auto refractionQuality = _fe3d.gfx_getRefractionQuality();
-			auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+			}
+			else if (screen->getButton("isFxaaEnabled")->isHovered())
+			{
+				isFxaaEnabled = !isFxaaEnabled;
+				isFxaaEnabled ? _fe3d.gfx_enableFXAA() : _fe3d.gfx_disableFXAA();
+			}
+			else if (screen->getButton("anisotropicQuality")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("shadowQuality")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("reflectionQuality")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("refractionQuality")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("maxAudioChannels")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+		}
 
-			// Check if input received
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
-			{
-				if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-				{
-					_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
-				}
-				else if (screen->getButton("isFxaaEnabled")->isHovered())
-				{
-					isFxaaEnabled = !isFxaaEnabled;
-					isFxaaEnabled ? _fe3d.gfx_enableFXAA() : _fe3d.gfx_disableFXAA();
-				}
-				else if (screen->getButton("anisotropicQuality")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("shadowQuality")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("reflectionQuality")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("refractionQuality")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-				else if (screen->getButton("maxAudioChannels")->isHovered())
-				{
-					_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				}
-			}
+		// Update forms
+		if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
+		{
+			_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicQuality,
+				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
+				Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
+		}
+		else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+		{
+			_fe3d.gfx_setShadowQuality(clamp(shadowQuality,
+				Config::MIN_SHADOW_QUALITY,
+				Config::MAX_SHADOW_QUALITY));
+		}
+		else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
+		{
+			_fe3d.gfx_setReflectionQuality(clamp(reflectionQuality,
+				Config::MIN_REFLECTION_QUALITY,
+				Config::MAX_REFLECTION_QUALITY));
+		}
+		else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
+		{
+			_fe3d.gfx_setRefractionQuality(clamp(refractionQuality,
+				Config::MIN_REFRACTION_QUALITY,
+				Config::MAX_REFRACTION_QUALITY));
+		}
+		else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
+		{
+			_fe3d.misc_setMaxAudioChannels(clamp(maxAudioChannels,
+				Config::MIN_AUDIO_CHANNELS,
+				Config::MAX_AUDIO_CHANNELS));
+		}
 
-			// Update forms
-			if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
-			{
-				_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicQuality,
-					Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
-					Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
-			{
-				_fe3d.gfx_setShadowQuality(clamp(shadowQuality,
-					Config::MIN_SHADOW_QUALITY,
-					Config::MAX_SHADOW_QUALITY));
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
-			{
-				_fe3d.gfx_setReflectionQuality(clamp(reflectionQuality,
-					Config::MIN_REFLECTION_QUALITY,
-					Config::MAX_REFLECTION_QUALITY));
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
-			{
-				_fe3d.gfx_setRefractionQuality(clamp(refractionQuality,
-					Config::MIN_REFRACTION_QUALITY,
-					Config::MAX_REFRACTION_QUALITY));
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
-			{
-				_fe3d.misc_setMaxAudioChannels(clamp(maxAudioChannels,
-					Config::MIN_AUDIO_CHANNELS,
-					Config::MAX_AUDIO_CHANNELS));
-			}
+		// Update button contents
+		screen->getButton("isFxaaEnabled")->changeTextContent(isFxaaEnabled ? "FXAA: ON" : "FXAA: OFF");
 
-			// Update button contents
-			screen->getButton("isFxaaEnabled")->changeTextContent(isFxaaEnabled ? "FXAA: ON" : "FXAA: OFF");
+		// Miscellaneous
+		_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
 
-			// Miscellaneous
-			_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
-
-			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
-			{
-				saveSettingsToFile();
-				unload();
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
-			{
-				unload();
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			}
+		// Check if user wants to save changes
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		{
+			saveSettingsToFile();
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		{
+			unload();
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
 	}
 }

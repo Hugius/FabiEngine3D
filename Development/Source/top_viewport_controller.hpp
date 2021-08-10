@@ -41,7 +41,7 @@ private:
 	void _updateProjectCreating();
 	void _updateProjectLoading();
 	void _updateProjectDeleting();
-	void _prepareProjectLoading();
+	void _prepareProjectChoosing(const string& title);
 	void _saveCurrentProject();
 	void _applyProjectChange();
 

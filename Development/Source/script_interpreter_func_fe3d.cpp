@@ -42,7 +42,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				executed = executed || _executeFe3dLightEntityFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dImageEntityFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dTextEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dSoundEntityFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dSoundFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dAnimationFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dRaycastFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dCollisionFunction(functionName, arguments, returnValues);

@@ -8,14 +8,41 @@ void WaterEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMeshMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateEffectsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateOptionsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateWaterCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateWaterChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateWaterDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

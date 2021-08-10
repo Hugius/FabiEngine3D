@@ -121,7 +121,7 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	// Create value form
 	_valueFormIDs.push_back(ID);
 	createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-	createTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
+	createTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
 	createWritefield(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
 	getWritefield(ID)->changeTextContent(valueString);
 
@@ -283,7 +283,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 
 	// Create answer form
 	createRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-	createTextfield("question", position, Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
+	createTextfield("question", position, Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
 	createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
 	createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
 	

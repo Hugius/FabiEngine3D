@@ -124,7 +124,7 @@ void TopViewportController::_updateProjectCreating()
 	}
 }
 
-void TopViewportController::_prepareProjectLoading()
+void TopViewportController::_prepareProjectChoosing(const string& title)
 {
 	// Get new path
 	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
@@ -147,7 +147,7 @@ void TopViewportController::_prepareProjectLoading()
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->createChoiceForm("projectList", "Load Project", Vec2(0.0f, 0.1f), projectIDs);
+		_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
 	}
 	else
 	{

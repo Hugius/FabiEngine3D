@@ -18,12 +18,33 @@ void AnimationEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateFrameMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateAnimationCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateAnimationChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateAnimationDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

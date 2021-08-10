@@ -6,13 +6,37 @@ void SkyEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMeshMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateOptionsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSkyCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSkyChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSkyDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

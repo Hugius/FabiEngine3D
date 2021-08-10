@@ -1,11 +1,11 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool isPreviewEntity)
+bool ScriptInterpreter::_validateFe3dSound(const string& ID, bool isPreviewEntity)
 {
 	if (isPreviewEntity)
 	{
 		// Validate existence
-		if (!_fe3d.soundEntity_isExisting(ID))
+		if (!_fe3d.sound_isExisting(ID))
 		{
 			_throwScriptError("requested preview sound with ID \"" + ID.substr(1) + "\" does not exist!");
 			return false;
@@ -21,7 +21,7 @@ bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool isPrevie
 		}
 
 		// Validate existence
-		if (!_fe3d.soundEntity_isExisting(ID))
+		if (!_fe3d.sound_isExisting(ID))
 		{
 			_throwScriptError("requested sound with ID \"" + ID + "\" does not exist!");
 			return false;
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_validateFe3dSoundEntity(const string& ID, bool isPrevie
 	return true;
 }
 
-bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:sound_is_existing")
@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 			}
 
 			// Check if existing
-			auto result = _fe3d.soundEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.sound_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
@@ -67,8 +67,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				return true;
 			}
 
-			// Find full soundEntity IDs based on part ID
-			for (const auto& ID : _fe3d.soundEntity_getAllIDs())
+			// Find full sound IDs based on part ID
+			for (const auto& ID : _fe3d.sound_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -87,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.soundEntity_getAllIDs();
+			auto result = _fe3d.sound_getAllIDs();
 
 			// For every sound
 			for (const auto& ID : result)
@@ -104,8 +104,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // New soundEntity ID
-			ScriptValueType::STRING, // Preview soundEntity ID
+			ScriptValueType::STRING, // New sound ID
+			ScriptValueType::STRING, // Preview sound ID
 			ScriptValueType::DECIMAL // Volume
 		};
 
@@ -119,19 +119,19 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				return true;
 			}
 
-			// Check if soundEntity already exists
-			if (_fe3d.soundEntity_isExisting(arguments[0].getString()))
+			// Check if sound already exists
+			if (_fe3d.sound_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("sound with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
 			// Validate preview sound ID
-			if (_validateFe3dSoundEntity("@" + arguments[1].getString(), true))
+			if (_validateFe3dSound("@" + arguments[1].getString(), true))
 			{
-				auto filePath = _fe3d.soundEntity_getFilePath("@" + arguments[1].getString());
-				_fe3d.soundEntity_create(arguments[0].getString(), filePath);
-				_fe3d.soundEntity_setVolume(arguments[0].getString(), arguments[2].getDecimal());
+				auto filePath = _fe3d.sound_getFilePath("@" + arguments[1].getString());
+				_fe3d.sound_create(arguments[0].getString(), filePath);
+				_fe3d.sound_setVolume(arguments[0].getString(), arguments[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -140,8 +140,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // New soundEntity ID
-			ScriptValueType::STRING, // Preview soundEntity ID
+			ScriptValueType::STRING, // New sound ID
+			ScriptValueType::STRING, // Preview sound ID
 			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Position
 			ScriptValueType::DECIMAL, // Max volume
 			ScriptValueType::DECIMAL // Max distance
@@ -161,15 +161,15 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 				return true;
 			}
 
-			// Check if soundEntity already exists
-			if (_fe3d.soundEntity_isExisting(newID))
+			// Check if sound already exists
+			if (_fe3d.sound_isExisting(newID))
 			{
 				_throwScriptError("sound with ID \"" + newID + "\" already exists!");
 				return true;
 			}
 
 			// Validate preview sound ID
-			if (_validateFe3dSoundEntity("@" + previewID, true))
+			if (_validateFe3dSound("@" + previewID, true))
 			{
 				// Temporary values
 				auto position = Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal());
@@ -178,8 +178,8 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 
 				// Add sound
 				_sceneEditor.copyPreviewAudio(newID, "@" + previewID, position);
-				_fe3d.soundEntity_setMaxVolume(newID, maxVolume);
-				_fe3d.soundEntity_setMaxDistance(newID, maxDistance);
+				_fe3d.sound_setMaxVolume(newID, maxVolume);
+				_fe3d.sound_setMaxDistance(newID, maxDistance);
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -194,9 +194,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_delete(arguments[0].getString());
+				_fe3d.sound_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -232,9 +232,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger());
+				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -252,9 +252,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
+				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -267,9 +267,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				auto result = _fe3d.soundEntity_isStarted(arguments[0].getString());
+				auto result = _fe3d.sound_isStarted(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -282,9 +282,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				auto result = _fe3d.soundEntity_isPlaying(arguments[0].getString());
+				auto result = _fe3d.sound_isPlaying(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -297,9 +297,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_pause(arguments[0].getString());
+				_fe3d.sound_pause(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -309,7 +309,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.soundEntity_pauseAll();
+			_fe3d.sound_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -321,9 +321,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				auto result = _fe3d.soundEntity_isPaused(arguments[0].getString());
+				auto result = _fe3d.sound_isPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -336,9 +336,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_resume(arguments[0].getString());
+				_fe3d.sound_resume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -348,7 +348,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.soundEntity_resumeAll();
+			_fe3d.sound_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -364,9 +364,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				_fe3d.soundEntity_stop(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.sound_stop(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -376,7 +376,7 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.soundEntity_stopAll();
+			_fe3d.sound_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -388,17 +388,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 2D sound
-				if (_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot change volume of 3D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				_fe3d.soundEntity_setVolume(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound_setVolume(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -411,9 +411,9 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
-				auto result = _fe3d.soundEntity_getVolume(arguments[0].getString());
+				auto result = _fe3d.sound_getVolume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
@@ -426,17 +426,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot change position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				_fe3d.soundEntity_setPosition(
+				_fe3d.sound_setPosition(
 					arguments[0].getString(), 
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -451,16 +451,16 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot retrieve position of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
-				auto result = _fe3d.soundEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.sound_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -473,17 +473,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot change maximum volume of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				_fe3d.soundEntity_setMaxVolume(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound_setMaxVolume(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -496,17 +496,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot retrieve maximum volume of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				auto result = _fe3d.soundEntity_getMaxVolume(arguments[0].getString());
+				auto result = _fe3d.sound_getMaxVolume(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
@@ -519,17 +519,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot change maximum distance of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				_fe3d.soundEntity_setMaxDistance(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.sound_setMaxDistance(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -542,17 +542,17 @@ bool ScriptInterpreter::_executeFe3dSoundEntityFunction(const string& functionNa
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
-			if (_validateFe3dSoundEntity(arguments[0].getString()))
+			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
-				if (!_fe3d.soundEntity_is3D(arguments[0].getString()))
+				if (!_fe3d.sound_is3D(arguments[0].getString()))
 				{
 					_throwScriptError("cannot retrieve maximum distance of 2D sound with ID \"" + arguments[0].getString() + "\"!");
 					return true;
 				}
 
 				// Execute function
-				auto result = _fe3d.soundEntity_getMaxDistance(arguments[0].getString());
+				auto result = _fe3d.sound_getMaxDistance(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}

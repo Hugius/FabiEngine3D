@@ -99,10 +99,10 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 		// Create sound
-		_fe3d.soundEntity_create(audioID, audioPath);
+		_fe3d.sound_create(audioID, audioPath);
 
 		// Check if sound creation went well
-		if (_fe3d.soundEntity_isExisting(audioID))
+		if (_fe3d.sound_isExisting(audioID))
 		{
 			// Add audio ID
 			_loadedAudioIDs.push_back(audioID);
@@ -144,7 +144,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 	for (const auto& audioID : _loadedAudioIDs)
 	{
 		// Retrieve all values
-		auto audioPath = _fe3d.soundEntity_getFilePath(audioID);
+		auto audioPath = _fe3d.sound_getFilePath(audioID);
 
 		// Perform empty string & space conversions
 		audioPath = (audioPath.empty()) ? "?" : audioPath;

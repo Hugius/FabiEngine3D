@@ -6,14 +6,41 @@ void TerrainEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMeshMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBlendMapMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTerrainCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTerrainChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTerrainDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

@@ -6,11 +6,29 @@ void ModelEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }
@@ -32,7 +50,7 @@ void ModelEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("add")->isHovered()) // Add model button
 			{
-				_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Mode", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Model", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingModel = true;
 			}
 			else if (screen->getButton("edit")->isHovered()) // Edit model button

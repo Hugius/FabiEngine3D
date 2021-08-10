@@ -8,11 +8,29 @@ void BillboardEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardCreating();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardDeleting();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

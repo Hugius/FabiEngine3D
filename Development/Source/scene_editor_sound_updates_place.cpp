@@ -20,18 +20,18 @@ void SceneEditor::_updateSoundPlacing()
 				newPosition = _fe3d.misc_getRaycastPointOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 				// Play preview soundcaster
-				if (!_fe3d.soundEntity_isStarted(_currentPreviewSoundID))
+				if (!_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.soundEntity_play(_currentPreviewSoundID, -1, 0);
+					_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
 				}
-				else if (_fe3d.soundEntity_isPaused(_currentPreviewSoundID))
+				else if (_fe3d.sound_isPaused(_currentPreviewSoundID))
 				{
-					_fe3d.soundEntity_resume(_currentPreviewSoundID);
+					_fe3d.sound_resume(_currentPreviewSoundID);
 				}
 
 				// Show preview soundcaster
-				_fe3d.soundEntity_setPosition(_currentPreviewSoundID, newPosition);
-				_fe3d.soundEntity_setMaxDistance(_currentPreviewSoundID, DEFAULT_SOUND_MAX_DISTANCE);
+				_fe3d.sound_setPosition(_currentPreviewSoundID, newPosition);
+				_fe3d.sound_setMaxDistance(_currentPreviewSoundID, DEFAULT_SOUND_MAX_DISTANCE);
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 				_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, newPosition);
 			}
@@ -41,9 +41,9 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Pause sound playback
-				if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
+				if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
 				{
-					_fe3d.soundEntity_pause(_currentPreviewSoundID);
+					_fe3d.sound_pause(_currentPreviewSoundID);
 				}
 			}
 
@@ -57,15 +57,15 @@ void SceneEditor::_updateSoundPlacing()
 				string newID = (_currentPreviewSoundID.substr(1) + "_" + to_string(randomSerial));
 
 				// Check if ID not already exists
-				if (_fe3d.soundEntity_isExisting(newID))
+				if (_fe3d.sound_isExisting(newID))
 				{
 					goto BEGIN;
 				}
 
 				// Stop sound playback
-				if (_fe3d.soundEntity_isStarted(_currentPreviewSoundID))
+				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
+					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
 
 				// Create model
@@ -83,9 +83,9 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 
 				// Create sound
-				_fe3d.soundEntity_create(newID, _fe3d.soundEntity_getFilePath(_currentPreviewSoundID));
-				_fe3d.soundEntity_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
-				_fe3d.soundEntity_play(newID, -1, 0);
+				_fe3d.sound_create(newID, _fe3d.sound_getFilePath(_currentPreviewSoundID));
+				_fe3d.sound_make3D(newID, newPosition, DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
+				_fe3d.sound_play(newID, -1, 0);
 				_loadedSoundIDs.insert(make_pair(newID, _currentPreviewSoundID));
 
 				// Disable placement mode if no terrain available to choose position from
@@ -104,9 +104,9 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop sound playback
-				if (_fe3d.soundEntity_isStarted(_currentPreviewSoundID))
+				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.soundEntity_stop(_currentPreviewSoundID, 0);
+					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
 
 				// Stop placing
@@ -123,9 +123,9 @@ void SceneEditor::_updateSoundPlacing()
 			_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 			// Pause sound playback
-			if (_fe3d.soundEntity_isPlaying(_currentPreviewSoundID))
+			if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
 			{
-				_fe3d.soundEntity_pause(_currentPreviewSoundID);
+				_fe3d.sound_pause(_currentPreviewSoundID);
 			}
 		}
 	}

@@ -5,18 +5,15 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 	// Determine type of function
 	if (functionName == "fe3d:music_add_to_playlist")
 	{
-		auto types =
-		{
-			ScriptValueType::STRING, // Preview soundEntity ID
-		};
+		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate preview audio ID
-			if (_validateFe3dSoundEntity("@" + arguments[0].getString(), true))
+			if (_validateFe3dSound("@" + arguments[0].getString(), true))
 			{
-				auto filePath = _fe3d.soundEntity_getFilePath("@" + arguments[0].getString());
+				auto filePath = _fe3d.sound_getFilePath("@" + arguments[0].getString());
 				_fe3d.music_addToPlaylist(filePath);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

@@ -272,9 +272,9 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Create sound
 			if (_copyPreviewAudio(soundID, previewID, position))
 			{
-				_fe3d.soundEntity_setMaxVolume(soundID, maxVolume);
-				_fe3d.soundEntity_setMaxDistance(soundID, maxDistance);
-				_fe3d.soundEntity_play(soundID, -1, 0);
+				_fe3d.sound_setMaxVolume(soundID, maxVolume);
+				_fe3d.sound_setMaxDistance(soundID, maxDistance);
+				_fe3d.sound_play(soundID, -1, 0);
 			}
 		}
 		else if (lineType == "AMBIENT_LIGHT")

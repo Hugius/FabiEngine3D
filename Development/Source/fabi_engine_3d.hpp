@@ -575,38 +575,38 @@ public:
 	const bool textEntity_isExisting(const string& ID);
 	const bool textEntity_isVisible(const string& ID);
 
-	// Sound entity interface - setters
-	void soundEntity_create(const string& ID, const string& filePath);
-	void soundEntity_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
-	void soundEntity_delete(const string& ID);
-	void soundEntity_deleteAll();
-	void soundEntity_play(const string& ID, int loops, int fadeMS, bool forcePlay = false);
-	void soundEntity_pause(const string& ID);
-	void soundEntity_pauseAll();
-	void soundEntity_resume(const string& ID);
-	void soundEntity_resumeAll();
-	void soundEntity_stop(const string& ID, int fadeMS);
-	void soundEntity_stopAll();
-	void soundEntity_setPosition(const string& ID, Vec3 position);
-	void soundEntity_move(const string& ID, Vec3 factor);
-	void soundEntity_setVolume(const string& ID, float volume);
-	void soundEntity_setMaxVolume(const string& ID, float volume);
-	void soundEntity_setMaxDistance(const string& ID, float maxDistance);
+	// Sound interface - setters
+	void sound_create(const string& ID, const string& filePath);
+	void sound_make3D(const string& ID, Vec3 position, float maxVolume, float maxDistance);
+	void sound_delete(const string& ID);
+	void sound_deleteAll();
+	void sound_play(const string& ID, int loops, int fadeMS, bool forcePlay = false);
+	void sound_pause(const string& ID);
+	void sound_pauseAll();
+	void sound_resume(const string& ID);
+	void sound_resumeAll();
+	void sound_stop(const string& ID, int fadeMS);
+	void sound_stopAll();
+	void sound_setPosition(const string& ID, Vec3 position);
+	void sound_move(const string& ID, Vec3 factor);
+	void sound_setVolume(const string& ID, float volume);
+	void sound_setMaxVolume(const string& ID, float volume);
+	void sound_setMaxDistance(const string& ID, float maxDistance);
 
-	// Sound entity interface - getters
-	const vector<string> soundEntity_getAllIDs();
-	const string& soundEntity_getFilePath(const string& ID);
-	const Vec3 soundEntity_getPosition(const string& ID);
-	const float soundEntity_getMaxDistance(const string& ID);
-	const float soundEntity_getVolume(const string& ID);
-	const float soundEntity_getMaxVolume(const string& ID);
-	const unsigned int soundEntity_getUsedChannelCount();
-	const bool soundEntity_isExisting(const string& ID);
-	const bool soundEntity_isStarted(const string& ID);
-	const bool soundEntity_isPlaying(const string& ID);
-	const bool soundEntity_isPaused(const string& ID);
-	const bool soundEntity_isLoaded(const string& ID);
-	const bool soundEntity_is3D(const string& ID);
+	// Sound interface - getters
+	const vector<string> sound_getAllIDs();
+	const string& sound_getFilePath(const string& ID);
+	const Vec3 sound_getPosition(const string& ID);
+	const float sound_getMaxDistance(const string& ID);
+	const float sound_getVolume(const string& ID);
+	const float sound_getMaxVolume(const string& ID);
+	const unsigned int sound_getUsedChannelCount();
+	const bool sound_isExisting(const string& ID);
+	const bool sound_isStarted(const string& ID);
+	const bool sound_isPlaying(const string& ID);
+	const bool sound_isPaused(const string& ID);
+	const bool sound_isLoaded(const string& ID);
+	const bool sound_is3D(const string& ID);
 
 	// Music interface - setters
 	void music_addToPlaylist(const string& filePath);

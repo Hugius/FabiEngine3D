@@ -7,58 +7,154 @@ void SceneEditor::update()
 {
 	if (_isEditorLoaded)
 	{
-		// Main updates
 		_updateMainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateChoiceMenu();
-
-		// Environment updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateEnvironmentMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSkyMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTerrainMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateWaterMenu();
-
-		// Model updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelPlacingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelChoosingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelPlacing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelEditing();
-
-		// Billboard updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardPlacingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardChoosingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardPlacing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardEditing();
-
-		// Lighting updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateAmbientLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateDirectionalLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updatePointLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightPlacing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightEditing();
-
-		// Sound updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSoundMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSoundPlacingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSoundChoosingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSoundPlacing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSoundEditing();
-
-		// Settings updates
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateShadowGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMotionBlurGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateDofGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateFogGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLensFlareGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSkyExposureGraphicsSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBloomGraphicsSettingsMenu();
-
-		// Miscellaneous
+	}
+	if (_isEditorLoaded)
+	{
 		_updateCamera();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateMiscellaneous();
 	}
 }

@@ -85,7 +85,7 @@ void SceneEditor::load()
 	_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
-		_fe3d.soundEntity_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
+		_fe3d.sound_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("soundcasters")->
 			createButton(audioID, audioID.substr(1));
 	}
@@ -132,7 +132,7 @@ void SceneEditor::unload()
 	_waterEditor.unloadWaterEntities();
 
 	// Delete other preview entities
-	_fe3d.soundEntity_deleteAll();
+	_fe3d.sound_deleteAll();
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();

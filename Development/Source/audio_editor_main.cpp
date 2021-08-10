@@ -37,7 +37,7 @@ void AudioEditor::unload()
 	_unloadGUI();
 
 	// Delete sounds
-	_fe3d.soundEntity_deleteAll();
+	_fe3d.sound_deleteAll();
 
 	// Miscellaneous
 	_fe3d.gfx_disableBloom(true);

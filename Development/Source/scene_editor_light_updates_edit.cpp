@@ -1,4 +1,5 @@
 #include "scene_editor.hpp"
+#include "logger.hpp"
 
 #define SELECTED_LAMP_ID _selectedLampID
 #define ACTIVE_LAMP_ID _activeLampID
@@ -98,28 +99,36 @@ void SceneEditor::_updateLightEditing()
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("position")->isHovered()) // Position button
+				if (screen->getButton("position")->isHovered())
 				{
-					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if (screen->getButton("radius")->isHovered()) // Rotation button
+				else if (screen->getButton("radius")->isHovered())
 				{
-					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(false);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if (screen->getButton("color")->isHovered()) // Color button
+				else if (screen->getButton("color")->isHovered())
 				{
-					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(false);
 				}
-				else if (screen->getButton("delete")->isHovered()) // Delete button
+				else if (screen->getButton("shape")->isHovered())
+				{
+					if (_fe3d.lightEntity_getShape(ACTIVE_LIGHT_ID) == LightShape::CIRCLE)
+					{
+						_fe3d.lightEntity_setShape(ACTIVE_LIGHT_ID, LightShape::SQUARE);
+					}
+					else
+					{
+						_fe3d.lightEntity_setShape(ACTIVE_LIGHT_ID, LightShape::CIRCLE);
+					}
+				}
+				else if (screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(ACTIVE_LAMP_ID);
 					_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
@@ -173,6 +182,17 @@ void SceneEditor::_updateLightEditing()
 			_handleValueChanging("pointLightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
 			_handleValueChanging("pointLightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
 			_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
+
+			// Handle shape
+			const auto imageEntityID = screen->getButton("shape")->getRectangle()->getEntityID();
+			if (_fe3d.lightEntity_getShape(ACTIVE_LIGHT_ID) == LightShape::CIRCLE)
+			{
+				_fe3d.imageEntity_setDiffuseMap(imageEntityID, "engine_assets\\textures\\shape_circle.png");
+			}
+			else
+			{
+				_fe3d.imageEntity_setDiffuseMap(imageEntityID, "engine_assets\\textures\\shape_square.png");
+			}
 		}
 	}
 }

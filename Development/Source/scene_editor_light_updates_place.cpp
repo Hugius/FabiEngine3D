@@ -62,6 +62,7 @@ void SceneEditor::_updateLightPlacing()
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 
 				// Create light
+				_fe3d.lightEntity_create(newID);
 				_fe3d.lightEntity_setPosition(newID, newPosition);
 				_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
 				_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);

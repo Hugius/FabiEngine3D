@@ -126,6 +126,7 @@ void ModelEntityColorRenderer::renderLightEntities(const unordered_map<string, s
 			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
 			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
 			_shader.uploadUniform("u_pointLightRadiuses[" + to_string(index) + "]", entity->getRadius());
+			_shader.uploadUniform("u_pointLightShapes[" + to_string(index) + "]", static_cast<int>(entity->getShape()));
 
 			index++;
 		}

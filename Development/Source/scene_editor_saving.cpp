@@ -292,6 +292,7 @@ bool SceneEditor::saveEditorSceneToFile()
 			auto radius = _fe3d.lightEntity_getRadius(lightID);
 			auto color = _fe3d.lightEntity_getColor(lightID);
 			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
+			auto shape = static_cast<unsigned int>(_fe3d.lightEntity_getShape(lightID));
 
 			// Write data
 			file <<
@@ -306,7 +307,8 @@ bool SceneEditor::saveEditorSceneToFile()
 				color.r << " " <<
 				color.g << " " <<
 				color.b << " " <<
-				intensity << endl;
+				intensity << " " <<
+				shape << endl;
 		}
 	}
 

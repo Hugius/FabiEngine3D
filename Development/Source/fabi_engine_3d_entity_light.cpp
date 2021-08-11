@@ -31,6 +31,11 @@ const  bool FabiEngine3D::lightEntity_isVisible(const string& ID)
 	return _core->_lightEntityManager.getEntity(ID)->isVisible();
 }
 
+const LightShape FabiEngine3D::lightEntity_getShape(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->getShape();
+}
+
 void FabiEngine3D::lightEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_lightEntityManager.getEntity(ID)->setPosition(position);
@@ -54,6 +59,11 @@ void FabiEngine3D::lightEntity_setColor(const string& ID, Vec3 color)
 void FabiEngine3D::lightEntity_setIntensity(const string& ID, float intensity)
 {
 	_core->_lightEntityManager.getEntity(ID)->setIntensity(intensity);
+}
+
+void FabiEngine3D::lightEntity_setShape(const string& ID, LightShape shape)
+{
+	return _core->_lightEntityManager.getEntity(ID)->setShape(shape);
 }
 
 const Vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)

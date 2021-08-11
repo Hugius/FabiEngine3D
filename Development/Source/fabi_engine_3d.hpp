@@ -9,6 +9,7 @@
 #include "water_quality.hpp"
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
+#include "light_shape.hpp"
 
 #include <array>
 #include <vector>
@@ -480,6 +481,7 @@ public:
 	void lightEntity_setRadius(const string& ID, Vec3 radius);
 	void lightEntity_setColor(const string& ID, Vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
+	void lightEntity_setShape(const string& ID, LightShape shape);
 
 	// Light entity interface - getters
 	const vector<string> lightEntity_getAllIDs();
@@ -489,6 +491,7 @@ public:
 	const float lightEntity_getIntensity(const string& ID);
 	const bool lightEntity_isExisting(const string& ID);
 	const bool lightEntity_isVisible(const string& ID);
+	const LightShape lightEntity_getShape(const string& ID);
 
 	// Image entity interface - setters
 	void imageEntity_create(const string& ID, bool isCentered);

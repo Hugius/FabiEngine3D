@@ -96,6 +96,9 @@
     <ClInclude Include="..\..\Source\camera.hpp">
       <Filter>Camera</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\light_shape.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\configuration.cpp">

@@ -2,6 +2,7 @@
 
 #include "base_entity.hpp"
 #include "mathematics.hpp"
+#include "light_shape.hpp"
 
 class LightEntity final : public BaseEntity
 {
@@ -14,6 +15,7 @@ public:
 	void setRadius(Vec3 value);
 	void setColor(Vec3 value);
 	void setIntensity(float value);
+	void setShape(LightShape value);
 
 	// Vectors
 	const Vec3 getPosition();
@@ -23,6 +25,9 @@ public:
 	// Floats
 	const float getIntensity();
 
+	// Miscellaneous
+	const LightShape getShape();
+
 private:
 	// Vectors
 	Vec3 _position = Vec3(0.0f);
@@ -31,4 +36,7 @@ private:
 
 	// Floats
 	float _intensity = 1.0f;
+
+	// Miscellaneous
+	LightShape _shape;
 };

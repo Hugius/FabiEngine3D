@@ -325,6 +325,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			string lightID;
 			Vec3 position, radius, color;
 			float intensity;
+			unsigned int shape;
 
 			// Extract data
 			iss >>
@@ -338,7 +339,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				color.r >>
 				color.g >>
 				color.b >>
-				intensity;
+				intensity >>
+				shape;
 
 			// Create lamp
 			if (_isEditorLoaded)
@@ -365,6 +367,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.lightEntity_setRadius(lightID, radius);
 			_fe3d.lightEntity_setColor(lightID, color);
 			_fe3d.lightEntity_setIntensity(lightID, intensity);
+			_fe3d.lightEntity_setShape(lightID, LightShape(shape));
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "LOD_DISTANCE")

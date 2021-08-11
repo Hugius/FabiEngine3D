@@ -116,7 +116,7 @@ void AnimationEditor::_loadGUI()
 	// Left-viewport: animationEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("animationEditorMenuMain");
-	leftWindow->getScreen("animationEditorMenuMain")->createButton("add", Vec2(0.0f, positions[0]), Vec2(TW("Add Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("animationEditorMenuMain")->createButton("add", Vec2(0.0f, positions[0]), Vec2(TW("Create Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuMain")->createButton("edit", Vec2(0.0f, positions[1]), Vec2(TW("Edit Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuMain")->createButton("delete", Vec2(0.0f, positions[2]), Vec2(TW("Delete Animation"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -125,7 +125,7 @@ void AnimationEditor::_loadGUI()
 	positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("animationEditorMenuChoice");
 	leftWindow->getScreen("animationEditorMenuChoice")->createButton("preview", Vec2(0.0f, positions[0]), Vec2(TW("Preview Model"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Preview Model", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("animationEditorMenuChoice")->createButton("addFrame", Vec2(0.0f, positions[1]), Vec2(TW("Add Frame"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Add Frame", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("animationEditorMenuChoice")->createButton("addFrame", Vec2(0.0f, positions[1]), Vec2(TW("Create Frame"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Frame", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuChoice")->createButton("editFrame", Vec2(0.0f, positions[2]), Vec2(TW("Edit Frame"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Frame", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuChoice")->createButton("deleteFrame", Vec2(0.0f, positions[3]), Vec2(TW("Delete Frame"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Frame", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("animationEditorMenuChoice")->createButton("prev", Vec2(-0.5f, positions[4]), Vec2(TW("Prev"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Prev", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);

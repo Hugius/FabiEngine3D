@@ -124,8 +124,8 @@ vec4 calculateWaterColor()
 	}
 
 	// Fresnel effect
-	vec3 viewDir = normalize(u_cameraPosition - f_pos);
-	float mixFactor = dot(viewDir, normal);
+	vec3 viewDirection = normalize(u_cameraPosition - f_pos);
+	float mixFactor = dot(viewDirection, normal);
 
 	// Finalizing fragment color
 	vec3 finalColor;
@@ -178,8 +178,8 @@ vec3 getPointLighting(vec3 normal)
 		for (int i = 0; i < u_pointLightCount; i++)
 		{
 		    // Calculate light strength
-			vec3 lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = clamp(dot(normal, lightDir), 0.0f, 1.0f);
+			vec3 lightDirection = normalize(u_pointLightPositions[i] - f_pos);
+			float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
 
 			// Calculate light attenuation
@@ -213,10 +213,10 @@ vec3 getDirectionalLighting(vec3 normal)
 {
 	if(u_isDirectionalLightEnabled)
 	{
-		vec3 lightDir = normalize(u_directionalLightPosition - f_pos); // Light ray
-		vec3 viewDir = normalize(f_pos - u_cameraPosition); // View ray
-		vec3 reflectDir = reflect(normalize(lightDir), normal); // Reflect ray
-		float specular = pow(clamp(dot(reflectDir, viewDir), 0.0f, 1.0f), u_specularLightFactor); // Calculate if perpendicular
+		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos); // Light ray
+		vec3 viewDirection = normalize(f_pos - u_cameraPosition); // View ray
+		vec3 reflectDirection = reflect(normalize(lightDirection), normal); // Reflect ray
+		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularLightFactor); // Calculate if perpendicular
 		specular *= u_directionalLightIntensity; // Directional intensity
 		specular *= u_specularLightIntensity; // Specular intensity
 		vec3 result = vec3(specular); // Add to lighting

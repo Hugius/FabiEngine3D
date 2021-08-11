@@ -63,6 +63,9 @@ uniform float u_mainSkyLightness;
 uniform float u_mixSkyLightness;
 uniform float u_shadowLightness;
 
+// Integer uniforms
+uniform int u_pointLightShapes[MAX_POINT_LIGHT_COUNT];
+
 // Boolean uniforms
 uniform bool u_isTransparent;
 uniform bool u_isSkyReflective;
@@ -251,10 +254,21 @@ vec3 getPointLighting(vec3 normal)
 			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
 
 			// Calculate light attenuation
-			vec3 distance = abs(u_pointLightPositions[i] - f_pos);
-			float attenuation = max(0.0f, 1.0f - (distance.x / u_pointLightRadiuses[i].x));
-			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.y / u_pointLightRadiuses[i].y)));
-			attenuation = min(attenuation, max(0.0f, 1.0f - (distance.z / u_pointLightRadiuses[i].z)));
+			float attenuation;
+			if(u_pointLightShapes[i] == 0)
+			{
+				float distance = length(u_pointLightPositions[i] - f_pos);
+				float averageRadius = ((u_pointLightRadiuses[i].x + u_pointLightRadiuses[i].y + u_pointLightRadiuses[i].z) / 3.0f);
+				attenuation = max(0.0f, (1.0f - (distance / averageRadius)));
+			}
+			else
+			{
+				vec3 distance = abs(u_pointLightPositions[i] - f_pos);
+				float xAttenuation = max(0.0f, (1.0f - (distance.x / u_pointLightRadiuses[i].x)));
+				float yAttenuation = max(0.0f, (1.0f - (distance.y / u_pointLightRadiuses[i].y)));
+				float zAttenuation = max(0.0f, (1.0f - (distance.z / u_pointLightRadiuses[i].z)));
+				attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
+			}
 
             // Apply
             vec3 current = vec3(0.0f);

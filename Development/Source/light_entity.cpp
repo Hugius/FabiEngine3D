@@ -30,6 +30,11 @@ void LightEntity::setIntensity(float value)
 	_intensity = max(0.0f, value);
 }
 
+void LightEntity::setShape(LightShape value)
+{
+	_shape = value;
+}
+
 const Vec3 LightEntity::getPosition()
 {
 	return _position;
@@ -48,4 +53,9 @@ const Vec3 LightEntity::getColor()
 const float LightEntity::getIntensity()
 {
 	return _intensity;
+}
+
+const LightShape LightEntity::getShape()
+{
+	return _shape;
 }

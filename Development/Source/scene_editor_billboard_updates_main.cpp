@@ -81,12 +81,6 @@ void SceneEditor::_updateBillboardPlacingMenu()
 						// Check if button is hovered
 						if (screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
 						{
-							// Hide old preview billboard
-							if (_currentPreviewBillboardID != "")
-							{
-								_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
-							}
-
 							// Set new preview billboard
 							_currentPreviewBillboardID = billboardID;
 							_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
@@ -104,7 +98,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 								_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 							}
 
-							// Disable model choosing
+							// Disable billboard choosing
 							break;
 						}
 					}

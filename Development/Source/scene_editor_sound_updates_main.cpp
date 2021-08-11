@@ -80,11 +80,24 @@ void SceneEditor::_updateSoundPlacingMenu()
 					{
 						// Set new preview soundcaster
 						_currentPreviewSoundID = audioID;
+						_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, Vec3(0.0f));
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
+						_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
+						_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
 						auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 						_fe3d.textEntity_setVisible(textEntityID, false);
 						_fe3d.textEntity_setTextContent(textEntityID, "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
+						
+						// Add position value forms for placing without terrain
+						if (_fe3d.terrainEntity_getSelectedID().empty())
+						{
+							_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+							_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+							_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+						}
+
+						// Disable sound choosing
 						break;
 					}
 				}

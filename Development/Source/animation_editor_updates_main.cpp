@@ -102,15 +102,14 @@ void AnimationEditor::_updateAnimationCreating()
 {
 	if (_isCreatingAnimation)
 	{
-		string newAnimationID = "";
-
 		// Check if user filled in a new ID
+		string newAnimationID = "";
 		if (_gui.getGlobalScreen()->checkValueForm("animationCreate", newAnimationID, { _currentAnimationID }))
 		{
-			// Check if ID contains spaces
+			// Spaces not allowed
 			if (newAnimationID.find(' ') == string::npos)
 			{
-				// Check if ID already exists
+				// Check if animation already exists
 				auto animationIDs = getAllAnimationIDs();
 				if (find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 				{

@@ -22,15 +22,12 @@ void SceneEditor::_updateBillboardPlacing()
 			// Check if billboard must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
-				// Remove the '@'
-				const string rawID = _currentPreviewBillboardID.substr(1);
-
 				// Adding a number to make it unique
 			BEGIN1:
 				int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-				auto newID = rawID + "_" + to_string(randomSerial);
+				const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(randomSerial));
 
-				// Check if ID already exists
+				// Check if billboard already exists
 				if (_fe3d.billboardEntity_isExisting(newID))
 				{
 					goto BEGIN1;
@@ -76,14 +73,13 @@ void SceneEditor::_updateBillboardPlacing()
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
 						// Temporary values
-						const string rawID = _currentPreviewBillboardID.substr(1);
 						const auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);
 
 					BEGIN2:
 						// Adding a number to make it unique
-						const string newID = rawID + "_" + to_string(Tools::getRandomInteger(0, INT_MAX));
+						const string newID = (_currentPreviewBillboardID.substr(1) + "_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
 
-						// Check if ID already exists
+						// Check if billboard already exists
 						if (_fe3d.billboardEntity_isExisting(newID))
 						{
 							goto BEGIN2;

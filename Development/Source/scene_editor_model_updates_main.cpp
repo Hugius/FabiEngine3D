@@ -80,12 +80,6 @@ void SceneEditor::_updateModelPlacingMenu()
 						// Check if button is hovered
 						if (screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 						{
-							// Hide old preview model
-							if (_currentPreviewModelID != "")
-							{
-								_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-							}
-
 							// Set new preview model
 							_currentPreviewModelID = modelID;
 							_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));

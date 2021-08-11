@@ -188,14 +188,14 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if user wants to create a new script file
+	// Check if user filled in a new ID
 	string newScriptFileID;
 	if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newScriptFileID))
 	{
 		// Spaces not allowed
 		if (newScriptFileID.find(' ') == string::npos)
 		{
-			// Check if ID already exists
+			// Check if script already exists
 			auto existingScriptFileIDs = _script.getAllScriptFileIDs();
 			if (find(existingScriptFileIDs.begin(), existingScriptFileIDs.end(), newScriptFileID) == existingScriptFileIDs.end())
 			{

@@ -27,7 +27,7 @@ void SceneEditor::_updateLightPlacing()
 			BEGIN1:
 				const string newID = ("light_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
 
-				// Check if ID already exists
+				// Check if light already exists
 				if (_fe3d.lightEntity_isExisting(newID))
 				{
 					goto BEGIN1;
@@ -100,7 +100,7 @@ void SceneEditor::_updateLightPlacing()
 					BEGIN2:
 						const string newID = ("light_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
 
-						// Check if ID already exists
+						// Check if light already exists
 						if (_fe3d.lightEntity_isExisting(newID))
 						{
 							goto BEGIN2;

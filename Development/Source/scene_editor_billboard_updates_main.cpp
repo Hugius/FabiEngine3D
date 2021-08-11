@@ -89,11 +89,22 @@ void SceneEditor::_updateBillboardPlacingMenu()
 
 							// Set new preview billboard
 							_currentPreviewBillboardID = billboardID;
+							_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
 							_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
 							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 							_fe3d.textEntity_setVisible(textEntityID, true);
 							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 							_fe3d.misc_centerCursor();
+							
+							// Add position value forms for placing without terrain
+							if (_fe3d.terrainEntity_getSelectedID().empty())
+							{
+								_gui.getGlobalScreen()->createValueForm("positionX", "X", 0.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+								_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+								_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+							}
+
+							// Disable model choosing
 							break;
 						}
 					}

@@ -6,68 +6,109 @@ void SceneEditor::_updateBillboardPlacing()
 	// Only if user is in placement mode
 	if (!_currentPreviewBillboardID.empty())
 	{
-		// Check if mouse behavior isn't being invalid
-		if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT) &&
-			!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID().empty())
+		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
-			// Default placement position
-			Vec3 newPosition = Vec3(0.0f);
+			// Retrieve current position
+			auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);
 
-			// Check if a terrain is loaded
-			if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPointOnTerrainValid())
+			// Update position change
+			bool filledX = _gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, { });
+			bool filledY = _gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, { });
+			bool filledZ = _gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, { });
+
+			// Update position
+			_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, newPosition);
+
+			// Check if billboard must be placed
+			if (_gui.getGlobalScreen()->isValueFormConfirmed())
 			{
-				// Show preview billboard
-				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
+				// Remove the '@'
+				const string rawID = _currentPreviewBillboardID.substr(1);
 
-				// Update preview billboard position
-				Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardID);
-				newPosition = _fe3d.misc_getRaycastPointOnTerrain();
-				_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, newPosition);
+				// Adding a number to make it unique
+			BEGIN1:
+				int randomSerial = Tools::getRandomInteger(0, INT_MAX);
+				auto newID = rawID + "_" + to_string(randomSerial);
+
+				// Check if ID already exists
+				if (_fe3d.billboardEntity_isExisting(newID))
+				{
+					goto BEGIN1;
+				}
+
+				// Create billboard
+				_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
+			}
+
+			// Check if placement mode must be disabled
+			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
+			{
+				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+				auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+				_fe3d.textEntity_setVisible(textEntityID, false);
+				_currentPreviewBillboardID = "";
+			}
+		}
+		else // Placing on terrain
+		{
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			{
+				// Check if allowed by mouse
+				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				{
+					// Check if a terrain is loaded
+					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					{
+						// Show preview billboard
+						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
+
+						// Update position
+						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, _fe3d.misc_getRaycastPointOnTerrain());
+					}
+					else
+					{
+						// Hide preview billboard
+						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+					}
+
+					// Check if billboard must be placed
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					{
+						// Temporary values
+						const string rawID = _currentPreviewBillboardID.substr(1);
+						const auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);
+
+					BEGIN2:
+						// Adding a number to make it unique
+						const string newID = rawID + "_" + to_string(Tools::getRandomInteger(0, INT_MAX));
+
+						// Check if ID already exists
+						if (_fe3d.billboardEntity_isExisting(newID))
+						{
+							goto BEGIN2;
+						}
+
+						// Create billboard
+						_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
+					}
+					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
+					{
+						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+						auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+						_fe3d.textEntity_setVisible(textEntityID, false);
+						_currentPreviewBillboardID = "";
+					}
+				}
+				else
+				{
+					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+				}
 			}
 			else
 			{
-				// Hide preview billboard
 				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 			}
-
-			// Placing billboard
-			if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid()) // If user pressed LMB
-				|| _fe3d.terrainEntity_getSelectedID().empty())  // Can be bypassed if terrain does not exist
-			{
-				// Add new billboard
-			BEGIN: int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-				string newID = _currentPreviewBillboardID.substr(1); // Remove the '@'
-				newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
-
-				// Check if ID not already exists
-				if (_fe3d.billboardEntity_isExisting(newID))
-				{
-					goto BEGIN;
-				}
-
-				// Add billboard
-				_copyPreviewBillboard(newID, _currentPreviewBillboardID, newPosition);
-
-				// Disable placement mode if no terrain available to choose position from
-				if (_fe3d.terrainEntity_getSelectedID().empty())
-				{
-					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
-					_currentPreviewBillboardID = "";
-				}
-			}
-			else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling billboard placement
-			{
-				// Hide preview billboard
-				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
-				_currentPreviewBillboardID = "";
-				auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
-				_fe3d.textEntity_setVisible(textEntityID, false);
-			}
-		}
-		else
-		{
-			// Hide preview billboard
-			_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
 		}
 	}
 }

@@ -95,7 +95,7 @@ void SceneEditor::_updateModelPlacing()
 					// Check if model must be placed
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
-						//Temporary values
+						// Temporary values
 						const string rawID = _currentPreviewModelID.substr(1);
 						const auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 

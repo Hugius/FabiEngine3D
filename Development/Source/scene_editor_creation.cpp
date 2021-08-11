@@ -302,10 +302,11 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_create(newID);
 
 	// Bind AABB entity
+	_fe3d.aabbEntity_create(newID);
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, newID);
 
 	// Diffuse map
-	if (_fe3d.billboardEntity_hasDiffuseMap(previewID))
+	if (!_fe3d.billboardEntity_getDiffuseMapPath(previewID).empty())
 	{
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}

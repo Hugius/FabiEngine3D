@@ -64,7 +64,7 @@ void SceneEditor::_updateModelPlacing()
 			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-				string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
+				auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 				_fe3d.textEntity_setVisible(textEntityID, false);
 				_currentPreviewModelID = "";
 			}
@@ -95,9 +95,9 @@ void SceneEditor::_updateModelPlacing()
 					// Check if model must be placed
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
-						// Remove the '@'
+						//Temporary values
 						const string rawID = _currentPreviewModelID.substr(1);
-						auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
+						const auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 
 						if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
 						{
@@ -119,8 +119,7 @@ void SceneEditor::_updateModelPlacing()
 						{
 						BEGIN2:
 							// Adding a number to make it unique
-							int randomSerial = Tools::getRandomInteger(0, INT_MAX);
-							auto newID = rawID + "_" + to_string(randomSerial);
+							const string newID = rawID + "_" + to_string(Tools::getRandomInteger(0, INT_MAX));
 
 							// Check if ID already exists
 							if (_fe3d.modelEntity_isExisting(newID))
@@ -135,7 +134,7 @@ void SceneEditor::_updateModelPlacing()
 					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
-						string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
+						auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 						_fe3d.textEntity_setVisible(textEntityID, false);
 						_currentPreviewModelID = "";
 					}

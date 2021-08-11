@@ -12,7 +12,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(4, CH);
 	leftWindow->createScreen("sceneEditorMenuMain");
-	leftWindow->getScreen("sceneEditorMenuMain")->createButton("add", Vec2(0.0f, positions[0]), Vec2(TW("Create Scene"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuMain")->createButton("create", Vec2(0.0f, positions[0]), Vec2(TW("Create Scene"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Create Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuMain")->createButton("edit", Vec2(0.0f, positions[1]), Vec2(TW("Edit Scene"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuMain")->createButton("delete", Vec2(0.0f, positions[2]), Vec2(TW("Delete Scene"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Scene", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -137,7 +137,7 @@ void SceneEditor::_loadGUI()
 	// Left-viewport: sceneEditorMenuLightingPoint
 	positions = VPC::calculateButtonPositions(2, CH);
 	leftWindow->createScreen("sceneEditorMenuLightingPoint");
-	leftWindow->getScreen("sceneEditorMenuLightingPoint")->createButton("add", Vec2(0.0f, positions[0]), Vec2(TW("Place Light"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Light", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuLightingPoint")->createButton("create", Vec2(0.0f, positions[0]), Vec2(TW("Place Light"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Light", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuLightingPoint")->createButton("back", Vec2(0.0f, positions[1]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuSettings

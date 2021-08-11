@@ -19,7 +19,7 @@ void SceneEditor::_updateModelEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingLight && _currentPreviewSoundID.empty())
 	{
 		// Check which entity is selected
 		auto hoveredID = _fe3d.collision_checkCursorInAny().first;
@@ -297,7 +297,7 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// Check if model is still selected or active
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
+		auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
 		if (SELECTED_MODEL_ID.empty() && ACTIVE_MODEL_ID.empty())
 		{
 			_fe3d.textEntity_setVisible(textEntityID, false);

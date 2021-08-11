@@ -113,7 +113,7 @@ void SceneEditor::_updateSoundPlacing()
 				_currentPreviewSoundID = "";
 
 				// Hide soundcaster ID
-				string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
+				auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 				_fe3d.textEntity_setVisible(textEntityID, false);
 			}
 		}

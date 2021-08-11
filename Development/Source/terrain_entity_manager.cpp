@@ -67,6 +67,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	auto entity = getEntity(ID);
 
 	// Set properties
+	entity->setHeightMapPath(heightMapPath);
 	entity->setPixelValues(*pixelValues);
 	entity->setSize(static_cast<float>(heightMapSize));
 

@@ -19,7 +19,7 @@ void SceneEditor::_updateBillboardEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingLight && _currentPreviewSoundID.empty())
 	{
 		// Check if user selected a billboard
 		for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -175,7 +175,7 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// Check if billboard is still selected or active
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+		auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
 		if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID.empty())
 		{
 			_fe3d.textEntity_setVisible(textEntityID, false);

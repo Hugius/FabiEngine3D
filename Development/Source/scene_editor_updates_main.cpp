@@ -176,7 +176,7 @@ void SceneEditor::_updateMainMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				return;
 			}
-			else if (screen->getButton("add")->isHovered())
+			else if (screen->getButton("create")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("newSceneName", "Create Scene", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}

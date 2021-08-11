@@ -40,7 +40,7 @@ void ScriptEditor::_updateGUI()
 			{
 				_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
-			else if (screen->getButton("add")->isHovered())
+			else if (screen->getButton("create")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}

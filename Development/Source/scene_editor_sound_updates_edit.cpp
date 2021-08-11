@@ -21,7 +21,7 @@ void SceneEditor::_updateSoundEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingPointLight && _currentPreviewSoundID.empty())
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingLight && _currentPreviewSoundID.empty())
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
@@ -131,7 +131,7 @@ void SceneEditor::_updateSoundEditing()
 		}
 
 		// Check if sound is still selected or active
-		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
+		auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
 		if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID.empty())
 		{
 			_fe3d.textEntity_setVisible(textEntityID, false);

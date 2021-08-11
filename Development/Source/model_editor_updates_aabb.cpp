@@ -29,7 +29,7 @@ void ModelEditor::_updateAabbMenu()
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), false);
 				return;
 			}
-			else if (screen->getButton("add")->isHovered())
+			else if (screen->getButton("create")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("aabbCreate", "Create AABB", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}

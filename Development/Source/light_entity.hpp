@@ -38,5 +38,5 @@ private:
 	float _intensity = 1.0f;
 
 	// Miscellaneous
-	LightShape _shape;
+	LightShape _shape = LightShape::CIRCLE;
 };

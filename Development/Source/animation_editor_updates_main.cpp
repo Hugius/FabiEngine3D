@@ -64,7 +64,7 @@ void AnimationEditor::_updateMainMenu()
 			{
 				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
-			else if (screen->getButton("add")->isHovered()) // Add animation button
+			else if (screen->getButton("create")->isHovered()) // Add animation button
 			{
 				_gui.getGlobalScreen()->createValueForm("animationCreate", "Create Animation", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAnimation = true;

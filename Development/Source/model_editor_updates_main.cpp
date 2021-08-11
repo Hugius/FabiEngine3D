@@ -48,7 +48,7 @@ void ModelEditor::_updateMainMenu()
 			{
 				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
-			else if (screen->getButton("add")->isHovered()) // Add model button
+			else if (screen->getButton("create")->isHovered()) // Add model button
 			{
 				_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Model", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingModel = true;

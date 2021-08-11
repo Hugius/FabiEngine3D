@@ -44,7 +44,7 @@ void AudioEditor::_updateMainMenu()
 			{
 				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
-			else if (screen->getButton("add")->isHovered()) // Add audio button
+			else if (screen->getButton("create")->isHovered()) // Add audio button
 			{
 				_gui.getGlobalScreen()->createValueForm("audioCreate", "Create Audio", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 				_isCreatingAudio = true;

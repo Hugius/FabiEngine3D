@@ -183,7 +183,7 @@ void SceneEditor::unload()
 	_activeLampSizeDirection = 1;
 	_dontResetSelectedModel = false;
 	_dontResetSelectedBillboard = false;
-	_isPlacingPointLight = false;
+	_isPlacingLight = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;
 	_editorSpeed = 1.0f;

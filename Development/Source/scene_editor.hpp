@@ -217,7 +217,7 @@ private:
 
 	// Point light variables
 	vector<string> _loadedLightIDs;
-	bool _isPlacingPointLight = false;
+	bool _isPlacingLight = false;
 	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
 	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f);

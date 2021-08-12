@@ -120,7 +120,7 @@ void WaterEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("waterID")->getEntityID(), false);
 				_fe3d.waterEntity_setWireFramed(_currentWaterID, false);
 				_fe3d.waterEntity_select("");
 				_currentWaterID = "";
@@ -183,7 +183,7 @@ void WaterEditor::_updateWaterCreating()
 							_fe3d.waterEntity_select(newWaterID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID();
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("waterID")->getEntityID();
 							_fe3d.textEntity_setTextContent(textEntityID, "Water: " + newWaterID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(textEntityID, true);
 							_isCreatingWater = false;
@@ -228,9 +228,9 @@ void WaterEditor::_updateWaterChoosing()
 				if (_isEditingWater)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(),
-						"Water: " + _currentWaterID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(), true);
+					auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
+					_fe3d.textEntity_setTextContent(textEntityID, "Water: " + _currentWaterID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 
 				// Show entity

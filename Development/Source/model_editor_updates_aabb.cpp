@@ -26,7 +26,7 @@ void ModelEditor::_updateAabbMenu()
 				_currentAabbID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 				_fe3d.misc_disableAabbFrameRendering();
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(), false);
 				return;
 			}
 			else if (screen->getButton("create")->isHovered())
@@ -53,7 +53,7 @@ void ModelEditor::_updateAabbMenu()
 				_transformationDirection = Direction::X;
 				_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
 				_currentAabbID = "";
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(), false);
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
@@ -141,9 +141,9 @@ void ModelEditor::_updateAabbMenu()
 						_transformationDirection = Direction::X;
 
 						// Show AABB title
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(),
-							"AABB: " + _currentAabbID, 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), true);
+						auto textEntityID = _gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID();
+						_fe3d.textEntity_setTextContent(textEntityID, "AABB: " + _currentAabbID, 0.025f);
+						_fe3d.textEntity_setVisible(textEntityID, true);
 					}
 					else
 					{
@@ -183,9 +183,9 @@ void ModelEditor::_updateAabbMenu()
 					_transformationDirection = Direction::X;
 
 					// Show AABB title
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(),
-						"AABB: " + _currentAabbID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAabbID")->getEntityID(), true);
+					auto textEntityID = _gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID();
+					_fe3d.textEntity_setTextContent(textEntityID,"AABB: " + _currentAabbID, 0.025f);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 					_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 				}
 				else

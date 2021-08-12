@@ -100,12 +100,12 @@ void SceneEditor::_loadGUI()
 
 	// Left-viewport: sceneEditorMenuSoundPlace
 	leftWindow->createScreen("sceneEditorMenuSoundPlace");
-	leftWindow->getScreen("sceneEditorMenuSoundPlace")->createScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen("sceneEditorMenuSoundPlace")->createScrollingList("sounds", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen("sceneEditorMenuSoundPlace")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuSoundChoice
 	leftWindow->createScreen("sceneEditorMenuSoundChoice");
-	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createScrollingList("soundcasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createScrollingList("sounds", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
 	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuLighting

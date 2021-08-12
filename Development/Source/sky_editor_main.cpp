@@ -24,7 +24,7 @@ void SkyEditor::load()
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("selectedSkyID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("skyID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("skyEditorControls");
 	_isEditorLoaded = true;
 }
@@ -50,7 +50,7 @@ void SkyEditor::unload()
 	_isDeletingSky = false;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextfield("selectedSkyID");
+	_gui.getGlobalScreen()->deleteTextfield("skyID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{

@@ -41,8 +41,7 @@ void SceneEditor::_updateBillboardPlacing()
 			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
-				auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
-				_fe3d.textEntity_setVisible(textEntityID, false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), false);
 				_currentPreviewBillboardID = "";
 			}
 		}
@@ -91,8 +90,7 @@ void SceneEditor::_updateBillboardPlacing()
 					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
-						auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
-						_fe3d.textEntity_setVisible(textEntityID, false);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), false);
 						_currentPreviewBillboardID = "";
 					}
 				}

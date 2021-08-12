@@ -118,7 +118,7 @@ void TerrainEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), false);
 				_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
@@ -203,7 +203,7 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.terrainEntity_select(newTerrainID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID();
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
 							_fe3d.textEntity_setTextContent(textEntityID, "Terrain: " + newTerrainID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(textEntityID, true);
 							_isCreatingTerrain = false;
@@ -254,9 +254,9 @@ void TerrainEditor::_updateTerrainChoosing()
 				if (_isEditingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(),
-						"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), true);
+					auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
+					_fe3d.textEntity_setTextContent(textEntityID, "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 
 				// Miscellaneous

@@ -85,7 +85,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 							_currentPreviewBillboardID = billboardID;
 							_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
 							_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID();
 							_fe3d.textEntity_setVisible(textEntityID, true);
 							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 							_fe3d.misc_centerCursor();

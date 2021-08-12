@@ -131,7 +131,7 @@ void SceneEditor::_updateSoundEditing()
 		}
 
 		// Check if sound is still selected or active
-		auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedSoundID")->getEntityID();
+		auto textEntityID = _gui.getGlobalScreen()->getTextfield("soundID")->getEntityID();
 		if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID.empty())
 		{
 			_fe3d.textEntity_setVisible(textEntityID, false);

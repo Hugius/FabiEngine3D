@@ -43,7 +43,7 @@ void TerrainEditor::load()
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("selectedTerrainID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("terrainID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("terrainEditorControls");
 	_isEditorLoaded = true;
 }
@@ -76,7 +76,7 @@ void TerrainEditor::unload()
 	_isDeletingTerrain = false;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainID");
+	_gui.getGlobalScreen()->deleteTextfield("terrainID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{

@@ -129,7 +129,7 @@ void BillboardEditor::_updateBillboardCreating()
 							_loadedBillboardIDs.push_back(newBillboardID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID();
 							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + newBillboardID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(textEntityID, true);
 							_isCreatingBillboard = false;
@@ -184,9 +184,9 @@ void BillboardEditor::_updateBillboardChoosing()
 				if (_isEditingBillboard)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), "Billboard: " +
-						_currentBillboardID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), true);
+					auto textEntityID = _gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID();
+					_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentBillboardID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(textEntityID, true);
 				}
 
 				// Miscellaneous

@@ -86,7 +86,7 @@ void SceneEditor::load()
 	for (const auto& audioID : _audioEditor.getLoadedAudioIDs())
 	{
 		_fe3d.sound_make3D(audioID, Vec3(0.0f), DEFAULT_SOUND_MAX_VOLUME, DEFAULT_SOUND_MAX_DISTANCE);
-		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("soundcasters")->
+		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundPlace")->getScrollingList("sounds")->
 			createButton(audioID, audioID.substr(1));
 	}
 
@@ -103,9 +103,9 @@ void SceneEditor::load()
 	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Create ID textfields
-	_gui.getGlobalScreen()->createTextfield("selectedModelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("selectedBillboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("selectedSoundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextfield("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
@@ -189,9 +189,9 @@ void SceneEditor::unload()
 	_editorSpeed = 1.0f;
 
 	// Delete ID textfields
-	_gui.getGlobalScreen()->deleteTextfield("selectedModelID");
-	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardID");
-	_gui.getGlobalScreen()->deleteTextfield("selectedSoundID");
+	_gui.getGlobalScreen()->deleteTextfield("modelID");
+	_gui.getGlobalScreen()->deleteTextfield("billboardID");
+	_gui.getGlobalScreen()->deleteTextfield("soundID");
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();

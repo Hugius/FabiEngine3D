@@ -182,7 +182,6 @@ void TerrainEditor::_updateTerrainCreating()
 								const string newFilePath = filePath.substr(rootDirectory.size());
 								_fe3d.misc_clearBitmapCache(newFilePath);
 								_fe3d.terrainEntity_create(newTerrainID, newFilePath);
-								_fe3d.terrainEntity_select(newTerrainID);
 							}
 							else
 							{
@@ -192,15 +191,24 @@ void TerrainEditor::_updateTerrainCreating()
 							}
 						}
 
-						// Miscellaneous
-						_currentTerrainID = newTerrainID;
-						_loadedTerrainIDs.push_back(_currentTerrainID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(),
-							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID(), true);
-						_isCreatingTerrain = false;
-						_isEditingTerrain = true;
+						// Check if terrain creation went well
+						if (_fe3d.terrainEntity_isExisting(newTerrainID))
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+
+							// Select terrain
+							_currentTerrainID = newTerrainID;
+							_loadedTerrainIDs.push_back(newTerrainID);
+							_fe3d.terrainEntity_select(newTerrainID);
+
+							// Miscellaneous
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedTerrainID")->getEntityID();
+							_fe3d.textEntity_setTextContent(textEntityID, "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(textEntityID, true);
+							_isCreatingTerrain = false;
+							_isEditingTerrain = true;
+						}
 					}
 					else
 					{

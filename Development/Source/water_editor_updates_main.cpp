@@ -168,16 +168,27 @@ void WaterEditor::_updateWaterCreating()
 					// If water not existing yet
 					if (find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterID) == _loadedWaterIDs.end())
 					{
-						_currentWaterID = newWaterID;
-						_loadedWaterIDs.push_back(_currentWaterID);
-						_fe3d.waterEntity_create(_currentWaterID);
-						_fe3d.waterEntity_select(_currentWaterID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(),
-							"Water: " + _currentWaterID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID(), true);
-						_isCreatingWater = false;
-						_isEditingWater = true;
+						// Create water
+						_fe3d.waterEntity_create(newWaterID);
+
+						// Check if water creation went well
+						if (_fe3d.waterEntity_isExisting(newWaterID))
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+
+							// Select water
+							_currentWaterID = newWaterID;
+							_loadedWaterIDs.push_back(newWaterID);
+							_fe3d.waterEntity_select(newWaterID);
+
+							// Miscellaneous
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedWaterID")->getEntityID();
+							_fe3d.textEntity_setTextContent(textEntityID, "Water: " + newWaterID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(textEntityID, true);
+							_isCreatingWater = false;
+							_isEditingWater = true;
+						}
 					}
 					else
 					{

@@ -70,14 +70,13 @@ void AudioEditor::_loadGUI()
 	leftWindow->getScreen("audioEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: audioEditorMenuChoice
-	positions = VPC::calculateButtonPositions(6, CH);
+	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("audioEditorMenuChoice");
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("load", Vec2(0.0f, positions[0]), Vec2(TW("Load WAV"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Load WAV", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("play", Vec2(0.0f, positions[1]), Vec2(TW("Play"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Play", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("resume", Vec2(0.0f, positions[2]), Vec2(TW("Resume"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Resume", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("pause", Vec2(0.0f, positions[3]), Vec2(TW("Pause"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Pause", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("stop", Vec2(0.0f, positions[4]), Vec2(TW("Stop"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Stop", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("audioEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuChoice")->createButton("play", Vec2(0.0f, positions[0]), Vec2(TW("Play"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Play", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuChoice")->createButton("resume", Vec2(0.0f, positions[1]), Vec2(TW("Resume"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Resume", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuChoice")->createButton("pause", Vec2(0.0f, positions[2]), Vec2(TW("Pause"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Pause", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuChoice")->createButton("stop", Vec2(0.0f, positions[3]), Vec2(TW("Stop"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Stop", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("audioEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void AudioEditor::_unloadGUI()

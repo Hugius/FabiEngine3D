@@ -214,15 +214,23 @@ void ModelEditor::_updateModelCreating()
 							}
 						}
 	
-						// Miscellaneous
-						_currentModelID = newModelID;
-						_loadedModelIDs.push_back(newModelID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(),
-							"Model: " + _currentModelID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID(), true);
-						_isCreatingModel = false;
-						_isEditingModel = true;
+						// Check if model creation went well
+						if (_fe3d.modelEntity_isExisting(newModelID))
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+
+							// Select model
+							_currentModelID = newModelID;
+							_loadedModelIDs.push_back(newModelID);
+
+							// Miscellaneous
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelID")->getEntityID();
+							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + newModelID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(textEntityID, true);
+							_isCreatingModel = false;
+							_isEditingModel = true;
+						}
 					}
 					else
 					{

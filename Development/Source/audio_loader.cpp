@@ -102,6 +102,7 @@ BEGIN:
 		if (data == nullptr)
 		{
 			Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
+			return nullptr;
 		}
 		else
 		{

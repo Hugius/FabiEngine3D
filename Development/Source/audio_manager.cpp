@@ -22,7 +22,14 @@ void AudioManager::deleteAllSounds()
 
 void AudioManager::createMusic(const string& filename)
 {
-	_musicList.push_back(Music(_audioLoader.getMusicDataPointer(filename)));
+	// Load data
+	auto dataPointer = _audioLoader.getMusicDataPointer(filename);
+
+	// Check if data loading went well
+	if (dataPointer != nullptr)
+	{
+		_musicList.push_back(Music(dataPointer));
+	}
 }
 
 void AudioManager::createSound(const string& ID, const string& filename)
@@ -36,7 +43,14 @@ void AudioManager::createSound(const string& ID, const string& filename)
 		Logger::throwError("Tried to create sound with empty ID!");
 	}
 
-	_soundList.push_back(Sound(ID, filename, _audioLoader.getChunkDataPointer(filename)));
+	// Load data
+	auto dataPointer = _audioLoader.getChunkDataPointer(filename);
+
+	// Check if data loading went well
+	if (dataPointer != nullptr)
+	{
+		_soundList.push_back(Sound(ID, filename, dataPointer));
+	}
 }
 
 void AudioManager::deleteSound(const string& ID)

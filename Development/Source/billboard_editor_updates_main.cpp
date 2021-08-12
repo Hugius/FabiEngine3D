@@ -115,20 +115,26 @@ void BillboardEditor::_updateBillboardCreating()
 					// If billboard not existing yet
 					if (find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardID) == _loadedBillboardIDs.end())
 					{
-						// Go to editor
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-
-						// Select billboard
-						_currentBillboardID = newBillboardID;
-						_loadedBillboardIDs.push_back(newBillboardID);
-
-						// Miscellaneous
+						// Create billboard
 						_fe3d.billboardEntity_create(newBillboardID);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), "Billboard: " +
-							_currentBillboardID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID(), true);
-						_isCreatingBillboard = false;
-						_isEditingBillboard = true;
+
+						// Check if billboard creation went well
+						if (_fe3d.billboardEntity_isExisting(newBillboardID))
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+
+							// Select billboard
+							_currentBillboardID = newBillboardID;
+							_loadedBillboardIDs.push_back(newBillboardID);
+
+							// Miscellaneous
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardID")->getEntityID();
+							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + newBillboardID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(textEntityID, true);
+							_isCreatingBillboard = false;
+							_isEditingBillboard = true;
+						}
 					}
 					else
 					{

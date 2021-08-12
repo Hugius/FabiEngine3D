@@ -33,38 +33,6 @@ void AudioEditor::_updateChoiceMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 				return;
 			}
-			else if (screen->getButton("load")->isHovered())
-			{
-				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("game_assets\\audio\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "WAV");
-
-				// Check if user did not cancel
-				if (filePath != "")
-				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-
-						// Remove old audio
-						if (_fe3d.sound_isExisting(_currentAudioID))
-						{
-							_fe3d.misc_clearAudioChunkCache(newFilePath);
-							_fe3d.sound_delete(_currentAudioID);
-						}
-
-						// Create new audio
-						_fe3d.sound_create(_currentAudioID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
-					}
-				}
-			}
 			else if (screen->getButton("play")->isHovered())
 			{
 				_fe3d.sound_play(_currentAudioID, 0, 0);

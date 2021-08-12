@@ -106,22 +106,55 @@ void AudioEditor::_updateAudioCreating()
 					// Add @ sign to new ID
 					newAudioID = ("@" + newAudioID);
 
-					// Check if audio already exists
+					// Check if audio not already exists
 					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
-						// Go to editor
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
+						// Get the chosen filename
+						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const string targetDirectory = string("game_assets\\audio\\");
+						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "WAV");
 
-						// Select audio
-						_currentAudioID = newAudioID;
-						_loadedAudioIDs.push_back(newAudioID);
+						// Check if user chose a filename
+						if (filePath.empty())
+						{
+							_isCreatingAudio = false;
+							return;
+						}
+						else
+						{
+							// Check if user did not switch directory
+							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+							{
+								const string newFilePath = filePath.substr(rootDirectory.size());
+								_fe3d.misc_clearAudioChunkCache(newFilePath);
+								_fe3d.sound_create(newAudioID, newFilePath);
+							}
+							else
+							{
+								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								_isCreatingAudio = false;
+								return;
+							}
+						}
 
-						// Miscellaneous
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), "Audio: " +
-							_currentAudioID.substr(1), 0.025f);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID(), true);
-						_isCreatingAudio = false;
-						_isEditingAudio = true;
+						// Check if sound creation went well
+						if (_fe3d.sound_isExisting(newAudioID))
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
+
+							// Select audio
+							_currentAudioID = newAudioID;
+							_loadedAudioIDs.push_back(newAudioID);
+
+							// Miscellaneous
+							auto textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioID")->getEntityID();
+							_fe3d.textEntity_setTextContent(textEntityID, "Audio: " + newAudioID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(textEntityID, true);
+							_isCreatingAudio = false;
+							_isEditingAudio = true;
+						}
 					}
 					else // ID already exists
 					{

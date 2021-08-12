@@ -183,9 +183,8 @@ void WaterEditor::_updateWaterCreating()
 							_fe3d.waterEntity_select(newWaterID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("waterID")->getEntityID();
-							_fe3d.textEntity_setTextContent(textEntityID, "Water: " + newWaterID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(textEntityID, true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("waterID")->getEntityID(), true);
 							_isCreatingWater = false;
 							_isEditingWater = true;
 						}
@@ -228,9 +227,8 @@ void WaterEditor::_updateWaterChoosing()
 				if (_isEditingWater)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-					auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textEntityID, "Water: " + _currentWaterID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(textEntityID, true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), true);
 				}
 
 				// Show entity

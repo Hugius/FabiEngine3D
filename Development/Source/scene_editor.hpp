@@ -129,11 +129,14 @@ private:
 	void _updateSpeakerAnimation(const string& modelID, int& direction);
 	void _updateLampAnimation(const string& modelID, int& direction);
 	void _selectModel(const string& modelID);
-	void _activateModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
-	void _activateBillboard(const string& billboardID);
 	void _selectSound(const string& soundID);
+	void _activateModel(const string& modelID);
+	void _activateBillboard(const string& billboardID);
 	void _activateSound(const string& soundID);
+	void _deactivateModel();
+	void _deactivateBillboard();
+	void _deactivateSound();
 	void _handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
@@ -220,6 +223,7 @@ private:
 	bool _isPlacingLight = false;
 	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
 	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
+	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f);
 	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.7f, 1.2f, 0.7f);
 	static inline const float DEFAULT_LIGHT_RADIUS = 5.0f;

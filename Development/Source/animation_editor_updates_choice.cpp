@@ -56,8 +56,8 @@ void AnimationEditor::_updateChoiceMenu()
 				_isEditingAnimation = false;
 				_currentAnimationID = "";
 				_currentFrameIndex = 0;
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationID")->getEntityID(), false);
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationFrame")->getEntityID(), false);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 				return;
 			}
@@ -194,7 +194,7 @@ void AnimationEditor::_updateChoiceMenu()
 		// Showing frame index
 		if (!isPlaying)
 		{
-			auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID();
+			auto textID = _gui.getGlobalScreen()->getTextfield("animationFrame")->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 

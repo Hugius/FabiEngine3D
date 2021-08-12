@@ -203,9 +203,8 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.terrainEntity_select(newTerrainID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
-							_fe3d.textEntity_setTextContent(textEntityID, "Terrain: " + newTerrainID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(textEntityID, true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
 							_isEditingTerrain = true;
 						}
@@ -254,9 +253,8 @@ void TerrainEditor::_updateTerrainChoosing()
 				if (_isEditingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					auto textEntityID = _gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textEntityID, "Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(textEntityID, true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

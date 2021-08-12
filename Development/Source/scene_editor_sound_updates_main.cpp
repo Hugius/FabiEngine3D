@@ -78,15 +78,19 @@ void SceneEditor::_updateSoundPlacingMenu()
 					// Check if button is hovered
 					if (screen->getScrollingList("sounds")->getButton(audioID)->isHovered())
 					{
+						// Deactivate everything
+						_deactivateModel();
+						_deactivateBillboard();
+						_deactivateSound();
+
 						// Set new preview sound
 						_currentPreviewSoundID = audioID;
 						_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, Vec3(0.0f));
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 						_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
 						_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
-						auto textEntityID = _gui.getGlobalScreen()->getTextfield("soundID")->getEntityID();
-						_fe3d.textEntity_setVisible(textEntityID, true);
-						_fe3d.textEntity_setTextContent(textEntityID, "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), true);
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 						
 						// Add position value forms for placing without terrain

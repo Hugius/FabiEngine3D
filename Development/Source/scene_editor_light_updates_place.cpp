@@ -12,9 +12,9 @@ void SceneEditor::_updateLightPlacing()
 			auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_LAMP_ID);
 
 			// Update position change
-			bool filledX = _gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, { });
-			bool filledY = _gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, { });
-			bool filledZ = _gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, { });
+			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
+			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
+			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
 			_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
@@ -80,8 +80,8 @@ void SceneEditor::_updateLightPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
 
 						// Update position
-						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain());
-						_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain());
+						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain() + LAMP_OFFSET);
+						_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain() + LAMP_OFFSET);
 					}
 					else
 					{

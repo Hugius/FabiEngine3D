@@ -209,7 +209,7 @@ BEGIN:
 	{
 		// Temporary values
 		vector<future<SDL_Surface*>> threads;
-		array<SDL_Surface*, 6> loadedImages = { };
+		array<SDL_Surface*, 6> loadedImages = {};
 
 		// Start all loading threads
 		for (size_t i = 0; i < filePaths.size(); i++)

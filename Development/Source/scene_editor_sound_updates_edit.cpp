@@ -131,17 +131,16 @@ void SceneEditor::_updateSoundEditing()
 		}
 
 		// Check if sound is still selected or active
-		auto textEntityID = _gui.getGlobalScreen()->getTextfield("soundID")->getEntityID();
 		if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID.empty())
 		{
-			_fe3d.textEntity_setVisible(textEntityID, false);
+			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), false);
 		}
 		else
 		{
 			if (_selectedModelID.empty() && _activeModelID.empty() && _selectedBillboardID.empty() && _activeBillboardID.empty()
 				&& _selectedLampID.empty() && _activeLampID.empty())
 			{
-				_fe3d.textEntity_setVisible(textEntityID, true);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), true);
 			}
 		}
 	}

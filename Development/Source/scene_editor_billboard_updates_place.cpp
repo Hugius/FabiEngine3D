@@ -12,9 +12,9 @@ void SceneEditor::_updateBillboardPlacing()
 			auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);
 
 			// Update position change
-			bool filledX = _gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, { });
-			bool filledY = _gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, { });
-			bool filledZ = _gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, { });
+			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
+			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
+			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
 			_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, newPosition);

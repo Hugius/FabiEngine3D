@@ -187,7 +187,7 @@ void BillboardEditor::_updateChoiceMenu()
 
 			// Setting billboard lightness
 			float newLightness;
-			if (_gui.getGlobalScreen()->checkValueForm("lightness", newLightness, { }))
+			if (_gui.getGlobalScreen()->checkValueForm("lightness", newLightness, {}))
 			{
 				newLightness = max(0.0f, newLightness / 100.0f);
 				_fe3d.billboardEntity_setLightness(_currentBillboardID, newLightness);
@@ -195,9 +195,9 @@ void BillboardEditor::_updateChoiceMenu()
 
 			// Setting billboard color
 			Vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardID) * 255.0f;
-			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
-			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
-			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
+			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, {});
+			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, {});
+			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, {});
 			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
 			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
 			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
@@ -246,7 +246,7 @@ void BillboardEditor::_updateChoiceMenu()
 			// Update value filling
 			if (_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
 				_gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
-				_gui.getGlobalScreen()->checkValueForm("speed", animationFramestep, { }))
+				_gui.getGlobalScreen()->checkValueForm("speed", animationFramestep, {}))
 			{
 				if (playing) // Only if animation is already playing
 				{
@@ -321,9 +321,9 @@ void BillboardEditor::_updateChoiceMenu()
 
 			// Setting text color
 			Vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardID) * 255.0f;
-			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
-			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
-			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
+			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, {});
+			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, {});
+			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, {});
 			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
 			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
 			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
@@ -331,7 +331,7 @@ void BillboardEditor::_updateChoiceMenu()
 
 			// Updating text content
 			string textContent = "";
-			if (_gui.getGlobalScreen()->checkValueForm("content", textContent, { }))
+			if (_gui.getGlobalScreen()->checkValueForm("content", textContent, {}))
 			{
 				_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
 				_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));

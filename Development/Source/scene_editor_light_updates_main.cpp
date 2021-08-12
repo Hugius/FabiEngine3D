@@ -247,11 +247,16 @@ void SceneEditor::_updatePointLightingMenu()
 			}
 			else if (screen->getButton("create")->isHovered())
 			{
+				// Deactivate everything
+				_deactivateModel();
+				_deactivateBillboard();
+				_deactivateSound();
+
 				// Set new preview light
 				_isPlacingLight = true;
-				_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+				_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, LAMP_OFFSET);
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
-				_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+				_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, LAMP_OFFSET);
 				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, true);
 				_fe3d.misc_centerCursor();
 

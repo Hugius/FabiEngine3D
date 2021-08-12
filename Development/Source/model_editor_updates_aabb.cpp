@@ -109,7 +109,7 @@ void ModelEditor::_updateAabbMenu()
 		}
 
 		// Filling transformation speed
-		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
+		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, {}))
 		{
 			_aabbTransformationSpeed /= 100.0f;
 		}
@@ -141,9 +141,8 @@ void ModelEditor::_updateAabbMenu()
 						_transformationDirection = Direction::X;
 
 						// Show AABB title
-						auto textEntityID = _gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID();
-						_fe3d.textEntity_setTextContent(textEntityID, "AABB: " + _currentAabbID, 0.025f);
-						_fe3d.textEntity_setVisible(textEntityID, true);
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(), "AABB: " + _currentAabbID, 0.025f);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(), true);
 					}
 					else
 					{
@@ -183,9 +182,8 @@ void ModelEditor::_updateAabbMenu()
 					_transformationDirection = Direction::X;
 
 					// Show AABB title
-					auto textEntityID = _gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textEntityID,"AABB: " + _currentAabbID, 0.025f);
-					_fe3d.textEntity_setVisible(textEntityID, true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(),"AABB: " + _currentAabbID, 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("aabbID")->getEntityID(), true);
 					_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 				}
 				else

@@ -70,9 +70,9 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 
 		// Color values
 		color *= 255.0f;
-		_gui.getGlobalScreen()->checkValueForm("colorR", color.r, { });
-		_gui.getGlobalScreen()->checkValueForm("colorG", color.g, { });
-		_gui.getGlobalScreen()->checkValueForm("colorB", color.b, { });
+		_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {});
+		_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {});
+		_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {});
 		color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
 		color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
 		color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);

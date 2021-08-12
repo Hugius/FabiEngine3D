@@ -81,13 +81,17 @@ void SceneEditor::_updateBillboardPlacingMenu()
 						// Check if button is hovered
 						if (screen->getScrollingList("billboardList")->getButton(billboardID)->isHovered())
 						{
+							// Deactivate everything
+							_deactivateModel();
+							_deactivateBillboard();
+							_deactivateSound();
+
 							// Set new preview billboard
 							_currentPreviewBillboardID = billboardID;
 							_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, Vec3(0.0f));
 							_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID();
-							_fe3d.textEntity_setVisible(textEntityID, true);
-							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), "Billboard: " + _currentPreviewBillboardID.substr(1), 0.025f);
 							_fe3d.misc_centerCursor();
 							
 							// Add position value forms for placing without terrain

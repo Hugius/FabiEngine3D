@@ -12,9 +12,9 @@ void SceneEditor::_updateSoundPlacing()
 			auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_SPEAKER_ID);
 
 			// Update position change
-			bool filledX = _gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, { });
-			bool filledY = _gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, { });
-			bool filledZ = _gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, { });
+			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
+			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
+			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
 			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, _fe3d.misc_getRaycastPointOnTerrain());
@@ -63,13 +63,13 @@ void SceneEditor::_updateSoundPlacing()
 			// Check if placement mode must be disabled
 			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				// Hide preview sound
+				// Hide preview speaker
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-				// Pause sound playback
-				if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
+				// Stop sound playback
+				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.sound_pause(_currentPreviewSoundID);
+					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
 
 				// Miscellaneous
@@ -170,11 +170,9 @@ void SceneEditor::_updateSoundPlacing()
 							_fe3d.sound_stop(_currentPreviewSoundID, 0);
 						}
 
-						// Stop placing
-						_currentPreviewSoundID = "";
-
-						// Hide sound ID
+						// Miscellaneous
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), false);
+						_currentPreviewSoundID = "";
 					}
 				}
 				else

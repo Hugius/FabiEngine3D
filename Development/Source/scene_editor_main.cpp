@@ -138,6 +138,7 @@ void SceneEditor::unload()
 	_fe3d.lightEntity_deleteAll();
 
 	// Reset editor properties
+	_customSceneID = "";
 	_hasCustomSceneLighting = false;
 	_hasCustomSceneGraphics = false;
 	_hasCustomSceneSky = false;
@@ -148,45 +149,54 @@ void SceneEditor::unload()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
-	_currentSkyID = "";
-	_currentTerrainID = "";
-	_currentWaterID = "";
-	_loadedSceneID = "";
 	_loadedSkyID = "";
 	_loadedTerrainID = "";
 	_loadedWaterID = "";
+	_currentSkyID = "";
+	_currentTerrainID = "";
+	_currentWaterID = "";
 	_loadedModelIDs.clear();
-	_loadedBillboardIDs.clear();
-	_loadedSoundIDs.clear();
-	_loadedLightIDs.clear();
-	_loadedAabbIDs.clear();
 	_outsideLoadedModelIDs.clear();
-	_outsideLoadedBillboardIDs.clear();
-	_outsideLoadedSoundIDs.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
 	_currentPreviewModelID = "";
 	_selectedModelID = "";
 	_activeModelID = "";
+	_selectedModelInversionDirection = 1;
+	_activeModelInversionDirection = 1;
+	_dontResetSelectedModel = false;
+	_loadedBillboardIDs.clear();
+	_outsideLoadedBillboardIDs.clear();
 	_currentPreviewBillboardID = "";
 	_selectedBillboardID = "";
 	_activeBillboardID = "";
-	_selectedLampID = "";
-	_activeLampID = "";
-	_currentSceneID = "";
-	_selectedModelInversionDirection = 1;
-	_activeModelInversionDirection = 1;
 	_selectedBillboardInversionDirection = 1;
 	_activeBillboardInversionDirection = 1;
+	_dontResetSelectedBillboard = false;
+	_loadedSoundIDs.clear();
+	_outsideLoadedSoundIDs.clear();
+	_currentPreviewSoundID = "";
+	_selectedSpeakerID = "";
+	_activeSpeakerID = "";
+	_selectedSpeakerSizeDirection = 1;
+	_activeSpeakerSizeDirection = 1;
+	_dontResetSelectedSpeaker = false;
+	_loadedLightIDs.clear();
+	_isPlacingLight = false;
 	_selectedLampSizeDirection = 1;
 	_activeLampSizeDirection = 1;
-	_dontResetSelectedModel = false;
-	_dontResetSelectedBillboard = false;
-	_isPlacingLight = false;
+	_selectedLampID = "";
+	_activeLampID = "";
+	_loadedAabbIDs.clear();
+	_loadedSceneID = "";
+	_currentProjectID = "";
+	_currentSceneID = "";
+	_editorSpeed = 1.0f;
+	_isEditorLoaded = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;
-	_editorSpeed = 1.0f;
+	_isEditorLoaded = false;
 
 	// Delete ID textfields
 	_gui.getGlobalScreen()->deleteTextfield("modelID");
@@ -212,5 +222,4 @@ void SceneEditor::unload()
 		_fe3d.misc_disableTerrainRaycastPointing();
 	}
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_isEditorLoaded = false;
 }

@@ -172,9 +172,8 @@ void SkyEditor::_updateSkyCreating()
 							_fe3d.skyEntity_selectMainSky(newSkyID);
 							
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("skyID")->getEntityID();
-							_fe3d.textEntity_setTextContent(textEntityID, "Sky: " + newSkyID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(textEntityID, true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), true);
 							_isCreatingSky = false;
 							_isEditingSky = true;
 						}
@@ -217,9 +216,8 @@ void SkyEditor::_updateSkyChoosing()
 				if (_isEditingSky)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-					auto textEntityID = _gui.getGlobalScreen()->getTextfield("skyID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textEntityID, "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(textEntityID, true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), true);
 				}
 
 				// Show entity

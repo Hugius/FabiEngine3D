@@ -225,9 +225,8 @@ void ModelEditor::_updateModelCreating()
 							_loadedModelIDs.push_back(newModelID);
 
 							// Miscellaneous
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("modelID")->getEntityID();
-							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + newModelID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(textEntityID, true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
 							_isCreatingModel = false;
 							_isEditingModel = true;
 						}
@@ -280,9 +279,8 @@ void ModelEditor::_updateModelChoosing()
 				if (_isEditingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					auto textEntityID = _gui.getGlobalScreen()->getTextfield("modelID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(textEntityID, true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

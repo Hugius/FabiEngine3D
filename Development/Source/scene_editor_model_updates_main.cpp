@@ -80,13 +80,17 @@ void SceneEditor::_updateModelPlacingMenu()
 						// Check if button is hovered
 						if (screen->getScrollingList("modelList")->getButton(modelID)->isHovered())
 						{
+							// Deactivate everything
+							_deactivateModel();
+							_deactivateBillboard();
+							_deactivateSound();
+
 							// Set new preview model
 							_currentPreviewModelID = modelID;
 							_fe3d.modelEntity_setPosition(_currentPreviewModelID, Vec3(0.0f));
 							_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
-							auto textEntityID = _gui.getGlobalScreen()->getTextfield("modelID")->getEntityID();
-							_fe3d.textEntity_setVisible(textEntityID, true);
-							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);
 							_fe3d.misc_centerCursor();
 
 							// Add position value forms for placing without terrain

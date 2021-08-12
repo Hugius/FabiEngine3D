@@ -179,7 +179,7 @@ void AnimationEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID));
 		bool hasPreviewModel = _fe3d.modelEntity_isExisting(currentAnimation->previewModelID);
 		screen->getButton("preview")->setHoverable(!isPlaying);

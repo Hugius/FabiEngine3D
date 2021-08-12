@@ -14,7 +14,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::getAllTerrainTexturePathsFromFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::getAllTerrainTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -158,7 +158,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::loadTerrainEntitiesFromFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::loadTerrainEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -333,7 +333,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::saveTerrainEntitiesToFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::saveTerrainEntitiesToFile");
 	}
 
 	// Compose file path

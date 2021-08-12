@@ -14,7 +14,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::getAllWaterTexturePathsFromFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::getAllWaterTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -82,7 +82,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::loadWaterEntitiesFromFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::loadWaterEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -218,7 +218,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("EnvironmentEditor::saveWaterEntitiesToFile() ---> no current project loaded!");
+		Logger::throwError("EnvironmentEditor::saveWaterEntitiesToFile");
 	}
 
 	// Compose file path

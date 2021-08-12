@@ -64,26 +64,17 @@ void ModelEditor::_updateLightingMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("reflectionType")->changeTextContent((reflectionType == ReflectionType::SKY) ? "Reflect: SKY" : "Reflect: SCENE");
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
-
-		// Update specular factor
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
-
-		// Update specular intensity
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d.modelEntity_setSpecularIntensity(_currentModelID, specularIntensity);
 		}
-
-		// Update lightness
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
@@ -94,5 +85,10 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("specularFactor")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("reflectionType")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
+
+		// Update button text contents
+		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("reflectionType")->changeTextContent((reflectionType == ReflectionType::SKY) ? "Reflect: SKY" : "Reflect: SCENE");
+		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 	}
 }

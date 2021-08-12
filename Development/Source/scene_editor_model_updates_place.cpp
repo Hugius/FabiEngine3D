@@ -12,7 +12,7 @@ void SceneEditor::_updateModelPlacing()
 			// Retrieve current position
 			auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID);
 
-			// Update position change
+			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
 			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});

@@ -139,7 +139,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			_fe3d.application_stop();
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		topScreen->getButton("saveProject")->setHoverable(_currentProjectID != "");
 	}
 }
@@ -200,7 +200,7 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 		}
 
-		// Update game buttons hoverability
+		// Update buttons hoverability
 		static bool wasInMainMenu = false;
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
 		gameScreen->getButton("play")->setHoverable(isInMainMenu && !_scriptEditor.getScriptExecutor().isScriptEmpty() && !isScriptRunning());
@@ -208,6 +208,11 @@ void TopViewportController::_updateGameScreenManagement()
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		gameScreen->getButton("stop")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
 		gameScreen->getButton("debug")->setHoverable(isInMainMenu && _scriptEditor.getScriptExecutor().isStarted());
+		projectScreen->getButton("newProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+		projectScreen->getButton("loadProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+		projectScreen->getButton("saveProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+		projectScreen->getButton("deleteProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
+		miscScreen->getButton("uncache")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
 
 		// Reload script files every second or if user came into menu
 		bool cameIntoMenu = (!wasInMainMenu && isInMainMenu);
@@ -216,13 +221,6 @@ void TopViewportController::_updateGameScreenManagement()
 			_scriptEditor.loadScriptFiles(false);
 		}
 		wasInMainMenu = isInMainMenu;
-
-		// Update other buttons hoverability
-		projectScreen->getButton("newProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("loadProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("saveProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		projectScreen->getButton("deleteProject")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
-		miscScreen->getButton("uncache")->setHoverable(!_scriptEditor.getScriptExecutor().isStarted());
 
 		// Check if user wants to pause the running game
 		if (_scriptEditor.getScriptExecutor().isRunning())
@@ -298,7 +296,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("TopViewportController::_saveCurrentProject() ---> no current project loaded!");
+		Logger::throwError("TopViewportController::_saveCurrentProject");
 	}
 
 	// Save everything

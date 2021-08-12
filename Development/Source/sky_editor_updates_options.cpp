@@ -42,31 +42,23 @@ void SkyEditor::_updateOptionsMenu()
 			}
 		}
 
-		// Speed value conversion
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{
 			skyRotationSpeed /= 1000.0f;
 		}
-
-		// Lightness value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
 			skyLightness = max(0.0f, skyLightness / 100.0f);
 		}
-
-		// Color R values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", skyColor.r))
 		{
 			skyColor.r = clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color G values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", skyColor.g))
 		{
 			skyColor.g = clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color B values conversion
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", skyColor.b))
 		{
 			skyColor.b = clamp(skyColor.b / 255.0f, 0.0f, 1.0f);

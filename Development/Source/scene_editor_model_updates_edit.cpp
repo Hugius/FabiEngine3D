@@ -179,10 +179,6 @@ void SceneEditor::_updateModelEditing()
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 			}
 
-			// Button text contents
-			bool isFrozen = _fe3d.modelEntity_isStaticToCamera(ACTIVE_MODEL_ID);
-			screen->getButton("freeze")->changeTextContent(isFrozen ? "Unfreeze" : "Freeze");
-
 			// Alternative way of deleting
 			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
@@ -294,6 +290,9 @@ void SceneEditor::_updateModelEditing()
 					_fe3d.modelEntity_setSize(ACTIVE_MODEL_ID, size);
 				}
 			}
+
+			// Update button text contents
+			screen->getButton("freeze")->changeTextContent(_fe3d.modelEntity_isStaticToCamera(ACTIVE_MODEL_ID) ? "Unfreeze" : "Freeze");
 		}
 
 		// Check if model is still selected or active

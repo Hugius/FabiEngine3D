@@ -51,7 +51,7 @@ void ModelEditor::_updateMeshMenu()
 			hoverable = existing && !_fe3d.modelEntity_isMultiParted(_currentModelID);
 		}
 
-		// Editing buttons hoverability
+		// Update buttons hoverability
 		screen->getButton("loadMesh")->setHoverable(!existing);
 		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
 		screen->getButton("loadEmissionMap")->setHoverable(hoverable);

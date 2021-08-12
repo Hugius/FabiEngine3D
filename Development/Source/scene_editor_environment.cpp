@@ -94,7 +94,7 @@ void SceneEditor::_updateSkyMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(_currentSkyID != "");
 
 		// Update sky selection
@@ -167,7 +167,7 @@ void SceneEditor::_updateTerrainMenu()
 		// Update terrain selection
 		_fe3d.terrainEntity_select(_currentTerrainID);
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(_currentTerrainID != "");
 	}
 }
@@ -234,7 +234,7 @@ void SceneEditor::_updateWaterMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(_currentWaterID != "");
 
 		// Update water selection

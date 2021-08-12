@@ -78,63 +78,47 @@ void WaterEditor::_updateOptionsMenu()
 			}
 		}
 
-		// Check if speed X value confirmed
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
-
-		// Check if speed Z value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
-
-		// Check if transparency value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
 			transparency = clamp(transparency / 100.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
-
-		// Check if color R value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
-
-		// Check if color G value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
 			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
-
-		// Check if color B value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
 			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
-
-		// Check if specular factor value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
-
-		// Check if specular intensity value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
-
-		// Check if wave height value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
 			waveHeight = max(0.0f, waveHeight / 100.0f);
@@ -144,12 +128,12 @@ void WaterEditor::_updateOptionsMenu()
 		// Update water quality
 		_fe3d.waterEntity_setQuality(_currentWaterID, quality);
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("specularFactor")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
 
-		// Button text contents
+		// Update button text contents
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

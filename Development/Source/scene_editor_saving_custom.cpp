@@ -12,7 +12,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::saveCustomSceneToFile() ---> no current project loaded!");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile");
 	}
 	if (_isEditorLoaded)
 	{

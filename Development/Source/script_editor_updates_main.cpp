@@ -74,13 +74,6 @@ void ScriptEditor::_updateGUI()
 			}
 		}
 
-		// Button text contents
-		screen->getTextfield("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
-
-		// Button hoverabilities
-		screen->getButton("rename")->setHoverable(_currentScriptFileID != "");
-		screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
-
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
@@ -93,6 +86,13 @@ void ScriptEditor::_updateGUI()
 			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
+
+		// Update buttons hoverability
+		screen->getButton("rename")->setHoverable(_currentScriptFileID != "");
+		screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
+
+		// Update button text contents
+		screen->getTextfield("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
 	}
 }
 
@@ -165,7 +165,7 @@ void ScriptEditor::_updateMiscellaneous()
 	_scrollingAcceleration *= 0.95f;
 	_fe3d.camera_move(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 
-	// Check if user wants to search a keyword
+	// Check if user filled in a keyword
 	string keyword;
 	if (_gui.getGlobalScreen()->checkValueForm("search", keyword))
 	{
@@ -237,7 +237,7 @@ void ScriptEditor::_updateMiscellaneous()
 		_gui.getGlobalScreen()->deleteChoiceForm("scriptFileList");
 	}
 
-	// Check if user wants to rename a script
+	// Check if user filled in a new ID
 	if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newScriptFileID))
 	{
 		auto existingScriptFileIDs = _script.getAllScriptFileIDs();

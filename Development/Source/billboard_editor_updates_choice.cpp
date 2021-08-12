@@ -55,6 +55,7 @@ void BillboardEditor::_updateChoiceMenu()
 		else if (screen->getID() == "billboardEditorMenuMesh")
 		{
 			// Temporary values
+			auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
 			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
 			auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
 			auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
@@ -71,8 +72,8 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 				else if (screen->getButton("size")->isHovered())
 				{
-					_gui.getGlobalScreen()->createValueForm("sizeX", "X", _fe3d.billboardEntity_getSize(_currentBillboardID).x * 100.0f, Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-					_gui.getGlobalScreen()->createValueForm("sizeY", "Y", _fe3d.billboardEntity_getSize(_currentBillboardID).y * 100.0f, Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("sizeX", "X", size.x * 100.0f, Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("sizeY", "Y", size.y * 100.0f, Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("facingX")->isHovered())
 				{
@@ -101,18 +102,17 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Setting billboard size
-			Vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardID) * 100.0f;
-			_gui.getGlobalScreen()->checkValueForm("sizeX", newSize.x, { 0.0f });
-			_gui.getGlobalScreen()->checkValueForm("sizeY", newSize.y, { 0.0f });
-			newSize.x = max(0.0f, newSize.x / 100.0f);
-			newSize.y = max(0.0f, newSize.y / 100.0f);
-			_fe3d.billboardEntity_setSize(_currentBillboardID, newSize);
-
-			// Button text contents
-			screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
-			screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
-			screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright : OFF");
+			// Update value forms
+			if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
+			{
+				size.x = max(0.0f, size.x / 100.0f);
+				_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			}
+			if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
+			{
+				size.y = max(0.0f, size.y / 100.0f);
+				_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			}
 
 			// Reset rotations if not facing camera
 			Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);
@@ -127,7 +127,10 @@ void BillboardEditor::_updateChoiceMenu()
 			}
 			_fe3d.billboardEntity_setRotation(_currentBillboardID, rotation);
 
-			// Button text contents
+			// Update button text contents
+			screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
+			screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
+			screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright : OFF");
 			screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
 			screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 		}
@@ -135,6 +138,8 @@ void BillboardEditor::_updateChoiceMenu()
 		{
 			// Temporary values
 			auto isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
+			auto lightness = _fe3d.billboardEntity_getLightness(_currentBillboardID);
+			auto color = _fe3d.billboardEntity_getColor(_currentBillboardID);
 
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -146,13 +151,13 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 				else if (screen->getButton("lightness")->isHovered())
 				{
-					_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", _fe3d.billboardEntity_getLightness(_currentBillboardID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->createValueForm("colorR", "R", _fe3d.billboardEntity_getColor(_currentBillboardID).r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-					_gui.getGlobalScreen()->createValueForm("colorG", "G", _fe3d.billboardEntity_getColor(_currentBillboardID).g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-					_gui.getGlobalScreen()->createValueForm("colorB", "B", _fe3d.billboardEntity_getColor(_currentBillboardID).b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("texture")->isHovered())
 				{
@@ -185,25 +190,28 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Setting billboard lightness
-			float newLightness;
-			if (_gui.getGlobalScreen()->checkValueForm("lightness", newLightness, {}))
+			// Update value forms
+			if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness, {}))
 			{
-				newLightness = max(0.0f, newLightness / 100.0f);
-				_fe3d.billboardEntity_setLightness(_currentBillboardID, newLightness);
+				lightness = max(0.0f, lightness / 100.0f);
 			}
+			if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
+			{
+				color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}
+			if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
+			{
+				color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}
+			if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
+			{
+				color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}			
 
-			// Setting billboard color
-			Vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardID) * 255.0f;
-			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, {});
-			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, {});
-			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, {});
-			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
-			_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
-
-			// Button text contents
+			// Update button text contents
 			screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");
 		}
 		else if (screen->getID() == "billboardEditorMenuAnimation")
@@ -239,16 +247,17 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 			}
 
-			// Update button hoverability
-			bool playing = _fe3d.billboardEntity_isSpriteAnimationStarted(_currentBillboardID);
+			// Update buttons hoverability
+			auto playing = _fe3d.billboardEntity_isSpriteAnimationStarted(_currentBillboardID);
 			screen->getButton("animate")->setHoverable(!playing && animationRowCount != 0 && animationColumnCount != 0);
 
-			// Update value filling
+			// Update value forms
 			if (_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
 				_gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
 				_gui.getGlobalScreen()->checkValueForm("speed", animationFramestep, {}))
 			{
-				if (playing) // Only if animation is already playing
+				// Only if animation is already playing
+				if (playing)
 				{
 					_fe3d.billboardEntity_stopSpriteAnimation(_currentBillboardID);
 					_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
@@ -262,6 +271,10 @@ void BillboardEditor::_updateChoiceMenu()
 		}
 		else if (screen->getID() == "billboardEditorMenuText")
 		{
+			// Temporary values
+			auto textContent = _fe3d.billboardEntity_getTextContent(_currentBillboardID);
+			auto color = _fe3d.billboardEntity_getColor(_currentBillboardID);
+
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -287,12 +300,11 @@ void BillboardEditor::_updateChoiceMenu()
 							// Set font
 							const string newFilePath = filePath.substr(rootDirectory.size());
 							_fe3d.misc_clearFontCache(newFilePath);
-							_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID),
-								_fe3d.billboardEntity_getFontPath(_currentBillboardID));
+							_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 							_fe3d.billboardEntity_setFont(_currentBillboardID, newFilePath);
 
 							// Set default text
-							if (_fe3d.billboardEntity_getTextContent(_currentBillboardID).empty())
+							if (textContent.empty())
 							{
 								_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
 							}
@@ -305,38 +317,42 @@ void BillboardEditor::_updateChoiceMenu()
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->createValueForm("colorR", "R", _fe3d.billboardEntity_getColor(_currentBillboardID).r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-					_gui.getGlobalScreen()->createValueForm("colorG", "G", _fe3d.billboardEntity_getColor(_currentBillboardID).g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-					_gui.getGlobalScreen()->createValueForm("colorB", "B", _fe3d.billboardEntity_getColor(_currentBillboardID).b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 				else if (screen->getButton("content")->isHovered())
 				{
-					_gui.getGlobalScreen()->createValueForm("content", "Text content", _fe3d.billboardEntity_getTextContent(_currentBillboardID), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+					_gui.getGlobalScreen()->createValueForm("content", "Text content", textContent, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
 			}
 
-			// Updating buttons hoverability
-			screen->getButton("color")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID) != "");
-			screen->getButton("content")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID) != "");
-
-			// Setting text color
-			Vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardID) * 255.0f;
-			_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, {});
-			_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, {});
-			_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, {});
-			newColor.r = clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-			newColor.g = clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-			newColor.b = clamp(newColor.b / 255.0f, 0.0f, 1.0f);
-			_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
-
-			// Updating text content
-			string textContent = "";
+			// Update value forms
+			if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
+			{
+				color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}
+			if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
+			{
+				color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}
+			if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
+			{
+				color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+				_fe3d.billboardEntity_setColor(_currentBillboardID, color);
+			}
 			if (_gui.getGlobalScreen()->checkValueForm("content", textContent, {}))
 			{
 				_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
 				_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 				_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 			}
+
+			// Update buttons hoverability
+			screen->getButton("color")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID) != "");
+			screen->getButton("content")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardID) != "");
 		}
 	}
 }

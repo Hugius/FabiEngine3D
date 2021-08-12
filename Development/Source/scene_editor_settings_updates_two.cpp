@@ -52,30 +52,31 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Min distance value
-		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
-		minDistance = max(0.0f, minDistance);
-
-		// Max distance value
-		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-		maxDistance = max(0.0f, maxDistance);
-
-		// Thickness value
-		thickness *= 100.0f;
-		_gui.getGlobalScreen()->checkValueForm("thickness", thickness);
-		thickness = clamp(thickness / 100.0f, 0.0f, 1.0f);
-
-		// Color values
-		color *= 255.0f;
-		_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {});
-		_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {});
-		_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {});
-		color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
-		color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
-		color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance))
+		{
+			minDistance = max(0.0f, minDistance);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
+		{
+			maxDistance = max(0.0f, maxDistance);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("thickness", thickness))
+		{
+			thickness = clamp(thickness / 100.0f, 0.0f, 1.0f);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
+		{
+			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
+		{
+			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
+		{
+			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+		}
 
 		// Disable fog
 		if (_fe3d.gfx_isFogEnabled())
@@ -94,6 +95,9 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		screen->getButton("maxDistance")->setHoverable(isEnabled);
 		screen->getButton("thickness")->setHoverable(isEnabled);
 		screen->getButton("color")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -164,16 +168,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Intensity value
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity = max(0.0f, intensity / 100.0f);
 		}
-
-		// Multiplier value
 		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
 		{
 			multiplier = max(0.0f, multiplier / 100.0f);
@@ -195,6 +194,9 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		screen->getButton("enabled")->setHoverable(_fe3d.misc_isFileExisting(rootDirectory + flareMapPath));
 		screen->getButton("intensity")->setHoverable(isEnabled);
 		screen->getButton("multiplier")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -233,16 +235,11 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Factor value
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
 		{
 			factor = max(0.0f, factor / 100.0f);
 		}
-
-		// Speed value
 		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
 			speed = max(0.0f, speed / 100000.0f);
@@ -263,6 +260,9 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		// Update buttons hoverability
 		screen->getButton("factor")->setHoverable(isEnabled);
 		screen->getButton("speed")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -306,17 +306,11 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
-
-		// Extra intensity value
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity = max(0.0f, intensity / 100.0f);
 		}
-
-		// Blur count value
 		if (_gui.getGlobalScreen()->checkValueForm("blurs", blurCount))
 		{
 			blurCount = max(0, blurCount);
@@ -338,5 +332,9 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		screen->getButton("type")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
 		screen->getButton("blurs")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
 	}
 }

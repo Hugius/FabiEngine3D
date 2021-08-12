@@ -13,7 +13,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::loadCustomSceneFromFile() ---> no current project loaded!");
+		Logger::throwError("SceneEditor::loadCustomSceneFromFile");
 	}
 	if (_isEditorLoaded)
 	{

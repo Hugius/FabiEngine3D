@@ -132,23 +132,19 @@ void TerrainEditor::_updateBlendMapMenu()
 			}
 		}
 
-		// Check if redRepeat confirmed
+		// Update value forms
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
 		{
 			blendRepeatR = max(0.0f, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
 		}
-
-		// Check if greenRepeat confirmed
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
 		{
 			blendRepeatG = max(0.0f, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
 		}
-
-		// Check if blueRepeat confirmed
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
 		{
@@ -157,12 +153,12 @@ void TerrainEditor::_updateBlendMapMenu()
 		}
 
 		// Filling statuses
-		bool hasBlendMap = _fe3d.terrainEntity_hasBlendMap(_currentTerrainID);
-		bool hasDiffuseMapR = _fe3d.terrainEntity_hasDiffuseMapR(_currentTerrainID);
-		bool hasDiffuseMapG = _fe3d.terrainEntity_hasDiffuseMapG(_currentTerrainID);
-		bool hasDiffuseMapB = _fe3d.terrainEntity_hasDiffuseMapB(_currentTerrainID);
+		auto hasBlendMap = _fe3d.terrainEntity_hasBlendMap(_currentTerrainID);
+		auto hasDiffuseMapR = _fe3d.terrainEntity_hasDiffuseMapR(_currentTerrainID);
+		auto hasDiffuseMapG = _fe3d.terrainEntity_hasDiffuseMapG(_currentTerrainID);
+		auto hasDiffuseMapB = _fe3d.terrainEntity_hasDiffuseMapB(_currentTerrainID);
 
-		// Button hoverability
+		// Update buttons hoverability
 		screen->getButton("red")->setHoverable(hasBlendMap);
 		screen->getButton("green")->setHoverable(hasBlendMap);
 		screen->getButton("blue")->setHoverable(hasBlendMap);

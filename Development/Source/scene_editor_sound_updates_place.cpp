@@ -11,7 +11,7 @@ void SceneEditor::_updateSoundPlacing()
 			// Retrieve current position
 			auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_SPEAKER_ID);
 
-			// Update position change
+			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
 			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});

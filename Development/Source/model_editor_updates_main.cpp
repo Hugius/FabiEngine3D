@@ -139,7 +139,7 @@ void ModelEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Buttons hoverability
+		// Update buttons hoverability
 		screen->getButton("aabb")->setHoverable(!_fe3d.modelEntity_isInstanced(_currentModelID));
 	}
 	else if (screen->getID() == "modelEditorMenuMesh")
@@ -170,7 +170,7 @@ void ModelEditor::_updateModelCreating()
 	{
 		string newModelID;
 
-		// Create new model
+		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("modelCreate", newModelID, {}))
 		{
 			// @ sign not allowed

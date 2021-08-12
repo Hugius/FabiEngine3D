@@ -71,7 +71,7 @@ void AudioEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("play")->setHoverable(!isPlaying && !isPaused && isLoaded);
 		screen->getButton("resume")->setHoverable(isPaused);
 		screen->getButton("pause")->setHoverable(isPlaying);

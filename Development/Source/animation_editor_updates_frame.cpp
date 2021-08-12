@@ -96,61 +96,45 @@ void AnimationEditor::_updateFrameMenu()
 			}
 		}
 
-		// Update X transformation change
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("transformationX", transformation.x, {}))
 		{
 			transformation.x /= multiplier;
 		}
-
-		// Update Y transformation change
 		if (_gui.getGlobalScreen()->checkValueForm("transformationY", transformation.y, {}))
 		{
 			transformation.y /= multiplier;
 		}
-
-		// Update Z transformation change
 		if (_gui.getGlobalScreen()->checkValueForm("transformationZ", transformation.z, {}))
 		{
 			transformation.z /= multiplier;
 		}
-
-		// Update X rotation origin change
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginX", rotationOrigin.x, {}))
 		{
 			rotationOrigin.x /= 1000.0f;
 		}
-
-		// Update Y rotation origin change
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginY", rotationOrigin.y, {}))
 		{
 			rotationOrigin.y /= 1000.0f;
 		}
-
-		// Update Z rotation origin change
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginZ", rotationOrigin.z, {}))
 		{
 			rotationOrigin.z /= 1000.0f;
 		}
-
-		// Update X speed change
 		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedX", speed.x, {}))
 		{
 			speed.x /= 1000.0f;
 		}
-
-		// Update Y speed change
 		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedY", speed.y, {}))
 		{
 			speed.y /= 1000.0f;
 		}
-
-		// Update Z speed change
 		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedZ", speed.z, {}))
 		{
 			speed.z /= 1000.0f;
 		}
 
-		// Button text contents
+		// Update button text contents
 		if (speedType == AnimationSpeedType::LINEAR)
 		{
 			screen->getButton("speedType")->changeTextContent("Speed: LINEAR");

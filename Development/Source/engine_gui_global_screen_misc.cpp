@@ -278,7 +278,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 	// Validate existence
 	if (!_answerFormID.empty())
 	{
-		Logger::throwError("EngineGuiGlobalScreen::createAnswerForm()");
+		Logger::throwError("EngineGuiGlobalScreen::createAnswerForm");
 	}
 
 	// Create answer form

@@ -106,32 +106,32 @@ void SettingsEditor::update()
 			}
 		}
 
-		// Update forms
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
 		{
 			_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicQuality,
 				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
 				Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 		}
-		else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 		{
 			_fe3d.gfx_setShadowQuality(clamp(shadowQuality,
 				Config::MIN_SHADOW_QUALITY,
 				Config::MAX_SHADOW_QUALITY));
 		}
-		else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 		{
 			_fe3d.gfx_setReflectionQuality(clamp(reflectionQuality,
 				Config::MIN_REFLECTION_QUALITY,
 				Config::MAX_REFLECTION_QUALITY));
 		}
-		else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
 			_fe3d.gfx_setRefractionQuality(clamp(refractionQuality,
 				Config::MIN_REFRACTION_QUALITY,
 				Config::MAX_REFRACTION_QUALITY));
 		}
-		else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
 			_fe3d.misc_setMaxAudioChannels(clamp(maxAudioChannels,
 				Config::MIN_AUDIO_CHANNELS,
@@ -174,7 +174,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SettingsEditor::loadSettings() ---> no current project loaded!");
+		Logger::throwError("SettingsEditor::loadSettings");
 	}
 
 	// Compose file path
@@ -227,7 +227,7 @@ bool SettingsEditor::saveSettingsToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SettingsEditor::save() ---> no current project loaded!");
+		Logger::throwError("SettingsEditor::save");
 	}
 
 	// Compose file path

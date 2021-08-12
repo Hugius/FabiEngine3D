@@ -142,32 +142,28 @@ void TerrainEditor::_updateLightingMenu()
 			}
 		}
 
-		// Button hoverabilities
-		screen->getButton("specularFactor")->setHoverable(isSpecular);
-		screen->getButton("specularIntensity")->setHoverable(isSpecular);
-
-		// Button text contents
-		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-
-		// Update specularFactor change
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, specularFactor);
 		}
-
-		// Update specularIntensity change
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity = max(0.0f, specularIntensity / 100.0f);
 			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
 		}
-
-		// Update lightness change
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness = max(0.0f, lightness / 100.0f);
 			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
 		}
+
+		// Update buttons hoverability
+		screen->getButton("specularFactor")->setHoverable(isSpecular);
+		screen->getButton("specularIntensity")->setHoverable(isSpecular);
+
+		// Update button text contents
+		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 	}
 }

@@ -131,7 +131,7 @@ void SkyEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Options screen hoverability
+		// Update buttons hoverability
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
 	}
 }
@@ -142,7 +142,7 @@ void SkyEditor::_updateSkyCreating()
 	{
 		string newSkyID;
 
-		// Create new sky
+		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("skyCreate", newSkyID, {}))
 		{
 			// @ sign not allowed

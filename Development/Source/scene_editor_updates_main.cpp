@@ -178,7 +178,7 @@ void SceneEditor::_updateMainMenu()
 			}
 			else if (screen->getButton("create")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("newSceneName", "Create Scene", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sceneCreate", "Create Scene", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
@@ -196,9 +196,9 @@ void SceneEditor::_updateMainMenu()
 			}
 		}
 
-		// Update scene creation
+		// Check if user filled in a new ID
 		string newSceneName;
-		if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("sceneCreate", newSceneName, {}))
 		{
 			auto sceneNames = _loadSceneIDs();
 

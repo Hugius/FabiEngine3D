@@ -36,7 +36,7 @@ void TopViewportController::_updateMiscellaneous()
 {
 	bool hoverable = (_currentProjectID.empty()) ? false : !_scriptEditor.getScriptExecutor().isStarted();
 
-	// Project menus hoverability
+	// Update buttons hoverability
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("skyEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("terrainEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("waterEditor")->setHoverable(hoverable);
@@ -56,7 +56,7 @@ void TopViewportController::_updateProjectCreating()
 		// Temporary values
 		string newProjectID;
 
-		// Check if value changed
+		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Get directory path for the new project

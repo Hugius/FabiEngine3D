@@ -40,18 +40,16 @@ void SceneEditor::_updateSettingsMenu()
 			}
 		}
 
-		// Setting custom camera speed
-		_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
-		_editorSpeed = max(0.0f, _editorSpeed);
-
-		// Setting LOD distance
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {}))
+		{
+			_editorSpeed = max(0.0f, _editorSpeed);
+		}
 		if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
 		{
 			lodDistance = max(0.0f, lodDistance);
 			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
-
-		// Setting reflection height
 		if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
 		{
 			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
@@ -168,35 +166,25 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Size value
-		_gui.getGlobalScreen()->checkValueForm("size", size);
-		size = max(0.0f, size);
-
-		// Position values
-		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
-		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);
-		_gui.getGlobalScreen()->checkValueForm("positionZ", position.z);
-
-		// Center values
-		_gui.getGlobalScreen()->checkValueForm("centerX", center.x);
-		_gui.getGlobalScreen()->checkValueForm("centerY", center.y);
-		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
-
-		// Button text contents
-		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
-
-		// Lightness value
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("size", size))
+		{
+			size = max(0.0f, size);
+		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness = max(0.0f, lightness / 100.0f);
 		}
-
-		// Interval value
-		_gui.getGlobalScreen()->checkValueForm("interval", interval);
-		interval = max(0, interval);
+		if (_gui.getGlobalScreen()->checkValueForm("interval", interval))
+		{
+			interval = max(0, interval);
+		}
+		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
+		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);
+		_gui.getGlobalScreen()->checkValueForm("positionZ", position.z);
+		_gui.getGlobalScreen()->checkValueForm("centerX", center.x);
+		_gui.getGlobalScreen()->checkValueForm("centerY", center.y);
+		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
 
 		// Disable shadows
 		if (_fe3d.gfx_isShadowsEnabled())
@@ -217,6 +205,10 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("follow")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);
 		screen->getButton("interval")->setHoverable(isEnabled && isFollowingCamera);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
 }
 
@@ -229,8 +221,8 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsMotionBlur")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isMotionBlurEnabled();
-		float strength = _fe3d.gfx_getMotionBlurStrength();
+		auto isEnabled = _fe3d.gfx_isMotionBlurEnabled();
+		auto strength = _fe3d.gfx_getMotionBlurStrength();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -249,11 +241,9 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 				_gui.getGlobalScreen()->createValueForm("strength", "Strength", strength * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
-		
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+	
 
-		// Strength value
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
 			strength = max(0.0f, strength / 100.0f);
@@ -273,6 +263,9 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 
 		// Update buttons hoverability
 		screen->getButton("strength")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -285,10 +278,10 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsDof")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isDofEnabled();
-		bool dynamic = _fe3d.gfx_isDofDynamic();
-		float blurDistance = _fe3d.gfx_getDofBlurDistance();
-		float maxDistance = _fe3d.gfx_getaMaxDofDistance();
+		auto isEnabled = _fe3d.gfx_isDofEnabled();
+		auto dynamic = _fe3d.gfx_isDofDynamic();
+		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
+		auto maxDistance = _fe3d.gfx_getaMaxDofDistance();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -316,17 +309,15 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
-
-		// Blur distance value
-		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
-		blurDistance = max(0.0f, blurDistance);
-
-		// Max distance value
-		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-		maxDistance = max(0.0f, maxDistance);
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance))
+		{
+			blurDistance = max(0.0f, blurDistance);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
+		{
+			maxDistance = max(0.0f, maxDistance);
+		}
 
 		// Disable DOF
 		if (_fe3d.gfx_isDofEnabled())
@@ -344,5 +335,9 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		screen->getButton("dynamic")->setHoverable(isEnabled);
 		screen->getButton("blurDistance")->setHoverable(isEnabled);
 		screen->getButton("maxDistance")->setHoverable(isEnabled && dynamic);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
 	}
 }

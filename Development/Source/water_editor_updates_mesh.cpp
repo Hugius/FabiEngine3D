@@ -32,15 +32,15 @@ void WaterEditor::_updateMeshMenu()
 			}
 		}
 
-		// Update size changes
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
 			waterSize = max(0.0f, waterSize);
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
-
-		// Update uvRepeat changes
-		_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
-		_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
+		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
+		{
+			_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
+		}
 	}
 }

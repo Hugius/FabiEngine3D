@@ -123,12 +123,12 @@ void WaterEditor::_updateEffectsMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("isRippling")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID));
 		screen->getButton("isSpecular")->setHoverable(_fe3d.waterEntity_hasNormalMap(_currentWaterID));
 		screen->getButton("isWaving")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 
-		// Button text contents
+		// Update button text contents
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
 		screen->getButton("isWaving")->changeTextContent(isWaving ? "Waving: ON" : "Waving: OFF");

@@ -190,7 +190,6 @@ void SceneEditor::unload()
 	_activeLampID = "";
 	_loadedAabbIDs.clear();
 	_loadedSceneID = "";
-	_currentProjectID = "";
 	_currentSceneID = "";
 	_editorSpeed = 1.0f;
 	_isEditorLoaded = false;

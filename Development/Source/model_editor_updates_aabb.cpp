@@ -84,13 +84,13 @@ void ModelEditor::_updateAabbMenu()
 			}
 		}
 
-		// Button hoverabilities
+		// Update buttons hoverability
 		screen->getButton("delete")->setHoverable(_currentAabbID != "");
 		screen->getButton("toggleMove")->setHoverable(_currentAabbID != "");
 		screen->getButton("toggleResize")->setHoverable(_currentAabbID != "");
 		screen->getButton("direction")->setHoverable(_currentAabbID != "");
 
-		// Button text contents
+		// Update button text contents
 		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
 		screen->getButton("toggleMove")->changeTextContent(_isMovingToggled ? "Move: ON" : "Move: OFF");
 		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Resize: ON" : "Resize: OFF");
@@ -108,13 +108,13 @@ void ModelEditor::_updateAabbMenu()
 			}
 		}
 
-		// Filling transformation speed
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, {}))
 		{
 			_aabbTransformationSpeed /= 100.0f;
 		}
 
-		// Create AABB
+		// Check if user filled in a new ID
 		string newAabbID;
 		if (_gui.getGlobalScreen()->checkValueForm("aabbCreate", newAabbID, {}))
 		{

@@ -13,7 +13,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("AnimationEditor::loadAnimationsFromFile() ---> no current project loaded!");
+		Logger::throwError("AnimationEditor::loadAnimationsFromFile");
 	}
 
 	// Clear animations list from previous loads
@@ -191,7 +191,7 @@ bool AnimationEditor::saveAnimationsToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("AnimationEditor::saveAnimationsToFile() ---> no current project loaded!");
+		Logger::throwError("AnimationEditor::saveAnimationsToFile");
 	}
 
 	// Compose full file path

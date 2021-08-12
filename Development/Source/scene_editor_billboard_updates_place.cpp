@@ -11,7 +11,7 @@ void SceneEditor::_updateBillboardPlacing()
 			// Retrieve current position
 			auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);
 
-			// Update position change
+			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
 			_gui.getGlobalScreen()->checkValueForm("positionY", newPosition.y, {});
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});

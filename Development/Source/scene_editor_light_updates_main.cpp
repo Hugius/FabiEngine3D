@@ -73,28 +73,19 @@ void SceneEditor::_updateAmbientLightingMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Color R value conversion
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
 		{
 			ambientLightingColor.r = clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color G value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
 		{
 			ambientLightingColor.g = clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color B value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
 		{
 			ambientLightingColor.b = clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Ambient intensity value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
 		{
 			ambientLightingIntensity = max(0.0f, ambientLightingIntensity / 100.0f);
@@ -115,6 +106,9 @@ void SceneEditor::_updateAmbientLightingMenu()
 		// Update buttons hoverability
 		screen->getButton("color")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -127,11 +121,11 @@ void SceneEditor::_updateDirectionalLightingMenu()
 	if (screen->getID() == "sceneEditorMenuLightingDirectional")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isDirectionalLightingEnabled();
-		Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-		Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+		auto isEnabled = _fe3d.gfx_isDirectionalLightingEnabled();
+		auto directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+		auto directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+		auto directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
+		auto billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -167,41 +161,30 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			}
 		}
 
-		// Button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-
-		// Color R value conversion
+		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
 		{
 			directionalLightingColor.r = clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color G value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
 		{
 			directionalLightingColor.g = clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Color B value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
 		{
 			directionalLightingColor.b = clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
 		}
-
-		// Update position values
-		_gui.getGlobalScreen()->checkValueForm("positionX", directionalLightingPosition.x);
-		_gui.getGlobalScreen()->checkValueForm("positionY", directionalLightingPosition.y);
-		_gui.getGlobalScreen()->checkValueForm("positionZ", directionalLightingPosition.z);
-
-		// Directional intensity value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
 		{
 			directionalLightingIntensity = max(0.0f, directionalLightingIntensity / 100.0f);
 		}
-
-		// Update billboard size value
-		_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
-		billboardSize = max(0.0f, billboardSize);
+		if (_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize))
+		{
+			billboardSize = max(0.0f, billboardSize);
+		}
+		_gui.getGlobalScreen()->checkValueForm("positionX", directionalLightingPosition.x);
+		_gui.getGlobalScreen()->checkValueForm("positionY", directionalLightingPosition.y);
+		_gui.getGlobalScreen()->checkValueForm("positionZ", directionalLightingPosition.z);
 
 		// Update lightsource billboard
 		_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
@@ -225,6 +208,9 @@ void SceneEditor::_updateDirectionalLightingMenu()
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("intensity")->setHoverable(isEnabled);
 		screen->getButton("billboardSize")->setHoverable(isEnabled);
+
+		// Update button text contents
+		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 

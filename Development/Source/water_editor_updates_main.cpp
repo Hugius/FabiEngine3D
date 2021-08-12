@@ -141,7 +141,7 @@ void WaterEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Screen hoverabilities
+		// Update buttons hoverability
 		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 	}
@@ -153,7 +153,7 @@ void WaterEditor::_updateWaterCreating()
 	{
 		string newWaterID;
 
-		// Create new water
+		// Create if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("waterCreate", newWaterID, {}))
 		{
 			// @ sign not allowed

@@ -12,7 +12,7 @@ void ModelEditor::_updateSizeMenu()
 	{
 		// Temporary values
 		const string directions[3] = { "X", "Y", "Z" };
-		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
+		auto size = _fe3d.modelEntity_getSize(_currentModelID);
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -26,9 +26,9 @@ void ModelEditor::_updateSizeMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeX", "X", size.x * 100.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", size.y * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", size.z * 100.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("toggleResize")->isHovered())
 			{
@@ -87,28 +87,24 @@ void ModelEditor::_updateSizeMenu()
 			_fe3d.modelEntity_setSize(_currentModelID, newSize);
 		}
 
-		// Update size X
-		if (_gui.getGlobalScreen()->checkValueForm("sizeX", currentSize.x))
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
 		{
-			currentSize.x /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
+			size.x /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
+		{
+			size.y /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
+		{
+			size.z /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, size);
 		}
 
-		// Update size Y
-		if (_gui.getGlobalScreen()->checkValueForm("sizeY", currentSize.y))
-		{
-			currentSize.y /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
-		}
-
-		// Update size Z
-		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", currentSize.z))
-		{
-			currentSize.z /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
-		}
-
-		// Button text contents
+		// Update button text contents
 		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Resize: ON" : "Resize: OFF");
 		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
 	}

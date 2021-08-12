@@ -355,7 +355,6 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_SPEAKER_SIZE.y)
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_SPEAKER_SIZE);
-			_fe3d.aabbEntity_setSize(modelID, DEFAULT_SPEAKER_AABB_SIZE);
 			direction *= -1;
 		}
 
@@ -363,17 +362,13 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& direction)
 		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setSize(modelID, (DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE));
-			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_SPEAKER_AABB_SIZE * SPEAKER_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
-		Vec3 modelSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
-		Vec3 aabbSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		Vec3 modelSpeed = (Vec3(SPEAKER_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
-		aabbSpeed *= ((DEFAULT_SPEAKER_AABB_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_AABB_SIZE);
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + aabbSpeed);
 	}
 }
 
@@ -392,7 +387,6 @@ void SceneEditor::_updateLampAnimation(const string& modelID, int& direction)
 		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_LAMP_SIZE.y)
 		{
 			_fe3d.modelEntity_setSize(modelID, DEFAULT_LAMP_SIZE);
-			_fe3d.aabbEntity_setSize(modelID, DEFAULT_LAMP_AABB_SIZE);
 			direction *= -1;
 		}
 
@@ -400,16 +394,12 @@ void SceneEditor::_updateLampAnimation(const string& modelID, int& direction)
 		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
 		{
 			_fe3d.modelEntity_setSize(modelID, (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
-			_fe3d.aabbEntity_setSize(modelID, (DEFAULT_LAMP_AABB_SIZE * LAMP_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
 		Vec3 modelSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
-		Vec3 aabbSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_SIZE);
-		aabbSpeed *= ((DEFAULT_LAMP_AABB_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_AABB_SIZE);
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + aabbSpeed);
 	}
 }

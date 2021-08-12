@@ -288,11 +288,12 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
-        float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float specular = getSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
         result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
-        result += vec3(getSpecularLighting(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
+        result += vec3(specular * float(noShadowOcclusion)); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 

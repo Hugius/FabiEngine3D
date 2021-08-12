@@ -84,8 +84,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 			replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
-			// NOTE: 1 model -> 1 line in file
-
 			// Write general data
 			file <<
 				modelID << " " <<

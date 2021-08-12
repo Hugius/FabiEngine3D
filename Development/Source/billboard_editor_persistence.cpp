@@ -180,9 +180,10 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboardEntity_setVisible(billboardID, false);
 			_fe3d.billboardEntity_setSize(billboardID, size);
 			_fe3d.billboardEntity_setColor(billboardID, color);
+			_fe3d.billboardEntity_setLightness(billboardID, lightness);
 			_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
 			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
-			_fe3d.billboardEntity_setLightness(billboardID, lightness);
+			_fe3d.billboardEntity_setTransparent(billboardID, isTransparent);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
 			_fe3d.billboardEntity_setBright(billboardID, isBright);

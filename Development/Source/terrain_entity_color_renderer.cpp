@@ -17,9 +17,9 @@ void TerrainEntityColorRenderer::bind()
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_cameraFront", _renderBus.getCameraFront());
 	_shader.uploadUniform("u_ambientLightColor", _renderBus.getAmbientLightColor());
+	_shader.uploadUniform("u_ambientLightIntensity", _renderBus.getAmbientLightIntensity());
 	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightColor());
 	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_ambientLightIntensity", _renderBus.getAmbientLightIntensity());
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
 	_shader.uploadUniform("u_spotLightColor", _renderBus.getSpotLightColor());
 	_shader.uploadUniform("u_spotLightIntensity", _renderBus.getSpotLightIntensity());

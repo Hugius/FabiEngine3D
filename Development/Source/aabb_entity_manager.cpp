@@ -100,23 +100,26 @@ void AabbEntityManager::update(
 						}
 
 						// Update size (based on parent size & AABB rotation)
-						Vec3 localSize = (entity->getLocalSize() * parentEntity->getSize());
-						entity->setSize(localSize);
+						const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getSize());
 						if ((fabsf(rotation) > 45.0f && fabsf(rotation) < 135.0f) || (fabsf(rotation) > 225.0f && fabsf(rotation) < 315.0f))
 						{
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
-								entity->setSize(Vec3(localSize.y, localSize.x, localSize.z));
+								entity->setSize(Vec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
 							}
 							else if (rotationDirection == Direction::Y)
 							{
-								entity->setSize(Vec3(localSize.z, localSize.y, localSize.x));
+								entity->setSize(Vec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
 							}
 							else if (rotationDirection == Direction::Z)
 							{
-								entity->setSize(Vec3(localSize.x, localSize.z, localSize.y));
+								entity->setSize(Vec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
 							}
+						}
+						else
+						{
+							entity->setSize(newAabbSize);
 						}
 
 						// Update position (based on parent position + rotation + size)
@@ -131,9 +134,10 @@ void AabbEntityManager::update(
 							0.0f; // No rotation
 						if (roundedRotation != 0.0f)
 						{
-							/* Note:
-								X & Z directions are different, because the model is rotated around Vec3(0.0f) but is standing on Y 0.0f (local).
-								The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
+							/*
+							NOTE:
+							X & Z directions are different, because the model is rotated around Vec3(0.0f) but is standing on Y 0.0f (local).
+							The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
 							*/
 
 							// Temporary values
@@ -142,21 +146,23 @@ void AabbEntityManager::update(
 							bool isMirrored = (roundedRotation == -180.0f || roundedRotation == 180.0f);
 							localPosition = (rotationDirection == Direction::Y) ? localPosition : 
 								(entity->getLocalPosition() + localOffset) * parentEntity->getSize();
-							float yOffset = (rotationDirection == Direction::Y) ? 0.0f : 
-								-((isMirrored ? localSize.y : localSize.x) / 2.0f);
+							float yOffset;
 
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
 								rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(roundedRotation));
+								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
 							}
 							else if (rotationDirection == Direction::Y)
 							{
 								rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(roundedRotation));
+								yOffset = 0.0f;
 							}
 							else if (rotationDirection == Direction::Z)
 							{
 								rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(roundedRotation));
+								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.z) / 2.0f);
 							}
 
 							// Apply rotation

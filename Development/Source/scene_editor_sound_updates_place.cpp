@@ -17,8 +17,8 @@ void SceneEditor::_updateSoundPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, _fe3d.misc_getRaycastPointOnTerrain());
-			_fe3d.sound_setPosition(_currentPreviewSoundID, _fe3d.misc_getRaycastPointOnTerrain());
+			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, newPosition);
+			_fe3d.sound_setPosition(_currentPreviewSoundID, newPosition);
 
 			// Check if sound must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -33,7 +33,7 @@ void SceneEditor::_updateSoundPlacing()
 					goto BEGIN1;
 				}
 
-				// Stop sound playback
+				// Stop preview sound playback
 				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
 					_fe3d.sound_stop(_currentPreviewSoundID, 0);
@@ -66,7 +66,7 @@ void SceneEditor::_updateSoundPlacing()
 				// Hide preview speaker
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-				// Stop sound playback
+				// Stop preview sound playback
 				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
 					_fe3d.sound_stop(_currentPreviewSoundID, 0);
@@ -93,12 +93,8 @@ void SceneEditor::_updateSoundPlacing()
 						{
 							_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
 						}
-						else if (_fe3d.sound_isPaused(_currentPreviewSoundID))
-						{
-							_fe3d.sound_resume(_currentPreviewSoundID);
-						}
 
-						// Show preview sound
+						// Show preview speaker
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 
 						// Update position
@@ -107,13 +103,13 @@ void SceneEditor::_updateSoundPlacing()
 					}
 					else
 					{
-						// Hide preview sound
+						// Hide preview speaker
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-						// Pause sound playback
-						if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
+						// Stop preview sound playback
+						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
-							_fe3d.sound_pause(_currentPreviewSoundID);
+							_fe3d.sound_stop(_currentPreviewSoundID, 0);
 						}
 					}
 
@@ -133,7 +129,7 @@ void SceneEditor::_updateSoundPlacing()
 							goto BEGIN2;
 						}
 
-						// Stop sound playback
+						// Stop preview sound playback
 						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
 							_fe3d.sound_stop(_currentPreviewSoundID, 0);
@@ -164,7 +160,7 @@ void SceneEditor::_updateSoundPlacing()
 						// Hide preview speaker
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-						// Stop sound playback
+						// Stop preview sound playback
 						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 						{
 							_fe3d.sound_stop(_currentPreviewSoundID, 0);
@@ -177,25 +173,25 @@ void SceneEditor::_updateSoundPlacing()
 				}
 				else
 				{
-					// Hide preview sound
+					// Hide preview speaker
 					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-					// Pause sound playback
-					if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
+					// Stop preview sound playback
+					if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 					{
-						_fe3d.sound_pause(_currentPreviewSoundID);
+						_fe3d.sound_stop(_currentPreviewSoundID, 0);
 					}
 				}
 			}
 			else
 			{
-				// Hide preview sound
+				// Hide preview speaker
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
-				// Pause sound playback
-				if (_fe3d.sound_isPlaying(_currentPreviewSoundID))
+				// Stop preview sound playback
+				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
 				{
-					_fe3d.sound_pause(_currentPreviewSoundID);
+					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
 			}
 		}

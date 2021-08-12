@@ -22,17 +22,11 @@ public:
 	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor,
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 
-	// Core
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
 	void update();
-
-	// Editor scene
-	bool loadEditorSceneFromFile(const string& filename);
-	bool saveEditorSceneToFile();
-
-	// Custom scene
 	void createCustomScene(const string& sceneID);
 	void addLightingToCustomScene();
 	void addGraphicsToCustomScene();
@@ -44,17 +38,21 @@ public:
 	void addAabbToCustomScene(const string& aabbID);
 	void addLightToCustomScene(const string& lightID);
 	void addSoundToCustomScene(const string& soundID);
-	bool loadCustomSceneFromFile(const string& filename);
-	bool saveCustomSceneToFile();
-
-	// Miscellaneous
 	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
+
+	// Strings
+	const string& getLoadedSceneID();
+
+	// Booleans
 	bool isLoaded();
 	bool isSceneExisting(const string& filename);
-	const string& getLoadedSceneID();
+	bool loadEditorSceneFromFile(const string& filename);
+	bool saveEditorSceneToFile();
+	bool loadCustomSceneFromFile(const string& filename);
+	bool saveCustomSceneToFile();
 
 private:
 	// GUI

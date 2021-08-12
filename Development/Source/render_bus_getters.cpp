@@ -405,11 +405,6 @@ const bool RenderBus::isShadowFrameRenderingEnabled()
 	return _isShadowFrameRenderingEnabled;
 }
 
-const bool RenderBus::isLightedShadowingEnabled()
-{
-	return _isLightedShadowingEnabled;
-}
-
 const bool RenderBus::isDebugRenderingEnabled()
 {
 	return _isDebugRenderingEnabled;

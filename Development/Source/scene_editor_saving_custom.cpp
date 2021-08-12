@@ -556,7 +556,6 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto position = _fe3d.gfx_getShadowEye();
 			auto center = _fe3d.gfx_getShadowCenter();
 			auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-			auto isLighted = _fe3d.gfx_isLightedShadowingEnabled();
 			auto interval = _fe3d.gfx_getShadowInterval();
 
 			// Write data
@@ -567,7 +566,6 @@ bool SceneEditor::saveCustomSceneToFile()
 				_fe3d.misc_vec2str(position) << " " <<
 				_fe3d.misc_vec2str(center) << " " <<
 				isFollowingCamera << " " <<
-				isLighted << " " <<
 				interval << endl;
 		}
 

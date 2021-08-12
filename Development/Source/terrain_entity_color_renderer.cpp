@@ -40,7 +40,6 @@ void TerrainEntityColorRenderer::bind()
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_isLightedShadowingEnabled", _renderBus.isLightedShadowingEnabled());
 	_shader.uploadUniform("u_diffuseMap", 0);
 	_shader.uploadUniform("u_normalMap", 1);
 	_shader.uploadUniform("u_blendMap", 2);

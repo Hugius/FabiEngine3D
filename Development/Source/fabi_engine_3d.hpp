@@ -637,7 +637,7 @@ public:
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
 	void gfx_enableFXAA();
-	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval);
+	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
 	void gfx_enableSkyExposure(float factor, float speed);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
@@ -708,7 +708,6 @@ public:
 	const bool gfx_isMotionBlurEnabled();
 	const bool gfx_isLensFlareEnabled();
 	const bool gfx_isShadowFollowingCamera();
-	const bool gfx_isLightedShadowingEnabled();
 
 	// Server interface - setters
 	void networkServer_start(unsigned int maxClientCount);

@@ -119,7 +119,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Temporary values
 		bool isEnabled = _fe3d.gfx_isShadowsEnabled();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		bool isLighted = _fe3d.gfx_isLightedShadowingEnabled();
 		float size = _fe3d.gfx_getShadowSize();
 		float lightness = _fe3d.gfx_getShadowLightness();
 		Vec3 position = _fe3d.gfx_getShadowEye();
@@ -159,10 +158,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			{
 				isFollowingCamera = !isFollowingCamera;
 			}
-			else if (screen->getButton("lighted")->isHovered())
-			{
-				isLighted = !isLighted;
-			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
@@ -192,7 +187,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 		// Button text contents
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
-		screen->getButton("lighted")->changeTextContent(isLighted ? "Lighted: ON" : "Lighted : OFF");
 
 		// Lightness value
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
@@ -213,7 +207,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Enable shadows
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isLighted, interval);
+			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, interval);
 		}
 
 		// Update buttons hoverability
@@ -221,7 +215,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("position")->setHoverable(isEnabled);
 		screen->getButton("center")->setHoverable(isEnabled);
 		screen->getButton("follow")->setHoverable(isEnabled);
-		screen->getButton("lighted")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);
 		screen->getButton("interval")->setHoverable(isEnabled && isFollowingCamera);
 	}

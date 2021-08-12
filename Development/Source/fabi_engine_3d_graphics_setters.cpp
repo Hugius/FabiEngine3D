@@ -128,7 +128,7 @@ void FabiEngine3D::gfx_enableFXAA()
 	}
 }
 
-void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, bool isLighted, unsigned int interval)
+void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, unsigned int interval)
 {
 	if (_core->_renderBus.isShadowsEnabled())
 	{
@@ -139,7 +139,6 @@ void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float re
 		_core->_shadowGenerator.loadShadows(eye, center, size, reach, isFollowingCamera, interval);
 		_core->_renderBus.setShadowsEnabled(true);
 		_core->_renderBus.setShadowLightness(lightness);
-		_core->_renderBus.setLightedShadowingEnabled(isLighted);
 	}
 }
 
@@ -339,7 +338,6 @@ void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 		{
 			_core->_shadowGenerator.unloadShadows();
 			_core->_renderBus.setShadowLightness(0.0f);
-			_core->_renderBus.setLightedShadowingEnabled(false);
 		}
 	}
 	else

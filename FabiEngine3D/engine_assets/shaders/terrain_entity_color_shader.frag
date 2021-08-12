@@ -68,7 +68,6 @@ uniform bool u_isSpotLightEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_isShadowFrameRenderEnabled;
-uniform bool u_isLightedShadowingEnabled;
 uniform bool u_isSpecularLightEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
@@ -91,7 +90,7 @@ layout (location = 1) out vec4 o_secondaryColor;
 vec3 getNormalMapping();
 vec3 getDiffuseMapping();
 vec3 getAmbientLighting();
-vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
+vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
 vec3 getSpotLighting(vec3 normal);
 vec3 getFog(vec3 color);
@@ -106,8 +105,9 @@ void main()
 
 	// Calculate lighting
     float shadowLighting	 = getShadows();
-	vec3 ambientLighting	 = getAmbientLighting();
-	vec3 directionalLighting = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadowLighting == 1.0f)));
+	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+	vec3 ambientLighting	 = (getAmbientLighting() * shadowLighting);
+	vec3 directionalLighting = (getDirectionalLighting(normal) * shadowOcclusion);
 	vec3 pointLighting		 = getPointLighting(normal);
 	vec3 spotLighting		 = getSpotLighting(normal);
 
@@ -121,7 +121,6 @@ void main()
 	vec3 lighting = vec3(0.0f);
 	lighting += ambientLighting;
 	lighting += directionalLighting;
-	lighting *= shadowLighting;
 	lighting += pointLighting;
 	lighting += spotLighting;
 	primaryColor *= lighting;
@@ -281,7 +280,7 @@ vec3 getAmbientLighting()
 	}
 }
 
-vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
+vec3 getDirectionalLighting(vec3 normal)
 {
 	if(u_isDirectionalLightEnabled)
 	{
@@ -292,8 +291,8 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 		float specular = getSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
-        result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
-        result += vec3(specular * float(noShadowOcclusion)); // Specular
+        result += vec3(diffuse); // Diffuse
+        result += vec3(specular); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 
@@ -418,7 +417,7 @@ vec3 getFog(vec3 color)
 
 float getSpecularLighting(vec3 position, vec3 normal)
 {
-    if(u_isSpecularLightEnabled && u_isSpecularLighted)
+    if (u_isSpecularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(position - f_pos);
@@ -437,22 +436,20 @@ float getSpecularLighting(vec3 position, vec3 normal)
 
 float getShadows()
 {
-	if(u_isShadowsEnabled)
+	if (u_isShadowsEnabled)
 	{
-		float halfSize = u_shadowAreaSize / 2.0f;
+		// Temporary values
+		float halfSize = (u_shadowAreaSize / 2.0f);
+		float distance = length(f_pos.xz - u_shadowAreaCenter.xz);
 
 		// Check if fragment is within shadow area
-		if
-		(
-			abs(f_pos.x - u_shadowAreaCenter.x) <= halfSize && 
-			abs(f_pos.z - u_shadowAreaCenter.z) <= halfSize
-		)
+		if(distance <= halfSize)
 		{
 			// Variables
 			float shadow       = 0.0f;
 			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
 			float currentDepth = projCoords.z;
-			vec2 texelSize    = (vec2(1.0f) / textureSize(u_shadowMap, 0));
+			vec2 texelSize     = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
@@ -480,29 +477,21 @@ float getShadows()
 			}
 
 			// Long-distance shadows fading
-			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
-			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
+			float alpha = distance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
 			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if(u_isShadowFrameRenderEnabled)
 			{
-				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
+				if((distance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}
 			}
 
 			// Return
-			if(u_isLightedShadowingEnabled)
-			{
-				return mix(shadow, 1.0f, alpha);
-			}
-			else
-			{
-				return shadow;
-			}
+			return mix(shadow, 1.0f, alpha);
 		}
 
 		// No shadow

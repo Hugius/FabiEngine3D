@@ -423,11 +423,6 @@ void RenderBus::setShadowFrameRenderingEnabled(bool value)
 	_isShadowFrameRenderingEnabled = value;
 }
 
-void RenderBus::setLightedShadowingEnabled(bool value)
-{
-	_isLightedShadowingEnabled = value;
-}
-
 void RenderBus::setTriangleCountingEnabled(bool value)
 {
 	_isTriangleCountingEnabled = value;

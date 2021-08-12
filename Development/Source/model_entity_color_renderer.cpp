@@ -40,7 +40,6 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_isLightedShadowingEnabled", _renderBus.isLightedShadowingEnabled());
 	_shader.uploadUniform("u_skyMixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainSkyLightness", _renderBus.getMainSkyLightness());
 	_shader.uploadUniform("u_mixSkyLightness", _renderBus.getMixSkyLightness());

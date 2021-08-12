@@ -586,7 +586,6 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			float size, lightness;
 			Vec3 position, center;
 			bool isFollowingCamera;
-			bool isLighted;
 			int interval;
 
 			// Extract data
@@ -600,11 +599,10 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				center.y >>
 				center.z >>
 				isFollowingCamera >>
-				isLighted >>
 				interval;
 
 			// Enable shadows
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isLighted, interval);
+			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, interval);
 		}
 		else if (lineType == "GRAPHICS_MOTION_BLUR")
 		{

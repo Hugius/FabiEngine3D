@@ -49,7 +49,6 @@ uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
 uniform float u_alpha;
 uniform float u_minDiffuseMapAlpha;
-uniform float u_lightness;
 uniform float u_inversion;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
@@ -59,6 +58,7 @@ uniform float u_maxSpotlightAngle;
 uniform float u_spotLightIntensity;
 uniform float u_maxSpotLightDistance;
 uniform float u_skyMixValue;
+uniform float u_lightness;
 uniform float u_mainSkyLightness;
 uniform float u_mixSkyLightness;
 uniform float u_shadowLightness;
@@ -72,7 +72,6 @@ uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
 uniform bool u_isShadowFrameRenderEnabled;
-uniform bool u_isLightedShadowingEnabled;
 uniform bool u_isAmbientLightEnabled;
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isSpecularLightEnabled;
@@ -98,7 +97,7 @@ vec3 getNormalMapping();
 vec3 getDiffuseMapping();
 vec3 getEmissionMapping();
 vec3 getAmbientLighting();
-vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
+vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
 vec3 getSpotLighting(vec3 normal);
 vec3 getFog(vec3 color);
@@ -112,15 +111,16 @@ void main()
 {
     // Calculate emission mapping
     vec3 emissionMapColor = getEmissionMapping();
+	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);
 
     // Calculate normal mapping
     vec3 normal = getNormalMapping();
 
 	// Calculate lighting
-	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);
 	float shadowLighting	 = getShadows();
-	vec3 ambientLighting	 = getAmbientLighting();
-	vec3 directionalLighting = getDirectionalLighting(normal, (u_isLightedShadowingEnabled ? true : (shadowLighting == 1.0f)));
+	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
+	vec3 ambientLighting	 = (getAmbientLighting() * shadowLighting);
+	vec3 directionalLighting = (getDirectionalLighting(normal) * shadowOcclusion);
 	vec3 pointLighting		 = getPointLighting(normal);
 	vec3 spotLighting		 = getSpotLighting(normal);
 
@@ -141,7 +141,6 @@ void main()
 		vec3 lighting = vec3(0.0f);
 		lighting += ambientLighting;
 		lighting += directionalLighting;
-		lighting *= shadowLighting;
 		lighting += pointLighting;
 		lighting += spotLighting;
 		primaryColor *= lighting;
@@ -214,7 +213,7 @@ vec3 getAmbientLighting()
 	}
 }
 
-vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
+vec3 getDirectionalLighting(vec3 normal)
 {
 	if(u_isDirectionalLightEnabled)
 	{
@@ -225,8 +224,8 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 		float specular = getSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
-        result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
-        result += vec3(specular * float(noShadowOcclusion)); // Specular
+        result += vec3(diffuse); // Diffuse
+        result += vec3(specular); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 
@@ -447,14 +446,12 @@ float getShadows()
 {
 	if(u_isShadowsEnabled)
 	{
-        float halfSize = u_shadowAreaSize / 2.0f;
+        // Temporary values
+		float halfSize = (u_shadowAreaSize / 2.0f);
+		float distance = length(f_pos.xz - u_shadowAreaCenter.xz);
 
         // Check if fragment is within shadow area
-		if
-		(
-			abs(f_pos.x - u_shadowAreaCenter.x) <= (halfSize) && 
-			abs(f_pos.z - u_shadowAreaCenter.z) <= (halfSize)
-		)
+		if (distance <= halfSize)
 		{
 			// Variables
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));

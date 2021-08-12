@@ -119,7 +119,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		_updateProjectDeleting();
 
 		// Quitting with ESCAPE
-		if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && leftScreen->getID() == "main")
+		if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && (leftScreen->getID() == "main") && !_gui.getGlobalScreen()->isFocused())
 		{
 			// Check if script execution not started
 			if (!_scriptEditor.getScriptExecutor().isStarted())

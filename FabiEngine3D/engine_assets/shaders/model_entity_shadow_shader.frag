@@ -20,9 +20,9 @@ void main()
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
 	// Check if transparent
-	if(u_isTransparent)
+	if (u_isTransparent)
 	{
-		if(diffuseMapColor.a < u_minDiffuseMapAlpha) 
+		if (diffuseMapColor.a < u_minDiffuseMapAlpha) 
 		{
 			discard;
 		}

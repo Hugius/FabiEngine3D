@@ -56,7 +56,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
 
 				// Check if function call exists
-				if(executed)
+				if (executed)
 				{
 					_engineFunctionCallCount++;
 				}

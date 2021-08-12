@@ -173,7 +173,7 @@ void EngineGuiWritefield::_updateTyping()
 					}
 				}
 			}
-			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
+			else if (_minusAllowed && !_noNumbers) // Minus character (for numbers)
 			{
 				if (_fe3d.input_isKeyPressed(InputType('-')))
 				{

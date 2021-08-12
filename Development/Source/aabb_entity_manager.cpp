@@ -71,7 +71,7 @@ void AabbEntityManager::update(
 			{
 				// Try to find the parent entity
 				auto foundPair = modelEntities.find(entity->getParentID());
-				if(foundPair != modelEntities.end())
+				if (foundPair != modelEntities.end())
 				{
 					// Retrieve parent entity
 					auto parentEntity = foundPair->second;

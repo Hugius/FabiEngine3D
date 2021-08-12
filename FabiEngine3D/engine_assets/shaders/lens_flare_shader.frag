@@ -23,7 +23,7 @@ layout (location = 0) out vec4 o_finalColor;
 void main()
 {
     // Validate
-	if(!u_isLensFlareEnabled)
+	if (!u_isLensFlareEnabled)
 	{
         o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;

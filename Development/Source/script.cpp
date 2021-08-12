@@ -13,7 +13,7 @@ void Script::createScriptFile(const string& ID)
 	// Check if non-existent
 	for (const auto& file : _scriptFiles)
 	{
-		if(file->getID() == ID)
+		if (file->getID() == ID)
 		{
 			Logger::throwError("Cannot add script file with ID: \"" + ID + "\", already existing!");
 		}

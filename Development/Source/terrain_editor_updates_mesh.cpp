@@ -53,22 +53,22 @@ void TerrainEditor::_updateMeshMenu()
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
 				_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
+		}
 
-			// Check if maxHeight confirmed
-			float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-			if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
-			{
-				maxHeight = max(0.0f, maxHeight);
-				_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
-			}
+		// Update maxHeight change
+		float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
+		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
+		{
+			maxHeight = max(0.0f, maxHeight);
+			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
+		}
 
-			// Check if uvRepeat confirmed
-			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-			if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
-			{
-				uvRepeat = max(0.0f, uvRepeat);
-				_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
-			}
+		// Update uvRepeat change
+		float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
+		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
+		{
+			uvRepeat = max(0.0f, uvRepeat);
+			_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
 		}
 	}
 }

@@ -40,16 +40,16 @@ void main()
 {
 	// Calculate primary color
 	vec3 primaryColor;
-	if(u_hasDiffuseMap)
+	if (u_hasDiffuseMap)
 	{
 		// Calculate diffuse map color
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Removing white alpha background
-		if(u_isTransparent)
+		if (u_isTransparent)
 		{
-			if(diffuseMapColor.a < u_minDiffuseMapAlpha)
+			if (diffuseMapColor.a < u_minDiffuseMapAlpha)
 			{
 				discard;
 			}
@@ -91,7 +91,7 @@ void main()
 
 vec3 getFog(vec3 color)
 {
-	if(u_isFogEnabled)
+	if (u_isFogEnabled)
 	{
         // Calculate distance in world space
         float distance = length(f_pos.xyz - u_cameraPosition);

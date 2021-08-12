@@ -65,7 +65,7 @@ void main()
 mat3 calculateTbnMatrix()
 {
     // Normal mapping matrix
-    if(u_hasNormalMap)
+    if (u_hasNormalMap)
     {
         vec3 tangent = normalize(mat3(u_normalModelMatrix) * v_tangent);
 			 tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);

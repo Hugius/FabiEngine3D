@@ -98,7 +98,7 @@ vec4 calculateWaterColor()
 
 	// Depth map
 	float alpha = 1.0f;
-	if(u_transparency > 0.0f)
+	if (u_transparency > 0.0f)
 	{
 		float depth = texture(u_depthMap, vec2(texCoords.x, -texCoords.y)).r;
 		float floorDistance = convertDepthToPerspective(depth);
@@ -108,7 +108,7 @@ vec4 calculateWaterColor()
 	}
 
 	// Rippling effect
-	if(u_isRippling)
+	if (u_isRippling)
 	{
 		// DUDV mapping
 		vec2 distortedTexCoords = f_uv + texture(u_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
@@ -137,17 +137,17 @@ vec4 calculateWaterColor()
 	refractionColor *= 1.0f;
 
 	// Determine which textures to mix
-	if(u_isReflective && u_isRefractive && !u_isUnderWater) // Both
+	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Both
 	{
 		finalColor = mix(reflectionColor, refractionColor, mixFactor); // Combining reflection & refraction
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
-	else if(u_isRefractive) // Only refraction
+	else if (u_isRefractive) // Only refraction
 	{
 		finalColor = refractionColor;
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
-	else if(u_isReflective) // Only reflection
+	else if (u_isReflective) // Only reflection
 	{
 		finalColor = mix(reflectionColor, vec3(0.0f), mixFactor);
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
@@ -158,7 +158,7 @@ vec4 calculateWaterColor()
 	}
 
 	// Specular lighting
-	if(u_isSpecularLightEnabled && u_isSpecularLighted)
+	if (u_isSpecularLightEnabled && u_isSpecularLighted)
 	{
 		finalColor += getDirectionalLighting(normal);
 		finalColor += getPointLighting(normal);
@@ -170,7 +170,7 @@ vec4 calculateWaterColor()
 
 vec3 getPointLighting(vec3 normal)
 {
-	if(u_isPointLightEnabled)
+	if (u_isPointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -211,7 +211,7 @@ vec3 getPointLighting(vec3 normal)
 
 vec3 getDirectionalLighting(vec3 normal)
 {
-	if(u_isDirectionalLightEnabled)
+	if (u_isDirectionalLightEnabled)
 	{
 		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos); // Light ray
 		vec3 viewDirection = normalize(f_pos - u_cameraPosition); // View ray
@@ -231,7 +231,7 @@ vec3 getDirectionalLighting(vec3 normal)
 
 float getSpecularLighting(vec3 position, vec3 normal)
 {
-    if(u_isSpecularLightEnabled && u_isSpecularLighted)
+    if (u_isSpecularLightEnabled && u_isSpecularLighted)
     {
     	// Calculate
         vec3 lightDirection   = normalize(position - f_pos);
@@ -250,7 +250,7 @@ float getSpecularLighting(vec3 position, vec3 normal)
 
 vec3 getFog(vec3 color)
 {
-	if(u_isFogEnabled)
+	if (u_isFogEnabled)
 	{
 		// Calculate distance in world space
 		float distance = length(f_pos.xyz - u_cameraPosition);

@@ -40,7 +40,7 @@ void main()
 
 float calculateFlareVisibility()
 {
-    if(u_isLensFlareEnabled && (u_flareSourcePositionClipspace.w > 0.0f))
+    if (u_isLensFlareEnabled && (u_flareSourcePositionClipspace.w > 0.0f))
     {
         // Convert to UV space
         vec2 lightSourceClipPosition = (u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w);
@@ -55,7 +55,7 @@ float calculateFlareVisibility()
         float flareDistance = length(viewDirection);
         
         // Check if lightsource is not occluded by an object
-        if((flareFragmentDepth * u_farZ) >= abs(flareDistance))
+        if ((flareFragmentDepth * u_farZ) >= abs(flareDistance))
         {
             return 1.0f;
         }

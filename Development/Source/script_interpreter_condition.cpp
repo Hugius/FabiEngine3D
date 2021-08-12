@@ -25,7 +25,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 			index++;
 			continue;
 		}
-		else if(index == conditionString.size() - 1) // Check if last character
+		else if (index == conditionString.size() - 1) // Check if last character
 		{
 			elementBuild += c;
 			elements.push_back(elementBuild);
@@ -205,7 +205,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 				mustBeComparisonOperator = true;
 			}
 		}
-		else if(mustBeComparisonOperator)
+		else if (mustBeComparisonOperator)
 		{
 			if (elementString == NOT_KEYWORD || elementString == IS_KEYWORD || elementString == MORE_KEYWORD || elementString == LESS_KEYWORD)
 			{
@@ -267,7 +267,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 		{
 			finalCondition = finalCondition && conditions[i];
 		}
-		else if(logicalOperators[i - 1] == OR_KEYWORD) // OR
+		else if (logicalOperators[i - 1] == OR_KEYWORD) // OR
 		{
 			finalCondition = finalCondition || conditions[i];
 		}

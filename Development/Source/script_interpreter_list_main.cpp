@@ -45,7 +45,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 		else
 		{
 			// Starting build of new value
-			if(!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			if (!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
 			{
 				if (c == '[') // VEC3
 				{

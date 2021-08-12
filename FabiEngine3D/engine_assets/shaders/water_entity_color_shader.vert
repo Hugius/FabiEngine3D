@@ -41,7 +41,7 @@ void main()
 	f_uv = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_uvRepeat;
 
 	// Vertex water waves
-	if(u_isWaving)
+	if (u_isWaving)
 	{
 		// Get size of 1 texel of this texture
 		vec2 texelSize = (vec2(1.0f) / textureSize(u_displacementMap, 0));

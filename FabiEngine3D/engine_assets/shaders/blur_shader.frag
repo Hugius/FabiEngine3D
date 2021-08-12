@@ -38,13 +38,13 @@ void main()
     vec3 result = (texture(u_diffuseMap, f_uv).rgb * kernel[0] * u_intensity);
 
     // Determine blur direction
-    if(u_isHorizontal)
+    if (u_isHorizontal)
     {
         for (int i = 1; i < KERNEL_SIZE; i++)
         {
             // Left texel
             vec2 leftUV = f_uv - vec2(uvOffset.x * i, 0.0f);
-            if(leftUV.x >= 0.0f && leftUV.x <= 1.0f)
+            if (leftUV.x >= 0.0f && leftUV.x <= 1.0f)
             {
                 result += (texture(u_diffuseMap, leftUV).rgb * kernel[i] * u_intensity);
             }
@@ -55,7 +55,7 @@ void main()
 
             // Right texel
             vec2 rightUV = f_uv + vec2(uvOffset.x * i, 0.0f);
-            if(rightUV.x >= 0.0f && rightUV.x <= 1.0f)
+            if (rightUV.x >= 0.0f && rightUV.x <= 1.0f)
             {
                 result += (texture(u_diffuseMap, rightUV).rgb * kernel[i] * u_intensity);
             }
@@ -72,7 +72,7 @@ void main()
         {
             // Bottom texel
             vec2 bottomUV = f_uv - vec2(0.0f, uvOffset.y * i);
-            if(bottomUV.y >= 0.0f && bottomUV.y <= 1.0f)
+            if (bottomUV.y >= 0.0f && bottomUV.y <= 1.0f)
             {
                 result += texture(u_diffuseMap, bottomUV).rgb * kernel[i] * u_intensity;
             }
@@ -83,7 +83,7 @@ void main()
 
             // Top texel
             vec2 topUV = f_uv + vec2(0.0f, uvOffset.y * i);
-            if(topUV.y >= 0.0f && topUV.y <= 1.0f)
+            if (topUV.y >= 0.0f && topUV.y <= 1.0f)
             {
            	    result += texture(u_diffuseMap, topUV).rgb * kernel[i] * u_intensity;
             }

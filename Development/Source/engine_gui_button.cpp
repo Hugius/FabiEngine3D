@@ -147,7 +147,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 	}
 
 	// Set cursor texture to pointing
-	if(_isHovered)
+	if (_isHovered)
 	{
 		_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 	}

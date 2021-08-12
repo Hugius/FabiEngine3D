@@ -148,7 +148,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		// If printing full message, time & seperator should be printed first
 		if (messageParts.size() == 1)
 		{
-			if(alreadyExisting) // Previous message
+			if (alreadyExisting) // Previous message
 			{
 				_fe3d.textEntity_setPosition(screen->getTextfield(ID + "_time")->getEntityID(), 
 					screen->convertPosition(Vec2(-1.0f, (-1.0f + Y_OFFSET) + (floatIndex * Y_OFFSET))));

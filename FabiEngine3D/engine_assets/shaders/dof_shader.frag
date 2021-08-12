@@ -29,7 +29,7 @@ float convertDepthToPerspective(float depth);
 void main()
 {
     // Validate
-	if(!u_isDofEnabled)
+	if (!u_isDofEnabled)
 	{
         o_finalColor.rgb = texture(u_sceneMap, f_uv).rgb;
 		o_finalColor.a = 1.0f;
@@ -50,7 +50,7 @@ void main()
     float middleSmoothingDistance = (u_dofMaxDistance * 0.2f);
 
     // Check if camera is looking at a close object
-    if(middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance) || !u_isDofDynamic)
+    if (middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance) || !u_isDofDynamic)
     {
         // Distance from camera to fragment in world space
         float fragmentDistance = (currentFragmentDepth * u_farZ);

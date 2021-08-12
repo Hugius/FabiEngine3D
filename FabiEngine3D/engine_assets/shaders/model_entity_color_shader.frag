@@ -136,7 +136,7 @@ void main()
 	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
 	
 	// Apply lighting
-	if(!isBright)
+	if (!isBright)
 	{
 		vec3 lighting = vec3(0.0f);
 		lighting += ambientLighting;
@@ -159,7 +159,7 @@ void main()
 
 vec3 getNormalMapping()
 {
-    if(u_hasNormalMap)
+    if (u_hasNormalMap)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -177,7 +177,7 @@ vec3 getNormalMapping()
 
 vec3 getDiffuseMapping()
 {
-	if(!u_hasDiffuseMap)
+	if (!u_hasDiffuseMap)
 	{
 		return vec3(1.0f);
 	}
@@ -188,9 +188,9 @@ vec3 getDiffuseMapping()
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
 		// Removing alpha background
-		if(u_isTransparent)
+		if (u_isTransparent)
 		{
-			if(diffuseMapColor.a < u_minDiffuseMapAlpha)
+			if (diffuseMapColor.a < u_minDiffuseMapAlpha)
 			{
 				discard;
 			}
@@ -203,7 +203,7 @@ vec3 getDiffuseMapping()
 
 vec3 getAmbientLighting()
 {
-	if(u_isAmbientLightEnabled)
+	if (u_isAmbientLightEnabled)
 	{
 		return (u_ambientLightColor * u_ambientLightIntensity);
 	}
@@ -215,7 +215,7 @@ vec3 getAmbientLighting()
 
 vec3 getDirectionalLighting(vec3 normal)
 {
-	if(u_isDirectionalLightEnabled)
+	if (u_isDirectionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
@@ -240,7 +240,7 @@ vec3 getDirectionalLighting(vec3 normal)
 
 vec3 getPointLighting(vec3 normal)
 {
-	if(u_isPointLightEnabled)
+	if (u_isPointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -254,7 +254,7 @@ vec3 getPointLighting(vec3 normal)
 
 			// Calculate light attenuation
 			float attenuation;
-			if(u_pointLightShapes[i] == 0)
+			if (u_pointLightShapes[i] == 0)
 			{
 				float distance = length(u_pointLightPositions[i] - f_pos);
 				float averageRadius = ((u_pointLightRadiuses[i].x + u_pointLightRadiuses[i].y + u_pointLightRadiuses[i].z) / 3.0f);
@@ -292,7 +292,7 @@ vec3 getPointLighting(vec3 normal)
 
 vec3 getSpotLighting(vec3 normal)
 {
-    if(u_isSpotLightEnabled)
+    if (u_isSpotLightEnabled)
     {
     	// Calculate distance
         float fragmentDistance = abs(length(u_cameraPosition - f_pos));
@@ -327,7 +327,7 @@ vec3 getSpotLighting(vec3 normal)
 
 vec3 getEmissionMapping()
 {
-	if(u_hasEmissionMap)
+	if (u_hasEmissionMap)
 	{
 		return texture(u_emissionMap, f_uv).rgb;
 	}
@@ -339,7 +339,7 @@ vec3 getEmissionMapping()
 
 vec3 getFog(vec3 color)
 {
-	if(u_isFogEnabled)
+	if (u_isFogEnabled)
 	{
 		// Calculate
         float distance = length(f_pos.xyz - u_cameraPosition);
@@ -360,13 +360,13 @@ vec3 getFog(vec3 color)
 
 vec3 getSkyReflections(vec3 color, vec3 normal)
 {
-	if(u_isSkyReflective)
+	if (u_isSkyReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = (u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f));
 		
 		// Check if current texel allows for reflection
-		if(reflectionMapColor != vec3(0.0f))
+		if (reflectionMapColor != vec3(0.0f))
 		{
 			// Calculate
 			float mixValue        = clamp(u_skyMixValue, 0.0, 1.0f);
@@ -397,13 +397,13 @@ vec3 getSkyReflections(vec3 color, vec3 normal)
 
 vec3 getSceneReflections(vec3 color)
 {
-	if(u_isSceneReflective)
+	if (u_isSceneReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);
 		
 		// Check if current texel allows for reflection
-		if(reflectionMapColor != vec3(0.0f))
+		if (reflectionMapColor != vec3(0.0f))
 		{
 			// Calculate
 			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
@@ -425,7 +425,7 @@ vec3 getSceneReflections(vec3 color)
 
 float getSpecularLighting(vec3 position, vec3 normal)
 {
-    if(u_isSpecularLightEnabled && u_isSpecularLighted)
+    if (u_isSpecularLightEnabled && u_isSpecularLighted)
     {
     	// Calculate
         vec3 lightDirection   = normalize(position - f_pos);
@@ -444,7 +444,7 @@ float getSpecularLighting(vec3 position, vec3 normal)
 
 float getShadows()
 {
-	if(u_isShadowsEnabled)
+	if (u_isShadowsEnabled)
 	{
         // Temporary values
 		float halfSize = (u_shadowAreaSize / 2.0f);
@@ -480,7 +480,7 @@ float getShadows()
 			shadow /= 9.0f;
 			
 			// Limit shadows
-			if(shadow > 1.0f)
+			if (shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}
@@ -492,9 +492,9 @@ float getShadows()
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
-			if(u_isShadowFrameRenderEnabled)
+			if (u_isShadowFrameRenderEnabled)
 			{
-				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
+				if ((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}

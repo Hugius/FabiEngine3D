@@ -140,7 +140,7 @@ vec3 getNormalMapping()
 {
     if (u_hasNormalMap || u_hasNormalMapR || u_hasNormalMapG || u_hasNormalMapB)
     {
-		if(u_hasBlendMap) // Blendmapped mixed normal
+		if (u_hasBlendMap) // Blendmapped mixed normal
 		{
 			// Get color values of blendmap (R, G, B)
 			vec2 blendUV = f_uv / u_diffuseMapRepeat;
@@ -154,7 +154,7 @@ vec3 getNormalMapping()
 			vec3 totalNormal;
 
 			// Diffuse normal map
-			if(u_hasNormalMap)
+			if (u_hasNormalMap)
 			{
 				vec3 normal = texture(u_normalMap, f_uv).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * diffuseStrength;
@@ -165,7 +165,7 @@ vec3 getNormalMapping()
 			}
 			
 			// BlendR normal map
-			if(u_hasNormalMapR)
+			if (u_hasNormalMapR)
 			{
 				vec3 normal = texture(u_normalMapR, blendUV * u_diffuseMapRepeatR).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * rStrength;
@@ -176,7 +176,7 @@ vec3 getNormalMapping()
 			}
 
 			// BlendG normal map
-			if(u_hasNormalMapG)
+			if (u_hasNormalMapG)
 			{
 				vec3 normal = texture(u_normalMapG, blendUV * u_diffuseMapRepeatG).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * gStrength;
@@ -187,7 +187,7 @@ vec3 getNormalMapping()
 			}
 
 			// BlendB normal map
-			if(u_hasNormalMapB)
+			if (u_hasNormalMapB)
 			{
 				vec3 normal = texture(u_normalMapB, blendUV * u_diffuseMapRepeatB).rgb * 2.0f - 1.0f;
 				totalNormal += normalize(f_tbnMatrix * normal) * bStrength;
@@ -202,7 +202,7 @@ vec3 getNormalMapping()
 		}
 		else // Diffuse normal
 		{
-			if(u_hasNormalMap)
+			if (u_hasNormalMap)
 			{
 				// Calculate new normal vector
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
@@ -226,7 +226,7 @@ vec3 getNormalMapping()
 
 vec3 getDiffuseMapping()
 {
-	if(u_hasBlendMap) // Blendmapped mixed texture
+	if (u_hasBlendMap) // Blendmapped mixed texture
 	{
 		// Get color value of blendmap (R, G, B)
 		vec2 blendUV = f_uv / u_diffuseMapRepeat;
@@ -234,7 +234,7 @@ vec3 getDiffuseMapping()
 
 		// Calculate diffuse map color
 		vec3 diffuseMapColor = vec3(0.0f);
-		if(u_hasDiffuseMap)
+		if (u_hasDiffuseMap)
 		{
 			diffuseMapColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 		}
@@ -253,7 +253,7 @@ vec3 getDiffuseMapping()
 		// Return
 		return newColor;
 	}
-	else if(u_hasDiffuseMap) // Diffuse texture
+	else if (u_hasDiffuseMap) // Diffuse texture
 	{
 		// Calculate
 		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
@@ -270,7 +270,7 @@ vec3 getDiffuseMapping()
 
 vec3 getAmbientLighting()
 {
-	if(u_isAmbientLightEnabled)
+	if (u_isAmbientLightEnabled)
 	{
 		return (u_ambientLightColor * u_ambientLightIntensity);
 	}
@@ -282,7 +282,7 @@ vec3 getAmbientLighting()
 
 vec3 getDirectionalLighting(vec3 normal)
 {
-	if(u_isDirectionalLightEnabled)
+	if (u_isDirectionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
@@ -307,7 +307,7 @@ vec3 getDirectionalLighting(vec3 normal)
 
 vec3 getPointLighting(vec3 normal)
 {
-	if(u_isPointLightEnabled)
+	if (u_isPointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -321,7 +321,7 @@ vec3 getPointLighting(vec3 normal)
 
 			// Calculate light attenuation
 			float attenuation;
-			if(u_pointLightShapes[i] == 0)
+			if (u_pointLightShapes[i] == 0)
 			{
 				float distance = length(u_pointLightPositions[i] - f_pos);
 				float averageRadius = ((u_pointLightRadiuses[i].x + u_pointLightRadiuses[i].y + u_pointLightRadiuses[i].z) / 3.0f);
@@ -359,7 +359,7 @@ vec3 getPointLighting(vec3 normal)
 
 vec3 getSpotLighting(vec3 normal)
 {
-    if(u_isSpotLightEnabled)
+    if (u_isSpotLightEnabled)
     {
 		// Calculate distance
     	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
@@ -394,7 +394,7 @@ vec3 getSpotLighting(vec3 normal)
 
 vec3 getFog(vec3 color)
 {
-	if(u_isFogEnabled)
+	if (u_isFogEnabled)
 	{
 		// Calculate distance in world space
 		float distance = length(f_pos.xyz - u_cameraPosition);
@@ -443,7 +443,7 @@ float getShadows()
 		float distance = length(f_pos.xz - u_shadowAreaCenter.xz);
 
 		// Check if fragment is within shadow area
-		if(distance <= halfSize)
+		if (distance <= halfSize)
 		{
 			// Variables
 			float shadow       = 0.0f;
@@ -471,7 +471,7 @@ float getShadows()
 			shadow /= 9.0f;
 
 			// Limit shadows
-			if(shadow > 1.0f)
+			if (shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}
@@ -482,9 +482,9 @@ float getShadows()
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
-			if(u_isShadowFrameRenderEnabled)
+			if (u_isShadowFrameRenderEnabled)
 			{
-				if((distance - (halfSize * 0.99f)) > 0.0f)
+				if ((distance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}

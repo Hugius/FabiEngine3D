@@ -272,7 +272,7 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Render BILLBOARD entities
-		if(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{		
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderBillboardEntities();

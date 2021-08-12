@@ -267,7 +267,7 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 	}
 
 	// If reached end of terrain Z
-	if(z == size)
+	if (z == size)
 	{
 		z--;
 	}

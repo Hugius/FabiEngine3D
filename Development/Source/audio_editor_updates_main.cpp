@@ -181,7 +181,7 @@ void AudioEditor::_updateAudioChoosing()
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("audioList");
 
 		// Check if a audio ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -193,7 +193,7 @@ void AudioEditor::_updateAudioChoosing()
 				if (_isEditingAudio)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + _currentAudioID.substr(1), 0.025f);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + selectedButtonID.substr(1), 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), true);
 				}
 

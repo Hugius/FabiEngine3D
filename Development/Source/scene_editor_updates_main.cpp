@@ -222,7 +222,7 @@ void SceneEditor::_updateMainMenu()
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("sceneList");
-			if (selectedButtonID != "")
+			if (!selectedButtonID.empty())
 			{
 				_currentSceneID = selectedButtonID;
 

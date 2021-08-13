@@ -238,7 +238,7 @@ void TerrainEditor::_updateTerrainChoosing()
 		_fe3d.terrainEntity_select("");
 
 		// Check if a terrain ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Show terrain
 			_fe3d.terrainEntity_select("@" + selectedButtonID);
@@ -247,7 +247,7 @@ void TerrainEditor::_updateTerrainChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select terrain
-				_currentTerrainID = "@" + selectedButtonID;
+				_currentTerrainID = ("@" + selectedButtonID);
 
 				// Go to editor
 				if (_isEditingTerrain)

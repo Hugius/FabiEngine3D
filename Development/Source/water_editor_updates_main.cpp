@@ -218,7 +218,7 @@ void WaterEditor::_updateWaterChoosing()
 		_fe3d.waterEntity_select("");
 
 		// Check if a water ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Show water
 			_fe3d.waterEntity_select("@" + selectedButtonID);
@@ -227,7 +227,7 @@ void WaterEditor::_updateWaterChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select water
-				_currentWaterID = "@" + selectedButtonID;
+				_currentWaterID = ("@" + selectedButtonID);
 
 				// Go to editor
 				if (_isEditingWater)
@@ -238,7 +238,6 @@ void WaterEditor::_updateWaterChoosing()
 				}
 
 				// Miscellaneous
-				_fe3d.waterEntity_select(_currentWaterID);
 				_gui.getGlobalScreen()->deleteChoiceForm("waterList");
 				_isChoosingWater = false;
 			}

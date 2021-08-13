@@ -120,11 +120,10 @@ void AnimationEditor::_updateAnimationCreating()
 					_currentAnimationID = newAnimationID;
 
 					// Create animation
-					_animations.push_back(make_shared<Animation>(_currentAnimationID));
+					_animations.push_back(make_shared<Animation>(newAnimationID));
 
 					// Miscellaneous
-					auto textID = _gui.getGlobalScreen()->getTextField("animationID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 					_isCreatingAnimation = false;
@@ -151,34 +150,39 @@ void AnimationEditor::_updateAnimationChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 
-		// Check if a animation ID is hovered
-		if (selectedButtonID != "")
+		// Hide last model
+		if (_hoveredModelID != "")
 		{
+			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
+		}
+
+		// Check if a animation ID is hovered
+		if (!selectedButtonID.empty())
+		{
+			// Set new hovered model
+			_hoveredModelID = _getAnimation(selectedButtonID)->previewModelID;
+
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select animation
 				_currentAnimationID = selectedButtonID;
+				_hoveredModelID = "";
 
 				// Go to editor
 				if (_isEditingAnimation)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
-
-					// Show text
-					auto textID = _gui.getGlobalScreen()->getTextField("animationID")->getEntityID();
-					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + selectedButtonID, 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
-
-					// Show preview model
-					if (_fe3d.modelEntity_isExisting(_getAnimation(_currentAnimationID)->previewModelID))
-					{
-						_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->previewModelID, true);
-					}
 				}
 
 				// Miscellaneous
+				if (_fe3d.modelEntity_isExisting(_getAnimation(selectedButtonID)->previewModelID))
+				{
+					_fe3d.modelEntity_setVisible(_getAnimation(selectedButtonID)->previewModelID, true);
+				}
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
 			}
@@ -189,6 +193,16 @@ void AnimationEditor::_updateAnimationChoosing()
 			_isEditingAnimation = false;
 			_isDeletingAnimation = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("animationList");
+		}
+		else
+		{
+			_hoveredModelID = "";
+		}
+
+		// Show hovered model
+		if (_hoveredModelID != "")
+		{
+			_fe3d.modelEntity_setVisible(_hoveredModelID, true);
 		}
 	}
 }

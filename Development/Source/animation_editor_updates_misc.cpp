@@ -101,7 +101,7 @@ void AnimationEditor::_updateMiscellaneous()
 		// Wire frame model rendering
 		if (!_currentAnimationID.empty())
 		{
-			auto modelID = _getAnimation(_currentAnimationID)->previewModelID;
+			const auto modelID = _getAnimation(_currentAnimationID)->previewModelID;
 			if (_fe3d.modelEntity_isExisting(modelID))
 			{
 				if (_fe3d.input_isKeyPressed(InputType::KEY_F))
@@ -200,29 +200,30 @@ void AnimationEditor::_updateMiscellaneous()
 			}
 		}
 
-		// Update model inversion
-		if (_currentPartID.empty())
+		// Update hovered model part inversion
+		auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
+		if (partID.empty())
 		{
 			_selectedPartInversionDirection = 1;
 		}
 		else
 		{
 			// Check if inversion reached minimum
-			if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) == 0.0f)
+			if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, partID) == 0.0f)
 			{
 				_selectedPartInversionDirection *= -1;
 			}
 
 			// Check if inversion reached maximum
-			if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) == 1.0f)
+			if (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, partID) == 1.0f)
 			{
 				_selectedPartInversionDirection *= -1;
 			}
 
 			// Set model inversion
 			float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionDirection));
-			_fe3d.modelEntity_setInversion(currentAnimation->previewModelID,
-				_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, _currentPartID) + speed, _currentPartID);
+			float newInversion = (_fe3d.modelEntity_getInversion(currentAnimation->previewModelID, partID) + speed);
+			_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, newInversion, partID);
 		}
 	}
 }

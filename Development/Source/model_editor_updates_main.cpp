@@ -263,7 +263,7 @@ void ModelEditor::_updateModelChoosing()
 		}
 
 		// Check if a model ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Set new hovered model
 			_hoveredModelID = ("@" + selectedButtonID);
@@ -272,7 +272,7 @@ void ModelEditor::_updateModelChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select model
-				_currentModelID = "@" + selectedButtonID;
+				_currentModelID = ("@" + selectedButtonID);
 				_hoveredModelID = "";
 
 				// Go to editor

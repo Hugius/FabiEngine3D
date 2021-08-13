@@ -88,9 +88,13 @@ void AnimationEditor::unload()
 
 	// Reset editor properties
 	_animations.clear();
+	_animationsToStop.clear();
+	_animationsToStartAgain.clear();
 	_startedAnimations.clear();
 	_currentAnimationID = "";
 	_currentPartID = "";
+	_hoveredModelID = "";
+	_hoveredPartID = "";
 	_cameraLookatPosition = Vec3(0.0f);
 	_currentFrameIndex = 0;
 	_selectedPartInversionDirection = 1;

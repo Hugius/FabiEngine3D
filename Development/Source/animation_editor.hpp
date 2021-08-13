@@ -68,6 +68,8 @@ private:
 	string _currentProjectID = "";
 	string _currentAnimationID = "";
 	string _currentPartID = "";
+	string _hoveredModelID = "";
+	string _hoveredPartID = "";
 
 	// Vectors
 	Vec3 _cameraLookatPosition = Vec3(0.0f);

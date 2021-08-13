@@ -169,7 +169,7 @@ void ModelEditor::_updateAabbMenu()
 			}
 
 			// Check if a AABB ID is hovered
-			if (selectedButtonID != "")
+			if (!selectedButtonID.empty())
 			{
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
 				{

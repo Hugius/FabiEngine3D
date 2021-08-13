@@ -220,7 +220,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 	// Check if existing script file chosen for viewing
 	string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("scriptFileList");
-	if (selectedButtonID != "")
+	if (!selectedButtonID.empty())
 	{
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{

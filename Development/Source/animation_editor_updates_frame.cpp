@@ -160,9 +160,9 @@ void AnimationEditor::_updateFrameMenu()
 			screen->getButton("transType")->changeTextContent("Type: SCALE");
 		}
 
-		// Check if a animation partID is clicked
+		// Check if an animation part ID is clicked
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("parts");
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Check if LMB pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -170,8 +170,14 @@ void AnimationEditor::_updateFrameMenu()
 				// Check if selected part exists on preview model
 				if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 				{
+					// Reset inversion
 					_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
+
+					// Set new current part
 					_currentPartID = selectedButtonID;
+
+					// Miscellaneous
+					_hoveredPartID = "";
 					_gui.getGlobalScreen()->deleteChoiceForm("parts");
 				}
 				else
@@ -179,10 +185,26 @@ void AnimationEditor::_updateFrameMenu()
 					Logger::throwWarning("Part does not exist on current preview model!");
 				}
 			}
+			else
+			{
+				// Reset inversion
+				if (_hoveredPartID != selectedButtonID)
+				{
+					_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
+				}
+
+				// Set new hovered part
+				_hoveredPartID = selectedButtonID;
+			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
 			_gui.getGlobalScreen()->deleteChoiceForm("parts");
+			_hoveredPartID = "";
+		}
+		else
+		{
+			_hoveredPartID = "";
 		}
 	}
 }

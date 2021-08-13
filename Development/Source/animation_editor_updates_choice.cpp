@@ -194,13 +194,12 @@ void AnimationEditor::_updateChoiceMenu()
 		// Showing frame index
 		if (!isPlaying)
 		{
-			auto textID = _gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID();
-			_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
+			_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
 		// Check if a animation ID is clicked
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))

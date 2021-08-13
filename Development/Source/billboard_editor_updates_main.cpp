@@ -167,7 +167,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		}
 
 		// Check if a billboard ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Set new hovered model
 			_hoveredBillboardID = ("@" + selectedButtonID);

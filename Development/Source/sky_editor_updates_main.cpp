@@ -207,7 +207,7 @@ void SkyEditor::_updateSkyChoosing()
 		_fe3d.skyEntity_selectMainSky("@@engineBackground");
 
 		// Check if a sky ID is hovered
-		if (selectedButtonID != "")
+		if (!selectedButtonID.empty())
 		{
 			// Show sky
 			_fe3d.skyEntity_selectMainSky("@" + selectedButtonID);
@@ -216,7 +216,7 @@ void SkyEditor::_updateSkyChoosing()
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select sky
-				_currentSkyID = "@" + selectedButtonID;
+				_currentSkyID = ("@" + selectedButtonID);
 
 				// Go to editor
 				if (_isEditingSky)
@@ -227,7 +227,6 @@ void SkyEditor::_updateSkyChoosing()
 				}
 
 				// Miscellaneous
-				_fe3d.skyEntity_selectMainSky(_currentSkyID);
 				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 				_isChoosingSky = false;
 			}

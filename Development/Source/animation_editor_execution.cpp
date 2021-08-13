@@ -16,8 +16,7 @@ void AnimationEditor::_updateAnimationExecution()
 			// Showing frame index
 			if (_isEditorLoaded)
 			{
-				auto textID = _gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID();
-				_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(animation.frameIndex + 1), 0.025f);
+				_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.frameIndex + 1), 0.025f);
 			}
 
 			// Retrieve current frame

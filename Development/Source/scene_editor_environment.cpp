@@ -75,7 +75,7 @@ void SceneEditor::_updateSkyMenu()
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
-			if (selectedButtonID != "")
+			if (!selectedButtonID.empty())
 			{
 				// Delete old
 				if (_fe3d.skyEntity_isExisting(selectedButtonID))
@@ -145,7 +145,7 @@ void SceneEditor::_updateTerrainMenu()
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("terrainList");
-			if (selectedButtonID != "")
+			if (!selectedButtonID.empty())
 			{
 				// Delete old
 				if (_fe3d.terrainEntity_isExisting(selectedButtonID))
@@ -215,7 +215,7 @@ void SceneEditor::_updateWaterMenu()
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("waterList");
-			if (selectedButtonID != "")
+			if (!selectedButtonID.empty())
 			{
 				// Delete old
 				if (_fe3d.waterEntity_isExisting(selectedButtonID))

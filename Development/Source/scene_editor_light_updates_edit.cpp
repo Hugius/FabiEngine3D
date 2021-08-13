@@ -14,7 +14,7 @@ void SceneEditor::_updateLightEditing()
 	SELECTED_LAMP_ID = "";
 
 	// User must not be in placement mode
-	if ((_currentPreviewModelID.empty()) && (_currentPreviewBillboardID.empty()) && !_isPlacingLight && (_currentPreviewSoundID.empty()))
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;

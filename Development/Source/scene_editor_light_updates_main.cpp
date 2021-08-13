@@ -228,7 +228,6 @@ void SceneEditor::_updatePointLightingMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
-				_isPlacingLight = false;
 				return;
 			}
 			else if (screen->getButton("create")->isHovered())

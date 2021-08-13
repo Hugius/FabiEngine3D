@@ -19,7 +19,7 @@ void SceneEditor::_updateBillboardEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && !_isPlacingLight && _currentPreviewSoundID.empty())
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
 	{
 		// Check if user selected a billboard
 		for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())

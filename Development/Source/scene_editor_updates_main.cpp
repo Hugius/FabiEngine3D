@@ -322,6 +322,12 @@ void SceneEditor::_updateChoiceMenu()
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
 		{
+			// Stop placing
+			_currentPreviewModelID = "";
+			_currentPreviewBillboardID = "";
+			_currentPreviewSoundID = "";
+			_isPlacingLight = false;
+
 			// Save before closing
 			saveEditorSceneToFile();
 
@@ -342,6 +348,12 @@ void SceneEditor::_updateChoiceMenu()
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
 		{
+			// Stop placing
+			_currentPreviewModelID = "";
+			_currentPreviewBillboardID = "";
+			_currentPreviewSoundID = "";
+			_isPlacingLight = false;
+
 			// Clear whole scene
 			clearCurrentScene();
 

@@ -243,9 +243,9 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("modelPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.025f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("modelPropertiesMenu")->createWriteField("y", Vec2(0.0f, -0.225f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("modelPropertiesMenu")->createWriteField("z", Vec2(0.0f, -0.475f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("modelPropertiesMenu")->createButton("animation", Vec2(0.0f, -0.625f), Vec2(1.5f, 0.08f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	rightWindow->getScreen("modelPropertiesMenu")->createButton("freeze", Vec2(0.0f, -0.775f), Vec2(1.0f, 0.08f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	rightWindow->getScreen("modelPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.925f), Vec2(1.0f, 0.08f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("modelPropertiesMenu")->createButton("animation", Vec2(0.0f, -0.625f), Vec2(1.5f, 0.1f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("modelPropertiesMenu")->createButton("freeze", Vec2(0.0f, -0.775f), Vec2(1.0f, 0.1f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("modelPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.925f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Right-viewport: billboardPropertiesMenu
 	rightWindow->createScreen("billboardPropertiesMenu");
@@ -265,8 +265,33 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.025f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("y", Vec2(0.0f, -0.225f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("billboardPropertiesMenu")->createWriteField("z", Vec2(0.0f, -0.475f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("billboardPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.775f), Vec2(1.0f, 0.08f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("billboardPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.625f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
+	// Right-viewport: soundPropertiesMenu
+	rightWindow->createScreen("soundPropertiesMenu");
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.7f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.45f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.2f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("xMinus", Vec2(-0.75f, 0.7f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("yMinus", Vec2(-0.75f, 0.45f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("zMinus", Vec2(-0.75f, 0.2f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.7f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.45f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.2f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("distance", Vec2(0.0f, 0.06f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("distancePlus", Vec2(0.75f, -0.05f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("distanceMinus", Vec2(-0.75f, -0.05f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("distance", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("soundPropertiesMenu")->createTextField("volume", Vec2(0.0f, -0.19f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumePlus", Vec2(0.75f, -0.3f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumeMinus", Vec2(-0.75f, -0.3f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("volume", Vec2(0.0f, -0.3f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("soundPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.45f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	
 	// Right-viewport: pointLightPropertiesMenu
 	rightWindow->createScreen("pointLightPropertiesMenu");
 	rightWindow->getScreen("pointLightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Light Menu", Vec3(0.0f, 1.0f, 0.0f));
@@ -285,37 +310,12 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("pointLightPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.125f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointLightPropertiesMenu")->createWriteField("y", Vec2(0.0f, -0.1f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointLightPropertiesMenu")->createWriteField("z", Vec2(0.0f, -0.325f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("pointLightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.44f), Vec2(1.5f, 0.1f), "Intensity", Vec3(1.0f));
+	rightWindow->getScreen("pointLightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.44f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f));
 	rightWindow->getScreen("pointLightPropertiesMenu")->createButton("intensityPlus", Vec2(0.75f, -0.55f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointLightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.55f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointLightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.55f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointLightPropertiesMenu")->createButton("shape", Vec2(0.0f, -0.725f), Vec2(0.75f, 0.2f), "shape_circle.png", Vec3(1.0f));
-	rightWindow->getScreen("pointLightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.0f, 0.08f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-
-	// Right-viewport: soundPropertiesMenu
-	rightWindow->createScreen("soundPropertiesMenu");
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.8f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.6f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.35f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.7f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.45f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.2f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("xMinus", Vec2(-0.75f, 0.7f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("yMinus", Vec2(-0.75f, 0.45f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("zMinus", Vec2(-0.75f, 0.2f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.7f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.45f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.2f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("distance", Vec2(0.0f, -0.325f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("distancePlus", Vec2(0.75f, -0.425f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("distanceMinus", Vec2(-0.75f, -0.425f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("distance", Vec2(0.0f, -0.425f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createTextField("volume", Vec2(0.0f, -0.55f), Vec2(1.25f, 0.1f), "Max volume", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumePlus", Vec2(0.75f, -0.65f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("volumeMinus", Vec2(-0.75f, -0.65f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("soundPropertiesMenu")->createWriteField("volume", Vec2(0.0f, -0.65f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("soundPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("pointLightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SceneEditor::_unloadGUI()

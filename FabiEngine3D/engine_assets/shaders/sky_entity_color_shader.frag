@@ -17,6 +17,9 @@ uniform float u_mixValue;
 uniform vec3 u_mainColor;
 uniform vec3 u_mixColor;
 
+// Boolean uniforms
+uniform bool u_isWireFramed;
+
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
@@ -24,6 +27,14 @@ layout (location = 1) out vec4 o_secondaryColor;
 // Process fragment
 void main()
 {
+	// Wire frame color
+	if(u_isWireFramed)
+	{
+		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return;
+	}
+
 	// Sky colors
 	vec3 mainColor = texture(u_mainCubeMap, f_uv).rgb;
 	vec3 mixColor  = texture(u_mixCubeMap, f_uv).rgb;

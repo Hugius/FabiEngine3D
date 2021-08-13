@@ -45,6 +45,7 @@ uniform float u_fogThickness;
 uniform int u_pointLightCount;
 
 // Boolean uniforms
+uniform bool u_isWireFramed;
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isRippling;
@@ -70,6 +71,14 @@ float convertDepthToPerspective(float depth);
 // Process fragment
 void main()
 {
+	// Wire frame color
+	if(u_isWireFramed)
+	{
+		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return;
+	}
+
 	// Main water color
 	vec4 waterColor = calculateWaterColor();
 

@@ -119,6 +119,7 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
+		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_diffuseMapRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_diffuseMapRepeatR", entity->getBlendRepeatR());

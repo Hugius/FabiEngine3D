@@ -37,6 +37,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 		}
 
 		// Shader uniforms
+		_shader.uploadUniform("u_isWireFramed", (mainEntity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());		
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());

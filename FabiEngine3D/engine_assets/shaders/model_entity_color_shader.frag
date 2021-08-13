@@ -67,6 +67,7 @@ uniform float u_shadowLightness;
 uniform int u_pointLightShapes[MAX_POINT_LIGHT_COUNT];
 
 // Boolean uniforms
+uniform bool u_isWireFramed;
 uniform bool u_isTransparent;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
@@ -109,6 +110,14 @@ float getSpecularLighting(vec3 position, vec3 normal);
 // Process fragment
 void main()
 {
+	// Wire frame color
+	if(u_isWireFramed)
+	{
+		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return;
+	}
+
     // Calculate emission mapping
     vec3 emissionMapColor = getEmissionMapping();
 	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);

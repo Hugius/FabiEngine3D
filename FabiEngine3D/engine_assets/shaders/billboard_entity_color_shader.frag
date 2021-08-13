@@ -23,6 +23,7 @@ uniform float u_minDiffuseMapAlpha;
 uniform float u_alpha;
 
 // Boolean uniforms
+uniform bool u_isWireFramed;
 uniform bool u_isFogEnabled;
 uniform bool u_isTransparent;
 uniform bool u_hasDiffuseMap;
@@ -38,6 +39,14 @@ vec3 getFog(vec3 color);
 // Process fragment
 void main()
 {
+	// Wire frame color
+	if(u_isWireFramed)
+	{
+		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return;
+	}
+
 	// Calculate primary color
 	vec3 primaryColor;
 	if (u_hasDiffuseMap)

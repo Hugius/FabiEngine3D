@@ -60,6 +60,7 @@ uniform float u_shadowLightness;
 uniform int u_pointLightShapes[MAX_POINT_LIGHT_COUNT];
 
 // Boolean uniforms
+uniform bool u_isWireFramed;
 uniform bool u_isSpecularLighted;
 uniform bool u_isAmbientLightEnabled;
 uniform bool u_isDirectionalLightEnabled;
@@ -100,6 +101,14 @@ float getShadows();
 // Process fragment
 void main()
 {
+	// Wire frame color
+	if(u_isWireFramed)
+	{
+		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		return;
+	}
+
 	// Calculate normal mapping
     vec3 normal = getNormalMapping();
 

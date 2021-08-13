@@ -118,6 +118,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getPosition().z + (entity->getSize() / 2.0f));
 
 		// Shader uniforms
+		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader.uploadUniform("u_waveHeight", entity->getWaveHeight());

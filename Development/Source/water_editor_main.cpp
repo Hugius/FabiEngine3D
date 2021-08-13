@@ -44,7 +44,7 @@ void WaterEditor::load()
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("waterID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("waterID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("waterEditorControls");
 	_isEditorLoaded = true;
 }
@@ -77,7 +77,7 @@ void WaterEditor::unload()
 	_isDeletingWater = false;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextfield("waterID");
+	_gui.getGlobalScreen()->deleteTextField("waterID");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if (_fe3d.camera_isThirdPersonViewEnabled())
 	{

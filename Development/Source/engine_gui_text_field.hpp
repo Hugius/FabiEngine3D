@@ -2,12 +2,12 @@
 
 #include "fabi_engine_3d.hpp"
 
-class EngineGuiTextfield final
+class EngineGuiTextField final
 {
 public:
-	EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
+	EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
 		string textContent, Vec3 color, bool isCentered = true, bool isDynamic = false);
-	~EngineGuiTextfield();
+	~EngineGuiTextField();
 
 	void setVisible(bool isVisible);
 	void changeTextContent(const string& content);

@@ -55,8 +55,8 @@ void SceneEditor::_selectModel(const string& modelID)
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
-		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Selected model: " + rawID, 0.025f);
+		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Selected model: " + rawID, 0.025f);
 	}
 }
 
@@ -70,19 +70,19 @@ void SceneEditor::_activateModel(const string& modelID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	// Filling writefields
+	// Filling writeFields
 	Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string tempID = modelID;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
+	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Active model: " + rawID, 0.025f);
 }
 
 void SceneEditor::_selectBillboard(const string& billboardID)
@@ -101,8 +101,8 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), true);
-		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
+		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
+		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Selected billboard: " + rawID, 0.025f);
 	}
 }
 
@@ -116,19 +116,19 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	// Filling writefields
+	// Filling writeFields
 	Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the billboardID and updating the text content
 	string tempID = billboardID;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
+	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Active billboard: " + rawID, 0.025f);
 }
 
 void SceneEditor::_selectSound(const string& soundID)
@@ -147,8 +147,8 @@ void SceneEditor::_selectSound(const string& soundID)
 		reverse(tempID.begin(), tempID.end());
 		string rawID = tempID.substr(tempID.find('_') + 1);
 		reverse(rawID.begin(), rawID.end());
-		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), true);
-		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), "Selected sound: " + rawID, 0.025f);
+		_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+		_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Selected sound: " + rawID, 0.025f);
 	}
 }
 
@@ -157,41 +157,41 @@ void SceneEditor::_activateSound(const string& soundID)
 	// Set ID
 	_activeSpeakerID = ("@@speaker_" + soundID);
 
-	// Filling writefields
+	// Filling writeFields
 	Vec3 position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
 	float maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
 	float maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWritefield("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("volume")->changeTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("distance")->changeTextContent(to_string(static_cast<int>(maxDistance)));
 
 	// Removing the unique number from the soundID and updating the text content
 	string tempID = soundID;
 	reverse(tempID.begin(), tempID.end());
 	string rawID = tempID.substr(tempID.find('_') + 1);
 	reverse(rawID.begin(), rawID.end());
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), true);
-	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
 }
 
 void SceneEditor::_deactivateModel()
 {
 	_activeModelID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), false);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 }
 
 void SceneEditor::_deactivateBillboard()
 {
 	_activeBillboardID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), false);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 }
 
 void SceneEditor::_deactivateSound()
 {
 	_activeSpeakerID = "";
-	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), false);
+	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 }
 
 vector<string> SceneEditor::_loadSceneIDs()
@@ -237,11 +237,11 @@ void SceneEditor::_deleteSceneFile(const string& sceneID)
 	}
 }
 
-void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, 
+void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, 
 	float multiplier, float minimum, float maximum)
 {
 	// Temporary values
-	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWritefield(writefieldID);
+	auto writeField = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writeFieldID);
 
 	// Plus & minus button handling
 	if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
@@ -252,33 +252,33 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		}
 	}
 
-	// Writefield pre-update
-	if (!writefield->isActive())
+	// WriteField pre-update
+	if (!writeField->isActive())
 	{
-		writefield->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 
-	// Writefield handling
-	if (writefield->getTextContent().empty())
+	// WriteField handling
+	if (writeField->getTextContent().empty())
 	{
 		value = 0.0f; // Reset value to default
 	}
 	else
 	{
 		// Check if something is filled in
-		if (writefield->isActive())
+		if (writeField->isActive())
 		{
-			value = (static_cast<float>(stoi(writefield->getTextContent())) / multiplier); // Update value in realtime
+			value = (static_cast<float>(stoi(writeField->getTextContent())) / multiplier); // Update value in realtime
 		}
 	}
 
 	// Clamp value range
 	value = clamp(value, minimum, maximum);
 
-	// Writefield post-update
-	if (!writefield->isActive())
+	// WriteField post-update
+	if (!writeField->isActive())
 	{
-		writefield->changeTextContent(to_string(static_cast<int>(value * multiplier)));
+		writeField->changeTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

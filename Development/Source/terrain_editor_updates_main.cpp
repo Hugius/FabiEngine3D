@@ -118,7 +118,7 @@ void TerrainEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), false);
 				_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
 				_fe3d.terrainEntity_select("");
 				_currentTerrainID = "";
@@ -203,8 +203,8 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.terrainEntity_select(newTerrainID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
 							_isEditingTerrain = true;
 						}
@@ -253,8 +253,8 @@ void TerrainEditor::_updateTerrainChoosing()
 				if (_isEditingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("terrainID")->getEntityID(), true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

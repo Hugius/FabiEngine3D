@@ -123,10 +123,10 @@ void AnimationEditor::_updateAnimationCreating()
 					_animations.push_back(make_shared<Animation>(_currentAnimationID));
 
 					// Miscellaneous
-					auto textID = _gui.getGlobalScreen()->getTextfield("animationID")->getEntityID();
+					auto textID = _gui.getGlobalScreen()->getTextField("animationID")->getEntityID();
 					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationID")->getEntityID(), true);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationFrame")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 					_isCreatingAnimation = false;
 					_isEditingAnimation = true;
 
@@ -166,10 +166,10 @@ void AnimationEditor::_updateAnimationChoosing()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 					// Show text
-					auto textID = _gui.getGlobalScreen()->getTextfield("animationID")->getEntityID();
+					auto textID = _gui.getGlobalScreen()->getTextField("animationID")->getEntityID();
 					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationID")->getEntityID(), true);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("animationFrame")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), true);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), true);
 
 					// Show preview model
 					if (_fe3d.modelEntity_isExisting(_getAnimation(_currentAnimationID)->previewModelID))

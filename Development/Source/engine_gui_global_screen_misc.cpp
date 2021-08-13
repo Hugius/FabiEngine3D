@@ -121,19 +121,19 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	// Create value form
 	_valueFormIDs.push_back(ID);
 	createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-	createTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
-	createWritefield(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
-	getWritefield(ID)->changeTextContent(valueString);
+	createTextField(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+	createWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+	getWriteField(ID)->changeTextContent(valueString);
 
-	// GUI focus & set first writefield active
+	// GUI focus & set first writeField active
 	if (!_isFocused)
 	{
-		getWritefield(ID)->setActive(true);
+		getWriteField(ID)->setActive(true);
 		_isFocused = true;
 	}
 
 	// Add done & cancel buttons
-	if (!checkButton("value_form_done"))
+	if (!isButtonExisting("value_form_done"))
 	{
 		createButton("value_form_done", buttonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.12f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
 		createButton("value_form_cancel", buttonsPosition + Vec2(0.15f, -0.2f), Vec2(0.18f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
@@ -148,7 +148,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	{
 		bool done = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
-		bool entered = getWritefield(ID)->confirmedInput();
+		bool entered = getWriteField(ID)->confirmedInput();
 
 		// Check if user confirmed or cancelled
 		if (done || entered || cancelled)
@@ -156,9 +156,9 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			if (done || entered) // Pressed done or ENTER
 			{
 				// Retrieve content
-				auto content = getWritefield(ID)->getTextContent();
+				auto content = getWriteField(ID)->getTextContent();
 				
-				// Check if writefield is not empty
+				// Check if writeField is not empty
 				if (content.empty())
 				{
 					return false;
@@ -175,7 +175,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 
 				// Apply to value
 				valueString = content;
-				changed = getWritefield(ID)->hasTextContentChanged();
+				changed = getWriteField(ID)->hasTextContentChanged();
 			}
 
 			// Remove valueform(s)
@@ -206,7 +206,7 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 
 	// Create choice form
 	createRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-	createTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+	createTextField(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
 	createScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(0.25f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), Vec3(1.0f), Vec3(0.0f), Vec2(0.075f, 0.2f));
 	createButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
@@ -259,7 +259,7 @@ void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 
 	// Delete choice form
 	deleteRectangle(_choiceFormID);
-	deleteTextfield(_choiceFormID);
+	deleteTextField(_choiceFormID);
 	deleteScrollingList(_choiceFormID);
 	deleteButton("choice_form_cancel");
 
@@ -283,7 +283,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 
 	// Create answer form
 	createRectangle("question", position, Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-	createTextfield("question", position, Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+	createTextField("question", position, Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
 	createButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.1f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
 	createButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.1f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
 	
@@ -310,7 +310,7 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 
 bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 {
-	if (checkButton("answer_form_no") && (ID == _answerFormID))
+	if (isButtonExisting("answer_form_no") && (ID == _answerFormID))
 	{
 		if (getButton("answer_form_no")->isHovered() && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -334,7 +334,7 @@ void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 
 	// Delete answer form
 	deleteRectangle("question");
-	deleteTextfield("question");
+	deleteTextField("question");
 	deleteButton("answer_form_yes");
 	deleteButton("answer_form_no");
 
@@ -356,8 +356,8 @@ void EngineGuiGlobalScreen::_updateValueFormDeleting()
 		for (const auto& tempID : _valueFormIDs)
 		{
 			deleteRectangle(tempID);
-			deleteTextfield(tempID);
-			deleteWritefield(tempID);
+			deleteTextField(tempID);
+			deleteWriteField(tempID);
 		}
 		_valueFormIDs.clear();
 

@@ -1,9 +1,9 @@
-#include "engine_gui_writefield.hpp"
+#include "engine_gui_write_field.hpp"
 
 #include <map>
 #include <windows.h>
 
-EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
+EngineGuiWriteField::EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 	:
 	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "", textColor, textHoverColor, false, true),
 	_noNumbers(noNumbers),
@@ -12,17 +12,17 @@ EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& paren
 	_noLetters(noLetters),
 	_minusAllowed(minusAllowed)
 {
-	_fe3d.textEntity_setTextContent(_textfield->getEntityID(), "|", CHAR_WIDTH);
+	_fe3d.textEntity_setTextContent(_textField->getEntityID(), "|", CHAR_WIDTH);
 }
 
-void EngineGuiWritefield::update(bool hoverable)
+void EngineGuiWriteField::update(bool hoverable)
 {
 	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
 	_updateTyping();
 }
 
-void EngineGuiWritefield::_updateActivation()
+void EngineGuiWriteField::_updateActivation()
 {
 	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
@@ -40,7 +40,7 @@ void EngineGuiWritefield::_updateActivation()
 	}
 }
 
-void EngineGuiWritefield::_updateTyping()
+void EngineGuiWriteField::_updateTyping()
 {
 	if (_isActive)
 	{
@@ -62,7 +62,7 @@ void EngineGuiWritefield::_updateTyping()
 		}
 
 		// Check if not writing out of border
-		if ((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textfield->getOriginalSize().x)
+		if ((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textField->getOriginalSize().x)
 		{
 			// Letter characters
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
@@ -216,7 +216,7 @@ void EngineGuiWritefield::_updateTyping()
 		}
 
 		// Update text content with or without bar
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
+		_fe3d.textEntity_setTextContent(_textField->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		// Input confirmation
 		if (_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
@@ -231,40 +231,40 @@ void EngineGuiWritefield::_updateTyping()
 	else
 	{
 		// Update text content
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, CHAR_WIDTH);
+		_fe3d.textEntity_setTextContent(_textField->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}
 }
 
-void EngineGuiWritefield::setActive(bool active)
+void EngineGuiWriteField::setActive(bool active)
 {
 	_isActive = active;
 }
 
-void EngineGuiWritefield::setPermActive(bool active)
+void EngineGuiWriteField::setPermActive(bool active)
 {
 	_isActive = active;
 	_mustBeActive = active;
 }
 
-bool EngineGuiWritefield::confirmedInput()
+bool EngineGuiWriteField::confirmedInput()
 {
 	return _confirmedInput;
 }
 
-bool EngineGuiWritefield::isActive()
+bool EngineGuiWriteField::isActive()
 {
 	return _isActive;
 }
 
-bool EngineGuiWritefield::hasTextContentChanged()
+bool EngineGuiWriteField::hasTextContentChanged()
 {
 	bool result = (_lastTextContent != _currentTextContent);
 	_lastTextContent = _currentTextContent;
 	return result;
 }
 
-const string EngineGuiWritefield::getTextContent()
+const string EngineGuiWriteField::getTextContent()
 {
 	// Check if user filled in a minus without a number
 	if (_currentTextContent == "-" && _noSpecials && _minusAllowed)
@@ -277,7 +277,7 @@ const string EngineGuiWritefield::getTextContent()
 	}
 }
 
-void EngineGuiWritefield::changeTextContent(const string& content)
+void EngineGuiWriteField::changeTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

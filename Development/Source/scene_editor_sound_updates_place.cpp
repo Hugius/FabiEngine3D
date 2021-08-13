@@ -73,7 +73,7 @@ void SceneEditor::_updateSoundPlacing()
 				}
 
 				// Miscellaneous
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 				_currentPreviewSoundID = "";
 			}
 		}
@@ -167,7 +167,7 @@ void SceneEditor::_updateSoundPlacing()
 						}
 
 						// Miscellaneous
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), false);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 						_currentPreviewSoundID = "";
 					}
 				}

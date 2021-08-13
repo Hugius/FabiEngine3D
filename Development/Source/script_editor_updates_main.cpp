@@ -92,7 +92,7 @@ void ScriptEditor::_updateGUI()
 		screen->getButton("delete")->setHoverable(_currentScriptFileID != "");
 
 		// Update button text contents
-		screen->getTextfield("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
+		screen->getTextField("lineCount")->changeTextContent("Lines: " + to_string(_script.getTotalLineCount()));
 	}
 }
 

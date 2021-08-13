@@ -26,11 +26,11 @@
     <ClCompile Include="..\..\Source\engine_gui_rectangle.cpp" />
     <ClCompile Include="..\..\Source\engine_gui_screen_main.cpp" />
     <ClCompile Include="..\..\Source\engine_gui_screen_misc.cpp" />
-    <ClCompile Include="..\..\Source\engine_gui_scrollinglist.cpp" />
-    <ClCompile Include="..\..\Source\engine_gui_textfield.cpp" />
+    <ClCompile Include="..\..\Source\engine_gui_scrolling_list.cpp" />
+    <ClCompile Include="..\..\Source\engine_gui_text_field.cpp" />
     <ClCompile Include="..\..\Source\engine_gui_viewport.cpp" />
     <ClCompile Include="..\..\Source\engine_gui_window.cpp" />
-    <ClCompile Include="..\..\Source\engine_gui_writefield.cpp" />
+    <ClCompile Include="..\..\Source\engine_gui_write_field.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\engine_gui_button.hpp" />
@@ -38,11 +38,11 @@
     <ClInclude Include="..\..\Source\engine_gui_manager.hpp" />
     <ClInclude Include="..\..\Source\engine_gui_rectangle.hpp" />
     <ClInclude Include="..\..\Source\engine_gui_screen.hpp" />
-    <ClInclude Include="..\..\Source\engine_gui_scrollinglist.hpp" />
-    <ClInclude Include="..\..\Source\engine_gui_textfield.hpp" />
+    <ClInclude Include="..\..\Source\engine_gui_scrolling_list.hpp" />
+    <ClInclude Include="..\..\Source\engine_gui_text_field.hpp" />
     <ClInclude Include="..\..\Source\engine_gui_viewport.hpp" />
     <ClInclude Include="..\..\Source\engine_gui_window.hpp" />
-    <ClInclude Include="..\..\Source\engine_gui_writefield.hpp" />
+    <ClInclude Include="..\..\Source\engine_gui_write_field.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

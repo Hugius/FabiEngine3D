@@ -126,20 +126,20 @@ void SceneEditor::_updateBillboardEditing()
 			// Enabling all axes by default
 			screen->getButton("xMinus")->setHoverable(true);
 			screen->getButton("xPlus")->setHoverable(true);
-			screen->getWritefield("x")->setHoverable(true);
+			screen->getWriteField("x")->setHoverable(true);
 			screen->getButton("yMinus")->setHoverable(true);
 			screen->getButton("yPlus")->setHoverable(true);
-			screen->getWritefield("y")->setHoverable(true);
+			screen->getWriteField("y")->setHoverable(true);
 			screen->getButton("zMinus")->setHoverable(true);
 			screen->getButton("zPlus")->setHoverable(true);
-			screen->getWritefield("z")->setHoverable(true);
+			screen->getWriteField("z")->setHoverable(true);
 
 			// Disabling Z axis for scaling operations on a billboard
 			if (!screen->getButton("size")->isHoverable())
 			{
 				screen->getButton("zMinus")->setHoverable(false);
 				screen->getButton("zPlus")->setHoverable(false);
-				screen->getWritefield("z")->setHoverable(false);
+				screen->getWriteField("z")->setHoverable(false);
 			}
 
 			// Apply position, rotationm, size
@@ -177,7 +177,7 @@ void SceneEditor::_updateBillboardEditing()
 		// Check if billboard is still selected or active
 		if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID.empty())
 		{
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), false);
+			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 		}
 		else
 		{
@@ -185,7 +185,7 @@ void SceneEditor::_updateBillboardEditing()
 				_selectedLampID.empty() && _activeLampID.empty() &&
 				_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("billboardID")->getEntityID(), true);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 			}
 		}
 	}

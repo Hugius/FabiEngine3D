@@ -1,4 +1,5 @@
 #include "engine_gui_viewport.hpp"
+#include "logger.hpp"
 
 EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 position, Vec2 size, Vec3 color)
 	:
@@ -94,5 +95,5 @@ shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiViewport::getWindow");
 }

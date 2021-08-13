@@ -102,10 +102,10 @@ void SceneEditor::load()
 	_fe3d.lightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
 	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
-	// Create ID textfields
-	_gui.getGlobalScreen()->createTextfield("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	// Create ID TextFields
+	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("soundID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.collision_enableCameraResponse(true, true, true);
@@ -197,10 +197,10 @@ void SceneEditor::unload()
 	_isDeletingScene = false;
 	_isEditorLoaded = false;
 
-	// Delete ID textfields
-	_gui.getGlobalScreen()->deleteTextfield("modelID");
-	_gui.getGlobalScreen()->deleteTextfield("billboardID");
-	_gui.getGlobalScreen()->deleteTextfield("soundID");
+	// Delete ID TextFields
+	_gui.getGlobalScreen()->deleteTextField("modelID");
+	_gui.getGlobalScreen()->deleteTextField("billboardID");
+	_gui.getGlobalScreen()->deleteTextField("soundID");
 
 	// Miscellaneous
 	_fe3d.collision_disableCameraResponse();

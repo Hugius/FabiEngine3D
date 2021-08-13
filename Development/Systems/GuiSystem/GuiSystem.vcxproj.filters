@@ -21,7 +21,7 @@
     <ClCompile Include="..\..\Source\engine_gui_screen_main.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\engine_gui_scrollinglist.cpp">
+    <ClCompile Include="..\..\Source\engine_gui_scrolling_list.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\engine_gui_button.cpp">
@@ -33,7 +33,7 @@
     <ClCompile Include="..\..\Source\engine_gui_screen_misc.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\engine_gui_textfield.cpp">
+    <ClCompile Include="..\..\Source\engine_gui_text_field.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\engine_gui_viewport.cpp">
@@ -42,7 +42,7 @@
     <ClCompile Include="..\..\Source\engine_gui_window.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\engine_gui_writefield.cpp">
+    <ClCompile Include="..\..\Source\engine_gui_write_field.cpp">
       <Filter>Elements</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="..\..\Source\engine_gui_manager.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\engine_gui_scrollinglist.hpp">
+    <ClInclude Include="..\..\Source\engine_gui_scrolling_list.hpp">
       <Filter>Elements</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\engine_gui_rectangle.hpp">
@@ -62,7 +62,7 @@
     <ClInclude Include="..\..\Source\engine_gui_screen.hpp">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\engine_gui_textfield.hpp">
+    <ClInclude Include="..\..\Source\engine_gui_text_field.hpp">
       <Filter>Elements</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\engine_gui_viewport.hpp">
@@ -71,7 +71,7 @@
     <ClInclude Include="..\..\Source\engine_gui_window.hpp">
       <Filter>Elements</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\engine_gui_writefield.hpp">
+    <ClInclude Include="..\..\Source\engine_gui_write_field.hpp">
       <Filter>Elements</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\engine_gui_button.hpp">

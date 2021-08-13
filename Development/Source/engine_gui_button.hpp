@@ -2,7 +2,7 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_rectangle.hpp"
-#include "engine_gui_textfield.hpp"
+#include "engine_gui_text_field.hpp"
 
 class EngineGuiButton
 {
@@ -24,7 +24,7 @@ public:
 	const string& getParentID();
 
 	shared_ptr<EngineGuiRectangle> getRectangle();
-	shared_ptr<EngineGuiTextfield> getTextfield();
+	shared_ptr<EngineGuiTextField> getTextField();
 
 protected:
 	FabiEngine3D& _fe3d;
@@ -36,7 +36,7 @@ protected:
 	const Vec3 _textHoverColor;
 
 	shared_ptr<EngineGuiRectangle> _rectangle = nullptr;
-	shared_ptr<EngineGuiTextfield> _textfield = nullptr;
+	shared_ptr<EngineGuiTextField> _textField = nullptr;
 
 	bool _isHovered = false;
 	bool _isHoverable = true;

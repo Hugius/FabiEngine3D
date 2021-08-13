@@ -21,11 +21,11 @@ void EngineGuiScreen::update(bool hoverable)
 		scrollingList->setVisible(_isActive);
 	}
 
-	// Update writefields
-	for (const auto& writefield : _writefields)
+	// Update writeFields
+	for (const auto& writeField : _writeFields)
 	{
-		writefield->update(hoverable);
-		writefield->setVisible(_isActive);
+		writeField->update(hoverable);
+		writeField->setVisible(_isActive);
 	}
 
 	// Update buttons
@@ -41,25 +41,23 @@ void EngineGuiScreen::update(bool hoverable)
 		rectangle->setVisible(_isActive);
 	}
 
-	// Update textfields
-	for (const auto& textfield : _textfields)
+	// Update TextFields
+	for (const auto& TextField : _textFields)
 	{
-		textfield->setVisible(_isActive);
+		TextField->setVisible(_isActive);
 	}
 }
 
-void EngineGuiScreen::createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,
-	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
+void EngineGuiScreen::createScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
 {
 	auto dimensions = _convertDimensions(position, size);
 	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
-void EngineGuiScreen::createWritefield(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
-	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
+void EngineGuiScreen::createWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
+	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
 }
 
 void EngineGuiScreen::createButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor)
@@ -86,10 +84,10 @@ void EngineGuiScreen::createRectangle(const string& ID, Vec2 position, Vec2 size
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
-void EngineGuiScreen::createTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
+void EngineGuiScreen::createTextField(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), textContent, textColor, isCentered, isDynamic));
+	_textFields.push_back(make_shared<EngineGuiTextField>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), textContent, textColor, isCentered, isDynamic));
 }
 
 void EngineGuiScreen::deleteScrollingList(const string& ID)
@@ -108,20 +106,20 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 	Logger::throwError("Cannot not delete scrollingList with ID \"" + ID + "\"!");
 }
 
-void EngineGuiScreen::deleteWritefield(const string& ID)
+void EngineGuiScreen::deleteWriteField(const string& ID)
 {
-	// Delete writefield
-	for (size_t i = 0; i < _writefields.size(); i++)
+	// Delete writeField
+	for (size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if (ID == _writefields[i]->getID())
+		if (ID == _writeFields[i]->getID())
 		{
-			_writefields.erase(_writefields.begin() + i);
+			_writeFields.erase(_writeFields.begin() + i);
 			return;
 		}
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete writefield with ID \"" + ID + "\"!");
+	Logger::throwError("Cannot not delete writeField with ID \"" + ID + "\"!");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)
@@ -156,18 +154,18 @@ void EngineGuiScreen::deleteRectangle(const string& ID)
 	Logger::throwError("Cannot not delete rectangle with ID \"" + ID + "\"!");
 }
 
-void EngineGuiScreen::deleteTextfield(const string& ID)
+void EngineGuiScreen::deleteTextField(const string& ID)
 {
-	// Delete textfield
-	for (size_t i = 0; i < _textfields.size(); i++)
+	// Delete TextField
+	for (size_t i = 0; i < _textFields.size(); i++)
 	{
-		if (ID == _textfields[i]->getID())
+		if (ID == _textFields[i]->getID())
 		{
-			_textfields.erase(_textfields.begin() + i);
+			_textFields.erase(_textFields.begin() + i);
 			return;
 		}
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete textfield with ID \"" + ID + "\"!");
+	Logger::throwError("Cannot not delete TextField with ID \"" + ID + "\"!");
 }

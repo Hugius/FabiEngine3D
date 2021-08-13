@@ -135,7 +135,7 @@ private:
 	void _deactivateModel();
 	void _deactivateBillboard();
 	void _deactivateSound();
-	void _handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, float multiplier = 1.0f,
+	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	// Instances

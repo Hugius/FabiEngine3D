@@ -113,7 +113,7 @@ void ModelEditor::_updateChoiceMenu()
 				_isEditingModel = false;
 				_currentModelID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 				return;
 			}
 			else if (screen->getButton("mesh")->isHovered())
@@ -225,8 +225,8 @@ void ModelEditor::_updateModelCreating()
 							_loadedModelIDs.push_back(newModelID);
 
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 							_isCreatingModel = false;
 							_isEditingModel = true;
 						}
@@ -279,8 +279,8 @@ void ModelEditor::_updateModelChoosing()
 				if (_isEditingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 				}
 
 				// Miscellaneous

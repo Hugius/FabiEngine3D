@@ -147,5 +147,5 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiWindow::getScreen");
 }

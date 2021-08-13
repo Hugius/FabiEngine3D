@@ -114,7 +114,7 @@ void SkyEditor::_updateChoiceMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), false);
 				_fe3d.skyEntity_setWireFramed(_currentSkyID, false);
 				_fe3d.skyEntity_selectMainSky("@@engineBackground");
 				_currentSkyID = "";
@@ -172,8 +172,8 @@ void SkyEditor::_updateSkyCreating()
 							_fe3d.skyEntity_selectMainSky(newSkyID);
 							
 							// Miscellaneous
-							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
-							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), true);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + newSkyID.substr(1), 0.025f);
+							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
 							_isCreatingSky = false;
 							_isEditingSky = true;
 						}
@@ -203,9 +203,15 @@ void SkyEditor::_updateSkyChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("skyList");
 
+		// Hide last sky
+		_fe3d.skyEntity_selectMainSky("@@engineBackground");
+
 		// Check if a sky ID is hovered
 		if (selectedButtonID != "")
 		{
+			// Show sky
+			_fe3d.skyEntity_selectMainSky("@" + selectedButtonID);
+
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
@@ -216,14 +222,12 @@ void SkyEditor::_updateSkyChoosing()
 				if (_isEditingSky)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
-					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("skyID")->getEntityID(), true);
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), "Sky: " + _currentSkyID.substr(1), 0.025f);
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("skyID")->getEntityID(), true);
 				}
 
-				// Show entity
-				_fe3d.skyEntity_selectMainSky(_currentSkyID);
-
 				// Miscellaneous
+				_fe3d.skyEntity_selectMainSky(_currentSkyID);
 				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 				_isChoosingSky = false;
 			}

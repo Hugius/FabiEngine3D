@@ -49,11 +49,11 @@ void SceneEditor::_updateLightEditing()
 							rightWindow->getScreen("pointLightPropertiesMenu")->getButton("radius")->setHoverable(true);
 							rightWindow->getScreen("pointLightPropertiesMenu")->getButton("color")->setHoverable(true);
 
-							// Filling writefields
+							// Filling writeFields
 							Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_LAMP_ID);
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWritefield("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 						}
 					}
 				}

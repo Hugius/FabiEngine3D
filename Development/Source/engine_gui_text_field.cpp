@@ -1,6 +1,6 @@
-#include "engine_gui_textfield.hpp"
+#include "engine_gui_text_field.hpp"
 
-EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 color, bool isCentered, bool isDynamic)
+EngineGuiTextField::EngineGuiTextField(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 color, bool isCentered, bool isDynamic)
 	:
 	_fe3d(fe3d),
 	_ID(ID),
@@ -18,17 +18,17 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.textEntity_setTextContent(_entityID, textContent);
 }
 
-EngineGuiTextfield::~EngineGuiTextfield()
+EngineGuiTextField::~EngineGuiTextField()
 {
 	_fe3d.textEntity_delete(_entityID);
 }
 
-void EngineGuiTextfield::setVisible(bool isVisible)
+void EngineGuiTextField::setVisible(bool isVisible)
 {
 	_fe3d.textEntity_setVisible(_entityID, isVisible);
 }
 
-void EngineGuiTextfield::changeTextContent(const string& content)
+void EngineGuiTextField::changeTextContent(const string& content)
 {
 	// Check if text content changed
 	if (content != _fe3d.textEntity_getTextContent(_entityID))
@@ -40,47 +40,47 @@ void EngineGuiTextfield::changeTextContent(const string& content)
 	}
 }
 
-void EngineGuiTextfield::updateOriginalPosition()
+void EngineGuiTextField::updateOriginalPosition()
 {
 	_originalPosition = _fe3d.textEntity_getPosition(_entityID);
 }
 
-void EngineGuiTextfield::updateOriginalSize()
+void EngineGuiTextField::updateOriginalSize()
 {
 	_originalSize = _fe3d.textEntity_getSize(_entityID);
 }
 
-void EngineGuiTextfield::updateOriginalColor()
+void EngineGuiTextField::updateOriginalColor()
 {
 	_originalColor = _fe3d.textEntity_getColor(_entityID);
 }
 
-const Vec2 EngineGuiTextfield::getOriginalPosition()
+const Vec2 EngineGuiTextField::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-const Vec2 EngineGuiTextfield::getOriginalSize()
+const Vec2 EngineGuiTextField::getOriginalSize()
 {
 	return _originalSize;
 }
 
-const Vec3 EngineGuiTextfield::getOriginalColor()
+const Vec3 EngineGuiTextField::getOriginalColor()
 {
 	return _originalColor;
 }
 
-const string& EngineGuiTextfield::getID()
+const string& EngineGuiTextField::getID()
 {
 	return _ID;
 }
 
-const string& EngineGuiTextfield::getEntityID()
+const string& EngineGuiTextField::getEntityID()
 {
 	return _entityID;
 }
 
-const string& EngineGuiTextfield::getParentID()
+const string& EngineGuiTextField::getParentID()
 {
 	return _parentID;
 }

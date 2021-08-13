@@ -1,4 +1,5 @@
 #include "engine_gui_screen.hpp"
+#include "logger.hpp"
 
 void EngineGuiScreen::show()
 {
@@ -38,29 +39,69 @@ Vec2 EngineGuiScreen::convertSize(Vec2 size)
 	return buttonSize;
 }
 
-bool EngineGuiScreen::checkScrollingList(const string& ID)
+bool EngineGuiScreen::isScrollingListExisting(const string& ID)
 {
-	return getScrollingList(ID) != nullptr;
+	for (const auto& scrollingList : _scrollingLists)
+	{
+		if (ID == scrollingList->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool EngineGuiScreen::checkWritefield(const string& ID)
+bool EngineGuiScreen::isWriteFieldExisting(const string& ID)
 {
-	return getWritefield(ID) != nullptr;
+	for (const auto& writeField : _writeFields)
+	{
+		if (ID == writeField->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool EngineGuiScreen::checkButton(const string& ID)
+bool EngineGuiScreen::isButtonExisting(const string& ID)
 {
-	return getButton(ID) != nullptr;
+	for (const auto& button : _buttons)
+	{
+		if (ID == button->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool EngineGuiScreen::checkRectangle(const string& ID)
+bool EngineGuiScreen::isRectangleExisting(const string& ID)
 {
-	return getRectangle(ID) != nullptr;
+	for (const auto& rectangle : _rectangles)
+	{
+		if (ID == rectangle->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-bool EngineGuiScreen::checkTextfield(const string& ID)
+bool EngineGuiScreen::isTextFieldExisting(const string& ID)
 {
-	return getTextfield(ID) != nullptr;
+	for (const auto& textField : _textFields)
+	{
+		if (ID == textField->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const string& ID)
@@ -73,20 +114,20 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiScreen::getScrollingList");
 }
 
-shared_ptr<EngineGuiWritefield> EngineGuiScreen::getWritefield(const string& ID)
+shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 {
-	for (const auto& writefield : _writefields)
+	for (const auto& writeField : _writeFields)
 	{
-		if (ID == writefield->getID())
+		if (ID == writeField->getID())
 		{
-			return writefield;
+			return writeField;
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiScreen::getWriteField");
 }
 
 shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
@@ -99,7 +140,7 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiScreen::getButton");
 }
 
 shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
@@ -112,20 +153,20 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiScreen::getRectangle");
 }
 
-shared_ptr<EngineGuiTextfield> EngineGuiScreen::getTextfield(const string& ID)
+shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
 {
-	for (const auto& textfield : _textfields)
+	for (const auto& TextField : _textFields)
 	{
-		if (ID == textfield->getID())
+		if (ID == TextField->getID())
 		{
-			return textfield;
+			return TextField;
 		}
 	}
 
-	return nullptr;
+	Logger::throwError("EngineGuiScreen::getTextField");
 }
 
 vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()
@@ -133,9 +174,9 @@ vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()
 	return _scrollingLists;
 }
 
-vector<shared_ptr<EngineGuiWritefield>>& EngineGuiScreen::getWritefields()
+vector<shared_ptr<EngineGuiWriteField>>& EngineGuiScreen::getWriteFields()
 {
-	return _writefields;
+	return _writeFields;
 }
 
 vector<shared_ptr<EngineGuiButton>>& EngineGuiScreen::getButtons()
@@ -148,9 +189,9 @@ vector<shared_ptr<EngineGuiRectangle>>& EngineGuiScreen::getRectangles()
 	return _rectangles;
 }
 
-vector<shared_ptr<EngineGuiTextfield>>& EngineGuiScreen::getTextfields()
+vector<shared_ptr<EngineGuiTextField>>& EngineGuiScreen::getTextFields()
 {
-	return _textfields;
+	return _textFields;
 }
 
 Vec4 EngineGuiScreen::_convertDimensions(Vec2 position, Vec2 size)

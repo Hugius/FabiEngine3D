@@ -1,11 +1,11 @@
-#include "engine_gui_scrollinglist.hpp"
+#include "engine_gui_scrolling_list.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
 EngineGuiScrollingList::EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
 	:
-	EngineGuiRectangle(fe3d, parentID + "_scrollinglist", ID, position, size, color),
+	EngineGuiRectangle(fe3d, parentID + "_scrollingList", ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -38,7 +38,7 @@ void EngineGuiScrollingList::createButton(const string& ID, string textContent)
 	
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
-	string textID = _buttons.back()->getTextfield()->getEntityID();
+	string textID = _buttons.back()->getTextField()->getEntityID();
 	_fe3d.imageEntity_setMinPosition(rectangleID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
 	_fe3d.textEntity_setMinPosition(textID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
 	_fe3d.imageEntity_setMaxPosition(rectangleID, Vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
@@ -60,7 +60,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 			for (size_t j = 0; j < _buttons.size(); j++)
 			{
 				buttonIDs.push_back(_buttons[j]->getID());
-				textContents.push_back(_fe3d.textEntity_getTextContent(_buttons[j]->getTextfield()->getEntityID()));
+				textContents.push_back(_fe3d.textEntity_getTextContent(_buttons[j]->getTextField()->getEntityID()));
 			}
 
 			// Delete all buttons
@@ -78,7 +78,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Button with ID \"" + ID + "\" not deleted from scrollinglist with ID \"" + _ID + "\"!");
+	Logger::throwError("Button with ID \"" + ID + "\" not deleted from scrollingList with ID \"" + _ID + "\"!");
 }
 
 void EngineGuiScrollingList::deleteButtons()
@@ -175,13 +175,13 @@ void EngineGuiScrollingList::_updateScolling()
 		for (const auto& button : _buttons)
 		{
 			string rectangleID = button->getRectangle()->getEntityID();
-			string textID = button->getTextfield()->getEntityID();
+			string textID = button->getTextField()->getEntityID();
 
 			// Determine whether moving or resetting the positions
 			if (mustReset)
 			{
 				_fe3d.imageEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
-				_fe3d.textEntity_setPosition(textID, button->getTextfield()->getOriginalPosition());
+				_fe3d.textEntity_setPosition(textID, button->getTextField()->getOriginalPosition());
 			}
 			else
 			{

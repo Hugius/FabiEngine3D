@@ -89,8 +89,8 @@ void SceneEditor::_updateSoundPlacingMenu()
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 						_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
 						_fe3d.sound_play(_currentPreviewSoundID, -1, 0);
-						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), true);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
+						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Sound: " + _currentPreviewSoundID.substr(1), 0.025f);
 						_fe3d.misc_centerCursor();
 						
 						// Add position value forms for placing without terrain

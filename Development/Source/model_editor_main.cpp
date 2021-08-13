@@ -52,8 +52,8 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->createTextfield("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->createTextfield("aabbID", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->createTextField("aabbID", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_fe3d.misc_setLevelOfDetailDistance(numeric_limits<float>::max());
 	_isEditorLoaded = true;
@@ -102,8 +102,8 @@ void ModelEditor::unload()
 	_transformationDirection = Direction::X;
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->deleteTextfield("modelID");
-	_gui.getGlobalScreen()->deleteTextfield("aabbID");
+	_gui.getGlobalScreen()->deleteTextField("modelID");
+	_gui.getGlobalScreen()->deleteTextField("aabbID");
 	if (_fe3d.misc_isAabbFrameRenderingEnabled())
 	{
 		_fe3d.misc_disableAabbFrameRendering();

@@ -298,7 +298,7 @@ void SceneEditor::_updateModelEditing()
 		// Check if model is still selected or active
 		if (SELECTED_MODEL_ID.empty() && ACTIVE_MODEL_ID.empty())
 		{
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), false);
+			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 		}
 		else
 		{
@@ -306,7 +306,7 @@ void SceneEditor::_updateModelEditing()
 				_selectedLampID.empty() && _activeLampID.empty() &&
 				_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextfield("modelID")->getEntityID(), true);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 			}
 		}
 	}

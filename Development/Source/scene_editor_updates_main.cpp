@@ -15,10 +15,6 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateEnvironmentMenu();
-	}
-	if (_isEditorLoaded)
-	{
 		_updateSkyMenu();
 	}
 	if (_isEditorLoaded)
@@ -293,9 +289,17 @@ void SceneEditor::_updateChoiceMenu()
 				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 				return;
 			}
-			else if (screen->getButton("environment")->isHovered())
+			else if (screen->getButton("sky")->isHovered())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSky");
+			}
+			else if (screen->getButton("terrain")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuTerrain");
+			}
+			else if (screen->getButton("water")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuWater");
 			}
 			else if (screen->getButton("model")->isHovered())
 			{

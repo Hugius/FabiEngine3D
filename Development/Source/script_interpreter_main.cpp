@@ -169,9 +169,13 @@ void ScriptInterpreter::load()
 	// No sky at default
 	_fe3d.skyEntity_selectMainSky("");
 
-	// Load preview environments
+	// Load preview skies
 	_skyEditor.loadSkyEntitiesFromFile();
+
+	// Load preview terrains
 	_terrainEditor.loadTerrainEntitiesFromFile();
+
+	// Load preview waters
 	_waterEditor.loadWaterEntitiesFromFile();
 
 	// Load preview models

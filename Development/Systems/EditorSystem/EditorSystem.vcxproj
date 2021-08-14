@@ -36,9 +36,14 @@
     <ClCompile Include="..\..\Source\billboard_editor_main.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_appearance.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp" />
-    <ClCompile Include="..\..\Source\billboard_editor_updates_choice.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_mesh.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_text.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_sky_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_terrain_updates_main.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_main.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_persistence.cpp" />
@@ -76,7 +81,7 @@
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_place.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_creation.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_environment.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_water_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_gui.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_light_updates_edit.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_light_updates_place.cpp" />

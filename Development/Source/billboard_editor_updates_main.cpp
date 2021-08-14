@@ -15,6 +15,22 @@ void BillboardEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateMeshMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAppearanceMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAnimationMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateTextMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateBillboardCreating();
 	}
 	if (_isEditorLoaded)
@@ -91,6 +107,51 @@ void BillboardEditor::_updateMainMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 		}
+	}
+}
+
+void BillboardEditor::_updateChoiceMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "billboardEditorMenuChoice")
+	{
+		// Check if input received
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
+				_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+				_currentBillboardID = "";
+				_isEditingBillboard = false;
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
+				return;
+			}
+			else if (screen->getButton("mesh")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMesh");
+			}
+			else if (screen->getButton("appearance")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAppearance");
+			}
+			else if (screen->getButton("animation")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAnimation");
+			}
+			else if (screen->getButton("text")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuText");
+			}
+		}
+
+		// Update buttons hoverability
+		screen->getButton("animation")->setHoverable(!_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID).empty());
+		screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID).empty());
 	}
 }
 

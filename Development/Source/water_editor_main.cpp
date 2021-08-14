@@ -31,7 +31,7 @@ void WaterEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
-	// 3D environment
+	// Editor models
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
 	_fe3d.modelEntity_setPosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
@@ -60,12 +60,11 @@ void WaterEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
-	// 3D environment
-	_fe3d.modelEntity_delete("@@cube");
-	_fe3d.modelEntity_delete("@@grid");
-
-	// Delete entities
+	// Delete waters
 	unloadWaterEntities();
+
+	// Editor models
+	_fe3d.modelEntity_deleteAll();
 
 	// Reset editor properties
 	_loadedWaterIDs.clear();

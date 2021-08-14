@@ -100,9 +100,8 @@ void TopViewportController::_updateProjectScreenManagement()
 			}
 			else if (topScreen->getButton("quitEngine")->isHovered())
 			{
-				// Check if currently in an editor (except for: scene editor & environment editor)
-				if (_currentProjectID != "" && leftScreen->getID() != "main" && 
-					leftScreen->getID() != "sceneEditorMenuMain" && leftScreen->getID() != "environmentEditorMenuMain")
+				// Check if currently in an editor (except for scene editor)
+				if (_currentProjectID != "" && leftScreen->getID() != "main" && leftScreen->getID() != "sceneEditorMenuMain")
 				{
 					_gui.getGlobalScreen()->createAnswerForm("quit", "Save Changes?", Vec2(0.0f, 0.25f));
 				}

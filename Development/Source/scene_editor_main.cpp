@@ -43,12 +43,16 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_setCameraFacingX("@@lightSource", true);
 	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
 
-	// Preview environment loading
+	// Load preview skies
 	_skyEditor.loadSkyEntitiesFromFile();
+
+	// Load preview terrains
 	_terrainEditor.loadTerrainEntitiesFromFile();
+
+	// Load preview waters
 	_waterEditor.loadWaterEntitiesFromFile();
 
-	// Preview models loading
+	// Load preview models
 	_modelEditor.loadModelEntitiesFromFile();
 	for (const auto& modelID : _modelEditor.getLoadedModelIDs())
 	{
@@ -60,10 +64,10 @@ void SceneEditor::load()
 		}
 	}
 
-	// Preview animations loading
+	// Load preview animations
 	_animationEditor.loadAnimationsFromFile(false);
 
-	// Preview billboards loading
+	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
 	for (const auto& billboardID : _billboardEditor.getLoadedBillboardIDs())
 	{
@@ -75,7 +79,7 @@ void SceneEditor::load()
 		}
 	}
 
-	// Preview audio loading
+	// Load preview sounds
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
 	_fe3d.modelEntity_setSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
@@ -90,7 +94,7 @@ void SceneEditor::load()
 			createButton(audioID, audioID.substr(1));
 	}
 
-	// Preview point light loading
+	// Load preview light
 	_fe3d.modelEntity_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d.modelEntity_setSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LAMP_ID, false);
@@ -126,15 +130,13 @@ void SceneEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disablePointLighting(true);
 
-	// Unload environment preview entities
+	// Unload preview entities
 	_skyEditor.unloadSkyEntities();
 	_terrainEditor.unloadTerrainEntities();
 	_waterEditor.unloadWaterEntities();
-
-	// Delete other preview entities
-	_fe3d.sound_deleteAll();
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
+	_fe3d.sound_deleteAll();
 	_fe3d.lightEntity_deleteAll();
 
 	// Reset editor properties

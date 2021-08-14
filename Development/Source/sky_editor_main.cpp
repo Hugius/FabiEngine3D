@@ -37,7 +37,7 @@ void SkyEditor::unload()
 	// Default graphics
 	_fe3d.gfx_disableMotionBlur(true);
 
-	// Delete entities
+	// Delete skies
 	unloadSkyEntities();
 
 	// Reset editor properties

@@ -268,9 +268,9 @@ private:
 	Vec3 _mixSkyColor = Vec3(1.0f);
 
 	// Floats
-	float _ambientLightIntensity = 0.0f;
-	float _directionalLightIntensity = 0.0f;
-	float _spotLightIntensity = 0.0f;
+	float _ambientLightIntensity = 1.0f;
+	float _directionalLightIntensity = 1.0f;
+	float _spotLightIntensity = 1.0f;
 	float _maxSpotLightAngle = 0.0f;
 	float _maxSpotLightDistance = 0.0f;
 	float _fogMinDistance = 0.0f;

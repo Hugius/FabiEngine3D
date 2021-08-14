@@ -57,7 +57,6 @@ private:
 	// Voids
 	void _loadGUI();
 	void _unloadGUI();
-	void _updateEnvironmentMenu();
 	void _updateSkyMenu();
 	void _updateTerrainMenu();
 	void _updateWaterMenu();

@@ -67,9 +67,6 @@
     <Filter Include="Scene Editor\Miscellaneous">
       <UniqueIdentifier>{5aa80d36-fbba-4b8a-8a17-87b4ad255715}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Environment">
-      <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene Editor\Persistence">
       <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
     </Filter>
@@ -142,6 +139,15 @@
     <Filter Include="Scene Editor\Sound">
       <UniqueIdentifier>{a79fe924-4760-4e94-b817-3591b6e1133b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene Editor\Sky">
+      <UniqueIdentifier>{3316dca3-322a-4803-a69a-feeebefa98f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Terrain">
+      <UniqueIdentifier>{3face351-f6d1-425f-bba7-cafe1f428f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Water">
+      <UniqueIdentifier>{7a1a04ff-1353-4638-9e4a-1b3e6d8b4503}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation_editor_main.cpp">
@@ -195,7 +201,7 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_choice.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_mesh.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\sky_editor_misc.cpp">
@@ -296,9 +302,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_sound_updates_main.cpp">
       <Filter>Scene Editor\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_environment.cpp">
-      <Filter>Scene Editor\Environment</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_editor_main.cpp">
       <Filter>Script Editor\Core</Filter>
@@ -401,6 +404,24 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_saving.cpp">
       <Filter>Scene Editor\Persistence\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_sky_updates_main.cpp">
+      <Filter>Scene Editor\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_water_updates_main.cpp">
+      <Filter>Scene Editor\Water</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_terrain_updates_main.cpp">
+      <Filter>Scene Editor\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates_appearance.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates_text.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp">
+      <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

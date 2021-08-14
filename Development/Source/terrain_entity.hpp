@@ -132,7 +132,7 @@ private:
 	float _size = 0.0f;
 	float _lightness = 1.0f;
 	float _specularLightingFactor = 1.0f;
-	float _specularLightingIntensity = 0.0f;
+	float _specularLightingIntensity = 1.0f;
 
 	// Booleans
 	bool _isSpecularLighted = false;

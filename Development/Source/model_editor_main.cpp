@@ -39,7 +39,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 	_fe3d.gfx_enableMotionBlur(0.1f);
 	
-	// 3D environment
+	// Editor models
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
 	_fe3d.modelEntity_setPosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");

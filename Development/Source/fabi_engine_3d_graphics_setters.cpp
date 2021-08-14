@@ -223,8 +223,8 @@ void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 
 		if (resetProperties)
 		{
-			_core->_renderBus.setAmbientLightColor(0.0f);
-			_core->_renderBus.setAmbientLightIntensity(0.0f);
+			_core->_renderBus.setAmbientLightColor(1.0f);
+			_core->_renderBus.setAmbientLightIntensity(1.0f);
 		}
 	}
 	else
@@ -242,8 +242,8 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 		if (resetProperties)
 		{
 			_core->_renderBus.setDirectionalLightPosition(Vec3(0.0f));
-			_core->_renderBus.setDirectionalLightColor(0.0f);
-			_core->_renderBus.setDirectionalLightIntensity(0.0f);
+			_core->_renderBus.setDirectionalLightColor(1.0f);
+			_core->_renderBus.setDirectionalLightIntensity(1.0f);
 		}
 	}
 	else
@@ -284,8 +284,8 @@ void FabiEngine3D::gfx_disableSpotLighting(bool resetProperties)
 
 		if (resetProperties)
 		{
-			_core->_renderBus.setSpotLightColor(Vec3(0.0f));
-			_core->_renderBus.setSpotLightIntensity(0.0f);
+			_core->_renderBus.setSpotLightColor(Vec3(1.0f));
+			_core->_renderBus.setSpotLightIntensity(1.0f);
 			_core->_renderBus.setMaxSpotLightAngle(0.0f);
 			_core->_renderBus.setMaxSpotLightDistance(0.0f);
 		}

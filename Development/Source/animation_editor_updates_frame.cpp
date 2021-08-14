@@ -170,13 +170,7 @@ void AnimationEditor::_updateFrameMenu()
 				// Check if selected part exists on preview model
 				if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 				{
-					// Reset inversion
-					_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
-
-					// Set new current part
 					_currentPartID = selectedButtonID;
-
-					// Miscellaneous
 					_hoveredPartID = "";
 					_gui.getGlobalScreen()->deleteChoiceForm("parts");
 				}
@@ -193,17 +187,23 @@ void AnimationEditor::_updateFrameMenu()
 					_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
 				}
 
-				// Set new hovered part
 				_hoveredPartID = selectedButtonID;
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
 			_gui.getGlobalScreen()->deleteChoiceForm("parts");
+			_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
 			_hoveredPartID = "";
 		}
 		else
 		{
+			// Reset inversion
+			if (!_hoveredPartID.empty())
+			{
+				_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
+			}
+
 			_hoveredPartID = "";
 		}
 	}

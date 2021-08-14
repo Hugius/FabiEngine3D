@@ -74,9 +74,13 @@ void ScriptEditor::unload()
 
 	// Reset editor properties
 	_scriptFilenamesToDelete.clear();
-	_activeActionKey = InputType::NONE;
+	_copyClipboard.clear();
+	_currentProjectID = "";
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;
+	_firstSelectedLineIndex = -1;
+	_lastSelectedLineIndex = -1;
+	_passedFrames = 0;
 	_isEditorLoaded = false;
 	_wasFxaaEnabled = false;
 	_isScriptLoadedFromFile = false;
@@ -84,9 +88,8 @@ void ScriptEditor::unload()
 	_isSingleActionAllowed = true;
 	_isContinuousActionAllowed = false;
 	_wasGuiFocused = false;
-	_firstSelectedLineIndex = -1;
-	_lastSelectedLineIndex = -1;
-	_passedFrames = 0;
+	_hasClickedLMB = false;
+	_activeActionKey = InputType::NONE;
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");

@@ -87,18 +87,18 @@ void ModelEditor::unload()
 	_fe3d.modelEntity_deleteAll();
 
 	// Properties
+	_loadedModelIDs.clear();
 	_currentModelID = "";
 	_currentAabbID = "";
 	_hoveredModelID = "";
-	_loadedModelIDs.clear();
 	_aabbTransformationSpeed = 0.1f;
-	_isEditorLoaded = false;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isEditingModel = false;
 	_isDeletingModel = false;
 	_isMovingToggled = false;
 	_isResizingToggled = false;
+	_isEditorLoaded = false;
 	_transformationDirection = Direction::X;
 
 	// Miscellaneous

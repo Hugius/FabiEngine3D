@@ -80,14 +80,14 @@ void BillboardEditor::unload()
 	_gui.getGlobalScreen()->deleteTextField("billboardID");
 
 	// Reset editor properties
-	_isEditorLoaded = false;
+	_loadedBillboardIDs.clear();
+	_hoveredBillboardID = "";
+	_currentBillboardID = "";
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
 	_isEditingBillboard = false;
 	_isDeletingBillboard = false;
-	_hoveredBillboardID = "";
-	_currentBillboardID = "";
-	_loadedBillboardIDs.clear();
+	_isEditorLoaded = false;
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");

@@ -8,10 +8,9 @@
 class ScriptEditor final
 {
 public:
-	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, 
-		WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, 
-		BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
+	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void unload();
@@ -19,18 +18,20 @@ public:
 	bool loadScriptFiles(bool isLoggingEnabled = true);
 	bool saveScriptFiles();
 
+	// Instances
 	ScriptExecutor& getScriptExecutor();
 
+	// Booleans
 	bool isLoaded();
 	bool isWritingScript();
 
 private:
+	// Voids
 	void _loadGUI();
 	void _unloadGUI();
 	void _updateGUI();
 	void _updateTextWriter();
-	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
-		unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
+	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateMiscellaneous();
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
@@ -60,6 +61,19 @@ private:
 	static inline const Vec3 COMMENT_TEXT_COLOR = Vec3(0.0f, 0.75f, 0.0f);
 	static inline const Vec2 TEXT_CHARACTER_SIZE = Vec2(0.25f, 0.75f);
 
+	// Floats
+	static inline const float CW = 0.115f;
+	static inline const float CH = 0.0875f;
+	static inline const float SCROLLING_SPEED = 0.1f;
+	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
+	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
+	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
+	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
+	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(13) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
+	static inline const float CAMERA_FOV = 71.0f;
+	static inline const float AABB_DEPTH = 0.05f;
+	float _scrollingAcceleration = 0.0f;
+
 	// Integers
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
@@ -70,19 +84,6 @@ private:
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 	unsigned int _passedFrames = 0;
-
-	// Floats
-	static inline const float CW = 0.115f;
-	static inline const float CH = 0.0875f;
-	static inline const float SCROLLING_SPEED = 0.1f;
-	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
-	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
-	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
-	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
-	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(MAX_VISIBLE_LINES) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
-	static inline const float CAMERA_FOV = 71.0f;
-	static inline const float AABB_DEPTH = 0.05f;
-	float _scrollingAcceleration = 0.0f;
 
 	// Booleans
 	bool _isEditorLoaded = false;
@@ -95,7 +96,6 @@ private:
 	bool _hasClickedLMB = false;
 
 	// Miscellaneous
-	InputType _activeActionKey = InputType::NONE;
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
@@ -127,4 +127,5 @@ private:
 		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, 
 		InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN
 	};
+	InputType _activeActionKey = InputType::NONE;
 };

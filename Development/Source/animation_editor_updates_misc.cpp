@@ -204,7 +204,7 @@ void AnimationEditor::_updateMiscellaneous()
 		auto partID = (_hoveredPartID.empty() ? _currentPartID : _hoveredPartID);
 		if (partID.empty())
 		{
-			_selectedPartInversionDirection = 1;
+			_selectedPartInversionDirection = 1; // Reset direction
 		}
 		else
 		{

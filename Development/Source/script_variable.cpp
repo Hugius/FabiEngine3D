@@ -51,7 +51,7 @@ void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
 	// Check if variable is immutable
 	if (_isConstant)
 	{
-		Logger::throwError("Cannot change script value: variable is constant!");
+		Logger::throwFatalError("ScriptVariable::changeValue");
 	}
 
 	// Delete old value
@@ -74,7 +74,7 @@ ScriptValue& ScriptVariable::getValue(unsigned int index)
 	// Validate index
 	if (index >= _values.size())
 	{
-		Logger::throwError("Invalid index at script variable!");
+		Logger::throwFatalError("ScriptVariable::getValue");
 	}
 
 	return *_values[index];

@@ -22,7 +22,7 @@ Config::Config()
 	ifstream file(path);
 	if (!exists(path))
 	{
-		Logger::throwError("Cannot load `config.fe3d`!");
+		Logger::throwFatalWarning("Cannot load configuration file `config.fe3d`!");
 	}
 
 	// Store config file content
@@ -37,7 +37,7 @@ Config::Config()
 	// Check if multiplier is between 0.0 and 1.0
 	if (windowSizeMultiplier < 0.0f || windowSizeMultiplier > 1.0f)
 	{
-		Logger::throwError("Option `window_size_multiplier` in configuration file must be between 0.0 and 1.0!");
+		Logger::throwFatalWarning("Configuration file @ option `window_size_multiplier`: must be between 0.0 and 1.0!");
 	}
 
 	// Save monitor dimensions
@@ -86,7 +86,7 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -107,7 +107,7 @@ void Config::_processOption(ifstream& file, float& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -128,7 +128,7 @@ void Config::_processOption(ifstream& file, int& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 
@@ -159,12 +159,12 @@ void Config::_processOption(ifstream& file, bool& option, string criteria)
 		}
 		else
 		{
-			Logger::throwError("Configuration file @ option `" + criteria + "`: invalid boolean value!");
+			Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid boolean value!");
 		}
 	}
 	else
 	{
-		Logger::throwError("Configuration file @ option `" + criteria + "`: invalid option field!");
+		Logger::throwFatalWarning("Configuration file @ option `" + criteria + "`: invalid option field!");
 	}
 }
 

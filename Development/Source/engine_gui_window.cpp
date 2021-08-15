@@ -84,7 +84,7 @@ void EngineGuiWindow::createScreen(const string& ID)
 	{
 		if (screen->getID() == ID)
 		{
-			Logger::throwError("Screen creation: screen with ID \"" + ID + "\" already exists!");
+			Logger::throwFatalError("EngineGuiWindow::createScreen");
 		}
 	}
 
@@ -98,12 +98,13 @@ void EngineGuiWindow::createScreen(const string& ID)
 void EngineGuiWindow::deleteScreen(const string& ID)
 {
 	// Find screen
+	bool isFound = false;
 	for (size_t i = 0; i < _screens.size(); i++)
 	{
 		if (_screens[i]->getID() == ID)
 		{
 			_screens.erase(_screens.begin() + i);
-			break;
+			isFound = true;
 		}
 	}
 
@@ -111,6 +112,12 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 	if (ID == _activeScreenID)
 	{
 		_activeScreenID = "";
+	}
+
+	// Error
+	if (!isFound)
+	{
+		Logger::throwFatalError("EngineGuiWindow::deleteScreen");
 	}
 }
 
@@ -139,6 +146,7 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getActiveScreen()
 
 shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 {
+	// Retrieve screen
 	for (const auto& screen : _screens)
 	{
 		if (ID == screen->getID())
@@ -147,5 +155,6 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiWindow::getScreen");
+	// Error
+	Logger::throwFatalError("EngineGuiWindow::getScreen");
 }

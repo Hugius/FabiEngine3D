@@ -7,7 +7,7 @@ BaseEntity::BaseEntity(const string& ID)
 {
 	if (ID.empty())
 	{
-		Logger::throwError("Tried to create a BaseEntity with an empty ID!");
+		Logger::throwFatalError("BaseEntity::BaseEntity");
 	}
 }
 

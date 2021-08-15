@@ -136,6 +136,7 @@ bool EngineGuiGlobalScreen::isTextFieldExisting(const string& ID)
 
 shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
 {
+	// Retrieve scrolling list
 	for (const auto& scrollingList : _scrollingLists)
 	{
 		if (ID == scrollingList->getID())
@@ -144,11 +145,13 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 		}
 	}
 
-	Logger::throwError("EngineGuiGlobalScreen::getScrollingList");
+	// Error
+	Logger::throwFatalError("EngineGuiGlobalScreen::getScrollingList");
 }
 
 shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const string& ID)
 {
+	// Retrieve write field
 	for (const auto& writeField : _writeFields)
 	{
 		if (ID == writeField->getID())
@@ -157,11 +160,13 @@ shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const strin
 		}
 	}
 
-	Logger::throwError("EngineGuiGlobalScreen::getWriteField");
+	// Error
+	Logger::throwFatalError("EngineGuiGlobalScreen::getWriteField");
 }
 
 shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 {
+	// Retrieve button
 	for (const auto& button : _buttons)
 	{
 		if (ID == button->getID())
@@ -170,11 +175,13 @@ shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiGlobalScreen::getButton");
+	// Error
+	Logger::throwFatalError("EngineGuiGlobalScreen::getButton");
 }
 
 shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string& ID)
 {
+	// Retrieve rectangle
 	for (const auto& rectangle : _rectangles)
 	{
 		if (ID == rectangle->getID())
@@ -183,11 +190,13 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 		}
 	}
 
-	Logger::throwError("EngineGuiGlobalScreen::getRectangle");
+	// Error
+	Logger::throwFatalError("EngineGuiGlobalScreen::getRectangle");
 }
 
 shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string& ID)
 {
+	// Retrieve text field
 	for (const auto& TextField : _textFields)
 	{
 		if (ID == TextField->getID())
@@ -196,7 +205,8 @@ shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string&
 		}
 	}
 
-	Logger::throwError("EngineGuiGlobalScreen::getTextField");
+	// Error
+	Logger::throwFatalError("EngineGuiGlobalScreen::getTextField");
 }
 
 vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingLists()
@@ -226,7 +236,7 @@ vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFields()
 
 void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)
 {
-	// Delete scrollingList
+	// Delete scrolling list
 	for (size_t i = 0; i < _scrollingLists.size(); i++)
 	{
 		if (ID == _scrollingLists[i]->getID())
@@ -237,12 +247,12 @@ void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete scrollingList with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiGlobalScreen::deleteScrollingList");
 }
 
 void EngineGuiGlobalScreen::deleteWriteField(const string& ID)
 {
-	// Delete writeField
+	// Delete write field
 	for (size_t i = 0; i < _writeFields.size(); i++)
 	{
 		if (ID == _writeFields[i]->getID())
@@ -253,7 +263,7 @@ void EngineGuiGlobalScreen::deleteWriteField(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete writeField with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiGlobalScreen::deleteWriteField");
 }
 
 void EngineGuiGlobalScreen::deleteButton(const string& ID)
@@ -269,7 +279,7 @@ void EngineGuiGlobalScreen::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete button with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiGlobalScreen::deleteButton");
 }
 
 void EngineGuiGlobalScreen::deleteRectangle(const string& ID)
@@ -285,12 +295,12 @@ void EngineGuiGlobalScreen::deleteRectangle(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete rectangle with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiGlobalScreen::deleteRectangle");
 }
 
 void EngineGuiGlobalScreen::deleteTextField(const string& ID)
 {
-	// Delete TextField
+	// Delete text field
 	for (size_t i = 0; i < _textFields.size(); i++)
 	{
 		if (ID == _textFields[i]->getID())
@@ -301,5 +311,5 @@ void EngineGuiGlobalScreen::deleteTextField(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete TextField with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiGlobalScreen::deleteTextField");
 }

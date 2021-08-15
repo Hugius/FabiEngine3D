@@ -15,7 +15,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("ScriptEditor::loadScriptsFromFile");
+		Logger::throwFatalError("ScriptEditor::loadScriptsFromFile");
 	}
 
 	// Clear last script
@@ -99,7 +99,7 @@ bool ScriptEditor::saveScriptFiles()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("ScriptEditor::saveScriptsToFile");
+		Logger::throwFatalError("ScriptEditor::saveScriptsToFile");
 	}
 
 	// Compose directory path

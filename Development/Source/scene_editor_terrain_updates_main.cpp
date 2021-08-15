@@ -30,7 +30,7 @@ void SceneEditor::_updateTerrainMenu()
 				}
 
 				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Choose Terrain", Vec2(-0.5f, 0.1f), terrainNames);
+				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Choose Terrain", Vec2(0.0f, 0.1f), terrainNames);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{

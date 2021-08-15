@@ -148,7 +148,7 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	// Check if vec3 value
 	if (!_isVec3Value(valueString))
 	{
-		Logger::throwError("Tried to extract Vec3 value from non-vec3 valuestring!");
+		Logger::throwFatalError("ScriptInterpreter::_extractVec3FromString");
 	}
 
 	// Remove brackets

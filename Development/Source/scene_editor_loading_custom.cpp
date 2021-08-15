@@ -13,11 +13,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::loadCustomSceneFromFile");
+		Logger::throwFatalError("SceneEditor::loadCustomSceneFromFile::1");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwError("SceneEditor::loadCustomSceneFromFile() ---> tried to call from within scene editor!");
+		Logger::throwFatalError("SceneEditor::loadCustomSceneFromFile::2");
 	}
 
 	// Compose file path

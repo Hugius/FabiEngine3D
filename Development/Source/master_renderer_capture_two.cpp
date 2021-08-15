@@ -100,7 +100,7 @@ void MasterRenderer::_captureSceneDepth()
 						}
 						else
 						{
-							Logger::throwError("MasterRenderer::_captureSceneDepth");
+							Logger::throwFatalError("MasterRenderer::_captureSceneDepth");
 						}
 					}
 					else // Render high-quality entity
@@ -295,7 +295,7 @@ void MasterRenderer::_captureShadows()
 					}
 					else
 					{
-						Logger::throwError("MasterRenderer::_captureShadows");
+						Logger::throwFatalError("MasterRenderer::_captureShadows");
 					}
 				}
 				else // Render high-quality entity

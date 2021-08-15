@@ -106,6 +106,7 @@ bool EngineGuiScreen::isTextFieldExisting(const string& ID)
 
 shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const string& ID)
 {
+	// Retrieve scrolling list
 	for (const auto& scrollingList : _scrollingLists)
 	{
 		if (ID == scrollingList->getID())
@@ -114,11 +115,13 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 		}
 	}
 
-	Logger::throwError("EngineGuiScreen::getScrollingList");
+	// Error
+	Logger::throwFatalError("EngineGuiScreen::getScrollingList");
 }
 
 shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 {
+	// Retrieve write field
 	for (const auto& writeField : _writeFields)
 	{
 		if (ID == writeField->getID())
@@ -127,11 +130,13 @@ shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiScreen::getWriteField");
+	// Error
+	Logger::throwFatalError("EngineGuiScreen::getWriteField");
 }
 
 shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 {
+	// Retrieve button
 	for (const auto& button : _buttons)
 	{
 		if (ID == button->getID())
@@ -140,11 +145,13 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiScreen::getButton");
+	// Error
+	Logger::throwFatalError("EngineGuiScreen::getButton");
 }
 
 shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 {
+	// Retrieve rectangle
 	for (const auto& rectangle : _rectangles)
 	{
 		if (ID == rectangle->getID())
@@ -153,11 +160,13 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiScreen::getRectangle");
+	// Error
+	Logger::throwFatalError("EngineGuiScreen::getRectangle");
 }
 
 shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
 {
+	// Retrieve text field
 	for (const auto& TextField : _textFields)
 	{
 		if (ID == TextField->getID())
@@ -166,7 +175,8 @@ shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiScreen::getTextField");
+	// Error
+	Logger::throwFatalError("EngineGuiScreen::getTextField");
 }
 
 vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()

@@ -12,11 +12,11 @@ bool SceneEditor::saveCustomSceneToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::saveCustomSceneToFile");
+		Logger::throwFatalError("SceneEditor::saveCustomSceneToFile::1");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwError("SceneEditor::saveCustomSceneToFile() ---> tried to call from within scene editor!");
+		Logger::throwFatalError("SceneEditor::saveCustomSceneToFile::2");
 	}
 
 	// Warning checking

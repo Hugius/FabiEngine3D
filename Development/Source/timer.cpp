@@ -36,8 +36,7 @@ void Timer::startDeltaPart(const string& ID)
 	// Error checking
 	if (!_currentID.empty())
 	{
-		Logger::throwError("Trying to start delta part timer, but was already started!");
-		return;
+		Logger::throwFatalError("Timer::startDeltaPart");
 	}
 
 	// Start
@@ -51,8 +50,7 @@ void Timer::stopDeltaPart()
 	// Error checking
 	if (_currentID.empty())
 	{
-		Logger::throwError("Trying to stop delta part timer, but was not started!");
-		return;
+		Logger::throwFatalError("Timer::stopDeltaPart");
 	}
 
 	// Stop

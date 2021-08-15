@@ -21,7 +21,6 @@ void AnimationEditor::_updateCamera()
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}
-		cameraLookat.y = max(-GRID_Y_OFFSET, cameraLookat.y);
 		_fe3d.camera_setThirdPersonLookat(cameraLookat);
 
 		// Hide cursor

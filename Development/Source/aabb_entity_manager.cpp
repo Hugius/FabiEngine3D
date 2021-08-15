@@ -40,7 +40,7 @@ shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing AABB entity with ID \"" + ID + "\" requested!");
+		Logger::throwFatalError("AabbEntityManager::getEntity");
 	}
 
 	return result;
@@ -180,7 +180,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwError("AABB entity with ID \"" + entity->getID() + "\" bound to non-existing model entity with ID \"" + entity->getParentID() + "\"");
+					Logger::throwFatalError("AabbEntityManager::update::1");
 				}
 			}
 			else
@@ -246,6 +246,10 @@ void AabbEntityManager::update(
 
 					// Update visibility
 					entity->setVisible(parentEntity->isVisible());
+				}
+				else
+				{
+					Logger::throwFatalError("AabbEntityManager::update::2");
 				}
 			}
 		}

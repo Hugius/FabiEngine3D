@@ -236,14 +236,13 @@ public:
 
 	// Water entity interface - getters
 	const vector<string> waterEntity_getAllIDs();
-	const Vec2 waterEntity_getSpeed(const string& ID);
-	const Vec3 waterEntity_getPosition(const string& ID);
-	const Vec3 waterEntity_getColor(const string& ID);
-	const WaterQuality waterEntity_getQuality(const string& ID);
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	const string waterEntity_getSelectedID();
+	const Vec3 waterEntity_getPosition(const string& ID);
+	const Vec3 waterEntity_getColor(const string& ID);
+	const Vec2 waterEntity_getSpeed(const string& ID);
 	const float waterEntity_getSize(const string& ID);
 	const float waterEntity_getUvRepeat(const string& ID);
 	const float waterEntity_getWaveHeight(const string& ID);
@@ -261,6 +260,7 @@ public:
 	const bool waterEntity_hasDudvMap(const string& ID);
 	const bool waterEntity_hasNormalMap(const string& ID);
 	const bool waterEntity_hasDisplacementMap(const string& ID);
+	const WaterQuality waterEntity_getQuality(const string& ID);
 
 	// Model entity interface - setters
 	void modelEntity_create(const string& ID, const string& meshPath);
@@ -307,21 +307,21 @@ public:
 	const vector<string> modelEntity_getPartIDs(const string& ID);
 	const vector<string> modelEntity_getAllIDs();
 	const vector<string> modelEntity_getGroupIDs(const string& ID);
-	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
 	const string& modelEntity_getMeshPath(const string& ID);
 	const string& modelEntity_getDiffuseMapPath(const string& ID);
 	const string& modelEntity_getEmissionMapPath(const string& ID);
 	const string& modelEntity_getNormalMapPath(const string& ID);
 	const string& modelEntity_getReflectionMapPath(const string& ID);
 	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
+	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
+	const Vec3 modelEntity_getLevelOfDetailSize(const string& ID);
 	const Vec3 modelEntity_getPosition(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getRotation(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getRotationOrigin(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
-	const Vec3 modelEntity_getLevelOfDetailSize(const string& ID);
-	const float modelEntity_getLightness(const string& ID);
 	const float modelEntity_getInversion(const string& ID, const string& partID = "");
+	const float modelEntity_getLightness(const string& ID);
 	const float modelEntity_getSpecularFactor(const string& ID);
 	const float modelEntity_getSpecularIntensity(const string& ID);
 	const float modelEntity_getAlpha(const string& ID);
@@ -442,12 +442,12 @@ public:
 	const string& aabbEntity_getParentID(const string& ID);
 	const Vec3 aabbEntity_getPosition(const string& ID);
 	const Vec3 aabbEntity_getSize(const string& ID);
-	const AabbParentType aabbEntity_getParentType(const string& ID);
 	const bool aabbEntity_isRaycastResponsive(const string& ID);
 	const bool aabbEntity_isCollisionResponsive(const string& ID);
 	const bool aabbEntity_isExisting(const string& ID);
 	const bool aabbEntity_isVisible(const string& ID);
 	const bool aabbEntity_hasParent(const string& ID);
+	const AabbParentType aabbEntity_getParentType(const string& ID);
 
 	// Global collision interface - setters
 	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
@@ -460,9 +460,6 @@ public:
 	const string collision_checkCameraWithAny();
 	const string collision_checkCameraWithEntities(const string& ID);
 	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
-	const pair<const string, float> collision_checkCursorInAny();
-	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
-	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
 	const bool collision_checkCameraWithTerrain();
 	const bool collision_checkCameraWithEntity(const string& ID);
 	const bool collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
@@ -470,6 +467,9 @@ public:
 	const bool collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
 	const bool collision_isCameraResponseEnabled();
 	const bool collision_isTerrainResponseEnabled();
+	const pair<const string, float> collision_checkCursorInAny();
+	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
+	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
 
 	// Light entity interface - setters
 	void lightEntity_create(const string& ID);
@@ -686,7 +686,6 @@ public:
 	const float gfx_getLensFlareIntensity();
 	const float gfx_getLensFlareMultiplier();
 	const float gfx_getMotionBlurStrength();
-	const BloomType gfx_getBloomType();
 	const unsigned int gfx_getAnisotropicFilteringQuality();
 	const unsigned int gfx_getShadowQuality();
 	const unsigned int gfx_getReflectionQuality();
@@ -708,6 +707,7 @@ public:
 	const bool gfx_isMotionBlurEnabled();
 	const bool gfx_isLensFlareEnabled();
 	const bool gfx_isShadowFollowingCamera();
+	const BloomType gfx_getBloomType();
 
 	// Server interface - setters
 	void networkServer_start(unsigned int maxClientCount);

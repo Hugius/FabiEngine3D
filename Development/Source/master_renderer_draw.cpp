@@ -82,38 +82,30 @@ void MasterRenderer::_renderModelEntities()
 			if (modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
-				if (foundPair != modelEntities.end())
-				{
-					auto lodEntity = foundPair->second;
+				auto lodEntity = modelEntities.find(modelEntity->getLodEntityID())->second;
 
-					// Save original transformation
-					Vec3 originalPosition = lodEntity->getPosition();
-					Vec3 originalRotation = lodEntity->getRotation();
-					Vec3 originalSize = lodEntity->getSize();
-					bool originalVisibility = lodEntity->isVisible();
+				// Save original transformation
+				Vec3 originalPosition = lodEntity->getPosition();
+				Vec3 originalRotation = lodEntity->getRotation();
+				Vec3 originalSize = lodEntity->getSize();
+				bool originalVisibility = lodEntity->isVisible();
 
-					// Change transformation
-					lodEntity->setPosition(modelEntity->getPosition());
-					lodEntity->setRotation(modelEntity->getRotation());
-					lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
-					lodEntity->setVisible(modelEntity->isVisible());
-					lodEntity->updateModelMatrix();
+				// Change transformation
+				lodEntity->setPosition(modelEntity->getPosition());
+				lodEntity->setRotation(modelEntity->getRotation());
+				lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
+				lodEntity->setVisible(modelEntity->isVisible());
+				lodEntity->updateModelMatrix();
 
-					// Render LOD entity
-					_modelEntityColorRenderer.render(lodEntity);
+				// Render LOD entity
+				_modelEntityColorRenderer.render(lodEntity);
 
-					// Revert to original transformation
-					lodEntity->setPosition(originalPosition);
-					lodEntity->setRotation(originalRotation);
-					lodEntity->setSize(originalSize);
-					lodEntity->setVisible(originalVisibility);
-					lodEntity->updateModelMatrix();
-				}
-				else
-				{
-					Logger::throwError("Model entity with ID \"" + modelEntity->getID() + "\" has a non-existing LOD entity with ID \"" + modelEntity->getLodEntityID() + "\"");
-				}
+				// Revert to original transformation
+				lodEntity->setPosition(originalPosition);
+				lodEntity->setRotation(originalRotation);
+				lodEntity->setSize(originalSize);
+				lodEntity->setVisible(originalVisibility);
+				lodEntity->updateModelMatrix();
 			}
 			else // Render high-quality entity
 			{

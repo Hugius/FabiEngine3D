@@ -30,7 +30,7 @@ void SceneEditor::_updateWaterMenu()
 				}
 
 				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("waterList", "Choose Water", Vec2(-0.5f, 0.1f), waterNames);
+				_gui.getGlobalScreen()->createChoiceForm("waterList", "Choose Water", Vec2(0.0f, 0.1f), waterNames);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{

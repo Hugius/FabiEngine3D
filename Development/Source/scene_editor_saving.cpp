@@ -18,7 +18,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::saveEditorSceneToFile");
+		Logger::throwFatalError("SceneEditor::saveEditorSceneToFile");
 	}
 
 	// Compose file path

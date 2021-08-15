@@ -17,7 +17,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing water entity with ID \"" + ID + "\" requested!");
+		Logger::throwFatalError("WaterEntityManager::getEntity");
 	}
 
 	return result;
@@ -48,7 +48,7 @@ void WaterEntityManager::selectWater(const string& ID)
 	}
 	else
 	{
-		Logger::throwError("Tried to select main sky entity with ID \"" + ID + "\": not existing!");
+		Logger::throwFatalError("WaterEntityManager::selectWater");
 	}
 }
 
@@ -69,7 +69,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	// Check if size is too large
 	if (size > 1024)
 	{
-		Logger::throwError("WaterEntityManager::loadMesh");
+		Logger::throwFatalError("WaterEntityManager::loadMesh");
 	}
 
 	// Reserving memory for the vertices

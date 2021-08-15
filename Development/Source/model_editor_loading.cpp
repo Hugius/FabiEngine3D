@@ -15,7 +15,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::getAllTexturePathsFromFile");
+		Logger::throwFatalError("ModelEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -96,7 +96,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::loadModelEntitiesFromFile");
+		Logger::throwFatalError("ModelEditor::loadModelEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads

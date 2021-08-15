@@ -172,7 +172,7 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 	// Find must never fail
 	if (channels.empty())
 	{
-		Logger::throwError("Trying to get corresponding channels of sound with ID \"", sound.getID(), "\"!");
+		Logger::throwFatalError("AudioPlayer::_findSoundChannels");
 	}
 
 	return channels;

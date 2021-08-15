@@ -151,7 +151,7 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 	}
 	else
 	{
-		Logger::throwError("Projects directory is missing!");
+		Logger::throwFatalError("TopViewportController::_prepareProjectChoosing");
 	}
 }
 

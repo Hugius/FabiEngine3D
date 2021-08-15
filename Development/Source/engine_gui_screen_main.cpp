@@ -92,7 +92,7 @@ void EngineGuiScreen::createTextField(const string& ID, Vec2 position, Vec2 size
 
 void EngineGuiScreen::deleteScrollingList(const string& ID)
 {
-	// Delete scrollingList
+	// Delete scrolling list
 	for (size_t i = 0; i < _scrollingLists.size(); i++)
 	{
 		if (ID == _scrollingLists[i]->getID())
@@ -103,12 +103,12 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete scrollingList with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiScreen::deleteScrollingList");
 }
 
 void EngineGuiScreen::deleteWriteField(const string& ID)
 {
-	// Delete writeField
+	// Delete write field
 	for (size_t i = 0; i < _writeFields.size(); i++)
 	{
 		if (ID == _writeFields[i]->getID())
@@ -119,7 +119,7 @@ void EngineGuiScreen::deleteWriteField(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete writeField with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiScreen::deleteWriteField");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)
@@ -135,7 +135,7 @@ void EngineGuiScreen::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete button with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiScreen::deleteButton");
 }
 
 void EngineGuiScreen::deleteRectangle(const string& ID)
@@ -151,7 +151,7 @@ void EngineGuiScreen::deleteRectangle(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete rectangle with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiScreen::deleteRectangle");
 }
 
 void EngineGuiScreen::deleteTextField(const string& ID)
@@ -167,5 +167,5 @@ void EngineGuiScreen::deleteTextField(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Cannot not delete TextField with ID \"" + ID + "\"!");
+	Logger::throwFatalError("EngineGuiScreen::deleteTextField");
 }

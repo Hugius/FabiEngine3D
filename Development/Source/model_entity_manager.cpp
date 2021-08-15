@@ -1,3 +1,4 @@
+
 #include "model_entity_manager.hpp"
 #include "logger.hpp"
 
@@ -16,7 +17,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing model entity with ID \"" + ID + "\" requested!");
+		Logger::throwFatalError("ModelEntityManager::getEntity");
 	}
 
 	return result;
@@ -131,9 +132,16 @@ void ModelEntityManager::update()
 			// Update model matrix
 			entity->updateModelMatrix();
 
-			// Check if entity has LOD
+			// Check if entity has a LOD entity
 			if (!entity->getLodEntityID().empty())
 			{
+				// Check if LOD entity still exists
+				auto lodEntityPair = getEntities().find(entity->getID());
+				if (lodEntityPair == getEntities().end())
+				{
+					Logger::throwFatalError("ModelEntityManager::update");
+				}
+
 				// Calculate absolute distance between camera and entity
 				Vec3 camPos = _renderBus.getCameraPosition();
 				Vec3 entityPos = entity->getPosition();

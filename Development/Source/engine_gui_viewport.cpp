@@ -65,19 +65,24 @@ void EngineGuiViewport::createWindow(const string& ID, Vec2 position, Vec2 size,
 	Vec2 viewportSize = _fe3d.imageEntity_getSize(_entityID);
 	Vec2 windowPosition = viewportPosition + (position * viewportSize);
 	Vec2 windowSize = (size / 2.0f) * viewportSize;
+
 	_windows.push_back(make_shared<EngineGuiWindow>(_fe3d, _ID, ID, windowPosition, windowSize, color));
 }
 
 void EngineGuiViewport::deleteWindow(const string& ID)
 {
+	// Delete window
 	for (size_t i = 0; i < _windows.size(); i++)
 	{
 		if (_windows[i]->getID() == ID)
 		{
 			_windows.erase(_windows.begin() + i);
-			break;
+			return;
 		}
 	}
+
+	// Error
+	Logger::throwFatalError("EngineGuiViewport::deleteWindow");
 }
 
 vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
@@ -87,6 +92,7 @@ vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
 
 shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 {
+	// Retrieve window
 	for (const auto& window : _windows)
 	{
 		if (ID == window->getID())
@@ -95,5 +101,6 @@ shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 		}
 	}
 
-	Logger::throwError("EngineGuiViewport::getWindow");
+	// Error
+	Logger::throwFatalError("EngineGuiViewport::getWindow");
 }

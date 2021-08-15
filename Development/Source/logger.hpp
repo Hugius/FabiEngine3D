@@ -37,18 +37,6 @@ public:
 	}
 
 	template<typename T, typename...Rest> 
-	inline static void throwError(T first, Rest...rest)
-	{
-		cout << endl;
-		_printPrefix(MessageType::ERR);
-		_printMessage(first, rest...);
-		cout << endl;
-		throwInfo("Press a key to continue...");
-		auto temp = _getch();
-		exit(420);
-	}
-
-	template<typename T, typename...Rest> 
 	inline static void throwDebug(T first, Rest...rest)
 	{
 		_printPrefix(MessageType::DEBUG);
@@ -60,6 +48,37 @@ public:
 	{
 		_printPrefix(MessageType::WARNING);
 		_printMessage(first, rest...);
+	}
+
+	template<typename T, typename...Rest>
+	inline static void throwError(T first, Rest...rest)
+	{
+		_printPrefix(MessageType::ERR);
+		_printMessage(first, rest...);
+	}
+
+	template<typename T, typename...Rest>
+	inline static void throwFatalWarning(T first, Rest...rest)
+	{
+		cout << endl;
+		_printPrefix(MessageType::WARNING);
+		_printMessage(first, rest...);
+		cout << endl;
+		throwInfo("Press a key to continue...");
+		auto temp = _getch();
+		exit(420);
+	}
+
+	template<typename T, typename...Rest>
+	inline static void throwFatalError(T first, Rest...rest)
+	{
+		cout << endl;
+		_printPrefix(MessageType::ERR);
+		_printMessage(first, rest...);
+		cout << endl;
+		throwInfo("Press a key to continue...");
+		auto temp = _getch();
+		exit(420);
 	}
 
 	inline static const vector<string>& getMessageQueue()

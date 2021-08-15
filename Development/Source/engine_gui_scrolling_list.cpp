@@ -78,7 +78,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwError("Button with ID \"" + ID + "\" not deleted from scrollingList with ID \"" + _ID + "\"!");
+	Logger::throwFatalError("EngineGuiScrollingList::deleteButton");
 }
 
 void EngineGuiScrollingList::deleteButtons()

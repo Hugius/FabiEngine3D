@@ -14,7 +14,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SceneEditor::loadEditorSceneFromFile");
+		Logger::throwFatalError("SceneEditor::loadEditorSceneFromFile");
 	}
 
 	// Compose file path

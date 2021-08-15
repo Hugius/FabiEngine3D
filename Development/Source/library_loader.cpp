@@ -25,7 +25,7 @@ LibraryLoader::LibraryLoader()
 	Logger::throwInfo("Initializing SDL...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
-		Logger::throwError("SDL could not be initialized: ", SDL_GetError());
+		Logger::throwFatalWarning("SDL could not be initialized: ", SDL_GetError());
 	}
 
 	// SDL_Window
@@ -40,28 +40,28 @@ LibraryLoader::LibraryLoader()
 	GLenum initGlew = glewInit();
 	if (initGlew != GLEW_OK)
 	{
-		Logger::throwError("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
+		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
 
 	// SDL_image
 	Logger::throwInfo("Initializing SDL_Image...");
 	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
-		Logger::throwError("SDL_IMG could not be initialized: ", IMG_GetError());
+		Logger::throwFatalWarning("SDL_IMG could not be initialized: ", IMG_GetError());
 	}
 
 	// SDL_ttf
 	Logger::throwInfo("Initializing SDL_TTF...");
 	if (TTF_Init() == -1)
 	{
-		Logger::throwError("SDL_TTF could not be initialized: ", TTF_GetError());
+		Logger::throwFatalWarning("SDL_TTF could not be initialized: ", TTF_GetError());
 	}
 
 	// SDL_mixer
 	Logger::throwInfo("Initializing SDL_Mixer...");
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
-		Logger::throwError("SDL_Mixer could not be initialized: ", Mix_GetError());
+		Logger::throwFatalWarning("SDL_Mixer could not be initialized: ", Mix_GetError());
 	}
 
 	// Winsock2
@@ -69,7 +69,7 @@ LibraryLoader::LibraryLoader()
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (winsockResult != 0)
 	{
-		Logger::throwError("Windows Sockets API could not be initialized: ", winsockResult);
+		Logger::throwFatalWarning("Windows Sockets API could not be initialized: ", winsockResult);
 	}
 }
 

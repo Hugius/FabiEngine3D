@@ -23,19 +23,19 @@ RenderShader::RenderShader(const string& vertexFilename, const string& fragmentF
 
 	// Compose file paths
 	const auto rootDir = Tools::getRootDirectory();
-	const auto vertexPath = "engine_assets\\shaders\\" + _vertexFilename;
-	const auto fragmentPath = "engine_assets\\shaders\\" + _fragmentFilename;
+	const auto vertexPath = ("engine_assets\\shaders\\" + _vertexFilename);
+	const auto fragmentPath = ("engine_assets\\shaders\\" + _fragmentFilename);
 
 	// Check if vertex shader file exists
 	if (!exists(rootDir + vertexPath))
 	{
-		Logger::throwError("Cannot load shader file: \"" + vertexPath + "\"!");
+		Logger::throwFatalError("RenderShader::RenderShader::1");
 	}
 
 	// Check if fragment shader file exists
 	if (!exists(rootDir + fragmentPath))
 	{
-		Logger::throwError("Cannot load shader file: \"" + fragmentPath + "\"!");
+		Logger::throwFatalError("RenderShader::RenderShader::2");
 	}
 
 	// Open the shader text files
@@ -74,7 +74,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _vertexFilename + ": " + infoLog);
+		Logger::throwFatalError("RenderShader::_createProgram::1");
 	}
 
 	// Fragment shader
@@ -87,7 +87,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _fragmentFilename + ": " + infoLog);
+		Logger::throwFatalError("RenderShader::_createProgram::2");
 	}
 
 	// Shader program
@@ -101,7 +101,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success)
 	{
 		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
-		Logger::throwError("Shader error at " + _name + ": " + infoLog);
+		Logger::throwFatalError("RenderShader::_createProgram::3");
 	}
 
 	// Delete the no longer needed shaders
@@ -122,7 +122,7 @@ UniformID RenderShader::_getUniformID(const string& uniformID)
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
 		if (uniform == -1)
 		{
-			Logger::throwError("Uniform " + uniformID + " not found in shader " + _name);
+			Logger::throwFatalError("RenderShader::_getUniformID");
 		}
 
 		// Cache uniform

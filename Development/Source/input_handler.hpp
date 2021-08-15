@@ -48,7 +48,7 @@ private:
 
 		if (it == list.end()) // Not found
 		{
-			Logger::throwError("Failed to get input " + to_string(static_cast<int>(element)) + " index from vector!");
+			Logger::throwFatalError("InputHandler::_getVectorIndex");
 		}
 		else // Found
 		{

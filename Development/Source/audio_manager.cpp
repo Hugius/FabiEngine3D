@@ -36,11 +36,11 @@ void AudioManager::createSound(const string& ID, const string& filename)
 {
 	if (_findIndex(ID) != -1)
 	{
-		Logger::throwError("Sound with ID \"", ID, "\" already exists!");
+		Logger::throwFatalError("AudioManager::createSound::1");
 	}
 	else if (ID.empty())
 	{
-		Logger::throwError("Tried to create sound with empty ID!");
+		Logger::throwFatalError("AudioManager::createSound::2");
 	}
 
 	// Load data
@@ -59,7 +59,7 @@ void AudioManager::deleteSound(const string& ID)
 
 	if (index == -1)
 	{
-		Logger::throwError("Tried to remove non-existing sound with ID \"", ID, "\"!");
+		Logger::throwFatalError("AudioManager::deleteSound");
 	}
 	else
 	{
@@ -78,7 +78,7 @@ Sound& AudioManager::getSound(const string& ID)
 
 	if (index == -1)
 	{
-		Logger::throwError("Tried to get non-existing sound with ID \"", ID, "\"!");
+		Logger::throwFatalError("AudioManager::getSound");
 	}
 	else
 	{

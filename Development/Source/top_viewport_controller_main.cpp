@@ -295,7 +295,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("TopViewportController::_saveCurrentProject");
+		Logger::throwFatalError("TopViewportController::_saveCurrentProject");
 	}
 
 	// Save everything

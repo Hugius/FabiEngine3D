@@ -78,7 +78,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 			// Cannot be a questionmark
 			if (selectedPartID == "?")
 			{
-				Logger::throwError("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
+				Logger::throwWarning("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
+				return {};
 			}
 
 			// Reset material paths
@@ -154,15 +155,14 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 				return {};
 			}
 
-			bool alreadyExisting = false;
-
 			// Check if able to add to existing mesh part
+			bool isAlreadyExisting = false;
 			for (auto& meshPart : meshParts)
 			{
 				// Find mesh part
 				if (meshPart.ID == selectedPartID)
 				{
-					alreadyExisting = true;
+					isAlreadyExisting = true;
 
 					// Add vertices
 					for (int i = 0; i < 3; i++)
@@ -178,7 +178,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 			}
 
 			// Create new mesh part
-			if (!alreadyExisting)
+			if (!isAlreadyExisting)
 			{
 				MeshPart newPart;
 
@@ -239,7 +239,7 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 		}
 	}
 
-	// Error checking
+	// Validate mesh parts
 	if (meshParts.empty())
 	{
 		Logger::throwWarning("Incorrect or too little content in mesh file: \"" + filePath + "\"");

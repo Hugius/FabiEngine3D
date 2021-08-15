@@ -14,7 +14,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::getAllTexturePathsFromFile");
+		Logger::throwFatalError("SkyEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -74,7 +74,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::loadSkyEntitiesFromFile");
+		Logger::throwFatalError("SkyEditor::loadSkyEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -166,7 +166,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SkyEditor::saveSkyEntitiesToFile");
+		Logger::throwFatalError("SkyEditor::saveSkyEntitiesToFile");
 	}
 
 	// Compose file path

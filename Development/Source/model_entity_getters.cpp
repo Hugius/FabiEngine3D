@@ -347,11 +347,12 @@ const float ModelEntity::getUvRepeat()
 
 unsigned int ModelEntity::_getPartIndex(string partID)
 {
+	// Validate parts amount
 	if (partID.empty())
 	{
 		if (_parts.size() > 1)
 		{
-			Logger::throwError("Model entity with ID \"" + getID() + "\" has multiple parts!");
+			Logger::throwFatalError("ModelEntity::_getPartIndex::1");
 		}
 		else
 		{
@@ -359,6 +360,7 @@ unsigned int ModelEntity::_getPartIndex(string partID)
 		}
 	}
 
+	// Try to find index
 	for (size_t i = 0; i < _parts.size(); i++)
 	{
 		if (partID == _parts[i].ID)
@@ -367,5 +369,6 @@ unsigned int ModelEntity::_getPartIndex(string partID)
 		}
 	}
 
-	Logger::throwError("Model entity with ID \"" + getID() + "\" has no part called \"" + partID + "\"!");
+	// Part is not found
+	Logger::throwFatalError("ModelEntity::_getPartIndex::2");
 }

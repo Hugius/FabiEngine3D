@@ -15,7 +15,7 @@ void Script::createScriptFile(const string& ID)
 	{
 		if (file->getID() == ID)
 		{
-			Logger::throwError("Cannot add script file with ID: \"" + ID + "\", already existing!");
+			Logger::throwFatalError("Script::createScriptFile");
 		}
 	}
 
@@ -34,7 +34,7 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 		}
 	}
 
-	Logger::throwError("Cannot rename script file with ID: \"" + ID + "\", not existing!");
+	Logger::throwFatalError("Script::renameScriptFile");
 }
 
 void Script::removeScriptFile(const string& ID)
@@ -48,7 +48,7 @@ void Script::removeScriptFile(const string& ID)
 		}
 	}
 
-	Logger::throwError("Cannot remove script file with ID: \"" + ID + "\", not existing!");
+	Logger::throwFatalError("Script::removeScriptFile");
 }
 
 void Script::reset()
@@ -96,7 +96,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 		}
 	}
 
-	Logger::throwError("Cannot retrieve script file with ID: \"" + ID + "\"");
+	Logger::throwFatalError("Script::getScriptFile");
 }
 
 const vector<string> Script::getAllScriptFileIDs()

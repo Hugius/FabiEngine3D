@@ -9,26 +9,12 @@ void FabiEngine3D::aabbEntity_create(const string& ID)
 
 void FabiEngine3D::aabbEntity_bindToModelEntity(const string& ID, const string& parentID)
 {
-	if (_core->_modelEntityManager.isExisting(parentID))
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::MODEL_ENTITY);
-	}
-	else
-	{
-		Logger::throwError("Tried to bind AABB entity with ID \"" + ID + "\" to non-existing model entity with ID \"" + parentID + "\"");
-	}
+	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::MODEL_ENTITY);
 }
 
 void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& ID, const string& parentID)
 {
-	if (_core->_billboardEntityManager.isExisting(parentID))
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::BILLBOARD_ENTITY);
-	}
-	else
-	{
-		Logger::throwError("Tried to bind AABB entity with ID \"" + ID + "\" to non-existing billboard entity with ID \"" + parentID + "\"");
-	}
+	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::BILLBOARD_ENTITY);
 }
 
 void FabiEngine3D::aabbEntity_deleteAll()

@@ -22,7 +22,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getSkyEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create sky entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::1");
 			}
 			else
 			{
@@ -36,7 +36,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTerrainEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create terrain entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::2");
 			}
 			else
 			{
@@ -50,7 +50,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getWaterEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create water entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::3");
 			}
 			else
 			{
@@ -64,7 +64,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getModelEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create model entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::4");
 			}
 			else
 			{
@@ -78,7 +78,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getBillboardEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create billboard entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::5");
 			}
 			else
 			{
@@ -92,7 +92,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getAabbEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create AABB entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::6");
 			}
 			else
 			{
@@ -106,7 +106,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getLightEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create light entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::7");
 			}
 			else
 			{
@@ -120,7 +120,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getImageEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create image entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::8");
 			}
 			else
 			{
@@ -136,7 +136,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwError("Cannot create text entity: \"" + ID + "\" already exists!");
+				Logger::throwFatalError("BaseEntityManager::_createEntity::9");
 			}
 			else
 			{
@@ -245,14 +245,8 @@ void BaseEntityManager::deleteEntity(const string& ID)
 		}
 	}
 
-	// Temporary type2string map
-	map<EntityType, string> temp;
-	temp[EntityType::SKY] = "SKY"; temp[EntityType::TERRAIN] = "TERRAIN"; temp[EntityType::WATER] = "WATER";
-	temp[EntityType::MODEL] = "MODEL"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
-	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::IMAGE] = "GUI"; temp[EntityType::TEXT] = "TEXT";
-
 	// Error logging
-	Logger::throwError("Non-existing " + temp[_type] + " entity with ID \"" + ID + "\" requested for removal!");
+	Logger::throwFatalError("BaseEntityManager::deleteEntity");
 }
 
 void BaseEntityManager::deleteAllEntities()

@@ -78,12 +78,12 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::throwError("Framebuffer not initialized properly!");
+			Logger::throwFatalError("RenderFramebuffer::createColorTexture::1");
 		}
 	}
 	else
 	{
-		Logger::throwError("Framebuffer already initialized!");
+		Logger::throwFatalError("RenderFramebuffer::createColorTexture::2");
 	}
 }
 
@@ -139,12 +139,12 @@ void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::throwError("Framebuffer not initialized properly!");
+			Logger::throwFatalError("RenderFramebuffer::createDepthTexture::1");
 		}
 	}
 	else
 	{
-		Logger::throwError("Framebuffer already initialized!");
+		Logger::throwFatalError("RenderFramebuffer::createDepthTexture::2");
 	}
 }
 

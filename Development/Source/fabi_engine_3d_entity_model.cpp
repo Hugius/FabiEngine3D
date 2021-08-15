@@ -357,12 +357,6 @@ void FabiEngine3D::modelEntity_enableInstancing(const string& ID, vector<Vec3> o
 	// Temporary values
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
-	// Validate offsets
-	if (offsets.empty())
-	{
-		Logger::throwError("FabiEngine3D::modelEntity_enableInstancing");
-	}
-
 	for (const auto& partID : entity->getPartIDs())
 	{
 		// Check if entity has render buffer

@@ -24,7 +24,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwError("Cannot delete animation with ID \"" + ID + "\"");
+	Logger::throwFatalError("AnimationEditor::_deleteAnimation");
 }
 
 bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
@@ -63,7 +63,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
+	Logger::throwFatalError("AnimationEditor::_getAnimation");
 }
 
 const vector<string> AnimationEditor::getAllAnimationIDs()

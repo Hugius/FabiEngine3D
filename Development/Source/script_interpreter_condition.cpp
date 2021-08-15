@@ -373,7 +373,10 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& co
 			return (firstValue.getInteger() < secondValue.getInteger());
 		}
 	}
+	else
+	{
+		Logger::throwFatalError("ScriptInterpreter::_compareValues");
+	}
 
-	Logger::throwError("This error should not be thrown...");
 	return false;
 }

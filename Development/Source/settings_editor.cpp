@@ -174,7 +174,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SettingsEditor::loadSettings");
+		Logger::throwFatalError("SettingsEditor::loadSettingsFromFile");
 	}
 
 	// Compose file path
@@ -227,7 +227,7 @@ bool SettingsEditor::saveSettingsToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("SettingsEditor::save");
+		Logger::throwFatalError("SettingsEditor::saveSettingsToFile");
 	}
 
 	// Compose file path

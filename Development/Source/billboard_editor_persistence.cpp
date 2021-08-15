@@ -14,7 +14,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::getAllTexturePathsFromFile");
+		Logger::throwFatalError("BillboardEditor::getAllTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -78,7 +78,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::loadBillboardEntitiesFromFile");
+		Logger::throwFatalError("BillboardEditor::loadBillboardEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -211,7 +211,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("BillboardEditor::saveBillboardEntitiesToFile");
+		Logger::throwFatalError("BillboardEditor::saveBillboardEntitiesToFile");
 	}
 
 	// Compose file path

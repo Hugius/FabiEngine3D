@@ -18,7 +18,7 @@ shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing image entity with ID \"" + ID + "\" requested!");
+		Logger::throwFatalError("ImageEntityManager::getEntity");
 	}
 
 	return result;

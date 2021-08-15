@@ -176,7 +176,7 @@ ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
 	}
 
 
-	Logger::throwError("Local script variable \"" + variableID + "\" not existing!");
+	Logger::throwFatalError("ScriptInterpreter::_getLocalVariable");
 }
 
 ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
@@ -188,5 +188,5 @@ ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
 		return it->second;
 	}
 
-	Logger::throwError("Global script variable \"" + variableID + "\" not existing!");
+	Logger::throwFatalError("ScriptInterpreter::_getGlobalVariable");
 }

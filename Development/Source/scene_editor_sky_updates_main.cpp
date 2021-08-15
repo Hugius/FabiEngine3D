@@ -30,7 +30,7 @@ void SceneEditor::_updateSkyMenu()
 				}
 
 				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("skyList", "Choose Sky", Vec2(-0.5f, 0.1f), skyNames);
+				_gui.getGlobalScreen()->createChoiceForm("skyList", "Choose Sky", Vec2(0.0f, 0.1f), skyNames);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{

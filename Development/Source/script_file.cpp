@@ -23,7 +23,7 @@ void ScriptFile::setLineText(unsigned int index, const string& textContent)
 {
 	if (index >= _lines.size())
 	{
-		Logger::throwError("Cannot set scriptline text content at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwFatalError("ScriptFile::setLineText");
 	}
 	else
 	{
@@ -35,7 +35,7 @@ void ScriptFile::removeLine(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		Logger::throwError("Cannot delete scriptline at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwFatalError("ScriptFile::removeLine");
 	}
 	else
 	{
@@ -72,7 +72,7 @@ const string& ScriptFile::getLineText(unsigned int index)
 {
 	if (index >= _lines.size())
 	{
-		Logger::throwError("Cannot retrieve scriptline at file \"" + _ID + "\" with index: " + to_string(index));
+		Logger::throwFatalError("ScriptFile::getLineText");
 	}
 	else
 	{

@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else
 			{
-				Logger::throwError("Script interpreter print received empty value!");
+				Logger::throwFatalError("ScriptInterpreter::_executeFe3dMiscFunction");
 			}
 
 			// Return

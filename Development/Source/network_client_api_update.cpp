@@ -37,9 +37,9 @@ void NetworkClientAPI::update()
 		if (_connectionThread.wait_until(system_clock::time_point::min()) == future_status::ready)
 		{
 			// Retrieve error code
-			auto errorCode = _connectionThread.get();
+			auto connectionErrorCode = _connectionThread.get();
 
-			if (errorCode == 0) // Successfully connected with server
+			if (connectionErrorCode == 0) // Successfully connected with server
 			{
 				// Not connecting anymore
 				_isConnectingToServer = false;
@@ -54,13 +54,13 @@ void NetworkClientAPI::update()
 				// Start a thread to wait for TCP messages
 				_tcpMessageThread = async(launch::async, &NetworkClientAPI::_waitForTcpMessage, this, _connectionSocketID);
 			}
-			else if ((errorCode == WSAECONNREFUSED) || (errorCode == WSAETIMEDOUT)) // Cannot connect with server
+			else if ((connectionErrorCode == WSAECONNREFUSED) || (connectionErrorCode == WSAETIMEDOUT)) // Cannot connect with server
 			{
 				_isConnectingToServer = false;
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Networking client connect failed with error code: ", errorCode);
+				Logger::throwFatalError("NetworkClientAPI::update::1 ---> ", connectionErrorCode);
 			}
 		}
 		else
@@ -191,7 +191,7 @@ void NetworkClientAPI::update()
 			}
 			else // Something really bad happened
 			{
-				Logger::throwError("Networking client TCP receive failed with error code: ", messageErrorCode);
+				Logger::throwFatalError("NetworkClientAPI::update::2 ---> ", code);
 			}
 		}
 
@@ -229,7 +229,7 @@ void NetworkClientAPI::update()
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking client UDP receive failed with error code: ", messageErrorCode);
+			Logger::throwFatalError("NetworkClientAPI::update::3 ---> ", messageErrorCode);
 		}
 	}
 }

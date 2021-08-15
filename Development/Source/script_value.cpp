@@ -53,7 +53,7 @@ void ScriptValue::setString(const string& value)
 {
 	if (_type != ScriptValueType::STRING)
 	{
-		Logger::throwError("Cannot set string script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::setString");
 	}
 
 	_string = value;
@@ -63,7 +63,7 @@ void ScriptValue::setDecimal(float value)
 {
 	if (_type != ScriptValueType::DECIMAL)
 	{
-		Logger::throwError("Cannot set decimal script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::setDecimal");
 	}
 
 	_decimal = value;
@@ -73,7 +73,7 @@ void ScriptValue::setInteger(int value)
 {
 	if (_type != ScriptValueType::INTEGER)
 	{
-		Logger::throwError("Cannot set integer script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::setInteger");
 	}
 
 	_integer = value;
@@ -83,7 +83,7 @@ void ScriptValue::setBoolean(bool value)
 {
 	if (_type != ScriptValueType::BOOLEAN)
 	{
-		Logger::throwError("Cannot set boolean script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::setBoolean");
 	}
 
 	_boolean = value;
@@ -103,7 +103,7 @@ const string& ScriptValue::getString() const
 {
 	if (_type != ScriptValueType::STRING)
 	{
-		Logger::throwError("Cannot get script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::getString");
 	}
 
 	return _string;
@@ -113,7 +113,7 @@ float ScriptValue::getDecimal() const
 {
 	if (_type != ScriptValueType::DECIMAL)
 	{
-		Logger::throwError("Cannot get script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::getDecimal");
 	}
 
 	return _decimal;
@@ -123,7 +123,7 @@ int ScriptValue::getInteger() const
 {
 	if (_type != ScriptValueType::INTEGER)
 	{
-		Logger::throwError("Cannot get script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::getInteger");
 	}
 
 	return _integer;
@@ -133,7 +133,7 @@ bool ScriptValue::getBoolean() const
 {
 	if (_type != ScriptValueType::BOOLEAN)
 	{
-		Logger::throwError("Cannot get script value: wrong type!");
+		Logger::throwFatalError("ScriptValue::getBoolean");
 	}
 
 	return _boolean;

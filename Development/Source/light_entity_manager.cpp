@@ -15,7 +15,7 @@ shared_ptr<LightEntity> LightEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Non-existing light entity with ID \"" + ID + "\" requested!");
+		Logger::throwFatalError("LightEntityManager::getEntity");
 	}
 
 	return result;

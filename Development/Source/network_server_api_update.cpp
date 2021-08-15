@@ -50,7 +50,7 @@ void NetworkServerAPI::update()
 		auto clientSocketID = _connectionThread.get();
 		if (clientSocketID == INVALID_SOCKET)
 		{
-			Logger::throwError("Networking server accept failed with error code: ", WSAGetLastError());
+			Logger::throwFatalError("NetworkServerAPI::update::1 ---> ", WSAGetLastError());
 		}
 
 		// Save new client
@@ -181,7 +181,7 @@ BEGIN:
 				}
 				else // Something really bad happened
 				{
-					Logger::throwError("Networking server TCP receive failed with error code: ", messageErrorCode);
+					Logger::throwFatalError("NetworkServerAPI::update::2 ---> ", messageErrorCode);
 				}
 			}
 
@@ -236,7 +236,7 @@ BEGIN:
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("Networking server UDP receive failed with error code: ", messageErrorCode);
+			Logger::throwFatalError("NetworkServerAPI::update::3 ---> ", messageErrorCode);
 		}
 	}
 }

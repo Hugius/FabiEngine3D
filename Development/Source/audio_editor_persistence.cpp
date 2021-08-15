@@ -13,7 +13,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::getAllAudioPathsFromFile");
+		Logger::throwFatalError("AudioEditor::getAllAudioPathsFromFile");
 	}
 
 	// Compose file path
@@ -61,7 +61,7 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::loadAudioEntitiesFromFile");
+		Logger::throwFatalError("AudioEditor::loadAudioEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -130,7 +130,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("AudioEditor::saveAudioEntitiesToFile");
+		Logger::throwFatalError("AudioEditor::saveAudioEntitiesToFile");
 	}
 
 	// Compose file path

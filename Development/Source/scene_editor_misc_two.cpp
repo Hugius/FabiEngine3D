@@ -73,9 +73,9 @@ void SceneEditor::copyPreviewBillboard(const string& newID, const string& previe
 	_copyPreviewBillboard(newID, previewID, position, true);
 }
 
-void SceneEditor::copyPreviewAudio(const string& newID, const string& previewID, Vec3 position)
+void SceneEditor::copyPreviewSound(const string& newID, const string& previewID, Vec3 position)
 {
-	_copyPreviewAudio(newID, previewID, position, true);
+	_copyPreviewSound(newID, previewID, position, true);
 }
 
 void SceneEditor::clearCurrentScene()

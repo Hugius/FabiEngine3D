@@ -139,34 +139,41 @@ TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, 
 	return texture;
 }
 
-TTF_Font* TextureLoader::_loadFont(const string& fontPath)
+TTF_Font* TextureLoader::_loadFont(const string& filePath)
 {
+BEGIN:
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
 
-	// Load font
-	auto it = _fontCache.find(fontPath);
-	if (it == _fontCache.end()) // Not in map (yet)
-	{
-		// Try to load font
-		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 32);
+	// Search cache
+	auto iterator = _fontCache.find(filePath);
 
-		// Check if font loading is successful
-		if (font == nullptr)
-		{
-			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"!");
-			return nullptr;
-		}
-		else
-		{
-			// Save font to cache
-			_fontCache.insert(make_pair(fontPath, font));
-			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
-			return font;
-		}
+	// Return from cache
+	if (iterator != _fontCache.end())
+	{
+		return iterator->second;
 	}
 
-	return it->second; // Cache texture
+	// Load SDL font
+	TTF_Font* font = TTF_OpenFont((rootDir + filePath).c_str(), 32);
+
+	// Check if font loading failed
+	if (font == nullptr)
+	{
+		Logger::throwWarning("Cannot load font: \"" + filePath + "\"!");
+		return nullptr;
+	}
+	else
+	{
+		// Logging
+		Logger::throwInfo("Loaded font: \"" + filePath + "\"");
+
+		// Cache font
+		_fontCache.insert(make_pair(filePath, font));
+
+		// Return cached font
+		goto BEGIN;
+	}
 }
 
 TextureID TextureLoader::_loadText(const string& textContent, const string& fontPath)

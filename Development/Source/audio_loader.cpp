@@ -65,7 +65,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 			// Retrieve raw WAV data
 			auto data = threads[i].get();
 
-			// Check data status
+			// Check if data loading failed
 			if (data == nullptr)
 			{
 				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
@@ -75,7 +75,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 				// Load chunk file
 				auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
 
-				// Check chunk status
+				// Check if chunk loading went well
 				if (chunk != nullptr)
 				{
 					// Logging
@@ -92,61 +92,32 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 Mix_Chunk* AudioLoader::getChunkDataPointer(const string& filePath)
 {
 BEGIN:
+	// Search cache
 	auto iterator = _chunkCache.find(filePath);
-	if (iterator == _chunkCache.end()) // Not in map (yet)
+
+	// Return from cache
+	if (iterator != _chunkCache.end())
 	{
-		// Load raw WAV data
-		auto data = _loadWaveFile(filePath);
-
-		// Check data status
-		if (data == nullptr)
-		{
-			Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
-			return nullptr;
-		}
-		else
-		{
-			// Load chunk file
-			auto chunk = _loadChunk(filePath, (unsigned char*)data);
-
-			// Check chunk status
-			if (chunk == nullptr)
-			{
-				return nullptr;
-			}
-			else
-			{
-				// Logging
-				_throwLoadedMessage(filePath);
-
-				// Cache chunk
-				_chunkCache.insert(make_pair(filePath, chunk));
-
-				// Return cached chunk
-				goto BEGIN;
-			}
-		}
+		return iterator->second;
 	}
 
-	return iterator->second;
-}
+	// Load raw WAV data
+	auto data = _loadWaveFile(filePath);
 
-Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
-{
-BEGIN:
-	auto iterator = _musicCache.find(filePath);
-	if (iterator == _musicCache.end()) // Not in map (yet)
+	// Check if data loading failed
+	if (data == nullptr)
 	{
-		// Get application root directory
-		const auto rootDir = Tools::getRootDirectory();
+		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
+		return nullptr;
+	}
+	else
+	{
+		// Load chunk file
+		auto chunk = _loadChunk(filePath, (unsigned char*)data);
 
-		// Load audio file
-		Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
-
-		// Check music status
-		if (music == nullptr)
+		// Check if chunk loading failed
+		if (chunk == nullptr)
 		{
-			Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
 			return nullptr;
 		}
 		else
@@ -154,16 +125,45 @@ BEGIN:
 			// Logging
 			_throwLoadedMessage(filePath);
 
-			// Cache music
-			_musicCache.insert(make_pair(filePath, music));
+			// Cache chunk
+			_chunkCache.insert(make_pair(filePath, chunk));
 
-			// Return cached music
+			// Return cached chunk
 			goto BEGIN;
 		}
 	}
+}
+
+Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
+{
+BEGIN:
+	// Search cache
+	auto iterator = _musicCache.find(filePath);
+
+	// Return from cache
+	if (iterator != _musicCache.end())
+	{
+		return iterator->second;
+	}
+
+	// Load music file
+	auto music = _loadMusic(filePath);
+
+	// Check if music loading failed
+	if (music == nullptr)
+	{
+		return nullptr;
+	}
 	else
 	{
-		return iterator->second; // Return the corresponding mesh parts
+		// Logging
+		_throwLoadedMessage(filePath);
+
+		// Cache music
+		_musicCache.insert(make_pair(filePath, music));
+
+		// Return cached music
+		goto BEGIN;
 	}
 }
 
@@ -187,6 +187,8 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 {
 	// Load RAW audio data into an SDL chunk
 	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
+
+	// Check if chunk loading failed
 	if (chunk == nullptr)
 	{
 		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
@@ -197,7 +199,20 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 
 Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 {
-	return nullptr;
+	// Get application root directory
+	const auto rootDir = Tools::getRootDirectory();
+
+	// Load SDL music
+	Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
+
+	// Check if music loading failed
+	if (music == nullptr)
+	{
+		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
+		return nullptr;
+	}
+
+	return music;
 }
 
 void AudioLoader::_throwLoadedMessage(const string& filePath)

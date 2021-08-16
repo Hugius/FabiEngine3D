@@ -270,7 +270,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create sound
-			if (_copyPreviewAudio(soundID, previewID, position))
+			if (_copyPreviewSound(soundID, previewID, position))
 			{
 				_fe3d.sound_setMaxVolume(soundID, maxVolume);
 				_fe3d.sound_setMaxDistance(soundID, maxDistance);

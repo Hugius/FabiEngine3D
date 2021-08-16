@@ -162,88 +162,33 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 TextureID TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
-	auto it = _textureCache2D.find(filePath);
-	if (it == _textureCache2D.end()) // Not in map (yet)
+	// Search cache
+	auto iterator = _textureCache2D.find(filePath);
+
+	// Return from cache
+	if (iterator != _textureCache2D.end())
 	{
-		// Load SDL image
-		auto loadedImage = _loadImage(filePath);
-
-		// Check image status
-		if (loadedImage == nullptr)
-		{
-			Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
-			return 0;
-		}
-		else
-		{
-			// Load OpenGL texture
-			auto loadedTexture = _convertToTexture2D(filePath, loadedImage, isMipmapped, isAnisotropic);
-
-			// Free image memory
-			SDL_FreeSurface(loadedImage);
-
-			// Check texture status
-			if (loadedTexture == 0)
-			{
-				return 0;
-			}
-			else
-			{
-				// Cache texture
-				_textureCache2D.insert(make_pair(filePath, loadedTexture));
-
-				// Return cached texture
-				goto BEGIN;
-			}
-		}
+		return iterator->second;
 	}
 
-	return it->second;
-}
+	// Load SDL image
+	auto loadedImage = _loadImage(filePath);
 
-TextureID TextureLoader::getTexture3D(const array<string, 6>& filePaths)
-{
-BEGIN:
-	auto it = _textureCache3D.find(filePaths);
-	if (it == _textureCache3D.end()) // Not in map (yet)
+	// Check image status
+	if (loadedImage == nullptr)
 	{
-		// Temporary values
-		vector<future<SDL_Surface*>> threads;
-		array<SDL_Surface*, 6> loadedImages = {};
-
-		// Start all loading threads
-		for (size_t i = 0; i < filePaths.size(); i++)
-		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
-		}
-
-		// Wait for all threads to finish
-		for (size_t i = 0; i < threads.size(); i++)
-		{
-			// Save loaded image
-			loadedImages[i] = threads[i].get();
-
-			// Error logging
-			if (loadedImages[i] == nullptr && !filePaths[i].empty())
-			{
-				Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
-			}
-		}
-
+		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
+		return 0;
+	}
+	else
+	{
 		// Load OpenGL texture
-		TextureID loadedTexture = _convertToTexture3D(filePaths, loadedImages);
+		auto loadedTexture = _convertToTexture2D(filePath, loadedImage, isMipmapped, isAnisotropic);
 
-		// Free images memory
-		for (const auto& image : loadedImages)
-		{
-			// Only if memory is present
-			if (image != nullptr)
-			{
-				SDL_FreeSurface(image);
-			}
-		}
+		// Free image memory
+		SDL_FreeSurface(loadedImage);
 
-		// Determine if needs to be cached
+		// Check texture status
 		if (loadedTexture == 0)
 		{
 			return 0;
@@ -251,63 +196,132 @@ BEGIN:
 		else
 		{
 			// Cache texture
-			_textureCache3D.insert(make_pair(filePaths, loadedTexture));
+			_textureCache2D.insert(make_pair(filePath, loadedTexture));
 
 			// Return cached texture
 			goto BEGIN;
 		}
 	}
+}
 
-	return it->second;
+TextureID TextureLoader::getTexture3D(const array<string, 6>& filePaths)
+{
+BEGIN:
+	// Search cache
+	auto iterator = _textureCache3D.find(filePaths);
+
+	// Return from cache
+	if (iterator != _textureCache3D.end())
+	{
+		return iterator->second;
+	}
+
+	// Temporary values
+	vector<future<SDL_Surface*>> threads;
+	array<SDL_Surface*, 6> loadedImages = {};
+
+	// Start all loading threads
+	for (size_t i = 0; i < filePaths.size(); i++)
+	{
+		threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
+	}
+
+	// Wait for all threads to finish
+	for (size_t i = 0; i < threads.size(); i++)
+	{
+		// Save loaded image
+		loadedImages[i] = threads[i].get();
+
+		// Error logging
+		if (loadedImages[i] == nullptr && !filePaths[i].empty())
+		{
+			Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
+		}
+	}
+
+	// Load OpenGL texture
+	TextureID loadedTexture = _convertToTexture3D(filePaths, loadedImages);
+
+	// Free images memory
+	for (const auto& image : loadedImages)
+	{
+		// Only if memory is present
+		if (image != nullptr)
+		{
+			SDL_FreeSurface(image);
+		}
+	}
+
+	// Determine if needs to be cached
+	if (loadedTexture == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		// Cache texture
+		_textureCache3D.insert(make_pair(filePaths, loadedTexture));
+
+		// Return cached texture
+		goto BEGIN;
+	}
 }
 
 TextureID TextureLoader::getText(const string& textContent, const string& fontPath)
 {
 BEGIN:
-	auto it = _textCache.find(make_pair(textContent, fontPath));
-	if (it == _textCache.end()) // Not in map (yet)
+	// Search cache
+	auto iterator = _textCache.find(make_pair(textContent, fontPath));
+
+	// Return from cache
+	if (iterator != _textCache.end())
 	{
-		TextureID loadedTexture = _loadText(textContent, fontPath);
-
-		// Determine if needs to be cached
-		if (loadedTexture == 0)
-		{
-			return 0;
-		}
-		else
-		{
-			_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
-			goto BEGIN;
-		}
+		return iterator->second;
 	}
+	
+	// Load OpenGL texture
+	TextureID loadedTexture = _loadText(textContent, fontPath);
 
-	return it->second;
+	// Determine if needs to be cached
+	if (loadedTexture == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
+		goto BEGIN;
+	}
 }
 
 const vector<float>* TextureLoader::getBitmapPixels(const string& filePath)
 {
 BEGIN:
-	auto it = _bitmapCache.find(filePath);
-	if (it == _bitmapCache.end()) // Not in map (yet)
+	// Search cache
+	auto iterator = _bitmapCache.find(filePath);
+
+	// Return from cache
+	if (iterator != _bitmapCache.end())
 	{
-		auto loadedPixels = _loadBitmapPixels(filePath);
-
-		// Check pixels status
-		if (loadedPixels.empty())
-		{
-			return nullptr;
-		}
-		else
-		{
-			// Cache pixels
-			_bitmapCache.insert(make_pair(filePath, loadedPixels));
-
-			// Return cached pixels
-			goto BEGIN;
-		}
+		return &iterator->second;
 	}
 
-	return &it->second;
+	// Load pixels
+	auto loadedPixels = _loadBitmapPixels(filePath);
+
+	// Check pixels status
+	if (loadedPixels.empty())
+	{
+		return nullptr;
+	}
+	else
+	{
+		// Cache pixels
+		_bitmapCache.insert(make_pair(filePath, loadedPixels));
+
+		// Return cached pixels
+		goto BEGIN;
+	}
 }
 
 void TextureLoader::clearTextureCache2D(const string& filePath)

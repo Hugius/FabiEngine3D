@@ -9,11 +9,11 @@ class AudioManager final
 public:
 	AudioManager(AudioLoader& audioLoader);
 
-	void createMusic(const string& filename);
 	void createSound(const string& ID, const string& filename);
-	void deleteMusic();
+	void createMusic(const string& filename);
 	void deleteSound(const string& ID);
 	void deleteAllSounds();
+	void deleteMusic();
 
 	bool isSoundExisting(const string& ID);
 

@@ -352,7 +352,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	return true;
 }
 
-bool SceneEditor::_copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
+bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside)
 {
 	// Error checking
 	if (_fe3d.sound_isExisting(newID))

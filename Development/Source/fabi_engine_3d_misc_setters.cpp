@@ -275,13 +275,9 @@ void FabiEngine3D::misc_clearBitmapCache(const string& filePath)
 	_core->_textureLoader.clearBitmapCache(filePath);
 }
 
-void FabiEngine3D::misc_clearAudioChunkCache(const string& filePath)
+void FabiEngine3D::misc_clearAudioCache(const string& filePath)
 {
 	_core->_audioLoader.clearChunkCache(filePath);
-}
-
-void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
-{
 	_core->_audioLoader.clearMusicCache(filePath);
 }
 

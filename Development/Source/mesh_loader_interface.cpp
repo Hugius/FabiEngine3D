@@ -78,33 +78,34 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 
 const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath)
 {
-	// Check if mesh data was loaded already, if not, load data and store in map
-BEGIN: auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
-	if (iterator == _meshCache.end()) 
+BEGIN:
+	// Search cache
+	auto iterator = _meshCache.find(filePath);
+
+	// Return from cache
+	if (iterator != _meshCache.end())
 	{
-		// Load mesh
-		auto loadedModel = _loadMesh(filePath);
+		return &iterator->second;
+	}
 
-		// Check model status
-		if (loadedModel.empty())
-		{
-			return nullptr;
-		}
-		else
-		{
-			// Logging
-			Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
+	// Load mesh
+	auto loadedModel = _loadMesh(filePath);
 
-			// Cache model
-			_meshCache.insert(make_pair(filePath, loadedModel));
-
-			// Return new model
-			goto BEGIN;
-		}
+	// Check model status
+	if (loadedModel.empty())
+	{
+		return nullptr;
 	}
 	else
 	{
-		return &iterator->second; // Return the corresponding mesh parts
+		// Logging
+		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
+
+		// Cache model
+		_meshCache.insert(make_pair(filePath, loadedModel));
+
+		// Return new model
+		goto BEGIN;
 	}
 }
 

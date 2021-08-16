@@ -127,7 +127,7 @@ void AudioEditor::_updateAudioCreating()
 								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 							{
 								const string newFilePath = filePath.substr(rootDirectory.size());
-								_fe3d.misc_clearAudioChunkCache(newFilePath);
+								_fe3d.misc_clearAudioCache(newFilePath);
 								_fe3d.sound_create(newAudioID, newFilePath);
 							}
 							else

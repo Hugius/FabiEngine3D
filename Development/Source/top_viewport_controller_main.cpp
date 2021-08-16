@@ -274,8 +274,7 @@ void TopViewportController::_updateMiscScreenManagement()
 					_fe3d.misc_clearFontCache(newFilePath);
 					_fe3d.misc_clearTextureCache2D(newFilePath);
 					_fe3d.misc_clearBitmapCache(newFilePath);
-					_fe3d.misc_clearAudioChunkCache(newFilePath);
-					_fe3d.misc_clearAudioMusicCache(newFilePath);
+					_fe3d.misc_clearAudioCache(newFilePath);
 				}
 				else
 				{

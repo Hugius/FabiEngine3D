@@ -39,7 +39,7 @@ public:
 	void addSoundToCustomScene(const string& soundID);
 	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
-	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
+	void copyPreviewSound(const string& newID, const string& previewID, Vec3 position);
 	void clearCurrentScene();
 
 	// Strings
@@ -119,7 +119,7 @@ private:
 	bool _copyPreviewWater(const string& newID, const string& previewID);
 	bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 	bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	bool _copyPreviewAudio(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
+	bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 	
 	// Instances
 	FabiEngine3D& _fe3d;

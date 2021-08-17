@@ -22,6 +22,10 @@ void SceneEditor::_updateSettingsMenu()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				return;
 			}
+			else if (screen->getButton("lighting")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsLighting");
+			}
 			else if (screen->getButton("graphics")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
@@ -242,7 +246,6 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 			}
 		}
 	
-
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{

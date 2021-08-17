@@ -1,6 +1,9 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
+// Constants variables
+#define KERNEL_SIZE 5
+
 // In variables
 in vec2 f_pos;
 in vec2 f_uv;
@@ -16,9 +19,6 @@ uniform bool u_isHorizontal;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
-
-// Local variables
-#define KERNEL_SIZE 5
 
 // Process fragment
 void main()

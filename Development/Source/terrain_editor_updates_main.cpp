@@ -21,7 +21,7 @@ void TerrainEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightingMenu();
+		_updateLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{

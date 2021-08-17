@@ -5,7 +5,7 @@
 
 using std::clamp;
 
-void TerrainEditor::_updateLightingMenu()
+void TerrainEditor::_updateLightingSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

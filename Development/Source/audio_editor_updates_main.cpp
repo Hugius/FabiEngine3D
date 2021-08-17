@@ -138,7 +138,7 @@ void AudioEditor::_updateAudioCreating()
 							}
 						}
 
-						// Check if sound creation went well
+						// Check if audio creation went well
 						if (_fe3d.sound_isExisting(newAudioID))
 						{
 							// Go to editor
@@ -229,7 +229,7 @@ void AudioEditor::_updateAudioDeleting()
 			// Go to main screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 
-			// Delete sound
+			// Delete audio
 			if (_fe3d.sound_isExisting(_currentAudioID))
 			{
 				_fe3d.sound_delete(_currentAudioID);

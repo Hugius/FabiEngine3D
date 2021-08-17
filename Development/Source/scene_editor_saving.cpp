@@ -281,7 +281,7 @@ bool SceneEditor::saveEditorSceneToFile()
 			billboardLightness << endl;
 	}
 
-	// Point lights
+	// Lights
 	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
 	{
 		// Check if allowed to save

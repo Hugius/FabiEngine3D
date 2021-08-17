@@ -26,8 +26,6 @@ void SceneEditor::load()
 	_fe3d.camera_reset();
 
 	// Default graphics
-	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_setSceneReflectionHeight(0.0f);
 
 	// Directional light source
@@ -125,10 +123,6 @@ void SceneEditor::unload()
 
 	// Clear scene
 	clearCurrentScene();
-
-	// Default graphics
-	_fe3d.gfx_disableSpecularLighting(true);
-	_fe3d.gfx_disablePointLighting(true);
 
 	// Unload preview entities
 	_skyEditor.unloadSkyEntities();

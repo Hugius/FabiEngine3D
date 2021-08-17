@@ -152,7 +152,7 @@ void ModelEditor::_updateChoiceMenu()
 	}
 	else if (screen->getID() == "modelEditorMenuLighting")
 	{
-		_updateLightingMenu();
+		_updateLightingSettingsMenu();
 	}
 	else if (screen->getID() == "modelEditorMenuSize")
 	{

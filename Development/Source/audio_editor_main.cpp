@@ -36,7 +36,7 @@ void AudioEditor::unload()
 	// GUI
 	_unloadGUI();
 
-	// Delete sounds
+	// Delete audio
 	_fe3d.sound_deleteAll();
 
 	// Miscellaneous

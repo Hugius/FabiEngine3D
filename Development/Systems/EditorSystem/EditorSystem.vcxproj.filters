@@ -423,6 +423,9 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_settings_updates_lighting.cpp">
+      <Filter>Scene Editor\Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\animation_editor.hpp">

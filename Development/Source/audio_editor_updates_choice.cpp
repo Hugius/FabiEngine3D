@@ -20,7 +20,7 @@ void AudioEditor::_updateChoiceMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				// Stop sound preview
+				// Stop audio preview
 				if (isPlaying)
 				{
 					_fe3d.sound_stop(_currentAudioID, 0);

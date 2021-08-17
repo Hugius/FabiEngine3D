@@ -10,13 +10,8 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate preview audio ID
-			if (_validateFe3dSound("@" + arguments[0].getString(), true))
-			{
-				auto filePath = _fe3d.sound_getFilePath("@" + arguments[0].getString());
-				_fe3d.music_addToPlaylist(filePath);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
+			_fe3d.music_addToPlaylist("game_assets\\audio\\" + arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_clear_playlist")

@@ -75,13 +75,13 @@ private:
 	void _updateSoundChoosingMenu();
 	void _updateSoundPlacing();
 	void _updateSoundEditing();
-	void _updateLightingMenu();
-	void _updateAmbientLightingMenu();
-	void _updateDirectionalLightingMenu();
-	void _updatePointLightingMenu();
+	void _updateLightMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
 	void _updateSettingsMenu();
+	void _updateLightingSettingsMenu();
+	void _updateAmbientLightingSettingsMenu();
+	void _updateDirectionalLightingSettingsMenu();
 	void _updateGraphicsSettingsMenu();
 	void _updateShadowGraphicsSettingsMenu();
 	void _updateMotionBlurGraphicsSettingsMenu();

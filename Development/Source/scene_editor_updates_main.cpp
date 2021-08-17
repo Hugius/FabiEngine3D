@@ -67,19 +67,19 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightingMenu();
+		_updateLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateAmbientLightingMenu();
+		_updateAmbientLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateDirectionalLightingMenu();
+		_updateDirectionalLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updatePointLightingMenu();
+		_updateLightMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -301,21 +301,21 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuWater");
 			}
-			else if (screen->getButton("model")->isHovered())
+			else if (screen->getButton("models")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 			}
-			else if (screen->getButton("billboard")->isHovered())
+			else if (screen->getButton("billboards")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 			}
-			else if (screen->getButton("lighting")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
-			}
-			else if (screen->getButton("sound")->isHovered())
+			else if (screen->getButton("sounds")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
+			}
+			else if (screen->getButton("lights")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLight");
 			}
 			else if (screen->getButton("settings")->isHovered())
 			{

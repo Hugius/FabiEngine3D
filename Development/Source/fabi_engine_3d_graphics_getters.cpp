@@ -16,16 +16,6 @@ const bool FabiEngine3D::gfx_isDirectionalLightingEnabled()
 	return _core->_renderBus.isDirectionalLightingEnabled();
 }
 
-const bool FabiEngine3D::gfx_isSpecularLightingEnabled()
-{
-	return _core->_renderBus.isSpecularLightingEnabled();
-}
-
-const bool FabiEngine3D::gfx_isPointLightingEnabled()
-{
-	return _core->_renderBus.isPointLightingEnabled();
-}
-
 const bool FabiEngine3D::gfx_isSpotLightingEnabled()
 {
 	return _core->_renderBus.isSpotLightingEnabled();
@@ -88,47 +78,47 @@ const unsigned int FabiEngine3D::gfx_getRefractionQuality()
 
 const Vec3 FabiEngine3D::gfx_getAmbientLightingColor()
 {
-	return _core->_renderBus.getAmbientLightColor();
+	return _core->_renderBus.getAmbientLightingColor();
 }
 
 const float FabiEngine3D::gfx_getAmbientLightingIntensity()
 {
-	return _core->_renderBus.getAmbientLightIntensity();
+	return _core->_renderBus.getAmbientLightingIntensity();
 }
 
 const float FabiEngine3D::gfx_getDirectionalLightingIntensity()
 {
-	return _core->_renderBus.getDirectionalLightIntensity();
+	return _core->_renderBus.getDirectionalLightingIntensity();
 }
 
 const float FabiEngine3D::gfx_getSpotLightingIntensity()
 {
-	return _core->_renderBus.getSpotLightIntensity();
+	return _core->_renderBus.getSpotLightingIntensity();
 }
 
 const float FabiEngine3D::gfx_getSpotLightingAngle()
 {
-	return _core->_renderBus.getMaxSpotLightAngle();
+	return _core->_renderBus.getMaxSpotLightingAngle();
 }
 
 const float FabiEngine3D::gfx_getSpotLightingDistance()
 {
-	return _core->_renderBus.getMaxSpotLightDistance();
+	return _core->_renderBus.getMaxSpotLightingDistance();
 }
 
 const Vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
 {
-	return _core->_renderBus.getDirectionalLightPosition();
+	return _core->_renderBus.getDirectionalLightingPosition();
 }
 
 const Vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
 {
-	return _core->_renderBus.getDirectionalLightColor();
+	return _core->_renderBus.getDirectionalLightingColor();
 }
 
 const Vec3 FabiEngine3D::gfx_getSpotLightingColor()
 {
-	return _core->_renderBus.getSpotLightColor();
+	return _core->_renderBus.getSpotLightingColor();
 }
 
 const float FabiEngine3D::gfx_getFogMinDistance()

@@ -85,7 +85,7 @@ void SceneEditor::_updateLightPlacing()
 					}
 					else
 					{
-						// Hide preview point light
+						// Hide preview light
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
 						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 					}

@@ -237,7 +237,7 @@ void MasterRenderer::_updateLensFlare()
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Calculate screen position
-		auto lightPosition = _renderBus.getDirectionalLightPosition();
+		auto lightPosition = _renderBus.getDirectionalLightingPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
 		auto projectionMatrix = _renderBus.getProjectionMatrix();
 		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightPosition.x, lightPosition.y, lightPosition.z, 1.0f));

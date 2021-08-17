@@ -115,22 +115,22 @@ void RenderBus::setCameraFront(Vec3 value)
 	_cameraFront = value;
 }
 
-void RenderBus::setAmbientLightColor(Vec3 value)
+void RenderBus::setAmbientLightingColor(Vec3 value)
 {
 	_ambientLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setDirectionalLightPosition(Vec3 value)
+void RenderBus::setDirectionalLightingPosition(Vec3 value)
 {
 	_directionalLightPosition = value;
 }
 
-void RenderBus::setDirectionalLightColor(Vec3 value)
+void RenderBus::setDirectionalLightingColor(Vec3 value)
 {
 	_directionalLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setSpotLightColor(Vec3 value)
+void RenderBus::setSpotLightingColor(Vec3 value)
 {
 	_spotLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
@@ -225,27 +225,27 @@ void RenderBus::setSkyMixValue(float value)
 	_skyMixValue = clamp(value, 0.0f, 1.0f);
 }
 
-void RenderBus::setMaxSpotLightAngle(float value)
+void RenderBus::setMaxSpotLightingAngle(float value)
 {
 	_maxSpotLightAngle = fmodf(value, 360.0f);
 }
 
-void RenderBus::setMaxSpotLightDistance(float value)
+void RenderBus::setMaxSpotLightingDistance(float value)
 {
 	_maxSpotLightDistance = max(0.0f, value);
 }
 
-void RenderBus::setAmbientLightIntensity(float value)
+void RenderBus::setAmbientLightingIntensity(float value)
 {
 	_ambientLightIntensity = max(0.0f, value);
 }
 
-void RenderBus::setDirectionalLightIntensity(float value)
+void RenderBus::setDirectionalLightingIntensity(float value)
 {
 	_directionalLightIntensity = max(0.0f, value);
 }
 
-void RenderBus::setSpotLightIntensity(float value)
+void RenderBus::setSpotLightingIntensity(float value)
 {
 	_spotLightIntensity = max(0.0f, value);
 }
@@ -351,16 +351,6 @@ void RenderBus::setAmbientLightingEnabled(bool value)
 void RenderBus::setDirectionalLightingEnabled(bool value)
 {
 	_isDirectionalLightingEnabled = value;
-}
-
-void RenderBus::setSpecularLightingEnabled(bool value)
-{
-	_isSpecularLightingEnabled = value;
-}
-
-void RenderBus::setPointLightingEnabled(bool value)
-{
-	_isPointLightingEnabled = value;
 }
 
 void RenderBus::setSpotLightingEnabled(bool value)

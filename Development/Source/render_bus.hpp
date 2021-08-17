@@ -44,10 +44,10 @@ public:
 	// Vector3
 	void setCameraPosition(Vec3 value);
 	void setCameraFront(Vec3 value);
-	void setAmbientLightColor(Vec3 value);
-	void setDirectionalLightPosition(Vec3 value);
-	void setDirectionalLightColor(Vec3 value);
-	void setSpotLightColor(Vec3 value);
+	void setAmbientLightingColor(Vec3 value);
+	void setDirectionalLightingPosition(Vec3 value);
+	void setDirectionalLightingColor(Vec3 value);
+	void setSpotLightingColor(Vec3 value);
 	void setShadowEyePosition(Vec3 value);
 	void setShadowAreaCenter(Vec3 value);
 	void setFogColor(Vec3 value);
@@ -56,11 +56,11 @@ public:
 	void setMixSkyColor(Vec3 value);
 
 	// Floats
-	void setAmbientLightIntensity(float value);
-	void setDirectionalLightIntensity(float value);
-	void setSpotLightIntensity(float value);
-	void setMaxSpotLightAngle(float value);
-	void setMaxSpotLightDistance(float value);
+	void setAmbientLightingIntensity(float value);
+	void setDirectionalLightingIntensity(float value);
+	void setSpotLightingIntensity(float value);
+	void setMaxSpotLightingAngle(float value);
+	void setMaxSpotLightingDistance(float value);
 	void setFogMinDistance(float value);
 	void setFogMaxDistance(float value);
 	void setFogThickness(float value);
@@ -97,8 +97,6 @@ public:
 	void setFxaaEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
-	void setSpecularLightingEnabled(bool value);
-	void setPointLightingEnabled(bool value);
 	void setSpotLightingEnabled(bool value);
 	void setFogEnabled(bool value);
 	void setBloomEnabled(bool value);
@@ -150,10 +148,10 @@ public:
 	// Vector3
 	const Vec3 getCameraPosition();
 	const Vec3 getCameraFront();
-	const Vec3 getAmbientLightColor();
-	const Vec3 getDirectionalLightColor();
-	const Vec3 getDirectionalLightPosition();
-	const Vec3 getSpotLightColor();
+	const Vec3 getAmbientLightingColor();
+	const Vec3 getDirectionalLightingColor();
+	const Vec3 getDirectionalLightingPosition();
+	const Vec3 getSpotLightingColor();
 	const Vec3 getShadowEyePosition();
 	const Vec3 getShadowAreaCenter();
 	const Vec3 getFogColor();
@@ -162,11 +160,11 @@ public:
 	const Vec3 getMixSkyColor();
 
 	// Floats
-	const float getAmbientLightIntensity();
-	const float getDirectionalLightIntensity();
-	const float getSpotLightIntensity();
-	const float getMaxSpotLightAngle();
-	const float getMaxSpotLightDistance();
+	const float getAmbientLightingIntensity();
+	const float getDirectionalLightingIntensity();
+	const float getSpotLightingIntensity();
+	const float getMaxSpotLightingAngle();
+	const float getMaxSpotLightingDistance();
 	const float getFogMinDistance();
 	const float getFogMaxDistance();
 	const float getFogThickness();
@@ -202,8 +200,6 @@ public:
 	const bool isFxaaEnabled();
 	const bool isAmbientLightingEnabled();
 	const bool isDirectionalLightingEnabled();
-	const bool isSpecularLightingEnabled();
-	const bool isPointLightingEnabled();
 	const bool isSpotLightingEnabled();
 	const bool isFogEnabled();
 	const bool isBloomEnabled();
@@ -308,8 +304,6 @@ private:
 	bool _isFxaaEnabled = false;
 	bool _isAmbientLightingEnabled = false;
 	bool _isDirectionalLightingEnabled = false;
-	bool _isSpecularLightingEnabled = false;
-	bool _isPointLightingEnabled = false;
 	bool _isSpotLightingEnabled = false;
 	bool _isFogEnabled = false;
 	bool _isBloomEnabled = false;

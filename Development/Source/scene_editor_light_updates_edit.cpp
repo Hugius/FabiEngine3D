@@ -45,15 +45,15 @@ void SceneEditor::_updateLightEditing()
 							ACTIVE_LAMP_ID = SELECTED_LAMP_ID;
 
 							// Update buttons hoverability
-							rightWindow->getScreen("pointLightPropertiesMenu")->getButton("position")->setHoverable(false);
-							rightWindow->getScreen("pointLightPropertiesMenu")->getButton("radius")->setHoverable(true);
-							rightWindow->getScreen("pointLightPropertiesMenu")->getButton("color")->setHoverable(true);
+							rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
+							rightWindow->getScreen("lightPropertiesMenu")->getButton("radius")->setHoverable(true);
+							rightWindow->getScreen("lightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 							// Filling writeFields
 							Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_LAMP_ID);
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-							rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 						}
 					}
 				}
@@ -91,10 +91,10 @@ void SceneEditor::_updateLightEditing()
 		if (ACTIVE_LAMP_ID != "")
 		{
 			// Temporary values
-			auto screen = rightWindow->getScreen("pointLightPropertiesMenu");
+			auto screen = rightWindow->getScreen("lightPropertiesMenu");
 
 			// Activate screen
-			rightWindow->setActiveScreen("pointLightPropertiesMenu");
+			rightWindow->setActiveScreen("lightPropertiesMenu");
 
 			// Check if input received
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -147,40 +147,40 @@ void SceneEditor::_updateLightEditing()
 			// Handle position, radius, color
 			if (!screen->getButton("position")->isHoverable())
 			{
-				_handleValueChanging("pointLightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointLightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
-				_handleValueChanging("pointLightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
-				_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
-				_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
+				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 				_fe3d.modelEntity_setPosition(ACTIVE_LAMP_ID, position);
 				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
 			}
 			else if (!screen->getButton("radius")->isHoverable())
 			{
-				_handleValueChanging("pointLightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / 100.0f), 1.0f, 0.0f);
+				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_fe3d.lightEntity_setRadius(ACTIVE_LIGHT_ID, radius);
 			}
 			else if (!screen->getButton("color")->isHoverable())
 			{
-				_handleValueChanging("pointLightPropertiesMenu", "xPlus", "x", color.r, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "xMinus", "x", color.r, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "yPlus", "y", color.g, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", color.g, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", color.b, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", color.r, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", color.r, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", color.g, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", color.g, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", color.b, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_fe3d.modelEntity_setColor(ACTIVE_LAMP_ID, color);
 				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
 			}
 
 			// Handle intensity
-			_handleValueChanging("pointLightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
-			_handleValueChanging("pointLightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
+			_handleValueChanging("lightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
+			_handleValueChanging("lightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
 			_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
 
 			// Handle shape

@@ -632,8 +632,6 @@ public:
 	void gfx_setRefractionQuality(int quality);
 	void gfx_enableAmbientLighting(Vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity);
-	void gfx_enableSpecularLighting();
-	void gfx_enablePointLighting();
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
 	void gfx_enableFXAA();
@@ -645,8 +643,6 @@ public:
 	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
 	void gfx_disableAmbientLighting(bool resetProperties = false);
 	void gfx_disableDirectionalLighting(bool resetProperties = false);
-	void gfx_disableSpecularLighting(bool resetProperties = false);
-	void gfx_disablePointLighting(bool resetProperties = false);
 	void gfx_disableSpotLighting(bool resetProperties = false);
 	void gfx_disableFog(bool resetProperties = false);
 	void gfx_disableFXAA(bool resetProperties = false);
@@ -695,8 +691,6 @@ public:
 	const bool gfx_isFxaaEnabled();
 	const bool gfx_isAmbientLightingEnabled();
 	const bool gfx_isDirectionalLightingEnabled();
-	const bool gfx_isSpecularLightingEnabled();
-	const bool gfx_isPointLightingEnabled();
 	const bool gfx_isSpotLightingEnabled();
 	const bool gfx_isFogEnabled();
 	const bool gfx_isBloomEnabled();

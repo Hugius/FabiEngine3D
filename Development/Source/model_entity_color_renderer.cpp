@@ -16,25 +16,23 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_cameraFront", _renderBus.getCameraFront());
-	_shader.uploadUniform("u_ambientLightColor", _renderBus.getAmbientLightColor());
-	_shader.uploadUniform("u_ambientLightIntensity", _renderBus.getAmbientLightIntensity());
-	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
-	_shader.uploadUniform("u_spotLightColor", _renderBus.getSpotLightColor());
-	_shader.uploadUniform("u_spotLightIntensity", _renderBus.getSpotLightIntensity());
-	_shader.uploadUniform("u_maxSpotLightDistance", _renderBus.getMaxSpotLightDistance());
-	_shader.uploadUniform("u_maxSpotlightAngle", cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightAngle())));
+	_shader.uploadUniform("u_ambientLightingColor", _renderBus.getAmbientLightingColor());
+	_shader.uploadUniform("u_ambientLightingIntensity", _renderBus.getAmbientLightingIntensity());
+	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_directionalLightingIntensity", _renderBus.getDirectionalLightingIntensity());
+	_shader.uploadUniform("u_spotLightingColor", _renderBus.getSpotLightingColor());
+	_shader.uploadUniform("u_spotLightingIntensity", _renderBus.getSpotLightingIntensity());
+	_shader.uploadUniform("u_maxSpotLightingDistance", _renderBus.getMaxSpotLightingDistance());
+	_shader.uploadUniform("u_maxSpotLightingAngle", cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightingAngle())));
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
 	_shader.uploadUniform("u_fogColor", _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled", _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isAmbientLightEnabled", _renderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_isSpotLightEnabled", _renderBus.isSpotLightingEnabled());
-	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_isPointLightEnabled", _renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_isAmbientLightingEnabled", _renderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_isDirectionalLightingEnabled", _renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_isSpotLightingEnabled", _renderBus.isSpotLightingEnabled());
 	_shader.uploadUniform("u_shadowAreaSize", _renderBus.getShadowAreaSize());
 	_shader.uploadUniform("u_shadowAreaCenter", _renderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
@@ -105,34 +103,31 @@ void ModelEntityColorRenderer::unbind()
 
 void ModelEntityColorRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
-	if (_renderBus.isPointLightingEnabled())
+	// Compose a map of all visible lights
+	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
+	for (const auto& [keyID, entity] : entities)
 	{
-		// Compose a map of all visible lights
-		unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
-		for (const auto& [keyID, entity] : entities)
+		if (entity->isVisible())
 		{
-			if (entity->isVisible())
-			{
-				visibleEntities[keyID] = entity;
-			}
+			visibleEntities[keyID] = entity;
 		}
-
-		// Render all lights
-		unsigned int index = 0;
-		for (const auto& [keyID, entity] : visibleEntities)
-		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-			_shader.uploadUniform("u_pointLightRadiuses[" + to_string(index) + "]", entity->getRadius());
-			_shader.uploadUniform("u_pointLightShapes[" + to_string(index) + "]", static_cast<int>(entity->getShape()));
-
-			index++;
-		}
-
-		// Upload amount
-		_shader.uploadUniform("u_pointLightCount", static_cast<int>(visibleEntities.size()));
 	}
+
+	// Render all lights
+	unsigned int index = 0;
+	for (const auto& [keyID, entity] : visibleEntities)
+	{
+		_shader.uploadUniform("u_lightPositions[" + to_string(index) + "]", entity->getPosition());
+		_shader.uploadUniform("u_lightColors[" + to_string(index) + "]", entity->getColor());
+		_shader.uploadUniform("u_lightIntensities[" + to_string(index) + "]", entity->getIntensity());
+		_shader.uploadUniform("u_lightRadiuses[" + to_string(index) + "]", entity->getRadius());
+		_shader.uploadUniform("u_lightShapes[" + to_string(index) + "]", static_cast<int>(entity->getShape()));
+
+		index++;
+	}
+
+	// Upload count
+	_shader.uploadUniform("u_lightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
@@ -155,8 +150,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 		auto viewMatrix = (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix());
 
 		// Shader uniforms
-		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
-		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
+		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isSkyReflective", (entity->getReflectionType() == ReflectionType::SKY));

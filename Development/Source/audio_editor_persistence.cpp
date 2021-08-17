@@ -98,10 +98,10 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 		audioPath = (audioPath == "?") ? "" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-		// Create sound
+		// Create audio
 		_fe3d.sound_create(audioID, audioPath);
 
-		// Check if sound creation went well
+		// Check if audio creation went well
 		if (_fe3d.sound_isExisting(audioID))
 		{
 			// Add audio ID

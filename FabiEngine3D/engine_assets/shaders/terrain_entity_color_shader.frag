@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Const variables
-#define MAX_POINT_LIGHT_COUNT 128
+#define MAX_LIGHT_COUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -24,23 +24,23 @@ layout (location = 8) uniform sampler2D u_normalMapB;
 layout (location = 9) uniform sampler2D u_shadowMap;
 
 // Vector uniforms
-uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
-uniform vec3 u_pointLightRadiuses[MAX_POINT_LIGHT_COUNT];
-uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_lightPositions[MAX_LIGHT_COUNT];
+uniform vec3 u_lightRadiuses[MAX_LIGHT_COUNT];
+uniform vec3 u_lightColors[MAX_LIGHT_COUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_cameraFront;
-uniform vec3 u_ambientLightColor;
+uniform vec3 u_ambientLightingColor;
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_spotLightColor;
+uniform vec3 u_spotLightingColor;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
 
 // Float uniforms
-uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
+uniform float u_lightIntensities[MAX_LIGHT_COUNT];
 uniform float u_lightness;
-uniform float u_ambientLightIntensity;
-uniform float u_directionalLightIntensity;
+uniform float u_ambientLightingIntensity;
+uniform float u_directionalLightingIntensity;
 uniform float u_diffuseMapRepeat;
 uniform float u_diffuseMapRepeatR;
 uniform float u_diffuseMapRepeatG;
@@ -49,27 +49,25 @@ uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
-uniform float u_specularLightFactor;
-uniform float u_specularLightIntensity;
-uniform float u_maxSpotlightAngle;
-uniform float u_spotLightIntensity;
-uniform float u_maxSpotLightDistance;
+uniform float u_specularLightingFactor;
+uniform float u_specularLightingIntensity;
+uniform float u_maxSpotLightingAngle;
+uniform float u_spotLightingIntensity;
+uniform float u_maxSpotLightingDistance;
 uniform float u_shadowLightness;
 
 // Integer uniforms
-uniform int u_pointLightShapes[MAX_POINT_LIGHT_COUNT];
+uniform int u_lightShapes[MAX_LIGHT_COUNT];
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
 uniform bool u_isSpecularLighted;
-uniform bool u_isAmbientLightEnabled;
-uniform bool u_isDirectionalLightEnabled;
-uniform bool u_isPointLightEnabled;
-uniform bool u_isSpotLightEnabled;
+uniform bool u_isAmbientLightingEnabled;
+uniform bool u_isDirectionalLightingEnabled;
+uniform bool u_isSpotLightingEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_isShadowFrameRenderEnabled;
-uniform bool u_isSpecularLightEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasBlendMap;
@@ -81,22 +79,22 @@ uniform bool u_hasNormalMapG;
 uniform bool u_hasNormalMapB;
 
 // Integer uniforms
-uniform int u_pointLightCount;
+uniform int u_lightCount;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec3 getNormalMapping();
-vec3 getDiffuseMapping();
-vec3 getAmbientLighting();
-vec3 getDirectionalLighting(vec3 normal);
-vec3 getPointLighting(vec3 normal);
-vec3 getSpotLighting(vec3 normal);
-vec3 getFog(vec3 color);
-float getSpecularLighting(vec3 position, vec3 normal);
-float getShadows();
+vec3 calculateNormalMapping();
+vec3 calculateDiffuseMapping();
+vec3 calculateAmbientLighting();
+vec3 calculateDirectionalLighting(vec3 normal);
+vec3 calculateLights(vec3 normal);
+vec3 calculateSpotLighting(vec3 normal);
+vec3 calculateFog(vec3 color);
+float calculateSpecularLighting(vec3 position, vec3 normal);
+float calculateShadows();
 
 // Process fragment
 void main()
@@ -110,19 +108,19 @@ void main()
 	}
 
 	// Calculate normal mapping
-    vec3 normal = getNormalMapping();
+    vec3 normal = calculateNormalMapping();
 
 	// Calculate lighting
-    float shadowLighting	 = getShadows();
+    float shadowLighting	 = calculateShadows();
 	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
-	vec3 ambientLighting	 = (getAmbientLighting() * shadowLighting);
-	vec3 directionalLighting = (getDirectionalLighting(normal) * shadowOcclusion);
-	vec3 pointLighting		 = getPointLighting(normal);
-	vec3 spotLighting		 = getSpotLighting(normal);
+	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
+	vec3 directionalLighting = (calculateDirectionalLighting(normal) * shadowOcclusion);
+	vec3 spotLighting		 = calculateSpotLighting(normal);
+	vec3 lights				 = calculateLights(normal);
 
 	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
-	primaryColor += getDiffuseMapping();
+	primaryColor += calculateDiffuseMapping();
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
 
@@ -130,12 +128,12 @@ void main()
 	vec3 lighting = vec3(0.0f);
 	lighting += ambientLighting;
 	lighting += directionalLighting;
-	lighting += pointLighting;
 	lighting += spotLighting;
+	lighting += lights;
 	primaryColor *= lighting;
 
 	// Apply fog
-	primaryColor = getFog(primaryColor);
+	primaryColor = calculateFog(primaryColor);
 
 	// Apply gamma correction
 	primaryColor = pow(primaryColor, vec3(1.0f / 2.2f));
@@ -145,7 +143,7 @@ void main()
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-vec3 getNormalMapping()
+vec3 calculateNormalMapping()
 {
     if (u_hasNormalMap || u_hasNormalMapR || u_hasNormalMapG || u_hasNormalMapB)
     {
@@ -233,7 +231,7 @@ vec3 getNormalMapping()
     }
 }
 
-vec3 getDiffuseMapping()
+vec3 calculateDiffuseMapping()
 {
 	if (u_hasBlendMap) // Blendmapped mixed texture
 	{
@@ -277,11 +275,11 @@ vec3 getDiffuseMapping()
 	}
 }
 
-vec3 getAmbientLighting()
+vec3 calculateAmbientLighting()
 {
-	if (u_isAmbientLightEnabled)
+	if (u_isAmbientLightingEnabled)
 	{
-		return (u_ambientLightColor * u_ambientLightIntensity);
+		return (u_ambientLightingColor * u_ambientLightingIntensity);
 	}
 	else
 	{
@@ -289,21 +287,21 @@ vec3 getAmbientLighting()
 	}
 }
 
-vec3 getDirectionalLighting(vec3 normal)
+vec3 calculateDirectionalLighting(vec3 normal)
 {
-	if (u_isDirectionalLightEnabled)
+	if (u_isDirectionalLightingEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-		float specular = getSpecularLighting(u_directionalLightPosition, normal);
+		float specular = calculateSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
         result += vec3(diffuse); // Diffuse
         result += vec3(specular); // Specular
         result *= u_directionalLightColor; // Color
-        result *= u_directionalLightIntensity; // Intensity
+        result *= u_directionalLightingIntensity; // Intensity
 
         // Return
         return result;
@@ -314,65 +312,58 @@ vec3 getDirectionalLighting(vec3 normal)
 	}
 }
 
-vec3 getPointLighting(vec3 normal)
+vec3 calculateLights(vec3 normal)
 {
-	if (u_isPointLightEnabled)
-	{
-		vec3 result = vec3(0.0f);
+	vec3 result = vec3(0.0f);
 		
-        // For every pointLight
-		for (int i = 0; i < u_pointLightCount; i++)
+    // For every light
+	for (int i = 0; i < u_lightCount; i++)
+	{
+        // Calculate light strength
+		vec3 lightDirection = normalize(u_lightPositions[i] - f_pos);
+		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(u_lightPositions[i], normal);
+
+		// Calculate light attenuation
+		float attenuation;
+		if (u_lightShapes[i] == 0)
 		{
-            // Calculate light strength
-			vec3 lightDirection = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-			float specular = getSpecularLighting(u_pointLightPositions[i], normal);
-
-			// Calculate light attenuation
-			float attenuation;
-			if (u_pointLightShapes[i] == 0)
-			{
-				float distance = length(u_pointLightPositions[i] - f_pos);
-				float averageRadius = ((u_pointLightRadiuses[i].x + u_pointLightRadiuses[i].y + u_pointLightRadiuses[i].z) / 3.0f);
-				attenuation = max(0.0f, (1.0f - (distance / averageRadius)));
-			}
-			else
-			{
-				vec3 distance = abs(u_pointLightPositions[i] - f_pos);
-				float xAttenuation = max(0.0f, (1.0f - (distance.x / u_pointLightRadiuses[i].x)));
-				float yAttenuation = max(0.0f, (1.0f - (distance.y / u_pointLightRadiuses[i].y)));
-				float zAttenuation = max(0.0f, (1.0f - (distance.z / u_pointLightRadiuses[i].z)));
-				attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
-			}
-
-            // Apply
-            vec3 current = vec3(0.0f);
-			current += vec3(diffuse); // Diffuse
-            current += vec3(specular); // Specular
-            current *= u_pointLightColors[i]; // Color
-            current *= (attenuation * attenuation); // Distance
-            current *= u_pointLightIntensities[i]; // Intensity
-
-            // Add to total lighting value
-            result += current;
+			float distance = length(u_lightPositions[i] - f_pos);
+			float averageRadius = ((u_lightRadiuses[i].x + u_lightRadiuses[i].y + u_lightRadiuses[i].z) / 3.0f);
+			attenuation = max(0.0f, (1.0f - (distance / averageRadius)));
+		}
+		else
+		{
+			vec3 distance = abs(u_lightPositions[i] - f_pos);
+			float xAttenuation = max(0.0f, (1.0f - (distance.x / u_lightRadiuses[i].x)));
+			float yAttenuation = max(0.0f, (1.0f - (distance.y / u_lightRadiuses[i].y)));
+			float zAttenuation = max(0.0f, (1.0f - (distance.z / u_lightRadiuses[i].z)));
+			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
-        // Return
-		return result;
+        // Apply
+        vec3 current = vec3(0.0f);
+		current += vec3(diffuse); // Diffuse
+        current += vec3(specular); // Specular
+        current *= u_lightColors[i]; // Color
+        current *= (attenuation * attenuation); // Distance
+        current *= u_lightIntensities[i]; // Intensity
+
+        // Add to total lighting value
+        result += current;
 	}
-	else
-	{
-		return vec3(0.0f);
-	}
+
+    // Return
+	return result;
 }
 
-vec3 getSpotLighting(vec3 normal)
+vec3 calculateSpotLighting(vec3 normal)
 {
-    if (u_isSpotLightEnabled)
+    if (u_isSpotLightingEnabled)
     {
 		// Calculate distance
     	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
-        float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
+        float distanceFactor = fragmentDistance / u_maxSpotLightingDistance;
         distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
         distanceFactor = 1.0f - distanceFactor;
 
@@ -381,16 +372,16 @@ vec3 getSpotLighting(vec3 normal)
         vec3 lightDirection = normalize(u_cameraPosition - f_pos);
         float smoothingFactor = 0.9f;
         float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
-        float epsilon   = u_maxSpotlightAngle - u_maxSpotlightAngle * smoothingFactor;
-        float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);  
+        float epsilon   = u_maxSpotLightingAngle - u_maxSpotLightingAngle * smoothingFactor;
+        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);  
 
         // Apply lighting calculations
         float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-        float specular = getSpecularLighting(u_cameraPosition, normal);
+        float specular = calculateSpecularLighting(u_cameraPosition, normal);
         result += vec3(diffuse * intensity); // Diffuse
         result += vec3(specular * intensity); // Specular
-        result *= u_spotLightColor; // Color
-        result *= u_spotLightIntensity; // Intensity
+        result *= u_spotLightingColor; // Color
+        result *= u_spotLightingIntensity; // Intensity
 
         // Return
         return result * distanceFactor;
@@ -401,7 +392,7 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
-vec3 getFog(vec3 color)
+vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
@@ -424,18 +415,18 @@ vec3 getFog(vec3 color)
 	}
 }
 
-float getSpecularLighting(vec3 position, vec3 normal)
+float calculateSpecularLighting(vec3 position, vec3 normal)
 {
-    if (u_isSpecularLightEnabled && u_isSpecularLighted)
+    if (u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(position - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightFactor);
+        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightingFactor);
 
         // Return
-        return (result * u_specularLightIntensity);
+        return (result * u_specularLightingIntensity);
     }
     else
     {
@@ -443,7 +434,7 @@ float getSpecularLighting(vec3 position, vec3 normal)
     }
 }
 
-float getShadows()
+float calculateShadows()
 {
 	if (u_isShadowsEnabled)
 	{

@@ -194,8 +194,6 @@ void ScriptInterpreter::load()
 	_fe3d.camera_reset();
 
 	// Default graphics
-	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_setSceneReflectionHeight(0.0f);
 
 	// Directional light source
@@ -368,14 +366,6 @@ void ScriptInterpreter::unload()
 	if (_fe3d.gfx_isBloomEnabled())
 	{
 		_fe3d.gfx_disableBloom(true);
-	}
-	if (_fe3d.gfx_isSpecularLightingEnabled())
-	{
-		_fe3d.gfx_disableSpecularLighting(true);
-	}
-	if (_fe3d.gfx_isPointLightingEnabled())
-	{
-		_fe3d.gfx_disablePointLighting(true);
 	}
 
 	// Delete game image entities

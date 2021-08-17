@@ -27,7 +27,6 @@ void TerrainEditor::load()
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(10000.0f), Vec3(1.0f), 3.0f);
-	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableMotionBlur(0.1f);
 
 	// Editor models
@@ -56,7 +55,6 @@ void TerrainEditor::unload()
 	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
-	_fe3d.gfx_disableSpecularLighting(true);
 	_fe3d.gfx_disableMotionBlur(true);
 
 	// Delete terrains

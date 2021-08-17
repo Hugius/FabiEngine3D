@@ -110,17 +110,17 @@ const Vec3 RenderBus::getCameraFront()
 	return _cameraFront;
 }
 
-const Vec3 RenderBus::getAmbientLightColor()
+const Vec3 RenderBus::getAmbientLightingColor()
 {
 	return _ambientLightColor;
 }
 
-const Vec3 RenderBus::getDirectionalLightPosition()
+const Vec3 RenderBus::getDirectionalLightingPosition()
 {
 	return _directionalLightPosition;
 }
 
-const Vec3 RenderBus::getSpotLightColor()
+const Vec3 RenderBus::getSpotLightingColor()
 {
 	return _spotLightColor;
 }
@@ -155,7 +155,7 @@ const Vec3 RenderBus::getMixSkyColor()
 	return _mixSkyColor;
 }
 
-const Vec3 RenderBus::getDirectionalLightColor()
+const Vec3 RenderBus::getDirectionalLightingColor()
 {
 	return _directionalLightColor;
 }
@@ -220,27 +220,27 @@ const float RenderBus::getMixSkyLightness()
 	return _mixSkyLightness;
 }
 
-const float RenderBus::getAmbientLightIntensity()
+const float RenderBus::getAmbientLightingIntensity()
 {
 	return _ambientLightIntensity;
 }
 
-const float RenderBus::getDirectionalLightIntensity()
+const float RenderBus::getDirectionalLightingIntensity()
 {
 	return _directionalLightIntensity;
 }
 
-const float RenderBus::getSpotLightIntensity()
+const float RenderBus::getSpotLightingIntensity()
 {
 	return _spotLightIntensity;
 }
 
-const float RenderBus::getMaxSpotLightAngle()
+const float RenderBus::getMaxSpotLightingAngle()
 {
 	return _maxSpotLightAngle;
 }
 
-const float RenderBus::getMaxSpotLightDistance()
+const float RenderBus::getMaxSpotLightingDistance()
 {
 	return _maxSpotLightDistance;
 }
@@ -338,16 +338,6 @@ const bool RenderBus::isAmbientLightingEnabled()
 const bool RenderBus::isDirectionalLightingEnabled()
 {
 	return _isDirectionalLightingEnabled;
-}
-
-const bool RenderBus::isSpecularLightingEnabled()
-{
-	return _isSpecularLightingEnabled;
-}
-
-const bool RenderBus::isPointLightingEnabled()
-{
-	return _isPointLightingEnabled;
 }
 
 const bool RenderBus::isSpotLightingEnabled()

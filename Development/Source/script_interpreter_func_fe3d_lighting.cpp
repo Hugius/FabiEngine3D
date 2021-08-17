@@ -315,22 +315,6 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:lighting_enable_points")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_enablePointLighting();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_disable_points")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_disablePointLighting();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
 	else
 	{
 		return false;

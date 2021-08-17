@@ -40,8 +40,8 @@ void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)
 	else
 	{
 		_core->_renderBus.setAmbientLightingEnabled(true);
-		_core->_renderBus.setAmbientLightColor(color);
-		_core->_renderBus.setAmbientLightIntensity(intensity);
+		_core->_renderBus.setAmbientLightingColor(color);
+		_core->_renderBus.setAmbientLightingIntensity(intensity);
 	}
 }
 
@@ -54,33 +54,9 @@ void FabiEngine3D::gfx_enableDirectionalLighting(Vec3 position, Vec3 color, floa
 	else
 	{
 		_core->_renderBus.setDirectionalLightingEnabled(true);
-		_core->_renderBus.setDirectionalLightPosition(position);
-		_core->_renderBus.setDirectionalLightColor(color);
-		_core->_renderBus.setDirectionalLightIntensity(intensity);
-	}
-}
-
-void FabiEngine3D::gfx_enableSpecularLighting()
-{
-	if (_core->_renderBus.isSpecularLightingEnabled())
-	{
-		Logger::throwWarning("Tried to enable specular lighting: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setSpecularLightingEnabled(true);
-	}
-}
-
-void FabiEngine3D::gfx_enablePointLighting()
-{
-	if (_core->_renderBus.isPointLightingEnabled())
-	{
-		Logger::throwWarning("Tried to enable point lighting: already enabled");
-	}
-	else
-	{
-		_core->_renderBus.setPointLightingEnabled(true);
+		_core->_renderBus.setDirectionalLightingPosition(position);
+		_core->_renderBus.setDirectionalLightingColor(color);
+		_core->_renderBus.setDirectionalLightingIntensity(intensity);
 	}
 }
 
@@ -93,10 +69,10 @@ void FabiEngine3D::gfx_enableSpotLighting(Vec3 color, float intensity, float ang
 	else
 	{
 		_core->_renderBus.setSpotLightingEnabled(true);
-		_core->_renderBus.setSpotLightColor(color);
-		_core->_renderBus.setSpotLightIntensity(intensity);
-		_core->_renderBus.setMaxSpotLightAngle(angle);
-		_core->_renderBus.setMaxSpotLightDistance(distance);
+		_core->_renderBus.setSpotLightingColor(color);
+		_core->_renderBus.setSpotLightingIntensity(intensity);
+		_core->_renderBus.setMaxSpotLightingAngle(angle);
+		_core->_renderBus.setMaxSpotLightingDistance(distance);
 	}
 }
 
@@ -223,8 +199,8 @@ void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 
 		if (resetProperties)
 		{
-			_core->_renderBus.setAmbientLightColor(1.0f);
-			_core->_renderBus.setAmbientLightIntensity(1.0f);
+			_core->_renderBus.setAmbientLightingColor(1.0f);
+			_core->_renderBus.setAmbientLightingIntensity(1.0f);
 		}
 	}
 	else
@@ -241,38 +217,14 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 
 		if (resetProperties)
 		{
-			_core->_renderBus.setDirectionalLightPosition(Vec3(0.0f));
-			_core->_renderBus.setDirectionalLightColor(1.0f);
-			_core->_renderBus.setDirectionalLightIntensity(1.0f);
+			_core->_renderBus.setDirectionalLightingPosition(Vec3(0.0f));
+			_core->_renderBus.setDirectionalLightingColor(1.0f);
+			_core->_renderBus.setDirectionalLightingIntensity(1.0f);
 		}
 	}
 	else
 	{
 		Logger::throwWarning("Tried to disable directional lighting: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disableSpecularLighting(bool resetProperties)
-{
-	if (_core->_renderBus.isSpecularLightingEnabled())
-	{
-		_core->_renderBus.setSpecularLightingEnabled(false);
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable specular lighting: not enabled");
-	}
-}
-
-void FabiEngine3D::gfx_disablePointLighting(bool resetProperties)
-{
-	if (_core->_renderBus.isPointLightingEnabled())
-	{
-		_core->_renderBus.setPointLightingEnabled(false);
-	}
-	else
-	{
-		Logger::throwWarning("Tried to disable point lighting: not enabled");
 	}
 }
 
@@ -284,10 +236,10 @@ void FabiEngine3D::gfx_disableSpotLighting(bool resetProperties)
 
 		if (resetProperties)
 		{
-			_core->_renderBus.setSpotLightColor(Vec3(1.0f));
-			_core->_renderBus.setSpotLightIntensity(1.0f);
-			_core->_renderBus.setMaxSpotLightAngle(0.0f);
-			_core->_renderBus.setMaxSpotLightDistance(0.0f);
+			_core->_renderBus.setSpotLightingColor(Vec3(1.0f));
+			_core->_renderBus.setSpotLightingIntensity(1.0f);
+			_core->_renderBus.setMaxSpotLightingAngle(0.0f);
+			_core->_renderBus.setMaxSpotLightingDistance(0.0f);
 		}
 	}
 	else

@@ -551,7 +551,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				color.b >>
 				intensity;
 
-			// Add point light
+			// Add light
 			_fe3d.lightEntity_setPosition(lightID, position);
 			_fe3d.lightEntity_setRadius(lightID, radius);
 			_fe3d.lightEntity_setColor(lightID, color);

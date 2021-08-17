@@ -11,8 +11,8 @@ void WaterEntityColorRenderer::bind()
 	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
+	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
@@ -21,10 +21,8 @@ void WaterEntityColorRenderer::bind()
 	_shader.uploadUniform("u_isFogEnabled", _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
-	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_isSpecularLightEnabled", _renderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_isPointLightEnabled", _renderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
+	_shader.uploadUniform("u_isDirectionalLightingEnabled", _renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingIntensity", _renderBus.getDirectionalLightingIntensity());
 	_shader.uploadUniform("u_reflectionMap", 0);
 	_shader.uploadUniform("u_refractionMap", 1);
 	_shader.uploadUniform("u_depthMap", 2);
@@ -71,33 +69,30 @@ void WaterEntityColorRenderer::unbind()
 
 void WaterEntityColorRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
-	if (_renderBus.isPointLightingEnabled())
+	// Compose a map of all visible lights
+	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
+	for (const auto& [keyID, entity] : entities)
 	{
-		// Compose a map of all visible lights
-		unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
-		for (const auto& [keyID, entity] : entities)
+		if (entity->isVisible())
 		{
-			if (entity->isVisible())
-			{
-				visibleEntities[keyID] = entity;
-			}
+			visibleEntities[keyID] = entity;
 		}
-
-		// Render all lights
-		unsigned int index = 0;
-		for (const auto& [keyID, entity] : visibleEntities)
-		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-			_shader.uploadUniform("u_pointLightRadiuses[" + to_string(index) + "]", entity->getRadius());
-
-			index++;
-		}
-
-		// Upload amount
-		_shader.uploadUniform("u_pointLightCount", static_cast<int>(visibleEntities.size()));
 	}
+
+	// Render all lights
+	unsigned int index = 0;
+	for (const auto& [keyID, entity] : visibleEntities)
+	{
+		_shader.uploadUniform("u_lightPositions[" + to_string(index) + "]", entity->getPosition());
+		_shader.uploadUniform("u_lightColors[" + to_string(index) + "]", entity->getColor());
+		_shader.uploadUniform("u_lightIntensities[" + to_string(index) + "]", entity->getIntensity());
+		_shader.uploadUniform("u_lightRadiuses[" + to_string(index) + "]", entity->getRadius());
+
+		index++;
+	}
+
+	// Upload amount
+	_shader.uploadUniform("u_lightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
@@ -124,8 +119,8 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_waveHeight", entity->getWaveHeight());
 		_shader.uploadUniform("u_positionOffset", entity->getPosition());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularLightingFactor());
-		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularLightingIntensity());
+		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isWaving", entity->isWaving());
 		_shader.uploadUniform("u_isRippling", entity->isRippling());

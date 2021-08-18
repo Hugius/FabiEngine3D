@@ -31,62 +31,54 @@ void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 {
 	if (_isThirdPersonViewEnabled)
 	{
-		Logger::throwWarning("Tried to enable first person view: third person view already enabled!");
+		Logger::throwError("Camera::enableFirstPersonView::1");
 	}
-	else if (_isFirstPersonViewEnabled)
+	if (_isFirstPersonViewEnabled)
 	{
-		Logger::throwWarning("Tried to enable first person view: already enabled!");
+		Logger::throwError("Camera::enableFirstPersonView::2");
 	}
-	else
-	{
-		_firstPersonYaw = initialYaw;
-		_firstPersonPitch = initialPitch;
-		_mustCenterCursor = true;
-		_isFirstPersonViewEnabled = true;
-	}
+
+	_firstPersonYaw = initialYaw;
+	_firstPersonPitch = initialPitch;
+	_mustCenterCursor = true;
+	_isFirstPersonViewEnabled = true;
 }
 
 void Camera::disableFirstPersonView()
 {
-	if (_isFirstPersonViewEnabled)
+	if (!_isFirstPersonViewEnabled)
 	{
-		_isFirstPersonViewEnabled = false;
+		Logger::throwError("Camera::disableFirstPersonView");
 	}
-	else
-	{
-		Logger::throwWarning("Tried to disable first person view: not enabled!");
-	}
+
+	_isFirstPersonViewEnabled = false;
 }
 
 void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 {
 	if (_isFirstPersonViewEnabled)
 	{
-		Logger::throwWarning("Tried to enable third person view: first person view already enabled!");
+		Logger::throwError("Camera::enableThirdPersonView::1");
 	}
-	else if (_isThirdPersonViewEnabled)
+	if (_isThirdPersonViewEnabled)
 	{
-		Logger::throwWarning("Tried to enable third person view: already enabled!");
+		Logger::throwError("Camera::enableThirdPersonView::2");
 	}
-	else
-	{
-		_thirdPersonYaw = initialYaw;
-		_thirdPersonPitch = initialPitch;
-		_mustCenterCursor = true;
-		_isThirdPersonViewEnabled = true;
-	}
+
+	_thirdPersonYaw = initialYaw;
+	_thirdPersonPitch = initialPitch;
+	_mustCenterCursor = true;
+	_isThirdPersonViewEnabled = true;
 }
 
 void Camera::disableThirdPersonView()
 {
-	if (_isThirdPersonViewEnabled)
+	if (!_isThirdPersonViewEnabled)
 	{
-		_isThirdPersonViewEnabled = false;
+		Logger::throwError("Camera::disableThirdPersonView");
 	}
-	else
-	{
-		Logger::throwWarning("Tried to disable third person view: not enabled!");
-	}
+
+	_isThirdPersonViewEnabled = false;
 }
 
 void Camera::setFOV(float value)

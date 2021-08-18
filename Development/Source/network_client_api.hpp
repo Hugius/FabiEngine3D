@@ -35,6 +35,7 @@ public:
 	const bool isRunning();
 	const bool isConnectingToServer();
 	const bool isConnectedToServer();
+	const bool isAcceptedByServer();
 
 	const unsigned int getPingLatency();
 

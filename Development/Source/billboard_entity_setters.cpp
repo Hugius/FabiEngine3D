@@ -158,20 +158,15 @@ void BillboardEntity::setShadowed(bool value)
 
 void BillboardEntity::startSpriteAnimation(int loops)
 {
-	// Warning checking
 	if (_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to start sprite animation on billboard with ID \"" + getID() + "\": animation already started!");
-		return;
+		Logger::throwError("BillboardEntity::startSpriteAnimation::1");
 	}
-
-	// Error checking
 	if (loops < -1)
 	{
-		Logger::throwFatalError("BillboardEntity::startSpriteAnimation");
+		Logger::throwError("BillboardEntity::startSpriteAnimation::2");
 	}
 
-	// Set values
 	_isSpriteAnimationStarted = true;
 	_passedSpriteAnimationFrames = 0;
 	_spriteAnimationLoops = 0;
@@ -182,13 +177,11 @@ void BillboardEntity::pauseSpriteAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("BillboardEntity::pauseSpriteAnimation::1");
 	}
 	else if (_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on billboard with ID \"" + getID() + "\" animation already paused!");
-		return;
+		Logger::throwError("BillboardEntity::pauseSpriteAnimation::2");
 	}
 
 	_isSpriteAnimationPaused = true;
@@ -198,8 +191,7 @@ void BillboardEntity::resumeSpriteAnimation()
 {
 	if (!_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to resume sprite animation on billboard with ID \"" + getID() + "\" animation not paused!");
-		return;
+		Logger::throwError("BillboardEntity::resumeSpriteAnimation");
 	}
 
 	_isSpriteAnimationPaused = false;
@@ -209,8 +201,7 @@ void BillboardEntity::stopSpriteAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to stop sprite animation on billboard with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("BillboardEntity::stopSpriteAnimation");
 	}
 
 	_isSpriteAnimationStarted = false;

@@ -61,7 +61,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 		}
 		else // Something really bad happened
 		{
-			Logger::throwFatalError("NetworkClientAPI::_sendTcpMessage ---> ", WSAGetLastError());
+			Logger::throwError("NetworkClientAPI::_sendTcpMessage ---> ", WSAGetLastError());
 		}
 	}
 
@@ -122,7 +122,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwFatalError("NetworkClientAPI::_sendUdpMessage ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage ---> ", WSAGetLastError());
 	}
 
 	return true;
@@ -156,7 +156,7 @@ void NetworkClientAPI::_setupTCP()
 	_connectionSocketID = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (_connectionSocketID == INVALID_SOCKET)
 	{
-		Logger::throwFatalError("NetworkClientAPI::_setupTCP ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_setupTCP ---> ", WSAGetLastError());
 	}
 
 	// Spawn a thread for connecting to the server
@@ -178,7 +178,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	auto udpInfoStatusCode = getaddrinfo(nullptr, tcpPort.c_str(), &hints, &addressInfo);
 	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwFatalError("NetworkClientAPI::_setupUDP::1 ---> ", udpInfoStatusCode);
+		Logger::throwError("NetworkClientAPI::_setupUDP::1 ---> ", udpInfoStatusCode);
 		return;
 	}
 
@@ -186,14 +186,14 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	_udpMessageSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if (_udpMessageSocketID == INVALID_SOCKET)
 	{
-		Logger::throwFatalError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
 
 	// Bind UDP socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwFatalError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
 	}
 
 	// Address info not needed anymore

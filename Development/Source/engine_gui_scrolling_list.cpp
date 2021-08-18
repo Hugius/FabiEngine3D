@@ -78,7 +78,7 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScrollingList::deleteButton");
+	Logger::throwError("EngineGuiScrollingList::deleteButton");
 }
 
 void EngineGuiScrollingList::deleteButtons()

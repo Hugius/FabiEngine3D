@@ -148,7 +148,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Tried to set animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
@@ -171,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Tried to set animation autopaused option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
@@ -194,7 +194,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
@@ -217,7 +217,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 
 				// Check if animation was found
@@ -240,7 +240,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve animation data
-				string errorMessage = "Trying to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
+				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
 				
 				// Check if animation was found

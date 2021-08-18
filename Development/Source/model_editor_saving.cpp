@@ -19,7 +19,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("ModelEditor::saveModelEntitiesToFile");
+		Logger::throwError("ModelEditor::saveModelEntitiesToFile");
 	}
 
 	// Compose file path

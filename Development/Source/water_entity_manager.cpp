@@ -17,7 +17,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("WaterEntityManager::getEntity");
+		Logger::throwError("WaterEntityManager::getEntity");
 	}
 
 	return result;
@@ -48,7 +48,7 @@ void WaterEntityManager::selectWater(const string& ID)
 	}
 	else
 	{
-		Logger::throwFatalError("WaterEntityManager::selectWater");
+		Logger::throwError("WaterEntityManager::selectWater");
 	}
 }
 
@@ -69,7 +69,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	// Check if size is too large
 	if (size > 1024)
 	{
-		Logger::throwFatalError("WaterEntityManager::loadMesh");
+		Logger::throwError("WaterEntityManager::loadMesh");
 	}
 
 	// Reserving memory for the vertices

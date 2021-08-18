@@ -31,7 +31,7 @@ public:
 	void resumeMusic();
 	void stopAllSounds();
 	void stopSound(Sound& sound, int fadeMS);
-	void stopMusic(bool forceStop = false);
+	void stopMusic();
 	void setMusicVolume(float volume);
 
 	float getMusicVolume();
@@ -39,6 +39,7 @@ public:
 	unsigned int getUsedChannelCount();
 	unsigned int getAllocatedChannelCount();
 
+	bool isChannelAvailable();
 	bool isSoundsEnabled();
 	bool isSoundStarted(Sound& sound);
 	bool isSoundPlaying(Sound& sound);

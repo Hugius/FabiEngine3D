@@ -36,11 +36,11 @@ void AudioManager::createSound(const string& ID, const string& filename)
 {
 	if (_findIndex(ID) != -1)
 	{
-		Logger::throwFatalError("AudioManager::createSound::1");
+		Logger::throwError("AudioManager::createSound::1");
 	}
 	else if (ID.empty())
 	{
-		Logger::throwFatalError("AudioManager::createSound::2");
+		Logger::throwError("AudioManager::createSound::2");
 	}
 
 	// Load data
@@ -59,7 +59,7 @@ void AudioManager::deleteSound(const string& ID)
 
 	if (index == -1)
 	{
-		Logger::throwFatalError("AudioManager::deleteSound");
+		Logger::throwError("AudioManager::deleteSound");
 	}
 	else
 	{
@@ -78,7 +78,7 @@ Sound& AudioManager::getSound(const string& ID)
 
 	if (index == -1)
 	{
-		Logger::throwFatalError("AudioManager::getSound");
+		Logger::throwError("AudioManager::getSound");
 	}
 	else
 	{

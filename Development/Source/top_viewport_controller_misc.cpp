@@ -151,7 +151,7 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 	}
 	else
 	{
-		Logger::throwFatalError("TopViewportController::_prepareProjectChoosing");
+		Logger::throwError("TopViewportController::_prepareProjectChoosing");
 	}
 }
 

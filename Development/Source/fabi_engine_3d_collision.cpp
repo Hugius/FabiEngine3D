@@ -8,22 +8,46 @@ void FabiEngine3D::collision_setCameraBoxSize(float bottom, float top, float lef
 
 void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)
 {
-	_core->_collisionResolver.enableCameraResponse(x, y, z);
+	if (_core->_collisionResolver.isCameraAabbResponseEnabled())
+	{
+		Logger::throwWarning("Tried to enable camera AABB response: already enabled!");
+		return;
+	}
+
+	_core->_collisionResolver.enableCameraAabbResponse(x, y, z);
 }
 
 void FabiEngine3D::collision_disableCameraResponse()
 {
-	_core->_collisionResolver.disableAabbResponse();
+	if (!_core->_collisionResolver.isCameraAabbResponseEnabled())
+	{
+		Logger::throwWarning("Tried to enable camera AABB response: not enabled!");
+		return;
+	}
+
+	_core->_collisionResolver.disableCameraAabbResponse();
 }
 
 void FabiEngine3D::collision_enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	_core->_collisionResolver.enableTerrainResponse(cameraHeight, cameraSpeed);
+	if (_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	{
+		Logger::throwWarning("Tried to enable camera terrain response: already enabled!");
+		return;
+	}
+
+	_core->_collisionResolver.enableCameraTerrainResponse(cameraHeight, cameraSpeed);
 }
 
 void FabiEngine3D::collision_disableTerrainResponse()
 {
-	_core->_collisionResolver.disableTerrainResponse();
+	if (!_core->_collisionResolver.isCameraTerrainResponseEnabled())
+	{
+		Logger::throwWarning("Tried to enable camera terrain response: not enabled!");
+		return;
+	}
+
+	_core->_collisionResolver.disableCameraTerrainResponse();
 }
 
 const string FabiEngine3D::collision_checkCameraWithAny()
@@ -226,10 +250,10 @@ const bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string
 
 const bool FabiEngine3D::collision_isCameraResponseEnabled()
 {
-	return _core->_collisionResolver.isCameraResponseEnabled();
+	return _core->_collisionResolver.isCameraAabbResponseEnabled();
 }
 
 const bool FabiEngine3D::collision_isTerrainResponseEnabled()
 {
-	return _core->_collisionResolver.isTerrainResponseEnabled();
+	return _core->_collisionResolver.isCameraTerrainResponseEnabled();
 }

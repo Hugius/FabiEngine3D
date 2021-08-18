@@ -16,7 +16,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("TerrainEntityManager::getEntity");
+		Logger::throwError("TerrainEntityManager::getEntity");
 	}
 
 	return result;
@@ -83,7 +83,7 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	}
 	else
 	{
-		Logger::throwFatalError("TerrainEntityManager::selectTerrain");
+		Logger::throwError("TerrainEntityManager::selectTerrain");
 	}
 }
 

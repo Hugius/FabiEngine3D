@@ -7,7 +7,7 @@ BaseEntity::BaseEntity(const string& ID)
 {
 	if (ID.empty())
 	{
-		Logger::throwFatalError("BaseEntity::BaseEntity");
+		Logger::throwError("BaseEntity::BaseEntity");
 	}
 }
 

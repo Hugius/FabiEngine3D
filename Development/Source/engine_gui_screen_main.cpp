@@ -103,7 +103,7 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::deleteScrollingList");
+	Logger::throwError("EngineGuiScreen::deleteScrollingList");
 }
 
 void EngineGuiScreen::deleteWriteField(const string& ID)
@@ -119,7 +119,7 @@ void EngineGuiScreen::deleteWriteField(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::deleteWriteField");
+	Logger::throwError("EngineGuiScreen::deleteWriteField");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)
@@ -135,7 +135,7 @@ void EngineGuiScreen::deleteButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::deleteButton");
+	Logger::throwError("EngineGuiScreen::deleteButton");
 }
 
 void EngineGuiScreen::deleteRectangle(const string& ID)
@@ -151,7 +151,7 @@ void EngineGuiScreen::deleteRectangle(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::deleteRectangle");
+	Logger::throwError("EngineGuiScreen::deleteRectangle");
 }
 
 void EngineGuiScreen::deleteTextField(const string& ID)
@@ -167,5 +167,5 @@ void EngineGuiScreen::deleteTextField(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::deleteTextField");
+	Logger::throwError("EngineGuiScreen::deleteTextField");
 }

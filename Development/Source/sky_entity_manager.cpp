@@ -64,7 +64,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("SkyEntityManager::getEntity");
+		Logger::throwError("SkyEntityManager::getEntity");
 	}
 
 	return result;
@@ -107,7 +107,7 @@ void SkyEntityManager::selectMainSky(const string& ID)
 	}
 	else
 	{
-		Logger::throwFatalError("SkyEntityManager::selectMainSky");
+		Logger::throwError("SkyEntityManager::selectMainSky");
 	}
 }
 
@@ -119,7 +119,7 @@ void SkyEntityManager::selectMixSky(const string& ID)
 	}
 	else
 	{
-		Logger::throwFatalError("SkyEntityManager::selectMixSky");
+		Logger::throwError("SkyEntityManager::selectMixSky");
 	}
 }
 

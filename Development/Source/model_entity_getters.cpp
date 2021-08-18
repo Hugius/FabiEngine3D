@@ -352,7 +352,7 @@ unsigned int ModelEntity::_getPartIndex(string partID)
 	{
 		if (_parts.size() > 1)
 		{
-			Logger::throwFatalError("ModelEntity::_getPartIndex::1");
+			Logger::throwError("ModelEntity::_getPartIndex::1");
 		}
 		else
 		{
@@ -370,5 +370,5 @@ unsigned int ModelEntity::_getPartIndex(string partID)
 	}
 
 	// Part is not found
-	Logger::throwFatalError("ModelEntity::_getPartIndex::2");
+	Logger::throwError("ModelEntity::_getPartIndex::2");
 }

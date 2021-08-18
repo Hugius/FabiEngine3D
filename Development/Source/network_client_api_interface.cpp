@@ -16,7 +16,7 @@ const bool NetworkClientAPI::isConnectingToServer()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve connecting status: not running!");
+		Logger::throwError("NetworkClientAPI::isConnectingToServer");
 	}
 
 	return _isConnectingToServer;
@@ -27,10 +27,15 @@ const bool NetworkClientAPI::isConnectedToServer()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve connection status: not running!");
+		Logger::throwError("NetworkClientAPI::isConnectedToServer");
 	}
 
 	return (_isConnectedToServer && _isAcceptedByServer);
+}
+
+const bool NetworkClientAPI::isAcceptedByServer()
+{
+	return _isAcceptedByServer;
 }
 
 const unsigned int NetworkClientAPI::getPingLatency()
@@ -38,13 +43,13 @@ const unsigned int NetworkClientAPI::getPingLatency()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve ping latency: not running!");
+		Logger::throwError("NetworkClientAPI::getPingLatency::1");
 	}
 
 	// Must be connected & accepted
 	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
-		Logger::throwWarning("Networking client tried to retrieve ping latency: not connected!");
+		Logger::throwError("NetworkClientAPI::getPingLatency::2");
 	}
 
 	// Calculate average ping
@@ -66,13 +71,13 @@ const string& NetworkClientAPI::getServerIP()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
+		Logger::throwError("NetworkClientAPI::getServerIP::1");
 	}
 
 	// Must be connected & accepted
 	if (!_isConnectedToServer || !_isAcceptedByServer)
 	{
-		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
+		Logger::throwError("NetworkClientAPI::getServerIP::2");
 	}
 
 	return _serverIP;
@@ -83,7 +88,7 @@ const vector<NetworkServerMessage>& NetworkClientAPI::getPendingMessages()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to retrieve pending messages: not running!");
+		Logger::throwError("NetworkClientAPI::getPendingMessages");
 	}
 
 	return _pendingMessages;

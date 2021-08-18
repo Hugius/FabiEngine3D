@@ -18,7 +18,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("TextEntityManager::getEntity");
+		Logger::throwError("TextEntityManager::getEntity");
 	}
 
 	return result;

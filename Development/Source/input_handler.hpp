@@ -48,7 +48,7 @@ private:
 
 		if (it == list.end()) // Not found
 		{
-			Logger::throwFatalError("InputHandler::_getVectorIndex");
+			Logger::throwError("InputHandler::_getVectorIndex");
 		}
 		else // Found
 		{

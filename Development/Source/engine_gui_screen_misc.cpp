@@ -116,7 +116,7 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::getScrollingList");
+	Logger::throwError("EngineGuiScreen::getScrollingList");
 }
 
 shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
@@ -131,7 +131,7 @@ shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::getWriteField");
+	Logger::throwError("EngineGuiScreen::getWriteField");
 }
 
 shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
@@ -146,7 +146,7 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::getButton");
+	Logger::throwError("EngineGuiScreen::getButton");
 }
 
 shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
@@ -161,7 +161,7 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::getRectangle");
+	Logger::throwError("EngineGuiScreen::getRectangle");
 }
 
 shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
@@ -176,7 +176,7 @@ shared_ptr<EngineGuiTextField> EngineGuiScreen::getTextField(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiScreen::getTextField");
+	Logger::throwError("EngineGuiScreen::getTextField");
 }
 
 vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()

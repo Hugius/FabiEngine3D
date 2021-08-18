@@ -105,7 +105,7 @@ void AudioPlayer::setMusicEnabled(bool value)
 {
 	if (!value)
 	{
-		stopMusic(true);
+		stopMusic();
 	}
 
 	_isMusicEnabled = value;
@@ -172,7 +172,7 @@ vector<int> AudioPlayer::_findSoundChannels(Sound& sound)
 	// Find must never fail
 	if (channels.empty())
 	{
-		Logger::throwFatalError("AudioPlayer::_findSoundChannels");
+		Logger::throwError("AudioPlayer::_findSoundChannels");
 	}
 
 	return channels;

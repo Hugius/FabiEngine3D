@@ -85,7 +85,7 @@ bool ScriptInterpreter::_validateSavesDirectory()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("ScriptInterpreter::_validateSavesDirectory");
+		Logger::throwError("ScriptInterpreter::_validateSavesDirectory");
 	}
 
 	// Check if saves directory still exists

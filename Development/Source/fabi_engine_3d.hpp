@@ -735,7 +735,7 @@ public:
 	void networkClient_stop();
 
 	// Client interface - getters
-	const vector<NetworkServerMessage>& networkClient_getPendingMessages();
+	const vector<NetworkServerMessage> networkClient_getPendingMessages();
 	const string& networkClient_getUsername();
 	const string& networkClient_getServerIP();
 	const unsigned int networkClient_getPingLatency();

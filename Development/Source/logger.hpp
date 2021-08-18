@@ -51,13 +51,6 @@ public:
 	}
 
 	template<typename T, typename...Rest>
-	inline static void throwError(T first, Rest...rest)
-	{
-		_printPrefix(MessageType::ERR);
-		_printMessage(first, rest...);
-	}
-
-	template<typename T, typename...Rest>
 	inline static void throwFatalWarning(T first, Rest...rest)
 	{
 		cout << endl;
@@ -70,7 +63,7 @@ public:
 	}
 
 	template<typename T, typename...Rest>
-	inline static void throwFatalError(T first, Rest...rest)
+	inline static void throwError(T first, Rest...rest)
 	{
 		cout << endl;
 		_printPrefix(MessageType::ERR);

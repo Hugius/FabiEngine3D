@@ -278,19 +278,18 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 	if (fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of billboard with ID \"" + ID + "\": no font loaded!");
+		return;
 	}
-	else
-	{
-		// Check if new text content is not the same as the current one
-		if (entity->getTextContent() != textContent)
-		{
-			// Set text content
-			entity->setTextContent(textContent);
 
-			// Load diffuse map
-			entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
-			entity->setTransparent(true);
-		}
+	// Check if new text content is not the same as the current one
+	if (entity->getTextContent() != textContent)
+	{
+		// Set text content
+		entity->setTextContent(textContent);
+
+		// Load diffuse map
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+		entity->setTransparent(true);
 	}
 }
 
@@ -306,22 +305,64 @@ const string& FabiEngine3D::billboardEntity_getTextContent(const string& ID)
 
 void FabiEngine3D::billboardEntity_startSpriteAnimation(const string& ID, int loops)
 {
-	_core->_billboardEntityManager.getEntity(ID)->startSpriteAnimation(loops);
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
+
+	if (entity->isSpriteAnimationStarted())
+	{
+		Logger::throwWarning("Tried to start sprite animation on billboard with ID \"" + ID + "\": animation already started!");
+		return;
+	}
+	if (loops < -1)
+	{
+		Logger::throwWarning("Tried to start sprite animation on billboard with ID \"" + ID + "\": invalid loops amount!");
+		return;
+	}
+
+	entity->startSpriteAnimation(loops);
 }
 
 void FabiEngine3D::billboardEntity_pauseSpriteAnimation(const string& ID)
 {
-	_core->_billboardEntityManager.getEntity(ID)->pauseSpriteAnimation();
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
+
+	if (!entity->isSpriteAnimationStarted())
+	{
+		Logger::throwWarning("Tried to pause sprite animation on billboard with ID \"" + ID + "\" animation not started!");
+		return;
+	}
+	else if (entity->isSpriteAnimationPaused())
+	{
+		Logger::throwWarning("Tried to pause sprite animation on billboard with ID \"" + ID + "\" animation already paused!");
+		return;
+	}
+
+	entity->pauseSpriteAnimation();
 }
 
 void FabiEngine3D::billboardEntity_resumeSpriteAnimation(const string& ID)
 {
-	_core->_billboardEntityManager.getEntity(ID)->resumeSpriteAnimation();
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
+
+	if (!entity->isSpriteAnimationPaused())
+	{
+		Logger::throwWarning("Tried to resume sprite animation on billboard with ID \"" + ID + "\" animation not paused!");
+		return;
+	}
+
+	entity->resumeSpriteAnimation();
 }
 
 void FabiEngine3D::billboardEntity_stopSpriteAnimation(const string& ID)
 {
-	_core->_billboardEntityManager.getEntity(ID)->stopSpriteAnimation();
+	auto entity = _core->_billboardEntityManager.getEntity(ID);
+
+	if (!entity->isSpriteAnimationStarted())
+	{
+		Logger::throwWarning("Tried to stop sprite animation on billboard with ID \"" + ID + "\" animation not started!");
+		return;
+	}
+
+	entity->stopSpriteAnimation();
 }
 
 void FabiEngine3D::billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows)

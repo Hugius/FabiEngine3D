@@ -48,8 +48,7 @@ void CoreEngine::_start()
 	// Error
 	if (_isRunning)
 	{
-		Logger::throwWarning("Trying to start engine: already running!");
-		return;
+		Logger::throwError("Tried to start engine: already running!");
 	}
 
 	// Start running
@@ -124,8 +123,7 @@ void CoreEngine::_pause()
 {
 	if (_isPaused)
 	{
-		Logger::throwWarning("Trying to resume engine: already paused!");
-		return;
+		Logger::throwError("Tried to resume engine: already paused!");
 	}
 
 	_isPaused = true;
@@ -135,8 +133,7 @@ void CoreEngine::_resume()
 {
 	if (!_isPaused)
 	{
-		Logger::throwWarning("Trying to resume engine: not paused!");
-		return;
+		Logger::throwError("Tried to resume engine: not paused!");
 	}
 
 	_isPaused = false;
@@ -146,8 +143,7 @@ void CoreEngine::_stop()
 {
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Trying to stop engine: not running!");
-		return;
+		Logger::throwError("Tried to stop engine: not running!");
 	}
 
 	_isRunning = false;

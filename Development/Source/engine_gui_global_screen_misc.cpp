@@ -115,7 +115,7 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	// Validate existence
 	if (isValueFormExisting(ID))
 	{
-		Logger::throwFatalError("EngineGuiGlobalScreen::_createValueForm");
+		Logger::throwError("EngineGuiGlobalScreen::_createValueForm");
 	}
 
 	// Create value form
@@ -201,7 +201,7 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	// Validate existence
 	if (!_choiceFormID.empty())
 	{
-		Logger::throwFatalError("EngineGuiGlobalScreen::createChoiceForm");
+		Logger::throwError("EngineGuiGlobalScreen::createChoiceForm");
 	}
 
 	// Create choice form
@@ -254,7 +254,7 @@ void EngineGuiGlobalScreen::deleteChoiceForm(const string& ID)
 	// Validate existence
 	if (ID != _choiceFormID)
 	{
-		Logger::throwFatalError("EngineGuiGlobalScreen::deleteChoiceForm");
+		Logger::throwError("EngineGuiGlobalScreen::deleteChoiceForm");
 	}
 
 	// Delete choice form
@@ -278,7 +278,7 @@ void EngineGuiGlobalScreen::createAnswerForm(const string& ID, string title, Vec
 	// Validate existence
 	if (!_answerFormID.empty())
 	{
-		Logger::throwFatalError("EngineGuiGlobalScreen::createAnswerForm");
+		Logger::throwError("EngineGuiGlobalScreen::createAnswerForm");
 	}
 
 	// Create answer form
@@ -329,7 +329,7 @@ void EngineGuiGlobalScreen::_deleteAnswerForm(const string& ID)
 	// Validate existence
 	if (ID != _answerFormID)
 	{
-		Logger::throwFatalError("EngineGuiGlobalScreen::_deleteAnswerForm");
+		Logger::throwError("EngineGuiGlobalScreen::_deleteAnswerForm");
 	}
 
 	// Delete answer form

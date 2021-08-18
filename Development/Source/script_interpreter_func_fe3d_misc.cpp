@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else
 			{
-				Logger::throwFatalError("ScriptInterpreter::_executeFe3dMiscFunction");
+				Logger::throwError("ScriptInterpreter::_executeFe3dMiscFunction");
 			}
 
 			// Return

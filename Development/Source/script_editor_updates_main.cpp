@@ -125,7 +125,7 @@ void ScriptEditor::_updateMiscellaneous()
 			_scrollingAcceleration = 0.0f;
 			_fe3d.camera_setPosition(CAMERA_POSITION);
 		}
-		else if (_fe3d.camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
+		else if (_fe3d.camera_getPosition().y == CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Tried to scroll up
 		{
 			_scrollingAcceleration = 0.0f;
 		}
@@ -138,7 +138,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_scrollingAcceleration = 0.0f;
 				_fe3d.camera_setPosition(Vec3(CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, CAMERA_POSITION.z));
 			}
-			else if (_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Trying to scroll down
+			else if (_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Tried to scroll down
 			{
 				_scrollingAcceleration = 0.0f;
 			}

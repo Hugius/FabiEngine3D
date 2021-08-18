@@ -375,7 +375,7 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, const string& co
 	}
 	else
 	{
-		Logger::throwFatalError("ScriptInterpreter::_compareValues");
+		Logger::throwError("ScriptInterpreter::_compareValues");
 	}
 
 	return false;

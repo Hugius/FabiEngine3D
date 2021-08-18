@@ -72,34 +72,32 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	if (fontPath.empty())
 	{
 		Logger::throwWarning("Tried to set text content of text with ID \"" + ID + "\": no font loaded!");
+		return;
+	}
+
+	// Set new text
+	entity->setTextContent(textContent);
+
+	// Calculate new size
+	Vec2 newSize = entity->getSize();
+	if (charWidth >= 0.0f)
+	{
+		newSize.x = (charWidth * static_cast<float>(textContent.size()));
+	}
+	if (charHeight >= 0.0f)
+	{
+		newSize.y = charHeight;
+	}
+	entity->setSize(newSize);
+
+	// Reload text
+	if (entity->isDynamic())
+	{
+		_core->_textEntityManager.loadCharacters(ID);
 	}
 	else
 	{
-
-		// Set new text
-		entity->setTextContent(textContent);
-
-		// Calculate new size
-		Vec2 newSize = entity->getSize();
-		if (charWidth >= 0.0f)
-		{
-			newSize.x = (charWidth * static_cast<float>(textContent.size()));
-		}
-		if (charHeight >= 0.0f)
-		{
-			newSize.y = charHeight;
-		}
-		entity->setSize(newSize);
-
-		// Reload text
-		if (entity->isDynamic())
-		{
-			_core->_textEntityManager.loadCharacters(ID);
-		}
-		else
-		{
-			entity->setDiffuseMap(_core->_textureLoader.getText(textContent, entity->getFontPath()));
-		}
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, entity->getFontPath()));
 	}
 }
 

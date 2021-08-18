@@ -6,7 +6,7 @@ using std::max;
 void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int loops)
 {
 	// Temporary values
-	string errorMessage = "Trying to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation exists
 	if (isAnimationExisting(animationID))
@@ -84,7 +84,7 @@ bool AnimationEditor::isAnimationExisting(const string& ID)
 bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to retrieve animation started status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation does not exist
 	if (!isAnimationExisting(animationID))
@@ -102,7 +102,7 @@ bool AnimationEditor::isAnimationStarted(const string& animationID, const string
 bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to retrieve animation playing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
@@ -124,7 +124,7 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to retrieve animation pausing status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
@@ -146,7 +146,7 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 bool AnimationEditor::isAnimationFading(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to retrieve animation fading status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is able to be retrieved
 	if (!isAnimationExisting(animationID))
@@ -168,7 +168,7 @@ bool AnimationEditor::isAnimationFading(const string& animationID, const string&
 void AnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to pause animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is existing
 	if (isAnimationExisting(animationID))
@@ -200,7 +200,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 void AnimationEditor::resumeAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to resume animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is existing
 	if (isAnimationExisting(animationID))
@@ -232,7 +232,7 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 void AnimationEditor::stopAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is existing
 	if (isAnimationExisting(animationID))
@@ -261,7 +261,7 @@ void AnimationEditor::stopAllAnimations()
 void AnimationEditor::fadeAnimation(const string& animationID, const string& modelID, int framestep)
 {
 	// Temporary values
-	string errorMessage = "Trying to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Tried to fade animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is existing
 	if (isAnimationExisting(animationID))

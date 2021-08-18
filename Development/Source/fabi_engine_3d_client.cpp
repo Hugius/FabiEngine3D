@@ -39,16 +39,39 @@ const bool FabiEngine3D::networkClient_isRunning()
 
 const bool FabiEngine3D::networkClient_isConnecting()
 {
+	if (!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve connecting status: not running!");
+		return false;
+	}
+
 	return _core->_networkClientAPI.isConnectingToServer();
 }
 
 const bool FabiEngine3D::networkClient_isConnected()
 {
+	if (!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve connection status: not running!");
+		return false;
+	}
+
 	return _core->_networkClientAPI.isConnectedToServer();
 }
 
 const unsigned int FabiEngine3D::networkClient_getPingLatency()
 {
+	if (!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve ping latency: not running!");
+		return 0;
+	}
+	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to retrieve ping latency: not connected!");
+		return 0;
+	}
+
 	return _core->_networkClientAPI.getPingLatency();
 }
 
@@ -64,10 +87,27 @@ const string& FabiEngine3D::networkClient_getUsername()
 
 const string& FabiEngine3D::networkClient_getServerIP()
 {
+	if (!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
+		return "";
+	}
+	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
+		return "";
+	}
+
 	return _core->_networkClientAPI.getServerIP();
 }
 
-const vector<NetworkServerMessage>& FabiEngine3D::networkClient_getPendingMessages()
+const vector<NetworkServerMessage> FabiEngine3D::networkClient_getPendingMessages()
 {
+	if (!_core->_networkClientAPI.isRunning())
+	{
+		Logger::throwWarning("Networking client tried to retrieve pending messages: not running!");
+		return {};
+	}
+
 	return _core->_networkClientAPI.getPendingMessages();
 }

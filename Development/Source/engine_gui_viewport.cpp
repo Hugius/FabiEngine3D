@@ -82,7 +82,7 @@ void EngineGuiViewport::deleteWindow(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiViewport::deleteWindow");
+	Logger::throwError("EngineGuiViewport::deleteWindow");
 }
 
 vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()
@@ -102,5 +102,5 @@ shared_ptr<EngineGuiWindow> EngineGuiViewport::getWindow(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiViewport::getWindow");
+	Logger::throwError("EngineGuiViewport::getWindow");
 }

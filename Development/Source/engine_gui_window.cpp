@@ -84,7 +84,7 @@ void EngineGuiWindow::createScreen(const string& ID)
 	{
 		if (screen->getID() == ID)
 		{
-			Logger::throwFatalError("EngineGuiWindow::createScreen");
+			Logger::throwError("EngineGuiWindow::createScreen");
 		}
 	}
 
@@ -117,7 +117,7 @@ void EngineGuiWindow::deleteScreen(const string& ID)
 	// Error
 	if (!isFound)
 	{
-		Logger::throwFatalError("EngineGuiWindow::deleteScreen");
+		Logger::throwError("EngineGuiWindow::deleteScreen");
 	}
 }
 
@@ -156,5 +156,5 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 	}
 
 	// Error
-	Logger::throwFatalError("EngineGuiWindow::getScreen");
+	Logger::throwError("EngineGuiWindow::getScreen");
 }

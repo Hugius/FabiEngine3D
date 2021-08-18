@@ -106,12 +106,11 @@ void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 	if (size > WaterEntityManager::MAX_SIZE)
 	{
 		Logger::throwWarning("Tried to set size of water with ID \"" + ID + "\": too high!");
+		return;
 	}
-	else
-	{
-		_core->_waterEntityManager.getEntity(ID)->setSize(size);
-		_core->_waterEntityManager.loadMesh(ID);
-	}
+
+	_core->_waterEntityManager.getEntity(ID)->setSize(size);
+	_core->_waterEntityManager.loadMesh(ID);
 }
 
 void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)

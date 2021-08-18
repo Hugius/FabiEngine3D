@@ -106,8 +106,11 @@ void ImageEntity::startSpriteAnimation(int loops)
 {
 	if (_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to start sprite animation on image with ID \"" + getID() + "\": animation already started!");
-		return;
+		Logger::throwError("ImageEntity::startSpriteAnimation::1");
+	}
+	if (loops < -1)
+	{
+		Logger::throwError("ImageEntity::startSpriteAnimation::2");
 	}
 
 	_isSpriteAnimationStarted = true;
@@ -120,13 +123,11 @@ void ImageEntity::pauseSpriteAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on image with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("ImageEntity::pauseSpriteAnimation::1");
 	}
 	else if (_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to pause sprite animation on image with ID \"" + getID() + "\" animation already paused!");
-		return;
+		Logger::throwError("ImageEntity::pauseSpriteAnimation::2");
 	}
 
 	_isSpriteAnimationPaused = true;
@@ -136,8 +137,7 @@ void ImageEntity::resumeSpriteAnimation()
 {
 	if (!_isSpriteAnimationPaused)
 	{
-		Logger::throwWarning("Trying to resume sprite animation on image with ID \"" + getID() + "\" animation not paused!");
-		return;
+		Logger::throwError("ImageEntity::resumeSpriteAnimation");
 	}
 
 	_isSpriteAnimationPaused = false;
@@ -147,8 +147,7 @@ void ImageEntity::stopSpriteAnimationAnimation()
 {
 	if (!_isSpriteAnimationStarted)
 	{
-		Logger::throwWarning("Trying to stop sprite animation on image with ID \"" + getID() + "\" animation not started!");
-		return;
+		Logger::throwError("ImageEntity::stopSpriteAnimation");
 	}
 
 	_isSpriteAnimationStarted = false;

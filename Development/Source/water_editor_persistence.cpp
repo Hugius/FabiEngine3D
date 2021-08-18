@@ -14,7 +14,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("WaterEditor::getAllWaterTexturePathsFromFile");
+		Logger::throwError("WaterEditor::getAllWaterTexturePathsFromFile");
 	}
 
 	// Compose file path
@@ -82,7 +82,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("WaterEditor::loadWaterEntitiesFromFile");
+		Logger::throwError("WaterEditor::loadWaterEntitiesFromFile");
 	}
 
 	// Clear IDs from previous loads
@@ -218,7 +218,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("WaterEditor::saveWaterEntitiesToFile");
+		Logger::throwError("WaterEditor::saveWaterEntitiesToFile");
 	}
 
 	// Compose file path

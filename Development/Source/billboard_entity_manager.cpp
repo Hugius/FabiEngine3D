@@ -29,7 +29,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("BillboardEntityManager::getEntity");
+		Logger::throwError("BillboardEntityManager::getEntity");
 	}
 
 	return result;

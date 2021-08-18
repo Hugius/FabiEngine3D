@@ -40,7 +40,7 @@ shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("AabbEntityManager::getEntity");
+		Logger::throwError("AabbEntityManager::getEntity");
 	}
 
 	return result;
@@ -180,7 +180,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwFatalError("AabbEntityManager::update::1");
+					Logger::throwError("AabbEntityManager::update::1");
 				}
 			}
 			else
@@ -249,7 +249,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwFatalError("AabbEntityManager::update::2");
+					Logger::throwError("AabbEntityManager::update::2");
 				}
 			}
 		}

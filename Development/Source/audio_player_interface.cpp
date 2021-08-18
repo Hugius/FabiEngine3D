@@ -31,12 +31,12 @@ void AudioPlayer::playSound(Sound& sound, int loops, int fadeMS, bool forcePlay)
 			}
 			else
 			{
-				Logger::throwWarning("Trying to play sound with ID \"", sound.getID(), "\": no audio channels available!");
+				Logger::throwError("AudioPlayer::playSound::1");
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Trying to play sound with ID \"", sound.getID(), "\": sound is already started!");
+			Logger::throwError("AudioPlayer::playSound::2");
 		}
 	}
 }
@@ -88,7 +88,6 @@ void AudioPlayer::pauseSound(Sound& sound)
 		{
 			if (!isSoundPaused(sound))
 			{
-				// For every sound playback
 				for (const auto& channel : _findSoundChannels(sound))
 				{
 					Mix_Pause(channel);
@@ -96,12 +95,12 @@ void AudioPlayer::pauseSound(Sound& sound)
 			}
 			else
 			{
-				Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), "\": sound is already paused!");
+				Logger::throwError("AudioPlayer::pauseSound::1");
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Trying to pause sound with ID \"", sound.getID(), "\": sound is not playing!");
+			Logger::throwError("AudioPlayer::pauseSound::2");
 		}
 	}
 }
@@ -118,12 +117,12 @@ void AudioPlayer::pauseMusic()
 			}
 			else
 			{
-				Logger::throwWarning("Trying to pause music playlist: music is already paused!");
+				Logger::throwError("AudioPlayer::pauseMusic::1");
 			}
 		}
 		else
 		{
-			Logger::throwWarning("Trying to pause music playlist: music is not playing!");
+			Logger::throwError("AudioPlayer::pauseMusic::2");
 		}
 	}
 }
@@ -140,9 +139,8 @@ void AudioPlayer::resumeSound(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-		if (isSoundStarted(sound) && isSoundPaused(sound))
+		if (isSoundPaused(sound))
 		{
-			// For every sound playback
 			for (const auto& channel : _findSoundChannels(sound))
 			{
 				Mix_Resume(channel);
@@ -150,7 +148,7 @@ void AudioPlayer::resumeSound(Sound& sound)
 		}
 		else
 		{
-			Logger::throwWarning("Trying to resume sound with ID \"", sound.getID(), "\": sound is not paused!");
+			Logger::throwError("AudioPlayer::resumeSound");
 		}
 	}
 }
@@ -165,7 +163,7 @@ void AudioPlayer::resumeMusic()
 		}
 		else
 		{
-			Logger::throwWarning("Trying to resume music playlist: music is not paused!");
+			Logger::throwError("AudioPlayer::resumeMusic");
 		}
 	}
 }
@@ -220,12 +218,12 @@ void AudioPlayer::stopSound(Sound& sound, int fadeMS)
 		}
 		else
 		{
-			Logger::throwWarning("Trying to stop sound with ID \"", sound.getID(), "\": sound is not playing!");
+			Logger::throwError("AudioPlayer::stopSound");
 		}
 	}
 }
 
-void AudioPlayer::stopMusic(bool forceStop)
+void AudioPlayer::stopMusic()
 {
 	if (_isMusicEnabled)
 	{
@@ -235,14 +233,14 @@ void AudioPlayer::stopMusic(bool forceStop)
 			resumeMusic();
 		}
 
-		// Check if music is playing
-		if (isMusicPlaying() || forceStop)
+		// Check if music is started
+		if (isMusicStarted())
 		{
 			Mix_HaltMusic();
 		}
 		else
 		{
-			Logger::throwWarning("Trying to stop music playlist: music is not playing!");
+			Logger::throwError("AudioPlayer::stopMusic");
 		}
 	}
 }
@@ -263,6 +261,19 @@ float AudioPlayer::getMusicVolume()
 	}
 
 	return -1.0f;
+}
+
+bool AudioPlayer::isChannelAvailable()
+{
+	for (size_t i = 0; i < _channels.size(); i++)
+	{
+		if (_channels[i].empty())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool AudioPlayer::isSoundsEnabled()
@@ -300,7 +311,6 @@ bool AudioPlayer::isSoundPaused(Sound& sound)
 {
 	if (_isSoundsEnabled)
 	{
-
 		return (isSoundStarted(sound) && Mix_Paused(_findSoundChannels(sound).front()));
 	}
 
@@ -336,7 +346,7 @@ bool AudioPlayer::isMusicPaused()
 {
 	if (_isMusicEnabled)
 	{
-		return (isMusicStarted() && Mix_PausedMusic());
+		return Mix_PausedMusic();
 	}
 
 	return false;

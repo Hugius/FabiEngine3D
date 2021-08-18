@@ -17,7 +17,7 @@ shared_ptr<ModelEntity> ModelEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("ModelEntityManager::getEntity");
+		Logger::throwError("ModelEntityManager::getEntity");
 	}
 
 	return result;
@@ -139,7 +139,7 @@ void ModelEntityManager::update()
 				auto lodEntityPair = getEntities().find(entity->getID());
 				if (lodEntityPair == getEntities().end())
 				{
-					Logger::throwFatalError("ModelEntityManager::update");
+					Logger::throwError("ModelEntityManager::update");
 				}
 
 				// Calculate absolute distance between camera and entity

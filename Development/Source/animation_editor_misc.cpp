@@ -24,7 +24,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwFatalError("AnimationEditor::_deleteAnimation");
+	Logger::throwError("AnimationEditor::_deleteAnimation");
 }
 
 bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
@@ -63,7 +63,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 		}
 	}
 
-	Logger::throwFatalError("AnimationEditor::_getAnimation");
+	Logger::throwError("AnimationEditor::_getAnimation");
 }
 
 const vector<string> AnimationEditor::getAllAnimationIDs()

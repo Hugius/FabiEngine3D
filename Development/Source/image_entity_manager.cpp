@@ -18,7 +18,7 @@ shared_ptr<ImageEntity> ImageEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwFatalError("ImageEntityManager::getEntity");
+		Logger::throwError("ImageEntityManager::getEntity");
 	}
 
 	return result;

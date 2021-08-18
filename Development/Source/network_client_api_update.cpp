@@ -60,7 +60,7 @@ void NetworkClientAPI::update()
 			}
 			else // Something really bad happened
 			{
-				Logger::throwFatalError("NetworkClientAPI::update::1 ---> ", connectionErrorCode);
+				Logger::throwError("NetworkClientAPI::update::1 ---> ", connectionErrorCode);
 			}
 		}
 		else
@@ -191,7 +191,7 @@ void NetworkClientAPI::update()
 			}
 			else // Something really bad happened
 			{
-				Logger::throwFatalError("NetworkClientAPI::update::2 ---> ", code);
+				Logger::throwError("NetworkClientAPI::update::2 ---> ", code);
 			}
 		}
 
@@ -229,7 +229,7 @@ void NetworkClientAPI::update()
 		}
 		else // Something really bad happened
 		{
-			Logger::throwFatalError("NetworkClientAPI::update::3 ---> ", messageErrorCode);
+			Logger::throwError("NetworkClientAPI::update::3 ---> ", messageErrorCode);
 		}
 	}
 }

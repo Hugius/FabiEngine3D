@@ -13,11 +13,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("SceneEditor::loadCustomSceneFromFile::1");
+		Logger::throwError("SceneEditor::loadCustomSceneFromFile::1");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwFatalError("SceneEditor::loadCustomSceneFromFile::2");
+		Logger::throwError("SceneEditor::loadCustomSceneFromFile::2");
 	}
 
 	// Compose file path
@@ -324,7 +324,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			if (_animationEditor.isAnimationExisting(animationID))
 			{
 				// Retrieve raw animation data for editing
-				string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
 
 				// Set properties

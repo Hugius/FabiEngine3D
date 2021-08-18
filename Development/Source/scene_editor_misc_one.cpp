@@ -18,7 +18,7 @@ bool SceneEditor::isSceneExisting(const string& filename)
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("SceneEditor::isSceneExisting");
+		Logger::throwError("SceneEditor::isSceneExisting");
 	}
 
 	// Compose full file path

@@ -51,7 +51,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 		}
 		else // Something really bad happened
 		{
-			Logger::throwFatalError("NetworkServerAPI::_sendTcpMessage ---> ", WSAGetLastError());
+			Logger::throwError("NetworkServerAPI::_sendTcpMessage ---> ", WSAGetLastError());
 		}
 	}
 
@@ -99,7 +99,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwFatalError("NetworkServerAPI::_sendUdpMessage ---> ", WSAGetLastError());
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage ---> ", WSAGetLastError());
 	}
 
 	return true;

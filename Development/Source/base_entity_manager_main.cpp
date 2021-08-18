@@ -22,7 +22,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getSkyEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::1");
+				Logger::throwError("BaseEntityManager::_createEntity::1");
 			}
 			else
 			{
@@ -36,7 +36,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTerrainEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::2");
+				Logger::throwError("BaseEntityManager::_createEntity::2");
 			}
 			else
 			{
@@ -50,7 +50,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getWaterEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::3");
+				Logger::throwError("BaseEntityManager::_createEntity::3");
 			}
 			else
 			{
@@ -64,7 +64,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getModelEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::4");
+				Logger::throwError("BaseEntityManager::_createEntity::4");
 			}
 			else
 			{
@@ -78,7 +78,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getBillboardEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::5");
+				Logger::throwError("BaseEntityManager::_createEntity::5");
 			}
 			else
 			{
@@ -92,7 +92,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getAabbEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::6");
+				Logger::throwError("BaseEntityManager::_createEntity::6");
 			}
 			else
 			{
@@ -106,7 +106,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getLightEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::7");
+				Logger::throwError("BaseEntityManager::_createEntity::7");
 			}
 			else
 			{
@@ -120,7 +120,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getImageEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::8");
+				Logger::throwError("BaseEntityManager::_createEntity::8");
 			}
 			else
 			{
@@ -136,7 +136,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwFatalError("BaseEntityManager::_createEntity::9");
+				Logger::throwError("BaseEntityManager::_createEntity::9");
 			}
 			else
 			{
@@ -246,7 +246,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	}
 
 	// Error logging
-	Logger::throwFatalError("BaseEntityManager::deleteEntity");
+	Logger::throwError("BaseEntityManager::deleteEntity");
 }
 
 void BaseEntityManager::deleteAllEntities()

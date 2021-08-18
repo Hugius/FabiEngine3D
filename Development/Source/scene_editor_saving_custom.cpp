@@ -12,11 +12,11 @@ bool SceneEditor::saveCustomSceneToFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwFatalError("SceneEditor::saveCustomSceneToFile::1");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile::1");
 	}
 	if (_isEditorLoaded)
 	{
-		Logger::throwFatalError("SceneEditor::saveCustomSceneToFile::2");
+		Logger::throwError("SceneEditor::saveCustomSceneToFile::2");
 	}
 
 	// Warning checking
@@ -274,7 +274,7 @@ bool SceneEditor::saveCustomSceneToFile()
 			for (const auto& animationID : _animationEditor.getStartedAnimationIDs(modelID))
 			{
 				// Retrieve raw animation data for retrieving
-				string errorMessage = "Trying to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
 
 				// Data to save

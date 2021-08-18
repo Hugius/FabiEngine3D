@@ -7,20 +7,22 @@
 
 class CollisionResolver final
 {
-public:	
-	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, 
-		Camera & camera, CollisionDetector& collisionDetector);
+public:
+	// Voids
+	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera& camera, CollisionDetector& collisionDetector);
 	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
-	void enableCameraResponse(bool x, bool y, bool z);
-	void disableAabbResponse();
-	void enableTerrainResponse(float cameraHeight, float cameraSpeed);
-	void disableTerrainResponse();
+	void enableCameraAabbResponse(bool x, bool y, bool z);
+	void disableCameraAabbResponse();
+	void enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
+	void disableCameraTerrainResponse();
 
+	// Booleans
 	bool isCameraUnderTerrain();
-	bool isCameraResponseEnabled();
-	bool isTerrainResponseEnabled();
+	bool isCameraAabbResponseEnabled();
+	bool isCameraTerrainResponseEnabled();
 
 private:
+	// Floats
 	float _cameraAabbBottom = 0.0f;
 	float _cameraAabbTop = 0.0f;
 	float _cameraAabbLeft = 0.0f;
@@ -30,10 +32,11 @@ private:
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
-	bool _isCameraResponseEnabled = false;
-	bool _isCameraResponseEnabledX = false;
-	bool _isCameraResponseEnabledY = false;
-	bool _isCameraResponseEnabledZ = false;
-	bool _isTerrainResponseEnabled = false;
+	// Booleans
+	bool _isCameraAabbResponseEnabled = false;
+	bool _isCameraAabbResponseEnabledX = false;
+	bool _isCameraAabbResponseEnabledY = false;
+	bool _isCameraAabbResponseEnabledZ = false;
+	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
 };

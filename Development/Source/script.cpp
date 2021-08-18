@@ -15,7 +15,7 @@ void Script::createScriptFile(const string& ID)
 	{
 		if (file->getID() == ID)
 		{
-			Logger::throwFatalError("Script::createScriptFile");
+			Logger::throwError("Script::createScriptFile");
 		}
 	}
 
@@ -34,7 +34,7 @@ void Script::renameScriptFile(const string& ID, const string& newID)
 		}
 	}
 
-	Logger::throwFatalError("Script::renameScriptFile");
+	Logger::throwError("Script::renameScriptFile");
 }
 
 void Script::removeScriptFile(const string& ID)
@@ -48,7 +48,7 @@ void Script::removeScriptFile(const string& ID)
 		}
 	}
 
-	Logger::throwFatalError("Script::removeScriptFile");
+	Logger::throwError("Script::removeScriptFile");
 }
 
 void Script::reset()
@@ -96,7 +96,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 		}
 	}
 
-	Logger::throwFatalError("Script::getScriptFile");
+	Logger::throwError("Script::getScriptFile");
 }
 
 const vector<string> Script::getAllScriptFileIDs()

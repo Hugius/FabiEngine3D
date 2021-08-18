@@ -16,11 +16,10 @@ void FabiEngine3D::misc_enableWireFrameRendering()
 	if (_core->_renderBus.isWireFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable wire frame rendering: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_renderBus.setWireFrameRenderingEnabled(true);
-	}
+
+	_core->_renderBus.setWireFrameRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_enableShadowFrameRendering()
@@ -28,11 +27,10 @@ void FabiEngine3D::misc_enableShadowFrameRendering()
 	if (_core->_renderBus.isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable shadow frame rendering: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_renderBus.setShadowFrameRenderingEnabled(true);
-	}
+
+	_core->_renderBus.setShadowFrameRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_enableAabbFrameRendering()
@@ -40,11 +38,10 @@ void FabiEngine3D::misc_enableAabbFrameRendering()
 	if (_core->_renderBus.isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable AABB frame rendering: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_renderBus.setAabbFrameRenderingEnabled(true);
-	}
+
+	_core->_renderBus.setAabbFrameRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_enableDebugRendering()
@@ -52,11 +49,10 @@ void FabiEngine3D::misc_enableDebugRendering()
 	if (_core->_renderBus.isDebugRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to enable debug rendering: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_renderBus.setDebugRenderingEnabled(true);
-	}
+
+	_core->_renderBus.setDebugRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_enableTerrainRaycastPointing(float distance, float precision)
@@ -64,13 +60,12 @@ void FabiEngine3D::misc_enableTerrainRaycastPointing(float distance, float preci
 	if (_core->_rayCaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_rayCaster.setTerrainPointingEnabled(true);
-		_core->_rayCaster.setTerrainPointingDistance(distance);
-		_core->_rayCaster.setTerrainPointingPrecision(precision);
-	}
+
+	_core->_rayCaster.setTerrainPointingEnabled(true);
+	_core->_rayCaster.setTerrainPointingDistance(distance);
+	_core->_rayCaster.setTerrainPointingPrecision(precision);
 }
 
 void FabiEngine3D::misc_enableVsync()
@@ -78,11 +73,10 @@ void FabiEngine3D::misc_enableVsync()
 	if (_core->_window.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to enable Vsync: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_window.enableVsync();
-	}
+
+	_core->_window.enableVsync();
 }
 
 void FabiEngine3D::misc_enableSounds()
@@ -90,11 +84,10 @@ void FabiEngine3D::misc_enableSounds()
 	if (_core->_audioPlayer.isSoundsEnabled())
 	{
 		Logger::throwWarning("Tried to enable sounds: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_audioPlayer.setSoundsEnabled(true);
-	}
+	
+	_core->_audioPlayer.setSoundsEnabled(true);
 }
 
 void FabiEngine3D::misc_enableMusic()
@@ -102,107 +95,98 @@ void FabiEngine3D::misc_enableMusic()
 	if (_core->_audioPlayer.isMusicEnabled())
 	{
 		Logger::throwWarning("Tried to enable music: already enabled!");
+		return;
 	}
-	else
-	{
-		_core->_audioPlayer.setMusicEnabled(true);
-	}
+
+	_core->_audioPlayer.setMusicEnabled(true);
 }
 
 void FabiEngine3D::misc_disableWireFrameRendering()
 {
-	if (_core->_renderBus.isWireFrameRenderingEnabled())
-	{
-		_core->_renderBus.setWireFrameRenderingEnabled(false);
-	}
-	else
+	if (!_core->_renderBus.isWireFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable wire frame rendering: not enabled!");
+		return;
 	}
+
+	_core->_renderBus.setWireFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableShadowFrameRendering()
 {
-	if (_core->_renderBus.isShadowFrameRenderingEnabled())
-	{
-		_core->_renderBus.setShadowFrameRenderingEnabled(false);
-	}
-	else
+	if (!_core->_renderBus.isShadowFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable shadow frame rendering: not enabled!");
+		return;
 	}
+
+	_core->_renderBus.setShadowFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableAabbFrameRendering()
 {
-	if (_core->_renderBus.isAabbFrameRenderingEnabled())
-	{
-		_core->_renderBus.setAabbFrameRenderingEnabled(false);
-	}
-	else
+	if (!_core->_renderBus.isAabbFrameRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable AABB frame rendering: not enabled!");
+		return;
 	}
+
+	_core->_renderBus.setAabbFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableDebugRendering()
 {
-	if (_core->_renderBus.isDebugRenderingEnabled())
-	{
-		_core->_renderBus.setDebugRenderingEnabled(false);
-	}
-	else
+	if (!_core->_renderBus.isDebugRenderingEnabled())
 	{
 		Logger::throwWarning("Tried to disable debug rendering: not enabled!");
+		return;
 	}
+
+	_core->_renderBus.setDebugRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableTerrainRaycastPointing()
 {
-	if (_core->_rayCaster.isTerrainPointingEnabled())
-	{
-		_core->_rayCaster.setTerrainPointingEnabled(false);
-	}
-	else
+	if (!_core->_rayCaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
+		return;
 	}
+
+	_core->_rayCaster.setTerrainPointingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableVsync()
 {
-	if (_core->_window.isVsyncEnabled())
-	{
-		_core->_window.disableVsync();
-	}
-	else
+	if (!_core->_window.isVsyncEnabled())
 	{
 		Logger::throwWarning("Tried to disable Vsync: not enabled!");
+		return;
 	}
+
+	_core->_window.disableVsync();
 }
 
 void FabiEngine3D::misc_disableSounds()
 {
-	if (_core->_audioPlayer.isSoundsEnabled())
-	{
-		_core->_audioPlayer.setSoundsEnabled(false);
-	}
-	else
+	if (!_core->_audioPlayer.isSoundsEnabled())
 	{
 		Logger::throwWarning("Tried to disable sounds: not enabled!");
+		return;
 	}
+
+	_core->_audioPlayer.setSoundsEnabled(false);
 }
 
 void FabiEngine3D::misc_disableMusic()
 {
-	if (_core->_audioPlayer.isMusicEnabled())
-	{
-		_core->_audioPlayer.setMusicEnabled(false);
-	}
-	else
+	if (!_core->_audioPlayer.isMusicEnabled())
 	{
 		Logger::throwWarning("Tried to disable music: not enabled!");
+		return;
 	}
+
+	_core->_audioPlayer.setMusicEnabled(false);
 }
 
 void FabiEngine3D::misc_setCursorVisible(bool isVisible)

@@ -29,13 +29,13 @@ RenderShader::RenderShader(const string& vertexFilename, const string& fragmentF
 	// Check if vertex shader file exists
 	if (!exists(rootDir + vertexPath))
 	{
-		Logger::throwFatalError("RenderShader::RenderShader::1");
+		Logger::throwError("RenderShader::RenderShader::1");
 	}
 
 	// Check if fragment shader file exists
 	if (!exists(rootDir + fragmentPath))
 	{
-		Logger::throwFatalError("RenderShader::RenderShader::2");
+		Logger::throwError("RenderShader::RenderShader::2");
 	}
 
 	// Open the shader text files
@@ -74,7 +74,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
-		Logger::throwFatalError("RenderShader::_createProgram::1");
+		Logger::throwError("RenderShader::_createProgram::1");
 	}
 
 	// Fragment shader
@@ -87,7 +87,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
-		Logger::throwFatalError("RenderShader::_createProgram::2");
+		Logger::throwError("RenderShader::_createProgram::2");
 	}
 
 	// Shader program
@@ -101,7 +101,7 @@ void RenderShader::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success)
 	{
 		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
-		Logger::throwFatalError("RenderShader::_createProgram::3");
+		Logger::throwError("RenderShader::_createProgram::3");
 	}
 
 	// Delete the no longer needed shaders
@@ -122,7 +122,7 @@ UniformID RenderShader::_getUniformID(const string& uniformID)
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
 		if (uniform == -1)
 		{
-			Logger::throwFatalError("RenderShader::_getUniformID");
+			Logger::throwError("RenderShader::_getUniformID");
 		}
 
 		// Cache uniform

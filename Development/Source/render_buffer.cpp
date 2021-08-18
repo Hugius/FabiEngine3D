@@ -138,14 +138,14 @@ void RenderBuffer::enableInstancing(const vector<Vec3>& offsets)
 {
 	if (_isInstanced)
 	{
-		Logger::throwFatalError("RenderBuffer::enableInstancing::1");
+		Logger::throwError("RenderBuffer::enableInstancing::1");
 	}
 	else
 	{
 		// Validate offsets
 		if (offsets.empty())
 		{
-			Logger::throwFatalError("RenderBuffer::enableInstancing::2");
+			Logger::throwError("RenderBuffer::enableInstancing::2");
 		}
 
 		// Create buffers
@@ -183,7 +183,7 @@ void RenderBuffer::disableInstancing()
 	}
 	else
 	{
-		Logger::throwFatalError("RenderBuffer::disableInstancing");
+		Logger::throwError("RenderBuffer::disableInstancing");
 	}
 }
 

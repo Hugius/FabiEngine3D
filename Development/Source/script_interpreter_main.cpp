@@ -291,7 +291,10 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_setMixValue(0.0f);
 
 	// Choose engine background again
-	_fe3d.skyEntity_selectMainSky("@@engineBackground");
+	if (!_fe3d.application_isExported())
+	{
+		_fe3d.skyEntity_selectMainSky("@@engineBackground");
+	}
 
 	// Camera
 	_fe3d.camera_reset();

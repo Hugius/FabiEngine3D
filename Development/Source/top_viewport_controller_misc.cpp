@@ -126,33 +126,32 @@ void TopViewportController::_updateProjectCreating()
 
 void TopViewportController::_prepareProjectChoosing(const string& title)
 {
-	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
+	// Temporary values
+	string userDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
 
 	// Check if projects directory exists
-	if (_fe3d.misc_isDirectoryExisting(userDirectoryPath))
+	if (!_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
-		// Get all project names
-		vector<string> projectIDs;
-		for (const auto& entry : directory_iterator(userDirectoryPath))
-		{
-			// Extract project ID
-			string projectPath = string(entry.path().u8string());
-			if (_fe3d.misc_isDirectoryExisting(projectPath))
-			{
-				string projectID = projectPath;
-				projectID.erase(0, userDirectoryPath.size());
-				projectIDs.push_back(projectID);
-			}
-		}
+		Logger::throwWarning("Cannot show projects: corrupted files/directories!");
+		return;
+	}
 
-		// Add buttons
-		_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
-	}
-	else
+	// Get all project names
+	vector<string> projectIDs;
+	for (const auto& entry : directory_iterator(userDirectoryPath))
 	{
-		Logger::throwError("TopViewportController::_prepareProjectChoosing");
+		// Extract project ID
+		string projectPath = string(entry.path().u8string());
+		if (_fe3d.misc_isDirectoryExisting(projectPath))
+		{
+			string projectID = projectPath;
+			projectID.erase(0, userDirectoryPath.size());
+			projectIDs.push_back(projectID);
+		}
 	}
+
+	// Add buttons
+	_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
 }
 
 void TopViewportController::_updateProjectLoading()
@@ -215,6 +214,7 @@ void TopViewportController::_updateProjectDeleting()
 {
 	if (_deletingProject)
 	{
+		// Temporary values
 		static string chosenButtonID = "";
 		string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
 

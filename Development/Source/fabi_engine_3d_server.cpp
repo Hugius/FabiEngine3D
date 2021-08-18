@@ -3,7 +3,7 @@
 
 void FabiEngine3D::networkServer_start(unsigned int maxClientCount)
 {
-	if (!_core->_networkServerAPI.isRunning())
+	if (_core->_networkServerAPI.isRunning())
 	{
 		Logger::throwWarning("Networking server tried to start: already running!");
 		return;

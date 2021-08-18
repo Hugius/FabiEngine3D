@@ -11,7 +11,7 @@ bool NetworkServerAPI::isClientConnected(const string& username)
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve client connection status: not running!");
+		Logger::throwError("NetworkServerAPI::isClientConnected");
 	}
 
 	// Try to find client
@@ -36,7 +36,7 @@ const string& NetworkServerAPI::getNewClientIP()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve new client IP: not running!");
+		Logger::throwError("NetworkServerAPI::getNewClientIP");
 	}
 
 	return _newClientIP;
@@ -47,7 +47,7 @@ const string& NetworkServerAPI::getNewClientPort()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve new client port: not running!");
+		Logger::throwError("NetworkServerAPI::getNewClientPort");
 	}
 
 	return _newClientPort;
@@ -58,7 +58,7 @@ const string& NetworkServerAPI::getNewClientUsername()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve new client username: not running!");
+		Logger::throwError("NetworkServerAPI::getNewClientUsername");
 	}
 
 	return _newClientUsername;
@@ -69,7 +69,7 @@ const string NetworkServerAPI::getOldClientIP()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve old client IP: not running!");
+		Logger::throwError("NetworkServerAPI::getOldClientIP");
 	}
 
 	if (_oldClientIPs.empty())
@@ -87,7 +87,7 @@ const string NetworkServerAPI::getOldClientPort()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve old client port: not running!");
+		Logger::throwError("NetworkServerAPI::getOldClientPort");
 	}
 
 	if (_oldClientPorts.empty())
@@ -105,7 +105,7 @@ const string NetworkServerAPI::getOldClientUsername()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve old client username: not running!");
+		Logger::throwError("NetworkServerAPI::getOldClientUsername");
 	}
 
 	if (_oldClientUsernames.empty())
@@ -123,7 +123,7 @@ const vector<NetworkClientMessage>& NetworkServerAPI::getPendingMessages()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve pending messages: not running!");
+		Logger::throwError("NetworkServerAPI::getPendingMessages");
 	}
 
 	return _pendingMessages;
@@ -134,7 +134,7 @@ const vector<string> NetworkServerAPI::getClientIPs()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve client IPs: not running!");
+		Logger::throwError("NetworkServerAPI::getClientIPs");
 	}
 
 	// Client must be fully accepted
@@ -154,7 +154,7 @@ const vector<string> NetworkServerAPI::getClientPorts()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve client ports: not running!");
+		Logger::throwError("NetworkServerAPI::getClientPorts");
 	}
 
 	// Client must be fully accepted
@@ -174,7 +174,7 @@ const vector<string> NetworkServerAPI::getClientUsernames()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to retrieve client usernames: not running!");
+		Logger::throwError("NetworkServerAPI::getClientUsernames");
 	}
 
 	// Client must be fully accepted
@@ -194,7 +194,7 @@ void NetworkServerAPI::sendTcpMessage(const string& username, const string& cont
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not running!");
+		Logger::throwError("NetworkServerAPI::sendTcpMessage::1");
 	}
 
 	// Try to find client and send message
@@ -214,7 +214,7 @@ void NetworkServerAPI::sendTcpMessage(const string& username, const string& cont
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server tried to send TCP message to client \"" + username + "\": not connected!");
+	Logger::throwError("NetworkServerAPI::sendTcpMessage::2");
 }
 
 void NetworkServerAPI::sendUdpMessage(const string& username, const string& content)
@@ -222,7 +222,7 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not running!");
+		Logger::throwError("NetworkServerAPI::sendUdpMessage::1");
 	}
 
 	// Try to find client and send message
@@ -242,7 +242,7 @@ void NetworkServerAPI::sendUdpMessage(const string& username, const string& cont
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server tried to send UDP message to client \"" + username + "\": not connected!");
+	Logger::throwError("NetworkServerAPI::sendUdpMessage::2");
 }
 
 void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& exceptionUsername)
@@ -250,7 +250,7 @@ void NetworkServerAPI::broadcastTcpMessage(const string& content, const string& 
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to broadcast TCP message: not running!");
+		Logger::throwError("NetworkServerAPI::broadcastTcpMessage");
 	}
 
 	// Send message to all connected clients
@@ -274,7 +274,7 @@ void NetworkServerAPI::broadcastUdpMessage(const string& content, const string& 
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to broadcast UDP message: not running!");
+		Logger::throwError("NetworkServerAPI::broadcastUdpMessage");
 	}
 
 	// Try to find client and send message
@@ -298,7 +298,7 @@ void NetworkServerAPI::disconnectClient(const string& username)
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not running!");
+		Logger::throwError("NetworkServerAPI::disconnectClient::1");
 	}
 
 	// Try to find client and send message
@@ -318,5 +318,5 @@ void NetworkServerAPI::disconnectClient(const string& username)
 	}
 
 	// Client not connected
-	Logger::throwWarning("Networking server tried to disconnect client \"" + username + "\": not connected!");
+	Logger::throwError("NetworkServerAPI::disconnectClient::2");
 }

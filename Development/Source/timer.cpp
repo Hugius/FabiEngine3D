@@ -6,8 +6,7 @@ void Timer::start()
 	// Error checking
 	if (_isStarted)
 	{
-		Logger::throwWarning("Tried to start timer, but was already started!");
-		return;
+		Logger::throwError("Timer::start");
 	}
 
 	// Start
@@ -21,8 +20,7 @@ float Timer::stop()
 	// Error checking
 	if (!_isStarted)
 	{
-		Logger::throwWarning("Tried to stop timer, but was not started!");
-		return 0.0f;
+		Logger::throwError("Timer::stop");
 	}
 
 	// Stop

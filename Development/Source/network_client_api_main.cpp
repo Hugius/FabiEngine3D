@@ -27,37 +27,29 @@ void NetworkClientAPI::start(const string& username)
 	// Must not be running
 	if (_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to start: already running!");
-		return;
+		Logger::throwError("NetworkClientAPI::start::1");
 	}
 
 	// Validate username
 	if (username.empty())
 	{
-		Logger::throwWarning("Networking client tried to start: username is empty!");
-		return;
+		Logger::throwError("NetworkClientAPI::start::2");
 	}
-	else if (username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
+	if (username.size() > NetworkUtils::MAX_USERNAME_CHARACTERS)
 	{
-		Logger::throwWarning("Networking client tried to start: username is too long!");
-		return;
+		Logger::throwError("NetworkClientAPI::start::3");
 	}
-	else if (NetworkUtils::isMessageReserved(username))
+	if (NetworkUtils::isMessageReserved(username))
 	{
-		Logger::throwWarning("Networking client tried to start: username is reserved!");
-		return;
+		Logger::throwError("NetworkClientAPI::start::4");
 	}
-	else if (find(username.begin(), username.end(), ';') != username.end())
+	if (find(username.begin(), username.end(), ';') != username.end())
 	{
-		Logger::throwWarning("Networking client tried to start: username cannot contain semicolons!");
-		return;
-	}
-	else
-	{
-		_username = username;
+		Logger::throwError("NetworkClientAPI::start::5");
 	}
 
 	// Client is now operable
+	_username = username;
 	_isRunning = true;
 }
 
@@ -66,29 +58,25 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to connect: not running!");
-		return;
+		Logger::throwError("NetworkClientAPI::connectToServer::1");
 	}
 
 	// Must not already be connected
 	if (_isConnectedToServer)
 	{
-		Logger::throwWarning("Networking client tried to connect: already connected!");
-		return;
+		Logger::throwError("NetworkClientAPI::connectToServer::2");
 	}
 
 	// Must not already be connecting
 	if (_isConnectingToServer)
 	{
-		Logger::throwWarning("Networking client tried to connect: already connecting!");
-		return;
+		Logger::throwError("NetworkClientAPI::connectToServer::3");
 	}
 
 	// Must be a valid IP
 	if (!isValidServerIP(serverIP))
 	{
-		Logger::throwWarning("Networking client tried to connect: invalid server IP!");
-		return;
+		Logger::throwError("NetworkClientAPI::connectToServer::4");
 	}
 
 	// Save server address
@@ -107,15 +95,13 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to disconnect: not running!");
-		return;
+		Logger::throwError("NetworkClientAPI::disconnectFromServer");
 	}
 
 	// Must be connected & accepted
 	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		Logger::throwWarning("Networking client tried to disconnect: not connected!");
-		return;
+		Logger::throwError("NetworkClientAPI::disconnectFromServer");
 	}
 
 	// Close connection socket
@@ -150,8 +136,7 @@ void NetworkClientAPI::stop()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to stop: not running!");
-		return;
+		Logger::throwError("NetworkClientAPI::stop");
 	}
 
 	// Close TCP socket

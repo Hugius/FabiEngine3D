@@ -287,6 +287,12 @@ void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)
 
 void FabiEngine3D::misc_startMillisecondTimer()
 {
+	if (_core->_timer.isStarted())
+	{
+		Logger::throwWarning("Tried to start milliseconds timer: already started!");
+		return;
+	}
+
 	_core->_timer.start();
 }
 

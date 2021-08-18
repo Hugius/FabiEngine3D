@@ -713,13 +713,13 @@ public:
 	void networkServer_stop();
 
 	// Server interface - getters
-	const vector<NetworkClientMessage>& networkServer_getPendingMessages();
+	const vector<NetworkClientMessage> networkServer_getPendingMessages();
 	const vector<string> networkServer_getClientIPs();
 	const vector<string> networkServer_getClientPorts();
 	const vector<string> networkServer_getClientUsernames();
-	const string& networkServer_getNewClientIP();
-	const string& networkServer_getNewClientPort();
-	const string& networkServer_getNewClientUsername();
+	const string networkServer_getNewClientIP();
+	const string networkServer_getNewClientPort();
+	const string networkServer_getNewClientUsername();
 	const string networkServer_getOldClientIP();
 	const string networkServer_getOldClientPort();
 	const string networkServer_getOldClientUsername();
@@ -737,7 +737,7 @@ public:
 	// Client interface - getters
 	const vector<NetworkServerMessage> networkClient_getPendingMessages();
 	const string& networkClient_getUsername();
-	const string& networkClient_getServerIP();
+	const string networkClient_getServerIP();
 	const unsigned int networkClient_getPingLatency();
 	const bool networkClient_isValidServerIP(const string& serverIP);
 	const bool networkClient_isRunning();

@@ -34,15 +34,13 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	// Must not be running
 	if (_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to start: already running!");
-		return;
+		Logger::throwError("NetworkServerAPI::start::1");
 	}
 
 	// Validate custom client count
 	if (maxClientCount <= 0)
 	{
-		Logger::throwWarning("Networking server tried to start: invalid maximum client count!");
-		return;
+		Logger::throwError("NetworkServerAPI::start::2");
 	}
 
 	// Compose TCP address info hints
@@ -66,7 +64,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	auto tcpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkServerAPI::start::1 ---> ", tcpInfoStatusCode);
+		Logger::throwError("NetworkServerAPI::start::3 ---> ", tcpInfoStatusCode);
 	}
 
 	// Create UDP address info
@@ -74,14 +72,14 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	auto udpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
-		Logger::throwError("NetworkServerAPI::start::2 ---> ", udpInfoStatusCode);
+		Logger::throwError("NetworkServerAPI::start::4 ---> ", udpInfoStatusCode);
 	}
 
 	// Create socket for listening to client connection requests
 	_connectionSocketID = socket(tcpAddressInfo->ai_family, tcpAddressInfo->ai_socktype, tcpAddressInfo->ai_protocol);
 	if (_connectionSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkServerAPI::start::3 ---> ", WSAGetLastError());
+		Logger::throwError("NetworkServerAPI::start::5 ---> ", WSAGetLastError());
 	}
 
 	// Add options to connection socket
@@ -92,7 +90,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
 	if (_udpMessageSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkServerAPI::start::4 ---> ", WSAGetLastError());
+		Logger::throwError("NetworkServerAPI::start::6 ---> ", WSAGetLastError());
 	}
 
 	// Bind connection socket
@@ -108,7 +106,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::start::5 ---> ", WSAGetLastError());
+			Logger::throwError("NetworkServerAPI::start::7 ---> ", WSAGetLastError());
 		}
 	}
 
@@ -125,7 +123,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::start::6 ---> ", WSAGetLastError());
+			Logger::throwError("NetworkServerAPI::start::8 ---> ", WSAGetLastError());
 		}
 	}
 
@@ -133,7 +131,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	auto listenStatusCode = listen(_connectionSocketID, SOMAXCONN);
 	if (listenStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkServerAPI::start::7 ---> ", WSAGetLastError());
+		Logger::throwError("NetworkServerAPI::start::9 ---> ", WSAGetLastError());
 	}
 
 	// Spawn a thread for accepting incoming connection requests
@@ -156,8 +154,7 @@ void NetworkServerAPI::stop()
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to stop: not running!");
-		return;
+		Logger::throwError("NetworkServerAPI::stop");
 	}
 
 	// Close TCP connection socket

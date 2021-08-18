@@ -42,6 +42,12 @@ const float FabiEngine3D::misc_radiansToDegrees(float angle)
 
 const float FabiEngine3D::misc_stopMillisecondTimer()
 {
+	if (!_core->_timer.isStarted())
+	{
+		Logger::throwWarning("Tried to stop milliseconds timer: not started!");
+		return 0.0f;
+	}
+
 	return _core->_timer.stop();
 }
 

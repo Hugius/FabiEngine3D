@@ -14,8 +14,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: not running!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendTcpMessage::1");
 	}
 
 	// Must be connected & optionally accepted
@@ -23,26 +22,22 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	{
 		if (mustBeAccepted)
 		{
-			Logger::throwWarning("Networking client tried to send TCP message: not connected!");
-			return false;
+			Logger::throwError("NetworkClientAPI::_sendTcpMessage::2");
 		}
 	}
 
 	// Validate message content
 	if (find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: cannot contain semicolons!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendTcpMessage::3");
 	}
-	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
+	if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: \"" + content + "\" is reserved!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendTcpMessage::4");
 	}
-	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
+	if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwWarning("Networking client tried to send TCP message: maximum character amount exceeded!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendTcpMessage::5");
 	}
 
 	// Add a semicolon to indicate end of this message
@@ -61,7 +56,7 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkClientAPI::_sendTcpMessage ---> ", WSAGetLastError());
+			Logger::throwError("NetworkClientAPI::_sendTcpMessage::6 ---> ", WSAGetLastError());
 		}
 	}
 
@@ -73,8 +68,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: not running!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::1");
 	}
 
 	// Must be connected & optionally accepted
@@ -82,26 +76,22 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	{
 		if (mustBeAccepted)
 		{
-			Logger::throwWarning("Networking client tried to send UDP message: not connected!");
-			return false;
+			Logger::throwError("NetworkClientAPI::_sendUdpMessage::2");
 		}
 	}
 
 	// Validate message semantics
 	if (find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: cannot contain semicolons!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::3");
 	}
 	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: \"" + content + "\" is reserved!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::4");
 	}
 	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwWarning("Networking client tried to send UDP message: maximum character amount exceeded!");
-		return false;
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::5");
 	}
 
 	// Compose socket address
@@ -122,7 +112,7 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkClientAPI::_sendUdpMessage ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::6 ---> ", WSAGetLastError());
 	}
 
 	return true;

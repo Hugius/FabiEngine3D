@@ -14,25 +14,21 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to send TCP message: not running!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendTcpMessage::1");
 	}
 
 	// Validate message content
 	if (find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking message tried to send TCP message: cannot contain semicolons!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendTcpMessage::2");
 	}
 	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking server tried to send TCP message: \"" + content + "\" is reserved!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendTcpMessage::3");
 	}
 	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwWarning("Networking server tried to send TCP message: maximum character amount exceeded!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendTcpMessage::4");
 	}
 
 	// Add a semicolon to indicate end of this message
@@ -51,7 +47,7 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 		}
 		else // Something really bad happened
 		{
-			Logger::throwError("NetworkServerAPI::_sendTcpMessage ---> ", WSAGetLastError());
+			Logger::throwError("NetworkServerAPI::_sendTcpMessage::5 ---> ", WSAGetLastError());
 		}
 	}
 
@@ -63,25 +59,21 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	// Must be running
 	if (!_isRunning)
 	{
-		Logger::throwWarning("Networking server tried to send UDP message: not running!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage::1");
 	}
 
 	// Validate message content
 	if (find(content.begin(), content.end(), ';') != content.end())
 	{
-		Logger::throwWarning("Networking message tried to send UDP message: cannot contain semicolons!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage::2");
 	}
 	else if (NetworkUtils::isMessageReserved(content) && !isReserved)
 	{
-		Logger::throwWarning("Networking server tried to send UDP message: \"" + content + "\" is reserved!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage::3");
 	}
 	else if (content.size() > NetworkUtils::MAX_MESSAGE_CHARACTERS)
 	{
-		Logger::throwWarning("Networking server tried to send UDP message: maximum character amount exceeded!");
-		return false;
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage::4");
 	}
 
 	// Compose socket address
@@ -99,7 +91,7 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage ---> ", WSAGetLastError());
+		Logger::throwError("NetworkServerAPI::_sendUdpMessage::5 ---> ", WSAGetLastError());
 	}
 
 	return true;

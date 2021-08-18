@@ -22,6 +22,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 {
 	// Temporary values
 	vector<future<SDL_Surface*>> threads;
+	vector<string> finalFilePaths;
 	vector<bool> cacheStatuses;
 	unsigned int finishedThreadCount = 0;
 
@@ -36,12 +37,8 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 		if (_textureCache2D.find(filePath) == _textureCache2D.end())
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
+			finalFilePaths.push_back(filePath);
 			cacheStatuses.push_back(false);
-		}
-		else
-		{
-			cacheStatuses.push_back(true);
-			finishedThreadCount++;
 		}
 	}
 
@@ -67,12 +64,12 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					// Check image status
 					if (loadedImage == nullptr)
 					{
-						Logger::throwWarning("Cannot load image file: \"" + uniqueFilePaths[i] + "\"!");
+						Logger::throwWarning("Cannot load image file: \"" + finalFilePaths[i] + "\"!");
 					}
 					else
 					{
 						// Load OpenGL texture
-						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, isMipmapped, isAnisotropic);
+						auto loadedTexture = _convertToTexture2D(finalFilePaths[i], loadedImage, isMipmapped, isAnisotropic);
 
 						// Free image memory
 						SDL_FreeSurface(loadedImage);
@@ -81,7 +78,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 						if (loadedTexture != 0)
 						{
 							// Cache texture
-							_textureCache2D[uniqueFilePaths[i]] = loadedTexture;
+							_textureCache2D[finalFilePaths[i]] = loadedTexture;
 						}
 					}
 				}
@@ -94,7 +91,9 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 {
 	// Temporary values
 	vector<vector<future<SDL_Surface*>>> threads;
+	vector<array<string, 6>> finalFilePathsList;
 	vector<bool> cacheStatuses;
+	unsigned int finishedThreadCount = 0;
 
 	// Start all loading threads
 	for (const auto& filePaths : filePathsList)
@@ -103,57 +102,77 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 		if (_textureCache3D.find(filePaths) == _textureCache3D.end())
 		{
 			// 6 threads for every 3D texture
-			cacheStatuses.push_back(false);
 			threads.push_back({});
 			for (const auto& filePath : filePaths)
 			{
 				threads.back().push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
 			}
-		}
-		else
-		{
-			cacheStatuses.push_back(true);
+			finalFilePathsList.push_back(filePaths);
+			cacheStatuses.push_back(false);
 		}
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < cacheStatuses.size(); i++)
+	while (finishedThreadCount != cacheStatuses.size())
 	{
-		// Check if texture is not processed yet
-		if (!cacheStatuses[i])
+		// For all threads
+		for (size_t i = 0; i < cacheStatuses.size(); i++)
 		{
-			// 6 images for every 3D texture
-			array<SDL_Surface*, 6> loadedImages;
-			for (size_t j = 0; j < threads[i].size(); j++)
+			// Check if texture is not processed yet
+			if (!cacheStatuses[i])
 			{
-				// Save loaded image
-				loadedImages[j] = threads[i][j].get();
-
-				// Error logging
-				if (loadedImages[j] == nullptr && !filePathsList[i][j].empty())
+				// Check if all 6 threads are finished
+				bool threadsAreFinished = true;
+				for (size_t j = 0; j < threads[i].size(); j++)
 				{
-					Logger::throwWarning("Cannot load image file: \"" + filePathsList[i][j] + "\"!");
+					// Check if thread is finished
+					if (threads[i][i].wait_until(system_clock::time_point::min()) != future_status::ready)
+					{
+						threadsAreFinished = false;
+					}
 				}
-			}
 
-			// Load OpenGL texture
-			TextureID loadedTexture = _convertToTexture3D(filePathsList[i], loadedImages);
-
-			// Free images memory
-			for (const auto& image : loadedImages)
-			{
-				// Only if memory is present
-				if (image != nullptr)
+				// Process threads if finished
+				array<SDL_Surface*, 6> loadedImages;
+				if (threadsAreFinished)
 				{
-					SDL_FreeSurface(image);
-				}
-			}
+					// Update thread status
+					cacheStatuses[i] = true;
+					finishedThreadCount++;
 
-			// Check texture status
-			if (loadedTexture != 0)
-			{
-				// Cache texture
-				_textureCache3D[filePathsList[i]] = loadedTexture;
+					// 6 images for every 3D texture
+					for (size_t j = 0; j < threads[i].size(); j++)
+					{
+						// Save loaded image
+						loadedImages[j] = threads[i][j].get();
+
+						// Error logging
+						if ((loadedImages[j] == nullptr) && !finalFilePathsList[i][j].empty())
+						{
+							Logger::throwWarning("Cannot load image file: \"" + finalFilePathsList[i][j] + "\"!");
+						}
+					}
+
+					// Load OpenGL texture
+					TextureID loadedTexture = _convertToTexture3D(finalFilePathsList[i], loadedImages);
+
+					// Free images memory
+					for (const auto& image : loadedImages)
+					{
+						// Only if memory is present
+						if (image != nullptr)
+						{
+							SDL_FreeSurface(image);
+						}
+					}
+
+					// Check texture status
+					if (loadedTexture != 0)
+					{
+						// Cache texture
+						_textureCache3D[finalFilePathsList[i]] = loadedTexture;
+					}
+				}
 			}
 		}
 	}

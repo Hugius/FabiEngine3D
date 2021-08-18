@@ -61,6 +61,80 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	}
 	else // Engine preview
 	{
+		// Temporary values
+		const string meshDirectoryPath = "engine_assets\\meshes\\";
+		const string textureDirectoryPath = "engine_assets\\textures\\";
+
+		// Pre-load engine meshes
+		vector<string> meshPaths;
+		vector<string> temp;
+		meshPaths.push_back(meshDirectoryPath + "cube.obj");
+		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
+		meshPaths.push_back(meshDirectoryPath + "plane.obj");
+		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
+		misc_cacheMeshesMultiThreaded(meshPaths, temp);
+
+		// Pre-load 2D engine textures
+		vector<string> texturePaths2D;
+		texturePaths2D.push_back(textureDirectoryPath + "a.png");
+		texturePaths2D.push_back(textureDirectoryPath + "b.png");
+		texturePaths2D.push_back(textureDirectoryPath + "backspace.png");
+		texturePaths2D.push_back(textureDirectoryPath + "c.png");
+		texturePaths2D.push_back(textureDirectoryPath + "color.png");
+		texturePaths2D.push_back(textureDirectoryPath + "ctrl.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cube.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_default.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_pointing.png");
+		texturePaths2D.push_back(textureDirectoryPath + "cursor_text.png");
+		texturePaths2D.push_back(textureDirectoryPath + "d.png");
+		texturePaths2D.push_back(textureDirectoryPath + "debug.png");
+		texturePaths2D.push_back(textureDirectoryPath + "down.png");
+		texturePaths2D.push_back(textureDirectoryPath + "enter.png");
+		texturePaths2D.push_back(textureDirectoryPath + "esc.png");
+		texturePaths2D.push_back(textureDirectoryPath + "f.png");
+		texturePaths2D.push_back(textureDirectoryPath + "grid.png");
+		texturePaths2D.push_back(textureDirectoryPath + "h.png");
+		texturePaths2D.push_back(textureDirectoryPath + "left.png");
+		texturePaths2D.push_back(textureDirectoryPath + "light_source.png");
+		texturePaths2D.push_back(textureDirectoryPath + "logo.png");
+		texturePaths2D.push_back(textureDirectoryPath + "minus.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_left.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_middle.png");
+		texturePaths2D.push_back(textureDirectoryPath + "mouse_right.png");
+		texturePaths2D.push_back(textureDirectoryPath + "p.png");
+		texturePaths2D.push_back(textureDirectoryPath + "pause.png");
+		texturePaths2D.push_back(textureDirectoryPath + "play.png");
+		texturePaths2D.push_back(textureDirectoryPath + "plus.png");
+		texturePaths2D.push_back(textureDirectoryPath + "position.png");
+		texturePaths2D.push_back(textureDirectoryPath + "r.png");
+		texturePaths2D.push_back(textureDirectoryPath + "radius.png");
+		texturePaths2D.push_back(textureDirectoryPath + "restart.png");
+		texturePaths2D.push_back(textureDirectoryPath + "right.png");
+		texturePaths2D.push_back(textureDirectoryPath + "rotation.png");
+		texturePaths2D.push_back(textureDirectoryPath + "s.png");
+		texturePaths2D.push_back(textureDirectoryPath + "settings.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shape_circle.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shape_square.png");
+		texturePaths2D.push_back(textureDirectoryPath + "shift.png");
+		texturePaths2D.push_back(textureDirectoryPath + "size.png");
+		texturePaths2D.push_back(textureDirectoryPath + "space.png");
+		texturePaths2D.push_back(textureDirectoryPath + "stop.png");
+		texturePaths2D.push_back(textureDirectoryPath + "up.png");
+		texturePaths2D.push_back(textureDirectoryPath + "v.png");
+		texturePaths2D.push_back(textureDirectoryPath + "w.png");
+		misc_cacheTexturesMultiThreaded2D(texturePaths2D);
+
+		// Pre-load 3D engine textures
+		array<string, 6> texturePaths3D;
+		texturePaths3D[0] = string(textureDirectoryPath + "background_right.png");
+		texturePaths3D[1] = string(textureDirectoryPath + "background_left.png");
+		texturePaths3D[2] = string(textureDirectoryPath + "background_top.png");
+		texturePaths3D[3] = string(textureDirectoryPath + "background_bottom.png");
+		texturePaths3D[4] = string(textureDirectoryPath + "background_back.png");
+		texturePaths3D[5] = string(textureDirectoryPath + "background_front.png");
+		misc_cacheTexturesMultiThreaded3D({ texturePaths3D });
+
 		// Enable vsync
 		misc_enableVsync();
 		
@@ -71,22 +145,13 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		camera_reset();
 
 		// Default engine background
-		string textureDirectoryPath = "engine_assets\\textures\\";
 		skyEntity_create("@@engineBackground");
-		skyEntity_setDiffuseMaps("@@engineBackground", {
-			textureDirectoryPath + "background_right.png",
-			textureDirectoryPath + "background_left.png",
-			textureDirectoryPath + "background_top.png",
-			textureDirectoryPath + "background_bottom.png",
-			textureDirectoryPath + "background_back.png",
-			textureDirectoryPath + "background_front.png" });
+		skyEntity_setDiffuseMaps("@@engineBackground", texturePaths3D);
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 		// Custom cursor texture
 		imageEntity_create("@@cursor", true);
 		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * misc_getAspectRatio()));
-		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_text.png");
-		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_default.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);

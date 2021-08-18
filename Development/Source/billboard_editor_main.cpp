@@ -160,7 +160,7 @@ void BillboardEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMain");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuChoice");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuMesh");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuTexture");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuAppearance");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuAnimation");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("billboardEditorMenuText");
 }

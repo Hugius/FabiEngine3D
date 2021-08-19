@@ -16,15 +16,82 @@ EngineController::EngineController()
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
+	// Temporary values
+	const string meshDirectoryPath = "engine_assets\\meshes\\";
+	const string textureDirectoryPath = "engine_assets\\textures\\";
+	const string fontDirectoryPath = "engine_assets\\fonts\\";
+
+	// Validate engine assets
+	if
+		(
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "lamp.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "plane.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "speaker.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "a.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "b.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "backspace.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "c.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "color.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "ctrl.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cube.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_default.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_pointing.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_text.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "d.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "debug.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "down.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "enter.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "esc.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "f.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "grid.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "h.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "left.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "light_source.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "logo.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "minus.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_left.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_middle.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_right.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "p.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "pause.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "play.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "plus.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "position.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "r.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "radius.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "restart.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "right.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "rotation.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "s.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "settings.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shape_circle.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shape_square.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shift.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "size.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "space.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "stop.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "up.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "v.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_right.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_left.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_top.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_bottom.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_back.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_front.png") ||
+			!misc_isFileExisting(misc_getRootDirectory() + fontDirectoryPath + "font.ttf")
+			)
+	{
+		Logger::throwFatalWarning("Directory `engine_assets` is missing/corrupted!");
+	}
+
 	if (application_isExported()) // Application preview
 	{
 		// Validate project files & directories
 		if (_topViewportController.isProjectCorrupted(misc_getRootDirectory()))
 		{
-			Logger::throwWarning("Cannot load application: corrupted files/directories!");
-			application_stop();
-			_promptOnExit = true;
-			return;
+			Logger::throwFatalWarning("Cannot load application: corrupted files/directories!");
 		}
 
 		// Set title of application to run
@@ -56,15 +123,11 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		if (!_leftViewportController.getScriptEditor().getScriptExecutor().isRunning())
 		{
 			application_stop();
-			_promptOnExit = true;
+			_mustPromptOnExit = true;
 		}
 	}
 	else // Engine preview
 	{
-		// Temporary values
-		const string meshDirectoryPath = "engine_assets\\meshes\\";
-		const string textureDirectoryPath = "engine_assets\\textures\\";
-
 		// Pre-load engine meshes
 		vector<string> meshPaths;
 		vector<string> temp;
@@ -73,7 +136,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		misc_cacheMeshesMultiThreaded(meshPaths, temp);
-
+		
 		// Pre-load 2D engine textures
 		vector<string> texturePaths2D;
 		texturePaths2D.push_back(textureDirectoryPath + "a.png");
@@ -179,7 +242,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		else // Scripting error has been thrown
 		{
 			application_stop();
-			_promptOnExit = true;
+			_mustPromptOnExit = true;
 		}
 	}
 	else // Engine preview
@@ -236,5 +299,5 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 
 bool EngineController::mustPromptOnExit()
 {
-	return _promptOnExit;
+	return _mustPromptOnExit;
 }

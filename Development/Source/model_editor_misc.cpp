@@ -23,7 +23,7 @@ void ModelEditor::_loadDiffuseMap()
 		}
 		else
 		{
-			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 		}
 	}
 }
@@ -48,7 +48,7 @@ void ModelEditor::_loadEmissionMap()
 		}
 		else
 		{
-			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 		}
 	}
 }
@@ -73,7 +73,7 @@ void ModelEditor::_loadReflectionMap()
 		}
 		else
 		{
-			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 		}
 	}
 }
@@ -98,7 +98,7 @@ void ModelEditor::_loadNormalMap()
 		}
 		else
 		{
-			Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+			Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 		}
 	}
 }

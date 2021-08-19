@@ -71,9 +71,9 @@ void TopViewportController::_updateProjectCreating()
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
 			}
-			else if (isupper(newProjectID.front()))
+			else if (std::any_of(newProjectID.begin(), newProjectID.end(), isupper))
 			{
-				Logger::throwWarning("New project name cannot start with capital!");
+				Logger::throwWarning("New project name cannot contain any capital letters!");
 			}
 			else // Project is non-existent
 			{
@@ -132,7 +132,7 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 	// Check if projects directory exists
 	if (!_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
-		Logger::throwWarning("Cannot show projects: corrupted files/directories!");
+		Logger::throwWarning("Directory `projects` is missing/corrupted!");
 		return;
 	}
 

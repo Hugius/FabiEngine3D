@@ -185,7 +185,7 @@ void TerrainEditor::_updateTerrainCreating()
 							}
 							else
 							{
-								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 								_isCreatingTerrain = false;
 								return;
 							}

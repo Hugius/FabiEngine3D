@@ -48,7 +48,7 @@ void BillboardEditor::_updateTextMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}

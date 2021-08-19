@@ -132,7 +132,7 @@ void AudioEditor::_updateAudioCreating()
 							}
 							else
 							{
-								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 								_isCreatingAudio = false;
 								return;
 							}

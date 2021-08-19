@@ -44,7 +44,7 @@ void WaterEditor::_updateEffectsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}
@@ -68,7 +68,7 @@ void WaterEditor::_updateEffectsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}
@@ -92,7 +92,7 @@ void WaterEditor::_updateEffectsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}

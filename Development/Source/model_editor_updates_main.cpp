@@ -208,7 +208,7 @@ void ModelEditor::_updateModelCreating()
 							}
 							else
 							{
-								Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+								Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 								_isCreatingModel = false;
 								return;
 							}

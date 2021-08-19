@@ -278,7 +278,7 @@ void TopViewportController::_updateMiscScreenManagement()
 				}
 				else
 				{
-					Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+					Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 				}
 			}
 		}

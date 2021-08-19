@@ -47,7 +47,7 @@ void TerrainEditor::_updateLightingSettingsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}
@@ -71,7 +71,7 @@ void TerrainEditor::_updateLightingSettingsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}
@@ -95,7 +95,7 @@ void TerrainEditor::_updateLightingSettingsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}
@@ -119,7 +119,7 @@ void TerrainEditor::_updateLightingSettingsMenu()
 					}
 					else
 					{
-						Logger::throwWarning("Invalid filepath, directory switching not allowed!");
+						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
 					}
 				}
 			}

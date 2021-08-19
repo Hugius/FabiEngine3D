@@ -6,24 +6,19 @@
 using std::endl;
 using std::cout;
 
-bool startEngine()
-{
-	// Create engine
-	EngineController fe3dController;
-
-	// Start engine
-	fe3dController.application_start();
-
-	// Return
-	return fe3dController.mustPromptOnExit();
-}
-
 int main(int argc, char* argv[])
 {
+	// Create engine
+	EngineController controller;
+
+	// Start engine
+	controller.application_start();
+
 	// Initiate new scope so engine can end
-	if (startEngine())
+	if (controller.mustPromptOnExit())
 	{
-		cout << endl << "Press a key to continue...";
+		cout << endl;
+		cout << "Press a key to continue...";
 		auto temp = _getch();
 	}
 

@@ -19,9 +19,6 @@ public:
 	bool mustPromptOnExit();
 
 private:
-	void _initializeMiscellaneous();
-	void _updateMiscellaneous();
-
 	EngineGuiManager _gui;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
@@ -30,5 +27,5 @@ private:
 
 	string _currentProject = "";
 
-	bool _promptOnExit = false;
+	bool _mustPromptOnExit = false;
 };

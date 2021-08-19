@@ -26,7 +26,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"animation.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `animation.fe3d` missing!");
 		return false;
 	}
 

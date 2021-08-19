@@ -214,7 +214,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 	}
 	else
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scenes\\editor\\\" directory missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scenes\\editor\\` missing!");
 	}
 
 	return sceneIDs;

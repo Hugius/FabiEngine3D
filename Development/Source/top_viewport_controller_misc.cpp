@@ -51,7 +51,7 @@ void TopViewportController::_updateMiscellaneous()
 
 void TopViewportController::_updateProjectCreating()
 {
-	if (_creatingProject)
+	if (_isCreatingProject)
 	{
 		// Temporary values
 		string newProjectID;
@@ -73,7 +73,7 @@ void TopViewportController::_updateProjectCreating()
 			}
 			else if (std::any_of(newProjectID.begin(), newProjectID.end(), isupper))
 			{
-				Logger::throwWarning("New project name cannot contain any capital letters!");
+				Logger::throwWarning("New project name cannot contain any capitals!");
 			}
 			else // Project is non-existent
 			{
@@ -118,13 +118,13 @@ void TopViewportController::_updateProjectCreating()
 				Logger::throwInfo("New project \"" + _currentProjectID + "\" created!");
 
 				// Miscellaneous
-				_creatingProject = false;
+				_isCreatingProject = false;
 			}
 		}
 	}
 }
 
-void TopViewportController::_prepareProjectChoosing(const string& title)
+bool TopViewportController::_prepareProjectChoosing(const string& title)
 {
 	// Temporary values
 	string userDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
@@ -133,7 +133,7 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 	if (!_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
 		Logger::throwWarning("Directory `projects\\` is missing!");
-		return;
+		return false;
 	}
 
 	// Get all project names
@@ -152,11 +152,13 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 
 	// Add buttons
 	_gui.getGlobalScreen()->createChoiceForm("projectList", title, Vec2(0.0f, 0.1f), projectIDs);
+
+	return true;
 }
 
 void TopViewportController::_updateProjectLoading()
 {
-	if (_loadingProject)
+	if (_isLoadingProject)
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
@@ -165,46 +167,46 @@ void TopViewportController::_updateProjectLoading()
 		// Check if user clicked a project ID
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
+			// Check if project is corrupted
 			if (isProjectCorrupted(projectDirectoryPath))
 			{
-				Logger::throwWarning("Cannot load project: corrupted files/directories!");
+				Logger::throwWarning("Cannot load project: missing files/directories!");
+				return;
 			}
-			else
-			{
-				// Load current project
-				_currentProjectID = clickedButtonID;
-				_applyProjectChange();
 
-				// Load settings for this project
-				_settingsEditor.loadSettingsFromFile();
+			// Load current project
+			_currentProjectID = clickedButtonID;
+			_applyProjectChange();
 
-				// Preload all big assets of this project
-				vector<string> texturePaths;
-				auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
-				auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
-				auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
-				auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
-				auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
-				auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
-				texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
-				texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
-				texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
-				texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
-				_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
-				_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
-				_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
+			// Load settings for this project
+			_settingsEditor.loadSettingsFromFile();
 
-				// Logging
-				Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
+			// Preload all big assets of this project
+			vector<string> texturePaths;
+			auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
+			auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
+			auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
+			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
+			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
+			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
+			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
+			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
+			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
+			_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
+			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
-				// Miscellaneous
-				_loadingProject = false;
-				_gui.getGlobalScreen()->deleteChoiceForm("projectList");
-			}
+			// Logging
+			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
+
+			// Miscellaneous
+			_isLoadingProject = false;
+			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
-			_loadingProject = false;
+			_isLoadingProject = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 	}
@@ -212,7 +214,7 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_updateProjectDeleting()
 {
-	if (_deletingProject)
+	if (_isDeletingProject)
 	{
 		// Temporary values
 		static string chosenButtonID = "";
@@ -227,7 +229,7 @@ void TopViewportController::_updateProjectDeleting()
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
-			_deletingProject = false;
+			_isDeletingProject = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 
@@ -243,27 +245,26 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			// Check if project directory is still existing
-			string directoryPath = (_fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID);
-			if (_fe3d.misc_isDirectoryExisting(directoryPath))
+			const string directoryPath = (_fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID);
+			if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 			{
-				// Deleting project directory
-				remove_all(directoryPath);
-
-				// Logging
-				Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
-
-				// Miscellaneous
-				_deletingProject = false;
-				chosenButtonID = "";
+				Logger::throwWarning("Cannot delete project: missing directory!");
+				return;
 			}
-			else
-			{
-				Logger::throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
-			}
+
+			// Delete project directory
+			remove_all(directoryPath);
+
+			// Logging
+			Logger::throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
+
+			// Miscellaneous
+			_isDeletingProject = false;
+			chosenButtonID = "";
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
-			_deletingProject = false;
+			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
 	}

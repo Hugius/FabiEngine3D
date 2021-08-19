@@ -24,7 +24,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
 		return {};
 	}
 
@@ -87,7 +87,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"sky.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `sky.fe3d` missing!");
 		return false;
 	}
 

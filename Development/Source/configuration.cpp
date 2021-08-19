@@ -22,7 +22,7 @@ Config::Config()
 	ifstream file(path);
 	if (!exists(path))
 	{
-		Logger::throwFatalWarning("File `config.fe3d` is missing/corrupted!");
+		Logger::throwFatalWarning("File `config.fe3d` is missing!");
 	}
 
 	// Store config file content

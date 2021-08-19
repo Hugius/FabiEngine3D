@@ -30,7 +30,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	{
 		if (isLoggingEnabled)
 		{
-			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"scripts\\\" directory missing!");
+			Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `scripts\\` missing!");
 		}
 		return false;
 	}

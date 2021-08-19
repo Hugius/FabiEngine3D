@@ -91,7 +91,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Validate project files & directories
 		if (_topViewportController.isProjectCorrupted(misc_getRootDirectory()))
 		{
-			Logger::throwFatalWarning("Cannot load application: corrupted files/directories!");
+			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
 
 		// Set title of application to run

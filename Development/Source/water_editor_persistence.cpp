@@ -24,7 +24,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return {};
 	}
 
@@ -95,7 +95,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"water.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return false;
 	}
 

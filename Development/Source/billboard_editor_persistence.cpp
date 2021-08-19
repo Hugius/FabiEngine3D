@@ -24,7 +24,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return {};
 	}
 
@@ -91,7 +91,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"billboard.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return false;
 	}
 

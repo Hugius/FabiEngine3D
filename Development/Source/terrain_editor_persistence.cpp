@@ -24,7 +24,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
 		return {};
 	}
 
@@ -171,7 +171,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"terrain.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
 		return false;
 	}
 

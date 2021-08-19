@@ -82,12 +82,14 @@ void TopViewportController::_updateProjectScreenManagement()
 			if (topScreen->getButton("newProject")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("newProjectID", "Create Project", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_creatingProject = true;
+				_isCreatingProject = true;
 			}
 			else if (topScreen->getButton("loadProject")->isHovered())
 			{
-				_prepareProjectChoosing("Load Project");
-				_loadingProject = true;
+				if (_prepareProjectChoosing("Load Project"))
+				{
+					_isLoadingProject = true;
+				}
 			}
 			else if (topScreen->getButton("saveProject")->isHovered())
 			{
@@ -95,8 +97,10 @@ void TopViewportController::_updateProjectScreenManagement()
 			}
 			else if (topScreen->getButton("deleteProject")->isHovered())
 			{
-				_prepareProjectChoosing("Delete Project");
-				_deletingProject = true;
+				if (_prepareProjectChoosing("Delete Project"))
+				{
+					_isDeletingProject = true;
+				}
 			}
 			else if (topScreen->getButton("quitEngine")->isHovered())
 			{

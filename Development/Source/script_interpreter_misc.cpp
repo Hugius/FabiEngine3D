@@ -92,7 +92,7 @@ bool ScriptInterpreter::_validateSavesDirectory()
 	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"saves\\\" directory missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");
 		return false;
 	}
 

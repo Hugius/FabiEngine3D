@@ -184,7 +184,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"settings.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `settings.fe3d` missing!");
 		return false;
 	}
 

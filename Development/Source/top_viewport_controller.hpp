@@ -21,19 +21,23 @@ public:
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor,
 		SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor);
 
+	// Voids
 	void initialize() override;
 	void update() override;
 
+	// Booleans
 	bool isScriptStarted();
 	bool isScriptRunning();
 	bool isProjectCorrupted(const string& projectDirectoryPath);
 
+	// Vectors
 	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.1f, 0.0f);
 	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
 	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
 	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 private:
+	// Voids
 	void _updateProjectScreenManagement();
 	void _updateGameScreenManagement();
 	void _updateMiscScreenManagement();
@@ -41,9 +45,11 @@ private:
 	void _updateProjectCreating();
 	void _updateProjectLoading();
 	void _updateProjectDeleting();
-	void _prepareProjectChoosing(const string& title);
 	void _saveCurrentProject();
 	void _applyProjectChange();
+
+	// Booleans
+	bool _prepareProjectChoosing(const string& title);
 
 	SkyEditor& _skyEditor;
 	TerrainEditor& _terrainEditor;
@@ -64,7 +70,7 @@ private:
 
 	static inline const Vec3 FRAME_COLOR = Vec3(0.075f);
 
-	bool _creatingProject = false;
-	bool _loadingProject = false;
-	bool _deletingProject = false;
+	bool _isCreatingProject = false;
+	bool _isLoadingProject = false;
+	bool _isDeletingProject = false;
 };

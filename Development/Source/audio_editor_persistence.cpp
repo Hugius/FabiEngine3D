@@ -23,7 +23,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `audio.fe3d` missing!");
 		return {};
 	}
 
@@ -74,7 +74,7 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	// Warning checking
 	if (!_fe3d.misc_isFileExisting(filePath))
 	{
-		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: \"audio.fe3d\" file missing!");
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `audio.fe3d` missing!");
 		return false;
 	}
 

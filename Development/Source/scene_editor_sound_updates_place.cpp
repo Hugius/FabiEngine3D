@@ -9,7 +9,7 @@ void SceneEditor::_updateSoundPlacing()
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_SPEAKER_ID);
+			auto newPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,6 @@ void SceneEditor::_updateSoundPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, newPosition);
 			_fe3d.sound_setPosition(_currentPreviewSoundID, newPosition);
 
 			// Check if sound must be placed
@@ -42,7 +41,6 @@ void SceneEditor::_updateSoundPlacing()
 				// Create model
 				const string newModelID = ("@@speaker_" + newID);
 				_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
-				_fe3d.modelEntity_setPosition(newModelID, newPosition);
 				_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
@@ -52,6 +50,7 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 				// Create sound
 				_fe3d.sound_create(newID, _fe3d.sound_getFilePath(_currentPreviewSoundID));
@@ -98,8 +97,7 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 
 						// Update position
-						_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, _fe3d.misc_getRaycastPointOnTerrain());
-						_fe3d.sound_setPosition(_currentPreviewSoundID, _fe3d.misc_getRaycastPointOnTerrain());
+						_fe3d.sound_setPosition(_currentPreviewSoundID, (_fe3d.misc_getRaycastPointOnTerrain() + SOUND_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -117,7 +115,7 @@ void SceneEditor::_updateSoundPlacing()
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
 						// Temporary values
-						const auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_SPEAKER_ID);
+						const auto newPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
 
 						// Adding a number to make it unique
 					BEGIN2:
@@ -138,7 +136,6 @@ void SceneEditor::_updateSoundPlacing()
 						// Create model
 						const string newModelID = ("@@speaker_" + newID);
 						_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
-						_fe3d.modelEntity_setPosition(newModelID, newPosition);
 						_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
 						_fe3d.modelEntity_setShadowed(newModelID, false);
 						_fe3d.modelEntity_setReflected(newModelID, false);
@@ -148,6 +145,7 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.aabbEntity_create(newModelID);
 						_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 						_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
+						_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 						// Create sound
 						_fe3d.sound_create(newID, _fe3d.sound_getFilePath(_currentPreviewSoundID));
@@ -194,6 +192,25 @@ void SceneEditor::_updateSoundPlacing()
 					_fe3d.sound_stop(_currentPreviewSoundID, 0);
 				}
 			}
+		}
+
+		// Update preview speaker position
+		if (!_currentPreviewSoundID.empty())
+		{
+			auto soundPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
+			soundPosition -= SPEAKER_OFFSET;
+			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, soundPosition);
+		}
+	}
+
+	// Update speaker positions
+	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	{
+		if (entityID.substr(0, string("@@speaker").size()) == "@@speaker")
+		{
+			auto soundPosition = _fe3d.sound_getPosition(entityID.substr(string("@@speaker_").size()));
+			soundPosition -= SPEAKER_OFFSET;
+			_fe3d.modelEntity_setPosition(entityID, soundPosition);
 		}
 	}
 }

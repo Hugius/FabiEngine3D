@@ -1,17 +1,13 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
 
-#define SELECTED_LAMP_ID _selectedLampID
-#define ACTIVE_LAMP_ID _activeLampID
-#define ACTIVE_LIGHT_ID _activeLampID.substr(string("@@lamp_").size())
-
 void SceneEditor::_updateLightEditing()
 {
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// Reset selected light from last frame
-	SELECTED_LAMP_ID = "";
+	_selectedLampID = "";
 
 	// User must not be in placement mode
 	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
@@ -30,7 +26,7 @@ void SceneEditor::_updateLightEditing()
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Set new selected lamp
-					SELECTED_LAMP_ID = entityID;
+					_selectedLampID = entityID;
 
 					// Change cursor
 					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -39,10 +35,10 @@ void SceneEditor::_updateLightEditing()
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
 						// Check if same lamp is not clicked again
-						if (SELECTED_LAMP_ID != ACTIVE_LAMP_ID)
+						if (_selectedLampID != _activeLampID)
 						{
 							// Set new active light
-							ACTIVE_LAMP_ID = SELECTED_LAMP_ID;
+							_activeLampID = _selectedLampID;
 
 							// Update buttons hoverability
 							rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -50,7 +46,7 @@ void SceneEditor::_updateLightEditing()
 							rightWindow->getScreen("lightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 							// Filling writeFields
-							Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_LAMP_ID);
+							Vec3 position = _fe3d.modelEntity_getPosition(_activeLampID);
 							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
@@ -60,7 +56,7 @@ void SceneEditor::_updateLightEditing()
 				else
 				{
 					// Don't reset if lamp is active
-					if (entityID != ACTIVE_LAMP_ID)
+					if (entityID != _activeLampID)
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_LAMP_SIZE);
 						_fe3d.aabbEntity_setSize(entityID, DEFAULT_LAMP_AABB_SIZE);
@@ -70,27 +66,28 @@ void SceneEditor::_updateLightEditing()
 		}
 
 		// Check if user made the active lamp inactive
-		if ((SELECTED_LAMP_ID.empty()) && (ACTIVE_LAMP_ID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		if ((_selectedLampID.empty()) && (_activeLampID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 		{
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				ACTIVE_LAMP_ID = "";
+				_activeLampID = "";
 				rightWindow->setActiveScreen("sceneEditorControls");
 			}
 		}
 
 		// Update lamp animations
-		if (SELECTED_LAMP_ID != ACTIVE_LAMP_ID)
+		if (_selectedLampID != _activeLampID)
 		{
-			_updateLampAnimation(SELECTED_LAMP_ID, _selectedLampSizeDirection);
+			_updateLampAnimation(_selectedLampID, _selectedLampSizeDirection);
 		}
-		_updateLampAnimation(ACTIVE_LAMP_ID, _activeLampSizeDirection);
+		_updateLampAnimation(_activeLampID, _activeLampSizeDirection);
 
 		// Update properties screen
-		if (ACTIVE_LAMP_ID != "")
+		if (!_activeLampID.empty())
 		{
 			// Temporary values
+			const string activeLightID = _activeLampID.substr(string("@@lamp_").size());
 			auto screen = rightWindow->getScreen("lightPropertiesMenu");
 
 			// Activate screen
@@ -119,30 +116,30 @@ void SceneEditor::_updateLightEditing()
 				}
 				else if (screen->getButton("shape")->isHovered())
 				{
-					if (_fe3d.lightEntity_getShape(ACTIVE_LIGHT_ID) == LightShape::CIRCLE)
+					if (_fe3d.lightEntity_getShape(activeLightID) == LightShape::CIRCLE)
 					{
-						_fe3d.lightEntity_setShape(ACTIVE_LIGHT_ID, LightShape::SQUARE);
+						_fe3d.lightEntity_setShape(activeLightID, LightShape::SQUARE);
 					}
 					else
 					{
-						_fe3d.lightEntity_setShape(ACTIVE_LIGHT_ID, LightShape::CIRCLE);
+						_fe3d.lightEntity_setShape(activeLightID, LightShape::CIRCLE);
 					}
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
-					_fe3d.modelEntity_delete(ACTIVE_LAMP_ID);
-					_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
+					_fe3d.modelEntity_delete(_activeLampID);
+					_fe3d.lightEntity_delete(activeLightID);
 					rightWindow->setActiveScreen("sceneEditorControls");
-					ACTIVE_LAMP_ID = "";
+					_activeLampID = "";
 					return;
 				}
 			}
 
 			// Get current values
-			auto position = _fe3d.lightEntity_getPosition(ACTIVE_LIGHT_ID);
-			auto radius = _fe3d.lightEntity_getRadius(ACTIVE_LIGHT_ID);
-			auto color = _fe3d.lightEntity_getColor(ACTIVE_LIGHT_ID);
-			auto intensity = _fe3d.lightEntity_getIntensity(ACTIVE_LIGHT_ID);
+			auto position = _fe3d.lightEntity_getPosition(activeLightID);
+			auto radius = _fe3d.lightEntity_getRadius(activeLightID);
+			auto color = _fe3d.lightEntity_getColor(activeLightID);
+			auto intensity = _fe3d.lightEntity_getIntensity(activeLightID);
 
 			// Handle position, radius, color
 			if (!screen->getButton("position")->isHoverable())
@@ -153,8 +150,7 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
-				_fe3d.modelEntity_setPosition(ACTIVE_LAMP_ID, position);
-				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
+				_fe3d.lightEntity_setPosition(activeLightID, position);
 			}
 			else if (!screen->getButton("radius")->isHoverable())
 			{
@@ -164,7 +160,7 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-				_fe3d.lightEntity_setRadius(ACTIVE_LIGHT_ID, radius);
+				_fe3d.lightEntity_setRadius(activeLightID, radius);
 			}
 			else if (!screen->getButton("color")->isHoverable())
 			{
@@ -174,18 +170,18 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", color.g, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", color.b, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
-				_fe3d.modelEntity_setColor(ACTIVE_LAMP_ID, color);
-				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
+				_fe3d.modelEntity_setColor(_activeLampID, color);
+				_fe3d.lightEntity_setColor(activeLightID, color);
 			}
 
 			// Handle intensity
 			_handleValueChanging("lightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
 			_handleValueChanging("lightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
-			_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
+			_fe3d.lightEntity_setIntensity(activeLightID, intensity);
 
 			// Handle shape
 			const auto imageEntityID = screen->getButton("shape")->getRectangle()->getEntityID();
-			if (_fe3d.lightEntity_getShape(ACTIVE_LIGHT_ID) == LightShape::CIRCLE)
+			if (_fe3d.lightEntity_getShape(activeLightID) == LightShape::CIRCLE)
 			{
 				_fe3d.imageEntity_setDiffuseMap(imageEntityID, "engine_assets\\textures\\shape_circle.png");
 			}

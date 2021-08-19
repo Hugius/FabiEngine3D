@@ -41,6 +41,10 @@ public:
 	void setRefractive(bool value);
 	void setWireFramed(bool value);
 
+	// Instances
+	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
+	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
+
 	// Vectors
 	const Vec2 getSpeed();
 	const Vec2 getRippleOffset();
@@ -75,8 +79,6 @@ public:
 	const bool hasDisplacementMap();
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
-	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
 	const WaterQuality getQuality();
 	const TextureID getDudvMap();
 	const TextureID getNormalMap();

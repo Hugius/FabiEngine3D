@@ -91,6 +91,11 @@ void ModelEntity::setNormalMap(TextureID value, const string& partID)
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
+void ModelEntity::setEnvironmentMap(TextureID value)
+{
+	_environmentMap = value;
+}
+
 void ModelEntity::setPosition(Vec3 value, const string& partID)
 {
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))

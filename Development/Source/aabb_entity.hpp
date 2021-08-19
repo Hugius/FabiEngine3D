@@ -56,6 +56,9 @@ public:
 	const Direction getCollisionDirection();
 
 private:
+	// Instances
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+
 	// Strings
 	string _parentID = "";
 
@@ -74,7 +77,6 @@ private:
 	bool _hasCollided = false;
 
 	// Miscellaneous
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	AabbParentType _parentType;
 	Direction _collisionDirection;
 };

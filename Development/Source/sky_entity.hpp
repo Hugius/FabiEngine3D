@@ -26,6 +26,9 @@ public:
 	void setRotationSpeed(float value);
 	void setWireFramed(bool value);
 
+	// Instances
+	const shared_ptr<RenderBuffer> getRenderBuffer();
+
 	// Strings
 	const array<string, 6>& getDiffuseMapPaths();
 
@@ -46,10 +49,12 @@ public:
 	const bool isWireFramed();
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getCubeMap();
 
 private:
+	// Instances
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
+
 	// Strings
 	array<string, 6> _diffuseMapPaths = { "", "", "", "", "", "" };
 
@@ -69,6 +74,5 @@ private:
 	bool _isWireFramed = false;
 
 	// Miscellaneous
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _cubeMap = 0;
 };

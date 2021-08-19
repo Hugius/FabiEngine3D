@@ -133,10 +133,10 @@ private:
 	AudioEditor& _audioEditor;
 
 	// Strings
-	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
-	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
+	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
+	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
 	map<string, string> _loadedSoundIDs;
 	map<string, string> _outsideLoadedSoundIDs;
 	map<string, string> _loadedModelIDs;
@@ -177,10 +177,13 @@ private:
 
 	// Vectors
 	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.35f, 1.35f, 1.1f);
-	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.05f, 1.05f, 0.9f);
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.7f, 1.2f, 0.7f);
+	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
+	static inline const Vec3 LIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 SOUND_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 SPEAKER_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 
 	// Floats
 	static inline const float MODEL_BLINKING_SPEED = 0.025f;

@@ -1,8 +1,5 @@
 #include "scene_editor.hpp"
 
-#define SELECTED_BILLBOARD_ID _selectedBillboardID
-#define ACTIVE_BILLBOARD_ID _activeBillboardID
-
 void SceneEditor::_updateBillboardEditing()
 {
 	// Temporary values
@@ -11,7 +8,7 @@ void SceneEditor::_updateBillboardEditing()
 	// Reset selected billboard from last frame
 	if (!_dontResetSelectedBillboard)
 	{
-		SELECTED_BILLBOARD_ID = "";
+		_selectedBillboardID = "";
 	}
 	else
 	{
@@ -41,17 +38,17 @@ void SceneEditor::_updateBillboardEditing()
 					// Check if user clicked billboard
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						// Check if same billboard is clicked again
-						if (SELECTED_BILLBOARD_ID != ACTIVE_BILLBOARD_ID)
+						// Check if same billboard is not clicked again
+						if (_selectedBillboardID != _activeBillboardID)
 						{
-							_activateBillboard(SELECTED_BILLBOARD_ID);
+							_activateBillboard(_selectedBillboardID);
 						}
 					}
 				}
 				else
 				{
 					// Don't reset inversion if billboard is active or selected
-					if (entityID != ACTIVE_BILLBOARD_ID && entityID != SELECTED_BILLBOARD_ID)
+					if (entityID != _activeBillboardID && entityID != _selectedBillboardID)
 					{
 						_fe3d.billboardEntity_setInversion(entityID, 0.0f);
 					}
@@ -60,24 +57,24 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// Check if user made the active billboard inactive
-		if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		if (_selectedBillboardID.empty() && _activeBillboardID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 		{
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				ACTIVE_BILLBOARD_ID = "";
+				_activeBillboardID = "";
 				rightWindow->setActiveScreen("sceneEditorControls");
 			}
 		}
 
 		// Update billboard blinking
-		if (SELECTED_BILLBOARD_ID != ACTIVE_BILLBOARD_ID)
+		if (_selectedBillboardID != _activeBillboardID)
 		{
-			_updateBillboardBlinking(SELECTED_BILLBOARD_ID, _selectedBillboardInversionDirection);
+			_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardInversionDirection);
 		}
-		_updateBillboardBlinking(ACTIVE_BILLBOARD_ID, _activeBillboardInversionDirection);
+		_updateBillboardBlinking(_activeBillboardID, _activeBillboardInversionDirection);
 
 		// Update properties screen
-		if (ACTIVE_BILLBOARD_ID != "")
+		if (_activeBillboardID != "")
 		{
 			// Temporary values
 			auto screen = rightWindow->getScreen("billboardPropertiesMenu");
@@ -111,17 +108,17 @@ void SceneEditor::_updateBillboardEditing()
 				}
 				else if (screen->getButton("delete")->isHovered()) // Delete button
 				{
-					_fe3d.billboardEntity_delete(ACTIVE_BILLBOARD_ID);
+					_fe3d.billboardEntity_delete(_activeBillboardID);
 					rightWindow->setActiveScreen("sceneEditorControls");
-					ACTIVE_BILLBOARD_ID = "";
+					_activeBillboardID = "";
 					return;
 				}
 			}
 
 			// Get entity transformation
-			Vec3 position = _fe3d.billboardEntity_getPosition(ACTIVE_BILLBOARD_ID);
-			Vec3 rotation = _fe3d.billboardEntity_getRotation(ACTIVE_BILLBOARD_ID);
-			Vec2 size = _fe3d.billboardEntity_getSize(ACTIVE_BILLBOARD_ID);
+			Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+			Vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
+			Vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
 
 			// Enabling all axes by default
 			screen->getButton("xMinus")->setHoverable(true);
@@ -151,7 +148,7 @@ void SceneEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
-				_fe3d.billboardEntity_setPosition(ACTIVE_BILLBOARD_ID, position);
+				_fe3d.billboardEntity_setPosition(_activeBillboardID, position);
 			}
 			else if (!screen->getButton("rotation")->isHoverable())
 			{
@@ -161,7 +158,7 @@ void SceneEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -(_editorSpeed / 50.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 50.0f));
 				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 50.0f));
-				_fe3d.billboardEntity_setRotation(ACTIVE_BILLBOARD_ID, rotation);
+				_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
 			}
 			else if (!screen->getButton("size")->isHoverable())
 			{
@@ -170,12 +167,12 @@ void SceneEditor::_updateBillboardEditing()
 				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -(_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-				_fe3d.billboardEntity_setSize(ACTIVE_BILLBOARD_ID, size);
+				_fe3d.billboardEntity_setSize(_activeBillboardID, size);
 			}
 		}
 
 		// Check if billboard is still selected or active
-		if (SELECTED_BILLBOARD_ID.empty() && ACTIVE_BILLBOARD_ID.empty())
+		if (_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 		}
@@ -201,8 +198,8 @@ void SceneEditor::_updateBillboardEditing()
 				{
 					rightWindow->setActiveScreen("sceneEditorControls");
 					_selectedBillboardInversionDirection = 1;
-					ACTIVE_BILLBOARD_ID = "";
-					SELECTED_BILLBOARD_ID = "";
+					_activeBillboardID = "";
+					_selectedBillboardID = "";
 				}
 			}
 		}

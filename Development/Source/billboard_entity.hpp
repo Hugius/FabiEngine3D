@@ -54,6 +54,9 @@ public:
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 
+	// Instances
+	const shared_ptr<RenderBuffer> getRenderBuffer();
+
 	// Strings
 	const string& getTextContent();
 	const string& getFontPath();
@@ -101,26 +104,36 @@ public:
 	const bool hasDiffuseMap();
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getDiffuseMap();
 
 private:
+	// Instances
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 
+	// Strings
+	string _textContent = "";
+	string _diffuseMapPath = "";
+	string _fontPath = "";
+
+	// Matrices
 	Matrix44 _modelMatrix = Matrix44(1.0f);
 
+	// Vectors
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _rotation = Vec3(0.0f);
 	Vec3 _initialRotation = Vec3(0.0f);
 	Vec3 _size = Vec3(1.0f);
 	Vec3 _color = Vec3(1.0f);
 
+	// Floats
 	float _lightness = 1.0f;
 	float _inversion = 0.0f;
 	float _alpha = 1.0f;
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();
 
+	// Integers
+	int _maxSpriteAnimationLoops = 0;
 	unsigned int _maxSpriteAnimationFramestep = 0;
 	unsigned int _passedSpriteAnimationFrames = 0;
 	unsigned int _totalSpriteAnimationRows = 0;
@@ -128,14 +141,8 @@ private:
 	unsigned int _spriteAnimationRowIndex = 0;
 	unsigned int _spriteAnimationColumnIndex = 0;
 	unsigned int _spriteAnimationLoops = 0;
-	int _maxSpriteAnimationLoops = 0;
 
-	TextureID _diffuseMap = 0;
-
-	string _textContent = "";
-	string _diffuseMapPath = "";
-	string _fontPath = "";
-
+	// Booleans
 	bool _isTransparent = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
@@ -146,4 +153,7 @@ private:
 	bool _isReflected = true;
 	bool _isBright = false;
 	bool _isWireFramed = false;
+
+	// Miscellaneous
+	TextureID _diffuseMap = 0;
 };

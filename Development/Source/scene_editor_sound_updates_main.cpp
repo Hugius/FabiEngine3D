@@ -85,7 +85,6 @@ void SceneEditor::_updateSoundPlacingMenu()
 
 						// Set new preview sound
 						_currentPreviewSoundID = audioID;
-						_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, Vec3(0.0f));
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 						_fe3d.sound_setPosition(_currentPreviewSoundID, Vec3(0.0f));
 						_fe3d.sound_play(_currentPreviewSoundID, -1, 0);

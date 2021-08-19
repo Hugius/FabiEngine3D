@@ -27,6 +27,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "lamp.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "plane.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "reflection.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "speaker.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "a.png") ||
 			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "b.png") ||
@@ -134,6 +135,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		meshPaths.push_back(meshDirectoryPath + "cube.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
+		meshPaths.push_back(meshDirectoryPath + "reflection.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		misc_cacheMeshesMultiThreaded(meshPaths, temp);
 		

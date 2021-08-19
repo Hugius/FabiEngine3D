@@ -31,6 +31,11 @@ const TextureID ModelEntity::getNormalMap(const string& partID)
 	return _parts[_getPartIndex(partID)].normalMap;
 }
 
+const TextureID ModelEntity::getEnvironmentMap()
+{
+	return _environmentMap;
+}
+
 const Vec3 ModelEntity::getColor(const string& partID)
 {
 	if (partID.empty())

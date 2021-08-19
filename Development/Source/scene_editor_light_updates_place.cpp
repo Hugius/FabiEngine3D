@@ -9,7 +9,7 @@ void SceneEditor::_updateLightPlacing()
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_LAMP_ID);
+			auto newPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -18,7 +18,6 @@ void SceneEditor::_updateLightPlacing()
 
 			// Update position
 			_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
-			_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
 
 			// Check if light must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -36,7 +35,6 @@ void SceneEditor::_updateLightPlacing()
 				// Create model
 				const string newModelID = ("@@lamp_" + newID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-				_fe3d.modelEntity_setPosition(newModelID, newPosition);
 				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
@@ -47,6 +45,7 @@ void SceneEditor::_updateLightPlacing()
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 				// Create light
 				_fe3d.lightEntity_create(newID);
@@ -80,8 +79,7 @@ void SceneEditor::_updateLightPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
 
 						// Update position
-						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain() + LAMP_OFFSET);
-						_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, _fe3d.misc_getRaycastPointOnTerrain() + LAMP_OFFSET);
+						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, (_fe3d.misc_getRaycastPointOnTerrain() + LIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -94,7 +92,7 @@ void SceneEditor::_updateLightPlacing()
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.modelEntity_getPosition(PREVIEW_LAMP_ID);
+						auto newPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
 
 						// Adding a number to make it unique
 					BEGIN2:
@@ -109,7 +107,6 @@ void SceneEditor::_updateLightPlacing()
 						// Create model
 						const string newModelID = ("@@lamp_" + newID);
 						_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-						_fe3d.modelEntity_setPosition(newModelID, newPosition);
 						_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
 						_fe3d.modelEntity_setShadowed(newModelID, false);
 						_fe3d.modelEntity_setReflected(newModelID, false);
@@ -120,6 +117,7 @@ void SceneEditor::_updateLightPlacing()
 						_fe3d.aabbEntity_create(newModelID);
 						_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 						_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+						_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 						// Create light
 						_fe3d.lightEntity_create(newID);
@@ -146,6 +144,25 @@ void SceneEditor::_updateLightPlacing()
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
 				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 			}
+		}
+
+		// Update preview lamp position
+		if (_isPlacingLight)
+		{
+			auto lightPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
+			lightPosition -= LAMP_OFFSET;
+			_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, lightPosition);
+		}
+	}
+
+	// Update lamp positions
+	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+	{
+		if (entityID.substr(0, string("@@lamp").size()) == "@@lamp")
+		{
+			auto lightPosition = _fe3d.lightEntity_getPosition(entityID.substr(string("@@lamp_").size()));
+			lightPosition -= LAMP_OFFSET;
+			_fe3d.modelEntity_setPosition(entityID, lightPosition);
 		}
 	}
 }

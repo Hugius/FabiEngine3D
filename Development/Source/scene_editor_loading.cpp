@@ -267,6 +267,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create sound
@@ -359,6 +360,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
 				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
 
 			// Create light

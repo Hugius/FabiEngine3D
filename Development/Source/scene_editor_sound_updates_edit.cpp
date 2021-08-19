@@ -1,10 +1,5 @@
 #include "scene_editor.hpp"
 
-#define SELECTED_SPEAKER_ID _selectedSpeakerID
-#define SELECTED_SOUND_ID _selectedSpeakerID.substr(string("@@speaker_").size())
-#define ACTIVE_SPEAKER_ID _activeSpeakerID
-#define ACTIVE_SOUND_ID _activeSpeakerID.substr(string("@@speaker_").size())
-
 void SceneEditor::_updateSoundEditing()
 {
 	// Temporary values
@@ -13,7 +8,7 @@ void SceneEditor::_updateSoundEditing()
 	// Reset selected sound from last frame
 	if (!_dontResetSelectedSpeaker)
 	{
-		SELECTED_SPEAKER_ID = "";
+		_selectedSpeakerID = "";
 	}
 	else
 	{
@@ -37,8 +32,8 @@ void SceneEditor::_updateSoundEditing()
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Set new selected speaker
-					SELECTED_SPEAKER_ID = entityID;
-					_selectSound(SELECTED_SOUND_ID);
+					_selectedSpeakerID = entityID;
+					_selectSound(_selectedSpeakerID.substr(string("@@speaker_").size()));
 
 					// Change cursor
 					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -46,18 +41,18 @@ void SceneEditor::_updateSoundEditing()
 					// Check if user clicked speaker
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						// Check if same speaker is clicked again
-						if (SELECTED_SPEAKER_ID != ACTIVE_SPEAKER_ID)
+						// Check if same speaker is not clicked again
+						if (_selectedSpeakerID != _activeSpeakerID)
 						{
-							ACTIVE_SPEAKER_ID = SELECTED_SPEAKER_ID;
-							_activateSound(ACTIVE_SOUND_ID);
+							_activeSpeakerID = _selectedSpeakerID;
+							_activateSound(_activeSpeakerID.substr(string("@@speaker_").size()));
 						}
 					}
 				}
 				else
 				{
 					// Don't reset if speaker is active
-					if (entityID != ACTIVE_SPEAKER_ID && SELECTED_SPEAKER_ID.empty())
+					if (entityID != _activeSpeakerID && _selectedSpeakerID.empty())
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
 						_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
@@ -67,27 +62,28 @@ void SceneEditor::_updateSoundEditing()
 		}
 
 		// Check if user made the active speaker inactive
-		if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		if (_selectedSpeakerID.empty() && _activeSpeakerID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 		{
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				ACTIVE_SPEAKER_ID = "";
+				_activeSpeakerID = "";
 				rightWindow->setActiveScreen("sceneEditorControls");
 			}
 		}
 
 		// Update speaker animations
-		if (SELECTED_SPEAKER_ID != ACTIVE_SPEAKER_ID)
+		if (_selectedSpeakerID != _activeSpeakerID)
 		{
-			_updateSpeakerAnimation(SELECTED_SPEAKER_ID, _selectedSpeakerSizeDirection);
+			_updateSpeakerAnimation(_selectedSpeakerID, _selectedSpeakerSizeDirection);
 		}
-		_updateSpeakerAnimation(ACTIVE_SPEAKER_ID, _activeSpeakerSizeDirection);
+		_updateSpeakerAnimation(_activeSpeakerID, _activeSpeakerSizeDirection);
 
 		// Update properties screen
-		if (ACTIVE_SPEAKER_ID != "")
+		if (_activeSpeakerID != "")
 		{
 			// Temporary values
+			const string activeSoundID = _activeSpeakerID.substr(string("@@speaker_").size());
 			auto screen = rightWindow->getScreen("soundPropertiesMenu");
 
 			// Activate screen
@@ -98,18 +94,18 @@ void SceneEditor::_updateSoundEditing()
 			{
 				if (screen->getButton("delete")->isHovered()) // Delete button
 				{
-					_fe3d.modelEntity_delete(ACTIVE_SPEAKER_ID);
-					_fe3d.sound_delete(ACTIVE_SOUND_ID);
+					_fe3d.modelEntity_delete(_activeSpeakerID);
+					_fe3d.sound_delete(activeSoundID);
 					rightWindow->setActiveScreen("sceneEditorControls");
-					ACTIVE_SPEAKER_ID = "";
+					_activeSpeakerID = "";
 					return;
 				}
 			}
 
 			// Get current values
-			Vec3 position = _fe3d.sound_getPosition(ACTIVE_SOUND_ID);
-			float maxVolume = _fe3d.sound_getMaxVolume(ACTIVE_SOUND_ID);
-			float maxDistance = _fe3d.sound_getMaxDistance(ACTIVE_SOUND_ID);
+			Vec3 position = _fe3d.sound_getPosition(activeSoundID);
+			float maxVolume = _fe3d.sound_getMaxVolume(activeSoundID);
+			float maxDistance = _fe3d.sound_getMaxDistance(activeSoundID);
 
 			// Update value filling and changing
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / 100.0f), 1.0f, 0.0f);
@@ -124,14 +120,13 @@ void SceneEditor::_updateSoundEditing()
 			_handleValueChanging("soundPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
 
 			// Apply new values
-			_fe3d.modelEntity_setPosition(ACTIVE_SPEAKER_ID, position);
-			_fe3d.sound_setPosition(ACTIVE_SOUND_ID, position);
-			_fe3d.sound_setMaxVolume(ACTIVE_SOUND_ID, maxVolume);
-			_fe3d.sound_setMaxDistance(ACTIVE_SOUND_ID, maxDistance);
+			_fe3d.sound_setPosition(activeSoundID, position);
+			_fe3d.sound_setMaxVolume(activeSoundID, maxVolume);
+			_fe3d.sound_setMaxDistance(activeSoundID, maxDistance);
 		}
 
 		// Check if sound is still selected or active
-		if (SELECTED_SPEAKER_ID.empty() && ACTIVE_SPEAKER_ID.empty())
+		if (_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 		}

@@ -134,22 +134,22 @@ void SceneEditor::unload()
 	_fe3d.lightEntity_deleteAll();
 
 	// Reset editor properties
-	_loadedSoundIDs;
-	_outsideLoadedSoundIDs;
-	_loadedModelIDs;
-	_outsideLoadedModelIDs;
-	_loadedBillboardIDs;
-	_outsideLoadedBillboardIDs;
-	_initialModelPosition;
-	_initialModelRotation;
-	_initialModelSize;
-	_customSceneModelIDs;
-	_customSceneBillboardIDs;
-	_customSceneAabbIDs;
-	_customSceneSoundIDs;
-	_customSceneLightIDs;
-	_loadedLightIDs;
-	_loadedAabbIDs;
+	_loadedSoundIDs.clear();
+	_outsideLoadedSoundIDs.clear();
+	_loadedModelIDs.clear();
+	_outsideLoadedModelIDs.clear();
+	_loadedBillboardIDs.clear();
+	_outsideLoadedBillboardIDs.clear();
+	_initialModelPosition.clear();
+	_initialModelRotation.clear();
+	_initialModelSize.clear();
+	_customSceneModelIDs.clear();
+	_customSceneBillboardIDs.clear();
+	_customSceneAabbIDs.clear();
+	_customSceneSoundIDs.clear();
+	_customSceneLightIDs.clear();
+	_loadedLightIDs.clear();
+	_loadedAabbIDs.clear();
 	_customSceneID = "";
 	_loadedSkyID = "";
 	_loadedTerrainID = "";

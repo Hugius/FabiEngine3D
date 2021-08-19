@@ -57,9 +57,7 @@ void AabbEntityManager::createEntity(const string& ID)
 	getEntity(ID)->setRenderBuffer(_renderBuffer);
 }
 
-void AabbEntityManager::update(
-	const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, 
-	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
+void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
 	for (const auto& [keyID, entity] : _getAabbEntities())
 	{

@@ -44,6 +44,9 @@ public:
 	void increaseSpriteAnimationLoops();
 	void setPerspectiveDepthEntity(bool value);
 
+	// Instances
+	const shared_ptr<RenderBuffer> getRenderBuffer();
+
 	// Strings
 	const string& getDiffuseMapPath();
 
@@ -82,10 +85,11 @@ public:
 	const bool hasDiffuseMap();
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getDiffuseMap();
 
 private:
+	// Instances
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 
 	// Matrices
 	Matrix44 _modelMatrix = Matrix44(1.0f);
@@ -123,6 +127,5 @@ private:
 	bool _isPerspectiveDepthEntity = false;
 
 	// Miscellaneous
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 };

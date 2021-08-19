@@ -22,6 +22,7 @@ public:
 	void setEmissionMap(TextureID value, const string& partID = "");
 	void setReflectionMap(TextureID value, const string& partID = "");
 	void setNormalMap(TextureID value, const string& partID = "");
+	void setEnvironmentMap(TextureID value);
 	void setPosition(Vec3 value, const string& partID = "");
 	void setRotation(Vec3 value, const string& partID = "");
 	void setRotationOrigin(Vec3 value, const string& partID = "");
@@ -54,6 +55,9 @@ public:
 	void setBright(bool value);
 	void setReflectionType(ReflectionType value);
 	void clearParts();
+
+	// Instances
+	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID = "");
 
 	// Strings
 	const vector<string> getPartIDs();
@@ -103,11 +107,11 @@ public:
 	const bool hasNormalMap(const string& partID = "");
 
 	// Miscellaneous
-	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID = "");
 	const TextureID getDiffuseMap(const string& partID = "");
 	const TextureID getEmissionMap(const string& partID = "");
 	const TextureID getReflectionMap(const string& partID = "");
 	const TextureID getNormalMap(const string& partID = "");
+	const TextureID getEnvironmentMap();
 	const ReflectionType getReflectionType();
 
 private:
@@ -120,43 +124,54 @@ private:
 
 		}
 
+		// Instances
+		shared_ptr<RenderBuffer> renderBuffer = nullptr;
+
+		// Strings
 		const string ID;
 		string diffuseMapPath = "";
 		string emissionMapPath = "";
 		string reflectionMapPath = "";
 		string normalMapPath = "";
 
-		shared_ptr<RenderBuffer> renderBuffer = nullptr;
-
+		// Matrices
 		Matrix44 modelMatrix = Matrix44(1.0f);
 
+		// Vectors
 		Vec3 localPosition = Vec3(0.0f);
 		Vec3 localRotation = Vec3(0.0f);
 		Vec3 localRotationOrigin = Vec3(0.0f);
 		Vec3 localSize = Vec3(1.0f);
 		Vec3 color = Vec3(1.0f);
 
+		// Floats
 		float inversion = 0.0f;
 
+		// Miscellaneous
 		TextureID diffuseMap = 0;
 		TextureID emissionMap = 0;
 		TextureID reflectionMap = 0;
 		TextureID normalMap = 0;
 	};
-
+	
+	// Integers
 	unsigned int _getPartIndex(string partID);
 
+	// Instances
 	vector<PartData> _parts;
 
+	// Strings
 	string _meshPath = "";
 	string _lodEntityID = "";
 
+	// Vectors
 	Vec3 _basePosition = Vec3(0.0f);
 	Vec3 _baseRotation = Vec3(0.0f);
 	Vec3 _baseRotationOrigin = Vec3(0.0f);
 	Vec3 _baseSize = Vec3(1.0f);
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
+	// Floats
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;
 	float _specularIntensity = 1.0f;
@@ -165,6 +180,7 @@ private:
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();
 
+	// Booleans
 	bool _isCameraStatic	 = false;
 	bool _isTransparent      = false;
 	bool _isFaceCulled       = false;
@@ -176,5 +192,7 @@ private:
 	bool _wireFramed		 = false;
 	bool _isBright			 = false;
 
+	// Miscellaneous
+	TextureID _environmentMap = 0;
 	ReflectionType _reflectionType;
 };

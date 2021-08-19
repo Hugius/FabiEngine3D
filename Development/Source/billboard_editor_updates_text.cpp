@@ -25,31 +25,39 @@ void BillboardEditor::_updateTextMenu()
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\fonts\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "TTF");
 
-				// Check if user did not cancel
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						// Set font
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearFontCache(newFilePath);
-						_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
-						_fe3d.billboardEntity_setFont(_currentBillboardID, newFilePath);
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
 
-						// Set default text
-						if (textContent.empty())
-						{
-							_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
-						}
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "TTF");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set font
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearFontCache(finalFilePath);
+				_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
+				_fe3d.billboardEntity_setFont(_currentBillboardID, finalFilePath);
+
+				// Set default text
+				if (textContent.empty())
+				{
+					_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
 				}
 			}
 			else if (screen->getButton("content")->isHovered())

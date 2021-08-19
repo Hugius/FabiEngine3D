@@ -165,31 +165,36 @@ void TerrainEditor::_updateTerrainCreating()
 						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("game_assets\\textures\\height_maps\\");
-						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "BMP");
 
-						// Check if user chose a filename
+						// Validate target directory
+						if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+						{
+							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+							_isCreatingTerrain = false;
+							return;
+						}
+
+						// Validate chosen file
+						const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "BMP");
 						if (filePath.empty())
 						{
 							_isCreatingTerrain = false;
 							return;
 						}
-						else
+
+						// Validate directory of file
+						if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+							filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 						{
-							// Check if user did not switch directory
-							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-							{
-								const string newFilePath = filePath.substr(rootDirectory.size());
-								_fe3d.misc_clearBitmapCache(newFilePath);
-								_fe3d.terrainEntity_create(newTerrainID, newFilePath);
-							}
-							else
-							{
-								Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-								_isCreatingTerrain = false;
-								return;
-							}
+							Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+							_isCreatingTerrain = false;
+							return;
 						}
+
+						// Create terrain
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearBitmapCache(newFilePath);
+						_fe3d.terrainEntity_create(newTerrainID, newFilePath);
 
 						// Check if terrain creation went well
 						if (_fe3d.terrainEntity_isExisting(newTerrainID))

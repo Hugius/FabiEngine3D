@@ -818,7 +818,7 @@ public:
 	const bool misc_isCursorVisible();
 	const bool misc_isCursorInsideViewport();
 	const bool misc_isCursorInsideWindow();
-	const bool misc_isDirectoryExisting(const string& filePath);
+	const bool misc_isDirectoryExisting(const string& directoryPath);
 	const bool misc_isFileExisting(const string& filePath);
 	const bool misc_checkInterval(unsigned int frames);
 	const bool misc_isRaycastPointOnTerrainValid();

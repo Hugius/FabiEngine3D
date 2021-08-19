@@ -29,72 +29,99 @@ void WaterEditor::_updateEffectsMenu()
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\dudv_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set DUDV map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set normal map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
 			}
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\displacement_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set displacement map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
 			}
 			else if (screen->getButton("isReflective")->isHovered())
 			{

@@ -21,7 +21,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string textureDirectoryPath = "engine_assets\\textures\\";
 	const string fontDirectoryPath = "engine_assets\\fonts\\";
 
-	// Validate engine assets
+	// Validate engine assets directory
 	if
 		(
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
@@ -83,7 +83,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			!misc_isFileExisting(misc_getRootDirectory() + fontDirectoryPath + "font.ttf")
 			)
 	{
-		Logger::throwFatalWarning("Directory `engine_assets` is missing/corrupted!");
+		Logger::throwFatalWarning("Directory `engine_assets\\` is missing/corrupted!");
 	}
 
 	if (application_isExported()) // Application preview

@@ -24,96 +24,132 @@ void TerrainEditor::_updateBlendMapMenu()
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\blend_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set blend map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
 			}
 			else if (screen->getButton("red")->isHovered())
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setDiffuseMapR(_currentTerrainID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set diffuse map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.terrainEntity_setDiffuseMapR(_currentTerrainID, newFilePath);
 			}
 			else if (screen->getButton("green")->isHovered())
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setDiffuseMapG(_currentTerrainID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set diffuse map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.terrainEntity_setDiffuseMapG(_currentTerrainID, newFilePath);
 			}
 			else if (screen->getButton("blue")->isHovered())
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setDiffuseMapB(_currentTerrainID, newFilePath);
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set diffuse map
+				const string newFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.terrainEntity_setDiffuseMapB(_currentTerrainID, newFilePath);
 			}
 			else if (screen->getButton("redRepeat")->isHovered())
 			{

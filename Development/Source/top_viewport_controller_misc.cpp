@@ -132,7 +132,7 @@ void TopViewportController::_prepareProjectChoosing(const string& title)
 	// Check if projects directory exists
 	if (!_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
-		Logger::throwWarning("Directory `projects` is missing/corrupted!");
+		Logger::throwWarning("Directory `projects\\` is missing!");
 		return;
 	}
 

@@ -62,8 +62,7 @@ const string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
-	auto startingDirectoryString = string(misc_getRootDirectory() + startingDirectory);
-	auto startingDirectoryStringC = startingDirectoryString.c_str();
+	auto startingDirectoryStringC = startingDirectory.c_str();
 
 	// Open file explorer
 	OPENFILENAME ofn;

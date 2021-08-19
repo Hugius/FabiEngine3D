@@ -131,32 +131,37 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("loadFlareMap")->isHovered())
 			{
-				// Get the chosen filename
-				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
-
-				// Check if user chose a filename
-				if (filePath != "")
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 				{
-					// Check if user did not switch directory
-					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-					{
-						flareMapPath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(flareMapPath);
-
-						// Save lens flare path
-						if (_fe3d.gfx_isLensFlareEnabled())
-						{
-							_fe3d.gfx_disableLensFlare();
-						}
-						_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
-						_fe3d.gfx_disableLensFlare();
-					}
-					else
-					{
-						Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-					}
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
 				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Save lens flare path
+				flareMapPath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(flareMapPath);
+				if (_fe3d.gfx_isLensFlareEnabled())
+				{
+					_fe3d.gfx_disableLensFlare();
+				}
+				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+				_fe3d.gfx_disableLensFlare();
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{

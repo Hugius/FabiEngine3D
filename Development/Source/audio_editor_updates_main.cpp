@@ -112,31 +112,36 @@ void AudioEditor::_updateAudioCreating()
 						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("game_assets\\audio\\");
-						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "WAV");
 
-						// Check if user chose a filename
+						// Validate target directory
+						if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+						{
+							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+							_isCreatingAudio = false;
+							return;
+						}
+
+						// Validate chosen file
+						const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "WAV");
 						if (filePath.empty())
 						{
 							_isCreatingAudio = false;
 							return;
 						}
-						else
+
+						// Validate directory of file
+						if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+							filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
 						{
-							// Check if user did not switch directory
-							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-							{
-								const string newFilePath = filePath.substr(rootDirectory.size());
-								_fe3d.misc_clearAudioCache(newFilePath);
-								_fe3d.sound_create(newAudioID, newFilePath);
-							}
-							else
-							{
-								Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-								_isCreatingAudio = false;
-								return;
-							}
+							Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+							_isCreatingAudio = false;
+							return;
 						}
+
+						// Create audio
+						const string finalFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearAudioCache(finalFilePath);
+						_fe3d.sound_create(newAudioID, finalFilePath);
 
 						// Check if audio creation went well
 						if (_fe3d.sound_isExisting(newAudioID))

@@ -257,30 +257,36 @@ void TopViewportController::_updateMiscScreenManagement()
 			// Get the chosen filename
 			const string rootDirectory = _fe3d.misc_getRootDirectory();
 			const string targetDirectory = string("game_assets\\");
-			const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "");
 
-			// Check if user did not cancel
-			if (filePath != "")
+			// Validate target directory
+			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 			{
-				// Check if user did not switch directory
-				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-					filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
-				{
-					// Make path relative
-					const string newFilePath = filePath.substr(rootDirectory.size());
-
-					// Clear the cache of selected file
-					_fe3d.misc_clearMeshCache(newFilePath);
-					_fe3d.misc_clearFontCache(newFilePath);
-					_fe3d.misc_clearTextureCache2D(newFilePath);
-					_fe3d.misc_clearBitmapCache(newFilePath);
-					_fe3d.misc_clearAudioCache(newFilePath);
-				}
-				else
-				{
-					Logger::throwWarning("Invalid filepath: directory switching not allowed!");
-				}
+				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				return;
 			}
+
+			// Validate chosen file
+			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "");
+			if (filePath.empty())
+			{
+				return;
+			}
+
+			// Validate directory of file
+			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				return;
+			}
+
+			// Clear the cache of selected file
+			const string newFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearMeshCache(newFilePath);
+			_fe3d.misc_clearFontCache(newFilePath);
+			_fe3d.misc_clearTextureCache2D(newFilePath);
+			_fe3d.misc_clearBitmapCache(newFilePath);
+			_fe3d.misc_clearAudioCache(newFilePath);
 		}
 		else if (screen->getButton("documentation")->isHovered())
 		{

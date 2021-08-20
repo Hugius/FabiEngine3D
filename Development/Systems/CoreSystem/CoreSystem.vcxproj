@@ -158,6 +158,7 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_image.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_light.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_model.cpp" />
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_reflection.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp" />
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp" />

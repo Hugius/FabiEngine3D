@@ -35,6 +35,8 @@
     <ClCompile Include="..\..\Source\model_entity_getters.cpp" />
     <ClCompile Include="..\..\Source\model_entity_manager.cpp" />
     <ClCompile Include="..\..\Source\model_entity_setters.cpp" />
+    <ClCompile Include="..\..\Source\reflection_entity.cpp" />
+    <ClCompile Include="..\..\Source\reflection_entity_manager.cpp" />
     <ClCompile Include="..\..\Source\sky_entity.cpp" />
     <ClCompile Include="..\..\Source\sky_entity_manager.cpp" />
     <ClCompile Include="..\..\Source\terrain_entity_getters.cpp" />
@@ -59,6 +61,8 @@
     <ClInclude Include="..\..\Source\light_entity_manager.hpp" />
     <ClInclude Include="..\..\Source\model_entity.hpp" />
     <ClInclude Include="..\..\Source\model_entity_manager.hpp" />
+    <ClInclude Include="..\..\Source\reflection_entity.hpp" />
+    <ClInclude Include="..\..\Source\reflection_entity_manager.hpp" />
     <ClInclude Include="..\..\Source\sky_entity.hpp" />
     <ClInclude Include="..\..\Source\sky_entity_manager.hpp" />
     <ClInclude Include="..\..\Source\terrain_entity.hpp" />

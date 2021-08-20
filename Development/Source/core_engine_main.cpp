@@ -28,6 +28,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	_billboardEntityManager(_meshLoader, _textureLoader, _renderBus, _camera),
 	_aabbEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_lightEntityManager(_meshLoader, _textureLoader, _renderBus),
+	_reflectionEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_shadowGenerator(),

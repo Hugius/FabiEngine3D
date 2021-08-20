@@ -493,6 +493,18 @@ public:
 	const bool lightEntity_isVisible(const string& ID);
 	const LightShape lightEntity_getShape(const string& ID);
 
+	// Reflection entity interface - setters
+	void reflectionEntity_create(const string& ID);
+	void reflectionEntity_deleteAll();
+	void reflectionEntity_delete(const string& ID);
+	void reflectionEntity_setPosition(const string& ID, Vec3 position);
+	void reflectionEntity_move(const string& ID, Vec3 factor);
+
+	// Reflection entity interface - getters
+	const vector<string> reflectionEntity_getAllIDs();
+	const Vec3 reflectionEntity_getPosition(const string& ID);
+	const bool reflectionEntity_isExisting(const string& ID);
+
 	// Image entity interface - setters
 	void imageEntity_create(const string& ID, bool isCentered);
 	void imageEntity_deleteAll();

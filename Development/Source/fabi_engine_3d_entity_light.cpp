@@ -1,11 +1,6 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::lightEntity_deleteAll()
-{
-	_core->_lightEntityManager.deleteAllEntities();
-}
-
 void FabiEngine3D::lightEntity_create(const string& ID)
 {
 	if (_core->_lightEntityManager.getEntities().size() == LightEntityManager::MAX_LIGHT_AMOUNT)
@@ -15,6 +10,11 @@ void FabiEngine3D::lightEntity_create(const string& ID)
 	}
 
 	_core->_lightEntityManager.createEntity(ID);
+}
+
+void FabiEngine3D::lightEntity_deleteAll()
+{
+	_core->_lightEntityManager.deleteAllEntities();
 }
 
 void FabiEngine3D::lightEntity_delete(const string& ID)

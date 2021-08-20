@@ -120,12 +120,18 @@ void CoreEngine::_renderApplication()
 	_renderBus.resetTriangleCount();
 
 	// Create bus with all entities
-	EntityBus entityBus
-	(
-		_skyEntityManager.getSelectedMainSky(), _skyEntityManager.getSelectedMixSky(), _terrainEntityManager.getSelectedTerrain(),
-		_waterEntityManager.getSelectedWater(), _modelEntityManager.getEntities(), _billboardEntityManager.getEntities(),
-		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _imageEntityManager.getEntities(), _textEntityManager.getEntities()
-	);
+	const auto mainSky = _skyEntityManager.getSelectedMainSky();
+	const auto mixSky = _skyEntityManager.getSelectedMixSky();
+	const auto terrain = _terrainEntityManager.getSelectedTerrain();
+	const auto water = _waterEntityManager.getSelectedWater();
+	const auto models = _modelEntityManager.getEntities();
+	const auto billboards = _billboardEntityManager.getEntities();
+	const auto AABBs = _aabbEntityManager.getEntities();
+	const auto lights = _lightEntityManager.getEntities();
+	const auto reflections = _reflectionEntityManager.getEntities();
+	const auto images = _imageEntityManager.getEntities();
+	const auto texts = _textEntityManager.getEntities();
+	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, lights, reflections, images, texts);
 
 	// Render entities
 	_masterRenderer.renderScene(&entityBus);

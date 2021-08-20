@@ -33,6 +33,10 @@ bool BaseEntityManager::isExisting(const string& ID)
 		{
 			return (_getLightEntity(ID) != nullptr);
 		}
+		case(EntityType::REFLECTION):
+		{
+			return (_getReflectionEntity(ID) != nullptr);
+		}
 		case(EntityType::IMAGE):
 		{
 			return (_getImageEntity(ID) != nullptr);
@@ -46,31 +50,6 @@ bool BaseEntityManager::isExisting(const string& ID)
 	return false;
 }
 
-unordered_map<string, shared_ptr<AabbEntity>>& BaseEntityManager::_getAabbEntities()
-{
-	return _aabbEntities;
-}
-
-unordered_map<string, shared_ptr<BillboardEntity>>& BaseEntityManager::_getBillboardEntities()
-{
-	return _billboardEntities;
-}
-
-unordered_map<string, shared_ptr<ModelEntity>>& BaseEntityManager::_getModelEntities()
-{
-	return _modelEntities;
-}
-
-unordered_map<string, shared_ptr<ImageEntity>>& BaseEntityManager::_getImageEntities()
-{
-	return _imageEntities;
-}
-
-unordered_map<string, shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
-{
-	return _lightEntities;
-}
-
 unordered_map<string, shared_ptr<SkyEntity>>& BaseEntityManager::_getSkyEntities()
 {
 	return _skyEntities;
@@ -81,84 +60,44 @@ unordered_map<string, shared_ptr<TerrainEntity>>& BaseEntityManager::_getTerrain
 	return _terrainEntities;
 }
 
-unordered_map<string, shared_ptr<TextEntity>>& BaseEntityManager::_getTextEntities()
-{
-	return _textEntities;
-}
-
 unordered_map<string, shared_ptr<WaterEntity>>& BaseEntityManager::_getWaterEntities()
 {
 	return _waterEntities;
 }
 
-shared_ptr<AabbEntity> BaseEntityManager::_getAabbEntity(const string& ID)
+unordered_map<string, shared_ptr<ModelEntity>>& BaseEntityManager::_getModelEntities()
 {
-	auto it = _aabbEntities.find(ID);
-
-	if (it == _aabbEntities.end())
-	{
-		return nullptr;
-	}
-	else
-	{
-		return it->second;
-	}
+	return _modelEntities;
 }
 
-shared_ptr<BillboardEntity> BaseEntityManager::_getBillboardEntity(const string& ID)
+unordered_map<string, shared_ptr<BillboardEntity>>& BaseEntityManager::_getBillboardEntities()
 {
-	auto it = _billboardEntities.find(ID);
-
-	if (it == _billboardEntities.end())
-	{
-		return nullptr;
-	}
-	else
-	{
-		return it->second;
-	}
+	return _billboardEntities;
 }
 
-shared_ptr<ModelEntity> BaseEntityManager::_getModelEntity(const string& ID)
+unordered_map<string, shared_ptr<AabbEntity>>& BaseEntityManager::_getAabbEntities()
 {
-	auto it = _modelEntities.find(ID);
-
-	if (it == _modelEntities.end())
-	{
-		return nullptr;
-	}
-	else
-	{
-		return it->second;
-	}
+	return _aabbEntities;
 }
 
-shared_ptr<ImageEntity> BaseEntityManager::_getImageEntity(const string& ID)
+unordered_map<string, shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
 {
-	auto it = _imageEntities.find(ID);
-
-	if (it == _imageEntities.end())
-	{
-		return nullptr;
-	}
-	else
-	{
-		return it->second;
-	}
+	return _lightEntities;
 }
 
-shared_ptr<LightEntity> BaseEntityManager::_getLightEntity(const string& ID)
+unordered_map<string, shared_ptr<ReflectionEntity>>& BaseEntityManager::_getReflectionEntities()
 {
-	auto it = _lightEntities.find(ID);
+	return _reflectionEntities;
+}
 
-	if (it == _lightEntities.end())
-	{
-		return nullptr;
-	}
-	else
-	{
-		return it->second;
-	}
+unordered_map<string, shared_ptr<ImageEntity>>& BaseEntityManager::_getImageEntities()
+{
+	return _imageEntities;
+}
+
+unordered_map<string, shared_ptr<TextEntity>>& BaseEntityManager::_getTextEntities()
+{
+	return _textEntities;
 }
 
 shared_ptr<SkyEntity> BaseEntityManager::_getSkyEntity(const string& ID)
@@ -189,11 +128,11 @@ shared_ptr<TerrainEntity> BaseEntityManager::_getTerrainEntity(const string& ID)
 	}
 }
 
-shared_ptr<TextEntity> BaseEntityManager::_getTextEntity(const string& ID)
+shared_ptr<WaterEntity> BaseEntityManager::_getWaterEntity(const string& ID)
 {
-	auto it = _textEntities.find(ID);
+	auto it = _waterEntities.find(ID);
 
-	if (it == _textEntities.end())
+	if (it == _waterEntities.end())
 	{
 		return nullptr;
 	}
@@ -203,11 +142,95 @@ shared_ptr<TextEntity> BaseEntityManager::_getTextEntity(const string& ID)
 	}
 }
 
-shared_ptr<WaterEntity> BaseEntityManager::_getWaterEntity(const string& ID)
+shared_ptr<ModelEntity> BaseEntityManager::_getModelEntity(const string& ID)
 {
-	auto it = _waterEntities.find(ID);
+	auto it = _modelEntities.find(ID);
 
-	if (it == _waterEntities.end())
+	if (it == _modelEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<BillboardEntity> BaseEntityManager::_getBillboardEntity(const string& ID)
+{
+	auto it = _billboardEntities.find(ID);
+
+	if (it == _billboardEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<AabbEntity> BaseEntityManager::_getAabbEntity(const string& ID)
+{
+	auto it = _aabbEntities.find(ID);
+
+	if (it == _aabbEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<LightEntity> BaseEntityManager::_getLightEntity(const string& ID)
+{
+	auto it = _lightEntities.find(ID);
+
+	if (it == _lightEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<ReflectionEntity> BaseEntityManager::_getReflectionEntity(const string& ID)
+{
+	auto it = _reflectionEntities.find(ID);
+
+	if (it == _reflectionEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<ImageEntity> BaseEntityManager::_getImageEntity(const string& ID)
+{
+	auto it = _imageEntities.find(ID);
+
+	if (it == _imageEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<TextEntity> BaseEntityManager::_getTextEntity(const string& ID)
+{
+	auto it = _textEntities.find(ID);
+
+	if (it == _textEntities.end())
 	{
 		return nullptr;
 	}

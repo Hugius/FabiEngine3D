@@ -9,6 +9,7 @@ enum class EntityType
 	BILLBOARD,
 	AABB,
 	LIGHT,
+	REFLECTION,
 	IMAGE,
 	TEXT
 };

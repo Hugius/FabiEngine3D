@@ -7,6 +7,7 @@
 #include "billboard_entity.hpp"
 #include "aabb_entity.hpp"
 #include "light_entity.hpp"
+#include "reflection_entity.hpp"
 #include "image_entity.hpp"
 #include "text_entity.hpp"
 
@@ -23,36 +24,39 @@ public:
 		const shared_ptr<SkyEntity> mixSkyEntity,
 		const shared_ptr<TerrainEntity> terrainEntity,
 		const shared_ptr<WaterEntity> waterEntity,
-		const unordered_map<string, shared_ptr<ModelEntity>>     & modelEntities,
-		const unordered_map<string, shared_ptr<BillboardEntity>> & billboardEntities,
-		const unordered_map<string, shared_ptr<AabbEntity>>      & aabbEntities,
-		const unordered_map<string, shared_ptr<LightEntity>>     & lightEntities,
-		const unordered_map<string, shared_ptr<ImageEntity>>     & imageEntities,
-		const unordered_map<string, shared_ptr<TextEntity>>      & textEntities
+		const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities,
+		const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities,
+		const unordered_map<string, shared_ptr<AabbEntity>>& aabbEntities,
+		const unordered_map<string, shared_ptr<LightEntity>>& lightEntities,
+		const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities,
+		const unordered_map<string, shared_ptr<ImageEntity>>& imageEntities,
+		const unordered_map<string, shared_ptr<TextEntity>>& textEntities
 	);
 
-	const shared_ptr<SkyEntity>		getMainSkyEntity() const;
-	const shared_ptr<SkyEntity>		getMixSkyEntity()  const;
-	const shared_ptr<TerrainEntity> getTerrainEntity() const;
-	const shared_ptr<WaterEntity>   getWaterEntity()   const;
-
-	const unordered_map<string, shared_ptr<ModelEntity>>     & getModelEntities()     const;
-	const unordered_map<string, shared_ptr<BillboardEntity>> & getBillboardEntities() const;
-	const unordered_map<string, shared_ptr<AabbEntity>>      & getAabbEntities()      const;
-	const unordered_map<string, shared_ptr<LightEntity>>     & getLightEntities()     const;
-	const unordered_map<string, shared_ptr<ImageEntity>>     & getImageEntities()     const;
-	const unordered_map<string, shared_ptr<TextEntity>>      & getTextEntities()      const;
+	// Instances
+	const shared_ptr<SkyEntity>	getMainSkyEntity();
+	const shared_ptr<SkyEntity> getMixSkyEntity();
+	const shared_ptr<TerrainEntity> getTerrainEntity();
+	const shared_ptr<WaterEntity> getWaterEntity();
+	const unordered_map<string, shared_ptr<ModelEntity>>& getModelEntities();
+	const unordered_map<string, shared_ptr<BillboardEntity>>& getBillboardEntities();
+	const unordered_map<string, shared_ptr<AabbEntity>>& getAabbEntities();
+	const unordered_map<string, shared_ptr<LightEntity>>& getLightEntities();
+	const unordered_map<string, shared_ptr<ReflectionEntity>>& getReflectionEntities();
+	const unordered_map<string, shared_ptr<ImageEntity>>& getImageEntities();
+	const unordered_map<string, shared_ptr<TextEntity>>& getTextEntities();
 
 private:
-	const shared_ptr<SkyEntity>		_mainSkyEntity = nullptr;
-	const shared_ptr<SkyEntity>		_mixSkyEntity  = nullptr;
+	// Instances
+	const shared_ptr<SkyEntity>	_mainSkyEntity = nullptr;
+	const shared_ptr<SkyEntity>	_mixSkyEntity = nullptr;
 	const shared_ptr<TerrainEntity> _terrainEntity = nullptr;
-	const shared_ptr<WaterEntity>   _waterEntity   = nullptr;
-	
+	const shared_ptr<WaterEntity> _waterEntity = nullptr;
 	const unordered_map<string, shared_ptr<ModelEntity>>     _modelEntities;
 	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 	const unordered_map<string, shared_ptr<AabbEntity>>      _aabbEntities;
 	const unordered_map<string, shared_ptr<LightEntity>>     _lightEntities;
+	const unordered_map<string, shared_ptr<ReflectionEntity>>     _reflectionEntities;
 	const unordered_map<string, shared_ptr<ImageEntity>>     _imageEntities;
 	const unordered_map<string, shared_ptr<TextEntity>>      _textEntities;
 };

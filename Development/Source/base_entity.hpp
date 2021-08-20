@@ -20,5 +20,5 @@ public:
 private:
 	const string _ID;
 
-	bool _visible = true;
+	bool _isVisible = true;
 };

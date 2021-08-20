@@ -13,7 +13,7 @@ BaseEntity::BaseEntity(const string& ID)
 
 void BaseEntity::setVisible(bool value)
 {
-	_visible = value;
+	_isVisible = value;
 }
 
 const string& BaseEntity::getID() const
@@ -23,5 +23,5 @@ const string& BaseEntity::getID() const
 
 const bool BaseEntity::isVisible() const
 {
-	return _visible;
+	return _isVisible;
 }

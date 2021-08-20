@@ -22,7 +22,6 @@ public:
 	void setEmissionMap(TextureID value, const string& partID = "");
 	void setReflectionMap(TextureID value, const string& partID = "");
 	void setNormalMap(TextureID value, const string& partID = "");
-	void setEnvironmentMap(TextureID value);
 	void setPosition(Vec3 value, const string& partID = "");
 	void setRotation(Vec3 value, const string& partID = "");
 	void setRotationOrigin(Vec3 value, const string& partID = "");
@@ -111,7 +110,6 @@ public:
 	const TextureID getEmissionMap(const string& partID = "");
 	const TextureID getReflectionMap(const string& partID = "");
 	const TextureID getNormalMap(const string& partID = "");
-	const TextureID getEnvironmentMap();
 	const ReflectionType getReflectionType();
 
 private:
@@ -193,6 +191,5 @@ private:
 	bool _isBright			 = false;
 
 	// Miscellaneous
-	TextureID _environmentMap = 0;
 	ReflectionType _reflectionType;
 };

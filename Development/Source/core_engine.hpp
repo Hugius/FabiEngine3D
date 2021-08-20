@@ -16,6 +16,7 @@
 #include "billboard_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "light_entity_manager.hpp"
+#include "reflection_entity_manager.hpp"
 #include "image_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
@@ -36,34 +37,35 @@ private:
 	CoreEngine(FabiEngine3D& fe3d);
 
 	// Core instances
-	LibraryLoader		   _libraryLoader;
-	Window				   _window;
-	MeshLoader             _meshLoader;
-	TextureLoader          _textureLoader;
-	AudioLoader			   _audioLoader;
-	InputHandler           _inputHandler;
-	RenderBus			   _renderBus;
-	Camera				   _camera;
-	MasterRenderer         _masterRenderer;
-	SkyEntityManager       _skyEntityManager;
-	TerrainEntityManager   _terrainEntityManager;
-	WaterEntityManager     _waterEntityManager;
-	ModelEntityManager     _modelEntityManager;
+	LibraryLoader _libraryLoader;
+	Window _window;
+	MeshLoader _meshLoader;
+	TextureLoader _textureLoader;
+	AudioLoader _audioLoader;
+	InputHandler _inputHandler;
+	RenderBus _renderBus;
+	Camera _camera;
+	MasterRenderer _masterRenderer;
+	SkyEntityManager  _skyEntityManager;
+	TerrainEntityManager _terrainEntityManager;
+	WaterEntityManager _waterEntityManager;
+	ModelEntityManager _modelEntityManager;
 	BillboardEntityManager _billboardEntityManager;
-	AabbEntityManager      _aabbEntityManager;
-	LightEntityManager     _lightEntityManager;
-	ImageEntityManager     _imageEntityManager;
-	TextEntityManager      _textEntityManager;
-	ShadowGenerator        _shadowGenerator;
-	RayCaster              _rayCaster;
-	CollisionDetector      _collisionDetector;
-	CollisionResolver      _collisionResolver;
-	Timer                  _timer;
-	AudioManager		   _audioManager;
-	AudioPlayer			   _audioPlayer;
-	NetworkServerAPI	   _networkServerAPI;
-	NetworkClientAPI	   _networkClientAPI;
-	
+	AabbEntityManager _aabbEntityManager;
+	LightEntityManager _lightEntityManager;
+	ReflectionEntityManager _reflectionEntityManager;
+	ImageEntityManager _imageEntityManager;
+	TextEntityManager _textEntityManager;
+	ShadowGenerator _shadowGenerator;
+	RayCaster _rayCaster;
+	CollisionDetector _collisionDetector;
+	CollisionResolver _collisionResolver;
+	Timer _timer;
+	AudioManager _audioManager;
+	AudioPlayer _audioPlayer;
+	NetworkServerAPI _networkServerAPI;
+	NetworkClientAPI _networkClientAPI;
+
 	// Core functions
 	void _start();
 	void _pause();
@@ -77,7 +79,7 @@ private:
 	void _updateWindowFading();
 
 	// Engine interface instance
-	FabiEngine3D & _fe3d;
+	FabiEngine3D& _fe3d;
 
 	// Miscellaneous variable
 	float _deltaTimeMS = 0.0f;

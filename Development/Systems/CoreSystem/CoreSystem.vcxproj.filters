@@ -93,6 +93,9 @@
     <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_reflection.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\core_engine.hpp">

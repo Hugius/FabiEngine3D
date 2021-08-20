@@ -251,7 +251,7 @@ void BottomViewportController::_deleteConsoleMessage(const string& ID)
 
 	// Delete all message parts
 	unsigned int index = 0;
-	while (screen->getTextField(ID + "_msg_" + to_string(index)) != nullptr)
+	while (screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 	{
 		screen->deleteTextField(ID + "_msg_" + to_string(index));
 		index++;

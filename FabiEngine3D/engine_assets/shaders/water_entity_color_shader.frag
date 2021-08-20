@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Const variables
-#define MAX_LIGHT_COUNT 128
+#define MAX_LIGHT_AMOUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -17,9 +17,9 @@ layout (location = 3) uniform sampler2D u_dudvMap;
 layout (location = 4) uniform sampler2D u_normalMap;
 
 // Vector uniforms
-uniform vec3 u_lightPositions[MAX_LIGHT_COUNT];
-uniform vec3 u_lightRadiuses[MAX_LIGHT_COUNT];
-uniform vec3 u_lightColors[MAX_LIGHT_COUNT];
+uniform vec3 u_lightPositions[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightRadiuses[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightColors[MAX_LIGHT_AMOUNT];
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
 uniform vec3 u_cameraPosition;
@@ -30,7 +30,7 @@ uniform vec3 u_fogColor;
 uniform vec2 u_rippleOffset;
 
 // Float uniforms
-uniform float u_lightIntensities[MAX_LIGHT_COUNT];
+uniform float u_lightIntensities[MAX_LIGHT_AMOUNT];
 uniform float u_directionalLightingIntensity;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;

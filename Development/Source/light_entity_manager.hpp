@@ -14,4 +14,6 @@ public:
 	void createEntity(const string& ID);
 
 	void update() override {};
+
+	static inline const unsigned int MAX_LIGHT_AMOUNT = 128;
 };

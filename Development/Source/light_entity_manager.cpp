@@ -28,5 +28,10 @@ const unordered_map<string, shared_ptr<LightEntity>>& LightEntityManager::getEnt
 
 void LightEntityManager::createEntity(const string& ID)
 {
+	if (getEntities().size() == MAX_LIGHT_AMOUNT)
+	{
+		Logger::throwError("LightEntityManager::createEntity");
+	}
+
 	_createEntity(ID);
 }

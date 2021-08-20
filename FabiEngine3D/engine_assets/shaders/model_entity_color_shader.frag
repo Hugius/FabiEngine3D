@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Constant variables
-#define MAX_LIGHT_COUNT 128
+#define MAX_LIGHT_AMOUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -26,9 +26,9 @@ layout (location = 7) uniform samplerCube u_mixSkyMap;
 uniform mat4 u_skyRotationMatrix;
 
 // Vector uniforms
-uniform vec3 u_lightPositions[MAX_LIGHT_COUNT];
-uniform vec3 u_lightRadiuses[MAX_LIGHT_COUNT];
-uniform vec3 u_lightColors[MAX_LIGHT_COUNT];
+uniform vec3 u_lightPositions[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightRadiuses[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightColors[MAX_LIGHT_AMOUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightingColor;
@@ -42,7 +42,7 @@ uniform vec3 u_mainSkyColor;
 uniform vec3 u_mixSkyColor;
 
 // Float uniforms
-uniform float u_lightIntensities[MAX_LIGHT_COUNT];
+uniform float u_lightIntensities[MAX_LIGHT_AMOUNT];
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularLightingFactor;
@@ -64,7 +64,7 @@ uniform float u_mixSkyLightness;
 uniform float u_shadowLightness;
 
 // Integer uniforms
-uniform int u_lightShapes[MAX_LIGHT_COUNT];
+uniform int u_lightShapes[MAX_LIGHT_AMOUNT];
 
 // Boolean uniforms
 uniform bool u_isWireFramed;

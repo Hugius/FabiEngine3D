@@ -32,27 +32,35 @@ void SceneEditor::_updateLightPlacing()
 					goto BEGIN1;
 				}
 
-				// Create model
-				const string newModelID = ("@@lamp_" + newID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
-				_fe3d.modelEntity_setShadowed(newModelID, false);
-				_fe3d.modelEntity_setReflected(newModelID, false);
-				_fe3d.modelEntity_setBright(newModelID, true);
-				_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
-
-				// Bind AABB
-				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
-				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
-
-				// Create light
+				// Try to create light
 				_fe3d.lightEntity_create(newID);
-				_fe3d.lightEntity_setPosition(newID, newPosition);
-				_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
-				_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
-				_loadedLightIDs.push_back(newID);
+
+				// Check if light creation went well
+				if (_fe3d.lightEntity_isExisting(newID))
+				{
+					// Create model
+					const string newModelID = ("@@lamp_" + newID);
+					_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
+					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
+					_fe3d.modelEntity_setShadowed(newModelID, false);
+					_fe3d.modelEntity_setReflected(newModelID, false);
+					_fe3d.modelEntity_setBright(newModelID, true);
+					_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
+
+					// Bind AABB
+					_fe3d.aabbEntity_create(newModelID);
+					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+					_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+
+					// Create light
+					_fe3d.lightEntity_delete(newID);
+					_fe3d.lightEntity_create(newID);
+					_fe3d.lightEntity_setPosition(newID, newPosition);
+					_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
+					_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
+					_loadedLightIDs.push_back(newID);
+				}
 			}
 
 			// Check if placement mode must be disabled
@@ -104,27 +112,35 @@ void SceneEditor::_updateLightPlacing()
 							goto BEGIN2;
 						}
 
-						// Create model
-						const string newModelID = ("@@lamp_" + newID);
-						_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-						_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
-						_fe3d.modelEntity_setShadowed(newModelID, false);
-						_fe3d.modelEntity_setReflected(newModelID, false);
-						_fe3d.modelEntity_setBright(newModelID, true);
-						_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
-
-						// Bind AABB
-						_fe3d.aabbEntity_create(newModelID);
-						_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-						_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
-						_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
-
-						// Create light
+						// Try to create light
 						_fe3d.lightEntity_create(newID);
-						_fe3d.lightEntity_setPosition(newID, newPosition);
-						_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
-						_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
-						_loadedLightIDs.push_back(newID);
+
+						// Check if light creation went well
+						if (_fe3d.lightEntity_isExisting(newID))
+						{
+							// Create model
+							const string newModelID = ("@@lamp_" + newID);
+							_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
+							_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
+							_fe3d.modelEntity_setShadowed(newModelID, false);
+							_fe3d.modelEntity_setReflected(newModelID, false);
+							_fe3d.modelEntity_setBright(newModelID, true);
+							_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
+
+							// Bind AABB
+							_fe3d.aabbEntity_create(newModelID);
+							_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+							_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+							_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+
+							// Create light
+							_fe3d.lightEntity_delete(newID);
+							_fe3d.lightEntity_create(newID);
+							_fe3d.lightEntity_setPosition(newID, newPosition);
+							_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
+							_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
+							_loadedLightIDs.push_back(newID);
+						}
 					}
 					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{

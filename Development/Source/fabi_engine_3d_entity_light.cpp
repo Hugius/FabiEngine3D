@@ -8,6 +8,12 @@ void FabiEngine3D::lightEntity_deleteAll()
 
 void FabiEngine3D::lightEntity_create(const string& ID)
 {
+	if (_core->_lightEntityManager.getEntities().size() == LightEntityManager::MAX_LIGHT_AMOUNT)
+	{
+		Logger::throwWarning("Tried to create light entity: maximum reached!");
+		return;
+	}
+
 	_core->_lightEntityManager.createEntity(ID);
 }
 

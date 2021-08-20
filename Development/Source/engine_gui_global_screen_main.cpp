@@ -197,11 +197,11 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string& ID)
 {
 	// Retrieve text field
-	for (const auto& TextField : _textFields)
+	for (const auto& textField : _textFields)
 	{
-		if (ID == TextField->getID())
+		if (ID == textField->getID())
 		{
-			return TextField;
+			return textField;
 		}
 	}
 

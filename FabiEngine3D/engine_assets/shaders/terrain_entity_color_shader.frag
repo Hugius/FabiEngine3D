@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Const variables
-#define MAX_LIGHT_COUNT 128
+#define MAX_LIGHT_AMOUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -24,9 +24,9 @@ layout (location = 8) uniform sampler2D u_normalMapB;
 layout (location = 9) uniform sampler2D u_shadowMap;
 
 // Vector uniforms
-uniform vec3 u_lightPositions[MAX_LIGHT_COUNT];
-uniform vec3 u_lightRadiuses[MAX_LIGHT_COUNT];
-uniform vec3 u_lightColors[MAX_LIGHT_COUNT];
+uniform vec3 u_lightPositions[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightRadiuses[MAX_LIGHT_AMOUNT];
+uniform vec3 u_lightColors[MAX_LIGHT_AMOUNT];
 uniform vec3 u_cameraPosition;
 uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightingColor;
@@ -37,7 +37,7 @@ uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
 
 // Float uniforms
-uniform float u_lightIntensities[MAX_LIGHT_COUNT];
+uniform float u_lightIntensities[MAX_LIGHT_AMOUNT];
 uniform float u_lightness;
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
@@ -57,7 +57,7 @@ uniform float u_maxSpotLightingDistance;
 uniform float u_shadowLightness;
 
 // Integer uniforms
-uniform int u_lightShapes[MAX_LIGHT_COUNT];
+uniform int u_lightShapes[MAX_LIGHT_AMOUNT];
 
 // Boolean uniforms
 uniform bool u_isWireFramed;

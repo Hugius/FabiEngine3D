@@ -42,9 +42,9 @@ void EngineGuiScreen::update(bool hoverable)
 	}
 
 	// Update TextFields
-	for (const auto& TextField : _textFields)
+	for (const auto& textField : _textFields)
 	{
-		TextField->setVisible(_isActive);
+		textField->setVisible(_isActive);
 	}
 }
 

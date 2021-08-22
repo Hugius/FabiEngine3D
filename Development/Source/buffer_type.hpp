@@ -1,6 +1,6 @@
 #pragma once
 
-enum class BufferType
+enum class RenderBufferType
 {
 	VERTEX,
 	VERTEX_UV,

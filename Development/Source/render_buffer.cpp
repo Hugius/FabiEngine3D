@@ -1,7 +1,7 @@
 #include "render_buffer.hpp"
 #include "logger.hpp"
 
-RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dataCount)
+RenderBuffer::RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount)
 {
 	// Set buffer type
 	_bufferType = type;
@@ -20,14 +20,14 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 	// Store buffer data
 	switch (type)
 	{
-	case BufferType::VERTEX:
+	case RenderBufferType::VERTEX:
 	{
 		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		break;
 	}
-	case BufferType::VERTEX_UV:
+	case RenderBufferType::VERTEX_UV:
 	{
 		_vertexCount = dataCount / 5;
 		glEnableVertexAttribArray(0);
@@ -36,7 +36,7 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 		break;
 	}
-	case BufferType::VERTEX_UV_NORMAL:
+	case RenderBufferType::VERTEX_UV_NORMAL:
 	{
 		_vertexCount = dataCount / 8;
 		glEnableVertexAttribArray(0);
@@ -47,7 +47,7 @@ RenderBuffer::RenderBuffer(BufferType type, const float data[], unsigned int dat
 		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		break;
 	}
-	case BufferType::VERTEX_UV_NORMAL_TANGENT:
+	case RenderBufferType::VERTEX_UV_NORMAL_TANGENT:
 	{
 		_vertexCount = dataCount / 11;
 		glEnableVertexAttribArray(0);
@@ -73,7 +73,7 @@ RenderBuffer::RenderBuffer(float x, float y, float w, float h, bool isCentered)
 	float* data = nullptr;
 
 	// Set buffer type
-	_bufferType = BufferType::VERTEX_UV;
+	_bufferType = RenderBufferType::VERTEX_UV;
 
 	// Determine center point of the quad
 	if (isCentered)
@@ -202,7 +202,7 @@ const bool RenderBuffer::isInstanced()
 	return _isInstanced;
 }
 
-const BufferType RenderBuffer::getBufferType()
+const RenderBufferType RenderBuffer::getBufferType()
 {
 	return _bufferType;
 }

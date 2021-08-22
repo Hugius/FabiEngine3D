@@ -1,6 +1,5 @@
 #include "master_renderer.hpp"
 #include "render_bus.hpp"
-#include "configuration.hpp"
 
 void MasterRenderer::_captureSceneDepth()
 {
@@ -38,7 +37,7 @@ void MasterRenderer::_captureSceneDepth()
 	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
 		// Bind
-		_sceneDepthFramebuffer.bind();
+		_sceneDepthCaptureBuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 
 		// Validate existence
@@ -135,10 +134,10 @@ void MasterRenderer::_captureSceneDepth()
 		}
 
 		// Unbind
-		_sceneDepthFramebuffer.unbind();
+		_sceneDepthCaptureBuffer.unbind();
 
 		// Update depth map
-		_renderBus.setDepthMap(_sceneDepthFramebuffer.getTexture(0));
+		_renderBus.setDepthMap(_sceneDepthCaptureBuffer.getTexture(0));
 	}
 	else
 	{
@@ -156,12 +155,12 @@ void MasterRenderer::_captureDOF()
 		_dofBlurRenderer.unbind();
 
 		// Apply DOF & update final scene map
-		_dofFramebuffer.bind();
+		_dofCaptureBuffer.bind();
 		_dofRenderer.bind();
 		_dofRenderer.render(_renderSurface);
 		_dofRenderer.unbind();
-		_dofFramebuffer.unbind();
-		_renderBus.setFinalSceneMap(_dofFramebuffer.getTexture(0));
+		_dofCaptureBuffer.unbind();
+		_renderBus.setFinalSceneMap(_dofCaptureBuffer.getTexture(0));
 	}
 	else
 	{
@@ -174,12 +173,12 @@ void MasterRenderer::_captureLensFlare()
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Apply lens flare & update final scene map
-		_lensFlareFramebuffer.bind();
+		_lensFlareCaptureBuffer.bind();
 		_lensFlareRenderer.bind();
 		_lensFlareRenderer.render(_renderSurface);
 		_lensFlareRenderer.unbind();
-		_lensFlareFramebuffer.unbind();
-		_renderBus.setFinalSceneMap(_lensFlareFramebuffer.getTexture(0));
+		_lensFlareCaptureBuffer.unbind();
+		_renderBus.setFinalSceneMap(_lensFlareCaptureBuffer.getTexture(0));
 	}
 }
 
@@ -227,110 +226,16 @@ void MasterRenderer::_captureMotionBlur()
 		}
 
 		// Apply motion blur & update final scene map
-		_motionBlurFramebuffer.bind();
+		_motionBlurCaptureBuffer.bind();
 		_motionBlurRenderer.bind();
 		_motionBlurRenderer.render(_renderSurface);
 		_motionBlurRenderer.unbind();
-		_motionBlurFramebuffer.unbind();
-		_renderBus.setFinalSceneMap(_motionBlurFramebuffer.getTexture(0));
+		_motionBlurCaptureBuffer.unbind();
+		_renderBus.setFinalSceneMap(_motionBlurCaptureBuffer.getTexture(0));
 	}
 	else // No motion blur
 	{
 		_renderBus.setMotionBlurMap(0);
-	}
-}
-
-void MasterRenderer::_captureShadows()
-{
-	if (_renderBus.isShadowsEnabled())
-	{
-		// Temporary values
-		auto modelEntities = _entityBus->getModelEntities();
-		auto billboardEntities = _entityBus->getBillboardEntities();
-
-		// Bind
-		_shadowFramebuffer.bind();
-		glClear(GL_DEPTH_BUFFER_BIT);
-
-		// Validate existence
-		if (!modelEntities.empty())
-		{
-			// Bind
-			_modelEntityShadowRenderer.bind();
-
-			// Render MODEL entities
-			for (const auto& [keyID, modelEntity] : modelEntities)
-			{
-				// Check if LOD entity needs to be rendered
-				if (modelEntity->isLevelOfDetailed())
-				{
-					// Try to find LOD entity
-					auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
-					if (foundPair != modelEntities.end())
-					{
-						auto lodEntity = foundPair->second;
-
-						// Save original transformation
-						Vec3 originalPosition = lodEntity->getPosition();
-						Vec3 originalRotation = lodEntity->getRotation();
-						Vec3 originalSize = lodEntity->getSize();
-						bool originalVisibility = lodEntity->isVisible();
-
-						// Change transformation
-						lodEntity->setPosition(modelEntity->getPosition());
-						lodEntity->setRotation(modelEntity->getRotation());
-						lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
-						lodEntity->setVisible(modelEntity->isVisible());
-						lodEntity->updateModelMatrix();
-
-						// Render LOD entity
-						_modelEntityShadowRenderer.render(lodEntity);
-
-						// Revert to original transformation
-						lodEntity->setPosition(originalPosition);
-						lodEntity->setRotation(originalRotation);
-						lodEntity->setSize(originalSize);
-						lodEntity->setVisible(originalVisibility);
-						lodEntity->updateModelMatrix();
-					}
-					else
-					{
-						Logger::throwError("MasterRenderer::_captureShadows");
-					}
-				}
-				else // Render high-quality entity
-				{
-					_modelEntityShadowRenderer.render(modelEntity);
-				}
-			}
-
-			// Unbind
-			_modelEntityShadowRenderer.unbind();
-		}
-		
-		// Validate existence
-		if (!billboardEntities.empty())
-		{
-			// Bind
-			_billboardEntityShadowRenderer.bind();
-
-			// Render BILLBOARD entities
-			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
-			{
-				_billboardEntityShadowRenderer.render(entity);
-			}
-
-			// Unbind
-			_billboardEntityShadowRenderer.unbind();
-		}
-
-		// Unbind
-		_shadowFramebuffer.unbind();
-		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
-	}
-	else
-	{
-		_renderBus.setShadowMap(0);
 	}
 }
 
@@ -339,12 +244,12 @@ void MasterRenderer::_captureAntiAliasing()
 	if (_renderBus.isFxaaEnabled())
 	{
 		// Apply anti-aliasing & update final scene map
-		_antiAliasingFramebuffer.bind();
+		_antiAliasingCaptureBuffer.bind();
 		_antiAliasingRenderer.bind();
 		_antiAliasingRenderer.render(_renderSurface);
 		_antiAliasingRenderer.unbind();
-		_antiAliasingFramebuffer.unbind();
-		_renderBus.setFinalSceneMap(_antiAliasingFramebuffer.getTexture(0));
+		_antiAliasingCaptureBuffer.unbind();
+		_renderBus.setFinalSceneMap(_antiAliasingCaptureBuffer.getTexture(0));
 	}
 }
 
@@ -376,12 +281,12 @@ void MasterRenderer::_captureBloom()
 		_bloomBlurRendererLowQuality.unbind();
 
 		// Apply bloom & update final scene map
-		_bloomFramebuffer.bind();
+		_bloomCaptureBuffer.bind();
 		_bloomRenderer.bind();
 		_bloomRenderer.render(_renderSurface);
 		_bloomRenderer.unbind();
-		_bloomFramebuffer.unbind();
-		_renderBus.setFinalSceneMap(_bloomFramebuffer.getTexture(0));
+		_bloomCaptureBuffer.unbind();
+		_renderBus.setFinalSceneMap(_bloomCaptureBuffer.getTexture(0));
 	}
 	else
 	{

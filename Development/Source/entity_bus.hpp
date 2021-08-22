@@ -52,11 +52,11 @@ private:
 	const shared_ptr<SkyEntity>	_mixSkyEntity = nullptr;
 	const shared_ptr<TerrainEntity> _terrainEntity = nullptr;
 	const shared_ptr<WaterEntity> _waterEntity = nullptr;
-	const unordered_map<string, shared_ptr<ModelEntity>>     _modelEntities;
+	const unordered_map<string, shared_ptr<ModelEntity>> _modelEntities;
 	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
-	const unordered_map<string, shared_ptr<AabbEntity>>      _aabbEntities;
-	const unordered_map<string, shared_ptr<LightEntity>>     _lightEntities;
-	const unordered_map<string, shared_ptr<ReflectionEntity>>     _reflectionEntities;
-	const unordered_map<string, shared_ptr<ImageEntity>>     _imageEntities;
-	const unordered_map<string, shared_ptr<TextEntity>>      _textEntities;
+	const unordered_map<string, shared_ptr<AabbEntity>> _aabbEntities;
+	const unordered_map<string, shared_ptr<LightEntity>> _lightEntities;
+	const unordered_map<string, shared_ptr<ReflectionEntity>> _reflectionEntities;
+	const unordered_map<string, shared_ptr<ImageEntity>> _imageEntities;
+	const unordered_map<string, shared_ptr<TextEntity>> _textEntities;
 };

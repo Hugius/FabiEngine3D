@@ -28,4 +28,9 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 void ReflectionEntityManager::createEntity(const string& ID)
 {
 	_createEntity(ID);
+
+	for (unsigned int i = 0; i < 6; i++)
+	{
+		getEntity(ID)->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+	}
 }

@@ -8,10 +8,10 @@
 
 using std::map;
 
-class RenderShader final
+class ShaderBuffer final
 {
 public:
-	RenderShader(const string& vertexFilename, const string& fragmentFilename);
+	ShaderBuffer(const string& vertexFilename, const string& fragmentFilename);
 
 	void bind();
 	void unbind();

@@ -142,7 +142,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	}
 	
 	// Create high quality render buffer
-	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
+	entity->setHighQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, &highQualityBufferData[0], static_cast<unsigned int>(highQualityBufferData.size())));
 
 	// Compose low quality buffer data
 	float lowQualityBufferData[] =
@@ -156,7 +156,7 @@ void WaterEntityManager::loadMesh(const string& ID)
 	};
 
 	// Create low quality render buffer
-	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, lowQualityBufferData, static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float))));
+	entity->setLowQualityRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, lowQualityBufferData, static_cast<unsigned int>(sizeof(lowQualityBufferData) / sizeof(float))));
 }
 
 void WaterEntityManager::update()

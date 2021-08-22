@@ -1,6 +1,83 @@
 #include "master_renderer.hpp"
 #include "render_bus.hpp"
-#include "configuration.hpp"
+
+void MasterRenderer::_captureEnvironmentReflections()
+{
+	for (const auto& [keyID, entity] : _entityBus->getReflectionEntities())
+	{
+		const float originalCameraYaw = _camera.getYaw();
+		const float originalCameraPitch = _camera.getPitch();
+		const float originalCameraFOV = _camera.getFOV();
+
+		_camera.setFOV(90.0f);
+
+		for (unsigned int i = 0; i < 6; i++)
+		{
+			// Start capturing reflections
+			entity->getCaptureBuffer(i).bind();
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			// Set camera view
+			if (i == 0)
+			{
+				_camera.setYaw(-90.0f);
+			}
+			else if (i == 1)
+			{
+				_camera.setYaw(90.0f);
+			}
+			else if (i == 2)
+			{
+				_camera.setPitch(90.0f);
+			}
+			else if (i == 3)
+			{
+				_camera.setPitch(90.0f);
+			}
+			else if (i == 4)
+			{
+				_camera.setYaw(180.0f);
+			}
+			else if (i == 5)
+			{
+				_camera.setYaw(0.0f);
+			}
+
+			// Render entities
+			_renderSkyEntity();
+			_renderTerrainEntity();
+			_renderModelEntities();
+
+			// Stop capturing reflections
+			entity->getCaptureBuffer(i).unbind();
+		}
+
+		TextureID texture = entity->getEnvironmentMap();
+		if (texture != 0)
+		{
+			glDeleteTextures(1, &texture);
+		}
+		texture = 0;
+		glGenTextures(1, &texture);
+		for (unsigned int i = 0; i < 6; i++)
+		{
+			glBindTexture(GL_TEXTURE_2D, entity->getCaptureBuffer(i).getTexture(0));
+			void* data = nullptr;
+			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+			glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		}
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		entity->setEnvironmentMap(texture);
+	}
+}
 
 void MasterRenderer::_captureSceneReflections()
 {
@@ -22,7 +99,7 @@ void MasterRenderer::_captureSceneReflections()
 		float cameraDistance = (_camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 
 		// Start capturing reflections
-		_sceneReflectionFramebuffer.bind();
+		_sceneReflectionCaptureBuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Iterate through all MODEL entities
@@ -152,10 +229,10 @@ void MasterRenderer::_captureSceneReflections()
 		}
 
 		// Stop capturing reflections
-		_sceneReflectionFramebuffer.unbind();
+		_sceneReflectionCaptureBuffer.unbind();
 
 		// Assign texture
-		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+		_renderBus.setSceneReflectionMap(_sceneReflectionCaptureBuffer.getTexture(0));
 	}
 	else
 	{
@@ -175,7 +252,7 @@ void MasterRenderer::_captureWaterReflections()
 		float cameraDistance = (_camera.getPosition().y - waterEntity->getPosition().y);
 
 		// Start capturing reflections
-		_waterReflectionFramebuffer.bind();
+		_waterReflectionCaptureBuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Save MODEL entities that must not be captured
@@ -328,112 +405,13 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Stop capturing reflections
-		_waterReflectionFramebuffer.unbind();
+		_waterReflectionCaptureBuffer.unbind();
 
 		// Assign texture
-		_renderBus.setWaterReflectionMap(_waterReflectionFramebuffer.getTexture(0));
+		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
 	}
 	else
 	{
 		_renderBus.setWaterReflectionMap(0);
-	}
-}
-
-void MasterRenderer::_captureWaterRefractions()
-{
-	// Temporary values
-	const auto waterEntity = _entityBus->getWaterEntity();
-
-	// Check if water refractions needed
-	if ((waterEntity != nullptr) && waterEntity->isRefractive())
-	{
-		// Start capturing refractions
-		_waterRefractionFramebuffer.bind();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		// Shadows are not needed if no models are rendered, so they should not appear
-		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
-		if (waterEntity->getQuality() == WaterQuality::SKY || waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
-		{
-			_renderBus.setShadowsEnabled(false);
-		}
-
-		// Sky exposure must not appear in refractions
-		float oldSkyLightness = 0.0f;
-		auto skyEntity = _entityBus->getMainSkyEntity();
-		if (skyEntity != nullptr)
-		{
-			oldSkyLightness = skyEntity->getLightness();
-			skyEntity->setLightness(skyEntity->getOriginalLightness());
-		}
-
-		// Check if camera underwater
-		const float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getPosition().y + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getPosition().x - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getPosition().x + (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getPosition().z - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getPosition().z + (waterEntity->getSize() / 2.0f)));
-
-		// Calculate clipping plane
-		if (isUnderWater)
-		{
-			const float clippingHeight = -(waterEntity->getPosition().y);
-			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
-			_renderBus.setClippingPlane(clippingPlane);
-		}
-		else
-		{
-			const float clippingHeight = (waterEntity->getPosition().y + waveHeight);
-			const Vec4 clippingPlane = Vec4(0.0f, -1.0f, 0.0f, clippingHeight);
-			_renderBus.setClippingPlane(clippingPlane);
-		}
-
-		// Render SKY entity
-		_renderSkyEntity();
-
-		// Render TERRAIN entity
-		if (waterEntity->getQuality() != WaterQuality::SKY)
-		{
-			glEnable(GL_CLIP_DISTANCE0);
-			_renderTerrainEntity();
-			glDisable(GL_CLIP_DISTANCE0);
-		}
-
-		// Render MODEL entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
-		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderModelEntities();
-			glDisable(GL_CLIP_DISTANCE2);
-		}
-
-		// Render BILLBOARD entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
-		{
-			glEnable(GL_CLIP_DISTANCE2);
-			_renderBillboardEntities();
-			glDisable(GL_CLIP_DISTANCE2);
-		}
-
-		// Revert shadows
-		_renderBus.setShadowsEnabled(wasShadowsEnabled);
-
-		// Revert sky lightness
-		if (skyEntity != nullptr)
-		{
-			skyEntity->setLightness(oldSkyLightness);
-		}
-
-		// Stop capturing refractions
-		_waterRefractionFramebuffer.unbind();
-
-		// Assign texture
-		_renderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
-	}
-	else
-	{
-		_renderBus.setWaterRefractionMap(0);
 	}
 }

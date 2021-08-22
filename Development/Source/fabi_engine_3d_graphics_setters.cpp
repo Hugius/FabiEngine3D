@@ -15,20 +15,29 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(int quality)
 void FabiEngine3D::gfx_setShadowQuality(int quality)
 {
 	_core->_renderBus.setShadowQuality(quality);
-	_core->_masterRenderer.reloadShadowFramebuffer();
+	_core->_masterRenderer.reloadShadowCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setReflectionQuality(int quality)
 {
 	_core->_renderBus.setReflectionQuality(quality);
-	_core->_masterRenderer.reloadSceneReflectionFramebuffer();
-	_core->_masterRenderer.reloadWaterReflectionFramebuffer();
+	_core->_masterRenderer.reloadSceneReflectionCaptureBuffer();
+	_core->_masterRenderer.reloadWaterReflectionCaptureBuffer();
+
+	for (const auto& [keyID, entity] : _core->_reflectionEntityManager.getEntities())
+	{
+		for (unsigned int i = 0; i < 6; i++)
+		{
+			entity->getCaptureBuffer(i).reset();
+			entity->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(_core->_renderBus.getReflectionQuality()), 1, false);
+		}
+	}
 }
 
 void FabiEngine3D::gfx_setRefractionQuality(int quality)
 {
 	_core->_renderBus.setRefractionQuality(quality);
-	_core->_masterRenderer.reloadWaterRefractionFramebuffer();
+	_core->_masterRenderer.reloadWaterRefractionCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)

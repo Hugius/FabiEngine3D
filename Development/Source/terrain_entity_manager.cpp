@@ -232,7 +232,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	}
 
 	// Create render buffer
-	entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
+	entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
 	// Set properties
 	entity->setVertices(vertices);

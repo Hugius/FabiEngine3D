@@ -1,6 +1,6 @@
 #pragma once
 
-#include "render_framebuffer.hpp"
+#include "capture_buffer.hpp"
 #include "camera.hpp"
 #include "entity_bus.hpp"
 #include "sky_entity_color_renderer.hpp"
@@ -34,10 +34,10 @@ public:
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus);
-	void reloadShadowFramebuffer();
-	void reloadSceneReflectionFramebuffer();
-	void reloadWaterReflectionFramebuffer();
-	void reloadWaterRefractionFramebuffer();
+	void reloadShadowCaptureBuffer();
+	void reloadSceneReflectionCaptureBuffer();
+	void reloadWaterReflectionCaptureBuffer();
+	void reloadWaterRefractionCaptureBuffer();
 
 private:
 	// Update functions
@@ -45,6 +45,7 @@ private:
 	void _updateLensFlare();
 
 	// Pre-capturing functions
+	void _captureEnvironmentReflections();
 	void _captureSceneReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
@@ -100,18 +101,18 @@ private:
 	BlurRenderer _bloomBlurRendererHighQuality;
 	BlurRenderer _bloomBlurRendererLowQuality;
 	
-	// Framebuffers
-	RenderFramebuffer _sceneReflectionFramebuffer;
-	RenderFramebuffer _waterReflectionFramebuffer;
-	RenderFramebuffer _waterRefractionFramebuffer;
-	RenderFramebuffer _shadowFramebuffer;
-	RenderFramebuffer _sceneDepthFramebuffer;
-	RenderFramebuffer _sceneColorFramebuffer;
-	RenderFramebuffer _antiAliasingFramebuffer;
-	RenderFramebuffer _bloomFramebuffer;
-	RenderFramebuffer _dofFramebuffer;
-	RenderFramebuffer _lensFlareFramebuffer;
-	RenderFramebuffer _motionBlurFramebuffer;
+	// CaptureBuffers
+	CaptureBuffer _sceneReflectionCaptureBuffer;
+	CaptureBuffer _waterReflectionCaptureBuffer;
+	CaptureBuffer _waterRefractionCaptureBuffer;
+	CaptureBuffer _shadowCaptureBuffer;
+	CaptureBuffer _sceneDepthCaptureBuffer;
+	CaptureBuffer _sceneColorCaptureBuffer;
+	CaptureBuffer _antiAliasingCaptureBuffer;
+	CaptureBuffer _bloomCaptureBuffer;
+	CaptureBuffer _dofCaptureBuffer;
+	CaptureBuffer _lensFlareCaptureBuffer;
+	CaptureBuffer _motionBlurCaptureBuffer;
 
 	// Surfaces
 	shared_ptr<ImageEntity> _renderSurface = nullptr;

@@ -7,10 +7,10 @@
 
 using std::vector;
 
-class RenderFramebuffer final
+class CaptureBuffer final
 {
 public:
-	~RenderFramebuffer();
+	~CaptureBuffer();
 
 	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped);
 	void createDepthTexture(Ivec2 position, Ivec2 size);
@@ -22,7 +22,7 @@ public:
 	Ivec2 getSize();
 
 	BufferID getFBO();
-	TextureID getTexture(int ID);
+	TextureID getTexture(unsigned int index);
 
 private:
 	BufferID _fbo = 0;

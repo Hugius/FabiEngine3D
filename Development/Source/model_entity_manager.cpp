@@ -91,7 +91,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		entity->createPart(part.ID);
 
 		// Render buffer
-		entity->setRenderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
+		entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.ID);
 
 		// Diffuse map
 		if (part.diffuseMapPath != "")

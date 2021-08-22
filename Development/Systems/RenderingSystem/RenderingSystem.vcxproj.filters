@@ -45,22 +45,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\render_framebuffer_main.cpp">
+    <ClCompile Include="..\..\Source\capture_buffer_main.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_framebuffer_misc.cpp">
+    <ClCompile Include="..\..\Source\capture_buffer_misc.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\render_buffer.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\render_shader.cpp">
+    <ClCompile Include="..\..\Source\shader_buffer.cpp">
       <Filter>Buffers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_one.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_capture_reflection.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\master_renderer_capture_two.cpp">
+    <ClCompile Include="..\..\Source\master_renderer_capture_post.cpp">
       <Filter>Master Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\master_renderer_draw.cpp">
@@ -138,15 +138,18 @@
     <ClCompile Include="..\..\Source\motion_blur_renderer.cpp">
       <Filter>Renderers\Post Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\master_renderer_capture_misc.cpp">
+      <Filter>Master Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\render_framebuffer.hpp">
+    <ClInclude Include="..\..\Source\capture_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\render_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\render_shader.hpp">
+    <ClInclude Include="..\..\Source\shader_buffer.hpp">
       <Filter>Buffers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\master_renderer.hpp">

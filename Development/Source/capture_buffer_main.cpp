@@ -1,14 +1,14 @@
-#include "render_framebuffer.hpp"
+#include "capture_buffer.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
 
-RenderFramebuffer::~RenderFramebuffer()
+CaptureBuffer::~CaptureBuffer()
 {
 	reset();
 }
 
-void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped)
+void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -35,7 +35,7 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 
 			// Bind texture
 			glBindTexture(GL_TEXTURE_2D, _textures[i]);
-
+			
 			// Fill texture
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
@@ -49,7 +49,7 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 			// Texture filtering
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+			
 			// Unbind texture
 			glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -78,16 +78,16 @@ void RenderFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned 
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::throwError("RenderFramebuffer::createColorTexture::1");
+			Logger::throwError("CaptureBuffer::createColorTexture::1");
 		}
 	}
 	else
 	{
-		Logger::throwError("RenderFramebuffer::createColorTexture::2");
+		Logger::throwError("CaptureBuffer::createColorTexture::2");
 	}
 }
 
-void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size)
+void CaptureBuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -139,16 +139,16 @@ void RenderFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size)
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::throwError("RenderFramebuffer::createDepthTexture::1");
+			Logger::throwError("CaptureBuffer::createDepthTexture::1");
 		}
 	}
 	else
 	{
-		Logger::throwError("RenderFramebuffer::createDepthTexture::2");
+		Logger::throwError("CaptureBuffer::createDepthTexture::2");
 	}
 }
 
-void RenderFramebuffer::reset()
+void CaptureBuffer::reset()
 {
 	if (_isInitialized)
 	{

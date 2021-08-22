@@ -2,10 +2,10 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
-void BlurRenderer::loadFramebuffer(BlurType type, unsigned int blurSize)
+void BlurRenderer::loadCaptureBuffer(BlurType type, unsigned int blurSize)
 {
 	_type = type;
-	_blurFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize() / blurSize, 1, true);
+	_blurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize() / blurSize, 1, true);
 }
 
 void BlurRenderer::bind()
@@ -37,10 +37,10 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 		// Blur multiple times
 		for (unsigned int i = 0; i < blurCount; i++)
 		{
-			_blurFramebuffer.bind();
+			_blurCaptureBuffer.bind();
 			_render(entity, texture);
-			_blurFramebuffer.unbind();
-			texture = _blurFramebuffer.getTexture(0);
+			_blurCaptureBuffer.unbind();
+			texture = _blurCaptureBuffer.getTexture(0);
 		}
 	}
 
@@ -53,10 +53,10 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 		// Blur multiple times
 		for (unsigned int i = 0; i < blurCount; i++)
 		{
-			_blurFramebuffer.bind();
+			_blurCaptureBuffer.bind();
 			_render(entity, texture);
-			_blurFramebuffer.unbind();
-			texture = _blurFramebuffer.getTexture(0);
+			_blurCaptureBuffer.unbind();
+			texture = _blurCaptureBuffer.getTexture(0);
 		}
 	}
 

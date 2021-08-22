@@ -12,7 +12,7 @@ class RenderBuffer final
 {
 public:
 	RenderBuffer() = delete;
-	RenderBuffer(BufferType type, const float data[], unsigned int dataCount);   // 3D
+	RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount);   // 3D
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 	
@@ -25,7 +25,7 @@ public:
 	
 	const bool isInstanced();
 
-	const BufferType getBufferType();
+	const RenderBufferType getBufferType();
 
 	const vector<Vec3>& getInstancedOffsets();
 
@@ -41,7 +41,7 @@ private:
 	bool _isInstanced = false;
 
 	// Miscellaneosu
-	BufferType _bufferType;
+	RenderBufferType _bufferType;
 	BufferID _vao = 0;
 	BufferID _vbo = 0;
 	BufferID _vbo_instanced = 0;

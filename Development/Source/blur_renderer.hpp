@@ -2,7 +2,7 @@
 
 #include "base_renderer.hpp"
 #include "image_entity.hpp"
-#include "render_framebuffer.hpp"
+#include "capture_buffer.hpp"
 #include "blur_direction.hpp"
 #include "blur_type.hpp"
 
@@ -11,7 +11,7 @@ class BlurRenderer final : public BaseRenderer
 public:
 	using BaseRenderer::BaseRenderer;
 
-	void loadFramebuffer(BlurType type, unsigned int blurSize);
+	void loadCaptureBuffer(BlurType type, unsigned int blurSize);
 	void bind() override;
 	void unbind() override;
 
@@ -22,6 +22,6 @@ private:
 
 	BlurType _type;
 
-	RenderFramebuffer _blurFramebuffer;
+	CaptureBuffer _blurCaptureBuffer;
 };
 

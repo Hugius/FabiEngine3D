@@ -18,7 +18,7 @@ BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLo
 	:
 	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
 	_camera(camera),
-	_renderBuffer(make_shared<RenderBuffer>(BufferType::VERTEX_UV, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
+	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 
 }

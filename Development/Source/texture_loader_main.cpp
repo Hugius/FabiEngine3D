@@ -75,7 +75,6 @@ TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, 
 	// Temporary values
 	TextureID texture;
 	glGenTextures(1, &texture);
-	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
 	// Validate image sizes
@@ -107,7 +106,7 @@ TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, 
 			}
 		}
 	}
-
+	
 	// Add the face images to the texture buffer
 	for (size_t i = 0; i < images.size(); i++)
 	{

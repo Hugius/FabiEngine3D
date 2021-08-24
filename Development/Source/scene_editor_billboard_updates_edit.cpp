@@ -115,10 +115,19 @@ void SceneEditor::_updateBillboardEditing()
 				}
 			}
 
-			// Get entity transformation
-			Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-			Vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
-			Vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
+			// Alternative way of deleting
+			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			{
+				_fe3d.billboardEntity_delete(_activeBillboardID);
+				rightWindow->setActiveScreen("sceneEditorControls");
+				_activeBillboardID = "";
+				return;
+			}
+
+			// Get current values
+			auto position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+			auto rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
+			auto size = _fe3d.billboardEntity_getSize(_activeBillboardID);
 
 			// Enabling all axes by default
 			screen->getButton("xMinus")->setHoverable(true);

@@ -135,6 +135,16 @@ void SceneEditor::_updateLightEditing()
 				}
 			}
 
+			// Alternative way of deleting
+			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			{
+				_fe3d.modelEntity_delete(_activeLampID);
+				_fe3d.lightEntity_delete(activeLightID);
+				rightWindow->setActiveScreen("sceneEditorControls");
+				_activeLampID = "";
+				return;
+			}
+
 			// Get current values
 			auto position = _fe3d.lightEntity_getPosition(activeLightID);
 			auto radius = _fe3d.lightEntity_getRadius(activeLightID);

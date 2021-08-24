@@ -185,13 +185,13 @@ void SceneEditor::_updateModelEditing()
 				return;
 			}
 
-			// Get entity transformation
-			Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
-			Vec3 rotation = _fe3d.modelEntity_getRotation(_activeModelID);
-			Vec3 size = _fe3d.modelEntity_getSize(_activeModelID);
-			Vec3 oldPosition = position;
-			Vec3 oldRotation = rotation;
-			Vec3 oldSize = size;
+			// Get current transformation
+			auto position = _fe3d.modelEntity_getPosition(_activeModelID);
+			auto rotation = _fe3d.modelEntity_getRotation(_activeModelID);
+			auto size = _fe3d.modelEntity_getSize(_activeModelID);
+			auto oldPosition = position;
+			auto oldRotation = rotation;
+			auto oldSize = size;
 
 			// Handle position, rotation, size
 			if (!screen->getButton("position")->isHoverable())

@@ -102,10 +102,20 @@ void SceneEditor::_updateSoundEditing()
 				}
 			}
 
+			// Alternative way of deleting
+			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
+			{
+				_fe3d.modelEntity_delete(_activeSpeakerID);
+				_fe3d.sound_delete(activeSoundID);
+				rightWindow->setActiveScreen("sceneEditorControls");
+				_activeSpeakerID = "";
+				return;
+			}
+
 			// Get current values
-			Vec3 position = _fe3d.sound_getPosition(activeSoundID);
-			float maxVolume = _fe3d.sound_getMaxVolume(activeSoundID);
-			float maxDistance = _fe3d.sound_getMaxDistance(activeSoundID);
+			auto position = _fe3d.sound_getPosition(activeSoundID);
+			auto maxVolume = _fe3d.sound_getMaxVolume(activeSoundID);
+			auto maxDistance = _fe3d.sound_getMaxDistance(activeSoundID);
 
 			// Update value filling and changing
 			_handleValueChanging("soundPropertiesMenu", "distancePlus", "distance", maxDistance, (_editorSpeed / 100.0f), 1.0f, 0.0f);

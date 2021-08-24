@@ -13,6 +13,13 @@ void MasterRenderer::_captureEnvironmentReflections()
 	const auto originalCameraYaw = _camera.getYaw();
 	const auto originalCameraPitch = _camera.getPitch();
 	const auto originalCameraPosition = _camera.getPosition();
+
+	// Save original shadow status
+	const auto originalShadowEyePosition = _renderBus.getShadowEyePosition();
+	const auto originalShadowAreaCenter = _renderBus.getShadowAreaCenter();
+	const auto originalShadowAreaSize = _renderBus.getShadowAreaSize();
+	const auto originalShadowAreaReach = _renderBus.getShadowAreaReach();
+	const auto originalShadowMatrix = _renderBus.getShadowMatrix();
 	
 	// Iterate through all MODEL entities
 	vector<string> savedModelEntityIDs;
@@ -193,7 +200,11 @@ void MasterRenderer::_captureEnvironmentReflections()
 	_camera.updateMatrices();
 
 	// Revert shadows
-	_shadowGenerator.updateMatrix(_renderBus);
+	_renderBus.setShadowEyePosition(originalShadowEyePosition);
+	_renderBus.setShadowAreaCenter(originalShadowAreaCenter);
+	_renderBus.setShadowAreaSize(originalShadowAreaSize);
+	_renderBus.setShadowAreaReach(originalShadowAreaReach);
+	_renderBus.setShadowMatrix(originalShadowMatrix);
 }
 
 void MasterRenderer::_captureSceneReflections()
@@ -267,10 +278,6 @@ void MasterRenderer::_captureSceneReflections()
 
 		// Disable reflections
 		_renderBus.setReflectionsEnabled(false);
-
-		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
-		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
-		_renderBus.setShadowsEnabled(false);
 
 		// Sky exposure must not appear in reflections
 		float oldSkyLightness = 0.0f;
@@ -347,9 +354,6 @@ void MasterRenderer::_captureSceneReflections()
 
 		// Revert reflections
 		_renderBus.setReflectionsEnabled(true);
-
-		// Revert shadows
-		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 
 		// Revert sky lightness
 		if (skyEntity != nullptr)

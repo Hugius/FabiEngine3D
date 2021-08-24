@@ -119,13 +119,13 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsShadows")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isShadowsEnabled();
-		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		float size = _fe3d.gfx_getShadowSize();
-		float lightness = _fe3d.gfx_getShadowLightness();
-		Vec3 position = _fe3d.gfx_getShadowEye();
-		Vec3 center = _fe3d.gfx_getShadowCenter();
-		int interval = _fe3d.gfx_getShadowInterval();
+		auto isEnabled = _fe3d.gfx_isShadowsEnabled();
+		auto isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+		auto size = _fe3d.gfx_getShadowSize();
+		auto lightness = _fe3d.gfx_getShadowLightness();
+		auto position = _fe3d.gfx_getShadowEye();
+		auto center = _fe3d.gfx_getShadowCenter();
+		auto interval = _fe3d.gfx_getShadowInterval();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -181,7 +181,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("interval", interval))
 		{
-			interval = max(0, interval);
+			interval = max(0, static_cast<int>(interval));
 		}
 		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
 		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);

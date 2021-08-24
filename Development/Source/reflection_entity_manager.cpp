@@ -48,6 +48,6 @@ void ReflectionEntityManager::createEntity(const string& ID)
 	// Create capture buffers
 	for (unsigned int i = 0; i < 6; i++)
 	{
-		entity->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(500), 1, false);
+		entity->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(256), 1, false);
 	}
 }

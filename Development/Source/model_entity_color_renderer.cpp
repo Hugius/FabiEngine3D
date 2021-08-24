@@ -33,6 +33,7 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_isAmbientLightingEnabled", _renderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_isDirectionalLightingEnabled", _renderBus.isDirectionalLightingEnabled());
 	_shader.uploadUniform("u_isSpotLightingEnabled", _renderBus.isSpotLightingEnabled());
+	_shader.uploadUniform("u_isReflectionsEnabled", _renderBus.isReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize", _renderBus.getShadowAreaSize());
 	_shader.uploadUniform("u_shadowAreaCenter", _renderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());

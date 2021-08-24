@@ -116,11 +116,25 @@ void BaseEntityManager::_createEntity(const string& ID)
 			break;
 		}
 
+		case(EntityType::REFLECTION):
+		{
+			if (_getLightEntity(ID) != nullptr)
+			{
+				Logger::throwError("BaseEntityManager::_createEntity::8");
+			}
+			else
+			{
+				_reflectionEntities.insert(make_pair(ID, make_shared<ReflectionEntity>(ID)));
+			}
+
+			break;
+		}
+
 		case(EntityType::IMAGE):
 		{
 			if (_getImageEntity(ID) != nullptr)
 			{
-				Logger::throwError("BaseEntityManager::_createEntity::8");
+				Logger::throwError("BaseEntityManager::_createEntity::9");
 			}
 			else
 			{
@@ -136,7 +150,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwError("BaseEntityManager::_createEntity::9");
+				Logger::throwError("BaseEntityManager::_createEntity::10");
 			}
 			else
 			{

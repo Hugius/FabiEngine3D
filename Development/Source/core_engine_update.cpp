@@ -39,6 +39,7 @@ void CoreEngine::_updateApplication()
 			// Collision updates
 			_timer.startDeltaPart("collisionUpdate");
 			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera, _collisionDetector);
+			_camera.updateMatrices();
 			_timer.stopDeltaPart();
 
 			// 3D entity updates
@@ -61,7 +62,6 @@ void CoreEngine::_updateApplication()
 			// Shadow updates
 			_timer.startDeltaPart("shadowUpdate");
 			_shadowGenerator.update(_renderBus);
-			_camera.updateMatrices();
 			_timer.stopDeltaPart();
 
 			// Audio updates

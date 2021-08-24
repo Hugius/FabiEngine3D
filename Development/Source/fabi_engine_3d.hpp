@@ -499,6 +499,7 @@ public:
 	void reflectionEntity_delete(const string& ID);
 	void reflectionEntity_setPosition(const string& ID, Vec3 position);
 	void reflectionEntity_move(const string& ID, Vec3 factor);
+	void reflectionEntity_capture(const string& ID);
 
 	// Reflection entity interface - getters
 	const vector<string> reflectionEntity_getAllIDs();

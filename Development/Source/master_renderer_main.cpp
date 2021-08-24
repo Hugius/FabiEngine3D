@@ -8,12 +8,13 @@ using std::make_shared;
 using std::max;
 using std::clamp;
 
-MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera)
+MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator)
 	:
 	_renderBus(renderBus),
 	_timer(timer),
 	_textureLoader(textureLoader),
 	_camera(camera),
+	_shadowGenerator(shadowGenerator),
 	_skyEntityColorRenderer("sky_entity_color_shader.vert", "sky_entity_color_shader.frag", renderBus),
 	_terrainEntityColorRenderer("terrain_entity_color_shader.vert", "terrain_entity_color_shader.frag", renderBus),
 	_terrainEntityDepthRenderer("terrain_entity_depth_shader.vert", "terrain_entity_depth_shader.frag", renderBus),
@@ -110,6 +111,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	{
 		// Pre-captures
 		_timer.startDeltaPart("reflectionPreRender");
+		_captureEnvironmentReflections();
 		_captureSceneReflections();
 		_captureWaterReflections();
 		_timer.stopDeltaPart();

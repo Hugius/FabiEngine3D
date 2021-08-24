@@ -9,10 +9,9 @@ using std::clamp;
 Camera::Camera(RenderBus& renderBus, Window& window)
 	:
 	_renderBus(renderBus),
-	_window(window),
-	_aspectRatio(static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y))
+	_window(window)
 {
-	//reset();
+	reset();
 }
 
 void Camera::reset()
@@ -22,12 +21,14 @@ void Camera::reset()
 	_projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
+	_upVector = DEFAULT_UP_VECTOR;
+	_frontVector = Vec3(0.0f);
+	_rightVector = Vec3(0.0f);
 	_position = Vec3(0.0f);
 	_thirdPersonLookat = Vec3(0.0f);
-	_right = Vec3(0.0f);
-	_front = Vec3(0.0f);
 
 	// Floats
+	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
 	_nearZ = DEFAULT_NEAR_Z;
 	_farZ = DEFAULT_FAR_Z;
@@ -195,17 +196,17 @@ void Camera::update(Ivec2 lastCursorPosition)
 void Camera::updateMatrices()
 {
 	// Lookat front vector
-	_front.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
-	_front.y = sin(Math::degreesToRadians(_pitch));
-	_front.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
-	_front.normalize();
+	_frontVector.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
+	_frontVector.y = sin(Math::degreesToRadians(_pitch));
+	_frontVector.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
+	_frontVector.normalize();
 
 	// Calculate the view matrix input
-	_right = _front.cross(UP_VECTOR);
-	_right.normalize();
+	_rightVector = _frontVector.cross(_upVector);
+	_rightVector.normalize();
 
 	// View matrix
-	_viewMatrix = Matrix44::createView(_position, _position + _front, UP_VECTOR);
+	_viewMatrix = Matrix44::createView(_position, _position + _frontVector, _upVector);
 
 	// Projection matrix
 	_projectionMatrix = Matrix44::createProjection(Math::degreesToRadians(_fov), _aspectRatio, _nearZ, _farZ);
@@ -213,7 +214,7 @@ void Camera::updateMatrices()
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);
 	_renderBus.setCameraPitch(_pitch);
-	_renderBus.setCameraFront(_front);
+	_renderBus.setCameraFront(_frontVector);
 	_renderBus.setCameraPosition(_position);
 	_renderBus.setViewMatrix(_viewMatrix);
 	_renderBus.setProjectionMatrix(_projectionMatrix);

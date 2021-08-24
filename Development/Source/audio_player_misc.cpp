@@ -59,7 +59,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					sound.setVolume(volume); // Update sound volume
 
 					// Panning
-					auto cameraFront = camera.getFront(); // From camera vector
+					auto cameraFront = camera.getFrontVector(); // From camera vector
 					Matrix44 rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(90.0f));
 					Vec3 pointVector = cameraPos - sound.getPosition(); // To camera vector
 					Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);

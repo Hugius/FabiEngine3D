@@ -345,6 +345,11 @@ const bool RenderBus::isSpotLightingEnabled()
 	return _isSpotLightingEnabled;
 }
 
+const bool RenderBus::isReflectionsEnabled()
+{
+	return _isReflectionsEnabled;
+}
+
 const bool RenderBus::isFogEnabled()
 {
 	return _isFogEnabled;

@@ -27,10 +27,27 @@ const unordered_map<string, shared_ptr<ReflectionEntity>>& ReflectionEntityManag
 
 void ReflectionEntityManager::createEntity(const string& ID)
 {
+	// Create entity
 	_createEntity(ID);
 
+	// Temporary values
+	auto entity = getEntity(ID);
+
+	// Create environment map
+	TextureID environmentMap;
+	glGenTextures(1, &environmentMap);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, environmentMap);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	entity->setEnvironmentMap(environmentMap);
+
+	// Create capture buffers
 	for (unsigned int i = 0; i < 6; i++)
 	{
-		getEntity(ID)->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+		entity->getCaptureBuffer(i).createColorTexture(Ivec2(0), Ivec2(256), 1, false);
 	}
 }

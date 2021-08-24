@@ -10,13 +10,16 @@ class Camera final
 public:
 	Camera(RenderBus& renderBus, Window& window);
 
+	// Voids
 	void reset();
 	void update(Ivec2 lastCursorPosition);
 	void updateMatrices();
 	void move(Vec3 value);
+	void setUpVector(Vec3 value);
 	void setPosition(Vec3 value);
 	void setThirdPersonLookat(Vec3 value);
 	void setThirdPersonDistance(float value);
+	void setAspectRatio(float value);
 	void setFOV(float value);
 	void setMouseSensitivity(float value);
 	void setYaw(float value);
@@ -36,11 +39,17 @@ public:
 	void disableThirdPersonView();
 	void notifyCursorCenter();
 
+	// Matrices
 	const Matrix44& getViewMatrix();
 	const Matrix44& getProjectionMatrix();
+
+	// Vectors
+	const Vec3 getUpVector();
+	const Vec3 getFrontVector();
 	const Vec3 getPosition();
-	const Vec3 getFront();
 	const Vec3 getThirdPersonLookat();
+
+	// Floats
 	const float getFOV();
 	const float getAspectRatio();
 	const float getYaw();
@@ -54,6 +63,8 @@ public:
 	const float getFarZ();
 	const float getMouseSensitivity();
 	const float getMouseOffset();
+
+	// Booleans
 	const bool isThirdPersonViewEnabled();
 	const bool isFirstPersonViewEnabled();
 
@@ -67,9 +78,10 @@ private:
 	Matrix44 _projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
-	static inline const Vec3 UP_VECTOR = Vec3(0.0f, 1.0f, 0.0f);
-	Vec3 _right = Vec3(0.0f);
-	Vec3 _front = Vec3(0.0f);
+	static inline const Vec3 DEFAULT_UP_VECTOR = Vec3(0.0f, 1.0f, 0.0f);
+	Vec3 _upVector = Vec3(0.0f);
+	Vec3 _frontVector = Vec3(0.0f);
+	Vec3 _rightVector = Vec3(0.0f);
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _thirdPersonLookat = Vec3(0.0f);
 
@@ -83,7 +95,7 @@ private:
 	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
 	static inline const float MAX_THIRD_PERSON_DISTANCE = numeric_limits<float>::max();
 	static inline const float MAX_ACCELERATION = 10.0f;
-	const float _aspectRatio;
+	float _aspectRatio = 0.0f;
 	float _fov = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;

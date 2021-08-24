@@ -26,6 +26,11 @@ void FabiEngine3D::reflectionEntity_move(const string& ID, Vec3 factor)
 	_core->_reflectionEntityManager.getEntity(ID)->move(factor);
 }
 
+void FabiEngine3D::reflectionEntity_capture(const string& ID)
+{
+	_core->_reflectionEntityManager.getEntity(ID)->capture();
+}
+
 const vector<string> FabiEngine3D::reflectionEntity_getAllIDs()
 {
 	vector<string> IDs;

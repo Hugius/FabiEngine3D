@@ -94,6 +94,7 @@ public:
 	void resetTriangleCount();
 
 	// Booleans
+	void setReflectionsEnabled(bool value);
 	void setFxaaEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
@@ -197,6 +198,7 @@ public:
 	const unsigned int getRefractionQuality();
 
 	// Booleans
+	const bool isReflectionsEnabled();
 	const bool isFxaaEnabled();
 	const bool isAmbientLightingEnabled();
 	const bool isDirectionalLightingEnabled();
@@ -301,6 +303,7 @@ private:
 	unsigned int _refractionQuality = 0;
 
 	// Booleans
+	bool _isReflectionsEnabled = true;
 	bool _isFxaaEnabled = false;
 	bool _isAmbientLightingEnabled = false;
 	bool _isDirectionalLightingEnabled = false;

@@ -24,11 +24,12 @@
 #include "timer.hpp"
 #include "blur_type.hpp"
 #include "texture_loader.hpp"
+#include "shadow_generator.hpp"
 
 class MasterRenderer final
 {
 public:
-	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera);
+	MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader, Camera& camera, ShadowGenerator& shadowGenerator);
 
 	// Voids
 	void update();
@@ -76,6 +77,7 @@ private:
 	Timer& _timer;
 	RenderBus& _renderBus;
 	TextureLoader& _textureLoader;
+	ShadowGenerator& _shadowGenerator;
 	EntityBus* _entityBus = nullptr;
 
 	// Renderers

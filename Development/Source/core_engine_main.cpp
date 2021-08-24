@@ -20,7 +20,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	_inputHandler(),
 	_renderBus(),
 	_camera(_renderBus, _window),
-	_masterRenderer(_renderBus, _timer, _textureLoader, _camera),
+	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator),
 	_skyEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_terrainEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_waterEntityManager(_meshLoader, _textureLoader, _renderBus),

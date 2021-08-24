@@ -8,12 +8,12 @@ using std::clamp;
 
 void Camera::moveFollowX(float value)
 { 
-	_position += (_right * value);
+	_position += (_rightVector * value);
 }
 
 void Camera::moveFollowZ(float value)
 {
-	Vec3 tempFront = _front;
+	Vec3 tempFront = _frontVector;
 	tempFront.x = cos(Math::degreesToRadians(_yaw));
 	tempFront.z = sin(Math::degreesToRadians(_yaw));
 	_position.x += (tempFront.x * value);
@@ -22,9 +22,9 @@ void Camera::moveFollowZ(float value)
 
 void Camera::moveFollowZY(float value)
 {
-	_position.x += (_front.x * value);
-	_position.y += (_front.y * value);
-	_position.z += (_front.z * value);
+	_position.x += (_frontVector.x * value);
+	_position.y += (_frontVector.y * value);
+	_position.z += (_frontVector.z * value);
 }
 
 void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
@@ -83,7 +83,7 @@ void Camera::disableThirdPersonView()
 
 void Camera::setFOV(float value)
 {
-	_viewMatrix.m[3][2] = _front.dot(_position);
+	_viewMatrix.m[3][2] = _frontVector.dot(_position);
 	_fov = value;
 }
 
@@ -139,14 +139,19 @@ void Camera::setThirdPersonDistance(float value)
 	_thirdPersonDistance = value;
 }
 
+void Camera::setAspectRatio(float value)
+{
+	_aspectRatio = value;
+}
+
 const Vec3 Camera::getPosition()
 {
 	return _position;
 }
 
-const Vec3 Camera::getFront()
+const Vec3 Camera::getFrontVector()
 {
-	return _front;
+	return _frontVector;
 }
 
 const Vec3 Camera::getThirdPersonLookat()
@@ -234,6 +239,11 @@ void Camera::move(Vec3 value)
 	_position += value;
 }
 
+void Camera::setUpVector(Vec3 value)
+{
+	_upVector = value;
+}
+
 void Camera::setPosition(Vec3 value)
 {
 	_position = value;
@@ -257,4 +267,9 @@ const Matrix44& Camera::getViewMatrix()
 const Matrix44& Camera::getProjectionMatrix()
 {
 	return _projectionMatrix;
+}
+
+const Vec3 Camera::getUpVector()
+{
+	return _upVector;
 }

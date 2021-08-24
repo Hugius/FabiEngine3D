@@ -3,80 +3,197 @@
 
 void MasterRenderer::_captureEnvironmentReflections()
 {
+	// Temporary values
+	auto reflectionQuality = _renderBus.getReflectionQuality();
+
+	// Save original camera status
+	const auto originalCameraAspectRatio = _camera.getAspectRatio();
+	const auto originalCameraFOV = _camera.getFOV();
+	const auto originalCameraUpVector = _camera.getUpVector();
+	const auto originalCameraYaw = _camera.getYaw();
+	const auto originalCameraPitch = _camera.getPitch();
+	const auto originalCameraPosition = _camera.getPosition();
+	
+	// Iterate through all MODEL entities
+	vector<string> savedModelEntityIDs;
+	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	{
+		// Hide non-reflected MODEL entity
+		if (!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedModelEntityIDs.push_back(entity->getID());
+		}
+	}
+
+	// Iterate through all BILLBOARD entities
+	vector<string> savedBillboardEntityIDs;
+	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	{
+		// Hide non-reflected BILLBOARD entity
+		if (!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedBillboardEntityIDs.push_back(entity->getID());
+		}
+	}
+
+	// Disable reflections
+	_renderBus.setReflectionsEnabled(false);
+
+	// Sky exposure must not appear in reflections
+	float oldLightness = 0.0f;
+	auto skyEntity = _entityBus->getMainSkyEntity();
+	if (skyEntity != nullptr)
+	{
+		oldLightness = skyEntity->getLightness();
+		skyEntity->setLightness(skyEntity->getOriginalLightness());
+	}
+
+	// Prepare camera
+	_camera.setAspectRatio(1.0f);
+	_camera.setFOV(90.0f);
+	_camera.setUpVector(Vec3(0.0f, -1.0f, 0.0f));
+
+	// Iterate through all REFLECTION entities
 	for (const auto& [keyID, entity] : _entityBus->getReflectionEntities())
 	{
-		const float originalCameraYaw = _camera.getYaw();
-		const float originalCameraPitch = _camera.getPitch();
-		const float originalCameraFOV = _camera.getFOV();
-
-		_camera.setFOV(90.0f);
-
-		for (unsigned int i = 0; i < 6; i++)
+		// Check if reflection must capture
+		if (entity->mustCapture())
 		{
-			// Start capturing reflections
-			entity->getCaptureBuffer(i).bind();
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			// Capture environment surrounding entity
+			for (unsigned int i = 0; i < 6; i++)
+			{
+				// Set camera position
+				_camera.setPosition(entity->getPosition());
 
-			// Set camera view
-			if (i == 0)
-			{
-				_camera.setYaw(-90.0f);
-			}
-			else if (i == 1)
-			{
-				_camera.setYaw(90.0f);
-			}
-			else if (i == 2)
-			{
-				_camera.setPitch(90.0f);
-			}
-			else if (i == 3)
-			{
-				_camera.setPitch(90.0f);
-			}
-			else if (i == 4)
-			{
-				_camera.setYaw(180.0f);
-			}
-			else if (i == 5)
-			{
-				_camera.setYaw(0.0f);
-			}
+				// Set camera view
+				switch (i)
+				{
+				case 0:
+				{
+					_camera.setYaw(90.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 1:
+				{
+					_camera.setYaw(-90.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 2:
+				{
+					_camera.setYaw(180.0f);
+					_camera.setPitch(90.0f);
+					break;
+				}
+				case 3:
+				{
+					_camera.setYaw(180.0f);
+					_camera.setPitch(-90.0f);
+					break;
+				}
+				case 4:
+				{
+					_camera.setYaw(180.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				case 5:
+				{
+					_camera.setYaw(0.0f);
+					_camera.setPitch(0.0f);
+					break;
+				}
+				}
 
-			// Render entities
-			_renderSkyEntity();
-			_renderTerrainEntity();
-			_renderModelEntities();
+				// Update camera
+				_camera.updateMatrices();
 
-			// Stop capturing reflections
-			entity->getCaptureBuffer(i).unbind();
+				// Update shadows
+				_shadowGenerator.updateMatrix(_renderBus);
+				_captureShadows();
+
+				// Start capturing reflections
+				entity->getCaptureBuffer(i).bind();
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+				// Render entities
+				_renderSkyEntity();
+				_renderTerrainEntity();
+				_renderModelEntities();
+
+				// Stop capturing reflections
+				entity->getCaptureBuffer(i).unbind();
+
+				// Retrieve capture buffer texture data
+				glBindTexture(GL_TEXTURE_2D, entity->getCaptureBuffer(i).getTexture(0));
+				int dataSize = (static_cast<int>(reflectionQuality) * static_cast<int>(reflectionQuality) * 3);
+				unsigned char* data = new unsigned char[dataSize];
+				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+				// Update environment map
+				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getEnvironmentMap());
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+			}
+			
+			_entityBus->getMainSkyEntity()->setCubeMap(entity->getEnvironmentMap());
 		}
-
-		TextureID texture = entity->getEnvironmentMap();
-		if (texture != 0)
-		{
-			glDeleteTextures(1, &texture);
-		}
-		texture = 0;
-		glGenTextures(1, &texture);
-		for (unsigned int i = 0; i < 6; i++)
-		{
-			glBindTexture(GL_TEXTURE_2D, entity->getCaptureBuffer(i).getTexture(0));
-			void* data = nullptr;
-			glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-
-			glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		}
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		entity->setEnvironmentMap(texture);
 	}
+
+	// Iterate through all MODEL entities
+	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	{
+		// Iterate through all saved MODEL entities
+		for (const auto& savedID : savedModelEntityIDs)
+		{
+			// Check if IDs match
+			if (entity->getID() == savedID)
+			{
+				// Show MODEL entity again
+				entity->setVisible(true);
+			}
+		}
+	}
+
+	// Iterate through all saved BILLBOARD entities
+	for (const auto& savedID : savedBillboardEntityIDs)
+	{
+		// Iterate through all BILLBOARD entities
+		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		{
+			// Check if IDs match
+			if (entity->getID() == savedID)
+			{
+				// Show BILLBOARD entity again
+				entity->setVisible(true);
+			}
+		}
+	}
+
+	// Enable reflections again
+	_renderBus.setReflectionsEnabled(true);
+
+	// Revert sky lightness
+	if (skyEntity != nullptr)
+	{
+		skyEntity->setLightness(oldLightness);
+	}
+
+	// Revert camera
+	_camera.setAspectRatio(originalCameraAspectRatio);
+	_camera.setFOV(originalCameraFOV);
+	_camera.setUpVector(originalCameraUpVector);
+	_camera.setYaw(originalCameraYaw);
+	_camera.setPitch(originalCameraPitch);
+	_camera.setPosition(originalCameraPosition);
+	_camera.updateMatrices();
+
+	// Revert shadows
+	_shadowGenerator.updateMatrix(_renderBus);
 }
 
 void MasterRenderer::_captureSceneReflections()
@@ -356,6 +473,12 @@ void MasterRenderer::_captureWaterReflections()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
+		// Stop capturing reflections
+		_waterReflectionCaptureBuffer.unbind();
+
+		// Assign texture
+		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
+
 		// Revert shadows
 		_renderBus.setShadowsEnabled(wasShadowsEnabled);
 
@@ -403,12 +526,6 @@ void MasterRenderer::_captureWaterReflections()
 				}
 			}
 		}
-
-		// Stop capturing reflections
-		_waterReflectionCaptureBuffer.unbind();
-
-		// Assign texture
-		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
 	}
 	else
 	{

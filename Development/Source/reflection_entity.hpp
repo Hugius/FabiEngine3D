@@ -15,6 +15,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void capture();
 	void setPosition(Vec3 value);
 	void move(Vec3 value);
 	void setEnvironmentMap(TextureID value);
@@ -25,6 +26,9 @@ public:
 	// Vectors
 	const Vec3 getPosition();
 
+	// Booleans
+	const bool mustCapture();
+
 	// Miscellaneous
 	const TextureID getEnvironmentMap();
 
@@ -34,6 +38,9 @@ private:
 
 	// Vectors
 	Vec3 _position = Vec3(0.0f);
+
+	// Boolean
+	bool _mustCapture = false;
 
 	// Miscellaneous
 	TextureID _environmentMap;

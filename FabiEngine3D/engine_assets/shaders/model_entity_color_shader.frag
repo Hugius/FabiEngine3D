@@ -76,6 +76,7 @@ uniform bool u_isShadowFrameRenderEnabled;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isSpotLightingEnabled;
+uniform bool u_isReflectionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
@@ -100,7 +101,7 @@ vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateSpotLighting(vec3 normal);
 vec3 calculateLights(vec3 normal);
 vec3 calculateFog(vec3 color);
-vec3 calculateSkyReflections(vec3 color, vec3 normal);
+vec3 calculateCubeMapReflections(vec3 color, vec3 normal);
 vec3 calculateSceneReflections(vec3 color);
 float calculateShadows();
 float calculateSpecularLighting(vec3 position, vec3 normal);
@@ -135,7 +136,7 @@ void main()
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += calculateDiffuseMapping();
 	primaryColor += emissionMapColor;
-	primaryColor  = calculateSkyReflections(primaryColor, normal);
+	primaryColor  = calculateCubeMapReflections(primaryColor, normal);
 	primaryColor  = calculateSceneReflections(primaryColor);
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
@@ -358,9 +359,9 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-vec3 calculateSkyReflections(vec3 color, vec3 normal)
+vec3 calculateCubeMapReflections(vec3 color, vec3 normal)
 {
-	if (u_isSkyReflective)
+	if (u_isReflectionsEnabled && u_isSkyReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = (u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f));
@@ -397,7 +398,7 @@ vec3 calculateSkyReflections(vec3 color, vec3 normal)
 
 vec3 calculateSceneReflections(vec3 color)
 {
-	if (u_isSceneReflective)
+	if (u_isReflectionsEnabled && u_isSceneReflective)
 	{
 		// Calculation reflection color
 		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);

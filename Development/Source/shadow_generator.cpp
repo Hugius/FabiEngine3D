@@ -33,28 +33,35 @@ void ShadowGenerator::unloadShadows()
 
 void ShadowGenerator::update(RenderBus& renderBus)
 {
+	if (_passedFrames >= _interval)
+	{
+		_passedFrames = 0;
+
+		updateMatrix(renderBus);
+	}
+	else
+	{
+		_passedFrames++;
+	}
+}
+
+void ShadowGenerator::updateMatrix(RenderBus& renderBus)
+{
 	if (_isFollowingCamera)
 	{
-		if (_passedFrames >= _interval)
-		{
-			_passedFrames = 0;
+		// Update eye & center
+		Vec3 cameraPos = renderBus.getCameraPosition();
+		Vec3 newEye = Vec3(cameraPos.x, 0.0f, cameraPos.z);
+		Vec3 newCenter = Vec3(cameraPos.x, 0.0f, cameraPos.z);
+		newEye += _eye;
+		newCenter += _center;
 
-			// Updated values
-			Vec3 cameraPos = renderBus.getCameraPosition();
-			Vec3 newEye = Vec3(cameraPos.x, 0.0f, cameraPos.z) + _eye;
-			Vec3 newCenter = Vec3(cameraPos.x, 0.0f, cameraPos.z) + _center;
-
-			// Apply
-			renderBus.setShadowEyePosition(newEye);
-			renderBus.setShadowAreaCenter(newCenter);
-			renderBus.setShadowAreaSize(_size);
-			renderBus.setShadowAreaReach(_reach);
-			renderBus.setShadowMatrix(_createLightSpaceMatrix(newEye, newCenter, _size, _reach));
-		}
-		else
-		{
-			_passedFrames++;
-		}
+		// Apply
+		renderBus.setShadowEyePosition(newEye);
+		renderBus.setShadowAreaCenter(newCenter);
+		renderBus.setShadowAreaSize(_size);
+		renderBus.setShadowAreaReach(_reach);
+		renderBus.setShadowMatrix(_createLightSpaceMatrix(newEye, newCenter, _size, _reach));
 	}
 	else
 	{
@@ -69,10 +76,11 @@ void ShadowGenerator::update(RenderBus& renderBus)
 Matrix44 ShadowGenerator::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
 {
 	// Matrix generation
-	Matrix44 lightView = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
-	Matrix44 lightProj = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, 0.01f, reach);
+	Matrix44 lightViewMatrix = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
+	Matrix44 lightProjectionMatrix = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, DEFAULT_NEAR_Z, reach);
 
-	return (lightProj * lightView);
+	// Return
+	return (lightProjectionMatrix * lightViewMatrix);
 }
 
 Vec3 ShadowGenerator::getEye()

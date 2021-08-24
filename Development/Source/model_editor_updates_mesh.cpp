@@ -52,7 +52,6 @@ void ModelEditor::_updateMeshMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("loadMesh")->setHoverable(!existing);
 		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
 		screen->getButton("loadEmissionMap")->setHoverable(hoverable);
 		screen->getButton("loadReflectionMap")->setHoverable(hoverable);

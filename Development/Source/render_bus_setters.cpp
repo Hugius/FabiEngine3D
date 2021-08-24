@@ -358,6 +358,11 @@ void RenderBus::setSpotLightingEnabled(bool value)
 	_isSpotLightingEnabled = value;
 }
 
+void RenderBus::setReflectionsEnabled(bool value)
+{
+	_isReflectionsEnabled = value;
+}
+
 void RenderBus::setFogEnabled(bool value)
 {
 	_isFogEnabled = value;

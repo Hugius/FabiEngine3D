@@ -45,6 +45,7 @@ void AnimationEditor::load()
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
 	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
 	_fe3d.modelEntity_setTransparent("@@grid", true);
+	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("animationID", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

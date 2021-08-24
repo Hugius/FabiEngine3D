@@ -169,7 +169,7 @@ void SkyEntityManager::update()
 
 		// Update main sky renderbus values
 		_renderBus.setSkyRotationMatrix(mainSky->getRotationMatrix());
-		_renderBus.setMainSkyReflectionCubeMap(mainSky->getCubeMap());
+		//_renderBus.setMainSkyReflectionCubeMap(mainSky->getCubeMap());
 		_renderBus.setMainSkyColor(mainSky->getColor());
 		_renderBus.setMainSkyLightness(mainSky->getLightness());
 

@@ -72,37 +72,37 @@ void MasterRenderer::_captureEnvironmentReflections()
 				{
 				case 0:
 				{
-					_camera.setYaw(90.0f);
+					_camera.setYaw(0.0f);
 					_camera.setPitch(0.0f);
 					break;
 				}
 				case 1:
 				{
-					_camera.setYaw(-90.0f);
+					_camera.setYaw(180.0f);
 					_camera.setPitch(0.0f);
 					break;
 				}
 				case 2:
 				{
-					_camera.setYaw(180.0f);
+					_camera.setYaw(90.0f);
 					_camera.setPitch(90.0f);
 					break;
 				}
 				case 3:
 				{
-					_camera.setYaw(180.0f);
+					_camera.setYaw(90.0f);
 					_camera.setPitch(-90.0f);
 					break;
 				}
 				case 4:
 				{
-					_camera.setYaw(180.0f);
+					_camera.setYaw(90.0f);
 					_camera.setPitch(0.0f);
 					break;
 				}
 				case 5:
 				{
-					_camera.setYaw(0.0f);
+					_camera.setYaw(-90.0f);
 					_camera.setPitch(0.0f);
 					break;
 				}
@@ -140,7 +140,7 @@ void MasterRenderer::_captureEnvironmentReflections()
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
 			
-			_entityBus->getMainSkyEntity()->setCubeMap(entity->getEnvironmentMap());
+			_renderBus.setMainSkyReflectionCubeMap(entity->getEnvironmentMap());
 		}
 	}
 
@@ -174,7 +174,7 @@ void MasterRenderer::_captureEnvironmentReflections()
 		}
 	}
 
-	// Enable reflections again
+	// Revert reflections
 	_renderBus.setReflectionsEnabled(true);
 
 	// Revert sky lightness
@@ -265,6 +265,9 @@ void MasterRenderer::_captureSceneReflections()
 		_renderBus.setCameraPosition(originalCameraPosition);
 		_renderBus.setCameraPitch(originalCameraPitch);
 
+		// Disable reflections
+		_renderBus.setReflectionsEnabled(false);
+
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
@@ -297,23 +300,11 @@ void MasterRenderer::_captureSceneReflections()
 		_renderBillboardEntities();
 		glDisable(GL_CLIP_DISTANCE2);
 
-		// Revert shadows
-		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+		// Stop capturing reflections
+		_sceneReflectionCaptureBuffer.unbind();
 
-		// Revert sky lightness
-		if (skyEntity != nullptr)
-		{
-			skyEntity->setLightness(oldSkyLightness);
-		}
-
-		// Look down
-		_camera.setPitch(originalCameraPitch);
-
-		// Move up
-		_camera.setPosition(originalCameraPosition);
-
-		// Update camera
-		_camera.updateMatrices();
+		// Assign texture
+		_renderBus.setSceneReflectionMap(_sceneReflectionCaptureBuffer.getTexture(0));
 
 		// Iterate through all MODEL entities
 		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
@@ -345,11 +336,26 @@ void MasterRenderer::_captureSceneReflections()
 			}
 		}
 
-		// Stop capturing reflections
-		_sceneReflectionCaptureBuffer.unbind();
+		// Look down
+		_camera.setPitch(originalCameraPitch);
 
-		// Assign texture
-		_renderBus.setSceneReflectionMap(_sceneReflectionCaptureBuffer.getTexture(0));
+		// Move up
+		_camera.setPosition(originalCameraPosition);
+
+		// Update camera
+		_camera.updateMatrices();
+
+		// Revert reflections
+		_renderBus.setReflectionsEnabled(true);
+
+		// Revert shadows
+		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+
+		// Revert sky lightness
+		if (skyEntity != nullptr)
+		{
+			skyEntity->setLightness(oldSkyLightness);
+		}
 	}
 	else
 	{
@@ -427,6 +433,9 @@ void MasterRenderer::_captureWaterReflections()
 		_renderBus.setCameraPosition(originalCameraPosition);
 		_renderBus.setCameraPitch(originalCameraPitch);
 
+		// Disable reflections
+		_renderBus.setReflectionsEnabled(false);
+
 		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
@@ -479,24 +488,6 @@ void MasterRenderer::_captureWaterReflections()
 		// Assign texture
 		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
 
-		// Revert shadows
-		_renderBus.setShadowsEnabled(wasShadowsEnabled);
-
-		// Revert sky lightness
-		if (skyEntity != nullptr)
-		{ 
-			skyEntity->setLightness(oldLightness);
-		}
-
-		// Look down
-		_camera.setPitch(originalCameraPitch);
-
-		// Move up
-		_camera.setPosition(originalCameraPosition);
-
-		// Update camera
-		_camera.updateMatrices();
-
 		// Iterate through all saved MODEL entities
 		for (const auto& savedID : savedModelEntityIDs)
 		{
@@ -525,6 +516,27 @@ void MasterRenderer::_captureWaterReflections()
 					entity->setVisible(true);
 				}
 			}
+		}
+
+		// Look down
+		_camera.setPitch(originalCameraPitch);
+
+		// Move up
+		_camera.setPosition(originalCameraPosition);
+
+		// Update camera
+		_camera.updateMatrices();
+
+		// Revert reflections
+		_renderBus.setReflectionsEnabled(true);
+
+		// Revert shadows
+		_renderBus.setShadowsEnabled(wasShadowsEnabled);
+
+		// Revert sky lightness
+		if (skyEntity != nullptr)
+		{ 
+			skyEntity->setLightness(oldLightness);
 		}
 	}
 	else

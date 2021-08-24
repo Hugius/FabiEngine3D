@@ -372,7 +372,7 @@ vec3 calculateCubeMapReflections(vec3 color, vec3 normal)
 			// Calculate
 			float mixValue        = clamp(u_skyMixValue, 0.0, 1.0f);
 			float lightness       = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
-			vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+			vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDirection = reflect(viewDirection, normal);
 			vec3 mainSkyColor     = texture(u_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb;
 			vec3 mixSkyColor      = texture(u_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDirection, 1.0f))).rgb;

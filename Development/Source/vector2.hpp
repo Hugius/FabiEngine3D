@@ -48,7 +48,6 @@ struct Vec2 final
 	const Vec2 operator/(const float& value) const;
 
 	// Floats
-	const float dot(const Vec2& v);
 	const float getMagnitude();
 
 	// Booleans

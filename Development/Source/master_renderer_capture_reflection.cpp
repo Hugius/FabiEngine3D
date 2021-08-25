@@ -152,6 +152,9 @@ void MasterRenderer::_captureCubeReflections()
 				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
+
+			// Miscellaneous
+			entity->setCaptured();
 		}
 	}
 

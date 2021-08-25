@@ -39,7 +39,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
+						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, tan(angle)));
 					}
 				}
@@ -49,7 +49,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
+						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, sin(angle)));
 					}
 				}
@@ -59,7 +59,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
+						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, cos(angle)));
 					}
 				}
@@ -70,7 +70,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = atan(arguments[0].getDecimal());
-						float result = _fe3d.misc_radiansToDegrees(angle);
+						float result = _fe3d.misc_convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
@@ -81,7 +81,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = asin(arguments[0].getDecimal());
-						float result = _fe3d.misc_radiansToDegrees(angle);
+						float result = _fe3d.misc_convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
@@ -92,7 +92,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = acos(arguments[0].getDecimal());
-						float result = _fe3d.misc_radiansToDegrees(angle);
+						float result = _fe3d.misc_convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
@@ -103,7 +103,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
-						float result = _fe3d.misc_radiansToDegrees(angle);
+						float result = _fe3d.misc_convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
@@ -272,17 +272,8 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 
 					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						// Save positions
-						Vec3 firstPos = arguments[0].getVec3();
-						Vec3 secondPos = arguments[1].getVec3();
-
-						// Calculate distances
-						float xDistance = fabsf(firstPos.x - secondPos.x);
-						float yDistance = fabsf(firstPos.y - secondPos.y);
-						float zDistance = fabsf(firstPos.z - secondPos.z);
-
 						// Calculate absolute distance
-						float result = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+						float result = Math::calculateAbsoluteDistance(arguments[0].getVec3(), arguments[1].getVec3());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}

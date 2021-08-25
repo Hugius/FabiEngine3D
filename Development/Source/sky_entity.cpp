@@ -15,7 +15,7 @@ void SkyEntity::updateRotation()
 	if (_rotationSpeed != 0.0f)
 	{
 		_rotation += _rotationSpeed;
-		_rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(_rotation));
+		_rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(_rotation));
 	}
 }
 

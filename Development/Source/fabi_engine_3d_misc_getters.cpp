@@ -30,14 +30,14 @@ const float FabiEngine3D::misc_getPI()
 	return Math::getPI();
 }
 
-const float FabiEngine3D::misc_degreesToRadians(float angle)
+const float FabiEngine3D::misc_convertToRadians(float degrees)
 {
-	return Math::degreesToRadians(angle);
+	return Math::convertToRadians(degrees);
 }
 
-const float FabiEngine3D::misc_radiansToDegrees(float angle)
+const float FabiEngine3D::misc_convertToDegrees(float radians)
 {
-	return Math::radiansToDegrees(angle);
+	return Math::convertToDegrees(radians);
 }
 
 const float FabiEngine3D::misc_stopMillisecondTimer()

@@ -32,9 +32,9 @@ void ModelEntity::updateModelMatrix()
 
 		// Base rotation matrix
 		Matrix44 baseRotationMatrix = Matrix44::createRotation(
-			Math::degreesToRadians(_baseRotation.x),
-			Math::degreesToRadians(_baseRotation.y),
-			Math::degreesToRadians(_baseRotation.z));
+			Math::convertToRadians(_baseRotation.x),
+			Math::convertToRadians(_baseRotation.y),
+			Math::convertToRadians(_baseRotation.z));
 		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationMatrix;
 
 		// Base rotation origin matrix - translate back
@@ -47,9 +47,9 @@ void ModelEntity::updateModelMatrix()
 
 		// Rotation matrix
 		Matrix44 rotationMatrix = Matrix44::createRotation(
-			Math::degreesToRadians(_parts[i].localRotation.x),
-			Math::degreesToRadians(_parts[i].localRotation.y),
-			Math::degreesToRadians(_parts[i].localRotation.z));
+			Math::convertToRadians(_parts[i].localRotation.x),
+			Math::convertToRadians(_parts[i].localRotation.y),
+			Math::convertToRadians(_parts[i].localRotation.z));
 		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationMatrix;
 
 		// Rotation origin matrix - translate back

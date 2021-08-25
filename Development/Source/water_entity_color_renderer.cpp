@@ -67,7 +67,7 @@ void WaterEntityColorRenderer::unbind()
 	_shader.unbind();
 }
 
-void WaterEntityColorRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
+void WaterEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
 	// Compose a map of all visible lights
 	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;

@@ -24,11 +24,6 @@ Vec2::Vec2(float x, float y) {
 	this->y = y;
 }
 
-const float Vec2::dot(const Vec2 & v)
-{
-	return (this->x * v.x + this->y * v.y);
-}
-
 const float Vec2::getMagnitude()
 {
 	return sqrt(this->x * this->x + this->y * this->y);

@@ -822,8 +822,8 @@ public:
 	const float misc_getAspectRatio();
 	const float misc_getFPS();
 	const float misc_getPI();
-	const float misc_degreesToRadians(float angle);
-	const float misc_radiansToDegrees(float angle);
+	const float misc_convertToRadians(float degrees);
+	const float misc_convertToDegrees(float radians);
 	const float misc_stopMillisecondTimer();
 	const float misc_getLevelOfDetailDistance();
 	const unsigned int misc_getTriangleCount();

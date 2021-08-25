@@ -15,6 +15,7 @@ public:
 
 	// Voids
 	void capture();
+	void setCaptured();
 	void setPosition(Vec3 value);
 	void move(Vec3 value);
 	void setCubeMap(TextureID value);
@@ -34,6 +35,7 @@ private:
 
 	// Boolean
 	bool _mustCapture = false;
+	bool _isCaptured = false;
 
 	// Miscellaneous
 	TextureID _cubeMap;

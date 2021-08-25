@@ -31,8 +31,8 @@ void MasterRenderer::_renderTerrainEntity()
 		// Bind
 		_terrainEntityColorRenderer.bind();
 
-		// Render LIGHT entities
-		_terrainEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
+		// Process LIGHT entities
+		_terrainEntityColorRenderer.processLightEntities(_entityBus->getLightEntities());
 
 		// Render TERRAIN entity
 		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
@@ -50,8 +50,8 @@ void MasterRenderer::_renderWaterEntity()
 		// Bind
 		_waterEntityColorRenderer.bind();
 
-		// Render LIGHT entities
-		_waterEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
+		// Process LIGHT entities
+		_waterEntityColorRenderer.processLightEntities(_entityBus->getLightEntities());
 
 		// Render WATER entity
 		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
@@ -72,8 +72,8 @@ void MasterRenderer::_renderModelEntities()
 		// Bind
 		_modelEntityColorRenderer.bind();
 
-		// Render lights
-		_modelEntityColorRenderer.renderLightEntities(_entityBus->getLightEntities());
+		// Process LIGHT entities
+		_modelEntityColorRenderer.processLightEntities(_entityBus->getLightEntities());
 
 		// Render MODEL entities
 		for (const auto& [keyID, modelEntity] : modelEntities)
@@ -98,7 +98,7 @@ void MasterRenderer::_renderModelEntities()
 				lodEntity->updateModelMatrix();
 
 				// Render LOD entity
-				_modelEntityColorRenderer.render(lodEntity);
+				_modelEntityColorRenderer.render(lodEntity, _entityBus->getReflectionEntities());
 
 				// Revert to original transformation
 				lodEntity->setPosition(originalPosition);
@@ -109,7 +109,7 @@ void MasterRenderer::_renderModelEntities()
 			}
 			else // Render high-quality entity
 			{
-				_modelEntityColorRenderer.render(modelEntity);
+				_modelEntityColorRenderer.render(modelEntity, _entityBus->getReflectionEntities());
 			}
 		}
 

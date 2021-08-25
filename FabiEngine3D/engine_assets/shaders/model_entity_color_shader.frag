@@ -92,8 +92,8 @@ vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateSpotLighting(vec3 normal);
 vec3 calculateLights(vec3 normal);
 vec3 calculateFog(vec3 color);
-vec3 calculatePlanarReflections(vec3 color);
 vec3 calculateCubeReflections(vec3 color, vec3 normal);
+vec3 calculatePlanarReflections(vec3 color);
 float calculateSpecularLighting(vec3 position, vec3 normal);
 float calculateShadows();
 
@@ -350,34 +350,6 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-vec3 calculatePlanarReflections(vec3 color)
-{
-	if (u_isReflectionsEnabled && u_isPlanarReflective)
-	{
-		// Calculation reflection color
-		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);
-		
-		// Check if current texel allows for reflection
-		if (reflectionMapColor != vec3(0.0f))
-		{
-			// Calculate
-			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
-			vec2 texCoords       = vec2(ndc.x, -ndc.y);
-			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
-			vec3 mixedColor      = mix(color.rgb, reflectionColor, 0.5f);
-        
-        	// Return
-			return mixedColor.rgb;
-		}
-
-		return color;
-	}
-	else
-	{
-		return color;
-	}
-}
-
 vec3 calculateCubeReflections(vec3 color, vec3 normal)
 {
 	if (u_isReflectionsEnabled && u_isCubeReflective)
@@ -400,6 +372,34 @@ vec3 calculateCubeReflections(vec3 color, vec3 normal)
 		}
 
 		// Return
+		return color;
+	}
+	else
+	{
+		return color;
+	}
+}
+
+vec3 calculatePlanarReflections(vec3 color)
+{
+	if (u_isReflectionsEnabled && u_isPlanarReflective)
+	{
+		// Calculation reflection color
+		vec3 reflectionMapColor = u_hasReflectionMap ? texture(u_reflectionMap, f_uv).rgb : vec3(0.0f);
+		
+		// Check if current texel allows for reflection
+		if (reflectionMapColor != vec3(0.0f))
+		{
+			// Calculate
+			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
+			vec2 texCoords       = vec2(ndc.x, -ndc.y);
+			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
+			vec3 mixedColor      = mix(color.rgb, reflectionColor, 0.5f);
+        
+        	// Return
+			return mixedColor.rgb;
+		}
+
 		return color;
 	}
 	else

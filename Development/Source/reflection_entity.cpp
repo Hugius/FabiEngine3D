@@ -6,6 +6,11 @@ void ReflectionEntity::capture()
 	_mustCapture = true;
 }
 
+void ReflectionEntity::setCaptured()
+{
+	_mustCapture = false;
+}
+
 void ReflectionEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -28,9 +33,7 @@ const Vec3 ReflectionEntity::getPosition()
 
 const bool ReflectionEntity::mustCapture()
 {
-	bool temp = _mustCapture;
-	_mustCapture = false;
-	return temp;
+	return _mustCapture;
 }
 
 const TextureID ReflectionEntity::getCubeMap()

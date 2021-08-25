@@ -1,18 +1,34 @@
 #include "mathematics.hpp"
+#include "mathematics.hpp"
 
-float Math::degreesToRadians(float angle)
+float Math::calculateDotProduct(Vec2 firstVector, Vec2 secondVector)
 {
-	return (angle * DEG2RAD);
+	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y));
 }
 
-float Math::radiansToDegrees(float angle)
+float Math::calculateDotProduct(Vec3 firstVector, Vec3 secondVector)
 {
-	return (angle * RAD2DEG);
+	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z));
+}
+
+float Math::calculateDotProduct(Vec4 firstVector, Vec4 secondVector)
+{
+	return ((firstVector.x * secondVector.x) + (firstVector.y * secondVector.y) + (firstVector.z * secondVector.z) + (firstVector.w * secondVector.w));
 }
 
 float Math::getPI()
 {
 	return PI;
+}
+
+float Math::convertToRadians(float angle)
+{
+	return (angle * DEG2RAD);
+}
+
+float Math::convertToDegrees(float angle)
+{
+	return (angle * RAD2DEG);
 }
 
 float Math::calculateReferenceAngle(float initialAngle)
@@ -33,4 +49,13 @@ float Math::calculateReferenceAngle(float initialAngle)
 	{
 		return 360.0f - initialAngle;
 	}
+}
+
+float Math::calculateAbsoluteDistance(Vec3 firstPosition, Vec3 secondPosition)
+{
+	float xDistance = fabsf(firstPosition.x - secondPosition.x);
+	float yDistance = fabsf(firstPosition.y - secondPosition.y);
+	float zDistance = fabsf(firstPosition.z - secondPosition.z);
+
+	return sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
 }

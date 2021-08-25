@@ -54,7 +54,6 @@ struct Vec3 final
 	const Vec3 operator-() const;
 
 	// Floats
-	const float dot(const Vec3& vector);
 	const float getMagnitude();
 
 	// Booleans

@@ -38,9 +38,9 @@ void SceneEditor::_updateSettingsMenu()
 			{
 				_gui.getGlobalScreen()->createValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
-			else if (screen->getButton("reflectionHeight")->isHovered())
+			else if (screen->getButton("planarHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("reflectionHeight", "Planar Reflection Height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("planarHeight", "Planar Reflection Height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -54,7 +54,7 @@ void SceneEditor::_updateSettingsMenu()
 			lodDistance = max(0.0f, lodDistance);
 			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("planarHeight", reflectionHeight, {}))
 		{
 			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}

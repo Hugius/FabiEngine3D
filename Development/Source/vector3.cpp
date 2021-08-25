@@ -131,11 +131,6 @@ const Vec3 Vec3::cross(const Vec3& vector) const
 	return crossVector;
 }
 
-const float Vec3::dot(const Vec3& vector)
-{
-	return (this->x * vector.x + this->y * vector.y + this->z * vector.z);
-}
-
 const float Vec3::getMagnitude()
 {
 	return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);

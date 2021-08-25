@@ -160,9 +160,9 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_thirdPersonDistance = clamp(_thirdPersonDistance, MIN_THIRD_PERSON_DISTANCE, MAX_THIRD_PERSON_DISTANCE);
 
 		// Calculate position multipliers
-		float xMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * sin(Math::degreesToRadians(_thirdPersonYaw));
-		float yMultiplier = sin(Math::degreesToRadians(_thirdPersonPitch));
-		float zMultiplier = cos(Math::degreesToRadians(_thirdPersonPitch)) * cos(Math::degreesToRadians(_thirdPersonYaw));
+		float xMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * sin(Math::convertToRadians(_thirdPersonYaw));
+		float yMultiplier = sin(Math::convertToRadians(_thirdPersonPitch));
+		float zMultiplier = cos(Math::convertToRadians(_thirdPersonPitch)) * cos(Math::convertToRadians(_thirdPersonYaw));
 
 		// Limit view distance
 		_thirdPersonDistance = max(0.0f, _thirdPersonDistance);
@@ -173,7 +173,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_position.z = _thirdPersonLookat.z + (_thirdPersonDistance * zMultiplier);
 
 		// Set view angles
-		_yaw = Math::radiansToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
+		_yaw = Math::convertToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
 		_pitch = -(_thirdPersonPitch);
 
 		// Spawn mouse in middle of screen
@@ -196,9 +196,9 @@ void Camera::update(Ivec2 lastCursorPosition)
 void Camera::updateMatrices()
 {
 	// Lookat front vector
-	_frontVector.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
-	_frontVector.y = sin(Math::degreesToRadians(_pitch));
-	_frontVector.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
+	_frontVector.x = cos(Math::convertToRadians(_pitch)) * cos(Math::convertToRadians(_yaw));
+	_frontVector.y = sin(Math::convertToRadians(_pitch));
+	_frontVector.z = cos(Math::convertToRadians(_pitch)) * sin(Math::convertToRadians(_yaw));
 	_frontVector.normalize();
 
 	// Calculate the view matrix input
@@ -209,7 +209,7 @@ void Camera::updateMatrices()
 	_viewMatrix = Matrix44::createView(_position, _position + _frontVector, _upVector);
 
 	// Projection matrix
-	_projectionMatrix = Matrix44::createProjection(Math::degreesToRadians(_fov), _aspectRatio, _nearZ, _farZ);
+	_projectionMatrix = Matrix44::createProjection(Math::convertToRadians(_fov), _aspectRatio, _nearZ, _farZ);
 
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);

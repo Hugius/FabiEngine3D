@@ -24,7 +24,7 @@ void TerrainEntityColorRenderer::bind()
 	_shader.uploadUniform("u_spotLightingColor", _renderBus.getSpotLightingColor());
 	_shader.uploadUniform("u_spotLightingIntensity", _renderBus.getSpotLightingIntensity());
 	_shader.uploadUniform("u_maxSpotLightingDistance", _renderBus.getMaxSpotLightingDistance());
-	_shader.uploadUniform("u_maxSpotLightingAngle", cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightingAngle())));
+	_shader.uploadUniform("u_maxSpotLightingAngle", cosf(Math::convertToRadians(_renderBus.getMaxSpotLightingAngle())));
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
@@ -71,7 +71,7 @@ void TerrainEntityColorRenderer::unbind()
 	_shader.unbind();
 }
 
-void TerrainEntityColorRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
+void TerrainEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
 	// Compose a map of all visible lights
 	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;

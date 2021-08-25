@@ -14,8 +14,8 @@ void Camera::moveFollowX(float value)
 void Camera::moveFollowZ(float value)
 {
 	Vec3 tempFront = _frontVector;
-	tempFront.x = cos(Math::degreesToRadians(_yaw));
-	tempFront.z = sin(Math::degreesToRadians(_yaw));
+	tempFront.x = cos(Math::convertToRadians(_yaw));
+	tempFront.z = sin(Math::convertToRadians(_yaw));
 	_position.x += (tempFront.x * value);
 	_position.z += (tempFront.z * value);
 }
@@ -83,7 +83,7 @@ void Camera::disableThirdPersonView()
 
 void Camera::setFOV(float value)
 {
-	_viewMatrix.m[3][2] = _frontVector.dot(_position);
+	_viewMatrix.m[3][2] = Math::calculateDotProduct(_frontVector, _position);
 	_fov = value;
 }
 

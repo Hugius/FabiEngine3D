@@ -145,12 +145,9 @@ void ModelEntityManager::update()
 				// Calculate absolute distance between camera and entity
 				Vec3 camPos = _renderBus.getCameraPosition();
 				Vec3 entityPos = entity->getPosition();
-				float xDistance = fabsf(camPos.x - entityPos.x);
-				float yDistance = fabsf(camPos.y - entityPos.y);
-				float zDistance = fabsf(camPos.z - entityPos.z);
-				float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+				auto absolsuteDistance = Math::calculateAbsoluteDistance(camPos, entityPos);
 
-				// Check if farther than LOD distance
+				// Check if entity is farther than LOD distance
 				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}

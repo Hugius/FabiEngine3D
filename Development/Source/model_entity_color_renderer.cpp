@@ -23,7 +23,7 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_spotLightingColor", _renderBus.getSpotLightingColor());
 	_shader.uploadUniform("u_spotLightingIntensity", _renderBus.getSpotLightingIntensity());
 	_shader.uploadUniform("u_maxSpotLightingDistance", _renderBus.getMaxSpotLightingDistance());
-	_shader.uploadUniform("u_maxSpotLightingAngle", cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightingAngle())));
+	_shader.uploadUniform("u_maxSpotLightingAngle", cosf(Math::convertToRadians(_renderBus.getMaxSpotLightingAngle())));
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
@@ -59,8 +59,6 @@ void ModelEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Bind textures
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getPlanarReflectionMap());
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
 	glActiveTexture(GL_TEXTURE2);
@@ -70,8 +68,6 @@ void ModelEntityColorRenderer::bind()
 void ModelEntityColorRenderer::unbind()
 {
 	// Unbind textures
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE2);
@@ -91,7 +87,7 @@ void ModelEntityColorRenderer::unbind()
 	_shader.unbind();
 }
 
-void ModelEntityColorRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
+void ModelEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
 	// Compose a map of all visible lights
 	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
@@ -120,7 +116,7 @@ void ModelEntityColorRenderer::renderLightEntities(const unordered_map<string, s
 	_shader.uploadUniform("u_lightCount", static_cast<int>(visibleEntities.size()));
 }
 
-void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
+void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities)
 {
 	if (entity->isVisible())
 	{
@@ -136,8 +132,21 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 			glEnable(GL_CULL_FACE);
 		}
 
-		// View matrix
-		auto viewMatrix = (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix());
+		// Choose reflection entity
+		string closestReflectionEntityID = "";
+		float closestDistance = 0.0f;
+		for (const auto& [keyID, reflectionEntity] : reflectionEntities)
+		{
+			if (reflectionEntity->isVisible())
+			{
+				auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
+				if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
+				{
+					closestReflectionEntityID = reflectionEntity->getID();
+					closestDistance = absoluteDistance;
+				}
+			}
+		}
 
 		// Shader uniforms
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
@@ -152,10 +161,21 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
-		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_viewMatrix", viewMatrix);
+		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
+		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+
+		// Bind reflection map
+		glActiveTexture(GL_TEXTURE0);
+		if (!closestReflectionEntityID.empty())
+		{
+			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(closestReflectionEntityID)->getCubeMap());
+		}
+		else
+		{
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
 
 		// Iterate through parts
 		for (const auto& partID : entity->getPartIDs())
@@ -243,6 +263,10 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Unbind buffer
 			glBindVertexArray(0);
 		}
+
+		// Unbind reflection map
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Disable face culling
 		if (entity->isFaceCulled())

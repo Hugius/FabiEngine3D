@@ -1,4 +1,5 @@
 #include "matrix44.hpp"
+#include "mathematics.hpp"
 
 const float Matrix44::getDeterminant()
 {
@@ -255,7 +256,7 @@ const Matrix44 Matrix44::createOrtho(float left, float right, float bottom, floa
 const Matrix44 Matrix44::createProjection(float fovY, float aspect, float nearZ, float farZ)
 {
 	// Pre-calculate
-	float tanHalfFov = tan(fovY / 2.0f);
+	const float tanHalfFov = tan(fovY / 2.0f);
 
 	// Create projection matrix
 	Matrix44 newMatrix(0.0f);
@@ -264,6 +265,8 @@ const Matrix44 Matrix44::createProjection(float fovY, float aspect, float nearZ,
 	newMatrix.m[2][2] = -((farZ + nearZ) / (farZ - nearZ));
 	newMatrix.m[2][3] = -1.0f;
 	newMatrix.m[3][2] = -((2.0f * farZ * nearZ) / (farZ - nearZ));
+
+	// Return
 	return newMatrix;
 }
 
@@ -285,11 +288,13 @@ const Matrix44 Matrix44::createView
 	newMatrix.m[0][1] = upVector.x;
 	newMatrix.m[1][1] = upVector.y;
 	newMatrix.m[2][1] = upVector.z;
-	newMatrix.m[0][2] = -frontVector.x;
-	newMatrix.m[1][2] = -frontVector.y;
-	newMatrix.m[2][2] = -frontVector.z;
-	newMatrix.m[3][0] = -(rightVector.dot(eye));
-	newMatrix.m[3][1] = -(upVector.dot(eye));
-	newMatrix.m[3][2] = frontVector.dot(eye);
+	newMatrix.m[0][2] = -(frontVector.x);
+	newMatrix.m[1][2] = -(frontVector.y);
+	newMatrix.m[2][2] = -(frontVector.z);
+	newMatrix.m[3][0] = -(Math::calculateDotProduct(rightVector, eye));
+	newMatrix.m[3][1] = -(Math::calculateDotProduct(upVector, eye));
+	newMatrix.m[3][2] = Math::calculateDotProduct(frontVector, eye);
+
+	// Return
 	return newMatrix;
 }

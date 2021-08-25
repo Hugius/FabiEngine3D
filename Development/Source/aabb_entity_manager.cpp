@@ -149,17 +149,17 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
-								rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(roundedRotation));
+								rotationMatrix = Matrix44::createRotationX(Math::convertToRadians(roundedRotation));
 								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
 							}
 							else if (rotationDirection == Direction::Y)
 							{
-								rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(roundedRotation));
+								rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(roundedRotation));
 								yOffset = 0.0f;
 							}
 							else if (rotationDirection == Direction::Z)
 							{
-								rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(roundedRotation));
+								rotationMatrix = Matrix44::createRotationZ(Math::convertToRadians(roundedRotation));
 								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.z) / 2.0f);
 							}
 
@@ -208,22 +208,22 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					// Determine direction to use
 					if (refRotationX > refRotationY && refRotationX > refRotationZ)
 					{
-						const auto xSinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
-						const auto xCosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
+						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(rotationX)));
+						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(rotationX)));
 						newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
 						newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
 					}
 					else if (refRotationY > refRotationX && refRotationY > refRotationZ)
 					{
-						const auto ySinRotation = fabsf(sinf(Math::degreesToRadians(rotationY)));
-						const auto yCosRotation = fabsf(cosf(Math::degreesToRadians(rotationY)));
+						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(rotationY)));
+						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(rotationY)));
 						newAabbSize.x = (yCosRotation * parentSize.x);
 						newAabbSize.z = (ySinRotation * parentSize.x);
 					}
 					else if (refRotationZ > refRotationX && refRotationZ > refRotationY)
 					{
-						const auto zSinRotation = fabsf(sinf(Math::degreesToRadians(rotationZ)));
-						const auto zCosRotation = fabsf(cosf(Math::degreesToRadians(rotationZ)));
+						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(rotationZ)));
+						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(rotationZ)));
 						newAabbSize.y = (zCosRotation * parentSize.y);
 						newAabbSize.z = (zSinRotation * parentSize.y);
 					}

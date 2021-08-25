@@ -48,11 +48,6 @@ void SceneEditor::_updateMiscellaneous()
 				_fe3d.misc_enableDebugRendering();
 			}
 		}
-
-		if (_fe3d.input_isKeyPressed(InputType::KEY_C))
-		{
-			_fe3d.reflectionEntity_capture("test");
-		}
 	}
 
 	// Disable terrain raycast pointing

@@ -16,19 +16,9 @@ void ReflectionEntity::move(Vec3 value)
 	_position += value;
 }
 
-void ReflectionEntity::setEnvironmentMap(TextureID value)
+void ReflectionEntity::setCubeMap(TextureID value)
 {
-	_environmentMap = value;
-}
-
-CaptureBuffer& ReflectionEntity::getCaptureBuffer(unsigned int index)
-{
-	if (index > 5)
-	{
-		Logger::throwError("ReflectionEntity::getCaptureBuffer");
-	}
-
-	return _captureBuffers[index];
+	_cubeMap = value;
 }
 
 const Vec3 ReflectionEntity::getPosition()
@@ -43,7 +33,7 @@ const bool ReflectionEntity::mustCapture()
 	return temp;
 }
 
-const TextureID ReflectionEntity::getEnvironmentMap()
+const TextureID ReflectionEntity::getCubeMap()
 {
-	return _environmentMap;
+	return _cubeMap;
 }

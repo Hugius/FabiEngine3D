@@ -316,7 +316,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Reflection height
-	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << endl;
+	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
 
 	// Editor camera speed
 	file << "EDITOR_SPEED " << _editorSpeed << endl;

@@ -4,14 +4,13 @@
 #include "image_entity.hpp"
 #include "capture_buffer.hpp"
 #include "blur_direction.hpp"
-#include "blur_type.hpp"
 
 class BlurRenderer final : public BaseRenderer
 {
 public:
 	using BaseRenderer::BaseRenderer;
 
-	void loadCaptureBuffer(BlurType type, unsigned int blurSize);
+	void loadCaptureBuffer(Ivec2 bufferSize);
 	void bind() override;
 	void unbind() override;
 
@@ -19,8 +18,6 @@ public:
 
 private:
 	void _render(const shared_ptr<ImageEntity> entity, TextureID texture);
-
-	BlurType _type;
 
 	CaptureBuffer _blurCaptureBuffer;
 };

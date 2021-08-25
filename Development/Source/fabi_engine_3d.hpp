@@ -638,11 +638,11 @@ public:
 	const bool music_isPaused();
 
 	// Graphics interface - setters
-	void gfx_setSceneReflectionHeight(float height);
+	void gfx_setPlanarReflectionHeight(float height);
 	void gfx_setAnisotropicFilteringQuality(int quality);
-	void gfx_setShadowQuality(int quality);
 	void gfx_setReflectionQuality(int quality);
 	void gfx_setRefractionQuality(int quality);
+	void gfx_setShadowQuality(int quality);
 	void gfx_enableAmbientLighting(Vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity);
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
@@ -683,7 +683,7 @@ public:
 	const float gfx_getFogMinDistance();
 	const float gfx_getFogMaxDistance();
 	const float gfx_getFogThickness();
-	const float gfx_getSceneReflectionHeight();
+	const float gfx_getPlanarReflectionHeight();
 	const float gfx_getShadowSize();
 	const float gfx_getShadowReach();
 	const float gfx_getShadowLightness();

@@ -5,19 +5,9 @@
 using std::max;
 using std::clamp;
 
-void RenderBus::setMainSkyReflectionCubeMap(TextureID value)
+void RenderBus::setPlanarReflectionMap(TextureID value)
 {
-	_mainSkyReflectionCubeMap = value;
-}
-
-void RenderBus::setMixSkyReflectionCubeMap(TextureID value)
-{
-	_mixSkyReflectionCubeMap = value;
-}
-
-void RenderBus::setSceneReflectionMap(TextureID value)
-{
-	_sceneReflectionMap = value;
+	_planarReflectionMap = value;
 }
 
 void RenderBus::setWaterReflectionMap(TextureID value)
@@ -85,11 +75,6 @@ void RenderBus::setProjectionMatrix(const Matrix44 value)
 	_projectionMatrix = value;
 }
 
-void RenderBus::setSkyRotationMatrix(const Matrix44 value)
-{
-	_skyRotationMatrix = value;
-}
-
 void RenderBus::setShadowMatrix(const Matrix44 value)
 {
 	_shadowMatrix = value;
@@ -155,19 +140,9 @@ void RenderBus::setFlareSourcePosition(Vec3 value)
 	_flareSourcePosition = value;
 }
 
-void RenderBus::setMainSkyColor(Vec3 value)
+void RenderBus::setPlanarReflectionHeight(float value)
 {
-	_mainSkyColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
-}
-
-void RenderBus::setMixSkyColor(Vec3 value)
-{
-	_mixSkyColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
-}
-
-void RenderBus::setSceneReflectionHeight(float value)
-{
-	_sceneReflectionHeight = value;
+	_planarReflectionHeight = value;
 }
 
 void RenderBus::setShadowAreaSize(float value)
@@ -210,19 +185,9 @@ void RenderBus::setMotionBlurMixValue(float value)
 	_motionBlurMixValue = clamp(value, 0.0f, 1.0f);
 }
 
-void RenderBus::setMainSkyLightness(float value)
-{
-	_mainSkyLightness = max(0.0f, value);
-}
-
-void RenderBus::setMixSkyLightness(float value)
-{
-	_mixSkyLightness = max(0.0f, value);
-}
-
 void RenderBus::setSkyMixValue(float value)
 {
-	_skyMixValue = clamp(value, 0.0f, 1.0f);
+	_skyMixValue = value;
 }
 
 void RenderBus::setMaxSpotLightingAngle(float value)

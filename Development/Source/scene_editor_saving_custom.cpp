@@ -542,7 +542,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
 
 	// Reflection height
-	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getSceneReflectionHeight() << endl;
+	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
 
 	// Check if allowed to save
 	if (_hasCustomSceneGraphics)

@@ -2,6 +2,6 @@
 
 enum class ReflectionType
 {
-	SKY,
-	SCENE
+	CUBE,
+	PLANAR
 };

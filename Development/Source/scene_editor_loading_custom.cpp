@@ -578,7 +578,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			iss >> reflectionHeight;
 
 			// Set height
-			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
+			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}
 		else if (lineType == "GRAPHICS_SHADOWS")
 		{

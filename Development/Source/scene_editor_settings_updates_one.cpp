@@ -12,7 +12,7 @@ void SceneEditor::_updateSettingsMenu()
 	{
 		// Temporary values
 		auto lodDistance = _fe3d.misc_getLevelOfDetailDistance();
-		auto reflectionHeight = _fe3d.gfx_getSceneReflectionHeight();
+		auto reflectionHeight = _fe3d.gfx_getPlanarReflectionHeight();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -40,7 +40,7 @@ void SceneEditor::_updateSettingsMenu()
 			}
 			else if (screen->getButton("reflectionHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("reflectionHeight", "Scene reflection height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("reflectionHeight", "Planar Reflection Height", reflectionHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -56,7 +56,7 @@ void SceneEditor::_updateSettingsMenu()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("reflectionHeight", reflectionHeight, {}))
 		{
-			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
+			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}
 	}
 }

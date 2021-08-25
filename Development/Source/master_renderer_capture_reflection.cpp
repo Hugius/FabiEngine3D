@@ -1,8 +1,14 @@
 #include "master_renderer.hpp"
 #include "render_bus.hpp"
 
-void MasterRenderer::_captureEnvironmentReflections()
+void MasterRenderer::_captureCubeReflections()
 {
+	// Check if no cube reflections needed
+	if (_entityBus->getReflectionEntities().empty())
+	{
+		return;
+	}
+
 	// Temporary values
 	auto reflectionQuality = _renderBus.getReflectionQuality();
 
@@ -68,7 +74,7 @@ void MasterRenderer::_captureEnvironmentReflections()
 		// Check if reflection must capture
 		if (entity->mustCapture())
 		{
-			// Capture environment surrounding entity
+			// Capture environment around entity
 			for (unsigned int i = 0; i < 6; i++)
 			{
 				// Set camera position
@@ -123,7 +129,7 @@ void MasterRenderer::_captureEnvironmentReflections()
 				_captureShadows();
 
 				// Start capturing reflections
-				entity->getCaptureBuffer(i).bind();
+				_cubeReflectionCaptureBuffer.bind();
 				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 				// Render entities
@@ -132,22 +138,20 @@ void MasterRenderer::_captureEnvironmentReflections()
 				_renderModelEntities();
 
 				// Stop capturing reflections
-				entity->getCaptureBuffer(i).unbind();
+				_cubeReflectionCaptureBuffer.unbind();
 
 				// Retrieve capture buffer texture data
-				glBindTexture(GL_TEXTURE_2D, entity->getCaptureBuffer(i).getTexture(0));
+				glBindTexture(GL_TEXTURE_2D, _cubeReflectionCaptureBuffer.getTexture(0));
 				int dataSize = (static_cast<int>(reflectionQuality) * static_cast<int>(reflectionQuality) * 3);
 				unsigned char* data = new unsigned char[dataSize];
 				glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-				// Update environment map
-				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getEnvironmentMap());
+				// Update cube map
+				glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap());
 				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + static_cast<int>(i), 0, GL_RGB, reflectionQuality, reflectionQuality, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			}
-			
-			_renderBus.setMainSkyReflectionCubeMap(entity->getEnvironmentMap());
 		}
 	}
 
@@ -207,163 +211,162 @@ void MasterRenderer::_captureEnvironmentReflections()
 	_renderBus.setShadowMatrix(originalShadowMatrix);
 }
 
-void MasterRenderer::_captureSceneReflections()
+void MasterRenderer::_capturePlanarReflections()
 {
 	// Search for any reflective model entity
 	bool anyReflectiveModelFound = false;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
+		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 		{
 			anyReflectiveModelFound = true;
 			break;
 		}
 	}
 
-	// Check if needed to capture scene
-	if (anyReflectiveModelFound)
+	// Check if no planar reflections needed
+	if (!anyReflectiveModelFound)
 	{
-		// Calculate distance between camera and reflection surface
-		float cameraDistance = (_camera.getPosition().y - _renderBus.getSceneReflectionHeight());
+		_renderBus.setPlanarReflectionMap(0);
+		return;
+	}
 
-		// Start capturing reflections
-		_sceneReflectionCaptureBuffer.bind();
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// Calculate distance between camera and reflection surface
+	float cameraDistance = (_camera.getPosition().y - _renderBus.getPlanarReflectionHeight());
 
-		// Iterate through all MODEL entities
-		vector<string> savedModelEntityIDs;
-		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	// Start capturing reflections
+	_planarReflectionCaptureBuffer.bind();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Iterate through all MODEL entities
+	vector<string> savedModelEntityIDs;
+	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	{
+		// Hide reflective MODEL entity
+		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 		{
-			// Hide reflective MODEL entity
-			if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
-			{
-				entity->setVisible(false);
-				savedModelEntityIDs.push_back(entity->getID());
-			}
-
-			// Hide non-reflected MODEL entity
-			if (!entity->isReflected() && entity->isVisible())
-			{
-				entity->setVisible(false);
-				savedModelEntityIDs.push_back(entity->getID());
-			}
+			entity->setVisible(false);
+			savedModelEntityIDs.push_back(entity->getID());
 		}
 
-		// Iterate through all BILLBOARD entities
-		vector<string> savedBillboardEntityIDs;
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+		// Hide non-reflected MODEL entity
+		if (!entity->isReflected() && entity->isVisible())
 		{
-			// Hide non-reflected BILLBOARD entity
-			if (!entity->isReflected() && entity->isVisible())
-			{
-				entity->setVisible(false);
-				savedBillboardEntityIDs.push_back(entity->getID());
-			}
-		}
-
-		// Move down
-		const Vec3 originalCameraPosition = _camera.getPosition();
-		_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
-
-		// Look up
-		const float originalCameraPitch = _camera.getPitch();
-		_camera.setPitch(-originalCameraPitch);
-
-		// Update camera
-		_camera.updateMatrices();
-
-		// Use original camera properties for correct specular lighting
-		_renderBus.setCameraPosition(originalCameraPosition);
-		_renderBus.setCameraPitch(originalCameraPitch);
-
-		// Disable reflections
-		_renderBus.setReflectionsEnabled(false);
-
-		// Sky exposure must not appear in reflections
-		float oldSkyLightness = 0.0f;
-		auto skyEntity = _entityBus->getMainSkyEntity();
-		if (skyEntity != nullptr)
-		{
-			oldSkyLightness = skyEntity->getLightness();
-			skyEntity->setLightness(skyEntity->getOriginalLightness());
-		}
-
-		// Calculate clipping plane
-		const float clippingHeight = -(_renderBus.getSceneReflectionHeight() + 0.0000001f);
-		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
-		_renderBus.setClippingPlane(clippingPlane);
-
-		// Render SKY entity
-		_renderSkyEntity();
-
-		// Render TERRAIN entity
-		glEnable(GL_CLIP_DISTANCE0);
-		_renderTerrainEntity();
-		glDisable(GL_CLIP_DISTANCE0);
-
-		// Render MODEL entities & BILLBOARD entities
-		glEnable(GL_CLIP_DISTANCE2);
-		_renderModelEntities();
-		_renderBillboardEntities();
-		glDisable(GL_CLIP_DISTANCE2);
-
-		// Stop capturing reflections
-		_sceneReflectionCaptureBuffer.unbind();
-
-		// Assign texture
-		_renderBus.setSceneReflectionMap(_sceneReflectionCaptureBuffer.getTexture(0));
-
-		// Iterate through all MODEL entities
-		for (const auto& [keyID, entity] : _entityBus->getModelEntities())
-		{
-			// Iterate through all saved MODEL entities
-			for (const auto& savedID : savedModelEntityIDs)
-			{
-				// Check if IDs match
-				if (entity->getID() == savedID)
-				{
-					// Show MODEL entity again
-					entity->setVisible(true);
-				}
-			}
-		}
-
-		// Iterate through all BILLBOARD entities
-		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
-		{
-			// Iterate through all saved BILLBOARD entities
-			for (const auto& savedID : savedBillboardEntityIDs)
-			{
-				// Check if IDs match
-				if (entity->getID() == savedID)
-				{
-					// Show BILLBOARD entity again
-					entity->setVisible(true);
-				}
-			}
-		}
-
-		// Look down
-		_camera.setPitch(originalCameraPitch);
-
-		// Move up
-		_camera.setPosition(originalCameraPosition);
-
-		// Update camera
-		_camera.updateMatrices();
-
-		// Revert reflections
-		_renderBus.setReflectionsEnabled(true);
-
-		// Revert sky lightness
-		if (skyEntity != nullptr)
-		{
-			skyEntity->setLightness(oldSkyLightness);
+			entity->setVisible(false);
+			savedModelEntityIDs.push_back(entity->getID());
 		}
 	}
-	else
+
+	// Iterate through all BILLBOARD entities
+	vector<string> savedBillboardEntityIDs;
+	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		_renderBus.setSceneReflectionMap(0);
+		// Hide non-reflected BILLBOARD entity
+		if (!entity->isReflected() && entity->isVisible())
+		{
+			entity->setVisible(false);
+			savedBillboardEntityIDs.push_back(entity->getID());
+		}
+	}
+
+	// Move down
+	const Vec3 originalCameraPosition = _camera.getPosition();
+	_camera.setPosition(Vec3(originalCameraPosition.x, originalCameraPosition.y - (cameraDistance * 2.0f), originalCameraPosition.z));
+
+	// Look up
+	const float originalCameraPitch = _camera.getPitch();
+	_camera.setPitch(-originalCameraPitch);
+
+	// Update camera
+	_camera.updateMatrices();
+
+	// Use original camera properties for correct specular lighting
+	_renderBus.setCameraPosition(originalCameraPosition);
+	_renderBus.setCameraPitch(originalCameraPitch);
+
+	// Disable reflections
+	_renderBus.setReflectionsEnabled(false);
+
+	// Sky exposure must not appear in reflections
+	float oldSkyLightness = 0.0f;
+	auto skyEntity = _entityBus->getMainSkyEntity();
+	if (skyEntity != nullptr)
+	{
+		oldSkyLightness = skyEntity->getLightness();
+		skyEntity->setLightness(skyEntity->getOriginalLightness());
+	}
+
+	// Calculate clipping plane
+	const float clippingHeight = -(_renderBus.getPlanarReflectionHeight() + 0.0000001f);
+	const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
+	_renderBus.setClippingPlane(clippingPlane);
+
+	// Render SKY entity
+	_renderSkyEntity();
+
+	// Render TERRAIN entity
+	glEnable(GL_CLIP_DISTANCE0);
+	_renderTerrainEntity();
+	glDisable(GL_CLIP_DISTANCE0);
+
+	// Render MODEL entities & BILLBOARD entities
+	glEnable(GL_CLIP_DISTANCE2);
+	_renderModelEntities();
+	_renderBillboardEntities();
+	glDisable(GL_CLIP_DISTANCE2);
+
+	// Stop capturing reflections
+	_planarReflectionCaptureBuffer.unbind();
+
+	// Assign texture
+	_renderBus.setPlanarReflectionMap(_planarReflectionCaptureBuffer.getTexture(0));
+
+	// Iterate through all MODEL entities
+	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
+	{
+		// Iterate through all saved MODEL entities
+		for (const auto& savedID : savedModelEntityIDs)
+		{
+			// Check if IDs match
+			if (entity->getID() == savedID)
+			{
+				// Show MODEL entity again
+				entity->setVisible(true);
+			}
+		}
+	}
+
+	// Iterate through all BILLBOARD entities
+	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
+	{
+		// Iterate through all saved BILLBOARD entities
+		for (const auto& savedID : savedBillboardEntityIDs)
+		{
+			// Check if IDs match
+			if (entity->getID() == savedID)
+			{
+				// Show BILLBOARD entity again
+				entity->setVisible(true);
+			}
+		}
+	}
+
+	// Look down
+	_camera.setPitch(originalCameraPitch);
+
+	// Move up
+	_camera.setPosition(originalCameraPosition);
+
+	// Update camera
+	_camera.updateMatrices();
+
+	// Revert reflections
+	_renderBus.setReflectionsEnabled(true);
+
+	// Revert sky lightness
+	if (skyEntity != nullptr)
+	{
+		skyEntity->setLightness(oldSkyLightness);
 	}
 }
 
@@ -391,7 +394,7 @@ void MasterRenderer::_captureWaterReflections()
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Hide reflective MODEL entity
-				if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::SCENE) && entity->isVisible())
+				if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());

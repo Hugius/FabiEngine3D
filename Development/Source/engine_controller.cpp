@@ -214,9 +214,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		skyEntity_setDiffuseMaps("@@engineBackground", texturePaths3D);
 		skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
-		reflectionEntity_create("test");
-		reflectionEntity_setPosition("test", Vec3(0.0f, 3.5f, 0.0f));
-
 		// Custom cursor texture
 		imageEntity_create("@@cursor", true);
 		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * misc_getAspectRatio()));

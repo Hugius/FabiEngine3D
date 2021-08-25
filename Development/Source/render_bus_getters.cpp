@@ -1,18 +1,8 @@
 #include "render_bus.hpp"
 
-const TextureID RenderBus::getMainSkyReflectionCubeMap()
+const TextureID RenderBus::getPlanarReflectionMap()
 {
-	return _mainSkyReflectionCubeMap;
-}
-
-const TextureID RenderBus::getMixSkyReflectionCubeMap()
-{
-	return _mixSkyReflectionCubeMap;
-}
-
-const TextureID RenderBus::getSceneReflectionMap()
-{
-	return _sceneReflectionMap;
+	return _planarReflectionMap;
 }
 
 const TextureID RenderBus::getWaterReflectionMap()
@@ -80,11 +70,6 @@ const Matrix44 RenderBus::getProjectionMatrix()
 	return _projectionMatrix;
 }
 
-const Matrix44 RenderBus::getSkyRotationMatrix()
-{
-	return _skyRotationMatrix;
-}
-
 const Matrix44 RenderBus::getShadowMatrix()
 {
 	return _shadowMatrix;
@@ -145,24 +130,14 @@ const Vec3 RenderBus::getFlareSourcePosition()
 	return _flareSourcePosition;
 }
 
-const Vec3 RenderBus::getMainSkyColor()
-{
-	return _mainSkyColor;
-}
-
-const Vec3 RenderBus::getMixSkyColor()
-{
-	return _mixSkyColor;
-}
-
 const Vec3 RenderBus::getDirectionalLightingColor()
 {
 	return _directionalLightColor;
 }
 
-const float RenderBus::getSceneReflectionHeight()
+const float RenderBus::getPlanarReflectionHeight()
 {
-	return _sceneReflectionHeight;
+	return _planarReflectionHeight;
 }
 
 const float RenderBus::getShadowAreaSize()
@@ -208,16 +183,6 @@ const float RenderBus::getMotionBlurMixValue()
 const float RenderBus::getSkyMixValue()
 {
 	return _skyMixValue;
-}
-
-const float RenderBus::getMainSkyLightness()
-{
-	return _mainSkyLightness;
-}
-
-const float RenderBus::getMixSkyLightness()
-{
-	return _mixSkyLightness;
 }
 
 const float RenderBus::getAmbientLightingIntensity()

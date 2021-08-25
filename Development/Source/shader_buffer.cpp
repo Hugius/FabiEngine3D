@@ -74,7 +74,7 @@ void ShaderBuffer::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, nullptr, infoLog);
-		Logger::throwError("ShaderBuffer::_createProgram::1");
+		Logger::throwError("ShaderBuffer::_createProgram::1 ---> ", _name, " ", infoLog);
 	}
 
 	// Fragment shader
@@ -87,7 +87,7 @@ void ShaderBuffer::_createProgram(const char* vShaderCode, const char* fShaderCo
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, nullptr, infoLog);
-		Logger::throwError("ShaderBuffer::_createProgram::2");
+		Logger::throwError("ShaderBuffer::_createProgram::2 ---> ", _name, " ", infoLog);
 	}
 
 	// Shader program

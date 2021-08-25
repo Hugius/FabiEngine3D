@@ -11,7 +11,6 @@ void ModelEntityColorRenderer::bind()
 
 	// Shader uniforms
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix", _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
@@ -39,19 +38,13 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_skyMixValue", _renderBus.getSkyMixValue());
-	_shader.uploadUniform("u_mainSkyLightness", _renderBus.getMainSkyLightness());
-	_shader.uploadUniform("u_mixSkyLightness", _renderBus.getMixSkyLightness());
-	_shader.uploadUniform("u_mainSkyColor", _renderBus.getMainSkyColor());
-	_shader.uploadUniform("u_mixSkyColor", _renderBus.getMixSkyColor());
-	_shader.uploadUniform("u_diffuseMap", 0);
-	_shader.uploadUniform("u_emissionMap", 1);
-	_shader.uploadUniform("u_reflectionMap", 2);
-	_shader.uploadUniform("u_normalMap", 3);
-	_shader.uploadUniform("u_sceneReflectionMap", 4);
-	_shader.uploadUniform("u_shadowMap", 5);
-	_shader.uploadUniform("u_mainSkyMap", 6);
-	_shader.uploadUniform("u_mixSkyMap", 7);
+	_shader.uploadUniform("u_cubeReflectionMap", 0);
+	_shader.uploadUniform("u_planarReflectionMap", 1);
+	_shader.uploadUniform("u_shadowMap", 2);
+	_shader.uploadUniform("u_diffuseMap", 3);
+	_shader.uploadUniform("u_emissionMap", 4);
+	_shader.uploadUniform("u_reflectionMap", 5);
+	_shader.uploadUniform("u_normalMap", 6);
 
 	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
@@ -66,27 +59,23 @@ void ModelEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Bind textures
-	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
-	glActiveTexture(GL_TEXTURE5);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getPlanarReflectionMap());
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
+	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
-	glActiveTexture(GL_TEXTURE6);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getMainSkyReflectionCubeMap());
-	glActiveTexture(GL_TEXTURE7);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getMixSkyReflectionCubeMap());
 }
 
 void ModelEntityColorRenderer::unbind()
 {
 	// Unbind textures
-	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE5);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glActiveTexture(GL_TEXTURE6);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-	glActiveTexture(GL_TEXTURE7);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Disable alpha blending
 	glDisable(GL_BLEND);
@@ -155,8 +144,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
-		_shader.uploadUniform("u_isSkyReflective", (entity->getReflectionType() == ReflectionType::SKY));
-		_shader.uploadUniform("u_isSceneReflective", (entity->getReflectionType() == ReflectionType::SCENE));
+		_shader.uploadUniform("u_isPlanarReflective", (entity->getReflectionType() == ReflectionType::PLANAR));
+		_shader.uploadUniform("u_isCubeReflective", (entity->getReflectionType() == ReflectionType::CUBE));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_positionY", entity->getPosition().y);
@@ -194,22 +183,22 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE0);
+				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
 			if (entity->hasEmissionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE1);
+				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
 			if (entity->hasReflectionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE2);
+				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
 			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE3);
+				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
@@ -232,22 +221,22 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE0);
+				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasEmissionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE1);
+				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasReflectionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE2);
+				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE2);
+				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 

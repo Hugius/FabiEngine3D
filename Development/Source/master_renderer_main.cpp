@@ -38,7 +38,8 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
 	// Load capture buffers
-	_sceneReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
 	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
 	_sceneDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
@@ -49,10 +50,10 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(BlurType::BLOOM, 2);
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(BlurType::BLOOM, 4);
-	_dofBlurRenderer.loadCaptureBuffer(BlurType::DOF, 2);
-	_motionBlurBlurRenderer.loadCaptureBuffer(BlurType::MOTION, 4);
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
 
 	// Render surface
 	_renderSurface = make_shared<ImageEntity>("renderSurface");
@@ -111,8 +112,8 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	{
 		// Pre-captures
 		_timer.startDeltaPart("reflectionPreRender");
-		_captureEnvironmentReflections();
-		_captureSceneReflections();
+		_captureCubeReflections();
+		_capturePlanarReflections();
 		_captureWaterReflections();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("refractionPreRender");
@@ -195,16 +196,16 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 	}
 }
 
-void MasterRenderer::reloadShadowCaptureBuffer()
+void MasterRenderer::reloadCubeReflectionCaptureBuffer()
 {
-	_shadowCaptureBuffer.reset();
-	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(_renderBus.getShadowQuality()));
+	_cubeReflectionCaptureBuffer.reset();
+	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
 }
 
-void MasterRenderer::reloadSceneReflectionCaptureBuffer()
+void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
 {
-	_sceneReflectionCaptureBuffer.reset();
-	_sceneReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+	_planarReflectionCaptureBuffer.reset();
+	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterReflectionCaptureBuffer()
@@ -217,6 +218,12 @@ void MasterRenderer::reloadWaterRefractionCaptureBuffer()
 {
 	_waterRefractionCaptureBuffer.reset();
 	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getRefractionQuality()), 1, false);
+}
+
+void MasterRenderer::reloadShadowCaptureBuffer()
+{
+	_shadowCaptureBuffer.reset();
+	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(_renderBus.getShadowQuality()));
 }
 
 void MasterRenderer::_updateMotionBlur()

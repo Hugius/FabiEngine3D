@@ -21,9 +21,6 @@
     <ClInclude Include="..\..\Source\blur_direction.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\blur_type.hpp">
-      <Filter>Enums</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\buffer_type.hpp">
       <Filter>Enums</Filter>
     </ClInclude>

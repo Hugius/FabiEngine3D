@@ -12,16 +12,16 @@ in vec4 f_shadowPos;
 in mat3 f_tbnMatrix;
 
 // Textures
-layout (location = 0) uniform sampler2D u_diffuseMap;
-layout (location = 1) uniform sampler2D u_normalMap;
-layout (location = 2) uniform sampler2D u_blendMap;
-layout (location = 3) uniform sampler2D u_diffuseMapR;
-layout (location = 4) uniform sampler2D u_diffuseMapG;
-layout (location = 5) uniform sampler2D u_diffuseMapB;
-layout (location = 6) uniform sampler2D u_normalMapR;
-layout (location = 7) uniform sampler2D u_normalMapG;
-layout (location = 8) uniform sampler2D u_normalMapB;
-layout (location = 9) uniform sampler2D u_shadowMap;
+layout (location = 0) uniform sampler2D u_shadowMap;
+layout (location = 1) uniform sampler2D u_diffuseMap;
+layout (location = 2) uniform sampler2D u_normalMap;
+layout (location = 3) uniform sampler2D u_blendMap;
+layout (location = 4) uniform sampler2D u_diffuseMapR;
+layout (location = 5) uniform sampler2D u_diffuseMapG;
+layout (location = 6) uniform sampler2D u_diffuseMapB;
+layout (location = 7) uniform sampler2D u_normalMapR;
+layout (location = 8) uniform sampler2D u_normalMapG;
+layout (location = 9) uniform sampler2D u_normalMapB;
 
 // Vector uniforms
 uniform vec3 u_lightPositions[MAX_LIGHT_AMOUNT];

@@ -166,20 +166,6 @@ void SkyEntityManager::update()
 		{
 			mainSky->setLightness(mainSky->getOriginalLightness()); // Revert lightness
 		}
-
-		// Update main sky renderbus values
-		_renderBus.setSkyRotationMatrix(mainSky->getRotationMatrix());
-		//_renderBus.setMainSkyReflectionCubeMap(mainSky->getCubeMap());
-		_renderBus.setMainSkyColor(mainSky->getColor());
-		_renderBus.setMainSkyLightness(mainSky->getLightness());
-
-		// Update mix sky renderbus values
-		if (mixSky != nullptr)
-		{
-			_renderBus.setMixSkyReflectionCubeMap(mixSky->getCubeMap());
-			_renderBus.setMixSkyColor(mixSky->getColor());
-			_renderBus.setMixSkyLightness(mixSky->getLightness());
-		}
 	}
 }
 

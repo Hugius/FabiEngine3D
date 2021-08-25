@@ -35,32 +35,32 @@ void ModelEditor::_updateLightingSettingsMenu()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("specularFactor", "Spec Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Spec Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
-			else if (screen->getButton("reflectionType")->isHovered())
-			{
-				if (reflectionType == ReflectionType::SKY)
-				{
-					reflectionType = ReflectionType::SCENE;
-				}
-				else
-				{
-					reflectionType = ReflectionType::SKY;
-				}
-				_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
-			}
 			else if (screen->getButton("isBright")->isHovered())
 			{
 				isBright = !isBright;
 				_fe3d.modelEntity_setBright(_currentModelID, isBright);
+			}
+			else if (screen->getButton("reflectionType")->isHovered())
+			{
+				if (reflectionType == ReflectionType::CUBE)
+				{
+					reflectionType = ReflectionType::PLANAR;
+				}
+				else
+				{
+					reflectionType = ReflectionType::CUBE;
+				}
+				_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
 			}
 		}
 
@@ -88,7 +88,21 @@ void ModelEditor::_updateLightingSettingsMenu()
 
 		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("reflectionType")->changeTextContent((reflectionType == ReflectionType::SKY) ? "Reflect: SKY" : "Reflect: SCENE");
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
+		if (_fe3d.modelEntity_hasReflectionMap(_currentModelID))
+		{
+			if (reflectionType == ReflectionType::CUBE)
+			{
+				screen->getButton("reflectionType")->changeTextContent("Reflect: CUBE");
+			}
+			else
+			{
+				screen->getButton("reflectionType")->changeTextContent("Reflect: PLANAR");
+			}
+		}
+		else
+		{
+			screen->getButton("reflectionType")->changeTextContent("Reflect: OFF");
+		}
 	}
 }

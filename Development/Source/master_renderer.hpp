@@ -22,7 +22,6 @@
 #include "motion_blur_renderer.hpp"
 #include "blur_renderer.hpp"
 #include "timer.hpp"
-#include "blur_type.hpp"
 #include "texture_loader.hpp"
 #include "shadow_generator.hpp"
 
@@ -35,10 +34,11 @@ public:
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus);
-	void reloadShadowCaptureBuffer();
-	void reloadSceneReflectionCaptureBuffer();
+	void reloadCubeReflectionCaptureBuffer();
+	void reloadPlanarReflectionCaptureBuffer();
 	void reloadWaterReflectionCaptureBuffer();
 	void reloadWaterRefractionCaptureBuffer();
+	void reloadShadowCaptureBuffer();
 
 private:
 	// Update functions
@@ -46,8 +46,8 @@ private:
 	void _updateLensFlare();
 
 	// Pre-capturing functions
-	void _captureEnvironmentReflections();
-	void _captureSceneReflections();
+	void _captureCubeReflections();
+	void _capturePlanarReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
 	void _captureSceneDepth();
@@ -98,13 +98,14 @@ private:
 	DofRenderer _dofRenderer;
 	LensFlareRenderer _lensFlareRenderer;
 	MotionBlurRenderer _motionBlurRenderer;
-	BlurRenderer _dofBlurRenderer;
-	BlurRenderer _motionBlurBlurRenderer;
 	BlurRenderer _bloomBlurRendererHighQuality;
 	BlurRenderer _bloomBlurRendererLowQuality;
+	BlurRenderer _dofBlurRenderer;
+	BlurRenderer _motionBlurBlurRenderer;
 	
 	// CaptureBuffers
-	CaptureBuffer _sceneReflectionCaptureBuffer;
+	CaptureBuffer _cubeReflectionCaptureBuffer;
+	CaptureBuffer _planarReflectionCaptureBuffer;
 	CaptureBuffer _waterReflectionCaptureBuffer;
 	CaptureBuffer _waterRefractionCaptureBuffer;
 	CaptureBuffer _shadowCaptureBuffer;

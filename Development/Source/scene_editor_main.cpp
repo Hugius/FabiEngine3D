@@ -26,7 +26,7 @@ void SceneEditor::load()
 	_fe3d.camera_reset();
 
 	// Default graphics
-	_fe3d.gfx_setSceneReflectionHeight(0.0f);
+	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
 
 	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";

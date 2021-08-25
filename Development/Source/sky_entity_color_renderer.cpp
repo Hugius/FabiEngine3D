@@ -8,7 +8,7 @@ void SkyEntityColorRenderer::bind()
 	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_rotationMatrix", _renderBus.getSkyRotationMatrix());
+	_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 	_shader.uploadUniform("u_mainCubeMap", 0);
 	_shader.uploadUniform("u_mixCubeMap", 1);
 	
@@ -38,7 +38,7 @@ void SkyEntityColorRenderer::render(const shared_ptr<SkyEntity> mainEntity, cons
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireFramed", (mainEntity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
-		_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
+		_shader.uploadUniform("u_rotationMatrix", mainEntity->getRotationMatrix());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());		
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
 		if (mixEntity != nullptr)

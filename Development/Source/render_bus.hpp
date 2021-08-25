@@ -14,9 +14,7 @@ public:
 	// Textures
 	void setPrimarySceneMap(TextureID value);
 	void setSecondarySceneMap(TextureID value);
-	void setMainSkyReflectionCubeMap(TextureID value);
-	void setMixSkyReflectionCubeMap(TextureID value);
-	void setSceneReflectionMap(TextureID value);
+	void setPlanarReflectionMap(TextureID value);
 	void setWaterReflectionMap(TextureID value);
 	void setWaterRefractionMap(TextureID value);
 	void setShadowMap(TextureID value);
@@ -34,14 +32,11 @@ public:
 	// Matrices
 	void setViewMatrix(const Matrix44 value);
 	void setProjectionMatrix(const Matrix44 value);
-	void setSkyRotationMatrix(const Matrix44 value);
 	void setShadowMatrix(const Matrix44 value);
 
-	// Vector4
+	// Vectors
 	void setFlareSourcePositionClipspace(Vec4 value);
 	void setClippingPlane(Vec4 value);
-
-	// Vector3
 	void setCameraPosition(Vec3 value);
 	void setCameraFront(Vec3 value);
 	void setAmbientLightingColor(Vec3 value);
@@ -52,8 +47,6 @@ public:
 	void setShadowAreaCenter(Vec3 value);
 	void setFogColor(Vec3 value);
 	void setFlareSourcePosition(Vec3 value);
-	void setMainSkyColor(Vec3 value);
-	void setMixSkyColor(Vec3 value);
 
 	// Floats
 	void setAmbientLightingIntensity(float value);
@@ -71,7 +64,7 @@ public:
 	void setFarZ(float value);
 	void setDofMaxDistance(float value);
 	void setDofBlurDistance(float value);
-	void setSceneReflectionHeight(float value);
+	void setPlanarReflectionHeight(float value);
 	void setShadowAreaSize(float value);
 	void setShadowAreaReach(float value);
 	void setShadowLightness(float value);
@@ -81,8 +74,6 @@ public:
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
 	void setSkyMixValue(float value);
-	void setMainSkyLightness(float value);
-	void setMixSkyLightness(float value);
 
 	// Integers
 	void setBloomBlurCount(unsigned int value);
@@ -119,9 +110,7 @@ public:
 	// Textures
 	const TextureID getPrimarySceneMap();
 	const TextureID getSecondarySceneMap();
-	const TextureID getMainSkyReflectionCubeMap();
-	const TextureID getMixSkyReflectionCubeMap();
-	const TextureID getSceneReflectionMap();
+	const TextureID getPlanarReflectionMap();
 	const TextureID getWaterReflectionMap();
 	const TextureID getWaterRefractionMap();
 	const TextureID getShadowMap();
@@ -139,14 +128,11 @@ public:
 	// Matrices
 	const Matrix44 getViewMatrix();
 	const Matrix44 getProjectionMatrix();
-	const Matrix44 getSkyRotationMatrix();
 	const Matrix44 getShadowMatrix();
 
-	// Vector4
+	// Vectors
 	const Vec4 getFlareSourcePositionClipspace();
 	const Vec4 getClippingPlane();
-
-	// Vector3
 	const Vec3 getCameraPosition();
 	const Vec3 getCameraFront();
 	const Vec3 getAmbientLightingColor();
@@ -157,8 +143,6 @@ public:
 	const Vec3 getShadowAreaCenter();
 	const Vec3 getFogColor();
 	const Vec3 getFlareSourcePosition();
-	const Vec3 getMainSkyColor();
-	const Vec3 getMixSkyColor();
 
 	// Floats
 	const float getAmbientLightingIntensity();
@@ -176,7 +160,7 @@ public:
 	const float getFarZ();
 	const float getDofMaxDistance();
 	const float getDofBlurDistance();
-	const float getSceneReflectionHeight();
+	const float getPlanarReflectionHeight();
 	const float getShadowAreaSize();
 	const float getShadowAreaReach();
 	const float getShadowLightness();
@@ -186,8 +170,6 @@ public:
 	const float getMotionBlurStrength();
 	const float getMotionBlurMixValue();
 	const float getSkyMixValue();
-	const float getMainSkyLightness();
-	const float getMixSkyLightness();
 
 	// Integers
 	const unsigned int getBloomBlurCount();
@@ -224,9 +206,7 @@ private:
 	// Textures
 	TextureID _primarySceneMap = 0;
 	TextureID _secondarySceneMap = 0;
-	TextureID _mainSkyReflectionCubeMap = 0;
-	TextureID _mixSkyReflectionCubeMap = 0;
-	TextureID _sceneReflectionMap = 0;
+	TextureID _planarReflectionMap = 0;
 	TextureID _waterReflectionMap = 0;
 	TextureID _waterRefractionMap = 0;
 	TextureID _shadowMap = 0;
@@ -244,14 +224,11 @@ private:
 	// Matrices
 	Matrix44 _viewMatrix = Matrix44(1.0f);
 	Matrix44 _projectionMatrix = Matrix44(1.0f);
-	Matrix44 _skyRotationMatrix = Matrix44(1.0f);
 	Matrix44 _shadowMatrix = Matrix44(1.0f);
 
-	// Vector4
+	// Vectors
 	Vec4 _flareSourcePositionClipspace = Vec4(0.0f);
 	Vec4 _clippingPlane = Vec4(0.0f);
-
-	// Vector3
 	Vec3 _cameraPosition = Vec3(0.0f);
 	Vec3 _cameraFront = Vec3(0.0f);
 	Vec3 _directionalLightPosition = Vec3(0.0f);
@@ -262,8 +239,6 @@ private:
 	Vec3 _directionalLightColor = Vec3(1.0f);
 	Vec3 _spotLightColor = Vec3(1.0f);
 	Vec3 _fogColor = Vec3(1.0f);
-	Vec3 _mainSkyColor = Vec3(1.0f);
-	Vec3 _mixSkyColor = Vec3(1.0f);
 
 	// Floats
 	float _ambientLightIntensity = 1.0f;
@@ -281,7 +256,7 @@ private:
 	float _farZ = 0.0f;
 	float _dofMaxDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
-	float _sceneReflectionHeight = 0.0f;
+	float _planarReflectionHeight = 0.0f;
 	float _shadowAreaSize = 0.0f;
 	float _shadowAreaReach = 0.0f;
 	float _shadowLightness = 0.0f;
@@ -291,8 +266,6 @@ private:
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;
 	float _skyMixValue = 0.0f;
-	float _mainSkyLightness = 0.0f;
-	float _mixSkyLightness = 0.0f;
 
 	// Integers
 	unsigned int _bloomBlurCount = 0;

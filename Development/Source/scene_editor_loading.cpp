@@ -393,7 +393,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				reflectionHeight;
 
 			// Set height
-			_fe3d.gfx_setSceneReflectionHeight(reflectionHeight);
+			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}
 		else if (lineType == "EDITOR_SPEED")
 		{

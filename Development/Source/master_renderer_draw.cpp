@@ -278,12 +278,12 @@ void MasterRenderer::_renderDebugScreens()
 	bloomSurface->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.666f, 0.666f, 0.666f, true));
 	bloomSurface->setMirroredVertically(true);
 
-	// Scene reflection - surface
-	shared_ptr<ImageEntity> sceneReflectionSurface = make_shared<ImageEntity>("sceneReflectionSurface");
-	sceneReflectionSurface->setDiffuseMap(_renderBus.getSceneReflectionMap());
-	sceneReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getSceneReflectionMap() != 0)));
-	sceneReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.0f, 0.666f, 0.666f, true));
-	sceneReflectionSurface->setMirroredVertically(true);
+	// Planar reflection - surface
+	shared_ptr<ImageEntity> planarReflectionSurface = make_shared<ImageEntity>("planarReflectionSurface");
+	planarReflectionSurface->setDiffuseMap(_renderBus.getPlanarReflectionMap());
+	planarReflectionSurface->setColor(Vec3(static_cast<float>(_renderBus.getPlanarReflectionMap() != 0)));
+	planarReflectionSurface->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, 0.0f, 0.666f, 0.666f, true));
+	planarReflectionSurface->setMirroredVertically(true);
 
 	// Water reflection - surface
 	shared_ptr<ImageEntity> waterReflectionSurface = make_shared<ImageEntity>("waterReflectionSurface");
@@ -339,11 +339,11 @@ void MasterRenderer::_renderDebugScreens()
 	bloomText->setRenderBuffer(make_shared<RenderBuffer>(0.666f, 0.4f, calcTextWidth("Bloom Render"), charHeight, true));
 	bloomText->setColor(textColor);
 	
-	// Scene reflection - text
-	shared_ptr<TextEntity> sceneReflectionText = make_shared<TextEntity>("sceneReflectionText");
-	sceneReflectionText->setDiffuseMap(_textureLoader.getText("Scene Reflection Render", fontPath));
-	sceneReflectionText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.26f, calcTextWidth("Scene Reflection Render"), charHeight, true));
-	sceneReflectionText->setColor(textColor);
+	// Planar reflection - text
+	shared_ptr<TextEntity> planarReflectionText = make_shared<TextEntity>("planarReflectionText");
+	planarReflectionText->setDiffuseMap(_textureLoader.getText("Planar Reflection Render", fontPath));
+	planarReflectionText->setRenderBuffer(make_shared<RenderBuffer>(-0.666f, -0.26f, calcTextWidth("Planar Reflection Render"), charHeight, true));
+	planarReflectionText->setColor(textColor);
 
 	// Water reflection - text
 	shared_ptr<TextEntity> waterReflectionText = make_shared<TextEntity>("waterReflectionText");
@@ -382,7 +382,7 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.render(sceneSurface);
 	_imageEntityColorRenderer.render(shadowSurface);
 	_imageEntityColorRenderer.render(bloomSurface);
-	_imageEntityColorRenderer.render(sceneReflectionSurface);
+	_imageEntityColorRenderer.render(planarReflectionSurface);
 	_imageEntityColorRenderer.render(waterReflectionSurface);
 	_imageEntityColorRenderer.render(waterRefractionSurface);
 	_imageEntityColorRenderer.render(depthSurface);
@@ -393,7 +393,7 @@ void MasterRenderer::_renderDebugScreens()
 	_imageEntityColorRenderer.render(sceneText);
 	_imageEntityColorRenderer.render(shadowText);
 	_imageEntityColorRenderer.render(bloomText);
-	_imageEntityColorRenderer.render(sceneReflectionText);
+	_imageEntityColorRenderer.render(planarReflectionText);
 	_imageEntityColorRenderer.render(waterReflectionText);
 	_imageEntityColorRenderer.render(waterRefractionText);
 	_imageEntityColorRenderer.render(depthText);

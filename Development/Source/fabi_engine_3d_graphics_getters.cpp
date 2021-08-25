@@ -141,9 +141,9 @@ const Vec3 FabiEngine3D::gfx_getFogColor()
 	return _core->_renderBus.getFogColor();
 }
 
-const float FabiEngine3D::gfx_getSceneReflectionHeight()
+const float FabiEngine3D::gfx_getPlanarReflectionHeight()
 {
-	return _core->_renderBus.getSceneReflectionHeight();
+	return _core->_renderBus.getPlanarReflectionHeight();
 }
 
 const Vec3 FabiEngine3D::gfx_getShadowEye()

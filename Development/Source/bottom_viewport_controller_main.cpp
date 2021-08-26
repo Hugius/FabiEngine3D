@@ -32,14 +32,14 @@ void BottomViewportController::initialize()
 	_statsScreen->createTextField("cpuModel", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextField("gpuModel", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextField("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->createTextField("cameraPosition", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("cursorPosition", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("triangleCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("modelEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("cameraPositionYawPitch", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("cursorPosition", Vec2(-1.0f, -0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("triangleCount", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("modelEntityCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("billboardEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("aabbEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextField("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("reflectionEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextField("imageEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
 	// Update-profiling statistics
@@ -106,23 +106,16 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update camera position
+	// Update camera position/yaw/pitch
 	if (_fe3d.misc_checkInterval(1))
 	{
-		string textID = _statsScreen->getTextField("cameraPosition")->getEntityID();
-		string text = "Camera Position: " + 
+		string textID = _statsScreen->getTextField("cameraPositionYawPitch")->getEntityID();
+		string text = ("Camera Position/Yaw/Pitch: " + 
 			to_string(static_cast<int>(_fe3d.camera_getPosition().x)) + " " +
 			to_string(static_cast<int>(_fe3d.camera_getPosition().y)) + " " +
-			to_string(static_cast<int>(_fe3d.camera_getPosition().z));
-		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
-	}
-
-	// Update camera pitch & yaw
-	if (_fe3d.misc_checkInterval(1))
-	{
-		string textID = _statsScreen->getTextField("cameraYawPitch")->getEntityID();
-		string text = "Camera Yaw + Pitch: " + 
-			to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " + to_string(static_cast<int>(_fe3d.camera_getPitch()));
+			to_string(static_cast<int>(_fe3d.camera_getPosition().z)) + " " +
+			to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " +
+			to_string(static_cast<int>(_fe3d.camera_getPitch())));
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

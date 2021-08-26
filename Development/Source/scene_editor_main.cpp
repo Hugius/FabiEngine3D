@@ -141,6 +141,7 @@ void SceneEditor::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.sound_deleteAll();
 	_fe3d.lightEntity_deleteAll();
+	_fe3d.reflectionEntity_deleteAll();
 
 	// Reset editor properties
 	_loadedSoundIDs.clear();

@@ -47,6 +47,16 @@ bool SceneEditor::saveEditorSceneToFile()
 		}
 	}
 
+	// Camera position
+	const auto cameraPosition = _fe3d.camera_getPosition();
+	file << "CAMERA_POSITION " << cameraPosition.x << " " << cameraPosition.y << " " << cameraPosition.z << endl;
+
+	// Camera yaw
+	file << "CAMERA_YAW " << _fe3d.camera_getYaw() << endl;
+
+	// Camera pitch
+	file << "CAMERA_PITCH " << _fe3d.camera_getPitch() << endl;
+
 	// Sky
 	string skyID = _fe3d.skyEntity_getSelectedID();
 	if (!skyID.empty())
@@ -241,6 +251,65 @@ bool SceneEditor::saveEditorSceneToFile()
 		}
 	}
 
+	// Lights
+	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		if (lightID[0] != '@')
+		{
+			// Data to save
+			auto position = _fe3d.lightEntity_getPosition(lightID);
+			auto radius = _fe3d.lightEntity_getRadius(lightID);
+			auto color = _fe3d.lightEntity_getColor(lightID);
+			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
+			auto shape = static_cast<unsigned int>(_fe3d.lightEntity_getShape(lightID));
+
+			// Write data
+			file <<
+				"LIGHT " <<
+				lightID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				radius.x << " " <<
+				radius.y << " " <<
+				radius.z << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				intensity << " " <<
+				shape << endl;
+		}
+	}
+
+	// Reflections
+	for (const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		if (reflectionID[0] != '@')
+		{
+			// Data to save
+			auto position = _fe3d.reflectionEntity_getPosition(reflectionID);
+
+			// Write data
+			file <<
+				"REFLECTION " <<
+				reflectionID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << endl;
+		}
+	}
+
+	// Editor camera speed
+	file << "EDITOR_SPEED " << _editorSpeed << endl;
+
+	// LOD distance
+	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
+
+	// Reflection height
+	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
+
 	// Ambient lighting
 	if (_fe3d.gfx_isAmbientLightingEnabled())
 	{
@@ -250,7 +319,7 @@ bool SceneEditor::saveEditorSceneToFile()
 
 		// Write data
 		file <<
-			"AMBIENT_LIGHT " <<
+			"LIGHTING_AMBIENT " <<
 			ambientLightingColor.r << " " <<
 			ambientLightingColor.g << " " <<
 			ambientLightingColor.b << " " <<
@@ -269,7 +338,7 @@ bool SceneEditor::saveEditorSceneToFile()
 
 		// Write data
 		file <<
-			"DIRECTIONAL_LIGHT " <<
+			"LIGHTING_DIRECTIONAL " <<
 			directionalLightingPosition.x << " " <<
 			directionalLightingPosition.y << " " <<
 			directionalLightingPosition.z << " " <<
@@ -280,56 +349,6 @@ bool SceneEditor::saveEditorSceneToFile()
 			billboardSize << " " <<
 			billboardLightness << endl;
 	}
-
-	// Lights
-	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
-	{
-		// Check if allowed to save
-		if (lightID[0] != '@')
-		{
-			// Data to save
-			auto position = _fe3d.lightEntity_getPosition(lightID);
-			auto radius = _fe3d.lightEntity_getRadius(lightID);
-			auto color = _fe3d.lightEntity_getColor(lightID);
-			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
-			auto shape = static_cast<unsigned int>(_fe3d.lightEntity_getShape(lightID));
-
-			// Write data
-			file <<
-				"POINT_LIGHT " <<
-				lightID << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				radius.x << " " <<
-				radius.y << " " <<
-				radius.z << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				intensity << " " <<
-				shape << endl;
-		}
-	}
-
-	// LOD distance
-	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
-
-	// Reflection height
-	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
-
-	// Editor camera speed
-	file << "EDITOR_SPEED " << _editorSpeed << endl;
-
-	// Editor camera position
-	auto position = _fe3d.camera_getPosition();
-	file << "EDITOR_POSITION " << position.x << " " << position.y << " " << position.z << endl;
-
-	// Editor camera yaw
-	file << "EDITOR_YAW " << _fe3d.camera_getYaw() << endl;
-
-	// Editor camera pitch
-	file << "EDITOR_PITCH " << _fe3d.camera_getPitch() << endl;
 
 	// Shadow settings
 	if (_fe3d.gfx_isShadowsEnabled())

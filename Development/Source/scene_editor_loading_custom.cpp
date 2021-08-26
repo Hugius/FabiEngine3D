@@ -488,49 +488,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				_fe3d.sound_play(soundID, -1, 0);
 			}
 		}
-		else if (lineType == "AMBIENT_LIGHT")
-		{
-			// Values
-			Vec3 ambientLightingColor;
-			float ambientLightingIntensity;
-
-			// Extract
-			iss >>
-				ambientLightingColor.r >>
-				ambientLightingColor.g >>
-				ambientLightingColor.b >>
-				ambientLightingIntensity;
-
-			// Apply
-			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
-		}
-		else if (lineType == "DIRECTIONAL_LIGHT")
-		{
-			// Data placeholders
-			Vec3 directionalLightingPosition, directionalLightingColor;
-			float directionalLightingIntensity, billboardSize;
-
-			// Extract data
-			iss >>
-				directionalLightingPosition.x >>
-				directionalLightingPosition.y >>
-				directionalLightingPosition.z >>
-				directionalLightingColor.r >>
-				directionalLightingColor.g >>
-				directionalLightingColor.b >>
-				directionalLightingIntensity >>
-				billboardSize;
-
-			// Add directional lighting
-			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-
-			// Set lightsource billboard
-			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
-			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
-			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
-			_fe3d.billboardEntity_setVisible("@@lightSource", true);
-		}
-		else if (lineType == "POINT_LIGHT")
+		else if (lineType == "LIGHT")
 		{
 			// Data placeholders
 			string lightID;
@@ -569,7 +527,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			// Set distance
 			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
-		else if (lineType == "SCENE_REFLECTION_HEIGHT")
+		else if (lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders
 			float reflectionHeight;
@@ -579,6 +537,48 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 
 			// Set height
 			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
+		}
+		else if (lineType == "LIGHTING_AMBIENT")
+		{
+			// Values
+			Vec3 ambientLightingColor;
+			float ambientLightingIntensity;
+
+			// Extract
+			iss >>
+				ambientLightingColor.r >>
+				ambientLightingColor.g >>
+				ambientLightingColor.b >>
+				ambientLightingIntensity;
+
+			// Apply
+			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+		}
+		else if (lineType == "LIGHTING_DIRECTIONAL")
+		{
+			// Data placeholders
+			Vec3 directionalLightingPosition, directionalLightingColor;
+			float directionalLightingIntensity, billboardSize;
+
+			// Extract data
+			iss >>
+				directionalLightingPosition.x >>
+				directionalLightingPosition.y >>
+				directionalLightingPosition.z >>
+				directionalLightingColor.r >>
+				directionalLightingColor.g >>
+				directionalLightingColor.b >>
+				directionalLightingIntensity >>
+				billboardSize;
+
+			// Add directional lighting
+			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+
+			// Set lightsource billboard
+			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
+			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
+			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
+			_fe3d.billboardEntity_setVisible("@@lightSource", true);
 		}
 		else if (lineType == "GRAPHICS_SHADOWS")
 		{

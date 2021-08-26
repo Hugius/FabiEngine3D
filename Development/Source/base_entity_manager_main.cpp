@@ -118,7 +118,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 
 		case(EntityType::REFLECTION):
 		{
-			if (_getLightEntity(ID) != nullptr)
+			if (_getReflectionEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::8");
 			}

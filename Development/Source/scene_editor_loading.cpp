@@ -43,7 +43,49 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		iss >> lineType;
 
 		// Load entity according to type
-		if (lineType == "SKY")
+		if (lineType == "CAMERA_POSITION")
+		{
+			// Data placeholders
+			Vec3 position;
+
+			// Extract data
+			iss >> position.x >> position.y >> position.z;
+
+			// Set position
+			if (_isEditorLoaded)
+			{
+				_fe3d.camera_setPosition(position);
+			}
+		}
+		else if (lineType == "CAMERA_YAW")
+		{
+			// Data placeholders
+			float yaw;
+
+			// Extract data
+			iss >> yaw;
+
+			// Set yaw
+			if (_isEditorLoaded)
+			{
+				_fe3d.camera_setYaw(yaw);
+			}
+		}
+		else if (lineType == "CAMERA_PITCH")
+		{
+			// Data placeholders
+			float pitch;
+
+			// Extract data
+			iss >> pitch;
+
+			// Set pitch
+			if (_isEditorLoaded)
+			{
+				_fe3d.camera_setPitch(pitch);
+			}
+		}
+		else if (lineType == "SKY")
 		{
 			// Data placeholders
 			string skyID, previewID;
@@ -278,49 +320,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.sound_play(soundID, -1, 0);
 			}
 		}
-		else if (lineType == "AMBIENT_LIGHT")
-		{
-			// Values
-			Vec3 ambientLightingColor;
-			float ambientLightingIntensity;
-
-			// Extract
-			iss >>
-				ambientLightingColor.r >>
-				ambientLightingColor.g >>
-				ambientLightingColor.b >>
-				ambientLightingIntensity;
-
-			// Enable ambient lighting
-			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
-		}
-		else if (lineType == "DIRECTIONAL_LIGHT")
-		{
-			// Data placeholders
-			Vec3 directionalLightingPosition, directionalLightingColor;
-			float directionalLightingIntensity, billboardSize;
-
-			// Extract data
-			iss >>
-				directionalLightingPosition.x >>
-				directionalLightingPosition.y >>
-				directionalLightingPosition.z >>
-				directionalLightingColor.r >>
-				directionalLightingColor.g >>
-				directionalLightingColor.b >>
-				directionalLightingIntensity >>
-				billboardSize;
-
-			// Enable directional lighting
-			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-
-			// Set lightsource billboard
-			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
-			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
-			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
-			_fe3d.billboardEntity_setVisible("@@lightSource", true);
-		}
-		else if (lineType == "POINT_LIGHT")
+		else if (lineType == "LIGHT")
 		{
 			// Data placeholders
 			string lightID;
@@ -372,6 +372,50 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.lightEntity_setShape(lightID, LightShape(shape));
 			_loadedLightIDs.push_back(lightID);
 		}
+		else if (lineType == "REFLECTION")
+		{
+			// Data placeholders
+			string reflectionID;
+			Vec3 position;
+
+			// Extract data
+			iss >>
+				reflectionID >>
+				position.x >>
+				position.y >>
+				position.z;
+
+			// Create arrows
+			if (_isEditorLoaded)
+			{
+				// Create model
+				const string newModelID = ("@@arrows_" + reflectionID);
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\arrows.obj");
+				_fe3d.modelEntity_setPosition(newModelID, position);
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_ARROWS_SIZE);
+				_fe3d.modelEntity_setShadowed(newModelID, false);
+				_fe3d.modelEntity_setReflected(newModelID, false);
+				_fe3d.modelEntity_setBright(newModelID, true);
+
+				// Bind AABB
+				_fe3d.aabbEntity_create(newModelID);
+				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_ARROWS_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+			}
+
+			// Create reflection
+			_fe3d.reflectionEntity_create(reflectionID);
+			_fe3d.reflectionEntity_setPosition(reflectionID, position);
+			_loadedReflectionIDs.push_back(reflectionID);
+		}
+		else if (lineType == "EDITOR_SPEED")
+		{
+			if (_isEditorLoaded)
+			{
+				iss >> _editorSpeed;
+			}
+		}
 		else if (lineType == "LOD_DISTANCE")
 		{
 			// Data placeholders
@@ -383,7 +427,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Set distance
 			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
-		else if (lineType == "SCENE_REFLECTION_HEIGHT")
+		else if (lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders
 			float reflectionHeight;
@@ -395,54 +439,47 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Set height
 			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
 		}
-		else if (lineType == "EDITOR_SPEED")
+		else if (lineType == "LIGHTING_AMBIENT")
 		{
-			if (_isEditorLoaded)
-			{
-				iss >> _editorSpeed;
-			}
+			// Values
+			Vec3 ambientLightingColor;
+			float ambientLightingIntensity;
+
+			// Extract
+			iss >>
+				ambientLightingColor.r >>
+				ambientLightingColor.g >>
+				ambientLightingColor.b >>
+				ambientLightingIntensity;
+
+			// Enable ambient lighting
+			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 		}
-		else if (lineType == "EDITOR_POSITION")
+		else if (lineType == "LIGHTING_DIRECTIONAL")
 		{
 			// Data placeholders
-			Vec3 position;
+			Vec3 directionalLightingPosition, directionalLightingColor;
+			float directionalLightingIntensity, billboardSize;
 
 			// Extract data
-			iss >> position.x >> position.y >> position.z;
+			iss >>
+				directionalLightingPosition.x >>
+				directionalLightingPosition.y >>
+				directionalLightingPosition.z >>
+				directionalLightingColor.r >>
+				directionalLightingColor.g >>
+				directionalLightingColor.b >>
+				directionalLightingIntensity >>
+				billboardSize;
 
-			// Set position
-			if (_isEditorLoaded)
-			{
-				_fe3d.camera_setPosition(position);
-			}
-		}
-		else if (lineType == "EDITOR_YAW")
-		{
-			// Data placeholders
-			float yaw;
+			// Enable directional lighting
+			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 
-			// Extract data
-			iss >> yaw;
-
-			// Set yaw
-			if (_isEditorLoaded)
-			{
-				_fe3d.camera_setYaw(yaw);
-			}
-		}
-		else if (lineType == "EDITOR_PITCH")
-		{
-			// Data placeholders
-			float pitch;
-
-			// Extract data
-			iss >> pitch;
-
-			// Set pitch
-			if (_isEditorLoaded)
-			{
-				_fe3d.camera_setPitch(pitch);
-			}
+			// Set lightsource billboard
+			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
+			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
+			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
+			_fe3d.billboardEntity_setVisible("@@lightSource", true);
 		}
 		else if (lineType == "GRAPHICS_SHADOWS")
 		{

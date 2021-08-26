@@ -463,6 +463,43 @@ bool SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
+	// Write lights
+	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		bool isCustomSceneLight =
+			find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
+		if ((lightID[0] != '@') && isCustomSceneLight)
+		{
+			// Data to save
+			auto position = _fe3d.lightEntity_getPosition(lightID);
+			auto radius = _fe3d.lightEntity_getRadius(lightID);
+			auto color = _fe3d.lightEntity_getColor(lightID);
+			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
+
+			// Write data
+			file <<
+				"LIGHT " <<
+				lightID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				radius.x << " " <<
+				radius.y << " " <<
+				radius.z << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				intensity << endl;
+		}
+	}
+
+	// LOD distance settings
+	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
+
+	// Planar reflection height
+	file << "PLANAR_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
+
 	// Check if allowed to save
 	if (_hasCustomSceneLighting)
 	{
@@ -475,7 +512,7 @@ bool SceneEditor::saveCustomSceneToFile()
 
 			// Write data
 			file <<
-				"AMBIENT_LIGHT " <<
+				"LIGHTING_AMBIENT " <<
 				ambientLightingColor.r << " " <<
 				ambientLightingColor.g << " " <<
 				ambientLightingColor.b << " " <<
@@ -494,7 +531,7 @@ bool SceneEditor::saveCustomSceneToFile()
 
 			// Write data
 			file <<
-				"DIRECTIONAL_LIGHT " <<
+				"LIGHTING_DIRECTIONAL " <<
 				directionalLightingPosition.x << " " <<
 				directionalLightingPosition.y << " " <<
 				directionalLightingPosition.z << " " <<
@@ -506,43 +543,6 @@ bool SceneEditor::saveCustomSceneToFile()
 				billboardLightness << endl;
 		}
 	}
-
-	// Write lights
-	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
-	{
-		// Check if allowed to save
-		bool isCustomSceneLight =
-			find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
-		if ((lightID[0] != '@') && isCustomSceneLight)
-		{
-			// Data to save
-			auto position = _fe3d.lightEntity_getPosition(lightID);
-			auto radius = _fe3d.lightEntity_getRadius(lightID);
-			auto color = _fe3d.lightEntity_getColor(lightID);
-			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
-
-			// Write data
-			file <<
-				"POINT_LIGHT " <<
-				lightID << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				radius.x << " " <<
-				radius.y << " " <<
-				radius.z << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				intensity << endl;
-		}
-	}
-
-	// LOD distance settings
-	file << "LOD_DISTANCE " << _fe3d.misc_getLevelOfDetailDistance() << endl;
-
-	// Reflection height
-	file << "SCENE_REFLECTION_HEIGHT " << _fe3d.gfx_getPlanarReflectionHeight() << endl;
 
 	// Check if allowed to save
 	if (_hasCustomSceneGraphics)

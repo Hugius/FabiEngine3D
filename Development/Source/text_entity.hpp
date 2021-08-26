@@ -13,7 +13,6 @@ public:
 	using ImageEntity::ImageEntity;
 	
 	// Voids
-	void setVisible(bool value);
 	void setCentered(bool value);
 	void setDynamic(bool value);
 	void createCharacterEntity(shared_ptr<ImageEntity> character);
@@ -27,7 +26,6 @@ public:
 	const string& getFontPath();
 
 	// Booleans
-	const bool isVisible();
 	const bool isCentered();
 	const bool isDynamic();
 
@@ -40,7 +38,6 @@ private:
 	string _fontPath = "";
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isCentered = false;
 	bool _isDynamic = false;
 

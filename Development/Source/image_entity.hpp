@@ -13,7 +13,8 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void updateModelMatrix();
+	void updateTransformationMatrix();
+	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
@@ -51,7 +52,7 @@ public:
 	const string& getDiffuseMapPath();
 
 	// Matrices
-	const Matrix44 getModelMatrix();
+	const Matrix44 getTransformationMatrix();
 
 	// Vectors
 	const Vec3 getColor();
@@ -76,6 +77,7 @@ public:
 	const unsigned int getDepth();
 
 	// Booleans
+	const bool isVisible();
 	const bool isMirroredHorizonally();
 	const bool isMirroredVertically();
 	const bool isSpriteAnimationStarted();
@@ -92,7 +94,7 @@ private:
 	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 
 	// Matrices
-	Matrix44 _modelMatrix = Matrix44(1.0f);
+	Matrix44 _transformationMatrix = Matrix44(1.0f);
 
 	// Strings
 	string _diffuseMapPath = "";
@@ -120,6 +122,7 @@ private:
 	unsigned int _depth = 0;
 
 	// Booleans
+	bool _isVisible = true;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
 	bool _isMirroredHorizontally = false;

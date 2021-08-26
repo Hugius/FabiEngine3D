@@ -4,7 +4,7 @@
 
 using std::max;
 
-void AabbEntity::updateModelMatrix()
+void AabbEntity::updateTransformationMatrix()
 {
 	// Temporary values
 	Matrix44 translationMatrix;
@@ -17,7 +17,12 @@ void AabbEntity::updateModelMatrix()
 	scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
 
 	// Final matrix
-	_modelMatrix = translationMatrix * scalingMatrix;
+	_transformationMatrix = translationMatrix * scalingMatrix;
+}
+
+void AabbEntity::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void AabbEntity::setPosition(Vec3 value)
@@ -99,9 +104,9 @@ const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()
 	return _renderBuffer;
 }
 
-const Matrix44 & AabbEntity::getModelMatrix()
+const Matrix44 & AabbEntity::getTransformationMatrix()
 {
-	return _modelMatrix;
+	return _transformationMatrix;
 }
 
 const Vec3 AabbEntity::getLocalPosition()
@@ -137,6 +142,11 @@ const AabbParentType AabbEntity::getParentType()
 const Direction AabbEntity::getCollisionDirection()
 {
 	return _collisionDirection;
+}
+
+const bool AabbEntity::isVisible()
+{
+	return _isVisible;
 }
 
 const bool AabbEntity::isRaycastResponsive()

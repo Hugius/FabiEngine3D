@@ -9,16 +9,13 @@ class BaseEntity
 public:
 	BaseEntity(const string& ID);
 
-	void setVisible(bool value);
-
-	const string& getID() const;
-
-	const bool isVisible() const;
-
-	virtual void dummy() {}
+	// Strings
+	const string& getID();
 
 private:
-	const string _ID;
+	// Voids
+	virtual void _dummy() {}
 
-	bool _isVisible = true;
+	// Strings
+	const string _ID;
 };

@@ -129,9 +129,6 @@ void ModelEntityManager::update()
 	{
 		if (entity->isVisible())
 		{
-			// Update model matrix
-			entity->updateModelMatrix();
-
 			// Check if entity has a LOD entity
 			if (!entity->getLodEntityID().empty())
 			{
@@ -151,6 +148,9 @@ void ModelEntityManager::update()
 				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
+
+			// Update transformation matrix
+			entity->updateTransformationMatrix();
 		}
 	}
 }

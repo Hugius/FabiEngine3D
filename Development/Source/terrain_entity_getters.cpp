@@ -165,6 +165,11 @@ const vector<float>& TerrainEntity::getPixelValues()
 	return _pixelValues;
 }
 
+const bool TerrainEntity::isVisible()
+{
+	return _isVisible;
+}
+
 const bool TerrainEntity::isSpecularLighted()
 {
 	return _isSpecularLighted;

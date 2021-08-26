@@ -137,14 +137,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		float closestDistance = 0.0f;
 		for (const auto& [keyID, reflectionEntity] : reflectionEntities)
 		{
-			if (reflectionEntity->isVisible())
+			auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
+			if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
 			{
-				auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
-				if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
-				{
-					closestReflectionEntityID = reflectionEntity->getID();
-					closestDistance = absoluteDistance;
-				}
+				closestReflectionEntityID = reflectionEntity->getID();
+				closestDistance = absoluteDistance;
 			}
 		}
 
@@ -184,10 +181,10 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			const auto buffer = entity->getRenderBuffer(partID);
 
 			// Model matrices
-			const auto& modelMatrix = entity->getModelMatrix(partID);
-			Matrix33 normalModelMatrix = Matrix33(modelMatrix);
-			normalModelMatrix.invert();
-			normalModelMatrix.transpose();
+			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
+			Matrix33 normalTransformationMatrix = Matrix33(transformationMatrix);
+			normalTransformationMatrix.invert();
+			normalTransformationMatrix.transpose();
 
 			// Shader uniforms
 			_shader.uploadUniform("u_color", entity->getColor(partID));
@@ -196,8 +193,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
 			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
-			_shader.uploadUniform("u_modelMatrix", modelMatrix);
-			_shader.uploadUniform("u_normalModelMatrix", normalModelMatrix);
+			_shader.uploadUniform("u_transformationMatrix", transformationMatrix);
+			_shader.uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures

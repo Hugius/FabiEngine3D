@@ -98,7 +98,7 @@ void TextEntityManager::update()
 		}
 		else
 		{
-			entity->updateModelMatrix(); // Whole word
+			entity->updateTransformationMatrix(); // Whole word
 		}
 	}
 }

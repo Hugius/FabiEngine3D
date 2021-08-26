@@ -10,6 +10,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void setVisible(bool value);
 	void setPosition(Vec3 value);
 	void move(Vec3 value);
 	void setRadius(Vec3 value);
@@ -25,6 +26,9 @@ public:
 	// Floats
 	const float getIntensity();
 
+	// Booleans
+	const bool isVisible();
+
 	// Miscellaneous
 	const LightShape getShape();
 
@@ -36,6 +40,9 @@ private:
 
 	// Floats
 	float _intensity = 1.0f;
+
+	// Booleans
+	bool _isVisible = true;
 
 	// Miscellaneous
 	LightShape _shape = LightShape::CIRCLE;

@@ -78,12 +78,6 @@ void BillboardEntityManager::update()
 		// Update rotation
 		entity->setRotation(rotation);
 
-		// Update model matrix
-		if (entity->isVisible())
-		{
-			entity->updateModelMatrix();
-		}
-
 		// Update sprite animations
 		if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() && 
 			(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
@@ -115,6 +109,12 @@ void BillboardEntityManager::update()
 			{
 				entity->increasePassedSpriteAnimationFrames();
 			}
+		}
+
+		// Update transformation matrix
+		if (entity->isVisible())
+		{
+			entity->updateTransformationMatrix();
 		}
 	}
 }

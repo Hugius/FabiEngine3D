@@ -141,7 +141,7 @@ void MasterRenderer::_captureShadows()
 						lodEntity->setRotation(modelEntity->getRotation());
 						lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 						lodEntity->setVisible(modelEntity->isVisible());
-						lodEntity->updateModelMatrix();
+						lodEntity->updateTransformationMatrix();
 
 						// Render LOD entity
 						_modelEntityShadowRenderer.render(lodEntity);
@@ -151,7 +151,7 @@ void MasterRenderer::_captureShadows()
 						lodEntity->setRotation(originalRotation);
 						lodEntity->setSize(originalSize);
 						lodEntity->setVisible(originalVisibility);
-						lodEntity->updateModelMatrix();
+						lodEntity->updateTransformationMatrix();
 					}
 					else
 					{

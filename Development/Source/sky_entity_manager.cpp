@@ -138,12 +138,6 @@ void SkyEntityManager::update()
 	// Check if main sky exists
 	if (mainSky != nullptr)
 	{
-		// Update rotation
-		if (mainSky->isVisible())
-		{
-			mainSky->updateRotation();
-		}
-
 		// Update sky exposure
 		if (_renderBus.isSkyExposureEnabled())
 		{
@@ -165,6 +159,13 @@ void SkyEntityManager::update()
 		else
 		{
 			mainSky->setLightness(mainSky->getOriginalLightness()); // Revert lightness
+		}
+
+		// Update rotation
+		if (mainSky->isVisible())
+		{
+			mainSky->setRotation(mainSky->getRotation() + mainSky->getRotationSpeed());
+			mainSky->updateRotationMatrix();
 		}
 	}
 }

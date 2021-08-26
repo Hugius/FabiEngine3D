@@ -15,7 +15,8 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void updateModelMatrix();
+	void updateTransformationMatrix();
+	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPosition(Vec3 value);
 	void setSize(Vec3 value);
@@ -35,7 +36,7 @@ public:
 	const string& getParentID();
 
 	// Matrices
-	const Matrix44& getModelMatrix();
+	const Matrix44& getTransformationMatrix();
 
 	// Vectors
 	const Vec3 getLocalPosition();
@@ -44,6 +45,7 @@ public:
 	const Vec3 getSize();
 
 	// Booleans
+	const bool isVisible();
 	const bool isRaycastResponsive();
 	const bool isCollisionResponsive();
 	const bool hasParent();
@@ -63,7 +65,7 @@ private:
 	string _parentID = "";
 
 	// Matrices
-	Matrix44 _modelMatrix = Matrix44(1.0f);
+	Matrix44 _transformationMatrix = Matrix44(1.0f);
 
 	// Vectors
 	Vec3 _localPosition = Vec3(0.0f);
@@ -72,6 +74,7 @@ private:
 	Vec3 _size = Vec3(1.0f);
 
 	// Booleans
+	bool _isVisible = true;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;

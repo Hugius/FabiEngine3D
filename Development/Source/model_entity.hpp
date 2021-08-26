@@ -16,7 +16,8 @@ public:
 	
 	// Voids
 	void createPart(const string& ID);
-	void updateModelMatrix();
+	void updateTransformationMatrix();
+	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID = "");
 	void setDiffuseMap(TextureID value, const string& partID = "");
 	void setEmissionMap(TextureID value, const string& partID = "");
@@ -68,7 +69,7 @@ public:
 	const string& getLodEntityID();
 
 	// Matrices
-	const Matrix44& getModelMatrix(const string& partID = "");
+	const Matrix44& getTransformationMatrix(const string& partID = "");
 
 	// Vectors
 	const Vec3 getPosition(const string& partID = "");
@@ -89,6 +90,7 @@ public:
 	const float getMaxHeight();
 
 	// Booleans
+	const bool isVisible();
 	const bool isTransparent();
 	const bool isFaceCulled();
 	const bool isSpecularLighted();
@@ -133,7 +135,7 @@ private:
 		string normalMapPath = "";
 
 		// Matrices
-		Matrix44 modelMatrix = Matrix44(1.0f);
+		Matrix44 transformationMatrix = Matrix44(1.0f);
 
 		// Vectors
 		Vec3 localPosition = Vec3(0.0f);
@@ -179,6 +181,7 @@ private:
 	float _maxHeight = (numeric_limits<float>::max)();
 
 	// Booleans
+	bool _isVisible = true;
 	bool _isCameraStatic	 = false;
 	bool _isTransparent      = false;
 	bool _isFaceCulled       = false;

@@ -14,7 +14,8 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void updateModelMatrix();
+	void updateTransformationMatrix();
+	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCameraFacingX(bool value);
 	void setCameraFacingY(bool value);
@@ -63,7 +64,7 @@ public:
 	const string& getDiffuseMapPath();
 
 	// Matrices
-	const Matrix44& getModelMatrix();
+	const Matrix44& getTransformationMatrix();
 
 	// Vectors
 	const Vec3 getPosition();
@@ -90,6 +91,7 @@ public:
 	const unsigned int getSpriteAnimationLoops();
 
 	// Booleans
+	const bool isVisible();
 	const bool isTransparent();
 	const bool isSpriteAnimationStarted();
 	const bool isSpriteAnimationPaused();
@@ -116,7 +118,7 @@ private:
 	string _fontPath = "";
 
 	// Matrices
-	Matrix44 _modelMatrix = Matrix44(1.0f);
+	Matrix44 _transformationMatrix = Matrix44(1.0f);
 
 	// Vectors
 	Vec3 _position = Vec3(0.0f);
@@ -143,6 +145,7 @@ private:
 	unsigned int _spriteAnimationLoops = 0;
 
 	// Booleans
+	bool _isVisible = true;
 	bool _isTransparent = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;

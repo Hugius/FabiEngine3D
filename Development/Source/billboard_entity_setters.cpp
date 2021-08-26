@@ -6,33 +6,38 @@
 using std::max;
 using std::clamp;
 
-void BillboardEntity::updateModelMatrix()
+void BillboardEntity::updateTransformationMatrix()
 {
 	// Identity matrix
-	_modelMatrix = Matrix44(1.0f);
+	_transformationMatrix = Matrix44(1.0f);
 
 	// Translation matrix
 	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
-	_modelMatrix = _modelMatrix * translationMatrix;
+	_transformationMatrix = _transformationMatrix * translationMatrix;
 
 	// Rotation origin matrix - translate
 	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_size.y / 2.0f), 0.0f);
-	_modelMatrix = _modelMatrix * rotationOriginMatrix;
+	_transformationMatrix = _transformationMatrix * rotationOriginMatrix;
 
 	// Rotation matrix
 	Matrix44 rotationMatrix = Matrix44::createRotation(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z));
-	_modelMatrix = _modelMatrix * rotationMatrix;
+	_transformationMatrix = _transformationMatrix * rotationMatrix;
 
 	// Rotation origin matrix - translate back
 	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_size.y / 2.0f), 0.0f);
-	_modelMatrix = _modelMatrix * rotationOriginMatrix;
+	_transformationMatrix = _transformationMatrix * rotationOriginMatrix;
 
 	// Scaling matrix
 	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
-	_modelMatrix = _modelMatrix * scalingMatrix;
+	_transformationMatrix = _transformationMatrix * scalingMatrix;
+}
+
+void BillboardEntity::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)

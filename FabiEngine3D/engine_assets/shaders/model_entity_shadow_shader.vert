@@ -8,7 +8,7 @@ layout (location = 4) in vec3 v_offset;
 
 // Matrix uniforms
 uniform mat4 u_lightSpaceMatrix;
-uniform mat4 u_modelMatrix;
+uniform mat4 u_transformationMatrix;
 
 // Float uniforms
 uniform float u_positionY;
@@ -25,7 +25,7 @@ out vec2 f_uv;
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
+	vec4 worldSpacePos = (u_transformationMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
 	vec4 lightSpacePos = (u_lightSpaceMatrix * worldSpacePos);
 
 	// GLSL variables

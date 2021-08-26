@@ -61,7 +61,7 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			const auto buffer = entity->getRenderBuffer(partID);
 
 			// Shader uniforms
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(partID));
+			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures

@@ -10,13 +10,14 @@ void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 	_renderBuffer = value;
 }
 
-void SkyEntity::updateRotation()
+void SkyEntity::updateRotationMatrix()
 {
-	if (_rotationSpeed != 0.0f)
-	{
-		_rotation += _rotationSpeed;
-		_rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(_rotation));
-	}
+	_rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(_rotation));
+}
+
+void SkyEntity::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
@@ -42,6 +43,11 @@ void SkyEntity::setOriginalLightness(float value)
 void SkyEntity::setLightness(float value)
 {
 	_lightness = max(0.0f, value);
+}
+
+void SkyEntity::setRotation(float value)
+{
+	_rotation = value;
 }
 
 void SkyEntity::setRotationSpeed(float value)
@@ -89,6 +95,11 @@ const float SkyEntity::getLightness()
 	return _lightness;
 }
 
+const float SkyEntity::getRotation()
+{
+	return _rotation;
+}
+
 const float SkyEntity::getRotationSpeed()
 {
 	return _rotationSpeed;
@@ -102,6 +113,11 @@ const bool SkyEntity::hasCubeMap()
 const bool SkyEntity::isWireFramed()
 {
 	return _isWireFramed;
+}
+
+const bool SkyEntity::isVisible()
+{
+	return _isVisible;
 }
 
 const bool SkyEntity::hasRenderBuffer()

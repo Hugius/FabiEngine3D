@@ -364,7 +364,6 @@ vec3 calculateCubeReflections(vec3 color, vec3 normal)
 			vec3 viewDirection = normalize(f_pos - u_cameraPosition);
 			vec3 reflectionDirection = reflect(viewDirection, normal);
 			vec3 cubeReflectionMapColor = texture(u_cubeReflectionMap, reflectionDirection).rgb;
-			cubeReflectionMapColor = pow(cubeReflectionMapColor, vec3(2.2f));
 			vec3 mixedColor = mix(color, cubeReflectionMapColor, 0.5f);
 
 			// Return

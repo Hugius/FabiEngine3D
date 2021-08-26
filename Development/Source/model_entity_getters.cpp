@@ -6,9 +6,9 @@ const shared_ptr<RenderBuffer> ModelEntity::getRenderBuffer(const string& partID
 	return _parts[_getPartIndex(partID)].renderBuffer;
 }
 
-const Matrix44& ModelEntity::getModelMatrix(const string& partID)
+const Matrix44& ModelEntity::getTransformationMatrix(const string& partID)
 {
-	return _parts[_getPartIndex(partID)].modelMatrix;
+	return _parts[_getPartIndex(partID)].transformationMatrix;
 }
 
 const TextureID ModelEntity::getDiffuseMap(const string& partID)
@@ -158,6 +158,11 @@ const vector<string> ModelEntity::getPartIDs()
 	}
 
 	return result;
+}
+
+const bool ModelEntity::isVisible()
+{
+	return _isVisible;
 }
 
 const bool ModelEntity::isTransparent()

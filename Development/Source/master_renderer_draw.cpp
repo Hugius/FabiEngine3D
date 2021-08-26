@@ -95,7 +95,7 @@ void MasterRenderer::_renderModelEntities()
 				lodEntity->setRotation(modelEntity->getRotation());
 				lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 				lodEntity->setVisible(modelEntity->isVisible());
-				lodEntity->updateModelMatrix();
+				lodEntity->updateTransformationMatrix();
 
 				// Render LOD entity
 				_modelEntityColorRenderer.render(lodEntity, _entityBus->getReflectionEntities());
@@ -105,7 +105,7 @@ void MasterRenderer::_renderModelEntities()
 				lodEntity->setRotation(originalRotation);
 				lodEntity->setSize(originalSize);
 				lodEntity->setVisible(originalVisibility);
-				lodEntity->updateModelMatrix();
+				lodEntity->updateTransformationMatrix();
 			}
 			else // Render high-quality entity
 			{

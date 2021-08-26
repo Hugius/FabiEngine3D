@@ -85,7 +85,7 @@ void MasterRenderer::_captureSceneDepth()
 							lodEntity->setRotation(modelEntity->getRotation());
 							lodEntity->setSize((modelEntity->getSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 							lodEntity->setVisible(modelEntity->isVisible());
-							lodEntity->updateModelMatrix();
+							lodEntity->updateTransformationMatrix();
 
 							// Render LOD entity
 							_modelEntityDepthRenderer.render(lodEntity, clippingY, isUnderWater);
@@ -95,7 +95,7 @@ void MasterRenderer::_captureSceneDepth()
 							lodEntity->setRotation(originalRotation);
 							lodEntity->setSize(originalSize);
 							lodEntity->setVisible(originalVisibility);
-							lodEntity->updateModelMatrix();
+							lodEntity->updateTransformationMatrix();
 						}
 						else
 						{

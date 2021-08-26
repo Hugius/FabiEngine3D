@@ -1,5 +1,10 @@
 #include "text_entity.hpp"
 
+void TextEntity::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 void TextEntity::setCentered(bool value)
 {
 	_isCentered = value;
@@ -49,7 +54,7 @@ void TextEntity::updateCharacterEntities()
 		character->setMinPosition(this->getMinPosition());
 		character->setMaxPosition(this->getMaxPosition());
 		character->setVisible(this->isVisible());
-		character->updateModelMatrix();
+		character->updateTransformationMatrix();
 
 		// Miscellaneous
 		index++;
@@ -69,6 +74,11 @@ void TextEntity::setTextContent(const string& text)
 void TextEntity::setFontPath(const string& fontPath)
 {
 	_fontPath = fontPath;
+}
+
+const bool TextEntity::isVisible()
+{
+	return _isVisible;
 }
 
 const bool TextEntity::isCentered()

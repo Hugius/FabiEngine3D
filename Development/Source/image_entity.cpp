@@ -6,13 +6,18 @@
 using std::max;
 using std::clamp;
 
-void ImageEntity::updateModelMatrix()
+void ImageEntity::updateTransformationMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, 0.0f);
 	Matrix44 rotationMatrix = Matrix44::createRotationX(Math::convertToRadians(_rotation));
 	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, 1.0f);
 
-	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	_transformationMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+}
+
+void ImageEntity::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
@@ -273,6 +278,11 @@ const float ImageEntity::getAlpha()
 	return _alpha;
 }
 
+const bool ImageEntity::isVisible()
+{
+	return _isVisible;
+}
+
 const bool ImageEntity::isMirroredHorizonally()
 {
 	return _isMirroredHorizontally;
@@ -288,9 +298,9 @@ const bool ImageEntity::hasDiffuseMap()
 	return (_diffuseMap != 0);
 }
 
-const Matrix44 ImageEntity::getModelMatrix()
+const Matrix44 ImageEntity::getTransformationMatrix()
 {
-	return _modelMatrix;
+	return _transformationMatrix;
 }
 
 const Vec2 ImageEntity::getPosition()

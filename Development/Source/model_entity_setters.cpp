@@ -11,59 +11,64 @@ void ModelEntity::createPart(const string& ID)
 	_parts.push_back(PartData(ID));
 }
 
-void ModelEntity::updateModelMatrix()
+void ModelEntity::updateTransformationMatrix()
 {
 	for (size_t i = 0; i < _parts.size(); i++)
 	{
 		// Identity matrix
-		_parts[i].modelMatrix = Matrix44(1.0f);
+		_parts[i].transformationMatrix = Matrix44(1.0f);
 
 		// Base translation matrix
 		Matrix44 baseTranslationMatrix = Matrix44::createTranslation(_basePosition.x, _basePosition.y, _basePosition.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * baseTranslationMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * baseTranslationMatrix;
 
 		// Translation matrix
 		Matrix44 translationMatrix = Matrix44::createTranslation(_parts[i].localPosition.x, _parts[i].localPosition.y, _parts[i].localPosition.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * translationMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * translationMatrix;
 
 		// Base rotation origin matrix - translate
 		Matrix44 baseRotationOriginMatrix = Matrix44::createTranslation(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationOriginMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * baseRotationOriginMatrix;
 
 		// Base rotation matrix
 		Matrix44 baseRotationMatrix = Matrix44::createRotation(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
 			Math::convertToRadians(_baseRotation.z));
-		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * baseRotationMatrix;
 
 		// Base rotation origin matrix - translate back
 		baseRotationOriginMatrix = Matrix44::createTranslation(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * baseRotationOriginMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * baseRotationOriginMatrix;
 
 		// Rotation origin matrix - translate
 		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(_parts[i].localRotationOrigin.x, _parts[i].localRotationOrigin.y, _parts[i].localRotationOrigin.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationOriginMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * rotationOriginMatrix;
 
 		// Rotation matrix
 		Matrix44 rotationMatrix = Matrix44::createRotation(
 			Math::convertToRadians(_parts[i].localRotation.x),
 			Math::convertToRadians(_parts[i].localRotation.y),
 			Math::convertToRadians(_parts[i].localRotation.z));
-		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * rotationMatrix;
 
 		// Rotation origin matrix - translate back
 		rotationOriginMatrix = Matrix44::createTranslation(-_parts[i].localRotationOrigin.x, -_parts[i].localRotationOrigin.y, -_parts[i].localRotationOrigin.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * rotationOriginMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * rotationOriginMatrix;
 
 		// Base scaling matrix
 		Matrix44 baseScalingMatrix = Matrix44::createScaling(_baseSize.x, _baseSize.y, _baseSize.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * baseScalingMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * baseScalingMatrix;
 
 		// Scaling matrix
 		Matrix44 scalingMatrix = Matrix44::createScaling(_parts[i].localSize.x, _parts[i].localSize.y, _parts[i].localSize.z);
-		_parts[i].modelMatrix = _parts[i].modelMatrix * scalingMatrix;
+		_parts[i].transformationMatrix = _parts[i].transformationMatrix * scalingMatrix;
 	}
+}
+
+void ModelEntity::setVisible(bool value)
+{
+	_isVisible = value;
 }
 
 void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID)

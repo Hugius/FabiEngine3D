@@ -5,9 +5,9 @@ const shared_ptr<RenderBuffer> BillboardEntity::getRenderBuffer()
 	return _renderBuffer;
 }
 
-const Matrix44 & BillboardEntity::getModelMatrix()
+const Matrix44 & BillboardEntity::getTransformationMatrix()
 {
-	return _modelMatrix;
+	return _transformationMatrix;
 }
 
 const TextureID BillboardEntity::getDiffuseMap()
@@ -118,6 +118,11 @@ const unsigned int BillboardEntity::getSpriteAnimationLoops()
 const int BillboardEntity::getMaxSpriteAnimationLoops()
 {
 	return _maxSpriteAnimationLoops;
+}
+
+const bool BillboardEntity::isVisible()
+{
+	return _isVisible;
 }
 
 const bool BillboardEntity::isTransparent()

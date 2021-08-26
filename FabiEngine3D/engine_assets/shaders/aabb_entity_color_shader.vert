@@ -5,7 +5,7 @@
 layout (location = 0) in vec3 v_pos;
 
 // Matrix uniforms
-uniform mat4 u_modelMatrix;
+uniform mat4 u_transformationMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projectionMatrix;
 
@@ -16,7 +16,7 @@ out vec2 f_uv;
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = (u_modelMatrix * vec4(v_pos, 1.0f));
+	vec4 worldSpacePos = (u_transformationMatrix * vec4(v_pos, 1.0f));
 	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
 	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
 

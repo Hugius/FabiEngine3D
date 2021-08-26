@@ -16,13 +16,15 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void updateRotationMatrix();
+	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void updateRotation();
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);
 	void setCubeMap(TextureID value);
 	void setOriginalLightness(float value);
 	void setLightness(float value);
+	void setRotation(float value);
 	void setRotationSpeed(float value);
 	void setWireFramed(bool value);
 
@@ -41,9 +43,11 @@ public:
 	// Floats
 	const float getOriginalLightness();
 	const float getLightness();
+	const float getRotation();
 	const float getRotationSpeed();
 
 	// Booleans
+	const bool isVisible();
 	const bool hasRenderBuffer();
 	const bool hasCubeMap();
 	const bool isWireFramed();
@@ -71,6 +75,7 @@ private:
 	float _rotation = 0.0f;
 
 	// Booleans
+	bool _isVisible = true;
 	bool _isWireFramed = false;
 
 	// Miscellaneous

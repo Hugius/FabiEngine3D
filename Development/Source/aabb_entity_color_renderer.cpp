@@ -28,7 +28,7 @@ void AabbEntityColorRenderer::render(const shared_ptr<AabbEntity> entity)
 	if (entity->isVisible())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 
 		// Bind buffer
 		glBindVertexArray(entity->getRenderBuffer()->getVAO());

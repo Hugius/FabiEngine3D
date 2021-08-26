@@ -238,10 +238,10 @@ void SceneEditor::clearCurrentScene()
 			// Delete reflection
 			_fe3d.reflectionEntity_delete(ID);
 
-			// Delete corresponding arrows model
+			// Delete corresponding camera model
 			if (!_currentSceneID.empty())
 			{
-				_fe3d.modelEntity_delete("@@arrows_" + ID);
+				_fe3d.modelEntity_delete("@@camera_" + ID);
 			}
 		}
 	}

@@ -14,7 +14,6 @@ public:
 
 	// Voids
 	void updateTransformationMatrix();
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
@@ -77,7 +76,6 @@ public:
 	const unsigned int getDepth();
 
 	// Booleans
-	const bool isVisible();
 	const bool isMirroredHorizonally();
 	const bool isMirroredVertically();
 	const bool isSpriteAnimationStarted();
@@ -122,7 +120,6 @@ private:
 	unsigned int _depth = 0;
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
 	bool _isMirroredHorizontally = false;

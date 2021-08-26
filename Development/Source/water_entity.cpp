@@ -55,11 +55,6 @@ void WaterEntity::setUvRepeat(float value)
 	_uvRepeat = max(0.0f, value);
 }
 
-void WaterEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void WaterEntity::setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_lowQualityRenderBuffer = value;
@@ -238,11 +233,6 @@ const float WaterEntity::getSize()
 const float WaterEntity::getTransparency()
 {
 	return _transparency;
-}
-
-const bool WaterEntity::isVisible()
-{
-	return _isVisible;
 }
 
 const bool WaterEntity::isWaving()

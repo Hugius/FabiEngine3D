@@ -17,7 +17,6 @@ public:
 
 	// Voids
 	void updateRotationMatrix();
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setDiffuseMapPaths(const array<string, 6>& value);
 	void setColor(Vec3 value);
@@ -47,7 +46,6 @@ public:
 	const float getRotationSpeed();
 
 	// Booleans
-	const bool isVisible();
 	const bool hasRenderBuffer();
 	const bool hasCubeMap();
 	const bool isWireFramed();
@@ -75,7 +73,6 @@ private:
 	float _rotation = 0.0f;
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isWireFramed = false;
 
 	// Miscellaneous

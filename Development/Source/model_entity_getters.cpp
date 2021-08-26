@@ -160,11 +160,6 @@ const vector<string> ModelEntity::getPartIDs()
 	return result;
 }
 
-const bool ModelEntity::isVisible()
-{
-	return _isVisible;
-}
-
 const bool ModelEntity::isTransparent()
 {
 	return _isTransparent;

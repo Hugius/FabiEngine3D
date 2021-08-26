@@ -7,7 +7,7 @@ void SceneEditor::_updateReflectionEditing()
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
 	// Reset selected reflection from last frame
-	_selectedArrowsID = "";
+	_selectedCameraID = "";
 
 	// User must not be in placement mode
 	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
@@ -15,33 +15,33 @@ void SceneEditor::_updateReflectionEditing()
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
-		// Check if user selected a arrows model
+		// Check if user selected a camera model
 		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 		{
 			// Must be reflection preview entity
-			if (entityID.substr(0, string("@@arrows").size()) == "@@arrows")
+			if (entityID.substr(0, string("@@camera").size()) == "@@camera")
 			{
 				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Set new selected arrows
-					_selectedArrowsID = entityID;
+					// Set new selected camera
+					_selectedCameraID = entityID;
 
 					// Change cursor
 					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
-					// Check if user clicked arrows
+					// Check if user clicked camera
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						// Check if same arrows is not clicked again
-						if (_selectedArrowsID != _activeArrowsID)
+						// Check if same camera is not clicked again
+						if (_selectedCameraID != _activeCameraID)
 						{
 							// Set new active reflection
-							_activeArrowsID = _selectedArrowsID;
+							_activeCameraID = _selectedCameraID;
 
 							// Filling writeFields
-							Vec3 position = _fe3d.modelEntity_getPosition(_activeArrowsID);
+							Vec3 position = _fe3d.modelEntity_getPosition(_activeCameraID);
 							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
@@ -50,39 +50,39 @@ void SceneEditor::_updateReflectionEditing()
 				}
 				else
 				{
-					// Don't reset if arrows is active
-					if (entityID != _activeArrowsID)
+					// Don't reset if camera is active
+					if (entityID != _activeCameraID)
 					{
-						_fe3d.modelEntity_setSize(entityID, DEFAULT_ARROWS_SIZE);
-						_fe3d.aabbEntity_setSize(entityID, DEFAULT_ARROWS_AABB_SIZE);
+						_fe3d.modelEntity_setSize(entityID, DEFAULT_CAMERA_SIZE);
+						_fe3d.aabbEntity_setSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
 					}
 				}
 			}
 		}
 
-		// Check if user made the active arrows inactive
-		if ((_selectedArrowsID.empty()) && (_activeArrowsID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if user made the active camera inactive
+		if ((_selectedCameraID.empty()) && (_activeCameraID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 		{
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 			{
-				_activeArrowsID = "";
+				_activeCameraID = "";
 				rightWindow->setActiveScreen("sceneEditorControls");
 			}
 		}
 
-		// Update arrows animations
-		if (_selectedArrowsID != _activeArrowsID)
+		// Update camera animations
+		if (_selectedCameraID != _activeCameraID)
 		{
-			_updateArrowsAnimation(_selectedArrowsID, _selectedArrowsSizeDirection);
+			_updateCameraAnimation(_selectedCameraID, _selectedCameraSizeDirection);
 		}
-		_updateArrowsAnimation(_activeArrowsID, _activeArrowsSizeDirection);
+		_updateCameraAnimation(_activeCameraID, _activeCameraSizeDirection);
 
 		// Update properties screen
-		if (!_activeArrowsID.empty())
+		if (!_activeCameraID.empty())
 		{
 			// Temporary values
-			const string activeReflectionID = _activeArrowsID.substr(string("@@arrows_").size());
+			const string activeReflectionID = _activeCameraID.substr(string("@@camera_").size());
 			auto screen = rightWindow->getScreen("reflectionPropertiesMenu");
 
 			// Activate screen
@@ -97,10 +97,10 @@ void SceneEditor::_updateReflectionEditing()
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
-					_fe3d.modelEntity_delete(_activeArrowsID);
+					_fe3d.modelEntity_delete(_activeCameraID);
 					_fe3d.reflectionEntity_delete(activeReflectionID);
 					rightWindow->setActiveScreen("sceneEditorControls");
-					_activeArrowsID = "";
+					_activeCameraID = "";
 					return;
 				}
 			}
@@ -108,10 +108,10 @@ void SceneEditor::_updateReflectionEditing()
 			// Alternative way of deleting
 			if (_fe3d.input_isKeyPressed(InputType::KEY_DELETE))
 			{
-				_fe3d.modelEntity_delete(_activeArrowsID);
+				_fe3d.modelEntity_delete(_activeCameraID);
 				_fe3d.reflectionEntity_delete(activeReflectionID);
 				rightWindow->setActiveScreen("sceneEditorControls");
-				_activeArrowsID = "";
+				_activeCameraID = "";
 				return;
 			}
 

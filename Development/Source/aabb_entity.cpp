@@ -20,11 +20,6 @@ void AabbEntity::updateTransformationMatrix()
 	_transformationMatrix = translationMatrix * scalingMatrix;
 }
 
-void AabbEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void AabbEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -142,11 +137,6 @@ const AabbParentType AabbEntity::getParentType()
 const Direction AabbEntity::getCollisionDirection()
 {
 	return _collisionDirection;
-}
-
-const bool AabbEntity::isVisible()
-{
-	return _isVisible;
 }
 
 const bool AabbEntity::isRaycastResponsive()

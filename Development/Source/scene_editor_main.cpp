@@ -105,13 +105,14 @@ void SceneEditor::load()
 	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Load preview reflection
-	_fe3d.modelEntity_create(PREVIEW_ARROWS_ID, ARROWS_MODEL_PATH);
-	_fe3d.modelEntity_setSize(PREVIEW_ARROWS_ID, DEFAULT_ARROWS_SIZE);
-	_fe3d.modelEntity_setShadowed(PREVIEW_ARROWS_ID, false);
-	_fe3d.modelEntity_setReflected(PREVIEW_ARROWS_ID, false);
-	_fe3d.modelEntity_setBright(PREVIEW_ARROWS_ID, true);
-	_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
-	_fe3d.reflectionEntity_create(PREVIEW_ARROWS_ID);
+	_fe3d.modelEntity_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
+	_fe3d.modelEntity_setSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
+	_fe3d.modelEntity_setShadowed(PREVIEW_CAMERA_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_CAMERA_ID, false);
+	_fe3d.modelEntity_setBright(PREVIEW_CAMERA_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
+	_fe3d.reflectionEntity_create(PREVIEW_CAMERA_ID);
+	_fe3d.reflectionEntity_setVisible(PREVIEW_CAMERA_ID, false);
 
 	// Create ID TextFields
 	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

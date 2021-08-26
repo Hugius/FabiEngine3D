@@ -35,11 +35,6 @@ void BillboardEntity::updateTransformationMatrix()
 	_transformationMatrix = _transformationMatrix * scalingMatrix;
 }
 
-void BillboardEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;

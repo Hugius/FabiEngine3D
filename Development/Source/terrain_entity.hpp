@@ -13,7 +13,6 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPixelValues(const vector<float>& value);
 	void setVertices(const vector<Vec3> value);
@@ -83,7 +82,6 @@ public:
 	const float getSpecularLightingIntensity();
 
 	// Booleans
-	const bool isVisible();
 	const bool isSpecularLighted();
 	const bool isWireFramed();
 	const bool hasRenderBuffer();
@@ -142,7 +140,6 @@ private:
 	float _specularLightingIntensity = 1.0f;
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isSpecularLighted = false;
 	bool _isWireFramed = false;
 

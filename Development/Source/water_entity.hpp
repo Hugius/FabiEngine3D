@@ -14,7 +14,6 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
-	void setVisible(bool value);
 	void setLowQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setHighQualityRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setQuality(WaterQuality value);
@@ -67,7 +66,6 @@ public:
 	const float getTransparency();
 
 	// Booleans
-	const bool isVisible();
 	const bool isWaving();
 	const bool isRippling();
 	const bool isSpecularLighted();
@@ -108,7 +106,6 @@ private:
 	float _transparency = 0.0f;
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isRippling = false;
 	bool _isWaving = false;
 	bool _isSpecularLighted = false;

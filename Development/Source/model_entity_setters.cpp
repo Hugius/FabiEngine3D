@@ -66,11 +66,6 @@ void ModelEntity::updateTransformationMatrix()
 	}
 }
 
-void ModelEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID)
 {
 	_parts[_getPartIndex(partID)].renderBuffer = value;

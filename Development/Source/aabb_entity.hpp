@@ -16,7 +16,6 @@ public:
 
 	// Voids
 	void updateTransformationMatrix();
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setPosition(Vec3 value);
 	void setSize(Vec3 value);
@@ -45,7 +44,6 @@ public:
 	const Vec3 getSize();
 
 	// Booleans
-	const bool isVisible();
 	const bool isRaycastResponsive();
 	const bool isCollisionResponsive();
 	const bool hasParent();
@@ -74,7 +72,6 @@ private:
 	Vec3 _size = Vec3(1.0f);
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;

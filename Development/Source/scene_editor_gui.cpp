@@ -320,7 +320,7 @@ void SceneEditor::_loadGUI()
 
 	// Right-viewport: reflectionPropertiesMenu
 	rightWindow->createScreen("reflectionPropertiesMenu");
-	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Reflection Menu", Vec3(0.0f, 1.0f, 0.0f));
 	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
 	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
 	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));

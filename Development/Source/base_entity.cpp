@@ -11,7 +11,17 @@ BaseEntity::BaseEntity(const string& ID)
 	}
 }
 
+void BaseEntity::setVisible(bool value)
+{
+	_isVisible = value;
+}
+
 const string& BaseEntity::getID()
 {
 	return _ID;
+}
+
+const bool BaseEntity::isVisible()
+{
+	return _isVisible;
 }

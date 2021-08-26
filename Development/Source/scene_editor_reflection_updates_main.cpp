@@ -25,8 +25,8 @@ void SceneEditor::_updateReflectionMenu()
 
 				// Set new preview reflection
 				_isPlacingReflection = true;
-				_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, true);
-				_fe3d.reflectionEntity_setPosition(PREVIEW_ARROWS_ID, Vec3(0.0f));
+				_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, true);
+				_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, Vec3(0.0f));
 				_fe3d.misc_centerCursor();
 
 				// Add position value forms for placing without terrain

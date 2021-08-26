@@ -15,7 +15,6 @@ public:
 
 	// Voids
 	void updateTransformationMatrix();
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCameraFacingX(bool value);
 	void setCameraFacingY(bool value);
@@ -91,7 +90,6 @@ public:
 	const unsigned int getSpriteAnimationLoops();
 
 	// Booleans
-	const bool isVisible();
 	const bool isTransparent();
 	const bool isSpriteAnimationStarted();
 	const bool isSpriteAnimationPaused();
@@ -145,7 +143,6 @@ private:
 	unsigned int _spriteAnimationLoops = 0;
 
 	// Booleans
-	bool _isVisible = true;
 	bool _isTransparent = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;

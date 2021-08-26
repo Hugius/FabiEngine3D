@@ -137,11 +137,14 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		float closestDistance = 0.0f;
 		for (const auto& [keyID, reflectionEntity] : reflectionEntities)
 		{
-			auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
-			if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
+			if (reflectionEntity->isVisible())
 			{
-				closestReflectionEntityID = reflectionEntity->getID();
-				closestDistance = absoluteDistance;
+				auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
+				if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
+				{
+					closestReflectionEntityID = reflectionEntity->getID();
+					closestDistance = absoluteDistance;
+				}
 			}
 		}
 
@@ -171,6 +174,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 		else
 		{
+			std::cout << entity->hasReflectionMap() << std::endl;
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 

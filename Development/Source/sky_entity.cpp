@@ -15,11 +15,6 @@ void SkyEntity::updateRotationMatrix()
 	_rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(_rotation));
 }
 
-void SkyEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
 {
 	_diffuseMapPaths = value;
@@ -113,11 +108,6 @@ const bool SkyEntity::hasCubeMap()
 const bool SkyEntity::isWireFramed()
 {
 	return _isWireFramed;
-}
-
-const bool SkyEntity::isVisible()
-{
-	return _isVisible;
 }
 
 const bool SkyEntity::hasRenderBuffer()

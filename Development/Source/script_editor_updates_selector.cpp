@@ -15,7 +15,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	{
 		// Check if user cancels or edits any selected text
 		if (_hasClickedLMB || _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_RIGHT) || // LMB or RMB
-			_activeActionKey != InputType::NONE || // Action keys such as arrows, enter, etc.
+			_activeActionKey != InputType::NONE || // Action keys such as arrow keys, enter, etc...
 			!newCharacters.empty() || // Typed characters
 			(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_V)) || // CTRL + V
 			(isControlKeyDown && _fe3d.input_isKeyPressed(InputType::KEY_X))) // CTRL + X

@@ -16,6 +16,11 @@ void FabiEngine3D::reflectionEntity_delete(const string& ID)
 	_core->_reflectionEntityManager.deleteEntity(ID);
 }
 
+void FabiEngine3D::reflectionEntity_setVisible(const string& ID, bool isVisible)
+{
+	_core->_reflectionEntityManager.getEntity(ID)->setVisible(isVisible);
+}
+
 void FabiEngine3D::reflectionEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_reflectionEntityManager.getEntity(ID)->setPosition(position);

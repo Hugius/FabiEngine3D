@@ -13,11 +13,10 @@ class ModelEntity final : public BaseEntity
 {
 public:
 	using BaseEntity::BaseEntity;
-	
+
 	// Voids
 	void createPart(const string& ID);
 	void updateTransformationMatrix();
-	void setVisible(bool value);
 	void setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID = "");
 	void setDiffuseMap(TextureID value, const string& partID = "");
 	void setEmissionMap(TextureID value, const string& partID = "");
@@ -90,7 +89,6 @@ public:
 	const float getMaxHeight();
 
 	// Booleans
-	const bool isVisible();
 	const bool isTransparent();
 	const bool isFaceCulled();
 	const bool isSpecularLighted();
@@ -153,7 +151,7 @@ private:
 		TextureID reflectionMap = 0;
 		TextureID normalMap = 0;
 	};
-	
+
 	// Integers
 	unsigned int _getPartIndex(string partID);
 
@@ -181,17 +179,16 @@ private:
 	float _maxHeight = (numeric_limits<float>::max)();
 
 	// Booleans
-	bool _isVisible = true;
-	bool _isCameraStatic	 = false;
-	bool _isTransparent      = false;
-	bool _isFaceCulled       = false;
-	bool _isSpecularLighted  = false;
-	bool _isShadowed         = true;
-	bool _isReflected		 = true;
+	bool _isCameraStatic = false;
+	bool _isTransparent = false;
+	bool _isFaceCulled = false;
+	bool _isSpecularLighted = false;
+	bool _isShadowed = true;
+	bool _isReflected = true;
 	bool _isDepthMapIncluded = true;
-	bool _isLevelOfDetailed  = false;
-	bool _wireFramed		 = false;
-	bool _isBright			 = false;
+	bool _isLevelOfDetailed = false;
+	bool _wireFramed = false;
+	bool _isBright = false;
 
 	// Miscellaneous
 	ReflectionType _reflectionType;

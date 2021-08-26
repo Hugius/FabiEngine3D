@@ -45,7 +45,6 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.modelEntity_setShadowed(newModelID, false);
 					_fe3d.modelEntity_setReflected(newModelID, false);
 					_fe3d.modelEntity_setBright(newModelID, true);
-					_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
 
 					// Bind AABB
 					_fe3d.aabbEntity_create(newModelID);
@@ -125,7 +124,6 @@ void SceneEditor::_updateLightPlacing()
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);
 							_fe3d.modelEntity_setBright(newModelID, true);
-							_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
 
 							// Bind AABB
 							_fe3d.aabbEntity_create(newModelID);

@@ -5,11 +5,6 @@
 using std::max;
 using std::clamp;
 
-void LightEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void LightEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -58,11 +53,6 @@ const Vec3 LightEntity::getColor()
 const float LightEntity::getIntensity()
 {
 	return _intensity;
-}
-
-const bool LightEntity::isVisible()
-{
-	return _isVisible;
 }
 
 const LightShape LightEntity::getShape()

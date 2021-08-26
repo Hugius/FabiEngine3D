@@ -33,7 +33,7 @@ void BottomViewportController::initialize()
 	_statsScreen->createTextField("gpuModel", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextField("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
 	_statsScreen->createTextField("cameraPositionYawPitch", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->createTextField("cursorPosition", Vec2(-1.0f, -0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->createTextField("cursorPosition", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextField("triangleCount", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextField("modelEntityCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->createTextField("billboardEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
@@ -154,6 +154,14 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
+	// Update AABB entity count
+	if (_fe3d.misc_checkInterval(10))
+	{
+		string textID = _statsScreen->getTextField("aabbEntityCount")->getEntityID();
+		string text = "AABB Entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
+		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
+	}
+
 	// Update light entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
@@ -162,11 +170,11 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update AABB entity count
+	// Update reflection entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
-		string textID = _statsScreen->getTextField("aabbEntityCount")->getEntityID();
-		string text = "AABB Entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
+		string textID = _statsScreen->getTextField("reflectionEntityCount")->getEntityID();
+		string text = "Reflection Entities: " + to_string(_fe3d.reflectionEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

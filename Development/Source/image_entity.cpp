@@ -15,11 +15,6 @@ void ImageEntity::updateTransformationMatrix()
 	_transformationMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void ImageEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void ImageEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;
@@ -276,11 +271,6 @@ const Vec3 ImageEntity::getColor()
 const float ImageEntity::getAlpha()
 {
 	return _alpha;
-}
-
-const bool ImageEntity::isVisible()
-{
-	return _isVisible;
 }
 
 const bool ImageEntity::isMirroredHorizonally()

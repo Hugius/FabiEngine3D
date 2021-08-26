@@ -24,7 +24,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	// Validate engine assets directory
 	if
 		(
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "arrows.obj") ||
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "camera.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "lamp.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "plane.obj") ||
@@ -132,7 +132,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Pre-load engine meshes
 		vector<string> meshPaths;
 		vector<string> temp;
-		meshPaths.push_back(meshDirectoryPath + "arrows.obj");
+		meshPaths.push_back(meshDirectoryPath + "camera.obj");
 		meshPaths.push_back(meshDirectoryPath + "cube.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");

@@ -9,8 +9,14 @@ class BaseEntity
 public:
 	BaseEntity(const string& ID);
 
+	// Voids
+	void setVisible(bool value);
+
 	// Strings
 	const string& getID();
+
+	// Booleans
+	const bool isVisible();
 
 private:
 	// Voids
@@ -18,4 +24,7 @@ private:
 
 	// Strings
 	const string _ID;
+
+	// Booleans
+	bool _isVisible = true;
 };

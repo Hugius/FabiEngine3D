@@ -385,14 +385,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				position.y >>
 				position.z;
 
-			// Create arrows
+			// Create camera
 			if (_isEditorLoaded)
 			{
 				// Create model
-				const string newModelID = ("@@arrows_" + reflectionID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\arrows.obj");
+				const string newModelID = ("@@camera_" + reflectionID);
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
 				_fe3d.modelEntity_setPosition(newModelID, position);
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_ARROWS_SIZE);
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -400,7 +400,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_ARROWS_AABB_SIZE);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
 

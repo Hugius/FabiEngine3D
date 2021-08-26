@@ -9,7 +9,7 @@ void SceneEditor::_updateReflectionPlacing()
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_ARROWS_ID);
+			auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,7 @@ void SceneEditor::_updateReflectionPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.reflectionEntity_setPosition(PREVIEW_ARROWS_ID, newPosition);
+			_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, newPosition);
 
 			// Check if reflection must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -33,18 +33,17 @@ void SceneEditor::_updateReflectionPlacing()
 				}
 
 				// Create model
-				const string newModelID = ("@@arrows_" + newID);
-				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\arrows.obj");
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_ARROWS_SIZE);
+				const string newModelID = ("@@camera_" + newID);
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
+				_fe3d.modelEntity_setSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
-				_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_ARROWS_AABB_SIZE);
+				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 				// Create reflection
@@ -56,7 +55,7 @@ void SceneEditor::_updateReflectionPlacing()
 			// Check if placement mode must be disabled
 			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+				_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 				_isPlacingReflection = false;
 			}
 		}
@@ -72,22 +71,22 @@ void SceneEditor::_updateReflectionPlacing()
 					if (_fe3d.misc_isRaycastPointOnTerrainValid())
 					{
 						// Show preview reflection
-						_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, true);
+						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, true);
 
 						// Update position
-						_fe3d.reflectionEntity_setPosition(PREVIEW_ARROWS_ID, (_fe3d.misc_getRaycastPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
+						_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, (_fe3d.misc_getRaycastPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
 					}
 					else
 					{
 						// Hide preview reflection
-						_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 					}
 
 					// Check if reflection must be placed
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_ARROWS_ID);
+						auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
 
 						// Adding a number to make it unique
 					BEGIN2:
@@ -106,18 +105,17 @@ void SceneEditor::_updateReflectionPlacing()
 						if (_fe3d.reflectionEntity_isExisting(newID))
 						{
 							// Create model
-							const string newModelID = ("@@arrows_" + newID);
-							_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\arrows.obj");
-							_fe3d.modelEntity_setSize(newModelID, DEFAULT_ARROWS_SIZE);
+							const string newModelID = ("@@camera_" + newID);
+							_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
+							_fe3d.modelEntity_setSize(newModelID, DEFAULT_CAMERA_SIZE);
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);
 							_fe3d.modelEntity_setBright(newModelID, true);
-							_fe3d.modelEntity_setColor(newModelID, Vec3(1.0f));
 
 							// Bind AABB
 							_fe3d.aabbEntity_create(newModelID);
 							_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-							_fe3d.aabbEntity_setSize(newModelID, DEFAULT_ARROWS_AABB_SIZE);
+							_fe3d.aabbEntity_setSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 							_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 							// Create reflection
@@ -129,37 +127,37 @@ void SceneEditor::_updateReflectionPlacing()
 					}
 					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
-						_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 						_isPlacingReflection = false;
 					}
 				}
 				else
 				{
-					_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+					_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 				}
 			}
 			else
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+				_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
 			}
 		}
 
-		// Update preview arrows position
+		// Update preview camera position
 		if (_isPlacingReflection)
 		{
-			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_ARROWS_ID);
-			reflectionPosition -= ARROWS_OFFSET;
-			_fe3d.modelEntity_setPosition(PREVIEW_ARROWS_ID, reflectionPosition);
+			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
+			reflectionPosition -= CAMERA_OFFSET;
+			_fe3d.modelEntity_setPosition(PREVIEW_CAMERA_ID, reflectionPosition);
 		}
 	}
 
-	// Update arrows positions
+	// Update camera positions
 	for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
 	{
-		if (entityID.substr(0, string("@@arrows").size()) == "@@arrows")
+		if (entityID.substr(0, string("@@camera").size()) == "@@camera")
 		{
-			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(entityID.substr(string("@@arrows_").size()));
-			reflectionPosition -= ARROWS_OFFSET;
+			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(entityID.substr(string("@@camera_").size()));
+			reflectionPosition -= CAMERA_OFFSET;
 			_fe3d.modelEntity_setPosition(entityID, reflectionPosition);
 		}
 	}

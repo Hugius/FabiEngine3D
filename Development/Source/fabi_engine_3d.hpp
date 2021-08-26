@@ -497,6 +497,7 @@ public:
 	void reflectionEntity_create(const string& ID);
 	void reflectionEntity_deleteAll();
 	void reflectionEntity_delete(const string& ID);
+	void reflectionEntity_setVisible(const string& ID, bool isVisible);
 	void reflectionEntity_setPosition(const string& ID, Vec3 position);
 	void reflectionEntity_move(const string& ID, Vec3 factor);
 	void reflectionEntity_capture(const string& ID);
@@ -505,6 +506,7 @@ public:
 	const vector<string> reflectionEntity_getAllIDs();
 	const Vec3 reflectionEntity_getPosition(const string& ID);
 	const bool reflectionEntity_isExisting(const string& ID);
+	const bool reflectionEntity_isVisible(const string& ID);
 
 	// Image entity interface - setters
 	void imageEntity_create(const string& ID, bool isCentered);

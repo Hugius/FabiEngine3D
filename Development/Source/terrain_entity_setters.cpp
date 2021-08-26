@@ -2,11 +2,6 @@
 
 using std::max;
 
-void TerrainEntity::setVisible(bool value)
-{
-	_isVisible = value;
-}
-
 void TerrainEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 {
 	_renderBuffer = value;

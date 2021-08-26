@@ -24,10 +24,10 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	// Validate engine assets directory
 	if
 		(
+			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "arrows.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "lamp.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "plane.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "reflection.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "speaker.obj") ||
 			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "a.png") ||
 			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "b.png") ||
@@ -84,7 +84,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 			!misc_isFileExisting(misc_getRootDirectory() + fontDirectoryPath + "font.ttf")
 			)
 	{
-		Logger::throwFatalWarning("Directory `engine_assets\\` is missing/corrupted!");
+		Logger::throwFatalWarning("Directory `engine_assets\\` is missing or corrupted!");
 	}
 
 	if (application_isExported()) // Application preview
@@ -132,10 +132,10 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Pre-load engine meshes
 		vector<string> meshPaths;
 		vector<string> temp;
+		meshPaths.push_back(meshDirectoryPath + "arrows.obj");
 		meshPaths.push_back(meshDirectoryPath + "cube.obj");
 		meshPaths.push_back(meshDirectoryPath + "lamp.obj");
 		meshPaths.push_back(meshDirectoryPath + "plane.obj");
-		meshPaths.push_back(meshDirectoryPath + "reflection.obj");
 		meshPaths.push_back(meshDirectoryPath + "speaker.obj");
 		misc_cacheMeshesMultiThreaded(meshPaths, temp);
 		

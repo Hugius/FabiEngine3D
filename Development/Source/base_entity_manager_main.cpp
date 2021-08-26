@@ -238,6 +238,16 @@ void BaseEntityManager::deleteEntity(const string& ID)
 			break;
 		}
 
+		case(EntityType::REFLECTION):
+		{
+			if (_reflectionEntities.erase(ID))
+			{
+				return;
+			}
+
+			break;
+		}
+
 		case(EntityType::IMAGE):
 		{
 			if (_imageEntities.erase(ID))

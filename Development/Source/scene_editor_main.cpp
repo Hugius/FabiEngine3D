@@ -104,6 +104,15 @@ void SceneEditor::load()
 	_fe3d.lightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
 	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
+	// Load preview reflection
+	_fe3d.modelEntity_create(PREVIEW_ARROWS_ID, ARROWS_MODEL_PATH);
+	_fe3d.modelEntity_setSize(PREVIEW_ARROWS_ID, DEFAULT_ARROWS_SIZE);
+	_fe3d.modelEntity_setShadowed(PREVIEW_ARROWS_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_ARROWS_ID, false);
+	_fe3d.modelEntity_setBright(PREVIEW_ARROWS_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_ARROWS_ID, false);
+	_fe3d.reflectionEntity_create(PREVIEW_ARROWS_ID);
+
 	// Create ID TextFields
 	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextField("billboardID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -148,8 +157,9 @@ void SceneEditor::unload()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
-	_loadedLightIDs.clear();
 	_loadedAabbIDs.clear();
+	_loadedLightIDs.clear();
+	_loadedReflectionIDs.clear();
 	_customSceneID = "";
 	_loadedSkyID = "";
 	_loadedTerrainID = "";

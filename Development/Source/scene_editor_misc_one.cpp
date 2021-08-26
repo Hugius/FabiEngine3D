@@ -403,3 +403,35 @@ void SceneEditor::_updateLampAnimation(const string& modelID, int& direction)
 		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
 	}
 }
+
+void SceneEditor::_updateArrowsAnimation(const string& modelID, int& direction)
+{
+	// Reset direction if nothing active/selected
+	if (modelID.empty())
+	{
+		direction = 1;
+	}
+
+	// Update reflection animation
+	if (modelID != "")
+	{
+		// Check if inversion reached minimum
+		if (_fe3d.modelEntity_getSize(modelID).y < DEFAULT_ARROWS_SIZE.y)
+		{
+			_fe3d.modelEntity_setSize(modelID, DEFAULT_ARROWS_SIZE);
+			direction *= -1;
+		}
+
+		// Check if inversion reached maximum
+		if (_fe3d.modelEntity_getSize(modelID).y > (DEFAULT_ARROWS_SIZE.y * ARROWS_SIZE_INCREASE))
+		{
+			_fe3d.modelEntity_setSize(modelID, (DEFAULT_ARROWS_SIZE * ARROWS_SIZE_INCREASE));
+			direction *= -1;
+		}
+
+		// Set new sizes
+		Vec3 modelSpeed = (Vec3(ARROWS_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
+		modelSpeed *= ((DEFAULT_ARROWS_SIZE * ARROWS_SIZE_INCREASE) - DEFAULT_ARROWS_SIZE);
+		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + modelSpeed);
+	}
+}

@@ -67,30 +67,6 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightingSettingsMenu();
-	}
-	if (_isEditorLoaded)
-	{
-		_updateAmbientLightingSettingsMenu();
-	}
-	if (_isEditorLoaded)
-	{
-		_updateDirectionalLightingSettingsMenu();
-	}
-	if (_isEditorLoaded)
-	{
-		_updateLightMenu();
-	}
-	if (_isEditorLoaded)
-	{
-		_updateLightPlacing();
-	}
-	if (_isEditorLoaded)
-	{
-		_updateLightEditing();
-	}
-	if (_isEditorLoaded)
-	{
 		_updateSoundMenu();
 	}
 	if (_isEditorLoaded)
@@ -111,7 +87,43 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateLightMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateLightPlacing();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateLightEditing();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateReflectionMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateReflectionPlacing();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateReflectionEditing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateLightingSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAmbientLightingSettingsMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateDirectionalLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -316,6 +328,10 @@ void SceneEditor::_updateChoiceMenu()
 			else if (screen->getButton("lights")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLight");
+			}
+			else if (screen->getButton("reflections")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuReflection");
 			}
 			else if (screen->getButton("settings")->isHovered())
 			{

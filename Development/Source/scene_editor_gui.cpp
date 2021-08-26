@@ -18,7 +18,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuChoice
-	positions = VPC::calculateButtonPositions(9, CH);
+	positions = VPC::calculateButtonPositions(10, CH);
 	leftWindow->createScreen("sceneEditorMenuChoice");
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("sky", Vec2(0.0f, positions[0]), Vec2(TW("Sky"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("terrain", Vec2(0.0f, positions[1]), Vec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -27,8 +27,9 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("billboards", Vec2(0.0f, positions[4]), Vec2(TW("Billboards"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Billboards", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("sounds", Vec2(0.0f, positions[5]), Vec2(TW("Sounds"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sounds", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("lights", Vec2(0.0f, positions[6]), Vec2(TW("Lights"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Lights", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("settings", Vec2(0.0f, positions[7]), Vec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[8]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("reflections", Vec2(0.0f, positions[7]), Vec2(TW("Reflections"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflections", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("settings", Vec2(0.0f, positions[8]), Vec2(TW("Settings"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[9]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuSky
 	positions = VPC::calculateButtonPositions(3, CH);
@@ -107,6 +108,12 @@ void SceneEditor::_loadGUI()
 	leftWindow->createScreen("sceneEditorMenuLight");
 	leftWindow->getScreen("sceneEditorMenuLight")->createButton("place", Vec2(0.0f, positions[0]), Vec2(TW("Place Light"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Light", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuLight")->createButton("back", Vec2(0.0f, positions[1]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
+	// Left-viewport: sceneEditorMenuReflection
+	positions = VPC::calculateButtonPositions(2, CH);
+	leftWindow->createScreen("sceneEditorMenuReflection");
+	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("place", Vec2(0.0f, positions[0]), Vec2(TW("Place Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("back", Vec2(0.0f, positions[1]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuSettings
 	positions = VPC::calculateButtonPositions(6, CH);
@@ -310,6 +317,24 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("lightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.55f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("lightPropertiesMenu")->createButton("shape", Vec2(0.0f, -0.725f), Vec2(0.75f, 0.2f), "shape_circle.png", Vec3(1.0f));
 	rightWindow->getScreen("lightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
+	// Right-viewport: reflectionPropertiesMenu
+	rightWindow->createScreen("reflectionPropertiesMenu");
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Sound Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.81f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.56f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.31f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.7f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.45f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.2f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("xMinus", Vec2(-0.75f, 0.7f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("yMinus", Vec2(-0.75f, 0.45f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("zMinus", Vec2(-0.75f, 0.2f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("reflectionPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.7f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.45f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.2f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("capture", Vec2(0.0f, 0.05f), Vec2(1.0f, 0.1f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Capture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("reflectionPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.1f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SceneEditor::_unloadGUI()
@@ -325,10 +350,11 @@ void SceneEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuBillboard");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuBillboardPlace");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuBillboardChoice");
-	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuLight");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSound");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSoundPlace");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSoundChoice");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuLight");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuReflection");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettings");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettingsLighting");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettingsLightingAmbient");
@@ -343,6 +369,7 @@ void SceneEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettingsGraphicsBloom");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("modelPropertiesMenu");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("billboardPropertiesMenu");
-	_gui.getViewport("right")->getWindow("main")->deleteScreen("lightPropertiesMenu");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("soundPropertiesMenu");
+	_gui.getViewport("right")->getWindow("main")->deleteScreen("lightPropertiesMenu");
+	_gui.getViewport("right")->getWindow("main")->deleteScreen("reflectionPropertiesMenu");
 }

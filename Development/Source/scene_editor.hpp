@@ -78,6 +78,9 @@ private:
 	void _updateLightMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
+	void _updateReflectionMenu();
+	void _updateReflectionPlacing();
+	void _updateReflectionEditing();
 	void _updateSettingsMenu();
 	void _updateLightingSettingsMenu();
 	void _updateAmbientLightingSettingsMenu();
@@ -99,6 +102,7 @@ private:
 	void _updateBillboardBlinking(const string& billboardID, int& direction);
 	void _updateSpeakerAnimation(const string& modelID, int& direction);
 	void _updateLampAnimation(const string& modelID, int& direction);
+	void _updateArrowsAnimation(const string& modelID, int& direction);
 	void _selectModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
 	void _selectSound(const string& soundID);
@@ -135,14 +139,16 @@ private:
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
 	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
+	static inline const string PREVIEW_ARROWS_ID = "@@previewArrows";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
 	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
-	map<string, string> _loadedSoundIDs;
-	map<string, string> _outsideLoadedSoundIDs;
+	static inline const string ARROWS_MODEL_PATH = "engine_assets\\meshes\\arrows.obj";
 	map<string, string> _loadedModelIDs;
 	map<string, string> _outsideLoadedModelIDs;
 	map<string, string> _loadedBillboardIDs;
 	map<string, string> _outsideLoadedBillboardIDs;
+	map<string, string> _loadedSoundIDs;
+	map<string, string> _outsideLoadedSoundIDs;
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
 	map<string, Vec3> _initialModelSize;
@@ -151,8 +157,9 @@ private:
 	vector<string> _customSceneAabbIDs;
 	vector<string> _customSceneSoundIDs;
 	vector<string> _customSceneLightIDs;
-	vector<string> _loadedLightIDs;
 	vector<string> _loadedAabbIDs;
+	vector<string> _loadedLightIDs;
+	vector<string> _loadedReflectionIDs;
 	string _customSceneID = "";
 	string _loadedSkyID = "";
 	string _loadedTerrainID = "";
@@ -171,19 +178,27 @@ private:
 	string _activeSpeakerID = "";
 	string _selectedLampID = "";
 	string _activeLampID = "";
+	string _selectedArrowsID = "";
+	string _activeArrowsID = "";
 	string _loadedSceneID = "";
 	string _currentProjectID = "";
 	string _currentSceneID = "";
 
 	// Vectors
-	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.05f, 1.05f, 0.9f);
-	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
-	static inline const Vec3 LIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 DEFAULT_ARROWS_SIZE = Vec3(1.0f, 1.0f, 1.0f);
+	static inline const Vec3 DEFAULT_ARROWS_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
+	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
+	static inline const Vec3 BILLBOARD_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
 	static inline const Vec3 SOUND_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 LIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 REFLECTION_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 SPEAKER_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 ARROWS_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 
 	// Floats
 	static inline const float MODEL_BLINKING_SPEED = 0.025f;
@@ -201,6 +216,8 @@ private:
 	static inline const float LAMP_ANIMATION_SPEED = 0.025f;
 	static inline const float LIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
 	static inline const float LIGHT_COLOR_CHANGING_SPEED = 0.005f;
+	static inline const float ARROWS_SIZE_INCREASE = 1.25f;
+	static inline const float ARROWS_ANIMATION_SPEED = 0.025f;
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	float _editorSpeed = 1.0f;
@@ -214,6 +231,8 @@ private:
 	int _activeSpeakerSizeDirection = 1;
 	int _selectedLampSizeDirection = 1;
 	int _activeLampSizeDirection = 1;
+	int _selectedArrowsSizeDirection = 1;
+	int _activeArrowsSizeDirection = 1;
 
 	// Booleans
 	bool _hasCustomSceneLighting = false;
@@ -225,6 +244,7 @@ private:
 	bool _dontResetSelectedBillboard = false;
 	bool _dontResetSelectedSpeaker = false;
 	bool _isPlacingLight = false;
+	bool _isPlacingReflection = false;
 	bool _isEditorLoaded = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;

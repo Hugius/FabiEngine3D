@@ -148,6 +148,9 @@
     <Filter Include="Scene Editor\Water">
       <UniqueIdentifier>{7a1a04ff-1353-4638-9e4a-1b3e6d8b4503}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene Editor\Reflection">
+      <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation_editor_main.cpp">
@@ -425,6 +428,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_settings_updates_lighting.cpp">
       <Filter>Scene Editor\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_main.cpp">
+      <Filter>Scene Editor\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_place.cpp">
+      <Filter>Scene Editor\Reflection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_reflection_updates_edit.cpp">
+      <Filter>Scene Editor\Reflection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

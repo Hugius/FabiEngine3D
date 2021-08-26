@@ -82,7 +82,7 @@ void SceneEditor::_updateModelPlacing()
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 
 						// Update position
-						_fe3d.modelEntity_setPosition(_currentPreviewModelID, _fe3d.misc_getRaycastPointOnTerrain());
+						_fe3d.modelEntity_setPosition(_currentPreviewModelID, (_fe3d.misc_getRaycastPointOnTerrain() + MODEL_TERRAIN_OFFSET));
 					}
 					else
 					{

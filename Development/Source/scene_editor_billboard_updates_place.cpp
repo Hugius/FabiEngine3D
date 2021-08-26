@@ -60,7 +60,7 @@ void SceneEditor::_updateBillboardPlacing()
 						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
 
 						// Update position
-						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, _fe3d.misc_getRaycastPointOnTerrain());
+						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, (_fe3d.misc_getRaycastPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
 					}
 					else
 					{

@@ -182,6 +182,12 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
+	// Hide lightsource billboard
+	if (_fe3d.billboardEntity_isExisting("@@lightSource"))
+	{
+		_fe3d.billboardEntity_setVisible("@@lightSource", false);
+	}
+
 	// Delete AABB entities
 	for (const auto& ID : _loadedAabbIDs)
 	{
@@ -208,12 +214,6 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Hide lightsource billboard
-	if (_fe3d.billboardEntity_isExisting("@@lightSource"))
-	{
-		_fe3d.billboardEntity_setVisible("@@lightSource", false);
-	}
-
 	// Delete light entities
 	for (const auto& ID : _loadedLightIDs)
 	{
@@ -230,6 +230,22 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
+	// Delete reflection entities
+	for (const auto& ID : _loadedReflectionIDs)
+	{
+		if (_fe3d.reflectionEntity_isExisting(ID))
+		{
+			// Delete reflection
+			_fe3d.reflectionEntity_delete(ID);
+
+			// Delete corresponding arrows model
+			if (!_currentSceneID.empty())
+			{
+				_fe3d.modelEntity_delete("@@arrows_" + ID);
+			}
+		}
+	}
+
 	// Reset saved IDs
 	_loadedSceneID = "";
 	_loadedSkyID = "";
@@ -239,6 +255,7 @@ void SceneEditor::clearCurrentScene()
 	_loadedBillboardIDs.clear();
 	_loadedSoundIDs.clear();
 	_loadedLightIDs.clear();
+	_loadedReflectionIDs.clear();
 }
 
 void SceneEditor::createCustomScene(const string& sceneID)

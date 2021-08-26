@@ -188,10 +188,10 @@ vec3 calculateLights(vec3 normal)
 		float specular = calculateSpecularLighting(u_lightPositions[i], normal);
 
 		// Calculate light attenuation
-		vec3 distance = abs(u_lightPositions[i] - f_pos);
-		float attenuation = max(0.0f, 1.0f - (distance.x / u_lightRadiuses[i].x));
-		attenuation = min(attenuation, max(0.0f, 1.0f - (distance.y / u_lightRadiuses[i].y)));
-		attenuation = min(attenuation, max(0.0f, 1.0f - (distance.z / u_lightRadiuses[i].z)));
+		vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
+		float attenuation = max(0.0f, 1.0f - (fragmentDistance.x / u_lightRadiuses[i].x));
+		attenuation = min(attenuation, max(0.0f, 1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
+		attenuation = min(attenuation, max(0.0f, 1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
 
         // Apply
         vec3 current = vec3(0.0f);
@@ -252,15 +252,14 @@ vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
-		// Calculate distance in world space
-		float distance = length(f_pos.xyz - u_cameraPosition);
+		// Calculate distance to fragment in world space
+		float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
 
         // Calculate fog intensity
-		float difference = u_fogMaxDistance - u_fogMinDistance;
-		float part = (distance - u_fogMinDistance) / difference;
-		part = clamp(part, 0.0f, 1.0f);
+		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
+		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float mixValue = part * thickness;
+		float mixValue = (distancePart * thickness);
 
 		// Return
 		return mix(color, u_fogColor, mixValue);

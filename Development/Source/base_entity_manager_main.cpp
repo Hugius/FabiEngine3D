@@ -275,13 +275,14 @@ void BaseEntityManager::deleteEntity(const string& ID)
 
 void BaseEntityManager::deleteAllEntities()
 {
-	_aabbEntities.clear();
-	_billboardEntities.clear();
-	_modelEntities.clear();
-	_imageEntities.clear();
-	_lightEntities.clear();
 	_skyEntities.clear();
 	_terrainEntities.clear();
-	_textEntities.clear();
 	_waterEntities.clear();
+	_modelEntities.clear();
+	_billboardEntities.clear();
+	_aabbEntities.clear();
+	_lightEntities.clear();
+	_reflectionEntities.clear();
+	_imageEntities.clear();
+	_textEntities.clear();
 }

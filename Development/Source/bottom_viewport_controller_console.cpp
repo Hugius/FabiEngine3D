@@ -26,7 +26,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
-			while (screen->getTextField(ID + "_msg_" + to_string(count)) != nullptr)
+			while (screen->isTextFieldExisting(ID + "_msg_" + to_string(count)))
 			{
 				count++;
 			}
@@ -61,7 +61,7 @@ void BottomViewportController::_updateConsoleScrolling()
 
 				// Move all message parts
 				unsigned int index = 0;
-				while (screen->getTextField(ID + "_msg_" + to_string(index)) != nullptr)
+				while (screen->isTextFieldExisting(ID + "_msg_" + to_string(index)))
 				{
 					_fe3d.textEntity_move(screen->getTextField(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 					index++;

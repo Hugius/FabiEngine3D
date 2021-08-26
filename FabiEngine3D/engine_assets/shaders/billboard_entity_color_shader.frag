@@ -103,13 +103,14 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
         // Calculate distance in world space
-        float distance = length(f_pos.xyz - u_cameraPosition);
+        float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
 
         // Calculate fog intensity
-		float difference = u_fogMaxDistance - u_fogMinDistance;
-		float part = (distance - u_fogMinDistance) / difference;
-		part = clamp(part, 0.0f, 1.0f);
-		float mixValue = part * u_fogThickness;
+		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
+		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
+		float mixValue = (distancePart * u_fogThickness);
+
+		// Return
 		return mix(color, u_fogColor, mixValue);
 	}
 	else

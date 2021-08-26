@@ -279,6 +279,9 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
+	// Reset camera
+	_fe3d.camera_reset();
+
 	// Delete all sky entities except the engine background
 	for (const auto& ID : _fe3d.skyEntity_getAllIDs())
 	{
@@ -296,9 +299,6 @@ void ScriptInterpreter::unload()
 		_fe3d.skyEntity_selectMainSky("@@engineBackground");
 	}
 
-	// Camera
-	_fe3d.camera_reset();
-
 	// Reset audio
 	if (!_fe3d.misc_isSoundsEnabled())
 	{
@@ -308,6 +308,7 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.misc_enableMusic();
 	}
+	_fe3d.music_clearPlaylist();
 
 	// Stop animations
 	_animationEditor.stopAllAnimations();
@@ -318,9 +319,29 @@ void ScriptInterpreter::unload()
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
-	_fe3d.lightEntity_deleteAll();
 	_fe3d.sound_deleteAll();
-	_fe3d.music_clearPlaylist();
+	_fe3d.lightEntity_deleteAll();
+	_fe3d.reflectionEntity_deleteAll();
+
+	// Delete game image entities
+	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
+	{
+		// Cannot delete engine image entities
+		if (ID.front() != '@')
+		{
+			_fe3d.imageEntity_delete(ID);
+		}
+	}
+
+	// Delete game text entities
+	for (const auto& ID : _fe3d.textEntity_getAllIDs())
+	{
+		// Cannot delete engine text entities
+		if (ID.front() != '@')
+		{
+			_fe3d.textEntity_delete(ID);
+		}
+	}
 
 	// Disable collision response
 	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
@@ -369,26 +390,6 @@ void ScriptInterpreter::unload()
 	if (_fe3d.gfx_isBloomEnabled())
 	{
 		_fe3d.gfx_disableBloom(true);
-	}
-
-	// Delete game image entities
-	for (const auto& ID : _fe3d.imageEntity_getAllIDs())
-	{
-		// Cannot delete engine image entities
-		if (ID.front() != '@')
-		{
-			_fe3d.imageEntity_delete(ID);
-		}
-	}
-
-	// Delete game text entities
-	for (const auto& ID : _fe3d.textEntity_getAllIDs())
-	{
-		// Cannot delete engine text entities
-		if (ID.front() != '@')
-		{
-			_fe3d.textEntity_delete(ID);
-		}
 	}
 
 	// Stop networking server

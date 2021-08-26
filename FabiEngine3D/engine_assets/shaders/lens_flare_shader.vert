@@ -51,8 +51,7 @@ float calculateFlareVisibility()
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farZ);
 
         // Calculate distance to light source
-        vec3 viewDirection = (u_cameraPosition - u_flareSourcePosition);
-        float flareDistance = length(viewDirection);
+        float flareDistance = distance(u_cameraPosition, u_flareSourcePosition);
         
         // Check if lightsource is not occluded by an object
         if ((flareFragmentDepth * u_farZ) >= abs(flareDistance))

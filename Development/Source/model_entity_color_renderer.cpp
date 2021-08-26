@@ -38,13 +38,14 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_cubeReflectionMap", 0);
-	_shader.uploadUniform("u_planarReflectionMap", 1);
-	_shader.uploadUniform("u_shadowMap", 2);
-	_shader.uploadUniform("u_diffuseMap", 3);
-	_shader.uploadUniform("u_emissionMap", 4);
-	_shader.uploadUniform("u_reflectionMap", 5);
-	_shader.uploadUniform("u_normalMap", 6);
+	_shader.uploadUniform("u_firstCubeReflectionMap", 0);
+	_shader.uploadUniform("u_secondCubeReflectionMap", 1);
+	_shader.uploadUniform("u_planarReflectionMap", 2);
+	_shader.uploadUniform("u_shadowMap", 3);
+	_shader.uploadUniform("u_diffuseMap", 4);
+	_shader.uploadUniform("u_emissionMap", 5);
+	_shader.uploadUniform("u_reflectionMap", 6);
+	_shader.uploadUniform("u_normalMap", 7);
 
 	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
@@ -59,18 +60,18 @@ void ModelEntityColorRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Bind textures
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
 	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getPlanarReflectionMap());
+	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 }
 
 void ModelEntityColorRenderer::unbind()
 {
 	// Unbind textures
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, 0);
 	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	// Disable alpha blending
@@ -133,18 +134,13 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 
 		// Choose reflection entity
-		string closestReflectionEntityID = "";
-		float closestDistance = 0.0f;
+		map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
 		for (const auto& [keyID, reflectionEntity] : reflectionEntities)
 		{
 			if (reflectionEntity->isVisible())
 			{
 				auto absoluteDistance = Math::calculateAbsoluteDistance(entity->getPosition(), reflectionEntity->getPosition());
-				if ((absoluteDistance < closestDistance) || closestReflectionEntityID.empty())
-				{
-					closestReflectionEntityID = reflectionEntity->getID();
-					closestDistance = absoluteDistance;
-				}
+				reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
 			}
 		}
 
@@ -166,15 +162,25 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
 
-		// Bind reflection map
+		// Bind cube reflection textures
 		glActiveTexture(GL_TEXTURE0);
-		if (!closestReflectionEntityID.empty())
+		if (reflectionDistanceMap.size() > 0)
 		{
-			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionEntities.at(closestReflectionEntityID)->getCubeMap());
+			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionDistanceMap.begin()->second->getCubeMap());
+			_shader.uploadUniform("u_firstCubeReflectionPosition", reflectionDistanceMap.begin()->second->getPosition());
 		}
 		else
 		{
-			std::cout << entity->hasReflectionMap() << std::endl;
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
+		glActiveTexture(GL_TEXTURE1);
+		if (reflectionDistanceMap.size() > 1)
+		{
+			glBindTexture(GL_TEXTURE_CUBE_MAP, reflectionDistanceMap.rbegin()->second->getCubeMap());
+			_shader.uploadUniform("u_secondCubeReflectionPosition", reflectionDistanceMap.rbegin()->second->getPosition());
+		}
+		else
+		{
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 		}
 
@@ -204,22 +210,22 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE3);
+				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
 			}
 			if (entity->hasEmissionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE4);
+				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
 			if (entity->hasReflectionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE5);
+				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
 			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE6);
+				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
@@ -242,22 +248,22 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE3);
+				glActiveTexture(GL_TEXTURE4);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasEmissionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE4);
+				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasReflectionMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE5);
+				glActiveTexture(GL_TEXTURE6);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE6);
+				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
@@ -265,8 +271,10 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glBindVertexArray(0);
 		}
 
-		// Unbind reflection map
+		// Unbind cube reflection textures
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Disable face culling

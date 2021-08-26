@@ -13,13 +13,14 @@ in vec4 f_clip;
 in mat3 f_tbnMatrix;
 
 // Textures
-layout (location = 0) uniform samplerCube u_cubeReflectionMap;
-layout (location = 1) uniform sampler2D u_planarReflectionMap;
-layout (location = 2) uniform sampler2D u_shadowMap;
-layout (location = 3) uniform sampler2D u_diffuseMap;
-layout (location = 4) uniform sampler2D u_emissionMap;
-layout (location = 5) uniform sampler2D u_reflectionMap;
-layout (location = 6) uniform sampler2D u_normalMap;
+layout (location = 0) uniform samplerCube u_firstCubeReflectionMap;
+layout (location = 1) uniform samplerCube u_secondCubeReflectionMap;
+layout (location = 2) uniform sampler2D u_planarReflectionMap;
+layout (location = 3) uniform sampler2D u_shadowMap;
+layout (location = 4) uniform sampler2D u_diffuseMap;
+layout (location = 5) uniform sampler2D u_emissionMap;
+layout (location = 6) uniform sampler2D u_reflectionMap;
+layout (location = 7) uniform sampler2D u_normalMap;
 
 // Vector uniforms
 uniform vec3 u_lightPositions[MAX_LIGHT_AMOUNT];
@@ -34,6 +35,8 @@ uniform vec3 u_spotLightingColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_shadowAreaCenter;
+uniform vec3 u_firstCubeReflectionPosition;
+uniform vec3 u_secondCubeReflectionPosition;
 
 // Float uniforms
 uniform float u_lightIntensities[MAX_LIGHT_AMOUNT];
@@ -253,16 +256,16 @@ vec3 calculateLights(vec3 normal)
 		float attenuation;
 		if (u_lightShapes[i] == 0)
 		{
-			float distance = length(u_lightPositions[i] - f_pos);
+			float fragmentDistance = distance(u_lightPositions[i], f_pos);
 			float averageRadius = ((u_lightRadiuses[i].x + u_lightRadiuses[i].y + u_lightRadiuses[i].z) / 3.0f);
-			attenuation = max(0.0f, (1.0f - (distance / averageRadius)));
+			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 distance = abs(u_lightPositions[i] - f_pos);
-			float xAttenuation = max(0.0f, (1.0f - (distance.x / u_lightRadiuses[i].x)));
-			float yAttenuation = max(0.0f, (1.0f - (distance.y / u_lightRadiuses[i].y)));
-			float zAttenuation = max(0.0f, (1.0f - (distance.z / u_lightRadiuses[i].z)));
+			vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_lightRadiuses[i].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
@@ -287,8 +290,8 @@ vec3 calculateSpotLighting(vec3 normal)
     if (u_isSpotLightingEnabled)
     {
     	// Calculate distance
-        float fragmentDistance = abs(length(u_cameraPosition - f_pos));
-        float distanceFactor = fragmentDistance / u_maxSpotLightingDistance;
+        float fragmentDistance = distance(u_cameraPosition, f_pos);
+        float distanceFactor = (fragmentDistance / u_maxSpotLightingDistance);
         distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
         distanceFactor = 1.0f - distanceFactor;
 
@@ -334,12 +337,11 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
 		// Calculate
-        float distance = length(f_pos.xyz - u_cameraPosition);
-		float difference = u_fogMaxDistance - u_fogMinDistance;
-		float part = (distance - u_fogMinDistance) / difference;
-		part = clamp(part, 0.0f, 1.0f);
+        float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
+		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
+		float distancePart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float mixValue = part * thickness;
+		float mixValue = (distancePart * thickness);
 
 		// Return
 		return mix(color, u_fogColor, mixValue);
@@ -363,7 +365,14 @@ vec3 calculateCubeReflections(vec3 color, vec3 normal)
 			// Calculate
 			vec3 viewDirection = normalize(f_pos - u_cameraPosition);
 			vec3 reflectionDirection = reflect(viewDirection, normal);
-			vec3 cubeReflectionMapColor = texture(u_cubeReflectionMap, reflectionDirection).rgb;
+			vec3 firstCubeReflectionMapColor = texture(u_firstCubeReflectionMap, reflectionDirection).rgb;
+			vec3 secondCubeReflectionMapColor = texture(u_secondCubeReflectionMap, reflectionDirection).rgb;
+			float firstDistance = distance(f_pos, u_firstCubeReflectionPosition);
+			float secondDistance = distance(f_pos, u_secondCubeReflectionPosition);
+			float totalDistance = (firstDistance + secondDistance);
+			float firstDistanceMultiplier = (1.0f - (firstDistance / totalDistance));
+			float secondDistanceMultiplier = (1.0f - (secondDistance / totalDistance));
+			vec3 cubeReflectionMapColor = (firstDistanceMultiplier * firstCubeReflectionMapColor) + (secondDistanceMultiplier * secondCubeReflectionMapColor);
 			vec3 mixedColor = mix(color, cubeReflectionMapColor, 0.5f);
 
 			// Return
@@ -413,10 +422,10 @@ float calculateShadows()
 	{
         // Temporary values
 		float halfSize = (u_shadowAreaSize / 2.0f);
-		float distance = length(f_pos.xz - u_shadowAreaCenter.xz);
+		float fragmentDistance = distance(f_pos.xz, u_shadowAreaCenter.xz);
 
         // Check if fragment is within shadow area
-		if (distance <= halfSize)
+		if (fragmentDistance <= halfSize)
 		{
 			// Variables
 			vec2 texelSize = (vec2(1.0f) / textureSize(u_shadowMap, 0));
@@ -451,15 +460,15 @@ float calculateShadows()
 			}
 
 			// Long-distance shadows fading
-			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
-			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
+			float alpha = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
+			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
 			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if (u_isShadowFrameRenderEnabled)
 			{
-				if ((maxDistance - (halfSize * 0.99f)) > 0.0f)
+				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}

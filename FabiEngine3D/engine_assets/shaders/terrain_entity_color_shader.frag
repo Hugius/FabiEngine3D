@@ -328,16 +328,16 @@ vec3 calculateLights(vec3 normal)
 		float attenuation;
 		if (u_lightShapes[i] == 0)
 		{
-			float distance = length(u_lightPositions[i] - f_pos);
+			float fragmentDistance = distance(u_lightPositions[i], f_pos);
 			float averageRadius = ((u_lightRadiuses[i].x + u_lightRadiuses[i].y + u_lightRadiuses[i].z) / 3.0f);
-			attenuation = max(0.0f, (1.0f - (distance / averageRadius)));
+			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 distance = abs(u_lightPositions[i] - f_pos);
-			float xAttenuation = max(0.0f, (1.0f - (distance.x / u_lightRadiuses[i].x)));
-			float yAttenuation = max(0.0f, (1.0f - (distance.y / u_lightRadiuses[i].y)));
-			float zAttenuation = max(0.0f, (1.0f - (distance.z / u_lightRadiuses[i].z)));
+			vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_lightRadiuses[i].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
@@ -362,7 +362,7 @@ vec3 calculateSpotLighting(vec3 normal)
     if (u_isSpotLightingEnabled)
     {
 		// Calculate distance
-    	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
+    	float fragmentDistance = distance(u_cameraPosition, f_pos);
         float distanceFactor = fragmentDistance / u_maxSpotLightingDistance;
         distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
         distanceFactor = 1.0f - distanceFactor;
@@ -384,7 +384,7 @@ vec3 calculateSpotLighting(vec3 normal)
         result *= u_spotLightingIntensity; // Intensity
 
         // Return
-        return result * distanceFactor;
+        return (result * distanceFactor);
     }
     else
     {
@@ -396,15 +396,14 @@ vec3 calculateFog(vec3 color)
 {
 	if (u_isFogEnabled)
 	{
-		// Calculate distance in world space
-		float distance = length(f_pos.xyz - u_cameraPosition);
+		// Calculate distance to fragment in world space
+		float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
 
         // Calculate fog intensity
-		float difference = u_fogMaxDistance - u_fogMinDistance;
-		float part = (distance - u_fogMinDistance) / difference;
-		part = clamp(part, 0.0f, 1.0f);
+		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
+		float fragmentPart = clamp(((fragmentDistance - u_fogMinDistance) / distanceDifference), 0.0f, 1.0f);
 		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
-		float mixValue = part * thickness;
+		float mixValue = (fragmentPart * thickness);
 
 		// Return
 		return mix(color, u_fogColor, mixValue);
@@ -440,10 +439,10 @@ float calculateShadows()
 	{
 		// Temporary values
 		float halfSize = (u_shadowAreaSize / 2.0f);
-		float distance = length(f_pos.xz - u_shadowAreaCenter.xz);
+		float fragmentDistance = distance(f_pos.xz, u_shadowAreaCenter.xz);
 
 		// Check if fragment is within shadow area
-		if (distance <= halfSize)
+		if (fragmentDistance <= halfSize)
 		{
 			// Variables
 			float shadow       = 0.0f;
@@ -477,14 +476,14 @@ float calculateShadows()
 			}
 
 			// Long-distance shadows fading
-			float alpha = distance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
+			float alpha = (fragmentDistance - (halfSize * 0.9f)); // Only for the outer 10% of the shadowed area
 			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if (u_isShadowFrameRenderEnabled)
 			{
-				if ((distance - (halfSize * 0.99f)) > 0.0f)
+				if ((fragmentDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return 0.0f;
 				}

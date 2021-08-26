@@ -407,6 +407,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Create reflection
 			_fe3d.reflectionEntity_create(reflectionID);
 			_fe3d.reflectionEntity_setPosition(reflectionID, position);
+			_fe3d.reflectionEntity_capture(reflectionID);
 			_loadedReflectionIDs.push_back(reflectionID);
 		}
 		else if (lineType == "EDITOR_SPEED")

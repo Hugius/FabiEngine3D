@@ -35,6 +35,7 @@ public:
 	void setReflectionMapPath(const string& value, const string& partID = "");
 	void setNormalMapPath(const string& value, const string& partID = "");
 	void setLodEntityID(const string& value);
+	void setReflectivity(float value);
 	void setLightness(float value);
 	void setSpecularFactor(float value);
 	void setSpecularIntensity(float value);
@@ -80,6 +81,7 @@ public:
 
 	// Floats
 	const float getInversion(const string& partID = "");
+	const float getReflectivity();
 	const float getLightness();
 	const float getSpecularFactor();
 	const float getSpecularIntensity();
@@ -170,6 +172,7 @@ private:
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
 	// Floats
+	float _reflectivity = 0.5f;
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;
 	float _specularIntensity = 1.0f;

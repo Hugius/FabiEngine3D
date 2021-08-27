@@ -124,7 +124,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	{
 		// Placeholder variables
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
-		float uvRepeat, specularFactor, specularIntensity, lightness;
+		float uvRepeat, specularFactor, specularIntensity, reflectivity, lightness;
 		unsigned int reflectionType;
 		bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBright;
 		Vec3 size, color;
@@ -152,6 +152,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			isSpecular >>
 			specularFactor >>
 			specularIntensity >>
+			reflectivity >>
 			lightness >>
 			color.r >>
 			color.g >>
@@ -253,6 +254,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.modelEntity_setBright(modelID, isBright);
 			_fe3d.modelEntity_setSpecularFactor(modelID, specularFactor);
 			_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
+			_fe3d.modelEntity_setReflectivity(modelID, reflectivity);
 			_fe3d.modelEntity_setLightness(modelID, lightness);
 			_fe3d.modelEntity_setColor(modelID, color);
 			_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);

@@ -11,6 +11,7 @@ public:
 	using BaseRenderer::BaseRenderer;
 
 	void loadCaptureBuffer(Ivec2 bufferSize);
+	void resetCaptureBuffer();
 	void bind() override;
 	void unbind() override;
 
@@ -19,6 +20,6 @@ public:
 private:
 	void _render(const shared_ptr<ImageEntity> entity, TextureID texture);
 
-	CaptureBuffer _blurCaptureBuffer;
+	CaptureBuffer _captureBuffer;
 };
 

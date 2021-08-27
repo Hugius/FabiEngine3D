@@ -322,6 +322,11 @@ void FabiEngine3D::modelEntity_setSpecularIntensity(const string& ID, float inte
 	_core->_modelEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
+void FabiEngine3D::modelEntity_setReflectivity(const string& ID, float reflectivity)
+{
+	_core->_modelEntityManager.getEntity(ID)->setReflectivity(reflectivity);
+}
+
 void FabiEngine3D::modelEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_modelEntityManager.getEntity(ID)->setLightness(lightness);
@@ -405,6 +410,11 @@ const float FabiEngine3D::modelEntity_getLightness(const string& ID)
 const float FabiEngine3D::modelEntity_getInversion(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getInversion(partID);
+}
+
+const float FabiEngine3D::modelEntity_getReflectivity(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getReflectivity();
 }
 
 const float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)

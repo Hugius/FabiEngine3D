@@ -37,13 +37,8 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus),
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
-	// Load capture buffers
-	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
-	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
+	// Post-processing capture buffers
 	_sceneDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
-	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
 	_sceneColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
 	_antiAliasingCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_bloomCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
@@ -54,6 +49,13 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
 	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
+
+	// Miscellaneous capture buffers
+	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
+	_waterRefractionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFRACTION_QUALITY), 1, false);
+	_shadowCaptureBuffer.createDepthTexture(Ivec2(0), Ivec2(Config::MIN_SHADOW_QUALITY));
 
 	// Render surface
 	_renderSurface = make_shared<ImageEntity>("renderSurface");

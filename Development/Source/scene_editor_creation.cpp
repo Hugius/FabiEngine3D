@@ -258,6 +258,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setSpecularFactor(newID, _fe3d.modelEntity_getSpecularFactor(previewID));
 	_fe3d.modelEntity_setSpecularIntensity(newID, _fe3d.modelEntity_getSpecularIntensity(previewID));
 	_fe3d.modelEntity_setLightness(newID, _fe3d.modelEntity_getLightness(previewID));
+	_fe3d.modelEntity_setReflectivity(newID, _fe3d.modelEntity_getReflectivity(previewID));
 	_fe3d.modelEntity_setColor(newID, _fe3d.modelEntity_getColor(previewID));
 	_fe3d.modelEntity_setUvRepeat(newID, _fe3d.modelEntity_getUvRepeat(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));

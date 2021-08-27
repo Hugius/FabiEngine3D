@@ -82,7 +82,7 @@ private:
 	void _updateReflectionPlacing();
 	void _updateReflectionEditing();
 	void _updateSettingsMenu();
-	void _updateLightingSettingsMenu();
+	void _updateLightingMenu();
 	void _updateAmbientLightingSettingsMenu();
 	void _updateDirectionalLightingSettingsMenu();
 	void _updateGraphicsSettingsMenu();

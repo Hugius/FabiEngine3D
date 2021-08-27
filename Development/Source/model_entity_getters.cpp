@@ -118,6 +118,11 @@ const float ModelEntity::getInversion(const string& partID)
 	}
 }
 
+const float ModelEntity::getReflectivity()
+{
+	return _reflectivity;
+}
+
 const string& ModelEntity::getMeshPath()
 {
 	return _meshPath;

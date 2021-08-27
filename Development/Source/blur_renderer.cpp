@@ -4,7 +4,12 @@
 
 void BlurRenderer::loadCaptureBuffer(Ivec2 bufferSize)
 {
-	_blurCaptureBuffer.createColorTexture(Ivec2(0), bufferSize, 1, true);
+	_captureBuffer.createColorTexture(Ivec2(0), bufferSize, 1, true);
+}
+
+void BlurRenderer::resetCaptureBuffer()
+{
+	_captureBuffer.reset();
 }
 
 void BlurRenderer::bind()
@@ -36,10 +41,10 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 		// Blur multiple times
 		for (unsigned int i = 0; i < blurCount; i++)
 		{
-			_blurCaptureBuffer.bind();
+			_captureBuffer.bind();
 			_render(entity, texture);
-			_blurCaptureBuffer.unbind();
-			texture = _blurCaptureBuffer.getTexture(0);
+			_captureBuffer.unbind();
+			texture = _captureBuffer.getTexture(0);
 		}
 	}
 
@@ -52,10 +57,10 @@ TextureID BlurRenderer::blurTexture(const shared_ptr<ImageEntity> entity, Textur
 		// Blur multiple times
 		for (unsigned int i = 0; i < blurCount; i++)
 		{
-			_blurCaptureBuffer.bind();
+			_captureBuffer.bind();
 			_render(entity, texture);
-			_blurCaptureBuffer.unbind();
-			texture = _blurCaptureBuffer.getTexture(0);
+			_captureBuffer.unbind();
+			texture = _captureBuffer.getTexture(0);
 		}
 	}
 

@@ -4,7 +4,7 @@
 
 using std::clamp;
 
-void ModelEditor::_updateLightingSettingsMenu()
+void ModelEditor::_updateLightingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -15,6 +15,7 @@ void ModelEditor::_updateLightingSettingsMenu()
 		// Temporary values
 		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
 		auto reflectionType = _fe3d.modelEntity_getReflectionType(_currentModelID);
+		auto reflectivity = _fe3d.modelEntity_getReflectivity(_currentModelID);
 		auto specularFactor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
@@ -39,11 +40,11 @@ void ModelEditor::_updateLightingSettingsMenu()
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("isBright")->isHovered())
 			{
@@ -62,6 +63,10 @@ void ModelEditor::_updateLightingSettingsMenu()
 				}
 				_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
 			}
+			else if (screen->getButton("reflectivity")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
 		}
 
 		// Update value forms
@@ -79,6 +84,12 @@ void ModelEditor::_updateLightingSettingsMenu()
 		{
 			lightness /= 100.0f;
 			_fe3d.modelEntity_setLightness(_currentModelID, lightness);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("reflectivity", reflectivity))
+		{
+			reflectivity /= 100.0f;
+			reflectivity = clamp(reflectivity, 0.0f, 1.0f);
+			_fe3d.modelEntity_setReflectivity(_currentModelID, reflectivity);
 		}
 
 		// Update buttons hoverability

@@ -210,6 +210,11 @@ void ModelEntity::setLodEntityID(const string& value)
 	_lodEntityID = value;
 }
 
+void ModelEntity::setReflectivity(float value)
+{
+	_reflectivity = value;
+}
+
 void ModelEntity::setTransparent(bool value)
 {
 	_isTransparent = value;

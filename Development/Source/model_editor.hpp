@@ -33,7 +33,7 @@ private:
 	void _updateChoiceMenu();
 	void _updateMeshMenu();
 	void _updateOptionsMenu();
-	void _updateLightingSettingsMenu();
+	void _updateLightingMenu();
 	void _updateSizeMenu();
 	void _updateAabbMenu();
 	void _updateModelCreating();

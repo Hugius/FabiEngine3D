@@ -4,7 +4,7 @@
 
 using std::clamp;
 
-void SceneEditor::_updateLightingSettingsMenu()
+void SceneEditor::_updateLightingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -65,7 +65,7 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("ambientIntensity", "Ambient Intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("ambientIntensity", "Ambient Intensity", (ambientLightingIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -149,7 +149,7 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("directionalIntensity", "Directional Intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("directionalIntensity", "Directional Intensity", (directionalLightingIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("billboardSize")->isHovered())
 			{

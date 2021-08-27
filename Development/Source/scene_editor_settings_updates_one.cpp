@@ -162,7 +162,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("interval")->isHovered())
 			{
@@ -242,7 +242,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("strength", "Strength", strength * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("strength", "Strength", (strength * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 	

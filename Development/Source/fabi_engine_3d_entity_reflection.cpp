@@ -57,3 +57,8 @@ const bool FabiEngine3D::reflectionEntity_isExisting(const string& ID)
 {
 	return _core->_reflectionEntityManager.isExisting(ID);
 }
+
+const bool FabiEngine3D::reflectionEntity_isVisible(const string& ID)
+{
+	return _core->_reflectionEntityManager.getEntity(ID)->isVisible();
+}

@@ -57,7 +57,7 @@ void ModelEditor::_updateAabbMenu()
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("speed", "Transformation Speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("speed", "Transformation Speed", (_aabbTransformationSpeed * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("toggleMove")->isHovered())
 			{

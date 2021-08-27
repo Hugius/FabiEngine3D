@@ -152,6 +152,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_isPlanarReflective", (entity->getReflectionType() == ReflectionType::PLANAR));
 		_shader.uploadUniform("u_isCubeReflective", (entity->getReflectionType() == ReflectionType::CUBE));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
+		_shader.uploadUniform("u_reflectivity", entity->getReflectivity());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_positionY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());

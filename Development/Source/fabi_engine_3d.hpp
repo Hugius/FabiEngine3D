@@ -292,6 +292,7 @@ public:
 	void modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size);
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
+	void modelEntity_setReflectivity(const string& ID, float reflectivity);
 	void modelEntity_setLightness(const string& ID, float lightness);
 	void modelEntity_setInversion(const string& ID, float inversion, const string& partID = "");
 	void modelEntity_setAlpha(const string& ID, float alpha);
@@ -321,6 +322,7 @@ public:
 	const Vec3 modelEntity_getSize(const string& ID, const string& partID = "");
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID = "");
 	const float modelEntity_getInversion(const string& ID, const string& partID = "");
+	const float modelEntity_getReflectivity(const string& ID);
 	const float modelEntity_getLightness(const string& ID);
 	const float modelEntity_getSpecularFactor(const string& ID);
 	const float modelEntity_getSpecularIntensity(const string& ID);

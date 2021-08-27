@@ -42,7 +42,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("thickness")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("thickness", "Thickness", thickness * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("thickness", "Thickness", (thickness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -165,11 +165,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("multiplier")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("multiplier", "Size Multiplier", multiplier * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("multiplier", "Size Multiplier", (multiplier * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -232,11 +232,11 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("factor")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("factor", "Exposure Factor", factor * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("factor", "Exposure Factor", (factor * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", speed * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", (speed * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 		}
 
@@ -303,7 +303,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("intensity", "Bloom Intensity", intensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("intensity", "Bloom Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("blurs")->isHovered())
 			{

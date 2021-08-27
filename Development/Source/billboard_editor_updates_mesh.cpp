@@ -31,8 +31,8 @@ void BillboardEditor::_updateMeshMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("sizeX", "X", size.x * 100.0f, Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", size.y * 100.0f, Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("facingX")->isHovered())
 			{

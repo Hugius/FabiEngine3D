@@ -54,6 +54,7 @@ uniform float u_fogThickness;
 uniform float u_spotLightingIntensity;
 uniform float u_maxSpotLightingAngle;
 uniform float u_maxSpotLightingDistance;
+uniform float u_reflectivity;
 uniform float u_lightness;
 uniform float u_shadowLightness;
 
@@ -373,10 +374,10 @@ vec3 calculateCubeReflections(vec3 color, vec3 normal)
 			float firstDistanceMultiplier = (1.0f - (firstDistance / totalDistance));
 			float secondDistanceMultiplier = (1.0f - (secondDistance / totalDistance));
 			vec3 cubeReflectionMapColor = (firstDistanceMultiplier * firstCubeReflectionMapColor) + (secondDistanceMultiplier * secondCubeReflectionMapColor);
-			vec3 mixedColor = mix(color, cubeReflectionMapColor, 0.5f);
+			vec3 mixedColor = mix(color, cubeReflectionMapColor, u_reflectivity);
 
 			// Return
-			return mixedColor.rgb;
+			return mixedColor;
 		}
 
 		// Return
@@ -399,13 +400,13 @@ vec3 calculatePlanarReflections(vec3 color)
 		if (reflectionMapColor != vec3(0.0f))
 		{
 			// Calculate
-			vec2 ndc             = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
-			vec2 texCoords       = vec2(ndc.x, -ndc.y);
+			vec2 ndc = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
+			vec2 texCoords = vec2(ndc.x, -ndc.y);
 			vec3 reflectionColor = texture(u_planarReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
-			vec3 mixedColor      = mix(color.rgb, reflectionColor, 0.5f);
+			vec3 mixedColor = mix(color, reflectionColor, u_reflectivity);
         
         	// Return
-			return mixedColor.rgb;
+			return mixedColor;
 		}
 
 		return color;

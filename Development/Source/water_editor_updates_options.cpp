@@ -37,7 +37,7 @@ void WaterEditor::_updateOptionsMenu()
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("transparency", "Transparency", transparency * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("transparency", "Transparency", (transparency * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -51,11 +51,11 @@ void WaterEditor::_updateOptionsMenu()
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", specularIntensity * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("waveHeight", "Wave Height Factor", waveHeight * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("waveHeight", "Wave Height Factor", (waveHeight * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("quality")->isHovered())
 			{

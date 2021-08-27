@@ -48,6 +48,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
 			auto specularFactor = _fe3d.modelEntity_getSpecularFactor(modelID);
 			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
+			auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID);
 			auto lightness = _fe3d.modelEntity_getLightness(modelID);
 			auto color = _fe3d.modelEntity_getColor(modelID);
 			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
@@ -101,6 +102,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				isSpecular << " " <<
 				specularFactor << " " <<
 				specularIntensity << " " <<
+				reflectivity << " " <<
 				lightness << " " <<
 				color.r << " " <<
 				color.g << " " <<

@@ -63,7 +63,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				color.g >>
 				color.b;
 
-			// Add sky
+			// Create sky
 			if (_copyPreviewSky(skyID, previewID))
 			{
 				_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
@@ -79,7 +79,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			// Extract data
 			iss >> terrainID >> previewID;
 
-			// Add terrain
+			// Create terrain
 			_copyPreviewTerrain(terrainID, previewID);
 		}
 		else if (lineType == "WATER")
@@ -101,7 +101,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				speed.y >>
 				transparency;
 
-			// Add water
+			// Create water
 			if (_copyPreviewWater(waterID, previewID))
 			{
 				_fe3d.waterEntity_setColor(waterID, color);
@@ -308,7 +308,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				{
 					break;
 				}
-				else // Add speed
+				else // Create speed
 				{
 					string partID = (nextElement == "?") ? "" : nextElement;
 					Vec3 speed;
@@ -454,7 +454,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				size.y >>
 				size.z;
 
-			// Add AABB
+			// Create AABB
 			_fe3d.aabbEntity_create(aabbID);
 			_fe3d.aabbEntity_setPosition(aabbID, position);
 			_fe3d.aabbEntity_setSize(aabbID, size);
@@ -480,7 +480,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				maxVolume >>
 				maxDistance;
 
-			// Add sound
+			// Create sound
 			if (_copyPreviewSound(soundID, previewID, position))
 			{
 				_fe3d.sound_setMaxVolume(soundID, maxVolume);
@@ -509,12 +509,31 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				color.b >>
 				intensity;
 
-			// Add light
+			// Create light
 			_fe3d.lightEntity_setPosition(lightID, position);
 			_fe3d.lightEntity_setRadius(lightID, radius);
 			_fe3d.lightEntity_setColor(lightID, color);
 			_fe3d.lightEntity_setIntensity(lightID, intensity);
 			_loadedLightIDs.push_back(lightID);
+		}
+		else if (lineType == "REFLECTION")
+		{
+			// Data placeholders
+			string reflectionID;
+			Vec3 position;
+
+			// Extract data
+			iss >>
+				reflectionID >>
+				position.x >>
+				position.y >>
+				position.z;
+
+			// Create reflection
+			_fe3d.reflectionEntity_create(reflectionID);
+			_fe3d.reflectionEntity_setPosition(reflectionID, position);
+			_fe3d.reflectionEntity_capture(reflectionID);
+			_loadedReflectionIDs.push_back(reflectionID);
 		}
 		else if (lineType == "LOD_DISTANCE")
 		{
@@ -551,7 +570,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				ambientLightingColor.b >>
 				ambientLightingIntensity;
 
-			// Apply
+			// Enable ambient lighting
 			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 		}
 		else if (lineType == "LIGHTING_DIRECTIONAL")
@@ -571,7 +590,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				directionalLightingIntensity >>
 				billboardSize;
 
-			// Add directional lighting
+			// Enable directional lighting
 			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 
 			// Set lightsource billboard

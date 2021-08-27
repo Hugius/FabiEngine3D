@@ -258,9 +258,9 @@ void SceneEditor::clearCurrentScene()
 	_loadedReflectionIDs.clear();
 }
 
-void SceneEditor::createCustomScene(const string& sceneID)
+void SceneEditor::createCustomScene(const string& ID)
 {
-	_customSceneID = sceneID;
+	_customSceneID = ID;
 	_hasCustomSceneLighting = false;
 	_hasCustomSceneGraphics = false;
 	_hasCustomSceneSky = false;
@@ -334,11 +334,11 @@ void SceneEditor::addWaterToCustomScene()
 	}
 }
 
-void SceneEditor::addModelToCustomScene(const string& modelID)
+void SceneEditor::addModelToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneModelIDs.push_back(modelID);
+		_customSceneModelIDs.push_back(ID);
 	}
 	else
 	{
@@ -346,11 +346,11 @@ void SceneEditor::addModelToCustomScene(const string& modelID)
 	}
 }
 
-void SceneEditor::addBillboardToCustomScene(const string& billboardID)
+void SceneEditor::addBillboardToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneBillboardIDs.push_back(billboardID);
+		_customSceneBillboardIDs.push_back(ID);
 	}
 	else
 	{
@@ -358,11 +358,11 @@ void SceneEditor::addBillboardToCustomScene(const string& billboardID)
 	}
 }
 
-void SceneEditor::addAabbToCustomScene(const string& aabbID)
+void SceneEditor::addAabbToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneAabbIDs.push_back(aabbID);
+		_customSceneAabbIDs.push_back(ID);
 	}
 	else
 	{
@@ -370,11 +370,23 @@ void SceneEditor::addAabbToCustomScene(const string& aabbID)
 	}
 }
 
-void SceneEditor::addLightToCustomScene(const string& lightID)
+void SceneEditor::addSoundToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneLightIDs.push_back(lightID);
+		_customSceneSoundIDs.push_back(ID);
+	}
+	else
+	{
+		Logger::throwWarning("Cannot add sound to custom scene!");
+	}
+}
+
+void SceneEditor::addLightToCustomScene(const string& ID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneLightIDs.push_back(ID);
 	}
 	else
 	{
@@ -382,14 +394,14 @@ void SceneEditor::addLightToCustomScene(const string& lightID)
 	}
 }
 
-void SceneEditor::addSoundToCustomScene(const string& soundID)
+void SceneEditor::addReflectionToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneSoundIDs.push_back(soundID);
+		_customSceneReflectionIDs.push_back(ID);
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add sound to custom scene!");
+		Logger::throwWarning("Cannot add reflection to custom scene!");
 	}
 }

@@ -426,7 +426,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
-	// Sound casters
+	// Sounds
 	for (const auto& soundID : _fe3d.sound_getAllIDs())
 	{
 		// Check if allowed to save
@@ -463,7 +463,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
-	// Write lights
+	// Lights
 	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
 	{
 		// Check if allowed to save
@@ -491,6 +491,27 @@ bool SceneEditor::saveCustomSceneToFile()
 				color.g << " " <<
 				color.b << " " <<
 				intensity << endl;
+		}
+	}
+
+	// Reflections
+	for (const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		bool isCustomSceneReflection =
+			find(_customSceneReflectionIDs.begin(), _customSceneReflectionIDs.end(), reflectionID) != _customSceneReflectionIDs.end();
+		if ((reflectionID[0] != '@') && isCustomSceneReflection)
+		{
+			// Data to save
+			auto position = _fe3d.reflectionEntity_getPosition(reflectionID);
+
+			// Write data
+			file <<
+				"REFLECTION " <<
+				reflectionID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << endl;
 		}
 	}
 

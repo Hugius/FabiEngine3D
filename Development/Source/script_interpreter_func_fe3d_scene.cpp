@@ -130,6 +130,16 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:scene_add_custom_reflection")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			_sceneEditor.addReflectionToCustomScene(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:scene_add_custom_lighting")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

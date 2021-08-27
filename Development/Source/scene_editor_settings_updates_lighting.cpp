@@ -4,7 +4,7 @@
 
 using std::clamp;
 
-void SceneEditor::_updateLightingMenu()
+void SceneEditor::_updateLightingSettingsMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();

@@ -52,6 +52,8 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
+	_fe3d.reflectionEntity_create("@@reflection");
+	_fe3d.reflectionEntity_capture("@@reflection");
 	_gui.getGlobalScreen()->createTextField("modelID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextField("aabbID", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
@@ -101,6 +103,7 @@ void ModelEditor::unload()
 	_transformationDirection = Direction::X;
 
 	// Miscellaneous
+	_fe3d.reflectionEntity_delete("@@reflection");
 	_gui.getGlobalScreen()->deleteTextField("modelID");
 	_gui.getGlobalScreen()->deleteTextField("aabbID");
 	if (_fe3d.misc_isAabbFrameRenderingEnabled())

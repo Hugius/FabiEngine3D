@@ -115,7 +115,7 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightingMenu();
+		_updateLightingSettingsMenu();
 	}
 	if (_isEditorLoaded)
 	{

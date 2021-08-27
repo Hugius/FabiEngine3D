@@ -171,6 +171,9 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_reflection.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\script.hpp">

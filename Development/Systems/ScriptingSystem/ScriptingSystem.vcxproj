@@ -40,6 +40,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_reflection.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene.cpp" />

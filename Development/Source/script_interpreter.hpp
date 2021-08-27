@@ -84,6 +84,7 @@ private:
 	bool _executeFe3dBillboardEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAabbEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dLightEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dReflectionEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dImageEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dTextEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dSoundFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -103,6 +104,7 @@ private:
 	bool _validateFe3dBillboardEntity(const string& ID, bool isPreviewEntity = false);
 	bool _validateFe3dAabbEntity(const string& ID);
 	bool _validateFe3dLightEntity(const string& ID);
+	bool _validateFe3dReflectionEntity(const string& ID);
 	bool _validateFe3dImageEntity(const string& ID);
 	bool _validateFe3dTextEntity(const string& ID);
 	bool _validateFe3dSound(const string& ID, bool isPreviewEntity = false);

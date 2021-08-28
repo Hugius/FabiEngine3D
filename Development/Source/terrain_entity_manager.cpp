@@ -87,6 +87,11 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 	}
 }
 
+void TerrainEntityManager::update()
+{
+	Logger::throwError("TerrainEntityManager::update");
+}
+
 void TerrainEntityManager::loadMesh(const string& ID)
 {
 	// Temporary values

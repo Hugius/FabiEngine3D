@@ -13,8 +13,8 @@ in vec4 f_clip;
 in mat3 f_tbnMatrix;
 
 // Textures
-layout (location = 0) uniform samplerCube u_firstCubeReflectionMap;
-layout (location = 1) uniform samplerCube u_secondCubeReflectionMap;
+layout (location = 0) uniform samplerCube u_previousCubeReflectionMap;
+layout (location = 1) uniform samplerCube u_currentCubeReflectionMap;
 layout (location = 2) uniform sampler2D u_planarReflectionMap;
 layout (location = 3) uniform sampler2D u_shadowMap;
 layout (location = 4) uniform sampler2D u_diffuseMap;
@@ -35,8 +35,6 @@ uniform vec3 u_spotLightingColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_shadowAreaCenter;
-uniform vec3 u_firstCubeReflectionPosition;
-uniform vec3 u_secondCubeReflectionPosition;
 
 // Float uniforms
 uniform float u_lightIntensities[MAX_LIGHT_AMOUNT];
@@ -57,6 +55,7 @@ uniform float u_maxSpotLightingDistance;
 uniform float u_reflectivity;
 uniform float u_lightness;
 uniform float u_shadowLightness;
+uniform float u_cubeReflectionMixValue;
 
 // Integer uniforms
 uniform int u_lightShapes[MAX_LIGHT_AMOUNT];
@@ -366,14 +365,9 @@ vec3 calculateCubeReflections(vec3 color, vec3 normal)
 			// Calculate
 			vec3 viewDirection = normalize(f_pos - u_cameraPosition);
 			vec3 reflectionDirection = reflect(viewDirection, normal);
-			vec3 firstCubeReflectionMapColor = texture(u_firstCubeReflectionMap, reflectionDirection).rgb;
-			vec3 secondCubeReflectionMapColor = texture(u_secondCubeReflectionMap, reflectionDirection).rgb;
-			float firstDistance = distance(f_pos, u_firstCubeReflectionPosition);
-			float secondDistance = distance(f_pos, u_secondCubeReflectionPosition);
-			float totalDistance = (firstDistance + secondDistance);
-			float firstDistanceMultiplier = (1.0f - (firstDistance / totalDistance));
-			float secondDistanceMultiplier = (1.0f - (secondDistance / totalDistance));
-			vec3 cubeReflectionMapColor = (firstDistanceMultiplier * firstCubeReflectionMapColor) + (secondDistanceMultiplier * secondCubeReflectionMapColor);
+			vec3 previousCubeReflectionMapColor = texture(u_previousCubeReflectionMap, reflectionDirection).rgb;
+			vec3 currentCubeReflectionMapColor = texture(u_currentCubeReflectionMap, reflectionDirection).rgb;
+			vec3 cubeReflectionMapColor = mix(previousCubeReflectionMapColor, currentCubeReflectionMapColor, u_cubeReflectionMixValue);
 			vec3 mixedColor = mix(color, cubeReflectionMapColor, u_reflectivity);
 
 			// Return

@@ -7,13 +7,14 @@ class LightEntityManager final : public BaseEntityManager
 public:
 	LightEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 
-	shared_ptr<LightEntity> getEntity(const string& ID);
+	// Voids
+	void createEntity(const string& ID);
+	void update() override;
 
+	// Instances
+	shared_ptr<LightEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<LightEntity>>& getEntities();
 
-	void createEntity(const string& ID);
-
-	void update() override {};
-
+	// Integers
 	static inline const unsigned int MAX_LIGHT_AMOUNT = 128;
 };

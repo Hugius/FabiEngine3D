@@ -227,6 +227,10 @@ bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& funct
 			}
 		}
 	}
+	else
+	{
+		return false;
+	}
 
 	// Cannot execute reflection functionality when server is running
 	if (_fe3d.networkServer_isRunning())

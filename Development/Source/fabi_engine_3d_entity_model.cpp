@@ -107,7 +107,7 @@ void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& 
 
 void FabiEngine3D::modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setLodEntityID(lodID);
+	_core->_modelEntityManager.getEntity(ID)->setLodModelEntityID(lodID);
 }
 
 void FabiEngine3D::modelEntity_setTransparent(const string& ID, bool enabled)
@@ -474,7 +474,7 @@ const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID)
 
 const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getLodEntityID();
+	return _core->_modelEntityManager.getEntity(ID)->getLodModelEntityID();
 }
 
 const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID)

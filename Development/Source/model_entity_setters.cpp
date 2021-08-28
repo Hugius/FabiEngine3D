@@ -205,9 +205,24 @@ void ModelEntity::setNormalMapPath(const string& value, const string& partID)
 	_parts[_getPartIndex(partID)].normalMapPath = value;
 }
 
-void ModelEntity::setLodEntityID(const string& value)
+void ModelEntity::setLodModelEntityID(const string& value)
 {
-	_lodEntityID = value;
+	_lodModelEntityID = value;
+}
+
+void ModelEntity::setPreviousReflectionEntityID(const string& value)
+{
+	_previousReflectionEntityID = value;
+}
+
+void ModelEntity::setCurrentReflectionEntityID(const string& value)
+{
+	_currentReflectionEntityID = value;
+}
+
+void ModelEntity::setCubeReflectionMixValue(float value)
+{
+	_cubeReflectionMixValue = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setReflectivity(float value)

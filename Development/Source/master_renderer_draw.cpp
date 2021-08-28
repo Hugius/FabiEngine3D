@@ -82,7 +82,7 @@ void MasterRenderer::_renderModelEntities()
 			if (modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				auto lodEntity = modelEntities.find(modelEntity->getLodEntityID())->second;
+				auto lodEntity = modelEntities.find(modelEntity->getLodModelEntityID())->second;
 
 				// Save original transformation
 				Vec3 originalPosition = lodEntity->getPosition();

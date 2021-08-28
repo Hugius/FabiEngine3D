@@ -125,7 +125,7 @@ void MasterRenderer::_captureShadows()
 				if (modelEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
-					auto foundPair = modelEntities.find(modelEntity->getLodEntityID());
+					auto foundPair = modelEntities.find(modelEntity->getLodModelEntityID());
 					if (foundPair != modelEntities.end())
 					{
 						auto lodEntity = foundPair->second;

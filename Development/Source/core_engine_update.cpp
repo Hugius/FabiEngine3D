@@ -50,7 +50,7 @@ void CoreEngine::_updateApplication()
 			_waterEntityManager.update();
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("modelEntityUpdate");
-			_modelEntityManager.update();
+			_modelEntityManager.update(_reflectionEntityManager.getEntities());
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("billboardEntityUpdate");
 			_billboardEntityManager.update();

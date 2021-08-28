@@ -12,7 +12,7 @@ public:
 	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
 
 	void createEntity(const string& ID);
-	void update() override {}
+	void update() override;
 	void update(const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
 
 private:

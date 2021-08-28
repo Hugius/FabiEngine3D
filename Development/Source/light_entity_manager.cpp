@@ -35,3 +35,8 @@ void LightEntityManager::createEntity(const string& ID)
 
 	_createEntity(ID);
 }
+
+void LightEntityManager::update()
+{
+	Logger::throwError("LightEntityManager::update");
+}

@@ -118,6 +118,11 @@ const float ModelEntity::getInversion(const string& partID)
 	}
 }
 
+const float ModelEntity::getCubeReflectionMixValue()
+{
+	return _cubeReflectionMixValue;
+}
+
 const float ModelEntity::getReflectivity()
 {
 	return _reflectivity;
@@ -148,9 +153,19 @@ const string& ModelEntity::getNormalMapPath(const string& partID)
 	return _parts[_getPartIndex(partID)].normalMapPath;
 }
 
-const string& ModelEntity::getLodEntityID()
+const string& ModelEntity::getLodModelEntityID()
 {
-	return _lodEntityID;
+	return _lodModelEntityID;
+}
+
+const string& ModelEntity::getPreviousReflectionEntityID()
+{
+	return _previousReflectionEntityID;
+}
+
+const string& ModelEntity::getCurrentReflectionEntityID()
+{
+	return _currentReflectionEntityID;
 }
 
 const vector<string> ModelEntity::getPartIDs()

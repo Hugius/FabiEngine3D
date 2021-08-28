@@ -45,3 +45,8 @@ void ReflectionEntityManager::createEntity(const string& ID)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	entity->setCubeMap(cubeMap);
 }
+
+void ReflectionEntityManager::update()
+{
+	Logger::throwError("ReflectionEntityManager::update");
+}

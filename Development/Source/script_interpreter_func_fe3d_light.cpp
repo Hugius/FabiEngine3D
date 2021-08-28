@@ -276,22 +276,22 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	//else if (functionName == "fe3d:light_set_distance")
-	//{
-	//	auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+	else if (functionName == "fe3d:light_set_radius")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
-	//	// Validate arguments
-	//	if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-	//	{
-	//		// Validate existing light ID
-	//		if (_validateFe3dLightEntity(arguments[0].getString()))
-	//		{
-	//			_fe3d.lightEntity_setDistanceFactor(arguments[0].getString(), arguments[1].getDecimal());
-	//			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-	//		}
-	//	}
-	//}
-	else if (functionName == "fe3d:light_get_distance")
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing light ID
+			if (_validateFe3dLightEntity(arguments[0].getString()))
+			{
+				_fe3d.lightEntity_setRadius(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:light_get_radius")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -303,6 +303,36 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			{
 				auto result = _fe3d.lightEntity_getRadius(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:light_is_circle_shape")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing light ID
+			if (_validateFe3dLightEntity(arguments[0].getString()))
+			{
+				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:light_is_square_shape")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing light ID
+			if (_validateFe3dLightEntity(arguments[0].getString()))
+			{
+				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}

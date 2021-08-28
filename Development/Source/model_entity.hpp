@@ -34,7 +34,10 @@ public:
 	void setEmissionMapPath(const string& value, const string& partID = "");
 	void setReflectionMapPath(const string& value, const string& partID = "");
 	void setNormalMapPath(const string& value, const string& partID = "");
-	void setLodEntityID(const string& value);
+	void setLodModelEntityID(const string& value);
+	void setPreviousReflectionEntityID(const string& value);
+	void setCurrentReflectionEntityID(const string& value);
+	void setCubeReflectionMixValue(float value);
 	void setReflectivity(float value);
 	void setLightness(float value);
 	void setSpecularFactor(float value);
@@ -66,7 +69,9 @@ public:
 	const string& getEmissionMapPath(const string& partID = "");
 	const string& getReflectionMapPath(const string& partID = "");
 	const string& getNormalMapPath(const string& partID = "");
-	const string& getLodEntityID();
+	const string& getLodModelEntityID();
+	const string& getPreviousReflectionEntityID();
+	const string& getCurrentReflectionEntityID();
 
 	// Matrices
 	const Matrix44& getTransformationMatrix(const string& partID = "");
@@ -81,6 +86,7 @@ public:
 
 	// Floats
 	const float getInversion(const string& partID = "");
+	const float getCubeReflectionMixValue();
 	const float getReflectivity();
 	const float getLightness();
 	const float getSpecularFactor();
@@ -162,7 +168,9 @@ private:
 
 	// Strings
 	string _meshPath = "";
-	string _lodEntityID = "";
+	string _lodModelEntityID = "";
+	string _previousReflectionEntityID = "";
+	string _currentReflectionEntityID = "";
 
 	// Vectors
 	Vec3 _basePosition = Vec3(0.0f);
@@ -172,6 +180,7 @@ private:
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
 	// Floats
+	float _cubeReflectionMixValue = 1.0f;
 	float _reflectivity = 0.5f;
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;

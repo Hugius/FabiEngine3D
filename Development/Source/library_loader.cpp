@@ -14,21 +14,21 @@
 
 LibraryLoader::LibraryLoader()
 {
-	// Attributes
+	// Set attributes
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 	// Make sure scaled monitors still show the correct resolution
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
-	// SDL2
+	// Initialize SDL
 	Logger::throwInfo("Initializing SDL...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		Logger::throwFatalWarning("SDL could not be initialized: ", SDL_GetError());
 	}
 
-	// SDL_Window
+	// Create SDL window
 	Logger::throwInfo("Initializing window...");
 	_windowPointer = SDL_CreateWindow("FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
 		SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
@@ -43,28 +43,28 @@ LibraryLoader::LibraryLoader()
 		Logger::throwFatalWarning("GLEW could not be initialized: ", reinterpret_cast<char const*>(glewGetErrorString(initGlew)));
 	}
 
-	// SDL_image
+	// Initialize SDL_image
 	Logger::throwInfo("Initializing SDL_Image...");
 	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
 		Logger::throwFatalWarning("SDL_IMG could not be initialized: ", IMG_GetError());
 	}
 
-	// SDL_ttf
+	// Initialize SDL_ttf
 	Logger::throwInfo("Initializing SDL_TTF...");
 	if (TTF_Init() == -1)
 	{
 		Logger::throwFatalWarning("SDL_TTF could not be initialized: ", TTF_GetError());
 	}
 
-	// SDL_mixer
+	// Initialize SDL_mixer
 	Logger::throwInfo("Initializing SDL_Mixer...");
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
-		Logger::throwFatalWarning("SDL_Mixer could not be initialized: ", Mix_GetError());
+		Logger::throwFatalWarning("SDL_MIX could not be initialized: ", Mix_GetError());
 	}
 
-	// Winsock2
+	// Initialize Winsock2
 	WSADATA wsaData;
 	auto winsockResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (winsockResult != 0)

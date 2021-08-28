@@ -174,9 +174,15 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				// Check if current reflection changed
 				if (entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
 				{
+					// Set IDs
 					entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
 					entity->setCurrentReflectionEntityID(closestReflectionEntityID);
-					entity->setCubeReflectionMixValue(0.0f);
+
+					// Reset overlapping
+					if (!entity->getPreviousReflectionEntityID().empty())
+					{
+						entity->setCubeReflectionMixValue(0.0f);
+					}
 				}
 			}
 

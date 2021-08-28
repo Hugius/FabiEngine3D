@@ -165,6 +165,23 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				}
 			}
 
+			// Validate reflection IDs
+			if (reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
+			{
+				entity->setPreviousReflectionEntityID("");
+				entity->setCubeReflectionMixValue(1.0f);
+			}
+			if (reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
+			{
+				entity->setCurrentReflectionEntityID("");
+				entity->setCubeReflectionMixValue(1.0f);
+			}
+			if (entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
+			{
+				entity->setPreviousReflectionEntityID("");
+				entity->setCubeReflectionMixValue(1.0f);
+			}
+
 			// Check if any reflection entity is found
 			if (!reflectionDistanceMap.empty())
 			{

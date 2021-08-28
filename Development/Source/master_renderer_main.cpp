@@ -45,8 +45,8 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 3);
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 6);
 	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
 	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
 

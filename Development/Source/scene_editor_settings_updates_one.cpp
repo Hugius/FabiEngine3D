@@ -208,7 +208,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("center")->setHoverable(isEnabled);
 		screen->getButton("follow")->setHoverable(isEnabled);
 		screen->getButton("lightness")->setHoverable(isEnabled);
-		screen->getButton("interval")->setHoverable(isEnabled && isFollowingCamera);
+		screen->getButton("interval")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");

@@ -44,8 +44,7 @@ void SceneEditor::_updateModelMenu()
 						reverse(modelID.begin(), modelID.end());
 
 						// Add new button
-						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->
-							getScrollingList("modelList")->createButton(modelID, rawID);
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->createButton(modelID, rawID);
 					}
 				}
 			}
@@ -66,6 +65,8 @@ void SceneEditor::_updateModelPlacingMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
+				_currentPreviewModelID = "";
+				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 				return;
 			}
@@ -84,6 +85,8 @@ void SceneEditor::_updateModelPlacingMenu()
 							_deactivateModel();
 							_deactivateBillboard();
 							_deactivateSound();
+							_deactivateLight();
+							_deactivateReflection();
 
 							// Set new preview model
 							_currentPreviewModelID = modelID;
@@ -162,7 +165,6 @@ void SceneEditor::_updateModelChoosingMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
-				_currentPreviewModelID = "";
 				return;
 			}
 		}

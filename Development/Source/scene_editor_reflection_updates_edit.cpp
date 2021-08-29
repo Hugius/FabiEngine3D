@@ -6,8 +6,15 @@ void SceneEditor::_updateReflectionEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected reflection from last frame
-	_selectedCameraID = "";
+	// Reset selected camera from last frame
+	if (!_dontResetSelectedCamera)
+	{
+		_selectedCameraID = "";
+	}
+	else
+	{
+		_dontResetSelectedCamera = false;
+	}
 
 	// User must not be in placement mode
 	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
@@ -25,11 +32,8 @@ void SceneEditor::_updateReflectionEditing()
 				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Set new selected camera
-					_selectedCameraID = entityID;
-
-					// Change cursor
-					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+					// Select hovered camera
+					_selectReflection(entityID.substr(string("@@camera_").size()));
 
 					// Check if user clicked camera
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -37,21 +41,14 @@ void SceneEditor::_updateReflectionEditing()
 						// Check if same camera is not clicked again
 						if (_selectedCameraID != _activeCameraID)
 						{
-							// Set new active reflection
-							_activeCameraID = _selectedCameraID;
-
-							// Filling writeFields
-							Vec3 position = _fe3d.modelEntity_getPosition(_activeCameraID);
-							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-							rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+							_activateReflection(_selectedCameraID.substr(string("@@camera_").size()));
 						}
 					}
 				}
 				else
 				{
-					// Don't reset if camera is active
-					if (entityID != _activeCameraID)
+					// Don't reset if camera is active or selected
+					if ((entityID != _activeCameraID) && (entityID != _selectedCameraID))
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_CAMERA_SIZE);
 						_fe3d.aabbEntity_setSize(entityID, DEFAULT_CAMERA_AABB_SIZE);

@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::_updateReflectionMenu()
 {
 	// Temporary values
@@ -13,6 +15,7 @@ void SceneEditor::_updateReflectionMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
+				_isPlacingReflection = false;
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				return;
 			}
@@ -22,6 +25,8 @@ void SceneEditor::_updateReflectionMenu()
 				_deactivateModel();
 				_deactivateBillboard();
 				_deactivateSound();
+				_deactivateLight();
+				_deactivateReflection();
 
 				// Set new preview reflection
 				_isPlacingReflection = true;
@@ -36,6 +41,89 @@ void SceneEditor::_updateReflectionMenu()
 					_gui.getGlobalScreen()->createValueForm("positionY", "Y", 0.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 					_gui.getGlobalScreen()->createValueForm("positionZ", "Z", 0.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 				}
+			}
+			else if (screen->getButton("choice")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuReflectionChoice");
+
+				// Clear all buttons from scrolling list
+				_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuReflectionChoice")->getScrollingList("reflections")->deleteButtons();
+
+				// Add the ID of every placed reflection
+				auto IDs = _fe3d.reflectionEntity_getAllIDs();
+				sort(IDs.begin(), IDs.end());
+				for (auto& reflectionID : IDs)
+				{
+					// Check if reflection is not a preview
+					if (reflectionID[0] != '@')
+					{
+						// Removing the unique number from the ID
+						reverse(reflectionID.begin(), reflectionID.end());
+						string rawID = reflectionID.substr(reflectionID.find('_') + 1);
+						reverse(rawID.begin(), rawID.end());
+						reverse(reflectionID.begin(), reflectionID.end());
+
+						// Add new button
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuReflectionChoice")->getScrollingList("reflections")->createButton(reflectionID, rawID);
+					}
+				}
+			}
+		}
+	}
+}
+
+void SceneEditor::_updateReflectionChoosingMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuReflectionChoice")
+	{
+		// Remove deleted reflections from the scrollingList buttons
+		for (const auto& button : screen->getScrollingList("reflections")->getButtons())
+		{
+			// Check if reflection is still existing
+			if (!_fe3d.reflectionEntity_isExisting(button->getID()))
+			{
+				// Delete button
+				screen->getScrollingList("reflections")->deleteButton(button->getID());
+				break;
+			}
+		}
+
+		// Iterate through every placed reflection
+		for (const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
+		{
+			// Check if reflection is not a preview
+			if (reflectionID[0] != '@')
+			{
+				// Check if button is hovered
+				if (screen->getScrollingList("reflections")->getButton(reflectionID)->isHovered())
+				{
+					// Check if LMB pressed (activation)
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+					{
+						_activateReflection(reflectionID);
+					}
+					else // Hovering (selection)
+					{
+						_dontResetSelectedCamera = true;
+						_selectReflection(reflectionID);
+					}
+
+					break;
+				}
+			}
+		}
+
+		// Back button
+		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuReflection");
+				return;
 			}
 		}
 	}

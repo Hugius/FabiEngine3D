@@ -104,16 +104,28 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuSoundChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	
 	// Left-viewport: sceneEditorMenuLight
-	positions = VPC::calculateButtonPositions(2, CH);
+	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("sceneEditorMenuLight");
 	leftWindow->getScreen("sceneEditorMenuLight")->createButton("place", Vec2(0.0f, positions[0]), Vec2(TW("Place Light"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Light", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("sceneEditorMenuLight")->createButton("back", Vec2(0.0f, positions[1]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuLight")->createButton("choice", Vec2(0.0f, positions[1]), Vec2(TW("Choose Light"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Light", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuLight")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	
+	// Left-viewport: sceneEditorMenuLightChoice
+	leftWindow->createScreen("sceneEditorMenuLightChoice");
+	leftWindow->getScreen("sceneEditorMenuLightChoice")->createScrollingList("lights", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen("sceneEditorMenuLightChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuReflection
-	positions = VPC::calculateButtonPositions(2, CH);
+	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("sceneEditorMenuReflection");
 	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("place", Vec2(0.0f, positions[0]), Vec2(TW("Place Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Place Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("back", Vec2(0.0f, positions[1]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("choice", Vec2(0.0f, positions[1]), Vec2(TW("Choose Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuReflection")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
+	// Left-viewport: sceneEditorMenuReflectionChoice
+	leftWindow->createScreen("sceneEditorMenuReflectionChoice");
+	leftWindow->getScreen("sceneEditorMenuReflectionChoice")->createScrollingList("reflections", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), LVPC::SCROLLING_LIST_COLOR, LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen("sceneEditorMenuReflectionChoice")->createButton("back", Vec2(0.0f, -0.9f), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuSettings
 	positions = VPC::calculateButtonPositions(6, CH);
@@ -354,7 +366,9 @@ void SceneEditor::_unloadGUI()
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSoundPlace");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSoundChoice");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuLight");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuLightChoice");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuReflection");
+	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuReflectionChoice");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettings");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettingsLighting");
 	_gui.getViewport("left")->getWindow("main")->deleteScreen("sceneEditorMenuSettingsLightingAmbient");

@@ -77,9 +77,11 @@ private:
 	void _updateSoundPlacing();
 	void _updateSoundEditing();
 	void _updateLightMenu();
+	void _updateLightChoosingMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
 	void _updateReflectionMenu();
+	void _updateReflectionChoosingMenu();
 	void _updateReflectionPlacing();
 	void _updateReflectionEditing();
 	void _updateSettingsMenu();
@@ -107,12 +109,18 @@ private:
 	void _selectModel(const string& ID);
 	void _selectBillboard(const string& ID);
 	void _selectSound(const string& ID);
+	void _selectLight(const string& ID);
+	void _selectReflection(const string& ID);
 	void _activateModel(const string& ID);
 	void _activateBillboard(const string& ID);
 	void _activateSound(const string& ID);
+	void _activateLight(const string& ID);
+	void _activateReflection(const string& ID);
 	void _deactivateModel();
 	void _deactivateBillboard();
 	void _deactivateSound();
+	void _deactivateLight();
+	void _deactivateReflection();
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
 	// Strings
@@ -245,6 +253,8 @@ private:
 	bool _dontResetSelectedModel = false;
 	bool _dontResetSelectedBillboard = false;
 	bool _dontResetSelectedSpeaker = false;
+	bool _dontResetSelectedLamp = false;
+	bool _dontResetSelectedCamera = false;
 	bool _isPlacingLight = false;
 	bool _isPlacingReflection = false;
 	bool _isEditorLoaded = false;

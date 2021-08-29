@@ -82,6 +82,8 @@ void main()
 		// Calculate base color
 		primaryColor  = u_color;
 		primaryColor *= u_lightness;
+		primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
+		primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
 
 		// Apply fog
 		primaryColor = calculateFog(primaryColor);

@@ -48,7 +48,7 @@ void SceneEditor::_updateModelEditing()
 				}
 				else
 				{
-					// Don't reset inversion if model is active or selected
+					// Don't reset if model is active or selected
 					if ((entityID != _activeModelID) && (entityID != _selectedModelID))
 					{
 						_fe3d.modelEntity_setInversion(entityID, 0.0f);

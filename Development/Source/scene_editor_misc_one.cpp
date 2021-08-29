@@ -65,16 +65,19 @@ void SceneEditor::_activateModel(const string& ID)
 	// Set ID
 	_activeModelID = ID;
 
-	// Update buttons hoverability
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.modelEntity_getPosition(_activeModelID);
 
-	// Filling writeFields
-	Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	// Update buttons hoverability
+	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	rightWindow->getScreen("modelPropertiesMenu")->getButton("size")->setHoverable(true);
+
+	// Filling write fields
+	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string tempID = ID;
@@ -111,13 +114,16 @@ void SceneEditor::_activateBillboard(const string& ID)
 	// Set ID
 	_activeBillboardID = ID;
 
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+
 	// Update buttons hoverability
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("position")->setHoverable(false);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("size")->setHoverable(true);
 
-	// Filling writeFields
-	Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+	// Filling write fields
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
@@ -152,15 +158,36 @@ void SceneEditor::_selectSound(const string& ID)
 	}
 }
 
+void SceneEditor::_selectLight(const string& ID)
+{
+	// Set ID
+	_selectedLampID = ("@@lamp_" + ID);
+
+	// Change cursor
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+}
+
+void SceneEditor::_selectReflection(const string& ID)
+{
+	// Set ID
+	_selectedCameraID = ("@@camera_" + ID);
+
+	// Change cursor
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+}
+
 void SceneEditor::_activateSound(const string& ID)
 {
 	// Set ID
 	_activeSpeakerID = ("@@speaker_" + ID);
 
-	// Filling writeFields
-	Vec3 position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
-	float maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
-	float maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.sound_getPosition(_activeSpeakerID.substr(string("@@speaker_").size()));
+	auto maxVolume = _fe3d.sound_getMaxVolume(_activeSpeakerID.substr(string("@@speaker_").size()));
+	auto maxDistance = _fe3d.sound_getMaxDistance(_activeSpeakerID.substr(string("@@speaker_").size()));
+
+	// Filling write fields
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("soundPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
@@ -174,6 +201,41 @@ void SceneEditor::_activateSound(const string& ID)
 	reverse(rawID.begin(), rawID.end());
 	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
 	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
+}
+
+void SceneEditor::_activateLight(const string& ID)
+{
+	// Set ID
+	_activeLampID = ("@@lamp_" + ID);
+
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.modelEntity_getPosition(_activeLampID);
+
+	// Update buttons hoverability
+	rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("lightPropertiesMenu")->getButton("radius")->setHoverable(true);
+	rightWindow->getScreen("lightPropertiesMenu")->getButton("color")->setHoverable(true);
+
+	// Filling writeFields
+	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+}
+
+void SceneEditor::_activateReflection(const string& ID)
+{
+	// Set ID
+	_activeCameraID = ("@@camera_" + ID);
+
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.modelEntity_getPosition(_activeCameraID);
+
+	// Filling writeFields
+	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 }
 
 void SceneEditor::_deactivateModel()
@@ -192,6 +254,16 @@ void SceneEditor::_deactivateSound()
 {
 	_activeSpeakerID = "";
 	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
+}
+
+void SceneEditor::_deactivateLight()
+{
+	_activeLampID = "";
+}
+
+void SceneEditor::_deactivateReflection()
+{
+	_activeCameraID = "";
 }
 
 vector<string> SceneEditor::_loadSceneIDs()

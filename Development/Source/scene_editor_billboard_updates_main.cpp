@@ -44,8 +44,7 @@ void SceneEditor::_updateBillboardMenu()
 						reverse(billboardID.begin(), billboardID.end());
 
 						// Add new button
-						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->
-							getScrollingList("billboardList")->createButton(billboardID, rawID);
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->createButton(billboardID, rawID);
 					}
 				}
 			}
@@ -67,6 +66,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 			// Back button
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
+				_currentPreviewBillboardID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 				return;
 			}
@@ -85,6 +85,8 @@ void SceneEditor::_updateBillboardPlacingMenu()
 							_deactivateModel();
 							_deactivateBillboard();
 							_deactivateSound();
+							_deactivateLight();
+							_deactivateReflection();
 
 							// Set new preview billboard
 							_currentPreviewBillboardID = billboardID;
@@ -163,7 +165,6 @@ void SceneEditor::_updateBillboardChoosingMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
-				_currentPreviewBillboardID = "";
 				return;
 			}
 		}

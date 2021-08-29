@@ -44,8 +44,7 @@ void SceneEditor::_updateSoundMenu()
 						reverse(soundID.begin(), soundID.end());
 
 						// Add new button
-						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->
-							getScrollingList("sounds")->createButton(soundID, rawID);
+						_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSoundChoice")->getScrollingList("sounds")->createButton(soundID, rawID);
 					}
 				}
 			}
@@ -67,6 +66,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 			// Back button
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
+				_currentPreviewSoundID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 				return;
 			}
@@ -82,6 +82,8 @@ void SceneEditor::_updateSoundPlacingMenu()
 						_deactivateModel();
 						_deactivateBillboard();
 						_deactivateSound();
+						_deactivateLight();
+						_deactivateReflection();
 
 						// Set new preview sound
 						_currentPreviewSoundID = audioID;
@@ -160,7 +162,6 @@ void SceneEditor::_updateSoundChoosingMenu()
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
-				_currentPreviewSoundID = "";
 				return;
 			}
 		}

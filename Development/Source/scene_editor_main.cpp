@@ -145,12 +145,12 @@ void SceneEditor::unload()
 	_fe3d.reflectionEntity_deleteAll();
 
 	// Reset editor properties
-	_loadedSoundIDs.clear();
-	_outsideLoadedSoundIDs.clear();
 	_loadedModelIDs.clear();
 	_outsideLoadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
 	_outsideLoadedBillboardIDs.clear();
+	_loadedSoundIDs.clear();
+	_outsideLoadedSoundIDs.clear();
 	_initialModelPosition.clear();
 	_initialModelRotation.clear();
 	_initialModelSize.clear();
@@ -159,6 +159,7 @@ void SceneEditor::unload()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customSceneLightIDs.clear();
+	_customSceneReflectionIDs.clear();
 	_loadedAabbIDs.clear();
 	_loadedLightIDs.clear();
 	_loadedReflectionIDs.clear();
@@ -180,6 +181,8 @@ void SceneEditor::unload()
 	_activeSpeakerID = "";
 	_selectedLampID = "";
 	_activeLampID = "";
+	_selectedCameraID = "";
+	_activeCameraID = "";
 	_loadedSceneID = "";
 	_currentSceneID = "";
 	_editorSpeed = 1.0f;
@@ -191,6 +194,8 @@ void SceneEditor::unload()
 	_activeSpeakerSizeDirection = 1;
 	_selectedLampSizeDirection = 1;
 	_activeLampSizeDirection = 1;
+	_selectedCameraSizeDirection = 1;
+	_activeCameraSizeDirection = 1;
 	_hasCustomSceneLighting = false;
 	_hasCustomSceneGraphics = false;
 	_hasCustomSceneSky = false;
@@ -199,7 +204,10 @@ void SceneEditor::unload()
 	_dontResetSelectedModel = false;
 	_dontResetSelectedBillboard = false;
 	_dontResetSelectedSpeaker = false;
+	_dontResetSelectedLamp = false;
+	_dontResetSelectedCamera = false;
 	_isPlacingLight = false;
+	_isPlacingReflection = false;
 	_isEditorLoaded = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;

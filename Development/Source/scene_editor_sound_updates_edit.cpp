@@ -5,7 +5,7 @@ void SceneEditor::_updateSoundEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected sound from last frame
+	// Reset selected speaker from last frame
 	if (!_dontResetSelectedSpeaker)
 	{
 		_selectedSpeakerID = "";
@@ -31,9 +31,8 @@ void SceneEditor::_updateSoundEditing()
 				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Set new selected speaker
-					_selectedSpeakerID = entityID;
-					_selectSound(_selectedSpeakerID.substr(string("@@speaker_").size()));
+					// Select hovered speaker
+					_selectSound(entityID.substr(string("@@speaker_").size()));
 
 					// Change cursor
 					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -44,15 +43,14 @@ void SceneEditor::_updateSoundEditing()
 						// Check if same speaker is not clicked again
 						if (_selectedSpeakerID != _activeSpeakerID)
 						{
-							_activeSpeakerID = _selectedSpeakerID;
-							_activateSound(_activeSpeakerID.substr(string("@@speaker_").size()));
+							_activateSound(_selectedSpeakerID.substr(string("@@speaker_").size()));
 						}
 					}
 				}
 				else
 				{
-					// Don't reset if speaker is active
-					if (entityID != _activeSpeakerID && _selectedSpeakerID.empty())
+					// Don't reset if speaker is active or selected
+					if ((entityID != _activeSpeakerID) && (entityID != _selectedSpeakerID))
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
 						_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);

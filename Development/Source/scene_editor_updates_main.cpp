@@ -91,6 +91,10 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateLightChoosingMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightPlacing();
 	}
 	if (_isEditorLoaded)
@@ -100,6 +104,10 @@ void SceneEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateReflectionMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateReflectionChoosingMenu();
 	}
 	if (_isEditorLoaded)
 	{

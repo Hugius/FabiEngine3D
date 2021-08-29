@@ -6,8 +6,15 @@ void SceneEditor::_updateLightEditing()
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
 
-	// Reset selected light from last frame
-	_selectedLampID = "";
+	// Reset selected lamp from last frame
+	if (!_dontResetSelectedLamp)
+	{
+		_selectedLampID = "";
+	}
+	else
+	{
+		_dontResetSelectedLamp = false;
+	}
 
 	// User must not be in placement mode
 	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
@@ -25,11 +32,8 @@ void SceneEditor::_updateLightEditing()
 				if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 					!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
-					// Set new selected lamp
-					_selectedLampID = entityID;
-
-					// Change cursor
-					_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+					// Select hovered lamp
+					_selectLight(entityID.substr(string("@@lamp_").size()));
 
 					// Check if user clicked lamp
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -37,26 +41,14 @@ void SceneEditor::_updateLightEditing()
 						// Check if same lamp is not clicked again
 						if (_selectedLampID != _activeLampID)
 						{
-							// Set new active light
-							_activeLampID = _selectedLampID;
-
-							// Update buttons hoverability
-							rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
-							rightWindow->getScreen("lightPropertiesMenu")->getButton("radius")->setHoverable(true);
-							rightWindow->getScreen("lightPropertiesMenu")->getButton("color")->setHoverable(true);
-
-							// Filling writeFields
-							Vec3 position = _fe3d.modelEntity_getPosition(_activeLampID);
-							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-							rightWindow->getScreen("lightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+							_activateLight(_selectedLampID.substr(string("@@lamp_").size()));
 						}
 					}
 				}
 				else
 				{
-					// Don't reset if lamp is active
-					if (entityID != _activeLampID)
+					// Don't reset if lamp is active or selected
+					if ((entityID != _activeLampID) && (entityID != _selectedLampID))
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_LAMP_SIZE);
 						_fe3d.aabbEntity_setSize(entityID, DEFAULT_LAMP_AABB_SIZE);

@@ -46,7 +46,7 @@ void NetworkClientAPI::update()
 				_isConnectedToServer = true;
 
 				// Send username to server
-				if (!_sendTcpMessage("USERNAME" + _username, true, false))
+				if (!_sendTcpMessage(("USERNAME" + _username), true, false))
 				{
 					return;
 				}

@@ -91,7 +91,7 @@ BEGIN:
 						if (clientMessageBuild.substr(0, 8) == "USERNAME") // Handle USERNAME message
 						{
 							// Extract username
-							auto username = clientMessageBuild.substr(8);
+							auto username = clientMessageBuild.substr(string("USERNAME").size());
 
 							// Check if server is full or username is already connected
 							if (_clientIPs.size() > _maxClientCount)

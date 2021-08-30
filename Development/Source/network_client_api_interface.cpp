@@ -52,13 +52,22 @@ const unsigned int NetworkClientAPI::getPingLatency()
 		Logger::throwError("NetworkClientAPI::getPingLatency::2");
 	}
 
+	// Check if no ping latency is measured yet
+	if (_pingLatencies.empty())
+	{
+		return 0;
+	}
+
 	// Calculate average ping
 	unsigned int totalPing = 0;
 	for (const auto& ping : _pingLatencies)
 	{
 		totalPing += ping;
 	}
-	return (totalPing / static_cast<int>(_pingLatencies.size()));
+	int averagePing = (totalPing / static_cast<int>(_pingLatencies.size()));
+
+	// Return
+	return averagePing;
 }
 
 const string& NetworkClientAPI::getUsername()

@@ -15,7 +15,14 @@ void SceneEditor::_updateReflectionMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_isPlacingReflection = false;
+				// Reset placing
+				if (_isPlacingReflection)
+				{
+					_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, false);
+					_isPlacingReflection = false;
+				}
+
+				// Miscellaneous
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				return;
 			}

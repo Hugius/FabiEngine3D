@@ -66,7 +66,15 @@ void SceneEditor::_updateBillboardPlacingMenu()
 			// Back button
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_currentPreviewBillboardID = "";
+				// Reset placing
+				if (!_currentPreviewBillboardID.empty())
+				{
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+					_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, false);
+					_currentPreviewBillboardID = "";
+				}
+
+				// Miscellaneous
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 				return;
 			}

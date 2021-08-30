@@ -15,7 +15,15 @@ void SceneEditor::_updateLightMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_isPlacingLight = false;
+				// Reset placing
+				if (_isPlacingLight)
+				{
+					_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
+					_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+					_isPlacingLight = false;
+				}
+
+				// Miscellaneous
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				return;
 			}

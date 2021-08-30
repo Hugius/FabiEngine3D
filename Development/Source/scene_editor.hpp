@@ -204,7 +204,7 @@ private:
 	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
 	static inline const Vec3 BILLBOARD_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
 	static inline const Vec3 SOUND_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
-	static inline const Vec3 LIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 LIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.5f, 0.0f);
 	static inline const Vec3 REFLECTION_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 SPEAKER_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);

@@ -32,12 +32,6 @@ void SceneEditor::_updateSoundPlacing()
 					goto BEGIN1;
 				}
 
-				// Stop preview sound playback
-				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
-				{
-					_fe3d.sound_stop(_currentPreviewSoundID, 0);
-				}
-
 				// Create model
 				const string newModelID = ("@@speaker_" + newID);
 				_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
@@ -66,10 +60,7 @@ void SceneEditor::_updateSoundPlacing()
 				_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 				// Stop preview sound playback
-				if (_fe3d.sound_isStarted(_currentPreviewSoundID))
-				{
-					_fe3d.sound_stop(_currentPreviewSoundID, 0);
-				}
+				_fe3d.sound_stop(_currentPreviewSoundID, 0);
 
 				// Miscellaneous
 				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
@@ -128,10 +119,7 @@ void SceneEditor::_updateSoundPlacing()
 						}
 
 						// Stop preview sound playback
-						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
-						{
-							_fe3d.sound_stop(_currentPreviewSoundID, 0);
-						}
+						_fe3d.sound_stop(_currentPreviewSoundID, 0);
 
 						// Create model
 						const string newModelID = ("@@speaker_" + newID);
@@ -159,10 +147,7 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
 
 						// Stop preview sound playback
-						if (_fe3d.sound_isStarted(_currentPreviewSoundID))
-						{
-							_fe3d.sound_stop(_currentPreviewSoundID, 0);
-						}
+						_fe3d.sound_stop(_currentPreviewSoundID, 0);
 
 						// Miscellaneous
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);

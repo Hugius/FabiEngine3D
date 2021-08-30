@@ -65,8 +65,15 @@ void SceneEditor::_updateModelPlacingMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_currentPreviewModelID = "";
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+				// Reset placing
+				if (!_currentPreviewModelID.empty())
+				{
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+					_fe3d.modelEntity_setVisible(_currentPreviewModelID, false);
+					_currentPreviewModelID = "";
+				}
+
+				// Miscellaneous
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 				return;
 			}

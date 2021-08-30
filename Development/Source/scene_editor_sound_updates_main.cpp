@@ -66,7 +66,24 @@ void SceneEditor::_updateSoundPlacingMenu()
 			// Back button
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_currentPreviewSoundID = "";
+				// Reset placing
+				if (!_currentPreviewSoundID.empty())
+				{
+					// Hide preview speaker
+					_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, false);
+
+					// Stop preview sound playback
+					if (_fe3d.sound_isStarted(_currentPreviewSoundID))
+					{
+						_fe3d.sound_stop(_currentPreviewSoundID, 0);
+					}
+
+					// Miscellaneous
+					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
+					_currentPreviewSoundID = "";
+				}
+
+				// Miscellaneous
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 				return;
 			}

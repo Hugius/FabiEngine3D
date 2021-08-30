@@ -21,72 +21,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	const string textureDirectoryPath = "engine_assets\\textures\\";
 	const string fontDirectoryPath = "engine_assets\\fonts\\";
 
-	// Validate engine assets directory
-	if
-		(
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "camera.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "cube.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "lamp.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "plane.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + meshDirectoryPath + "speaker.obj") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "a.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "b.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "backspace.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "c.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "color.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "ctrl.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cube.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_default.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_pointing.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "cursor_text.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "d.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "debug.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "down.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "enter.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "esc.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "f.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "grid.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "h.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "left.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "light_source.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "logo.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "minus.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_left.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_middle.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "mouse_right.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "p.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "pause.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "play.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "plus.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "position.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "r.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "radius.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "restart.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "right.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "rotation.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "s.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "settings.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shape_circle.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shape_square.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "shift.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "size.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "space.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "stop.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "up.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "v.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_right.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_left.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_top.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_bottom.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_back.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + textureDirectoryPath + "background_front.png") ||
-			!misc_isFileExisting(misc_getRootDirectory() + fontDirectoryPath + "font.ttf")
-			)
-	{
-		Logger::throwFatalWarning("Directory `engine_assets\\` is missing or corrupted!");
-	}
-
 	if (application_isExported()) // Application preview
 	{
 		// Validate project files & directories
@@ -161,7 +95,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		texturePaths2D.push_back(textureDirectoryPath + "h.png");
 		texturePaths2D.push_back(textureDirectoryPath + "left.png");
 		texturePaths2D.push_back(textureDirectoryPath + "light_source.png");
-		texturePaths2D.push_back(textureDirectoryPath + "logo.png");
 		texturePaths2D.push_back(textureDirectoryPath + "minus.png");
 		texturePaths2D.push_back(textureDirectoryPath + "mouse.png");
 		texturePaths2D.push_back(textureDirectoryPath + "mouse_left.png");

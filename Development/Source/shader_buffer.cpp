@@ -23,19 +23,19 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 
 	// Compose file paths
 	const auto rootDir = Tools::getRootDirectory();
-	const auto vertexPath = ("engine_assets\\shaders\\" + _vertexFilename);
-	const auto fragmentPath = ("engine_assets\\shaders\\" + _fragmentFilename);
+	const auto vertexPath = ("shaders\\" + _vertexFilename);
+	const auto fragmentPath = ("shaders\\" + _fragmentFilename);
 
 	// Check if vertex shader file exists
 	if (!exists(rootDir + vertexPath))
 	{
-		Logger::throwError("ShaderBuffer::ShaderBuffer::1");
+		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}
 
 	// Check if fragment shader file exists
 	if (!exists(rootDir + fragmentPath))
 	{
-		Logger::throwError("ShaderBuffer::ShaderBuffer::2");
+		Logger::throwFatalWarning("Directory `shaders\\` is missing or corrupted!");
 	}
 
 	// Open the shader text files

@@ -36,7 +36,18 @@ class CoreEngine final
 private:
 	CoreEngine(FabiEngine3D& fe3d);
 
-	// Core instances
+	// Voids
+	void _start();
+	void _pause();
+	void _resume();
+	void _stop();
+	void _prepareApplication();
+	void _updateApplication();
+	void _renderApplication();
+	void _updateWindowFading();
+
+	// Instances
+	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
 	Window _window;
 	MeshLoader _meshLoader;
@@ -66,23 +77,10 @@ private:
 	NetworkServerAPI _networkServerAPI;
 	NetworkClientAPI _networkClientAPI;
 
-	// Core functions
-	void _start();
-	void _pause();
-	void _resume();
-	void _stop();
-	void _prepareApplication();
-	void _updateApplication();
-	void _renderApplication();
-
-	// Miscellaneous functions
-	void _updateWindowFading();
-
-	// Engine interface instance
-	FabiEngine3D& _fe3d;
-
-	// Miscellaneous variable
+	// Floats
 	float _deltaTimeMS = 0.0f;
+
+	// Booleans
 	bool _isPaused = false;
 	bool _isRunning = false;
 };

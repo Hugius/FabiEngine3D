@@ -96,6 +96,20 @@ void AnimationEditor::_updateFrameMenu()
 			}
 		}
 
+		// Update rotation origin visualization
+		if (_gui.getGlobalScreen()->isValueFormExisting("rotationOriginX") && 
+			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginY") &&
+			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginZ"))
+		{
+			const auto speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartID];
+			_fe3d.modelEntity_rotate(currentAnimation->previewModelID, speed, _currentPartID);
+			_mustUpdateCurrentFramePreview = false;
+		}
+		else
+		{
+			_mustUpdateCurrentFramePreview = true;
+		}
+
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("transformationX", transformation.x, {}))
 		{
@@ -112,14 +126,17 @@ void AnimationEditor::_updateFrameMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginX", rotationOrigin.x, {}))
 		{
 			rotationOrigin.x /= 1000.0f;
+			_mustUpdateCurrentFramePreview = true;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginY", rotationOrigin.y, {}))
 		{
 			rotationOrigin.y /= 1000.0f;
+			_mustUpdateCurrentFramePreview = true;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("rotationOriginZ", rotationOrigin.z, {}))
 		{
 			rotationOrigin.z /= 1000.0f;
+			_mustUpdateCurrentFramePreview = true;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("transformationSpeedX", speed.x, {}))
 		{

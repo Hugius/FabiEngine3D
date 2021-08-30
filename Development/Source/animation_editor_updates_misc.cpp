@@ -118,8 +118,8 @@ void AnimationEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if animation loaded in editor
-	if (!_currentAnimationID.empty())
+	// Check if allowed to set frame transformation
+	if (!_currentAnimationID.empty() && _mustUpdateCurrentFramePreview)
 	{
 		// Retrieve current animation
 		auto currentAnimation = _getAnimation(_currentAnimationID);
@@ -130,9 +130,10 @@ void AnimationEditor::_updateMiscellaneous()
 			// Check if animation has a preview model
 			if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
 			{
-				// Default transformation
+				// For every animation part
 				for (auto partID : currentAnimation->partIDs)
 				{
+					// Default transformation
 					_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partID);
 					_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partID);
 					_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partID);

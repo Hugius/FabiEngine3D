@@ -96,6 +96,7 @@ private:
 	int _selectedPartInversionDirection = 1;
 
 	// Booleans
+	bool _mustUpdateCurrentFramePreview = true;
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
 	bool _isEditingAnimation = false;

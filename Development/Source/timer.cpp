@@ -92,7 +92,7 @@ void Timer::sleep(int microseconds)
 
 void Timer::increasePassedFrameCount()
 {
-	_passedFrameCount++;
+	_passedTickCount++;
 }
 
 void Timer::clearDeltaParts()
@@ -100,9 +100,9 @@ void Timer::clearDeltaParts()
 	_deltaParts.clear();
 }
 
-int Timer::getPassedFrameCount()
+int Timer::getPassedTickCount()
 {
-	return _passedFrameCount;
+	return _passedTickCount;
 }
 
 bool Timer::isStarted()

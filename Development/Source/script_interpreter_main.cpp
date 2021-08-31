@@ -446,8 +446,11 @@ void ScriptInterpreter::unload()
 	_engineFunctionCallCount = 0;
 	_executionDepth = 0;
 	_hasThrownError = false;
-	_applicationMustStop = false;
-	_scopeHasChanged = false;
-	_passedScopeChanger = false;
+	_mustStopApplication = false;
+	_hasPassedLoopStatement = false;
+	_hasPassedIfStatement = false;
+	_hasPassedElifStatement = false;
+	_hasPassedElseStatement = false;
+	_mustIgnoreDeeperScope = false;
 	_isDebugging = false;
 }

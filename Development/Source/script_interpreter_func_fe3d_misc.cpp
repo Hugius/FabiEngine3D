@@ -50,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else // Engine preview
 			{
-				_applicationMustStop = true;
+				_mustStopApplication = true;
 			}
 			
 			// Return

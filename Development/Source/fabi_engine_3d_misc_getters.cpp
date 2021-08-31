@@ -322,9 +322,9 @@ const bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 	return (isExisting && !misc_isDirectoryExisting(filePath));
 }
 
-const bool FabiEngine3D::misc_checkInterval(unsigned int frames)
+const bool FabiEngine3D::misc_checkInterval(unsigned int ticks)
 {
-	return ((_core->_timer.getPassedFrameCount() % frames) == 0);
+	return ((_core->_timer.getPassedTickCount() % ticks) == 0);
 }
 
 const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()

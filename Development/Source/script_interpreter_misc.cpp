@@ -15,7 +15,7 @@ bool ScriptInterpreter::hasThrownError()
 
 bool ScriptInterpreter::gameMustStop()
 {
-	return _applicationMustStop;
+	return _mustStopApplication;
 }
 
 unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
@@ -50,13 +50,28 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 
 bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
 {
-	// Calculate scope depth of current scriptline
-	unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
+	// Temporary values
+	const unsigned int currentLineScopeDepth = (countedSpaces / SPACES_PER_INDENT);
+	const bool isScopeDepthInvalid = (currentLineScopeDepth != (scopeDepth + static_cast<int>(_mustIgnoreDeeperScope)));
 
-	// Check if there is any code right after a scope change
-	if (_scopeHasChanged && ((currentLineScopeDepth != scopeDepth) || scriptLineText.substr(0, 3) == "///"))
+	if (_hasPassedLoopStatement && isScopeDepthInvalid) // Passed loop statement
 	{
-		_throwScriptError("no indented code after scope change!");
+		_throwScriptError("incorrect indentation after LOOP statement!");
+		return false;
+	}
+	else if (_hasPassedIfStatement && isScopeDepthInvalid) // Passed if statement
+	{
+		_throwScriptError("incorrect indentation after IF statement!");
+		return false;
+	}
+	else if (_hasPassedElifStatement && isScopeDepthInvalid) // Passed elif statement
+	{
+		_throwScriptError("incorrect indentation after ELIF statement!");
+		return false;
+	}
+	else if (_hasPassedElseStatement && isScopeDepthInvalid) // Passed else statement
+	{
+		_throwScriptError("incorrect indentation after ELSE statement!");
 		return false;
 	}
 	else if (currentLineScopeDepth < scopeDepth) // End of current scope
@@ -65,18 +80,21 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	}
 	else if (currentLineScopeDepth > scopeDepth) // Outside of current scope
 	{
-		if (_passedScopeChanger) // Skip current line
+		if (_mustIgnoreDeeperScope) // Skip current line
 		{
 			return false;
 		}
-		else // Useless indented statement
+		else // Useless indentation
 		{
 			_throwScriptError("useless indentation before statement!"); 
 			return false;
 		}
 	}
+	else
+	{
+		_mustIgnoreDeeperScope = false;
+	}
 
-	_scopeHasChanged = false;
 	return true;
 }
 

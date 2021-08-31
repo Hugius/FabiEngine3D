@@ -838,7 +838,7 @@ public:
 	const bool misc_isCursorInsideWindow();
 	const bool misc_isDirectoryExisting(const string& directoryPath);
 	const bool misc_isFileExisting(const string& filePath);
-	const bool misc_checkInterval(unsigned int frames);
+	const bool misc_checkInterval(unsigned int ticks);
 	const bool misc_isRaycastPointOnTerrainValid();
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_createNewDirectory(const string& directoryPath);

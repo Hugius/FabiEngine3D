@@ -37,7 +37,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	}
 
 	// Skip the following lines of code if necessary
-	if (_hasThrownError || _applicationMustStop)
+	if (_hasThrownError || _mustStopApplication)
 	{
 		return;
 	}
@@ -124,19 +124,23 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 		}
 
-		// Validate a potentional scope change
+		// Validate scope change
 		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText, scopeDepth);
-		if (_hasThrownError) // Check if an error was thrown
+		_hasPassedLoopStatement = false;
+		_hasPassedIfStatement = false;
+		_hasPassedElifStatement = false;
+		_hasPassedElseStatement = false;
+
+		// Check if an error was thrown
+		if (_hasThrownError)
 		{
 			return;
 		}
-		else if (!scopeChangeValidation) // Current line outside of scope, skip
+
+		// Check if current line execution must be skipped
+		if (!scopeChangeValidation)
 		{
 			continue;
-		}
-		else // Current line in correct scope
-		{
-			_passedScopeChanger = false;
 		}
 
 		// Ignore empty lines
@@ -145,13 +149,18 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			continue;
 		}
 
-		// Cannot start a new statement at the end of the script
-		if (lineIndex == scriptFile->getLineCount() - 1 &&
-			(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD || scriptLineText.substr(0, IF_KEYWORD.size()) == IF_KEYWORD ||
-				scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD || scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD))
+		// Check if current line is the last
+		if (lineIndex == (scriptFile->getLineCount() - 1))
 		{
-			_throwScriptError("no statement allowed as the last line!");
-			return;
+			// Check if current line is an loop/if/elif/else statement
+			if (scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD ||
+				scriptLineText.substr(0, IF_KEYWORD.size()) == IF_KEYWORD ||
+				scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD ||
+				scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD)
+			{
+				_throwScriptError("no LOOP/IF/ELIF/ELSE statement allowed as the last line!");
+				return;
+			}
 		}
 
 		// Determine keyword type
@@ -225,18 +234,18 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD)
 		{
-			// Check if "loop" statement ends with colon
+			// Check if loop statement ends with colon
 			if (scriptLineText == (LOOP_KEYWORD + ":"))
 			{
 				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
 				loopLineIndices.push_back(lineIndex); // Save loop's line index
 				loopIterationCounts.push_back(0); // Save loop's iteration count
 				scopeDepth++; // New depth layer
-				_scopeHasChanged = true;
+				_hasPassedLoopStatement = true;
 			}
 			else
 			{
-				_throwScriptError("loop statement must end with colon!");
+				_throwScriptError("LOOP statement must end with colon!");
 				return;
 			}
 		}
@@ -251,19 +260,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				// Check the condition of the if statement
 				if (_checkConditionString(conditionString))
 				{
-					_scopeHasChanged = true;
+					_hasPassedIfStatement = true;
 					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, true));
 					scopeDepth++;
 				}
 				else
 				{
-					_passedScopeChanger = true;
+					_hasPassedIfStatement = true;
+					_mustIgnoreDeeperScope = true;
 					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, false));
 				}
 			}
 			else
 			{
-				_throwScriptError("if statement must end with colon!");
+				_throwScriptError("IF statement must end with colon!");
 				return;
 			}
 		}
@@ -286,25 +296,26 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					// Check the condition of the elif statements
 					if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult && _checkConditionString(conditionString))
 					{
-						_scopeHasChanged = true;
+						_hasPassedElifStatement = true;
 						_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult = true;
 						scopeDepth++;
 					}
 					else
 					{
-						_passedScopeChanger = true;
+						_hasPassedElifStatement = true;
+						_mustIgnoreDeeperScope = true;
 					}
 
 				}
 				else
 				{
-					_throwScriptError("elif statement can only come after if or elif statement!");
+					_throwScriptError("ELIF statement can only come after if or elif statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("elif statement must end with colon!");
+				_throwScriptError("ELIF statement must end with colon!");
 				return;
 			}
 		}
@@ -329,29 +340,30 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 						if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult)
 						{
 							scopeDepth++;
-							_scopeHasChanged = true;
+							_hasPassedElseStatement = true;
 						}
 						else
 						{
-							_passedScopeChanger = true;
+							_hasPassedElseStatement = true;
+							_mustIgnoreDeeperScope = true;
 						}
 					}
 					else
 					{
-						_throwScriptError("else statement cannot have a condition!");
+						_throwScriptError("ELSE statement cannot have a condition!");
 						return;
 					}
 
 				}
 				else
 				{
-					_throwScriptError("else statement can only come after if or elif statement!");
+					_throwScriptError("ELSE statement can only come after if or elif statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("else statement must end with colon!");
+				_throwScriptError("ELSE statement must end with colon!");
 				return;
 			}
 		}
@@ -405,7 +417,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			loopScopeDepths.pop_back();
 			loopLineIndices.pop_back();
 			loopIterationCounts.pop_back();
-			_passedScopeChanger = true;
+			_mustIgnoreDeeperScope = true;
 		}
 		else if (scriptLineText == PASS_KEYWORD)
 		{
@@ -421,7 +433,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_checkEngineWarnings(lastLoggerMessageCount);
 
 		// Skip the following lines of code if necessary
-		if (_hasThrownError || _applicationMustStop)
+		if (_hasThrownError || _mustStopApplication)
 		{
 			return;
 		}

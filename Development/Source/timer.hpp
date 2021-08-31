@@ -23,7 +23,7 @@ public:
 	float getDeltaPart(const string& ID);
 	float getDeltaPartSum();
 
-	int getPassedFrameCount();
+	int getPassedTickCount();
 
 	bool isStarted();
 	bool isDeltaPartStarted(const string& ID);
@@ -40,7 +40,7 @@ private:
 
 	string _currentID = "";
 
-	unsigned int _passedFrameCount = 0;
+	unsigned int _passedTickCount = 0;
 
 	bool _isStarted = false;
 };

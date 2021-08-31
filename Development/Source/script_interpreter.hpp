@@ -196,9 +196,12 @@ private:
 
 	// Booleans
 	bool _hasThrownError = false;
-	bool _applicationMustStop = false;
-	bool _scopeHasChanged = false;
-	bool _passedScopeChanger = false;
+	bool _mustStopApplication = false;
+	bool _hasPassedLoopStatement = false;
+	bool _hasPassedIfStatement = false;
+	bool _hasPassedElifStatement = false;
+	bool _hasPassedElseStatement = false;
+	bool _mustIgnoreDeeperScope = false;
 	bool _isDebugging = false;
 	bool _isExecutingInitialization = false;
 	bool _isExecutingUpdate = false;

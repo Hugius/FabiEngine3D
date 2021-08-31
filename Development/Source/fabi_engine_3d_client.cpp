@@ -66,9 +66,14 @@ void FabiEngine3D::networkClient_sendMessageTCP(const string& content)
 		Logger::throwWarning("Networking client tried to send TCP message: not running!");
 		return;
 	}
-	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	if (!_core->_networkClientAPI.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send TCP message: not connected!");
+		return;
+	}
+	if (!_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to send TCP message: not accepted!");
 		return;
 	}
 	if (find(content.begin(), content.end(), ';') != content.end())
@@ -97,9 +102,14 @@ void FabiEngine3D::networkClient_sendMessageUDP(const string& content)
 		Logger::throwWarning("Networking client tried to send UDP message: not running!");
 		return;
 	}
-	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	if (!_core->_networkClientAPI.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to send UDP message: not connected!");
+		return;
+	}
+	if (!_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to send UDP message: not accepted!");
 		return;
 	}
 	if (find(content.begin(), content.end(), ';') != content.end())
@@ -128,9 +138,14 @@ void FabiEngine3D::networkClient_disconnect()
 		Logger::throwWarning("Networking client tried to disconnect: not running!");
 		return;
 	}
-	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	if (!_core->_networkClientAPI.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to disconnect: not connected!");
+		return;
+	}
+	if (!_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to disconnect: not accepted!");
 		return;
 	}
 
@@ -175,6 +190,11 @@ const bool FabiEngine3D::networkClient_isConnected()
 	return _core->_networkClientAPI.isConnectedToServer();
 }
 
+const bool FabiEngine3D::networkClient_isAccepted()
+{
+	return _core->_networkClientAPI.isAcceptedByServer();
+}
+
 const unsigned int FabiEngine3D::networkClient_getPingLatency()
 {
 	if (!_core->_networkClientAPI.isRunning())
@@ -182,9 +202,14 @@ const unsigned int FabiEngine3D::networkClient_getPingLatency()
 		Logger::throwWarning("Networking client tried to retrieve ping latency: not running!");
 		return 0;
 	}
-	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	if (!_core->_networkClientAPI.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to retrieve ping latency: not connected!");
+		return 0;
+	}
+	if (!_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to retrieve ping latency: not accepted!");
 		return 0;
 	}
 
@@ -208,9 +233,14 @@ const string FabiEngine3D::networkClient_getServerIP()
 		Logger::throwWarning("Networking client tried to retrieve server IP: not running!");
 		return "";
 	}
-	if (!_core->_networkClientAPI.isConnectedToServer() || !_core->_networkClientAPI.isAcceptedByServer())
+	if (!_core->_networkClientAPI.isConnectedToServer())
 	{
 		Logger::throwWarning("Networking client tried to retrieve server IP: not connected!");
+		return "";
+	}
+	if (!_core->_networkClientAPI.isAcceptedByServer())
+	{
+		Logger::throwWarning("Networking client tried to retrieve server IP: not accepted!");
 		return "";
 	}
 

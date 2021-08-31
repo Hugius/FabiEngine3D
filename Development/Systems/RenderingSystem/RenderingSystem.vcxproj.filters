@@ -223,16 +223,40 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\FabiEngine3D\shaders\blur_shader.vert">
+    <None Include="..\..\..\FabiEngine3D\shaders\motion_blur_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\blur_shader.frag">
+    <None Include="..\..\..\FabiEngine3D\shaders\motion_blur_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\anti_aliasing_shader.frag">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\shaders\anti_aliasing_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\anti_aliasing_shader.frag">
+    <None Include="..\..\..\FabiEngine3D\shaders\bloom_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\bloom_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\blur_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\blur_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\dof_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\dof_shader.vert">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\lens_flare_shader.frag">
+      <Filter>Shaders\Post Shaders</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\lens_flare_shader.vert">
       <Filter>Shaders\Post Shaders</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\shaders\aabb_entity_color_shader.frag">
@@ -277,59 +301,35 @@
     <None Include="..\..\..\FabiEngine3D\shaders\water_entity_color_shader.vert">
       <Filter>Shaders\Entity Shaders\Color</Filter>
     </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\terrain_entity_depth_shader.vert">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
+    <None Include="..\..\..\FabiEngine3D\shaders\terrain_entity_depth_shader.frag">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
+    </None>
     <None Include="..\..\..\FabiEngine3D\shaders\model_entity_depth_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\shaders\model_entity_depth_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\terrain_entity_depth_shader.frag">
-      <Filter>Shaders\Entity Shaders\Depth</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\terrain_entity_depth_shader.vert">
+    <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_depth_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_depth_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_depth_shader.vert">
-      <Filter>Shaders\Entity Shaders\Depth</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\model_entity_shadow_shader.frag">
-      <Filter>Shaders\Entity Shaders\Depth</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\model_entity_shadow_shader.vert">
+    <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
     <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_shadow_shader.frag">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\billboard_entity_shadow_shader.vert">
+    <None Include="..\..\..\FabiEngine3D\shaders\model_entity_shadow_shader.vert">
       <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\lens_flare_shader.vert">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\motion_blur_shader.frag">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\motion_blur_shader.vert">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\bloom_shader.frag">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\bloom_shader.vert">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\dof_shader.frag">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\dof_shader.vert">
-      <Filter>Shaders\Post Shaders</Filter>
-    </None>
-    <None Include="..\..\..\FabiEngine3D\shaders\lens_flare_shader.frag">
-      <Filter>Shaders\Post Shaders</Filter>
+    <None Include="..\..\..\FabiEngine3D\shaders\model_entity_shadow_shader.frag">
+      <Filter>Shaders\Entity Shaders\Depth</Filter>
     </None>
   </ItemGroup>
 </Project>

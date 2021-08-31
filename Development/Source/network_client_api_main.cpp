@@ -98,7 +98,7 @@ void NetworkClientAPI::disconnectFromServer(bool mustBeAccepted)
 		Logger::throwError("NetworkClientAPI::disconnectFromServer");
 	}
 
-	// Must be connected & accepted
+	// Must be connected & optionally accepted
 	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
 		Logger::throwError("NetworkClientAPI::disconnectFromServer");

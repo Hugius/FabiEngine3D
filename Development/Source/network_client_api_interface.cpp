@@ -30,11 +30,17 @@ const bool NetworkClientAPI::isConnectedToServer()
 		Logger::throwError("NetworkClientAPI::isConnectedToServer");
 	}
 
-	return (_isConnectedToServer && _isAcceptedByServer);
+	return _isConnectedToServer;
 }
 
 const bool NetworkClientAPI::isAcceptedByServer()
 {
+	// Must be running
+	if (!_isRunning)
+	{
+		Logger::throwError("NetworkClientAPI::isAcceptedByServer");
+	}
+
 	return _isAcceptedByServer;
 }
 

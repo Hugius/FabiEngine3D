@@ -760,6 +760,7 @@ public:
 	const bool networkClient_isRunning();
 	const bool networkClient_isConnecting();
 	const bool networkClient_isConnected();
+	const bool networkClient_isAccepted();
 
 	// Miscellaneous interface - setters
 	void misc_enableWireFrameRendering();

@@ -81,6 +81,15 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:client_is_accepted")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.networkClient_isAccepted();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
 	else if (functionName == "fe3d:client_send_tcp_message")
 	{
 		auto types = { ScriptValueType::STRING };

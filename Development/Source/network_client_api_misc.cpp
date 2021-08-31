@@ -18,12 +18,9 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 	}
 
 	// Must be connected & optionally accepted
-	if (!_isConnectedToServer || !_isAcceptedByServer)
+	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		if (mustBeAccepted)
-		{
-			Logger::throwError("NetworkClientAPI::_sendTcpMessage::2");
-		}
+		Logger::throwError("NetworkClientAPI::_sendTcpMessage::2");
 	}
 
 	// Validate message content
@@ -72,12 +69,9 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	}
 
 	// Must be connected & optionally accepted
-	if (!_isConnectedToServer || !_isAcceptedByServer)
+	if (!_isConnectedToServer || (!_isAcceptedByServer && mustBeAccepted))
 	{
-		if (mustBeAccepted)
-		{
-			Logger::throwError("NetworkClientAPI::_sendUdpMessage::2");
-		}
+		Logger::throwError("NetworkClientAPI::_sendUdpMessage::2");
 	}
 
 	// Validate message semantics

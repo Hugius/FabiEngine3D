@@ -59,21 +59,31 @@ void TopViewportController::_updateProjectCreating()
 		// Check if user filled in a new ID
 		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
-			// Get directory path for the new project
-			string newProjectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectID;
+			// Temporary values
+			const string projectDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
+			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID);
 
-			// Check if project already exists
-			if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath))
+			// Check if projects directory exists
+			if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
+				Logger::throwWarning("Directory `projects\\` is missing!");
+				return;
 			}
-			else if (newProjectID.find_first_not_of(" ") == string::npos)
+
+			if (newProjectID.find(' ') != string::npos) // ID contains spaces
 			{
 				Logger::throwWarning("New project name cannot contain any spaces!");
+				return;
 			}
-			else if (std::any_of(newProjectID.begin(), newProjectID.end(), isupper))
+			else if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
+			{
+				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
+				return;
+			}
+			else if (std::any_of(newProjectID.begin(), newProjectID.end(), isupper)) // ID contains capitals
 			{
 				Logger::throwWarning("New project name cannot contain any capitals!");
+				return;
 			}
 			else // Project is non-existent
 			{
@@ -127,10 +137,10 @@ void TopViewportController::_updateProjectCreating()
 bool TopViewportController::_prepareProjectChoosing(const string& title)
 {
 	// Temporary values
-	string userDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
+	const string projectDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
 
 	// Check if projects directory exists
-	if (!_fe3d.misc_isDirectoryExisting(userDirectoryPath))
+	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath))
 	{
 		Logger::throwWarning("Directory `projects\\` is missing!");
 		return false;
@@ -138,14 +148,14 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 
 	// Get all project names
 	vector<string> projectIDs;
-	for (const auto& entry : directory_iterator(userDirectoryPath))
+	for (const auto& entry : directory_iterator(projectDirectoryPath))
 	{
 		// Extract project ID
 		string projectPath = string(entry.path().u8string());
 		if (_fe3d.misc_isDirectoryExisting(projectPath))
 		{
 			string projectID = projectPath;
-			projectID.erase(0, userDirectoryPath.size());
+			projectID.erase(0, projectDirectoryPath.size());
 			projectIDs.push_back(projectID);
 		}
 	}

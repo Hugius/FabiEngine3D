@@ -58,7 +58,7 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
 
-		// Save file paths
+		// Save file path
 		texturePaths.push_back(diffuseMapPaths);
 	}
 

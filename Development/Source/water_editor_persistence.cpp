@@ -55,7 +55,7 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
-		// Save file paths
+		// Save file path
 		if (!dudvMapPath.empty())
 		{
 			texturePaths.push_back(dudvMapPath);

@@ -16,6 +16,7 @@ public:
 
 	// Strings
 	const vector<string> getAllTexturePathsFromFile();
+	const vector<string> getAllFontPathsFromFile();
 	const vector<string>& getLoadedBillboardIDs();
 
 	// Booleans

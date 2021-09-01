@@ -148,23 +148,27 @@ void ScriptInterpreter::load()
 	if (_fe3d.application_isExported())
 	{
 		// Gather all file paths
-		auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
-		auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
-		auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
-		auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
-		auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+		auto skyTexturePaths = _skyEditor.getAllTexturePathsFromFile();
+		auto terrainTexturePaths = _terrainEditor.getAllTerrainTexturePathsFromFile();
+		auto waterTexturePaths = _waterEditor.getAllWaterTexturePathsFromFile();
+		auto modelTexturePaths = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
+		auto billboardTexturePaths = _billboardEditor.getAllTexturePathsFromFile();
+		auto billboardFontPaths = _billboardEditor.getAllFontPathsFromFile();
 		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
 
 		// Cache 2D textures
 		vector<string> texturePaths;
-		texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
-		texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
-		texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
-		texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+		texturePaths.insert(texturePaths.end(), terrainTexturePaths.begin(), terrainTexturePaths.end());
+		texturePaths.insert(texturePaths.end(), waterTexturePaths.begin(), waterTexturePaths.end());
+		texturePaths.insert(texturePaths.end(), modelTexturePaths.begin(), modelTexturePaths.end());
+		texturePaths.insert(texturePaths.end(), billboardTexturePaths.begin(), billboardTexturePaths.end());
 		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
 
 		// Cache 3D textures
-		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures);
+		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTexturePaths);
+
+		// Cache fonts
+		_fe3d.misc_cacheFontsMultiThreaded(billboardFontPaths);
 
 		// Cache audio
 		_fe3d.misc_cacheAudioMultiThreaded(audioPaths);

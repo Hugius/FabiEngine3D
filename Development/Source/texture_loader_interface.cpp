@@ -228,7 +228,11 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 					}
 					else
 					{
+						// Cache font
 						_fontCache[finalFilePaths[i]] = loadedFont;
+
+						// Logging
+						Logger::throwInfo("Loaded font: \"" + finalFilePaths[i] + "\"");
 					}
 				}
 			}

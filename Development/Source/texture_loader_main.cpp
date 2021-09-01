@@ -170,11 +170,11 @@ TextureID TextureLoader::_loadText(const string& textContent, const string& font
 		}
 		else
 		{
-			// Logging
-			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
-
 			// Cache font
 			_fontCache.insert(make_pair(fontPath, font));
+
+			// Logging
+			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
 		}
 	}
 	else // Use existing font

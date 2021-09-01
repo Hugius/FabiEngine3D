@@ -57,20 +57,28 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-		// Save file paths
+		// Save mesh path
 		meshPaths.push_back(meshPath);
+
+		// Save diffuse map path
 		if (!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
 		}
+
+		// Save emission map path
 		if (!emissionMapPath.empty())
 		{
 			texturePaths.push_back(emissionMapPath);
 		}
+
+		// Save reflection map path
 		if (!reflectionMapPath.empty())
 		{
 			texturePaths.push_back(reflectionMapPath);
 		}
+
+		// Save normal map path
 		if (!normalMapPath.empty())
 		{
 			texturePaths.push_back(normalMapPath);
@@ -117,8 +125,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	ifstream file(filePath);
 
 	// Read model data
-	vector<string> meshPaths;
-	vector<string> texturePaths;
 	string line;
 	while (getline(file, line))
 	{

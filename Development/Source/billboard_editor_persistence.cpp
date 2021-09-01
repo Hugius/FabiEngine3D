@@ -59,7 +59,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 
-		// Save file paths
+		// Save file path
 		if (!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
@@ -71,6 +71,74 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 
 	// Return
 	return texturePaths;
+}
+
+const vector<string> BillboardEditor::getAllFontPathsFromFile()
+{
+	// Error checking
+	if (_currentProjectID.empty())
+	{
+		Logger::throwError("BillboardEditor::getAllFontPathsFromFile");
+	}
+
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
+
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
+	{
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
+		return {};
+	}
+
+	// Load billboard file
+	ifstream file(filePath);
+
+	// Read billboard data
+	vector<string> fontPaths;
+	string line;
+	while (getline(file, line))
+	{
+		// Temporary values
+		string billboardID, diffuseMapPath, fontPath;
+		Vec2 size;
+		Vec3 color;
+		bool facingX, facingY, isTransparent, isReflected, isShadowed;
+		istringstream iss(line);
+
+		// Extract data
+		iss >>
+			billboardID >>
+			size.x >>
+			size.y >>
+			color.r >>
+			color.g >>
+			color.b >>
+			facingX >>
+			facingY >>
+			diffuseMapPath >>
+			isTransparent >>
+			isReflected >>
+			isShadowed >>
+			fontPath;
+
+		// Perform empty string & space conversions
+		fontPath = (fontPath == "?") ? "" : fontPath;
+		replace(fontPath.begin(), fontPath.end(), '?', ' ');
+
+		// Save file path
+		if (!fontPath.empty())
+		{
+			fontPaths.push_back(fontPath);
+		}
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return fontPaths;
 }
 
 bool BillboardEditor::loadBillboardEntitiesFromFile()

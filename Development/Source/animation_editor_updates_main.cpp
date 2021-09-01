@@ -62,7 +62,7 @@ void AnimationEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("create")->isHovered()) // Add animation button
 			{
@@ -83,17 +83,19 @@ void AnimationEditor::_updateMainMenu()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveAnimationsToFile();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
+			return;
 		}
 	}
 }
@@ -217,7 +219,7 @@ void AnimationEditor::_updateAnimationDeleting()
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
-		// Check if form is answered
+		// Update answer form
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
@@ -230,7 +232,7 @@ void AnimationEditor::_updateAnimationDeleting()
 			// Miscellaneous
 			_isDeletingAnimation = false;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingAnimation = false;
 			_currentAnimationID = "";

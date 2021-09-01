@@ -34,7 +34,7 @@ void ScriptEditor::_updateGUI()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("search")->isHovered())
 			{
@@ -74,17 +74,19 @@ void ScriptEditor::_updateGUI()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveScriptFiles();
 			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
-			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			unload();
+			return;
 		}
 
 		// Update buttons hoverability

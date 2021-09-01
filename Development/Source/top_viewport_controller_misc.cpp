@@ -243,7 +243,7 @@ void TopViewportController::_updateProjectDeleting()
 			_gui.getGlobalScreen()->deleteChoiceForm("projectList");
 		}
 
-		// Check if user is sure to delete
+		// Update answer forms
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Check if deleting currently opened project
@@ -272,7 +272,7 @@ void TopViewportController::_updateProjectDeleting()
 			_isDeletingProject = false;
 			chosenButtonID = "";
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_isDeletingProject = false;
 			chosenButtonID = "";

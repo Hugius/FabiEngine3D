@@ -243,7 +243,7 @@ void MasterRenderer::_captureAntiAliasing()
 {
 	if (_renderBus.isAntiAliasingEnabled())
 	{
-		// Apply anti-aliasing & update final scene map
+		// Apply anti aliasing & update final scene map
 		_antiAliasingCaptureBuffer.bind();
 		_antiAliasingRenderer.bind();
 		_antiAliasingRenderer.render(_renderSurface);

@@ -54,7 +54,7 @@ void SkyEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("create")->isHovered())
 			{
@@ -85,17 +85,19 @@ void SkyEditor::_updateMainMenu()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveSkyEntitiesToFile();
 			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
-			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			unload();
+			return;
 		}
 	}
 }
@@ -251,7 +253,7 @@ void SkyEditor::_updateSkyDeleting()
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
-		// Check if form is answered
+		// Update answer form
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Delete entity
@@ -265,7 +267,7 @@ void SkyEditor::_updateSkyDeleting()
 			// Enable engine background
 			_fe3d.skyEntity_selectMainSky("@@engineBackground");
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			// Enable engine background
 			_fe3d.skyEntity_selectMainSky("@@engineBackground");

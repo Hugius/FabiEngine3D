@@ -65,23 +65,38 @@ void SettingsEditor::update()
 	if (screen->getID() == "settingsEditorMenuMain")
 	{
 		// Temporary values
-		auto antiAliasingQuality = static_cast<unsigned int>(_fe3d.gfx_isAntiAliasingEnabled());
-		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
-		auto shadowQuality = _fe3d.gfx_getShadowQuality();
-		auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
-		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
-		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
+		auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
+		auto bloomSize = static_cast<int>(_fe3d.gfx_getBloomSize());
+		auto dofSize = static_cast<int>(_fe3d.gfx_getDofSize());
+		auto motionBlurSize = static_cast<int>(_fe3d.gfx_getMotionBlurSize());
+		auto anisotropicFilteringQuality = static_cast<int>(_fe3d.gfx_getAnisotropicFilteringQuality());
+		auto shadowQuality = static_cast<int>(_fe3d.gfx_getShadowQuality());
+		auto reflectionQuality = static_cast<int>(_fe3d.gfx_getReflectionQuality());
+		auto refractionQuality = static_cast<int>(_fe3d.gfx_getRefractionQuality());
+		auto maxAudioChannels = static_cast<int>(_fe3d.misc_getMaxAudioChannelCount());
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
-			else if (screen->getButton("antiAliasingQuality")->isHovered())
+			else if (screen->getButton("isAntiAliasingEnabled")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("antiAliasingQuality", "Anti Aliasing Quality", antiAliasingQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Enable Anti Aliasing?", Vec2(0.0f, 0.25f));
+			}
+			else if (screen->getButton("bloomSize")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("bloomSize", "Bloom Size", bloomSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("dofSize")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("dofSize", "DOF Size", dofSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			}
+			else if (screen->getButton("motionBlurSize")->isHovered())
+			{
+				_gui.getGlobalScreen()->createValueForm("motionBlurSize", "Motion Blur Size", motionBlurSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("anisotropicFilteringQuality")->isHovered())
 			{
@@ -105,70 +120,90 @@ void SettingsEditor::update()
 			}
 		}
 
-		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("antiAliasingQuality", antiAliasingQuality, {}))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
-			if (_fe3d.gfx_isAntiAliasingEnabled())
-			{
-				antiAliasingQuality ? void(0) : _fe3d.gfx_disableAntiAliasing();
-			}
-			else
-			{
-				antiAliasingQuality ? _fe3d.gfx_enableAntiAliasing() : void(0);
-			}
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			saveSettingsToFile();
+			unload();
+			return;
 		}
-		else if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
-			_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicFilteringQuality,
-				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
-				Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			unload();
+			return;
+		}
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("isAntiAliasingEnabled") && !_fe3d.gfx_isAntiAliasingEnabled())
+		{
+			_fe3d.gfx_enableAntiAliasing();
+		}
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("isAntiAliasingEnabled") && _fe3d.gfx_isAntiAliasingEnabled())
+		{
+			_fe3d.gfx_disableAntiAliasing();
+		}
+
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
+		{
+			_fe3d.gfx_setBloomSize(static_cast<unsigned int>(clamp(bloomSize,
+				static_cast<int>(Config::MIN_BLOOM_SIZE),
+				static_cast<int>(Config::MAX_BLOOM_SIZE))));
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
+		{
+			_fe3d.gfx_setDofSize(static_cast<unsigned int>(clamp(dofSize,
+				static_cast<int>(Config::MIN_DOF_SIZE),
+				static_cast<int>(Config::MAX_DOF_SIZE))));
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
+		{
+			_fe3d.gfx_setMotionBlurSize(static_cast<unsigned int>(clamp(motionBlurSize,
+				static_cast<int>(Config::MIN_MOTION_BLUR_SIZE),
+				static_cast<int>(Config::MAX_MOTION_BLUR_SIZE))));
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
+		{
+			_fe3d.gfx_setAnisotropicFilteringQuality(static_cast<unsigned int>(clamp(anisotropicFilteringQuality,
+				static_cast<int>(Config::MIN_ANISOTROPIC_FILTERING_QUALITY),
+				static_cast<int>(Config::MAX_ANISOTROPIC_FILTERING_QUALITY))));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 		{
-			_fe3d.gfx_setShadowQuality(clamp(shadowQuality,
-				Config::MIN_SHADOW_QUALITY,
-				Config::MAX_SHADOW_QUALITY));
+			_fe3d.gfx_setShadowQuality(static_cast<unsigned int>(clamp(shadowQuality,
+				static_cast<int>(Config::MIN_SHADOW_QUALITY),
+				static_cast<int>(Config::MAX_SHADOW_QUALITY))));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 		{
-			_fe3d.gfx_setReflectionQuality(clamp(reflectionQuality,
-				Config::MIN_REFLECTION_QUALITY,
-				Config::MAX_REFLECTION_QUALITY));
+			_fe3d.gfx_setReflectionQuality(static_cast<unsigned int>(clamp(reflectionQuality,
+				static_cast<int>(Config::MIN_REFLECTION_QUALITY),
+				static_cast<int>(Config::MAX_REFLECTION_QUALITY))));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
-			_fe3d.gfx_setRefractionQuality(clamp(refractionQuality,
-				Config::MIN_REFRACTION_QUALITY,
-				Config::MAX_REFRACTION_QUALITY));
+			_fe3d.gfx_setRefractionQuality(static_cast<unsigned int>(clamp(refractionQuality,
+				static_cast<int>(Config::MIN_REFRACTION_QUALITY),
+				static_cast<int>(Config::MAX_REFRACTION_QUALITY))));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
-			_fe3d.misc_setMaxAudioChannels(clamp(maxAudioChannels,
-				Config::MIN_AUDIO_CHANNELS,
-				Config::MAX_AUDIO_CHANNELS));
+			_fe3d.misc_setMaxAudioChannels(static_cast<unsigned int>(clamp(maxAudioChannels,
+				static_cast<int>(Config::MIN_AUDIO_CHANNELS),
+				static_cast<int>(Config::MAX_AUDIO_CHANNELS))));
 		}
 
 		// Miscellaneous
 		_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
-
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
-		{
-			saveSettingsToFile();
-			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
-		{
-			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-		}
 	}
 }
 
 void SettingsEditor::loadDefaultSettings()
 {
 	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing() : void();
+	_fe3d.gfx_setBloomSize(Config::MIN_BLOOM_SIZE);
+	_fe3d.gfx_setDofSize(Config::MIN_DOF_SIZE);
+	_fe3d.gfx_setMotionBlurSize(Config::MIN_MOTION_BLUR_SIZE);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	_fe3d.gfx_setReflectionQuality(Config::MIN_REFLECTION_QUALITY);
@@ -204,11 +239,20 @@ bool SettingsEditor::loadSettingsFromFile()
 	istringstream iss(line);
 
 	// Extract values from file
-	unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+	unsigned int bloomSize, dofSize, motionBlurSize, anisotropicFilteringQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
 	bool isAntiAliasingEnabled;
-	iss >> isAntiAliasingEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+	iss >>
+		isAntiAliasingEnabled >>
+		bloomSize >>
+		dofSize >>
+		motionBlurSize >>
+		anisotropicFilteringQuality >>
+		shadowQuality >>
+		reflectionQuality >>
+		refractionQuality >>
+		audioChannels;
 
-	// Disable anti-aliasing
+	// Disable anti aliasing
 	if (_fe3d.gfx_isAntiAliasingEnabled())
 	{
 		_fe3d.gfx_disableAntiAliasing(true);
@@ -216,7 +260,10 @@ bool SettingsEditor::loadSettingsFromFile()
 
 	// Set values
 	isAntiAliasingEnabled ? _fe3d.gfx_enableAntiAliasing() : void();
-	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicQuality);
+	_fe3d.gfx_setBloomSize(bloomSize);
+	_fe3d.gfx_setDofSize(dofSize);
+	_fe3d.gfx_setMotionBlurSize(motionBlurSize);
+	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 	_fe3d.gfx_setShadowQuality(shadowQuality);
 	_fe3d.gfx_setReflectionQuality(reflectionQuality);
 	_fe3d.gfx_setRefractionQuality(refractionQuality);
@@ -246,7 +293,10 @@ bool SettingsEditor::saveSettingsToFile()
 
 	// Get values
 	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-	auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
+	auto bloomSize = _fe3d.gfx_getBloomSize();
+	auto dofSize = _fe3d.gfx_getDofSize();
+	auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
+	auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
 	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
 	auto refractionQuality = _fe3d.gfx_getRefractionQuality();
@@ -255,7 +305,10 @@ bool SettingsEditor::saveSettingsToFile()
 	// Write to file
 	file <<
 		isAntiAliasingEnabled << " " <<
-		anisotropicQuality << " " <<
+		bloomSize << " " <<
+		dofSize << " " <<
+		motionBlurSize << " " <<
+		anisotropicFilteringQuality << " " <<
 		shadowQuality << " " <<
 		reflectionQuality << " " <<
 		refractionQuality << " " <<
@@ -284,15 +337,18 @@ void SettingsEditor::_loadGUI()
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: settingsEditorMenuMain
-	auto positions = VPC::calculateButtonPositions(7, CH);
+	auto positions = VPC::calculateButtonPositions(10, CH);
 	leftWindow->createScreen("settingsEditorMenuMain");
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("antiAliasingQuality", Vec2(0.0f, positions[0]), Vec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", Vec2(0.0f, positions[1]), Vec2(TW("Anisotropic"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", Vec2(0.0f, positions[2]), Vec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("reflectionQuality", Vec2(0.0f, positions[3]), Vec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[4]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", Vec2(0.0f, positions[5]), Vec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isAntiAliasingEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("bloomSize", Vec2(0.0f, positions[1]), Vec2(TW("Bloom"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bloom", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("dofSize", Vec2(0.0f, positions[2]), Vec2(TW("DOF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "DOF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("motionBlurSize", Vec2(0.0f, positions[3]), Vec2(TW("Motion Blur"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Motion Blur", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", Vec2(0.0f, positions[4]), Vec2(TW("Aniso Filtering"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Aniso Filtering", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", Vec2(0.0f, positions[5]), Vec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("reflectionQuality", Vec2(0.0f, positions[6]), Vec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[7]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", Vec2(0.0f, positions[8]), Vec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", Vec2(0.0f, positions[9]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SettingsEditor::_unloadGUI()

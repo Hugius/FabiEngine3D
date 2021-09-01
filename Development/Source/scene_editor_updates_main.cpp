@@ -275,20 +275,17 @@ void SceneEditor::_updateMainMenu()
 			}
 		}
 
-		// Update scene deleting if chosen
-		if (_isDeletingScene && _currentSceneID != "")
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete")) // Confirmed
-			{
-				_deleteSceneFile(_currentSceneID);
-				_isDeletingScene = false;
-				_currentSceneID = "";
-			}
-			else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete")) // Cancelled
-			{
-				_isDeletingScene = false;
-				_currentSceneID = "";
-			}
+			_deleteSceneFile(_currentSceneID);
+			_isDeletingScene = false;
+			_currentSceneID = "";
+		}
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		{
+			_isDeletingScene = false;
+			_currentSceneID = "";
 		}
 	}
 }
@@ -306,7 +303,7 @@ void SceneEditor::_updateChoiceMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 				return;
 			}
 			else if (screen->getButton("sky")->isHovered())
@@ -347,8 +344,8 @@ void SceneEditor::_updateChoiceMenu()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
 			// Stop placing
 			_currentPreviewModelID = "";
@@ -373,8 +370,9 @@ void SceneEditor::_updateChoiceMenu()
 
 			// Go to main menu
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			// Stop placing
 			_currentPreviewModelID = "";
@@ -396,6 +394,7 @@ void SceneEditor::_updateChoiceMenu()
 
 			// Go to main menu
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
+			return;
 		}
 	}
 }

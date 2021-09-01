@@ -46,7 +46,7 @@ void ModelEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("create")->isHovered()) // Add model button
 			{
@@ -77,17 +77,19 @@ void ModelEditor::_updateMainMenu()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveModelEntitiesToFile();
 			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
-			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			unload();
+			return;
 		}
 	}
 }
@@ -324,7 +326,7 @@ void ModelEditor::_updateModelDeleting()
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
-		// Check is form is answered
+		// Update answer form
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			_fe3d.modelEntity_delete(_currentModelID);
@@ -332,7 +334,7 @@ void ModelEditor::_updateModelDeleting()
 			_isDeletingModel = false;
 			_currentModelID = "";
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.modelEntity_setVisible(_currentModelID, false);
 			_isDeletingModel = false;

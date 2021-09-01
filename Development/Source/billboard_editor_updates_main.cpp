@@ -64,7 +64,7 @@ void BillboardEditor::_updateMainMenu()
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 			{
-				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("create")->isHovered()) // Add billboard button
 			{
@@ -95,17 +95,19 @@ void BillboardEditor::_updateMainMenu()
 			}
 		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exit"))
+		// Update answer forms
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("back"))
 		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			saveBillboardEntitiesToFile();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
+			return;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("back"))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
+			return;
 		}
 	}
 }
@@ -289,7 +291,7 @@ void BillboardEditor::_updateBillboardDeleting()
 			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
 		}
 
-		// Check if form is answered
+		// Update answer form
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
 		{
 			// Go to main screen
@@ -303,7 +305,7 @@ void BillboardEditor::_updateBillboardDeleting()
 			// Miscellaneous
 			_isDeletingBillboard = false;
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
 		{
 			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
 			_isDeletingBillboard = false;

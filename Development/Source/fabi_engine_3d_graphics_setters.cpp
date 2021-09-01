@@ -108,7 +108,7 @@ void FabiEngine3D::gfx_enableAntiAliasing()
 {
 	if (_core->_renderBus.isAntiAliasingEnabled())
 	{
-		Logger::throwWarning("Tried to enable anti-aliasing: already enabled");
+		Logger::throwWarning("Tried to enable anti aliasing: already enabled");
 		return;
 	}
 
@@ -273,7 +273,7 @@ void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
 {
 	if (!_core->_renderBus.isAntiAliasingEnabled())
 	{
-		Logger::throwWarning("Tried to disable anti-aliasing: not enabled");
+		Logger::throwWarning("Tried to disable anti aliasing: not enabled");
 		return;
 	}
 

@@ -131,13 +131,13 @@ void TopViewportController::_updateProjectScreenManagement()
 			}
 		}
 
-		// Check if user wants to save changes
+		// Update answer forms
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("quit"))
 		{
 			_saveCurrentProject();
 			_fe3d.application_stop();
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("quit"))
 		{
 			_fe3d.application_stop();
 		}

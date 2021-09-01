@@ -280,6 +280,11 @@ void FabiEngine3D::misc_cacheTexturesMultiThreaded3D(const vector<array<string, 
 	_core->_textureLoader.cacheTexturesMultiThreaded3D(filePaths);
 }
 
+void FabiEngine3D::misc_cacheBitmapsMultiThreaded(const vector<string>& filePaths)
+{
+	_core->_textureLoader.cacheBitmapsMultiThreaded(filePaths);
+}
+
 void FabiEngine3D::misc_cacheFontsMultiThreaded(const vector<string>& filePaths)
 {
 	_core->_textureLoader.cacheFontsMultiThreaded(filePaths);

@@ -45,7 +45,7 @@ void TerrainEntityManager::createEntity(const string& ID, const string& heightMa
 	_createEntity(ID);
 
 	// Load height map
-	auto pixelValues = _textureLoader.getBitmapPixels(heightMapPath);
+	auto pixelValues = _textureLoader.getBitmap(heightMapPath);
 
 	// Check if height map loading failed
 	if (pixelValues == nullptr)

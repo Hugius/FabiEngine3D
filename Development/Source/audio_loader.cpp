@@ -93,12 +93,12 @@ Mix_Chunk* AudioLoader::getChunkDataPointer(const string& filePath)
 {
 BEGIN:
 	// Search cache
-	auto iterator = _chunkCache.find(filePath);
+	auto cacheIterator = _chunkCache.find(filePath);
 
 	// Return from cache
-	if (iterator != _chunkCache.end())
+	if (cacheIterator != _chunkCache.end())
 	{
-		return iterator->second;
+		return cacheIterator->second;
 	}
 
 	// Load raw WAV data
@@ -138,12 +138,12 @@ Mix_Music* AudioLoader::getMusicDataPointer(const string& filePath)
 {
 BEGIN:
 	// Search cache
-	auto iterator = _musicCache.find(filePath);
+	auto cacheIterator = _musicCache.find(filePath);
 
 	// Return from cache
-	if (iterator != _musicCache.end())
+	if (cacheIterator != _musicCache.end())
 	{
-		return iterator->second;
+		return cacheIterator->second;
 	}
 
 	// Load music file

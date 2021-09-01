@@ -80,12 +80,12 @@ const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath)
 {
 BEGIN:
 	// Search cache
-	auto iterator = _meshCache.find(filePath);
+	auto cacheIterator = _meshCache.find(filePath);
 
 	// Return from cache
-	if (iterator != _meshCache.end())
+	if (cacheIterator != _meshCache.end())
 	{
-		return &iterator->second;
+		return &cacheIterator->second;
 	}
 
 	// Load mesh

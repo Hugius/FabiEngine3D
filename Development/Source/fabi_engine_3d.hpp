@@ -801,6 +801,7 @@ public:
 	void misc_cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
 	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
 	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
+	void misc_cacheBitmapsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheFontsMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();

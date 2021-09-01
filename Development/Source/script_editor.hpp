@@ -89,7 +89,7 @@ private:
 
 	// Booleans
 	bool _isEditorLoaded = false;
-	bool _wasFxaaEnabled = false;
+	bool _wasAntiAliasingEnabled = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _isSingleActionAllowed = true;

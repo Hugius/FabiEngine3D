@@ -37,11 +37,11 @@ void ScriptEditor::load()
 	_originalBloomSize = _fe3d.gfx_getBloomSize();
 	_fe3d.gfx_setBloomSize(BLOOM_SIZE);
 
-	// Save FXAA state
-	_wasFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
-	if (_wasFxaaEnabled)
+	// Save anti-aliasing state
+	_wasAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
+	if (_wasAntiAliasingEnabled)
 	{
-		_fe3d.gfx_disableFXAA(true);
+		_fe3d.gfx_disableAntiAliasing(true);
 	}
 
 	// Miscellaneous
@@ -64,10 +64,10 @@ void ScriptEditor::unload()
 	// Reset bloom size
 	_fe3d.gfx_setBloomSize(_originalBloomSize);
 
-	// Reset FXAA
-	if (_wasFxaaEnabled)
+	// Reset anti-aliasing
+	if (_wasAntiAliasingEnabled)
 	{
-		_fe3d.gfx_enableFXAA();
+		_fe3d.gfx_enableAntiAliasing();
 	}
 
 	// Delete added entities
@@ -89,7 +89,7 @@ void ScriptEditor::unload()
 	_passedFrames = 0;
 	_originalBloomSize = 0;
 	_isEditorLoaded = false;
-	_wasFxaaEnabled = false;
+	_wasAntiAliasingEnabled = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_isSingleActionAllowed = true;

@@ -104,15 +104,15 @@ void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float thi
 	_core->_renderBus.setFogColor(color);
 }
 
-void FabiEngine3D::gfx_enableFXAA()
+void FabiEngine3D::gfx_enableAntiAliasing()
 {
-	if (_core->_renderBus.isFxaaEnabled())
+	if (_core->_renderBus.isAntiAliasingEnabled())
 	{
-		Logger::throwWarning("Tried to enable FXAA: already enabled");
+		Logger::throwWarning("Tried to enable anti-aliasing: already enabled");
 		return;
 	}
 
-	_core->_renderBus.setFxaaEnabled(true);
+	_core->_renderBus.setAntiAliasingEnabled(true);
 }
 
 void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, unsigned int interval)
@@ -269,15 +269,15 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 	}
 }
 
-void FabiEngine3D::gfx_disableFXAA(bool resetProperties)
+void FabiEngine3D::gfx_disableAntiAliasing(bool resetProperties)
 {
-	if (!_core->_renderBus.isFxaaEnabled())
+	if (!_core->_renderBus.isAntiAliasingEnabled())
 	{
-		Logger::throwWarning("Tried to disable FXAA: not enabled");
+		Logger::throwWarning("Tried to disable anti-aliasing: not enabled");
 		return;
 	}
 
-	_core->_renderBus.setFxaaEnabled(false);
+	_core->_renderBus.setAntiAliasingEnabled(false);
 }
 
 void FabiEngine3D::gfx_disableShadows(bool resetProperties)

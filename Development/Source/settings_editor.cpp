@@ -65,8 +65,8 @@ void SettingsEditor::update()
 	if (screen->getID() == "settingsEditorMenuMain")
 	{
 		// Temporary values
-		auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
-		auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
+		auto antiAliasingQuality = static_cast<unsigned int>(_fe3d.gfx_isAntiAliasingEnabled());
+		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 		auto shadowQuality = _fe3d.gfx_getShadowQuality();
 		auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
 		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
@@ -79,14 +79,13 @@ void SettingsEditor::update()
 			{
 				_gui.getGlobalScreen()->createAnswerForm("exit", "Save Changes?", Vec2(0.0f, 0.25f));
 			}
-			else if (screen->getButton("isFxaaEnabled")->isHovered())
+			else if (screen->getButton("antiAliasingQuality")->isHovered())
 			{
-				isFxaaEnabled = !isFxaaEnabled;
-				isFxaaEnabled ? _fe3d.gfx_enableFXAA() : _fe3d.gfx_disableFXAA();
+				_gui.getGlobalScreen()->createValueForm("antiAliasingQuality", "Anti Aliasing Quality", antiAliasingQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
-			else if (screen->getButton("anisotropicQuality")->isHovered())
+			else if (screen->getButton("anisotropicFilteringQuality")->isHovered())
 			{
-				_gui.getGlobalScreen()->createValueForm("anisotropicQuality", "Anisotropic Filtering Quality", anisotropicQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			}
 			else if (screen->getButton("shadowQuality")->isHovered())
 			{
@@ -107,9 +106,20 @@ void SettingsEditor::update()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("anisotropicQuality", anisotropicQuality, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("antiAliasingQuality", antiAliasingQuality, {}))
 		{
-			_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicQuality,
+			if (_fe3d.gfx_isAntiAliasingEnabled())
+			{
+				antiAliasingQuality ? void(0) : _fe3d.gfx_disableAntiAliasing();
+			}
+			else
+			{
+				antiAliasingQuality ? _fe3d.gfx_enableAntiAliasing() : void(0);
+			}
+		}
+		else if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
+		{
+			_fe3d.gfx_setAnisotropicFilteringQuality(clamp(anisotropicFilteringQuality,
 				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
 				Config::MAX_ANISOTROPIC_FILTERING_QUALITY));
 		}
@@ -138,9 +148,6 @@ void SettingsEditor::update()
 				Config::MAX_AUDIO_CHANNELS));
 		}
 
-		// Update button contents
-		screen->getButton("isFxaaEnabled")->changeTextContent(isFxaaEnabled ? "FXAA: ON" : "FXAA: OFF");
-
 		// Miscellaneous
 		_fe3d.billboardEntity_rotate("@@icon", Vec3(0.0f, 0.5f, 0.0f));
 
@@ -161,7 +168,7 @@ void SettingsEditor::update()
 
 void SettingsEditor::loadDefaultSettings()
 {
-	_fe3d.gfx_isFxaaEnabled() ? _fe3d.gfx_disableFXAA() : void();
+	_fe3d.gfx_isAntiAliasingEnabled() ? _fe3d.gfx_disableAntiAliasing() : void();
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	_fe3d.gfx_setReflectionQuality(Config::MIN_REFLECTION_QUALITY);
@@ -198,17 +205,17 @@ bool SettingsEditor::loadSettingsFromFile()
 
 	// Extract values from file
 	unsigned int anisotropicQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
-	bool isFxaaEnabled;
-	iss >> isFxaaEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+	bool isAntiAliasingEnabled;
+	iss >> isAntiAliasingEnabled >> anisotropicQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
 
-	// Disable FXAA
-	if (_fe3d.gfx_isFxaaEnabled())
+	// Disable anti-aliasing
+	if (_fe3d.gfx_isAntiAliasingEnabled())
 	{
-		_fe3d.gfx_disableFXAA(true);
+		_fe3d.gfx_disableAntiAliasing(true);
 	}
 
 	// Set values
-	isFxaaEnabled ? _fe3d.gfx_enableFXAA() : void();
+	isAntiAliasingEnabled ? _fe3d.gfx_enableAntiAliasing() : void();
 	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicQuality);
 	_fe3d.gfx_setShadowQuality(shadowQuality);
 	_fe3d.gfx_setReflectionQuality(reflectionQuality);
@@ -238,7 +245,7 @@ bool SettingsEditor::saveSettingsToFile()
 	ofstream file(filePath);
 
 	// Get values
-	auto isFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
+	auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
 	auto anisotropicQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
 	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
@@ -247,7 +254,7 @@ bool SettingsEditor::saveSettingsToFile()
 
 	// Write to file
 	file <<
-		isFxaaEnabled << " " <<
+		isAntiAliasingEnabled << " " <<
 		anisotropicQuality << " " <<
 		shadowQuality << " " <<
 		reflectionQuality << " " <<
@@ -279,8 +286,8 @@ void SettingsEditor::_loadGUI()
 	// Left-viewport: settingsEditorMenuMain
 	auto positions = VPC::calculateButtonPositions(7, CH);
 	leftWindow->createScreen("settingsEditorMenuMain");
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isFxaaEnabled", Vec2(0.0f, positions[0]), Vec2(TW("FXAA: ON"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "FXAA: ON", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicQuality", Vec2(0.0f, positions[1]), Vec2(TW("Anisotropic"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("antiAliasingQuality", Vec2(0.0f, positions[0]), Vec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", Vec2(0.0f, positions[1]), Vec2(TW("Anisotropic"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anisotropic", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", Vec2(0.0f, positions[2]), Vec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("reflectionQuality", Vec2(0.0f, positions[3]), Vec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[4]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);

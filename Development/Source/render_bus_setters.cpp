@@ -318,9 +318,9 @@ void RenderBus::resetTriangleCount()
 	_triangleCount = 0;
 }
 
-void RenderBus::setFxaaEnabled(bool value)
+void RenderBus::setAntiAliasingEnabled(bool value)
 {
-	_isFxaaEnabled = value;
+	_isAntiAliasingEnabled = value;
 }
 
 void RenderBus::setAmbientLightingEnabled(bool value)

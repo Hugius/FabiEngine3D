@@ -654,7 +654,7 @@ public:
 	void gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity);
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
-	void gfx_enableFXAA();
+	void gfx_enableAntiAliasing();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
 	void gfx_enableSkyExposure(float factor, float speed);
@@ -665,7 +665,7 @@ public:
 	void gfx_disableDirectionalLighting(bool resetProperties = false);
 	void gfx_disableSpotLighting(bool resetProperties = false);
 	void gfx_disableFog(bool resetProperties = false);
-	void gfx_disableFXAA(bool resetProperties = false);
+	void gfx_disableAntiAliasing(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
 	void gfx_disableBloom(bool resetProperties = false);
 	void gfx_disableSkyExposure(bool resetProperties = false);
@@ -711,7 +711,7 @@ public:
 	const unsigned int gfx_getRefractionQuality();
 	const unsigned int gfx_getBloomBlurCount();
 	const unsigned int gfx_getShadowInterval();
-	const bool gfx_isFxaaEnabled();
+	const bool gfx_isAntiAliasingEnabled();
 	const bool gfx_isAmbientLightingEnabled();
 	const bool gfx_isDirectionalLightingEnabled();
 	const bool gfx_isSpotLightingEnabled();

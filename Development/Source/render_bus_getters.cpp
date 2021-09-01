@@ -305,9 +305,9 @@ const unsigned int RenderBus::getRefractionQuality()
 	return _refractionQuality;
 }
 
-const bool RenderBus::isFxaaEnabled()
+const bool RenderBus::isAntiAliasingEnabled()
 {
-	return _isFxaaEnabled;
+	return _isAntiAliasingEnabled;
 }
 
 const bool RenderBus::isAmbientLightingEnabled()

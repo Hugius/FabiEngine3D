@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-const bool FabiEngine3D::gfx_isFxaaEnabled()
+const bool FabiEngine3D::gfx_isAntiAliasingEnabled()
 {
-	return _core->_renderBus.isFxaaEnabled();
+	return _core->_renderBus.isAntiAliasingEnabled();
 }
 
 const bool FabiEngine3D::gfx_isAmbientLightingEnabled()

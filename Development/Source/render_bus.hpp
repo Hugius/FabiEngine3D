@@ -90,7 +90,7 @@ public:
 
 	// Booleans
 	void setReflectionsEnabled(bool value);
-	void setFxaaEnabled(bool value);
+	void setAntiAliasingEnabled(bool value);
 	void setAmbientLightingEnabled(bool value);
 	void setDirectionalLightingEnabled(bool value);
 	void setSpotLightingEnabled(bool value);
@@ -188,7 +188,7 @@ public:
 
 	// Booleans
 	const bool isReflectionsEnabled();
-	const bool isFxaaEnabled();
+	const bool isAntiAliasingEnabled();
 	const bool isAmbientLightingEnabled();
 	const bool isDirectionalLightingEnabled();
 	const bool isSpotLightingEnabled();
@@ -287,7 +287,7 @@ private:
 
 	// Booleans
 	bool _isReflectionsEnabled = true;
-	bool _isFxaaEnabled = false;
+	bool _isAntiAliasingEnabled = false;
 	bool _isAmbientLightingEnabled = false;
 	bool _isDirectionalLightingEnabled = false;
 	bool _isSpotLightingEnabled = false;

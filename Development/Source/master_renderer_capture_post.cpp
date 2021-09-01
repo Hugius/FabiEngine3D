@@ -241,7 +241,7 @@ void MasterRenderer::_captureMotionBlur()
 
 void MasterRenderer::_captureAntiAliasing()
 {
-	if (_renderBus.isFxaaEnabled())
+	if (_renderBus.isAntiAliasingEnabled())
 	{
 		// Apply anti-aliasing & update final scene map
 		_antiAliasingCaptureBuffer.bind();

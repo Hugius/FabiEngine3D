@@ -70,7 +70,7 @@ void ScriptEditor::unload()
 		_fe3d.gfx_enableAntiAliasing();
 	}
 
-	// Delete added entities
+	// Delete created entities
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();

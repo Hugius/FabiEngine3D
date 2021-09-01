@@ -35,8 +35,10 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string audioID, audioPath;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Extract from file

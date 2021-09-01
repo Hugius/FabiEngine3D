@@ -11,7 +11,7 @@ bool SceneEditor::_copyPreviewSky(const string& newID, const string& previewID)
 	}
 	if (!_fe3d.skyEntity_isExisting(previewID))
 	{
-		Logger::throwWarning("Base sky of scene sky with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor sky of scene sky with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -39,7 +39,7 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	}
 	if (!_fe3d.terrainEntity_isExisting(previewID))
 	{
-		Logger::throwWarning("Base terrain of scene terrain with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor terrain of scene terrain with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -134,7 +134,7 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	}
 	if (!_fe3d.waterEntity_isExisting(previewID))
 	{
-		Logger::throwWarning("Base water of scene water with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor water of scene water with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -199,7 +199,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	}
 	if (!_fe3d.modelEntity_isExisting(previewID))
 	{
-		Logger::throwWarning("Base model of model with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor model of model with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -295,7 +295,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	}
 	if (!_fe3d.billboardEntity_isExisting(previewID))
 	{
-		Logger::throwWarning("Base billboard of billboard with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor billboard of billboard with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 
@@ -363,7 +363,7 @@ bool SceneEditor::_copyPreviewSound(const string& newID, const string& previewID
 	}
 	if (!_fe3d.sound_isExisting(previewID))
 	{
-		Logger::throwWarning("Base audio of sound with ID \"" + newID + "\" not existing anymore!");
+		Logger::throwWarning("Editor audio of sound with ID \"" + newID + "\" not existing anymore!");
 		return false;
 	}
 

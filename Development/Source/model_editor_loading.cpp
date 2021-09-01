@@ -38,8 +38,10 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Extract data

@@ -84,8 +84,8 @@ private:
 	static inline const unsigned int BLOOM_SIZE = 1;
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
-	unsigned int _passedFrames = 0;
 	unsigned int _originalBloomSize = 0;
+	unsigned int _passedFrames = 0;
 
 	// Booleans
 	bool _isEditorLoaded = false;

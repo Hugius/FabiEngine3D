@@ -202,20 +202,20 @@ void MasterRenderer::reloadBloomBlurCaptureBuffer()
 {
 	_bloomBlurRendererHighQuality.resetCaptureBuffer();
 	_bloomBlurRendererLowQuality.resetCaptureBuffer();
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_BLOOM_SIZE);
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (Config::MIN_BLOOM_SIZE * 2));
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getBloomSize());
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (_renderBus.getBloomSize() * 2));
 }
 
 void MasterRenderer::reloadDofBlurCaptureBuffer()
 {
 	_dofBlurRenderer.resetCaptureBuffer();
-	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_DOF_SIZE);
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getDofSize());
 }
 
 void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 {
 	_motionBlurBlurRenderer.resetCaptureBuffer();
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_MOTION_BLUR_SIZE);
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getMotionBlurSize	());
 }
 
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()

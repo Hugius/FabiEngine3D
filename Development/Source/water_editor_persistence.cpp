@@ -36,8 +36,10 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Load base data
@@ -106,8 +108,6 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		istringstream iss(line);
-
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 		Vec3 color, position;
@@ -115,6 +115,9 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		float size, uvRepeat, waveHeight, transparency, specularFactor, specularIntensity;
 		unsigned int quality;
 		bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
+
+		// For file extraction
+		istringstream iss(line);
 
 		// Load base data
 		iss >>

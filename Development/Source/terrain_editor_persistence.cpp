@@ -36,11 +36,13 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Load base data
@@ -64,7 +66,6 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 			normalMapPathB;
 
 		// Perform empty string & space conversions
-		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 		normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
@@ -74,7 +75,6 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
-		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 		replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
@@ -89,12 +89,6 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		if (!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
-		}
-
-		// Save height map path
-		if (!heightMapPath.empty())
-		{
-			texturePaths.push_back(heightMapPath);
 		}
 
 		// Save normal map path
@@ -153,6 +147,62 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 	return texturePaths;
 }
 
+const vector<string> TerrainEditor::getAllTerrainBitmapPathsFromFile()
+{
+	// Error checking
+	if (_currentProjectID.empty())
+	{
+		Logger::throwError("TerrainEditor::getAllTerrainTexturePathsFromFile");
+	}
+
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
+	{
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `terrain.fe3d` missing!");
+		return {};
+	}
+
+	// Load terrain file
+	ifstream file(filePath);
+
+	// Read terrain data
+	vector<string> bitmapPaths;
+	string line;
+	while (getline(file, line))
+	{
+		// Values
+		string terrainID, heightMapPath;
+
+		// For file extraction
+		istringstream iss(line);
+
+		// Load base data
+		iss >>
+			terrainID >>
+			heightMapPath;
+
+		// Perform empty string & space conversions
+		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+		replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+
+		// Save height map path
+		if (!heightMapPath.empty())
+		{
+			bitmapPaths.push_back(heightMapPath);
+		}
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return bitmapPaths;
+}
+
 bool TerrainEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
@@ -182,14 +232,15 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		istringstream iss(line);
-
 		// Values
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
 		bool isSpecular;
+
+		// For file extraction
+		istringstream iss(line);
 
 		// Load base data
 		iss >>

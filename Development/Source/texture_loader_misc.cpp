@@ -106,7 +106,7 @@ BEGIN:
 		}
 	}
 
-	// Determine if needs to be cached
+	// Check texture status
 	if (loadedTexture == 0)
 	{
 		return 0;
@@ -158,6 +158,9 @@ BEGIN:
 TextureID TextureLoader::getText(const string& textContent, const string& fontPath)
 {
 BEGIN:
+	// Temporary values
+	TTF_Font* font = nullptr;
+
 	// Search text cache
 	auto textCacheIterator = _textCache.find(make_pair(textContent, fontPath));
 
@@ -166,9 +169,6 @@ BEGIN:
 	{
 		return textCacheIterator->second;
 	}
-
-	// Temporary values
-	TTF_Font* font = nullptr;
 
 	// Search font cache
 	auto fontCacheIterator = _fontCache.find(fontPath);
@@ -202,14 +202,17 @@ BEGIN:
 	// Load OpenGL texture
 	TextureID loadedTexture = _convertIntoTexture(font, textContent);
 
-	// Determine if needs to be cached
+	// Check texture status
 	if (loadedTexture == 0)
 	{
 		return 0;
 	}
 	else
 	{
+		// Cache texture
 		_textCache.insert(make_pair(make_pair(textContent, fontPath), loadedTexture));
+
+		// Return cached texture
 		goto BEGIN;
 	}
 }

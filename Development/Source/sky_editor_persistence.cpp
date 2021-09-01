@@ -36,9 +36,11 @@ const vector<array<string, 6>> SkyEditor::getAllTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string skyID;
 		array<string, 6> diffuseMapPaths = {};
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Load base data
@@ -98,6 +100,7 @@ bool SkyEditor::loadSkyEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
+		// For file extraction
 		istringstream iss(line);
 
 		// Values

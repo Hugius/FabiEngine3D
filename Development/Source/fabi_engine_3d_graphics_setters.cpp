@@ -8,26 +8,26 @@ void FabiEngine3D::gfx_setPlanarReflectionHeight(float height)
 
 void FabiEngine3D::gfx_setBloomSize(unsigned int size)
 {
-	_core->_masterRenderer.reloadBloomBlurCaptureBuffer();
 	_core->_renderBus.setBloomSize(size);
+	_core->_masterRenderer.reloadBloomBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setDofSize(unsigned int size)
 {
-	_core->_masterRenderer.reloadDofBlurCaptureBuffer();
 	_core->_renderBus.setDofSize(size);
+	_core->_masterRenderer.reloadDofBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setMotionBlurSize(unsigned int size)
 {
-	_core->_masterRenderer.reloadMotionBlurBlurCaptureBuffer();
 	_core->_renderBus.setMotionBlurSize(size);
+	_core->_masterRenderer.reloadMotionBlurBlurCaptureBuffer();
 }
 
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int quality)
 {
-	_core->_renderBus.setAnisotropicFilteringQuality(quality);
 	_core->_textureLoader.reloadAnisotropicFiltering();
+	_core->_renderBus.setAnisotropicFilteringQuality(quality);
 }
 
 void FabiEngine3D::gfx_setReflectionQuality(unsigned int quality)

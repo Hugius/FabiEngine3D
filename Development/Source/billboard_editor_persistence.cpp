@@ -36,11 +36,13 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string billboardID, diffuseMapPath;
 		Vec2 size;
 		Vec3 color;
 		bool facingX, facingY;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Extract data
@@ -100,11 +102,13 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Temporary values
+		// Values
 		string billboardID, diffuseMapPath, fontPath;
 		Vec2 size;
 		Vec3 color;
 		bool facingX, facingY, isTransparent, isReflected, isShadowed;
+
+		// For file extraction
 		istringstream iss(line);
 
 		// Extract data

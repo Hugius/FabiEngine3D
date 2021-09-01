@@ -16,6 +16,7 @@ public:
 	void unloadTerrainEntities();
 
 	// Strings
+	const vector<string> getAllTerrainBitmapPathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();
 	const vector<string>& getLoadedTerrainIDs();
 

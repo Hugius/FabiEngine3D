@@ -643,10 +643,13 @@ public:
 
 	// Graphics interface - setters
 	void gfx_setPlanarReflectionHeight(float height);
-	void gfx_setAnisotropicFilteringQuality(int quality);
-	void gfx_setReflectionQuality(int quality);
-	void gfx_setRefractionQuality(int quality);
-	void gfx_setShadowQuality(int quality);
+	void gfx_setBloomSize(unsigned int size);
+	void gfx_setDofSize(unsigned int size);
+	void gfx_setMotionBlurSize(unsigned int size);
+	void gfx_setAnisotropicFilteringQuality(unsigned int quality);
+	void gfx_setReflectionQuality(unsigned int quality);
+	void gfx_setRefractionQuality(unsigned int quality);
+	void gfx_setShadowQuality(unsigned int quality);
 	void gfx_enableAmbientLighting(Vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity);
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
@@ -699,6 +702,9 @@ public:
 	const float gfx_getLensFlareIntensity();
 	const float gfx_getLensFlareMultiplier();
 	const float gfx_getMotionBlurStrength();
+	const unsigned int gfx_getBloomSize();
+	const unsigned int gfx_getDofSize();
+	const unsigned int gfx_getMotionBlurSize();
 	const unsigned int gfx_getAnisotropicFilteringQuality();
 	const unsigned int gfx_getShadowQuality();
 	const unsigned int gfx_getReflectionQuality();

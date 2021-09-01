@@ -34,6 +34,9 @@ public:
 	void update();
 	void renderEngineLogo(shared_ptr<ImageEntity> entity, shared_ptr<TextEntity> text, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus);
+	void reloadBloomBlurCaptureBuffer();
+	void reloadDofBlurCaptureBuffer();
+	void reloadMotionBlurBlurCaptureBuffer();
 	void reloadCubeReflectionCaptureBuffer();
 	void reloadPlanarReflectionCaptureBuffer();
 	void reloadWaterReflectionCaptureBuffer();
@@ -41,26 +44,20 @@ public:
 	void reloadShadowCaptureBuffer();
 
 private:
-	// Update functions
+	// Voids
 	void _updateMotionBlur();
 	void _updateLensFlare();
-
-	// Pre-capturing functions
 	void _captureCubeReflections();
 	void _capturePlanarReflections();
 	void _captureWaterReflections();
 	void _captureWaterRefractions();
 	void _captureSceneDepth();
 	void _captureShadows();
-
-	// Post-capturing functions
 	void _captureAntiAliasing();
 	void _captureBloom();
 	void _captureDOF();
 	void _captureLensFlare();
 	void _captureMotionBlur();
-
-	// Rendering functions
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
@@ -78,9 +75,6 @@ private:
 	RenderBus& _renderBus;
 	TextureLoader& _textureLoader;
 	ShadowGenerator& _shadowGenerator;
-	EntityBus* _entityBus = nullptr;
-
-	// Renderers
 	SkyEntityColorRenderer _skyEntityColorRenderer;
 	TerrainEntityColorRenderer _terrainEntityColorRenderer;
 	TerrainEntityDepthRenderer _terrainEntityDepthRenderer;
@@ -102,8 +96,6 @@ private:
 	BlurRenderer _bloomBlurRendererLowQuality;
 	BlurRenderer _dofBlurRenderer;
 	BlurRenderer _motionBlurBlurRenderer;
-	
-	// CaptureBuffers
 	CaptureBuffer _cubeReflectionCaptureBuffer;
 	CaptureBuffer _planarReflectionCaptureBuffer;
 	CaptureBuffer _waterReflectionCaptureBuffer;
@@ -116,11 +108,10 @@ private:
 	CaptureBuffer _dofCaptureBuffer;
 	CaptureBuffer _lensFlareCaptureBuffer;
 	CaptureBuffer _motionBlurCaptureBuffer;
-
-	// Surfaces
 	shared_ptr<ImageEntity> _renderSurface = nullptr;
+	EntityBus* _entityBus = nullptr;
 
-	// Miscellaneous
+	// Floats
 	float _cameraYawDifference = 0.0f;
 	float _cameraPitchDifference = 0.0f;
 };

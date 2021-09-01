@@ -35,6 +35,12 @@ public:
 	const bool    isApplicationExported() const;
 
 	// Constants
+	static inline const unsigned int MIN_BLOOM_SIZE = 1;
+	static inline const unsigned int MAX_BLOOM_SIZE = 5;
+	static inline const unsigned int MIN_DOF_SIZE = 1;
+	static inline const unsigned int MAX_DOF_SIZE = 5;
+	static inline const unsigned int MIN_MOTION_BLUR_SIZE = 1;
+	static inline const unsigned int MAX_MOTION_BLUR_SIZE = 5;
 	static inline const unsigned int MIN_ANISOTROPIC_FILTERING_QUALITY = 1;
 	static inline const unsigned int MAX_ANISOTROPIC_FILTERING_QUALITY = 16;
 	static inline const unsigned int MIN_SHADOW_QUALITY = 2048;

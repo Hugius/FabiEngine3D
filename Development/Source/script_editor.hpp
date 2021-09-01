@@ -81,9 +81,11 @@ private:
 	static inline const unsigned int MAX_CHARACTERS_PER_LINE = 88;
 	static inline const unsigned int MAX_LINE_AMOUNT = 100;
 	static inline const unsigned int MAX_VISIBLE_LINES = 13;
+	static inline const unsigned int BLOOM_SIZE = 1;
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 	unsigned int _passedFrames = 0;
+	unsigned int _originalBloomSize = 0;
 
 	// Booleans
 	bool _isEditorLoaded = false;

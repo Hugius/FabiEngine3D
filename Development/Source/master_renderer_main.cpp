@@ -45,10 +45,10 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 3);
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / 6);
-	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 2);
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / 4);
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_BLOOM_SIZE);
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (Config::MIN_BLOOM_SIZE * 2));
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_DOF_SIZE);
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_MOTION_BLUR_SIZE);
 
 	// Miscellaneous capture buffers
 	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
@@ -196,6 +196,26 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 		_renderBus.setTriangleCountingEnabled(false);
 		_timer.stopDeltaPart();
 	}
+}
+
+void MasterRenderer::reloadBloomBlurCaptureBuffer()
+{
+	_bloomBlurRendererHighQuality.resetCaptureBuffer();
+	_bloomBlurRendererLowQuality.resetCaptureBuffer();
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_BLOOM_SIZE);
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (Config::MIN_BLOOM_SIZE * 2));
+}
+
+void MasterRenderer::reloadDofBlurCaptureBuffer()
+{
+	_dofBlurRenderer.resetCaptureBuffer();
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_DOF_SIZE);
+}
+
+void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
+{
+	_motionBlurBlurRenderer.resetCaptureBuffer();
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_MOTION_BLUR_SIZE);
 }
 
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()

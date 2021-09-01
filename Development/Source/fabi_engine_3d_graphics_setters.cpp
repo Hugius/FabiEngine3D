@@ -6,13 +6,28 @@ void FabiEngine3D::gfx_setPlanarReflectionHeight(float height)
 	_core->_renderBus.setPlanarReflectionHeight(height);
 }
 
-void FabiEngine3D::gfx_setAnisotropicFilteringQuality(int quality)
+void FabiEngine3D::gfx_setBloomSize(unsigned int size)
+{
+	_core->_renderBus.setBloomSize(size);
+}
+
+void FabiEngine3D::gfx_setDofSize(unsigned int size)
+{
+	_core->_renderBus.setDofSize(size);
+}
+
+void FabiEngine3D::gfx_setMotionBlurSize(unsigned int size)
+{
+	_core->_renderBus.setMotionBlurSize(size);
+}
+
+void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int quality)
 {
 	_core->_renderBus.setAnisotropicFilteringQuality(quality);
 	_core->_textureLoader.reloadAnisotropicFiltering();
 }
 
-void FabiEngine3D::gfx_setReflectionQuality(int quality)
+void FabiEngine3D::gfx_setReflectionQuality(unsigned int quality)
 {
 	_core->_renderBus.setReflectionQuality(quality);
 	_core->_masterRenderer.reloadCubeReflectionCaptureBuffer();
@@ -20,13 +35,13 @@ void FabiEngine3D::gfx_setReflectionQuality(int quality)
 	_core->_masterRenderer.reloadWaterReflectionCaptureBuffer();
 }
 
-void FabiEngine3D::gfx_setRefractionQuality(int quality)
+void FabiEngine3D::gfx_setRefractionQuality(unsigned int quality)
 {
 	_core->_renderBus.setRefractionQuality(quality);
 	_core->_masterRenderer.reloadWaterRefractionCaptureBuffer();
 }
 
-void FabiEngine3D::gfx_setShadowQuality(int quality)
+void FabiEngine3D::gfx_setShadowQuality(unsigned int quality)
 {
 	_core->_renderBus.setShadowQuality(quality);
 	_core->_masterRenderer.reloadShadowCaptureBuffer();

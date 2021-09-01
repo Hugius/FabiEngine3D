@@ -33,6 +33,10 @@ void ScriptEditor::load()
 	// Default graphics
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 2);
 
+	// Save bloom size
+	_originalBloomSize = _fe3d.gfx_getBloomSize();
+	_fe3d.gfx_setBloomSize(BLOOM_SIZE);
+
 	// Save FXAA state
 	_wasFxaaEnabled = _fe3d.gfx_isFxaaEnabled();
 	if (_wasFxaaEnabled)
@@ -57,6 +61,9 @@ void ScriptEditor::unload()
 	// Default graphics
 	_fe3d.gfx_disableBloom(true);
 
+	// Reset bloom size
+	_fe3d.gfx_setBloomSize(_originalBloomSize);
+
 	// Reset FXAA
 	if (_wasFxaaEnabled)
 	{
@@ -80,6 +87,7 @@ void ScriptEditor::unload()
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;
+	_originalBloomSize = 0;
 	_isEditorLoaded = false;
 	_wasFxaaEnabled = false;
 	_isScriptLoadedFromFile = false;

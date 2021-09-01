@@ -3,6 +3,7 @@
 #include "mathematics.hpp"
 #include "bloom_type.hpp"
 #include "render_utils.hpp"
+#include "configuration.hpp"
 
 #include <string>
 
@@ -76,12 +77,15 @@ public:
 	void setSkyMixValue(float value);
 
 	// Integers
-	void setBloomBlurCount(unsigned int value);
+	void setBloomSize(unsigned int value);
+	void setDofSize(unsigned int value);
+	void setMotionBlurSize(unsigned int value);
 	void setAnisotropicFilteringQuality(unsigned int value);
 	void setShadowQuality(unsigned int value);
 	void setReflectionQuality(unsigned int value);
 	void setRefractionQuality(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
+	void setBloomBlurCount(unsigned int value);
 	void resetTriangleCount();
 
 	// Booleans
@@ -172,12 +176,15 @@ public:
 	const float getSkyMixValue();
 
 	// Integers
-	const unsigned int getBloomBlurCount();
-	const unsigned int getTriangleCount();
+	const unsigned int getBloomSize();
+	const unsigned int getDofSize();
+	const unsigned int getMotionBlurSize();
 	const unsigned int getAnisotropicFilteringQuality();
 	const unsigned int getShadowQuality();
 	const unsigned int getReflectionQuality();
 	const unsigned int getRefractionQuality();
+	const unsigned int getBloomBlurCount();
+	const unsigned int getTriangleCount();
 
 	// Booleans
 	const bool isReflectionsEnabled();
@@ -268,12 +275,15 @@ private:
 	float _skyMixValue = 0.0f;
 
 	// Integers
+	unsigned int _bloomSize = Config::MIN_BLOOM_SIZE;
+	unsigned int _dofSize = Config::MIN_DOF_SIZE;
+	unsigned int _motionBlurSize = Config::MIN_MOTION_BLUR_SIZE;
+	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
+	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
+	unsigned int _reflectionQuality = Config::MIN_REFLECTION_QUALITY;
+	unsigned int _refractionQuality = Config::MIN_REFRACTION_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;
-	unsigned int _anisotropicFilteringQuality = 0;
-	unsigned int _shadowQuality = 0;
-	unsigned int _reflectionQuality = 0;
-	unsigned int _refractionQuality = 0;
 
 	// Booleans
 	bool _isReflectionsEnabled = true;

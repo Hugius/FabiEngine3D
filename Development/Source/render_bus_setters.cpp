@@ -190,6 +190,21 @@ void RenderBus::setSkyMixValue(float value)
 	_skyMixValue = value;
 }
 
+void RenderBus::setBloomSize(unsigned int value)
+{
+	_bloomSize = value;
+}
+
+void RenderBus::setDofSize(unsigned int value)
+{
+	_dofSize = value;
+}
+
+void RenderBus::setMotionBlurSize(unsigned int value)
+{
+	_motionBlurSize = value;
+}
+
 void RenderBus::setMaxSpotLightingAngle(float value)
 {
 	_maxSpotLightAngle = fmodf(value, 360.0f);

@@ -185,6 +185,21 @@ const float RenderBus::getSkyMixValue()
 	return _skyMixValue;
 }
 
+const unsigned int RenderBus::getBloomSize()
+{
+	return _bloomSize;
+}
+
+const unsigned int RenderBus::getDofSize()
+{
+	return _dofSize;
+}
+
+const unsigned int RenderBus::getMotionBlurSize()
+{
+	return _motionBlurSize;
+}
+
 const float RenderBus::getAmbientLightingIntensity()
 {
 	return _ambientLightIntensity;

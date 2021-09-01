@@ -36,7 +36,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 		// Check if texture is not already cached
 		if (_textureCache2D.find(filePath) == _textureCache2D.end())
 		{
-			threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
+			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			finalFilePaths.push_back(filePath);
 			cacheStatuses.push_back(false);
 		}
@@ -69,9 +69,9 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					else
 					{
 						// Load OpenGL texture
-						auto loadedTexture = _convertToTexture2D(finalFilePaths[i], loadedImage, isMipmapped, isAnisotropic);
+						auto loadedTexture = _loadTexture2D(finalFilePaths[i], loadedImage, isMipmapped, isAnisotropic);
 
-						// Free image memory
+						// Memory management
 						SDL_FreeSurface(loadedImage);
 
 						// Check texture status
@@ -105,7 +105,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 			threads.push_back({});
 			for (const auto& filePath : filePaths)
 			{
-				threads.back().push_back(async(launch::async, &TextureLoader::_loadImage, this, filePath));
+				threads.back().push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			}
 			finalFilePathsList.push_back(filePaths);
 			cacheStatuses.push_back(false);
@@ -154,9 +154,9 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 					}
 
 					// Load OpenGL texture
-					TextureID loadedTexture = _convertToTexture3D(finalFilePathsList[i], loadedImages);
+					TextureID loadedTexture = _loadTexture3D(finalFilePathsList[i], loadedImages);
 
-					// Free images memory
+					// Memory management
 					for (const auto& image : loadedImages)
 					{
 						// Only if memory is present
@@ -178,6 +178,64 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	}
 }
 
+void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
+{
+	// Temporary values
+	vector<future<TTF_Font*>> threads;
+	vector<string> finalFilePaths;
+	vector<bool> cacheStatuses;
+	unsigned int finishedThreadCount = 0;
+
+	// Remove duplicates
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
+	// Start all loading threads
+	for (const auto& filePath : uniqueFilePaths)
+	{
+		// Check if font is not already cached
+		if (_fontCache.find(filePath) == _fontCache.end())
+		{
+			threads.push_back(async(launch::async, &TextureLoader::_loadFont, this, filePath));
+			finalFilePaths.push_back(filePath);
+			cacheStatuses.push_back(false);
+		}
+	}
+
+	// Wait for all threads to finish
+	while (finishedThreadCount != cacheStatuses.size())
+	{
+		// For all threads
+		for (size_t i = 0; i < cacheStatuses.size(); i++)
+		{
+			// Check if font is not processed yet
+			if (!cacheStatuses[i])
+			{
+				// Check if thread is finished
+				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
+				{
+					// Retrieve the TTF font
+					auto loadedFont = threads[i].get();
+
+					// Update thread status
+					cacheStatuses[i] = true;
+					finishedThreadCount++;
+
+					// Check font status
+					if (loadedFont == nullptr)
+					{
+						Logger::throwWarning("Cannot load font file: \"" + finalFilePaths[i] + "\"!");
+					}
+					else
+					{
+						_fontCache[finalFilePaths[i]] = loadedFont;
+					}
+				}
+			}
+		}
+	}
+}
+
 TextureID TextureLoader::getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic)
 {
 BEGIN:
@@ -191,7 +249,7 @@ BEGIN:
 	}
 
 	// Load SDL image
-	auto loadedImage = _loadImage(filePath);
+	auto loadedImage = _loadSurface(filePath);
 
 	// Check image status
 	if (loadedImage == nullptr)
@@ -202,9 +260,9 @@ BEGIN:
 	else
 	{
 		// Load OpenGL texture
-		auto loadedTexture = _convertToTexture2D(filePath, loadedImage, isMipmapped, isAnisotropic);
+		auto loadedTexture = _loadTexture2D(filePath, loadedImage, isMipmapped, isAnisotropic);
 
-		// Free image memory
+		// Memory management
 		SDL_FreeSurface(loadedImage);
 
 		// Check texture status
@@ -242,7 +300,7 @@ BEGIN:
 	// Start all loading threads
 	for (size_t i = 0; i < filePaths.size(); i++)
 	{
-		threads.push_back(async(launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
+		threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePaths[i]));
 	}
 
 	// Wait for all threads to finish
@@ -259,9 +317,9 @@ BEGIN:
 	}
 
 	// Load OpenGL texture
-	TextureID loadedTexture = _convertToTexture3D(filePaths, loadedImages);
+	TextureID loadedTexture = _loadTexture3D(filePaths, loadedImages);
 
-	// Free images memory
+	// Memory management
 	for (const auto& image : loadedImages)
 	{
 		// Only if memory is present
@@ -326,7 +384,7 @@ BEGIN:
 	}
 
 	// Load pixels
-	auto loadedPixels = _loadBitmapPixels(filePath);
+	auto loadedPixels = _loadBitmap(filePath);
 
 	// Check pixels status
 	if (loadedPixels.empty())

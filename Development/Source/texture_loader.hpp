@@ -23,6 +23,7 @@ public:
 	// Voids
 	void cacheTexturesMultiThreaded2D(const vector<string>& filePaths, bool isMipmapped, bool isAnisotropic);
 	void cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList);
+	void cacheFontsMultiThreaded(const vector<string>& filePaths);
 	void clearTextureCache2D(const string& filePath);
 	void clearTextureCache3D(const array<string, 6>& filePaths);
 	void clearFontCache(const string& filePath);
@@ -40,14 +41,14 @@ public:
 
 private:
 	// Floats
-	vector<float> _loadBitmapPixels(const string& filePath);
+	vector<float> _loadBitmap(const string& filePath);
 
 	// Miscellaneous
-	SDL_Surface* _loadImage(const string& filePath);
+	SDL_Surface* _loadSurface(const string& filePath);
 	TTF_Font* _loadFont(const string& filePath);
-	TextureID _loadText(const string& textContent, const string& filePath);
-	TextureID _convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic);
-	TextureID _convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images);
+	TextureID _loadText(const string& textContent, const string& fontPath);
+	TextureID _loadTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic);
+	TextureID _loadTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images);
 
 	// Instances
 	RenderBus& _renderBus;

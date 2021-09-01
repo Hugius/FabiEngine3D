@@ -84,7 +84,7 @@ void SettingsEditor::update()
 			}
 			else if (screen->getButton("isAntiAliasingEnabled")->isHovered())
 			{
-				_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Enable Anti Aliasing?", Vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Anti Aliasing?", Vec2(0.0f, 0.25f));
 			}
 			else if (screen->getButton("bloomSize")->isHovered())
 			{

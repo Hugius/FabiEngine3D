@@ -191,21 +191,27 @@ void TopViewportController::_updateProjectLoading()
 			// Load settings for this project
 			_settingsEditor.loadSettingsFromFile();
 
-			// Preload all big assets of this project
-			vector<string> texturePaths;
+			// Gather all file paths
 			auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
 			auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
 			auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
 			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
 			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
-			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
-			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
-			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
-			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
-			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
-			_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
-			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
+
+			// Cache 2D textures
+			vector<string> texturePaths2D;
+			texturePaths2D.insert(texturePaths2D.end(), terrainTextures.begin(), terrainTextures.end());
+			texturePaths2D.insert(texturePaths2D.end(), waterTextures.begin(), waterTextures.end());
+			texturePaths2D.insert(texturePaths2D.end(), modelTextures.begin(), modelTextures.end());
+			texturePaths2D.insert(texturePaths2D.end(), billboardTextures.begin(), billboardTextures.end());
+			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths2D);
+
+			// Cache 3D textures	
+			_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures);
+
+			// Cache audio
+			_fe3d.misc_cacheAudioMultiThreaded(audioPaths);
 
 			// Logging
 			Logger::throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");

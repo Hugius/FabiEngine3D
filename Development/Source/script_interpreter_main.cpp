@@ -144,11 +144,10 @@ void ScriptInterpreter::load()
 		}
 	}
 
-	// Preload all editor assets of this project, only in application preview
+	// Load all editor assets of this project if in application preview
 	if (_fe3d.application_isExported())
 	{
-		vector<string> texturePaths;
-
+		// Gather all file paths
 		auto skyTextures = _skyEditor.getAllTexturePathsFromFile();
 		auto terrainTextures = _terrainEditor.getAllTerrainTexturePathsFromFile();
 		auto waterTextures = _waterEditor.getAllWaterTexturePathsFromFile();
@@ -156,14 +155,19 @@ void ScriptInterpreter::load()
 		auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
 
+		// Cache 2D textures
+		vector<string> texturePaths;
 		texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
 		texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
 		texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
 		texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
 
-		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
-		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
-		_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
+		// Cache 3D textures
+		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures);
+
+		// Cache audio
+		_fe3d.misc_cacheAudioMultiThreaded(audioPaths);
 	}
 
 	// No sky at default

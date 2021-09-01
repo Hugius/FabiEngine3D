@@ -4,23 +4,34 @@
 
 #include <SDL\\SDL_image.h>
 
-SDL_Surface* TextureLoader::_loadImage(const string& filePath)
+SDL_Surface* TextureLoader::_loadSurface(const string& filePath)
 {
 	// Disable libpng warnings
 	auto temp = freopen("NUL:", "w", stderr);
 
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
-	const string fullFilePath = string(rootDir + filePath);
 
-	// Load actual image data
-	SDL_Surface* image = IMG_Load(fullFilePath.c_str());
+	// Load SDL surface
+	SDL_Surface* image = IMG_Load(string(rootDir + filePath).c_str());
 
 	// Return
 	return image;
 }
 
-TextureID TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic)
+TTF_Font* TextureLoader::_loadFont(const string& filePath)
+{
+	// Get application root directory
+	const auto rootDir = Tools::getRootDirectory();
+
+	// Load TTF font
+	TTF_Font* font = TTF_OpenFont((rootDir + filePath).c_str(), 32);
+
+	// Return
+	return font;
+}
+
+TextureID TextureLoader::_loadTexture2D(const string& filePath, SDL_Surface* image, bool isMipmapped, bool isAnisotropic)
 {
 	// Generate OpenGL texture
 	TextureID texture;
@@ -38,7 +49,7 @@ TextureID TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface
 	}
 	else
 	{
-		Logger::throwWarning("Pixel format not recognized at texture: \"" + filePath + "\"");
+		Logger::throwWarning("Pixel format not recognized at image: \"" + filePath + "\"");
 		return 0;
 	}
 
@@ -67,7 +78,7 @@ TextureID TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface
 	return texture;
 }
 
-TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
+TextureID TextureLoader::_loadTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
@@ -138,70 +149,47 @@ TextureID TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, 
 	return texture;
 }
 
-TTF_Font* TextureLoader::_loadFont(const string& filePath)
-{
-BEGIN:
-	// Get application root directory
-	const auto rootDir = Tools::getRootDirectory();
-
-	// Search cache
-	auto iterator = _fontCache.find(filePath);
-
-	// Return from cache
-	if (iterator != _fontCache.end())
-	{
-		return iterator->second;
-	}
-
-	// Load SDL font
-	TTF_Font* font = TTF_OpenFont((rootDir + filePath).c_str(), 32);
-
-	// Check if font loading failed
-	if (font == nullptr)
-	{
-		Logger::throwWarning("Cannot load font: \"" + filePath + "\"!");
-		return nullptr;
-	}
-	else
-	{
-		// Logging
-		Logger::throwInfo("Loaded font: \"" + filePath + "\"");
-
-		// Cache font
-		_fontCache.insert(make_pair(filePath, font));
-
-		// Return cached font
-		goto BEGIN;
-	}
-}
-
 TextureID TextureLoader::_loadText(const string& textContent, const string& fontPath)
 {
-	// No empty text
-	string newText;
-	if (textContent.empty())
-	{
-		newText = " ";
-	}
-	else
-	{
-		newText = textContent;
-	}
+	// Temporary values
+	TTF_Font* font = nullptr;
 
-	// Load font
-	auto font = _loadFont(fontPath);
+	// Search font cache
+	auto iterator = _fontCache.find(fontPath);
 
-	// Check if font loading went well
-	if (font == nullptr)
+	if (iterator == _fontCache.end()) // Use new font
 	{
-		return 0;
+		// Load font
+		font = _loadFont(fontPath);
+
+		// Check font status
+		if (font == nullptr)
+		{
+			Logger::throwWarning("Cannot load font file: \"" + fontPath + "\"!");
+			return 0;
+		}
+		else
+		{
+			// Logging
+			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
+
+			// Cache font
+			_fontCache.insert(make_pair(fontPath, font));
+		}
+	}
+	else // Use existing font
+	{
+		font = iterator->second;
 	}
 
 	// Load color
-	SDL_Color* sdlColor = new SDL_Color{ 255, 255, 255 };
+	SDL_Color* color = new SDL_Color{ 255, 255, 255 };
+
+	// No empty text
+	string finalTextContent = (textContent.empty() ? " " : textContent);
 
 	// Texture data of text
-	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
+	SDL_Surface* surface = TTF_RenderText_Blended(font, finalTextContent.c_str(), *color);
 
 	// OpenGL Texture
 	TextureID texture;
@@ -231,7 +219,8 @@ TextureID TextureLoader::_loadText(const string& textContent, const string& font
 	return texture;
 }
 
-vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
+// http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
+vector<float> TextureLoader::_loadBitmap(const string& filePath)
 {
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
@@ -244,7 +233,7 @@ vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http:/
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::throwWarning("Cannot load bitmap image: \"" + filePath + "\"!");
+		Logger::throwWarning("Cannot load image file: \"" + filePath + "\"!");
 		return {};
 	}
 
@@ -275,7 +264,7 @@ vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http:/
 	fclose(streamIn);
 
 	// Logging
-	Logger::throwInfo("Loaded bitmap image: \"" + filePath + "\"");
+	Logger::throwInfo("Loaded bitmap pixels: \"" + filePath + "\"");
 
 	// Return new texture
 	return pixelIntensities;

@@ -37,13 +37,17 @@ bool NetworkServerAPI::_sendTcpMessage(SOCKET clientSocketID, const string& cont
 	// Send message to client
 	auto sendStatusCode = send(clientSocketID, message.c_str(), static_cast<int>(message.size()), 0);
 
-	// Check if sending went well
+	// Check if sending went wrong
 	if (sendStatusCode == SOCKET_ERROR)
 	{
 		if (WSAGetLastError() == WSAECONNRESET || WSAGetLastError() == WSAECONNABORTED) // Client lost socket connection
 		{
 			_disconnectClient(clientSocketID);
 			return false;
+		}
+		else if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		{
+			Logger::throwWarning("Networking server is sending too many TCP messages!");
 		}
 		else // Something really bad happened
 		{
@@ -88,10 +92,17 @@ bool NetworkServerAPI::_sendUdpMessage(const string& clientIP, const string& cli
 		reinterpret_cast<sockaddr*>(&socketAddress), // Client address
 		sizeof(socketAddress)); // Client address length
 
-	// Check if sending went well
+	// Check if sending went wrong
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkServerAPI::_sendUdpMessage::5 ---> ", WSAGetLastError());
+		if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		{
+			Logger::throwWarning("Networking server is sending too many UDP messages!");
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("NetworkServerAPI::_sendUdpMessage::5 ---> ", WSAGetLastError());
+		}
 	}
 
 	return true;

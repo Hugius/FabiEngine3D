@@ -51,6 +51,10 @@ bool NetworkClientAPI::_sendTcpMessage(const string& content, bool isReserved, b
 			disconnectFromServer(mustBeAccepted);
 			return false;
 		}
+		else if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		{
+			Logger::throwWarning("Networking client is sending too many TCP messages!");
+		}
 		else // Something really bad happened
 		{
 			Logger::throwError("NetworkClientAPI::_sendTcpMessage::6 ---> ", WSAGetLastError());
@@ -106,7 +110,14 @@ bool NetworkClientAPI::_sendUdpMessage(const string& content, bool isReserved, b
 	// Check if sending went well
 	if (sendStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkClientAPI::_sendUdpMessage::6 ---> ", WSAGetLastError());
+		if (WSAGetLastError() == WSAENOBUFS) // Buffer full
+		{
+			Logger::throwWarning("Networking client is sending too many UDP messages!");
+		}
+		else // Something really bad happened
+		{
+			Logger::throwError("NetworkClientAPI::_sendUdpMessage::6 ---> ", WSAGetLastError());
+		}
 	}
 
 	return true;

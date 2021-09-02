@@ -11,6 +11,7 @@ void CoreEngine::_updateApplication()
 	if (_inputHandler.isKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		_stop();
+		return;
 	}
 
 	// User updates

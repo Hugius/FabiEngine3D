@@ -67,11 +67,12 @@ private:
 	static inline const float SCROLLING_SPEED = 0.1f;
 	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
 	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
-	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
 	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
+	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
 	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (static_cast<float>(13) / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
 	static inline const float CAMERA_FOV = 71.0f;
-	static inline const float AABB_DEPTH = 0.05f;
+	static inline const float SELECTION_DEPTH = 0.001f;
+	static inline const float AABB_DEPTH = 0.01f;
 	float _scrollingAcceleration = 0.0f;
 
 	// Integers

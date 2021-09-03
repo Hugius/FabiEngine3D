@@ -31,7 +31,7 @@ void ScriptEditor::load()
 	_fe3d.misc_setMainRenderingColor(BACKGROUND_COLOR);
 
 	// Default graphics
-	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 2);
+	_fe3d.gfx_enableBloom(BloomType::PARTS, 0.95f, 2);
 
 	// Save bloom size
 	_originalBloomSize = _fe3d.gfx_getBloomSize();

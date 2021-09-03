@@ -54,7 +54,7 @@ private:
 	static inline const Vec3 CAMERA_POSITION = Vec3(0.0f, 0.0f, 10.0f);
 	static inline const Vec3 SCRIPT_TEXT_STARTING_POSITION = Vec3(-11.0f, 6.0f, 0.5f);
 	static inline const Vec3 BACKGROUND_COLOR = Vec3(0.05f);
-	static inline const Vec3 SELECTION_COLOR = Vec3(0.1f);
+	static inline const Vec3 SELECTION_COLOR = Vec3(0.075f);
 	static inline const Vec3 LINE_NUMBER_COLOR = Vec3(0.25f, 0.25f, 1.0f);
 	static inline const Vec3 SEPARATOR_COLOR = Vec3(1.0f, 0.85f, 0.0f);
 	static inline const Vec3 DEFAULT_TEXT_COLOR = Vec3(1.0f);

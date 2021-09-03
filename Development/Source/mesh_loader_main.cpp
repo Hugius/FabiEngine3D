@@ -8,7 +8,7 @@
 
 using std::filesystem::exists;
 
-vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
+pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 {
 	// Declare variables
 	vector<MeshPart> meshParts;
@@ -29,8 +29,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 	FILE* file = fopen(path.c_str(), "r");
 	if (!exists(path) || filePath.empty())
 	{
-		Logger::throwWarning("Cannot load mesh file: \"" + filePath + "\"!");
-		return {};
+		string warningMessage = string("Cannot load mesh file: \"" + filePath + "\"!");
+		return make_pair(warningMessage, meshParts);
 	}
 
 	// Fill the vector with the data from the file
@@ -78,8 +78,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 			// Cannot be a questionmark
 			if (selectedPartID == "?")
 			{
-				Logger::throwWarning("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
-				return {};
+				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
+				return make_pair(warningMessage, meshParts);
 			}
 
 			// Reset material paths
@@ -151,8 +151,8 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 			// Check if face amount is correct (3x3)
 			if (matches != 9)
 			{
-				Logger::throwWarning("Too many or not enough faces in mesh file: \"" + filePath + "\"");
-				return {};
+				string warningMessage = string("Too many or not enough faces in mesh file: \"" + filePath + "\"");
+				return make_pair(warningMessage, meshParts);
 			}
 
 			// Check if able to add to existing mesh part
@@ -242,10 +242,10 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath)
 	// Validate mesh parts
 	if (meshParts.empty())
 	{
-		Logger::throwWarning("Incorrect or too little content in mesh file: \"" + filePath + "\"");
-		return {};
+		string warningMessage = string("Incorrect or too little content in mesh file: \"" + filePath + "\"");
+		return make_pair(warningMessage, meshParts);
 	}
 
 	// Return new mesh parts
-	return meshParts;
+	return make_pair("", meshParts);
 }

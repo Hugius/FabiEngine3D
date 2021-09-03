@@ -48,6 +48,8 @@ void AnimationEditor::load()
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
+	_fe3d.reflectionEntity_create("@@reflection");
+	_fe3d.reflectionEntity_capture("@@reflection");
 	_gui.getGlobalScreen()->createTextField("animationID", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->createTextField("animationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
@@ -105,6 +107,7 @@ void AnimationEditor::unload()
 	_isEditorLoaded = false;
 
 	// Miscellaneous
+	_fe3d.reflectionEntity_delete("@@reflection");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	if (_fe3d.misc_isDebugRenderingEnabled())
 	{

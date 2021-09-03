@@ -185,7 +185,7 @@ void AudioLoader::clearMusicCache(const string& filePath)
 
 Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 {
-	// Load RAW audio data into an SDL chunk
+	// Load audio data into an SDL chunk
 	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
 
 	// Check if chunk loading failed
@@ -209,7 +209,6 @@ Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 	if (music == nullptr)
 	{
 		Logger::throwWarning("Cannot load audio file \"", filePath, "\"!");
-		return nullptr;
 	}
 
 	return music;

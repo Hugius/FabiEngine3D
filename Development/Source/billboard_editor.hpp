@@ -61,7 +61,7 @@ private:
 	static inline const float GRID_Y_OFFSET = 0.001f;
 	static inline const float GRID_SIZE = 30.0f;
 	static inline const float GRID_UV = 3.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 1.5f;
+	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline const float CAMERA_DISTANCE_SPEED = 0.125f;
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
 

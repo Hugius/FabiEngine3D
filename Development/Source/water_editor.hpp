@@ -60,7 +60,7 @@ private:
 	static inline const float GRID_SIZE = 1024.0f;
 	static inline const float GRID_UV = 10.0f;
 	static inline const float CAMERA_DISTANCE_SPEED = 5.0f;
-	static inline const float MIN_CAMERA_DISTANCE = 1.5f;
+	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 
 	// Booleans
 	bool _isEditorLoaded = false;

@@ -6,6 +6,7 @@
 #include <map>
 
 using std::map;
+using std::pair;
 
 class MeshLoader final
 {
@@ -17,7 +18,7 @@ public:
 	void clearMeshCache(const string& filePath);
 
 private:
-	vector<MeshPart> _loadMesh(const string& filePath);
+	pair<string, vector<MeshPart>> _loadMesh(const string& filePathe);
 
 	map<string, vector<MeshPart>> _meshCache;
 };

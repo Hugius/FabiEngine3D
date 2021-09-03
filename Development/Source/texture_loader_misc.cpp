@@ -5,6 +5,7 @@
 
 using std::future;
 using std::launch;
+using std::clamp;
 
 TextureLoader::TextureLoader(RenderBus& renderBus)
 	:
@@ -270,12 +271,18 @@ void TextureLoader::reloadAnisotropicFiltering()
 
 		// Get current quality
 		int currentQuality;
-		glGetIntegerv(GL_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
+		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
-		// Set new quality
-		if (currentQuality >= 1 && currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY)
+		// Check if texture must be anisotropically filtered
+		if (currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY && currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
+			// Limit new quality
+			auto newQuality = clamp(_renderBus.getAnisotropicFilteringQuality(),
+				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
+				Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+
+			// Set anisotropic filtering
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(newQuality));
 		}
 
 		// Unbind

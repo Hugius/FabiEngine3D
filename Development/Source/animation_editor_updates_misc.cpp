@@ -118,80 +118,84 @@ void AnimationEditor::_updateMiscellaneous()
 		}
 	}
 
-	// Check if allowed to set frame transformation
-	if (!_currentAnimationID.empty() && _mustUpdateCurrentFramePreview)
+	// Check if current animation active
+	if (!_currentAnimationID.empty())
 	{
 		// Retrieve current animation
 		auto currentAnimation = _getAnimation(_currentAnimationID);
 
-		// Check if animation is not started
-		if (!isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
+		// Check if allowed to set frame transformation
+		if (_mustUpdateCurrentFramePreview)
 		{
-			// Check if animation has a preview model
-			if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
+			// Check if animation is not started
+			if (!isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 			{
-				// For every animation part
-				for (auto partID : currentAnimation->partIDs)
+				// Check if animation has a preview model
+				if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
 				{
-					// Default transformation
-					_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partID);
-					_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partID);
-					_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partID);
-
-					// Only whole model size must be original
-					if (partID.empty())
+					// For every animation part
+					for (auto partID : currentAnimation->partIDs)
 					{
-						_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
-					}
-					else
-					{
-						_fe3d.modelEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partID);
-					}
-				}
+						// Default transformation
+						_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partID);
+						_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partID);
+						_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partID);
 
-				// Set transformation of current frame
-				if (_currentFrameIndex > 0)
-				{
-					// For every frame until current frame
-					for (unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
-					{
-						// Retrieve frame
-						auto frame = currentAnimation->frames[frameIndex];
-
-						// For every part of frame
-						for (auto partID : currentAnimation->partIDs)
+						// Only whole model size must be original
+						if (partID.empty())
 						{
-							// Check if model has part
-							if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, partID) || partID.empty())
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialSize, partID);
+						}
+						else
+						{
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partID);
+						}
+					}
+
+					// Set transformation of current frame
+					if (_currentFrameIndex > 0)
+					{
+						// For every frame until current frame
+						for (unsigned int frameIndex = 1; frameIndex <= _currentFrameIndex; frameIndex++)
+						{
+							// Retrieve frame
+							auto frame = currentAnimation->frames[frameIndex];
+
+							// For every part of frame
+							for (auto partID : currentAnimation->partIDs)
 							{
-								// Determine type of transformation
-								if (frame.transformationTypes[partID] == TransformationType::MOVEMENT)
+								// Check if model has part
+								if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, partID) || partID.empty())
 								{
-									// Movement
-									_fe3d.modelEntity_setPosition(currentAnimation->previewModelID,
-										(currentAnimation->initialSize * frame.targetTransformations[partID]), partID);
-								}
-								else if (frame.transformationTypes[partID] == TransformationType::ROTATION)
-								{
-									// Retrieve current model size
-									const auto& currentModelSize = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
+									// Determine type of transformation
+									if (frame.transformationTypes[partID] == TransformationType::MOVEMENT)
+									{
+										// Movement
+										_fe3d.modelEntity_setPosition(currentAnimation->previewModelID,
+											(currentAnimation->initialSize * frame.targetTransformations[partID]), partID);
+									}
+									else if (frame.transformationTypes[partID] == TransformationType::ROTATION)
+									{
+										// Retrieve current model size
+										const auto& currentModelSize = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
 
-									// Origin
-									_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID,
-										(currentModelSize * frame.rotationOrigins[partID]), partID);
+										// Origin
+										_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID,
+											(currentModelSize * frame.rotationOrigins[partID]), partID);
 
-									// Rotation
-									_fe3d.modelEntity_setRotation(currentAnimation->previewModelID,
-										frame.targetTransformations[partID], partID);
-								}
-								else if (frame.transformationTypes[partID] == TransformationType::SCALING)
-								{
-									// Retrieve model size (or part default size)
-									const auto& modelSize = partID.empty() ? currentAnimation->initialSize : Vec3(1.0f);
+										// Rotation
+										_fe3d.modelEntity_setRotation(currentAnimation->previewModelID,
+											frame.targetTransformations[partID], partID);
+									}
+									else if (frame.transformationTypes[partID] == TransformationType::SCALING)
+									{
+										// Retrieve model size (or part default size)
+										const auto& modelSize = partID.empty() ? currentAnimation->initialSize : Vec3(1.0f);
 
-									// Scaling
-									_fe3d.modelEntity_setSize(currentAnimation->previewModelID,
-										modelSize + (modelSize * frame.targetTransformations[partID]), partID);
+										// Scaling
+										_fe3d.modelEntity_setSize(currentAnimation->previewModelID,
+											modelSize + (modelSize * frame.targetTransformations[partID]), partID);
+									}
 								}
 							}
 						}

@@ -1,10 +1,5 @@
 #include "sky_editor.hpp"
 
-#include <algorithm>
-
-using std::max;
-using std::clamp;
-
 void SkyEditor::_updateOptionsMenu()
 {
 	// Temporary values
@@ -49,19 +44,19 @@ void SkyEditor::_updateOptionsMenu()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
-			skyLightness = max(0.0f, skyLightness / 100.0f);
+			skyLightness /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", skyColor.r))
 		{
-			skyColor.r = clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
+			skyColor.r /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", skyColor.g))
 		{
-			skyColor.g = clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
+			skyColor.g /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", skyColor.b))
 		{
-			skyColor.b = clamp(skyColor.b / 255.0f, 0.0f, 1.0f);
+			skyColor.b /= 255.0f;
 		}
 
 		// Dynamically update sky options

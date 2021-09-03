@@ -26,8 +26,8 @@ void FabiEngine3D::gfx_setMotionBlurSize(unsigned int size)
 
 void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int quality)
 {
-	_core->_textureLoader.reloadAnisotropicFiltering();
 	_core->_renderBus.setAnisotropicFilteringQuality(quality);
+	_core->_textureLoader.reloadAnisotropicFiltering();
 }
 
 void FabiEngine3D::gfx_setReflectionQuality(unsigned int quality)

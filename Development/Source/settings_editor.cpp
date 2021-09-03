@@ -154,51 +154,35 @@ void SettingsEditor::update()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
 		{
-			_fe3d.gfx_setBloomSize(static_cast<unsigned int>(clamp(bloomSize,
-				static_cast<int>(Config::MIN_BLOOM_SIZE),
-				static_cast<int>(Config::MAX_BLOOM_SIZE))));
+			_fe3d.gfx_setBloomSize(static_cast<unsigned int>(bloomSize));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
 		{
-			_fe3d.gfx_setDofSize(static_cast<unsigned int>(clamp(dofSize,
-				static_cast<int>(Config::MIN_DOF_SIZE),
-				static_cast<int>(Config::MAX_DOF_SIZE))));
+			_fe3d.gfx_setDofSize(static_cast<unsigned int>(dofSize));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
 		{
-			_fe3d.gfx_setMotionBlurSize(static_cast<unsigned int>(clamp(motionBlurSize,
-				static_cast<int>(Config::MIN_MOTION_BLUR_SIZE),
-				static_cast<int>(Config::MAX_MOTION_BLUR_SIZE))));
+			_fe3d.gfx_setMotionBlurSize(static_cast<unsigned int>(motionBlurSize));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
 		{
-			_fe3d.gfx_setAnisotropicFilteringQuality(static_cast<unsigned int>(clamp(anisotropicFilteringQuality,
-				static_cast<int>(Config::MIN_ANISOTROPIC_FILTERING_QUALITY),
-				static_cast<int>(Config::MAX_ANISOTROPIC_FILTERING_QUALITY))));
+			_fe3d.gfx_setAnisotropicFilteringQuality(static_cast<unsigned int>(anisotropicFilteringQuality));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 		{
-			_fe3d.gfx_setShadowQuality(static_cast<unsigned int>(clamp(shadowQuality,
-				static_cast<int>(Config::MIN_SHADOW_QUALITY),
-				static_cast<int>(Config::MAX_SHADOW_QUALITY))));
+			_fe3d.gfx_setShadowQuality(static_cast<unsigned int>(shadowQuality));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 		{
-			_fe3d.gfx_setReflectionQuality(static_cast<unsigned int>(clamp(reflectionQuality,
-				static_cast<int>(Config::MIN_REFLECTION_QUALITY),
-				static_cast<int>(Config::MAX_REFLECTION_QUALITY))));
+			_fe3d.gfx_setReflectionQuality(static_cast<unsigned int>(reflectionQuality));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
-			_fe3d.gfx_setRefractionQuality(static_cast<unsigned int>(clamp(refractionQuality,
-				static_cast<int>(Config::MIN_REFRACTION_QUALITY),
-				static_cast<int>(Config::MAX_REFRACTION_QUALITY))));
+			_fe3d.gfx_setRefractionQuality(static_cast<unsigned int>(refractionQuality));
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
-			_fe3d.misc_setMaxAudioChannels(static_cast<unsigned int>(clamp(maxAudioChannels,
-				static_cast<int>(Config::MIN_AUDIO_CHANNELS),
-				static_cast<int>(Config::MAX_AUDIO_CHANNELS))));
+			_fe3d.misc_setMaxAudioChannels(static_cast<unsigned int>(maxAudioChannels));
 		}
 
 		// Miscellaneous

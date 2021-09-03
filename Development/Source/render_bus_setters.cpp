@@ -192,17 +192,17 @@ void RenderBus::setSkyMixValue(float value)
 
 void RenderBus::setBloomSize(unsigned int value)
 {
-	_bloomSize = value;
+	_bloomSize = clamp(value, Config::MIN_BLOOM_SIZE, Config::MAX_BLOOM_SIZE);
 }
 
 void RenderBus::setDofSize(unsigned int value)
 {
-	_dofSize = value;
+	_dofSize = clamp(value, Config::MIN_DOF_SIZE, Config::MAX_DOF_SIZE);
 }
 
 void RenderBus::setMotionBlurSize(unsigned int value)
 {
-	_motionBlurSize = value;
+	_motionBlurSize = clamp(value, Config::MIN_MOTION_BLUR_SIZE, Config::MAX_MOTION_BLUR_SIZE);
 }
 
 void RenderBus::setMaxSpotLightingAngle(float value)
@@ -300,17 +300,17 @@ void RenderBus::increaseTriangleCount(unsigned int value)
 
 void RenderBus::setShadowQuality(unsigned int value)
 {
-	_shadowQuality = value;
+	_shadowQuality = clamp(value, Config::MIN_SHADOW_QUALITY, Config::MAX_SHADOW_QUALITY);
 }
 
 void RenderBus::setReflectionQuality(unsigned int value)
 {
-	_reflectionQuality = value;
+	_reflectionQuality = clamp(value, Config::MIN_REFLECTION_QUALITY, Config::MAX_REFLECTION_QUALITY);
 }
 
 void RenderBus::setRefractionQuality(unsigned int value)
 {
-	_refractionQuality = value;
+	_refractionQuality = clamp(value, Config::MIN_REFRACTION_QUALITY, Config::MAX_REFRACTION_QUALITY);
 }
 
 void RenderBus::resetTriangleCount()

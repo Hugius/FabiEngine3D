@@ -12,6 +12,9 @@ AudioPlayer::AudioPlayer()
 
 void AudioPlayer::allocateChannels(unsigned int count)
 {
+	// Limit count
+	count = clamp(count, Config::MIN_AUDIO_CHANNELS, Config::MAX_AUDIO_CHANNELS);
+
 	// Allocate audio channels
 	Mix_AllocateChannels(count);
 

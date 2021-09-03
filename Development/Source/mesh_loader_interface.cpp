@@ -12,7 +12,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 {
 	// Temporary values
 	vector<future<pair<string, vector<MeshPart>>>> threads;
-	vector<bool> cacheStatuses;
+	vector<bool> threadStatuses;
 
 	// Remove duplicates
 	auto tempFilePaths = set<string>(meshPaths.begin(), meshPaths.end());
@@ -25,19 +25,19 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 		if (_meshCache.find(filePath) == _meshCache.end())
 		{
 			threads.push_back(async(launch::async, &MeshLoader::_loadMesh, this, filePath));
-			cacheStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 		else
 		{
-			cacheStatuses.push_back(true);
+			threadStatuses.push_back(true);
 		}
 	}
 
 	// Wait for all threads to finish
-	for (size_t i = 0; i < cacheStatuses.size(); i++)
+	for (size_t i = 0; i < threadStatuses.size(); i++)
 	{
 		// Check if mesh is not processed yet
-		if (!cacheStatuses[i])
+		if (!threadStatuses[i])
 		{
 			// Retrieve return value
 			auto returnValue = threads[i].get();
@@ -49,12 +49,6 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 			}
 			else
 			{
-				// Logging
-				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
-
-				// Cache model
-				_meshCache[uniqueFilePaths[i]] = returnValue.second;
-
 				// Extract any texture paths
 				for (const auto& part : returnValue.second)
 				{
@@ -75,6 +69,12 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 						resultingTexturePaths.push_back(part.reflectionMapPath);
 					}
 				}
+
+				// Cache mesh
+				_meshCache[uniqueFilePaths[i]] = returnValue.second;
+
+				// Logging
+				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
 			}
 		}
 	}
@@ -103,11 +103,11 @@ BEGIN:
 	}
 	else
 	{
+		// Cache mesh
+		_meshCache.insert(make_pair(filePath, returnValue.second));
+
 		// Logging
 		Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
-
-		// Cache model
-		_meshCache.insert(make_pair(filePath, returnValue.second));
 
 		// Return new model
 		goto BEGIN;

@@ -174,8 +174,8 @@ void ScriptInterpreter::load()
 		// Cache fonts
 		_fe3d.misc_cacheFontsMultiThreaded(billboardFontPaths);
 
-		// Cache audio
-		_fe3d.misc_cacheAudioMultiThreaded(audioPaths);
+		// Cache sounds
+		_fe3d.misc_cacheSoundsMultiThreaded(audioPaths);
 	}
 
 	// No sky at default

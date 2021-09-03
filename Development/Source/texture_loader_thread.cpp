@@ -15,7 +15,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	// Temporary values
 	vector<future<SDL_Surface*>> threads;
 	vector<string> finalFilePaths;
-	vector<bool> cacheStatuses;
+	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
 	// Remove duplicates
@@ -30,27 +30,27 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			finalFilePaths.push_back(filePath);
-			cacheStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != cacheStatuses.size())
+	while (finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < cacheStatuses.size(); i++)
+		for (size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if texture is not processed yet
-			if (!cacheStatuses[i])
+			if (!threadStatuses[i])
 			{
 				// Check if thread is finished
 				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve the SDL image
+					// Retrieve return value
 					auto loadedImage = threads[i].get();
 
 					// Update thread status
-					cacheStatuses[i] = true;
+					threadStatuses[i] = true;
 					finishedThreadCount++;
 
 					// Check image status
@@ -84,7 +84,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 	// Temporary values
 	vector<vector<future<SDL_Surface*>>> threads;
 	vector<array<string, 6>> finalFilePathsList;
-	vector<bool> cacheStatuses;
+	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
 	// Start all loading threads
@@ -100,18 +100,18 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 				threads.back().push_back(async(launch::async, &TextureLoader::_loadSurface, this, filePath));
 			}
 			finalFilePathsList.push_back(filePaths);
-			cacheStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != cacheStatuses.size())
+	while (finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < cacheStatuses.size(); i++)
+		for (size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if texture is not processed yet
-			if (!cacheStatuses[i])
+			if (!threadStatuses[i])
 			{
 				// Check if all 6 threads are finished
 				bool threadsAreFinished = true;
@@ -129,7 +129,7 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 				if (threadsAreFinished)
 				{
 					// Update thread status
-					cacheStatuses[i] = true;
+					threadStatuses[i] = true;
 					finishedThreadCount++;
 
 					// 6 images for every 3D texture
@@ -175,7 +175,7 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 	// Temporary values
 	vector<future<vector<float>>> threads;
 	vector<string> finalFilePaths;
-	vector<bool> cacheStatuses;
+	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
 	// Remove duplicates
@@ -190,27 +190,27 @@ void TextureLoader::cacheBitmapsMultiThreaded(const vector<string>& filePaths)
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadBitmap, this, filePath));
 			finalFilePaths.push_back(filePath);
-			cacheStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != cacheStatuses.size())
+	while (finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < cacheStatuses.size(); i++)
+		for (size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if bitmap is not processed yet
-			if (!cacheStatuses[i])
+			if (!threadStatuses[i])
 			{
 				// Check if thread is finished
 				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve the bitmap pixels
+					// Retrieve return value
 					auto loadedBitmap = threads[i].get();
 
 					// Update thread status
-					cacheStatuses[i] = true;
+					threadStatuses[i] = true;
 					finishedThreadCount++;
 
 					// Check bitmap status
@@ -237,7 +237,7 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 	// Temporary values
 	vector<future<TTF_Font*>> threads;
 	vector<string> finalFilePaths;
-	vector<bool> cacheStatuses;
+	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
 	// Remove duplicates
@@ -252,27 +252,27 @@ void TextureLoader::cacheFontsMultiThreaded(const vector<string>& filePaths)
 		{
 			threads.push_back(async(launch::async, &TextureLoader::_loadFont, this, filePath));
 			finalFilePaths.push_back(filePath);
-			cacheStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 	}
 
 	// Wait for all threads to finish
-	while (finishedThreadCount != cacheStatuses.size())
+	while (finishedThreadCount != threadStatuses.size())
 	{
 		// For all threads
-		for (size_t i = 0; i < cacheStatuses.size(); i++)
+		for (size_t i = 0; i < threadStatuses.size(); i++)
 		{
 			// Check if font is not processed yet
-			if (!cacheStatuses[i])
+			if (!threadStatuses[i])
 			{
 				// Check if thread is finished
 				if (threads[i].wait_until(system_clock::time_point::min()) == future_status::ready)
 				{
-					// Retrieve the TTF font
+					// Retrieve return value
 					auto loadedFont = threads[i].get();
 
 					// Update thread status
-					cacheStatuses[i] = true;
+					threadStatuses[i] = true;
 					finishedThreadCount++;
 
 					// Check font status

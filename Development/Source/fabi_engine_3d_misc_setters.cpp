@@ -290,9 +290,14 @@ void FabiEngine3D::misc_cacheFontsMultiThreaded(const vector<string>& filePaths)
 	_core->_textureLoader.cacheFontsMultiThreaded(filePaths);
 }
 
-void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)
+void FabiEngine3D::misc_cacheSoundsMultiThreaded(const vector<string>& filePaths)
 {
 	_core->_audioLoader.cacheChunksMultiThreaded(filePaths);
+}
+
+void FabiEngine3D::misc_cacheMusicMultiThreaded(const vector<string>& filePaths)
+{
+	_core->_audioLoader.cacheMusicMultiThreaded(filePaths);
 }
 
 void FabiEngine3D::misc_startMillisecondTimer()

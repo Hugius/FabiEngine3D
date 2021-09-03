@@ -35,7 +35,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<future<char*>> threads;
-	vector<bool> chunkStatuses;
+	vector<bool> threadStatuses;
 
 	// Remove duplicates
 	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
@@ -48,11 +48,11 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 		if (_chunkCache.find(filePath) == _chunkCache.end())
 		{
 			threads.push_back(async(launch::async, &AudioLoader::_loadWaveFile, this, filePath));
-			chunkStatuses.push_back(false);
+			threadStatuses.push_back(false);
 		}
 		else
 		{
-			chunkStatuses.push_back(true);
+			threadStatuses.push_back(true);
 		}
 	}
 
@@ -60,30 +60,81 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	for (size_t i = 0; i < threads.size(); i++)
 	{
 		// Check if chunk is not processed yet
-		if (!chunkStatuses[i])
+		if (!threadStatuses[i])
 		{
-			// Retrieve raw WAV data
-			auto data = threads[i].get();
+			// Retrieve return value
+			auto loadedData = threads[i].get();
 
 			// Check if data loading failed
-			if (data == nullptr)
+			if (loadedData == nullptr)
 			{
 				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
 			}
 			else
 			{
 				// Load chunk file
-				auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
+				auto loadedChunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)loadedData);
 
 				// Check if chunk loading went well
-				if (chunk != nullptr)
+				if (loadedChunk != nullptr)
 				{
 					// Logging
 					_throwLoadedMessage(uniqueFilePaths[i]);
 
 					// Cache chunk
-					_chunkCache[uniqueFilePaths[i]] = chunk;
+					_chunkCache[uniqueFilePaths[i]] = loadedChunk;
 				}
+			}
+		}
+	}
+}
+
+void AudioLoader::cacheMusicMultiThreaded(const vector<string>& filePaths)
+{
+	// Temporary values
+	vector<future<Mix_Music*>> threads;
+	vector<bool> threadStatuses;
+
+	// Remove duplicates
+	auto tempFilePaths = set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
+	// Start all loading threads
+	for (const auto& filePath : uniqueFilePaths)
+	{
+		// Check if music is not already cached
+		if (_musicCache.find(filePath) == _musicCache.end())
+		{
+			threads.push_back(async(launch::async, &AudioLoader::_loadMusic, this, filePath));
+			threadStatuses.push_back(false);
+		}
+		else
+		{
+			threadStatuses.push_back(true);
+		}
+	}
+
+	// Wait for all threads to finish
+	for (size_t i = 0; i < threads.size(); i++)
+	{
+		// Check if music is not processed yet
+		if (!threadStatuses[i])
+		{
+			// Retrieve return value
+			auto loadedMusic = threads[i].get();
+
+			// Check if music loading failed
+			if (loadedMusic == nullptr)
+			{
+				Logger::throwWarning("Cannot load audio file \"", uniqueFilePaths[i], "\"!");
+			}
+			else
+			{
+				// Cache music
+				_musicCache[uniqueFilePaths[i]] = loadedMusic;
+
+				// Logging
+				_throwLoadedMessage(uniqueFilePaths[i]);
 			}
 		}
 	}

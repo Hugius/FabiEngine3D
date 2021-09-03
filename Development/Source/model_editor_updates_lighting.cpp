@@ -1,9 +1,5 @@
 #include "model_editor.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void ModelEditor::_updateLightingMenu()
 {
 	// Temporary values
@@ -72,7 +68,7 @@ void ModelEditor::_updateLightingMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = min(256.0f, specularFactor);
 			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
@@ -88,7 +84,6 @@ void ModelEditor::_updateLightingMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("reflectivity", reflectivity))
 		{
 			reflectivity /= 100.0f;
-			reflectivity = clamp(reflectivity, 0.0f, 1.0f);
 			_fe3d.modelEntity_setReflectivity(_currentModelID, reflectivity);
 		}
 

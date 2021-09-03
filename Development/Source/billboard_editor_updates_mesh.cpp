@@ -1,10 +1,6 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void BillboardEditor::_updateMeshMenu()
 {
 	// Temporary values
@@ -64,12 +60,12 @@ void BillboardEditor::_updateMeshMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
 		{
-			size.x = max(0.0f, size.x / 100.0f);
+			size.x /= 100.0f;
 			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
 		{
-			size.y = max(0.0f, size.y / 100.0f);
+			size.y /= 100.0f;
 			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
 		}
 

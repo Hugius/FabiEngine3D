@@ -34,11 +34,11 @@ public:
 	void pauseSpriteAnimation();
 	void resumeSpriteAnimation();
 	void stopSpriteAnimationAnimation();
-	void setSpriteAnimationRowIndex(int value);
-	void setSpriteAnimationColumnIndex(int value);
-	void setTotalSpriteAnimationRows(int value);
-	void setTotalSpriteAnimationColumns(int value);
-	void setMaxSpriteAnimationFramestep(int value);
+	void setSpriteAnimationRowIndex(unsigned int value);
+	void setSpriteAnimationColumnIndex(unsigned int value);
+	void setTotalSpriteAnimationRows(unsigned int value);
+	void setTotalSpriteAnimationColumns(unsigned int value);
+	void setMaxSpriteAnimationFramestep(unsigned int value);
 	void increasePassedSpriteAnimationFrames();
 	void resetPassedSpriteAnimationFrames();
 	void increaseSpriteAnimationLoops();
@@ -65,14 +65,14 @@ public:
 	const float getRotation();
 
 	// Integers
-	const int getPassedSpriteAnimationFrames();
-	const int getMaxSpriteAnimationFramestep();
-	const int getTotalSpriteAnimationRows();
-	const int getTotalSpriteAnimationColumns();
-	const int getSpriteAnimationRowIndex();
-	const int getSpriteAnimationColumnIndex();
-	const int getSpriteAnimationLoops();
 	const int getMaxSpriteAnimationLoops();
+	const unsigned int getPassedSpriteAnimationFrames();
+	const unsigned int getMaxSpriteAnimationFramestep();
+	const unsigned int getTotalSpriteAnimationRows();
+	const unsigned int getTotalSpriteAnimationColumns();
+	const unsigned int getSpriteAnimationRowIndex();
+	const unsigned int getSpriteAnimationColumnIndex();
+	const unsigned int getSpriteAnimationLoops();
 	const unsigned int getDepth();
 
 	// Booleans
@@ -109,14 +109,14 @@ private:
 	float _alpha = 1.0f;
 
 	// Integers
-	int _maxSpriteAnimationFramestep = 0;
-	int _passedSpriteAnimationFrames = 0;
-	int _totalSpriteAnimationRows = 0;
-	int _totalSpriteAnimationColumns = 0;
-	int _spriteAnimationRowIndex = 0;
-	int _spriteAnimationColumnIndex = 0;
-	int _spriteAnimationLoops = 0;
 	int _maxSpriteAnimationLoops = 0;
+	unsigned int _maxSpriteAnimationFramestep = 0;
+	unsigned int _passedSpriteAnimationFrames = 0;
+	unsigned int _totalSpriteAnimationRows = 0;
+	unsigned int _totalSpriteAnimationColumns = 0;
+	unsigned int _spriteAnimationRowIndex = 0;
+	unsigned int _spriteAnimationColumnIndex = 0;
+	unsigned int _spriteAnimationLoops = 0;
 	unsigned int _depth = 0;
 
 	// Booleans

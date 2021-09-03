@@ -1,10 +1,5 @@
 #include "water_editor.hpp"
 
-#include <algorithm>
-
-using std::max;
-using std::clamp;
-
 void WaterEditor::_updateOptionsMenu()
 {
 	// Temporary values
@@ -91,37 +86,37 @@ void WaterEditor::_updateOptionsMenu()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
-			transparency = clamp(transparency / 100.0f, 0.0f, 1.0f);
+			transparency /= 100.0f;
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
-			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+			color.r /= 255.0f;
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
-			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+			color.g /= 255.0f;
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
-			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+			color.b /= 255.0f;
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = min(256.0f, specularFactor);
 			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			specularIntensity = max(0.0f, specularIntensity / 100.0f);
+			specularIntensity /= 100.0f;
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
-			waveHeight = max(0.0f, waveHeight / 100.0f);
+			waveHeight /= 100.0f;
 			_fe3d.waterEntity_setWaveHeight(_currentWaterID, waveHeight);
 		}
 

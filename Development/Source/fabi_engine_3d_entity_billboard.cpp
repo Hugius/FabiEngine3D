@@ -95,7 +95,7 @@ void FabiEngine3D::billboardEntity_rotate(const string& ID, Vec3 factor)
 
 void FabiEngine3D::billboardEntity_scale(const string& ID, Vec2 factor)
 {
-	_core->_billboardEntityManager.getEntity(ID)->scale(Vec3(factor.x, factor.y, 0.0f));
+	_core->_billboardEntityManager.getEntity(ID)->scale(factor);
 }
 
 void FabiEngine3D::billboardEntity_setPosition(const string& ID, Vec3 position)
@@ -110,7 +110,7 @@ void FabiEngine3D::billboardEntity_setRotation(const string& ID, Vec3 rotation)
 
 void FabiEngine3D::billboardEntity_setSize(const string& ID, Vec2 size)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setSize(Vec3(size.x, size.y, 1.0f));
+	_core->_billboardEntityManager.getEntity(ID)->setSize(size);
 }
 
 void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)

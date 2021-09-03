@@ -165,7 +165,7 @@ void TerrainEditor::_updateTerrainCreating()
 					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
 						// Get the chosen filename
-						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("game_assets\\textures\\height_maps\\");
 
 						// Validate target directory

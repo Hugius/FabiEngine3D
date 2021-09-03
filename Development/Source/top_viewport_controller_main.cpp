@@ -259,7 +259,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		if (screen->getButton("uncache")->isHovered())
 		{
 			// Get the chosen filename
-			const string rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = _fe3d.misc_getRootDirectory();
 			const string targetDirectory = string("game_assets\\");
 
 			// Validate target directory

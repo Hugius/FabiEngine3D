@@ -1,9 +1,5 @@
 #include "scene_editor.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void SceneEditor::_updateLightingSettingsMenu()
 {
 	// Temporary values
@@ -72,19 +68,19 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
 		{
-			ambientLightingColor.r = clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
+			ambientLightingColor.r /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
 		{
-			ambientLightingColor.g = clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
+			ambientLightingColor.g /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
 		{
-			ambientLightingColor.b = clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
+			ambientLightingColor.b /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
 		{
-			ambientLightingIntensity = max(0.0f, ambientLightingIntensity / 100.0f);
+			ambientLightingIntensity /= 100.0f;
 		}
 
 		// Disable ambient lighting
@@ -160,19 +156,19 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
 		{
-			directionalLightingColor.r = clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
+			directionalLightingColor.r /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
 		{
-			directionalLightingColor.g = clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
+			directionalLightingColor.g /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
 		{
-			directionalLightingColor.b = clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
+			directionalLightingColor.b /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
 		{
-			directionalLightingIntensity = max(0.0f, directionalLightingIntensity / 100.0f);
+			directionalLightingIntensity /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize))
 		{

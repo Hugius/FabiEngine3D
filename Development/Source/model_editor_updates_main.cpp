@@ -188,7 +188,7 @@ void ModelEditor::_updateModelCreating()
 					if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
 						// Get the chosen filename
-						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("game_assets\\meshes\\");
 
 						// Validate target directory

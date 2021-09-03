@@ -9,9 +9,9 @@ void BillboardEditor::_updateAnimationMenu()
 	if (screen->getID() == "billboardEditorMenuAnimation")
 	{
 		// Temporary values
-		int animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
-		int animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
-		int animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
+		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
+		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
+		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -57,8 +57,8 @@ void BillboardEditor::_updateAnimationMenu()
 		}
 
 		// Update animation values
-		_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, max(0, animationRowCount));
-		_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, max(0, animationColumnCount));
-		_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, max(0, animationFramestep));
+		_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, animationRowCount);
+		_fe3d.billboardEntity_setSpriteAnimationColumns(_currentBillboardID, animationColumnCount);
+		_fe3d.billboardEntity_setSpriteAnimationFramestep(_currentBillboardID, animationFramestep);
 	}
 }

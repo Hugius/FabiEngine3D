@@ -1,10 +1,6 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void BillboardEditor::_updateAppearanceMenu()
 {
 	// Temporary values
@@ -29,7 +25,7 @@ void BillboardEditor::_updateAppearanceMenu()
 			else if (screen->getButton("texture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\billboard_maps\\");
 
 				// Validate target directory
@@ -79,21 +75,22 @@ void BillboardEditor::_updateAppearanceMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness, {}))
 		{
-			lightness = max(0.0f, lightness / 100.0f);
+			lightness /= 100.0f;
+			_fe3d.billboardEntity_setLightness(_currentBillboardID, lightness);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
-			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+			color.r /= 255.0f;
 			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
-			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+			color.g /= 255.0f;
 			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
-			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+			color.b /= 255.0f;
 			_fe3d.billboardEntity_setColor(_currentBillboardID, color);
 		}
 

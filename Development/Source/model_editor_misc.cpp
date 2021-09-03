@@ -6,7 +6,7 @@
 void ModelEditor::_loadDiffuseMap()
 {
 	// Get the chosen filename
-	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const auto rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 	// Validate target directory
@@ -40,7 +40,7 @@ void ModelEditor::_loadDiffuseMap()
 void ModelEditor::_loadEmissionMap()
 {
 	// Get the chosen filename
-	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const auto rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
 
 	// Validate target directory
@@ -74,7 +74,7 @@ void ModelEditor::_loadEmissionMap()
 void ModelEditor::_loadReflectionMap()
 {
 	// Get the chosen filename
-	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const auto rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("game_assets\\textures\\reflection_maps\\");
 
 	// Validate target directory
@@ -108,7 +108,7 @@ void ModelEditor::_loadReflectionMap()
 void ModelEditor::_loadNormalMap()
 {
 	// Get the chosen filename
-	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const auto rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 	// Validate target directory

@@ -1,8 +1,8 @@
-
 #include "model_entity_manager.hpp"
 #include "logger.hpp"
 
 using std::make_shared;
+using std::max;
 
 ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
 	:
@@ -214,7 +214,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 
 void ModelEntityManager::setLodDistance(float distance)
 {
-	_lodDistance = distance;
+	_lodDistance = max(0.0f, distance);
 }
 
 float ModelEntityManager::getLodDistance()

@@ -1,8 +1,6 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
-using std::max;
-
 void TerrainEditor::_updateMeshMenu()
 {
 	// Temporary values
@@ -26,7 +24,7 @@ void TerrainEditor::_updateMeshMenu()
 			else if (screen->getButton("diffuseMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 				// Validate target directory
@@ -69,12 +67,10 @@ void TerrainEditor::_updateMeshMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 		{
-			maxHeight = max(0.0f, maxHeight);
 			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
 		{
-			uvRepeat = max(0.0f, uvRepeat);
 			_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
 		}
 	}

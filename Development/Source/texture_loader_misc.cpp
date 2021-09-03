@@ -276,13 +276,7 @@ void TextureLoader::reloadAnisotropicFiltering()
 		// Check if texture must be anisotropically filtered
 		if (currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY && currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY)
 		{
-			// Limit new quality
-			auto newQuality = clamp(_renderBus.getAnisotropicFilteringQuality(),
-				Config::MIN_ANISOTROPIC_FILTERING_QUALITY,
-				Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-
-			// Set anisotropic filtering
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(newQuality));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
 		}
 
 		// Unbind

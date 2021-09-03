@@ -51,7 +51,6 @@ void SceneEditor::_updateSettingsMenu()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
 		{
-			lodDistance = max(0.0f, lodDistance);
 			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("planarHeight", reflectionHeight, {}))
@@ -171,18 +170,12 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("size", size))
-		{
-			size = max(0.0f, size);
-		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness = max(0.0f, lightness / 100.0f);
+			lightness /= 100.0f;
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("interval", interval))
-		{
-			interval = max(0, static_cast<int>(interval));
-		}
+		_gui.getGlobalScreen()->checkValueForm("size", size);
+		_gui.getGlobalScreen()->checkValueForm("interval", interval);
 		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
 		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);
 		_gui.getGlobalScreen()->checkValueForm("positionZ", position.z);
@@ -249,7 +242,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
-			strength = max(0.0f, strength / 100.0f);
+			strength /= 100.0f;
 		}
 
 		// Disable motion blur
@@ -313,14 +306,8 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance))
-		{
-			blurDistance = max(0.0f, blurDistance);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
-		{
-			maxDistance = max(0.0f, maxDistance);
-		}
+		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
+		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
 
 		// Disable DOF
 		if (_fe3d.gfx_isDofEnabled())

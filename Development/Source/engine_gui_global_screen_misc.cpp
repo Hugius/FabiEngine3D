@@ -3,27 +3,27 @@
 
 void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, unsigned int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, false);
 }
 
 void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_createValueForm(ID, title, to_string(value), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(value), position, size, buttonsPosition, true, true);
 }
 
 void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
 void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true, buttonsPosition);
+	_createValueForm(ID, title, to_string(static_cast<int>(value)), position, size, buttonsPosition, true, true);
 }
 
 void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition)
 {
-	_createValueForm(ID, title, value, position, size, false, buttonsPosition);
+	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
 
 bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
@@ -110,7 +110,7 @@ bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 	return find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers, Vec2 buttonsPosition)
+void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed)
 {
 	// Validate existence
 	if (isValueFormExisting(ID))
@@ -122,7 +122,7 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	_valueFormIDs.push_back(ID);
 	createRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
 	createTextField(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
-	createWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+	createWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, (onlyNumbers && minusAllowed));
 	getWriteField(ID)->changeTextContent(valueString);
 
 	// GUI focus & set first writeField active

@@ -1,10 +1,6 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void SceneEditor::_updateFogGraphicsSettingsMenu()
 {
 	// Temporary values
@@ -14,11 +10,11 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsFog")
 	{
 		// Temporary values
-		bool isEnabled = _fe3d.gfx_isFogEnabled();
-		float minDistance = _fe3d.gfx_getFogMinDistance();
-		float maxDistance = _fe3d.gfx_getFogMaxDistance();
-		float thickness = _fe3d.gfx_getFogThickness();
-		Vec3 color = _fe3d.gfx_getFogColor();
+		auto isEnabled = _fe3d.gfx_isFogEnabled();
+		auto minDistance = _fe3d.gfx_getFogMinDistance();
+		auto maxDistance = _fe3d.gfx_getFogMaxDistance();
+		auto thickness = _fe3d.gfx_getFogThickness();
+		auto color = _fe3d.gfx_getFogColor();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -53,30 +49,24 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance))
-		{
-			minDistance = max(0.0f, minDistance);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
-		{
-			maxDistance = max(0.0f, maxDistance);
-		}
 		if (_gui.getGlobalScreen()->checkValueForm("thickness", thickness))
 		{
-			thickness = clamp(thickness / 100.0f, 0.0f, 1.0f);
+			thickness /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
-			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+			color.r /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
-			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+			color.g /= 255.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
-			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+			color.b /= 255.0f;
 		}
+		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
+		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
 
 		// Disable fog
 		if (_fe3d.gfx_isFogEnabled())
@@ -110,12 +100,12 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
-		const string rootDirectory = _fe3d.misc_getRootDirectory();
+		const auto rootDirectory = _fe3d.misc_getRootDirectory();
 		const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
-		bool isEnabled = _fe3d.gfx_isLensFlareEnabled();
-		string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
-		float intensity = _fe3d.gfx_getLensFlareIntensity();
-		float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
+		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
+		auto intensity = _fe3d.gfx_getLensFlareIntensity();
+		auto multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -176,11 +166,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity = max(0.0f, intensity / 100.0f);
+			intensity /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
 		{
-			multiplier = max(0.0f, multiplier / 100.0f);
+			multiplier /= 100.0f;
 		}
 
 		// Disable lens flare
@@ -243,11 +233,11 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
 		{
-			factor = max(0.0f, factor / 100.0f);
+			factor /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
-			speed = max(0.0f, speed / 100000.0f);
+			speed /= 100000.0f;
 		}
 
 		// Disable sky exposure
@@ -283,7 +273,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		auto isEnabled = _fe3d.gfx_isBloomEnabled();
 		auto type = _fe3d.gfx_getBloomType();
 		auto intensity = _fe3d.gfx_getBloomIntensity();
-		int blurCount = _fe3d.gfx_getBloomBlurCount();
+		auto blurCount = _fe3d.gfx_getBloomBlurCount();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -314,12 +304,9 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity = max(0.0f, intensity / 100.0f);
+			intensity /= 100.0f;
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("blurs", blurCount))
-		{
-			blurCount = max(0, blurCount);
-		}
+		_gui.getGlobalScreen()->checkValueForm("blurs", blurCount);
 
 		// Disable bloom
 		if (_fe3d.gfx_isBloomEnabled())

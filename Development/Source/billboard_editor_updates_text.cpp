@@ -23,7 +23,7 @@ void BillboardEditor::_updateTextMenu()
 			else if (screen->getButton("font")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\fonts\\");
 
 				// Validate target directory

@@ -20,7 +20,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("rightTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory
@@ -53,7 +53,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("leftTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory
@@ -86,7 +86,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("topTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory
@@ -119,7 +119,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("bottomTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory
@@ -152,7 +152,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("frontTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory
@@ -185,7 +185,7 @@ void SkyEditor::_updateMeshMenu()
 			else if (screen->getButton("backTexture")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 				// Validate target directory

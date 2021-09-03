@@ -1,8 +1,6 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
-using std::max;
-
 void TerrainEditor::_updateBlendMapMenu()
 {
 	// Temporary values
@@ -22,7 +20,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			else if (screen->getButton("blendMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\blend_maps\\");
 
 				// Validate target directory
@@ -55,7 +53,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			else if (screen->getButton("red")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 				// Validate target directory
@@ -88,7 +86,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			else if (screen->getButton("green")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 				// Validate target directory
@@ -121,7 +119,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			else if (screen->getButton("blue")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 				// Validate target directory
@@ -172,19 +170,16 @@ void TerrainEditor::_updateBlendMapMenu()
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
 		{
-			blendRepeatR = max(0.0f, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
 		}
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
 		{
-			blendRepeatG = max(0.0f, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
 		}
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
 		{
-			blendRepeatB = max(0.0f, blendRepeatB);
 			_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);
 		}
 

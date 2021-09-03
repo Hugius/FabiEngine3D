@@ -27,7 +27,7 @@ void WaterEditor::_updateEffectsMenu()
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\dudv_maps\\");
 
 				// Validate target directory
@@ -60,7 +60,7 @@ void WaterEditor::_updateEffectsMenu()
 			else if (screen->getButton("normalMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 				// Validate target directory
@@ -93,7 +93,7 @@ void WaterEditor::_updateEffectsMenu()
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\displacement_maps\\");
 
 				// Validate target directory

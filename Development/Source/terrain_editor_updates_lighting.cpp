@@ -30,7 +30,7 @@ void TerrainEditor::_updateLightingMenu()
 			else if (screen->getButton("normalMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 				// Validate target directory
@@ -63,7 +63,7 @@ void TerrainEditor::_updateLightingMenu()
 			else if (screen->getButton("normalMapR")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 				// Validate target directory
@@ -96,7 +96,7 @@ void TerrainEditor::_updateLightingMenu()
 			else if (screen->getButton("normalMapG")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 				// Validate target directory
@@ -129,7 +129,7 @@ void TerrainEditor::_updateLightingMenu()
 			else if (screen->getButton("normalMapB")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 				// Validate target directory
@@ -181,17 +181,17 @@ void TerrainEditor::_updateLightingMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			specularFactor = clamp(specularFactor, 0.0f, 256.0f);
+			specularFactor = min(256.0f, specularFactor);
 			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, specularFactor);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			specularIntensity = max(0.0f, specularIntensity / 100.0f);
+			specularIntensity /= 100.0f;
 			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness = max(0.0f, lightness / 100.0f);
+			lightness /= 100.0f;
 			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
 		}
 

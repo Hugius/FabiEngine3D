@@ -112,7 +112,7 @@ void AudioEditor::_updateAudioCreating()
 					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
 						// Get the chosen filename
-						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("game_assets\\audio\\");
 
 						// Validate target directory

@@ -13,26 +13,26 @@ void BillboardEntity::updateTransformationMatrix()
 
 	// Translation matrix
 	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
-	_transformationMatrix = _transformationMatrix * translationMatrix;
+	_transformationMatrix = (_transformationMatrix * translationMatrix);
 
 	// Rotation origin matrix - translate
 	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_size.y / 2.0f), 0.0f);
-	_transformationMatrix = _transformationMatrix * rotationOriginMatrix;
+	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Rotation matrix
 	Matrix44 rotationMatrix = Matrix44::createRotation(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z));
-	_transformationMatrix = _transformationMatrix * rotationMatrix;
+	_transformationMatrix = (_transformationMatrix * rotationMatrix);
 
 	// Rotation origin matrix - translate back
 	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_size.y / 2.0f), 0.0f);
-	_transformationMatrix = _transformationMatrix * rotationOriginMatrix;
+	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Scaling matrix
-	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
-	_transformationMatrix = _transformationMatrix * scalingMatrix;
+	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, 1.0f);
+	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 
 void BillboardEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
@@ -80,9 +80,9 @@ void BillboardEntity::setRotation(Vec3 value)
 	_rotation.z = fmodf(_rotation.z, 360.0f);
 }
 
-void BillboardEntity::setSize(Vec3 value)
+void BillboardEntity::setSize(Vec2 value)
 {
-	_size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 void BillboardEntity::setColor(Vec3 value)
@@ -105,10 +105,10 @@ void BillboardEntity::rotate(Vec3 value)
 	_rotation.z = fmodf(_rotation.z, 360.0f);
 }
 
-void BillboardEntity::scale(Vec3 value)
+void BillboardEntity::scale(Vec2 value)
 {
 	_size += value;
-	_size = Vec3(max(0.0f, _size.x), max(0.0f, _size.y), max(0.0f, _size.z));
+	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
 }
 
 void BillboardEntity::setTextContent(const string& value)
@@ -261,7 +261,7 @@ void BillboardEntity::setInversion(float value)
 
 void BillboardEntity::setAlpha(float value)
 {
-	_alpha = value;
+	_alpha = clamp(value, 0.0f, 1.0f);
 }
 
 void BillboardEntity::setMinHeight(float value)

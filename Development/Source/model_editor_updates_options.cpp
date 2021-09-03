@@ -73,17 +73,17 @@ void ModelEditor::_updateOptionsMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
-			color.r = clamp(color.r / 255.0f, 0.0f, 1.0f);
+			color.r /= 255.0f;
 			_fe3d.modelEntity_setColor(_currentModelID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
-			color.g = clamp(color.g / 255.0f, 0.0f, 1.0f);
+			color.g /= 255.0f;
 			_fe3d.modelEntity_setColor(_currentModelID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
-			color.b = clamp(color.b / 255.0f, 0.0f, 1.0f);
+			color.b /= 255.0f;
 			_fe3d.modelEntity_setColor(_currentModelID, color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))

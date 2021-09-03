@@ -5,12 +5,10 @@
 
 #include <fstream>
 #include <sstream>
-#include <algorithm>
 
 using std::ifstream;
 using std::ofstream;
 using std::istringstream;
-using std::clamp;
 
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
@@ -74,14 +72,14 @@ void SettingsEditor::update()
 	{
 		// Temporary values
 		auto isAntiAliasingEnabled = _fe3d.gfx_isAntiAliasingEnabled();
-		auto bloomSize = static_cast<int>(_fe3d.gfx_getBloomSize());
-		auto dofSize = static_cast<int>(_fe3d.gfx_getDofSize());
-		auto motionBlurSize = static_cast<int>(_fe3d.gfx_getMotionBlurSize());
-		auto anisotropicFilteringQuality = static_cast<int>(_fe3d.gfx_getAnisotropicFilteringQuality());
-		auto shadowQuality = static_cast<int>(_fe3d.gfx_getShadowQuality());
-		auto reflectionQuality = static_cast<int>(_fe3d.gfx_getReflectionQuality());
-		auto refractionQuality = static_cast<int>(_fe3d.gfx_getRefractionQuality());
-		auto maxAudioChannels = static_cast<int>(_fe3d.misc_getMaxAudioChannelCount());
+		auto bloomSize = _fe3d.gfx_getBloomSize();
+		auto dofSize = _fe3d.gfx_getDofSize();
+		auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
+		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
+		auto shadowQuality = _fe3d.gfx_getShadowQuality();
+		auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
+		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
 		// Check if input received
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
@@ -154,35 +152,35 @@ void SettingsEditor::update()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("bloomSize", bloomSize, {}))
 		{
-			_fe3d.gfx_setBloomSize(static_cast<unsigned int>(bloomSize));
+			_fe3d.gfx_setBloomSize(bloomSize);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("dofSize", dofSize, {}))
 		{
-			_fe3d.gfx_setDofSize(static_cast<unsigned int>(dofSize));
+			_fe3d.gfx_setDofSize(dofSize);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("motionBlurSize", motionBlurSize, {}))
 		{
-			_fe3d.gfx_setMotionBlurSize(static_cast<unsigned int>(motionBlurSize));
+			_fe3d.gfx_setMotionBlurSize(motionBlurSize);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("anisotropicFilteringQuality", anisotropicFilteringQuality, {}))
 		{
-			_fe3d.gfx_setAnisotropicFilteringQuality(static_cast<unsigned int>(anisotropicFilteringQuality));
+			_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 		{
-			_fe3d.gfx_setShadowQuality(static_cast<unsigned int>(shadowQuality));
+			_fe3d.gfx_setShadowQuality(shadowQuality);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 		{
-			_fe3d.gfx_setReflectionQuality(static_cast<unsigned int>(reflectionQuality));
+			_fe3d.gfx_setReflectionQuality(reflectionQuality);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
-			_fe3d.gfx_setRefractionQuality(static_cast<unsigned int>(refractionQuality));
+			_fe3d.gfx_setRefractionQuality(refractionQuality);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
-			_fe3d.misc_setMaxAudioChannels(static_cast<unsigned int>(maxAudioChannels));
+			_fe3d.misc_setMaxAudioChannels(maxAudioChannels);
 		}
 
 		// Miscellaneous

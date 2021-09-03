@@ -30,7 +30,7 @@ const Vec3 BillboardEntity::getRotation()
 	return _rotation;
 }
 
-const Vec3 BillboardEntity::getSize()
+const Vec2 BillboardEntity::getSize()
 {
 	return _size;
 }

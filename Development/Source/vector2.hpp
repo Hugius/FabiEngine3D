@@ -25,8 +25,6 @@ struct Vec2 final
 	Vec2(float x, float y);
 
 	// Voids
-	void normalize();
-	void clear();
 	void operator+=(const Vec2& v);
 	void operator-=(const Vec2& v);
 	void operator*=(const Vec2& v);
@@ -46,9 +44,6 @@ struct Vec2 final
 	const Vec2 operator-(const float& value) const;
 	const Vec2 operator*(const float& value) const;
 	const Vec2 operator/(const float& value) const;
-
-	// Floats
-	const float getMagnitude();
 
 	// Booleans
 	const bool operator==(const Vec2& other) const;

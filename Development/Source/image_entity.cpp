@@ -8,9 +8,9 @@ using std::clamp;
 
 void ImageEntity::updateTransformationMatrix()
 {
-	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, 0.0f);
-	Matrix44 rotationMatrix = Matrix44::createRotationX(Math::convertToRadians(_rotation));
-	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, 1.0f);
+	Matrix44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
+	Matrix44 rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(_rotation));
+	Matrix44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 
 	_transformationMatrix = (translationMatrix * rotationMatrix * scalingMatrix);
 }

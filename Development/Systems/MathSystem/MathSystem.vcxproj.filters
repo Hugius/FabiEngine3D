@@ -38,13 +38,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\matrix33_main.cpp">
+    <ClCompile Include="..\..\Source\matrix33.cpp">
       <Filter>Matrix</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\matrix44_main.cpp">
-      <Filter>Matrix</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\matrix44_functions.cpp">
+    <ClCompile Include="..\..\Source\matrix44.cpp">
       <Filter>Matrix</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ivector2.cpp">
@@ -62,11 +59,14 @@
     <ClCompile Include="..\..\Source\vector4.cpp">
       <Filter>Vector</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics.cpp">
+    <ClCompile Include="..\..\Source\mathematics_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\matrix33_functions.cpp">
-      <Filter>Matrix</Filter>
+    <ClCompile Include="..\..\Source\mathematics_matrix.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\mathematics_vector.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,10 +11,10 @@ void AabbEntity::updateTransformationMatrix()
 	Matrix44 scalingMatrix;
 
 	// Translation
-	translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
+	translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 
 	// Scaling
-	scalingMatrix = Matrix44::createScaling(_size.x, _size.y, _size.z);
+	scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
 
 	// Final matrix
 	_transformationMatrix = translationMatrix * scalingMatrix;

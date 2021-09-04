@@ -124,19 +124,17 @@ Vec2 RayCaster::_converToNDC(Ivec2 val)
 
 Vec4 RayCaster::_convertToViewSpace(Vec4 value)
 {
-	Matrix44 invertedProjection = _renderBus.getProjectionMatrix();
-	invertedProjection.invert();
-	Vec4 viewCoords = invertedProjection * value;
+	Matrix44 invertedProjection = Math::invertMatrix(_renderBus.getProjectionMatrix());
+	Vec4 viewCoords = (invertedProjection * value);
 
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
 Vec3 RayCaster::_convertToWorldSpace(Vec4 value)
 {
-	Matrix44 invertedView = _renderBus.getViewMatrix();
-	invertedView.invert();
-	Vec4 worldCoords = invertedView * value;
-	worldCoords.normalize();
+	Matrix44 invertedView = Math::invertMatrix(_renderBus.getViewMatrix());
+	Vec4 worldCoords = (invertedView * value);
+	worldCoords = Math::normalizeVector(worldCoords);
 
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
@@ -144,9 +142,9 @@ Vec3 RayCaster::_convertToWorldSpace(Vec4 value)
 Vec3 RayCaster::_getPointOnRay(float distance)
 {
 	Vec3 cameraPos = _renderBus.getCameraPosition();
-	Vec3 scaledRay = _ray * distance;
+	Vec3 scaledRay = (_ray * distance);
 
-	return cameraPos + scaledRay;
+	return (cameraPos + scaledRay);
 }
 
 bool RayCaster::_isUnderTerrain(float distance)

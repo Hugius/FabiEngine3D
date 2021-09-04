@@ -32,8 +32,6 @@ struct Vec4 final
 	Vec4(float x, float y, float z, float w);
 
 	// Voids
-	void normalize();
-	void clear();
 	void operator+=(const Vec4& v);
 	void operator-=(const Vec4& v);
 	void operator*=(const Vec4& v);
@@ -53,9 +51,6 @@ struct Vec4 final
 	const Vec4 operator-(const float& value) const;
 	const Vec4 operator/(const float& value) const;
 	const Vec4 operator*(const float& value) const;
-
-	// Floats	
-	const float getMagnitude() const;
 
 	// Booleans
 	const bool operator==(const Vec4& other) const;

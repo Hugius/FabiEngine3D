@@ -13,11 +13,6 @@ Matrix44::Matrix44(
 	this->m[0][3] = m03; this->m[1][3] = m13; this->m[2][3] = m23; this->m[3][3] = m33;
 }
 
-const float Matrix44::operator[](unsigned int index) const
-{
-	return this->f[index];
-}
-
 Matrix44::Matrix44()
 {
 	for (int i = 0; i < 16; i++)
@@ -116,48 +111,4 @@ const Matrix44 Matrix44::operator*(const Matrix44& other) const
 	}
 
 	return newMatrix;
-}
-
-const Vec3 Matrix44::getXAxis()
-{
-	Vec3 newVector;
-	newVector.x = this->m[0][0];
-	newVector.y = this->m[0][1];
-	newVector.z = this->m[0][2];
-
-	return newVector;
-}
-
-const Vec3 Matrix44::getYAxis()
-{
-	Vec3 newVector;
-
-	newVector.x = this->m[1][0];
-	newVector.y = this->m[1][1];
-	newVector.z = this->m[1][2];
-
-	return newVector;
-}
-
-const Vec3 Matrix44::getZAxis()
-{
-	Vec3 newVector;
-
-	newVector.x = this->m[2][0];
-	newVector.y = this->m[2][1];
-	newVector.z = this->m[2][2];
-
-	return newVector;
-}
-
-void Matrix44::setEulerAxis(float yaw, float pitch, float roll)
-{
-	Matrix44 newMatrix;
-
-	Matrix44 yawMatrix = createRotationY(yaw);
-	Matrix44 pitchMatrix = createRotationX(pitch);
-	Matrix44 rollMatrix = createRotationZ(roll);
-	newMatrix = yawMatrix * pitchMatrix * rollMatrix;
-
-	*this = newMatrix;
 }

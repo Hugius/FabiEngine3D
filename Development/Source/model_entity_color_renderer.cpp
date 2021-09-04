@@ -173,10 +173,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 
 			// Model matrices
 			const auto& transformationMatrix = entity->getTransformationMatrix(partID);
-			Matrix44 normalTransformationMatrixCopy = transformationMatrix;
-			normalTransformationMatrixCopy.invert();
-			normalTransformationMatrixCopy.transpose();
-			Matrix33 normalTransformationMatrix = Matrix33(normalTransformationMatrixCopy);
+			Matrix33 normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(Matrix33(transformationMatrix)));
 
 			// Shader uniforms
 			_shader.uploadUniform("u_color", entity->getColor(partID));

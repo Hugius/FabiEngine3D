@@ -125,7 +125,7 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
 			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixelColors);
 			Vec3 normal = Vec3(LH - RH, 3.0f, DH - UH);
-			normal.normalize();
+			normal = Math::normalizeVector(normal);
 
 			// Add data
 			tempVertices.push_back(Vec3(vertexX, vertexY, vertexZ));

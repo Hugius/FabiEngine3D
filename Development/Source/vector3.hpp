@@ -30,8 +30,6 @@ struct Vec3 final
 	Vec3(float x, float y, float z);
 
 	// Voids
-	void normalize();
-	void clear();
 	void operator+=(const float& other);
 	void operator-=(const float& other);
 	void operator*=(const float& other);
@@ -42,7 +40,6 @@ struct Vec3 final
 	void operator/=(const Vec3& other);
 
 	// Vectors
-	const Vec3 cross(const Vec3& vector) const;
 	const Vec3 operator+(const Vec3& other) const;
 	const Vec3 operator-(const Vec3& other) const;
 	const Vec3 operator*(const Vec3& other) const;
@@ -52,9 +49,6 @@ struct Vec3 final
 	const Vec3 operator*(const float& other) const;
 	const Vec3 operator/(const float& other) const;
 	const Vec3 operator-() const;
-
-	// Floats
-	const float getMagnitude();
 
 	// Booleans
 	const bool operator==(const Vec3& other) const;

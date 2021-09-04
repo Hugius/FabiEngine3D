@@ -154,17 +154,17 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
 							{
-								rotationMatrix = Matrix44::createRotationX(Math::convertToRadians(roundedRotation));
+								rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
 								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
 							}
 							else if (rotationDirection == Direction::Y)
 							{
-								rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(roundedRotation));
+								rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
 								yOffset = 0.0f;
 							}
 							else if (rotationDirection == Direction::Z)
 							{
-								rotationMatrix = Matrix44::createRotationZ(Math::convertToRadians(roundedRotation));
+								rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
 								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.z) / 2.0f);
 							}
 

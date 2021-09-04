@@ -63,11 +63,11 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 
 					// Panning
 					auto cameraFront = camera.getFrontVector(); // From camera vector
-					Matrix44 rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(90.0f));
+					Matrix44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
 					Vec3 pointVector = cameraPos - sound.getPosition(); // To camera vector
 					Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);
 					pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
-					pointVector.normalize(); // Normalize
+					pointVector = Math::normalizeVector(pointVector); // Normalize
 					float dot = Math::calculateDotProduct(pointVector, cameraFront);; // Dot product
 					float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 					Uint8 leftStrength = Uint8(255.0f * range); // Left ear

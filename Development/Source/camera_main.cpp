@@ -199,17 +199,17 @@ void Camera::updateMatrices()
 	_frontVector.x = cos(Math::convertToRadians(_pitch)) * cos(Math::convertToRadians(_yaw));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
 	_frontVector.z = cos(Math::convertToRadians(_pitch)) * sin(Math::convertToRadians(_yaw));
-	_frontVector.normalize();
+	_frontVector = Math::normalizeVector(_frontVector);
 
 	// Calculate the view matrix input
-	_rightVector = _frontVector.cross(_upVector);
-	_rightVector.normalize();
+	_rightVector = Math::calculateCrossProduct(_frontVector, _upVector);
+	_rightVector = Math::normalizeVector(_rightVector);
 
 	// View matrix
-	_viewMatrix = Matrix44::createView(_position, _position + _frontVector, _upVector);
+	_viewMatrix = Math::createViewMatrix(_position, _position + _frontVector, _upVector);
 
 	// Projection matrix
-	_projectionMatrix = Matrix44::createProjection(Math::convertToRadians(_fov), _aspectRatio, _nearZ, _farZ);
+	_projectionMatrix = Math::createProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearZ, _farZ);
 
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);

@@ -12,26 +12,26 @@ void BillboardEntity::updateTransformationMatrix()
 	_transformationMatrix = Matrix44(1.0f);
 
 	// Translation matrix
-	Matrix44 translationMatrix = Matrix44::createTranslation(_position.x, _position.y, _position.z);
+	Matrix44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, _position.z);
 	_transformationMatrix = (_transformationMatrix * translationMatrix);
 
 	// Rotation origin matrix - translate
-	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_size.y / 2.0f), 0.0f);
+	Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(0.0f, (_size.y / 2.0f), 0.0f);
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Rotation matrix
-	Matrix44 rotationMatrix = Matrix44::createRotation(
+	Matrix44 rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
 		Math::convertToRadians(_rotation.z));
 	_transformationMatrix = (_transformationMatrix * rotationMatrix);
 
 	// Rotation origin matrix - translate back
-	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_size.y / 2.0f), 0.0f);
+	rotationOriginMatrix = Math::createTranslationMatrix(0.0f, -(_size.y / 2.0f), 0.0f);
 	_transformationMatrix = (_transformationMatrix * rotationOriginMatrix);
 
 	// Scaling matrix
-	Matrix44 scalingMatrix = Matrix44::createScaling(_size.x, _size.y, 1.0f);
+	Matrix44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, 1.0f);
 	_transformationMatrix = (_transformationMatrix * scalingMatrix);
 }
 

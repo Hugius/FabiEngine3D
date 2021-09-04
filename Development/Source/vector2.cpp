@@ -24,25 +24,6 @@ Vec2::Vec2(float x, float y) {
 	this->y = y;
 }
 
-const float Vec2::getMagnitude()
-{
-	return sqrt(this->x * this->x + this->y * this->y);
-}
-
-void Vec2::normalize()
-{
-	float inverseSqrt = (1.0f / this->getMagnitude());
-
-	this->x *= inverseSqrt;
-	this->y *= inverseSqrt;
-}
-
-void Vec2::clear()
-{
-	this->x = 0.0f;
-	this->y = 0.0f;
-}
-
 void Vec2::operator+=(const Vec2& v)
 {
 	this->x += v.x;

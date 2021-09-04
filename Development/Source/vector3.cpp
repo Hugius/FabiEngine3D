@@ -122,29 +122,6 @@ void Vec3::operator/=(const float& other)
 	this->z /= other;
 }
 
-const Vec3 Vec3::cross(const Vec3& vector) const
-{
-	Vec3 crossVector;
-	crossVector.x = this->y * vector.z - this->z * vector.y;
-	crossVector.y = this->z * vector.x - this->x * vector.z;
-	crossVector.z = this->x * vector.y - this->y * vector.x;
-	return crossVector;
-}
-
-const float Vec3::getMagnitude()
-{
-	return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
-}
-
-void Vec3::normalize()
-{
-	float inverseSqrt = (1.0f / this->getMagnitude());
-
-	this->x *= inverseSqrt;
-	this->y *= inverseSqrt;
-	this->z *= inverseSqrt;
-}
-
 const bool Vec3::operator==(const Vec3& other) const
 {
 	return (this->x == other.x && this->y == other.y && this->z == other.z);
@@ -153,11 +130,4 @@ const bool Vec3::operator==(const Vec3& other) const
 const bool Vec3::operator!=(const Vec3& other) const
 {
 	return (this->x != other.x || this->y != other.y || this->z != other.z);
-}
-
-void Vec3::clear()
-{
-	this->x = 0.0f;
-	this->y = 0.0f;
-	this->z = 0.0f;
 }

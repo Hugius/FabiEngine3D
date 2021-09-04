@@ -12,7 +12,7 @@ void SkyEntity::setRenderBuffer(shared_ptr<RenderBuffer> value)
 
 void SkyEntity::updateRotationMatrix()
 {
-	_rotationMatrix = Matrix44::createRotationY(Math::convertToRadians(_rotation));
+	_rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(_rotation));
 }
 
 void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)

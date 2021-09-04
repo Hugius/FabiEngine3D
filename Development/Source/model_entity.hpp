@@ -16,6 +16,7 @@ public:
 
 	// Voids
 	void createPart(const string& ID);
+	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID = "");
 	void setDiffuseMap(TextureID value, const string& partID = "");
@@ -26,6 +27,12 @@ public:
 	void setRotation(Vec3 value, const string& partID = "");
 	void setRotationOrigin(Vec3 value, const string& partID = "");
 	void setSize(Vec3 value, const string& partID = "");
+	void move(Vec3 value, const string& partID = "");
+	void rotate(Vec3 value, const string& partID = "");
+	void scale(Vec3 value, const string& partID = "");
+	void moveTo(Vec3 target, Vec3 speed, const string& partID = "");
+	void rotateTo(Vec3 target, Vec3 speed, const string& partID = "");
+	void scaleTo(Vec3 target, Vec3 speed, const string& partID = "");
 	void setColor(Vec3 value, const string& partID = "");
 	void setLevelOfDetailSize(Vec3 value);
 	void setInversion(float value, const string& partID = "");
@@ -148,6 +155,12 @@ private:
 		Vec3 localRotation = Vec3(0.0f);
 		Vec3 localRotationOrigin = Vec3(0.0f);
 		Vec3 localSize = Vec3(1.0f);
+		Vec3 localPositionTarget = Vec3(0.0f);
+		Vec3 localRotationTarget = Vec3(0.0f);
+		Vec3 localSizeTarget = Vec3(1.0f);
+		Vec3 localPositionTargetSpeed = Vec3(0.0f);
+		Vec3 localRotationTargetSpeed = Vec3(0.0f);
+		Vec3 localSizeTargetSpeed = Vec3(0.0f);
 		Vec3 color = Vec3(1.0f);
 
 		// Floats
@@ -159,6 +172,9 @@ private:
 		TextureID reflectionMap = 0;
 		TextureID normalMap = 0;
 	};
+
+	// Voids
+	void _correctTransformationTarget(Vec3& current, Vec3 target, Vec3 speed);
 
 	// Integers
 	unsigned int _getPartIndex(string partID);
@@ -177,6 +193,12 @@ private:
 	Vec3 _baseRotation = Vec3(0.0f);
 	Vec3 _baseRotationOrigin = Vec3(0.0f);
 	Vec3 _baseSize = Vec3(1.0f);
+	Vec3 _basePositionTarget = Vec3(0.0f);
+	Vec3 _baseRotationTarget = Vec3(0.0f);
+	Vec3 _baseSizeTarget = Vec3(1.0f);
+	Vec3 _basePositionTargetSpeed = Vec3(0.0f);
+	Vec3 _baseRotationTargetSpeed = Vec3(0.0f);
+	Vec3 _baseSizeTargetSpeed = Vec3(0.0f);
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
 	// Floats

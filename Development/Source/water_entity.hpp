@@ -21,6 +21,7 @@ public:
 	void setRippleOffset(Vec2 value);
 	void setWaveOffset(Vec2 value);
 	void setPosition(Vec3 value);
+	void move(Vec3 value);
 	void setColor(Vec3 value);
 	void setDudvMap(TextureID value);
 	void setNormalMap(TextureID value);

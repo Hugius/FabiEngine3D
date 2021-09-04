@@ -244,24 +244,6 @@ const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& I
 	return _core->_modelEntityManager.getEntity(ID)->getReflectionType();
 }
 
-void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
-{
-	auto position = _core->_modelEntityManager.getEntity(ID)->getPosition(partID);
-	_core->_modelEntityManager.getEntity(ID)->setPosition(position + factor, partID);
-}
-
-void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const string& partID)
-{
-	auto rotation = _core->_modelEntityManager.getEntity(ID)->getRotation(partID);
-	_core->_modelEntityManager.getEntity(ID)->setRotation(rotation + factor, partID);
-}
-
-void FabiEngine3D::modelEntity_scale(const string& ID, Vec3 factor, const string& partID)
-{
-	auto size = _core->_modelEntityManager.getEntity(ID)->getSize(partID);
-	_core->_modelEntityManager.getEntity(ID)->setSize(size + factor, partID);
-}
-
 void FabiEngine3D::modelEntity_setPosition(const string& ID, Vec3 position, const string& partID)
 {
 	_core->_modelEntityManager.getEntity(ID)->setPosition(position, partID);
@@ -280,6 +262,36 @@ void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 rotation
 void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string& partID)
 {
 	_core->_modelEntityManager.getEntity(ID)->setSize(size, partID);
+}
+
+void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->move(factor, partID);
+}
+
+void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->rotate(factor, partID);
+}
+
+void FabiEngine3D::modelEntity_scale(const string& ID, Vec3 factor, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->scale(factor, partID);
+}
+
+void FabiEngine3D::modelEntity_moveTo(const string& ID, Vec3 target, Vec3 speed, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->moveTo(target, speed, partID);
+}
+
+void FabiEngine3D::modelEntity_rotateTo(const string& ID, Vec3 target, Vec3 speed, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->rotateTo(target, speed, partID);
+}
+
+void FabiEngine3D::modelEntity_scaleTo(const string& ID, Vec3 target, Vec3 speed, const string& partID)
+{
+	_core->_modelEntityManager.getEntity(ID)->scaleTo(target, speed, partID);
 }
 
 const Vec3 FabiEngine3D::modelEntity_getPosition(const string& ID, const string& partID)

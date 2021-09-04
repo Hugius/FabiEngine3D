@@ -11,6 +11,55 @@ void ModelEntity::createPart(const string& ID)
 	_parts.push_back(PartData(ID));
 }
 
+void ModelEntity::updateTransformation()
+{
+	// Base position target
+	if (_basePosition != _basePositionTarget)
+	{
+		_basePosition += _basePositionTargetSpeed;
+		_correctTransformationTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
+	}
+
+	// Base rotation target
+	if (_baseRotation != _baseRotationTarget)
+	{
+		_baseRotation += _baseRotationTargetSpeed;
+		_correctTransformationTarget(_baseRotation, _baseRotationTarget, _baseRotationTargetSpeed);
+	}
+
+	// Base size target
+	if (_baseSize != _baseSizeTarget)
+	{
+		_baseSize += _baseSizeTargetSpeed;
+		_correctTransformationTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
+	}
+
+	// Iterate through parts
+	for (auto& part : _parts)
+	{
+		// Local position target
+		if (part.localPosition != part.localPositionTarget)
+		{
+			part.localPosition += part.localPositionTargetSpeed;
+			_correctTransformationTarget(part.localPosition, part.localPositionTarget, part.localPositionTargetSpeed);
+		}
+
+		// Local rotation target
+		if (part.localRotation != part.localRotationTarget)
+		{
+			part.localRotation += part.localRotationTargetSpeed;
+			_correctTransformationTarget(part.localRotation, part.localRotationTarget, part.localRotationTargetSpeed);
+		}
+
+		// Local size target
+		if (part.localSize != part.localSizeTarget)
+		{
+			part.localSize += part.localSizeTargetSpeed;
+			_correctTransformationTarget(part.localSize, part.localSizeTarget, part.localSizeTargetSpeed);
+		}
+	}
+}
+
 void ModelEntity::updateTransformationMatrix()
 {
 	for (size_t i = 0; i < _parts.size(); i++)
@@ -96,10 +145,12 @@ void ModelEntity::setPosition(Vec3 value, const string& partID)
 	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
 	{
 		_basePosition = value;
+		_basePositionTarget = value;
 	}
 	else
 	{
 		_parts[_getPartIndex(partID)].localPosition = value;
+		_parts[_getPartIndex(partID)].localPositionTarget = value;
 	}
 }
 
@@ -140,6 +191,86 @@ void ModelEntity::setSize(Vec3 value, const string& partID)
 	else
 	{
 		_parts[_getPartIndex(partID)].localSize = value;
+	}
+}
+
+void ModelEntity::move(Vec3 value, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_basePosition += value;
+		_basePositionTarget += value;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localPosition += value;
+		_parts[_getPartIndex(partID)].localPositionTarget += value;
+	}
+}
+
+void ModelEntity::rotate(Vec3 value, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_baseRotation += value;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localRotation += value;
+	}
+}
+
+void ModelEntity::scale(Vec3 value, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_baseSize += value;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localSize += value;
+	}
+}
+
+void ModelEntity::moveTo(Vec3 target, Vec3 speed, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_basePositionTarget = target;
+		_basePositionTargetSpeed = speed;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localPositionTarget = target;
+		_parts[_getPartIndex(partID)].localPositionTargetSpeed = speed;
+	}
+}
+
+void ModelEntity::rotateTo(Vec3 target, Vec3 speed, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_baseRotationTarget = target;
+		_baseRotationTargetSpeed = speed;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localRotationTarget = target;
+		_parts[_getPartIndex(partID)].localRotationTargetSpeed = speed;
+	}
+}
+
+void ModelEntity::scaleTo(Vec3 target, Vec3 speed, const string& partID)
+{
+	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	{
+		_baseSizeTarget = target;
+		_baseSizeTargetSpeed = speed;
+	}
+	else
+	{
+		_parts[_getPartIndex(partID)].localSizeTarget = target;
+		_parts[_getPartIndex(partID)].localSizeTargetSpeed = speed;
 	}
 }
 

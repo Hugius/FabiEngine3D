@@ -134,6 +134,9 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 	{
 		if (entity->isVisible())
 		{
+			// Update transformation
+			entity->updateTransformation();
+
 			// Check if model has LOD
 			if (!entity->getLodModelEntityID().empty())
 			{

@@ -365,6 +365,27 @@ const float ModelEntity::getUvRepeat()
 	return _uvRepeat;
 }
 
+void ModelEntity::_correctTransformationTarget(Vec3& current, Vec3 target, Vec3 speed)
+{
+	// Correct X
+	if (fabsf(target.x - current.x) <= fabsf(speed.x))
+	{
+		current.x = target.x;
+	}
+
+	// Correct Y
+	if (fabsf(target.y - current.y) <= fabsf(speed.y))
+	{
+		current.y = target.y;
+	}
+
+	// Correct Z
+	if (fabsf(target.z - current.z) <= fabsf(speed.z))
+	{
+		current.z = target.z;
+	}
+}
+
 unsigned int ModelEntity::_getPartIndex(string partID)
 {
 	// Validate parts amount

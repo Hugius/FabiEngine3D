@@ -33,19 +33,19 @@ float Math::convertToDegrees(float angle)
 
 float Math::calculateReferenceAngle(float initialAngle)
 {
-	if (initialAngle >= 0.0f && initialAngle <= 90.0f)
+	if (initialAngle >= 0.0f && initialAngle <= 90.0f) // 1st quadrant
 	{
 		return initialAngle;
 	}
-	else if (initialAngle > 90.0f && initialAngle <= 180.0f)
+	else if (initialAngle > 90.0f && initialAngle <= 180.0f) // 2nd quadrant
 	{
 		return 180.0f - initialAngle;
 	}
-	else if (initialAngle > 180.0f && initialAngle <= 270.0f)
+	else if (initialAngle > 180.0f && initialAngle <= 270.0f) // 3rd quadrant
 	{
 		return initialAngle - 180.0f;
 	}
-	else
+	else // 4th quadrant
 	{
 		return 360.0f - initialAngle;
 	}
@@ -53,9 +53,17 @@ float Math::calculateReferenceAngle(float initialAngle)
 
 float Math::calculateAbsoluteDistance(Vec3 firstPosition, Vec3 secondPosition)
 {
+	// Check if distance is 0
+	if (firstPosition == secondPosition)
+	{
+		return 0.0f;
+	}
+
+	// Calculate distances
 	float xDistance = fabsf(firstPosition.x - secondPosition.x);
 	float yDistance = fabsf(firstPosition.y - secondPosition.y);
 	float zDistance = fabsf(firstPosition.z - secondPosition.z);
 
+	// Return absolute distance
 	return sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
 }

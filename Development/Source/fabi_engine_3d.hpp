@@ -364,12 +364,15 @@ public:
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void billboardEntity_setFont(const string& ID, const string& fontPath);
 	void billboardEntity_setTextContent(const string& ID, const string& textContent);
-	void billboardEntity_move(const string& ID, Vec3 factor);
-	void billboardEntity_rotate(const string& ID, Vec3 factor);
-	void billboardEntity_scale(const string& ID, Vec2 factor);
 	void billboardEntity_setPosition(const string& ID, Vec3 position);
 	void billboardEntity_setRotation(const string& ID, Vec3 rotation);
 	void billboardEntity_setSize(const string& ID, Vec2 size);
+	void billboardEntity_move(const string& ID, Vec3 factor);
+	void billboardEntity_rotate(const string& ID, Vec3 factor);
+	void billboardEntity_scale(const string& ID, Vec2 factor);
+	void billboardEntity_moveTo(const string& ID, Vec3 target, float speed);
+	void billboardEntity_rotateTo(const string& ID, Vec3 target, float speed);
+	void billboardEntity_scaleTo(const string& ID, Vec2 target, float speed);
 	void billboardEntity_setColor(const string& ID, Vec3 color);
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
@@ -483,6 +486,7 @@ public:
 	void lightEntity_setVisible(const string& ID, bool isVisible);
 	void lightEntity_setPosition(const string& ID, Vec3 position);
 	void lightEntity_move(const string& ID, Vec3 factor);
+	void lightEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void lightEntity_setRadius(const string& ID, Vec3 radius);
 	void lightEntity_setColor(const string& ID, Vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
@@ -505,6 +509,7 @@ public:
 	void reflectionEntity_setVisible(const string& ID, bool isVisible);
 	void reflectionEntity_setPosition(const string& ID, Vec3 position);
 	void reflectionEntity_move(const string& ID, Vec3 factor);
+	void reflectionEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void reflectionEntity_capture(const string& ID);
 
 	// Reflection entity interface - getters

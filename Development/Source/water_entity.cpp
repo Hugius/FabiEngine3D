@@ -10,11 +10,6 @@ void WaterEntity::setPosition(Vec3 value)
 	_position = value;
 }
 
-void WaterEntity::move(Vec3 value)
-{
-	_position += value;
-}
-
 void WaterEntity::setColor(Vec3 value)
 {
 	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));

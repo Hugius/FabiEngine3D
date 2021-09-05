@@ -20,11 +20,6 @@ const Vec3 BillboardEntity::getPosition()
 	return _position;
 }
 
-const Vec3 BillboardEntity::getInitialRotation()
-{
-	return _initialRotation;
-}
-
 const Vec3 BillboardEntity::getRotation()
 {
 	return _rotation;

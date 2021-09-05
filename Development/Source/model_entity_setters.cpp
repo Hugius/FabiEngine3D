@@ -165,7 +165,7 @@ void ModelEntity::setPosition(Vec3 value, const string& partID)
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_basePosition = value;
-		_basePositionTarget = value;
+		_basePositionTarget = _basePosition;
 	}
 	else
 	{
@@ -179,10 +179,12 @@ void ModelEntity::setRotation(Vec3 value, const string& partID)
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+		_baseRotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 	}
 	else
 	{
 		_parts[_getPartIndex(partID)].localRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 	}
 }
 
@@ -203,10 +205,12 @@ void ModelEntity::setSize(Vec3 value, const string& partID)
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+		_baseSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	}
 	else
 	{
 		_parts[_getPartIndex(partID)].localSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+		_parts[_getPartIndex(partID)].localSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	}
 }
 
@@ -229,13 +233,19 @@ void ModelEntity::rotate(Vec3 value, const string& partID)
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseRotation += value;
+		_baseRotationTarget += value;
 		_baseRotation = Vec3(fmodf(_baseRotation.x, 360.0f), fmodf(_baseRotation.y, 360.0f), fmodf(_baseRotation.z, 360.0f));
+		_baseRotationTarget = Vec3(fmodf(_baseRotationTarget.x, 360.0f), fmodf(_baseRotationTarget.y, 360.0f), fmodf(_baseRotationTarget.z, 360.0f));
 	}
 	else
 	{
 		Vec3& localRotation = _parts[_getPartIndex(partID)].localRotation;
+		Vec3& localRotationTarget = _parts[_getPartIndex(partID)].localRotationTarget;
 		localRotation += value;
+		localRotationTarget += value;
 		localRotation = Vec3(fmodf(localRotation.x, 360.0f), fmodf(localRotation.y, 360.0f), fmodf(localRotation.z, 360.0f));
+		localRotationTarget = Vec3(fmodf(localRotationTarget.x, 360.0f), fmodf(localRotationTarget.y, 360.0f), fmodf(localRotationTarget.z, 360.0f));
+
 	}
 }
 
@@ -244,13 +254,18 @@ void ModelEntity::scale(Vec3 value, const string& partID)
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseSize += value;
+		_baseSizeTarget += value;
 		_baseSize = Vec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+		_baseSizeTarget = Vec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
 	}
 	else
 	{
 		Vec3& localSize = _parts[_getPartIndex(partID)].localSize;
+		Vec3& localSizeTarget = _parts[_getPartIndex(partID)].localSizeTarget;
 		localSize += value;
+		localSizeTarget += value;
 		localSize = Vec3(max(0.0f, localSize.x), max(0.0f, localSize.y), max(0.0f, localSize.z));
+		localSizeTarget = Vec3(max(0.0f, localSizeTarget.x), max(0.0f, localSizeTarget.y), max(0.0f, localSizeTarget.z));
 	}
 }
 

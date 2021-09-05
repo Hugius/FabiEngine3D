@@ -333,14 +333,14 @@ const vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics(
 	vector<pair<string, int>> result =
 	{
 		pair<string, int>("coreUpdate", 0),
-		pair<string, int>("cameraUpdate", 0),
-		pair<string, int>("raycastUpdate", 0),
-		pair<string, int>("collisionUpdate", 0),
+		pair<string, int>("physicsUpdate", 0),
 		pair<string, int>("skyEntityUpdate", 0),
 		pair<string, int>("waterEntityUpdate", 0),
 		pair<string, int>("modelEntityUpdate", 0),
 		pair<string, int>("billboardEntityUpdate", 0),
 		pair<string, int>("aabbEntityUpdate", 0),
+		pair<string, int>("lightEntityUpdate", 0),
+		pair<string, int>("reflectionEntityUpdate", 0),
 		pair<string, int>("guiEntityUpdate", 0),
 		pair<string, int>("shadowUpdate", 0),
 		pair<string, int>("audioUpdate", 0),

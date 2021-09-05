@@ -200,6 +200,22 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
+	else if (functionName == "fe3d:light_move_to")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing light ID
+			if (_validateFe3dLightEntity(arguments[0].getString()))
+			{
+				_fe3d.lightEntity_moveTo(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
 	else if (functionName == "fe3d:light_get_position")
 	{
 		auto types = { ScriptValueType::STRING };

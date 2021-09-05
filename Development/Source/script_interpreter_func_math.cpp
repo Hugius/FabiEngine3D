@@ -248,7 +248,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:get_pi")
+				else if (functionName == "math:pi")
 				{
 					if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 					{
@@ -266,7 +266,29 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 					}
 				}
-				else if (functionName == "math:distance")
+				else if (functionName == "math:angle_difference")
+				{
+					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Calculate angle difference
+						float result = Math::calculateAngleDifference(arguments[0].getDecimal(), arguments[1].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "math:reference_angle")
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					{
+						// Calculate absolute distance
+						float result = Math::calculateReferenceAngle(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "math:vector_distance")
 				{
 					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };
 

@@ -14,6 +14,7 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCameraFacingX(bool value);
@@ -25,14 +26,16 @@ public:
 	void setBright(bool value);
 	void setWireFramed(bool value);
 	void setDiffuseMap(TextureID value);
+	void setPosition(Vec3 value);
+	void setRotation(Vec3 value);
+	void setSize(Vec2 value);
 	void move(Vec3 value);
 	void rotate(Vec3 value);
-	void setPosition(Vec3 value);
-	void setInitialRotation(Vec3 value);
-	void setRotation(Vec3 value);
-	void setColor(Vec3 color);
 	void scale(Vec2 value);
-	void setSize(Vec2 value);
+	void moveTo(Vec3 target, float speed);
+	void rotateTo(Vec3 target, float speed);
+	void scaleTo(Vec2 target, float speed);
+	void setColor(Vec3 color);
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
@@ -67,7 +70,6 @@ public:
 
 	// Vectors
 	const Vec3 getPosition();
-	const Vec3 getInitialRotation();
 	const Vec3 getRotation();
 	const Vec3 getColor();
 	const Vec2 getSize();
@@ -121,11 +123,16 @@ private:
 	// Vectors
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _rotation = Vec3(0.0f);
-	Vec3 _initialRotation = Vec3(0.0f);
+	Vec3 _positionTarget = Vec3(0.0f);
+	Vec3 _rotationTarget = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 	Vec2 _size = Vec2(1.0f);
+	Vec2 _sizeTarget = Vec2(1.0f);
 
 	// Floats
+	float _positionTargetSpeed = 0.0f;
+	float _rotationTargetSpeed = 0.0f;
+	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
 	float _inversion = 0.0f;
 	float _alpha = 1.0f;

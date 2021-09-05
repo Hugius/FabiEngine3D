@@ -52,6 +52,11 @@ void FabiEngine3D::lightEntity_move(const string& ID, Vec3 factor)
 	_core->_lightEntityManager.getEntity(ID)->move(factor);
 }
 
+void FabiEngine3D::lightEntity_moveTo(const string& ID, Vec3 target, float speed)
+{
+	_core->_lightEntityManager.getEntity(ID)->moveTo(target, speed);
+}
+
 void FabiEngine3D::lightEntity_setRadius(const string& ID, Vec3 radius)
 {
 	_core->_lightEntityManager.getEntity(ID)->setRadius(radius);

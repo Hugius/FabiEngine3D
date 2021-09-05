@@ -38,5 +38,11 @@ void LightEntityManager::createEntity(const string& ID)
 
 void LightEntityManager::update()
 {
-	Logger::throwError("LightEntityManager::update");
+	for (const auto& [keyID, entity] : _getLightEntities())
+	{
+		if (entity->isVisible())
+		{
+			entity->updateTransformation();
+		}
+	}
 }

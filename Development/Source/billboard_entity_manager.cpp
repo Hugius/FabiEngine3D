@@ -50,70 +50,73 @@ void BillboardEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getBillboardEntities())
 	{
-		// 3D camera facing
-		auto facingX = entity->isFacingCameraX();
-		auto facingY = entity->isFacingCameraY();
-		Vec3 rotation = entity->getRotation();
-		if (facingX || facingY)
-		{
-			// Calculate center of billboard
-			Vec3 position = (entity->getPosition() + Vec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
-
-			// Calculate direction
-			Vec3 direction = (position - _renderBus.getCameraPosition());
-
-			// Calculate angles
-			float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
-			float degreesY = atan2f(direction.z, direction.x);
-
-			// Convert to degrees
-			degreesZ = Math::convertToDegrees(degreesZ);
-			degreesY = Math::convertToDegrees(degreesY);
-
-			// Apply rotation angles
-			rotation.z = (degreesZ) * static_cast<float>(facingX);
-			rotation.y = (-(degreesY) - 90.0f) * static_cast<float>(facingY);
-		}
-
-		// Update rotation
-		entity->setRotation(rotation);
-
-		// Update sprite animations
-		if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() && 
-			(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
-		{
-			if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
-			{
-				entity->resetPassedSpriteAnimationFrames(); // Reset counter
-
-				if (entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
-				{
-					entity->setSpriteAnimationColumnIndex(0); // Reset column index
-
-					if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
-					{
-						entity->increaseSpriteAnimationLoops();
-						entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
-					}
-					else // Next row
-					{
-						entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
-					}
-				}
-				else // Next column
-				{
-					entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
-				}
-			}
-			else // Increase counter
-			{
-				entity->increasePassedSpriteAnimationFrames();
-			}
-		}
-
-		// Update transformation matrix
 		if (entity->isVisible())
 		{
+			// Update transformation
+			entity->updateTransformation();
+
+			// 3D camera facing
+			auto facingX = entity->isFacingCameraX();
+			auto facingY = entity->isFacingCameraY();
+			Vec3 rotation = entity->getRotation();
+			if (facingX || facingY)
+			{
+				// Calculate center of billboard
+				Vec3 position = (entity->getPosition() + Vec3(0.0f, (entity->getSize().y / 2.0f), 0.0f));
+
+				// Calculate direction
+				Vec3 direction = (position - _renderBus.getCameraPosition());
+
+				// Calculate angles
+				float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
+				float degreesY = atan2f(direction.z, direction.x);
+
+				// Convert to degrees
+				degreesZ = Math::convertToDegrees(degreesZ);
+				degreesY = Math::convertToDegrees(degreesY);
+
+				// Apply rotation angles
+				rotation.z = (degreesZ) * static_cast<float>(facingX);
+				rotation.y = (-(degreesY)-90.0f) * static_cast<float>(facingY);
+
+				// Update rotation
+				entity->setRotation(rotation);
+			}
+
+			// Update sprite animations
+			if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
+				(entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops()))
+			{
+				if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
+				{
+					entity->resetPassedSpriteAnimationFrames(); // Reset counter
+
+					if (entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
+					{
+						entity->setSpriteAnimationColumnIndex(0); // Reset column index
+
+						if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
+						{
+							entity->increaseSpriteAnimationLoops();
+							entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
+						}
+						else // Next row
+						{
+							entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
+						}
+					}
+					else // Next column
+					{
+						entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
+					}
+				}
+				else // Increase counter
+				{
+					entity->increasePassedSpriteAnimationFrames();
+				}
+			}
+
+			// Update transformation matrix
 			entity->updateTransformationMatrix();
 		}
 	}

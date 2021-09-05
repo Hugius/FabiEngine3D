@@ -5,14 +5,46 @@
 using std::max;
 using std::clamp;
 
+void LightEntity::updateTransformation()
+{
+	if (_position != _positionTarget)
+	{
+		// Update position
+		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
+		_position += (speedMultiplier * _positionTargetSpeed);
+
+		// Correct position
+		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		{
+			_position.x = _positionTarget.x;
+		}
+		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		{
+			_position.y = _positionTarget.y;
+		}
+		if (fabsf(_positionTarget.z - _position.z) <= _positionTargetSpeed)
+		{
+			_position.z = _positionTarget.z;
+		}
+	}
+}
+
 void LightEntity::setPosition(Vec3 value)
 {
 	_position = value;
+	_positionTarget = value;
 }
 
 void LightEntity::move(Vec3 value)
 {
 	_position += value;
+	_positionTarget += value;
+}
+
+void LightEntity::moveTo(Vec3 target, float speed)
+{
+	_positionTarget = target;
+	_positionTargetSpeed = speed;
 }
 
 void LightEntity::setRadius(Vec3 value)

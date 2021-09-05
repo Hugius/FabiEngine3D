@@ -197,6 +197,22 @@ bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& funct
 			}
 		}
 	}
+	else if (functionName == "fe3d:reflection_move_to")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing reflection ID
+			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			{
+				_fe3d.reflectionEntity_moveTo(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
 	else if (functionName == "fe3d:reflection_get_position")
 	{
 		auto types = { ScriptValueType::STRING };

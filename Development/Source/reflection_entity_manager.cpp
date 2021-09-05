@@ -48,5 +48,11 @@ void ReflectionEntityManager::createEntity(const string& ID)
 
 void ReflectionEntityManager::update()
 {
-	Logger::throwError("ReflectionEntityManager::update");
+	for (const auto& [keyID, entity] : _getReflectionEntities())
+	{
+		if (entity->isVisible())
+		{
+			entity->updateTransformation();
+		}
+	}
 }

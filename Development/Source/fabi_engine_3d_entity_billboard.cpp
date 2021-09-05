@@ -98,6 +98,21 @@ void FabiEngine3D::billboardEntity_scale(const string& ID, Vec2 factor)
 	_core->_billboardEntityManager.getEntity(ID)->scale(factor);
 }
 
+void FabiEngine3D::billboardEntity_moveTo(const string& ID, Vec3 target, float speed)
+{
+	_core->_billboardEntityManager.getEntity(ID)->moveTo(target, speed);
+}
+
+void FabiEngine3D::billboardEntity_rotateTo(const string& ID, Vec3 target, float speed)
+{
+	_core->_billboardEntityManager.getEntity(ID)->rotateTo(target, speed);
+}
+
+void FabiEngine3D::billboardEntity_scaleTo(const string& ID, Vec2 target, float speed)
+{
+	_core->_billboardEntityManager.getEntity(ID)->scaleTo(target, speed);
+}
+
 void FabiEngine3D::billboardEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setPosition(position);

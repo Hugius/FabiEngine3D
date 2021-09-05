@@ -27,18 +27,10 @@ void CoreEngine::_updateApplication()
 		// Only update 3D if engine not paused
 		if (!_isPaused)
 		{
-			// Camera updates
-			_timer.startDeltaPart("cameraUpdate");
+			// Physics updates
+			_timer.startDeltaPart("physicsUpdate");
 			_camera.update(lastCursorPosition);
-			_timer.stopDeltaPart();
-
-			// Raycast updates
-			_timer.startDeltaPart("raycastUpdate");
 			_rayCaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
-			_timer.stopDeltaPart();
-
-			// Collision updates
-			_timer.startDeltaPart("collisionUpdate");
 			_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _camera, _collisionDetector);
 			_camera.updateMatrices();
 			_timer.stopDeltaPart();
@@ -58,6 +50,12 @@ void CoreEngine::_updateApplication()
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("aabbEntityUpdate");
 			_aabbEntityManager.update(_modelEntityManager.getEntities(), _billboardEntityManager.getEntities());
+			_timer.stopDeltaPart();
+			_timer.startDeltaPart("lightEntityUpdate");
+			_lightEntityManager.update();
+			_timer.stopDeltaPart();
+			_timer.startDeltaPart("reflectionEntityUpdate");
+			_reflectionEntityManager.update();
 			_timer.stopDeltaPart();
 
 			// Shadow updates

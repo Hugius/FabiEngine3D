@@ -28,6 +28,9 @@ public:
 
 	// Vectors
 	static const Vec3 calculateCrossProduct(Vec3 firstVector, Vec3 secondVector);
+	static const Vec2 calculateVectorDifference(Vec2 firstPosition, Vec2 secondPosition);
+	static const Vec3 calculateVectorDifference(Vec3 firstPosition, Vec3 secondPosition);
+	static const Vec4 calculateVectorDifference(Vec4 firstPosition, Vec4 secondPosition);
 	static const Vec2 normalizeVector(Vec2 vector);
 	static const Vec3 normalizeVector(Vec3 vector);
 	static const Vec4 normalizeVector(Vec4 vector);
@@ -44,6 +47,7 @@ public:
 	static const float calculateVectorMagnitude(Vec2 vector);
 	static const float calculateVectorMagnitude(Vec3 vector);
 	static const float calculateVectorMagnitude(Vec4 vector);
+	static const float calculateAngleDifference(float firstAngle, float secondAngle);
 	static const float calculateReferenceAngle(float initialAngle);
 	static const float convertToRadians(float degrees);
 	static const float convertToDegrees(float radians);

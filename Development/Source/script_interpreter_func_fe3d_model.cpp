@@ -302,7 +302,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:model_move_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -311,15 +311,14 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_moveTo(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-					Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_rotate_to")
 	{
-	auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -328,15 +327,14 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_rotateTo(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-					Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_scale_to")
 	{
-	auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -345,8 +343,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_scaleTo(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-					Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

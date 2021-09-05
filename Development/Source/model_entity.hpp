@@ -30,9 +30,9 @@ public:
 	void move(Vec3 value, const string& partID = "");
 	void rotate(Vec3 value, const string& partID = "");
 	void scale(Vec3 value, const string& partID = "");
-	void moveTo(Vec3 target, Vec3 speed, const string& partID = "");
-	void rotateTo(Vec3 target, Vec3 speed, const string& partID = "");
-	void scaleTo(Vec3 target, Vec3 speed, const string& partID = "");
+	void moveTo(Vec3 target, float speed, const string& partID = "");
+	void rotateTo(Vec3 target, float speed, const string& partID = "");
+	void scaleTo(Vec3 target, float speed, const string& partID = "");
 	void setColor(Vec3 value, const string& partID = "");
 	void setLevelOfDetailSize(Vec3 value);
 	void setInversion(float value, const string& partID = "");
@@ -158,12 +158,12 @@ private:
 		Vec3 localPositionTarget = Vec3(0.0f);
 		Vec3 localRotationTarget = Vec3(0.0f);
 		Vec3 localSizeTarget = Vec3(1.0f);
-		Vec3 localPositionTargetSpeed = Vec3(0.0f);
-		Vec3 localRotationTargetSpeed = Vec3(0.0f);
-		Vec3 localSizeTargetSpeed = Vec3(0.0f);
 		Vec3 color = Vec3(1.0f);
 
 		// Floats
+		float localPositionTargetSpeed = 0.0f;
+		float localRotationTargetSpeed = 0.0f;
+		float localSizeTargetSpeed = 0.0f;
 		float inversion = 0.0f;
 
 		// Miscellaneous
@@ -174,7 +174,9 @@ private:
 	};
 
 	// Voids
-	void _correctTransformationTarget(Vec3& current, Vec3 target, Vec3 speed);
+	void _correctPositionTarget(Vec3& current, Vec3 target, float speed);
+	void _correctRotationTarget(Vec3& current, Vec3 target, float speed);
+	void _correctSizeTarget(Vec3& current, Vec3 target, float speed);
 
 	// Integers
 	unsigned int _getPartIndex(string partID);
@@ -196,12 +198,12 @@ private:
 	Vec3 _basePositionTarget = Vec3(0.0f);
 	Vec3 _baseRotationTarget = Vec3(0.0f);
 	Vec3 _baseSizeTarget = Vec3(1.0f);
-	Vec3 _basePositionTargetSpeed = Vec3(0.0f);
-	Vec3 _baseRotationTargetSpeed = Vec3(0.0f);
-	Vec3 _baseSizeTargetSpeed = Vec3(0.0f);
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
 	// Floats
+	float _basePositionTargetSpeed = 0.0f;
+	float _baseRotationTargetSpeed = 0.0f;
+	float _baseSizeTargetSpeed = 0.0f;
 	float _cubeReflectionMixValue = 1.0f;
 	float _reflectivity = 0.5f;
 	float _lightness = 1.0f;

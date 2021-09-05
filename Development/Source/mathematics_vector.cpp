@@ -1,5 +1,52 @@
 #include "mathematics.hpp"
 
+const Vec3 Math::calculateCrossProduct(Vec3 firstVector, Vec3 secondVector)
+{
+	// Result
+	Vec3 crossVector;
+
+	// Calculate
+	crossVector.x = ((firstVector.y * secondVector.z) - (firstVector.z * secondVector.y));
+	crossVector.y = ((firstVector.z * secondVector.x) - (firstVector.x * secondVector.z));
+	crossVector.z = ((firstVector.x * secondVector.y) - (firstVector.y * secondVector.x));
+
+	// Return
+	return crossVector;
+}
+
+const Vec2 Math::calculateVectorDifference(Vec2 firstPosition, Vec2 secondPosition)
+{
+	// Calculate
+	float xDistance = fabsf(firstPosition.x - secondPosition.x);
+	float yDistance = fabsf(firstPosition.y - secondPosition.y);
+
+	// Return
+	return Vec2(xDistance, yDistance);
+}
+
+const Vec3 Math::calculateVectorDifference(Vec3 firstPosition, Vec3 secondPosition)
+{
+	// Calculate
+	float xDistance = fabsf(firstPosition.x - secondPosition.x);
+	float yDistance = fabsf(firstPosition.y - secondPosition.y);
+	float zDistance = fabsf(firstPosition.z - secondPosition.z);
+
+	// Return
+	return Vec3(xDistance, yDistance, zDistance);
+}
+
+const Vec4 Math::calculateVectorDifference(Vec4 firstPosition, Vec4 secondPosition)
+{
+	// Calculate
+	float xDistance = fabsf(firstPosition.x - secondPosition.x);
+	float yDistance = fabsf(firstPosition.y - secondPosition.y);
+	float zDistance = fabsf(firstPosition.z - secondPosition.z);
+	float wDistance = fabsf(firstPosition.w - secondPosition.w);
+
+	// Return
+	return Vec4(xDistance, yDistance, zDistance, wDistance);
+}
+
 const Vec2 Math::normalizeVector(Vec2 vector)
 {
 	// Calculate inverse magnitude
@@ -40,20 +87,6 @@ const Vec4 Math::normalizeVector(Vec4 vector)
 
 	// Return
 	return vector;
-}
-
-const Vec3 Math::calculateCrossProduct(Vec3 firstVector, Vec3 secondVector)
-{
-	// Result
-	Vec3 crossVector;
-
-	// Calculate
-	crossVector.x = ((firstVector.y * secondVector.z) - (firstVector.z * secondVector.y));
-	crossVector.y = ((firstVector.z * secondVector.x) - (firstVector.x * secondVector.z));
-	crossVector.z = ((firstVector.x * secondVector.y) - (firstVector.y * secondVector.x));
-
-	// Return
-	return crossVector;
 }
 
 const float Math::calculateVectorDistance(Vec2 firstPosition, Vec2 secondPosition)

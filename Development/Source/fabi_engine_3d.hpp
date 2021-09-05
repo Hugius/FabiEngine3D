@@ -289,9 +289,9 @@ public:
 	void modelEntity_move(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_rotate(const string& ID, Vec3 factor, const string& partID = "");
 	void modelEntity_scale(const string& ID, Vec3 factor, const string& partID = "");
-	void modelEntity_moveTo(const string& ID, Vec3 target, Vec3 speed, const string& partID = "");
-	void modelEntity_rotateTo(const string& ID, Vec3 target, Vec3 speed, const string& partID = "");
-	void modelEntity_scaleTo(const string& ID, Vec3 target, Vec3 speed, const string& partID = "");
+	void modelEntity_moveTo(const string& ID, Vec3 target, float speed, const string& partID = "");
+	void modelEntity_rotateTo(const string& ID, Vec3 target, float speed, const string& partID = "");
+	void modelEntity_scaleTo(const string& ID, Vec3 target, float speed, const string& partID = "");
 	void modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size);
 	void modelEntity_setSpecularFactor(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);

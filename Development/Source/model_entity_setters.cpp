@@ -16,22 +16,32 @@ void ModelEntity::updateTransformation()
 	// Base position target
 	if (_basePosition != _basePositionTarget)
 	{
-		_basePosition += _basePositionTargetSpeed;
-		_correctTransformationTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
+		auto speedMultiplier = Math::normalizeVector(_basePositionTarget - _basePosition);
+		_basePosition += (speedMultiplier * _basePositionTargetSpeed);
+		_correctPositionTarget(_basePosition, _basePositionTarget, _basePositionTargetSpeed);
 	}
 
 	// Base rotation target
 	if (_baseRotation != _baseRotationTarget)
 	{
-		_baseRotation += _baseRotationTargetSpeed;
-		_correctTransformationTarget(_baseRotation, _baseRotationTarget, _baseRotationTargetSpeed);
+		auto difference = Math::calculateVectorDifference(_baseRotation, _baseRotationTarget);
+		Vec3 multiplier = Vec3(
+			((difference.x < 180.0f) ? 1.0f : -1.0f),
+			((difference.y < 180.0f) ? 1.0f : -1.0f),
+			((difference.z < 180.0f) ? 1.0f : -1.0f));
+		Vec3 speed = (Vec3(_baseRotationTargetSpeed) * multiplier);
+		_baseRotation.x += ((_baseRotation.x < _baseRotationTarget.x) ? speed.x : -speed.x);
+		_baseRotation.y += ((_baseRotation.y < _baseRotationTarget.y) ? speed.y : -speed.y);
+		_baseRotation.z += ((_baseRotation.z < _baseRotationTarget.z) ? speed.z : -speed.z);
+		_correctRotationTarget(_baseRotation, _baseRotationTarget, _baseRotationTargetSpeed);
 	}
 
 	// Base size target
 	if (_baseSize != _baseSizeTarget)
 	{
-		_baseSize += _baseSizeTargetSpeed;
-		_correctTransformationTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
+		auto speedMultiplier = Math::normalizeVector(_baseSizeTarget - _baseSize);
+		_baseSize += (speedMultiplier * _baseSizeTargetSpeed);
+		_correctSizeTarget(_baseSize, _baseSizeTarget, _baseSizeTargetSpeed);
 	}
 
 	// Iterate through parts
@@ -40,22 +50,32 @@ void ModelEntity::updateTransformation()
 		// Local position target
 		if (part.localPosition != part.localPositionTarget)
 		{
-			part.localPosition += part.localPositionTargetSpeed;
-			_correctTransformationTarget(part.localPosition, part.localPositionTarget, part.localPositionTargetSpeed);
+			auto speedMultiplier = Math::normalizeVector(part.localPositionTarget - part.localPosition);
+			part.localPosition += (speedMultiplier * part.localPositionTargetSpeed);
+			_correctPositionTarget(part.localPosition, part.localPositionTarget, part.localPositionTargetSpeed);
 		}
 
 		// Local rotation target
 		if (part.localRotation != part.localRotationTarget)
 		{
-			part.localRotation += part.localRotationTargetSpeed;
-			_correctTransformationTarget(part.localRotation, part.localRotationTarget, part.localRotationTargetSpeed);
+			auto difference = Math::calculateVectorDifference(part.localRotation, part.localRotationTarget);
+			Vec3 multiplier = Vec3(
+				((difference.x < 180.0f) ? 1.0f : -1.0f),
+				((difference.y < 180.0f) ? 1.0f : -1.0f),
+				((difference.z < 180.0f) ? 1.0f : -1.0f));
+			Vec3 speed = (Vec3(part.localRotationTargetSpeed) * multiplier);
+			part.localRotation.x += ((part.localRotation.x < part.localRotationTarget.x) ? speed.x : -speed.x);
+			part.localRotation.y += ((part.localRotation.y < part.localRotationTarget.y) ? speed.y : -speed.y);
+			part.localRotation.z += ((part.localRotation.z < part.localRotationTarget.z) ? speed.z : -speed.z);
+			_correctRotationTarget(part.localRotation, part.localRotationTarget, part.localRotationTargetSpeed);
 		}
 
 		// Local size target
 		if (part.localSize != part.localSizeTarget)
 		{
-			part.localSize += part.localSizeTargetSpeed;
-			_correctTransformationTarget(part.localSize, part.localSizeTarget, part.localSizeTargetSpeed);
+			auto speedMultiplier = Math::normalizeVector(part.localSizeTarget - part.localSize);
+			part.localSize += (speedMultiplier * part.localSizeTargetSpeed);
+			_correctSizeTarget(part.localSize, part.localSizeTarget, part.localSizeTargetSpeed);
 		}
 	}
 }
@@ -142,7 +162,7 @@ void ModelEntity::setNormalMap(TextureID value, const string& partID)
 
 void ModelEntity::setPosition(Vec3 value, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_basePosition = value;
 		_basePositionTarget = value;
@@ -156,21 +176,19 @@ void ModelEntity::setPosition(Vec3 value, const string& partID)
 
 void ModelEntity::setRotation(Vec3 value, const string& partID)
 {
-	value = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
-
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseRotation = value;
+		_baseRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localRotation = value;
+		_parts[_getPartIndex(partID)].localRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 	}
 }
 
 void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseRotationOrigin = value;
 	}
@@ -182,21 +200,19 @@ void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 
 void ModelEntity::setSize(Vec3 value, const string& partID)
 {
-	value = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseSize = value;
+		_baseSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localSize = value;
+		_parts[_getPartIndex(partID)].localSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 	}
 }
 
 void ModelEntity::move(Vec3 value, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_basePosition += value;
 		_basePositionTarget += value;
@@ -210,84 +226,88 @@ void ModelEntity::move(Vec3 value, const string& partID)
 
 void ModelEntity::rotate(Vec3 value, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseRotation += value;
+		_baseRotation = Vec3(fmodf(_baseRotation.x, 360.0f), fmodf(_baseRotation.y, 360.0f), fmodf(_baseRotation.z, 360.0f));
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localRotation += value;
+		Vec3& localRotation = _parts[_getPartIndex(partID)].localRotation;
+		localRotation += value;
+		localRotation = Vec3(fmodf(localRotation.x, 360.0f), fmodf(localRotation.y, 360.0f), fmodf(localRotation.z, 360.0f));
 	}
 }
 
 void ModelEntity::scale(Vec3 value, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_baseSize += value;
+		_baseSize = Vec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localSize += value;
+		Vec3& localSize = _parts[_getPartIndex(partID)].localSize;
+		localSize += value;
+		localSize = Vec3(max(0.0f, localSize.x), max(0.0f, localSize.y), max(0.0f, localSize.z));
 	}
 }
 
-void ModelEntity::moveTo(Vec3 target, Vec3 speed, const string& partID)
+void ModelEntity::moveTo(Vec3 target, float speed, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
 		_basePositionTarget = target;
-		_basePositionTargetSpeed = speed;
+		_basePositionTargetSpeed = fabsf(speed);
 	}
 	else
 	{
 		_parts[_getPartIndex(partID)].localPositionTarget = target;
-		_parts[_getPartIndex(partID)].localPositionTargetSpeed = speed;
+		_parts[_getPartIndex(partID)].localPositionTargetSpeed = fabsf(speed);
 	}
 }
 
-void ModelEntity::rotateTo(Vec3 target, Vec3 speed, const string& partID)
+void ModelEntity::rotateTo(Vec3 target, float speed, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseRotationTarget = target;
-		_baseRotationTargetSpeed = speed;
+		_baseRotationTarget = Vec3(fmodf(target.x, 360.0f), fmodf(target.y, 360.0f), fmodf(target.z, 360.0f));
+		_baseRotationTargetSpeed = fabsf(speed);
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localRotationTarget = target;
-		_parts[_getPartIndex(partID)].localRotationTargetSpeed = speed;
+		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(fmodf(target.x, 360.0f), fmodf(target.y, 360.0f), fmodf(target.z, 360.0f));
+		_parts[_getPartIndex(partID)].localRotationTargetSpeed = fabsf(speed);
 	}
 }
 
-void ModelEntity::scaleTo(Vec3 target, Vec3 speed, const string& partID)
+void ModelEntity::scaleTo(Vec3 target, float speed, const string& partID)
 {
-	if (_parts.size() == 1 || (_parts.size() > 1 && partID.empty()))
+	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseSizeTarget = target;
-		_baseSizeTargetSpeed = speed;
+		_baseSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+		_baseSizeTargetSpeed = fabsf(speed);
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localSizeTarget = target;
-		_parts[_getPartIndex(partID)].localSizeTargetSpeed = speed;
+		_parts[_getPartIndex(partID)].localSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+		_parts[_getPartIndex(partID)].localSizeTargetSpeed = fabsf(speed);
 	}
 }
 
 void ModelEntity::setColor(Vec3 value, const string& partID)
 {
-	value = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
-
 	if (partID.empty())
 	{
 		for (auto& part : _parts)
 		{
-			part.color = value;
+			part.color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 		}
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].color = value;
+		_parts[_getPartIndex(partID)].color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 	}
 }
 
@@ -298,18 +318,16 @@ void ModelEntity::setLevelOfDetailSize(Vec3 value)
 
 void ModelEntity::setInversion(float value, const string& partID)
 {
-	value = clamp(value, 0.0f, 1.0f);
-
 	if (partID.empty())
 	{
 		for (auto& part : _parts)
 		{
-			part.inversion = value;
+			part.inversion = clamp(value, 0.0f, 1.0f);
 		}
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].inversion = value;
+		_parts[_getPartIndex(partID)].inversion = clamp(value, 0.0f, 1.0f);
 	}
 }
 
@@ -456,4 +474,73 @@ void ModelEntity::setAlpha(float value)
 void ModelEntity::setUvRepeat(float value)
 {
 	_uvRepeat = max(0.0f, value);
+}
+
+void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)
+{
+	// Correct X
+	if (fabsf(target.x - current.x) <= speed)
+	{
+		current.x = target.x;
+	}
+
+	// Correct Y
+	if (fabsf(target.y - current.y) <= speed)
+	{
+		current.y = target.y;
+	}
+
+	// Correct Z
+	if (fabsf(target.z - current.z) <= speed)
+	{
+		current.z = target.z;
+	}
+}
+
+void ModelEntity::_correctRotationTarget(Vec3& current, Vec3 target, float speed)
+{
+	// Correct current
+	current = Vec3(fmodf(current.x, 360.0f), fmodf(current.y, 360.0f), fmodf(current.z, 360.0f));
+
+	// Correct X
+	if (Math::calculateAngleDifference(current.x, target.x) <= speed)
+	{
+		current.x = target.x;
+	}
+
+	// Correct Y
+	if (Math::calculateAngleDifference(current.y, target.y) <= speed)
+	{
+		current.y = target.y;
+	}
+
+	// Correct Z
+	if (Math::calculateAngleDifference(current.z, target.z) <= speed)
+	{
+		current.z = target.z;
+	}
+}
+
+void ModelEntity::_correctSizeTarget(Vec3& current, Vec3 target, float speed)
+{
+	// Correct current
+	current = Vec3(max(0.0f, current.x), max(0.0f, current.y), max(0.0f, current.z));
+
+	// Correct X
+	if (fabsf(target.x - current.x) <= speed)
+	{
+		current.x = target.x;
+	}
+
+	// Correct Y
+	if (fabsf(target.y - current.y) <= speed)
+	{
+		current.y = target.y;
+	}
+
+	// Correct Z
+	if (fabsf(target.z - current.z) <= speed)
+	{
+		current.z = target.z;
+	}
 }

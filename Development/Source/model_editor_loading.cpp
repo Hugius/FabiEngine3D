@@ -219,8 +219,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				const string newAabbID = (modelID + "@" + aabbIDs[i]);
 				_fe3d.aabbEntity_create(newAabbID);
 				_fe3d.aabbEntity_bindToModelEntity(newAabbID, modelID);
-				_fe3d.aabbEntity_setPosition(newAabbID, aabbPositions[i]);
-				_fe3d.aabbEntity_setSize(newAabbID, aabbSizes[i]);
+				_fe3d.aabbEntity_setLocalPosition(newAabbID, aabbPositions[i]);
+				_fe3d.aabbEntity_setLocalSize(newAabbID, aabbSizes[i]);
 			}
 
 			// Diffuse map

@@ -53,7 +53,7 @@ void SceneEditor::_updateSoundEditing()
 					if ((entityID != _activeSpeakerID) && (entityID != _selectedSpeakerID))
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
-						_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
+						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
 					}
 				}
 			}

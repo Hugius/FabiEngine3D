@@ -15,16 +15,17 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
-	void setPosition(Vec3 value);
-	void setSize(Vec3 value);
 	void setLocalPosition(Vec3 value);
 	void setLocalSize(Vec3 value);
+	void setPosition(Vec3 value);
+	void setSize(Vec3 value);
 	void move(Vec3 value);
 	void scale(Vec3 value);
-	void moveLocal(Vec3 value);
-	void scaleLocal(Vec3 value);
+	void moveTo(Vec3 target, float speed);
+	void scaleTo(Vec3 target, float speed);
 	void setParent(const string& ID, AabbParentType value);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
@@ -70,6 +71,12 @@ private:
 	Vec3 _localSize = Vec3(1.0f);
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _size = Vec3(1.0f);
+	Vec3 _positionTarget = Vec3(0.0f);
+	Vec3 _sizeTarget = Vec3(1.0f);
+
+	// Floats
+	float _positionTargetSpeed = 0.0f;
+	float _sizeTargetSpeed = 0.0f;
 
 	// Booleans
 	bool _isRaycastResponsive = true;

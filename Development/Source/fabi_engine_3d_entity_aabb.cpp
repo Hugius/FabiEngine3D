@@ -42,52 +42,44 @@ void FabiEngine3D::aabbEntity_setCollisionResponsive(const string& ID, bool resp
 	_core->_aabbEntityManager.getEntity(ID)->setCollisionResponsive(responsive);
 }
 
+void FabiEngine3D::aabbEntity_setLocalPosition(const string& ID, Vec3 position)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setLocalPosition(position);
+}
+
+void FabiEngine3D::aabbEntity_setLocalSize(const string& ID, Vec3 size)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setLocalSize(size);
+}
+
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setLocalPosition(position);
-	}
-	else
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
-	}
-}
-
-void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor)
-{
-	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
-	{
-		_core->_aabbEntityManager.getEntity(ID)->moveLocal(factor);
-	}
-	else
-	{
-		_core->_aabbEntityManager.getEntity(ID)->move(factor);
-	}
-}
-
-void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor)
-{
-	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
-	{
-		_core->_aabbEntityManager.getEntity(ID)->scaleLocal(factor);
-	}
-	else
-	{
-		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
-	}
+	_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
 }
 
 void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->hasParent())
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setLocalSize(size);
-	}
-	else
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setSize(size);
-	}
+	_core->_aabbEntityManager.getEntity(ID)->setSize(size);
+}
+
+void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor)
+{
+	_core->_aabbEntityManager.getEntity(ID)->move(factor);
+}
+
+void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor)
+{
+	_core->_aabbEntityManager.getEntity(ID)->scale(factor);
+}
+
+void FabiEngine3D::aabbEntity_moveTo(const string& ID, Vec3 target, float speed)
+{
+	_core->_aabbEntityManager.getEntity(ID)->moveTo(target, speed);
+}
+
+void FabiEngine3D::aabbEntity_scaleTo(const string& ID, Vec3 target, float speed)
+{
+	_core->_aabbEntityManager.getEntity(ID)->scaleTo(target, speed);
 }
 
 const Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)

@@ -51,7 +51,7 @@ void SceneEditor::_updateReflectionEditing()
 					if ((entityID != _activeCameraID) && (entityID != _selectedCameraID))
 					{
 						_fe3d.modelEntity_setSize(entityID, DEFAULT_CAMERA_SIZE);
-						_fe3d.aabbEntity_setSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
+						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
 					}
 				}
 			}

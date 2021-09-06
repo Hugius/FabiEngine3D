@@ -256,6 +256,14 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				}
 			}
 		}
+		else
+		{
+			// Update transformation
+			if (entity->isVisible())
+			{
+				entity->updateTransformation();
+			}
+		}
 
 		// Update transformation matrix
 		if (entity->isVisible())

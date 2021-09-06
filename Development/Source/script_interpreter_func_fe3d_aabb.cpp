@@ -74,28 +74,6 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_get_all_ids")
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.aabbEntity_getAllIDs();
-
-			// For every AABB
-			for (const auto& ID : result)
-			{
-				// Only non-preview AABBs
-				if (ID.front() != '@')
-				{
-					// Only non-bound AABBs
-					if (!_fe3d.aabbEntity_hasParent(ID))
-					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-					}
-				}
-			}
-		}
-	}
 	else if (functionName == "fe3d:aabb_place")
 	{
 		auto types =
@@ -224,8 +202,35 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				}
 
 				// Set position
-				_fe3d.aabbEntity_setPosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.aabbEntity_setPosition(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_set_size")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				// Cannot access a bound entity
+				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				{
+					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
+					return true;
+				}
+
+				// Set size
+				_fe3d.aabbEntity_setSize(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -249,57 +254,8 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				}
 
 				// Move position
-				_fe3d.aabbEntity_move(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:aabb_get_position")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing AABB ID
-			if (_validateFe3dAabbEntity(arguments[0].getString()))
-			{
-				// Cannot access a bound entity
-				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
-				{
-					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
-					return true;
-				}
-
-				// Get position
-				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString());
-
-				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:aabb_set_size")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing AABB ID
-			if (_validateFe3dAabbEntity(arguments[0].getString()))
-			{
-				// Cannot access a bound entity
-				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
-				{
-					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
-					return true;
-				}
-
-				// Set size
-				_fe3d.aabbEntity_setSize(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.aabbEntity_move(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -324,16 +280,17 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				}
 
 				// Scale size
-				_fe3d.aabbEntity_scale(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.aabbEntity_scale(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_get_size")
+	else if (functionName == "fe3d:aabb_move_to")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -348,11 +305,38 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 					return true;
 				}
 
-				// Get size
-				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString());
+				// Move position
+				_fe3d.aabbEntity_moveTo(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_scale_to")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				// Cannot access a bound entity
+				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				{
+					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
+					return true;
+				}
+
+				// Scale size
+				_fe3d.aabbEntity_scaleTo(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
@@ -403,6 +387,78 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_get_position")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				// Cannot access a bound entity
+				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				{
+					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
+					return true;
+				}
+
+				// Get position
+				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString());
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_get_size")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				// Cannot access a bound entity
+				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				{
+					_throwScriptError("cannot access AABB with ID \"" + arguments[0].getString() + "\": bound to a model or billboard!");
+					return true;
+				}
+
+				// Get size
+				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString());
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_get_all_ids")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.aabbEntity_getAllIDs();
+
+			// For every AABB
+			for (const auto& ID : result)
+			{
+				// Only non-preview AABBs
+				if (ID.front() != '@')
+				{
+					// Only non-bound AABBs
+					if (!_fe3d.aabbEntity_hasParent(ID))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
 			}
 		}
 	}

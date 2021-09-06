@@ -215,8 +215,8 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
 		_fe3d.aabbEntity_create(newAabbID);
 		_fe3d.aabbEntity_bindToModelEntity(newAabbID, newID);
-		_fe3d.aabbEntity_setPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
-		_fe3d.aabbEntity_setSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
+		_fe3d.aabbEntity_setLocalPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
+		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
 
 	// Diffuse map

@@ -43,7 +43,7 @@ void SceneEditor::_updateReflectionPlacing()
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
 				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-				_fe3d.aabbEntity_setSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
+				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 				// Create reflection
@@ -115,7 +115,7 @@ void SceneEditor::_updateReflectionPlacing()
 							// Bind AABB
 							_fe3d.aabbEntity_create(newModelID);
 							_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-							_fe3d.aabbEntity_setSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
+							_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 							_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 							// Create reflection

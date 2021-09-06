@@ -439,10 +439,14 @@ public:
 	void aabbEntity_setVisible(const string& ID, bool isVisible);
 	void aabbEntity_setRaycastResponsive(const string& ID, bool responsive);
 	void aabbEntity_setCollisionResponsive(const string& ID, bool responsive);
+	void aabbEntity_setLocalPosition(const string& ID, Vec3 position);
+	void aabbEntity_setLocalSize(const string& ID, Vec3 size);
 	void aabbEntity_setPosition(const string& ID, Vec3 position);
 	void aabbEntity_setSize(const string& ID, Vec3 size);
 	void aabbEntity_move(const string& ID, Vec3 factor);
 	void aabbEntity_scale(const string& ID, Vec3 factor);
+	void aabbEntity_moveTo(const string& ID, Vec3 target, float speed);
+	void aabbEntity_scaleTo(const string& ID, Vec3 target, float speed);
 
 	// AABB entity interface - getters
 	const vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);

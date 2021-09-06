@@ -229,7 +229,7 @@ void ModelEditor::_updateAabbMenu()
 				}
 
 				// Apply new size
-				_fe3d.aabbEntity_setPosition(_currentModelID + "@" + _currentAabbID, newPosition);
+				_fe3d.aabbEntity_setLocalPosition(_currentModelID + "@" + _currentAabbID, newPosition);
 			}
 
 			// Update resizing through cursor
@@ -264,7 +264,7 @@ void ModelEditor::_updateAabbMenu()
 				}
 
 				// Apply new size
-				_fe3d.aabbEntity_setSize(_currentModelID + "@" + _currentAabbID, newSize);
+				_fe3d.aabbEntity_setLocalSize(_currentModelID + "@" + _currentAabbID, newSize);
 			}
 		}
 	}

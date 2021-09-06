@@ -73,14 +73,12 @@ void ImageEntity::move(Vec2 value)
 void ImageEntity::rotate(float value)
 {
 	_rotation += value;
-
 	_rotation = fmodf(_rotation, 360.0f);
 }
 
 void ImageEntity::scale(Vec2 value)
 {
 	_size += value;
-
 	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
 }
 

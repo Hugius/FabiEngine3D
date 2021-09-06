@@ -49,7 +49,7 @@ void SceneEditor::_updateLightPlacing()
 					// Bind AABB
 					_fe3d.aabbEntity_create(newModelID);
 					_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-					_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+					_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 					_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 					// Create light
@@ -128,7 +128,7 @@ void SceneEditor::_updateLightPlacing()
 							// Bind AABB
 							_fe3d.aabbEntity_create(newModelID);
 							_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
-							_fe3d.aabbEntity_setSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
+							_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 							_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 							// Create light

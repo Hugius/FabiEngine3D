@@ -70,6 +70,21 @@ void FabiEngine3D::imageEntity_scale(const string& ID, Vec2 size)
 	_core->_imageEntityManager.getEntity(ID)->scale(size);
 }
 
+void FabiEngine3D::imageEntity_moveTo(const string& ID, Vec2 target, float speed)
+{
+	_core->_imageEntityManager.getEntity(ID)->moveTo(target, speed);
+}
+
+void FabiEngine3D::imageEntity_rotateTo(const string& ID, float target, float speed)
+{
+	_core->_imageEntityManager.getEntity(ID)->rotateTo(target, speed);
+}
+
+void FabiEngine3D::imageEntity_scaleTo(const string& ID, Vec2 target, float speed)
+{
+	_core->_imageEntityManager.getEntity(ID)->scaleTo(target, speed);
+}
+
 void FabiEngine3D::imageEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_imageEntityManager.getEntity(ID)->setColor(color);

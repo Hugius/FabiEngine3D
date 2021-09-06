@@ -202,7 +202,7 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
 			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
-		size = size * sizeMultiplier;
+		size *= sizeMultiplier;
 	}
 
 	return size;
@@ -212,9 +212,9 @@ Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
 {
 	if (!_fe3d.application_isExported())
 	{
-		auto sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
-			Vec2(_fe3d.misc_getViewportSize());
-		size = size * sizeMultiplier;
+		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
+		size /= sizeMultiplier;
 	}
 
 	return size;

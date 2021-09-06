@@ -141,6 +141,21 @@ void FabiEngine3D::textEntity_scale(const string& ID, Vec2 size)
 	_core->_textEntityManager.getEntity(ID)->scale(size);
 }
 
+void FabiEngine3D::textEntity_moveTo(const string& ID, Vec2 target, float speed)
+{
+	_core->_textEntityManager.getEntity(ID)->moveTo(target, speed);
+}
+
+void FabiEngine3D::textEntity_rotateTo(const string& ID, float target, float speed)
+{
+	_core->_textEntityManager.getEntity(ID)->rotateTo(target, speed);
+}
+
+void FabiEngine3D::textEntity_scaleTo(const string& ID, Vec2 target, float speed)
+{
+	_core->_textEntityManager.getEntity(ID)->scaleTo(target, speed);
+}
+
 void FabiEngine3D::textEntity_setMinPosition(const string& ID, Vec2 minPos)
 {
 	_core->_textEntityManager.getEntity(ID)->setMinPosition(minPos);

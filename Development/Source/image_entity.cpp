@@ -6,6 +6,63 @@
 using std::max;
 using std::clamp;
 
+void ImageEntity::updateTransformation()
+{
+	// Position target
+	if (_position != _positionTarget)
+	{
+		// Update position
+		auto speedMultiplier = Math::normalizeVector(_positionTarget - _position);
+		_position += (speedMultiplier * _positionTargetSpeed);
+
+		// Correct position
+		if (fabsf(_positionTarget.x - _position.x) <= _positionTargetSpeed)
+		{
+			_position.x = _positionTarget.x;
+		}
+		if (fabsf(_positionTarget.y - _position.y) <= _positionTargetSpeed)
+		{
+			_position.y = _positionTarget.y;
+		}
+	}
+
+	// Rotation target
+	if (_rotation != _rotationTarget)
+	{
+		// Update rotation
+		auto difference = fabsf(_rotation - _rotationTarget);
+		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
+		float speed = (_rotationTargetSpeed * multiplier);
+		_rotation += ((_rotation < _rotationTarget) ? speed : -speed);
+
+		// Correct rotation
+		_rotation = fmodf(_rotation, 360.0f);
+		if (Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
+		{
+			_rotation = _rotationTarget;
+		}
+	}
+
+	// Size target
+	if (_size != _sizeTarget)
+	{
+		// Update size
+		auto speedMultiplier = Math::normalizeVector(_sizeTarget - _size);
+		_size += (speedMultiplier * _sizeTargetSpeed);
+
+		// Correct size
+		_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+		if (fabsf(_sizeTarget.x - _size.x) <= _sizeTargetSpeed)
+		{
+			_size.x = _positionTarget.x;
+		}
+		if (fabsf(_sizeTarget.y - _size.y) <= _sizeTargetSpeed)
+		{
+			_size.y = _positionTarget.y;
+		}
+	}
+}
+
 void ImageEntity::updateTransformationMatrix()
 {
 	Matrix44 translationMatrix = Math::createTranslationMatrix(_position.x, _position.y, 0.0f);
@@ -53,33 +110,59 @@ void ImageEntity::setAlpha(float value)
 void ImageEntity::setPosition(Vec2 value)
 {
 	_position = value;
+	_positionTarget = value;
 }
 
 void ImageEntity::setRotation(float value)
 {
 	_rotation = fmodf(value, 360.0f);
+	_rotationTarget = fmodf(value, 360.0f);
 }
 
 void ImageEntity::setSize(Vec2 value)
 {
 	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
+	_sizeTarget = Vec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 void ImageEntity::move(Vec2 value)
 {
 	_position += value;
+	_positionTarget += value;
 }
 
 void ImageEntity::rotate(float value)
 {
 	_rotation += value;
+	_rotationTarget += value;
 	_rotation = fmodf(_rotation, 360.0f);
+	_rotationTarget = fmodf(_rotation, 360.0f);
 }
 
 void ImageEntity::scale(Vec2 value)
 {
 	_size += value;
+	_sizeTarget += value;
 	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+	_sizeTarget = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+}
+
+void ImageEntity::moveTo(Vec2 target, float speed)
+{
+	_positionTarget = target;
+	_positionTargetSpeed = speed;
+}
+
+void ImageEntity::rotateTo(float target, float speed)
+{
+	_rotationTarget = target;
+	_rotationTargetSpeed = speed;
+}
+
+void ImageEntity::scaleTo(Vec2 target, float speed)
+{
+	_sizeTarget = target;
+	_sizeTargetSpeed = speed;
 }
 
 void ImageEntity::setMinPosition(Vec2 value)

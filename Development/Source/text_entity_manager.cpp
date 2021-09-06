@@ -91,14 +91,20 @@ void TextEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getTextEntities())
 	{
-		// Update entity
-		if (entity->isDynamic())
+		if (entity->isVisible())
 		{
-			entity->updateCharacterEntities(); // Individual characters
-		}
-		else
-		{
-			entity->updateTransformationMatrix(); // Whole word
+			// Update transformation
+			entity->updateTransformation();
+
+			// Update
+			if (entity->isDynamic())
+			{
+				entity->updateCharacterEntities();
+			}
+			else
+			{
+				entity->updateTransformationMatrix();
+			}
 		}
 	}
 }

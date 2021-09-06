@@ -528,16 +528,19 @@ public:
 	void imageEntity_delete(const string& ID);
 	void imageEntity_setVisible(const string& ID, bool isVisible);
 	void imageEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void imageEntity_setColor(const string& ID, Vec3 color);
+	void imageEntity_setAlpha(const string& ID, float alpha);
+	void imageEntity_setMinPosition(const string& ID, Vec2 minPos);
+	void imageEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 	void imageEntity_setPosition(const string& ID, Vec2 position);
 	void imageEntity_setRotation(const string& ID, float rotation);
 	void imageEntity_setSize(const string& ID, Vec2 size);
 	void imageEntity_move(const string& ID, Vec2 position);
 	void imageEntity_rotate(const string& ID, float rotation);
 	void imageEntity_scale(const string& ID, Vec2 size);
-	void imageEntity_setColor(const string& ID, Vec3 color);
-	void imageEntity_setAlpha(const string& ID, float alpha);
-	void imageEntity_setMinPosition(const string& ID, Vec2 minPos);
-	void imageEntity_setMaxPosition(const string& ID, Vec2 maxPos);
+	void imageEntity_moveTo(const string& ID, Vec2 target, float speed);
+	void imageEntity_rotateTo(const string& ID, float target, float speed);
+	void imageEntity_scaleTo(const string& ID, Vec2 target, float speed);
 	void imageEntity_setMirroredHorizontally(const string& ID, bool mirrored);
 	void imageEntity_setMirroredVertically(const string& ID, bool mirrored);
 	void imageEntity_startSpriteAnimation(const string& ID, int loops);
@@ -584,14 +587,17 @@ public:
 	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth = -1.0f, float charHeight = -1.0f);
 	void textEntity_setColor(const string& ID, Vec3 color);
 	void textEntity_setAlpha(const string& ID, float alpha);
+	void textEntity_setMinPosition(const string& ID, Vec2 minPos);
+	void textEntity_setMaxPosition(const string& ID, Vec2 maxPos);
 	void textEntity_setPosition(const string& ID, Vec2 position);
 	void textEntity_setRotation(const string& ID, float rotation);
 	void textEntity_setSize(const string& ID, Vec2 size);
 	void textEntity_move(const string& ID, Vec2 position);
 	void textEntity_rotate(const string& ID, float rotation);
 	void textEntity_scale(const string& ID, Vec2 size);
-	void textEntity_setMinPosition(const string& ID, Vec2 minPos);
-	void textEntity_setMaxPosition(const string& ID, Vec2 maxPos);
+	void textEntity_moveTo(const string& ID, Vec2 target, float speed);
+	void textEntity_rotateTo(const string& ID, float target, float speed);
+	void textEntity_scaleTo(const string& ID, Vec2 target, float speed);
 
 	// Text interface - getters
 	const vector<string> textEntity_getAllIDs();

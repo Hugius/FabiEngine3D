@@ -77,9 +77,9 @@ void ImageEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getImageEntities())
 	{
-		// Update transformation matrix
 		if (entity->isVisible())
 		{
+			entity->updateTransformation();
 			entity->updateTransformationMatrix();
 		}
 	}

@@ -13,22 +13,26 @@ public:
 	using BaseEntity::BaseEntity;
 
 	// Voids
+	void updateTransformation();
 	void updateTransformationMatrix();
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(TextureID value);
 	void setDiffuseMapPath(const string& value);
-	void setColor(Vec3 value);
 	void setMirroredHorizontally(bool value);
 	void setMirroredVertically(bool value);
 	void setAlpha(float value);
+	void setColor(Vec3 value);
+	void setMinPosition(Vec2 value);
+	void setMaxPosition(Vec2 value);
 	void setPosition(Vec2 value);
 	void setRotation(float value);
 	void setSize(Vec2 value);
 	void move(Vec2 value);
 	void rotate(float value);
 	void scale(Vec2 value);
-	void setMinPosition(Vec2 value);
-	void setMaxPosition(Vec2 value);
+	void moveTo(Vec2 target, float speed);
+	void rotateTo(float target, float speed);
+	void scaleTo(Vec2 target, float speed);
 	void setDepth(unsigned int value);
 	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
@@ -99,13 +103,19 @@ private:
 
 	// Vectors
 	Vec3 _color = Vec3(1.0f);
-	Vec2 _position = Vec2(0.0f);
 	Vec2 _minPosition = Vec2(-1.0f);
 	Vec2 _maxPosition = Vec2(1.0f);
+	Vec2 _position = Vec2(0.0f);
 	Vec2 _size = Vec2(1.0f);
+	Vec2 _positionTarget = Vec2(0.0f);
+	Vec2 _sizeTarget = Vec2(1.0f);
 
 	// Floats
 	float _rotation = 0.0f;
+	float _rotationTarget = 0.0f;
+	float _positionTargetSpeed = 0.0f;
+	float _rotationTargetSpeed = 0.0f;
+	float _sizeTargetSpeed = 0.0f;
 	float _alpha = 1.0f;
 
 	// Integers

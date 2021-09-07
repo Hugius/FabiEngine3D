@@ -20,7 +20,6 @@ public:
 	void setSpeed(Vec2 value);
 	void setRippleOffset(Vec2 value);
 	void setWaveOffset(Vec2 value);
-	void setPosition(Vec3 value);
 	void setColor(Vec3 value);
 	void setDudvMap(TextureID value);
 	void setNormalMap(TextureID value);
@@ -32,6 +31,7 @@ public:
 	void setWaveHeight(float value);
 	void setSpecularLightingFactor(float value);
 	void setSpecularLightingIntensity(float value);
+	void setHeight(float value);
 	void setSize(float value);
 	void setTransparency(float value);
 	void setWaving(bool value);
@@ -45,19 +45,19 @@ public:
 	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
 	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
 
-	// Vectors
-	const Vec2 getSpeed();
-	const Vec2 getRippleOffset();
-	const Vec2 getWaveOffset();
-	const Vec3 getPosition();
-	const Vec3 getColor();
-
 	// Strings
 	const string& getDudvMapPath();
 	const string& getNormalMapPath();
 	const string& getDisplacementMapPath();
 
+	// Vectors
+	const Vec3 getColor();
+	const Vec2 getSpeed();
+	const Vec2 getRippleOffset();
+	const Vec2 getWaveOffset();
+
 	// Floats
+	const float getHeight();
 	const float getUvRepeat();
 	const float getWaveHeight();
 	const float getSpecularLightingFactor();
@@ -86,7 +86,6 @@ public:
 
 private:
 	// Vectors
-	Vec3 _position = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 	Vec2 _speed = Vec2(0.0f);
 	Vec2 _rippleOffset = Vec2(0.0f);
@@ -98,6 +97,7 @@ private:
 	string _displacementMapPath = "";
 
 	// Floats
+	float _height = 0.0f;
 	float _size = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _waveHeight = 0.0f;

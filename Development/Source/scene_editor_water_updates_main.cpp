@@ -39,6 +39,19 @@ void SceneEditor::_updateWaterMenu()
 			}
 		}
 
+		// Check if input received
+		if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("up")->isHovered())
+			{
+				_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+			}
+			else if (screen->getButton("down")->isHovered())
+			{
+				_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
+			}
+		}
+
 		// Update water choosing
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
@@ -63,6 +76,8 @@ void SceneEditor::_updateWaterMenu()
 		}
 
 		// Update buttons hoverability
+		screen->getButton("up")->setHoverable(_currentWaterID != "");
+		screen->getButton("down")->setHoverable(_currentWaterID != "");
 		screen->getButton("delete")->setHoverable(_currentWaterID != "");
 
 		// Update water selection

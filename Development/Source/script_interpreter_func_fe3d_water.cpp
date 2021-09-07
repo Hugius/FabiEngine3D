@@ -65,7 +65,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			// Validate water existence
 			if (_validateFe3dWaterEntity())
 			{
-				auto result = _fe3d.waterEntity_getPosition(_fe3d.waterEntity_getSelectedID()).y;
+				auto result = _fe3d.waterEntity_getHeight(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}

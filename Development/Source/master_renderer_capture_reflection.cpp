@@ -382,7 +382,7 @@ void MasterRenderer::_captureWaterReflections()
 	if ((waterEntity != nullptr) && waterEntity->isReflective())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (_camera.getPosition().y - waterEntity->getPosition().y);
+		float cameraDistance = (_camera.getPosition().y - waterEntity->getHeight());
 
 		// Start capturing reflections
 		_waterReflectionCaptureBuffer.bind();
@@ -460,7 +460,7 @@ void MasterRenderer::_captureWaterReflections()
 		}
 
 		// Calculate clipping plane
-		const float clippingHeight = -(waterEntity->getPosition().y);
+		const float clippingHeight = -(waterEntity->getHeight());
 		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 		_renderBus.setClippingPlane(clippingPlane);
 

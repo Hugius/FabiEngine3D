@@ -132,16 +132,19 @@ void BillboardEntity::setDiffuseMap(TextureID value)
 void BillboardEntity::setPosition(Vec3 value)
 {
 	_position = value;
+	_positionTarget = value;
 }
 
 void BillboardEntity::setRotation(Vec3 value)
 {
 	_rotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+	_rotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
 }
 
 void BillboardEntity::setSize(Vec2 value)
 {
 	_size = Vec2(max(0.0f, value.x), max(0.0f, value.y));
+	_sizeTarget = Vec2(max(0.0f, value.x), max(0.0f, value.y));
 }
 
 void BillboardEntity::move(Vec3 value)
@@ -180,7 +183,7 @@ void BillboardEntity::rotateTo(Vec3 target, float speed)
 
 void BillboardEntity::scaleTo(Vec2 target, float speed)
 {
-	_sizeTarget = target;
+	_sizeTarget = Vec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 

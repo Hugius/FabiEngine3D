@@ -106,18 +106,18 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		}
 
 		// Check if camera is underwater
-		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getPosition().y + entity->getWaveHeight()));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getPosition().x - (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < entity->getPosition().x + (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > entity->getPosition().z - (entity->getSize() / 2.0f));
-		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getPosition().z + (entity->getSize() / 2.0f));
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getHeight() + entity->getWaveHeight()));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < (entity->getSize() / 2.0f));
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader.uploadUniform("u_waveHeight", entity->getWaveHeight());
-		_shader.uploadUniform("u_positionOffset", entity->getPosition());
+		_shader.uploadUniform("u_heightOffset", entity->getHeight());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
 		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());

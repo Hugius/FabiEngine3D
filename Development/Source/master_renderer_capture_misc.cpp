@@ -15,7 +15,7 @@ void MasterRenderer::_captureWaterRefractions()
 
 		// Shadows are not needed if no models are rendered, so they should not appear
 		bool wasShadowsEnabled = _renderBus.isShadowsEnabled();
-		if (waterEntity->getQuality() == WaterQuality::SKY || waterEntity->getQuality() == WaterQuality::SKY_TERRAIN)
+		if ((waterEntity->getQuality() == WaterQuality::SKY) || (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN))
 		{
 			_renderBus.setShadowsEnabled(false);
 		}
@@ -31,22 +31,22 @@ void MasterRenderer::_captureWaterRefractions()
 
 		// Check if camera underwater
 		const float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
-		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getPosition().y + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getPosition().x - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getPosition().x + (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getPosition().z - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getPosition().z + (waterEntity->getSize() / 2.0f)));
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
 
 		// Calculate clipping plane
 		if (isUnderWater)
 		{
-			const float clippingHeight = -(waterEntity->getPosition().y);
+			const float clippingHeight = -(waterEntity->getHeight());
 			const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}
 		else
 		{
-			const float clippingHeight = (waterEntity->getPosition().y + waveHeight);
+			const float clippingHeight = (waterEntity->getHeight() + waveHeight);
 			const Vec4 clippingPlane = Vec4(0.0f, -1.0f, 0.0f, clippingHeight);
 			_renderBus.setClippingPlane(clippingPlane);
 		}
@@ -63,8 +63,8 @@ void MasterRenderer::_captureWaterRefractions()
 		}
 
 		// Render MODEL entities
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
-			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
+		if ((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS) ||
+			(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS))
 		{
 			glEnable(GL_CLIP_DISTANCE2);
 			_renderModelEntities();

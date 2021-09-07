@@ -46,11 +46,13 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuTerrain")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuWater
-	positions = VPC::calculateButtonPositions(3, CH);
+	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("sceneEditorMenuWater");
 	leftWindow->getScreen("sceneEditorMenuWater")->createButton("choose", Vec2(0.0f, positions[0]), Vec2(TW("Choose Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Choose Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuWater")->createButton("delete", Vec2(0.0f, positions[1]), Vec2(TW("Delete Water"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete Water", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("sceneEditorMenuWater")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuWater")->createButton("up", Vec2(0.0f, positions[2]), Vec2(TW("Move Up"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Move Up", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuWater")->createButton("down", Vec2(0.0f, positions[3]), Vec2(TW("Move Down"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Move Down", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("sceneEditorMenuWater")->createButton("back", Vec2(0.0f, positions[4]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuModel
 	positions = VPC::calculateButtonPositions(3, CH);

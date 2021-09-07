@@ -5,9 +5,9 @@
 using std::max;
 using std::clamp;
 
-void WaterEntity::setPosition(Vec3 value)
+void WaterEntity::setHeight(float value)
 {
-	_position = value;
+	_height = value;
 }
 
 void WaterEntity::setColor(Vec3 value)
@@ -135,9 +135,9 @@ void WaterEntity::setTransparency(float value)
 	_transparency = max(0.0f, value);
 }
 
-const Vec3 WaterEntity::getPosition()
+const float WaterEntity::getHeight()
 {
-	return _position;
+	return _height;
 }
 
 const Vec3 WaterEntity::getColor()

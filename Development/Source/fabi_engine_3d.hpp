@@ -215,7 +215,7 @@ public:
 	void waterEntity_setVisible(const string& ID, bool isVisible);
 	void waterEntity_select(const string& ID);
 	void waterEntity_setSpeed(const string& ID, Vec2 speed);
-	void waterEntity_setPosition(const string& ID, Vec3 position);
+	void waterEntity_setHeight(const string& ID, float height);
 	void waterEntity_setSize(const string& ID, float size);
 	void waterEntity_setWaving(const string& ID, bool enabled);
 	void waterEntity_setRippling(const string& ID, bool enabled);
@@ -240,9 +240,9 @@ public:
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	const string waterEntity_getSelectedID();
-	const Vec3 waterEntity_getPosition(const string& ID);
 	const Vec3 waterEntity_getColor(const string& ID);
 	const Vec2 waterEntity_getSpeed(const string& ID);
+	const float waterEntity_getHeight(const string& ID);
 	const float waterEntity_getSize(const string& ID);
 	const float waterEntity_getUvRepeat(const string& ID);
 	const float waterEntity_getWaveHeight(const string& ID);

@@ -110,9 +110,9 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	{
 		// Values
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
-		Vec3 color, position;
+		Vec3 color;
 		Vec2 speed;
-		float size, uvRepeat, waveHeight, transparency, specularFactor, specularIntensity;
+		float height, size, uvRepeat, waveHeight, transparency, specularFactor, specularIntensity;
 		unsigned int quality;
 		bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
 
@@ -134,9 +134,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			color.g >>
 			color.b >>
 			size >>
-			position.x >>
-			position.y >>
-			position.z >>
+			height >>
 			uvRepeat >>
 			waveHeight >>
 			quality >>
@@ -182,7 +180,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			}
 
 			// Set properties
-			_fe3d.waterEntity_setPosition(waterID, position);
+			_fe3d.waterEntity_setHeight(waterID, height);
 			_fe3d.waterEntity_setSize(waterID, size);
 			_fe3d.waterEntity_setWaving(waterID, isWaving);
 			_fe3d.waterEntity_setRippling(waterID, isRippling);
@@ -239,7 +237,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		auto normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
 		auto displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
 		auto color = _fe3d.waterEntity_getColor(waterID);
-		auto position = _fe3d.waterEntity_getPosition(waterID);
+		auto height = _fe3d.waterEntity_getHeight(waterID);
 		auto speed = _fe3d.waterEntity_getSpeed(waterID);
 		auto size = _fe3d.waterEntity_getSize(waterID);
 		auto uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
@@ -277,9 +275,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 			color.g << " " <<
 			color.b << " " <<
 			size << " " <<
-			position.x << " " <<
-			position.y << " " <<
-			position.z << " " <<
+			height << " " <<
 			uvRepeat << " " <<
 			waveHeight << " " <<
 			quality << " " <<

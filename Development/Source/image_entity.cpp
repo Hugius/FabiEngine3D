@@ -136,7 +136,7 @@ void ImageEntity::rotate(float value)
 	_rotation += value;
 	_rotationTarget += value;
 	_rotation = fmodf(_rotation, 360.0f);
-	_rotationTarget = fmodf(_rotation, 360.0f);
+	_rotationTarget = fmodf(_rotationTarget, 360.0f);
 }
 
 void ImageEntity::scale(Vec2 value)
@@ -144,7 +144,7 @@ void ImageEntity::scale(Vec2 value)
 	_size += value;
 	_sizeTarget += value;
 	_size = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
-	_sizeTarget = Vec2(max(0.0f, _size.x), max(0.0f, _size.y));
+	_sizeTarget = Vec2(max(0.0f, _sizeTarget.x), max(0.0f, _sizeTarget.y));
 }
 
 void ImageEntity::moveTo(Vec2 target, float speed)
@@ -155,13 +155,13 @@ void ImageEntity::moveTo(Vec2 target, float speed)
 
 void ImageEntity::rotateTo(float target, float speed)
 {
-	_rotationTarget = target;
+	_rotationTarget = fmodf(target, 360.0f);
 	_rotationTargetSpeed = speed;
 }
 
 void ImageEntity::scaleTo(Vec2 target, float speed)
 {
-	_sizeTarget = target;
+	_sizeTarget = Vec2(max(0.0f, target.x), max(0.0f, target.y));
 	_sizeTargetSpeed = speed;
 }
 

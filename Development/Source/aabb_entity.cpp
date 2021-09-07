@@ -93,11 +93,13 @@ void AabbEntity::setCollided(bool value)
 void AabbEntity::setPosition(Vec3 value)
 {
 	_position = value;
+	_positionTarget = value;
 }
 
 void AabbEntity::setSize(Vec3 value)
 {
 	_size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_sizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void AabbEntity::move(Vec3 value)

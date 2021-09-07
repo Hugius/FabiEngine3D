@@ -16,20 +16,20 @@ void MasterRenderer::_captureSceneDepth()
 		// Check if camera is underwater
 		auto waterEntity = _entityBus->getWaterEntity();
 		float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
-		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getPosition().y + waveHeight));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getPosition().x - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getPosition().x + (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getPosition().z - (waterEntity->getSize() / 2.0f)));
-		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getPosition().z + (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z > (waterEntity->getSize() / 2.0f)));
+		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().z < (waterEntity->getSize() / 2.0f)));
 		
 		// Determine clipping Y based on being underwater or not
 		if (isUnderWater)
 		{
-			clippingY = waterEntity->getPosition().y;
+			clippingY = waterEntity->getHeight();
 		}
 		else
 		{
-			clippingY = (waterEntity->getPosition().y + waveHeight);
+			clippingY = (waterEntity->getHeight() + waveHeight);
 		}
 	}
 	

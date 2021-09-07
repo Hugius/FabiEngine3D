@@ -77,7 +77,7 @@ void BillboardEntityManager::update()
 
 				// Apply rotation angles
 				rotation.z = (degreesZ) * static_cast<float>(facingX);
-				rotation.y = (-(degreesY)-90.0f) * static_cast<float>(facingY);
+				rotation.y = (-degreesY - 90.0f) * static_cast<float>(facingY);
 
 				// Update rotation
 				entity->setRotation(rotation);

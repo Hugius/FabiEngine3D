@@ -24,7 +24,7 @@ public:
 	}
 
 private:
-	void _createProgram(const char* vShaderCode, const char* fShaderCode);
+	void _createProgram(const char* vertexShaderCode, const char* fragmentShaderCode);
 	void _uploadUniform(const UniformID& uniformID, const bool& data);
 	void _uploadUniform(const UniformID& uniformID, const int& data);
 	void _uploadUniform(const UniformID& uniformID, const float& data);

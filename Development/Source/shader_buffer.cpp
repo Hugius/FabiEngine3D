@@ -57,7 +57,7 @@ ShaderBuffer::ShaderBuffer(const string& vertexFilename, const string& fragmentF
 	_createProgram(vShaderCode, fShaderCode);
 }
 
-void ShaderBuffer::_createProgram(const char* vShaderCode, const char* fShaderCode)
+void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* fragmentShaderCode)
 {
 	// Compile the shaders
 	unsigned int vertex, fragment;
@@ -66,7 +66,7 @@ void ShaderBuffer::_createProgram(const char* vShaderCode, const char* fShaderCo
 
 	// Vertex shader
 	vertex = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex, 1, &vShaderCode, nullptr);
+	glShaderSource(vertex, 1, &vertexShaderCode, nullptr);
 	glCompileShader(vertex);
 
 	// Errors vertex shader
@@ -79,7 +79,7 @@ void ShaderBuffer::_createProgram(const char* vShaderCode, const char* fShaderCo
 
 	// Fragment shader
 	fragment = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment, 1, &fShaderCode, nullptr);
+	glShaderSource(fragment, 1, &fragmentShaderCode, nullptr);
 	glCompileShader(fragment);
 
 	// Errors fragment shader
@@ -122,7 +122,7 @@ UniformID ShaderBuffer::_getUniformID(const string& uniformID)
 		auto uniform = glGetUniformLocation(_program, uniformID.c_str());
 		if (uniform == -1)
 		{
-			Logger::throwError("ShaderBuffer::_getUniformID");
+			Logger::throwError("ShaderBuffer::_getUniformID ---> ", uniformID);
 		}
 
 		// Cache uniform

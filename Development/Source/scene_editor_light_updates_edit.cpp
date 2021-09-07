@@ -85,28 +85,28 @@ void SceneEditor::_updateLightEditing()
 			// Activate screen
 			rightWindow->setActiveScreen("lightPropertiesMenu");
 
-			// Check if input received
+			// Button management
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("position")->isHovered())
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if (screen->getButton("radius")->isHovered())
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(false);
 					screen->getButton("color")->setHoverable(true);
 				}
-				else if (screen->getButton("color")->isHovered())
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(false);
 				}
-				else if (screen->getButton("shape")->isHovered())
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shape")->isHovered())
 				{
 					if (_fe3d.lightEntity_getShape(activeLightID) == LightShape::CIRCLE)
 					{
@@ -117,7 +117,7 @@ void SceneEditor::_updateLightEditing()
 						_fe3d.lightEntity_setShape(activeLightID, LightShape::CIRCLE);
 					}
 				}
-				else if (screen->getButton("delete")->isHovered())
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeLampID);
 					_fe3d.lightEntity_delete(activeLightID);

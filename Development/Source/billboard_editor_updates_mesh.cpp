@@ -6,7 +6,7 @@ void BillboardEditor::_updateMeshMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "billboardEditorMenuMesh")
 	{
 		// Temporary values
@@ -17,44 +17,41 @@ void BillboardEditor::_updateMeshMenu()
 		auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
 		auto isBright = _fe3d.billboardEntity_isBright(_currentBillboardID);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("size")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("facingX")->isHovered())
-			{
-				isFacingX = !isFacingX;
-				_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
-			}
-			else if (screen->getButton("facingY")->isHovered())
-			{
-				isFacingY = !isFacingY;
-				_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
-			}
-			else if (screen->getButton("isShadowed")->isHovered())
-			{
-				isShadowed = !isShadowed;
-				_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
-			}
-			else if (screen->getButton("isReflected")->isHovered())
-			{
-				isReflected = !isReflected;
-				_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
-			}
-			else if (screen->getButton("isBright")->isHovered())
-			{
-				isBright = !isBright;
-				_fe3d.billboardEntity_setBright(_currentBillboardID, isBright);
-			}
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("facingX")->isHovered())
+		{
+			isFacingX = !isFacingX;
+			_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("facingY")->isHovered())
+		{
+			isFacingY = !isFacingY;
+			_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
+		{
+			isShadowed = !isShadowed;
+			_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
+		{
+			isReflected = !isReflected;
+			_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
+		{
+			isBright = !isBright;
+			_fe3d.billboardEntity_setBright(_currentBillboardID, isBright);
 		}
 
 		// Update value forms

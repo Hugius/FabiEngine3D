@@ -7,40 +7,37 @@ void ModelEditor::_updateMeshMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "modelEditorMenuMesh")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("loadDiffuseMap")->isHovered())
-			{
-				_loadDiffuseMap();
-			}
-			else if (screen->getButton("loadEmissionMap")->isHovered())
-			{
-				_loadEmissionMap();
-			}
-			else if (screen->getButton("loadReflectionMap")->isHovered())
-			{
-				_loadReflectionMap();
-			}
-			else if (screen->getButton("loadNormalMap")->isHovered())
-			{
-				_loadNormalMap();
-			}
-			else if (screen->getButton("clearMaps")->isHovered())
-			{
-				_fe3d.modelEntity_setDiffuseMap(_currentModelID, "");
-				_fe3d.modelEntity_setEmissionMap(_currentModelID, "");
-				_fe3d.modelEntity_setReflectionMap(_currentModelID, "");
-				_fe3d.modelEntity_setNormalMap(_currentModelID, "");
-			}
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadDiffuseMap")->isHovered())
+		{
+			_loadDiffuseMap();
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadEmissionMap")->isHovered())
+		{
+			_loadEmissionMap();
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadReflectionMap")->isHovered())
+		{
+			_loadReflectionMap();
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadNormalMap")->isHovered())
+		{
+			_loadNormalMap();
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		{
+			_fe3d.modelEntity_setDiffuseMap(_currentModelID, "");
+			_fe3d.modelEntity_setEmissionMap(_currentModelID, "");
+			_fe3d.modelEntity_setReflectionMap(_currentModelID, "");
+			_fe3d.modelEntity_setNormalMap(_currentModelID, "");
 		}
 
 		// Check if mesh exists

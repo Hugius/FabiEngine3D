@@ -26,42 +26,39 @@ void ScriptEditor::_updateGUI()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "scriptEditorMenuMain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
-			}
-			else if (screen->getButton("search")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("create")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("edit")->isHovered())
-			{
-				auto IDs = _script.getAllScriptFileIDs();
-				sort(IDs.begin(), IDs.end());
-				_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", Vec2(0.0f, 0.1f), IDs);
-			}
-			else if (screen->getButton("rename")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("scriptRename", "Rename Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("delete")->isHovered())
-			{
-				_scriptFilenamesToDelete.push_back(_currentScriptFileID);
-				_fe3d.billboardEntity_deleteAll();
-				_script.removeScriptFile(_currentScriptFileID);
-				_isWritingScript = false;
-				_currentScriptFileID = "";
-			}
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("search")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("search", "Search Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("scriptCreate", "Create Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		{
+			auto IDs = _script.getAllScriptFileIDs();
+			sort(IDs.begin(), IDs.end());
+			_gui.getGlobalScreen()->createChoiceForm("scriptFileList", "Edit Script", Vec2(0.0f, 0.1f), IDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rename")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("scriptRename", "Rename Script", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_scriptFilenamesToDelete.push_back(_currentScriptFileID);
+			_fe3d.billboardEntity_deleteAll();
+			_script.removeScriptFile(_currentScriptFileID);
+			_isWritingScript = false;
+			_currentScriptFileID = "";
 		}
 
 		// Control key combinations

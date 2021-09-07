@@ -85,14 +85,14 @@ void SceneEditor::_updateReflectionEditing()
 			// Activate screen
 			rightWindow->setActiveScreen("reflectionPropertiesMenu");
 
-			// Check if input received
+			// Button management
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("capture")->isHovered())
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("capture")->isHovered())
 				{
 					_fe3d.reflectionEntity_capture(activeReflectionID);
 				}
-				else if (screen->getButton("delete")->isHovered())
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeCameraID);
 					_fe3d.reflectionEntity_delete(activeReflectionID);

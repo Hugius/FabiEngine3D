@@ -56,43 +56,40 @@ void BillboardEditor::_updateMainMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "billboardEditorMenuMain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("billboardCreate", "Create Billboard", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingBillboard = true;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		{
+			_isChoosingBillboard = true;
+			_isEditingBillboard = true;
+			auto IDs = getLoadedBillboardIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("create")->isHovered()) // Add billboard button
+			_gui.getGlobalScreen()->createChoiceForm("billboardList", "Edit Billboard", Vec2(-0.5f, 0.1f), IDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_isChoosingBillboard = true;
+			_isDeletingBillboard = true;
+			auto IDs = getLoadedBillboardIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createValueForm("billboardCreate", "Create Billboard", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_isCreatingBillboard = true;
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("edit")->isHovered()) // Edit billboard button
-			{
-				_isChoosingBillboard = true;
-				_isEditingBillboard = true;
-				auto IDs = getLoadedBillboardIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Edit Billboard", Vec2(-0.5f, 0.1f), IDs);
-			}
-			else if (screen->getButton("delete")->isHovered()) // Delete billboard button
-			{
-				_isChoosingBillboard = true;
-				_isDeletingBillboard = true;
-				auto IDs = getLoadedBillboardIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("billboardList", "Delete Billboard", Vec2(-0.5f, 0.1f), IDs);
-			}
+			_gui.getGlobalScreen()->createChoiceForm("billboardList", "Delete Billboard", Vec2(-0.5f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -117,38 +114,35 @@ void BillboardEditor::_updateChoiceMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "billboardEditorMenuChoice")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
-				_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-				_currentBillboardID = "";
-				_isEditingBillboard = false;
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
-				return;
-			}
-			else if (screen->getButton("mesh")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMesh");
-			}
-			else if (screen->getButton("appearance")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAppearance");
-			}
-			else if (screen->getButton("animation")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAnimation");
-			}
-			else if (screen->getButton("text")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuText");
-			}
+			_fe3d.billboardEntity_setWireFramed(_currentBillboardID, false);
+			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
+			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
+			_currentBillboardID = "";
+			_isEditingBillboard = false;
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMesh");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("appearance")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAppearance");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAnimation");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("text")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuText");
 		}
 
 		// Update buttons hoverability

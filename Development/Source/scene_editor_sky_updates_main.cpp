@@ -5,38 +5,34 @@ void SceneEditor::_updateSkyMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "sceneEditorMenuSky")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		{
+			// Retrieve preview sky IDs
+			vector<string> skyIDs;
+			for (const auto& ID : _skyEditor.getLoadedSkyIDs())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("choose")->isHovered())
-			{
-				// Retrieve created skies
-				vector<string> skyNames;
-				for (const auto& ID : _skyEditor.getLoadedSkyIDs())
+				if ((ID[0] == '@') && (ID != "@@engineBackground"))
 				{
-					// Check if not engine sky & not scene editor sky
-					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
-					{
-						skyNames.push_back(ID.substr(1));
-					}
+					skyIDs.push_back(ID.substr(1));
 				}
+			}
 
-				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("skyList", "Choose Sky", Vec2(0.0f, 0.1f), skyNames);
-			}
-			else if (screen->getButton("delete")->isHovered())
-			{
-				_fe3d.skyEntity_delete(_currentSkyID);
-				_currentSkyID = "";
-			}
+			// Add choice list
+			_gui.getGlobalScreen()->createChoiceForm("skyList", "Choose Sky", Vec2(0.0f, 0.1f), skyIDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_fe3d.skyEntity_delete(_currentSkyID);
+			_currentSkyID = "";
 		}
 
 		// Update sky choosing
@@ -53,7 +49,7 @@ void SceneEditor::_updateSkyMenu()
 
 				// Create new
 				_currentSkyID = selectedButtonID;
-				_copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
+				_copyPreviewSky(_currentSkyID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("skyList");
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList"))

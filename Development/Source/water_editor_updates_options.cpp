@@ -5,7 +5,7 @@ void WaterEditor::_updateOptionsMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "waterEditorMenuOptions")
 	{
 		// Temporary values
@@ -17,59 +17,56 @@ void WaterEditor::_updateOptionsMenu()
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("speedX", "X", speed.x * 100000.0f, Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("speedZ", "Z", speed.y * 100000.0f, Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("transparency", "Transparency", (transparency * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularFactor")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waveHeight")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("waveHeight", "Wave Height Factor", (waveHeight * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
+		{
+			if (quality == WaterQuality::SKY)
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-				return;
+				quality = WaterQuality::SKY_TERRAIN;
 			}
-			else if (screen->getButton("speed")->isHovered())
+			else if (quality == WaterQuality::SKY_TERRAIN)
 			{
-				_gui.getGlobalScreen()->createValueForm("speedX", "X", speed.x * 100000.0f, Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("speedZ", "Z", speed.y * 100000.0f, Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				quality = WaterQuality::SKY_TERRAIN_MODELS;
 			}
-			else if (screen->getButton("transparency")->isHovered())
+			else if (quality == WaterQuality::SKY_TERRAIN_MODELS)
 			{
-				_gui.getGlobalScreen()->createValueForm("transparency", "Transparency", (transparency * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				quality = WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS;
 			}
-			else if (screen->getButton("color")->isHovered())
+			else
 			{
-				_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("specularFactor")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("specularIntensity")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("waveHeight")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("waveHeight", "Wave Height Factor", (waveHeight * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("quality")->isHovered())
-			{
-				if (quality == WaterQuality::SKY)
-				{
-					quality = WaterQuality::SKY_TERRAIN;
-				}
-				else if (quality == WaterQuality::SKY_TERRAIN)
-				{
-					quality = WaterQuality::SKY_TERRAIN_MODELS;
-				}
-				else if (quality == WaterQuality::SKY_TERRAIN_MODELS)
-				{
-					quality = WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS;
-				}
-				else
-				{
-					quality = WaterQuality::SKY;
-				}
+				quality = WaterQuality::SKY;
 			}
 		}
 

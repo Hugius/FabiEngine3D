@@ -5,51 +5,42 @@ void SceneEditor::_updateWaterMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "sceneEditorMenuWater")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("choose")->isHovered())
-			{
-				// Retrieve created skies
-				vector<string> waterNames;
-				for (const auto& ID : _waterEditor.getLoadedWaterIDs())
-				{
-					// Check if not engine water & not scene editor water
-					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
-					{
-						waterNames.push_back(ID.substr(1));
-					}
-				}
-
-				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("waterList", "Choose Water", Vec2(0.0f, 0.1f), waterNames);
-			}
-			else if (screen->getButton("delete")->isHovered())
-			{
-				_fe3d.waterEntity_delete(_currentWaterID);
-				_currentWaterID = "";
-			}
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+			return;
 		}
-
-		// Check if input received
-		if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT))
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
 		{
-			if (screen->getButton("up")->isHovered())
+			// Retrieve preview water IDs
+			vector<string> waterIDs;
+			for (const auto& ID : _waterEditor.getLoadedWaterIDs())
 			{
-				_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+				if (ID[0] == '@')
+				{
+					waterIDs.push_back(ID.substr(1));
+				}
 			}
-			else if (screen->getButton("down")->isHovered())
-			{
-				_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
-			}
+
+			// Add choice list
+			_gui.getGlobalScreen()->createChoiceForm("waterList", "Choose Water", Vec2(0.0f, 0.1f), waterIDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_fe3d.waterEntity_delete(_currentWaterID);
+			_currentWaterID = "";
+		}
+		else if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("up")->isHovered())
+		{
+			_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) + (_editorSpeed / 100.0f)));
+		}
+		else if (_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("down")->isHovered())
+		{
+			_fe3d.waterEntity_setHeight(_currentWaterID, (_fe3d.waterEntity_getHeight(_currentWaterID) - (_editorSpeed / 100.0f)));
 		}
 
 		// Update water choosing
@@ -66,7 +57,7 @@ void SceneEditor::_updateWaterMenu()
 
 				// Create new
 				_currentWaterID = selectedButtonID;
-				_copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
+				_copyPreviewWater(_currentWaterID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("waterList");
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList"))

@@ -74,7 +74,7 @@ void TopViewportController::_updateProjectScreenManagement()
 	auto topScreen = _projectWindow->getActiveScreen();
 	auto leftScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (topScreen->getID() == "main")
 	{
 		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -252,50 +252,46 @@ void TopViewportController::_updateMiscScreenManagement()
 	// Temporary values
 	auto screen = _miscWindow->getScreen("main");
 
-	// Check if LMB pressed
-	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// Button management
+	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
-		// Check if button is hovered
-		if (screen->getButton("uncache")->isHovered())
+		// Get the chosen filename
+		const auto rootDirectory = _fe3d.misc_getRootDirectory();
+		const string targetDirectory = string("game_assets\\");
+
+		// Validate target directory
+		if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
 		{
-			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
-			const string targetDirectory = string("game_assets\\");
-
-			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
-			{
-				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
-				return;
-			}
-
-			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "");
-			if (filePath.empty())
-			{
-				return;
-			}
-
-			// Validate directory of file
-			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
-				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
-			{
-				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
-				return;
-			}
-
-			// Clear the cache of selected file
-			const string newFilePath = filePath.substr(rootDirectory.size());
-			_fe3d.misc_clearMeshCache(newFilePath);
-			_fe3d.misc_clearFontCache(newFilePath);
-			_fe3d.misc_clearTextureCache2D(newFilePath);
-			_fe3d.misc_clearBitmapCache(newFilePath);
-			_fe3d.misc_clearAudioCache(newFilePath);
+			Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+			return;
 		}
-		else if (screen->getButton("documentation")->isHovered())
+
+		// Validate chosen file
+		const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "");
+		if (filePath.empty())
 		{
-			ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
+			return;
 		}
+
+		// Validate directory of file
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+		{
+			Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+			return;
+		}
+
+		// Clear the cache of selected file
+		const string newFilePath = filePath.substr(rootDirectory.size());
+		_fe3d.misc_clearMeshCache(newFilePath);
+		_fe3d.misc_clearFontCache(newFilePath);
+		_fe3d.misc_clearTextureCache2D(newFilePath);
+		_fe3d.misc_clearBitmapCache(newFilePath);
+		_fe3d.misc_clearAudioCache(newFilePath);
+	}
+	else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("documentation")->isHovered())
+	{
+		ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 	}
 }
 

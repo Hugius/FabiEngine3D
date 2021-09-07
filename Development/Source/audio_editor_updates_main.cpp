@@ -34,43 +34,40 @@ void AudioEditor::_updateMainMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "audioEditorMenuMain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("audioCreate", "Create Audio", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingAudio = true;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		{
+			_isChoosingAudio = true;
+			_isEditingAudio = true;
+			auto IDs = getLoadedAudioIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("create")->isHovered()) // Add audio button
+			_gui.getGlobalScreen()->createChoiceForm("audioList", "Edit Audio", Vec2(0.0f, 0.1f), IDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_isChoosingAudio = true;
+			_isDeletingAudio = true;
+			auto IDs = getLoadedAudioIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createValueForm("audioCreate", "Create Audio", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_isCreatingAudio = true;
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("edit")->isHovered()) // Edit audio button
-			{
-				_isChoosingAudio = true;
-				_isEditingAudio = true;
-				auto IDs = getLoadedAudioIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("audioList", "Edit Audio", Vec2(0.0f, 0.1f), IDs);
-			}
-			else if (screen->getButton("delete")->isHovered()) // Delete audio button
-			{
-				_isChoosingAudio = true;
-				_isDeletingAudio = true;
-				auto IDs = getLoadedAudioIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
-			}
+			_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
 		}
 
 		// Update answer forms

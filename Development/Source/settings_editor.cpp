@@ -67,7 +67,7 @@ void SettingsEditor::update()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "settingsEditorMenuMain")
 	{
 		// Temporary values
@@ -81,49 +81,46 @@ void SettingsEditor::update()
 		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
 		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
-			}
-			else if (screen->getButton("isAntiAliasingEnabled")->isHovered())
-			{
-				_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Anti Aliasing?", Vec2(0.0f, 0.25f));
-			}
-			else if (screen->getButton("bloomSize")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("bloomSize", "Bloom Size", bloomSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("dofSize")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("dofSize", "DOF Size", dofSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("motionBlurSize")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("motionBlurSize", "Motion Blur Size", motionBlurSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("anisotropicFilteringQuality")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("shadowQuality")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("reflectionQuality")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("refractionQuality")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("maxAudioChannels")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isAntiAliasingEnabled")->isHovered())
+		{
+			_gui.getGlobalScreen()->createAnswerForm("isAntiAliasingEnabled", "Anti Aliasing?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bloomSize")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("bloomSize", "Bloom Size", bloomSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dofSize")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("dofSize", "DOF Size", dofSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("motionBlurSize")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("motionBlurSize", "Motion Blur Size", motionBlurSize, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("anisotropicFilteringQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("anisotropicFilteringQuality", "Anisotropic Filtering Quality", anisotropicFilteringQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("shadowQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("refractionQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("refractionQuality", "Refraction Quality", refractionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxAudioChannels")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("maxAudioChannels", "Max Audio Channels", maxAudioChannels, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update answer forms

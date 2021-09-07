@@ -6,48 +6,45 @@ void ModelEditor::_updateSizeMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	
-	// GUI management
+
+	// Screen management
 	if (screen->getID() == "modelEditorMenuSize")
 	{
 		// Temporary values
 		const string directions[3] = { "X", "Y", "Z" };
 		auto size = _fe3d.modelEntity_getSize(_currentModelID);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			_isResizingToggled = false;
+			_transformationDirection = Direction::X;
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", (size.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("toggleResize")->isHovered())
+		{
+			_isResizingToggled = !_isResizingToggled;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("direction")->isHovered())
+		{
+			if (_transformationDirection == Direction::X)
 			{
-				_isResizingToggled = false;
+				_transformationDirection = Direction::Y;
+			}
+			else if (_transformationDirection == Direction::Y)
+			{
+				_transformationDirection = Direction::Z;
+			}
+			else
+			{
 				_transformationDirection = Direction::X;
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("size")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", (size.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("toggleResize")->isHovered())
-			{
-				_isResizingToggled = !_isResizingToggled;
-			}
-			else if (screen->getButton("direction")->isHovered())
-			{
-				if (_transformationDirection == Direction::X)
-				{
-					_transformationDirection = Direction::Y;
-				}
-				else if (_transformationDirection == Direction::Y)
-				{
-					_transformationDirection = Direction::Z;
-				}
-				else
-				{
-					_transformationDirection = Direction::X;
-				}
 			}
 		}
 
@@ -63,23 +60,23 @@ void ModelEditor::_updateSizeMenu()
 			{
 				switch (_transformationDirection)
 				{
-					case Direction::X:
-					{
-						newSize.x *= (1.0f + scrollSpeed);
-						break;
-					}
+				case Direction::X:
+				{
+					newSize.x *= (1.0f + scrollSpeed);
+					break;
+				}
 
-					case Direction::Y:
-					{
-						newSize.y *= (1.0f + scrollSpeed);
-						break;
-					}
+				case Direction::Y:
+				{
+					newSize.y *= (1.0f + scrollSpeed);
+					break;
+				}
 
-					case Direction::Z:
-					{
-						newSize.z *= (1.0f + scrollSpeed);
-						break;
-					}
+				case Direction::Z:
+				{
+					newSize.z *= (1.0f + scrollSpeed);
+					break;
+				}
 				}
 			}
 

@@ -96,6 +96,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Create sky
 			if (_copyPreviewSky(skyID, previewID))
 			{
+				// Set ID
 				if (_isEditorLoaded)
 				{
 					_currentSkyID = skyID;
@@ -113,6 +114,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Create terrain
 			if (_copyPreviewTerrain(terrainID, previewID))
 			{
+				// Set ID
 				if (_isEditorLoaded)
 				{
 					_currentTerrainID = terrainID;
@@ -123,17 +125,22 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		{
 			// Data placeholders
 			string waterID, previewID;
+			float height;
 
 			// Extract data
-			iss >> waterID >> previewID;
+			iss >> waterID >> previewID >> height;
 
 			// Create water
 			if (_copyPreviewWater(waterID, previewID))
 			{
+				// Set ID
 				if (_isEditorLoaded)
 				{
 					_currentWaterID = waterID;
 				}
+
+				// Set height
+				_fe3d.waterEntity_setHeight(waterID, height);
 			}
 		}
 		else if (lineType == "MODEL")

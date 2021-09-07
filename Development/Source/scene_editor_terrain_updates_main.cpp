@@ -5,38 +5,34 @@ void SceneEditor::_updateTerrainMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "sceneEditorMenuTerrain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choose")->isHovered())
+		{
+			// Retrieve preview terrain IDs
+			vector<string> terrainIDs;
+			for (const auto& ID : _terrainEditor.getLoadedTerrainIDs())
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("choose")->isHovered())
-			{
-				// Retrieve created skies
-				vector<string> terrainNames;
-				for (const auto& ID : _terrainEditor.getLoadedTerrainIDs())
+				if (ID[0] == '@')
 				{
-					// Check if not engine terrain & not scene editor terrain
-					if (ID[0] == '@' && ID.substr(0, 2) != "@@")
-					{
-						terrainNames.push_back(ID.substr(1));
-					}
+					terrainIDs.push_back(ID.substr(1));
 				}
+			}
 
-				// Add choice list
-				_gui.getGlobalScreen()->createChoiceForm("terrainList", "Choose Terrain", Vec2(0.0f, 0.1f), terrainNames);
-			}
-			else if (screen->getButton("delete")->isHovered())
-			{
-				_fe3d.terrainEntity_delete(_currentTerrainID);
-				_currentTerrainID = "";
-			}
+			// Add choice list
+			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Choose Terrain", Vec2(0.0f, 0.1f), terrainIDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_fe3d.terrainEntity_delete(_currentTerrainID);
+			_currentTerrainID = "";
 		}
 
 		// Update terrain choosing
@@ -53,7 +49,7 @@ void SceneEditor::_updateTerrainMenu()
 
 				// Create new
 				_currentTerrainID = selectedButtonID;
-				_copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
+				_copyPreviewTerrain(_currentTerrainID, ("@" + selectedButtonID));
 				_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))

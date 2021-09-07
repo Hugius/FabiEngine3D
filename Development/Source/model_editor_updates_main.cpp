@@ -13,6 +13,26 @@ void ModelEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateMeshMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateOptionsMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateSizeMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAabbMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateModelCreating();
 	}
 	if (_isEditorLoaded)
@@ -38,43 +58,40 @@ void ModelEditor::_updateMainMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "modelEditorMenuMain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Model", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingModel = true;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		{
+			_isChoosingModel = true;
+			_isEditingModel = true;
+			auto IDs = getLoadedModelIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("create")->isHovered()) // Add model button
+			_gui.getGlobalScreen()->createChoiceForm("modelList", "Edit Model", Vec2(-0.5f, 0.1f), IDs);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_isChoosingModel = true;
+			_isDeletingModel = true;
+			auto IDs = getLoadedModelIDs();
+			for (auto& ID : IDs)
 			{
-				_gui.getGlobalScreen()->createValueForm("modelCreate", "Create Model", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_isCreatingModel = true;
+				ID = ID.substr(1);
 			}
-			else if (screen->getButton("edit")->isHovered()) // Edit model button
-			{
-				_isChoosingModel = true;
-				_isEditingModel = true;
-				auto IDs = getLoadedModelIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("modelList", "Edit Model", Vec2(-0.5f, 0.1f), IDs);
-			}
-			else if (screen->getButton("delete")->isHovered()) // Delete model button
-			{
-				_isChoosingModel = true;
-				_isDeletingModel = true;
-				auto IDs = getLoadedModelIDs();
-				for (auto& ID : IDs)
-				{
-					ID = ID.substr(1);
-				}
-				_gui.getGlobalScreen()->createChoiceForm("modelList", "Delete Model", Vec2(-0.5f, 0.1f), IDs);
-			}
+			_gui.getGlobalScreen()->createChoiceForm("modelList", "Delete Model", Vec2(-0.5f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -99,70 +116,47 @@ void ModelEditor::_updateChoiceMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "modelEditorMenuChoice")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				// Hide model entity
-				_fe3d.modelEntity_setWireFramed(_currentModelID, false);
-				_fe3d.modelEntity_setVisible(_currentModelID, false);
+			// Hide model entity
+			_fe3d.modelEntity_setWireFramed(_currentModelID, false);
+			_fe3d.modelEntity_setVisible(_currentModelID, false);
 
-				// Go back to main screen
-				_isEditingModel = false;
-				_currentModelID = "";
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
-				return;
-			}
-			else if (screen->getButton("mesh")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMesh");
-			}
-			else if (screen->getButton("options")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuOptions");
-			}
-			else if (screen->getButton("lighting")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuLighting");
-			}
-			else if (screen->getButton("size")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
-			}
-			else if (screen->getButton("aabb")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
-				_fe3d.misc_enableAabbFrameRendering();
-			}
+			// Go back to main screen
+			_isEditingModel = false;
+			_currentModelID = "";
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
+			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMesh");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuOptions");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuLighting");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
+			_fe3d.misc_enableAabbFrameRendering();
 		}
 
 		// Update buttons hoverability
 		screen->getButton("aabb")->setHoverable(!_fe3d.modelEntity_isInstanced(_currentModelID));
-	}
-	else if (screen->getID() == "modelEditorMenuMesh")
-	{
-		_updateMeshMenu();
-	}
-	else if (screen->getID() == "modelEditorMenuOptions")
-	{
-		_updateOptionsMenu();
-	}
-	else if (screen->getID() == "modelEditorMenuLighting")
-	{
-		_updateLightingMenu();
-	}
-	else if (screen->getID() == "modelEditorMenuSize")
-	{
-		_updateSizeMenu();
-	}
-	else if (screen->getID() == "modelEditorMenuAabb")
-	{
-		_updateAabbMenu();
 	}
 }
 

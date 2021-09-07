@@ -62,7 +62,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	if (!skyID.empty())
 	{
 		// Data to save
-		string previewID = "@" + skyID;
+		string previewID = ("@" + skyID);
 
 		// Write data
 		file <<
@@ -76,7 +76,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	if (!terrainID.empty())
 	{
 		// Data to save
-		string previewID = "@" + terrainID;
+		string previewID = ("@" + terrainID);
 
 		// Write data
 		file <<
@@ -90,13 +90,15 @@ bool SceneEditor::saveEditorSceneToFile()
 	if (!waterID.empty())
 	{
 		// Data to save
-		string previewID = "@" + waterID;
+		string previewID = ("@" + waterID);
+		auto height = _fe3d.waterEntity_getHeight(waterID);
 
 		// Write data
 		file <<
 			"WATER " <<
 			waterID << " " <<
-			previewID << endl;
+			previewID << " " <<
+			height << endl;
 	}
 
 	// Models

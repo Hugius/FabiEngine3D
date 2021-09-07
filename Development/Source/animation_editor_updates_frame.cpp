@@ -6,7 +6,7 @@ void AnimationEditor::_updateFrameMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "animationEditorMenuFrame")
 	{
 		// Temporary values
@@ -27,77 +27,74 @@ void AnimationEditor::_updateFrameMenu()
 		// Speed is only available if speed type is not instantly
 		screen->getButton("speed")->setHoverable(speedType != AnimationSpeedType::INSTANTLY);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+			_currentPartID = "";
+			_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transformation")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("transformationX", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("transformationY", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("transformationZ", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrigin")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speedType")->isHovered())
+		{
+			// Change speed type
+			if (speedType == AnimationSpeedType::LINEAR)
 			{
-				_currentPartID = "";
-				_fe3d.modelEntity_setInversion(currentAnimation->previewModelID, 0.0f);
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
-				return;
+				speedType = AnimationSpeedType::EXPONENTIAL;
 			}
-			else if (screen->getButton("transformation")->isHovered())
+			else if (speedType == AnimationSpeedType::EXPONENTIAL)
 			{
-				_gui.getGlobalScreen()->createValueForm("transformationX", "X", transformation.x * multiplier, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("transformationY", "Y", transformation.y * multiplier, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("transformationZ", "Z", transformation.z * multiplier, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				speedType = AnimationSpeedType::INSTANTLY;
 			}
-			else if (screen->getButton("rotationOrigin")->isHovered())
+			else
 			{
-				_gui.getGlobalScreen()->createValueForm("rotationOriginX", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("rotationOriginY", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("rotationOriginZ", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				speedType = AnimationSpeedType::LINEAR;
 			}
-			else if (screen->getButton("speed")->isHovered())
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transType")->isHovered())
+		{
+			// Change transformation type
+			if (transType == TransformationType::MOVEMENT)
 			{
-				_gui.getGlobalScreen()->createValueForm("transformationSpeedX", "X", speed.x * 1000.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("transformationSpeedY", "Y", speed.y * 1000.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-				_gui.getGlobalScreen()->createValueForm("transformationSpeedZ", "Z", speed.z * 1000.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+				transType = TransformationType::ROTATION;
 			}
-			else if (screen->getButton("speedType")->isHovered())
+			else if (transType == TransformationType::ROTATION)
 			{
-				// Change speed type
-				if (speedType == AnimationSpeedType::LINEAR)
-				{
-					speedType = AnimationSpeedType::EXPONENTIAL;
-				}
-				else if (speedType == AnimationSpeedType::EXPONENTIAL)
-				{
-					speedType = AnimationSpeedType::INSTANTLY;
-				}
-				else
-				{
-					speedType = AnimationSpeedType::LINEAR;
-				}
+				transType = TransformationType::SCALING;
 			}
-			else if (screen->getButton("transType")->isHovered())
+			else if (transType == TransformationType::SCALING)
 			{
-				// Change transformation type
-				if (transType == TransformationType::MOVEMENT)
-				{
-					transType = TransformationType::ROTATION;
-				}
-				else if (transType == TransformationType::ROTATION)
-				{
-					transType = TransformationType::SCALING;
-				}
-				else if (transType == TransformationType::SCALING)
-				{
-					transType = TransformationType::MOVEMENT;
-				}
+				transType = TransformationType::MOVEMENT;
 			}
-			else if (screen->getButton("part")->isHovered())
-			{
-				// Choosing part of preview model
-				auto modelParts = currentAnimation->partIDs;
-				modelParts.erase(modelParts.begin());
-				_gui.getGlobalScreen()->createChoiceForm("parts", "Choose Part", Vec2(-0.5f, 0.1f), modelParts);
-			}
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("part")->isHovered())
+		{
+			// Choosing part of preview model
+			auto modelParts = currentAnimation->partIDs;
+			modelParts.erase(modelParts.begin());
+			_gui.getGlobalScreen()->createChoiceForm("parts", "Choose Part", Vec2(-0.5f, 0.1f), modelParts);
 		}
 
 		// Update rotation origin visualization
-		if (_gui.getGlobalScreen()->isValueFormExisting("rotationOriginX") && 
+		if (_gui.getGlobalScreen()->isValueFormExisting("rotationOriginX") &&
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginY") &&
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginZ"))
 		{

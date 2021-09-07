@@ -54,33 +54,30 @@ void AnimationEditor::_updateMainMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "animationEditorMenuMain")
 	{
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
-			{
-				_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
-			}
-			else if (screen->getButton("create")->isHovered()) // Add animation button
-			{
-				_gui.getGlobalScreen()->createValueForm("animationCreate", "Create Animation", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
-				_isCreatingAnimation = true;
-			}
-			else if (screen->getButton("edit")->isHovered()) // Edit animation button
-			{
-				_isChoosingAnimation = true;
-				_isEditingAnimation = true;
-				_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
-			}
-			else if (screen->getButton("delete")->isHovered()) // Delete animation button
-			{
-				_isChoosingAnimation = true;
-				_isDeletingAnimation = true;
-				_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
-			}
+			_gui.getGlobalScreen()->createAnswerForm("back", "Save Changes?", Vec2(0.0f, 0.25f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("animationCreate", "Create Animation", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingAnimation = true;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
+		{
+			_isChoosingAnimation = true;
+			_isEditingAnimation = true;
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
+		{
+			_isChoosingAnimation = true;
+			_isDeletingAnimation = true;
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
 		}
 
 		// Update answer forms

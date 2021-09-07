@@ -5,7 +5,7 @@ void ModelEditor::_updateLightingMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "modelEditorMenuLighting")
 	{
 		// Temporary values
@@ -17,52 +17,49 @@ void ModelEditor::_updateLightingMenu()
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
 		auto isBright = _fe3d.modelEntity_isBright(_currentModelID);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
+		{
+			isSpecular = !isSpecular;
+			_fe3d.modelEntity_setSpecularLighted(_currentModelID, isSpecular);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularFactor")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
+		{
+			isBright = !isBright;
+			_fe3d.modelEntity_setBright(_currentModelID, isBright);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
+		{
+			if (reflectionType == ReflectionType::CUBE)
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-				return;
+				reflectionType = ReflectionType::PLANAR;
 			}
-			else if (screen->getButton("isSpecular")->isHovered())
+			else
 			{
-				isSpecular = !isSpecular;
-				_fe3d.modelEntity_setSpecularLighted(_currentModelID, isSpecular);
+				reflectionType = ReflectionType::CUBE;
 			}
-			else if (screen->getButton("specularFactor")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("specularIntensity")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("specularIntensity", "Specular Intensity", (specularIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("lightness")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("isBright")->isHovered())
-			{
-				isBright = !isBright;
-				_fe3d.modelEntity_setBright(_currentModelID, isBright);
-			}
-			else if (screen->getButton("reflectionType")->isHovered())
-			{
-				if (reflectionType == ReflectionType::CUBE)
-				{
-					reflectionType = ReflectionType::PLANAR;
-				}
-				else
-				{
-					reflectionType = ReflectionType::CUBE;
-				}
-				_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
-			}
-			else if (screen->getButton("reflectivity")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
+			_fe3d.modelEntity_setReflectionType(_currentModelID, reflectionType);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectivity")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("reflectivity", "Reflectivity", (reflectivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms

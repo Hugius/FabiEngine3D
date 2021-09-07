@@ -58,7 +58,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	if (!skyID.empty() && _hasCustomSceneSky)
 	{
 		// Data to save
-		auto previewID = "@" + skyID;
+		auto previewID = ("@" + skyID);
 		auto color = _fe3d.skyEntity_getColor(skyID);
 		auto rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
 		auto lightness = _fe3d.skyEntity_getOriginalLightness(skyID);
@@ -80,7 +80,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	if (!terrainID.empty() && _hasCustomSceneTerrain)
 	{
 		// Data to save
-		string previewID = "@" + terrainID;
+		string previewID = ("@" + terrainID);
 
 		// Write data
 		file <<
@@ -94,10 +94,10 @@ bool SceneEditor::saveCustomSceneToFile()
 	if (!waterID.empty() && _hasCustomSceneWater)
 	{
 		// Data to save
-		string previewID = "@" + waterID;
-		Vec3 color = _fe3d.waterEntity_getColor(waterID);
-		Vec2 speed = _fe3d.waterEntity_getSpeed(waterID);
-		float transparency = _fe3d.waterEntity_getTransparency(waterID);
+		string previewID = ("@" + waterID);
+		auto color = _fe3d.waterEntity_getColor(waterID);
+		auto speed = _fe3d.waterEntity_getSpeed(waterID);
+		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
 
 		// Write data
 		file <<

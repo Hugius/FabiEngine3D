@@ -130,7 +130,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			if (_validateFe3dBillboardEntity("@" + arguments[1].getString(), true))
 			{
 				// Copy preview billboard
-				_sceneEditor.copyPreviewBillboard(arguments[0].getString(), "@" + arguments[1].getString(),
+				_sceneEditor.copyPreviewBillboard(arguments[0].getString(), ("@" + arguments[1].getString()),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 
 				// Stop animation if started

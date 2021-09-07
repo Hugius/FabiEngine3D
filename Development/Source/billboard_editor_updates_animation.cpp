@@ -5,7 +5,7 @@ void BillboardEditor::_updateAnimationMenu()
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-	// GUI management
+	// Screen management
 	if (screen->getID() == "billboardEditorMenuAnimation")
 	{
 		// Temporary values
@@ -13,30 +13,27 @@ void BillboardEditor::_updateAnimationMenu()
 		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
 
-		// Check if input received
-		if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-				return;
-			}
-			else if (screen->getButton("animate")->isHovered())
-			{
-				_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
-			}
-			else if (screen->getButton("rows")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("rows", "Rows", animationRowCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("columns")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("columns", "Columns", animationColumnCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
-			else if (screen->getButton("speed")->isHovered())
-			{
-				_gui.getGlobalScreen()->createValueForm("speed", "Framestep", animationFramestep, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			}
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animate")->isHovered())
+		{
+			_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rows")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("rows", "Rows", animationRowCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("columns")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("columns", "Columns", animationColumnCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("speed", "Framestep", animationFramestep, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update buttons hoverability

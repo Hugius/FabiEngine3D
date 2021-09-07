@@ -84,31 +84,31 @@ void SceneEditor::_updateModelEditing()
 			// Activate screen
 			rightWindow->setActiveScreen("modelPropertiesMenu");
 
-			// Check if input received
+			// Button management
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("position")->isHovered()) // Position button
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(false);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if (screen->getButton("rotation")->isHovered()) // Rotation button
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotation")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(false);
 					screen->getButton("size")->setHoverable(true);
 				}
-				else if (screen->getButton("size")->isHovered()) // Size button
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 				{
 					// Update buttons hoverability
 					screen->getButton("position")->setHoverable(true);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(false);
 				}
-				else if (screen->getButton("freeze")->isHovered()) // Freeze button
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
 					// Model
 					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
@@ -120,12 +120,12 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 					}
 				}
-				else if (screen->getButton("animation")->isHovered()) // Animation button
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
 					_gui.getGlobalScreen()->createChoiceForm("animationList", "Choose Animation", Vec2(0.0f, 0.1f),
 						_animationEditor.getAllAnimationIDs());
 				}
-				else if (screen->getButton("delete")->isHovered()) // Delete button
+				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeModelID);
 					rightWindow->setActiveScreen("sceneEditorControls");

@@ -87,10 +87,10 @@ void SceneEditor::_updateSoundEditing()
 			// Activate screen
 			rightWindow->setActiveScreen("soundPropertiesMenu");
 
-			// Check if input received
+			// Button management
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("delete")->isHovered()) // Delete button
+				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 				{
 					_fe3d.modelEntity_delete(_activeSpeakerID);
 					_fe3d.sound_delete(activeSoundID);

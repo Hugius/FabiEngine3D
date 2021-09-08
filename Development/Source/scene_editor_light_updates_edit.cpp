@@ -146,32 +146,56 @@ void SceneEditor::_updateLightEditing()
 			// Handle position, radius, color
 			if (!screen->getButton("position")->isHoverable())
 			{
+				// Set value form descriptions
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("x")->changeTextContent("X");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
+
+				// Update value forms
 				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+
+				// Update entity
 				_fe3d.lightEntity_setPosition(activeLightID, position);
 			}
 			else if (!screen->getButton("radius")->isHoverable())
 			{
+				// Set value form descriptions
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("x")->changeTextContent("X");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("y")->changeTextContent("Y");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("z")->changeTextContent("Z");
+
+				// Update value forms
 				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", radius.x, (_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", radius.x, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", radius.y, (_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", radius.y, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", radius.z, (_editorSpeed / 100.0f), 1.0f, 0.0f);
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", radius.z, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+
+				// Update entity
 				_fe3d.lightEntity_setRadius(activeLightID, radius);
 			}
 			else if (!screen->getButton("color")->isHoverable())
 			{
+				// Set value form descriptions
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("x")->changeTextContent("R");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("y")->changeTextContent("G");
+				rightWindow->getScreen("lightPropertiesMenu")->getTextField("z")->changeTextContent("B");
+
+				// Update value forms
 				_handleValueChanging("lightPropertiesMenu", "xPlus", "x", color.r, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "xMinus", "x", color.r, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "yPlus", "y", color.g, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "yMinus", "y", color.g, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "zPlus", "z", color.b, LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+
+				// Update entities
 				_fe3d.modelEntity_setColor(_activeLampID, color);
 				_fe3d.lightEntity_setColor(activeLightID, color);
 			}

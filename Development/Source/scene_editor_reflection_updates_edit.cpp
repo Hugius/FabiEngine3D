@@ -115,13 +115,15 @@ void SceneEditor::_updateReflectionEditing()
 			// Get current values
 			auto position = _fe3d.reflectionEntity_getPosition(activeReflectionID);
 
-			// Handle position
+			// Update value filling and changing
 			_handleValueChanging("reflectionPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
 			_handleValueChanging("reflectionPropertiesMenu", "xMinus", "x", position.x, -(_editorSpeed / 100.0f));
 			_handleValueChanging("reflectionPropertiesMenu", "yPlus", "y", position.y, (_editorSpeed / 100.0f));
 			_handleValueChanging("reflectionPropertiesMenu", "yMinus", "y", position.y, -(_editorSpeed / 100.0f));
 			_handleValueChanging("reflectionPropertiesMenu", "zPlus", "z", position.z, (_editorSpeed / 100.0f));
 			_handleValueChanging("reflectionPropertiesMenu", "zMinus", "z", position.z, -(_editorSpeed / 100.0f));
+
+			// Apply new values
 			_fe3d.reflectionEntity_setPosition(activeReflectionID, position);
 		}
 	}

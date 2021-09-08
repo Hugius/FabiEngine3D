@@ -148,7 +148,7 @@ void SceneEditor::_updateBillboardEditing()
 				screen->getWriteField("z")->setHoverable(false);
 			}
 
-			// Apply position, rotationm, size
+			// Handle position, rotation, size
 			if (!screen->getButton("position")->isHoverable())
 			{
 				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, (_editorSpeed / 100.0f));
@@ -171,7 +171,6 @@ void SceneEditor::_updateBillboardEditing()
 			}
 			else if (!screen->getButton("size")->isHoverable())
 			{
-				Vec2 oldSize = size;
 				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, (_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -(_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, (_editorSpeed / 100.0f), BILLBOARD_SIZE_MULTIPLIER, 0.0f);

@@ -141,48 +141,121 @@ void BottomViewportController::update()
 	// Update model entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible models
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())
+		{
+			if (_fe3d.modelEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("modelEntityCount")->getEntityID();
-		string text = "Model Entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
+		string text = "Model Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update billboard entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible entities
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
+		{
+			if (_fe3d.billboardEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("billboardEntityCount")->getEntityID();
-		string text = "Billboard Entities: " + to_string(_fe3d.billboardEntity_getAllIDs().size());
+		string text = "Billboard Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update AABB entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible entities
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())
+		{
+			if (_fe3d.aabbEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("aabbEntityCount")->getEntityID();
-		string text = "AABB Entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
+		string text = "AABB Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update light entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible entities
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.lightEntity_getAllIDs())
+		{
+			if (_fe3d.lightEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("lightEntityCount")->getEntityID();
-		string text = "Light Entities: " + to_string(_fe3d.lightEntity_getAllIDs().size());
+		string text = "Light Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update reflection entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible entities
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.reflectionEntity_getAllIDs())
+		{
+			if (_fe3d.reflectionEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("reflectionEntityCount")->getEntityID();
-		string text = "Reflection Entities: " + to_string(_fe3d.reflectionEntity_getAllIDs().size());
+		string text = "Reflection Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
 	// Update GUI entity count
 	if (_fe3d.misc_checkInterval(10))
 	{
+		// Count visible entities
+		unsigned int entityCount = 0;
+		for (const auto& entityID : _fe3d.imageEntity_getAllIDs())
+		{
+			if (_fe3d.imageEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+		for (const auto& entityID : _fe3d.textEntity_getAllIDs())
+		{
+			if (_fe3d.textEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+
+		// Set text content
 		string textID = _statsScreen->getTextField("imageEntityCount")->getEntityID();
-		string text = "GUI Entities: " + to_string(_fe3d.imageEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
+		string text = "GUI Entities: " + to_string(entityCount);
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

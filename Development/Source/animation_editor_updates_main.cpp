@@ -223,6 +223,10 @@ void AnimationEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 
 			// Delete animation
+			if (!_getAnimation(_currentAnimationID)->previewModelID.empty())
+			{
+				_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->previewModelID, false);
+			}
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";
 

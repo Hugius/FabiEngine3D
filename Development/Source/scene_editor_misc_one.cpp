@@ -48,7 +48,7 @@ void SceneEditor::_selectModel(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
+	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string tempID = ID;
@@ -97,7 +97,7 @@ void SceneEditor::_selectBillboard(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID.empty() && _activeModelID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
+	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string tempID = ID;
@@ -146,7 +146,7 @@ void SceneEditor::_selectSound(const string& ID)
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID.empty() && _activeModelID.empty() && _activeLampID.empty() && _activeSpeakerID.empty())
+	if (_activeModelID.empty() && _activeBillboardID.empty() && _activeSpeakerID.empty() && _activeLampID.empty() && _activeCameraID.empty())
 	{
 		// Removing the unique number from the soundID and updating the text content
 		string tempID = ID;

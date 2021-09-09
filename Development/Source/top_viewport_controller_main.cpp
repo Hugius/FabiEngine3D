@@ -228,7 +228,7 @@ void TopViewportController::_updateGameScreenManagement()
 		// Check if user wants to pause the running game
 		if (_scriptEditor.getScriptExecutor().isRunning())
 		{
-			// Check if user pressed ESCAPE
+			// Check if ESCAPE pressed
 			if (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (_fe3d.networkServer_isRunning()) // Server application cannot be paused, only on or off

@@ -16,7 +16,7 @@ void SceneEditor::_updateSoundEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
@@ -59,14 +59,22 @@ void SceneEditor::_updateSoundEditing()
 			}
 		}
 
-		// Check if user made the active speaker inactive
-		if (_selectedSpeakerID.empty() && _activeSpeakerID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if RMB not down
+		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				_activeSpeakerID = "";
-				rightWindow->setActiveScreen("sceneEditorControls");
+				// Check if speaker is active
+				if (_activeSpeakerID != "")
+				{
+					// Check if active speaker cancelled
+					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedSpeakerID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					{
+						_activeSpeakerID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+					}
+				}
 			}
 		}
 
@@ -139,14 +147,6 @@ void SceneEditor::_updateSoundEditing()
 		if (_selectedSpeakerID.empty() && _activeSpeakerID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
-		}
-		else
-		{
-			if (_selectedModelID.empty() && _activeModelID.empty() && _selectedBillboardID.empty() && _activeBillboardID.empty()
-				&& _selectedLampID.empty() && _activeLampID.empty())
-			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), true);
-			}
 		}
 	}
 }

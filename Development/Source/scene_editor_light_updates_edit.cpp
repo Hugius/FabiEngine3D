@@ -17,7 +17,7 @@ void SceneEditor::_updateLightEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
@@ -57,14 +57,22 @@ void SceneEditor::_updateLightEditing()
 			}
 		}
 
-		// Check if user made the active lamp inactive
-		if ((_selectedLampID.empty()) && (_activeLampID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if RMB not down
+		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				_activeLampID = "";
-				rightWindow->setActiveScreen("sceneEditorControls");
+				// Check if light is active
+				if (_activeLampID != "")
+				{
+					// Check if active light cancelled
+					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedLampID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					{
+						_activeLampID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+					}
+				}
 			}
 		}
 

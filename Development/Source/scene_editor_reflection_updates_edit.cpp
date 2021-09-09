@@ -57,14 +57,22 @@ void SceneEditor::_updateReflectionEditing()
 			}
 		}
 
-		// Check if user made the active camera inactive
-		if ((_selectedCameraID.empty()) && (_activeCameraID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if RMB not down
+		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				_activeCameraID = "";
-				rightWindow->setActiveScreen("sceneEditorControls");
+				// Check if camera is active
+				if (_activeCameraID != "")
+				{
+					// Check if active camera cancelled
+					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedCameraID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					{
+						_activeCameraID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+					}
+				}
 			}
 		}
 

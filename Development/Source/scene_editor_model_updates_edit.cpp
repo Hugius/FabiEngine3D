@@ -16,7 +16,7 @@ void SceneEditor::_updateModelEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredID = _fe3d.collision_checkCursorInAny().first;
@@ -57,14 +57,22 @@ void SceneEditor::_updateModelEditing()
 			}
 		}
 
-		// Check if user made the active model inactive
-		if ((_selectedModelID.empty()) && (_activeModelID != "") && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if RMB not down
+		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			// Check if LMB is pressed
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				_activeModelID = "";
-				rightWindow->setActiveScreen("sceneEditorControls");
+				// Check if model is active
+				if (_activeModelID != "")
+				{
+					// Check if active model cancelled
+					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedModelID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					{
+						_activeModelID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+					}
+				}
 			}
 		}
 
@@ -296,15 +304,6 @@ void SceneEditor::_updateModelEditing()
 		if (_selectedModelID.empty() && _activeModelID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
-		}
-		else
-		{
-			if (_selectedBillboardID.empty() && _activeBillboardID.empty() &&
-				_selectedLampID.empty() && _activeLampID.empty() &&
-				_selectedSpeakerID.empty() && _activeSpeakerID.empty())
-			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
-			}
 		}
 	}
 	else

@@ -16,7 +16,7 @@ void SceneEditor::_updateBillboardEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight)
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
 	{
 		// Check if user selected a billboard
 		for (const auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -56,13 +56,22 @@ void SceneEditor::_updateBillboardEditing()
 			}
 		}
 
-		// Check if user made the active billboard inactive
-		if (_selectedBillboardID.empty() && _activeBillboardID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+		// Check if RMB not down
+		if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 		{
-			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+			// Check if allowed by GUI
+			if (_fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
-				_activeBillboardID = "";
-				rightWindow->setActiveScreen("sceneEditorControls");
+				// Check if billboard is active
+				if (_activeBillboardID != "")
+				{
+					// Check if active billboard cancelled
+					if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _selectedBillboardID.empty()) || _fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
+					{
+						_activeBillboardID = "";
+						rightWindow->setActiveScreen("sceneEditorControls");
+					}
+				}
 			}
 		}
 
@@ -183,15 +192,6 @@ void SceneEditor::_updateBillboardEditing()
 		if (_selectedBillboardID.empty() && _activeBillboardID.empty())
 		{
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
-		}
-		else
-		{
-			if (_selectedModelID.empty() && _activeModelID.empty() &&
-				_selectedLampID.empty() && _activeLampID.empty() &&
-				_selectedSpeakerID.empty() && _activeSpeakerID.empty())
-			{
-				_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
-			}
 		}
 	}
 	else

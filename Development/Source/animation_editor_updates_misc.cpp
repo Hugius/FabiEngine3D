@@ -17,7 +17,7 @@ void AnimationEditor::_updateCamera()
 		{
 			cameraLookat.y += CAMERA_LOOKAT_SPEED;
 		}
-		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT))
+		if (_fe3d.input_isKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_isKeyDown(InputType::KEY_RSHIFT))
 		{
 			cameraLookat.y -= CAMERA_LOOKAT_SPEED;
 		}

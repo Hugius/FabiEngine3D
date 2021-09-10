@@ -1,6 +1,8 @@
 #include "collision_resolver.hpp"
 #include "logger.hpp"
 
+using std::max;
+
 void CollisionResolver::update(
 	const unordered_map<string, shared_ptr<AabbEntity>>& aabbs, 
 	TerrainEntityManager& terrainManager, 
@@ -112,12 +114,12 @@ void CollisionResolver::update(
 
 void CollisionResolver::setCameraBoxSize(float bottom, float top, float left, float right, float front, float back)
 {
-	_cameraAabbBottom = bottom * 0.99f;
-	_cameraAabbTop = top * 0.99f;
-	_cameraAabbLeft = left * 0.99f;
-	_cameraAabbRight = right * 0.99f;
-	_cameraAabbFront = front * 0.99f;
-	_cameraAabbBack = back * 0.99f;
+	_cameraAabbBottom = max(0.0f, (bottom * 0.99f));
+	_cameraAabbTop = max(0.0f, (top * 0.99f));
+	_cameraAabbLeft = max(0.0f, (left * 0.99f));
+	_cameraAabbRight = max(0.0f, (right * 0.99f));
+	_cameraAabbFront = max(0.0f, (front * 0.99f));
+	_cameraAabbBack = max(0.0f, (back * 0.99f));
 }
 
 void CollisionResolver::enableCameraAabbResponse(bool x, bool y, bool z)

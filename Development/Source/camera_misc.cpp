@@ -5,6 +5,7 @@
 #include <algorithm>
 
 using std::clamp;
+using std::max;
 
 void Camera::moveFollowX(float value)
 { 
@@ -38,8 +39,8 @@ void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 		Logger::throwError("Camera::enableFirstPersonView::2");
 	}
 
-	_firstPersonYaw = initialYaw;
-	_firstPersonPitch = initialPitch;
+	_firstPersonYaw = fmodf(initialYaw, 360.0f);
+	_firstPersonPitch = clamp(clamp(initialPitch, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 	_mustCenterCursor = true;
 	_isFirstPersonViewEnabled = true;
 }
@@ -65,8 +66,8 @@ void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 		Logger::throwError("Camera::enableThirdPersonView::2");
 	}
 
-	_thirdPersonYaw = initialYaw;
-	_thirdPersonPitch = initialPitch;
+	_thirdPersonYaw = fmodf(initialYaw, 360.0f);
+	_thirdPersonPitch = clamp(clamp(initialPitch, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 	_mustCenterCursor = true;
 	_isThirdPersonViewEnabled = true;
 }
@@ -83,65 +84,62 @@ void Camera::disableThirdPersonView()
 
 void Camera::setFOV(float value)
 {
-	_viewMatrix.m[3][2] = Math::calculateDotProduct(_frontVector, _position);
-	_fov = value;
+	_fov = max(0.0f, value);
 }
 
-void Camera::setMouseSensitivity(float speed)
+void Camera::setMouseSensitivity(float value)
 {
-	_mouseSensitivity = speed;
+	_mouseSensitivity = max(0.0f, value);
 }
 
 void Camera::setYaw(float value)
 {
-	_yaw = value;
-	_yaw = fmodf(_yaw, 360.0f);
+	_yaw = fmodf(value, 360.0f);
 }
 
 void Camera::setPitch(float value)
 {
-	_pitch = value;
-	_pitch = clamp(_pitch, -89.0f, 89.0f);
+	_pitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setNearZ(float value)
 {
-	_nearZ = value;
+	_nearZ = max(0.0f, value);
 }
 
 void Camera::setFarZ(float value)
 {
-	_farZ = value;
+	_farZ = max(0.0f, value);
 }
 
 void Camera::setMinFirstPersonPitch(float value)
 {
-	_minFirstPersonPitch = value;
+	_minFirstPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setMaxFirstPersonPitch(float value)
 {
-	_maxFirstPersonPitch = value;
+	_maxFirstPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setMinThirdPersonPitch(float value)
 {
-	_minThirdPersonPitch = value;
+	_minThirdPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setMaxThirdPersonPitch(float value)
 {
-	_maxThirdPersonPitch = value;
+	_maxThirdPersonPitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
 void Camera::setThirdPersonDistance(float value)
 {
-	_thirdPersonDistance = value;
+	_thirdPersonDistance = max(0.0f, value);
 }
 
 void Camera::setAspectRatio(float value)
 {
-	_aspectRatio = value;
+	_aspectRatio = max(0.0f, value);
 }
 
 const Vec3 Camera::getPosition()

@@ -234,9 +234,9 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					}
 
 					// AABB must still be a box (cannot be flat)
-					newAabbSize.x = max(newAabbSize.x, 0.1f);
-					newAabbSize.y = max(newAabbSize.y, 0.1f);
-					newAabbSize.z = max(newAabbSize.z, 0.1f);
+					newAabbSize.x = max(0.1f, newAabbSize.x);
+					newAabbSize.y = max(0.1f, newAabbSize.y);
+					newAabbSize.z = max(0.1f, newAabbSize.z);
 
 					// Calculate Y offset, because rotation is around center while billboard is not centered
 					float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);

@@ -90,8 +90,8 @@ private:
 	static inline const float DEFAULT_NEAR_Z = 0.01f;
 	static inline const float DEFAULT_FAR_Z = 3000.0f;
 	static inline const float DEFAULT_MOUSE_SENSITIVITY = 0.01f;
-	static inline const float MIN_PITCH_ANGLE = -89.0f;
-	static inline const float MAX_PITCH_ANGLE = 89.0f;
+	static inline const float MIN_PITCH_ANGLE = -89.99f;
+	static inline const float MAX_PITCH_ANGLE = 89.99f;
 	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
 	static inline const float MAX_THIRD_PERSON_DISTANCE = numeric_limits<float>::max();
 	static inline const float MAX_ACCELERATION = 10.0f;

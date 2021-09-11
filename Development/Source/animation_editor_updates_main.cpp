@@ -113,7 +113,12 @@ void AnimationEditor::_updateAnimationCreating()
 					_currentAnimationID = newAnimationID;
 
 					// Create animation
-					_animations.push_back(make_shared<Animation>(newAnimationID));
+					auto animation = make_shared<Animation>(newAnimationID);
+					animation->addPartID("");
+					animation->addTotalMovement("", Vec3(0.0f));
+					animation->addTotalRotation("", Vec3(0.0f));
+					animation->addTotalScaling("", Vec3(0.0f));
+					_animations.push_back(animation);
 
 					// Miscellaneous
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationID")->getEntityID(), "Animation: " + newAnimationID, 0.025f);

@@ -1,5 +1,5 @@
 #include "animation_editor.hpp"
-#include "logger.hpp"
+
 void AnimationEditor::_updateAnimationExecution()
 {
 	if (!_fe3d.application_isPaused())
@@ -130,33 +130,33 @@ void AnimationEditor::_updateAnimationExecution()
 							if (transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.x - targetTransformation.x);
-								totalMovement.x += (-difference);
+								totalMovement.x -= difference;
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
 								difference = (totalRotation.x - targetTransformation.x);
-								totalRotation.x += (-difference);
+								totalRotation.x -= difference;
 							}
 							else if (transformationType == TransformationType::SCALING)
 							{
 								difference = (totalScaling.x - targetTransformation.x);
-								totalScaling.x += (-difference);
+								totalScaling.x -= difference;
 							}
 						}
 
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3((finalSpeed - difference), 0.0f, 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), (currentModelSize * rotationOrigin), partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3((finalSpeed - difference), 0.0f, 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3((finalSpeed - difference), 0.0f, 0.0f), partID);
 						}
 					}
 
@@ -216,33 +216,33 @@ void AnimationEditor::_updateAnimationExecution()
 							if (transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.y - targetTransformation.y);
-								totalMovement.y += (-difference);
+								totalMovement.y -= difference;
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
 								difference = (totalRotation.y - targetTransformation.y);
-								totalRotation.y += (-difference);
+								totalRotation.y -= difference;
 							}
 							else if (transformationType == TransformationType::SCALING)
 							{
 								difference = (totalScaling.y - targetTransformation.y);
-								totalScaling.y += (-difference);
+								totalScaling.y -= difference;
 							}
 						}
 
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, (finalSpeed - difference), 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), (currentModelSize * rotationOrigin), partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, (finalSpeed - difference), 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, (finalSpeed - difference), 0.0f), partID);
 						}
 					}
 
@@ -302,41 +302,41 @@ void AnimationEditor::_updateAnimationExecution()
 							if (transformationType == TransformationType::MOVEMENT)
 							{
 								difference = (totalMovement.z - targetTransformation.z);
-								totalMovement.z += (-difference);
+								totalMovement.z -= difference;
 							}
 							else if (transformationType == TransformationType::ROTATION)
 							{
 								difference = (totalRotation.z - targetTransformation.z);
-								totalRotation.z += (-difference);
+								totalRotation.z -= difference;
 							}
 							else if (transformationType == TransformationType::SCALING)
 							{
 								difference = (totalScaling.z - targetTransformation.z);
-								totalScaling.z += (-difference);
+								totalScaling.z -= difference;
 							}
 						}
 
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, (finalSpeed - difference)), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), (currentModelSize * rotationOrigin), partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, (finalSpeed - difference)), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, (finalSpeed - difference)), partID);
 						}
 					}
 				}
 
 				// Update animation values
 				animation.setTotalMovement(partID, totalMovement);
-				animation.setTotalRotation(partID, totalMovement);
-				animation.setTotalScaling(partID, totalMovement);
+				animation.setTotalRotation(partID, totalRotation);
+				animation.setTotalScaling(partID, totalScaling);
 
 				// Update frame values
 				frame.setSpeed(partID, baseSpeed);
@@ -379,7 +379,7 @@ void AnimationEditor::_updateAnimationExecution()
 				{
 					_animationsToStop.insert(idPair);
 				}
-				else if (animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished normally
+				else if (animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished
 				{
 					// Check if animation is endless
 					if (animation.getTimesToPlay() == -1)
@@ -412,7 +412,6 @@ void AnimationEditor::_updateAnimationExecution()
 					}
 
 					// Next frame
-					std::cout << "hoi";
 					animation.setFrameIndex(animation.getFrameIndex() + 1);
 				}
 			}

@@ -121,7 +121,7 @@ void AnimationEditor::_updateChoiceMenu()
 			if (_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()) &&
 				_fe3d.modelEntity_isMultiParted(currentAnimation->getPreviewModelID()))
 			{
-				// Check if last frame is the default frame
+				// Check if only default frame exists
 				if (currentAnimation->getFrames().size() == 1)
 				{
 					// Clear empty partID

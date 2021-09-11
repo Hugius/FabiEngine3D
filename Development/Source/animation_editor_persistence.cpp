@@ -58,14 +58,9 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			iss = istringstream(line);
 			iss >> animationID >> previewModelID;
 
-			// Clear default empty partID
-			newAnimation->setPartIDs({});
-			newAnimation->setTotalMovements({});
-			newAnimation->setTotalRotations({});
-			newAnimation->setTotalScalings({});
-
 			// Extract frame data from file
 			vector<AnimationFrame> frames;
+			AnimationFrame defaultFrame;
 			while (true)
 			{
 				// Read the amount of model parts
@@ -97,23 +92,34 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 							partID = "";
 						}
 
-						// Add part to frame
+						// Add part to animation only once
+						if (frames.empty())
+						{
+							// Add part ID
+							newAnimation->addPartID(partID);
+
+							// Add total transformation
+							newAnimation->addTotalMovement(partID, Vec3(0.0f));
+							newAnimation->addTotalRotation(partID, Vec3(0.0f));
+							newAnimation->addTotalScaling(partID, Vec3(0.0f));
+						}
+
+						// Fill default frame only once
+						if (frames.empty())
+						{
+							defaultFrame.addTargetTransformation(partID, Vec3(0.0f));
+							defaultFrame.addRotationOrigin(partID, Vec3(0.0f));
+							defaultFrame.addSpeed(partID, Vec3(0.0f));
+							defaultFrame.addSpeedType(partID, AnimationSpeedType::LINEAR);
+							defaultFrame.addTransformationType(partID, TransformationType::MOVEMENT);
+						}
+
+						// Add part data to frame
 						frame.addTargetTransformation(partID, targetTransformation);
 						frame.addRotationOrigin(partID, rotationOrigin);
 						frame.addSpeed(partID, speed);
 						frame.addSpeedType(partID, AnimationSpeedType(speedType));
 						frame.addTransformationType(partID, TransformationType(transformationType));
-
-						// Add all partIDs only once
-						if (frames.empty())
-						{
-							newAnimation->addPartID(partID);
-
-							// Also add total transformation for each partID
-							newAnimation->addTotalMovement(partID, Vec3(0.0f));
-							newAnimation->addTotalRotation(partID, Vec3(0.0f));
-							newAnimation->addTotalScaling(partID, Vec3(0.0f));
-						}
 					}
 
 					// Add frame
@@ -125,10 +131,14 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 				}
 			}
 
-			// Add frames to animation
-			auto currentFrames = newAnimation->getFrames();
-			currentFrames.insert(currentFrames.end(), frames.begin(), frames.end());
-			newAnimation->setFrames(currentFrames);
+			// Add default frame to animation
+			newAnimation->addFrame(defaultFrame);
+
+			// Add custom frames to animation
+			for (const auto& frame : frames)
+			{
+				newAnimation->addFrame(frame);
+			}
 		}
 
 		// Only if loading animations in editor

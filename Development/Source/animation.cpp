@@ -7,20 +7,7 @@ Animation::Animation(const string& ID)
 	:
 	_ID(ID)
 {
-	// Empty part = whole model
-	_partIDs.push_back("");
-	_totalMovements.insert(make_pair("", Vec3(0.0f)));
-	_totalRotations.insert(make_pair("", Vec3(0.0f)));
-	_totalScalings.insert(make_pair("", Vec3(0.0f)));
 
-	// Add default frame
-	AnimationFrame defaultFrame;
-	defaultFrame.addTargetTransformation("", Vec3(0.0f));
-	defaultFrame.addRotationOrigin("", Vec3(0.0f));
-	defaultFrame.addSpeed("", Vec3(0.0f));
-	defaultFrame.addSpeedType("", AnimationSpeedType::LINEAR);
-	defaultFrame.addTransformationType("", TransformationType::MOVEMENT);
-	_frames.push_back(defaultFrame);
 }
 
 void Animation::setFrames(const vector<AnimationFrame>& value)

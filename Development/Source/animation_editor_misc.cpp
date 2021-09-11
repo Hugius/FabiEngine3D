@@ -29,7 +29,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 
 bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
 {
-	return (first >= second - fabsf(speed)) && (first <= second + fabsf(speed));
+	return (first >= (second - fabsf(speed))) && (first <= (second + fabsf(speed)));
 }
 
 bool AnimationEditor::_comparePartIDs(vector<string> first, vector<string> second)

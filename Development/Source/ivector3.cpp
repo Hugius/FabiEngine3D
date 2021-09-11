@@ -15,28 +15,28 @@ Ivec3::Ivec3(const Vec3& other)
 	this->z = static_cast<int>(other.z);
 }
 
-Ivec3::Ivec3(int xyz)
+Ivec3::Ivec3(const int value)
 {
-	this->x = xyz;
-	this->y = xyz;
-	this->z = xyz;
+	this->x = value;
+	this->y = value;
+	this->z = value;
 }
 
-Ivec3::Ivec3(int x, int y, int z) 
+Ivec3::Ivec3(const int x, const int y, const int z)
 {
 	this->x = x;
 	this->y = y;
 	this->z = z;
 }
 
-void Ivec3::operator+=(const Ivec3 & v)
+void Ivec3::operator+=(const Ivec3& v)
 {
 	this->x += v.x;
 	this->y += v.y;
 	this->z += v.z;
 }
 
-void Ivec3::operator-=(const Ivec3 & v)
+void Ivec3::operator-=(const Ivec3& v)
 {
 	this->x -= v.x;
 	this->y -= v.y;
@@ -71,14 +71,14 @@ void Ivec3::operator-=(const int& value)
 	this->z -= value;
 }
 
-void Ivec3::operator/=(const int & value)
+void Ivec3::operator/=(const int& value)
 {
 	this->x /= value;
 	this->y /= value;
 	this->z /= value;
 }
 
-void Ivec3::operator*=(const int & value)
+void Ivec3::operator*=(const int& value)
 {
 	this->x *= value;
 	this->y *= value;

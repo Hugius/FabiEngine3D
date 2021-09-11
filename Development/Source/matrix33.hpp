@@ -16,12 +16,12 @@ struct Matrix33 final
 	// Creation
 	Matrix33();
 	Matrix33(const Matrix44& other);
-	Matrix33(float value);
+	Matrix33(const float value);
 	Matrix33
 	(
-		float m00, float m01, float m02,
-		float m10, float m11, float m12,
-		float m20, float m21, float m22
+		const float m00, const float m01, const float m02,
+		const float m10, const float m11, const float m12,
+		const float m20, const float m21, const float m22
 	);
 
 	// Matrices

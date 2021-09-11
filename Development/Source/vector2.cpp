@@ -13,13 +13,13 @@ Vec2::Vec2(const Ivec2& other)
 	this->y = static_cast<float>(other.y);
 }
 
-Vec2::Vec2(float xy)
+Vec2::Vec2(const float value)
 {
-	this->x = xy;
-	this->y = xy;
+	this->x = value;
+	this->y = value;
 }
 
-Vec2::Vec2(float x, float y) {
+Vec2::Vec2(const float x, const float y) {
 	this->x = x;
 	this->y = y;
 }

@@ -1,10 +1,10 @@
 #include "billboard_entity.hpp"
-
-#include <algorithm>
 #include "logger.hpp"
 
-using std::max;
+#include <algorithm>
+
 using std::clamp;
+using std::max;
 
 void BillboardEntity::updateTransformation()
 {

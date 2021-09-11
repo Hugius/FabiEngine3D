@@ -18,8 +18,8 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 	string selectedPartID = "";
 	string tempDiffuseMapPath = "";
 	string tempEmissionMapPath = "";
-	string tempNormalMapPath = "";
 	string tempReflectionMapPath = "";
+	string tempNormalMapPath = "";
 
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
@@ -136,14 +136,13 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 		}
 		else if (strcmp(lineHeader, "f") == 0) // Faces (triangle data)
 		{
-			// Declare variables
+			// Temporary values
 			unsigned int posIndex[3];
 			unsigned int uvIndex[3];
 			unsigned int normalIndex[3];
-			int matches;
 
 			// Read face indices
-			matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", 
+			int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n",
 				&posIndex[0], &uvIndex[0], &normalIndex[0], 
 				&posIndex[1], &uvIndex[1], &normalIndex[1], 
 				&posIndex[2], &uvIndex[2], &normalIndex[2]);
@@ -160,16 +159,17 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			for (auto& meshPart : meshParts)
 			{
 				// Find mesh part
-				if (meshPart.ID == selectedPartID)
+				if (meshPart.getID() == selectedPartID)
 				{
+					// Prevent mesh part creation
 					isAlreadyExisting = true;
 
-					// Add vertices
+					// Add data
 					for (int i = 0; i < 3; i++)
 					{
-						meshPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
-						meshPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
-						meshPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
+						meshPart.addVertex(temp_positions[posIndex[i] - 1]);
+						meshPart.addUV(temp_uvs[uvIndex[i] - 1]);
+						meshPart.addNormal(temp_normals[normalIndex[i] - 1]);
 					}
 
 					// Part is found
@@ -180,24 +180,23 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			// Create new mesh part
 			if (!isAlreadyExisting)
 			{
+				// Create mesh part
 				MeshPart newPart;
 
-				// Add vertices
+				// Set texture paths
+				newPart.setID(selectedPartID);
+				newPart.setDiffuseMapPath(tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath));
+				newPart.setEmissionMapPath(tempEmissionMapPath.empty() ? "" : string("game_assets\\textures\\emission_maps\\" + tempEmissionMapPath));
+				newPart.setReflectionMapPath(tempReflectionMapPath.empty() ? "" : string("game_assets\\textures\\reflection_maps\\" + tempReflectionMapPath));
+				newPart.setNormalMapPath(tempNormalMapPath.empty() ? "" : string("game_assets\\textures\\normal_maps\\" + tempNormalMapPath));
+
+				// Add first data
 				for (int i = 0; i < 3; i++)
 				{
-					newPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
-					newPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
-					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
+					newPart.addVertex(temp_positions[posIndex[i] - 1]);
+					newPart.addUV(temp_uvs[uvIndex[i] - 1]);
+					newPart.addNormal(temp_normals[normalIndex[i] - 1]);
 				}
-
-				// Set mesh part ID
-				newPart.ID = selectedPartID;
-
-				// Set texture map paths
-				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);
-				newPart.emissionMapPath = tempEmissionMapPath.empty() ? "" : string("game_assets\\textures\\emission_maps\\" + tempEmissionMapPath);
-				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("game_assets\\textures\\normal_maps\\" + tempNormalMapPath);
-				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("game_assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
 
 				// Add new mesh part
 				meshParts.push_back(newPart);
@@ -208,17 +207,17 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 	// Calculate tangents for normal mapping
 	for (auto& meshPart : meshParts)
 	{
-		for (size_t i = 0; i < meshPart.vertices.size(); i += 3)
+		for (size_t i = 0; i < meshPart.getVertices().size(); i += 3)
 		{
 			// Vertices of 1 triangle
-			Vec3 v0 = meshPart.vertices[i + 0];
-			Vec3 v1 = meshPart.vertices[i + 1];
-			Vec3 v2 = meshPart.vertices[i + 2];
+			Vec3 v0 = meshPart.getVertices()[i + 0];
+			Vec3 v1 = meshPart.getVertices()[i + 1];
+			Vec3 v2 = meshPart.getVertices()[i + 2];
 
 			// Shortcuts for UVs
-			Vec2 uv0 = meshPart.uvCoords[i + 0];
-			Vec2 uv1 = meshPart.uvCoords[i + 1];
-			Vec2 uv2 = meshPart.uvCoords[i + 2];
+			Vec2 uv0 = meshPart.getUVs()[i + 0];
+			Vec2 uv1 = meshPart.getUVs()[i + 1];
+			Vec2 uv2 = meshPart.getUVs()[i + 2];
 
 			// Vertex delta
 			Vec3 deltaPos1 = (v1 - v0);
@@ -233,9 +232,9 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			Vec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
 
 			// Add to current mesh part
-			meshPart.tangents.push_back(tangent);
-			meshPart.tangents.push_back(tangent);
-			meshPart.tangents.push_back(tangent);
+			meshPart.addTangent(tangent);
+			meshPart.addTangent(tangent);
+			meshPart.addTangent(tangent);
 		}
 	}
 

@@ -284,20 +284,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				// Check if in sequence with if statement
 				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
-					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
-						_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
+					(_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::IF ||
+						_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::ELIF))
 				{
 					// Extract condition string
 					string conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
 
 					// Set to elif statement
-					_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELIF;
+					_getLastConditionStatement(conditionStatements, scopeDepth)->setType(ScriptConditionType::ELIF);
 
-					// Check the condition of the elif statements
-					if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult && _checkConditionString(conditionString))
+					// Check the condition of the elif statement
+					if (_getLastConditionStatement(conditionStatements, scopeDepth)->isFalse() && _checkConditionString(conditionString))
 					{
 						_hasPassedElifStatement = true;
-						_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult = true;
+						_getLastConditionStatement(conditionStatements, scopeDepth)->setTrue();
 						scopeDepth++;
 					}
 					else
@@ -326,18 +326,18 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				// Check if in sequence with if or elif statement
 				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
-					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
-						_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
+					(_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::IF ||
+						_getLastConditionStatement(conditionStatements, scopeDepth)->getType() == ScriptConditionType::ELIF))
 				{
 
 					// Check if the statement does not have a condition
 					if (scriptLineText.size() == (ELSE_KEYWORD.size() + 1))
 					{
 						// Set to else statement
-						_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELSE;
+						_getLastConditionStatement(conditionStatements, scopeDepth)->setType(ScriptConditionType::ELSE);
 
 						// Check if all previous conditions failed
-						if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult)
+						if (_getLastConditionStatement(conditionStatements, scopeDepth)->isFalse())
 						{
 							scopeDepth++;
 							_hasPassedElseStatement = true;

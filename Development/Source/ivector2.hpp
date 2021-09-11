@@ -21,8 +21,8 @@ struct Ivec2 final
 	// Creation
 	Ivec2();
 	Ivec2(const Vec2& other);
-	Ivec2(int xy);
-	Ivec2(int x, int y);
+	Ivec2(const int value);
+	Ivec2(const int x, const int y);
 
 	// Voids
 	void operator+=(const Ivec2& other);

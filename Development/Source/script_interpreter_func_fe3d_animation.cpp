@@ -154,7 +154,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
-					animationData->speedMultiplier = arguments[2].getDecimal();
+					animationData->setSpeedMultiplier(arguments[2].getDecimal());
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 				}
 			}
@@ -177,7 +177,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
-					animationData->isAutoPaused = arguments[2].getBoolean();
+					animationData->setAutoPaused(arguments[2].getBoolean());
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 				}
 			}
@@ -200,7 +200,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
-					auto result = animationData->speedMultiplier;
+					auto result = animationData->getSpeedMultiplier();
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 				}
 			}
@@ -223,7 +223,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
-					auto result = animationData->isAutoPaused;
+					auto result = animationData->isAutoPaused();
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 				}
 			}
@@ -246,7 +246,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
-					auto result = animationData->frameIndex;
+					auto result = animationData->getFrameIndex();
 					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 				}
 			}

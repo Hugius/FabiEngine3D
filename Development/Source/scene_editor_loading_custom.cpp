@@ -326,13 +326,14 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				// Retrieve raw animation data for editing
 				string errorMessage = "Tried to retrieve animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
+				auto frameData = animationData->getFrames()[frameIndex];
 
 				// Set properties
 				isPaused ? _animationEditor.pauseAnimation(animationID, modelID) : void();
-				animationData->speedMultiplier = speedMultiplier;
-				animationData->fadeFramestep = fadeFramestep;
-				animationData->frameIndex = frameIndex;
-				animationData->frames[frameIndex].speeds = speeds;
+				animationData->setSpeedMultiplier(speedMultiplier);
+				animationData->setFadeFramestep(fadeFramestep);
+				animationData->setFrameIndex(frameIndex);
+				frameData.setSpeeds(speeds);
 
 				// Retrieve parts
 				auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
@@ -344,9 +345,9 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 					auto size = _fe3d.modelEntity_getSize(modelID, partID);
 
 					// Set properties
-					animationData->totalMovements[partID] = position;
-					animationData->totalRotations[partID] = rotation;
-					animationData->totalScalings[partID] = size;
+					animationData->setTotalMovement(partID, position);
+					animationData->setTotalRotation(partID, rotation);
+					animationData->setTotalScaling(partID, size);
 				}
 			}
 		}

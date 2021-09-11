@@ -17,7 +17,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 {
 	for (size_t i = 0; i < _animations.size(); i++)
 	{
-		if (_animations[i]->ID == ID)
+		if (_animations[i]->getID() == ID)
 		{
 			_animations.erase(_animations.begin() + i);
 			return;
@@ -57,7 +57,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 {
 	for (const auto& animation : _animations)
 	{
-		if (animation->ID == ID)
+		if (animation->getID() == ID)
 		{
 			return animation;
 		}
@@ -73,7 +73,7 @@ const vector<string> AnimationEditor::getAllAnimationIDs()
 	// Find all IDs
 	for (const auto& animation : _animations)
 	{
-		IDs.push_back(animation->ID);
+		IDs.push_back(animation->getID());
 	}
 
 	// Sort alphabetically

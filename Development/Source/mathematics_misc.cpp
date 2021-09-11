@@ -6,7 +6,7 @@ const float Math::calculateAngleDifference(float firstAngle, float secondAngle)
 
 	if (difference > 180.0f)
 	{
-		difference = (360.0f - difference);
+		return (360.0f - difference);
 	}
 	else
 	{

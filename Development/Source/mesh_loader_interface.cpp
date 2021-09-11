@@ -52,21 +52,21 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 				// Extract any texture paths
 				for (const auto& part : returnValue.second)
 				{
-					if (!part.diffuseMapPath.empty()) // Diffuse map
+					if (!part.getDiffuseMapPath().empty()) // Diffuse map
 					{
-						resultingTexturePaths.push_back(part.diffuseMapPath);
+						resultingTexturePaths.push_back(part.getDiffuseMapPath());
 					}
-					if (!part.emissionMapPath.empty()) // Emission map
+					if (!part.getEmissionMapPath().empty()) // Emission map
 					{
-						resultingTexturePaths.push_back(part.emissionMapPath);
+						resultingTexturePaths.push_back(part.getEmissionMapPath());
 					}
-					if (!part.normalMapPath.empty()) // Normal map
+					if (!part.getNormalMapPath().empty()) // Normal map
 					{
-						resultingTexturePaths.push_back(part.normalMapPath);
+						resultingTexturePaths.push_back(part.getNormalMapPath());
 					}
-					if (!part.reflectionMapPath.empty()) // Reflection map
+					if (!part.getReflectionMapPath().empty()) // Reflection map
 					{
-						resultingTexturePaths.push_back(part.reflectionMapPath);
+						resultingTexturePaths.push_back(part.getReflectionMapPath());
 					}
 				}
 
@@ -99,7 +99,7 @@ BEGIN:
 	if (returnValue.second.empty())
 	{
 		Logger::throwWarning(returnValue.first);
-		return nullptr;
+		return {};
 	}
 	else
 	{

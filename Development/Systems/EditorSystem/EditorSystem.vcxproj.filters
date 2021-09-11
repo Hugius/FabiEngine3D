@@ -438,6 +438,12 @@
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_edit.cpp">
       <Filter>Scene Editor\Reflection</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\animation.cpp">
+      <Filter>Animation Editor\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_frame.cpp">
+      <Filter>Animation Editor\Data Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\animation_editor.hpp">

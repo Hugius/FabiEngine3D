@@ -1,63 +1,100 @@
 #pragma once
 
-#include "fabi_engine_3d.hpp"
 #include "animation_frame.hpp"
 
-struct Animation final
+#include <vector>
+
+using std::vector;
+
+class Animation final
 {
-	Animation(const string& ID)
-		:
-		ID(ID)
-	{
-		// Empty part = whole model
-		partIDs.push_back("");
-		totalMovements.insert(make_pair("", Vec3(0.0f)));
-		totalRotations.insert(make_pair("", Vec3(0.0f)));
-		totalScalings.insert(make_pair("", Vec3(0.0f)));
+public:
+	Animation(const string& ID);
 
-		// Add default frame
-		AnimationFrame defaultFrame;
-		defaultFrame.targetTransformations.insert(make_pair("", Vec3(0.0f)));
-		defaultFrame.rotationOrigins.insert(make_pair("", Vec3(0.0f)));
-		defaultFrame.speeds.insert(make_pair("", Vec3(0.0f)));
-		defaultFrame.speedTypes.insert(make_pair("", AnimationSpeedType::LINEAR));
-		defaultFrame.transformationTypes.insert(make_pair("", TransformationType::MOVEMENT));
-		frames.push_back(defaultFrame);
-	}
+	// Voids
+	void setFrames(const vector<AnimationFrame>& value);
+	void setFrame(unsigned int index, const AnimationFrame& value);
+	void addFrame(const AnimationFrame& value);
+	void setPartIDs(const vector<string>& value);
+	void setPartID(unsigned int index, const string& value);
+	void addPartID(const string& value);
+	void setPreviewModelID(const string& value);
+	void setOldPreviewModelID(const string& value);
+	void setAnimatedModelID(const string& value);
+	void setTotalMovements(const map<string, Vec3>& value);
+	void setTotalMovement(const string& partID, Vec3 value);
+	void addTotalMovement(const string& partID, Vec3 value);
+	void setTotalRotations(const map<string, Vec3>& value);
+	void setTotalRotation(const string& partID, Vec3 value);
+	void addTotalRotation(const string& partID, Vec3 value);
+	void setTotalScalings(const map<string, Vec3>& value);
+	void setTotalScaling(const string& partID, Vec3 value);
+	void addTotalScaling(const string& partID, Vec3 value);
+	void setInitialSize(Vec3 value);
+	void setSpeedMultiplier(float value);
+	void setTimesToPlay(int value);
+	void setFadeFramestep(int value);
+	void setFadeFrameIndex(int value);
+	void setFrameIndex(unsigned int value);
+	void setPaused(bool value);
+	void setAutoPaused(bool value);
 
-	void updateValueLimits()
-	{
-		for (auto& [partID, totalScaling] : totalScalings)
-		{
-			totalScaling = Vec3(max(0.0f, totalScaling.x), max(0.0f, totalScaling.y), max(0.0f, totalScaling.z));
-		}
-		speedMultiplier = max(0.0f, speedMultiplier);
-		initialSize = Vec3(max(0.0f, initialSize.x), max(0.0f, initialSize.y), max(0.0f, initialSize.z));
-	}
+	// Instances
+	const vector<AnimationFrame>& getFrames() const;
 
-	const string ID;
+	// Strings
+	const string& getID() const;
+	const vector<string>& getPartIDs() const;
+	const string& getPreviewModelID() const;
+	const string& getOldPreviewModelID() const;
+	const string& getAnimatedModelID() const;
 
-	vector<AnimationFrame> frames;
-	vector<string> partIDs;
+	// Vectors
+	const map<string, Vec3>& getTotalMovements() const;
+	const map<string, Vec3>& getTotalRotations() const;
+	const map<string, Vec3>& getTotalScalings() const;
+	const Vec3 getInitialSize() const;
 
-	map<string, Vec3> totalMovements;
-	map<string, Vec3> totalRotations;
-	map<string, Vec3> totalScalings;
+	// Floats
+	const float getSpeedMultiplier() const;
 
-	Vec3 initialSize = Vec3(0.0f);
+	// Integers
+	const int getTimesToPlay() const;
+	const int getFadeFramestep() const;
+	const int getFadeFrameIndex() const;
+	const unsigned int getFrameIndex() const;
 
-	string previewModelID = "";
-	string oldPreviewModelID = "";
-	string animatedModelID = "";
+	// Booleans
+	const bool isPaused() const;
+	const bool isAutoPaused() const;
 
-	float speedMultiplier = 1.0f;
+private:
+	// Instances
+	vector<AnimationFrame> _frames;
 
-	int timesToPlay = 0;
-	int fadeFramestep = -1;
-	int fadeFrameIndex = -1;
+	// Strings
+	const string _ID;
+	vector<string> _partIDs;
+	string _previewModelID = "";
+	string _oldPreviewModelID = "";
+	string _animatedModelID = "";
 
-	unsigned int frameIndex = 0;
+	// Vectors
+	map<string, Vec3> _totalMovements;
+	map<string, Vec3> _totalRotations;
+	map<string, Vec3> _totalScalings;
+	Vec3 _initialSize = Vec3(0.0f);
 
-	bool isPaused = false;
-	bool isAutoPaused = false;
+	// Floats
+	float _speedMultiplier = 1.0f;
+
+	// Integers
+	int _timesToPlay = 0;
+	int _fadeFramestep = -1;
+	int _fadeFrameIndex = -1;
+	unsigned int _frameIndex = 0;
+
+	// Booleans
+	bool _isPaused = false;
+	bool _isAutoPaused = false;
 };

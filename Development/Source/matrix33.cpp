@@ -2,9 +2,9 @@
 #include "matrix44.hpp"
 
 Matrix33::Matrix33(
-	float m00, float m01, float m02, 
-	float m10, float m11, float m12, 
-	float m20, float m21, float m22)
+	const float m00, const float m01, const float m02, 
+	const float m10, const float m11, const float m12, 
+	const float m20, const float m21, const float m22)
 {
 	this->m[0][0] = m00; this->m[1][0] = m10; this->m[2][0] = m20;
 	this->m[0][1] = m01; this->m[1][1] = m11; this->m[2][1] = m21;
@@ -29,7 +29,7 @@ Matrix33::Matrix33(const Matrix44& other)
 	this->m[0][2] = other.m[0][2]; this->m[1][2] = other.m[1][2]; this->m[2][2] = other.m[2][2];
 }
 
-Matrix33::Matrix33(float value)
+Matrix33::Matrix33(const float value)
 {
 	for (int i = 0; i < 9; i++) {
 		f[i] = 0.0f;

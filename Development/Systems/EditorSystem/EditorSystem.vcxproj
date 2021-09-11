@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\animation.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_execution.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_interface.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_main.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="..\..\Source\animation_editor_updates_frame.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_updates_choice.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_updates_misc.cpp" />
+    <ClCompile Include="..\..\Source\animation_frame.cpp" />
     <ClCompile Include="..\..\Source\audio_editor_main.cpp" />
     <ClCompile Include="..\..\Source\audio_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\audio_editor_persistence.cpp" />

@@ -14,7 +14,7 @@ public:
 	Window(LibraryLoader& libraryLoader);
 	~Window();
 	
-	void setTitle(const string & title);
+	void setTitle(const string& title);
 	void setSize(Ivec2 size);
 	void center();
 	void setOpacity(float value);

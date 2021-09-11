@@ -2,20 +2,33 @@
 
 #include "script_condition_type.hpp"
 
-struct ScriptConditionStatement final
+class ScriptConditionStatement final
 {
-	ScriptConditionStatement(unsigned int scopeDepth, bool conditionResult)
-		:
-		scopeDepth(scopeDepth),
-		conditionResult(conditionResult),
-		type(ScriptConditionType::IF)
-	{
+public:
+	ScriptConditionStatement(unsigned int scopeDepth, bool isTrue);
 
-	}
+	// Voids
+	void setTrue();
+	void setFalse();
+	void setType(ScriptConditionType type);
 
-	const unsigned int scopeDepth;
+	// Integers
+	const unsigned int getScopeDepth();
 
-	bool conditionResult;
+	// Booleans
+	const bool isTrue();
+	const bool isFalse();
 
-	ScriptConditionType type;
+	// Miscellaneous
+	const ScriptConditionType getType();
+
+private:
+	// Integers
+	const unsigned int _scopeDepth;
+
+	// Booleans
+	bool _conditionResult = false;
+
+	// Miscellaneous
+	ScriptConditionType _type = ScriptConditionType::IF;
 };

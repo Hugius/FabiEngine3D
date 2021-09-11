@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\Source\texture_loader_misc.cpp">
       <Filter>Texture</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\mesh_part.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\audio_loader.hpp">

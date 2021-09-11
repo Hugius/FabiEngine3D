@@ -1,4 +1,5 @@
 #include "vector3.hpp"
+#include "ivector3.hpp"
 
 Vec3::Vec3()
 {
@@ -7,14 +8,21 @@ Vec3::Vec3()
 	this->z = 0;
 }
 
-Vec3::Vec3(float xyz)
+Vec3::Vec3(const Ivec3& other)
 {
-	this->x = xyz;
-	this->y = xyz;
-	this->z = xyz;
+	this->x = static_cast<float>(other.x);
+	this->y = static_cast<float>(other.y);
+	this->z = static_cast<float>(other.z);
 }
 
-Vec3::Vec3(float x, float y, float z)
+Vec3::Vec3(const float value)
+{
+	this->x = value;
+	this->y = value;
+	this->z = value;
+}
+
+Vec3::Vec3(const float x, const float y, const float z)
 {
 	this->x = x;
 	this->y = y;

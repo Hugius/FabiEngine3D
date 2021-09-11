@@ -5,7 +5,7 @@ const shared_ptr<RenderBuffer> BillboardEntity::getRenderBuffer()
 	return _renderBuffer;
 }
 
-const Matrix44 & BillboardEntity::getTransformationMatrix()
+const Matrix44& BillboardEntity::getTransformationMatrix()
 {
 	return _transformationMatrix;
 }

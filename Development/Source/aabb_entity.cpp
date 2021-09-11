@@ -148,7 +148,7 @@ const shared_ptr<RenderBuffer> AabbEntity::getRenderBuffer()
 	return _renderBuffer;
 }
 
-const Matrix44 & AabbEntity::getTransformationMatrix()
+const Matrix44& AabbEntity::getTransformationMatrix()
 {
 	return _transformationMatrix;
 }

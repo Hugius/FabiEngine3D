@@ -278,11 +278,11 @@ bool SceneEditor::saveCustomSceneToFile()
 				auto animationData = _animationEditor.getAnimationData(animationID, modelID, errorMessage);
 
 				// Data to save
-				auto isPaused		 = animationData->isPaused;
-				auto frameIndex		 = animationData->frameIndex;
-				auto speedMultiplier = animationData->speedMultiplier;
-				auto remainingLoops  = (animationData->timesToPlay == -1) ? -1 : (animationData->timesToPlay - 1);
-				auto fadeFramestep   = animationData->fadeFramestep;
+				auto isPaused		 = animationData->isPaused();
+				auto frameIndex		 = animationData->getFrameIndex();
+				auto speedMultiplier = animationData->getSpeedMultiplier();
+				auto remainingLoops  = (animationData->getTimesToPlay() == -1) ? -1 : (animationData->getTimesToPlay() - 1);
+				auto fadeFramestep   = animationData->getFadeFramestep();
 
 				// Write main data
 				file <<
@@ -297,14 +297,14 @@ bool SceneEditor::saveCustomSceneToFile()
 
 				// Write speeds
 				unsigned int index = 0;
-				auto speeds = animationData->frames[animationData->frameIndex].speeds;
-				for (const auto& [partID, speed] : speeds)
+				auto frame = animationData->getFrames().at(animationData->getFrameIndex());
+				for (const auto& [partID, speed] : frame.getSpeeds())
 				{
 					// Write speed
 					file << (partID.empty() ? "?" : partID) << " " << speed.x << " " << speed.y << " " << speed.z;
 
 					// Write space
-					if (index != (speeds.size() - 1))
+					if (index != (frame.getSpeeds().size() - 1))
 					{
 						file << " ";
 					}

@@ -22,18 +22,18 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 				{
 					// Retrieve animation
 					auto animation = *_getAnimation(animationID);
-					animation.animatedModelID = modelID;
-					animation.timesToPlay = (loops == -1) ? -1 : (loops + 1);
-					animation.initialSize = _fe3d.modelEntity_getSize(modelID);
+					animation.setAnimatedModelID(modelID);
+					animation.setTimesToPlay((loops == -1) ? -1 : (loops + 1));
+					animation.setInitialSize(_fe3d.modelEntity_getSize(modelID));
 
 					// Check if model has all the parts
 					bool hasAllParts = true;
-					for (const auto& partID : animation.partIDs)
+					for (const auto& partID : animation.getPartIDs())
 					{
 						// Part cannot be empty
 						if (!partID.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(modelID, partID);
+							hasAllParts = (hasAllParts && _fe3d.modelEntity_hasPart(modelID, partID));
 						}
 					}
 
@@ -72,7 +72,7 @@ bool AnimationEditor::isAnimationExisting(const string& ID)
 {
 	for (const auto& animation : _animations)
 	{
-		if (animation->ID == ID)
+		if (animation->getID() == ID)
 		{
 			return true;
 		}
@@ -115,7 +115,7 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	}
 	else
 	{
-		return !_startedAnimations.at(make_pair(animationID, modelID)).isPaused;
+		return !_startedAnimations.at(make_pair(animationID, modelID)).isPaused();
 	}
 
 	return false;
@@ -137,7 +137,7 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	}
 	else
 	{
-		return _startedAnimations.at(make_pair(animationID, modelID)).isPaused;
+		return _startedAnimations.at(make_pair(animationID, modelID)).isPaused();
 	}
 
 	return false;
@@ -159,7 +159,7 @@ bool AnimationEditor::isAnimationFading(const string& animationID, const string&
 	}
 	else
 	{
-		return (_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep != -1);
+		return (_startedAnimations.at(make_pair(animationID, modelID)).getFadeFramestep() != -1);
 	}
 
 	return false;
@@ -183,7 +183,7 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 			}
 			else
 			{
-				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = true;
+				_startedAnimations.at(make_pair(animationID, modelID)).setPaused(true);
 			}
 		}
 		else
@@ -211,7 +211,7 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 			// Check if animation is paused
 			if (isAnimationPaused(animationID, modelID))
 			{
-				_startedAnimations.at(make_pair(animationID, modelID)).isPaused = false;
+				_startedAnimations.at(make_pair(animationID, modelID)).setPaused(false);
 			}
 			else
 			{
@@ -279,7 +279,7 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 				}
 				else
 				{
-					_startedAnimations.at(make_pair(animationID, modelID)).fadeFramestep = max(0, framestep);
+					_startedAnimations.at(make_pair(animationID, modelID)).setFadeFramestep(max(0, framestep));
 				}
 			}
 			else

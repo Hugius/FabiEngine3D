@@ -1,5 +1,5 @@
 #include "animation_editor.hpp"
-
+#include "logger.hpp"
 void AnimationEditor::_updateAnimationExecution()
 {
 	if (!_fe3d.application_isPaused())
@@ -8,7 +8,7 @@ void AnimationEditor::_updateAnimationExecution()
 		for (auto& [idPair, animation] : _startedAnimations)
 		{
 			// Skip paused animations
-			if (animation.isPaused)
+			if (animation.isPaused())
 			{
 				continue;
 			}
@@ -16,60 +16,59 @@ void AnimationEditor::_updateAnimationExecution()
 			// Showing frame index
 			if (_isEditorLoaded)
 			{
-				_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.frameIndex + 1), 0.025f);
+				_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(animation.getFrameIndex() + 1), 0.025f);
 			}
 
 			// Retrieve current frame
-			auto& frame = animation.frames[animation.frameIndex];
+			const auto frameIndex = animation.getFrameIndex();
+			auto frame = animation.getFrames()[frameIndex];
 
 			// For every model part in this frame
 			unsigned int finishedPartsAmount = 0;
-			for (auto partID : animation.partIDs)
+			for (auto partID : animation.getPartIDs())
 			{
 				// Check if model still exists
-				if (!_fe3d.modelEntity_isExisting(animation.animatedModelID))
+				if (!_fe3d.modelEntity_isExisting(animation.getAnimatedModelID()))
 				{
 					break;
 				}
 
-				// Immutable values
-				const auto& currentModelSize = _fe3d.modelEntity_getSize(animation.animatedModelID);
-				const auto& transformationType = frame.transformationTypes[partID];
-				const auto& isMovement = (transformationType == TransformationType::MOVEMENT);
-				const auto& isRotation = (transformationType == TransformationType::ROTATION);
-				const auto& isScaling = (transformationType == TransformationType::SCALING);
-				const auto& speedMultiplier = (partID.empty() || (isMovement || isScaling)) ? animation.initialSize : Vec3(1.0f);
-				const auto& speedType = frame.speedTypes[partID];
-				const auto& rotationOrigin = frame.rotationOrigins[partID];
-				const auto& speed = frame.speeds[partID] * animation.speedMultiplier;
-				const auto& xSpeed = (!isRotation ? (speedMultiplier.x * speed.x) : speed.x);
-				const auto& ySpeed = (!isRotation ? (speedMultiplier.y * speed.y) : speed.y);
-				const auto& zSpeed = (!isRotation ? (speedMultiplier.z * speed.z) : speed.z);
-
-				// Movement is relative to initial size
-				// Rotation is always relative to real-time size
-				// Scaling is relative to initial size
-				const auto& targetTransformation =
-					isMovement ? (animation.initialSize * frame.targetTransformations[partID]) :
-					isRotation ? frame.targetTransformations[partID] :
-					((partID.empty() ? animation.initialSize : Vec3(1.0f)) * frame.targetTransformations[partID]);
-
 				// Mutable values
-				auto& totalMovement = animation.totalMovements[partID];
-				auto& totalRotation = animation.totalRotations[partID];
-				auto& totalScaling = animation.totalScalings[partID];
-				auto& baseSpeed = frame.speeds[partID];
+				auto totalMovement = animation.getTotalMovements().at(partID);
+				auto totalRotation = animation.getTotalRotations().at(partID);
+				auto totalScaling = animation.getTotalScalings().at(partID);
+				auto baseSpeed = frame.getSpeeds().at(partID);
+
+				// Immutable values
+				const auto currentModelSize = _fe3d.modelEntity_getSize(animation.getAnimatedModelID());
+				const auto transformationType = frame.getTransformationTypes().at(partID);
+				const auto isMovement = (transformationType == TransformationType::MOVEMENT);
+				const auto isRotation = (transformationType == TransformationType::ROTATION);
+				const auto isScaling = (transformationType == TransformationType::SCALING);
+				const auto speedMultiplier = (partID.empty() || (isMovement || isScaling)) ? animation.getInitialSize() : Vec3(1.0f);
+				const auto speedType = frame.getSpeedTypes().at(partID);
+				const auto rotationOrigin = frame.getRotationOrigins().at(partID);
+				const auto currentSpeed = (frame.getSpeeds().at(partID) * animation.getSpeedMultiplier());
+				const auto xSpeed = (!isRotation ? (speedMultiplier.x * currentSpeed.x) : currentSpeed.x);
+				const auto ySpeed = (!isRotation ? (speedMultiplier.y * currentSpeed.y) : currentSpeed.y);
+				const auto zSpeed = (!isRotation ? (speedMultiplier.z * currentSpeed.z) : currentSpeed.z);
+				const auto targetMovement = (animation.getInitialSize() * frame.getTargetTransformations().at(partID));
+				const auto targetRotation = frame.getTargetTransformations().at(partID);
+				const auto targetScaling = ((partID.empty() ? animation.getInitialSize() : Vec3(1.0f)) * frame.getTargetTransformations().at(partID));
+				const auto targetTransformation = (isMovement ? targetMovement : isRotation ? targetRotation : targetScaling);
 				
 				// Check if reached transformation of current frame
 				if (((isMovement && _hasReachedFloat(totalMovement.x, targetTransformation.x, xSpeed)) &&
 					(isMovement && _hasReachedFloat(totalMovement.y, targetTransformation.y, xSpeed)) &&
-					(isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, xSpeed))) ||
+					(isMovement && _hasReachedFloat(totalMovement.z, targetTransformation.z, xSpeed)))
+					||
 					((isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, ySpeed)) &&
-						(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
-						(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed))) ||
+					(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
+					(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed)))
+					||
 					((isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, zSpeed)) &&
-						(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
-						(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
+					(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
+					(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
 				{
 					finishedPartsAmount++;
 				}
@@ -148,16 +147,16 @@ void AnimationEditor::_updateAnimationExecution()
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.animatedModelID, Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.animatedModelID, Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(finalSpeed + (-difference), 0.0f, 0.0f), partID);
 						}
 					}
 
@@ -234,16 +233,16 @@ void AnimationEditor::_updateAnimationExecution()
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.animatedModelID, Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.animatedModelID, Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, finalSpeed + (-difference), 0.0f), partID);
 						}
 					}
 
@@ -320,59 +319,70 @@ void AnimationEditor::_updateAnimationExecution()
 						// Transform the model
 						if (transformationType == TransformationType::MOVEMENT)
 						{
-							_fe3d.modelEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_move(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.modelEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partID);
-							_fe3d.modelEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_setRotationOrigin(animation.getAnimatedModelID(), currentModelSize * rotationOrigin, partID);
+							_fe3d.modelEntity_rotate(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.modelEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
+							_fe3d.modelEntity_scale(animation.getAnimatedModelID(), Vec3(0.0f, 0.0f, finalSpeed + (-difference)), partID);
 						}
 					}
 				}
+
+				// Update animation values
+				animation.setTotalMovement(partID, totalMovement);
+				animation.setTotalRotation(partID, totalMovement);
+				animation.setTotalScaling(partID, totalMovement);
+
+				// Update frame values
+				frame.setSpeed(partID, baseSpeed);
 			}
 
+			// Update frame
+			animation.setFrame(frameIndex, frame);
+
 			// Check if animation needs to be faded
-			if (animation.fadeFramestep != -1 && animation.fadeFrameIndex == -1)
+			if (animation.getFadeFramestep() != -1 && animation.getFadeFrameIndex() == -1)
 			{
-				if (animation.fadeFramestep == 1)
+				if (animation.getFadeFramestep() == 1)
 				{
-					if ((animation.frameIndex % 2) != 0)
+					if ((animation.getFrameIndex() % 2) != 0)
 					{
-						animation.fadeFrameIndex = animation.frameIndex + 1;
+						animation.setFadeFrameIndex(animation.getFrameIndex() + 1);
 					}
 					else
 					{
-						animation.fadeFrameIndex = animation.frameIndex;
+						animation.setFadeFrameIndex(animation.getFrameIndex());
 					}
 				}
 				else
 				{
-					if ((animation.frameIndex % animation.fadeFramestep) == 0)
+					if ((animation.getFrameIndex() % animation.getFadeFramestep()) == 0)
 					{
-						animation.fadeFrameIndex = animation.frameIndex + 1;
+						animation.setFadeFrameIndex(animation.getFrameIndex() + 1);
 					}
 					else
 					{
-						animation.fadeFrameIndex = animation.frameIndex;
+						animation.setFadeFrameIndex(animation.getFrameIndex());
 					}
 				}
 			}
 
 			// Check if current frame is finished
-			if (finishedPartsAmount == animation.partIDs.size())
+			if (finishedPartsAmount == animation.getPartIDs().size())
 			{
-				if (animation.frameIndex == animation.fadeFrameIndex) // Animation faded to its end
+				if (animation.getFrameIndex() == animation.getFadeFrameIndex()) // Animation faded to its end
 				{
 					_animationsToStop.insert(idPair);
 				}
-				else if (animation.frameIndex == (static_cast<unsigned int>(animation.frames.size()) - 1)) // Animation finished normally
+				else if (animation.getFrameIndex() == (static_cast<unsigned int>(animation.getFrames().size()) - 1)) // Animation finished normally
 				{
 					// Check if animation is endless
-					if (animation.timesToPlay == -1)
+					if (animation.getTimesToPlay() == -1)
 					{
 						_animationsToStop.insert(idPair);
 						_animationsToStartAgain.insert(idPair);
@@ -380,29 +390,30 @@ void AnimationEditor::_updateAnimationExecution()
 					else
 					{
 						// Animation finished current play
-						animation.timesToPlay--;
+						animation.setTimesToPlay(animation.getTimesToPlay() - 1);
 
 						// Check if animation must stop
-						if (animation.timesToPlay == 0)
+						if (animation.getTimesToPlay() == 0)
 						{
 							_animationsToStop.insert(idPair);
 						}
 						else
 						{
-							animation.frameIndex = 0;
+							animation.setFrameIndex(0);
 						}
 					}
 				}
 				else // Animation not finished yet
 				{
 					// Auto-pause if allowed (skip default frame)
-					if (animation.isAutoPaused && animation.frameIndex != 0)
+					if (animation.isAutoPaused() && animation.getFrameIndex() != 0)
 					{
-						animation.isPaused = true;
+						animation.setPaused(true);
 					}
 
 					// Next frame
-					animation.frameIndex++;
+					std::cout << "hoi";
+					animation.setFrameIndex(animation.getFrameIndex() + 1);
 				}
 			}
 		}

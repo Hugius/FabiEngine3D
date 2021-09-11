@@ -22,8 +22,8 @@ struct Ivec3 final
 	// Creation
 	Ivec3();
 	Ivec3(const Vec3& other);
-	Ivec3(int xyz);
-	Ivec3(int x, int y, int z);
+	Ivec3(const int value);
+	Ivec3(const int x, const int y, const int z);
 
 	// Voids
 	void operator+=(const Ivec3& other);

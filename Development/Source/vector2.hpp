@@ -21,8 +21,8 @@ struct Vec2 final
 	// Creation
 	Vec2();
 	Vec2(const Ivec2& other);
-	Vec2(float xy);
-	Vec2(float x, float y);
+	Vec2(const float value);
+	Vec2(const float x, const float y);
 
 	// Voids
 	void operator+=(const Vec2& v);

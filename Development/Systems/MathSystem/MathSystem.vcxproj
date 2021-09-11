@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\ivector2.hpp" />
     <ClInclude Include="..\..\Source\ivector3.hpp" />
+    <ClInclude Include="..\..\Source\ivector4.hpp" />
     <ClInclude Include="..\..\Source\mathematics.hpp" />
     <ClInclude Include="..\..\Source\matrix33.hpp" />
     <ClInclude Include="..\..\Source\matrix44.hpp" />
@@ -31,6 +32,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\ivector2.cpp" />
     <ClCompile Include="..\..\Source\ivector3.cpp" />
+    <ClCompile Include="..\..\Source\ivector4.cpp" />
     <ClCompile Include="..\..\Source\mathematics_matrix.cpp" />
     <ClCompile Include="..\..\Source\mathematics_misc.cpp" />
     <ClCompile Include="..\..\Source\mathematics_vector.cpp" />

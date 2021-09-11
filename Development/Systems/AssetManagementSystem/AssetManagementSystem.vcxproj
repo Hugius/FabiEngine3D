@@ -147,6 +147,7 @@
     <ClCompile Include="..\..\Source\audio_loader.cpp" />
     <ClCompile Include="..\..\Source\mesh_loader_interface.cpp" />
     <ClCompile Include="..\..\Source\mesh_loader_main.cpp" />
+    <ClCompile Include="..\..\Source\mesh_part.cpp" />
     <ClCompile Include="..\..\Source\texture_loader_misc.cpp" />
     <ClCompile Include="..\..\Source\texture_loader_thread.cpp" />
     <ClCompile Include="..\..\Source\texture_loader_main.cpp" />

@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+struct Ivec3;
+
 struct Vec3 final
 {
 	// Data access
@@ -26,8 +28,9 @@ struct Vec3 final
 
 	// Creation
 	Vec3();
-	Vec3(float xyz);
-	Vec3(float x, float y, float z);
+	Vec3(const Ivec3& other);
+	Vec3(const float value);
+	Vec3(const float x, const float y, const float z);
 
 	// Voids
 	void operator+=(const float& other);

@@ -119,16 +119,20 @@ bool ScriptInterpreter::_validateSavesDirectory()
 
 ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth)
 {
-	auto i = static_cast<unsigned int>(statements.size());
+	// Temporary values
+	unsigned int index = static_cast<unsigned int>(statements.size());
 
-	while (i--)
+	// Loop through conditions backwards
+	while (index--)
 	{
-		if (statements[i].scopeDepth == scopeDepth)
+		// Check if scope depth matches
+		if (statements[index].getScopeDepth() == scopeDepth)
 		{
-			return &statements[i];
+			return &statements[index];
 		}
 	}
 
+	// No condition statement
 	return nullptr;
 }
 

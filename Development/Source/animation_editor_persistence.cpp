@@ -48,7 +48,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 
 		// Create new animation
 		auto newAnimation = make_shared<Animation>(animationID);
-		newAnimation->previewModelID = previewModelID;
+		newAnimation->setPreviewModelID(previewModelID);
 
 		// Check if there is any more content in line
 		string temp;
@@ -59,10 +59,10 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			iss >> animationID >> previewModelID;
 
 			// Clear default empty partID
-			newAnimation->partIDs.clear();
-			newAnimation->totalMovements.clear();
-			newAnimation->totalRotations.clear();
-			newAnimation->totalScalings.clear();
+			newAnimation->setPartIDs({});
+			newAnimation->setTotalMovements({});
+			newAnimation->setTotalRotations({});
+			newAnimation->setTotalScalings({});
 
 			// Extract frame data from file
 			vector<AnimationFrame> frames;
@@ -98,21 +98,21 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 						}
 
 						// Add part to frame
-						frame.targetTransformations.insert(make_pair(partID, targetTransformation));
-						frame.rotationOrigins.insert(make_pair(partID, rotationOrigin));
-						frame.speeds.insert(make_pair(partID, speed));
-						frame.speedTypes.insert(make_pair(partID, AnimationSpeedType(speedType)));
-						frame.transformationTypes.insert(make_pair(partID, TransformationType(transformationType)));
+						frame.addTargetTransformation(partID, targetTransformation);
+						frame.addRotationOrigin(partID, rotationOrigin);
+						frame.addSpeed(partID, speed);
+						frame.addSpeedType(partID, AnimationSpeedType(speedType));
+						frame.addTransformationType(partID, TransformationType(transformationType));
 
-						// Add all partIDs 1 time only
+						// Add all partIDs only once
 						if (frames.empty())
 						{
-							newAnimation->partIDs.push_back(partID);
+							newAnimation->addPartID(partID);
 
 							// Also add total transformation for each partID
-							newAnimation->totalMovements.insert(make_pair(partID, Vec3(0.0f)));
-							newAnimation->totalRotations.insert(make_pair(partID, Vec3(0.0f)));
-							newAnimation->totalScalings.insert(make_pair(partID, Vec3(0.0f)));
+							newAnimation->addTotalMovement(partID, Vec3(0.0f));
+							newAnimation->addTotalRotation(partID, Vec3(0.0f));
+							newAnimation->addTotalScaling(partID, Vec3(0.0f));
 						}
 					}
 
@@ -126,43 +126,45 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			}
 
 			// Add frames to animation
-			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
+			auto currentFrames = newAnimation->getFrames();
+			currentFrames.insert(currentFrames.end(), frames.begin(), frames.end());
+			newAnimation->setFrames(currentFrames);
 		}
 
 		// Only if loading animations in editor
 		if (mustCheckPreviewModel)
 		{
 			// Check if preview model is still existing
-			if (_fe3d.modelEntity_isExisting(newAnimation->previewModelID))
+			if (_fe3d.modelEntity_isExisting(newAnimation->getPreviewModelID()))
 			{
 				// Check if parts are present
 				bool hasAllParts = true;
-				for (const auto& partID : newAnimation->partIDs)
+				for (const auto& partID : newAnimation->getPartIDs())
 				{
 					// Part cannot be empty
 					if (!partID.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partID);
+						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->getPreviewModelID(), partID);
 					}
 				}
 
 				// Check if preview model still has all the parts
 				if (hasAllParts)
 				{
-					newAnimation->initialSize = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
+					newAnimation->setInitialSize(_fe3d.modelEntity_getSize(newAnimation->getPreviewModelID()));
 				}
 				else // Clear preview model
 				{
-					newAnimation->oldPreviewModelID = newAnimation->previewModelID;
-					newAnimation->previewModelID = "";
-					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" does not have required animation parts anymore!");
+					newAnimation->setOldPreviewModelID(newAnimation->getPreviewModelID());
+					newAnimation->setPreviewModelID("");
+					Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->getID() + "\" does not have required animation parts anymore!");
 				}
 			}
 			else // Clear preview model
 			{
-				newAnimation->oldPreviewModelID = newAnimation->previewModelID;
-				newAnimation->previewModelID = "";
-				Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+				newAnimation->setOldPreviewModelID(newAnimation->getPreviewModelID());
+				newAnimation->setPreviewModelID("");
+				Logger::throwWarning("Preview model of animation with ID \"" + newAnimation->getID() + "\" not existing anymore!");
 			}
 		}
 
@@ -205,11 +207,11 @@ bool AnimationEditor::saveAnimationsToFile()
 	for (const auto& animation : _animations)
 	{
 		// Only if animation has data
-		if (!animation->previewModelID.empty() || !animation->oldPreviewModelID.empty())
+		if (!animation->getPreviewModelID().empty() || !animation->getOldPreviewModelID().empty())
 		{
 			// Retrieve all values
-			auto animationID = animation->ID;
-			auto previewModelID = animation->previewModelID.empty() ? animation->oldPreviewModelID : animation->previewModelID;
+			auto animationID = animation->getID();
+			auto previewModelID = animation->getPreviewModelID().empty() ? animation->getOldPreviewModelID() : animation->getPreviewModelID();
 
 			// Export  general data
 			file <<
@@ -217,27 +219,28 @@ bool AnimationEditor::saveAnimationsToFile()
 				previewModelID;
 
 			// Export frame data
-			if (animation->frames.size() > 1)
+			if (animation->getFrames().size() > 1)
 			{
 				// Add space
 				file << " ";
 
 				// For every frame
-				for (unsigned int i = 1; i < animation->frames.size(); i++)
+				for (unsigned int frameIndex = 1; frameIndex < animation->getFrames().size(); frameIndex++)
 				{
 					// Write the amount of model parts
-					file << animation->partIDs.size() << " ";
+					file << animation->getPartIDs().size() << " ";
 
 					// For every model part
 					unsigned int partIndex = 0;
-					for (auto partID : animation->partIDs)
+					for (auto partID : animation->getPartIDs())
 					{
 						// Retrieve data
-						const auto& targetTransformation = animation->frames[i].targetTransformations[partID];
-						const auto& rotationOrigin = animation->frames[i].rotationOrigins[partID];
-						const auto& speed = animation->frames[i].speeds[partID];
-						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partID]);
-						const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partID]);
+						auto frame = animation->getFrames()[frameIndex];
+						auto targetTransformation = frame.getTargetTransformations().at(partID);
+						auto rotationOrigin = frame.getRotationOrigins().at(partID);
+						auto speed = frame.getSpeeds().at(partID);
+						auto speedType = static_cast<int>(frame.getSpeedTypes().at(partID));
+						auto transformationType = static_cast<int>(frame.getTransformationTypes().at(partID));
 
 						// Questionmark means empty partID
 						if (partID.empty())
@@ -261,7 +264,7 @@ bool AnimationEditor::saveAnimationsToFile()
 							transformationType;
 
 						// Add space
-						if (partIndex != (animation->partIDs.size() - 1))
+						if (partIndex != (animation->getPartIDs().size() - 1))
 						{
 							file << " ";
 						}
@@ -269,7 +272,7 @@ bool AnimationEditor::saveAnimationsToFile()
 					}
 
 					// Add space
-					if (i != (animation->frames.size() - 1))
+					if (frameIndex != (animation->getFrames().size() - 1))
 					{
 						file << " ";
 					}

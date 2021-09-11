@@ -5,12 +5,6 @@
 
 void AnimationEditor::update()
 {
-	// Prepare animation values
-	for (const auto& animation : _animations)
-	{
-		animation->updateValueLimits();
-	}
-
 	// Animation execution
 	_updateAnimationExecution();
 
@@ -159,7 +153,7 @@ void AnimationEditor::_updateAnimationChoosing()
 		if (!selectedButtonID.empty())
 		{
 			// Set new hovered model
-			_hoveredModelID = _getAnimation(selectedButtonID)->previewModelID;
+			_hoveredModelID = _getAnimation(selectedButtonID)->getPreviewModelID();
 
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -178,9 +172,9 @@ void AnimationEditor::_updateAnimationChoosing()
 				}
 
 				// Miscellaneous
-				if (_fe3d.modelEntity_isExisting(_getAnimation(selectedButtonID)->previewModelID))
+				if (_fe3d.modelEntity_isExisting(_getAnimation(selectedButtonID)->getPreviewModelID()))
 				{
-					_fe3d.modelEntity_setVisible(_getAnimation(selectedButtonID)->previewModelID, true);
+					_fe3d.modelEntity_setVisible(_getAnimation(selectedButtonID)->getPreviewModelID(), true);
 				}
 				_gui.getGlobalScreen()->deleteChoiceForm("animationList");
 				_isChoosingAnimation = false;
@@ -223,9 +217,9 @@ void AnimationEditor::_updateAnimationDeleting()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 
 			// Delete animation
-			if (!_getAnimation(_currentAnimationID)->previewModelID.empty())
+			if (!_getAnimation(_currentAnimationID)->getPreviewModelID().empty())
 			{
-				_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->previewModelID, false);
+				_fe3d.modelEntity_setVisible(_getAnimation(_currentAnimationID)->getPreviewModelID(), false);
 			}
 			_deleteAnimation(_currentAnimationID);
 			_currentAnimationID = "";

@@ -28,6 +28,10 @@ void SettingsEditor::load()
 	// Default graphics
 	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
 
+	// Camera
+	_fe3d.camera_reset();
+	_fe3d.camera_setYaw(270.0f);
+
 	// Editor billboards
 	_fe3d.billboardEntity_create("@@icon");
 	_fe3d.billboardEntity_setPosition("@@icon", Vec3(0.0f, -0.5f, -1.5f));
@@ -36,8 +40,6 @@ void SettingsEditor::load()
 	_fe3d.billboardEntity_setBright("@@icon", true);
 
 	// Miscellaneous
-	_fe3d.camera_reset();
-	_fe3d.camera_setYaw(-90.0f);
 	_isEditorLoaded = true;
 }
 
@@ -52,7 +54,7 @@ void SettingsEditor::unload()
 	// Delete created entities
 	_fe3d.billboardEntity_delete("@@icon");
 
-	// Miscellaneous
+	// Reset editor properties
 	_isEditorLoaded = false;
 }
 

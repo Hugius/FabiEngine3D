@@ -104,7 +104,7 @@ void MasterRenderer::_captureCubeReflections()
 				case 3:
 				{
 					_camera.setYaw(90.0f);
-					_camera.setPitch(-90.0f);
+					_camera.setPitch(270.0f);
 					break;
 				}
 				case 4:
@@ -115,7 +115,7 @@ void MasterRenderer::_captureCubeReflections()
 				}
 				case 5:
 				{
-					_camera.setYaw(-90.0f);
+					_camera.setYaw(270.0f);
 					_camera.setPitch(0.0f);
 					break;
 				}

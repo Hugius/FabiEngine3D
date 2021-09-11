@@ -178,13 +178,13 @@ void ModelEntity::setRotation(Vec3 value, const string& partID)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
-		_baseRotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+		_baseRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+		_baseRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localRotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
-		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+		_parts[_getPartIndex(partID)].localRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 	}
 }
 
@@ -234,8 +234,8 @@ void ModelEntity::rotate(Vec3 value, const string& partID)
 	{
 		_baseRotation += value;
 		_baseRotationTarget += value;
-		_baseRotation = Vec3(fmodf(_baseRotation.x, 360.0f), fmodf(_baseRotation.y, 360.0f), fmodf(_baseRotation.z, 360.0f));
-		_baseRotationTarget = Vec3(fmodf(_baseRotationTarget.x, 360.0f), fmodf(_baseRotationTarget.y, 360.0f), fmodf(_baseRotationTarget.z, 360.0f));
+		_baseRotation = Vec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
+		_baseRotationTarget = Vec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
 	}
 	else
 	{
@@ -243,8 +243,8 @@ void ModelEntity::rotate(Vec3 value, const string& partID)
 		Vec3& localRotationTarget = _parts[_getPartIndex(partID)].localRotationTarget;
 		localRotation += value;
 		localRotationTarget += value;
-		localRotation = Vec3(fmodf(localRotation.x, 360.0f), fmodf(localRotation.y, 360.0f), fmodf(localRotation.z, 360.0f));
-		localRotationTarget = Vec3(fmodf(localRotationTarget.x, 360.0f), fmodf(localRotationTarget.y, 360.0f), fmodf(localRotationTarget.z, 360.0f));
+		localRotation = Vec3(Math::limitAngle(localRotation.x), Math::limitAngle(localRotation.y), Math::limitAngle(localRotation.z));
+		localRotationTarget = Vec3(Math::limitAngle(localRotationTarget.x), Math::limitAngle(localRotationTarget.y), Math::limitAngle(localRotationTarget.z));
 
 	}
 }
@@ -287,12 +287,12 @@ void ModelEntity::rotateTo(Vec3 target, float speed, const string& partID)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
-		_baseRotationTarget = Vec3(fmodf(target.x, 360.0f), fmodf(target.y, 360.0f), fmodf(target.z, 360.0f));
+		_baseRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 		_baseRotationTargetSpeed = fabsf(speed);
 	}
 	else
 	{
-		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(fmodf(target.x, 360.0f), fmodf(target.y, 360.0f), fmodf(target.z, 360.0f));
+		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 		_parts[_getPartIndex(partID)].localRotationTargetSpeed = fabsf(speed);
 	}
 }
@@ -515,7 +515,7 @@ void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed
 void ModelEntity::_correctRotationTarget(Vec3& current, Vec3 target, float speed)
 {
 	// Correct current
-	current = Vec3(fmodf(current.x, 360.0f), fmodf(current.y, 360.0f), fmodf(current.z, 360.0f));
+	current = Vec3(Math::limitAngle(current.x), Math::limitAngle(current.y), Math::limitAngle(current.z));
 
 	// Correct X
 	if (Math::calculateAngleDifference(current.x, target.x) <= speed)

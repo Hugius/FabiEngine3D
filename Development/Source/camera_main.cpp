@@ -111,7 +111,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_firstPersonPitchAcceleration *= 0.75f;
 
 		// Limit view angles
-		_firstPersonYaw = fmodf(_firstPersonYaw, 360.0f);
+		_firstPersonYaw = Math::limitAngle(_firstPersonYaw);
 		_firstPersonPitch = clamp(_firstPersonPitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
 		// Set view angles
@@ -145,7 +145,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_thirdPersonYawAcceleration += xOffset;
 		_thirdPersonYawAcceleration = clamp(_thirdPersonYawAcceleration, -MAX_ACCELERATION, MAX_ACCELERATION);
 		_thirdPersonYaw -= _thirdPersonYawAcceleration;
-		_thirdPersonYaw = fmodf(_thirdPersonYaw, 360.0f);
+		_thirdPersonYaw = Math::limitAngle(_thirdPersonYaw);
 		_thirdPersonYawAcceleration *= 0.75f;
 		
 		// Update pitch
@@ -186,7 +186,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 	}
 
 	// Limit view angles
-	_yaw = fmodf(_yaw, 360.0f);
+	_yaw = Math::limitAngle(_yaw);
 	_pitch = clamp(_pitch, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 
 	// Update matrices
@@ -196,9 +196,9 @@ void Camera::update(Ivec2 lastCursorPosition)
 void Camera::updateMatrices()
 {
 	// Lookat front vector
-	_frontVector.x = cos(Math::convertToRadians(_pitch)) * cos(Math::convertToRadians(_yaw));
+	_frontVector.x = (cos(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector.y = sin(Math::convertToRadians(_pitch));
-	_frontVector.z = cos(Math::convertToRadians(_pitch)) * sin(Math::convertToRadians(_yaw));
+	_frontVector.z = (sin(Math::convertToRadians(_yaw)) * cos(Math::convertToRadians(_pitch)));
 	_frontVector = Math::normalizeVector(_frontVector);
 
 	// Calculate the view matrix input
@@ -206,7 +206,7 @@ void Camera::updateMatrices()
 	_rightVector = Math::normalizeVector(_rightVector);
 
 	// View matrix
-	_viewMatrix = Math::createViewMatrix(_position, _position + _frontVector, _upVector);
+	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);
 
 	// Projection matrix
 	_projectionMatrix = Math::createProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearZ, _farZ);

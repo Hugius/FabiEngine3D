@@ -36,7 +36,7 @@ void ImageEntity::updateTransformation()
 		_rotation += ((_rotation < _rotationTarget) ? speed : -speed);
 
 		// Correct rotation
-		_rotation = fmodf(_rotation, 360.0f);
+		_rotation = Math::limitAngle(_rotation);
 		if (Math::calculateAngleDifference(_rotation, _rotationTarget) <= _rotationTargetSpeed)
 		{
 			_rotation = _rotationTarget;
@@ -115,8 +115,8 @@ void ImageEntity::setPosition(Vec2 value)
 
 void ImageEntity::setRotation(float value)
 {
-	_rotation = fmodf(value, 360.0f);
-	_rotationTarget = fmodf(value, 360.0f);
+	_rotation = Math::limitAngle(value);
+	_rotationTarget = Math::limitAngle(value);
 }
 
 void ImageEntity::setSize(Vec2 value)
@@ -135,8 +135,8 @@ void ImageEntity::rotate(float value)
 {
 	_rotation += value;
 	_rotationTarget += value;
-	_rotation = fmodf(_rotation, 360.0f);
-	_rotationTarget = fmodf(_rotationTarget, 360.0f);
+	_rotation = Math::limitAngle(_rotation);
+	_rotationTarget = Math::limitAngle(_rotationTarget);
 }
 
 void ImageEntity::scale(Vec2 value)
@@ -155,7 +155,7 @@ void ImageEntity::moveTo(Vec2 target, float speed)
 
 void ImageEntity::rotateTo(float target, float speed)
 {
-	_rotationTarget = fmodf(target, 360.0f);
+	_rotationTarget = Math::limitAngle(target);
 	_rotationTargetSpeed = speed;
 }
 

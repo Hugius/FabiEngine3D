@@ -39,7 +39,7 @@ void Camera::enableFirstPersonView(float initialYaw, float initialPitch)
 		Logger::throwError("Camera::enableFirstPersonView::2");
 	}
 
-	_firstPersonYaw = fmodf(initialYaw, 360.0f);
+	_firstPersonYaw = Math::limitAngle(initialYaw);
 	_firstPersonPitch = clamp(clamp(initialPitch, _minFirstPersonPitch, _maxFirstPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 	_mustCenterCursor = true;
 	_isFirstPersonViewEnabled = true;
@@ -66,7 +66,7 @@ void Camera::enableThirdPersonView(float initialYaw, float initialPitch)
 		Logger::throwError("Camera::enableThirdPersonView::2");
 	}
 
-	_thirdPersonYaw = fmodf(initialYaw, 360.0f);
+	_thirdPersonYaw = Math::limitAngle(initialYaw);
 	_thirdPersonPitch = clamp(clamp(initialPitch, _minThirdPersonPitch, _maxThirdPersonPitch), MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 	_mustCenterCursor = true;
 	_isThirdPersonViewEnabled = true;
@@ -94,7 +94,7 @@ void Camera::setMouseSensitivity(float value)
 
 void Camera::setYaw(float value)
 {
-	_yaw = fmodf(value, 360.0f);
+	_yaw = Math::limitAngle(value);
 }
 
 void Camera::setPitch(float value)

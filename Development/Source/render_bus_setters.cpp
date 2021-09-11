@@ -207,7 +207,7 @@ void RenderBus::setMotionBlurSize(unsigned int value)
 
 void RenderBus::setMaxSpotLightingAngle(float value)
 {
-	_maxSpotLightAngle = fmodf(value, 360.0f);
+	_maxSpotLightAngle = Math::limitAngle(value);
 }
 
 void RenderBus::setMaxSpotLightingDistance(float value)

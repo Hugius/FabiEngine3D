@@ -45,7 +45,7 @@ void BillboardEntity::updateTransformation()
 		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : -speed.z);
 
 		// Correct rotation
-		_rotation = Vec3(fmodf(_rotation.x, 360.0f), fmodf(_rotation.y, 360.0f), fmodf(_rotation.z, 360.0f));
+		_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
 		if (Math::calculateAngleDifference(_rotation.x, _rotationTarget.x) <= _rotationTargetSpeed)
 		{
 			_rotation.x = _rotationTarget.x;
@@ -137,8 +137,8 @@ void BillboardEntity::setPosition(Vec3 value)
 
 void BillboardEntity::setRotation(Vec3 value)
 {
-	_rotation = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
-	_rotationTarget = Vec3(fmodf(value.x, 360.0f), fmodf(value.y, 360.0f), fmodf(value.z, 360.0f));
+	_rotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_rotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
 void BillboardEntity::setSize(Vec2 value)
@@ -157,8 +157,8 @@ void BillboardEntity::rotate(Vec3 value)
 {
 	_rotation += value;
 	_rotationTarget += value;
-	_rotation = Vec3(fmodf(_rotation.x, 360.0f), fmodf(_rotation.y, 360.0f), fmodf(_rotation.z, 360.0f));
-	_rotationTarget = Vec3(fmodf(_rotationTarget.x, 360.0f), fmodf(_rotationTarget.y, 360.0f), fmodf(_rotationTarget.z, 360.0f));
+	_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));
+	_rotationTarget = Vec3(Math::limitAngle(_rotationTarget.x), Math::limitAngle(_rotationTarget.y), Math::limitAngle(_rotationTarget.z));
 }
 
 void BillboardEntity::scale(Vec2 value)
@@ -177,7 +177,7 @@ void BillboardEntity::moveTo(Vec3 target, float speed)
 
 void BillboardEntity::rotateTo(Vec3 target, float speed)
 {
-	_rotationTarget = Vec3(fmodf(target.x, 360.0f), fmodf(target.y, 360.0f), fmodf(target.z, 360.0f));
+	_rotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
 	_rotationTargetSpeed = speed;
 }
 

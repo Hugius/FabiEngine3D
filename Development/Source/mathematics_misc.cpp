@@ -8,27 +8,45 @@ const float Math::calculateAngleDifference(float firstAngle, float secondAngle)
 	{
 		difference = (360.0f - difference);
 	}
-
-	return difference;
+	else
+	{
+		return difference;
+	}
 }
 
-const float Math::calculateReferenceAngle(float initialAngle)
+const float Math::limitAngle(float angle)
 {
-	if (initialAngle >= 0.0f && initialAngle <= 90.0f) // 1st quadrant
+	// 360 degrees max
+	angle = fmodf(angle, 360.0f);
+
+	// Make the angle non-negative
+	if (angle < 0.0f)
 	{
-		return initialAngle;
+		return (360.0f - fabsf(angle));
 	}
-	else if (initialAngle > 90.0f && initialAngle <= 180.0f) // 2nd quadrant
+	else
 	{
-		return (180.0f - initialAngle);
+		return angle;
 	}
-	else if (initialAngle > 180.0f && initialAngle <= 270.0f) // 3rd quadrant
+}
+
+const float Math::calculateReferenceAngle(float angle)
+{
+	if (angle >= 0.0f && angle <= 90.0f) // 1st quadrant
 	{
-		return (initialAngle - 180.0f);
+		return angle;
+	}
+	else if (angle > 90.0f && angle <= 180.0f) // 2nd quadrant
+	{
+		return (180.0f - angle);
+	}
+	else if (angle > 180.0f && angle <= 270.0f) // 3rd quadrant
+	{
+		return (angle - 180.0f);
 	}
 	else // 4th quadrant
 	{
-		return (360.0f - initialAngle);
+		return (360.0f - angle);
 	}
 }
 

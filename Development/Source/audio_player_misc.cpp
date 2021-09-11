@@ -65,7 +65,7 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 					auto cameraFront = camera.getFrontVector(); // From camera vector
 					Matrix44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
 					Vec3 pointVector = cameraPos - sound.getPosition(); // To camera vector
-					Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);
+					Vec4 result = (rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f));
 					pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
 					pointVector = Math::normalizeVector(pointVector); // Normalize
 					float dot = Math::calculateDotProduct(pointVector, cameraFront);; // Dot product

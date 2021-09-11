@@ -48,7 +48,8 @@ public:
 	static const float calculateVectorMagnitude(Vec3 vector);
 	static const float calculateVectorMagnitude(Vec4 vector);
 	static const float calculateAngleDifference(float firstAngle, float secondAngle);
-	static const float calculateReferenceAngle(float initialAngle);
+	static const float calculateReferenceAngle(float angle);
+	static const float limitAngle(float angle);
 	static const float convertToRadians(float degrees);
 	static const float convertToDegrees(float radians);
 	static const float getPI();

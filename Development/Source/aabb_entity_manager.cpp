@@ -86,17 +86,17 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						Direction rotationDirection;
 						Vec3 parentRotation = parentEntity->getRotation();
 						float rotation = 0.0f;
-						if (fabsf(parentRotation.x) > fabsf(parentRotation.y) && fabsf(parentRotation.x) > fabsf(parentRotation.z))
+						if ((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 						{
 							rotationDirection = Direction::X;
 							rotation = parentRotation.x;
 						}
-						else if (fabsf(parentRotation.y) > fabsf(parentRotation.x) && fabsf(parentRotation.y) > fabsf(parentRotation.z))
+						else if ((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 						{
 							rotationDirection = Direction::Y;
 							rotation = parentRotation.y;
 						}
-						else if (fabsf(parentRotation.z) > fabsf(parentRotation.x) && fabsf(parentRotation.z) > fabsf(parentRotation.y))
+						else if ((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 						{
 							rotationDirection = Direction::Z;
 							rotation = parentRotation.z;
@@ -104,7 +104,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 
 						// Update size (based on parent size & AABB rotation)
 						const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getSize());
-						if ((fabsf(rotation) > 45.0f && fabsf(rotation) < 135.0f) || (fabsf(rotation) > 225.0f && fabsf(rotation) < 315.0f))
+						if (((rotation > 45.0f) && (rotation < 135.0f)) || ((rotation > 225.0f) && (rotation < 315.0f)))
 						{
 							// Determine rotation direction
 							if (rotationDirection == Direction::X)
@@ -131,9 +131,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
 							(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
 							(rotation > 225.0f && rotation < 315.0f) ? 270.0f : // 270 degrees rounded
-							(rotation < -45.0f && rotation > -135.0f) ? -90.0f : // -90 degrees rounded
-							(rotation <= -135.0f && rotation >= -225.0f) ? -180.0f : // -180 degrees rounded
-							(rotation < -225.0f && rotation > -315.0f) ? -270.0f : // -270 degrees rounded
 							0.0f; // No rotation
 						if (roundedRotation != 0.0f)
 						{
@@ -146,7 +143,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							// Temporary values
 							Matrix44 rotationMatrix = Matrix44(1.0f);
 							Vec3 localOffset = Vec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
-							bool isMirrored = (roundedRotation == -180.0f || roundedRotation == 180.0f);
+							bool isMirrored = (roundedRotation == 180.0f);
 							localPosition = (rotationDirection == Direction::Y) ? localPosition : 
 								(entity->getLocalPosition() + localOffset) * parentEntity->getSize();
 							float yOffset;
@@ -198,9 +195,9 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					auto newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 
 					// Retrieve absolute rotations
-					const float rotationX = fabsf(parentEntity->getRotation().x);
-					const float rotationY = fabsf(parentEntity->getRotation().y);
-					const float rotationZ = fabsf(parentEntity->getRotation().z);
+					const float rotationX = parentEntity->getRotation().x;
+					const float rotationY = parentEntity->getRotation().y;
+					const float rotationZ = parentEntity->getRotation().z;
 
 					// Calculate reference rotation & convert it to 0-45 range
 					float refRotationX = Math::calculateReferenceAngle(rotationX);

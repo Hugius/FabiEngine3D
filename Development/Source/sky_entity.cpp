@@ -42,7 +42,7 @@ void SkyEntity::setLightness(float value)
 
 void SkyEntity::setRotation(float value)
 {
-	_rotation = value;
+	_rotation = Math::limitAngle(value);
 }
 
 void SkyEntity::setRotationSpeed(float value)

@@ -333,8 +333,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				animationData->setSpeedMultiplier(speedMultiplier);
 				animationData->setFadeFramestep(fadeFramestep);
 				animationData->setFrameIndex(frameIndex);
-				frameData.setSpeeds(speeds);
-
+				for (const auto& [partID, speed] : speeds)
+				{
+					frameData.setSpeed(partID, speed);
+				}
+				
 				// Retrieve parts
 				auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
 				for (const auto& partID : partIDs)

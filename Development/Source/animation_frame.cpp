@@ -1,78 +1,48 @@
 #include "animation_frame.hpp"
 
-void AnimationFrame::setTargetTransformations(const map<string, Vec3>& value)
+using std::max;
+
+void AnimationFrame::clearParts()
 {
-    _targetTransformations = value;
+    _targetTransformations.clear();
+    _rotationOrigins.clear();
+    _speeds.clear();
+    _speedTypes.clear();
+    _transformationTypes.clear();
 }
 
-void AnimationFrame::setRotationOrigins(const map<string, Vec3>& value)
+void AnimationFrame::addPart(const string& partID, Vec3 targetTransformation, Vec3 rotationOrigin, Vec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType)
 {
-    _rotationOrigins = value;
-}
-
-void AnimationFrame::setSpeeds(const map<string, Vec3>& value)
-{
-    _speeds = value;
-}
-
-void AnimationFrame::setSpeedTypes(const map<string, AnimationSpeedType>& value)
-{
-    _speedTypes = value;
-}
-
-void AnimationFrame::setTransformationTypes(const map<string, TransformationType>& value)
-{
-    _transformationTypes = value;
+    _targetTransformations.insert(make_pair(partID, targetTransformation));
+    _rotationOrigins.insert(make_pair(partID, rotationOrigin));
+    _speeds.insert(make_pair(partID, speed));
+    _speedTypes.insert(make_pair(partID, animationSpeedType));
+    _transformationTypes.insert(make_pair(partID, transformationType));
 }
 
 void AnimationFrame::setTargetTransformation(const string& partID, Vec3 value)
 {
-    _targetTransformations[partID] = value;
-}
-
-void AnimationFrame::addTargetTransformation(const string& partID, Vec3 value)
-{
-    _targetTransformations.insert(make_pair(partID, value));
+    _targetTransformations.at(partID) = value;
 }
 
 void AnimationFrame::setRotationOrigin(const string& partID, Vec3 value)
 {
-    _rotationOrigins[partID] = value;
-}
-
-void AnimationFrame::addRotationOrigin(const string& partID, Vec3 value)
-{
-    _rotationOrigins.insert(make_pair(partID, value));
+    _rotationOrigins.at(partID) = value;
 }
 
 void AnimationFrame::setSpeed(const string& partID, Vec3 value)
 {
-    _speeds[partID] = value;
-}
-
-void AnimationFrame::addSpeed(const string& partID, Vec3 value)
-{
-    _speeds.insert(make_pair(partID, value));
+    _speeds.at(partID) = value;
 }
 
 void AnimationFrame::setSpeedType(const string& partID, AnimationSpeedType value)
 {
-    _speedTypes[partID] = value;
-}
-
-void AnimationFrame::addSpeedType(const string& partID, AnimationSpeedType value)
-{
-    _speedTypes.insert(make_pair(partID, value));
+    _speedTypes.at(partID) = value;
 }
 
 void AnimationFrame::setTransformationType(const string& partID, TransformationType value)
 {
-    _transformationTypes[partID] = value;
-}
-
-void AnimationFrame::addTransformationType(const string& partID, TransformationType value)
-{
-    _transformationTypes.insert(make_pair(partID, value));
+    _transformationTypes.at(partID) = value;
 }
 
 const map<string, Vec3>& AnimationFrame::getTargetTransformations() const

@@ -14,21 +14,13 @@ class AnimationFrame final
 {
 public:
 	// Voids
-	void setTargetTransformations(const map<string, Vec3>& value);
+	void clearParts();
+	void addPart(const string& partID, Vec3 targetTransformation, Vec3 rotationOrigin, Vec3 speed, AnimationSpeedType animationSpeedType, TransformationType transformationType);
 	void setTargetTransformation(const string& partID, Vec3 value);
-	void addTargetTransformation(const string& partID, Vec3 value);
-	void setRotationOrigins(const map<string, Vec3>& value);
 	void setRotationOrigin(const string& partID, Vec3 value);
-	void addRotationOrigin(const string& partID, Vec3 value);
-	void setSpeeds(const map<string, Vec3>& value);
 	void setSpeed(const string& partID, Vec3 value);
-	void addSpeed(const string& partID, Vec3 value);
-	void setSpeedTypes(const map<string, AnimationSpeedType>& value);
 	void setSpeedType(const string& partID, AnimationSpeedType value);
-	void addSpeedType(const string& partID, AnimationSpeedType value);
-	void setTransformationTypes(const map<string, TransformationType>& value);
 	void setTransformationType(const string& partID, TransformationType value);
-	void addTransformationType(const string& partID, TransformationType value);
 
 	// Vectors
 	const map<string, Vec3>& getTargetTransformations() const;

@@ -124,21 +124,13 @@ void AnimationEditor::_updateChoiceMenu()
 				// Check if only default frame exists
 				if (currentAnimation->getFrames().size() == 1)
 				{
-					// Clear empty partID
-					lastFrameCopy.setTargetTransformations({});
-					lastFrameCopy.setRotationOrigins({});
-					lastFrameCopy.setSpeeds({});
-					lastFrameCopy.setSpeedTypes({});
-					lastFrameCopy.setTransformationTypes({});
+					// Clear frame
+					lastFrameCopy.clearParts();
 
-					// Add empty data for every model part
+					// Add default data for every model part
 					for (auto partID : currentAnimation->getPartIDs())
 					{
-						lastFrameCopy.addTargetTransformation(partID, Vec3(0.0f));
-						lastFrameCopy.addRotationOrigin(partID, Vec3(0.0f));
-						lastFrameCopy.addSpeed(partID, Vec3(0.0f));
-						lastFrameCopy.addSpeedType(partID, AnimationSpeedType::LINEAR);
-						lastFrameCopy.addTransformationType(partID, TransformationType::MOVEMENT);
+						lastFrameCopy.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
 				}
 			}
@@ -241,24 +233,24 @@ void AnimationEditor::_updateChoiceMenu()
 				currentAnimation->setPreviewModelID(selectedModelID);
 				currentAnimation->setInitialSize(_fe3d.modelEntity_getSize(currentAnimation->getPreviewModelID()));
 
-				// First time choosing preview model, add all partIDs for this animation
-				if (currentAnimation->getFrames().size() == 1)
+				// Check if first time choosing preview model
+				if (currentAnimation->getFrames().empty())
 				{
+					// Create default frame
+					AnimationFrame defaultFrame;
+
 					// Retrieve partIDs from model
 					for (auto partID : _fe3d.modelEntity_getPartIDs(currentAnimation->getPreviewModelID()))
 					{
-						// Cannot add whole-model partID again
-						if (!partID.empty())
-						{
-							// Add part ID
-							currentAnimation->addPartID(partID);
+						// Add part to animation
+						currentAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
 
-							// Add total transformation
-							currentAnimation->addTotalMovement(partID, Vec3(0.0f));
-							currentAnimation->addTotalRotation(partID, Vec3(0.0f));
-							currentAnimation->addTotalScaling(partID, Vec3(0.0f));
-						}
+						// Add part to frame
+						defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 					}
+
+					// Add default frame to animation
+					currentAnimation->addFrame(defaultFrame);
 				}
 
 				// Miscellaneous

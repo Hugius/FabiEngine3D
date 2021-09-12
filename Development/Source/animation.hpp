@@ -12,24 +12,16 @@ public:
 	Animation(const string& ID);
 
 	// Voids
-	void setFrames(const vector<AnimationFrame>& value);
-	void setFrame(unsigned int index, const AnimationFrame& value);
 	void addFrame(const AnimationFrame& value);
-	void setPartIDs(const vector<string>& value);
-	void setPartID(unsigned int index, const string& value);
-	void addPartID(const string& value);
+	void setFrame(unsigned int index, const AnimationFrame& value);
+	void setFrames(const vector<AnimationFrame>& value);
+	void addPart(const string& partID, Vec3 totalMovement, Vec3 totalRotation, Vec3 totalScaling);
 	void setPreviewModelID(const string& value);
 	void setOldPreviewModelID(const string& value);
 	void setAnimatedModelID(const string& value);
-	void setTotalMovements(const map<string, Vec3>& value);
 	void setTotalMovement(const string& partID, Vec3 value);
-	void addTotalMovement(const string& partID, Vec3 value);
-	void setTotalRotations(const map<string, Vec3>& value);
 	void setTotalRotation(const string& partID, Vec3 value);
-	void addTotalRotation(const string& partID, Vec3 value);
-	void setTotalScalings(const map<string, Vec3>& value);
 	void setTotalScaling(const string& partID, Vec3 value);
-	void addTotalScaling(const string& partID, Vec3 value);
 	void setInitialSize(Vec3 value);
 	void setSpeedMultiplier(float value);
 	void setTimesToPlay(int value);

@@ -25,59 +25,27 @@ void Animation::addFrame(const AnimationFrame& value)
 	_frames.push_back(value);
 }
 
-void Animation::setPartIDs(const vector<string>& value)
+void Animation::addPart(const string& partID, Vec3 totalMovement, Vec3 totalRotation, Vec3 totalScaling)
 {
-	_partIDs = value;
-}
-
-void Animation::setPartID(unsigned int index, const string& value)
-{
-	_partIDs[index] = value;
-}
-
-void Animation::addPartID(const string& value)
-{
-	_partIDs.push_back(value);
+	_partIDs.push_back(partID);
+	_totalMovements.insert(make_pair(partID, totalMovement));
+	_totalRotations.insert(make_pair(partID, totalRotation));
+	_totalScalings.insert(make_pair(partID, totalScaling));
 }
 
 void Animation::setTotalMovement(const string& partID, Vec3 value)
 {
-	_totalMovements[partID] = value;
-}
-
-void Animation::addTotalMovement(const string& partID, Vec3 value)
-{
-	_totalMovements.insert(make_pair(partID, value));
-}
-
-void Animation::setTotalRotations(const map<string, Vec3>& value)
-{
-	_totalRotations = value;
+	_totalMovements.at(partID) = value;
 }
 
 void Animation::setTotalRotation(const string& partID, Vec3 value)
 {
-	_totalRotations[partID] = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-}
-
-void Animation::addTotalRotation(const string& partID, Vec3 value)
-{
-	_totalRotations.insert(make_pair(partID, value));
-}
-
-void Animation::setTotalScalings(const map<string, Vec3>& value)
-{
-	_totalScalings = value;
+	_totalRotations.at(partID) = value;
 }
 
 void Animation::setTotalScaling(const string& partID, Vec3 value)
 {
-	_totalScalings[partID] = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-}
-
-void Animation::addTotalScaling(const string& partID, Vec3 value)
-{
-	_totalScalings.insert(make_pair(partID, value));
+	_totalScalings.at(partID) = value;
 }
 
 void Animation::setPreviewModelID(const string& value)
@@ -93,11 +61,6 @@ void Animation::setOldPreviewModelID(const string& value)
 void Animation::setAnimatedModelID(const string& value)
 {
 	_animatedModelID = value;
-}
-
-void Animation::setTotalMovements(const map<string, Vec3>& value)
-{
-	_totalMovements = value;
 }
 
 void Animation::setInitialSize(Vec3 value)

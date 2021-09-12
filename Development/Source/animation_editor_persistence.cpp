@@ -50,6 +50,9 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 		auto newAnimation = make_shared<Animation>(animationID);
 		newAnimation->setPreviewModelID(previewModelID);
 
+		// Create default frame
+		AnimationFrame defaultFrame;
+
 		// Check if there is any more content in line
 		string temp;
 		if (iss >> temp)
@@ -59,8 +62,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			iss >> animationID >> previewModelID;
 
 			// Extract frame data from file
-			vector<AnimationFrame> frames;
-			AnimationFrame defaultFrame;
+			vector<AnimationFrame> customFrames;
 			while (true)
 			{
 				// Read the amount of model parts
@@ -69,8 +71,8 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 				// Check if file has frame data left
 				if (iss >> modelPartCount)
 				{
-					// Create frame
-					AnimationFrame frame;
+					// Create custom frame
+					AnimationFrame customFrame;
 
 					// For every model part
 					for (unsigned int i = 0; i < modelPartCount; i++)
@@ -93,37 +95,23 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 						}
 
 						// Add part to animation only once
-						if (frames.empty())
+						if (customFrames.empty())
 						{
-							// Add part ID
-							newAnimation->addPartID(partID);
-
-							// Add total transformation
-							newAnimation->addTotalMovement(partID, Vec3(0.0f));
-							newAnimation->addTotalRotation(partID, Vec3(0.0f));
-							newAnimation->addTotalScaling(partID, Vec3(0.0f));
+							newAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
 						}
 
-						// Fill default frame only once
-						if (frames.empty())
+						// Add part to default frame only once
+						if (customFrames.empty())
 						{
-							defaultFrame.addTargetTransformation(partID, Vec3(0.0f));
-							defaultFrame.addRotationOrigin(partID, Vec3(0.0f));
-							defaultFrame.addSpeed(partID, Vec3(0.0f));
-							defaultFrame.addSpeedType(partID, AnimationSpeedType::LINEAR);
-							defaultFrame.addTransformationType(partID, TransformationType::MOVEMENT);
+							defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 						}
 
-						// Add part data to frame
-						frame.addTargetTransformation(partID, targetTransformation);
-						frame.addRotationOrigin(partID, rotationOrigin);
-						frame.addSpeed(partID, speed);
-						frame.addSpeedType(partID, AnimationSpeedType(speedType));
-						frame.addTransformationType(partID, TransformationType(transformationType));
+						// Add part to custom frame
+						customFrame.addPart(partID, targetTransformation, rotationOrigin, speed, AnimationSpeedType(speedType), TransformationType(transformationType));
 					}
 
-					// Add frame
-					frames.push_back(frame);
+					// Add custom frame
+					customFrames.push_back(customFrame);
 				}
 				else
 				{
@@ -135,9 +123,9 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			newAnimation->addFrame(defaultFrame);
 
 			// Add custom frames to animation
-			for (const auto& frame : frames)
+			for (const auto& customFrame : customFrames)
 			{
-				newAnimation->addFrame(frame);
+				newAnimation->addFrame(customFrame);
 			}
 		}
 

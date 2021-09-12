@@ -12,7 +12,7 @@ void ModelEditor::_updateSizeMenu()
 	{
 		// Temporary values
 		const string directions[3] = { "X", "Y", "Z" };
-		auto size = _fe3d.modelEntity_getSize(_currentModelID);
+		auto size = _fe3d.modelEntity_getSize(_currentModelID, "");
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -53,52 +53,55 @@ void ModelEditor::_updateSizeMenu()
 		{
 			// Temporary values
 			float scrollSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * 0.05f;
-			Vec3 newSize = _fe3d.modelEntity_getSize(_currentModelID);
 
-			// Check if able to scroll
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+			// Check if user scrolled
+			if (scrollSpeed != 0.0f)
 			{
-				switch (_transformationDirection)
+				// Check if able to scroll
+				if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 				{
-				case Direction::X:
-				{
-					newSize.x *= (1.0f + scrollSpeed);
-					break;
+					switch (_transformationDirection)
+					{
+					case Direction::X:
+					{
+						size.x *= (1.0f + scrollSpeed);
+						break;
+					}
+
+					case Direction::Y:
+					{
+						size.y *= (1.0f + scrollSpeed);
+						break;
+					}
+
+					case Direction::Z:
+					{
+						size.z *= (1.0f + scrollSpeed);
+						break;
+					}
+					}
 				}
 
-				case Direction::Y:
-				{
-					newSize.y *= (1.0f + scrollSpeed);
-					break;
-				}
-
-				case Direction::Z:
-				{
-					newSize.z *= (1.0f + scrollSpeed);
-					break;
-				}
-				}
+				// Apply new size
+				_fe3d.modelEntity_setSize(_currentModelID, "", size);
 			}
-
-			// Apply new size
-			_fe3d.modelEntity_setSize(_currentModelID, newSize);
 		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, size);
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, size);
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
 		{
 			size.z /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, size);
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
 		}
 
 		// Update button text contents

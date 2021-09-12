@@ -51,7 +51,7 @@ void SceneEditor::_updateModelEditing()
 					// Don't reset if model is active or selected
 					if ((entityID != _activeModelID) && (entityID != _selectedModelID))
 					{
-						_fe3d.modelEntity_setInversion(entityID, 0.0f);
+						_fe3d.modelEntity_setInversion(entityID, "", 0.0f);
 					}
 				}
 			}
@@ -154,10 +154,10 @@ void SceneEditor::_updateModelEditing()
 					_animationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
 
 					// Reset main transformation
-					_fe3d.modelEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
-					_fe3d.modelEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d.modelEntity_setPosition(_activeModelID, "", _initialModelPosition[_activeModelID]);
+					_fe3d.modelEntity_setRotationOrigin(_activeModelID, "", Vec3(0.0f));
+					_fe3d.modelEntity_setRotation(_activeModelID, "", _initialModelRotation[_activeModelID]);
+					_fe3d.modelEntity_setSize(_activeModelID, "", _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
 					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
@@ -165,10 +165,10 @@ void SceneEditor::_updateModelEditing()
 						// Only named parts
 						if (!partID.empty())
 						{
-							_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partID);
+							_fe3d.modelEntity_setPosition(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setRotationOrigin(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setRotation(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setSize(_activeModelID, partID, Vec3(1.0f));
 						}
 					}
 				}
@@ -194,9 +194,9 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Get current transformation
-			auto position = _fe3d.modelEntity_getPosition(_activeModelID);
-			auto rotation = _fe3d.modelEntity_getRotation(_activeModelID);
-			auto size = _fe3d.modelEntity_getSize(_activeModelID);
+			auto position = _fe3d.modelEntity_getPosition(_activeModelID, "");
+			auto rotation = _fe3d.modelEntity_getRotation(_activeModelID, "");
+			auto size = _fe3d.modelEntity_getSize(_activeModelID, "");
 			auto oldPosition = position;
 			auto oldRotation = rotation;
 			auto oldSize = size;
@@ -259,10 +259,10 @@ void SceneEditor::_updateModelEditing()
 					}
 
 					// Set new transformations
-					_fe3d.modelEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
-					_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
-					_fe3d.modelEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-					_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
+					_fe3d.modelEntity_setPosition(_activeModelID, "", _initialModelPosition[_activeModelID]);
+					_fe3d.modelEntity_setRotationOrigin(_activeModelID, "", Vec3(0.0f));
+					_fe3d.modelEntity_setRotation(_activeModelID, "", _initialModelRotation[_activeModelID]);
+					_fe3d.modelEntity_setSize(_activeModelID, "", _initialModelSize[_activeModelID]);
 
 					// Reset part transformations
 					for (const auto& partID : _fe3d.modelEntity_getPartIDs(_activeModelID))
@@ -270,10 +270,10 @@ void SceneEditor::_updateModelEditing()
 						// Only named parts
 						if (!partID.empty())
 						{
-							_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partID);
-							_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partID);
+							_fe3d.modelEntity_setPosition(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setRotationOrigin(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setRotation(_activeModelID, partID, Vec3(0.0f));
+							_fe3d.modelEntity_setSize(_activeModelID, partID, Vec3(1.0f));
 						}
 					}
 
@@ -284,15 +284,15 @@ void SceneEditor::_updateModelEditing()
 				{
 					// Update position
 					_initialModelPosition[_activeModelID] = position;
-					_fe3d.modelEntity_setPosition(_activeModelID, position);
+					_fe3d.modelEntity_setPosition(_activeModelID, "", position);
 
 					// Update rotation
 					_initialModelRotation[_activeModelID] = rotation;
-					_fe3d.modelEntity_setRotation(_activeModelID, rotation);
+					_fe3d.modelEntity_setRotation(_activeModelID, "", rotation);
 
 					// Update size
 					_initialModelSize[_activeModelID] = size;
-					_fe3d.modelEntity_setSize(_activeModelID, size);
+					_fe3d.modelEntity_setSize(_activeModelID, "", size);
 				}
 			}
 

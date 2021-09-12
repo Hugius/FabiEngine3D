@@ -50,7 +50,7 @@ void SceneEditor::_updateLightEditing()
 					// Don't reset if lamp is active or selected
 					if ((entityID != _activeLampID) && (entityID != _selectedLampID))
 					{
-						_fe3d.modelEntity_setSize(entityID, DEFAULT_LAMP_SIZE);
+						_fe3d.modelEntity_setSize(entityID, "", DEFAULT_LAMP_SIZE);
 						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_LAMP_AABB_SIZE);
 					}
 				}
@@ -204,7 +204,7 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("lightPropertiesMenu", "zMinus", "z", color.b, -LIGHT_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 
 				// Update entities
-				_fe3d.modelEntity_setColor(_activeLampID, color);
+				_fe3d.modelEntity_setColor(_activeLampID, "", color);
 				_fe3d.lightEntity_setColor(activeLightID, color);
 			}
 

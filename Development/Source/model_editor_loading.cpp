@@ -255,7 +255,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 			// Set properties
 			_fe3d.modelEntity_setVisible(modelID, false);
-			_fe3d.modelEntity_setSize(modelID, size);
+			_fe3d.modelEntity_setSize(modelID, "", size);
+			_fe3d.modelEntity_setColor(modelID, "", color);
 			_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
 			_fe3d.modelEntity_setTransparent(modelID, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
@@ -264,7 +265,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
 			_fe3d.modelEntity_setReflectivity(modelID, reflectivity);
 			_fe3d.modelEntity_setLightness(modelID, lightness);
-			_fe3d.modelEntity_setColor(modelID, color);
 			_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
 			_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
 			_fe3d.modelEntity_setReflectionType(modelID, ReflectionType(reflectionType));

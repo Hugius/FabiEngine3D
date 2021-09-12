@@ -129,11 +129,11 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
 			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isRaycastResponsive(aabbIDs.front());
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
-			auto position = _fe3d.modelEntity_getPosition(modelID);
-			auto rotation = _fe3d.modelEntity_getRotation(modelID);
-			auto rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID);
-			auto size = _fe3d.modelEntity_getSize(modelID);
-			auto color = _fe3d.modelEntity_getColor(modelID);
+			auto position = _fe3d.modelEntity_getPosition(modelID, "");
+			auto rotation = _fe3d.modelEntity_getRotation(modelID, "");
+			auto rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, "");
+			auto size = _fe3d.modelEntity_getSize(modelID, "");
+			auto color = _fe3d.modelEntity_getColor(modelID, "");
 			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
 			auto maxHeight = _fe3d.modelEntity_getMaxHeight(modelID);
 			auto alpha = _fe3d.modelEntity_getAlpha(modelID);

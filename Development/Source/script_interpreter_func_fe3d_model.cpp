@@ -198,7 +198,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_setPosition(arguments[0].getString(),
+				_fe3d.modelEntity_setPosition(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -214,7 +214,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_setRotation(arguments[0].getString(),
+				_fe3d.modelEntity_setRotation(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -230,7 +230,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_setRotationOrigin(arguments[0].getString(),
+				_fe3d.modelEntity_setRotationOrigin(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -246,7 +246,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_setSize(arguments[0].getString(),
+				_fe3d.modelEntity_setSize(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -262,7 +262,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_move(arguments[0].getString(),
+				_fe3d.modelEntity_move(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -278,7 +278,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_rotate(arguments[0].getString(),
+				_fe3d.modelEntity_rotate(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -294,7 +294,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_scale(arguments[0].getString(),
+				_fe3d.modelEntity_scale(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -310,7 +310,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_moveTo(arguments[0].getString(),
+				_fe3d.modelEntity_moveTo(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -326,7 +326,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_rotateTo(arguments[0].getString(),
+				_fe3d.modelEntity_rotateTo(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -342,7 +342,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_scaleTo(arguments[0].getString(),
+				_fe3d.modelEntity_scaleTo(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -358,7 +358,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.modelEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getPosition(arguments[0].getString(), "");
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -373,7 +373,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.modelEntity_getRotation(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getRotation(arguments[0].getString(), "");
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -388,7 +388,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.modelEntity_getRotationOrigin(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getRotationOrigin(arguments[0].getString(), "");
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -403,7 +403,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.modelEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getSize(arguments[0].getString(), "");
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -418,7 +418,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.modelEntity_setColor(arguments[0].getString(),
+				_fe3d.modelEntity_setColor(arguments[0].getString(), "",
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -434,7 +434,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.modelEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getColor(arguments[0].getString(), "");
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}

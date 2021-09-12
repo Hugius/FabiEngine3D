@@ -202,8 +202,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			if (_copyPreviewModel(modelID, previewID, position))
 			{
 				// Set properties
-				_fe3d.modelEntity_setRotation(modelID, rotation);
-				_fe3d.modelEntity_setSize(modelID, size);
+				_fe3d.modelEntity_setRotation(modelID, "", rotation);
+				_fe3d.modelEntity_setSize(modelID, "", size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 
 				// Save original transformation
@@ -306,8 +306,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				// Create model
 				const string newModelID = ("@@speaker_" + soundID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\speaker.obj");
-				_fe3d.modelEntity_setPosition(newModelID, position);
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_SPEAKER_SIZE);
+				_fe3d.modelEntity_setPosition(newModelID, "", position);
+				_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -356,9 +356,9 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				// Create model
 				const string newModelID = ("@@lamp_" + lightID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-				_fe3d.modelEntity_setPosition(newModelID, position);
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
-				_fe3d.modelEntity_setColor(newModelID, color);
+				_fe3d.modelEntity_setPosition(newModelID, "", position);
+				_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_LAMP_SIZE);
+				_fe3d.modelEntity_setColor(newModelID, "", color);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -398,8 +398,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				// Create model
 				const string newModelID = ("@@camera_" + reflectionID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
-				_fe3d.modelEntity_setPosition(newModelID, position);
-				_fe3d.modelEntity_setSize(newModelID, DEFAULT_CAMERA_SIZE);
+				_fe3d.modelEntity_setPosition(newModelID, "", position);
+				_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_CAMERA_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);

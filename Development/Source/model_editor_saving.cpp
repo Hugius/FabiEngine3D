@@ -42,7 +42,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto emissionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getEmissionMapPath(modelID);
 			auto normalMapPath = isMultiParted ? "" : _fe3d.modelEntity_getNormalMapPath(modelID);
 			auto reflectionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID);
-			auto modelSize = _fe3d.modelEntity_getSize(modelID);
+			auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
 			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
 			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
@@ -50,7 +50,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
 			auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID);
 			auto lightness = _fe3d.modelEntity_getLightness(modelID);
-			auto color = _fe3d.modelEntity_getColor(modelID);
+			auto color = _fe3d.modelEntity_getColor(modelID, "");
 			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
 			auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);

@@ -67,7 +67,7 @@ void SceneEditor::_activateModel(const string& ID)
 
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getPosition(_activeModelID);
+	auto position = _fe3d.modelEntity_getPosition(_activeModelID, "");
 
 	// Update buttons hoverability
 	rightWindow->getScreen("modelPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -210,7 +210,7 @@ void SceneEditor::_activateLight(const string& ID)
 
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getPosition(_activeLampID);
+	auto position = _fe3d.modelEntity_getPosition(_activeLampID, "");
 
 	// Update buttons hoverability
 	rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
@@ -230,7 +230,7 @@ void SceneEditor::_activateReflection(const string& ID)
 
 	// Temporary values
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");
-	auto position = _fe3d.modelEntity_getPosition(_activeCameraID);
+	auto position = _fe3d.modelEntity_getPosition(_activeCameraID, "");
 
 	// Filling writeFields
 	rightWindow->getScreen("reflectionPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
@@ -366,20 +366,20 @@ void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getInversion(ID) == 0.0f)
+		if (_fe3d.modelEntity_getInversion(ID, "") == 0.0f)
 		{
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getInversion(ID) == 1.0f)
+		if (_fe3d.modelEntity_getInversion(ID, "") == 1.0f)
 		{
 			direction *= -1;
 		}
 
 		// Set model inversion
 		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
-		_fe3d.modelEntity_setInversion(ID, _fe3d.modelEntity_getInversion(ID) + speed);
+		_fe3d.modelEntity_setInversion(ID, "", (_fe3d.modelEntity_getInversion(ID, "") + speed));
 	}
 }
 
@@ -424,23 +424,23 @@ void SceneEditor::_updateSpeakerAnimation(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(ID).y < DEFAULT_SPEAKER_SIZE.y)
+		if (_fe3d.modelEntity_getSize(ID, "").y < DEFAULT_SPEAKER_SIZE.y)
 		{
-			_fe3d.modelEntity_setSize(ID, DEFAULT_SPEAKER_SIZE);
+			_fe3d.modelEntity_setSize(ID, "", DEFAULT_SPEAKER_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(ID).y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(ID, "").y > (DEFAULT_SPEAKER_SIZE.y * SPEAKER_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(ID, (DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(ID, "", (DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
 		Vec3 modelSpeed = (Vec3(SPEAKER_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_SPEAKER_SIZE * SPEAKER_SIZE_INCREASE) - DEFAULT_SPEAKER_SIZE);
-		_fe3d.modelEntity_setSize(ID, _fe3d.modelEntity_getSize(ID) + modelSpeed);
+		_fe3d.modelEntity_setSize(ID, "", (_fe3d.modelEntity_getSize(ID, "") + modelSpeed));
 	}
 }
 
@@ -456,23 +456,23 @@ void SceneEditor::_updateLampAnimation(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(ID).y < DEFAULT_LAMP_SIZE.y)
+		if (_fe3d.modelEntity_getSize(ID, "").y < DEFAULT_LAMP_SIZE.y)
 		{
-			_fe3d.modelEntity_setSize(ID, DEFAULT_LAMP_SIZE);
+			_fe3d.modelEntity_setSize(ID, "", DEFAULT_LAMP_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(ID).y > (DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(ID, "").y >(DEFAULT_LAMP_SIZE.y * LAMP_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(ID, (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(ID, "", (DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
 		Vec3 modelSpeed = (Vec3(LAMP_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_LAMP_SIZE * LAMP_SIZE_INCREASE) - DEFAULT_LAMP_SIZE);
-		_fe3d.modelEntity_setSize(ID, _fe3d.modelEntity_getSize(ID) + modelSpeed);
+		_fe3d.modelEntity_setSize(ID, "", (_fe3d.modelEntity_getSize(ID, "") + modelSpeed));
 	}
 }
 
@@ -488,22 +488,22 @@ void SceneEditor::_updateCameraAnimation(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getSize(ID).y < DEFAULT_CAMERA_SIZE.y)
+		if (_fe3d.modelEntity_getSize(ID, "").y < DEFAULT_CAMERA_SIZE.y)
 		{
-			_fe3d.modelEntity_setSize(ID, DEFAULT_CAMERA_SIZE);
+			_fe3d.modelEntity_setSize(ID, "", DEFAULT_CAMERA_SIZE);
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getSize(ID).y > (DEFAULT_CAMERA_SIZE.y * CAMERA_SIZE_INCREASE))
+		if (_fe3d.modelEntity_getSize(ID, "").y >(DEFAULT_CAMERA_SIZE.y * CAMERA_SIZE_INCREASE))
 		{
-			_fe3d.modelEntity_setSize(ID, (DEFAULT_CAMERA_SIZE * CAMERA_SIZE_INCREASE));
+			_fe3d.modelEntity_setSize(ID, "", (DEFAULT_CAMERA_SIZE * CAMERA_SIZE_INCREASE));
 			direction *= -1;
 		}
 
 		// Set new sizes
 		Vec3 modelSpeed = (Vec3(CAMERA_ANIMATION_SPEED) * Vec3(static_cast<float>(direction)));
 		modelSpeed *= ((DEFAULT_CAMERA_SIZE * CAMERA_SIZE_INCREASE) - DEFAULT_CAMERA_SIZE);
-		_fe3d.modelEntity_setSize(ID, _fe3d.modelEntity_getSize(ID) + modelSpeed);
+		_fe3d.modelEntity_setSize(ID, "", _fe3d.modelEntity_getSize(ID, "") + modelSpeed);
 	}
 }

@@ -137,18 +137,18 @@ void AnimationEditor::_updateMiscellaneous()
 					for (auto partID : currentAnimation->getPartIDs())
 					{
 						// Default transformation
-						_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), Vec3(0.0f), partID);
-						_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f), partID);
-						_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f), partID);
+						_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+						_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+						_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 
 						// Only whole model size must be original
 						if (partID.empty())
 						{
-							_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize(), partID);
+							_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
 						}
 						else
 						{
-							_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), Vec3(1.0f), partID);
+							_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 						}
 					}
 
@@ -170,31 +170,27 @@ void AnimationEditor::_updateMiscellaneous()
 									// Determine type of transformation
 									if (frame.getTransformationTypes().at(partID) == TransformationType::MOVEMENT)
 									{
-										// Movement
-										const auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partID));
-										_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), newPosition, partID);
+										// Position
+										auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partID));
+										_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), partID, newPosition);
 									}
 									else if (frame.getTransformationTypes().at(partID) == TransformationType::ROTATION)
 									{
-										// Retrieve current model size
-										const auto& currentModelSize = _fe3d.modelEntity_getSize(currentAnimation->getPreviewModelID());
-
 										// Origin
-										_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(),
-											(currentModelSize * frame.getRotationOrigins().at(partID)), partID);
+										auto currentModelSize = _fe3d.modelEntity_getSize(currentAnimation->getPreviewModelID(), partID);
+										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partID));
+										_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
 
 										// Rotation
-										_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(),
-											frame.getTargetTransformations().at(partID), partID);
+										auto newRotation = frame.getTargetTransformations().at(partID);
+										_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), partID, newRotation);
 									}
 									else if (frame.getTransformationTypes().at(partID) == TransformationType::SCALING)
 									{
-										// Retrieve model size (or part default size)
-										const auto& modelSize = partID.empty() ? currentAnimation->getInitialSize() : Vec3(1.0f);
-
-										// Scaling
-										_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(),
-											modelSize + (modelSize * frame.getTargetTransformations().at(partID)), partID);
+										// Size
+										auto modelSize = (partID.empty() ? currentAnimation->getInitialSize() : Vec3(1.0f));
+										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partID)));
+										_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, newSize);
 									}
 								}
 							}
@@ -227,7 +223,7 @@ void AnimationEditor::_updateMiscellaneous()
 			// Set model inversion
 			float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionDirection));
 			float newInversion = (_fe3d.modelEntity_getInversion(currentAnimation->getPreviewModelID(), partID) + speed);
-			_fe3d.modelEntity_setInversion(currentAnimation->getPreviewModelID(), newInversion, partID);
+			_fe3d.modelEntity_setInversion(currentAnimation->getPreviewModelID(), partID, newInversion);
 		}
 	}
 }

@@ -205,9 +205,9 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 
 	// Create model entity
 	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID));
-	_fe3d.modelEntity_setPosition(newID, position);
-	_fe3d.modelEntity_setSize(newID, _fe3d.modelEntity_getSize(previewID));
-	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getSize(previewID));
+	_fe3d.modelEntity_setPosition(newID, "", position);
+	_fe3d.modelEntity_setSize(newID, "", _fe3d.modelEntity_getSize(previewID, ""));
+	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getSize(previewID, ""));
 
 	// Bind AABB entities to model entity
 	for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
@@ -259,7 +259,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setSpecularIntensity(newID, _fe3d.modelEntity_getSpecularIntensity(previewID));
 	_fe3d.modelEntity_setLightness(newID, _fe3d.modelEntity_getLightness(previewID));
 	_fe3d.modelEntity_setReflectivity(newID, _fe3d.modelEntity_getReflectivity(previewID));
-	_fe3d.modelEntity_setColor(newID, _fe3d.modelEntity_getColor(previewID));
+	_fe3d.modelEntity_setColor(newID, "", _fe3d.modelEntity_getColor(previewID, ""));
 	_fe3d.modelEntity_setUvRepeat(newID, _fe3d.modelEntity_getUvRepeat(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
 	_fe3d.modelEntity_setBright(newID, _fe3d.modelEntity_isBright(previewID));
@@ -267,9 +267,9 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Save original transformation
 	if (_isEditorLoaded)
 	{
-		_initialModelPosition[newID] = _fe3d.modelEntity_getPosition(previewID);
-		_initialModelRotation[newID] = _fe3d.modelEntity_getRotation(previewID);
-		_initialModelSize[newID] = _fe3d.modelEntity_getSize(previewID);
+		_initialModelPosition[newID] = _fe3d.modelEntity_getPosition(previewID, "");
+		_initialModelRotation[newID] = _fe3d.modelEntity_getRotation(previewID, "");
+		_initialModelSize[newID] = _fe3d.modelEntity_getSize(previewID, "");
 	}
 
 	// Save ID

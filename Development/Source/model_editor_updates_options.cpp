@@ -15,7 +15,7 @@ void ModelEditor::_updateOptionsMenu()
 	{
 		// Temporary values
 		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
-		auto color = _fe3d.modelEntity_getColor(_currentModelID);
+		auto color = _fe3d.modelEntity_getColor(_currentModelID, "");
 		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
 		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
 		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
@@ -71,17 +71,17 @@ void ModelEditor::_updateOptionsMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, color);
+			_fe3d.modelEntity_setColor(_currentModelID, "", color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, color);
+			_fe3d.modelEntity_setColor(_currentModelID, "", color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, color);
+			_fe3d.modelEntity_setColor(_currentModelID, "", color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
 		{

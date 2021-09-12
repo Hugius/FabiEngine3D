@@ -147,7 +147,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 				// Check if preview model still has all the parts
 				if (hasAllParts)
 				{
-					newAnimation->setInitialSize(_fe3d.modelEntity_getSize(newAnimation->getPreviewModelID()));
+					newAnimation->setInitialSize(_fe3d.modelEntity_getSize(newAnimation->getPreviewModelID(), ""));
 				}
 				else // Clear preview model
 				{

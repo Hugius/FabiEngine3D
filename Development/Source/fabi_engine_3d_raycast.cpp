@@ -100,7 +100,7 @@ const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string
 	}
 }
 
-const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
+const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -120,7 +120,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 		// Check if ID matches (a part of) hovered AABB ID
 		if (_hoveredAabbID.size() >= ID.size())
 		{
-			if (_hoveredAabbID.substr(0, ID.size()) == ID && _hoveredAabbID != exception)
+			if (_hoveredAabbID.substr(0, ID.size()) == ID)
 			{
 				return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 			}
@@ -142,7 +142,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 			{
 				if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 				{
-					if (entity->getID().substr(0, ID.size()) == ID && entity->getID() != exception) // If entity matches ID
+					if (entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
 					{
 						// Calculate box left bottom (LB) and right top (RT)
 						Vec3 lb, rt;

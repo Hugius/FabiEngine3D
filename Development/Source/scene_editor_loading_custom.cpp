@@ -197,11 +197,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				}
 
 				// Set properties
-				_fe3d.modelEntity_setRotation(modelID, rotation);
-				_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin);
-				_fe3d.modelEntity_setSize(modelID, size);
+				_fe3d.modelEntity_setRotation(modelID, "", rotation);
+				_fe3d.modelEntity_setRotationOrigin(modelID, "", rotationOrigin);
+				_fe3d.modelEntity_setSize(modelID, "", size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
-				_fe3d.modelEntity_setColor(modelID, color);
+				_fe3d.modelEntity_setColor(modelID, "", color);
 				_fe3d.modelEntity_setMinHeight(modelID, minHeight);
 				_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
 				_fe3d.modelEntity_setAlpha(modelID, alpha);
@@ -234,10 +234,10 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 						size.z;
 
 					// Set part transformation
-					_fe3d.modelEntity_setPosition(modelID, position, partID);
-					_fe3d.modelEntity_setRotation(modelID, rotation, partID);
-					_fe3d.modelEntity_setRotationOrigin(modelID, rotationOrigin, partID);
-					_fe3d.modelEntity_setSize(modelID, size, partID);
+					_fe3d.modelEntity_setPosition(modelID, partID, position);
+					_fe3d.modelEntity_setRotation(modelID, partID, rotation);
+					_fe3d.modelEntity_setRotationOrigin(modelID, partID, rotationOrigin);
+					_fe3d.modelEntity_setSize(modelID, partID, size);
 				}
 
 				// Extract instanced offsets

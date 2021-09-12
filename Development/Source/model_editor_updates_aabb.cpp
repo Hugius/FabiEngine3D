@@ -13,7 +13,7 @@ void ModelEditor::_updateAabbMenu()
 	{
 		// Temporary values
 		const string directions[3] = { "X", "Y", "Z" };
-		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
+		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID, "");
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

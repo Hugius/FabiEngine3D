@@ -32,7 +32,7 @@ void AnimationEditor::_updateFrameMenu()
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
 			_currentPartID = "";
-			_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), 0.0f);
+			_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), "", 0.0f);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 			return;
 		}
@@ -99,7 +99,7 @@ void AnimationEditor::_updateFrameMenu()
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginY") &&
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginZ"))
 		{
-			_fe3d.modelEntity_rotate(animation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID), _currentPartID);
+			_fe3d.modelEntity_rotate(animation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
 			_mustUpdateCurrentFramePreview = false;
 		}
 		else
@@ -208,7 +208,7 @@ void AnimationEditor::_updateFrameMenu()
 				// Reset inversion
 				if (_hoveredPartID != selectedButtonID)
 				{
-					_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), 0.0f);
+					_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), "", 0.0f);
 				}
 
 				_hoveredPartID = selectedButtonID;
@@ -217,7 +217,7 @@ void AnimationEditor::_updateFrameMenu()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
 			_gui.getGlobalScreen()->deleteChoiceForm("parts");
-			_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), 0.0f);
+			_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), "", 0.0f);
 			_hoveredPartID = "";
 		}
 		else
@@ -225,7 +225,7 @@ void AnimationEditor::_updateFrameMenu()
 			// Reset inversion
 			if (!_hoveredPartID.empty())
 			{
-				_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), 0.0f);
+				_fe3d.modelEntity_setInversion(animation->getPreviewModelID(), "", 0.0f);
 			}
 
 			_hoveredPartID = "";

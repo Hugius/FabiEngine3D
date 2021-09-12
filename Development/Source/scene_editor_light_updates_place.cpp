@@ -41,7 +41,7 @@ void SceneEditor::_updateLightPlacing()
 					// Create model
 					const string newModelID = ("@@lamp_" + newID);
 					_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-					_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
+					_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_LAMP_SIZE);
 					_fe3d.modelEntity_setShadowed(newModelID, false);
 					_fe3d.modelEntity_setReflected(newModelID, false);
 					_fe3d.modelEntity_setBright(newModelID, true);
@@ -120,7 +120,7 @@ void SceneEditor::_updateLightPlacing()
 							// Create model
 							const string newModelID = ("@@lamp_" + newID);
 							_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
-							_fe3d.modelEntity_setSize(newModelID, DEFAULT_LAMP_SIZE);
+							_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_LAMP_SIZE);
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);
 							_fe3d.modelEntity_setBright(newModelID, true);
@@ -165,7 +165,7 @@ void SceneEditor::_updateLightPlacing()
 		{
 			auto lightPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
 			lightPosition -= LAMP_OFFSET;
-			_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, lightPosition);
+			_fe3d.modelEntity_setPosition(PREVIEW_LAMP_ID, "", lightPosition);
 		}
 	}
 
@@ -176,7 +176,7 @@ void SceneEditor::_updateLightPlacing()
 		{
 			auto lightPosition = _fe3d.lightEntity_getPosition(entityID.substr(string("@@lamp_").size()));
 			lightPosition -= LAMP_OFFSET;
-			_fe3d.modelEntity_setPosition(entityID, lightPosition);
+			_fe3d.modelEntity_setPosition(entityID, "", lightPosition);
 		}
 	}
 }

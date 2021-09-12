@@ -65,10 +65,8 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			vector<AnimationFrame> customFrames;
 			while (true)
 			{
-				// Read the amount of model parts
-				unsigned int modelPartCount;
-
 				// Check if file has frame data left
+				unsigned int modelPartCount;
 				if (iss >> modelPartCount)
 				{
 					// Create custom frame

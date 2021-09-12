@@ -3,7 +3,7 @@
 
 void FabiEngine3D::lightEntity_create(const string& ID)
 {
-	if (_core->_lightEntityManager.getEntities().size() == LightEntityManager::MAX_LIGHT_AMOUNT)
+	if (_core->_lightEntityManager.getEntities().size() == LightEntityManager::MAX_LIGHT_COUNT)
 	{
 		Logger::throwWarning("Tried to create light entity: maximum reached!");
 		return;

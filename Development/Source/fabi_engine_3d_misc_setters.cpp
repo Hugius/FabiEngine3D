@@ -313,10 +313,10 @@ void FabiEngine3D::misc_startMillisecondTimer()
 
 void FabiEngine3D::misc_setLevelOfDetailDistance(float distance)
 {
-	_core->_modelEntityManager.setLodDistance(distance);
+	_core->_modelEntityManager.setLevelOfDetailDistance(distance);
 }
 
-void FabiEngine3D::misc_setMaxAudioChannels(unsigned int count)
+void FabiEngine3D::misc_setMaxAudioChannelCount(unsigned int count)
 {
 	_core->_audioPlayer.allocateChannels(count);
 }

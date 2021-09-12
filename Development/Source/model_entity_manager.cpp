@@ -91,34 +91,34 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		entity->createPart(part.getID());
 
 		// Render buffer
-		entity->setRenderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())), part.getID());
+		entity->setRenderBuffer(part.getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 
 		// Diffuse map
 		if (part.getDiffuseMapPath() != "")
 		{
-			entity->setDiffuseMap(_textureLoader.getTexture2D(part.getDiffuseMapPath(), true, true), part.getID());
-			entity->setDiffuseMapPath(part.getDiffuseMapPath(), part.getID());
+			entity->setDiffuseMap(part.getID(), _textureLoader.getTexture2D(part.getDiffuseMapPath(), true, true));
+			entity->setDiffuseMapPath(part.getID(), part.getDiffuseMapPath());
 		}
 
 		// Emission map
 		if (part.getEmissionMapPath() != "")
 		{
-			entity->setEmissionMap(_textureLoader.getTexture2D(part.getEmissionMapPath(), true, true), part.getID());
-			entity->setEmissionMapPath(part.getEmissionMapPath(), part.getID());
+			entity->setEmissionMap(part.getID(), _textureLoader.getTexture2D(part.getEmissionMapPath(), true, true));
+			entity->setEmissionMapPath(part.getID(), part.getEmissionMapPath());
 		}
 
 		// Reflection map
 		if (part.getReflectionMapPath() != "")
 		{
-			entity->setReflectionMap(_textureLoader.getTexture2D(part.getReflectionMapPath(), true, true), part.getID());
-			entity->setReflectionMapPath(part.getReflectionMapPath(), part.getID());
+			entity->setReflectionMap(part.getID(), _textureLoader.getTexture2D(part.getReflectionMapPath(), true, true));
+			entity->setReflectionMapPath(part.getID(), part.getReflectionMapPath());
 		}
 
 		// Normal map
 		if (part.getNormalMapPath() != "")
 		{
-			entity->setNormalMap(_textureLoader.getTexture2D(part.getNormalMapPath(), true, true), part.getID());
-			entity->setNormalMapPath(part.getNormalMapPath(), part.getID());
+			entity->setNormalMap(part.getID(), _textureLoader.getTexture2D(part.getNormalMapPath(), true, true));
+			entity->setNormalMapPath(part.getID(), part.getNormalMapPath());
 		}
 	}
 }
@@ -138,7 +138,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 			entity->updateTransformation();
 
 			// Check if model has LOD
-			if (!entity->getLodModelEntityID().empty())
+			if (!entity->getLevelOfDetailEntityID().empty())
 			{
 				// Check if LOD entity still exists
 				auto lodEntityPair = getEntities().find(entity->getID());
@@ -149,11 +149,11 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 
 				// Calculate absolute distance between camera and entity
 				Vec3 camPos = _renderBus.getCameraPosition();
-				Vec3 entityPos = entity->getPosition();
+				Vec3 entityPos = entity->getPosition("");
 				auto absolsuteDistance = Math::calculateVectorDistance(camPos, entityPos);
 
 				// Check if entity is farther than LOD distance
-				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodModelEntityID().empty());
+				bool isFarEnough = (absolsuteDistance > _levelOfDetailDistance) && (!entity->getLevelOfDetailEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 
@@ -163,7 +163,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 			{
 				if (reflectionEntity->isVisible())
 				{
-					auto absoluteDistance = Math::calculateVectorDistance(entity->getPosition(), reflectionEntity->getPosition());
+					auto absoluteDistance = Math::calculateVectorDistance(entity->getPosition(""), reflectionEntity->getPosition());
 					reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
 				}
 			}
@@ -215,12 +215,12 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 	}
 }
 
-void ModelEntityManager::setLodDistance(float distance)
+void ModelEntityManager::setLevelOfDetailDistance(float distance)
 {
-	_lodDistance = max(0.0f, distance);
+	_levelOfDetailDistance = max(0.0f, distance);
 }
 
-float ModelEntityManager::getLodDistance()
+float ModelEntityManager::getLevelOfDetailDistance()
 {
-	return _lodDistance;
+	return _levelOfDetailDistance;
 }

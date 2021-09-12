@@ -8,7 +8,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // Distance + precision
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.misc_enableTerrainRaycastPointing(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -17,7 +17,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_disable_terrain_pointing")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_disableTerrainRaycastPointing();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_get_vector")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
@@ -39,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_get_point_on_terrain")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
@@ -52,7 +52,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_is_point_on_terrain_valid")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
@@ -67,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -110,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -153,7 +153,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_into_models")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -177,7 +177,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_into_models_distance")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -203,7 +203,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -227,7 +227,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_into_billboards")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			string result = "";
@@ -253,7 +253,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
@@ -277,7 +277,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 	else if (functionName == "fe3d:raycast_into_billboards_distance")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;

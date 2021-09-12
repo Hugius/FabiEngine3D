@@ -179,7 +179,7 @@ void SettingsEditor::update()
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", maxAudioChannels, {}))
 		{
-			_fe3d.misc_setMaxAudioChannels(maxAudioChannels);
+			_fe3d.misc_setMaxAudioChannelCount(maxAudioChannels);
 		}
 
 		// Miscellaneous
@@ -197,7 +197,7 @@ void SettingsEditor::loadDefaultSettings()
 	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
 	_fe3d.gfx_setReflectionQuality(Config::MIN_REFLECTION_QUALITY);
 	_fe3d.gfx_setRefractionQuality(Config::MIN_REFRACTION_QUALITY);
-	_fe3d.misc_setMaxAudioChannels(Config::MIN_AUDIO_CHANNELS);
+	_fe3d.misc_setMaxAudioChannelCount(Config::MIN_AUDIO_CHANNELS);
 }
 
 bool SettingsEditor::loadSettingsFromFile()
@@ -256,7 +256,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	_fe3d.gfx_setShadowQuality(shadowQuality);
 	_fe3d.gfx_setReflectionQuality(reflectionQuality);
 	_fe3d.gfx_setRefractionQuality(refractionQuality);
-	_fe3d.misc_setMaxAudioChannels(audioChannels);
+	_fe3d.misc_setMaxAudioChannelCount(audioChannels);
 
 	// Close file
 	file.close();

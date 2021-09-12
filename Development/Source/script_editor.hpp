@@ -80,7 +80,7 @@ private:
 	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
 	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
 	static inline const unsigned int MAX_CHARACTERS_PER_LINE = 88;
-	static inline const unsigned int MAX_LINE_AMOUNT = 100;
+	static inline const unsigned int MAX_LINE_COUNT = 100;
 	static inline const unsigned int MAX_VISIBLE_LINES = 13;
 	static inline const unsigned int BLOOM_SIZE = 1;
 	int _firstSelectedLineIndex = -1;

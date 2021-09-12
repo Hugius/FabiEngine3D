@@ -220,7 +220,7 @@ void MasterRenderer::_capturePlanarReflections()
 	bool anyReflectiveModelFound = false;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
+		if (entity->hasReflectionMap("") && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 		{
 			anyReflectiveModelFound = true;
 			break;
@@ -246,7 +246,7 @@ void MasterRenderer::_capturePlanarReflections()
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
 		// Hide reflective MODEL entity
-		if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
+		if (entity->hasReflectionMap("") && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
@@ -397,7 +397,7 @@ void MasterRenderer::_captureWaterReflections()
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Hide reflective MODEL entity
-				if (entity->hasReflectionMap() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
+				if (entity->hasReflectionMap("") && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());

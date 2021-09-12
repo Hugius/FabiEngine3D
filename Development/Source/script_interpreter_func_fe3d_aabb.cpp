@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot access a bound entity
 			if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
@@ -84,7 +84,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// New AABB ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
@@ -114,7 +114,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -139,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -164,7 +164,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -189,7 +189,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -215,7 +215,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -241,7 +241,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -267,7 +267,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -293,7 +293,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -319,7 +319,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -345,7 +345,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -370,7 +370,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -395,7 +395,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -420,7 +420,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
@@ -443,7 +443,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 	else if (functionName == "fe3d:aabb_get_all_ids")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.aabbEntity_getAllIDs();
 

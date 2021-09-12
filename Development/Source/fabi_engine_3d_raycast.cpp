@@ -11,7 +11,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 	// Iterate through AABB entities
 	for (const auto& [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
-		// Check if parent entity is not level of detailed
+		// Check if parent entity does not have LOD
 		if (!(entity->hasParent() && entity->getParentType() == AabbParentType::MODEL_ENTITY &&
 			_core->_modelEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
 		{

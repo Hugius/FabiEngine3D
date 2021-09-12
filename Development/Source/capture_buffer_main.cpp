@@ -8,7 +8,7 @@ CaptureBuffer::~CaptureBuffer()
 	reset();
 }
 
-void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped)
+void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int count, bool isTextureClamped)
 {
 	// Check if already loaded
 	if (!_isInitialized)
@@ -25,7 +25,7 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 		bind();
 
 		// Texture generation
-		for (unsigned int i = 0; i < amount; i++)
+		for (unsigned int i = 0; i < count; i++)
 		{
 			// Add empty texture ID
 			_textures.push_back(0);
@@ -66,11 +66,11 @@ void CaptureBuffer::createColorTexture(Ivec2 position, Ivec2 size, unsigned int 
 
 		// Multiple textures
 		vector<TextureID> attachments;
-		for (unsigned int i = 0; i < amount; i++)
+		for (unsigned int i = 0; i < count; i++)
 		{
 			attachments.push_back(GL_COLOR_ATTACHMENT0 + i);
 		}
-		glDrawBuffers(amount, &attachments[0]);
+		glDrawBuffers(count, &attachments[0]);
 
 		// Unbind
 		unbind();

@@ -10,7 +10,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	// Determine type of function
 	if (functionName == "fe3d:application_pause")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute pausing functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:application_resume")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute pausing functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:application_stop")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			if (_fe3d.application_isExported()) // Application preview
 			{
@@ -60,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	else if (functionName == "fe3d:print")
 	{
 		// Validate amount of arguments
-		if (_validateListValueAmount(arguments, 1))
+		if (_validateListValueCount(arguments, 1))
 		{
 			// Determine which type of value to print
 			if (arguments[0].getType() == ScriptValueType::VEC3)
@@ -97,7 +97,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		auto types = { ScriptValueType::BOOLEAN };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -113,7 +113,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:cursor_is_visible")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -129,7 +129,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:cursor_center")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -145,7 +145,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:cursor_get_position_x")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -161,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:cursor_get_position_y")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -177,7 +177,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:window_get_width")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:window_get_height")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -209,7 +209,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:timer_start")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_startMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -217,7 +217,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:timer_is_started")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_isMillisecondTimerStarted();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -225,7 +225,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:timer_stop")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -233,7 +233,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:wireFrame_enable_rendering")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute wire frame functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -249,7 +249,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:wireFrame_disable_rendering")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute wire frame functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -265,7 +265,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:aabbs_enable_rendering")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute AABBs functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -281,7 +281,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:aabbs_disable_rendering")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute AABBs functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -299,7 +299,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		auto types = { ScriptValueType::INTEGER };
 
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.misc_checkInterval(arguments[0].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -307,7 +307,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:vsync_enable")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -323,7 +323,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:vsync_disable")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
 			if (_fe3d.networkServer_isRunning())
@@ -339,7 +339,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:vynsc_is_enabled")
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running
 			if (_fe3d.networkServer_isRunning())

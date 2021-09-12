@@ -135,32 +135,32 @@ void ModelEntity::updateTransformationMatrix()
 	}
 }
 
-void ModelEntity::setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID)
+void ModelEntity::setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value)
 {
 	_parts[_getPartIndex(partID)].renderBuffer = value;
 }
 
-void ModelEntity::setDiffuseMap(TextureID value, const string& partID)
+void ModelEntity::setDiffuseMap(const string& partID, TextureID value)
 {
 	_parts[_getPartIndex(partID)].diffuseMap = value;
 }
 
-void ModelEntity::setEmissionMap(TextureID value, const string& partID)
+void ModelEntity::setEmissionMap(const string& partID, TextureID value)
 {
 	_parts[_getPartIndex(partID)].emissionMap = value;
 }
 
-void ModelEntity::setReflectionMap(TextureID value, const string& partID)
+void ModelEntity::setReflectionMap(const string& partID, TextureID value)
 {
 	_parts[_getPartIndex(partID)].reflectionMap = value;
 }
 
-void ModelEntity::setNormalMap(TextureID value, const string& partID)
+void ModelEntity::setNormalMap(const string& partID, TextureID value)
 {
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
-void ModelEntity::setPosition(Vec3 value, const string& partID)
+void ModelEntity::setPosition(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -174,7 +174,7 @@ void ModelEntity::setPosition(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::setRotation(Vec3 value, const string& partID)
+void ModelEntity::setRotation(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -188,7 +188,7 @@ void ModelEntity::setRotation(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
+void ModelEntity::setRotationOrigin(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -200,7 +200,7 @@ void ModelEntity::setRotationOrigin(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::setSize(Vec3 value, const string& partID)
+void ModelEntity::setSize(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -214,7 +214,7 @@ void ModelEntity::setSize(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::move(Vec3 value, const string& partID)
+void ModelEntity::move(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -228,7 +228,7 @@ void ModelEntity::move(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::rotate(Vec3 value, const string& partID)
+void ModelEntity::rotate(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -249,7 +249,7 @@ void ModelEntity::rotate(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::scale(Vec3 value, const string& partID)
+void ModelEntity::scale(const string& partID, Vec3 value)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -269,7 +269,7 @@ void ModelEntity::scale(Vec3 value, const string& partID)
 	}
 }
 
-void ModelEntity::moveTo(Vec3 target, float speed, const string& partID)
+void ModelEntity::moveTo(const string& partID, Vec3 target, float speed)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -283,7 +283,7 @@ void ModelEntity::moveTo(Vec3 target, float speed, const string& partID)
 	}
 }
 
-void ModelEntity::rotateTo(Vec3 target, float speed, const string& partID)
+void ModelEntity::rotateTo(const string& partID, Vec3 target, float speed)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -297,7 +297,7 @@ void ModelEntity::rotateTo(Vec3 target, float speed, const string& partID)
 	}
 }
 
-void ModelEntity::scaleTo(Vec3 target, float speed, const string& partID)
+void ModelEntity::scaleTo(const string& partID, Vec3 target, float speed)
 {
 	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
 	{
@@ -311,7 +311,7 @@ void ModelEntity::scaleTo(Vec3 target, float speed, const string& partID)
 	}
 }
 
-void ModelEntity::setColor(Vec3 value, const string& partID)
+void ModelEntity::setColor(const string& partID, Vec3 value)
 {
 	if (partID.empty())
 	{
@@ -331,7 +331,7 @@ void ModelEntity::setLevelOfDetailSize(Vec3 value)
 	_levelOfDetailSize = value;
 }
 
-void ModelEntity::setInversion(float value, const string& partID)
+void ModelEntity::setInversion(const string& partID, float value)
 {
 	if (partID.empty())
 	{
@@ -351,29 +351,29 @@ void ModelEntity::setMeshPath(const string& value)
 	_meshPath = value;
 }
 
-void ModelEntity::setDiffuseMapPath(const string& value, const string& partID)
+void ModelEntity::setDiffuseMapPath(const string& partID, const string& value)
 {
 	_parts[_getPartIndex(partID)].diffuseMapPath = value;
 }
 
-void ModelEntity::setEmissionMapPath(const string& value, const string& partID)
+void ModelEntity::setEmissionMapPath(const string& partID, const string& value)
 {
 	_parts[_getPartIndex(partID)].emissionMapPath = value;
 }
 
-void ModelEntity::setReflectionMapPath(const string& value, const string& partID)
+void ModelEntity::setReflectionMapPath(const string& partID, const string& value)
 {
 	_parts[_getPartIndex(partID)].reflectionMapPath = value;
 }
 
-void ModelEntity::setNormalMapPath(const string& value, const string& partID)
+void ModelEntity::setNormalMapPath(const string& partID, const string& value)
 {
 	_parts[_getPartIndex(partID)].normalMapPath = value;
 }
 
-void ModelEntity::setLodModelEntityID(const string& value)
+void ModelEntity::setLevelOfDetailEntityID(const string& value)
 {
-	_lodModelEntityID = value;
+	_levelOfDetailEntityID = value;
 }
 
 void ModelEntity::setPreviousReflectionEntityID(const string& value)

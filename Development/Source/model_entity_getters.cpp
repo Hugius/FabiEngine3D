@@ -153,9 +153,9 @@ const string& ModelEntity::getNormalMapPath(const string& partID)
 	return _parts[_getPartIndex(partID)].normalMapPath;
 }
 
-const string& ModelEntity::getLodModelEntityID()
+const string& ModelEntity::getLevelOfDetailEntityID()
 {
-	return _lodModelEntityID;
+	return _levelOfDetailEntityID;
 }
 
 const string& ModelEntity::getPreviousReflectionEntityID()
@@ -365,7 +365,7 @@ const float ModelEntity::getUvRepeat()
 	return _uvRepeat;
 }
 
-unsigned int ModelEntity::_getPartIndex(string partID)
+unsigned int ModelEntity::_getPartIndex(const string& partID)
 {
 	// Validate parts amount
 	if (partID.empty())

@@ -12,7 +12,7 @@ class CaptureBuffer final
 public:
 	~CaptureBuffer();
 
-	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int amount, bool isTextureClamped);
+	void createColorTexture(Ivec2 position, Ivec2 size, unsigned int count, bool isTextureClamped);
 	void createDepthTexture(Ivec2 position, Ivec2 size);
 	void reset();
 

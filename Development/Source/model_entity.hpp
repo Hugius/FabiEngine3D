@@ -18,30 +18,30 @@ public:
 	void createPart(const string& ID);
 	void updateTransformation();
 	void updateTransformationMatrix();
-	void setRenderBuffer(shared_ptr<RenderBuffer> value, const string& partID = "");
-	void setDiffuseMap(TextureID value, const string& partID = "");
-	void setEmissionMap(TextureID value, const string& partID = "");
-	void setReflectionMap(TextureID value, const string& partID = "");
-	void setNormalMap(TextureID value, const string& partID = "");
-	void setPosition(Vec3 value, const string& partID = "");
-	void setRotation(Vec3 value, const string& partID = "");
-	void setRotationOrigin(Vec3 value, const string& partID = "");
-	void setSize(Vec3 value, const string& partID = "");
-	void move(Vec3 value, const string& partID = "");
-	void rotate(Vec3 value, const string& partID = "");
-	void scale(Vec3 value, const string& partID = "");
-	void moveTo(Vec3 target, float speed, const string& partID = "");
-	void rotateTo(Vec3 target, float speed, const string& partID = "");
-	void scaleTo(Vec3 target, float speed, const string& partID = "");
-	void setColor(Vec3 value, const string& partID = "");
+	void setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value);
+	void setDiffuseMap(const string& partID, TextureID value);
+	void setEmissionMap(const string& partID, TextureID value);
+	void setReflectionMap(const string& partID, TextureID value);
+	void setNormalMap(const string& partID, TextureID value);
+	void setPosition(const string& partID, Vec3 value);
+	void setRotation(const string& partID, Vec3 value);
+	void setRotationOrigin(const string& partID, Vec3 value);
+	void setSize(const string& partID, Vec3 value);
+	void move(const string& partID, Vec3 value);
+	void rotate(const string& partID, Vec3 value);
+	void scale(const string& partID, Vec3 value);
+	void moveTo(const string& partID, Vec3 target, float speed);
+	void rotateTo(const string& partID, Vec3 target, float speed);
+	void scaleTo(const string& partID, Vec3 target, float speed);
+	void setColor(const string& partID, Vec3 value);
+	void setInversion(const string& partID, float value);
+	void setDiffuseMapPath(const string& partID, const string& value);
+	void setEmissionMapPath(const string& partID, const string& value);
+	void setReflectionMapPath(const string& partID, const string& value);
+	void setNormalMapPath(const string& partID, const string& value);
 	void setLevelOfDetailSize(Vec3 value);
-	void setInversion(float value, const string& partID = "");
+	void setLevelOfDetailEntityID(const string& value);
 	void setMeshPath(const string& value);
-	void setDiffuseMapPath(const string& value, const string& partID = "");
-	void setEmissionMapPath(const string& value, const string& partID = "");
-	void setReflectionMapPath(const string& value, const string& partID = "");
-	void setNormalMapPath(const string& value, const string& partID = "");
-	void setLodModelEntityID(const string& value);
 	void setPreviousReflectionEntityID(const string& value);
 	void setCurrentReflectionEntityID(const string& value);
 	void setCubeReflectionMixValue(float value);
@@ -67,32 +67,32 @@ public:
 	void clearParts();
 
 	// Instances
-	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID = "");
+	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
 
 	// Strings
 	const vector<string> getPartIDs();
 	const string& getMeshPath();
-	const string& getDiffuseMapPath(const string& partID = "");
-	const string& getEmissionMapPath(const string& partID = "");
-	const string& getReflectionMapPath(const string& partID = "");
-	const string& getNormalMapPath(const string& partID = "");
-	const string& getLodModelEntityID();
+	const string& getDiffuseMapPath(const string& partID);
+	const string& getEmissionMapPath(const string& partID);
+	const string& getReflectionMapPath(const string& partID);
+	const string& getNormalMapPath(const string& partID);
+	const string& getLevelOfDetailEntityID();
 	const string& getPreviousReflectionEntityID();
 	const string& getCurrentReflectionEntityID();
 
 	// Matrices
-	const Matrix44& getTransformationMatrix(const string& partID = "");
+	const Matrix44& getTransformationMatrix(const string& partID);
 
 	// Vectors
-	const Vec3 getPosition(const string& partID = "");
-	const Vec3 getRotation(const string& partID = "");
-	const Vec3 getRotationOrigin(const string& partID = "");
-	const Vec3 getSize(const string& partID = "");
+	const Vec3 getPosition(const string& partID);
+	const Vec3 getRotation(const string& partID);
+	const Vec3 getRotationOrigin(const string& partID);
+	const Vec3 getSize(const string& partID);
+	const Vec3 getColor(const string& partID);
 	const Vec3 getLevelOfDetailSize();
-	const Vec3 getColor(const string& partID = "");
 
 	// Floats
-	const float getInversion(const string& partID = "");
+	const float getInversion(const string& partID);
 	const float getCubeReflectionMixValue();
 	const float getReflectivity();
 	const float getLightness();
@@ -114,17 +114,17 @@ public:
 	const bool isLevelOfDetailed();
 	const bool isWireFramed();
 	const bool isBright();
-	const bool hasRenderBuffer(const string& partID = "");
-	const bool hasDiffuseMap(const string& partID = "");
-	const bool hasEmissionMap(const string& partID = "");
-	const bool hasReflectionMap(const string& partID = "");
-	const bool hasNormalMap(const string& partID = "");
+	const bool hasRenderBuffer(const string& partID);
+	const bool hasDiffuseMap(const string& partID);
+	const bool hasEmissionMap(const string& partID);
+	const bool hasReflectionMap(const string& partID);
+	const bool hasNormalMap(const string& partID);
 
 	// Miscellaneous
-	const TextureID getDiffuseMap(const string& partID = "");
-	const TextureID getEmissionMap(const string& partID = "");
-	const TextureID getReflectionMap(const string& partID = "");
-	const TextureID getNormalMap(const string& partID = "");
+	const TextureID getDiffuseMap(const string& partID);
+	const TextureID getEmissionMap(const string& partID);
+	const TextureID getReflectionMap(const string& partID);
+	const TextureID getNormalMap(const string& partID);
 	const ReflectionType getReflectionType();
 
 private:
@@ -179,14 +179,14 @@ private:
 	void _correctSizeTarget(Vec3& current, Vec3 target, float speed);
 
 	// Integers
-	unsigned int _getPartIndex(string partID);
+	unsigned int _getPartIndex(const string& partID);
 
 	// Instances
 	vector<PartData> _parts;
 
 	// Strings
 	string _meshPath = "";
-	string _lodModelEntityID = "";
+	string _levelOfDetailEntityID = "";
 	string _previousReflectionEntityID = "";
 	string _currentReflectionEntityID = "";
 

@@ -272,7 +272,7 @@ public:
 	void modelEntity_setEmissionMap(const string& ID, const string& texturePath);
 	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
 	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
-	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
+	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
 	void modelEntity_setTransparent(const string& ID, bool enabled);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setReflectionType(const string& ID, ReflectionType type);
@@ -825,7 +825,7 @@ public:
 	void misc_cacheMusicMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
-	void misc_setMaxAudioChannels(unsigned int count);
+	void misc_setMaxAudioChannelCount(unsigned int count);
 
 	// Miscellaneous interface - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();

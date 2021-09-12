@@ -53,13 +53,13 @@ void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& tex
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(0);
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath("");
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap("", 0);
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath("", "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath("", texturePath);
 	}
 }
 
@@ -67,13 +67,13 @@ void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& te
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(0);
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("");
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap("", 0);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("", "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("", texturePath);
 	}
 }
 
@@ -81,13 +81,13 @@ void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& text
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap(0);
-		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("");
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap("", 0);
+		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("", "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("", texturePath);
 	}
 }
 
@@ -95,19 +95,19 @@ void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& 
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(0);
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath("");
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap("", 0);
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath("", "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath("", texturePath);
 	}
 }
 
-void FabiEngine3D::modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID)
+void FabiEngine3D::modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setLodModelEntityID(lodID);
+	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailEntityID(levelOfDetailID);
 }
 
 void FabiEngine3D::modelEntity_setTransparent(const string& ID, bool enabled)
@@ -146,7 +146,7 @@ const bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 	auto entity = _core->_modelEntityManager.getEntity(ID);
 
 	// Check if entity has render buffer
-	if (entity->hasRenderBuffer())
+	if (entity->hasRenderBuffer(""))
 	{
 		return entity->getRenderBuffer(entity->getPartIDs()[0])->isInstanced();
 	}
@@ -221,22 +221,22 @@ const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 
 const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap();
+	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap("");
 }
 
 const bool FabiEngine3D::modelEntity_hasEmissionMap(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap();
+	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap("");
 }
 
 const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasReflectionMap();
+	return _core->_modelEntityManager.getEntity(ID)->hasReflectionMap("");
 }
 
 const bool FabiEngine3D::modelEntity_hasNormalMap(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasNormalMap();
+	return _core->_modelEntityManager.getEntity(ID)->hasNormalMap("");
 }
 
 const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& ID)
@@ -246,52 +246,52 @@ const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& I
 
 void FabiEngine3D::modelEntity_setPosition(const string& ID, Vec3 position, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setPosition(position, partID);
+	_core->_modelEntityManager.getEntity(ID)->setPosition(partID, position);
 }
 
 void FabiEngine3D::modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setRotation(rotation, partID);
+	_core->_modelEntityManager.getEntity(ID)->setRotation(partID, rotation);
 }
 
 void FabiEngine3D::modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(rotationOrigin, partID);
+	_core->_modelEntityManager.getEntity(ID)->setRotationOrigin(partID, rotationOrigin);
 }
 
 void FabiEngine3D::modelEntity_setSize(const string& ID, Vec3 size, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setSize(size, partID);
+	_core->_modelEntityManager.getEntity(ID)->setSize(partID, size);
 }
 
 void FabiEngine3D::modelEntity_move(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->move(factor, partID);
+	_core->_modelEntityManager.getEntity(ID)->move(partID, factor);
 }
 
 void FabiEngine3D::modelEntity_rotate(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->rotate(factor, partID);
+	_core->_modelEntityManager.getEntity(ID)->rotate(partID, factor);
 }
 
 void FabiEngine3D::modelEntity_scale(const string& ID, Vec3 factor, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->scale(factor, partID);
+	_core->_modelEntityManager.getEntity(ID)->scale(partID, factor);
 }
 
 void FabiEngine3D::modelEntity_moveTo(const string& ID, Vec3 target, float speed, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->moveTo(target, speed, partID);
+	_core->_modelEntityManager.getEntity(ID)->moveTo(partID, target, speed);
 }
 
 void FabiEngine3D::modelEntity_rotateTo(const string& ID, Vec3 target, float speed, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->rotateTo(target, speed, partID);
+	_core->_modelEntityManager.getEntity(ID)->rotateTo(partID, target, speed);
 }
 
 void FabiEngine3D::modelEntity_scaleTo(const string& ID, Vec3 target, float speed, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->scaleTo(target, speed, partID);
+	_core->_modelEntityManager.getEntity(ID)->scaleTo(partID, target, speed);
 }
 
 const Vec3 FabiEngine3D::modelEntity_getPosition(const string& ID, const string& partID)
@@ -346,7 +346,7 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, float lightness)
 
 void FabiEngine3D::modelEntity_setInversion(const string& ID, float inversion, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setInversion(inversion, partID);
+	_core->_modelEntityManager.getEntity(ID)->setInversion(partID, inversion);
 }
 
 void FabiEngine3D::modelEntity_setMinHeight(const string& ID, float height)
@@ -466,27 +466,27 @@ const string& FabiEngine3D::modelEntity_getMeshPath(const string& ID)
 
 const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath();
+	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath("");
 }
 
 const string& FabiEngine3D::modelEntity_getEmissionMapPath(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath();
+	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath("");
 }
 
 const string& FabiEngine3D::modelEntity_getNormalMapPath(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath();
+	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath("");
 }
 
 const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPath();
+	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPath("");
 }
 
 const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getLodModelEntityID();
+	return _core->_modelEntityManager.getEntity(ID)->getLevelOfDetailEntityID();
 }
 
 const vector<Vec3> FabiEngine3D::modelEntity_getInstancedOffsets(const string& ID)
@@ -527,7 +527,7 @@ void FabiEngine3D::modelEntity_setDepthMapIncluded(const string& ID, bool enable
 
 void FabiEngine3D::modelEntity_setColor(const string& ID, Vec3 color, const string& partID)
 {
-	_core->_modelEntityManager.getEntity(ID)->setColor(color, partID);
+	_core->_modelEntityManager.getEntity(ID)->setColor(partID, color);
 }
 
 void FabiEngine3D::modelEntity_setReflected(const string& ID, bool enabled)

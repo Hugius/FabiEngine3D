@@ -29,7 +29,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	ofstream file(filePath);
 
 	// Save all LOD model IDs
-	vector<string> lodIDs;
+	vector<string> lodEntityIDs;
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if not preview entity
@@ -39,9 +39,9 @@ bool SceneEditor::saveEditorSceneToFile()
 			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if (find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
+				if (find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
 				{
-					lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					lodEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -105,7 +105,7 @@ bool SceneEditor::saveEditorSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
 		if ((modelID[0] != '@') || isLodModel)
 		{
 			// Check if model has bound animation

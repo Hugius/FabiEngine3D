@@ -20,7 +20,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 	else if (functionName == "fe3d:terrain_get_max_height")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 	else if (functionName == "fe3d:terrain_get_size")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
 			if (_validateFe3dTerrainEntity())

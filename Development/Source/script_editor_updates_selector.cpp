@@ -79,7 +79,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if (_fe3d.input_isKeyPressed(InputType::KEY_ENTER))
 				{
 					// Check if not exceeding the line limit
-					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
+					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 					{
 						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
 						cursorLineIndex++;
@@ -189,7 +189,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if (!_copyClipboard.empty())
 				{
 					// Paste as much copied text as possible
-					unsigned int pastedAmount = 0;
+					unsigned int pastedCount = 0;
 					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
 					for (size_t i = 0; i < _copyClipboard.size(); i++)
 					{
@@ -200,16 +200,16 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 							if (_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + static_cast<unsigned int>(i)).empty())
 							{
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
-								pastedAmount++;
+								pastedCount++;
 								continue;
 							}
 						}
 
 						// Try to create new line
-						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
+						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 						{
 							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + static_cast<unsigned int>(i), _copyClipboard[i]);
-							pastedAmount++;
+							pastedCount++;
 						}
 						else
 						{
@@ -218,11 +218,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					}
 
 					// Check if anything has been successfully pasted
-					if (pastedAmount > 0)
+					if (pastedCount > 0)
 					{
 						// Change cursor position
-						cursorLineIndex += (pastedAmount - static_cast<int>(firstLineEmpty));
-						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_AMOUNT - 1));
+						cursorLineIndex += (pastedCount - static_cast<int>(firstLineEmpty));
+						cursorLineIndex = min(cursorLineIndex, (MAX_LINE_COUNT - 1));
 						cursorCharIndex = static_cast<unsigned int>(_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size());
 
 						// Make sure the script gets re-rendered

@@ -34,7 +34,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto firstName = arguments[0].getString();
@@ -84,7 +84,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto listName = arguments[0].getString();
@@ -113,7 +113,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, 2))
+					if (_validateListValueCount(arguments, 2))
 					{
 						// List name must be string
 						if (arguments[0].getType() != ScriptValueType::STRING)
@@ -186,7 +186,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
 						auto listName = arguments[0].getString();
@@ -219,7 +219,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
@@ -228,7 +228,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = arguments[0].getString().size();
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
@@ -238,7 +238,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -248,7 +248,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate index
 						if ((arguments[1].getInteger() < 0) ||
@@ -267,7 +267,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate splitter
 						if ((arguments[1].getString().size() > 1) ||
@@ -304,7 +304,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING };
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Compose string in reverse
 						string result = "";
@@ -327,7 +327,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						ScriptValueType::INTEGER  // Max
 					};
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = Tools::getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
@@ -341,7 +341,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						ScriptValueType::DECIMAL  // Max
 					};
 
-					if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));

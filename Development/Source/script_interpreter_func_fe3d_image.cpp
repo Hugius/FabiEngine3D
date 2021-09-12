@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
@@ -73,7 +73,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 	else if (functionName == "fe3d:image_get_all_ids")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.imageEntity_getAllIDs();
 
@@ -100,7 +100,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Temporary values
 			auto ID = arguments[0].getString();
@@ -144,7 +144,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -159,7 +159,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -174,7 +174,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -189,7 +189,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -205,7 +205,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -221,7 +221,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -238,7 +238,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -253,7 +253,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -268,7 +268,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -283,7 +283,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -298,7 +298,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -313,7 +313,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -328,7 +328,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -344,7 +344,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -360,7 +360,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -377,7 +377,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -392,7 +392,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -407,7 +407,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -423,7 +423,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -438,7 +438,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -453,7 +453,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -475,7 +475,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -493,7 +493,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -508,7 +508,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -523,7 +523,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -538,7 +538,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -553,7 +553,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -568,7 +568,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -583,7 +583,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -598,7 +598,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -613,7 +613,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
@@ -628,7 +628,7 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))

@@ -34,7 +34,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	ofstream file(filePath);
 
 	// Save model LOD IDs
-	vector<string> lodIDs;
+	vector<string> lodEntityIDs;
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
@@ -45,9 +45,9 @@ bool SceneEditor::saveCustomSceneToFile()
 			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
-				if (find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
+				if (find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) == lodEntityIDs.end())
 				{
-					lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
+					lodEntityIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -116,7 +116,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
 		bool isCustomSceneModel =
 			find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
@@ -265,7 +265,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	for (const auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isLodModel = find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+		bool isLodModel = find(lodEntityIDs.begin(), lodEntityIDs.end(), modelID) != lodEntityIDs.end();
 		bool isCustomSceneModel =
 			find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)

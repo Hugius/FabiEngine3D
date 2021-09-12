@@ -14,7 +14,7 @@ void ModelEditor::_updateOptionsMenu()
 	if (screen->getID() == "modelEditorMenuOptions")
 	{
 		// Temporary values
-		auto lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
+		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
 		auto color = _fe3d.modelEntity_getColor(_currentModelID);
 		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
 		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
@@ -61,10 +61,10 @@ void ModelEditor::_updateOptionsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodID")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodEntityID")->isHovered())
 		{
-			lodID = (lodID.empty()) ? lodID : lodID.substr(1, lodID.size() - 1);
-			_gui.getGlobalScreen()->createValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
+			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
+			_gui.getGlobalScreen()->createValueForm("lodEntityID", "LOD entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
@@ -87,19 +87,19 @@ void ModelEditor::_updateOptionsMenu()
 		{
 			_fe3d.modelEntity_setUvRepeat(_currentModelID, uvRepeat);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("lodID", lodID, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("lodEntityID", levelOfDetailEntityID, {}))
 		{
-			if (lodID == "@") // No LOD entity
+			if (levelOfDetailEntityID == "@") // No LOD entity
 			{
 				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "");
 			}
-			else if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + lodID)) == _loadedModelIDs.end()) // Check LOD entity
+			else if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), ("@" + levelOfDetailEntityID)) == _loadedModelIDs.end()) // Check LOD entity
 			{
-				Logger::throwWarning("Cannot find LOD entity with ID \"" + lodID + "\"");
+				Logger::throwWarning("Cannot find LOD entity with ID \"" + levelOfDetailEntityID + "\"");
 			}
 			else // Set LOD entity
 			{
-				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, ("@" + lodID));
+				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, ("@" + levelOfDetailEntityID));
 			}
 		}
 

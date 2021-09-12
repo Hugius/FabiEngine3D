@@ -8,7 +8,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.networkClient_start(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -19,7 +19,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.networkClient_connect(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -28,7 +28,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_disconnect")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.networkClient_disconnect();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_stop")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.networkClient_stop();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.networkClient_isValidServerIP(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_is_running")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isRunning();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -66,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_is_connecting")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isConnecting();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -75,7 +75,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_is_connected")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isConnected();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -84,7 +84,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_is_accepted")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_isAccepted();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -95,7 +95,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.networkClient_sendMessageTCP(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -106,7 +106,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.networkClient_sendMessageUDP(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -115,7 +115,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_get_pending_protocols")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto messages = _fe3d.networkClient_getPendingMessages();
 			for (const auto& message : messages)
@@ -127,7 +127,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_get_pending_contents")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto messages = _fe3d.networkClient_getPendingMessages();
 			for (const auto& message : messages)
@@ -139,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_get_ping_latency")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getPingLatency();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
@@ -148,7 +148,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_get_server_ip")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getServerIP();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
@@ -157,7 +157,7 @@ bool ScriptInterpreter::_executeFe3dClientFunction(const string& functionName, v
 	else if (functionName == "fe3d:client_get_username")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkClient_getUsername();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));

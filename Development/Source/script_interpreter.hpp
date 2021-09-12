@@ -63,7 +63,7 @@ private:
 
 	// List functions
 	bool _validateListIndex(ScriptVariable& list, unsigned int index);
-	bool _validateListValueAmount(const vector<ScriptValue>& values, unsigned int amount);
+	bool _validateListValueCount(const vector<ScriptValue>& values, unsigned int count);
 	bool _validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
 	vector<ScriptValue> _extractValuesFromListString(const string& listString);
 	void _processListPush(const string& scriptLine);

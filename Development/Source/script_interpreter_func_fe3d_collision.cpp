@@ -8,7 +8,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // CameraHeight + cameraSpeed
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.collision_enableTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -17,7 +17,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	else if (functionName == "fe3d:collision_disable_camera_terrain_response")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.collision_disableTerrainResponse();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	else if (functionName == "fe3d:collision_is_camera_under_terrain")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			bool result = _fe3d.collision_checkCameraWithTerrain();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.collision_setCameraBoxSize(
 				arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal(),
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.collision_enableCameraResponse(arguments[0].getBoolean(), arguments[1].getBoolean(), arguments[2].getBoolean());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -68,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	else if (functionName == "fe3d:collision_disable_camera_aabb_response")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.collision_disableCameraResponse();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -79,7 +79,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntity ID + aabbEntity part ID + direction
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate direction
 			if (arguments[2].getString() != "X" && arguments[2].getString() != "Y" && 
@@ -140,7 +140,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		auto types = { ScriptValueType::STRING }; // Direction
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate direction
 			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
@@ -184,7 +184,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // aabbEntity ID + Direction
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate direction
 			if (arguments[1].getString() != "X" && arguments[1].getString() != "Y" && 
@@ -230,7 +230,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		auto types = { ScriptValueType::STRING }; // Direction
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate direction
 			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
@@ -273,7 +273,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Temporary values
 			string result = "";
@@ -373,7 +373,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Temporary values
 			string result = "";
@@ -438,7 +438,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Temporary values
 			string result = "";

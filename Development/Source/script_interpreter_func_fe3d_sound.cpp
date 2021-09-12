@@ -39,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview sound
 			if (arguments[0].getString().front() == '@')
@@ -58,7 +58,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Cannot request a preview sound
 			if (arguments[0].getString().front() == '@')
@@ -85,7 +85,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_get_all_ids")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.sound_getAllIDs();
 
@@ -110,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// New sound ID cannot start with '@'
 			if (arguments[0].getString().front() == '@')
@@ -148,7 +148,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Temporary values
 			string newID = arguments[0].getString();
@@ -191,7 +191,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -204,7 +204,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_enable")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_enableSounds();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -213,7 +213,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_disable")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_disableSounds();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -229,7 +229,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -249,7 +249,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -264,7 +264,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -279,7 +279,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -294,7 +294,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -307,7 +307,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_pause_all")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.sound_pauseAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -318,7 +318,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -333,7 +333,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -346,7 +346,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_resume_all")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.sound_resumeAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -361,7 +361,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		};
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -374,7 +374,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 	else if (functionName == "fe3d:sound_stop_all")
 	{
 		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.sound_stopAll();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -385,7 +385,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -408,7 +408,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -423,7 +423,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -448,7 +448,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -470,7 +470,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -493,7 +493,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -516,7 +516,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))
@@ -539,7 +539,7 @@ bool ScriptInterpreter::_executeFe3dSoundFunction(const string& functionName, ve
 		auto types = { ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing sound ID
 			if (_validateFe3dSound(arguments[0].getString()))

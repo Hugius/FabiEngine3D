@@ -53,7 +53,7 @@ const float FabiEngine3D::misc_stopMillisecondTimer()
 
 const float FabiEngine3D::misc_getLevelOfDetailDistance()
 {
-	return _core->_modelEntityManager.getLodDistance();
+	return _core->_modelEntityManager.getLevelOfDetailDistance();
 }
 
 const string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)

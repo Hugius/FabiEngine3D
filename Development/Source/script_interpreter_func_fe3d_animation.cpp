@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -22,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -52,7 +52,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -67,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -82,7 +82,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -97,7 +97,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -112,7 +112,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -127,7 +127,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -142,7 +142,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -165,7 +165,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -188,7 +188,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -211,7 +211,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))
@@ -234,7 +234,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
-		if (_validateListValueAmount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
 			if (_validateFe3dModelEntity(arguments[0].getString()))

@@ -19,13 +19,13 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 	return true;
 }
 
-bool ScriptInterpreter::_validateListValueAmount(const vector<ScriptValue>& values, unsigned int amount)
+bool ScriptInterpreter::_validateListValueCount(const vector<ScriptValue>& values, unsigned int count)
 {
-	if (values.size() == amount) // Check if value amount is correct
+	if (values.size() == count) // Check if value amount is correct
 	{
 		return true;
 	}
-	else if (values.size() < amount) // Not enough values
+	else if (values.size() < count) // Not enough values
 	{
 		_throwScriptError("not enough values!");
 		return false;

@@ -24,7 +24,7 @@ void AnimationEditor::_updateAnimationExecution()
 			auto frame = animation.getFrames()[frameIndex];
 
 			// For every model part in this frame
-			unsigned int finishedPartsAmount = 0;
+			unsigned int finishedPartCount = 0;
 			for (auto partID : animation.getPartIDs())
 			{
 				// Check if model still exists
@@ -70,7 +70,7 @@ void AnimationEditor::_updateAnimationExecution()
 					(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
 					(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
 				{
-					finishedPartsAmount++;
+					finishedPartCount++;
 				}
 				else
 				{
@@ -373,7 +373,7 @@ void AnimationEditor::_updateAnimationExecution()
 			}
 
 			// Check if current frame is finished
-			if (finishedPartsAmount == animation.getPartIDs().size())
+			if (finishedPartCount == animation.getPartIDs().size())
 			{
 				if (animation.getFrameIndex() == animation.getFadeFrameIndex()) // Animation faded to its end
 				{

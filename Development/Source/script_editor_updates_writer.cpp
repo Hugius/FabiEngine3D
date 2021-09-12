@@ -129,7 +129,7 @@ void ScriptEditor::_updateTextWriter()
 			if (_firstSelectedLineIndex == -1)
 			{
 				// Check if not exceeding the line limit
-				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
+				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_COUNT)
 				{
 					// Check if single or fast new line action
 					if (_isSingleActionAllowed || _isContinuousActionAllowed)

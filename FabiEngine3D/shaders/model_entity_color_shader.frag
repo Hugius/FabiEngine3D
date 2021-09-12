@@ -111,6 +111,9 @@ void main()
 		return;
 	}
 
+	// Calculate diffuse mapping
+	vec3 diffuseMapColor = calculateDiffuseMapping();
+
     // Calculate emission mapping
     vec3 emissionMapColor = calculateEmissionMapping();
 	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);
@@ -128,7 +131,7 @@ void main()
 
 	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
-	primaryColor += calculateDiffuseMapping();
+	primaryColor += diffuseMapColor;
 	primaryColor += emissionMapColor;
 	primaryColor  = calculatePlanarReflections(primaryColor);
 	primaryColor  = calculateCubeReflections(primaryColor, normal);

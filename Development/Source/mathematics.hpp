@@ -7,6 +7,7 @@
 #include "vector4.hpp"
 #include "matrix33.hpp"
 #include "matrix44.hpp"
+#include "direction.hpp"
 
 class Math final
 {
@@ -17,11 +18,17 @@ public:
 	static const Matrix33 transposeMatrix(Matrix33 matrix);
 	static const Matrix44 transposeMatrix(Matrix44 matrix);
 	static const Matrix44 createTranslationMatrix(float x, float y, float z);
-	static const Matrix44 createRotationMatrix(float x, float y, float z);
+	static const Matrix44 createTranslationMatrixX(float value);
+	static const Matrix44 createTranslationMatrixY(float value);
+	static const Matrix44 createTranslationMatrixZ(float value);
+	static const Matrix44 createRotationMatrix(float x, float y, float z, Direction dominantDirection);
 	static const Matrix44 createRotationMatrixX(float angle);
 	static const Matrix44 createRotationMatrixY(float angle);
 	static const Matrix44 createRotationMatrixZ(float angle);
 	static const Matrix44 createScalingMatrix(float x, float y, float z);
+	static const Matrix44 createScalingMatrixX(float value);
+	static const Matrix44 createScalingMatrixY(float value);
+	static const Matrix44 createScalingMatrixZ(float value);
 	static const Matrix44 createOrthoMatrix(float left, float right, float bottom, float top, float nearZ, float farZ);
 	static const Matrix44 createViewMatrix(Vec3 eye, Vec3 center, Vec3 up);
 	static const Matrix44 createProjectionMatrix(float fovY, float aspect, float nearZ, float farZ);

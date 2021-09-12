@@ -79,50 +79,50 @@ const Vec2 Vec2::operator-() const
 
 const Vec2 Vec2::operator+(const Vec2& v)const
 {
-	return Vec2(this->x + v.x, this->y + v.y);
+	return Vec2((this->x + v.x), (this->y + v.y));
 }
 
 const Vec2 Vec2::operator-(const Vec2& v)const
 {
-	return Vec2(this->x - v.x, this->y - v.y);
+	return Vec2((this->x - v.x), (this->y - v.y));
 }
 
 const Vec2 Vec2::operator*(const Vec2& v)const
 {
-	return Vec2(this->x * v.x, this->y * v.y);
+	return Vec2((this->x * v.x), (this->y * v.y));
 }
 
 const Vec2 Vec2::operator/(const Vec2& v)const
 {
-	return Vec2(this->x / v.x, this->y / v.y);
+	return Vec2((this->x / v.x), (this->y / v.y));
 }
 
 const Vec2 Vec2::operator+(const float& value)const
 {
-	return Vec2(this->x + value, this->y + value);
+	return Vec2((this->x + value), (this->y + value));
 }
 
 const Vec2 Vec2::operator-(const float& value)const
 {
-	return Vec2(this->x - value, this->y - value);
+	return Vec2((this->x - value), (this->y - value));
 }
 
 const Vec2 Vec2::operator/(const float& value)const
 {
-	return Vec2(this->x / value, this->y / value);
+	return Vec2((this->x / value), (this->y / value));
 }
 
 const Vec2 Vec2::operator*(const float& value)const
 {
-	return Vec2(this->x * value, this->y * value);
+	return Vec2((this->x * value), (this->y * value));
 }
 
 const bool Vec2::operator==(const Vec2& other) const
 {
-	return (this->x == other.x && this->y == other.y);
+	return ((this->x == other.x) && (this->y == other.y));
 }
 
 const bool Vec2::operator!=(const Vec2& other) const
 {
-	return (this->x != other.x || this->y != other.y);
+	return ((this->x != other.x) || (this->y != other.y));
 }

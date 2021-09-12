@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector2.hpp"
+#include "vector3.hpp"
 
 struct Matrix44;
 
@@ -28,4 +28,7 @@ struct Matrix33 final
 	const Matrix33 operator+(const Matrix33& other) const;
 	const Matrix33 operator-(const Matrix33& other) const;
 	const Matrix33 operator*(const Matrix33& other) const;
+
+	// Vectors
+	const Vec3 operator*(const Vec3& other) const;
 };

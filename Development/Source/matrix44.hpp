@@ -1,6 +1,5 @@
 #pragma once
 
-#include "vector3.hpp"
 #include "vector4.hpp"
 
 struct Matrix33;
@@ -33,5 +32,4 @@ struct Matrix44 final
 
 	// Vectors
 	const Vec4 operator*(const Vec4& other) const;
-	const Vec3 operator*(const Vec3& other) const;
 };

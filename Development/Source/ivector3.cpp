@@ -90,52 +90,52 @@ const Ivec3 Ivec3::operator-() const
 	return Ivec3(-this->x, -this->y, -this->z);
 }
 
-const Ivec3 Ivec3::operator+(const Ivec3& v) const
+const Ivec3 Ivec3::operator+(const Ivec3& other) const
 {
-	return Ivec3(this->x + v.x, this->y + v.y, this->z + v.z);
+	return Ivec3((this->x + other.x), (this->y + other.y), (this->z + other.z));
 }
 
-const Ivec3 Ivec3::operator-(const Ivec3& v) const
+const Ivec3 Ivec3::operator-(const Ivec3& other) const
 {
-	return Ivec3(this->x - v.x, this->y - v.y, this->z - v.z);
+	return Ivec3((this->x - other.x), (this->y - other.y), (this->z - other.z));
 }
 
-const Ivec3 Ivec3::operator*(const Ivec3& v) const
+const Ivec3 Ivec3::operator*(const Ivec3& other) const
 {
-	return Ivec3(this->x * v.x, this->y * v.y, this->z * v.z);
+	return Ivec3((this->x * other.x), (this->y * other.y), (this->z * other.z));
 }
 
-const Ivec3 Ivec3::operator/(const Ivec3& v) const
+const Ivec3 Ivec3::operator/(const Ivec3& other) const
 {
-	return Ivec3(this->x / v.x, this->y / v.y, this->z / v.z);
+	return Ivec3((this->x / other.x), (this->y / other.y), (this->z / other.z));
 }
 
-const Ivec3 Ivec3::operator+(const int& value) const
+const Ivec3 Ivec3::operator+(const int& other) const
 {
-	return Ivec3(this->x + value, this->y + value, this->z + value);
+	return Ivec3((this->x + other), (this->y + other), (this->z + other));
 }
 
-const Ivec3 Ivec3::operator-(const int& value) const
+const Ivec3 Ivec3::operator-(const int& other) const
 {
-	return Ivec3(this->x - value, this->y - value, this->z - value);
+	return Ivec3((this->x - other), (this->y - other), (this->z - other));
 }
 
-const Ivec3 Ivec3::operator/(const int& value) const
+const Ivec3 Ivec3::operator*(const int& other) const
 {
-	return Ivec3(this->x / value, this->y / value, this->z / value);
+	return Ivec3((this->x * other), (this->y * other), (this->z * other));
 }
 
-const Ivec3 Ivec3::operator*(const int& value) const
+const Ivec3 Ivec3::operator/(const int& other) const
 {
-	return Ivec3(this->x * value, this->y * value, this->z * value);
+	return Ivec3((this->x / other), (this->y / other), (this->z / other));
 }
 
 const bool Ivec3::operator==(const Ivec3& other) const
 {
-	return (this->x == other.x && this->y == other.y && this->z == other.z);
+	return ((this->x == other.x) && (this->y == other.y) && (this->z == other.z));
 }
 
 const bool Ivec3::operator!=(const Ivec3& other) const
 {
-	return (this->x != other.x || this->y != other.y || this->z != other.z);
+	return ((this->x != other.x) || (this->y != other.y) || (this->z != other.z));
 }

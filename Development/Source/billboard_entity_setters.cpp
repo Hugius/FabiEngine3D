@@ -97,7 +97,7 @@ void BillboardEntity::updateTransformationMatrix()
 	Matrix44 rotationMatrix = Math::createRotationMatrix(
 		Math::convertToRadians(_rotation.x),
 		Math::convertToRadians(_rotation.y),
-		Math::convertToRadians(_rotation.z));
+		Math::convertToRadians(_rotation.z), Direction::Y);
 	_transformationMatrix = (_transformationMatrix * rotationMatrix);
 
 	// Rotation origin matrix - translate back

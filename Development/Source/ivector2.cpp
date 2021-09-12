@@ -79,50 +79,50 @@ const Ivec2 Ivec2::operator-() const
 
 const Ivec2 Ivec2::operator+(const Ivec2& v) const
 {
-	return Ivec2(this->x + v.x, this->y + v.y);
+	return Ivec2((this->x + v.x), (this->y + v.y));
 }
 
 const Ivec2 Ivec2::operator-(const Ivec2& v) const
 {
-	return Ivec2(this->x - v.x, this->y - v.y);
+	return Ivec2((this->x - v.x), (this->y - v.y));
 }
 
 const Ivec2 Ivec2::operator*(const Ivec2& v) const
 {
-	return Ivec2(this->x * v.x, this->y * v.y);
+	return Ivec2((this->x * v.x), (this->y * v.y));
 }
 
 const Ivec2 Ivec2::operator/(const Ivec2& v) const
 {
-	return Ivec2(this->x / v.x, this->y / v.y);
+	return Ivec2((this->x / v.x), (this->y / v.y));
 }
 
 const Ivec2 Ivec2::operator+(const int& value) const
 {
-	return Ivec2(this->x + value, this->y + value);
+	return Ivec2((this->x + value), (this->y + value));
 }
 
 const Ivec2 Ivec2::operator-(const int& value) const
 {
-	return Ivec2(this->x - value, this->y - value);
+	return Ivec2((this->x - value), (this->y - value));
 }
 
 const Ivec2 Ivec2::operator/(const int& value) const
 {
-	return Ivec2(this->x / value, this->y / value);
+	return Ivec2((this->x / value), (this->y / value));
 }
 
 const Ivec2 Ivec2::operator*(const int& value) const
 {
-	return Ivec2(this->x * value, this->y * value);
+	return Ivec2((this->x * value), (this->y * value));
 }
 
 const bool Ivec2::operator==(const Ivec2& other) const
 {
-	return (this->x == other.x && this->y == other.y);
+	return ((this->x == other.x) && (this->y == other.y));
 }
 
 const bool Ivec2::operator!=(const Ivec2& other) const
 {
-	return (this->x != other.x || this->y != other.y);
+	return ((this->x != other.x) || (this->y != other.y));
 }

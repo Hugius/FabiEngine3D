@@ -103,7 +103,7 @@ void ModelEntity::updateTransformationMatrix()
 		Matrix44 baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
-			Math::convertToRadians(_baseRotation.z));
+			Math::convertToRadians(_baseRotation.z), Direction::Y);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationMatrix);
 
 		// Base rotation origin matrix - translate back
@@ -118,7 +118,7 @@ void ModelEntity::updateTransformationMatrix()
 		Matrix44 rotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_parts[i].localRotation.x),
 			Math::convertToRadians(_parts[i].localRotation.y),
-			Math::convertToRadians(_parts[i].localRotation.z));
+			Math::convertToRadians(_parts[i].localRotation.z), Direction::X);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationMatrix);
 
 		// Rotation origin matrix - translate back

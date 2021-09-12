@@ -246,11 +246,48 @@ const float Math::calculateDeterminant(Matrix44 matrix)
 	return (values[0] - values[1] + values[2] - values[3]);
 }
 
+const Matrix44 Math::createTranslationMatrixX(float value)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	newMatrix.m[3][0] = value;
+
+	// Return
+	return newMatrix;
+}
+
+const Matrix44 Math::createTranslationMatrixY(float value)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	newMatrix.m[3][1] = value;
+
+	// Return
+	return newMatrix;
+}
+
+const Matrix44 Math::createTranslationMatrixZ(float value)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	newMatrix.m[3][2] = value;
+
+	// Return
+	return newMatrix;
+}
+
 const Matrix44 Math::createTranslationMatrix(float x, float y, float z)
 {
 	// Result
 	Matrix44 newMatrix;
 
+	// Create
 	newMatrix.m[3][0] = x;
 	newMatrix.m[3][1] = y;
 	newMatrix.m[3][2] = z;
@@ -264,6 +301,7 @@ const Matrix44 Math::createScalingMatrix(float x, float y, float z)
 	// Result
 	Matrix44 newMatrix;
 
+	// Create
 	newMatrix.m[0][0] = x;
 	newMatrix.m[1][1] = y;
 	newMatrix.m[2][2] = z;
@@ -272,14 +310,66 @@ const Matrix44 Math::createScalingMatrix(float x, float y, float z)
 	return newMatrix;
 }
 
-const Matrix44 Math::createRotationMatrix(float x, float y, float z)
+const Matrix44 Math::createScalingMatrixX(float value)
 {
 	// Result
 	Matrix44 newMatrix;
 
-	newMatrix = (newMatrix * createRotationMatrixY(y));
-	newMatrix = (newMatrix * createRotationMatrixX(x));
-	newMatrix = (newMatrix * createRotationMatrixZ(z));
+	// Create
+	newMatrix.m[0][0] = value;
+
+	// Return
+	return newMatrix;
+}
+
+const Matrix44 Math::createScalingMatrixY(float value)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	newMatrix.m[1][1] = value;
+
+	// Return
+	return newMatrix;
+}
+
+const Matrix44 Math::createScalingMatrixZ(float value)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	newMatrix.m[2][2] = value;
+
+	// Return
+	return newMatrix;
+}
+
+const Matrix44 Math::createRotationMatrix(float x, float y, float z, Direction dominantDirection)
+{
+	// Result
+	Matrix44 newMatrix;
+
+	// Create
+	if (dominantDirection == Direction::X)
+	{
+		newMatrix = (newMatrix * createRotationMatrixX(x));
+		newMatrix = (newMatrix * createRotationMatrixY(y));
+		newMatrix = (newMatrix * createRotationMatrixZ(z));
+	}
+	if (dominantDirection == Direction::Y)
+	{
+		newMatrix = (newMatrix * createRotationMatrixY(y));
+		newMatrix = (newMatrix * createRotationMatrixX(x));
+		newMatrix = (newMatrix * createRotationMatrixZ(z));
+	}
+	if (dominantDirection == Direction::Z)
+	{
+		newMatrix = (newMatrix * createRotationMatrixZ(z));
+		newMatrix = (newMatrix * createRotationMatrixX(x));
+		newMatrix = (newMatrix * createRotationMatrixY(y));
+	}
 
 	// Return
 	return newMatrix;
@@ -290,6 +380,7 @@ const Matrix44 Math::createRotationMatrixX(float angle)
 	// Result
 	Matrix44 newMatrix;
 
+	// Create
 	newMatrix.m[0][0] = cos(angle);
 	newMatrix.m[1][0] = -sin(angle);
 	newMatrix.m[0][1] = sin(angle);
@@ -304,6 +395,7 @@ const Matrix44 Math::createRotationMatrixY(float angle)
 	// Result
 	Matrix44 newMatrix;
 
+	// Create
 	newMatrix.m[0][0] = cos(angle);
 	newMatrix.m[0][2] = -sin(angle);
 	newMatrix.m[2][0] = sin(angle);
@@ -318,6 +410,7 @@ const Matrix44 Math::createRotationMatrixZ(float angle)
 	// Result
 	Matrix44 newMatrix;
 
+	// Create
 	newMatrix.m[1][1] = cos(angle);
 	newMatrix.m[1][2] = sin(angle);
 	newMatrix.m[2][1] = -sin(angle);

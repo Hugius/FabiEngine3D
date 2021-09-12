@@ -31,42 +31,42 @@ Vec3::Vec3(const float x, const float y, const float z)
 
 const Vec3 Vec3::operator+(const Vec3& other) const
 {
-	return Vec3(this->x + other.x, this->y + other.y, this->z + other.z);
+	return Vec3((this->x + other.x), (this->y + other.y), (this->z + other.z));
 }
 
 const Vec3 Vec3::operator-(const Vec3& other) const
 {
-	return Vec3(this->x - other.x, this->y - other.y, this->z - other.z);
+	return Vec3((this->x - other.x), (this->y - other.y), (this->z - other.z));
 }
 
 const Vec3 Vec3::operator*(const Vec3& other) const
 {
-	return Vec3(this->x * other.x, this->y * other.y, this->z * other.z);
+	return Vec3((this->x * other.x), (this->y * other.y), (this->z * other.z));
 }
 
 const Vec3 Vec3::operator/(const Vec3& other) const
 {
-	return Vec3(this->x / other.x, this->y / other.y, this->z / other.z);
+	return Vec3((this->x / other.x), (this->y / other.y), (this->z / other.z));
 }
 
 const Vec3 Vec3::operator+(const float& other) const
 {
-	return Vec3(this->x + other, this->y + other, this->z + other);
+	return Vec3((this->x + other), (this->y + other), (this->z + other));
 }
 
 const Vec3 Vec3::operator-(const float& other) const
 {
-	return Vec3(this->x - other, this->y - other, this->z - other);
+	return Vec3((this->x - other), (this->y - other), (this->z - other));
 }
 
 const Vec3 Vec3::operator*(const float& other) const
 {
-	return Vec3(this->x * other, this->y * other, this->z * other);
+	return Vec3((this->x * other), (this->y * other), (this->z * other));
 }
 
 const Vec3 Vec3::operator/(const float& other) const
 {
-	return Vec3(this->x / other, this->y / other, this->z / other);
+	return Vec3((this->x / other), (this->y / other), (this->z / other));
 }
 
 const Vec3 Vec3::operator-() const
@@ -132,10 +132,10 @@ void Vec3::operator/=(const float& other)
 
 const bool Vec3::operator==(const Vec3& other) const
 {
-	return (this->x == other.x && this->y == other.y && this->z == other.z);
+	return ((this->x == other.x) && (this->y == other.y) && (this->z == other.z));
 }
 
 const bool Vec3::operator!=(const Vec3& other) const
 {
-	return (this->x != other.x || this->y != other.y || this->z != other.z);
+	return ((this->x != other.x) || (this->y != other.y) || (this->z != other.z));
 }

@@ -102,50 +102,50 @@ const Vec4 Vec4::operator-() const
 
 const Vec4 Vec4::operator+(const Vec4& v) const
 {
-	return Vec4(this->x + v.x, this->y + v.y, this->z + v.z, this->w + v.w);
+	return Vec4((this->x + v.x), (this->y + v.y), (this->z + v.z), (this->w + v.w));
 }
 
 const Vec4 Vec4::operator-(const Vec4& v) const
 {
-	return Vec4(this->x - v.x, this->y - v.y, this->z - v.z, this->w - v.w);
+	return Vec4((this->x - v.x), (this->y - v.y), (this->z - v.z), (this->w - v.w));
 }
 
 const Vec4 Vec4::operator*(const Vec4& v) const
 {
-	return Vec4(this->x * v.x, this->y * v.y, this->z * v.z, this->w * v.w);
+	return Vec4((this->x * v.x), (this->y * v.y), (this->z * v.z), (this->w * v.w));
 }
 
 const Vec4 Vec4::operator/(const Vec4& v) const
 {
-	return Vec4(this->x / v.x, this->y / v.y, this->z / v.z, this->w / v.w);
+	return Vec4((this->x / v.x), (this->y / v.y), (this->z / v.z), (this->w / v.w));
 }
 
 const Vec4 Vec4::operator+(const float& value) const
 {
-	return Vec4(this->x + value, this->y + value, this->z + value, this->w + value);
+	return Vec4((this->x + value), (this->y + value), (this->z + value), (this->w + value));
 }
 
 const Vec4 Vec4::operator-(const float& value) const
 {
-	return Vec4(this->x - value, this->y - value, this->z - value, this->w - value);
+	return Vec4((this->x - value), (this->y - value), (this->z - value), (this->w - value));
 }
 
 const Vec4 Vec4::operator/(const float& value) const
 {
-	return Vec4(this->x / value, this->y / value, this->z / value, this->w / value);
+	return Vec4((this->x / value), (this->y / value), (this->z / value), (this->w / value));
 }
 
 const Vec4 Vec4::operator*(const float& value) const
 {
-	return Vec4(this->x * value, this->y * value, this->z * value, this->w * value);
+	return Vec4((this->x * value), (this->y * value), (this->z * value), (this->w * value));
 }
 
 const bool Vec4::operator==(const Vec4& other) const
 {
-	return (this->x == other.x && this->y == other.y && this->z == other.z && this->w == other.w);
+	return ((this->x == other.x) && (this->y == other.y) && (this->z == other.z) && (this->w == other.w));
 }
 
 const bool Vec4::operator!=(const Vec4& other) const
 {
-	return (this->x != other.x || this->y != other.y || this->z != other.z || this->w != other.w);
+	return ((this->x != other.x) || (this->y != other.y) || (this->z != other.z) || (this->w != other.w));
 }

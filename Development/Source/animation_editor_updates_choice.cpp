@@ -239,14 +239,23 @@ void AnimationEditor::_updateChoiceMenu()
 					// Create default frame
 					AnimationFrame defaultFrame;
 
-					// Retrieve partIDs from model
-					for (auto partID : _fe3d.modelEntity_getPartIDs(currentAnimation->getPreviewModelID()))
-					{
-						// Add part to animation
-						currentAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
+					// Add default part
+					currentAnimation->addPart("", Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
+					defaultFrame.addPart("", Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 
-						// Add part to frame
-						defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+					// Add custom parts
+					auto partIDs = _fe3d.modelEntity_getPartIDs(currentAnimation->getPreviewModelID());
+					if (partIDs.size() > 1)
+					{
+						// Iterate through parts
+						for (auto partID : partIDs)
+						{
+							// Add part to animation
+							currentAnimation->addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f));
+
+							// Add part to frame
+							defaultFrame.addPart(partID, Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
+						}
 					}
 
 					// Add default frame to animation

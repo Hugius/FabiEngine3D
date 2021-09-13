@@ -40,9 +40,9 @@ void BillboardEntity::updateTransformation()
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
 			((difference.z < 180.0f) ? 1.0f : -1.0f));
 		Vec3 speed = (Vec3(_rotationTargetSpeed) * multiplier);
-		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : -speed.x);
-		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : -speed.y);
-		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : -speed.z);
+		_rotation.x += ((_rotation.x < _rotationTarget.x) ? speed.x : (_rotation.x > _rotationTarget.x) ? -speed.x : 0.0f);
+		_rotation.y += ((_rotation.y < _rotationTarget.y) ? speed.y : (_rotation.y > _rotationTarget.y) ? -speed.y : 0.0f);
+		_rotation.z += ((_rotation.z < _rotationTarget.z) ? speed.z : (_rotation.z > _rotationTarget.z) ? -speed.z : 0.0f);
 
 		// Correct rotation
 		_rotation = Vec3(Math::limitAngle(_rotation.x), Math::limitAngle(_rotation.y), Math::limitAngle(_rotation.z));

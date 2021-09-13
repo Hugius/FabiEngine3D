@@ -30,9 +30,9 @@ void ModelEntity::updateTransformation()
 			((difference.y < 180.0f) ? 1.0f : -1.0f),
 			((difference.z < 180.0f) ? 1.0f : -1.0f));
 		Vec3 speed = (Vec3(_baseRotationTargetSpeed) * multiplier);
-		_baseRotation.x += ((_baseRotation.x < _baseRotationTarget.x) ? speed.x : -speed.x);
-		_baseRotation.y += ((_baseRotation.y < _baseRotationTarget.y) ? speed.y : -speed.y);
-		_baseRotation.z += ((_baseRotation.z < _baseRotationTarget.z) ? speed.z : -speed.z);
+		_baseRotation.x += ((_baseRotation.x < _baseRotationTarget.x) ? speed.x : (_baseRotation.x > _baseRotationTarget.x) ? -speed.x : 0.0f);
+		_baseRotation.y += ((_baseRotation.y < _baseRotationTarget.y) ? speed.y : (_baseRotation.y > _baseRotationTarget.y) ? -speed.y : 0.0f);
+		_baseRotation.z += ((_baseRotation.z < _baseRotationTarget.z) ? speed.z : (_baseRotation.z > _baseRotationTarget.z) ? -speed.z : 0.0f);
 		_correctRotationTarget(_baseRotation, _baseRotationTarget, _baseRotationTargetSpeed);
 	}
 
@@ -64,9 +64,11 @@ void ModelEntity::updateTransformation()
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
 				((difference.z < 180.0f) ? 1.0f : -1.0f));
 			Vec3 speed = (Vec3(part.localRotationTargetSpeed) * multiplier);
-			part.localRotation.x += ((part.localRotation.x < part.localRotationTarget.x) ? speed.x : -speed.x);
-			part.localRotation.y += ((part.localRotation.y < part.localRotationTarget.y) ? speed.y : -speed.y);
-			part.localRotation.z += ((part.localRotation.z < part.localRotationTarget.z) ? speed.z : -speed.z);
+			Vec3 rotation = part.localRotation;
+			Vec3 target = part.localRotationTarget;
+			part.localRotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
+			part.localRotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
+			part.localRotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
 			_correctRotationTarget(part.localRotation, part.localRotationTarget, part.localRotationTargetSpeed);
 		}
 

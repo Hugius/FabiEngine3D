@@ -33,7 +33,7 @@ void ImageEntity::updateTransformation()
 		auto difference = fabsf(_rotation - _rotationTarget);
 		float multiplier = ((difference < 180.0f) ? 1.0f : -1.0f);
 		float speed = (_rotationTargetSpeed * multiplier);
-		_rotation += ((_rotation < _rotationTarget) ? speed : -speed);
+		_rotation += ((_rotation < _rotationTarget) ? speed : (_rotation > _rotationTarget) ? -speed : 0.0f);
 
 		// Correct rotation
 		_rotation = Math::limitAngle(_rotation);

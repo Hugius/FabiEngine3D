@@ -85,14 +85,14 @@ void WaterEntity::setWaveHeight(float value)
 	_waveHeight = max(0.0f, value);
 }
 
-void WaterEntity::setSpecularLightingFactor(float value)
+void WaterEntity::setSpecularShininess(float value)
 {
-	_specularLightingFactor = max(0.0f, value);
+	_specularShininess = max(0.0f, value);
 }
 
-void WaterEntity::setSpecularLightingIntensity(float value)
+void WaterEntity::setSpecularIntensity(float value)
 {
-	_specularLightingIntensity = max(0.0f, value);
+	_specularIntensity = max(0.0f, value);
 }
 
 void WaterEntity::setWaving(bool value)
@@ -215,14 +215,14 @@ const float WaterEntity::getWaveHeight()
 	return _waveHeight;
 }
 
-const float WaterEntity::getSpecularLightingFactor()
+const float WaterEntity::getSpecularShininess()
 {
-	return _specularLightingFactor;
+	return _specularShininess;
 }
 
-const float WaterEntity::getSpecularLightingIntensity()
+const float WaterEntity::getSpecularIntensity()
 {
-	return _specularLightingIntensity;
+	return _specularIntensity;
 }
 
 const float WaterEntity::getSize()

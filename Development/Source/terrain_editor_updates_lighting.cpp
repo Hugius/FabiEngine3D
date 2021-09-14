@@ -15,8 +15,8 @@ void TerrainEditor::_updateLightingMenu()
 	{
 		// Temporary values
 		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
-		float specularFactor = _fe3d.terrainEntity_getSpecularLightingFactor(_currentTerrainID);
-		float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
+		float specularShininess = _fe3d.terrainEntity_getSpecularShininess(_currentTerrainID);
+		float specularIntensity = _fe3d.terrainEntity_getSpecularIntensity(_currentTerrainID);
 		float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
 
 		// Button management
@@ -162,9 +162,9 @@ void TerrainEditor::_updateLightingMenu()
 			isSpecular = !isSpecular;
 			_fe3d.terrainEntity_setSpecularLighted(_currentTerrainID, isSpecular);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularFactor")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("specularShininess", "Specular Shininess", specularShininess, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
@@ -176,15 +176,15 @@ void TerrainEditor::_updateLightingMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularFactor = min(256.0f, specularFactor);
-			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, specularFactor);
+			specularShininess = min(256.0f, specularShininess);
+			_fe3d.terrainEntity_setSpecularShininess(_currentTerrainID, specularShininess);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
-			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
+			_fe3d.terrainEntity_setSpecularIntensity(_currentTerrainID, specularIntensity);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
@@ -193,7 +193,7 @@ void TerrainEditor::_updateLightingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("specularFactor")->setHoverable(isSpecular);
+		screen->getButton("specularShininess")->setHoverable(isSpecular);
 		screen->getButton("specularIntensity")->setHoverable(isSpecular);
 
 		// Update button text contents

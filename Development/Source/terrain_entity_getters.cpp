@@ -145,14 +145,14 @@ const float TerrainEntity::getLightness()
 	return _lightness;
 }
 
-const float TerrainEntity::getSpecularLightingFactor()
+const float TerrainEntity::getSpecularShininess()
 {
-	return _specularLightingFactor;
+	return _specularShininess;
 }
 
-const float TerrainEntity::getSpecularLightingIntensity()
+const float TerrainEntity::getSpecularIntensity()
 {
-	return _specularLightingIntensity;
+	return _specularIntensity;
 }
 
 const shared_ptr<RenderBuffer> TerrainEntity::getRenderBuffer()

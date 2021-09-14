@@ -49,8 +49,8 @@ uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
-uniform float u_specularLightingFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_specularShininess;
+uniform float u_specularIntensity;
 uniform float u_maxSpotLightingAngle;
 uniform float u_spotLightingIntensity;
 uniform float u_maxSpotLightingDistance;
@@ -422,10 +422,10 @@ float calculateSpecularLighting(vec3 position, vec3 normal)
         vec3 lightDirection   = normalize(position - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightingFactor);
+        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
         // Return
-        return (result * u_specularLightingIntensity);
+        return (result * u_specularIntensity);
     }
     else
     {

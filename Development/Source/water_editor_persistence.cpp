@@ -112,7 +112,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 		Vec3 color;
 		Vec2 speed;
-		float height, size, uvRepeat, waveHeight, transparency, specularFactor, specularIntensity;
+		float height, size, uvRepeat, waveHeight, transparency, specularShininess, specularIntensity;
 		unsigned int quality;
 		bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
 
@@ -141,7 +141,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			speed.x >>
 			speed.y >>
 			transparency >>
-			specularFactor >>
+			specularShininess >>
 			specularIntensity;
 
 		// Perform empty string & space conversions
@@ -189,8 +189,8 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
 			_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
 			_fe3d.waterEntity_setQuality(waterID, static_cast<WaterQuality>(quality));
-			_fe3d.waterEntity_setSpecularLightingFactor(waterID, specularFactor);
-			_fe3d.waterEntity_setSpecularLightingIntensity(waterID, specularIntensity);
+			_fe3d.waterEntity_setSpecularShininess(waterID, specularShininess);
+			_fe3d.waterEntity_setSpecularIntensity(waterID, specularIntensity);
 			_fe3d.waterEntity_setTransparency(waterID, transparency);
 			_fe3d.waterEntity_setColor(waterID, color);
 			_fe3d.waterEntity_setUvRepeat(waterID, uvRepeat);
@@ -243,8 +243,8 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		auto uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(waterID);
 		auto transparency = _fe3d.waterEntity_getTransparency(waterID);
-		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
-		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
+		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(waterID);
+		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(waterID);
 		auto quality = static_cast<unsigned int>(_fe3d.waterEntity_getQuality(waterID));
 		auto isWaving = _fe3d.waterEntity_isWaving(waterID);
 		auto isRippling = _fe3d.waterEntity_isRippling(waterID);
@@ -282,7 +282,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 			speed.x << " " <<
 			speed.y << " " <<
 			transparency << " " <<
-			specularFactor << " " <<
+			specularShininess << " " <<
 			specularIntensity << endl;
 	}
 

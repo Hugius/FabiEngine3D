@@ -463,9 +463,9 @@ void ModelEntity::setLightness(float value)
 	_lightness = max(0.0f, value);
 }
 
-void ModelEntity::setSpecularFactor(float value)
+void ModelEntity::setSpecularShininess(float value)
 {
-	_specularFactor = max(0.0f, value);
+	_specularShininess = max(0.0f, value);
 }
 
 void ModelEntity::setSpecularIntensity(float value)
@@ -491,6 +491,11 @@ void ModelEntity::setAlpha(float value)
 void ModelEntity::setUvRepeat(float value)
 {
 	_uvRepeat = max(0.0f, value);
+}
+
+void ModelEntity::setEmissionIntensity(float value)
+{
+	_emissionIntensity = value;
 }
 
 void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)

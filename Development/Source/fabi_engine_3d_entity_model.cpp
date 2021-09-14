@@ -324,9 +324,9 @@ const Vec3 FabiEngine3D::modelEntity_getLevelOfDetailSize(const string& ID)
 	_core->_modelEntityManager.getEntity(ID)->getLevelOfDetailSize();
 }
 
-void FabiEngine3D::modelEntity_setSpecularFactor(const string& ID, float intensity)
+void FabiEngine3D::modelEntity_setSpecularShininess(const string& ID, float intensity)
 {
-	_core->_modelEntityManager.getEntity(ID)->setSpecularFactor(intensity);
+	_core->_modelEntityManager.getEntity(ID)->setSpecularShininess(intensity);
 }
 
 void FabiEngine3D::modelEntity_setSpecularIntensity(const string& ID, float intensity)
@@ -347,6 +347,11 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, float lightness)
 void FabiEngine3D::modelEntity_setInversion(const string& ID, const string& partID, float inversion)
 {
 	_core->_modelEntityManager.getEntity(ID)->setInversion(partID, inversion);
+}
+
+void FabiEngine3D::modelEntity_setEmissionIntensity(const string& ID, float intensity)
+{
+	_core->_modelEntityManager.getEntity(ID)->setEmissionIntensity(intensity);
 }
 
 void FabiEngine3D::modelEntity_setMinHeight(const string& ID, float height)
@@ -429,9 +434,9 @@ const float FabiEngine3D::modelEntity_getReflectivity(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->getReflectivity();
 }
 
-const float FabiEngine3D::modelEntity_getSpecularFactor(const string& ID)
+const float FabiEngine3D::modelEntity_getSpecularShininess(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getSpecularFactor();
+	return _core->_modelEntityManager.getEntity(ID)->getSpecularShininess();
 }
 
 const float FabiEngine3D::modelEntity_getSpecularIntensity(const string& ID)
@@ -457,6 +462,11 @@ const float FabiEngine3D::modelEntity_getMaxHeight(const string& ID)
 const float FabiEngine3D::modelEntity_getUvRepeat(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getUvRepeat();
+}
+
+const float FabiEngine3D::modelEntity_getEmissionIntensity(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getEmissionIntensity();
 }
 
 const string& FabiEngine3D::modelEntity_getMeshPath(const string& ID)

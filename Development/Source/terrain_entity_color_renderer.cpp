@@ -121,8 +121,8 @@ void TerrainEntityColorRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_diffuseMapRepeatG", entity->getBlendRepeatG());
 		_shader.uploadUniform("u_diffuseMapRepeatB", entity->getBlendRepeatB());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
-		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
+		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
+		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
 		_shader.uploadUniform("u_hasBlendMap", entity->hasBlendMap());

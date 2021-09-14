@@ -61,8 +61,8 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 	_fe3d.terrainEntity_setBlendRepeatG(newID, _fe3d.terrainEntity_getBlendRepeatG(previewID));
 	_fe3d.terrainEntity_setBlendRepeatB(newID, _fe3d.terrainEntity_getBlendRepeatB(previewID));
 	_fe3d.terrainEntity_setSpecularLighted(newID, _fe3d.terrainEntity_isSpecularLighted(previewID));
-	_fe3d.terrainEntity_setSpecularLightingFactor(newID, _fe3d.terrainEntity_getSpecularLightingFactor(previewID));
-	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, _fe3d.terrainEntity_getSpecularLightingIntensity(previewID));
+	_fe3d.terrainEntity_setSpecularShininess(newID, _fe3d.terrainEntity_getSpecularShininess(previewID));
+	_fe3d.terrainEntity_setSpecularIntensity(newID, _fe3d.terrainEntity_getSpecularIntensity(previewID));
 
 	// Diffuse map
 	if (_fe3d.terrainEntity_hasDiffuseMap(previewID))
@@ -158,8 +158,8 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	_fe3d.waterEntity_setRefractive(newID, _fe3d.waterEntity_isRefractive(previewID));
 	_fe3d.waterEntity_setWaveHeight(newID, _fe3d.waterEntity_getWaveHeight(previewID));
 	_fe3d.waterEntity_setQuality(newID, _fe3d.waterEntity_getQuality(previewID));
-	_fe3d.waterEntity_setSpecularLightingFactor(newID, _fe3d.waterEntity_getSpecularLightingFactor(previewID));
-	_fe3d.waterEntity_setSpecularLightingIntensity(newID, _fe3d.waterEntity_getSpecularLightingIntensity(previewID));
+	_fe3d.waterEntity_setSpecularShininess(newID, _fe3d.waterEntity_getSpecularShininess(previewID));
+	_fe3d.waterEntity_setSpecularIntensity(newID, _fe3d.waterEntity_getSpecularIntensity(previewID));
 	_fe3d.waterEntity_setTransparency(newID, _fe3d.waterEntity_getTransparency(previewID));
 	_fe3d.waterEntity_setColor(newID, _fe3d.waterEntity_getColor(previewID));
 	_fe3d.waterEntity_setUvRepeat(newID, _fe3d.waterEntity_getUvRepeat(previewID));
@@ -255,7 +255,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setTransparent(newID, _fe3d.modelEntity_isTransparent(previewID));
 	_fe3d.modelEntity_setReflectionType(newID, _fe3d.modelEntity_getReflectionType(previewID));
 	_fe3d.modelEntity_setSpecularLighted(newID, _fe3d.modelEntity_isSpecularLighted(previewID));
-	_fe3d.modelEntity_setSpecularFactor(newID, _fe3d.modelEntity_getSpecularFactor(previewID));
+	_fe3d.modelEntity_setSpecularShininess(newID, _fe3d.modelEntity_getSpecularShininess(previewID));
 	_fe3d.modelEntity_setSpecularIntensity(newID, _fe3d.modelEntity_getSpecularIntensity(previewID));
 	_fe3d.modelEntity_setLightness(newID, _fe3d.modelEntity_getLightness(previewID));
 	_fe3d.modelEntity_setReflectivity(newID, _fe3d.modelEntity_getReflectivity(previewID));

@@ -165,8 +165,8 @@ public:
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setLightness(const string& ID, float lightness);
-	void terrainEntity_setSpecularLightingFactor(const string& ID, float factor);
-	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
+	void terrainEntity_setSpecularShininess(const string& ID, float factor);
+	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setWireFramed(const string& ID, bool enabled);
 
@@ -191,8 +191,8 @@ public:
 	const float terrainEntity_getBlendRepeatB(const string& ID);
 	const float terrainEntity_getSize(const string& ID);
 	const float terrainEntity_getPixelHeight(const string& ID, float x, float z);
-	const float terrainEntity_getSpecularLightingFactor(const string& ID);
-	const float terrainEntity_getSpecularLightingIntensity(const string& ID);
+	const float terrainEntity_getSpecularShininess(const string& ID);
+	const float terrainEntity_getSpecularIntensity(const string& ID);
 	const bool terrainEntity_isExisting(const string& ID);
 	const bool terrainEntity_isVisible(const string& ID);
 	const bool terrainEntity_isSpecularLighted(const string& ID);
@@ -227,8 +227,8 @@ public:
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
 	void waterEntity_setWaveHeight(const string& ID, float height);
-	void waterEntity_setSpecularLightingFactor(const string& ID, float factor);
-	void waterEntity_setSpecularLightingIntensity(const string& ID, float intensity);
+	void waterEntity_setSpecularShininess(const string& ID, float factor);
+	void waterEntity_setSpecularIntensity(const string& ID, float intensity);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, Vec3 color);
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
@@ -246,8 +246,8 @@ public:
 	const float waterEntity_getSize(const string& ID);
 	const float waterEntity_getUvRepeat(const string& ID);
 	const float waterEntity_getWaveHeight(const string& ID);
-	const float waterEntity_getSpecularLightingFactor(const string& ID);
-	const float waterEntity_getSpecularLightingIntensity(const string& ID);
+	const float waterEntity_getSpecularShininess(const string& ID);
+	const float waterEntity_getSpecularIntensity(const string& ID);
 	const float waterEntity_getTransparency(const string& ID);
 	const bool waterEntity_isExisting(const string& ID);
 	const bool waterEntity_isVisible(const string& ID);
@@ -293,11 +293,12 @@ public:
 	void modelEntity_rotateTo(const string& ID, const string& partID, Vec3 target, float speed);
 	void modelEntity_scaleTo(const string& ID, const string& partID, Vec3 target, float speed);
 	void modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size);
-	void modelEntity_setSpecularFactor(const string& ID, float intensity);
+	void modelEntity_setSpecularShininess(const string& ID, float intensity);
 	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
 	void modelEntity_setReflectivity(const string& ID, float reflectivity);
 	void modelEntity_setLightness(const string& ID, float lightness);
 	void modelEntity_setInversion(const string& ID, const string& partID, float inversion);
+	void modelEntity_setEmissionIntensity(const string& ID, float intensity);
 	void modelEntity_setAlpha(const string& ID, float alpha);
 	void modelEntity_setColor(const string& ID, const string& partID, Vec3 color);
 	void modelEntity_setMinHeight(const string& ID, float height);
@@ -327,12 +328,13 @@ public:
 	const float modelEntity_getInversion(const string& ID, const string& partID);
 	const float modelEntity_getReflectivity(const string& ID);
 	const float modelEntity_getLightness(const string& ID);
-	const float modelEntity_getSpecularFactor(const string& ID);
+	const float modelEntity_getSpecularShininess(const string& ID);
 	const float modelEntity_getSpecularIntensity(const string& ID);
 	const float modelEntity_getAlpha(const string& ID);
 	const float modelEntity_getMinHeight(const string& ID);
 	const float modelEntity_getMaxHeight(const string& ID);
 	const float modelEntity_getUvRepeat(const string& ID);
+	const float modelEntity_getEmissionIntensity(const string& ID);
 	const bool modelEntity_isExisting(const string& ID);
 	const bool modelEntity_isVisible(const string& ID);
 	const bool modelEntity_isInstanced(const string& ID);

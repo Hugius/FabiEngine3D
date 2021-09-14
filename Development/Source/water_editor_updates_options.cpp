@@ -12,8 +12,8 @@ void WaterEditor::_updateOptionsMenu()
 		auto color = _fe3d.waterEntity_getColor(_currentWaterID);
 		auto speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
 		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-		auto specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
-		auto specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
+		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(_currentWaterID);
+		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(_currentWaterID);
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
 
@@ -38,9 +38,9 @@ void WaterEditor::_updateOptionsMenu()
 			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularFactor")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("specularShininess", "Specular Shininess", specularShininess, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
@@ -101,15 +101,15 @@ void WaterEditor::_updateOptionsMenu()
 			color.b /= 255.0f;
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularFactor = min(256.0f, specularFactor);
-			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
+			specularShininess = min(256.0f, specularShininess);
+			_fe3d.waterEntity_setSpecularShininess(_currentWaterID, specularShininess);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
-			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
+			_fe3d.waterEntity_setSpecularIntensity(_currentWaterID, specularIntensity);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
@@ -121,7 +121,7 @@ void WaterEditor::_updateOptionsMenu()
 		_fe3d.waterEntity_setQuality(_currentWaterID, quality);
 
 		// Update buttons hoverability
-		screen->getButton("specularFactor")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
+		screen->getButton("specularShininess")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
 

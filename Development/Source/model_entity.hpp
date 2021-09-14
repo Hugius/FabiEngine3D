@@ -47,12 +47,13 @@ public:
 	void setCubeReflectionMixValue(float value);
 	void setReflectivity(float value);
 	void setLightness(float value);
-	void setSpecularFactor(float value);
+	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setAlpha(float value);
 	void setUvRepeat(float value);
+	void setEmissionIntensity(float value);
 	void setTransparent(bool value);
 	void setFaceCulled(bool value);
 	void setSpecularLighted(bool value);
@@ -96,12 +97,13 @@ public:
 	const float getCubeReflectionMixValue();
 	const float getReflectivity();
 	const float getLightness();
-	const float getSpecularFactor();
+	const float getSpecularShininess();
 	const float getSpecularIntensity();
 	const float getAlpha();
 	const float getUvRepeat();
 	const float getMinHeight();
 	const float getMaxHeight();
+	const float getEmissionIntensity();
 
 	// Booleans
 	const bool isTransparent();
@@ -207,9 +209,10 @@ private:
 	float _cubeReflectionMixValue = 1.0f;
 	float _reflectivity = 0.5f;
 	float _lightness = 1.0f;
-	float _specularFactor = 1.0f;
+	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;
 	float _alpha = 1.0f;
+	float _emissionIntensity = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();

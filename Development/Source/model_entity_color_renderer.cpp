@@ -134,8 +134,8 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
-		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
+		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
+		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isPlanarReflective", (entity->getReflectionType() == ReflectionType::PLANAR));
@@ -152,6 +152,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
 		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 
 		// Bind textures
 		if (!entity->getPreviousReflectionEntityID().empty())

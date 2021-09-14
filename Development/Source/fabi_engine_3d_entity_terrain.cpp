@@ -124,14 +124,14 @@ const float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
 }
 
-const float FabiEngine3D::terrainEntity_getSpecularLightingFactor(const string& ID)
+const float FabiEngine3D::terrainEntity_getSpecularShininess(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingFactor();
+	return _core->_terrainEntityManager.getEntity(ID)->getSpecularShininess();
 }
 
-const float FabiEngine3D::terrainEntity_getSpecularLightingIntensity(const string& ID)
+const float FabiEngine3D::terrainEntity_getSpecularIntensity(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingIntensity();
+	return _core->_terrainEntityManager.getEntity(ID)->getSpecularIntensity();
 }
 
 const string FabiEngine3D::terrainEntity_getSelectedID()
@@ -386,14 +386,14 @@ void FabiEngine3D::terrainEntity_setBlendRepeatB(const string& ID, float repeat)
 	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatB(repeat);
 }
 
-void FabiEngine3D::terrainEntity_setSpecularLightingFactor(const string& ID, float factor)
+void FabiEngine3D::terrainEntity_setSpecularShininess(const string& ID, float factor)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setSpecularLightingFactor(factor);
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularShininess(factor);
 }
 
-void FabiEngine3D::terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity)
+void FabiEngine3D::terrainEntity_setSpecularIntensity(const string& ID, float intensity)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
 void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)

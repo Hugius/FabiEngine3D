@@ -12,10 +12,11 @@ void ModelEditor::_updateLightingMenu()
 		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
 		auto reflectionType = _fe3d.modelEntity_getReflectionType(_currentModelID);
 		auto reflectivity = _fe3d.modelEntity_getReflectivity(_currentModelID);
-		auto specularFactor = _fe3d.modelEntity_getSpecularFactor(_currentModelID);
+		auto specularShininess = _fe3d.modelEntity_getSpecularShininess(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
 		auto isBright = _fe3d.modelEntity_isBright(_currentModelID);
+		auto emissionIntensity = _fe3d.modelEntity_getEmissionIntensity(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -28,9 +29,9 @@ void ModelEditor::_updateLightingMenu()
 			isSpecular = !isSpecular;
 			_fe3d.modelEntity_setSpecularLighted(_currentModelID, isSpecular);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularFactor")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("specularFactor", "Specular Factor", specularFactor, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("specularShininess", "Specular Shininess", specularShininess, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularIntensity")->isHovered())
 		{
@@ -44,6 +45,10 @@ void ModelEditor::_updateLightingMenu()
 		{
 			isBright = !isBright;
 			_fe3d.modelEntity_setBright(_currentModelID, isBright);
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionIntensity")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
@@ -63,10 +68,10 @@ void ModelEditor::_updateLightingMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularShininess", specularShininess))
 		{
-			specularFactor = min(256.0f, specularFactor);
-			_fe3d.modelEntity_setSpecularFactor(_currentModelID, specularFactor);
+			specularShininess = min(256.0f, specularShininess);
+			_fe3d.modelEntity_setSpecularShininess(_currentModelID, specularShininess);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
@@ -83,9 +88,14 @@ void ModelEditor::_updateLightingMenu()
 			reflectivity /= 100.0f;
 			_fe3d.modelEntity_setReflectivity(_currentModelID, reflectivity);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("emissionIntensity", emissionIntensity))
+		{
+			emissionIntensity /= 100.0f;
+			_fe3d.modelEntity_setEmissionIntensity(_currentModelID, emissionIntensity);
+		}
 
 		// Update buttons hoverability
-		screen->getButton("specularFactor")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
+		screen->getButton("specularShininess")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("reflectionType")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
 		screen->getButton("reflectivity")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));

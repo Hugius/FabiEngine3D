@@ -40,8 +40,8 @@ uniform vec3 u_shadowAreaCenter;
 uniform float u_lightIntensities[MAX_LIGHT_COUNT];
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
-uniform float u_specularLightingFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_specularShininess;
+uniform float u_specularIntensity;
 uniform float u_alpha;
 uniform float u_minDiffuseMapAlpha;
 uniform float u_inversion;
@@ -56,6 +56,7 @@ uniform float u_reflectivity;
 uniform float u_lightness;
 uniform float u_shadowLightness;
 uniform float u_cubeReflectionMixValue;
+uniform float u_emissionIntensity;
 
 // Integer uniforms
 uniform int u_lightShapes[MAX_LIGHT_COUNT];
@@ -87,9 +88,9 @@ layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec3 calculateNormalMapping();
 vec3 calculateDiffuseMapping();
 vec3 calculateEmissionMapping();
+vec3 calculateNormalMapping();
 vec3 calculateAmbientLighting();
 vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateSpotLighting(vec3 normal);
@@ -112,11 +113,10 @@ void main()
 	}
 
 	// Calculate diffuse mapping
-	vec3 diffuseMapColor = calculateDiffuseMapping();
+	vec3 diffuseMapping = calculateDiffuseMapping();
 
-    // Calculate emission mapping
-    vec3 emissionMapColor = calculateEmissionMapping();
-	bool isBright = ((emissionMapColor != vec3(0.0f)) || u_isBright);
+	// Calculate emission mapping
+	vec3 emissionMapping = calculateEmissionMapping();
 
     // Calculate normal mapping
     vec3 normal = calculateNormalMapping();
@@ -131,8 +131,8 @@ void main()
 
 	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
-	primaryColor += diffuseMapColor;
-	primaryColor += emissionMapColor;
+	primaryColor += diffuseMapping;
+	primaryColor += emissionMapping;
 	primaryColor  = calculatePlanarReflections(primaryColor);
 	primaryColor  = calculateCubeReflections(primaryColor, normal);
 	primaryColor *= u_color;
@@ -141,6 +141,7 @@ void main()
 	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
 	
 	// Apply lighting
+	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);
 	if (!isBright)
 	{
 		vec3 lighting = vec3(0.0f);
@@ -160,24 +161,6 @@ void main()
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, u_alpha);
 	o_secondaryColor = vec4((isBright ? primaryColor : vec3(0.0f)), 1.0f);
-}
-
-vec3 calculateNormalMapping()
-{
-    if (u_hasNormalMap)
-    {
-        // Calculate new normal vector
-        vec3 normal = texture(u_normalMap, f_uv).rgb;
-        normal = ((normal * 2.0f) - 1.0f);
-        normal = normalize(f_tbnMatrix * normal);
-
-        // Return
-        return normal;
-    }
-    else
-    {
-        return f_normal;
-    }
 }
 
 vec3 calculateDiffuseMapping()
@@ -204,6 +187,36 @@ vec3 calculateDiffuseMapping()
 		// Return
 		return diffuseMapColor.rgb;
 	}
+}
+
+vec3 calculateEmissionMapping()
+{
+	if (u_hasEmissionMap)
+	{
+		return (texture(u_emissionMap, f_uv).rgb * u_emissionIntensity);
+	}
+	else
+	{
+		return vec3(0.0f);
+	}
+}
+
+vec3 calculateNormalMapping()
+{
+    if (u_hasNormalMap)
+    {
+        // Calculate new normal vector
+        vec3 normal = texture(u_normalMap, f_uv).rgb;
+        normal = ((normal * 2.0f) - 1.0f);
+        normal = normalize(f_tbnMatrix * normal);
+
+        // Return
+        return normal;
+    }
+    else
+    {
+        return f_normal;
+    }
 }
 
 vec3 calculateAmbientLighting()
@@ -294,16 +307,16 @@ vec3 calculateSpotLighting(vec3 normal)
     {
     	// Calculate distance
         float fragmentDistance = distance(u_cameraPosition, f_pos);
-        float distanceFactor = (fragmentDistance / u_maxSpotLightingDistance);
-        distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
-        distanceFactor = 1.0f - distanceFactor;
+        float distanceMultiplier = (fragmentDistance / u_maxSpotLightingDistance);
+        distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
+        distanceMultiplier = (1.0f - distanceMultiplier);
 
         // Calculate lighting strength
         vec3 lightDirection = normalize(u_cameraPosition - f_pos);
-        float smoothingFactor = 0.9f;
+        float smoothingMultiplier = 0.9f;
         float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
-        float epsilon = u_maxSpotLightingAngle - u_maxSpotLightingAngle * smoothingFactor;
-        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);
+        float epsilon = u_maxSpotLightingAngle - u_maxSpotLightingAngle * smoothingMultiplier;
+        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingMultiplier) / epsilon, 0.0f, 1.0f);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
         float specular = calculateSpecularLighting(u_cameraPosition, normal);
 
@@ -315,24 +328,12 @@ vec3 calculateSpotLighting(vec3 normal)
         result *= u_spotLightingIntensity; // Intensity
 
         // Return
-        return (result * distanceFactor);
+        return (result * distanceMultiplier);
     }
     else
     {
         return vec3(0.0f);
     }
-}
-
-vec3 calculateEmissionMapping()
-{
-	if (u_hasEmissionMap)
-	{
-		return texture(u_emissionMap, f_uv).rgb;
-	}
-	else
-	{
-		return vec3(0.0f);
-	}
 }
 
 vec3 calculateFog(vec3 color)
@@ -494,10 +495,10 @@ float calculateSpecularLighting(vec3 position, vec3 normal)
         vec3 lightDirection   = normalize(position - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightingFactor);
+        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
         // Return
-        return (result * u_specularLightingIntensity);
+        return (result * u_specularIntensity);
     }
     else
     {

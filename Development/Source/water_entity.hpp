@@ -29,8 +29,8 @@ public:
 	void setDisplacementMapPath(const string& value);
 	void setUvRepeat(float value);
 	void setWaveHeight(float value);
-	void setSpecularLightingFactor(float value);
-	void setSpecularLightingIntensity(float value);
+	void setSpecularShininess(float value);
+	void setSpecularIntensity(float value);
 	void setHeight(float value);
 	void setSize(float value);
 	void setTransparency(float value);
@@ -60,8 +60,8 @@ public:
 	const float getHeight();
 	const float getUvRepeat();
 	const float getWaveHeight();
-	const float getSpecularLightingFactor();
-	const float getSpecularLightingIntensity();
+	const float getSpecularShininess();
+	const float getSpecularIntensity();
 	const float getSize();
 	const float getTransparency();
 
@@ -101,8 +101,8 @@ private:
 	float _size = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _waveHeight = 0.0f;
-	float _specularLightingFactor = 1.0f;
-	float _specularLightingIntensity = 1.0f;
+	float _specularShininess = 1.0f;
+	float _specularIntensity = 1.0f;
 	float _transparency = 0.0f;
 
 	// Booleans

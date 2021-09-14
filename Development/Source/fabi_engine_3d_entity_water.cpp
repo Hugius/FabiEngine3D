@@ -200,14 +200,14 @@ void FabiEngine3D::waterEntity_setWaveHeight(const string& ID, float height)
 	_core->_waterEntityManager.getEntity(ID)->setWaveHeight(height);
 }
 
-void FabiEngine3D::waterEntity_setSpecularLightingFactor(const string& ID, float factor)
+void FabiEngine3D::waterEntity_setSpecularShininess(const string& ID, float factor)
 {
-	_core->_waterEntityManager.getEntity(ID)->setSpecularLightingFactor(factor);
+	_core->_waterEntityManager.getEntity(ID)->setSpecularShininess(factor);
 }
 
-void FabiEngine3D::waterEntity_setSpecularLightingIntensity(const string& ID, float intensity)
+void FabiEngine3D::waterEntity_setSpecularIntensity(const string& ID, float intensity)
 {
-	_core->_waterEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
+	_core->_waterEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
 void FabiEngine3D::waterEntity_setSpeed(const string& ID, Vec2 speed)
@@ -269,14 +269,14 @@ const float FabiEngine3D::waterEntity_getWaveHeight(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getWaveHeight();
 }
 
-const float FabiEngine3D::waterEntity_getSpecularLightingFactor(const string& ID)
+const float FabiEngine3D::waterEntity_getSpecularShininess(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getSpecularLightingFactor();
+	return _core->_waterEntityManager.getEntity(ID)->getSpecularShininess();
 }
 
-const float FabiEngine3D::waterEntity_getSpecularLightingIntensity(const string& ID)
+const float FabiEngine3D::waterEntity_getSpecularIntensity(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getSpecularLightingIntensity();
+	return _core->_waterEntityManager.getEntity(ID)->getSpecularIntensity();
 }
 
 const float FabiEngine3D::waterEntity_getTransparency(const string& ID)

@@ -32,8 +32,8 @@ uniform vec2 u_rippleOffset;
 // Float uniforms
 uniform float u_lightIntensities[MAX_LIGHT_COUNT];
 uniform float u_directionalLightingIntensity;
-uniform float u_specularLightingFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_specularShininess;
+uniform float u_specularIntensity;
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
@@ -216,9 +216,9 @@ vec3 calculateDirectionalLighting(vec3 normal)
 		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos); // Light ray
 		vec3 viewDirection = normalize(f_pos - u_cameraPosition); // View ray
 		vec3 reflectDirection = reflect(normalize(lightDirection), normal); // Reflect ray
-		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularLightingFactor); // Calculate if perpendicular
+		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess); // Calculate if perpendicular
 		specular *= u_directionalLightingIntensity; // Directional intensity
-		specular *= u_specularLightingIntensity; // Specular intensity
+		specular *= u_specularIntensity; // Specular intensity
 		vec3 result = vec3(specular); // Add to lighting
 		result *= u_directionalLightColor; // Directional color
 		return result; // Return
@@ -237,10 +237,10 @@ float calculateSpecularLighting(vec3 position, vec3 normal)
         vec3 lightDirection   = normalize(position - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularLightingFactor);
+        float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
         // Return
-        return (result * u_specularLightingIntensity);
+        return (result * u_specularIntensity);
     }
     else
     {

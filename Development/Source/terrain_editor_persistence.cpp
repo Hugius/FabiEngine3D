@@ -236,7 +236,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
+		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularShininess, specularIntensity;
 		bool isSpecular;
 
 		// For file extraction
@@ -262,7 +262,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 			normalMapPathG >>
 			normalMapPathB >>
 			isSpecular >>
-			specularFactor >>
+			specularShininess >>
 			specularIntensity;
 
 		// Perform empty string & space conversions
@@ -358,8 +358,8 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
 			_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
-			_fe3d.terrainEntity_setSpecularLightingFactor(terrainID, specularFactor);
-			_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
+			_fe3d.terrainEntity_setSpecularShininess(terrainID, specularShininess);
+			_fe3d.terrainEntity_setSpecularIntensity(terrainID, specularIntensity);
 		}
 	}
 
@@ -411,8 +411,8 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		float maxHeight = _fe3d.terrainEntity_getMaxHeight(terrainID);
 		float uvRepeat = _fe3d.terrainEntity_getUvRepeat(terrainID);
 		float lightness = _fe3d.terrainEntity_getLightness(terrainID);
-		float specularFactor = _fe3d.terrainEntity_getSpecularLightingFactor(terrainID);
-		float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(terrainID);
+		float specularShininess = _fe3d.terrainEntity_getSpecularShininess(terrainID);
+		float specularIntensity = _fe3d.terrainEntity_getSpecularIntensity(terrainID);
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
@@ -460,7 +460,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 			normalMapPathG << " " <<
 			normalMapPathB << " " <<
 			isSpecular << " " <<
-			specularFactor << " " <<
+			specularShininess << " " <<
 			specularIntensity << endl;
 	}
 

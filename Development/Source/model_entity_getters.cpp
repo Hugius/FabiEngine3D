@@ -335,9 +335,9 @@ const float ModelEntity::getLightness()
 	return _lightness;
 }
 
-const float ModelEntity::getSpecularFactor()
+const float ModelEntity::getSpecularShininess()
 {
-	return _specularFactor;
+	return _specularShininess;
 }
 
 const float ModelEntity::getSpecularIntensity()
@@ -353,6 +353,11 @@ const float ModelEntity::getMinHeight()
 const float ModelEntity::getMaxHeight()
 {
 	return _maxHeight;
+}
+
+const float ModelEntity::getEmissionIntensity()
+{
+	return _emissionIntensity;
 }
 
 const float ModelEntity::getAlpha()

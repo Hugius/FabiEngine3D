@@ -167,12 +167,12 @@ void TerrainEntity::setLightness(float value)
 	_lightness = max(0.0f, value);
 }
 
-void TerrainEntity::setSpecularLightingFactor(float value)
+void TerrainEntity::setSpecularShininess(float value)
 {
-	_specularLightingFactor = max(0.0f, value);
+	_specularShininess = max(0.0f, value);
 }
 
-void TerrainEntity::setSpecularLightingIntensity(float value)
+void TerrainEntity::setSpecularIntensity(float value)
 {
-	_specularLightingIntensity = max(0.0f, value);
+	_specularIntensity = max(0.0f, value);
 }

@@ -44,8 +44,8 @@ public:
 	void setSize(float value);
 	void setMaxHeight(float value);
 	void setLightness(float value);
-	void setSpecularLightingFactor(float value);
-	void setSpecularLightingIntensity(float value);
+	void setSpecularShininess(float value);
+	void setSpecularIntensity(float value);
 	void setSpecularLighted(bool value);
 	void setWireFramed(bool value);
 
@@ -78,8 +78,8 @@ public:
 	const float getSize();
 	const float getMaxHeight();
 	const float getLightness();
-	const float getSpecularLightingFactor();
-	const float getSpecularLightingIntensity();
+	const float getSpecularShininess();
+	const float getSpecularIntensity();
 
 	// Booleans
 	const bool isSpecularLighted();
@@ -136,8 +136,8 @@ private:
 	float _maxHeight = 1.0f;
 	float _size = 0.0f;
 	float _lightness = 1.0f;
-	float _specularLightingFactor = 1.0f;
-	float _specularLightingIntensity = 1.0f;
+	float _specularShininess = 1.0f;
+	float _specularIntensity = 1.0f;
 
 	// Booleans
 	bool _isSpecularLighted = false;

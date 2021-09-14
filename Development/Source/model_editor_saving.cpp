@@ -38,15 +38,15 @@ bool ModelEditor::saveModelEntitiesToFile()
 			// General data
 			auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
 			auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
-			auto diffuseMapPath = isMultiParted ? "" : _fe3d.modelEntity_getDiffuseMapPath(modelID);
-			auto emissionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getEmissionMapPath(modelID);
-			auto normalMapPath = isMultiParted ? "" : _fe3d.modelEntity_getNormalMapPath(modelID);
-			auto reflectionMapPath = isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID);
+			auto diffuseMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getDiffuseMapPath(modelID));
+			auto emissionMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getEmissionMapPath(modelID));
+			auto normalMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getNormalMapPath(modelID));
+			auto reflectionMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID));
 			auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
 			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
 			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
-			auto specularFactor = _fe3d.modelEntity_getSpecularFactor(modelID);
+			auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID);
 			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
 			auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID);
 			auto lightness = _fe3d.modelEntity_getLightness(modelID);
@@ -56,6 +56,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
 			auto isBright = _fe3d.modelEntity_isBright(modelID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID));
+			auto emissionIntensity = _fe3d.modelEntity_getEmissionIntensity(modelID);
 
 			// AABB data
 			vector<string> aabbIDs;
@@ -100,7 +101,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				isTransparent << " " <<
 				reflectionType << " " <<
 				isSpecular << " " <<
-				specularFactor << " " <<
+				specularShininess << " " <<
 				specularIntensity << " " <<
 				reflectivity << " " <<
 				lightness << " " <<
@@ -110,7 +111,8 @@ bool ModelEditor::saveModelEntitiesToFile()
 				uvRepeat << " " <<
 				lodEntityID << " " <<
 				isInstanced << " " <<
-				isBright;
+				isBright << " " <<
+				emissionIntensity;
 
 			// Add space
 			if (!aabbIDs.empty())

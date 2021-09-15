@@ -12,6 +12,7 @@ void BillboardEditor::_updateAnimationMenu()
 		auto animationRowCount = _fe3d.billboardEntity_getSpriteAnimationRows(_currentBillboardID);
 		auto animationColumnCount = _fe3d.billboardEntity_getSpriteAnimationColumns(_currentBillboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(_currentBillboardID);
+		auto isPlaying = _fe3d.billboardEntity_isSpriteAnimationPlaying(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -36,22 +37,21 @@ void BillboardEditor::_updateAnimationMenu()
 			_gui.getGlobalScreen()->createValueForm("speed", "Framestep", animationFramestep, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
-		// Update buttons hoverability
-		auto playing = _fe3d.billboardEntity_isSpriteAnimationStarted(_currentBillboardID);
-		screen->getButton("animate")->setHoverable(!playing && animationRowCount != 0 && animationColumnCount != 0);
-
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
 			_gui.getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
 			_gui.getGlobalScreen()->checkValueForm("speed", animationFramestep, {}))
 		{
 			// Only if animation is already playing
-			if (playing)
+			if (isPlaying)
 			{
 				_fe3d.billboardEntity_stopSpriteAnimation(_currentBillboardID);
 				_fe3d.billboardEntity_startSpriteAnimation(_currentBillboardID, -1);
 			}
 		}
+
+		// Update buttons hoverability
+		screen->getButton("animate")->setHoverable(!isPlaying && (animationRowCount != 0) && (animationColumnCount != 0));
 
 		// Update animation values
 		_fe3d.billboardEntity_setSpriteAnimationRows(_currentBillboardID, animationRowCount);

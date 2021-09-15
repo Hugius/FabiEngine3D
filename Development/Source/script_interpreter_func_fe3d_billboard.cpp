@@ -779,8 +779,8 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Check if billboard is of type text
-				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
+				// Check if billboard is not of type text
+				if (!_fe3d.billboardEntity_isText(arguments[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;
@@ -803,8 +803,8 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				// Check if billboard is of type text
-				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
+				// Check if billboard is not of type text
+				if (!_fe3d.billboardEntity_isText(arguments[0].getString()))
 				{
 					_throwScriptError("billboard with ID \"" + arguments[0].getString() + "\" is not of type text!");
 					return true;

@@ -307,13 +307,13 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, newID);
 
 	// Diffuse map
-	if (!_fe3d.billboardEntity_getDiffuseMapPath(previewID).empty())
+	if (_fe3d.billboardEntity_hasDiffuseMap(previewID) && !_fe3d.billboardEntity_isText(previewID))
 	{
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}
 
 	// Text
-	if (!_fe3d.billboardEntity_getFontPath(previewID).empty())
+	if (_fe3d.billboardEntity_isText(previewID))
 	{
 		_fe3d.billboardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
 		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));

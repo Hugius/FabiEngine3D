@@ -135,7 +135,7 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true), false);
 	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
@@ -278,7 +278,7 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 	auto textContent = entity->getTextContent();
 	if (!textContent.empty())
 	{
-		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath), true);
 		entity->setTransparent(true);
 	}
 }
@@ -303,7 +303,7 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 		entity->setTextContent(textContent);
 
 		// Load diffuse map
-		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath), true);
 		entity->setTransparent(true);
 	}
 }
@@ -428,6 +428,11 @@ const bool FabiEngine3D::billboardEntity_isSpriteAnimationPaused(const string& I
 const bool FabiEngine3D::billboardEntity_hasDiffuseMap(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+const bool FabiEngine3D::billboardEntity_isText(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isText();
 }
 
 const bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)

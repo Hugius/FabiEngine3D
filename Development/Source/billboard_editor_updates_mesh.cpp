@@ -11,11 +11,7 @@ void BillboardEditor::_updateMeshMenu()
 	{
 		// Temporary values
 		auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
-		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
-		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
-		auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
-		auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-		auto isBright = _fe3d.billboardEntity_isBright(_currentBillboardID);
+		auto textContent = _fe3d.billboardEntity_getTextContent(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -28,30 +24,78 @@ void BillboardEditor::_updateMeshMenu()
 			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("facingX")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			isFacingX = !isFacingX;
-			_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
+			// Get the chosen filename
+			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const string targetDirectory = string("game_assets\\textures\\billboard_maps\\");
+
+			// Validate target directory
+			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			{
+				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				return;
+			}
+
+			// Validate chosen file
+			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			if (filePath.empty())
+			{
+				return;
+			}
+
+			// Validate directory of file
+			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				return;
+			}
+
+			// Set diffuse map
+			const string finalFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearTextureCache2D(finalFilePath);
+			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("facingY")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
-			isFacingY = !isFacingY;
-			_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isShadowed")->isHovered())
-		{
-			isShadowed = !isShadowed;
-			_fe3d.billboardEntity_setShadowed(_currentBillboardID, isShadowed);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflected")->isHovered())
-		{
-			isReflected = !isReflected;
-			_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
-		{
-			isBright = !isBright;
-			_fe3d.billboardEntity_setBright(_currentBillboardID, isBright);
+			// Get the chosen filename
+			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const string targetDirectory = string("game_assets\\fonts\\");
+
+			// Validate target directory
+			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			{
+				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+				return;
+			}
+
+			// Validate chosen file
+			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "TTF");
+			if (filePath.empty())
+			{
+				return;
+			}
+
+			// Validate directory of file
+			if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+				filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+			{
+				Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+				return;
+			}
+
+			// Set font
+			const string finalFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearFontCache(finalFilePath);
+			_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
+			_fe3d.billboardEntity_setFont(_currentBillboardID, finalFilePath);
+
+			// Set default text
+			if (textContent.empty())
+			{
+				_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
+			}
 		}
 
 		// Update value forms
@@ -66,24 +110,8 @@ void BillboardEditor::_updateMeshMenu()
 			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
 		}
 
-		// Reset rotations if not facing camera
-		Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);
-		if (!isFacingX)
-		{
-			rotation.x = 0.0f;
-			rotation.z = 0.0f;
-		}
-		if (!isFacingY)
-		{
-			rotation.y = 0.0f;
-		}
-		_fe3d.billboardEntity_setRotation(_currentBillboardID, rotation);
-
-		// Update button text contents
-		screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
-		screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright : OFF");
-		screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
-		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+		// Update buttons hoverability
+		screen->getButton("diffuseMap")->setHoverable(!_fe3d.billboardEntity_isText(_currentBillboardID));
+		screen->getButton("font")->setHoverable(!_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) || _fe3d.billboardEntity_isText(_currentBillboardID));
 	}
 }

@@ -25,7 +25,7 @@ public:
 	void setReflected(bool value);
 	void setBright(bool value);
 	void setWireFramed(bool value);
-	void setDiffuseMap(TextureID value);
+	void setDiffuseMap(TextureID value, bool isText);
 	void setPosition(Vec3 value);
 	void setRotation(Vec3 value);
 	void setSize(Vec2 value);
@@ -104,6 +104,7 @@ public:
 	const bool isWireFramed();
 	const bool hasRenderBuffer();
 	const bool hasDiffuseMap();
+	const bool isText();
 
 	// Miscellaneous
 	const TextureID getDiffuseMap();
@@ -160,6 +161,7 @@ private:
 	bool _isReflected = true;
 	bool _isBright = false;
 	bool _isWireFramed = false;
+	bool _isText = false;
 
 	// Miscellaneous
 	TextureID _diffuseMap = 0;

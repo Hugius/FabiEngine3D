@@ -31,9 +31,9 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateMeshMenu();
-	void _updateAppearanceMenu();
+	void _updateLightingMenu();
 	void _updateAnimationMenu();
-	void _updateTextMenu();
+	void _updateOptionsMenu();
 	void _updateBillboardCreating();
 	void _updateBillboardChoosing();
 	void _updateBillboardDeleting();

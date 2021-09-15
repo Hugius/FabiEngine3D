@@ -414,10 +414,10 @@
     <ClCompile Include="..\..\Source\scene_editor_terrain_updates_main.cpp">
       <Filter>Scene Editor\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_appearance.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_lighting.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_text.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_options.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp">

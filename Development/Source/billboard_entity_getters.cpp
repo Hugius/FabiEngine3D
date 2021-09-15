@@ -174,3 +174,8 @@ const bool BillboardEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
 }
+
+const bool BillboardEntity::isText()
+{
+	return _isText;
+}

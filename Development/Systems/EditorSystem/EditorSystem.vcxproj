@@ -39,11 +39,11 @@
     <ClCompile Include="..\..\Source\billboard_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp" />
-    <ClCompile Include="..\..\Source\billboard_editor_updates_appearance.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_mesh.cpp" />
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp" />
-    <ClCompile Include="..\..\Source\billboard_editor_updates_text.cpp" />
+    <ClCompile Include="..\..\Source\billboard_editor_updates_options.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_edit.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_place.cpp" />

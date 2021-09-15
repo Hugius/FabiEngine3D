@@ -19,15 +19,15 @@ void BillboardEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateAppearanceMenu();
-	}
-	if (_isEditorLoaded)
-	{
 		_updateAnimationMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateTextMenu();
+		_updateLightingMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateOptionsMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -132,22 +132,21 @@ void BillboardEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMesh");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("appearance")->isHovered())
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAppearance");
-		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuAnimation");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("text")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuText");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuOptions");
 		}
 
 		// Update buttons hoverability
-		screen->getButton("animation")->setHoverable(!_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID).empty());
-		screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID).empty());
+		screen->getButton("animation")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
 	}
 }
 

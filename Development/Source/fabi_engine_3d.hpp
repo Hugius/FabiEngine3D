@@ -431,6 +431,7 @@ public:
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);
 	const bool billboardEntity_hasDiffuseMap(const string& ID);
+	const bool billboardEntity_isText(const string& ID);
 
 	// AABB entity interface - setters
 	void aabbEntity_create(const string& ID);

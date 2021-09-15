@@ -56,6 +56,8 @@
     <ClCompile Include="..\..\Source\terrain_editor_main.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_persistence.cpp" />
+    <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp" />
+    <ClCompile Include="..\..\Source\terrain_editor_updates_normal.cpp" />
     <ClCompile Include="..\..\Source\water_editor_main.cpp" />
     <ClCompile Include="..\..\Source\water_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\water_editor_persistence.cpp" />
@@ -63,14 +65,13 @@
     <ClCompile Include="..\..\Source\sky_editor_updates_mesh.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_updates_options.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_updates_misc.cpp" />
-    <ClCompile Include="..\..\Source\terrain_editor_updates_blendmap.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_mesh.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_main.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\water_editor_updates_main.cpp" />
     <ClCompile Include="..\..\Source\water_editor_updates_mesh.cpp" />
-    <ClCompile Include="..\..\Source\water_editor_updates_effects.cpp" />
+    <ClCompile Include="..\..\Source\water_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\model_editor_loading.cpp" />
     <ClCompile Include="..\..\Source\model_editor_main.cpp" />

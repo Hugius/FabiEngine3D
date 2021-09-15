@@ -21,6 +21,10 @@ void TerrainEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateNormalMapMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateLightingMenu();
 	}
 	if (_isEditorLoaded)
@@ -129,6 +133,10 @@ void TerrainEditor::_updateChoiceMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuNormalMap");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{

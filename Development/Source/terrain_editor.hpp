@@ -33,6 +33,7 @@ private:
 	void _updateChoiceMenu();
 	void _updateMeshMenu();
 	void _updateBlendMapMenu();
+	void _updateNormalMapMenu();
 	void _updateLightingMenu();
 	void _updateTerrainCreating();
 	void _updateTerrainChoosing();

@@ -31,7 +31,7 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateMeshMenu();
-	void _updateEffectsMenu();
+	void _updateLightingMenu();
 	void _updateOptionsMenu();
 	void _updateWaterCreating();
 	void _updateWaterChoosing();

@@ -19,7 +19,7 @@ void WaterEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateEffectsMenu();
+		_updateLightingMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -128,9 +128,9 @@ void WaterEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMesh");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("effects")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuEffects");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuLighting");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
 		{
@@ -138,7 +138,7 @@ void WaterEditor::_updateChoiceMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("lighting")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 	}
 }

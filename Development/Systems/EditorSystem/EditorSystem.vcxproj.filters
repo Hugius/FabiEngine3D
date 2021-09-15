@@ -351,9 +351,6 @@
     <ClCompile Include="..\..\Source\terrain_editor_updates_mesh.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_blendmap.cpp">
-      <Filter>Terrain Editor\Updates</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
@@ -372,7 +369,7 @@
     <ClCompile Include="..\..\Source\water_editor_updates_main.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_effects.cpp">
+    <ClCompile Include="..\..\Source\water_editor_updates_lighting.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\water_editor_updates_misc.cpp">
@@ -443,6 +440,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\animation_frame.cpp">
       <Filter>Animation Editor\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_normal.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

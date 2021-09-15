@@ -196,9 +196,9 @@ const unsigned int FabiEngine3D::gfx_getShadowInterval()
 	return _core->_shadowGenerator.getInterval();
 }
 
-const float FabiEngine3D::gfx_getSkyExposureFactor()
+const float FabiEngine3D::gfx_getSkyExposureIntensity()
 {
-	return _core->_skyEntityManager.getSkyExposureFactor();
+	return _core->_skyEntityManager.getSkyExposureIntensity();
 }
 
 const float FabiEngine3D::gfx_getSkyExposureSpeed()

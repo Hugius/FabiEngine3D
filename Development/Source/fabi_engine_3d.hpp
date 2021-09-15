@@ -165,7 +165,7 @@ public:
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setLightness(const string& ID, float lightness);
-	void terrainEntity_setSpecularShininess(const string& ID, float factor);
+	void terrainEntity_setSpecularShininess(const string& ID, float shininess);
 	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setWireFramed(const string& ID, bool enabled);
@@ -227,7 +227,7 @@ public:
 	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
 	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
 	void waterEntity_setWaveHeight(const string& ID, float height);
-	void waterEntity_setSpecularShininess(const string& ID, float factor);
+	void waterEntity_setSpecularShininess(const string& ID, float shininess);
 	void waterEntity_setSpecularIntensity(const string& ID, float intensity);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, Vec3 color);
@@ -286,9 +286,9 @@ public:
 	void modelEntity_setRotation(const string& ID, const string& partID, Vec3 rotation);
 	void modelEntity_setRotationOrigin(const string& ID, const string& partID, Vec3 rotationOrigin);
 	void modelEntity_setSize(const string& ID, const string& partID, Vec3 size);
-	void modelEntity_move(const string& ID, const string& partID, Vec3 factor);
-	void modelEntity_rotate(const string& ID, const string& partID, Vec3 factor);
-	void modelEntity_scale(const string& ID, const string& partID, Vec3 factor);
+	void modelEntity_move(const string& ID, const string& partID, Vec3 change);
+	void modelEntity_rotate(const string& ID, const string& partID, Vec3 change);
+	void modelEntity_scale(const string& ID, const string& partID, Vec3 change);
 	void modelEntity_moveTo(const string& ID, const string& partID, Vec3 target, float speed);
 	void modelEntity_rotateTo(const string& ID, const string& partID, Vec3 target, float speed);
 	void modelEntity_scaleTo(const string& ID, const string& partID, Vec3 target, float speed);
@@ -369,9 +369,9 @@ public:
 	void billboardEntity_setPosition(const string& ID, Vec3 position);
 	void billboardEntity_setRotation(const string& ID, Vec3 rotation);
 	void billboardEntity_setSize(const string& ID, Vec2 size);
-	void billboardEntity_move(const string& ID, Vec3 factor);
-	void billboardEntity_rotate(const string& ID, Vec3 factor);
-	void billboardEntity_scale(const string& ID, Vec2 factor);
+	void billboardEntity_move(const string& ID, Vec3 change);
+	void billboardEntity_rotate(const string& ID, Vec3 change);
+	void billboardEntity_scale(const string& ID, Vec2 change);
 	void billboardEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void billboardEntity_rotateTo(const string& ID, Vec3 target, float speed);
 	void billboardEntity_scaleTo(const string& ID, Vec2 target, float speed);
@@ -446,8 +446,8 @@ public:
 	void aabbEntity_setLocalSize(const string& ID, Vec3 size);
 	void aabbEntity_setPosition(const string& ID, Vec3 position);
 	void aabbEntity_setSize(const string& ID, Vec3 size);
-	void aabbEntity_move(const string& ID, Vec3 factor);
-	void aabbEntity_scale(const string& ID, Vec3 factor);
+	void aabbEntity_move(const string& ID, Vec3 change);
+	void aabbEntity_scale(const string& ID, Vec3 change);
 	void aabbEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void aabbEntity_scaleTo(const string& ID, Vec3 target, float speed);
 
@@ -492,7 +492,7 @@ public:
 	void lightEntity_delete(const string& ID);
 	void lightEntity_setVisible(const string& ID, bool isVisible);
 	void lightEntity_setPosition(const string& ID, Vec3 position);
-	void lightEntity_move(const string& ID, Vec3 factor);
+	void lightEntity_move(const string& ID, Vec3 change);
 	void lightEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void lightEntity_setRadius(const string& ID, Vec3 radius);
 	void lightEntity_setColor(const string& ID, Vec3 color);
@@ -515,7 +515,7 @@ public:
 	void reflectionEntity_delete(const string& ID);
 	void reflectionEntity_setVisible(const string& ID, bool isVisible);
 	void reflectionEntity_setPosition(const string& ID, Vec3 position);
-	void reflectionEntity_move(const string& ID, Vec3 factor);
+	void reflectionEntity_move(const string& ID, Vec3 change);
 	void reflectionEntity_moveTo(const string& ID, Vec3 target, float speed);
 	void reflectionEntity_capture(const string& ID);
 
@@ -629,7 +629,7 @@ public:
 	void sound_stop(const string& ID, int fadeMS);
 	void sound_stopAll();
 	void sound_setPosition(const string& ID, Vec3 position);
-	void sound_move(const string& ID, Vec3 factor);
+	void sound_move(const string& ID, Vec3 change);
 	void sound_setVolume(const string& ID, float volume);
 	void sound_setMaxVolume(const string& ID, float volume);
 	void sound_setMaxDistance(const string& ID, float maxDistance);
@@ -678,7 +678,7 @@ public:
 	void gfx_enableAntiAliasing();
 	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool isFollowingCamera, unsigned int interval);
 	void gfx_enableBloom(BloomType type, float intensity, unsigned int blurCount);
-	void gfx_enableSkyExposure(float factor, float speed);
+	void gfx_enableSkyExposure(float intensity, float speed);
 	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
 	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
@@ -716,7 +716,7 @@ public:
 	const float gfx_getShadowReach();
 	const float gfx_getShadowLightness();
 	const float gfx_getBloomIntensity();
-	const float gfx_getSkyExposureFactor();
+	const float gfx_getSkyExposureIntensity();
 	const float gfx_getSkyExposureSpeed();
 	const float gfx_getaMaxDofDistance();
 	const float gfx_getDofBlurDistance();

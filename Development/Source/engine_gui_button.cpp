@@ -79,7 +79,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 							_fe3d.imageEntity_getSize(rectangleID).y < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
 						{
 							// Rectangle
-							_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * INCREASE_FACTOR);
+							_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * INCREASE_MULTIPLIER);
 						}
 
 						// Slowly increase TextField size
@@ -90,7 +90,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 							if (_fe3d.textEntity_getSize(rectangleID).x < (_textField->getOriginalSize() * TOTAL_SIZE_INCREASE).x &&
 								_fe3d.textEntity_getSize(rectangleID).y < (_textField->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
 							{
-								_fe3d.textEntity_setSize(TextFieldID, _fe3d.textEntity_getSize(TextFieldID) * INCREASE_FACTOR);
+								_fe3d.textEntity_setSize(TextFieldID, _fe3d.textEntity_getSize(TextFieldID) * INCREASE_MULTIPLIER);
 							}
 						}
 					}
@@ -122,7 +122,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 				_fe3d.imageEntity_getSize(rectangleID).y > _rectangle->getOriginalSize().y)
 			{
 				// Rectangle
-				_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * DECREASE_FACTOR);
+				_fe3d.imageEntity_setSize(rectangleID, _fe3d.imageEntity_getSize(rectangleID) * DECREASE_MULTIPLIER);
 			}
 
 			// Set rectangle to default color
@@ -137,7 +137,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 				if (_fe3d.textEntity_getSize(rectangleID).x > _textField->getOriginalSize().x &&
 					_fe3d.textEntity_getSize(rectangleID).y > _textField->getOriginalSize().y)
 				{
-					_fe3d.textEntity_setSize(TextFieldID, _fe3d.textEntity_getSize(TextFieldID) * DECREASE_FACTOR);
+					_fe3d.textEntity_setSize(TextFieldID, _fe3d.textEntity_getSize(TextFieldID) * DECREASE_MULTIPLIER);
 				}
 
 				// Set to default color

@@ -132,7 +132,7 @@ vec4 calculateWaterColor()
 
 	// Fresnel effect
 	vec3 viewDirection = normalize(u_cameraPosition - f_pos);
-	float mixFactor = dot(viewDirection, normal);
+	float mixValue = dot(viewDirection, normal);
 
 	// Finalizing fragment color
 	vec3 finalColor;
@@ -146,17 +146,17 @@ vec4 calculateWaterColor()
 	// Determine which textures to mix
 	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Both
 	{
-		finalColor = mix(reflectionColor, refractionColor, mixFactor); // Combining reflection & refraction
+		finalColor = mix(reflectionColor, refractionColor, mixValue); // Refraction fresnel effect
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else if (u_isRefractive) // Only refraction
 	{
-		finalColor = refractionColor;
+		finalColor = refractionColor; // No fresnel effect
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else if (u_isReflective) // Only reflection
 	{
-		finalColor = mix(reflectionColor, vec3(0.0f), mixFactor);
+		finalColor = mix(reflectionColor, vec3(0.0f), mixValue); // Dark fresnel effect
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else // None

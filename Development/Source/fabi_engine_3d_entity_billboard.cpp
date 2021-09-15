@@ -83,19 +83,19 @@ const bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->isVisible();
 }
 
-void FabiEngine3D::billboardEntity_move(const string& ID, Vec3 factor)
+void FabiEngine3D::billboardEntity_move(const string& ID, Vec3 change)
 {
-	_core->_billboardEntityManager.getEntity(ID)->move(factor);
+	_core->_billboardEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::billboardEntity_rotate(const string& ID, Vec3 factor)
+void FabiEngine3D::billboardEntity_rotate(const string& ID, Vec3 change)
 {
-	_core->_billboardEntityManager.getEntity(ID)->rotate(factor);
+	_core->_billboardEntityManager.getEntity(ID)->rotate(change);
 }
 
-void FabiEngine3D::billboardEntity_scale(const string& ID, Vec2 factor)
+void FabiEngine3D::billboardEntity_scale(const string& ID, Vec2 change)
 {
-	_core->_billboardEntityManager.getEntity(ID)->scale(factor);
+	_core->_billboardEntityManager.getEntity(ID)->scale(change);
 }
 
 void FabiEngine3D::billboardEntity_moveTo(const string& ID, Vec3 target, float speed)

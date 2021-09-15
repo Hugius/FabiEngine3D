@@ -363,17 +363,17 @@ vec3 calculateSpotLighting(vec3 normal)
     {
 		// Calculate distance
     	float fragmentDistance = distance(u_cameraPosition, f_pos);
-        float distanceFactor = fragmentDistance / u_maxSpotLightingDistance;
-        distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
-        distanceFactor = 1.0f - distanceFactor;
+        float distanceMultiplier = (fragmentDistance / u_maxSpotLightingDistance);
+        distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
+        distanceMultiplier = (1.0f - distanceMultiplier);
 
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 lightDirection = normalize(u_cameraPosition - f_pos);
-        float smoothingFactor = 0.9f;
+        float smoothingMultiplier = 0.9f;
         float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
-        float epsilon   = u_maxSpotLightingAngle - u_maxSpotLightingAngle * smoothingFactor;
-        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);  
+        float epsilon   = (u_maxSpotLightingAngle - (u_maxSpotLightingAngle * smoothingMultiplier));
+        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingMultiplier) / epsilon, 0.0f, 1.0f);  
 
         // Apply lighting calculations
         float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
@@ -384,7 +384,7 @@ vec3 calculateSpotLighting(vec3 normal)
         result *= u_spotLightingIntensity; // Intensity
 
         // Return
-        return (result * distanceFactor);
+        return (result * distanceMultiplier);
     }
     else
     {

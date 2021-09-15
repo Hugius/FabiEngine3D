@@ -199,7 +199,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isSkyExposureEnabled();
-		auto factor = _fe3d.gfx_getSkyExposureFactor();
+		auto intensity = _fe3d.gfx_getSkyExposureIntensity();
 		auto speed = _fe3d.gfx_getSkyExposureSpeed();
 
 		// Button management
@@ -212,23 +212,23 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		{
 			isEnabled = !isEnabled;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("factor")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("factor", "Exposure Factor", (factor * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("intensity", "Exposure Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", (speed * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("speed", "Exposure Speed", (speed * 10000.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("factor", factor))
+		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			factor /= 100.0f;
+			intensity /= 100.0f;
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
-			speed /= 100000.0f;
+			speed /= 10000.0f;
 		}
 
 		// Disable sky exposure
@@ -240,11 +240,11 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		// Enable sky exposure
 		if (isEnabled)
 		{
-			_fe3d.gfx_enableSkyExposure(factor, speed);
+			_fe3d.gfx_enableSkyExposure(intensity, speed);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("factor")->setHoverable(isEnabled);
+		screen->getButton("intensity")->setHoverable(isEnabled);
 		screen->getButton("speed")->setHoverable(isEnabled);
 
 		// Update button text contents

@@ -210,8 +210,8 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_move(arguments[0].getString(), factor);
+				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.imageEntity_move(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -349,8 +349,8 @@ bool ScriptInterpreter::_executeFe3dImageEntityFunction(const string& functionNa
 			// Validate existing image ID
 			if (_validateFe3dImageEntity(arguments[0].getString()))
 			{
-				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				_fe3d.imageEntity_scale(arguments[0].getString(), factor);
+				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.imageEntity_scale(arguments[0].getString(), change);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

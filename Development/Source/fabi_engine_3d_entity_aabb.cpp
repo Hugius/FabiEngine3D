@@ -62,14 +62,14 @@ void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
 	_core->_aabbEntityManager.getEntity(ID)->setSize(size);
 }
 
-void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor)
+void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 change)
 {
-	_core->_aabbEntityManager.getEntity(ID)->move(factor);
+	_core->_aabbEntityManager.getEntity(ID)->move(change);
 }
 
-void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor)
+void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 change)
 {
-	_core->_aabbEntityManager.getEntity(ID)->scale(factor);
+	_core->_aabbEntityManager.getEntity(ID)->scale(change);
 }
 
 void FabiEngine3D::aabbEntity_moveTo(const string& ID, Vec3 target, float speed)

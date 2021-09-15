@@ -200,9 +200,9 @@ void FabiEngine3D::waterEntity_setWaveHeight(const string& ID, float height)
 	_core->_waterEntityManager.getEntity(ID)->setWaveHeight(height);
 }
 
-void FabiEngine3D::waterEntity_setSpecularShininess(const string& ID, float factor)
+void FabiEngine3D::waterEntity_setSpecularShininess(const string& ID, float shininess)
 {
-	_core->_waterEntityManager.getEntity(ID)->setSpecularShininess(factor);
+	_core->_waterEntityManager.getEntity(ID)->setSpecularShininess(shininess);
 }
 
 void FabiEngine3D::waterEntity_setSpecularIntensity(const string& ID, float intensity)

@@ -653,7 +653,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		// Sky exposure settings
 		if (_fe3d.gfx_isSkyExposureEnabled())
 		{
-			file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureFactor() << " " << _fe3d.gfx_getSkyExposureSpeed() << endl;
+			file << "GRAPHICS_SKY_EXPOSURE " << _fe3d.gfx_getSkyExposureIntensity() << " " << _fe3d.gfx_getSkyExposureSpeed() << endl;
 		}
 
 		// Bloom settings

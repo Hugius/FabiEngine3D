@@ -386,9 +386,9 @@ void FabiEngine3D::terrainEntity_setBlendRepeatB(const string& ID, float repeat)
 	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatB(repeat);
 }
 
-void FabiEngine3D::terrainEntity_setSpecularShininess(const string& ID, float factor)
+void FabiEngine3D::terrainEntity_setSpecularShininess(const string& ID, float shininess)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setSpecularShininess(factor);
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularShininess(shininess);
 }
 
 void FabiEngine3D::terrainEntity_setSpecularIntensity(const string& ID, float intensity)

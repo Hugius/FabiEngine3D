@@ -47,9 +47,9 @@ void FabiEngine3D::lightEntity_setPosition(const string& ID, Vec3 position)
 	_core->_lightEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::lightEntity_move(const string& ID, Vec3 factor)
+void FabiEngine3D::lightEntity_move(const string& ID, Vec3 change)
 {
-	_core->_lightEntityManager.getEntity(ID)->move(factor);
+	_core->_lightEntityManager.getEntity(ID)->move(change);
 }
 
 void FabiEngine3D::lightEntity_moveTo(const string& ID, Vec3 target, float speed)

@@ -567,13 +567,13 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		else if (lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
 			// Data placeholders
-			float factor, speed;
+			float intensity, speed;
 
 			// Extract data
-			iss >> factor >> speed;
+			iss >> intensity >> speed;
 
 			// Enable sky exposure
-			_fe3d.gfx_enableSkyExposure(factor, speed);
+			_fe3d.gfx_enableSkyExposure(intensity, speed);
 		}
 		else if (lineType == "GRAPHICS_BLOOM")
 		{

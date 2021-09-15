@@ -26,9 +26,9 @@ void FabiEngine3D::reflectionEntity_setPosition(const string& ID, Vec3 position)
 	_core->_reflectionEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::reflectionEntity_move(const string& ID, Vec3 factor)
+void FabiEngine3D::reflectionEntity_move(const string& ID, Vec3 change)
 {
-	_core->_reflectionEntityManager.getEntity(ID)->move(factor);
+	_core->_reflectionEntityManager.getEntity(ID)->move(change);
 }
 
 void FabiEngine3D::reflectionEntity_moveTo(const string& ID, Vec3 target, float speed)

@@ -17,10 +17,10 @@ public:
 	void selectMainSky(const string& ID);
 	void selectMixSky(const string& ID);
 	void update() override;
-	void setExposureFactor(float skyExposureFactor);
+	void setExposureIntensity(float intensity);
 	void setExposureSpeed(float speed);
 
-	float getSkyExposureFactor();
+	float getSkyExposureIntensity();
 	float getSkyExposureSpeed();
 
 private:
@@ -29,6 +29,6 @@ private:
 	string _selectedMainID = "";
 	string _selectedMixID = "";
 
-	float _exposureFactor = 0.0f;
+	float _exposureIntensity = 0.0f;
 	float _exposureSpeed = 0.0f;
 };

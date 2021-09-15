@@ -145,7 +145,7 @@ void FabiEngine3D::gfx_enableBloom(BloomType type, float intensity, unsigned int
 	_core->_renderBus.setBloomBlurCount(blurCount);
 }
 
-void FabiEngine3D::gfx_enableSkyExposure(float factor, float speed)
+void FabiEngine3D::gfx_enableSkyExposure(float intensity, float speed)
 {
 	if (_core->_renderBus.isSkyExposureEnabled())
 	{
@@ -154,7 +154,7 @@ void FabiEngine3D::gfx_enableSkyExposure(float factor, float speed)
 	}
 
 	_core->_renderBus.setSkyExposureEnabled(true);
-	_core->_skyEntityManager.setExposureFactor(factor);
+	_core->_skyEntityManager.setExposureIntensity(intensity);
 	_core->_skyEntityManager.setExposureSpeed(speed);
 }
 
@@ -330,7 +330,7 @@ void FabiEngine3D::gfx_disableSkyExposure(bool resetProperties)
 
 	if (resetProperties)
 	{
-		_core->_skyEntityManager.setExposureFactor(0.0f);
+		_core->_skyEntityManager.setExposureIntensity(0.0f);
 	}
 }
 

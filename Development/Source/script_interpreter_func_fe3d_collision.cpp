@@ -50,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:collision_enable_camera_aabb_response")
+	else if (functionName == "fe3d:collision_enable_camera_response")
 	{
 		// xResponse yResponse zResponse
 		auto types =
@@ -65,7 +65,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:collision_disable_camera_aabb_response")
+	else if (functionName == "fe3d:collision_disable_camera_response")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			// Check if AABB found
 			if (!foundAabbID.empty())
 			{
-				// Check if AABB has modelEntity parent
+				// Check if AABB has model parent
 				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
 					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 				{
@@ -157,9 +157,97 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			// Check if AABB found
 			if (!foundAabbID.empty())
 			{
-				// Check if AABB has modelEntity parent
+				// Check if AABB has model parent
 				if (_fe3d.aabbEntity_hasParent(foundAabbID) && 
 					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
+				{
+					// Check direction
+					auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
+					auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
+					auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
+					if ((directionX && arguments[0].getString() == "X") ||
+						(directionY && arguments[0].getString() == "Y") ||
+						(directionZ && arguments[0].getString() == "Z") ||
+						((directionX || directionY || directionZ) && arguments[0].getString().empty()))
+					{
+						result = _fe3d.aabbEntity_getParentID(foundAabbID);
+					}
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:collision_check_camera_billboard")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate direction
+			if (arguments[1].getString() != "X" && arguments[1].getString() != "Y" &&
+				arguments[1].getString() != "Z" && arguments[1].getString() != "")
+			{
+				_throwScriptError("invalid direction argument!");
+				return true;
+			}
+
+			// Find aabbEntity
+			string result = "";
+			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(arguments[0].getString());
+
+			// Check if AABB found
+			if (!foundAabbID.empty())
+			{
+				// Check if AABB has billboard parent
+				if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
+					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
+				{
+					// Check direction
+					auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
+					auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
+					auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
+					if ((directionX && arguments[1].getString() == "X") ||
+						(directionY && arguments[1].getString() == "Y") ||
+						(directionZ && arguments[1].getString() == "Z") ||
+						((directionX || directionY || directionZ) && arguments[1].getString().empty()))
+					{
+						result = _fe3d.aabbEntity_getParentID(foundAabbID);
+					}
+				}
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:collision_check_camera_billboards")
+	{
+		auto types = { ScriptValueType::STRING }; // Direction
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate direction
+			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
+				arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			{
+				_throwScriptError("invalid direction argument!");
+				return true;
+			}
+
+			// Find aabbEntity
+			string result = "";
+			auto foundAabbID = _fe3d.collision_checkCameraWithAny();
+
+			// Check if AABB found
+			if (!foundAabbID.empty())
+			{
+				// Check if AABB has billboard parent
+				if (_fe3d.aabbEntity_hasParent(foundAabbID) &&
+					(_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
 				{
 					// Check direction
 					auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
@@ -266,11 +354,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:collision_check_model_models")
 	{
-		auto types = 
-		{ 
-			ScriptValueType::STRING, ScriptValueType::STRING, // ModelEntity ID + aabbEntity part ID
-			ScriptValueType::STRING, ScriptValueType::STRING  // ModelEntity ID + aabbEntity part ID
-		};
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -367,10 +451,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:collision_check_model_billboards")
 	{
-		auto types =
-		{
-			ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING
-		};
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -431,11 +512,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:collision_check_model_aabbs")
 	{
-		auto types =
-		{
-			ScriptValueType::STRING, ScriptValueType::STRING, // ModelEntity ID + aabbEntity part ID
-			ScriptValueType::STRING // aabbEntity ID
-		};
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING,ScriptValueType::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -88,7 +88,6 @@ void BillboardEditor::unload()
 	_currentBillboardID = "";
 	_isCreatingBillboard = false;
 	_isChoosingBillboard = false;
-	_isEditingBillboard = false;
 	_isDeletingBillboard = false;
 	_isEditorLoaded = false;
 

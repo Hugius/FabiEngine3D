@@ -62,30 +62,23 @@ void WaterEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
-			_isCreatingWater = true;
 			_gui.getGlobalScreen()->createValueForm("waterCreate", "Create Water", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingWater = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_isChoosingWater = true;
-			_isEditingWater = true;
 			auto IDs = getLoadedWaterIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
+			for (auto& ID : IDs) { ID = ID.substr(1); }
 			_gui.getGlobalScreen()->createChoiceForm("waterList", "Edit Water", Vec2(0.0f, 0.1f), IDs);
+			_isChoosingWater = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			auto IDs = getLoadedWaterIDs();
+			for (auto& ID : IDs) { ID = ID.substr(1); }
+			_gui.getGlobalScreen()->createChoiceForm("waterList", "Delete Water", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingWater = true;
 			_isDeletingWater = true;
-			auto IDs = getLoadedWaterIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("waterList", "Delete Water", Vec2(0.0f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -121,7 +114,6 @@ void WaterEditor::_updateChoiceMenu()
 			_fe3d.waterEntity_setWireFramed(_currentWaterID, false);
 			_fe3d.waterEntity_select("");
 			_currentWaterID = "";
-			_isEditingWater = false;
 			return;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
@@ -182,7 +174,6 @@ void WaterEditor::_updateWaterCreating()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + newWaterID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), true);
 							_isCreatingWater = false;
-							_isEditingWater = true;
 						}
 					}
 					else
@@ -226,7 +217,7 @@ void WaterEditor::_updateWaterChoosing()
 				_currentWaterID = ("@" + selectedButtonID);
 
 				// Go to editor
-				if (_isEditingWater)
+				if (!_isDeletingWater)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("waterID")->getEntityID(), "Water: " + _currentWaterID.substr(1), 0.025f);
@@ -241,7 +232,6 @@ void WaterEditor::_updateWaterChoosing()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList")) // Cancelled choosing
 		{
 			_isChoosingWater = false;
-			_isEditingWater = false;
 			_isDeletingWater = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("waterList");
 		}

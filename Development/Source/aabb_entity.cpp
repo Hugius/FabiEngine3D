@@ -61,7 +61,7 @@ void AabbEntity::updateTransformationMatrix()
 	Matrix44 scalingMatrix = Math::createScalingMatrix(_size.x, _size.y, _size.z);
 
 	// Final matrix
-	_transformationMatrix = translationMatrix * scalingMatrix;
+	_transformationMatrix = (translationMatrix * scalingMatrix);
 }
 
 void AabbEntity::setParent(const string& ID, AabbParentType type)

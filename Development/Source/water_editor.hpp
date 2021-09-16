@@ -63,9 +63,8 @@ private:
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 
 	// Booleans
-	bool _isEditorLoaded = false;
 	bool _isCreatingWater = false;
 	bool _isChoosingWater = false;
-	bool _isEditingWater = false;
 	bool _isDeletingWater = false;
+	bool _isEditorLoaded = false;
 };

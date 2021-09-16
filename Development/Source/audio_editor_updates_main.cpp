@@ -49,25 +49,18 @@ void AudioEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_isChoosingAudio = true;
-			_isEditingAudio = true;
 			auto IDs = getLoadedAudioIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
+			for (auto& ID : IDs) { ID = ID.substr(1); }
 			_gui.getGlobalScreen()->createChoiceForm("audioList", "Edit Audio", Vec2(0.0f, 0.1f), IDs);
+			_isChoosingAudio = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			auto IDs = getLoadedAudioIDs();
+			for (auto& ID : IDs) { ID = ID.substr(1); }
+			_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingAudio = true;
 			_isDeletingAudio = true;
-			auto IDs = getLoadedAudioIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("audioList", "Delete Audio", Vec2(0.0f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -156,7 +149,6 @@ void AudioEditor::_updateAudioCreating()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + newAudioID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), true);
 							_isCreatingAudio = false;
-							_isEditingAudio = true;
 						}
 					}
 					else // ID already exists
@@ -194,7 +186,7 @@ void AudioEditor::_updateAudioChoosing()
 				_currentAudioID = ("@" + selectedButtonID);
 
 				// Go to editor
-				if (_isEditingAudio)
+				if (!_isDeletingAudio)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), "Audio: " + selectedButtonID.substr(1), 0.025f);
@@ -209,7 +201,6 @@ void AudioEditor::_updateAudioChoosing()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("audioList")) // Cancelled choosing
 		{
 			_isChoosingAudio = false;
-			_isEditingAudio = false;
 			_isDeletingAudio = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("audioList");
 		}

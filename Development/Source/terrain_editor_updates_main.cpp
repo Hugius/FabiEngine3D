@@ -69,25 +69,18 @@ void TerrainEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_isChoosingTerrain = true;
-			_isEditingTerrain = true;
 			auto IDs = getLoadedTerrainIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
+			for (auto& ID : IDs) { ID = ID.substr(1); }
 			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Edit Terrain", Vec2(0.0f, 0.1f), IDs);
+			_isChoosingTerrain = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			auto IDs = getLoadedTerrainIDs();
+			for (auto& ID : IDs) { ID = ID.substr(1); }
+			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Delete Terrain", Vec2(0.0f, 0.1f), IDs);
 			_isChoosingTerrain = true;
 			_isDeletingTerrain = true;
-			auto IDs = getLoadedTerrainIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Delete Terrain", Vec2(0.0f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -123,7 +116,6 @@ void TerrainEditor::_updateChoiceMenu()
 			_fe3d.terrainEntity_setWireFramed(_currentTerrainID, false);
 			_fe3d.terrainEntity_select("");
 			_currentTerrainID = "";
-			_isEditingTerrain = false;
 			return;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
@@ -215,7 +207,6 @@ void TerrainEditor::_updateTerrainCreating()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + newTerrainID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), true);
 							_isCreatingTerrain = false;
-							_isEditingTerrain = true;
 						}
 					}
 					else
@@ -259,7 +250,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				_currentTerrainID = ("@" + selectedButtonID);
 
 				// Go to editor
-				if (_isEditingTerrain)
+				if (!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("terrainID")->getEntityID(), "Terrain: " + _currentTerrainID.substr(1), 0.025f);
@@ -274,7 +265,6 @@ void TerrainEditor::_updateTerrainChoosing()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 		{
 			_isChoosingTerrain = false;
-			_isEditingTerrain = false;
 			_isDeletingTerrain = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("terrainList");
 		}

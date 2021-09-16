@@ -99,7 +99,6 @@ private:
 	bool _mustUpdateCurrentFramePreview = true;
 	bool _isCreatingAnimation = false;
 	bool _isChoosingAnimation = false;
-	bool _isEditingAnimation = false;
 	bool _isDeletingAnimation = false;
 	bool _isEditorLoaded = false;
 };

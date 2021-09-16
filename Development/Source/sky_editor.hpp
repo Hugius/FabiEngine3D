@@ -53,9 +53,8 @@ private:
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
 
 	// Booleans
-	bool _isEditorLoaded = false;
 	bool _isCreatingSky = false;
 	bool _isChoosingSky = false;
-	bool _isEditingSky = false;
 	bool _isDeletingSky = false;
+	bool _isEditorLoaded = false;
 };

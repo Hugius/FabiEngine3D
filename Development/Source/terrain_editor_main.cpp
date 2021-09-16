@@ -70,7 +70,6 @@ void TerrainEditor::unload()
 	_isEditorLoaded = false;
 	_isCreatingTerrain = false;
 	_isChoosingTerrain = false;
-	_isEditingTerrain = false;
 	_isDeletingTerrain = false;
 
 	// Miscellaneous

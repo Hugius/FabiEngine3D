@@ -56,7 +56,6 @@ void AudioEditor::unload()
 	_isEditorLoaded = false;
 	_isCreatingAudio = false;
 	_isChoosingAudio = false;
-	_isEditingAudio = false;
 	_isDeletingAudio = false;
 
 	// Miscellaneous

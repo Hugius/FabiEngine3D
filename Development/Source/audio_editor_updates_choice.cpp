@@ -27,7 +27,6 @@ void AudioEditor::_updateChoiceMenu()
 			// Miscellaneous
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("audioID")->getEntityID(), false);
 			_currentAudioID = "";
-			_isEditingAudio = false;
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuMain");
 			return;
 		}

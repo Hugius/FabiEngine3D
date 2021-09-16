@@ -46,7 +46,6 @@ void SkyEditor::unload()
 	_isEditorLoaded = false;
 	_isCreatingSky = false;
 	_isChoosingSky = false;
-	_isEditingSky = false;
 	_isDeletingSky = false;
 
 	// Miscellaneous

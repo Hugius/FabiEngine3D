@@ -65,9 +65,8 @@ private:
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 
 	// Booleans
-	bool _isEditorLoaded = false;
 	bool _isCreatingTerrain = false;
 	bool _isChoosingTerrain = false;
-	bool _isEditingTerrain = false;
 	bool _isDeletingTerrain = false;
+	bool _isEditorLoaded = false;
 };

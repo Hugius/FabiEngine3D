@@ -257,7 +257,7 @@ private:
 	bool _dontResetSelectedCamera = false;
 	bool _isPlacingLight = false;
 	bool _isPlacingReflection = false;
-	bool _isEditorLoaded = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
+	bool _isEditorLoaded = false;
 };

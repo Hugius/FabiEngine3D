@@ -102,7 +102,6 @@ void AnimationEditor::unload()
 	_mustUpdateCurrentFramePreview = true;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
-	_isEditingAnimation = false;
 	_isDeletingAnimation = false;
 	_isEditorLoaded = false;
 

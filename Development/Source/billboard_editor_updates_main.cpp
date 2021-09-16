@@ -71,25 +71,18 @@ void BillboardEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_isChoosingBillboard = true;
-			_isEditingBillboard = true;
 			auto IDs = getLoadedBillboardIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
+			for (auto& ID : IDs) { ID = ID.substr(1); }
 			_gui.getGlobalScreen()->createChoiceForm("billboardList", "Edit Billboard", Vec2(-0.5f, 0.1f), IDs);
+			_isChoosingBillboard = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			auto IDs = getLoadedBillboardIDs();
+			for (auto& ID : IDs) { ID = ID.substr(1); }
+			_gui.getGlobalScreen()->createChoiceForm("billboardList", "Delete Billboard", Vec2(-0.5f, 0.1f), IDs);
 			_isChoosingBillboard = true;
 			_isDeletingBillboard = true;
-			auto IDs = getLoadedBillboardIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("billboardList", "Delete Billboard", Vec2(-0.5f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -124,7 +117,6 @@ void BillboardEditor::_updateChoiceMenu()
 			_fe3d.billboardEntity_setVisible(_currentBillboardID, false);
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), false);
 			_currentBillboardID = "";
-			_isEditingBillboard = false;
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 			return;
 		}
@@ -188,7 +180,6 @@ void BillboardEditor::_updateBillboardCreating()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + newBillboardID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), true);
 							_isCreatingBillboard = false;
-							_isEditingBillboard = true;
 						}
 					}
 					else
@@ -236,7 +227,7 @@ void BillboardEditor::_updateBillboardChoosing()
 				_hoveredBillboardID = "";
 
 				// Go to editor
-				if (_isEditingBillboard)
+				if (!_isDeletingBillboard)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("billboardID")->getEntityID(), "Billboard: " + _currentBillboardID.substr(1), 0.025f);
@@ -257,7 +248,6 @@ void BillboardEditor::_updateBillboardChoosing()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("billboardList")) // Cancelled choosing
 		{
 			_isChoosingBillboard = false;
-			_isEditingBillboard = false;
 			_isDeletingBillboard = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("billboardList");
 		}

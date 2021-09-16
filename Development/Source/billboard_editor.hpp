@@ -68,7 +68,6 @@ private:
 	// Booleans
 	bool _isCreatingBillboard = false;
 	bool _isChoosingBillboard = false;
-	bool _isEditingBillboard = false;
 	bool _isDeletingBillboard = false;
 	bool _isEditorLoaded = false;
 };

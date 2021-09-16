@@ -88,17 +88,7 @@ private:
 	unsigned int _originalBloomSize = 0;
 	unsigned int _passedFrames = 0;
 
-	// Booleans
-	bool _isEditorLoaded = false;
-	bool _wasAntiAliasingEnabled = false;
-	bool _isScriptLoadedFromFile = false;
-	bool _isWritingScript = false;
-	bool _isSingleActionAllowed = true;
-	bool _isContinuousActionAllowed = false;
-	bool _wasGuiFocused = false;
-	bool _hasClickedLMB = false;
-
-	// Miscellaneous
+	// Characters
 	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
@@ -125,6 +115,18 @@ private:
 		{'-', '_'  },
 		{'=', '+'  }
 	};
+
+	// Booleans
+	bool _wasAntiAliasingEnabled = false;
+	bool _isScriptLoadedFromFile = false;
+	bool _isWritingScript = false;
+	bool _isSingleActionAllowed = true;
+	bool _isContinuousActionAllowed = false;
+	bool _wasGuiFocused = false;
+	bool _hasClickedLMB = false;
+	bool _isEditorLoaded = false;
+
+	// Miscellaneous
 	static inline const vector<InputType> ACTION_KEYS =
 	{ 
 		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, 

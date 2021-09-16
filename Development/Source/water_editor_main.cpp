@@ -71,7 +71,6 @@ void WaterEditor::unload()
 	_isEditorLoaded = false;
 	_isCreatingWater = false;
 	_isChoosingWater = false;
-	_isEditingWater = false;
 	_isDeletingWater = false;
 
 	// Miscellaneous

@@ -553,7 +553,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), false, true);
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), AabbParentType::BILLBOARD_ENTITY);
 
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())
@@ -584,7 +584,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), false, true);
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), AabbParentType::BILLBOARD_ENTITY);
 
 				// Check if billboardEntity has no AABBs
 				if (aabbIDs.empty())

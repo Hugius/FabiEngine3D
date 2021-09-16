@@ -67,9 +67,6 @@
     <Filter Include="Scene Editor\Miscellaneous">
       <UniqueIdentifier>{5aa80d36-fbba-4b8a-8a17-87b4ad255715}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Persistence">
-      <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script Editor">
       <UniqueIdentifier>{d7b6a7a0-0d31-44c7-a5d5-605afe7eaad4}</UniqueIdentifier>
     </Filter>
@@ -121,12 +118,6 @@
     <Filter Include="Terrain Editor\Miscellaneous">
       <UniqueIdentifier>{874f3f11-4af9-4678-b56b-09709d9252bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Persistence\Editor">
-      <UniqueIdentifier>{d501544b-39db-41f9-9471-343b717f5762}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene Editor\Persistence\Custom">
-      <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene Editor\Billboard">
       <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
     </Filter>
@@ -150,6 +141,15 @@
     </Filter>
     <Filter Include="Scene Editor\Reflection">
       <UniqueIdentifier>{22fd3606-00be-4ca6-8682-ac1f43f7a6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Persistence">
+      <UniqueIdentifier>{4f779ec4-4d0d-44ed-92ff-ad5c3244da08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Persistence\Editor">
+      <UniqueIdentifier>{d501544b-39db-41f9-9471-343b717f5762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Persistence\Custom">
+      <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,9 +235,6 @@
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">
-      <Filter>Model Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_loading.cpp">

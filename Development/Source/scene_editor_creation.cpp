@@ -210,7 +210,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getSize(previewID, ""));
 
 	// Bind AABB entities to model entity
-	for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
+	for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, AabbParentType::MODEL_ENTITY))
 	{
 		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
 		_fe3d.aabbEntity_create(newAabbID);

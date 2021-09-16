@@ -17,19 +17,19 @@ void ModelEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateOptionsMenu();
-	}
-	if (_isEditorLoaded)
-	{
 		_updateLightingMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateSizeMenu();
+		_updateOptionsMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateAabbMenu();
+		_updateMainAabbMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateChoiceAabbMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -42,6 +42,18 @@ void ModelEditor::update()
 	if (_isEditorLoaded)
 	{
 		_updateModelDeleting();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAabbCreating();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAabbChoosing();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateAabbDeleting();
 	}
 	if (_isEditorLoaded)
 	{
@@ -73,25 +85,18 @@ void ModelEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_isChoosingModel = true;
-			_isEditingModel = true;
 			auto IDs = getLoadedModelIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
+			for (auto& ID : IDs) { ID = ID.substr(1); }
 			_gui.getGlobalScreen()->createChoiceForm("modelList", "Edit Model", Vec2(-0.5f, 0.1f), IDs);
+			_isChoosingModel = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
+			auto IDs = getLoadedModelIDs();
+			for (auto& ID : IDs) { ID = ID.substr(1); }
+			_gui.getGlobalScreen()->createChoiceForm("modelList", "Delete Model", Vec2(-0.5f, 0.1f), IDs);
 			_isChoosingModel = true;
 			_isDeletingModel = true;
-			auto IDs = getLoadedModelIDs();
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(1);
-			}
-			_gui.getGlobalScreen()->createChoiceForm("modelList", "Delete Model", Vec2(-0.5f, 0.1f), IDs);
 		}
 
 		// Update answer forms
@@ -127,7 +132,6 @@ void ModelEditor::_updateChoiceMenu()
 			_fe3d.modelEntity_setVisible(_currentModelID, false);
 
 			// Go back to main screen
-			_isEditingModel = false;
 			_currentModelID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), false);
@@ -137,21 +141,17 @@ void ModelEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMesh");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
-		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuOptions");
-		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuLighting");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuOptions");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("aabb")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d.misc_enableAabbFrameRendering();
 		}
 
@@ -164,6 +164,7 @@ void ModelEditor::_updateModelCreating()
 {
 	if (_isCreatingModel)
 	{
+		// Temporary values
 		string newModelID;
 
 		// Check if user filled in a new ID
@@ -229,7 +230,6 @@ void ModelEditor::_updateModelCreating()
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + newModelID.substr(1), 0.025f);
 							_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 							_isCreatingModel = false;
-							_isEditingModel = true;
 						}
 					}
 					else
@@ -277,7 +277,7 @@ void ModelEditor::_updateModelChoosing()
 				_hoveredModelID = "";
 
 				// Go to editor
-				if (_isEditingModel)
+				if (!_isDeletingModel)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentModelID.substr(1), 0.025f);
@@ -293,7 +293,6 @@ void ModelEditor::_updateModelChoosing()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 		{
 			_isChoosingModel = false;
-			_isEditingModel = false;
 			_isDeletingModel = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("modelList");
 		}

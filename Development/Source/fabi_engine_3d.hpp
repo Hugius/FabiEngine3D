@@ -452,7 +452,7 @@ public:
 	void aabbEntity_scaleTo(const string& ID, Vec3 target, float speed);
 
 	// AABB entity interface - getters
-	const vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
+	const vector<string> aabbEntity_getBoundIDs(const string& parentID, AabbParentType parentType);
 	const vector<string> aabbEntity_getAllIDs();
 	const string& aabbEntity_getParentID(const string& ID);
 	const Vec3 aabbEntity_getPosition(const string& ID);

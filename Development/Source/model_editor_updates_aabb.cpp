@@ -3,266 +3,232 @@
 
 #include <algorithm>
 
-void ModelEditor::_updateAabbMenu()
+void ModelEditor::_updateMainAabbMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "modelEditorMenuAabb")
+	if (screen->getID() == "modelEditorMenuAabbMain")
 	{
-		// Temporary values
-		const string directions[3] = { "X", "Y", "Z" };
-		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID, "");
-
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			_isMovingToggled = false;
-			_isResizingToggled = false;
-			_transformationDirection = Direction::X;
-			_currentAabbID = "";
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			_fe3d.misc_disableAabbFrameRendering();
-			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), false);
 			return;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("aabbCreate", "Create AABB", "", Vec2(0.0f, 0.1f), Vec2(0.5f, 0.1f), Vec2(0.0f, 0.1f));
+			_isCreatingAabb = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			// Retrieve all AABB names of this model
-			vector<string> IDs = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
-			for (auto& ID : IDs)
-			{
-				ID = ID.substr(string(_currentModelID + "@").size());
-			}
+			auto IDs = _fe3d.aabbEntity_getBoundIDs(_currentModelID, AabbParentType::MODEL_ENTITY);
+			for (auto& ID : IDs) { ID = ID.substr(string(_currentModelID + "@").size()); }
 			sort(IDs.begin(), IDs.end());
-
-			// Show choicelist
 			_gui.getGlobalScreen()->createChoiceForm("aabbList", "Edit AABB", Vec2(-0.5f, 0.1f), IDs);
+			_isChoosingAabb = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_isMovingToggled = false;
-			_isResizingToggled = false;
-			_transformationDirection = Direction::X;
-			_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
+			auto IDs = _fe3d.aabbEntity_getBoundIDs(_currentModelID, AabbParentType::MODEL_ENTITY);
+			for (auto& ID : IDs) { ID = ID.substr(string(_currentModelID + "@").size()); }
+			sort(IDs.begin(), IDs.end());
+			_gui.getGlobalScreen()->createChoiceForm("aabbList", "Delete AABB", Vec2(-0.5f, 0.1f), IDs);
+			_isChoosingAabb = true;
+			_isDeletingAabb = true;
+		}
+	}
+}
+
+void ModelEditor::_updateChoiceAabbMenu()
+{
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// Screen management
+	if (screen->getID() == "modelEditorMenuAabbChoice")
+	{
+		// Temporary values
+		auto position = _fe3d.aabbEntity_getPosition(_currentModelID + "@" + _currentAabbID);
+		auto size = _fe3d.aabbEntity_getSize(_currentModelID + "@" + _currentAabbID);
+
+		// Button management
+		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+		{
 			_currentAabbID = "";
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbMain");
 			_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), false);
+			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("speed")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("speed", "Transformation Speed", (_aabbTransformationSpeed * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("positionX", "X", (position.x * 100.0f), Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("positionY", "Y", (position.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("positionZ", "Z", (position.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("toggleMove")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_isMovingToggled = !_isMovingToggled;
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("toggleResize")->isHovered())
-		{
-			_isResizingToggled = !_isResizingToggled;
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("direction")->isHovered())
-		{
-			if (_transformationDirection == Direction::X)
-			{
-				_transformationDirection = Direction::Y;
-			}
-			else if (_transformationDirection == Direction::Y)
-			{
-				_transformationDirection = Direction::Z;
-			}
-			else
-			{
-				_transformationDirection = Direction::X;
-			}
-		}
-
-		// Update buttons hoverability
-		screen->getButton("delete")->setHoverable(_currentAabbID != "");
-		screen->getButton("toggleMove")->setHoverable(_currentAabbID != "");
-		screen->getButton("toggleResize")->setHoverable(_currentAabbID != "");
-		screen->getButton("direction")->setHoverable(_currentAabbID != "");
-
-		// Update button text contents
-		screen->getButton("direction")->changeTextContent("Direction: " + directions[static_cast<int>(_transformationDirection)]);
-		screen->getButton("toggleMove")->changeTextContent(_isMovingToggled ? "Move: ON" : "Move: OFF");
-		screen->getButton("toggleResize")->changeTextContent(_isResizingToggled ? "Resize: ON" : "Resize: OFF");
-
-		// Update AABB visibility
-		for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())
-		{
-			if (entityID == (_currentModelID + "@" + _currentAabbID))
-			{
-				_fe3d.aabbEntity_setVisible(entityID, true);
-			}
-			else
-			{
-				_fe3d.aabbEntity_setVisible(entityID, false);
-			}
+			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", (size.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("positionX", position.x))
 		{
-			_aabbTransformationSpeed /= 100.0f;
+			position.x /= 100.0f;
+			_fe3d.aabbEntity_setLocalPosition((_currentModelID + "@" + _currentAabbID), position);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("positionY", position.y))
+		{
+			position.y /= 100.0f;
+			_fe3d.aabbEntity_setLocalPosition((_currentModelID + "@" + _currentAabbID), position);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("positionZ", position.z))
+		{
+			position.z /= 100.0f;
+			_fe3d.aabbEntity_setLocalPosition((_currentModelID + "@" + _currentAabbID), position);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
+		{
+			size.x /= 100.0f;
+			_fe3d.aabbEntity_setLocalSize((_currentModelID + "@" + _currentAabbID), size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
+		{
+			size.y /= 100.0f;
+			_fe3d.aabbEntity_setLocalSize((_currentModelID + "@" + _currentAabbID), size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
+		{
+			size.z /= 100.0f;
+			_fe3d.aabbEntity_setLocalSize((_currentModelID + "@" + _currentAabbID), size);
+		}
+	}
+}
+
+void ModelEditor::_updateAabbCreating()
+{
+	if (_isCreatingAabb)
+	{
+		// Temporary values
+		string newAabbID;
 
 		// Check if user filled in a new ID
-		string newAabbID;
 		if (_gui.getGlobalScreen()->checkValueForm("aabbCreate", newAabbID, {}))
 		{
-			if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbID)) // Check if already exists
+			// @ sign not allowed
+			if (newAabbID.find('@') == string::npos)
 			{
-				Logger::throwWarning("AABB with ID \"" + newAabbID + "\" of model with ID \"" + _currentModelID.substr(1) + "\" already exists!");
-			}
-			else
-			{
-				// @ sign not allowed
-				if (newAabbID.find('@') == string::npos)
+				// Spaces not allowed
+				if (newAabbID.find(' ') == string::npos)
 				{
-					// Spaces not allowed
-					if (newAabbID.find(' ') == string::npos)
+					// If AABB not existing yet
+					if (!_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbID))
 					{
-						// Bind AABB
-						_fe3d.aabbEntity_create(_currentModelID + "@" + newAabbID);
-						_fe3d.aabbEntity_bindToModelEntity((_currentModelID + "@" + newAabbID), _currentModelID);
+						// Select AABB
 						_currentAabbID = newAabbID;
 
-						// Reset editing
-						_isMovingToggled = false;
-						_isResizingToggled = false;
-						_transformationDirection = Direction::X;
+						// Bind AABB
+						_fe3d.aabbEntity_create(_currentModelID + "@" + _currentAabbID);
+						_fe3d.aabbEntity_bindToModelEntity((_currentModelID + "@" + _currentAabbID), _currentModelID);
 
-						// Show AABB title
+						// Miscellaneous
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), "AABB: " + _currentAabbID, 0.025f);
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), true);
+						_isCreatingAabb = false;
 					}
 					else
 					{
-						Logger::throwWarning("AABB ID cannot contain any spaces!");
+						Logger::throwWarning("AABB with ID \"" + newAabbID + "\" already exists!");
 					}
 				}
 				else
 				{
-					Logger::throwWarning("AABB ID cannot contain '@'!");
+					Logger::throwWarning("AABB ID cannot contain any spaces!");
 				}
 			}
-		}
-
-		// Choose AABB
-		if (_gui.getGlobalScreen()->isChoiceFormExisting("aabbList"))
-		{
-			string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("aabbList");
-			string hoveredAabbID = "";
-
-			// Hide every AABB
-			for (const auto& entityID : _fe3d.aabbEntity_getAllIDs())
+			else
 			{
-				_fe3d.aabbEntity_setVisible(entityID, false);
+				Logger::throwWarning("AABB ID cannot contain '@'!");
 			}
+		}
+	}
+}
 
-			// Check if a AABB ID is hovered
-			if (!selectedButtonID.empty())
+void ModelEditor::_updateAabbChoosing()
+{
+	if (_isChoosingAabb)
+	{
+		// Temporary values
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("aabbList");
+		string hoveredAabbID = "";
+
+		// Check if a AABB ID is hovered
+		if (!selectedButtonID.empty())
+		{
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
 			{
-				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
+				// Select AABB
+				_currentAabbID = selectedButtonID;
+
+				// Go to editor
+				if (!_isDeletingAabb)
 				{
-					// Set current AABB
-					_currentAabbID = selectedButtonID;
-
-					// Reset editing
-					_isMovingToggled = false;
-					_isResizingToggled = false;
-					_transformationDirection = Direction::X;
-
-					// Show AABB title
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), "AABB: " + _currentAabbID, 0.025f);
 					_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), true);
-					_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
 				}
-				else
-				{
-					hoveredAabbID = selectedButtonID;
-				}
-			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
-			{
-				_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
-			}
 
-			// Show hovered AABB
-			if (hoveredAabbID != "")
+				// Miscellaneous
+				_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
+				_isChoosingAabb = false;
+			}
+			else
 			{
-				_fe3d.aabbEntity_setVisible(_currentModelID + "@" + hoveredAabbID, true);
+				hoveredAabbID = selectedButtonID;
 			}
 		}
-
-		// Check if currently editing an AABB
-		if (_currentAabbID != "" && !_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
+		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
 		{
-			// Update moving through cursor
-			if (_isMovingToggled)
-			{
-				float scrollingDirection = static_cast<float>(_fe3d.input_getMouseWheelY());
-				Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "@" + _currentAabbID);
+			_isChoosingAabb = false;
+			_isDeletingAabb = false;
+			_gui.getGlobalScreen()->deleteChoiceForm("aabbList");
+		}
 
-				// Determine direction
-				switch (_transformationDirection)
-				{
-				case Direction::X:
-					newPosition.x += _aabbTransformationSpeed * scrollingDirection;
-					break;
+		// Show hovered AABB
+		if (hoveredAabbID != "")
+		{
+			//.aabbEntity_setVisible(_currentModelID + "@" + hoveredAabbID, true);
+		}
+	}
+}
 
-				case Direction::Y:
-					newPosition.y += _aabbTransformationSpeed * scrollingDirection;
-					break;
+void ModelEditor::_updateAabbDeleting()
+{
+	if (_isDeletingAabb && _currentAabbID != "")
+	{
+		// Add answer form
+		if (!_gui.getGlobalScreen()->isAnswerFormExisting("delete"))
+		{
+			_gui.getGlobalScreen()->createAnswerForm("delete", "Are You Sure?", Vec2(0.0f, 0.25f));
+		}
 
-				case Direction::Z:
-					newPosition.z += _aabbTransformationSpeed * scrollingDirection;
-					break;
-				}
-
-				// Apply new size
-				_fe3d.aabbEntity_setLocalPosition(_currentModelID + "@" + _currentAabbID, newPosition);
-			}
-
-			// Update resizing through cursor
-			if (_isResizingToggled)
-			{
-				float scrollingDirection = static_cast<float>(_fe3d.input_getMouseWheelY());
-				Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "@" + _currentAabbID);
-
-				// Check if able to scroll
-				if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
-				{
-					switch (_transformationDirection)
-					{
-					case Direction::X:
-					{
-						newSize.x += (_aabbTransformationSpeed * scrollingDirection);
-						break;
-					}
-
-					case Direction::Y:
-					{
-						newSize.y += (_aabbTransformationSpeed * scrollingDirection);
-						break;
-					}
-
-					case Direction::Z:
-					{
-						newSize.z += (_aabbTransformationSpeed * scrollingDirection);
-						break;
-					}
-					}
-				}
-
-				// Apply new size
-				_fe3d.aabbEntity_setLocalSize(_currentModelID + "@" + _currentAabbID, newSize);
-			}
+		// Update answer form
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("delete"))
+		{
+			_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
+			_isDeletingAabb = false;
+			_currentAabbID = "";
+		}
+		if (_gui.getGlobalScreen()->isAnswerFormDenied("delete"))
+		{
+			_isDeletingAabb = false;
+			_currentAabbID = "";
 		}
 	}
 }

@@ -122,7 +122,7 @@ void SceneEditor::_updateModelEditing()
 					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 
 					// AABB
-					for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
+					for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, AabbParentType::MODEL_ENTITY))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 						_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));

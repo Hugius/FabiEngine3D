@@ -83,7 +83,6 @@
     <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_options.cpp" />
-    <ClCompile Include="..\..\Source\model_editor_updates_size.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_edit.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_place.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_main.cpp" />

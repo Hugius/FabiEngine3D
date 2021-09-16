@@ -122,7 +122,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		if (((modelID[0] != '@') || isLodModel) && isCustomSceneModel)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(modelID, true, false);
+			auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(modelID, AabbParentType::MODEL_ENTITY);
 
 			// Data to save
 			auto isVisible = _fe3d.modelEntity_isVisible(modelID);
@@ -325,7 +325,7 @@ bool SceneEditor::saveCustomSceneToFile()
 		if ((billboardID[0] != '@') && isCustomSceneBillboard)
 		{
 			// Retrieve all bound AABB IDs
-			auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(billboardID, false, true);
+			auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(billboardID, AabbParentType::BILLBOARD_ENTITY);
 
 			// Data to save
 			auto isVisible = _fe3d.billboardEntity_isVisible(billboardID);

@@ -64,7 +64,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			vector<Vec3> aabbSizes;
 			if (!isInstanced)
 			{
-				for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
+				for (const auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, AabbParentType::MODEL_ENTITY))
 				{
 					aabbIDs.push_back(aabbID.substr(string(modelID + "_").size()));
 					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));

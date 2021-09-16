@@ -2,7 +2,6 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "direction.hpp"
 #include "reflection_type.hpp"
 
 class ModelEditor final
@@ -32,13 +31,16 @@ private:
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateMeshMenu();
-	void _updateOptionsMenu();
 	void _updateLightingMenu();
-	void _updateSizeMenu();
-	void _updateAabbMenu();
+	void _updateOptionsMenu();
+	void _updateMainAabbMenu();
+	void _updateChoiceAabbMenu();
 	void _updateModelCreating();
 	void _updateModelChoosing();
 	void _updateModelDeleting();
+	void _updateAabbCreating();
+	void _updateAabbChoosing();
+	void _updateAabbDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -67,17 +69,13 @@ private:
 	static inline const float MIN_CAMERA_DISTANCE = 0.5f;
 	static inline const float CAMERA_DISTANCE_SPEED = 0.25f;
 	static inline const float CAMERA_LOOKAT_SPEED = 0.025f;
-	float _aabbTransformationSpeed = 0.1f;
 
 	// Booleans
 	bool _isCreatingModel = false;
 	bool _isChoosingModel = false;
-	bool _isEditingModel = false;
 	bool _isDeletingModel = false;
-	bool _isMovingToggled = false;
-	bool _isResizingToggled = false;
+	bool _isCreatingAabb = false;
+	bool _isChoosingAabb = false;
+	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
-
-	// Miscellaneous
-	Direction _transformationDirection = Direction::X;
 };

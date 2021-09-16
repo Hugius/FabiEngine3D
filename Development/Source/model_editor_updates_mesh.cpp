@@ -10,11 +10,20 @@ void ModelEditor::_updateMeshMenu()
 	// Screen management
 	if (screen->getID() == "modelEditorMenuMesh")
 	{
+		// Temporary values
+		auto size = _fe3d.modelEntity_getSize(_currentModelID, "");
+
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", (size.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadDiffuseMap")->isHovered())
 		{
@@ -40,19 +49,36 @@ void ModelEditor::_updateMeshMenu()
 			_fe3d.modelEntity_setNormalMap(_currentModelID, "");
 		}
 
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
+		{
+			size.x /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
+		{
+			size.y /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
+		{
+			size.z /= 100.0f;
+			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+		}
+
 		// Check if mesh exists
 		bool isExisting = _fe3d.modelEntity_isExisting(_currentModelID);
-		bool hoverable = false;
+		bool isHoverable = false;
 		if (isExisting)
 		{
-			hoverable = (isExisting && !_fe3d.modelEntity_isMultiParted(_currentModelID));
+			isHoverable = (isExisting && !_fe3d.modelEntity_isMultiParted(_currentModelID));
 		}
 
 		// Update buttons hoverability
-		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
-		screen->getButton("loadEmissionMap")->setHoverable(hoverable);
-		screen->getButton("loadReflectionMap")->setHoverable(hoverable);
-		screen->getButton("loadNormalMap")->setHoverable(hoverable);
-		screen->getButton("clearMaps")->setHoverable(hoverable);
+		screen->getButton("loadDiffuseMap")->setHoverable(isHoverable);
+		screen->getButton("loadEmissionMap")->setHoverable(isHoverable);
+		screen->getButton("loadReflectionMap")->setHoverable(isHoverable);
+		screen->getButton("loadNormalMap")->setHoverable(isHoverable);
+		screen->getButton("clearMaps")->setHoverable(isHoverable);
 	}
 }

@@ -540,7 +540,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
 
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
@@ -571,7 +571,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
-				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), AabbParentType::MODEL_ENTITY);
 
 				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())

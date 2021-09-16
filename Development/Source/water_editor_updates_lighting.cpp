@@ -12,7 +12,6 @@ void WaterEditor::_updateLightingMenu()
 		// Temporary values
 		bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
 		bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
-		bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
 		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(_currentWaterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(_currentWaterID);
@@ -32,11 +31,6 @@ void WaterEditor::_updateLightingMenu()
 		{
 			isRefractive = !isRefractive;
 			_fe3d.waterEntity_setRefractive(_currentWaterID, isRefractive);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isRippling")->isHovered())
-		{
-			isRippling = !isRippling;
-			_fe3d.waterEntity_setRippling(_currentWaterID, isRippling);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
@@ -65,14 +59,12 @@ void WaterEditor::_updateLightingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("isRippling")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID));
 		screen->getButton("specularShininess")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
 
 		// Update button text contents
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
-		screen->getButton("isRippling")->changeTextContent(isRippling ? "Rippling: ON" : "Rippling: OFF");
 		screen->getButton("isSpecular")->changeTextContent(isSpecularLighted ? "Specular: ON" : "Specular: OFF");
 	}
 }

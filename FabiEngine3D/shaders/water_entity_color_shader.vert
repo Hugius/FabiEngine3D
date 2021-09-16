@@ -58,7 +58,7 @@ void main()
 		float height = height1 + ((height2 - height1) / 2.0f);
 
 		// Add height to vertex Y
-		newPosition.y += height * u_waveHeight;
+		newPosition.y += (height * u_waveHeight);
 	}
 
 	// Camera spaces

@@ -143,23 +143,23 @@ vec4 calculateWaterColor()
 	reflectionColor *= 1.0f;
 	refractionColor *= 1.0f;
 
-	// Determine which textures to mix
-	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Both
+	// Calculate final color
+	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Refraction & reflection
 	{
 		finalColor = mix(reflectionColor, refractionColor, mixValue); // Refraction fresnel effect
-		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+		finalColor *= u_color;
 	}
 	else if (u_isRefractive) // Only refraction
 	{
 		finalColor = refractionColor; // No fresnel effect
-		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+		finalColor *= u_color;
 	}
 	else if (u_isReflective) // Only reflection
 	{
-		finalColor = mix(reflectionColor, vec3(0.0f), mixValue); // Dark fresnel effect
-		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), mixValue); // Dark fresnel effect
+		finalColor *= u_color;
 	}
-	else // None
+	else // Only color
 	{
 		finalColor = u_color;
 	}

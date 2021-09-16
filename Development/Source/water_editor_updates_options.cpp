@@ -11,7 +11,6 @@ void WaterEditor::_updateOptionsMenu()
 		// Temporary values
 		auto color = _fe3d.waterEntity_getColor(_currentWaterID);
 		auto speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
-		bool isWaving = _fe3d.waterEntity_isWaving(_currentWaterID);
 		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
@@ -26,11 +25,6 @@ void WaterEditor::_updateOptionsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isWaving")->isHovered())
-		{
-			isWaving = !isWaving;
-			_fe3d.waterEntity_setWaving(_currentWaterID, isWaving);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waveHeight")->isHovered())
 		{
@@ -121,12 +115,10 @@ void WaterEditor::_updateOptionsMenu()
 			_fe3d.waterEntity_hasDudvMap(_currentWaterID) ||
 			_fe3d.waterEntity_hasNormalMap(_currentWaterID) ||
 			_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
-		screen->getButton("isWaving")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
 		screen->getButton("speed")->setHoverable(_fe3d.waterEntity_isRippling(_currentWaterID) || _fe3d.waterEntity_isWaving(_currentWaterID));
 
 		// Update button text contents
-		screen->getButton("isWaving")->changeTextContent(isWaving ? "Waving: ON" : "Waving: OFF");
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));
 	}
 }

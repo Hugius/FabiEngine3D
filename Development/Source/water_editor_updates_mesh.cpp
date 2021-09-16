@@ -54,6 +54,7 @@ void WaterEditor::_updateMeshMenu()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
+			_fe3d.waterEntity_setRippling(_currentWaterID, true);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
@@ -120,6 +121,7 @@ void WaterEditor::_updateMeshMenu()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
+			_fe3d.waterEntity_setWaving(_currentWaterID, true);
 		}
 
 		// Update value forms

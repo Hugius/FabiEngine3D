@@ -48,7 +48,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setNormalMap(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMapR")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("red")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -81,7 +81,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMapG")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("green")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -114,7 +114,7 @@ void TerrainEditor::_updateNormalMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMapB")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blue")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -149,8 +149,8 @@ void TerrainEditor::_updateNormalMapMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("normalMapR")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
-		screen->getButton("normalMapG")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
-		screen->getButton("normalMapB")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
+		screen->getButton("red")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
+		screen->getButton("green")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
+		screen->getButton("blue")->setHoverable(_fe3d.terrainEntity_hasBlendMap(_currentTerrainID));
 	}
 }

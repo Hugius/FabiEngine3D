@@ -58,6 +58,7 @@
     <ClCompile Include="..\..\Source\terrain_editor_persistence.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp" />
     <ClCompile Include="..\..\Source\terrain_editor_updates_normal.cpp" />
+    <ClCompile Include="..\..\Source\terrain_editor_updates_options.cpp" />
     <ClCompile Include="..\..\Source\water_editor_main.cpp" />
     <ClCompile Include="..\..\Source\water_editor_misc.cpp" />
     <ClCompile Include="..\..\Source\water_editor_persistence.cpp" />

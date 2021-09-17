@@ -444,6 +444,9 @@
     <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_updates_options.cpp">
+      <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\animation_editor.hpp">

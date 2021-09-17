@@ -29,6 +29,10 @@ void TerrainEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateOptionsMenu();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateTerrainCreating();
 	}
 	if (_isEditorLoaded)
@@ -133,6 +137,10 @@ void TerrainEditor::_updateChoiceMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuOptions");
 		}
 	}
 }

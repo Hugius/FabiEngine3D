@@ -99,6 +99,7 @@ void ModelEditor::_updateLightingMenu()
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("reflectionType")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
 		screen->getButton("reflectivity")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
+		screen->getButton("emissionIntensity")->setHoverable(_fe3d.modelEntity_hasEmissionMap(_currentModelID));
 
 		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");

@@ -103,6 +103,10 @@ void ModelEditor::_updateOptionsMenu()
 			}
 		}
 
+		// Update buttons hoverability
+		screen->getButton("isTransparent")->setHoverable(_fe3d.modelEntity_hasDiffuseMap(_currentModelID));
+		screen->getButton("uvRepeat")->setHoverable(_fe3d.modelEntity_hasDiffuseMap(_currentModelID));
+
 		// Update button text contents
 		screen->getButton("isFaceculled")->changeTextContent(isFaceculled ? "Culling: ON" : "Culling: OFF");
 		screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");

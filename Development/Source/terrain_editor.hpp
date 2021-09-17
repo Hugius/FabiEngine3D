@@ -35,6 +35,7 @@ private:
 	void _updateBlendMapMenu();
 	void _updateNormalMapMenu();
 	void _updateLightingMenu();
+	void _updateOptionsMenu();
 	void _updateTerrainCreating();
 	void _updateTerrainChoosing();
 	void _updateTerrainDeleting();

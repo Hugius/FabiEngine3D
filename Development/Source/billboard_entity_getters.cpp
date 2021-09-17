@@ -75,6 +75,11 @@ const float BillboardEntity::getMaxHeight()
 	return _maxHeight;
 }
 
+const float BillboardEntity::getUvRepeat()
+{
+	return _uvRepeat;
+}
+
 const unsigned int BillboardEntity::getPassedSpriteAnimationFrames()
 {
 	return _passedSpriteAnimationFrames;

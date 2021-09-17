@@ -73,6 +73,11 @@ const float FabiEngine3D::billboardEntity_getAlpha(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getAlpha();
 }
 
+const float FabiEngine3D::billboardEntity_getUvRepeat(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getUvRepeat();
+}
+
 const bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 {
 	return _core->_billboardEntityManager.isExisting(ID);
@@ -234,6 +239,11 @@ void FabiEngine3D::billboardEntity_setInversion(const string& ID, float inversio
 void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setAlpha(alpha);
+}
+
+void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
 const bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)

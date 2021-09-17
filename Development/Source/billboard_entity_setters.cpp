@@ -355,3 +355,8 @@ void BillboardEntity::setMaxHeight(float value)
 {
 	_maxHeight = value;
 }
+
+void BillboardEntity::setUvRepeat(float value)
+{
+	_uvRepeat = max(0.0f, value);
+}

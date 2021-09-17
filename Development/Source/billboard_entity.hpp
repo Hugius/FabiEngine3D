@@ -56,6 +56,7 @@ public:
 	void setAlpha(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
+	void setUvRepeat(float value);
 
 	// Instances
 	const shared_ptr<RenderBuffer> getRenderBuffer();
@@ -80,6 +81,7 @@ public:
 	const float getAlpha();
 	const float getMinHeight();
 	const float getMaxHeight();
+	const float getUvRepeat();
 
 	// Integers
 	const int getMaxSpriteAnimationLoops();
@@ -131,6 +133,7 @@ private:
 	Vec2 _sizeTarget = Vec2(1.0f);
 
 	// Floats
+	float _uvRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;

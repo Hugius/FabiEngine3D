@@ -381,6 +381,7 @@ public:
 	void billboardEntity_setLightness(const string& ID, float lightness);
 	void billboardEntity_setInversion(const string& ID, float inversion);
 	void billboardEntity_setAlpha(const string& ID, float alpha);
+	void billboardEntity_setUvRepeat(const string& ID, float repeat);
 	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
 	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
 	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
@@ -411,6 +412,7 @@ public:
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const float billboardEntity_getAlpha(const string& ID);
+	const float billboardEntity_getUvRepeat(const string& ID);
 	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
 	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
 	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);

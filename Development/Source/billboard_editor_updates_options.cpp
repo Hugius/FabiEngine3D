@@ -15,6 +15,7 @@ void BillboardEditor::_updateOptionsMenu()
 		auto color = _fe3d.billboardEntity_getColor(_currentBillboardID);
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
+		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -25,6 +26,10 @@ void BillboardEditor::_updateOptionsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("textContent", "Text content", textContent, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("facingX")->isHovered())
 		{
@@ -68,6 +73,10 @@ void BillboardEditor::_updateOptionsMenu()
 			_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 			_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 		}
+		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
+		{
+			_fe3d.billboardEntity_setUvRepeat(_currentBillboardID, uvRepeat);
+		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
@@ -87,6 +96,7 @@ void BillboardEditor::_updateOptionsMenu()
 		// Update buttons hoverability
 		screen->getButton("textContent")->setHoverable(_fe3d.billboardEntity_isText(_currentBillboardID));
 		screen->getButton("isTransparent")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
+		screen->getButton("uvRepeat")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
 
 		// Update button text contents
 		screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");

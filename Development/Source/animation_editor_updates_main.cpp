@@ -63,12 +63,12 @@ void AnimationEditor::_updateMainMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Edit Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
-			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(-0.5f, 0.1f), getAllAnimationIDs());
+			_gui.getGlobalScreen()->createChoiceForm("animationList", "Delete Animation", Vec2(0.0f, 0.1f), getAllAnimationIDs());
 			_isChoosingAnimation = true;
 			_isDeletingAnimation = true;
 		}
@@ -141,24 +141,14 @@ void AnimationEditor::_updateAnimationChoosing()
 		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("animationList");
 
-		// Hide last model
-		if (_hoveredModelID != "")
-		{
-			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
-		}
-
 		// Check if a animation ID is hovered
 		if (!selectedButtonID.empty())
 		{
-			// Set new hovered model
-			_hoveredModelID = _getAnimation(selectedButtonID)->getPreviewModelID();
-
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Select animation
 				_currentAnimationID = selectedButtonID;
-				_hoveredModelID = "";
 
 				// Go to editor
 				if (!_isDeletingAnimation)
@@ -183,16 +173,6 @@ void AnimationEditor::_updateAnimationChoosing()
 			_isChoosingAnimation = false;
 			_isDeletingAnimation = false;
 			_gui.getGlobalScreen()->deleteChoiceForm("animationList");
-		}
-		else
-		{
-			_hoveredModelID = "";
-		}
-
-		// Show hovered model
-		if (_hoveredModelID != "")
-		{
-			_fe3d.modelEntity_setVisible(_hoveredModelID, true);
 		}
 	}
 }

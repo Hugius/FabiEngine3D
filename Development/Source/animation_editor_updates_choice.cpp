@@ -185,22 +185,36 @@ void AnimationEditor::_updateChoiceMenu()
 		screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
 		screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->getFrames().size() - 1) && !isPlaying && hasPreviewModel);
 
-		// Showing frame index
+		// Update frame index display
 		if (!isPlaying)
 		{
 			_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("animationFrame")->getEntityID(), "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 		}
 
-		// Check if a animation ID is clicked
+		// Update preview model visibility
+		if (_fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID()))
+		{
+			_fe3d.modelEntity_setVisible(currentAnimation->getPreviewModelID(), !_gui.getGlobalScreen()->isChoiceFormExisting("modelList"));
+		}
+
+		// Get selected button ID
 		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("modelList");
+
+		// Hide last model
+		if (_hoveredModelID != "")
+		{
+			_fe3d.modelEntity_setVisible(_hoveredModelID, false);
+		}
+
+		// Check if model ID is hovered
 		if (!selectedButtonID.empty())
 		{
+			// Set new hovered model
+			_hoveredModelID = ("@" + selectedButtonID);
+
 			// Check if LMB is pressed
 			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				// Compose selected model ID
-				string selectedModelID = ("@" + selectedButtonID);
-
 				// Check if parts are present
 				bool hasAllParts = true;
 				for (const auto& partID : currentAnimation->getPartIDs())
@@ -208,7 +222,7 @@ void AnimationEditor::_updateChoiceMenu()
 					// Part cannot be empty
 					if (!partID.empty())
 					{
-						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(selectedModelID, partID);
+						hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(_hoveredModelID, partID);
 					}
 				}
 
@@ -219,18 +233,9 @@ void AnimationEditor::_updateChoiceMenu()
 					return;
 				}
 
-				// Hide old model
-				if (hasPreviewModel)
-				{
-					_fe3d.modelEntity_setVisible(currentAnimation->getPreviewModelID(), false);
-				}
-
-				// Show new model
-				_fe3d.modelEntity_setVisible(selectedModelID, true);
-
 				// Change values
-				currentAnimation->setPreviewModelID(selectedModelID);
-				currentAnimation->setInitialSize(_fe3d.modelEntity_getSize(currentAnimation->getPreviewModelID(), ""));
+				currentAnimation->setPreviewModelID(_hoveredModelID);
+				currentAnimation->setInitialSize(_fe3d.modelEntity_getSize(_hoveredModelID, ""));
 
 				// Check if first time choosing preview model
 				if (currentAnimation->getFrames().empty())
@@ -243,7 +248,7 @@ void AnimationEditor::_updateChoiceMenu()
 					defaultFrame.addPart("", Vec3(0.0f), Vec3(0.0f), Vec3(0.0f), AnimationSpeedType::LINEAR, TransformationType::MOVEMENT);
 
 					// Add custom parts
-					auto partIDs = _fe3d.modelEntity_getPartIDs(currentAnimation->getPreviewModelID());
+					auto partIDs = _fe3d.modelEntity_getPartIDs(_hoveredModelID);
 					if (partIDs.size() > 1)
 					{
 						// Iterate through parts
@@ -263,11 +268,22 @@ void AnimationEditor::_updateChoiceMenu()
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->deleteChoiceForm("modelList");
+				_hoveredModelID = "";
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
 		{
 			_gui.getGlobalScreen()->deleteChoiceForm("modelList");
+		}
+		else
+		{
+			_hoveredModelID = "";
+		}
+
+		// Show hovered model
+		if (_hoveredModelID != "")
+		{
+			_fe3d.modelEntity_setVisible(_hoveredModelID, true);
 		}
 	}
 }

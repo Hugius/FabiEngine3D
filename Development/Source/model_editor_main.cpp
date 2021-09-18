@@ -48,7 +48,6 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setSize("@@grid", "", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
 	_fe3d.modelEntity_setUvRepeat("@@grid", GRID_UV);
-	_fe3d.modelEntity_setTransparent("@@grid", true);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
@@ -162,15 +161,14 @@ void ModelEditor::_loadGUI()
 	leftWindow->getScreen("modelEditorMenuLighting")->createButton("back", Vec2(0.0f, positions[8]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: modelEditorMenuOptions
-	positions = VPC::calculateButtonPositions(7, CH);
+	positions = VPC::calculateButtonPositions(6, CH);
 	leftWindow->createScreen("modelEditorMenuOptions");
 	leftWindow->getScreen("modelEditorMenuOptions")->createButton("isFaceculled", Vec2(0.0f, positions[0]), Vec2(TW("Culling: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Culling: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("isTransparent", Vec2(0.0f, positions[1]), Vec2(TW("Alpha: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Alpha: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("isInstanced", Vec2(0.0f, positions[2]), Vec2(TW("Instanced: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Instanced: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("color", Vec2(0.0f, positions[3]), Vec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("uvRepeat", Vec2(0.0f, positions[4]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("lodEntityID", Vec2(0.0f, positions[5]), Vec2(TW("Level Of Detail"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Level Of Detail", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuOptions")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuOptions")->createButton("isInstanced", Vec2(0.0f, positions[1]), Vec2(TW("Instanced: OFF"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Instanced: OFF", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuOptions")->createButton("color", Vec2(0.0f, positions[2]), Vec2(TW("Color"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuOptions")->createButton("uvRepeat", Vec2(0.0f, positions[3]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuOptions")->createButton("lodEntityID", Vec2(0.0f, positions[4]), Vec2(TW("Level Of Detail"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Level Of Detail", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuOptions")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: modelEditorMenuAabbMain
 	positions = VPC::calculateButtonPositions(4, CH);

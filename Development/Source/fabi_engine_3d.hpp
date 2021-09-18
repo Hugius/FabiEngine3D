@@ -279,7 +279,6 @@ public:
 	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
 	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
-	void modelEntity_setTransparent(const string& ID, bool enabled);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setReflectionType(const string& ID, ReflectionType type);
 	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
@@ -345,7 +344,6 @@ public:
 	const bool modelEntity_isVisible(const string& ID);
 	const bool modelEntity_isInstanced(const string& ID);
 	const bool modelEntity_isMultiParted(const string& ID);
-	const bool modelEntity_isTransparent(const string& ID);
 	const bool modelEntity_isFaceCulled(const string& ID);
 	const bool modelEntity_isSpecularLighted(const string& ID);
 	const bool modelEntity_isShadowed(const string& ID);
@@ -401,7 +399,6 @@ public:
 	void billboardEntity_setShadowed(const string& ID, bool enabled);
 	void billboardEntity_setReflected(const string& ID, bool enabled);
 	void billboardEntity_setBright(const string& ID, bool enabled);
-	void billboardEntity_setTransparent(const string& ID, bool enabled);
 	void billboardEntity_setWireFramed(const string& ID, bool enabled);
 
 	// Billboard entity interface - getters
@@ -433,7 +430,6 @@ public:
 	const bool billboardEntity_isShadowed(const string& ID);
 	const bool billboardEntity_isReflected(const string& ID);
 	const bool billboardEntity_isBright(const string& ID);
-	const bool billboardEntity_isTransparent(const string& ID);
 	const bool billboardEntity_isWireFramed(const string& ID);
 	const bool billboardEntity_isSpriteAnimationStarted(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);

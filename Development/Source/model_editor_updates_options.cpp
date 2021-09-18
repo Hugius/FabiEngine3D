@@ -18,7 +18,6 @@ void ModelEditor::_updateOptionsMenu()
 		auto color = _fe3d.modelEntity_getColor(_currentModelID, "");
 		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
 		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
-		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
 
 		// Button management
@@ -31,11 +30,6 @@ void ModelEditor::_updateOptionsMenu()
 		{
 			isFaceculled = !isFaceculled;
 			_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceculled);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isTransparent")->isHovered())
-		{
-			isTransparent = !isTransparent;
-			_fe3d.modelEntity_setTransparent(_currentModelID, isTransparent);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{
@@ -104,12 +98,10 @@ void ModelEditor::_updateOptionsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("isTransparent")->setHoverable(_fe3d.modelEntity_hasDiffuseMap(_currentModelID));
 		screen->getButton("uvRepeat")->setHoverable(_fe3d.modelEntity_hasDiffuseMap(_currentModelID));
 
 		// Update button text contents
 		screen->getButton("isFaceculled")->changeTextContent(isFaceculled ? "Culling: ON" : "Culling: OFF");
-		screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");
 		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");
 	}
 }

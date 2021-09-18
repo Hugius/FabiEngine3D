@@ -33,7 +33,6 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_create("@@lightSource");
 	_fe3d.billboardEntity_setSize("@@lightSource", Vec2(0.0f));
 	_fe3d.billboardEntity_setDiffuseMap("@@lightSource", texturePath);
-	_fe3d.billboardEntity_setTransparent("@@lightSource", true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setShadowed("@@lightSource", false);
 	_fe3d.billboardEntity_setReflected("@@lightSource", true);

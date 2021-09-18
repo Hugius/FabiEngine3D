@@ -101,14 +101,14 @@ vec4 calculateWaterColor()
 	vec3 directionalLighting = vec3(0.0f);
 
 	// Projective texture mapping
-	vec2 ndc = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
-	vec2 texCoords = vec2(ndc.x, -ndc.y);
+	vec2 ndc = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
+	vec2 ndcUV = vec2(ndc.x, -ndc.y);
 
 	// Depth map
 	float alpha = 1.0f;
 	if (u_transparency > 0.0f)
 	{
-		float depth = texture(u_depthMap, vec2(texCoords.x, -texCoords.y)).r;
+		float depth = texture(u_depthMap, vec2(ndcUV.x, -ndcUV.y)).r;
 		float floorDistance = convertDepthToPerspective(depth);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 		float waterDepth = floorDistance - waterDistance;
@@ -121,9 +121,9 @@ vec4 calculateWaterColor()
 		// DUDV mapping
 		vec2 distortedTexCoords = f_uv + texture(u_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
 		vec2 totalDistortion = (texture(u_dudvMap, distortedTexCoords).rg * 2.0 - 1.0f) * 0.025f;
-		texCoords  += totalDistortion;
-		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
-		texCoords.y = clamp(texCoords.y, -0.999f, -0.001f);
+		ndcUV  += totalDistortion;
+		ndcUV.x = clamp(ndcUV.x, 0.001f, 0.999f);
+		ndcUV.y = clamp(ndcUV.y, -0.999f, -0.001f);
 
 		// Normal mapping
 		vec3 normalMapColor = texture(u_normalMap, distortedTexCoords).rgb;
@@ -137,8 +137,8 @@ vec4 calculateWaterColor()
 
 	// Finalizing fragment color
 	vec3 finalColor;
-	vec3 reflectionColor = texture(u_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
-	vec3 refractionColor = texture(u_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
+	vec3 reflectionColor = texture(u_reflectionMap, vec2(ndcUV.x,  ndcUV.y)).rgb; // Reflection color
+	vec3 refractionColor = texture(u_refractionMap, vec2(ndcUV.x, -ndcUV.y)).rgb; // Refraction color
 
 	// Bloom correction
 	reflectionColor *= 1.0f;

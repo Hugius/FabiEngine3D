@@ -208,11 +208,6 @@ void BillboardEntity::setDiffuseMapPath(const string& value)
 	_diffuseMapPath = value;
 }
 
-void BillboardEntity::setTransparent(bool value)
-{
-	_isTransparent = value;
-}
-
 void BillboardEntity::setDepthMapIncluded(bool value)
 {
 	_isDepthMapIncluded = value;

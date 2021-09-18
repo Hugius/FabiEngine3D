@@ -11,7 +11,6 @@ layout (location = 0) uniform sampler2D u_diffuseMap;
 uniform float u_minDiffuseMapAlpha;
 
 // Boolean uniforms
-uniform bool u_isTransparent;
 
 // Process fragment
 void main()
@@ -20,12 +19,9 @@ void main()
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
 	// Check if transparent
-	if (u_isTransparent)
+	if (diffuseMapColor.a < u_minDiffuseMapAlpha)
 	{
-		if (diffuseMapColor.a < u_minDiffuseMapAlpha)
-		{
-			discard;
-		}
+		discard;
 	}
 
 	// Set final depth

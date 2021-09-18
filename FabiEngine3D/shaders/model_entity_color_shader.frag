@@ -64,7 +64,6 @@ uniform int u_lightShapes[MAX_LIGHT_COUNT];
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
-uniform bool u_isTransparent;
 uniform bool u_isPlanarReflective;
 uniform bool u_isCubeReflective;
 uniform bool u_isSpecularLighted;
@@ -176,13 +175,10 @@ vec3 calculateDiffuseMapping()
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		// Removing alpha background
-		if (u_isTransparent)
+		// Check if transparent
+		if (diffuseMapColor.a < u_minDiffuseMapAlpha)
 		{
-			if (diffuseMapColor.a < u_minDiffuseMapAlpha)
-			{
-				discard;
-			}
+			discard;
 		}
 
 		// Return

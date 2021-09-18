@@ -78,7 +78,6 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		// Shader uniforms
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
-		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());

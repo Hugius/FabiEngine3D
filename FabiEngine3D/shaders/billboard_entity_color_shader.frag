@@ -28,7 +28,6 @@ uniform float u_alpha;
 // Boolean uniforms
 uniform bool u_isWireFramed;
 uniform bool u_isFogEnabled;
-uniform bool u_isTransparent;
 uniform bool u_hasDiffuseMap;
 uniform bool u_isBright;
 
@@ -58,13 +57,10 @@ void main()
 		vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 		diffuseMapColor.rgb = pow(diffuseMapColor.rgb, vec3(2.2f));
 
-		// Removing white alpha background
-		if (u_isTransparent)
+		// Check if transparent
+		if (diffuseMapColor.a < u_minDiffuseMapAlpha)
 		{
-			if (diffuseMapColor.a < u_minDiffuseMapAlpha)
-			{
-				discard;
-			}
+			discard;
 		}
 
 		// Calculate base color

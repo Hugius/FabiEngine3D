@@ -43,7 +43,6 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_positionY", entity->getPosition("").y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
@@ -60,7 +59,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 
 			// Bind textures
-			if (entity->isTransparent() && entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(partID));
@@ -84,7 +83,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			glBindVertexArray(0);
 
 			// Unbind textures
-			if (entity->isTransparent() && entity->hasDiffuseMap(partID))
+			if (entity->hasDiffuseMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);

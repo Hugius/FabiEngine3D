@@ -252,7 +252,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Set properties
 	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
 	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
-	_fe3d.modelEntity_setTransparent(newID, _fe3d.modelEntity_isTransparent(previewID));
 	_fe3d.modelEntity_setReflectionType(newID, _fe3d.modelEntity_getReflectionType(previewID));
 	_fe3d.modelEntity_setSpecularLighted(newID, _fe3d.modelEntity_isSpecularLighted(previewID));
 	_fe3d.modelEntity_setSpecularShininess(newID, _fe3d.modelEntity_getSpecularShininess(previewID));
@@ -336,7 +335,6 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_setColor(newID, _fe3d.billboardEntity_getColor(previewID));
 	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
 	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
-	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
 	_fe3d.billboardEntity_setBright(newID, _fe3d.billboardEntity_isBright(previewID));
 

@@ -120,11 +120,6 @@ const int BillboardEntity::getMaxSpriteAnimationLoops()
 	return _maxSpriteAnimationLoops;
 }
 
-const bool BillboardEntity::isTransparent()
-{
-	return _isTransparent;
-}
-
 const bool BillboardEntity::isSpriteAnimationStarted()
 {
 	return _isSpriteAnimationStarted;

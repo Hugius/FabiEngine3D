@@ -137,7 +137,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
-		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isPlanarReflective", (entity->getReflectionType() == ReflectionType::PLANAR));
 		_shader.uploadUniform("u_isCubeReflective", (entity->getReflectionType() == ReflectionType::CUBE));
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());

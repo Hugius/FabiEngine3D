@@ -38,7 +38,7 @@ void main()
 	newPosition += vec3(0.0f, u_heightOffset, 0.0f);
 
 	// Pre-calculate UV out variable
-	f_uv = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_uvRepeat;
+	f_uv = (vec2(((v_uv.x / 2.0f) + 0.5f), ((v_uv.y / 2.0f) + 0.5f)) * u_uvRepeat);
 
 	// Vertex water waves
 	if (u_isWaving)
@@ -51,8 +51,8 @@ void main()
 		float maxX = u_waveOffset.x + mod(u_waveOffset.x, 1.0f);
 		float minZ = u_waveOffset.y - mod(u_waveOffset.y, 1.0f);
 		float maxZ = u_waveOffset.y + mod(u_waveOffset.y, 1.0f);
-		float height1 = texture(u_displacementMap, f_uv + (vec2(minX, minZ) * texelSize)).r;
-		float height2 = texture(u_displacementMap, f_uv + (vec2(maxX, maxZ) * texelSize)).r;
+		float height1 = texture(u_displacementMap, (f_uv + (vec2(minX, minZ) * texelSize))).r;
+		float height2 = texture(u_displacementMap, (f_uv + (vec2(maxX, maxZ) * texelSize))).r;
 
 		// Calculate height in between texels
 		float height = height1 + ((height2 - height1) / 2.0f);

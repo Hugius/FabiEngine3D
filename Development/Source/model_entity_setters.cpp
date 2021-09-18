@@ -398,11 +398,6 @@ void ModelEntity::setReflectivity(float value)
 	_reflectivity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setTransparent(bool value)
-{
-	_isTransparent = value;
-}
-
 void ModelEntity::setFaceCulled(bool value)
 {
 	_isFaceCulled = value;

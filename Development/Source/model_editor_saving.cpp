@@ -44,7 +44,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto reflectionMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID));
 			auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
 			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
-			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
 			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
 			auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID);
 			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
@@ -98,7 +97,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 				modelSize.y << " " <<
 				modelSize.z << " " <<
 				isFaceCulled << " " <<
-				isTransparent << " " <<
 				reflectionType << " " <<
 				isSpecular << " " <<
 				specularShininess << " " <<

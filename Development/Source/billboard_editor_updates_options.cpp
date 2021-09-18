@@ -11,7 +11,6 @@ void BillboardEditor::_updateOptionsMenu()
 	{
 		// Temporary values
 		auto textContent = _fe3d.billboardEntity_getTextContent(_currentBillboardID);
-		auto isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 		auto color = _fe3d.billboardEntity_getColor(_currentBillboardID);
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
@@ -40,11 +39,6 @@ void BillboardEditor::_updateOptionsMenu()
 		{
 			isFacingY = !isFacingY;
 			_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isTransparent")->isHovered())
-		{
-			isTransparent = !isTransparent;
-			_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 		{
@@ -95,12 +89,10 @@ void BillboardEditor::_updateOptionsMenu()
 
 		// Update buttons hoverability
 		screen->getButton("textContent")->setHoverable(_fe3d.billboardEntity_isText(_currentBillboardID));
-		screen->getButton("isTransparent")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
 		screen->getButton("uvRepeat")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
 
 		// Update button text contents
 		screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");
 		screen->getButton("facingY")->changeTextContent(isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
-		screen->getButton("isTransparent")->changeTextContent(isTransparent ? "Alpha: ON" : "Alpha: OFF");
 	}
 }

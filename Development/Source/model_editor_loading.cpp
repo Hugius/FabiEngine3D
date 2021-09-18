@@ -134,7 +134,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 		float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
 		unsigned int reflectionType;
-		bool isFaceCulled, isTransparent, isSpecular, isInstanced, isBright;
+		bool isFaceCulled, isSpecular, isInstanced, isBright;
 		Vec3 size, color;
 		vector<string> aabbIDs;
 		vector<Vec3> aabbPositions;
@@ -155,7 +155,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			size.y >>
 			size.z >>
 			isFaceCulled >>
-			isTransparent >>
 			reflectionType >>
 			isSpecular >>
 			specularShininess >>
@@ -259,7 +258,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.modelEntity_setSize(modelID, "", size);
 			_fe3d.modelEntity_setColor(modelID, "", color);
 			_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
-			_fe3d.modelEntity_setTransparent(modelID, isTransparent);
 			_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
 			_fe3d.modelEntity_setBright(modelID, isBright);
 			_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);

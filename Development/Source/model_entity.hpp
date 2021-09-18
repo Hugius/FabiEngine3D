@@ -54,7 +54,6 @@ public:
 	void setAlpha(float value);
 	void setUvRepeat(float value);
 	void setEmissionIntensity(float value);
-	void setTransparent(bool value);
 	void setFaceCulled(bool value);
 	void setSpecularLighted(bool value);
 	void setShadowed(bool value);
@@ -106,7 +105,6 @@ public:
 	const float getEmissionIntensity();
 
 	// Booleans
-	const bool isTransparent();
 	const bool isFaceCulled();
 	const bool isSpecularLighted();
 	const bool isShadowed();
@@ -219,7 +217,6 @@ private:
 
 	// Booleans
 	bool _isCameraStatic = false;
-	bool _isTransparent = false;
 	bool _isFaceCulled = false;
 	bool _isSpecularLighted = false;
 	bool _isShadowed = true;

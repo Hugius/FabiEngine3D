@@ -106,7 +106,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 		string billboardID, diffuseMapPath, fontPath;
 		Vec2 size;
 		Vec3 color;
-		bool facingX, facingY, isTransparent, isReflected, isShadowed;
+		bool facingX, facingY, isReflected, isShadowed;
 
 		// For file extraction
 		istringstream iss(line);
@@ -122,7 +122,6 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 			facingX >>
 			facingY >>
 			diffuseMapPath >>
-			isTransparent >>
 			isReflected >>
 			isShadowed >>
 			fontPath;
@@ -179,7 +178,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		Vec2 size;
 		Vec3 color;
 		float lightness, uvRepeat;
-		bool isFacingX, isFacingY, isTransparent, isReflected, isShadowed, isAnimationStarted, isBright;
+		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted, isBright;
 		unsigned int animationRows, animationColumns, animationFramestep;
 
 		// For file extraction
@@ -196,7 +195,6 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			isFacingX >>
 			isFacingY >>
 			diffuseMapPath >>
-			isTransparent >>
 			isReflected >>
 			isShadowed >>
 			fontPath >>
@@ -256,7 +254,6 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboardEntity_setLightness(billboardID, lightness);
 			_fe3d.billboardEntity_setCameraFacingX(billboardID, isFacingX);
 			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
-			_fe3d.billboardEntity_setTransparent(billboardID, isTransparent);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
 			_fe3d.billboardEntity_setBright(billboardID, isBright);
@@ -306,7 +303,6 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
-		auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
 		auto isReflected = _fe3d.billboardEntity_isReflected(billboardID);
 		auto isShadowed = _fe3d.billboardEntity_isShadowed(billboardID);
 		auto isAnimationStarted = _fe3d.billboardEntity_isSpriteAnimationStarted(billboardID);
@@ -336,7 +332,6 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 			isFacingX << " " <<
 			isFacingY << " " <<
 			diffuseMapPath << " " <<
-			isTransparent << " " <<
 			isReflected << " " <<
 			isShadowed << " " <<
 			fontPath << " " <<

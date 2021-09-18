@@ -110,11 +110,6 @@ void FabiEngine3D::modelEntity_setLevelOfDetailEntity(const string& ID, const st
 	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailEntityID(levelOfDetailID);
 }
 
-void FabiEngine3D::modelEntity_setTransparent(const string& ID, bool enabled)
-{
-	_core->_modelEntityManager.getEntity(ID)->setTransparent(enabled);
-}
-
 void FabiEngine3D::modelEntity_setFaceCulled(const string& ID, bool enabled)
 {
 	_core->_modelEntityManager.getEntity(ID)->setFaceCulled(enabled);
@@ -159,11 +154,6 @@ const bool FabiEngine3D::modelEntity_isInstanced(const string& ID)
 const bool FabiEngine3D::modelEntity_isMultiParted(const string& ID)
 {
 	return (_core->_modelEntityManager.getEntity(ID)->getPartIDs().size() > 1);
-}
-
-const bool FabiEngine3D::modelEntity_isTransparent(const string& ID)
-{
-	return _core->_modelEntityManager.getEntity(ID)->isTransparent();
 }
 
 const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)

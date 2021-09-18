@@ -19,7 +19,6 @@ public:
 	void setRenderBuffer(shared_ptr<RenderBuffer> value);
 	void setCameraFacingX(bool value);
 	void setCameraFacingY(bool value);
-	void setTransparent(bool value);
 	void setDepthMapIncluded(bool value);
 	void setShadowed(bool value);
 	void setReflected(bool value);
@@ -94,7 +93,6 @@ public:
 	const unsigned int getSpriteAnimationLoops();
 
 	// Booleans
-	const bool isTransparent();
 	const bool isSpriteAnimationStarted();
 	const bool isSpriteAnimationPaused();
 	const bool isFacingCameraX();
@@ -154,7 +152,6 @@ private:
 	unsigned int _spriteAnimationLoops = 0;
 
 	// Booleans
-	bool _isTransparent = false;
 	bool _isSpriteAnimationStarted = false;
 	bool _isSpriteAnimationPaused = false;
 	bool _isFacingCameraX = false;

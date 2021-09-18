@@ -180,11 +180,6 @@ const vector<string> ModelEntity::getPartIDs()
 	return result;
 }
 
-const bool ModelEntity::isTransparent()
-{
-	return _isTransparent;
-}
-
 const bool ModelEntity::isFaceCulled()
 {
 	return _isFaceCulled;

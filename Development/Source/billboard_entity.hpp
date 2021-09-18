@@ -103,10 +103,10 @@ public:
 	const bool isShadowed();
 	const bool isReflected();
 	const bool isBright();
+	const bool isText();
 	const bool isWireFramed();
 	const bool hasRenderBuffer();
 	const bool hasDiffuseMap();
-	const bool isText();
 
 	// Miscellaneous
 	const TextureID getDiffuseMap();

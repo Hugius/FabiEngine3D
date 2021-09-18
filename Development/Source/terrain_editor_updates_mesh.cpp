@@ -55,11 +55,18 @@ void TerrainEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setDiffuseMap(_currentTerrainID, newFilePath);
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		{
+			_fe3d.terrainEntity_setDiffuseMap(_currentTerrainID, "");
+		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 		{
 			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 		}
+
+		// Update buttons hoverability
+		screen->getButton("clearMaps")->setHoverable(_fe3d.terrainEntity_hasDiffuseMap(_currentTerrainID));
 	}
 }

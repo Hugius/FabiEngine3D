@@ -27,7 +27,7 @@ void SkyEntity::setColor(Vec3 value)
 
 void SkyEntity::setCubeMap(TextureID value)
 {
-	_cubeMap = value;
+	_diffuseMap = value;
 }
 
 void SkyEntity::setOriginalLightness(float value)
@@ -75,9 +75,9 @@ const Vec3 SkyEntity::getColor()
 	return _color;
 }
 
-const TextureID SkyEntity::getCubeMap()
+const TextureID SkyEntity::getDiffuseMap()
 {
-	return _cubeMap;
+	return _diffuseMap;
 }
 
 const float SkyEntity::getOriginalLightness()
@@ -102,7 +102,7 @@ const float SkyEntity::getRotationSpeed()
 
 const bool SkyEntity::hasCubeMap()
 {
-	return (_cubeMap != 0);
+	return (_diffuseMap != 0);
 }
 
 const bool SkyEntity::isWireFramed()

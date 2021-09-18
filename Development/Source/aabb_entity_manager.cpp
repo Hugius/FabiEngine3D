@@ -76,12 +76,13 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				auto foundPair = modelEntities.find(entity->getParentID());
 				if (foundPair != modelEntities.end())
 				{
-					// Retrieve parent entity
+					// Temporary values
 					auto parentEntity = foundPair->second;
 
-					// Model entity must not be level of detailed
+					// Model must not be level of detailed
 					if (!parentEntity->isLevelOfDetailed())
 					{
+						// AABB must be allowed to follow parent
 						if (entity->mustFollowParentTransformation())
 						{
 							// Retrieve maximum rotation & direction (based on parent rotation)
@@ -197,61 +198,69 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 				{
 					// Temporary values
 					auto parentEntity = foundPair->second;
-					const auto parentSize = parentEntity->getSize();
-					auto newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 
-					// Retrieve absolute rotations
-					const float rotationX = parentEntity->getRotation().x;
-					const float rotationY = parentEntity->getRotation().y;
-					const float rotationZ = parentEntity->getRotation().z;
-
-					// Calculate reference rotation & convert it to 0-45 range
-					float refRotationX = Math::calculateReferenceAngle(rotationX);
-					float refRotationY = Math::calculateReferenceAngle(rotationY);
-					float refRotationZ = Math::calculateReferenceAngle(rotationZ);
-					refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
-					refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
-					refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
-					
-					// Determine direction to use
-					if (refRotationX > refRotationY && refRotationX > refRotationZ)
+					// AABB must be allowed to follow parent
+					if (entity->mustFollowParentTransformation())
 					{
-						const auto xSinRotation = fabsf(sinf(Math::convertToRadians(rotationX)));
-						const auto xCosRotation = fabsf(cosf(Math::convertToRadians(rotationX)));
-						newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
-						newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
+						const auto parentSize = parentEntity->getSize();
+						auto newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
+
+						// Retrieve absolute rotations
+						const float rotationX = parentEntity->getRotation().x;
+						const float rotationY = parentEntity->getRotation().y;
+						const float rotationZ = parentEntity->getRotation().z;
+
+						// Calculate reference rotation & convert it to 0-45 range
+						float refRotationX = Math::calculateReferenceAngle(rotationX);
+						float refRotationY = Math::calculateReferenceAngle(rotationY);
+						float refRotationZ = Math::calculateReferenceAngle(rotationZ);
+						refRotationX = ((refRotationX <= 45.0f) ? refRotationX : (refRotationX == 90.0f) ? 90.0f : (90.0f - refRotationX));
+						refRotationY = ((refRotationY <= 45.0f) ? refRotationY : (refRotationY == 90.0f) ? 90.0f : (90.0f - refRotationY));
+						refRotationZ = ((refRotationZ <= 45.0f) ? refRotationZ : (refRotationZ == 90.0f) ? 90.0f : (90.0f - refRotationZ));
+
+						// Determine direction to use
+						if (refRotationX > refRotationY && refRotationX > refRotationZ)
+						{
+							const auto xSinRotation = fabsf(sinf(Math::convertToRadians(rotationX)));
+							const auto xCosRotation = fabsf(cosf(Math::convertToRadians(rotationX)));
+							newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
+							newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
+						}
+						else if (refRotationY > refRotationX && refRotationY > refRotationZ)
+						{
+							const auto ySinRotation = fabsf(sinf(Math::convertToRadians(rotationY)));
+							const auto yCosRotation = fabsf(cosf(Math::convertToRadians(rotationY)));
+							newAabbSize.x = (yCosRotation * parentSize.x);
+							newAabbSize.z = (ySinRotation * parentSize.x);
+						}
+						else if (refRotationZ > refRotationX && refRotationZ > refRotationY)
+						{
+							const auto zSinRotation = fabsf(sinf(Math::convertToRadians(rotationZ)));
+							const auto zCosRotation = fabsf(cosf(Math::convertToRadians(rotationZ)));
+							newAabbSize.y = (zCosRotation * parentSize.y);
+							newAabbSize.z = (zSinRotation * parentSize.y);
+						}
+
+						// AABB must still be a box (cannot be flat)
+						newAabbSize.x = max(0.1f, newAabbSize.x);
+						newAabbSize.y = max(0.1f, newAabbSize.y);
+						newAabbSize.z = max(0.1f, newAabbSize.z);
+
+						// Calculate Y offset, because rotation is around center while billboard is not centered
+						float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
+
+						// Update size (based on parent rotation)
+						entity->setSize(newAabbSize);
+
+						// Update position (based on parent position + size)
+						entity->setPosition(parentEntity->getPosition() + entity->getLocalPosition() + Vec3(0.0f, yOffset, 0.0f));
 					}
-					else if (refRotationY > refRotationX && refRotationY > refRotationZ)
-					{
-						const auto ySinRotation = fabsf(sinf(Math::convertToRadians(rotationY)));
-						const auto yCosRotation = fabsf(cosf(Math::convertToRadians(rotationY)));
-						newAabbSize.x = (yCosRotation * parentSize.x);
-						newAabbSize.z = (ySinRotation * parentSize.x);
-					}
-					else if (refRotationZ > refRotationX && refRotationZ > refRotationY)
-					{
-						const auto zSinRotation = fabsf(sinf(Math::convertToRadians(rotationZ)));
-						const auto zCosRotation = fabsf(cosf(Math::convertToRadians(rotationZ)));
-						newAabbSize.y = (zCosRotation * parentSize.y);
-						newAabbSize.z = (zSinRotation * parentSize.y);
-					}
-
-					// AABB must still be a box (cannot be flat)
-					newAabbSize.x = max(0.1f, newAabbSize.x);
-					newAabbSize.y = max(0.1f, newAabbSize.y);
-					newAabbSize.z = max(0.1f, newAabbSize.z);
-
-					// Calculate Y offset, because rotation is around center while billboard is not centered
-					float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
-
-					// Update size (based on parent rotation)
-					entity->setSize(newAabbSize);
-
-					// Update position (based on parent position + size)
-					entity->setPosition(parentEntity->getPosition() + entity->getLocalPosition() + Vec3(0.0f, yOffset, 0.0f));
 
 					// Update visibility
-					entity->setVisible(parentEntity->isVisible());
+					if (entity->mustFollowParentVisibility())
+					{
+						entity->setVisible(parentEntity->isVisible());
+					}
 				}
 				else
 				{

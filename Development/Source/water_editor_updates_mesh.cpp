@@ -123,11 +123,25 @@ void WaterEditor::_updateMeshMenu()
 			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
 			_fe3d.waterEntity_setWaving(_currentWaterID, true);
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		{
+			_fe3d.waterEntity_setDudvMap(_currentWaterID, "");
+			_fe3d.waterEntity_setNormalMap(_currentWaterID, "");
+			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, "");
+			_fe3d.waterEntity_setRippling(_currentWaterID, false);
+			_fe3d.waterEntity_setWaving(_currentWaterID, false);
+		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
+
+		// Update buttons hoverability
+		screen->getButton("clearMaps")->setHoverable(
+			_fe3d.waterEntity_hasDudvMap(_currentWaterID) ||
+			_fe3d.waterEntity_hasNormalMap(_currentWaterID) ||
+			_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 	}
 }

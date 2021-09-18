@@ -140,8 +140,16 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true), false);
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+	if (texturePath.empty())
+	{
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(0, false);
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath("");
+	}
+	else
+	{
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true), false);
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+	}
 }
 
 void FabiEngine3D::billboardEntity_setTransparent(const string& ID, bool enabled)

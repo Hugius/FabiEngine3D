@@ -51,7 +51,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("red")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -84,7 +84,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setDiffuseMapR(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("green")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -117,7 +117,7 @@ void TerrainEditor::_updateBlendMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setDiffuseMapG(_currentTerrainID, newFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blue")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -150,10 +150,22 @@ void TerrainEditor::_updateBlendMapMenu()
 			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.terrainEntity_setDiffuseMapB(_currentTerrainID, newFilePath);
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		{
+			_fe3d.terrainEntity_setBlendMap(_currentTerrainID, "");
+			_fe3d.terrainEntity_setDiffuseMapR(_currentTerrainID, "");
+			_fe3d.terrainEntity_setDiffuseMapG(_currentTerrainID, "");
+			_fe3d.terrainEntity_setDiffuseMapB(_currentTerrainID, "");
+		}
 
 		// Update buttons hoverability
-		screen->getButton("red")->setHoverable(hasBlendMap);
-		screen->getButton("green")->setHoverable(hasBlendMap);
-		screen->getButton("blue")->setHoverable(hasBlendMap);
+		screen->getButton("redMap")->setHoverable(hasBlendMap);
+		screen->getButton("greenMap")->setHoverable(hasBlendMap);
+		screen->getButton("blueMap")->setHoverable(hasBlendMap);
+		screen->getButton("clearMaps")->setHoverable(
+			_fe3d.terrainEntity_hasBlendMap(_currentTerrainID) ||
+			_fe3d.terrainEntity_hasDiffuseMapR(_currentTerrainID) ||
+			_fe3d.terrainEntity_hasDiffuseMapG(_currentTerrainID) ||
+			_fe3d.terrainEntity_hasDiffuseMapB(_currentTerrainID));
 	}
 }

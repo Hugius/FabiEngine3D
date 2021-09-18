@@ -143,6 +143,12 @@ public:
 	const bool skyEntity_isExisting(const string& ID);
 	const bool skyEntity_isVisible(const string& ID);
 	const bool skyEntity_isWireFramed(const string& ID);
+	const bool skyEntity_hasDiffuseMapRight(const string& ID);
+	const bool skyEntity_hasDiffuseMapLeft(const string& ID);
+	const bool skyEntity_hasDiffuseMapTop(const string& ID);
+	const bool skyEntity_hasDiffuseMapBottom(const string& ID);
+	const bool skyEntity_hasDiffuseMapBack(const string& ID);
+	const bool skyEntity_hasDiffuseMapFront(const string& ID);
 
 	// Terrain entity interface - setters
 	void terrainEntity_create(const string& ID, const string& heightMapPath);

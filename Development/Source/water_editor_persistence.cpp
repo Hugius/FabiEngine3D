@@ -114,7 +114,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		Vec2 speed;
 		float height, size, uvRepeat, waveHeight, transparency, specularShininess, specularIntensity;
 		unsigned int quality;
-		bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
+		bool isSpecularLighted, isReflective, isRefractive;
 
 		// For file extraction
 		istringstream iss(line);
@@ -125,8 +125,6 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			dudvMapPath >>
 			normalMapPath >>
 			displacementMapPath >>
-			isWaving >>
-			isRippling >>
 			isSpecularLighted >>
 			isReflective >>
 			isRefractive >>
@@ -165,6 +163,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			if (dudvMapPath != "")
 			{
 				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
+				_fe3d.waterEntity_setRippling(waterID, true);
 			}
 
 			// Normal map
@@ -177,13 +176,12 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			if (displacementMapPath != "")
 			{
 				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
+				_fe3d.waterEntity_setWaving(waterID, true);
 			}
 
 			// Set properties
 			_fe3d.waterEntity_setHeight(waterID, height);
 			_fe3d.waterEntity_setSize(waterID, size);
-			_fe3d.waterEntity_setWaving(waterID, isWaving);
-			_fe3d.waterEntity_setRippling(waterID, isRippling);
 			_fe3d.waterEntity_setSpecularLighted(waterID, isSpecularLighted);
 			_fe3d.waterEntity_setReflective(waterID, isReflective);
 			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
@@ -246,8 +244,6 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(waterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(waterID);
 		auto quality = static_cast<unsigned int>(_fe3d.waterEntity_getQuality(waterID));
-		auto isWaving = _fe3d.waterEntity_isWaving(waterID);
-		auto isRippling = _fe3d.waterEntity_isRippling(waterID);
 		auto isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
 		auto isReflective = _fe3d.waterEntity_isReflective(waterID);
 		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
@@ -266,8 +262,6 @@ bool WaterEditor::saveWaterEntitiesToFile()
 			dudvMapPath << " " <<
 			normalMapPath << " " <<
 			displacementMapPath << " " <<
-			isWaving << " " <<
-			isRippling << " " <<
 			isSpecularLighted << " " <<
 			isReflective << " " <<
 			isRefractive << " " <<

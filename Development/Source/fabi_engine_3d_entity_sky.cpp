@@ -8,7 +8,6 @@ void FabiEngine3D::skyEntity_create(const string& ID)
 
 void FabiEngine3D::skyEntity_deleteAll()
 {
-	// For every sky entity
 	for (const auto& [keyID, entity] : _core->_skyEntityManager.getEntities())
 	{
 		skyEntity_delete(entity->getID());
@@ -200,4 +199,34 @@ const bool FabiEngine3D::skyEntity_isVisible(const string& ID)
 const bool FabiEngine3D::skyEntity_isWireFramed(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->isWireFramed();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapRight(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[0].empty();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapLeft(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[1].empty();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapTop(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[2].empty();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapBottom(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[3].empty();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapBack(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[4].empty();
+}
+
+const bool FabiEngine3D::skyEntity_hasDiffuseMapFront(const string& ID)
+{
+	return !_core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths()[5].empty();
 }

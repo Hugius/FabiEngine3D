@@ -51,7 +51,7 @@ public:
 	const bool isWireFramed();
 
 	// Miscellaneous
-	const TextureID getCubeMap();
+	const TextureID getDiffuseMap();
 
 private:
 	// Instances
@@ -76,5 +76,5 @@ private:
 	bool _isWireFramed = false;
 
 	// Miscellaneous
-	TextureID _cubeMap = 0;
+	TextureID _diffuseMap = 0;
 };

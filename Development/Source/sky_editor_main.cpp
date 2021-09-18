@@ -82,15 +82,16 @@ void SkyEditor::_loadGUI()
 	leftWindow->getScreen("skyEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: skyEditorMenuMesh
-	positions = VPC::calculateButtonPositions(7, CH);
+	positions = VPC::calculateButtonPositions(8, CH);
 	leftWindow->createScreen("skyEditorMenuMesh");
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("leftTexture", Vec2(0.0f, positions[0]), Vec2(TW("Left Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Left Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("rightTexture", Vec2(0.0f, positions[1]), Vec2(TW("Right Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Right Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("frontTexture", Vec2(0.0f, positions[2]), Vec2(TW("Front Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Front Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("backTexture", Vec2(0.0f, positions[3]), Vec2(TW("Back Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Back Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("topTexture", Vec2(0.0f, positions[4]), Vec2(TW("Top Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Top Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("bottomTexture", Vec2(0.0f, positions[5]), Vec2(TW("Bottom Texture"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bottom Texture", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("skyEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("leftMap", Vec2(0.0f, positions[0]), Vec2(TW("Left Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Left Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("rightMap", Vec2(0.0f, positions[1]), Vec2(TW("Right Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Right Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("frontMap", Vec2(0.0f, positions[2]), Vec2(TW("Front Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Front Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("backMap", Vec2(0.0f, positions[3]), Vec2(TW("Back Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Back Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("topMap", Vec2(0.0f, positions[4]), Vec2(TW("Top Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Top Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("bottomMap", Vec2(0.0f, positions[5]), Vec2(TW("Bottom Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bottom Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("clearMaps", Vec2(0.0f, positions[6]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("skyEditorMenuMesh")->createButton("back", Vec2(0.0f, positions[7]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: skyEditorMenuOptions
 	positions = VPC::calculateButtonPositions(4, CH);

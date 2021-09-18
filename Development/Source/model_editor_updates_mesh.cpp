@@ -1,5 +1,3 @@
-#include <algorithm>
-
 #include "model_editor.hpp"
 
 void ModelEditor::_updateMeshMenu()
@@ -12,6 +10,7 @@ void ModelEditor::_updateMeshMenu()
 	{
 		// Temporary values
 		auto size = _fe3d.modelEntity_getSize(_currentModelID, "");
+		auto isMultiParted = _fe3d.modelEntity_isMultiParted(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -25,19 +24,19 @@ void ModelEditor::_updateMeshMenu()
 			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 			_gui.getGlobalScreen()->createValueForm("sizeZ", "Z", (size.z * 100.0f), Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadDiffuseMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			_loadDiffuseMap();
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadEmissionMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			_loadEmissionMap();
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadReflectionMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
 			_loadReflectionMap();
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadNormalMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			_loadNormalMap();
 		}
@@ -66,19 +65,15 @@ void ModelEditor::_updateMeshMenu()
 			_fe3d.modelEntity_setSize(_currentModelID, "", size);
 		}
 
-		// Check if mesh exists
-		bool isExisting = _fe3d.modelEntity_isExisting(_currentModelID);
-		bool isHoverable = false;
-		if (isExisting)
-		{
-			isHoverable = (isExisting && !_fe3d.modelEntity_isMultiParted(_currentModelID));
-		}
-
 		// Update buttons hoverability
-		screen->getButton("loadDiffuseMap")->setHoverable(isHoverable);
-		screen->getButton("loadEmissionMap")->setHoverable(isHoverable);
-		screen->getButton("loadReflectionMap")->setHoverable(isHoverable);
-		screen->getButton("loadNormalMap")->setHoverable(isHoverable);
-		screen->getButton("clearMaps")->setHoverable(isHoverable);
+		screen->getButton("diffuseMap")->setHoverable(!isMultiParted);
+		screen->getButton("emissionMap")->setHoverable(!isMultiParted);
+		screen->getButton("reflectionMap")->setHoverable(!isMultiParted);
+		screen->getButton("normalMap")->setHoverable(!isMultiParted);
+		screen->getButton("clearMaps")->setHoverable(!isMultiParted && (
+			_fe3d.modelEntity_hasDiffuseMap(_currentModelID) ||
+			_fe3d.modelEntity_hasEmissionMap(_currentModelID) ||
+			_fe3d.modelEntity_hasReflectionMap(_currentModelID) ||
+			_fe3d.modelEntity_hasNormalMap(_currentModelID)));
 	}
 }

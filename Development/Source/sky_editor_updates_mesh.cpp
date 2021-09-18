@@ -15,7 +15,7 @@ void SkyEditor::_updateMeshMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rightTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -48,7 +48,7 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapRight(_currentSkyID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("leftTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -81,7 +81,7 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapLeft(_currentSkyID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -114,7 +114,7 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapTop(_currentSkyID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bottomTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -147,7 +147,7 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapBottom(_currentSkyID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -180,7 +180,7 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapFront(_currentSkyID, finalFilePath);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backTexture")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{
 			// Get the chosen filename
 			const auto rootDirectory = _fe3d.misc_getRootDirectory();
@@ -213,5 +213,18 @@ void SkyEditor::_updateMeshMenu()
 			_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 			_fe3d.skyEntity_setDiffuseMapBack(_currentSkyID, finalFilePath);
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
+		{
+			_fe3d.skyEntity_setDiffuseMaps(_currentSkyID, { "","","","","","" });
+		}
+
+		// Update buttons hoverability
+		screen->getButton("clearMaps")->setHoverable(
+			_fe3d.skyEntity_hasDiffuseMapRight(_currentSkyID) ||
+			_fe3d.skyEntity_hasDiffuseMapLeft(_currentSkyID) ||
+			_fe3d.skyEntity_hasDiffuseMapTop(_currentSkyID) ||
+			_fe3d.skyEntity_hasDiffuseMapBottom(_currentSkyID) ||
+			_fe3d.skyEntity_hasDiffuseMapFront(_currentSkyID) ||
+			_fe3d.skyEntity_hasDiffuseMapBack(_currentSkyID));
 	}
 }

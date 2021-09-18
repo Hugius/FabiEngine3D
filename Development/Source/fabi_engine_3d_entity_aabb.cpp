@@ -7,14 +7,9 @@ void FabiEngine3D::aabbEntity_create(const string& ID)
 	_core->_aabbEntityManager.createEntity(ID);
 }
 
-void FabiEngine3D::aabbEntity_bindToModelEntity(const string& ID, const string& parentID)
+void FabiEngine3D::aabbEntity_setParent(const string& ID, const string& parentID, AabbParentType parentType)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::MODEL_ENTITY);
-}
-
-void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& ID, const string& parentID)
-{
-	_core->_aabbEntityManager.getEntity(ID)->setParent(parentID, AabbParentType::BILLBOARD_ENTITY);
 }
 
 void FabiEngine3D::aabbEntity_deleteAll()
@@ -40,6 +35,16 @@ void FabiEngine3D::aabbEntity_setRaycastResponsive(const string& ID, bool respon
 void FabiEngine3D::aabbEntity_setCollisionResponsive(const string& ID, bool responsive)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setCollisionResponsive(responsive);
+}
+
+void FabiEngine3D::aabbEntity_setFollowParentTransformation(const string& ID, bool mustFollow)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setFollowParentTransformation(mustFollow);
+}
+
+void FabiEngine3D::aabbEntity_setFollowParentVisibility(const string& ID, bool mustFollow)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setFollowParentVisibility(mustFollow);
 }
 
 void FabiEngine3D::aabbEntity_setLocalPosition(const string& ID, Vec3 position)
@@ -131,7 +136,7 @@ const bool FabiEngine3D::aabbEntity_hasParent(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->hasParent();
 }
 
-const vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, AabbParentType parentType)
+const vector<string> FabiEngine3D::aabbEntity_getChildIDs(const string& parentID, AabbParentType parentType)
 {
 	vector<string> IDs;
 

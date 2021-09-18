@@ -210,11 +210,11 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getSize(previewID, ""));
 
 	// Bind AABB entities to model entity
-	for (const auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, AabbParentType::MODEL_ENTITY))
+	for (const auto& previewAabbID : _fe3d.aabbEntity_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
 	{
 		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
 		_fe3d.aabbEntity_create(newAabbID);
-		_fe3d.aabbEntity_bindToModelEntity(newAabbID, newID);
+		_fe3d.aabbEntity_setParent(newAabbID, newID, AabbParentType::MODEL_ENTITY);
 		_fe3d.aabbEntity_setLocalPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
 		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
@@ -304,7 +304,7 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 
 	// Bind AABB entity
 	_fe3d.aabbEntity_create(newID);
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, newID);
+	_fe3d.aabbEntity_setParent(newID, newID, AabbParentType::BILLBOARD_ENTITY);
 
 	// Diffuse map
 	if (_fe3d.billboardEntity_hasDiffuseMap(previewID) && !_fe3d.billboardEntity_isText(previewID))

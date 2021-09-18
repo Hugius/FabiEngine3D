@@ -207,7 +207,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				_fe3d.modelEntity_setAlpha(modelID, alpha);
 				_fe3d.modelEntity_setLightness(modelID, lightness);
 				_fe3d.modelEntity_setVisible(modelID, isVisible);
-				for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(modelID, AabbParentType::MODEL_ENTITY))
+				for (const auto& ID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);
@@ -413,7 +413,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
 				_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
 				_fe3d.billboardEntity_setVisible(billboardID, isVisible);
-				for (const auto& ID : _fe3d.aabbEntity_getBoundIDs(billboardID, AabbParentType::BILLBOARD_ENTITY))
+				for (const auto& ID : _fe3d.aabbEntity_getChildIDs(billboardID, AabbParentType::BILLBOARD_ENTITY))
 				{
 					_fe3d.aabbEntity_setRaycastResponsive(ID, isAabbRaycastResponsive);
 					_fe3d.aabbEntity_setCollisionResponsive(ID, isAabbCollisionResponsive);

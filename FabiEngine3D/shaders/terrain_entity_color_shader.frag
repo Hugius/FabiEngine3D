@@ -3,6 +3,7 @@
 
 // Const variables
 #define MAX_LIGHT_COUNT 128
+#define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 
 // In variables
 in vec3 f_pos;
@@ -102,7 +103,7 @@ void main()
 	// Wire frame color
 	if(u_isWireFramed)
 	{
-		o_primaryColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+		o_primaryColor = vec4(FRAME_COLOR, 1.0f);
 		o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		return;
 	}

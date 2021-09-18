@@ -64,10 +64,20 @@ void AabbEntity::updateTransformationMatrix()
 	_transformationMatrix = (translationMatrix * scalingMatrix);
 }
 
-void AabbEntity::setParent(const string& ID, AabbParentType type)
+void AabbEntity::setParent(const string& parentID, AabbParentType parentType)
 {
-	_parentID = ID;
-	_parentType = type;
+	_parentID = parentID;
+	_parentType = parentType;
+}
+
+void AabbEntity::setFollowParentTransformation(bool mustFollow)
+{
+	_mustFollowParentTransformation = mustFollow;
+}
+
+void AabbEntity::setFollowParentVisibility(bool mustFollow)
+{
+	_mustFollowParentVisibility = mustFollow;
 }
 
 void AabbEntity::setCollisionDirection(Direction value)
@@ -211,4 +221,14 @@ const bool AabbEntity::hasCollided()
 const bool AabbEntity::hasRenderBuffer()
 {
 	return (_renderBuffer != nullptr);
+}
+
+const bool AabbEntity::mustFollowParentTransformation()
+{
+	return _mustFollowParentTransformation;
+}
+
+const bool AabbEntity::mustFollowParentVisibility()
+{
+	return _mustFollowParentVisibility;
 }

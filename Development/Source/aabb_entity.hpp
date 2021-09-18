@@ -26,7 +26,9 @@ public:
 	void scale(Vec3 value);
 	void moveTo(Vec3 target, float speed);
 	void scaleTo(Vec3 target, float speed);
-	void setParent(const string& ID, AabbParentType value);
+	void setParent(const string& parentID, AabbParentType parentType);
+	void setFollowParentTransformation(bool mustFollow);
+	void setFollowParentVisibility(bool mustFollow);
 	void setCollisionDirection(Direction value);
 	void setRaycastResponsive(bool value);
 	void setCollisionResponsive(bool value);
@@ -50,6 +52,8 @@ public:
 	const bool hasParent();
 	const bool hasCollided();
 	const bool hasRenderBuffer();
+	const bool mustFollowParentTransformation();
+	const bool mustFollowParentVisibility();
 
 	// Miscellaneous
 	const shared_ptr<RenderBuffer> getRenderBuffer();
@@ -79,6 +83,8 @@ private:
 	float _sizeTargetSpeed = 0.0f;
 
 	// Booleans
+	bool _mustFollowParentTransformation = true;
+	bool _mustFollowParentVisibility = true;
 	bool _isRaycastResponsive = true;
 	bool _isCollisionResponsive = true;
 	bool _hasCollided = false;

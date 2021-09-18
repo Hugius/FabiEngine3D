@@ -437,13 +437,14 @@ public:
 
 	// AABB entity interface - setters
 	void aabbEntity_create(const string& ID);
-	void aabbEntity_bindToModelEntity(const string& ID, const string& parentID);
-	void aabbEntity_bindToBillboardEntity(const string& ID, const string& parentID);
+	void aabbEntity_setParent(const string& ID, const string& parentID, AabbParentType parentType);
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
 	void aabbEntity_setVisible(const string& ID, bool isVisible);
 	void aabbEntity_setRaycastResponsive(const string& ID, bool responsive);
 	void aabbEntity_setCollisionResponsive(const string& ID, bool responsive);
+	void aabbEntity_setFollowParentTransformation(const string& ID, bool mustFollow);
+	void aabbEntity_setFollowParentVisibility(const string& ID, bool mustFollow);
 	void aabbEntity_setLocalPosition(const string& ID, Vec3 position);
 	void aabbEntity_setLocalSize(const string& ID, Vec3 size);
 	void aabbEntity_setPosition(const string& ID, Vec3 position);
@@ -454,7 +455,7 @@ public:
 	void aabbEntity_scaleTo(const string& ID, Vec3 target, float speed);
 
 	// AABB entity interface - getters
-	const vector<string> aabbEntity_getBoundIDs(const string& parentID, AabbParentType parentType);
+	const vector<string> aabbEntity_getChildIDs(const string& parentID, AabbParentType parentType);
 	const vector<string> aabbEntity_getAllIDs();
 	const string& aabbEntity_getParentID(const string& ID);
 	const Vec3 aabbEntity_getPosition(const string& ID);

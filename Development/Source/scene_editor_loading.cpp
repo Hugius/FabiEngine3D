@@ -314,7 +314,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
 				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
@@ -365,7 +365,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
 				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_LAMP_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
@@ -406,7 +406,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 
 				// Bind AABB
 				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
 				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_CAMERA_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}

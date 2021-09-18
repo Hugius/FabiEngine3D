@@ -79,103 +79,109 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					// Retrieve parent entity
 					auto parentEntity = foundPair->second;
 
-					// Model entity must not have LOD
+					// Model entity must not be level of detailed
 					if (!parentEntity->isLevelOfDetailed())
 					{
-						// Retrieve maximum rotation & direction (based on parent rotation)
-						Direction rotationDirection;
-						Vec3 parentRotation = parentEntity->getRotation("");
-						float rotation = 0.0f;
-						if ((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
+						if (entity->mustFollowParentTransformation())
 						{
-							rotationDirection = Direction::X;
-							rotation = parentRotation.x;
-						}
-						else if ((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
-						{
-							rotationDirection = Direction::Y;
-							rotation = parentRotation.y;
-						}
-						else if ((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
-						{
-							rotationDirection = Direction::Z;
-							rotation = parentRotation.z;
-						}
-
-						// Update size (based on parent size & AABB rotation)
-						const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getSize(""));
-						if (((rotation > 45.0f) && (rotation < 135.0f)) || ((rotation > 225.0f) && (rotation < 315.0f)))
-						{
-							// Determine rotation direction
-							if (rotationDirection == Direction::X)
+							// Retrieve maximum rotation & direction (based on parent rotation)
+							Direction rotationDirection;
+							Vec3 parentRotation = parentEntity->getRotation("");
+							float rotation = 0.0f;
+							if ((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 							{
-								entity->setSize(Vec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+								rotationDirection = Direction::X;
+								rotation = parentRotation.x;
 							}
-							else if (rotationDirection == Direction::Y)
+							else if ((parentRotation.y > parentRotation.x) && (parentRotation.y > parentRotation.z))
 							{
-								entity->setSize(Vec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+								rotationDirection = Direction::Y;
+								rotation = parentRotation.y;
 							}
-							else if (rotationDirection == Direction::Z)
+							else if ((parentRotation.z > parentRotation.x) && (parentRotation.z > parentRotation.y))
 							{
-								entity->setSize(Vec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
-							}
-						}
-						else
-						{
-							entity->setSize(newAabbSize);
-						}
-
-						// Update position (based on parent position + rotation + size)
-						Vec3 localPosition = (entity->getLocalPosition() * parentEntity->getSize(""));
-						float roundedRotation = 
-							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
-							(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
-							(rotation > 225.0f && rotation < 315.0f) ? 270.0f : // 270 degrees rounded
-							0.0f; // No rotation
-						if (roundedRotation != 0.0f)
-						{
-							/*
-							NOTE:
-							X & Z directions are different, because the model is rotated around Vec3(0.0f) but is standing on Y 0.0f (local).
-							The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
-							*/
-
-							// Temporary values
-							Matrix44 rotationMatrix = Matrix44(1.0f);
-							Vec3 localOffset = Vec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
-							bool isMirrored = (roundedRotation == 180.0f);
-							localPosition = (rotationDirection == Direction::Y) ? localPosition : 
-								(entity->getLocalPosition() + localOffset) * parentEntity->getSize("");
-							float yOffset;
-
-							// Determine rotation direction
-							if (rotationDirection == Direction::X)
-							{
-								rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
-								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
-							}
-							else if (rotationDirection == Direction::Y)
-							{
-								rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
-								yOffset = 0.0f;
-							}
-							else if (rotationDirection == Direction::Z)
-							{
-								rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
-								yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.z) / 2.0f);
+								rotationDirection = Direction::Z;
+								rotation = parentRotation.z;
 							}
 
-							// Apply rotation
-							Vec4 result = rotationMatrix * Vec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
-							entity->setPosition(parentEntity->getPosition("") + Vec3(result.x, result.y + yOffset, result.z));
-						}
-						else // No rotation
-						{
-							entity->setPosition(parentEntity->getPosition("") + localPosition);
+							// Update size (based on parent size & AABB rotation)
+							const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getSize(""));
+							if (((rotation > 45.0f) && (rotation < 135.0f)) || ((rotation > 225.0f) && (rotation < 315.0f)))
+							{
+								// Determine rotation direction
+								if (rotationDirection == Direction::X)
+								{
+									entity->setSize(Vec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+								}
+								else if (rotationDirection == Direction::Y)
+								{
+									entity->setSize(Vec3(newAabbSize.z, newAabbSize.y, newAabbSize.x));
+								}
+								else if (rotationDirection == Direction::Z)
+								{
+									entity->setSize(Vec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+								}
+							}
+							else
+							{
+								entity->setSize(newAabbSize);
+							}
+
+							// Update position (based on parent position + rotation + size)
+							Vec3 localPosition = (entity->getLocalPosition() * parentEntity->getSize(""));
+							float roundedRotation =
+								(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
+								(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
+								(rotation > 225.0f && rotation < 315.0f) ? 270.0f : // 270 degrees rounded
+								0.0f; // No rotation
+							if (roundedRotation != 0.0f)
+							{
+								/*
+								NOTE:
+								X & Z directions are different, because the model is rotated around Vec3(0.0f) but is standing on Y 0.0f (local).
+								The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
+								*/
+
+								// Temporary values
+								Matrix44 rotationMatrix = Matrix44(1.0f);
+								Vec3 localOffset = Vec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
+								bool isMirrored = (roundedRotation == 180.0f);
+								localPosition = (rotationDirection == Direction::Y) ? localPosition :
+									(entity->getLocalPosition() + localOffset) * parentEntity->getSize("");
+								float yOffset;
+
+								// Determine rotation direction
+								if (rotationDirection == Direction::X)
+								{
+									rotationMatrix = Math::createRotationMatrixX(Math::convertToRadians(roundedRotation));
+									yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.x) / 2.0f);
+								}
+								else if (rotationDirection == Direction::Y)
+								{
+									rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(roundedRotation));
+									yOffset = 0.0f;
+								}
+								else if (rotationDirection == Direction::Z)
+								{
+									rotationMatrix = Math::createRotationMatrixZ(Math::convertToRadians(roundedRotation));
+									yOffset = -((isMirrored ? newAabbSize.y : newAabbSize.z) / 2.0f);
+								}
+
+								// Apply rotation
+								Vec4 result = rotationMatrix * Vec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
+								entity->setPosition(parentEntity->getPosition("") + Vec3(result.x, result.y + yOffset, result.z));
+							}
+							else // No rotation
+							{
+								entity->setPosition(parentEntity->getPosition("") + localPosition);
+							}
 						}
 
 						// Update visibility
-						entity->setVisible(parentEntity->isVisible());
+						if (entity->mustFollowParentVisibility())
+						{
+							entity->setVisible(parentEntity->isVisible());
+						}
 					}
 				}
 				else

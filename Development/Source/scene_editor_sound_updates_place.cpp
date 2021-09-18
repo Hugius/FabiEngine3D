@@ -42,7 +42,7 @@ void SceneEditor::_updateSoundPlacing()
 
 				// Create AABB
 				_fe3d.aabbEntity_create(newModelID);
-				_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
 				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
@@ -131,7 +131,7 @@ void SceneEditor::_updateSoundPlacing()
 
 						// Create AABB
 						_fe3d.aabbEntity_create(newModelID);
-						_fe3d.aabbEntity_bindToModelEntity(newModelID, newModelID);
+						_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
 						_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_SPEAKER_AABB_SIZE);
 						_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 

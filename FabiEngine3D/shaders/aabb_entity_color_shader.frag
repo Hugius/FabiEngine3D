@@ -1,8 +1,8 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Constants
-vec3 FRAME_COLOR = vec3(1.0f, 0.0f, 0.0f);
+// Constant variables
+#define FRAME_COLOR vec3(1.0f, 0.0f, 0.0f)
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;

@@ -122,12 +122,13 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
-		_shader.uploadUniform("u_isWaving", entity->isWaving());
-		_shader.uploadUniform("u_isRippling", entity->isRippling());
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_isReflective", entity->isReflective());
 		_shader.uploadUniform("u_isRefractive", entity->isRefractive());
 		_shader.uploadUniform("u_color", entity->getColor());
+		_shader.uploadUniform("u_hasDisplacementMap", entity->hasDisplacementMap());
+		_shader.uploadUniform("u_hasDudvMap", entity->hasDudvMap());
+		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		
 		// Bind textures
@@ -148,7 +149,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		}
 
 		// Bind buffer
-		if (entity->isWaving())
+		if (entity->hasDisplacementMap())
 		{
 			glBindVertexArray(entity->getHighQualityRenderBuffer()->getVAO());
 		}
@@ -158,7 +159,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		}
 
 		// Render
-		if (entity->isWaving())
+		if (entity->hasDisplacementMap())
 		{
 			glDrawArrays(GL_TRIANGLES, 0, entity->getHighQualityRenderBuffer()->getVertexCount());
 			_renderBus.increaseTriangleCount(entity->getHighQualityRenderBuffer()->getVertexCount() / 3);

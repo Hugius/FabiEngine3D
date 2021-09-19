@@ -163,7 +163,6 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			if (dudvMapPath != "")
 			{
 				_fe3d.waterEntity_setDudvMap(waterID, dudvMapPath);
-				_fe3d.waterEntity_setRippling(waterID, true);
 			}
 
 			// Normal map
@@ -176,7 +175,6 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			if (displacementMapPath != "")
 			{
 				_fe3d.waterEntity_setDisplacementMap(waterID, displacementMapPath);
-				_fe3d.waterEntity_setWaving(waterID, true);
 			}
 
 			// Set properties

@@ -95,16 +95,6 @@ void WaterEntity::setSpecularIntensity(float value)
 	_specularIntensity = max(0.0f, value);
 }
 
-void WaterEntity::setWaving(bool value)
-{
-	_isWaving = value;
-}
-
-void WaterEntity::setRippling(bool value)
-{
-	_isRippling = value;
-}
-
 void WaterEntity::setSpecularLighted(bool value)
 {
 	_isSpecularLighted = value;
@@ -233,16 +223,6 @@ const float WaterEntity::getSize()
 const float WaterEntity::getTransparency()
 {
 	return _transparency;
-}
-
-const bool WaterEntity::isWaving()
-{
-	return _isWaving;
-}
-
-const bool WaterEntity::isRippling()
-{
-	return _isRippling;
 }
 
 const bool WaterEntity::isSpecularLighted()

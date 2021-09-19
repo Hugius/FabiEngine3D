@@ -49,11 +49,12 @@ uniform int u_lightCount;
 uniform bool u_isWireFramed;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
-uniform bool u_isRippling;
 uniform bool u_isSpecularLighted;
 uniform bool u_isReflective;
 uniform bool u_isRefractive;
 uniform bool u_isUnderWater;
+uniform bool u_hasDudvMap;
+uniform bool u_hasNormalMap;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;
@@ -97,57 +98,78 @@ void main()
 vec4 calculateWaterColor()
 {
 	// Variables to be used
+	vec2 mapUV = f_uv;
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
 	vec3 directionalLighting = vec3(0.0f);
 
 	// Projective texture mapping
-	vec2 ndc = (((f_clip.xy / f_clip.w) / 2.0f) + 0.5f);
-	vec2 ndcUV = vec2(ndc.x, -ndc.y);
+	vec2 ndc = (f_clip.xy / f_clip.w);
+	ndc /= 2.0f;
+	ndc += 0.5f;
+	vec2 reflectionUV = vec2(ndc.x, -ndc.y);
+	vec2 refractionUV = vec2(ndc.x, ndc.y);
 
 	// Depth map
 	float alpha = 1.0f;
 	if (u_transparency > 0.0f)
 	{
-		float depth = texture(u_depthMap, vec2(ndcUV.x, -ndcUV.y)).r;
+		float depth = texture(u_depthMap, refractionUV).r;
 		float floorDistance = convertDepthToPerspective(depth);
 		float waterDistance = convertDepthToPerspective(gl_FragCoord.z);
 		float waterDepth = floorDistance - waterDistance;
 		alpha = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
 	}
 
-	// Rippling effect
-	if (u_isRippling)
+	// DUDV mapping
+	if (u_hasDudvMap)
 	{
-		// DUDV mapping
-		vec2 distortedTexCoords = f_uv + texture(u_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
-		vec2 totalDistortion = (texture(u_dudvMap, distortedTexCoords).rg * 2.0 - 1.0f) * 0.025f;
-		ndcUV  += totalDistortion;
-		ndcUV.x = clamp(ndcUV.x, 0.001f, 0.999f);
-		ndcUV.y = clamp(ndcUV.y, -0.999f, -0.001f);
+		// Distort map UV coordinates
+		vec2 distortedMapUV = texture(u_dudvMap, (mapUV + u_rippleOffset)).rg;
+		distortedMapUV *= 0.1f;
+		mapUV += distortedMapUV;
 
-		// Normal mapping
-		vec3 normalMapColor = texture(u_normalMap, distortedTexCoords).rgb;
-		normal              = vec3((normalMapColor.r * 2.0f) - 1.0f, normalMapColor.b, (normalMapColor.g * 2.0f) - 1.0f);
-		normal              = normalize(normal);
+		// Distort NDC UV coordinates
+		vec2 distortedNdcUV = texture(u_dudvMap, mapUV).rg;
+		distortedNdcUV *= 2.0f;
+		distortedNdcUV -= 1.0f;
+		distortedNdcUV *= 0.025f;
+
+		// Add to refraction UV coordinates
+		reflectionUV += distortedNdcUV;
+
+		// Add to reflection UV coordinates
+		refractionUV += distortedNdcUV;
+
+		// Limit reflection UV coordinates
+		reflectionUV.x = clamp(reflectionUV.x, 0.001f, 0.999f);
+		reflectionUV.y = clamp(reflectionUV.y, -0.999f, -0.001f);
+
+		// Limit refraction UV coordinates
+		refractionUV.x = clamp(refractionUV.x, 0.001f, 0.999f);
+		refractionUV.y = clamp(refractionUV.y, 0.001f, 0.999f);
+	}
+
+	// Normal mapping
+	if (u_hasNormalMap)
+	{
+		vec3 normalMapColor = texture(u_normalMap, mapUV).rgb;
+		normal = vec3(((normalMapColor.r * 2.0f) - 1.0f), normalMapColor.b, ((normalMapColor.g * 2.0f) - 1.0f));
+		normal = normalize(normal);
 	}
 
 	// Fresnel effect
 	vec3 viewDirection = normalize(u_cameraPosition - f_pos);
-	float mixValue = dot(viewDirection, normal);
+	float fresnelMixValue = dot(viewDirection, normal);
 
 	// Finalizing fragment color
 	vec3 finalColor;
-	vec3 reflectionColor = texture(u_reflectionMap, vec2(ndcUV.x,  ndcUV.y)).rgb; // Reflection color
-	vec3 refractionColor = texture(u_refractionMap, vec2(ndcUV.x, -ndcUV.y)).rgb; // Refraction color
-
-	// Bloom correction
-	reflectionColor *= 1.0f;
-	refractionColor *= 1.0f;
+	vec3 reflectionColor = texture(u_reflectionMap, reflectionUV).rgb;
+	vec3 refractionColor = texture(u_refractionMap, refractionUV).rgb;
 
 	// Calculate final color
 	if (u_isReflective && u_isRefractive && !u_isUnderWater) // Refraction & reflection
 	{
-		finalColor = mix(reflectionColor, refractionColor, mixValue); // Refraction fresnel effect
+		finalColor = mix(reflectionColor, refractionColor, fresnelMixValue); // Refraction fresnel effect
 		finalColor *= u_color;
 	}
 	else if (u_isRefractive) // Only refraction
@@ -157,7 +179,7 @@ vec4 calculateWaterColor()
 	}
 	else if (u_isReflective) // Only reflection
 	{
-		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), mixValue); // Dark fresnel effect
+		finalColor = mix(reflectionColor, (reflectionColor * 0.1f), fresnelMixValue); // Dark fresnel effect
 		finalColor *= u_color;
 	}
 	else // Only color

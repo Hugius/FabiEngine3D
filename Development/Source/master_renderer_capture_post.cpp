@@ -15,7 +15,7 @@ void MasterRenderer::_captureSceneDepth()
 	{
 		// Check if camera is underwater
 		auto waterEntity = _entityBus->getWaterEntity();
-		float waveHeight = (waterEntity->isWaving() ? waterEntity->getWaveHeight() : 0.0f);
+		float waveHeight = (waterEntity->hasDisplacementMap() ? waterEntity->getWaveHeight() : 0.0f);
 		isUnderWater = (_renderBus.getCameraPosition().y < (waterEntity->getHeight() + waveHeight));
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x > (waterEntity->getSize() / 2.0f)));
 		isUnderWater = (isUnderWater && (_renderBus.getCameraPosition().x < (waterEntity->getSize() / 2.0f)));

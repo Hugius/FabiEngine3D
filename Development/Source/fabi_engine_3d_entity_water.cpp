@@ -46,16 +46,6 @@ const bool FabiEngine3D::waterEntity_isVisible(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::waterEntity_isWaving(const string& ID)
-{
-	return _core->_waterEntityManager.getEntity(ID)->isWaving();
-}
-
-const bool FabiEngine3D::waterEntity_isRippling(const string& ID)
-{
-	return _core->_waterEntityManager.getEntity(ID)->isRippling();
-}
-
 const bool FabiEngine3D::waterEntity_isSpecularLighted(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->isSpecularLighted();
@@ -111,16 +101,6 @@ void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 
 	_core->_waterEntityManager.getEntity(ID)->setSize(size);
 	_core->_waterEntityManager.loadMesh(ID);
-}
-
-void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)
-{
-	_core->_waterEntityManager.getEntity(ID)->setWaving(enabled);
-}
-
-void FabiEngine3D::waterEntity_setRippling(const string& ID, bool enabled)
-{
-	_core->_waterEntityManager.getEntity(ID)->setRippling(enabled);
 }
 
 void FabiEngine3D::waterEntity_setSpecularLighted(const string& ID, bool enabled)

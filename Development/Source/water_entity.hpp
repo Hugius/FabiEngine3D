@@ -34,8 +34,6 @@ public:
 	void setHeight(float value);
 	void setSize(float value);
 	void setTransparency(float value);
-	void setWaving(bool value);
-	void setRippling(bool value);
 	void setSpecularLighted(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
@@ -66,8 +64,6 @@ public:
 	const float getTransparency();
 
 	// Booleans
-	const bool isWaving();
-	const bool isRippling();
 	const bool isSpecularLighted();
 	const bool isReflective();
 	const bool isRefractive();
@@ -106,8 +102,6 @@ private:
 	float _transparency = 0.0f;
 
 	// Booleans
-	bool _isRippling = false;
-	bool _isWaving = false;
 	bool _isSpecularLighted = false;
 	bool _isReflective = false;
 	bool _isRefractive = false;

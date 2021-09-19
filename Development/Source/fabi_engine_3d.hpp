@@ -223,8 +223,6 @@ public:
 	void waterEntity_setSpeed(const string& ID, Vec2 speed);
 	void waterEntity_setHeight(const string& ID, float height);
 	void waterEntity_setSize(const string& ID, float size);
-	void waterEntity_setWaving(const string& ID, bool enabled);
-	void waterEntity_setRippling(const string& ID, bool enabled);
 	void waterEntity_setSpecularLighted(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
@@ -257,8 +255,6 @@ public:
 	const float waterEntity_getTransparency(const string& ID);
 	const bool waterEntity_isExisting(const string& ID);
 	const bool waterEntity_isVisible(const string& ID);
-	const bool waterEntity_isWaving(const string& ID);
-	const bool waterEntity_isRippling(const string& ID);
 	const bool waterEntity_isSpecularLighted(const string& ID);
 	const bool waterEntity_isReflective(const string& ID);
 	const bool waterEntity_isRefractive(const string& ID);

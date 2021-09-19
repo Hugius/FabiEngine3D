@@ -151,8 +151,6 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	// Fill water entity
 	_fe3d.waterEntity_setHeight(newID, _fe3d.waterEntity_getHeight(previewID));
 	_fe3d.waterEntity_setSize(newID, _fe3d.waterEntity_getSize(previewID));
-	_fe3d.waterEntity_setWaving(newID, _fe3d.waterEntity_isWaving(previewID));
-	_fe3d.waterEntity_setRippling(newID, _fe3d.waterEntity_isRippling(previewID));
 	_fe3d.waterEntity_setSpecularLighted(newID, _fe3d.waterEntity_isSpecularLighted(previewID));
 	_fe3d.waterEntity_setReflective(newID, _fe3d.waterEntity_isReflective(previewID));
 	_fe3d.waterEntity_setRefractive(newID, _fe3d.waterEntity_isRefractive(previewID));

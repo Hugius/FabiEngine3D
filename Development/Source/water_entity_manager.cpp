@@ -164,7 +164,7 @@ void WaterEntityManager::update()
 	// Update all water entities
 	for (const auto& [keyID, entity] : _getWaterEntities())
 	{
-		// Update water animations (rippling & waving)
+		// Update water animations
 		if (entity->isVisible())
 		{
 			// Update ripple offset
@@ -172,7 +172,7 @@ void WaterEntityManager::update()
 			newOffset = Vec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
 			entity->setRippleOffset(newOffset);
 
-			// Update waving offset
+			// Update wave offset
 			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() * 500.0f));
 		}
 	}

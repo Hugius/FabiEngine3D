@@ -115,8 +115,8 @@ void WaterEditor::_updateOptionsMenu()
 			_fe3d.waterEntity_hasDudvMap(_currentWaterID) ||
 			_fe3d.waterEntity_hasNormalMap(_currentWaterID) ||
 			_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
-		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_isWaving(_currentWaterID));
-		screen->getButton("speed")->setHoverable(_fe3d.waterEntity_isRippling(_currentWaterID) || _fe3d.waterEntity_isWaving(_currentWaterID));
+		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
+		screen->getButton("speed")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID) || _fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 
 		// Update button text contents
 		screen->getButton("quality")->changeTextContent("Quality: " + to_string(static_cast<int>(quality) + 1));

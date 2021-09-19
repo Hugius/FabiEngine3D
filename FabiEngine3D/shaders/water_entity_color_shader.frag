@@ -43,6 +43,7 @@ uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 
 // Integer uniforms
+uniform int u_lightShapes[MAX_LIGHT_COUNT];
 uniform int u_lightCount;
 
 // Boolean uniforms
@@ -200,21 +201,32 @@ vec4 calculateWaterColor()
 
 vec3 calculateLights(vec3 normal)
 {
-	vec3 result = vec3(0.0f);
+		vec3 result = vec3(0.0f);
 		
     // For every light
 	for (int i = 0; i < u_lightCount; i++)
 	{
-		// Calculate light strength
+        // Calculate light strength
 		vec3 lightDirection = normalize(u_lightPositions[i] - f_pos);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_lightPositions[i], normal);
 
 		// Calculate light attenuation
-		vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
-		float attenuation = max(0.0f, 1.0f - (fragmentDistance.x / u_lightRadiuses[i].x));
-		attenuation = min(attenuation, max(0.0f, 1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
-		attenuation = min(attenuation, max(0.0f, 1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
+		float attenuation;
+		if (u_lightShapes[i] == 0)
+		{
+			float fragmentDistance = distance(u_lightPositions[i], f_pos);
+			float averageRadius = ((u_lightRadiuses[i].x + u_lightRadiuses[i].y + u_lightRadiuses[i].z) / 3.0f);
+			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
+		}
+		else
+		{
+			vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_lightRadiuses[i].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
+			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
+		}
 
         // Apply
         vec3 current = vec3(0.0f);

@@ -87,6 +87,7 @@ void WaterEntityColorRenderer::processLightEntities(const unordered_map<string, 
 		_shader.uploadUniform("u_lightColors[" + to_string(index) + "]", entity->getColor());
 		_shader.uploadUniform("u_lightIntensities[" + to_string(index) + "]", entity->getIntensity());
 		_shader.uploadUniform("u_lightRadiuses[" + to_string(index) + "]", entity->getRadius());
+		_shader.uploadUniform("u_lightShapes[" + to_string(index) + "]", static_cast<int>(entity->getShape()));
 
 		index++;
 	}

@@ -59,6 +59,7 @@ uniform float u_shadowLightness;
 
 // Integer uniforms
 uniform int u_lightShapes[MAX_LIGHT_COUNT];
+uniform int u_lightCount;
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
@@ -78,9 +79,6 @@ uniform bool u_hasDiffuseMapB;
 uniform bool u_hasNormalMapR;
 uniform bool u_hasNormalMapG;
 uniform bool u_hasNormalMapB;
-
-// Integer uniforms
-uniform int u_lightCount;
 
 // Out variables
 layout (location = 0) out vec4 o_primaryColor;

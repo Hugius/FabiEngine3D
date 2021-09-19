@@ -10,6 +10,57 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
+const vector<string> ModelEditor::getAllMeshPathsFromFile()
+{
+	// Error checking
+	if (_currentProjectID.empty())
+	{
+		Logger::throwError("ModelEditor::getAllMeshPathsFromFile");
+	}
+
+	// Compose file path
+	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
+
+	// Warning checking
+	if (!_fe3d.misc_isFileExisting(filePath))
+	{
+		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
+		return {};
+	}
+
+	// Load model file
+	ifstream file(filePath);
+
+	// Read model data
+	vector<string> meshPaths;
+	string line;
+	while (getline(file, line))
+	{
+		// Values
+		string modelID, meshPath;
+
+		// For file extraction
+		istringstream iss(line);
+
+		// Extract data
+		iss >> modelID >> meshPath;
+
+		// Perform empty string & space conversions
+		meshPath = (meshPath == "?") ? "" : meshPath;
+		replace(meshPath.begin(), meshPath.end(), '?', ' ');
+
+		// Save mesh path
+		meshPaths.push_back(meshPath);
+	}
+
+	// Close file
+	file.close();
+
+	// Return
+	return meshPaths;
+}
+
 const vector<string> ModelEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
@@ -33,7 +84,6 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	ifstream file(filePath);
 
 	// Read model data
-	vector<string> meshPaths;
 	vector<string> texturePaths;
 	string line;
 	while (getline(file, line))
@@ -48,19 +98,14 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
 
 		// Perform empty string & space conversions
-		meshPath = (meshPath == "?") ? "" : meshPath;
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		replace(meshPath.begin(), meshPath.end(), '?', ' ');
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-
-		// Save mesh path
-		meshPaths.push_back(meshPath);
 
 		// Save diffuse map path
 		if (!diffuseMapPath.empty())
@@ -89,13 +134,6 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 
 	// Close file
 	file.close();
-
-	// Cache mesh files
-	vector<string> meshTexturePaths;
-	_fe3d.misc_cacheMeshesMultiThreaded(meshPaths, meshTexturePaths);
-
-	// Add to texture paths
-	texturePaths.insert(texturePaths.end(), meshTexturePaths.begin(), meshTexturePaths.end());
 
 	// Return
 	return texturePaths;

@@ -26,7 +26,7 @@ using std::unordered_map;
 class BaseEntityManager
 {
 public:
-	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
 	virtual void update() = 0;

@@ -5,7 +5,7 @@
 class WaterEntityManager final : public BaseEntityManager
 {
 public:
-	WaterEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	shared_ptr<WaterEntity> getEntity(const string& ID);
 	shared_ptr<WaterEntity> getSelectedWater();

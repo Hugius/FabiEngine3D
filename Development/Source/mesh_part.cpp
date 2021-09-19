@@ -1,28 +1,9 @@
 #include "mesh_part.hpp"
 
-void MeshPart::setID(const string& value)
+MeshPart::MeshPart(const string& ID) :
+	_ID(ID)
 {
-	_ID = value;
-}
 
-void MeshPart::setDiffuseMapPath(const string& value)
-{
-	_diffuseMapPath = value;
-}
-
-void MeshPart::setEmissionMapPath(const string& value)
-{
-	_emissionMapPath = value;
-}
-
-void MeshPart::setReflectionMapPath(const string& value)
-{
-	_reflectionMapPath = value;
-}
-
-void MeshPart::setNormalMapPath(const string& value)
-{
-	_normalMapPath = value;
 }
 
 void MeshPart::addVertex(Vec3 value)
@@ -48,26 +29,6 @@ void MeshPart::addUV(Vec2 value)
 const string& MeshPart::getID() const
 {
 	return _ID;
-}
-
-const string& MeshPart::getDiffuseMapPath() const
-{
-	return _diffuseMapPath;
-}
-
-const string& MeshPart::getEmissionMapPath() const
-{
-	return _emissionMapPath;
-}
-
-const string& MeshPart::getReflectionMapPath() const
-{
-	return _reflectionMapPath;
-}
-
-const string& MeshPart::getNormalMapPath() const
-{
-	return _normalMapPath;
 }
 
 const vector<Vec3>& MeshPart::getVertices() const

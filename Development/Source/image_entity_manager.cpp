@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+ImageEntityManager::ImageEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::IMAGE, meshLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::IMAGE, meshLoader, textureLoader, renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {

@@ -18,6 +18,7 @@ public:
 
 	bool isLoaded();
 
+	const vector<string> getAllMeshPathsFromFile();
 	const vector<string> getAllTexturePathsFromFile();
 	const vector<string>& getLoadedModelIDs();
 

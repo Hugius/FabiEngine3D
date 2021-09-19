@@ -4,9 +4,9 @@
 
 using std::make_shared;
 
-WaterEntityManager::WaterEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+WaterEntityManager::WaterEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::WATER, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::WATER, meshLoader, textureLoader, renderBus)
 {
 
 }

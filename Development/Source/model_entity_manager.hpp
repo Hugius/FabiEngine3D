@@ -5,7 +5,7 @@
 class ModelEntityManager final : public BaseEntityManager
 {
 public:
-	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
 	void createEntity(const string& ID, const string& meshPath);

@@ -3,22 +3,25 @@
 #include "mathematics.hpp"
 #include "mesh_part.hpp"
 
+#include <memory>
 #include <map>
 
 using std::map;
 using std::pair;
+using std::shared_ptr;
 
 class MeshLoader final
 {
 public:
-	const vector<MeshPart>* loadMesh(const string& filePath);
-
-	void cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
-
+	// Voids
+	void cacheMeshesMultiThreaded(const vector<string>& meshPaths);
 	void clearMeshCache(const string& filePath);
 
-private:
-	pair<string, vector<MeshPart>> _loadMesh(const string& filePathe);
+	// Instances
+	const vector<shared_ptr<MeshPart>>* loadMesh(const string& filePath);
 
-	map<string, vector<MeshPart>> _meshCache;
+private:
+	// Instances
+	pair<string, vector<shared_ptr<MeshPart>>> _loadMesh(const string& filePathe);
+	map<string, vector<shared_ptr<MeshPart>>> _meshCache;
 };

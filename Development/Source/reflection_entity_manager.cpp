@@ -1,9 +1,9 @@
 #include "reflection_entity_manager.hpp"
 #include "logger.hpp"
 
-ReflectionEntityManager::ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+ReflectionEntityManager::ReflectionEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::REFLECTION, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::REFLECTION, meshLoader, textureLoader, renderBus)
 {
 
 }

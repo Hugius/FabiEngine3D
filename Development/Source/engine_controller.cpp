@@ -65,13 +65,12 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	{
 		// Cache engine meshes
 		vector<string> meshPaths;
-		vector<string> temp;
 		meshPaths.push_back(string(meshDirectoryPath + "camera.obj"));
 		meshPaths.push_back(string(meshDirectoryPath + "cube.obj"));
 		meshPaths.push_back(string(meshDirectoryPath + "lamp.obj"));
 		meshPaths.push_back(string(meshDirectoryPath + "plane.obj"));
 		meshPaths.push_back(string(meshDirectoryPath + "speaker.obj"));
-		misc_cacheMeshesMultiThreaded(meshPaths, temp);
+		misc_cacheMeshesMultiThreaded(meshPaths);
 		
 		// Cache 2D engine textures
 		vector<string> texturePaths2D;

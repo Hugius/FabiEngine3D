@@ -5,7 +5,7 @@
 class ImageEntityManager final : public BaseEntityManager
 {
 public:
-	ImageEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	ImageEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	shared_ptr<ImageEntity> getEntity(const string& ID);
 

@@ -26,9 +26,9 @@ const float bufferData[] =
 	-0.5f,  0.0f, -0.5f
 };
 
-AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::AABB, meshLoader, textureLoader, renderBus),
 	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 

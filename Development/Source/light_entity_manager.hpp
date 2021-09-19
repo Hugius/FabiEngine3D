@@ -5,7 +5,7 @@
 class LightEntityManager final : public BaseEntityManager
 {
 public:
-	LightEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	LightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	// Voids
 	void createEntity(const string& ID);

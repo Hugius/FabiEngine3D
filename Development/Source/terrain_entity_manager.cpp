@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-TerrainEntityManager::TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+TerrainEntityManager::TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::TERRAIN, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::TERRAIN, meshLoader, textureLoader, renderBus)
 {
 
 }

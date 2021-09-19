@@ -196,10 +196,14 @@ void TopViewportController::_updateProjectLoading()
 			auto terrainTexturePaths = _terrainEditor.getAllTerrainTexturePathsFromFile();
 			auto terrainBitmapPaths = _terrainEditor.getAllTerrainBitmapPathsFromFile();
 			auto waterTexturePaths = _waterEditor.getAllWaterTexturePathsFromFile();
-			auto modelTexturePaths = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
+			auto modelMeshPaths = _modelEditor.getAllMeshPathsFromFile();
+			auto modelTexturePaths = _modelEditor.getAllTexturePathsFromFile();
 			auto billboardTexturePaths = _billboardEditor.getAllTexturePathsFromFile();
 			auto billboardFontPaths = _billboardEditor.getAllFontPathsFromFile();
 			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
+
+			// Cache meshes
+			_fe3d.misc_cacheMeshesMultiThreaded(modelMeshPaths);
 
 			// Cache 2D textures
 			vector<string> texturePaths2D;

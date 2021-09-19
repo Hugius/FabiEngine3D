@@ -4,9 +4,9 @@
 using std::make_shared;
 using std::max;
 
-ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::MODEL, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::MODEL, meshLoader, textureLoader, renderBus)
 {
 
 }
@@ -45,7 +45,7 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 
 	// Check if multiparted model only has 1 part
 	auto parts = *partsPointer;
-	if ((parts.size() == 1) && !parts[0].getID().empty())
+	if ((parts.size() == 1) && !parts[0]->getID().empty())
 	{
 		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
 		deleteEntity(ID);
@@ -65,61 +65,33 @@ void ModelEntityManager::createEntity(const string& ID, const string& meshPath)
 		vector<float> bufferData;
 
 		// For every triangle vertex point
-		for (size_t i = 0; i < part.getVertices().size(); i++)
+		for (size_t i = 0; i < part->getVertices().size(); i++)
 		{
 			// Vertex coordinate
-			bufferData.push_back(part.getVertices()[i].x);
-			bufferData.push_back(part.getVertices()[i].y);
-			bufferData.push_back(part.getVertices()[i].z);
+			bufferData.push_back(part->getVertices()[i].x);
+			bufferData.push_back(part->getVertices()[i].y);
+			bufferData.push_back(part->getVertices()[i].z);
 
 			// UV coordinate
-			bufferData.push_back(part.getUVs()[i].x);
-			bufferData.push_back(part.getUVs()[i].y);
+			bufferData.push_back(part->getUVs()[i].x);
+			bufferData.push_back(part->getUVs()[i].y);
 
 			// Normal vector
-			bufferData.push_back(part.getNormals()[i].x);
-			bufferData.push_back(part.getNormals()[i].y);
-			bufferData.push_back(part.getNormals()[i].z);
+			bufferData.push_back(part->getNormals()[i].x);
+			bufferData.push_back(part->getNormals()[i].y);
+			bufferData.push_back(part->getNormals()[i].z);
 
 			// Tangent vector
-			bufferData.push_back(part.getTangents()[i].x);
-			bufferData.push_back(part.getTangents()[i].y);
-			bufferData.push_back(part.getTangents()[i].z);
+			bufferData.push_back(part->getTangents()[i].x);
+			bufferData.push_back(part->getTangents()[i].y);
+			bufferData.push_back(part->getTangents()[i].z);
 		}
 
 		// New model part
-		entity->createPart(part.getID());
+		entity->createPart(part->getID());
 
 		// Render buffer
-		entity->setRenderBuffer(part.getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
-
-		// Diffuse map
-		if (part.getDiffuseMapPath() != "")
-		{
-			entity->setDiffuseMap(part.getID(), _textureLoader.getTexture2D(part.getDiffuseMapPath(), true, true));
-			entity->setDiffuseMapPath(part.getID(), part.getDiffuseMapPath());
-		}
-
-		// Emission map
-		if (part.getEmissionMapPath() != "")
-		{
-			entity->setEmissionMap(part.getID(), _textureLoader.getTexture2D(part.getEmissionMapPath(), true, true));
-			entity->setEmissionMapPath(part.getID(), part.getEmissionMapPath());
-		}
-
-		// Reflection map
-		if (part.getReflectionMapPath() != "")
-		{
-			entity->setReflectionMap(part.getID(), _textureLoader.getTexture2D(part.getReflectionMapPath(), true, true));
-			entity->setReflectionMapPath(part.getID(), part.getReflectionMapPath());
-		}
-
-		// Normal map
-		if (part.getNormalMapPath() != "")
-		{
-			entity->setNormalMap(part.getID(), _textureLoader.getTexture2D(part.getNormalMapPath(), true, true));
-			entity->setNormalMapPath(part.getID(), part.getNormalMapPath());
-		}
+		entity->setRenderBuffer(part->getID(), make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV_NORMAL_TANGENT, &bufferData[0], static_cast<unsigned int>(bufferData.size())));
 	}
 }
 

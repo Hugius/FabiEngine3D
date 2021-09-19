@@ -8,10 +8,10 @@ using std::set;
 using std::future;
 using std::launch;
 
-void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths)
+void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths)
 {
 	// Temporary values
-	vector<future<pair<string, vector<MeshPart>>>> threads;
+	vector<future<pair<string, vector<shared_ptr<MeshPart>>>>> threads;
 	vector<bool> threadStatuses;
 
 	// Remove duplicates
@@ -49,27 +49,6 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 			}
 			else
 			{
-				// Extract any texture paths
-				for (const auto& part : returnValue.second)
-				{
-					if (!part.getDiffuseMapPath().empty()) // Diffuse map
-					{
-						resultingTexturePaths.push_back(part.getDiffuseMapPath());
-					}
-					if (!part.getEmissionMapPath().empty()) // Emission map
-					{
-						resultingTexturePaths.push_back(part.getEmissionMapPath());
-					}
-					if (!part.getNormalMapPath().empty()) // Normal map
-					{
-						resultingTexturePaths.push_back(part.getNormalMapPath());
-					}
-					if (!part.getReflectionMapPath().empty()) // Reflection map
-					{
-						resultingTexturePaths.push_back(part.getReflectionMapPath());
-					}
-				}
-
 				// Cache mesh
 				_meshCache[uniqueFilePaths[i]] = returnValue.second;
 
@@ -80,7 +59,7 @@ void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vecto
 	}
 }
 
-const vector<MeshPart>* MeshLoader::loadMesh(const string& filePath)
+const vector<shared_ptr<MeshPart>>* MeshLoader::loadMesh(const string& filePath)
 {
 BEGIN:
 	// Search cache
@@ -99,7 +78,7 @@ BEGIN:
 	if (returnValue.second.empty())
 	{
 		Logger::throwWarning(returnValue.first);
-		return {};
+		return nullptr;
 	}
 	else
 	{

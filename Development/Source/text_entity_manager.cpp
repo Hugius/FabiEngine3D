@@ -3,9 +3,9 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::TEXT, meshLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::TEXT, meshLoader, textureLoader, renderBus),
 	_centeredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, true)),
 	_nonCenteredRenderBuffer(make_shared<RenderBuffer>(0.0f, 0.0f, 1.0f, 1.0f, false))
 {

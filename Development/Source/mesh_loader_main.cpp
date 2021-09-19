@@ -2,24 +2,21 @@
 #include "logger.hpp"
 #include "tools.hpp"
 
-#pragma warning(disable:4996) // Disabling annoying warning
-
 #include <filesystem>
 
+#pragma warning(disable:4996) // Disabling annoying warning
+
+using std::make_shared;
 using std::filesystem::exists;
 
-pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
+pair<string, vector<shared_ptr<MeshPart>>> MeshLoader::_loadMesh(const string& filePath)
 {
 	// Declare variables
-	vector<MeshPart> meshParts;
+	vector<shared_ptr<MeshPart>> meshParts;
 	vector<Vec3> temp_positions;
 	vector<Vec2> temp_uvs;
 	vector<Vec3> temp_normals;
 	string selectedPartID = "";
-	string tempDiffuseMapPath = "";
-	string tempEmissionMapPath = "";
-	string tempReflectionMapPath = "";
-	string tempNormalMapPath = "";
 
 	// Get application root directory
 	const auto rootDir = Tools::getRootDirectory();
@@ -36,16 +33,33 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 	// Fill the vector with the data from the file
 	while (true)
 	{
-		// Check for end of file
-		char lineHeader[128];
+		// Scan line to string
+		char* lineHeader = new char[128];
 		int res = fscanf(file, "%s", lineHeader);
+
+		// Check for end of file
 		if (res == EOF)
 		{
 			break;
 		}
 		
 		// File content
-		if (strcmp(lineHeader, "v") == 0) // Vertices
+		if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
+		{
+			char* ID = new char[128];
+			auto temp = fscanf(file, "%s\n", ID);
+			selectedPartID = string(ID);
+
+			// Cannot be a questionmark
+			if (selectedPartID == "?")
+			{
+				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
+				return make_pair(warningMessage, meshParts);
+			}
+
+			continue;
+		}
+		else if (strcmp(lineHeader, "v") == 0) // Vertices
 		{
 			Vec3 vertex;
 			auto temp = fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
@@ -53,7 +67,7 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "vt") == 0) // Uv coords
+		else if (strcmp(lineHeader, "vt") == 0) // UV coordinates
 		{
 			Vec2 uv;
 			auto temp = fscanf(file, "%f %f\n", &uv.x, &uv.y);
@@ -66,71 +80,6 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			Vec3 normal;
 			auto temp = fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
-
-			continue;
-		}
-		else if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
-		{
-			char ID[128];
-			auto temp = fscanf(file, "%s\n", ID);
-			selectedPartID = ID;
-
-			// Cannot be a questionmark
-			if (selectedPartID == "?")
-			{
-				string warningMessage = string("Mesh part ID cannot be '?' in mesh file: \"" + filePath + "\"!");
-				return make_pair(warningMessage, meshParts);
-			}
-
-			// Reset material paths
-			tempDiffuseMapPath = "";
-			tempEmissionMapPath = "";
-			tempReflectionMapPath = "";
-			tempNormalMapPath = "";
-
-			continue;
-		}
-		else if (strcmp(lineHeader, "FE3D_DIFFUSE_MAP") == 0) // Diffuse map material
-		{
-			if (selectedPartID != "")
-			{
-				char path[128];
-				auto temp = fscanf(file, "%s\n", path);
-				tempDiffuseMapPath = path;
-			}
-
-			continue;
-		}
-		else if (strcmp(lineHeader, "FE3D_EMISSION_MAP") == 0) // Emission map material
-		{
-			if (selectedPartID != "")
-			{
-				char path[128];
-				auto temp = fscanf(file, "%s\n", path);
-				tempEmissionMapPath = path;
-			}
-
-			continue;
-		}
-		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Reflection map material
-		{
-			if (selectedPartID != "")
-			{
-				char path[128];
-				auto temp = fscanf(file, "%s\n", path);
-				tempReflectionMapPath = path;
-			}
-
-			continue;
-		}
-		else if (strcmp(lineHeader, "FE3D_NORMAL_MAP") == 0) // Normal map material
-		{
-			if (selectedPartID != "")
-			{
-				char path[128];
-				auto temp = fscanf(file, "%s\n", path);
-				tempNormalMapPath = path;
-			}
 
 			continue;
 		}
@@ -159,7 +108,7 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			for (auto& meshPart : meshParts)
 			{
 				// Find mesh part
-				if (meshPart.getID() == selectedPartID)
+				if (meshPart->getID() == selectedPartID)
 				{
 					// Prevent mesh part creation
 					isAlreadyExisting = true;
@@ -167,9 +116,9 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 					// Add data
 					for (int i = 0; i < 3; i++)
 					{
-						meshPart.addVertex(temp_positions[posIndex[i] - 1]);
-						meshPart.addUV(temp_uvs[uvIndex[i] - 1]);
-						meshPart.addNormal(temp_normals[normalIndex[i] - 1]);
+						meshPart->addVertex(temp_positions[posIndex[i] - 1]);
+						meshPart->addUV(temp_uvs[uvIndex[i] - 1]);
+						meshPart->addNormal(temp_normals[normalIndex[i] - 1]);
 					}
 
 					// Part is found
@@ -181,15 +130,8 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			if (!isAlreadyExisting)
 			{
 				// Create mesh part
-				MeshPart newPart;
-
-				// Set texture paths
-				newPart.setID(selectedPartID);
-				newPart.setDiffuseMapPath(tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath));
-				newPart.setEmissionMapPath(tempEmissionMapPath.empty() ? "" : string("game_assets\\textures\\emission_maps\\" + tempEmissionMapPath));
-				newPart.setReflectionMapPath(tempReflectionMapPath.empty() ? "" : string("game_assets\\textures\\reflection_maps\\" + tempReflectionMapPath));
-				newPart.setNormalMapPath(tempNormalMapPath.empty() ? "" : string("game_assets\\textures\\normal_maps\\" + tempNormalMapPath));
-
+				MeshPart newPart(selectedPartID);
+				
 				// Add first data
 				for (int i = 0; i < 3; i++)
 				{
@@ -199,7 +141,7 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 				}
 
 				// Add new mesh part
-				meshParts.push_back(newPart);
+				meshParts.push_back(make_shared<MeshPart>(newPart));
 			}
 		}
 	}
@@ -207,17 +149,17 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 	// Calculate tangents for normal mapping
 	for (auto& meshPart : meshParts)
 	{
-		for (size_t i = 0; i < meshPart.getVertices().size(); i += 3)
+		for (size_t i = 0; i < meshPart->getVertices().size(); i += 3)
 		{
 			// Vertices of 1 triangle
-			Vec3 v0 = meshPart.getVertices()[i + 0];
-			Vec3 v1 = meshPart.getVertices()[i + 1];
-			Vec3 v2 = meshPart.getVertices()[i + 2];
+			Vec3 v0 = meshPart->getVertices()[i + 0];
+			Vec3 v1 = meshPart->getVertices()[i + 1];
+			Vec3 v2 = meshPart->getVertices()[i + 2];
 
 			// Shortcuts for UVs
-			Vec2 uv0 = meshPart.getUVs()[i + 0];
-			Vec2 uv1 = meshPart.getUVs()[i + 1];
-			Vec2 uv2 = meshPart.getUVs()[i + 2];
+			Vec2 uv0 = meshPart->getUVs()[i + 0];
+			Vec2 uv1 = meshPart->getUVs()[i + 1];
+			Vec2 uv2 = meshPart->getUVs()[i + 2];
 
 			// Vertex delta
 			Vec3 deltaPos1 = (v1 - v0);
@@ -232,9 +174,9 @@ pair<string, vector<MeshPart>> MeshLoader::_loadMesh(const string& filePath)
 			Vec3 tangent = ((deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r);
 
 			// Add to current mesh part
-			meshPart.addTangent(tangent);
-			meshPart.addTangent(tangent);
-			meshPart.addTangent(tangent);
+			meshPart->addTangent(tangent);
+			meshPart->addTangent(tangent);
+			meshPart->addTangent(tangent);
 		}
 	}
 

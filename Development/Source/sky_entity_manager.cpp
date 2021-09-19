@@ -50,9 +50,9 @@ const float bufferData[] =
 	 1.0f, -1.0f,  1.0f
 };
 
-SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::SKY, meshLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::SKY, meshLoader, textureLoader, renderBus),
 	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {
 

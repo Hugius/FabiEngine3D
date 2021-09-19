@@ -14,9 +14,9 @@ const float bufferData[] =
 	-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 };
 
-BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, Camera& camera)
+BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Camera& camera)
 	:
-	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::BILLBOARD, meshLoader, textureLoader, renderBus),
 	_camera(camera),
 	_renderBuffer(make_shared<RenderBuffer>(RenderBufferType::VERTEX_UV, bufferData, static_cast<unsigned int>(sizeof(bufferData) / sizeof(float))))
 {

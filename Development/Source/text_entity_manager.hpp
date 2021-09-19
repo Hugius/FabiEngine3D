@@ -5,7 +5,7 @@
 class TextEntityManager final : public BaseEntityManager
 {
 public:
-	TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	TextEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
 
 	shared_ptr<TextEntity> getEntity(const string& ID);
 

@@ -820,7 +820,7 @@ public:
 	void misc_clearTextCache(const string& textContent, const string& fontPath);
 	void misc_clearBitmapCache(const string& filePath);
 	void misc_clearAudioCache(const string& filePath);
-	void misc_cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
+	void misc_cacheMeshesMultiThreaded(const vector<string>& filePaths);
 	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
 	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
 	void misc_cacheBitmapsMultiThreaded(const vector<string>& filePaths);

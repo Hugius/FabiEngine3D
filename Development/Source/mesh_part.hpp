@@ -11,12 +11,9 @@ using std::string;
 class MeshPart final
 {
 public:
+	MeshPart(const string& ID);
+
 	// Voids
-	void setID(const string& value);
-	void setDiffuseMapPath(const string& value);
-	void setEmissionMapPath(const string& value);
-	void setReflectionMapPath(const string& value);
-	void setNormalMapPath(const string& value);
 	void addVertex(Vec3 value);
 	void addNormal(Vec3 value);
 	void addTangent(Vec3 value);
@@ -24,10 +21,6 @@ public:
 
 	// Strings
 	const string& getID() const;
-	const string& getDiffuseMapPath() const;
-	const string& getEmissionMapPath() const;
-	const string& getReflectionMapPath() const;
-	const string& getNormalMapPath() const;
 
 	// Vectors
 	const vector<Vec3>& getVertices() const;
@@ -37,11 +30,7 @@ public:
 
 private:
 	// Strings
-	string _ID;
-	string _diffuseMapPath;
-	string _emissionMapPath;
-	string _reflectionMapPath;
-	string _normalMapPath;
+	const string _ID;
 
 	// Vectors
 	vector<Vec3> _vertices;

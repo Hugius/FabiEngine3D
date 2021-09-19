@@ -2,9 +2,9 @@
 #include "configuration.hpp"
 #include "logger.hpp"
 
-LightEntityManager::LightEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus)
+LightEntityManager::LightEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
 	:
-	BaseEntityManager(EntityType::LIGHT, meshLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::LIGHT, meshLoader, textureLoader, renderBus)
 {
 
 }

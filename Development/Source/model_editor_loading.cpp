@@ -170,9 +170,9 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	{
 		// Placeholder variables
 		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
-		float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness, emissionIntensity;
+		float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 		unsigned int reflectionType;
-		bool isFaceCulled, isSpecular, isInstanced, isBright;
+		bool isFaceCulled, isSpecular, isInstanced;
 		Vec3 size, color;
 		vector<string> aabbIDs;
 		vector<Vec3> aabbPositions;
@@ -204,9 +204,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			color.b >>
 			uvRepeat >>
 			lodEntityID >>
-			isInstanced >>
-			isBright >>
-			emissionIntensity;
+			isInstanced;
 
 		// Extract AABB data from file
 		while (true)
@@ -297,7 +295,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			_fe3d.modelEntity_setColor(modelID, "", color);
 			_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
 			_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
-			_fe3d.modelEntity_setBright(modelID, isBright);
 			_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);
 			_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
 			_fe3d.modelEntity_setReflectivity(modelID, reflectivity);

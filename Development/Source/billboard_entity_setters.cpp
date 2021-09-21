@@ -130,6 +130,11 @@ void BillboardEntity::setDiffuseMap(TextureID value, bool isText)
 	_isText = isText;
 }
 
+void BillboardEntity::setEmissionMap(TextureID value)
+{
+	_emissionMap = value;
+}
+
 void BillboardEntity::setPosition(Vec3 value)
 {
 	_position = value;
@@ -206,6 +211,11 @@ void BillboardEntity::setFontPath(const string& value)
 void BillboardEntity::setDiffuseMapPath(const string& value)
 {
 	_diffuseMapPath = value;
+}
+
+void BillboardEntity::setEmissionMapPath(const string& value)
+{
+	_emissionMapPath = value;
 }
 
 void BillboardEntity::setDepthMapIncluded(bool value)
@@ -354,4 +364,9 @@ void BillboardEntity::setMaxHeight(float value)
 void BillboardEntity::setUvRepeat(float value)
 {
 	_uvRepeat = max(0.0f, value);
+}
+
+void BillboardEntity::setEmissionIntensity(float value)
+{
+	_emissionIntensity = value;
 }

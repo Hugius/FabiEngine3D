@@ -15,8 +15,6 @@ void ModelEditor::_updateLightingMenu()
 		auto specularShininess = _fe3d.modelEntity_getSpecularShininess(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
-		auto isBright = _fe3d.modelEntity_isBright(_currentModelID);
-		auto emissionIntensity = _fe3d.modelEntity_getEmissionIntensity(_currentModelID);
 		auto hasReflectionMap = _fe3d.modelEntity_hasReflectionMap(_currentModelID, "");
 		auto isSpecularLighted = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
 
@@ -42,15 +40,6 @@ void ModelEditor::_updateLightingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
-		{
-			isBright = !isBright;
-			_fe3d.modelEntity_setBright(_currentModelID, isBright);
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionIntensity")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("emissionIntensity", "Emission Intensity", (emissionIntensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
@@ -90,22 +79,15 @@ void ModelEditor::_updateLightingMenu()
 			reflectivity /= 100.0f;
 			_fe3d.modelEntity_setReflectivity(_currentModelID, reflectivity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("emissionIntensity", emissionIntensity))
-		{
-			emissionIntensity /= 100.0f;
-			_fe3d.modelEntity_setEmissionIntensity(_currentModelID, emissionIntensity);
-		}
 
 		// Update buttons hoverability
 		screen->getButton("specularShininess")->setHoverable(isSpecularLighted);
 		screen->getButton("specularIntensity")->setHoverable(isSpecularLighted);
 		screen->getButton("reflectionType")->setHoverable(hasReflectionMap);
 		screen->getButton("reflectivity")->setHoverable(hasReflectionMap);
-		screen->getButton("emissionIntensity")->setHoverable(hasReflectionMap);
 
 		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
 		if (hasReflectionMap)
 		{
 			if (reflectionType == ReflectionType::CUBE)

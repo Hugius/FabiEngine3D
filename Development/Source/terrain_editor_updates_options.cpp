@@ -65,7 +65,7 @@ void TerrainEditor::_updateOptionsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("uvRepeat")->setHoverable(hasDiffuseMap || hasBlendMap || hasNormalMap);
+		screen->getButton("uvRepeat")->setHoverable(hasDiffuseMap || hasDiffuseMapR || hasDiffuseMapG || hasDiffuseMapB);
 		screen->getButton("redRepeat")->setHoverable(hasDiffuseMapR || hasNormalMapR);
 		screen->getButton("greenRepeat")->setHoverable(hasDiffuseMapG || hasNormalMapG);
 		screen->getButton("blueRepeat")->setHoverable(hasDiffuseMapB || hasNormalMapB);

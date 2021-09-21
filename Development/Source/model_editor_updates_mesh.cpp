@@ -1,4 +1,5 @@
 #include "model_editor.hpp"
+#include "logger.hpp"
 
 void ModelEditor::_updateMeshMenu()
 {
@@ -26,30 +27,175 @@ void ModelEditor::_updateMeshMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			auto lambda = [this]() { _loadDiffuseMap(); };
+			auto lambda = [this]()
+			{
+				// Get the chosen filename
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
+
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+				{
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set diffuse map
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(finalFilePath);
+				_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
+
+				// Miscellaneous
+				_currentPartID = "";
+			};
 			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			auto lambda = [this]() { _loadEmissionMap(); };
+			auto lambda = [this]()
+			{
+				// Get the chosen filename
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
+
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+				{
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set emission map
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(finalFilePath);
+				_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
+
+				// Miscellaneous
+				_currentPartID = "";
+			};
 			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
-			auto lambda = [this]() { _loadReflectionMap(); };
+			auto lambda = [this]()
+			{
+				// Get the chosen filename
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("game_assets\\textures\\reflection_maps\\");
+
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+				{
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set reflection map
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(finalFilePath);
+				_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
+
+				// Miscellaneous
+				_currentPartID = "";
+			};
 			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
-			auto lambda = [this]() { _loadNormalMap(); };
+			auto lambda = [this]()
+			{
+				// Get the chosen filename
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
+
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+				{
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set normal map
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(finalFilePath);
+				_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
+
+				// Miscellaneous
+				_currentPartID = "";
+			};
 			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
-			_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
+			auto lambda = [this]()
+			{
+				_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, "");
+				_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, "");
+				_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
+				_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
+				_currentPartID = "";
+			};
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 
 		// Update value forms
@@ -68,12 +214,5 @@ void ModelEditor::_updateMeshMenu()
 			size.z /= 100.0f;
 			_fe3d.modelEntity_setSize(_currentModelID, "", size);
 		}
-
-		// Update buttons hoverability
-		screen->getButton("clearMaps")->setHoverable(!isMultiParted && (
-			_fe3d.modelEntity_hasDiffuseMap(_currentModelID, "") ||
-			_fe3d.modelEntity_hasEmissionMap(_currentModelID, "") ||
-			_fe3d.modelEntity_hasReflectionMap(_currentModelID, "") ||
-			_fe3d.modelEntity_hasNormalMap(_currentModelID, "")));
 	}
 }

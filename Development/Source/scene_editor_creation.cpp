@@ -259,7 +259,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setColor(newID, "", _fe3d.modelEntity_getColor(previewID, ""));
 	_fe3d.modelEntity_setUvRepeat(newID, _fe3d.modelEntity_getUvRepeat(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
-	_fe3d.modelEntity_setBright(newID, _fe3d.modelEntity_isBright(previewID));
 
 	// Save original transformation
 	if (_isEditorLoaded)
@@ -309,6 +308,12 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}
 
+	// Emission map
+	if (_fe3d.billboardEntity_hasEmissionMap(previewID))
+	{
+		_fe3d.billboardEntity_setEmissionMap(newID, _fe3d.billboardEntity_getEmissionMapPath(previewID));
+	}
+
 	// Text
 	if (_fe3d.billboardEntity_isText(previewID))
 	{
@@ -334,7 +339,6 @@ bool SceneEditor::_copyPreviewBillboard(const string& newID, const string& previ
 	_fe3d.billboardEntity_setShadowed(newID, _fe3d.billboardEntity_isShadowed(previewID));
 	_fe3d.billboardEntity_setReflected(newID, _fe3d.billboardEntity_isReflected(previewID));
 	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
-	_fe3d.billboardEntity_setBright(newID, _fe3d.billboardEntity_isBright(previewID));
 
 	// Save ID
 	if (fromOutside)

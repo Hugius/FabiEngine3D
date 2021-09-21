@@ -13,7 +13,6 @@ void BillboardEditor::_updateLightingMenu()
 		auto lightness = _fe3d.billboardEntity_getLightness(_currentBillboardID);
 		auto isReflected = _fe3d.billboardEntity_isReflected(_currentBillboardID);
 		auto isShadowed = _fe3d.billboardEntity_isShadowed(_currentBillboardID);
-		auto isBright = _fe3d.billboardEntity_isBright(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -35,11 +34,6 @@ void BillboardEditor::_updateLightingMenu()
 			isReflected = !isReflected;
 			_fe3d.billboardEntity_setReflected(_currentBillboardID, isReflected);
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isBright")->isHovered())
-		{
-			isBright = !isBright;
-			_fe3d.billboardEntity_setBright(_currentBillboardID, isBright);
-		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness, {}))
@@ -49,7 +43,6 @@ void BillboardEditor::_updateLightingMenu()
 		}
 
 		// Update button text contents
-		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright : OFF");
 		screen->getButton("isReflected")->changeTextContent(isReflected ? "Reflected: ON" : "Reflected: OFF");
 		screen->getButton("isShadowed")->changeTextContent(isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 	}

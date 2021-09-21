@@ -78,6 +78,11 @@ const float FabiEngine3D::billboardEntity_getUvRepeat(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getUvRepeat();
 }
 
+const float FabiEngine3D::billboardEntity_getEmissionIntensity(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getEmissionIntensity();
+}
+
 const bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 {
 	return _core->_billboardEntityManager.isExisting(ID);
@@ -149,6 +154,20 @@ void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string&
 	{
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true), false);
 		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+	}
+}
+
+void FabiEngine3D::billboardEntity_setEmissionMap(const string& ID, const string& texturePath)
+{
+	if (texturePath.empty())
+	{
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(0);
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath("");
+	}
+	else
+	{
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_billboardEntityManager.getEntity(ID)->setEmissionMapPath(texturePath);
 	}
 }
 
@@ -247,6 +266,11 @@ void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)
 void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
+}
+
+void FabiEngine3D::billboardEntity_setEmissionIntensity(const string& ID, float intensity)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setEmissionIntensity(intensity);
 }
 
 const bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
@@ -421,6 +445,11 @@ const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
+const string& FabiEngine3D::billboardEntity_getEmissionMapPath(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getEmissionMapPath();
+}
+
 const bool FabiEngine3D::billboardEntity_isSpriteAnimationStarted(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isSpriteAnimationStarted();
@@ -439,6 +468,11 @@ const bool FabiEngine3D::billboardEntity_isSpriteAnimationPaused(const string& I
 const bool FabiEngine3D::billboardEntity_hasDiffuseMap(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+const bool FabiEngine3D::billboardEntity_hasEmissionMap(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->hasEmissionMap();
 }
 
 const bool FabiEngine3D::billboardEntity_isText(const string& ID)

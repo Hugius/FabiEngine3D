@@ -37,7 +37,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	while (getline(file, line))
 	{
 		// Values
-		string billboardID, diffuseMapPath;
+		string billboardID, diffuseMapPath, emissionMapPath;
 		Vec2 size;
 		Vec3 color;
 		bool facingX, facingY;
@@ -55,16 +55,25 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 			color.b >>
 			facingX >>
 			facingY >>
-			diffuseMapPath;
+			diffuseMapPath >>
+			emissionMapPath;
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 
-		// Save file path
+		// Save diffuse map path
 		if (!diffuseMapPath.empty())
 		{
 			texturePaths.push_back(diffuseMapPath);
+		}
+
+		// Save emission map path
+		if (!emissionMapPath.empty())
+		{
+			texturePaths.push_back(emissionMapPath);
 		}
 	}
 
@@ -174,11 +183,11 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	while (getline(file, line))
 	{
 		// Placeholder variables
-		string billboardID, diffuseMapPath, fontPath, textContent;
+		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
 		Vec2 size;
 		Vec3 color;
 		float lightness, uvRepeat;
-		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted, isBright;
+		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted;
 		unsigned int animationRows, animationColumns, animationFramestep;
 
 		// For file extraction
@@ -195,6 +204,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			isFacingX >>
 			isFacingY >>
 			diffuseMapPath >>
+			emissionMapPath >>
 			isReflected >>
 			isShadowed >>
 			fontPath >>
@@ -204,14 +214,15 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			animationColumns >>
 			animationFramestep >>
 			lightness >>
-			isBright >>
 			uvRepeat;
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
 		fontPath = (fontPath == "?") ? "" : fontPath;
 		textContent = (textContent == "?") ? "" : textContent;
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
 		replace(fontPath.begin(), fontPath.end(), '?', ' ');
 		replace(textContent.begin(), textContent.end(), '?', ' ');
 
@@ -240,6 +251,12 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 				}
 			}
 
+			// Emission map
+			if (!emissionMapPath.empty())
+			{
+				_fe3d.billboardEntity_setEmissionMap(billboardID, emissionMapPath);
+			}
+
 			// Text
 			if (!fontPath.empty())
 			{
@@ -256,7 +273,6 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-			_fe3d.billboardEntity_setBright(billboardID, isBright);
 			_fe3d.billboardEntity_setUvRepeat(billboardID, uvRepeat);
 		}
 	}
@@ -299,6 +315,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		auto size = _fe3d.billboardEntity_getSize(billboardID);
 		auto color = _fe3d.billboardEntity_getColor(billboardID);
 		auto diffuseMapPath = _fe3d.billboardEntity_getDiffuseMapPath(billboardID);
+		auto emissionMapPath = _fe3d.billboardEntity_getEmissionMapPath(billboardID);
 		auto fontPath = _fe3d.billboardEntity_getFontPath(billboardID);
 		auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
@@ -310,14 +327,15 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
-		auto isBright = _fe3d.billboardEntity_isBright(billboardID);
 		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(billboardID);
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
 		fontPath = (fontPath.empty()) ? "?" : fontPath;
 		textContent = (textContent.empty()) ? "?" : textContent;
 		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');
 
@@ -332,6 +350,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 			isFacingX << " " <<
 			isFacingY << " " <<
 			diffuseMapPath << " " <<
+			emissionMapPath << " " <<
 			isReflected << " " <<
 			isShadowed << " " <<
 			fontPath << " " <<
@@ -341,7 +360,6 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 			animationColumns << " " <<
 			animationFramestep << " " <<
 			lightness << " " <<
-			isBright << " " <<
 			uvRepeat << endl;
 	}
 

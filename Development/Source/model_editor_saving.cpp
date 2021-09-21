@@ -53,9 +53,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
 			auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
-			auto isBright = _fe3d.modelEntity_isBright(modelID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID));
-			auto emissionIntensity = _fe3d.modelEntity_getEmissionIntensity(modelID);
 
 			// AABB data
 			vector<string> aabbIDs;
@@ -108,9 +106,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				color.b << " " <<
 				uvRepeat << " " <<
 				lodEntityID << " " <<
-				isInstanced << " " <<
-				isBright << " " <<
-				emissionIntensity;
+				isInstanced;
 
 			// Add space
 			if (!aabbIDs.empty())

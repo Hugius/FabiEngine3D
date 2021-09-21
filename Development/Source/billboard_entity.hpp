@@ -25,6 +25,7 @@ public:
 	void setBright(bool value);
 	void setWireFramed(bool value);
 	void setDiffuseMap(TextureID value, bool isText);
+	void setEmissionMap(TextureID value);
 	void setPosition(Vec3 value);
 	void setRotation(Vec3 value);
 	void setSize(Vec2 value);
@@ -38,6 +39,7 @@ public:
 	void setTextContent(const string& value);
 	void setFontPath(const string& value);
 	void setDiffuseMapPath(const string& value);
+	void setEmissionMapPath(const string& value);
 	void startSpriteAnimation(int loops);
 	void pauseSpriteAnimation();
 	void resumeSpriteAnimation();
@@ -56,6 +58,7 @@ public:
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
 	void setUvRepeat(float value);
+	void setEmissionIntensity(float value);
 
 	// Instances
 	const shared_ptr<RenderBuffer> getRenderBuffer();
@@ -64,6 +67,7 @@ public:
 	const string& getTextContent();
 	const string& getFontPath();
 	const string& getDiffuseMapPath();
+	const string& getEmissionMapPath();
 
 	// Matrices
 	const Matrix44& getTransformationMatrix();
@@ -81,6 +85,7 @@ public:
 	const float getMinHeight();
 	const float getMaxHeight();
 	const float getUvRepeat();
+	const float getEmissionIntensity();
 
 	// Integers
 	const int getMaxSpriteAnimationLoops();
@@ -105,9 +110,11 @@ public:
 	const bool isWireFramed();
 	const bool hasRenderBuffer();
 	const bool hasDiffuseMap();
+	const bool hasEmissionMap();
 
 	// Miscellaneous
 	const TextureID getDiffuseMap();
+	const TextureID getEmissionMap();
 
 private:
 	// Instances
@@ -116,6 +123,7 @@ private:
 	// Strings
 	string _textContent = "";
 	string _diffuseMapPath = "";
+	string _emissionMapPath = "";
 	string _fontPath = "";
 
 	// Matrices
@@ -131,6 +139,7 @@ private:
 	Vec2 _sizeTarget = Vec2(1.0f);
 
 	// Floats
+	float _emissionIntensity = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
@@ -165,4 +174,5 @@ private:
 
 	// Miscellaneous
 	TextureID _diffuseMap = 0;
+	TextureID _emissionMap = 0;
 };

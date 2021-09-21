@@ -7,16 +7,17 @@ void BillboardEntityColorRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_clippingPlane",	_renderBus.getClippingPlane());
-	_shader.uploadUniform("u_cameraPosition",	_renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogMinDistance",   _renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance",   _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogThickness",	    _renderBus.getFogThickness());
-	_shader.uploadUniform("u_fogColor",		    _renderBus.getFogColor());
-	_shader.uploadUniform("u_isFogEnabled",	    _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_clippingPlane", _renderBus.getClippingPlane());
+	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
+	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance", _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogThickness", _renderBus.getFogThickness());
+	_shader.uploadUniform("u_fogColor", _renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled", _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_diffuseMap", 0);
+	_shader.uploadUniform("u_emissionMap", 1);
 
 	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
@@ -59,6 +60,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
+
 		// Sprite animation
 		Vec2 uvMultiplier = Vec2(1.0f);
 		Vec2 uvAdder = Vec2(0.0f);
@@ -79,6 +81,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
 		_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_inversion", entity->getInversion());
@@ -87,6 +90,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isBright", entity->isBright());
+		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
@@ -97,6 +101,11 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
+		if (entity->hasEmissionMap())
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap());
 		}
 
 		// Bind buffer
@@ -113,6 +122,11 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		if (entity->hasDiffuseMap())
 		{
 			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasEmissionMap())
+		{
+			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 

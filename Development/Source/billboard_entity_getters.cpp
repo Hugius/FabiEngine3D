@@ -15,6 +15,11 @@ const TextureID BillboardEntity::getDiffuseMap()
 	return _diffuseMap;
 }
 
+const TextureID BillboardEntity::getEmissionMap()
+{
+	return _emissionMap;
+}
+
 const Vec3 BillboardEntity::getPosition()
 {
 	return _position;
@@ -50,6 +55,11 @@ const string& BillboardEntity::getDiffuseMapPath()
 	return _diffuseMapPath;
 }
 
+const string& BillboardEntity::getEmissionMapPath()
+{
+	return _emissionMapPath;
+}
+
 const float BillboardEntity::getLightness()
 {
 	return _lightness;
@@ -78,6 +88,11 @@ const float BillboardEntity::getMaxHeight()
 const float BillboardEntity::getUvRepeat()
 {
 	return _uvRepeat;
+}
+
+const float BillboardEntity::getEmissionIntensity()
+{
+	return _emissionIntensity;
 }
 
 const unsigned int BillboardEntity::getPassedSpriteAnimationFrames()
@@ -173,6 +188,11 @@ const bool BillboardEntity::hasRenderBuffer()
 const bool BillboardEntity::hasDiffuseMap()
 {
 	return (_diffuseMap != 0);
+}
+
+const bool BillboardEntity::hasEmissionMap()
+{
+	return (_emissionMap != 0);
 }
 
 const bool BillboardEntity::isText()

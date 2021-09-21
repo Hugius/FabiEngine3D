@@ -364,6 +364,7 @@ public:
 	void billboardEntity_resumeSpriteAnimation(const string& ID);
 	void billboardEntity_stopSpriteAnimation(const string& ID);
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void billboardEntity_setEmissionMap(const string& ID, const string& texturePath);
 	void billboardEntity_setFont(const string& ID, const string& fontPath);
 	void billboardEntity_setTextContent(const string& ID, const string& textContent);
 	void billboardEntity_setPosition(const string& ID, Vec3 position);
@@ -382,6 +383,7 @@ public:
 	void billboardEntity_setInversion(const string& ID, float inversion);
 	void billboardEntity_setAlpha(const string& ID, float alpha);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
+	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
 	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
 	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
 	void billboardEntity_setSpriteAnimationColumns(const string& ID, unsigned int columns);
@@ -400,6 +402,7 @@ public:
 	// Billboard entity interface - getters
 	const vector<string> billboardEntity_getAllIDs();
 	const string& billboardEntity_getDiffuseMapPath(const string& ID);
+	const string& billboardEntity_getEmissionMapPath(const string& ID);
 	const string& billboardEntity_getFontPath(const string& ID);
 	const string& billboardEntity_getTextContent(const string& ID);
 	const Vec3 billboardEntity_getPosition(const string& ID);
@@ -412,6 +415,7 @@ public:
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const float billboardEntity_getAlpha(const string& ID);
 	const float billboardEntity_getUvRepeat(const string& ID);
+	const float billboardEntity_getEmissionIntensity(const string& ID);
 	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
 	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);
 	const unsigned int billboardEntity_getSpriteAnimationColumns(const string& ID);
@@ -431,6 +435,7 @@ public:
 	const bool billboardEntity_isSpriteAnimationPlaying(const string& ID);
 	const bool billboardEntity_isSpriteAnimationPaused(const string& ID);
 	const bool billboardEntity_hasDiffuseMap(const string& ID);
+	const bool billboardEntity_hasEmissionMap(const string& ID);
 	const bool billboardEntity_isText(const string& ID);
 
 	// AABB entity interface - setters

@@ -15,6 +15,8 @@ void BillboardEditor::_updateOptionsMenu()
 		auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
 		auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
 		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(_currentBillboardID);
+		auto isText = _fe3d.billboardEntity_isText(_currentBillboardID);
+		auto hasDiffuseMap = _fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -88,8 +90,8 @@ void BillboardEditor::_updateOptionsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("textContent")->setHoverable(_fe3d.billboardEntity_isText(_currentBillboardID));
-		screen->getButton("uvRepeat")->setHoverable(_fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID) && !_fe3d.billboardEntity_isText(_currentBillboardID));
+		screen->getButton("textContent")->setHoverable(isText);
+		screen->getButton("uvRepeat")->setHoverable(hasDiffuseMap && !isText);
 
 		// Update button text contents
 		screen->getButton("facingX")->changeTextContent(isFacingX ? "Facing X: ON" : "Facing X: OFF");

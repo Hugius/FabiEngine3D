@@ -279,7 +279,7 @@ vector<string> SceneEditor::_loadSceneIDs()
 		// Get all project IDs
 		for (const auto& entry : directory_iterator(directoryPath))
 		{
-			string sceneID = string(entry.path().u8string());
+			string sceneID = string(entry.path().string());
 			sceneID.erase(0, directoryPath.size());
 			sceneIDs.push_back(sceneID.substr(0, sceneID.size() - 5));
 		}

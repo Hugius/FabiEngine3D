@@ -202,21 +202,7 @@ const bool ModelEntity::isReflected()
 
 const bool ModelEntity::hasDiffuseMap(const string& partID)
 {
-	if (partID.empty())
-	{
-		for (const auto& part : _parts)
-		{
-			if (part.diffuseMap != 0)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	else
-	{
-		return (_parts[_getPartIndex(partID)].diffuseMap != 0);
-	}
+	return (_parts[_getPartIndex(partID)].diffuseMap != 0);
 }
 
 const bool ModelEntity::hasEmissionMap(const string& partID)

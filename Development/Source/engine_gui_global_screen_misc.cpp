@@ -26,7 +26,7 @@ void EngineGuiGlobalScreen::createValueForm(const string& ID, string title, stri
 	_createValueForm(ID, title, value, position, size, buttonsPosition, false, false);
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues)
 {
 	// Convert from unsigned integer to string
 	vector<string> forbiddenValueStrings;
@@ -42,7 +42,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, unsigned int& value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues)
 {
 	// Convert from integer to string
 	vector<string> forbiddenValueStrings;
@@ -58,7 +58,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vector<float> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues)
 {
 	// Convert from float to integer to string
 	vector<string> forbiddenValueStrings;
@@ -74,7 +74,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vecto
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vector<double> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues)
 {
 	// Convert from double to integer to string
 	vector<string> forbiddenValueStrings;
@@ -90,7 +90,7 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vect
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vector<string> forbiddenValues)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues)
 {
 	return _checkValueForm(ID, value, forbiddenValues);
 }
@@ -140,7 +140,7 @@ void EngineGuiGlobalScreen::_createValueForm(const string& ID, string title, str
 	}
 }
 
-bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings)
+bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings)
 {
 	bool changed = false;
 
@@ -196,12 +196,12 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	return changed;
 }
 
-void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles)
+void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec2 position, const vector<string>& buttonTitles)
 {
 	// Validate existence
 	if (!_choiceFormID.empty())
 	{
-		Logger::throwError("EngineGuiGlobalScreen::createChoiceForm");
+		Logger::throwError("EngineGuiGlobalScreen::createChoiceForm::1");
 	}
 
 	// Create choice form
@@ -213,7 +213,14 @@ void EngineGuiGlobalScreen::createChoiceForm(const string& ID, string title, Vec
 	// Add buttons to scrolling list
 	for (const auto& buttonTitle : buttonTitles)
 	{
-		getScrollingList(ID)->createButton(buttonTitle, buttonTitle.empty() ? " " : buttonTitle);
+		// Validate button title
+		if (buttonTitle.empty())
+		{
+			Logger::throwError("EngineGuiGlobalScreen::createChoiceForm::2");
+		}
+
+		// Add button
+		getScrollingList(ID)->createButton(buttonTitle, buttonTitle);
 	}
 
 	// Miscellaneous

@@ -270,10 +270,10 @@ public:
 	void modelEntity_delete(const string& ID);
 	void modelEntity_deleteGroup(const string& ID);
 	void modelEntity_setVisible(const string& ID, bool isVisible);
-	void modelEntity_setDiffuseMap(const string& ID, const string& texturePath);
-	void modelEntity_setEmissionMap(const string& ID, const string& texturePath);
-	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
-	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
+	void modelEntity_setDiffuseMap(const string& ID, const string& partID, const string& texturePath);
+	void modelEntity_setEmissionMap(const string& ID, const string& partID, const string& texturePath);
+	void modelEntity_setReflectionMap(const string& ID, const string& partID, const string& texturePath);
+	void modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setReflectionType(const string& ID, ReflectionType type);
@@ -349,10 +349,10 @@ public:
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
 	const bool modelEntity_isBright(const string& ID);
-	const bool modelEntity_hasDiffuseMap(const string& ID);
-	const bool modelEntity_hasEmissionMap(const string& ID);
-	const bool modelEntity_hasReflectionMap(const string& ID);
-	const bool modelEntity_hasNormalMap(const string& ID);
+	const bool modelEntity_hasDiffuseMap(const string& ID, const string& partID);
+	const bool modelEntity_hasEmissionMap(const string& ID, const string& partID);
+	const bool modelEntity_hasReflectionMap(const string& ID, const string& partID);
+	const bool modelEntity_hasNormalMap(const string& ID, const string& partID);
 	const ReflectionType modelEntity_getReflectionType(const string& ID);
 
 	// Billboard entity interface - setters

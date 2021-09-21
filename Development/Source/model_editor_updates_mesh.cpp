@@ -26,26 +26,30 @@ void ModelEditor::_updateMeshMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
-			_loadDiffuseMap();
+			auto lambda = [this]() { _loadDiffuseMap(); };
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
-			_loadEmissionMap();
+			auto lambda = [this]() { _loadEmissionMap(); };
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
-			_loadReflectionMap();
+			auto lambda = [this]() { _loadReflectionMap(); };
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
-			_loadNormalMap();
+			auto lambda = [this]() { _loadNormalMap(); };
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
-			_fe3d.modelEntity_setDiffuseMap(_currentModelID, "");
-			_fe3d.modelEntity_setEmissionMap(_currentModelID, "");
-			_fe3d.modelEntity_setReflectionMap(_currentModelID, "");
-			_fe3d.modelEntity_setNormalMap(_currentModelID, "");
+			_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, "");
+			_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, "");
+			_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
+			_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
 		}
 
 		// Update value forms
@@ -66,14 +70,10 @@ void ModelEditor::_updateMeshMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("diffuseMap")->setHoverable(!isMultiParted);
-		screen->getButton("emissionMap")->setHoverable(!isMultiParted);
-		screen->getButton("reflectionMap")->setHoverable(!isMultiParted);
-		screen->getButton("normalMap")->setHoverable(!isMultiParted);
 		screen->getButton("clearMaps")->setHoverable(!isMultiParted && (
-			_fe3d.modelEntity_hasDiffuseMap(_currentModelID) ||
-			_fe3d.modelEntity_hasEmissionMap(_currentModelID) ||
-			_fe3d.modelEntity_hasReflectionMap(_currentModelID) ||
-			_fe3d.modelEntity_hasNormalMap(_currentModelID)));
+			_fe3d.modelEntity_hasDiffuseMap(_currentModelID, "") ||
+			_fe3d.modelEntity_hasEmissionMap(_currentModelID, "") ||
+			_fe3d.modelEntity_hasReflectionMap(_currentModelID, "") ||
+			_fe3d.modelEntity_hasNormalMap(_currentModelID, "")));
 	}
 }

@@ -17,6 +17,8 @@ void ModelEditor::_updateLightingMenu()
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
 		auto isBright = _fe3d.modelEntity_isBright(_currentModelID);
 		auto emissionIntensity = _fe3d.modelEntity_getEmissionIntensity(_currentModelID);
+		auto hasReflectionMap = _fe3d.modelEntity_hasReflectionMap(_currentModelID, "");
+		auto isSpecularLighted = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -95,16 +97,16 @@ void ModelEditor::_updateLightingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("specularShininess")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
-		screen->getButton("specularIntensity")->setHoverable(_fe3d.modelEntity_isSpecularLighted(_currentModelID));
-		screen->getButton("reflectionType")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
-		screen->getButton("reflectivity")->setHoverable(_fe3d.modelEntity_hasReflectionMap(_currentModelID));
-		screen->getButton("emissionIntensity")->setHoverable(_fe3d.modelEntity_hasEmissionMap(_currentModelID));
+		screen->getButton("specularShininess")->setHoverable(isSpecularLighted);
+		screen->getButton("specularIntensity")->setHoverable(isSpecularLighted);
+		screen->getButton("reflectionType")->setHoverable(hasReflectionMap);
+		screen->getButton("reflectivity")->setHoverable(hasReflectionMap);
+		screen->getButton("emissionIntensity")->setHoverable(hasReflectionMap);
 
 		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 		screen->getButton("isBright")->changeTextContent(isBright ? "Bright: ON" : "Bright: OFF");
-		if (_fe3d.modelEntity_hasReflectionMap(_currentModelID))
+		if (hasReflectionMap)
 		{
 			if (reflectionType == ReflectionType::CUBE)
 			{

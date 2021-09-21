@@ -151,7 +151,7 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 	for (const auto& entry : directory_iterator(projectDirectoryPath))
 	{
 		// Extract project ID
-		string projectPath = string(entry.path().u8string());
+		string projectPath = entry.path().string();
 		if (_fe3d.misc_isDirectoryExisting(projectPath))
 		{
 			string projectID = projectPath;

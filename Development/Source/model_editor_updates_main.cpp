@@ -45,6 +45,10 @@ void ModelEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updatePartChoosing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateAabbCreating();
 	}
 	if (_isEditorLoaded)
@@ -332,6 +336,36 @@ void ModelEditor::_updateModelDeleting()
 			_fe3d.modelEntity_setVisible(_currentModelID, false);
 			_isDeletingModel = false;
 			_currentModelID = "";
+		}
+	}
+}
+
+void ModelEditor::_updatePartChoosing()
+{
+	if (_isChoosingPart)
+	{
+		// Get selected button ID
+		string selectedButtonID = _gui.getGlobalScreen()->checkChoiceForm("partList");
+
+		// Check if a part ID is hovered
+		if (!selectedButtonID.empty())
+		{
+			// Check if LMB is pressed
+			if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				// Select part
+				_currentPartID = selectedButtonID;
+
+				// Miscellaneous
+				_gui.getGlobalScreen()->deleteChoiceForm("partList");
+				_isChoosingPart = false;
+				_partExecutionFunction();
+			}
+		}
+		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("partList")) // Cancelled choosing
+		{
+			_isChoosingPart = false;
+			_gui.getGlobalScreen()->deleteChoiceForm("partList");
 		}
 	}
 }

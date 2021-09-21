@@ -39,7 +39,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	for (const auto& entry : directory_iterator(directoryPath))
 	{
 		// Extract filename
-		string filename = string(entry.path().u8string());
+		string filename = string(entry.path().string());
 		filename.erase(0, directoryPath.size());
 
 		// Check if script file exists & check if the file extension is correct

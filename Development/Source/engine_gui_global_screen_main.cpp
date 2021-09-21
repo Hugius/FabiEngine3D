@@ -209,27 +209,27 @@ shared_ptr<EngineGuiTextField> EngineGuiGlobalScreen::getTextField(const string&
 	Logger::throwError("EngineGuiGlobalScreen::getTextField");
 }
 
-vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingLists()
+const vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiGlobalScreen::getScrollingLists()
 {
 	return _scrollingLists;
 }
 
-vector<shared_ptr<EngineGuiWriteField>>& EngineGuiGlobalScreen::getWriteFields()
+const vector<shared_ptr<EngineGuiWriteField>>& EngineGuiGlobalScreen::getWriteFields()
 {
 	return _writeFields;
 }
 
-vector<shared_ptr<EngineGuiButton>>& EngineGuiGlobalScreen::getButtons()
+const vector<shared_ptr<EngineGuiButton>>& EngineGuiGlobalScreen::getButtons()
 {
 	return _buttons;
 }
 
-vector<shared_ptr<EngineGuiRectangle>>& EngineGuiGlobalScreen::getRectangles()
+const vector<shared_ptr<EngineGuiRectangle>>& EngineGuiGlobalScreen::getRectangles()
 {
 	return _rectangles;
 }
 
-vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFields()
+const vector<shared_ptr<EngineGuiTextField>>& EngineGuiGlobalScreen::getTextFields()
 {
 	return _textFields;
 }

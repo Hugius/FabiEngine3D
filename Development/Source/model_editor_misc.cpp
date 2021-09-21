@@ -3,6 +3,15 @@
 
 #include <algorithm>
 
+void ModelEditor::_preparePartChoosing(function<void()>&& executionFunction)
+{
+	auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
+	sort(IDs.begin(), IDs.end());
+	_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", Vec2(0.0f, 0.1f), IDs);
+	_isChoosingPart = true;
+	_partExecutionFunction = executionFunction;
+}
+
 void ModelEditor::_loadDiffuseMap()
 {
 	// Get the chosen filename
@@ -34,7 +43,7 @@ void ModelEditor::_loadDiffuseMap()
 	// Set diffuse map
 	const string finalFilePath = filePath.substr(rootDirectory.size());
 	_fe3d.misc_clearTextureCache2D(finalFilePath);
-	_fe3d.modelEntity_setDiffuseMap(_currentModelID, finalFilePath);
+	_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, finalFilePath);
 }
 
 void ModelEditor::_loadEmissionMap()
@@ -68,7 +77,7 @@ void ModelEditor::_loadEmissionMap()
 	// Set emission map
 	const string finalFilePath = filePath.substr(rootDirectory.size());
 	_fe3d.misc_clearTextureCache2D(finalFilePath);
-	_fe3d.modelEntity_setEmissionMap(_currentModelID, finalFilePath);
+	_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, finalFilePath);
 }
 
 void ModelEditor::_loadReflectionMap()
@@ -102,7 +111,7 @@ void ModelEditor::_loadReflectionMap()
 	// Set reflection map
 	const string finalFilePath = filePath.substr(rootDirectory.size());
 	_fe3d.misc_clearTextureCache2D(finalFilePath);
-	_fe3d.modelEntity_setReflectionMap(_currentModelID, finalFilePath);
+	_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, finalFilePath);
 }
 
 void ModelEditor::_loadNormalMap()
@@ -136,7 +145,7 @@ void ModelEditor::_loadNormalMap()
 	// Set normal map
 	const string finalFilePath = filePath.substr(rootDirectory.size());
 	_fe3d.misc_clearTextureCache2D(finalFilePath);
-	_fe3d.modelEntity_setNormalMap(_currentModelID, finalFilePath);
+	_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, finalFilePath);
 }
 
 void ModelEditor::setCurrentProjectID(const string& projectID)

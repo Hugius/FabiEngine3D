@@ -49,59 +49,59 @@ void FabiEngine3D::modelEntity_setVisible(const string& ID, bool isVisible)
 	_core->_modelEntityManager.getEntity(ID)->setVisible(isVisible);
 }
 
-void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& texturePath)
+void FabiEngine3D::modelEntity_setDiffuseMap(const string& ID, const string& partID, const string& texturePath)
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap("", 0);
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath("", "");
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, 0);
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath("", texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setDiffuseMapPath(partID, texturePath);
 	}
 }
 
-void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& texturePath)
+void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& partID, const string& texturePath)
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap("", 0);
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("", "");
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, 0);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath("", texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setEmissionMapPath(partID, texturePath);
 	}
 }
 
-void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& texturePath)
+void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath)
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap("", 0);
-		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("", "");
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, 0);
+		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setNormalMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath("", texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setNormalMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setNormalMapPath(partID, texturePath);
 	}
 }
 
-void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& texturePath)
+void FabiEngine3D::modelEntity_setReflectionMap(const string& ID, const string& partID, const string& texturePath)
 {
 	if (texturePath.empty())
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap("", 0);
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath("", "");
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, 0);
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, "");
 	}
 	else
 	{
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMap("", _core->_textureLoader.getTexture2D(texturePath, true, true));
-		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath("", texturePath);
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setReflectionMapPath(partID, texturePath);
 	}
 }
 
@@ -209,24 +209,24 @@ const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isBright();
 }
 
-const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID)
+const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap("");
+	return _core->_modelEntityManager.getEntity(ID)->hasDiffuseMap(partID);
 }
 
-const bool FabiEngine3D::modelEntity_hasEmissionMap(const string& ID)
+const bool FabiEngine3D::modelEntity_hasEmissionMap(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap("");
+	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap(partID);
 }
 
-const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID)
+const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasReflectionMap("");
+	return _core->_modelEntityManager.getEntity(ID)->hasReflectionMap(partID);
 }
 
-const bool FabiEngine3D::modelEntity_hasNormalMap(const string& ID)
+const bool FabiEngine3D::modelEntity_hasNormalMap(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->hasNormalMap("");
+	return _core->_modelEntityManager.getEntity(ID)->hasNormalMap(partID);
 }
 
 const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& ID)

@@ -32,7 +32,7 @@ public:
 	void createValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
 	void createValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
 	void createValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size, Vec2 buttonsPosition);
-	void createChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles);
+	void createChoiceForm(const string& ID, string title, Vec2 position, const vector<string>& buttonTitles);
 	void deleteChoiceForm(const string& ID);
 	void createAnswerForm(const string& ID, string title, Vec2 position);
 
@@ -46,11 +46,11 @@ public:
 	bool isButtonExisting(const string& ID);
 	bool isRectangleExisting(const string& ID);
 	bool isTextFieldExisting(const string& ID);
-	bool checkValueForm(const string& ID, unsigned int& value, vector<unsigned int> forbiddenValues = {});
-	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
-	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
-	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});
-	bool checkValueForm(const string& ID, string& value, vector<string> forbiddenValues = {});
+	bool checkValueForm(const string& ID, unsigned int& value, const vector<unsigned int>& forbiddenValues = {});
+	bool checkValueForm(const string& ID, int& value, const vector<int>& forbiddenValues = {});
+	bool checkValueForm(const string& ID, float& value, const vector<float>& forbiddenValues = {});
+	bool checkValueForm(const string& ID, double& value, const vector<double>& forbiddenValues = {});
+	bool checkValueForm(const string& ID, string& value, const vector<string>& forbiddenValues = {});
 	bool isValueFormConfirmed();
 	bool isValueFormCancelled();
 	bool isValueFormExisting(const string& ID);
@@ -66,18 +66,18 @@ public:
 	shared_ptr<EngineGuiButton> getButton(const string& ID);
 	shared_ptr<EngineGuiRectangle> getRectangle(const string& ID);
 	shared_ptr<EngineGuiTextField> getTextField(const string& ID);
-	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
-	vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
-	vector<shared_ptr<EngineGuiButton>>& getButtons();
-	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
-	vector<shared_ptr<EngineGuiTextField>>& getTextFields();
+	const vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
+	const vector<shared_ptr<EngineGuiWriteField>>& getWriteFields();
+	const vector<shared_ptr<EngineGuiButton>>& getButtons();
+	const vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
+	const vector<shared_ptr<EngineGuiTextField>>& getTextFields();
 
 private:
 	// Voids
 	void _createValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, Vec2 buttonsPosition, bool onlyNumbers, bool minusAllowed);
 	void _updateValueFormDeleting();
 	void _deleteAnswerForm(const string& ID);
-	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
+	bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
 
 	// Instances
 	FabiEngine3D& _fe3d;

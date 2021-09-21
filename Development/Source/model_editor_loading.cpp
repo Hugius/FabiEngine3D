@@ -264,25 +264,25 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			// Diffuse map
 			if (!_fe3d.modelEntity_isMultiParted(modelID) && diffuseMapPath != "")
 			{
-				_fe3d.modelEntity_setDiffuseMap(modelID, diffuseMapPath);
+				_fe3d.modelEntity_setDiffuseMap(modelID, "", diffuseMapPath);
 			}
 
 			// Emission map
 			if (!_fe3d.modelEntity_isMultiParted(modelID) && emissionMapPath != "")
 			{
-				_fe3d.modelEntity_setEmissionMap(modelID, emissionMapPath);
+				_fe3d.modelEntity_setEmissionMap(modelID, "", emissionMapPath);
 			}
 
 			// Reflection map
 			if (!_fe3d.modelEntity_isMultiParted(modelID) && reflectionMapPath != "")
 			{
-				_fe3d.modelEntity_setReflectionMap(modelID, reflectionMapPath);
+				_fe3d.modelEntity_setReflectionMap(modelID, "", reflectionMapPath);
 			}
 
 			// Normal map
 			if (!_fe3d.modelEntity_isMultiParted(modelID) && normalMapPath != "")
 			{
-				_fe3d.modelEntity_setNormalMap(modelID, normalMapPath);
+				_fe3d.modelEntity_setNormalMap(modelID, "", normalMapPath);
 			}
 
 			// Instancing

@@ -46,7 +46,7 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 		_shader.uploadUniform("u_positionY", entity->getPosition("").y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Iterate through parts
 		for (const auto& partID : entity->getPartIDs())

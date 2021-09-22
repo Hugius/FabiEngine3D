@@ -85,8 +85,8 @@ layout (location = 0) out vec4 o_primaryColor;
 layout (location = 1) out vec4 o_secondaryColor;
 
 // Functions
-vec3 calculateNormalMapping();
 vec3 calculateDiffuseMapping();
+vec3 calculateNormalMapping();
 vec3 calculateAmbientLighting();
 vec3 calculateDirectionalLighting(vec3 normal);
 vec3 calculateLights(vec3 normal);
@@ -140,6 +140,50 @@ void main()
 	// Set final colors
 	o_primaryColor = vec4(primaryColor, 1.0f);
 	o_secondaryColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
+vec3 calculateDiffuseMapping()
+{
+	if (u_hasBlendMap) // Blendmapped mixed texture
+	{
+		// Get color value of blendmap (R, G, B)
+		vec2 blendUV = f_uv / u_diffuseMapRepeat;
+		vec4 blendMapColor = texture(u_blendMap, blendUV);
+
+		// Calculate diffuse map color
+		vec3 diffuseMapColor = vec3(0.0f);
+		if (u_hasDiffuseMap)
+		{
+			diffuseMapColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+		}
+
+		// Calculate blending color for every channel
+		vec3 rColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
+		vec3 gColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
+		vec3 bColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
+		rColor = pow(rColor, vec3(2.2f));
+		gColor = pow(gColor, vec3(2.2f));
+		bColor = pow(bColor, vec3(2.2f));
+
+		// Compose final color
+		vec3 newColor = (diffuseMapColor + rColor + gColor + bColor);
+        
+		// Return
+		return newColor;
+	}
+	else if (u_hasDiffuseMap) // Diffuse texture
+	{
+		// Calculate
+		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
+		newColor = pow(newColor, vec3(2.2f));
+
+		// Return
+		return newColor;
+	}
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 vec3 calculateNormalMapping()
@@ -228,50 +272,6 @@ vec3 calculateNormalMapping()
     {
         return f_normal;
     }
-}
-
-vec3 calculateDiffuseMapping()
-{
-	if (u_hasBlendMap) // Blendmapped mixed texture
-	{
-		// Get color value of blendmap (R, G, B)
-		vec2 blendUV = f_uv / u_diffuseMapRepeat;
-		vec4 blendMapColor = texture(u_blendMap, blendUV);
-
-		// Calculate diffuse map color
-		vec3 diffuseMapColor = vec3(0.0f);
-		if (u_hasDiffuseMap)
-		{
-			diffuseMapColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
-		}
-
-		// Calculate blending color for every channel
-		vec3 rColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
-		vec3 gColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
-		vec3 bColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
-		rColor = pow(rColor, vec3(2.2f));
-		gColor = pow(gColor, vec3(2.2f));
-		bColor = pow(bColor, vec3(2.2f));
-
-		// Compose final color
-		vec3 newColor = (diffuseMapColor + rColor + gColor + bColor);
-        
-		// Return
-		return newColor;
-	}
-	else if (u_hasDiffuseMap) // Diffuse texture
-	{
-		// Calculate
-		vec3 newColor = texture(u_diffuseMap, vec2(-f_uv.x, f_uv.y)).rgb;
-		newColor = pow(newColor, vec3(2.2f));
-
-		// Return
-		return newColor;
-	}
-	else
-	{
-		return vec3(0.0f);
-	}
 }
 
 vec3 calculateAmbientLighting()

@@ -63,7 +63,7 @@ void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> ent
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
-		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 
 		// Bind textures
 		if (entity->hasDiffuseMap())

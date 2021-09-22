@@ -29,5 +29,5 @@ protected:
 
 	RenderBus& _renderBus;
 
-	static inline const float MIN_DIFFUSE_MAP_ALPHA = 0.25f;
+	static inline const float MIN_TEXTURE_ALPHA = 0.25f;
 };

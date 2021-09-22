@@ -97,9 +97,6 @@ void ModelEditor::_updateOptionsMenu()
 			}
 		}
 
-		// Update buttons hoverability
-		screen->getButton("uvRepeat")->setHoverable(_fe3d.modelEntity_hasDiffuseMap(_currentModelID, ""));
-
 		// Update button text contents
 		screen->getButton("isFaceculled")->changeTextContent(isFaceculled ? "Culling: ON" : "Culling: OFF");
 		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");

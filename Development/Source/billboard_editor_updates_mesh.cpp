@@ -154,6 +154,7 @@ void BillboardEditor::_updateMeshMenu()
 		// Update buttons hoverability
 		screen->getButton("font")->setHoverable(!hasDiffuseMap || isText);
 		screen->getButton("diffuseMap")->setHoverable(!isText);
+		screen->getButton("diffuseMap")->setHoverable(!isText);
 		screen->getButton("clearMaps")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
 	}
 }

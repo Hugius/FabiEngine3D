@@ -150,7 +150,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
 		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
-		_shader.uploadUniform("u_minDiffuseMapAlpha", MIN_DIFFUSE_MAP_ALPHA);
+		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
 		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 
 		// Bind textures

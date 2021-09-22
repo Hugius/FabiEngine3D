@@ -8,7 +8,7 @@ in vec2 f_uv;
 layout (location = 0) uniform sampler2D u_diffuseMap;
 
 // Float uniforms
-uniform float u_minDiffuseMapAlpha;
+uniform float u_minTextureAlpha;
 
 // Boolean uniforms
 
@@ -19,7 +19,7 @@ void main()
 	vec4 diffuseMapColor = texture(u_diffuseMap, f_uv);
 
 	// Check if transparent
-	if (diffuseMapColor.a < u_minDiffuseMapAlpha)
+	if (diffuseMapColor.a < u_minTextureAlpha)
 	{
 		discard;
 	}

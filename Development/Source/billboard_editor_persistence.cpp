@@ -36,7 +36,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Values
+		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath;
 		Vec2 size;
 		Vec3 color;
@@ -45,7 +45,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract data
+		// Read data from file
 		iss >>
 			billboardID >>
 			size.x >>
@@ -111,7 +111,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Values
+		// Data placeholders
 		string billboardID, diffuseMapPath, fontPath;
 		Vec2 size;
 		Vec3 color;
@@ -120,7 +120,7 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract data
+		// Read data from file
 		iss >>
 			billboardID >>
 			size.x >>
@@ -182,7 +182,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Placeholder variables
+		// Data placeholders
 		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
 		Vec2 size;
 		Vec3 color;
@@ -193,7 +193,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract from file
+		// Read from file
 		iss >>
 			billboardID >>
 			size.x >>
@@ -339,7 +339,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		replace(fontPath.begin(), fontPath.end(), ' ', '?');
 		replace(textContent.begin(), textContent.end(), ' ', '?');
 
-		// Export data
+		// Write data to file
 		file <<
 			billboardID << " " <<
 			size.x << " " <<

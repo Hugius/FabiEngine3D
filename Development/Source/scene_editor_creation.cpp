@@ -217,28 +217,31 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
 
-	// Diffuse map
-	if (!_fe3d.modelEntity_isMultiParted(previewID) && _fe3d.modelEntity_hasDiffuseMap(previewID, ""))
+	for (const auto& partID : _fe3d.modelEntity_getPartIDs(previewID))
 	{
-		_fe3d.modelEntity_setDiffuseMap(newID, "", _fe3d.modelEntity_getDiffuseMapPath(previewID));
-	}
+		// Diffuse map
+		if (_fe3d.modelEntity_hasDiffuseMap(previewID, partID))
+		{
+			_fe3d.modelEntity_setDiffuseMap(newID, partID, _fe3d.modelEntity_getDiffuseMapPath(previewID, partID));
+		}
 
-	// Emission map
-	if (!_fe3d.modelEntity_isMultiParted(previewID) && _fe3d.modelEntity_hasEmissionMap(previewID, ""))
-	{
-		_fe3d.modelEntity_setEmissionMap(newID, "", _fe3d.modelEntity_getEmissionMapPath(previewID));
-	}
+		// Emission map
+		if (_fe3d.modelEntity_hasEmissionMap(previewID, partID))
+		{
+			_fe3d.modelEntity_setEmissionMap(newID, partID, _fe3d.modelEntity_getEmissionMapPath(previewID, partID));
+		}
 
-	// Reflection map
-	if (!_fe3d.modelEntity_isMultiParted(previewID) && _fe3d.modelEntity_hasReflectionMap(previewID, ""))
-	{
-		_fe3d.modelEntity_setReflectionMap(newID, "", _fe3d.modelEntity_getReflectionMapPath(previewID));
-	}
+		// Reflection map
+		if (_fe3d.modelEntity_hasReflectionMap(previewID, partID))
+		{
+			_fe3d.modelEntity_setReflectionMap(newID, partID, _fe3d.modelEntity_getReflectionMapPath(previewID, partID));
+		}
 
-	// Normal map
-	if (!_fe3d.modelEntity_isMultiParted(previewID) && _fe3d.modelEntity_hasNormalMap(previewID, ""))
-	{
-		_fe3d.modelEntity_setNormalMap(newID, "", _fe3d.modelEntity_getNormalMapPath(previewID));
+		// Normal map
+		if (_fe3d.modelEntity_hasNormalMap(previewID, partID))
+		{
+			_fe3d.modelEntity_setNormalMap(newID, partID, _fe3d.modelEntity_getNormalMapPath(previewID, partID));
+		}
 	}
 
 	// Instancing

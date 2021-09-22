@@ -37,21 +37,29 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Values
-		string modelID, meshPath;
-
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract data
-		iss >> modelID >> meshPath;
+		// Read type from file
+		string lineType;
+		iss >> lineType;
 
-		// Perform empty string & space conversions
-		meshPath = (meshPath == "?") ? "" : meshPath;
-		replace(meshPath.begin(), meshPath.end(), '?', ' ');
+		// Determine line type
+		if (lineType == "MODEL")
+		{
+			// Data placeholders
+			string modelID, meshPath;
 
-		// Save mesh path
-		meshPaths.push_back(meshPath);
+			// Read data from file
+			iss >> modelID >> meshPath;
+
+			// Perform empty string & space conversions
+			meshPath = (meshPath == "?") ? "" : meshPath;
+			replace(meshPath.begin(), meshPath.end(), '?', ' ');
+
+			// Save mesh path
+			meshPaths.push_back(meshPath);
+		}
 	}
 
 	// Close file
@@ -88,47 +96,55 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Values
-		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
-
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract data
-		iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
+		// Read type from file
+		string lineType;
+		iss >> lineType;
 
-		// Perform empty string & space conversions
-		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-
-		// Save diffuse map path
-		if (!diffuseMapPath.empty())
+		// Determine line type
+		if (lineType == "MODEL")
 		{
-			texturePaths.push_back(diffuseMapPath);
-		}
+			// Data placeholders
+			string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
 
-		// Save emission map path
-		if (!emissionMapPath.empty())
-		{
-			texturePaths.push_back(emissionMapPath);
-		}
+			// Read data from file
+			iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
 
-		// Save reflection map path
-		if (!reflectionMapPath.empty())
-		{
-			texturePaths.push_back(reflectionMapPath);
-		}
+			// Perform empty string & space conversions
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-		// Save normal map path
-		if (!normalMapPath.empty())
-		{
-			texturePaths.push_back(normalMapPath);
+			// Save diffuse map path
+			if (!diffuseMapPath.empty())
+			{
+				texturePaths.push_back(diffuseMapPath);
+			}
+
+			// Save emission map path
+			if (!emissionMapPath.empty())
+			{
+				texturePaths.push_back(emissionMapPath);
+			}
+
+			// Save reflection map path
+			if (!reflectionMapPath.empty())
+			{
+				texturePaths.push_back(reflectionMapPath);
+			}
+
+			// Save normal map path
+			if (!normalMapPath.empty())
+			{
+				texturePaths.push_back(normalMapPath);
+			}
 		}
 	}
 
@@ -168,140 +184,144 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Placeholder variables
-		string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
-		float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
-		unsigned int reflectionType;
-		bool isFaceCulled, isSpecular, isInstanced;
-		Vec3 size, color;
-		vector<string> aabbIDs;
-		vector<Vec3> aabbPositions;
-		vector<Vec3> aabbSizes;
-
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract general data from file
-		iss >>
-			modelID >>
-			meshPath >>
-			diffuseMapPath >>
-			emissionMapPath >>
-			reflectionMapPath >>
-			normalMapPath >>
-			size.x >>
-			size.y >>
-			size.z >>
-			isFaceCulled >>
-			reflectionType >>
-			isSpecular >>
-			specularShininess >>
-			specularIntensity >>
-			reflectivity >>
-			lightness >>
-			color.r >>
-			color.g >>
-			color.b >>
-			uvRepeat >>
-			lodEntityID >>
-			isInstanced;
+		// Read type from file
+		string lineType;
+		iss >> lineType;
 
-		// Extract AABB data from file
-		while (true)
+		// Determine line type
+		if (lineType == "MODEL")
 		{
-			// Check if file has AABB data left
-			string aabbID;
-			Vec3 position, size;
-			iss >> aabbID;
-			if (aabbID.empty())
+			// Data placeholders
+			string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+			float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+			unsigned int reflectionType;
+			bool isFaceCulled, isSpecular, isInstanced;
+			Vec3 size, color;
+
+			// Read data from file
+			iss >>
+				modelID >>
+				meshPath >>
+				diffuseMapPath >>
+				emissionMapPath >>
+				reflectionMapPath >>
+				normalMapPath >>
+				size.x >>
+				size.y >>
+				size.z >>
+				isFaceCulled >>
+				reflectionType >>
+				isSpecular >>
+				specularShininess >>
+				specularIntensity >>
+				reflectivity >>
+				lightness >>
+				color.r >>
+				color.g >>
+				color.b >>
+				uvRepeat >>
+				lodEntityID >>
+				isInstanced;
+
+			// Perform empty string & space conversions
+			meshPath = (meshPath == "?") ? "" : meshPath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+			lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
+			replace(meshPath.begin(), meshPath.end(), '?', ' ');
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
+
+			// Create model
+			_fe3d.modelEntity_create(modelID, meshPath);
+
+			// Check if model creation went well
+			if (_fe3d.modelEntity_isExisting(modelID))
 			{
-				break;
-			}
-			else
-			{
-				iss >> position.x >> position.y >> position.z >> size.x >> size.y >> size.z;
-				aabbIDs.push_back(aabbID);
-				aabbPositions.push_back(position);
-				aabbSizes.push_back(size);
+				// Add model ID
+				_loadedModelIDs.push_back(modelID);
+
+				// Diffuse map
+				if (!_fe3d.modelEntity_isMultiParted(modelID) && diffuseMapPath != "")
+				{
+					_fe3d.modelEntity_setDiffuseMap(modelID, "", diffuseMapPath);
+				}
+
+				// Emission map
+				if (!_fe3d.modelEntity_isMultiParted(modelID) && emissionMapPath != "")
+				{
+					_fe3d.modelEntity_setEmissionMap(modelID, "", emissionMapPath);
+				}
+
+				// Reflection map
+				if (!_fe3d.modelEntity_isMultiParted(modelID) && reflectionMapPath != "")
+				{
+					_fe3d.modelEntity_setReflectionMap(modelID, "", reflectionMapPath);
+				}
+
+				// Normal map
+				if (!_fe3d.modelEntity_isMultiParted(modelID) && normalMapPath != "")
+				{
+					_fe3d.modelEntity_setNormalMap(modelID, "", normalMapPath);
+				}
+
+				// Instancing
+				if (isInstanced)
+				{
+					_fe3d.modelEntity_enableInstancing(modelID, { Vec3(0.0f) });
+				}
+
+				// Set properties
+				_fe3d.modelEntity_setVisible(modelID, false);
+				_fe3d.modelEntity_setSize(modelID, "", size);
+				_fe3d.modelEntity_setColor(modelID, "", color);
+				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
+				_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
+				_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);
+				_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
+				_fe3d.modelEntity_setReflectivity(modelID, reflectivity);
+				_fe3d.modelEntity_setLightness(modelID, lightness);
+				_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
+				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
+				_fe3d.modelEntity_setReflectionType(modelID, ReflectionType(reflectionType));
 			}
 		}
-
-		// Perform empty string & space conversions
-		meshPath = (meshPath == "?") ? "" : meshPath;
-		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-		emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-		reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-		normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-		lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
-		replace(meshPath.begin(), meshPath.end(), '?', ' ');
-		replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-		replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-		replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-		replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-		replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
-
-		// Create model
-		_fe3d.modelEntity_create(modelID, meshPath);
-
-		// Check if model creation went well
-		if (_fe3d.modelEntity_isExisting(modelID))
+		else if (lineType == "AABB")
 		{
-			// Add model ID
-			_loadedModelIDs.push_back(modelID);
+			// Data placeholders
+			string aabbID, modelID;
+			Vec3 position, size;
 
-			// Bind AABBs
-			for (size_t i = 0; i < aabbIDs.size(); i++)
-			{
-				const string newAabbID = (modelID + "@" + aabbIDs[i]);
-				_fe3d.aabbEntity_create(newAabbID);
-				_fe3d.aabbEntity_setParent(newAabbID, modelID, AabbParentType::MODEL_ENTITY);
-				_fe3d.aabbEntity_setLocalPosition(newAabbID, aabbPositions[i]);
-				_fe3d.aabbEntity_setLocalSize(newAabbID, aabbSizes[i]);
-			}
+			// Read data from file
+			iss >>
+				aabbID >>
+				modelID >>
+				position.x >>
+				position.y >>
+				position.z >>
+				size.x >>
+				size.y >>
+				size.z;
 
-			// Diffuse map
-			if (!_fe3d.modelEntity_isMultiParted(modelID) && diffuseMapPath != "")
-			{
-				_fe3d.modelEntity_setDiffuseMap(modelID, "", diffuseMapPath);
-			}
-
-			// Emission map
-			if (!_fe3d.modelEntity_isMultiParted(modelID) && emissionMapPath != "")
-			{
-				_fe3d.modelEntity_setEmissionMap(modelID, "", emissionMapPath);
-			}
-
-			// Reflection map
-			if (!_fe3d.modelEntity_isMultiParted(modelID) && reflectionMapPath != "")
-			{
-				_fe3d.modelEntity_setReflectionMap(modelID, "", reflectionMapPath);
-			}
-
-			// Normal map
-			if (!_fe3d.modelEntity_isMultiParted(modelID) && normalMapPath != "")
-			{
-				_fe3d.modelEntity_setNormalMap(modelID, "", normalMapPath);
-			}
-
-			// Instancing
-			if (isInstanced)
-			{
-				_fe3d.modelEntity_enableInstancing(modelID, { Vec3(0.0f) });
-			}
+			// Create AABB
+			_fe3d.aabbEntity_create(aabbID);
 
 			// Set properties
-			_fe3d.modelEntity_setVisible(modelID, false);
-			_fe3d.modelEntity_setSize(modelID, "", size);
-			_fe3d.modelEntity_setColor(modelID, "", color);
-			_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
-			_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
-			_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);
-			_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
-			_fe3d.modelEntity_setReflectivity(modelID, reflectivity);
-			_fe3d.modelEntity_setLightness(modelID, lightness);
-			_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
-			_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
-			_fe3d.modelEntity_setReflectionType(modelID, ReflectionType(reflectionType));
+			_fe3d.aabbEntity_setParent(aabbID, modelID, AabbParentType::MODEL_ENTITY);
+			_fe3d.aabbEntity_setLocalPosition(aabbID, position);
+			_fe3d.aabbEntity_setLocalSize(aabbID, size);
+		}
+		else
+		{
+			Logger::throwError("ModelEditor::loadModelEntitiesFromFile");
 		}
 	}
 

@@ -38,17 +38,17 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract type from file
+		// Read type from file
 		string lineType;
 		iss >> lineType;
 
-		// Load entity according to type
+		// Determine line type
 		if (lineType == "CAMERA_POSITION")
 		{
 			// Data placeholders
 			Vec3 position;
 
-			// Extract data
+			// Read data from file
 			iss >> position.x >> position.y >> position.z;
 
 			// Set position
@@ -62,7 +62,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float yaw;
 
-			// Extract data
+			// Read data from file
 			iss >> yaw;
 
 			// Set yaw
@@ -76,7 +76,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float pitch;
 
-			// Extract data
+			// Read data from file
 			iss >> pitch;
 
 			// Set pitch
@@ -90,7 +90,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			string skyID, previewID;
 
-			// Extract data
+			// Read data from file
 			iss >> skyID >> previewID;
 
 			// Create sky
@@ -108,7 +108,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			string terrainID, previewID;
 
-			// Extract data
+			// Read data from file
 			iss >> terrainID >> previewID;
 
 			// Create terrain
@@ -127,7 +127,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			string waterID, previewID;
 			float height;
 
-			// Extract data
+			// Read data from file
 			iss >> waterID >> previewID >> height;
 
 			// Create water
@@ -150,7 +150,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			Vec3 position, rotation, size;
 			bool isFrozen;
 
-			// Extract ID
+			// Read ID from file
 			iss >> modelID;
 
 			// If LOD entity, only load if executing game
@@ -168,7 +168,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				}
 			}
 
-			// Extract main data
+			// Read main data from file
 			iss >>
 				previewID >>
 				position.x >>
@@ -220,7 +220,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 					_animationEditor.startAnimation(animationID, modelID, -1);
 				}
 
-				// Extract instanced offsets
+				// Read offset data from file
 				if (_fe3d.modelEntity_isInstanced(modelID))
 				{
 					vector<Vec3> instancedOffsets;
@@ -263,7 +263,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			Vec3 position, rotation;
 			Vec2 size;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				billboardID >>
 				previewID >>
@@ -290,7 +290,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			Vec3 position;
 			float maxVolume, maxDistance;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				soundID >>
 				previewID >>
@@ -335,7 +335,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			float intensity;
 			unsigned int shape;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				lightID >>
 				position.x >>
@@ -385,7 +385,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			string reflectionID;
 			Vec3 position;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				reflectionID >>
 				position.x >>
@@ -429,7 +429,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float lodDistance;
 
-			// Extract data
+			// Read data from file
 			iss >> lodDistance;
 
 			// Set distance
@@ -440,7 +440,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float reflectionHeight;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				reflectionHeight;
 
@@ -449,11 +449,11 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		}
 		else if (lineType == "LIGHTING_AMBIENT")
 		{
-			// Values
+			// Data placeholders
 			Vec3 ambientLightingColor;
 			float ambientLightingIntensity;
 
-			// Extract
+			// Read data from file
 			iss >>
 				ambientLightingColor.r >>
 				ambientLightingColor.g >>
@@ -469,7 +469,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			Vec3 directionalLightingPosition, directionalLightingColor;
 			float directionalLightingIntensity, billboardSize;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				directionalLightingPosition.x >>
 				directionalLightingPosition.y >>
@@ -497,7 +497,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			bool isFollowingCamera;
 			int interval;
 
-			// Extract data
+			// Read data from file
 			iss >>
 				size >>
 				lightness >>
@@ -518,7 +518,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float strength;
 
-			// Extract data
+			// Read data from file
 			iss >> strength;
 
 			// Enable motion blur
@@ -530,7 +530,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			bool isDynamic;
 			float blurDistance, maxDistance;
 
-			// Extract data
+			// Read data from file
 			iss >> isDynamic >> blurDistance >> maxDistance;
 
 			// Enable DOF
@@ -542,7 +542,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			float minDistance, maxDistance, thickness;
 			Vec3 color;
 
-			// Extract data
+			// Read data from file
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
 			// Enable fog
@@ -554,7 +554,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			string flareMapPath;
 			float intensity, multiplier;
 
-			// Extract data
+			// Read data from file
 			iss >> flareMapPath >> intensity >> multiplier;
 
 			// Perform empty string & space conversions
@@ -569,7 +569,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			// Data placeholders
 			float intensity, speed;
 
-			// Extract data
+			// Read data from file
 			iss >> intensity >> speed;
 
 			// Enable sky exposure
@@ -581,11 +581,15 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			unsigned int type, blurCount;
 			float intensity;
 
-			// Extract data
+			// Read data from file
 			iss >> type >> intensity >> blurCount;
 
 			// Enable bloom
 			_fe3d.gfx_enableBloom(BloomType(type), intensity, blurCount);
+		}
+		else
+		{
+			Logger::throwError("SceneEditor::loadEditorSceneFromFile");
 		}
 	}
 

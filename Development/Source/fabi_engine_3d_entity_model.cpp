@@ -464,24 +464,24 @@ const string& FabiEngine3D::modelEntity_getMeshPath(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->getMeshPath();
 }
 
-const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath("");
+	return _core->_modelEntityManager.getEntity(ID)->getDiffuseMapPath(partID);
 }
 
-const string& FabiEngine3D::modelEntity_getEmissionMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getEmissionMapPath(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath("");
+	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath(partID);
 }
 
-const string& FabiEngine3D::modelEntity_getNormalMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath("");
+	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPath(partID);
 }
 
-const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID)
+const string& FabiEngine3D::modelEntity_getNormalMapPath(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getReflectionMapPath("");
+	return _core->_modelEntityManager.getEntity(ID)->getNormalMapPath(partID);
 }
 
 const string& FabiEngine3D::modelEntity_getLevelOfDetailEntityID(const string& ID)

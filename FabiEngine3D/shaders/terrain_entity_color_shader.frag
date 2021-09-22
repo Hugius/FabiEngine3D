@@ -147,7 +147,7 @@ vec3 calculateDiffuseMapping()
 	if (u_hasBlendMap) // Blendmapped mixed texture
 	{
 		// Get color value of blendmap (R, G, B)
-		vec2 blendUV = f_uv / u_diffuseMapRepeat;
+		vec2 blendUV = (f_uv / u_diffuseMapRepeat);
 		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
 		// Calculate diffuse map color
@@ -158,9 +158,9 @@ vec3 calculateDiffuseMapping()
 		}
 
 		// Calculate blending color for every channel
-		vec3 rColor = u_hasDiffuseMapR ? (texture(u_diffuseMapR, blendUV * u_diffuseMapRepeatR).rgb * blendMapColor.r) : vec3(0.0f);
-		vec3 gColor = u_hasDiffuseMapG ? (texture(u_diffuseMapG, blendUV * u_diffuseMapRepeatG).rgb * blendMapColor.g) : vec3(0.0f);
-		vec3 bColor = u_hasDiffuseMapB ? (texture(u_diffuseMapB, blendUV * u_diffuseMapRepeatB).rgb * blendMapColor.b) : vec3(0.0f);
+		vec3 rColor = (u_hasDiffuseMapR ? (texture(u_diffuseMapR, (blendUV * u_diffuseMapRepeatR)).rgb * blendMapColor.r) : vec3(0.0f));
+		vec3 gColor = (u_hasDiffuseMapG ? (texture(u_diffuseMapG, (blendUV * u_diffuseMapRepeatG)).rgb * blendMapColor.g) : vec3(0.0f));
+		vec3 bColor = (u_hasDiffuseMapB ? (texture(u_diffuseMapB, (blendUV * u_diffuseMapRepeatB)).rgb * blendMapColor.b) : vec3(0.0f));
 		rColor = pow(rColor, vec3(2.2f));
 		gColor = pow(gColor, vec3(2.2f));
 		bColor = pow(bColor, vec3(2.2f));
@@ -193,7 +193,7 @@ vec3 calculateNormalMapping()
 		if (u_hasBlendMap) // Blendmapped mixed normal
 		{
 			// Get color values of blendmap (R, G, B)
-			vec2 blendUV = f_uv / u_diffuseMapRepeat;
+			vec2 blendUV = (f_uv / u_diffuseMapRepeat);
 			vec4 blendMapColor = texture(u_blendMap, blendUV);
 			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 			float rStrength = blendMapColor.r;
@@ -206,8 +206,10 @@ vec3 calculateNormalMapping()
 			// Diffuse normal map
 			if (u_hasNormalMap)
 			{
-				vec3 normal = texture(u_normalMap, f_uv).rgb * 2.0f - 1.0f;
-				totalNormal += normalize(f_tbnMatrix * normal) * diffuseStrength;
+				vec3 normal = texture(u_normalMap, f_uv).rgb;
+				normal *= 2.0f;
+				normal -= 1.0f;
+				totalNormal += (normalize(f_tbnMatrix * normal) * diffuseStrength);
 			}
 			else
 			{
@@ -217,8 +219,10 @@ vec3 calculateNormalMapping()
 			// BlendR normal map
 			if (u_hasNormalMapR)
 			{
-				vec3 normal = texture(u_normalMapR, blendUV * u_diffuseMapRepeatR).rgb * 2.0f - 1.0f;
-				totalNormal += normalize(f_tbnMatrix * normal) * rStrength;
+				vec3 normal = texture(u_normalMapR, (blendUV * u_diffuseMapRepeatR)).rgb;
+				normal *= 2.0f;
+				normal -= 1.0f;
+				totalNormal += (normalize(f_tbnMatrix * normal) * rStrength);
 			}
 			else
 			{
@@ -228,8 +232,10 @@ vec3 calculateNormalMapping()
 			// BlendG normal map
 			if (u_hasNormalMapG)
 			{
-				vec3 normal = texture(u_normalMapG, blendUV * u_diffuseMapRepeatG).rgb * 2.0f - 1.0f;
-				totalNormal += normalize(f_tbnMatrix * normal) * gStrength;
+				vec3 normal = texture(u_normalMapG, (blendUV * u_diffuseMapRepeatG)).rgb;
+				normal *= 2.0f;
+				normal -= 1.0f;
+				totalNormal += (normalize(f_tbnMatrix * normal) * gStrength);
 			}
 			else
 			{
@@ -239,8 +245,10 @@ vec3 calculateNormalMapping()
 			// BlendB normal map
 			if (u_hasNormalMapB)
 			{
-				vec3 normal = texture(u_normalMapB, blendUV * u_diffuseMapRepeatB).rgb * 2.0f - 1.0f;
-				totalNormal += normalize(f_tbnMatrix * normal) * bStrength;
+				vec3 normal = texture(u_normalMapB, (blendUV * u_diffuseMapRepeatB)).rgb;
+				normal *= 2.0f;
+				normal -= 1.0f;
+				totalNormal += (normalize(f_tbnMatrix * normal) * bStrength);
 			}
 			else
 			{
@@ -256,7 +264,8 @@ vec3 calculateNormalMapping()
 			{
 				// Calculate new normal vector
 				vec3 normal = texture(u_normalMap, f_uv).rgb;
-				normal = normal * 2.0f - 1.0f;
+				normal *= 2.0f;
+				normal -= 1.0f;
 				normal = normalize(f_tbnMatrix * normal);
 
 				// Return

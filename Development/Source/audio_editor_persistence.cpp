@@ -35,13 +35,13 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Values
+		// Data placeholders
 		string audioID, audioPath;
 
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract from file
+		// Read from file
 		iss >> audioID >> audioPath;
 
 		// Perform empty string & space conversions
@@ -87,13 +87,13 @@ bool AudioEditor::loadAudioEntitiesFromFile()
 	string line;
 	while (getline(file, line))
 	{
-		// Placeholder variables
+		// Data placeholders
 		string audioID, audioPath;
 
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract from file
+		// Read from file
 		iss >> audioID >> audioPath;
 
 		// Perform empty string & space conversions
@@ -152,7 +152,7 @@ bool AudioEditor::saveAudioEntitiesToFile()
 		audioPath = (audioPath.empty()) ? "?" : audioPath;
 		replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
-		// Export data
+		// Write data to file
 		file << audioID << " " << audioPath << endl;
 	}
 

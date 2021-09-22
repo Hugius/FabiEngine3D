@@ -37,13 +37,13 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	string line;
 	while (getline(file, line))
 	{
-		// Placeholder variables
+		// Data placeholders
 		string animationID, previewModelID;
 
 		// For file extraction
 		istringstream iss(line);
 
-		// Extract general data from file
+		// Read data from file
 		iss >> animationID >> previewModelID;
 
 		// Create new animation
@@ -57,11 +57,13 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 		string temp;
 		if (iss >> temp)
 		{
-			// Start reading again
+			// For file extraction
 			iss = istringstream(line);
+
+			// Read main data from file
 			iss >> animationID >> previewModelID;
 
-			// Extract frame data from file
+			// Read frame data from file
 			vector<AnimationFrame> customFrames;
 			while (true)
 			{
@@ -80,7 +82,7 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 						Vec3 targetTransformation, rotationOrigin, speed;
 						int speedType, transformationType;
 
-						// Extract data
+						// Read data from file
 						iss >> partID >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
 							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >>
 							speed.x >> speed.y >> speed.z >>
@@ -209,12 +211,10 @@ bool AnimationEditor::saveAnimationsToFile()
 			auto animationID = animation->getID();
 			auto previewModelID = animation->getPreviewModelID().empty() ? animation->getOldPreviewModelID() : animation->getPreviewModelID();
 
-			// Export  general data
-			file <<
-				animationID << " " <<
-				previewModelID;
+			// Write data to file
+			file << animationID << " " << previewModelID;
 
-			// Export frame data
+			// Check if animation has custom frames
 			if (animation->getFrames().size() > 1)
 			{
 				// Add space
@@ -244,7 +244,7 @@ bool AnimationEditor::saveAnimationsToFile()
 							partID = "?";
 						}
 
-						// Write data
+						// Write data to file
 						file <<
 							partID << " " <<
 							targetTransformation.x << " " <<

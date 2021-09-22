@@ -314,10 +314,10 @@ public:
 	const vector<string> modelEntity_getAllIDs();
 	const vector<string> modelEntity_getGroupIDs(const string& ID);
 	const string& modelEntity_getMeshPath(const string& ID);
-	const string& modelEntity_getDiffuseMapPath(const string& ID);
-	const string& modelEntity_getEmissionMapPath(const string& ID);
-	const string& modelEntity_getNormalMapPath(const string& ID);
-	const string& modelEntity_getReflectionMapPath(const string& ID);
+	const string& modelEntity_getDiffuseMapPath(const string& ID, const string& partID);
+	const string& modelEntity_getEmissionMapPath(const string& ID, const string& partID);
+	const string& modelEntity_getReflectionMapPath(const string& ID, const string& partID);
+	const string& modelEntity_getNormalMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
 	const vector<Vec3> modelEntity_getInstancedOffsets(const string& ID);
 	const Vec3 modelEntity_getLevelOfDetailSize(const string& ID);

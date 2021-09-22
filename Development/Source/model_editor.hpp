@@ -30,10 +30,6 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 	void _preparePartChoosing(function<void()>&& executionFunction);
-	void _loadDiffuseMap();
-	void _loadEmissionMap();
-	void _loadReflectionMap();
-	void _loadNormalMap();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
 	void _updateMeshMenu();

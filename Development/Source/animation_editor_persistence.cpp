@@ -60,10 +60,10 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 			// For file extraction
 			iss = istringstream(line);
 
-			// Read main data from file
+			// Read data from file
 			iss >> animationID >> previewModelID;
 
-			// Read frame data from file
+			// Read frame data
 			vector<AnimationFrame> customFrames;
 			while (true)
 			{

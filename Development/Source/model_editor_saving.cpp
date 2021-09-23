@@ -35,10 +35,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 		// Retrieve all values
 		auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
 		auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
-		auto diffuseMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getDiffuseMapPath(modelID, ""));
-		auto emissionMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getEmissionMapPath(modelID, ""));
-		auto normalMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getNormalMapPath(modelID, ""));
-		auto reflectionMapPath = (isMultiParted ? "" : _fe3d.modelEntity_getReflectionMapPath(modelID, ""));
 		auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
@@ -54,26 +50,14 @@ bool ModelEditor::saveModelEntitiesToFile()
 
 		// Perform empty string & space conversions
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
-		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
-		emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
-		reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
-		normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 		lodEntityID = (lodEntityID.empty()) ? "?" : lodEntityID;
 		replace(meshPath.begin(), meshPath.end(), ' ', '?');
-		replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-		replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
-		replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
-		replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 		replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
 		// Write data to file
 		file << "MODEL " <<
 			modelID << " " <<
 			meshPath << " " <<
-			diffuseMapPath << " " <<
-			emissionMapPath << " " <<
-			reflectionMapPath << " " <<
-			normalMapPath << " " <<
 			modelSize.x << " " <<
 			modelSize.y << " " <<
 			modelSize.z << " " <<
@@ -89,7 +73,50 @@ bool ModelEditor::saveModelEntitiesToFile()
 			color.b << " " <<
 			uvRepeat << " " <<
 			lodEntityID << " " <<
-			isInstanced << endl;
+			isInstanced;
+
+		// Write space to file
+		file << " ";
+
+		// Write part data
+		auto partIDs = _fe3d.modelEntity_getPartIDs(modelID);
+		for (size_t i = 0; i < partIDs.size(); i++)
+		{
+			// Retrieve all values
+			auto partID = partIDs[i];
+			auto diffuseMapPath = _fe3d.modelEntity_getDiffuseMapPath(modelID, partID);
+			auto emissionMapPath = _fe3d.modelEntity_getEmissionMapPath(modelID, partID);
+			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID, partID);
+			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID, partID);
+
+			// Perform empty string & space conversions
+			partID = (partID.empty()) ? "?" : partID;
+			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
+			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
+			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
+			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
+			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
+			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
+			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+
+			// Write data to file
+			file <<
+				partID << " " <<
+				diffuseMapPath << " " <<
+				emissionMapPath << " " <<
+				reflectionMapPath << " " <<
+				normalMapPath;
+
+			// Write space to file
+			if (i < (partIDs.size() - 1))
+			{
+				file << " ";
+			}
+		}
+
+		// Write newline to file
+		file << endl;
 
 		// Write AABB data
 		for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
@@ -98,6 +125,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto position = _fe3d.aabbEntity_getPosition(aabbID);
 			auto size = _fe3d.aabbEntity_getSize(aabbID);
 
+			// Write data to file
 			file << "AABB " <<
 				aabbID << " " <<
 				modelID << " " <<
@@ -106,10 +134,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				position.z << " " <<
 				size.x << " " <<
 				size.y << " " <<
-				size.z;
-
-			// Add newline
-			file << endl;
+				size.z << endl;
 		}
 	}
 

@@ -168,7 +168,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				}
 			}
 
-			// Read main data from file
+			// Read data from file
 			iss >>
 				previewID >>
 				position.x >>

@@ -107,43 +107,87 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		if (lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
+			string modelID, meshPath, lodEntityID;
+			float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+			unsigned int reflectionType;
+			bool isFaceCulled, isSpecular, isInstanced;
+			Vec3 size, color;
 
 			// Read data from file
-			iss >> modelID >> meshPath >> diffuseMapPath >> emissionMapPath >> reflectionMapPath >> normalMapPath;
+			iss >>
+				modelID >>
+				meshPath >>
+				size.x >>
+				size.y >>
+				size.z >>
+				isFaceCulled >>
+				reflectionType >>
+				isSpecular >>
+				specularShininess >>
+				specularIntensity >>
+				reflectivity >>
+				lightness >>
+				color.r >>
+				color.g >>
+				color.b >>
+				uvRepeat >>
+				lodEntityID >>
+				isInstanced;
 
-			// Perform empty string & space conversions
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
-
-			// Save diffuse map path
-			if (!diffuseMapPath.empty())
+			// Read part data
+			while (true)
 			{
-				texturePaths.push_back(diffuseMapPath);
-			}
+				// Check if file has any part data left
+				string partID;
+				iss >> partID;
+				if (partID.empty())
+				{
+					break;
+				}
 
-			// Save emission map path
-			if (!emissionMapPath.empty())
-			{
-				texturePaths.push_back(emissionMapPath);
-			}
+				// Data placeholders
+				string diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
 
-			// Save reflection map path
-			if (!reflectionMapPath.empty())
-			{
-				texturePaths.push_back(reflectionMapPath);
-			}
+				// Read data from file
+				iss >>
+					diffuseMapPath >>
+					emissionMapPath >>
+					reflectionMapPath >>
+					normalMapPath;
 
-			// Save normal map path
-			if (!normalMapPath.empty())
-			{
-				texturePaths.push_back(normalMapPath);
+				// Perform empty string & space conversions
+				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+				replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+				replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+				replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+				replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+
+				// Diffuse map
+				if (!diffuseMapPath.empty())
+				{
+					texturePaths.push_back(diffuseMapPath);
+				}
+
+				// Emission map
+				if (!emissionMapPath.empty())
+				{
+					texturePaths.push_back(emissionMapPath);
+				}
+
+				// Reflection map
+				if (!reflectionMapPath.empty())
+				{
+					texturePaths.push_back(reflectionMapPath);
+				}
+
+				// Normal map
+				if (!normalMapPath.empty())
+				{
+					texturePaths.push_back(normalMapPath);
+				}
 			}
 		}
 	}
@@ -195,7 +239,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		if (lineType == "MODEL")
 		{
 			// Data placeholders
-			string modelID, meshPath, diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+			string modelID, meshPath, lodEntityID;
 			float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 			unsigned int reflectionType;
 			bool isFaceCulled, isSpecular, isInstanced;
@@ -205,10 +249,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			iss >>
 				modelID >>
 				meshPath >>
-				diffuseMapPath >>
-				emissionMapPath >>
-				reflectionMapPath >>
-				normalMapPath >>
 				size.x >>
 				size.y >>
 				size.z >>
@@ -228,16 +268,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 			// Perform empty string & space conversions
 			meshPath = (meshPath == "?") ? "" : meshPath;
-			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
-			emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
-			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
-			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 			lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
 			replace(meshPath.begin(), meshPath.end(), '?', ' ');
-			replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
-			replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
-			replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-			replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 			replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 			// Create model
@@ -248,30 +280,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 			{
 				// Add model ID
 				_loadedModelIDs.push_back(modelID);
-
-				// Diffuse map
-				if (!_fe3d.modelEntity_isMultiParted(modelID) && diffuseMapPath != "")
-				{
-					_fe3d.modelEntity_setDiffuseMap(modelID, "", diffuseMapPath);
-				}
-
-				// Emission map
-				if (!_fe3d.modelEntity_isMultiParted(modelID) && emissionMapPath != "")
-				{
-					_fe3d.modelEntity_setEmissionMap(modelID, "", emissionMapPath);
-				}
-
-				// Reflection map
-				if (!_fe3d.modelEntity_isMultiParted(modelID) && reflectionMapPath != "")
-				{
-					_fe3d.modelEntity_setReflectionMap(modelID, "", reflectionMapPath);
-				}
-
-				// Normal map
-				if (!_fe3d.modelEntity_isMultiParted(modelID) && normalMapPath != "")
-				{
-					_fe3d.modelEntity_setNormalMap(modelID, "", normalMapPath);
-				}
 
 				// Instancing
 				if (isInstanced)
@@ -292,6 +300,63 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
 				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
 				_fe3d.modelEntity_setReflectionType(modelID, ReflectionType(reflectionType));
+
+				// Read part data
+				while (true)
+				{
+					// Check if file has any part data left
+					string partID;
+					iss >> partID;
+					if (partID.empty())
+					{
+						break;
+					}
+
+					// Data placeholders
+					string diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
+
+					// Read data from file
+					iss >>
+						diffuseMapPath >>
+						emissionMapPath >>
+						reflectionMapPath >>
+						normalMapPath;
+
+					// Perform empty string & space conversions
+					partID = (partID == "?") ? "" : partID;
+					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+					reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+					normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+					replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+					replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+
+					// Diffuse map
+					if (!diffuseMapPath.empty())
+					{
+						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
+					}
+
+					// Emission map
+					if (!emissionMapPath.empty())
+					{
+						_fe3d.modelEntity_setEmissionMap(modelID, partID, emissionMapPath);
+					}
+
+					// Reflection map
+					if (!reflectionMapPath.empty())
+					{
+						_fe3d.modelEntity_setReflectionMap(modelID, partID, reflectionMapPath);
+					}
+
+					// Normal map
+					if (!normalMapPath.empty())
+					{
+						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);
+					}
+				}
 			}
 		}
 		else if (lineType == "AABB")

@@ -77,6 +77,20 @@ void FabiEngine3D::modelEntity_setEmissionMap(const string& ID, const string& pa
 	}
 }
 
+void FabiEngine3D::modelEntity_setSpecularMap(const string& ID, const string& partID, const string& texturePath)
+{
+	if (texturePath.empty())
+	{
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, 0);
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, "");
+	}
+	else
+	{
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMap(partID, _core->_textureLoader.getTexture2D(texturePath, true, true));
+		_core->_modelEntityManager.getEntity(ID)->setSpecularMapPath(partID, texturePath);
+	}
+}
+
 void FabiEngine3D::modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath)
 {
 	if (texturePath.empty())
@@ -217,6 +231,11 @@ const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID, const strin
 const bool FabiEngine3D::modelEntity_hasEmissionMap(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->hasEmissionMap(partID);
+}
+
+const bool FabiEngine3D::modelEntity_hasSpecularMap(const string& ID, const string& partID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->hasSpecularMap(partID);
 }
 
 const bool FabiEngine3D::modelEntity_hasReflectionMap(const string& ID, const string& partID)
@@ -472,6 +491,11 @@ const string& FabiEngine3D::modelEntity_getDiffuseMapPath(const string& ID, cons
 const string& FabiEngine3D::modelEntity_getEmissionMapPath(const string& ID, const string& partID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->getEmissionMapPath(partID);
+}
+
+const string& FabiEngine3D::modelEntity_getSpecularMapPath(const string& ID, const string& partID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getSpecularMapPath(partID);
 }
 
 const string& FabiEngine3D::modelEntity_getReflectionMapPath(const string& ID, const string& partID)

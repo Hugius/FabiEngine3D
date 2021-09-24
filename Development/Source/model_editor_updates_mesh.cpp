@@ -105,6 +105,46 @@ void ModelEditor::_updateMeshMenu()
 			};
 			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
+		{
+			auto lambda = [this]()
+			{
+				// Get the chosen filename
+				const auto rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("game_assets\\textures\\specular_maps\\");
+
+				// Validate target directory
+				if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+				{
+					Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
+					return;
+				}
+
+				// Validate chosen file
+				const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+				if (filePath.empty())
+				{
+					return;
+				}
+
+				// Validate directory of file
+				if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+					filePath.substr(rootDirectory.size(), targetDirectory.size()) != targetDirectory)
+				{
+					Logger::throwWarning("File cannot be outside of `" + targetDirectory + "`!");
+					return;
+				}
+
+				// Set specular map
+				const string finalFilePath = filePath.substr(rootDirectory.size());
+				_fe3d.misc_clearTextureCache2D(finalFilePath);
+				_fe3d.modelEntity_setSpecularMap(_currentModelID, _currentPartID, finalFilePath);
+
+				// Miscellaneous
+				_currentPartID = "";
+			};
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
+		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
 			auto lambda = [this]()
@@ -191,6 +231,7 @@ void ModelEditor::_updateMeshMenu()
 			{
 				_fe3d.modelEntity_setDiffuseMap(_currentModelID, _currentPartID, "");
 				_fe3d.modelEntity_setEmissionMap(_currentModelID, _currentPartID, "");
+				_fe3d.modelEntity_setSpecularMap(_currentModelID, _currentPartID, "");
 				_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
 				_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
 				_currentPartID = "";

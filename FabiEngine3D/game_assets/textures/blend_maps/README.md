@@ -1,1 +1,0 @@
-# This is where your blend map files are stored

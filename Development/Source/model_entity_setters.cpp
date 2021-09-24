@@ -152,6 +152,11 @@ void ModelEntity::setEmissionMap(const string& partID, TextureID value)
 	_parts[_getPartIndex(partID)].emissionMap = value;
 }
 
+void ModelEntity::setSpecularMap(const string& partID, TextureID value)
+{
+	_parts[_getPartIndex(partID)].specularMap = value;
+}
+
 void ModelEntity::setReflectionMap(const string& partID, TextureID value)
 {
 	_parts[_getPartIndex(partID)].reflectionMap = value;
@@ -361,6 +366,11 @@ void ModelEntity::setDiffuseMapPath(const string& partID, const string& value)
 void ModelEntity::setEmissionMapPath(const string& partID, const string& value)
 {
 	_parts[_getPartIndex(partID)].emissionMapPath = value;
+}
+
+void ModelEntity::setSpecularMapPath(const string& partID, const string& value)
+{
+	_parts[_getPartIndex(partID)].specularMapPath = value;
 }
 
 void ModelEntity::setReflectionMapPath(const string& partID, const string& value)

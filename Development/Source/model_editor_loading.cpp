@@ -313,12 +313,13 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					}
 
 					// Data placeholders
-					string diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
+					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 
 					// Read data from file
 					iss >>
 						diffuseMapPath >>
 						emissionMapPath >>
+						specularMapPath >>
 						reflectionMapPath >>
 						normalMapPath;
 
@@ -326,10 +327,12 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					partID = (partID == "?") ? "" : partID;
 					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 					emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+					specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 					reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 					normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 					replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 					replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+					replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
@@ -337,6 +340,12 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					if (!diffuseMapPath.empty())
 					{
 						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
+					}
+
+					// Specular map
+					if (!specularMapPath.empty())
+					{
+						_fe3d.modelEntity_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
 					// Emission map

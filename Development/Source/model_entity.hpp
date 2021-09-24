@@ -21,6 +21,7 @@ public:
 	void setRenderBuffer(const string& partID, shared_ptr<RenderBuffer> value);
 	void setDiffuseMap(const string& partID, TextureID value);
 	void setEmissionMap(const string& partID, TextureID value);
+	void setSpecularMap(const string& partID, TextureID value);
 	void setReflectionMap(const string& partID, TextureID value);
 	void setNormalMap(const string& partID, TextureID value);
 	void setPosition(const string& partID, Vec3 value);
@@ -37,6 +38,7 @@ public:
 	void setInversion(const string& partID, float value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
+	void setSpecularMapPath(const string& partID, const string& value);
 	void setReflectionMapPath(const string& partID, const string& value);
 	void setNormalMapPath(const string& partID, const string& value);
 	void setLevelOfDetailSize(Vec3 value);
@@ -74,6 +76,7 @@ public:
 	const string& getMeshPath();
 	const string& getDiffuseMapPath(const string& partID);
 	const string& getEmissionMapPath(const string& partID);
+	const string& getSpecularMapPath(const string& partID);
 	const string& getReflectionMapPath(const string& partID);
 	const string& getNormalMapPath(const string& partID);
 	const string& getLevelOfDetailEntityID();
@@ -117,12 +120,14 @@ public:
 	const bool hasRenderBuffer(const string& partID);
 	const bool hasDiffuseMap(const string& partID);
 	const bool hasEmissionMap(const string& partID);
+	const bool hasSpecularMap(const string& partID);
 	const bool hasReflectionMap(const string& partID);
 	const bool hasNormalMap(const string& partID);
 
 	// Miscellaneous
 	const TextureID getDiffuseMap(const string& partID);
 	const TextureID getEmissionMap(const string& partID);
+	const TextureID getSpecularMap(const string& partID);
 	const TextureID getReflectionMap(const string& partID);
 	const TextureID getNormalMap(const string& partID);
 	const ReflectionType getReflectionType();
@@ -144,6 +149,7 @@ private:
 		const string ID;
 		string diffuseMapPath = "";
 		string emissionMapPath = "";
+		string specularMapPath = "";
 		string reflectionMapPath = "";
 		string normalMapPath = "";
 
@@ -169,6 +175,7 @@ private:
 		// Miscellaneous
 		TextureID diffuseMap = 0;
 		TextureID emissionMap = 0;
+		TextureID specularMap = 0;
 		TextureID reflectionMap = 0;
 		TextureID normalMap = 0;
 	};

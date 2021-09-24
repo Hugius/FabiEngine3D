@@ -21,6 +21,11 @@ const TextureID ModelEntity::getEmissionMap(const string& partID)
 	return _parts[_getPartIndex(partID)].emissionMap;
 }
 
+const TextureID ModelEntity::getSpecularMap(const string& partID)
+{
+	return _parts[_getPartIndex(partID)].specularMap;
+}
+
 const TextureID ModelEntity::getReflectionMap(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].reflectionMap;
@@ -143,6 +148,11 @@ const string& ModelEntity::getEmissionMapPath(const string& partID)
 	return _parts[_getPartIndex(partID)].emissionMapPath;
 }
 
+const string& ModelEntity::getSpecularMapPath(const string& partID)
+{
+	return _parts[_getPartIndex(partID)].specularMapPath;
+}
+
 const string& ModelEntity::getReflectionMapPath(const string& partID)
 {
 	return _parts[_getPartIndex(partID)].reflectionMapPath;
@@ -221,6 +231,25 @@ const bool ModelEntity::hasEmissionMap(const string& partID)
 	else
 	{
 		return (_parts[_getPartIndex(partID)].emissionMap != 0);
+	}
+}
+
+const bool ModelEntity::hasSpecularMap(const string& partID)
+{
+	if (partID.empty())
+	{
+		for (const auto& part : _parts)
+		{
+			if (part.specularMap != 0)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return (_parts[_getPartIndex(partID)].specularMap != 0);
 	}
 }
 

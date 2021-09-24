@@ -1,0 +1,1 @@
+# This is where your specular map files are stored

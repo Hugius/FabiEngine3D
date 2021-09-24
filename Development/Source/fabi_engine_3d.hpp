@@ -272,6 +272,7 @@ public:
 	void modelEntity_setVisible(const string& ID, bool isVisible);
 	void modelEntity_setDiffuseMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setEmissionMap(const string& ID, const string& partID, const string& texturePath);
+	void modelEntity_setSpecularMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setReflectionMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
@@ -316,6 +317,7 @@ public:
 	const string& modelEntity_getMeshPath(const string& ID);
 	const string& modelEntity_getDiffuseMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getEmissionMapPath(const string& ID, const string& partID);
+	const string& modelEntity_getSpecularMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getReflectionMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getNormalMapPath(const string& ID, const string& partID);
 	const string& modelEntity_getLevelOfDetailEntityID(const string& ID);
@@ -351,6 +353,7 @@ public:
 	const bool modelEntity_isBright(const string& ID);
 	const bool modelEntity_hasDiffuseMap(const string& ID, const string& partID);
 	const bool modelEntity_hasEmissionMap(const string& ID, const string& partID);
+	const bool modelEntity_hasSpecularMap(const string& ID, const string& partID);
 	const bool modelEntity_hasReflectionMap(const string& ID, const string& partID);
 	const bool modelEntity_hasNormalMap(const string& ID, const string& partID);
 	const ReflectionType modelEntity_getReflectionType(const string& ID);

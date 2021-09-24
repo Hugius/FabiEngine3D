@@ -231,6 +231,12 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 			_fe3d.modelEntity_setEmissionMap(newID, partID, _fe3d.modelEntity_getEmissionMapPath(previewID, partID));
 		}
 
+		// Specular map
+		if (_fe3d.modelEntity_hasSpecularMap(previewID, partID))
+		{
+			_fe3d.modelEntity_setSpecularMap(newID, partID, _fe3d.modelEntity_getSpecularMapPath(previewID, partID));
+		}
+
 		// Reflection map
 		if (_fe3d.modelEntity_hasReflectionMap(previewID, partID))
 		{

@@ -86,17 +86,20 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto partID = partIDs[i];
 			auto diffuseMapPath = _fe3d.modelEntity_getDiffuseMapPath(modelID, partID);
 			auto emissionMapPath = _fe3d.modelEntity_getEmissionMapPath(modelID, partID);
-			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID, partID);
+			auto specularMapPath = _fe3d.modelEntity_getSpecularMapPath(modelID, partID);
 			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID, partID);
+			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID, partID);
 
 			// Perform empty string & space conversions
 			partID = (partID.empty()) ? "?" : partID;
 			diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
 			emissionMapPath = (emissionMapPath.empty()) ? "?" : emissionMapPath;
+			specularMapPath = (specularMapPath.empty()) ? "?" : specularMapPath;
 			reflectionMapPath = (reflectionMapPath.empty()) ? "?" : reflectionMapPath;
 			normalMapPath = (normalMapPath.empty()) ? "?" : normalMapPath;
 			replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			replace(emissionMapPath.begin(), emissionMapPath.end(), ' ', '?');
+			replace(specularMapPath.begin(), specularMapPath.end(), ' ', '?');
 			replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 			replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
@@ -105,6 +108,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				partID << " " <<
 				diffuseMapPath << " " <<
 				emissionMapPath << " " <<
+				specularMapPath << " " <<
 				reflectionMapPath << " " <<
 				normalMapPath;
 

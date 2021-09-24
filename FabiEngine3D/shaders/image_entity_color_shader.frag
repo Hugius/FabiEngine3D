@@ -32,11 +32,11 @@ float convertDepthToPerspective(float depth);
 void main()
 {
 	// Calculate fragment position and convert to NDC
-	vec2 normalizedPos = gl_FragCoord.xy / u_windowSize;
-	vec2 ndcPos = (normalizedPos * 2.0f) - vec2(1.0f);
+	vec2 normalizedPos = (gl_FragCoord.xy / u_windowSize);
+	vec2 ndcPos = ((normalizedPos * 2.0f) - vec2(1.0f));
 
 	// Determine if fragment is outside of maximum bounds
-	if (ndcPos.x > u_maxPosition.x || ndcPos.y > u_maxPosition.y || ndcPos.x < u_minPosition.x || ndcPos.y < u_minPosition.y)
+	if ((ndcPos.x > u_maxPosition.x) || (ndcPos.y > u_maxPosition.y) || (ndcPos.x < u_minPosition.x) || (ndcPos.y < u_minPosition.y))
 	{
 		discard;
 	}

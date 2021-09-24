@@ -44,8 +44,9 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_shadowMap", 3);
 	_shader.uploadUniform("u_diffuseMap", 4);
 	_shader.uploadUniform("u_emissionMap", 5);
-	_shader.uploadUniform("u_reflectionMap", 6);
-	_shader.uploadUniform("u_normalMap", 7);
+	_shader.uploadUniform("u_specularMap", 6);
+	_shader.uploadUniform("u_reflectionMap", 7);
+	_shader.uploadUniform("u_normalMap", 8);
 
 	// Enable clipping
 	glEnable(GL_CLIP_DISTANCE0);
@@ -180,6 +181,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
 			_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
+			_shader.uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partID));
 			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap(partID));
 			_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap(partID));
 			_shader.uploadUniform("u_transformationMatrix", transformationMatrix);
@@ -197,14 +199,19 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, entity->getEmissionMap(partID));
 			}
-			if (entity->hasReflectionMap(partID))
+			if (entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE6);
+				glBindTexture(GL_TEXTURE_2D, entity->getSpecularMap(partID));
+			}
+			if (entity->hasReflectionMap(partID))
+			{
+				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(partID));
 			}
 			if (entity->hasNormalMap(partID))
 			{
-				glActiveTexture(GL_TEXTURE7);
+				glActiveTexture(GL_TEXTURE8);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(partID));
 			}
 
@@ -231,6 +238,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 			if (entity->hasEmissionMap(partID))
+			{
+				glActiveTexture(GL_TEXTURE5);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+			if (entity->hasSpecularMap(partID))
 			{
 				glActiveTexture(GL_TEXTURE5);
 				glBindTexture(GL_TEXTURE_2D, 0);

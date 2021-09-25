@@ -37,7 +37,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 		auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
 		auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
-		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
+		auto isSpecular = _fe3d.modelEntity_isSpecular(modelID);
 		auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
 		auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID);

@@ -46,9 +46,9 @@ const bool FabiEngine3D::waterEntity_isVisible(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::waterEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::waterEntity_isSpecular(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->isSpecularLighted();
+	return _core->_waterEntityManager.getEntity(ID)->isSpecular();
 }
 
 const bool FabiEngine3D::waterEntity_isReflective(const string& ID)
@@ -103,9 +103,9 @@ void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 	_core->_waterEntityManager.loadMesh(ID);
 }
 
-void FabiEngine3D::waterEntity_setSpecularLighted(const string& ID, bool enabled)
+void FabiEngine3D::waterEntity_setSpecular(const string& ID, bool enabled)
 {
-	_core->_waterEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+	_core->_waterEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
 void FabiEngine3D::waterEntity_setUvRepeat(const string& ID, float repeat)

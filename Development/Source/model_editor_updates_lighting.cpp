@@ -9,14 +9,13 @@ void ModelEditor::_updateLightingMenu()
 	if (screen->getID() == "modelEditorMenuLighting")
 	{
 		// Temporary values
-		auto isSpecular = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
+		auto isSpecular = _fe3d.modelEntity_isSpecular(_currentModelID);
+		auto isReflective = _fe3d.modelEntity_isReflective(_currentModelID);
 		auto reflectionType = _fe3d.modelEntity_getReflectionType(_currentModelID);
 		auto reflectivity = _fe3d.modelEntity_getReflectivity(_currentModelID);
 		auto specularShininess = _fe3d.modelEntity_getSpecularShininess(_currentModelID);
 		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(_currentModelID);
 		auto lightness = _fe3d.modelEntity_getLightness(_currentModelID);
-		auto hasReflectionMap = _fe3d.modelEntity_hasReflectionMap(_currentModelID, "");
-		auto isSpecularLighted = _fe3d.modelEntity_isSpecularLighted(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -27,7 +26,7 @@ void ModelEditor::_updateLightingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
 			isSpecular = !isSpecular;
-			_fe3d.modelEntity_setSpecularLighted(_currentModelID, isSpecular);
+			_fe3d.modelEntity_setSpecular(_currentModelID, isSpecular);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
@@ -40,6 +39,11 @@ void ModelEditor::_updateLightingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("lightness", "Lightness", (lightness * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isReflective")->isHovered())
+		{
+			isReflective = !isReflective;
+			_fe3d.modelEntity_setReflective(_currentModelID, isReflective);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionType")->isHovered())
 		{
@@ -81,27 +85,28 @@ void ModelEditor::_updateLightingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("specularShininess")->setHoverable(isSpecularLighted);
-		screen->getButton("specularIntensity")->setHoverable(isSpecularLighted);
-		screen->getButton("reflectionType")->setHoverable(hasReflectionMap);
-		screen->getButton("reflectivity")->setHoverable(hasReflectionMap);
+		screen->getButton("specularShininess")->setHoverable(isSpecular);
+		screen->getButton("specularIntensity")->setHoverable(isSpecular);
+		screen->getButton("reflectionType")->setHoverable(isReflective);
+		screen->getButton("reflectivity")->setHoverable(isReflective);
 
 		// Update button text contents
 		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
-		if (hasReflectionMap)
+		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
+		if (isReflective)
 		{
 			if (reflectionType == ReflectionType::CUBE)
 			{
-				screen->getButton("reflectionType")->changeTextContent("Reflect: CUBE");
+				screen->getButton("reflectionType")->changeTextContent("Type: CUBE");
 			}
 			else
 			{
-				screen->getButton("reflectionType")->changeTextContent("Reflect: PLANAR");
+				screen->getButton("reflectionType")->changeTextContent("Type: PLANAR");
 			}
 		}
 		else
 		{
-			screen->getButton("reflectionType")->changeTextContent("Reflect: OFF");
+			screen->getButton("reflectionType")->changeTextContent("Type: NONE");
 		}
 	}
 }

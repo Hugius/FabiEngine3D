@@ -63,12 +63,12 @@ uniform float u_emissionIntensity;
 // Integer uniforms
 uniform int u_lightShapes[MAX_LIGHT_COUNT];
 uniform int u_lightCount;
+uniform int u_reflectionType;
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
-uniform bool u_isPlanarReflective;
-uniform bool u_isCubeReflective;
-uniform bool u_isSpecularLighted;
+uniform bool u_isReflective;
+uniform bool u_isSpecular;
 uniform bool u_isShadowFrameRenderEnabled;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
@@ -98,8 +98,8 @@ vec3 calculateDirectionalLighting(vec3 specularMapColor, vec3 normal);
 vec3 calculateSpotLighting(vec3 specularMapColor, vec3 normal);
 vec3 calculateLights(vec3 specularMapColor, vec3 normal);
 vec3 calculateFog(vec3 color);
-vec3 calculateCubeReflections(vec3 reflectionMapColor, vec3 color, vec3 normal);
-vec3 calculatePlanarReflections(vec3 reflectionMapColor, vec3 color);
+vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal);
+vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
 float calculateSpecularLighting(vec3 specularMapColor, vec3 position, vec3 normal);
 float calculateShadows();
 
@@ -141,8 +141,8 @@ void main()
 	vec3 primaryColor = vec3(0.0f);
 	primaryColor += diffuseMapping;
 	primaryColor += emissionMapping;
-	primaryColor  = calculateCubeReflections(reflectionMapping, primaryColor, normalMapping);
-	primaryColor  = calculatePlanarReflections(reflectionMapping, primaryColor);
+	primaryColor  = calculateCubeReflection(reflectionMapping, primaryColor, normalMapping);
+	primaryColor  = calculatePlanarReflection(reflectionMapping, primaryColor);
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
@@ -234,7 +234,7 @@ vec3 calculateSpecularMapping()
 	}
 	else
 	{
-		return vec3(0.0f);
+		return vec3(1.0f);
 	}
 }
 
@@ -256,7 +256,7 @@ vec3 calculateReflectionMapping()
 	}
 	else
 	{
-		return vec3(0.0f);
+		return vec3(1.0f);
 	}
 }
 
@@ -415,9 +415,9 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-vec3 calculateCubeReflections(vec3 reflectionMapColor, vec3 color, vec3 normal)
+vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal)
 {
-	if (u_isReflectionsEnabled && u_isCubeReflective)
+	if (u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 0))
 	{		
 		// Check if current texel allows for reflection
 		if (reflectionMapColor != vec3(0.0f))
@@ -443,9 +443,9 @@ vec3 calculateCubeReflections(vec3 reflectionMapColor, vec3 color, vec3 normal)
 	}
 }
 
-vec3 calculatePlanarReflections(vec3 reflectionMapColor, vec3 color)
+vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color)
 {
-	if (u_isReflectionsEnabled && u_isPlanarReflective)
+	if (u_isReflectionsEnabled && u_isReflective && (u_reflectionType == 1))
 	{
 		// Check if current texel allows for reflection
 		if (reflectionMapColor != vec3(0.0f))
@@ -542,7 +542,7 @@ float calculateShadows()
 
 float calculateSpecularLighting(vec3 specularMapColor, vec3 position, vec3 normal)
 {
-    if (u_isSpecularLighted)
+    if (u_isSpecular)
     {
     	// Calculate
         vec3 lightDirection = normalize(position - f_pos);

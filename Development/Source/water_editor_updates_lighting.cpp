@@ -12,7 +12,7 @@ void WaterEditor::_updateLightingMenu()
 		// Temporary values
 		bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
 		bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
-		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
+		bool isSpecular = _fe3d.waterEntity_isSpecular(_currentWaterID);
 		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(_currentWaterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(_currentWaterID);
 
@@ -34,8 +34,8 @@ void WaterEditor::_updateLightingMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
-			isSpecularLighted = !isSpecularLighted;
-			_fe3d.waterEntity_setSpecularLighted(_currentWaterID, isSpecularLighted);
+			isSpecular = !isSpecular;
+			_fe3d.waterEntity_setSpecular(_currentWaterID, isSpecular);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{
@@ -59,12 +59,12 @@ void WaterEditor::_updateLightingMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("specularShininess")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
-		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecularLighted(_currentWaterID));
+		screen->getButton("specularShininess")->setHoverable(_fe3d.waterEntity_isSpecular(_currentWaterID));
+		screen->getButton("specularIntensity")->setHoverable(_fe3d.waterEntity_isSpecular(_currentWaterID));
 
 		// Update button text contents
 		screen->getButton("isReflective")->changeTextContent(isReflective ? "Reflective: ON" : "Reflective: OFF");
 		screen->getButton("isRefractive")->changeTextContent(isRefractive ? "Refractive: ON" : "Refractive: OFF");
-		screen->getButton("isSpecular")->changeTextContent(isSpecularLighted ? "Specular: ON" : "Specular: OFF");
+		screen->getButton("isSpecular")->changeTextContent(isSpecular ? "Specular: ON" : "Specular: OFF");
 	}
 }

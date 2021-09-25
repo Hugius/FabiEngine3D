@@ -63,7 +63,7 @@ uniform int u_lightCount;
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
-uniform bool u_isSpecularLighted;
+uniform bool u_isSpecular;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isSpotLightingEnabled;
@@ -424,7 +424,7 @@ vec3 calculateFog(vec3 color)
 
 float calculateSpecularLighting(vec3 position, vec3 normal)
 {
-    if (u_isSpecularLighted)
+    if (u_isSpecular)
     {
         // Calculate
         vec3 lightDirection   = normalize(position - f_pos);

@@ -146,22 +146,25 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				}
 
 				// Data placeholders
-				string diffuseMapPath, emissionMapPath, reflectionMapPath, normalMapPath;
+				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 
 				// Read data from file
 				iss >>
 					diffuseMapPath >>
 					emissionMapPath >>
+					specularMapPath >>
 					reflectionMapPath >>
 					normalMapPath;
 
 				// Perform empty string & space conversions
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				emissionMapPath = (emissionMapPath == "?") ? "" : emissionMapPath;
+				specularMapPath = (specularMapPath == "?") ? "" : specularMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 				replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				replace(emissionMapPath.begin(), emissionMapPath.end(), '?', ' ');
+				replace(specularMapPath.begin(), specularMapPath.end(), '?', ' ');
 				replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 				replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
@@ -175,6 +178,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				if (!emissionMapPath.empty())
 				{
 					texturePaths.push_back(emissionMapPath);
+				}
+
+				// Specular map
+				if (!specularMapPath.empty())
+				{
+					texturePaths.push_back(specularMapPath);
 				}
 
 				// Reflection map
@@ -292,7 +301,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				_fe3d.modelEntity_setSize(modelID, "", size);
 				_fe3d.modelEntity_setColor(modelID, "", color);
 				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
-				_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
+				_fe3d.modelEntity_setSpecular(modelID, isSpecular);
 				_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);
 				_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
 				_fe3d.modelEntity_setReflectivity(modelID, reflectivity);

@@ -57,7 +57,8 @@ public:
 	void setUvRepeat(float value);
 	void setEmissionIntensity(float value);
 	void setFaceCulled(bool value);
-	void setSpecularLighted(bool value);
+	void setSpecular(bool value);
+	void setReflective(bool value);
 	void setShadowed(bool value);
 	void setReflected(bool value);
 	void setCameraStatic(bool value);
@@ -109,7 +110,8 @@ public:
 
 	// Booleans
 	const bool isFaceCulled();
-	const bool isSpecularLighted();
+	const bool isSpecular();
+	const bool isReflective();
 	const bool isShadowed();
 	const bool isReflected();
 	const bool isCameraStatic();
@@ -225,12 +227,13 @@ private:
 	// Booleans
 	bool _isCameraStatic = false;
 	bool _isFaceCulled = false;
-	bool _isSpecularLighted = false;
+	bool _isSpecular = false;
+	bool _isReflective = false;
 	bool _isShadowed = true;
 	bool _isReflected = true;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed = false;
-	bool _wireFramed = false;
+	bool _isWireFramed = false;
 	bool _isBright = false;
 
 	// Miscellaneous

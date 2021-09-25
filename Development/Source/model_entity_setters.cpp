@@ -418,9 +418,14 @@ void ModelEntity::setReflectionType(ReflectionType value)
 	_reflectionType = value;
 }
 
-void ModelEntity::setSpecularLighted(bool value)
+void ModelEntity::setSpecular(bool value)
 {
-	_isSpecularLighted = value;
+	_isSpecular = value;
+}
+
+void ModelEntity::setReflective(bool value)
+{
+	_isReflective = value;
 }
 
 void ModelEntity::setShadowed(bool value)
@@ -450,7 +455,7 @@ void ModelEntity::setLevelOfDetailed(bool value)
 
 void ModelEntity::setWireFramed(bool value)
 {
-	_wireFramed = value;
+	_isWireFramed = value;
 }
 
 void ModelEntity::setBright(bool value)

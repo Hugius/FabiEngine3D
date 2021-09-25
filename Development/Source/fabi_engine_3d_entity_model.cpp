@@ -134,9 +134,14 @@ void FabiEngine3D::modelEntity_setReflectionType(const string& ID, ReflectionTyp
 	_core->_modelEntityManager.getEntity(ID)->setReflectionType(type);
 }
 
-void FabiEngine3D::modelEntity_setSpecularLighted(const string& ID, bool enabled)
+void FabiEngine3D::modelEntity_setSpecular(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+	_core->_modelEntityManager.getEntity(ID)->setSpecular(enabled);
+}
+
+void FabiEngine3D::modelEntity_setReflective(const string& ID, bool enabled)
+{
+	_core->_modelEntityManager.getEntity(ID)->setReflective(enabled);
 }
 
 const bool FabiEngine3D::modelEntity_isExisting(const string& ID)
@@ -175,9 +180,9 @@ const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->isFaceCulled();
 }
 
-const bool FabiEngine3D::modelEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::modelEntity_isSpecular(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->isSpecularLighted();
+	return _core->_modelEntityManager.getEntity(ID)->isSpecular();
 }
 
 const bool FabiEngine3D::modelEntity_isShadowed(const string& ID)
@@ -221,6 +226,11 @@ const bool FabiEngine3D::modelEntity_hasPart(const string& ID, const string& par
 const bool FabiEngine3D::modelEntity_isBright(const string& ID)
 {
 	return _core->_modelEntityManager.getEntity(ID)->isBright();
+}
+
+const bool FabiEngine3D::modelEntity_isReflective(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->isReflective();
 }
 
 const bool FabiEngine3D::modelEntity_hasDiffuseMap(const string& ID, const string& partID)

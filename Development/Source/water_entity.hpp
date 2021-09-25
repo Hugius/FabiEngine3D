@@ -34,7 +34,7 @@ public:
 	void setHeight(float value);
 	void setSize(float value);
 	void setTransparency(float value);
-	void setSpecularLighted(bool value);
+	void setSpecular(bool value);
 	void setReflective(bool value);
 	void setRefractive(bool value);
 	void setWireFramed(bool value);
@@ -64,7 +64,7 @@ public:
 	const float getTransparency();
 
 	// Booleans
-	const bool isSpecularLighted();
+	const bool isSpecular();
 	const bool isReflective();
 	const bool isRefractive();
 	const bool isWireFramed();
@@ -102,7 +102,7 @@ private:
 	float _transparency = 0.0f;
 
 	// Booleans
-	bool _isSpecularLighted = false;
+	bool _isSpecular = false;
 	bool _isReflective = false;
 	bool _isRefractive = false;
 	bool _isWireFramed = false;

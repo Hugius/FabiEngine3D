@@ -152,9 +152,9 @@ void TerrainEntity::setMaxHeight(float value)
 	_maxHeight = max(0.0f, value);
 }
 
-void TerrainEntity::setSpecularLighted(bool value)
+void TerrainEntity::setSpecular(bool value)
 {
-	_isSpecularLighted = value;
+	_isSpecular = value;
 }
 
 void TerrainEntity::setWireFramed(bool value)

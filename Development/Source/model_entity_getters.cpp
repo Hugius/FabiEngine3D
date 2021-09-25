@@ -195,9 +195,14 @@ const bool ModelEntity::isFaceCulled()
 	return _isFaceCulled;
 }
 
-const bool ModelEntity::isSpecularLighted()
+const bool ModelEntity::isSpecular()
 {
-	return _isSpecularLighted;
+	return _isSpecular;
+}
+
+const bool ModelEntity::isReflective()
+{
+	return _isReflective;
 }
 
 const bool ModelEntity::isShadowed()
@@ -337,7 +342,7 @@ const bool ModelEntity::isLevelOfDetailed()
 
 const bool ModelEntity::isWireFramed()
 {
-	return _wireFramed;
+	return _isWireFramed;
 }
 
 const float ModelEntity::getLightness()

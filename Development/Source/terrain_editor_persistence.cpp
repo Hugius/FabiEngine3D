@@ -357,7 +357,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 			_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
-			_fe3d.terrainEntity_setSpecularLighted(terrainID, isSpecular);
+			_fe3d.terrainEntity_setSpecular(terrainID, isSpecular);
 			_fe3d.terrainEntity_setSpecularShininess(terrainID, specularShininess);
 			_fe3d.terrainEntity_setSpecularIntensity(terrainID, specularIntensity);
 		}
@@ -416,7 +416,7 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
-		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(terrainID);
+		bool isSpecular = _fe3d.terrainEntity_isSpecular(terrainID);
 
 		// Perform empty string & space conversions
 		heightMapPath = (heightMapPath.empty()) ? "?" : heightMapPath;

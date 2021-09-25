@@ -95,9 +95,9 @@ void WaterEntity::setSpecularIntensity(float value)
 	_specularIntensity = max(0.0f, value);
 }
 
-void WaterEntity::setSpecularLighted(bool value)
+void WaterEntity::setSpecular(bool value)
 {
-	_isSpecularLighted = value;
+	_isSpecular = value;
 }
 
 void WaterEntity::setReflective(bool value)
@@ -225,9 +225,9 @@ const float WaterEntity::getTransparency()
 	return _transparency;
 }
 
-const bool WaterEntity::isSpecularLighted()
+const bool WaterEntity::isSpecular()
 {
-	return _isSpecularLighted;
+	return _isSpecular;
 }
 
 const bool WaterEntity::isReflective()

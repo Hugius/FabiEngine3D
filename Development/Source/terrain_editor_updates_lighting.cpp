@@ -14,7 +14,7 @@ void TerrainEditor::_updateLightingMenu()
 	if (screen->getID() == "terrainEditorMenuLighting")
 	{
 		// Temporary values
-		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
+		bool isSpecular = _fe3d.terrainEntity_isSpecular(_currentTerrainID);
 		float specularShininess = _fe3d.terrainEntity_getSpecularShininess(_currentTerrainID);
 		float specularIntensity = _fe3d.terrainEntity_getSpecularIntensity(_currentTerrainID);
 		float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
@@ -28,7 +28,7 @@ void TerrainEditor::_updateLightingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isSpecular")->isHovered())
 		{
 			isSpecular = !isSpecular;
-			_fe3d.terrainEntity_setSpecularLighted(_currentTerrainID, isSpecular);
+			_fe3d.terrainEntity_setSpecular(_currentTerrainID, isSpecular);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularShininess")->isHovered())
 		{

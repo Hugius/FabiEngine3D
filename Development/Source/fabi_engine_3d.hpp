@@ -173,7 +173,7 @@ public:
 	void terrainEntity_setLightness(const string& ID, float lightness);
 	void terrainEntity_setSpecularShininess(const string& ID, float shininess);
 	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
-	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
+	void terrainEntity_setSpecular(const string& ID, bool enabled);
 	void terrainEntity_setWireFramed(const string& ID, bool enabled);
 
 	// Terrain entity interface - getters
@@ -201,7 +201,7 @@ public:
 	const float terrainEntity_getSpecularIntensity(const string& ID);
 	const bool terrainEntity_isExisting(const string& ID);
 	const bool terrainEntity_isVisible(const string& ID);
-	const bool terrainEntity_isSpecularLighted(const string& ID);
+	const bool terrainEntity_isSpecular(const string& ID);
 	const bool terrainEntity_isWireFramed(const string& ID);
 	const bool terrainEntity_isInside(const string& ID, float x, float z);
 	const bool terrainEntity_hasBlendMap(const string& ID);
@@ -223,7 +223,7 @@ public:
 	void waterEntity_setSpeed(const string& ID, Vec2 speed);
 	void waterEntity_setHeight(const string& ID, float height);
 	void waterEntity_setSize(const string& ID, float size);
-	void waterEntity_setSpecularLighted(const string& ID, bool enabled);
+	void waterEntity_setSpecular(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
 	void waterEntity_setWireFramed(const string& ID, bool enabled);
@@ -255,7 +255,7 @@ public:
 	const float waterEntity_getTransparency(const string& ID);
 	const bool waterEntity_isExisting(const string& ID);
 	const bool waterEntity_isVisible(const string& ID);
-	const bool waterEntity_isSpecularLighted(const string& ID);
+	const bool waterEntity_isSpecular(const string& ID);
 	const bool waterEntity_isReflective(const string& ID);
 	const bool waterEntity_isRefractive(const string& ID);
 	const bool waterEntity_isWireFramed(const string& ID);
@@ -278,7 +278,8 @@ public:
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
 	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setReflectionType(const string& ID, ReflectionType type);
-	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
+	void modelEntity_setSpecular(const string& ID, bool enabled);
+	void modelEntity_setReflective(const string& ID, bool enabled);
 	void modelEntity_setShadowed(const string& ID, bool enabled);
 	void modelEntity_setReflected(const string& ID, bool enabled);
 	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
@@ -343,7 +344,7 @@ public:
 	const bool modelEntity_isInstanced(const string& ID);
 	const bool modelEntity_isMultiParted(const string& ID);
 	const bool modelEntity_isFaceCulled(const string& ID);
-	const bool modelEntity_isSpecularLighted(const string& ID);
+	const bool modelEntity_isSpecular(const string& ID);
 	const bool modelEntity_isShadowed(const string& ID);
 	const bool modelEntity_isReflected(const string& ID);
 	const bool modelEntity_isStaticToCamera(const string& ID);
@@ -351,6 +352,7 @@ public:
 	const bool modelEntity_isDepthMapIncluded(const string& ID);
 	const bool modelEntity_hasPart(const string& ID, const string& partID);
 	const bool modelEntity_isBright(const string& ID);
+	const bool modelEntity_isReflective(const string& ID);
 	const bool modelEntity_hasDiffuseMap(const string& ID, const string& partID);
 	const bool modelEntity_hasEmissionMap(const string& ID, const string& partID);
 	const bool modelEntity_hasSpecularMap(const string& ID, const string& partID);

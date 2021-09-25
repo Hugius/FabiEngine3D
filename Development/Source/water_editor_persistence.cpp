@@ -114,7 +114,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 		Vec2 speed;
 		float height, size, uvRepeat, waveHeight, transparency, specularShininess, specularIntensity;
 		unsigned int quality;
-		bool isSpecularLighted, isReflective, isRefractive;
+		bool isSpecular, isReflective, isRefractive;
 
 		// For file extraction
 		istringstream iss(line);
@@ -125,7 +125,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			dudvMapPath >>
 			normalMapPath >>
 			displacementMapPath >>
-			isSpecularLighted >>
+			isSpecular >>
 			isReflective >>
 			isRefractive >>
 			color.r >>
@@ -180,7 +180,7 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 			// Set properties
 			_fe3d.waterEntity_setHeight(waterID, height);
 			_fe3d.waterEntity_setSize(waterID, size);
-			_fe3d.waterEntity_setSpecularLighted(waterID, isSpecularLighted);
+			_fe3d.waterEntity_setSpecular(waterID, isSpecular);
 			_fe3d.waterEntity_setReflective(waterID, isReflective);
 			_fe3d.waterEntity_setRefractive(waterID, isRefractive);
 			_fe3d.waterEntity_setWaveHeight(waterID, waveHeight);
@@ -242,7 +242,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 		auto specularShininess = _fe3d.waterEntity_getSpecularShininess(waterID);
 		auto specularIntensity = _fe3d.waterEntity_getSpecularIntensity(waterID);
 		auto quality = static_cast<unsigned int>(_fe3d.waterEntity_getQuality(waterID));
-		auto isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
+		auto isSpecular = _fe3d.waterEntity_isSpecular(waterID);
 		auto isReflective = _fe3d.waterEntity_isReflective(waterID);
 		auto isRefractive = _fe3d.waterEntity_isRefractive(waterID);
 
@@ -260,7 +260,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 			dudvMapPath << " " <<
 			normalMapPath << " " <<
 			displacementMapPath << " " <<
-			isSpecularLighted << " " <<
+			isSpecular << " " <<
 			isReflective << " " <<
 			isRefractive << " " <<
 			color.r << " " <<

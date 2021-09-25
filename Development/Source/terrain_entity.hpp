@@ -46,7 +46,7 @@ public:
 	void setLightness(float value);
 	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);
-	void setSpecularLighted(bool value);
+	void setSpecular(bool value);
 	void setWireFramed(bool value);
 
 	// Instances
@@ -82,7 +82,7 @@ public:
 	const float getSpecularIntensity();
 
 	// Booleans
-	const bool isSpecularLighted();
+	const bool isSpecular();
 	const bool isWireFramed();
 	const bool hasRenderBuffer();
 	const bool hasDiffuseMap();
@@ -140,7 +140,7 @@ private:
 	float _specularIntensity = 1.0f;
 
 	// Booleans
-	bool _isSpecularLighted = false;
+	bool _isSpecular = false;
 	bool _isWireFramed = false;
 
 	// Miscellaneous

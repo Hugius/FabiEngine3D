@@ -44,9 +44,9 @@ const bool FabiEngine3D::terrainEntity_isVisible(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->isVisible();
 }
 
-const bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
+const bool FabiEngine3D::terrainEntity_isSpecular(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
+	return _core->_terrainEntityManager.getEntity(ID)->isSpecular();
 }
 
 const bool FabiEngine3D::terrainEntity_isWireFramed(const string& ID)
@@ -401,9 +401,9 @@ void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)
 	_core->_terrainEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::terrainEntity_setSpecularLighted(const string& ID, bool enabled)
+void FabiEngine3D::terrainEntity_setSpecular(const string& ID, bool enabled)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+	_core->_terrainEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
 void FabiEngine3D::terrainEntity_setWireFramed(const string& ID, bool enabled)

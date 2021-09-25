@@ -50,7 +50,7 @@ uniform int u_lightCount;
 uniform bool u_isWireFramed;
 uniform bool u_isDirectionalLightingEnabled;
 uniform bool u_isFogEnabled;
-uniform bool u_isSpecularLighted;
+uniform bool u_isSpecular;
 uniform bool u_isReflective;
 uniform bool u_isRefractive;
 uniform bool u_isUnderWater;
@@ -189,7 +189,7 @@ vec4 calculateWaterColor()
 	}
 
 	// Specular lighting
-	if (u_isSpecularLighted)
+	if (u_isSpecular)
 	{
 		finalColor += calculateDirectionalLighting(normal);
 		finalColor += calculateLights(normal);
@@ -266,7 +266,7 @@ vec3 calculateDirectionalLighting(vec3 normal)
 
 float calculateSpecularLighting(vec3 position, vec3 normal)
 {
-    if (u_isSpecularLighted)
+    if (u_isSpecular)
     {
     	// Calculate
         vec3 lightDirection   = normalize(position - f_pos);

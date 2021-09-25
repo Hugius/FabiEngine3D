@@ -102,8 +102,8 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 
 			// Place AABB
 			_fe3d.aabbEntity_create(arguments[0].getString());
-			_fe3d.aabbEntity_setPosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.aabbEntity_setSize(arguments[0].getString(), Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.aabbEntity_setBasePosition(arguments[0].getString(), Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+			_fe3d.aabbEntity_setBaseSize(arguments[0].getString(), Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -202,7 +202,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				}
 
 				// Set position
-				_fe3d.aabbEntity_setPosition(arguments[0].getString(),
+				_fe3d.aabbEntity_setBasePosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				
 				// Return
@@ -228,7 +228,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				}
 
 				// Set size
-				_fe3d.aabbEntity_setSize(arguments[0].getString(),
+				_fe3d.aabbEntity_setBaseSize(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 
 				// Return

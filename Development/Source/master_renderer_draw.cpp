@@ -85,15 +85,15 @@ void MasterRenderer::_renderModelEntities()
 				auto lodEntity = modelEntities.find(modelEntity->getLevelOfDetailEntityID())->second;
 
 				// Save original transformation
-				Vec3 originalPosition = lodEntity->getPosition("");
-				Vec3 originalRotation = lodEntity->getRotation("");
-				Vec3 originalSize = lodEntity->getSize("");
+				Vec3 originalPosition = lodEntity->getBasePosition();
+				Vec3 originalRotation = lodEntity->getBaseRotation();
+				Vec3 originalSize = lodEntity->getBaseSize();
 				bool originalVisibility = lodEntity->isVisible();
 
 				// Change transformation
-				lodEntity->setPosition("", modelEntity->getPosition(""));
-				lodEntity->setRotation("", modelEntity->getRotation(""));
-				lodEntity->setSize("", (modelEntity->getSize("") / modelEntity->getLevelOfDetailSize()) * originalSize);
+				lodEntity->setBasePosition(modelEntity->getBasePosition());
+				lodEntity->setBaseRotation(modelEntity->getBaseRotation());
+				lodEntity->setBaseSize((modelEntity->getBaseSize() / modelEntity->getLevelOfDetailSize()) * originalSize);
 				lodEntity->setVisible(modelEntity->isVisible());
 				lodEntity->updateTransformationMatrix();
 
@@ -101,9 +101,9 @@ void MasterRenderer::_renderModelEntities()
 				_modelEntityColorRenderer.render(lodEntity, _entityBus->getReflectionEntities());
 
 				// Revert to original transformation
-				lodEntity->setPosition("", originalPosition);
-				lodEntity->setRotation("", originalRotation);
-				lodEntity->setSize("", originalSize);
+				lodEntity->setBasePosition(originalPosition);
+				lodEntity->setBaseRotation(originalRotation);
+				lodEntity->setBaseSize(originalSize);
 				lodEntity->setVisible(originalVisibility);
 				lodEntity->updateTransformationMatrix();
 			}

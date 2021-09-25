@@ -79,7 +79,7 @@ void SceneEditor::load()
 	// Load preview sounds
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.modelEntity_create(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH);
-	_fe3d.modelEntity_setSize(PREVIEW_SPEAKER_ID, "", DEFAULT_SPEAKER_SIZE);
+	_fe3d.modelEntity_setBaseSize(PREVIEW_SPEAKER_ID, DEFAULT_SPEAKER_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_SPEAKER_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_SPEAKER_ID, true);
@@ -93,7 +93,7 @@ void SceneEditor::load()
 
 	// Load preview light
 	_fe3d.modelEntity_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
-	_fe3d.modelEntity_setSize(PREVIEW_LAMP_ID, "", DEFAULT_LAMP_SIZE);
+	_fe3d.modelEntity_setBaseSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LAMP_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_LAMP_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_LAMP_ID, true);
@@ -105,7 +105,7 @@ void SceneEditor::load()
 
 	// Load preview reflection
 	_fe3d.modelEntity_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
-	_fe3d.modelEntity_setSize(PREVIEW_CAMERA_ID, "", DEFAULT_CAMERA_SIZE);
+	_fe3d.modelEntity_setBaseSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_CAMERA_ID, false);
 	_fe3d.modelEntity_setReflected(PREVIEW_CAMERA_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_CAMERA_ID, true);

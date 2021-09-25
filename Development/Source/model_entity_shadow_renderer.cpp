@@ -36,14 +36,8 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 {
 	if (entity->isVisible() && entity->isShadowed())
 	{
-		// Enable face culling
-		if (entity->isFaceCulled())
-		{
-			glEnable(GL_CULL_FACE);
-		}
-
 		// Shader uniforms
-		_shader.uploadUniform("u_positionY", entity->getPosition("").y);
+		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
@@ -57,6 +51,12 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 			// Shader uniforms
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
+
+			// Enable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glEnable(GL_CULL_FACE);
+			}
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -88,12 +88,12 @@ void ModelEntityShadowRenderer::render(const shared_ptr<ModelEntity> entity)
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-		}
 
-		// Disable face culling
-		if (entity->isFaceCulled())
-		{
-			glDisable(GL_CULL_FACE);
+			// Disable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glDisable(GL_CULL_FACE);
+			}
 		}
 	}
 }

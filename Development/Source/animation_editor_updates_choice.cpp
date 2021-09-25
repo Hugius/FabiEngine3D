@@ -27,18 +27,18 @@ void AnimationEditor::_updateChoiceMenu()
 				// For every model part
 				for (const auto& partID : currentAnimation->getPartIDs())
 				{
-					_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-					_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+					_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+					_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+					_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 
 					// Only whole model size must be original
 					if (partID.empty())
 					{
-						_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
+						_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
 					}
 					else
 					{
-						_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+						_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 					}
 				}
 			}
@@ -69,18 +69,18 @@ void AnimationEditor::_updateChoiceMenu()
 			// Reset preview model transformation
 			for (const auto& partID : currentAnimation->getPartIDs())
 			{
-				_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-				_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-				_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 
 				// Only whole model size must be original
 				if (partID.empty())
 				{
-					_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
+					_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
 				}
 				else
 				{
-					_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+					_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 				}
 			}
 
@@ -93,21 +93,21 @@ void AnimationEditor::_updateChoiceMenu()
 			stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 
 			// Reset preview model transformation
-			_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), "", currentAnimation->getInitialSize());
+			_fe3d.modelEntity_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 			for (const auto& partID : currentAnimation->getPartIDs())
 			{
-				_fe3d.modelEntity_setPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-				_fe3d.modelEntity_setRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-				_fe3d.modelEntity_setRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+				_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 
 				// Only whole model size must be original
 				if (partID.empty())
 				{
-					_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
+					_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
 				}
 				else
 				{
-					_fe3d.modelEntity_setSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
+					_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 				}
 			}
 		}
@@ -235,7 +235,7 @@ void AnimationEditor::_updateChoiceMenu()
 
 				// Change values
 				currentAnimation->setPreviewModelID(_hoveredModelID);
-				currentAnimation->setInitialSize(_fe3d.modelEntity_getSize(_hoveredModelID, ""));
+				currentAnimation->setInitialSize(_fe3d.modelEntity_getBaseSize(_hoveredModelID));
 
 				// Check if first time choosing preview model
 				if (currentAnimation->getFrames().empty())

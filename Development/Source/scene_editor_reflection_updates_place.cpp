@@ -35,7 +35,7 @@ void SceneEditor::_updateReflectionPlacing()
 				// Create model
 				const string newModelID = ("@@camera_" + newID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
-				_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_CAMERA_SIZE);
+				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -107,7 +107,7 @@ void SceneEditor::_updateReflectionPlacing()
 							// Create model
 							const string newModelID = ("@@camera_" + newID);
 							_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\camera.obj");
-							_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_CAMERA_SIZE);
+							_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_CAMERA_SIZE);
 							_fe3d.modelEntity_setShadowed(newModelID, false);
 							_fe3d.modelEntity_setReflected(newModelID, false);
 							_fe3d.modelEntity_setBright(newModelID, true);
@@ -147,7 +147,7 @@ void SceneEditor::_updateReflectionPlacing()
 		{
 			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);
 			reflectionPosition -= CAMERA_OFFSET;
-			_fe3d.modelEntity_setPosition(PREVIEW_CAMERA_ID, "", reflectionPosition);
+			_fe3d.modelEntity_setBasePosition(PREVIEW_CAMERA_ID, reflectionPosition);
 		}
 	}
 
@@ -158,7 +158,7 @@ void SceneEditor::_updateReflectionPlacing()
 		{
 			auto reflectionPosition = _fe3d.reflectionEntity_getPosition(entityID.substr(string("@@camera_").size()));
 			reflectionPosition -= CAMERA_OFFSET;
-			_fe3d.modelEntity_setPosition(entityID, "", reflectionPosition);
+			_fe3d.modelEntity_setBasePosition(entityID, reflectionPosition);
 		}
 	}
 }

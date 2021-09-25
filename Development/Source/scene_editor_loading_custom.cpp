@@ -197,15 +197,15 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				}
 
 				// Set properties
-				_fe3d.modelEntity_setRotation(modelID, "", rotation);
-				_fe3d.modelEntity_setRotationOrigin(modelID, "", rotationOrigin);
-				_fe3d.modelEntity_setSize(modelID, "", size);
+				_fe3d.modelEntity_setBaseRotation(modelID, rotation);
+				_fe3d.modelEntity_setBaseRotationOrigin(modelID, rotationOrigin);
+				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 				_fe3d.modelEntity_setColor(modelID, "", color);
 				_fe3d.modelEntity_setMinHeight(modelID, minHeight);
 				_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
-				_fe3d.modelEntity_setAlpha(modelID, alpha);
-				_fe3d.modelEntity_setLightness(modelID, lightness);
+				//_fe3d.modelEntity_setAlpha(modelID, alpha);
+				//_fe3d.modelEntity_setLightness(modelID, lightness);
 				_fe3d.modelEntity_setVisible(modelID, isVisible);
 				for (const auto& ID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
 				{
@@ -234,10 +234,10 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 						size.z;
 
 					// Set part transformation
-					_fe3d.modelEntity_setPosition(modelID, partID, position);
-					_fe3d.modelEntity_setRotation(modelID, partID, rotation);
-					_fe3d.modelEntity_setRotationOrigin(modelID, partID, rotationOrigin);
-					_fe3d.modelEntity_setSize(modelID, partID, size);
+					_fe3d.modelEntity_setPartPosition(modelID, partID, position);
+					_fe3d.modelEntity_setPartRotation(modelID, partID, rotation);
+					_fe3d.modelEntity_setPartRotationOrigin(modelID, partID, rotationOrigin);
+					_fe3d.modelEntity_setPartSize(modelID, partID, size);
 				}
 
 				// Read offset data from file
@@ -343,9 +343,9 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				for (const auto& partID : partIDs)
 				{
 					// Retrieve part transformation
-					auto position = _fe3d.modelEntity_getPosition(modelID, partID);
-					auto rotation = _fe3d.modelEntity_getRotation(modelID, partID);
-					auto size = _fe3d.modelEntity_getSize(modelID, partID);
+					auto position = _fe3d.modelEntity_getPartPosition(modelID, partID);
+					auto rotation = _fe3d.modelEntity_getPartRotation(modelID, partID);
+					auto size = _fe3d.modelEntity_getPartSize(modelID, partID);
 
 					// Set properties
 					animationData->setTotalMovement(partID, position);
@@ -460,8 +460,8 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 
 			// Create AABB
 			_fe3d.aabbEntity_create(aabbID);
-			_fe3d.aabbEntity_setPosition(aabbID, position);
-			_fe3d.aabbEntity_setSize(aabbID, size);
+			_fe3d.aabbEntity_setBasePosition(aabbID, position);
+			_fe3d.aabbEntity_setBaseSize(aabbID, size);
 			_fe3d.aabbEntity_setRaycastResponsive(aabbID, isRaycastResponsive);
 			_fe3d.aabbEntity_setCollisionResponsive(aabbID, isCollisionResponsive);
 			_fe3d.aabbEntity_setVisible(aabbID, isVisible);

@@ -108,10 +108,8 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
-			float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
-			unsigned int reflectionType;
-			bool isFaceCulled, isSpecular, isInstanced;
-			Vec3 size, color;
+			bool isInstanced;
+			Vec3 size;
 
 			// Read data from file
 			iss >>
@@ -120,17 +118,6 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				size.x >>
 				size.y >>
 				size.z >>
-				isFaceCulled >>
-				reflectionType >>
-				isSpecular >>
-				specularShininess >>
-				specularIntensity >>
-				reflectivity >>
-				lightness >>
-				color.r >>
-				color.g >>
-				color.b >>
-				uvRepeat >>
 				lodEntityID >>
 				isInstanced;
 
@@ -249,10 +236,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
-			float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
-			unsigned int reflectionType;
-			bool isFaceCulled, isSpecular, isInstanced;
-			Vec3 size, color;
+			bool isInstanced;
+			Vec3 size;
 
 			// Read data from file
 			iss >>
@@ -261,17 +246,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				size.x >>
 				size.y >>
 				size.z >>
-				isFaceCulled >>
-				reflectionType >>
-				isSpecular >>
-				specularShininess >>
-				specularIntensity >>
-				reflectivity >>
-				lightness >>
-				color.r >>
-				color.g >>
-				color.b >>
-				uvRepeat >>
 				lodEntityID >>
 				isInstanced;
 
@@ -298,17 +272,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 				// Set properties
 				_fe3d.modelEntity_setVisible(modelID, false);
-				_fe3d.modelEntity_setSize(modelID, "", size);
-				_fe3d.modelEntity_setColor(modelID, "", color);
-				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
-				_fe3d.modelEntity_setSpecular(modelID, isSpecular);
-				_fe3d.modelEntity_setSpecularShininess(modelID, specularShininess);
-				_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
-				_fe3d.modelEntity_setReflectivity(modelID, reflectivity);
-				_fe3d.modelEntity_setLightness(modelID, lightness);
-				_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
+				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
-				_fe3d.modelEntity_setReflectionType(modelID, ReflectionType(reflectionType));
 
 				// Read part data
 				while (true)
@@ -323,6 +288,10 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 					// Data placeholders
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
+					float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+					unsigned int reflectionType;
+					bool isFaceCulled, isSpecular, isReflective;
+					Vec3 color;
 
 					// Read data from file
 					iss >>
@@ -330,7 +299,19 @@ bool ModelEditor::loadModelEntitiesFromFile()
 						emissionMapPath >>
 						specularMapPath >>
 						reflectionMapPath >>
-						normalMapPath;
+						normalMapPath >>
+						isFaceCulled >>
+						reflectionType >>
+						isSpecular >>
+						isReflective >>
+						specularShininess >>
+						specularIntensity >>
+						reflectivity >>
+						lightness >>
+						color.r >>
+						color.g >>
+						color.b >>
+						uvRepeat;
 
 					// Perform empty string & space conversions
 					partID = (partID == "?") ? "" : partID;
@@ -374,6 +355,18 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					{
 						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);
 					}
+
+					// Set properties
+					_fe3d.modelEntity_setColor(modelID, partID, color);
+					_fe3d.modelEntity_setFaceCulled(modelID, partID, isFaceCulled);
+					_fe3d.modelEntity_setSpecular(modelID, partID, isSpecular);
+					_fe3d.modelEntity_setSpecularShininess(modelID, partID, specularShininess);
+					_fe3d.modelEntity_setSpecularIntensity(modelID, partID, specularIntensity);
+					_fe3d.modelEntity_setReflectivity(modelID, partID, reflectivity);
+					_fe3d.modelEntity_setLightness(modelID, partID, lightness);
+					_fe3d.modelEntity_setUvRepeat(modelID, partID, uvRepeat);
+					_fe3d.modelEntity_setReflective(modelID, partID, isReflective);
+					_fe3d.modelEntity_setReflectionType(modelID, partID, ReflectionType(reflectionType));
 				}
 			}
 		}

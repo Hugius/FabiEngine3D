@@ -57,12 +57,12 @@ void FabiEngine3D::aabbEntity_setLocalSize(const string& ID, Vec3 size)
 	_core->_aabbEntityManager.getEntity(ID)->setLocalSize(size);
 }
 
-void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::aabbEntity_setBasePosition(const string& ID, Vec3 position)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setPosition(position);
 }
 
-void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
+void FabiEngine3D::aabbEntity_setBaseSize(const string& ID, Vec3 size)
 {
 	_core->_aabbEntityManager.getEntity(ID)->setSize(size);
 }

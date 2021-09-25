@@ -92,7 +92,7 @@ void SceneEditor::_updateModelPlacingMenu()
 
 						// Set new preview model
 						_currentPreviewModelID = modelID;
-						_fe3d.modelEntity_setPosition(_currentPreviewModelID, "", Vec3(0.0f));
+						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, Vec3(0.0f));
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), true);
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("modelID")->getEntityID(), "Model: " + _currentPreviewModelID.substr(1), 0.025f);

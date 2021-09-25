@@ -87,7 +87,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						{
 							// Retrieve maximum rotation & direction (based on parent rotation)
 							Direction rotationDirection;
-							Vec3 parentRotation = parentEntity->getRotation("");
+							Vec3 parentRotation = parentEntity->getBaseRotation();
 							float rotation = 0.0f;
 							if ((parentRotation.x > parentRotation.y) && (parentRotation.x > parentRotation.z))
 							{
@@ -106,7 +106,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							}
 
 							// Update size (based on parent size & AABB rotation)
-							const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getSize(""));
+							const Vec3 newAabbSize = (entity->getLocalSize() * parentEntity->getBaseSize());
 							if (((rotation > 45.0f) && (rotation < 135.0f)) || ((rotation > 225.0f) && (rotation < 315.0f)))
 							{
 								// Determine rotation direction
@@ -129,7 +129,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 							}
 
 							// Update position (based on parent position + rotation + size)
-							Vec3 localPosition = (entity->getLocalPosition() * parentEntity->getSize(""));
+							Vec3 localPosition = (entity->getLocalPosition() * parentEntity->getBaseSize());
 							float roundedRotation =
 								(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
 								(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
@@ -148,7 +148,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								Vec3 localOffset = Vec3(0.0f, (entity->getLocalSize().y / 2.0f), 0.0f);
 								bool isMirrored = (roundedRotation == 180.0f);
 								localPosition = (rotationDirection == Direction::Y) ? localPosition :
-									(entity->getLocalPosition() + localOffset) * parentEntity->getSize("");
+									(entity->getLocalPosition() + localOffset) * parentEntity->getBaseSize();
 								float yOffset;
 
 								// Determine rotation direction
@@ -170,11 +170,11 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 
 								// Apply rotation
 								Vec4 result = rotationMatrix * Vec4(localPosition.x, localPosition.y, localPosition.z, 1.0f);
-								entity->setPosition(parentEntity->getPosition("") + Vec3(result.x, result.y + yOffset, result.z));
+								entity->setPosition(parentEntity->getBasePosition() + Vec3(result.x, result.y + yOffset, result.z));
 							}
 							else // No rotation
 							{
-								entity->setPosition(parentEntity->getPosition("") + localPosition);
+								entity->setPosition(parentEntity->getBasePosition() + localPosition);
 							}
 						}
 

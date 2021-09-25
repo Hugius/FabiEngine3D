@@ -38,14 +38,8 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 {
 	if (entity->isVisible())
 	{
-		// Enable face culling
-		if (entity->isFaceCulled())
-		{
-			glEnable(GL_CULL_FACE);
-		}
-
 		// Shader uniforms
-		_shader.uploadUniform("u_positionY", entity->getPosition("").y);
+		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
@@ -62,6 +56,12 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 			// Shader uniforms
 			_shader.uploadUniform("u_transformationMatrix", entity->getTransformationMatrix(partID));
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
+
+			// Enable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glEnable(GL_CULL_FACE);
+			}
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -84,6 +84,9 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
+			// Unbind buffer
+			glBindVertexArray(0);
+
 			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
@@ -91,14 +94,11 @@ void ModelEntityDepthRenderer::render(const shared_ptr<ModelEntity> entity, floa
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Unbind buffer
-			glBindVertexArray(0);
-		}
-
-		// Disable face culling
-		if (entity->isFaceCulled())
-		{
-			glDisable(GL_CULL_FACE);
+			// Disable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glDisable(GL_CULL_FACE);
+			}
 		}
 	}
 }

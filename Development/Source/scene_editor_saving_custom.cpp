@@ -129,15 +129,15 @@ bool SceneEditor::saveCustomSceneToFile()
 			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
 			auto isAabbRaycastResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isRaycastResponsive(aabbIDs.front());
 			auto isAabbCollisionResponsive = aabbIDs.empty() ? false : _fe3d.aabbEntity_isCollisionResponsive(aabbIDs.front());
-			auto position = _fe3d.modelEntity_getPosition(modelID, "");
-			auto rotation = _fe3d.modelEntity_getRotation(modelID, "");
-			auto rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, "");
-			auto size = _fe3d.modelEntity_getSize(modelID, "");
+			auto position = _fe3d.modelEntity_getBasePosition(modelID);
+			auto rotation = _fe3d.modelEntity_getBaseRotation(modelID);
+			auto rotationOrigin = _fe3d.modelEntity_getBaseRotationOrigin(modelID);
+			auto size = _fe3d.modelEntity_getBaseSize(modelID);
 			auto color = _fe3d.modelEntity_getColor(modelID, "");
 			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
 			auto maxHeight = _fe3d.modelEntity_getMaxHeight(modelID);
-			auto alpha = _fe3d.modelEntity_getAlpha(modelID);
-			auto lightness = _fe3d.modelEntity_getLightness(modelID);
+			auto alpha = _fe3d.modelEntity_getAlpha(modelID, "");
+			auto lightness = _fe3d.modelEntity_getLightness(modelID, "");
 
 			// Extract preview ID
 			string previewID;
@@ -204,10 +204,10 @@ bool SceneEditor::saveCustomSceneToFile()
 						file << " ";
 
 						// Retrieve transformation
-						position = _fe3d.modelEntity_getPosition(modelID, partIDs[i]);
-						rotation = _fe3d.modelEntity_getRotation(modelID, partIDs[i]);
-						rotationOrigin = _fe3d.modelEntity_getRotationOrigin(modelID, partIDs[i]);
-						size = _fe3d.modelEntity_getSize(modelID, partIDs[i]);
+						position = _fe3d.modelEntity_getPartPosition(modelID, partIDs[i]);
+						rotation = _fe3d.modelEntity_getPartRotation(modelID, partIDs[i]);
+						rotationOrigin = _fe3d.modelEntity_getPartRotationOrigin(modelID, partIDs[i]);
+						size = _fe3d.modelEntity_getPartSize(modelID, partIDs[i]);
 
 						// Write transformation
 						file <<

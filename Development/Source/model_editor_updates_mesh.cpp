@@ -10,7 +10,7 @@ void ModelEditor::_updateMeshMenu()
 	if (screen->getID() == "modelEditorMenuMesh")
 	{
 		// Temporary values
-		auto size = _fe3d.modelEntity_getSize(_currentModelID, "");
+		auto size = _fe3d.modelEntity_getBaseSize(_currentModelID);
 		auto isMultiParted = _fe3d.modelEntity_isMultiParted(_currentModelID);
 
 		// Button management
@@ -243,17 +243,17 @@ void ModelEditor::_updateMeshMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x))
 		{
 			size.x /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y))
 		{
 			size.y /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", size.z))
 		{
 			size.z /= 100.0f;
-			_fe3d.modelEntity_setSize(_currentModelID, "", size);
+			_fe3d.modelEntity_setBaseSize(_currentModelID, size);
 		}
 	}
 }

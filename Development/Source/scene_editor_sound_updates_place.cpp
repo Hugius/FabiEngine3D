@@ -35,7 +35,7 @@ void SceneEditor::_updateSoundPlacing()
 				// Create model
 				const string newModelID = ("@@speaker_" + newID);
 				_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
-				_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_SPEAKER_SIZE);
+				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 				_fe3d.modelEntity_setShadowed(newModelID, false);
 				_fe3d.modelEntity_setReflected(newModelID, false);
 				_fe3d.modelEntity_setBright(newModelID, true);
@@ -124,7 +124,7 @@ void SceneEditor::_updateSoundPlacing()
 						// Create model
 						const string newModelID = ("@@speaker_" + newID);
 						_fe3d.modelEntity_create(newModelID, _fe3d.modelEntity_getMeshPath(PREVIEW_SPEAKER_ID));
-						_fe3d.modelEntity_setSize(newModelID, "", DEFAULT_SPEAKER_SIZE);
+						_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_SPEAKER_SIZE);
 						_fe3d.modelEntity_setShadowed(newModelID, false);
 						_fe3d.modelEntity_setReflected(newModelID, false);
 						_fe3d.modelEntity_setBright(newModelID, true);
@@ -184,7 +184,7 @@ void SceneEditor::_updateSoundPlacing()
 		{
 			auto soundPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);
 			soundPosition -= SPEAKER_OFFSET;
-			_fe3d.modelEntity_setPosition(PREVIEW_SPEAKER_ID, "", soundPosition);
+			_fe3d.modelEntity_setBasePosition(PREVIEW_SPEAKER_ID, soundPosition);
 		}
 	}
 
@@ -195,7 +195,7 @@ void SceneEditor::_updateSoundPlacing()
 		{
 			auto soundPosition = _fe3d.sound_getPosition(entityID.substr(string("@@speaker_").size()));
 			soundPosition -= SPEAKER_OFFSET;
-			_fe3d.modelEntity_setPosition(entityID, "", soundPosition);
+			_fe3d.modelEntity_setBasePosition(entityID, soundPosition);
 		}
 	}
 }

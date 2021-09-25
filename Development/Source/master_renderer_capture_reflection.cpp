@@ -220,10 +220,13 @@ void MasterRenderer::_capturePlanarReflections()
 	bool anyReflectiveModelFound = false;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		if (entity->isReflective() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
+		for (const auto& partID : entity->getPartIDs())
 		{
-			anyReflectiveModelFound = true;
-			break;
+			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			{
+				anyReflectiveModelFound = true;
+				break;
+			}
 		}
 	}
 
@@ -245,18 +248,23 @@ void MasterRenderer::_capturePlanarReflections()
 	vector<string> savedModelEntityIDs;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Hide reflective MODEL entity
-		if (entity->isReflective() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
-		{
-			entity->setVisible(false);
-			savedModelEntityIDs.push_back(entity->getID());
-		}
-
 		// Hide non-reflected MODEL entity
 		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
 			savedModelEntityIDs.push_back(entity->getID());
+			continue;
+		}
+
+		// Hide reflective MODEL entity
+		for (const auto& partID : entity->getPartIDs())
+		{
+			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+			{
+				entity->setVisible(false);
+				savedModelEntityIDs.push_back(entity->getID());
+				break;
+			}
 		}
 	}
 
@@ -390,24 +398,29 @@ void MasterRenderer::_captureWaterReflections()
 
 		// Save MODEL entities that must not be captured
 		vector<string> savedModelEntityIDs;
-		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS || 
+		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
 			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			// Iterate through all MODEL entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
-				// Hide reflective MODEL entity
-				if (entity->isReflective() && (entity->getReflectionType() == ReflectionType::PLANAR) && entity->isVisible())
-				{
-					entity->setVisible(false);
-					savedModelEntityIDs.push_back(entity->getID());
-				}
-
 				// Hide non-reflected MODEL entity
 				if (!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
 					savedModelEntityIDs.push_back(entity->getID());
+					continue;
+				}
+
+				// Hide reflective MODEL entity
+				for (const auto& partID : entity->getPartIDs())
+				{
+					if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
+					{
+						entity->setVisible(false);
+						savedModelEntityIDs.push_back(entity->getID());
+						break;
+					}
 				}
 			}
 		}

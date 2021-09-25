@@ -121,7 +121,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 
 				// Calculate absolute distance between camera and entity
 				Vec3 camPos = _renderBus.getCameraPosition();
-				Vec3 entityPos = entity->getPosition("");
+				Vec3 entityPos = entity->getBasePosition();
 				auto absolsuteDistance = Math::calculateVectorDistance(camPos, entityPos);
 
 				// Check if entity is farther than LOD distance
@@ -135,7 +135,7 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 			{
 				if (reflectionEntity->isVisible())
 				{
-					auto absoluteDistance = Math::calculateVectorDistance(entity->getPosition(""), reflectionEntity->getPosition());
+					auto absoluteDistance = Math::calculateVectorDistance(entity->getBasePosition(), reflectionEntity->getPosition());
 					reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
 				}
 			}

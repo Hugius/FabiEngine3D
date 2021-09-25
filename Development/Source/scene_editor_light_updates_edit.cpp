@@ -50,7 +50,7 @@ void SceneEditor::_updateLightEditing()
 					// Don't reset if lamp is active or selected
 					if ((entityID != _activeLampID) && (entityID != _selectedLampID))
 					{
-						_fe3d.modelEntity_setSize(entityID, "", DEFAULT_LAMP_SIZE);
+						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_LAMP_SIZE);
 						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_LAMP_AABB_SIZE);
 					}
 				}

@@ -203,9 +203,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 
 	// Create model entity
 	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID));
-	_fe3d.modelEntity_setPosition(newID, "", position);
-	_fe3d.modelEntity_setSize(newID, "", _fe3d.modelEntity_getSize(previewID, ""));
-	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getSize(previewID, ""));
 
 	// Bind AABB entities to model entity
 	for (const auto& previewAabbID : _fe3d.aabbEntity_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
@@ -217,64 +214,70 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
 
+	// Set parts
 	for (const auto& partID : _fe3d.modelEntity_getPartIDs(previewID))
 	{
-		// Diffuse map
+		// Set diffuse map
 		if (_fe3d.modelEntity_hasDiffuseMap(previewID, partID))
 		{
 			_fe3d.modelEntity_setDiffuseMap(newID, partID, _fe3d.modelEntity_getDiffuseMapPath(previewID, partID));
 		}
 
-		// Emission map
+		// Set emission map
 		if (_fe3d.modelEntity_hasEmissionMap(previewID, partID))
 		{
 			_fe3d.modelEntity_setEmissionMap(newID, partID, _fe3d.modelEntity_getEmissionMapPath(previewID, partID));
 		}
 
-		// Specular map
+		// Set specular map
 		if (_fe3d.modelEntity_hasSpecularMap(previewID, partID))
 		{
 			_fe3d.modelEntity_setSpecularMap(newID, partID, _fe3d.modelEntity_getSpecularMapPath(previewID, partID));
 		}
 
-		// Reflection map
+		// Set reflection map
 		if (_fe3d.modelEntity_hasReflectionMap(previewID, partID))
 		{
 			_fe3d.modelEntity_setReflectionMap(newID, partID, _fe3d.modelEntity_getReflectionMapPath(previewID, partID));
 		}
 
-		// Normal map
+		// Set normal map
 		if (_fe3d.modelEntity_hasNormalMap(previewID, partID))
 		{
 			_fe3d.modelEntity_setNormalMap(newID, partID, _fe3d.modelEntity_getNormalMapPath(previewID, partID));
 		}
+
+		// Set properties
+		_fe3d.modelEntity_setFaceCulled(newID, partID, _fe3d.modelEntity_isFaceCulled(previewID, partID));
+		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
+		_fe3d.modelEntity_setSpecular(newID, partID, _fe3d.modelEntity_isSpecular(previewID, partID));
+		_fe3d.modelEntity_setSpecularShininess(newID, partID, _fe3d.modelEntity_getSpecularShininess(previewID, partID));
+		_fe3d.modelEntity_setSpecularIntensity(newID, partID, _fe3d.modelEntity_getSpecularIntensity(previewID, partID));
+		_fe3d.modelEntity_setLightness(newID, partID, _fe3d.modelEntity_getLightness(previewID, partID));
+		_fe3d.modelEntity_setReflectivity(newID, partID, _fe3d.modelEntity_getReflectivity(previewID, partID));
+		_fe3d.modelEntity_setColor(newID, partID, _fe3d.modelEntity_getColor(previewID, partID));
+		_fe3d.modelEntity_setUvRepeat(newID, partID, _fe3d.modelEntity_getUvRepeat(previewID, partID));
 	}
 
-	// Instancing
+	// Set instancing
 	if (_fe3d.modelEntity_isInstanced(previewID))
 	{
 		_fe3d.modelEntity_enableInstancing(newID, { Vec3(0.0f) });
 	}
 
 	// Set properties
+	_fe3d.modelEntity_setBasePosition(newID, position);
+	_fe3d.modelEntity_setBaseSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
+	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
 	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
-	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
-	_fe3d.modelEntity_setReflectionType(newID, _fe3d.modelEntity_getReflectionType(previewID));
-	_fe3d.modelEntity_setSpecular(newID, _fe3d.modelEntity_isSpecular(previewID));
-	_fe3d.modelEntity_setSpecularShininess(newID, _fe3d.modelEntity_getSpecularShininess(previewID));
-	_fe3d.modelEntity_setSpecularIntensity(newID, _fe3d.modelEntity_getSpecularIntensity(previewID));
-	_fe3d.modelEntity_setLightness(newID, _fe3d.modelEntity_getLightness(previewID));
-	_fe3d.modelEntity_setReflectivity(newID, _fe3d.modelEntity_getReflectivity(previewID));
-	_fe3d.modelEntity_setColor(newID, "", _fe3d.modelEntity_getColor(previewID, ""));
-	_fe3d.modelEntity_setUvRepeat(newID, _fe3d.modelEntity_getUvRepeat(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
 
 	// Save original transformation
 	if (_isEditorLoaded)
 	{
-		_initialModelPosition[newID] = _fe3d.modelEntity_getPosition(previewID, "");
-		_initialModelRotation[newID] = _fe3d.modelEntity_getRotation(previewID, "");
-		_initialModelSize[newID] = _fe3d.modelEntity_getSize(previewID, "");
+		_initialModelPosition[newID] = _fe3d.modelEntity_getBasePosition(previewID);
+		_initialModelRotation[newID] = _fe3d.modelEntity_getBaseRotation(previewID);
+		_initialModelSize[newID] = _fe3d.modelEntity_getBaseSize(previewID);
 	}
 
 	// Save ID

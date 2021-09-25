@@ -105,6 +105,7 @@
     <ClCompile Include="..\..\Source\reflection_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\model_entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\base_entity_manager.hpp">

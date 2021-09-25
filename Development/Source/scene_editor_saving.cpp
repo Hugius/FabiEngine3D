@@ -112,10 +112,10 @@ bool SceneEditor::saveEditorSceneToFile()
 			if (!_animationEditor.getStartedAnimationIDs(modelID).empty())
 			{
 				// Reset main transformation
-				_fe3d.modelEntity_setPosition(modelID, "", _initialModelPosition[modelID]);
-				_fe3d.modelEntity_setRotationOrigin(modelID, "", Vec3(0.0f));
-				_fe3d.modelEntity_setRotation(modelID, "", _initialModelRotation[modelID]);
-				_fe3d.modelEntity_setSize(modelID, "", _initialModelSize[modelID]);
+				_fe3d.modelEntity_setBasePosition(modelID, _initialModelPosition[modelID]);
+				_fe3d.modelEntity_setBaseRotationOrigin(modelID, Vec3(0.0f));
+				_fe3d.modelEntity_setBaseRotation(modelID, _initialModelRotation[modelID]);
+				_fe3d.modelEntity_setBaseSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
 				for (const auto& partID : _fe3d.modelEntity_getPartIDs(modelID))
@@ -123,18 +123,18 @@ bool SceneEditor::saveEditorSceneToFile()
 					// Only named parts
 					if (!partID.empty())
 					{
-						_fe3d.modelEntity_setPosition(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setRotationOrigin(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setRotation(modelID, partID, Vec3(0.0f));
-						_fe3d.modelEntity_setSize(modelID, partID, Vec3(1.0f));
+						_fe3d.modelEntity_setPartPosition(modelID, partID, Vec3(0.0f));
+						_fe3d.modelEntity_setPartRotationOrigin(modelID, partID, Vec3(0.0f));
+						_fe3d.modelEntity_setPartRotation(modelID, partID, Vec3(0.0f));
+						_fe3d.modelEntity_setPartSize(modelID, partID, Vec3(1.0f));
 					}
 				}
 			}
 
 			// Data to save
-			auto position = _fe3d.modelEntity_getPosition(modelID, "");
-			auto rotation = _fe3d.modelEntity_getRotation(modelID, "");
-			auto size = _fe3d.modelEntity_getSize(modelID, "");
+			auto position = _fe3d.modelEntity_getBasePosition(modelID);
+			auto rotation = _fe3d.modelEntity_getBaseRotation(modelID);
+			auto size = _fe3d.modelEntity_getBaseSize(modelID);
 			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
 			auto animationID = (_animationEditor.getStartedAnimationIDs(modelID).empty()) ? "" :
 				_animationEditor.getStartedAnimationIDs(modelID).front();

@@ -122,37 +122,21 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 {
 	if (entity->isVisible())
 	{
+		// Shader uniforms
+		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
+		_shader.uploadUniform("u_positionY", entity->getBasePosition().y);
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_isBright", entity->isBright());
+		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
+		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
+		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
+
 		// Enable wire frame
 		if (entity->isWireFramed())
 		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
-
-		// Enable face culling
-		if (entity->isFaceCulled())
-		{
-			glEnable(GL_CULL_FACE);
-		}
-
-		// Shader uniforms
-		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
-		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
-		_shader.uploadUniform("u_isWireFramed", (entity->isWireFramed() || _renderBus.isWireFrameRenderingEnabled()));
-		_shader.uploadUniform("u_isReflective", entity->isReflective());
-		_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType()));
-		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
-		_shader.uploadUniform("u_reflectivity", entity->getReflectivity());
-		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_positionY", entity->getPosition("").y);
-		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
-		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_alpha", entity->getAlpha());
-		_shader.uploadUniform("u_isBright", entity->isBright());
-		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_cubeReflectionMixValue", entity->getCubeReflectionMixValue());
-		_shader.uploadUniform("u_viewMatrix", (entity->isCameraStatic() ? Matrix44(Matrix33(_renderBus.getViewMatrix())) : _renderBus.getViewMatrix()));
-		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);
-		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
 
 		// Bind textures
 		if (!entity->getPreviousReflectionEntityID().empty())
@@ -177,6 +161,15 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			Matrix33 normalTransformationMatrix = Math::transposeMatrix(Math::invertMatrix(Matrix33(transformationMatrix)));
 
 			// Shader uniforms
+			_shader.uploadUniform("u_isReflective", entity->isReflective(partID));
+			_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
+			_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat(partID));
+			_shader.uploadUniform("u_alpha", entity->getAlpha(partID));
+			_shader.uploadUniform("u_isSpecular", entity->isSpecular(partID));
+			_shader.uploadUniform("u_reflectivity", entity->getReflectivity(partID));
+			_shader.uploadUniform("u_lightness", entity->getLightness(partID));
+			_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess(partID));
+			_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partID));
 			_shader.uploadUniform("u_color", entity->getColor(partID));
 			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
@@ -187,6 +180,13 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_transformationMatrix", transformationMatrix);
 			_shader.uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
+			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
+
+			// Enable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glEnable(GL_CULL_FACE);
+			}
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -231,6 +231,9 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 			}
 
+			// Unbind buffer
+			glBindVertexArray(0);
+
 			// Unbind textures
 			if (entity->hasDiffuseMap(partID))
 			{
@@ -258,8 +261,11 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
 
-			// Unbind buffer
-			glBindVertexArray(0);
+			// Disable face culling
+			if (entity->isFaceCulled(partID))
+			{
+				glDisable(GL_CULL_FACE);
+			}
 		}
 
 		// Unbind textures
@@ -272,12 +278,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		}
-
-		// Disable face culling
-		if (entity->isFaceCulled())
-		{
-			glDisable(GL_CULL_FACE);
 		}
 
 		// Disable wire frame

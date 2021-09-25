@@ -131,7 +131,7 @@ void ModelEditor::_updateChoiceMenu()
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
-			// Hide model entity
+			// Hide model
 			_fe3d.modelEntity_setWireFramed(_currentModelID, false);
 			_fe3d.modelEntity_setVisible(_currentModelID, false);
 

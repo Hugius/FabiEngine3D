@@ -47,37 +47,37 @@ void ModelEntity::updateTransformation()
 	// Iterate through parts
 	for (auto& part : _parts)
 	{
-		// Local position target
-		if (part.localPosition != part.localPositionTarget)
+		// Part position target
+		if (part.position != part.positionTarget)
 		{
-			auto speedMultiplier = Math::normalizeVector(part.localPositionTarget - part.localPosition);
-			part.localPosition += (speedMultiplier * part.localPositionTargetSpeed);
-			_correctPositionTarget(part.localPosition, part.localPositionTarget, part.localPositionTargetSpeed);
+			auto speedMultiplier = Math::normalizeVector(part.positionTarget - part.position);
+			part.position += (speedMultiplier * part.positionTargetSpeed);
+			_correctPositionTarget(part.position, part.positionTarget, part.positionTargetSpeed);
 		}
 
-		// Local rotation target
-		if (part.localRotation != part.localRotationTarget)
+		// Part rotation target
+		if (part.rotation != part.rotationTarget)
 		{
-			auto difference = Math::calculateVectorDifference(part.localRotation, part.localRotationTarget);
+			auto difference = Math::calculateVectorDifference(part.rotation, part.rotationTarget);
 			Vec3 multiplier = Vec3(
 				((difference.x < 180.0f) ? 1.0f : -1.0f),
 				((difference.y < 180.0f) ? 1.0f : -1.0f),
 				((difference.z < 180.0f) ? 1.0f : -1.0f));
-			Vec3 speed = (Vec3(part.localRotationTargetSpeed) * multiplier);
-			Vec3 rotation = part.localRotation;
-			Vec3 target = part.localRotationTarget;
-			part.localRotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
-			part.localRotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
-			part.localRotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
-			_correctRotationTarget(part.localRotation, part.localRotationTarget, part.localRotationTargetSpeed);
+			Vec3 speed = (Vec3(part.rotationTargetSpeed) * multiplier);
+			Vec3 rotation = part.rotation;
+			Vec3 target = part.rotationTarget;
+			part.rotation.x += ((rotation.x < target.x) ? speed.x : (rotation.x > target.x) ? -speed.x : 0.0f);
+			part.rotation.y += ((rotation.y < target.y) ? speed.y : (rotation.y > target.y) ? -speed.y : 0.0f);
+			part.rotation.z += ((rotation.z < target.z) ? speed.z : (rotation.z > target.z) ? -speed.z : 0.0f);
+			_correctRotationTarget(part.rotation, part.rotationTarget, part.rotationTargetSpeed);
 		}
 
-		// Local size target
-		if (part.localSize != part.localSizeTarget)
+		// Part size target
+		if (part.size != part.sizeTarget)
 		{
-			auto speedMultiplier = Math::normalizeVector(part.localSizeTarget - part.localSize);
-			part.localSize += (speedMultiplier * part.localSizeTargetSpeed);
-			_correctSizeTarget(part.localSize, part.localSizeTarget, part.localSizeTargetSpeed);
+			auto speedMultiplier = Math::normalizeVector(part.sizeTarget - part.size);
+			part.size += (speedMultiplier * part.sizeTargetSpeed);
+			_correctSizeTarget(part.size, part.sizeTarget, part.sizeTargetSpeed);
 		}
 	}
 }
@@ -94,7 +94,7 @@ void ModelEntity::updateTransformationMatrix()
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseTranslationMatrix);
 
 		// Translation matrix
-		Matrix44 translationMatrix = Math::createTranslationMatrix(_parts[i].localPosition.x, _parts[i].localPosition.y, _parts[i].localPosition.z);
+		Matrix44 translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * translationMatrix);
 
 		// Base rotation origin matrix - translate
@@ -113,18 +113,18 @@ void ModelEntity::updateTransformationMatrix()
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
 		// Rotation origin matrix - translate
-		Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].localRotationOrigin.x, _parts[i].localRotationOrigin.y, _parts[i].localRotationOrigin.z);
+		Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
 		// Rotation matrix
 		Matrix44 rotationMatrix = Math::createRotationMatrix(
-			Math::convertToRadians(_parts[i].localRotation.x),
-			Math::convertToRadians(_parts[i].localRotation.y),
-			Math::convertToRadians(_parts[i].localRotation.z), Direction::X);
+			Math::convertToRadians(_parts[i].rotation.x),
+			Math::convertToRadians(_parts[i].rotation.y),
+			Math::convertToRadians(_parts[i].rotation.z), Direction::X);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationMatrix);
 
 		// Rotation origin matrix - translate back
-		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].localRotationOrigin.x, -_parts[i].localRotationOrigin.y, -_parts[i].localRotationOrigin.z);
+		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].rotationOrigin.x, -_parts[i].rotationOrigin.y, -_parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
 		// Base scaling matrix
@@ -132,7 +132,7 @@ void ModelEntity::updateTransformationMatrix()
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseScalingMatrix);
 
 		// Scaling matrix
-		Matrix44 scalingMatrix = Math::createScalingMatrix(_parts[i].localSize.x, _parts[i].localSize.y, _parts[i].localSize.z);
+		Matrix44 scalingMatrix = Math::createScalingMatrix(_parts[i].size.x, _parts[i].size.y, _parts[i].size.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * scalingMatrix);
 	}
 }
@@ -167,170 +167,139 @@ void ModelEntity::setNormalMap(const string& partID, TextureID value)
 	_parts[_getPartIndex(partID)].normalMap = value;
 }
 
-void ModelEntity::setPosition(const string& partID, Vec3 value)
+void ModelEntity::setBasePosition(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_basePosition = value;
-		_basePositionTarget = _basePosition;
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localPosition = value;
-		_parts[_getPartIndex(partID)].localPositionTarget = value;
-	}
+	_basePosition = value;
+	_basePositionTarget = _basePosition;
 }
 
-void ModelEntity::setRotation(const string& partID, Vec3 value)
+void ModelEntity::setBaseRotation(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-		_baseRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
-	}
+	_baseRotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_baseRotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::setRotationOrigin(const string& partID, Vec3 value)
+void ModelEntity::setBaseRotationOrigin(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseRotationOrigin = value;
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localRotationOrigin = value;
-	}
+	_baseRotationOrigin = value;
 }
 
-void ModelEntity::setSize(const string& partID, Vec3 value)
+void ModelEntity::setBaseSize(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-		_baseSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-		_parts[_getPartIndex(partID)].localSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
-	}
+	_baseSize = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_baseSizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::move(const string& partID, Vec3 value)
+void ModelEntity::setPartPosition(const string& partID, Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_basePosition += value;
-		_basePositionTarget += value;
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localPosition += value;
-		_parts[_getPartIndex(partID)].localPositionTarget += value;
-	}
+	_parts[_getPartIndex(partID)].position = value;
+	_parts[_getPartIndex(partID)].positionTarget = value;
 }
 
-void ModelEntity::rotate(const string& partID, Vec3 value)
+void ModelEntity::setPartRotation(const string& partID, Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseRotation += value;
-		_baseRotationTarget += value;
-		_baseRotation = Vec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
-		_baseRotationTarget = Vec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
-	}
-	else
-	{
-		Vec3& localRotation = _parts[_getPartIndex(partID)].localRotation;
-		Vec3& localRotationTarget = _parts[_getPartIndex(partID)].localRotationTarget;
-		localRotation += value;
-		localRotationTarget += value;
-		localRotation = Vec3(Math::limitAngle(localRotation.x), Math::limitAngle(localRotation.y), Math::limitAngle(localRotation.z));
-		localRotationTarget = Vec3(Math::limitAngle(localRotationTarget.x), Math::limitAngle(localRotationTarget.y), Math::limitAngle(localRotationTarget.z));
-
-	}
+	_parts[_getPartIndex(partID)].rotation = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
+	_parts[_getPartIndex(partID)].rotationTarget = Vec3(Math::limitAngle(value.x), Math::limitAngle(value.y), Math::limitAngle(value.z));
 }
 
-void ModelEntity::scale(const string& partID, Vec3 value)
+void ModelEntity::setPartRotationOrigin(const string& partID, Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseSize += value;
-		_baseSizeTarget += value;
-		_baseSize = Vec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
-		_baseSizeTarget = Vec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
-	}
-	else
-	{
-		Vec3& localSize = _parts[_getPartIndex(partID)].localSize;
-		Vec3& localSizeTarget = _parts[_getPartIndex(partID)].localSizeTarget;
-		localSize += value;
-		localSizeTarget += value;
-		localSize = Vec3(max(0.0f, localSize.x), max(0.0f, localSize.y), max(0.0f, localSize.z));
-		localSizeTarget = Vec3(max(0.0f, localSizeTarget.x), max(0.0f, localSizeTarget.y), max(0.0f, localSizeTarget.z));
-	}
+	_parts[_getPartIndex(partID)].rotationOrigin = value;
 }
 
-void ModelEntity::moveTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::setPartSize(const string& partID, Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_basePositionTarget = target;
-		_basePositionTargetSpeed = fabsf(speed);
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localPositionTarget = target;
-		_parts[_getPartIndex(partID)].localPositionTargetSpeed = fabsf(speed);
-	}
+	_parts[_getPartIndex(partID)].size = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
+	_parts[_getPartIndex(partID)].sizeTarget = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
-void ModelEntity::rotateTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::moveBase(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
-		_baseRotationTargetSpeed = fabsf(speed);
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
-		_parts[_getPartIndex(partID)].localRotationTargetSpeed = fabsf(speed);
-	}
+	_basePosition += value;
+	_basePositionTarget += value;
 }
 
-void ModelEntity::scaleTo(const string& partID, Vec3 target, float speed)
+void ModelEntity::rotateBase(Vec3 value)
 {
-	if ((_parts.size() == 1) || ((_parts.size() > 1) && partID.empty()))
-	{
-		_baseSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-		_baseSizeTargetSpeed = fabsf(speed);
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].localSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
-		_parts[_getPartIndex(partID)].localSizeTargetSpeed = fabsf(speed);
-	}
+	_baseRotation += value;
+	_baseRotationTarget += value;
+	_baseRotation = Vec3(Math::limitAngle(_baseRotation.x), Math::limitAngle(_baseRotation.y), Math::limitAngle(_baseRotation.z));
+	_baseRotationTarget = Vec3(Math::limitAngle(_baseRotationTarget.x), Math::limitAngle(_baseRotationTarget.y), Math::limitAngle(_baseRotationTarget.z));
+}
+
+void ModelEntity::scaleBase(Vec3 value)
+{
+	_baseSize += value;
+	_baseSizeTarget += value;
+	_baseSize = Vec3(max(0.0f, _baseSize.x), max(0.0f, _baseSize.y), max(0.0f, _baseSize.z));
+	_baseSizeTarget = Vec3(max(0.0f, _baseSizeTarget.x), max(0.0f, _baseSizeTarget.y), max(0.0f, _baseSizeTarget.z));
+}
+
+void ModelEntity::movePart(const string& partID, Vec3 value)
+{
+	_parts[_getPartIndex(partID)].position += value;
+	_parts[_getPartIndex(partID)].positionTarget += value;
+}
+
+void ModelEntity::rotatePart(const string& partID, Vec3 value)
+{
+	Vec3& rotation = _parts[_getPartIndex(partID)].rotation;
+	Vec3& rotationTarget = _parts[_getPartIndex(partID)].rotationTarget;
+	rotation += value;
+	rotationTarget += value;
+	rotation = Vec3(Math::limitAngle(rotation.x), Math::limitAngle(rotation.y), Math::limitAngle(rotation.z));
+	rotationTarget = Vec3(Math::limitAngle(rotationTarget.x), Math::limitAngle(rotationTarget.y), Math::limitAngle(rotationTarget.z));
+}
+
+void ModelEntity::scalePart(const string& partID, Vec3 value)
+{
+	Vec3& size = _parts[_getPartIndex(partID)].size;
+	Vec3& sizeTarget = _parts[_getPartIndex(partID)].sizeTarget;
+	size += value;
+	sizeTarget += value;
+	size = Vec3(max(0.0f, size.x), max(0.0f, size.y), max(0.0f, size.z));
+	sizeTarget = Vec3(max(0.0f, sizeTarget.x), max(0.0f, sizeTarget.y), max(0.0f, sizeTarget.z));
+}
+
+void ModelEntity::moveBaseTo(Vec3 target, float speed)
+{
+	_basePositionTarget = target;
+	_basePositionTargetSpeed = fabsf(speed);
+}
+
+void ModelEntity::rotateBaseTo(Vec3 target, float speed)
+{
+	_baseRotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_baseRotationTargetSpeed = fabsf(speed);
+}
+
+void ModelEntity::scaleBaseTo(Vec3 target, float speed)
+{
+	_baseSizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_baseSizeTargetSpeed = fabsf(speed);
+}
+
+void ModelEntity::movePartTo(const string& partID, Vec3 target, float speed)
+{
+	_parts[_getPartIndex(partID)].positionTarget = target;
+	_parts[_getPartIndex(partID)].positionTargetSpeed = fabsf(speed);
+}
+
+void ModelEntity::rotatePartTo(const string& partID, Vec3 target, float speed)
+{
+	_parts[_getPartIndex(partID)].rotationTarget = Vec3(Math::limitAngle(target.x), Math::limitAngle(target.y), Math::limitAngle(target.z));
+	_parts[_getPartIndex(partID)].rotationTargetSpeed = fabsf(speed);
+}
+
+void ModelEntity::scalePartTo(const string& partID, Vec3 target, float speed)
+{
+	_parts[_getPartIndex(partID)].sizeTarget = Vec3(max(0.0f, target.x), max(0.0f, target.y), max(0.0f, target.z));
+	_parts[_getPartIndex(partID)].sizeTargetSpeed = fabsf(speed);
 }
 
 void ModelEntity::setColor(const string& partID, Vec3 value)
 {
-	if (partID.empty())
-	{
-		for (auto& part : _parts)
-		{
-			part.color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
-		}
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
-	}
+	_parts[_getPartIndex(partID)].color = Vec3(clamp(value.x, 0.0f, 1.0f), clamp(value.y, 0.0f, 1.0f), clamp(value.z, 0.0f, 1.0f));
 }
 
 void ModelEntity::setLevelOfDetailSize(Vec3 value)
@@ -340,17 +309,7 @@ void ModelEntity::setLevelOfDetailSize(Vec3 value)
 
 void ModelEntity::setInversion(const string& partID, float value)
 {
-	if (partID.empty())
-	{
-		for (auto& part : _parts)
-		{
-			part.inversion = clamp(value, 0.0f, 1.0f);
-		}
-	}
-	else
-	{
-		_parts[_getPartIndex(partID)].inversion = clamp(value, 0.0f, 1.0f);
-	}
+	_parts[_getPartIndex(partID)].inversion = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setMeshPath(const string& value)
@@ -403,29 +362,29 @@ void ModelEntity::setCubeReflectionMixValue(float value)
 	_cubeReflectionMixValue = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setReflectivity(float value)
+void ModelEntity::setReflectivity(const string& partID, float value)
 {
-	_reflectivity = clamp(value, 0.0f, 1.0f);
+	_parts[_getPartIndex(partID)].reflectivity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setFaceCulled(bool value)
+void ModelEntity::setFaceCulled(const string& partID, bool value)
 {
-	_isFaceCulled = value;
+	_parts[_getPartIndex(partID)].isFaceCulled = value;
 }
 
-void ModelEntity::setReflectionType(ReflectionType value)
+void ModelEntity::setReflectionType(const string& partID, ReflectionType value)
 {
-	_reflectionType = value;
+	_parts[_getPartIndex(partID)].reflectionType = value;
 }
 
-void ModelEntity::setSpecular(bool value)
+void ModelEntity::setSpecular(const string& partID, bool value)
 {
-	_isSpecular = value;
+	_parts[_getPartIndex(partID)].isSpecular = value;
 }
 
-void ModelEntity::setReflective(bool value)
+void ModelEntity::setReflective(const string& partID, bool value)
 {
-	_isReflective = value;
+	_parts[_getPartIndex(partID)].isReflective = value;
 }
 
 void ModelEntity::setShadowed(bool value)
@@ -468,19 +427,19 @@ void ModelEntity::clearParts()
 	_parts.clear();
 }
 
-void ModelEntity::setLightness(float value)
+void ModelEntity::setLightness(const string& partID, float value)
 {
-	_lightness = max(0.0f, value);
+	_parts[_getPartIndex(partID)].lightness = max(0.0f, value);
 }
 
-void ModelEntity::setSpecularShininess(float value)
+void ModelEntity::setSpecularShininess(const string& partID, float value)
 {
-	_specularShininess = max(0.0f, value);
+	_parts[_getPartIndex(partID)].specularShininess = max(0.0f, value);
 }
 
-void ModelEntity::setSpecularIntensity(float value)
+void ModelEntity::setSpecularIntensity(const string& partID, float value)
 {
-	_specularIntensity = max(0.0f, value);
+	_parts[_getPartIndex(partID)].specularIntensity = max(0.0f, value);
 }
 
 void ModelEntity::setMinHeight(float value)
@@ -493,19 +452,19 @@ void ModelEntity::setMaxHeight(float value)
 	_maxHeight = value;
 }
 
-void ModelEntity::setAlpha(float value)
+void ModelEntity::setAlpha(const string& partID, float value)
 {
-	_alpha = clamp(value, 0.0f, 1.0f);
+	_parts[_getPartIndex(partID)].alpha = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setUvRepeat(float value)
+void ModelEntity::setUvRepeat(const string& partID, float value)
 {
-	_uvRepeat = max(0.0f, value);
+	_parts[_getPartIndex(partID)].uvRepeat = max(0.0f, value);
 }
 
-void ModelEntity::setEmissionIntensity(float value)
+void ModelEntity::setEmissionIntensity(const string& partID, float value)
 {
-	_emissionIntensity = value;
+	_parts[_getPartIndex(partID)].emissionIntensity = value;
 }
 
 void ModelEntity::_correctPositionTarget(Vec3& current, Vec3 target, float speed)

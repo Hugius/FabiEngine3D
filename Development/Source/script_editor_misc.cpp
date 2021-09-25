@@ -49,8 +49,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		const Vec3 lineAabbPosition = (lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH));
 		const Vec3 lineAabbSize = Vec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 		_fe3d.aabbEntity_create(lineNumberID);
-		_fe3d.aabbEntity_setPosition(lineNumberID, lineAabbPosition);
-		_fe3d.aabbEntity_setSize(lineNumberID, lineAabbSize);
+		_fe3d.aabbEntity_setBasePosition(lineNumberID, lineAabbPosition);
+		_fe3d.aabbEntity_setBaseSize(lineNumberID, lineAabbSize);
 
 		// Create line text display BILLBOARD
 		istringstream iss(lineTextString);
@@ -83,8 +83,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				const Vec3 characterAabbPosition = (characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f));
 				const Vec3 characterAabbSize = Vec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 				_fe3d.aabbEntity_create(characterID);
-				_fe3d.aabbEntity_setPosition(characterID, characterAabbPosition);
-				_fe3d.aabbEntity_setSize(characterID, characterAabbSize);
+				_fe3d.aabbEntity_setBasePosition(characterID, characterAabbPosition);
+				_fe3d.aabbEntity_setBaseSize(characterID, characterAabbSize);
 			}
 		}
 	}

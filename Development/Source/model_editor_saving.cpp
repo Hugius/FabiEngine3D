@@ -35,18 +35,9 @@ bool ModelEditor::saveModelEntitiesToFile()
 		// Retrieve all values
 		auto isMultiParted = _fe3d.modelEntity_isMultiParted(modelID);
 		auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
-		auto modelSize = _fe3d.modelEntity_getSize(modelID, "");
-		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
-		auto isSpecular = _fe3d.modelEntity_isSpecular(modelID);
-		auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID);
-		auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
-		auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID);
-		auto lightness = _fe3d.modelEntity_getLightness(modelID);
-		auto color = _fe3d.modelEntity_getColor(modelID, "");
-		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
+		auto modelSize = _fe3d.modelEntity_getBaseSize(modelID);
 		auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
-		auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID));
 
 		// Perform empty string & space conversions
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
@@ -61,17 +52,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 			modelSize.x << " " <<
 			modelSize.y << " " <<
 			modelSize.z << " " <<
-			isFaceCulled << " " <<
-			reflectionType << " " <<
-			isSpecular << " " <<
-			specularShininess << " " <<
-			specularIntensity << " " <<
-			reflectivity << " " <<
-			lightness << " " <<
-			color.r << " " <<
-			color.g << " " <<
-			color.b << " " <<
-			uvRepeat << " " <<
 			lodEntityID << " " <<
 			isInstanced;
 
@@ -89,6 +69,16 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto specularMapPath = _fe3d.modelEntity_getSpecularMapPath(modelID, partID);
 			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID, partID);
 			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID, partID);
+			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID, partID);
+			auto isSpecular = _fe3d.modelEntity_isSpecular(modelID, partID);
+			auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID, partID);
+			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID, partID);
+			auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID, partID);
+			auto lightness = _fe3d.modelEntity_getLightness(modelID, partID);
+			auto color = _fe3d.modelEntity_getColor(modelID, partID);
+			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID, partID);
+			auto isReflective = _fe3d.modelEntity_isReflective(modelID, partID);
+			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID, partID));
 
 			// Perform empty string & space conversions
 			partID = (partID.empty()) ? "?" : partID;
@@ -110,7 +100,19 @@ bool ModelEditor::saveModelEntitiesToFile()
 				emissionMapPath << " " <<
 				specularMapPath << " " <<
 				reflectionMapPath << " " <<
-				normalMapPath;
+				normalMapPath << " " <<
+				isFaceCulled << " " <<
+				reflectionType << " " <<
+				isSpecular << " " <<
+				isReflective << " " <<
+				specularShininess << " " <<
+				specularIntensity << " " <<
+				reflectivity << " " <<
+				lightness << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				uvRepeat;
 
 			// Write space to file
 			if (i < (partIDs.size() - 1))

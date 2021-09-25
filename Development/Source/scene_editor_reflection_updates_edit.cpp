@@ -50,7 +50,7 @@ void SceneEditor::_updateReflectionEditing()
 					// Don't reset if camera is active or selected
 					if ((entityID != _activeCameraID) && (entityID != _selectedCameraID))
 					{
-						_fe3d.modelEntity_setSize(entityID, "", DEFAULT_CAMERA_SIZE);
+						_fe3d.modelEntity_setBaseSize(entityID, DEFAULT_CAMERA_SIZE);
 						_fe3d.aabbEntity_setLocalSize(entityID, DEFAULT_CAMERA_AABB_SIZE);
 					}
 				}

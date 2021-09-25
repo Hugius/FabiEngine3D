@@ -10,7 +10,7 @@ void SceneEditor::_updateModelPlacing()
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID, "");
+			auto newPosition = _fe3d.modelEntity_getBasePosition(_currentPreviewModelID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -18,7 +18,7 @@ void SceneEditor::_updateModelPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.modelEntity_setPosition(_currentPreviewModelID, "", newPosition);
+			_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, newPosition);
 
 			// Check if model must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -82,7 +82,7 @@ void SceneEditor::_updateModelPlacing()
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 
 						// Update position
-						_fe3d.modelEntity_setPosition(_currentPreviewModelID, "", (_fe3d.misc_getRaycastPointOnTerrain() + MODEL_TERRAIN_OFFSET));
+						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, (_fe3d.misc_getRaycastPointOnTerrain() + MODEL_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -95,7 +95,7 @@ void SceneEditor::_updateModelPlacing()
 					{
 						// Temporary values
 						const string rawID = _currentPreviewModelID.substr(1);
-						const auto newPosition = _fe3d.modelEntity_getPosition(_currentPreviewModelID, "");
+						const auto newPosition = _fe3d.modelEntity_getBasePosition(_currentPreviewModelID);
 
 						if (_fe3d.modelEntity_isInstanced(_currentPreviewModelID)) // Instanced model
 						{

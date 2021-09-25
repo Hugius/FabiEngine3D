@@ -15,7 +15,7 @@ void ModelEditor::_updateOptionsMenu()
 	{
 		// Temporary values
 		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
-		auto color = _fe3d.modelEntity_getColor(_currentModelID, "");
+		auto color = _fe3d.modelEntity_getColor(_currentModelID);
 		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
 		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
@@ -28,8 +28,12 @@ void ModelEditor::_updateOptionsMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceculled")->isHovered())
 		{
-			isFaceculled = !isFaceculled;
-			_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceculled);
+			auto lambda = [this]()
+			{
+				isFaceculled = !isFaceculled;
+				_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceculled);
+			}
+			isMultiParted ? _preparePartChoosing(lambda) : lambda();
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{

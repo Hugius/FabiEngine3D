@@ -366,20 +366,20 @@ void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getInversion(ID, "") == 0.0f)
+		if (_fe3d.modelEntity_getColorInversion(ID, "") == 0.0f)
 		{
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getInversion(ID, "") == 1.0f)
+		if (_fe3d.modelEntity_getColorInversion(ID, "") == 1.0f)
 		{
 			direction *= -1;
 		}
 
 		// Set model inversion
 		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
-		_fe3d.modelEntity_setInversion(ID, "", (_fe3d.modelEntity_getInversion(ID, "") + speed));
+		_fe3d.modelEntity_setColorInversion(ID, "", (_fe3d.modelEntity_getColorInversion(ID, "") + speed));
 	}
 }
 
@@ -395,20 +395,20 @@ void SceneEditor::_updateBillboardBlinking(const string& ID, int& direction)
 	if (ID != "")
 	{
 		// Check if inversion reached minimum
-		if (_fe3d.billboardEntity_getInversion(ID) == 0.0f)
+		if (_fe3d.billboardEntity_getColorInversion(ID) == 0.0f)
 		{
 			direction *= -1;
 		}
 
 		// Check if inversion reached maximum
-		if (_fe3d.billboardEntity_getInversion(ID) == 1.0f)
+		if (_fe3d.billboardEntity_getColorInversion(ID) == 1.0f)
 		{
 			direction *= -1;
 		}
 
 		// Set billboard inversion
 		float speed = (BILLBOARD_BLINKING_SPEED * static_cast<float>(direction));
-		_fe3d.billboardEntity_setInversion(ID, _fe3d.billboardEntity_getInversion(ID) + speed);
+		_fe3d.billboardEntity_setColorInversion(ID, _fe3d.billboardEntity_getColorInversion(ID) + speed);
 	}
 }
 

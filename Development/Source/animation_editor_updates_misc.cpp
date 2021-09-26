@@ -209,21 +209,21 @@ void AnimationEditor::_updateMiscellaneous()
 		else
 		{
 			// Check if inversion reached minimum
-			if (_fe3d.modelEntity_getInversion(currentAnimation->getPreviewModelID(), partID) == 0.0f)
+			if (_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) == 0.0f)
 			{
 				_selectedPartInversionDirection *= -1;
 			}
 
 			// Check if inversion reached maximum
-			if (_fe3d.modelEntity_getInversion(currentAnimation->getPreviewModelID(), partID) == 1.0f)
+			if (_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) == 1.0f)
 			{
 				_selectedPartInversionDirection *= -1;
 			}
 
 			// Set model inversion
 			float speed = (PART_BLINKING_SPEED * static_cast<float>(_selectedPartInversionDirection));
-			float newInversion = (_fe3d.modelEntity_getInversion(currentAnimation->getPreviewModelID(), partID) + speed);
-			_fe3d.modelEntity_setInversion(currentAnimation->getPreviewModelID(), partID, newInversion);
+			float newInversion = (_fe3d.modelEntity_getColorInversion(currentAnimation->getPreviewModelID(), partID) + speed);
+			_fe3d.modelEntity_setColorInversion(currentAnimation->getPreviewModelID(), partID, newInversion);
 		}
 	}
 }

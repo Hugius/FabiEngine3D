@@ -50,7 +50,7 @@ void SceneEditor::_updateBillboardEditing()
 					// Don't reset if billboard is active or selected
 					if ((entityID != _activeBillboardID) && (entityID != _selectedBillboardID))
 					{
-						_fe3d.billboardEntity_setInversion(entityID, 0.0f);
+						_fe3d.billboardEntity_setColorInversion(entityID, 0.0f);
 					}
 				}
 			}

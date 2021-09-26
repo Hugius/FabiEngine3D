@@ -22,7 +22,7 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_lightness;
-uniform float u_inversion;
+uniform float u_colorInversion;
 uniform float u_minTextureAlpha;
 uniform float u_alpha;
 uniform float u_emissionIntensity;
@@ -67,7 +67,7 @@ void main()
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
+	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_colorInversion, 0.0f, 1.0f));
 
 	// Apply fog
 	primaryColor = calculateFog(primaryColor);

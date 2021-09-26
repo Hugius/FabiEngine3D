@@ -53,9 +53,9 @@ const float FabiEngine3D::billboardEntity_getLightness(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getLightness();
 }
 
-const float FabiEngine3D::billboardEntity_getInversion(const string& ID)
+const float FabiEngine3D::billboardEntity_getColorInversion(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getInversion();
+	return _core->_billboardEntityManager.getEntity(ID)->getColorInversion();
 }
 
 const float FabiEngine3D::billboardEntity_getMinHeight(const string& ID)
@@ -253,9 +253,9 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::billboardEntity_setInversion(const string& ID, float inversion)
+void FabiEngine3D::billboardEntity_setColorInversion(const string& ID, float colorInversion)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setInversion(inversion);
+	_core->_billboardEntityManager.getEntity(ID)->setColorInversion(colorInversion);
 }
 
 void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)

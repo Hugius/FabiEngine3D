@@ -60,7 +60,7 @@ public:
 	void rotatePartTo(const string& partID, Vec3 target, float speed);
 	void scalePartTo(const string& partID, Vec3 target, float speed);
 	void setColor(const string& partID, Vec3 value);
-	void setInversion(const string& partID, float value);
+	void setColorInversion(const string& partID, float value);
 	void setDiffuseMapPath(const string& partID, const string& value);
 	void setEmissionMapPath(const string& partID, const string& value);
 	void setSpecularMapPath(const string& partID, const string& value);
@@ -113,7 +113,7 @@ public:
 	const float getCubeReflectionMixValue();
 	const float getMinHeight();
 	const float getMaxHeight();
-	const float getInversion(const string& partID);
+	const float getColorInversion(const string& partID);
 	const float getReflectivity(const string& partID);
 	const float getLightness(const string& partID);
 	const float getSpecularShininess(const string& partID);
@@ -186,7 +186,7 @@ private:
 		float positionTargetSpeed = 0.0f;
 		float rotationTargetSpeed = 0.0f;
 		float sizeTargetSpeed = 0.0f;
-		float inversion = 0.0f;
+		float colorInversion = 0.0f;
 		float reflectivity = 0.5f;
 		float lightness = 1.0f;
 		float specularShininess = 1.0f;

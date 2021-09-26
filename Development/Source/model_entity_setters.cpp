@@ -307,9 +307,9 @@ void ModelEntity::setLevelOfDetailSize(Vec3 value)
 	_levelOfDetailSize = value;
 }
 
-void ModelEntity::setInversion(const string& partID, float value)
+void ModelEntity::setColorInversion(const string& partID, float value)
 {
-	_parts[_getPartIndex(partID)].inversion = clamp(value, 0.0f, 1.0f);
+	_parts[_getPartIndex(partID)].colorInversion = clamp(value, 0.0f, 1.0f);
 }
 
 void ModelEntity::setMeshPath(const string& value)

@@ -310,7 +310,7 @@ public:
 	void modelEntity_setSpecularIntensity(const string& ID, const string& partID, float intensity);
 	void modelEntity_setReflectivity(const string& ID, const string& partID, float reflectivity);
 	void modelEntity_setLightness(const string& ID, const string& partID, float lightness);
-	void modelEntity_setInversion(const string& ID, const string& partID, float inversion);
+	void modelEntity_setColorInversion(const string& ID, const string& partID, float colorInversion);
 	void modelEntity_setEmissionIntensity(const string& ID, const string& partID, float intensity);
 	void modelEntity_setAlpha(const string& ID, const string& partID, float alpha);
 	void modelEntity_setColor(const string& ID, const string& partID, Vec3 color);
@@ -343,7 +343,7 @@ public:
 	const Vec3 modelEntity_getPartRotationOrigin(const string& ID, const string& partID);
 	const Vec3 modelEntity_getPartSize(const string& ID, const string& partID);
 	const Vec3 modelEntity_getColor(const string& ID, const string& partID);
-	const float modelEntity_getInversion(const string& ID, const string& partID);
+	const float modelEntity_getColorInversion(const string& ID, const string& partID);
 	const float modelEntity_getReflectivity(const string& ID, const string& partID);
 	const float modelEntity_getLightness(const string& ID, const string& partID);
 	const float modelEntity_getSpecularShininess(const string& ID, const string& partID);
@@ -399,7 +399,7 @@ public:
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
-	void billboardEntity_setInversion(const string& ID, float inversion);
+	void billboardEntity_setColorInversion(const string& ID, float colorInversion);
 	void billboardEntity_setAlpha(const string& ID, float alpha);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
 	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
@@ -429,7 +429,7 @@ public:
 	const Vec2 billboardEntity_getSize(const string& ID);
 	const Vec3 billboardEntity_getColor(const string& ID);
 	const float billboardEntity_getLightness(const string& ID);
-	const float billboardEntity_getInversion(const string& ID);
+	const float billboardEntity_getColorInversion(const string& ID);
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const float billboardEntity_getAlpha(const string& ID);

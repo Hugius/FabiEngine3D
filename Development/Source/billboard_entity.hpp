@@ -53,7 +53,7 @@ public:
 	void resetPassedSpriteAnimationFrames();
 	void increaseSpriteAnimationLoops();
 	void setLightness(float value);
-	void setInversion(float value);
+	void setColorInversion(float value);
 	void setAlpha(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
@@ -80,7 +80,7 @@ public:
 
 	// Floats
 	const float getLightness();
-	const float getInversion();
+	const float getColorInversion();
 	const float getAlpha();
 	const float getMinHeight();
 	const float getMaxHeight();
@@ -145,7 +145,7 @@ private:
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 	float _lightness = 1.0f;
-	float _inversion = 0.0f;
+	float _colorInversion = 0.0f;
 	float _alpha = 1.0f;
 	float _minHeight = -(numeric_limits<float>::max)();
 	float _maxHeight = (numeric_limits<float>::max)();

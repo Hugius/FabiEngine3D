@@ -46,7 +46,7 @@ uniform float u_specularShininess;
 uniform float u_specularIntensity;
 uniform float u_alpha;
 uniform float u_minTextureAlpha;
-uniform float u_inversion;
+uniform float u_colorInversion;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
@@ -146,7 +146,7 @@ void main()
 	primaryColor *= u_color;
 	primaryColor *= u_lightness;
 	primaryColor  = clamp(primaryColor, vec3(0.0f), vec3(1.0f));
-	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_inversion, 0.0f, 1.0f));
+	primaryColor  = mix(primaryColor, (vec3(1.0f) - primaryColor), clamp(u_colorInversion, 0.0f, 1.0f));
 	
 	// Apply lighting
 	bool isBright = ((emissionMapping != vec3(0.0f)) || u_isBright);

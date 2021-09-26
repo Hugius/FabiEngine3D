@@ -408,9 +408,9 @@ void FabiEngine3D::modelEntity_setLightness(const string& ID, const string& part
 	_core->_modelEntityManager.getEntity(ID)->setLightness(partID, lightness);
 }
 
-void FabiEngine3D::modelEntity_setInversion(const string& ID, const string& partID, float inversion)
+void FabiEngine3D::modelEntity_setColorInversion(const string& ID, const string& partID, float colorInversion)
 {
-	_core->_modelEntityManager.getEntity(ID)->setInversion(partID, inversion);
+	_core->_modelEntityManager.getEntity(ID)->setColorInversion(partID, colorInversion);
 }
 
 void FabiEngine3D::modelEntity_setEmissionIntensity(const string& ID, const string& partID, float intensity)
@@ -493,9 +493,9 @@ const float FabiEngine3D::modelEntity_getLightness(const string& ID, const strin
 	return _core->_modelEntityManager.getEntity(ID)->getLightness(partID);
 }
 
-const float FabiEngine3D::modelEntity_getInversion(const string& ID, const string& partID)
+const float FabiEngine3D::modelEntity_getColorInversion(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getInversion(partID);
+	return _core->_modelEntityManager.getEntity(ID)->getColorInversion(partID);
 }
 
 const float FabiEngine3D::modelEntity_getReflectivity(const string& ID, const string& partID)

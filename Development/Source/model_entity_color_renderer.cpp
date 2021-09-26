@@ -177,7 +177,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess(partID));
 			_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity(partID));
 			_shader.uploadUniform("u_color", entity->getColor(partID));
-			_shader.uploadUniform("u_inversion", entity->getInversion(partID));
+			_shader.uploadUniform("u_colorInversion", entity->getColorInversion(partID));
 			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap(partID));
 			_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap(partID));
 			_shader.uploadUniform("u_hasSpecularMap", entity->hasSpecularMap(partID));

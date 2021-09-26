@@ -84,7 +84,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_hasEmissionMap", entity->hasEmissionMap());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_inversion", entity->getInversion());
+		_shader.uploadUniform("u_colorInversion", entity->getColorInversion());
 		_shader.uploadUniform("u_positionY", entity->getPosition().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());

@@ -86,9 +86,9 @@ const Vec3 ModelEntity::getLevelOfDetailSize()
 	return _levelOfDetailSize;
 }
 
-const float ModelEntity::getInversion(const string& partID)
+const float ModelEntity::getColorInversion(const string& partID)
 {
-	return _parts[_getPartIndex(partID)].inversion;
+	return _parts[_getPartIndex(partID)].colorInversion;
 }
 
 const float ModelEntity::getCubeReflectionMixValue()

@@ -341,9 +341,9 @@ void BillboardEntity::setLightness(float value)
 	_lightness = max(0.0f, value);
 }
 
-void BillboardEntity::setInversion(float value)
+void BillboardEntity::setColorInversion(float value)
 {
-	_inversion = clamp(value, 0.0f, 1.0f);
+	_colorInversion = clamp(value, 0.0f, 1.0f);
 }
 
 void BillboardEntity::setAlpha(float value)

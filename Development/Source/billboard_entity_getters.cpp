@@ -65,9 +65,9 @@ const float BillboardEntity::getLightness()
 	return _lightness;
 }
 
-const float BillboardEntity::getInversion()
+const float BillboardEntity::getColorInversion()
 {
-	return _inversion;
+	return _colorInversion;
 }
 
 const float BillboardEntity::getAlpha()

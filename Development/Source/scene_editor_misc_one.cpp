@@ -363,23 +363,28 @@ void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 	}
 
 	// Update model inversion
-	if (ID != "")
+	if (!ID.empty())
 	{
-		// Check if inversion reached minimum
-		if (_fe3d.modelEntity_getColorInversion(ID, "") == 0.0f)
+		// Update all parts
+		auto partIDs = _fe3d.modelEntity_getPartIDs(ID);
+		for (size_t i = 0; i < partIDs.size(); i++)
 		{
-			direction *= -1;
-		}
+			// Check if inversion reached minimum
+			if ((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 0.0f) && (i == 0))
+			{
+				direction *= -1;
+			}
 
-		// Check if inversion reached maximum
-		if (_fe3d.modelEntity_getColorInversion(ID, "") == 1.0f)
-		{
-			direction *= -1;
-		}
+			// Check if inversion reached maximum
+			if ((_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) == 1.0f) && (i == 0))
+			{
+				direction *= -1;
+			}
 
-		// Set model inversion
-		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
-		_fe3d.modelEntity_setColorInversion(ID, "", (_fe3d.modelEntity_getColorInversion(ID, "") + speed));
+			// Set model inversion
+			float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
+			_fe3d.modelEntity_setColorInversion(ID, partIDs[i], (_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) + speed));
+		}
 	}
 }
 

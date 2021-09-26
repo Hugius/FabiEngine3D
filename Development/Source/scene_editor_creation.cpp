@@ -204,15 +204,19 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	// Create model entity
 	_fe3d.modelEntity_create(newID, _fe3d.modelEntity_getMeshPath(previewID));
 
-	// Bind AABB entities to model entity
-	for (const auto& previewAabbID : _fe3d.aabbEntity_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
+	// Set instancing
+	if (_fe3d.modelEntity_isInstanced(previewID))
 	{
-		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
-		_fe3d.aabbEntity_create(newAabbID);
-		_fe3d.aabbEntity_setParent(newAabbID, newID, AabbParentType::MODEL_ENTITY);
-		_fe3d.aabbEntity_setLocalPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
-		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
+		_fe3d.modelEntity_enableInstancing(newID, { Vec3(0.0f) });
 	}
+
+	// Set properties
+	_fe3d.modelEntity_setBasePosition(newID, position);
+	_fe3d.modelEntity_setBaseSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
+	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
+	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
+	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
+	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
 
 	// Set parts
 	for (const auto& partID : _fe3d.modelEntity_getPartIDs(previewID))
@@ -258,19 +262,15 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setUvRepeat(newID, partID, _fe3d.modelEntity_getUvRepeat(previewID, partID));
 	}
 
-	// Set instancing
-	if (_fe3d.modelEntity_isInstanced(previewID))
+	// Bind AABB entities to model entity
+	for (const auto& previewAabbID : _fe3d.aabbEntity_getChildIDs(previewID, AabbParentType::MODEL_ENTITY))
 	{
-		_fe3d.modelEntity_enableInstancing(newID, { Vec3(0.0f) });
+		const string newAabbID = (newID + "@" + previewAabbID.substr(string(previewID + "_").size()));
+		_fe3d.aabbEntity_create(newAabbID);
+		_fe3d.aabbEntity_setParent(newAabbID, newID, AabbParentType::MODEL_ENTITY);
+		_fe3d.aabbEntity_setLocalPosition(newAabbID, _fe3d.aabbEntity_getPosition(previewAabbID));
+		_fe3d.aabbEntity_setLocalSize(newAabbID, _fe3d.aabbEntity_getSize(previewAabbID));
 	}
-
-	// Set properties
-	_fe3d.modelEntity_setBasePosition(newID, position);
-	_fe3d.modelEntity_setBaseSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
-	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
-	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
-	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
-	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
 
 	// Save original transformation
 	if (_isEditorLoaded)

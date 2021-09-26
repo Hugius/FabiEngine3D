@@ -220,9 +220,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 					_animationEditor.startAnimation(animationID, modelID, -1);
 				}
 
-				// Read offset data from file
+				// Check if instanced
 				if (_fe3d.modelEntity_isInstanced(modelID))
 				{
+					// Read offset data from file
 					vector<Vec3> instancedOffsets;
 					while (true)
 					{
@@ -244,7 +245,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 						}
 					}
 
-					// Enable instancing
+					// Add offsets
 					_fe3d.modelEntity_disableInstancing(modelID);
 					_fe3d.modelEntity_enableInstancing(modelID, instancedOffsets);
 				}

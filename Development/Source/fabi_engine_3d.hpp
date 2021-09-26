@@ -70,8 +70,8 @@ public:
 	// Camera interface - setters
 	void camera_reset();
 	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
-	void camera_disableFirstPersonView();
 	void camera_enableThirdPersonView(float initialYaw, float initialPitch);
+	void camera_disableFirstPersonView();
 	void camera_disableThirdPersonView();
 	void camera_moveFollowX(float speed);
 	void camera_moveFollowZY(float speed);

@@ -281,7 +281,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				// Add model ID
 				_loadedModelIDs.push_back(modelID);
 
-				// Instancing
+				// Set instancing
 				if (isInstanced)
 				{
 					_fe3d.modelEntity_enableInstancing(modelID, { Vec3(0.0f) });
@@ -343,31 +343,31 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 					replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
-					// Diffuse map
+					// Set diffuse map
 					if (!diffuseMapPath.empty())
 					{
 						_fe3d.modelEntity_setDiffuseMap(modelID, partID, diffuseMapPath);
 					}
 
-					// Specular map
+					// Set specular map
 					if (!specularMapPath.empty())
 					{
 						_fe3d.modelEntity_setSpecularMap(modelID, partID, specularMapPath);
 					}
 
-					// Emission map
+					// Set emission map
 					if (!emissionMapPath.empty())
 					{
 						_fe3d.modelEntity_setEmissionMap(modelID, partID, emissionMapPath);
 					}
 
-					// Reflection map
+					// Set reflection map
 					if (!reflectionMapPath.empty())
 					{
 						_fe3d.modelEntity_setReflectionMap(modelID, partID, reflectionMapPath);
 					}
 
-					// Normal map
+					// Set normal map
 					if (!normalMapPath.empty())
 					{
 						_fe3d.modelEntity_setNormalMap(modelID, partID, normalMapPath);

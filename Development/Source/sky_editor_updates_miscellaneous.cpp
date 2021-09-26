@@ -1,12 +1,12 @@
 #include "sky_editor.hpp"
 
-void SkyEditor::_updateOptionsMenu()
+void SkyEditor::_updateMiscellaneousMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "skyEditorMenuOptions")
+	if (screen->getID() == "skyEditorMenuMiscellaneous")
 	{
 		// Temporary values
 		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
@@ -38,27 +38,27 @@ void SkyEditor::_updateOptionsMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{
 			skyRotationSpeed /= 1000.0f;
+			_fe3d.skyEntity_setRotationSpeed(_currentSkyID, skyRotationSpeed);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
 			skyLightness /= 100.0f;
+			_fe3d.skyEntity_setLightness(_currentSkyID, skyLightness);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", skyColor.r))
 		{
 			skyColor.r /= 255.0f;
+			_fe3d.skyEntity_setColor(_currentSkyID, skyColor);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", skyColor.g))
 		{
 			skyColor.g /= 255.0f;
+			_fe3d.skyEntity_setColor(_currentSkyID, skyColor);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", skyColor.b))
 		{
 			skyColor.b /= 255.0f;
+			_fe3d.skyEntity_setColor(_currentSkyID, skyColor);
 		}
-
-		// Dynamically update sky options
-		_fe3d.skyEntity_setRotationSpeed(_currentSkyID, skyRotationSpeed);
-		_fe3d.skyEntity_setLightness(_currentSkyID, skyLightness);
-		_fe3d.skyEntity_setColor(_currentSkyID, skyColor);
 	}
 }

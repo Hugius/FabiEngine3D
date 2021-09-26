@@ -108,7 +108,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
-			bool isInstanced;
+			bool isInstanced, isFaceCulled;
 			Vec3 size;
 
 			// Read data from file
@@ -119,7 +119,8 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				size.y >>
 				size.z >>
 				lodEntityID >>
-				isInstanced;
+				isInstanced >>
+				isFaceCulled;
 
 			// Read part data
 			while (true)
@@ -137,7 +138,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				Vec3 color;
 				float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 				unsigned int reflectionType;
-				bool isFaceCulled, isSpecular, isReflective;
+				bool isSpecular, isReflective;
 
 				// Read data from file
 				iss >>
@@ -146,7 +147,6 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 					specularMapPath >>
 					reflectionMapPath >>
 					normalMapPath >>
-					isFaceCulled >>
 					reflectionType >>
 					isSpecular >>
 					isReflective >>

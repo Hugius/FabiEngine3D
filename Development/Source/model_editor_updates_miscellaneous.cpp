@@ -1,10 +1,6 @@
 #include "model_editor.hpp"
 #include "logger.hpp"
 
-#include <algorithm>
-
-using std::clamp;
-
 void ModelEditor::_updateMiscellaneousMenu()
 {
 	// Temporary values

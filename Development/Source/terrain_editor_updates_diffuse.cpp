@@ -1,26 +1,19 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
 
-void TerrainEditor::_updateMeshMenu()
+void TerrainEditor::_updateDiffuseMapMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "terrainEditorMenuMesh")
+	if (screen->getID() == "terrainEditorMenuDiffuseMap")
 	{
-		// Temporary values
-		float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
@@ -58,12 +51,6 @@ void TerrainEditor::_updateMeshMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("clearMaps")->isHovered())
 		{
 			_fe3d.terrainEntity_setDiffuseMap(_currentTerrainID, "");
-		}
-
-		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
-		{
-			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 		}
 
 		// Update buttons hoverability

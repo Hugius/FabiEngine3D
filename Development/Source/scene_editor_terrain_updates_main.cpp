@@ -27,7 +27,7 @@ void SceneEditor::_updateTerrainMenu()
 			}
 
 			// Add choice list
-			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Choose Terrain", Vec2(0.0f, 0.1f), terrainIDs);
+			_gui.getGlobalScreen()->createChoiceForm("terrainList", "Select Terrain", Vec2(0.0f, 0.1f), terrainIDs);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{

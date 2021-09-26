@@ -30,8 +30,8 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateMeshMenu();
-	void _updateOptionsMenu();
+	void _updateTexturingMenu();
+	void _updateMiscellaneousMenu();
 	void _updateSkyCreating();
 	void _updateSkyChoosing();
 	void _updateSkyDeleting();

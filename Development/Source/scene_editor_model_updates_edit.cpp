@@ -130,7 +130,7 @@ void SceneEditor::_updateModelEditing()
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 				{
-					_gui.getGlobalScreen()->createChoiceForm("animationList", "Choose Animation", Vec2(0.0f, 0.1f),
+					_gui.getGlobalScreen()->createChoiceForm("animationList", "Select Animation", Vec2(0.0f, 0.1f),
 						_animationEditor.getAllAnimationIDs());
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())

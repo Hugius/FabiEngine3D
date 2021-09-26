@@ -204,7 +204,7 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_main.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_texturing.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\sky_editor_misc.cpp">
@@ -234,7 +234,7 @@
     <ClCompile Include="..\..\Source\model_editor_updates_texturing.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_miscellaneous.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_loading.cpp">
@@ -345,7 +345,7 @@
     <ClCompile Include="..\..\Source\terrain_editor_updates_misc.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\terrain_editor_updates_diffuse.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\terrain_editor_updates_lighting.cpp">
@@ -354,10 +354,10 @@
     <ClCompile Include="..\..\Source\sky_editor_updates_main.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\sky_editor_updates_texturing.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\sky_editor_updates_miscellaneous.cpp">
       <Filter>Sky Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\sky_editor_updates_misc.cpp">
@@ -384,10 +384,10 @@
     <ClCompile Include="..\..\Source\water_editor_main.cpp">
       <Filter>Water Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\water_editor_updates_texturing.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\water_editor_updates_miscellaneous.cpp">
       <Filter>Water Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp">
@@ -414,7 +414,7 @@
     <ClCompile Include="..\..\Source\billboard_editor_updates_lighting.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\billboard_editor_updates_miscellaneous.cpp">
       <Filter>Billboard Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_animation.cpp">
@@ -444,7 +444,7 @@
     <ClCompile Include="..\..\Source\terrain_editor_updates_blend.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_updates_options.cpp">
+    <ClCompile Include="..\..\Source\terrain_editor_updates_miscellaneous.cpp">
       <Filter>Terrain Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>

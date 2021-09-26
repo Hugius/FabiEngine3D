@@ -31,11 +31,11 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateMeshMenu();
+	void _updateDiffuseMapMenu();
 	void _updateBlendMapMenu();
 	void _updateNormalMapMenu();
 	void _updateLightingMenu();
-	void _updateOptionsMenu();
+	void _updateMiscellaneousMenu();
 	void _updateTerrainCreating();
 	void _updateTerrainChoosing();
 	void _updateTerrainDeleting();

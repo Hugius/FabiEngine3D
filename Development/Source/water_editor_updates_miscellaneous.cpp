@@ -1,30 +1,24 @@
 #include "water_editor.hpp"
 
-void WaterEditor::_updateOptionsMenu()
+void WaterEditor::_updateMiscellaneousMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "waterEditorMenuOptions")
+	if (screen->getID() == "waterEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto color = _fe3d.waterEntity_getColor(_currentWaterID);
 		auto speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
 		auto transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
 		auto waveHeight = _fe3d.waterEntity_getWaveHeight(_currentWaterID);
 		auto quality = _fe3d.waterEntity_getQuality(_currentWaterID);
-		float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 			return;
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("waveHeight")->isHovered())
 		{
@@ -38,12 +32,6 @@ void WaterEditor::_updateOptionsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("transparency")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("transparency", "Transparency", (transparency * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("quality")->isHovered())
 		{
@@ -70,10 +58,6 @@ void WaterEditor::_updateOptionsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
-		{
-			_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
-		}
 		if (_gui.getGlobalScreen()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
@@ -89,21 +73,6 @@ void WaterEditor::_updateOptionsMenu()
 			transparency /= 100.0f;
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
-		{
-			color.r /= 255.0f;
-			_fe3d.waterEntity_setColor(_currentWaterID, color);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
-		{
-			color.g /= 255.0f;
-			_fe3d.waterEntity_setColor(_currentWaterID, color);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
-		{
-			color.b /= 255.0f;
-			_fe3d.waterEntity_setColor(_currentWaterID, color);
-		}
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeight))
 		{
 			waveHeight /= 100.0f;
@@ -111,10 +80,6 @@ void WaterEditor::_updateOptionsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("uvRepeat")->setHoverable(
-			_fe3d.waterEntity_hasDudvMap(_currentWaterID) ||
-			_fe3d.waterEntity_hasNormalMap(_currentWaterID) ||
-			_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 		screen->getButton("waveHeight")->setHoverable(_fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 		screen->getButton("speed")->setHoverable(_fe3d.waterEntity_hasDudvMap(_currentWaterID) || _fe3d.waterEntity_hasDisplacementMap(_currentWaterID));
 

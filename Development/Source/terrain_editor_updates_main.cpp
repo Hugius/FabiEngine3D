@@ -13,7 +13,7 @@ void TerrainEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateMeshMenu();
+		_updateDiffuseMapMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -29,7 +29,7 @@ void TerrainEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateOptionsMenu();
+		_updateMiscellaneousMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -112,6 +112,9 @@ void TerrainEditor::_updateChoiceMenu()
 	// Screen management
 	if (screen->getID() == "terrainEditorMenuChoice")
 	{
+		// Temporary values
+		float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
+
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
@@ -122,9 +125,13 @@ void TerrainEditor::_updateChoiceMenu()
 			_currentTerrainID = "";
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxHeight")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMesh");
+			_gui.getGlobalScreen()->createValueForm("maxHeight", "Max Height", maxHeight, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuDiffuseMap");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
@@ -138,9 +145,15 @@ void TerrainEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuOptions");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMiscellaneous");
+		}
+
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
+		{
+			_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 		}
 	}
 }

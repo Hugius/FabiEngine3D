@@ -4,7 +4,7 @@
 
 void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 {
-	if (_fe3d.modelEntity_isMultiParted(_currentModelID))
+	if (_fe3d.modelEntity_isMultiParted(_currentModelID)) // Multiple parts
 	{
 		auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
 		sort(IDs.begin(), IDs.end());
@@ -12,7 +12,7 @@ void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 		_isChoosingPart = true;
 		_nextActiveScreenID = nextActiveScreenID;
 	}
-	else
+	else // Single part
 	{
 		_gui.getViewport("left")->getWindow("main")->setActiveScreen(nextActiveScreenID);
 	}

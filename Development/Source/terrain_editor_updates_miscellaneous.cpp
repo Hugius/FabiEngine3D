@@ -1,12 +1,12 @@
 #include "terrain_editor.hpp"
 
-void TerrainEditor::_updateOptionsMenu()
+void TerrainEditor::_updateMiscellaneousMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "terrainEditorMenuOptions")
+	if (screen->getID() == "terrainEditorMenuMiscellaneous")
 	{
 		// Temporary values
 		auto uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);

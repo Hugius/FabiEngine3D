@@ -1,13 +1,13 @@
 #include "sky_editor.hpp"
 #include "logger.hpp"
 
-void SkyEditor::_updateMeshMenu()
+void SkyEditor::_updateTexturingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "skyEditorMenuMesh")
+	if (screen->getID() == "skyEditorMenuTexturing")
 	{
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

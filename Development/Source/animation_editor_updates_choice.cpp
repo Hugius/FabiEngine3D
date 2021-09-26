@@ -62,7 +62,7 @@ void AnimationEditor::_updateChoiceMenu()
 		{
 			auto modelIDs = _modelEditor.getLoadedModelIDs();
 			for (auto& ID : modelIDs) { ID = ID.substr(1); }
-			_gui.getGlobalScreen()->createChoiceForm("modelList", "Choose Model", Vec2(-0.5f, 0.1f), modelIDs);
+			_gui.getGlobalScreen()->createChoiceForm("modelList", "Select Model", Vec2(-0.5f, 0.1f), modelIDs);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("play")->isHovered())
 		{

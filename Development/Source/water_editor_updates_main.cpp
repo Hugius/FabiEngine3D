@@ -15,7 +15,7 @@ void WaterEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateMeshMenu();
+		_updateTexturingMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -23,7 +23,7 @@ void WaterEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateOptionsMenu();
+		_updateMiscellaneousMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -106,6 +106,9 @@ void WaterEditor::_updateChoiceMenu()
 	// Screen management
 	if (screen->getID() == "waterEditorMenuChoice")
 	{
+		// Temporary values
+		float size = _fe3d.waterEntity_getSize(_currentWaterID);
+
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
@@ -116,22 +119,32 @@ void WaterEditor::_updateChoiceMenu()
 			_currentWaterID = "";
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMesh");
+			_gui.getGlobalScreen()->createValueForm("size", "Size", size, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuTexturing");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lighting")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuLighting");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuOptions");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMiscellaneous");
+		}
+
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("size", size, { 0.0f }))
+		{
+			_fe3d.waterEntity_setSize(_currentWaterID, size);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("lighting")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("miscellaneous")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 	}
 }
 

@@ -308,7 +308,7 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_selectMixSky("");
 	_fe3d.skyEntity_setMixValue(0.0f);
 
-	// Choose engine background again
+	// Select engine background again
 	if (!_fe3d.application_isExported())
 	{
 		_fe3d.skyEntity_selectMainSky("@@engineBackground");

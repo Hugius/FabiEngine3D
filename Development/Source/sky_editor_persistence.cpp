@@ -204,7 +204,7 @@ bool SkyEditor::saveSkyEntitiesToFile()
 			file << diffuseMapPath << " ";
 		}
 
-		// Write options to file
+		// Write data to file
 		file <<
 			rotationSpeed << " " <<
 			lightness << " " <<

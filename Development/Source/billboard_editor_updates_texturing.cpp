@@ -1,31 +1,26 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
 
-void BillboardEditor::_updateMeshMenu()
+void BillboardEditor::_updateTexturingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "billboardEditorMenuMesh")
+	if (screen->getID() == "billboardEditorMenuTexturing")
 	{
 		// Temporary values
-		auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
 		auto textContent = _fe3d.billboardEntity_getTextContent(_currentBillboardID);
 		auto isText = _fe3d.billboardEntity_isText(_currentBillboardID);
 		auto hasDiffuseMap = _fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID);
 		auto hasEmissionMap = _fe3d.billboardEntity_hasEmissionMap(_currentBillboardID);
+		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 			return;
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
@@ -66,6 +61,10 @@ void BillboardEditor::_updateMeshMenu()
 			{
 				_fe3d.billboardEntity_setTextContent(_currentBillboardID, "text");
 			}
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textContent")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("textContent", "Text content", textContent, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
@@ -138,23 +137,29 @@ void BillboardEditor::_updateMeshMenu()
 			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, "");
 			_fe3d.billboardEntity_setEmissionMap(_currentBillboardID, "");
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		{
+		_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
+		if (_gui.getGlobalScreen()->checkValueForm("textContent", textContent, {}))
 		{
-			size.x /= 100.0f;
-			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
+			_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
+			_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
+		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
 		{
-			size.y /= 100.0f;
-			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+			_fe3d.billboardEntity_setUvRepeat(_currentBillboardID, uvRepeat);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("font")->setHoverable(!hasDiffuseMap || isText);
+		screen->getButton("textContent")->setHoverable(isText);
 		screen->getButton("diffuseMap")->setHoverable(!isText);
 		screen->getButton("diffuseMap")->setHoverable(!isText);
 		screen->getButton("clearMaps")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
+		screen->getButton("uvRepeat")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
 	}
 }

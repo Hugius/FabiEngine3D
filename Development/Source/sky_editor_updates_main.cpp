@@ -13,11 +13,11 @@ void SkyEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateMeshMenu();
+		_updateTexturingMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateOptionsMenu();
+		_updateMiscellaneousMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -110,17 +110,17 @@ void SkyEditor::_updateChoiceMenu()
 			_currentSkyID = "";
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMesh");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuTexturing");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuOptions");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMiscellaneous");
 		}
 
 		// Update buttons hoverability
-		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
+		screen->getButton("miscellaneous")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
 	}
 }
 

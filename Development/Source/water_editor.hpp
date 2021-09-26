@@ -30,9 +30,9 @@ private:
 	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateMeshMenu();
+	void _updateTexturingMenu();
 	void _updateLightingMenu();
-	void _updateOptionsMenu();
+	void _updateMiscellaneousMenu();
 	void _updateWaterCreating();
 	void _updateWaterChoosing();
 	void _updateWaterDeleting();

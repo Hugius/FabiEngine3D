@@ -15,7 +15,7 @@ void BillboardEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateMeshMenu();
+		_updateTexturingMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -27,7 +27,7 @@ void BillboardEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateOptionsMenu();
+		_updateMiscellaneousMenu();
 	}
 	if (_isEditorLoaded)
 	{
@@ -110,6 +110,9 @@ void BillboardEditor::_updateChoiceMenu()
 	// Screen management
 	if (screen->getID() == "billboardEditorMenuChoice")
 	{
+		// Temporary values
+		auto size = _fe3d.billboardEntity_getSize(_currentBillboardID);
+
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
@@ -120,9 +123,14 @@ void BillboardEditor::_updateChoiceMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("mesh")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMesh");
+			_gui.getGlobalScreen()->createValueForm("sizeX", "X", (size.x * 100.0f), Vec2(-0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sizeY", "Y", (size.y * 100.0f), Vec2(0.15f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("texturing")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuTexturing");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("animation")->isHovered())
 		{
@@ -132,9 +140,21 @@ void BillboardEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuLighting");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("options")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("miscellaneous")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuOptions");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMiscellaneous");
+		}
+
+		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("sizeX", size.x, { 0.0f }))
+		{
+			size.x /= 100.0f;
+			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("sizeY", size.y, { 0.0f }))
+		{
+			size.y /= 100.0f;
+			_fe3d.billboardEntity_setSize(_currentBillboardID, size);
 		}
 
 		// Update buttons hoverability

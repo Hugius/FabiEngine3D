@@ -203,7 +203,7 @@ void TerrainEditor::_updateTerrainCreating()
 						// Check if terrain creation went well
 						if (_fe3d.terrainEntity_isExisting(newTerrainID))
 						{
-							// Go to editor
+							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
 							// Select terrain
@@ -257,7 +257,7 @@ void TerrainEditor::_updateTerrainChoosing()
 				// Select terrain
 				_currentTerrainID = ("@" + selectedButtonID);
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingTerrain)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");

@@ -4,10 +4,6 @@
 #include "engine_gui_manager.hpp"
 #include "reflection_type.hpp"
 
-#include <functional>
-
-using std::function;
-
 class ModelEditor final
 {
 public:
@@ -29,12 +25,12 @@ public:
 private:
 	void _loadGUI();
 	void _unloadGUI();
-	void _preparePartChoosing(function<void()>&& executionFunction);
+	void _tryPartChoosing(const string& nextActiveScreenID);
 	void _updateMainMenu();
 	void _updateChoiceMenu();
-	void _updateMeshMenu();
+	void _updateTexturingMenu();
 	void _updateLightingMenu();
-	void _updateOptionsMenu();
+	void _updateMiscellaneousMenu();
 	void _updateMainAabbMenu();
 	void _updateChoiceAabbMenu();
 	void _updateModelCreating();
@@ -58,6 +54,7 @@ private:
 	string _currentAabbID = "";
 	string _currentProjectID = "";
 	string _hoveredModelID = "";
+	string _nextActiveScreenID = "";
 
 	// Floats
 	static inline const float CW = 0.115f;
@@ -83,7 +80,4 @@ private:
 	bool _isChoosingAabb = false;
 	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
-
-	// Miscellaneous
-	function<void()> _partExecutionFunction;
 };

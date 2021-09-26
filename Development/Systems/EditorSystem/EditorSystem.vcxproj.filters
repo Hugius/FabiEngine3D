@@ -231,7 +231,7 @@
     <ClCompile Include="..\..\Source\model_editor_updates_main.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp">
+    <ClCompile Include="..\..\Source\model_editor_updates_texturing.cpp">
       <Filter>Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_editor_updates_options.cpp">

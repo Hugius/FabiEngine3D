@@ -169,7 +169,7 @@ void BillboardEditor::_updateBillboardCreating()
 						// Check if billboard creation went well
 						if (_fe3d.billboardEntity_isExisting(newBillboardID))
 						{
-							// Go to editor
+							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 
 							// Select billboard
@@ -226,7 +226,7 @@ void BillboardEditor::_updateBillboardChoosing()
 				_currentBillboardID = ("@" + selectedButtonID);
 				_hoveredBillboardID = "";
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingBillboard)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");

@@ -248,7 +248,6 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		}
 
 		// Set properties
-		_fe3d.modelEntity_setFaceCulled(newID, partID, _fe3d.modelEntity_isFaceCulled(previewID, partID));
 		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
 		_fe3d.modelEntity_setSpecular(newID, partID, _fe3d.modelEntity_isSpecular(previewID, partID));
 		_fe3d.modelEntity_setSpecularShininess(newID, partID, _fe3d.modelEntity_getSpecularShininess(previewID, partID));
@@ -271,6 +270,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setLevelOfDetailSize(newID, _fe3d.modelEntity_getBaseSize(previewID));
 	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
+	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
 
 	// Save original transformation
 	if (_isEditorLoaded)

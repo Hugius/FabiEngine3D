@@ -148,7 +148,7 @@ void AnimationEditor::_updateChoiceMenu()
 				stopAnimation(_currentAnimationID, currentAnimation->getPreviewModelID());
 			}
 
-			// Go to editor screen
+			// Go to next screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuFrame");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("deleteFrame")->isHovered())

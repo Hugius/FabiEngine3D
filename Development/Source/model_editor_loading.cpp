@@ -134,6 +134,10 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 
 				// Data placeholders
 				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
+				Vec3 color;
+				float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+				unsigned int reflectionType;
+				bool isFaceCulled, isSpecular, isReflective;
 
 				// Read data from file
 				iss >>
@@ -141,7 +145,19 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 					emissionMapPath >>
 					specularMapPath >>
 					reflectionMapPath >>
-					normalMapPath;
+					normalMapPath >>
+					isFaceCulled >>
+					reflectionType >>
+					isSpecular >>
+					isReflective >>
+					specularShininess >>
+					specularIntensity >>
+					reflectivity >>
+					lightness >>
+					color.r >>
+					color.g >>
+					color.b >>
+					uvRepeat;
 
 				// Perform empty string & space conversions
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -236,7 +252,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
-			bool isInstanced;
+			bool isInstanced, isFaceCulled;
 			Vec3 size;
 
 			// Read data from file
@@ -247,7 +263,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				size.y >>
 				size.z >>
 				lodEntityID >>
-				isInstanced;
+				isInstanced >>
+				isFaceCulled;
 
 			// Perform empty string & space conversions
 			meshPath = (meshPath == "?") ? "" : meshPath;
@@ -274,6 +291,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				_fe3d.modelEntity_setVisible(modelID, false);
 				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
+				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
 
 				// Read part data
 				while (true)
@@ -290,7 +308,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 					float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 					unsigned int reflectionType;
-					bool isFaceCulled, isSpecular, isReflective;
+					bool isSpecular, isReflective;
 					Vec3 color;
 
 					// Read data from file
@@ -300,7 +318,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 						specularMapPath >>
 						reflectionMapPath >>
 						normalMapPath >>
-						isFaceCulled >>
 						reflectionType >>
 						isSpecular >>
 						isReflective >>
@@ -358,7 +375,6 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 					// Set properties
 					_fe3d.modelEntity_setColor(modelID, partID, color);
-					_fe3d.modelEntity_setFaceCulled(modelID, partID, isFaceCulled);
 					_fe3d.modelEntity_setSpecular(modelID, partID, isSpecular);
 					_fe3d.modelEntity_setSpecularShininess(modelID, partID, specularShininess);
 					_fe3d.modelEntity_setSpecularIntensity(modelID, partID, specularIntensity);

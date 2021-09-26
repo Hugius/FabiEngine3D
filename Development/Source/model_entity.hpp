@@ -73,11 +73,11 @@ public:
 	void setAlpha(const string& partID, float value);
 	void setUvRepeat(const string& partID, float value);
 	void setEmissionIntensity(const string& partID, float value);
-	void setFaceCulled(const string& partID, bool value);
 	void setSpecular(const string& partID, bool value);
 	void setReflective(const string& partID, bool value);
-	void setWireFramed(bool value);
 	void setReflectionType(const string& partID, ReflectionType value);
+	void setWireFramed(bool value);
+	void setFaceCulled(bool value);
 
 	// Instances
 	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
@@ -130,7 +130,7 @@ public:
 	const bool isLevelOfDetailed();
 	const bool isBright();
 	const bool isWireFramed();
-	const bool isFaceCulled(const string& partID);
+	const bool isFaceCulled();
 	const bool isSpecular(const string& partID);
 	const bool isReflective(const string& partID);
 	const bool hasRenderBuffer(const string& partID);
@@ -198,7 +198,6 @@ private:
 		// Booleans
 		bool isSpecular = false;
 		bool isReflective = false;
-		bool isFaceCulled = false;
 
 		// Miscellaneous
 		TextureID diffuseMap = 0;
@@ -252,4 +251,5 @@ private:
 	bool _isLevelOfDetailed = false;
 	bool _isBright = false;
 	bool _isWireFramed = false;
+	bool _isFaceCulled = false;
 };

@@ -124,9 +124,9 @@ void FabiEngine3D::modelEntity_setLevelOfDetailEntity(const string& ID, const st
 	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailEntityID(levelOfDetailID);
 }
 
-void FabiEngine3D::modelEntity_setFaceCulled(const string& ID, const string& partID, bool enabled)
+void FabiEngine3D::modelEntity_setFaceCulled(const string& ID, bool enabled)
 {
-	_core->_modelEntityManager.getEntity(ID)->setFaceCulled(partID, enabled);
+	_core->_modelEntityManager.getEntity(ID)->setFaceCulled(enabled);
 }
 
 void FabiEngine3D::modelEntity_setReflectionType(const string& ID, const string& partID, ReflectionType type)
@@ -165,9 +165,9 @@ const bool FabiEngine3D::modelEntity_isMultiParted(const string& ID)
 	return (_core->_modelEntityManager.getEntity(ID)->getPartIDs().size() > 1);
 }
 
-const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID, const string& partID)
+const bool FabiEngine3D::modelEntity_isFaceCulled(const string& ID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->isFaceCulled(partID);
+	return _core->_modelEntityManager.getEntity(ID)->isFaceCulled();
 }
 
 const bool FabiEngine3D::modelEntity_isSpecular(const string& ID, const string& partID)

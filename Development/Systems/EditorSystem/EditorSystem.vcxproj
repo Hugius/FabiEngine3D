@@ -81,7 +81,7 @@
     <ClCompile Include="..\..\Source\model_editor_updates_aabb.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_main.cpp" />
-    <ClCompile Include="..\..\Source\model_editor_updates_mesh.cpp" />
+    <ClCompile Include="..\..\Source\model_editor_updates_texturing.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_misc.cpp" />
     <ClCompile Include="..\..\Source\model_editor_updates_options.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_billboard_updates_edit.cpp" />

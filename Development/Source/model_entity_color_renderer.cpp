@@ -138,6 +138,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
+		// Enable face culling
+		if (entity->isFaceCulled())
+		{
+			glEnable(GL_CULL_FACE);
+		}
+
 		// Bind textures
 		if (!entity->getPreviousReflectionEntityID().empty())
 		{
@@ -181,12 +187,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			_shader.uploadUniform("u_normalTransformationMatrix", normalTransformationMatrix);
 			_shader.uploadUniform("u_isInstanced", buffer->isInstanced());
 			_shader.uploadUniform("u_reflectionType", static_cast<int>(entity->getReflectionType(partID)));
-
-			// Enable face culling
-			if (entity->isFaceCulled(partID))
-			{
-				glEnable(GL_CULL_FACE);
-			}
 
 			// Bind textures
 			if (entity->hasDiffuseMap(partID))
@@ -260,12 +260,6 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 				glActiveTexture(GL_TEXTURE7);
 				glBindTexture(GL_TEXTURE_2D, 0);
 			}
-
-			// Disable face culling
-			if (entity->isFaceCulled(partID))
-			{
-				glDisable(GL_CULL_FACE);
-			}
 		}
 
 		// Unbind textures
@@ -278,6 +272,12 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
+
+		// Disable face culling
+		if (entity->isFaceCulled())
+		{
+			glDisable(GL_CULL_FACE);
 		}
 
 		// Disable wire frame

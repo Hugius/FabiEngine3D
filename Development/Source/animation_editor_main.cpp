@@ -38,7 +38,7 @@ void AnimationEditor::load()
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
 	_fe3d.modelEntity_setBasePosition("@@cube", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setDiffuseMap("@@cube", "", "engine_assets\\textures\\cube.png");
-	_fe3d.modelEntity_setFaceCulled("@@cube", "", true);
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
 	_fe3d.modelEntity_create("@@grid", "engine_assets\\meshes\\plane.obj");
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));

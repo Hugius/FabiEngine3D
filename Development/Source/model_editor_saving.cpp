@@ -38,6 +38,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 		auto modelSize = _fe3d.modelEntity_getBaseSize(modelID);
 		auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
+		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
 
 		// Perform empty string & space conversions
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
@@ -53,7 +54,8 @@ bool ModelEditor::saveModelEntitiesToFile()
 			modelSize.y << " " <<
 			modelSize.z << " " <<
 			lodEntityID << " " <<
-			isInstanced;
+			isInstanced << " " <<
+			isFaceCulled;
 
 		// Write space to file
 		file << " ";
@@ -69,7 +71,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto specularMapPath = _fe3d.modelEntity_getSpecularMapPath(modelID, partID);
 			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID, partID);
 			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID, partID);
-			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID, partID);
 			auto isSpecular = _fe3d.modelEntity_isSpecular(modelID, partID);
 			auto specularShininess = _fe3d.modelEntity_getSpecularShininess(modelID, partID);
 			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID, partID);
@@ -101,7 +102,6 @@ bool ModelEditor::saveModelEntitiesToFile()
 				specularMapPath << " " <<
 				reflectionMapPath << " " <<
 				normalMapPath << " " <<
-				isFaceCulled << " " <<
 				reflectionType << " " <<
 				isSpecular << " " <<
 				isReflective << " " <<
@@ -124,23 +124,27 @@ bool ModelEditor::saveModelEntitiesToFile()
 		// Write newline to file
 		file << endl;
 
-		// Write AABB data
-		for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
+		// Check if model not instanced
+		if (!isInstanced)
 		{
-			// Retrieve all values
-			auto position = _fe3d.aabbEntity_getPosition(aabbID);
-			auto size = _fe3d.aabbEntity_getSize(aabbID);
+			// Write AABB data
+			for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(modelID, AabbParentType::MODEL_ENTITY))
+			{
+				// Retrieve all values
+				auto position = _fe3d.aabbEntity_getPosition(aabbID);
+				auto size = _fe3d.aabbEntity_getSize(aabbID);
 
-			// Write data to file
-			file << "AABB " <<
-				aabbID << " " <<
-				modelID << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				size.x << " " <<
-				size.y << " " <<
-				size.z << endl;
+				// Write data to file
+				file << "AABB " <<
+					aabbID << " " <<
+					modelID << " " <<
+					position.x << " " <<
+					position.y << " " <<
+					position.z << " " <<
+					size.x << " " <<
+					size.y << " " <<
+					size.z << endl;
+			}
 		}
 	}
 

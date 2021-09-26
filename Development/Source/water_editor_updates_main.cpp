@@ -162,7 +162,7 @@ void WaterEditor::_updateWaterCreating()
 						// Check if water creation went well
 						if (_fe3d.waterEntity_isExisting(newWaterID))
 						{
-							// Go to editor
+							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
 
 							// Select water
@@ -216,7 +216,7 @@ void WaterEditor::_updateWaterChoosing()
 				// Select water
 				_currentWaterID = ("@" + selectedButtonID);
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingWater)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");

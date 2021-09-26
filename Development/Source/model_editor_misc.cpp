@@ -1,15 +1,21 @@
 #include "model_editor.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
 
-void ModelEditor::_preparePartChoosing(function<void()>&& executionFunction)
+void ModelEditor::_tryPartChoosing(const string& nextActiveScreenID)
 {
-	auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
-	sort(IDs.begin(), IDs.end());
-	_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", Vec2(0.0f, 0.1f), IDs);
-	_isChoosingPart = true;
-	_partExecutionFunction = executionFunction;
+	if (_fe3d.modelEntity_isMultiParted(_currentModelID))
+	{
+		auto IDs = _fe3d.modelEntity_getPartIDs(_currentModelID);
+		sort(IDs.begin(), IDs.end());
+		_gui.getGlobalScreen()->createChoiceForm("partList", "Select Part", Vec2(0.0f, 0.1f), IDs);
+		_isChoosingPart = true;
+		_nextActiveScreenID = nextActiveScreenID;
+	}
+	else
+	{
+		_gui.getViewport("left")->getWindow("main")->setActiveScreen(nextActiveScreenID);
+	}
 }
 
 void ModelEditor::setCurrentProjectID(const string& projectID)

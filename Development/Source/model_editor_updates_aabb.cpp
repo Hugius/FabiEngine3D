@@ -143,10 +143,12 @@ void ModelEditor::_updateAabbCreating()
 						_fe3d.aabbEntity_create(_currentModelID + "@" + _currentAabbID);
 						_fe3d.aabbEntity_setParent((_currentModelID + "@" + _currentAabbID), _currentModelID, AabbParentType::MODEL_ENTITY);
 
-						// Miscellaneous
+						// Go to next screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), ("AABB: " + _currentAabbID), 0.025f);
 						_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("aabbID")->getEntityID(), true);
+
+						// Miscellaneous
 						_isCreatingAabb = false;
 					}
 					else
@@ -194,7 +196,7 @@ void ModelEditor::_updateAabbChoosing()
 				// Select AABB
 				_currentAabbID = selectedButtonID;
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingAabb)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabbChoice");

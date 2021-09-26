@@ -276,7 +276,7 @@ public:
 	void modelEntity_setReflectionMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setNormalMap(const string& ID, const string& partID, const string& texturePath);
 	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& levelOfDetailID);
-	void modelEntity_setFaceCulled(const string& ID, const string& partID, bool enabled);
+	void modelEntity_setFaceCulled(const string& ID, bool enabled);
 	void modelEntity_setReflectionType(const string& ID, const string& partID, ReflectionType type);
 	void modelEntity_setSpecular(const string& ID, const string& partID, bool enabled);
 	void modelEntity_setReflective(const string& ID, const string& partID, bool enabled);
@@ -357,7 +357,7 @@ public:
 	const bool modelEntity_isVisible(const string& ID);
 	const bool modelEntity_isInstanced(const string& ID);
 	const bool modelEntity_isMultiParted(const string& ID);
-	const bool modelEntity_isFaceCulled(const string& ID, const string& partID);
+	const bool modelEntity_isFaceCulled(const string& ID);
 	const bool modelEntity_isSpecular(const string& ID, const string& partID);
 	const bool modelEntity_isShadowed(const string& ID);
 	const bool modelEntity_isReflected(const string& ID);

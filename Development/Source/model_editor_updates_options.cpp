@@ -5,20 +5,18 @@
 
 using std::clamp;
 
-void ModelEditor::_updateOptionsMenu()
+void ModelEditor::_updateMiscellaneousMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "modelEditorMenuOptions")
+	if (screen->getID() == "modelEditorMenuMiscellaneous")
 	{
 		// Temporary values
 		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
-		auto color = _fe3d.modelEntity_getColor(_currentModelID);
-		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
-		auto isFaceculled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
+		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -26,19 +24,14 @@ void ModelEditor::_updateOptionsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceculled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodEntityID")->isHovered())
 		{
-			auto lambda = [this]()
-			{
-				isFaceculled = !isFaceculled;
-				_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceculled);
-			}
-			isMultiParted ? _preparePartChoosing(lambda) : lambda();
+			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
+			_gui.getGlobalScreen()->createValueForm("lodEntityID", "LOD entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isInstanced")->isHovered())
 		{
 			isInstanced = !isInstanced;
-
 			if (isInstanced)
 			{
 				_fe3d.modelEntity_enableInstancing(_currentModelID, { Vec3(0.0f) });
@@ -47,44 +40,14 @@ void ModelEditor::_updateOptionsMenu()
 			{
 				_fe3d.modelEntity_disableInstancing(_currentModelID);
 			}
-
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isFaceCulled")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-			_gui.getGlobalScreen()->createValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
-		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
-		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodEntityID")->isHovered())
-		{
-			levelOfDetailEntityID = (levelOfDetailEntityID.empty()) ? levelOfDetailEntityID : levelOfDetailEntityID.substr(1, levelOfDetailEntityID.size() - 1);
-			_gui.getGlobalScreen()->createValueForm("lodEntityID", "LOD entity ID", levelOfDetailEntityID, Vec2(0.0f, 0.1f), Vec2(0.4f, 0.1f), Vec2(0.0f, 0.1f));
+			isFaceCulled = !isFaceCulled;
+			_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceCulled);
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
-		{
-			color.r /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, "", color);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
-		{
-			color.g /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, "", color);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
-		{
-			color.b /= 255.0f;
-			_fe3d.modelEntity_setColor(_currentModelID, "", color);
-		}
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
-		{
-			_fe3d.modelEntity_setUvRepeat(_currentModelID, uvRepeat);
-		}
 		if (_gui.getGlobalScreen()->checkValueForm("lodEntityID", levelOfDetailEntityID, {}))
 		{
 			if (levelOfDetailEntityID == "@") // No LOD entity
@@ -102,7 +65,7 @@ void ModelEditor::_updateOptionsMenu()
 		}
 
 		// Update button text contents
-		screen->getButton("isFaceculled")->changeTextContent(isFaceculled ? "Culling: ON" : "Culling: OFF");
+		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");
 	}
 }

@@ -105,7 +105,7 @@ void AnimationEditor::_updateAnimationCreating()
 				auto animationIDs = getAllAnimationIDs();
 				if (find(animationIDs.begin(), animationIDs.end(), newAnimationID) == animationIDs.end())
 				{
-					// Go to editor
+					// Go to next screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 					// Create animation
@@ -150,7 +150,7 @@ void AnimationEditor::_updateAnimationChoosing()
 				// Select animation
 				_currentAnimationID = selectedButtonID;
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingAnimation)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");

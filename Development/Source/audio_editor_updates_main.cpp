@@ -138,7 +138,7 @@ void AudioEditor::_updateAudioCreating()
 						// Check if audio creation went well
 						if (_fe3d.sound_isExisting(newAudioID))
 						{
-							// Go to editor
+							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 
 							// Select audio
@@ -185,7 +185,7 @@ void AudioEditor::_updateAudioChoosing()
 				// Select audio
 				_currentAudioID = ("@" + selectedButtonID);
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingAudio)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");

@@ -158,9 +158,9 @@ const vector<string> ModelEntity::getPartIDs()
 	return result;
 }
 
-const bool ModelEntity::isFaceCulled(const string& partID)
+const bool ModelEntity::isFaceCulled()
 {
-	return _parts[_getPartIndex(partID)].isFaceCulled;
+	return _isFaceCulled;
 }
 
 const bool ModelEntity::isSpecular(const string& partID)

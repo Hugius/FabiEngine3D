@@ -367,9 +367,9 @@ void ModelEntity::setReflectivity(const string& partID, float value)
 	_parts[_getPartIndex(partID)].reflectivity = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setFaceCulled(const string& partID, bool value)
+void ModelEntity::setFaceCulled(bool value)
 {
-	_parts[_getPartIndex(partID)].isFaceCulled = value;
+	_isFaceCulled = value;
 }
 
 void ModelEntity::setReflectionType(const string& partID, ReflectionType value)

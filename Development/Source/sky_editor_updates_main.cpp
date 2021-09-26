@@ -151,7 +151,7 @@ void SkyEditor::_updateSkyCreating()
 						// Check if sky creation went well
 						if (_fe3d.skyEntity_isExisting(newSkyID))
 						{
-							// Go to editor
+							// Go to next screen
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
 							// Select sky
@@ -205,7 +205,7 @@ void SkyEditor::_updateSkyChoosing()
 				// Select sky
 				_currentSkyID = ("@" + selectedButtonID);
 
-				// Go to editor
+				// Go to next screen
 				if (!_isDeletingSky)
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");

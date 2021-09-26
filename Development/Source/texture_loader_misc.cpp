@@ -246,19 +246,22 @@ void TextureLoader::clearBitmapCache(const string& filePath)
 
 void TextureLoader::clearFontCache(const string& filePath)
 {
+	// Clear font cache
 	if (_fontCache.find(filePath) != _fontCache.end())
 	{
 		TTF_CloseFont(_fontCache[filePath]);
 		_fontCache.erase(filePath);
 	}
-}
 
-void TextureLoader::clearTextCache(const string& textContent, const string& fontPath)
-{
-	if (_textCache.find(make_pair(textContent, fontPath)) != _textCache.end())
+	// Clear text cache
+	for (const auto& [key, textureID] : _textCache)
 	{
-		glDeleteTextures(1, &_textCache[make_pair(textContent, fontPath)]);
-		_textCache.erase(make_pair(textContent, fontPath));
+		// Check if font corresponds
+		if (key.second == filePath)
+		{
+			glDeleteTextures(1, &textureID);
+			_textCache.erase(key);
+		}
 	}
 }
 

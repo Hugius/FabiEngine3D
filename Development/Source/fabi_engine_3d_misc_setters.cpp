@@ -234,11 +234,6 @@ void FabiEngine3D::misc_clearMeshCache(const string& filePath)
 	_core->_meshLoader.clearMeshCache(filePath);
 }
 
-void FabiEngine3D::misc_clearTextCache(const string& textContent, const string& fontPath)
-{
-	_core->_textureLoader.clearTextCache(textContent, fontPath);
-}
-
 void FabiEngine3D::misc_clearFontCache(const string& filePath)
 {
 	_core->_textureLoader.clearFontCache(filePath);

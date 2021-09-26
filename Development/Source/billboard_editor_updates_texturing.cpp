@@ -53,7 +53,6 @@ void BillboardEditor::_updateTexturingMenu()
 			// Set font
 			const string finalFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearFontCache(finalFilePath);
-			_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 			_fe3d.billboardEntity_setFont(_currentBillboardID, finalFilePath);
 
 			// Set default text
@@ -145,8 +144,6 @@ void BillboardEditor::_updateTexturingMenu()
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("textContent", textContent, {}))
 		{
-			_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
-			_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 			_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))

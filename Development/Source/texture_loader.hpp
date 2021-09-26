@@ -29,7 +29,6 @@ public:
 	void clearTextureCache3D(const array<string, 6>& filePaths);
 	void clearBitmapCache(const string& filePath);
 	void clearFontCache(const string& filePath);
-	void clearTextCache(const string& textContent, const string& fontPath);
 	void reloadAnisotropicFiltering();
 
 	// Floats

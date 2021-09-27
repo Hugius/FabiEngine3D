@@ -252,11 +252,12 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		}
 
 		// Set properties
-		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
+		_fe3d.modelEntity_setLightness(newID, partID, _fe3d.modelEntity_getLightness(previewID, partID));
 		_fe3d.modelEntity_setSpecular(newID, partID, _fe3d.modelEntity_isSpecular(previewID, partID));
 		_fe3d.modelEntity_setSpecularShininess(newID, partID, _fe3d.modelEntity_getSpecularShininess(previewID, partID));
 		_fe3d.modelEntity_setSpecularIntensity(newID, partID, _fe3d.modelEntity_getSpecularIntensity(previewID, partID));
-		_fe3d.modelEntity_setLightness(newID, partID, _fe3d.modelEntity_getLightness(previewID, partID));
+		_fe3d.modelEntity_setReflective(newID, partID, _fe3d.modelEntity_isReflective(previewID, partID));
+		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
 		_fe3d.modelEntity_setReflectivity(newID, partID, _fe3d.modelEntity_getReflectivity(previewID, partID));
 		_fe3d.modelEntity_setColor(newID, partID, _fe3d.modelEntity_getColor(previewID, partID));
 		_fe3d.modelEntity_setUvRepeat(newID, partID, _fe3d.modelEntity_getUvRepeat(previewID, partID));

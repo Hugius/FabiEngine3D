@@ -137,7 +137,7 @@ const string FabiEngine3D::misc_getCpuModel() // https://stackoverflow.com/quest
 	// Remove trailing spaces
 	string result;
 	reverse(nameString.begin(), nameString.end());
-	for (unsigned int i = 0; i < nameString.size(); i++)
+	for (size_t i = 0; i < nameString.size(); i++)
 	{
 		// Check if end of whitespace found
 		if (nameString[i] != 0)

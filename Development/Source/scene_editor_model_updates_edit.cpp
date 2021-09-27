@@ -51,7 +51,11 @@ void SceneEditor::_updateModelEditing()
 					// Don't reset if model is active or selected
 					if ((entityID != _activeModelID) && (entityID != _selectedModelID))
 					{
-						_fe3d.modelEntity_setColorInversion(entityID, "", 0.0f);
+						// Reset all parts
+						for (const auto& partID : _fe3d.modelEntity_getPartIDs(entityID))
+						{
+							_fe3d.modelEntity_setColorInversion(entityID, partID, 0.0f);
+						}
 					}
 				}
 			}

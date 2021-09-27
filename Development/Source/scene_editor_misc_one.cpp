@@ -382,7 +382,7 @@ void SceneEditor::_updateModelBlinking(const string& ID, int& direction)
 			}
 
 			// Set model inversion
-			float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
+			const float speed = (MODEL_BLINKING_SPEED * static_cast<float>(direction));
 			_fe3d.modelEntity_setColorInversion(ID, partIDs[i], (_fe3d.modelEntity_getColorInversion(ID, partIDs[i]) + speed));
 		}
 	}

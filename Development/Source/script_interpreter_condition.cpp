@@ -251,7 +251,7 @@ bool ScriptInterpreter::_checkConditionString(const string& conditionString)
 	// Multiple conditions
 	bool finalCondition = conditions[0];
 	string currentLogicalOperator = "";
-	for (unsigned int i = 1; i < conditions.size(); i++)
+	for (size_t i = 1; i < conditions.size(); i++)
 	{
 		if (currentLogicalOperator.empty()) // Save logical operator
 		{

@@ -93,7 +93,7 @@ bool ScriptInterpreter::_isDecimalValue(const string& valueString)
 
 	// Validate every character
 	unsigned dots = 0;
-	for (unsigned int i = startingIndex; i < valueString.size(); i++)
+	for (size_t i = startingIndex; i < valueString.size(); i++)
 	{
 		if (!isdigit(valueString[i]) && valueString[i] != '.')
 		{
@@ -127,7 +127,7 @@ bool ScriptInterpreter::_isIntegerValue(const string& valueString)
 	}
 
 	// Check if every character is a digit
-	for (unsigned int i = startingIndex; i < valueString.size(); i++)
+	for (size_t i = startingIndex; i < valueString.size(); i++)
 	{
 		if (!isdigit(valueString[i]))
 		{

@@ -31,8 +31,14 @@ void AnimationEditor::_updateFrameMenu()
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 		{
+			// Reset color inversion
+			for (const auto& partID : _fe3d.modelEntity_getPartIDs(animation->getPreviewModelID()))
+			{
+				_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), partID, 0.0f);
+			}
+
+			// Miscellaneous
 			_currentPartID = "";
-			_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), "", 0.0f);
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 			return;
 		}
@@ -205,29 +211,45 @@ void AnimationEditor::_updateFrameMenu()
 			}
 			else
 			{
-				// Reset inversion
+				// Check if new part hovered
 				if (_hoveredPartID != selectedButtonID)
 				{
-					_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), "", 0.0f);
+					// Reset color inversion
+					for (const auto& partID : _fe3d.modelEntity_getPartIDs(animation->getPreviewModelID()))
+					{
+						_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), partID, 0.0f);
+					}
 				}
 
+				// Set hovered ID
 				_hoveredPartID = selectedButtonID;
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 		{
+			// Reset color inversion
+			for (const auto& partID : _fe3d.modelEntity_getPartIDs(animation->getPreviewModelID()))
+			{
+				_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), partID, 0.0f);
+			}
+
+			// Miscellaneous
 			_gui.getGlobalScreen()->deleteChoiceForm("parts");
-			_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), "", 0.0f);
 			_hoveredPartID = "";
 		}
 		else
 		{
-			// Reset inversion
+			// Check if a part was hovered
 			if (!_hoveredPartID.empty())
 			{
-				_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), "", 0.0f);
+				// Reset color inversion
+				for (const auto& partID : _fe3d.modelEntity_getPartIDs(animation->getPreviewModelID()))
+				{
+					_fe3d.modelEntity_setColorInversion(animation->getPreviewModelID(), partID, 0.0f);
+				}
 			}
 
+			// Reset hovered ID
 			_hoveredPartID = "";
 		}
 	}

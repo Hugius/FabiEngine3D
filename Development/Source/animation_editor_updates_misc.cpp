@@ -136,18 +136,18 @@ void AnimationEditor::_updateMiscellaneous()
 					// For every animation part
 					for (auto partID : currentAnimation->getPartIDs())
 					{
-						// Default transformation
-						_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-						_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-						_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
-
-						// Only whole model size must be original
-						if (partID.empty())
+						if (partID.empty()) // Base transformation
 						{
-							_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, currentAnimation->getInitialSize());
+							_fe3d.modelEntity_setBasePosition(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.modelEntity_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.modelEntity_setBaseRotation(currentAnimation->getPreviewModelID(), Vec3(0.0f));
+							_fe3d.modelEntity_setBaseSize(currentAnimation->getPreviewModelID(), currentAnimation->getInitialSize());
 						}
-						else
+						else // Part transformation
 						{
+							_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+							_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
+							_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, Vec3(0.0f));
 							_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, Vec3(1.0f));
 						}
 					}
@@ -172,25 +172,53 @@ void AnimationEditor::_updateMiscellaneous()
 									{
 										// Position
 										auto newPosition = (currentAnimation->getInitialSize() * frame.getTargetTransformations().at(partID));
-										_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, newPosition);
+										if (partID.empty())
+										{
+											_fe3d.modelEntity_setBasePosition(currentAnimation->getPreviewModelID(), newPosition);
+										}
+										else
+										{
+											_fe3d.modelEntity_setPartPosition(currentAnimation->getPreviewModelID(), partID, newPosition);
+										}
 									}
 									else if (frame.getTransformationTypes().at(partID) == TransformationType::ROTATION)
 									{
 										// Origin
 										auto currentModelSize = _fe3d.modelEntity_getPartSize(currentAnimation->getPreviewModelID(), partID);
 										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partID));
-										_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
+										if (partID.empty())
+										{
+											_fe3d.modelEntity_setBaseRotationOrigin(currentAnimation->getPreviewModelID(), newOrigin);
+										}
+										else
+										{
+											_fe3d.modelEntity_setPartRotationOrigin(currentAnimation->getPreviewModelID(), partID, newOrigin);
+										}
 
 										// Rotation
 										auto newRotation = frame.getTargetTransformations().at(partID);
-										_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, newRotation);
+										if (partID.empty())
+										{
+											_fe3d.modelEntity_setBaseRotation(currentAnimation->getPreviewModelID(), newRotation);
+										}
+										else
+										{
+											_fe3d.modelEntity_setPartRotation(currentAnimation->getPreviewModelID(), partID, newRotation);
+										}
 									}
 									else if (frame.getTransformationTypes().at(partID) == TransformationType::SCALING)
 									{
 										// Size
 										auto modelSize = (partID.empty() ? currentAnimation->getInitialSize() : Vec3(1.0f));
 										auto newSize = (modelSize + (modelSize * frame.getTargetTransformations().at(partID)));
-										_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, newSize);
+										if (partID.empty())
+										{
+											_fe3d.modelEntity_setBaseSize(currentAnimation->getPreviewModelID(), newSize);
+										}
+										else
+										{
+											_fe3d.modelEntity_setPartSize(currentAnimation->getPreviewModelID(), partID, newSize);
+										}
 									}
 								}
 							}

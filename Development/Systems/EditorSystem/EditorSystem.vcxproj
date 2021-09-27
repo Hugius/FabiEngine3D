@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation.cpp" />
-    <ClCompile Include="..\..\Source\animation_editor_execution.cpp" />
+    <ClCompile Include="..\..\Source\animation_editor_updates_execution.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_interface.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_main.cpp" />
     <ClCompile Include="..\..\Source\animation_editor_misc.cpp" />

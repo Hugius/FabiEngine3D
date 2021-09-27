@@ -151,21 +151,33 @@
     <Filter Include="Scene Editor\Persistence\Custom">
       <UniqueIdentifier>{4ceef589-4ca6-4266-a3a4-efaca2751088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script Editor\Persistence">
+      <UniqueIdentifier>{292288e6-2bf3-44d2-9fa5-79da4ac1130f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sky Editor\Persistence">
+      <UniqueIdentifier>{fa359fee-c847-4de6-b19f-eb9f79335d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Terrain Editor\Persistence">
+      <UniqueIdentifier>{18369043-e3a7-4334-a3d9-f7f3e5cd9f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Water Editor\Persistence">
+      <UniqueIdentifier>{9cd6b5a4-b16f-40e7-afdb-1170458e9ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Billboard Editor\Persistence">
+      <UniqueIdentifier>{56c13b35-dfec-489b-8bb5-898cc76156f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio Editor\Persistence">
+      <UniqueIdentifier>{a017341e-9ace-40d8-8090-f5b3370da817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation Editor\Persistence">
+      <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\animation_editor_main.cpp">
       <Filter>Animation Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_persistence.cpp">
-      <Filter>Animation Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_interface.cpp">
-      <Filter>Animation Editor\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_misc.cpp">
-      <Filter>Animation Editor\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\animation_editor_execution.cpp">
       <Filter>Animation Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_updates_main.cpp">
@@ -180,9 +192,6 @@
     <ClCompile Include="..\..\Source\audio_editor_main.cpp">
       <Filter>Audio Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\audio_editor_persistence.cpp">
-      <Filter>Audio Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\audio_editor_misc.cpp">
       <Filter>Audio Editor\Miscellaneous</Filter>
     </ClCompile>
@@ -193,9 +202,6 @@
       <Filter>Audio Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_main.cpp">
-      <Filter>Billboard Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp">
       <Filter>Billboard Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_misc.cpp">
@@ -306,9 +312,6 @@
     <ClCompile Include="..\..\Source\script_editor_main.cpp">
       <Filter>Script Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_editor_persistence.cpp">
-      <Filter>Script Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\script_editor_updates_writer.cpp">
       <Filter>Script Editor\Updates</Filter>
     </ClCompile>
@@ -329,15 +332,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\billboard_editor_updates_misc.cpp">
       <Filter>Billboard Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\sky_editor_persistence.cpp">
-      <Filter>Sky Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\terrain_editor_persistence.cpp">
-      <Filter>Terrain Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\water_editor_persistence.cpp">
-      <Filter>Water Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\terrain_editor_updates_main.cpp">
       <Filter>Terrain Editor\Updates</Filter>
@@ -446,6 +440,33 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\terrain_editor_updates_miscellaneous.cpp">
       <Filter>Terrain Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_updates_execution.cpp">
+      <Filter>Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_interface.cpp">
+      <Filter>Animation Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_editor_persistence.cpp">
+      <Filter>Script Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\sky_editor_persistence.cpp">
+      <Filter>Sky Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\terrain_editor_persistence.cpp">
+      <Filter>Terrain Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\water_editor_persistence.cpp">
+      <Filter>Water Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\billboard_editor_persistence.cpp">
+      <Filter>Billboard Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\audio_editor_persistence.cpp">
+      <Filter>Audio Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\animation_editor_persistence.cpp">
+      <Filter>Animation Editor\Persistence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

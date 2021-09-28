@@ -31,11 +31,13 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				bool executed = false;
 
 				// Possibly execute FE3D function
-				executed = (executed || _executeFe3dInputFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dInputGetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dCameraFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSkyEntityFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dTerrainEntityFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dWaterEntityFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dSkySetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dSkyGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dTerrainGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dWaterSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dWaterGetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dModelSetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dModelGetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dBillboardSetterFunction(functionName, arguments, returnValues));

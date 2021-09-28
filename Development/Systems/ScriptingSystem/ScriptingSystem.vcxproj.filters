@@ -96,7 +96,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input_getters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc.cpp">
@@ -138,19 +138,16 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb_getters.cpp">
-      <Filter>Execution\Interpreter\Function\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard_setters.cpp">
@@ -202,6 +199,12 @@
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
   </ItemGroup>

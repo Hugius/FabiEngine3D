@@ -27,7 +27,6 @@
     <ClCompile Include="..\..\Source\script_interpreter_execution.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb_setters.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera.cpp" />
@@ -37,7 +36,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_graphics.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_getters.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d.cpp" />
@@ -51,13 +50,15 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_server.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky_setters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_validation.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water_setters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_math.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_misc.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_list_main.cpp" />

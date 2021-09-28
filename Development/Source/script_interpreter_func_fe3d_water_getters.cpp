@@ -1,25 +1,9 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:water_set_speed")
-	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate water existence
-			if (_validateFe3dWaterEntity())
-			{
-				_fe3d.waterEntity_setSpeed(_fe3d.waterEntity_getSelectedID(), 
-					Vec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:water_get_speed_x")
+	if (functionName == "fe3d:water_get_speed_x")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -58,24 +42,6 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_set_color")
-	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate water existence
-			if (_validateFe3dWaterEntity())
-			{
-				_fe3d.waterEntity_setColor(_fe3d.waterEntity_getSelectedID(), Vec3(
-					arguments[0].getDecimal(), 
-					arguments[1].getDecimal(),
-					arguments[2].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
 	else if (functionName == "fe3d:water_get_color")
 	{
 		// Validate arguments
@@ -86,21 +52,6 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			{
 				auto result = _fe3d.waterEntity_getColor(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:water_set_transparency")
-	{
-		auto types = { ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate water existence
-			if (_validateFe3dWaterEntity())
-			{
-				_fe3d.waterEntity_setTransparency(_fe3d.waterEntity_getSelectedID(), arguments[0].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}

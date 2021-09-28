@@ -2,6 +2,11 @@
 
 bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
+	// Temporary values
+	bool isSetterFound = true;
+	bool isGetterFound = true;
+
+	// Setters
 	if (functionName == "fe3d:model_start_animation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
@@ -14,66 +19,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			{
 				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_is_animation_started")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				auto result = _animationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_is_animation_playing")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				auto result = _animationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_is_animation_paused")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				auto result = _animationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_is_animation_fading")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
-			{
-				auto result = _animationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}
@@ -183,6 +128,72 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			}
 		}
 	}
+	else
+	{
+		isSetterFound = false;
+	}
+
+	// Getters
+	if (functionName == "fe3d:model_is_animation_started")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_is_animation_playing")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_is_animation_paused")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_is_animation_fading")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModelEntity(arguments[0].getString()))
+			{
+				auto result = _animationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:model_get_animation_speed")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
@@ -242,7 +253,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
 				auto animationData = _animationEditor.getAnimationData(arguments[1].getString(), arguments[0].getString(), errorMessage);
-				
+
 				// Check if animation was found
 				if (animationData != nullptr)
 				{
@@ -254,7 +265,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else
 	{
-		return false;
+		isGetterFound = false;
 	}
 
 	// Cannot execute model functionality when server is running
@@ -263,5 +274,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 		_throwScriptError("cannot access `fe3d:model` functionality as a networking server!");
 	}
 
+	// Return
 	return true;
 }

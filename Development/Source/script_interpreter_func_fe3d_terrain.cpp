@@ -1,17 +1,5 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dTerrainEntity()
-{
-	// Check if entity exists
-	if (_fe3d.terrainEntity_getSelectedID().empty())
-	{
-		_throwScriptError("current scene has no terrain entity!");
-		return false;
-	}
-
-	return true;
-}
-
 bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -69,5 +57,6 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 		_throwScriptError("cannot access `fe3d:terrain` functionality as a networking server!");
 	}
 
+	// Return
 	return true;
 }

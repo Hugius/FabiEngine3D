@@ -1,17 +1,5 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dWaterEntity()
-{
-	// Check if entity exists
-	if (_fe3d.waterEntity_getSelectedID().empty())
-	{
-		_throwScriptError("current scene has no water entity!");
-		return false;
-	}
-
-	return true;
-}
-
 bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -140,5 +128,6 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 		_throwScriptError("cannot access `fe3d:water` functionality as a networking server!");
 	}
 
+	// Return
 	return true;
 }

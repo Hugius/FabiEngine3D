@@ -31,30 +31,36 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				bool executed = false;
 
 				// Possibly execute FE3D function
-				executed = executed || _executeFe3dInputFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dCameraFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dSkyEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dTerrainEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dWaterEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dModelEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dBillboardEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dAabbEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dLightEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dReflectionEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dImageEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dTextEntityFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dSoundFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dAnimationFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dRaycastFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dCollisionFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dLightingFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dGraphicsFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dMusicFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dFilesystemFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dSceneFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dServerFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dClientFunction(functionName, arguments, returnValues);
-				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
+				executed = (executed || _executeFe3dInputFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dCameraFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dSkyEntityFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dTerrainEntityFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dWaterEntityFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dModelSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dModelGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dBillboardSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dBillboardGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dAabbSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dAabbGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dLightSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dLightGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dReflectionSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dReflectionGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dImageSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dImageGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dTextSetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dTextGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dSoundFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dRaycastFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dCollisionFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dLightingFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dGraphicsFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dMusicFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dFilesystemFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dSceneFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dServerFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dClientFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dMiscFunction(functionName, arguments, returnValues));
 
 				// Check if function call exists
 				if (executed)

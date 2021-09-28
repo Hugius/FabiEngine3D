@@ -43,6 +43,9 @@
     <Filter Include="Execution\Interpreter\Function\Networking">
       <UniqueIdentifier>{847cc0de-5f17-483f-8f9d-0fee2643eea6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Execution\Interpreter\Function\Audio">
+      <UniqueIdentifier>{f0265524-b264-47ea-9dfc-72cb593e78c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\script.cpp">
@@ -144,38 +147,62 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_animation.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp">
-      <Filter>Execution\Interpreter\Function\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text.cpp">
-      <Filter>Execution\Interpreter\Function\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_reflection.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_reflection_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_condition_statement.cpp">
       <Filter>Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_music.cpp">
+      <Filter>Execution\Interpreter\Function\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound.cpp">
+      <Filter>Execution\Interpreter\Function\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_aabb_setters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_validation.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_billboard_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_reflection_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

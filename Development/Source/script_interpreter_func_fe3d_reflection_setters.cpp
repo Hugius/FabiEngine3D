@@ -1,94 +1,9 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dReflectionEntity(const string& ID)
-{
-	// Cannot request/delete an engine entity
-	if (ID.front() == '@')
-	{
-		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot start with '@'!");
-		return false;
-	}
-
-	// Check if entity exists
-	if (!_fe3d.reflectionEntity_isExisting(ID))
-	{
-		_throwScriptError("requested reflection with ID \"" + ID + "\" does not exist!");
-		return false;
-	}
-
-	return true;
-}
-
-bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:reflection_is_existing")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Cannot request a preview entity
-			if (arguments[0].getString().front() == '@')
-			{
-				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
-				return true;
-			}
-
-			// Check if existing
-			auto result = _fe3d.reflectionEntity_isExisting(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
-	else if (functionName == "fe3d:reflection_find_ids")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Cannot request a preview entity
-			if (arguments[0].getString().front() == '@')
-			{
-				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
-				return true;
-			}
-
-			// Find full reflection IDs based on part ID
-			for (const auto& ID : _fe3d.reflectionEntity_getAllIDs())
-			{
-				// If substring matches
-				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
-				{
-					// Only non-preview reflections
-					if (ID.front() != '@')
-					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-					}
-				}
-			}
-		}
-	}
-	else if (functionName == "fe3d:reflection_get_all_ids")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.reflectionEntity_getAllIDs();
-
-			// For every reflection
-			for (const auto& ID : result)
-			{
-				// Only non-preview reflections
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
-			}
-		}
-	}
-	else if (functionName == "fe3d:reflection_place")
+	if (functionName == "fe3d:reflection_place")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -150,21 +65,6 @@ bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& funct
 			}
 		}
 	}
-	else if (functionName == "fe3d:reflection_is_visible")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
-			{
-				auto result = _fe3d.reflectionEntity_isVisible(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:reflection_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
@@ -213,21 +113,6 @@ bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& funct
 			}
 		}
 	}
-	else if (functionName == "fe3d:reflection_get_position")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
-			{
-				auto result = _fe3d.reflectionEntity_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:reflection_capture")
 	{
 		auto types = { ScriptValueType::STRING };
@@ -254,5 +139,6 @@ bool ScriptInterpreter::_executeFe3dReflectionEntityFunction(const string& funct
 		_throwScriptError("cannot access `fe3d:reflection` functionality as a networking server!");
 	}
 
+	// Return
 	return true;
 }

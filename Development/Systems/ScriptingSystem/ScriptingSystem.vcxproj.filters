@@ -75,10 +75,10 @@
     <ClCompile Include="..\..\Source\script_interpreter_string_operations.cpp">
       <Filter>Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_raycast.cpp">
@@ -87,13 +87,13 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_scene.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_graphics.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_graphics_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_setters.cpp">
       <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input_getters.cpp">
@@ -206,6 +206,21 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_water_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_camera_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_collision_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_filesystem_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_graphics_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

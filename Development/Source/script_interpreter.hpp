@@ -21,6 +21,7 @@ public:
 		WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, 
 		BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor);
 
+	// Voids
 	void setCurrentProjectID(const string& projectID);
 	void load();
 	void executeInitialization();
@@ -28,51 +29,62 @@ public:
 	void executeDestruction();
 	void unload();
 
+	// Booleans
 	bool hasThrownError();
 	bool gameMustStop();
 
 private:
-	// Core functions
+	// Voids
 	void _executeScript(const string& scriptID, ScriptType scriptType);
+	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
+	void _processVariableAlteration(const string& scriptLine);
+	void _processVariableArithmetic(const string& scriptLine);
+	void _processVariableTypecast(const string& scriptLine);
+	void _processListPush(const string& scriptLine);
+	void _processListPull(const string& scriptLine);
+	void _throwScriptError(const string& message);
+	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 
-	// Value functions
+	// Instances
+	vector<ScriptValue> _extractValuesFromListString(const string& listString);
+	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
+	ScriptVariable& _getLocalVariable(const string& variableID);
+	ScriptVariable& _getGlobalVariable(const string& variableID);
+	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
+
+	// Strings
+	string _limitIntegerString(const string& valueString);
+	string _limitDecimalString(const string& valueString);
+
+	// Vectors
+	Vec3 _extractVec3FromString(const string& valueString);
+	Ivec3 _extractVec3PartFromString(const string& valueString);
+	Vec2 _convertGuiPositionToViewport(Vec2 position);
+	Vec2 _convertGuiPositionFromViewport(Vec2 position);
+	Vec2 _convertGuiSizeToViewport(Vec2 size);
+	Vec2 _convertGuiSizeFromViewport(Vec2 size);
+
+	// Integers
+	int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
+	unsigned int _countFrontSpaces(const string& scriptLineText);
+
+	// Booleans
 	bool _isListValue(const string& valueString);
 	bool _isVec3Value(const string& valueString);
 	bool _isStringValue(const string& valueString);
 	bool _isDecimalValue(const string& valueString);
 	bool _isIntegerValue(const string& valueString);
 	bool _isBooleanValue(const string& valueString);
-	Vec3 _extractVec3FromString(const string& valueString);
-	Ivec3 _extractVec3PartFromString(const string& valueString);
-	int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
-
-	// Variable functions
-	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
-	void _processVariableAlteration(const string& scriptLine);
-	void _processVariableArithmetic(const string& scriptLine);
-	void _processVariableTypecast(const string& scriptLine);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
-	ScriptVariable& _getLocalVariable(const string& variableID);
-	ScriptVariable& _getGlobalVariable(const string& variableID);
-
-	// If statement functions
 	bool _checkConditionString(const string& conditionString);
 	bool _validateCondition(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
 	bool _compareValues(ScriptValue& firstValue, const string& comparisonOperator, ScriptValue& secondValue);
-
-	// List functions
 	bool _validateListIndex(ScriptVariable& list, unsigned int index);
 	bool _validateListValueCount(const vector<ScriptValue>& values, unsigned int count);
 	bool _validateListValueTypes(const vector<ScriptValue>& values, const vector<ScriptValueType>& types);
-	vector<ScriptValue> _extractValuesFromListString(const string& listString);
-	void _processListPush(const string& scriptLine);
-	void _processListPull(const string& scriptLine);
-
-	// Functioncall functions
-	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
-	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
-	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
 	bool _executeFe3dInputGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCameraSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCameraGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -98,47 +110,40 @@ private:
 	bool _executeFe3dImageGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dTextSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dTextGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dSoundFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSoundSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSoundGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dLightingSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dLightingGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dGraphicsSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dGraphicsGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dMusicFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dMusicSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dMusicGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dFilesystemGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dSceneFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dServerFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dClientFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _validateFe3dSkyEntity();
-	bool _validateFe3dTerrainEntity();
-	bool _validateFe3dWaterEntity();
-	bool _validateFe3dModelEntity(const string& ID, bool isPreviewEntity = false);
-	bool _validateFe3dBillboardEntity(const string& ID, bool isPreviewEntity = false);
-	bool _validateFe3dAabbEntity(const string& ID);
-	bool _validateFe3dLightEntity(const string& ID);
-	bool _validateFe3dReflectionEntity(const string& ID);
-	bool _validateFe3dImageEntity(const string& ID);
-	bool _validateFe3dTextEntity(const string& ID);
-	bool _validateFe3dSound(const string& ID, bool isPreviewEntity = false);
-
-	// Miscellaneous functions
-	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
-	string _limitIntegerString(const string& valueString);
-	string _limitDecimalString(const string& valueString);
-	unsigned int _countFrontSpaces(const string& scriptLineText);
+	bool _executeFe3dMiscSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dMiscGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _validateFe3dModel(const string& ID, bool isPreview = false);
+	bool _validateFe3dBillboard(const string& ID, bool isPreview = false);
+	bool _validateFe3dSound(const string& ID, bool isPreview = false);
+	bool _validateFe3dAabb(const string& ID);
+	bool _validateFe3dLight(const string& ID);
+	bool _validateFe3dReflection(const string& ID);
+	bool _validateFe3dImage(const string& ID);
+	bool _validateFe3dText(const string& ID);
+	bool _validateFe3dSky();
+	bool _validateFe3dTerrain();
+	bool _validateFe3dWater();
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	bool _validateKeyInputString(const string& inputString);
 	bool _validateMouseInputString(const string& inputString);
 	bool _validateSavesDirectory();
-	Vec2 _convertGuiPositionToViewport(Vec2 position);
-	Vec2 _convertGuiPositionFromViewport(Vec2 position);
-	Vec2 _convertGuiSizeToViewport(Vec2 size);
-	Vec2 _convertGuiSizeFromViewport(Vec2 size);
-	void _throwScriptError(const string& message);
-	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 
 	// Instances
+	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
+	unordered_map<string, ScriptVariable> _globalVariables;
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	SkyEditor& _skyEditor;
@@ -150,24 +155,7 @@ private:
 	AudioEditor& _audioEditor;
 	SceneEditor& _sceneEditor;
 
-	// Dictionaries
-	map<string, float> _debuggingTimes;
-	unordered_map<string, ScriptVariable> _globalVariables;
-	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
-
-	// Vectors
-	vector<string> _currentScriptIDsStack;
-	vector<unsigned int> _currentLineIndexStack;
-	vector<string> _lineStringStreams;
-	vector<string> _initScriptIDs;
-	vector<string> _updateScriptIDs;
-	vector<string> _destroyScriptIDs;
-
 	// Strings
-	string _currentProjectID = "";
-	string _initEntryID = "";
-	string _updateEntryID = "";
-	string _destroyEntryID = "";
 	static inline const string META_KEYWORD = "META";
 	static inline const string EXECUTE_KEYWORD = "EXEC";
 	static inline const string LOOP_KEYWORD = "LOOP";
@@ -199,11 +187,24 @@ private:
 	static inline const string PUSHING_KEYWORD = "PUSH";
 	static inline const string PULLING_KEYWORD = "PULL";
 	static inline const string PASS_KEYWORD = "PASS";
+	vector<string> _currentScriptIDsStack;
+	vector<string> _lineStringStreams;
+	vector<string> _initScriptIDs;
+	vector<string> _updateScriptIDs;
+	vector<string> _destroyScriptIDs;
+	string _currentProjectID = "";
+	string _initEntryID = "";
+	string _updateEntryID = "";
+	string _destroyEntryID = "";
+
+	// Floats
+	map<string, float> _debuggingTimes;
 
 	// Integers
 	static inline const unsigned int SPACES_PER_INDENT = 4;
 	static inline const unsigned int MAX_ITERATIONS_PER_LOOP = 1000;
 	static inline const unsigned int MAX_EXECUTION_DEPTH = 10;
+	vector<unsigned int> _currentLineIndexStack;
 	unsigned int _engineFunctionCallCount = 0;
 	unsigned int _executionDepth = 0;
 
@@ -220,7 +221,7 @@ private:
 	bool _isExecutingUpdate = false;
 	bool _isExecutingDestruction = false;
 
-	// String to input type map
+	// Miscellaneous
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},
@@ -317,7 +318,6 @@ private:
 		{"KEY_PERIOD", InputType::KEY_PERIOD},
 		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
-
 	static inline const map<string, InputType> MOUSE_INPUT_STRING_MAP =
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},

@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:music_add_to_playlist")
@@ -52,33 +52,6 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:music_get_volume")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.music_getVolume();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-		}
-	}
-	else if (functionName == "fe3d:music_is_started")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.music_isStarted();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
-	else if (functionName == "fe3d:music_is_playing")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.music_isPlaying();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
 	else if (functionName == "fe3d:music_pause")
 	{
 		// Validate arguments
@@ -86,15 +59,6 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 		{
 			_fe3d.music_pause();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:music_is_paused")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.music_isPaused();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:music_resume")

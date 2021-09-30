@@ -77,7 +77,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -92,7 +92,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getBasePosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -107,7 +107,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getBaseRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -122,7 +122,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getBaseRotationOrigin(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -137,7 +137,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getBaseSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -152,7 +152,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				//auto result = _fe3d.modelEntity_getColor(arguments[0].getString());
 				//returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -167,7 +167,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getMinHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -182,7 +182,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _fe3d.modelEntity_getMaxHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -197,7 +197,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				//auto result = _fe3d.modelEntity_getLightness(arguments[0].getString());
 				//returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -212,7 +212,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				//auto result = _fe3d.modelEntity_getAlpha(arguments[0].getString());
 				//returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -227,7 +227,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _animationEditor.isAnimationStarted(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -242,7 +242,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _animationEditor.isAnimationPlaying(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -257,7 +257,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _animationEditor.isAnimationPaused(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -272,7 +272,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				auto result = _animationEditor.isAnimationFading(arguments[1].getString(), arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -287,7 +287,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation speed with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
@@ -310,7 +310,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation autopause option with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";
@@ -333,7 +333,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dModelEntity(arguments[0].getString()))
+			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				// Retrieve animation data
 				string errorMessage = "Tried to get animation frame index with ID \"" + arguments[1].getString() + "\" on model with ID \"" + arguments[0].getString() + "\": ";

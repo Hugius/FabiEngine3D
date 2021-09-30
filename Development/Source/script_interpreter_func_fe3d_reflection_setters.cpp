@@ -43,7 +43,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -58,7 +58,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -73,7 +73,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_setPosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -89,7 +89,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -105,7 +105,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_moveTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
@@ -121,7 +121,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_capture(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

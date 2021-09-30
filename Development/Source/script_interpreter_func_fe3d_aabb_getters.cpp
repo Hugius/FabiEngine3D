@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
-			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
@@ -88,7 +88,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
-			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
@@ -113,7 +113,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing AABB ID
-			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
 				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())

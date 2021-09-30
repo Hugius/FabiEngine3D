@@ -55,61 +55,6 @@ public:
 	bool application_isPaused();
 	bool application_isExported();
 
-	// Input interface - setters
-	void input_setLocked(bool locked);
-
-	// Input interface - getters
-	const int input_getMouseWheelX();
-	const int input_getMouseWheelY();
-	const bool input_isLocked();
-	const bool input_isKeyDown(InputType key);
-	const bool input_isKeyPressed(InputType key);
-	const bool input_isMouseDown(InputType button);
-	const bool input_isMousePressed(InputType button);
-
-	// Camera interface - setters
-	void camera_reset();
-	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
-	void camera_enableThirdPersonView(float initialYaw, float initialPitch);
-	void camera_disableFirstPersonView();
-	void camera_disableThirdPersonView();
-	void camera_moveFollowX(float speed);
-	void camera_moveFollowZY(float speed);
-	void camera_moveFollowZ(float speed);
-	void camera_move(Vec3 speed);
-	void camera_setPosition(Vec3 position);
-	void camera_setThirdPersonLookat(Vec3 position);
-	void camera_setThirdPersonDistance(float distance);
-	void camera_setFOV(float angle);
-	void camera_setYaw(float angle);
-	void camera_setPitch(float angle);
-	void camera_setMinFirstPersonPitch(float angle);
-	void camera_setMaxFirstPersonPitch(float angle);
-	void camera_setMinThirdPersonPitch(float angle);
-	void camera_setMaxThirdPersonPitch(float angle);
-	void camera_setNearZ(float distance);
-	void camera_setFarZ(float farZ);
-	void camera_setMouseSensitivity(float speed);
-
-	// Camera interface - getters
-	const Vec3 camera_getPosition();
-	const Vec3 camera_getThirdPersonLookat();
-	const float camera_getFOV();
-	const float getAspectRatio();
-	const float camera_getMouseSensitivity();
-	const float camera_getYaw();
-	const float camera_getPitch();
-	const float camera_getFirstPersonYaw();
-	const float camera_getFirstPersonPitch();
-	const float camera_getThirdPersonYaw();
-	const float camera_getThirdPersonPitch();
-	const float camera_getThirdPersonDistance();
-	const float camera_getNearDistance();
-	const float camera_getFarDistance();
-	const float camera_getMouseOffset();
-	const bool camera_isThirdPersonViewEnabled();
-	const bool camera_isFirstPersonViewEnabled();
-
 	// Sky entity interface - setters
 	void skyEntity_create(const string& ID);
 	void skyEntity_deleteAll();
@@ -489,28 +434,6 @@ public:
 	const bool aabbEntity_hasParent(const string& ID);
 	const AabbParentType aabbEntity_getParentType(const string& ID);
 
-	// Global collision interface - setters
-	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
-	void collision_enableCameraResponse(bool x, bool y, bool z);
-	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
-	void collision_disableCameraResponse();
-	void collision_disableTerrainResponse();
-
-	// Global collision interface - getters
-	const string collision_checkCameraWithAny();
-	const string collision_checkCameraWithEntities(const string& ID);
-	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
-	const bool collision_checkCameraWithTerrain();
-	const bool collision_checkCameraWithEntity(const string& ID);
-	const bool collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
-	const bool collision_checkCameraWithAnyDirection(Direction direction);
-	const bool collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
-	const bool collision_isCameraResponseEnabled();
-	const bool collision_isTerrainResponseEnabled();
-	const pair<const string, float> collision_checkCursorInAny();
-	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded);
-	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
-
 	// Light entity interface - setters
 	void lightEntity_create(const string& ID);
 	void lightEntity_deleteAll();
@@ -686,6 +609,83 @@ public:
 	const bool music_isStarted();
 	const bool music_isPlaying();
 	const bool music_isPaused();
+
+	// Input interface - setters
+	void input_setLocked(bool locked);
+
+	// Input interface - getters
+	const int input_getMouseWheelX();
+	const int input_getMouseWheelY();
+	const bool input_isLocked();
+	const bool input_isKeyDown(InputType key);
+	const bool input_isKeyPressed(InputType key);
+	const bool input_isMouseDown(InputType button);
+	const bool input_isMousePressed(InputType button);
+
+	// Camera interface - setters
+	void camera_reset();
+	void camera_enableFirstPersonView(float initialYaw, float initialPitch);
+	void camera_enableThirdPersonView(float initialYaw, float initialPitch);
+	void camera_disableFirstPersonView();
+	void camera_disableThirdPersonView();
+	void camera_moveFollowX(float speed);
+	void camera_moveFollowZY(float speed);
+	void camera_moveFollowZ(float speed);
+	void camera_move(Vec3 speed);
+	void camera_setPosition(Vec3 position);
+	void camera_setThirdPersonLookat(Vec3 position);
+	void camera_setThirdPersonDistance(float distance);
+	void camera_setFOV(float angle);
+	void camera_setYaw(float angle);
+	void camera_setPitch(float angle);
+	void camera_setMinFirstPersonPitch(float angle);
+	void camera_setMaxFirstPersonPitch(float angle);
+	void camera_setMinThirdPersonPitch(float angle);
+	void camera_setMaxThirdPersonPitch(float angle);
+	void camera_setNearZ(float distance);
+	void camera_setFarZ(float farZ);
+	void camera_setMouseSensitivity(float speed);
+
+	// Camera interface - getters
+	const Vec3 camera_getPosition();
+	const Vec3 camera_getThirdPersonLookat();
+	const float camera_getFOV();
+	const float getAspectRatio();
+	const float camera_getMouseSensitivity();
+	const float camera_getYaw();
+	const float camera_getPitch();
+	const float camera_getFirstPersonYaw();
+	const float camera_getFirstPersonPitch();
+	const float camera_getThirdPersonYaw();
+	const float camera_getThirdPersonPitch();
+	const float camera_getThirdPersonDistance();
+	const float camera_getNearDistance();
+	const float camera_getFarDistance();
+	const float camera_getMouseOffset();
+	const bool camera_isThirdPersonViewEnabled();
+	const bool camera_isFirstPersonViewEnabled();
+
+	// Collision interface - setters
+	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
+	void collision_enableCameraResponse(bool x, bool y, bool z);
+	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
+	void collision_disableCameraResponse();
+	void collision_disableTerrainResponse();
+
+	// Collision interface - getters
+	const string collision_checkCameraWithAny();
+	const string collision_checkCameraWithEntities(const string& ID);
+	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
+	const bool collision_checkCameraWithTerrain();
+	const bool collision_checkCameraWithEntity(const string& ID);
+	const bool collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
+	const bool collision_checkCameraWithAnyDirection(Direction direction);
+	const bool collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
+	const bool collision_isCameraResponseEnabled();
+	const bool collision_isTerrainResponseEnabled();
+	const pair<const string, float> collision_checkCursorInAny();
+	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded);
+	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
 
 	// Graphics interface - setters
 	void gfx_setPlanarReflectionHeight(float height);

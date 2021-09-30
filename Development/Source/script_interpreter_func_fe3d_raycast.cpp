@@ -29,7 +29,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.misc_getRaycastVector();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.misc_getRaycastPointOnTerrain();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -55,7 +55,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.misc_isRaycastPointOnTerrainValid();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));

@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				float halfTerrainSize = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()) / 2.0f;
 				auto result = _fe3d.terrainEntity_getPixelHeight(_fe3d.terrainEntity_getSelectedID(), 
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.terrainEntity_getMaxHeight(_fe3d.terrainEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -39,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate terrain existence
-			if (_validateFe3dTerrainEntity())
+			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));

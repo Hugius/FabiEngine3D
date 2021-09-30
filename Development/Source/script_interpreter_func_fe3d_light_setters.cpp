@@ -53,7 +53,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -68,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -83,7 +83,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setPosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -99,7 +99,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -115,7 +115,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_moveTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
@@ -131,7 +131,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -147,7 +147,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -162,7 +162,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setRadius(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

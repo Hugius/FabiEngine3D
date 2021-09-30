@@ -77,7 +77,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -92,7 +92,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).x));
@@ -107,7 +107,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).y));
@@ -122,7 +122,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -137,7 +137,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).x));
@@ -152,7 +152,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).y));
@@ -167,7 +167,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -182,7 +182,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getTextContent(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
@@ -197,7 +197,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing text ID
-			if (_validateFe3dTextEntity(arguments[0].getString()))
+			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getAlpha(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));

@@ -77,7 +77,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -92,7 +92,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing reflection ID
-			if (_validateFe3dReflectionEntity(arguments[0].getString()))
+			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));

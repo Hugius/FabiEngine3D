@@ -11,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				_fe3d.waterEntity_setSpeed(_fe3d.waterEntity_getSelectedID(), 
 					Vec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
@@ -27,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				_fe3d.waterEntity_setColor(_fe3d.waterEntity_getSelectedID(), Vec3(
 					arguments[0].getDecimal(), 
@@ -45,7 +45,7 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				_fe3d.waterEntity_setTransparency(_fe3d.waterEntity_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

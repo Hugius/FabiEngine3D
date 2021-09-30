@@ -70,7 +70,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -85,7 +85,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -100,7 +100,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -115,7 +115,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getIntensity(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -130,7 +130,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getRadius(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -145,7 +145,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -160,7 +160,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing light ID
-			if (_validateFe3dLightEntity(arguments[0].getString()))
+			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));

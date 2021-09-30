@@ -9,7 +9,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).x;
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -22,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).y;
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getHeight(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getColor(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
@@ -61,7 +61,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate water existence
-			if (_validateFe3dWaterEntity())
+			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getTransparency(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));

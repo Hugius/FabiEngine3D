@@ -62,7 +62,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -77,7 +77,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -92,7 +92,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.imageEntity_setPosition(arguments[0].getString(), position);
@@ -108,7 +108,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.imageEntity_move(arguments[0].getString(), change);
@@ -124,7 +124,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
@@ -141,7 +141,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -156,7 +156,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -171,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -186,7 +186,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.imageEntity_setSize(arguments[0].getString(), size);
@@ -202,7 +202,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.imageEntity_scale(arguments[0].getString(), change);
@@ -218,7 +218,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
@@ -235,7 +235,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
@@ -251,7 +251,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -273,7 +273,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setSpriteAnimationRows(arguments[0].getString(), arguments[1].getInteger());
 				_fe3d.imageEntity_setSpriteAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
@@ -291,7 +291,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_pauseSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -306,7 +306,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_resumeSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -321,7 +321,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_stopSpriteAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -336,7 +336,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setMirroredHorizontally(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -351,7 +351,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing image ID
-			if (_validateFe3dImageEntity(arguments[0].getString()))
+			if (_validateFe3dImage(arguments[0].getString()))
 			{
 				_fe3d.imageEntity_setMirroredVertically(arguments[0].getString(), arguments[1].getBoolean());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

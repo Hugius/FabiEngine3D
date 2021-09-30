@@ -9,7 +9,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
-			if (_validateFe3dSkyEntity())
+			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getMixID();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
@@ -22,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
-			if (_validateFe3dSkyEntity())
+			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getMixValue();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
-			if (_validateFe3dSkyEntity())
+			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getRotationSpeed(_fe3d.skyEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
-			if (_validateFe3dSkyEntity())
+			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getLightness(_fe3d.skyEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
@@ -61,7 +61,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
-			if (_validateFe3dSkyEntity())
+			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getColor(_fe3d.skyEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));

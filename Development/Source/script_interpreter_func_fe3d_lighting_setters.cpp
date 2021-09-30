@@ -36,15 +36,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_ambient_color")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getAmbientLightingColor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-		}
-	}
 	else if (functionName == "fe3d:lighting_set_ambient_intensity")
 	{
 		auto types = { ScriptValueType::DECIMAL };
@@ -54,15 +45,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		{
 			_fe3d.gfx_enableAmbientLighting(_fe3d.gfx_getAmbientLightingColor(), arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_get_ambient_intensity")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getAmbientLightingIntensity();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:lighting_enable_directional")
@@ -102,15 +84,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_directional_position")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getDirectionalLightingPosition();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-		}
-	}
 	else if (functionName == "fe3d:lighting_set_directional_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
@@ -123,15 +96,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
 				_fe3d.gfx_getDirectionalLightingIntensity());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_get_directional_color")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getDirectionalLightingColor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
 	else if (functionName == "fe3d:lighting_set_directional_intensity")
@@ -148,15 +112,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_directional_intensity")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getDirectionalLightingIntensity();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-		}
-	}
 	else if (functionName == "fe3d:lighting_set_directional_billboard_size")
 	{
 		auto types = { ScriptValueType::DECIMAL };
@@ -166,15 +121,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		{
 			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(arguments[0].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_get_directional_billboard_size")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.billboardEntity_getSize("@@lightSource").x;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:lighting_enable_spot")
@@ -219,15 +165,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_spot_color")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getSpotLightingColor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-		}
-	}
 	else if (functionName == "fe3d:lighting_set_spot_intensity")
 	{
 		auto types = { ScriptValueType::DECIMAL };
@@ -246,15 +183,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 				_fe3d.gfx_disableSpotLighting();
 			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_get_spot_intensity")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getSpotLightingIntensity();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:lighting_set_spot_angle")
@@ -277,15 +205,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_spot_angle")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getSpotLightingAngle();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-		}
-	}
 	else if (functionName == "fe3d:lighting_set_spot_distance")
 	{
 		auto types = { ScriptValueType::DECIMAL };
@@ -304,15 +223,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 				_fe3d.gfx_disableSpotLighting();
 			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_get_spot_distance")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gfx_getSpotLightingDistance();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else

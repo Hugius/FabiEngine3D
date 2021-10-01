@@ -124,9 +124,9 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextField("cursorPosition")->getEntityID();
 		string text = "Raycast Position: " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().x)) + " " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().y)) + " " +
-			to_string(static_cast<int>(_fe3d.misc_getRaycastPointOnTerrain().z));
+			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().x)) + " " +
+			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().y)) + " " +
+			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().z));
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

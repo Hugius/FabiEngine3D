@@ -76,13 +76,13 @@ void SceneEditor::_updateModelPlacing()
 				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview model
 						_fe3d.modelEntity_setVisible(_currentPreviewModelID, true);
 
 						// Update position
-						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, (_fe3d.misc_getRaycastPointOnTerrain() + MODEL_TERRAIN_OFFSET));
+						_fe3d.modelEntity_setBasePosition(_currentPreviewModelID, (_fe3d.raycast_getPointOnTerrain() + MODEL_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -91,7 +91,7 @@ void SceneEditor::_updateModelPlacing()
 					}
 
 					// Check if model must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						const string rawID = _currentPreviewModelID.substr(1);

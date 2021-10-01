@@ -68,13 +68,13 @@ void SceneEditor::_updateReflectionPlacing()
 				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview reflection
 						_fe3d.modelEntity_setVisible(PREVIEW_CAMERA_ID, true);
 
 						// Update position
-						_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, (_fe3d.misc_getRaycastPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
+						_fe3d.reflectionEntity_setPosition(PREVIEW_CAMERA_ID, (_fe3d.raycast_getPointOnTerrain() + REFLECTION_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -83,7 +83,7 @@ void SceneEditor::_updateReflectionPlacing()
 					}
 
 					// Check if reflection must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						auto newPosition = _fe3d.reflectionEntity_getPosition(PREVIEW_CAMERA_ID);

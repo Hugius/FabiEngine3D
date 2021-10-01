@@ -20,7 +20,7 @@ void SceneEditor::_updateLightEditing()
 	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingLight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
-		auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
+		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 		// Check if user selected a lamp model
 		for (const auto& entityID : _fe3d.modelEntity_getAllIDs())

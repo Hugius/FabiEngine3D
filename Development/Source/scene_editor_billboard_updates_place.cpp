@@ -54,13 +54,13 @@ void SceneEditor::_updateBillboardPlacing()
 				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview billboard
 						_fe3d.billboardEntity_setVisible(_currentPreviewBillboardID, true);
 
 						// Update position
-						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, (_fe3d.misc_getRaycastPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
+						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardID, (_fe3d.raycast_getPointOnTerrain() + BILLBOARD_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -69,7 +69,7 @@ void SceneEditor::_updateBillboardPlacing()
 					}
 
 					// Check if billboard must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						const auto newPosition = _fe3d.billboardEntity_getPosition(_currentPreviewBillboardID);

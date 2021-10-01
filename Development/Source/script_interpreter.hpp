@@ -88,7 +88,8 @@ private:
 	bool _executeFe3dInputGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCameraSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCameraGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dRaycastFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dRaycastSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCollisionSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCollisionGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dSkySetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -120,9 +121,12 @@ private:
 	bool _executeFe3dMusicGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dFilesystemGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dSceneFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dServerFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dClientFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSceneSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSceneGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dServerSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dServerGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dClientSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dClientGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _validateFe3dModel(const string& ID, bool isPreview = false);

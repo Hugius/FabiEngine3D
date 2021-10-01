@@ -76,7 +76,7 @@ void SceneEditor::_updateSoundPlacing()
 				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Play preview sound
 						if (!_fe3d.sound_isStarted(_currentPreviewSoundID))
@@ -88,7 +88,7 @@ void SceneEditor::_updateSoundPlacing()
 						_fe3d.modelEntity_setVisible(PREVIEW_SPEAKER_ID, true);
 
 						// Update position
-						_fe3d.sound_setPosition(_currentPreviewSoundID, (_fe3d.misc_getRaycastPointOnTerrain() + SOUND_TERRAIN_OFFSET));
+						_fe3d.sound_setPosition(_currentPreviewSoundID, (_fe3d.raycast_getPointOnTerrain() + SOUND_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -103,7 +103,7 @@ void SceneEditor::_updateSoundPlacing()
 					}
 
 					// Check if model must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						const auto newPosition = _fe3d.sound_getPosition(_currentPreviewSoundID);

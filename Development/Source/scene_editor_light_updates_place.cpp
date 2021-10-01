@@ -79,14 +79,14 @@ void SceneEditor::_updateLightPlacing()
 				if (!_fe3d.input_isMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					// Check if a terrain is loaded
-					if (_fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview light
 						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, true);
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
 
 						// Update position
-						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, (_fe3d.misc_getRaycastPointOnTerrain() + LIGHT_TERRAIN_OFFSET));
+						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + LIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
@@ -96,7 +96,7 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Check if light must be placed
-					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPointOnTerrainValid())
+					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
 						auto newPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);

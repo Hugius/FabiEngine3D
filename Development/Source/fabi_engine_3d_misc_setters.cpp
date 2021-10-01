@@ -55,19 +55,6 @@ void FabiEngine3D::misc_enableDebugRendering()
 	_core->_renderBus.setDebugRenderingEnabled(true);
 }
 
-void FabiEngine3D::misc_enableTerrainRaycastPointing(float distance, float precision)
-{
-	if (_core->_rayCaster.isTerrainPointingEnabled())
-	{
-		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
-		return;
-	}
-
-	_core->_rayCaster.setTerrainPointingEnabled(true);
-	_core->_rayCaster.setTerrainPointingDistance(distance);
-	_core->_rayCaster.setTerrainPointingPrecision(precision);
-}
-
 void FabiEngine3D::misc_enableVsync()
 {
 	if (_core->_window.isVsyncEnabled())
@@ -143,17 +130,6 @@ void FabiEngine3D::misc_disableDebugRendering()
 	}
 
 	_core->_renderBus.setDebugRenderingEnabled(false);
-}
-
-void FabiEngine3D::misc_disableTerrainRaycastPointing()
-{
-	if (!_core->_rayCaster.isTerrainPointingEnabled())
-	{
-		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
-		return;
-	}
-
-	_core->_rayCaster.setTerrainPointingEnabled(false);
 }
 
 void FabiEngine3D::misc_disableVsync()

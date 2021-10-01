@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:scene_load")
@@ -20,30 +20,6 @@ bool ScriptInterpreter::_executeFe3dSceneFunction(const string& functionName, ve
 		{
 			_sceneEditor.clearCurrentScene();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:scene_get_current_id")
-	{
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _sceneEditor.getLoadedSceneID();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-		}
-	}
-	else if (functionName == "fe3d:scene_is_custom_existing")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
-				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
-			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
-
-			// Return
-			auto result = _fe3d.misc_isFileExisting(filePath);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:scene_add_custom")

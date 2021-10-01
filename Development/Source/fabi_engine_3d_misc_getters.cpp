@@ -231,21 +231,6 @@ const Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 position)
 	return Vec2(x, y);
 }
 
-const Vec3 FabiEngine3D::misc_getRaycastVector()
-{
-	return _core->_rayCaster.getRay();
-}
-
-const Vec3 FabiEngine3D::misc_getRaycastPointOnTerrain()
-{
-	return _core->_rayCaster.getTerrainPoint();
-}
-
-const bool FabiEngine3D::misc_isRaycastPointOnTerrainValid()
-{
-	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
-}
-
 const bool FabiEngine3D::misc_isMillisecondTimerStarted()
 {
 	return _core->_timer.isStarted();
@@ -415,11 +400,6 @@ const bool FabiEngine3D::misc_isAabbFrameRenderingEnabled()
 const bool FabiEngine3D::misc_isDebugRenderingEnabled()
 {
 	return _core->_renderBus.isDebugRenderingEnabled();
-}
-
-const bool FabiEngine3D::misc_isTerrainRaycastPointingEnabled()
-{
-	return _core->_rayCaster.isTerrainPointingEnabled();
 }
 
 const bool FabiEngine3D::misc_isSoundsEnabled()

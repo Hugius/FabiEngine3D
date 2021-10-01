@@ -683,9 +683,19 @@ public:
 	const bool collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
 	const bool collision_isCameraResponseEnabled();
 	const bool collision_isTerrainResponseEnabled();
-	const pair<const string, float> collision_checkCursorInAny();
-	const pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded);
-	const pair<bool, float> collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
+
+	// Raycast inferface - setters
+	void raycast_enableTerrainPointing(float distance, float precision);
+	void raycast_disableTerrainPointing();
+
+	// Raycast inferface - getters
+	const pair<const string, float> raycast_checkCursorInAny();
+	const pair<const string, float> raycast_checkCursorInEntities(const string& ID, bool canBeOccluded);
+	const pair<bool, float> raycast_checkCursorInEntity(const string& ID, bool canBeOccluded);
+	const Vec3 raycast_getVector();
+	const Vec3 raycast_getPointOnTerrain();
+	const bool raycast_isPointOnTerrainValid();
+	const bool raycast_isTerrainPointingEnabled();
 
 	// Graphics interface - setters
 	void gfx_setPlanarReflectionHeight(float height);
@@ -819,7 +829,6 @@ public:
 	void misc_enableShadowFrameRendering();
 	void misc_enableAabbFrameRendering();
 	void misc_enableDebugRendering();
-	void misc_enableTerrainRaycastPointing(float distance, float precision);
 	void misc_enableVsync();
 	void misc_enableSounds();
 	void misc_enableMusic();
@@ -827,7 +836,6 @@ public:
 	void misc_disableShadowFrameRendering();
 	void misc_disableAabbFrameRendering();
 	void misc_disableDebugRendering();
-	void misc_disableTerrainRaycastPointing();
 	void misc_disableVsync();
 	void misc_disableSounds();
 	void misc_disableMusic();
@@ -866,8 +874,6 @@ public:
 	const string misc_getCpuModel();
 	const string misc_getGpuModel();
 	const string misc_getOpenglVersion();
-	const Vec3 misc_getRaycastVector();
-	const Vec3 misc_getRaycastPointOnTerrain();
 	const Vec2 misc_convertToNDC(Vec2 position);
 	const Vec2 misc_convertFromNDC(Vec2 position);
 	const Vec2 misc_convertFromScreenCoords(Ivec2 position);
@@ -893,7 +899,6 @@ public:
 	const bool misc_isDirectoryExisting(const string& directoryPath);
 	const bool misc_isFileExisting(const string& filePath);
 	const bool misc_checkInterval(unsigned int ticks);
-	const bool misc_isRaycastPointOnTerrainValid();
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_createNewDirectory(const string& directoryPath);
 	const bool misc_isVsyncEnabled();
@@ -901,7 +906,6 @@ public:
 	const bool misc_isShadowFrameRenderingEnabled();
 	const bool misc_isAabbFrameRenderingEnabled();
 	const bool misc_isDebugRenderingEnabled();
-	const bool misc_isTerrainRaycastPointingEnabled();
 	const bool misc_isSoundsEnabled();
 	const bool misc_isMusicEnabled();
 

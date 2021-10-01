@@ -51,15 +51,15 @@ void SceneEditor::_updateMiscellaneous()
 	}
 
 	// Disable terrain raycast pointing
-	if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+	if (_fe3d.raycast_isTerrainPointingEnabled())
 	{
-		_fe3d.misc_disableTerrainRaycastPointing();
+		_fe3d.raycast_disableTerrainPointing();
 	}
 
 	// Enable terrain raycast pointing
 	if (!_fe3d.terrainEntity_getSelectedID().empty())
 	{
-		_fe3d.misc_enableTerrainRaycastPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
+		_fe3d.raycast_enableTerrainPointing(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
 	}
 }
 

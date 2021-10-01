@@ -1,29 +1,9 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_enable_terrain_pointing")
-	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // Distance + precision
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.misc_enableTerrainRaycastPointing(arguments[0].getDecimal(), arguments[1].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:raycast_disable_terrain_pointing")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.misc_disableTerrainRaycastPointing();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:raycast_get_vector")
+	if (functionName == "fe3d:raycast_get_vector")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -31,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Validate terrain existence
 			if (_validateFe3dTerrain())
 			{
-				auto result = _fe3d.misc_getRaycastVector();
+				auto result = _fe3d.raycast_getVector();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -44,7 +24,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Validate terrain existence
 			if (_validateFe3dTerrain())
 			{
-				auto result = _fe3d.misc_getRaycastPointOnTerrain();
+				auto result = _fe3d.raycast_getPointOnTerrain();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -57,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Validate terrain existence
 			if (_validateFe3dTerrain())
 			{
-				auto result = _fe3d.misc_isRaycastPointOnTerrainValid();
+				auto result = _fe3d.raycast_isPointOnTerrainValid();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
@@ -71,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
 
 			// Check if AABB found
 			if (!foundAabbID.empty())
@@ -114,7 +94,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean());
+			auto intersection = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean());
 			string foundAabbID = intersection.first;
 			float foundDistance = intersection.second;
 
@@ -157,7 +137,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCursorInAny().first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 			// Check if AABB found
 			if (!foundAabbID.empty())
@@ -181,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.collision_checkCursorInAny();
+			auto intersection = _fe3d.raycast_checkCursorInAny();
 
 			// Check if AABB found
 			if (!intersection.first.empty())
@@ -207,7 +187,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean()).first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean()).first;
 
 			// Check if AABB found
 			if (!foundAabbID.empty())
@@ -231,7 +211,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			string result = "";
-			auto foundAabbID = _fe3d.collision_checkCursorInAny().first;
+			auto foundAabbID = _fe3d.raycast_checkCursorInAny().first;
 
 			// Check if AABB found
 			if (!foundAabbID.empty())
@@ -257,7 +237,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
+			auto intersection = _fe3d.raycast_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
 
 			// Check if AABB found
 			if (!intersection.first.empty())
@@ -281,7 +261,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			float result = -1.0f;
-			auto intersection = _fe3d.collision_checkCursorInAny();
+			auto intersection = _fe3d.raycast_checkCursorInAny();
 
 			// Check if AABB found
 			if (!intersection.first.empty())

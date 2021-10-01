@@ -3,7 +3,31 @@
 
 using std::numeric_limits;
 
-const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
+void FabiEngine3D::raycast_enableTerrainPointing(float distance, float precision)
+{
+	if (_core->_rayCaster.isTerrainPointingEnabled())
+	{
+		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
+		return;
+	}
+
+	_core->_rayCaster.setTerrainPointingEnabled(true);
+	_core->_rayCaster.setTerrainPointingDistance(distance);
+	_core->_rayCaster.setTerrainPointingPrecision(precision);
+}
+
+void FabiEngine3D::raycast_disableTerrainPointing()
+{
+	if (!_core->_rayCaster.isTerrainPointingEnabled())
+	{
+		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
+		return;
+	}
+
+	_core->_rayCaster.setTerrainPointingEnabled(false);
+}
+
+const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 {
 	// Temporary values
 	float closestDistance = (numeric_limits<float>::max)();
@@ -53,7 +77,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 	return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 }
 
-const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
+const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -61,7 +85,7 @@ const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string
 		// Check if raycasting needs to be updated
 		if (!_isRaycastUpdated)
 		{
-			collision_checkCursorInAny();
+			raycast_checkCursorInAny();
 		}
 
 		// Check if hovered AABB still exists
@@ -100,7 +124,7 @@ const pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string
 	}
 }
 
-const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded)
+const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -108,7 +132,7 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 		// Check if raycasting needs to be updated
 		if (!_isRaycastUpdated)
 		{
-			collision_checkCursorInAny();
+			raycast_checkCursorInAny();
 		}
 
 		// Check if hovered AABB is empty or non-existing
@@ -177,4 +201,24 @@ const pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(co
 			return make_pair(closestBoxID, closestDistance);
 		}
 	}
+}
+
+const Vec3 FabiEngine3D::raycast_getVector()
+{
+	return _core->_rayCaster.getRay();
+}
+
+const Vec3 FabiEngine3D::raycast_getPointOnTerrain()
+{
+	return _core->_rayCaster.getTerrainPoint();
+}
+
+const bool FabiEngine3D::raycast_isPointOnTerrainValid()
+{
+	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
+}
+
+const bool FabiEngine3D::raycast_isTerrainPointingEnabled()
+{
+	return _core->_rayCaster.isTerrainPointingEnabled();
 }

@@ -28,7 +28,7 @@ void ScriptEditor::_updateTextWriter()
 		string newCharacters = "";
 		
 		// Check if a billboard is hovered
-		auto hoveredBillboardID = _fe3d.collision_checkCursorInAny().first;
+		auto hoveredBillboardID = _fe3d.raycast_checkCursorInAny().first;
 		int hoveredLineIndex = -1;
 		int hoveredCharacterIndex = -1;
 		if (!hoveredBillboardID.empty())

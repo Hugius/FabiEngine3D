@@ -428,9 +428,9 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.misc_disableWireFrameRendering();
 	}
-	if (_fe3d.misc_isTerrainRaycastPointingEnabled())
+	if (_fe3d.raycast_isTerrainPointingEnabled())
 	{
-		_fe3d.misc_disableTerrainRaycastPointing();
+		_fe3d.raycast_disableTerrainPointing();
 	}
 	_fe3d.misc_setCursorVisible(false);
 

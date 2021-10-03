@@ -2,6 +2,8 @@
 
 #define TW(text) calculateTextWidth(text, CW)
 
+using RVPC = RightViewportController;
+
 void RightViewportController::initialize()
 {
 	// Window

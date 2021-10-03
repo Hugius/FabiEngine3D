@@ -1,6 +1,9 @@
 #include "sky_editor.hpp"
 #include "left_viewport_controller.hpp"
 
+using VPC = BaseViewportController;
+using LVPC = LeftViewportController;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 SkyEditor::SkyEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)

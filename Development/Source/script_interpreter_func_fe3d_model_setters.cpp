@@ -1,16 +1,25 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
+static const vector<string> extractModelPartIDs(FabiEngine3D& fe3d, const string& modelID, const string& partID)
+{
+	if (partID.empty())
+	{
+		return fe3d.modelEntity_getPartIDs(modelID);
+	}
+	else
+	{
+		return { partID };
+	}
+}
+
 bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:model_place")
 	{
-		auto types =
-		{
-			ScriptValueType::STRING, // New modelEntity ID
-			ScriptValueType::STRING, // Preview modelEntity ID
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL // Position
-		};
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -34,13 +43,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_sceneEditor.copyPreviewModel(arguments[0].getString(), ("@" + arguments[1].getString()),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -49,13 +58,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_delete(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_visible")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -64,13 +73,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_position")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -80,13 +89,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_setBasePosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_rotation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -96,13 +105,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_setBaseRotation(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_rotation_origin")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -112,13 +121,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_setBaseRotationOrigin(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_size")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -128,13 +137,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_setBaseSize(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_move")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -144,13 +153,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_moveBase(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_rotate")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -160,13 +169,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_rotateBase(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_scale")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -176,13 +185,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_scaleBase(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_move_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -192,13 +201,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_moveBaseTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_rotate_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -208,13 +217,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_rotateBaseTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_scale_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -224,29 +233,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			{
 				_fe3d.modelEntity_scaleBaseTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_set_color")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModel(arguments[0].getString()))
-			{
-				//_fe3d.modelEntity_setColor(arguments[0].getString(),
-				//	Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				//returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_min_height")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -255,13 +248,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_max_height")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -270,28 +263,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_fe3d.modelEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_set_lightness")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModel(arguments[0].getString()))
-			{
-				//_fe3d.modelEntity_setLightness(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_aabb_raycast_responsive")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -316,13 +294,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_aabb_collision_responsive")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -347,28 +325,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_set_alpha")
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing model ID
-			if (_validateFe3dModel(arguments[0].getString()))
-			{
-				//_fe3d.modelEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
-				//returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_start_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { SVT::STRING, SVT::STRING, SVT::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -377,13 +340,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_animationEditor.startAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_pause_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -392,13 +355,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_animationEditor.pauseAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_resume_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -407,13 +370,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_animationEditor.resumeAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_fade_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { SVT::STRING, SVT::STRING, SVT::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -422,13 +385,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_animationEditor.fadeAnimation(arguments[1].getString(), arguments[0].getString(), arguments[2].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_stop_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -437,13 +400,13 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 			if (_validateFe3dModel(arguments[0].getString()))
 			{
 				_animationEditor.stopAnimation(arguments[1].getString(), arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_animation_speed")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -459,14 +422,14 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 				if (animationData != nullptr)
 				{
 					animationData->setSpeedMultiplier(arguments[2].getDecimal());
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 			}
 		}
 	}
 	else if (functionName == "fe3d:model_set_animation_autopaused")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -482,8 +445,93 @@ bool ScriptInterpreter::_executeFe3dModelSetterFunction(const string& functionNa
 				if (animationData != nullptr)
 				{
 					animationData->setAutoPaused(arguments[2].getBoolean());
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_color")
+	{
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModel(arguments[0].getString()))
+			{
+				// Set color
+				for (const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.modelEntity_setColor(arguments[0].getString(), partID,
+						Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_lightness")
+	{
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModel(arguments[0].getString()))
+			{
+				// Set lightness
+				for (const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.modelEntity_setLightness(arguments[0].getString(), partID, arguments[2].getDecimal());
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_alpha")
+	{
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModel(arguments[0].getString()))
+			{
+				// Set alpha
+				for (const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.modelEntity_setAlpha(arguments[0].getString(), partID, arguments[2].getDecimal());
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_emission_intensity")
+	{
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dModel(arguments[0].getString()))
+			{
+				// Set emission intensity
+				for (const auto& partID : extractModelPartIDs(_fe3d, arguments[0].getString(), arguments[1].getString()))
+				{
+					_fe3d.modelEntity_setEmissionIntensity(arguments[0].getString(), partID, arguments[2].getDecimal());
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}

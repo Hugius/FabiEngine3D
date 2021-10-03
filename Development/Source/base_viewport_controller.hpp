@@ -3,8 +3,6 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
-#define VPC BaseViewportController
-
 class BaseViewportController
 {
 public:

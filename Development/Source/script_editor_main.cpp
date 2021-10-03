@@ -2,6 +2,9 @@
 #include "left_viewport_controller.hpp"
 #include "configuration.hpp"
 
+using VPC = BaseViewportController;
+using LVPC = LeftViewportController;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor)

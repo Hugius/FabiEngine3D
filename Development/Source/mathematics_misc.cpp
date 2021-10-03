@@ -50,6 +50,42 @@ const float Math::calculateReferenceAngle(float angle)
 	}
 }
 
+const Vec3 Math::calculateAverage(const vector<Vec3>& values)
+{
+	Vec3 total = Vec3(0.0f);
+
+	for (const auto& value : values)
+	{
+		total += value;
+	}
+
+	return (total / static_cast<float>(values.size()));
+}
+
+const float Math::calculateAverage(const vector<float>& values)
+{
+	float total = 0.0f;
+
+	for (const auto& value : values)
+	{
+		total += value;
+	}
+
+	return (total / static_cast<float>(values.size()));
+}
+
+const int Math::calculateAverage(const vector<int>& values)
+{
+	int total = 0;
+
+	for (const auto& value : values)
+	{
+		total += value;
+	}
+
+	return static_cast<int>(total / values.size());
+}
+
 const float Math::convertToRadians(float angle)
 {
 	return (angle * DEG2RAD);

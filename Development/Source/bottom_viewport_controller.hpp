@@ -4,8 +4,6 @@
 #include "top_viewport_controller.hpp"
 #include "script_editor.hpp"
 
-#define BVPC BottomViewportController
-
 class BottomViewportController final : public BaseViewportController
 {
 public:

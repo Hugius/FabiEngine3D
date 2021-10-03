@@ -8,6 +8,9 @@
 
 using std::numeric_limits;
 
+using VPC = BaseViewportController;
+using LVPC = LeftViewportController;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 ModelEditor::ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)

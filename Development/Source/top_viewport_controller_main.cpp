@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 
+using TVPC = TopViewportController;
+
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, SkyEditor& skyEditor, TerrainEditor& terrainEditor, WaterEditor& waterEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor, SettingsEditor& settingsEditor)
 	:
 	BaseViewportController(fe3d, gui),

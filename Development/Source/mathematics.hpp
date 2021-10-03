@@ -9,6 +9,10 @@
 #include "matrix44.hpp"
 #include "direction.hpp"
 
+#include <vector>
+
+using std::vector;
+
 class Math final
 {
 public:
@@ -34,6 +38,7 @@ public:
 	static const Matrix44 createProjectionMatrix(float fovY, float aspect, float nearZ, float farZ);
 
 	// Vectors
+	static const Vec3 calculateAverage(const vector<Vec3>& values);
 	static const Vec3 calculateCrossProduct(Vec3 firstVector, Vec3 secondVector);
 	static const Vec2 calculateVectorDifference(Vec2 firstPosition, Vec2 secondPosition);
 	static const Vec3 calculateVectorDifference(Vec3 firstPosition, Vec3 secondPosition);
@@ -56,10 +61,14 @@ public:
 	static const float calculateVectorMagnitude(Vec4 vector);
 	static const float calculateAngleDifference(float firstAngle, float secondAngle);
 	static const float calculateReferenceAngle(float angle);
+	static const float calculateAverage(const vector<float>& values);
 	static const float limitAngle(float angle);
 	static const float convertToRadians(float degrees);
 	static const float convertToDegrees(float radians);
 	static const float getPI();
+
+	// Integers
+	static const int calculateAverage(const vector<int>& values);
 
 private:
 	// Floats

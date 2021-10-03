@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+using BVPC = BottomViewportController;
+
 BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 	TopViewportController& topViewportController, ScriptEditor& scriptEditor)
 	:

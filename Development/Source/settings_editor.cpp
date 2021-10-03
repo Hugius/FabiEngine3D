@@ -10,6 +10,9 @@ using std::ifstream;
 using std::ofstream;
 using std::istringstream;
 
+using VPC = BaseViewportController;
+using LVPC = LeftViewportController;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)

@@ -1,6 +1,9 @@
 #include "terrain_editor.hpp"
 #include "left_viewport_controller.hpp"
 
+using VPC = BaseViewportController;
+using LVPC = LeftViewportController;
+
 #define TW(text) VPC::calculateTextWidth(text, CW)
 
 TerrainEditor::TerrainEditor(FabiEngine3D& fe3d, EngineGuiManager& gui)

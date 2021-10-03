@@ -2,8 +2,6 @@
 
 #include "base_viewport_controller.hpp"
 
-#define RVPC RightViewportController
-
 class RightViewportController final : public BaseViewportController
 {
 public:

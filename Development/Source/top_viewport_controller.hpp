@@ -11,8 +11,6 @@
 #include "script_editor.hpp"
 #include "settings_editor.hpp"
 
-#define TVPC TopViewportController
-
 class TopViewportController final : public BaseViewportController
 {
 public:

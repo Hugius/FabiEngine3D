@@ -2,6 +2,8 @@
 
 #define TW(text) calculateTextWidth(text, CW)
 
+using LVPC = LeftViewportController;
+
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui)
 	:
 	BaseViewportController(fe3d, gui),

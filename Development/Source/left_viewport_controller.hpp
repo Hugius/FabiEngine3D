@@ -12,8 +12,6 @@
 #include "audio_editor.hpp"
 #include "settings_editor.hpp"
 
-#define LVPC LeftViewportController
-
 class LeftViewportController final : public BaseViewportController
 {
 public:

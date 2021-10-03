@@ -7,6 +7,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	// Determine type of function
 	if (functionName == "fe3d:camera_get_position")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPosition();
@@ -15,6 +16,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_yaw")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getYaw();
@@ -23,6 +25,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_pitch")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPitch();
@@ -31,6 +34,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_pitch")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPitch();
@@ -39,6 +43,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_fov")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFOV();
@@ -47,6 +52,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_is_first_person_view_enabled")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_isFirstPersonViewEnabled();
@@ -55,6 +61,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_first_person_yaw")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFirstPersonYaw();
@@ -63,6 +70,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_first_person_pitch")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFirstPersonPitch();
@@ -71,6 +79,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_is_third_person_view_enabled")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_isThirdPersonViewEnabled();
@@ -79,6 +88,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_third_person_yaw")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonYaw();
@@ -87,6 +97,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_third_person_pitch")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonPitch();
@@ -95,6 +106,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_third_person_distance")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonDistance();
@@ -103,6 +115,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 	}
 	else if (functionName == "fe3d:camera_get_third_person_lookat")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonLookat();

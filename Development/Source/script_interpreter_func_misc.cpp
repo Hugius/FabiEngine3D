@@ -29,6 +29,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 			// Check if argument extraction went well
 			if (!_hasThrownError)
 			{
+				// Temporary values
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function
@@ -36,6 +37,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
@@ -86,6 +88,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
@@ -115,6 +118,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, 2))
 					{
 						// List name must be string
@@ -188,6 +192,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Temporary values
@@ -221,6 +226,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, arguments[0].getString() + arguments[1].getString()));
@@ -230,6 +236,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = arguments[0].getString().size();
@@ -240,6 +247,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
@@ -250,6 +258,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate index
@@ -269,6 +278,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING, SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Validate splitter
@@ -306,6 +316,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { SVT::STRING };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						// Compose string in reverse
@@ -323,12 +334,9 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else if (functionName == "misc:get_random_integer")
 				{
-					auto types =
-					{
-						SVT::INTEGER, // Min
-						SVT::INTEGER  // Max
-					};
+					auto types = { SVT::INTEGER, SVT::INTEGER };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = Tools::getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
@@ -337,12 +345,9 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else if (functionName == "misc:get_random_decimal")
 				{
-					auto types =
-					{
-						SVT::DECIMAL, // Min
-						SVT::DECIMAL  // Max
-					};
+					auto types = { SVT::DECIMAL, SVT::DECIMAL };
 
+					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());

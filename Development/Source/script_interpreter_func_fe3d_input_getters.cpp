@@ -9,6 +9,7 @@ bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
@@ -22,6 +23,7 @@ bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateKeyInputString(arguments[0].getString()))
@@ -35,6 +37,7 @@ bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
@@ -48,6 +51,7 @@ bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateMouseInputString(arguments[0].getString()))
@@ -59,6 +63,7 @@ bool ScriptInterpreter::_executeFe3dInputGetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:input_get_mousewheel_direction")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.input_getMouseWheelY();

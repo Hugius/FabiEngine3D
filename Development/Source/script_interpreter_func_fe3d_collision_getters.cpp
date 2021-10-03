@@ -16,7 +16,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_camera_model")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::STRING }; // ModelEntity ID + aabbEntity part ID + direction
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -77,7 +77,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_camera_models")
 	{
-		auto types = { SVT::STRING }; // Direction
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -165,7 +165,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_camera_billboards")
 	{
-		auto types = { SVT::STRING }; // Direction
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -209,7 +209,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_camera_aabb")
 	{
-		auto types = { SVT::STRING, SVT::STRING }; // aabbEntity ID + Direction
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -255,7 +255,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_camera_aabbs")
 	{
-		auto types = { SVT::STRING }; // Direction
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -452,7 +452,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 	}
 	else if (functionName == "fe3d:collision_check_model_aabbs")
 	{
-		auto types = { SVT::STRING, SVT::STRING,SVT::STRING };
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

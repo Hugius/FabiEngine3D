@@ -12,6 +12,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	// Determine type of function
 	if (functionName == "fe3d:cursor_is_visible")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
@@ -28,6 +29,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:cursor_get_position_x")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
@@ -44,6 +46,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:cursor_get_position_y")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute cursor functionality when server is running
@@ -60,6 +63,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:window_get_width")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
@@ -76,6 +80,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:window_get_height")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute window functionality when server is running
@@ -92,6 +97,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:timer_is_started")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_isMillisecondTimerStarted();
@@ -100,6 +106,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:vynsc_is_enabled")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Cannot execute Vsync functionality when server is running

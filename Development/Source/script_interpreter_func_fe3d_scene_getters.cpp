@@ -7,6 +7,7 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 	// Determine type of function
 	if (functionName == "fe3d:scene_get_current_id")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _sceneEditor.getLoadedSceneID();
@@ -17,6 +18,7 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path

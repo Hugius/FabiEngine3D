@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& functi
 	// Determine type of function
 	if (functionName == "fe3d:collision_enable_camera_terrain_response")
 	{
-		auto types = { SVT::DECIMAL, SVT::DECIMAL }; // CameraHeight + cameraSpeed
+		auto types = { SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

@@ -9,6 +9,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.clearCurrentScene();
@@ -18,6 +19,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_clear")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.clearCurrentScene();
@@ -28,6 +30,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.createCustomScene(arguments[0].getString());
@@ -36,6 +39,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_add_custom_sky")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.addSkyToCustomScene();
@@ -44,6 +48,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_add_custom_terrain")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.addTerrainToCustomScene();
@@ -52,6 +57,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_add_custom_water")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.addWaterToCustomScene();
@@ -62,6 +68,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addModelToCustomScene(arguments[0].getString());
@@ -72,6 +79,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addBillboardToCustomScene(arguments[0].getString());
@@ -82,6 +90,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addAabbToCustomScene(arguments[0].getString());
@@ -92,6 +101,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addSoundToCustomScene(arguments[0].getString());
@@ -102,6 +112,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addLightToCustomScene(arguments[0].getString());
@@ -112,6 +123,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addReflectionToCustomScene(arguments[0].getString());
@@ -120,6 +132,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_add_custom_lighting")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.addLightingToCustomScene();
@@ -128,6 +141,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_add_custom_graphics")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.addGraphicsToCustomScene();
@@ -136,6 +150,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:scene_save_custom")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.saveCustomSceneToFile();
@@ -146,6 +161,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.clearCurrentScene();
@@ -157,6 +173,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path

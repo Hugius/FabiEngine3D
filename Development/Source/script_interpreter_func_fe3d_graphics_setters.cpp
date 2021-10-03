@@ -7,6 +7,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	// Determine type of function
 	if (functionName == "fe3d:graphics_enable_fog")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(),
@@ -16,6 +17,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_disable_fog")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableFog();
@@ -26,6 +28,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
@@ -41,6 +44,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
@@ -56,6 +60,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
@@ -71,6 +76,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isFogEnabled();
@@ -85,6 +91,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_enable_dof")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableDOF(_fe3d.gfx_isDofDynamic(), _fe3d.gfx_getaMaxDofDistance(), _fe3d.gfx_getDofBlurDistance());
@@ -93,6 +100,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_disable_dof")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableDOF();
@@ -103,6 +111,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::BOOLEAN };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
@@ -118,6 +127,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
@@ -133,6 +143,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isDofEnabled();
@@ -146,6 +157,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_enable_shadows")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableShadows(
@@ -161,6 +173,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_disable_shadows")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableShadows();
@@ -171,6 +184,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.gfx_enableShadows(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
@@ -185,6 +199,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_enable_motion_blur")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableMotionBlur(_fe3d.gfx_getMotionBlurStrength());
@@ -193,6 +208,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_disable_motion_blur")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableMotionBlur();
@@ -203,6 +219,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isMotionBlurEnabled();
@@ -216,6 +233,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_enable_lens_flare")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableLensFlare(_fe3d.gfx_getLensFlareMapPath(), _fe3d.gfx_getLensFlareIntensity(), _fe3d.gfx_getLensFlareMultiplier());
@@ -224,6 +242,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	}
 	else if (functionName == "fe3d:graphics_disable_lens_flare")
 	{
+		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableLensFlare();
@@ -234,6 +253,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
@@ -251,6 +271,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
@@ -266,6 +287,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 	{
 		auto types = { SVT::DECIMAL };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();

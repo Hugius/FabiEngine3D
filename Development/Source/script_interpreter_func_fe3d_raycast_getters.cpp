@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 	}
 	else if (functionName == "fe3d:raycast_into_model")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
+		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -89,7 +89,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 	}
 	else if (functionName == "fe3d:raycast_into_model_distance")
 	{
-		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
+		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -182,7 +182,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 	}
 	else if (functionName == "fe3d:raycast_into_billboard")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN }; // BillboardEntityID + canBeOccluded
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -232,7 +232,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 	}
 	else if (functionName == "fe3d:raycast_into_billboard_distance")
 	{
-		auto types = { SVT::STRING, SVT::BOOLEAN }; // BillboardEntityID + canBeOccluded
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

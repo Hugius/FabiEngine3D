@@ -18,6 +18,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
@@ -39,6 +40,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
@@ -62,6 +64,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -85,6 +88,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -131,6 +135,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
@@ -149,6 +154,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	{
 		auto types = { SVT::STRING };
 
+		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path

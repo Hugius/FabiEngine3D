@@ -28,57 +28,57 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 			{
 				// Temporary values
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
-				bool executed = false;
+				bool isExecuted = false;
 
 				// Possibly execute FE3D function
-				executed = (executed || _executeFe3dSkySetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSkyGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dTerrainSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dTerrainGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dWaterSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dWaterGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dModelSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dModelGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dBillboardSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dBillboardGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dAabbSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dAabbGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dLightSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dLightGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dReflectionSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dReflectionGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dImageSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dImageGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dTextSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dTextGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSoundSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSoundGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dMusicSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dMusicGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dInputGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dCameraSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dCameraGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dCollisionSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dCollisionGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dRaycastSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dRaycastGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dGraphicsSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dGraphicsGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dLightingSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dLightingGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dServerSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dServerGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dClientSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dClientGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dFilesystemSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dFilesystemGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSceneSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dSceneGetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dMiscSetterFunction(functionName, arguments, returnValues));
-				executed = (executed || _executeFe3dMiscGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSkySetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSkyGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dTerrainSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dTerrainGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dWaterSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dWaterGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dModelSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dModelGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dBillboardSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dBillboardGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dAabbSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dAabbGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dLightSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dLightGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dReflectionSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dReflectionGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dImageSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dImageGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dTextSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dTextGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSoundSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSoundGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dMusicSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dMusicGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dInputGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dCameraSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dCameraGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dCollisionSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dCollisionGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dRaycastSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dRaycastGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dGraphicsSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dGraphicsGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dLightingSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dLightingGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dServerSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dServerGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dClientSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dClientGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dFilesystemSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dFilesystemGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSceneSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSceneGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dMiscSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dMiscGetterFunction(functionName, arguments, returnValues));
 
 				// Check if function call exists
-				if (executed)
+				if (isExecuted)
 				{
 					_engineFunctionCallCount++;
 				}

@@ -7,12 +7,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 	// Determine type of function
 	if (functionName == "fe3d:billboard_place")
 	{
-		auto types =
-		{
-			SVT::STRING, // New billboardEntity ID
-			SVT::STRING, // Preview billboardEntity ID
-			SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL // Position
-		};
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

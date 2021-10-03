@@ -372,9 +372,9 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 	return result;
 }
 
-const bool FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
+void FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
 {
-	return (_mkdir(directoryPath.c_str()) != -1);
+	_mkdir(directoryPath.c_str());
 }
 
 const bool FabiEngine3D::misc_isVsyncEnabled()

@@ -7,14 +7,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 	// Determine type of function
 	if (functionName == "fe3d:image_place")
 	{
-		auto types =
-		{
-			SVT::STRING, // ID
-			SVT::STRING, // Texture path
-			SVT::DECIMAL, SVT::DECIMAL, // Position
-			SVT::DECIMAL, // Rotation
-			SVT::DECIMAL, SVT::DECIMAL // Size
-		};
+		auto types = { SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -262,14 +255,7 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 	}
 	else if (functionName == "fe3d:image_start_animation")
 	{
-		auto types =
-		{
-			SVT::STRING,
-			SVT::INTEGER,
-			SVT::INTEGER,
-			SVT::INTEGER,
-			SVT::INTEGER
-		};
+		auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER, SVT::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

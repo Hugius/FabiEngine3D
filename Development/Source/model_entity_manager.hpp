@@ -1,11 +1,12 @@
 #pragma once
 
 #include "base_entity_manager.hpp"
+#include "timer.hpp"
 
 class ModelEntityManager final : public BaseEntityManager
 {
 public:
-	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus);
+	ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Timer& timer);
 
 	// Voids
 	void createEntity(const string& ID, const string& meshPath);
@@ -21,6 +22,9 @@ public:
 	float getLevelOfDetailDistance();
 
 private:
+	// Instances
+	Timer& _timer;
+
 	// Floats
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 	float _levelOfDetailDistance = 0.0f;

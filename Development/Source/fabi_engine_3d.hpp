@@ -861,6 +861,7 @@ public:
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
 	void misc_setMaxAudioChannelCount(unsigned int count);
+	void misc_createNewDirectory(const string& directoryPath);
 
 	// Miscellaneous interface - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
@@ -900,7 +901,6 @@ public:
 	const bool misc_isFileExisting(const string& filePath);
 	const bool misc_checkInterval(unsigned int ticks);
 	const bool misc_isMillisecondTimerStarted();
-	const bool misc_createNewDirectory(const string& directoryPath);
 	const bool misc_isVsyncEnabled();
 	const bool misc_isWireFrameRenderingEnabled();
 	const bool misc_isShadowFrameRenderingEnabled();

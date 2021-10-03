@@ -52,10 +52,11 @@ private:
 	Window _window;
 	MeshLoader _meshLoader;
 	TextureLoader _textureLoader;
-	AudioLoader _audioLoader;
 	InputHandler _inputHandler;
 	RenderBus _renderBus;
+	ShadowGenerator _shadowGenerator;
 	Camera _camera;
+	Timer _timer;
 	MasterRenderer _masterRenderer;
 	SkyEntityManager  _skyEntityManager;
 	TerrainEntityManager _terrainEntityManager;
@@ -67,11 +68,10 @@ private:
 	ReflectionEntityManager _reflectionEntityManager;
 	ImageEntityManager _imageEntityManager;
 	TextEntityManager _textEntityManager;
-	ShadowGenerator _shadowGenerator;
 	RayCaster _rayCaster;
 	CollisionDetector _collisionDetector;
 	CollisionResolver _collisionResolver;
-	Timer _timer;
+	AudioLoader _audioLoader;
 	AudioManager _audioManager;
 	AudioPlayer _audioPlayer;
 	NetworkServerAPI _networkServerAPI;

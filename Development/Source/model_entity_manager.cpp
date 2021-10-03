@@ -4,9 +4,10 @@
 using std::make_shared;
 using std::max;
 
-ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus)
+ModelEntityManager::ModelEntityManager(MeshLoader& meshLoader, TextureLoader& textureLoader, RenderBus& renderBus, Timer& timer)
 	:
-	BaseEntityManager(EntityType::MODEL, meshLoader, textureLoader, renderBus)
+	BaseEntityManager(EntityType::MODEL, meshLoader, textureLoader, renderBus),
+	_timer(timer)
 {
 
 }
@@ -128,58 +129,62 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				bool isFarEnough = (absolsuteDistance > _levelOfDetailDistance) && (!entity->getLevelOfDetailEntityID().empty());
 				entity->setLevelOfDetailed(isFarEnough);
 			}
-
-			// Sort reflection entities based on distance
-			map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
-			for (const auto& [keyID, reflectionEntity] : reflectionEntities)
+			
+			// Update cube reflections
+			if ((_timer.getPassedTickCount() % 10) == 0)
 			{
-				if (reflectionEntity->isVisible())
+				// Sort reflection entities based on distance
+				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;
+				for (const auto& [keyID, reflectionEntity] : reflectionEntities)
 				{
-					auto absoluteDistance = Math::calculateVectorDistance(entity->getBasePosition(), reflectionEntity->getPosition());
-					reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
-				}
-			}
-
-			// Validate reflection IDs
-			if (reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
-			{
-				entity->setPreviousReflectionEntityID("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-			if (reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
-			{
-				entity->setCurrentReflectionEntityID("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-			if (entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
-			{
-				entity->setPreviousReflectionEntityID("");
-				entity->setCubeReflectionMixValue(1.0f);
-			}
-
-			// Check if any reflection entity is found
-			if (!reflectionDistanceMap.empty())
-			{
-				// Temporary values
-				auto closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
-
-				// Check if current reflection changed
-				if (entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
-				{
-					// Set IDs
-					entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
-					entity->setCurrentReflectionEntityID(closestReflectionEntityID);
-
-					// Reset overlapping
-					if (!entity->getPreviousReflectionEntityID().empty())
+					if (reflectionEntity->isVisible())
 					{
-						entity->setCubeReflectionMixValue(0.0f);
+						auto absoluteDistance = Math::calculateVectorDistance(entity->getBasePosition(), reflectionEntity->getPosition());
+						reflectionDistanceMap.insert(std::make_pair(absoluteDistance, reflectionEntity));
 					}
 				}
-			}
 
-			// Update cube reflection overlapping
-			entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
+				// Validate reflection IDs
+				if (reflectionEntities.find(entity->getPreviousReflectionEntityID()) == reflectionEntities.end())
+				{
+					entity->setPreviousReflectionEntityID("");
+					entity->setCubeReflectionMixValue(1.0f);
+				}
+				if (reflectionEntities.find(entity->getCurrentReflectionEntityID()) == reflectionEntities.end())
+				{
+					entity->setCurrentReflectionEntityID("");
+					entity->setCubeReflectionMixValue(1.0f);
+				}
+				if (entity->getPreviousReflectionEntityID() == entity->getCurrentReflectionEntityID())
+				{
+					entity->setPreviousReflectionEntityID("");
+					entity->setCubeReflectionMixValue(1.0f);
+				}
+
+				// Check if any reflection entity is found
+				if (!reflectionDistanceMap.empty())
+				{
+					// Temporary values
+					auto closestReflectionEntityID = reflectionDistanceMap.begin()->second->getID();
+
+					// Check if current reflection changed
+					if (entity->getCurrentReflectionEntityID() != closestReflectionEntityID)
+					{
+						// Set IDs
+						entity->setPreviousReflectionEntityID(entity->getCurrentReflectionEntityID());
+						entity->setCurrentReflectionEntityID(closestReflectionEntityID);
+
+						// Reset overlapping
+						if (!entity->getPreviousReflectionEntityID().empty())
+						{
+							entity->setCubeReflectionMixValue(0.0f);
+						}
+					}
+				}
+
+				// Update cube reflection overlapping
+				entity->setCubeReflectionMixValue(entity->getCubeReflectionMixValue() + CUBE_REFLECTION_OVERLAP_SPEED);
+			}
 
 			// Update transformation matrix
 			entity->updateTransformationMatrix();

@@ -7,15 +7,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 	// Determine type of function
 	if (functionName == "fe3d:text_place")
 	{
-		auto types =
-		{
-			SVT::STRING, // ID
-			SVT::STRING, // Font path
-			SVT::STRING, // Text
-			SVT::DECIMAL, SVT::DECIMAL, // Position
-			SVT::DECIMAL, // Rotation
-			SVT::DECIMAL, SVT::DECIMAL // Size
-		};
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))

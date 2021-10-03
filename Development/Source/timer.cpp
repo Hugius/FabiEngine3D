@@ -100,7 +100,7 @@ void Timer::clearDeltaParts()
 	_deltaParts.clear();
 }
 
-int Timer::getPassedTickCount()
+unsigned int Timer::getPassedTickCount()
 {
 	return _passedTickCount;
 }

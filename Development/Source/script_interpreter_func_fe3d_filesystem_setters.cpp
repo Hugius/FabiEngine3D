@@ -26,10 +26,14 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
-			// Try to create new directory
-			if (_fe3d.misc_createNewDirectory(newDirectoryPath))
+			// Check if directory exists
+			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
 			{
 				_throwScriptError("cannot create directory \"" + arguments[0].getString() + "\"!");
+			}
+			else
+			{
+				_fe3d.misc_createNewDirectory(newDirectoryPath);
 			}
 
 			// Return
@@ -60,6 +64,33 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			}
 		}
 	}
+	else if (functionName == "fe3d:file_create")
+	{
+		auto types = { SVT::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, 2) && _validateSavesDirectory())
+		{
+			// Compose file path
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+				("projects\\" + _currentProjectID)) + "\\saves\\");
+			string filePath = (directoryPath + arguments[0].getString());
+
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(filePath))
+			{
+				_throwScriptError("cannot create file \"" + arguments[0].getString() + "\"!");
+			}
+			else
+			{
+				ofstream file(filePath);
+				file.close();
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:file_delete")
 	{
 		auto types = { SVT::STRING };
@@ -70,7 +101,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))
@@ -94,38 +125,46 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
-			// Open file
-			ofstream file(filePath, ios::app);
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(filePath))
+			{
+				// Open file
+				ofstream file(filePath, ios::app);
 
-			// Determine which type of value to print
-			if (arguments[1].getType() == SVT::VEC3)
-			{
-				file << "[" + 
-					to_string(arguments[1].getVec3().x) << " " <<
-					to_string(arguments[1].getVec3().y) << " " <<
-					to_string(arguments[1].getVec3().z) + "]";
-			}
-			else if (arguments[1].getType() == SVT::STRING)
-			{
-				file << arguments[1].getString();
-			}
-			else if (arguments[1].getType() == SVT::DECIMAL)
-			{
-				file << to_string(arguments[1].getDecimal());
-			}
-			else if (arguments[1].getType() == SVT::INTEGER)
-			{
-				file << to_string(arguments[1].getInteger());
-			}
-			else if (arguments[1].getType() == SVT::BOOLEAN)
-			{
-				file << (arguments[1].getBoolean() ? "<true>" : "<false>");
-			}
+				// Determine which type of value to print
+				if (arguments[1].getType() == SVT::VEC3)
+				{
+					file << "[" +
+						to_string(arguments[1].getVec3().x) << " " <<
+						to_string(arguments[1].getVec3().y) << " " <<
+						to_string(arguments[1].getVec3().z) + "]";
+				}
+				else if (arguments[1].getType() == SVT::STRING)
+				{
+					file << arguments[1].getString();
+				}
+				else if (arguments[1].getType() == SVT::DECIMAL)
+				{
+					file << to_string(arguments[1].getDecimal());
+				}
+				else if (arguments[1].getType() == SVT::INTEGER)
+				{
+					file << to_string(arguments[1].getInteger());
+				}
+				else if (arguments[1].getType() == SVT::BOOLEAN)
+				{
+					file << (arguments[1].getBoolean() ? "<true>" : "<false>");
+				}
 
-			// Close file
-			file.close();
+				// Close file
+				file.close();
+			}
+			else
+			{
+				_throwScriptError("cannot write to file \"" + arguments[0].getString() + "\"!");
+			}
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -139,15 +178,22 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
-			// Write line to file
-			ofstream file(filePath, ios::app);
-			file << endl;
-			file.close();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(filePath))
+			{
+				ofstream file(filePath, ios::app);
+				file << endl;
+				file.close();
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("cannot add new line to file \"" + arguments[0].getString() + "\"!");
+			}
 		}
 	}
 	else if (functionName == "fe3d:file_clear")
@@ -160,7 +206,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))

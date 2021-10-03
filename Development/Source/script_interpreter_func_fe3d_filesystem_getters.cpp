@@ -36,7 +36,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
 			// Return
 			auto result = _fe3d.misc_isFileExisting(filePath);
@@ -53,7 +53,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 			// Compose file path
 			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
-			string filePath = directoryPath + arguments[0].getString();
+			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
 			if (_fe3d.misc_isFileExisting(filePath))

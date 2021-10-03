@@ -13,7 +13,7 @@ void WaterEditor::_updateTexturingMenu()
 		auto hasDudvMap = _fe3d.waterEntity_hasDudvMap(_currentWaterID);
 		auto hasNormalMap = _fe3d.waterEntity_hasNormalMap(_currentWaterID);
 		auto hasDisplacementMap = _fe3d.waterEntity_hasDisplacementMap(_currentWaterID);
-		auto uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
+		auto textureRepeat = _fe3d.waterEntity_getTextureRepeat(_currentWaterID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -126,19 +126,19 @@ void WaterEditor::_updateTexturingMenu()
 			_fe3d.waterEntity_setNormalMap(_currentWaterID, "");
 			_fe3d.waterEntity_setDisplacementMap(_currentWaterID, "");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
+		if (_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
 		{
-			_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
+			_fe3d.waterEntity_setTextureRepeat(_currentWaterID, textureRepeat);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("clearMaps")->setHoverable(hasDudvMap || hasNormalMap || hasDisplacementMap);
-		screen->getButton("uvRepeat")->setHoverable(hasDudvMap || hasNormalMap || hasDisplacementMap);
+		screen->getButton("textureRepeat")->setHoverable(hasDudvMap || hasNormalMap || hasDisplacementMap);
 	}
 }

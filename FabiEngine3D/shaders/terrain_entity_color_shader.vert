@@ -15,6 +15,9 @@ uniform mat4 u_shadowMatrix;
 // Vector uniforms
 uniform vec4 u_clippingPlane;
 
+// Float uniforms
+uniform float u_textureRepeat;
+
 // Bool uniforms
 uniform bool u_hasNormalMap;
 
@@ -42,7 +45,7 @@ void main()
 	
 	// Out variables
 	f_pos = worldSpacePos.xyz;
-	f_uv = v_uv;
+	f_uv = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
 	f_normal = normalize(v_normal);
 	f_shadowPos = u_shadowMatrix * worldSpacePos;
 	f_tbnMatrix = calculateTbnMatrix();

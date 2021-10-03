@@ -57,7 +57,7 @@ public:
 	void setAlpha(float value);
 	void setMinHeight(float value);
 	void setMaxHeight(float value);
-	void setUvRepeat(float value);
+	void setTextureRepeat(float value);
 	void setEmissionIntensity(float value);
 
 	// Instances
@@ -84,7 +84,7 @@ public:
 	const float getAlpha();
 	const float getMinHeight();
 	const float getMaxHeight();
-	const float getUvRepeat();
+	const float getTextureRepeat();
 	const float getEmissionIntensity();
 
 	// Integers
@@ -140,7 +140,7 @@ private:
 
 	// Floats
 	float _emissionIntensity = 1.0f;
-	float _uvRepeat = 1.0f;
+	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
 	float _rotationTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;

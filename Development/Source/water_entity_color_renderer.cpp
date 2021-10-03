@@ -119,7 +119,7 @@ void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader.uploadUniform("u_waveHeight", entity->getWaveHeight());
 		_shader.uploadUniform("u_heightOffset", entity->getHeight());
-		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_specularShininess", entity->getSpecularShininess());
 		_shader.uploadUniform("u_specularIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());

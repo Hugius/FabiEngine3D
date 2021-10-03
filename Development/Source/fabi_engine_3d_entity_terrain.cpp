@@ -64,9 +64,9 @@ const float FabiEngine3D::terrainEntity_getMaxHeight(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-const float FabiEngine3D::terrainEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::terrainEntity_getTextureRepeat(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getUvRepeat();
+	return _core->_terrainEntityManager.getEntity(ID)->getTextureRepeat();
 }
 
 const bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float z)
@@ -203,19 +203,19 @@ const string& FabiEngine3D::terrainEntity_getNormalMapPathB(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathB();
 }
 
-const float FabiEngine3D::terrainEntity_getBlendRepeatR(const string& ID)
+const float FabiEngine3D::terrainEntity_getRedRepeat(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatR();
+	return _core->_terrainEntityManager.getEntity(ID)->getRedRepeat();
 }
 
-const float FabiEngine3D::terrainEntity_getBlendRepeatG(const string& ID)
+const float FabiEngine3D::terrainEntity_getGreenRepeat(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatG();
+	return _core->_terrainEntityManager.getEntity(ID)->getGreenRepeat();
 }
 
-const float FabiEngine3D::terrainEntity_getBlendRepeatB(const string& ID)
+const float FabiEngine3D::terrainEntity_getBlueRepeat(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendRepeatB();
+	return _core->_terrainEntityManager.getEntity(ID)->getBlueRepeat();
 }
 
 const float FabiEngine3D::terrainEntity_getLightness(const string& ID)
@@ -239,10 +239,9 @@ void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 	_core->_terrainEntityManager.loadMesh(ID);
 }
 
-void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
+void FabiEngine3D::terrainEntity_setTextureRepeat(const string& ID, float repeat)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setUvRepeat(repeat);
-	_core->_terrainEntityManager.loadMesh(ID);
+	_core->_terrainEntityManager.getEntity(ID)->setTextureRepeat(repeat);
 }
 
 void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& texturePath)
@@ -371,19 +370,19 @@ void FabiEngine3D::terrainEntity_setNormalMapB(const string& ID, const string& t
 	}
 }
 
-void FabiEngine3D::terrainEntity_setBlendRepeatR(const string& ID, float repeat)
+void FabiEngine3D::terrainEntity_setRedRepeat(const string& ID, float repeat)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatR(repeat);
+	_core->_terrainEntityManager.getEntity(ID)->setRedRepeat(repeat);
 }
 
-void FabiEngine3D::terrainEntity_setBlendRepeatG(const string& ID, float repeat)
+void FabiEngine3D::terrainEntity_setGreenRepeat(const string& ID, float repeat)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatG(repeat);
+	_core->_terrainEntityManager.getEntity(ID)->setGreenRepeat(repeat);
 }
 
-void FabiEngine3D::terrainEntity_setBlendRepeatB(const string& ID, float repeat)
+void FabiEngine3D::terrainEntity_setBlueRepeat(const string& ID, float repeat)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatB(repeat);
+	_core->_terrainEntityManager.getEntity(ID)->setBlueRepeat(repeat);
 }
 
 void FabiEngine3D::terrainEntity_setSpecularShininess(const string& ID, float shininess)

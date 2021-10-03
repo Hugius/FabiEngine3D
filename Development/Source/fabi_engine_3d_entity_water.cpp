@@ -108,9 +108,9 @@ void FabiEngine3D::waterEntity_setSpecular(const string& ID, bool enabled)
 	_core->_waterEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
-void FabiEngine3D::waterEntity_setUvRepeat(const string& ID, float repeat)
+void FabiEngine3D::waterEntity_setTextureRepeat(const string& ID, float repeat)
 {
-	_core->_waterEntityManager.getEntity(ID)->setUvRepeat(repeat);
+	_core->_waterEntityManager.getEntity(ID)->setTextureRepeat(repeat);
 }
 
 void FabiEngine3D::waterEntity_setQuality(const string& ID, WaterQuality quality)
@@ -234,9 +234,9 @@ const float FabiEngine3D::waterEntity_getSize(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getSize();
 }
 
-const float FabiEngine3D::waterEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::waterEntity_getTextureRepeat(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getUvRepeat();
+	return _core->_waterEntityManager.getEntity(ID)->getTextureRepeat();
 }
 
 const Vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)

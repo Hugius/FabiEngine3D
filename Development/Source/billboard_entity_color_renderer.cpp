@@ -91,7 +91,7 @@ void BillboardEntityColorRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isBright", entity->isBright());
 		_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity());
-		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);

@@ -46,7 +46,7 @@ void AnimationEditor::load()
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", "", GRID_UV);
+	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous

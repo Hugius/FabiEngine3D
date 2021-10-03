@@ -55,11 +55,11 @@ bool SceneEditor::_copyPreviewTerrain(const string& newID, const string& preview
 
 	// Fill terrain entity
 	_fe3d.terrainEntity_setMaxHeight(newID, _fe3d.terrainEntity_getMaxHeight(previewID));
-	_fe3d.terrainEntity_setUvRepeat(newID, _fe3d.terrainEntity_getUvRepeat(previewID));
+	_fe3d.terrainEntity_setTextureRepeat(newID, _fe3d.terrainEntity_getTextureRepeat(previewID));
 	_fe3d.terrainEntity_setLightness(newID, _fe3d.terrainEntity_getLightness(previewID));
-	_fe3d.terrainEntity_setBlendRepeatR(newID, _fe3d.terrainEntity_getBlendRepeatR(previewID));
-	_fe3d.terrainEntity_setBlendRepeatG(newID, _fe3d.terrainEntity_getBlendRepeatG(previewID));
-	_fe3d.terrainEntity_setBlendRepeatB(newID, _fe3d.terrainEntity_getBlendRepeatB(previewID));
+	_fe3d.terrainEntity_setRedRepeat(newID, _fe3d.terrainEntity_getRedRepeat(previewID));
+	_fe3d.terrainEntity_setGreenRepeat(newID, _fe3d.terrainEntity_getGreenRepeat(previewID));
+	_fe3d.terrainEntity_setBlueRepeat(newID, _fe3d.terrainEntity_getBlueRepeat(previewID));
 	_fe3d.terrainEntity_setSpecular(newID, _fe3d.terrainEntity_isSpecular(previewID));
 	_fe3d.terrainEntity_setSpecularShininess(newID, _fe3d.terrainEntity_getSpecularShininess(previewID));
 	_fe3d.terrainEntity_setSpecularIntensity(newID, _fe3d.terrainEntity_getSpecularIntensity(previewID));
@@ -160,7 +160,7 @@ bool SceneEditor::_copyPreviewWater(const string& newID, const string& previewID
 	_fe3d.waterEntity_setSpecularIntensity(newID, _fe3d.waterEntity_getSpecularIntensity(previewID));
 	_fe3d.waterEntity_setTransparency(newID, _fe3d.waterEntity_getTransparency(previewID));
 	_fe3d.waterEntity_setColor(newID, _fe3d.waterEntity_getColor(previewID));
-	_fe3d.waterEntity_setUvRepeat(newID, _fe3d.waterEntity_getUvRepeat(previewID));
+	_fe3d.waterEntity_setTextureRepeat(newID, _fe3d.waterEntity_getTextureRepeat(previewID));
 	_fe3d.waterEntity_setSpeed(newID, _fe3d.waterEntity_getSpeed(previewID));
 
 	// DUDV map
@@ -260,7 +260,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 		_fe3d.modelEntity_setReflectionType(newID, partID, _fe3d.modelEntity_getReflectionType(previewID, partID));
 		_fe3d.modelEntity_setReflectivity(newID, partID, _fe3d.modelEntity_getReflectivity(previewID, partID));
 		_fe3d.modelEntity_setColor(newID, partID, _fe3d.modelEntity_getColor(previewID, partID));
-		_fe3d.modelEntity_setUvRepeat(newID, partID, _fe3d.modelEntity_getUvRepeat(previewID, partID));
+		_fe3d.modelEntity_setTextureRepeat(newID, partID, _fe3d.modelEntity_getTextureRepeat(previewID, partID));
 	}
 
 	// Bind AABB entities to model entity

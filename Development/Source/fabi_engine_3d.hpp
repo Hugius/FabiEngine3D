@@ -110,11 +110,11 @@ public:
 	void terrainEntity_setNormalMapR(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapG(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapB(const string& ID, const string& texturePath);
-	void terrainEntity_setBlendRepeatR(const string& ID, float repeat);
-	void terrainEntity_setBlendRepeatG(const string& ID, float repeat);
-	void terrainEntity_setBlendRepeatB(const string& ID, float repeat);
+	void terrainEntity_setRedRepeat(const string& ID, float repeat);
+	void terrainEntity_setGreenRepeat(const string& ID, float repeat);
+	void terrainEntity_setBlueRepeat(const string& ID, float repeat);
 	void terrainEntity_setMaxHeight(const string& ID, float height);
-	void terrainEntity_setUvRepeat(const string& ID, float repeat);
+	void terrainEntity_setTextureRepeat(const string& ID, float repeat);
 	void terrainEntity_setLightness(const string& ID, float lightness);
 	void terrainEntity_setSpecularShininess(const string& ID, float shininess);
 	void terrainEntity_setSpecularIntensity(const string& ID, float intensity);
@@ -135,11 +135,11 @@ public:
 	const string& terrainEntity_getNormalMapPathG(const string& ID);
 	const string& terrainEntity_getNormalMapPathB(const string& ID);
 	const float terrainEntity_getMaxHeight(const string& ID);
-	const float terrainEntity_getUvRepeat(const string& ID);
+	const float terrainEntity_getTextureRepeat(const string& ID);
 	const float terrainEntity_getLightness(const string& ID);
-	const float terrainEntity_getBlendRepeatR(const string& ID);
-	const float terrainEntity_getBlendRepeatG(const string& ID);
-	const float terrainEntity_getBlendRepeatB(const string& ID);
+	const float terrainEntity_getRedRepeat(const string& ID);
+	const float terrainEntity_getGreenRepeat(const string& ID);
+	const float terrainEntity_getBlueRepeat(const string& ID);
 	const float terrainEntity_getSize(const string& ID);
 	const float terrainEntity_getPixelHeight(const string& ID, float x, float z);
 	const float terrainEntity_getSpecularShininess(const string& ID);
@@ -180,7 +180,7 @@ public:
 	void waterEntity_setSpecularIntensity(const string& ID, float intensity);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, Vec3 color);
-	void waterEntity_setUvRepeat(const string& ID, float repeat);
+	void waterEntity_setTextureRepeat(const string& ID, float repeat);
 	void waterEntity_setQuality(const string& ID, WaterQuality quality);
 
 	// Water entity interface - getters
@@ -193,7 +193,7 @@ public:
 	const Vec2 waterEntity_getSpeed(const string& ID);
 	const float waterEntity_getHeight(const string& ID);
 	const float waterEntity_getSize(const string& ID);
-	const float waterEntity_getUvRepeat(const string& ID);
+	const float waterEntity_getTextureRepeat(const string& ID);
 	const float waterEntity_getWaveHeight(const string& ID);
 	const float waterEntity_getSpecularShininess(const string& ID);
 	const float waterEntity_getSpecularIntensity(const string& ID);
@@ -261,7 +261,7 @@ public:
 	void modelEntity_setColor(const string& ID, const string& partID, Vec3 color);
 	void modelEntity_setMinHeight(const string& ID, float height);
 	void modelEntity_setMaxHeight(const string& ID, float height);
-	void modelEntity_setUvRepeat(const string& ID, const string& partID, float repeat);
+	void modelEntity_setTextureRepeat(const string& ID, const string& partID, float repeat);
 	void modelEntity_enableInstancing(const string& ID, vector<Vec3> offsets);
 	void modelEntity_disableInstancing(const string& ID);
 	void modelEntity_setBright(const string& ID, bool enabled);
@@ -296,7 +296,7 @@ public:
 	const float modelEntity_getAlpha(const string& ID, const string& partID);
 	const float modelEntity_getMinHeight(const string& ID);
 	const float modelEntity_getMaxHeight(const string& ID);
-	const float modelEntity_getUvRepeat(const string& ID, const string& partID);
+	const float modelEntity_getTextureRepeat(const string& ID, const string& partID);
 	const float modelEntity_getEmissionIntensity(const string& ID, const string& partID);
 	const bool modelEntity_isExisting(const string& ID);
 	const bool modelEntity_isVisible(const string& ID);
@@ -346,7 +346,7 @@ public:
 	void billboardEntity_setLightness(const string& ID, float lightness);
 	void billboardEntity_setColorInversion(const string& ID, float colorInversion);
 	void billboardEntity_setAlpha(const string& ID, float alpha);
-	void billboardEntity_setUvRepeat(const string& ID, float repeat);
+	void billboardEntity_setTextureRepeat(const string& ID, float repeat);
 	void billboardEntity_setEmissionIntensity(const string& ID, float intensity);
 	void billboardEntity_startSpriteAnimation(const string& ID, int loops);
 	void billboardEntity_setSpriteAnimationRows(const string& ID, unsigned int rows);
@@ -378,7 +378,7 @@ public:
 	const float billboardEntity_getMinHeight(const string& ID);
 	const float billboardEntity_getMaxHeight(const string& ID);
 	const float billboardEntity_getAlpha(const string& ID);
-	const float billboardEntity_getUvRepeat(const string& ID);
+	const float billboardEntity_getTextureRepeat(const string& ID);
 	const float billboardEntity_getEmissionIntensity(const string& ID);
 	const int billboardEntity_getRemainingSpriteAnimationLoops(const string& ID);
 	const unsigned int billboardEntity_getSpriteAnimationRows(const string& ID);

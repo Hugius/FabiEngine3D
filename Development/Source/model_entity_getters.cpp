@@ -278,9 +278,9 @@ const float ModelEntity::getAlpha(const string& partID)
 	return _parts[_getPartIndex(partID)].alpha;
 }
 
-const float ModelEntity::getUvRepeat(const string& partID)
+const float ModelEntity::getTextureRepeat(const string& partID)
 {
-	return _parts[_getPartIndex(partID)].uvRepeat;
+	return _parts[_getPartIndex(partID)].textureRepeat;
 }
 
 unsigned int ModelEntity::_getPartIndex(const string& partID)

@@ -9,10 +9,10 @@ void TerrainEditor::_updateMiscellaneousMenu()
 	if (screen->getID() == "terrainEditorMenuMiscellaneous")
 	{
 		// Temporary values
-		auto uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-		auto blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
-		auto blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
-		auto blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
+		auto textureRepeat = _fe3d.terrainEntity_getTextureRepeat(_currentTerrainID);
+		auto redRepeat = _fe3d.terrainEntity_getRedRepeat(_currentTerrainID);
+		auto greenRepeat = _fe3d.terrainEntity_getGreenRepeat(_currentTerrainID);
+		auto blueRepeat = _fe3d.terrainEntity_getBlueRepeat(_currentTerrainID);
 		auto hasBlendMap = _fe3d.terrainEntity_hasBlendMap(_currentTerrainID);
 		auto hasDiffuseMap = _fe3d.terrainEntity_hasDiffuseMap(_currentTerrainID);
 		auto hasNormalMap = _fe3d.terrainEntity_hasNormalMap(_currentTerrainID);
@@ -29,43 +29,43 @@ void TerrainEditor::_updateMiscellaneousMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("redRepeat", "Red Repeat", blendRepeatR, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("redRepeat", "Red Repeat", redRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("greenRepeat", "Green Repeat", blendRepeatG, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("greenRepeat", "Green Repeat", greenRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("blueRepeat", "Blue Repeat", blendRepeatB, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("blueRepeat", "Blue Repeat", blueRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
+		if (_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat))
 		{
-			_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
+			_fe3d.terrainEntity_setTextureRepeat(_currentTerrainID, textureRepeat);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
+		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", redRepeat))
 		{
-			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
+			_fe3d.terrainEntity_setRedRepeat(_currentTerrainID, redRepeat);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
+		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", greenRepeat))
 		{
-			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
+			_fe3d.terrainEntity_setGreenRepeat(_currentTerrainID, greenRepeat);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
+		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blueRepeat))
 		{
-			_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);
+			_fe3d.terrainEntity_setBlueRepeat(_currentTerrainID, blueRepeat);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("uvRepeat")->setHoverable(hasDiffuseMap || hasNormalMap);
+		screen->getButton("textureRepeat")->setHoverable(hasDiffuseMap || hasNormalMap);
 		screen->getButton("redRepeat")->setHoverable(hasDiffuseMapR || hasNormalMapR);
 		screen->getButton("greenRepeat")->setHoverable(hasDiffuseMapG || hasNormalMapG);
 		screen->getButton("blueRepeat")->setHoverable(hasDiffuseMapB || hasNormalMapB);

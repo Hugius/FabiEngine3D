@@ -122,24 +122,24 @@ void TerrainEntity::setNormalMapPathB(const string& filePath)
 	_normalMapPathB = filePath;
 }
 
-void TerrainEntity::setUvRepeat(float value)
+void TerrainEntity::setTextureRepeat(float value)
 {
-	_uvRepeat = max(0.0f, value);
+	_textureRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setBlendRepeatR(float value)
+void TerrainEntity::setRedRepeat(float value)
 {
-	_blendRepeatR = max(0.0f, value);
+	_redRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setBlendRepeatG(float value)
+void TerrainEntity::setGreenRepeat(float value)
 {
-	_blendRepeatG = max(0.0f, value);
+	_greenRepeat = max(0.0f, value);
 }
 
-void TerrainEntity::setBlendRepeatB(float value)
+void TerrainEntity::setBlueRepeat(float value)
 {
-	_blendRepeatB = max(0.0f, value);
+	_blueRepeat = max(0.0f, value);
 }
 
 void TerrainEntity::setSize(float value)

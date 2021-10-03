@@ -14,7 +14,7 @@ void BillboardEditor::_updateTexturingMenu()
 		auto isText = _fe3d.billboardEntity_isText(_currentBillboardID);
 		auto hasDiffuseMap = _fe3d.billboardEntity_hasDiffuseMap(_currentBillboardID);
 		auto hasEmissionMap = _fe3d.billboardEntity_hasEmissionMap(_currentBillboardID);
-		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(_currentBillboardID);
+		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(_currentBillboardID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -136,9 +136,9 @@ void BillboardEditor::_updateTexturingMenu()
 			_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, "");
 			_fe3d.billboardEntity_setEmissionMap(_currentBillboardID, "");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
@@ -146,9 +146,9 @@ void BillboardEditor::_updateTexturingMenu()
 		{
 			_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d.billboardEntity_setUvRepeat(_currentBillboardID, uvRepeat);
+			_fe3d.billboardEntity_setTextureRepeat(_currentBillboardID, textureRepeat);
 		}
 
 		// Update buttons hoverability
@@ -157,6 +157,6 @@ void BillboardEditor::_updateTexturingMenu()
 		screen->getButton("diffuseMap")->setHoverable(!isText);
 		screen->getButton("diffuseMap")->setHoverable(!isText);
 		screen->getButton("clearMaps")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
-		screen->getButton("uvRepeat")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
+		screen->getButton("textureRepeat")->setHoverable((hasDiffuseMap && !isText) || hasEmissionMap);
 	}
 }

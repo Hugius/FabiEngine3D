@@ -64,7 +64,7 @@ void BillboardEntityDepthRenderer::render(const shared_ptr<BillboardEntity> enti
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
-		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_minTextureAlpha", MIN_TEXTURE_ALPHA);

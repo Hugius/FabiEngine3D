@@ -85,9 +85,9 @@ const float BillboardEntity::getMaxHeight()
 	return _maxHeight;
 }
 
-const float BillboardEntity::getUvRepeat()
+const float BillboardEntity::getTextureRepeat()
 {
-	return _uvRepeat;
+	return _textureRepeat;
 }
 
 const float BillboardEntity::getEmissionIntensity()

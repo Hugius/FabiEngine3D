@@ -22,7 +22,7 @@ uniform vec4 u_clippingPlane;
 uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
-uniform float u_uvRepeat;
+uniform float u_textureRepeat;
 
 // Boolean uniforms
 uniform bool u_isInstanced;
@@ -55,7 +55,7 @@ void main()
 	
 	// Out variables
 	f_pos       = worldSpacePos.xyz;
-	f_uv        = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
+	f_uv        = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
 	f_normal    = normalize(u_normalTransformationMatrix * v_normal);
 	f_shadowPos = u_shadowMatrix * worldSpacePos;
 	f_clip      = clipSpacePos;

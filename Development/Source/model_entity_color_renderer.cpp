@@ -169,7 +169,7 @@ void ModelEntityColorRenderer::render(const shared_ptr<ModelEntity> entity, cons
 			// Shader uniforms
 			_shader.uploadUniform("u_isReflective", entity->isReflective(partID));
 			_shader.uploadUniform("u_emissionIntensity", entity->getEmissionIntensity(partID));
-			_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat(partID));
+			_shader.uploadUniform("u_textureRepeat", entity->getTextureRepeat(partID));
 			_shader.uploadUniform("u_alpha", entity->getAlpha(partID));
 			_shader.uploadUniform("u_isSpecular", entity->isSpecular(partID));
 			_shader.uploadUniform("u_reflectivity", entity->getReflectivity(partID));

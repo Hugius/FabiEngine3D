@@ -17,7 +17,7 @@ uniform vec2 u_waveOffset;
 
 // Float uniforms
 uniform float u_heightOffset;
-uniform float u_uvRepeat;
+uniform float u_textureRepeat;
 uniform float u_waveHeight;
 
 // Boolean uniforms
@@ -38,7 +38,7 @@ void main()
 	newPosition += vec3(0.0f, u_heightOffset, 0.0f);
 
 	// Pre-calculate UV out variable
-	f_uv = (v_uv * u_uvRepeat);
+	f_uv = (v_uv * u_textureRepeat);
 
 	// Vertex water waves
 	if (u_hasDisplacementMap)

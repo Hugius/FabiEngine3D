@@ -77,7 +77,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 			auto reflectivity = _fe3d.modelEntity_getReflectivity(modelID, partID);
 			auto lightness = _fe3d.modelEntity_getLightness(modelID, partID);
 			auto color = _fe3d.modelEntity_getColor(modelID, partID);
-			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID, partID);
+			auto textureRepeat = _fe3d.modelEntity_getTextureRepeat(modelID, partID);
 			auto isReflective = _fe3d.modelEntity_isReflective(modelID, partID);
 			auto reflectionType = static_cast<unsigned int>(_fe3d.modelEntity_getReflectionType(modelID, partID));
 
@@ -112,7 +112,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 				color.r << " " <<
 				color.g << " " <<
 				color.b << " " <<
-				uvRepeat;
+				textureRepeat;
 
 			// Write space to file
 			if (i < (partIDs.size() - 1))

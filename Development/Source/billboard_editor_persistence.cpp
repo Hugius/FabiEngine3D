@@ -186,7 +186,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 		string billboardID, diffuseMapPath, emissionMapPath, fontPath, textContent;
 		Vec2 size;
 		Vec3 color;
-		float lightness, uvRepeat;
+		float lightness, textureRepeat;
 		bool isFacingX, isFacingY, isReflected, isShadowed, isAnimationStarted;
 		unsigned int animationRows, animationColumns, animationFramestep;
 
@@ -214,7 +214,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			animationColumns >>
 			animationFramestep >>
 			lightness >>
-			uvRepeat;
+			textureRepeat;
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -273,7 +273,7 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 			_fe3d.billboardEntity_setCameraFacingY(billboardID, isFacingY);
 			_fe3d.billboardEntity_setShadowed(billboardID, isShadowed);
 			_fe3d.billboardEntity_setReflected(billboardID, isReflected);
-			_fe3d.billboardEntity_setUvRepeat(billboardID, uvRepeat);
+			_fe3d.billboardEntity_setTextureRepeat(billboardID, textureRepeat);
 		}
 	}
 
@@ -327,7 +327,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 		auto animationColumns = _fe3d.billboardEntity_getSpriteAnimationColumns(billboardID);
 		auto animationFramestep = _fe3d.billboardEntity_getSpriteAnimationFramestep(billboardID);
 		auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
-		auto uvRepeat = _fe3d.billboardEntity_getUvRepeat(billboardID);
+		auto textureRepeat = _fe3d.billboardEntity_getTextureRepeat(billboardID);
 
 		// Perform empty string & space conversions
 		diffuseMapPath = (diffuseMapPath.empty()) ? "?" : diffuseMapPath;
@@ -360,7 +360,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 			animationColumns << " " <<
 			animationFramestep << " " <<
 			lightness << " " <<
-			uvRepeat << endl;
+			textureRepeat << endl;
 	}
 
 	// Close file

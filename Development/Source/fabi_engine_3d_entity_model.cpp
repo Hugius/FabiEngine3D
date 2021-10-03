@@ -448,9 +448,9 @@ void FabiEngine3D::modelEntity_setLevelOfDetailSize(const string& ID, Vec3 size)
 	_core->_modelEntityManager.getEntity(ID)->setLevelOfDetailSize(size);
 }
 
-void FabiEngine3D::modelEntity_setUvRepeat(const string& ID, const string& partID, float repeat)
+void FabiEngine3D::modelEntity_setTextureRepeat(const string& ID, const string& partID, float repeat)
 {
-	_core->_modelEntityManager.getEntity(ID)->setUvRepeat(partID, repeat);
+	_core->_modelEntityManager.getEntity(ID)->setTextureRepeat(partID, repeat);
 }
 
 void FabiEngine3D::modelEntity_enableInstancing(const string& ID, vector<Vec3> offsets)
@@ -528,9 +528,9 @@ const float FabiEngine3D::modelEntity_getMaxHeight(const string& ID)
 	return _core->_modelEntityManager.getEntity(ID)->getMaxHeight();
 }
 
-const float FabiEngine3D::modelEntity_getUvRepeat(const string& ID, const string& partID)
+const float FabiEngine3D::modelEntity_getTextureRepeat(const string& ID, const string& partID)
 {
-	return _core->_modelEntityManager.getEntity(ID)->getUvRepeat(partID);
+	return _core->_modelEntityManager.getEntity(ID)->getTextureRepeat(partID);
 }
 
 const float FabiEngine3D::modelEntity_getEmissionIntensity(const string& ID, const string& partID)

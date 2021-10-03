@@ -71,7 +71,7 @@ public:
 	void setSpecularShininess(const string& partID, float value);
 	void setSpecularIntensity(const string& partID, float value);
 	void setAlpha(const string& partID, float value);
-	void setUvRepeat(const string& partID, float value);
+	void setTextureRepeat(const string& partID, float value);
 	void setEmissionIntensity(const string& partID, float value);
 	void setSpecular(const string& partID, bool value);
 	void setReflective(const string& partID, bool value);
@@ -119,7 +119,7 @@ public:
 	const float getSpecularShininess(const string& partID);
 	const float getSpecularIntensity(const string& partID);
 	const float getAlpha(const string& partID);
-	const float getUvRepeat(const string& partID);
+	const float getTextureRepeat(const string& partID);
 	const float getEmissionIntensity(const string& partID);
 
 	// Booleans
@@ -193,7 +193,7 @@ private:
 		float specularIntensity = 1.0f;
 		float alpha = 1.0f;
 		float emissionIntensity = 1.0f;
-		float uvRepeat = 1.0f;
+		float textureRepeat = 1.0f;
 
 		// Booleans
 		bool isSpecular = false;

@@ -43,7 +43,7 @@ void BillboardEditor::load()
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", "", GRID_UV);
+	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
@@ -132,7 +132,7 @@ void BillboardEditor::_loadGUI()
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("diffuseMap", Vec2(0.0f, positions[2]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("emissionMap", Vec2(0.0f, positions[3]), Vec2(TW("Emission Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Emission Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("clearMaps", Vec2(0.0f, positions[4]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("uvRepeat", Vec2(0.0f, positions[5]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("textureRepeat", Vec2(0.0f, positions[5]), Vec2(TW("Texture Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texture Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("billboardEditorMenuTexturing")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: billboardEditorMenuAnimation

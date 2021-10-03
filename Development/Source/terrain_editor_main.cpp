@@ -41,7 +41,7 @@ void TerrainEditor::load()
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", "", GRID_UV);
+	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
@@ -111,23 +111,23 @@ void TerrainEditor::_loadGUI()
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("miscellaneous", Vec2(0.0f, positions[5]), Vec2(TW("Miscellaneous"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Miscellaneous", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuChoice")->createButton("back", Vec2(0.0f, positions[6]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
-	// Left-viewport: terrainEditorMenuDiffuseMap
-	positions = VPC::calculateButtonPositions(3, CH);
-	leftWindow->createScreen("terrainEditorMenuDiffuseMap");
-	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("diffuseMap", Vec2(0.0f, positions[0]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("clearMaps", Vec2(0.0f, positions[1]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-
 	// Left-viewport: terrainEditorMenuBlendMap
-	positions = VPC::calculateButtonPositions(6, CH);
+	positions = VPC::calculateButtonPositions(3, CH);
 	leftWindow->createScreen("terrainEditorMenuBlendMap");
 	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("blendMap", Vec2(0.0f, positions[0]), Vec2(TW("Blend Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blend Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("redMap", Vec2(0.0f, positions[1]), Vec2(TW("Red Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Red Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("greenMap", Vec2(0.0f, positions[2]), Vec2(TW("Green Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Green Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("blueMap", Vec2(0.0f, positions[3]), Vec2(TW("Blue Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blue Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("clearMaps", Vec2(0.0f, positions[4]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
+	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("clearMaps", Vec2(0.0f, positions[1]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuBlendMap")->createButton("back", Vec2(0.0f, positions[2]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
+	// Left-viewport: terrainEditorMenuDiffuseMap
+	positions = VPC::calculateButtonPositions(6, CH);
+	leftWindow->createScreen("terrainEditorMenuDiffuseMap");
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("diffuseMap", Vec2(0.0f, positions[0]), Vec2(TW("Diffuse Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Diffuse Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("redMap", Vec2(0.0f, positions[1]), Vec2(TW("Red Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Red Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("greenMap", Vec2(0.0f, positions[2]), Vec2(TW("Green Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Green Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("blueMap", Vec2(0.0f, positions[3]), Vec2(TW("Blue Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blue Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("clearMaps", Vec2(0.0f, positions[4]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuDiffuseMap")->createButton("back", Vec2(0.0f, positions[5]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+
 	// Left-viewport: terrainEditorMenuNormalMap
 	positions = VPC::calculateButtonPositions(6, CH);
 	leftWindow->createScreen("terrainEditorMenuNormalMap");
@@ -150,7 +150,7 @@ void TerrainEditor::_loadGUI()
 	// Left-viewport: terrainEditorMenuMiscellaneous
 	positions = VPC::calculateButtonPositions(5, CH);
 	leftWindow->createScreen("terrainEditorMenuMiscellaneous");
-	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("uvRepeat", Vec2(0.0f, positions[0]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("textureRepeat", Vec2(0.0f, positions[0]), Vec2(TW("Texture Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texture Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("redRepeat", Vec2(0.0f, positions[1]), Vec2(TW("Red Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Red Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("greenRepeat", Vec2(0.0f, positions[2]), Vec2(TW("Green Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Green Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("terrainEditorMenuMiscellaneous")->createButton("blueRepeat", Vec2(0.0f, positions[3]), Vec2(TW("Blue Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Blue Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);

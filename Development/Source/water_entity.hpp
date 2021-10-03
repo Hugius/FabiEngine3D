@@ -27,7 +27,7 @@ public:
 	void setDudvMapPath(const string& value);
 	void setNormalMapPath(const string& value);
 	void setDisplacementMapPath(const string& value);
-	void setUvRepeat(float value);
+	void setTextureRepeat(float value);
 	void setWaveHeight(float value);
 	void setSpecularShininess(float value);
 	void setSpecularIntensity(float value);
@@ -56,7 +56,7 @@ public:
 
 	// Floats
 	const float getHeight();
-	const float getUvRepeat();
+	const float getTextureRepeat();
 	const float getWaveHeight();
 	const float getSpecularShininess();
 	const float getSpecularIntensity();
@@ -95,7 +95,7 @@ private:
 	// Floats
 	float _height = 0.0f;
 	float _size = 1.0f;
-	float _uvRepeat = 1.0f;
+	float _textureRepeat = 1.0f;
 	float _waveHeight = 0.0f;
 	float _specularShininess = 1.0f;
 	float _specularIntensity = 1.0f;

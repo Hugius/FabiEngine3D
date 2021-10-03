@@ -110,24 +110,24 @@ const vector<Vec3>& TerrainEntity::getNormals()
 	return _normals;
 }
 
-const float TerrainEntity::getUvRepeat()
+const float TerrainEntity::getTextureRepeat()
 {
-	return _uvRepeat;
+	return _textureRepeat;
 }
 
-const float TerrainEntity::getBlendRepeatR()
+const float TerrainEntity::getRedRepeat()
 {
-	return _blendRepeatR;
+	return _redRepeat;
 }
 
-const float TerrainEntity::getBlendRepeatG()
+const float TerrainEntity::getGreenRepeat()
 {
-	return _blendRepeatG;
+	return _greenRepeat;
 }
 
-const float TerrainEntity::getBlendRepeatB()
+const float TerrainEntity::getBlueRepeat()
 {
-	return _blendRepeatB;
+	return _blueRepeat;
 }
 
 const float TerrainEntity::getSize()

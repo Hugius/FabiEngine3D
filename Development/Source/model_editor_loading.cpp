@@ -136,7 +136,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				// Data placeholders
 				string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
 				Vec3 color;
-				float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+				float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 				unsigned int reflectionType;
 				bool isSpecular, isReflective;
 
@@ -157,7 +157,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 					color.r >>
 					color.g >>
 					color.b >>
-					uvRepeat;
+					textureRepeat;
 
 				// Perform empty string & space conversions
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
@@ -306,7 +306,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 
 					// Data placeholders
 					string diffuseMapPath, emissionMapPath, specularMapPath, reflectionMapPath, normalMapPath;
-					float uvRepeat, specularShininess, specularIntensity, reflectivity, lightness;
+					float textureRepeat, specularShininess, specularIntensity, reflectivity, lightness;
 					unsigned int reflectionType;
 					bool isSpecular, isReflective;
 					Vec3 color;
@@ -328,7 +328,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 						color.r >>
 						color.g >>
 						color.b >>
-						uvRepeat;
+						textureRepeat;
 
 					// Perform empty string & space conversions
 					partID = (partID == "?") ? "" : partID;
@@ -380,7 +380,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 					_fe3d.modelEntity_setSpecularIntensity(modelID, partID, specularIntensity);
 					_fe3d.modelEntity_setReflectivity(modelID, partID, reflectivity);
 					_fe3d.modelEntity_setLightness(modelID, partID, lightness);
-					_fe3d.modelEntity_setUvRepeat(modelID, partID, uvRepeat);
+					_fe3d.modelEntity_setTextureRepeat(modelID, partID, textureRepeat);
 					_fe3d.modelEntity_setReflective(modelID, partID, isReflective);
 					_fe3d.modelEntity_setReflectionType(modelID, partID, ReflectionType(reflectionType));
 				}

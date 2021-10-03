@@ -101,7 +101,6 @@ void TerrainEntityManager::loadMesh(const string& ID)
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
 	const float maxHeight = entity->getMaxHeight();
-	const float uvRepeat = entity->getUvRepeat();
 	vector<Vec3> tempVertices;
 	vector<Vec2> tempUvCoords;
 	vector<Vec3> tempNormals;
@@ -116,8 +115,8 @@ void TerrainEntityManager::loadMesh(const string& ID)
 			float vertexZ = z;
 
 			// Calculate UV coordinate
-			float uvX = ((x + halfSize) / size) * uvRepeat;
-			float uvY = ((z + halfSize) / size) * uvRepeat;
+			float uvX = ((x + halfSize) / size);
+			float uvY = ((z + halfSize) / size);
 
 			// Calculate normal vector
 			float LH = _getPixelHeight(x + halfSize - 1, z + halfSize, size, maxHeight, pixelColors);

@@ -50,7 +50,7 @@ void ModelEditor::load()
 	_fe3d.modelEntity_setBasePosition("@@grid", Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	_fe3d.modelEntity_setBaseSize("@@grid", Vec3(GRID_SIZE, 1.0f, GRID_SIZE));
 	_fe3d.modelEntity_setDiffuseMap("@@grid", "", "engine_assets\\textures\\grid.png");
-	_fe3d.modelEntity_setUvRepeat("@@grid", "", GRID_UV);
+	_fe3d.modelEntity_setTextureRepeat("@@grid", "", GRID_UV);
 	_fe3d.modelEntity_setShadowed("@@grid", false);
 
 	// Miscellaneous
@@ -153,7 +153,7 @@ void ModelEditor::_loadGUI()
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("reflectionMap", Vec2(0.0f, positions[3]), Vec2(TW("Reflect Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflect Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("normalMap", Vec2(0.0f, positions[4]), Vec2(TW("Normal Map"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Normal Map", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("clearMaps", Vec2(0.0f, positions[5]), Vec2(TW("Clear Maps"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Clear Maps", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("uvRepeat", Vec2(0.0f, positions[6]), Vec2(TW("UV Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "UV Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("textureRepeat", Vec2(0.0f, positions[6]), Vec2(TW("Texture Repeat"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Texture Repeat", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("modelEditorMenuTexturing")->createButton("back", Vec2(0.0f, positions[7]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: modelEditorMenuLighting

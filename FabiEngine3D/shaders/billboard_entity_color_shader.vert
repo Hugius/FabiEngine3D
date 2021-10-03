@@ -19,7 +19,7 @@ uniform vec2 u_uvMultiplier;
 uniform float u_positionY;
 uniform float u_minHeight;
 uniform float u_maxHeight;
-uniform float u_uvRepeat;
+uniform float u_textureRepeat;
 
 // Out variables
 out vec3 f_pos;
@@ -40,6 +40,6 @@ void main()
 	gl_ClipDistance[2] = dot(worldSpacePos, u_clippingPlane);
 	
 	// Out variables
-	f_uv = (vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y)) * u_uvRepeat);
+	f_uv = (vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y)) * u_textureRepeat);
     f_pos = worldSpacePos.xyz;
 }

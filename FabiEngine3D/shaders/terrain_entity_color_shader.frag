@@ -42,10 +42,10 @@ uniform float u_lightIntensities[MAX_LIGHT_COUNT];
 uniform float u_lightness;
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
-uniform float u_diffuseMapRepeat;
-uniform float u_diffuseMapRepeatR;
-uniform float u_diffuseMapRepeatG;
-uniform float u_diffuseMapRepeatB;
+uniform float u_textureRepeat;
+uniform float u_redRepeat;
+uniform float u_greenRepeat;
+uniform float u_blueRepeat;
 uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
@@ -147,20 +147,21 @@ vec3 calculateDiffuseMapping()
 	if (u_hasBlendMap) // Blendmapped mixed texture
 	{
 		// Get color value of blendmap (R, G, B)
-		vec2 blendUV = (f_uv / u_diffuseMapRepeat);
+		vec2 blendUV = (f_uv / u_textureRepeat);
 		vec4 blendMapColor = texture(u_blendMap, blendUV);
 
 		// Calculate diffuse map color
 		vec3 diffuseMapColor = vec3(0.0f);
 		if (u_hasDiffuseMap)
 		{
-			diffuseMapColor = texture(u_diffuseMap, f_uv).rgb* (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			float blendMultiplier = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			diffuseMapColor = (texture(u_diffuseMap, f_uv).rgb * blendMultiplier);
 		}
 
 		// Calculate blending color for every channel
-		vec3 rColor = (u_hasDiffuseMapR ? (texture(u_diffuseMapR, (blendUV * u_diffuseMapRepeatR)).rgb * blendMapColor.r) : vec3(0.0f));
-		vec3 gColor = (u_hasDiffuseMapG ? (texture(u_diffuseMapG, (blendUV * u_diffuseMapRepeatG)).rgb * blendMapColor.g) : vec3(0.0f));
-		vec3 bColor = (u_hasDiffuseMapB ? (texture(u_diffuseMapB, (blendUV * u_diffuseMapRepeatB)).rgb * blendMapColor.b) : vec3(0.0f));
+		vec3 rColor = (u_hasDiffuseMapR ? (texture(u_diffuseMapR, (blendUV * u_redRepeat)).rgb * blendMapColor.r) : vec3(0.0f));
+		vec3 gColor = (u_hasDiffuseMapG ? (texture(u_diffuseMapG, (blendUV * u_greenRepeat)).rgb * blendMapColor.g) : vec3(0.0f));
+		vec3 bColor = (u_hasDiffuseMapB ? (texture(u_diffuseMapB, (blendUV * u_blueRepeat)).rgb * blendMapColor.b) : vec3(0.0f));
 		rColor = pow(rColor, vec3(2.2f));
 		gColor = pow(gColor, vec3(2.2f));
 		bColor = pow(bColor, vec3(2.2f));
@@ -193,7 +194,7 @@ vec3 calculateNormalMapping()
 		if (u_hasBlendMap) // Blendmapped mixed normal
 		{
 			// Get color values of blendmap (R, G, B)
-			vec2 blendUV = (f_uv / u_diffuseMapRepeat);
+			vec2 blendUV = (f_uv / u_textureRepeat);
 			vec4 blendMapColor = texture(u_blendMap, blendUV);
 			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 			float rStrength = blendMapColor.r;
@@ -219,7 +220,7 @@ vec3 calculateNormalMapping()
 			// BlendR normal map
 			if (u_hasNormalMapR)
 			{
-				vec3 normal = texture(u_normalMapR, (blendUV * u_diffuseMapRepeatR)).rgb;
+				vec3 normal = texture(u_normalMapR, (blendUV * u_redRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * rStrength);
@@ -232,7 +233,7 @@ vec3 calculateNormalMapping()
 			// BlendG normal map
 			if (u_hasNormalMapG)
 			{
-				vec3 normal = texture(u_normalMapG, (blendUV * u_diffuseMapRepeatG)).rgb;
+				vec3 normal = texture(u_normalMapG, (blendUV * u_greenRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * gStrength);
@@ -245,7 +246,7 @@ vec3 calculateNormalMapping()
 			// BlendB normal map
 			if (u_hasNormalMapB)
 			{
-				vec3 normal = texture(u_normalMapB, (blendUV * u_diffuseMapRepeatB)).rgb;
+				vec3 normal = texture(u_normalMapB, (blendUV * u_blueRepeat)).rgb;
 				normal *= 2.0f;
 				normal -= 1.0f;
 				totalNormal += (normalize(f_tbnMatrix * normal) * bStrength);

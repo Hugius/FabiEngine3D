@@ -40,7 +40,7 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
+		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat;
 
 		// For file extraction
 		istringstream iss(line);
@@ -51,15 +51,15 @@ const vector<string> TerrainEditor::getAllTerrainTexturePathsFromFile()
 			heightMapPath >>
 			diffuseMapPath >>
 			maxHeight >>
-			uvRepeat >>
+			textureRepeat >>
 			lightness >>
 			blendMapPath >>
 			blendMapPathR >>
 			blendMapPathG >>
 			blendMapPathB >>
-			blendRepeatR >>
-			blendRepeatG >>
-			blendRepeatB >>
+			redRepeat >>
+			greenRepeat >>
+			blueRepeat >>
 			normalMapPath >>
 			normalMapPathR >>
 			normalMapPathG >>
@@ -236,7 +236,7 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 		string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 			normalMapPathR, normalMapPathG, normalMapPathB,
 			blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularShininess, specularIntensity;
+		float maxHeight, textureRepeat, lightness, redRepeat, greenRepeat, blueRepeat, specularShininess, specularIntensity;
 		bool isSpecular;
 
 		// For file extraction
@@ -248,15 +248,15 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 			heightMapPath >>
 			diffuseMapPath >>
 			maxHeight >>
-			uvRepeat >>
+			textureRepeat >>
 			lightness >>
 			blendMapPath >>
 			blendMapPathR >>
 			blendMapPathG >>
 			blendMapPathB >>
-			blendRepeatR >>
-			blendRepeatG >>
-			blendRepeatB >>
+			redRepeat >>
+			greenRepeat >>
+			blueRepeat >>
 			normalMapPath >>
 			normalMapPathR >>
 			normalMapPathG >>
@@ -352,11 +352,11 @@ bool TerrainEditor::loadTerrainEntitiesFromFile()
 
 			// Set properties
 			_fe3d.terrainEntity_setMaxHeight(terrainID, maxHeight);
-			_fe3d.terrainEntity_setUvRepeat(terrainID, uvRepeat);
+			_fe3d.terrainEntity_setTextureRepeat(terrainID, textureRepeat);
 			_fe3d.terrainEntity_setLightness(terrainID, lightness);
-			_fe3d.terrainEntity_setBlendRepeatR(terrainID, blendRepeatR);
-			_fe3d.terrainEntity_setBlendRepeatG(terrainID, blendRepeatG);
-			_fe3d.terrainEntity_setBlendRepeatB(terrainID, blendRepeatB);
+			_fe3d.terrainEntity_setRedRepeat(terrainID, redRepeat);
+			_fe3d.terrainEntity_setGreenRepeat(terrainID, greenRepeat);
+			_fe3d.terrainEntity_setBlueRepeat(terrainID, blueRepeat);
 			_fe3d.terrainEntity_setSpecular(terrainID, isSpecular);
 			_fe3d.terrainEntity_setSpecularShininess(terrainID, specularShininess);
 			_fe3d.terrainEntity_setSpecularIntensity(terrainID, specularIntensity);
@@ -409,13 +409,13 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 		string normalMapPathG = _fe3d.terrainEntity_getNormalMapPathG(terrainID);
 		string normalMapPathB = _fe3d.terrainEntity_getNormalMapPathB(terrainID);
 		float maxHeight = _fe3d.terrainEntity_getMaxHeight(terrainID);
-		float uvRepeat = _fe3d.terrainEntity_getUvRepeat(terrainID);
+		float textureRepeat = _fe3d.terrainEntity_getTextureRepeat(terrainID);
 		float lightness = _fe3d.terrainEntity_getLightness(terrainID);
 		float specularShininess = _fe3d.terrainEntity_getSpecularShininess(terrainID);
 		float specularIntensity = _fe3d.terrainEntity_getSpecularIntensity(terrainID);
-		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
-		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
-		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
+		float redRepeat = _fe3d.terrainEntity_getRedRepeat(terrainID);
+		float greenRepeat = _fe3d.terrainEntity_getGreenRepeat(terrainID);
+		float blueRepeat = _fe3d.terrainEntity_getBlueRepeat(terrainID);
 		bool isSpecular = _fe3d.terrainEntity_isSpecular(terrainID);
 
 		// Perform empty string & space conversions
@@ -446,15 +446,15 @@ bool TerrainEditor::saveTerrainEntitiesToFile()
 			heightMapPath << " " <<
 			diffuseMapPath << " " <<
 			maxHeight << " " <<
-			uvRepeat << " " <<
+			textureRepeat << " " <<
 			lightness << " " <<
 			blendMapPath << " " <<
 			blendMapPathR << " " <<
 			blendMapPathG << " " <<
 			blendMapPathB << " " <<
-			blendRepeatR << " " <<
-			blendRepeatG << " " <<
-			blendRepeatB << " " <<
+			redRepeat << " " <<
+			greenRepeat << " " <<
+			blueRepeat << " " <<
 			normalMapPath << " " <<
 			normalMapPathR << " " <<
 			normalMapPathG << " " <<

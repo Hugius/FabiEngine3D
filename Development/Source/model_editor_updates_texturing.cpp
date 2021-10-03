@@ -12,7 +12,7 @@ void ModelEditor::_updateTexturingMenu()
 	if (screen->getID() == "modelEditorMenuTexturing")
 	{
 		// Temporary values
-		auto uvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID, _currentPartID);
+		auto textureRepeat = _fe3d.modelEntity_getTextureRepeat(_currentModelID, _currentPartID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -195,15 +195,15 @@ void ModelEditor::_updateTexturingMenu()
 			_fe3d.modelEntity_setReflectionMap(_currentModelID, _currentPartID, "");
 			_fe3d.modelEntity_setNormalMap(_currentModelID, _currentPartID, "");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uvRepeat")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("textureRepeat")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("uvRepeat", "UV Repeat", uvRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("textureRepeat", "Texture Repeat", textureRepeat, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("textureRepeat", textureRepeat, {}))
 		{
-			_fe3d.modelEntity_setUvRepeat(_currentModelID, _currentPartID, uvRepeat);
+			_fe3d.modelEntity_setTextureRepeat(_currentModelID, _currentPartID, textureRepeat);
 		}
 	}
 }

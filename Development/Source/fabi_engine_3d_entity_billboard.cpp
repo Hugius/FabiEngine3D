@@ -73,9 +73,9 @@ const float FabiEngine3D::billboardEntity_getAlpha(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getAlpha();
 }
 
-const float FabiEngine3D::billboardEntity_getUvRepeat(const string& ID)
+const float FabiEngine3D::billboardEntity_getTextureRepeat(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getUvRepeat();
+	return _core->_billboardEntityManager.getEntity(ID)->getTextureRepeat();
 }
 
 const float FabiEngine3D::billboardEntity_getEmissionIntensity(const string& ID)
@@ -263,9 +263,9 @@ void FabiEngine3D::billboardEntity_setAlpha(const string& ID, float alpha)
 	_core->_billboardEntityManager.getEntity(ID)->setAlpha(alpha);
 }
 
-void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
+void FabiEngine3D::billboardEntity_setTextureRepeat(const string& ID, float repeat)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
+	_core->_billboardEntityManager.getEntity(ID)->setTextureRepeat(repeat);
 }
 
 void FabiEngine3D::billboardEntity_setEmissionIntensity(const string& ID, float intensity)

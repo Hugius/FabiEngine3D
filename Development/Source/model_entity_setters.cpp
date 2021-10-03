@@ -457,9 +457,9 @@ void ModelEntity::setAlpha(const string& partID, float value)
 	_parts[_getPartIndex(partID)].alpha = clamp(value, 0.0f, 1.0f);
 }
 
-void ModelEntity::setUvRepeat(const string& partID, float value)
+void ModelEntity::setTextureRepeat(const string& partID, float value)
 {
-	_parts[_getPartIndex(partID)].uvRepeat = max(0.0f, value);
+	_parts[_getPartIndex(partID)].textureRepeat = max(0.0f, value);
 }
 
 void ModelEntity::setEmissionIntensity(const string& partID, float value)

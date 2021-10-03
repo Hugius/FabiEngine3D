@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -9,18 +11,18 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.networkServer_isRunning();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:server_is_client_connected")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.networkServer_isClientConnected(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:server_get_new_ip")
@@ -29,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto IP = _fe3d.networkServer_getNewClientIP();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, IP));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
 		}
 	}
 	else if (functionName == "fe3d:server_get_new_port")
@@ -38,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto port = _fe3d.networkServer_getNewClientPort();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, port));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, port));
 		}
 	}
 	else if (functionName == "fe3d:server_get_new_username")
@@ -47,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto username = _fe3d.networkServer_getNewClientUsername();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, username));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
 		}
 	}
 	else if (functionName == "fe3d:server_get_old_ip")
@@ -56,7 +58,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto IP = _fe3d.networkServer_getOldClientIP();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, IP));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
 		}
 	}
 	else if (functionName == "fe3d:server_get_old_port")
@@ -65,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto port = _fe3d.networkServer_getOldClientPort();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, port));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, port));
 		}
 	}
 	else if (functionName == "fe3d:server_get_old_username")
@@ -74,7 +76,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto username = _fe3d.networkServer_getOldClientUsername();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, username));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
 		}
 	}
 	else if (functionName == "fe3d:server_get_connected_ips")
@@ -85,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto IPs = _fe3d.networkServer_getClientIPs();
 			for (const auto& IP : IPs)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, IP));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, IP));
 			}
 		}
 	}
@@ -97,7 +99,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto ports = _fe3d.networkServer_getClientPorts();
 			for (const auto& port : ports)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, port));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, port));
 			}
 		}
 	}
@@ -109,7 +111,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto usernames = _fe3d.networkServer_getClientUsernames();
 			for (const auto& username : usernames)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, username));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, username));
 			}
 		}
 	}
@@ -121,7 +123,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.IP));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.IP));
 			}
 		}
 	}
@@ -133,7 +135,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.port));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.port));
 			}
 		}
 	}
@@ -145,7 +147,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.username));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.username));
 			}
 		}
 	}
@@ -157,7 +159,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, string((message.protocol == NetworkProtocol::TCP) ? "TCP" : "UDP")));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, string((message.protocol == NetworkProtocol::TCP) ? "TCP" : "UDP")));
 			}
 		}
 	}
@@ -169,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dServerGetterFunction(const string& functionN
 			auto messages = _fe3d.networkServer_getPendingMessages();
 			for (const auto& message : messages)
 			{
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, message.content));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, message.content));
 			}
 		}
 	}

@@ -1,11 +1,13 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:water_set_speed")
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -15,13 +17,13 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 			{
 				_fe3d.waterEntity_setSpeed(_fe3d.waterEntity_getSelectedID(), 
 					Vec2(arguments[0].getDecimal() / 100000.0f, arguments[1].getDecimal() / 100000.0f));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:water_set_color")
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -33,13 +35,13 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 					arguments[0].getDecimal(), 
 					arguments[1].getDecimal(),
 					arguments[2].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:water_set_transparency")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -48,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dWaterSetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				_fe3d.waterEntity_setTransparency(_fe3d.waterEntity_getSelectedID(), arguments[0].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}

@@ -1,11 +1,13 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:text_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -19,12 +21,12 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 
 			// Check if existing
 			auto result = _fe3d.textEntity_isExisting(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:text_find_ids")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -45,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 					// Only non-preview text
 					if (ID.front() != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
 				}
 			}
@@ -64,14 +66,14 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 				// Only non-preview texts
 				if (ID.front() != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 				}
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_is_visible")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -80,13 +82,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_isVisible(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_position_x")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -95,13 +97,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).x));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).x));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_position_y")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -110,13 +112,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).y));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiPositionFromViewport(result).y));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_rotation")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -125,13 +127,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getRotation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_width")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -140,13 +142,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).x));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).x));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_height")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -155,13 +157,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).y));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, _convertGuiSizeFromViewport(result).y));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_color")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -170,13 +172,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getColor(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_content")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -185,13 +187,13 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getTextContent(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_get_alpha")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -200,7 +202,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getAlpha(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -7,9 +9,9 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // New billboardEntity ID
-			ScriptValueType::STRING, // Preview billboardEntity ID
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL // Position
+			SVT::STRING, // New billboardEntity ID
+			SVT::STRING, // Preview billboardEntity ID
+			SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL // Position
 		};
 
 		// Validate arguments
@@ -43,13 +45,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -58,13 +60,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_delete(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_visible")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,13 +75,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_position")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -89,13 +91,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_setPosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_rotation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -105,13 +107,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_setRotation(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_size")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -120,13 +122,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setSize(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_move")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -136,13 +138,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_rotate")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -152,13 +154,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_rotate(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_scale")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -167,13 +169,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_scale(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_move_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -183,13 +185,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_moveTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_rotate_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -199,13 +201,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_rotateTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_scale_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -215,13 +217,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_scaleTo(arguments[0].getString(),
 					Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()), arguments[3].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_color")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -231,13 +233,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			{
 				_fe3d.billboardEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_min_height")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -246,13 +248,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_max_height")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -261,13 +263,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_alpha")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -276,13 +278,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_lightness")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -291,13 +293,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setLightness(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_aabb_raycast_responsive")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -322,13 +324,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_aabb_collision_responsive")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -353,13 +355,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_camera_facing_x")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -368,13 +370,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setCameraFacingX(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_camera_facing_y")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -383,13 +385,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setCameraFacingY(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_start_animation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { SVT::STRING, SVT::INTEGER };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -398,13 +400,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_startSpriteAnimation(arguments[0].getString(), arguments[1].getInteger());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_pause_animation")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -413,13 +415,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_pauseSpriteAnimation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_resume_animation")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -428,13 +430,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_resumeSpriteAnimation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_stop_animation")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -443,13 +445,13 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:billboard_set_text")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -466,7 +468,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 				else
 				{
 					_fe3d.billboardEntity_setTextContent(arguments[0].getString(), arguments[1].getString());
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 				}
 			}
 		}

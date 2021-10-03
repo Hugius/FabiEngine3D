@@ -1,23 +1,25 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:light_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Check if existing
 			auto result = _fe3d.lightEntity_isExisting(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:light_find_ids")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -38,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 					// Only non-preview lights
 					if (ID.front() != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
 				}
 			}
@@ -57,14 +59,14 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 				// Only non-preview lights
 				if (ID.front() != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 				}
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_is_visible")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -73,13 +75,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_isVisible(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_get_position")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -88,13 +90,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_get_color")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -103,13 +105,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getColor(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_get_intensity")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -118,13 +120,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getIntensity(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_get_radius")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -133,13 +135,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.lightEntity_getRadius(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_is_circle_shape")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -148,13 +150,13 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_is_square_shape")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -163,7 +165,7 @@ bool ScriptInterpreter::_executeFe3dLightGetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.lightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}

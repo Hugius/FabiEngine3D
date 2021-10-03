@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -8,7 +10,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPosition();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_yaw")
@@ -16,7 +18,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getYaw();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_pitch")
@@ -24,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPitch();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_pitch")
@@ -32,7 +34,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getPitch();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_fov")
@@ -40,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFOV();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_is_first_person_view_enabled")
@@ -48,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_isFirstPersonViewEnabled();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_first_person_yaw")
@@ -56,7 +58,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFirstPersonYaw();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_first_person_pitch")
@@ -64,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getFirstPersonPitch();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_is_third_person_view_enabled")
@@ -72,7 +74,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_isThirdPersonViewEnabled();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_third_person_yaw")
@@ -80,7 +82,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonYaw();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_third_person_pitch")
@@ -88,7 +90,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonPitch();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_third_person_distance")
@@ -96,7 +98,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonDistance();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_get_third_person_lookat")
@@ -104,7 +106,7 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.camera_getThirdPersonLookat();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 		}
 	}
 	else

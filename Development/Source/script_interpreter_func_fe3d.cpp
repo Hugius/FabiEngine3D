@@ -33,6 +33,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				// Possibly execute FE3D function
 				executed = (executed || _executeFe3dSkySetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dSkyGetterFunction(functionName, arguments, returnValues));
+				executed = (executed || _executeFe3dTerrainSetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dTerrainGetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dWaterSetterFunction(functionName, arguments, returnValues));
 				executed = (executed || _executeFe3dWaterGetterFunction(functionName, arguments, returnValues));

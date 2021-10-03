@@ -1,70 +1,85 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dSkySetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine function type
-	if (functionName == "fe3d:sky_get_mix_id")
+	if (functionName == "fe3d:sky_mix")
 	{
+		auto types = { SVT::STRING };
+
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSky())
 			{
-				auto result = _fe3d.skyEntity_getMixID();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+				_fe3d.skyEntity_selectMixSky("@" + arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:sky_get_mix_value")
+	else if (functionName == "fe3d:sky_set_mix_value")
 	{
+		auto types = { SVT::DECIMAL };
+
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSky())
 			{
-				auto result = _fe3d.skyEntity_getMixValue();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				_fe3d.skyEntity_setMixValue(arguments[0].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:sky_get_rotation_speed")
+	else if (functionName == "fe3d:sky_set_rotation_speed")
 	{
+		auto types = { SVT::DECIMAL };
+
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSky())
 			{
-				auto result = _fe3d.skyEntity_getRotationSpeed(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				_fe3d.skyEntity_setRotationSpeed(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:sky_get_lightness")
+	else if (functionName == "fe3d:sky_set_lightness")
 	{
+		auto types = { SVT::DECIMAL };
+
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSky())
 			{
-				auto result = _fe3d.skyEntity_getLightness(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				_fe3d.skyEntity_setLightness(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:sky_get_color")
+	else if (functionName == "fe3d:sky_set_color")
 	{
+		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+
 		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Validate sky existence
 			if (_validateFe3dSky())
 			{
-				auto result = _fe3d.skyEntity_getColor(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				_fe3d.skyEntity_setColor(_fe3d.skyEntity_getSelectedID(), Vec3(
+					arguments[0].getDecimal(),
+					arguments[1].getDecimal(),
+					arguments[2].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}

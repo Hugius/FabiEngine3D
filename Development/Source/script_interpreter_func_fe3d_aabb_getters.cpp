@@ -1,11 +1,13 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:aabb_find_ids")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -29,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 						// Only non-bound AABBs
 						if (!_fe3d.aabbEntity_hasParent(ID))
 						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+							returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 						}
 					}
 				}
@@ -38,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 	}
 	else if (functionName == "fe3d:aabb_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -52,12 +54,12 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 
 			// Check if existing
 			auto result = _fe3d.aabbEntity_isExisting(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:aabb_is_visible")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -76,13 +78,13 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 				auto result = _fe3d.aabbEntity_isVisible(arguments[0].getString());
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:aabb_get_position")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -101,13 +103,13 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString());
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:aabb_get_size")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -126,7 +128,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString());
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
@@ -146,7 +148,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 					// Only non-bound AABBs
 					if (!_fe3d.aabbEntity_hasParent(ID))
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
 				}
 			}

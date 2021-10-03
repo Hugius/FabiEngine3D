@@ -5,6 +5,8 @@
 
 using std::clamp;
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -21,7 +23,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Pause engine
 			_fe3d.application_pause();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:application_resume")
@@ -37,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Resume engine
 			_fe3d.application_resume();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:application_stop")
@@ -54,7 +56,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 			}
 			
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:print")
@@ -63,24 +65,24 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, 1))
 		{
 			// Determine which type of value to print
-			if (arguments[0].getType() == ScriptValueType::VEC3)
+			if (arguments[0].getType() == SVT::VEC3)
 			{
 				Logger::throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
 			}
-			else if (arguments[0].getType() == ScriptValueType::STRING)
+			else if (arguments[0].getType() == SVT::STRING)
 			{
 				Logger::throwInfo(arguments[0].getString());
 			}
-			else if (arguments[0].getType() == ScriptValueType::DECIMAL)
+			else if (arguments[0].getType() == SVT::DECIMAL)
 			{
 				string decimalString = to_string(arguments[0].getDecimal());
 				Logger::throwInfo(decimalString.substr(0, decimalString.size() - 1));
 			}
-			else if (arguments[0].getType() == ScriptValueType::INTEGER)
+			else if (arguments[0].getType() == SVT::INTEGER)
 			{
 				Logger::throwInfo(to_string(arguments[0].getInteger()));
 			}
-			else if (arguments[0].getType() == ScriptValueType::BOOLEAN)
+			else if (arguments[0].getType() == SVT::BOOLEAN)
 			{
 				Logger::throwInfo(arguments[0].getBoolean() ? "true" : "false");
 			}
@@ -90,12 +92,12 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:cursor_set_visible")
 	{
-		auto types = { ScriptValueType::BOOLEAN };
+		auto types = { SVT::BOOLEAN };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -108,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Set cursor visibility
 			_fe3d.misc_setCursorVisible(arguments[0].getBoolean());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:cursor_center")
@@ -124,7 +126,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Center cursor
 			_fe3d.misc_centerCursor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:timer_start")
@@ -132,7 +134,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_startMillisecondTimer();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:timer_stop")
@@ -140,7 +142,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:wireFrame_enable_rendering")
@@ -156,7 +158,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Enable wire frame rendering
 			_fe3d.misc_enableWireFrameRendering();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:wireFrame_disable_rendering")
@@ -172,7 +174,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Disable wire frame rendering
 			_fe3d.misc_disableWireFrameRendering();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:aabbs_enable_rendering")
@@ -188,7 +190,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Enable AABB rendering
 			_fe3d.misc_enableAabbFrameRendering();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:aabbs_disable_rendering")
@@ -204,17 +206,17 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Disable AABB rendering
 			_fe3d.misc_disableAabbFrameRendering();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:time_interval")
 	{
-		auto types = { ScriptValueType::INTEGER };
+		auto types = { SVT::INTEGER };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.misc_checkInterval(arguments[0].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:vsync_enable")
@@ -230,7 +232,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Enable Vsync
 			_fe3d.misc_enableVsync();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:vsync_disable")
@@ -246,7 +248,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 
 			// Disable Vsync
 			_fe3d.misc_disableVsync();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else

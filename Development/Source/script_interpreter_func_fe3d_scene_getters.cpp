@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -8,12 +10,12 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _sceneEditor.getLoadedSceneID();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:scene_is_custom_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -24,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 
 			// Return
 			auto result = _fe3d.misc_isFileExisting(filePath);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else

@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -9,12 +11,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			bool result = _fe3d.collision_checkCameraWithTerrain();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_model")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING }; // ModelEntity ID + aabbEntity part ID + direction
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING }; // ModelEntity ID + aabbEntity part ID + direction
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -70,12 +72,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_models")
 	{
-		auto types = { ScriptValueType::STRING }; // Direction
+		auto types = { SVT::STRING }; // Direction
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -114,12 +116,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_billboard")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -158,12 +160,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_billboards")
 	{
-		auto types = { ScriptValueType::STRING }; // Direction
+		auto types = { SVT::STRING }; // Direction
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -202,12 +204,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_aabb")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // aabbEntity ID + Direction
+		auto types = { SVT::STRING, SVT::STRING }; // aabbEntity ID + Direction
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -247,13 +249,13 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 				}
 
 				// Return
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:collision_check_camera_aabbs")
 	{
-		auto types = { ScriptValueType::STRING }; // Direction
+		auto types = { SVT::STRING }; // Direction
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -287,12 +289,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_model_models")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -384,12 +386,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_model_billboards")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -445,12 +447,12 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_check_model_aabbs")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING,ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING,SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -504,7 +506,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else

@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -12,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_getVector();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
@@ -25,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_getPointOnTerrain();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
@@ -38,13 +40,13 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.raycast_isPointOnTerrainValid();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_model")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
+		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -82,12 +84,12 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_model_distance")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
+		auto types = { SVT::STRING, SVT::STRING, SVT::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -127,7 +129,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_models")
@@ -151,7 +153,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_models_distance")
@@ -175,12 +177,12 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboard")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
+		auto types = { SVT::STRING, SVT::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -201,7 +203,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboards")
@@ -225,12 +227,12 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboard_distance")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
+		auto types = { SVT::STRING, SVT::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -251,7 +253,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboards_distance")
@@ -275,7 +277,7 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else

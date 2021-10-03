@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -12,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).x;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -25,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).y;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -38,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getHeight(_fe3d.waterEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -51,7 +53,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getColor(_fe3d.waterEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
@@ -64,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dWaterGetterFunction(const string& functionNa
 			if (_validateFe3dWater())
 			{
 				auto result = _fe3d.waterEntity_getTransparency(_fe3d.waterEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

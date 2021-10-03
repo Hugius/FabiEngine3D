@@ -4,12 +4,14 @@
 
 using std::ifstream;
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:directory_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -20,12 +22,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 
 			// Return
 			auto result =  _fe3d.misc_isDirectoryExisting(newDirectoryPath);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:file_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -36,12 +38,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 
 			// Return
 			auto result = _fe3d.misc_isFileExisting(filePath);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:file_read")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -61,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 				while (!file.eof())
 				{
 					getline(file, line);
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, line));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, line));
 				}
 
 				// Close file

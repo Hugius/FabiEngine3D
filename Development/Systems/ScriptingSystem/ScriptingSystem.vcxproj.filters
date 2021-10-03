@@ -243,6 +243,9 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_client_getters.cpp">
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_setters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\script.hpp">

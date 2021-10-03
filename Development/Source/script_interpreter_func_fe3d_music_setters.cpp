@@ -1,17 +1,19 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:music_add_to_playlist")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.music_addToPlaylist("game_assets\\audio\\" + arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_clear_playlist")
@@ -20,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.music_clearPlaylist();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_enable")
@@ -29,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_enableMusic();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_disable")
@@ -38,18 +40,18 @@ bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_disableMusic();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_set_volume")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.music_setVolume(arguments[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_pause")
@@ -58,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.music_pause();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:music_resume")
@@ -67,7 +69,7 @@ bool ScriptInterpreter::_executeFe3dMusicSetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.music_resume();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else

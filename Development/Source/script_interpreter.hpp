@@ -94,6 +94,7 @@ private:
 	bool _executeFe3dCollisionGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dSkySetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dSkyGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dTerrainSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dTerrainGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dWaterSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dWaterGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);

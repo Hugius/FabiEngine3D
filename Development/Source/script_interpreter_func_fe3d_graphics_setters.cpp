@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -9,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		{
 			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(),
 				_fe3d.gfx_getFogThickness(), _fe3d.gfx_getFogColor());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_disable_fog")
@@ -17,12 +19,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableFog();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_min_fog_distance")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -32,12 +34,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableFog();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_max_fog_distance")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -47,12 +49,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableFog();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_fog_thickness")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -62,12 +64,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableFog();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_fog_color")
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -78,7 +80,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableFog();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_enable_dof")
@@ -86,7 +88,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableDOF(_fe3d.gfx_isDofDynamic(), _fe3d.gfx_getaMaxDofDistance(), _fe3d.gfx_getDofBlurDistance());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_disable_dof")
@@ -94,12 +96,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableDOF();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_dof_dynamic")
 	{
-		auto types = { ScriptValueType::BOOLEAN };
+		auto types = { SVT::BOOLEAN };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -109,12 +111,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableDOF();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_max_dof_distance")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -124,12 +126,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableDOF();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_dof_blur_distance")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -139,7 +141,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableDOF();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_enable_shadows")
@@ -154,7 +156,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 				_fe3d.gfx_getShadowLightness(),
 				_fe3d.gfx_isShadowFollowingCamera(),
 				_fe3d.gfx_getShadowInterval());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_disable_shadows")
@@ -162,12 +164,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableShadows();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_shadow_position")
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -178,7 +180,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 				_fe3d.gfx_getShadowLightness(),
 				_fe3d.gfx_isShadowFollowingCamera(),
 				_fe3d.gfx_getShadowInterval());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_enable_motion_blur")
@@ -186,7 +188,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableMotionBlur(_fe3d.gfx_getMotionBlurStrength());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_disable_motion_blur")
@@ -194,12 +196,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableMotionBlur();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_motion_blur_strength")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -209,7 +211,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableMotionBlur();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_enable_lens_flare")
@@ -217,7 +219,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_enableLensFlare(_fe3d.gfx_getLensFlareMapPath(), _fe3d.gfx_getLensFlareIntensity(), _fe3d.gfx_getLensFlareMultiplier());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_disable_lens_flare")
@@ -225,12 +227,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disableLensFlare();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_lens_flare_map")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -242,12 +244,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableLensFlare();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_lens_flare_intensity")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -257,12 +259,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableLensFlare();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:graphics_set_lens_flare_multiplier")
 	{
-		auto types = { ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
@@ -272,7 +274,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsSetterFunction(const string& functio
 			{
 				_fe3d.gfx_disableLensFlare();
 			}
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else

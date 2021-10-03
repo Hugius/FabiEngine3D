@@ -5,6 +5,8 @@
 
 using std::clamp;
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -21,7 +23,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Return cursor visbility
 			auto result = _fe3d.misc_isCursorVisible();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:cursor_get_position_x")
@@ -37,7 +39,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Get cursor position X
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:cursor_get_position_y")
@@ -53,7 +55,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Get cursor position Y
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, clamp(result, -1.0f, 1.0f)));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:window_get_width")
@@ -69,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Get window width
 			auto result = _fe3d.misc_getWindowSize().x;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
 	else if (functionName == "fe3d:window_get_height")
@@ -85,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Get window height
 			auto result = _fe3d.misc_getWindowSize().y;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
 	else if (functionName == "fe3d:timer_is_started")
@@ -93,7 +95,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_isMillisecondTimerStarted();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:vynsc_is_enabled")
@@ -109,7 +111,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 
 			// Return Vsync status
 			auto result = _fe3d.misc_isVsyncEnabled();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else

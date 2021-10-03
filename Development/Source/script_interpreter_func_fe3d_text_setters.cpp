@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -7,12 +9,12 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // ID
-			ScriptValueType::STRING, // Font path
-			ScriptValueType::STRING, // Text
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Position
-			ScriptValueType::DECIMAL, // Rotation
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL // Size
+			SVT::STRING, // ID
+			SVT::STRING, // Font path
+			SVT::STRING, // Text
+			SVT::DECIMAL, SVT::DECIMAL, // Position
+			SVT::DECIMAL, // Rotation
+			SVT::DECIMAL, SVT::DECIMAL // Size
 		};
 
 		// Validate arguments
@@ -53,12 +55,12 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:text_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -67,13 +69,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_delete(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_visible")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -82,13 +84,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_position")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -98,13 +100,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			{
 				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.textEntity_setPosition(arguments[0].getString(), position);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_move")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -114,13 +116,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.textEntity_move(arguments[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_move_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -131,13 +133,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.textEntity_moveTo(arguments[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_rotate_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -146,13 +148,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_scale_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -163,13 +165,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				Vec2 speed = _convertGuiSizeToViewport(Vec2(arguments[3].getDecimal(), arguments[3].getDecimal()));
 				_fe3d.textEntity_scaleTo(arguments[0].getString(), target, speed.x);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_rotation")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -178,13 +180,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_rotate")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -193,13 +195,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_size")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -209,13 +211,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			{
 				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.textEntity_setSize(arguments[0].getString(), size);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_scale")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -225,13 +227,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				_fe3d.textEntity_scale(arguments[0].getString(), change);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_color")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -241,13 +243,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			{
 				_fe3d.textEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_content")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { SVT::STRING, SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -256,13 +258,13 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setTextContent(arguments[0].getString(), arguments[1].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:text_set_alpha")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -271,7 +273,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}

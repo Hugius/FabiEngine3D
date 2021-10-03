@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -9,7 +11,7 @@ bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_getVolume();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:music_is_started")
@@ -18,7 +20,7 @@ bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isStarted();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:music_is_playing")
@@ -27,7 +29,7 @@ bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPlaying();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:music_is_paused")
@@ -36,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dMusicGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.music_isPaused();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else

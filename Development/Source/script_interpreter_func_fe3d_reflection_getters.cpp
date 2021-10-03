@@ -1,11 +1,13 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:reflection_is_existing")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -19,12 +21,12 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 
 			// Check if existing
 			auto result = _fe3d.reflectionEntity_isExisting(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:reflection_find_ids")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -45,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 					// Only non-preview reflections
 					if (ID.front() != '@')
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 					}
 				}
 			}
@@ -64,14 +66,14 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 				// Only non-preview reflections
 				if (ID.front() != '@')
 				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
 				}
 			}
 		}
 	}
 	else if (functionName == "fe3d:reflection_is_visible")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -80,13 +82,13 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_isVisible(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
 	else if (functionName == "fe3d:reflection_get_position")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -95,7 +97,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_getPosition(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine function type
@@ -12,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getMixID();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 			}
 		}
 	}
@@ -25,7 +27,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getMixValue();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -38,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getRotationSpeed(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -51,7 +53,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getLightness(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -64,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dSkyGetterFunction(const string& functionName
 			if (_validateFe3dSky())
 			{
 				auto result = _fe3d.skyEntity_getColor(_fe3d.skyEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}

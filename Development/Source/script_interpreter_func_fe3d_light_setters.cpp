@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -7,11 +9,11 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // ID
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Position
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Radius
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Color
-			ScriptValueType::DECIMAL // Intensity
+			SVT::STRING, // ID
+			SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, // Position
+			SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, // Radius
+			SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, // Color
+			SVT::DECIMAL // Intensity
 		};
 
 		// Validate arguments
@@ -42,12 +44,12 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			_fe3d.lightEntity_setIntensity(ID, arguments[10].getDecimal());
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:light_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -56,13 +58,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_delete(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_set_visible")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+		auto types = { SVT::STRING, SVT::BOOLEAN };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -71,13 +73,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_set_position")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -87,13 +89,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			{
 				_fe3d.lightEntity_setPosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_move")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -103,13 +105,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			{
 				_fe3d.lightEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_move_to")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -119,13 +121,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			{
 				_fe3d.lightEntity_moveTo(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), arguments[4].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_set_color")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -135,13 +137,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			{
 				_fe3d.lightEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_set_intensity")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -150,13 +152,13 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setIntensity(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:light_set_radius")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -165,7 +167,7 @@ bool ScriptInterpreter::_executeFe3dLightSetterFunction(const string& functionNa
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setRadius(arguments[0].getString(), arguments[1].getDecimal());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}
 	}

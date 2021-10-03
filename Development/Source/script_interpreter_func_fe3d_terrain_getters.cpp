@@ -1,11 +1,13 @@
 #include "script_interpreter.hpp"
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:terrain_get_pixel_height")
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -13,10 +15,11 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 			// Validate terrain existence
 			if (_validateFe3dTerrain())
 			{
-				float halfTerrainSize = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()) / 2.0f;
-				auto result = _fe3d.terrainEntity_getPixelHeight(_fe3d.terrainEntity_getSelectedID(), 
-					arguments[0].getDecimal() + halfTerrainSize, arguments[1].getDecimal() + halfTerrainSize);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				float halfTerrainSize = (_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()) / 2.0f);
+				auto result = _fe3d.terrainEntity_getPixelHeight(_fe3d.terrainEntity_getSelectedID(),
+					(arguments[0].getDecimal() + halfTerrainSize), 
+					(arguments[1].getDecimal() + halfTerrainSize));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -29,7 +32,7 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.terrainEntity_getMaxHeight(_fe3d.terrainEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -42,7 +45,20 @@ bool ScriptInterpreter::_executeFe3dTerrainGetterFunction(const string& function
 			if (_validateFe3dTerrain())
 			{
 				auto result = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:terrain_get_lightness")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrain())
+			{
+				auto result = _fe3d.terrainEntity_getLightness(_fe3d.terrainEntity_getSelectedID());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

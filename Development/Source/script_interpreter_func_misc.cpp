@@ -1,6 +1,8 @@
 #include "script_interpreter.hpp"
 #include "tools.hpp"
 
+using SVT = ScriptValueType;
+
 vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const string& scriptLine)
 {
 	// Temporary values
@@ -32,7 +34,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				// Determine type of function
 				if (functionName == "misc:list_concat")
 				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+					auto types = { SVT::STRING, SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -82,7 +84,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else if (functionName == "misc:list_get_size")
 				{
-					auto types = { ScriptValueType::STRING };
+					auto types = { SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -106,17 +108,17 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return list size
 						auto result = listVariable.getValueCount();
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 					}
 				}
 				else if (functionName == "misc:list_contains")
 				{
-					auto types = { ScriptValueType::STRING };
+					auto types = { SVT::STRING };
 
 					if (_validateListValueCount(arguments, 2))
 					{
 						// List name must be string
-						if (arguments[0].getType() != ScriptValueType::STRING)
+						if (arguments[0].getType() != SVT::STRING)
 						{
 							_throwScriptError("wrong value type(s)!");
 							return returnValues;
@@ -144,32 +146,32 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						{
 							if
 								(
-									(value->getType() == ScriptValueType::VEC3 &&
-									arguments[1].getType() == ScriptValueType::VEC3 &&
+									(value->getType() == SVT::VEC3 &&
+									arguments[1].getType() == SVT::VEC3 &&
 									value->getVec3() == arguments[1].getVec3())
 
 									||
 
-									(value->getType() == ScriptValueType::STRING &&
-									arguments[1].getType() == ScriptValueType::STRING &&
+									(value->getType() == SVT::STRING &&
+									arguments[1].getType() == SVT::STRING &&
 									value->getString() == arguments[1].getString())
 
 									||
 
-									(value->getType() == ScriptValueType::DECIMAL &&
-									arguments[1].getType() == ScriptValueType::DECIMAL &&
+									(value->getType() == SVT::DECIMAL &&
+									arguments[1].getType() == SVT::DECIMAL &&
 									value->getDecimal() == arguments[1].getDecimal())
 
 									||
 
-									(value->getType() == ScriptValueType::INTEGER &&
-									arguments[1].getType() == ScriptValueType::INTEGER &&
+									(value->getType() == SVT::INTEGER &&
+									arguments[1].getType() == SVT::INTEGER &&
 									value->getInteger() == arguments[1].getInteger())
 
 									||
 
-									(value->getType() == ScriptValueType::BOOLEAN &&
-									arguments[1].getType() == ScriptValueType::BOOLEAN &&
+									(value->getType() == SVT::BOOLEAN &&
+									arguments[1].getType() == SVT::BOOLEAN &&
 									value->getBoolean() == arguments[1].getBoolean())
 								)
 							{
@@ -179,12 +181,12 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Return find result
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, foundValue));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, foundValue));
 					}
 				}
 				else if (functionName == "misc:list_reverse")
 				{
-					auto types = { ScriptValueType::STRING };
+					auto types = { SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -217,36 +219,36 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else if (functionName == "misc:string_concat")
 				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+					auto types = { SVT::STRING, SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
 				}
 				else if (functionName == "misc:string_get_size")
 				{
-					auto types = { ScriptValueType::STRING };
+					auto types = { SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = arguments[0].getString().size();
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, static_cast<int>(result)));
 					}
 				}
 				else if (functionName == "misc:string_contains")
 				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+					auto types = { SVT::STRING, SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = (arguments[0].getString().find(arguments[1].getString()) != string::npos);
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 					}
 				}
 				else if (functionName == "misc:string_get_part")
 				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
+					auto types = { SVT::STRING, SVT::INTEGER, SVT::INTEGER };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -260,12 +262,12 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 					}
 				}
 				else if (functionName == "misc:string_split")
 				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+					auto types = { SVT::STRING, SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -285,13 +287,13 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						{
 							if (fullString[i] == splitter.back()) // Found splitter
 							{
-								returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, stringPart));
+								returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
 								stringPart = "";
 							}
 							else if (i == (fullString.size() - 1)) // End of string
 							{
 								stringPart += fullString[i];
-								returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, stringPart));
+								returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, stringPart));
 							}
 							else // Add to string part
 							{
@@ -302,7 +304,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				}
 				else if (functionName == "misc:string_reverse")
 				{
-					auto types = { ScriptValueType::STRING };
+					auto types = { SVT::STRING };
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
@@ -316,35 +318,35 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 
 						// Return
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, result));
 					}
 				}
 				else if (functionName == "misc:get_random_integer")
 				{
 					auto types =
 					{
-						ScriptValueType::INTEGER, // Min
-						ScriptValueType::INTEGER  // Max
+						SVT::INTEGER, // Min
+						SVT::INTEGER  // Max
 					};
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = Tools::getRandomInteger(arguments[0].getInteger(), arguments[1].getInteger());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 					}
 				}
 				else if (functionName == "misc:get_random_decimal")
 				{
 					auto types =
 					{
-						ScriptValueType::DECIMAL, // Min
-						ScriptValueType::DECIMAL  // Max
+						SVT::DECIMAL, // Min
+						SVT::DECIMAL  // Max
 					};
 
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}
 				else

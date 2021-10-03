@@ -66,6 +66,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_getters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_validation.cpp" />

@@ -9,12 +9,14 @@ using std::ios;
 using std::ofstream;
 using std::filesystem::remove_all;
 
+using SVT = ScriptValueType;
+
 bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
 	if (functionName == "fe3d:directory_create")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -30,12 +32,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			}
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:directory_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -48,7 +50,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
 			{
 				remove_all(newDirectoryPath);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 			else
 			{
@@ -58,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	}
 	else if (functionName == "fe3d:file_delete")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -71,7 +73,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			if (_fe3d.misc_isFileExisting(filePath))
 			{
 				auto status = remove(filePath.c_str());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 			else
 			{
@@ -81,7 +83,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 	}
 	else if (functionName == "fe3d:file_write")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, 2) && _validateSavesDirectory())
 		{
@@ -94,26 +96,26 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			ofstream file(filePath, ios::app);
 
 			// Determine which type of value to print
-			if (arguments[1].getType() == ScriptValueType::VEC3)
+			if (arguments[1].getType() == SVT::VEC3)
 			{
 				file << "[" + 
 					to_string(arguments[1].getVec3().x) << " " <<
 					to_string(arguments[1].getVec3().y) << " " <<
 					to_string(arguments[1].getVec3().z) + "]";
 			}
-			else if (arguments[1].getType() == ScriptValueType::STRING)
+			else if (arguments[1].getType() == SVT::STRING)
 			{
 				file << arguments[1].getString();
 			}
-			else if (arguments[1].getType() == ScriptValueType::DECIMAL)
+			else if (arguments[1].getType() == SVT::DECIMAL)
 			{
 				file << to_string(arguments[1].getDecimal());
 			}
-			else if (arguments[1].getType() == ScriptValueType::INTEGER)
+			else if (arguments[1].getType() == SVT::INTEGER)
 			{
 				file << to_string(arguments[1].getInteger());
 			}
-			else if (arguments[1].getType() == ScriptValueType::BOOLEAN)
+			else if (arguments[1].getType() == SVT::BOOLEAN)
 			{
 				file << (arguments[1].getBoolean() ? "<true>" : "<false>");
 			}
@@ -122,12 +124,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			file.close();
 
 			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:file_add_new_line")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -140,12 +142,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			ofstream file(filePath, ios::app);
 			file << endl;
 			file.close();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:file_clear")
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { SVT::STRING };
 
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
@@ -159,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 			{
 				ofstream file(filePath, ios::trunc);
 				file.close();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 			else
 			{

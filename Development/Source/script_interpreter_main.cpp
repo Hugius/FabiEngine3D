@@ -225,8 +225,11 @@ void ScriptInterpreter::load()
 	_fe3d.billboardEntity_setCameraFacingY("@@lightSource", true);
 
 	// Miscellaneous
+	if (_fe3d.misc_isVsyncEnabled())
+	{
+		_fe3d.misc_disableVsync();
+	}
 	_fe3d.misc_setCursorVisible(true);
-	_fe3d.misc_disableVsync();
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);

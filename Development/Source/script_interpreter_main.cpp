@@ -226,6 +226,7 @@ void ScriptInterpreter::load()
 
 	// Miscellaneous
 	_fe3d.misc_setCursorVisible(true);
+	_fe3d.misc_disableVsync();
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings(lastLoggerMessageCount);
@@ -294,9 +295,6 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
-	// Reset camera
-	_fe3d.camera_reset();
-
 	// Delete all sky entities except the engine background
 	for (const auto& ID : _fe3d.skyEntity_getAllIDs())
 	{
@@ -358,7 +356,10 @@ void ScriptInterpreter::unload()
 		}
 	}
 
-	// Disable collision response
+	// Reset camera
+	_fe3d.camera_reset();
+
+	// Reset collision
 	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	if (_fe3d.collision_isCameraResponseEnabled())
 	{
@@ -369,7 +370,13 @@ void ScriptInterpreter::unload()
 		_fe3d.collision_disableTerrainResponse();
 	}
 
-	// Disable graphics
+	// Reset raycasting
+	if (_fe3d.raycast_isTerrainPointingEnabled())
+	{
+		_fe3d.raycast_disableTerrainPointing();
+	}
+
+	// Reset graphics
 	if (_fe3d.gfx_isAmbientLightingEnabled())
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
@@ -407,13 +414,13 @@ void ScriptInterpreter::unload()
 		_fe3d.gfx_disableBloom(true);
 	}
 
-	// Stop networking server
+	// Reset networking server
 	if (_fe3d.networkServer_isRunning())
 	{
 		_fe3d.networkServer_stop();
 	}
 
-	// Stop networking client
+	// Reset networking client
 	if (_fe3d.networkClient_isRunning())
 	{
 		_fe3d.networkClient_stop();
@@ -428,23 +435,15 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.misc_disableWireFrameRendering();
 	}
-	if (_fe3d.raycast_isTerrainPointingEnabled())
+	if (!_fe3d.misc_isVsyncEnabled())
 	{
-		_fe3d.raycast_disableTerrainPointing();
+		_fe3d.misc_enableVsync();
 	}
-	_fe3d.misc_setCursorVisible(false);
-
-	// Reset Vsync
-	if (_fe3d.misc_isVsyncEnabled())
-	{
-		_fe3d.misc_disableVsync();
-	}
-
-	// Reset timer
 	if (_fe3d.misc_isMillisecondTimerStarted())
 	{
 		_fe3d.misc_stopMillisecondTimer();
 	}
+	_fe3d.misc_setCursorVisible(false);
 
 	// Reset all variables
 	_debuggingTimes.clear();

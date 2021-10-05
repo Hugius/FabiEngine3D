@@ -47,9 +47,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Load application settings
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
 
-		// Camera
-		camera_reset();
-
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().loadScriptFiles();
 		_leftViewportController.getScriptEditor().getScriptExecutor().load();
@@ -137,14 +134,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		fontPaths.push_back(string(fontDirectoryPath + "font.ttf"));
 		misc_cacheFontsMultiThreaded(fontPaths);
 		
-		// Enable vsync
-		misc_enableVsync();
-		
 		// Default rendering color
 		misc_setMainRenderingColor(Vec3(0.0f));
-
-		// Camera
-		camera_reset();
 
 		// Default engine background
 		skyEntity_create("@@engineBackground");
@@ -163,6 +154,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_bottomViewportController.initialize();
 		_topViewportController.initialize();
 		_leftViewportController.initialize();
+
+		// Enable Vsync
+		misc_enableVsync();
 	}
 }
 
@@ -198,12 +192,6 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			skyEntity_selectMainSky("@@engineBackground");
 			skyEntity_setMixValue(0.0f);
 			skyEntity_setLightness("@@engineBackground", 1.0f);
-			
-			// Restore Vsync
-			if (!misc_isVsyncEnabled())
-			{
-				misc_enableVsync();
-			}
 		}
 		lastScreen = activeScreen;
 

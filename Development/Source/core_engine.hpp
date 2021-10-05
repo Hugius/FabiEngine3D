@@ -49,14 +49,21 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
-	Window _window;
 	MeshLoader _meshLoader;
-	TextureLoader _textureLoader;
-	InputHandler _inputHandler;
+	AudioLoader _audioLoader;
 	RenderBus _renderBus;
 	ShadowGenerator _shadowGenerator;
-	Camera _camera;
+	CollisionDetector _collisionDetector;
+	CollisionResolver _collisionResolver;
 	Timer _timer;
+	AudioPlayer _audioPlayer;
+	InputHandler _inputHandler;
+	NetworkServerAPI _networkServerAPI;
+	NetworkClientAPI _networkClientAPI;
+	Window _window;
+	AudioManager _audioManager;
+	TextureLoader _textureLoader;
+	Camera _camera;
 	MasterRenderer _masterRenderer;
 	SkyEntityManager  _skyEntityManager;
 	TerrainEntityManager _terrainEntityManager;
@@ -69,13 +76,6 @@ private:
 	ImageEntityManager _imageEntityManager;
 	TextEntityManager _textEntityManager;
 	RayCaster _rayCaster;
-	CollisionDetector _collisionDetector;
-	CollisionResolver _collisionResolver;
-	AudioLoader _audioLoader;
-	AudioManager _audioManager;
-	AudioPlayer _audioPlayer;
-	NetworkServerAPI _networkServerAPI;
-	NetworkClientAPI _networkClientAPI;
 
 	// Floats
 	float _deltaTimeMS = 0.0f;

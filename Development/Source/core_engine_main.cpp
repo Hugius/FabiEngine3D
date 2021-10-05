@@ -13,12 +13,20 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	:
 	_fe3d(fe3d),
 	_libraryLoader(),
-	_window(_libraryLoader),
 	_meshLoader(),
-	_textureLoader(_renderBus),
+	_audioLoader(),
 	_renderBus(),
 	_shadowGenerator(),
+	_collisionDetector(),
+	_collisionResolver(),
 	_timer(),
+	_audioPlayer(),
+	_inputHandler(),
+	_networkServerAPI(),
+	_networkClientAPI(),
+	_window(_libraryLoader),
+	_audioManager(_audioLoader),
+	_textureLoader(_renderBus),
 	_camera(_renderBus, _window),
 	_masterRenderer(_renderBus, _timer, _textureLoader, _camera, _shadowGenerator),
 	_skyEntityManager(_meshLoader, _textureLoader, _renderBus),
@@ -31,15 +39,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	_reflectionEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_rayCaster(_renderBus, _terrainEntityManager),
-	_collisionDetector(),
-	_collisionResolver(),
-	_audioLoader(),
-	_audioManager(_audioLoader),
-	_audioPlayer(),
-	_inputHandler(),
-	_networkServerAPI(),
-	_networkClientAPI()
+	_rayCaster(_renderBus, _terrainEntityManager)
 {
 
 }

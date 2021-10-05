@@ -130,8 +130,8 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				entity->setLevelOfDetailed(isFarEnough);
 			}
 			
-			// Update cube reflections
-			if ((_timer.getPassedTickCount() % 10) == 0)
+			// Update cube reflections every second
+			if ((_timer.getPassedTickCount() % Config::UPDATES_PER_SECOND) == 0)
 			{
 				// Sort reflection entities based on distance
 				map<float, shared_ptr<ReflectionEntity>> reflectionDistanceMap;

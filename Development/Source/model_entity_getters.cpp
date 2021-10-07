@@ -213,6 +213,11 @@ const ReflectionType ModelEntity::getReflectionType(const string& partID)
 	return _parts[_getPartIndex(partID)].reflectionType;
 }
 
+const Direction ModelEntity::getRotationDirection()
+{
+	return _rotationDirection;
+}
+
 const bool ModelEntity::isBright()
 {
 	return _isBright;

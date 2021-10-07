@@ -78,6 +78,7 @@ public:
 	void setReflectionType(const string& partID, ReflectionType value);
 	void setWireFramed(bool value);
 	void setFaceCulled(bool value);
+	void setRotationDirection(Direction direction);
 
 	// Instances
 	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
@@ -147,6 +148,7 @@ public:
 	const TextureID getReflectionMap(const string& partID);
 	const TextureID getNormalMap(const string& partID);
 	const ReflectionType getReflectionType(const string& partID);
+	const Direction getRotationDirection();
 
 private:
 	struct PartData final
@@ -252,4 +254,7 @@ private:
 	bool _isBright = false;
 	bool _isWireFramed = false;
 	bool _isFaceCulled = false;
+
+	// Miscellaneous
+	Direction _rotationDirection = Direction::Y;
 };

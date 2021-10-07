@@ -548,8 +548,8 @@ float calculateSpecularLighting(vec3 specularMapColor, vec3 position, vec3 norma
         vec3 lightDirection = normalize(position - f_pos);
         vec3 viewDirection = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
-        float result = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);
+        float result = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), (u_specularShininess * specularMapIntensity));
 
         // Return
         return (result * u_specularIntensity * specularMapIntensity);

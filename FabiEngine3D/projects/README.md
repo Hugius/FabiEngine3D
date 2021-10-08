@@ -1,1 +1,0 @@
-# This is where your game projects are stored

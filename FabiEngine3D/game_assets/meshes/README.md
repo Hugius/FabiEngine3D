@@ -1,1 +1,0 @@
-# This is where your mesh files are stored

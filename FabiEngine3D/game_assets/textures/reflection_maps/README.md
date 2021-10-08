@@ -1,1 +1,0 @@
-# This is where your reflection map files are stored

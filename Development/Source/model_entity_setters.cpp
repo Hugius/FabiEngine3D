@@ -105,7 +105,7 @@ void ModelEntity::updateTransformationMatrix()
 		Matrix44 baseRotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_baseRotation.x),
 			Math::convertToRadians(_baseRotation.y),
-			Math::convertToRadians(_baseRotation.z), _rotationDirection);
+			Math::convertToRadians(_baseRotation.z), _rotationOrder);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationMatrix);
 
 		// Base rotation origin matrix - translate back
@@ -120,7 +120,7 @@ void ModelEntity::updateTransformationMatrix()
 		Matrix44 rotationMatrix = Math::createRotationMatrix(
 			Math::convertToRadians(_parts[i].rotation.x),
 			Math::convertToRadians(_parts[i].rotation.y),
-			Math::convertToRadians(_parts[i].rotation.z), _rotationDirection);
+			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationMatrix);
 
 		// Rotation origin matrix - translate back
@@ -372,9 +372,9 @@ void ModelEntity::setFaceCulled(bool value)
 	_isFaceCulled = value;
 }
 
-void ModelEntity::setRotationDirection(Direction direction)
+void ModelEntity::setRotationOrder(DirectionOrder order)
 {
-	_rotationDirection = direction;
+	_rotationOrder = order;
 }
 
 void ModelEntity::setReflectionType(const string& partID, ReflectionType value)

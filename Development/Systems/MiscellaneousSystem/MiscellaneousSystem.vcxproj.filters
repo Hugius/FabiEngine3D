@@ -96,6 +96,9 @@
     <ClInclude Include="..\..\Source\light_shape.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\direction_order.hpp">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\configuration.cpp">

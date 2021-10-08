@@ -213,9 +213,9 @@ const ReflectionType ModelEntity::getReflectionType(const string& partID)
 	return _parts[_getPartIndex(partID)].reflectionType;
 }
 
-const Direction ModelEntity::getRotationDirection()
+const DirectionOrder ModelEntity::getRotationOrder()
 {
-	return _rotationDirection;
+	return _rotationOrder;
 }
 
 const bool ModelEntity::isBright()

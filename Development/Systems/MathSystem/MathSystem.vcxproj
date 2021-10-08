@@ -33,7 +33,8 @@
     <ClCompile Include="..\..\Source\ivector2.cpp" />
     <ClCompile Include="..\..\Source\ivector3.cpp" />
     <ClCompile Include="..\..\Source\ivector4.cpp" />
-    <ClCompile Include="..\..\Source\mathematics_matrix.cpp" />
+    <ClCompile Include="..\..\Source\mathematics_matrix_creation.cpp" />
+    <ClCompile Include="..\..\Source\mathematics_matrix_misc.cpp" />
     <ClCompile Include="..\..\Source\mathematics_misc.cpp" />
     <ClCompile Include="..\..\Source\mathematics_vector.cpp" />
     <ClCompile Include="..\..\Source\matrix33.cpp" />

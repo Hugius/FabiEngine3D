@@ -7,7 +7,7 @@
 #include "vector4.hpp"
 #include "matrix33.hpp"
 #include "matrix44.hpp"
-#include "direction.hpp"
+#include "direction_order.hpp"
 
 #include <vector>
 
@@ -25,7 +25,7 @@ public:
 	static const Matrix44 createTranslationMatrixX(float value);
 	static const Matrix44 createTranslationMatrixY(float value);
 	static const Matrix44 createTranslationMatrixZ(float value);
-	static const Matrix44 createRotationMatrix(float x, float y, float z, Direction dominantDirection);
+	static const Matrix44 createRotationMatrix(float x, float y, float z, DirectionOrder order);
 	static const Matrix44 createRotationMatrixX(float angle);
 	static const Matrix44 createRotationMatrixY(float angle);
 	static const Matrix44 createRotationMatrixZ(float angle);

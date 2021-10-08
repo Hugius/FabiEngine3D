@@ -27,6 +27,7 @@
     <ClInclude Include="..\..\Source\camera.hpp" />
     <ClInclude Include="..\..\Source\configuration.hpp" />
     <ClInclude Include="..\..\Source\direction.hpp" />
+    <ClInclude Include="..\..\Source\direction_order.hpp" />
     <ClInclude Include="..\..\Source\entity_type.hpp" />
     <ClInclude Include="..\..\Source\input_handler.hpp" />
     <ClInclude Include="..\..\Source\input_type.hpp" />

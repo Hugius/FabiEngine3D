@@ -56,7 +56,7 @@
     <ClCompile Include="..\..\Source\mathematics_misc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\mathematics_matrix.cpp">
+    <ClCompile Include="..\..\Source\mathematics_matrix_creation.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\mathematics_vector.cpp">
@@ -79,6 +79,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\ivector3.cpp">
       <Filter>Vector\Integer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\mathematics_matrix_misc.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

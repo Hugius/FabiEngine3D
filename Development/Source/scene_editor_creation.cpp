@@ -217,6 +217,7 @@ bool SceneEditor::_copyPreviewModel(const string& newID, const string& previewID
 	_fe3d.modelEntity_setStaticToCamera(newID, _fe3d.modelEntity_isStaticToCamera(previewID));
 	_fe3d.modelEntity_setLevelOfDetailEntity(newID, _fe3d.modelEntity_getLevelOfDetailEntityID(previewID));
 	_fe3d.modelEntity_setFaceCulled(newID, _fe3d.modelEntity_isFaceCulled(previewID));
+	_fe3d.modelEntity_setRotationOrder(newID, _fe3d.modelEntity_getRotationOrder(previewID));
 
 	// Set parts
 	for (const auto& partID : _fe3d.modelEntity_getPartIDs(previewID))

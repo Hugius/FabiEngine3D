@@ -2,6 +2,7 @@
 
 #include "input_type.hpp"
 #include "direction.hpp"
+#include "direction_order.hpp"
 #include "aabb_parent_type.hpp"
 #include "network_client_message.hpp"
 #include "network_server_message.hpp"
@@ -265,6 +266,7 @@ public:
 	void modelEntity_enableInstancing(const string& ID, vector<Vec3> offsets);
 	void modelEntity_disableInstancing(const string& ID);
 	void modelEntity_setBright(const string& ID, bool enabled);
+	void modelEntity_setRotationOrder(const string& ID, DirectionOrder order);
 
 	// Model entity interface - getters
 	const vector<string> modelEntity_getPartIDs(const string& ID);
@@ -318,6 +320,7 @@ public:
 	const bool modelEntity_hasReflectionMap(const string& ID, const string& partID);
 	const bool modelEntity_hasNormalMap(const string& ID, const string& partID);
 	const ReflectionType modelEntity_getReflectionType(const string& ID, const string& partID);
+	const DirectionOrder modelEntity_getRotationOrder(const string& ID);
 
 	// Billboard entity interface - setters
 	void billboardEntity_create(const string& ID);

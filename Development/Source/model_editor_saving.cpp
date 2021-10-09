@@ -39,6 +39,7 @@ bool ModelEditor::saveModelEntitiesToFile()
 		auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
+		auto rotationOrder = static_cast<unsigned int>(_fe3d.modelEntity_getRotationOrder(modelID));
 
 		// Perform empty string & space conversions
 		meshPath = (meshPath.empty()) ? "?" : meshPath;
@@ -55,7 +56,8 @@ bool ModelEditor::saveModelEntitiesToFile()
 			modelSize.z << " " <<
 			lodEntityID << " " <<
 			isInstanced << " " <<
-			isFaceCulled;
+			isFaceCulled << " " <<
+			rotationOrder;
 
 		// Write space to file
 		file << " ";

@@ -108,6 +108,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
+			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			Vec3 size;
 
@@ -120,7 +121,8 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 				size.z >>
 				lodEntityID >>
 				isInstanced >>
-				isFaceCulled;
+				isFaceCulled >>
+				rotationOrder;
 
 			// Read part data
 			while (true)
@@ -252,6 +254,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		{
 			// Data placeholders
 			string modelID, meshPath, lodEntityID;
+			unsigned int rotationOrder;
 			bool isInstanced, isFaceCulled;
 			Vec3 size;
 
@@ -264,7 +267,8 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				size.z >>
 				lodEntityID >>
 				isInstanced >>
-				isFaceCulled;
+				isFaceCulled >>
+				rotationOrder;
 
 			// Perform empty string & space conversions
 			meshPath = (meshPath == "?") ? "" : meshPath;
@@ -292,6 +296,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 				_fe3d.modelEntity_setBaseSize(modelID, size);
 				_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
 				_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
+				_fe3d.modelEntity_setRotationOrder(modelID, DirectionOrder(rotationOrder));
 
 				// Read part data
 				while (true)

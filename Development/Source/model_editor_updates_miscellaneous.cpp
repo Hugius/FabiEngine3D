@@ -13,6 +13,7 @@ void ModelEditor::_updateMiscellaneousMenu()
 		auto levelOfDetailEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
 		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
 		auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
+		auto rotationOrder = _fe3d.modelEntity_getRotationOrder(_currentModelID);
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -42,6 +43,34 @@ void ModelEditor::_updateMiscellaneousMenu()
 			isFaceCulled = !isFaceCulled;
 			_fe3d.modelEntity_setFaceCulled(_currentModelID, isFaceCulled);
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rotationOrder")->isHovered())
+		{
+			if (rotationOrder == DirectionOrder::XYZ)
+			{
+				rotationOrder = DirectionOrder::XZY;
+			}
+			else if (rotationOrder == DirectionOrder::XZY)
+			{
+				rotationOrder = DirectionOrder::YXZ;
+			}
+			else if (rotationOrder == DirectionOrder::YXZ)
+			{
+				rotationOrder = DirectionOrder::YZX;
+			}
+			else if (rotationOrder == DirectionOrder::YZX)
+			{
+				rotationOrder = DirectionOrder::ZXY;
+			}
+			else if (rotationOrder == DirectionOrder::ZXY)
+			{
+				rotationOrder = DirectionOrder::ZYX;
+			}
+			else if (rotationOrder == DirectionOrder::ZYX)
+			{
+				rotationOrder = DirectionOrder::XYZ;
+			}
+			_fe3d.modelEntity_setRotationOrder(_currentModelID, rotationOrder);
+		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("lodEntityID", levelOfDetailEntityID, {}))
@@ -63,5 +92,29 @@ void ModelEditor::_updateMiscellaneousMenu()
 		// Update button text contents
 		screen->getButton("isFaceCulled")->changeTextContent(isFaceCulled ? "Culling: ON" : "Culling: OFF");
 		screen->getButton("isInstanced")->changeTextContent(isInstanced ? "Instanced: ON" : "Instanced: OFF");
+		if (rotationOrder == DirectionOrder::XYZ)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Y Z");
+		}
+		else if (rotationOrder == DirectionOrder::XZY)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: X Z Y");
+		}
+		else if (rotationOrder == DirectionOrder::YXZ)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: Y X Z");
+		}
+		else if (rotationOrder == DirectionOrder::YZX)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: Y Z X");
+		}
+		else if (rotationOrder == DirectionOrder::ZXY)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: Z X Y");
+		}
+		else if (rotationOrder == DirectionOrder::ZYX)
+		{
+			screen->getButton("rotationOrder")->changeTextContent("Rotation: Z Y X");
+		}
 	}
 }

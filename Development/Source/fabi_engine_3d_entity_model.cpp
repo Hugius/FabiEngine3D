@@ -253,6 +253,11 @@ const ReflectionType FabiEngine3D::modelEntity_getReflectionType(const string& I
 	return _core->_modelEntityManager.getEntity(ID)->getReflectionType(partID);
 }
 
+const DirectionOrder FabiEngine3D::modelEntity_getRotationOrder(const string& ID)
+{
+	return _core->_modelEntityManager.getEntity(ID)->getRotationOrder();
+}
+
 void FabiEngine3D::modelEntity_setBasePosition(const string& ID, Vec3 position)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBasePosition(position);
@@ -476,6 +481,11 @@ void FabiEngine3D::modelEntity_disableInstancing(const string& ID)
 void FabiEngine3D::modelEntity_setBright(const string& ID, bool enabled)
 {
 	_core->_modelEntityManager.getEntity(ID)->setBright(enabled);
+}
+
+void FabiEngine3D::modelEntity_setRotationOrder(const string& ID, DirectionOrder order)
+{
+	_core->_modelEntityManager.getEntity(ID)->setRotationOrder(order);
 }
 
 void FabiEngine3D::modelEntity_setStaticToCamera(const string& ID, bool enabled)

@@ -112,31 +112,31 @@ const Matrix44 Math::createRotationMatrix(float x, float y, float z, DirectionOr
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 	}
-	if (order == DirectionOrder::XZY)
+	else if (order == DirectionOrder::XZY)
 	{
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 	}
-	if (order == DirectionOrder::YXZ)
+	else if (order == DirectionOrder::YXZ)
 	{
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 	}
-	if (order == DirectionOrder::YZX)
+	else if (order == DirectionOrder::YZX)
 	{
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 	}
-	if (order == DirectionOrder::ZXY)
+	else if (order == DirectionOrder::ZXY)
 	{
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixX(x));
 		newMatrix = (newMatrix * createRotationMatrixY(y));
 	}
-	if (order == DirectionOrder::ZYX)
+	else if (order == DirectionOrder::ZYX)
 	{
 		newMatrix = (newMatrix * createRotationMatrixZ(z));
 		newMatrix = (newMatrix * createRotationMatrixY(y));

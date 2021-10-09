@@ -105,7 +105,14 @@ void AnimationEditor::_updateFrameMenu()
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginY") &&
 			_gui.getGlobalScreen()->isValueFormExisting("rotationOriginZ"))
 		{
-			_fe3d.modelEntity_rotatePart(animation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
+			if (_currentPartID.empty()) // Base rotation
+			{
+				_fe3d.modelEntity_rotateBase(animation->getPreviewModelID(), frame.getSpeeds().at(_currentPartID));
+			}
+			else // Part rotation
+			{
+				_fe3d.modelEntity_rotatePart(animation->getPreviewModelID(), _currentPartID, frame.getSpeeds().at(_currentPartID));
+			}
 			_mustUpdateCurrentFramePreview = false;
 		}
 		else

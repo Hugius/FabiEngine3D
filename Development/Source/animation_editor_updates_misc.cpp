@@ -184,7 +184,7 @@ void AnimationEditor::_updateMiscellaneous()
 									else if (frame.getTransformationTypes().at(partID) == TransformationType::ROTATION)
 									{
 										// Origin
-										auto currentModelSize = _fe3d.modelEntity_getPartSize(currentAnimation->getPreviewModelID(), partID);
+										auto currentModelSize = _fe3d.modelEntity_getBaseSize(currentAnimation->getPreviewModelID());
 										auto newOrigin = (currentModelSize * frame.getRotationOrigins().at(partID));
 										if (partID.empty())
 										{

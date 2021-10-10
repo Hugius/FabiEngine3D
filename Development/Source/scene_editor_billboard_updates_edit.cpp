@@ -97,7 +97,7 @@ void SceneEditor::_updateBillboardEditing()
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					// Update buttons hoverability
-					screen->getButton("position")->setHoverable(true);
+					screen->getButton("position")->setHoverable(false);
 					screen->getButton("rotation")->setHoverable(true);
 					screen->getButton("size")->setHoverable(true);
 				}

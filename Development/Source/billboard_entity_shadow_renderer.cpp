@@ -6,8 +6,7 @@ void BillboardEntityShadowRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_diffuseMap", 0);
 
 	// Enable clipping
@@ -34,7 +33,7 @@ void BillboardEntityShadowRenderer::unbind()
 
 void BillboardEntityShadowRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && entity->isShadowed())
 	{
 		// Temporary values
 		const auto buffer = entity->getRenderBuffer();

@@ -7,8 +7,8 @@ layout (location = 1) in vec2 v_uv;
 layout (location = 4) in vec3 v_offset;
 
 // Matrix uniforms
-uniform mat4 u_lightSpaceMatrix;
 uniform mat4 u_transformationMatrix;
+uniform mat4 u_lightSpaceMatrix;
 
 // Float uniforms
 uniform float u_positionY;

@@ -88,7 +88,7 @@ BEGIN:
 		loadedSurfaces[i] = threads[i].get();
 
 		// Error logging
-		if (loadedSurfaces[i] == nullptr && !filePaths[i].empty())
+		if ((loadedSurfaces[i] == nullptr) && !filePaths[i].empty())
 		{
 			Logger::throwWarning("Cannot load image file: \"" + filePaths[i] + "\"!");
 		}

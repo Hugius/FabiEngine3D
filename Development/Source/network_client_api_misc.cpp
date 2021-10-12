@@ -134,7 +134,7 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 		reinterpret_cast<sockaddr*>(&socketAddress),
 		sizeof(socketAddress));
 	
-	// Check if connection attempt went well
+	// Check if connection failed
 	if (connectStatusCode == SOCKET_ERROR)
 	{
 		return WSAGetLastError();
@@ -188,7 +188,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError(), " ", _serverPort, " ", tcpPort);
 	}
 
 	// Address info not needed anymore

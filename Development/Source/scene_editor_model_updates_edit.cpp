@@ -122,10 +122,10 @@ void SceneEditor::_updateModelEditing()
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("freeze")->isHovered())
 				{
-					// Model
+					// Freeze model
 					_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 
-					// AABB
+					// Set AABBs responsiveness
 					for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(_activeModelID, AabbParentType::MODEL_ENTITY))
 					{
 						_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));

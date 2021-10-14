@@ -283,9 +283,9 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 					{
 						// Validate splitter
 						if ((arguments[1].getString().size() > 1) ||
-							arguments[0].getString().find(arguments[1].getString()) == string::npos)
+							(arguments[0].getString().find(arguments[1].getString()) == string::npos))
 						{
-							_throwScriptError("incorrect string splitter!");
+							_throwScriptError("string splitter not found!");
 							return returnValues;
 						}
 

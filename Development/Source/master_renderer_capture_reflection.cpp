@@ -10,7 +10,7 @@ void MasterRenderer::_captureCubeReflections()
 	}
 
 	// Temporary values
-	auto reflectionQuality = _renderBus.getReflectionQuality();
+	const auto reflectionQuality = _renderBus.getCubeReflectionQuality();
 
 	// Save original camera status
 	const auto originalCameraAspectRatio = _camera.getAspectRatio();

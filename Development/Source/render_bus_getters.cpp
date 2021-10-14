@@ -295,9 +295,14 @@ const unsigned int RenderBus::getShadowQuality()
 	return _shadowQuality;
 }
 
-const unsigned int RenderBus::getReflectionQuality()
+const unsigned int RenderBus::getCubeReflectionQuality()
 {
-	return _reflectionQuality;
+	return _cubeReflectionQuality;
+}
+
+const unsigned int RenderBus::getPlanarReflectionQuality()
+{
+	return _planarReflectionQuality;
 }
 
 const unsigned int RenderBus::getRefractionQuality()

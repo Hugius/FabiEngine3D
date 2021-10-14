@@ -82,7 +82,8 @@ public:
 	void setMotionBlurSize(unsigned int value);
 	void setAnisotropicFilteringQuality(unsigned int value);
 	void setShadowQuality(unsigned int value);
-	void setReflectionQuality(unsigned int value);
+	void setCubeReflectionQuality(unsigned int value);
+	void setPlanarReflectionQuality(unsigned int value);
 	void setRefractionQuality(unsigned int value);
 	void increaseTriangleCount(unsigned int value);
 	void setBloomBlurCount(unsigned int value);
@@ -181,7 +182,8 @@ public:
 	const unsigned int getMotionBlurSize();
 	const unsigned int getAnisotropicFilteringQuality();
 	const unsigned int getShadowQuality();
-	const unsigned int getReflectionQuality();
+	const unsigned int getCubeReflectionQuality();
+	const unsigned int getPlanarReflectionQuality();
 	const unsigned int getRefractionQuality();
 	const unsigned int getBloomBlurCount();
 	const unsigned int getTriangleCount();
@@ -280,7 +282,8 @@ private:
 	unsigned int _motionBlurSize = Config::MIN_MOTION_BLUR_SIZE;
 	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
-	unsigned int _reflectionQuality = Config::MIN_REFLECTION_QUALITY;
+	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
+	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _refractionQuality = Config::MIN_REFRACTION_QUALITY;
 	unsigned int _bloomBlurCount = 0;
 	unsigned int _triangleCount = 0;

@@ -30,10 +30,15 @@ void FabiEngine3D::gfx_setAnisotropicFilteringQuality(unsigned int quality)
 	_core->_textureLoader.reloadAnisotropicFiltering();
 }
 
-void FabiEngine3D::gfx_setReflectionQuality(unsigned int quality)
+void FabiEngine3D::gfx_setCubeReflectionQuality(unsigned int quality)
 {
-	_core->_renderBus.setReflectionQuality(quality);
+	_core->_renderBus.setCubeReflectionQuality(quality);
 	_core->_masterRenderer.reloadCubeReflectionCaptureBuffer();
+}
+
+void FabiEngine3D::gfx_setPlanarReflectionQuality(unsigned int quality)
+{
+	_core->_renderBus.setPlanarReflectionQuality(quality);
 	_core->_masterRenderer.reloadPlanarReflectionCaptureBuffer();
 	_core->_masterRenderer.reloadWaterReflectionCaptureBuffer();
 }

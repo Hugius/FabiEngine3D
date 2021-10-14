@@ -221,19 +221,19 @@ void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()
 {
 	_cubeReflectionCaptureBuffer.reset();
-	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getCubeReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadPlanarReflectionCaptureBuffer()
 {
 	_planarReflectionCaptureBuffer.reset();
-	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+	_planarReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterReflectionCaptureBuffer()
 {
 	_waterReflectionCaptureBuffer.reset();
-	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getReflectionQuality()), 1, false);
+	_waterReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(_renderBus.getPlanarReflectionQuality()), 1, false);
 }
 
 void MasterRenderer::reloadWaterRefractionCaptureBuffer()

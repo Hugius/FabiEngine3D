@@ -66,9 +66,14 @@ const unsigned int FabiEngine3D::gfx_getShadowQuality()
 	return _core->_renderBus.getShadowQuality();
 }
 
-const unsigned int FabiEngine3D::gfx_getReflectionQuality()
+const unsigned int FabiEngine3D::gfx_getCubeReflectionQuality()
 {
-	return _core->_renderBus.getReflectionQuality();
+	return _core->_renderBus.getCubeReflectionQuality();
+}
+
+const unsigned int FabiEngine3D::gfx_getPlanarReflectionQuality()
+{
+	return _core->_renderBus.getPlanarReflectionQuality();
 }
 
 const unsigned int FabiEngine3D::gfx_getRefractionQuality()

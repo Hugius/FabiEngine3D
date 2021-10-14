@@ -81,7 +81,8 @@ void SettingsEditor::update()
 		auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
 		auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 		auto shadowQuality = _fe3d.gfx_getShadowQuality();
-		auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+		auto cubeReflectionQuality = _fe3d.gfx_getCubeReflectionQuality();
+		auto planarReflectionQuality = _fe3d.gfx_getPlanarReflectionQuality();
 		auto refractionQuality = _fe3d.gfx_getRefractionQuality();
 		auto maxAudioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
@@ -114,9 +115,13 @@ void SettingsEditor::update()
 		{
 			_gui.getGlobalScreen()->createValueForm("shadowQuality", "Shadow Quality", shadowQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionQuality")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("cubeReflectionQuality")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("reflectionQuality", "Reflection Quality", reflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("cubeReflectionQuality", "Cube Reflection Quality", cubeReflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("planarReflectionQuality")->isHovered())
+		{
+			_gui.getGlobalScreen()->createValueForm("planarReflectionQuality", "Planar Reflection Quality", planarReflectionQuality, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("refractionQuality")->isHovered())
 		{
@@ -171,9 +176,13 @@ void SettingsEditor::update()
 		{
 			_fe3d.gfx_setShadowQuality(shadowQuality);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("cubeReflectionQuality", cubeReflectionQuality, {}))
 		{
-			_fe3d.gfx_setReflectionQuality(reflectionQuality);
+			_fe3d.gfx_setCubeReflectionQuality(cubeReflectionQuality);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("planarReflectionQuality", planarReflectionQuality, {}))
+		{
+			_fe3d.gfx_setPlanarReflectionQuality(planarReflectionQuality);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 		{
@@ -197,7 +206,8 @@ void SettingsEditor::loadDefaultSettings()
 	_fe3d.gfx_setMotionBlurSize(Config::MIN_MOTION_BLUR_SIZE);
 	_fe3d.gfx_setAnisotropicFilteringQuality(Config::MIN_ANISOTROPIC_FILTERING_QUALITY);
 	_fe3d.gfx_setShadowQuality(Config::MIN_SHADOW_QUALITY);
-	_fe3d.gfx_setReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setCubeReflectionQuality(Config::MIN_REFLECTION_QUALITY);
+	_fe3d.gfx_setPlanarReflectionQuality(Config::MIN_REFLECTION_QUALITY);
 	_fe3d.gfx_setRefractionQuality(Config::MIN_REFRACTION_QUALITY);
 	_fe3d.misc_setMaxAudioChannelCount(Config::MIN_AUDIO_CHANNELS);
 }
@@ -230,7 +240,7 @@ bool SettingsEditor::loadSettingsFromFile()
 	istringstream iss(line);
 
 	// Extract values from file
-	unsigned int bloomSize, dofSize, motionBlurSize, anisotropicFilteringQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+	unsigned int bloomSize, dofSize, motionBlurSize, anisotropicFilteringQuality, shadowQuality, cubeReflectionQuality, planarReflectionQuality, refractionQuality, audioChannels;
 	bool isAntiAliasingEnabled;
 	iss >>
 		isAntiAliasingEnabled >>
@@ -239,7 +249,8 @@ bool SettingsEditor::loadSettingsFromFile()
 		motionBlurSize >>
 		anisotropicFilteringQuality >>
 		shadowQuality >>
-		reflectionQuality >>
+		cubeReflectionQuality >>
+		planarReflectionQuality >>
 		refractionQuality >>
 		audioChannels;
 
@@ -256,7 +267,8 @@ bool SettingsEditor::loadSettingsFromFile()
 	_fe3d.gfx_setMotionBlurSize(motionBlurSize);
 	_fe3d.gfx_setAnisotropicFilteringQuality(anisotropicFilteringQuality);
 	_fe3d.gfx_setShadowQuality(shadowQuality);
-	_fe3d.gfx_setReflectionQuality(reflectionQuality);
+	_fe3d.gfx_setCubeReflectionQuality(cubeReflectionQuality);
+	_fe3d.gfx_setPlanarReflectionQuality(planarReflectionQuality);
 	_fe3d.gfx_setRefractionQuality(refractionQuality);
 	_fe3d.misc_setMaxAudioChannelCount(audioChannels);
 
@@ -289,7 +301,8 @@ bool SettingsEditor::saveSettingsToFile()
 	auto motionBlurSize = _fe3d.gfx_getMotionBlurSize();
 	auto anisotropicFilteringQuality = _fe3d.gfx_getAnisotropicFilteringQuality();
 	auto shadowQuality = _fe3d.gfx_getShadowQuality();
-	auto reflectionQuality = _fe3d.gfx_getReflectionQuality();
+	auto cubeReflectionQuality = _fe3d.gfx_getCubeReflectionQuality();
+	auto planarReflectionQuality = _fe3d.gfx_getPlanarReflectionQuality();
 	auto refractionQuality = _fe3d.gfx_getRefractionQuality();
 	auto audioChannels = _fe3d.misc_getMaxAudioChannelCount();
 
@@ -301,7 +314,8 @@ bool SettingsEditor::saveSettingsToFile()
 		motionBlurSize << " " <<
 		anisotropicFilteringQuality << " " <<
 		shadowQuality << " " <<
-		reflectionQuality << " " <<
+		cubeReflectionQuality << " " <<
+		planarReflectionQuality << " " <<
 		refractionQuality << " " <<
 		audioChannels;
 
@@ -328,7 +342,7 @@ void SettingsEditor::_loadGUI()
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: settingsEditorMenuMain
-	auto positions = VPC::calculateButtonPositions(10, CH);
+	auto positions = VPC::calculateButtonPositions(11, CH);
 	leftWindow->createScreen("settingsEditorMenuMain");
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("isAntiAliasingEnabled", Vec2(0.0f, positions[0]), Vec2(TW("Anti Aliasing"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Anti Aliasing", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("bloomSize", Vec2(0.0f, positions[1]), Vec2(TW("Bloom"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Bloom", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -336,10 +350,11 @@ void SettingsEditor::_loadGUI()
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("motionBlurSize", Vec2(0.0f, positions[3]), Vec2(TW("Motion Blur"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Motion Blur", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("anisotropicFilteringQuality", Vec2(0.0f, positions[4]), Vec2(TW("Aniso Filtering"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Aniso Filtering", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("settingsEditorMenuMain")->createButton("shadowQuality", Vec2(0.0f, positions[5]), Vec2(TW("Shadow"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Shadow", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("reflectionQuality", Vec2(0.0f, positions[6]), Vec2(TW("Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[7]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", Vec2(0.0f, positions[8]), Vec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", Vec2(0.0f, positions[9]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("cubeReflectionQuality", Vec2(0.0f, positions[6]), Vec2(TW("Cube Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Cube Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("planarReflectionQuality", Vec2(0.0f, positions[7]), Vec2(TW("Planar Reflection"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Planar Reflection", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("refractionQuality", Vec2(0.0f, positions[8]), Vec2(TW("Refraction"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Refraction", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("maxAudioChannels", Vec2(0.0f, positions[9]), Vec2(TW("Audio"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Audio", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("settingsEditorMenuMain")->createButton("back", Vec2(0.0f, positions[10]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void SettingsEditor::_unloadGUI()

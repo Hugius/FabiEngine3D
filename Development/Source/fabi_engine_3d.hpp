@@ -706,7 +706,8 @@ public:
 	void gfx_setDofSize(unsigned int size);
 	void gfx_setMotionBlurSize(unsigned int size);
 	void gfx_setAnisotropicFilteringQuality(unsigned int quality);
-	void gfx_setReflectionQuality(unsigned int quality);
+	void gfx_setCubeReflectionQuality(unsigned int quality);
+	void gfx_setPlanarReflectionQuality(unsigned int quality);
 	void gfx_setRefractionQuality(unsigned int quality);
 	void gfx_setShadowQuality(unsigned int quality);
 	void gfx_enableAmbientLighting(Vec3 color, float intensity);
@@ -766,7 +767,8 @@ public:
 	const unsigned int gfx_getMotionBlurSize();
 	const unsigned int gfx_getAnisotropicFilteringQuality();
 	const unsigned int gfx_getShadowQuality();
-	const unsigned int gfx_getReflectionQuality();
+	const unsigned int gfx_getCubeReflectionQuality();
+	const unsigned int gfx_getPlanarReflectionQuality();
 	const unsigned int gfx_getRefractionQuality();
 	const unsigned int gfx_getBloomBlurCount();
 	const unsigned int gfx_getShadowInterval();

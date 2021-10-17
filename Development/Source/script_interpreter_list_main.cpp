@@ -107,7 +107,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(const string
 					}
 					else
 					{
-						_throwScriptError("invalid vec3 syntax!");
+						_throwScriptError("invalid VEC3 syntax!");
 						return {};
 					}
 				}

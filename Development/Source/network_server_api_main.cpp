@@ -82,16 +82,16 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 		Logger::throwError("NetworkServerAPI::start::5 ---> ", WSAGetLastError());
 	}
 
-	// Add options to connection socket
-	DWORD optionValue = 1;
-	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&optionValue), sizeof(optionValue));
-
 	// Create socket for handling UDP messages
 	_udpMessageSocketID = socket(udpAddressInfo->ai_family, udpAddressInfo->ai_socktype, udpAddressInfo->ai_protocol);
 	if (_udpMessageSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkServerAPI::start::6 ---> ", WSAGetLastError());
 	}
+
+	// Set socket options
+	DWORD trueValue = 1;
+	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
 
 	// Bind connection socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));

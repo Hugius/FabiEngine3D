@@ -147,12 +147,18 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 
 void NetworkClientAPI::_setupTCP()
 {
-	// Create TCP socket
+	// Create socket
 	_connectionSocketID = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (_connectionSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupTCP ---> ", WSAGetLastError());
 	}
+
+	// Set socket options
+	DWORD trueValue = 1;
+	DWORD falseValue = 0;
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
 
 	// Spawn a thread for connecting to the server
 	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
@@ -160,7 +166,7 @@ void NetworkClientAPI::_setupTCP()
 
 void NetworkClientAPI::_setupUDP(const string& tcpPort)
 {
-	// Compose UDP address info hints
+	// Compose address info hints
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_INET; // Ipv4 address
@@ -168,7 +174,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	hints.ai_protocol = IPPROTO_UDP; // UDP protocol
 	hints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
 	
-	// Create UDP address info
+	// Create address info
 	addrinfo* addressInfo = nullptr;
 	auto udpInfoStatusCode = getaddrinfo(nullptr, tcpPort.c_str(), &hints, &addressInfo);
 	if (udpInfoStatusCode != 0)
@@ -177,14 +183,20 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 		return;
 	}
 
-	// Create UDP socket
+	// Create socket
 	_udpMessageSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if (_udpMessageSocketID == INVALID_SOCKET)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
 
-	// Bind UDP socket
+	// Set socket options
+	DWORD trueValue = 1;
+	DWORD falseValue = 0;
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+
+	// Bind socket
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{

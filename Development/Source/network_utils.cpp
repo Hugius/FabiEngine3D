@@ -16,48 +16,48 @@ const sockaddr_in NetworkUtils::composeSocketAddress(const string& IP, const str
 	return socketAddress;
 }
 
-const string NetworkUtils::extractSocketAddressIP(sockaddr_in* address)
+const string NetworkUtils::extractAddressIP(sockaddr_in* address)
 {
 	char IP[IPV4_ADDRESS_LENGTH];
 	inet_ntop(AF_INET, &(address->sin_addr), IP, sizeof(IP));
 	return string(IP);
 }
 
-const string NetworkUtils::extractSocketAddressPort(sockaddr_in* address)
+const string NetworkUtils::extractAddressPort(sockaddr_in* address)
 {
 	return to_string(ntohs(address->sin_port));
 }
 
-const string NetworkUtils::extractSocketSourceIP(SOCKET socket)
+const string NetworkUtils::extractSocketIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	return extractSocketAddressIP(&socketAddress);
+	return extractAddressIP(&socketAddress);
 }
 
-const string NetworkUtils::extractSocketSourcePort(SOCKET socket)
+const string NetworkUtils::extractSocketPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getsockname(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	return extractSocketAddressPort(&socketAddress);
+	return extractAddressPort(&socketAddress);
 }
 
-const string NetworkUtils::extractSocketDestinationIP(SOCKET socket)
+const string NetworkUtils::extractPeerIP(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	return extractSocketAddressIP(&socketAddress);
+	return extractAddressIP(&socketAddress);
 }
 
-const string NetworkUtils::extractSocketDestinationPort(SOCKET socket)
+const string NetworkUtils::extractPeerPort(SOCKET socket)
 {
 	sockaddr_in socketAddress = sockaddr_in();
 	int socketAddressLength = sizeof(socketAddress);
 	auto peerResult = getpeername(socket, (sockaddr*)&socketAddress, &socketAddressLength);
-	return extractSocketAddressPort(&socketAddress);
+	return extractAddressPort(&socketAddress);
 }
 
 const bool NetworkUtils::isValidIP(const string& IP)

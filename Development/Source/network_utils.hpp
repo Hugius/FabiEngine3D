@@ -14,21 +14,26 @@ class NetworkUtils final
 public:
 	NetworkUtils() = delete;
 
-	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
+	// Strings
+	static const string extractAddressIP(sockaddr_in* address);
+	static const string extractAddressPort(sockaddr_in* address);
+	static const string extractSocketIP(SOCKET socket);
+	static const string extractSocketPort(SOCKET socket);
+	static const string extractPeerIP(SOCKET socket);
+	static const string extractPeerPort(SOCKET socket);
 
-	static const string extractSocketAddressIP(sockaddr_in* address);
-	static const string extractSocketAddressPort(sockaddr_in* address);
-	static const string extractSocketSourceIP(SOCKET socket);
-	static const string extractSocketSourcePort(SOCKET socket);
-	static const string extractSocketDestinationIP(SOCKET socket);
-	static const string extractSocketDestinationPort(SOCKET socket);
-
+	// Booleans
 	static const bool isValidIP(const string& IP);
 	static const bool isUdpMessageReady(SOCKET socket);
 	static const bool isMessageReserved(const string& message);
 
-	static inline const string SERVER_PORT = "61205";
+	// Miscellaneous
+	static const sockaddr_in composeSocketAddress(const string& IP, const string& port);
+	
+	// Strings
+	static inline const string SERVER_PORT = "61295";
 
+	// Integers
 	static inline const unsigned int MAX_PING_COUNT = 10;
 	static inline const unsigned int MAX_MESSAGE_CHARACTERS = 128;
 	static inline const unsigned int MAX_USERNAME_CHARACTERS = 16;

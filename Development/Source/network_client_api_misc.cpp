@@ -147,11 +147,27 @@ int NetworkClientAPI::_waitForServerConnection(SOCKET serverSocketID, const stri
 
 void NetworkClientAPI::_setupTCP()
 {
+	// Compose address info hints
+	addrinfo hints;
+	ZeroMemory(&hints, sizeof(hints));
+	hints.ai_family = AF_INET; // Ipv4 address
+	hints.ai_socktype = SOCK_STREAM; // Streaming socket
+	hints.ai_protocol = IPPROTO_TCP; // TCP protocol
+
+	// Create address info
+	addrinfo* addressInfo = nullptr;
+	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", "0", &hints, &addressInfo);
+	if (tcpInfoStatusCode != 0)
+	{
+		Logger::throwError("NetworkClientAPI::_setupTCP::1 ---> ", tcpInfoStatusCode);
+		return;
+	}
+
 	// Create socket
-	_connectionSocketID = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	_connectionSocketID = socket(addressInfo->ai_family, addressInfo->ai_socktype, addressInfo->ai_protocol);
 	if (_connectionSocketID == INVALID_SOCKET)
 	{
-		Logger::throwError("NetworkClientAPI::_setupTCP ---> ", WSAGetLastError());
+		Logger::throwError("NetworkClientAPI::_setupTCP::2 ---> ", WSAGetLastError());
 	}
 
 	// Set socket options
@@ -160,23 +176,32 @@ void NetworkClientAPI::_setupTCP()
 	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
 	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
 
+	// Bind socket
+	auto tcpBindStatusCode = bind(_connectionSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
+	if (tcpBindStatusCode == SOCKET_ERROR)
+	{
+		Logger::throwError("NetworkClientAPI::_setupTCP::3 ---> ", WSAGetLastError());
+	}
+
 	// Spawn a thread for connecting to the server
 	_connectionThread = async(launch::async, &NetworkClientAPI::_waitForServerConnection, this, _connectionSocketID, _serverIP, _serverPort);
 }
 
-void NetworkClientAPI::_setupUDP(const string& tcpPort)
+void NetworkClientAPI::_setupUDP()
 {
+	// Extract TCP port
+	auto tcpPort = NetworkUtils::extractSocketPort(_connectionSocketID);
+
 	// Compose address info hints
 	addrinfo hints;
 	ZeroMemory(&hints, sizeof(hints));
 	hints.ai_family = AF_INET; // Ipv4 address
 	hints.ai_socktype = SOCK_DGRAM; // Datagram socket
 	hints.ai_protocol = IPPROTO_UDP; // UDP protocol
-	hints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
-	
+
 	// Create address info
 	addrinfo* addressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo(nullptr, tcpPort.c_str(), &hints, &addressInfo);
+	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", tcpPort.c_str(), &hints, &addressInfo);
 	if (udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::1 ---> ", udpInfoStatusCode);
@@ -189,7 +214,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	{
 		Logger::throwError("NetworkClientAPI::_setupUDP::2 ----> ", WSAGetLastError());
 	}
-
+	
 	// Set socket options
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
@@ -200,7 +225,7 @@ void NetworkClientAPI::_setupUDP(const string& tcpPort)
 	auto udpBindStatusCode = bind(_udpMessageSocketID, addressInfo->ai_addr, static_cast<int>(addressInfo->ai_addrlen));
 	if (udpBindStatusCode == SOCKET_ERROR)
 	{
-		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError(), " ", _serverPort, " ", tcpPort);
+		Logger::throwError("NetworkClientAPI::_setupUDP::3 ---> ", WSAGetLastError());
 	}
 
 	// Address info not needed anymore
@@ -236,8 +261,8 @@ tuple<int, int, string, string, string> NetworkClientAPI::_receiveUdpMessage(SOC
 	auto receiveResult = recvfrom(udpSocketID, buffer, bufferLength, 0, reinterpret_cast<sockaddr*>(&sourceAddress), &sourceAddressLength);
 	
 	// Extract address
-	auto IP = NetworkUtils::extractSocketAddressIP(&sourceAddress);
-	auto port = NetworkUtils::extractSocketAddressPort(&sourceAddress);
+	auto IP = NetworkUtils::extractAddressIP(&sourceAddress);
+	auto port = NetworkUtils::extractAddressPort(&sourceAddress);
 
 	if (receiveResult > 0) // Message received correctly
 	{

@@ -54,7 +54,7 @@ private:
 	// Miscellaneous functions
 	int _waitForServerConnection(SOCKET serverSocketID, const string& serverIP, const string& serverPort);
 	void _setupTCP();
-	void _setupUDP(const string& tcpPort);
+	void _setupUDP();
 
 	// Connection variables
 	SOCKET _connectionSocketID;

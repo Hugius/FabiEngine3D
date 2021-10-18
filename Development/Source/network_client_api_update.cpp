@@ -108,9 +108,6 @@ void NetworkClientAPI::update()
 				{
 					if (_tcpMessageBuild == "ACCEPTED") // Handle ACCEPTED message
 					{
-						// UDP uses the same port as TCP
-						auto tcpPort = NetworkUtils::extractSocketSourcePort(_connectionSocketID);
-						_setupUDP(tcpPort);
 						_isAcceptedByServer = true;
 						_tcpMessageBuild = "";
 					}

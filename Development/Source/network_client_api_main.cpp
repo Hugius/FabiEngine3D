@@ -83,8 +83,11 @@ void NetworkClientAPI::connectToServer(const string& serverIP, const string& ser
 	_serverIP = serverIP;
 	_serverPort = serverPort;
 
-	// Prepare for TCP connection
+	// Load TCP socket
 	_setupTCP();
+
+	// Load UDP socket
+	_setupUDP();
 
 	// Client is now connecting
 	_isConnectingToServer = true;

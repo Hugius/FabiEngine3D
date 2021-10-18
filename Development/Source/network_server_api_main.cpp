@@ -49,7 +49,6 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	tcpHints.ai_family = AF_INET; // Ipv4 address
 	tcpHints.ai_socktype = SOCK_STREAM; // Streaming socket
 	tcpHints.ai_protocol = IPPROTO_TCP; // TCP protocol
-	tcpHints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
 
 	// Compose UDP address info hints
 	addrinfo udpHints = addrinfo();
@@ -57,11 +56,10 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	udpHints.ai_family = AF_INET; // Ipv4 address
 	udpHints.ai_socktype = SOCK_DGRAM; // Datagram socket
 	udpHints.ai_protocol = IPPROTO_UDP; // UDP protocol
-	udpHints.ai_flags = AI_PASSIVE; // Flag to indicate the current machines's IPV4 should be used
 
 	// Create TCP address info
 	addrinfo* tcpAddressInfo = nullptr;
-	auto tcpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
+	auto tcpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkUtils::SERVER_PORT.c_str(), &tcpHints, &tcpAddressInfo);
 	if (tcpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkServerAPI::start::3 ---> ", tcpInfoStatusCode);
@@ -69,7 +67,7 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 
 	// Create UDP address info
 	addrinfo* udpAddressInfo = nullptr;
-	auto udpInfoStatusCode = getaddrinfo(nullptr, NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
+	auto udpInfoStatusCode = getaddrinfo("0.0.0.0", NetworkUtils::SERVER_PORT.c_str(), &udpHints, &udpAddressInfo);
 	if (udpInfoStatusCode != 0)
 	{
 		Logger::throwError("NetworkServerAPI::start::4 ---> ", udpInfoStatusCode);
@@ -93,10 +91,10 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 	DWORD trueValue = 1;
 	DWORD falseValue = 0;
 	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
-	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
-	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
 
 	// Bind connection socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));

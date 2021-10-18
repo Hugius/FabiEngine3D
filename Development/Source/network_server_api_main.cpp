@@ -91,7 +91,12 @@ void NetworkServerAPI::start(unsigned int maxClientCount)
 
 	// Set socket options
 	DWORD trueValue = 1;
+	DWORD falseValue = 0;
 	setsockopt(_connectionSocketID, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_connectionSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&trueValue), sizeof(trueValue));
+	setsockopt(_udpMessageSocketID, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<char*>(&falseValue), sizeof(falseValue));
 
 	// Bind connection socket
 	auto tcpBindStatusCode = bind(_connectionSocketID, tcpAddressInfo->ai_addr, static_cast<int>(tcpAddressInfo->ai_addrlen));

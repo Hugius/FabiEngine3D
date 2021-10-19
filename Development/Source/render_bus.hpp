@@ -36,7 +36,6 @@ public:
 	void setShadowMatrix(const Matrix44 value);
 
 	// Vectors
-	void setFlareSourcePositionClipspace(Vec4 value);
 	void setClippingPlane(Vec4 value);
 	void setCameraPosition(Vec3 value);
 	void setCameraFront(Vec3 value);
@@ -48,6 +47,7 @@ public:
 	void setShadowCenterPosition(Vec3 value);
 	void setFogColor(Vec3 value);
 	void setFlareSourcePosition(Vec3 value);
+	void setFlareSourceUV(Vec2 value);
 
 	// Floats
 	void setAmbientLightingIntensity(float value);
@@ -134,7 +134,6 @@ public:
 	const Matrix44 getShadowMatrix();
 
 	// Vectors
-	const Vec4 getFlareSourcePositionClipspace();
 	const Vec4 getClippingPlane();
 	const Vec3 getCameraPosition();
 	const Vec3 getCameraFront();
@@ -146,6 +145,7 @@ public:
 	const Vec3 getShadowCenterPosition();
 	const Vec3 getFogColor();
 	const Vec3 getFlareSourcePosition();
+	const Vec2 getFlareSourceUV();
 
 	// Floats
 	const float getAmbientLightingIntensity();
@@ -227,12 +227,11 @@ private:
 	string _lensFlareMapPath = "";
 
 	// Matrices
-	Matrix44 _viewMatrix = Matrix44();
-	Matrix44 _projectionMatrix = Matrix44();
-	Matrix44 _shadowMatrix = Matrix44();
+	Matrix44 _viewMatrix = Matrix44(1.0f);
+	Matrix44 _projectionMatrix = Matrix44(1.0f);
+	Matrix44 _shadowMatrix = Matrix44(1.0f);
 
 	// Vectors
-	Vec4 _flareSourcePositionClipspace = Vec4(0.0f);
 	Vec4 _clippingPlane = Vec4(0.0f);
 	Vec3 _cameraPosition = Vec3(0.0f);
 	Vec3 _cameraFront = Vec3(0.0f);
@@ -240,21 +239,22 @@ private:
 	Vec3 _shadowEyePosition = Vec3(0.0f);
 	Vec3 _shadowCenterPosition = Vec3(0.0f);
 	Vec3 _flareSourcePosition = Vec3(0.0f);
-	Vec3 _ambientLightColor = Vec3(0.0f);
-	Vec3 _directionalLightColor = Vec3(0.0f);
-	Vec3 _spotLightColor = Vec3(0.0f);
-	Vec3 _fogColor = Vec3(0.0f);
+	Vec3 _ambientLightColor = Vec3(1.0f);
+	Vec3 _directionalLightColor = Vec3(1.0f);
+	Vec3 _spotLightColor = Vec3(1.0f);
+	Vec3 _fogColor = Vec3(1.0f);
+	Vec2 _flareSourceUV = Vec2(0.0f);
 
 	// Floats
-	float _ambientLightIntensity = 0.0f;
-	float _directionalLightIntensity = 0.0f;
-	float _spotLightIntensity = 0.0f;
+	float _ambientLightIntensity = 1.0f;
+	float _directionalLightIntensity = 1.0f;
+	float _spotLightIntensity = 1.0f;
+	float _bloomIntensity = 1.0f;
 	float _maxSpotLightAngle = 0.0f;
 	float _maxSpotLightDistance = 0.0f;
 	float _fogMinDistance = 0.0f;
 	float _fogMaxDistance = 0.0f;
-	float _fogThickness = 0.0f;
-	float _bloomIntensity = 0.0f;
+	float _fogThickness = 1.0f;
 	float _cameraYaw = 0.0f;
 	float _cameraPitch = 0.0f;
 	float _nearZ = 0.0f;
@@ -266,8 +266,8 @@ private:
 	float _shadowAreaReach = 0.0f;
 	float _shadowLightness = 0.0f;
 	float _lensFlareAlpha = 0.0f;
-	float _lensFlareIntensity = 0.0f;
-	float _lensFlareSize = 0.0f;
+	float _lensFlareSize = 1.0f;
+	float _lensFlareIntensity = 1.0f;
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;
 	float _skyMixValue = 0.0f;

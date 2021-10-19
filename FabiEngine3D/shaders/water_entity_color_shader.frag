@@ -308,5 +308,5 @@ vec3 calculateFog(vec3 color)
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
-    return (2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
+    return ((2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ)));
 }

@@ -9,15 +9,14 @@ layout (location = 1) in vec2 v_uv;
 layout (location = 0) uniform sampler2D u_depthMap;
 
 // Vector uniforms
-uniform vec4 u_flareSourcePositionClipspace;
-
-// Vector uniforms
-uniform vec3 u_flareSourcePosition;
 uniform vec3 u_cameraPosition;
+uniform vec3 u_flareSourcePosition;
+uniform vec2 u_flareSourceUV;
 
 // Float uniforms
 uniform float u_farZ;
 uniform float u_nearZ;
+uniform float u_lensFlareAlpha;
 
 // Boolean uniforms
 uniform bool u_isLensFlareEnabled;
@@ -40,14 +39,10 @@ void main()
 
 float calculateFlareVisibility()
 {
-    if (u_isLensFlareEnabled && (u_flareSourcePositionClipspace.w > 0.0f))
+    if (u_isLensFlareEnabled && (u_lensFlareIntensity > 0.0f) && (u_lensFlareAlpha > 0.0f))
     {
-        // Convert to UV space
-        vec2 lightSourceClipPosition = (u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w);
-        vec2 lightSourceUV = vec2((lightSourceClipPosition.x + 1.0f) / 2.0f, (lightSourceClipPosition.y + 1.0f) / 2.0f);
-
         // Calculate scene depth
-        float flareDepth = texture(u_depthMap, lightSourceUV).r;
+        float flareDepth = texture(u_depthMap, u_flareSourceUV).r;
         float flareFragmentDepth = (convertDepthToPerspective(flareDepth) / u_farZ);
 
         // Calculate distance to light source
@@ -58,13 +53,19 @@ float calculateFlareVisibility()
         {
             return 1.0f;
         }
+        else
+        {
+            return 0.0f;
+        }
     }
-
-    return 0.0f;
+    else
+    {
+        return 0.0f;
+    }
 }
 
 float convertDepthToPerspective(float depth)
 {
-    float z = depth * 2.0 - 1.0; // Back to NDC 
-    return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
+    float z = ((depth * 2.0f) - 1.0f);
+    return ((2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ)));
 }

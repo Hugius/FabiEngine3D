@@ -75,9 +75,9 @@ const Matrix44 RenderBus::getShadowMatrix()
 	return _shadowMatrix;
 }
 
-const Vec4 RenderBus::getFlareSourcePositionClipspace()
+const Vec2 RenderBus::getFlareSourceUV()
 {
-	return _flareSourcePositionClipspace;
+	return _flareSourceUV;
 }
 
 const Vec4 RenderBus::getClippingPlane()

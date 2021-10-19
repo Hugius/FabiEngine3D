@@ -267,25 +267,28 @@ void MasterRenderer::_updateLensFlare()
 {
 	if (_renderBus.isLensFlareEnabled())
 	{
-		// Calculate screen position
-		auto lightPosition = _renderBus.getDirectionalLightingPosition();
+		// Temporary values
+		auto flareSourcePosition = _renderBus.getDirectionalLightingPosition();
 		auto viewMatrix = _renderBus.getViewMatrix();
 		auto projectionMatrix = _renderBus.getProjectionMatrix();
-		Vec4 clipSpacePosition = (projectionMatrix * viewMatrix * Vec4(lightPosition.x, lightPosition.y, lightPosition.z, 1.0f));
 		float alpha = 0.0f;
 
-		// Calculate transparency value
-		if (clipSpacePosition.w > 0.0f)
+		// Calculate screen position
+		Vec4 flareSourceClip = (projectionMatrix * viewMatrix * Vec4(flareSourcePosition.x, flareSourcePosition.y, flareSourcePosition.z, 1.0f));
+		Vec2 flareSourceNDC = (Vec2(flareSourceClip.x, flareSourceClip.y) / flareSourceClip.w);
+		Vec2 flareSourceUV = Vec2(((flareSourceNDC.x + 1.0f) / 2.0f), ((flareSourceNDC.y + 1.0f) / 2.0f));
+
+		// Check if flare source is visible
+		if ((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
-			const float x = (clipSpacePosition.x / clipSpacePosition.w);
-			const float y = (clipSpacePosition.y / clipSpacePosition.w);
-			alpha = (1.0f - (max(fabsf(x), fabsf(y)) / _renderBus.getLensFlareSize()));
+
+			alpha = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSize()));
 			alpha = clamp(alpha, 0.0f, 1.0f);
 		}
 
 		// Update shader properties
 		_renderBus.setLensFlareAlpha(alpha);
-		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
-		_renderBus.setFlareSourcePosition(lightPosition);
+		_renderBus.setFlareSourcePosition(flareSourcePosition);
+		_renderBus.setFlareSourceUV(flareSourceUV);
 	}
 }

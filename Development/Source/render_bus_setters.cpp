@@ -80,9 +80,9 @@ void RenderBus::setShadowMatrix(const Matrix44 value)
 	_shadowMatrix = value;
 }
 
-void RenderBus::setFlareSourcePositionClipspace(Vec4 value)
+void RenderBus::setFlareSourceUV(Vec2 value)
 {
-	_flareSourcePositionClipspace = value;
+	_flareSourceUV = value;
 }
 
 void RenderBus::setClippingPlane(Vec4 value)

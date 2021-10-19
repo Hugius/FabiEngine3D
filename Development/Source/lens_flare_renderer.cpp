@@ -14,9 +14,9 @@ void LensFlareRenderer::bind()
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 	_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
 	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
-	_shader.uploadUniform("u_flareSourcePositionClipspace", _renderBus.getFlareSourcePositionClipspace());
-	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
+	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
+	_shader.uploadUniform("u_flareSourceUV", _renderBus.getFlareSourceUV());
 	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 
 	// Bind textures

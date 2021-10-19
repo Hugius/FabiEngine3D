@@ -5,40 +5,29 @@
 class ShadowGenerator final
 {
 public:
-	ShadowGenerator();
+	ShadowGenerator(RenderBus& renderBus);
 	
 	// Voids
-	void loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, unsigned int interval);
-	void unloadShadows();
-	void update(RenderBus& renderBus);
-	void updateMatrix(RenderBus& renderBus);
-
-	// Vectors
-	Vec3 getEye();
-	Vec3 getCenter();
-
-	// Floats
-	float getSize();
-	float getReach();
+	void update();
+	void updateMatrix();
+	void setInterval(unsigned int value);
+	void setFollowingCamera(bool value);
 
 	// Integers
-	int getInterval();
+	const unsigned int getInterval() const;
 
 	// Booleans
-	bool isFollowingCamera();
+	const bool isFollowingCamera() const;
 
 private:
-	// Matrices
-	Matrix44 _createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach);
+	// Instances
+	RenderBus& _renderBus;
 
-	// Vectors
-	Vec3 _eye = Vec3(0.0f);
-	Vec3 _center = Vec3(0.0f);
+	// Matrices
+	Matrix44 _createLightSpaceMatrix();
 
 	// Floats
-	static inline const float DEFAULT_NEAR_Z = 0.01f;
-	float _size = 0.0f;
-	float _reach = 0.0f;
+	static inline const float NEAR_Z = 0.01f;
 
 	// Integers
 	unsigned int _interval = 0;

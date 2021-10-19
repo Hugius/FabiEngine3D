@@ -115,9 +115,9 @@ const Vec3 RenderBus::getShadowEyePosition()
 	return _shadowEyePosition;
 }
 
-const Vec3 RenderBus::getShadowAreaCenter()
+const Vec3 RenderBus::getShadowCenterPosition()
 {
-	return _shadowAreaCenter;
+	return _shadowCenterPosition;
 }
 
 const Vec3 RenderBus::getFogColor()
@@ -165,9 +165,9 @@ const float RenderBus::getLensFlareIntensity()
 	return _lensFlareIntensity;
 }
 
-const float RenderBus::getLensFlareMultiplier()
+const float RenderBus::getLensFlareSize()
 {
-	return _lensFlareMultiplier;
+	return _lensFlareSize;
 }
 
 const float RenderBus::getMotionBlurStrength()
@@ -285,11 +285,6 @@ const unsigned int RenderBus::getTriangleCount()
 	return _triangleCount;
 }
 
-const unsigned int RenderBus::getAnisotropicFilteringQuality()
-{
-	return _anisotropicFilteringQuality;
-}
-
 const unsigned int RenderBus::getShadowQuality()
 {
 	return _shadowQuality;
@@ -343,11 +338,6 @@ const bool RenderBus::isFogEnabled()
 const bool RenderBus::isBloomEnabled()
 {
 	return _isBloomEnabled;
-}
-
-const bool RenderBus::isSkyExposureEnabled()
-{
-	return _isSkyExposureEnabled;
 }
 
 const bool RenderBus::isShadowsEnabled()

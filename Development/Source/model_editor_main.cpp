@@ -35,11 +35,22 @@ void ModelEditor::load()
 	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 
 	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(10000.0f), Vec3(1.0f), 3.0f);
+	_fe3d.gfx_enableAmbientLighting();
+	_fe3d.gfx_setAmbientLightingColor(Vec3(1.0f));
+	_fe3d.gfx_setAmbientLightingIntensity(1.0f);
+	_fe3d.gfx_enableDirectionalLighting();
+	_fe3d.gfx_setDirectionalLightingColor(Vec3(1.0f));
+	_fe3d.gfx_setDirectionalLightingPosition(Vec3(10000.0f));
+	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
 	_fe3d.gfx_setPlanarReflectionHeight(0.0f);
-	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
-	_fe3d.gfx_enableMotionBlur(0.1f);
+	_fe3d.gfx_enableBloom();
+	_fe3d.gfx_setBloomType(BloomType::PARTS);
+	_fe3d.gfx_setBloomIntensity(1.0f);
+	_fe3d.gfx_setBloomBlurCount(5);
+	_fe3d.gfx_enableMotionBlur();
+	_fe3d.gfx_setMotionBlurStrength(0.1f);
+	_fe3d.gfx_enableShadows();
+	_fe3d.gfx_setShadowLightness(0.25f);
 	
 	// Editor models
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");
@@ -75,17 +86,12 @@ void ModelEditor::unload()
 		_fe3d.camera_disableThirdPersonView();
 	}
 
-	// Shadows
-	if (_fe3d.gfx_isShadowsEnabled())
-	{
-		_fe3d.gfx_disableShadows(true);
-	}
-
 	// Default graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableBloom(true);
 	_fe3d.gfx_disableMotionBlur(true);
+	_fe3d.gfx_disableShadows(true);
 
 	// Delete models
 	_fe3d.modelEntity_deleteAll();

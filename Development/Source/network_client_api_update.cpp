@@ -148,7 +148,7 @@ void NetworkClientAPI::update()
 
 						// Subtract the server & client processing delays
 						auto serverReceiveDelay = stoll(_tcpMessageBuild.substr(4));
-						auto clientReceiveDelay = Tools::getTimeSinceEpochMS() - messageTimestamp;
+						auto clientReceiveDelay = (Tools::getTimeSinceEpochMS() - messageTimestamp);
 						latency -= serverReceiveDelay;
 						latency -= clientReceiveDelay;
 

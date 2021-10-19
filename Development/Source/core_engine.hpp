@@ -52,7 +52,6 @@ private:
 	MeshLoader _meshLoader;
 	AudioLoader _audioLoader;
 	RenderBus _renderBus;
-	ShadowGenerator _shadowGenerator;
 	CollisionDetector _collisionDetector;
 	CollisionResolver _collisionResolver;
 	Timer _timer;
@@ -62,6 +61,7 @@ private:
 	NetworkClientAPI _networkClientAPI;
 	Window _window;
 	AudioManager _audioManager;
+	ShadowGenerator _shadowGenerator;
 	TextureLoader _textureLoader;
 	Camera _camera;
 	MasterRenderer _masterRenderer;

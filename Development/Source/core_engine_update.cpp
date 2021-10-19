@@ -60,7 +60,7 @@ void CoreEngine::_updateApplication()
 
 			// Shadow updates
 			_timer.startDeltaPart("shadowUpdate");
-			_shadowGenerator.update(_renderBus);
+			_shadowGenerator.update();
 			_timer.stopDeltaPart();
 
 			// Audio updates

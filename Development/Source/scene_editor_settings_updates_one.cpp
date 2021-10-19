@@ -130,6 +130,14 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableShadows();
+			}
+			else
+			{
+				_fe3d.gfx_disableShadows();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
@@ -150,6 +158,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("follow")->isHovered())
 		{
 			isFollowingCamera = !isFollowingCamera;
+			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lightness")->isHovered())
 		{
@@ -161,29 +170,43 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		}
 
 		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("size", size))
+		{
+			_fe3d.gfx_setShadowAreaSize(size);
+			_fe3d.gfx_setShadowAreaReach(size * 2.0f);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("positionX", position.x))
+		{
+			_fe3d.gfx_setShadowEyePosition(position);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("positionY", position.y))
+		{
+			_fe3d.gfx_setShadowEyePosition(position);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("positionZ", position.z))
+		{
+			_fe3d.gfx_setShadowEyePosition(position);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("centerX", center.x))
+		{
+			_fe3d.gfx_setShadowCenterPosition(center);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("centerY", center.y))
+		{
+			_fe3d.gfx_setShadowCenterPosition(center);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("centerZ", center.z))
+		{
+			_fe3d.gfx_setShadowCenterPosition(center);
+		}
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
+			_fe3d.gfx_setShadowLightness(lightness);
 		}
-		_gui.getGlobalScreen()->checkValueForm("size", size);
-		_gui.getGlobalScreen()->checkValueForm("interval", interval);
-		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
-		_gui.getGlobalScreen()->checkValueForm("positionY", position.y);
-		_gui.getGlobalScreen()->checkValueForm("positionZ", position.z);
-		_gui.getGlobalScreen()->checkValueForm("centerX", center.x);
-		_gui.getGlobalScreen()->checkValueForm("centerY", center.y);
-		_gui.getGlobalScreen()->checkValueForm("centerZ", center.z);
-
-		// Disable shadows
-		if (_fe3d.gfx_isShadowsEnabled())
+		if (_gui.getGlobalScreen()->checkValueForm("interval", interval))
 		{
-			_fe3d.gfx_disableShadows();
-		}
-
-		// Enable shadows
-		if (isEnabled)
-		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, interval);
+			_fe3d.gfx_setShadowInterval(interval);
 		}
 
 		// Update buttons hoverability
@@ -221,6 +244,14 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableMotionBlur();
+			}
+			else
+			{
+				_fe3d.gfx_disableMotionBlur();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("strength")->isHovered())
 		{
@@ -231,18 +262,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
 			strength /= 100.0f;
-		}
-
-		// Disable motion blur
-		if (_fe3d.gfx_isMotionBlurEnabled())
-		{
-			_fe3d.gfx_disableMotionBlur();
-		}
-
-		// Enable motion blur
-		if (isEnabled)
-		{
-			_fe3d.gfx_enableMotionBlur(strength);
+			_fe3d.gfx_setMotionBlurStrength(strength);
 		}
 
 		// Update buttons hoverability
@@ -263,7 +283,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 	{
 		// Temporary values
 		auto isEnabled = _fe3d.gfx_isDofEnabled();
-		auto dynamic = _fe3d.gfx_isDofDynamic();
+		auto isDynamic = _fe3d.gfx_isDofDynamic();
 		auto blurDistance = _fe3d.gfx_getDofBlurDistance();
 		auto maxDistance = _fe3d.gfx_getaMaxDofDistance();
 
@@ -276,10 +296,19 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableDOF();
+			}
+			else
+			{
+				_fe3d.gfx_disableDOF();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("dynamic")->isHovered())
 		{
-			dynamic = !dynamic;
+			isDynamic = !isDynamic;
+			_fe3d.gfx_setDofDynamic(isDynamic);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurDistance")->isHovered())
 		{
@@ -291,28 +320,22 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Update value forms
-		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
-		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-
-		// Disable DOF
-		if (_fe3d.gfx_isDofEnabled())
+		if (_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance))
 		{
-			_fe3d.gfx_disableDOF();
+			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
-
-		// Enable DOF
-		if (isEnabled)
+		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
 		{
-			_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+			_fe3d.gfx_setDofMaxDistance(maxDistance);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("dynamic")->setHoverable(isEnabled);
 		screen->getButton("blurDistance")->setHoverable(isEnabled);
-		screen->getButton("maxDistance")->setHoverable(isEnabled && dynamic);
+		screen->getButton("maxDistance")->setHoverable(isEnabled && isDynamic);
 
 		// Update button text contents
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
-		screen->getButton("dynamic")->changeTextContent(dynamic ? "Dynamic: YES" : "Dynamic: NO");
+		screen->getButton("dynamic")->changeTextContent(isDynamic ? "Dynamic: YES" : "Dynamic: NO");
 	}
 }

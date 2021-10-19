@@ -22,7 +22,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	// Save original shadow status
 	const auto originalShadowEyePosition = _renderBus.getShadowEyePosition();
-	const auto originalShadowAreaCenter = _renderBus.getShadowAreaCenter();
+	const auto originalShadowAreaCenter = _renderBus.getShadowCenterPosition();
 	const auto originalShadowAreaSize = _renderBus.getShadowAreaSize();
 	const auto originalShadowAreaReach = _renderBus.getShadowAreaReach();
 	const auto originalShadowMatrix = _renderBus.getShadowMatrix();
@@ -125,7 +125,7 @@ void MasterRenderer::_captureCubeReflections()
 				_camera.updateMatrices();
 
 				// Update shadows
-				_shadowGenerator.updateMatrix(_renderBus);
+				_shadowGenerator.updateMatrix();
 				_captureShadows();
 
 				// Start capturing reflections
@@ -208,7 +208,7 @@ void MasterRenderer::_captureCubeReflections()
 
 	// Revert shadows
 	_renderBus.setShadowEyePosition(originalShadowEyePosition);
-	_renderBus.setShadowAreaCenter(originalShadowAreaCenter);
+	_renderBus.setShadowCenterPosition(originalShadowAreaCenter);
 	_renderBus.setShadowAreaSize(originalShadowAreaSize);
 	_renderBus.setShadowAreaReach(originalShadowAreaReach);
 	_renderBus.setShadowMatrix(originalShadowMatrix);

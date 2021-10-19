@@ -139,7 +139,7 @@ void SkyEntityManager::update()
 	if (mainSky != nullptr)
 	{
 		// Update sky exposure
-		if (_renderBus.isSkyExposureEnabled())
+		if (_isExposureEnabled)
 		{
 			// Values
 			float lightness = mainSky->getLightness(); // Current lightness
@@ -170,22 +170,32 @@ void SkyEntityManager::update()
 	}
 }
 
-void SkyEntityManager::setExposureIntensity(float intensity)
+void SkyEntityManager::setExposureIntensity(float value)
 {
-	_exposureIntensity = intensity;
+	_exposureIntensity = value;
 }
 
-void SkyEntityManager::setExposureSpeed(float speed)
+void SkyEntityManager::setExposureSpeed(float value)
 {
-	_exposureSpeed = speed;
+	_exposureSpeed = value;
 }
 
-float SkyEntityManager::getSkyExposureIntensity()
+void SkyEntityManager::setExposureEnabled(bool value)
+{
+	_isExposureEnabled = value;
+}
+
+const float SkyEntityManager::getExposureIntensity()
 {
 	return _exposureIntensity;
 }
 
-float SkyEntityManager::getSkyExposureSpeed()
+const float SkyEntityManager::getExposureSpeed()
 {
 	return _exposureSpeed;
+}
+
+const bool SkyEntityManager::isExposureEnabled()
+{
+	return _isExposureEnabled;
 }

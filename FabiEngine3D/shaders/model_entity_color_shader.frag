@@ -100,7 +100,7 @@ vec3 calculateLights(vec3 specularMapColor, vec3 normal);
 vec3 calculateFog(vec3 color);
 vec3 calculateCubeReflection(vec3 reflectionMapColor, vec3 color, vec3 normal);
 vec3 calculatePlanarReflection(vec3 reflectionMapColor, vec3 color);
-float calculateSpecularLighting(vec3 specularMapColor, vec3 position, vec3 normal);
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal);
 float calculateShadows();
 
 // Process fragment
@@ -374,8 +374,8 @@ vec3 calculateSpotLighting(vec3 specularMapColor, vec3 normal)
         vec3 lightDirection = normalize(u_cameraPosition - f_pos);
         float smoothingMultiplier = 0.9f;
         float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
-        float epsilon = u_maxSpotLightingAngle - u_maxSpotLightingAngle * smoothingMultiplier;
-        float intensity = clamp((spotTheta - u_maxSpotLightingAngle * smoothingMultiplier) / epsilon, 0.0f, 1.0f);
+        float epsilon = (u_maxSpotLightingAngle - (u_maxSpotLightingAngle * smoothingMultiplier));
+        float intensity = clamp(((spotTheta - (u_maxSpotLightingAngle * smoothingMultiplier)) / epsilon), 0.0f, 1.0f);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
         float specular = calculateSpecularLighting(specularMapColor, u_cameraPosition, normal);
 
@@ -540,12 +540,12 @@ float calculateShadows()
 	}
 }
 
-float calculateSpecularLighting(vec3 specularMapColor, vec3 position, vec3 normal)
+float calculateSpecularLighting(vec3 specularMapColor, vec3 lightPosition, vec3 normal)
 {
     if (u_isSpecular)
     {
     	// Calculate
-        vec3 lightDirection = normalize(position - f_pos);
+        vec3 lightDirection = normalize(lightPosition - f_pos);
         vec3 viewDirection = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
 		float specularMapIntensity = ((specularMapColor.r + specularMapColor.g + specularMapColor.b) / 3.0f);

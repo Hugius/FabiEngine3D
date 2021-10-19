@@ -24,7 +24,8 @@ void SkyEditor::load()
 	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
 	
 	// Default graphics
-	_fe3d.gfx_enableMotionBlur(0.1f);
+	_fe3d.gfx_enableMotionBlur();
+	_fe3d.gfx_setMotionBlurStrength(0.1f);
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->createTextField("skyID", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));

@@ -10,9 +10,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_enableAmbientLighting(
-				_fe3d.gfx_getAmbientLightingColor(),
-				_fe3d.gfx_getAmbientLightingIntensity());
+			_fe3d.gfx_enableAmbientLighting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -32,9 +30,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableAmbientLighting(
-				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
-				_fe3d.gfx_getAmbientLightingIntensity());
+			_fe3d.gfx_setAmbientLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -45,7 +41,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableAmbientLighting(_fe3d.gfx_getAmbientLightingColor(), arguments[0].getDecimal());
+			_fe3d.gfx_setAmbientLightingIntensity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -54,10 +50,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_enableDirectionalLighting(
-				_fe3d.gfx_getDirectionalLightingPosition(),
-				_fe3d.gfx_getDirectionalLightingColor(),
-				_fe3d.gfx_getDirectionalLightingIntensity());
+			_fe3d.gfx_enableDirectionalLighting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -78,10 +71,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			auto position = Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
-			_fe3d.gfx_enableDirectionalLighting(
-				position,
-				_fe3d.gfx_getDirectionalLightingColor(),
-				_fe3d.gfx_getDirectionalLightingIntensity());
+			_fe3d.gfx_setDirectionalLightingPosition(position);
 			_fe3d.billboardEntity_setPosition("@@lightSource", position);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
@@ -93,10 +83,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableDirectionalLighting(
-				_fe3d.gfx_getDirectionalLightingPosition(),
-				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
-				_fe3d.gfx_getDirectionalLightingIntensity());
+			_fe3d.gfx_setDirectionalLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -107,10 +94,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableDirectionalLighting(
-				_fe3d.gfx_getDirectionalLightingPosition(),
-				_fe3d.gfx_getDirectionalLightingColor(),
-				arguments[0].getDecimal());
+			_fe3d.gfx_setDirectionalLightingIntensity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -130,11 +114,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_enableSpotLighting(
-				_fe3d.gfx_getSpotLightingColor(),
-				_fe3d.gfx_getSpotLightingIntensity(),
-				_fe3d.gfx_getSpotLightingAngle(),
-				_fe3d.gfx_getSpotLightingDistance());
+			_fe3d.gfx_enableSpotLighting();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -154,16 +134,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
-			_fe3d.gfx_enableSpotLighting(
-				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
-				_fe3d.gfx_getSpotLightingIntensity(),
-				_fe3d.gfx_getSpotLightingAngle(),
-				_fe3d.gfx_getSpotLightingDistance());
-			if (!wasEnabled)
-			{
-				_fe3d.gfx_disableSpotLighting();
-			}
+			_fe3d.gfx_setSpotLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -174,16 +145,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
-			_fe3d.gfx_enableSpotLighting(
-				_fe3d.gfx_getSpotLightingColor(),
-				arguments[0].getDecimal(),
-				_fe3d.gfx_getSpotLightingAngle(),
-				_fe3d.gfx_getSpotLightingDistance());
-			if (!wasEnabled)
-			{
-				_fe3d.gfx_disableSpotLighting();
-			}
+			_fe3d.gfx_setSpotLightingIntensity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -194,16 +156,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
-			_fe3d.gfx_enableSpotLighting(
-				_fe3d.gfx_getSpotLightingColor(),
-				_fe3d.gfx_getSpotLightingIntensity(),
-				arguments[0].getDecimal(),
-				_fe3d.gfx_getSpotLightingDistance());
-			if (!wasEnabled)
-			{
-				_fe3d.gfx_disableSpotLighting();
-			}
+			_fe3d.gfx_setSpotLightingAngle(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
@@ -214,16 +167,7 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
-			_fe3d.gfx_enableSpotLighting(
-				_fe3d.gfx_getSpotLightingColor(),
-				_fe3d.gfx_getSpotLightingIntensity(),
-				_fe3d.gfx_getSpotLightingAngle(),
-				arguments[0].getDecimal());
-			if (!wasEnabled)
-			{
-				_fe3d.gfx_disableSpotLighting();
-			}
+			_fe3d.gfx_setSpotLightingDistance(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

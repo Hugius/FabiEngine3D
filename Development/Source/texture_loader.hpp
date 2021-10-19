@@ -29,10 +29,13 @@ public:
 	void clearTextureCache3D(const array<string, 6>& filePaths);
 	void clearBitmapCache(const string& filePath);
 	void clearFontCache(const string& filePath);
-	void reloadAnisotropicFiltering();
+	void setAnisotropicFilteringQuality(unsigned int value);
 
 	// Floats
 	const vector<float>* getBitmap(const string& filePath);
+
+	// Integers
+	const unsigned int getAnisotropicFilteringQuality();
 
 	// Miscellaneous
 	TextureID getTexture2D(const string& filePath, bool isMipmapped, bool isAnisotropic);
@@ -40,6 +43,9 @@ public:
 	TextureID getText(const string& textContent, const string& fontPath);
 
 private:
+	// Voids
+	void _reloadAnisotropicFiltering();
+
 	// Floats
 	vector<float> _loadBitmap(const string& filePath);
 
@@ -55,6 +61,9 @@ private:
 
 	// Floats
 	map<string, vector<float>> _bitmapCache;
+
+	// Integers
+	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 
 	// Miscellaneous
 	map<string, TextureID> _textureCache2D;

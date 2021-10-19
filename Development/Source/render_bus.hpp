@@ -45,7 +45,7 @@ public:
 	void setDirectionalLightingColor(Vec3 value);
 	void setSpotLightingColor(Vec3 value);
 	void setShadowEyePosition(Vec3 value);
-	void setShadowAreaCenter(Vec3 value);
+	void setShadowCenterPosition(Vec3 value);
 	void setFogColor(Vec3 value);
 	void setFlareSourcePosition(Vec3 value);
 
@@ -71,7 +71,7 @@ public:
 	void setShadowLightness(float value);
 	void setLensFlareAlpha(float value);
 	void setLensFlareIntensity(float value);
-	void setLensFlareMultiplier(float value);
+	void setLensFlareSize(float value);
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
 	void setSkyMixValue(float value);
@@ -80,7 +80,6 @@ public:
 	void setBloomSize(unsigned int value);
 	void setDofSize(unsigned int value);
 	void setMotionBlurSize(unsigned int value);
-	void setAnisotropicFilteringQuality(unsigned int value);
 	void setShadowQuality(unsigned int value);
 	void setCubeReflectionQuality(unsigned int value);
 	void setPlanarReflectionQuality(unsigned int value);
@@ -97,7 +96,6 @@ public:
 	void setSpotLightingEnabled(bool value);
 	void setFogEnabled(bool value);
 	void setBloomEnabled(bool value);
-	void setSkyExposureEnabled(bool value);
 	void setShadowsEnabled(bool value);
 	void setDofEnabled(bool value);
 	void setMotionBlurEnabled(bool value);
@@ -145,7 +143,7 @@ public:
 	const Vec3 getDirectionalLightingPosition();
 	const Vec3 getSpotLightingColor();
 	const Vec3 getShadowEyePosition();
-	const Vec3 getShadowAreaCenter();
+	const Vec3 getShadowCenterPosition();
 	const Vec3 getFogColor();
 	const Vec3 getFlareSourcePosition();
 
@@ -171,7 +169,7 @@ public:
 	const float getShadowLightness();
 	const float getLensFlareAlpha();
 	const float getLensFlareIntensity();
-	const float getLensFlareMultiplier();
+	const float getLensFlareSize();
 	const float getMotionBlurStrength();
 	const float getMotionBlurMixValue();
 	const float getSkyMixValue();
@@ -180,7 +178,6 @@ public:
 	const unsigned int getBloomSize();
 	const unsigned int getDofSize();
 	const unsigned int getMotionBlurSize();
-	const unsigned int getAnisotropicFilteringQuality();
 	const unsigned int getShadowQuality();
 	const unsigned int getCubeReflectionQuality();
 	const unsigned int getPlanarReflectionQuality();
@@ -196,7 +193,6 @@ public:
 	const bool isSpotLightingEnabled();
 	const bool isFogEnabled();
 	const bool isBloomEnabled();
-	const bool isSkyExposureEnabled();
 	const bool isShadowsEnabled();
 	const bool isDofEnabled();
 	const bool isMotionBlurEnabled();
@@ -231,9 +227,9 @@ private:
 	string _lensFlareMapPath = "";
 
 	// Matrices
-	Matrix44 _viewMatrix = Matrix44(1.0f);
-	Matrix44 _projectionMatrix = Matrix44(1.0f);
-	Matrix44 _shadowMatrix = Matrix44(1.0f);
+	Matrix44 _viewMatrix = Matrix44();
+	Matrix44 _projectionMatrix = Matrix44();
+	Matrix44 _shadowMatrix = Matrix44();
 
 	// Vectors
 	Vec4 _flareSourcePositionClipspace = Vec4(0.0f);
@@ -242,17 +238,17 @@ private:
 	Vec3 _cameraFront = Vec3(0.0f);
 	Vec3 _directionalLightPosition = Vec3(0.0f);
 	Vec3 _shadowEyePosition = Vec3(0.0f);
-	Vec3 _shadowAreaCenter = Vec3(0.0f);
+	Vec3 _shadowCenterPosition = Vec3(0.0f);
 	Vec3 _flareSourcePosition = Vec3(0.0f);
-	Vec3 _ambientLightColor = Vec3(1.0f);
-	Vec3 _directionalLightColor = Vec3(1.0f);
-	Vec3 _spotLightColor = Vec3(1.0f);
-	Vec3 _fogColor = Vec3(1.0f);
+	Vec3 _ambientLightColor = Vec3(0.0f);
+	Vec3 _directionalLightColor = Vec3(0.0f);
+	Vec3 _spotLightColor = Vec3(0.0f);
+	Vec3 _fogColor = Vec3(0.0f);
 
 	// Floats
-	float _ambientLightIntensity = 1.0f;
-	float _directionalLightIntensity = 1.0f;
-	float _spotLightIntensity = 1.0f;
+	float _ambientLightIntensity = 0.0f;
+	float _directionalLightIntensity = 0.0f;
+	float _spotLightIntensity = 0.0f;
 	float _maxSpotLightAngle = 0.0f;
 	float _maxSpotLightDistance = 0.0f;
 	float _fogMinDistance = 0.0f;
@@ -271,7 +267,7 @@ private:
 	float _shadowLightness = 0.0f;
 	float _lensFlareAlpha = 0.0f;
 	float _lensFlareIntensity = 0.0f;
-	float _lensFlareMultiplier = 0.0f;
+	float _lensFlareSize = 0.0f;
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;
 	float _skyMixValue = 0.0f;
@@ -280,7 +276,6 @@ private:
 	unsigned int _bloomSize = Config::MIN_BLOOM_SIZE;
 	unsigned int _dofSize = Config::MIN_DOF_SIZE;
 	unsigned int _motionBlurSize = Config::MIN_MOTION_BLUR_SIZE;
-	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 	unsigned int _shadowQuality = Config::MIN_SHADOW_QUALITY;
 	unsigned int _cubeReflectionQuality = Config::MIN_REFLECTION_QUALITY;
 	unsigned int _planarReflectionQuality = Config::MIN_REFLECTION_QUALITY;
@@ -296,7 +291,6 @@ private:
 	bool _isSpotLightingEnabled = false;
 	bool _isFogEnabled = false;
 	bool _isBloomEnabled = false;
-	bool _isSkyExposureEnabled = false;
 	bool _isShadowsEnabled = false;
 	bool _isDofEnabled = false;
 	bool _isMotionBlurEnabled = false;

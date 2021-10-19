@@ -4,111 +4,86 @@
 
 using std::max;
 
-ShadowGenerator::ShadowGenerator()
+ShadowGenerator::ShadowGenerator(RenderBus& renderBus) :
+	_renderBus(renderBus)
 {
-	_passedFrames = INT_MAX;
+
 }
 
-void ShadowGenerator::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, unsigned int interval)
+void ShadowGenerator::update()
 {
-	_eye = eye;
-	_center = center;
-	_size = max(0.0f, size);
-	_reach = max(0.0f, reach);
-	_isFollowingCamera = isFollowingCamera;
-	_interval = interval;
-	_passedFrames = 0;
-}
-
-void ShadowGenerator::unloadShadows()
-{
-	_eye = Vec3(0.0f);
-	_center = Vec3(0.0f);
-	_size = 0.0f;
-	_reach = 0.0f;
-	_isFollowingCamera = false;
-	_interval = 0;
-	_passedFrames = -1;
-}
-
-void ShadowGenerator::update(RenderBus& renderBus)
-{
-	if (_passedFrames >= _interval)
+	if (_renderBus.isShadowsEnabled())
 	{
-		_passedFrames = 0;
+		if (_passedFrames >= _interval)
+		{
+			_passedFrames = 0;
 
-		updateMatrix(renderBus);
-	}
-	else
-	{
-		_passedFrames++;
+			updateMatrix();
+		}
+		else
+		{
+			_passedFrames++;
+		}
 	}
 }
 
-void ShadowGenerator::updateMatrix(RenderBus& renderBus)
+void ShadowGenerator::updateMatrix()
 {
 	if (_isFollowingCamera)
 	{
+		// Temporary values
+		auto cameraPosition = _renderBus.getCameraPosition();
+		auto eyePosition = _renderBus.getShadowEyePosition();
+		auto centerPosition = _renderBus.getShadowCenterPosition();
+
 		// Update eye & center
-		Vec3 cameraPos = renderBus.getCameraPosition();
-		Vec3 newEye = Vec3(cameraPos.x, 0.0f, cameraPos.z);
-		Vec3 newCenter = Vec3(cameraPos.x, 0.0f, cameraPos.z);
-		newEye += _eye;
-		newCenter += _center;
+		Vec3 newEyePosition = Vec3(cameraPosition.x, 0.0f, cameraPosition.z);
+		Vec3 newCenterPosition = Vec3(cameraPosition.x, 0.0f, cameraPosition.z);
+		newEyePosition += eyePosition;
+		newCenterPosition += centerPosition;
 
 		// Apply
-		renderBus.setShadowEyePosition(newEye);
-		renderBus.setShadowAreaCenter(newCenter);
-		renderBus.setShadowAreaSize(_size);
-		renderBus.setShadowAreaReach(_reach);
-		renderBus.setShadowMatrix(_createLightSpaceMatrix(newEye, newCenter, _size, _reach));
+		_renderBus.setShadowEyePosition(newEyePosition);
+		_renderBus.setShadowCenterPosition(newCenterPosition);
 	}
-	else
-	{
-		renderBus.setShadowEyePosition(_eye);
-		renderBus.setShadowAreaCenter(_center);
-		renderBus.setShadowAreaSize(_size);
-		renderBus.setShadowAreaReach(_reach);
-		renderBus.setShadowMatrix(_createLightSpaceMatrix(_eye, _center, _size, _reach));
-	}
+
+	// Create light space matrix
+	_renderBus.setShadowMatrix(_createLightSpaceMatrix());
 }
 
-Matrix44 ShadowGenerator::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
+Matrix44 ShadowGenerator::_createLightSpaceMatrix()
 {
+	// Temporary values
+	auto eye = _renderBus.getShadowEyePosition();
+	auto center = _renderBus.getShadowCenterPosition();
+	auto size = _renderBus.getShadowAreaSize();
+	auto reach = _renderBus.getShadowAreaReach();
+
 	// Matrix generation
 	Matrix44 lightViewMatrix = Math::createViewMatrix(eye, center, Vec3(0.0f, 1.0f, 0.0f));
-	Matrix44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, DEFAULT_NEAR_Z, reach);
+	Matrix44 lightProjectionMatrix = Math::createOrthoMatrix(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, NEAR_Z, reach);
 
 	// Return
 	return (lightProjectionMatrix * lightViewMatrix);
 }
 
-Vec3 ShadowGenerator::getEye()
+void ShadowGenerator::setInterval(unsigned int value)
 {
-	return _eye;
+	_interval = value;
+	_passedFrames = 0;
 }
 
-Vec3 ShadowGenerator::getCenter()
+void ShadowGenerator::setFollowingCamera(bool value)
 {
-	return _center;
+	_isFollowingCamera = value;
 }
 
-float ShadowGenerator::getSize()
-{
-	return _size;
-}
-
-float ShadowGenerator::getReach()
-{
-	return _reach;
-}
-
-bool ShadowGenerator::isFollowingCamera()
-{
-	return _isFollowingCamera;
-}
-
-int ShadowGenerator::getInterval()
+const unsigned int ShadowGenerator::getInterval() const
 {
 	return _interval;
+}
+
+const bool ShadowGenerator::isFollowingCamera() const
+{
+	return _isFollowingCamera;
 }

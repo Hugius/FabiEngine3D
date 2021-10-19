@@ -104,12 +104,12 @@ bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:graphics_get_lens_flare_multiplier")
+	else if (functionName == "fe3d:graphics_get_lens_flare_size")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getLensFlareMultiplier();
+			auto result = _fe3d.gfx_getLensFlareSize();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

@@ -26,16 +26,12 @@ void AnimationEditor::_updateCamera()
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);
 
-		// Disable shadows
-		if (_fe3d.gfx_isShadowsEnabled())
-		{
-			_fe3d.gfx_disableShadows();
-		}
-
-		// Enable shadows
+		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
-		_fe3d.gfx_enableShadows(Vec3(cameraLookat + Vec3(distance * 2.0f)),
-			cameraLookat, distance * 4.0f, distance * 8.0f, 0.25f, false, 0);
+		_fe3d.gfx_setShadowEyePosition(Vec3(cameraLookat + Vec3(distance * 2.0f)));
+		_fe3d.gfx_setShadowCenterPosition(cameraLookat);
+		_fe3d.gfx_setShadowAreaSize(distance * 4.0f);
+		_fe3d.gfx_setShadowAreaReach(distance * 8.0f);
 	}
 
 	// Check if allowed by GUI

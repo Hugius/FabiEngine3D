@@ -34,7 +34,7 @@ void ModelEntityColorRenderer::bind()
 	_shader.uploadUniform("u_isSpotLightingEnabled", _renderBus.isSpotLightingEnabled());
 	_shader.uploadUniform("u_isReflectionsEnabled", _renderBus.isReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize", _renderBus.getShadowAreaSize());
-	_shader.uploadUniform("u_shadowAreaCenter", _renderBus.getShadowAreaCenter());
+	_shader.uploadUniform("u_shadowAreaCenter", _renderBus.getShadowCenterPosition());
 	_shader.uploadUniform("u_shadowLightness", _renderBus.getShadowLightness());
 	_shader.uploadUniform("u_isShadowsEnabled", _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());

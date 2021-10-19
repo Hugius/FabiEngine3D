@@ -279,7 +279,7 @@ void MasterRenderer::_updateLensFlare()
 		{
 			const float x = (clipSpacePosition.x / clipSpacePosition.w);
 			const float y = (clipSpacePosition.y / clipSpacePosition.w);
-			alpha = (1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier()));
+			alpha = (1.0f - (max(fabsf(x), fabsf(y)) / _renderBus.getLensFlareSize()));
 			alpha = clamp(alpha, 0.0f, 1.0f);
 		}
 

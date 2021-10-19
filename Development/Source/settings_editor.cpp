@@ -29,7 +29,10 @@ void SettingsEditor::load()
 	_loadGUI();
 	
 	// Default graphics
-	_fe3d.gfx_enableBloom(BloomType::PARTS, 1.0f, 5);
+	_fe3d.gfx_enableBloom();
+	_fe3d.gfx_setBloomType(BloomType::PARTS);
+	_fe3d.gfx_setBloomIntensity(1.0f);
+	_fe3d.gfx_setBloomBlurCount(5);
 
 	// Camera
 	_fe3d.camera_reset();

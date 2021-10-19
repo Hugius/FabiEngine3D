@@ -29,9 +29,15 @@ void WaterEditor::load()
 	_fe3d.camera_setThirdPersonLookat(Vec3(0.0f, -GRID_Y_OFFSET, 0.0f));
 	
 	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableDirectionalLighting(Vec3(10000.0f), Vec3(1.0f), 3.0f);
-	_fe3d.gfx_enableMotionBlur(0.1f);
+	_fe3d.gfx_enableAmbientLighting();
+	_fe3d.gfx_setAmbientLightingColor(Vec3(1.0f));
+	_fe3d.gfx_setAmbientLightingIntensity(1.0f);
+	_fe3d.gfx_enableDirectionalLighting();
+	_fe3d.gfx_setDirectionalLightingColor(Vec3(1.0f));
+	_fe3d.gfx_setDirectionalLightingPosition(Vec3(10000.0f));
+	_fe3d.gfx_setDirectionalLightingIntensity(3.0f);
+	_fe3d.gfx_enableMotionBlur();
+	_fe3d.gfx_setMotionBlurStrength(0.1f);
 
 	// Editor models
 	_fe3d.modelEntity_create("@@cube", "engine_assets\\meshes\\cube.obj");

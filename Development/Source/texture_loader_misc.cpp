@@ -156,6 +156,11 @@ BEGIN:
 	}
 }
 
+const unsigned int TextureLoader::getAnisotropicFilteringQuality()
+{
+	return _anisotropicFilteringQuality;
+}
+
 TextureID TextureLoader::getText(const string& textContent, const string& fontPath)
 {
 BEGIN:
@@ -265,7 +270,13 @@ void TextureLoader::clearFontCache(const string& filePath)
 	}
 }
 
-void TextureLoader::reloadAnisotropicFiltering()
+void TextureLoader::setAnisotropicFilteringQuality(unsigned int value)
+{
+	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
+	_reloadAnisotropicFiltering();
+}
+
+void TextureLoader::_reloadAnisotropicFiltering()
 {
 	for (auto& [path, texture] : _textureCache2D)
 	{
@@ -277,9 +288,9 @@ void TextureLoader::reloadAnisotropicFiltering()
 		glGetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &currentQuality);
 
 		// Check if texture must be anisotropically filtered
-		if (currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY && currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY)
+		if ((currentQuality >= Config::MIN_ANISOTROPIC_FILTERING_QUALITY) && (currentQuality <= Config::MAX_ANISOTROPIC_FILTERING_QUALITY))
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 		}
 
 		// Unbind

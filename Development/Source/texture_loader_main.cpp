@@ -115,7 +115,7 @@ TextureID TextureLoader::_convertIntoTexture(SDL_Surface* surface, const string&
 	// Anisotropic filtering
 	if (isAnisotropic)
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_renderBus.getAnisotropicFilteringQuality()));
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, static_cast<int>(_anisotropicFilteringQuality));
 	}
 
 	// Logging

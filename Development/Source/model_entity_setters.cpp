@@ -97,7 +97,7 @@ void ModelEntity::updateTransformationMatrix()
 		Matrix44 translationMatrix = Math::createTranslationMatrix(_parts[i].position.x, _parts[i].position.y, _parts[i].position.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * translationMatrix);
 
-		// Base rotation origin matrix - translate
+		// Base rotation origin matrix - translate back
 		Matrix44 baseRotationOriginMatrix = Math::createTranslationMatrix(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
@@ -108,11 +108,11 @@ void ModelEntity::updateTransformationMatrix()
 			Math::convertToRadians(_baseRotation.z), _rotationOrder);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationMatrix);
 
-		// Base rotation origin matrix - translate back
+		// Base rotation origin matrix - translate
 		baseRotationOriginMatrix = Math::createTranslationMatrix(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * baseRotationOriginMatrix);
 
-		// Rotation origin matrix - translate
+		// Rotation origin matrix - translate back
 		Matrix44 rotationOriginMatrix = Math::createTranslationMatrix(_parts[i].rotationOrigin.x, _parts[i].rotationOrigin.y, _parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 
@@ -123,7 +123,7 @@ void ModelEntity::updateTransformationMatrix()
 			Math::convertToRadians(_parts[i].rotation.z), _rotationOrder);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationMatrix);
 
-		// Rotation origin matrix - translate back
+		// Rotation origin matrix - translate
 		rotationOriginMatrix = Math::createTranslationMatrix(-_parts[i].rotationOrigin.x, -_parts[i].rotationOrigin.y, -_parts[i].rotationOrigin.z);
 		_parts[i].transformationMatrix = (_parts[i].transformationMatrix * rotationOriginMatrix);
 

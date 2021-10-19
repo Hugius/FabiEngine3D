@@ -25,6 +25,14 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableFog();
+			}
+			else
+			{
+				_fe3d.gfx_disableFog();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("minDistance")->isHovered())
 		{
@@ -46,35 +54,33 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		}
 
 		// Update value forms
+		if (_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance))
+		{
+			_fe3d.gfx_setFogMinDistance(minDistance);
+		}
+		if (_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance))
+		{
+			_fe3d.gfx_setFogMaxDistance(maxDistance);
+		}
 		if (_gui.getGlobalScreen()->checkValueForm("thickness", thickness))
 		{
 			thickness /= 100.0f;
+			_fe3d.gfx_setFogThickness(thickness);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r, {}))
 		{
 			color.r /= 255.0f;
+			_fe3d.gfx_setFogColor(color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g, {}))
 		{
 			color.g /= 255.0f;
+			_fe3d.gfx_setFogColor(color);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b, {}))
 		{
 			color.b /= 255.0f;
-		}
-		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
-		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
-
-		// Disable fog
-		if (_fe3d.gfx_isFogEnabled())
-		{
-			_fe3d.gfx_disableFog();
-		}
-
-		// Enable fog
-		if (isEnabled)
-		{
-			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
+			_fe3d.gfx_setFogColor(color);
 		}
 
 		// Update buttons hoverability
@@ -102,7 +108,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
-		auto multiplier = _fe3d.gfx_getLensFlareMultiplier();
+		auto size = _fe3d.gfx_getLensFlareSize();
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -113,8 +119,16 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableLensFlare();
+			}
+			else
+			{
+				_fe3d.gfx_disableLensFlare();
+			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("loadFlareMap")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("flareMap")->isHovered())
 		{
 			// Validate target directory
 			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
@@ -141,48 +155,32 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			// Save lens flare path
 			flareMapPath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache2D(flareMapPath);
-			if (_fe3d.gfx_isLensFlareEnabled())
-			{
-				_fe3d.gfx_disableLensFlare();
-			}
-			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
-			_fe3d.gfx_disableLensFlare();
+			_fe3d.gfx_setLensFlareMap(flareMapPath);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("multiplier")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("multiplier", "Size Multiplier", (multiplier * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("size", "Flare Size", (size * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
+			_fe3d.gfx_setLensFlareIntensity(intensity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
+		if (_gui.getGlobalScreen()->checkValueForm("size", size))
 		{
-			multiplier /= 100.0f;
-		}
-
-		// Disable lens flare
-		if (_fe3d.gfx_isLensFlareEnabled())
-		{
-			_fe3d.gfx_disableLensFlare();
-		}
-
-		// Enable lens flare
-		if (isEnabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
-		{
-			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+			size /= 100.0f;
+			_fe3d.gfx_setLensFlareSize(size);
 		}
 
 		// Update buttons hoverability
-		screen->getButton("enabled")->setHoverable(_fe3d.misc_isFileExisting(rootDirectory + flareMapPath));
 		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("multiplier")->setHoverable(isEnabled);
+		screen->getButton("size")->setHoverable(isEnabled);
 
 		// Update button text contents
 		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
@@ -211,6 +209,14 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableSkyExposure();
+			}
+			else
+			{
+				_fe3d.gfx_disableSkyExposure();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -225,22 +231,12 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
+			_fe3d.gfx_setSkyExposureIntensity(intensity);
 		}
 		if (_gui.getGlobalScreen()->checkValueForm("speed", speed))
 		{
 			speed /= 10000.0f;
-		}
-
-		// Disable sky exposure
-		if (_fe3d.gfx_isSkyExposureEnabled())
-		{
-			_fe3d.gfx_disableSkyExposure();
-		}
-
-		// Enable sky exposure
-		if (isEnabled)
-		{
-			_fe3d.gfx_enableSkyExposure(intensity, speed);
+			_fe3d.gfx_setSkyExposureSpeed(speed);
 		}
 
 		// Update buttons hoverability
@@ -275,10 +271,26 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableBloom();
+			}
+			else
+			{
+				_fe3d.gfx_disableBloom();
+			}
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("type")->isHovered())
 		{
-			type = (type == BloomType::EVERYTHING) ? BloomType::PARTS : BloomType::EVERYTHING;
+			if (type == BloomType::EVERYTHING)
+			{
+				type = BloomType::PARTS;
+			}
+			else
+			{
+				type = BloomType::EVERYTHING;
+			}
+			_fe3d.gfx_setBloomType(type);
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("intensity")->isHovered())
 		{
@@ -286,26 +298,18 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blurs")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("blurs", "Amount Of Blurs", blurCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("blurCount", "Amount Of Blurs", blurCount, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
 			intensity /= 100.0f;
+			_fe3d.gfx_setBloomIntensity(intensity);
 		}
-		_gui.getGlobalScreen()->checkValueForm("blurs", blurCount);
-
-		// Disable bloom
-		if (_fe3d.gfx_isBloomEnabled())
+		if (_gui.getGlobalScreen()->checkValueForm("blurCount", blurCount))
 		{
-			_fe3d.gfx_disableBloom();
-		}
-
-		// Enable bloom
-		if (isEnabled)
-		{
-			_fe3d.gfx_enableBloom(type, intensity, blurCount);
+			_fe3d.gfx_setBloomBlurCount(blurCount);
 		}
 
 		// Update buttons hoverability

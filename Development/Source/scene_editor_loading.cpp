@@ -435,66 +435,71 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		else if (lineType == "LOD_DISTANCE")
 		{
 			// Data placeholders
-			float lodDistance;
+			float distance;
 
 			// Read data from file
-			iss >> lodDistance;
+			iss >> distance;
 
 			// Set distance
-			_fe3d.misc_setLevelOfDetailDistance(lodDistance);
+			_fe3d.misc_setLevelOfDetailDistance(distance);
 		}
 		else if (lineType == "PLANAR_REFLECTION_HEIGHT")
 		{
 			// Data placeholders
-			float reflectionHeight;
+			float height;
 
 			// Read data from file
 			iss >>
-				reflectionHeight;
+				height;
 
 			// Set height
-			_fe3d.gfx_setPlanarReflectionHeight(reflectionHeight);
+			_fe3d.gfx_setPlanarReflectionHeight(height);
 		}
 		else if (lineType == "LIGHTING_AMBIENT")
 		{
 			// Data placeholders
-			Vec3 ambientLightingColor;
-			float ambientLightingIntensity;
+			Vec3 color;
+			float intensity;
 
 			// Read data from file
 			iss >>
-				ambientLightingColor.r >>
-				ambientLightingColor.g >>
-				ambientLightingColor.b >>
-				ambientLightingIntensity;
+				color.r >>
+				color.g >>
+				color.b >>
+				intensity;
 
 			// Enable ambient lighting
-			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+			_fe3d.gfx_enableAmbientLighting();
+			_fe3d.gfx_setAmbientLightingColor(color);
+			_fe3d.gfx_setAmbientLightingIntensity(intensity);
 		}
 		else if (lineType == "LIGHTING_DIRECTIONAL")
 		{
 			// Data placeholders
-			Vec3 directionalLightingPosition, directionalLightingColor;
-			float directionalLightingIntensity, billboardSize;
+			Vec3 position, color;
+			float intensity, billboardSize;
 
 			// Read data from file
 			iss >>
-				directionalLightingPosition.x >>
-				directionalLightingPosition.y >>
-				directionalLightingPosition.z >>
-				directionalLightingColor.r >>
-				directionalLightingColor.g >>
-				directionalLightingColor.b >>
-				directionalLightingIntensity >>
+				position.x >>
+				position.y >>
+				position.z >>
+				color.r >>
+				color.g >>
+				color.b >>
+				intensity >>
 				billboardSize;
 
 			// Enable directional lighting
-			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+			_fe3d.gfx_enableDirectionalLighting();
+			_fe3d.gfx_setDirectionalLightingPosition(position);
+			_fe3d.gfx_setDirectionalLightingIntensity(intensity);
+			_fe3d.gfx_setDirectionalLightingColor(color);
 
 			// Set lightsource billboard
-			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
+			_fe3d.billboardEntity_setPosition("@@lightSource", position);
 			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
-			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
+			_fe3d.billboardEntity_setColor("@@lightSource", color);
 			_fe3d.billboardEntity_setVisible("@@lightSource", true);
 		}
 		else if (lineType == "GRAPHICS_SHADOWS")
@@ -519,7 +524,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				interval;
 
 			// Enable shadows
-			_fe3d.gfx_enableShadows(position, center, size, size * 2.5f, lightness, isFollowingCamera, interval);
+			_fe3d.gfx_enableShadows();
+			_fe3d.gfx_setShadowEyePosition(position);
+			_fe3d.gfx_setShadowCenterPosition(center);
+			_fe3d.gfx_setShadowAreaSize(size);
+			_fe3d.gfx_setShadowAreaReach(size * 2.0f);
+			_fe3d.gfx_setShadowLightness(lightness);
+			_fe3d.gfx_setShadowFollowingCamera(isFollowingCamera);
+			_fe3d.gfx_setShadowInterval(interval);
 		}
 		else if (lineType == "GRAPHICS_MOTION_BLUR")
 		{
@@ -530,7 +542,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> strength;
 
 			// Enable motion blur
-			_fe3d.gfx_enableMotionBlur(strength);
+			_fe3d.gfx_enableMotionBlur();
+			_fe3d.gfx_setMotionBlurStrength(strength);
 		}
 		else if (lineType == "GRAPHICS_DOF")
 		{
@@ -542,7 +555,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> isDynamic >> blurDistance >> maxDistance;
 
 			// Enable DOF
-			_fe3d.gfx_enableDOF(isDynamic, maxDistance, blurDistance);
+			_fe3d.gfx_enableDOF();
+			_fe3d.gfx_setDofDynamic(isDynamic);
+			_fe3d.gfx_setDofMaxDistance(maxDistance);
+			_fe3d.gfx_setDofBlurDistance(blurDistance);
 		}
 		else if (lineType == "GRAPHICS_FOG")
 		{
@@ -554,23 +570,30 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
 			// Enable fog
-			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
+			_fe3d.gfx_enableFog();
+			_fe3d.gfx_setFogMinDistance(minDistance);
+			_fe3d.gfx_setFogMaxDistance(maxDistance);
+			_fe3d.gfx_setFogThickness(thickness);
+			_fe3d.gfx_setFogColor(color);
 		}
 		else if (lineType == "GRAPHICS_LENS_FLARE")
 		{
 			// Data placeholders
 			string flareMapPath;
-			float intensity, multiplier;
+			float intensity, size;
 
 			// Read data from file
-			iss >> flareMapPath >> intensity >> multiplier;
+			iss >> flareMapPath >> intensity >> size;
 
 			// Perform empty string & space conversions
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 			replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 
 			// Enable lens flare
-			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+			_fe3d.gfx_enableLensFlare();
+			_fe3d.gfx_setLensFlareMap(flareMapPath);
+			_fe3d.gfx_setLensFlareIntensity(intensity);
+			_fe3d.gfx_setLensFlareSize(size);
 		}
 		else if (lineType == "GRAPHICS_SKY_EXPOSURE")
 		{
@@ -581,7 +604,9 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> intensity >> speed;
 
 			// Enable sky exposure
-			_fe3d.gfx_enableSkyExposure(intensity, speed);
+			_fe3d.gfx_enableSkyExposure();
+			_fe3d.gfx_setSkyExposureIntensity(intensity);
+			_fe3d.gfx_setSkyExposureSpeed(speed);
 		}
 		else if (lineType == "GRAPHICS_BLOOM")
 		{
@@ -593,7 +618,10 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			iss >> type >> intensity >> blurCount;
 
 			// Enable bloom
-			_fe3d.gfx_enableBloom(BloomType(type), intensity, blurCount);
+			_fe3d.gfx_enableBloom();
+			_fe3d.gfx_setBloomType(BloomType(type));
+			_fe3d.gfx_setBloomIntensity(intensity);
+			_fe3d.gfx_setBloomBlurCount(blurCount);
 		}
 		else
 		{

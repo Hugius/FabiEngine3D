@@ -125,9 +125,9 @@ void RenderBus::setShadowEyePosition(Vec3 value)
 	_shadowEyePosition = value;
 }
 
-void RenderBus::setShadowAreaCenter(Vec3 value)
+void RenderBus::setShadowCenterPosition(Vec3 value)
 {
-	_shadowAreaCenter = value;
+	_shadowCenterPosition = value;
 }
 
 void RenderBus::setFogColor(Vec3 value)
@@ -170,9 +170,9 @@ void RenderBus::setLensFlareIntensity(float value)
 	_lensFlareIntensity = max(0.0f, value);
 }
 
-void RenderBus::setLensFlareMultiplier(float value)
+void RenderBus::setLensFlareSize(float value)
 {
-	_lensFlareMultiplier = max(0.0f, value);
+	_lensFlareSize = max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurStrength(float value)
@@ -285,11 +285,6 @@ void RenderBus::setBloomBlurCount(unsigned int value)
 	_bloomBlurCount = value;
 }
 
-void RenderBus::setAnisotropicFilteringQuality(unsigned int value)
-{
-	_anisotropicFilteringQuality = clamp(value, Config::MIN_ANISOTROPIC_FILTERING_QUALITY, Config::MAX_ANISOTROPIC_FILTERING_QUALITY);
-}
-
 void RenderBus::increaseTriangleCount(unsigned int value)
 {
 	if (_isTriangleCountingEnabled)
@@ -356,11 +351,6 @@ void RenderBus::setFogEnabled(bool value)
 void RenderBus::setBloomEnabled(bool value)
 {
 	_isBloomEnabled = value;
-}
-
-void RenderBus::setSkyExposureEnabled(bool value)
-{
-	_isSkyExposureEnabled = value;
 }
 
 void RenderBus::setShadowsEnabled(bool value)

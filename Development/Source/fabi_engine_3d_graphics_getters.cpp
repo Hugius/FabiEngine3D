@@ -33,7 +33,7 @@ const bool FabiEngine3D::gfx_isBloomEnabled()
 
 const bool FabiEngine3D::gfx_isSkyExposureEnabled()
 {
-	return _core->_renderBus.isSkyExposureEnabled();
+	return _core->_skyEntityManager.isExposureEnabled();
 }
 
 const bool FabiEngine3D::gfx_isShadowsEnabled()
@@ -153,12 +153,12 @@ const float FabiEngine3D::gfx_getPlanarReflectionHeight()
 
 const Vec3 FabiEngine3D::gfx_getShadowEye()
 {
-	return _core->_shadowGenerator.getEye();
+	return _core->_renderBus.getShadowEyePosition();
 }
 
 const Vec3 FabiEngine3D::gfx_getShadowCenter()
 {
-	return _core->_shadowGenerator.getCenter();
+	return _core->_renderBus.getShadowCenterPosition();
 }
 
 const string& FabiEngine3D::gfx_getLensFlareMapPath()
@@ -168,12 +168,12 @@ const string& FabiEngine3D::gfx_getLensFlareMapPath()
 
 const float FabiEngine3D::gfx_getShadowSize()
 {
-	return _core->_shadowGenerator.getSize();
+	return _core->_renderBus.getShadowAreaSize();
 }
 
 const float FabiEngine3D::gfx_getShadowReach()
 {
-	return _core->_shadowGenerator.getReach();
+	return _core->_renderBus.getShadowAreaReach();
 }
 
 const float FabiEngine3D::gfx_getShadowLightness()
@@ -203,12 +203,12 @@ const unsigned int FabiEngine3D::gfx_getShadowInterval()
 
 const float FabiEngine3D::gfx_getSkyExposureIntensity()
 {
-	return _core->_skyEntityManager.getSkyExposureIntensity();
+	return _core->_skyEntityManager.getExposureIntensity();
 }
 
 const float FabiEngine3D::gfx_getSkyExposureSpeed()
 {
-	return _core->_skyEntityManager.getSkyExposureSpeed();
+	return _core->_skyEntityManager.getExposureSpeed();
 }
 
 const float FabiEngine3D::gfx_getaMaxDofDistance()
@@ -226,9 +226,9 @@ const float FabiEngine3D::gfx_getLensFlareIntensity()
 	return _core->_renderBus.getLensFlareIntensity();
 }
 
-const float FabiEngine3D::gfx_getLensFlareMultiplier()
+const float FabiEngine3D::gfx_getLensFlareSize()
 {
-	return _core->_renderBus.getLensFlareMultiplier();
+	return _core->_renderBus.getLensFlareSize();
 }
 
 const float FabiEngine3D::gfx_getMotionBlurStrength()
@@ -258,5 +258,5 @@ const BloomType FabiEngine3D::gfx_getBloomType()
 
 const unsigned int FabiEngine3D::gfx_getAnisotropicFilteringQuality()
 {
-	return _core->_renderBus.getAnisotropicFilteringQuality();
+	return _core->_textureLoader.getAnisotropicFilteringQuality();
 }

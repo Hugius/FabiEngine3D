@@ -312,7 +312,7 @@ void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
 		_core->_renderBus.setLensFlareMap(0);
 		_core->_renderBus.setLensFlareMapPath("");
 		_core->_renderBus.setLensFlareIntensity(0.0f);
-		_core->_renderBus.setLensFlareSize(0.0f);
+		_core->_renderBus.setLensFlareSensitivity(0.0f);
 	}
 }
 
@@ -525,7 +525,7 @@ void FabiEngine3D::gfx_setLensFlareIntensity(float intensity)
 	_core->_renderBus.setLensFlareIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_setLensFlareSize(float size)
+void FabiEngine3D::gfx_setLensFlareSensitivity(float size)
 {
-	_core->_renderBus.setLensFlareSize(size);
+	_core->_renderBus.setLensFlareSensitivity(size);
 }

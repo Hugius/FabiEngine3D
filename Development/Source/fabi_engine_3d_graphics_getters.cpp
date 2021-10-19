@@ -226,9 +226,9 @@ const float FabiEngine3D::gfx_getLensFlareIntensity()
 	return _core->_renderBus.getLensFlareIntensity();
 }
 
-const float FabiEngine3D::gfx_getLensFlareSize()
+const float FabiEngine3D::gfx_getLensFlareSensitivity()
 {
-	return _core->_renderBus.getLensFlareSize();
+	return _core->_renderBus.getLensFlareSensitivity();
 }
 
 const float FabiEngine3D::gfx_getMotionBlurStrength()

@@ -22,7 +22,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -90,7 +90,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		screen->getButton("color")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -108,7 +108,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		auto isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
-		auto size = _fe3d.gfx_getLensFlareSize();
+		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -116,7 +116,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -161,9 +161,9 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		{
 			_gui.getGlobalScreen()->createValueForm("intensity", "Flare Intensity", (intensity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("size")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("sensitivity")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("size", "Flare Size", (size * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("sensitivity", "Flare Sensitivity", (sensitivity * 100.0f), Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
@@ -172,18 +172,18 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			intensity /= 100.0f;
 			_fe3d.gfx_setLensFlareIntensity(intensity);
 		}
-		if (_gui.getGlobalScreen()->checkValueForm("size", size))
+		if (_gui.getGlobalScreen()->checkValueForm("sensitivity", sensitivity))
 		{
-			size /= 100.0f;
-			_fe3d.gfx_setLensFlareSize(size);
+			sensitivity /= 100.0f;
+			_fe3d.gfx_setLensFlareSensitivity(sensitivity);
 		}
 
 		// Update buttons hoverability
 		screen->getButton("intensity")->setHoverable(isEnabled);
-		screen->getButton("size")->setHoverable(isEnabled);
+		screen->getButton("sensitivity")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -206,7 +206,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -244,7 +244,7 @@ void SceneEditor::_updateSkyExposureGraphicsSettingsMenu()
 		screen->getButton("speed")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -268,7 +268,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -318,7 +318,7 @@ void SceneEditor::_updateBloomGraphicsSettingsMenu()
 		screen->getButton("blurs")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 		screen->getButton("type")->changeTextContent((type == BloomType::EVERYTHING) ? "Type: EVERYTHING" : "Type: PARTS");
 	}
 }

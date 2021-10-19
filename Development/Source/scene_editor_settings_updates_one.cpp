@@ -28,9 +28,9 @@ void SceneEditor::_updateSettingsMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("setSpeed")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("editorSpeed")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("setSpeed", "Camera Speed", _editorSpeed, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("editorSpeed", "Editor Speed", _editorSpeed, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lodDistance")->isHovered())
 		{
@@ -42,7 +42,7 @@ void SceneEditor::_updateSettingsMenu()
 		}
 
 		// Update value forms
-		if (_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("editorSpeed", _editorSpeed, {}))
 		{
 			_editorSpeed = max(0.0f, _editorSpeed);
 		}
@@ -127,7 +127,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			_fe3d.misc_disableShadowFrameRendering();
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -218,7 +218,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("interval")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 		screen->getButton("follow")->changeTextContent(isFollowingCamera ? "Follow Cam: ON" : "Follow Cam: OFF");
 	}
 }
@@ -241,7 +241,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -269,7 +269,7 @@ void SceneEditor::_updateMotionBlurGraphicsSettingsMenu()
 		screen->getButton("strength")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -293,7 +293,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -316,7 +316,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("maxDistance")->isHovered())
 		{
-			_gui.getGlobalScreen()->createValueForm("maxDistance", "DOF Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
+			_gui.getGlobalScreen()->createValueForm("maxDistance", "Max Distance", maxDistance, Vec2(0.0f, 0.1f), Vec2(0.15f, 0.1f), Vec2(0.0f, 0.1f));
 		}
 
 		// Update value forms
@@ -335,7 +335,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		screen->getButton("maxDistance")->setHoverable(isEnabled && isDynamic);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 		screen->getButton("dynamic")->changeTextContent(isDynamic ? "Dynamic: YES" : "Dynamic: NO");
 	}
 }

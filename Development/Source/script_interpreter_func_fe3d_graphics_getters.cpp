@@ -109,7 +109,7 @@ bool ScriptInterpreter::_executeFe3dGraphicsGetterFunction(const string& functio
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getLensFlareSize();
+			auto result = _fe3d.gfx_getLensFlareSensitivity();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}

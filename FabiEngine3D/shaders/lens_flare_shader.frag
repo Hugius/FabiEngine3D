@@ -10,8 +10,8 @@ layout (location = 1) uniform sampler2D u_sceneMap;
 layout (location = 2) uniform sampler2D u_flareMap;
 
 // Float uniforms
-uniform float u_lensFlareAlpha;
 uniform float u_lensFlareIntensity;
+uniform float u_lensFlareAlpha;
 
 // Boolean uniforms
 uniform bool u_isLensFlareEnabled;

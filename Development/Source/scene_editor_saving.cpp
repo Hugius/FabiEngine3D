@@ -420,7 +420,7 @@ bool SceneEditor::saveEditorSceneToFile()
 		// Data to save
 		auto flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		auto intensity = _fe3d.gfx_getLensFlareIntensity();
-		auto size = _fe3d.gfx_getLensFlareSize();
+		auto sensitivity = _fe3d.gfx_getLensFlareSensitivity();
 
 		// Perform empty string & space conversions
 		flareMapPath = (flareMapPath.empty()) ? "?" : flareMapPath;
@@ -431,7 +431,7 @@ bool SceneEditor::saveEditorSceneToFile()
 			"GRAPHICS_LENS_FLARE " <<
 			flareMapPath << " " <<
 			intensity << " " <<
-			size << endl;
+			sensitivity << endl;
 	}
 
 	// Sky exposure settings

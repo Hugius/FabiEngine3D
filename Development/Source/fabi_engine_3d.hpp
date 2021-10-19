@@ -763,7 +763,7 @@ public:
 	void gfx_setMotionBlurStrength(float strength);
 	void gfx_setLensFlareMap(const string& texturePath);
 	void gfx_setLensFlareIntensity(float intensity);
-	void gfx_setLensFlareSize(float size);
+	void gfx_setLensFlareSensitivity(float size);
 
 	// Graphics interface - getters
 	const string& gfx_getLensFlareMapPath();
@@ -792,7 +792,7 @@ public:
 	const float gfx_getaMaxDofDistance();
 	const float gfx_getDofBlurDistance();
 	const float gfx_getLensFlareIntensity();
-	const float gfx_getLensFlareSize();
+	const float gfx_getLensFlareSensitivity();
 	const float gfx_getMotionBlurStrength();
 	const unsigned int gfx_getBloomSize();
 	const unsigned int gfx_getDofSize();

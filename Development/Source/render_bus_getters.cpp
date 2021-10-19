@@ -165,9 +165,9 @@ const float RenderBus::getLensFlareIntensity()
 	return _lensFlareIntensity;
 }
 
-const float RenderBus::getLensFlareSize()
+const float RenderBus::getLensFlareSensitivity()
 {
-	return _lensFlareSize;
+	return _lensFlareSensitivity;
 }
 
 const float RenderBus::getMotionBlurStrength()

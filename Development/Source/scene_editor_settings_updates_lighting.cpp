@@ -44,7 +44,7 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsLighting");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -94,7 +94,7 @@ void SceneEditor::_updateAmbientLightingSettingsMenu()
 		screen->getButton("intensity")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }
 
@@ -119,7 +119,7 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsLighting");
 			return;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("enabled")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("isEnabled")->isHovered())
 		{
 			isEnabled = !isEnabled;
 			if (isEnabled)
@@ -204,6 +204,6 @@ void SceneEditor::_updateDirectionalLightingSettingsMenu()
 		screen->getButton("billboardSize")->setHoverable(isEnabled);
 
 		// Update button text contents
-		screen->getButton("enabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
+		screen->getButton("isEnabled")->changeTextContent(isEnabled ? "Enabled: YES" : "Enabled: NO");
 	}
 }

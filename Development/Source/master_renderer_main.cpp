@@ -282,7 +282,7 @@ void MasterRenderer::_updateLensFlare()
 		if ((flareSourceNDC.x > -1.0f) && (flareSourceNDC.x < 1.0f) && (flareSourceNDC.y > -1.0f) && (flareSourceNDC.y < 1.0f))
 		{
 
-			alpha = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSize()));
+			alpha = (1.0f - (max(fabsf(flareSourceNDC.x), fabsf(flareSourceNDC.y)) / _renderBus.getLensFlareSensitivity()));
 			alpha = clamp(alpha, 0.0f, 1.0f);
 		}
 

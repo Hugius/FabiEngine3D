@@ -71,7 +71,7 @@ public:
 	void setShadowLightness(float value);
 	void setLensFlareAlpha(float value);
 	void setLensFlareIntensity(float value);
-	void setLensFlareSize(float value);
+	void setLensFlareSensitivity(float value);
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
 	void setSkyMixValue(float value);
@@ -169,7 +169,7 @@ public:
 	const float getShadowLightness();
 	const float getLensFlareAlpha();
 	const float getLensFlareIntensity();
-	const float getLensFlareSize();
+	const float getLensFlareSensitivity();
 	const float getMotionBlurStrength();
 	const float getMotionBlurMixValue();
 	const float getSkyMixValue();
@@ -266,7 +266,7 @@ private:
 	float _shadowAreaReach = 0.0f;
 	float _shadowLightness = 0.0f;
 	float _lensFlareAlpha = 0.0f;
-	float _lensFlareSize = 1.0f;
+	float _lensFlareSensitivity = 1.0f;
 	float _lensFlareIntensity = 1.0f;
 	float _motionBlurStrength = 0.0f;
 	float _motionBlurMixValue = 0.0f;

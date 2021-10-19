@@ -170,9 +170,9 @@ void RenderBus::setLensFlareIntensity(float value)
 	_lensFlareIntensity = max(0.0f, value);
 }
 
-void RenderBus::setLensFlareSize(float value)
+void RenderBus::setLensFlareSensitivity(float value)
 {
-	_lensFlareSize = max(0.0f, value);
+	_lensFlareSensitivity = max(0.0f, value);
 }
 
 void RenderBus::setMotionBlurStrength(float value)

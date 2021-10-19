@@ -143,7 +143,7 @@ void AnimationEditor::_updateChoiceMenu()
 			currentAnimation->setFrames(frames);
 			_currentFrameIndex++;
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("editFrame")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("edit")->isHovered())
 		{
 			// First stop animation
 			if (isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()))
@@ -154,7 +154,7 @@ void AnimationEditor::_updateChoiceMenu()
 			// Go to next screen
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuFrame");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("deleteFrame")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
 		{
 			// Delete frame
 			auto frames = currentAnimation->getFrames();
@@ -183,8 +183,8 @@ void AnimationEditor::_updateChoiceMenu()
 		screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->getFrames().size() > 1);
 		screen->getButton("stop")->setHoverable(isPlaying && hasPreviewModel);
 		screen->getButton("addFrame")->setHoverable(currentAnimation->getFrames().size() < MAX_FRAME_COUNT && !isPlaying && hasPreviewModel);
-		screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
-		screen->getButton("deleteFrame")->setHoverable(currentAnimation->getFrames().size() > 1 && _currentFrameIndex > 0 && !isPlaying && hasPreviewModel);
+		screen->getButton("edit")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
+		screen->getButton("delete")->setHoverable(currentAnimation->getFrames().size() > 1 && _currentFrameIndex > 0 && !isPlaying && hasPreviewModel);
 		screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
 		screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->getFrames().size() - 1) && !isPlaying && hasPreviewModel);
 

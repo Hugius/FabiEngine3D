@@ -16,6 +16,7 @@ uniform vec2 u_flareSourceUV;
 // Float uniforms
 uniform float u_farZ;
 uniform float u_nearZ;
+uniform float u_lensFlareIntensity;
 uniform float u_lensFlareAlpha;
 
 // Boolean uniforms

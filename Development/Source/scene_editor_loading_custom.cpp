@@ -687,10 +687,10 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 		{
 			// Data placeholders
 			string flareMapPath;
-			float intensity, size;
+			float intensity, sensitivity;
 
 			// Read data from file
-			iss >> flareMapPath >> intensity >> size;
+			iss >> flareMapPath >> intensity >> sensitivity;
 
 			// Perform empty string & space conversions
 			flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
@@ -700,7 +700,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 			_fe3d.gfx_enableLensFlare();
 			_fe3d.gfx_setLensFlareMap(flareMapPath);
 			_fe3d.gfx_setLensFlareIntensity(intensity);
-			_fe3d.gfx_setLensFlareSize(size);
+			_fe3d.gfx_setLensFlareSensitivity(sensitivity);
 		}
 		else if (lineType == "GRAPHICS_SKY_EXPOSURE")
 		{

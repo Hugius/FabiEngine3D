@@ -1,7 +1,7 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
-// Const variables
+// Constant variables
 #define MAX_LIGHT_COUNT 128
 #define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 

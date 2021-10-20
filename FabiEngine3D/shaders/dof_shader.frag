@@ -1,6 +1,10 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : require
 
+// Constants
+#define MIDDLE_SMOOTHING_MULTIPLIER 0.2f
+#define FRAGMENT_SMOOTHING_MULTIPLIER 0.5f
+
 // In variables
 in vec2 f_uv;
 
@@ -41,39 +45,36 @@ void main()
     float middleDepth = texture(u_depthMap, vec2(0.5f)).r;
     vec3 blurColor = texture(u_dofMap, f_uv).rgb;
 
-    // Calculate framgnet depths
-    float currentFragmentDepth = (convertDepthToPerspective(currentDepth) / u_farZ);
-    float middleFragmentDepth  = (convertDepthToPerspective(middleDepth) / u_farZ);
+    // Calculate fragment depths
+    float currentFragmentDistance = convertDepthToPerspective(currentDepth);
+    float middleFragmentDistance = convertDepthToPerspective(middleDepth);
+
+    // Calculate smoothing distances
+    float middleSmoothingDistance = (u_dofMaxDistance * MIDDLE_SMOOTHING_MULTIPLIER);
+    float fragmentSmoothingDistance = (u_dofBlurDistance * FRAGMENT_SMOOTHING_MULTIPLIER);
 
     // Calculate distance from camera to direct object
-    float middleFragmentDistance = (middleFragmentDepth * u_farZ);
-    float middleSmoothingDistance = (u_dofMaxDistance * 0.2f);
+    bool isCloseToFragment = (middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance));
 
-    // Check if camera is looking at a close object
-    if (middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance) || !u_isDofDynamic)
+    // Check if DOF blur is needed
+    if (isCloseToFragment || !u_isDofDynamic)
     {
-        // Distance from camera to fragment in world space
-        float fragmentDistance = (currentFragmentDepth * u_farZ);
-
-        // Smooth blur overlap distance in world space
-        float blurSmoothingDistance = u_dofBlurDistance * 0.5f;
-
         // Calculate DOF blur strength based on fragment distance
-        float blurMixValue = (fragmentDistance - (u_dofBlurDistance - blurSmoothingDistance)) / blurSmoothingDistance;
+        float blurMixValue = (currentFragmentDistance - (u_dofBlurDistance - fragmentSmoothingDistance)) / fragmentSmoothingDistance;
 
         // Calculate DOF blur strength based on middle distance
         float distanceMixValue = ((u_dofMaxDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
-            
-        // Values must not go over 1
+
+        // Clamp mix values
         blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 
         distanceMixValue = clamp(distanceMixValue, 0.0f, 1.0f);
 
-        // Apply camera distance mix value
-        blurMixValue = mix(0.0f, blurMixValue, u_isDofDynamic ? distanceMixValue : 1.0f);
+        // Calculate final mix value (distant blur or dynamic DOF)
+        float finalMixValue = mix(0.0f, blurMixValue, (u_isDofDynamic ? distanceMixValue : 1.0f));
 
         // Mix with blur color accordingly
         vec3 sceneColor = texture(u_sceneMap, f_uv).rgb;
-        o_finalColor.rgb = mix(sceneColor, blurColor, blurMixValue);
+        o_finalColor.rgb = mix(sceneColor, blurColor, finalMixValue);
         o_finalColor.a = 1.0f;
     }
     else

@@ -4,6 +4,7 @@
 // Constant variables
 #define MAX_LIGHT_COUNT 128
 #define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
+#define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
 // In variables
 in vec3 f_pos;
@@ -364,20 +365,13 @@ vec3 calculateSpotLighting(vec3 specularMapColor, vec3 normal)
 {
     if (u_isSpotLightingEnabled)
     {
-    	// Calculate distance
-        float fragmentDistance = distance(u_cameraPosition, f_pos);
-        float distanceMultiplier = (fragmentDistance / u_maxSpotLightingDistance);
-        distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
-        distanceMultiplier = (1.0f - distanceMultiplier);
-
         // Calculate lighting strength
         vec3 lightDirection = normalize(u_cameraPosition - f_pos);
-        float smoothingMultiplier = 0.9f;
-        float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
-        float epsilon = (u_maxSpotLightingAngle - (u_maxSpotLightingAngle * smoothingMultiplier));
-        float intensity = clamp(((spotTheta - (u_maxSpotLightingAngle * smoothingMultiplier)) / epsilon), 0.0f, 1.0f);
+        float spot = dot(lightDirection, normalize(-u_cameraFront));
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
         float specular = calculateSpecularLighting(specularMapColor, u_cameraPosition, normal);
+		float smoothingAngle = (u_maxSpotLightingAngle * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
+        float intensity = clamp(((spot - (u_maxSpotLightingAngle * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
         // Apply lighting calculations
 		vec3 result = vec3(0.0f);
@@ -385,6 +379,12 @@ vec3 calculateSpotLighting(vec3 specularMapColor, vec3 normal)
         result += vec3(specular * intensity); // Specular
         result *= u_spotLightingColor; // Color
         result *= u_spotLightingIntensity; // Intensity
+
+		// Calculate distance multiplier
+        float fragmentDistance = distance(u_cameraPosition, f_pos);
+        float distanceMultiplier = (fragmentDistance / u_maxSpotLightingDistance);
+        distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
+        distanceMultiplier = (1.0f - distanceMultiplier);
 
         // Return
         return (result * distanceMultiplier);

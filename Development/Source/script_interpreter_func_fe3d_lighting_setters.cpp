@@ -109,68 +109,6 @@ bool ScriptInterpreter::_executeFe3dLightingSetterFunction(const string& functio
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_enable_spot")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_enableSpotLighting();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_disable_spot")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_disableSpotLighting();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_set_spot_color")
-	{
-		auto types = { SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.gfx_setSpotLightingColor(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_set_spot_intensity")
-	{
-		auto types = { SVT::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.gfx_setSpotLightingIntensity(arguments[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_set_spot_angle")
-	{
-		auto types = { SVT::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.gfx_setSpotLightingAngle(arguments[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:lighting_set_spot_distance")
-	{
-		auto types = { SVT::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			_fe3d.gfx_setSpotLightingDistance(arguments[0].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-		}
-	}
 	else
 	{
 		return false;

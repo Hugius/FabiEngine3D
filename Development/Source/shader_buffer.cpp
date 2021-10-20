@@ -101,7 +101,7 @@ void ShaderBuffer::_createProgram(const char* vertexShaderCode, const char* frag
 	if (!success)
 	{
 		glGetProgramInfoLog(_program, 512, nullptr, infoLog);
-		Logger::throwError("ShaderBuffer::_createProgram::3");
+		Logger::throwError("ShaderBuffer::_createProgram::3 ---> ", _name, " ", infoLog);
 	}
 
 	// Delete the no longer needed shaders

@@ -47,6 +47,11 @@ void SpotlightEntity::moveTo(Vec3 target, float speed)
 	_positionTargetSpeed = speed;
 }
 
+void SpotlightEntity::setFront(Vec3 value)
+{
+	_front = Vec3(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f), clamp(value.z, -1.0f, 1.0f));;
+}
+
 void SpotlightEntity::setColor(Vec3 value)
 {
 	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
@@ -57,9 +62,24 @@ void SpotlightEntity::setIntensity(float value)
 	_intensity = max(0.0f, value);
 }
 
+void SpotlightEntity::setAngle(float value)
+{
+	_angle = Math::limitAngle(value);
+}
+
+void SpotlightEntity::setDistance(float value)
+{
+	_distance = max(0.0f, value);
+}
+
 const Vec3 SpotlightEntity::getPosition()
 {
 	return _position;
+}
+
+const Vec3 SpotlightEntity::getFront()
+{
+	return _front;
 }
 
 const Vec3 SpotlightEntity::getColor()
@@ -70,4 +90,14 @@ const Vec3 SpotlightEntity::getColor()
 const float SpotlightEntity::getIntensity()
 {
 	return _intensity;
+}
+
+const float SpotlightEntity::getAngle()
+{
+	return _angle;
+}
+
+const float SpotlightEntity::getDistance()
+{
+	return _distance;
 }

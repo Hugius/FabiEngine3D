@@ -16,5 +16,5 @@ public:
 	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
 
 	// Integers
-	static inline const unsigned int MAX_LIGHT_COUNT = 128;
+	static inline const unsigned int MAX_LIGHT_COUNT = 64;
 };

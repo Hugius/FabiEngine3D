@@ -105,11 +105,6 @@ const Vec3 RenderBus::getDirectionalLightingPosition()
 	return _directionalLightPosition;
 }
 
-const Vec3 RenderBus::getSpotLightingColor()
-{
-	return _spotLightColor;
-}
-
 const Vec3 RenderBus::getShadowEyePosition()
 {
 	return _shadowEyePosition;
@@ -210,21 +205,6 @@ const float RenderBus::getDirectionalLightingIntensity()
 	return _directionalLightIntensity;
 }
 
-const float RenderBus::getSpotLightingIntensity()
-{
-	return _spotLightIntensity;
-}
-
-const float RenderBus::getMaxSpotLightingAngle()
-{
-	return _maxSpotLightAngle;
-}
-
-const float RenderBus::getMaxSpotLightingDistance()
-{
-	return _maxSpotLightDistance;
-}
-
 const float RenderBus::getFogMinDistance()
 {
 	return _fogMinDistance;
@@ -318,11 +298,6 @@ const bool RenderBus::isAmbientLightingEnabled()
 const bool RenderBus::isDirectionalLightingEnabled()
 {
 	return _isDirectionalLightingEnabled;
-}
-
-const bool RenderBus::isSpotLightingEnabled()
-{
-	return _isSpotLightingEnabled;
 }
 
 const bool RenderBus::isReflectionsEnabled()

@@ -2,7 +2,8 @@
 #extension GL_ARB_explicit_uniform_location : require
 
 // Constant variables
-#define MAX_LIGHT_COUNT 128
+#define MAX_POINTLIGHT_COUNT 64
+#define MAX_SPOTLIGHT_COUNT 64
 #define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
@@ -26,20 +27,24 @@ layout (location = 8) uniform sampler2D u_normalMapG;
 layout (location = 9) uniform sampler2D u_normalMapB;
 
 // Vector uniforms
-uniform vec3 u_lightPositions[MAX_LIGHT_COUNT];
-uniform vec3 u_lightRadiuses[MAX_LIGHT_COUNT];
-uniform vec3 u_lightColors[MAX_LIGHT_COUNT];
+uniform vec3 u_pointlightPositions[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_pointlightRadiuses[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_pointlightColors[MAX_POINTLIGHT_COUNT];
+uniform vec3 u_spotlightPositions[MAX_SPOTLIGHT_COUNT];
+uniform vec3 u_spotlightFronts[MAX_SPOTLIGHT_COUNT];
+uniform vec3 u_spotlightColors[MAX_SPOTLIGHT_COUNT];
 uniform vec3 u_cameraPosition;
-uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightingColor;
-uniform vec3 u_directionalLightColor;
+uniform vec3 u_directionalLightingColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_spotLightingColor;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
 
 // Float uniforms
-uniform float u_lightIntensities[MAX_LIGHT_COUNT];
+uniform float u_pointlightIntensities[MAX_POINTLIGHT_COUNT];
+uniform float u_spotlightIntensities[MAX_SPOTLIGHT_COUNT];
+uniform float u_spotlightAngles[MAX_SPOTLIGHT_COUNT];
+uniform float u_spotlightDistances[MAX_SPOTLIGHT_COUNT];
 uniform float u_lightness;
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
@@ -53,21 +58,18 @@ uniform float u_fogMaxDistance;
 uniform float u_fogThickness;
 uniform float u_specularShininess;
 uniform float u_specularIntensity;
-uniform float u_maxSpotLightingAngle;
-uniform float u_spotLightingIntensity;
-uniform float u_maxSpotLightingDistance;
 uniform float u_shadowLightness;
 
 // Integer uniforms
-uniform int u_lightShapes[MAX_LIGHT_COUNT];
-uniform int u_lightCount;
+uniform int u_pointlightShapes[MAX_POINTLIGHT_COUNT];
+uniform int u_pointlightCount;
+uniform int u_spotlightCount;
 
 // Boolean uniforms
 uniform bool u_isWireFramed;
 uniform bool u_isSpecular;
 uniform bool u_isAmbientLightingEnabled;
 uniform bool u_isDirectionalLightingEnabled;
-uniform bool u_isSpotLightingEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_isShadowFrameRenderEnabled;
@@ -90,10 +92,10 @@ vec3 calculateDiffuseMapping();
 vec3 calculateNormalMapping();
 vec3 calculateAmbientLighting();
 vec3 calculateDirectionalLighting(vec3 normal);
-vec3 calculateLights(vec3 normal);
-vec3 calculateSpotLighting(vec3 normal);
+vec3 calculatePointlights(vec3 normal);
+vec3 calculateSpotlights(vec3 normal);
 vec3 calculateFog(vec3 color);
-float calculateSpecularLighting(vec3 position, vec3 normal);
+float calculateSpecularLighting(vec3 lightPosition, vec3 normal);
 float calculateShadows();
 
 // Process fragment
@@ -115,8 +117,8 @@ void main()
 	float shadowOcclusion	 = ((shadowLighting - u_shadowLightness) / (1.0f - u_shadowLightness));
 	vec3 ambientLighting	 = (calculateAmbientLighting() * shadowLighting);
 	vec3 directionalLighting = (calculateDirectionalLighting(normal) * shadowOcclusion);
-	vec3 spotLighting		 = calculateSpotLighting(normal);
-	vec3 lights				 = calculateLights(normal);
+	vec3 pointlights	     = calculatePointlights(normal);
+	vec3 spotlights		     = calculateSpotlights(normal);
 
 	// Calculate base color
 	vec3 primaryColor = vec3(0.0f);
@@ -128,8 +130,8 @@ void main()
 	vec3 lighting = vec3(0.0f);
 	lighting += ambientLighting;
 	lighting += directionalLighting;
-	lighting += spotLighting;
-	lighting += lights;
+	lighting += pointlights;
+	lighting += spotlights;
 	primaryColor *= lighting;
 
 	// Apply fog
@@ -303,14 +305,14 @@ vec3 calculateDirectionalLighting(vec3 normal)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
-        vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
+        vec3 direction = normalize(u_directionalLightPosition - f_pos);
+		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_directionalLightPosition, normal);
 
         // Apply
         result += vec3(diffuse); // Diffuse
         result += vec3(specular); // Specular
-        result *= u_directionalLightColor; // Color
+        result *= u_directionalLightingColor; // Color
         result *= u_directionalLightingIntensity; // Intensity
 
         // Return
@@ -322,83 +324,86 @@ vec3 calculateDirectionalLighting(vec3 normal)
 	}
 }
 
-vec3 calculateLights(vec3 normal)
+vec3 calculatePointlights(vec3 normal)
 {
 	vec3 result = vec3(0.0f);
 		
-    // For every light
-	for (int i = 0; i < u_lightCount; i++)
+	// For every light
+	for (int i = 0; i < u_pointlightCount; i++)
 	{
-        // Calculate light strength
-		vec3 lightDirection = normalize(u_lightPositions[i] - f_pos);
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-		float specular = calculateSpecularLighting(u_lightPositions[i], normal);
+		// Calculate light strength
+		vec3 direction = normalize(u_pointlightPositions[i] - f_pos);
+		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
 		// Calculate light attenuation
 		float attenuation;
-		if (u_lightShapes[i] == 0)
+		if (u_pointlightShapes[i] == 0)
 		{
-			float fragmentDistance = distance(u_lightPositions[i], f_pos);
-			float averageRadius = ((u_lightRadiuses[i].x + u_lightRadiuses[i].y + u_lightRadiuses[i].z) / 3.0f);
+			float fragmentDistance = distance(u_pointlightPositions[i], f_pos);
+			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_lightPositions[i] - f_pos);
-			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_lightRadiuses[i].x)));
-			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_lightRadiuses[i].y)));
-			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_lightRadiuses[i].z)));
+			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_pos);
+			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
+			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
+			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
 			attenuation = min(xAttenuation, min(yAttenuation, zAttenuation));
 		}
 
-        // Apply
-        vec3 current = vec3(0.0f);
+		// Apply
+		vec3 current = vec3(0.0f);
 		current += vec3(diffuse); // Diffuse
-        current += vec3(specular); // Specular
-        current *= u_lightColors[i]; // Color
-        current *= (attenuation * attenuation); // Distance
-        current *= u_lightIntensities[i]; // Intensity
+		current += vec3(specular); // Specular
+		current *= u_pointlightColors[i]; // Color
+		current *= (attenuation * attenuation); // Distance
+		current *= u_pointlightIntensities[i]; // Intensity
 
-        // Add to total lighting value
-        result += current;
+		// Add to total lighting value
+		result += current;
 	}
 
-    // Return
+	// Return
 	return result;
 }
 
-vec3 calculateSpotLighting(vec3 normal)
+vec3 calculateSpotlights(vec3 normal)
 {
-    if (u_isSpotLightingEnabled)
-    {
-		// Calculate lighting strength
-        vec3 lightDirection = normalize(u_cameraPosition - f_pos);
-        float spot = dot(lightDirection, normalize(-u_cameraFront));
-		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
-        float specular = calculateSpecularLighting(u_cameraPosition, normal);
-		float smoothingAngle = (u_maxSpotLightingAngle * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
-        float intensity = clamp(((spot - (u_maxSpotLightingAngle * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
+	vec3 result = vec3(0.0f);
 
-        // Apply lighting calculations
-		vec3 result = vec3(0.0f);
-        result += vec3(diffuse * intensity); // Diffuse
-        result += vec3(specular * intensity); // Specular
-        result *= u_spotLightingColor; // Color
-        result *= u_spotLightingIntensity; // Intensity
+    // For every light
+	for (int i = 0; i < u_spotlightCount; i++)
+	{
+		// Calculate light strength
+		vec3 direction = normalize(u_spotlightPositions[i] - f_pos);
+		float spot = dot(direction, normalize(-u_spotlightFronts[i]));
+		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
+		float specular = calculateSpecularLighting(u_spotlightPositions[i], normal);
+		float smoothingAngle = (u_spotlightAngles[i] * (1.0f - SPOTLIGHT_SMOOTHING_MULTIPLIER));
+		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
-		// Calculate distance multiplier
-        float fragmentDistance = distance(u_cameraPosition, f_pos);
-        float distanceMultiplier = (fragmentDistance / u_maxSpotLightingDistance);
-        distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
-        distanceMultiplier = (1.0f - distanceMultiplier);
+		// Calculate light distance
+		float fragmentDistance = distance(u_spotlightPositions[i], f_pos);
+		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
+		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
+		distanceMultiplier = (1.0f - distanceMultiplier);
 
-        // Return
-        return (result * distanceMultiplier);
-    }
-    else
-    {
-        return vec3(0.0f);
-    }
+		// Apply
+		vec3 current = vec3(0.0f);
+		current += vec3(diffuse * intensity); // Diffuse
+		current += vec3(specular * intensity); // Specular
+		current *= u_spotlightColors[i]; // Color
+		current *= u_spotlightIntensities[i]; // Intensity
+		current *= distanceMultiplier; // Distance
+
+		// Add to total lighting value
+		result += current;
+	}
+
+	// Return
+	return result;
 }
 
 vec3 calculateFog(vec3 color)
@@ -423,12 +428,12 @@ vec3 calculateFog(vec3 color)
 	}
 }
 
-float calculateSpecularLighting(vec3 position, vec3 normal)
+float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
 {
     if (u_isSpecular)
     {
         // Calculate
-        vec3 lightDirection   = normalize(position - f_pos);
+        vec3 lightDirection   = normalize(lightPosition - f_pos);
         vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);

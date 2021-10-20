@@ -23,17 +23,6 @@ void FabiEngine3D::gfx_enableDirectionalLighting()
 	_core->_renderBus.setDirectionalLightingEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableSpotLighting()
-{
-	if (_core->_renderBus.isSpotLightingEnabled())
-	{
-		Logger::throwWarning("Tried to enable spot lighting: already enabled");
-		return;
-	}
-
-	_core->_renderBus.setSpotLightingEnabled(true);
-}
-
 void FabiEngine3D::gfx_enableFog()
 {
 	if (_core->_renderBus.isFogEnabled())
@@ -154,25 +143,6 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 		_core->_renderBus.setDirectionalLightingPosition(Vec3(0.0f));
 		_core->_renderBus.setDirectionalLightingColor(1.0f);
 		_core->_renderBus.setDirectionalLightingIntensity(1.0f);
-	}
-}
-
-void FabiEngine3D::gfx_disableSpotLighting(bool resetProperties)
-{
-	if (!_core->_renderBus.isSpotLightingEnabled())
-	{
-		Logger::throwWarning("Tried to disable spot lighting: not enabled");
-		return;
-	}
-
-	_core->_renderBus.setSpotLightingEnabled(false);
-
-	if (resetProperties)
-	{
-		_core->_renderBus.setSpotLightingColor(Vec3(1.0f));
-		_core->_renderBus.setSpotLightingIntensity(1.0f);
-		_core->_renderBus.setMaxSpotLightingAngle(0.0f);
-		_core->_renderBus.setMaxSpotLightingDistance(0.0f);
 	}
 }
 
@@ -392,26 +362,6 @@ void FabiEngine3D::gfx_setDirectionalLightingColor(Vec3 color)
 void FabiEngine3D::gfx_setDirectionalLightingIntensity(float intensity)
 {
 	_core->_renderBus.setDirectionalLightingIntensity(intensity);
-}
-
-void FabiEngine3D::gfx_setSpotLightingColor(Vec3 color)
-{
-	_core->_renderBus.setSpotLightingColor(color);
-}
-
-void FabiEngine3D::gfx_setSpotLightingIntensity(float intensity)
-{
-	_core->_renderBus.setSpotLightingIntensity(intensity);
-}
-
-void FabiEngine3D::gfx_setSpotLightingAngle(float angle)
-{
-	_core->_renderBus.setMaxSpotLightingAngle(angle);
-}
-
-void FabiEngine3D::gfx_setSpotLightingDistance(float distance)
-{
-	_core->_renderBus.setMaxSpotLightingDistance(distance);
 }
 
 void FabiEngine3D::gfx_setFogColor(Vec3 color)

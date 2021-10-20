@@ -388,10 +388,6 @@ void ScriptInterpreter::unload()
 	{
 		_fe3d.gfx_disableDirectionalLighting(true);
 	}
-	if (_fe3d.gfx_isSpotLightingEnabled())
-	{
-		_fe3d.gfx_disableSpotLighting(true);
-	}
 	if (_fe3d.gfx_isFogEnabled())
 	{
 		_fe3d.gfx_disableFog(true);

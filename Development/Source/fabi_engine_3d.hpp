@@ -703,7 +703,6 @@ public:
 	// Graphics interface - setters
 	void gfx_enableAmbientLighting();
 	void gfx_enableDirectionalLighting();
-	void gfx_enableSpotLighting();
 	void gfx_enableFog();
 	void gfx_enableAntiAliasing();
 	void gfx_enableShadows();
@@ -714,7 +713,6 @@ public:
 	void gfx_enableLensFlare();
 	void gfx_disableAmbientLighting(bool resetProperties = false);
 	void gfx_disableDirectionalLighting(bool resetProperties = false);
-	void gfx_disableSpotLighting(bool resetProperties = false);
 	void gfx_disableFog(bool resetProperties = false);
 	void gfx_disableAntiAliasing(bool resetProperties = false);
 	void gfx_disableShadows(bool resetProperties = false);
@@ -737,10 +735,6 @@ public:
 	void gfx_setDirectionalLightingPosition(Vec3 position);
 	void gfx_setDirectionalLightingColor(Vec3 color);
 	void gfx_setDirectionalLightingIntensity(float intensity);
-	void gfx_setSpotLightingColor(Vec3 color);
-	void gfx_setSpotLightingIntensity(float intensity);
-	void gfx_setSpotLightingAngle(float angle);
-	void gfx_setSpotLightingDistance(float distance);
 	void gfx_setFogColor(Vec3 color);
 	void gfx_setFogThickness(float thickness);
 	void gfx_setFogMinDistance(float minDistance);
@@ -770,15 +764,11 @@ public:
 	const Vec3 gfx_getDirectionalLightingPosition();
 	const Vec3 gfx_getAmbientLightingColor();
 	const Vec3 gfx_getDirectionalLightingColor();
-	const Vec3 gfx_getSpotLightingColor();
 	const Vec3 gfx_getFogColor();
 	const Vec3 gfx_getShadowEye();
 	const Vec3 gfx_getShadowCenter();
 	const float gfx_getAmbientLightingIntensity();
 	const float gfx_getDirectionalLightingIntensity();
-	const float gfx_getSpotLightingIntensity();
-	const float gfx_getSpotLightingAngle();
-	const float gfx_getSpotLightingDistance();
 	const float gfx_getFogMinDistance();
 	const float gfx_getFogMaxDistance();
 	const float gfx_getFogThickness();
@@ -807,7 +797,6 @@ public:
 	const bool gfx_isAntiAliasingEnabled();
 	const bool gfx_isAmbientLightingEnabled();
 	const bool gfx_isDirectionalLightingEnabled();
-	const bool gfx_isSpotLightingEnabled();
 	const bool gfx_isFogEnabled();
 	const bool gfx_isBloomEnabled();
 	const bool gfx_isSkyExposureEnabled();

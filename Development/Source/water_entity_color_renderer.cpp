@@ -11,7 +11,7 @@ void WaterEntityColorRenderer::bind()
 	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightColor", _renderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightingColor", _renderBus.getDirectionalLightingColor());
 	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_fogMinDistance", _renderBus.getFogMinDistance());
@@ -67,33 +67,58 @@ void WaterEntityColorRenderer::unbind()
 	_shader.unbind();
 }
 
-void WaterEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
+void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
-	// Compose a map of all visible lights
-	unordered_map<string, shared_ptr<PointlightEntity>> visibleEntities;
+	// Save visible lights
+	vector<shared_ptr<PointlightEntity>> visibleEntities;
 	for (const auto& [keyID, entity] : entities)
 	{
 		if (entity->isVisible())
 		{
-			visibleEntities[keyID] = entity;
+			visibleEntities.push_back(entity);
 		}
 	}
 
-	// Render all lights
+	// Upload lights
 	unsigned int index = 0;
-	for (const auto& [keyID, entity] : visibleEntities)
+	for (unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
-		_shader.uploadUniform("u_lightPositions[" + to_string(index) + "]", entity->getPosition());
-		_shader.uploadUniform("u_lightColors[" + to_string(index) + "]", entity->getColor());
-		_shader.uploadUniform("u_lightIntensities[" + to_string(index) + "]", entity->getIntensity());
-		_shader.uploadUniform("u_lightRadiuses[" + to_string(index) + "]", entity->getRadius());
-		_shader.uploadUniform("u_lightShapes[" + to_string(index) + "]", static_cast<int>(entity->getShape()));
-
-		index++;
+		_shader.uploadUniform("u_pointlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
+		_shader.uploadUniform("u_pointlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
+		_shader.uploadUniform("u_pointlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
+		_shader.uploadUniform("u_pointlightRadiuses[" + to_string(i) + "]", visibleEntities[i]->getRadius());
+		_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload amount
-	_shader.uploadUniform("u_lightCount", static_cast<int>(visibleEntities.size()));
+	// Upload light count
+	_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
+}
+
+void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<string, shared_ptr<SpotlightEntity>>& entities)
+{
+	// Save visible lights
+	vector<shared_ptr<SpotlightEntity>> visibleEntities;
+	for (const auto& [keyID, entity] : entities)
+	{
+		if (entity->isVisible())
+		{
+			visibleEntities.push_back(entity);
+		}
+	}
+
+	// Upload lights
+	for (unsigned int i = 0; i < visibleEntities.size(); i++)
+	{
+		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
+		_shader.uploadUniform("u_spotlightFronts[" + to_string(i) + "]", visibleEntities[i]->getFront());
+		_shader.uploadUniform("u_spotlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
+		_shader.uploadUniform("u_spotlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
+		_shader.uploadUniform("u_spotlightAngles[" + to_string(i) + "]", visibleEntities[i]->getAngle());
+		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
+	}
+
+	// Upload light count
+	_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void WaterEntityColorRenderer::render(const shared_ptr<WaterEntity> entity)

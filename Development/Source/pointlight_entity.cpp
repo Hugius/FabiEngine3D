@@ -49,7 +49,7 @@ void PointlightEntity::moveTo(Vec3 target, float speed)
 
 void PointlightEntity::setRadius(Vec3 value)
 {
-	_radius = Vec3(max(0.0f, value.r), max(0.0f, value.g), max(0.0f, value.b));
+	_radius = Vec3(max(0.0f, value.x), max(0.0f, value.y), max(0.0f, value.z));
 }
 
 void PointlightEntity::setColor(Vec3 value)

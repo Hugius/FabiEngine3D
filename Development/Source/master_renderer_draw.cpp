@@ -32,7 +32,7 @@ void MasterRenderer::_renderTerrainEntity()
 		_terrainEntityColorRenderer.bind();
 
 		// Process LIGHT entities
-		_terrainEntityColorRenderer.processLightEntities(_entityBus->getPointLightEntities());
+		_terrainEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
 		// Render TERRAIN entity
 		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
@@ -51,7 +51,7 @@ void MasterRenderer::_renderWaterEntity()
 		_waterEntityColorRenderer.bind();
 
 		// Process LIGHT entities
-		_waterEntityColorRenderer.processLightEntities(_entityBus->getPointLightEntities());
+		_waterEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
 		// Render WATER entity
 		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
@@ -73,7 +73,7 @@ void MasterRenderer::_renderModelEntities()
 		_modelEntityColorRenderer.bind();
 
 		// Process LIGHT entities
-		_modelEntityColorRenderer.processLightEntities(_entityBus->getPointLightEntities());
+		_modelEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
 		// Render MODEL entities
 		for (const auto& [keyID, modelEntity] : modelEntities)

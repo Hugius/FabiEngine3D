@@ -115,11 +115,6 @@ void RenderBus::setDirectionalLightingColor(Vec3 value)
 	_directionalLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void RenderBus::setSpotLightingColor(Vec3 value)
-{
-	_spotLightColor = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
-}
-
 void RenderBus::setShadowEyePosition(Vec3 value)
 {
 	_shadowEyePosition = value;
@@ -205,16 +200,6 @@ void RenderBus::setMotionBlurSize(unsigned int value)
 	_motionBlurSize = clamp(value, Config::MIN_MOTION_BLUR_SIZE, Config::MAX_MOTION_BLUR_SIZE);
 }
 
-void RenderBus::setMaxSpotLightingAngle(float value)
-{
-	_maxSpotLightAngle = Math::limitAngle(value);
-}
-
-void RenderBus::setMaxSpotLightingDistance(float value)
-{
-	_maxSpotLightDistance = max(0.0f, value);
-}
-
 void RenderBus::setAmbientLightingIntensity(float value)
 {
 	_ambientLightIntensity = max(0.0f, value);
@@ -223,11 +208,6 @@ void RenderBus::setAmbientLightingIntensity(float value)
 void RenderBus::setDirectionalLightingIntensity(float value)
 {
 	_directionalLightIntensity = max(0.0f, value);
-}
-
-void RenderBus::setSpotLightingIntensity(float value)
-{
-	_spotLightIntensity = max(0.0f, value);
 }
 
 void RenderBus::setFogMinDistance(float value)
@@ -331,11 +311,6 @@ void RenderBus::setAmbientLightingEnabled(bool value)
 void RenderBus::setDirectionalLightingEnabled(bool value)
 {
 	_isDirectionalLightingEnabled = value;
-}
-
-void RenderBus::setSpotLightingEnabled(bool value)
-{
-	_isSpotLightingEnabled = value;
 }
 
 void RenderBus::setReflectionsEnabled(bool value)

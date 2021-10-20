@@ -80,7 +80,7 @@ void ScriptEditor::unload()
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
-	_fe3d.lightEntity_deleteAll();
+	_fe3d.pointlightEntity_deleteAll();
 
 	// Unload script
 	_script.reset();

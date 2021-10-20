@@ -15,7 +15,7 @@ void MasterRenderer::_renderSkyEntity()
 		// Bind
 		_skyEntityColorRenderer.bind();
 
-		// Render SKY entity
+		// Render sky entity
 		_skyEntityColorRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
 		// Unbind
@@ -31,10 +31,13 @@ void MasterRenderer::_renderTerrainEntity()
 		// Bind
 		_terrainEntityColorRenderer.bind();
 
-		// Process LIGHT entities
+		// Process pointlight entities
 		_terrainEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Render TERRAIN entity
+		// Process spotlight entities
+		_terrainEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+
+		// Render terrain entity
 		_terrainEntityColorRenderer.render(_entityBus->getTerrainEntity());
 
 		// Unbind
@@ -50,10 +53,13 @@ void MasterRenderer::_renderWaterEntity()
 		// Bind
 		_waterEntityColorRenderer.bind();
 
-		// Process LIGHT entities
+		// Process pointlight entities
 		_waterEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Render WATER entity
+		// Process spotlight entities
+		_waterEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+
+		// Render water entity
 		_waterEntityColorRenderer.render(_entityBus->getWaterEntity());
 
 		// Unbind
@@ -72,10 +78,13 @@ void MasterRenderer::_renderModelEntities()
 		// Bind
 		_modelEntityColorRenderer.bind();
 
-		// Process LIGHT entities
+		// Process pointlight entities
 		_modelEntityColorRenderer.processPointlightEntities(_entityBus->getPointLightEntities());
 
-		// Render MODEL entities
+		// Process spotlight entities
+		_modelEntityColorRenderer.processSpotlightEntities(_entityBus->getSpotlightEntities());
+
+		// Render model entities
 		for (const auto& [keyID, modelEntity] : modelEntities)
 		{
 			// Check if LOD entity needs to be rendered
@@ -129,7 +138,7 @@ void MasterRenderer::_renderBillboardEntities()
 		// Bind
 		_billboardEntityColorRenderer.bind();
 
-		// Render BILLBOARD entities
+		// Render billboard entities
 		for (const auto& [keyID, entity] : billboardEntities)
 		{
 			_billboardEntityColorRenderer.render(entity);
@@ -207,14 +216,14 @@ void MasterRenderer::_renderGUI()
 		// Render entities
 		for (const auto& [keyID, entity] : orderedEntityMap)
 		{
-			// Check if entity is a TEXT entity
+			// Check if entity is a text entity
 			auto castedTextEntity = dynamic_pointer_cast<TextEntity>(entity);
 
-			if (castedTextEntity == nullptr) // IMAGE entity
+			if (castedTextEntity == nullptr) // Image entity
 			{
 				_imageEntityColorRenderer.render(entity);
 			}
-			else // TEXT entity
+			else // Text entity
 			{
 				if (castedTextEntity->isDynamic()) // Dynamic text rendering
 				{

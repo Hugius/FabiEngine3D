@@ -156,7 +156,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_setters.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_pointlight_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model_setters.cpp">
@@ -195,7 +195,7 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_getters.cpp">
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_pointlight_getters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_getters.cpp">
@@ -244,6 +244,12 @@
       <Filter>Execution\Interpreter\Function\Networking</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_setters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_spotlight_getters.cpp">
+      <Filter>Execution\Interpreter\Function\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_spotlight_setters.cpp">
       <Filter>Execution\Interpreter\Function\Entities</Filter>
     </ClCompile>
   </ItemGroup>

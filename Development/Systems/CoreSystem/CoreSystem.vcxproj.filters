@@ -30,70 +30,73 @@
     <ClCompile Include="..\..\Source\core_engine_update.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d.cpp">
+    <ClCompile Include="..\..\Source\fe3d.cpp">
       <Filter>Interface\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_setters.cpp">
+    <ClCompile Include="..\..\Source\fe3d_graphics_setters.cpp">
       <Filter>Interface\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_graphics_getters.cpp">
+    <ClCompile Include="..\..\Source\fe3d_graphics_getters.cpp">
       <Filter>Interface\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_audio.cpp">
+    <ClCompile Include="..\..\Source\fe3d_audio.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_camera.cpp">
+    <ClCompile Include="..\..\Source\fe3d_camera.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_collision.cpp">
+    <ClCompile Include="..\..\Source\fe3d_collision.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_input.cpp">
+    <ClCompile Include="..\..\Source\fe3d_input.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_getters.cpp">
+    <ClCompile Include="..\..\Source\fe3d_misc_getters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_misc_setters.cpp">
+    <ClCompile Include="..\..\Source\fe3d_misc_setters.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_server.cpp">
+    <ClCompile Include="..\..\Source\fe3d_server.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_client.cpp">
+    <ClCompile Include="..\..\Source\fe3d_client.cpp">
       <Filter>Interface\Networking</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_raycast.cpp">
+    <ClCompile Include="..\..\Source\fe3d_raycast.cpp">
       <Filter>Interface\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_sky.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_sky.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_terrain.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_terrain.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_water.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_water.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_aabb.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_aabb.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_billboard.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_billboard.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_image.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_image.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_light.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_pointlight.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_model.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_model.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_text.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_text.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\fabi_engine_3d_entity_reflection.cpp">
+    <ClCompile Include="..\..\Source\fe3d_entity_reflection.cpp">
+      <Filter>Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\fe3d_entity_spotlight.cpp">
       <Filter>Interface\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,7 +104,7 @@
     <ClInclude Include="..\..\Source\core_engine.hpp">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\fabi_engine_3d.hpp">
+    <ClInclude Include="..\..\Source\fe3d.hpp">
       <Filter>Interface\Core</Filter>
     </ClInclude>
   </ItemGroup>

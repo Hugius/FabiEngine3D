@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fabi_engine_3d.hpp"
+#include "fe3d.hpp"
 #include "mesh_loader.hpp"
 #include "texture_loader.hpp"
 #include "audio_loader.hpp"

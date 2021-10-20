@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dImageGetterFunction(const string& functionNa
 				return true;
 			}
 
-			// Find full imageEntity IDs based on part ID
+			// Find full entity IDs based on part ID
 			for (const auto& ID : _fe3d.imageEntity_getAllIDs())
 			{
 				// If substring matches

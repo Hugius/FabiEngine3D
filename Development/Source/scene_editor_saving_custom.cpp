@@ -464,7 +464,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Lights
-	for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
+	for (const auto& lightID : _fe3d.pointlightEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isCustomSceneLight =
@@ -472,10 +472,10 @@ bool SceneEditor::saveCustomSceneToFile()
 		if ((lightID[0] != '@') && isCustomSceneLight)
 		{
 			// Data to save
-			auto position = _fe3d.lightEntity_getPosition(lightID);
-			auto radius = _fe3d.lightEntity_getRadius(lightID);
-			auto color = _fe3d.lightEntity_getColor(lightID);
-			auto intensity = _fe3d.lightEntity_getIntensity(lightID);
+			auto position = _fe3d.pointlightEntity_getPosition(lightID);
+			auto radius = _fe3d.pointlightEntity_getRadius(lightID);
+			auto color = _fe3d.pointlightEntity_getColor(lightID);
+			auto intensity = _fe3d.pointlightEntity_getIntensity(lightID);
 
 			// Write data
 			file <<

@@ -214,13 +214,13 @@ void SceneEditor::clearCurrentScene()
 		}
 	}
 
-	// Delete light entities
+	// Delete pointlight entities
 	for (const auto& ID : _loadedLightIDs)
 	{
-		if (_fe3d.lightEntity_isExisting(ID))
+		if (_fe3d.pointlightEntity_isExisting(ID))
 		{
 			// Delete light
-			_fe3d.lightEntity_delete(ID);
+			_fe3d.pointlightEntity_delete(ID);
 
 			// Delete corresponding lamp model
 			if (!_currentSceneID.empty())

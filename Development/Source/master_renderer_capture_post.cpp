@@ -46,7 +46,7 @@ void MasterRenderer::_captureSceneDepth()
 			// Bind
 			_terrainEntityDepthRenderer.bind();
 
-			// Render TERRAIN entity
+			// Render terrain entity
 			_terrainEntityDepthRenderer.render(_entityBus->getTerrainEntity());
 
 			// Unbind
@@ -59,7 +59,7 @@ void MasterRenderer::_captureSceneDepth()
 			// Bind
 			_modelEntityDepthRenderer.bind();
 
-			// Render MODEL entities
+			// Render model entities
 			for (const auto& [keyID, modelEntity] : modelEntities)
 			{
 				// Check if entity must be included in depth map
@@ -119,7 +119,7 @@ void MasterRenderer::_captureSceneDepth()
 			// Bind
 			_billboardEntityDepthRenderer.bind();
 
-			// Render BILLBOARD entities
+			// Render billboard entities
 			for (const auto& [keyID, entity] : billboardEntities)
 			{
 				// Check if entity must be included in depth map

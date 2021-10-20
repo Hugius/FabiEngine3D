@@ -237,7 +237,7 @@ bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview billboard
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -256,14 +256,14 @@ bool ScriptInterpreter::_executeFe3dBillboardGetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview billboard
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
-			// Find full billboardEntity IDs based on part ID
+			// Find full entity IDs based on part ID
 			for (const auto& ID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// If substring matches

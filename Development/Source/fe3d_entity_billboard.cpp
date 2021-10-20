@@ -1,4 +1,4 @@
-#include "fabi_engine_3d.hpp"
+#include "fe3d.hpp"
 #include "core_engine.hpp"
 
 void FabiEngine3D::billboardEntity_create(const string& ID)
@@ -28,7 +28,7 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 
 void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
 {
-	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Iterate through BILLBOARD entities
+	for (const auto& [keyID, entity] : _core->_billboardEntityManager.getEntities()) // Iterate through billboard entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

@@ -80,7 +80,7 @@ bool ScriptInterpreter::_validateFe3dLight(const string& ID)
 	}
 
 	// Check if entity exists
-	if (!_fe3d.lightEntity_isExisting(ID))
+	if (!_fe3d.pointlightEntity_isExisting(ID))
 	{
 		_throwScriptError("requested light with ID \"" + ID + "\" does not exist!");
 		return false;

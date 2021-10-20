@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 				return true;
 			}
 
-			// Find full textEntity IDs based on part ID
+			// Find full entity IDs based on part ID
 			for (const auto& ID : _fe3d.textEntity_getAllIDs())
 			{
 				// If substring matches

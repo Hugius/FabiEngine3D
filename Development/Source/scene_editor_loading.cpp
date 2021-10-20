@@ -379,12 +379,12 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			}
 
 			// Create light
-			_fe3d.lightEntity_create(lightID);
-			_fe3d.lightEntity_setPosition(lightID, position);
-			_fe3d.lightEntity_setRadius(lightID, radius);
-			_fe3d.lightEntity_setColor(lightID, color);
-			_fe3d.lightEntity_setIntensity(lightID, intensity);
-			_fe3d.lightEntity_setShape(lightID, LightShape(shape));
+			_fe3d.pointlightEntity_create(lightID);
+			_fe3d.pointlightEntity_setPosition(lightID, position);
+			_fe3d.pointlightEntity_setRadius(lightID, radius);
+			_fe3d.pointlightEntity_setColor(lightID, color);
+			_fe3d.pointlightEntity_setIntensity(lightID, intensity);
+			_fe3d.pointlightEntity_setShape(lightID, LightShape(shape));
 			_loadedLightIDs.push_back(lightID);
 		}
 		else if (lineType == "REFLECTION")

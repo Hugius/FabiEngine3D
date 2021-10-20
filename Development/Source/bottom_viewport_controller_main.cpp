@@ -202,9 +202,16 @@ void BottomViewportController::update()
 	{
 		// Count visible entities
 		unsigned int entityCount = 0;
-		for (const auto& entityID : _fe3d.lightEntity_getAllIDs())
+		for (const auto& entityID : _fe3d.pointlightEntity_getAllIDs())
 		{
-			if (_fe3d.lightEntity_isVisible(entityID))
+			if (_fe3d.pointlightEntity_isVisible(entityID))
+			{
+				entityCount++;
+			}
+		}
+		for (const auto& entityID : _fe3d.spotlightEntity_getAllIDs())
+		{
+			if (_fe3d.spotlightEntity_isVisible(entityID))
 			{
 				entityCount++;
 			}

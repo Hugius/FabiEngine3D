@@ -17,7 +17,7 @@ void SceneEditor::_updateLightMenu()
 			if (_isPlacingLight)
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 				_isPlacingLight = false;
 			}
 
@@ -37,8 +37,8 @@ void SceneEditor::_updateLightMenu()
 			// Set new preview light
 			_isPlacingLight = true;
 			_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+			_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, true);
+			_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
@@ -57,7 +57,7 @@ void SceneEditor::_updateLightMenu()
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightChoice")->getScrollingList("lights")->deleteButtons();
 
 			// Add the ID of every placed light
-			auto IDs = _fe3d.lightEntity_getAllIDs();
+			auto IDs = _fe3d.pointlightEntity_getAllIDs();
 			sort(IDs.begin(), IDs.end());
 			for (auto& lightID : IDs)
 			{
@@ -90,7 +90,7 @@ void SceneEditor::_updateLightChoosingMenu()
 		for (const auto& button : screen->getScrollingList("lights")->getButtons())
 		{
 			// Check if light is still existing
-			if (!_fe3d.lightEntity_isExisting(button->getID()))
+			if (!_fe3d.pointlightEntity_isExisting(button->getID()))
 			{
 				// Delete button
 				screen->getScrollingList("lights")->deleteButton(button->getID());
@@ -99,7 +99,7 @@ void SceneEditor::_updateLightChoosingMenu()
 		}
 
 		// Iterate through every placed light
-		for (const auto& lightID : _fe3d.lightEntity_getAllIDs())
+		for (const auto& lightID : _fe3d.pointlightEntity_getAllIDs())
 		{
 			// Check if light is not a preview
 			if (lightID[0] != '@')

@@ -43,10 +43,10 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_image_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_input_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting_getters.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_setters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_pointlight_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_lighting_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d.cpp" />
-    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_light_getters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_pointlight_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_misc_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_model_setters.cpp" />
@@ -65,6 +65,8 @@
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sky_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_sound_getters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_spotlight_getters.cpp" />
+    <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_spotlight_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_getters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_terrain_setters.cpp" />
     <ClCompile Include="..\..\Source\script_interpreter_func_fe3d_text_setters.cpp" />

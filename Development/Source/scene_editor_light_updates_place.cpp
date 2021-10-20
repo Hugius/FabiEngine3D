@@ -9,7 +9,7 @@ void SceneEditor::_updateLightPlacing()
 		if (_fe3d.terrainEntity_getSelectedID().empty()) // Placing without terrain
 		{
 			// Retrieve current position
-			auto newPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
+			auto newPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
 
 			// Update value forms
 			_gui.getGlobalScreen()->checkValueForm("positionX", newPosition.x, {});
@@ -17,7 +17,7 @@ void SceneEditor::_updateLightPlacing()
 			_gui.getGlobalScreen()->checkValueForm("positionZ", newPosition.z, {});
 
 			// Update position
-			_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
+			_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, newPosition);
 
 			// Check if light must be placed
 			if (_gui.getGlobalScreen()->isValueFormConfirmed())
@@ -27,16 +27,16 @@ void SceneEditor::_updateLightPlacing()
 				const string newID = ("light_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
 
 				// Check if light already exists
-				if (_fe3d.lightEntity_isExisting(newID))
+				if (_fe3d.pointlightEntity_isExisting(newID))
 				{
 					goto BEGIN1;
 				}
 
 				// Try to create light
-				_fe3d.lightEntity_create(newID);
+				_fe3d.pointlightEntity_create(newID);
 
 				// Check if light creation went well
-				if (_fe3d.lightEntity_isExisting(newID))
+				if (_fe3d.pointlightEntity_isExisting(newID))
 				{
 					// Create model
 					const string newModelID = ("@@lamp_" + newID);
@@ -53,11 +53,11 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 					// Create light
-					_fe3d.lightEntity_delete(newID);
-					_fe3d.lightEntity_create(newID);
-					_fe3d.lightEntity_setPosition(newID, newPosition);
-					_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
-					_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
+					_fe3d.pointlightEntity_delete(newID);
+					_fe3d.pointlightEntity_create(newID);
+					_fe3d.pointlightEntity_setPosition(newID, newPosition);
+					_fe3d.pointlightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
+					_fe3d.pointlightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
 					_loadedLightIDs.push_back(newID);
 				}
 			}
@@ -66,7 +66,7 @@ void SceneEditor::_updateLightPlacing()
 			if (_gui.getGlobalScreen()->isValueFormConfirmed() || _gui.getGlobalScreen()->isValueFormCancelled())
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 				_isPlacingLight = false;
 			}
 		}
@@ -82,40 +82,40 @@ void SceneEditor::_updateLightPlacing()
 					if (_fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Show preview light
-						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, true);
+						_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, true);
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
 
 						// Update position
-						_fe3d.lightEntity_setPosition(PREVIEW_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + LIGHT_TERRAIN_OFFSET));
+						_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, (_fe3d.raycast_getPointOnTerrain() + LIGHT_TERRAIN_OFFSET));
 					}
 					else
 					{
 						// Hide preview light
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+						_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 					}
 
 					// Check if light must be placed
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.raycast_isPointOnTerrainValid())
 					{
 						// Temporary values
-						auto newPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
+						auto newPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
 
 						// Adding a number to make it unique
 					BEGIN2:
 						const string newID = ("light_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
 
 						// Check if light already exists
-						if (_fe3d.lightEntity_isExisting(newID))
+						if (_fe3d.pointlightEntity_isExisting(newID))
 						{
 							goto BEGIN2;
 						}
 
 						// Try to create light
-						_fe3d.lightEntity_create(newID);
+						_fe3d.pointlightEntity_create(newID);
 
 						// Check if light creation went well
-						if (_fe3d.lightEntity_isExisting(newID))
+						if (_fe3d.pointlightEntity_isExisting(newID))
 						{
 							// Create model
 							const string newModelID = ("@@lamp_" + newID);
@@ -132,38 +132,38 @@ void SceneEditor::_updateLightPlacing()
 							_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 
 							// Create light
-							_fe3d.lightEntity_delete(newID);
-							_fe3d.lightEntity_create(newID);
-							_fe3d.lightEntity_setPosition(newID, newPosition);
-							_fe3d.lightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
-							_fe3d.lightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
+							_fe3d.pointlightEntity_delete(newID);
+							_fe3d.pointlightEntity_create(newID);
+							_fe3d.pointlightEntity_setPosition(newID, newPosition);
+							_fe3d.pointlightEntity_setRadius(newID, Vec3(DEFAULT_LIGHT_RADIUS));
+							_fe3d.pointlightEntity_setIntensity(newID, DEFAULT_LIGHT_INTENSITY);
 							_loadedLightIDs.push_back(newID);
 						}
 					}
 					else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Disable placement mode
 					{
 						_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-						_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+						_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 						_isPlacingLight = false;
 					}
 				}
 				else
 				{
 					_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-					_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+					_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 				}
 			}
 			else
 			{
 				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 			}
 		}
 
 		// Update preview lamp position
 		if (_isPlacingLight)
 		{
-			auto lightPosition = _fe3d.lightEntity_getPosition(PREVIEW_LAMP_ID);
+			auto lightPosition = _fe3d.pointlightEntity_getPosition(PREVIEW_LAMP_ID);
 			lightPosition -= LAMP_OFFSET;
 			_fe3d.modelEntity_setBasePosition(PREVIEW_LAMP_ID, lightPosition);
 		}
@@ -174,7 +174,7 @@ void SceneEditor::_updateLightPlacing()
 	{
 		if (entityID.substr(0, string("@@lamp").size()) == "@@lamp")
 		{
-			auto lightPosition = _fe3d.lightEntity_getPosition(entityID.substr(string("@@lamp_").size()));
+			auto lightPosition = _fe3d.pointlightEntity_getPosition(entityID.substr(string("@@lamp_").size()));
 			lightPosition -= LAMP_OFFSET;
 			_fe3d.modelEntity_setBasePosition(entityID, lightPosition);
 		}

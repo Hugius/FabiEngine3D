@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview sound
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested sound with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dSoundGetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview sound
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested sound with ID \"" + arguments[0].getString() + "\" cannot start with '@'");

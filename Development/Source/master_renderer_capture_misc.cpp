@@ -51,10 +51,10 @@ void MasterRenderer::_captureWaterRefractions()
 			_renderBus.setClippingPlane(clippingPlane);
 		}
 
-		// Render SKY entity
+		// Render sky entity
 		_renderSkyEntity();
 
-		// Render TERRAIN entity
+		// Render terrain entity
 		if (waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
@@ -62,7 +62,7 @@ void MasterRenderer::_captureWaterRefractions()
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		// Render MODEL entities
+		// Render model entities
 		if ((waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS) ||
 			(waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS))
 		{
@@ -71,7 +71,7 @@ void MasterRenderer::_captureWaterRefractions()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		// Render BILLBOARD entities
+		// Render billboard entities
 		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
 			glEnable(GL_CLIP_DISTANCE2);
@@ -118,7 +118,7 @@ void MasterRenderer::_captureShadows()
 			// Bind
 			_modelEntityShadowRenderer.bind();
 
-			// Render MODEL entities
+			// Render model entities
 			for (const auto& [keyID, modelEntity] : modelEntities)
 			{
 				// Check if LOD entity needs to be rendered
@@ -174,7 +174,7 @@ void MasterRenderer::_captureShadows()
 			// Bind
 			_billboardEntityShadowRenderer.bind();
 
-			// Render BILLBOARD entities
+			// Render billboard entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
 				_billboardEntityShadowRenderer.render(entity);

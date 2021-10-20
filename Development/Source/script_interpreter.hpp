@@ -104,8 +104,10 @@ private:
 	bool _executeFe3dBillboardGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAabbSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAabbGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dLightSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dLightGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dPointlightSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dPointlightGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSpotlightSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSpotlightGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dReflectionSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dReflectionGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dImageSetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);

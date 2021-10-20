@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fabi_engine_3d.hpp"
+#include "fe3d.hpp"
 #include "engine_gui_viewport.hpp"
 #include "engine_gui_global_screen.hpp"
 

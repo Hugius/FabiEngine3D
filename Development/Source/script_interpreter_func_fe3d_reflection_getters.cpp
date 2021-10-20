@@ -38,7 +38,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 				return true;
 			}
 
-			// Find full reflection IDs based on part ID
+			// Find full entity IDs based on part ID
 			for (const auto& ID : _fe3d.reflectionEntity_getAllIDs())
 			{
 				// If substring matches

@@ -186,7 +186,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 			
 		}
 
-		// Render IMAGE entities & TEXT entities
+		// Render image entities & text entities
 		_timer.startDeltaPart("guiEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
 		_renderGUI();

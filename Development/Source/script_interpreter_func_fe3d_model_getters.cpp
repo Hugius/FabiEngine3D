@@ -24,7 +24,7 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview model
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -43,14 +43,14 @@ bool ScriptInterpreter::_executeFe3dModelGetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview model
+			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested model with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
-			// Find full modelEntity IDs based on part ID
+			// Find full entity IDs based on part ID
 			for (const auto& ID : _fe3d.modelEntity_getAllIDs())
 			{
 				// If substring matches

@@ -27,11 +27,11 @@ void MasterRenderer::_captureCubeReflections()
 	const auto originalShadowAreaReach = _renderBus.getShadowAreaReach();
 	const auto originalShadowMatrix = _renderBus.getShadowMatrix();
 	
-	// Iterate through all MODEL entities
+	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Hide non-reflected MODEL entity
+		// Hide non-reflected model entity
 		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -39,11 +39,11 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Iterate through all BILLBOARD entities
+	// Iterate through all billboard entities
 	vector<string> savedBillboardEntityIDs;
 	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Hide non-reflected BILLBOARD entity
+		// Hide non-reflected billboard entity
 		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -68,7 +68,7 @@ void MasterRenderer::_captureCubeReflections()
 	_camera.setFOV(90.0f);
 	_camera.setUpVector(Vec3(0.0f, -1.0f, 0.0f));
 
-	// Iterate through all REFLECTION entities
+	// Iterate through all reflection entities
 	for (const auto& [keyID, entity] : _entityBus->getReflectionEntities())
 	{
 		// Check if reflection must capture
@@ -158,31 +158,31 @@ void MasterRenderer::_captureCubeReflections()
 		}
 	}
 
-	// Iterate through all MODEL entities
+	// Iterate through all model entities
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Iterate through all saved MODEL entities
+		// Iterate through all saved model entities
 		for (const auto& savedID : savedModelEntityIDs)
 		{
 			// Check if IDs match
 			if (entity->getID() == savedID)
 			{
-				// Show MODEL entity again
+				// Show model entity again
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	// Iterate through all saved BILLBOARD entities
+	// Iterate through all saved billboard entities
 	for (const auto& savedID : savedBillboardEntityIDs)
 	{
-		// Iterate through all BILLBOARD entities
+		// Iterate through all billboard entities
 		for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if IDs match
 			if (entity->getID() == savedID)
 			{
-				// Show BILLBOARD entity again
+				// Show billboard entity again
 				entity->setVisible(true);
 			}
 		}
@@ -244,11 +244,11 @@ void MasterRenderer::_capturePlanarReflections()
 	_planarReflectionCaptureBuffer.bind();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Iterate through all MODEL entities
+	// Iterate through all model entities
 	vector<string> savedModelEntityIDs;
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Hide non-reflected MODEL entity
+		// Hide non-reflected model entity
 		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -256,7 +256,7 @@ void MasterRenderer::_capturePlanarReflections()
 			continue;
 		}
 
-		// Hide reflective MODEL entity
+		// Hide reflective model entity
 		for (const auto& partID : entity->getPartIDs())
 		{
 			if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
@@ -268,11 +268,11 @@ void MasterRenderer::_capturePlanarReflections()
 		}
 	}
 
-	// Iterate through all BILLBOARD entities
+	// Iterate through all billboard entities
 	vector<string> savedBillboardEntityIDs;
 	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Hide non-reflected BILLBOARD entity
+		// Hide non-reflected billboard entity
 		if (!entity->isReflected() && entity->isVisible())
 		{
 			entity->setVisible(false);
@@ -312,15 +312,15 @@ void MasterRenderer::_capturePlanarReflections()
 	const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 	_renderBus.setClippingPlane(clippingPlane);
 
-	// Render SKY entity
+	// Render sky entity
 	_renderSkyEntity();
 
-	// Render TERRAIN entity
+	// Render terrain entity
 	glEnable(GL_CLIP_DISTANCE0);
 	_renderTerrainEntity();
 	glDisable(GL_CLIP_DISTANCE0);
 
-	// Render MODEL entities & BILLBOARD entities
+	// Render model entities & billboard entities
 	glEnable(GL_CLIP_DISTANCE2);
 	_renderModelEntities();
 	_renderBillboardEntities();
@@ -332,31 +332,31 @@ void MasterRenderer::_capturePlanarReflections()
 	// Assign texture
 	_renderBus.setPlanarReflectionMap(_planarReflectionCaptureBuffer.getTexture(0));
 
-	// Iterate through all MODEL entities
+	// Iterate through all model entities
 	for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 	{
-		// Iterate through all saved MODEL entities
+		// Iterate through all saved model entities
 		for (const auto& savedID : savedModelEntityIDs)
 		{
 			// Check if IDs match
 			if (entity->getID() == savedID)
 			{
-				// Show MODEL entity again
+				// Show model entity again
 				entity->setVisible(true);
 			}
 		}
 	}
 
-	// Iterate through all BILLBOARD entities
+	// Iterate through all billboard entities
 	for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 	{
-		// Iterate through all saved BILLBOARD entities
+		// Iterate through all saved billboard entities
 		for (const auto& savedID : savedBillboardEntityIDs)
 		{
 			// Check if IDs match
 			if (entity->getID() == savedID)
 			{
-				// Show BILLBOARD entity again
+				// Show billboard entity again
 				entity->setVisible(true);
 			}
 		}
@@ -396,15 +396,15 @@ void MasterRenderer::_captureWaterReflections()
 		_waterReflectionCaptureBuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Save MODEL entities that must not be captured
+		// Save model entities that must not be captured
 		vector<string> savedModelEntityIDs;
 		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
 			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
-			// Iterate through all MODEL entities
+			// Iterate through all model entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
-				// Hide non-reflected MODEL entity
+				// Hide non-reflected model entity
 				if (!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
@@ -412,7 +412,7 @@ void MasterRenderer::_captureWaterReflections()
 					continue;
 				}
 
-				// Hide reflective MODEL entity
+				// Hide reflective model entity
 				for (const auto& partID : entity->getPartIDs())
 				{
 					if (entity->isReflective(partID) && (entity->getReflectionType(partID) == ReflectionType::PLANAR) && entity->isVisible())
@@ -425,14 +425,14 @@ void MasterRenderer::_captureWaterReflections()
 			}
 		}
 
-		// Save BILLBOARD entities that must not be captured
+		// Save billboard entities that must not be captured
 		vector<string> savedBillboardEntityIDs;
 		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
-			// Iterate through all BILLBOARD entities
+			// Iterate through all billboard entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
-				// Hide non-reflected BILLBOARD entity
+				// Hide non-reflected billboard entity
 				if (!entity->isReflected() && entity->isVisible())
 				{
 					entity->setVisible(false);
@@ -477,10 +477,10 @@ void MasterRenderer::_captureWaterReflections()
 		const Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, clippingHeight);
 		_renderBus.setClippingPlane(clippingPlane);
 
-		// Render SKY entity
+		// Render sky entity
 		_renderSkyEntity();
 
-		// Render TERRAIN entity
+		// Render terrain entity
 		if (waterEntity->getQuality() != WaterQuality::SKY)
 		{
 			glEnable(GL_CLIP_DISTANCE0);
@@ -488,7 +488,7 @@ void MasterRenderer::_captureWaterReflections()
 			glDisable(GL_CLIP_DISTANCE0);
 		}
 
-		// Render MODEL entities
+		// Render model entities
 		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS ||
 			waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{
@@ -497,7 +497,7 @@ void MasterRenderer::_captureWaterReflections()
 			glDisable(GL_CLIP_DISTANCE2);
 		}
 
-		// Render BILLBOARD entities
+		// Render billboard entities
 		if (waterEntity->getQuality() == WaterQuality::SKY_TERRAIN_MODELS_BILLBOARDS)
 		{		
 			glEnable(GL_CLIP_DISTANCE2);
@@ -511,31 +511,31 @@ void MasterRenderer::_captureWaterReflections()
 		// Assign texture
 		_renderBus.setWaterReflectionMap(_waterReflectionCaptureBuffer.getTexture(0));
 
-		// Iterate through all saved MODEL entities
+		// Iterate through all saved model entities
 		for (const auto& savedID : savedModelEntityIDs)
 		{
-			// Iterate through all MODEL entities
+			// Iterate through all model entities
 			for (const auto& [keyID, entity] : _entityBus->getModelEntities())
 			{
 				// Check if IDs match
 				if (entity->getID() == savedID)
 				{
-					// Show MODEL entity again
+					// Show model entity again
 					entity->setVisible(true);
 				}
 			}
 		}
 
-		// Iterate through all saved BILLBOARD entities
+		// Iterate through all saved billboard entities
 		for (const auto& savedID : savedBillboardEntityIDs)
 		{
-			// Iterate through all BILLBOARD entities
+			// Iterate through all billboard entities
 			for (const auto& [keyID, entity] : _entityBus->getBillboardEntities())
 			{
 				// Check if IDs match
 				if (entity->getID() == savedID)
 				{
-					// Show BILLBOARD entity again
+					// Show billboard entity again
 					entity->setVisible(true);
 				}
 			}

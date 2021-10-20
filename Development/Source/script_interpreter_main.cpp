@@ -336,7 +336,7 @@ void ScriptInterpreter::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
 	_fe3d.sound_deleteAll();
-	_fe3d.lightEntity_deleteAll();
+	_fe3d.pointlightEntity_deleteAll();
 	_fe3d.reflectionEntity_deleteAll();
 
 	// Delete game image entities

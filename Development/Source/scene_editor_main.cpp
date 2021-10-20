@@ -98,10 +98,10 @@ void SceneEditor::load()
 	_fe3d.modelEntity_setReflected(PREVIEW_LAMP_ID, false);
 	_fe3d.modelEntity_setBright(PREVIEW_LAMP_ID, true);
 	_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-	_fe3d.lightEntity_create(PREVIEW_LAMP_ID);
-	_fe3d.lightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_LIGHT_RADIUS));
-	_fe3d.lightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
-	_fe3d.lightEntity_setVisible(PREVIEW_LAMP_ID, false);
+	_fe3d.pointlightEntity_create(PREVIEW_LAMP_ID);
+	_fe3d.pointlightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_LIGHT_RADIUS));
+	_fe3d.pointlightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
+	_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Load preview reflection
 	_fe3d.modelEntity_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
@@ -140,7 +140,7 @@ void SceneEditor::unload()
 	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.sound_deleteAll();
-	_fe3d.lightEntity_deleteAll();
+	_fe3d.pointlightEntity_deleteAll();
 	_fe3d.reflectionEntity_deleteAll();
 
 	// Reset editor properties

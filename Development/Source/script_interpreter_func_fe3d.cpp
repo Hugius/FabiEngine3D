@@ -43,8 +43,10 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				isExecuted = (isExecuted || _executeFe3dBillboardGetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dAabbSetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dAabbGetterFunction(functionName, arguments, returnValues));
-				isExecuted = (isExecuted || _executeFe3dLightSetterFunction(functionName, arguments, returnValues));
-				isExecuted = (isExecuted || _executeFe3dLightGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dPointlightSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dPointlightGetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSpotlightSetterFunction(functionName, arguments, returnValues));
+				isExecuted = (isExecuted || _executeFe3dSpotlightGetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dReflectionSetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dReflectionGetterFunction(functionName, arguments, returnValues));
 				isExecuted = (isExecuted || _executeFe3dImageSetterFunction(functionName, arguments, returnValues));

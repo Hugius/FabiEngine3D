@@ -102,15 +102,29 @@ void BaseEntityManager::_createEntity(const string& ID)
 			break;
 		}
 
-		case(EntityType::LIGHT):
+		case(EntityType::POINTLIGHT):
 		{
-			if (_getLightEntity(ID) != nullptr)
+			if (_getPointlightEntity(ID) != nullptr)
 			{
 				Logger::throwError("BaseEntityManager::_createEntity::7");
 			}
 			else
 			{
-				_lightEntities.insert(make_pair(ID, make_shared<LightEntity>(ID)));
+				_pointlightEntities.insert(make_pair(ID, make_shared<PointlightEntity>(ID)));
+			}
+
+			break;
+		}
+
+		case(EntityType::SPOTLIGHT):
+		{
+			if (_getSpotlightEntity(ID) != nullptr)
+			{
+				Logger::throwError("BaseEntityManager::_createEntity::8");
+			}
+			else
+			{
+				_spotlightEntities.insert(make_pair(ID, make_shared<SpotlightEntity>(ID)));
 			}
 
 			break;
@@ -120,7 +134,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getReflectionEntity(ID) != nullptr)
 			{
-				Logger::throwError("BaseEntityManager::_createEntity::8");
+				Logger::throwError("BaseEntityManager::_createEntity::9");
 			}
 			else
 			{
@@ -134,7 +148,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getImageEntity(ID) != nullptr)
 			{
-				Logger::throwError("BaseEntityManager::_createEntity::9");
+				Logger::throwError("BaseEntityManager::_createEntity::10");
 			}
 			else
 			{
@@ -150,7 +164,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 		{
 			if (_getTextEntity(ID) != nullptr)
 			{
-				Logger::throwError("BaseEntityManager::_createEntity::10");
+				Logger::throwError("BaseEntityManager::_createEntity::11");
 			}
 			else
 			{
@@ -228,9 +242,19 @@ void BaseEntityManager::deleteEntity(const string& ID)
 			break;
 		}
 
-		case(EntityType::LIGHT):
+		case(EntityType::POINTLIGHT):
 		{
-			if (_lightEntities.erase(ID))
+			if (_pointlightEntities.erase(ID))
+			{
+				return;
+			}
+
+			break;
+		}
+
+		case(EntityType::SPOTLIGHT):
+		{
+			if (_spotlightEntities.erase(ID))
 			{
 				return;
 			}
@@ -281,7 +305,8 @@ void BaseEntityManager::deleteAllEntities()
 	_modelEntities.clear();
 	_billboardEntities.clear();
 	_aabbEntities.clear();
-	_lightEntities.clear();
+	_pointlightEntities.clear();
+	_spotlightEntities.clear();
 	_reflectionEntities.clear();
 	_imageEntities.clear();
 	_textEntities.clear();

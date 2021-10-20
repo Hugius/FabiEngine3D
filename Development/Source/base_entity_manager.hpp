@@ -10,7 +10,8 @@
 #include "model_entity.hpp"
 #include "billboard_entity.hpp"
 #include "aabb_entity.hpp"
-#include "light_entity.hpp"
+#include "pointlight_entity.hpp"
+#include "spotlight_entity.hpp"
 #include "reflection_entity.hpp"
 #include "image_entity.hpp"
 #include "text_entity.hpp"
@@ -48,7 +49,8 @@ protected:
 	unordered_map<string, shared_ptr<BillboardEntity>>& _getBillboardEntities();
 	unordered_map<string, shared_ptr<AabbEntity>>& _getAabbEntities();
 	unordered_map<string, shared_ptr<ReflectionEntity>>& _getReflectionEntities();
-	unordered_map<string, shared_ptr<LightEntity>>& _getLightEntities();
+	unordered_map<string, shared_ptr<PointlightEntity>>& _getPointlightEntities();
+	unordered_map<string, shared_ptr<SpotlightEntity>>& _getSpotlightEntities();
 	unordered_map<string, shared_ptr<ImageEntity>>& _getImageEntities();
 	unordered_map<string, shared_ptr<TextEntity>>& _getTextEntities();
 	shared_ptr<SkyEntity> _getSkyEntity(const string& ID);
@@ -57,7 +59,8 @@ protected:
 	shared_ptr<ModelEntity> _getModelEntity(const string& ID);
 	shared_ptr<BillboardEntity> _getBillboardEntity(const string& ID);
 	shared_ptr<AabbEntity> _getAabbEntity(const string& ID);
-	shared_ptr<LightEntity>	_getLightEntity(const string& ID);
+	shared_ptr<PointlightEntity> _getPointlightEntity(const string& ID);
+	shared_ptr<SpotlightEntity> _getSpotlightEntity(const string& ID);
 	shared_ptr<ReflectionEntity> _getReflectionEntity(const string& ID);
 	shared_ptr<ImageEntity>	_getImageEntity(const string& ID);
 	shared_ptr<TextEntity> _getTextEntity(const string& ID);
@@ -76,7 +79,8 @@ private:
 	unordered_map<string, shared_ptr<ModelEntity>> _modelEntities;
 	unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 	unordered_map<string, shared_ptr<AabbEntity>> _aabbEntities;
-	unordered_map<string, shared_ptr<LightEntity>> _lightEntities;
+	unordered_map<string, shared_ptr<PointlightEntity>> _pointlightEntities;
+	unordered_map<string, shared_ptr<SpotlightEntity>> _spotlightEntities;
 	unordered_map<string, shared_ptr<ReflectionEntity>> _reflectionEntities;
 	unordered_map<string, shared_ptr<ImageEntity>> _imageEntities;
 	unordered_map<string, shared_ptr<TextEntity>> _textEntities;

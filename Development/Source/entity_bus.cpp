@@ -1,4 +1,5 @@
 #include "entity_bus.hpp"
+#include "entity_bus.hpp"
 
 EntityBus::EntityBus
 (
@@ -9,7 +10,8 @@ EntityBus::EntityBus
 	const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities,
 	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities,
 	const unordered_map<string, shared_ptr<AabbEntity>>& aabbEntities,
-	const unordered_map<string, shared_ptr<LightEntity>>& lightEntities,
+	const unordered_map<string, shared_ptr<PointlightEntity>>& pointlightEntities,
+	const unordered_map<string, shared_ptr<SpotlightEntity>>& spotlightEntities,
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities,
 	const unordered_map<string, shared_ptr<ImageEntity>>& imageEntities,
 	const unordered_map<string, shared_ptr<TextEntity>>& textEntities
@@ -22,7 +24,8 @@ EntityBus::EntityBus
 	_modelEntities(modelEntities),
 	_billboardEntities(billboardEntities),
 	_aabbEntities(aabbEntities),
-	_lightEntities(lightEntities),
+	_pointlightEntities(pointlightEntities),
+	_spotlightEntities(spotlightEntities),
 	_reflectionEntities(reflectionEntities),
 	_imageEntities(imageEntities),
 	_textEntities(textEntities)
@@ -65,9 +68,14 @@ const unordered_map<string, shared_ptr<AabbEntity>>& EntityBus::getAabbEntities(
 	return _aabbEntities;
 }
 
-const unordered_map<string, shared_ptr<LightEntity>>& EntityBus::getLightEntities()
+const unordered_map<string, shared_ptr<PointlightEntity>>& EntityBus::getPointLightEntities()
 {
-	return _lightEntities;
+	return _pointlightEntities;
+}
+
+const unordered_map<string, shared_ptr<SpotlightEntity>>& EntityBus::getSpotlightEntities()
+{
+	return _spotlightEntities;
 }
 
 const unordered_map<string, shared_ptr<ReflectionEntity>>& EntityBus::getReflectionEntities()

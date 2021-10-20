@@ -5,7 +5,7 @@
 #include "sky_entity.hpp"
 #include "terrain_entity.hpp"
 #include "water_entity.hpp"
-#include "light_entity.hpp"
+#include "pointlight_entity.hpp"
 #include "model_entity.hpp"
 #include "image_entity.hpp"
 #include "render_bus.hpp"

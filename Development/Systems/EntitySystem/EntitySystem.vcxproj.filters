@@ -42,7 +42,7 @@
     <ClCompile Include="..\..\Source\image_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\light_entity_manager.cpp">
+    <ClCompile Include="..\..\Source\pointlight_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_entity_manager.cpp">
@@ -75,7 +75,7 @@
     <ClCompile Include="..\..\Source\image_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\light_entity.cpp">
+    <ClCompile Include="..\..\Source\pointlight_entity.cpp">
       <Filter>Data Structures\Entities</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\model_entity_getters.cpp">
@@ -105,6 +105,12 @@
     <ClCompile Include="..\..\Source\reflection_entity_manager.cpp">
       <Filter>Managers\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\spotlight_entity.cpp">
+      <Filter>Data Structures\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\spotlight_entity_manager.cpp">
+      <Filter>Managers\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\base_entity_manager.hpp">
@@ -125,7 +131,7 @@
     <ClInclude Include="..\..\Source\image_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\light_entity_manager.hpp">
+    <ClInclude Include="..\..\Source\pointlight_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\model_entity_manager.hpp">
@@ -152,7 +158,7 @@
     <ClInclude Include="..\..\Source\image_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\light_entity.hpp">
+    <ClInclude Include="..\..\Source\pointlight_entity.hpp">
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\model_entity.hpp">
@@ -174,6 +180,12 @@
       <Filter>Data Structures\Entities</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\reflection_entity_manager.hpp">
+      <Filter>Managers\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\spotlight_entity.hpp">
+      <Filter>Data Structures\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\spotlight_entity_manager.hpp">
       <Filter>Managers\Entities</Filter>
     </ClInclude>
   </ItemGroup>

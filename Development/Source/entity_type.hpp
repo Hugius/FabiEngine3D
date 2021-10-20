@@ -8,7 +8,8 @@ enum class EntityType
 	MODEL,
 	BILLBOARD,
 	AABB,
-	LIGHT,
+	POINTLIGHT,
+	SPOTLIGHT,
 	REFLECTION,
 	IMAGE,
 	TEXT

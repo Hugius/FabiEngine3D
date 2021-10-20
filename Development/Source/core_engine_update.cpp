@@ -52,7 +52,8 @@ void CoreEngine::_updateApplication()
 			_aabbEntityManager.update(_modelEntityManager.getEntities(), _billboardEntityManager.getEntities());
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("lightEntityUpdate");
-			_lightEntityManager.update();
+			_pointlightEntityManager.update();
+			_spotlightEntityManager.update();
 			_timer.stopDeltaPart();
 			_timer.startDeltaPart("reflectionEntityUpdate");
 			_reflectionEntityManager.update();
@@ -126,11 +127,12 @@ void CoreEngine::_renderApplication()
 	const auto models = _modelEntityManager.getEntities();
 	const auto billboards = _billboardEntityManager.getEntities();
 	const auto AABBs = _aabbEntityManager.getEntities();
-	const auto lights = _lightEntityManager.getEntities();
+	const auto pointlights = _pointlightEntityManager.getEntities();
+	const auto spotlights = _spotlightEntityManager.getEntities();
 	const auto reflections = _reflectionEntityManager.getEntities();
 	const auto images = _imageEntityManager.getEntities();
 	const auto texts = _textEntityManager.getEntities();
-	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, lights, reflections, images, texts);
+	EntityBus entityBus(mainSky, mixSky, terrain, water, models, billboards, AABBs, pointlights, spotlights, reflections, images, texts);
 
 	// Render entities
 	_masterRenderer.renderScene(&entityBus);

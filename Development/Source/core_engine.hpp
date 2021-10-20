@@ -15,7 +15,8 @@
 #include "model_entity_manager.hpp"
 #include "billboard_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
-#include "light_entity_manager.hpp"
+#include "pointlight_entity_manager.hpp"
+#include "spotlight_entity_manager.hpp"
 #include "reflection_entity_manager.hpp"
 #include "image_entity_manager.hpp"
 #include "text_entity_manager.hpp"
@@ -71,7 +72,8 @@ private:
 	ModelEntityManager _modelEntityManager;
 	BillboardEntityManager _billboardEntityManager;
 	AabbEntityManager _aabbEntityManager;
-	LightEntityManager _lightEntityManager;
+	PointlightEntityManager _pointlightEntityManager;
+	SpotlightEntityManager _spotlightEntityManager;
 	ReflectionEntityManager _reflectionEntityManager;
 	ImageEntityManager _imageEntityManager;
 	TextEntityManager _textEntityManager;

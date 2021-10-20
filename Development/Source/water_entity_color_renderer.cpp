@@ -67,10 +67,10 @@ void WaterEntityColorRenderer::unbind()
 	_shader.unbind();
 }
 
-void WaterEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
+void WaterEntityColorRenderer::processLightEntities(const unordered_map<string, shared_ptr<PointlightEntity>>& entities)
 {
 	// Compose a map of all visible lights
-	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
+	unordered_map<string, shared_ptr<PointlightEntity>> visibleEntities;
 	for (const auto& [keyID, entity] : entities)
 	{
 		if (entity->isVisible())

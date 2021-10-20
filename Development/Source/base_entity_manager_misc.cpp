@@ -29,9 +29,13 @@ bool BaseEntityManager::isExisting(const string& ID)
 		{
 			return (_getAabbEntity(ID) != nullptr);
 		}
-		case(EntityType::LIGHT):
+		case(EntityType::POINTLIGHT):
 		{
-			return (_getLightEntity(ID) != nullptr);
+			return (_getPointlightEntity(ID) != nullptr);
+		}
+		case(EntityType::SPOTLIGHT):
+		{
+			return (_getSpotlightEntity(ID) != nullptr);
 		}
 		case(EntityType::REFLECTION):
 		{
@@ -80,9 +84,14 @@ unordered_map<string, shared_ptr<AabbEntity>>& BaseEntityManager::_getAabbEntiti
 	return _aabbEntities;
 }
 
-unordered_map<string, shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
+unordered_map<string, shared_ptr<PointlightEntity>>& BaseEntityManager::_getPointlightEntities()
 {
-	return _lightEntities;
+	return _pointlightEntities;
+}
+
+unordered_map<string, shared_ptr<SpotlightEntity>>& BaseEntityManager::_getSpotlightEntities()
+{
+	return _spotlightEntities;
 }
 
 unordered_map<string, shared_ptr<ReflectionEntity>>& BaseEntityManager::_getReflectionEntities()
@@ -184,11 +193,25 @@ shared_ptr<AabbEntity> BaseEntityManager::_getAabbEntity(const string& ID)
 	}
 }
 
-shared_ptr<LightEntity> BaseEntityManager::_getLightEntity(const string& ID)
+shared_ptr<PointlightEntity> BaseEntityManager::_getPointlightEntity(const string& ID)
 {
-	auto it = _lightEntities.find(ID);
+	auto it = _pointlightEntities.find(ID);
 
-	if (it == _lightEntities.end())
+	if (it == _pointlightEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
+}
+
+shared_ptr<SpotlightEntity> BaseEntityManager::_getSpotlightEntity(const string& ID)
+{
+	auto it = _spotlightEntities.find(ID);
+
+	if (it == _spotlightEntities.end())
 	{
 		return nullptr;
 	}

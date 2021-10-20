@@ -1,11 +1,11 @@
-#include "light_entity.hpp"
+#include "pointlight_entity.hpp"
 
 #include <algorithm>
 
 using std::max;
 using std::clamp;
 
-void LightEntity::updateTransformation()
+void PointlightEntity::updateTransformation()
 {
 	if (_position != _positionTarget)
 	{
@@ -29,65 +29,65 @@ void LightEntity::updateTransformation()
 	}
 }
 
-void LightEntity::setPosition(Vec3 value)
+void PointlightEntity::setPosition(Vec3 value)
 {
 	_position = value;
 	_positionTarget = value;
 }
 
-void LightEntity::move(Vec3 value)
+void PointlightEntity::move(Vec3 value)
 {
 	_position += value;
 	_positionTarget += value;
 }
 
-void LightEntity::moveTo(Vec3 target, float speed)
+void PointlightEntity::moveTo(Vec3 target, float speed)
 {
 	_positionTarget = target;
 	_positionTargetSpeed = speed;
 }
 
-void LightEntity::setRadius(Vec3 value)
+void PointlightEntity::setRadius(Vec3 value)
 {
 	_radius = Vec3(max(0.0f, value.r), max(0.0f, value.g), max(0.0f, value.b));
 }
 
-void LightEntity::setColor(Vec3 value)
+void PointlightEntity::setColor(Vec3 value)
 {
 	_color = Vec3(clamp(value.r, 0.0f, 1.0f), clamp(value.g, 0.0f, 1.0f), clamp(value.b, 0.0f, 1.0f));
 }
 
-void LightEntity::setIntensity(float value)
+void PointlightEntity::setIntensity(float value)
 {
 	_intensity = max(0.0f, value);
 }
 
-void LightEntity::setShape(LightShape value)
+void PointlightEntity::setShape(LightShape value)
 {
 	_shape = value;
 }
 
-const Vec3 LightEntity::getPosition()
+const Vec3 PointlightEntity::getPosition()
 {
 	return _position;
 }
 
-const Vec3 LightEntity::getRadius()
+const Vec3 PointlightEntity::getRadius()
 {
 	return _radius;
 }
 
-const Vec3 LightEntity::getColor()
+const Vec3 PointlightEntity::getColor()
 {
 	return _color;
 }
 
-const float LightEntity::getIntensity()
+const float PointlightEntity::getIntensity()
 {
 	return _intensity;
 }
 
-const LightShape LightEntity::getShape()
+const LightShape PointlightEntity::getShape()
 {
 	return _shape;
 }

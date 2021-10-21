@@ -15,7 +15,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			// Temporary values 
 			const auto ID = arguments[0].getString();
 
-			// New text ID cannot start with '@'
+			// @ sign is reserved
 			if (ID.front() == '@')
 			{
 				_throwScriptError("new text ID \"" + ID + "\" cannot start with '@'");
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_delete(arguments[0].getString());
@@ -72,7 +72,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -87,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -103,7 +103,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -119,7 +119,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -136,7 +136,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_rotateTo(arguments[0].getString(), arguments[1].getDecimal(), arguments[2].getDecimal());
@@ -151,7 +151,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 target = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -168,7 +168,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setRotation(arguments[0].getString(), arguments[1].getDecimal());
@@ -183,7 +183,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_rotate(arguments[0].getString(), arguments[1].getDecimal());
@@ -198,7 +198,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -214,7 +214,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				Vec2 change = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -230,7 +230,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setColor(arguments[0].getString(),
@@ -246,7 +246,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setTextContent(arguments[0].getString(), arguments[1].getString());
@@ -261,7 +261,7 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				_fe3d.textEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());

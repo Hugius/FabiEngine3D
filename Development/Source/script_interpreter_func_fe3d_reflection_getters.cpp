@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested reflection with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// Only non-preview reflections
+					// @ sign is reserved
 					if (ID.front() != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 			// For every reflection
 			for (const auto& ID : result)
 			{
-				// Only non-preview reflections
+				// @ sign is reserved
 				if (ID.front() != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_isVisible(arguments[0].getString());
@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dReflectionGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				auto result = _fe3d.reflectionEntity_getPosition(arguments[0].getString());

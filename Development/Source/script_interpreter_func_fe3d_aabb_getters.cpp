@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested AABB with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -25,7 +25,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// Only non-preview AABBs
+					// @ sign is reserved
 					if (ID.front() != '@')
 					{
 						// Only non-bound AABBs
@@ -45,7 +45,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested billboard with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing AABB ID
+			// Validate existence
 			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing AABB ID
+			// Validate existence
 			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -121,7 +121,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing AABB ID
+			// Validate existence
 			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Cannot access a bound entity
@@ -149,7 +149,7 @@ bool ScriptInterpreter::_executeFe3dAabbGetterFunction(const string& functionNam
 			// For every AABB
 			for (const auto& ID : result)
 			{
-				// Only non-preview AABBs
+				// @ sign is reserved
 				if (ID.front() != '@')
 				{
 					// Only non-bound AABBs

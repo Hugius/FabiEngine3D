@@ -15,7 +15,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 			// Temporary values
 			auto ID = arguments[0].getString();
 
-			// New reflection ID cannot start with '@'
+			// @ sign is reserved
 			if (ID.front() == '@')
 			{
 				_throwScriptError("new reflection ID (\"" + ID + "\") cannot start with '@'");
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_delete(arguments[0].getString());
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -74,7 +74,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_setPosition(arguments[0].getString(),
@@ -90,7 +90,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_move(arguments[0].getString(),
@@ -106,7 +106,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_moveTo(arguments[0].getString(),
@@ -122,7 +122,7 @@ bool ScriptInterpreter::_executeFe3dReflectionSetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing reflection ID
+			// Validate existence
 			if (_validateFe3dReflection(arguments[0].getString()))
 			{
 				_fe3d.reflectionEntity_capture(arguments[0].getString());

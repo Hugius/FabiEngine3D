@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// New billboard ID cannot start with '@'
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("new billboard ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_delete(arguments[0].getString());
@@ -66,7 +66,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setVisible(arguments[0].getString(), arguments[1].getBoolean());
@@ -81,7 +81,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setPosition(arguments[0].getString(),
@@ -97,7 +97,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setRotation(arguments[0].getString(),
@@ -113,7 +113,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setSize(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -128,7 +128,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_move(arguments[0].getString(),
@@ -144,7 +144,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_rotate(arguments[0].getString(),
@@ -160,7 +160,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_scale(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
@@ -175,7 +175,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_moveTo(arguments[0].getString(),
@@ -191,7 +191,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_rotateTo(arguments[0].getString(),
@@ -207,7 +207,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_scaleTo(arguments[0].getString(),
@@ -223,7 +223,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setColor(arguments[0].getString(),
@@ -239,7 +239,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
@@ -254,7 +254,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
@@ -269,7 +269,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
@@ -284,7 +284,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setLightness(arguments[0].getString(), arguments[1].getDecimal());
@@ -299,7 +299,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
@@ -330,7 +330,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
@@ -361,7 +361,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setCameraFacingX(arguments[0].getString(), arguments[1].getBoolean());
@@ -376,7 +376,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_setCameraFacingY(arguments[0].getString(), arguments[1].getBoolean());
@@ -391,7 +391,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_startSpriteAnimation(arguments[0].getString(), arguments[1].getInteger());
@@ -406,7 +406,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_pauseSpriteAnimation(arguments[0].getString());
@@ -421,7 +421,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_resumeSpriteAnimation(arguments[0].getString());
@@ -436,7 +436,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
@@ -451,7 +451,7 @@ bool ScriptInterpreter::_executeFe3dBillboardSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing billboard ID
+			// Validate existence
 			if (_validateFe3dBillboard(arguments[0].getString()))
 			{
 				// Check if billboard is not of type text

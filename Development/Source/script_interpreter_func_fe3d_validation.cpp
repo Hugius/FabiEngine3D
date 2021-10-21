@@ -3,7 +3,7 @@
 
 bool ScriptInterpreter::_validateFe3dAabb(const string& ID)
 {
-	// Cannot request/delete a preview entity
+	// @ sign is reserved
 	if (ID.front() == '@')
 	{
 		_throwScriptError("ID of requested AABB with ID \"" + ID + "\" cannot start with '@'!");
@@ -33,7 +33,7 @@ bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
 	}
 	else
 	{
-		// Cannot access a preview billboard
+		// @ sign is reserved
 		if (!isPreview && ID.front() == '@')
 		{
 			_throwScriptError("ID of requested billboard with ID \"" + ID + "\" cannot start with '@'!");
@@ -53,7 +53,7 @@ bool ScriptInterpreter::_validateFe3dBillboard(const string& ID, bool isPreview)
 
 bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 {
-	// Cannot request/delete an engine entity
+	// @ sign is reserved
 	if (ID.front() == '@')
 	{
 		_throwScriptError("ID of requested image with ID \"" + ID + "\" cannot start with '@'!");
@@ -70,21 +70,38 @@ bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 	return true;
 }
 
-bool ScriptInterpreter::_validateFe3dLight(const string& ID)
+bool ScriptInterpreter::_validateFe3dPointlight(const string& ID)
 {
-	return true;
-
-	// Just to be consistent with not starting entity ID's with '@'
+	// @ sign is reserved
 	if (ID.front() == '@')
 	{
-		_throwScriptError("ID of requested light with ID \"" + ID + "\" cannot start with '@'!");
+		_throwScriptError("ID of requested pointlight with ID \"" + ID + "\" cannot start with '@'!");
 		return false;
 	}
 
 	// Check if entity exists
 	if (!_fe3d.pointlightEntity_isExisting(ID))
 	{
-		_throwScriptError("requested light with ID \"" + ID + "\" does not exist!");
+		_throwScriptError("requested pointlight with ID \"" + ID + "\" does not exist!");
+		return false;
+	}
+
+	return true;
+}
+
+bool ScriptInterpreter::_validateFe3dSpotlight(const string& ID)
+{
+	// @ sign is reserved
+	if (ID.front() == '@')
+	{
+		_throwScriptError("ID of requested spotlight with ID \"" + ID + "\" cannot start with '@'!");
+		return false;
+	}
+
+	// Check if entity exists
+	if (!_fe3d.spotlightEntity_isExisting(ID))
+	{
+		_throwScriptError("requested spotlight with ID \"" + ID + "\" does not exist!");
 		return false;
 	}
 
@@ -111,7 +128,7 @@ bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
 	}
 	else
 	{
-		// Cannot access a preview model
+		// @ sign is reserved
 		if (ID.front() == '@')
 		{
 			_throwScriptError("ID of requested model with ID \"" + ID + "\" cannot start with '@'!");
@@ -132,7 +149,7 @@ bool ScriptInterpreter::_validateFe3dModel(const string& ID, bool isPreview)
 
 bool ScriptInterpreter::_validateFe3dReflection(const string& ID)
 {
-	// Cannot request/delete an engine entity
+	// @ sign is reserved
 	if (ID.front() == '@')
 	{
 		_throwScriptError("ID of requested reflection with ID \"" + ID + "\" cannot start with '@'!");
@@ -175,7 +192,7 @@ bool ScriptInterpreter::_validateFe3dTerrain()
 
 bool ScriptInterpreter::_validateFe3dText(const string& ID)
 {
-	// Cannot request/delete an engine entity
+	// @ sign is reserved
 	if (ID.front() == '@')
 	{
 		_throwScriptError("ID of requested text with ID \"" + ID + "\" cannot start with '@'!");
@@ -217,7 +234,7 @@ bool ScriptInterpreter::_validateFe3dSound(const string& ID, bool isPreview)
 	}
 	else
 	{
-		// Cannot access a preview sound
+		// @ sign is reserved
 		if (!isPreview && ID.front() == '@')
 		{
 			_throwScriptError("ID of requested sound with ID \"" + ID + "\" cannot start with '@'!");

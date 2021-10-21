@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested text with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested text with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// Only non-preview text
+					// @ sign is reserved
 					if (ID.front() != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 			// For every text
 			for (const auto& ID : result)
 			{
-				// Only non-preview texts
+				// @ sign is reserved
 				if (ID.front() != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_isVisible(arguments[0].getString());
@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
@@ -108,7 +108,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
@@ -123,7 +123,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getRotation(arguments[0].getString());
@@ -138,7 +138,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
@@ -153,7 +153,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
@@ -168,7 +168,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getColor(arguments[0].getString());
@@ -183,7 +183,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getTextContent(arguments[0].getString());
@@ -198,7 +198,7 @@ bool ScriptInterpreter::_executeFe3dTextGetterFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing text ID
+			// Validate existence
 			if (_validateFe3dText(arguments[0].getString()))
 			{
 				auto result = _fe3d.textEntity_getAlpha(arguments[0].getString());

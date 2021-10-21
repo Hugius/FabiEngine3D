@@ -12,7 +12,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// New sound ID cannot start with '@'
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
@@ -47,7 +47,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 			string newID = arguments[0].getString();
 			string previewID = arguments[1].getString();
 
-			// New sound ID cannot start with '@'
+			// @ sign is reserved
 			if (newID.front() == '@')
 			{
 				_throwScriptError("new sound ID (\"" + arguments[0].getString() + "\") cannot start with '@'");
@@ -86,7 +86,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_delete(arguments[0].getString());
@@ -119,7 +119,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger());
@@ -134,7 +134,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_play(arguments[0].getString(), arguments[1].getInteger(), arguments[2].getInteger(), true);
@@ -149,7 +149,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_pause(arguments[0].getString());
@@ -173,7 +173,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_resume(arguments[0].getString());
@@ -197,7 +197,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				_fe3d.sound_stop(arguments[0].getString(), arguments[1].getInteger());
@@ -221,7 +221,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 2D sound
@@ -244,7 +244,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
@@ -269,7 +269,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound
@@ -292,7 +292,7 @@ bool ScriptInterpreter::_executeFe3dSoundSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing sound ID
+			// Validate existence
 			if (_validateFe3dSound(arguments[0].getString()))
 			{
 				// Only for 3D sound

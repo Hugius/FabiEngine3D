@@ -12,6 +12,13 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
+			// @ sign is reserved
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("ID of requested pointlight with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
+				return true;
+			}
+
 			// Check if existing
 			auto result = _fe3d.pointlightEntity_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -24,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Cannot request a preview entity
+			// @ sign is reserved
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("ID of requested pointlight with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
@@ -37,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// Only non-preview pointlights
+					// @ sign is reserved
 					if (ID.front() != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -56,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 			// For every pointlight
 			for (const auto& ID : result)
 			{
-				// Only non-preview pointlights
+				// @ sign is reserved
 				if (ID.front() != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -71,8 +78,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -86,8 +93,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -101,8 +108,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_getRadius(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -116,8 +123,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
@@ -131,8 +138,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_getIntensity(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
@@ -146,8 +153,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
@@ -161,8 +168,8 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
+			// Validate existence
+			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
 				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));

@@ -222,7 +222,7 @@ bool ScriptInterpreter::_executeFe3dCollisionGetterFunction(const string& functi
 				return true;
 			}
 
-			// Validate existing aabbEntity ID
+			// Validate existence
 			if (_validateFe3dAabb(arguments[0].getString()))
 			{
 				// Temporary values

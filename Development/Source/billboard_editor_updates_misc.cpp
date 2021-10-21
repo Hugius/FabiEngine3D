@@ -29,12 +29,6 @@ void BillboardEditor::_updateCamera()
 		// Hide cursor
 		_fe3d.imageEntity_setVisible("@@cursor", false);
 
-		// Disable shadows
-		if (_fe3d.gfx_isShadowsEnabled())
-		{
-			_fe3d.gfx_disableShadows();
-		}
-
 		// Update shadows
 		const auto distance = _fe3d.camera_getThirdPersonDistance();
 		_fe3d.gfx_setShadowEyePosition(Vec3(cameraLookat + Vec3(distance * 2.0f)));

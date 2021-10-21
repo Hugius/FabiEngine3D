@@ -114,7 +114,7 @@ void AnimationEditor::_updateChoiceMenu()
 				}
 			}
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("addFrame")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("create")->isHovered())
 		{
 			// Copy current frame
 			auto lastFrameCopy = currentAnimation->getFrames()[_currentFrameIndex];
@@ -180,13 +180,13 @@ void AnimationEditor::_updateChoiceMenu()
 		bool isPlaying = (isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->getPreviewModelID()));
 		bool hasPreviewModel = _fe3d.modelEntity_isExisting(currentAnimation->getPreviewModelID());
 		screen->getButton("preview")->setHoverable(!isPlaying);
-		screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->getFrames().size() > 1);
+		screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && (currentAnimation->getFrames().size() > 1));
 		screen->getButton("stop")->setHoverable(isPlaying && hasPreviewModel);
-		screen->getButton("addFrame")->setHoverable(currentAnimation->getFrames().size() < MAX_FRAME_COUNT && !isPlaying && hasPreviewModel);
-		screen->getButton("edit")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
-		screen->getButton("delete")->setHoverable(currentAnimation->getFrames().size() > 1 && _currentFrameIndex > 0 && !isPlaying && hasPreviewModel);
-		screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
-		screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->getFrames().size() - 1) && !isPlaying && hasPreviewModel);
+		screen->getButton("create")->setHoverable((currentAnimation->getFrames().size() < MAX_FRAME_COUNT) && !isPlaying && hasPreviewModel);
+		screen->getButton("edit")->setHoverable((_currentFrameIndex > 0) && !isPlaying);
+		screen->getButton("delete")->setHoverable((currentAnimation->getFrames().size() > 1) && (_currentFrameIndex > 0) && !isPlaying && hasPreviewModel);
+		screen->getButton("prev")->setHoverable((_currentFrameIndex > 0) && !isPlaying);
+		screen->getButton("next")->setHoverable((_currentFrameIndex < (currentAnimation->getFrames().size() - 1)) && !isPlaying && hasPreviewModel);
 
 		// Update frame index display
 		if (!isPlaying)

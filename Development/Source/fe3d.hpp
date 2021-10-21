@@ -468,8 +468,9 @@ public:
 	void spotlightEntity_setPosition(const string& ID, Vec3 position);
 	void spotlightEntity_move(const string& ID, Vec3 change);
 	void spotlightEntity_moveTo(const string& ID, Vec3 target, float speed);
-	void spotlightEntity_setFrontVector(const string& ID, Vec3 front);
 	void spotlightEntity_setColor(const string& ID, Vec3 color);
+	void spotlightEntity_setYaw(const string& ID, float yaw);
+	void spotlightEntity_setPitch(const string& ID, float pitch);
 	void spotlightEntity_setIntensity(const string& ID, float intensity);
 	void spotlightEntity_setAngle(const string& ID, float angle);
 	void spotlightEntity_setDistance(const string& ID, float distance);
@@ -477,8 +478,9 @@ public:
 	// Spotlight entity interface - getters
 	const vector<string> spotlightEntity_getAllIDs();
 	const Vec3 spotlightEntity_getPosition(const string& ID);
-	const Vec3 spotlightEntity_getFrontVector(const string& ID);
 	const Vec3 spotlightEntity_getColor(const string& ID);
+	const float spotlightEntity_getYaw(const string& ID);
+	const float spotlightEntity_getPitch(const string& ID);
 	const float spotlightEntity_getIntensity(const string& ID);
 	const float spotlightEntity_getAngle(const string& ID);
 	const float spotlightEntity_getDistance(const string& ID);

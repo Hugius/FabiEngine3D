@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& functi
 	// Determine type of function
 	if (functionName == "fe3d:spotlight_place")
 	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
+		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
@@ -32,11 +32,12 @@ bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& functi
 			// Create spotlight
 			_fe3d.spotlightEntity_create(ID);
 			_fe3d.spotlightEntity_setPosition(ID, Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-			_fe3d.spotlightEntity_setFrontVector(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
-			_fe3d.spotlightEntity_setColor(ID, Vec3(arguments[7].getDecimal(), arguments[8].getDecimal(), arguments[9].getDecimal()));
-			_fe3d.spotlightEntity_setIntensity(ID, arguments[10].getDecimal());
-			_fe3d.spotlightEntity_setAngle(ID, arguments[11].getDecimal());
-			_fe3d.spotlightEntity_setDistance(ID, arguments[12].getDecimal());
+			_fe3d.spotlightEntity_setColor(ID, Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()));
+			_fe3d.spotlightEntity_setYaw(ID, arguments[7].getDecimal());
+			_fe3d.spotlightEntity_setPitch(ID, arguments[8].getDecimal());
+			_fe3d.spotlightEntity_setIntensity(ID, arguments[9].getDecimal());
+			_fe3d.spotlightEntity_setAngle(ID, arguments[10].getDecimal());
+			_fe3d.spotlightEntity_setDistance(ID, arguments[11].getDecimal());
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -120,22 +121,6 @@ bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:spotlight_set_front_vector")
-	{
-		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing spotlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
-			{
-				_fe3d.spotlightEntity_setFrontVector(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
-				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
-			}
-		}
-	}
 	else if (functionName == "fe3d:spotlight_set_color")
 	{
 		auto types = { SVT::STRING, SVT::DECIMAL, SVT::DECIMAL, SVT::DECIMAL };
@@ -148,6 +133,36 @@ bool ScriptInterpreter::_executeFe3dSpotlightSetterFunction(const string& functi
 			{
 				_fe3d.spotlightEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:spotlight_set_yaw")
+	{
+		auto types = { SVT::STRING, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing spotlight ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				_fe3d.spotlightEntity_setYaw(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:spotlight_set_pitch")
+	{
+		auto types = { SVT::STRING, SVT::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing spotlight ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				_fe3d.spotlightEntity_setPitch(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 			}
 		}

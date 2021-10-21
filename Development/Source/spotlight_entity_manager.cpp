@@ -42,6 +42,7 @@ void SpotlightEntityManager::update()
 		if (entity->isVisible())
 		{
 			entity->updateTransformation();
+			entity->updateFrontVector();
 		}
 	}
 }

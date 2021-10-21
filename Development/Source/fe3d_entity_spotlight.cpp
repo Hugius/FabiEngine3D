@@ -42,14 +42,19 @@ void FabiEngine3D::spotlightEntity_moveTo(const string& ID, Vec3 target, float s
 	_core->_spotlightEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::spotlightEntity_setFrontVector(const string& ID, Vec3 front)
-{
-	_core->_spotlightEntityManager.getEntity(ID)->setFrontVector(front);
-}
-
 void FabiEngine3D::spotlightEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_spotlightEntityManager.getEntity(ID)->setColor(color);
+}
+
+void FabiEngine3D::spotlightEntity_setYaw(const string& ID, float yaw)
+{
+	_core->_spotlightEntityManager.getEntity(ID)->setYaw(yaw);
+}
+
+void FabiEngine3D::spotlightEntity_setPitch(const string& ID, float pitch)
+{
+	_core->_spotlightEntityManager.getEntity(ID)->setPitch(pitch);
 }
 
 void FabiEngine3D::spotlightEntity_setIntensity(const string& ID, float intensity)
@@ -84,14 +89,19 @@ const Vec3 FabiEngine3D::spotlightEntity_getPosition(const string& ID)
 	return _core->_spotlightEntityManager.getEntity(ID)->getPosition();
 }
 
-const Vec3 FabiEngine3D::spotlightEntity_getFrontVector(const string& ID)
-{
-	return _core->_spotlightEntityManager.getEntity(ID)->getFrontVector();
-}
-
 const Vec3 FabiEngine3D::spotlightEntity_getColor(const string& ID)
 {
 	return _core->_spotlightEntityManager.getEntity(ID)->getColor();
+}
+
+const float FabiEngine3D::spotlightEntity_getYaw(const string& ID)
+{
+	return _core->_spotlightEntityManager.getEntity(ID)->getYaw();
+}
+
+const float FabiEngine3D::spotlightEntity_getPitch(const string& ID)
+{
+	return _core->_spotlightEntityManager.getEntity(ID)->getPitch();
 }
 
 const float FabiEngine3D::spotlightEntity_getIntensity(const string& ID)

@@ -94,21 +94,6 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:spotlight_get_front_vector")
-	{
-		auto types = { SVT::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing entity ID
-			if (_validateFe3dLight(arguments[0].getString()))
-			{
-				auto result = _fe3d.spotlightEntity_getFrontVector(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:spotlight_get_color")
 	{
 		auto types = { SVT::STRING };
@@ -121,6 +106,36 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 			{
 				auto result = _fe3d.spotlightEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:spotlight_get_yaw")
+	{
+		auto types = { SVT::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing entity ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlightEntity_getYaw(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:spotlight_get_pitch")
+	{
+		auto types = { SVT::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing entity ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlightEntity_getPitch(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}

@@ -13,7 +13,7 @@ public:
 	void setPosition(Vec3 value);
 	void move(Vec3 value);
 	void moveTo(Vec3 target, float speed);
-	void setFront(Vec3 value);
+	void setFrontVector(Vec3 value);
 	void setColor(Vec3 value);
 	void setIntensity(float value);
 	void setAngle(float value);
@@ -21,7 +21,7 @@ public:
 
 	// Vectors
 	const Vec3 getPosition();
-	const Vec3 getFront();
+	const Vec3 getFrontVector();
 	const Vec3 getColor();
 
 	// Floats
@@ -33,7 +33,7 @@ private:
 	// Vectors
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _positionTarget = Vec3(0.0f);
-	Vec3 _front = Vec3(0.0f);
+	Vec3 _frontVector = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 
 	// Floats

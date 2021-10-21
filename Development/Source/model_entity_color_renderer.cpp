@@ -125,10 +125,10 @@ void ModelEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 	for (unsigned int i = 0; i < visibleEntities.size(); i++)
 	{
 		_shader.uploadUniform("u_spotlightPositions[" + to_string(i) + "]", visibleEntities[i]->getPosition());
-		_shader.uploadUniform("u_spotlightFronts[" + to_string(i) + "]", visibleEntities[i]->getFront());
+		_shader.uploadUniform("u_spotlightFronts[" + to_string(i) + "]", visibleEntities[i]->getFrontVector());
 		_shader.uploadUniform("u_spotlightColors[" + to_string(i) + "]", visibleEntities[i]->getColor());
 		_shader.uploadUniform("u_spotlightIntensities[" + to_string(i) + "]", visibleEntities[i]->getIntensity());
-		_shader.uploadUniform("u_spotlightAngles[" + to_string(i) + "]", visibleEntities[i]->getAngle());
+		_shader.uploadUniform("u_spotlightAngles[" + to_string(i) + "]", cosf(Math::convertToRadians(visibleEntities[i]->getAngle())));
 		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 

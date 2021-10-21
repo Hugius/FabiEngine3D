@@ -42,9 +42,9 @@ void FabiEngine3D::spotlightEntity_moveTo(const string& ID, Vec3 target, float s
 	_core->_spotlightEntityManager.getEntity(ID)->moveTo(target, speed);
 }
 
-void FabiEngine3D::spotlightEntity_setFront(const string& ID, Vec3 front)
+void FabiEngine3D::spotlightEntity_setFrontVector(const string& ID, Vec3 front)
 {
-	_core->_spotlightEntityManager.getEntity(ID)->setFront(front);
+	_core->_spotlightEntityManager.getEntity(ID)->setFrontVector(front);
 }
 
 void FabiEngine3D::spotlightEntity_setColor(const string& ID, Vec3 color)
@@ -84,9 +84,9 @@ const Vec3 FabiEngine3D::spotlightEntity_getPosition(const string& ID)
 	return _core->_spotlightEntityManager.getEntity(ID)->getPosition();
 }
 
-const Vec3 FabiEngine3D::spotlightEntity_getFront(const string& ID)
+const Vec3 FabiEngine3D::spotlightEntity_getFrontVector(const string& ID)
 {
-	return _core->_spotlightEntityManager.getEntity(ID)->getFront();
+	return _core->_spotlightEntityManager.getEntity(ID)->getFrontVector();
 }
 
 const Vec3 FabiEngine3D::spotlightEntity_getColor(const string& ID)

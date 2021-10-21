@@ -46,6 +46,7 @@ public:
 	// Vectors
 	const Vec3 getUpVector();
 	const Vec3 getFrontVector();
+	const Vec3 getRightVector();
 	const Vec3 getPosition();
 	const Vec3 getThirdPersonLookat();
 

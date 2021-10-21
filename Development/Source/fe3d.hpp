@@ -468,7 +468,7 @@ public:
 	void spotlightEntity_setPosition(const string& ID, Vec3 position);
 	void spotlightEntity_move(const string& ID, Vec3 change);
 	void spotlightEntity_moveTo(const string& ID, Vec3 target, float speed);
-	void spotlightEntity_setFront(const string& ID, Vec3 front);
+	void spotlightEntity_setFrontVector(const string& ID, Vec3 front);
 	void spotlightEntity_setColor(const string& ID, Vec3 color);
 	void spotlightEntity_setIntensity(const string& ID, float intensity);
 	void spotlightEntity_setAngle(const string& ID, float angle);
@@ -477,7 +477,7 @@ public:
 	// Spotlight entity interface - getters
 	const vector<string> spotlightEntity_getAllIDs();
 	const Vec3 spotlightEntity_getPosition(const string& ID);
-	const Vec3 spotlightEntity_getFront(const string& ID);
+	const Vec3 spotlightEntity_getFrontVector(const string& ID);
 	const Vec3 spotlightEntity_getColor(const string& ID);
 	const float spotlightEntity_getIntensity(const string& ID);
 	const float spotlightEntity_getAngle(const string& ID);
@@ -676,6 +676,9 @@ public:
 
 	// Camera interface - getters
 	const Vec3 camera_getPosition();
+	const Vec3 camera_getUpVector();
+	const Vec3 camera_getFrontVector();
+	const Vec3 camera_getRightVector();
 	const Vec3 camera_getThirdPersonLookat();
 	const float camera_getFOV();
 	const float getAspectRatio();

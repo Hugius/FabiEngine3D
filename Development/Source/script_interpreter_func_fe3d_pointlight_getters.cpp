@@ -94,6 +94,21 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 			}
 		}
 	}
+	else if (functionName == "fe3d:pointlight_get_radius")
+	{
+		auto types = { SVT::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing pointlight ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				auto result = _fe3d.pointlightEntity_getRadius(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:pointlight_get_color")
 	{
 		auto types = { SVT::STRING };
@@ -120,21 +135,6 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
 				auto result = _fe3d.pointlightEntity_getIntensity(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:pointlight_get_radius")
-	{
-		auto types = { SVT::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
-			{
-				auto result = _fe3d.pointlightEntity_getRadius(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}

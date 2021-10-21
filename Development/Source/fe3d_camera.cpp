@@ -215,6 +215,21 @@ const Vec3 FabiEngine3D::camera_getPosition()
 	return _core->_camera.getPosition();
 }
 
+const Vec3 FabiEngine3D::camera_getUpVector()
+{
+	return _core->_camera.getUpVector();
+}
+
+const Vec3 FabiEngine3D::camera_getFrontVector()
+{
+	return _core->_camera.getFrontVector();
+}
+
+const Vec3 FabiEngine3D::camera_getRightVector()
+{
+	return _core->_camera.getRightVector();
+}
+
 const Vec3 FabiEngine3D::camera_getThirdPersonLookat()
 {
 	return _core->_camera.getThirdPersonLookat();

@@ -72,6 +72,8 @@ bool ScriptInterpreter::_validateFe3dImage(const string& ID)
 
 bool ScriptInterpreter::_validateFe3dLight(const string& ID)
 {
+	return true;
+
 	// Just to be consistent with not starting entity ID's with '@'
 	if (ID.front() == '@')
 	{

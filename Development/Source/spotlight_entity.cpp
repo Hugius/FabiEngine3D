@@ -47,9 +47,9 @@ void SpotlightEntity::moveTo(Vec3 target, float speed)
 	_positionTargetSpeed = speed;
 }
 
-void SpotlightEntity::setFront(Vec3 value)
+void SpotlightEntity::setFrontVector(Vec3 value)
 {
-	_front = Vec3(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f), clamp(value.z, -1.0f, 1.0f));;
+	_frontVector = Vec3(clamp(value.x, -1.0f, 1.0f), clamp(value.y, -1.0f, 1.0f), clamp(value.z, -1.0f, 1.0f));;
 }
 
 void SpotlightEntity::setColor(Vec3 value)
@@ -77,9 +77,9 @@ const Vec3 SpotlightEntity::getPosition()
 	return _position;
 }
 
-const Vec3 SpotlightEntity::getFront()
+const Vec3 SpotlightEntity::getFrontVector()
 {
-	return _front;
+	return _frontVector;
 }
 
 const Vec3 SpotlightEntity::getColor()

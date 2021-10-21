@@ -14,6 +14,33 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 		}
 	}
+	else if (functionName == "fe3d:camera_get_up_vector")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getUpVector();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_front_vector")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getFrontVector();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_right_vector")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getRightVector();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+		}
+	}
 	else if (functionName == "fe3d:camera_get_yaw")
 	{
 		// Validate arguments

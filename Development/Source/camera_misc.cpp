@@ -152,6 +152,11 @@ const Vec3 Camera::getFrontVector()
 	return _frontVector;
 }
 
+const Vec3 Camera::getRightVector()
+{
+	return _rightVector;
+}
+
 const Vec3 Camera::getThirdPersonLookat()
 {
 	return _thirdPersonLookat;

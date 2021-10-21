@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:light_is_existing")
+	if (functionName == "fe3d:spotlight_is_existing")
 	{
 		auto types = { SVT::STRING };
 
@@ -13,11 +13,11 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Check if existing
-			auto result = _fe3d.pointlightEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.spotlightEntity_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:light_find_ids")
+	else if (functionName == "fe3d:spotlight_find_ids")
 	{
 		auto types = { SVT::STRING };
 
@@ -27,17 +27,17 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 			// Cannot request a preview entity
 			if (arguments[0].getString().front() == '@')
 			{
-				_throwScriptError("ID of requested light with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
+				_throwScriptError("ID of requested spotlight with ID \"" + arguments[0].getString() + "\" cannot start with '@'");
 				return true;
 			}
 
 			// Find full entity IDs based on part ID
-			for (const auto& ID : _fe3d.pointlightEntity_getAllIDs())
+			for (const auto& ID : _fe3d.spotlightEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					// Only non-preview lights
+					// Only non-preview spotlights
 					if (ID.front() != '@')
 					{
 						returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -46,17 +46,17 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_all_ids")
+	else if (functionName == "fe3d:spotlight_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.pointlightEntity_getAllIDs();
+			auto result = _fe3d.spotlightEntity_getAllIDs();
 
-			// For every light
+			// For every spotlight
 			for (const auto& ID : result)
 			{
-				// Only non-preview lights
+				// Only non-preview spotlights
 				if (ID.front() != '@')
 				{
 					returnValues.push_back(ScriptValue(_fe3d, SVT::STRING, ID));
@@ -64,108 +64,108 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_is_visible")
+	else if (functionName == "fe3d:spotlight_is_visible")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = _fe3d.pointlightEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.spotlightEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_position")
+	else if (functionName == "fe3d:spotlight_get_position")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = _fe3d.pointlightEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.spotlightEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_color")
+	else if (functionName == "fe3d:spotlight_get_front_vector")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = _fe3d.pointlightEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.spotlightEntity_getFrontVector(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_intensity")
+	else if (functionName == "fe3d:spotlight_get_color")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = _fe3d.pointlightEntity_getIntensity(arguments[0].getString());
+				auto result = _fe3d.spotlightEntity_getColor(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:spotlight_get_intensity")
+	{
+		auto types = { SVT::STRING };
+
+		// Validate arguments
+		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing entity ID
+			if (_validateFe3dLight(arguments[0].getString()))
+			{
+				auto result = _fe3d.spotlightEntity_getIntensity(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_radius")
+	else if (functionName == "fe3d:spotlight_get_angle")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = _fe3d.pointlightEntity_getRadius(arguments[0].getString());
+				auto result = _fe3d.spotlightEntity_getAngle(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_is_circle_shape")
+	else if (functionName == "fe3d:spotlight_get_distance")
 	{
 		auto types = { SVT::STRING };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			// Validate existing pointlight ID
+			// Validate existing entity ID
 			if (_validateFe3dLight(arguments[0].getString()))
 			{
-				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:light_is_square_shape")
-	{
-		auto types = { SVT::STRING };
-
-		// Validate arguments
-		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing pointlight ID
-			if (_validateFe3dLight(arguments[0].getString()))
-			{
-				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
-				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
+				auto result = _fe3d.spotlightEntity_getDistance(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 			}
 		}
 	}
@@ -174,10 +174,10 @@ bool ScriptInterpreter::_executeFe3dSpotlightGetterFunction(const string& functi
 		return false;
 	}
 
-	// Cannot execute light functionality when server is running
+	// Cannot execute spotlight functionality when server is running
 	if (_fe3d.networkServer_isRunning())
 	{
-		_throwScriptError("cannot access `fe3d:light` functionality as a networking server!");
+		_throwScriptError("cannot access `fe3d:spotlight` functionality as a networking server!");
 	}
 
 	// Return

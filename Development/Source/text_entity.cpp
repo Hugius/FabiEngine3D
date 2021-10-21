@@ -49,7 +49,12 @@ void TextEntity::updateCharacterEntities()
 		character->setMinPosition(this->getMinPosition());
 		character->setMaxPosition(this->getMaxPosition());
 		character->setVisible(this->isVisible());
-		character->updateTransformationMatrix();
+
+		// Update transformation matrix
+		if (this->isVisible())
+		{
+			character->updateTransformationMatrix();
+		}
 
 		// Miscellaneous
 		index++;

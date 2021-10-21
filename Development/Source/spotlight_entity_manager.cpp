@@ -39,9 +39,12 @@ void SpotlightEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getSpotlightEntities())
 	{
+		// Update transformation
+		entity->updateTransformation();
+
+		// Update front vector
 		if (entity->isVisible())
 		{
-			entity->updateTransformation();
 			entity->updateFrontVector();
 		}
 	}

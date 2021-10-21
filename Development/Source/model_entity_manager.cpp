@@ -105,11 +105,12 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 {
 	for (const auto& [keyID, entity] : _getModelEntities())
 	{
+		// Update transformation
+		entity->updateTransformation();
+
+		// Update model if visible
 		if (entity->isVisible())
 		{
-			// Update transformation
-			entity->updateTransformation();
-
 			// Check if model has LOD
 			if (!entity->getLevelOfDetailEntityID().empty())
 			{

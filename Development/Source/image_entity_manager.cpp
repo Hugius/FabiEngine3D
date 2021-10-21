@@ -35,51 +35,67 @@ void ImageEntityManager::createEntity(const string& ID, bool isCentered)
 	getEntity(ID)->setRenderBuffer(isCentered ? _centeredRenderBuffer : _nonCenteredRenderBuffer);
 }
 
-void ImageEntityManager::updateSpriteAnimations()
-{
-	for (const auto& [keyID, entity] : _getImageEntities())
-	{
-		if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused() &&
-			entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
-		{
-			if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
-			{
-				entity->resetPassedSpriteAnimationFrames(); // Reset counter
-
-				if (entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
-				{
-					entity->setSpriteAnimationColumnIndex(0); // Reset column index
-
-					if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
-					{
-						entity->increaseSpriteAnimationLoops();
-						entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
-					}
-					else // Next row
-					{
-						entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
-					}
-				}
-				else // Next column
-				{
-					entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
-				}
-			}
-			else // Increase counter
-			{
-				entity->increasePassedSpriteAnimationFrames();
-			}
-		}
-	}
-}
-
 void ImageEntityManager::update()
 {
+	Logger::throwError("ImageEntityManager::update");
+}
+
+void ImageEntityManager::update(bool isEnginePaused)
+{
 	for (const auto& [keyID, entity] : _getImageEntities())
 	{
+		// Update transformation
+		entity->updateTransformation();
+
+		// Update sprite animation
+		if (!isEnginePaused)
+		{
+			// Animation is playing
+			if (entity->isSpriteAnimationStarted() && !entity->isSpriteAnimationPaused())
+			{
+				// Amount of loops not reached yet
+				if (entity->getSpriteAnimationLoops() != entity->getMaxSpriteAnimationLoops())
+				{
+					// Animation not finished yet
+					if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep())
+					{
+						// Reset frame counter
+						entity->resetPassedSpriteAnimationFrames();
+
+						// Reached total columns
+						if (entity->getSpriteAnimationColumnIndex() >= (entity->getTotalSpriteAnimationColumns() - 1))
+						{
+							// Reset column index
+							entity->setSpriteAnimationColumnIndex(0);
+
+							// Reached total rows
+							if (entity->getSpriteAnimationRowIndex() >= (entity->getTotalSpriteAnimationRows() - 1))
+							{
+								// Reset row index (animation finished)
+								entity->setSpriteAnimationRowIndex(0);
+								entity->increaseSpriteAnimationLoops();
+							}
+							else // Next row
+							{
+								entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
+							}
+						}
+						else // Next column
+						{
+							entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
+						}
+					}
+					else // Increase frame counter
+					{
+						entity->increasePassedSpriteAnimationFrames();
+					}
+				}
+			}
+		}
+
+		// Update transformation matrix
 		if (entity->isVisible())
 		{
-			entity->updateTransformation();
 			entity->updateTransformationMatrix();
 		}
 	}

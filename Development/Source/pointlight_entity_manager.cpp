@@ -39,9 +39,6 @@ void PointlightEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getPointlightEntities())
 	{
-		if (entity->isVisible())
-		{
-			entity->updateTransformation();
-		}
+		entity->updateTransformation();
 	}
 }

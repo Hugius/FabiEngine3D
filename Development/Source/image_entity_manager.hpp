@@ -13,7 +13,7 @@ public:
 
 	void createEntity(const string& ID, bool isCentered);
 	void update() override;
-	void updateSpriteAnimations();
+	void update(bool isEnginePaused);
 
 private:
 	const shared_ptr<RenderBuffer> _centeredRenderBuffer;

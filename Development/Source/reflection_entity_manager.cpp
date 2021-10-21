@@ -50,9 +50,6 @@ void ReflectionEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getReflectionEntities())
 	{
-		if (entity->isVisible())
-		{
-			entity->updateTransformation();
-		}
+		entity->updateTransformation();
 	}
 }

@@ -45,14 +45,14 @@ void TextEntityManager::loadCharacters(const string& ID)
 	if ((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
 	{
 		// Temporary values
-		bool invalidFont = false;
+		bool isInvalidFont = false;
 		_textContentMap[ID] = entity->getTextContent();
 		entity->deleteCharacterEntities();
 
 		// For every character
 		for (const auto& c : entity->getTextContent())
 		{
-			if (!invalidFont)
+			if (!isInvalidFont)
 			{
 				// Create new character entity
 				auto newCharacter = make_shared<ImageEntity>("uselessID");
@@ -71,7 +71,7 @@ void TextEntityManager::loadCharacters(const string& ID)
 				}
 				else
 				{
-					invalidFont = true;
+					isInvalidFont = true;
 				}
 			}
 		}
@@ -91,17 +91,18 @@ void TextEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getTextEntities())
 	{
-		if (entity->isVisible())
-		{
-			// Update transformation
-			entity->updateTransformation();
+		// Update transformation
+		entity->updateTransformation();
 
-			// Update
-			if (entity->isDynamic())
-			{
-				entity->updateCharacterEntities();
-			}
-			else
+		// Update characters
+		if (entity->isDynamic())
+		{
+			entity->updateCharacterEntities();
+		}
+		else
+		{
+			// Update transformation matrix
+			if (entity->isVisible())
 			{
 				entity->updateTransformationMatrix();
 			}

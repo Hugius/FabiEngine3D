@@ -162,9 +162,11 @@ void SkyEntityManager::update()
 		}
 
 		// Update rotation
+		mainSky->setRotation(mainSky->getRotation() + mainSky->getRotationSpeed());
+
+		// Update rotation matrix
 		if (mainSky->isVisible())
 		{
-			mainSky->setRotation(mainSky->getRotation() + mainSky->getRotationSpeed());
 			mainSky->updateRotationMatrix();
 		}
 	}

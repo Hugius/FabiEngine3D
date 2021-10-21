@@ -164,7 +164,7 @@ void WaterEntityManager::update()
 	// Update all water entities
 	for (const auto& [keyID, entity] : _getWaterEntities())
 	{
-		// Update water animations
+		// Update water if visible
 		if (entity->isVisible())
 		{
 			// Update ripple offset

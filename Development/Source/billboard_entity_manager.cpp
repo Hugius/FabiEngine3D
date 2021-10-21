@@ -50,11 +50,12 @@ void BillboardEntityManager::update()
 {
 	for (const auto& [keyID, entity] : _getBillboardEntities())
 	{
+		// Update transformation
+		entity->updateTransformation();
+
+		// Update billboard if visible
 		if (entity->isVisible())
 		{
-			// Update transformation
-			entity->updateTransformation();
-
 			// 3D camera facing
 			auto facingX = entity->isFacingCameraX();
 			auto facingY = entity->isFacingCameraY();

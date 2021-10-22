@@ -91,7 +91,7 @@ void SceneEditor::load()
 			createButton(audioID, audioID.substr(1));
 	}
 
-	// Load preview light
+	// Load preview pointlight
 	_fe3d.modelEntity_create(PREVIEW_LAMP_ID, LAMP_MODEL_PATH);
 	_fe3d.modelEntity_setBaseSize(PREVIEW_LAMP_ID, DEFAULT_LAMP_SIZE);
 	_fe3d.modelEntity_setShadowed(PREVIEW_LAMP_ID, false);
@@ -99,8 +99,8 @@ void SceneEditor::load()
 	_fe3d.modelEntity_setBright(PREVIEW_LAMP_ID, true);
 	_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
 	_fe3d.pointlightEntity_create(PREVIEW_LAMP_ID);
-	_fe3d.pointlightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_LIGHT_RADIUS));
-	_fe3d.pointlightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_LIGHT_INTENSITY);
+	_fe3d.pointlightEntity_setRadius(PREVIEW_LAMP_ID, Vec3(DEFAULT_POINTLIGHT_RADIUS));
+	_fe3d.pointlightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
 	_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
 	// Load preview reflection
@@ -157,10 +157,10 @@ void SceneEditor::unload()
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
-	_customSceneLightIDs.clear();
+	_customScenePointlightIDs.clear();
 	_customSceneReflectionIDs.clear();
 	_loadedAabbIDs.clear();
-	_loadedLightIDs.clear();
+	_loadedPointlightIDs.clear();
 	_loadedReflectionIDs.clear();
 	_customSceneID = "";
 	_loadedSkyID = "";
@@ -205,7 +205,7 @@ void SceneEditor::unload()
 	_dontResetSelectedSpeaker = false;
 	_dontResetSelectedLamp = false;
 	_dontResetSelectedCamera = false;
-	_isPlacingLight = false;
+	_isPlacingPointlight = false;
 	_isPlacingReflection = false;
 	_isEditorLoaded = false;
 	_isChoosingScene = false;

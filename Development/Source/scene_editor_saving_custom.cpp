@@ -468,7 +468,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	{
 		// Check if allowed to save
 		bool isCustomSceneLight =
-			find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
+			find(_customScenePointlightIDs.begin(), _customScenePointlightIDs.end(), lightID) != _customScenePointlightIDs.end();
 		if ((lightID[0] != '@') && isCustomSceneLight)
 		{
 			// Data to save
@@ -479,7 +479,7 @@ bool SceneEditor::saveCustomSceneToFile()
 
 			// Write data
 			file <<
-				"LIGHT " <<
+				"POINTLIGHT " <<
 				lightID << " " <<
 				position.x << " " <<
 				position.y << " " <<
@@ -687,7 +687,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
-	_customSceneLightIDs.clear();
+	_customScenePointlightIDs.clear();
 
 	// Return
 	return true;

@@ -335,7 +335,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.sound_play(soundID, -1, 0);
 			}
 		}
-		else if (lineType == "LIGHT")
+		else if (lineType == "POINTLIGHT")
 		{
 			// Data placeholders
 			string lightID;
@@ -384,8 +384,8 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			_fe3d.pointlightEntity_setRadius(lightID, radius);
 			_fe3d.pointlightEntity_setColor(lightID, color);
 			_fe3d.pointlightEntity_setIntensity(lightID, intensity);
-			_fe3d.pointlightEntity_setShape(lightID, LightShape(shape));
-			_loadedLightIDs.push_back(lightID);
+			_fe3d.pointlightEntity_setShape(lightID, PointlightShape(shape));
+			_loadedPointlightIDs.push_back(lightID);
 		}
 		else if (lineType == "REFLECTION")
 		{

@@ -87,19 +87,19 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightMenu();
+		_updatePointlightMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightChoosingMenu();
+		_updatePointlightChoosingMenu();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightPlacing();
+		_updatePointlightPlacing();
 	}
 	if (_isEditorLoaded)
 	{
-		_updateLightEditing();
+		_updatePointlightEditing();
 	}
 	if (_isEditorLoaded)
 	{
@@ -325,9 +325,9 @@ void SceneEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSound");
 		}
-		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("lights")->isHovered())
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("pointlights")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLight");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuPointlight");
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflections")->isHovered())
 		{
@@ -345,7 +345,7 @@ void SceneEditor::_updateChoiceMenu()
 			_currentPreviewModelID = "";
 			_currentPreviewBillboardID = "";
 			_currentPreviewSoundID = "";
-			_isPlacingLight = false;
+			_isPlacingPointlight = false;
 
 			// Save before closing
 			saveEditorSceneToFile();
@@ -372,7 +372,7 @@ void SceneEditor::_updateChoiceMenu()
 			_currentPreviewModelID = "";
 			_currentPreviewBillboardID = "";
 			_currentPreviewSoundID = "";
-			_isPlacingLight = false;
+			_isPlacingPointlight = false;
 
 			// Clear whole scene
 			clearCurrentScene();

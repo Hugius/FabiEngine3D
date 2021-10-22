@@ -253,23 +253,23 @@ bool SceneEditor::saveEditorSceneToFile()
 		}
 	}
 
-	// Lights
-	for (const auto& lightID : _fe3d.pointlightEntity_getAllIDs())
+	// Pointlights
+	for (const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		if (lightID[0] != '@')
+		if (pointlightID[0] != '@')
 		{
 			// Data to save
-			auto position = _fe3d.pointlightEntity_getPosition(lightID);
-			auto radius = _fe3d.pointlightEntity_getRadius(lightID);
-			auto color = _fe3d.pointlightEntity_getColor(lightID);
-			auto intensity = _fe3d.pointlightEntity_getIntensity(lightID);
-			auto shape = static_cast<unsigned int>(_fe3d.pointlightEntity_getShape(lightID));
+			auto position = _fe3d.pointlightEntity_getPosition(pointlightID);
+			auto radius = _fe3d.pointlightEntity_getRadius(pointlightID);
+			auto color = _fe3d.pointlightEntity_getColor(pointlightID);
+			auto intensity = _fe3d.pointlightEntity_getIntensity(pointlightID);
+			auto shape = static_cast<unsigned int>(_fe3d.pointlightEntity_getShape(pointlightID));
 
 			// Write data
 			file <<
-				"LIGHT " <<
-				lightID << " " <<
+				"POINTLIGHT " <<
+				pointlightID << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<

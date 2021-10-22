@@ -37,7 +37,7 @@ const  bool FabiEngine3D::pointlightEntity_isVisible(const string& ID)
 	return _core->_pointlightEntityManager.getEntity(ID)->isVisible();
 }
 
-const LightShape FabiEngine3D::pointlightEntity_getShape(const string& ID)
+const PointlightShape FabiEngine3D::pointlightEntity_getShape(const string& ID)
 {
 	return _core->_pointlightEntityManager.getEntity(ID)->getShape();
 }
@@ -72,7 +72,7 @@ void FabiEngine3D::pointlightEntity_setIntensity(const string& ID, float intensi
 	_core->_pointlightEntityManager.getEntity(ID)->setIntensity(intensity);
 }
 
-void FabiEngine3D::pointlightEntity_setShape(const string& ID, LightShape shape)
+void FabiEngine3D::pointlightEntity_setShape(const string& ID, PointlightShape shape)
 {
 	return _core->_pointlightEntityManager.getEntity(ID)->setShape(shape);
 }

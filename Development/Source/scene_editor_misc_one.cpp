@@ -158,10 +158,19 @@ void SceneEditor::_selectSound(const string& ID)
 	}
 }
 
-void SceneEditor::_selectLight(const string& ID)
+void SceneEditor::_selectPointlight(const string& ID)
 {
 	// Set ID
 	_selectedLampID = ("@@lamp_" + ID);
+
+	// Change cursor
+	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
+}
+
+void SceneEditor::_selectSpotlight(const string& ID)
+{
+	// Set ID
+	_selectedTorchID = ("@@torch_" + ID);
 
 	// Change cursor
 	_fe3d.imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
@@ -203,7 +212,7 @@ void SceneEditor::_activateSound(const string& ID)
 	_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), "Active sound: " + rawID, 0.025f);
 }
 
-void SceneEditor::_activateLight(const string& ID)
+void SceneEditor::_activatePointlight(const string& ID)
 {
 	// Set ID
 	_activeLampID = ("@@lamp_" + ID);
@@ -213,14 +222,34 @@ void SceneEditor::_activateLight(const string& ID)
 	auto position = _fe3d.modelEntity_getBasePosition(_activeLampID);
 
 	// Update buttons hoverability
-	rightWindow->getScreen("lightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("lightPropertiesMenu")->getButton("radius")->setHoverable(true);
-	rightWindow->getScreen("lightPropertiesMenu")->getButton("color")->setHoverable(true);
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("radius")->setHoverable(true);
+	rightWindow->getScreen("pointlightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 	// Filling writeFields
-	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
-	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
-	rightWindow->getScreen("lightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("pointlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
+}
+
+void SceneEditor::_activateSpotlight(const string& ID)
+{
+	// Set ID
+	_activeTorchID = ("@@torch_" + ID);
+
+	// Temporary values
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	auto position = _fe3d.modelEntity_getBasePosition(_activeTorchID);
+
+	// Update buttons hoverability
+	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
+	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("radius")->setHoverable(true);
+	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
+
+	// Filling writeFields
+	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("x")->changeTextContent(to_string(static_cast<int>(position.x)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("y")->changeTextContent(to_string(static_cast<int>(position.y)));
+	rightWindow->getScreen("spotlightPropertiesMenu")->getWriteField("z")->changeTextContent(to_string(static_cast<int>(position.z)));
 }
 
 void SceneEditor::_activateReflection(const string& ID)
@@ -256,7 +285,7 @@ void SceneEditor::_deactivateSound()
 	_fe3d.textEntity_setVisible(_gui.getGlobalScreen()->getTextField("soundID")->getEntityID(), false);
 }
 
-void SceneEditor::_deactivateLight()
+void SceneEditor::_deactivatePoinlight()
 {
 	_activeLampID = "";
 }

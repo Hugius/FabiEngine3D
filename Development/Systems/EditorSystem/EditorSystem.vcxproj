@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\Source\scene_editor_reflection_updates_place.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_settings_updates_lighting.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_sky_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_place.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_terrain_updates_main.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_main.cpp" />
     <ClCompile Include="..\..\Source\sky_editor_misc.cpp" />
@@ -90,9 +93,9 @@
     <ClCompile Include="..\..\Source\scene_editor_creation.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_water_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_gui.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_edit.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_place.cpp" />
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_main.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_edit.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_place.cpp" />
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_main.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_loading.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_loading_custom.cpp" />
     <ClCompile Include="..\..\Source\scene_editor_main.cpp" />

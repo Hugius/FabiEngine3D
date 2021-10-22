@@ -10,7 +10,7 @@
 #include "water_quality.hpp"
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
-#include "light_shape.hpp"
+#include "pointlight_shape.hpp"
 
 #include <array>
 #include <vector>
@@ -448,7 +448,7 @@ public:
 	void pointlightEntity_setRadius(const string& ID, Vec3 radius);
 	void pointlightEntity_setColor(const string& ID, Vec3 color);
 	void pointlightEntity_setIntensity(const string& ID, float intensity);
-	void pointlightEntity_setShape(const string& ID, LightShape shape);
+	void pointlightEntity_setShape(const string& ID, PointlightShape shape);
 
 	// Pointlight entity interface - getters
 	const vector<string> pointlightEntity_getAllIDs();
@@ -458,7 +458,7 @@ public:
 	const float pointlightEntity_getIntensity(const string& ID);
 	const bool pointlightEntity_isExisting(const string& ID);
 	const bool pointlightEntity_isVisible(const string& ID);
-	const LightShape pointlightEntity_getShape(const string& ID);
+	const PointlightShape pointlightEntity_getShape(const string& ID);
 
 	// Spotlight entity interface - setters
 	void spotlightEntity_create(const string& ID);

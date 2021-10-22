@@ -215,7 +215,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete pointlight entities
-	for (const auto& ID : _loadedLightIDs)
+	for (const auto& ID : _loadedPointlightIDs)
 	{
 		if (_fe3d.pointlightEntity_isExisting(ID))
 		{
@@ -254,7 +254,7 @@ void SceneEditor::clearCurrentScene()
 	_loadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
 	_loadedSoundIDs.clear();
-	_loadedLightIDs.clear();
+	_loadedPointlightIDs.clear();
 	_loadedReflectionIDs.clear();
 }
 
@@ -271,7 +271,7 @@ void SceneEditor::createCustomScene(const string& ID)
 	_customSceneBillboardIDs.clear();
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
-	_customSceneLightIDs.clear();
+	_customScenePointlightIDs.clear();
 }
 
 void SceneEditor::addLightingToCustomScene()
@@ -382,15 +382,27 @@ void SceneEditor::addSoundToCustomScene(const string& ID)
 	}
 }
 
-void SceneEditor::addLightToCustomScene(const string& ID)
+void SceneEditor::addPointlightToCustomScene(const string& ID)
 {
 	if (!_customSceneID.empty())
 	{
-		_customSceneLightIDs.push_back(ID);
+		_customScenePointlightIDs.push_back(ID);
 	}
 	else
 	{
-		Logger::throwWarning("Cannot add light to custom scene!");
+		Logger::throwWarning("Cannot add pointlight to custom scene!");
+	}
+}
+
+void SceneEditor::addSpotlightToCustomScene(const string& ID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneSpotlightIDs.push_back(ID);
+	}
+	else
+	{
+		Logger::throwWarning("Cannot add spotlight to custom scene!");
 	}
 }
 

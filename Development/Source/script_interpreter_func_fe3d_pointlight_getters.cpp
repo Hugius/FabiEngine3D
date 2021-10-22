@@ -156,7 +156,7 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 			// Validate existence
 			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
-				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::CIRCLE);
+				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == PointlightShape::CIRCLE);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}
@@ -171,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dPointlightGetterFunction(const string& funct
 			// Validate existence
 			if (_validateFe3dPointlight(arguments[0].getString()))
 			{
-				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == LightShape::SQUARE);
+				auto result = (_fe3d.pointlightEntity_getShape(arguments[0].getString()) == PointlightShape::SQUARE);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 			}
 		}

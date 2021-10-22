@@ -93,7 +93,7 @@
     <ClInclude Include="..\..\Source\camera.hpp">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\light_shape.hpp">
+    <ClInclude Include="..\..\Source\pointlight_shape.hpp">
       <Filter>Enums</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\direction_order.hpp">

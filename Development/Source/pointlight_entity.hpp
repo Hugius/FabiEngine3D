@@ -2,7 +2,7 @@
 
 #include "base_entity.hpp"
 #include "mathematics.hpp"
-#include "light_shape.hpp"
+#include "pointlight_shape.hpp"
 
 class PointlightEntity final : public BaseEntity
 {
@@ -17,7 +17,7 @@ public:
 	void setRadius(Vec3 value);
 	void setColor(Vec3 value);
 	void setIntensity(float value);
-	void setShape(LightShape value);
+	void setShape(PointlightShape value);
 
 	// Vectors
 	const Vec3 getPosition();
@@ -28,7 +28,7 @@ public:
 	const float getIntensity();
 
 	// Miscellaneous
-	const LightShape getShape();
+	const PointlightShape getShape();
 
 private:
 	// Vectors
@@ -42,5 +42,5 @@ private:
 	float _intensity = 1.0f;
 
 	// Miscellaneous
-	LightShape _shape = LightShape::CIRCLE;
+	PointlightShape _shape = PointlightShape::CIRCLE;
 };

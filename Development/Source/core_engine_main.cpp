@@ -164,7 +164,6 @@ void CoreEngine::_prepareApplication()
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "camera.obj")) ||
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "cube.obj")) ||
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "lamp.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "plane.obj")) ||
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "speaker.obj")) ||
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "a.png")) ||
 			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "b.png")) ||

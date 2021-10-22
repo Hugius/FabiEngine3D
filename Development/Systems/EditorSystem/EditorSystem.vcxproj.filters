@@ -121,9 +121,6 @@
     <Filter Include="Scene Editor\Billboard">
       <UniqueIdentifier>{f2bb771e-b877-4eae-91b1-20e1208ed48c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene Editor\Light">
-      <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene Editor\Model">
       <UniqueIdentifier>{0725081c-ce09-4ba4-aca4-247cf8a4eb32}</UniqueIdentifier>
     </Filter>
@@ -171,6 +168,12 @@
     </Filter>
     <Filter Include="Animation Editor\Persistence">
       <UniqueIdentifier>{f67f8919-3990-4cee-b59b-97e1c29774c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Pointlight">
+      <UniqueIdentifier>{6ec4ef62-8c51-427c-9abf-329dbdc1b9b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene Editor\Spotlight">
+      <UniqueIdentifier>{aea86504-0afd-4aef-8db1-993fe0469761}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,14 +261,14 @@
     <ClCompile Include="..\..\Source\scene_editor_updates_main.cpp">
       <Filter>Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_edit.cpp">
-      <Filter>Scene Editor\Light</Filter>
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_edit.cpp">
+      <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_place.cpp">
-      <Filter>Scene Editor\Light</Filter>
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_place.cpp">
+      <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\scene_editor_light_updates_main.cpp">
-      <Filter>Scene Editor\Light</Filter>
+    <ClCompile Include="..\..\Source\scene_editor_pointlight_updates_main.cpp">
+      <Filter>Scene Editor\Pointlight</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\scene_editor_settings_updates_one.cpp">
       <Filter>Scene Editor\Settings</Filter>
@@ -467,6 +470,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\animation_editor_persistence.cpp">
       <Filter>Animation Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_edit.cpp">
+      <Filter>Scene Editor\Spotlight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_main.cpp">
+      <Filter>Scene Editor\Spotlight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\scene_editor_spotlight_updates_place.cpp">
+      <Filter>Scene Editor\Spotlight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

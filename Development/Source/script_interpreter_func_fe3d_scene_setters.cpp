@@ -115,7 +115,7 @@ bool ScriptInterpreter::_executeFe3dSceneSetterFunction(const string& functionNa
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_sceneEditor.addLightToCustomScene(arguments[0].getString());
+			_sceneEditor.addPointlightToCustomScene(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

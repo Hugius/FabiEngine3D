@@ -21,7 +21,7 @@ void SceneEditor::_loadGUI()
 	leftWindow->getScreen("sceneEditorMenuMain")->createButton("back", Vec2(0.0f, positions[3]), Vec2(TW("Go Back"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go Back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Left-viewport: sceneEditorMenuChoice
-	positions = VPC::calculateButtonPositions(10, CH);
+	positions = VPC::calculateButtonPositions(11, CH);
 	leftWindow->createScreen("sceneEditorMenuChoice");
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("sky", Vec2(0.0f, positions[0]), Vec2(TW("Sky"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Sky", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("sceneEditorMenuChoice")->createButton("terrain", Vec2(0.0f, positions[1]), Vec2(TW("Terrain"), CH), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Terrain", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
@@ -430,5 +430,6 @@ void SceneEditor::_unloadGUI()
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("billboardPropertiesMenu");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("soundPropertiesMenu");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("pointlightPropertiesMenu");
+	_gui.getViewport("right")->getWindow("main")->deleteScreen("spotlightPropertiesMenu");
 	_gui.getViewport("right")->getWindow("main")->deleteScreen("reflectionPropertiesMenu");
 }

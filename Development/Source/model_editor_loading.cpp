@@ -218,7 +218,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	// Error checking
 	if (_currentProjectID.empty())
 	{
-		Logger::throwError("ModelEditor::loadModelEntitiesFromFile");
+		Logger::throwError("ModelEditor::loadModelEntitiesFromFile::1");
 	}
 
 	// Clear IDs from previous loads
@@ -418,7 +418,7 @@ bool ModelEditor::loadModelEntitiesFromFile()
 		}
 		else
 		{
-			Logger::throwError("ModelEditor::loadModelEntitiesFromFile");
+			Logger::throwError("ModelEditor::loadModelEntitiesFromFile::2");
 		}
 	}
 

@@ -732,7 +732,7 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 		}
 		else
 		{
-			Logger::throwError("SceneEditor::loadCustomSceneFromFile");
+			Logger::throwError("SceneEditor::loadCustomSceneFromFile::3");
 		}
 	}
 

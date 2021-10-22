@@ -62,6 +62,7 @@ void ModelEditor::_updateChoiceAabbMenu()
 			for (const auto& aabbID : _fe3d.aabbEntity_getChildIDs(_currentModelID, AabbParentType::MODEL_ENTITY))
 			{
 				_fe3d.aabbEntity_setVisible(aabbID, true);
+				_fe3d.aabbEntity_setFollowParentVisibility(aabbID, true);
 			}
 
 			// Miscellaneous

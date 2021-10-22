@@ -66,6 +66,9 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 {
 	for (const auto& [keyID, entity] : _getAabbEntities())
 	{
+		// Update transformation
+		entity->updateTransformation();
+
 		// Check if AABB has parent
 		if (entity->hasParent())
 		{
@@ -267,11 +270,6 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 					Logger::throwError("AabbEntityManager::update::2");
 				}
 			}
-		}
-		else
-		{
-			// Update transformation
-			entity->updateTransformation();
 		}
 
 		// Update transformation matrix

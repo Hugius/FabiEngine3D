@@ -110,6 +110,7 @@ private:
 	void _updateBillboardBlinking(const string& ID, int& direction);
 	void _updateSpeakerAnimation(const string& ID, int& direction);
 	void _updateLampAnimation(const string& ID, int& direction);
+	void _updateTorchAnimation(const string& ID, int& direction);
 	void _updateCameraAnimation(const string& ID, int& direction);
 	void _selectModel(const string& ID);
 	void _selectBillboard(const string& ID);
@@ -126,7 +127,8 @@ private:
 	void _deactivateModel();
 	void _deactivateBillboard();
 	void _deactivateSound();
-	void _deactivatePoinlight();
+	void _deactivatePointlight();
+	void _deactivateSpotlight();
 	void _deactivateReflection();
 	void _handleValueChanging(const string& screenID, string buttonID, string writeFieldID, float& value, float adder, float multiplier = 1.0f, float minimum = numeric_limits<float>::lowest(), float maximum = numeric_limits<float>::max());
 
@@ -155,9 +157,11 @@ private:
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
 	static inline const string PREVIEW_LAMP_ID = "@@previewLamp";
+	static inline const string PREVIEW_TORCH_ID = "@@previewTorch";
 	static inline const string PREVIEW_CAMERA_ID = "@@previewCamera";
 	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
 	static inline const string LAMP_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
+	static inline const string TORCH_MODEL_PATH = "engine_assets\\meshes\\torch.obj";
 	static inline const string CAMERA_MODEL_PATH = "engine_assets\\meshes\\camera.obj";
 	map<string, string> _loadedModelIDs;
 	map<string, string> _outsideLoadedModelIDs;
@@ -173,9 +177,11 @@ private:
 	vector<string> _customSceneAabbIDs;
 	vector<string> _customSceneSoundIDs;
 	vector<string> _customScenePointlightIDs;
+	vector<string> _customSceneSpotlightIDs;
 	vector<string> _customSceneReflectionIDs;
 	vector<string> _loadedAabbIDs;
 	vector<string> _loadedPointlightIDs;
+	vector<string> _loadedSpotlightIDs;
 	vector<string> _loadedReflectionIDs;
 	string _customSceneID = "";
 	string _loadedSkyID = "";
@@ -208,35 +214,47 @@ private:
 	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.05f, 1.05f, 0.9f);
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
+	static inline const Vec3 DEFAULT_TORCH_SIZE = Vec3(1.0f, 1.0f, 1.0f);
+	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
 	static inline const Vec3 DEFAULT_CAMERA_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_CAMERA_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
 	static inline const Vec3 BILLBOARD_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
 	static inline const Vec3 SOUND_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 POINTLIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.5f, 0.0f);
+	static inline const Vec3 SPOTLIGHT_TERRAIN_OFFSET = Vec3(0.0f, 1.5f, 0.0f);
 	static inline const Vec3 REFLECTION_TERRAIN_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 SPEAKER_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 LAMP_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
+	static inline const Vec3 TORCH_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 CAMERA_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 
 	// Floats
-	static inline const float MODEL_BLINKING_SPEED = 0.025f;
-	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
-	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
-	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
-	static inline const float SPEAKER_SIZE_INCREASE = 1.25f;
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
-	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
-	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
 	static inline const float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
 	static inline const float DEFAULT_POINTLIGHT_INTENSITY = 10.0f;
-	static inline const float LAMP_SIZE_INCREASE = 1.25f;
-	static inline const float LAMP_ANIMATION_SPEED = 0.025f;
+	static inline const float DEFAULT_SPOTLIGHT_PITCH = -90.0f;
+	static inline const float DEFAULT_SPOTLIGHT_INTENSITY = 10.0f;
+	static inline const float DEFAULT_SPOTLIGHT_ANGLE = 25.0f;
+	static inline const float DEFAULT_SPOTLIGHT_DISTANCE = 10.0f;
+	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
+	static inline const float MODEL_BLINKING_SPEED = 0.025f;
+	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
+	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
+	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
 	static inline const float POINTLIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
 	static inline const float POINTLIGHT_COLOR_CHANGING_SPEED = 0.005f;
-	static inline const float CAMERA_SIZE_INCREASE = 1.25f;
+	static inline const float SPOTLIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
+	static inline const float SPOTLIGHT_COLOR_CHANGING_SPEED = 0.005f;
+	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
+	static inline const float SPEAKER_SIZE_INCREASE = 1.25f;
+	static inline const float LAMP_ANIMATION_SPEED = 0.025f;
+	static inline const float LAMP_SIZE_INCREASE = 1.25f;
+	static inline const float TORCH_ANIMATION_SPEED = 0.025f;
+	static inline const float TORCH_SIZE_INCREASE = 1.25f;
 	static inline const float CAMERA_ANIMATION_SPEED = 0.025f;
+	static inline const float CAMERA_SIZE_INCREASE = 1.25f;
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	float _editorSpeed = 1.0f;
@@ -250,6 +268,8 @@ private:
 	int _activeSpeakerSizeDirection = 1;
 	int _selectedLampSizeDirection = 1;
 	int _activeLampSizeDirection = 1;
+	int _selectedTorchSizeDirection = 1;
+	int _activeTorchSizeDirection = 1;
 	int _selectedCameraSizeDirection = 1;
 	int _activeCameraSizeDirection = 1;
 
@@ -263,8 +283,10 @@ private:
 	bool _dontResetSelectedBillboard = false;
 	bool _dontResetSelectedSpeaker = false;
 	bool _dontResetSelectedLamp = false;
+	bool _dontResetSelectedTorch = false;
 	bool _dontResetSelectedCamera = false;
 	bool _isPlacingPointlight = false;
+	bool _isPlacingSpotlight = false;
 	bool _isPlacingReflection = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;

@@ -103,6 +103,20 @@ void SceneEditor::load()
 	_fe3d.pointlightEntity_setIntensity(PREVIEW_LAMP_ID, DEFAULT_POINTLIGHT_INTENSITY);
 	_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
 
+	// Load preview spotlight
+	_fe3d.modelEntity_create(PREVIEW_TORCH_ID, TORCH_MODEL_PATH);
+	_fe3d.modelEntity_setBaseSize(PREVIEW_TORCH_ID, DEFAULT_TORCH_SIZE);
+	_fe3d.modelEntity_setShadowed(PREVIEW_TORCH_ID, false);
+	_fe3d.modelEntity_setReflected(PREVIEW_TORCH_ID, false);
+	_fe3d.modelEntity_setBright(PREVIEW_TORCH_ID, true);
+	_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
+	_fe3d.spotlightEntity_create(PREVIEW_TORCH_ID);
+	_fe3d.spotlightEntity_setPitch(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_PITCH);
+	_fe3d.spotlightEntity_setIntensity(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_INTENSITY);
+	_fe3d.spotlightEntity_setAngle(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_ANGLE);
+	_fe3d.spotlightEntity_setDistance(PREVIEW_TORCH_ID, DEFAULT_SPOTLIGHT_DISTANCE);
+	_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
+
 	// Load preview reflection
 	_fe3d.modelEntity_create(PREVIEW_CAMERA_ID, CAMERA_MODEL_PATH);
 	_fe3d.modelEntity_setBaseSize(PREVIEW_CAMERA_ID, DEFAULT_CAMERA_SIZE);
@@ -141,6 +155,7 @@ void SceneEditor::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.sound_deleteAll();
 	_fe3d.pointlightEntity_deleteAll();
+	_fe3d.spotlightEntity_deleteAll();
 	_fe3d.reflectionEntity_deleteAll();
 
 	// Reset editor properties
@@ -158,9 +173,11 @@ void SceneEditor::unload()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customScenePointlightIDs.clear();
+	_customSceneSpotlightIDs.clear();
 	_customSceneReflectionIDs.clear();
 	_loadedAabbIDs.clear();
 	_loadedPointlightIDs.clear();
+	_loadedSpotlightIDs.clear();
 	_loadedReflectionIDs.clear();
 	_customSceneID = "";
 	_loadedSkyID = "";
@@ -180,6 +197,8 @@ void SceneEditor::unload()
 	_activeSpeakerID = "";
 	_selectedLampID = "";
 	_activeLampID = "";
+	_selectedTorchID = "";
+	_activeTorchID = "";
 	_selectedCameraID = "";
 	_activeCameraID = "";
 	_loadedSceneID = "";
@@ -193,6 +212,8 @@ void SceneEditor::unload()
 	_activeSpeakerSizeDirection = 1;
 	_selectedLampSizeDirection = 1;
 	_activeLampSizeDirection = 1;
+	_selectedTorchSizeDirection = 1;
+	_activeTorchSizeDirection = 1;
 	_selectedCameraSizeDirection = 1;
 	_activeCameraSizeDirection = 1;
 	_hasCustomSceneLighting = false;
@@ -204,8 +225,10 @@ void SceneEditor::unload()
 	_dontResetSelectedBillboard = false;
 	_dontResetSelectedSpeaker = false;
 	_dontResetSelectedLamp = false;
+	_dontResetSelectedTorch = false;
 	_dontResetSelectedCamera = false;
 	_isPlacingPointlight = false;
+	_isPlacingSpotlight = false;
 	_isPlacingReflection = false;
 	_isEditorLoaded = false;
 	_isChoosingScene = false;

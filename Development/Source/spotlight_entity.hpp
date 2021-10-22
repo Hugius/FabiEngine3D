@@ -45,6 +45,6 @@ private:
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;
 	float _intensity = 1.0f;
-	float _angle = 1.0f;
-	float _distance = 1.0f;
+	float _angle = 0.0f;
+	float _distance = 0.0f;
 };

@@ -8,17 +8,17 @@ void SceneEditor::_updateSpotlightMenu()
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuPointlight")
+	if (screen->getID() == "sceneEditorMenuSpotlight")
 	{
 		// Button management
 		if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 		{
 			// Reset placing
-			if (_isPlacingPointlight)
+			if (_isPlacingSpotlight)
 			{
-				_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, false);
-				_isPlacingPointlight = false;
+				_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, false);
+				_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, false);
+				_isPlacingSpotlight = false;
 			}
 
 			// Miscellaneous
@@ -31,14 +31,14 @@ void SceneEditor::_updateSpotlightMenu()
 			_deactivateModel();
 			_deactivateBillboard();
 			_deactivateSound();
-			_deactivatePoinlight();
+			_deactivateSpotlight();
 			_deactivateReflection();
 
-			// Set new preview pointlight
-			_isPlacingPointlight = true;
-			_fe3d.modelEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlightEntity_setVisible(PREVIEW_LAMP_ID, true);
-			_fe3d.pointlightEntity_setPosition(PREVIEW_LAMP_ID, Vec3(0.0f));
+			// Set new preview spotlight
+			_isPlacingSpotlight = true;
+			_fe3d.modelEntity_setVisible(PREVIEW_TORCH_ID, true);
+			_fe3d.spotlightEntity_setVisible(PREVIEW_TORCH_ID, true);
+			_fe3d.spotlightEntity_setPosition(PREVIEW_TORCH_ID, Vec3(0.0f));
 			_fe3d.misc_centerCursor();
 
 			// Add position value forms for placing without terrain
@@ -51,71 +51,71 @@ void SceneEditor::_updateSpotlightMenu()
 		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("choice")->isHovered())
 		{
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuPointlightChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSpotlightChoice");
 
 			// Clear all buttons from scrolling list
-			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuPointlightChoice")->getScrollingList("pointlights")->deleteButtons();
+			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSpotlightChoice")->getScrollingList("spotlights")->deleteButtons();
 
-			// Add the ID of every placed pointlight
-			auto IDs = _fe3d.pointlightEntity_getAllIDs();
+			// Add the ID of every placed spotlight
+			auto IDs = _fe3d.spotlightEntity_getAllIDs();
 			sort(IDs.begin(), IDs.end());
-			for (auto& pointlightID : IDs)
+			for (auto& spotlightID : IDs)
 			{
-				// Check if pointlight is not a preview
-				if (pointlightID[0] != '@')
+				// Check if spotlight is not a preview
+				if (spotlightID[0] != '@')
 				{
 					// Removing the unique number from the ID
-					reverse(pointlightID.begin(), pointlightID.end());
-					string rawID = pointlightID.substr(pointlightID.find('_') + 1);
+					reverse(spotlightID.begin(), spotlightID.end());
+					string rawID = spotlightID.substr(spotlightID.find('_') + 1);
 					reverse(rawID.begin(), rawID.end());
-					reverse(pointlightID.begin(), pointlightID.end());
+					reverse(spotlightID.begin(), spotlightID.end());
 
 					// Add new button
-					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuPointlightChoice")->getScrollingList("pointlights")->createButton(pointlightID, rawID);
+					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSpotlightChoice")->getScrollingList("spotlights")->createButton(spotlightID, rawID);
 				}
 			}
 		}
 	}
 }
 
-void SceneEditor::_updatePointlightChoosingMenu()
+void SceneEditor::_updateSpotlightChoosingMenu()
 {
 	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 	// Screen management
-	if (screen->getID() == "sceneEditorMenuPointlightChoice")
+	if (screen->getID() == "sceneEditorMenuSpotlightChoice")
 	{
-		// Remove deleted pointlights from the scrollingList buttons
-		for (const auto& button : screen->getScrollingList("pointlights")->getButtons())
+		// Remove deleted spotlights from the scrollingList buttons
+		for (const auto& button : screen->getScrollingList("spotlights")->getButtons())
 		{
-			// Check if pointlight is still existing
-			if (!_fe3d.pointlightEntity_isExisting(button->getID()))
+			// Check if spotlight is still existing
+			if (!_fe3d.spotlightEntity_isExisting(button->getID()))
 			{
 				// Delete button
-				screen->getScrollingList("pointlights")->deleteButton(button->getID());
+				screen->getScrollingList("spotlights")->deleteButton(button->getID());
 				break;
 			}
 		}
 
-		// Iterate through every placed pointlight
-		for (const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
+		// Iterate through every placed spotlight
+		for (const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
 		{
-			// Check if pointlight is not a preview
-			if (pointlightID[0] != '@')
+			// Check if spotlight is not a preview
+			if (spotlightID[0] != '@')
 			{
 				// Check if button is hovered
-				if (screen->getScrollingList("pointlights")->getButton(pointlightID)->isHovered())
+				if (screen->getScrollingList("spotlights")->getButton(spotlightID)->isHovered())
 				{
 					// Check if LMB pressed (activation)
 					if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
 					{
-						_activatePointlight(pointlightID);
+						_activateSpotlight(spotlightID);
 					}
 					else // Hovering (selection)
 					{
-						_dontResetSelectedLamp = true;
-						_selectPointlight(pointlightID);
+						_dontResetSelectedTorch = true;
+						_selectSpotlight(spotlightID);
 					}
 
 					break;
@@ -128,7 +128,7 @@ void SceneEditor::_updatePointlightChoosingMenu()
 		{
 			if ((_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("back")->isHovered()) || (_fe3d.input_isKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuPointlight");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSpotlight");
 				return;
 			}
 		}

@@ -93,7 +93,7 @@ void SceneEditor::_updateSoundPlacingMenu()
 					_deactivateModel();
 					_deactivateBillboard();
 					_deactivateSound();
-					_deactivatePoinlight();
+					_deactivatePointlight();
 					_deactivateReflection();
 
 					// Set new preview sound

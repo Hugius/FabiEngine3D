@@ -103,6 +103,22 @@ void SceneEditor::update()
 	}
 	if (_isEditorLoaded)
 	{
+		_updateSpotlightMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateSpotlightChoosingMenu();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateSpotlightPlacing();
+	}
+	if (_isEditorLoaded)
+	{
+		_updateSpotlightEditing();
+	}
+	if (_isEditorLoaded)
+	{
 		_updateReflectionMenu();
 	}
 	if (_isEditorLoaded)
@@ -329,6 +345,10 @@ void SceneEditor::_updateChoiceMenu()
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuPointlight");
 		}
+		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("spotlights")->isHovered())
+		{
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSpotlight");
+		}
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflections")->isHovered())
 		{
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuReflection");
@@ -346,6 +366,8 @@ void SceneEditor::_updateChoiceMenu()
 			_currentPreviewBillboardID = "";
 			_currentPreviewSoundID = "";
 			_isPlacingPointlight = false;
+			_isPlacingSpotlight = false;
+			_isPlacingReflection = false;
 
 			// Save before closing
 			saveEditorSceneToFile();
@@ -373,6 +395,8 @@ void SceneEditor::_updateChoiceMenu()
 			_currentPreviewBillboardID = "";
 			_currentPreviewSoundID = "";
 			_isPlacingPointlight = false;
+			_isPlacingSpotlight = false;
+			_isPlacingReflection = false;
 
 			// Clear whole scene
 			clearCurrentScene();

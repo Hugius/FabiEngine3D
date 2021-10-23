@@ -170,12 +170,12 @@ void SceneEditor::_updateBillboardEditing()
 			}
 			else if (!screen->getButton("rotation")->isHoverable())
 			{
-				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, (_editorSpeed / 50.0f));
-				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -(_editorSpeed / 50.0f));
-				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, (_editorSpeed / 50.0f));
-				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -(_editorSpeed / 50.0f));
-				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 50.0f));
-				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 50.0f));
+				_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, (_editorSpeed / 25.0f));
+				_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -(_editorSpeed / 25.0f));
+				_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, (_editorSpeed / 25.0f));
+				_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -(_editorSpeed / 25.0f));
+				_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, (_editorSpeed / 25.0f));
+				_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -(_editorSpeed / 25.0f));
 				_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
 			}
 			else if (!screen->getButton("size")->isHoverable())

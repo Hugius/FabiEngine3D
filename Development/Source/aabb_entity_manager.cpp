@@ -115,7 +115,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								// Determine rotation direction
 								if (rotationDirection == Direction::X)
 								{
-									entity->setSize(Vec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
+									entity->setSize(Vec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
 								}
 								else if (rotationDirection == Direction::Y)
 								{
@@ -123,7 +123,7 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 								}
 								else if (rotationDirection == Direction::Z)
 								{
-									entity->setSize(Vec3(newAabbSize.x, newAabbSize.z, newAabbSize.y));
+									entity->setSize(Vec3(newAabbSize.y, newAabbSize.x, newAabbSize.z));
 								}
 							}
 							else
@@ -226,8 +226,8 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						{
 							const auto xSinRotation = fabsf(sinf(Math::convertToRadians(rotationX)));
 							const auto xCosRotation = fabsf(cosf(Math::convertToRadians(rotationX)));
-							newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
-							newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
+							newAabbSize.y = (xCosRotation * parentSize.y);
+							newAabbSize.z = (xSinRotation * parentSize.y);
 						}
 						else if (refRotationY > refRotationX && refRotationY > refRotationZ)
 						{
@@ -240,8 +240,8 @@ void AabbEntityManager::update(const unordered_map<string, shared_ptr<ModelEntit
 						{
 							const auto zSinRotation = fabsf(sinf(Math::convertToRadians(rotationZ)));
 							const auto zCosRotation = fabsf(cosf(Math::convertToRadians(rotationZ)));
-							newAabbSize.y = (zCosRotation * parentSize.y);
-							newAabbSize.z = (zSinRotation * parentSize.y);
+							newAabbSize.x = ((zCosRotation * parentSize.x) + (zSinRotation * parentSize.y));
+							newAabbSize.y = ((zSinRotation * parentSize.x) + (zCosRotation * parentSize.y));
 						}
 
 						// AABB must still be a box (cannot be flat)

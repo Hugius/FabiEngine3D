@@ -41,7 +41,7 @@ void EngineGuiScreen::update(bool hoverable)
 		rectangle->setVisible(_isActive);
 	}
 
-	// Update TextFields
+	// Update textFields
 	for (const auto& textField : _textFields)
 	{
 		textField->setVisible(_isActive);

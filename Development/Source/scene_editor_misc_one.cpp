@@ -243,7 +243,6 @@ void SceneEditor::_activateSpotlight(const string& ID)
 
 	// Update buttons hoverability
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("position")->setHoverable(false);
-	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("radius")->setHoverable(true);
 	rightWindow->getScreen("spotlightPropertiesMenu")->getButton("color")->setHoverable(true);
 
 	// Filling writeFields

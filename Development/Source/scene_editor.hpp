@@ -215,7 +215,7 @@ private:
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
 	static inline const Vec3 DEFAULT_TORCH_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
+	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(1.0f, 0.25f, 0.25f);
 	static inline const Vec3 DEFAULT_CAMERA_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_CAMERA_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);

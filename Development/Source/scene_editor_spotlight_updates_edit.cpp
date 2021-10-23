@@ -99,19 +99,11 @@ void SceneEditor::_updateSpotlightEditing()
 				if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("position")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(false);
-					screen->getButton("radius")->setHoverable(true);
-					screen->getButton("color")->setHoverable(true);
-				}
-				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("radius")->isHovered())
-				{
-					screen->getButton("position")->setHoverable(true);
-					screen->getButton("radius")->setHoverable(false);
 					screen->getButton("color")->setHoverable(true);
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("color")->isHovered())
 				{
 					screen->getButton("position")->setHoverable(true);
-					screen->getButton("radius")->setHoverable(true);
 					screen->getButton("color")->setHoverable(false);
 				}
 				else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("delete")->isHovered())
@@ -139,7 +131,7 @@ void SceneEditor::_updateSpotlightEditing()
 			auto color = _fe3d.spotlightEntity_getColor(activeSpotlightID);
 			auto intensity = _fe3d.spotlightEntity_getIntensity(activeSpotlightID);
 
-			// Handle position, radius, color
+			// Handle position, color
 			if (!screen->getButton("position")->isHoverable())
 			{
 				// Set value form descriptions

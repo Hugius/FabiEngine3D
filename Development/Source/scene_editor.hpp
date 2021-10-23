@@ -215,7 +215,7 @@ private:
 	static inline const Vec3 DEFAULT_LAMP_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_LAMP_AABB_SIZE = Vec3(0.6f, 1.0f, 0.6f);
 	static inline const Vec3 DEFAULT_TORCH_SIZE = Vec3(1.0f, 1.0f, 1.0f);
-	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(1.0f, 0.25f, 0.25f);
+	static inline const Vec3 DEFAULT_TORCH_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_CAMERA_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 DEFAULT_CAMERA_AABB_SIZE = Vec3(1.0f, 1.0f, 1.0f);
 	static inline const Vec3 MODEL_TERRAIN_OFFSET = Vec3(0.0f, 0.0f, 0.0f);
@@ -243,10 +243,13 @@ private:
 	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 	static inline const float SOUND_VOLUME_CHANGING_SPEED = 0.01f;
-	static inline const float POINTLIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
 	static inline const float POINTLIGHT_COLOR_CHANGING_SPEED = 0.005f;
-	static inline const float SPOTLIGHT_INTENSITY_CHANGING_SPEED = 0.01f;
+	static inline const float POINTLIGHT_INTENSITY_CHANGING_SPEED = 0.1f;
 	static inline const float SPOTLIGHT_COLOR_CHANGING_SPEED = 0.005f;
+	static inline const float SPOTLIGHT_YAW_CHANGING_SPEED = 0.5f;
+	static inline const float SPOTLIGHT_PITCH_CHANGING_SPEED = 0.5f;
+	static inline const float SPOTLIGHT_INTENSITY_CHANGING_SPEED = 0.1f;
+	static inline const float SPOTLIGHT_ANGLE_CHANGING_SPEED = 0.1f;
 	static inline const float SPEAKER_ANIMATION_SPEED = 0.025f;
 	static inline const float SPEAKER_SIZE_INCREASE = 1.25f;
 	static inline const float LAMP_ANIMATION_SPEED = 0.025f;

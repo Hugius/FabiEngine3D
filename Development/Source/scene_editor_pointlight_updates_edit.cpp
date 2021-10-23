@@ -209,8 +209,8 @@ void SceneEditor::_updatePointlightEditing()
 			}
 
 			// Handle intensity
-			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
-			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_CHANGING_SPEED, 100.0f, 0.0f);
+			_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, POINTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
+			_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -POINTLIGHT_INTENSITY_CHANGING_SPEED, 10.0f, 0.0f);
 			_fe3d.pointlightEntity_setIntensity(activePointlightID, intensity);
 
 			// Handle shape

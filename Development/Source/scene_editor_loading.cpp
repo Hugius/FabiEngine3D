@@ -416,6 +416,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				const string newModelID = ("@@torch_" + spotlightID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\torch.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
+				_fe3d.modelEntity_setBaseRotation(newModelID, Vec3(0.0f, -yaw, pitch));
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
 				_fe3d.modelEntity_setColor(newModelID, "", color);
 				_fe3d.modelEntity_setShadowed(newModelID, false);

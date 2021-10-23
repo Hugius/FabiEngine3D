@@ -62,12 +62,12 @@ void SpotlightEntity::setColor(Vec3 value)
 
 void SpotlightEntity::setYaw(float value)
 {
-	_yaw = value;
+	_yaw = Math::limitAngle(value);
 }
 
 void SpotlightEntity::setPitch(float value)
 {
-	_pitch = value;
+	_pitch = clamp(value, -90.0f, 90.0f);
 }
 
 void SpotlightEntity::setIntensity(float value)
@@ -77,7 +77,7 @@ void SpotlightEntity::setIntensity(float value)
 
 void SpotlightEntity::setAngle(float value)
 {
-	_angle = Math::limitAngle(value);
+	_angle = clamp(value, 0.0f, 45.0f);
 }
 
 void SpotlightEntity::setDistance(float value)

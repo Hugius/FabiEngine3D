@@ -369,7 +369,7 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawPlus", Vec2(0.75f, -0.15f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawMinus", Vec2(-0.75f, -0.15f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("yaw", Vec2(0.0f, -0.15f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.314f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.274f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchPlus", Vec2(0.75f, -0.375f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchMinus", Vec2(-0.75f, -0.375f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("pitch", Vec2(0.0f, -0.375f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);

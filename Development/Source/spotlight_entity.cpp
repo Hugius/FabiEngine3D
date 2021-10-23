@@ -67,7 +67,7 @@ void SpotlightEntity::setYaw(float value)
 
 void SpotlightEntity::setPitch(float value)
 {
-	_pitch = clamp(value, -90.0f, 90.0f);
+	_pitch = Math::limitAngle(value);
 }
 
 void SpotlightEntity::setIntensity(float value)

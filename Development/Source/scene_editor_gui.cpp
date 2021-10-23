@@ -325,7 +325,7 @@ void SceneEditor::_loadGUI()
 	
 	// Right-viewport: pointlightPropertiesMenu
 	rightWindow->createScreen("pointlightPropertiesMenu");
-	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Light Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("pointlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.875f, 0.1f), "Pointlight Menu", Vec3(0.0f, 1.0f, 0.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("position", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("radius", Vec2(0.0f, 0.6f), Vec2(0.75f, 0.2f), "radius.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("color", Vec2(0.0f, 0.4f), Vec2(0.75f, 0.2f), "color.png", Vec3(1.0f));
@@ -346,42 +346,46 @@ void SceneEditor::_loadGUI()
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.55f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen("pointlightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.55f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("shape", Vec2(0.0f, -0.725f), Vec2(0.75f, 0.2f), "shape_circle.png", Vec3(1.0f));
-	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("pointlightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.91f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Right-viewport: spotlightPropertiesMenu
 	rightWindow->createScreen("spotlightPropertiesMenu");
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.25f, 0.1f), "Light Menu", Vec3(0.0f, 1.0f, 0.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("title", Vec2(0.0f, 0.95f), Vec2(1.75f, 0.1f), "Spotlight Menu", Vec3(0.0f, 1.0f, 0.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("position", Vec2(-0.5f, 0.8f), Vec2(0.75f, 0.2f), "position.png", Vec3(1.0f));
 	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("color", Vec2(0.5f, 0.8f), Vec2(0.75f, 0.2f), "color.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.635f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.41f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.185f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.525f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.3f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.075f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("xMinus", Vec2(-0.75f, 0.525f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yMinus", Vec2(-0.75f, 0.3f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("zMinus", Vec2(-0.75f, 0.075f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.525f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.3f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.075f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("yaw", Vec2(0.0f, -0.04f), Vec2(0.375f, 0.1f), "Yaw", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawPlus", Vec2(0.75f, -0.15f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawMinus", Vec2(-0.75f, -0.15f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("yaw", Vec2(0.0f, -0.15f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.274f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchPlus", Vec2(0.75f, -0.375f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchMinus", Vec2(-0.75f, -0.375f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("pitch", Vec2(0.0f, -0.375f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.49f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityPlus", Vec2(0.75f, -0.6f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.6f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.6f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("angle", Vec2(0.0f, -0.69f), Vec2(0.625f, 0.1f), "Angle", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("anglePlus", Vec2(0.75f, -0.8f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("angleMinus", Vec2(-0.75f, -0.8f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
-	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("angle", Vec2(0.0f, -0.8f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.9f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("x", Vec2(0.0f, 0.725f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("y", Vec2(0.0f, 0.525f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("z", Vec2(0.0f, 0.325f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("xPlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yPlus", Vec2(0.75f, 0.425f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("zPlus", Vec2(0.75f, 0.225f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("xMinus", Vec2(-0.75f, 0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yMinus", Vec2(-0.75f, 0.425f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("zMinus", Vec2(-0.75f, 0.225f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("x", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("y", Vec2(0.0f, 0.425f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("z", Vec2(0.0f, 0.225f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("yaw", Vec2(0.0f, 0.125f), Vec2(0.375f, 0.1f), "Yaw", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawPlus", Vec2(0.75f, 0.025f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("yawMinus", Vec2(-0.75f, 0.025f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("yaw", Vec2(0.0f, 0.025f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("pitch", Vec2(0.0f, -0.075f), Vec2(0.625f, 0.1f), "Pitch", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchPlus", Vec2(0.75f, -0.175f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("pitchMinus", Vec2(-0.75f, -0.175f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("pitch", Vec2(0.0f, -0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("intensity", Vec2(0.0f, -0.275f), Vec2(1.125f, 0.1f), "Intensity", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityPlus", Vec2(0.75f, -0.375f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("intensityMinus", Vec2(-0.75f, -0.375f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("intensity", Vec2(0.0f, -0.375f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("angle", Vec2(0.0f, -0.475f), Vec2(0.625f, 0.1f), "Angle", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("anglePlus", Vec2(0.75f, -0.575f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("angleMinus", Vec2(-0.75f, -0.575f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("angle", Vec2(0.0f, -0.575f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createTextField("distance", Vec2(0.0f, -0.675f), Vec2(1.0f, 0.1f), "Distance", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("distancePlus", Vec2(0.75f, -0.775f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("distanceMinus", Vec2(-0.75f, -0.775f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen("spotlightPropertiesMenu")->createWriteField("distance", Vec2(0.0f, -0.775f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen("spotlightPropertiesMenu")->createButton("delete", Vec2(0.0f, -0.915f), Vec2(1.0f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 
 	// Right-viewport: reflectionPropertiesMenu
 	rightWindow->createScreen("reflectionPropertiesMenu");

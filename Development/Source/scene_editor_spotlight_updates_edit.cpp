@@ -181,8 +181,8 @@ void SceneEditor::_updateSpotlightEditing()
 			_fe3d.spotlightEntity_setYaw(activeSpotlightID, yaw);
 			
 			// Handle pitch
-			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED, 1.0f, -90.0f, 90.0f);
-			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED, 1.0f, -90.0f, 90.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "pitchPlus", "pitch", pitch, SPOTLIGHT_PITCH_CHANGING_SPEED);
+			_handleValueChanging("spotlightPropertiesMenu", "pitchMinus", "pitch", pitch, -SPOTLIGHT_PITCH_CHANGING_SPEED);
 			_fe3d.modelEntity_setBaseRotation(_activeTorchID, Vec3(0.0f, _fe3d.modelEntity_getBaseRotation(_activeTorchID).y, pitch));
 			_fe3d.spotlightEntity_setPitch(activeSpotlightID, pitch);
 
@@ -197,9 +197,9 @@ void SceneEditor::_updateSpotlightEditing()
 			_fe3d.spotlightEntity_setAngle(activeSpotlightID, angle);
 
 			// Handle distance
-			//_handleValueChanging("spotlightPropertiesMenu", "intensityPlus", "intensity", intensity, (_editorSpeed / 100.0f), 1.0f, 0.0f);
-			//_handleValueChanging("spotlightPropertiesMenu", "intensityMinus", "intensity", intensity, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
-			//_fe3d.spotlightEntity_setIntensity(activeSpotlightID, intensity);
+			_handleValueChanging("spotlightPropertiesMenu", "distancePlus", "distance", distance, (_editorSpeed / 100.0f), 1.0f, 0.0f);
+			_handleValueChanging("spotlightPropertiesMenu", "distanceMinus", "distance", distance, -(_editorSpeed / 100.0f), 1.0f, 0.0f);
+			_fe3d.spotlightEntity_setDistance(activeSpotlightID, distance);
 		}
 	}
 }

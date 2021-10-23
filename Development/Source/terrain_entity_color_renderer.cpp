@@ -87,7 +87,7 @@ void TerrainEntityColorRenderer::processPointlightEntities(const unordered_map<s
 		_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload light count
+	// Upload pointlight count
 	_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
@@ -114,7 +114,7 @@ void TerrainEntityColorRenderer::processSpotlightEntities(const unordered_map<st
 		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 
-	// Upload light count
+	// Upload spotlight count
 	_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 

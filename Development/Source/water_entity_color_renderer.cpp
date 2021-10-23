@@ -90,7 +90,7 @@ void WaterEntityColorRenderer::processPointlightEntities(const unordered_map<str
 		_shader.uploadUniform("u_pointlightShapes[" + to_string(i) + "]", static_cast<int>(visibleEntities[i]->getShape()));
 	}
 
-	// Upload light count
+	// Upload pointlight count
 	_shader.uploadUniform("u_pointlightCount", static_cast<int>(visibleEntities.size()));
 }
 
@@ -117,7 +117,7 @@ void WaterEntityColorRenderer::processSpotlightEntities(const unordered_map<stri
 		_shader.uploadUniform("u_spotlightDistances[" + to_string(i) + "]", visibleEntities[i]->getDistance());
 	}
 
-	// Upload light count
+	// Upload spotlight count
 	_shader.uploadUniform("u_spotlightCount", static_cast<int>(visibleEntities.size()));
 }
 

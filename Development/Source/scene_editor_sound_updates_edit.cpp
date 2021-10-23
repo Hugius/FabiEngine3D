@@ -16,7 +16,7 @@ void SceneEditor::_updateSoundEditing()
 	}
 
 	// User must not be in placement mode
-	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingReflection)
+	if (_currentPreviewModelID.empty() && _currentPreviewBillboardID.empty() && _currentPreviewSoundID.empty() && !_isPlacingPointlight && !_isPlacingSpotlight && !_isPlacingReflection)
 	{
 		// Check which entity is selected
 		auto hoveredAabbID = _fe3d.raycast_checkCursorInAny().first;

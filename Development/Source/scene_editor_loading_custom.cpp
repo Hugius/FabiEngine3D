@@ -495,13 +495,13 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 		else if (lineType == "POINTLIGHT")
 		{
 			// Data placeholders
-			string lightID;
+			string pointlightID;
 			Vec3 position, radius, color;
 			float intensity;
 
 			// Read data from file
 			iss >>
-				lightID >>
+				pointlightID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -513,12 +513,44 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 				color.b >>
 				intensity;
 
-			// Create light
-			_fe3d.pointlightEntity_setPosition(lightID, position);
-			_fe3d.pointlightEntity_setRadius(lightID, radius);
-			_fe3d.pointlightEntity_setColor(lightID, color);
-			_fe3d.pointlightEntity_setIntensity(lightID, intensity);
-			_loadedPointlightIDs.push_back(lightID);
+			// Create pointlight
+			_fe3d.pointlightEntity_setPosition(pointlightID, position);
+			_fe3d.pointlightEntity_setRadius(pointlightID, radius);
+			_fe3d.pointlightEntity_setColor(pointlightID, color);
+			_fe3d.pointlightEntity_setIntensity(pointlightID, intensity);
+			_loadedPointlightIDs.push_back(pointlightID);
+		}
+		else if (lineType == "SPOTLIGHT")
+		{
+			// Data placeholders
+			string spotlightID;
+			Vec3 position, color;
+			float yaw, pitch, intensity, angle, distance;
+
+			// Read data from file
+			iss >>
+				spotlightID >>
+				position.x >>
+				position.y >>
+				position.z >>
+				color.r >>
+				color.g >>
+				color.b >>
+				yaw >>
+				pitch >>
+				intensity >>
+				angle >>
+				distance;
+
+			// Create spotlight
+			_fe3d.spotlightEntity_setPosition(spotlightID, position);
+			_fe3d.spotlightEntity_setColor(spotlightID, color);
+			_fe3d.spotlightEntity_setYaw(spotlightID, yaw);
+			_fe3d.spotlightEntity_setPitch(spotlightID, pitch);
+			_fe3d.spotlightEntity_setIntensity(spotlightID, intensity);
+			_fe3d.spotlightEntity_setAngle(spotlightID, angle);
+			_fe3d.spotlightEntity_setDistance(spotlightID, distance);
+			_loadedSpotlightIDs.push_back(spotlightID);
 		}
 		else if (lineType == "REFLECTION")
 		{

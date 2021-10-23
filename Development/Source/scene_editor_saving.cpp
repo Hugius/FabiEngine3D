@@ -284,6 +284,39 @@ bool SceneEditor::saveEditorSceneToFile()
 		}
 	}
 
+	// Spotlights
+	for (const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		if (spotlightID[0] != '@')
+		{
+			// Data to save
+			auto position = _fe3d.spotlightEntity_getPosition(spotlightID);
+			auto color = _fe3d.spotlightEntity_getColor(spotlightID);
+			auto yaw = _fe3d.spotlightEntity_getYaw(spotlightID);
+			auto pitch = _fe3d.spotlightEntity_getPitch(spotlightID);
+			auto intensity = _fe3d.spotlightEntity_getIntensity(spotlightID);
+			auto angle = _fe3d.spotlightEntity_getAngle(spotlightID);
+			auto distance = _fe3d.spotlightEntity_getDistance(spotlightID);
+
+			// Write data
+			file <<
+				"SPOTLIGHT " <<
+				spotlightID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				yaw << " " <<
+				pitch << " " <<
+				intensity << " " <<
+				angle << " " <<
+				distance << endl;
+		}
+	}
+
 	// Reflections
 	for (const auto& reflectionID : _fe3d.reflectionEntity_getAllIDs())
 	{

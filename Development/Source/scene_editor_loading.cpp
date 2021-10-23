@@ -338,14 +338,14 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 		else if (lineType == "POINTLIGHT")
 		{
 			// Data placeholders
-			string lightID;
+			string pointlightID;
 			Vec3 position, radius, color;
 			float intensity;
 			unsigned int shape;
 
 			// Read data from file
 			iss >>
-				lightID >>
+				pointlightID >>
 				position.x >>
 				position.y >>
 				position.z >>
@@ -362,7 +362,7 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 			if (_isEditorLoaded)
 			{
 				// Create model
-				const string newModelID = ("@@lamp_" + lightID);
+				const string newModelID = ("@@lamp_" + pointlightID);
 				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\lamp.obj");
 				_fe3d.modelEntity_setBasePosition(newModelID, position);
 				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_LAMP_SIZE);
@@ -378,14 +378,67 @@ bool SceneEditor::loadEditorSceneFromFile(const string& filename)
 				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
 			}
 
-			// Create light
-			_fe3d.pointlightEntity_create(lightID);
-			_fe3d.pointlightEntity_setPosition(lightID, position);
-			_fe3d.pointlightEntity_setRadius(lightID, radius);
-			_fe3d.pointlightEntity_setColor(lightID, color);
-			_fe3d.pointlightEntity_setIntensity(lightID, intensity);
-			_fe3d.pointlightEntity_setShape(lightID, PointlightShape(shape));
-			_loadedPointlightIDs.push_back(lightID);
+			// Create pointlight
+			_fe3d.pointlightEntity_create(pointlightID);
+			_fe3d.pointlightEntity_setPosition(pointlightID, position);
+			_fe3d.pointlightEntity_setRadius(pointlightID, radius);
+			_fe3d.pointlightEntity_setColor(pointlightID, color);
+			_fe3d.pointlightEntity_setIntensity(pointlightID, intensity);
+			_fe3d.pointlightEntity_setShape(pointlightID, PointlightShape(shape));
+			_loadedPointlightIDs.push_back(pointlightID);
+		}
+		else if (lineType == "SPOTLIGHT")
+		{
+			// Data placeholders
+			string spotlightID;
+			Vec3 position, color;
+			float yaw, pitch, intensity, angle, distance;
+
+			// Read data from file
+			iss >>
+				spotlightID >>
+				position.x >>
+				position.y >>
+				position.z >>
+				color.r >>
+				color.g >>
+				color.b >>
+				yaw >>
+				pitch >>
+				intensity >>
+				angle >>
+				distance;
+
+			// Create torch
+			if (_isEditorLoaded)
+			{
+				// Create model
+				const string newModelID = ("@@torch_" + spotlightID);
+				_fe3d.modelEntity_create(newModelID, "engine_assets\\meshes\\torch.obj");
+				_fe3d.modelEntity_setBasePosition(newModelID, position);
+				_fe3d.modelEntity_setBaseSize(newModelID, DEFAULT_TORCH_SIZE);
+				_fe3d.modelEntity_setColor(newModelID, "", color);
+				_fe3d.modelEntity_setShadowed(newModelID, false);
+				_fe3d.modelEntity_setReflected(newModelID, false);
+				_fe3d.modelEntity_setBright(newModelID, true);
+
+				// Bind AABB
+				_fe3d.aabbEntity_create(newModelID);
+				_fe3d.aabbEntity_setParent(newModelID, newModelID, AabbParentType::MODEL_ENTITY);
+				_fe3d.aabbEntity_setLocalSize(newModelID, DEFAULT_TORCH_AABB_SIZE);
+				_fe3d.aabbEntity_setCollisionResponsive(newModelID, false);
+			}
+
+			// Create spotlight
+			_fe3d.spotlightEntity_create(spotlightID);
+			_fe3d.spotlightEntity_setPosition(spotlightID, position);
+			_fe3d.spotlightEntity_setColor(spotlightID, color);
+			_fe3d.spotlightEntity_setYaw(spotlightID, yaw);
+			_fe3d.spotlightEntity_setPitch(spotlightID, pitch);
+			_fe3d.spotlightEntity_setIntensity(spotlightID, intensity);
+			_fe3d.spotlightEntity_setAngle(spotlightID, angle);
+			_fe3d.spotlightEntity_setDistance(spotlightID, distance);
+			_loadedSpotlightIDs.push_back(spotlightID);
 		}
 		else if (lineType == "REFLECTION")
 		{

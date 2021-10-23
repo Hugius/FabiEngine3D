@@ -31,6 +31,7 @@ void SceneEditor::_updateReflectionMenu()
 			_deactivateBillboard();
 			_deactivateSound();
 			_deactivatePointlight();
+			_deactivateSpotlight();
 			_deactivateReflection();
 
 			// Set new preview reflection

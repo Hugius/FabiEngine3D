@@ -88,6 +88,7 @@ void SceneEditor::_updateModelPlacingMenu()
 						_deactivateBillboard();
 						_deactivateSound();
 						_deactivatePointlight();
+						_deactivateSpotlight();
 						_deactivateReflection();
 
 						// Set new preview model

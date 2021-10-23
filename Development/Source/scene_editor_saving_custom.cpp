@@ -463,24 +463,24 @@ bool SceneEditor::saveCustomSceneToFile()
 		}
 	}
 
-	// Lights
-	for (const auto& lightID : _fe3d.pointlightEntity_getAllIDs())
+	// Pointlights
+	for (const auto& pointlightID : _fe3d.pointlightEntity_getAllIDs())
 	{
 		// Check if allowed to save
-		bool isCustomSceneLight =
-			find(_customScenePointlightIDs.begin(), _customScenePointlightIDs.end(), lightID) != _customScenePointlightIDs.end();
-		if ((lightID[0] != '@') && isCustomSceneLight)
+		bool isCustomScenePointlight =
+			find(_customScenePointlightIDs.begin(), _customScenePointlightIDs.end(), pointlightID) != _customScenePointlightIDs.end();
+		if ((pointlightID[0] != '@') && isCustomScenePointlight)
 		{
 			// Data to save
-			auto position = _fe3d.pointlightEntity_getPosition(lightID);
-			auto radius = _fe3d.pointlightEntity_getRadius(lightID);
-			auto color = _fe3d.pointlightEntity_getColor(lightID);
-			auto intensity = _fe3d.pointlightEntity_getIntensity(lightID);
+			auto position = _fe3d.pointlightEntity_getPosition(pointlightID);
+			auto radius = _fe3d.pointlightEntity_getRadius(pointlightID);
+			auto color = _fe3d.pointlightEntity_getColor(pointlightID);
+			auto intensity = _fe3d.pointlightEntity_getIntensity(pointlightID);
 
 			// Write data
 			file <<
 				"POINTLIGHT " <<
-				lightID << " " <<
+				pointlightID << " " <<
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
@@ -491,6 +491,41 @@ bool SceneEditor::saveCustomSceneToFile()
 				color.g << " " <<
 				color.b << " " <<
 				intensity << endl;
+		}
+	}
+
+	// Spotlights
+	for (const auto& spotlightID : _fe3d.spotlightEntity_getAllIDs())
+	{
+		// Check if allowed to save
+		bool isCustomSceneSpotlight =
+			find(_customSceneSpotlightIDs.begin(), _customSceneSpotlightIDs.end(), spotlightID) != _customSceneSpotlightIDs.end();
+		if ((spotlightID[0] != '@') && isCustomSceneSpotlight)
+		{
+			// Data to save
+			auto position = _fe3d.spotlightEntity_getPosition(spotlightID);
+			auto color = _fe3d.spotlightEntity_getColor(spotlightID);
+			auto yaw = _fe3d.spotlightEntity_getYaw(spotlightID);
+			auto pitch = _fe3d.spotlightEntity_getPitch(spotlightID);
+			auto intensity = _fe3d.spotlightEntity_getIntensity(spotlightID);
+			auto angle = _fe3d.spotlightEntity_getAngle(spotlightID);
+			auto distance = _fe3d.spotlightEntity_getDistance(spotlightID);
+
+			// Write data
+			file <<
+				"SPOTLIGHT " <<
+				spotlightID << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				yaw << " " <<
+				pitch << " " <<
+				intensity << " " <<
+				angle << " " <<
+				distance << endl;
 		}
 	}
 
@@ -688,6 +723,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customScenePointlightIDs.clear();
+	_customSceneSpotlightIDs.clear();
 
 	// Return
 	return true;

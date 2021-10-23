@@ -31,6 +31,7 @@ void SceneEditor::_updateSpotlightMenu()
 			_deactivateModel();
 			_deactivateBillboard();
 			_deactivateSound();
+			_deactivatePointlight();
 			_deactivateSpotlight();
 			_deactivateReflection();
 

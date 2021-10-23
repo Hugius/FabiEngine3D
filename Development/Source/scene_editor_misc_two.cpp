@@ -219,13 +219,29 @@ void SceneEditor::clearCurrentScene()
 	{
 		if (_fe3d.pointlightEntity_isExisting(ID))
 		{
-			// Delete light
+			// Delete pointlight
 			_fe3d.pointlightEntity_delete(ID);
 
 			// Delete corresponding lamp model
 			if (!_currentSceneID.empty())
 			{
 				_fe3d.modelEntity_delete("@@lamp_" + ID);
+			}
+		}
+	}
+
+	// Delete spotlight entities
+	for (const auto& ID : _loadedSpotlightIDs)
+	{
+		if (_fe3d.spotlightEntity_isExisting(ID))
+		{
+			// Delete spotlight
+			_fe3d.spotlightEntity_delete(ID);
+
+			// Delete corresponding torch model
+			if (!_currentSceneID.empty())
+			{
+				_fe3d.modelEntity_delete("@@torch_" + ID);
 			}
 		}
 	}
@@ -255,6 +271,7 @@ void SceneEditor::clearCurrentScene()
 	_loadedBillboardIDs.clear();
 	_loadedSoundIDs.clear();
 	_loadedPointlightIDs.clear();
+	_loadedSpotlightIDs.clear();
 	_loadedReflectionIDs.clear();
 }
 
@@ -272,6 +289,7 @@ void SceneEditor::createCustomScene(const string& ID)
 	_customSceneAabbIDs.clear();
 	_customSceneSoundIDs.clear();
 	_customScenePointlightIDs.clear();
+	_customSceneSpotlightIDs.clear();
 }
 
 void SceneEditor::addLightingToCustomScene()

@@ -71,19 +71,19 @@ float RayCaster::getTerrainPointingPrecision()
 
 float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
 {
-	// Direction fraction
-	Vec3 dirfrac;
-	dirfrac.x = 1.0f / _ray.x;
-	dirfrac.y = 1.0f / _ray.y;
-	dirfrac.z = 1.0f / _ray.z;
+	// Ray fraction
+	Vec3 rayFraction;
+	rayFraction.x = (1.0f / _ray.x);
+	rayFraction.y = (1.0f / _ray.y);
+	rayFraction.z = (1.0f / _ray.z);
 
 	// Define AABB
-	float t1 = (lb.x - cameraPos.x) * dirfrac.x;
-	float t2 = (rt.x - cameraPos.x) * dirfrac.x;
-	float t3 = (lb.y - cameraPos.y) * dirfrac.y;
-	float t4 = (rt.y - cameraPos.y) * dirfrac.y;
-	float t5 = (lb.z - cameraPos.z) * dirfrac.z;
-	float t6 = (rt.z - cameraPos.z) * dirfrac.z;
+	float t1 = ((lb.x - cameraPos.x) * rayFraction.x);
+	float t2 = ((rt.x - cameraPos.x) * rayFraction.x);
+	float t3 = ((lb.y - cameraPos.y) * rayFraction.y);
+	float t4 = ((rt.y - cameraPos.y) * rayFraction.y);
+	float t5 = ((lb.z - cameraPos.z) * rayFraction.z);
+	float t6 = ((rt.z - cameraPos.z) * rayFraction.z);
 
 	float tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6));
 	float tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));

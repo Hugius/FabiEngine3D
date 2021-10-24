@@ -364,7 +364,7 @@ void ScriptInterpreter::unload()
 	_fe3d.camera_reset();
 
 	// Reset collision
-	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	_fe3d.collision_setCameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	if (_fe3d.collision_isCameraResponseEnabled())
 	{
 		_fe3d.collision_disableCameraResponse();

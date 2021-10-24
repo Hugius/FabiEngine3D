@@ -1,13 +1,15 @@
 #pragma once
 
-#include "collision.hpp"
 #include "mathematics.hpp"
-#include "direction.hpp"
+#include "box.hpp"
 
 class CollisionDetector final
 {
 public:
-	Collision check(Vec3 position, Vec3 size, Vec3 middlePosition,
-		float bottom, float top, float left, float right, float front, float back,
-		Vec3 middleChange, bool hasCollided);
+	bool checkX(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box);
+	bool checkY(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box);
+	bool checkZ(Vec3 aabbPosition, Vec3 aabbSize, Vec3 boxMiddle, Vec3 boxMiddleChange, Box box);
+
+private:
+	bool _isInside(Vec3 aabbPosition, Vec3 aabbHalfSize, Vec3 boxMiddle, Box box);
 };

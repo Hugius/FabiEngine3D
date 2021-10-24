@@ -4,13 +4,16 @@
 #include "aabb_entity.hpp"
 #include "camera.hpp"
 #include "terrain_entity_manager.hpp"
+#include "box.hpp"
 
 class CollisionResolver final
 {
 public:
+	CollisionResolver();
+
 	// Voids
 	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, Camera& camera, CollisionDetector& collisionDetector);
-	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
+	void setCameraBox(const Box& box);
 	void enableCameraAabbResponse(bool x, bool y, bool z);
 	void disableCameraAabbResponse();
 	void enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
@@ -22,13 +25,10 @@ public:
 	bool isCameraTerrainResponseEnabled();
 
 private:
+	// Instances
+	Box _cameraBox;
+
 	// Floats
-	float _cameraAabbBottom = 0.0f;
-	float _cameraAabbTop = 0.0f;
-	float _cameraAabbLeft = 0.0f;
-	float _cameraAabbRight = 0.0f;
-	float _cameraAabbFront = 0.0f;
-	float _cameraAabbBack = 0.0f;
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 

@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\collision.cpp" />
+    <ClCompile Include="..\..\Source\box.cpp" />
     <ClCompile Include="..\..\Source\collision_detector.cpp" />
     <ClCompile Include="..\..\Source\collision_resolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\collision.hpp" />
+    <ClInclude Include="..\..\Source\box.hpp" />
     <ClInclude Include="..\..\Source\collision_detector.hpp" />
     <ClInclude Include="..\..\Source\collision_resolver.hpp" />
   </ItemGroup>

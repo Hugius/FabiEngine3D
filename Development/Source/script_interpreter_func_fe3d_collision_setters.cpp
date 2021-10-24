@@ -33,9 +33,10 @@ bool ScriptInterpreter::_executeFe3dCollisionSetterFunction(const string& functi
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.collision_setCameraBoxSize(
-				arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal(),
-				arguments[3].getDecimal(), arguments[4].getDecimal(), arguments[5].getDecimal());
+			_fe3d.collision_setCameraBox(
+				arguments[0].getDecimal(), arguments[1].getDecimal(),
+				arguments[2].getDecimal(), arguments[3].getDecimal(),
+				arguments[4].getDecimal(), arguments[5].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

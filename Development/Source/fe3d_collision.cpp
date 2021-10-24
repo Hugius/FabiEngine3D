@@ -1,9 +1,9 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back)
+void FabiEngine3D::collision_setCameraBox(float left, float right, float bottom, float top, float front, float back)
 {
-	_core->_collisionResolver.setCameraBoxSize(bottom, top, left, right, front, back);
+	_core->_collisionResolver.setCameraBox(Box(left, right, bottom, top, front, back));
 }
 
 void FabiEngine3D::collision_enableCameraResponse(bool x, bool y, bool z)

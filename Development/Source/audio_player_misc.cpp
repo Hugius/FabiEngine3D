@@ -52,24 +52,24 @@ void AudioPlayer::update(Camera& camera, vector<Sound>& soundList, vector<Music>
 				if (isSoundStarted(sound))
 				{
 					// Distance
-					auto cameraPos = camera.getPosition(); // Camera position
-					float xDiff = fabsf(sound.getPosition().x - cameraPos.x); // Difference between camera X & point X
-					float yDiff = fabsf(sound.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
-					float zDiff = fabsf(sound.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
-					float maxDiff = max(xDiff, max(yDiff, zDiff)); // Maximum difference
-					float volume = sound.getMaxVolume() - ((maxDiff / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
+					auto cameraPosition = camera.getPosition(); // Camera position
+					float xDifference = fabsf(sound.getPosition().x - cameraPosition.x); // Difference between camera X & point X
+					float yDifference = fabsf(sound.getPosition().y - cameraPosition.y); // Difference between camera Y & point Y
+					float zDifference = fabsf(sound.getPosition().z - cameraPosition.z); // Difference between camera Z & point Z
+					float maxDifference = max(xDifference, max(yDifference, zDifference)); // Maximum difference
+					float volume = sound.getMaxVolume() - ((maxDifference / sound.getMaxDistance()) * sound.getMaxVolume()); // Calculate volume
 					volume = clamp(volume, 0.0f, sound.getMaxVolume()); // Clamp to maximum
 					sound.setVolume(volume); // Update sound volume
 
 					// Panning
 					auto cameraFront = camera.getFrontVector(); // From camera vector
 					Matrix44 rotationMatrix = Math::createRotationMatrixY(Math::convertToRadians(90.0f));
-					Vec3 pointVector = cameraPos - sound.getPosition(); // To camera vector
+					Vec3 pointVector = cameraPosition - sound.getPosition(); // To camera vector
 					Vec4 result = (rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f));
 					pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
 					pointVector = Math::normalizeVector(pointVector); // Normalize
 					float dot = Math::calculateDotProduct(pointVector, cameraFront); // Dot product
-					float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
+					float range = ((dot / 2.0f) + 0.5f); // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 					Uint8 leftStrength = Uint8(255.0f * range); // Left ear
 					Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
 

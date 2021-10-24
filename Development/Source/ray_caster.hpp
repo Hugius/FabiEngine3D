@@ -16,7 +16,7 @@ public:
 	float getTerrainPointingDistance();
 	float getTerrainPointingPrecision();
 
-	float checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos);
+	float checkCursorInBox(Vec3 leftBottomCoordinate, Vec3 rightTopCoordinate, Vec3 cameraPosition);
 
 	Vec3 getRay();
 	Vec3 getTerrainPoint();

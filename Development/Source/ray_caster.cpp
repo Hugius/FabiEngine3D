@@ -69,39 +69,41 @@ float RayCaster::getTerrainPointingPrecision()
 	return _terrainPointingPrecision;
 }
 
-float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
+// https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
+float RayCaster::checkCursorInBox(Vec3 leftBottomCoordinate, Vec3 rightTopCoordinate, Vec3 cameraPosition)
 {
-	// Ray fraction
-	Vec3 rayFraction;
-	rayFraction.x = (1.0f / _ray.x);
-	rayFraction.y = (1.0f / _ray.y);
-	rayFraction.z = (1.0f / _ray.z);
+	// Ray direction
+	Vec3 rayDirection;
+	rayDirection.x = (1.0f / _ray.x);
+	rayDirection.y = (1.0f / _ray.y);
+	rayDirection.z = (1.0f / _ray.z);
 
-	// Define AABB
-	float t1 = ((lb.x - cameraPos.x) * rayFraction.x);
-	float t2 = ((rt.x - cameraPos.x) * rayFraction.x);
-	float t3 = ((lb.y - cameraPos.y) * rayFraction.y);
-	float t4 = ((rt.y - cameraPos.y) * rayFraction.y);
-	float t5 = ((lb.z - cameraPos.z) * rayFraction.z);
-	float t6 = ((rt.z - cameraPos.z) * rayFraction.z);
+	// Calculates distances between camera & collision
+	float distance1 = ((leftBottomCoordinate.x - cameraPosition.x) * rayDirection.x);
+	float distance2 = ((rightTopCoordinate.x - cameraPosition.x) * rayDirection.x);
+	float distance3 = ((leftBottomCoordinate.y - cameraPosition.y) * rayDirection.y);
+	float distance4 = ((rightTopCoordinate.y - cameraPosition.y) * rayDirection.y);
+	float distance5 = ((leftBottomCoordinate.z - cameraPosition.z) * rayDirection.z);
+	float distance6 = ((rightTopCoordinate.z - cameraPosition.z) * rayDirection.z);
+	float minDistance = max(max(min(distance1, distance2), min(distance3, distance4)), min(distance5, distance6));
+	float maxDistance = min(min(max(distance1, distance2), max(distance3, distance4)), max(distance5, distance6));
 
-	float tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6));
-	float tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));
-
-	// AABB is behind
-	if (tmax < 0)
+	// AABB is behind camera
+	if (maxDistance < 0.0f)
 	{
 		return -1.0f;
 	}
 
 	// No intersection
-	if (tmin > tmax)
+	if (minDistance > maxDistance)
 	{
 		return -1.0f;
 	}
-	
-	// Intersection
-	return tmin;
+	else
+	{
+		// Intersection
+		return minDistance;
+	}
 }
 
 Vec3 RayCaster::_getMouseRay(Ivec2 cursorPosition)
@@ -141,10 +143,10 @@ Vec3 RayCaster::_convertToWorldSpace(Vec4 value)
 
 Vec3 RayCaster::_getPointOnRay(float distance)
 {
-	Vec3 cameraPos = _renderBus.getCameraPosition();
+	Vec3 cameraPosition = _renderBus.getCameraPosition();
 	Vec3 scaledRay = (_ray * distance);
 
-	return (cameraPos + scaledRay);
+	return (cameraPosition + scaledRay);
 }
 
 bool RayCaster::_isUnderTerrain(float distance)

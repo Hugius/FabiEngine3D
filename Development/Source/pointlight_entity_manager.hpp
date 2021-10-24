@@ -11,10 +11,10 @@ public:
 	void createEntity(const string& ID);
 	void update() override;
 
-	// Instances
-	shared_ptr<PointlightEntity> getEntity(const string& ID);
-	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
-
 	// Integers
 	static inline const unsigned int MAX_LIGHT_COUNT = 64;
+
+	// Miscellaneous
+	shared_ptr<PointlightEntity> getEntity(const string& ID);
+	const unordered_map<string, shared_ptr<PointlightEntity>>& getEntities();
 };

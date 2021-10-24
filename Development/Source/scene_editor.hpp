@@ -142,17 +142,6 @@ private:
 	bool _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 	bool _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
 	bool _copyPreviewSound(const string& newID, const string& previewID, Vec3 position, bool fromOutside = false);
-	
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-	SkyEditor& _skyEditor;
-	TerrainEditor& _terrainEditor;
-	WaterEditor& _waterEditor;
-	ModelEditor& _modelEditor;
-	AnimationEditor& _animationEditor;
-	BillboardEditor& _billboardEditor;
-	AudioEditor& _audioEditor;
 
 	// Strings
 	static inline const string PREVIEW_SPEAKER_ID = "@@previewSpeaker";
@@ -229,7 +218,7 @@ private:
 	static inline const Vec3 TORCH_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 	static inline const Vec3 CAMERA_OFFSET = Vec3(0.0f, 0.5f, 0.0f);
 
-	// Floats
+	// Decimals
 	static inline const float DEFAULT_SOUND_MAX_VOLUME = 1.0f;
 	static inline const float DEFAULT_SOUND_MAX_DISTANCE = 25.0f;
 	static inline const float DEFAULT_POINTLIGHT_RADIUS = 5.0f;
@@ -294,4 +283,15 @@ private:
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+	SkyEditor& _skyEditor;
+	TerrainEditor& _terrainEditor;
+	WaterEditor& _waterEditor;
+	ModelEditor& _modelEditor;
+	AnimationEditor& _animationEditor;
+	BillboardEditor& _billboardEditor;
+	AudioEditor& _audioEditor;
 };

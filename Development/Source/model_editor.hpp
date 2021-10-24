@@ -43,10 +43,6 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-
 	// Strings
 	vector<string> _loadedModelIDs;
 	string _currentModelID = "";
@@ -56,7 +52,7 @@ private:
 	string _hoveredModelID = "";
 	string _nextActiveScreenID = "";
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
@@ -80,4 +76,8 @@ private:
 	bool _isChoosingAabb = false;
 	bool _isDeletingAabb = false;
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
 };

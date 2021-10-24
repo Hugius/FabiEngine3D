@@ -34,17 +34,13 @@ private:
 	void _updateAudioDeleting();
 	void _updateMiscellaneous();
 
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-
 	// Strings
 	vector<string> _loadedAudioIDs;
 	string _currentAudioID = "";
 	string _hoveredAudioID = "";
 	string _currentProjectID = "";
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
@@ -53,4 +49,8 @@ private:
 	bool _isChoosingAudio = false;
 	bool _isDeletingAudio = false;
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
 };

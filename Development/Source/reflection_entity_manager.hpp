@@ -11,7 +11,7 @@ public:
 	void createEntity(const string& ID);
 	void update() override;
 
-	// Instances
+	// Miscellaneous
 	shared_ptr<ReflectionEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<ReflectionEntity>>& getEntities();
 };

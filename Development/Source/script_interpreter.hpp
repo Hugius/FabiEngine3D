@@ -45,15 +45,6 @@ private:
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings(unsigned int lastLoggerMessageCount);
 
-	// Instances
-	vector<ScriptValue> _extractValuesFromListString(const string& listString);
-	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
-	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
-	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
-	ScriptVariable& _getLocalVariable(const string& variableID);
-	ScriptVariable& _getGlobalVariable(const string& variableID);
-	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
-
 	// Strings
 	string _limitIntegerString(const string& valueString);
 	string _limitDecimalString(const string& valueString);
@@ -149,19 +140,14 @@ private:
 	bool _validateMouseInputString(const string& inputString);
 	bool _validateSavesDirectory();
 
-	// Instances
-	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
-	unordered_map<string, ScriptVariable> _globalVariables;
-	FabiEngine3D& _fe3d;
-	Script& _script;
-	SkyEditor& _skyEditor;
-	TerrainEditor& _terrainEditor;
-	WaterEditor& _waterEditor;
-	ModelEditor& _modelEditor;
-	AnimationEditor& _animationEditor;
-	BillboardEditor& _billboardEditor;
-	AudioEditor& _audioEditor;
-	SceneEditor& _sceneEditor;
+	// Miscellaneous
+	vector<ScriptValue> _extractValuesFromListString(const string& listString);
+	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
+	ScriptVariable& _getLocalVariable(const string& variableID);
+	ScriptVariable& _getGlobalVariable(const string& variableID);
+	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
 
 	// Strings
 	static inline const string META_KEYWORD = "META";
@@ -205,7 +191,7 @@ private:
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
 
-	// Floats
+	// Decimals
 	map<string, float> _debuggingTimes;
 
 	// Integers
@@ -230,6 +216,18 @@ private:
 	bool _isExecutingDestruction = false;
 
 	// Miscellaneous
+	unordered_map<unsigned int, unordered_map<string, ScriptVariable>> _localVariables;
+	unordered_map<string, ScriptVariable> _globalVariables;
+	FabiEngine3D& _fe3d;
+	Script& _script;
+	SkyEditor& _skyEditor;
+	TerrainEditor& _terrainEditor;
+	WaterEditor& _waterEditor;
+	ModelEditor& _modelEditor;
+	AnimationEditor& _animationEditor;
+	BillboardEditor& _billboardEditor;
+	AudioEditor& _audioEditor;
+	SceneEditor& _sceneEditor;
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},

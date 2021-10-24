@@ -50,7 +50,7 @@ public:
 	const Vec3 getPosition();
 	const Vec3 getThirdPersonLookat();
 
-	// Floats
+	// Decimals
 	const float getFOV();
 	const float getAspectRatio();
 	const float getYaw();
@@ -70,10 +70,6 @@ public:
 	const bool isFirstPersonViewEnabled();
 
 private:
-	// Instances
-	RenderBus& _renderBus;
-	Window& _window;
-
 	// Matrices
 	Matrix44 _viewMatrix = Matrix44(1.0f);
 	Matrix44 _projectionMatrix = Matrix44(1.0f);
@@ -86,7 +82,7 @@ private:
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _thirdPersonLookat = Vec3(0.0f);
 
-	// Floats
+	// Decimals
 	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
 	static inline const float DEFAULT_NEAR_Z = 0.01f;
 	static inline const float DEFAULT_FAR_Z = 3000.0f;
@@ -123,4 +119,8 @@ private:
 	bool _isFirstPersonViewEnabled = false;
 	bool _mustCenterCursor = false;
 	bool _cursorIsBeingCentered = false;
+
+	// Miscellaneous
+	RenderBus& _renderBus;
+	Window& _window;
 };

@@ -18,12 +18,12 @@ public:
 	bool loadScriptFiles(bool isLoggingEnabled = true);
 	bool saveScriptFiles();
 
-	// Instances
-	ScriptExecutor& getScriptExecutor();
-
 	// Booleans
 	bool isLoaded();
 	bool isWritingScript();
+
+	// Miscellaneous
+	ScriptExecutor& getScriptExecutor();
 
 private:
 	// Voids
@@ -35,12 +35,6 @@ private:
 	void _updateMiscellaneous();
 	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
-
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-	Script _script;
-	ScriptExecutor _scriptExecutor;
 
 	// Strings
 	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
@@ -61,7 +55,7 @@ private:
 	static inline const Vec3 COMMENT_TEXT_COLOR = Vec3(0.0f, 0.75f, 0.0f);
 	static inline const Vec2 TEXT_CHARACTER_SIZE = Vec2(0.25f, 0.75f);
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float SCROLLING_SPEED = 0.1f;
@@ -127,10 +121,14 @@ private:
 	bool _isEditorLoaded = false;
 
 	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+	Script _script;
+	ScriptExecutor _scriptExecutor;
+	InputType _activeActionKey = InputType::NONE;
 	static inline const vector<InputType> ACTION_KEYS =
 	{ 
 		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, 
 		InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN
 	};
-	InputType _activeActionKey = InputType::NONE;
 };

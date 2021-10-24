@@ -17,11 +17,11 @@ public:
 	void cacheMeshesMultiThreaded(const vector<string>& meshPaths);
 	void clearMeshCache(const string& filePath);
 
-	// Instances
+	// Miscellaneous
 	const vector<shared_ptr<MeshPart>>* loadMesh(const string& filePath);
 
 private:
-	// Instances
+	// Miscellaneous
 	pair<string, vector<shared_ptr<MeshPart>>> _loadMesh(const string& filePathe);
 	map<string, vector<shared_ptr<MeshPart>>> _meshCache;
 };

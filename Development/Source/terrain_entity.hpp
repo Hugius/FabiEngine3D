@@ -49,9 +49,6 @@ public:
 	void setSpecular(bool value);
 	void setWireFramed(bool value);
 
-	// Instances
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-
 	// Strings
 	const string& getHeightMapPath();
 	const string& getDiffuseMapPath();
@@ -69,7 +66,7 @@ public:
 	const vector<Vec3>& getNormals();
 	const vector<Vec2>& getUvCoords();
 
-	// Floats
+	// Decimals
 	const vector<float>& getPixelValues();
 	const float getTextureRepeat();
 	const float getRedRepeat();
@@ -96,6 +93,7 @@ public:
 	const bool hasNormalMapB();
 
 	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getDiffuseMap();
 	const TextureID getNormalMap();
 	const TextureID getBlendMap();
@@ -107,9 +105,6 @@ public:
 	const TextureID getNormalMapB();
 
 private:
-	// Instances
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-
 	// Strings
 	string _heightMapPath = "";
 	string _diffuseMapPath = "";
@@ -127,7 +122,7 @@ private:
 	vector<Vec3> _normals;
 	vector<Vec2> _uvCoords;
 
-	// Floats
+	// Decimals
 	vector<float> _pixelValues;
 	float _redRepeat = 1.0f;
 	float _greenRepeat = 1.0f;
@@ -144,6 +139,7 @@ private:
 	bool _isWireFramed = false;
 
 	// Miscellaneous
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _normalMap = 0;
 	TextureID _blendMap = 0;

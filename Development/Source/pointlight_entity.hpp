@@ -24,7 +24,7 @@ public:
 	const Vec3 getColor();
 	const Vec3 getRadius();
 
-	// Floats
+	// Decimals
 	const float getIntensity();
 
 	// Miscellaneous
@@ -37,7 +37,7 @@ private:
 	Vec3 _radius = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 
-	// Floats
+	// Decimals
 	float _positionTargetSpeed = 0.0f;
 	float _intensity = 1.0f;
 

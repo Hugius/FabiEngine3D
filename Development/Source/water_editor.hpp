@@ -38,17 +38,13 @@ private:
 	void _updateWaterDeleting();
 	void _updateCamera();
 	void _updateMiscellaneous();
-	
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
 
 	// Strings
 	vector <string> _loadedWaterIDs;
 	string _currentProjectID = "";
 	string _currentWaterID = "";
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;
@@ -67,4 +63,8 @@ private:
 	bool _isChoosingWater = false;
 	bool _isDeletingWater = false;
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
 };

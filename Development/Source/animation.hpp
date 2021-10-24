@@ -31,9 +31,6 @@ public:
 	void setPaused(bool value);
 	void setAutoPaused(bool value);
 
-	// Instances
-	const vector<AnimationFrame>& getFrames() const;
-
 	// Strings
 	const string& getID() const;
 	const vector<string>& getPartIDs() const;
@@ -47,7 +44,7 @@ public:
 	const map<string, Vec3>& getTotalScalings() const;
 	const Vec3 getInitialSize() const;
 
-	// Floats
+	// Decimals
 	const float getSpeedMultiplier() const;
 
 	// Integers
@@ -60,10 +57,10 @@ public:
 	const bool isPaused() const;
 	const bool isAutoPaused() const;
 
-private:
-	// Instances
-	vector<AnimationFrame> _frames;
+	// Miscellaneous
+	const vector<AnimationFrame>& getFrames() const;
 
+private:
 	// Strings
 	const string _ID;
 	vector<string> _partIDs;
@@ -77,7 +74,7 @@ private:
 	map<string, Vec3> _totalScalings;
 	Vec3 _initialSize = Vec3(0.0f);
 
-	// Floats
+	// Decimals
 	float _speedMultiplier = 1.0f;
 
 	// Integers
@@ -89,4 +86,7 @@ private:
 	// Booleans
 	bool _isPaused = false;
 	bool _isAutoPaused = false;
+
+	// Miscellaneous
+	vector<AnimationFrame> _frames;
 };

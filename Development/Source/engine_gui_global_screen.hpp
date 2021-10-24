@@ -79,9 +79,6 @@ private:
 	void _deleteAnswerForm(const string& ID);
 	bool _checkValueForm(const string& ID, string& valueString, const vector<string>& forbiddenValueStrings);
 
-	// Instances
-	FabiEngine3D& _fe3d;
-
 	// GUI elements
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
@@ -97,4 +94,7 @@ private:
 	// Booleans
 	bool _isFocused = false;
 	bool _mustDeleteValueForms = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
 };

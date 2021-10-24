@@ -13,16 +13,16 @@ public:
 	void selectTerrain(const string& ID);
 	void update() override;
 
-	// Instances
-	shared_ptr<TerrainEntity> getEntity(const string& ID);
-	shared_ptr<TerrainEntity> getSelectedTerrain();
-	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
-
-	// Floats
+	// Decimals
 	float getPixelHeight(const string& ID, float x, float z);
 
 	// Booleans
 	bool isInside(const string& ID, float x, float z);
+
+	// Miscellaneous
+	shared_ptr<TerrainEntity> getEntity(const string& ID);
+	shared_ptr<TerrainEntity> getSelectedTerrain();
+	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 
 	// Integers
 	static inline const unsigned int MAX_SIZE = 1024;
@@ -31,6 +31,6 @@ private:
 	// Strings
 	string _selectedID = "";
 
-	// Floats
+	// Decimals
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors);
 };

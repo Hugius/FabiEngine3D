@@ -31,7 +31,7 @@ public:
 	void clearFontCache(const string& filePath);
 	void setAnisotropicFilteringQuality(unsigned int value);
 
-	// Floats
+	// Decimals
 	const vector<float>* getBitmap(const string& filePath);
 
 	// Integers
@@ -46,7 +46,7 @@ private:
 	// Voids
 	void _reloadAnisotropicFiltering();
 
-	// Floats
+	// Decimals
 	vector<float> _loadBitmap(const string& filePath);
 
 	// Miscellaneous
@@ -56,16 +56,14 @@ private:
 	TextureID _convertIntoTexture(const array<SDL_Surface*, 6>& surfaces, const array<string, 6>& filePaths);
 	TextureID _convertIntoTexture(TTF_Font* font, const string& textContent);
 
-	// Instances
-	RenderBus& _renderBus;
-
-	// Floats
+	// Decimals
 	map<string, vector<float>> _bitmapCache;
 
 	// Integers
 	unsigned int _anisotropicFilteringQuality = Config::MIN_ANISOTROPIC_FILTERING_QUALITY;
 
 	// Miscellaneous
+	RenderBus& _renderBus;
 	map<string, TextureID> _textureCache2D;
 	map<array<string, 6>, TextureID> _textureCache3D;
 	map<pair<string, string>, TextureID> _textCache;

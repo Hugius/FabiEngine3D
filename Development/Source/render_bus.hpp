@@ -48,7 +48,7 @@ public:
 	void setFlareSourcePosition(Vec3 value);
 	void setFlareSourceUV(Vec2 value);
 
-	// Floats
+	// Decimals
 	void setAmbientLightingIntensity(float value);
 	void setDirectionalLightingIntensity(float value);
 	void setFogMinDistance(float value);
@@ -141,7 +141,7 @@ public:
 	const Vec3 getFlareSourcePosition();
 	const Vec2 getFlareSourceUV();
 
-	// Floats
+	// Decimals
 	const float getAmbientLightingIntensity();
 	const float getDirectionalLightingIntensity();
 	const float getFogMinDistance();
@@ -234,7 +234,7 @@ private:
 	Vec3 _fogColor = Vec3(1.0f);
 	Vec2 _flareSourceUV = Vec2(0.0f);
 
-	// Floats
+	// Decimals
 	float _ambientLightIntensity = 1.0f;
 	float _directionalLightIntensity = 1.0f;
 	float _bloomIntensity = 1.0f;

@@ -39,10 +39,6 @@ public:
 	void setRefractive(bool value);
 	void setWireFramed(bool value);
 
-	// Instances
-	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
-	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
-
 	// Strings
 	const string& getDudvMapPath();
 	const string& getNormalMapPath();
@@ -54,7 +50,7 @@ public:
 	const Vec2 getRippleOffset();
 	const Vec2 getWaveOffset();
 
-	// Floats
+	// Decimals
 	const float getHeight();
 	const float getTextureRepeat();
 	const float getWaveHeight();
@@ -75,6 +71,8 @@ public:
 	const bool hasDisplacementMap();
 
 	// Miscellaneous
+	const shared_ptr<RenderBuffer> getLowQualityRenderBuffer();
+	const shared_ptr<RenderBuffer> getHighQualityRenderBuffer();
 	const WaterQuality getQuality();
 	const TextureID getDudvMap();
 	const TextureID getNormalMap();
@@ -92,7 +90,7 @@ private:
 	string _normalMapPath = "";
 	string _displacementMapPath = "";
 
-	// Floats
+	// Decimals
 	float _height = 0.0f;
 	float _size = 1.0f;
 	float _textureRepeat = 1.0f;

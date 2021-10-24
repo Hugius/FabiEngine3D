@@ -47,7 +47,14 @@ private:
 	void _renderApplication();
 	void _updateWindowFading();
 
-	// Instances
+	// Decimals
+	float _deltaTimeMS = 0.0f;
+
+	// Booleans
+	bool _isPaused = false;
+	bool _isRunning = false;
+
+	// Miscellaneous
 	FabiEngine3D& _fe3d;
 	LibraryLoader _libraryLoader;
 	MeshLoader _meshLoader;
@@ -78,11 +85,4 @@ private:
 	ImageEntityManager _imageEntityManager;
 	TextEntityManager _textEntityManager;
 	RayCaster _rayCaster;
-
-	// Floats
-	float _deltaTimeMS = 0.0f;
-
-	// Booleans
-	bool _isPaused = false;
-	bool _isRunning = false;
 };

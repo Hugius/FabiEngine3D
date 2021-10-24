@@ -35,7 +35,7 @@ public:
 		const unordered_map<string, shared_ptr<TextEntity>>& textEntities
 	);
 
-	// Instances
+	// Miscellaneous
 	const shared_ptr<SkyEntity>	getMainSkyEntity();
 	const shared_ptr<SkyEntity> getMixSkyEntity();
 	const shared_ptr<TerrainEntity> getTerrainEntity();
@@ -50,7 +50,7 @@ public:
 	const unordered_map<string, shared_ptr<TextEntity>>& getTextEntities();
 
 private:
-	// Instances
+	// Miscellaneous
 	const shared_ptr<SkyEntity>	_mainSkyEntity = nullptr;
 	const shared_ptr<SkyEntity>	_mixSkyEntity = nullptr;
 	const shared_ptr<TerrainEntity> _terrainEntity = nullptr;

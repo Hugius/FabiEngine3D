@@ -14,18 +14,18 @@ public:
 	void update() override;
 	void update(const unordered_map<string, shared_ptr<ReflectionEntity>>& reflectionEntities);
 
-	// Instances
+	// Decimals
+	float getLevelOfDetailDistance();
+
+	// Miscellaneous
 	shared_ptr<ModelEntity> getEntity(const string& ID);
 	const unordered_map<string, shared_ptr<ModelEntity>>& getEntities();
 
-	// Floats
-	float getLevelOfDetailDistance();
-
 private:
-	// Instances
-	Timer& _timer;
-
-	// Floats
+	// Decimals
 	static inline const float CUBE_REFLECTION_OVERLAP_SPEED = 0.01f;
 	float _levelOfDetailDistance = 0.0f;
+
+	// Miscellaneous
+	Timer& _timer;
 };

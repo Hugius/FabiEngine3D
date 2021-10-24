@@ -80,9 +80,6 @@ public:
 	void setFaceCulled(bool value);
 	void setRotationOrder(DirectionOrder order);
 
-	// Instances
-	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
-
 	// Strings
 	const vector<string> getPartIDs();
 	const string& getMeshPath();
@@ -110,7 +107,7 @@ public:
 	const Vec3 getPartRotationOrigin(const string& partID);
 	const Vec3 getPartSize(const string& partID);
 
-	// Floats
+	// Decimals
 	const float getCubeReflectionMixValue();
 	const float getMinHeight();
 	const float getMaxHeight();
@@ -142,6 +139,7 @@ public:
 	const bool hasNormalMap(const string& partID);
 
 	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer(const string& partID);
 	const TextureID getDiffuseMap(const string& partID);
 	const TextureID getEmissionMap(const string& partID);
 	const TextureID getSpecularMap(const string& partID);
@@ -159,9 +157,6 @@ private:
 		{
 
 		}
-
-		// Instances
-		shared_ptr<RenderBuffer> renderBuffer = nullptr;
 
 		// Strings
 		const string ID;
@@ -184,7 +179,7 @@ private:
 		Vec3 sizeTarget = Vec3(1.0f);
 		Vec3 color = Vec3(1.0f);
 
-		// Floats
+		// Decimals
 		float positionTargetSpeed = 0.0f;
 		float rotationTargetSpeed = 0.0f;
 		float sizeTargetSpeed = 0.0f;
@@ -202,6 +197,7 @@ private:
 		bool isReflective = false;
 
 		// Miscellaneous
+		shared_ptr<RenderBuffer> renderBuffer = nullptr;
 		TextureID diffuseMap = 0;
 		TextureID emissionMap = 0;
 		TextureID specularMap = 0;
@@ -217,9 +213,6 @@ private:
 
 	// Integers
 	unsigned int _getPartIndex(const string& partID);
-
-	// Instances
-	vector<PartData> _parts;
 
 	// Strings
 	string _meshPath = "";
@@ -237,7 +230,7 @@ private:
 	Vec3 _baseSizeTarget = Vec3(1.0f);
 	Vec3 _levelOfDetailSize = Vec3(1.0f);
 
-	// Floats
+	// Decimals
 	float _basePositionTargetSpeed = 0.0f;
 	float _baseRotationTargetSpeed = 0.0f;
 	float _baseSizeTargetSpeed = 0.0f;
@@ -256,5 +249,6 @@ private:
 	bool _isFaceCulled = false;
 
 	// Miscellaneous
+	vector<PartData> _parts;
 	DirectionOrder _rotationOrder = DirectionOrder::YXZ;
 };

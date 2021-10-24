@@ -20,7 +20,7 @@ public:
 	void increasePassedFrameCount();
 	void clearDeltaParts();
 
-	// Floats
+	// Decimals
 	float stop();
 	float getDeltaPart(const string& ID);
 	float getDeltaPartSum();
@@ -36,7 +36,7 @@ private:
 	// Strings
 	string _currentID = "";
 
-	// Floats
+	// Decimals
 	map<string, float> _deltaParts;
 
 	// Integers

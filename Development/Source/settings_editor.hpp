@@ -25,17 +25,17 @@ private:
 	void _loadGUI();
 	void _unloadGUI();
 
-	// Instances
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-
 	// Strings
 	string _currentProjectID = "";
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 
 	// Booleans
 	bool _isEditorLoaded = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
 };

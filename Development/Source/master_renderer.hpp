@@ -69,7 +69,11 @@ private:
 	void _renderCustomCursor();
 	void _renderDebugScreens();
 
-	// Instances
+	// Decimals
+	float _cameraYawDifference = 0.0f;
+	float _cameraPitchDifference = 0.0f;
+
+	// Miscellaneous
 	Camera& _camera;
 	Timer& _timer;
 	RenderBus& _renderBus;
@@ -110,8 +114,4 @@ private:
 	CaptureBuffer _motionBlurCaptureBuffer;
 	shared_ptr<ImageEntity> _renderSurface = nullptr;
 	EntityBus* _entityBus = nullptr;
-
-	// Floats
-	float _cameraYawDifference = 0.0f;
-	float _cameraPitchDifference = 0.0f;
 };

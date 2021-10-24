@@ -60,9 +60,6 @@ public:
 	void setTextureRepeat(float value);
 	void setEmissionIntensity(float value);
 
-	// Instances
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-
 	// Strings
 	const string& getTextContent();
 	const string& getFontPath();
@@ -78,7 +75,7 @@ public:
 	const Vec3 getColor();
 	const Vec2 getSize();
 
-	// Floats
+	// Decimals
 	const float getLightness();
 	const float getColorInversion();
 	const float getAlpha();
@@ -113,13 +110,11 @@ public:
 	const bool hasEmissionMap();
 
 	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getDiffuseMap();
 	const TextureID getEmissionMap();
 
 private:
-	// Instances
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-
 	// Strings
 	string _textContent = "";
 	string _diffuseMapPath = "";
@@ -138,7 +133,7 @@ private:
 	Vec2 _size = Vec2(1.0f);
 	Vec2 _sizeTarget = Vec2(1.0f);
 
-	// Floats
+	// Decimals
 	float _emissionIntensity = 1.0f;
 	float _textureRepeat = 1.0f;
 	float _positionTargetSpeed = 0.0f;
@@ -173,6 +168,7 @@ private:
 	bool _isText = false;
 
 	// Miscellaneous
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 	TextureID _emissionMap = 0;
 };

@@ -61,9 +61,6 @@ public:
 	const Direction getCollisionDirection();
 
 private:
-	// Instances
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-
 	// Strings
 	string _parentID = "";
 
@@ -78,7 +75,7 @@ private:
 	Vec3 _positionTarget = Vec3(0.0f);
 	Vec3 _sizeTarget = Vec3(1.0f);
 
-	// Floats
+	// Decimals
 	float _positionTargetSpeed = 0.0f;
 	float _sizeTargetSpeed = 0.0f;
 
@@ -90,6 +87,7 @@ private:
 	bool _hasCollided = false;
 
 	// Miscellaneous
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	AabbParentType _parentType;
 	Direction _collisionDirection;
 };

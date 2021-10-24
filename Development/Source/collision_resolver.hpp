@@ -25,10 +25,7 @@ public:
 	bool isCameraTerrainResponseEnabled();
 
 private:
-	// Instances
-	Box _cameraBox;
-
-	// Floats
+	// Decimals
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
@@ -39,4 +36,7 @@ private:
 	bool _isCameraAabbResponseEnabledZ = false;
 	bool _isCameraTerrainResponseEnabled = false;
 	bool _isCameraUnderTerrain = false;
+
+	// Miscellaneous
+	Box _cameraBox;
 };

@@ -949,15 +949,15 @@ protected:
 	virtual void FE3D_CONTROLLER_DESTROY() = 0;
 
 private:
-	// Instances
-	CoreEngine* _core = nullptr;
-
 	// Strings
 	string _hoveredAabbID = "";
 
-	// Floats
+	// Decimals
 	float _hoveredAabbDistance = -1.0f;
 
 	// Booleans
 	bool _isRaycastUpdated = false;
+
+	// Miscellaneous
+	CoreEngine* _core = nullptr;
 };

@@ -27,9 +27,6 @@ public:
 	void setRotationSpeed(float value);
 	void setWireFramed(bool value);
 
-	// Instances
-	const shared_ptr<RenderBuffer> getRenderBuffer();
-
 	// Strings
 	const array<string, 6>& getDiffuseMapPaths();
 
@@ -39,7 +36,7 @@ public:
 	// Vectors
 	const Vec3 getColor();
 
-	// Floats
+	// Decimals
 	const float getOriginalLightness();
 	const float getLightness();
 	const float getRotation();
@@ -51,12 +48,10 @@ public:
 	const bool isWireFramed();
 
 	// Miscellaneous
+	const shared_ptr<RenderBuffer> getRenderBuffer();
 	const TextureID getDiffuseMap();
 
 private:
-	// Instances
-	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
-
 	// Strings
 	array<string, 6> _diffuseMapPaths = { "", "", "", "", "", "" };
 
@@ -66,7 +61,7 @@ private:
 	// Vectors
 	Vec3 _color = Vec3(1.0f);
 
-	// Floats
+	// Decimals
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;
 	float _rotationSpeed = 0.0f;
@@ -76,5 +71,6 @@ private:
 	bool _isWireFramed = false;
 
 	// Miscellaneous
+	shared_ptr<RenderBuffer> _renderBuffer = nullptr;
 	TextureID _diffuseMap = 0;
 };

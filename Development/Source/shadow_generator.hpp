@@ -20,13 +20,10 @@ public:
 	const bool isFollowingCamera() const;
 
 private:
-	// Instances
-	RenderBus& _renderBus;
-
 	// Matrices
 	Matrix44 _createLightSpaceMatrix();
 
-	// Floats
+	// Decimals
 	static inline const float NEAR_Z = 0.01f;
 
 	// Integers
@@ -35,4 +32,7 @@ private:
 
 	// Booleans
 	bool _isFollowingCamera = false;
+
+	// Miscellaneous
+	RenderBus& _renderBus;
 };

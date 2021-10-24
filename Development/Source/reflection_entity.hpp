@@ -36,7 +36,7 @@ private:
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _positionTarget = Vec3(0.0f);
 
-	// Floats
+	// Decimals
 	float _positionTargetSpeed = 0.0f;
 
 	// Boolean

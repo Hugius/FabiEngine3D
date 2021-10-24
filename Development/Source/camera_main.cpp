@@ -27,7 +27,7 @@ void Camera::reset()
 	_position = Vec3(0.0f);
 	_thirdPersonLookat = Vec3(0.0f);
 
-	// Floats
+	// Decimals
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
 	_nearZ = DEFAULT_NEAR_Z;

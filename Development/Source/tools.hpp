@@ -27,7 +27,7 @@ public:
 	static const Vec2 convertFromScreenCoords(Ivec2 position);
 	static const Ivec2 convertToScreenCoords(Vec2 position);
 
-	// Floats
+	// Decimals
 	static const float getWindowAspectRatio();
 
 	// Integers

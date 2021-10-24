@@ -57,9 +57,6 @@ public:
 	bool isTextFieldExisting(const string& ID);
 
 private:
-	// Instances
-	FabiEngine3D& _fe3d;
-
 	// GUI elements
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWriteField>> _writeFields;
@@ -78,4 +75,7 @@ private:
 
 	// Booleans
 	bool _isActive = false;
+
+	// Miscellaneous
+	FabiEngine3D& _fe3d;
 };

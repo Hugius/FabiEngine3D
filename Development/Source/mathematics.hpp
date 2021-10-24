@@ -54,7 +54,7 @@ public:
 	static const Vec2 convertFromNDC(Vec2 position);
 	static const Vec2 convertToNDC(Vec2 position);
 
-	// Floats
+	// Decimals
 	static const float calculateDeterminant(Matrix33 matrix);
 	static const float calculateDeterminant(Matrix44 matrix);
 	static const float calculateVectorDistance(Vec2 firstPosition, Vec2 secondPosition);
@@ -80,7 +80,7 @@ public:
 	static const int getRandomInteger(int min, int max);
 
 private:
-	// Floats
+	// Decimals
 	static inline const float PI = 3.14159265358979323846264338327f;
 	static inline const float DEG2RAD = 0.01745329251994329576923690768489f;
 	static inline const float RAD2DEG = 57.295779513082320876798154814278f;

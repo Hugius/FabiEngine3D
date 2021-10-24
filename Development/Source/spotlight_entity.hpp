@@ -26,7 +26,7 @@ public:
 	const Vec3 getFrontVector();
 	const Vec3 getColor();
 
-	// Floats
+	// Decimals
 	const float getYaw();
 	const float getPitch();
 	const float getIntensity();
@@ -40,7 +40,7 @@ private:
 	Vec3 _frontVector = Vec3(0.0f);
 	Vec3 _color = Vec3(1.0f);
 
-	// Floats
+	// Decimals
 	float _positionTargetSpeed = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;

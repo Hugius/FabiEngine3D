@@ -16,31 +16,31 @@ public:
 	void setExposureSpeed(float value);
 	void setExposureEnabled(bool value);
 
-	// Instances
-	shared_ptr<SkyEntity> getEntity(const string& ID);
-	shared_ptr<SkyEntity> getSelectedMainSky();
-	shared_ptr<SkyEntity> getSelectedMixSky();
-	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
-
-	// Floats
+	// Decimals
 	const float getExposureIntensity();
 	const float getExposureSpeed();
 
 	// Booleans
 	const bool isExposureEnabled();
 
-private:
-	// Instances
-	const shared_ptr<RenderBuffer> _renderBuffer;
+	// Miscellaneous
+	shared_ptr<SkyEntity> getEntity(const string& ID);
+	shared_ptr<SkyEntity> getSelectedMainSky();
+	shared_ptr<SkyEntity> getSelectedMixSky();
+	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 
+private:
 	// Strings
 	string _selectedMainID = "";
 	string _selectedMixID = "";
 
-	// Floats
+	// Decimals
 	float _exposureIntensity = 0.0f;
 	float _exposureSpeed = 0.0f;
 
 	// Booleans
 	bool _isExposureEnabled = false;
+
+	// Miscellaneous
+	const shared_ptr<RenderBuffer> _renderBuffer;
 };

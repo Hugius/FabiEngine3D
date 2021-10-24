@@ -74,7 +74,7 @@ private:
 	// Vectors
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 
-	// Floats
+	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
 	static inline const float MOUSE_SENSITIVITY = 0.025f;

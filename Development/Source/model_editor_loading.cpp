@@ -1,6 +1,7 @@
 #include "model_editor.hpp"
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -19,11 +20,11 @@ const vector<string> ModelEditor::getAllMeshPathsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return {};
@@ -78,11 +79,11 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return {};
@@ -225,11 +226,11 @@ bool ModelEditor::loadModelEntitiesFromFile()
 	_loadedModelIDs.clear();
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\model.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `model.fe3d` missing!");
 		return false;

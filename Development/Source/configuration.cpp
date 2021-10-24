@@ -188,12 +188,12 @@ const Ivec2 Config::getWindowSize() const
 	return _windowSize;
 }
 
-const Ivec2 Config::getVpPos() const
+const Ivec2 Config::getViewportPosition() const
 {
 	return _viewportPosition;
 }
 
-const Ivec2 Config::getVpSize() const
+const Ivec2 Config::getViewportSize() const
 {
 	return _viewportSize;
 }

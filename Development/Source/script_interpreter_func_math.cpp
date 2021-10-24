@@ -43,7 +43,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
+						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, tan(angle)));
 					}
 				}
@@ -54,7 +54,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
+						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, sin(angle)));
 					}
 				}
@@ -65,7 +65,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					// Validate arguments
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
-						float angle = _fe3d.misc_convertToRadians(arguments[0].getDecimal());
+						float angle = Math::convertToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, cos(angle)));
 					}
 				}
@@ -77,7 +77,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = atan(arguments[0].getDecimal());
-						float result = _fe3d.misc_convertToDegrees(angle);
+						float result = Math::convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}
@@ -89,7 +89,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = asin(arguments[0].getDecimal());
-						float result = _fe3d.misc_convertToDegrees(angle);
+						float result = Math::convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}
@@ -101,7 +101,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = acos(arguments[0].getDecimal());
-						float result = _fe3d.misc_convertToDegrees(angle);
+						float result = Math::convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}
@@ -113,7 +113,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 					{
 						float angle = atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
-						float result = _fe3d.misc_convertToDegrees(angle);
+						float result = Math::convertToDegrees(angle);
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}
@@ -271,7 +271,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 					// Validate arguments
 					if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
 					{
-						auto result = _fe3d.misc_getPI();
+						auto result = Math::getPI();
 						returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 					}
 				}

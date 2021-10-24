@@ -11,8 +11,7 @@ using std::vector;
 class RenderBuffer final
 {
 public:
-	RenderBuffer() = delete;
-	RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount);   // 3D
+	RenderBuffer(RenderBufferType type, const float data[], unsigned int dataCount); // 3D
 	RenderBuffer(float x, float y, float w, float h, bool isCentered); // 2D
 	~RenderBuffer();
 	

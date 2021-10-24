@@ -61,10 +61,10 @@ void Camera::update(Ivec2 lastCursorPosition)
 {
 	// Temporary values
 	Ivec2 currenCursorPosition = _window.getCursorPosition();
-	const int left = Config::getInst().getVpPos().x;
-	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
-	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
-	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
+	const int left = Config::getInst().getViewportPosition().x;
+	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
+	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
+	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 
 	// Update cursor centering
 	if (_mustCenterCursor)

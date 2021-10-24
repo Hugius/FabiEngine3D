@@ -1,22 +1,39 @@
 #pragma once
 
+#include "mathematics.hpp"
+
 #include <string>
-#include <random>
-#include <ctime>
 
 using std::string;
-using std::mt19937;
 
 class Tools final
 {
 public:
 	Tools() = delete;
 
+	// Voids
+	static void createNewDirectory(const string& directoryPath);
+	static void setMainRenderingColor(Vec3 color);
+
+	// Strings
+	static const string vec2str(Ivec2 vec);
+	static const string vec2str(Vec2 vec);
+	static const string vec2str(Vec3 vec);
+	static const string vec2str(Vec4 vec);
 	static const string getRootDirectory();
-	static const int getRandomInteger(int min, int max);
-	static const float getRandomFloat(float min, float max);
+	static const string getWinExplorerFilename(const string& startingDirectory, const string& fileType);
+
+	// Vectors
+	static const Vec2 convertFromScreenCoords(Ivec2 position);
+	static const Ivec2 convertToScreenCoords(Vec2 position);
+
+	// Floats
+	static const float getWindowAspectRatio();
+
+	// Integers
 	static const long long getTimeSinceEpochMS();
 
-private:
-	static inline mt19937 _generator = mt19937(static_cast<unsigned int>(time(nullptr)));
+	// Booleans
+	static const bool isDirectoryExisting(const string& directoryPath);
+	static const bool isFileExisting(const string& filePath);
 };

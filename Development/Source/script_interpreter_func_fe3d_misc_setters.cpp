@@ -1,5 +1,6 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -70,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dMiscSetterFunction(const string& functionNam
 			// Determine which type of value to print
 			if (arguments[0].getType() == SVT::VEC3)
 			{
-				Logger::throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
+				Logger::throwInfo(Tools::vec2str(arguments[0].getVec3()));
 			}
 			else if (arguments[0].getType() == SVT::STRING)
 			{

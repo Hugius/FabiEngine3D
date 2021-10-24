@@ -1,5 +1,6 @@
 #include "audio_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void AudioEditor::update()
 {
@@ -102,11 +103,11 @@ void AudioEditor::_updateAudioCreating()
 					if (find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioID) == _loadedAudioIDs.end())
 					{
 						// Get the chosen filename
-						const auto rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = Tools::getRootDirectory();
 						const string targetDirectory = string("game_assets\\audio\\");
 
 						// Validate target directory
-						if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+						if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 						{
 							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 							_isCreatingAudio = false;
@@ -114,7 +115,7 @@ void AudioEditor::_updateAudioCreating()
 						}
 
 						// Validate chosen file
-						const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "WAV");
+						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "WAV");
 						if (filePath.empty())
 						{
 							_isCreatingAudio = false;

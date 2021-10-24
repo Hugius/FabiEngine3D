@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
+#include "configuration.hpp"
 
 #include <sstream>
 
@@ -107,8 +109,8 @@ bool ScriptInterpreter::_validateSavesDirectory()
 	}
 
 	// Check if saves directory still exists
-	auto directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
+	auto directoryPath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+	if (!Tools::isDirectoryExisting(directoryPath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: directory `saves\\` missing!");
 		return false;
@@ -168,10 +170,10 @@ Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 {
 	if (!_fe3d.application_isExported())
 	{
-		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
-		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
+		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
+		auto positionMultiplier = Vec2(Config::getInst().getViewportPosition()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
 		position *= sizeMultiplier;
 		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
 		position += Vec2(fabsf(offset.x), fabsf(offset.y));
@@ -184,16 +186,16 @@ Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 {
 	if (!_fe3d.application_isExported())
 	{
-		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
-		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
+		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
+		auto positionMultiplier = Vec2(Config::getInst().getViewportPosition()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
 		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
 		position -= Vec2(fabsf(offset.x), fabsf(offset.y));
-		sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
-			Vec2(_fe3d.misc_getViewportSize());
-		positionMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
-			Vec2(_fe3d.misc_getViewportPosition());
+		sizeMultiplier = Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y)) /
+			Vec2(Config::getInst().getViewportSize());
+		positionMultiplier = Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y)) /
+			Vec2(Config::getInst().getViewportPosition());
 		position *= sizeMultiplier;
 	}
 
@@ -204,8 +206,8 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 {
 	if (!_fe3d.application_isExported())
 	{
-		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
+		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
 		size *= sizeMultiplier;
 	}
 
@@ -216,8 +218,8 @@ Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
 {
 	if (!_fe3d.application_isExported())
 	{
-		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
+		auto sizeMultiplier = Vec2(Config::getInst().getViewportSize()) /
+			Vec2(static_cast<float>(Config::getInst().getWindowSize().x), static_cast<float>(Config::getInst().getWindowSize().y));
 		size /= sizeMultiplier;
 	}
 

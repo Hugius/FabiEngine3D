@@ -1,6 +1,7 @@
 #include "top_viewport_controller.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -258,18 +259,18 @@ void TopViewportController::_updateMiscScreenManagement()
 	if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("uncache")->isHovered())
 	{
 		// Get the chosen filename
-		const auto rootDirectory = _fe3d.misc_getRootDirectory();
+		const auto rootDirectory = Tools::getRootDirectory();
 		const string targetDirectory = string("game_assets\\");
 
 		// Validate target directory
-		if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+		if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 		{
 			Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 			return;
 		}
 
 		// Validate chosen file
-		const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "");
+		const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "");
 		if (filePath.empty())
 		{
 			return;

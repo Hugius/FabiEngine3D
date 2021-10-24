@@ -1,5 +1,6 @@
 #include "engine_gui_scrolling_list.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -104,7 +105,7 @@ void EngineGuiScrollingList::_updateHovering()
 	_isHovered = false;
 
 	// Convert dimensions to same space
-	Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+	Vec2 mousePos = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 	Vec2 listPos = _fe3d.imageEntity_getPosition(_entityID);
 	Vec2 listSize = _fe3d.imageEntity_getSize(_entityID);
 
@@ -126,7 +127,7 @@ void EngineGuiScrollingList::_updateScolling()
 		bool mustReset = false;
 
 		// Checking if cursor is inside scrolling list
-		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 mousePos = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
 			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))

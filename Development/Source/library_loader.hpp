@@ -13,8 +13,9 @@ public:
 
 	SDL_Window* getWindowPointer();
 
-	const string getGpuModel();
-	const string getOpenglVersion();
+	const string getCpuModel() const;
+	const string getGpuModel() const;
+	const string getOpenglVersion() const;
 
 private:
 	SDL_Window* _windowPointer = nullptr;

@@ -38,17 +38,17 @@ MasterRenderer::MasterRenderer(RenderBus& renderBus, Timer& timer, TextureLoader
 	_motionBlurBlurRenderer("blur_shader.vert", "blur_shader.frag", renderBus)
 {
 	// Post-processing capture buffers
-	_sceneDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize());
-	_sceneColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 2, false);
-	_antiAliasingCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_BLOOM_SIZE);
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (Config::MIN_BLOOM_SIZE * 2));
-	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_DOF_SIZE);
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / Config::MIN_MOTION_BLUR_SIZE);
+	_sceneDepthCaptureBuffer.createDepthTexture(Ivec2(0), Config::getInst().getViewportSize());
+	_sceneColorCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 2, false);
+	_antiAliasingCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_bloomCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_dofCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_lensFlareCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_motionBlurCaptureBuffer.createColorTexture(Ivec2(0), Config::getInst().getViewportSize(), 1, false);
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_BLOOM_SIZE);
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (Config::MIN_BLOOM_SIZE * 2));
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_DOF_SIZE);
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / Config::MIN_MOTION_BLUR_SIZE);
 
 	// Miscellaneous capture buffers
 	_cubeReflectionCaptureBuffer.createColorTexture(Ivec2(0), Ivec2(Config::MIN_REFLECTION_QUALITY), 1, false);
@@ -97,7 +97,7 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 
 	if (_renderBus.isWireFrameRenderingEnabled()) // Wire frame rendering
 	{
-		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
+		glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderSkyEntity();
@@ -174,13 +174,13 @@ void MasterRenderer::renderScene(EntityBus * entityBus)
 
 		if (_renderBus.isDebugRenderingEnabled()) // Render debug screens
 		{
-			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
+			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y + 1);
 			_renderDebugScreens();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		}
 		else // Render final scene texture
 		{
-			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
+			glViewport(Config::getInst().getViewportPosition().x, Config::getInst().getViewportPosition().y, Config::getInst().getViewportSize().x, Config::getInst().getViewportSize().y +0);
 			_renderFinalSceneImage();
 			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 			
@@ -202,20 +202,20 @@ void MasterRenderer::reloadBloomBlurCaptureBuffer()
 {
 	_bloomBlurRendererHighQuality.resetCaptureBuffer();
 	_bloomBlurRendererLowQuality.resetCaptureBuffer();
-	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getBloomSize());
-	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getVpSize() / (_renderBus.getBloomSize() * 2));
+	_bloomBlurRendererHighQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus.getBloomSize());
+	_bloomBlurRendererLowQuality.loadCaptureBuffer(Config::getInst().getViewportSize() / (_renderBus.getBloomSize() * 2));
 }
 
 void MasterRenderer::reloadDofBlurCaptureBuffer()
 {
 	_dofBlurRenderer.resetCaptureBuffer();
-	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getDofSize());
+	_dofBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus.getDofSize());
 }
 
 void MasterRenderer::reloadMotionBlurBlurCaptureBuffer()
 {
 	_motionBlurBlurRenderer.resetCaptureBuffer();
-	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getVpSize() / _renderBus.getMotionBlurSize	());
+	_motionBlurBlurRenderer.loadCaptureBuffer(Config::getInst().getViewportSize() / _renderBus.getMotionBlurSize	());
 }
 
 void MasterRenderer::reloadCubeReflectionCaptureBuffer()

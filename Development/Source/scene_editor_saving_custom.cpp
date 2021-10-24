@@ -1,5 +1,6 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -27,7 +28,7 @@ bool SceneEditor::saveCustomSceneToFile()
 	}
 
 	// Compose file path
-	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + _customSceneID + ".fe3d");
 
 	// Create or overwrite file
@@ -619,8 +620,8 @@ bool SceneEditor::saveCustomSceneToFile()
 				"GRAPHICS_SHADOWS " <<
 				size << " " <<
 				lightness << " " <<
-				_fe3d.misc_vec2str(position) << " " <<
-				_fe3d.misc_vec2str(center) << " " <<
+				Tools::vec2str(position) << " " <<
+				Tools::vec2str(center) << " " <<
 				isFollowingCamera << " " <<
 				interval << endl;
 		}
@@ -662,7 +663,7 @@ bool SceneEditor::saveCustomSceneToFile()
 				minDistance << " " <<
 				maxDistance << " " <<
 				thickness << " " <<
-				_fe3d.misc_vec2str(color) << endl;
+				Tools::vec2str(color) << endl;
 		}
 
 		// Lens flare settings

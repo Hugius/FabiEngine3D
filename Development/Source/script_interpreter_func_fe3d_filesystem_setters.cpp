@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <direct.h>
@@ -22,18 +23,18 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
-			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
+			if (Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				_throwScriptError("cannot create directory \"" + arguments[0].getString() + "\"!");
 			}
 			else
 			{
-				_fe3d.misc_createNewDirectory(newDirectoryPath);
+				Tools::createNewDirectory(newDirectoryPath);
 			}
 
 			// Return
@@ -48,12 +49,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
-			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
+			if (Tools::isDirectoryExisting(newDirectoryPath))
 			{
 				remove_all(newDirectoryPath);
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -72,12 +73,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				_throwScriptError("cannot create file \"" + arguments[0].getString() + "\"!");
 			}
@@ -99,12 +100,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				auto status = remove(filePath.c_str());
 				returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
@@ -123,12 +124,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, 2) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				// Open file
 				ofstream file(filePath, ios::app);
@@ -178,12 +179,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				ofstream file(filePath, ios::app);
 				file << endl;
@@ -204,12 +205,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemSetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				ofstream file(filePath, ios::trunc);
 				file.close();

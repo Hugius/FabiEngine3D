@@ -1,5 +1,6 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -18,11 +19,11 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return {};
@@ -93,11 +94,11 @@ const vector<string> BillboardEditor::getAllFontPathsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return {};
@@ -165,11 +166,11 @@ bool BillboardEditor::loadBillboardEntitiesFromFile()
 	_loadedBillboardIDs.clear();
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `billboard.fe3d` missing!");
 		return false;
@@ -302,7 +303,7 @@ bool BillboardEditor::saveBillboardEntitiesToFile()
 	}
 
 	// Compose file path
-	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\billboard.fe3d");
 
 	// Create or overwrite billboard file

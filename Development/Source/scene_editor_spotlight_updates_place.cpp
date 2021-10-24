@@ -24,7 +24,7 @@ void SceneEditor::_updateSpotlightPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				const string newID = ("spotlight_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+				const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if spotlight already exists
 				if (_fe3d.spotlightEntity_isExisting(newID))
@@ -105,7 +105,7 @@ void SceneEditor::_updateSpotlightPlacing()
 
 						// Adding a number to make it unique
 					BEGIN2:
-						const string newID = ("spotlight_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+						const string newID = ("spotlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if spotlight already exists
 						if (_fe3d.spotlightEntity_isExisting(newID))

@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 
@@ -17,12 +18,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose directory paths
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
-			auto result =  _fe3d.misc_isDirectoryExisting(newDirectoryPath);
+			auto result =  Tools::isDirectoryExisting(newDirectoryPath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -34,12 +35,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Return
-			auto result = _fe3d.misc_isFileExisting(filePath);
+			auto result = Tools::isFileExisting(filePath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}
@@ -51,12 +52,12 @@ bool ScriptInterpreter::_executeFe3dFilesystemGetterFunction(const string& funct
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types) && _validateSavesDirectory())
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" : 
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" : 
 				("projects\\" + _currentProjectID)) + "\\saves\\");
 			string filePath = (directoryPath + arguments[0].getString());
 
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(filePath))
+			if (Tools::isFileExisting(filePath))
 			{
 				// Open file
 				ifstream file(filePath);

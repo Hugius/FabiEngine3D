@@ -1,6 +1,7 @@
 #include "engine_controller.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 EngineController::EngineController()
 	:
@@ -24,7 +25,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	if (application_isExported()) // Application preview
 	{
 		// Validate project files & directories
-		if (_topViewportController.isProjectCorrupted(misc_getRootDirectory()))
+		if (_topViewportController.isProjectCorrupted(Tools::getRootDirectory()))
 		{
 			Logger::throwFatalWarning("Cannot load application: missing files/directories!");
 		}
@@ -42,7 +43,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().setCurrentProjectID(application_getTitle());
 
 		// Default rendering color
-		misc_setMainRenderingColor(Vec3(0.0f));
+		Tools::setMainRenderingColor(Vec3(0.0f));
 
 		// Load application settings
 		_leftViewportController.getSettingsEditor().loadSettingsFromFile();
@@ -136,7 +137,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		misc_cacheFontsMultiThreaded(fontPaths);
 		
 		// Default rendering color
-		misc_setMainRenderingColor(Vec3(0.0f));
+		Tools::setMainRenderingColor(Vec3(0.0f));
 
 		// Default engine background
 		skyEntity_create("@@engineBackground");
@@ -145,7 +146,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Custom cursor texture
 		imageEntity_create("@@cursor", true);
-		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * misc_getAspectRatio()));
+		imageEntity_setSize("@@cursor", Vec2(0.075f, 0.075f * Tools::getWindowAspectRatio()));
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_default.png");
 		misc_setCustomCursor("@@cursor");
 		misc_setCursorVisible(false);
@@ -197,7 +198,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		lastScreen = activeScreen;
 
 		// Update custom cursor
-		imageEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
+		imageEntity_setPosition("@@cursor", Math::convertToNDC(Tools::convertFromScreenCoords(misc_getCursorPosition())));
 		imageEntity_setDiffuseMap("@@cursor", "engine_assets\\textures\\cursor_default.png");
 		imageEntity_setVisible("@@cursor", misc_isCursorInsideWindow());
 

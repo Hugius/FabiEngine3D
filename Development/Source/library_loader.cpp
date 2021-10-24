@@ -90,12 +90,52 @@ SDL_Window* LibraryLoader::getWindowPointer()
 	return temp;
 }
 
-const string LibraryLoader::getGpuModel()
+// https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
+const string LibraryLoader::getCpuModel() const
+{
+	// Temporary values
+	int CPUInfo[4];
+	char model[48];
+
+	// Retrieve full CPU model string
+	__cpuid(CPUInfo, 0x80000002);
+	memcpy(model, CPUInfo, sizeof(CPUInfo));
+	__cpuid(CPUInfo, 0x80000003);
+	memcpy(model + 16, CPUInfo, sizeof(CPUInfo));
+	__cpuid(CPUInfo, 0x80000004);
+	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
+
+	// Convert to string
+	string nameString;
+	for (unsigned int i = 0; i < 48; i++)
+	{
+		nameString.push_back(model[i]);
+	}
+
+	// Remove trailing spaces
+	string result;
+	reverse(nameString.begin(), nameString.end());
+	for (size_t i = 0; i < nameString.size(); i++)
+	{
+		// Check if end of whitespace found
+		if (nameString[i] != 0)
+		{
+			result = nameString.substr(i);
+			break;
+		}
+	}
+
+	// Return
+	reverse(result.begin(), result.end());
+	return result;
+}
+
+const string LibraryLoader::getGpuModel() const
 {
 	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
 }
 
-const string LibraryLoader::getOpenglVersion()
+const string LibraryLoader::getOpenglVersion() const
 {
 	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
 }

@@ -46,7 +46,7 @@ void SceneEditor::_updateModelPlacing()
 				{
 					// Adding a number to make it unique
 				BEGIN1:
-					const string newID = (rawID + "_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+					const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 					// Check if model already exists
 					if (_fe3d.modelEntity_isExisting(newID))
@@ -117,7 +117,7 @@ void SceneEditor::_updateModelPlacing()
 						{
 						BEGIN2:
 							// Adding a number to make it unique
-							const string newID = (rawID + "_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+							const string newID = (rawID + "_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 							// Check if model already exists
 							if (_fe3d.modelEntity_isExisting(newID))

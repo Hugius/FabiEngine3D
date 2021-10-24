@@ -1,5 +1,6 @@
 #include "model_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -215,11 +216,11 @@ void ModelEditor::_updateModelCreating()
 					if (find(_loadedModelIDs.begin(), _loadedModelIDs.end(), newModelID) == _loadedModelIDs.end())
 					{
 						// Get the chosen filename
-						const auto rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = Tools::getRootDirectory();
 						const string targetDirectory = string("game_assets\\meshes\\");
 
 						// Validate target directory
-						if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+						if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 						{
 							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 							_isCreatingModel = false;
@@ -227,7 +228,7 @@ void ModelEditor::_updateModelCreating()
 						}
 
 						// Validate chosen file
-						const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "OBJ");
+						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "OBJ");
 						if (filePath.empty())
 						{
 							_isCreatingModel = false;

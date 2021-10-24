@@ -1,5 +1,8 @@
 #include "mathematics.hpp"
 
+using std::uniform_int_distribution;
+using std::uniform_real_distribution;
+
 const float Math::calculateAngleDifference(float firstAngle, float secondAngle)
 {
 	float difference = fabsf(firstAngle - secondAngle);
@@ -99,4 +102,34 @@ const float Math::convertToDegrees(float angle)
 const float Math::getPI()
 {
 	return PI;
+}
+
+const float Math::getRandomFloat(float min, float max)
+{
+	uniform_real_distribution<float> dist(min, max);
+	return dist(_generator);
+}
+
+const int Math::getRandomInteger(int min, int max)
+{
+	uniform_int_distribution<int> dist(min, max);
+	return dist(_generator);
+}
+
+const Vec2 Math::convertToNDC(Vec2 position)
+{
+	position.x = ((position.x * 2.0f) - 1.0f);
+	position.y = ((position.y * 2.0f) - 1.0f);
+
+	return Vec2(position.x, position.y);
+}
+
+const Vec2 Math::convertFromNDC(Vec2 position)
+{
+	position.x += 1.0f;
+	position.y += 1.0f;
+	position.x /= 2.0f;
+	position.y /= 2.0f;
+
+	return Vec2(position.x, position.y);
 }

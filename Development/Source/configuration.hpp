@@ -28,8 +28,8 @@ public:
 	const string& getWindowTitle()		  const;
 	const Ivec2   getMonitorSize()		  const;
 	const Ivec2   getWindowSize()		  const;
-	const Ivec2   getVpSize()			  const;
-	const Ivec2   getVpPos()			  const;
+	const Ivec2   getViewportSize()		  const;
+	const Ivec2   getViewportPosition()	  const;
 	const bool    isWindowFullscreen()	  const;
 	const bool    isWindowBorderless()	  const;
 	const bool    isApplicationExported() const;
@@ -61,7 +61,7 @@ private:
 	void _processOption(ifstream& file, float& option, string criteria);
 	void _processOption(ifstream& file, int& option, string criteria);
 	void _processOption(ifstream& file, bool& option, string criteria);
-	
+
 	string _applicationTitle = "";
 	string _windowTitle = "";
 	Ivec2  _monitorSize = Ivec2(0);

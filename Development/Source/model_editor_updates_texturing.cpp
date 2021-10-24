@@ -1,5 +1,6 @@
 #include "model_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -25,18 +26,18 @@ void ModelEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -58,18 +59,18 @@ void ModelEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -91,18 +92,18 @@ void ModelEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("specularMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\specular_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -124,18 +125,18 @@ void ModelEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("reflectionMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\reflection_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -157,18 +158,18 @@ void ModelEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("normalMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;

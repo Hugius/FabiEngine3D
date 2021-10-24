@@ -1,43 +1,15 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
-#include "tools.hpp"
 #include "configuration.hpp"
-
-#include <direct.h>
 
 const unsigned int FabiEngine3D::misc_getTriangleCount()
 {
 	return _core->_renderBus.getTriangleCount();
 }
 
-const float FabiEngine3D::misc_getRandomFloat(float min, float max)
-{
-	return Tools::getRandomFloat(min, max);
-}
-
-const float FabiEngine3D::misc_getAspectRatio()
-{
-	return static_cast<float>(misc_getWindowSize().x) / static_cast<float>(misc_getWindowSize().y);
-}
-
 const float FabiEngine3D::misc_getFPS()
 {
-	return 1000.0f / _core->_deltaTimeMS;
-}
-
-const float FabiEngine3D::misc_getPI()
-{
-	return Math::getPI();
-}
-
-const float FabiEngine3D::misc_convertToRadians(float degrees)
-{
-	return Math::convertToRadians(degrees);
-}
-
-const float FabiEngine3D::misc_convertToDegrees(float radians)
-{
-	return Math::convertToDegrees(radians);
+	return (1000.0f / _core->_deltaTimeMS);
 }
 
 const float FabiEngine3D::misc_stopMillisecondTimer()
@@ -56,100 +28,9 @@ const float FabiEngine3D::misc_getLevelOfDetailDistance()
 	return _core->_modelEntityManager.getLevelOfDetailDistance();
 }
 
-const string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)
+const string FabiEngine3D::misc_getCpuModel()
 {
-	// Prepare filter C-string
-	string filter = fileType;
-	filter.push_back('\0');
-	filter += "*." + fileType + '\0';
-	auto startingDirectoryStringC = startingDirectory.c_str();
-
-	// Open file explorer
-	OPENFILENAME ofn;
-	char pathBuffer[256] = {};
-	char titleBuffer[100] = {};
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = nullptr;
-	ofn.lpstrFile = pathBuffer;
-	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = sizeof(pathBuffer);
-	ofn.lpstrFilter = filter.c_str();
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = titleBuffer;
-	ofn.lpstrFileTitle[0] = '\0';
-	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = startingDirectoryStringC;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-	GetOpenFileName(&ofn);
-
-	// Return chosen filename or nothing if cancelled
-	string filePath = ofn.lpstrFile;
-	return filePath;
-}
-
-const string FabiEngine3D::misc_vec2str(Ivec2 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y);
-}
-
-const string FabiEngine3D::misc_vec2str(Vec2 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y);
-}
-
-const string FabiEngine3D::misc_vec2str(Vec3 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z);
-}
-
-const string FabiEngine3D::misc_vec2str(Vec4 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
-}
-
-const string FabiEngine3D::misc_getRootDirectory()
-{
-	return Tools::getRootDirectory();
-}
-
-const string FabiEngine3D::misc_getCpuModel() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
-{
-	// Temporary values
-	int CPUInfo[4];
-	char model[48];
-
-	// Retrieve full CPU model string
-	__cpuid(CPUInfo, 0x80000002);
-	memcpy(model, CPUInfo, sizeof(CPUInfo));
-	__cpuid(CPUInfo, 0x80000003);
-	memcpy(model + 16, CPUInfo, sizeof(CPUInfo));
-	__cpuid(CPUInfo, 0x80000004);
-	memcpy(model + 32, CPUInfo, sizeof(CPUInfo));
-
-	// Convert to string
-	string nameString;
-	for (unsigned int i = 0; i < 48; i++)
-	{
-		nameString.push_back(model[i]);
-	}
-
-	// Remove trailing spaces
-	string result;
-	reverse(nameString.begin(), nameString.end());
-	for (size_t i = 0; i < nameString.size(); i++)
-	{
-		// Check if end of whitespace found
-		if (nameString[i] != 0)
-		{
-			result = nameString.substr(i);
-			break;
-		}
-	}
-
-	// Return
-	reverse(result.begin(), result.end());
-	return result;
+	return _core->_libraryLoader.getCpuModel();
 }
 
 const string FabiEngine3D::misc_getGpuModel()
@@ -162,37 +43,11 @@ const string FabiEngine3D::misc_getOpenglVersion()
 	return _core->_libraryLoader.getOpenglVersion();
 }
 
-const Vec2 FabiEngine3D::misc_convertToNDC(Vec2 position)
-{
-	position.x = (position.x * 2.0f) - 1.0f;
-	position.y = (position.y * 2.0f) - 1.0f;
-
-	return Vec2(position.x, position.y);
-}
-
-const Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 position)
-{
-	position.x += 1.0f;
-	position.x /= 2.0f;
-	position.y += 1.0f;
-	position.y /= 2.0f;
-
-	return Vec2(position.x, position.y);
-}
-
-const Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 position)
-{
-	const float x = static_cast<float>(position.x) * static_cast<float>(misc_getWindowSize().x);
-	const float y = static_cast<float>(position.y) * static_cast<float>(misc_getWindowSize().y);
-
-	return Ivec2(static_cast<int>(x), static_cast<int>(y));
-}
-
 const Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
 	Ivec2 mousePosition = _core->_window.getCursorPosition();
 
-	return Ivec2(mousePosition.x, misc_getWindowSize().y - mousePosition.y);
+	return Ivec2(mousePosition.x, (Config::getInst().getWindowSize().y - mousePosition.y));
 }
 
 const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
@@ -205,8 +60,8 @@ const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 	{
 		// Temporary values
 		auto windowSize = Config::getInst().getWindowSize();
-		auto viewportPosition = Config::getInst().getVpPos();
-		auto viewportSize = Config::getInst().getVpSize();
+		auto viewportPosition = Config::getInst().getViewportPosition();
+		auto viewportSize = Config::getInst().getViewportSize();
 
 		// Calculate viewport position Y offset, because GUI borders are not all of the same size
 		Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
@@ -219,36 +74,13 @@ const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 
 		// Return
 		Ivec2 result = Ivec2(relativeCursorPosition);
-		return Ivec2(result.x, misc_getWindowSize().y - result.y);
+		return Ivec2(result.x, (Config::getInst().getWindowSize().y - result.y));
 	}
-}
-
-const Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 position)
-{
-	const float x = static_cast<float>(position.x) / static_cast<float>(misc_getWindowSize().x);
-	const float y = static_cast<float>(position.y) / static_cast<float>(misc_getWindowSize().y);
-
-	return Vec2(x, y);
 }
 
 const bool FabiEngine3D::misc_isMillisecondTimerStarted()
 {
 	return _core->_timer.isStarted();
-}
-
-const Ivec2 FabiEngine3D::misc_getWindowSize()
-{
-	return Config::getInst().getWindowSize();
-}
-
-const Ivec2 FabiEngine3D::misc_getViewportPosition()
-{
-	return Config::getInst().getVpPos();
-}
-
-const Ivec2 FabiEngine3D::misc_getViewportSize()
-{
-	return Config::getInst().getVpSize();
 }
 
 const bool FabiEngine3D::misc_isCursorVisible()
@@ -260,13 +92,13 @@ const bool FabiEngine3D::misc_isCursorInsideViewport()
 {
 	// Temporary values
 	auto mousePosition = misc_getCursorPosition();
-	auto viewportPosition = misc_getViewportPosition();
-	auto viewportSize = misc_getViewportSize();
+	auto viewportPosition = Config::getInst().getViewportPosition();
+	auto viewportSize = Config::getInst().getViewportSize();
 
 	// Checking if cursor is inside viewport
-	if (mousePosition.x > viewportPosition.x && mousePosition.x < viewportPosition.x + viewportSize.x)
+	if ((mousePosition.x > viewportPosition.x) && (mousePosition.x < (viewportPosition.x + viewportSize.x)))
 	{
-		if (mousePosition.y > viewportPosition.y && mousePosition.y < viewportPosition.y + viewportSize.y)
+		if ((mousePosition.y > viewportPosition.y) && (mousePosition.y < (viewportPosition.y + viewportSize.y)))
 		{
 			return true;
 		}
@@ -279,32 +111,18 @@ const bool FabiEngine3D::misc_isCursorInsideWindow()
 {
 	// Temporary values
 	auto mousePosition = misc_getCursorPosition();
-	auto windowSize = misc_getWindowSize();
+	auto windowSize = Config::getInst().getWindowSize();
 	
 	// Checking if cursor is inside viewport
-	if (mousePosition.x > 1 && mousePosition.x < windowSize.x - 1)
+	if ((mousePosition.x > 1) && (mousePosition.x < (windowSize.x - 1)))
 	{
-		if (mousePosition.y > 1 && mousePosition.y < windowSize.y - 1)
+		if ((mousePosition.y > 1) && (mousePosition.y < (windowSize.y - 1)))
 		{
 			return true;
 		}
 	}
 
 	return false;
-}
-
-const bool FabiEngine3D::misc_isDirectoryExisting(const string& filePath)
-{
-	struct stat fileInfo;
-	int result = stat(filePath.c_str(), &fileInfo);
-	return (result == 0 && (fileInfo.st_mode & S_IFDIR));
-}
-
-const bool FabiEngine3D::misc_isFileExisting(const string& filePath)
-{
-	struct stat fileInfo;
-	bool isExisting = stat(filePath.c_str(), &fileInfo) == 0;
-	return (isExisting && !misc_isDirectoryExisting(filePath));
 }
 
 const bool FabiEngine3D::misc_checkInterval(unsigned int ticks)
@@ -370,11 +188,6 @@ const vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics(
 	}
 
 	return result;
-}
-
-void FabiEngine3D::misc_createNewDirectory(const string& directoryPath)
-{
-	_mkdir(directoryPath.c_str());
 }
 
 const bool FabiEngine3D::misc_isVsyncEnabled()

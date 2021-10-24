@@ -1,15 +1,36 @@
 #include "tools.hpp"
-#include "logger.hpp"
+#include "configuration.hpp"
 
-#include <sstream>
 #include <filesystem>
+#include <windows.h>
+#include <direct.h>
+#include <GLEW/glew.h>
 
-using std::uniform_int_distribution;
-using std::uniform_real_distribution;
+using std::to_string;
 using std::filesystem::absolute;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
 using std::chrono::system_clock;
+
+const string Tools::vec2str(Ivec2 vec)
+{
+	return string(to_string(vec.x) + " " + to_string(vec.y));
+}
+
+const string Tools::vec2str(Vec2 vec)
+{
+	return string(to_string(vec.x) + " " + to_string(vec.y));
+}
+
+const string Tools::vec2str(Vec3 vec)
+{
+	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z));
+}
+
+const string Tools::vec2str(Vec4 vec)
+{
+	return string(to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w));
+}
 
 const string Tools::getRootDirectory()
 {
@@ -33,19 +54,84 @@ const string Tools::getRootDirectory()
 	return rootDir;
 }
 
-const int Tools::getRandomInteger(int min, int max)
+const float Tools::getWindowAspectRatio()
 {
-	uniform_int_distribution<int> dist(min, max);
-	return dist(_generator);
-}
-
-const float Tools::getRandomFloat(float min, float max)
-{	
-	uniform_real_distribution<float> dist(min, max);
-	return dist(_generator);
+	return static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 }
 
 const long long Tools::getTimeSinceEpochMS()
 {
 	return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+}
+
+const string Tools::getWinExplorerFilename(const string& startingDirectory, const string& fileType)
+{
+	// Prepare filter C-string
+	string filter = fileType;
+	filter.push_back('\0');
+	filter += "*." + fileType + '\0';
+	auto startingDirectoryStringC = startingDirectory.c_str();
+
+	// Open file explorer
+	OPENFILENAME ofn;
+	char pathBuffer[256] = {};
+	char titleBuffer[100] = {};
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = nullptr;
+	ofn.lpstrFile = pathBuffer;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(pathBuffer);
+	ofn.lpstrFilter = filter.c_str();
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = titleBuffer;
+	ofn.lpstrFileTitle[0] = '\0';
+	ofn.nMaxFileTitle = sizeof(titleBuffer);
+	ofn.lpstrInitialDir = startingDirectoryStringC;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	GetOpenFileName(&ofn);
+
+	// Return chosen filename or nothing if cancelled
+	string filePath = ofn.lpstrFile;
+	return filePath;
+}
+
+const bool Tools::isDirectoryExisting(const string& filePath)
+{
+	struct stat fileInfo;
+	int result = stat(filePath.c_str(), &fileInfo);
+	return (result == 0 && (fileInfo.st_mode & S_IFDIR));
+}
+
+const bool Tools::isFileExisting(const string& filePath)
+{
+	struct stat fileInfo;
+	bool isExisting = stat(filePath.c_str(), &fileInfo) == 0;
+	return (isExisting && !isDirectoryExisting(filePath));
+}
+
+void Tools::createNewDirectory(const string& directoryPath)
+{
+	auto temp = _mkdir(directoryPath.c_str());
+}
+
+void Tools::setMainRenderingColor(Vec3 color)
+{
+	glClearColor(color.r, color.g, color.b, 1.0f);
+}
+
+const Ivec2 Tools::convertToScreenCoords(Vec2 position)
+{
+	const float x = (position.x * static_cast<float>(Config::getInst().getWindowSize().x));
+	const float y = (position.y * static_cast<float>(Config::getInst().getWindowSize().y));
+
+	return Ivec2(static_cast<int>(x), static_cast<int>(y));
+}
+
+const Vec2 Tools::convertFromScreenCoords(Ivec2 position)
+{
+	const float x = (static_cast<float>(position.x) / static_cast<float>(Config::getInst().getWindowSize().x));
+	const float y = (static_cast<float>(position.y) / static_cast<float>(Config::getInst().getWindowSize().y));
+
+	return Vec2(x, y);
 }

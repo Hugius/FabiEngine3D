@@ -1,5 +1,6 @@
 #include "scene_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -21,11 +22,11 @@ bool SceneEditor::loadCustomSceneFromFile(const string& filename)
 	}
 
 	// Compose file path
-	const string filePath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scenes\\custom\\" + filename + ".fe3d");
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Cannot load scene with ID \"" + filename + "\"!");
 		return false;

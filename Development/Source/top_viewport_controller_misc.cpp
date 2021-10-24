@@ -1,5 +1,6 @@
 #include "top_viewport_controller.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -60,11 +61,11 @@ void TopViewportController::_updateProjectCreating()
 		if (_gui.getGlobalScreen()->checkValueForm("newProjectID", newProjectID))
 		{
 			// Temporary values
-			const string projectDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
+			const string projectDirectoryPath = (Tools::getRootDirectory() + "projects\\");
 			const string newProjectDirectoryPath = (projectDirectoryPath + newProjectID);
 
 			// Check if projects directory exists
-			if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath))
+			if (!Tools::isDirectoryExisting(projectDirectoryPath))
 			{
 				Logger::throwWarning("Directory `projects\\` is missing!");
 				return;
@@ -75,7 +76,7 @@ void TopViewportController::_updateProjectCreating()
 				Logger::throwWarning("New project name cannot contain any spaces!");
 				return;
 			}
-			else if (_fe3d.misc_isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
+			else if (Tools::isDirectoryExisting(newProjectDirectoryPath)) // Project already exists
 			{
 				Logger::throwWarning("Project \"" + newProjectID + "\"" + " already exists!");
 				return;
@@ -88,15 +89,15 @@ void TopViewportController::_updateProjectCreating()
 			else // Project is non-existent
 			{
 				// Generate new project directory
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath);
+				Tools::createNewDirectory(newProjectDirectoryPath);
 
 				// Generate project subdirectories
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\data");
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\saves");
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes");
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes\\custom");
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scenes\\editor");
-				_fe3d.misc_createNewDirectory(newProjectDirectoryPath + "\\scripts");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\data");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\saves");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes\\custom");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\scenes\\editor");
+				Tools::createNewDirectory(newProjectDirectoryPath + "\\scripts");
 
 				// Create new empty project files
 				auto file = ofstream(string(newProjectDirectoryPath + "\\data\\animation.fe3d"));
@@ -137,10 +138,10 @@ void TopViewportController::_updateProjectCreating()
 bool TopViewportController::_prepareProjectChoosing(const string& title)
 {
 	// Temporary values
-	const string projectDirectoryPath = (_fe3d.misc_getRootDirectory() + "projects\\");
+	const string projectDirectoryPath = (Tools::getRootDirectory() + "projects\\");
 
 	// Check if projects directory exists
-	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath))
+	if (!Tools::isDirectoryExisting(projectDirectoryPath))
 	{
 		Logger::throwWarning("Directory `projects\\` is missing!");
 		return false;
@@ -152,7 +153,7 @@ bool TopViewportController::_prepareProjectChoosing(const string& title)
 	{
 		// Extract project ID
 		string projectPath = entry.path().string();
-		if (_fe3d.misc_isDirectoryExisting(projectPath))
+		if (Tools::isDirectoryExisting(projectPath))
 		{
 			string projectID = projectPath;
 			projectID.erase(0, projectDirectoryPath.size());
@@ -172,7 +173,7 @@ void TopViewportController::_updateProjectLoading()
 	{
 		// Temporary values
 		const string clickedButtonID = _gui.getGlobalScreen()->checkChoiceForm("projectList");
-		const string projectDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + clickedButtonID;
+		const string projectDirectoryPath = Tools::getRootDirectory() + "projects\\" + clickedButtonID;
 
 		// Check if user clicked a project ID
 		if (clickedButtonID != "" && _fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -273,8 +274,8 @@ void TopViewportController::_updateProjectDeleting()
 			}
 
 			// Check if project directory is still existing
-			const string directoryPath = (_fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID);
-			if (!_fe3d.misc_isDirectoryExisting(directoryPath))
+			const string directoryPath = (Tools::getRootDirectory() + "projects\\" + chosenButtonID);
+			if (!Tools::isDirectoryExisting(directoryPath))
 			{
 				Logger::throwWarning("Cannot delete project: missing directory!");
 				return;
@@ -389,26 +390,26 @@ void TopViewportController::_applyProjectChange()
 bool TopViewportController::isProjectCorrupted(const string& projectDirectoryPath)
 {
 	// Check if all default directories are still existing
-	if (!_fe3d.misc_isDirectoryExisting(projectDirectoryPath) ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\data") ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\saves") ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
-		!_fe3d.misc_isDirectoryExisting(projectDirectoryPath + "\\scripts"))
+	if (!Tools::isDirectoryExisting(projectDirectoryPath) ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\data") ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\saves") ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes") ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\custom") ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scenes\\editor") ||
+		!Tools::isDirectoryExisting(projectDirectoryPath + "\\scripts"))
 	{
 		return true;
 	}
 
 	// Check if all default files are still existing
-	if (!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
-		!_fe3d.misc_isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
+	if (!Tools::isFileExisting(projectDirectoryPath + "\\data\\animation.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\audio.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\billboard.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\model.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\sky.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\terrain.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\data\\water.fe3d") ||
+		!Tools::isFileExisting(projectDirectoryPath + "\\settings.fe3d"))
 	{
 		return true;
 	}

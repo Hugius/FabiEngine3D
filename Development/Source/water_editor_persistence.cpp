@@ -1,5 +1,6 @@
 #include "water_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -18,11 +19,11 @@ const vector<string> WaterEditor::getAllWaterTexturePathsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return {};
@@ -91,11 +92,11 @@ bool WaterEditor::loadWaterEntitiesFromFile()
 	_loadedWaterIDs.clear();
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `water.fe3d` missing!");
 		return false;
@@ -219,7 +220,7 @@ bool WaterEditor::saveWaterEntitiesToFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file

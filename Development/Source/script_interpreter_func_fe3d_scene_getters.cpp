@@ -1,4 +1,5 @@
 #include "script_interpreter.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -22,12 +23,12 @@ bool ScriptInterpreter::_executeFe3dSceneGetterFunction(const string& functionNa
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
 			// Compose file path
-			string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+			string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\");
 			string filePath = (directoryPath + arguments[0].getString() + ".fe3d");
 
 			// Return
-			auto result = _fe3d.misc_isFileExisting(filePath);
+			auto result = Tools::isFileExisting(filePath);
 			returnValues.push_back(ScriptValue(_fe3d, SVT::BOOLEAN, result));
 		}
 	}

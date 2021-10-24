@@ -1,5 +1,6 @@
 #include "animation_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <algorithm>
@@ -20,11 +21,11 @@ bool AnimationEditor::loadAnimationsFromFile(bool mustCheckPreviewModel)
 	_animations.clear();
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `animation.fe3d` missing!");
 		return false;
@@ -195,7 +196,7 @@ bool AnimationEditor::saveAnimationsToFile()
 	}
 
 	// Compose full file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Create or overwrite animation file

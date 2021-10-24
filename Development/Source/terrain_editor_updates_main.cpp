@@ -1,5 +1,6 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void TerrainEditor::update()
 {
@@ -180,11 +181,11 @@ void TerrainEditor::_updateTerrainCreating()
 					if (find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainID) == _loadedTerrainIDs.end())
 					{
 						// Get the chosen filename
-						const auto rootDirectory = _fe3d.misc_getRootDirectory();
+						const auto rootDirectory = Tools::getRootDirectory();
 						const string targetDirectory = string("game_assets\\textures\\height_maps\\");
 
 						// Validate target directory
-						if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+						if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 						{
 							Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 							_isCreatingTerrain = false;
@@ -192,7 +193,7 @@ void TerrainEditor::_updateTerrainCreating()
 						}
 
 						// Validate chosen file
-						const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "BMP");
+						const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "BMP");
 						if (filePath.empty())
 						{
 							_isCreatingTerrain = false;

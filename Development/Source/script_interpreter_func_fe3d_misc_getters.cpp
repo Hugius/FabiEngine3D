@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 #include "logger.hpp"
+#include "configuration.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -40,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			}
 
 			// Get cursor position X
-			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
+			auto result = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
@@ -57,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			}
 
 			// Get cursor position Y
-			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
+			auto result = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, clamp(result, -1.0f, 1.0f)));
 		}
 	}
@@ -74,7 +76,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			}
 
 			// Get window width
-			auto result = _fe3d.misc_getWindowSize().x;
+			auto result = Config::getInst().getWindowSize().x;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}
@@ -91,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dMiscGetterFunction(const string& functionNam
 			}
 
 			// Get window height
-			auto result = _fe3d.misc_getWindowSize().y;
+			auto result = Config::getInst().getWindowSize().y;
 			returnValues.push_back(ScriptValue(_fe3d, SVT::INTEGER, result));
 		}
 	}

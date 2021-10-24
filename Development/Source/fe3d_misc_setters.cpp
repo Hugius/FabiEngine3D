@@ -1,6 +1,5 @@
 #include "fe3d.hpp"
 #include "core_engine.hpp"
-#include "tools.hpp"
 #include "configuration.hpp"
 
 #include <chrono>
@@ -180,10 +179,10 @@ void FabiEngine3D::misc_setCursorVisible(bool isVisible)
 void FabiEngine3D::misc_centerCursor()
 {
 	// Center the cursor
-	const int left = Config::getInst().getVpPos().x;
-	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
-	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
-	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
+	const int left = Config::getInst().getViewportPosition().x;
+	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getViewportPosition().y + Config::getInst().getViewportSize().y);
+	const int xMiddle = left + (Config::getInst().getViewportSize().x / 2);
+	const int yMiddle = bottom + (Config::getInst().getViewportSize().y / 2);
 	_core->_window.setCursorPosition({ xMiddle, yMiddle });
 
 	// Notify camera of centering
@@ -193,11 +192,6 @@ void FabiEngine3D::misc_centerCursor()
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_window.setCursorPosition(pos);
-}
-
-void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
-{
-	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
 void FabiEngine3D::misc_setWindowTitle(const string& title)

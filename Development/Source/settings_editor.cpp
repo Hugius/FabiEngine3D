@@ -2,6 +2,7 @@
 #include "left_viewport_controller.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -224,11 +225,11 @@ bool SettingsEditor::loadSettingsFromFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Warning checking
-	if (!_fe3d.misc_isFileExisting(filePath))
+	if (!Tools::isFileExisting(filePath))
 	{
 		Logger::throwWarning("Project \"" + _currentProjectID + "\" corrupted: file `settings.fe3d` missing!");
 		return false;
@@ -291,7 +292,7 @@ bool SettingsEditor::saveSettingsToFile()
 	}
 
 	// Compose file path
-	const string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string filePath = Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\settings.fe3d";
 
 	// Create or overwrite settings file

@@ -24,7 +24,7 @@ void SceneEditor::_updatePointlightPlacing()
 			{
 				// Adding a number to make it unique
 			BEGIN1:
-				const string newID = ("pointlight_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+				const string newID = ("pointlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 				// Check if pointlight already exists
 				if (_fe3d.pointlightEntity_isExisting(newID))
@@ -103,7 +103,7 @@ void SceneEditor::_updatePointlightPlacing()
 
 						// Adding a number to make it unique
 					BEGIN2:
-						const string newID = ("pointlight_" + to_string(Tools::getRandomInteger(0, INT_MAX)));
+						const string newID = ("pointlight_" + to_string(Math::getRandomInteger(0, INT_MAX)));
 
 						// Check if pointlight already exists
 						if (_fe3d.pointlightEntity_isExisting(newID))

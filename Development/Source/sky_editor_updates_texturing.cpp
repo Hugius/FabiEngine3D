@@ -1,5 +1,6 @@
 #include "sky_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void SkyEditor::_updateTexturingMenu()
 {
@@ -18,18 +19,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("rightMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -51,18 +52,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("leftMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -84,18 +85,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("topMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -117,18 +118,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("bottomMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -150,18 +151,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("frontMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -183,18 +184,18 @@ void SkyEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("backMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;

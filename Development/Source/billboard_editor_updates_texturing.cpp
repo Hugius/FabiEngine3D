@@ -1,5 +1,6 @@
 #include "billboard_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void BillboardEditor::_updateTexturingMenu()
 {
@@ -25,18 +26,18 @@ void BillboardEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("font")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\fonts\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "TTF");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "TTF");
 			if (filePath.empty())
 			{
 				return;
@@ -68,18 +69,18 @@ void BillboardEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("diffuseMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -101,18 +102,18 @@ void BillboardEditor::_updateTexturingMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("emissionMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\emission_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;

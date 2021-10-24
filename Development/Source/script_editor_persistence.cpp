@@ -1,5 +1,6 @@
 #include "script_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -22,11 +23,11 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 	_script.reset();
 
 	// Compose directory path
-	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Warning checking
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath))
+	if (!Tools::isDirectoryExisting(directoryPath))
 	{
 		if (isLoggingEnabled)
 		{
@@ -43,7 +44,7 @@ bool ScriptEditor::loadScriptFiles(bool isLoggingEnabled)
 		filename.erase(0, directoryPath.size());
 
 		// Check if script file exists & check if the file extension is correct
-		if (_fe3d.misc_isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
+		if (Tools::isFileExisting(directoryPath + filename) && (filename.substr(filename.size() - 5, 5) == ".fe3d"))
 		{
 			// Load script file
 			ifstream file(directoryPath + filename);
@@ -103,7 +104,7 @@ bool ScriptEditor::saveScriptFiles()
 	}
 
 	// Compose directory path
-	const string directoryPath = (_fe3d.misc_getRootDirectory() + (_fe3d.application_isExported() ? "" :
+	const string directoryPath = (Tools::getRootDirectory() + (_fe3d.application_isExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scripts\\");
 
 	// Delete all text files containing deleted scripts
@@ -112,7 +113,7 @@ bool ScriptEditor::saveScriptFiles()
 		const string finalPath = directoryPath + filename + ".fe3d";
 
 		// Check if file exists
-		if (_fe3d.misc_isFileExisting(finalPath))
+		if (Tools::isFileExisting(finalPath))
 		{
 			DeleteFile(LPCSTR(finalPath.c_str()));
 		}

@@ -1,4 +1,6 @@
 #include "script_interpreter.hpp"
+#include "configuration.hpp"
+#include "tools.hpp"
 
 using SVT = ScriptValueType;
 
@@ -40,8 +42,8 @@ bool ScriptInterpreter::_executeFe3dTextSetterFunction(const string& functionNam
 			// In-engine viewport boundaries
 			if (!_fe3d.application_isExported())
 			{
-				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
-				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
+				auto minPos = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
+				auto maxPos = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
 				_fe3d.textEntity_setMinPosition(arguments[0].getString(), minPos);
 				_fe3d.textEntity_setMaxPosition(arguments[0].getString(), maxPos);
 			}

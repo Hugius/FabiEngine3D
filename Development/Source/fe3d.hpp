@@ -899,7 +899,6 @@ public:
 	void misc_setCustomCursor(const string& imageEntityID);
 	void misc_centerCursor();
 	void misc_setCursorPosition(Ivec2 pos);
-	void misc_setMainRenderingColor(Vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearMeshCache(const string& filePath);
 	void misc_clearTextureCache2D(const string& filePath);
@@ -917,35 +916,16 @@ public:
 	void misc_startMillisecondTimer();
 	void misc_setLevelOfDetailDistance(float distance);
 	void misc_setMaxAudioChannelCount(unsigned int count);
-	void misc_createNewDirectory(const string& directoryPath);
 
 	// Miscellaneous interface - getters
 	const vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	const vector<pair<string, int>> misc_getRenderProfilingStatistics();
-	const string misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType);
-	const string misc_vec2str(Ivec2 vec);
-	const string misc_vec2str(Vec2 vec);
-	const string misc_vec2str(Vec3 vec);
-	const string misc_vec2str(Vec4 vec);
-	const string misc_getRootDirectory();
 	const string misc_getCpuModel();
 	const string misc_getGpuModel();
 	const string misc_getOpenglVersion();
-	const Vec2 misc_convertToNDC(Vec2 position);
-	const Vec2 misc_convertFromNDC(Vec2 position);
-	const Vec2 misc_convertFromScreenCoords(Ivec2 position);
 	const Ivec2 misc_getCursorPosition();
 	const Ivec2 misc_getCursorPositionRelativeToViewport();
-	const Ivec2 misc_convertToScreenCoords(Vec2 position);
-	const Ivec2 misc_getViewportPosition();
-	const Ivec2 misc_getViewportSize();
-	const Ivec2 misc_getWindowSize();
-	const float misc_getRandomFloat(float min, float max);
-	const float misc_getAspectRatio();
 	const float misc_getFPS();
-	const float misc_getPI();
-	const float misc_convertToRadians(float degrees);
-	const float misc_convertToDegrees(float radians);
 	const float misc_stopMillisecondTimer();
 	const float misc_getLevelOfDetailDistance();
 	const unsigned int misc_getTriangleCount();
@@ -953,8 +933,6 @@ public:
 	const bool misc_isCursorVisible();
 	const bool misc_isCursorInsideViewport();
 	const bool misc_isCursorInsideWindow();
-	const bool misc_isDirectoryExisting(const string& directoryPath);
-	const bool misc_isFileExisting(const string& filePath);
 	const bool misc_checkInterval(unsigned int ticks);
 	const bool misc_isMillisecondTimerStarted();
 	const bool misc_isVsyncEnabled();
@@ -971,11 +949,15 @@ protected:
 	virtual void FE3D_CONTROLLER_DESTROY() = 0;
 
 private:
+	// Instances
 	CoreEngine* _core = nullptr;
 
-	bool _isRaycastUpdated = false;
-
+	// Strings
 	string _hoveredAabbID = "";
 
+	// Floats
 	float _hoveredAabbDistance = -1.0f;
+
+	// Booleans
+	bool _isRaycastUpdated = false;
 };

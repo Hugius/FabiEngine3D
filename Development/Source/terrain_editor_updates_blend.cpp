@@ -1,5 +1,6 @@
 #include "terrain_editor.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 void TerrainEditor::_updateBlendMapMenu()
 {
@@ -21,18 +22,18 @@ void TerrainEditor::_updateBlendMapMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blendMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\blend_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -54,18 +55,18 @@ void TerrainEditor::_updateBlendMapMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("redMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -87,18 +88,18 @@ void TerrainEditor::_updateBlendMapMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("greenMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;
@@ -120,18 +121,18 @@ void TerrainEditor::_updateBlendMapMenu()
 		else if (_fe3d.input_isMousePressed(InputType::MOUSE_BUTTON_LEFT) && screen->getButton("blueMap")->isHovered())
 		{
 			// Get the chosen filename
-			const auto rootDirectory = _fe3d.misc_getRootDirectory();
+			const auto rootDirectory = Tools::getRootDirectory();
 			const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 
 			// Validate target directory
-			if (!_fe3d.misc_isDirectoryExisting(rootDirectory + targetDirectory))
+			if (!Tools::isDirectoryExisting(rootDirectory + targetDirectory))
 			{
 				Logger::throwWarning("Directory `" + targetDirectory + "` is missing!");
 				return;
 			}
 
 			// Validate chosen file
-			const string filePath = _fe3d.misc_getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
+			const string filePath = Tools::getWinExplorerFilename(string(rootDirectory + targetDirectory), "PNG");
 			if (filePath.empty())
 			{
 				return;

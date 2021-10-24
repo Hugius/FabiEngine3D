@@ -1,5 +1,6 @@
 #include "core_engine.hpp"
 #include "configuration.hpp"
+#include "tools.hpp"
 
 #include <ctime>
 #include <ratio>
@@ -161,65 +162,65 @@ void CoreEngine::_prepareApplication()
 	// Validate engine assets directory
 	if
 		(
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "camera.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "cube.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "lamp.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "plane.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "speaker.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + meshDirectoryPath + "torch.obj")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "a.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "b.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "backspace.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "c.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "color.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "ctrl.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "cube.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "cursor_default.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "cursor_pointing.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "cursor_text.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "d.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "debug.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "down.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "enter.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "esc.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "f.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "grid.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "h.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "left.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "light_source.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "logo.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "minus.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "mouse.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "mouse_left.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "mouse_middle.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "mouse_right.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "p.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "pause.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "play.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "plus.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "position.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "r.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "radius.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "restart.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "right.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "rotation.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "s.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "settings.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "shape_circle.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "shape_square.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "shift.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "size.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "space.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "stop.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "up.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "v.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_right.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_left.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_top.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_bottom.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_back.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + textureDirectoryPath + "background_front.png")) ||
-			!_fe3d.misc_isFileExisting(string(_fe3d.misc_getRootDirectory() + fontDirectoryPath + "font.ttf"))
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "camera.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "cube.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "lamp.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "plane.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "speaker.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + meshDirectoryPath + "torch.obj")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "a.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "b.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "backspace.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "c.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "color.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "ctrl.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cube.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_default.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_pointing.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "cursor_text.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "d.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "debug.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "down.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "enter.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "esc.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "f.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "grid.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "h.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "left.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "light_source.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "logo.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "minus.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_left.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_middle.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "mouse_right.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "p.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "pause.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "play.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "plus.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "position.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "r.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "radius.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "restart.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "right.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "rotation.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "s.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "settings.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_circle.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shape_square.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "shift.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "size.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "space.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "stop.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "up.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "v.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_right.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_left.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_top.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_bottom.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_back.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + textureDirectoryPath + "background_front.png")) ||
+			!Tools::isFileExisting(string(Tools::getRootDirectory() + fontDirectoryPath + "font.ttf"))
 			)
 	{
 		Logger::throwFatalWarning("Directory `engine_assets\\` is missing or corrupted!");

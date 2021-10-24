@@ -1,6 +1,6 @@
 #include "script_editor.hpp"
 #include "left_viewport_controller.hpp"
-#include "configuration.hpp"
+#include "tools.hpp"
 
 using VPC = BaseViewportController;
 using LVPC = LeftViewportController;
@@ -31,7 +31,7 @@ void ScriptEditor::load()
 
 	// Background
 	_fe3d.skyEntity_selectMainSky("");
-	_fe3d.misc_setMainRenderingColor(BACKGROUND_COLOR);
+	Tools::setMainRenderingColor(BACKGROUND_COLOR);
 
 	// Default graphics
 	_fe3d.gfx_enableBloom();
@@ -62,7 +62,7 @@ void ScriptEditor::unload()
 
 	// Background
 	_fe3d.skyEntity_selectMainSky("@@engineBackground");
-	_fe3d.misc_setMainRenderingColor(Vec3(0.0f));
+	Tools::setMainRenderingColor(Vec3(0.0f));
 
 	// Default graphics
 	_fe3d.gfx_disableBloom(true);

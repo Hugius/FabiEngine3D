@@ -1,4 +1,5 @@
 #include "engine_gui_button.hpp"
+#include "tools.hpp"
 
 EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeChangeEnabled, bool colorChangeEnabled)
 	:
@@ -54,7 +55,7 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 	if (_fe3d.imageEntity_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
-		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 mousePos = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		Vec2 buttonPos = _fe3d.imageEntity_getPosition(_rectangle->getEntityID());
 		Vec2 buttonSize = _fe3d.imageEntity_getSize(_rectangle->getEntityID());
 

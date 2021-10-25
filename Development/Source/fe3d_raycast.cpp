@@ -47,11 +47,11 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 				float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
 				float bottom = entity->getPosition().y;
 				float top = (entity->getPosition().y + entity->getSize().y);
-				float front = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 				float back = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+				float front = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 
 				// Check intersection
-				float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
+				float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, back, front));
 
 				// Check if closest to camera
 				if ((distance != -1.0f) && (distance < closestDistance))
@@ -109,11 +109,11 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 			float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
 			float bottom = entity->getPosition().y;
 			float top = (entity->getPosition().y + entity->getSize().y);
-			float front = (entity->getPosition().z - (entity->getSize().z / 2.0f));
-			float back = (entity->getPosition().z + (entity->getSize().z / 2.0f));
+			float back = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+			float front = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 
 			// Calculate intersection & distance
-			float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
+			float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, back, front));
 			bool result = (distance != -1.0f);
 
 			// Return
@@ -171,14 +171,14 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 						float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
 						float bottom = entity->getPosition().y;
 						float top = (entity->getPosition().y + entity->getSize().y);
-						float front = (entity->getPosition().z - (entity->getSize().z / 2.0f));
-						float back = (entity->getPosition().z + (entity->getSize().z / 2.0f));
+						float back = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+						float front = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 
 						// Check intersection
-						float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
+						float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, back, front));
 
 						// Check if closest to camera
-						if (distance != -1.0f && distance < closestDistance)
+						if ((distance != -1.0f) && (distance < closestDistance))
 						{
 							closestDistance = distance;
 							closestBoxID = entity->getID();

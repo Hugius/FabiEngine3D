@@ -82,21 +82,18 @@ Vec3 Raycaster::getTerrainPoint()
 // https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
 float Raycaster::checkRayBoxIntersection(Ray ray, Box box)
 {
-	// Ray direction
-	Vec3 normalizedRayDirection;
-	normalizedRayDirection.x = (1.0f / ray.getDirection().x);
-	normalizedRayDirection.y = (1.0f / ray.getDirection().y);
-	normalizedRayDirection.z = (1.0f / ray.getDirection().z);
+	// Small performance optimization
+	const Vec3 inverseRayDirection = (Vec3(1.0f) / ray.getDirection());
 
-	// Calculates distances between camera & collision
-	float distance1 = ((box.getLeft() - ray.getPosition().x) * normalizedRayDirection.x);
-	float distance2 = ((box.getRight() - ray.getPosition().x) * normalizedRayDirection.x);
-	float distance3 = ((box.getBottom() - ray.getPosition().y) * normalizedRayDirection.y);
-	float distance4 = ((box.getTop() - ray.getPosition().y) * normalizedRayDirection.y);
-	float distance5 = ((box.getFront() - ray.getPosition().z) * normalizedRayDirection.z);
-	float distance6 = ((box.getBack() - ray.getPosition().z) * normalizedRayDirection.z);
-	float minDistance = max(max(min(distance1, distance2), min(distance3, distance4)), min(distance5, distance6));
-	float maxDistance = min(min(max(distance1, distance2), max(distance3, distance4)), max(distance5, distance6));
+	// Calculates distances
+	float minX = ((box.getLeft() - ray.getPosition().x) * inverseRayDirection.x);
+	float maxX = ((box.getRight() - ray.getPosition().x) * inverseRayDirection.x);
+	float minY = ((box.getBottom() - ray.getPosition().y) * inverseRayDirection.y);
+	float maxY = ((box.getTop() - ray.getPosition().y) * inverseRayDirection.y);
+	float minZ = ((box.getBack() - ray.getPosition().z) * inverseRayDirection.z);
+	float maxZ = ((box.getFront() - ray.getPosition().z) * inverseRayDirection.z);
+	float minDistance = max(max(min(minX, maxX), min(minY, maxY)), min(minZ, maxZ));
+	float maxDistance = min(min(max(minX, maxX), max(minY, maxY)), max(minZ, maxZ));
 
 	// AABB is behind camera
 	if (maxDistance < 0.0f)

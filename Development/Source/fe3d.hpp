@@ -699,7 +699,7 @@ public:
 	const bool camera_isFirstPersonViewEnabled();
 
 	// Collision interface - setters
-	void collision_setCameraBox(float left, float right, float bottom, float top, float front, float back);
+	void collision_setCameraBox(float left, float right, float bottom, float top, float back, float front);
 	void collision_enableCameraResponse(bool x, bool y, bool z);
 	void collision_enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraResponse();

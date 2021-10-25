@@ -8,10 +8,10 @@
 #define SPOTLIGHT_SMOOTHING_MULTIPLIER 0.95f
 
 // In variables
-in vec3 f_pos;
+in vec3 f_position;
 in vec2 f_uv;
 in vec3 f_normal;
-in vec4 f_shadowPos;
+in vec4 f_shadowPosition;
 in mat3 f_tbnMatrix;
 
 // Textures
@@ -305,7 +305,7 @@ vec3 calculateDirectionalLighting(vec3 normal)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
-        vec3 direction = normalize(u_directionalLightPosition - f_pos);
+        vec3 direction = normalize(u_directionalLightPosition - f_position);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_directionalLightPosition, normal);
 
@@ -332,7 +332,7 @@ vec3 calculatePointlights(vec3 normal)
 	for (int i = 0; i < u_pointlightCount; i++)
 	{
 		// Calculate light strength
-		vec3 direction = normalize(u_pointlightPositions[i] - f_pos);
+		vec3 direction = normalize(u_pointlightPositions[i] - f_position);
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
@@ -340,13 +340,13 @@ vec3 calculatePointlights(vec3 normal)
 		float attenuation;
 		if (u_pointlightShapes[i] == 0)
 		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_pos);
+			float fragmentDistance = distance(u_pointlightPositions[i], f_position);
 			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_pos);
+			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_position);
 			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
 			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
 			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
@@ -377,7 +377,7 @@ vec3 calculateSpotlights(vec3 normal)
 	for (int i = 0; i < u_spotlightCount; i++)
 	{
 		// Calculate light strength
-		vec3 direction = normalize(u_spotlightPositions[i] - f_pos);
+		vec3 direction = normalize(u_spotlightPositions[i] - f_position);
 		float spot = dot(direction, normalize(-u_spotlightFrontVectors[i]));
 		float diffuse = clamp(dot(normal, direction), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_spotlightPositions[i], normal);
@@ -385,7 +385,7 @@ vec3 calculateSpotlights(vec3 normal)
 		float intensity = clamp(((spot - (u_spotlightAngles[i] * SPOTLIGHT_SMOOTHING_MULTIPLIER)) / smoothingAngle), 0.0f, 1.0f);  
 
 		// Calculate light distance
-		float fragmentDistance = distance(u_spotlightPositions[i], f_pos);
+		float fragmentDistance = distance(u_spotlightPositions[i], f_position);
 		float distanceMultiplier = (fragmentDistance / u_spotlightDistances[i]);
 		distanceMultiplier = clamp(distanceMultiplier, 0.0f, 1.0f);
 		distanceMultiplier = (1.0f - distanceMultiplier);
@@ -411,7 +411,7 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
 		// Calculate distance to fragment in world space
-		float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
+		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
         // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);
@@ -433,8 +433,8 @@ float calculateSpecularLighting(vec3 lightPosition, vec3 normal)
     if (u_isSpecular)
     {
         // Calculate
-        vec3 lightDirection   = normalize(lightPosition - f_pos);
-        vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+        vec3 lightDirection   = normalize(lightPosition - f_position);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_position);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
@@ -453,14 +453,14 @@ float calculateShadows()
 	{
 		// Temporary values
 		float halfSize = (u_shadowAreaSize / 2.0f);
-		float fragmentDistance = distance(f_pos.xz, u_shadowAreaCenter.xz);
+		float fragmentDistance = distance(f_position.xz, u_shadowAreaCenter.xz);
 
 		// Check if fragment is within shadow area
 		if (fragmentDistance <= halfSize)
 		{
 			// Variables
 			float shadow       = 0.0f;
-			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
+			vec3 projCoords    = (f_shadowPosition.xyz / f_shadowPosition.w) * 0.5f + 0.5f;
 			float currentDepth = projCoords.z;
 			vec2 texelSize     = (vec2(1.0f) / textureSize(u_shadowMap, 0));
 

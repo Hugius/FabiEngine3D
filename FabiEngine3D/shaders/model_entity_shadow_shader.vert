@@ -25,13 +25,13 @@ out vec2 f_uv;
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = (u_transformationMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
-	vec4 lightSpacePos = (u_lightSpaceMatrix * worldSpacePos);
+	vec4 worldSpacePosition = (u_transformationMatrix * vec4(v_pos, 1.0f)) + ((u_isInstanced == true) ? vec4(v_offset, 0.0f) : vec4(0.0f));
+	vec4 lightSpacePosition = (u_lightSpaceMatrix * worldSpacePosition);
 
 	// GLSL variables
-	gl_Position = lightSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
+	gl_Position = lightSpacePosition;
+	gl_ClipDistance[0] = dot(worldSpacePosition, vec4(0.0f,  1.0f, 0.0f, -(u_positionY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePosition, vec4(0.0f, -1.0f, 0.0f,  (u_positionY + u_maxHeight)));
 	
 	// Out variables
 	f_uv = vec2(v_uv.x, -v_uv.y);

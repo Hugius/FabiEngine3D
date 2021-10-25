@@ -12,10 +12,10 @@ uniform mat4 u_projectionMatrix;
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = vec4(v_pos, 1.0f);
-	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
-	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
+	vec4 worldSpacePosition = vec4(v_pos, 1.0f);
+	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
 
 	// GLSL variables
-	gl_Position = clipSpacePos;
+	gl_Position = clipSpacePosition;
 }

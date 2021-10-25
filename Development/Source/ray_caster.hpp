@@ -7,19 +7,23 @@ class RayCaster final
 public:
 	RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager);
 
+	// Voids
 	void update(Ivec2 cursorPosition);
 	void setTerrainPointingEnabled(bool enabled);
 	void setTerrainPointingDistance(float distance);
 	void setTerrainPointingPrecision(float precision);
 
-	bool isTerrainPointingEnabled();
+	// Floats
 	float getTerrainPointingDistance();
 	float getTerrainPointingPrecision();
-
 	float checkCursorInBox(Vec3 leftBottomCoordinate, Vec3 rightTopCoordinate, Vec3 cameraPosition);
 
+	// Vectors
 	Vec3 getRay();
 	Vec3 getTerrainPoint();
+
+	// Booleans
+	bool isTerrainPointingEnabled();
 
 private:
 	RenderBus& _renderBus;
@@ -33,7 +37,7 @@ private:
 
 	bool _isUnderTerrain(float distance);
 
-	Vec3 _ray = Vec3(0.0f);
+	Vec3 _cursorRay = Vec3(0.0f);
 	Vec3 _terrainPoint = Vec3(0.0f);
 
 	TerrainEntityManager& _terrainManager;

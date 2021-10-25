@@ -22,10 +22,10 @@ uniform float u_textureRepeat;
 uniform bool u_hasNormalMap;
 
 // Out variables
-out vec3 f_pos;
+out vec3 f_position;
 out vec2 f_uv;
 out vec3 f_normal;
-out vec4 f_shadowPos;
+out vec4 f_shadowPosition;
 out mat3 f_tbnMatrix;
 
 // Declarations
@@ -35,19 +35,19 @@ mat3 calculateTbnMatrix();
 void main()
 {
 	// In variables
-	vec4 worldSpacePos = vec4(v_pos, 1.0f);
-	vec4 viewSpacePos  = (u_viewMatrix * worldSpacePos);
-	vec4 clipSpacePos  = (u_projectionMatrix * viewSpacePos);
+	vec4 worldSpacePosition = vec4(v_pos, 1.0f);
+	vec4 viewSpacePosition  = (u_viewMatrix * worldSpacePosition);
+	vec4 clipSpacePosition  = (u_projectionMatrix * viewSpacePosition);
 
 	// GLSL variables
-	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
+	gl_Position = clipSpacePosition;
+	gl_ClipDistance[0] = dot(worldSpacePosition, u_clippingPlane);
 	
 	// Out variables
-	f_pos = worldSpacePos.xyz;
+	f_position = worldSpacePosition.xyz;
 	f_uv = (vec2(v_uv.x, -v_uv.y) * u_textureRepeat);
 	f_normal = normalize(v_normal);
-	f_shadowPos = u_shadowMatrix * worldSpacePos;
+	f_shadowPosition = u_shadowMatrix * worldSpacePosition;
 	f_tbnMatrix = calculateTbnMatrix();
 }
 

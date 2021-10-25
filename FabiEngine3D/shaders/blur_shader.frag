@@ -5,7 +5,7 @@
 #define KERNEL_SIZE 5
 
 // In variables
-in vec2 f_pos;
+in vec2 f_position;
 in vec2 f_uv;
 
 // Textures

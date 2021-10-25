@@ -84,7 +84,7 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 
 	// Temporary values
 	auto self = _core->_aabbEntityManager.getEntity(selfID);
-	Vec3 selfPos = self->getPosition();
+	Vec3 selfPosition = self->getPosition();
 	Vec3 selfSize = self->getSize() / 2.0f;
 
 	// Check if self entity is responsive and visible
@@ -117,41 +117,41 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 			}
 
 			// Temporary values
-			Vec3 otherPos = other->getPosition();
+			Vec3 otherPosition = other->getPosition();
 			Vec3 otherSize = other->getSize() / 2.0f;
 			// Check XYZ collision between 2 entities
 			if
 			(
 				// Middle coordinate within
-				((selfPos.x > otherPos.x - otherSize.x && selfPos.x < otherPos.x + otherSize.x) ||
+				((selfPosition.x > otherPosition.x - otherSize.x && selfPosition.x < otherPosition.x + otherSize.x) ||
 				// Lower corner within
-				(selfPos.x - selfSize.x > otherPos.x - otherSize.x && selfPos.x - selfSize.x < otherPos.x + otherSize.x) ||
+				(selfPosition.x - selfSize.x > otherPosition.x - otherSize.x && selfPosition.x - selfSize.x < otherPosition.x + otherSize.x) ||
 				// Upper corner within 
-				(selfPos.x + selfSize.x > otherPos.x - otherSize.x && selfPos.x + selfSize.x < otherPos.x + otherSize.x) ||
+				(selfPosition.x + selfSize.x > otherPosition.x - otherSize.x && selfPosition.x + selfSize.x < otherPosition.x + otherSize.x) ||
 				// AABB too big but overlapping
-				(selfPos.x - selfSize.x <= otherPos.x - otherSize.x && selfPos.x + selfSize.x >= otherPos.x + otherSize.x)) 
+				(selfPosition.x - selfSize.x <= otherPosition.x - otherSize.x && selfPosition.x + selfSize.x >= otherPosition.x + otherSize.x)) 
 
 				&&
 
 				// Middle coordinate within
-				((selfPos.y + selfSize.y > otherPos.y && selfPos.y + selfSize.y < otherPos.y + (otherSize.y * 2.0f)) ||
+				((selfPosition.y + selfSize.y > otherPosition.y && selfPosition.y + selfSize.y < otherPosition.y + (otherSize.y * 2.0f)) ||
 				// Lower corner within
-				(selfPos.y > otherPos.y && selfPos.y < otherPos.y + (otherSize.y * 2.0f)) ||
+				(selfPosition.y > otherPosition.y && selfPosition.y < otherPosition.y + (otherSize.y * 2.0f)) ||
 				// Upper corner within 
-				(selfPos.y + (selfSize.y * 2.0f) > otherPos.y && selfPos.y + (selfSize.y * 2.0f) < otherPos.y + (otherSize.y * 2.0f)) ||
+				(selfPosition.y + (selfSize.y * 2.0f) > otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) < otherPosition.y + (otherSize.y * 2.0f)) ||
 				// AABB too big but overlapping 
-				(selfPos.y <= otherPos.y && selfPos.y + (selfSize.y * 2.0f) >= otherPos.y + (otherSize.y * 2.0f)))
+				(selfPosition.y <= otherPosition.y && selfPosition.y + (selfSize.y * 2.0f) >= otherPosition.y + (otherSize.y * 2.0f)))
 
 				&&
 
 				// Middle coordinate within
-				((selfPos.z > otherPos.z - otherSize.z && selfPos.z < otherPos.z + otherSize.z) ||
+				((selfPosition.z > otherPosition.z - otherSize.z && selfPosition.z < otherPosition.z + otherSize.z) ||
 				// Lower corner within
-				(selfPos.z - selfSize.z > otherPos.z - otherSize.z && selfPos.z - selfSize.z < otherPos.z + otherSize.z) ||
+				(selfPosition.z - selfSize.z > otherPosition.z - otherSize.z && selfPosition.z - selfSize.z < otherPosition.z + otherSize.z) ||
 				// Upper corner within 
-				(selfPos.z + selfSize.z > otherPos.z - otherSize.z && selfPos.z + selfSize.z < otherPos.z + otherSize.z) || 
+				(selfPosition.z + selfSize.z > otherPosition.z - otherSize.z && selfPosition.z + selfSize.z < otherPosition.z + otherSize.z) || 
 				// AABB too big but overlapping 
-				(selfPos.z - selfSize.z <= otherPos.z - otherSize.z && selfPos.z + selfSize.z >= otherPos.z + otherSize.z))   
+				(selfPosition.z - selfSize.z <= otherPosition.z - otherSize.z && selfPosition.z + selfSize.z >= otherPosition.z + otherSize.z))   
 			)
 			{
 				return other->getID();

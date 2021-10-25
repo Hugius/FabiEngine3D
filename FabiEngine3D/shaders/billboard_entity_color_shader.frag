@@ -6,7 +6,7 @@
 
 // In variables
 in vec2 f_uv;
-in vec3 f_pos;
+in vec3 f_position;
 
 // Textures
 layout (location = 0) uniform sampler2D u_diffuseMap;
@@ -130,7 +130,7 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
         // Calculate distance in world space
-        float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
+        float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
         // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);

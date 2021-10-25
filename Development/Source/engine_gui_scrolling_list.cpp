@@ -105,14 +105,14 @@ void EngineGuiScrollingList::_updateHovering()
 	_isHovered = false;
 
 	// Convert dimensions to same space
-	Vec2 mousePos = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-	Vec2 listPos = _fe3d.imageEntity_getPosition(_entityID);
+	Vec2 mousePosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+	Vec2 listPosition = _fe3d.imageEntity_getPosition(_entityID);
 	Vec2 listSize = _fe3d.imageEntity_getSize(_entityID);
 
 	// Check if cursor inside button
-	if (mousePos.x > listPos.x - (listSize.x / 2.0f) && mousePos.x < listPos.x + (listSize.x / 2.0f)) // X axis
+	if (mousePosition.x > listPosition.x - (listSize.x / 2.0f) && mousePosition.x < listPosition.x + (listSize.x / 2.0f)) // X axis
 	{
-		if (mousePos.y > listPos.y - (listSize.y / 2.0f) && mousePos.y < listPos.y + (listSize.y / 2.0f)) // Y axis
+		if (mousePosition.y > listPosition.y - (listSize.y / 2.0f) && mousePosition.y < listPosition.y + (listSize.y / 2.0f)) // Y axis
 		{
 			_isHovered = true;
 		}
@@ -127,10 +127,10 @@ void EngineGuiScrollingList::_updateScolling()
 		bool mustReset = false;
 
 		// Checking if cursor is inside scrolling list
-		Vec2 mousePos = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
+		Vec2 mousePosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		if (mousePosition.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePosition.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
-			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
+			if (mousePosition.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePosition.y < _originalPosition.y + (_originalSize.y / 2.0f))
 			{
 				float scrollingAcceleration = (static_cast<float>(-_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER);
 				_scrollingSpeed += scrollingAcceleration;

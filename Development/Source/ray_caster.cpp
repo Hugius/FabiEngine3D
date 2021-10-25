@@ -1,7 +1,6 @@
 #include "ray_caster.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
-#include "logger.hpp"
 
 #include <algorithm>
 
@@ -19,7 +18,7 @@ RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
 void RayCaster::update(Ivec2 cursorPosition)
 {
 	// Update raycasting
-	_ray = _getMouseRay(cursorPosition);
+	_cursorRay = _getMouseRay(cursorPosition);
 
 	// Update cursor pointing on terrain
 	if (_isTerrainPointingEnabled)
@@ -74,9 +73,9 @@ float RayCaster::checkCursorInBox(Vec3 leftBottomCoordinate, Vec3 rightTopCoordi
 {
 	// Ray direction
 	Vec3 rayDirection;
-	rayDirection.x = (1.0f / _ray.x);
-	rayDirection.y = (1.0f / _ray.y);
-	rayDirection.z = (1.0f / _ray.z);
+	rayDirection.x = (1.0f / _cursorRay.x);
+	rayDirection.y = (1.0f / _cursorRay.y);
+	rayDirection.z = (1.0f / _cursorRay.z);
 
 	// Calculates distances between camera & collision
 	float distance1 = ((leftBottomCoordinate.x - cameraPosition.x) * rayDirection.x);
@@ -144,7 +143,7 @@ Vec3 RayCaster::_convertToWorldSpace(Vec4 value)
 Vec3 RayCaster::_getPointOnRay(float distance)
 {
 	Vec3 cameraPosition = _renderBus.getCameraPosition();
-	Vec3 scaledRay = (_ray * distance);
+	Vec3 scaledRay = (_cursorRay * distance);
 
 	return (cameraPosition + scaledRay);
 }
@@ -204,7 +203,7 @@ Vec3 RayCaster::_calculateTerrainPoint()
 
 Vec3 RayCaster::getRay()
 {
-	return _ray;
+	return _cursorRay;
 }
 
 Vec3 RayCaster::getTerrainPoint()

@@ -122,9 +122,9 @@ void ModelEntityManager::update(const unordered_map<string, shared_ptr<Reflectio
 				}
 
 				// Calculate absolute distance between camera and entity
-				Vec3 camPos = _renderBus.getCameraPosition();
-				Vec3 entityPos = entity->getBasePosition();
-				auto absolsuteDistance = Math::calculateVectorDistance(camPos, entityPos);
+				Vec3 cameraPosition = _renderBus.getCameraPosition();
+				Vec3 entityPosition = entity->getBasePosition();
+				auto absolsuteDistance = Math::calculateVectorDistance(cameraPosition, entityPosition);
 
 				// Check if entity is farther than LOD distance
 				bool isFarEnough = (absolsuteDistance > _levelOfDetailDistance) && (!entity->getLevelOfDetailEntityID().empty());

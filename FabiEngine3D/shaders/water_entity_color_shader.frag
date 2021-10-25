@@ -6,7 +6,7 @@
 #define FRAME_COLOR vec3(1.0f, 1.0f, 1.0f)
 
 // In variables
-in vec3 f_pos;
+in vec3 f_position;
 in vec2 f_uv;
 in vec4 f_clip;
 
@@ -159,7 +159,7 @@ vec4 calculateWaterColor()
 	}
 
 	// Fresnel effect
-	vec3 viewDirection = normalize(u_cameraPosition - f_pos);
+	vec3 viewDirection = normalize(u_cameraPosition - f_position);
 	float fresnelMixValue = dot(viewDirection, normal);
 
 	// Finalizing fragment color
@@ -207,7 +207,7 @@ vec3 calculateLights(vec3 normal)
 	for (int i = 0; i < u_lightCount; i++)
 	{
         // Calculate light strength
-		vec3 lightDirection = normalize(u_pointlightPositions[i] - f_pos);
+		vec3 lightDirection = normalize(u_pointlightPositions[i] - f_position);
 		float diffuse = clamp(dot(normal, lightDirection), 0.0f, 1.0f);
 		float specular = calculateSpecularLighting(u_pointlightPositions[i], normal);
 
@@ -215,13 +215,13 @@ vec3 calculateLights(vec3 normal)
 		float attenuation;
 		if (u_pointlightShapes[i] == 0)
 		{
-			float fragmentDistance = distance(u_pointlightPositions[i], f_pos);
+			float fragmentDistance = distance(u_pointlightPositions[i], f_position);
 			float averageRadius = ((u_pointlightRadiuses[i].x + u_pointlightRadiuses[i].y + u_pointlightRadiuses[i].z) / 3.0f);
 			attenuation = max(0.0f, (1.0f - (fragmentDistance / averageRadius)));
 		}
 		else
 		{
-			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_pos);
+			vec3 fragmentDistance = abs(u_pointlightPositions[i] - f_position);
 			float xAttenuation = max(0.0f, (1.0f - (fragmentDistance.x / u_pointlightRadiuses[i].x)));
 			float yAttenuation = max(0.0f, (1.0f - (fragmentDistance.y / u_pointlightRadiuses[i].y)));
 			float zAttenuation = max(0.0f, (1.0f - (fragmentDistance.z / u_pointlightRadiuses[i].z)));
@@ -248,8 +248,8 @@ vec3 calculateDirectionalLighting(vec3 normal)
 {
 	if (u_isDirectionalLightingEnabled)
 	{
-		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos); // Light ray
-		vec3 viewDirection = normalize(f_pos - u_cameraPosition); // View ray
+		vec3 lightDirection = normalize(u_directionalLightPosition - f_position); // Light ray
+		vec3 viewDirection = normalize(f_position - u_cameraPosition); // View ray
 		vec3 reflectDirection = reflect(normalize(lightDirection), normal); // Reflect ray
 		float specular = pow(clamp(dot(reflectDirection, viewDirection), 0.0f, 1.0f), u_specularShininess); // Calculate if perpendicular
 		specular *= u_directionalLightingIntensity; // Directional intensity
@@ -269,8 +269,8 @@ float calculateSpecularLighting(vec3 position, vec3 normal)
     if (u_isSpecular)
     {
     	// Calculate
-        vec3 lightDirection   = normalize(position - f_pos);
-        vec3 viewDirection    = normalize(u_cameraPosition - f_pos);
+        vec3 lightDirection   = normalize(position - f_position);
+        vec3 viewDirection    = normalize(u_cameraPosition - f_position);
         vec3 halfWayDirection = normalize(lightDirection + viewDirection);
         float result          = pow(clamp(dot(normal, halfWayDirection), 0.0f, 1.0f), u_specularShininess);
 
@@ -288,7 +288,7 @@ vec3 calculateFog(vec3 color)
 	if (u_isFogEnabled)
 	{
 		// Calculate distance to fragment in world space
-		float fragmentDistance = distance(f_pos.xyz, u_cameraPosition);
+		float fragmentDistance = distance(f_position.xyz, u_cameraPosition);
 
         // Calculate fog intensity
 		float distanceDifference = (u_fogMaxDistance - u_fogMinDistance);

@@ -26,7 +26,7 @@ uniform bool u_hasDisplacementMap;
 // Out variables
 out vec4 f_clip;
 out vec2 f_uv;
-out vec3 f_pos;
+out vec3 f_position;
 
 // Process vertex
 void main()
@@ -54,13 +54,13 @@ void main()
 	}
 
 	// Camera spaces
-	vec4 worldSpacePos = vec4(newPosition, 1.0f);
-	vec4 clipSpacePos  = u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f);
+	vec4 worldSpacePosition = vec4(newPosition, 1.0f);
+	vec4 clipSpacePosition  = u_projectionMatrix * u_viewMatrix * vec4(newPosition, 1.0f);
 
 	// GLSL variables
-	gl_Position = clipSpacePos;
+	gl_Position = clipSpacePosition;
 
 	// Out variables
-	f_pos  = worldSpacePos.xyz;
-	f_clip = clipSpacePos;
+	f_position  = worldSpacePosition.xyz;
+	f_clip = clipSpacePosition;
 }

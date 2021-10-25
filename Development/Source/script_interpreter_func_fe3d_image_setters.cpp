@@ -41,10 +41,10 @@ bool ScriptInterpreter::_executeFe3dImageSetterFunction(const string& functionNa
 			// In-engine viewport boundaries
 			if (!_fe3d.application_isExported())
 			{
-				auto minPos = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
-				auto maxPos = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
-				_fe3d.imageEntity_setMinPosition(ID, minPos);
-				_fe3d.imageEntity_setMaxPosition(ID, maxPos);
+				auto minPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition()));
+				auto maxPosition = Math::convertToNDC(Tools::convertFromScreenCoords(Config::getInst().getViewportPosition() + Config::getInst().getViewportSize()));
+				_fe3d.imageEntity_setMinPosition(ID, minPosition);
+				_fe3d.imageEntity_setMaxPosition(ID, maxPosition);
 			}
 
 			// Return

@@ -121,24 +121,24 @@ void CollisionResolver::update(
 		if (terrainManager.getSelectedTerrain() != nullptr)
 		{
 			// Retrieve height of terrain point at camera position
-			Vec3 camPos = camera.getPosition();
-			const float terrainX = camPos.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
-			const float terrainZ = camPos.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+			Vec3 cameraPosition = camera.getPosition();
+			const float terrainX = cameraPosition.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+			const float terrainZ = cameraPosition.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
 			const float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight;
 
 			// If camera goes underground
-			if (camPos.y < targetY)
+			if (cameraPosition.y < targetY)
 			{
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
-				camera.move(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraTerrainSpeed, 0.0f));
-				camPos.y = camera.getPosition().y;
+				camera.move(Vec3(0.0f, fabsf(cameraPosition.y - targetY) * _cameraTerrainSpeed, 0.0f));
+				cameraPosition.y = camera.getPosition().y;
 
 				// Correct moved distance
-				if (camPos.y > targetY)
+				if (cameraPosition.y > targetY)
 				{
-					camera.setPosition(Vec3(camPos.x, targetY, camPos.z));
+					camera.setPosition(Vec3(cameraPosition.x, targetY, cameraPosition.z));
 				}
 			}
 		}

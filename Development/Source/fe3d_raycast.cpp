@@ -42,17 +42,17 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 			// Check if AABB is responsive
 			if (entity->isRaycastResponsive() && entity->isVisible())
 			{
-				// Calculate box left bottom (LB) and right top (RT)
-				Vec3 lb, rt;
-				lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
-				lb.y = (entity->getPosition().y);
-				lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
-				rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
-				rt.y = (entity->getPosition().y + entity->getSize().y);
-				rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
+				// Convert AABB dimensions
+				Vec3 leftBottomFront, rightTopBack;
+				leftBottomFront.x = (entity->getPosition().x - (entity->getSize().x / 2.0f));
+				leftBottomFront.y = (entity->getPosition().y);
+				leftBottomFront.z = (entity->getPosition().z + (entity->getSize().z / 2.0f));
+				rightTopBack.x = (entity->getPosition().x + (entity->getSize().x / 2.0f));
+				rightTopBack.y = (entity->getPosition().y + entity->getSize().y);
+				rightTopBack.z = (entity->getPosition().z - (entity->getSize().z / 2.0f));
 
 				// Check intersection
-				float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
+				float distance = _core->_rayCaster.checkCursorInBox(leftBottomFront, rightTopBack, _core->_camera.getPosition());
 
 				// Check if closest to camera
 				if (distance != -1.0f && distance < closestDistance)

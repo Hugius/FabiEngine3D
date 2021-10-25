@@ -63,9 +63,6 @@
     <ClInclude Include="..\..\Source\logger.hpp">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\ray_caster.hpp">
-      <Filter>Other</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Source\timer.hpp">
       <Filter>Other</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\configuration.cpp">
-      <Filter>Other</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Source\ray_caster.cpp">
       <Filter>Other</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\timer.cpp">

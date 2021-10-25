@@ -41,7 +41,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d)
 	_reflectionEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_imageEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
-	_rayCaster(_renderBus, _terrainEntityManager)
+	_raycaster(_renderBus, _terrainEntityManager)
 {
 
 }

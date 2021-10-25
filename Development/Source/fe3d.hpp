@@ -11,6 +11,7 @@
 #include "bloom_type.hpp"
 #include "reflection_type.hpp"
 #include "pointlight_shape.hpp"
+#include "ray.hpp"
 
 #include <array>
 #include <vector>
@@ -724,10 +725,10 @@ public:
 	const pair<const string, float> raycast_checkCursorInAny();
 	const pair<const string, float> raycast_checkCursorInEntities(const string& ID, bool canBeOccluded);
 	const pair<bool, float> raycast_checkCursorInEntity(const string& ID, bool canBeOccluded);
-	const Vec3 raycast_getVector();
 	const Vec3 raycast_getPointOnTerrain();
 	const bool raycast_isPointOnTerrainValid();
 	const bool raycast_isTerrainPointingEnabled();
+	const Ray raycast_getCursorRay();
 
 	// Graphics interface - setters
 	void gfx_enableAmbientLighting();

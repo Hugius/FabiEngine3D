@@ -5,7 +5,7 @@ using SVT = ScriptValueType;
 bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_get_vector")
+	if (functionName == "fe3d:raycast_get_cursor_ray_position")
 	{
 		// Validate arguments
 		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -13,7 +13,20 @@ bool ScriptInterpreter::_executeFe3dRaycastGetterFunction(const string& function
 			// Validate terrain existence
 			if (_validateFe3dTerrain())
 			{
-				auto result = _fe3d.raycast_getVector();
+				auto result = _fe3d.raycast_getCursorRay().getPosition();
+				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:raycast_get_cursor_ray_direction")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrain())
+			{
+				auto result = _fe3d.raycast_getCursorRay().getDirection();
 				returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
 			}
 		}

@@ -21,7 +21,7 @@
 #include "image_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_generator.hpp"
-#include "ray_caster.hpp"
+#include "raycaster.hpp"
 #include "collision_resolver.hpp"
 #include "timer.hpp"
 #include "audio_manager.hpp"
@@ -84,5 +84,5 @@ private:
 	ReflectionEntityManager _reflectionEntityManager;
 	ImageEntityManager _imageEntityManager;
 	TextEntityManager _textEntityManager;
-	RayCaster _rayCaster;
+	Raycaster _raycaster;
 };

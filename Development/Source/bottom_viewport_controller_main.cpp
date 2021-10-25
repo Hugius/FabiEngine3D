@@ -125,10 +125,10 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval(1))
 	{
 		string textID = _statsScreen->getTextField("cursorPosition")->getEntityID();
-		string text = "Raycast Position: " +
-			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().x)) + " " +
-			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().y)) + " " +
-			to_string(static_cast<int>(_fe3d.raycast_getPointOnTerrain().z));
+		string text = "Raycast Direction: " +
+			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().x * 100.0f)) + "% " +
+			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().y * 100.0f)) + "% " +
+			to_string(static_cast<int>(_fe3d.raycast_getCursorRay().getDirection().z * 100.0f)) + "%";
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

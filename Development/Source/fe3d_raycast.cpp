@@ -5,26 +5,26 @@ using std::numeric_limits;
 
 void FabiEngine3D::raycast_enableTerrainPointing(float distance, float precision)
 {
-	if (_core->_rayCaster.isTerrainPointingEnabled())
+	if (_core->_raycaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to enable terrain raycast pointing: already enabled!");
 		return;
 	}
 
-	_core->_rayCaster.setTerrainPointingEnabled(true);
-	_core->_rayCaster.setTerrainPointingDistance(distance);
-	_core->_rayCaster.setTerrainPointingPrecision(precision);
+	_core->_raycaster.setTerrainPointingEnabled(true);
+	_core->_raycaster.setTerrainPointingDistance(distance);
+	_core->_raycaster.setTerrainPointingPrecision(precision);
 }
 
 void FabiEngine3D::raycast_disableTerrainPointing()
 {
-	if (!_core->_rayCaster.isTerrainPointingEnabled())
+	if (!_core->_raycaster.isTerrainPointingEnabled())
 	{
 		Logger::throwWarning("Tried to disable terrain raycast pointing: not enabled!");
 		return;
 	}
 
-	_core->_rayCaster.setTerrainPointingEnabled(false);
+	_core->_raycaster.setTerrainPointingEnabled(false);
 }
 
 const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
@@ -42,20 +42,19 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInAny()
 			// Check if AABB is responsive
 			if (entity->isRaycastResponsive() && entity->isVisible())
 			{
-				// Convert AABB dimensions
-				Vec3 leftBottomFront, rightTopBack;
-				leftBottomFront.x = (entity->getPosition().x - (entity->getSize().x / 2.0f));
-				leftBottomFront.y = (entity->getPosition().y);
-				leftBottomFront.z = (entity->getPosition().z + (entity->getSize().z / 2.0f));
-				rightTopBack.x = (entity->getPosition().x + (entity->getSize().x / 2.0f));
-				rightTopBack.y = (entity->getPosition().y + entity->getSize().y);
-				rightTopBack.z = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+				// Compose AABB dimensions
+				float left = (entity->getPosition().x - (entity->getSize().x / 2.0f));
+				float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
+				float bottom = entity->getPosition().y;
+				float top = (entity->getPosition().y + entity->getSize().y);
+				float front = (entity->getPosition().z + (entity->getSize().z / 2.0f));
+				float back = (entity->getPosition().z - (entity->getSize().z / 2.0f));
 
 				// Check intersection
-				float distance = _core->_rayCaster.checkCursorInBox(leftBottomFront, rightTopBack, _core->_camera.getPosition());
+				float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
 
 				// Check if closest to camera
-				if (distance != -1.0f && distance < closestDistance)
+				if ((distance != -1.0f) && (distance < closestDistance))
 				{
 					closestDistance = distance;
 					_hoveredAabbID = entity->getID();
@@ -105,17 +104,16 @@ const pair<bool, float> FabiEngine3D::raycast_checkCursorInEntity(const string& 
 
 		if (entity->isRaycastResponsive() && entity->isVisible())
 		{
-			// Prepare intersection box
-			Vec3 lb, rt;
-			lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
-			lb.y = (entity->getPosition().y);
-			lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
-			rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
-			rt.y = (entity->getPosition().y + entity->getSize().y);
-			rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
+			// Compose AABB dimensions
+			float left = (entity->getPosition().x - (entity->getSize().x / 2.0f));
+			float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
+			float bottom = entity->getPosition().y;
+			float top = (entity->getPosition().y + entity->getSize().y);
+			float front = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+			float back = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 
 			// Calculate intersection & distance
-			float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
+			float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
 			bool result = (distance != -1.0f);
 
 			// Return
@@ -168,17 +166,16 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 				{
 					if (entity->getID().substr(0, ID.size()) == ID) // If entity matches ID
 					{
-						// Calculate box left bottom (LB) and right top (RT)
-						Vec3 lb, rt;
-						lb.x = (entity->getPosition().x - entity->getSize().x / 2.0f);
-						lb.y = (entity->getPosition().y);
-						lb.z = (entity->getPosition().z + entity->getSize().z / 2.0f);
-						rt.x = (entity->getPosition().x + entity->getSize().x / 2.0f);
-						rt.y = (entity->getPosition().y + entity->getSize().y);
-						rt.z = (entity->getPosition().z - entity->getSize().z / 2.0f);
+						// Compose AABB dimensions
+						float left = (entity->getPosition().x - (entity->getSize().x / 2.0f));
+						float right = (entity->getPosition().x + (entity->getSize().x / 2.0f));
+						float bottom = entity->getPosition().y;
+						float top = (entity->getPosition().y + entity->getSize().y);
+						float front = (entity->getPosition().z - (entity->getSize().z / 2.0f));
+						float back = (entity->getPosition().z + (entity->getSize().z / 2.0f));
 
 						// Check intersection
-						float distance = _core->_rayCaster.checkCursorInBox(lb, rt, _core->_camera.getPosition());
+						float distance = _core->_raycaster.checkRayBoxIntersection(_core->_raycaster.getCursorRay(), Box(left, right, bottom, top, front, back));
 
 						// Check if closest to camera
 						if (distance != -1.0f && distance < closestDistance)
@@ -203,22 +200,22 @@ const pair<const string, float> FabiEngine3D::raycast_checkCursorInEntities(cons
 	}
 }
 
-const Vec3 FabiEngine3D::raycast_getVector()
+const Ray FabiEngine3D::raycast_getCursorRay()
 {
-	return _core->_rayCaster.getRay();
+	return _core->_raycaster.getCursorRay();
 }
 
 const Vec3 FabiEngine3D::raycast_getPointOnTerrain()
 {
-	return _core->_rayCaster.getTerrainPoint();
+	return _core->_raycaster.getTerrainPoint();
 }
 
 const bool FabiEngine3D::raycast_isPointOnTerrainValid()
 {
-	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
+	return (_core->_raycaster.getTerrainPoint() != Vec3(-1.0f));
 }
 
 const bool FabiEngine3D::raycast_isTerrainPointingEnabled()
 {
-	return _core->_rayCaster.isTerrainPointingEnabled();
+	return _core->_raycaster.isTerrainPointingEnabled();
 }

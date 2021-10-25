@@ -22,11 +22,15 @@
     <ClCompile Include="..\..\Source\box.cpp" />
     <ClCompile Include="..\..\Source\collision_detector.cpp" />
     <ClCompile Include="..\..\Source\collision_resolver.cpp" />
+    <ClCompile Include="..\..\Source\ray.cpp" />
+    <ClCompile Include="..\..\Source\raycaster.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\box.hpp" />
     <ClInclude Include="..\..\Source\collision_detector.hpp" />
     <ClInclude Include="..\..\Source\collision_resolver.hpp" />
+    <ClInclude Include="..\..\Source\ray.hpp" />
+    <ClInclude Include="..\..\Source\raycaster.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -7,26 +7,44 @@
     <Filter Include="Data Structures">
       <UniqueIdentifier>{9dd572bc-a971-4c4d-bdc5-bafbeb583d68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Collision">
+      <UniqueIdentifier>{ca41db49-1882-4403-97a1-1182e8d0d208}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Raycasting">
+      <UniqueIdentifier>{38c4b353-998f-4065-9e6b-e3620964be85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\box.cpp">
+      <Filter>Data Structures</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\collision_detector.cpp">
-      <Filter>Core</Filter>
+      <Filter>Core\Collision</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\collision_resolver.cpp">
-      <Filter>Core</Filter>
+      <Filter>Core\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\box.cpp">
+    <ClCompile Include="..\..\Source\raycaster.cpp">
+      <Filter>Core\Raycasting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ray.cpp">
       <Filter>Data Structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\collision_detector.hpp">
-      <Filter>Core</Filter>
+    <ClInclude Include="..\..\Source\box.hpp">
+      <Filter>Data Structures</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\collision_resolver.hpp">
-      <Filter>Core</Filter>
+      <Filter>Core\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Source\box.hpp">
+    <ClInclude Include="..\..\Source\collision_detector.hpp">
+      <Filter>Core\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\raycaster.hpp">
+      <Filter>Core\Raycasting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ray.hpp">
       <Filter>Data Structures</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,7 @@ public:
 	void setThirdPersonDistance(float value);
 	void setAspectRatio(float value);
 	void setFOV(float value);
-	void setMouseSensitivity(float value);
+	void setCursorSensitivity(float value);
 	void setYaw(float value);
 	void setPitch(float value);
 	void setMinFirstPersonPitch(float value);
@@ -62,8 +62,7 @@ public:
 	const float getThirdPersonDistance();
 	const float getNearZ();
 	const float getFarZ();
-	const float getMouseSensitivity();
-	const float getMouseOffset();
+	const float getCursorSensitivity();
 
 	// Booleans
 	const bool isThirdPersonViewEnabled();
@@ -86,7 +85,7 @@ private:
 	static inline const float DEFAULT_FOV_ANGLE = 90.0f;
 	static inline const float DEFAULT_NEAR_Z = 0.01f;
 	static inline const float DEFAULT_FAR_Z = 3000.0f;
-	static inline const float DEFAULT_MOUSE_SENSITIVITY = 0.01f;
+	static inline const float DEFAULT_CURSOR_SENSITIVITY = 0.01f;
 	static inline const float MIN_PITCH_ANGLE = -89.99f;
 	static inline const float MAX_PITCH_ANGLE = 89.99f;
 	static inline const float MIN_THIRD_PERSON_DISTANCE = 0.01f;
@@ -111,8 +110,7 @@ private:
 	float _maxThirdPersonPitch = 0.0f;
 	float _nearZ = 0.0f;
 	float _farZ = 0.0f;
-	float _mouseSensitivity = 0.0f;
-	float _mouseOffset = 0.0f;
+	float _cursorSensitivity = 0.0f;
 
 	// Booleans
 	bool _isThirdPersonViewEnabled = false;

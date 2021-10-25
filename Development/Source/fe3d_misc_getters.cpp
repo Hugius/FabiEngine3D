@@ -45,9 +45,9 @@ const string FabiEngine3D::misc_getOpenglVersion()
 
 const Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
-	Ivec2 mousePosition = _core->_window.getCursorPosition();
+	Ivec2 cursorPosition = _core->_window.getCursorPosition();
 
-	return Ivec2(mousePosition.x, (Config::getInst().getWindowSize().y - mousePosition.y));
+	return Ivec2(cursorPosition.x, (Config::getInst().getWindowSize().y - cursorPosition.y));
 }
 
 const Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
@@ -91,14 +91,14 @@ const bool FabiEngine3D::misc_isCursorVisible()
 const bool FabiEngine3D::misc_isCursorInsideViewport()
 {
 	// Temporary values
-	auto mousePosition = misc_getCursorPosition();
+	auto cursorPosition = misc_getCursorPosition();
 	auto viewportPosition = Config::getInst().getViewportPosition();
 	auto viewportSize = Config::getInst().getViewportSize();
 
 	// Checking if cursor is inside viewport
-	if ((mousePosition.x > viewportPosition.x) && (mousePosition.x < (viewportPosition.x + viewportSize.x)))
+	if ((cursorPosition.x > viewportPosition.x) && (cursorPosition.x < (viewportPosition.x + viewportSize.x)))
 	{
-		if ((mousePosition.y > viewportPosition.y) && (mousePosition.y < (viewportPosition.y + viewportSize.y)))
+		if ((cursorPosition.y > viewportPosition.y) && (cursorPosition.y < (viewportPosition.y + viewportSize.y)))
 		{
 			return true;
 		}
@@ -110,13 +110,13 @@ const bool FabiEngine3D::misc_isCursorInsideViewport()
 const bool FabiEngine3D::misc_isCursorInsideWindow()
 {
 	// Temporary values
-	auto mousePosition = misc_getCursorPosition();
+	auto cursorPosition = misc_getCursorPosition();
 	auto windowSize = Config::getInst().getWindowSize();
 	
 	// Checking if cursor is inside viewport
-	if ((mousePosition.x > 1) && (mousePosition.x < (windowSize.x - 1)))
+	if ((cursorPosition.x > 1) && (cursorPosition.x < (windowSize.x - 1)))
 	{
-		if ((mousePosition.y > 1) && (mousePosition.y < (windowSize.y - 1)))
+		if ((cursorPosition.y > 1) && (cursorPosition.y < (windowSize.y - 1)))
 		{
 			return true;
 		}

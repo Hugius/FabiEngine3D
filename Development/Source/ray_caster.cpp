@@ -18,7 +18,7 @@ RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager)
 void RayCaster::update(Ivec2 cursorPosition)
 {
 	// Update raycasting
-	_cursorRay = _getMouseRay(cursorPosition);
+	_cursorRay = _getCursorRay(cursorPosition);
 
 	// Update cursor pointing on terrain
 	if (_isTerrainPointingEnabled)
@@ -105,7 +105,7 @@ float RayCaster::checkCursorInBox(Vec3 leftBottomCoordinate, Vec3 rightTopCoordi
 	}
 }
 
-Vec3 RayCaster::_getMouseRay(Ivec2 cursorPosition)
+Vec3 RayCaster::_getCursorRay(Ivec2 cursorPosition)
 {
 	Vec2 NDC = _converToNDC(cursorPosition);
 	Vec4 clipCoords = Vec4(NDC.x, NDC.y, -1.0f, 1.0f);

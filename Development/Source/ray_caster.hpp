@@ -28,7 +28,7 @@ public:
 private:
 	RenderBus& _renderBus;
 
-	Vec3 _getMouseRay(Ivec2 cursorPosition);
+	Vec3 _getCursorRay(Ivec2 cursorPosition);
 	Vec2 _converToNDC(Ivec2 val);
 	Vec4 _convertToViewSpace(Vec4 value);
 	Vec3 _convertToWorldSpace(Vec4 value);

@@ -21,7 +21,7 @@ void SkyEditor::load()
 
 	// Camera
 	_fe3d.camera_reset();
-	_fe3d.camera_setMouseSensitivity(MOUSE_SENSITIVITY);
+	_fe3d.camera_setCursorSensitivity(CURSOR_SENSITIVITY);
 	
 	// Default graphics
 	_fe3d.gfx_enableMotionBlur();

@@ -55,14 +55,14 @@ void EngineGuiButton::_updateHovering(bool isHoverable)
 	if (_fe3d.imageEntity_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
-		Vec2 mousePosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		Vec2 buttonPosition = _fe3d.imageEntity_getPosition(_rectangle->getEntityID());
 		Vec2 buttonSize = _fe3d.imageEntity_getSize(_rectangle->getEntityID());
 
 		// Check if cursor inside button
-		if (mousePosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && mousePosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
+		if (cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
 		{
-			if (mousePosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && mousePosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
+			if (cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				// Check if button is hoverable
 				if (isHoverable && _isHoverable)

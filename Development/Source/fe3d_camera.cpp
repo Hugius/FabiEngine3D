@@ -95,9 +95,9 @@ void FabiEngine3D::camera_setFOV(float angle)
 	_core->_camera.setFOV(angle);
 }
 
-void FabiEngine3D::camera_setMouseSensitivity(float speed)
+void FabiEngine3D::camera_setCursorSensitivity(float speed)
 {
-	_core->_camera.setMouseSensitivity(speed);
+	_core->_camera.setCursorSensitivity(speed);
 }
 
 void FabiEngine3D::camera_setYaw(float angle)
@@ -190,11 +190,6 @@ const float FabiEngine3D::camera_getFarDistance()
 	return _core->_camera.getFarZ();
 }
 
-const float FabiEngine3D::camera_getMouseOffset()
-{
-	return _core->_camera.getMouseOffset();
-}
-
 const float FabiEngine3D::camera_getFOV()
 {
 	return _core->_camera.getFOV();
@@ -205,9 +200,9 @@ const float FabiEngine3D::getAspectRatio()
 	return _core->_camera.getAspectRatio();
 }
 
-const float FabiEngine3D::camera_getMouseSensitivity()
+const float FabiEngine3D::camera_getCursorSensitivity()
 {
-	return _core->_camera.getMouseSensitivity();
+	return _core->_camera.getCursorSensitivity();
 }
 
 const Vec3 FabiEngine3D::camera_getPosition()

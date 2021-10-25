@@ -87,9 +87,9 @@ void Camera::setFOV(float value)
 	_fov = max(0.0f, value);
 }
 
-void Camera::setMouseSensitivity(float value)
+void Camera::setCursorSensitivity(float value)
 {
-	_mouseSensitivity = max(0.0f, value);
+	_cursorSensitivity = max(0.0f, value);
 }
 
 void Camera::setYaw(float value)
@@ -182,14 +182,9 @@ const float Camera::getFarZ()
 	return _farZ;
 }
 
-const float Camera::getMouseSensitivity()
+const float Camera::getCursorSensitivity()
 {
-	return _mouseSensitivity;
-}
-
-const float Camera::getMouseOffset()
-{
-	return _mouseOffset;
+	return _cursorSensitivity;
 }
 
 const float Camera::getThirdPersonYaw()

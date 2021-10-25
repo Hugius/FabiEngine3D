@@ -104,14 +104,14 @@ bool ScriptInterpreter::_executeFe3dCameraSetterFunction(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:camera_set_mouse_sensitivity")
+	else if (functionName == "fe3d:camera_set_cursor_sensitivity")
 	{
 		auto types = { SVT::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueCount(arguments, static_cast<unsigned int>(types.size())) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.camera_setMouseSensitivity(arguments[0].getDecimal());
+			_fe3d.camera_setCursorSensitivity(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, SVT::EMPTY));
 		}
 	}

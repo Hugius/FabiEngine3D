@@ -674,7 +674,7 @@ public:
 	void camera_setMaxThirdPersonPitch(float angle);
 	void camera_setNearZ(float distance);
 	void camera_setFarZ(float farZ);
-	void camera_setMouseSensitivity(float speed);
+	void camera_setCursorSensitivity(float speed);
 
 	// Camera interface - getters
 	const Vec3 camera_getPosition();
@@ -684,7 +684,7 @@ public:
 	const Vec3 camera_getThirdPersonLookat();
 	const float camera_getFOV();
 	const float getAspectRatio();
-	const float camera_getMouseSensitivity();
+	const float camera_getCursorSensitivity();
 	const float camera_getYaw();
 	const float camera_getPitch();
 	const float camera_getFirstPersonYaw();
@@ -694,7 +694,6 @@ public:
 	const float camera_getThirdPersonDistance();
 	const float camera_getNearDistance();
 	const float camera_getFarDistance();
-	const float camera_getMouseOffset();
 	const bool camera_isThirdPersonViewEnabled();
 	const bool camera_isFirstPersonViewEnabled();
 

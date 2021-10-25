@@ -49,7 +49,7 @@ private:
 	// Decimals
 	static inline const float CW = 0.115f;
 	static inline const float CH = 0.0875f;
-	static inline const float MOUSE_SENSITIVITY = 0.025f;
+	static inline const float CURSOR_SENSITIVITY = 0.025f;
 	static inline const float INITIAL_CAMERA_YAW = 45.0f;
 	static inline const float INITIAL_CAMERA_PITCH = 45.0f;
 	static inline const float INITIAL_CAMERA_DISTANCE = 2.5f;

@@ -33,14 +33,14 @@ bool EngineGuiViewport::isHovered()
 	if (_fe3d.imageEntity_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
-		Vec2 mousePosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 cursorPosition = Math::convertToNDC(Tools::convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		Vec2 buttonPosition = _fe3d.imageEntity_getPosition(_entityID);
 		Vec2 buttonSize = _fe3d.imageEntity_getSize(_entityID);
 
 		// Check if cursor inside entity
-		if (mousePosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && mousePosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
+		if (cursorPosition.x > buttonPosition.x - (buttonSize.x / 2.0f) && cursorPosition.x < buttonPosition.x + (buttonSize.x / 2.0f)) // X axis
 		{
-			if (mousePosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && mousePosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
+			if (cursorPosition.y > buttonPosition.y - (buttonSize.y / 2.0f) && cursorPosition.y < buttonPosition.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				return true;
 			}

@@ -32,7 +32,7 @@ void Camera::reset()
 	_fov = DEFAULT_FOV_ANGLE;
 	_nearZ = DEFAULT_NEAR_Z;
 	_farZ = DEFAULT_FAR_Z;
-	_mouseSensitivity = DEFAULT_MOUSE_SENSITIVITY;
+	_cursorSensitivity = DEFAULT_CURSOR_SENSITIVITY;
 	_minFirstPersonPitch = MIN_PITCH_ANGLE;
 	_maxFirstPersonPitch = MAX_PITCH_ANGLE;
 	_minThirdPersonPitch = MIN_PITCH_ANGLE;
@@ -48,7 +48,6 @@ void Camera::reset()
 	_thirdPersonYawAcceleration = 0.0f;
 	_thirdPersonPitchAcceleration = 0.0f;
 	_thirdPersonDistance = 0.0f;
-	_mouseOffset = 0.0f;
 
 	// Booleans
 	_isFirstPersonViewEnabled = false;
@@ -86,16 +85,13 @@ void Camera::update(Ivec2 lastCursorPosition)
 	// Update first person camera
 	if (_isFirstPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		// Offset between current mouse position & middle of the screen
+		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
-		// Applying mouse sensitivity
-		xOffset *= _mouseSensitivity;
-		yOffset *= _mouseSensitivity;
-
-		// Calculate overall mouse offset
-		_mouseOffset = (xOffset + yOffset) / 2.0f;
+		// Applying cursor sensitivity
+		xOffset *= _cursorSensitivity;
+		yOffset *= _cursorSensitivity;
 
 		// Update yaw
 		_firstPersonYawAcceleration += xOffset;
@@ -118,7 +114,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_yaw = _firstPersonYaw;
 		_pitch = _firstPersonPitch;
 
-		// Spawn mouse in middle of screen
+		// Spawn cursor in middle of screen
 		_window.setCursorPosition({ xMiddle, yMiddle });
 	}
 	else
@@ -130,16 +126,13 @@ void Camera::update(Ivec2 lastCursorPosition)
 	// Update third person camera
 	if (_isThirdPersonViewEnabled && !_cursorIsBeingCentered)
 	{
-		// Offset between current mouse position & middle of the screen
+		// Offset between current cursor position & middle of the screen
 		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
-		// Applying mouse sensitivity
-		xOffset *= _mouseSensitivity;
-		yOffset *= _mouseSensitivity;
-
-		// Calculate overall mouse offset
-		_mouseOffset = (xOffset + yOffset) / 2.0f;
+		// Applying cursor sensitivity
+		xOffset *= _cursorSensitivity;
+		yOffset *= _cursorSensitivity;
 
 		// Update yaw
 		_thirdPersonYawAcceleration += xOffset;
@@ -176,7 +169,7 @@ void Camera::update(Ivec2 lastCursorPosition)
 		_yaw = Math::convertToDegrees(atan2f(_position.z - _thirdPersonLookat.z, _position.x - _thirdPersonLookat.x)) + 180.0f;
 		_pitch = -(_thirdPersonPitch);
 
-		// Spawn mouse in middle of screen
+		// Spawn cursor in middle of screen
 		_window.setCursorPosition({ xMiddle, yMiddle });
 	}
 	else

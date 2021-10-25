@@ -38,9 +38,9 @@ public:
 	static const Matrix44 createScalingMatrixX(float value);
 	static const Matrix44 createScalingMatrixY(float value);
 	static const Matrix44 createScalingMatrixZ(float value);
-	static const Matrix44 createOrthoMatrix(float left, float right, float bottom, float top, float nearZ, float farZ);
+	static const Matrix44 createOrthoMatrix(float left, float right, float bottom, float top, float near, float far);
 	static const Matrix44 createViewMatrix(Vec3 eye, Vec3 center, Vec3 up);
-	static const Matrix44 createProjectionMatrix(float fovY, float aspect, float nearZ, float farZ);
+	static const Matrix44 createProjectionMatrix(float fov, float aspect, float near, float far);
 
 	// Vectors
 	static const Vec3 calculateAverage(const vector<Vec3>& values);

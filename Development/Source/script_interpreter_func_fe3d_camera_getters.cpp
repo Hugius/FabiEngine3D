@@ -59,15 +59,6 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:camera_get_pitch")
-	{
-		// Validate arguments
-		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.camera_getPitch();
-			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
-		}
-	}
 	else if (functionName == "fe3d:camera_get_fov")
 	{
 		// Validate arguments
@@ -147,6 +138,42 @@ bool ScriptInterpreter::_executeFe3dCameraGetterFunction(const string& functionN
 		{
 			auto result = _fe3d.camera_getThirdPersonLookat();
 			returnValues.push_back(ScriptValue(_fe3d, SVT::VEC3, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_aspect_ratio")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getAspectRatio();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_cursor_sensitivity")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getCursorSensitivity();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_near_distance")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getNearDistance();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:camera_get_far_distance")
+	{
+		// Validate arguments
+		if (_validateListValueCount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getFarDistance();
+			returnValues.push_back(ScriptValue(_fe3d, SVT::DECIMAL, result));
 		}
 	}
 	else

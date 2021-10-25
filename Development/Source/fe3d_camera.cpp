@@ -110,14 +110,14 @@ void FabiEngine3D::camera_setPitch(float angle)
 	_core->_camera.setPitch(angle);
 }
 
-void FabiEngine3D::camera_setNearZ(float distance)
+void FabiEngine3D::camera_setNearDistance(float distance)
 {
-	_core->_camera.setNearZ(distance);
+	_core->_camera.setNearDistance(distance);
 }
 
-void FabiEngine3D::camera_setFarZ(float distance)
+void FabiEngine3D::camera_setFarDistance(float distance)
 {
-	_core->_camera.setFarZ(distance);
+	_core->_camera.setFarDistance(distance);
 }
 
 void FabiEngine3D::camera_setMinFirstPersonPitch(float angle)
@@ -182,12 +182,12 @@ const float FabiEngine3D::camera_getThirdPersonDistance()
 
 const float FabiEngine3D::camera_getNearDistance()
 {
-	return _core->_camera.getNearZ();
+	return _core->_camera.getNearDistance();
 }
 
 const float FabiEngine3D::camera_getFarDistance()
 {
-	return _core->_camera.getFarZ();
+	return _core->_camera.getFarDistance();
 }
 
 const float FabiEngine3D::camera_getFOV()
@@ -195,7 +195,7 @@ const float FabiEngine3D::camera_getFOV()
 	return _core->_camera.getFOV();
 }
 
-const float FabiEngine3D::getAspectRatio()
+const float FabiEngine3D::camera_getAspectRatio()
 {
 	return _core->_camera.getAspectRatio();
 }

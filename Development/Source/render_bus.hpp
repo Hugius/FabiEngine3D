@@ -57,8 +57,8 @@ public:
 	void setBloomIntensity(float value);
 	void setCameraYaw(float value);
 	void setCameraPitch(float value);
-	void setNearZ(float value);
-	void setFarZ(float value);
+	void setNearDistance(float value);
+	void setFarDistance(float value);
 	void setDofMaxDistance(float value);
 	void setDofBlurDistance(float value);
 	void setPlanarReflectionHeight(float value);
@@ -150,8 +150,8 @@ public:
 	const float getBloomIntensity();
 	const float getCameraYaw();
 	const float getCameraPitch();
-	const float getNearZ();
-	const float getFarZ();
+	const float getNearDistance();
+	const float getFarDistance();
 	const float getDofMaxDistance();
 	const float getDofBlurDistance();
 	const float getPlanarReflectionHeight();
@@ -243,8 +243,8 @@ private:
 	float _fogThickness = 1.0f;
 	float _cameraYaw = 0.0f;
 	float _cameraPitch = 0.0f;
-	float _nearZ = 0.0f;
-	float _farZ = 0.0f;
+	float _nearDistance = 0.0f;
+	float _farDistance = 0.0f;
 	float _dofMaxDistance = 0.0f;
 	float _dofBlurDistance = 0.0f;
 	float _planarReflectionHeight = 0.0f;

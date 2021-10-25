@@ -30,8 +30,8 @@ void Camera::reset()
 	// Decimals
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 	_fov = DEFAULT_FOV_ANGLE;
-	_nearZ = DEFAULT_NEAR_Z;
-	_farZ = DEFAULT_FAR_Z;
+	_nearDistance = DEFAULT_NEAR_Z;
+	_farDistance = DEFAULT_FAR_Z;
 	_cursorSensitivity = DEFAULT_CURSOR_SENSITIVITY;
 	_minFirstPersonPitch = MIN_PITCH_ANGLE;
 	_maxFirstPersonPitch = MAX_PITCH_ANGLE;
@@ -202,7 +202,7 @@ void Camera::updateMatrices()
 	_viewMatrix = Math::createViewMatrix(_position, (_position + _frontVector), _upVector);
 
 	// Projection matrix
-	_projectionMatrix = Math::createProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearZ, _farZ);
+	_projectionMatrix = Math::createProjectionMatrix(Math::convertToRadians(_fov), _aspectRatio, _nearDistance, _farDistance);
 
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);
@@ -211,6 +211,6 @@ void Camera::updateMatrices()
 	_renderBus.setCameraPosition(_position);
 	_renderBus.setViewMatrix(_viewMatrix);
 	_renderBus.setProjectionMatrix(_projectionMatrix);
-	_renderBus.setNearZ(_nearZ);
-	_renderBus.setFarZ(_farZ);
+	_renderBus.setNearDistance(_nearDistance);
+	_renderBus.setFarDistance(_farDistance);
 }

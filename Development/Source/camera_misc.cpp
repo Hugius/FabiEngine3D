@@ -102,14 +102,14 @@ void Camera::setPitch(float value)
 	_pitch = clamp(value, MIN_PITCH_ANGLE, MAX_PITCH_ANGLE);
 }
 
-void Camera::setNearZ(float value)
+void Camera::setNearDistance(float value)
 {
-	_nearZ = max(0.0f, value);
+	_nearDistance = max(0.0f, value);
 }
 
-void Camera::setFarZ(float value)
+void Camera::setFarDistance(float value)
 {
-	_farZ = max(0.0f, value);
+	_farDistance = max(0.0f, value);
 }
 
 void Camera::setMinFirstPersonPitch(float value)
@@ -172,14 +172,14 @@ const float Camera::getFirstPersonPitch()
 	return _pitch;
 }
 
-const float Camera::getNearZ()
+const float Camera::getNearDistance()
 {
-	return _nearZ;
+	return _nearDistance;
 }
 
-const float Camera::getFarZ()
+const float Camera::getFarDistance()
 {
-	return _farZ;
+	return _farDistance;
 }
 
 const float Camera::getCursorSensitivity()

@@ -28,8 +28,8 @@ public:
 	void setMaxFirstPersonPitch(float value);
 	void setMinThirdPersonPitch(float value);
 	void setMaxThirdPersonPitch(float value);
-	void setNearZ(float value);
-	void setFarZ(float value);
+	void setNearDistance(float value);
+	void setFarDistance(float value);
 	void moveFollowX(float value);
 	void moveFollowZY(float value);
 	void moveFollowZ(float value);
@@ -60,8 +60,8 @@ public:
 	const float getThirdPersonYaw();
 	const float getThirdPersonPitch();
 	const float getThirdPersonDistance();
-	const float getNearZ();
-	const float getFarZ();
+	const float getNearDistance();
+	const float getFarDistance();
 	const float getCursorSensitivity();
 
 	// Booleans
@@ -108,8 +108,8 @@ private:
 	float _thirdPersonPitchAcceleration = 0.0f;
 	float _minThirdPersonPitch = 0.0f;
 	float _maxThirdPersonPitch = 0.0f;
-	float _nearZ = 0.0f;
-	float _farZ = 0.0f;
+	float _nearDistance = 0.0f;
+	float _farDistance = 0.0f;
 	float _cursorSensitivity = 0.0f;
 
 	// Booleans

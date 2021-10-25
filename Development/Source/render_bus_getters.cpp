@@ -235,14 +235,14 @@ const float RenderBus::getCameraPitch()
 	return _cameraPitch;
 }
 
-const float RenderBus::getNearZ()
+const float RenderBus::getNearDistance()
 {
-	return _nearZ;
+	return _nearDistance;
 }
 
-const float RenderBus::getFarZ()
+const float RenderBus::getFarDistance()
 {
-	return _farZ;
+	return _farDistance;
 }
 
 const float RenderBus::getDofMaxDistance()

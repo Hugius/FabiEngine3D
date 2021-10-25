@@ -15,8 +15,8 @@ uniform vec2 u_maxPosition;
 
 // Float uniforms
 uniform float u_alpha;
-uniform float u_nearZ;
-uniform float u_farZ;
+uniform float u_nearDistance;
+uniform float u_farDistance;
 
 // Boolean uniforms
 uniform bool u_isPerspectiveDepthEntity;
@@ -44,7 +44,7 @@ void main()
 	if (u_isPerspectiveDepthEntity) // Visualize depth map
 	{
 		float depth = texture(u_diffuseMap, f_uv).r;
-		o_finalColor = vec4(vec3((convertDepthToPerspective(depth) / u_farZ)), 1.0f);
+		o_finalColor = vec4(vec3((convertDepthToPerspective(depth) / u_farDistance)), 1.0f);
 		o_finalColor.rgb = pow(o_finalColor.rgb, vec3(1.0f / 2.2f));
 	}
 	else
@@ -69,5 +69,5 @@ void main()
 float convertDepthToPerspective(float depth)
 {
     float z = ((depth * 2.0f) - 1.0f);
-    return ((2.0f * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ)));
+    return ((2.0f * u_nearDistance * u_farDistance) / (u_farDistance + u_nearDistance - z * (u_farDistance - u_nearDistance)));
 }

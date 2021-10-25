@@ -192,7 +192,7 @@ const Matrix44 Math::createRotationMatrixZ(float angle)
 	return newMatrix;
 }
 
-const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, float top, float nearZ, float farZ)
+const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, float top, float near, float far)
 {
 	// Result
 	Matrix44 newMatrix;
@@ -200,10 +200,10 @@ const Matrix44 Math::createOrthoMatrix(float left, float right, float bottom, fl
 	// Create
 	newMatrix.m[0][0] = 2.0f / (right - left);
 	newMatrix.m[1][1] = 2.0f / (top - bottom);
-	newMatrix.m[2][2] = -2.0f / (farZ - nearZ);
+	newMatrix.m[2][2] = -2.0f / (far - near);
 	newMatrix.m[3][0] = -((right + left) / (right - left));
 	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
-	newMatrix.m[3][2] = -((farZ + nearZ) / (farZ - nearZ));
+	newMatrix.m[3][2] = -((far + near) / (far - near));
 
 	// Return
 	return newMatrix;
@@ -237,18 +237,18 @@ const Matrix44 Math::createViewMatrix(Vec3 eye, Vec3 center, Vec3 up)
 	return newMatrix;
 }
 
-const Matrix44 Math::createProjectionMatrix(float fovY, float aspect, float nearZ, float farZ)
+const Matrix44 Math::createProjectionMatrix(float fov, float aspect, float near, float far)
 {
 	// Temporary values
-	const float tanHalfFov = tan(fovY / 2.0f);
+	const float tanHalfFovY = tan(fov / 2.0f);
 
 	// Create
 	Matrix44 newMatrix(0.0f);
-	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFov);
-	newMatrix.m[1][1] = 1.0f / tanHalfFov;
-	newMatrix.m[2][2] = -((farZ + nearZ) / (farZ - nearZ));
+	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFovY);
+	newMatrix.m[1][1] = 1.0f / tanHalfFovY;
+	newMatrix.m[2][2] = -((far + near) / (far - near));
 	newMatrix.m[2][3] = -1.0f;
-	newMatrix.m[3][2] = -((2.0f * farZ * nearZ) / (farZ - nearZ));
+	newMatrix.m[3][2] = -((2.0f * far * near) / (far - near));
 
 	// Return
 	return newMatrix;

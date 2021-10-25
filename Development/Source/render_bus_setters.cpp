@@ -240,14 +240,14 @@ void RenderBus::setCameraPitch(float value)
 	_cameraPitch = value;
 }
 
-void RenderBus::setNearZ(float value)
+void RenderBus::setNearDistance(float value)
 {
-	_nearZ = max(0.0f, value);
+	_nearDistance = max(0.0f, value);
 }
 
-void RenderBus::setFarZ(float value)
+void RenderBus::setFarDistance(float value)
 {
-	_farZ = value;
+	_farDistance = value;
 }
 
 void RenderBus::setDofMaxDistance(float value)

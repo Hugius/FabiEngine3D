@@ -1,6 +1,7 @@
 #include "mesh_part.hpp"
 
-MeshPart::MeshPart(const string& ID) :
+MeshPart::MeshPart(const string& ID)
+	:
 	_ID(ID)
 {
 

@@ -82,33 +82,49 @@ Vec3 Raycaster::getTerrainPoint()
 // https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
 float Raycaster::checkRayBoxIntersection(Ray ray, Box box)
 {
+	/*
+		Original formula: point = (origin + distance) * direction
+		Rearranged formula: distance = (point - origin) / direction
+		Final formula: distance = (point - origin) * (1 / direction)
+	*/
+
 	// Small performance optimization
 	const Vec3 inverseRayDirection = (Vec3(1.0f) / ray.getDirection());
 
+	// Calculate box points
+	float minX = (box.getPosition().x - box.getLeft());
+	float maxX = (box.getPosition().x + box.getRight());
+	float minY = (box.getPosition().y - box.getBottom());
+	float maxY = (box.getPosition().y + box.getTop());
+	float minZ = (box.getPosition().z - box.getBack());
+	float maxZ = (box.getPosition().z + box.getFront());
+
 	// Calculates distances
-	float minX = ((box.getLeft() - ray.getPosition().x) * inverseRayDirection.x);
-	float maxX = ((box.getRight() - ray.getPosition().x) * inverseRayDirection.x);
-	float minY = ((box.getBottom() - ray.getPosition().y) * inverseRayDirection.y);
-	float maxY = ((box.getTop() - ray.getPosition().y) * inverseRayDirection.y);
-	float minZ = ((box.getBack() - ray.getPosition().z) * inverseRayDirection.z);
-	float maxZ = ((box.getFront() - ray.getPosition().z) * inverseRayDirection.z);
-	float minDistance = max(max(min(minX, maxX), min(minY, maxY)), min(minZ, maxZ));
-	float maxDistance = min(min(max(minX, maxX), max(minY, maxY)), max(minZ, maxZ));
+	float minDistanceX = ((minX - ray.getPosition().x) * inverseRayDirection.x);
+	float maxDistanceX = ((maxX - ray.getPosition().x) * inverseRayDirection.x);
+	float minDistanceY = ((minY - ray.getPosition().y) * inverseRayDirection.y);
+	float maxDistanceY = ((maxY - ray.getPosition().y) * inverseRayDirection.y);
+	float minDistanceZ = ((minZ - ray.getPosition().z) * inverseRayDirection.z);
+	float maxDistanceZ = ((maxZ - ray.getPosition().z) * inverseRayDirection.z);
+
+	// Calculate intersections
+	float minIntersectionDistance = max(max(min(minDistanceX, maxDistanceX), min(minDistanceY, maxDistanceY)), min(minDistanceZ, maxDistanceZ));
+	float maxIntersectionDistance = min(min(max(minDistanceX, maxDistanceX), max(minDistanceY, maxDistanceY)), max(minDistanceZ, maxDistanceZ));
 
 	// AABB is behind camera
-	if (maxDistance < 0.0f)
+	if (maxIntersectionDistance < 0.0f)
 	{
 		return -1.0f;
 	}
 
 	// No intersection
-	if (minDistance > maxDistance)
+	if (minIntersectionDistance > maxIntersectionDistance)
 	{
 		return -1.0f;
 	}
 
 	// Intersection
-	return minDistance;
+	return minIntersectionDistance;
 }
 
 Ray Raycaster::_calculateCursorRay(Ivec2 cursorPosition)

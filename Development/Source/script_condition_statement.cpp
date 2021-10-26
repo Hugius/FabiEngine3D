@@ -1,6 +1,7 @@
 #include "script_condition_statement.hpp"
 
-ScriptConditionStatement::ScriptConditionStatement(unsigned int scopeDepth, bool isTrue) :
+ScriptConditionStatement::ScriptConditionStatement(unsigned int scopeDepth, bool isTrue)
+	:
 	_scopeDepth(scopeDepth),
 	_conditionResult(isTrue)
 {

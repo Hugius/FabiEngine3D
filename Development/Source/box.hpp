@@ -1,10 +1,17 @@
 #pragma once
 
+#include "mathematics.hpp"
+
 class Box final
 {
 public:
+	Box(Vec3 position, float left, float right, float bottom, float top, float back, float front);
 	Box(float left, float right, float bottom, float top, float back, float front);
 
+	// Vectors
+	const Vec3 getPosition() const;
+
+	// Floats
 	const float getLeft() const;
 	const float getRight() const;
 	const float getBottom() const;
@@ -13,6 +20,10 @@ public:
 	const float getFront() const;
 
 private:
+	// Vectors
+	Vec3 _position;
+
+	// Floats
 	float _left;
 	float _right;
 	float _bottom;

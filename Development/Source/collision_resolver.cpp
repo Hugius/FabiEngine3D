@@ -1,7 +1,8 @@
 #include "collision_resolver.hpp"
 #include "logger.hpp"
 
-CollisionResolver::CollisionResolver() :
+CollisionResolver::CollisionResolver()
+	:
 	_cameraBox(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
 {
 

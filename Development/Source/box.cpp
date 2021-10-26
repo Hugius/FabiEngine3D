@@ -4,15 +4,35 @@
 
 using std::max;
 
-Box::Box(float left, float right, float bottom, float top, float back, float front) :
-	_left(max(0.0f, (left * 0.99f))),
-	_right(max(0.0f, (right * 0.99f))),
-	_bottom(max(0.0f, (bottom * 0.99f))),
-	_top(max(0.0f, (top * 0.99f))),
-	_back(max(0.0f, (back * 0.99f))),
-	_front(max(0.0f, (front * 0.99f)))
+Box::Box(Vec3 position, float left, float right, float bottom, float top, float back, float front)
+	:
+	_position(position),
+	_left(max(0.0f, left)),
+	_right(max(0.0f, right)),
+	_bottom(max(0.0f, bottom)),
+	_top(max(0.0f, top)),
+	_back(max(0.0f, back)),
+	_front(max(0.0f, front))
 {
 
+}
+
+Box::Box(float left, float right, float bottom, float top, float back, float front)
+	:
+	_position(Vec3(0.0f)),
+	_left(max(0.0f, left)),
+	_right(max(0.0f, right)),
+	_bottom(max(0.0f, bottom)),
+	_top(max(0.0f, top)),
+	_back(max(0.0f, back)),
+	_front(max(0.0f, front))
+{
+
+}
+
+const Vec3 Box::getPosition() const
+{
+	return _position;
 }
 
 const float Box::getLeft() const

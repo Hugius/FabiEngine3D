@@ -4,7 +4,8 @@
 
 using std::max;
 
-ShadowGenerator::ShadowGenerator(RenderBus& renderBus) :
+ShadowGenerator::ShadowGenerator(RenderBus& renderBus)
+	:
 	_renderBus(renderBus)
 {
 
